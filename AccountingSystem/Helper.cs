@@ -1,0 +1,254 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace AccountingSystem
+{
+    public class Helper
+    {
+        public static void LoadFormIcon(Form form)
+        {
+            //form.Icon = Properties.Resources.ZBSIcon;
+        }
+
+        // apply the default styling of the datagridview
+        public static void DatagridDefaultStyle(DataGridView dgv, Boolean Fill = false)
+        {
+            dgv.AllowUserToAddRows = false;
+            dgv.AllowUserToDeleteRows = false;
+            dgv.AllowUserToOrderColumns = false;
+            dgv.AllowUserToResizeColumns = true;
+            dgv.BackgroundColor = Color.White;
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgv.GridColor = Color.FromKnownColor(KnownColor.Control);
+            dgv.ReadOnly = true;
+            dgv.SelectionMode = DataGridViewSelectionMode.RowHeaderSelect;
+            dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgv.AllowUserToResizeRows = false;
+            dgv.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dgv.RowHeadersWidth = 25;
+            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            //dgv.ColumnHeadersHeight = 30;
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
+            dgv.DefaultCellStyle.SelectionBackColor = Color.LightSkyBlue;
+            dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            if (Fill == true) dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        #region ErrorProviders on Controls
+        private static string GetFirstLetter(string word)
+        {
+            return word.Substring(0, 1);
+        }
+
+        private static string ErrorMessageForEmpty(string fieldName)
+        {
+            if (GetFirstLetter(fieldName) == "A")
+                return $"Please enter an {fieldName}";
+            else
+                return $"Please enter a {fieldName}";
+        }
+
+        public static bool ShowErrorTextBoxEmpty(ErrorProvider ep, TextBox txtBox, string fieldName = "Field")
+        {
+            if (string.IsNullOrWhiteSpace(txtBox.Text.Trim()))
+            {
+                ep.SetError(txtBox, $"{ErrorMessageForEmpty(fieldName)}");
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool ShowErrorRichTextBoxEmpty(ErrorProvider ep, RichTextBox richTxtBox, string fieldName = "Field")
+        {
+            if (string.IsNullOrWhiteSpace(richTxtBox.Text.Trim()))
+            {
+                ep.SetError(richTxtBox, $"{ErrorMessageForEmpty(fieldName)}");
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool ShowErrorComboBoxEmpty(ErrorProvider ep, ComboBox cmbBox, string fieldName = "Field")
+        {
+            if (string.IsNullOrWhiteSpace(cmbBox.Text))
+            {
+                ep.SetError(cmbBox, $"{ErrorMessageForEmpty(fieldName)}");
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool ShowErrorNumericUpDownEmpty(ErrorProvider ep, NumericUpDown numUpDown, string fieldName = "Field")
+        {
+            if (string.IsNullOrWhiteSpace(numUpDown.Text.ToString()))
+            {
+                ep.SetError(numUpDown, $"{ErrorMessageForEmpty(fieldName)}");
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool ShowErrorCheckedListBox(ErrorProvider ep, CheckedListBox chklstBox, string fieldName = "Field")
+        {
+            if (chklstBox.CheckedIndices.Count == 0)
+            {
+                ep.SetError(chklstBox, $"{fieldName} is required");
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool ShowErrorDatagridView(ErrorProvider ep, DataGridView dgView, string fieldName = "Field")
+        {
+            if (dgView.Rows.Count == 0)
+            {
+                ep.SetError(dgView, $"{fieldName} is required");
+                return true;
+            }
+
+            return false;
+        }
+
+        public static void ClearErrorNumericUpDown(ErrorProvider ep, NumericUpDown numUpDown)
+        {
+            ep.SetError(numUpDown, string.Empty);
+        }
+
+        public static void ClearErrorComboBox(ErrorProvider ep, ComboBox cmbBox)
+        {
+            ep.SetError(cmbBox, string.Empty);
+        }
+
+        public static void ClearErrorTextBox(ErrorProvider ep, TextBox txtBox)
+        {
+            ep.SetError(txtBox, string.Empty);
+        }
+
+        public static void ClearErrorRichTextBox(ErrorProvider ep, RichTextBox richtxtBox)
+        {
+            ep.SetError(richtxtBox, string.Empty);
+        }
+
+        public static void ClearErrorCheckedListBox(ErrorProvider ep, CheckedListBox chklstBox)
+        {
+            ep.SetError(chklstBox, string.Empty);
+        }
+
+        public static void ClearErrorDatagridView(ErrorProvider ep, DataGridView dgView)
+        {
+            ep.SetError(dgView, string.Empty);
+        }
+
+        #endregion
+
+        #region MessageBoxes
+        // prompt a success messagebox
+        public static void MessageBoxSuccess(string message)
+        {
+            _ = MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        // prompt an error messagebox
+        public static void MessageBoxError(string message)
+        {
+            _ = MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public static bool MessageBoxConfirmDelete(int rowCount)
+        {
+            string message = string.Empty;
+
+            if (rowCount == 1)
+                message = "Are you sure you want to delete a record?";
+            else if (rowCount > 1)
+                message = $"Are you sure you want to delete {rowCount} records?";
+
+            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                return true;
+
+            return false;
+        }
+        #endregion
+
+        #region EnableDisableButtons
+        internal static void EnableDisableButtons(DataGridView dgv, Button btnEdit, Button btnDelete)
+        {
+            int SelectedRows = dgv.SelectedRows.Count;
+            if (SelectedRows == 1)
+            {
+                btnEdit.Enabled = true;
+                btnDelete.Enabled = true;
+                btnDelete.Text = "Delete (" + SelectedRows + ")";
+
+            }
+            else if (SelectedRows > 1)
+            {
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = true;
+                btnDelete.Text = "Delete (" + SelectedRows + ")";
+            }
+            else
+            {
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = false;
+                btnDelete.Text = "Delete";
+            }
+        }
+
+        internal static void EnableDisableToolStripButtons(DataGridView dgv, ToolStripButton tsBtnEdit, ToolStripButton tsBtnDelete)
+        {
+            int SelectedRows = dgv.SelectedRows.Count;
+            if (SelectedRows == 1)
+            {
+                tsBtnEdit.Enabled = true;
+                tsBtnDelete.Enabled = true;
+                tsBtnDelete.Text = "Delete (" + SelectedRows + ")";
+
+            }
+            else if (SelectedRows > 1)
+            {
+                tsBtnEdit.Enabled = false;
+                tsBtnDelete.Enabled = true;
+                tsBtnDelete.Text = "Delete (" + SelectedRows + ")";
+            }
+            else
+            {
+                tsBtnEdit.Enabled = false;
+                tsBtnDelete.Enabled = false;
+                tsBtnDelete.Text = "Delete";
+            }
+        }
+        #endregion
+
+        internal static void ShowRecordTimestamp(DataGridView dataGridView, int[] index, ToolStripStatusLabel lblCreatedAt, ToolStripStatusLabel lblUpdatedAt)
+        {
+            if (dataGridView.SelectedRows.Count == 1)
+            {
+                lblCreatedAt.Text = dataGridView.SelectedCells[index[0]].Value.ToString();
+                lblUpdatedAt.Text = dataGridView.SelectedCells[index[1]].Value.ToString();
+            }
+            else
+            {
+                lblCreatedAt.Text = string.Empty;
+                lblUpdatedAt.Text = string.Empty;
+            }
+        }
+
+        internal static string TruncateString(string myString, int maxLength)
+        {
+            return myString.Length > maxLength ? $"{myString.Substring(0, 20)}..." : $"{myString}";
+        }
+    }
+}
