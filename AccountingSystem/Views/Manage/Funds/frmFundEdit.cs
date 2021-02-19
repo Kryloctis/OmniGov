@@ -9,29 +9,28 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Journals
+namespace AccountingSystem.Views.Manage.Funds
 {
-    public partial class frmJournalsEdit : Form
+    public partial class frmFundEdit : Form
     {
-        private frmJournals _frmJournals;
-
-        public frmJournalsEdit(frmJournals frmJournals, int journalId)
+        private frmFunds _frmFunds;
+        public frmFundEdit(frmFunds frmFunds, int fundId)
         {
             InitializeComponent();
-            _frmJournals = frmJournals;
-            ucJournals1.journalId = journalId;
+            _frmFunds = frmFunds;
+          ucFunds1.fundId = fundId;
         }
 
         private void LoadSelectedRecord()
         {
             try
             {
-                var uc = ucJournals1;
-                var journalsRepository = Factory.JournalsRepository();
-                var journalData = journalsRepository.GetRecordByID(uc.journalId);
+                var uc = ucFunds1;
+                var fundsRepository = Factory.FundsRepository();
+                var fundData = fundsRepository.GetRecordByID(uc.fundId);
 
-                uc.txtName.Text = journalData["journal_name"];
-                uc.chkSpecialJournal.Checked = journalData["is_special"] == "0" ? false : true;
+                uc.txtName.Text = fundData["fund_name"];
+                             
             }
             catch (Exception ex)
             {
@@ -40,12 +39,14 @@ namespace AccountingSystem.Views.Manage.Journals
             }
         }
 
+
+
         private bool SaveData()
         {
             try
             {
-                var uc = ucJournals1;
-                
+                var uc = ucFunds1;
+
 
                 // if error occurs, show messagebox error
                 if (!uc.ValidateChildren())
@@ -55,15 +56,16 @@ namespace AccountingSystem.Views.Manage.Journals
                 }
 
                 // proceed to update
-                var journalModel = new JournalsModel()
+                var fundModel = new FundsModel()
                 {
-                    Id = uc.journalId,
-                    JournalName = uc.txtName.Text.Trim(),
-                    IsSpecialJournal = uc.chkSpecialJournal.Checked
+                    Id = uc.fundId,
+                    FundName = uc.txtName.Text.Trim()
                 };
 
-                var journalsRepository = Factory.JournalsRepository();
-                return journalsRepository.Update(journalModel);
+                var fundsRepository = Factory.FundsRepository();
+                return fundsRepository.Update(fundModel);
+
+               
             }
             catch (Exception ex)
             {
@@ -73,7 +75,7 @@ namespace AccountingSystem.Views.Manage.Journals
             return false;
         }
 
-        private void frmJournalsEdit_Load(object sender, EventArgs e)
+        private void frmFundsEdit_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
             LoadSelectedRecord();
@@ -83,14 +85,24 @@ namespace AccountingSystem.Views.Manage.Journals
         {
             if (SaveData())
             {
-                Helper.MessageBoxSuccess("Journal has been saved.");
-                _frmJournals.LoadRecords();
+                Helper.MessageBoxSuccess("Fund has been saved.");
+                _frmFunds.LoadRecords();
+            }
+        }
+
+        private void btnSave_Click_1(object sender, EventArgs e)
+        {
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("Fund has been saved.");
+                _frmFunds.LoadRecords();
             }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-          
+            ucFunds1.ResetForm();
+            this.Close();
         }
     }
 }

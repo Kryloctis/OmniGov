@@ -9,23 +9,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Journals
+namespace AccountingSystem.Views.Manage.Funds
 {
-    public partial class frmJournalsAdd : Form
+    public partial class frmFundAdd : Form
     {
-        private frmJournals _frmJournals;
+        private frmFunds _frmFunds;
 
-        public frmJournalsAdd(frmJournals frmJournals)
+        public frmFundAdd(frmFunds frmFunds)
         {
             InitializeComponent();
-            _frmJournals = frmJournals;
+            _frmFunds = frmFunds;
         }
 
         private bool SaveData()
         {
             try
             {
-                var uc = ucJournals1;
+                var uc = ucFunds1;
                 // if error occurs, show messagebox error
                 if (!uc.ValidateChildren())
                 {
@@ -34,14 +34,14 @@ namespace AccountingSystem.Views.Manage.Journals
                 }
 
                 // proceed to insert
-                var journalModel = new JournalsModel()
+                var fundModel = new FundsModel()
                 {
-                    JournalName = uc.txtName.Text.Trim(),
-                    IsSpecialJournal = uc.chkSpecialJournal.Checked
+                    FundName = uc.txtName.Text.Trim()
+                    
                 };
 
-                var journalsRepository = Factory.JournalsRepository();
-                return journalsRepository.Insert(journalModel);
+                var fundsRepository = Factory.FundsRepository();
+                return fundsRepository.Insert(fundModel);
             }
             catch (Exception ex)
             {
@@ -52,29 +52,24 @@ namespace AccountingSystem.Views.Manage.Journals
         }
 
 
-        private void frmJournalsAdd_Load(object sender, EventArgs e)
+        private void frmFundAdd_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnSave_Click_1(object sender, EventArgs e)
         {
             if (SaveData())
             {
-                Helper.MessageBoxSuccess("Journal has been saved.");
-                _frmJournals.LoadRecords();
-                ucJournals1.ResetForm();
+                Helper.MessageBoxSuccess("Fund has been saved.");
+                _frmFunds.LoadRecords();
+                ucFunds1.ResetForm();
             }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void btnCancel_Click_1(object sender, EventArgs e)
-        {
-
+            ucFunds1.ResetForm();
         }
     }
 }

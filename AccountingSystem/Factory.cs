@@ -12,6 +12,7 @@ namespace AccountingSystem
     {
         
         internal static IJournalsRepository JournalsRepository() => new JournalsRepository(new MySqlGenericCommands());
+        internal static IFundsRepository FundsRepository() => new FundsRepository(new MySqlGenericCommands());
 
         internal static IError CreateErrors(Array errors) => new Error(errors);
     }

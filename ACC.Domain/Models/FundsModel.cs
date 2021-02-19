@@ -1,0 +1,12 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace ACC.Domain.Models
+{
+    public class FundsModel
+    {
+        public int Id { get; set; }
+        public string FundName { get; set; }      
+    }
+}
