@@ -69,7 +69,7 @@ namespace AccountingSystem.Views.Manage.Funds
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            ucFunds1.ResetForm();
+            
         }
     }
 }

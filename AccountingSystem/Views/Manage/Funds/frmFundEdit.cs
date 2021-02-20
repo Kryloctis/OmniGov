@@ -14,11 +14,13 @@ namespace AccountingSystem.Views.Manage.Funds
     public partial class frmFundEdit : Form
     {
         private frmFunds _frmFunds;
+
         public frmFundEdit(frmFunds frmFunds, int fundId)
         {
             InitializeComponent();
             _frmFunds = frmFunds;
           ucFunds1.fundId = fundId;
+
         }
 
         private void LoadSelectedRecord()
@@ -30,7 +32,7 @@ namespace AccountingSystem.Views.Manage.Funds
                 var fundData = fundsRepository.GetRecordByID(uc.fundId);
 
                 uc.txtName.Text = fundData["fund_name"];
-                             
+
             }
             catch (Exception ex)
             {
@@ -75,20 +77,6 @@ namespace AccountingSystem.Views.Manage.Funds
             return false;
         }
 
-        private void frmFundsEdit_Load(object sender, EventArgs e)
-        {
-            Helper.LoadFormIcon(this);
-            LoadSelectedRecord();
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (SaveData())
-            {
-                Helper.MessageBoxSuccess("Fund has been saved.");
-                _frmFunds.LoadRecords();
-            }
-        }
 
         private void btnSave_Click_1(object sender, EventArgs e)
         {
@@ -101,8 +89,13 @@ namespace AccountingSystem.Views.Manage.Funds
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            ucFunds1.ResetForm();
-            this.Close();
+           
+        }
+
+        private void frmFundEdit_Load(object sender, EventArgs e)
+        {
+            Helper.LoadFormIcon(this);
+            LoadSelectedRecord();
         }
     }
 }

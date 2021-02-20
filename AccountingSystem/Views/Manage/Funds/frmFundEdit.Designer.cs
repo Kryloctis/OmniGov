@@ -85,8 +85,11 @@ namespace AccountingSystem.Views.Manage.Funds
             // 
             // frmFundEdit
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(415, 96);
             this.Controls.Add(this.ucFunds1);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -94,6 +97,7 @@ namespace AccountingSystem.Views.Manage.Funds
             this.Name = "frmFundEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Fund";
+            this.Load += new System.EventHandler(this.frmFundEdit_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
