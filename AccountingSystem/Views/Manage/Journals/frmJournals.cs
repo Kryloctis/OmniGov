@@ -30,7 +30,6 @@ namespace AccountingSystem.Views.Manage.Journals
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
         private void frmJournals_Load(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Normal;
@@ -83,6 +82,11 @@ namespace AccountingSystem.Views.Manage.Journals
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

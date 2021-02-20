@@ -1,7 +1,7 @@
 ﻿
-namespace AccountingSystem.Views.Manage.Journals
+namespace AccountingSystem.Views.Manage.Funds
 {
-    partial class frmJournalsEdit
+    partial class frmFundAdd
     {
         /// <summary>
         /// Required designer variable.
@@ -29,21 +29,20 @@ namespace AccountingSystem.Views.Manage.Journals
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmJournalsEdit));
-            this.ucJournals1 = new AccountingSystem.Views.Manage.Journals.ucJournals();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFundAdd));
+            this.ucFunds1 = new AccountingSystem.Views.Manage.Funds.ucFunds();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // ucJournals1
+            // ucFunds1
             // 
-            this.ucJournals1.Location = new System.Drawing.Point(12, 7);
-            this.ucJournals1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ucJournals1.Name = "ucJournals1";
-            this.ucJournals1.Size = new System.Drawing.Size(398, 58);
-            this.ucJournals1.TabIndex = 0;
+            this.ucFunds1.Location = new System.Drawing.Point(8, 6);
+            this.ucFunds1.Name = "ucFunds1";
+            this.ucFunds1.Size = new System.Drawing.Size(401, 58);
+            this.ucFunds1.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
@@ -82,24 +81,20 @@ namespace AccountingSystem.Views.Manage.Journals
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click_1);
             // 
-            // frmJournalsEdit
+            // frmFundAdd
             // 
-            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(415, 96);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.ucJournals1);
+            this.Controls.Add(this.ucFunds1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "frmJournalsEdit";
+            this.Name = "frmFundAdd";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Edit Journal";
-            this.Load += new System.EventHandler(this.frmJournalsEdit_Load);
+            this.Text = "Add Fund";
+            this.Load += new System.EventHandler(this.frmFundAdd_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -107,7 +102,7 @@ namespace AccountingSystem.Views.Manage.Journals
 
         #endregion
 
-        private ucJournals ucJournals1;
+        private ucFunds ucFunds1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;

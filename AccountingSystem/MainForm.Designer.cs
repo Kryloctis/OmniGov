@@ -35,6 +35,7 @@ namespace AccountingSystem
             this.menuManage = new System.Windows.Forms.ToolStripMenuItem();
             this.menuJournals = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAllotmentClasses = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuFunds = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
@@ -50,69 +51,79 @@ namespace AccountingSystem
             this.menuReports});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1268, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1110, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // menuFile
             // 
             this.menuFile.Name = "menuFile";
-            this.menuFile.Size = new System.Drawing.Size(46, 24);
+            this.menuFile.Size = new System.Drawing.Size(37, 20);
             this.menuFile.Text = "&File";
             // 
             // menuTransactions
             // 
             this.menuTransactions.Name = "menuTransactions";
-            this.menuTransactions.Size = new System.Drawing.Size(104, 24);
+            this.menuTransactions.Size = new System.Drawing.Size(84, 20);
             this.menuTransactions.Text = "Transactions";
             // 
             // menuManage
             // 
             this.menuManage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuJournals,
-            this.menuAllotmentClasses});
+            this.menuAllotmentClasses,
+            this.menuFunds});
             this.menuManage.Name = "menuManage";
-            this.menuManage.Size = new System.Drawing.Size(77, 24);
+            this.menuManage.Size = new System.Drawing.Size(62, 20);
             this.menuManage.Text = "Manage";
             // 
             // menuJournals
             // 
             this.menuJournals.Name = "menuJournals";
-            this.menuJournals.Size = new System.Drawing.Size(218, 26);
+            this.menuJournals.Size = new System.Drawing.Size(177, 22);
             this.menuJournals.Text = "Journals...";
             this.menuJournals.Click += new System.EventHandler(this.menuJournals_Click);
             // 
             // menuAllotmentClasses
             // 
             this.menuAllotmentClasses.Name = "menuAllotmentClasses";
-            this.menuAllotmentClasses.Size = new System.Drawing.Size(218, 26);
+            this.menuAllotmentClasses.Size = new System.Drawing.Size(177, 22);
             this.menuAllotmentClasses.Text = "Allotment Classes...";
+            // 
+            // menuFunds
+            // 
+            this.menuFunds.Name = "menuFunds";
+            this.menuFunds.Size = new System.Drawing.Size(177, 22);
+            this.menuFunds.Text = "Funds...";
+            this.menuFunds.Click += new System.EventHandler(this.menuFunds_Click);
             // 
             // menuReports
             // 
             this.menuReports.Name = "menuReports";
-            this.menuReports.Size = new System.Drawing.Size(74, 24);
+            this.menuReports.Size = new System.Drawing.Size(59, 20);
             this.menuReports.Text = "Reports";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(12, 42);
+            this.label1.Location = new System.Drawing.Point(0, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(202, 50);
+            this.label1.Size = new System.Drawing.Size(163, 41);
             this.label1.TabIndex = 1;
             this.label1.Text = "Dashboard";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(1268, 718);
+            this.ClientSize = new System.Drawing.Size(1110, 538);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Accounting System";
@@ -135,6 +146,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuReports;
         private System.Windows.Forms.ToolStripMenuItem menuAllotmentClasses;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem menuFunds;
     }
 }
 

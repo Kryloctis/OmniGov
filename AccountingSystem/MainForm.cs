@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AccountingSystem.Views.Manage.Journals;
+using AccountingSystem.Views.Manage.Funds;
 
 namespace AccountingSystem
 {
@@ -27,5 +28,13 @@ namespace AccountingSystem
         {
             _ = new frmJournals().ShowDialog();
         }
+        private void menuFunds_Click(object sender, EventArgs e)
+        {
+            _ = new frmFunds().ShowDialog();
+        }
+
+
+
+
     }
 }

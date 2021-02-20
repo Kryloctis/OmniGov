@@ -9,12 +9,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.Journals
+namespace AccountingSystem.Views.Manage.Funds
 {
-    public partial class ucJournals : UserControl
+    public partial class ucFunds : UserControl
     {
-        internal int journalId = 0;
-        public ucJournals()
+        internal int fundId = 0;
+        public ucFunds()
         {
             InitializeComponent();
         }
@@ -28,28 +28,28 @@ namespace AccountingSystem.Views.Manage.Journals
             return _errors.GenerateErrorMessage();
         }
 
+
         internal void ResetForm()
         {
             txtName.Clear();
-            chkSpecialJournal.Checked = false;
         }
 
         private void txtName_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "journal name");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "fund name");
 
-            var journalsRepository = Factory.JournalsRepository();
-            string journalName = txtName.Text.Trim();
-            bool journalNameExist;
+            var fundsRepository = Factory.FundsRepository();
+            string fundName = txtName.Text.Trim();
+            bool fundNameExist;
 
-            if (journalId == 0)
-                journalNameExist = journalsRepository.NameExist(journalName); // add form
+            if (fundId == 0)
+                fundNameExist = fundsRepository.NameExist(fundName); // add form
             else
-                journalNameExist = journalsRepository.NameExist(journalName, journalId); // edit form
+                fundNameExist = fundsRepository.NameExist(fundName, fundId); // edit form
 
-            if (journalNameExist)
+            if (fundNameExist)
             {
-                epName.SetError(txtName, "Journal name already exist in your records.");
+                epName.SetError(txtName, "Fund name already exist in your records.");
                 e.Cancel = true;
             }
         }
@@ -59,7 +59,7 @@ namespace AccountingSystem.Views.Manage.Journals
             Helper.ClearErrorTextBox(epName, txtName);
         }
 
-        private void ucJournals_Load(object sender, EventArgs e)
+        private void ucFunds_Load(object sender, EventArgs e)
         {
 
         }
