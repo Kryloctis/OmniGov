@@ -6,8 +6,8 @@ using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IMajorAccountGroupRepository : IRepository<MajorAccountGroupModel>
+    public interface IGeneralLedgerAccountsRepository : IRepository<GeneralLedgerAccountsModal>
     {
-        DataTable GetRecordsByAccountGroupId(byte id);
+        DataTable GetViewRecords();
     }
 }

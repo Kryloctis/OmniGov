@@ -7,29 +7,24 @@ using ACC.Domain.Models;
 
 namespace ACC.Data
 {
-    public class MajorAccountGroupRepository : IMajorAccountGroupRepository
+    public class SubMajorAccountGroupRepository : ISubMajorAccountGroupRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "major_account_group";
 
-        public MajorAccountGroupRepository(IDbGenericCommands dbGenericCommands)
+        public SubMajorAccountGroupRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }
 
-        public DataTable GetRecords()
+        public int CountRecords()
         {
-            try
-            {
-                string query = $"SELECT * FROM {tableName}";
+            throw new NotImplementedException();
+        }
 
-                var dtJournals = new DataTable();
-                return _dbGenericCommands.Fill(query, dtJournals);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+        public bool Delete(List<SubMajorAccountGroupModel> entityList)
+        {
+            throw new NotImplementedException();
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -37,16 +32,21 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public DataTable GetRecordsByAccountGroupId(byte id)
+        public DataTable GetRecords()
+        {
+            throw new NotImplementedException();
+        }
+
+        public DataTable GetRecordsByMajorAccountId(short majorAccountId)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Byte, id},
+                    new object[] { "@id", DbType.Byte, majorAccountId},
                 };
 
-                string query = $"SELECT * FROM {tableName} WHERE account_group_id =  @id";
+                string query = $"SELECT * FROM {tableName} WHERE major_account_group_id =  @id";
 
                 return _dbGenericCommands.ExecuteReader(query, parameters);
             }
@@ -61,27 +61,17 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Insert(MajorAccountGroupModel entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(MajorAccountGroupModel entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Delete(List<MajorAccountGroupModel> entityList)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool IdExist(int id)
         {
             throw new NotImplementedException();
         }
 
-        public int CountRecords()
+        public bool Insert(SubMajorAccountGroupModel entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(SubMajorAccountGroupModel entity)
         {
             throw new NotImplementedException();
         }

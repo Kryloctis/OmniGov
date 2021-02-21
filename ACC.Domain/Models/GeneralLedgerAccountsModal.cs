@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ACC.Domain.Models
 {
-    public class GeneralLedgerAccountModal
+    public class GeneralLedgerAccountsModal
     {
         public int Id { get; set; }
         public Int16 SubMajorAccountGroupId { get; set; }

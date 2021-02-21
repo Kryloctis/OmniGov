@@ -12,37 +12,42 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 {
     public partial class frmChartOfAccounts : Form
     {
+
         public frmChartOfAccounts()
         {
             InitializeComponent();
         }
 
-        private void AccountGroupNodes()
+        internal void LoadRecords()
         {
-            DataTable dtaccountGroup = Factory.AccountGroupRepository().GetRecords();
-
-            foreach (DataRow dataRow in dtaccountGroup.Rows)
+            try
             {
-                int accountGroupId = int.Parse(dataRow["id"].ToString());
-                string accountGroupCode = dataRow["account_group_code"].ToString();
-                string accountGroupName = dataRow["account_group_name"].ToString();
+                var generalLedgerAccountsRepo = Factory.GeneralLedgerAccountsRepository();
+                var dtAccounts = generalLedgerAccountsRepo.GetViewRecords();
+                HelperLoadRecords.GeneralLedgerAccountsDatagridView(dtAccounts, dgGeneralLedgerAccounts);
 
-                TreeNode accountGroupNode = new TreeNode(accountGroupCode);
-                accountGroupNode.Nodes.Add(accountGroupName);
-
+                lblRecordCount.Text = generalLedgerAccountsRepo.CountRecords().ToString();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
-        private void PopulateTreeView()
-        {
-            // get account group records
-            
-        }
 
         private void frmChartOfAccounts_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            PopulateTreeView();
+            Helper.DatagridDefaultStyle(dgGeneralLedgerAccounts);
+            toolStrip1.Visible = false;
+            LoadRecords();
+        }
+
+        private void dgGeneralLedgerAccounts_SelectionChanged(object sender, EventArgs e)
+        {
+            int[] columnIndexTimestamp = { 3, 4 };
+            Helper.ShowRecordTimestamp(dgGeneralLedgerAccounts, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgGeneralLedgerAccounts, btnEdit, btnDelete);
         }
     }
 }
