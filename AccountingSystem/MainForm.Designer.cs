@@ -38,6 +38,7 @@ namespace AccountingSystem
             this.menuFunds = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
+            this.menuChartOfAccounts = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,6 +73,8 @@ namespace AccountingSystem
             // 
             this.menuManage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuJournals,
+            this.menuAllotmentClasses,
+            this.menuChartOfAccounts,
             this.menuAllotmentClasses,
             this.menuFunds});
             this.menuManage.Name = "menuManage";
@@ -114,6 +117,13 @@ namespace AccountingSystem
             this.label1.TabIndex = 1;
             this.label1.Text = "Dashboard";
             // 
+            // menuChartOfAccounts
+            // 
+            this.menuChartOfAccounts.Name = "menuChartOfAccounts";
+            this.menuChartOfAccounts.Size = new System.Drawing.Size(218, 26);
+            this.menuChartOfAccounts.Text = "Chart of Accounts...";
+            this.menuChartOfAccounts.Click += new System.EventHandler(this.menuChartOfAccounts_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -147,6 +157,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuAllotmentClasses;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem menuFunds;
+        private System.Windows.Forms.ToolStripMenuItem menuChartOfAccounts;
     }
 }
 

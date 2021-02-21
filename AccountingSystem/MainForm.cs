@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using AccountingSystem.Views.Manage.Journals;
 using AccountingSystem.Views.Manage.Funds;
+using AccountingSystem.Views.Manage.ChartOfAccounts;
 
 namespace AccountingSystem
 {
@@ -36,5 +30,10 @@ namespace AccountingSystem
 
 
 
+
+        private void menuChartOfAccounts_Click(object sender, EventArgs e)
+        {
+            _ = new frmChartOfAccounts().ShowDialog();
+        }
     }
 }
