@@ -39,7 +39,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             Helper.LoadFormIcon(this);
             Helper.DatagridDefaultStyle(dgGeneralLedgerAccounts);
-            toolStrip1.Visible = false;
             LoadRecords();
         }
 
@@ -47,7 +46,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             int[] columnIndexTimestamp = { 3, 4 };
             Helper.ShowRecordTimestamp(dgGeneralLedgerAccounts, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-            Helper.EnableDisableToolStripButtons(dgGeneralLedgerAccounts, btnEdit, btnDelete);
         }
     }
 }
