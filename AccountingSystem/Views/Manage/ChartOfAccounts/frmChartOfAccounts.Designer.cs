@@ -29,6 +29,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmChartOfAccounts));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -38,8 +39,25 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgGeneralLedgerAccounts = new System.Windows.Forms.DataGridView();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabSubsidiaryLedgers = new System.Windows.Forms.TabPage();
+            this.tabGeneralLedgers = new System.Windows.Forms.TabPage();
+            this.tabSubMajorAccount = new System.Windows.Forms.TabPage();
+            this.tabMajorAccount = new System.Windows.Forms.TabPage();
+            this.tabAccountGroup = new System.Windows.Forms.TabPage();
+            this.dgAccountGroup = new System.Windows.Forms.DataGridView();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnAdd = new System.Windows.Forms.ToolStripButton();
+            this.btnEdit = new System.Windows.Forms.ToolStripButton();
+            this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.btnFind = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgGeneralLedgerAccounts)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabGeneralLedgers.SuspendLayout();
+            this.tabAccountGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgAccountGroup)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -55,7 +73,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.lblUpdatedAt});
             this.statusStrip1.Location = new System.Drawing.Point(0, 640);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(984, 26);
+            this.statusStrip1.Size = new System.Drawing.Size(982, 26);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
@@ -75,7 +93,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(719, 20);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(717, 20);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -102,26 +120,158 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             // 
             // dgGeneralLedgerAccounts
             // 
-            this.dgGeneralLedgerAccounts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgGeneralLedgerAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgGeneralLedgerAccounts.Location = new System.Drawing.Point(12, 12);
+            this.dgGeneralLedgerAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgGeneralLedgerAccounts.Location = new System.Drawing.Point(3, 3);
             this.dgGeneralLedgerAccounts.Name = "dgGeneralLedgerAccounts";
             this.dgGeneralLedgerAccounts.RowHeadersWidth = 51;
             this.dgGeneralLedgerAccounts.RowTemplate.Height = 29;
-            this.dgGeneralLedgerAccounts.Size = new System.Drawing.Size(960, 625);
+            this.dgGeneralLedgerAccounts.Size = new System.Drawing.Size(944, 541);
             this.dgGeneralLedgerAccounts.TabIndex = 4;
             this.dgGeneralLedgerAccounts.SelectionChanged += new System.EventHandler(this.dgGeneralLedgerAccounts_SelectionChanged);
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+            this.tabControl1.Controls.Add(this.tabSubsidiaryLedgers);
+            this.tabControl1.Controls.Add(this.tabGeneralLedgers);
+            this.tabControl1.Controls.Add(this.tabSubMajorAccount);
+            this.tabControl1.Controls.Add(this.tabMajorAccount);
+            this.tabControl1.Controls.Add(this.tabAccountGroup);
+            this.tabControl1.Location = new System.Drawing.Point(12, 54);
+            this.tabControl1.Multiline = true;
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(958, 583);
+            this.tabControl1.TabIndex = 5;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            // 
+            // tabSubsidiaryLedgers
+            // 
+            this.tabSubsidiaryLedgers.Location = new System.Drawing.Point(4, 32);
+            this.tabSubsidiaryLedgers.Name = "tabSubsidiaryLedgers";
+            this.tabSubsidiaryLedgers.Size = new System.Drawing.Size(950, 547);
+            this.tabSubsidiaryLedgers.TabIndex = 2;
+            this.tabSubsidiaryLedgers.Text = "Subsidiary Ledgers";
+            this.tabSubsidiaryLedgers.UseVisualStyleBackColor = true;
+            // 
+            // tabGeneralLedgers
+            // 
+            this.tabGeneralLedgers.Controls.Add(this.dgGeneralLedgerAccounts);
+            this.tabGeneralLedgers.Location = new System.Drawing.Point(4, 32);
+            this.tabGeneralLedgers.Name = "tabGeneralLedgers";
+            this.tabGeneralLedgers.Padding = new System.Windows.Forms.Padding(3);
+            this.tabGeneralLedgers.Size = new System.Drawing.Size(950, 547);
+            this.tabGeneralLedgers.TabIndex = 0;
+            this.tabGeneralLedgers.Text = "General Ledgers";
+            this.tabGeneralLedgers.UseVisualStyleBackColor = true;
+            // 
+            // tabSubMajorAccount
+            // 
+            this.tabSubMajorAccount.Location = new System.Drawing.Point(4, 32);
+            this.tabSubMajorAccount.Name = "tabSubMajorAccount";
+            this.tabSubMajorAccount.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSubMajorAccount.Size = new System.Drawing.Size(950, 547);
+            this.tabSubMajorAccount.TabIndex = 1;
+            this.tabSubMajorAccount.Text = "Sub Major Account Group";
+            this.tabSubMajorAccount.UseVisualStyleBackColor = true;
+            // 
+            // tabMajorAccount
+            // 
+            this.tabMajorAccount.Location = new System.Drawing.Point(4, 32);
+            this.tabMajorAccount.Name = "tabMajorAccount";
+            this.tabMajorAccount.Size = new System.Drawing.Size(950, 547);
+            this.tabMajorAccount.TabIndex = 3;
+            this.tabMajorAccount.Text = "Major Account Group";
+            this.tabMajorAccount.UseVisualStyleBackColor = true;
+            // 
+            // tabAccountGroup
+            // 
+            this.tabAccountGroup.Controls.Add(this.dgAccountGroup);
+            this.tabAccountGroup.Location = new System.Drawing.Point(4, 32);
+            this.tabAccountGroup.Name = "tabAccountGroup";
+            this.tabAccountGroup.Size = new System.Drawing.Size(950, 547);
+            this.tabAccountGroup.TabIndex = 4;
+            this.tabAccountGroup.Text = "Account Group";
+            this.tabAccountGroup.UseVisualStyleBackColor = true;
+            // 
+            // dgAccountGroup
+            // 
+            this.dgAccountGroup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgAccountGroup.Location = new System.Drawing.Point(3, 3);
+            this.dgAccountGroup.Name = "dgAccountGroup";
+            this.dgAccountGroup.RowHeadersWidth = 51;
+            this.dgAccountGroup.RowTemplate.Height = 29;
+            this.dgAccountGroup.Size = new System.Drawing.Size(944, 541);
+            this.dgAccountGroup.TabIndex = 0;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnAdd,
+            this.btnEdit,
+            this.btnDelete,
+            this.btnFind});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(982, 51);
+            this.toolStrip1.TabIndex = 6;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
+            this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(50, 48);
+            this.btnAdd.Text = "Add...";
+            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(48, 48);
+            this.btnEdit.Text = "Edit...";
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(57, 48);
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btnFind
+            // 
+            this.btnFind.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnFind.Image = ((System.Drawing.Image)(resources.GetObject("btnFind.Image")));
+            this.btnFind.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnFind.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnFind.Name = "btnFind";
+            this.btnFind.Size = new System.Drawing.Size(46, 48);
+            this.btnFind.Text = "Filter";
+            this.btnFind.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // frmChartOfAccounts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 666);
-            this.Controls.Add(this.dgGeneralLedgerAccounts);
+            this.ClientSize = new System.Drawing.Size(982, 666);
+            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmChartOfAccounts";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -130,6 +280,12 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgGeneralLedgerAccounts)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabGeneralLedgers.ResumeLayout(false);
+            this.tabAccountGroup.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgAccountGroup)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -145,5 +301,17 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.DataGridView dgGeneralLedgerAccounts;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabGeneralLedgers;
+        private System.Windows.Forms.TabPage tabSubMajorAccount;
+        private System.Windows.Forms.TabPage tabSubsidiaryLedgers;
+        private System.Windows.Forms.TabPage tabMajorAccount;
+        private System.Windows.Forms.TabPage tabAccountGroup;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton btnAdd;
+        private System.Windows.Forms.ToolStripButton btnEdit;
+        private System.Windows.Forms.ToolStripButton btnDelete;
+        private System.Windows.Forms.ToolStripButton btnFind;
+        private System.Windows.Forms.DataGridView dgAccountGroup;
     }
 }
