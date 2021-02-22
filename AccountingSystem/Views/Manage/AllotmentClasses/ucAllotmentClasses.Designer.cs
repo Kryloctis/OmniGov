@@ -53,9 +53,10 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(63, 40);
+            this.txtName.MaxLength = 50;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(370, 27);
-            this.txtName.TabIndex = 3;
+            this.txtName.TabIndex = 2;
             this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.txtName_Validating);
             this.txtName.Validated += new System.EventHandler(this.txtName_Validated);
             // 
@@ -75,9 +76,10 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             // txtCode
             // 
             this.txtCode.Location = new System.Drawing.Point(63, 7);
+            this.txtCode.MaxLength = 5;
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(370, 27);
-            this.txtCode.TabIndex = 5;
+            this.txtCode.TabIndex = 1;
             this.txtCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtCode_Validating);
             this.txtCode.Validated += new System.EventHandler(this.txtCode_Validated);
             // 
