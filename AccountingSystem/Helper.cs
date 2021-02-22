@@ -49,6 +49,7 @@ namespace AccountingSystem
 
         private static string ErrorMessageForEmpty(string fieldName)
         {
+            
             if (GetFirstLetter(fieldName) == "A")
                 return $"Please enter an {fieldName}";
             else
@@ -61,6 +62,7 @@ namespace AccountingSystem
             {
                 ep.SetError(txtBox, $"{ErrorMessageForEmpty(fieldName)}");
                 return true;
+                
             }
 
             return false;

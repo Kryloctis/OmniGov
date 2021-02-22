@@ -59,6 +59,7 @@ namespace AccountingSystem
             this.menuStrip1.Size = new System.Drawing.Size(1269, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // menuFile
             // 
@@ -103,6 +104,7 @@ namespace AccountingSystem
             this.menuAllotmentClasses.Name = "menuAllotmentClasses";
             this.menuAllotmentClasses.Size = new System.Drawing.Size(218, 26);
             this.menuAllotmentClasses.Text = "Allotment Classes...";
+            this.menuAllotmentClasses.Click += new System.EventHandler(this.menuAllotmentClasses_Click);
             // 
             // menuFunds
             // 

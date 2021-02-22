@@ -4,6 +4,7 @@ using AccountingSystem.Views.Manage.Journals;
 using AccountingSystem.Views.Manage.Funds;
 using AccountingSystem.Views.Manage.ChartOfAccounts;
 
+using AccountingSystem.Views.Manage.AllotmentClasses;
 namespace AccountingSystem
 {
     public partial class MainForm : Form
@@ -34,6 +35,15 @@ namespace AccountingSystem
         private void menuChartOfAccounts_Click(object sender, EventArgs e)
         {
             _ = new frmChartOfAccounts().ShowDialog();
+        }
+        private void menuAllotmentClasses_Click(object sender, EventArgs e)
+        {
+            _ = new frmAllotmentClasses().ShowDialog();
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }
