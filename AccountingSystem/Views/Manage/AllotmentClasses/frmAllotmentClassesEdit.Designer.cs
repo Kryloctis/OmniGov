@@ -1,7 +1,7 @@
 ﻿
-namespace AccountingSystem.Views.Manage.Journals
+namespace AccountingSystem.Views.Manage.AllotmentClasses
 {
-    partial class frmJournalsAdd
+    partial class frmAllotmentClassesEdit
     {
         /// <summary>
         /// Required designer variable.
@@ -29,20 +29,20 @@ namespace AccountingSystem.Views.Manage.Journals
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmJournalsAdd));
-            this.ucJournals1 = new AccountingSystem.Views.Manage.Journals.ucJournals();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAllotmentClassesEdit));
+            this.ucAllotmentClasses1 = new AccountingSystem.Views.Manage.AllotmentClasses.ucAllotmentClasses();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // ucJournals1
+            // ucAllotmentClasses1
             // 
-            this.ucJournals1.Location = new System.Drawing.Point(12, 12);
-            this.ucJournals1.Name = "ucJournals1";
-            this.ucJournals1.Size = new System.Drawing.Size(459, 66);
-            this.ucJournals1.TabIndex = 0;
+            this.ucAllotmentClasses1.Location = new System.Drawing.Point(12, 13);
+            this.ucAllotmentClasses1.Name = "ucAllotmentClasses1";
+            this.ucAllotmentClasses1.Size = new System.Drawing.Size(450, 73);
+            this.ucAllotmentClasses1.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
@@ -54,7 +54,7 @@ namespace AccountingSystem.Views.Manage.Journals
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.flowLayoutPanel1.Size = new System.Drawing.Size(474, 36);
-            this.flowLayoutPanel1.TabIndex = 1;
+            this.flowLayoutPanel1.TabIndex = 3;
             // 
             // btnCancel
             // 
@@ -65,7 +65,6 @@ namespace AccountingSystem.Views.Manage.Journals
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
@@ -78,9 +77,9 @@ namespace AccountingSystem.Views.Manage.Journals
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click_1);
             // 
-            // frmJournalsAdd
+            // frmAllotmentClassesEdit
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -89,12 +88,12 @@ namespace AccountingSystem.Views.Manage.Journals
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(474, 128);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.ucJournals1);
+            this.Controls.Add(this.ucAllotmentClasses1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "frmJournalsAdd";
+            this.Name = "frmAllotmentClassesEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Journal";
-            this.Load += new System.EventHandler(this.frmJournalsAdd_Load);
+            this.Text = "Edit Allotment Class";
+            this.Load += new System.EventHandler(this.frmAllotmentClassesEdit_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -102,7 +101,7 @@ namespace AccountingSystem.Views.Manage.Journals
 
         #endregion
 
-        private ucJournals ucJournals1;
+        private ucAllotmentClasses ucAllotmentClasses1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;

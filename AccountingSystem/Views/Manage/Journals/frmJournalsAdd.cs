@@ -65,5 +65,10 @@ namespace AccountingSystem.Views.Manage.Journals
                 ucJournals1.ResetForm();
             }
         }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

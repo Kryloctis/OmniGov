@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AccountingSystem.Views.Manage.Journals;
-
+using AccountingSystem.Views.Manage.AllotmentClasses;
 namespace AccountingSystem
 {
     public partial class MainForm : Form
@@ -26,6 +26,15 @@ namespace AccountingSystem
         private void menuJournals_Click(object sender, EventArgs e)
         {
             _ = new frmJournals().ShowDialog();
+        }
+        private void menuAllotmentClasses_Click(object sender, EventArgs e)
+        {
+            _ = new frmAllotmentClasses().ShowDialog();
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

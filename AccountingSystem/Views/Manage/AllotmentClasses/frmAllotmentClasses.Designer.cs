@@ -1,7 +1,7 @@
 ﻿
-namespace AccountingSystem.Views.Manage.Journals
+namespace AccountingSystem.Views.Manage.AllotmentClasses
 {
-    partial class frmJournals
+    partial class frmAllotmentClasses
     {
         /// <summary>
         /// Required designer variable.
@@ -21,6 +21,7 @@ namespace AccountingSystem.Views.Manage.Journals
             base.Dispose(disposing);
         }
 
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -29,12 +30,12 @@ namespace AccountingSystem.Views.Manage.Journals
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmJournals));
-            this.dgJournals = new System.Windows.Forms.DataGridView();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAllotmentClasses));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.dgAllotmentClasses = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -43,25 +44,10 @@ namespace AccountingSystem.Views.Manage.Journals
             this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.dgJournals)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgAllotmentClasses)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // dgJournals
-            // 
-            this.dgJournals.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgJournals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgJournals.Location = new System.Drawing.Point(12, 54);
-            this.dgJournals.Name = "dgJournals";
-            this.dgJournals.RowHeadersWidth = 51;
-            this.dgJournals.RowTemplate.Height = 29;
-            this.dgJournals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgJournals.Size = new System.Drawing.Size(773, 444);
-            this.dgJournals.TabIndex = 0;
-            this.dgJournals.SelectionChanged += new System.EventHandler(this.dgJournals_SelectionChanged);
             // 
             // toolStrip1
             // 
@@ -74,8 +60,9 @@ namespace AccountingSystem.Views.Manage.Journals
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(797, 51);
-            this.toolStrip1.TabIndex = 1;
+            this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
             // btnAdd
             // 
@@ -110,6 +97,21 @@ namespace AccountingSystem.Views.Manage.Journals
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+            // dgAllotmentClasses
+            // 
+            this.dgAllotmentClasses.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgAllotmentClasses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgAllotmentClasses.Location = new System.Drawing.Point(12, 54);
+            this.dgAllotmentClasses.Name = "dgAllotmentClasses";
+            this.dgAllotmentClasses.RowHeadersWidth = 51;
+            this.dgAllotmentClasses.RowTemplate.Height = 29;
+            this.dgAllotmentClasses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgAllotmentClasses.Size = new System.Drawing.Size(773, 444);
+            this.dgAllotmentClasses.TabIndex = 3;
+            this.dgAllotmentClasses.SelectionChanged += new System.EventHandler(this.dgAllotmentClasses_SelectionChanged_1);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -124,7 +126,7 @@ namespace AccountingSystem.Views.Manage.Journals
             this.statusStrip1.Location = new System.Drawing.Point(0, 501);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(797, 26);
-            this.statusStrip1.TabIndex = 2;
+            this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
@@ -167,23 +169,21 @@ namespace AccountingSystem.Views.Manage.Journals
             this.lblUpdatedAt.Name = "lblUpdatedAt";
             this.lblUpdatedAt.Size = new System.Drawing.Size(0, 20);
             // 
-            // frmJournals
+            // frmAllotmentClasses
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(797, 527);
-            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.dgJournals);
-            this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(815, 574);
-            this.Name = "frmJournals";
+            this.Controls.Add(this.dgAllotmentClasses);
+            this.Controls.Add(this.statusStrip1);
+            this.Name = "frmAllotmentClasses";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Manage > Journals";
-            this.Load += new System.EventHandler(this.frmJournals_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgJournals)).EndInit();
+            this.Text = "Manage Allotment Classes";
+            this.Load += new System.EventHandler(this.frmAllotmentClasses_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgAllotmentClasses)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -193,11 +193,11 @@ namespace AccountingSystem.Views.Manage.Journals
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgJournals;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnAdd;
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnDelete;
+        private System.Windows.Forms.DataGridView dgAllotmentClasses;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;

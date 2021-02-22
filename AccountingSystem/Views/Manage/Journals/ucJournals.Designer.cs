@@ -78,6 +78,7 @@ namespace AccountingSystem.Views.Manage.Journals
             this.Controls.Add(this.txtName);
             this.Name = "ucJournals";
             this.Size = new System.Drawing.Size(458, 77);
+            this.Load += new System.EventHandler(this.ucJournals_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epName)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -58,5 +58,10 @@ namespace AccountingSystem.Views.Manage.Journals
         {
             Helper.ClearErrorTextBox(epName, txtName);
         }
+
+        private void ucJournals_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
