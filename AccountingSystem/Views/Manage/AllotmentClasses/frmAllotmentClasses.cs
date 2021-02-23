@@ -82,7 +82,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
 
         private void dgAllotmentClasses_SelectionChanged_1(object sender, EventArgs e)
         {
-            int[] columnIndexTimestamp = { 3, 4 };
+            byte[] columnIndexTimestamp = { 3, 4 };
             Helper.ShowRecordTimestamp(dgAllotmentClasses, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgAllotmentClasses, btnEdit, btnDelete);
         }
