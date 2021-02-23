@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Manage.Journals
 
         private void dgJournals_SelectionChanged(object sender, EventArgs e)
         {
-            int[] columnIndexTimestamp = { 3, 4 };
+            byte[] columnIndexTimestamp = { 3, 4 };
             Helper.ShowRecordTimestamp(dgJournals, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgJournals, btnEdit, btnDelete);
         }

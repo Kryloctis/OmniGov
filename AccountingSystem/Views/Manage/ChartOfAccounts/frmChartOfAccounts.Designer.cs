@@ -44,6 +44,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.tabGeneralLedgers = new System.Windows.Forms.TabPage();
             this.tabSubMajorAccount = new System.Windows.Forms.TabPage();
             this.tabMajorAccount = new System.Windows.Forms.TabPage();
+            this.dgMajorAccountGroup = new System.Windows.Forms.DataGridView();
             this.tabAccountGroup = new System.Windows.Forms.TabPage();
             this.dgAccountGroup = new System.Windows.Forms.DataGridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -55,6 +56,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             ((System.ComponentModel.ISupportInitialize)(this.dgGeneralLedgerAccounts)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabGeneralLedgers.SuspendLayout();
+            this.tabMajorAccount.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgMajorAccountGroup)).BeginInit();
             this.tabAccountGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAccountGroup)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -181,12 +184,25 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             // 
             // tabMajorAccount
             // 
+            this.tabMajorAccount.Controls.Add(this.dgMajorAccountGroup);
             this.tabMajorAccount.Location = new System.Drawing.Point(4, 32);
             this.tabMajorAccount.Name = "tabMajorAccount";
             this.tabMajorAccount.Size = new System.Drawing.Size(950, 547);
             this.tabMajorAccount.TabIndex = 3;
             this.tabMajorAccount.Text = "Major Account Group";
             this.tabMajorAccount.UseVisualStyleBackColor = true;
+            // 
+            // dgMajorAccountGroup
+            // 
+            this.dgMajorAccountGroup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgMajorAccountGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgMajorAccountGroup.Location = new System.Drawing.Point(0, 0);
+            this.dgMajorAccountGroup.Name = "dgMajorAccountGroup";
+            this.dgMajorAccountGroup.RowHeadersWidth = 51;
+            this.dgMajorAccountGroup.RowTemplate.Height = 29;
+            this.dgMajorAccountGroup.Size = new System.Drawing.Size(950, 547);
+            this.dgMajorAccountGroup.TabIndex = 0;
+            this.dgMajorAccountGroup.SelectionChanged += new System.EventHandler(this.dgMajorAccountGroup_SelectionChanged);
             // 
             // tabAccountGroup
             // 
@@ -207,6 +223,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.dgAccountGroup.RowTemplate.Height = 29;
             this.dgAccountGroup.Size = new System.Drawing.Size(944, 541);
             this.dgAccountGroup.TabIndex = 0;
+            this.dgAccountGroup.SelectionChanged += new System.EventHandler(this.dgAccountGroup_SelectionChanged);
             // 
             // toolStrip1
             // 
@@ -232,6 +249,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.btnAdd.Size = new System.Drawing.Size(50, 48);
             this.btnAdd.Text = "Add...";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
             // btnEdit
             // 
@@ -242,6 +260,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.btnEdit.Size = new System.Drawing.Size(48, 48);
             this.btnEdit.Text = "Edit...";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
             // btnDelete
             // 
@@ -252,6 +271,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.btnDelete.Size = new System.Drawing.Size(57, 48);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // btnFind
             // 
@@ -282,6 +302,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             ((System.ComponentModel.ISupportInitialize)(this.dgGeneralLedgerAccounts)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabGeneralLedgers.ResumeLayout(false);
+            this.tabMajorAccount.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgMajorAccountGroup)).EndInit();
             this.tabAccountGroup.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgAccountGroup)).EndInit();
             this.toolStrip1.ResumeLayout(false);
@@ -313,5 +335,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStripButton btnFind;
         private System.Windows.Forms.DataGridView dgAccountGroup;
+        private System.Windows.Forms.DataGridView dgMajorAccountGroup;
     }
 }

@@ -7,8 +7,8 @@ namespace ACC.Domain.Interfaces
 {
     public interface IAccountGroupRepository : IRepository<AccountGroupModel>
     {
-        bool CodeExist(string name);
-        bool CodeExist(string name, int id);
+        bool CodeExist(string code);
+        bool CodeExist(string code, int id);
         bool NameExist(string name);
         bool NameExist(string name, int id);
     }

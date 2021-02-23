@@ -8,6 +8,7 @@ namespace ACC.Domain.Interfaces
 {
     public interface IMajorAccountGroupRepository : IRepository<MajorAccountGroupModel>
     {
+        DataTable GetViewRecords();
         DataTable GetRecordsByAccountGroupId(byte id);
     }
 }

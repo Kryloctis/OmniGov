@@ -34,11 +34,7 @@ namespace AccountingSystem.Views.Manage.Funds
                 uc.txtName.Text = fundData["fund_name"];
 
             }
-            catch (Exception ex)
-            {
-
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
 

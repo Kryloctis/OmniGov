@@ -234,7 +234,7 @@ namespace AccountingSystem
         }
         #endregion
 
-        internal static void ShowRecordTimestamp(DataGridView dataGridView, int[] index, ToolStripStatusLabel lblCreatedAt, ToolStripStatusLabel lblUpdatedAt)
+        internal static void ShowRecordTimestamp(DataGridView dataGridView, byte[] index, ToolStripStatusLabel lblCreatedAt, ToolStripStatusLabel lblUpdatedAt)
         {
             if (dataGridView.SelectedRows.Count == 1)
             {

@@ -11,6 +11,7 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "major_account_group";
+        private readonly string viewTableName = "view_major_account_group";
 
         public MajorAccountGroupRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -22,6 +23,21 @@ namespace ACC.Data
             try
             {
                 string query = $"SELECT * FROM {tableName}";
+
+                var dtJournals = new DataTable();
+                return _dbGenericCommands.Fill(query, dtJournals);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetViewRecords()
+        {
+            try
+            {
+                string query = $"SELECT maj_acc_group_id, maj_acc_group_code, maj_acc_group_name, account_group_name, created_at, updated_at FROM {viewTableName}";
 
                 var dtJournals = new DataTable();
                 return _dbGenericCommands.Fill(query, dtJournals);
@@ -83,7 +99,16 @@ namespace ACC.Data
 
         public int CountRecords()
         {
-            throw new NotImplementedException();
+            try
+            {
+                string query = $"SELECT COUNT(*) FROM {tableName}";
+
+                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

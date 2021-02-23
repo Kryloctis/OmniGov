@@ -8,6 +8,6 @@ namespace ACC.Domain.Models
     {
         public int Id { get; set; }
         public string AccountGroupCode { get; set; }
-        public bool AccountGroupName { get; set; }
+        public string AccountGroupName { get; set; }
     }
 }

@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Manage.Funds
 
         private void dgFunds_SelectionChanged(object sender, EventArgs e)
         {
-            int[] columnIndexTimestamp = { 2, 3 };
+            byte[] columnIndexTimestamp = { 2, 3 };
             Helper.ShowRecordTimestamp(dgFunds, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgFunds, btnEdit, btnDelete);
 
