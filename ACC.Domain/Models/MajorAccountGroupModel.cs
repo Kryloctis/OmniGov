@@ -9,6 +9,6 @@ namespace ACC.Domain.Models
         public int Id { get; set; }
         public byte AccountGroupId { get; set; }
         public string MajorAccountGroupCode { get; set; }
-        public bool MajorAccountGroupName { get; set; }
+        public string MajorAccountGroupName { get; set; }
     }
 }

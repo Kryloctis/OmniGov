@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
-using AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup;
 using ACC.Domain.Models;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
+using AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup;
+using AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup;
+using System.Data;
 
 namespace AccountingSystem.Views.Manage.ChartOfAccounts
 {
@@ -33,12 +35,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             try
             {
-                var dtMajorAccountGroup = Factory.MajorAccountGroupRepository().GetViewRecords();
+                byte accountGroupId = Convert.ToByte(cmbAccountGroup.SelectedValue);
+                var dtMajorAccountGroup = Factory.MajorAccountGroupRepository().GetViewRecordsByAccountGroupId(accountGroupId);
                 HelperLoadRecords.MajorAccountGroupDatagridView(dtMajorAccountGroup, dgMajorAccountGroup);
 
-                lblRecordCount.Text = Factory.MajorAccountGroupRepository()
-                                             .CountRecords()
-                                             .ToString();
+                lblRecordCount.Text = dgMajorAccountGroup.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -56,6 +57,19 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void LoadAccountGroupComboBox()
+        {
+            try
+            {
+                DataTable dtAccountGroup = Factory.AccountGroupRepository().GetRecords();
+                HelperLoadRecords.AccountGroupComboBox(dtAccountGroup, cmbAccountGroup, "account_group_name", "id");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void DeleteAccountGroupRecords()
@@ -96,6 +110,42 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             }
         }
 
+        private void DeleteMajorAccountGroupRecords()
+        {
+            int selectedRowsCount = dgMajorAccountGroup.SelectedRows.Count;
+
+            try
+            {
+                if (selectedRowsCount > 0)
+                {
+                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                    {
+                        var majorAccountGroupModelList = new List<MajorAccountGroupModel>();
+                        foreach (DataGridViewRow row in dgMajorAccountGroup.SelectedRows)
+                        {
+                            int majorAccountGroupId = Convert.ToInt16(row.Cells[0].Value.ToString());
+                            majorAccountGroupModelList.Add(new MajorAccountGroupModel() { Id = majorAccountGroupId });
+                        }
+
+                        _ = Factory.MajorAccountGroupRepository().Delete(majorAccountGroupModelList);
+                        LoadMajorAccountGroup();
+                    }
+                }
+            }
+            catch (MySqlException Mysqlex)
+            {
+                switch (Mysqlex.Number)
+                {
+                    case 1451:
+                        Helper.MessageBoxError($"Cannot delete selected records. It is referenced by atleast one record.");
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
 
         private void frmChartOfAccounts_Load(object sender, EventArgs e)
         {
@@ -103,19 +153,52 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             Helper.DatagridDefaultStyle(dgGeneralLedgerAccounts);
             Helper.DatagridDefaultStyle(dgAccountGroup);
             Helper.DatagridDefaultStyle(dgMajorAccountGroup);
+
+            LoadAccountGroupComboBox();
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedTab == tabControl1.TabPages["tabAccountGroup"])
+            if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubsidiaryLedgers"])
             {
-                _ = new frmAccountGroupAdd(this).ShowDialog();
+
             }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
+            {
+
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
+            {
+
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
+            {
+                _ = new frmMajorAccountGroupAdd(this).ShowDialog();
+            }
+            else
+                _ = new frmAccountGroupAdd(this).ShowDialog();
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedTab == tabControl1.TabPages["tabAccountGroup"])
+            if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubsidiaryLedgers"])
+            {
+
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
+            {
+
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
+            {
+
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
+            {
+                short majorAccountGroupId = short.Parse(dgMajorAccountGroup.SelectedCells[0].Value.ToString());
+                _ = new frmMajorAccountGroupEdit(this, majorAccountGroupId).ShowDialog();
+            }
+            else
             {
                 byte accountGroupId = byte.Parse(dgAccountGroup.SelectedCells[0].Value.ToString());
                 _ = new frmAccountGroupEdit(this, accountGroupId).ShowDialog();
@@ -138,7 +221,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             }
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
             {
-
+                DeleteMajorAccountGroupRecords();
             }
             else
                 DeleteAccountGroupRecords();
@@ -169,11 +252,13 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             {
                 LoadMajorAccountGroup();
                 DisableEditDeleteButtons();
+                btnFind.Enabled = false;
             }
             else
             {
                 LoadAccountGroup();
                 DisableEditDeleteButtons();
+                btnFind.Enabled = false;
             }
                 
         }
@@ -200,6 +285,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             byte[] columnIndexTimestamp = { 4, 5 };
             SetActionControls(dgMajorAccountGroup, columnIndexTimestamp);
+        }
+
+        private void cmbAccountGroup_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadMajorAccountGroup();
         }
     }
 }

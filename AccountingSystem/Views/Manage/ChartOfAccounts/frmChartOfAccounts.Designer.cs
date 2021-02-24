@@ -44,6 +44,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.tabGeneralLedgers = new System.Windows.Forms.TabPage();
             this.tabSubMajorAccount = new System.Windows.Forms.TabPage();
             this.tabMajorAccount = new System.Windows.Forms.TabPage();
+            this.cmbAccountGroup = new System.Windows.Forms.ComboBox();
             this.dgMajorAccountGroup = new System.Windows.Forms.DataGridView();
             this.tabAccountGroup = new System.Windows.Forms.TabPage();
             this.dgAccountGroup = new System.Windows.Forms.DataGridView();
@@ -184,6 +185,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             // 
             // tabMajorAccount
             // 
+            this.tabMajorAccount.Controls.Add(this.cmbAccountGroup);
             this.tabMajorAccount.Controls.Add(this.dgMajorAccountGroup);
             this.tabMajorAccount.Location = new System.Drawing.Point(4, 32);
             this.tabMajorAccount.Name = "tabMajorAccount";
@@ -192,15 +194,24 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.tabMajorAccount.Text = "Major Account Group";
             this.tabMajorAccount.UseVisualStyleBackColor = true;
             // 
+            // cmbAccountGroup
+            // 
+            this.cmbAccountGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbAccountGroup.FormattingEnabled = true;
+            this.cmbAccountGroup.Location = new System.Drawing.Point(3, 3);
+            this.cmbAccountGroup.Name = "cmbAccountGroup";
+            this.cmbAccountGroup.Size = new System.Drawing.Size(202, 28);
+            this.cmbAccountGroup.TabIndex = 1;
+            this.cmbAccountGroup.SelectionChangeCommitted += new System.EventHandler(this.cmbAccountGroup_SelectionChangeCommitted);
+            // 
             // dgMajorAccountGroup
             // 
             this.dgMajorAccountGroup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgMajorAccountGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgMajorAccountGroup.Location = new System.Drawing.Point(0, 0);
+            this.dgMajorAccountGroup.Location = new System.Drawing.Point(0, 37);
             this.dgMajorAccountGroup.Name = "dgMajorAccountGroup";
             this.dgMajorAccountGroup.RowHeadersWidth = 51;
             this.dgMajorAccountGroup.RowTemplate.Height = 29;
-            this.dgMajorAccountGroup.Size = new System.Drawing.Size(950, 547);
+            this.dgMajorAccountGroup.Size = new System.Drawing.Size(950, 510);
             this.dgMajorAccountGroup.TabIndex = 0;
             this.dgMajorAccountGroup.SelectionChanged += new System.EventHandler(this.dgMajorAccountGroup_SelectionChanged);
             // 
@@ -336,5 +347,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         private System.Windows.Forms.ToolStripButton btnFind;
         private System.Windows.Forms.DataGridView dgAccountGroup;
         private System.Windows.Forms.DataGridView dgMajorAccountGroup;
+        private System.Windows.Forms.ComboBox cmbAccountGroup;
     }
 }

@@ -9,6 +9,10 @@ namespace ACC.Domain.Interfaces
     public interface IMajorAccountGroupRepository : IRepository<MajorAccountGroupModel>
     {
         DataTable GetViewRecords();
-        DataTable GetRecordsByAccountGroupId(byte id);
+        DataTable GetViewRecordsByAccountGroupId(byte id);
+        bool CodeExist(string code);
+        bool CodeExist(string code, int id);
+        bool NameExist(string name);
+        bool NameExist(string name, int id);
     }
 }
