@@ -1,7 +1,7 @@
 ﻿
-namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
+namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramProject
 {
-    partial class frmMajorAccountGroupEdit
+    partial class frmFunctionProgramProjectEdit
     {
         /// <summary>
         /// Required designer variable.
@@ -29,10 +29,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMajorAccountGroupEdit));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFunctionProgramProjectEdit));
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.ucFunctionProgramProject1 = new AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramProject.ucFunctionProgramProject();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,12 +43,12 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 103);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 90);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.flowLayoutPanel1.Size = new System.Drawing.Size(465, 27);
-            this.flowLayoutPanel1.TabIndex = 5;
+            this.flowLayoutPanel1.TabIndex = 6;
             // 
             // btnCancel
             // 
@@ -74,23 +75,27 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // frmMajorAccountGroupEdit
+            // ucFunctionProgramProject1
+            // 
+            this.ucFunctionProgramProject1.Location = new System.Drawing.Point(5, 3);
+            this.ucFunctionProgramProject1.Name = "ucFunctionProgramProject1";
+            this.ucFunctionProgramProject1.Size = new System.Drawing.Size(457, 87);
+            this.ucFunctionProgramProject1.TabIndex = 7;
+            // 
+            // frmFunctionProgramProjectEdit
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(465, 130);
+            this.ClientSize = new System.Drawing.Size(465, 117);
+            this.Controls.Add(this.ucFunctionProgramProject1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "frmMajorAccountGroupEdit";
+            this.Name = "frmFunctionProgramProjectEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Edit Major Account Group";
-            this.Load += new System.EventHandler(this.frmMajorAccountGroupEdit_Load);
+            this.Text = "Edit Function Program Project";
+            this.Load += new System.EventHandler(this.frmFunctionProgramProjectEdit_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -98,9 +103,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
 
         #endregion
 
-        private UcMajorAccountGroup ucMajorAccountGroup1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
+        private ucFunctionProgramProject ucFunctionProgramProject1;
     }
 }

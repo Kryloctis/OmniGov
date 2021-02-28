@@ -1,7 +1,7 @@
 ﻿
-namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
+namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService
 {
-    partial class frmMajorAccountGroupEdit
+    partial class frmFunctonalClassificationServiceEdit
     {
         /// <summary>
         /// Required designer variable.
@@ -29,10 +29,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMajorAccountGroupEdit));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFunctonalClassificationServiceEdit));
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.ucFunctonalClassificationServices1 = new AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService.ucFunctonalClassificationServices();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,7 +43,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 103);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 70);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -74,23 +75,27 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // frmMajorAccountGroupEdit
+            // ucFunctonalClassificationServices1
+            // 
+            this.ucFunctonalClassificationServices1.Location = new System.Drawing.Point(6, 6);
+            this.ucFunctonalClassificationServices1.Name = "ucFunctonalClassificationServices1";
+            this.ucFunctonalClassificationServices1.Size = new System.Drawing.Size(455, 60);
+            this.ucFunctonalClassificationServices1.TabIndex = 6;
+            // 
+            // frmFunctonalClassificationServiceEdit
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(465, 130);
+            this.ClientSize = new System.Drawing.Size(465, 97);
+            this.Controls.Add(this.ucFunctonalClassificationServices1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "frmMajorAccountGroupEdit";
+            this.Name = "frmFunctonalClassificationServiceEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Edit Major Account Group";
-            this.Load += new System.EventHandler(this.frmMajorAccountGroupEdit_Load);
+            this.Text = "Edit Functonal Classification Service";
+            this.Load += new System.EventHandler(this.frmFunctonalClassificationServiceEdit_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -98,9 +103,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
 
         #endregion
 
-        private UcMajorAccountGroup ucMajorAccountGroup1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
+        private ucFunctonalClassificationServices ucFunctonalClassificationServices1;
     }
 }
