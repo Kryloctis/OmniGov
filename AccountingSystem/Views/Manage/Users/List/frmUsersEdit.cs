@@ -98,7 +98,7 @@ namespace AccountingSystem.Views.Manage.Users.List
         {
             Helper.LoadFormIcon(this);
             ucUsers1.LoadRoleName();
-            LoadSelectedRecord();s
+            LoadSelectedRecord();
 
         }
 
