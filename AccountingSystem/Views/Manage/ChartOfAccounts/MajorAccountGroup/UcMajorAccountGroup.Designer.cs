@@ -125,6 +125,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             this.Controls.Add(this.label1);
             this.Name = "UcMajorAccountGroup";
             this.Size = new System.Drawing.Size(521, 115);
+            
             ((System.ComponentModel.ISupportInitialize)(this.epAccountGroup)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epName)).EndInit();

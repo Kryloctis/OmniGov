@@ -12,6 +12,7 @@ namespace ACC.Data
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "general_ledger_accounts";
         private readonly string viewTableName = "view_general_ledger_accounts";
+        
 
         public GeneralLedgerAccountsRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -37,6 +38,7 @@ namespace ACC.Data
                 throw;
             }
         }
+        
 
         public DataTable GetViewRecords()
         {

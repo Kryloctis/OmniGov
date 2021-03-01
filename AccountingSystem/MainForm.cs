@@ -5,6 +5,8 @@ using AccountingSystem.Views.Manage.Funds;
 using AccountingSystem.Views.Manage.ChartOfAccounts;
 
 using AccountingSystem.Views.Manage.AllotmentClasses;
+using AccountingSystem.Views.Manage.Users.Roles;
+using AccountingSystem.Views.Manage.Users.List;
 namespace AccountingSystem
 {
     public partial class MainForm : Form
@@ -32,6 +34,7 @@ namespace AccountingSystem
 
 
 
+
         private void menuChartOfAccounts_Click(object sender, EventArgs e)
         {
             _ = new frmChartOfAccounts().ShowDialog();
@@ -39,6 +42,16 @@ namespace AccountingSystem
         private void menuAllotmentClasses_Click(object sender, EventArgs e)
         {
             _ = new frmAllotmentClasses().ShowDialog();
+        }
+
+        private void menuRoles_Click(object sender, EventArgs e)
+        {
+            _ = new frmRoles().ShowDialog();
+        }
+
+        private void menuUserList_Click(object sender, EventArgs e)
+        {
+            _ = new frmUsers().ShowDialog();
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)

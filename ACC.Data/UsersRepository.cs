@@ -1,25 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
 using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 
 namespace ACC.Data
 {
-    public class AccountGroupRepository : IAccountGroupRepository
+    public class UsersRepository : IUsersRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
-        private readonly string tableName = "account_group";
+        private readonly string tableName = "users";
         
 
-
-        public AccountGroupRepository(IDbGenericCommands dbGenericCommands)
+        public UsersRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }
-
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var record = new Dictionary<string, string>();
@@ -31,17 +28,21 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT account_group_code, account_group_name, created_at, updated_at FROM {tableName} WHERE id = @id";
+                string query = $"SELECT roles_id, first_name, mid_initial, last_name, username, password, is_deleted, created_at, updated_at FROM {tableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
                         return record;
 
-                    record.Add("account_group_code", reader.Rows[0][0].ToString());
-                    record.Add("account_group_name", reader.Rows[0][1].ToString());
-                    record.Add("created_at", reader.Rows[0][2].ToString());
-                    record.Add("updated_at", reader.Rows[0][3].ToString());
+                    record.Add("roles_id", reader.Rows[0][0].ToString());
+                    record.Add("first_name", reader.Rows[0][1].ToString());
+                    record.Add("mid_initial", reader.Rows[0][2].ToString());
+                    record.Add("last_name", reader.Rows[0][3].ToString());
+                    record.Add("username", reader.Rows[0][4].ToString());
+                    record.Add("password", reader.Rows[0][5].ToString());
+                    record.Add("created_at", reader.Rows[0][6].ToString());
+                    record.Add("updated_at", reader.Rows[0][7].ToString());
                 }
             }
             catch (Exception)
@@ -51,39 +52,43 @@ namespace ACC.Data
 
             return record;
         }
-       
+
         public DataTable GetRecords()
         {
             try
             {
-                string query = $"SELECT * FROM {tableName}";
-
-                var dtJournals = new DataTable();
-                return _dbGenericCommands.Fill(query, dtJournals);
+                string query = $"SELECT {tableName}.id, {tableName}.first_name, {tableName}.mid_initial, {tableName}.last_name, {tableName}.username, roles.role_name, {tableName}.created_at, {tableName}.updated_at FROM {tableName} inner join roles on {tableName}.roles_id  = roles.id";
+                var dtUsers = new DataTable();
+                return _dbGenericCommands.Fill(query, dtUsers);
             }
             catch (Exception)
             {
                 throw;
             }
         }
-        
 
+      
         public DataTable GetRecordsBySearch(string searchText)
         {
             throw new NotImplementedException();
         }
 
-        public bool Insert(AccountGroupModel entity)
+        public bool Insert(UsersModel entity)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@account_group_code", DbType.String, entity.AccountGroupCode},
-                    new object[] { "@account_group_name", DbType.String, entity.AccountGroupName},
+                    new object[] { "@roles_id", DbType.Byte  , entity.RoleId},
+                    new object[] { "@first_name", DbType.String  , entity.FirstName},
+                    new object[] { "@mid_initial", DbType.String, entity.MidInitial},
+                    new object[] { "@last_name", DbType.String, entity.LastName},
+                    new object[] { "@username", DbType.String, entity.UserName},
+                    new object[] { "@password", DbType.String, entity.Password},
+
                 };
 
-                string query = $"INSERT INTO {tableName} (account_group_code, account_group_name) VALUES (@account_group_code, @account_group_name)";
+                string query = $"INSERT INTO {tableName} ( roles_id, first_name, mid_initial, last_name, username, password) VALUES (@roles_id, @first_name, @mid_initial, @last_name, @username, @password)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -92,18 +97,23 @@ namespace ACC.Data
             }
         }
 
-        public bool Update(AccountGroupModel entity)
+        public bool Update(UsersModel entity)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Byte, entity.Id},
-                    new object[] { "@account_group_code", DbType.String, entity.AccountGroupCode},
-                    new object[] { "@account_group_name", DbType.String, entity.AccountGroupName},
+                    new object[] { "@id", DbType.Int16, entity.Id},
+                    new object[] { "@roles_id", DbType.Byte  , entity.RoleId},
+                    new object[] { "@first_name", DbType.String  , entity.FirstName},
+                    new object[] { "@mid_initial", DbType.String, entity.MidInitial},
+                    new object[] { "@last_name", DbType.String, entity.LastName},
+                    new object[] { "@username", DbType.String, entity.UserName},
+                    new object[] { "@password", DbType.String, entity.Password},
+
                 };
 
-                string query = $"UPDATE {tableName} SET account_group_code = @account_group_code, account_group_name = @account_group_name WHERE id = @id";
+                string query = $"UPDATE {tableName} SET roles_id = @roles_id, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, username = @username, password = @password WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -112,7 +122,7 @@ namespace ACC.Data
             }
         }
 
-        public bool Delete(List<AccountGroupModel> entityList)
+        public bool Delete(List<UsersModel> entityList)
         {
             try
             {
@@ -159,7 +169,7 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Byte, id },
+                    new object[] { "@id", DbType.Int32, id },
                 };
 
                 string query = $"SELECT id FROM {tableName} WHERE id = @id";
@@ -176,16 +186,16 @@ namespace ACC.Data
             return false;
         }
 
-        public bool CodeExist(string code)
+        public bool NameExist(string userName)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@account_group_code", DbType.String, code },
+                    new object[] { "@username", DbType.String, userName },
                 };
 
-                string query = $"SELECT account_group_code FROM {tableName} WHERE account_group_code = @account_group_code";
+                string query = $"SELECT username FROM {tableName} WHERE username = @username";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -199,64 +209,17 @@ namespace ACC.Data
             return false;
         }
 
-        public bool CodeExist(string code, int id)
+        public bool NameExist(string userName, int userId)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.String, id },
-                    new object[] { "@account_group_code", DbType.String, code },
+                    new object[] { "@id", DbType.Int16, userId },
+                    new object[] { "@username", DbType.String, userName },
                 };
 
-                string query = $"SELECT account_group_code FROM {tableName} WHERE id <> @id AND account_group_code = @account_group_code";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            };
-
-            return false;
-        }
-
-        public bool NameExist(string name)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@account_group_name", DbType.String, name },
-                };
-
-                string query = $"SELECT account_group_name FROM {tableName} WHERE account_group_name = @account_group_name";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            };
-
-            return false;
-        }
-
-        public bool NameExist(string name, int id)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.String, id },
-                    new object[] { "@account_group_name", DbType.String, name },
-                };
-
-                string query = $"SELECT account_group_name FROM {tableName} WHERE id <> @id AND account_group_name = @account_group_name";
+                string query = $"SELECT username FROM {tableName} WHERE id <> @id AND username = @username";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true

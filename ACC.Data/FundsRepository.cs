@@ -11,6 +11,7 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "funds";
+        
 
         public FundsRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -63,7 +64,7 @@ namespace ACC.Data
                 throw;
             }
         }
-
+       
 
         public DataTable GetRecordsBySearch(string searchText)
         {

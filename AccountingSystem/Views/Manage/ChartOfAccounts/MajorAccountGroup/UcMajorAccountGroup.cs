@@ -84,5 +84,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
         {
             Helper.ClearErrorTextBox(epName, txtName);
         }
+
+      
     }
 }

@@ -11,6 +11,7 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "allotment_classes";
+        
         public AllotmentClassesRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -61,6 +62,7 @@ namespace ACC.Data
                 throw;
             }
         }
+       
 
         public DataTable GetRecordsBySearch(string searchText)
         {

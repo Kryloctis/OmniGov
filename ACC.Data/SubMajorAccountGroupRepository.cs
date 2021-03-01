@@ -11,6 +11,7 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "major_account_group";
+        
 
         public SubMajorAccountGroupRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -36,6 +37,7 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
+        
 
         public DataTable GetRecordsByMajorAccountId(short majorAccountId)
         {
