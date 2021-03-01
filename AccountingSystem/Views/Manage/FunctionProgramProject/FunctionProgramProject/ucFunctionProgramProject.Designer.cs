@@ -50,7 +50,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(109, 57);
+            this.txtName.Location = new System.Drawing.Point(97, 57);
             this.txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtName.MaxLength = 99;
             this.txtName.Name = "txtName";
@@ -61,7 +61,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // 
             // txtCode
             // 
-            this.txtCode.Location = new System.Drawing.Point(109, 32);
+            this.txtCode.Location = new System.Drawing.Point(97, 32);
             this.txtCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCode.MaxLength = 4;
             this.txtCode.Name = "txtCode";
@@ -74,7 +74,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // 
             this.cmbServiceName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbServiceName.FormattingEnabled = true;
-            this.cmbServiceName.Location = new System.Drawing.Point(109, 6);
+            this.cmbServiceName.Location = new System.Drawing.Point(97, 6);
             this.cmbServiceName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbServiceName.Name = "cmbServiceName";
             this.cmbServiceName.Size = new System.Drawing.Size(324, 23);
@@ -111,7 +111,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // 
             // txtServiceId
             // 
-            this.txtServiceId.Location = new System.Drawing.Point(110, 84);
+            this.txtServiceId.Location = new System.Drawing.Point(98, 84);
             this.txtServiceId.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtServiceId.MaxLength = 99;
             this.txtServiceId.Name = "txtServiceId";

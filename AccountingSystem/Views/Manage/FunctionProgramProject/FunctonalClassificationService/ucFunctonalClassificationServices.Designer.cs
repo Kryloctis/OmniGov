@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(111, 29);
+            this.txtName.Location = new System.Drawing.Point(107, 29);
             this.txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(324, 23);
@@ -65,13 +65,14 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             // 
             // txtCode
             // 
-            this.txtCode.Location = new System.Drawing.Point(111, 53);
+            this.txtCode.Location = new System.Drawing.Point(107, 53);
             this.txtCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCode.MaxLength = 2;
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(324, 23);
             this.txtCode.TabIndex = 13;
             this.txtCode.Visible = false;
+            this.txtCode.TextChanged += new System.EventHandler(this.txtCode_TextChanged);
             this.txtCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtCode_Validating);
             this.txtCode.Validated += new System.EventHandler(this.txtCode_Validated);
             // 
@@ -79,7 +80,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             // 
             this.cmbSectorName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSectorName.FormattingEnabled = true;
-            this.cmbSectorName.Location = new System.Drawing.Point(111, 3);
+            this.cmbSectorName.Location = new System.Drawing.Point(107, 3);
             this.cmbSectorName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbSectorName.Name = "cmbSectorName";
             this.cmbSectorName.Size = new System.Drawing.Size(324, 23);

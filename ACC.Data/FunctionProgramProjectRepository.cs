@@ -71,7 +71,24 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var srchtxt = searchText;
+                // var parameters = new object[][]
+                //{
+                //     new object[] { "@id", DbType.Int32, id},
+                //};
+
+                // string query = $"SELECT * FROM {tableName} WHERE functional_classifications_id  = @id";
+                string query = $"SELECT * FROM {tableName} WHERE fpp_code  LIKE'%" + srchtxt + "%' OR fpp_name  LIKE'%" + srchtxt + "%'";
+
+                var dtFunctionProjectProgram = new DataTable();
+                return _dbGenericCommands.Fill(query, dtFunctionProjectProgram);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Insert(FunctionProgramProjectModel entity)

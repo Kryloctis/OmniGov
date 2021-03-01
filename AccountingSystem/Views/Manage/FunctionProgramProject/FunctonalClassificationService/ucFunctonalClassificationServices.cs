@@ -112,5 +112,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
                 Helper.MessageBoxError(ex.Message);
             }
         }
+
+        private void txtCode_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

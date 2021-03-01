@@ -28,6 +28,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         {
             try
             {
+                txtSearch.Clear();
                 var dtFunctionalClassification = Factory.FunctionalClassificationRepository().GetRecords();
                 HelperLoadRecords.FuntionalClassificationDatagridView(dtFunctionalClassification, dgFunctionalClassification);
 
@@ -43,6 +44,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
            
             try
             {
+                txtSearch.Clear();
                 byte id = Convert.ToByte(cmbSectorName.SelectedValue);
                 var dtfunctionProgramProjectServiceRepository = Factory.FunctionalClassificationServiceRepository().GetViewRecordsByClassificationId(id);
                 HelperLoadRecords.FuntionalClassificationServiceDatagridView(dtfunctionProgramProjectServiceRepository, dgFuntionalClassificationService);
@@ -59,6 +61,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
             try
             {
+                txtSearch.Clear();
                 byte id = Convert.ToByte(cmbServiceName.SelectedValue);
                 var dtfunctionProgramProjectRepository = Factory.FunctionProgramProjectRepository().GetViewRecordsByServiceNameId(id);
                 HelperLoadRecords.FuntionProjectProgramDatagridView(dtfunctionProgramProjectRepository, dgFunctionalProgramProject);
@@ -73,6 +76,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         {
             try
             {
+                txtSearch.Clear();
                 var dtfunctionalClassificationServiceRepository = Factory.FunctionalClassificationServiceRepository().GetRecords();
                 HelperLoadRecords.FuntionalClassificationServiceDatagridView(dtfunctionalClassificationServiceRepository, dgFuntionalClassificationService);
 
@@ -87,6 +91,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         {
             try
             {
+                txtSearch.Clear();
                 byte id = Convert.ToByte(cmbSectorName.SelectedValue);
                 //GetRecordsWithFilter(id)
                 var dtfunctionProgramProjectRepository = Factory.FunctionProgramProjectRepository().GetRecords();
@@ -239,7 +244,63 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                 Helper.MessageBoxError(ex.Message);
             }
         }
+        internal void LoadFunctionalClassificationRecordsBySearch()
+        {
 
+            try
+            {
+                string searchkey = Convert.ToString(txtSearch.Text);
+                var dtfunctionalClassificationRepository = Factory.FunctionalClassificationRepository().GetRecordsBySearch(searchkey);
+                HelperLoadRecords.FuntionalClassificationDatagridView(dtfunctionalClassificationRepository, dgFunctionalClassification);
+
+                lblRecordCount.Text = dgFunctionalClassification.Rows.Count.ToString();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+        }
+        internal void LoadFunctionalClassificationServicesRecordsBySearch()
+        {
+
+            try
+            {
+                string searchkey = Convert.ToString(txtSearch.Text);
+                var dtfunctionalClassificationServiceRepository = Factory.FunctionalClassificationServiceRepository().GetRecordsBySearch(searchkey);
+                HelperLoadRecords.FuntionalClassificationServiceDatagridView(dtfunctionalClassificationServiceRepository, dgFuntionalClassificationService);
+
+                lblRecordCount.Text = dgFuntionalClassificationService.Rows.Count.ToString();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+        }
+
+        internal void LoadFunctionProgramProjectRecordsBySearch()
+        {
+
+            try
+            {
+                string searchkey = Convert.ToString(txtSearch.Text);
+                var dtfunctionProgramProjectRepository = Factory.FunctionProgramProjectRepository().GetRecordsBySearch(searchkey);
+                HelperLoadRecords.FuntionProjectProgramDatagridView(dtfunctionProgramProjectRepository, dgFunctionalProgramProject);
+
+                lblRecordCount.Text = dgFunctionalProgramProject.Rows.Count.ToString();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassification"])
+            {
+                LoadFunctionalClassificationRecordsBySearch();
+            }
+            else if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassificationService"])
+            {
+                LoadFunctionalClassificationServicesRecordsBySearch();
+            }
+            else
+                LoadFunctionProgramProjectRecordsBySearch();           
+        }
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassification"])

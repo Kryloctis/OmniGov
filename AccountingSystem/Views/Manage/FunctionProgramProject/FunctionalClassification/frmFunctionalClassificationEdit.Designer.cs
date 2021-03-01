@@ -77,9 +77,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
             // 
             // ucFunctionalClassification1
             // 
-            this.ucFunctionalClassification1.Location = new System.Drawing.Point(3, -2);
+            this.ucFunctionalClassification1.Location = new System.Drawing.Point(0, -2);
             this.ucFunctionalClassification1.Name = "ucFunctionalClassification1";
-            this.ucFunctionalClassification1.Size = new System.Drawing.Size(401, 64);
+            this.ucFunctionalClassification1.Size = new System.Drawing.Size(410, 64);
             this.ucFunctionalClassification1.TabIndex = 6;
             // 
             // frmFunctionalClassificationEdit
