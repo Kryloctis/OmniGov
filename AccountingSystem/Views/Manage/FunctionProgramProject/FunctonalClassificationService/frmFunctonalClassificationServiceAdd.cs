@@ -59,6 +59,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
                 Helper.MessageBoxSuccess("Functional Classification Service has been saved.");
                 ucFunctonalClassificationServices1.ResetForm();
                 _frmFunctionProgramProject.LoadFunctionalClassificationServicesRecords();
+                _frmFunctionProgramProject.LoadServiceNameComboBox();
             }
         }
     }

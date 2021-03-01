@@ -8,7 +8,7 @@ namespace ACC.Domain.Interfaces
     public interface IRepository<T> where T : class
     {
         bool IdExist(int id);
-        DataTable GetRecords();     
+        DataTable GetRecords();
         DataTable GetRecordsBySearch(string searchText);
         Dictionary<string, string> GetRecordByID(int Id);
         int CountRecords();

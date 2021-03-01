@@ -152,6 +152,7 @@ namespace AccountingSystem
 
                 comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
                 comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+               
             }
         }
 

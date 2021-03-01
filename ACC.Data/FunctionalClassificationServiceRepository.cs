@@ -51,9 +51,7 @@ namespace ACC.Data
 
             return record;
         }
-
-
-
+           
         public DataTable GetRecords()
         {
             try
@@ -277,5 +275,26 @@ namespace ACC.Data
             return false;
         }
 
-    }
+		public DataTable GetViewRecordsByClassificationId(byte id)
+		{
+            try
+            {
+                var Id = id;
+                // var parameters = new object[][]
+                //{
+                //     new object[] { "@id", DbType.Int32, id},
+                //};
+
+                // string query = $"SELECT * FROM {tableName} WHERE functional_classifications_id  = @id";
+                string query = $"SELECT * FROM {tableName} WHERE functional_classifications_id  ='"+ Id +"'";
+
+                var dtFunctionProjectProgram = new DataTable();
+                return _dbGenericCommands.Fill(query, dtFunctionProjectProgram);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+	}
 }

@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             try
             {
                 DataTable dtSectorName = Factory.FunctionalClassificationRepository().GetRecords();
-                HelperLoadRecords.SectorNameComboBox(dtSectorName, cmbSectorName, "sector_name", "id");
+                HelperLoadRecords.SectorNameComboBox(dtSectorName, cmbSectorName, "sector_name", "id");               
                 byte id = Convert.ToByte(cmbSectorName.SelectedValue);
                 txtCode.Text = Convert.ToString(id);
             }

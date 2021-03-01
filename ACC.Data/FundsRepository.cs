@@ -47,8 +47,6 @@ namespace ACC.Data
 
             return record;
         }
-
-
         public DataTable GetRecords()
         {
             try

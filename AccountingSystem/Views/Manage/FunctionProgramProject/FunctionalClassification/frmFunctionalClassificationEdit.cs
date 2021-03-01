@@ -90,6 +90,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
             {
                 Helper.MessageBoxSuccess("Allotment class has been saved.");
                 _frmFunctionProgramProject.LoadFunctionalClassificationRecords();
+                _frmFunctionProgramProject.LoadSectorNameComboBox();
                 ucFunctionalClassification1.ResetForm();
             }
         }
