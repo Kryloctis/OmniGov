@@ -70,7 +70,19 @@ namespace ACC.Data
       
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var srchtxt = searchText;
+               
+                string query = $"SELECT {tableName}.id, {tableName}.first_name, {tableName}.mid_initial, {tableName}.last_name, {tableName}.username, roles.role_name, {tableName}.created_at, {tableName}.updated_at FROM {tableName} inner join roles on {tableName}.roles_id  = roles.id WHERE last_name  LIKE'%" + srchtxt + "%' OR first_name  LIKE'%" + srchtxt + "%' OR mid_initial  LIKE'%" + srchtxt + "%' OR role_name  LIKE'%" + srchtxt + "%'";
+
+                var dtUsers = new DataTable();
+                return _dbGenericCommands.Fill(query, dtUsers);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Insert(UsersModel entity)

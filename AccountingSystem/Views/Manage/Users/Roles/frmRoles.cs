@@ -30,6 +30,20 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+        internal void LoadDataBySearch()
+        {
+
+            try
+            {
+                string searchkey = Convert.ToString(txtSearch.Text);
+                var dtRoles = Factory.RolesRepository().GetRecordsBySearch(searchkey);
+                HelperLoadRecords.RolesDatagridView(dtRoles, dgRoles);
+
+                lblRecordCount.Text = dgRoles.Rows.Count.ToString();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+        }
 
         private void frmRoles_Load(object sender, EventArgs e)
         {
@@ -83,6 +97,11 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadDataBySearch();
         }
     }
 }

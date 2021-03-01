@@ -43,6 +43,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgRoles)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -167,11 +168,21 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.lblUpdatedAt.Name = "lblUpdatedAt";
             this.lblUpdatedAt.Size = new System.Drawing.Size(0, 20);
             // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(528, 12);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.PlaceholderText = "Search";
+            this.txtSearch.Size = new System.Drawing.Size(256, 27);
+            this.txtSearch.TabIndex = 100;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
             // frmRoles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(799, 535);
+            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.dgRoles);
             this.Controls.Add(this.statusStrip1);
@@ -204,5 +215,6 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }

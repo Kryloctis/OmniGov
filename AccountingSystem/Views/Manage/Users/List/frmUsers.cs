@@ -30,6 +30,20 @@ namespace AccountingSystem.Views.Manage.Users.List
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        internal void LoadDataBySearch()
+        {
+
+            try
+            {
+                string searchkey = Convert.ToString(txtSearch.Text);
+                var dtUsers = Factory.UsersRepository().GetRecordsBySearch(searchkey);
+                HelperLoadRecords.UsersDatagridView(dtUsers, dgUsers);
+
+                lblRecordCount.Text = dgUsers.Rows.Count.ToString();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+        }
         private void btnAdd_Click(object sender, EventArgs e)
         {
             _ = new frmUsersAdd(this).ShowDialog();
@@ -81,6 +95,11 @@ namespace AccountingSystem.Views.Manage.Users.List
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadDataBySearch();
         }
     }
 }

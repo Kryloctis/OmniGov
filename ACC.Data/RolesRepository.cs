@@ -65,7 +65,19 @@ namespace ACC.Data
         
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var srchtxt = searchText;
+
+                string query = $"SELECT * FROM {tableName} WHERE role_name  LIKE'%" + srchtxt + "%'";
+
+                var dtUsers = new DataTable();
+                return _dbGenericCommands.Fill(query, dtUsers);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Insert(RolesModel entity)
