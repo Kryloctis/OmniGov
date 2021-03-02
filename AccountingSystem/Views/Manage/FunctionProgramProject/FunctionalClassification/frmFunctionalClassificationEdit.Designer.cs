@@ -93,6 +93,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
 			this.Controls.Add(this.ucFunctionalClassification1);
 			this.Controls.Add(this.flowLayoutPanel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+			this.MaximizeBox = false;
+			this.MaximumSize = new System.Drawing.Size(426, 125);
+			this.MinimumSize = new System.Drawing.Size(426, 125);
 			this.Name = "frmFunctionalClassificationEdit";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Edit Functional Classification";

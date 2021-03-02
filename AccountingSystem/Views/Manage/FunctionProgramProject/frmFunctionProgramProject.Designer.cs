@@ -133,7 +133,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 			this.txtSearch.ForeColor = System.Drawing.Color.Black;
 			this.txtSearch.Name = "txtSearch";
 			this.txtSearch.Size = new System.Drawing.Size(280, 46);
-			this.txtSearch.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.txtSearch.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
 			// 
 			// toolStripLabel1

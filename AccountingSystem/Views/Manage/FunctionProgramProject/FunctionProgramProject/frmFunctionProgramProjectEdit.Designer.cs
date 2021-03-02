@@ -93,6 +93,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
 			this.Controls.Add(this.ucFunctionProgramProject1);
 			this.Controls.Add(this.flowLayoutPanel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+			this.MaximumSize = new System.Drawing.Size(481, 156);
+			this.MinimumSize = new System.Drawing.Size(481, 156);
 			this.Name = "frmFunctionProgramProjectEdit";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Edit Function Program Project";

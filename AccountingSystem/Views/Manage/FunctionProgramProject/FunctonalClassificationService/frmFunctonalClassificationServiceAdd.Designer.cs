@@ -93,7 +93,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
 			this.Controls.Add(this.ucFunctonalClassificationServices1);
 			this.Controls.Add(this.flowLayoutPanel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+			this.MaximumSize = new System.Drawing.Size(481, 136);
 			this.MinimizeBox = false;
+			this.MinimumSize = new System.Drawing.Size(481, 136);
 			this.Name = "frmFunctonalClassificationServiceAdd";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Add Functonal Classification Service";

@@ -13,7 +13,7 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "functional_classification_services";
-     //   private readonly string viewTableName = "view_major_account_group";
+        private readonly string tableName2 = "functional_classifications";
 
         public FunctionalClassificationServiceRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -56,7 +56,8 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName}";
+                  string query = $"SELECT t1.id, t2.sector_name, t1.service_name, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
+                   $" ON t2.id = t1.functional_classifications_id";
 
                 var dtFunctionalClassificationService = new DataTable();
                 return _dbGenericCommands.Fill(query, dtFunctionalClassificationService);
@@ -73,14 +74,28 @@ namespace ACC.Data
         {
             try
             {
-                var srchtxt = searchText;
-                // var parameters = new object[][]
-                //{
-                //     new object[] { "@id", DbType.Int32, id},
-                //};
+                var srchtxt = searchText;               
+                string query = $"SELECT t1.id, t2.sector_name, t1.service_name, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
+                    $" ON t2.id = t1.functional_classifications_id WHERE t1.service_name  LIKE'%" + srchtxt + "%' OR t2.sector_name LIKE'%" + srchtxt + "%'";
 
-                // string query = $"SELECT * FROM {tableName} WHERE functional_classifications_id  = @id";
-                string query = $"SELECT * FROM {tableName} WHERE service_name  LIKE'%" + srchtxt + "%'";
+                var dtFunctionProjectProgram = new DataTable();
+                return _dbGenericCommands.Fill(query, dtFunctionProjectProgram);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetViewRecordsByClassificationId(byte id)
+        {
+            try
+            {
+                var Id = id;               
+                //string query = $"SELECT * FROM {tableName} WHERE functional_classifications_id  ='" + Id + "'";
+                string query = $"SELECT t1.id, t2.sector_name, t1.service_name, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
+                   $" ON t2.id = t1.functional_classifications_id WHERE t1.functional_classifications_id  ='" + Id + "'";
+
 
                 var dtFunctionProjectProgram = new DataTable();
                 return _dbGenericCommands.Fill(query, dtFunctionProjectProgram);
@@ -292,26 +307,6 @@ namespace ACC.Data
             return false;
         }
 
-		public DataTable GetViewRecordsByClassificationId(byte id)
-		{
-            try
-            {
-                var Id = id;
-                // var parameters = new object[][]
-                //{
-                //     new object[] { "@id", DbType.Int32, id},
-                //};
-
-                // string query = $"SELECT * FROM {tableName} WHERE functional_classifications_id  = @id";
-                string query = $"SELECT * FROM {tableName} WHERE functional_classifications_id  ='"+ Id +"'";
-
-                var dtFunctionProjectProgram = new DataTable();
-                return _dbGenericCommands.Fill(query, dtFunctionProjectProgram);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+		
 	}
 }
