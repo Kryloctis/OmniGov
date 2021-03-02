@@ -20,7 +20,16 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
         private void dgFunctionalClassification_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassification"])
+            {     
+                LoadFunctionalClassificationRecords();              
+            }
+            else if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassificationService"])
+            {
+                LoadFunctionalClassificationServicesRecords();
+            }
+            else
+                LoadFunctionProgramProjectRecords();
         }
         
 
@@ -110,18 +119,17 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         {
             WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgFunctionalClassification);
-            LoadFunctionalClassificationRecords();
+            Helper.DatagridDefaultStyle(dgFunctionalClassification);            
             Helper.DatagridDefaultStyle(dgFuntionalClassificationService);
             LoadFunctionalClassificationServicesRecords();
-            Helper.DatagridDefaultStyle(dgFunctionalProgramProject);
-
-          
+            Helper.DatagridDefaultStyle(dgFunctionalProgramProject);          
 
             LoadSectorNameComboBox();
             LoadFunctionalClassificationServicesRecordsByGroup();
             LoadServiceNameComboBox();
             LoadFunctionProgramProjectRecords();
+
+            LoadFunctionalClassificationRecords();
 
 
         }
@@ -428,5 +436,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 		{
             LoadFunctionProgramProjectRecords();
 		}
+
+		private void tabControlFunctionProgramProject_Selected(object sender, TabControlEventArgs e)
+		{
+          
+        }
 	}
 }

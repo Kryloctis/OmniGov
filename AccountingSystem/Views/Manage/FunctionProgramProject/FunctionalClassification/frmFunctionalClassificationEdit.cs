@@ -88,10 +88,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
         {
             if (SaveData())
             {
-                Helper.MessageBoxSuccess("Allotment class has been saved.");
+                Helper.MessageBoxSuccess("Functional Classification has been saved.");
                 _frmFunctionProgramProject.LoadFunctionalClassificationRecords();
                 _frmFunctionProgramProject.LoadSectorNameComboBox();
-                ucFunctionalClassification1.ResetForm();
+               
             }
         }
     }

@@ -76,10 +76,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
         {
             if (SaveData())
             {
-                Helper.MessageBoxSuccess("Major account group has been saved.");
+                Helper.MessageBoxSuccess("Functional Classification Services has been saved.");
                 _frmFunctionProgramProject.LoadFunctionalClassificationServicesRecords();
                 _frmFunctionProgramProject.LoadServiceNameComboBox();
-                ucFunctonalClassificationServices1.ResetForm();
+               
             }
         }
     }

@@ -30,8 +30,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
                 Dictionary<string, string> data = functionProgramProjectRepository.GetRecordByID(uc.FppID);
 
                 uc.cmbServiceName.SelectedValue = data["functional_classification_services_id"];
-                uc.txtName.Text = data["fpp_code"];
-                uc.txtCode.Text = data["fpp_name"];
+                uc.txtCode.Text = data["fpp_code"];
+                uc.txtName.Text = data["fpp_name"];
                 uc.txtServiceId.Text = data["functional_classification_services_id"];
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             {
                 Helper.MessageBoxSuccess("Function Program Project has been saved.");
                 _frmFunctionProgramProject.LoadFunctionProgramProjectRecords();
-                ucFunctionProgramProject1.ResetForm();
+               
             }
         }
     }
