@@ -10,7 +10,8 @@ namespace ACC.Data
     public class SubMajorAccountGroupRepository : ISubMajorAccountGroupRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
-        private readonly string tableName = "major_account_group";
+        private readonly string tableName = "sub_major_account_group";
+        private readonly string viewTableName = "view_sub_major_account_group";
 
         public SubMajorAccountGroupRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -59,6 +60,25 @@ namespace ACC.Data
         public DataTable GetRecordsBySearch(string searchText)
         {
             throw new NotImplementedException();
+        }
+
+        public DataTable GetViewRecordsByMajorAccountId(short majorAccountId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Byte, majorAccountId},
+                };
+
+                string query = $"SELECT sub_maj_acc_group_id, sub_maj_acc_group_code, sub_maj_acc_group_name, maj_acc_group_name, created_at, updated_at FROM {viewTableName} WHERE major_account_group_id =  @id";
+
+                return _dbGenericCommands.ExecuteReader(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool IdExist(int id)

@@ -47,6 +47,38 @@ namespace AccountingSystem
             datagrid.Columns[4].Visible = false;
             datagrid.Columns[5].Visible = false;
         }
+
+        internal static void MajorAccountGroupComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+
+            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                // loop datatable to add items in autocompletesource
+                foreach (DataRow item in dataTable.Rows)
+                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
+
+                comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+                comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            }
+        }
+        #endregion
+
+        #region Sub Major Account Group
+        internal static void SubMajorAccountGroupDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].HeaderText = "Code";
+            datagrid.Columns[2].HeaderText = "Name";
+            datagrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns[3].HeaderText = "Major Account";
+            datagrid.Columns[3].Width = 300;
+            datagrid.Columns[4].Visible = false;
+            datagrid.Columns[5].Visible = false;
+        }
         #endregion
 
         #region General Ledger Accounts
@@ -57,8 +89,10 @@ namespace AccountingSystem
             datagrid.Columns[1].HeaderText = "Code";
             datagrid.Columns[2].HeaderText = "Name";
             datagrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            datagrid.Columns[3].Visible = false;
+            datagrid.Columns[3].HeaderText = "Sub Major Account";
+            datagrid.Columns[3].Width = 400;
             datagrid.Columns[4].Visible = false;
+            datagrid.Columns[5].Visible = false;
         }
         #endregion
 

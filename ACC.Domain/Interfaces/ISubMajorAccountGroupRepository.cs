@@ -9,5 +9,7 @@ namespace ACC.Domain.Interfaces
     public interface ISubMajorAccountGroupRepository : IRepository<SubMajorAccountGroupModel>
     {
         DataTable GetRecordsByMajorAccountId(short majorAccountId);
+
+        DataTable GetViewRecordsByMajorAccountId(short majorAccountId);
     }
 }

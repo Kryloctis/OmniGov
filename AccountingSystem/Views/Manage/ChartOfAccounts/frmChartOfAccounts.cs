@@ -44,6 +44,23 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void LoadSubMajorAccountGroup()
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(cmbMajorAccount.Text))
+                {
+                    short majorAccountGroupId = short.Parse(cmbMajorAccount.SelectedValue.ToString());
+                    DataTable dtSubMajorAccountGroup = Factory.SubMajorAccountGroupRepository().GetViewRecordsByMajorAccountId(majorAccountGroupId);
+                    HelperLoadRecords.SubMajorAccountGroupDatagridView(dtSubMajorAccountGroup, dgSubMajorAccount);
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
         internal void LoadGeneralLedgers()
         {
             try
@@ -65,6 +82,19 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             {
                 DataTable dtAccountGroup = Factory.AccountGroupRepository().GetRecords();
                 HelperLoadRecords.AccountGroupComboBox(dtAccountGroup, cmbAccountGroup, "account_group_name", "id");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void LoadMajorAccountGroupComboBox()
+        {
+            try
+            {
+                DataTable dtAccountGroup = Factory.MajorAccountGroupRepository().GetRecords();
+                HelperLoadRecords.MajorAccountGroupComboBox(dtAccountGroup, cmbMajorAccount, "maj_acc_group_name", "id");
             }
             catch (Exception ex)
             {
@@ -153,8 +183,10 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             Helper.DatagridDefaultStyle(dgGeneralLedgerAccounts);
             Helper.DatagridDefaultStyle(dgAccountGroup);
             Helper.DatagridDefaultStyle(dgMajorAccountGroup);
+            Helper.DatagridDefaultStyle(dgSubMajorAccount);
 
             LoadAccountGroupComboBox();
+            LoadMajorAccountGroupComboBox();
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -246,7 +278,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             }
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
             {
-                
+                LoadSubMajorAccountGroup();
+                DisableEditDeleteButtons();
+                btnFind.Enabled = false;
             } 
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
             {
@@ -271,7 +305,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         private void dgGeneralLedgerAccounts_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 3, 4 };
+            byte[] columnIndexTimestamp = { 4, 5 };
             SetActionControls(dgGeneralLedgerAccounts, columnIndexTimestamp);
         }
 
@@ -290,6 +324,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         private void cmbAccountGroup_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadMajorAccountGroup();
+        }
+
+        private void cmbMajorAccount_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadSubMajorAccountGroup();
         }
     }
 }

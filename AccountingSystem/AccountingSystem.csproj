@@ -41,4 +41,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\" />
+  </ItemGroup>
+
 </Project>
