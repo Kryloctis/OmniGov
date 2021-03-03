@@ -187,6 +187,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
             LoadAccountGroupComboBox();
             LoadMajorAccountGroupComboBox();
+            LoadGeneralLedgers();
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
