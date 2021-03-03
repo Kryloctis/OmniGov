@@ -41,14 +41,14 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 			this.tabFunctionalClassification = new System.Windows.Forms.TabPage();
 			this.dgFunctionalClassification = new System.Windows.Forms.DataGridView();
 			this.tabFunctionalClassificationService = new System.Windows.Forms.TabPage();
+			this.dgFuntionalClassificationService = new System.Windows.Forms.DataGridView();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.cmbSectorName = new System.Windows.Forms.ComboBox();
 			this.btnLoadAllFsc = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
-			this.cmbSectorName = new System.Windows.Forms.ComboBox();
-			this.dgFuntionalClassificationService = new System.Windows.Forms.DataGridView();
 			this.tabFunctionProgramProject = new System.Windows.Forms.TabPage();
 			this.btnLoadAllFpp = new System.Windows.Forms.Button();
 			this.label2 = new System.Windows.Forms.Label();
-			this.cmbServiceName = new System.Windows.Forms.ComboBox();
 			this.dgFunctionalProgramProject = new System.Windows.Forms.DataGridView();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -58,15 +58,19 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 			this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+			this.panel2 = new System.Windows.Forms.Panel();
+			this.cmbServiceName = new System.Windows.Forms.ComboBox();
 			this.toolStrip1.SuspendLayout();
 			this.tabControlFunctionProgramProject.SuspendLayout();
 			this.tabFunctionalClassification.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgFunctionalClassification)).BeginInit();
 			this.tabFunctionalClassificationService.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgFuntionalClassificationService)).BeginInit();
+			this.panel1.SuspendLayout();
 			this.tabFunctionProgramProject.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgFunctionalProgramProject)).BeginInit();
 			this.statusStrip1.SuspendLayout();
+			this.panel2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// toolStrip1
@@ -190,10 +194,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 			// 
 			// tabFunctionalClassificationService
 			// 
-			this.tabFunctionalClassificationService.Controls.Add(this.btnLoadAllFsc);
-			this.tabFunctionalClassificationService.Controls.Add(this.label1);
-			this.tabFunctionalClassificationService.Controls.Add(this.cmbSectorName);
 			this.tabFunctionalClassificationService.Controls.Add(this.dgFuntionalClassificationService);
+			this.tabFunctionalClassificationService.Controls.Add(this.panel1);
 			this.tabFunctionalClassificationService.Location = new System.Drawing.Point(4, 27);
 			this.tabFunctionalClassificationService.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.tabFunctionalClassificationService.Name = "tabFunctionalClassificationService";
@@ -203,11 +205,45 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 			this.tabFunctionalClassificationService.Text = "Functional Classification Service";
 			this.tabFunctionalClassificationService.UseVisualStyleBackColor = true;
 			// 
+			// dgFuntionalClassificationService
+			// 
+			this.dgFuntionalClassificationService.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgFuntionalClassificationService.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dgFuntionalClassificationService.Location = new System.Drawing.Point(3, 32);
+			this.dgFuntionalClassificationService.Name = "dgFuntionalClassificationService";
+			this.dgFuntionalClassificationService.RowTemplate.Height = 25;
+			this.dgFuntionalClassificationService.Size = new System.Drawing.Size(824, 356);
+			this.dgFuntionalClassificationService.TabIndex = 17;
+			this.dgFuntionalClassificationService.SelectionChanged += new System.EventHandler(this.dgFuntionalClassificationService_SelectionChanged_1);
+			// 
+			// panel1
+			// 
+			this.panel1.Controls.Add(this.cmbSectorName);
+			this.panel1.Controls.Add(this.btnLoadAllFsc);
+			this.panel1.Controls.Add(this.label1);
+			this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.panel1.Location = new System.Drawing.Point(3, 2);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(824, 30);
+			this.panel1.TabIndex = 16;
+			// 
+			// cmbSectorName
+			// 
+			this.cmbSectorName.Dock = System.Windows.Forms.DockStyle.Left;
+			this.cmbSectorName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbSectorName.FormattingEnabled = true;
+			this.cmbSectorName.Location = new System.Drawing.Point(120, 0);
+			this.cmbSectorName.Name = "cmbSectorName";
+			this.cmbSectorName.Size = new System.Drawing.Size(322, 23);
+			this.cmbSectorName.TabIndex = 16;
+			this.cmbSectorName.SelectionChangeCommitted += new System.EventHandler(this.cmbSectorName_SelectionChangeCommitted_2);
+			// 
 			// btnLoadAllFsc
 			// 
-			this.btnLoadAllFsc.Location = new System.Drawing.Point(752, 10);
+			this.btnLoadAllFsc.Dock = System.Windows.Forms.DockStyle.Right;
+			this.btnLoadAllFsc.Location = new System.Drawing.Point(749, 0);
 			this.btnLoadAllFsc.Name = "btnLoadAllFsc";
-			this.btnLoadAllFsc.Size = new System.Drawing.Size(75, 25);
+			this.btnLoadAllFsc.Size = new System.Drawing.Size(75, 30);
 			this.btnLoadAllFsc.TabIndex = 15;
 			this.btnLoadAllFsc.Text = "Load All";
 			this.btnLoadAllFsc.UseVisualStyleBackColor = true;
@@ -216,43 +252,18 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(19, 14);
+			this.label1.Dock = System.Windows.Forms.DockStyle.Left;
+			this.label1.Location = new System.Drawing.Point(0, 0);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(120, 15);
 			this.label1.TabIndex = 14;
 			this.label1.Text = "Load by Sector Name";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// cmbSectorName
-			// 
-			this.cmbSectorName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbSectorName.FormattingEnabled = true;
-			this.cmbSectorName.Location = new System.Drawing.Point(144, 10);
-			this.cmbSectorName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.cmbSectorName.Name = "cmbSectorName";
-			this.cmbSectorName.Size = new System.Drawing.Size(333, 23);
-			this.cmbSectorName.TabIndex = 13;
-			this.cmbSectorName.SelectionChangeCommitted += new System.EventHandler(this.cmbSectorName_SelectionChangeCommitted_1);
-			// 
-			// dgFuntionalClassificationService
-			// 
-			this.dgFuntionalClassificationService.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dgFuntionalClassificationService.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.dgFuntionalClassificationService.Location = new System.Drawing.Point(3, 38);
-			this.dgFuntionalClassificationService.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.dgFuntionalClassificationService.Name = "dgFuntionalClassificationService";
-			this.dgFuntionalClassificationService.RowHeadersWidth = 51;
-			this.dgFuntionalClassificationService.RowTemplate.Height = 29;
-			this.dgFuntionalClassificationService.Size = new System.Drawing.Size(824, 350);
-			this.dgFuntionalClassificationService.TabIndex = 4;
-			this.dgFuntionalClassificationService.SelectionChanged += new System.EventHandler(this.dgFuntionalClassificationService_SelectionChanged);
-			// 
 			// tabFunctionProgramProject
 			// 
-			this.tabFunctionProgramProject.Controls.Add(this.btnLoadAllFpp);
-			this.tabFunctionProgramProject.Controls.Add(this.label2);
-			this.tabFunctionProgramProject.Controls.Add(this.cmbServiceName);
 			this.tabFunctionProgramProject.Controls.Add(this.dgFunctionalProgramProject);
+			this.tabFunctionProgramProject.Controls.Add(this.panel2);
 			this.tabFunctionProgramProject.Location = new System.Drawing.Point(4, 27);
 			this.tabFunctionProgramProject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.tabFunctionProgramProject.Name = "tabFunctionProgramProject";
@@ -264,9 +275,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 			// 
 			// btnLoadAllFpp
 			// 
-			this.btnLoadAllFpp.Location = new System.Drawing.Point(752, 10);
+			this.btnLoadAllFpp.Dock = System.Windows.Forms.DockStyle.Right;
+			this.btnLoadAllFpp.Location = new System.Drawing.Point(749, 0);
 			this.btnLoadAllFpp.Name = "btnLoadAllFpp";
-			this.btnLoadAllFpp.Size = new System.Drawing.Size(75, 25);
+			this.btnLoadAllFpp.Size = new System.Drawing.Size(75, 30);
 			this.btnLoadAllFpp.TabIndex = 18;
 			this.btnLoadAllFpp.Text = "Load All";
 			this.btnLoadAllFpp.UseVisualStyleBackColor = true;
@@ -275,33 +287,24 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(11, 14);
+			this.label2.Dock = System.Windows.Forms.DockStyle.Left;
+			this.label2.Location = new System.Drawing.Point(0, 0);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(124, 15);
 			this.label2.TabIndex = 17;
 			this.label2.Text = "Load by Service Name";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// cmbServiceName
-			// 
-			this.cmbServiceName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbServiceName.FormattingEnabled = true;
-			this.cmbServiceName.Location = new System.Drawing.Point(143, 10);
-			this.cmbServiceName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.cmbServiceName.Name = "cmbServiceName";
-			this.cmbServiceName.Size = new System.Drawing.Size(334, 23);
-			this.cmbServiceName.TabIndex = 16;
-			this.cmbServiceName.SelectionChangeCommitted += new System.EventHandler(this.cmbServiceName_SelectionChangeCommitted);
-			// 
 			// dgFunctionalProgramProject
 			// 
 			this.dgFunctionalProgramProject.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dgFunctionalProgramProject.Location = new System.Drawing.Point(3, 38);
+			this.dgFunctionalProgramProject.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dgFunctionalProgramProject.Location = new System.Drawing.Point(3, 32);
 			this.dgFunctionalProgramProject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.dgFunctionalProgramProject.Name = "dgFunctionalProgramProject";
 			this.dgFunctionalProgramProject.RowHeadersWidth = 51;
 			this.dgFunctionalProgramProject.RowTemplate.Height = 29;
-			this.dgFunctionalProgramProject.Size = new System.Drawing.Size(824, 350);
+			this.dgFunctionalProgramProject.Size = new System.Drawing.Size(824, 356);
 			this.dgFunctionalProgramProject.TabIndex = 5;
 			this.dgFunctionalProgramProject.SelectionChanged += new System.EventHandler(this.dgFunctionalProgramProject_SelectionChanged);
 			// 
@@ -364,6 +367,28 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 			this.lblUpdatedAt.Name = "lblUpdatedAt";
 			this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
 			// 
+			// panel2
+			// 
+			this.panel2.Controls.Add(this.cmbServiceName);
+			this.panel2.Controls.Add(this.btnLoadAllFpp);
+			this.panel2.Controls.Add(this.label2);
+			this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+			this.panel2.Location = new System.Drawing.Point(3, 2);
+			this.panel2.Name = "panel2";
+			this.panel2.Size = new System.Drawing.Size(824, 30);
+			this.panel2.TabIndex = 19;
+			// 
+			// cmbServiceName
+			// 
+			this.cmbServiceName.Dock = System.Windows.Forms.DockStyle.Left;
+			this.cmbServiceName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbServiceName.FormattingEnabled = true;
+			this.cmbServiceName.Location = new System.Drawing.Point(124, 0);
+			this.cmbServiceName.Name = "cmbServiceName";
+			this.cmbServiceName.Size = new System.Drawing.Size(318, 23);
+			this.cmbServiceName.TabIndex = 19;
+			this.cmbServiceName.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
+			// 
 			// frmFunctionProgramProject
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -384,13 +409,15 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 			this.tabFunctionalClassification.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dgFunctionalClassification)).EndInit();
 			this.tabFunctionalClassificationService.ResumeLayout(false);
-			this.tabFunctionalClassificationService.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgFuntionalClassificationService)).EndInit();
+			this.panel1.ResumeLayout(false);
+			this.panel1.PerformLayout();
 			this.tabFunctionProgramProject.ResumeLayout(false);
-			this.tabFunctionProgramProject.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgFunctionalProgramProject)).EndInit();
 			this.statusStrip1.ResumeLayout(false);
 			this.statusStrip1.PerformLayout();
+			this.panel2.ResumeLayout(false);
+			this.panel2.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -405,7 +432,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         private System.Windows.Forms.TabControl tabControlFunctionProgramProject;
         private System.Windows.Forms.TabPage tabFunctionalClassification;
         private System.Windows.Forms.TabPage tabFunctionalClassificationService;
-        private System.Windows.Forms.DataGridView dgFuntionalClassificationService;
         private System.Windows.Forms.TabPage tabFunctionProgramProject;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
@@ -417,14 +443,17 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.DataGridView dgFunctionalClassification;
         private System.Windows.Forms.DataGridView dgFunctionalProgramProject;
-		internal System.Windows.Forms.ComboBox cmbSectorName;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button btnLoadAllFsc;
 		private System.Windows.Forms.Button btnLoadAllFpp;
 		private System.Windows.Forms.Label label2;
-		internal System.Windows.Forms.ComboBox cmbServiceName;
 		private System.Windows.Forms.ToolStripTextBox txtSearch;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.ComboBox cmbSectorName;
+		private System.Windows.Forms.DataGridView dgFuntionalClassificationService;
+		private System.Windows.Forms.Panel panel2;
+		private System.Windows.Forms.ComboBox cmbServiceName;
 	}
 }

@@ -43,11 +43,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
 			this.flowLayoutPanel1.Controls.Add(this.btnCancel);
 			this.flowLayoutPanel1.Controls.Add(this.btnSave);
 			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 70);
+			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 68);
 			this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
 			this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-			this.flowLayoutPanel1.Size = new System.Drawing.Size(465, 27);
+			this.flowLayoutPanel1.Size = new System.Drawing.Size(465, 29);
 			this.flowLayoutPanel1.TabIndex = 5;
 			// 
 			// btnCancel
@@ -77,9 +77,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
 			// 
 			// ucFunctonalClassificationServices1
 			// 
-			this.ucFunctonalClassificationServices1.Location = new System.Drawing.Point(8, 9);
+			this.ucFunctonalClassificationServices1.Location = new System.Drawing.Point(0, -3);
 			this.ucFunctonalClassificationServices1.Name = "ucFunctonalClassificationServices1";
-			this.ucFunctonalClassificationServices1.Size = new System.Drawing.Size(457, 62);
+			this.ucFunctonalClassificationServices1.Size = new System.Drawing.Size(465, 66);
 			this.ucFunctonalClassificationServices1.TabIndex = 6;
 			// 
 			// frmFunctonalClassificationServiceAdd

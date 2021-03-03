@@ -47,7 +47,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(11, 29);
+			this.label2.Location = new System.Drawing.Point(11, 39);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(79, 15);
 			this.label2.TabIndex = 9;
@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
 			// 
 			// txtName
 			// 
-			this.txtName.Location = new System.Drawing.Point(107, 29);
+			this.txtName.Location = new System.Drawing.Point(107, 39);
 			this.txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.txtName.Name = "txtName";
 			this.txtName.Size = new System.Drawing.Size(324, 23);
@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
 			// 
 			// txtCode
 			// 
-			this.txtCode.Location = new System.Drawing.Point(107, 53);
+			this.txtCode.Location = new System.Drawing.Point(107, 65);
 			this.txtCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.txtCode.MaxLength = 2;
 			this.txtCode.Name = "txtCode";
@@ -80,7 +80,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
 			// 
 			this.cmbSectorName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbSectorName.FormattingEnabled = true;
-			this.cmbSectorName.Location = new System.Drawing.Point(107, 3);
+			this.cmbSectorName.Location = new System.Drawing.Point(107, 13);
 			this.cmbSectorName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.cmbSectorName.Name = "cmbSectorName";
 			this.cmbSectorName.Size = new System.Drawing.Size(324, 23);
@@ -93,7 +93,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(11, 55);
+			this.label1.Location = new System.Drawing.Point(11, 67);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(35, 15);
 			this.label1.TabIndex = 11;
@@ -103,7 +103,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(11, 6);
+			this.label3.Location = new System.Drawing.Point(11, 16);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(75, 15);
 			this.label3.TabIndex = 10;
@@ -132,7 +132,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.txtName);
 			this.Name = "ucFunctonalClassificationServices";
-			this.Size = new System.Drawing.Size(457, 78);
+			this.Size = new System.Drawing.Size(457, 92);
 			((System.ComponentModel.ISupportInitialize)(this.epCode)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.epName)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.epSectorName)).EndInit();
