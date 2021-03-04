@@ -30,7 +30,36 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new NotImplementedException();
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.UInt16, Id},
+                };
+
+                string query = $"SELECT funds_id, general_ledger_accounts_id, sub_code, sub_name, created_at, updated_at FROM {tableName} WHERE id = @id";
+
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    record.Add("funds_id", reader.Rows[0][0].ToString());
+                    record.Add("general_ledger_accounts_id", reader.Rows[0][1].ToString());
+                    record.Add("sub_code", reader.Rows[0][2].ToString());
+                    record.Add("sub_name", reader.Rows[0][3].ToString());
+                    record.Add("created_at", reader.Rows[0][4].ToString());
+                    record.Add("updated_at", reader.Rows[0][5].ToString());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
         }
 
         public DataTable GetRecords()
@@ -102,7 +131,25 @@ namespace ACC.Data
 
         public bool Update(SubsidiaryLedgerAccountsModel entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.UInt16, entity.Id},
+                    new object[] { "@funds_id", DbType.Byte, entity.FundId},
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, entity.GeneralLedgerAccountsId},
+                    new object[] { "@sub_code", DbType.String, entity.Code},
+                    new object[] { "@sub_name", DbType.String, entity.Name},
+                };
+
+                string query = $"UPDATE {tableName} SET funds_id = @funds_id, general_ledger_accounts_id = @general_ledger_accounts_id, sub_code = @sub_code, sub_name = @sub_name WHERE id = @id";
+
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

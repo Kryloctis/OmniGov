@@ -66,7 +66,10 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
+            byte fundId = Convert.ToByte(cmbFund.SelectedValue);
+            ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.SelectedCells[0].Value);
 
+            _ = new frmSubsidiaryEdit(this, fundId, generalLedgerId, subsidiaryLedgerId).ShowDialog();
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
