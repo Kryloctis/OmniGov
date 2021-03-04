@@ -168,7 +168,6 @@ namespace AccountingSystem
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
-        #endregion
 
         internal static void FuntionalClassificationDatagridView(DataTable dataTable, DataGridView datagrid)
         {
@@ -207,8 +206,6 @@ namespace AccountingSystem
             datagrid.Columns[5].Visible = false;
         }
 
-
-
         internal static void SectorNameComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
             comboBox.DataSource = dataTable;
@@ -243,7 +240,6 @@ namespace AccountingSystem
                 comboBox1.AutoCompleteSource = AutoCompleteSource.CustomSource;
             }
         }
-
 
 
     }
