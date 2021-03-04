@@ -62,6 +62,21 @@ namespace ACC.Data
             }
         }
 
+        public DataTable GetAddedPermissions(int currentRoleId)
+        {
+            try
+            {
+                var roleId = currentRoleId;
+                string query = $"SELECT * from role_has_permissions where roles_id ='" + roleId + "'";
+
+                var dtPermissions = new DataTable();
+                return _dbGenericCommands.Fill(query, dtPermissions);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
 
 
@@ -262,6 +277,8 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
+
+        
     }
 }
 

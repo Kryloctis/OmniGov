@@ -179,7 +179,7 @@ namespace AccountingSystem
         internal static void AddedPermissionsDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[0].HeaderText = "Role Name";
             datagrid.Columns[1].HeaderText = "Permission Name";
             
 

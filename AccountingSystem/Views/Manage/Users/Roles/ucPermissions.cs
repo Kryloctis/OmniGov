@@ -47,19 +47,21 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         }
 
 
-      /*  internal void LoadAddedPermissions(int getroleId)
+        internal void LoadAddedPermissions()
         {
             try
             {
+                getroleId = frmAddPermissions.getroleId;
+                int currentRoleId = getroleId;
                 var permissionsRepository = Factory.PermissionsRepository();
-                var dtAddedPermissions = permissionsRepository.GetAddedPermissions();
+                DataTable dtAddedPermissions = Factory.PermissionsRepository().GetAddedPermissions(currentRoleId);
                 HelperLoadRecords.AddedPermissionsDatagridView(dtAddedPermissions, dgPermissions);
 
-                
+
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-      */
+
 
         private void cmbPermissions_Validating(object sender, CancelEventArgs e)
         {
@@ -94,6 +96,6 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             Helper.ClearErrorComboBox(epPermissions, cmbPermissions);
         }
 
-        
+       
     }
 }

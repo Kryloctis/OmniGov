@@ -66,6 +66,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         {
             Helper.LoadFormIcon(this);
             ucPermissions1.LoadPermissions();
+            ucPermissions1.LoadAddedPermissions();
             //ucPermissions1.LoadAddedPermissions(getroleId);
 
 
