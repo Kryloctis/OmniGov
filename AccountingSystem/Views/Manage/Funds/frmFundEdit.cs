@@ -30,8 +30,9 @@ namespace AccountingSystem.Views.Manage.Funds
                 var uc = ucFunds1;
                 var fundsRepository = Factory.FundsRepository();
                 var fundData = fundsRepository.GetRecordByID(uc.fundId);
-
-                uc.txtName.Text = fundData["fund_name"];
+                uc.txtName.Text = fundData["fund_code"];
+                uc.txtCode.Text = fundData["fund_name"];
+               
 
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -57,6 +58,7 @@ namespace AccountingSystem.Views.Manage.Funds
                 var fundModel = new FundsModel()
                 {
                     Id = uc.fundId,
+                    FundCode = uc.txtCode.Text.Trim(),
                     FundName = uc.txtName.Text.Trim()
                 };
 

@@ -38,13 +38,7 @@ namespace AccountingSystem.Views.Manage.Funds
             LoadRecords();
         }
 
-        private void dgFunds_SelectionChanged(object sender, EventArgs e)
-        {
-            byte[] columnIndexTimestamp = { 2, 3 };
-            Helper.ShowRecordTimestamp(dgFunds, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-            Helper.EnableDisableToolStripButtons(dgFunds, btnEdit, btnDelete);
-
-        }
+      
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -91,5 +85,13 @@ namespace AccountingSystem.Views.Manage.Funds
         {
 
         }
-    }
+
+
+		private void dgFunds_SelectionChanged(object sender, EventArgs e)
+		{
+            byte[] columnIndexTimestamp = { 2, 3 };
+            Helper.ShowRecordTimestamp(dgFunds, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgFunds, btnEdit, btnDelete);
+        }
+	}
 }
