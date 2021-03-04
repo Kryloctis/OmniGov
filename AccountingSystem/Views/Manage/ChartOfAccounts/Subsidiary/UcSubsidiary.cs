@@ -31,6 +31,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
         internal void ResetForm()
         {
+            txtCode.Focus();
             txtCode.Clear();
             txtName.Clear();
         }

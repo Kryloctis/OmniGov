@@ -46,7 +46,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.txtCode.MaxLength = 20;
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(370, 27);
-            this.txtCode.TabIndex = 1;
+            this.txtCode.TabIndex = 0;
             this.txtCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtCode_Validating);
             this.txtCode.Validated += new System.EventHandler(this.txtCode_Validated);
             // 
@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.txtName.MaxLength = 99;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(370, 27);
-            this.txtName.TabIndex = 2;
+            this.txtName.TabIndex = 1;
             this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.txtName_Validating);
             this.txtName.Validated += new System.EventHandler(this.txtName_Validated);
             // 
