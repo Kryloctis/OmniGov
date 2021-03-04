@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Text;
 using System.Transactions;
 using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 
 namespace ACC.Data
 {
-   public class FundsRepository : IFundsRepository
+    public class FunctionalClassificationRepository :IFunctionalClassificationRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
-        private readonly string tableName = "funds";
+        private readonly string tableName = "functional_classifications";
 
-        public FundsRepository(IDbGenericCommands dbGenericCommands)
+        public FunctionalClassificationRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }
@@ -28,16 +29,17 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT fund_name, created_at, updated_at FROM {tableName} WHERE id = @id";
+                string query = $"SELECT sector_code, sector_name, created_at, updated_at FROM {tableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
                         return record;
 
-                    record.Add("fund_name", reader.Rows[0][0].ToString());
-                    record.Add("created_at", reader.Rows[0][1].ToString());
-                    record.Add("updated_at", reader.Rows[0][2].ToString());
+                    record.Add("sector_code", reader.Rows[0][0].ToString());
+                    record.Add("sector_name", reader.Rows[0][1].ToString());
+                    record.Add("created_at", reader.Rows[0][2].ToString());
+                    record.Add("updated_at", reader.Rows[0][3].ToString());
                 }
             }
             catch (Exception)
@@ -47,38 +49,39 @@ namespace ACC.Data
 
             return record;
         }
+
+
         public DataTable GetRecords()
         {
             try
             {
                 string query = $"SELECT * FROM {tableName}";
 
-                var dtFunds = new DataTable();
-                return _dbGenericCommands.Fill(query, dtFunds);
+                var dtFunctionalClassification = new DataTable();
+                return _dbGenericCommands.Fill(query, dtFunctionalClassification);
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
+      
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool Insert(FundsModel entity)
-        {
             try
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@fund_name", DbType.String, entity.FundName},
-                };
+                var srchtxt = searchText;
+                // var parameters = new object[][]
+                //{
+                //     new object[] { "@id", DbType.Int32, id},
+                //};
 
-                string query = $"INSERT INTO {tableName} (fund_name) VALUES (@fund_name)";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                // string query = $"SELECT * FROM {tableName} WHERE functional_classifications_id  = @id";
+                string query = $"SELECT * FROM {tableName} WHERE sector_name  LIKE'%" + srchtxt + "%' OR sector_code LIKE'%" + srchtxt + "%' ";
+
+                var dtFunctionProjectProgram = new DataTable();
+                return _dbGenericCommands.Fill(query, dtFunctionProjectProgram);
             }
             catch (Exception)
             {
@@ -87,17 +90,17 @@ namespace ACC.Data
         }
 
 
-        public bool Update(FundsModel entity)
+        public bool Insert(FunctionalClassificationModel entity)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Int16, entity.Id},
-                    new object[] { "@fund_name", DbType.String, entity.FundName},
+                    new object[] { "@sector_code", DbType.String, entity.SectorCode},
+                    new object[] { "@sector_name", DbType.String, entity.SectorName},
                 };
 
-                string query = $"UPDATE {tableName} SET fund_name = @fund_name WHERE id = @id";
+                string query = $"INSERT INTO {tableName} (sector_code, sector_name) VALUES (@sector_code, @sector_name)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -106,8 +109,27 @@ namespace ACC.Data
             }
         }
 
+        public bool Update(FunctionalClassificationModel entity)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Byte, entity.Id},
+                    new object[] { "@sector_code", DbType.String, entity.SectorCode},
+                    new object[] { "@sector_name", DbType.String, entity.SectorName},
+                };
 
-        public bool Delete(List<FundsModel> entityList)
+                string query = $"UPDATE {tableName} SET sector_code = @sector_code, sector_name = @sector_name WHERE id = @id";
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool Delete(List<FunctionalClassificationModel> entityList)
         {
             try
             {
@@ -148,14 +170,13 @@ namespace ACC.Data
             }
         }
 
-
         public bool IdExist(int id)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Int32, id },
+                    new object[] { "@id", DbType.Byte, id },
                 };
 
                 string query = $"SELECT id FROM {tableName} WHERE id = @id";
@@ -172,17 +193,16 @@ namespace ACC.Data
             return false;
         }
 
-
-        public bool NameExist(string fundName)
+        public bool CodeExist(string code)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@fund_name", DbType.String, fundName },
+                    new object[] { "@sector_code", DbType.String, code },
                 };
 
-                string query = $"SELECT fund_name FROM {tableName} WHERE fund_name = @fund_name";
+                string query = $"SELECT sector_code FROM {tableName} WHERE sector_code = @sector_code";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -196,18 +216,17 @@ namespace ACC.Data
             return false;
         }
 
-
-        public bool NameExist(string fundName, int fundId)
+        public bool CodeExist(string code, int id)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Int16, fundId },
-                    new object[] { "@fund_name", DbType.String, fundName },
+                    new object[] { "@id", DbType.String, id },
+                    new object[] { "@sector_code", DbType.String, code },
                 };
 
-                string query = $"SELECT fund_name FROM {tableName} WHERE id <> @id AND fund_name = @fund_name";
+                string query = $"SELECT sector_code FROM {tableName} WHERE id <> @id AND sector_code = @sector_code";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -221,7 +240,52 @@ namespace ACC.Data
             return false;
         }
 
+        public bool NameExist(string name)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@sector_name", DbType.String, name },
+                };
 
+                string query = $"SELECT sector_name FROM {tableName} WHERE sector_name = @sector_name";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
+
+        public bool NameExist(string name, int id)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.String, id },
+                    new object[] { "@sector_name", DbType.String, name },
+                };
+
+                string query = $"SELECT sector_name FROM {tableName} WHERE id <> @id AND sector_name = @sector_name";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
 
     }
 }

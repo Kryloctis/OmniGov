@@ -30,19 +30,12 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMajorAccountGroupAdd));
-            this.ucMajorAccountGroup1 = new AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup.UcMajorAccountGroup();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.ucMajorAccountGroup1 = new AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup.UcMajorAccountGroup();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // ucMajorAccountGroup1
-            // 
-            this.ucMajorAccountGroup1.Location = new System.Drawing.Point(12, 12);
-            this.ucMajorAccountGroup1.Name = "ucMajorAccountGroup1";
-            this.ucMajorAccountGroup1.Size = new System.Drawing.Size(518, 111);
-            this.ucMajorAccountGroup1.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
@@ -50,18 +43,20 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 137);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 103);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(531, 36);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(465, 27);
             this.flowLayoutPanel1.TabIndex = 4;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(434, 3);
+            this.btnCancel.Location = new System.Drawing.Point(380, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnCancel.Size = new System.Drawing.Size(94, 29);
+            this.btnCancel.Size = new System.Drawing.Size(82, 22);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -70,26 +65,36 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             // 
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(334, 3);
+            this.btnSave.Location = new System.Drawing.Point(292, 2);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSave.Size = new System.Drawing.Size(94, 29);
+            this.btnSave.Size = new System.Drawing.Size(82, 22);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // ucMajorAccountGroup1
+            // 
+            this.ucMajorAccountGroup1.Location = new System.Drawing.Point(10, 9);
+            this.ucMajorAccountGroup1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ucMajorAccountGroup1.Name = "ucMajorAccountGroup1";
+            this.ucMajorAccountGroup1.Size = new System.Drawing.Size(453, 83);
+            this.ucMajorAccountGroup1.TabIndex = 0;
+            // 
             // frmMajorAccountGroupAdd
             // 
             this.AcceptButton = this.btnSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(531, 173);
+            this.ClientSize = new System.Drawing.Size(465, 130);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ucMajorAccountGroup1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmMajorAccountGroupAdd";
@@ -102,10 +107,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
         }
 
         #endregion
-
-        private UcMajorAccountGroup ucMajorAccountGroup1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
+        private UcMajorAccountGroup ucMajorAccountGroup1;
     }
 }
