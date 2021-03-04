@@ -8,6 +8,6 @@ namespace ACC.Domain.Models
     {
         public int Id { get; set; }
         public string FundCode { get; set; }
-        public string FundName { get; set; }      
+        public string FundName { get; set; }
     }
 }

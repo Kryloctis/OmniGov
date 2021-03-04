@@ -1,7 +1,7 @@
 ﻿
-namespace AccountingSystem.Views.Manage.Funds
+namespace AccountingSystem.Views.Manage.CollectingOfficer
 {
-    partial class frmFundAdd
+    partial class frmCollectingOfficerEdit
     {
         /// <summary>
         /// Required designer variable.
@@ -29,20 +29,13 @@ namespace AccountingSystem.Views.Manage.Funds
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFundAdd));
-            this.ucFunds1 = new AccountingSystem.Views.Manage.Funds.ucFunds();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCollectingOfficerEdit));
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.ucCollectingOfficer1 = new AccountingSystem.Views.Manage.CollectingOfficer.ucCollectingOfficer();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // ucFunds1
-            // 
-            this.ucFunds1.Location = new System.Drawing.Point(8, -3);
-            this.ucFunds1.Name = "ucFunds1";
-            this.ucFunds1.Size = new System.Drawing.Size(401, 69);
-            this.ucFunds1.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
@@ -50,16 +43,16 @@ namespace AccountingSystem.Views.Manage.Funds
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 69);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 121);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(415, 27);
-            this.flowLayoutPanel1.TabIndex = 2;
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(448, 27);
+            this.flowLayoutPanel1.TabIndex = 3;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(330, 2);
+            this.btnCancel.Location = new System.Drawing.Point(363, 2);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -67,13 +60,12 @@ namespace AccountingSystem.Views.Manage.Funds
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(242, 2);
+            this.btnSave.Location = new System.Drawing.Point(275, 2);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -81,25 +73,33 @@ namespace AccountingSystem.Views.Manage.Funds
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click_1);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // frmFundAdd
+            // ucCollectingOfficer1
+            // 
+            this.ucCollectingOfficer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucCollectingOfficer1.Location = new System.Drawing.Point(0, 0);
+            this.ucCollectingOfficer1.Name = "ucCollectingOfficer1";
+            this.ucCollectingOfficer1.Size = new System.Drawing.Size(448, 121);
+            this.ucCollectingOfficer1.TabIndex = 4;
+            // 
+            // frmCollectingOfficerEdit
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(415, 96);
+            this.ClientSize = new System.Drawing.Size(448, 148);
+            this.Controls.Add(this.ucCollectingOfficer1);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.ucFunds1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximumSize = new System.Drawing.Size(431, 135);
-            this.MinimumSize = new System.Drawing.Size(431, 135);
-            this.Name = "frmFundAdd";
+            this.MaximumSize = new System.Drawing.Size(464, 187);
+            this.MinimumSize = new System.Drawing.Size(464, 187);
+            this.Name = "frmCollectingOfficerEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Fund";
-            this.Load += new System.EventHandler(this.frmFundAdd_Load);
+            this.Text = "Edit Collecting Officer";
+            this.Load += new System.EventHandler(this.frmCollectingOfficerEdit_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -107,9 +107,9 @@ namespace AccountingSystem.Views.Manage.Funds
 
         #endregion
 
-        private ucFunds ucFunds1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
+        private ucCollectingOfficer ucCollectingOfficer1;
     }
 }

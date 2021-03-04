@@ -47,8 +47,12 @@ namespace AccountingSystem.Views.Manage.Funds
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int fundId = int.Parse(dgFunds.SelectedCells[0].Value.ToString());
-            _ = new frmFundEdit(this, fundId).ShowDialog();
+            if (dgFunds.Rows.Count > 0)
+            {
+                int fundId = int.Parse(dgFunds.SelectedCells[0].Value.ToString());
+                _ = new frmFundEdit(this, fundId).ShowDialog();
+            }
+           
         }
 
 
