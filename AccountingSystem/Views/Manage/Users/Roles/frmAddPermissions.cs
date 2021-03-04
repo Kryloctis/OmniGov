@@ -79,6 +79,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             {
                 Helper.MessageBoxSuccess("Permission added.");
                 //ucPermissions1.ResetForm();
+                ucPermissions1.LoadAddedPermissions();
 
             }
         }

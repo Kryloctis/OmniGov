@@ -67,7 +67,7 @@ namespace ACC.Data
             try
             {
                 var roleId = currentRoleId;
-                string query = $"SELECT * from role_has_permissions where roles_id ='" + roleId + "'";
+                string query = $"SELECT distinct permissions.permission_name from role_has_permissions inner join permissions on permissions.id = role_has_permissions.permissions_id join roles on role_has_permissions.roles_id = roles.id where permissions.id = role_has_permissions.permissions_id and roles.id ='" + roleId + "'";
 
                 var dtPermissions = new DataTable();
                 return _dbGenericCommands.Fill(query, dtPermissions);

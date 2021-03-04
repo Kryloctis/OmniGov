@@ -41,7 +41,9 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                     button.Name = "btnAddPermissions";
                     button.HeaderText = "Manage";
                     button.Text = "Add Permissions";
-                    button.UseColumnTextForButtonValue = true; 
+                    button.UseColumnTextForButtonValue = true;
+                    button.FlatStyle = FlatStyle.Standard;
+                    button.CellTemplate.Style.BackColor = Color.Honeydew;
                     this.dgRoles.Columns.Insert( 4, button);
                 }
 

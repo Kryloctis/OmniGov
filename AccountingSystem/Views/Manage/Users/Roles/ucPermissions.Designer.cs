@@ -30,6 +30,9 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbPermissions = new System.Windows.Forms.ComboBox();
@@ -73,12 +76,44 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             // dgPermissions
             // 
+            this.dgPermissions.AllowUserToAddRows = false;
+            this.dgPermissions.AllowUserToDeleteRows = false;
+            this.dgPermissions.AllowUserToResizeColumns = false;
+            this.dgPermissions.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgPermissions.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgPermissions.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgPermissions.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dgPermissions.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.dgPermissions.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgPermissions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgPermissions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgPermissions.ColumnHeadersVisible = false;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgPermissions.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgPermissions.GridColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgPermissions.Location = new System.Drawing.Point(91, 48);
             this.dgPermissions.Name = "dgPermissions";
+            this.dgPermissions.RowHeadersVisible = false;
             this.dgPermissions.RowHeadersWidth = 51;
             this.dgPermissions.RowTemplate.Height = 29;
-            this.dgPermissions.Size = new System.Drawing.Size(345, 95);
+            this.dgPermissions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgPermissions.Size = new System.Drawing.Size(345, 109);
             this.dgPermissions.TabIndex = 11;
             // 
             // ucPermissions
@@ -90,8 +125,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbPermissions);
             this.Name = "ucPermissions";
-            this.Size = new System.Drawing.Size(468, 156);
-            
+            this.Size = new System.Drawing.Size(468, 169);
             ((System.ComponentModel.ISupportInitialize)(this.epPermissions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgPermissions)).EndInit();
             this.ResumeLayout(false);
