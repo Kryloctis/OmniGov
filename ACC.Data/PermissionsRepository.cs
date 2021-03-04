@@ -7,13 +7,13 @@ using ACC.Domain.Models;
 
 namespace ACC.Data
 {
-    public class RolesRepository : IRolesRepository
+    public class PermissionsRepository : IPermissionsRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
-        private readonly string tableName = "roles";
-        
+        private readonly string tableName = "permissions";
 
-        public RolesRepository(IDbGenericCommands dbGenericCommands)
+
+        public PermissionsRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }
@@ -28,16 +28,15 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT role_name, created_at, updated_at FROM {tableName} WHERE id = @id";
+                string query = $"SELECT permission_name FROM {tableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
                         return record;
 
-                    record.Add("role_name", reader.Rows[0][0].ToString());
-                    record.Add("created_at", reader.Rows[0][1].ToString());
-                    record.Add("updated_at", reader.Rows[0][2].ToString());
+                    record.Add("permission_name", reader.Rows[0][0].ToString());
+
                 }
             }
             catch (Exception)
@@ -54,8 +53,8 @@ namespace ACC.Data
             {
                 string query = $"SELECT * FROM {tableName}";
 
-                var dtRoles = new DataTable();
-                return _dbGenericCommands.Fill(query, dtRoles);
+                var dtPermissions = new DataTable();
+                return _dbGenericCommands.Fill(query, dtPermissions);
             }
             catch (Exception)
             {
@@ -63,7 +62,9 @@ namespace ACC.Data
             }
         }
 
-    
+
+
+
 
         public DataTable GetRecordsBySearch(string searchText)
         {
@@ -71,7 +72,7 @@ namespace ACC.Data
             {
                 var srchtxt = searchText;
 
-                string query = $"SELECT * FROM {tableName} WHERE role_name  LIKE'%" + srchtxt + "%'";
+                string query = $"SELECT * FROM {tableName} WHERE permission_name  LIKE'%" + srchtxt + "%'";
 
                 var dtUsers = new DataTable();
                 return _dbGenericCommands.Fill(query, dtUsers);
@@ -82,17 +83,19 @@ namespace ACC.Data
             }
         }
 
-        public bool Insert(RolesModel entity)
+        public bool Insert(PermissionsModel entity)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@role_name", DbType.String, entity.RoleName},
-                    
+                    new object[] { "@permission_name", DbType.String, entity.PermissionName},
+                    new object[] { "@permission_id", DbType.Byte, entity.Id},
+                    new object[] { "@role_id", DbType.Byte, entity.currentRole},
+
                 };
 
-                string query = $"INSERT INTO {tableName} (role_name) VALUES (@role_name)";
+                string query = $"INSERT INTO role_has_permissions (roles_id, permissions_id) VALUES (@role_id, @permission_id)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -101,18 +104,18 @@ namespace ACC.Data
             }
         }
 
-        public bool Update(RolesModel entity)
+        public bool Update(PermissionsModel entity)
         {
             try
             {
                 var parameters = new object[][]
                 {
                     new object[] { "@id", DbType.Int16, entity.Id},
-                    new object[] { "@role_name", DbType.String, entity.RoleName},
-                   
+                    new object[] { "@permission_name", DbType.String, entity.PermissionName},
+
                 };
 
-                string query = $"UPDATE {tableName} SET role_name = @role_name WHERE id = @id";
+                string query = $"UPDATE {tableName} SET permission_name = @permission_name WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -121,7 +124,7 @@ namespace ACC.Data
             }
         }
 
-        public bool Delete(List<RolesModel> entityList)
+        public bool Delete(List<PermissionsModel> entityList)
         {
             try
             {
@@ -184,18 +187,17 @@ namespace ACC.Data
 
             return false;
         }
-
-
-        public bool NameExist(string roleName)
+        public bool PermissionExists(int id, int roleid)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@role_name", DbType.String, roleName },
+                    new object[] { "@id", DbType.Int32, id },
+                    new object[] { "@roleid", DbType.Int32, roleid },
                 };
 
-                string query = $"SELECT role_name FROM {tableName} WHERE role_name = @role_name";
+                string query = $"SELECT * FROM role_has_permissions WHERE roles_id = @roleid and permissions_id = @id";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -209,17 +211,16 @@ namespace ACC.Data
             return false;
         }
 
-        public bool NameExist(string roleName, int roleId)
+        public bool NameExist(string permissionName)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Int16, roleId },
-                    new object[] { "@role_name", DbType.String, roleName },
+                    new object[] { "@permission_name", DbType.String, permissionName },
                 };
 
-                string query = $"SELECT role_name FROM {tableName} WHERE id <> @id AND role_name = @role_name";
+                string query = $"SELECT permission_name FROM {tableName} WHERE permission_name = @permission_name";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -231,6 +232,36 @@ namespace ACC.Data
             };
 
             return false;
+        }
+
+        public bool NameExist(string permissionName, int permissionId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int16, permissionId },
+                    new object[] { "@permission_name", DbType.String, permissionName },
+                };
+
+                string query = $"SELECT permission_name FROM {tableName} WHERE id <> @id AND permission_name = @permission_name";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
+
+        public bool idExist(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
+

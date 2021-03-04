@@ -19,7 +19,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             try
             {
                 DataTable dtRoleName = Factory.RolesRepository().GetRecords();
-                HelperLoadRecords.AccountGroupComboBox(dtRoleName, cmbRoles, "role_name", "id");
+                HelperLoadRecords.RoleNameComboBox(dtRoleName, cmbRoles, "role_name", "id");
             }
             catch (Exception ex)
             {

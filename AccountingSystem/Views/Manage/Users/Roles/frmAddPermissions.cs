@@ -11,20 +11,25 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Users.Roles
 {
-    public partial class frmRolesAdd : Form
+    public partial class frmAddPermissions : Form
     {
         private frmRoles _frmRoles;
-        public frmRolesAdd(frmRoles frmRoles)
+        public static int getroleId;
+        
+
+        public frmAddPermissions(frmRoles frmRoles, int roleId)
         {
             InitializeComponent();
             _frmRoles = frmRoles;
+            getroleId = roleId;
+            
         }
 
         private bool SaveData()
         {
             try
             {
-                var uc = ucRoles1;
+                var uc = ucPermissions1;
                 // if error occurs, show messagebox error
                 if (!uc.ValidateChildren())
                 {
@@ -33,14 +38,17 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                 }
 
                 // proceed to insert
-                var roleModel = new RolesModel()
+                var permissionsModel = new PermissionsModel()
                 {
-                    RoleName = uc.txtName.Text.Trim()
-                   
+
+                    Id = ((byte)uc.cmbPermissions.SelectedValue),
+                    currentRole = (getroleId),
+                    
+
                 };
 
-                var rolesRepository = Factory.RolesRepository();
-                return rolesRepository.Insert(roleModel);
+                var permissionsRepository = Factory.PermissionsRepository();
+                return permissionsRepository.Insert(permissionsModel);
             }
             catch (Exception ex)
             {
@@ -50,28 +58,28 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             return false;
         }
 
-        private void frmRolesAdd_Load(object sender, EventArgs e)
+
+
+
+
+        private void frmAddPermissions_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
+            ucPermissions1.LoadPermissions();
+            //ucPermissions1.LoadAddedPermissions(getroleId);
+
+
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (SaveData())
             {
-                Helper.MessageBoxSuccess("Role has been saved.");
-                
-                _frmRoles.LoadRecords();
-                //ucRoles1.ResetForm();
+                Helper.MessageBoxSuccess("Permission added.");
+                //ucPermissions1.ResetForm();
 
-                
-                
             }
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

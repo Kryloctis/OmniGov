@@ -23,6 +23,7 @@ namespace AccountingSystem
         internal static IAllotmentClassesRepository AllotmentClassesRepository() => new AllotmentClassesRepository(new MySqlGenericCommands());
         internal static IRolesRepository RolesRepository() => new RolesRepository(new MySqlGenericCommands());
         internal static IUsersRepository UsersRepository() => new UsersRepository(new MySqlGenericCommands());
+        internal static IPermissionsRepository PermissionsRepository() => new PermissionsRepository(new MySqlGenericCommands());
 
         internal static IError CreateErrors(Array errors) => new Error(errors);
     }

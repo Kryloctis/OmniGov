@@ -59,7 +59,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.btnDelete});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(799, 51);
+            this.toolStrip1.Size = new System.Drawing.Size(797, 51);
             this.toolStrip1.TabIndex = 7;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -107,7 +107,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.dgUsers.RowHeadersWidth = 51;
             this.dgUsers.RowTemplate.Height = 29;
             this.dgUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgUsers.Size = new System.Drawing.Size(773, 444);
+            this.dgUsers.Size = new System.Drawing.Size(771, 436);
             this.dgUsers.TabIndex = 6;
             this.dgUsers.SelectionChanged += new System.EventHandler(this.dgUsers_SelectionChanged);
             // 
@@ -122,9 +122,9 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.lblCreatedAt,
             this.toolStripStatusLabel3,
             this.lblUpdatedAt});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 509);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 501);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(799, 26);
+            this.statusStrip1.Size = new System.Drawing.Size(797, 26);
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -143,7 +143,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(534, 20);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(532, 20);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -170,6 +170,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             // 
             // txtSearch
             // 
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearch.Location = new System.Drawing.Point(528, 13);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PlaceholderText = "Search";
@@ -181,11 +182,13 @@ namespace AccountingSystem.Views.Manage.Users.List
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(799, 535);
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ClientSize = new System.Drawing.Size(797, 527);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.dgUsers);
             this.Controls.Add(this.statusStrip1);
+            this.MinimumSize = new System.Drawing.Size(815, 574);
             this.Name = "frmUsers";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Users ";

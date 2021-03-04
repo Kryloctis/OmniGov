@@ -6,11 +6,14 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IRolesRepository : IRepository<RolesModel>
+    public interface IPermissionsRepository : IRepository<PermissionsModel>
     {
+        bool idExist(int id);
         bool NameExist(string name);
         bool NameExist(string name, int id);
-        //DataTable GetPermissions();
+        bool PermissionExists(int permissionId, int currentRoleId);
+
         
+
     }
 }

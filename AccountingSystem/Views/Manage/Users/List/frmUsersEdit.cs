@@ -108,7 +108,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             {
                 Helper.MessageBoxSuccess("User has been saved.");
                 _frmUsers.LoadRecords();
-                ucUsers1.ResetForm();
+                
             }
         }
     }

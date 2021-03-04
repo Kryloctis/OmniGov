@@ -47,7 +47,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(72, 25);
+            this.txtName.Location = new System.Drawing.Point(72, 24);
             this.txtName.MaxLength = 99;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(370, 27);

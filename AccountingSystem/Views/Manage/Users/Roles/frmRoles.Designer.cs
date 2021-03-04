@@ -51,6 +51,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             // toolStrip1
             // 
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -59,7 +60,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.btnDelete});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(799, 51);
+            this.toolStrip1.Size = new System.Drawing.Size(158, 51);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -107,8 +108,9 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.dgRoles.RowHeadersWidth = 51;
             this.dgRoles.RowTemplate.Height = 29;
             this.dgRoles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgRoles.Size = new System.Drawing.Size(773, 444);
+            this.dgRoles.Size = new System.Drawing.Size(771, 436);
             this.dgRoles.TabIndex = 3;
+            this.dgRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgRoles_CellContentClick);
             this.dgRoles.SelectionChanged += new System.EventHandler(this.dgRoles_SelectionChanged);
             // 
             // statusStrip1
@@ -122,9 +124,9 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.lblCreatedAt,
             this.toolStripStatusLabel3,
             this.lblUpdatedAt});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 509);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 501);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(799, 26);
+            this.statusStrip1.Size = new System.Drawing.Size(797, 26);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -143,7 +145,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(534, 20);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(532, 20);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -170,6 +172,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             // txtSearch
             // 
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearch.Location = new System.Drawing.Point(528, 12);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PlaceholderText = "Search";
@@ -181,11 +184,13 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(799, 535);
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ClientSize = new System.Drawing.Size(797, 527);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.dgRoles);
             this.Controls.Add(this.statusStrip1);
+            this.MaximumSize = new System.Drawing.Size(815, 574);
             this.Name = "frmRoles";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Users > Roles";

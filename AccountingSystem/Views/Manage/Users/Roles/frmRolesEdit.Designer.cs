@@ -51,6 +51,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             // btnCancel
             // 
+            this.btnCancel.CausesValidation = false;
             this.btnCancel.Location = new System.Drawing.Point(377, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -62,6 +63,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             // btnSave
             // 
+            this.btnSave.CausesValidation = false;
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSave.Location = new System.Drawing.Point(277, 3);
@@ -91,6 +93,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.Controls.Add(this.ucRoles1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MinimumSize = new System.Drawing.Size(492, 175);
             this.Name = "frmRolesEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Role";

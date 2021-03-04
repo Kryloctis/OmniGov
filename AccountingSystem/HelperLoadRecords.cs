@@ -52,8 +52,33 @@ namespace AccountingSystem
             }
         }
 
-        #region Major Account Group
-        internal static void MajorAccountGroupDatagridView(DataTable dataTable, DataGridView datagrid)
+
+        internal static void PermissionsComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+
+            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                // loop datatable to add items in autocompletesource
+                foreach (DataRow item in dataTable.Rows)
+                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
+
+                comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+                comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            }
+        }
+        internal static void PermissionCheckedListBox(DataTable dataTable, CheckedListBox checkedListBox, string displayMember, string valueMember)
+        {
+            checkedListBox.DataSource = dataTable;
+            checkedListBox.DisplayMember = displayMember;
+            checkedListBox.ValueMember = valueMember;
+        }
+    
+
+            #region Major Account Group
+            internal static void MajorAccountGroupDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
             datagrid.Columns[0].Visible = false;
@@ -126,7 +151,9 @@ namespace AccountingSystem
             datagrid.Columns[1].HeaderText = "Role Name";
             datagrid.Columns[2].Visible = false;
             datagrid.Columns[3].Visible = false;
-           
+            
+
+
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -149,5 +176,14 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
+        internal static void AddedPermissionsDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].HeaderText = "Permission Name";
+            
+
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
     }
 }

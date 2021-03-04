@@ -13,18 +13,37 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 {
     public partial class frmRoles : Form
     {
+        
+
         public frmRoles()
         {
             InitializeComponent();
         }
 
+
         internal void LoadRecords()
         {
             try
             {
+                int count = dgRoles.Rows.Count;
+                if (count >= 1)
+                {
+                    dgRoles.Columns.RemoveAt(4);
+                }
+
                 var rolesRepository = Factory.RolesRepository();
                 var dtRoles = rolesRepository.GetRecords();
                 HelperLoadRecords.RolesDatagridView(dtRoles, dgRoles);
+
+                DataGridViewButtonColumn button = new DataGridViewButtonColumn();
+                {
+                   
+                    button.Name = "btnAddPermissions";
+                    button.HeaderText = "Manage";
+                    button.Text = "Add Permissions";
+                    button.UseColumnTextForButtonValue = true; 
+                    this.dgRoles.Columns.Insert( 4, button);
+                }
 
                 lblRecordCount.Text = rolesRepository.CountRecords().ToString();
             }
@@ -102,6 +121,22 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             LoadDataBySearch();
+        }
+
+        private void dgRoles_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                e.RowIndex >= 0)
+
+            {
+                DataGridViewRow row = dgRoles.Rows[e.RowIndex];
+                //MessageBox.Show(("Selected Row " + (e.RowIndex + 1).ToString() +"Role Id: " + row.Cells["id"].Value));
+                int roleId = int.Parse(row.Cells["id"].Value.ToString());
+                _ = new frmAddPermissions(this, roleId).ShowDialog();
+
+            }
         }
     }
 }
