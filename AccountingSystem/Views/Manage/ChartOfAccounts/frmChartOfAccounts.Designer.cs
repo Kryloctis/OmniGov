@@ -41,6 +41,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.dgGeneralLedgerAccounts = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabGeneralLedgers = new System.Windows.Forms.TabPage();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabSubMajorAccount = new System.Windows.Forms.TabPage();
             this.cmbMajorAccount = new System.Windows.Forms.ComboBox();
             this.dgSubMajorAccount = new System.Windows.Forms.DataGridView();
@@ -53,7 +55,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.btnFind = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.BtnSubsidiary = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgGeneralLedgerAccounts)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -127,14 +130,17 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             // 
             // dgGeneralLedgerAccounts
             // 
+            this.dgGeneralLedgerAccounts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgGeneralLedgerAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgGeneralLedgerAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgGeneralLedgerAccounts.Location = new System.Drawing.Point(3, 3);
+            this.dgGeneralLedgerAccounts.Location = new System.Drawing.Point(3, 36);
             this.dgGeneralLedgerAccounts.Name = "dgGeneralLedgerAccounts";
             this.dgGeneralLedgerAccounts.RowHeadersWidth = 51;
             this.dgGeneralLedgerAccounts.RowTemplate.Height = 29;
-            this.dgGeneralLedgerAccounts.Size = new System.Drawing.Size(1088, 541);
+            this.dgGeneralLedgerAccounts.Size = new System.Drawing.Size(1088, 508);
             this.dgGeneralLedgerAccounts.TabIndex = 4;
+            this.dgGeneralLedgerAccounts.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgGeneralLedgerAccounts_RowHeaderMouseDoubleClick);
             this.dgGeneralLedgerAccounts.SelectionChanged += new System.EventHandler(this.dgGeneralLedgerAccounts_SelectionChanged);
             // 
             // tabControl1
@@ -157,6 +163,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             // 
             // tabGeneralLedgers
             // 
+            this.tabGeneralLedgers.Controls.Add(this.txtSearch);
+            this.tabGeneralLedgers.Controls.Add(this.label1);
             this.tabGeneralLedgers.Controls.Add(this.dgGeneralLedgerAccounts);
             this.tabGeneralLedgers.Location = new System.Drawing.Point(4, 32);
             this.tabGeneralLedgers.Name = "tabGeneralLedgers";
@@ -165,6 +173,23 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.tabGeneralLedgers.TabIndex = 0;
             this.tabGeneralLedgers.Text = "General Ledgers";
             this.tabGeneralLedgers.UseVisualStyleBackColor = true;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(62, 3);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(316, 27);
+            this.txtSearch.TabIndex = 6;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 20);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Search";
             // 
             // tabSubMajorAccount
             // 
@@ -268,7 +293,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.btnAdd,
             this.btnEdit,
             this.btnDelete,
-            this.btnFind});
+            this.toolStripSeparator1,
+            this.BtnSubsidiary});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1126, 51);
@@ -308,16 +334,21 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
-            // btnFind
+            // toolStripSeparator1
             // 
-            this.btnFind.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnFind.Image = ((System.Drawing.Image)(resources.GetObject("btnFind.Image")));
-            this.btnFind.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnFind.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnFind.Name = "btnFind";
-            this.btnFind.Size = new System.Drawing.Size(46, 48);
-            this.btnFind.Text = "Filter";
-            this.btnFind.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 51);
+            // 
+            // BtnSubsidiary
+            // 
+            this.BtnSubsidiary.Image = ((System.Drawing.Image)(resources.GetObject("BtnSubsidiary.Image")));
+            this.BtnSubsidiary.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.BtnSubsidiary.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BtnSubsidiary.Name = "BtnSubsidiary";
+            this.BtnSubsidiary.Size = new System.Drawing.Size(81, 48);
+            this.BtnSubsidiary.Text = "Subsidiary";
+            this.BtnSubsidiary.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.BtnSubsidiary.Click += new System.EventHandler(this.BtnSubsidiary_Click);
             // 
             // frmChartOfAccounts
             // 
@@ -328,6 +359,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1144, 713);
             this.Name = "frmChartOfAccounts";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Chart Of Accounts";
@@ -337,6 +369,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             ((System.ComponentModel.ISupportInitialize)(this.dgGeneralLedgerAccounts)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabGeneralLedgers.ResumeLayout(false);
+            this.tabGeneralLedgers.PerformLayout();
             this.tabSubMajorAccount.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgSubMajorAccount)).EndInit();
             this.tabMajorAccount.ResumeLayout(false);
@@ -369,11 +402,14 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         private System.Windows.Forms.ToolStripButton btnAdd;
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnDelete;
-        private System.Windows.Forms.ToolStripButton btnFind;
         private System.Windows.Forms.DataGridView dgAccountGroup;
         private System.Windows.Forms.DataGridView dgMajorAccountGroup;
         private System.Windows.Forms.ComboBox cmbAccountGroup;
         private System.Windows.Forms.DataGridView dgSubMajorAccount;
         private System.Windows.Forms.ComboBox cmbMajorAccount;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton BtnSubsidiary;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Label label1;
     }
 }

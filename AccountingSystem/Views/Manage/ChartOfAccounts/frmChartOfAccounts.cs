@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup;
 using AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup;
+using AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary;
 using System.Data;
 
 namespace AccountingSystem.Views.Manage.ChartOfAccounts
@@ -260,6 +261,25 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
                 DeleteAccountGroupRecords();
         }
 
+        private void ShowSubsidiaryForm()
+        {
+            if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
+            {
+                ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.SelectedCells[0].Value);
+                _ = new frmSubsidiary(generalLedgerId).ShowDialog();
+            }
+        }
+
+        private void BtnSubsidiary_Click(object sender, EventArgs e)
+        {
+            ShowSubsidiaryForm();
+        }
+
+        private void dgGeneralLedgerAccounts_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            ShowSubsidiaryForm();
+        }
+
         private void DisableEditDeleteButtons()
         {
             btnEdit.Enabled = false;
@@ -268,11 +288,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubsidiaryLedgers"])
-            {
-
-            }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
+            if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
             {
                 LoadGeneralLedgers();
                 DisableEditDeleteButtons();
@@ -281,19 +297,19 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             {
                 LoadSubMajorAccountGroup();
                 DisableEditDeleteButtons();
-                btnFind.Enabled = false;
+                BtnSubsidiary.Enabled = false;
             } 
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
             {
                 LoadMajorAccountGroup();
                 DisableEditDeleteButtons();
-                btnFind.Enabled = false;
+                BtnSubsidiary.Enabled = false;
             }
             else
             {
                 LoadAccountGroup();
                 DisableEditDeleteButtons();
-                btnFind.Enabled = false;
+                BtnSubsidiary.Enabled = false;
             }
                 
         }
@@ -308,6 +324,14 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             byte[] columnIndexTimestamp = { 4, 5 };
             SetActionControls(dgGeneralLedgerAccounts, columnIndexTimestamp);
+
+            if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
+            {
+                BtnSubsidiary.Enabled = true;
+                return;
+            }
+
+            BtnSubsidiary.Enabled = false;
         }
 
         private void dgAccountGroup_SelectionChanged(object sender, EventArgs e)
@@ -330,6 +354,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         private void cmbMajorAccount_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadSubMajorAccountGroup();
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

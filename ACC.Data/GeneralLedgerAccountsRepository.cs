@@ -20,7 +20,37 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new NotImplementedException();
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, Id},
+                };
+
+                string query = $"SELECT sub_major_account_group_id, account_code, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {viewTableName} WHERE general_ledger_accounts_id = @id";
+
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    record.Add("sub_major_account_group_id", reader.Rows[0][0].ToString());
+                    record.Add("ledger_code", reader.Rows[0][1].ToString());
+                    record.Add("account_code", reader.Rows[0][2].ToString());
+                    record.Add("ledger_name", reader.Rows[0][3].ToString());
+                    record.Add("is_contra_account", reader.Rows[0][4].ToString());
+                    record.Add("created_at", reader.Rows[0][5].ToString());
+                    record.Add("updated_at", reader.Rows[0][6].ToString());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
         }
 
         public DataTable GetRecords()
@@ -55,7 +85,17 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string query = $"SELECT * FROM {tableName} LIMIT 5";
+
+                var dtJournals = new DataTable();
+                return _dbGenericCommands.Fill(query, dtJournals);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Insert(GeneralLedgerAccountsModal entity)

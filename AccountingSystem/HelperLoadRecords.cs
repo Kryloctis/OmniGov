@@ -96,6 +96,22 @@ namespace AccountingSystem
         }
         #endregion
 
+        #region Subsidiary Ledgers
+        internal static void SubsidiaryLedgerAccountsDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].Visible = false;
+            datagrid.Columns[2].Visible = false;
+            datagrid.Columns[3].HeaderText = "Code";
+            datagrid.Columns[3].Width = 200;
+            datagrid.Columns[4].HeaderText = "Name";
+            datagrid.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns[5].Visible = false;
+            datagrid.Columns[6].Visible = false;
+        }
+        #endregion
+
         #region Journals
         internal static void JournalsDatagridView(DataTable dataTable, DataGridView datagrid)
         {
@@ -121,6 +137,25 @@ namespace AccountingSystem
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
+        internal static void FundsComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+
+            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                // loop datatable to add items in autocompletesource
+                foreach (DataRow item in dataTable.Rows)
+                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
+
+                comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+                comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            }
+        }
+
+        #endregion
+
         internal static void AllotmentClassesDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -129,10 +164,9 @@ namespace AccountingSystem
             datagrid.Columns[2].HeaderText = "Name";
             datagrid.Columns[3].Visible = false;
             datagrid.Columns[4].Visible = false;
-            
+
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
-        #endregion
     }
 }

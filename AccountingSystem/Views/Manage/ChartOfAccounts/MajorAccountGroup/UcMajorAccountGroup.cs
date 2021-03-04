@@ -8,7 +8,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
     public partial class UcMajorAccountGroup : UserControl
     {
         internal short majorAccountGroupId = 0;
-        IMajorAccountGroupRepository _majorAccountGroupRepository;
 
         public UcMajorAccountGroup()
         {
