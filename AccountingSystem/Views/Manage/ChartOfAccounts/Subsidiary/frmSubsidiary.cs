@@ -53,6 +53,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             LoadFunds();
             LoadSelectedRecord();
             LoadSubsidiaryRecordsByFundAndGeneralLedger(1);
+
+            btnEdit.Enabled = false;
+            btnDelete.Enabled = false;
         }
 
         private void dgSubsidiary_SelectionChanged(object sender, EventArgs e)
@@ -68,10 +71,13 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-            byte fundId = Convert.ToByte(cmbFund.SelectedValue);
-            ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.SelectedCells[0].Value);
+            if (dgSubsidiary.SelectedRows.Count == 1)
+            {
+                byte fundId = Convert.ToByte(cmbFund.SelectedValue);
+                ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.SelectedCells[0].Value);
 
-            _ = new frmSubsidiaryEdit(this, fundId, generalLedgerId, subsidiaryLedgerId).ShowDialog();
+                _ = new frmSubsidiaryEdit(this, fundId, generalLedgerId, subsidiaryLedgerId).ShowDialog();
+            }
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
