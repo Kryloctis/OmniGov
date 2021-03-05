@@ -81,7 +81,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void dgCollectingOfficer_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 2, 3 };
+            byte[] columnIndexTimestamp = { 3, 4 };
             Helper.ShowRecordTimestamp(dgCollectingOfficer, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgCollectingOfficer, btnEdit, btnDelete);
         }
