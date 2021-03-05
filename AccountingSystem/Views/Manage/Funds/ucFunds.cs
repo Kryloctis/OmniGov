@@ -21,8 +21,9 @@ namespace AccountingSystem.Views.Manage.Funds
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[1];
-            errorArray[0] = epName.GetError(txtName);
+            var errorArray = new string[2];
+            errorArray[0] = epCode.GetError(txtCode);
+            errorArray[1] = epName.GetError(txtName);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -31,6 +32,7 @@ namespace AccountingSystem.Views.Manage.Funds
 
         internal void ResetForm()
         {
+            txtCode.Clear();
             txtName.Clear();
         }
 
@@ -63,5 +65,30 @@ namespace AccountingSystem.Views.Manage.Funds
         {
 
         }
-    }
+
+		private void txtCode_Validating(object sender, CancelEventArgs e)
+		{
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epCode, txtCode, "fund code");
+
+            var fundsRepository = Factory.FundsRepository();
+            string fundCode = txtCode.Text.Trim();
+            bool fundCodeExist;
+
+            if (fundId == 0)
+                fundCodeExist = fundsRepository.CodeExist(fundCode); // add form
+            else
+                fundCodeExist = fundsRepository.CodeExist(fundCode, fundId); // edit form
+
+            if (fundCodeExist)
+            {
+                epCode.SetError(txtCode, "Fund code already exist in your records.");
+                e.Cancel = true;
+            }
+        }
+
+		private void txtCode_Validated(object sender, EventArgs e)
+		{
+            Helper.ClearErrorTextBox(epCode, txtCode);
+        }
+	}
 }

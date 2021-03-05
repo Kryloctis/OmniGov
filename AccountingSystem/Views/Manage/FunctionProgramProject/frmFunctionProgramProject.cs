@@ -325,6 +325,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
+            if (dgFunctionalClassification.Rows.Count == 0)
+            {
+                return;
+            }
             if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassification"])
             {
                 byte functionalClassificationId = byte.Parse(dgFunctionalClassification.SelectedCells[0].Value.ToString());

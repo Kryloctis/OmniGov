@@ -36,6 +36,7 @@ namespace AccountingSystem.Views.Manage.Funds
                 // proceed to insert
                 var fundModel = new FundsModel()
                 {
+                    FundCode = uc.txtCode.Text.Trim(),
                     FundName = uc.txtName.Text.Trim()
                     
                 };

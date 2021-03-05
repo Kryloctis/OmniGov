@@ -131,9 +131,10 @@ namespace AccountingSystem
         {
             datagrid.DataSource = dataTable;
             datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Name";
-            datagrid.Columns[2].Visible = false;
+            datagrid.Columns[1].HeaderText = "Code";
+            datagrid.Columns[2].HeaderText = "Name";
             datagrid.Columns[3].Visible = false;
+            datagrid.Columns[4].Visible = false;
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -241,6 +242,17 @@ namespace AccountingSystem
             }
         }
 
+        internal static void CollectingOfficerDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].HeaderText = "Full Name";
+            datagrid.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns[2].HeaderText = "Job Title";         
+            datagrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns[3].Visible = false;
+            datagrid.Columns[4].Visible = false;
+        }
 
     }
 }

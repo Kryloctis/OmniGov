@@ -28,7 +28,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT fund_name, created_at, updated_at FROM {tableName} WHERE id = @id";
+                string query = $"SELECT fund_code,fund_name, created_at, updated_at FROM {tableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -36,8 +36,9 @@ namespace ACC.Data
                         return record;
 
                     record.Add("fund_name", reader.Rows[0][0].ToString());
-                    record.Add("created_at", reader.Rows[0][1].ToString());
-                    record.Add("updated_at", reader.Rows[0][2].ToString());
+                    record.Add("fund_code", reader.Rows[0][1].ToString());
+                    record.Add("created_at", reader.Rows[0][2].ToString());
+                    record.Add("updated_at", reader.Rows[0][3].ToString());
                 }
             }
             catch (Exception)
@@ -75,9 +76,10 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@fund_name", DbType.String, entity.FundName},
+                      new object[] { "@fund_code", DbType.String, entity.FundCode},
                 };
 
-                string query = $"INSERT INTO {tableName} (fund_name) VALUES (@fund_name)";
+                string query = $"INSERT INTO {tableName} (fund_code,fund_name) VALUES (@fund_code,@fund_name)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -95,9 +97,10 @@ namespace ACC.Data
                 {
                     new object[] { "@id", DbType.Int16, entity.Id},
                     new object[] { "@fund_name", DbType.String, entity.FundName},
+                     new object[] { "@fund_code", DbType.String, entity.FundCode},
                 };
 
-                string query = $"UPDATE {tableName} SET fund_name = @fund_name WHERE id = @id";
+                string query = $"UPDATE {tableName} SET fund_code = @fund_code, fund_name = @fund_name WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -221,7 +224,52 @@ namespace ACC.Data
             return false;
         }
 
+        public bool CodeExist(string fundCode)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@fund_code", DbType.String, fundCode },
+                };
 
+                string query = $"SELECT fund_code FROM {tableName} WHERE fund_code = @fund_code";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
+
+        public bool CodeExist(string fundCode, int fundId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int16, fundId },
+                    new object[] { "@fund_code", DbType.String, fundCode },
+                };
+
+                string query = $"SELECT fund_code FROM {tableName} WHERE id <> @id AND fund_code = @fund_code";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
 
     }
 }

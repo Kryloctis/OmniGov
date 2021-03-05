@@ -6,6 +6,7 @@ using AccountingSystem.Views.Manage.ChartOfAccounts;
 
 using AccountingSystem.Views.Manage.AllotmentClasses;
 using AccountingSystem.Views.Manage.FunctionProgramProject;
+using AccountingSystem.Views.Manage.CollectingOfficer;
 namespace AccountingSystem
 {
     public partial class MainForm : Form
@@ -49,8 +50,11 @@ namespace AccountingSystem
         private void menuFunctionProgramProject_Click(object sender, EventArgs e)
         {
             _ = new frmFunctionProgramProject().ShowDialog();
+        }        
+        private void menuCollectingOfficer_Click(object sender, EventArgs e)
+        {
+            _ = new frmCollectingOfficer().ShowDialog();
         }
-
 
     }
 }

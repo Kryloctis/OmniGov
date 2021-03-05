@@ -14,6 +14,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
     public partial class frmFunctonalClassificationServiceEdit : Form
     {
         private frmFunctionProgramProject _frmFunctionProgramProject;
+        public string AllotmentName;     
         public frmFunctonalClassificationServiceEdit(frmFunctionProgramProject frmFunctionProgramProject, byte serviceID)
         {
             InitializeComponent();
