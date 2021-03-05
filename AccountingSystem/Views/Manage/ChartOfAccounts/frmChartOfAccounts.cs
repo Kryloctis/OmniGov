@@ -66,13 +66,18 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             try
             {
-                var dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
-                HelperLoadRecords.GeneralLedgerAccountsDatagridView(dtAccounts, dgGeneralLedgerAccounts);
+                if (txtSearch.Text.Length > 3 || string.IsNullOrWhiteSpace(txtSearch.Text.Trim()))
+                {
+                    var dtGeneralLedgers = new DataTable();
 
-                lblRecordCount.Text = Factory.GeneralLedgerAccountsRepository()
-                                             .CountRecords()
-                                             .ToString();
+                    if (string.IsNullOrWhiteSpace(txtSearch.Text.Trim()))
+                        dtGeneralLedgers = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
+                    else
+                        dtGeneralLedgers = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(txtSearch.Text.Trim());
 
+                    HelperLoadRecords.GeneralLedgerAccountsDatagridView(dtGeneralLedgers, dgGeneralLedgerAccounts);
+                    lblRecordCount.Text = dgGeneralLedgerAccounts.Rows.Count.ToString();
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -358,7 +363,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-
+            LoadGeneralLedgers();
         }
     }
 }

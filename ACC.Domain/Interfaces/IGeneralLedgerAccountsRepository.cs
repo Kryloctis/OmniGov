@@ -9,5 +9,6 @@ namespace ACC.Domain.Interfaces
     public interface IGeneralLedgerAccountsRepository : IRepository<GeneralLedgerAccountsModal>
     {
         DataTable GetViewRecords();
+        DataTable GetViewRecordsBySearch(string searchText);
     }
 }

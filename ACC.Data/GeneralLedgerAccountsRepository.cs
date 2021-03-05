@@ -83,14 +83,19 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetRecordsBySearch(string searchText)
+        public DataTable GetViewRecordsBySearch(string searchText)
         {
             try
             {
-                string query = $"SELECT * FROM {tableName} LIMIT 5";
+                var parameters = new object[][]
+                {
+                    new object[] { "@searchText", DbType.String, $"%{searchText}%" },
+                };
 
-                var dtJournals = new DataTable();
-                return _dbGenericCommands.Fill(query, dtJournals);
+                string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, sub_maj_acc_group_name, created_at, updated_at FROM {viewTableName} WHERE account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText";
+
+                var dtGeneralLedgers = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
             }
             catch (Exception)
             {
@@ -128,6 +133,11 @@ namespace ACC.Data
         }
 
         public bool IdExist(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DataTable GetRecordsBySearch(string searchText)
         {
             throw new NotImplementedException();
         }
