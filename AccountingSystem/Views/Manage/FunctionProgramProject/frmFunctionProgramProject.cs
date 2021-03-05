@@ -413,7 +413,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         private void btnLoadAll_Click(object sender, EventArgs e)
         {
             LoadFunctionalClassificationServicesRecords();
-
         }
 
 
