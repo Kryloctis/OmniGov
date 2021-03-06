@@ -56,13 +56,50 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
             try
             {
+
+                dgRoles.Columns.RemoveAt(4);
+                if (dgRoles.Rows.Count == 0)
+                {
+                    dgRoles.Columns.RemoveAt(4);
+                }
+                string searchkey = Convert.ToString(txtSearch.Text);
+                var dtRoles = Factory.RolesRepository().GetRecordsBySearch(searchkey);
+                
+                HelperLoadRecords.RolesDatagridView(dtRoles, dgRoles);
+                if (dgRoles.Rows.Count >=1 )
+                {
+
+                    DataGridViewButtonColumn button = new DataGridViewButtonColumn();
+                    {
+                        button.Name = "btnAddPermissions";
+                        button.HeaderText = "Manage";
+                        button.Text = "Add Permissions";
+                        button.UseColumnTextForButtonValue = true;
+                        button.FlatStyle = FlatStyle.Standard;
+                        button.CellTemplate.Style.BackColor = Color.Honeydew;
+                        this.dgRoles.Columns.Insert(4, button);
+                    }
+                }
+                lblRecordCount.Text = dgRoles.Rows.Count.ToString();
+            }
+            catch (Exception ex) {
                 string searchkey = Convert.ToString(txtSearch.Text);
                 var dtRoles = Factory.RolesRepository().GetRecordsBySearch(searchkey);
                 HelperLoadRecords.RolesDatagridView(dtRoles, dgRoles);
-
-                lblRecordCount.Text = dgRoles.Rows.Count.ToString();
+                if (dgRoles.Rows.Count >= 1)
+                {
+                    DataGridViewButtonColumn button = new DataGridViewButtonColumn();
+                    {
+                        button.Name = "btnAddPermissions";
+                        button.HeaderText = "Manage";
+                        button.Text = "Add Permissions";
+                        button.UseColumnTextForButtonValue = true;
+                        button.FlatStyle = FlatStyle.Standard;
+                        button.CellTemplate.Style.BackColor = Color.Honeydew;
+                        this.dgRoles.Columns.Insert(4, button);
+                    }
+                }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 
         }
 
@@ -140,5 +177,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
             }
         }
+
+        
     }
 }

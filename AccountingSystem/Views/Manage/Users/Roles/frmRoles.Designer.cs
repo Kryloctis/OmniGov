@@ -178,6 +178,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.txtSearch.PlaceholderText = "Search";
             this.txtSearch.Size = new System.Drawing.Size(256, 27);
             this.txtSearch.TabIndex = 100;
+            
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // frmRoles
