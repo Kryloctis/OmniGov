@@ -296,5 +296,44 @@ namespace AccountingSystem
             datagrid.Columns[4].Visible = false;
         }
 
+        #region Roles
+        internal static void RolesDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].HeaderText = "Role Name";
+            datagrid.Columns[2].Visible = false;
+            datagrid.Columns[3].Visible = false;
+
+
+
+
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        #endregion
+
+        #region Users
+        internal static void UsersDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].HeaderText = "Firstname";
+            datagrid.Columns[2].HeaderText = "MI";
+            datagrid.Columns[3].HeaderText = "Lastname";
+            datagrid.Columns[4].HeaderText = "Username";
+            datagrid.Columns[5].HeaderText = "Role";
+            datagrid.Columns[6].Visible = false;
+            datagrid.Columns[7].Visible = false;
+
+
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        #endregion
+        internal static void AddedPermissionsDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].HeaderText = "Permission Name";
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
     }
 }
