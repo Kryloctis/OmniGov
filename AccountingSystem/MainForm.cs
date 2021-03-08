@@ -32,11 +32,6 @@ namespace AccountingSystem
             _ = new frmFunds().ShowDialog();
         }
 
-
-
-
-
-
         private void menuChartOfAccounts_Click(object sender, EventArgs e)
         {
             _ = new frmChartOfAccounts().ShowDialog();

@@ -103,12 +103,14 @@ namespace AccountingSystem
 			this.menuUserList.Name = "menuUserList";
 			this.menuUserList.Size = new System.Drawing.Size(111, 22);
 			this.menuUserList.Text = "List...";
+			this.menuUserList.Click += new System.EventHandler(this.menuUserList_Click);
 			// 
 			// menuRoles
 			// 
 			this.menuRoles.Name = "menuRoles";
 			this.menuRoles.Size = new System.Drawing.Size(111, 22);
 			this.menuRoles.Text = "Roles...";
+			this.menuRoles.Click += new System.EventHandler(this.menuRoles_Click);
 			// 
 			// menuCollectingOfficer
 			// 
