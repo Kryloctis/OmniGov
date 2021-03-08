@@ -1,7 +1,7 @@
 ﻿
-namespace AccountingSystem.Views.Manage.Funds
+namespace AccountingSystem.Views.Manage.Users.Roles
 {
-    partial class frmFundAdd
+    partial class frmRolesAdd
     {
         /// <summary>
         /// Required designer variable.
@@ -29,19 +29,13 @@ namespace AccountingSystem.Views.Manage.Funds
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFundAdd));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRolesAdd));
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.ucRoles1 = new AccountingSystem.Views.Manage.Users.Roles.ucRoles();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // ucFunds1
-            // 
-            this.ucFunds1.Location = new System.Drawing.Point(8, -3);
-            this.ucFunds1.Name = "ucFunds1";
-            this.ucFunds1.Size = new System.Drawing.Size(401, 69);
-            this.ucFunds1.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
@@ -57,6 +51,7 @@ namespace AccountingSystem.Views.Manage.Funds
             // 
             // btnCancel
             // 
+            this.btnCancel.CausesValidation = false;
             this.btnCancel.Location = new System.Drawing.Point(377, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -68,6 +63,7 @@ namespace AccountingSystem.Views.Manage.Funds
             // 
             // btnSave
             // 
+            this.btnSave.CausesValidation = false;
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSave.Location = new System.Drawing.Point(277, 3);
@@ -77,9 +73,16 @@ namespace AccountingSystem.Views.Manage.Funds
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click_1);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // frmFundAdd
+            // ucRoles1
+            // 
+            this.ucRoles1.Location = new System.Drawing.Point(0, 6);
+            this.ucRoles1.Name = "ucRoles1";
+            this.ucRoles1.Size = new System.Drawing.Size(471, 80);
+            this.ucRoles1.TabIndex = 3;
+            // 
+            // frmRolesAdd
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -87,14 +90,14 @@ namespace AccountingSystem.Views.Manage.Funds
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(474, 128);
+            this.Controls.Add(this.ucRoles1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximumSize = new System.Drawing.Size(431, 135);
-            this.MinimumSize = new System.Drawing.Size(431, 135);
-            this.Name = "frmFundAdd";
+            this.MinimumSize = new System.Drawing.Size(492, 175);
+            this.Name = "frmRolesAdd";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Fund";
-            this.Load += new System.EventHandler(this.frmFundAdd_Load);
+            this.Text = "Add Roles";
+            this.Load += new System.EventHandler(this.frmRolesAdd_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -102,9 +105,9 @@ namespace AccountingSystem.Views.Manage.Funds
 
         #endregion
 
-        private ucFunds ucFunds1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
+        private ucRoles ucRoles1;
     }
 }

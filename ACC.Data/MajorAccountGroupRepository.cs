@@ -13,6 +13,7 @@ namespace ACC.Data
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "major_account_group";
         private readonly string viewTableName = "view_major_account_group";
+        
 
         public MajorAccountGroupRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -33,7 +34,7 @@ namespace ACC.Data
                 throw;
             }
         }
-
+       
         public DataTable GetViewRecords()
         {
             try

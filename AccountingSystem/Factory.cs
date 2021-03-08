@@ -27,6 +27,10 @@ namespace AccountingSystem
         internal static IFunctionalClassificationServiceRepository FunctionalClassificationServiceRepository() => new FunctionalClassificationServiceRepository(new MySqlGenericCommands());
         internal static IFunctionProgramProjectRepository FunctionProgramProjectRepository() => new FunctionProgramProjectRepository(new MySqlGenericCommands());
         internal static ICollectingOfficerRepository CollectingOfficerRepository() => new CollectingOfficerRepository(new MySqlGenericCommands());
+        internal static IRolesRepository RolesRepository() => new RolesRepository(new MySqlGenericCommands());
+        internal static IUsersRepository UsersRepository() => new UsersRepository(new MySqlGenericCommands());
+        internal static IPermissionsRepository PermissionsRepository() => new PermissionsRepository(new MySqlGenericCommands());
+
         internal static IError CreateErrors(Array errors) => new Error(errors);
     }
 }

@@ -12,6 +12,8 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "account_group";
+        
+
 
         public AccountGroupRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -49,7 +51,7 @@ namespace ACC.Data
 
             return record;
         }
-
+       
         public DataTable GetRecords()
         {
             try
@@ -64,6 +66,7 @@ namespace ACC.Data
                 throw;
             }
         }
+        
 
         public DataTable GetRecordsBySearch(string searchText)
         {
