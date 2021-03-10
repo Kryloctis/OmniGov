@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ACC.Domain.Interfaces;
+using ACC.Data;
+
+namespace AccountingSystem
+{
+    public static class Factory
+    {
+        public static ISubsidiaryLedgerAccountsRepository SubsidiaryLedgerAccountsRepository() => new SubsidiaryLedgerAccountsRepository(new MySqlGenericCommands());
+
+        public static IGeneralLedgerAccountsRepository GeneralLedgerAccountsRepository() => new GeneralLedgerAccountsRepository(new MySqlGenericCommands());
+
+        public static ISubMajorAccountGroupRepository SubMajorAccountGroupRepository() => new SubMajorAccountGroupRepository(new MySqlGenericCommands());
+
+        public static IMajorAccountGroupRepository MajorAccountGroupRepository() => new MajorAccountGroupRepository(new MySqlGenericCommands());
+
+        public static IAccountGroupRepository AccountGroupRepository() => new AccountGroupRepository(new MySqlGenericCommands());
+
+        public static IJournalsRepository JournalsRepository() => new JournalsRepository(new MySqlGenericCommands());
+        public static IFundsRepository FundsRepository() => new FundsRepository(new MySqlGenericCommands());
+        public static IAllotmentClassesRepository AllotmentClassesRepository() => new AllotmentClassesRepository(new MySqlGenericCommands());
+        public static IFunctionalClassificationRepository FunctionalClassificationRepository() => new FunctionalClassificationRepository(new MySqlGenericCommands());
+        public static IFunctionalClassificationServiceRepository FunctionalClassificationServiceRepository() => new FunctionalClassificationServiceRepository(new MySqlGenericCommands());
+        public static IFunctionProgramProjectRepository FunctionProgramProjectRepository() => new FunctionProgramProjectRepository(new MySqlGenericCommands());
+        public static ICollectingOfficerRepository CollectingOfficerRepository() => new CollectingOfficerRepository(new MySqlGenericCommands());
+        public static IRolesRepository RolesRepository() => new RolesRepository(new MySqlGenericCommands());
+        public static IUsersRepository UsersRepository() => new UsersRepository(new MySqlGenericCommands());
+        public static IPermissionsRepository PermissionsRepository() => new PermissionsRepository(new MySqlGenericCommands());
+
+        public static IError CreateErrors(Array errors) => new Error(errors);
+    }
+}
