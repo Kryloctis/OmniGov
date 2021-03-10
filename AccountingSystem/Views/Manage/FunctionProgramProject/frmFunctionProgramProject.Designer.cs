@@ -80,7 +80,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.toolStripLabel1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(982, 51);
+            this.toolStrip1.Size = new System.Drawing.Size(859, 50);
             this.toolStrip1.TabIndex = 7;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(50, 48);
+            this.btnAdd.Size = new System.Drawing.Size(42, 47);
             this.btnAdd.Text = "Add...";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
@@ -101,7 +101,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(48, 48);
+            this.btnEdit.Size = new System.Drawing.Size(40, 47);
             this.btnEdit.Text = "Edit...";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
@@ -112,7 +112,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(57, 48);
+            this.btnDelete.Size = new System.Drawing.Size(44, 47);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
@@ -125,7 +125,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.txtSearch.ForeColor = System.Drawing.Color.Black;
             this.txtSearch.Margin = new System.Windows.Forms.Padding(1, 0, 10, 0);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(250, 51);
+            this.txtSearch.Size = new System.Drawing.Size(219, 50);
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // toolStripLabel1
@@ -133,7 +133,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripLabel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(53, 48);
+            this.toolStripLabel1.Size = new System.Drawing.Size(42, 47);
             this.toolStripLabel1.Text = "Search";
             this.toolStripLabel1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
@@ -146,11 +146,12 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.tabControlFunctionProgramProject.Controls.Add(this.tabFunctionalClassification);
             this.tabControlFunctionProgramProject.Controls.Add(this.tabFunctionalClassificationService);
             this.tabControlFunctionProgramProject.Controls.Add(this.tabFunctionProgramProject);
-            this.tabControlFunctionProgramProject.Location = new System.Drawing.Point(11, 64);
+            this.tabControlFunctionProgramProject.Location = new System.Drawing.Point(10, 48);
+            this.tabControlFunctionProgramProject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControlFunctionProgramProject.Multiline = true;
             this.tabControlFunctionProgramProject.Name = "tabControlFunctionProgramProject";
             this.tabControlFunctionProgramProject.SelectedIndex = 0;
-            this.tabControlFunctionProgramProject.Size = new System.Drawing.Size(958, 561);
+            this.tabControlFunctionProgramProject.Size = new System.Drawing.Size(838, 421);
             this.tabControlFunctionProgramProject.TabIndex = 8;
             this.tabControlFunctionProgramProject.SelectedIndexChanged += new System.EventHandler(this.dgFunctionalClassification_SelectedIndexChanged);
             this.tabControlFunctionProgramProject.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControlFunctionProgramProject_Selected);
@@ -158,9 +159,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             // tabFunctionalClassification
             // 
             this.tabFunctionalClassification.Controls.Add(this.dgFunctionalClassification);
-            this.tabFunctionalClassification.Location = new System.Drawing.Point(4, 32);
+            this.tabFunctionalClassification.Location = new System.Drawing.Point(4, 27);
+            this.tabFunctionalClassification.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabFunctionalClassification.Name = "tabFunctionalClassification";
-            this.tabFunctionalClassification.Size = new System.Drawing.Size(950, 525);
+            this.tabFunctionalClassification.Size = new System.Drawing.Size(830, 390);
             this.tabFunctionalClassification.TabIndex = 2;
             this.tabFunctionalClassification.Text = "Functional Classifications";
             this.tabFunctionalClassification.UseVisualStyleBackColor = true;
@@ -170,10 +172,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.dgFunctionalClassification.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgFunctionalClassification.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgFunctionalClassification.Location = new System.Drawing.Point(0, 0);
+            this.dgFunctionalClassification.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgFunctionalClassification.Name = "dgFunctionalClassification";
             this.dgFunctionalClassification.RowHeadersWidth = 51;
             this.dgFunctionalClassification.RowTemplate.Height = 29;
-            this.dgFunctionalClassification.Size = new System.Drawing.Size(950, 525);
+            this.dgFunctionalClassification.Size = new System.Drawing.Size(830, 390);
             this.dgFunctionalClassification.TabIndex = 5;
             this.dgFunctionalClassification.SelectionChanged += new System.EventHandler(this.dgFunctionalClassification_SelectionChanged);
             // 
@@ -183,10 +186,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.tabFunctionalClassificationService.Controls.Add(this.cmbSectorName);
             this.tabFunctionalClassificationService.Controls.Add(this.dgFuntionalClassificationService);
             this.tabFunctionalClassificationService.Controls.Add(this.btnLoadAllFsc);
-            this.tabFunctionalClassificationService.Location = new System.Drawing.Point(4, 32);
+            this.tabFunctionalClassificationService.Location = new System.Drawing.Point(4, 27);
+            this.tabFunctionalClassificationService.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabFunctionalClassificationService.Name = "tabFunctionalClassificationService";
-            this.tabFunctionalClassificationService.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFunctionalClassificationService.Size = new System.Drawing.Size(950, 525);
+            this.tabFunctionalClassificationService.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabFunctionalClassificationService.Size = new System.Drawing.Size(830, 390);
             this.tabFunctionalClassificationService.TabIndex = 0;
             this.tabFunctionalClassificationService.Text = "Functional Classification Service";
             this.tabFunctionalClassificationService.UseVisualStyleBackColor = true;
@@ -194,9 +198,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 7);
+            this.label1.Location = new System.Drawing.Point(3, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(152, 20);
+            this.label1.Size = new System.Drawing.Size(120, 15);
             this.label1.TabIndex = 14;
             this.label1.Text = "Load by Sector Name";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -205,10 +209,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             // 
             this.cmbSectorName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSectorName.FormattingEnabled = true;
-            this.cmbSectorName.Location = new System.Drawing.Point(161, 4);
-            this.cmbSectorName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cmbSectorName.Location = new System.Drawing.Point(141, 3);
             this.cmbSectorName.Name = "cmbSectorName";
-            this.cmbSectorName.Size = new System.Drawing.Size(270, 28);
+            this.cmbSectorName.Size = new System.Drawing.Size(237, 23);
             this.cmbSectorName.TabIndex = 16;
             this.cmbSectorName.SelectionChangeCommitted += new System.EventHandler(this.cmbSectorName_SelectionChangeCommitted_2);
             // 
@@ -218,22 +221,20 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgFuntionalClassificationService.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgFuntionalClassificationService.Location = new System.Drawing.Point(3, 40);
-            this.dgFuntionalClassificationService.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgFuntionalClassificationService.Location = new System.Drawing.Point(3, 30);
             this.dgFuntionalClassificationService.Name = "dgFuntionalClassificationService";
             this.dgFuntionalClassificationService.RowHeadersWidth = 51;
             this.dgFuntionalClassificationService.RowTemplate.Height = 25;
-            this.dgFuntionalClassificationService.Size = new System.Drawing.Size(944, 481);
+            this.dgFuntionalClassificationService.Size = new System.Drawing.Size(826, 361);
             this.dgFuntionalClassificationService.TabIndex = 17;
             this.dgFuntionalClassificationService.SelectionChanged += new System.EventHandler(this.dgFuntionalClassificationService_SelectionChanged_1);
             // 
             // btnLoadAllFsc
             // 
             this.btnLoadAllFsc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoadAllFsc.Location = new System.Drawing.Point(861, 4);
-            this.btnLoadAllFsc.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnLoadAllFsc.Location = new System.Drawing.Point(753, 3);
             this.btnLoadAllFsc.Name = "btnLoadAllFsc";
-            this.btnLoadAllFsc.Size = new System.Drawing.Size(86, 29);
+            this.btnLoadAllFsc.Size = new System.Drawing.Size(75, 22);
             this.btnLoadAllFsc.TabIndex = 15;
             this.btnLoadAllFsc.Text = "Load All";
             this.btnLoadAllFsc.UseVisualStyleBackColor = true;
@@ -245,10 +246,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.tabFunctionProgramProject.Controls.Add(this.cmbServiceName);
             this.tabFunctionProgramProject.Controls.Add(this.dgFunctionalProgramProject);
             this.tabFunctionProgramProject.Controls.Add(this.btnLoadAllFpp);
-            this.tabFunctionProgramProject.Location = new System.Drawing.Point(4, 32);
+            this.tabFunctionProgramProject.Location = new System.Drawing.Point(4, 27);
+            this.tabFunctionProgramProject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabFunctionProgramProject.Name = "tabFunctionProgramProject";
-            this.tabFunctionProgramProject.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFunctionProgramProject.Size = new System.Drawing.Size(950, 525);
+            this.tabFunctionProgramProject.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabFunctionProgramProject.Size = new System.Drawing.Size(830, 390);
             this.tabFunctionProgramProject.TabIndex = 1;
             this.tabFunctionProgramProject.Text = "Function Program Project";
             this.tabFunctionProgramProject.UseVisualStyleBackColor = true;
@@ -256,9 +258,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 7);
+            this.label2.Location = new System.Drawing.Point(3, 5);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(157, 20);
+            this.label2.Size = new System.Drawing.Size(124, 15);
             this.label2.TabIndex = 17;
             this.label2.Text = "Load by Service Name";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -267,10 +269,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             // 
             this.cmbServiceName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbServiceName.FormattingEnabled = true;
-            this.cmbServiceName.Location = new System.Drawing.Point(166, 4);
-            this.cmbServiceName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cmbServiceName.Location = new System.Drawing.Point(145, 3);
             this.cmbServiceName.Name = "cmbServiceName";
-            this.cmbServiceName.Size = new System.Drawing.Size(270, 28);
+            this.cmbServiceName.Size = new System.Drawing.Size(237, 23);
             this.cmbServiceName.TabIndex = 19;
             this.cmbServiceName.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
             // 
@@ -280,21 +281,21 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgFunctionalProgramProject.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgFunctionalProgramProject.Location = new System.Drawing.Point(3, 40);
+            this.dgFunctionalProgramProject.Location = new System.Drawing.Point(3, 30);
+            this.dgFunctionalProgramProject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgFunctionalProgramProject.Name = "dgFunctionalProgramProject";
             this.dgFunctionalProgramProject.RowHeadersWidth = 51;
             this.dgFunctionalProgramProject.RowTemplate.Height = 29;
-            this.dgFunctionalProgramProject.Size = new System.Drawing.Size(944, 482);
+            this.dgFunctionalProgramProject.Size = new System.Drawing.Size(826, 362);
             this.dgFunctionalProgramProject.TabIndex = 5;
             this.dgFunctionalProgramProject.SelectionChanged += new System.EventHandler(this.dgFunctionalProgramProject_SelectionChanged);
             // 
             // btnLoadAllFpp
             // 
             this.btnLoadAllFpp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoadAllFpp.Location = new System.Drawing.Point(861, 4);
-            this.btnLoadAllFpp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnLoadAllFpp.Location = new System.Drawing.Point(753, 3);
             this.btnLoadAllFpp.Name = "btnLoadAllFpp";
-            this.btnLoadAllFpp.Size = new System.Drawing.Size(86, 29);
+            this.btnLoadAllFpp.Size = new System.Drawing.Size(75, 22);
             this.btnLoadAllFpp.TabIndex = 18;
             this.btnLoadAllFpp.Text = "Load All";
             this.btnLoadAllFpp.UseVisualStyleBackColor = true;
@@ -311,9 +312,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.lblCreatedAt,
             this.toolStripStatusLabel3,
             this.lblUpdatedAt});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 641);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 478);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(982, 26);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(859, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 9;
             this.statusStrip1.Text = "statusStrip1";
@@ -321,54 +323,53 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(65, 20);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
             this.toolStripStatusLabel1.Text = "Records:";
             // 
             // lblRecordCount
             // 
             this.lblRecordCount.Name = "lblRecordCount";
-            this.lblRecordCount.Size = new System.Drawing.Size(17, 20);
+            this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
             this.lblRecordCount.Text = "0";
             // 
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(717, 20);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(649, 17);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(81, 20);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(64, 17);
             this.toolStripStatusLabel2.Text = "Created at:";
             // 
             // lblCreatedAt
             // 
             this.lblCreatedAt.Name = "lblCreatedAt";
-            this.lblCreatedAt.Size = new System.Drawing.Size(0, 20);
+            this.lblCreatedAt.Size = new System.Drawing.Size(0, 17);
             // 
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(87, 20);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(68, 17);
             this.toolStripStatusLabel3.Text = "Updated at:";
             // 
             // lblUpdatedAt
             // 
             this.lblUpdatedAt.Name = "lblUpdatedAt";
-            this.lblUpdatedAt.Size = new System.Drawing.Size(0, 20);
+            this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
             // 
             // frmFunctionProgramProject
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(982, 667);
+            this.ClientSize = new System.Drawing.Size(859, 500);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControlFunctionProgramProject);
             this.Controls.Add(this.toolStrip1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(997, 703);
+            this.MinimumSize = new System.Drawing.Size(874, 537);
             this.Name = "frmFunctionProgramProject";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Function, Program, Project...";

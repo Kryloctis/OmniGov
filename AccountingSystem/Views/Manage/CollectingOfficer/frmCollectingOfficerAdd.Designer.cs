@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 119);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 128);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -80,7 +80,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.ucCollectingOfficer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucCollectingOfficer1.Location = new System.Drawing.Point(0, 0);
             this.ucCollectingOfficer1.Name = "ucCollectingOfficer1";
-            this.ucCollectingOfficer1.Size = new System.Drawing.Size(448, 119);
+            this.ucCollectingOfficer1.Size = new System.Drawing.Size(448, 128);
             this.ucCollectingOfficer1.TabIndex = 4;
             // 
             // frmCollectingOfficerAdd
@@ -90,12 +90,10 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(448, 148);
+            this.ClientSize = new System.Drawing.Size(448, 157);
             this.Controls.Add(this.ucCollectingOfficer1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximumSize = new System.Drawing.Size(464, 187);
-            this.MinimumSize = new System.Drawing.Size(464, 187);
             this.Name = "frmCollectingOfficerAdd";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Collecting Officer";

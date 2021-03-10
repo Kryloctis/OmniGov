@@ -39,9 +39,10 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // 
             // ucSubsidiary1
             // 
-            this.ucSubsidiary1.Location = new System.Drawing.Point(12, 12);
+            this.ucSubsidiary1.Location = new System.Drawing.Point(10, 9);
+            this.ucSubsidiary1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucSubsidiary1.Name = "ucSubsidiary1";
-            this.ucSubsidiary1.Size = new System.Drawing.Size(461, 122);
+            this.ucSubsidiary1.Size = new System.Drawing.Size(403, 92);
             this.ucSubsidiary1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -50,18 +51,20 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 99);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 74);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(484, 36);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(424, 27);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(387, 3);
+            this.btnCancel.Location = new System.Drawing.Point(339, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnCancel.Size = new System.Drawing.Size(94, 29);
+            this.btnCancel.Size = new System.Drawing.Size(82, 22);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -70,10 +73,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // 
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(287, 3);
+            this.btnSave.Location = new System.Drawing.Point(251, 2);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSave.Size = new System.Drawing.Size(94, 29);
+            this.btnSave.Size = new System.Drawing.Size(82, 22);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -82,14 +86,15 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // frmSubsidiaryAdd
             // 
             this.AcceptButton = this.btnSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(484, 135);
+            this.ClientSize = new System.Drawing.Size(424, 101);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ucSubsidiary1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmSubsidiaryAdd";

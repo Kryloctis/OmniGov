@@ -43,18 +43,20 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 92);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 79);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(474, 36);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(415, 27);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(377, 3);
+            this.btnCancel.Location = new System.Drawing.Point(330, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnCancel.Size = new System.Drawing.Size(94, 29);
+            this.btnCancel.Size = new System.Drawing.Size(82, 22);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -63,10 +65,11 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             // 
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(277, 3);
+            this.btnSave.Location = new System.Drawing.Point(242, 2);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSave.Size = new System.Drawing.Size(94, 29);
+            this.btnSave.Size = new System.Drawing.Size(82, 22);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -74,22 +77,24 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             // 
             // ucAllotmentClasses1
             // 
-            this.ucAllotmentClasses1.Location = new System.Drawing.Point(0, 1);
+            this.ucAllotmentClasses1.Location = new System.Drawing.Point(12, 11);
+            this.ucAllotmentClasses1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucAllotmentClasses1.Name = "ucAllotmentClasses1";
-            this.ucAllotmentClasses1.Size = new System.Drawing.Size(474, 88);
+            this.ucAllotmentClasses1.Size = new System.Drawing.Size(400, 66);
             this.ucAllotmentClasses1.TabIndex = 4;
             // 
             // frmAllotmentClassesAdd
             // 
             this.AcceptButton = this.btnSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(474, 128);
+            this.ClientSize = new System.Drawing.Size(415, 106);
             this.Controls.Add(this.ucAllotmentClasses1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmAllotmentClassesAdd";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Allotment Class";

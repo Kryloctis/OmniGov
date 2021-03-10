@@ -58,7 +58,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnDelete});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(699, 46);
+            this.toolStrip1.Size = new System.Drawing.Size(699, 50);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -68,7 +68,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(42, 43);
+            this.btnAdd.Size = new System.Drawing.Size(42, 47);
             this.btnAdd.Text = "Add...";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(40, 43);
+            this.btnEdit.Size = new System.Drawing.Size(40, 47);
             this.btnEdit.Text = "Edit...";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(44, 43);
+            this.btnDelete.Size = new System.Drawing.Size(44, 47);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -101,13 +101,13 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgCollectingOfficer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgCollectingOfficer.Location = new System.Drawing.Point(9, 49);
+            this.dgCollectingOfficer.Location = new System.Drawing.Point(9, 52);
             this.dgCollectingOfficer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgCollectingOfficer.Name = "dgCollectingOfficer";
             this.dgCollectingOfficer.RowHeadersWidth = 51;
             this.dgCollectingOfficer.RowTemplate.Height = 29;
             this.dgCollectingOfficer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgCollectingOfficer.Size = new System.Drawing.Size(680, 328);
+            this.dgCollectingOfficer.Size = new System.Drawing.Size(680, 325);
             this.dgCollectingOfficer.TabIndex = 7;
             this.dgCollectingOfficer.SelectionChanged += new System.EventHandler(this.dgCollectingOfficer_SelectionChanged);
             // 
