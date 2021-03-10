@@ -57,6 +57,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.dgOthersFPP.RowTemplate.Height = 25;
             this.dgOthersFPP.Size = new System.Drawing.Size(776, 368);
             this.dgOthersFPP.TabIndex = 0;
+            this.dgOthersFPP.SelectionChanged += new System.EventHandler(this.dgOthersFPP_SelectionChanged);
             // 
             // toolStrip1
             // 
@@ -203,6 +204,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage> Function, Program, Project> Others Function Program Project";
+            this.Load += new System.EventHandler(this.frmOthersFunctionProgramProject_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgOthersFPP)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

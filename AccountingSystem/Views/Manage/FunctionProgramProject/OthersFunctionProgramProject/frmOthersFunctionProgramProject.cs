@@ -18,6 +18,13 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             InitializeComponent();
         }
 
+        internal void LoadRecords() 
+        {
+            var dtOthersFPP = Factory.OthersFPPRepository().GetRecords();
+            HelperLoadRecords.OthersFPPDatagridView(dtOthersFPP, dgOthersFPP);
+            lblRecordCount.Text = dgOthersFPP.Rows.Count.ToString();
+        }
+
         private void ShowOthersFunctionProgramProjectAdd() 
         {
             var frmOthersFunctionProgramProjectAdd = new frmOthersFunctionProgramProjectAdd();
@@ -28,6 +35,18 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
         private void toolStripBtnAdd_Click(object sender, EventArgs e) 
         {
             ShowOthersFunctionProgramProjectAdd();
+        }
+
+        private void frmOthersFunctionProgramProject_Load(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
+
+        private void dgOthersFPP_SelectionChanged(object sender, EventArgs e)
+        {
+            byte[] columnIndexTimestamp = { 3, 4 };
+            Helper.ShowRecordTimestamp(dgOthersFPP, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgOthersFPP, toolStripBtnEdit, toolStripBtnDelete); 
         }
     }
 }
