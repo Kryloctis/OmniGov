@@ -143,9 +143,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControlFunctionProgramProject.Appearance = System.Windows.Forms.TabAppearance.Buttons;
-            this.tabControlFunctionProgramProject.Controls.Add(this.tabFunctionalClassification);
-            this.tabControlFunctionProgramProject.Controls.Add(this.tabFunctionalClassificationService);
             this.tabControlFunctionProgramProject.Controls.Add(this.tabFunctionProgramProject);
+            this.tabControlFunctionProgramProject.Controls.Add(this.tabFunctionalClassificationService);
+            this.tabControlFunctionProgramProject.Controls.Add(this.tabFunctionalClassification);
             this.tabControlFunctionProgramProject.Location = new System.Drawing.Point(10, 48);
             this.tabControlFunctionProgramProject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControlFunctionProgramProject.Multiline = true;
