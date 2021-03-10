@@ -113,8 +113,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-
-
         private void frmFunctionProgramProject_Load(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Normal;
@@ -133,8 +131,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
 
         }
-
-
 
         private void DeleteFunctionalClassificationRecords()
         {
@@ -213,7 +209,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                 Helper.MessageBoxError(ex.Message);
             }
         }
-
 
         private void DeleteFunctionProgramProjectDGRecords()
         {
@@ -419,7 +414,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             LoadFunctionalClassificationServicesRecords();
         }
 
-
         private void button1_Click(object sender, EventArgs e)
         {
             LoadFunctionProgramProjectRecords();
@@ -441,9 +435,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             Helper.ShowRecordTimestamp(dgFuntionalClassificationService, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgFuntionalClassificationService, btnEdit, btnDelete);
         }
-
        
-
 		private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
 		{
             LoadFunctionProgramProjectRecordsByGroup();
@@ -451,7 +443,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
         private void dgFunctionalProgramProject_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-           _ = new frmOthersFunctionProgramProject().ShowDialog();
+            int functionProgramProjectID = Convert.ToInt32(dgFunctionalProgramProject.SelectedCells[0].Value);
+            var frmOthersFunctionProgramProject = new frmOthersFunctionProgramProject();
+            frmOthersFunctionProgramProject.functionProgramProjectID = functionProgramProjectID;
+            frmOthersFunctionProgramProject.ShowDialog();
         }
     }
 }

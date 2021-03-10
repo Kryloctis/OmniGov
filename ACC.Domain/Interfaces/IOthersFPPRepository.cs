@@ -7,5 +7,7 @@ namespace ACC.Domain.Interfaces
 {
     public interface IOthersFPPRepository : IRepository<OthersFPPModel>
     {
+        bool NameExist(string name);
+        bool NameExist(int id, string name);
     }
 }

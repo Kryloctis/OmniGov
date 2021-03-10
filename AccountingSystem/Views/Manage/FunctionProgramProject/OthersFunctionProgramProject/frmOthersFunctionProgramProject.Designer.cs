@@ -81,11 +81,13 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.toolStripBtnAdd.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolStripBtnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripBtnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnAdd.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
             this.toolStripBtnAdd.Name = "toolStripBtnAdd";
             this.toolStripBtnAdd.Size = new System.Drawing.Size(42, 47);
             this.toolStripBtnAdd.Text = "Add...";
             this.toolStripBtnAdd.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.toolStripBtnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripBtnAdd.Click += new System.EventHandler(this.toolStripBtnAdd_Click);
             // 
             // toolStripBtnEdit
             // 
