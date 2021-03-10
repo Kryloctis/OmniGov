@@ -32,6 +32,13 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                 LoadFunctionProgramProjectRecords();
         }
 
+        private void ShowOthersFPP() 
+        {
+            int functionProgramProjectID = Convert.ToInt32(dgFunctionalProgramProject.SelectedCells[0].Value);
+            var frmOthersFunctionProgramProject = new frmOthersFunctionProgramProject();
+            frmOthersFunctionProgramProject.functionProgramProjectID = functionProgramProjectID;
+            frmOthersFunctionProgramProject.ShowDialog();
+        }
 
         internal void LoadFunctionalClassificationRecords()
         {
@@ -358,6 +365,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                 DeleteFunctionProgramProjectDGRecords();
         }
 
+        private void toolStripBtnOthers_Click(object sender, EventArgs e) 
+        {
+            ShowOthersFPP();
+        }
+
         private void dgFunctionalClassification_SelectionChanged(object sender, EventArgs e)
         {
             byte[] columnIndexTimestamp = { 3, 4 };
@@ -375,6 +387,15 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             byte[] columnIndexTimestamp = { 4, 5 };
             Helper.ShowRecordTimestamp(dgFunctionalProgramProject, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgFunctionalProgramProject, btnEdit, btnDelete);
+
+            if (dgFunctionalProgramProject.SelectedRows.Count == 1) 
+            {
+                toolStripBtnOthers.Enabled = true;
+                return;
+            }
+
+            toolStripBtnOthers.Enabled = false;
+
         }
         public void LoadSectorNameComboBox()
         {
@@ -443,10 +464,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
         private void dgFunctionalProgramProject_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            int functionProgramProjectID = Convert.ToInt32(dgFunctionalProgramProject.SelectedCells[0].Value);
-            var frmOthersFunctionProgramProject = new frmOthersFunctionProgramProject();
-            frmOthersFunctionProgramProject.functionProgramProjectID = functionProgramProjectID;
-            frmOthersFunctionProgramProject.ShowDialog();
+            ShowOthersFPP();
         }
     }
 }

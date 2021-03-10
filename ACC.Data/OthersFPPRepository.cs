@@ -54,43 +54,43 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new NotImplementedException();
-        }
+            var record = new Dictionary<string, string>();
 
-        public DataTable GetRecords()
-        {
-            try
-            {
-                string query = $"SELECT id, function_program_project_id, name, created_at, updated_at FROM {tableName}";
-
-                var dtPermissions = new DataTable();
-                return mySqlGenericCommands.Fill(query, dtPermissions);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public DataTable GetRecordsBySearch(string searchText)
-        {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] {"@name", DbType.String, $"%{searchText}%"}
+                   new object[] {"@id", DbType.Int32, Id},
                 };
+                string query = $"SELECT name FROM {tableName} WHERE id = @id";
 
+                using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
 
-                string query = $"SELECT id, function_program_project_id, name, created_at, updated_at FROM {tableName} WHERE name LIKE @name";
-
-                var dtOthersFPP = new DataTable();
-                return mySqlGenericCommands.FillBySearch(query, dtOthersFPP, parameters);
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("name", item[0].ToString());
+                    }
+                }
             }
             catch (Exception)
             {
                 throw;
             }
+
+            return record;
+        }
+
+        public DataTable GetRecords()
+        {
+            throw new NotImplementedException();
+        }
+
+        public DataTable GetRecordsBySearch(string searchText)
+        {
+            throw new NotImplementedException();
         }
 
         public bool IdExist(int id)
@@ -119,7 +119,22 @@ namespace ACC.Data
 
         public bool Update(OthersFPPModel entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, entity.Id},
+                    new object[] { "@name", DbType.String, entity.Name},
+
+                };
+
+                string query = $"UPDATE {tableName} SET name = @name WHERE id = @id";
+                return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         #region Validations
@@ -169,6 +184,49 @@ namespace ACC.Data
             };
 
             return false;
+        }
+
+        public DataTable GetRecordsByID(int id)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@function_program_project_id", DbType.Int32, id }
+                };
+
+
+                string query = $"SELECT id, function_program_project_id, name, created_at, updated_at FROM {tableName} WHERE function_program_project_id = @function_program_project_id";
+
+                var dtOthersFPP = new DataTable();
+                return mySqlGenericCommands.FillBySearch(query, dtOthersFPP, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetRecorsBySearchAndID(int id, string searchtxt)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@function_program_project_id", DbType.Int32, id },
+                    new object[] {"@name", DbType.String, $"%{searchtxt}%"}
+                };
+
+
+                string query = $"SELECT id, function_program_project_id, name, created_at, updated_at FROM {tableName} WHERE function_program_project_id = @function_program_project_id AND name LIKE @name";
+
+                var dtOthersFPP = new DataTable();
+                return mySqlGenericCommands.FillBySearch(query, dtOthersFPP, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         #endregion Validations

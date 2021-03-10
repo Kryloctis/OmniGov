@@ -232,6 +232,7 @@ namespace AccountingSystem
                 tsBtnDelete.Text = "Delete";
             }
         }
+
         #endregion
 
         internal static void ShowRecordTimestamp(DataGridView dataGridView, byte[] index, ToolStripStatusLabel lblCreatedAt, ToolStripStatusLabel lblUpdatedAt)

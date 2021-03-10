@@ -13,6 +13,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
     public partial class ucOthersFunctionProgramProject : UserControl
     {
         internal int functionProgramProjectID = 0;
+        internal int othersFPPID = 0;
         public ucOthersFunctionProgramProject()
         {
             InitializeComponent();
@@ -38,18 +39,18 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             string name = txtName.Text.Trim();
             bool nameExist;
 
-            if (functionProgramProjectID == 0) 
+            if (othersFPPID == 0) 
             {
                 nameExist = Factory.OthersFPPRepository().NameExist(name);
             }
             else
             {
-                nameExist = Factory.OthersFPPRepository().NameExist(functionProgramProjectID, name);
+                nameExist = Factory.OthersFPPRepository().NameExist(othersFPPID, name);
             }
 
             if (nameExist) 
             {
-                epName.SetError(txtName, "Name you entered is not allowed. Already existed on your record.");
+                epName.SetError(txtName, "Name you entered is not allowed. Already exist on your record.");
                 e.Cancel = true;
             }
             

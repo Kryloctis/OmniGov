@@ -57,6 +57,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripBtnOthers = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.tabControlFunctionProgramProject.SuspendLayout();
             this.tabFunctionProgramProject.SuspendLayout();
@@ -76,6 +78,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.btnAdd,
             this.btnEdit,
             this.btnDelete,
+            this.toolStripSeparator1,
+            this.toolStripBtnOthers,
             this.txtSearch,
             this.toolStripLabel1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -361,6 +365,22 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.lblUpdatedAt.Name = "lblUpdatedAt";
             this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
+            // toolStripBtnOthers
+            // 
+            this.toolStripBtnOthers.Image = global::AccountingSystem.Properties.Resources.others;
+            this.toolStripBtnOthers.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripBtnOthers.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnOthers.Name = "toolStripBtnOthers";
+            this.toolStripBtnOthers.Size = new System.Drawing.Size(55, 47);
+            this.toolStripBtnOthers.Text = "Others...";
+            this.toolStripBtnOthers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripBtnOthers.Click += new System.EventHandler(this.toolStripBtnOthers_Click);
+            // 
             // frmFunctionProgramProject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -422,5 +442,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 		private System.Windows.Forms.ComboBox cmbSectorName;
 		private System.Windows.Forms.DataGridView dgFuntionalClassificationService;
 		private System.Windows.Forms.ComboBox cmbServiceName;
-	}
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton toolStripBtnOthers;
+    }
 }

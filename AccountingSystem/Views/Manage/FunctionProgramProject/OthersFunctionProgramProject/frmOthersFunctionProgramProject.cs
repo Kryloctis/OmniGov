@@ -13,7 +13,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
 {
     public partial class frmOthersFunctionProgramProject : Form
     {
-        internal int functionProgramProjectID;
+        internal int functionProgramProjectID = 0;
         public frmOthersFunctionProgramProject()
         {
             InitializeComponent();
@@ -26,11 +26,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             {
                 if (toolStripTxtSearch.Text.Length > 3 && !string.IsNullOrEmpty(toolStripTxtSearch.Text))
                 {
-                    dtOthersFPP = Factory.OthersFPPRepository().GetRecordsBySearch(toolStripTxtSearch.Text.Trim());
+                    dtOthersFPP = Factory.OthersFPPRepository().GetRecorsBySearchAndID(functionProgramProjectID, toolStripTxtSearch.Text.Trim());
                 }
                 else 
                 {
-                    dtOthersFPP = Factory.OthersFPPRepository().GetRecords();
+                    dtOthersFPP = Factory.OthersFPPRepository().GetRecordsByID(functionProgramProjectID);
                 }
 
                 HelperLoadRecords.OthersFPPDatagridView(dtOthersFPP, dgOthersFPP);
@@ -40,6 +40,17 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        private void ShowOthersFunctionProgramProjectEdit() 
+        {
+            int rowIndex = dgOthersFPP.CurrentCell.RowIndex;
+            var frmOthersFunctionProgramProjectEdit = new frmOthersFunctionProgramProjectEdit(this);
+            int othersFPPID = Convert.ToInt32(dgOthersFPP.Rows[rowIndex].Cells["id"].Value);
+
+            frmOthersFunctionProgramProjectEdit.ucOthersFunctionProgramProject1.functionProgramProjectID = functionProgramProjectID;
+            frmOthersFunctionProgramProjectEdit.ucOthersFunctionProgramProject1.othersFPPID = othersFPPID;
+            frmOthersFunctionProgramProjectEdit.ShowDialog();
         }
 
         private void ShowOthersFunctionProgramProjectAdd() 
@@ -52,6 +63,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
         private void toolStripBtnAdd_Click(object sender, EventArgs e) 
         {
             ShowOthersFunctionProgramProjectAdd();
+        }
+
+        private void toolStripBtnEdit_Click(object sender, EventArgs e) 
+        {
+            ShowOthersFunctionProgramProjectEdit();
         }
 
         private void toolStripBtnDelete_Click(object sender, EventArgs e) 

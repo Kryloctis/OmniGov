@@ -101,6 +101,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.toolStripBtnEdit.Text = "Edit...";
             this.toolStripBtnEdit.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.toolStripBtnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripBtnEdit.Click += new System.EventHandler(this.toolStripBtnEdit_Click);
             // 
             // toolStripBtnDelete
             // 
