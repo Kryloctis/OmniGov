@@ -74,7 +74,23 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] {"@name", DbType.String, $"%{searchText}%"}
+                };
+
+
+                string query = $"SELECT id, function_program_project_id, name, created_at, updated_at FROM {tableName} WHERE name LIKE @name";
+
+                var dtOthersFPP = new DataTable();
+                return mySqlGenericCommands.FillBySearch(query, dtOthersFPP, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool IdExist(int id)

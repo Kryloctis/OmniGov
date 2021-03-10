@@ -123,6 +123,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.toolStripTxtSearch.MaxLength = 100000000;
             this.toolStripTxtSearch.Name = "toolStripTxtSearch";
             this.toolStripTxtSearch.Size = new System.Drawing.Size(200, 50);
+            this.toolStripTxtSearch.TextChanged += new System.EventHandler(this.toolStripTxtSearch_TextChanged);
             // 
             // toolStripLabel1
             // 

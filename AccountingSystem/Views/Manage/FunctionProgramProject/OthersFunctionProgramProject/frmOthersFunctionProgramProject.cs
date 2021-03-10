@@ -21,9 +21,25 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
 
         internal void LoadRecords() 
         {
-            var dtOthersFPP = Factory.OthersFPPRepository().GetRecords();
-            HelperLoadRecords.OthersFPPDatagridView(dtOthersFPP, dgOthersFPP);
-            lblRecordCount.Text = dgOthersFPP.Rows.Count.ToString();
+            DataTable dtOthersFPP;
+            try
+            {
+                if (toolStripTxtSearch.Text.Length > 3 && !string.IsNullOrEmpty(toolStripTxtSearch.Text))
+                {
+                    dtOthersFPP = Factory.OthersFPPRepository().GetRecordsBySearch(toolStripTxtSearch.Text.Trim());
+                }
+                else 
+                {
+                    dtOthersFPP = Factory.OthersFPPRepository().GetRecords();
+                }
+
+                HelperLoadRecords.OthersFPPDatagridView(dtOthersFPP, dgOthersFPP);
+                lblRecordCount.Text = dgOthersFPP.Rows.Count.ToString();
+            }
+            catch (Exception ex) 
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void ShowOthersFunctionProgramProjectAdd() 
@@ -70,6 +86,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        private void toolStripTxtSearch_TextChanged(object sender, EventArgs e) 
+        {
+            LoadRecords();
         }
 
         private void frmOthersFunctionProgramProject_Load(object sender, EventArgs e)
