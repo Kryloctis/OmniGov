@@ -113,6 +113,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.toolStripBtnDelete.Text = "Delete";
             this.toolStripBtnDelete.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.toolStripBtnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripBtnDelete.Click += new System.EventHandler(this.toolStripBtnDelete_Click);
             // 
             // toolStripTxtSearch
             // 

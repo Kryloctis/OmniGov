@@ -13,9 +13,12 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
 {
     public partial class frmOthersFunctionProgramProjectAdd : Form
     {
-        public frmOthersFunctionProgramProjectAdd()
+        private frmOthersFunctionProgramProject _frmOthersFunctionProgramProject;
+
+        public frmOthersFunctionProgramProjectAdd(frmOthersFunctionProgramProject frmOthersFunctionProgramProject)
         {
             InitializeComponent();
+            _frmOthersFunctionProgramProject = frmOthersFunctionProgramProject;
         }
 
         private bool SaveData()
@@ -53,6 +56,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             if (SaveData()) 
             {
                 uc.ResetForm();
+                _frmOthersFunctionProgramProject.LoadRecords();
             }
         }
 
