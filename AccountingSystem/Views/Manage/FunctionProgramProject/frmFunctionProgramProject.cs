@@ -448,5 +448,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 		{
             LoadFunctionProgramProjectRecordsByGroup();
         }
-	}
+
+        private void dgFunctionalProgramProject_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            MessageBox.Show("Second Form");
+        }
+    }
 }
