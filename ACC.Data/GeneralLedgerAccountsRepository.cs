@@ -58,7 +58,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName} LIMIT 5";
+                string query = $"SELECT * FROM {tableName}";
 
                 var dtJournals = new DataTable();
                 return _dbGenericCommands.Fill(query, dtJournals);

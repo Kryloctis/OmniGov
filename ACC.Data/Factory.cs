@@ -10,6 +10,12 @@ namespace AccountingSystem
 {
     public static class Factory
     {
+        private static MySqlGenericCommands mySqlGenericCommands = new MySqlGenericCommands();
+
+        public static IJEVRepository JEVRepository() => new JEVRepository(mySqlGenericCommands, Factory.JEVAccountsRepository());
+
+        public static IJEVAccountsRepository JEVAccountsRepository() => new JEVAccountsRepository(mySqlGenericCommands);
+
         public static ISubsidiaryLedgerAccountsRepository SubsidiaryLedgerAccountsRepository() => new SubsidiaryLedgerAccountsRepository(new MySqlGenericCommands());
 
         public static IGeneralLedgerAccountsRepository GeneralLedgerAccountsRepository() => new GeneralLedgerAccountsRepository(new MySqlGenericCommands());
