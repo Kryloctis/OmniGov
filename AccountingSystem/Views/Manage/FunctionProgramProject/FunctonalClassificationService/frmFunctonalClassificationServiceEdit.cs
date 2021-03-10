@@ -68,7 +68,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
 
         private void frmFunctonalClassificationServiceEdit_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
+            Helper.LoadFormIconAccounting(this);
             ucFunctonalClassificationServices1.LoadSectorNameComboBox();
             LoadSelectedRecord();
         }

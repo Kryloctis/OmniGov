@@ -92,7 +92,7 @@ namespace AccountingSystem.Views.Manage.Funds
 
         private void frmFundEdit_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
+            Helper.LoadFormIconAccounting(this);
             LoadSelectedRecord();
         }
     }

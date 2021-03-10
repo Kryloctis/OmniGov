@@ -61,6 +61,16 @@ namespace AccountingSystem.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon accounting {
+            get {
+                object obj = ResourceManager.GetObject("accounting", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap add {
@@ -146,6 +156,16 @@ namespace AccountingSystem.Properties {
         internal static System.Drawing.Bitmap save14px {
             get {
                 object obj = ResourceManager.GetObject("save14px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap save28px {
+            get {
+                object obj = ResourceManager.GetObject("save28px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

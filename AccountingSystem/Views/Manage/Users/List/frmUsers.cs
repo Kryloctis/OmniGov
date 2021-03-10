@@ -52,7 +52,7 @@ namespace AccountingSystem.Views.Manage.Users.List
         private void frmUsers_Load(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Normal;
-            Helper.LoadFormIcon(this);
+            Helper.LoadFormIconAccounting(this);
             Helper.DatagridDefaultStyle(dgUsers);
             LoadRecords();
         }

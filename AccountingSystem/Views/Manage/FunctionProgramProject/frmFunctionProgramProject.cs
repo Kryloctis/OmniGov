@@ -118,7 +118,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         private void frmFunctionProgramProject_Load(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Normal;
-            Helper.LoadFormIcon(this);
+            Helper.LoadFormIconAccounting(this);
             Helper.DatagridDefaultStyle(dgFunctionalClassification);
             Helper.DatagridDefaultStyle(dgFuntionalClassificationService);
             LoadFunctionalClassificationServicesRecords();

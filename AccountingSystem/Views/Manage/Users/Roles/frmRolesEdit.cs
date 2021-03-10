@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
         private void frmRolesEdit_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
+            Helper.LoadFormIconAccounting(this);
             LoadSelectedRecord();
         }
     }

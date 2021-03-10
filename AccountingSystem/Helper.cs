@@ -11,9 +11,9 @@ namespace AccountingSystem
 {
     public class Helper
     {
-        public static void LoadFormIcon(Form form)
+        public static void LoadFormIconAccounting(Form form)
         {
-            //form.Icon = Properties.Resources.ZBSIcon;
+            form.Icon = Properties.Resources.accounting;
         }
 
         // apply the default styling of the datagridview

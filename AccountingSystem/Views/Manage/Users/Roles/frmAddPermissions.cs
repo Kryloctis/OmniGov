@@ -64,7 +64,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
         private void frmAddPermissions_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
+            Helper.LoadFormIconAccounting(this);
             ucPermissions1.LoadPermissions();
             ucPermissions1.LoadAddedPermissions();
             //ucPermissions1.LoadAddedPermissions(getroleId);

@@ -54,7 +54,7 @@ namespace AccountingSystem.Views.Manage.Journals
 
         private void frmJournalsAdd_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
+            Helper.LoadFormIconAccounting(this);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

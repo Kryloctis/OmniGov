@@ -80,7 +80,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
         private void frmFunctionalClassificationEdit_Load(object sender, EventArgs e)
         {
             this.Visible = true;
-            Helper.LoadFormIcon(this);
+            Helper.LoadFormIconAccounting(this);
             LoadSelectedRecord();
         }
 
