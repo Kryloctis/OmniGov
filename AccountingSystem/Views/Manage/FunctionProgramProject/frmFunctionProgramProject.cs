@@ -7,7 +7,7 @@ using AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassificat
 using AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService;
 using AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramProject;
 using System.Data;
-
+using AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject;
 
 namespace AccountingSystem.Views.Manage.FunctionProgramProject
 {
@@ -451,7 +451,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
         private void dgFunctionalProgramProject_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            MessageBox.Show("Second Form");
+           _ = new frmOthersFunctionProgramProject().ShowDialog();
         }
     }
 }
