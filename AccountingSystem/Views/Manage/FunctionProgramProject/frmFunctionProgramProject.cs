@@ -7,7 +7,7 @@ using AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassificat
 using AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService;
 using AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramProject;
 using System.Data;
-
+using AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject;
 
 namespace AccountingSystem.Views.Manage.FunctionProgramProject
 {
@@ -32,6 +32,13 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                 LoadFunctionProgramProjectRecords();
         }
 
+        private void ShowOthersFPP() 
+        {
+            int functionProgramProjectID = Convert.ToInt32(dgFunctionalProgramProject.SelectedCells[0].Value);
+            var frmOthersFunctionProgramProject = new frmOthersFunctionProgramProject();
+            frmOthersFunctionProgramProject.functionProgramProjectID = functionProgramProjectID;
+            frmOthersFunctionProgramProject.ShowDialog();
+        }
 
         internal void LoadFunctionalClassificationRecords()
         {
@@ -113,8 +120,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-
-
         private void frmFunctionProgramProject_Load(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Normal;
@@ -133,8 +138,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
 
         }
-
-
 
         private void DeleteFunctionalClassificationRecords()
         {
@@ -213,7 +216,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                 Helper.MessageBoxError(ex.Message);
             }
         }
-
 
         private void DeleteFunctionProgramProjectDGRecords()
         {
@@ -363,6 +365,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                 DeleteFunctionProgramProjectDGRecords();
         }
 
+        private void toolStripBtnOthers_Click(object sender, EventArgs e) 
+        {
+            ShowOthersFPP();
+        }
+
         private void dgFunctionalClassification_SelectionChanged(object sender, EventArgs e)
         {
             byte[] columnIndexTimestamp = { 3, 4 };
@@ -380,6 +387,15 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             byte[] columnIndexTimestamp = { 4, 5 };
             Helper.ShowRecordTimestamp(dgFunctionalProgramProject, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgFunctionalProgramProject, btnEdit, btnDelete);
+
+            if (dgFunctionalProgramProject.SelectedRows.Count == 1) 
+            {
+                toolStripBtnOthers.Enabled = true;
+                return;
+            }
+
+            toolStripBtnOthers.Enabled = false;
+
         }
         public void LoadSectorNameComboBox()
         {
@@ -419,7 +435,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             LoadFunctionalClassificationServicesRecords();
         }
 
-
         private void button1_Click(object sender, EventArgs e)
         {
             LoadFunctionProgramProjectRecords();
@@ -441,12 +456,15 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             Helper.ShowRecordTimestamp(dgFuntionalClassificationService, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgFuntionalClassificationService, btnEdit, btnDelete);
         }
-
        
-
 		private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
 		{
             LoadFunctionProgramProjectRecordsByGroup();
         }
-	}
+
+        private void dgFunctionalProgramProject_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            ShowOthersFPP();
+        }
+    }
 }
