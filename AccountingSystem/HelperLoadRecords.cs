@@ -391,5 +391,26 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
+        internal static void AddedPermissionsDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].HeaderText = "Permission Name";
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        #region Others FPP
+
+        internal static void OthersFPPDatagridView(DataTable dataTable, DataGridView dataGridView) 
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns[0].Visible = false;
+            dataGridView.Columns[1].Visible = false;
+            dataGridView.Columns[2].HeaderText = "Name";
+            dataGridView.Columns[3].Visible = false;
+            dataGridView.Columns[4].Visible = false;
+            Helper.DatagridDefaultStyle(dataGridView, true);
+        }
+
+        #endregion Others FPP
     }
 }

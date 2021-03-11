@@ -1,7 +1,7 @@
 ﻿
-namespace AccountingSystem.Views.Manage.Funds
+namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
 {
-    partial class frmFundAdd
+    partial class frmOthersFunctionProgramProjectEdit
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.Funds
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucFunds1 = new AccountingSystem.Views.Manage.Funds.ucFunds();
+            this.ucOthersFunctionProgramProject1 = new AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject.ucOthersFunctionProgramProject();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,62 +42,59 @@ namespace AccountingSystem.Views.Manage.Funds
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 72);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 45);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(404, 27);
-            this.flowLayoutPanel1.TabIndex = 2;
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(442, 30);
+            this.flowLayoutPanel1.TabIndex = 1;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(319, 2);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCancel.Location = new System.Drawing.Point(364, 3);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnCancel.Size = new System.Drawing.Size(82, 22);
-            this.btnCancel.TabIndex = 1;
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(231, 2);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSave.Location = new System.Drawing.Point(283, 3);
             this.btnSave.Name = "btnSave";
-            this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSave.Size = new System.Drawing.Size(82, 22);
-            this.btnSave.TabIndex = 0;
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Save";
+            this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click_1);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // ucFunds1
+            // ucOthersFunctionProgramProject1
             // 
-            this.ucFunds1.Location = new System.Drawing.Point(12, 12);
-            this.ucFunds1.Name = "ucFunds1";
-            this.ucFunds1.Size = new System.Drawing.Size(395, 53);
-            this.ucFunds1.TabIndex = 3;
+            this.ucOthersFunctionProgramProject1.Location = new System.Drawing.Point(12, 12);
+            this.ucOthersFunctionProgramProject1.Name = "ucOthersFunctionProgramProject1";
+            this.ucOthersFunctionProgramProject1.Size = new System.Drawing.Size(430, 25);
+            this.ucOthersFunctionProgramProject1.TabIndex = 2;
             // 
-            // frmFundAdd
+            // frmOthersFunctionProgramProjectEdit
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(404, 99);
-            this.Controls.Add(this.ucFunds1);
+            this.ClientSize = new System.Drawing.Size(442, 75);
+            this.Controls.Add(this.ucOthersFunctionProgramProject1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "frmFundAdd";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "frmOthersFunctionProgramProjectEdit";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Fund";
-            this.Load += new System.EventHandler(this.frmFundAdd_Load);
+            this.Text = "Edit Others Function Program Project";
+            this.Load += new System.EventHandler(this.frmOthersFunctionProgramProjectEdit_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -105,10 +102,9 @@ namespace AccountingSystem.Views.Manage.Funds
 
         #endregion
 
-        private ucFunds ucFunds1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private ucFunds ucFunds2;
+        internal ucOthersFunctionProgramProject ucOthersFunctionProgramProject1;
     }
 }
