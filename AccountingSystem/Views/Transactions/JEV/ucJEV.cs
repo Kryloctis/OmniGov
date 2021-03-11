@@ -12,8 +12,8 @@ namespace AccountingSystem.Views.Transactions.JEV
 {
     public partial class ucJEV : UserControl
     {
-        private int fundId;
-        private int journalId;
+        internal int fundId;
+        internal int journalId;
 
         public ucJEV()
         {

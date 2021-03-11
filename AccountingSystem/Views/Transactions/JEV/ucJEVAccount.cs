@@ -12,6 +12,8 @@ namespace AccountingSystem.Views.Transactions.JEV
 {
     public partial class ucJEVAccount : UserControl
     {
+        internal byte fundId;
+
         public ucJEVAccount()
         {
             InitializeComponent();
@@ -39,6 +41,21 @@ namespace AccountingSystem.Views.Transactions.JEV
                 DataTable dtGeneralLedgers = Factory.GeneralLedgerAccountsRepository().GetRecords();
 
                 HelperLoadRecords.GeneralLedgerComboBox(dtGeneralLedgers, cmbAccount, "ledger_name", "id");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void LoadSubsidiary()
+        {
+            try
+            {
+                ushort generalLedgerId = Convert.ToUInt16(cmbAccount.SelectedValue);
+                DataTable dtSubsidiary = Factory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
+
+                HelperLoadRecords.SubsidiaryLedgerComboBox(dtSubsidiary, cmbSubsidiary, "sub_name", "id");
             }
             catch (Exception ex)
             {

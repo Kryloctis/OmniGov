@@ -239,21 +239,18 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.FPPId.HeaderText = "FPPId";
             this.FPPId.Name = "FPPId";
             this.FPPId.ReadOnly = true;
-            this.FPPId.Visible = false;
             // 
             // GeneralLedgerId
             // 
             this.GeneralLedgerId.HeaderText = "GeneralLedgerId";
             this.GeneralLedgerId.Name = "GeneralLedgerId";
             this.GeneralLedgerId.ReadOnly = true;
-            this.GeneralLedgerId.Visible = false;
             // 
             // SubsidiaryLedgerId
             // 
             this.SubsidiaryLedgerId.HeaderText = "SubsidiaryLedgerId";
             this.SubsidiaryLedgerId.Name = "SubsidiaryLedgerId";
             this.SubsidiaryLedgerId.ReadOnly = true;
-            this.SubsidiaryLedgerId.Visible = false;
             // 
             // FPP
             // 

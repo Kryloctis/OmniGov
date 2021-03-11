@@ -189,6 +189,24 @@ namespace AccountingSystem
             datagrid.Columns[5].Visible = false;
             datagrid.Columns[6].Visible = false;
         }
+
+        internal static void SubsidiaryLedgerComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+
+            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                // loop datatable to add items in autocompletesource
+                foreach (DataRow item in dataTable.Rows)
+                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
+
+                comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+                comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            }
+        }
         #endregion
 
         #region Journals
