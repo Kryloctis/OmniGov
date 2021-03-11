@@ -391,12 +391,6 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
-        internal static void AddedPermissionsDatagridView(DataTable dataTable, DataGridView datagrid)
-        {
-            datagrid.DataSource = dataTable;
-            datagrid.Columns[0].HeaderText = "Permission Name";
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        }
 
         #region Others FPP
 
