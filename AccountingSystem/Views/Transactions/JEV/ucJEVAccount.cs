@@ -19,6 +19,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             InitializeComponent();
         }
 
+        private void ResetForm()
+        {
+            
+        }
+
         internal void LoadFPP()
         {
             try

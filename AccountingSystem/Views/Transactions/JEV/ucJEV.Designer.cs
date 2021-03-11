@@ -39,19 +39,21 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnEditAccount = new System.Windows.Forms.Button();
             this.btnAddAccount = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.txtRefNo = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtPayeeCollectingOfficer = new System.Windows.Forms.TextBox();
             this.dgAccounts = new System.Windows.Forms.DataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtExplanation = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtpDateEntry = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.txtJEVNo = new System.Windows.Forms.MaskedTextBox();
             this.FPPId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GeneralLedgerId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SubsidiaryLedgerId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsDebit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsDeposit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FPP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AccountName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AccountCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -142,12 +144,12 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.label8.TabIndex = 41;
             this.label8.Text = "Collecting Officer";
             // 
-            // textBox6
+            // txtRefNo
             // 
-            this.textBox6.Location = new System.Drawing.Point(106, 197);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(315, 23);
-            this.textBox6.TabIndex = 40;
+            this.txtRefNo.Location = new System.Drawing.Point(106, 197);
+            this.txtRefNo.Name = "txtRefNo";
+            this.txtRefNo.Size = new System.Drawing.Size(315, 23);
+            this.txtRefNo.TabIndex = 40;
             // 
             // label4
             // 
@@ -158,12 +160,12 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.label4.TabIndex = 39;
             this.label4.Text = "Check No.";
             // 
-            // textBox2
+            // txtPayeeCollectingOfficer
             // 
-            this.textBox2.Location = new System.Drawing.Point(106, 226);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(315, 23);
-            this.textBox2.TabIndex = 38;
+            this.txtPayeeCollectingOfficer.Location = new System.Drawing.Point(106, 226);
+            this.txtPayeeCollectingOfficer.Name = "txtPayeeCollectingOfficer";
+            this.txtPayeeCollectingOfficer.Size = new System.Drawing.Size(315, 23);
+            this.txtPayeeCollectingOfficer.TabIndex = 38;
             // 
             // dgAccounts
             // 
@@ -172,6 +174,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.FPPId,
             this.GeneralLedgerId,
             this.SubsidiaryLedgerId,
+            this.IsDebit,
+            this.IsDeposit,
             this.FPP,
             this.AccountName,
             this.AccountCode,
@@ -183,13 +187,13 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.dgAccounts.Size = new System.Drawing.Size(854, 191);
             this.dgAccounts.TabIndex = 37;
             // 
-            // textBox1
+            // txtExplanation
             // 
-            this.textBox1.Location = new System.Drawing.Point(542, 197);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(315, 52);
-            this.textBox1.TabIndex = 36;
+            this.txtExplanation.Location = new System.Drawing.Point(542, 197);
+            this.txtExplanation.Multiline = true;
+            this.txtExplanation.Name = "txtExplanation";
+            this.txtExplanation.Size = new System.Drawing.Size(315, 52);
+            this.txtExplanation.TabIndex = 36;
             // 
             // label3
             // 
@@ -209,13 +213,13 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.label2.TabIndex = 34;
             this.label2.Text = "Date of Entry";
             // 
-            // dateTimePicker1
+            // dtpDateEntry
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(542, 168);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(315, 23);
-            this.dateTimePicker1.TabIndex = 33;
+            this.dtpDateEntry.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDateEntry.Location = new System.Drawing.Point(542, 168);
+            this.dtpDateEntry.Name = "dtpDateEntry";
+            this.dtpDateEntry.Size = new System.Drawing.Size(315, 23);
+            this.dtpDateEntry.TabIndex = 33;
             // 
             // label1
             // 
@@ -226,13 +230,13 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.label1.TabIndex = 32;
             this.label1.Text = "JEV No.";
             // 
-            // maskedTextBox1
+            // txtJEVNo
             // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(106, 168);
-            this.maskedTextBox1.Mask = "00-0000-00-0000";
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(315, 23);
-            this.maskedTextBox1.TabIndex = 31;
+            this.txtJEVNo.Location = new System.Drawing.Point(106, 168);
+            this.txtJEVNo.Mask = "00-0000-00-0000";
+            this.txtJEVNo.Name = "txtJEVNo";
+            this.txtJEVNo.Size = new System.Drawing.Size(315, 23);
+            this.txtJEVNo.TabIndex = 31;
             // 
             // FPPId
             // 
@@ -252,6 +256,18 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.SubsidiaryLedgerId.Name = "SubsidiaryLedgerId";
             this.SubsidiaryLedgerId.ReadOnly = true;
             // 
+            // IsDebit
+            // 
+            this.IsDebit.HeaderText = "IsDebit";
+            this.IsDebit.Name = "IsDebit";
+            this.IsDebit.ReadOnly = true;
+            // 
+            // IsDeposit
+            // 
+            this.IsDeposit.HeaderText = "IsDeposit";
+            this.IsDeposit.Name = "IsDeposit";
+            this.IsDeposit.ReadOnly = true;
+            // 
             // FPP
             // 
             this.FPP.HeaderText = "FPP";
@@ -260,10 +276,10 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // AccountName
             // 
-            this.AccountName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.AccountName.HeaderText = "AccountName";
             this.AccountName.Name = "AccountName";
             this.AccountName.ReadOnly = true;
+            this.AccountName.Width = 403;
             // 
             // AccountCode
             // 
@@ -297,16 +313,16 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.Controls.Add(this.btnEditAccount);
             this.Controls.Add(this.btnAddAccount);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.txtRefNo);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtPayeeCollectingOfficer);
             this.Controls.Add(this.dgAccounts);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtExplanation);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dtpDateEntry);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.maskedTextBox1);
+            this.Controls.Add(this.txtJEVNo);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "ucJEV";
@@ -335,15 +351,17 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        internal System.Windows.Forms.TextBox textBox6;
-        internal System.Windows.Forms.TextBox textBox2;
+        internal System.Windows.Forms.TextBox txtRefNo;
+        internal System.Windows.Forms.TextBox txtPayeeCollectingOfficer;
         internal System.Windows.Forms.DataGridView dgAccounts;
-        internal System.Windows.Forms.TextBox textBox1;
-        internal System.Windows.Forms.DateTimePicker dateTimePicker1;
-        internal System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        internal System.Windows.Forms.TextBox txtExplanation;
+        internal System.Windows.Forms.DateTimePicker dtpDateEntry;
+        internal System.Windows.Forms.MaskedTextBox txtJEVNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn FPPId;
         private System.Windows.Forms.DataGridViewTextBoxColumn GeneralLedgerId;
         private System.Windows.Forms.DataGridViewTextBoxColumn SubsidiaryLedgerId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IsDebit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IsDeposit;
         private System.Windows.Forms.DataGridViewTextBoxColumn FPP;
         private System.Windows.Forms.DataGridViewTextBoxColumn AccountName;
         private System.Windows.Forms.DataGridViewTextBoxColumn AccountCode;

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ACC.Domain.Models;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
@@ -24,26 +25,81 @@ namespace AccountingSystem.Views.Transactions.JEV
             Helper.LoadFormIconAccounting(this);
         }
 
+        private List<JEVAccountsModel> JevAcountsModelList()
+        {
+            var uc = ucjev1;
+            var jevAccountsModelList = new List<JEVAccountsModel>();
+            foreach (DataGridViewRow item in uc.dgAccounts.Rows)
+            {
+                int fppId = Convert.ToInt32(item.Cells["FPPId"].Value);
+                ushort generalLedgerId = Convert.ToUInt16(item.Cells["GeneralLedgerId"].Value);
+                ushort? subsidiaryLedgerId = Convert.ToUInt16(item.Cells["SubsidiaryLedgerId"].Value);
+                bool isDebit = Convert.ToBoolean(item.Cells["IsDebit"].Value);
+                bool? isDeposit = (bool?)item.Cells["IsDeposit"].Value;
+
+                decimal amount;
+                if (isDebit)
+                    amount = Convert.ToDecimal(item.Cells["Debit"].Value);
+                else
+                    amount = Convert.ToDecimal(item.Cells["Credit"].Value);
+
+                var jevAccountModel = new JEVAccountsModel()
+                {
+                    FPPId = fppId,
+                    GeneralLedgerId = generalLedgerId,
+                    SubsidiaryLedgerId = subsidiaryLedgerId,
+                    IsDeposit = isDeposit,
+                    IsDebit = isDebit,
+                    Amount = amount
+                };
+
+                jevAccountsModelList.Add(jevAccountModel);
+            }
+
+            return jevAccountsModelList;
+        }
+
         private bool SaveData()
         {
             try
             {
-                return true;
-            }
-            catch (Exception)
-            {
+                var user = Helper.GetLoggedInUser();
 
-                throw;
+                var uc = ucjev1;
+                // if error occurs, show messagebox error
+                if (!uc.ValidateChildren())
+                {
+                    Helper.MessageBoxError(uc.GetFormErrors());
+                    return false;
+                }
+
+                var jevModel = new JEVModel()
+                {
+                    FundsId = uc.fundId,
+                    JournalsId = uc.journalId,
+                    JEVNumber = uc.txtJEVNo.Text.Trim(),
+                    DateEntry = uc.dtpDateEntry.Value,
+                    Explanation = uc.txtExplanation.Text.Trim(),
+                    CreatedBy = Convert.ToByte(user["id"])
+                };
+
+                return Factory.JEVRepository().Insert(jevModel, JevAcountsModelList());
             }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return false;
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("JEV has been saved.");
+                //ucjev1.ResetForm();
+            }
         }
-
-        
-
-        
     }
 }

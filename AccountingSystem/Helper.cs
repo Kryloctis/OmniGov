@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace AccountingSystem
 {
-    public class Helper
+    class Helper
     {
         public static void LoadFormIconAccounting(Form form)
         {
@@ -39,6 +39,23 @@ namespace AccountingSystem
             dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
 
             if (Fill == true) dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        internal static Dictionary<string, string> GetLoggedInUser()
+        {
+            var user = new Dictionary<string, string>();
+
+            try
+            {
+                user.Add("id", "1");
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return user;
         }
 
         #region ErrorProviders on Controls

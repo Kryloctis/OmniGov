@@ -27,39 +27,55 @@ namespace AccountingSystem.Views.Transactions.JEV
             var uc = ucjevAccount1;
             string fppId = uc.cmbFPP.SelectedValue.ToString();
             string fppName = uc.cmbFPP.Text;
-            string accountId = uc.cmbAccount.SelectedValue.ToString();
-            string accountName = uc.cmbAccount.Text;
+            string generalLedgerId = uc.cmbAccount.SelectedValue.ToString();
+            string subsidiaryLedgerId = uc.cmbSubsidiary.SelectedValue.ToString();
+            string generalLedgerName = uc.cmbAccount.Text;
             string amount = uc.nudAmount.Value.ToString("N2");
             bool isDebit = uc.radioDebit.Checked;
-
-            string[] dgRowDebit = new string[]
-                {
-                    fppId,
-                    accountId,
-                    "Subsidiary",
-                    fppName,
-                    accountName,
-                    "Account Code",
-                    amount,
-                    "",
-                };
-
-            string[] dgRowCredit = new string[]
-                {
-                    fppId,
-                    accountId,
-                    "Subsidiary",
-                    fppName,
-                    $"     {accountName}",
-                    "Account Code",
-                    "",
-                    amount,
-                };
+            bool? isDeposit;
+            if (uc.radioDeposits.Checked)
+                isDeposit = true;
+            else if (uc.radioCollections.Checked)
+                isDeposit = false;
+            else
+                isDeposit = null;
 
             if (isDebit)
+            {
+                var dgRowDebit = new object[]
+                {
+                    fppId,
+                    generalLedgerId,
+                    subsidiaryLedgerId,
+                    isDebit,
+                    isDeposit,
+                    fppName,
+                    generalLedgerName,
+                    "Account Code",
+                    amount,
+                    "",
+                };
+
                 ucJEV.dgAccounts.Rows.Add(dgRowDebit);
+            }
             else
+            {
+                var dgRowCredit = new object[]
+                {
+                    fppId,
+                    generalLedgerId,
+                    subsidiaryLedgerId,
+                    isDebit,
+                    isDeposit,
+                    fppName,
+                    $"     {generalLedgerName}",
+                    "Account Code",
+                    "",
+                    amount,
+                };
+
                 ucJEV.dgAccounts.Rows.Add(dgRowCredit);
+            } 
 
             return false;
         }

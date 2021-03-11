@@ -13,11 +13,34 @@ namespace AccountingSystem.Views.Transactions.JEV
     public partial class ucJEV : UserControl
     {
         internal byte fundId;
-        internal ushort journalId;
+        internal byte journalId;
 
         public ucJEV()
         {
             InitializeComponent();
+        }
+
+        internal string GetFormErrors()
+        {
+            //var errorArray = new string[2];
+            //errorArray[0] = epName.GetError(txtName);
+            //errorArray[1] = epCode.GetError(txtCode);
+
+
+            //IError _errors = Factory.CreateErrors(errorArray);
+            //return _errors.GenerateErrorMessage();
+
+            return "";
+        }
+
+        internal void ResetForm()
+        {
+            txtJEVNo.Clear();
+            txtRefNo.Clear();
+            txtPayeeCollectingOfficer.Clear();
+            txtExplanation.Clear();
+
+            dgAccounts.Rows.Clear();
         }
 
         internal void LoadFunds()

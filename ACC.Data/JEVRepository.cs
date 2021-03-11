@@ -67,14 +67,16 @@ namespace ACC.Data
                         new object[] { "@created_by", DbType.Byte, entity.CreatedBy },
                     };
 
-                    string query = $"INSERT INTO {tableName} (funds_id, journals_id, jev_no, date_entry, explanation, created_by) VALUES (@funds_id, @journals_id, @jev_no, @date_entry, @explanation, @created_by); SELECT LAST_INSERT_ID();";
+                    string query = $"INSERT INTO {tableName} (funds_id, journals_id, jev_no, date_entry, explanation, created_by) VALUES (@funds_id, @journals_id, @jev_no, @date_entry, @explanation, @created_by);";
 
-                    int jevId = _dbGenericCommands.ExecuteScalar(query, parameters);
+                    // save and get the last inserted id
+                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
 
+                    // loop jev accounts list then insert each using the latest Jev Id
                     foreach (var jevAccounts in jevAccountsModelList)
                     {
-                        jevAccounts.JEVId = jevId;
-                        _jevAccountsRepository.Insert(jevAccounts);
+                        jevAccounts.JEVId = GetLastInsertedID();
+                        _ = _jevAccountsRepository.Insert(jevAccounts);
                     }
 
                     scope.Complete();
@@ -97,6 +99,19 @@ namespace ACC.Data
         public bool Update(JEVModel entity)
         {
             throw new NotImplementedException();
+        }
+
+        public int GetLastInsertedID()
+        {
+            try
+            {
+                string query = $"SELECT MAX(id) FROM {tableName}";
+                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

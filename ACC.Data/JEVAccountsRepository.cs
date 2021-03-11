@@ -54,31 +54,16 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@jev_id", DbType.UInt32, entity.JEVId},
-                    new object[] { "@fpp_id", DbType.UInt32, entity.FPPId},
-                    new object[] { "@general_ledger_accounts_id", DbType.UInt32, entity.GeneralLedgerId},
-                    new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt32, entity.SubsidiaryLedgerId},
+                    new object[] { "@jev_id", DbType.Int32, entity.JEVId},
+                    new object[] { "@fpp_id", DbType.Int32, entity.FPPId},
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, entity.GeneralLedgerId},
+                    new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, entity.SubsidiaryLedgerId},
                     new object[] { "@is_deposit", DbType.Boolean, entity.IsDeposit},
                     new object[] { "@is_debit", DbType.Boolean, entity.IsDebit},
-                    new object[] { "@amount", DbType.Boolean, entity.Amount},
+                    new object[] { "@amount", DbType.Decimal, entity.Amount},
                 };
 
-                string query = $"INSERT INTO {tableName} " +
-                    $"(jev_id, " +
-                    $"function_program_project_id, " +
-                    $"general_ledger_accounts_id, " +
-                    $"subsidiary_ledger_accounts_id, " +
-                    $"is_deposit, " +
-                    $"is_debit, " +
-                    $"amount) " +
-                    $"VALUES " +
-                    $"(@jev_id, " +
-                    $"@function_program_project_id, " +
-                    $"@general_ledger_accounts_id, " +
-                    $"@subsidiary_ledger_accounts_id, " +
-                    $"@is_deposit, " +
-                    $"@s_debit, " +
-                    $"amount)";
+                string query = $"INSERT INTO {tableName} (jev_id, function_program_project_id, general_ledger_accounts_id, subsidiary_ledger_accounts_id, is_deposit, is_debit, amount) VALUES (@jev_id, @fpp_id, @general_ledger_accounts_id, @subsidiary_ledger_accounts_id, @is_deposit, @is_debit, @amount);";
 
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }

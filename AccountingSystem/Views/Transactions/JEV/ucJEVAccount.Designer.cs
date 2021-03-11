@@ -213,7 +213,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.Controls.Add(this.cmbFPP);
             this.Controls.Add(this.label1);
             this.Name = "ucJEVAccount";
-            this.Size = new System.Drawing.Size(489, 165);
+            this.Size = new System.Drawing.Size(489, 164);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.pnlCollectionsDeposits.ResumeLayout(false);
