@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BudgetSystem.Views.BudgetAppropriations;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,5 +18,16 @@ namespace BudgetSystem
             InitializeComponent();
         }
 
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void MenuItemBudgetAppropriations_Click(object sender, EventArgs e) 
+        {
+
+            _ = new frmBudgetAppropriations().ShowDialog();
+
+        }
     }
 }

@@ -46,6 +46,7 @@ namespace BudgetSystem
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1110, 24);
             this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // toolStripMenuItemFile
             // 
@@ -70,6 +71,7 @@ namespace BudgetSystem
             this.MenuItemBudgetAppropriations.Name = "MenuItemBudgetAppropriations";
             this.MenuItemBudgetAppropriations.Size = new System.Drawing.Size(203, 22);
             this.MenuItemBudgetAppropriations.Text = "Budget Appropriations...";
+            this.MenuItemBudgetAppropriations.Click += new System.EventHandler(this.MenuItemBudgetAppropriations_Click);
             // 
             // label1
             // 
