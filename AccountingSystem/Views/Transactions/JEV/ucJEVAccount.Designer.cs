@@ -29,6 +29,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucJEVAccount));
             this.label1 = new System.Windows.Forms.Label();
             this.cmbFPP = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -82,6 +83,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.cmbAccount.Name = "cmbAccount";
             this.cmbAccount.Size = new System.Drawing.Size(370, 23);
             this.cmbAccount.TabIndex = 3;
+            this.cmbAccount.SelectedValueChanged += new System.EventHandler(this.cmbAccount_SelectedValueChanged);
             // 
             // radioDebit
             // 
@@ -188,11 +190,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(443, 67);
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(443, 68);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(24, 23);
+            this.button1.Size = new System.Drawing.Size(22, 22);
             this.button1.TabIndex = 11;
-            this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // ucJEVAccount

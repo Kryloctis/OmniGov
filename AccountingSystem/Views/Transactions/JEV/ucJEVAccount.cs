@@ -38,9 +38,11 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             try
             {
+                this.cmbAccount.SelectedValueChanged -= cmbAccount_SelectedValueChanged;
                 DataTable dtGeneralLedgers = Factory.GeneralLedgerAccountsRepository().GetRecords();
 
                 HelperLoadRecords.GeneralLedgerComboBox(dtGeneralLedgers, cmbAccount, "ledger_name", "id");
+                this.cmbAccount.SelectedValueChanged += cmbAccount_SelectedValueChanged;
             }
             catch (Exception ex)
             {
@@ -61,6 +63,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        private void cmbAccount_SelectedValueChanged(object sender, EventArgs e)
+        { 
+            LoadSubsidiary();
         }
     }
 }

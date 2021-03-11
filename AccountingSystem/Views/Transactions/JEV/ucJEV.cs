@@ -12,8 +12,8 @@ namespace AccountingSystem.Views.Transactions.JEV
 {
     public partial class ucJEV : UserControl
     {
-        internal int fundId;
-        internal int journalId;
+        internal byte fundId;
+        internal ushort journalId;
 
         public ucJEV()
         {
@@ -71,14 +71,14 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void radFunds_Click(object sender, EventArgs e)
         {
             var radFund = sender as RadioButton;
-            fundId = Convert.ToInt32(radFund.Tag);
+            fundId = Convert.ToByte(radFund.Tag);
             ShowCheckIcon(radFund);
         }
 
         private void radJournal_Click(object sender, EventArgs e)
         {
             var radJournal = sender as RadioButton;
-            journalId = Convert.ToInt32(radJournal.Tag);
+            journalId = Convert.ToByte(radJournal.Tag);
             ShowCheckIcon(radJournal);
         }
 

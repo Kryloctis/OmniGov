@@ -14,10 +14,12 @@ namespace AccountingSystem.Views.Transactions.JEV
     public partial class frmJEVAccountAdd : Form
     {
         private readonly ucJEV ucJEV;
+
         public frmJEVAccountAdd(ucJEV ucJEV)
         {
             InitializeComponent();
             this.ucJEV = ucJEV;
+            this.ucjevAccount1.fundId = ucJEV.fundId;
         }
 
         private bool AddAccount()
