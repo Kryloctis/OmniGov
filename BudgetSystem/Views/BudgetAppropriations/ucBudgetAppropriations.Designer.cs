@@ -181,7 +181,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Name = "ucBudgetAppropriations";
-            this.Size = new System.Drawing.Size(487, 143);
+            this.Size = new System.Drawing.Size(483, 143);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFunctionProgramProject)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFunctionProgramProject)).EndInit();
