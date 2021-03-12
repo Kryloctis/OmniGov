@@ -30,74 +30,77 @@ namespace BudgetSystem.Views.BudgetAppropriations
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbxFPP = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cmbxOthersFPP = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.cmbxAllotmentClass = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.cmbxLedgerAccount = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.nudAmount = new System.Windows.Forms.NumericUpDown();
             this.epFunctionProgramProject = new System.Windows.Forms.ErrorProvider(this.components);
             this.epOthersFunctionProgramProject = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epAllotmentType = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epAllotmentClass = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.epGeneralLedgerAcc = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFunctionProgramProject)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFunctionProgramProject)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epAllotmentType)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAllotmentClass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epGeneralLedgerAcc)).BeginInit();
             this.SuspendLayout();
             // 
-            // comboBox1
+            // cmbxFPP
             // 
-            this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(187, 0);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(273, 23);
-            this.comboBox1.TabIndex = 0;
+            this.cmbxFPP.FormattingEnabled = true;
+            this.cmbxFPP.Location = new System.Drawing.Point(140, 0);
+            this.cmbxFPP.Name = "cmbxFPP";
+            this.cmbxFPP.Size = new System.Drawing.Size(273, 23);
+            this.cmbxFPP.TabIndex = 0;
+            this.cmbxFPP.TextChanged += new System.EventHandler(this.cmbxFunctionProgramProject_TextChanged);
+            this.cmbxFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxFPP_Validating);
+            this.cmbxFPP.Validated += new System.EventHandler(this.cmbxFPP_Validated);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(0, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(143, 15);
+            this.label1.Size = new System.Drawing.Size(27, 15);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Function Program Project";
+            this.label1.Text = "FPP";
             // 
-            // comboBox2
+            // cmbxOthersFPP
             // 
-            this.comboBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(187, 29);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(273, 23);
-            this.comboBox2.TabIndex = 0;
+            this.cmbxOthersFPP.FormattingEnabled = true;
+            this.cmbxOthersFPP.Location = new System.Drawing.Point(140, 29);
+            this.cmbxOthersFPP.Name = "cmbxOthersFPP";
+            this.cmbxOthersFPP.Size = new System.Drawing.Size(273, 23);
+            this.cmbxOthersFPP.TabIndex = 1;
+            this.cmbxOthersFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxOthersFPP_Validating);
+            this.cmbxOthersFPP.Validated += new System.EventHandler(this.cmbxOthersFPP_Validated);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(0, 32);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(181, 15);
+            this.label2.Size = new System.Drawing.Size(65, 15);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Others Function Program Project";
+            this.label2.Text = "Others FPP";
             // 
-            // comboBox3
+            // cmbxAllotmentClass
             // 
-            this.comboBox3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(187, 58);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(273, 23);
-            this.comboBox3.TabIndex = 0;
+            this.cmbxAllotmentClass.FormattingEnabled = true;
+            this.cmbxAllotmentClass.Location = new System.Drawing.Point(140, 58);
+            this.cmbxAllotmentClass.Name = "cmbxAllotmentClass";
+            this.cmbxAllotmentClass.Size = new System.Drawing.Size(273, 23);
+            this.cmbxAllotmentClass.TabIndex = 2;
+            this.cmbxAllotmentClass.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAllotmentClass_Validating);
+            this.cmbxAllotmentClass.Validated += new System.EventHandler(this.cmbxAllotmentClass_Validated);
             // 
             // label3
             // 
@@ -108,15 +111,15 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.label3.TabIndex = 1;
             this.label3.Text = "Allotment Class";
             // 
-            // comboBox4
+            // cmbxLedgerAccount
             // 
-            this.comboBox4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(187, 87);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(273, 23);
-            this.comboBox4.TabIndex = 0;
+            this.cmbxLedgerAccount.FormattingEnabled = true;
+            this.cmbxLedgerAccount.Location = new System.Drawing.Point(140, 87);
+            this.cmbxLedgerAccount.Name = "cmbxLedgerAccount";
+            this.cmbxLedgerAccount.Size = new System.Drawing.Size(273, 23);
+            this.cmbxLedgerAccount.TabIndex = 3;
+            this.cmbxLedgerAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxLedgerAccount_Validating);
+            this.cmbxLedgerAccount.Validated += new System.EventHandler(this.cmbxLedgerAccount_Validated);
             // 
             // label4
             // 
@@ -136,19 +139,21 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.label5.TabIndex = 1;
             this.label5.Text = "Amount";
             // 
-            // numericUpDown1
+            // nudAmount
             // 
-            this.numericUpDown1.DecimalPlaces = 2;
-            this.numericUpDown1.Location = new System.Drawing.Point(187, 116);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.nudAmount.DecimalPlaces = 2;
+            this.nudAmount.Location = new System.Drawing.Point(140, 116);
+            this.nudAmount.Maximum = new decimal(new int[] {
             -1530494976,
             232830,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(273, 23);
-            this.numericUpDown1.TabIndex = 2;
-            this.numericUpDown1.ThousandsSeparator = true;
+            this.nudAmount.Name = "nudAmount";
+            this.nudAmount.Size = new System.Drawing.Size(273, 23);
+            this.nudAmount.TabIndex = 4;
+            this.nudAmount.ThousandsSeparator = true;
+            this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
+            this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
             // 
             // epFunctionProgramProject
             // 
@@ -158,35 +163,41 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // 
             this.epOthersFunctionProgramProject.ContainerControl = this;
             // 
-            // epAllotmentType
+            // epAllotmentClass
             // 
-            this.epAllotmentType.ContainerControl = this;
+            this.epAllotmentClass.ContainerControl = this;
             // 
             // epAmount
             // 
             this.epAmount.ContainerControl = this;
             // 
+            // epGeneralLedgerAcc
+            // 
+            this.epGeneralLedgerAcc.ContainerControl = this;
+            // 
             // ucBudgetAppropriations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.numericUpDown1);
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.Controls.Add(this.nudAmount);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox4);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmbxLedgerAccount);
+            this.Controls.Add(this.cmbxAllotmentClass);
+            this.Controls.Add(this.cmbxOthersFPP);
+            this.Controls.Add(this.cmbxFPP);
             this.Name = "ucBudgetAppropriations";
-            this.Size = new System.Drawing.Size(483, 143);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.Size = new System.Drawing.Size(436, 143);
+            ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFunctionProgramProject)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFunctionProgramProject)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epAllotmentType)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAllotmentClass)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epGeneralLedgerAcc)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -194,19 +205,20 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbxFPP;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cmbxOthersFPP;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox cmbxAllotmentClass;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox cmbxLedgerAccount;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown nudAmount;
         private System.Windows.Forms.ErrorProvider epFunctionProgramProject;
         private System.Windows.Forms.ErrorProvider epOthersFunctionProgramProject;
-        private System.Windows.Forms.ErrorProvider epAllotmentType;
+        private System.Windows.Forms.ErrorProvider epAllotmentClass;
         private System.Windows.Forms.ErrorProvider epAmount;
+        private System.Windows.Forms.ErrorProvider epGeneralLedgerAcc;
     }
 }

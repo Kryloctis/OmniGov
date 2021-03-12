@@ -52,7 +52,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName}";
+                string query = $"SELECT id, allotment_code, allotment_name, created_at, updated_at FROM {tableName}";
 
                 var dtAllotmentClasses = new DataTable();
                 return _dbGenericCommands.Fill(query, dtAllotmentClasses);
@@ -62,7 +62,6 @@ namespace ACC.Data
                 throw;
             }
         }
-       
 
         public DataTable GetRecordsBySearch(string searchText)
         {
@@ -174,8 +173,6 @@ namespace ACC.Data
             return false;
         }
 
-
-
         public bool CodeExist(string allotmentCode)
         {
             try
@@ -269,9 +266,5 @@ namespace ACC.Data
 
             return false;
         }
-
-
-
-
     }
 }

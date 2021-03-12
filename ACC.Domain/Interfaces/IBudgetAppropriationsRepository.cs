@@ -7,5 +7,6 @@ namespace ACC.Domain.Interfaces
 {
     public interface IBudgetAppropriationsRepository : IRepository<BudgetAppropriationsModel>
     {
+
     }
 }

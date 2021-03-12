@@ -10,5 +10,8 @@ namespace ACC.Domain.Interfaces
     {
         DataTable GetViewRecords();
         DataTable GetViewRecordsBySearch(string searchText);
+
+        bool NameExist(string txtName);
+        bool NameExist(int id, string txtName);
     }
 }

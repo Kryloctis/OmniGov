@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccountingSystem;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,16 @@ namespace BudgetSystem.Views.BudgetAppropriations
         public frmBudgetAppropriations()
         {
             InitializeComponent();
+        }
+
+        private void frmBudgetAppropriations_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void toolStripButtonAdd_Click(object sender, EventArgs e) 
+        {
+            var frmBudgetAppropriationsAdd = new frmBudgetAppropriationsAdd();
+            frmBudgetAppropriationsAdd.ShowDialog();
         }
     }
 }

@@ -29,7 +29,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgBudgetAppropriations = new System.Windows.Forms.DataGridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
@@ -42,20 +42,20 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgBudgetAppropriations)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgBudgetAppropriations
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 50);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(800, 378);
-            this.dataGridView1.TabIndex = 0;
+            this.dgBudgetAppropriations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgBudgetAppropriations.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgBudgetAppropriations.Location = new System.Drawing.Point(0, 50);
+            this.dgBudgetAppropriations.Name = "dgBudgetAppropriations";
+            this.dgBudgetAppropriations.RowTemplate.Height = 25;
+            this.dgBudgetAppropriations.Size = new System.Drawing.Size(800, 378);
+            this.dgBudgetAppropriations.TabIndex = 0;
             // 
             // toolStrip1
             // 
@@ -79,6 +79,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.toolStripButtonAdd.Size = new System.Drawing.Size(42, 47);
             this.toolStripButtonAdd.Text = "Add...";
             this.toolStripButtonAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButtonAdd.Click += new System.EventHandler(this.toolStripButtonAdd_Click);
             // 
             // toolStripButtonEdit
             // 
@@ -165,7 +166,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgBudgetAppropriations);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -174,7 +175,8 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Budget Appropriations ";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.frmBudgetAppropriations_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgBudgetAppropriations)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -186,7 +188,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgBudgetAppropriations;
         private System.Windows.Forms.ToolStrip toolStrip1;
         internal System.Windows.Forms.ToolStripButton toolStripButtonAdd;
         internal System.Windows.Forms.ToolStripButton toolStripButtonEdit;

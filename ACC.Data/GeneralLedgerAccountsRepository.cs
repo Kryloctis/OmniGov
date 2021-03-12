@@ -143,5 +143,52 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
+
+        public bool NameExist(string txtName)
+        {
+            try
+            {
+                var parameters = new object[][]
+               {
+                    new object[] { "@ledger_name", DbType.String, txtName},
+               };
+
+                string query = $"SELECT id FROM {tableName} WHERE ledger_name = @ledger_name";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+
+            }
+            catch (Exception) 
+            {
+                throw;
+            }
+            return false;
+        }
+
+        public bool NameExist(int id, string txtName)
+        {
+            try
+            {
+                     var parameters = new object[][]
+               {
+                    new object[] { "@ledger_name", DbType.String, txtName},
+                    new object[] { "@id", DbType.Int32, id }
+               };
+
+                string query = $"SELECT id FROM {tableName} WHERE id = @id AND ledger_name = @ledger_name";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+
+            }
+            catch (Exception) 
+            {
+                throw;
+            }
+            return false;
+        }
     }
 }

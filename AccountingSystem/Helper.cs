@@ -56,6 +56,14 @@ namespace AccountingSystem
                 return $"Please enter a {fieldName}";
         }
 
+        public static string ErrorMessage(string fieldName) 
+        {
+            if (GetFirstLetter(fieldName) == "A")
+                return $"Please enter an {fieldName}";
+            else
+                return $"Please enter a {fieldName}";
+        }
+
         public static bool ShowErrorTextBoxEmpty(ErrorProvider ep, TextBox txtBox, string fieldName = "Field")
         {
             if (string.IsNullOrWhiteSpace(txtBox.Text.Trim()))
