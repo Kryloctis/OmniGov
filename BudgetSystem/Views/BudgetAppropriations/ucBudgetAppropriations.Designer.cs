@@ -45,12 +45,14 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.epAllotmentClass = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
             this.epGeneralLedgerAcc = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epBudgetAppropriation = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFunctionProgramProject)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFunctionProgramProject)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAllotmentClass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epGeneralLedgerAcc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epBudgetAppropriation)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbxFPP
@@ -58,7 +60,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.cmbxFPP.FormattingEnabled = true;
             this.cmbxFPP.Location = new System.Drawing.Point(140, 0);
             this.cmbxFPP.Name = "cmbxFPP";
-            this.cmbxFPP.Size = new System.Drawing.Size(273, 23);
+            this.cmbxFPP.Size = new System.Drawing.Size(436, 23);
             this.cmbxFPP.TabIndex = 0;
             this.cmbxFPP.TextChanged += new System.EventHandler(this.cmbxFunctionProgramProject_TextChanged);
             this.cmbxFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxFPP_Validating);
@@ -78,7 +80,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.cmbxOthersFPP.FormattingEnabled = true;
             this.cmbxOthersFPP.Location = new System.Drawing.Point(140, 29);
             this.cmbxOthersFPP.Name = "cmbxOthersFPP";
-            this.cmbxOthersFPP.Size = new System.Drawing.Size(273, 23);
+            this.cmbxOthersFPP.Size = new System.Drawing.Size(436, 23);
             this.cmbxOthersFPP.TabIndex = 1;
             this.cmbxOthersFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxOthersFPP_Validating);
             this.cmbxOthersFPP.Validated += new System.EventHandler(this.cmbxOthersFPP_Validated);
@@ -97,8 +99,9 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.cmbxAllotmentClass.FormattingEnabled = true;
             this.cmbxAllotmentClass.Location = new System.Drawing.Point(140, 58);
             this.cmbxAllotmentClass.Name = "cmbxAllotmentClass";
-            this.cmbxAllotmentClass.Size = new System.Drawing.Size(273, 23);
+            this.cmbxAllotmentClass.Size = new System.Drawing.Size(436, 23);
             this.cmbxAllotmentClass.TabIndex = 2;
+            this.cmbxAllotmentClass.TextChanged += new System.EventHandler(this.cmbxAllotmentClass_TextChanged);
             this.cmbxAllotmentClass.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAllotmentClass_Validating);
             this.cmbxAllotmentClass.Validated += new System.EventHandler(this.cmbxAllotmentClass_Validated);
             // 
@@ -114,9 +117,10 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // cmbxLedgerAccount
             // 
             this.cmbxLedgerAccount.FormattingEnabled = true;
+            this.cmbxLedgerAccount.IntegralHeight = false;
             this.cmbxLedgerAccount.Location = new System.Drawing.Point(140, 87);
             this.cmbxLedgerAccount.Name = "cmbxLedgerAccount";
-            this.cmbxLedgerAccount.Size = new System.Drawing.Size(273, 23);
+            this.cmbxLedgerAccount.Size = new System.Drawing.Size(436, 23);
             this.cmbxLedgerAccount.TabIndex = 3;
             this.cmbxLedgerAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxLedgerAccount_Validating);
             this.cmbxLedgerAccount.Validated += new System.EventHandler(this.cmbxLedgerAccount_Validated);
@@ -149,7 +153,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             0,
             0});
             this.nudAmount.Name = "nudAmount";
-            this.nudAmount.Size = new System.Drawing.Size(273, 23);
+            this.nudAmount.Size = new System.Drawing.Size(436, 23);
             this.nudAmount.TabIndex = 4;
             this.nudAmount.ThousandsSeparator = true;
             this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
@@ -175,6 +179,10 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // 
             this.epGeneralLedgerAcc.ContainerControl = this;
             // 
+            // epBudgetAppropriation
+            // 
+            this.epBudgetAppropriation.ContainerControl = this;
+            // 
             // ucBudgetAppropriations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -191,34 +199,35 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.Controls.Add(this.cmbxOthersFPP);
             this.Controls.Add(this.cmbxFPP);
             this.Name = "ucBudgetAppropriations";
-            this.Size = new System.Drawing.Size(436, 143);
+            this.Size = new System.Drawing.Size(601, 143);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFunctionProgramProject)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFunctionProgramProject)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAllotmentClass)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epGeneralLedgerAcc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epBudgetAppropriation)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ComboBox cmbxFPP;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbxOthersFPP;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmbxAllotmentClass;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cmbxLedgerAccount;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.NumericUpDown nudAmount;
         private System.Windows.Forms.ErrorProvider epFunctionProgramProject;
         private System.Windows.Forms.ErrorProvider epOthersFunctionProgramProject;
         private System.Windows.Forms.ErrorProvider epAllotmentClass;
         private System.Windows.Forms.ErrorProvider epAmount;
         private System.Windows.Forms.ErrorProvider epGeneralLedgerAcc;
+        internal System.Windows.Forms.ComboBox cmbxFPP;
+        internal System.Windows.Forms.ComboBox cmbxOthersFPP;
+        internal System.Windows.Forms.ComboBox cmbxAllotmentClass;
+        internal System.Windows.Forms.ComboBox cmbxLedgerAccount;
+        internal System.Windows.Forms.NumericUpDown nudAmount;
+        private System.Windows.Forms.ErrorProvider epBudgetAppropriation;
     }
 }

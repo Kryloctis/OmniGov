@@ -58,7 +58,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName} LIMIT 5";
+                string query = $"SELECT * FROM {tableName}";
 
                 var dtJournals = new DataTable();
                 return _dbGenericCommands.Fill(query, dtJournals);
@@ -69,7 +69,6 @@ namespace ACC.Data
             }
         }
         
-
         public DataTable GetViewRecords()
         {
             try
@@ -144,6 +143,9 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
+
+        #region Validations
+
         public bool NameExist(string txtName)
         {
             try
@@ -160,7 +162,7 @@ namespace ACC.Data
                 if (!string.IsNullOrEmpty(queryResult)) return true;
 
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 throw;
             }
@@ -171,11 +173,11 @@ namespace ACC.Data
         {
             try
             {
-                     var parameters = new object[][]
-               {
+                var parameters = new object[][]
+                {
                     new object[] { "@ledger_name", DbType.String, txtName},
                     new object[] { "@id", DbType.Int32, id }
-               };
+                };
 
                 string query = $"SELECT id FROM {tableName} WHERE id = @id AND ledger_name = @ledger_name";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
@@ -184,11 +186,54 @@ namespace ACC.Data
                 if (!string.IsNullOrEmpty(queryResult)) return true;
 
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 throw;
             }
             return false;
         }
+
+        #endregion Validations
+
+
+        //Budget System
+        public DataTable GetViewRecordsByMajAccGroupName(string majAccGroupName)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@maj_acc_group_name", DbType.String, majAccGroupName},
+
+                };
+
+
+                string query = $"SELECT account_group_id, account_group_code, account_group_name, major_account_group_id, maj_acc_group_code, maj_acc_group_name, sub_maj_acc_group_code, sub_maj_acc_group_name, sub_major_account_group_id, general_ledger_accounts_id, account_code, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {viewTableName} WHERE maj_acc_group_name = @maj_acc_group_name";
+
+                var dtJournals = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtJournals,parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetAllViewRecords()
+        {
+            try
+            {
+                string query = $"SELECT account_group_id, account_group_code, account_group_name, major_account_group_id, maj_acc_group_code, maj_acc_group_name, sub_maj_acc_group_code, sub_maj_acc_group_name, sub_major_account_group_id, general_ledger_accounts_id, account_code, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {viewTableName}";
+
+                var dtJournals = new DataTable();
+                return _dbGenericCommands.Fill(query, dtJournals);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+      
     }
 }

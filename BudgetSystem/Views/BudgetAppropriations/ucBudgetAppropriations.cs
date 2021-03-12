@@ -13,6 +13,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
 {
     public partial class ucBudgetAppropriations : UserControl
     {
+        internal int budgetAppropriationId = 0;
 
         public ucBudgetAppropriations()
         {
@@ -21,12 +22,13 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[5];
+            var errorArray = new string[6];
             errorArray[0] = epFunctionProgramProject.GetError(cmbxFPP);
             errorArray[1] = epOthersFunctionProgramProject.GetError(cmbxOthersFPP);
             errorArray[2] = epAllotmentClass.GetError(cmbxAllotmentClass);
             errorArray[3] = epGeneralLedgerAcc.GetError(cmbxLedgerAccount);
             errorArray[4] = epAmount.GetError(nudAmount);
+            errorArray[5] = epBudgetAppropriation.GetError(cmbxFPP);
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
@@ -67,6 +69,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 {
                     int fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
                     HelperLoadRecords.OthersFPPCombobox(Factory.OthersFPPRepository().GetRecordsByID(fppId), cmbxOthersFPP, "name", "id");
+                    cmbxOthersFPP.SelectedIndex = -1;
                     cmbxOthersFPP.Enabled = true;
                 }
            
@@ -81,8 +84,9 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             try
             {
+                cmbxAllotmentClass.TextChanged -= new EventHandler(cmbxAllotmentClass_TextChanged);
                 HelperLoadRecords.AllotmentCombobox(Factory.AllotmentClassesRepository().GetRecords(), cmbxAllotmentClass, "allotment_name", "id");
-
+                cmbxAllotmentClass.TextChanged += new EventHandler(cmbxAllotmentClass_TextChanged);
             }
             catch (Exception ex) 
             {
@@ -96,8 +100,25 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             try
             {
-
-                HelperLoadRecords.GeneralLedgerAccountsCombobox(Factory.GeneralLedgerAccountsRepository().GetRecords(), cmbxLedgerAccount, "ledger_name", "id");
+                if (cmbxAllotmentClass.SelectedIndex < 0 || string.IsNullOrEmpty(cmbxAllotmentClass.Text))
+                {
+                    cmbxLedgerAccount.Enabled = false;
+                    cmbxLedgerAccount.DataSource = null;
+                }
+                else
+                {
+                    if (Convert.ToInt32(cmbxAllotmentClass.SelectedValue) == 4)
+                    {
+                        HelperLoadRecords.GeneralLedgerAccountsCombobox(Factory.GeneralLedgerAccountsRepository().GetAllViewRecords(), cmbxLedgerAccount, "ledger_name", "general_ledger_accounts_id");
+                    }
+                    else 
+                    {
+                        HelperLoadRecords.GeneralLedgerAccountsCombobox(Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajAccGroupName(cmbxAllotmentClass.Text.Trim()), cmbxLedgerAccount, "ledger_name", "general_ledger_accounts_id");
+                    }
+                
+                    cmbxLedgerAccount.Enabled = true;
+                    cmbxLedgerAccount.SelectedIndex = -1;
+                }      
             }
             catch (Exception ex) 
             {
@@ -126,9 +147,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         private void cmbxOthersFPP_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epOthersFunctionProgramProject, cmbxOthersFPP, "Others Function Program Project");
-
-            if (!Factory.OthersFPPRepository().NameExist(cmbxOthersFPP.Text.Trim())) 
+            if (!Factory.OthersFPPRepository().NameExist(cmbxOthersFPP.Text.Trim()) && !string.IsNullOrWhiteSpace(cmbxOthersFPP.Text)) 
             {
                 epOthersFunctionProgramProject.SetError(cmbxOthersFPP, "Invalid Others FPP. Please select on the list.");
                 e.Cancel = true;
@@ -173,11 +192,44 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
 
-            if (nudAmount.Value == nudAmount.Minimum) 
+            if (nudAmount.Value == nudAmount.Minimum || nudAmount.Value == 0) 
             {
                 epAmount.SetError(nudAmount, Helper.ErrorMessage("Valuable Amount"));
                 e.Cancel = true;
             }
+
+            #region Validation of Budget Appropriration Record
+
+            int FPPId = Convert.ToInt32(cmbxFPP.SelectedValue);
+            int? othersFPPId;
+            int allotmentClassId = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
+            int generalLedgerAccId = Convert.ToInt32(cmbxLedgerAccount.SelectedValue);
+
+            if (cmbxOthersFPP.SelectedValue == null)
+                othersFPPId = null;
+            else
+                othersFPPId = Convert.ToInt32(cmbxOthersFPP.SelectedValue);
+
+
+            bool budgetAppropriationExist;
+
+            if (budgetAppropriationId == 0)
+            {
+                budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAllotmentExist(FPPId, othersFPPId, allotmentClassId, generalLedgerAccId);
+            }
+            else
+            {
+                budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAllotmentExist(budgetAppropriationId, FPPId, othersFPPId, allotmentClassId, generalLedgerAccId);
+            }
+
+            if (budgetAppropriationExist)
+            {
+                epBudgetAppropriation.SetError(cmbxFPP, "Budget Appropriation you entered is not allowed. Already exist on your record.");
+                e.Cancel = true;
+            }
+
+            #endregion 
+
         }
         private void nudAmount_Validated(object sender, EventArgs e)
         {
@@ -189,6 +241,11 @@ namespace BudgetSystem.Views.BudgetAppropriations
         private void cmbxFunctionProgramProject_TextChanged(object sender, EventArgs e)
         {
             LoadOtherFPPRecords();
+        }
+
+        private void cmbxAllotmentClass_TextChanged(object sender, EventArgs e)
+        {
+            LoadGeneralLedgerAccounts();
         }
     }
 }

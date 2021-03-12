@@ -1,4 +1,5 @@
-﻿using AccountingSystem;
+﻿using ACC.Domain.Models;
+using AccountingSystem;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,12 +34,31 @@ namespace BudgetSystem.Views.BudgetAppropriations
             try
             {
                 var uc = ucBudgetAppropriations1;
+                int? othersFPPId;
+
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
-                return true;
+
+
+                if (uc.cmbxOthersFPP.SelectedValue == null)
+                    othersFPPId = null;
+                else
+                    othersFPPId = Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue);
+
+                // proceed to insert
+                var budgetAppropriationsModel = new BudgetAppropriationsModel()
+                {
+                    FunctionProgramProjectId = Convert.ToInt32(uc.cmbxFPP.SelectedValue),
+                    OthersFPPId = othersFPPId,
+                    AllotmentClassesId = Convert.ToInt32(uc.cmbxAllotmentClass.SelectedValue),
+                    GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxLedgerAccount.SelectedValue),
+                    amount = uc.nudAmount.Value
+                };
+
+                return Factory.BudgetAppropriationsRepository().Insert(budgetAppropriationsModel);
             }
             catch (Exception ex) 
             {
@@ -55,6 +75,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             if (SaveData()) 
             {
                 uc.ResetForm();
+                Helper.MessageBoxSuccess("Budget Appropriation has been saved."); 
             }
         }
 

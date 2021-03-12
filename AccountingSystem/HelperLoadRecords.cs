@@ -421,6 +421,7 @@ namespace AccountingSystem
 
                 comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+                comboBox.DropDownHeight = 200;
             }
         }
 
