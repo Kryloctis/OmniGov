@@ -34,6 +34,8 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
+            this.txtStripSearch = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -54,8 +56,9 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.dgBudgetAppropriations.Location = new System.Drawing.Point(0, 50);
             this.dgBudgetAppropriations.Name = "dgBudgetAppropriations";
             this.dgBudgetAppropriations.RowTemplate.Height = 25;
-            this.dgBudgetAppropriations.Size = new System.Drawing.Size(800, 378);
+            this.dgBudgetAppropriations.Size = new System.Drawing.Size(951, 378);
             this.dgBudgetAppropriations.TabIndex = 0;
+            this.dgBudgetAppropriations.SelectionChanged += new System.EventHandler(this.dgBudgetAppropriations_SelectionChanged);
             // 
             // toolStrip1
             // 
@@ -63,10 +66,13 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonAdd,
             this.toolStripButtonEdit,
-            this.toolStripButtonDelete});
+            this.toolStripButtonDelete,
+            this.txtStripSearch,
+            this.toolStripLabel1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(800, 50);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
+            this.toolStrip1.Size = new System.Drawing.Size(951, 50);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -101,6 +107,20 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.toolStripButtonDelete.Text = "Delete";
             this.toolStripButtonDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
+            // txtStripSearch
+            // 
+            this.txtStripSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.txtStripSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtStripSearch.Name = "txtStripSearch";
+            this.txtStripSearch.Size = new System.Drawing.Size(200, 50);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(42, 47);
+            this.toolStripLabel1.Text = "Search";
+            // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -115,7 +135,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.statusStrip1.Location = new System.Drawing.Point(0, 428);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(951, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 10;
             this.statusStrip1.Text = "statusStrip1";
@@ -135,7 +155,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(590, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(741, 17);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -165,12 +185,13 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(951, 450);
             this.Controls.Add(this.dgBudgetAppropriations);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(967, 489);
             this.Name = "frmBudgetAppropriations";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -206,5 +227,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        internal System.Windows.Forms.ToolStripTextBox txtStripSearch;
     }
 }

@@ -11,6 +11,7 @@ namespace ACC.Data
     {
         private MySqlGenericCommands mySqlGenericCommands;
         private readonly string tableName = "budget_appropriations";
+        private readonly string viewTableName = "view_budget_appropriations";
 
         public BudgetAppropriationsRepository(MySqlGenericCommands mySqlGenericCommands)
         {
@@ -128,6 +129,36 @@ namespace ACC.Data
                 throw;
             }
             return false;
+        }
+
+        public DataTable GetViewRecords()
+        {
+            try
+            {
+                string query = $"SELECT budget_approrations_id, fpp_id, fpp_code, fpp_name, others_fpp_id, others_fpp_name, allotment_classes_id, allotment_code, allotment_name, general_ledger_acc_id, ledger_code, ledger_name, is_contra_account, amount, created_at, updated_at FROM {viewTableName}";
+
+                var dtPermissions = new DataTable();
+                return mySqlGenericCommands.Fill(query, dtPermissions);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetViewRecordsBySearch(string searchTxt)
+        {
+            try
+            {
+                string query = $"SELECT budget_approrations_id, fpp_id, fpp_code, fpp_name, others_fpp_id, others_fpp_name, allotment_classes_id, allotment_code, allotment_name, general_ledger_acc_id, ledger_code, ledger_name, is_contra_account, amount, created_at, updated_at FROM {viewTableName}";
+
+                var dtPermissions = new DataTable();
+                return mySqlGenericCommands.Fill(query, dtPermissions);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         #endregion Validations
