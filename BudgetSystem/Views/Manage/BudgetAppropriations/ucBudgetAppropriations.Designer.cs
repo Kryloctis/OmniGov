@@ -62,7 +62,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.cmbxFPP.Name = "cmbxFPP";
             this.cmbxFPP.Size = new System.Drawing.Size(436, 23);
             this.cmbxFPP.TabIndex = 0;
-            this.cmbxFPP.TextChanged += new System.EventHandler(this.cmbxFunctionProgramProject_TextChanged);
+            this.cmbxFPP.SelectedValueChanged += new System.EventHandler(this.cmbxFPP_SelectedValueChanged);
             this.cmbxFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxFPP_Validating);
             this.cmbxFPP.Validated += new System.EventHandler(this.cmbxFPP_Validated);
             // 
@@ -101,7 +101,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.cmbxAllotmentClass.Name = "cmbxAllotmentClass";
             this.cmbxAllotmentClass.Size = new System.Drawing.Size(436, 23);
             this.cmbxAllotmentClass.TabIndex = 2;
-            this.cmbxAllotmentClass.TextChanged += new System.EventHandler(this.cmbxAllotmentClass_TextChanged);
+            this.cmbxAllotmentClass.SelectedValueChanged += new System.EventHandler(this.cmbxAllotmentClass_SelectedValueChanged);
             this.cmbxAllotmentClass.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAllotmentClass_Validating);
             this.cmbxAllotmentClass.Validated += new System.EventHandler(this.cmbxAllotmentClass_Validated);
             // 

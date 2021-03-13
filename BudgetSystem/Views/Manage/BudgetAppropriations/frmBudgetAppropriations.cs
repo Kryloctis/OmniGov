@@ -48,7 +48,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e) 
         {
-            var frmBudgetAppropriationsAdd = new frmBudgetAppropriationsAdd();
+            var frmBudgetAppropriationsAdd = new frmBudgetAppropriationsAdd(this);
             frmBudgetAppropriationsAdd.ShowDialog();
         }
 

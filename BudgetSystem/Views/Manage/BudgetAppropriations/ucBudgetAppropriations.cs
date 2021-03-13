@@ -46,9 +46,9 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             try
             {
-                cmbxFPP.TextChanged -= new EventHandler(cmbxFunctionProgramProject_TextChanged);
+                cmbxFPP.SelectedValueChanged -= new EventHandler(cmbxFPP_SelectedValueChanged);
                 HelperLoadRecords.FPPCombobox(Factory.FunctionProgramProjectRepository().GetRecords(), cmbxFPP, "fpp_name", "id");
-                cmbxFPP.TextChanged += new EventHandler(cmbxFunctionProgramProject_TextChanged);
+                cmbxFPP.SelectedValueChanged += new EventHandler(cmbxFPP_SelectedValueChanged);
             }
             catch (Exception ex) 
             {
@@ -84,9 +84,9 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             try
             {
-                cmbxAllotmentClass.TextChanged -= new EventHandler(cmbxAllotmentClass_TextChanged);
+                cmbxAllotmentClass.SelectedValueChanged -= new EventHandler(cmbxAllotmentClass_SelectedValueChanged);
                 HelperLoadRecords.AllotmentCombobox(Factory.AllotmentClassesRepository().GetRecords(), cmbxAllotmentClass, "allotment_name", "id");
-                cmbxAllotmentClass.TextChanged += new EventHandler(cmbxAllotmentClass_TextChanged);
+                cmbxAllotmentClass.SelectedValueChanged += new EventHandler(cmbxAllotmentClass_SelectedValueChanged);
             }
             catch (Exception ex) 
             {
@@ -192,10 +192,15 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
 
-            if (nudAmount.Value == nudAmount.Minimum || nudAmount.Value == 0) 
+            if (nudAmount.Value == 0)
             {
                 epAmount.SetError(nudAmount, Helper.ErrorMessage("Valuable Amount"));
                 e.Cancel = true;
+            }
+            else 
+            {
+                epAmount.SetError(nudAmount, string.Empty);
+                e.Cancel = false;
             }
 
             #region Validation of Budget Appropriration Record
@@ -227,6 +232,11 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 epBudgetAppropriation.SetError(cmbxFPP, "Budget Appropriation you entered is not allowed. Already exist on your record.");
                 e.Cancel = true;
             }
+            else
+            {
+                epBudgetAppropriation.SetError(cmbxFPP, string.Empty);
+                e.Cancel = false;
+            }
 
             #endregion 
 
@@ -238,12 +248,12 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         #endregion Validations
 
-        private void cmbxFunctionProgramProject_TextChanged(object sender, EventArgs e)
+        private void cmbxFPP_SelectedValueChanged(object sender, EventArgs e)
         {
             LoadOtherFPPRecords();
         }
 
-        private void cmbxAllotmentClass_TextChanged(object sender, EventArgs e)
+        private void cmbxAllotmentClass_SelectedValueChanged(object sender, EventArgs e)
         {
             LoadGeneralLedgerAccounts();
         }

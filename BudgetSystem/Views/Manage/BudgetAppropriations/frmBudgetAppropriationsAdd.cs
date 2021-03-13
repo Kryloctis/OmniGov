@@ -14,9 +14,11 @@ namespace BudgetSystem.Views.BudgetAppropriations
 {
     public partial class frmBudgetAppropriationsAdd : Form
     {
-        public frmBudgetAppropriationsAdd()
+        private frmBudgetAppropriations _frmBudgetAppropriations;
+        public frmBudgetAppropriationsAdd(frmBudgetAppropriations frmBudgetAppropriations)
         {
             InitializeComponent();
+            _frmBudgetAppropriations = frmBudgetAppropriations;
         }
 
         private void LoadComboboxes()
@@ -75,6 +77,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             if (SaveData()) 
             {
                 uc.ResetForm();
+                _frmBudgetAppropriations.LoadRecords();
                 Helper.MessageBoxSuccess("Budget Appropriation has been saved."); 
             }
         }
