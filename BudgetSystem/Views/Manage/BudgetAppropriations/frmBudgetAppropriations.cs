@@ -1,4 +1,5 @@
-﻿using AccountingSystem;
+﻿using ACC.Domain.Models;
+using AccountingSystem;
 using BudgetSystem.Views.Manage.BudgetAppropriations;
 using System;
 using System.Collections.Generic;
@@ -81,6 +82,39 @@ namespace BudgetSystem.Views.BudgetAppropriations
             frmBudgetAppropriationEdit.ShowDialog();
         }
 
+        private void toolStripButtonDelete_Click(object sender, EventArgs e)
+        {
+            int selectedRowsCount = dgBudgetAppropriations.SelectedRows.Count;
+
+            var budgetAppropriationsModelList = new List<BudgetAppropriationsModel>();
+
+            try
+            {
+                if (selectedRowsCount > 0)
+                {
+                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                    {
+                        foreach (DataGridViewRow row in dgBudgetAppropriations.SelectedRows)
+                        {
+                            int budgetAppID = int.Parse(row.Cells[0].Value.ToString());
+                            var budgetAppropriationsModel = new BudgetAppropriationsModel()
+                            {
+                                ID = budgetAppID
+                            };
+
+                            budgetAppropriationsModelList.Add(budgetAppropriationsModel);
+                        }
+
+                        _ = Factory.BudgetAppropriationsRepository().Delete(budgetAppropriationsModelList);
+                        LoadRecords();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
 
         private void dgBudgetAppropriations_SelectionChanged(object sender, EventArgs e)
         {

@@ -107,6 +107,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.toolStripButtonDelete.Size = new System.Drawing.Size(44, 47);
             this.toolStripButtonDelete.Text = "Delete";
             this.toolStripButtonDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
             // 
             // txtStripSearch
             // 
