@@ -38,7 +38,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 var uc = ucBudgetAppropriations1;
                 int? othersFPPId;
 
-                if (!uc.ValidateChildren())
+                if (uc.BudgetAppropriationsValidation() || !uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;

@@ -132,7 +132,59 @@ namespace BudgetSystem.Views.BudgetAppropriations
             }
         }
 
+
         #region Validations
+
+        //Overriden Validation
+        internal bool BudgetAppropriationsValidation() 
+        {
+            try
+            {
+
+                #region Validation of Budget Appropriration Record
+
+                int FPPId = Convert.ToInt32(cmbxFPP.SelectedValue);
+                int? othersFPPId;
+                int allotmentClassId = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
+                int generalLedgerAccId = Convert.ToInt32(cmbxLedgerAccount.SelectedValue);
+
+                if (cmbxOthersFPP.SelectedValue == null)
+                    othersFPPId = null;
+                else
+                    othersFPPId = Convert.ToInt32(cmbxOthersFPP.SelectedValue);
+
+
+                bool budgetAppropriationExist;
+
+                if (budgetAppropriationId == 0)
+                {
+                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAllotmentExist(FPPId, othersFPPId, allotmentClassId, generalLedgerAccId);
+                }
+                else
+                {
+                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAllotmentExist(budgetAppropriationId, FPPId, othersFPPId, allotmentClassId, generalLedgerAccId);
+                }
+
+                if (budgetAppropriationExist)
+                {
+                    epBudgetAppropriation.SetError(cmbxFPP, "Budget Appropriation you entered is not allowed. Already exist on your record.");
+                    return true;
+                }
+                else
+                {
+                    epBudgetAppropriation.SetError(cmbxFPP, string.Empty);
+                    return false;
+                }
+
+                #endregion
+            }
+            catch (Exception e)
+            {
+                Helper.MessageBoxError(e.Message);
+            }
+            return false;
+        
+        }
 
         private void cmbxFPP_Validating(object sender, CancelEventArgs e)
         {
@@ -196,54 +248,11 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
 
-            if (nudAmount.Value == 0)
+            if (nudAmount.Value == nudAmount.Minimum || nudAmount.Value == 0)
             {
                 epAmount.SetError(nudAmount, Helper.ErrorMessage("Valuable Amount"));
                 e.Cancel = true;
             }
-            else 
-            {
-                epAmount.SetError(nudAmount, string.Empty);
-                e.Cancel = false;
-            }
-
-            #region Validation of Budget Appropriration Record
-
-            int FPPId = Convert.ToInt32(cmbxFPP.SelectedValue);
-            int? othersFPPId;
-            int allotmentClassId = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
-            int generalLedgerAccId = Convert.ToInt32(cmbxLedgerAccount.SelectedValue);
-
-            if (cmbxOthersFPP.SelectedValue == null)
-                othersFPPId = null;
-            else
-                othersFPPId = Convert.ToInt32(cmbxOthersFPP.SelectedValue);
-
-
-            bool budgetAppropriationExist;
-
-            if (budgetAppropriationId == 0)
-            {
-                budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAllotmentExist(FPPId, othersFPPId, allotmentClassId, generalLedgerAccId);
-            }
-            else
-            {
-                budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAllotmentExist(budgetAppropriationId, FPPId, othersFPPId, allotmentClassId, generalLedgerAccId);
-            }
-
-            if (budgetAppropriationExist)
-            {
-                epBudgetAppropriation.SetError(cmbxFPP, "Budget Appropriation you entered is not allowed. Already exist on your record.");
-                e.Cancel = true;
-            }
-            else
-            {
-                epBudgetAppropriation.SetError(cmbxFPP, string.Empty);
-                e.Cancel = false;
-            }
-
-            #endregion 
-
         }
         private void nudAmount_Validated(object sender, EventArgs e)
         {
