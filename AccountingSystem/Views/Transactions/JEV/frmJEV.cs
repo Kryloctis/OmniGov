@@ -33,7 +33,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 int fppId = Convert.ToInt32(item.Cells["FPPId"].Value);
                 ushort generalLedgerId = Convert.ToUInt16(item.Cells["GeneralLedgerId"].Value);
-                ushort? subsidiaryLedgerId = Convert.ToUInt16(item.Cells["SubsidiaryLedgerId"].Value);
+                ushort? subsidiaryLedgerId = (ushort?)item.Cells["SubsidiaryLedgerId"].Value;
                 bool isDebit = Convert.ToBoolean(item.Cells["IsDebit"].Value);
                 bool? isDeposit = (bool?)item.Cells["IsDeposit"].Value;
 
@@ -63,9 +63,16 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             try
             {
-                var user = Helper.GetLoggedInUser();
-
+                var user = Helper.GetLoggedInUserAccounting();
                 var uc = ucjev1;
+
+                // if no fund or journal selected, show error
+                if (uc.fundId == 0 || uc.journalId == 0)
+                {
+                    Helper.MessageBoxError(uc.GetFormErrors());
+                    return false;
+                }
+
                 // if error occurs, show messagebox error
                 if (!uc.ValidateChildren())
                 {
@@ -73,11 +80,25 @@ namespace AccountingSystem.Views.Transactions.JEV
                     return false;
                 }
 
+                // if no rows in accounts datagrid, show error
+                if (uc.dgAccounts.Rows.Count == 0)
+                {
+                    Helper.MessageBoxError(uc.GetFormErrors());
+                    return false;
+                }
+
+                if (uc.txtDebitTotal.Text != uc.txtCreditTotal.Text)
+                {
+                    Helper.MessageBoxError("Debit & Credit amounts must be equal.");
+                    return false;
+                }
+
+                string jevNo = $"{uc.txtFundsJevNo.Text}-{uc.txtJEVNo.Text.Trim()}";
                 var jevModel = new JEVModel()
                 {
                     FundsId = uc.fundId,
                     JournalsId = uc.journalId,
-                    JEVNumber = uc.txtJEVNo.Text.Trim(),
+                    JEVNumber = jevNo,
                     DateEntry = uc.dtpDateEntry.Value,
                     Explanation = uc.txtExplanation.Text.Trim(),
                     CreatedBy = Convert.ToByte(user["id"])
@@ -98,7 +119,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("JEV has been saved.");
-                //ucjev1.ResetForm();
+                ucjev1.ResetForm();
             }
         }
     }

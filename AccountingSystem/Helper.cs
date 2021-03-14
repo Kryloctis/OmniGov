@@ -41,7 +41,7 @@ namespace AccountingSystem
             if (Fill == true) dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        internal static Dictionary<string, string> GetLoggedInUser()
+        internal static Dictionary<string, string> GetLoggedInUserAccounting()
         {
             var user = new Dictionary<string, string>();
 
@@ -67,10 +67,10 @@ namespace AccountingSystem
         private static string ErrorMessageForEmpty(string fieldName)
         {
             
-            if (GetFirstLetter(fieldName) == "A")
-                return $"Please enter an {fieldName}";
+            if (GetFirstLetter(fieldName) == "A" || GetFirstLetter(fieldName) == "a")
+                return $"Please enter an {fieldName.ToLower()}";
             else
-                return $"Please enter a {fieldName}";
+                return $"Please enter a {fieldName.ToLower()}";
         }
 
         public static bool ShowErrorTextBoxEmpty(ErrorProvider ep, TextBox txtBox, string fieldName = "Field")

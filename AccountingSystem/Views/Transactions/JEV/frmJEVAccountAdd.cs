@@ -22,17 +22,19 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.ucjevAccount1.fundId = ucJEV.fundId;
         }
 
-        private bool AddAccount()
+        private void AddAccount()
         {
             var uc = ucjevAccount1;
             string fppId = uc.cmbFPP.SelectedValue.ToString();
             string fppName = uc.cmbFPP.Text;
             string generalLedgerId = uc.cmbAccount.SelectedValue.ToString();
-            string subsidiaryLedgerId = uc.cmbSubsidiary.SelectedValue.ToString();
+            string subsidiaryId = !string.IsNullOrWhiteSpace(uc.cmbSubsidiary.Text) ? uc.cmbSubsidiary.SelectedValue.ToString() : null;
+            string subsidiaryName = uc.cmbSubsidiary.Text;
             string generalLedgerName = uc.cmbAccount.Text;
             string amount = uc.nudAmount.Value.ToString("N2");
             bool isDebit = uc.radioDebit.Checked;
             bool? isDeposit;
+
             if (uc.radioDeposits.Checked)
                 isDeposit = true;
             else if (uc.radioCollections.Checked)
@@ -40,44 +42,46 @@ namespace AccountingSystem.Views.Transactions.JEV
             else
                 isDeposit = null;
 
+            object[] accountRow;
             if (isDebit)
             {
-                var dgRowDebit = new object[]
+                // for debit row
+                accountRow = new object[]
                 {
                     fppId,
                     generalLedgerId,
-                    subsidiaryLedgerId,
+                    subsidiaryId,
                     isDebit,
                     isDeposit,
                     fppName,
                     generalLedgerName,
-                    "Account Code",
+                    "",
+                    subsidiaryName,
                     amount,
                     "",
                 };
-
-                ucJEV.dgAccounts.Rows.Add(dgRowDebit);
             }
             else
             {
-                var dgRowCredit = new object[]
+                // for credit row
+                accountRow = new object[]
                 {
                     fppId,
                     generalLedgerId,
-                    subsidiaryLedgerId,
+                    subsidiaryId,
                     isDebit,
                     isDeposit,
                     fppName,
                     $"     {generalLedgerName}",
-                    "Account Code",
+                    "",
+                    subsidiaryName,
                     "",
                     amount,
                 };
+            }
 
-                ucJEV.dgAccounts.Rows.Add(dgRowCredit);
-            } 
-
-            return false;
+            ucJEV.dgAccounts.Rows.Add(accountRow);
+            ucJEV.SumDebitCredit();
         }
 
         private void frmJEVAccountAdd_Load(object sender, EventArgs e)
@@ -85,11 +89,35 @@ namespace AccountingSystem.Views.Transactions.JEV
             var uc = ucjevAccount1;
             uc.LoadFPP();
             uc.LoadGeneralLedgers();
+            uc.cmbFPP.SelectedIndex = -1;
+            uc.cmbAccount.SelectedIndex = -1;
+
+
+            if (ucJEV.journalName == "Cash Receipts Journal")
+            {
+                uc.pnlCollectionsDeposits.Visible = true;
+                uc.radioDeposits.Checked = true;
+            }
+            else
+            {
+                uc.pnlCollectionsDeposits.Visible = false;
+                uc.radioDeposits.Checked = false;
+                uc.radioCollections.Checked = false;
+            }
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+            var uc = ucjevAccount1;
+            // show error kung naa
+            if (!uc.ValidateChildren())
+            {
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return;
+            }
+
             AddAccount();
+            uc.ResetForm();
         }
     }
 }

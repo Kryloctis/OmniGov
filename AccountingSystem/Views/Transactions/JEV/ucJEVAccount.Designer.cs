@@ -29,6 +29,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucJEVAccount));
             this.label1 = new System.Windows.Forms.Label();
             this.cmbFPP = new System.Windows.Forms.ComboBox();
@@ -45,9 +46,15 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.cmbSubsidiary = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.epFPP = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epAccount = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             this.pnlCollectionsDeposits.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAccount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -65,7 +72,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.cmbFPP.Location = new System.Drawing.Point(67, 9);
             this.cmbFPP.Name = "cmbFPP";
             this.cmbFPP.Size = new System.Drawing.Size(370, 23);
-            this.cmbFPP.TabIndex = 1;
+            this.cmbFPP.TabIndex = 0;
+            this.cmbFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbFPP_Validating);
+            this.cmbFPP.Validated += new System.EventHandler(this.cmbFPP_Validated);
             // 
             // label2
             // 
@@ -82,16 +91,19 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.cmbAccount.Location = new System.Drawing.Point(67, 38);
             this.cmbAccount.Name = "cmbAccount";
             this.cmbAccount.Size = new System.Drawing.Size(370, 23);
-            this.cmbAccount.TabIndex = 3;
+            this.cmbAccount.TabIndex = 1;
             this.cmbAccount.SelectedValueChanged += new System.EventHandler(this.cmbAccount_SelectedValueChanged);
+            this.cmbAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbAccount_Validating);
+            this.cmbAccount.Validated += new System.EventHandler(this.cmbAccount_Validated);
             // 
             // radioDebit
             // 
             this.radioDebit.AutoSize = true;
+            this.radioDebit.Checked = true;
             this.radioDebit.Location = new System.Drawing.Point(3, 3);
             this.radioDebit.Name = "radioDebit";
             this.radioDebit.Size = new System.Drawing.Size(53, 19);
-            this.radioDebit.TabIndex = 4;
+            this.radioDebit.TabIndex = 3;
             this.radioDebit.TabStop = true;
             this.radioDebit.Text = "Debit";
             this.radioDebit.UseVisualStyleBackColor = true;
@@ -111,8 +123,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.radioCredit.Location = new System.Drawing.Point(62, 3);
             this.radioCredit.Name = "radioCredit";
             this.radioCredit.Size = new System.Drawing.Size(57, 19);
-            this.radioCredit.TabIndex = 5;
-            this.radioCredit.TabStop = true;
+            this.radioCredit.TabIndex = 4;
             this.radioCredit.Text = "Credit";
             this.radioCredit.UseVisualStyleBackColor = true;
             // 
@@ -131,7 +142,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.radioDeposits.Location = new System.Drawing.Point(93, 3);
             this.radioDeposits.Name = "radioDeposits";
             this.radioDeposits.Size = new System.Drawing.Size(70, 19);
-            this.radioDeposits.TabIndex = 5;
+            this.radioDeposits.TabIndex = 7;
             this.radioDeposits.TabStop = true;
             this.radioDeposits.Text = "Deposits";
             this.radioDeposits.UseVisualStyleBackColor = true;
@@ -142,7 +153,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.radioCollections.Location = new System.Drawing.Point(3, 3);
             this.radioCollections.Name = "radioCollections";
             this.radioCollections.Size = new System.Drawing.Size(84, 19);
-            this.radioCollections.TabIndex = 4;
+            this.radioCollections.TabIndex = 6;
             this.radioCollections.TabStop = true;
             this.radioCollections.Text = "Collections";
             this.radioCollections.UseVisualStyleBackColor = true;
@@ -158,9 +169,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             0});
             this.nudAmount.Name = "nudAmount";
             this.nudAmount.Size = new System.Drawing.Size(370, 23);
-            this.nudAmount.TabIndex = 7;
+            this.nudAmount.TabIndex = 5;
             this.nudAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudAmount.ThousandsSeparator = true;
+            this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
+            this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
             // 
             // label3
             // 
@@ -173,11 +186,12 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // cmbSubsidiary
             // 
+            this.cmbSubsidiary.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSubsidiary.FormattingEnabled = true;
             this.cmbSubsidiary.Location = new System.Drawing.Point(67, 67);
             this.cmbSubsidiary.Name = "cmbSubsidiary";
             this.cmbSubsidiary.Size = new System.Drawing.Size(370, 23);
-            this.cmbSubsidiary.TabIndex = 9;
+            this.cmbSubsidiary.TabIndex = 2;
             // 
             // label4
             // 
@@ -194,8 +208,20 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.button1.Location = new System.Drawing.Point(443, 68);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(22, 22);
-            this.button1.TabIndex = 11;
+            this.button1.TabIndex = 8;
             this.button1.UseVisualStyleBackColor = true;
+            // 
+            // epFPP
+            // 
+            this.epFPP.ContainerControl = this;
+            // 
+            // epAccount
+            // 
+            this.epAccount.ContainerControl = this;
+            // 
+            // epAmount
+            // 
+            this.epAmount.ContainerControl = this;
             // 
             // ucJEVAccount
             // 
@@ -219,6 +245,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.pnlCollectionsDeposits.ResumeLayout(false);
             this.pnlCollectionsDeposits.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epFPP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAccount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -229,7 +258,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel pnlCollectionsDeposits;
         private System.Windows.Forms.Label label3;
         internal System.Windows.Forms.ComboBox cmbFPP;
         internal System.Windows.Forms.ComboBox cmbAccount;
@@ -241,5 +269,9 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal System.Windows.Forms.ComboBox cmbSubsidiary;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button1;
+        internal System.Windows.Forms.Panel pnlCollectionsDeposits;
+        private System.Windows.Forms.ErrorProvider epFPP;
+        private System.Windows.Forms.ErrorProvider epAccount;
+        private System.Windows.Forms.ErrorProvider epAmount;
     }
 }

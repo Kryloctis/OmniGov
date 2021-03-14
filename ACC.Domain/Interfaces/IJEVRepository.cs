@@ -10,5 +10,7 @@ namespace ACC.Domain.Interfaces
         bool Insert(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList);
 
         int GetLastInsertedID();
+
+        bool JevNumberExist(string jevNo);
     }
 }
