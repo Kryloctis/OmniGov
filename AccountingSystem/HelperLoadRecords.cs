@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace AccountingSystem
 {
-    class HelperLoadRecords
+    public class HelperLoadRecords
     {
         #region Account Group
         internal static void AccountGroupDatagridView(DataTable dataTable, DataGridView datagrid)
@@ -350,5 +350,113 @@ namespace AccountingSystem
         }
 
         #endregion Others FPP
+
+
+        //BUDGET SYSTEM
+
+        #region BudgetAppropriations
+
+        public static void BudgetAppropriationsDataGridView(DataTable dataTable, DataGridView dataGridView)
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns[0].Visible = false;
+            dataGridView.Columns[1].Visible = false;
+            dataGridView.Columns[2].HeaderText = "FPP Code";
+            dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns[3].HeaderText = "FPP Name";
+            dataGridView.Columns[4].Visible = false;
+            dataGridView.Columns[5].HeaderText = "Others FPP";
+            dataGridView.Columns[6].Visible = false;
+            dataGridView.Columns[7].HeaderText = "Allotment Code";
+            dataGridView.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns[8].HeaderText = "Allotment Name";
+            dataGridView.Columns[9].Visible = false;
+            dataGridView.Columns[10].HeaderText = "Ledger Code";
+            dataGridView.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns[11].HeaderText = "Ledger Name";
+            dataGridView.Columns[12].Visible = false;
+            dataGridView.Columns[13].HeaderText = "Amount";
+            dataGridView.Columns[13].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns[13].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns[13].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns[14].Visible = false;
+            dataGridView.Columns[15].Visible = false;
+            dataGridView.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+            Helper.DatagridDefaultStyle(dataGridView, true);
+        }
+
+        public static void FPPCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+
+            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                // loop datatable to add items in autocompletesource
+                foreach (DataRow item in dataTable.Rows)
+                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
+
+                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            }
+        }
+
+        public static void OthersFPPCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+
+            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                // loop datatable to add items in autocompletesource
+                foreach (DataRow item in dataTable.Rows)
+                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
+
+                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            }
+        }
+
+        public static void AllotmentCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+
+            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                // loop datatable to add items in autocompletesource
+                foreach (DataRow item in dataTable.Rows)
+                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
+
+                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            }
+        }
+
+        public static void GeneralLedgerAccountsCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+
+            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                // loop datatable to add items in autocompletesource
+                foreach (DataRow item in dataTable.Rows)
+                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
+
+                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+                comboBox.DropDownHeight = 200;
+            }
+        }
+
+
+        #endregion BudgetAppropriations
+
     }
 }

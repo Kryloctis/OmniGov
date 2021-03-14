@@ -70,8 +70,6 @@ namespace ACC.Data
             }
         }
 
-
-
         public DataTable GetRecordsBySearch(string searchText)
         {
             try
@@ -148,8 +146,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
-
 
         public bool Delete(List<FunctionProgramProjectModel> entityList)
         {
@@ -287,8 +283,6 @@ namespace ACC.Data
 
             return false;
         }
-
-
 
         public bool NameExist(string name, int id)
         {
