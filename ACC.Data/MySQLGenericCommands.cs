@@ -12,7 +12,7 @@ namespace ACC.Data
 
         public MySqlGenericCommands()
         {
-            connectionString = ConfigurationManager.ConnectionStrings["AccountingInstance"].ConnectionString;
+            connectionString = ConfigurationManager.ConnectionStrings["LocalFinanceInstance"].ConnectionString;
         }
 
         private void AddDbParameter(MySqlCommand command, object[] param)

@@ -34,6 +34,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripBtnOthers = new System.Windows.Forms.ToolStripButton();
             this.txtSearch = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tabControlFunctionProgramProject = new System.Windows.Forms.TabControl();
@@ -57,8 +59,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripBtnOthers = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.tabControlFunctionProgramProject.SuspendLayout();
             this.tabFunctionProgramProject.SuspendLayout();
@@ -121,6 +121,22 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
+            // toolStripBtnOthers
+            // 
+            this.toolStripBtnOthers.Image = global::AccountingSystem.Properties.Resources.others;
+            this.toolStripBtnOthers.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripBtnOthers.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnOthers.Name = "toolStripBtnOthers";
+            this.toolStripBtnOthers.Size = new System.Drawing.Size(55, 47);
+            this.toolStripBtnOthers.Text = "Others...";
+            this.toolStripBtnOthers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripBtnOthers.Click += new System.EventHandler(this.toolStripBtnOthers_Click);
+            // 
             // txtSearch
             // 
             this.txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -143,19 +159,17 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             // 
             // tabControlFunctionProgramProject
             // 
-            this.tabControlFunctionProgramProject.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControlFunctionProgramProject.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             this.tabControlFunctionProgramProject.Controls.Add(this.tabFunctionProgramProject);
             this.tabControlFunctionProgramProject.Controls.Add(this.tabFunctionalClassificationService);
             this.tabControlFunctionProgramProject.Controls.Add(this.tabFunctionalClassification);
-            this.tabControlFunctionProgramProject.Location = new System.Drawing.Point(12, 68);
+            this.tabControlFunctionProgramProject.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlFunctionProgramProject.Location = new System.Drawing.Point(0, 50);
             this.tabControlFunctionProgramProject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControlFunctionProgramProject.Multiline = true;
             this.tabControlFunctionProgramProject.Name = "tabControlFunctionProgramProject";
             this.tabControlFunctionProgramProject.SelectedIndex = 0;
-            this.tabControlFunctionProgramProject.Size = new System.Drawing.Size(838, 421);
+            this.tabControlFunctionProgramProject.Size = new System.Drawing.Size(859, 426);
             this.tabControlFunctionProgramProject.TabIndex = 8;
             this.tabControlFunctionProgramProject.SelectedIndexChanged += new System.EventHandler(this.dgFunctionalClassification_SelectedIndexChanged);
             this.tabControlFunctionProgramProject.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControlFunctionProgramProject_Selected);
@@ -170,7 +184,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.tabFunctionProgramProject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabFunctionProgramProject.Name = "tabFunctionProgramProject";
             this.tabFunctionProgramProject.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabFunctionProgramProject.Size = new System.Drawing.Size(830, 390);
+            this.tabFunctionProgramProject.Size = new System.Drawing.Size(851, 395);
             this.tabFunctionProgramProject.TabIndex = 1;
             this.tabFunctionProgramProject.Text = "Function Program Project";
             this.tabFunctionProgramProject.UseVisualStyleBackColor = true;
@@ -206,7 +220,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.dgFunctionalProgramProject.Name = "dgFunctionalProgramProject";
             this.dgFunctionalProgramProject.RowHeadersWidth = 51;
             this.dgFunctionalProgramProject.RowTemplate.Height = 29;
-            this.dgFunctionalProgramProject.Size = new System.Drawing.Size(826, 362);
+            this.dgFunctionalProgramProject.Size = new System.Drawing.Size(847, 363);
             this.dgFunctionalProgramProject.TabIndex = 5;
             this.dgFunctionalProgramProject.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgFunctionalProgramProject_RowHeaderMouseDoubleClick);
             this.dgFunctionalProgramProject.SelectionChanged += new System.EventHandler(this.dgFunctionalProgramProject_SelectionChanged);
@@ -214,7 +228,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             // btnLoadAllFpp
             // 
             this.btnLoadAllFpp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoadAllFpp.Location = new System.Drawing.Point(753, 3);
+            this.btnLoadAllFpp.Location = new System.Drawing.Point(774, 3);
             this.btnLoadAllFpp.Name = "btnLoadAllFpp";
             this.btnLoadAllFpp.Size = new System.Drawing.Size(75, 22);
             this.btnLoadAllFpp.TabIndex = 18;
@@ -317,7 +331,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.lblCreatedAt,
             this.toolStripStatusLabel3,
             this.lblUpdatedAt});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 478);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 476);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
             this.statusStrip1.Size = new System.Drawing.Size(859, 22);
@@ -365,30 +379,14 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.lblUpdatedAt.Name = "lblUpdatedAt";
             this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
-            // 
-            // toolStripBtnOthers
-            // 
-            this.toolStripBtnOthers.Image = global::AccountingSystem.Properties.Resources.others;
-            this.toolStripBtnOthers.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripBtnOthers.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripBtnOthers.Name = "toolStripBtnOthers";
-            this.toolStripBtnOthers.Size = new System.Drawing.Size(55, 47);
-            this.toolStripBtnOthers.Text = "Others...";
-            this.toolStripBtnOthers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripBtnOthers.Click += new System.EventHandler(this.toolStripBtnOthers_Click);
-            // 
             // frmFunctionProgramProject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(859, 500);
-            this.Controls.Add(this.statusStrip1);
+            this.ClientSize = new System.Drawing.Size(859, 498);
             this.Controls.Add(this.tabControlFunctionProgramProject);
             this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.statusStrip1);
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(874, 537);
             this.Name = "frmFunctionProgramProject";

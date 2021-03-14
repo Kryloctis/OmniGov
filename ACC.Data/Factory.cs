@@ -38,6 +38,7 @@ namespace AccountingSystem
         public static IPermissionsRepository PermissionsRepository() => new PermissionsRepository(new MySqlGenericCommands());
         public static IOthersFPPRepository OthersFPPRepository() => new OthersFPPRepository(new MySqlGenericCommands());
 
+        public static IBudgetAppropriationsRepository BudgetAppropriationsRepository() => new BudgetAppropriationsRepository(new MySqlGenericCommands());
         public static IError CreateErrors(Array errors) => new Error(errors);
     }
 }

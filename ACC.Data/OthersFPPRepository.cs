@@ -85,7 +85,17 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            throw new NotImplementedException();
+            try
+            {
+                string query = $"SELECT id, function_program_project_id, name, created_at, updated_at FROM {tableName}";
+
+                var dtPermissions = new DataTable();
+                return mySqlGenericCommands.Fill(query, dtPermissions);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -194,7 +204,6 @@ namespace ACC.Data
                 {
                     new object[] { "@function_program_project_id", DbType.Int32, id }
                 };
-
 
                 string query = $"SELECT id, function_program_project_id, name, created_at, updated_at FROM {tableName} WHERE function_program_project_id = @function_program_project_id";
 

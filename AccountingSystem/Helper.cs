@@ -73,6 +73,14 @@ namespace AccountingSystem
                 return $"Please enter a {fieldName.ToLower()}";
         }
 
+        public static string ErrorMessage(string fieldName) 
+        {
+            if (GetFirstLetter(fieldName) == "A")
+                return $"Please enter an {fieldName}";
+            else
+                return $"Please enter a {fieldName}";
+        }
+
         public static bool ShowErrorTextBoxEmpty(ErrorProvider ep, TextBox txtBox, string fieldName = "Field")
         {
             if (string.IsNullOrWhiteSpace(txtBox.Text.Trim()))
@@ -202,7 +210,7 @@ namespace AccountingSystem
         #endregion
 
         #region EnableDisableButtons
-        internal static void EnableDisableButtons(DataGridView dgv, Button btnEdit, Button btnDelete)
+        public static void EnableDisableButtons(DataGridView dgv, Button btnEdit, Button btnDelete)
         {
             int SelectedRows = dgv.SelectedRows.Count;
             if (SelectedRows == 1)
@@ -226,7 +234,7 @@ namespace AccountingSystem
             }
         }
 
-        internal static void EnableDisableToolStripButtons(DataGridView dgv, ToolStripButton tsBtnEdit, ToolStripButton tsBtnDelete)
+        public static void EnableDisableToolStripButtons(DataGridView dgv, ToolStripButton tsBtnEdit, ToolStripButton tsBtnDelete)
         {
             int SelectedRows = dgv.SelectedRows.Count;
             if (SelectedRows == 1)
@@ -252,7 +260,7 @@ namespace AccountingSystem
 
         #endregion
 
-        internal static void ShowRecordTimestamp(DataGridView dataGridView, byte[] index, ToolStripStatusLabel lblCreatedAt, ToolStripStatusLabel lblUpdatedAt)
+        public static void ShowRecordTimestamp(DataGridView dataGridView, byte[] index, ToolStripStatusLabel lblCreatedAt, ToolStripStatusLabel lblUpdatedAt)
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
@@ -266,7 +274,7 @@ namespace AccountingSystem
             }
         }
 
-        internal static string TruncateString(string myString, int maxLength)
+        public static string TruncateString(string myString, int maxLength)
         {
             return myString.Length > maxLength ? $"{myString.Substring(0, 20)}..." : $"{myString}";
         }
