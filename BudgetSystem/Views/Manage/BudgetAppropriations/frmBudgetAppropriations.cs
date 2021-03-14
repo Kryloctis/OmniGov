@@ -1,4 +1,5 @@
 ﻿using AccountingSystem;
+using BudgetSystem.Views.Manage.BudgetAppropriations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -51,6 +52,35 @@ namespace BudgetSystem.Views.BudgetAppropriations
             var frmBudgetAppropriationsAdd = new frmBudgetAppropriationsAdd(this);
             frmBudgetAppropriationsAdd.ShowDialog();
         }
+
+        private void toolStripButtonEdit_Click(object sender, EventArgs e) 
+        {
+            var frmBudgetAppropriationEdit = new frmBudgetAppropriationsEdit(this);
+
+            var uc = frmBudgetAppropriationEdit.ucBudgetAppropriations1;
+            var budgetAppId = dgBudgetAppropriations.SelectedCells[0].Value;
+            var fppId = dgBudgetAppropriations.SelectedCells[1].Value;
+            var dgothersFPPId = dgBudgetAppropriations.SelectedCells[4].Value;
+            int? othersFPPId;
+            var allotmentClassesId = dgBudgetAppropriations.SelectedCells[6].Value;
+            var genLedgerAccId = dgBudgetAppropriations.SelectedCells[9].Value;
+
+
+            if (string.IsNullOrEmpty(dgothersFPPId.ToString()))
+                othersFPPId = null;
+            else
+                othersFPPId = Convert.ToInt32(dgothersFPPId);
+
+            uc.budgetAppropriationId = Convert.ToInt32(budgetAppId);
+            uc.fppId = Convert.ToInt32(fppId);
+            uc.othersFPPId = othersFPPId;
+            uc.allotmentClassesId = Convert.ToInt32(allotmentClassesId);
+            uc.generalLedgerAccId = Convert.ToInt32(genLedgerAccId);
+
+
+            frmBudgetAppropriationEdit.ShowDialog();
+        }
+
 
         private void dgBudgetAppropriations_SelectionChanged(object sender, EventArgs e)
         {

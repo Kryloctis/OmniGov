@@ -14,6 +14,10 @@ namespace BudgetSystem.Views.BudgetAppropriations
     public partial class ucBudgetAppropriations : UserControl
     {
         internal int budgetAppropriationId = 0;
+        internal int fppId = 0;
+        internal int? othersFPPId = 0;
+        internal int allotmentClassesId = 0;
+        internal int generalLedgerAccId = 0;
 
         public ucBudgetAppropriations()
         {

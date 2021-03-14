@@ -73,7 +73,25 @@ namespace ACC.Data
 
         public bool Update(BudgetAppropriationsModel entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, entity.ID},
+                    new object[] { "@function_program_project_id", DbType.Int32, entity.FunctionProgramProjectId},
+                    new object[] { "@others_fpp_id", DbType.String, entity.OthersFPPId},
+                    new object[] { "@allotment_classes_id", DbType.Int32, entity.AllotmentClassesId},
+                    new object[] { "@general_ledger_accounts_id", DbType.Int32, entity.GeneralLedgerAccountsId},
+                    new object[] { "@amount", DbType.Decimal, entity.amount}
+                };
+
+                string query = $"UPDATE {tableName} SET function_program_project_id = @function_program_project_id, others_fpp_id = @others_fpp_id, allotment_classes_id = @allotment_classes_id, general_ledger_accounts_id = @general_ledger_accounts_id, amount = @amount WHERE id = @id";
+                return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         #region Validations
@@ -117,7 +135,7 @@ namespace ACC.Data
                     new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerAccountId},
                 };
 
-                string query = $"SELECT id FROM {tableName} WHERE id = @id, function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id";
+                string query = $"SELECT id FROM {tableName} WHERE id <> @id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id";
                 string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -159,6 +177,45 @@ namespace ACC.Data
             {
                 throw;
             }
+        }
+
+        public Dictionary<string, string> GetRecordByIDs(int budgetAppID, int fppID, int? othersFPPID, int allotmentClassID, int genLedgerAccID)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                   new object[] {"@id", DbType.Int32, budgetAppID},
+                   new object[] {"@function_program_project_id", DbType.Int32, fppID},
+                   new object[] {"@others_fpp_id", DbType.String, othersFPPID},
+                   new object[] {"@allotment_classes_id", DbType.Int32, allotmentClassID},
+                   new object[] {"@general_ledger_accounts_id", DbType.Int32, genLedgerAccID }
+                };
+                string query = $"SELECT function_program_project_id, others_fpp_id, allotment_classes_id, general_ledger_accounts_id, amount FROM {tableName} WHERE id = @id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id";
+
+                using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("function_program_project_id", item[0].ToString());
+                        record.Add("others_fpp_id", item[1].ToString());
+                        record.Add("allotment_classes_id", item[2].ToString());
+                        record.Add("general_ledger_accounts_id", item[3].ToString());
+                        record.Add("amount", item[4].ToString());
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
         }
 
         #endregion Validations

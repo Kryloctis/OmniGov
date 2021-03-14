@@ -96,6 +96,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.toolStripButtonEdit.Size = new System.Drawing.Size(40, 47);
             this.toolStripButtonEdit.Text = "Edit...";
             this.toolStripButtonEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButtonEdit.Click += new System.EventHandler(this.toolStripButtonEdit_Click);
             // 
             // toolStripButtonDelete
             // 
