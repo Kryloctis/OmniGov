@@ -185,7 +185,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.tabFunctionProgramProject.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabFunctionProgramProject.Size = new System.Drawing.Size(851, 395);
             this.tabFunctionProgramProject.TabIndex = 1;
-            this.tabFunctionProgramProject.Text = "Function Program Project";
+            this.tabFunctionProgramProject.Text = "Function, Program && Project";
             this.tabFunctionProgramProject.UseVisualStyleBackColor = true;
             // 
             // label2
@@ -390,7 +390,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.MinimumSize = new System.Drawing.Size(874, 537);
             this.Name = "frmFunctionProgramProject";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Manage > Function, Program, Project...";
+            this.Text = "Manage > Function, Program & Project...";
             this.Load += new System.EventHandler(this.frmFunctionProgramProject_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
