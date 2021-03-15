@@ -259,5 +259,18 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             Helper.ClearErrorTextBox(epCollectingOfficerPayee, txtPayeeCollectingOfficer);
         }
+
+        private void btnRemoveAccount_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dgAccounts.SelectedRows)
+            {
+                dgAccounts.Rows.Remove(row);
+            }
+        }
+
+        private void btnEditAccount_Click(object sender, EventArgs e)
+        {
+            _ = new frmJEVAccountEdit(this).ShowDialog();
+        }
     }
 }

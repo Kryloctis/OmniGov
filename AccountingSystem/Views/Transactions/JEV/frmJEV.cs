@@ -13,8 +13,6 @@ namespace AccountingSystem.Views.Transactions.JEV
 {
     public partial class frmJEV : Form
     {
-        
-
         public frmJEV()
         {
             InitializeComponent();
@@ -25,6 +23,16 @@ namespace AccountingSystem.Views.Transactions.JEV
             Helper.LoadFormIconAccounting(this);
         }
 
+        private ushort? ValidateNullSubsidiary(object subsidiaryCellValue)
+        {
+            if (subsidiaryCellValue != null)
+            {
+                return Convert.ToUInt16(subsidiaryCellValue);
+            }
+
+            return null;
+        }
+
         private List<JEVAccountsModel> JevAcountsModelList()
         {
             var uc = ucjev1;
@@ -33,7 +41,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 int fppId = Convert.ToInt32(item.Cells["FPPId"].Value);
                 ushort generalLedgerId = Convert.ToUInt16(item.Cells["GeneralLedgerId"].Value);
-                ushort? subsidiaryLedgerId = (ushort?)item.Cells["SubsidiaryLedgerId"].Value;
+                ushort? subsidiaryLedgerId = ValidateNullSubsidiary(item.Cells["SubsidiaryLedgerId"].Value);
                 bool isDebit = Convert.ToBoolean(item.Cells["IsDebit"].Value);
                 bool? isDeposit = (bool?)item.Cells["IsDeposit"].Value;
 

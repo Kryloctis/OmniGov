@@ -128,6 +128,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnRemoveAccount.TabIndex = 7;
             this.btnRemoveAccount.Text = "Remove";
             this.btnRemoveAccount.UseVisualStyleBackColor = true;
+            this.btnRemoveAccount.Click += new System.EventHandler(this.btnRemoveAccount_Click);
             // 
             // btnEditAccount
             // 
@@ -137,6 +138,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnEditAccount.TabIndex = 6;
             this.btnEditAccount.Text = "Edit...";
             this.btnEditAccount.UseVisualStyleBackColor = true;
+            this.btnEditAccount.Click += new System.EventHandler(this.btnEditAccount_Click);
             // 
             // btnAddAccount
             // 
@@ -338,28 +340,24 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.GeneralLedgerId.HeaderText = "GeneralLedgerId";
             this.GeneralLedgerId.Name = "GeneralLedgerId";
             this.GeneralLedgerId.ReadOnly = true;
-            this.GeneralLedgerId.Visible = false;
             // 
             // SubsidiaryLedgerId
             // 
             this.SubsidiaryLedgerId.HeaderText = "SubsidiaryLedgerId";
             this.SubsidiaryLedgerId.Name = "SubsidiaryLedgerId";
             this.SubsidiaryLedgerId.ReadOnly = true;
-            this.SubsidiaryLedgerId.Visible = false;
             // 
             // IsDebit
             // 
             this.IsDebit.HeaderText = "IsDebit";
             this.IsDebit.Name = "IsDebit";
             this.IsDebit.ReadOnly = true;
-            this.IsDebit.Visible = false;
             // 
             // IsDeposit
             // 
             this.IsDeposit.HeaderText = "IsDeposit";
             this.IsDeposit.Name = "IsDeposit";
             this.IsDeposit.ReadOnly = true;
-            this.IsDeposit.Visible = false;
             // 
             // FPP
             // 
@@ -477,6 +475,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal System.Windows.Forms.TextBox txtFundsJevNo;
         private System.Windows.Forms.ErrorProvider epRefNo;
         private System.Windows.Forms.ErrorProvider epCollectingOfficerPayee;
+        internal System.Windows.Forms.TextBox txtCreditTotal;
+        internal System.Windows.Forms.TextBox txtDebitTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn FPPId;
         private System.Windows.Forms.DataGridViewTextBoxColumn GeneralLedgerId;
         private System.Windows.Forms.DataGridViewTextBoxColumn SubsidiaryLedgerId;
@@ -488,7 +488,5 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.DataGridViewTextBoxColumn Subsidiary;
         private System.Windows.Forms.DataGridViewTextBoxColumn Debit;
         private System.Windows.Forms.DataGridViewTextBoxColumn Credit;
-        internal System.Windows.Forms.TextBox txtCreditTotal;
-        internal System.Windows.Forms.TextBox txtDebitTotal;
     }
 }

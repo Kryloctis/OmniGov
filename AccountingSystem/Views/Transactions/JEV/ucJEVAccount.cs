@@ -1,12 +1,7 @@
 ﻿using ACC.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.JEV
@@ -14,6 +9,7 @@ namespace AccountingSystem.Views.Transactions.JEV
     public partial class ucJEVAccount : UserControl
     {
         internal byte fundId;
+
 
         public ucJEVAccount()
         {
@@ -69,24 +65,21 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        private void LoadSubsidiary()
+        internal void LoadSubsidiary(ushort generalLedgerId)
         {
             try
             {
-                ushort generalLedgerId = Convert.ToUInt16(cmbAccount.SelectedValue);
                 DataTable dtSubsidiary = Factory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
 
                 HelperLoadRecords.SubsidiaryLedgerComboBox(dtSubsidiary, cmbSubsidiary, "sub_name", "id");
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void cmbAccount_SelectedValueChanged(object sender, EventArgs e)
-        { 
-            LoadSubsidiary();
+        {
+            ushort generalLedgerId = Convert.ToUInt16(cmbAccount.SelectedValue);
+            LoadSubsidiary(generalLedgerId);
         }
 
         private void cmbFPP_Validating(object sender, CancelEventArgs e)
@@ -112,6 +105,11 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "amount");
+
+            if (nudAmount.Value < 1)
+            {
+                epAmount.SetError(nudAmount, "Plase enter a non-zero amount.");
+;            }
         }
 
         private void nudAmount_Validated(object sender, EventArgs e)

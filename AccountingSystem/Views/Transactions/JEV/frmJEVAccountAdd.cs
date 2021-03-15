@@ -25,6 +25,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void AddAccount()
         {
             var uc = ucjevAccount1;
+
             string fppId = uc.cmbFPP.SelectedValue.ToString();
             string fppName = uc.cmbFPP.Text;
             string generalLedgerId = uc.cmbAccount.SelectedValue.ToString();
@@ -42,6 +43,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             else
                 isDeposit = null;
 
+            Dictionary<string, string> accountData = Factory.GeneralLedgerAccountsRepository().GetRecordByID(Convert.ToInt32(generalLedgerId));
             object[] accountRow;
             if (isDebit)
             {
@@ -55,7 +57,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     isDeposit,
                     fppName,
                     generalLedgerName,
-                    "",
+                    accountData["ledger_code"],
                     subsidiaryName,
                     amount,
                     "",
@@ -73,7 +75,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     isDeposit,
                     fppName,
                     $"     {generalLedgerName}",
-                    "",
+                    accountData["ledger_code"],
                     subsidiaryName,
                     "",
                     amount,
@@ -96,7 +98,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             if (ucJEV.journalName == "Cash Receipts Journal")
             {
                 uc.pnlCollectionsDeposits.Visible = true;
-                uc.radioDeposits.Checked = true;
+                uc.radioCollections.Checked = true;
             }
             else
             {

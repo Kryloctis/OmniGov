@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace AccountingSystem
 {
-    class Helper
+    public class Helper
     {
         public static void LoadFormIconAccounting(Form form)
         {
