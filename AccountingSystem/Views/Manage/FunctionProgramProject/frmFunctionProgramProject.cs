@@ -23,10 +23,12 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassification"])
             {
                 LoadFunctionalClassificationRecords();
+                toolStripBtnOthers.Enabled = false;
             }
             else if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassificationService"])
             {
                 LoadFunctionalClassificationServicesRecords();
+                toolStripBtnOthers.Enabled = false;
             }
             else
                 LoadFunctionProgramProjectRecords();
@@ -388,13 +390,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             Helper.ShowRecordTimestamp(dgFunctionalProgramProject, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgFunctionalProgramProject, btnEdit, btnDelete);
 
-            if (dgFunctionalProgramProject.SelectedRows.Count == 1) 
-            {
+            if (dgFunctionalProgramProject.SelectedRows.Count < 1)
+                toolStripBtnOthers.Enabled = false;
+            else
                 toolStripBtnOthers.Enabled = true;
-                return;
-            }
-
-            toolStripBtnOthers.Enabled = false;
 
         }
         public void LoadSectorNameComboBox()
@@ -438,11 +437,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         private void button1_Click(object sender, EventArgs e)
         {
             LoadFunctionProgramProjectRecords();
-        }
-
-        private void tabControlFunctionProgramProject_Selected(object sender, TabControlEventArgs e)
-        {
-
         }
 
         private void cmbSectorName_SelectionChangeCommitted_2(object sender, EventArgs e)

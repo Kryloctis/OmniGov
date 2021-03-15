@@ -84,6 +84,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                     OthersFPPId = othersFPPId,
                     AllotmentClassesId = Convert.ToInt32(uc.cmbxAllotmentClass.SelectedValue),
                     GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxLedgerAccount.SelectedValue),
+                    DateEntry = uc.dtDateEntry.Value,
                     amount = uc.nudAmount.Value
                 };
 

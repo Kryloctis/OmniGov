@@ -81,10 +81,11 @@ namespace ACC.Data
                     new object[] { "@others_fpp_id", DbType.String, entity.OthersFPPId},
                     new object[] { "@allotment_classes_id", DbType.Int32, entity.AllotmentClassesId},
                     new object[] { "@general_ledger_accounts_id", DbType.Int32, entity.GeneralLedgerAccountsId},
+                    new object[] { "@date_entry", DbType.Date, entity.DateEntry},
                     new object[] { "@amount", DbType.Decimal, entity.amount}
                };
 
-                string query = $"INSERT INTO {tableName} (function_program_project_id , others_fpp_id, allotment_classes_id, general_ledger_accounts_id, amount) VALUES (@function_program_project_id , @others_fpp_id, @allotment_classes_id, @general_ledger_accounts_id, @amount)";
+                string query = $"INSERT INTO {tableName} (function_program_project_id , others_fpp_id, allotment_classes_id, general_ledger_accounts_id, date_entry, amount) VALUES (@function_program_project_id , @others_fpp_id, @allotment_classes_id, @general_ledger_accounts_id, @date_entry, @amount)";
                 return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -105,10 +106,11 @@ namespace ACC.Data
                     new object[] { "@others_fpp_id", DbType.String, entity.OthersFPPId},
                     new object[] { "@allotment_classes_id", DbType.Int32, entity.AllotmentClassesId},
                     new object[] { "@general_ledger_accounts_id", DbType.Int32, entity.GeneralLedgerAccountsId},
+                    new object[] { "@date_entry", DbType.Date, entity.DateEntry},
                     new object[] { "@amount", DbType.Decimal, entity.amount}
                 };
 
-                string query = $"UPDATE {tableName} SET function_program_project_id = @function_program_project_id, others_fpp_id = @others_fpp_id, allotment_classes_id = @allotment_classes_id, general_ledger_accounts_id = @general_ledger_accounts_id, amount = @amount WHERE id = @id";
+                string query = $"UPDATE {tableName} SET function_program_project_id = @function_program_project_id, others_fpp_id = @others_fpp_id, allotment_classes_id = @allotment_classes_id, general_ledger_accounts_id = @general_ledger_accounts_id, date_entry = @date_entry, amount = @amount WHERE id = @id";
                 return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -176,7 +178,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT budget_approrations_id, fpp_id, fpp_code, fpp_name, others_fpp_id, others_fpp_name, allotment_classes_id, allotment_code, allotment_name, general_ledger_acc_id, ledger_code, ledger_name, is_contra_account, amount, created_at, updated_at FROM {viewTableName}";
+                string query = $"SELECT budget_approrations_id, fpp_id, fpp_code, fpp_name, others_fpp_id, others_fpp_name, allotment_classes_id, allotment_code, allotment_name, general_ledger_acc_id, ledger_code, ledger_name, is_contra_account, date_entry, amount, created_at, updated_at FROM {viewTableName}";
 
                 var dtPermissions = new DataTable();
                 return mySqlGenericCommands.Fill(query, dtPermissions);
@@ -191,7 +193,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT budget_approrations_id, fpp_id, fpp_code, fpp_name, others_fpp_id, others_fpp_name, allotment_classes_id, allotment_code, allotment_name, general_ledger_acc_id, ledger_code, ledger_name, is_contra_account, amount, created_at, updated_at FROM {viewTableName}";
+                string query = $"SELECT budget_approrations_id, fpp_id, fpp_code, fpp_name, others_fpp_id, others_fpp_name, allotment_classes_id, allotment_code, allotment_name, general_ledger_acc_id, ledger_code, ledger_name, is_contra_account, date_entry, amount, created_at, updated_at FROM {viewTableName}";
 
                 var dtPermissions = new DataTable();
                 return mySqlGenericCommands.Fill(query, dtPermissions);
@@ -216,7 +218,7 @@ namespace ACC.Data
                    new object[] {"@allotment_classes_id", DbType.Int32, allotmentClassID},
                    new object[] {"@general_ledger_accounts_id", DbType.Int32, genLedgerAccID }
                 };
-                string query = $"SELECT function_program_project_id, others_fpp_id, allotment_classes_id, general_ledger_accounts_id, amount FROM {tableName} WHERE id = @id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id";
+                string query = $"SELECT function_program_project_id, others_fpp_id, allotment_classes_id, general_ledger_accounts_id, date_entry, amount FROM {tableName} WHERE id = @id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id";
 
                 using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -229,7 +231,8 @@ namespace ACC.Data
                         record.Add("others_fpp_id", item[1].ToString());
                         record.Add("allotment_classes_id", item[2].ToString());
                         record.Add("general_ledger_accounts_id", item[3].ToString());
-                        record.Add("amount", item[4].ToString());
+                        record.Add("date_entry", item[4].ToString());
+                        record.Add("amount", item[5].ToString());
                     }
                 }
             }

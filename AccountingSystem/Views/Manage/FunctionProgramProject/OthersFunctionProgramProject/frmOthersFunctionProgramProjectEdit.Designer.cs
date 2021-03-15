@@ -93,7 +93,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.Name = "frmOthersFunctionProgramProjectEdit";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Edit Others Function Program Project";
+            this.Text = "Edit Other Function, Program & Project";
             this.Load += new System.EventHandler(this.frmOthersFunctionProgramProjectEdit_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);

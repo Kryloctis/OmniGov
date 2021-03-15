@@ -46,6 +46,8 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
             this.epGeneralLedgerAcc = new System.Windows.Forms.ErrorProvider(this.components);
             this.epBudgetAppropriation = new System.Windows.Forms.ErrorProvider(this.components);
+            this.dtDateEntry = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFunctionProgramProject)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFunctionProgramProject)).BeginInit();
@@ -137,7 +139,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(0, 118);
+            this.label5.Location = new System.Drawing.Point(0, 147);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(51, 15);
             this.label5.TabIndex = 1;
@@ -146,7 +148,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // nudAmount
             // 
             this.nudAmount.DecimalPlaces = 2;
-            this.nudAmount.Location = new System.Drawing.Point(140, 116);
+            this.nudAmount.Location = new System.Drawing.Point(140, 145);
             this.nudAmount.Maximum = new decimal(new int[] {
             -1530494976,
             232830,
@@ -183,12 +185,30 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // 
             this.epBudgetAppropriation.ContainerControl = this;
             // 
+            // dtDateEntry
+            // 
+            this.dtDateEntry.Location = new System.Drawing.Point(140, 116);
+            this.dtDateEntry.Name = "dtDateEntry";
+            this.dtDateEntry.Size = new System.Drawing.Size(436, 23);
+            this.dtDateEntry.TabIndex = 5;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(0, 122);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(61, 15);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Date Entry";
+            // 
             // ucBudgetAppropriations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.Controls.Add(this.dtDateEntry);
             this.Controls.Add(this.nudAmount);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -199,7 +219,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.Controls.Add(this.cmbxOthersFPP);
             this.Controls.Add(this.cmbxFPP);
             this.Name = "ucBudgetAppropriations";
-            this.Size = new System.Drawing.Size(601, 143);
+            this.Size = new System.Drawing.Size(601, 174);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFunctionProgramProject)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFunctionProgramProject)).EndInit();
@@ -229,5 +249,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
         internal System.Windows.Forms.ComboBox cmbxLedgerAccount;
         internal System.Windows.Forms.NumericUpDown nudAmount;
         private System.Windows.Forms.ErrorProvider epBudgetAppropriation;
+        private System.Windows.Forms.Label label6;
+        internal System.Windows.Forms.DateTimePicker dtDateEntry;
     }
 }

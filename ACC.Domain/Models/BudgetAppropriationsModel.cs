@@ -11,6 +11,7 @@ namespace ACC.Domain.Models
         public int? OthersFPPId { get; set; }
         public int AllotmentClassesId { get; set; }
         public int GeneralLedgerAccountsId { get; set; }
+        public DateTime DateEntry { get; set; }
         public decimal amount { get; set; }
     }
 }

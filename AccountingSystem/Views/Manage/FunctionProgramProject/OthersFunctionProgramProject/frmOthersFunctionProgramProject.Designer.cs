@@ -206,7 +206,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.Name = "frmOthersFunctionProgramProject";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Manage> Function, Program, Project> Others Function Program Project";
+            this.Text = "Manage> Function, Program, Project> Others Function, Program & Project";
             this.Load += new System.EventHandler(this.frmOthersFunctionProgramProject_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgOthersFPP)).EndInit();
             this.toolStrip1.ResumeLayout(false);

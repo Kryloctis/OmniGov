@@ -138,7 +138,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
             this.statusStrip1.Size = new System.Drawing.Size(951, 22);
-            this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 10;
             this.statusStrip1.Text = "statusStrip1";
             // 
