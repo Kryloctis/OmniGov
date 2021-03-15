@@ -44,6 +44,7 @@ namespace AccountingSystem
             this.menuCollectingOfficer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
+            this.menuBudgetAppropriation = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,7 +85,8 @@ namespace AccountingSystem
             this.menuAllotmentClasses,
             this.menuFunds,
             this.menuFunctionProgramProject,
-            this.menuCollectingOfficer});
+            this.menuCollectingOfficer,
+            this.menuBudgetAppropriation});
             this.menuManage.Name = "menuManage";
             this.menuManage.Size = new System.Drawing.Size(62, 19);
             this.menuManage.Text = "Manage";
@@ -170,6 +172,13 @@ namespace AccountingSystem
             this.label1.TabIndex = 1;
             this.label1.Text = "Dashboard";
             // 
+            // menuBudgetAppropriation
+            // 
+            this.menuBudgetAppropriation.Name = "menuBudgetAppropriation";
+            this.menuBudgetAppropriation.Size = new System.Drawing.Size(235, 22);
+            this.menuBudgetAppropriation.Text = "Budget Appropriations";
+            this.menuBudgetAppropriation.Click += new System.EventHandler(this.menuBudgetAppropriation_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -209,6 +218,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuRoles;
         private System.Windows.Forms.ToolStripMenuItem menuFunctionProgramProject;
         private System.Windows.Forms.ToolStripMenuItem menuCollectingOfficer;
+        private System.Windows.Forms.ToolStripMenuItem menuBudgetAppropriation;
     }
 }
 
