@@ -172,7 +172,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.tabControlFunctionProgramProject.Size = new System.Drawing.Size(859, 426);
             this.tabControlFunctionProgramProject.TabIndex = 8;
             this.tabControlFunctionProgramProject.SelectedIndexChanged += new System.EventHandler(this.dgFunctionalClassification_SelectedIndexChanged);
-            this.tabControlFunctionProgramProject.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControlFunctionProgramProject_Selected);
             // 
             // tabFunctionProgramProject
             // 
@@ -186,7 +185,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.tabFunctionProgramProject.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabFunctionProgramProject.Size = new System.Drawing.Size(851, 395);
             this.tabFunctionProgramProject.TabIndex = 1;
-            this.tabFunctionProgramProject.Text = "Function Program Project";
+            this.tabFunctionProgramProject.Text = "Function, Program && Project";
             this.tabFunctionProgramProject.UseVisualStyleBackColor = true;
             // 
             // label2
@@ -246,7 +245,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.tabFunctionalClassificationService.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabFunctionalClassificationService.Name = "tabFunctionalClassificationService";
             this.tabFunctionalClassificationService.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabFunctionalClassificationService.Size = new System.Drawing.Size(830, 390);
+            this.tabFunctionalClassificationService.Size = new System.Drawing.Size(851, 395);
             this.tabFunctionalClassificationService.TabIndex = 0;
             this.tabFunctionalClassificationService.Text = "Functional Classification Service";
             this.tabFunctionalClassificationService.UseVisualStyleBackColor = true;
@@ -302,7 +301,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.tabFunctionalClassification.Location = new System.Drawing.Point(4, 27);
             this.tabFunctionalClassification.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabFunctionalClassification.Name = "tabFunctionalClassification";
-            this.tabFunctionalClassification.Size = new System.Drawing.Size(830, 390);
+            this.tabFunctionalClassification.Size = new System.Drawing.Size(851, 395);
             this.tabFunctionalClassification.TabIndex = 2;
             this.tabFunctionalClassification.Text = "Functional Classifications";
             this.tabFunctionalClassification.UseVisualStyleBackColor = true;
@@ -316,7 +315,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.dgFunctionalClassification.Name = "dgFunctionalClassification";
             this.dgFunctionalClassification.RowHeadersWidth = 51;
             this.dgFunctionalClassification.RowTemplate.Height = 29;
-            this.dgFunctionalClassification.Size = new System.Drawing.Size(830, 390);
+            this.dgFunctionalClassification.Size = new System.Drawing.Size(851, 395);
             this.dgFunctionalClassification.TabIndex = 5;
             this.dgFunctionalClassification.SelectionChanged += new System.EventHandler(this.dgFunctionalClassification_SelectionChanged);
             // 
@@ -391,7 +390,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.MinimumSize = new System.Drawing.Size(874, 537);
             this.Name = "frmFunctionProgramProject";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Manage > Function, Program, Project...";
+            this.Text = "Manage > Function, Program & Project...";
             this.Load += new System.EventHandler(this.frmFunctionProgramProject_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

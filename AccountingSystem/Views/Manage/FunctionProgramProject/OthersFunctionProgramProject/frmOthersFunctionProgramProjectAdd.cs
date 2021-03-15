@@ -56,6 +56,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             if (SaveData()) 
             {
                 uc.ResetForm();
+                Helper.MessageBoxSuccess("Other Function, Program & Project has been saved.");
                 _frmOthersFunctionProgramProject.LoadRecords();
             }
         }
