@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACC.Data", "ACC.Data\ACC.Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACC.Domain", "ACC.Domain\ACC.Domain.csproj", "{1D7D25C5-7324-449A-9BD1-2BAEA19A8917}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetSystem", "BudgetSystem\BudgetSystem.csproj", "{29FDAF03-149D-452A-8A50-A639FF261DB5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{1D7D25C5-7324-449A-9BD1-2BAEA19A8917}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D7D25C5-7324-449A-9BD1-2BAEA19A8917}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D7D25C5-7324-449A-9BD1-2BAEA19A8917}.Release|Any CPU.Build.0 = Release|Any CPU
-		{29FDAF03-149D-452A-8A50-A639FF261DB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29FDAF03-149D-452A-8A50-A639FF261DB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29FDAF03-149D-452A-8A50-A639FF261DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29FDAF03-149D-452A-8A50-A639FF261DB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

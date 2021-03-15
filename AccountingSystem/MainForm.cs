@@ -8,6 +8,7 @@ using AccountingSystem.Views.Manage.FunctionProgramProject;
 using AccountingSystem.Views.Manage.CollectingOfficer;
 using AccountingSystem.Views.Manage.Users.Roles;
 using AccountingSystem.Views.Manage.Users.List;
+using BudgetSystem.Views.BudgetAppropriations;
 using AccountingSystem.Views.Transactions.JEV;
 
 namespace AccountingSystem
@@ -68,6 +69,10 @@ namespace AccountingSystem
         private void menuCollectingOfficer_Click(object sender, EventArgs e)
         {
             _ = new frmCollectingOfficer().ShowDialog();
+        }
+        private void menuBudgetAppropriation_Click(object sender, EventArgs e) 
+        {
+            _ = new frmBudgetAppropriations().ShowDialog();
         }
 
     }
