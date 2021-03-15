@@ -25,7 +25,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             DataTable dtBudgetAppropriations;
             try
             {
-                if (txtStripSearch.Text.Length > 3 && !string.IsNullOrEmpty(txtStripSearch.Text))
+                if (txtStripSearch.Text.Length > 3)
                 {
                     dtBudgetAppropriations = Factory.BudgetAppropriationsRepository().GetViewRecords();
                 }
@@ -118,7 +118,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         private void dgBudgetAppropriations_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 14, 15 };
+            byte[] columnIndexTimestamp = { 15, 16 };
             Helper.ShowRecordTimestamp(dgBudgetAppropriations, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgBudgetAppropriations, toolStripButtonEdit, toolStripButtonDelete);
         }

@@ -375,12 +375,14 @@ namespace AccountingSystem
             dataGridView.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns[11].HeaderText = "Ledger Name";
             dataGridView.Columns[12].Visible = false;
-            dataGridView.Columns[13].HeaderText = "Amount";
-            dataGridView.Columns[13].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns[13].HeaderText = "Date Entry";
             dataGridView.Columns[13].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridView.Columns[13].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridView.Columns[14].Visible = false;
+            dataGridView.Columns[14].HeaderText = "Amount";
+            dataGridView.Columns[14].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns[14].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns[14].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridView.Columns[15].Visible = false;
+            dataGridView.Columns[16].Visible = false;
             dataGridView.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 
             Helper.DatagridDefaultStyle(dataGridView, true);
