@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Manage.Funds
 
         private void frmFundAdd_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
+            Helper.LoadFormIconAccounting(this);
         }
 
         private void btnSave_Click_1(object sender, EventArgs e)

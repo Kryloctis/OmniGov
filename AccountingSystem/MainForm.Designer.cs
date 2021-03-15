@@ -32,6 +32,7 @@ namespace AccountingSystem
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.menuTransactions = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuJEV = new System.Windows.Forms.ToolStripMenuItem();
             this.menuManage = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUserList = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,9 +73,18 @@ namespace AccountingSystem
             // 
             // menuTransactions
             // 
+            this.menuTransactions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuJEV});
             this.menuTransactions.Name = "menuTransactions";
             this.menuTransactions.Size = new System.Drawing.Size(84, 19);
             this.menuTransactions.Text = "Transactions";
+            // 
+            // menuJEV
+            // 
+            this.menuJEV.Name = "menuJEV";
+            this.menuJEV.Size = new System.Drawing.Size(197, 22);
+            this.menuJEV.Text = "Journal Entry Voucher...";
+            this.menuJEV.Click += new System.EventHandler(this.menuJEV_Click);
             // 
             // menuManage
             // 
@@ -97,7 +107,7 @@ namespace AccountingSystem
             this.menuUserList,
             this.menuRoles});
             this.menuUsers.Name = "menuUsers";
-            this.menuUsers.Size = new System.Drawing.Size(235, 22);
+            this.menuUsers.Size = new System.Drawing.Size(219, 22);
             this.menuUsers.Text = "Users";
             // 
             // menuUserList
@@ -117,42 +127,42 @@ namespace AccountingSystem
             // menuJournals
             // 
             this.menuJournals.Name = "menuJournals";
-            this.menuJournals.Size = new System.Drawing.Size(235, 22);
+            this.menuJournals.Size = new System.Drawing.Size(219, 22);
             this.menuJournals.Text = "Journals...";
             this.menuJournals.Click += new System.EventHandler(this.menuJournals_Click);
             // 
             // menuChartOfAccounts
             // 
             this.menuChartOfAccounts.Name = "menuChartOfAccounts";
-            this.menuChartOfAccounts.Size = new System.Drawing.Size(235, 22);
+            this.menuChartOfAccounts.Size = new System.Drawing.Size(219, 22);
             this.menuChartOfAccounts.Text = "Chart of Accounts...";
             this.menuChartOfAccounts.Click += new System.EventHandler(this.menuChartOfAccounts_Click);
             // 
             // menuAllotmentClasses
             // 
             this.menuAllotmentClasses.Name = "menuAllotmentClasses";
-            this.menuAllotmentClasses.Size = new System.Drawing.Size(235, 22);
+            this.menuAllotmentClasses.Size = new System.Drawing.Size(219, 22);
             this.menuAllotmentClasses.Text = "Allotment Classes...";
             this.menuAllotmentClasses.Click += new System.EventHandler(this.menuAllotmentClasses_Click);
             // 
             // menuFunds
             // 
             this.menuFunds.Name = "menuFunds";
-            this.menuFunds.Size = new System.Drawing.Size(235, 22);
+            this.menuFunds.Size = new System.Drawing.Size(219, 22);
             this.menuFunds.Text = "Funds...";
             this.menuFunds.Click += new System.EventHandler(this.menuFunds_Click);
             // 
             // menuFunctionProgramProject
             // 
             this.menuFunctionProgramProject.Name = "menuFunctionProgramProject";
-            this.menuFunctionProgramProject.Size = new System.Drawing.Size(235, 22);
-            this.menuFunctionProgramProject.Text = "Function, Program && Project...";
+            this.menuFunctionProgramProject.Size = new System.Drawing.Size(219, 22);
+            this.menuFunctionProgramProject.Text = "Funtion, Program & Project...";
             this.menuFunctionProgramProject.Click += new System.EventHandler(this.menuFunctionProgramProject_Click);
             // 
             // menuCollectingOfficer
             // 
             this.menuCollectingOfficer.Name = "menuCollectingOfficer";
-            this.menuCollectingOfficer.Size = new System.Drawing.Size(235, 22);
+            this.menuCollectingOfficer.Size = new System.Drawing.Size(219, 22);
             this.menuCollectingOfficer.Text = "Collecting Officer...";
             this.menuCollectingOfficer.Click += new System.EventHandler(this.menuCollectingOfficer_Click);
             // 
@@ -191,7 +201,7 @@ namespace AccountingSystem
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Accounting System";
+            this.Text = "Local Finance System";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -219,6 +229,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuFunctionProgramProject;
         private System.Windows.Forms.ToolStripMenuItem menuCollectingOfficer;
         private System.Windows.Forms.ToolStripMenuItem menuBudgetAppropriation;
+        private System.Windows.Forms.ToolStripMenuItem menuJEV;
     }
 }
 

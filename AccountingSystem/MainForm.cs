@@ -3,13 +3,13 @@ using System.Windows.Forms;
 using AccountingSystem.Views.Manage.Journals;
 using AccountingSystem.Views.Manage.Funds;
 using AccountingSystem.Views.Manage.ChartOfAccounts;
-
 using AccountingSystem.Views.Manage.AllotmentClasses;
 using AccountingSystem.Views.Manage.FunctionProgramProject;
 using AccountingSystem.Views.Manage.CollectingOfficer;
 using AccountingSystem.Views.Manage.Users.Roles;
 using AccountingSystem.Views.Manage.Users.List;
 using BudgetSystem.Views.BudgetAppropriations;
+using AccountingSystem.Views.Transactions.JEV;
 
 namespace AccountingSystem
 {
@@ -22,7 +22,7 @@ namespace AccountingSystem
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
+            Helper.LoadFormIconAccounting(this);
         }
 
         private void menuJournals_Click(object sender, EventArgs e)
@@ -51,6 +51,11 @@ namespace AccountingSystem
         private void menuUserList_Click(object sender, EventArgs e)
         {
             _ = new frmUsers().ShowDialog();
+        }
+
+        private void menuJEV_Click(object sender, EventArgs e)
+        {
+            _ = new frmJEV().ShowDialog();
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)

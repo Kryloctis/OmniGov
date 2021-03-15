@@ -106,7 +106,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         private void frmRoles_Load(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Normal;
-            Helper.LoadFormIcon(this);
+            Helper.LoadFormIconAccounting(this);
             Helper.DatagridDefaultStyle(dgRoles);
             LoadRecords();
         }

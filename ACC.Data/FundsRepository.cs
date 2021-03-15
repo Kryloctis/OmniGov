@@ -36,8 +36,8 @@ namespace ACC.Data
                     if (reader.Rows.Count < 1)
                         return record;
 
-                    record.Add("fund_name", reader.Rows[0][0].ToString());
-                    record.Add("fund_code", reader.Rows[0][1].ToString());
+                    record.Add("fund_code", reader.Rows[0][0].ToString());
+                    record.Add("fund_name", reader.Rows[0][1].ToString());
                     record.Add("created_at", reader.Rows[0][2].ToString());
                     record.Add("updated_at", reader.Rows[0][3].ToString());
                 }
@@ -49,6 +49,7 @@ namespace ACC.Data
 
             return record;
         }
+
         public DataTable GetRecords()
         {
             try
@@ -63,7 +64,6 @@ namespace ACC.Data
                 throw;
             }
         }
-       
 
         public DataTable GetRecordsBySearch(string searchText)
         {

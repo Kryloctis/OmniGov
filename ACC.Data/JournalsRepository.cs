@@ -64,7 +64,6 @@ namespace ACC.Data
                 throw;
             }
         }
-     
 
         public DataTable GetRecordsBySearch(string searchText)
         {

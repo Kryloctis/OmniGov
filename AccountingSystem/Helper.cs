@@ -11,9 +11,9 @@ namespace AccountingSystem
 {
     public class Helper
     {
-        public static void LoadFormIcon(Form form)
+        public static void LoadFormIconAccounting(Form form)
         {
-            //form.Icon = Properties.Resources.ZBSIcon;
+            form.Icon = Properties.Resources.accounting;
         }
 
         // apply the default styling of the datagridview
@@ -41,6 +41,23 @@ namespace AccountingSystem
             if (Fill == true) dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
+        internal static Dictionary<string, string> GetLoggedInUserAccounting()
+        {
+            var user = new Dictionary<string, string>();
+
+            try
+            {
+                user.Add("id", "1");
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return user;
+        }
+
         #region ErrorProviders on Controls
         private static string GetFirstLetter(string word)
         {
@@ -50,10 +67,10 @@ namespace AccountingSystem
         private static string ErrorMessageForEmpty(string fieldName)
         {
             
-            if (GetFirstLetter(fieldName) == "A")
-                return $"Please enter an {fieldName}";
+            if (GetFirstLetter(fieldName) == "A" || GetFirstLetter(fieldName) == "a")
+                return $"Please enter an {fieldName.ToLower()}";
             else
-                return $"Please enter a {fieldName}";
+                return $"Please enter a {fieldName.ToLower()}";
         }
 
         public static string ErrorMessage(string fieldName) 

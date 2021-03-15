@@ -33,7 +33,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         private void frmCollectingOfficer_Load(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Normal;
-            Helper.LoadFormIcon(this);
+            Helper.LoadFormIconAccounting(this);
             Helper.DatagridDefaultStyle(dgCollectingOfficer);
             LoadRecords();
         }

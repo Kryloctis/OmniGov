@@ -66,7 +66,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void frmCollectingOfficerAdd_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
+            Helper.LoadFormIconAccounting(this);
         }
     }
 }

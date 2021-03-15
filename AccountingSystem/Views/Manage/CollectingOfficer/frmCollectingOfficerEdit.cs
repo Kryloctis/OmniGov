@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void frmCollectingOfficerEdit_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
+            Helper.LoadFormIconAccounting(this);
             LoadSelectedRecord();
         }
     }

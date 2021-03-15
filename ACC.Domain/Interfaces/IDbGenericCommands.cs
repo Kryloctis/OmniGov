@@ -11,6 +11,6 @@ namespace ACC.Domain.Interfaces
         DataTable FillBySearch(string query, DataTable dataTable, params object[][] parameters);
         bool ExecuteNonQuery(string query, params object[][] parameters);
         DataTable ExecuteReader(string query, params object[][] parameters);
-        dynamic ExecuteScalar(string query, params object[][] parameters);
+        string ExecuteScalar(string query, params object[][] parameters);
     }
 }

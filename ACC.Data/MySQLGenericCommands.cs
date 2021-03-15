@@ -90,7 +90,7 @@ namespace ACC.Data
             }
         }
 
-        public dynamic ExecuteScalar(string query, params object[][] parameters)
+        public string ExecuteScalar(string query, params object[][] parameters)
         {
             using (var connection = new MySqlConnection(connectionString))
             {
