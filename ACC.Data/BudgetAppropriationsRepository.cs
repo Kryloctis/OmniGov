@@ -81,10 +81,11 @@ namespace ACC.Data
                     new object[] { "@others_fpp_id", DbType.String, entity.OthersFPPId},
                     new object[] { "@allotment_classes_id", DbType.Int32, entity.AllotmentClassesId},
                     new object[] { "@general_ledger_accounts_id", DbType.Int32, entity.GeneralLedgerAccountsId},
+                    new object[] { "@date_entry", DbType.Date, entity.DateEntry},
                     new object[] { "@amount", DbType.Decimal, entity.amount}
                };
 
-                string query = $"INSERT INTO {tableName} (function_program_project_id , others_fpp_id, allotment_classes_id, general_ledger_accounts_id, amount) VALUES (@function_program_project_id , @others_fpp_id, @allotment_classes_id, @general_ledger_accounts_id, @amount)";
+                string query = $"INSERT INTO {tableName} (function_program_project_id , others_fpp_id, allotment_classes_id, general_ledger_accounts_id, date_entry, amount) VALUES (@function_program_project_id , @others_fpp_id, @allotment_classes_id, @general_ledger_accounts_id, @date_entry, @amount)";
                 return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
