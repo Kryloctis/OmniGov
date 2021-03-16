@@ -340,24 +340,28 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.GeneralLedgerId.HeaderText = "GeneralLedgerId";
             this.GeneralLedgerId.Name = "GeneralLedgerId";
             this.GeneralLedgerId.ReadOnly = true;
+            this.GeneralLedgerId.Visible = false;
             // 
             // SubsidiaryLedgerId
             // 
             this.SubsidiaryLedgerId.HeaderText = "SubsidiaryLedgerId";
             this.SubsidiaryLedgerId.Name = "SubsidiaryLedgerId";
             this.SubsidiaryLedgerId.ReadOnly = true;
+            this.SubsidiaryLedgerId.Visible = false;
             // 
             // IsDebit
             // 
             this.IsDebit.HeaderText = "IsDebit";
             this.IsDebit.Name = "IsDebit";
             this.IsDebit.ReadOnly = true;
+            this.IsDebit.Visible = false;
             // 
             // IsDeposit
             // 
             this.IsDeposit.HeaderText = "IsDeposit";
             this.IsDeposit.Name = "IsDeposit";
             this.IsDeposit.ReadOnly = true;
+            this.IsDeposit.Visible = false;
             // 
             // FPP
             // 
@@ -368,11 +372,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // AccountName
             // 
+            this.AccountName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.AccountName.HeaderText = "AccountName";
             this.AccountName.Name = "AccountName";
             this.AccountName.ReadOnly = true;
             this.AccountName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.AccountName.Width = 200;
             // 
             // AccountCode
             // 
