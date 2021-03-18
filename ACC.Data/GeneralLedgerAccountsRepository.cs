@@ -38,8 +38,8 @@ namespace ACC.Data
                         return record;
 
                     record.Add("sub_major_account_group_id", reader.Rows[0][0].ToString());
-                    record.Add("ledger_code", reader.Rows[0][1].ToString());
-                    record.Add("account_code", reader.Rows[0][2].ToString());
+                    record.Add("account_code", reader.Rows[0][1].ToString());
+                    record.Add("ledger_code", reader.Rows[0][2].ToString());
                     record.Add("ledger_name", reader.Rows[0][3].ToString());
                     record.Add("is_contra_account", reader.Rows[0][4].ToString());
                     record.Add("created_at", reader.Rows[0][5].ToString());

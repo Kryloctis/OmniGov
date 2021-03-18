@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using System.Transactions;
 using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 
@@ -25,7 +26,29 @@ namespace ACC.Data
 
         public bool Delete(List<JEVAccountsModel> entityList)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    foreach (var entity in entityList)
+                    {
+                        var parameters = new object[][]
+                        {
+                            new object[] { "@id", DbType.Int16, entity.Id},
+                        };
+
+                        string query = $"DELETE FROM {tableName} WHERE id = @id";
+                        _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                    }
+
+                    scope.Complete();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -76,6 +99,26 @@ namespace ACC.Data
         public bool Update(JEVAccountsModel entity)
         {
             throw new NotImplementedException();
+        }
+
+        public DataTable GetRecordsByJevId(uint jevId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@jev_id", DbType.Int32, jevId },
+                };
+
+                string query = $"SELECT id, fpp_id, general_ledger_accounts_id, subsidiary_ledger_accounts_id, is_debit, is_deposit, fpp_name, ledger_name, account_code, sub_name, amount FROM {viewTableName} WHERE jev_id = @jev_id";
+
+                var dtGeneralLedgers = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

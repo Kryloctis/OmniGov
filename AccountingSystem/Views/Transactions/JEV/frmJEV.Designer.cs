@@ -29,11 +29,13 @@ namespace AccountingSystem.Views.Transactions.JEV
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmJEV));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.btnCancel = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
             this.ucjev1 = new AccountingSystem.Views.Transactions.JEV.ucJEV();
             this.toolStrip1.SuspendLayout();
@@ -48,6 +50,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnSave,
             this.toolStripSeparator1,
             this.btnDelete,
+            this.btnCancel,
             this.btnSearch});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -64,9 +67,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnAdd.Size = new System.Drawing.Size(42, 47);
             this.btnAdd.Text = "&Add...";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
             // btnSave
             // 
+            this.btnSave.Enabled = false;
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save28px;
             this.btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -92,6 +97,16 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnDelete.Text = "&Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Image = ((System.Drawing.Image)(resources.GetObject("btnCancel.Image")));
+            this.btnCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(47, 47);
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
             // btnSearch
             // 
             this.btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -102,9 +117,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnSearch.Size = new System.Drawing.Size(46, 47);
             this.btnSearch.Text = "S&earch";
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
             // ucjev1
             // 
+            this.ucjev1.Enabled = false;
             this.ucjev1.Location = new System.Drawing.Point(12, 57);
             this.ucjev1.Name = "ucjev1";
             this.ucjev1.Size = new System.Drawing.Size(883, 489);
@@ -132,14 +149,15 @@ namespace AccountingSystem.Views.Transactions.JEV
         }
 
         #endregion
-        private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnAdd;
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton BtnSubsidiary;
         private System.Windows.Forms.ToolStripButton btnSearch;
-        private ucJEV ucjev1;
+        internal System.Windows.Forms.ToolStrip toolStrip1;
+        protected internal ucJEV ucjev1;
+        internal System.Windows.Forms.ToolStripButton btnSave;
+        private System.Windows.Forms.ToolStripButton btnCancel;
     }
 }
