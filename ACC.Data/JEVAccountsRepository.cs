@@ -24,31 +24,27 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Delete(List<JEVAccountsModel> entityList)
+        public bool DeleteByJevId(uint jevId)
         {
             try
             {
-                using (var scope = new TransactionScope())
+                var parameters = new object[][]
                 {
-                    foreach (var entity in entityList)
-                    {
-                        var parameters = new object[][]
-                        {
-                            new object[] { "@id", DbType.Int16, entity.Id},
-                        };
+                    new object[] { "@id", DbType.UInt32, jevId},
+                };
 
-                        string query = $"DELETE FROM {tableName} WHERE id = @id";
-                        _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-                    }
-
-                    scope.Complete();
-                    return true;
-                }
+                string query = $"DELETE FROM {tableName} WHERE jev_id = @id";
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
             {
                 throw;
             }
+        }
+
+        public bool Delete(List<JEVAccountsModel> entityList)
+        {
+            throw new NotImplementedException();
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)

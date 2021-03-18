@@ -9,5 +9,6 @@ namespace ACC.Domain.Interfaces
     public interface IJEVAccountsRepository : IRepository<JEVAccountsModel>
     {
         DataTable GetRecordsByJevId(uint jevId);
+        bool DeleteByJevId(uint jevId);
     }
 }

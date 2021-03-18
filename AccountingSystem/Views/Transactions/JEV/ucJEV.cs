@@ -34,6 +34,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         internal void ResetForm()
         {
+
             txtJEVNo.Clear();
             txtRefNo.Clear();
             txtPayeeCollectingOfficer.Clear();
@@ -143,6 +144,12 @@ namespace AccountingSystem.Views.Transactions.JEV
             btnAddAccount.Enabled = true;
         }
 
+        private void radioJournals_Click(object sender, EventArgs e)
+        {
+            var radJournals = sender as RadioButton;
+            journalId = Convert.ToByte(radJournals.Tag);
+        }
+
         private void EnableDisableAdditionalFields(bool statusRefNo, bool statusPayee)
         {
             lblRefNo.Visible = statusRefNo;
@@ -150,12 +157,6 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             lblCollectingOfficerPayee.Visible = statusPayee;
             txtPayeeCollectingOfficer.Enabled = statusPayee;
-        }
-
-        private void radioJournals_Click(object sender, EventArgs e)
-        {
-            var radJournals = sender as RadioButton;
-            journalId = Convert.ToByte(radJournals.Tag);
         }
 
         private void radioJournals_CheckedChanged(object sender, EventArgs e)
@@ -172,6 +173,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                 case "Cash Disbursements Journal":
                     EnableDisableAdditionalFields(false, false);
 
+                    epRefNo.SetError(txtRefNo, string.Empty);
+                    epCollectingOfficerPayee.SetError(txtPayeeCollectingOfficer, string.Empty);
                     break;
                 case "Cash Receipts Journal":
                     EnableDisableAdditionalFields(true, true);
@@ -189,6 +192,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     EnableDisableAdditionalFields(true, false);
 
                     lblRefNo.Text = "ADA No.";
+                    epCollectingOfficerPayee.SetError(txtPayeeCollectingOfficer, string.Empty);
                     break;
 
                 default:

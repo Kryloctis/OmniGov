@@ -7,6 +7,7 @@ namespace ACC.Domain.Interfaces
     {
         bool Insert(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList);
         bool Update(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList);
+        bool Delete(JEVModel entity);
         int GetLastInsertedID();
         Dictionary<string, string> GetRecordByJEV(string jevNo);
         bool JevNumberExist(string jevNo);

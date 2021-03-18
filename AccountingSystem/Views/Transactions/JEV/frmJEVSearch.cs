@@ -109,6 +109,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                     uc.Enabled = true;
                     frmJEV.btnSave.Enabled = true;
+                    frmJEV.btnDelete.Enabled = true;
 
                     frmJEV.ucjev1.txtFundsJevNo.Text = $"{jevNoSplit[0]}-{jevNoSplit[1]}-{jevNoSplit[2]}";
                     frmJEV.ucjev1.txtJEVNo.Text = jevNoSplit[3];

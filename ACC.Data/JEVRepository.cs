@@ -31,6 +31,34 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
+        public bool Delete(JEVModel entity)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@id", DbType.Int32, entity.Id},
+                    };
+
+                    // delete first the jev accounts
+                    _jevAccountsRepository.DeleteByJevId(entity.Id);
+
+                    // delete the jev
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+
+                    scope.Complete();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             throw new NotImplementedException();
@@ -124,7 +152,7 @@ namespace ACC.Data
                     _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
 
                     // delete all the jev accounts first
-                    _ = _jevAccountsRepository.Delete(jevAccountsModelList);
+                    _ = _jevAccountsRepository.DeleteByJevId(entity.Id);
 
                     // loop jev accounts list then insert each using the latest Jev Id
                     foreach (var jevAccounts in jevAccountsModelList)

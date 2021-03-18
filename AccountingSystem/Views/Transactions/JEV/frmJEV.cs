@@ -21,6 +21,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void frmJEV_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIconAccounting(this);
+            this.btnDelete.Click += new EventHandler(this.BtnDelete_Click);
         }
 
         private ushort? ValidateNullSubsidiary(object subsidiaryCellValue)
@@ -202,6 +203,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             var uc = ucjev1;
             btnSave.Enabled = true;
+            btnDelete.Enabled = false;
             uc.Enabled = true;
             uc.ResetForm();
         }
@@ -209,6 +211,27 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void BtnSearch_Click(object sender, EventArgs e)
         {
             _ = new frmJEVSearch(this).ShowDialog();
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var uc = ucjev1;
+                if (MessageBox.Show("Are you sure you want to delete this record?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    var jevModel = new JEVModel();
+                    jevModel.Id = uc.jevId;
+
+                    var jevRepository = Factory.JEVRepository();
+                    _ = jevRepository.Delete(jevModel);
+                    uc.ResetForm();
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
     }
 }
