@@ -138,8 +138,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         #endregion
         private System.Windows.Forms.ToolStripButton btnAdd;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton btnEdit;
-        private System.Windows.Forms.ToolStripButton BtnSubsidiary;
         private System.Windows.Forms.ToolStripButton btnSearch;
         internal System.Windows.Forms.ToolStrip toolStrip1;
         protected internal ucJEV ucjev1;

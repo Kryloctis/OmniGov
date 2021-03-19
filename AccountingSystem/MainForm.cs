@@ -10,6 +10,7 @@ using AccountingSystem.Views.Manage.Users.Roles;
 using AccountingSystem.Views.Manage.Users.List;
 using BudgetSystem.Views.BudgetAppropriations;
 using AccountingSystem.Views.Transactions.JEV;
+using AccountingSystem.Views.Manage.BudgetAppropriations;
 
 namespace AccountingSystem
 {

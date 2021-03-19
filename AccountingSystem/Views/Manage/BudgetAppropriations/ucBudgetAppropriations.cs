@@ -26,13 +26,15 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[6];
-            errorArray[0] = epFunctionProgramProject.GetError(cmbxFPP);
-            errorArray[1] = epOthersFunctionProgramProject.GetError(cmbxOthersFPP);
-            errorArray[2] = epAllotmentClass.GetError(cmbxAllotmentClass);
-            errorArray[3] = epGeneralLedgerAcc.GetError(cmbxLedgerAccount);
-            errorArray[4] = epAmount.GetError(nudAmount);
-            errorArray[5] = epBudgetAppropriation.GetError(cmbxFPP);
+            var errorArray = new string[8];
+            errorArray[0] = epTypeOfFund.GetError(cmbxTypeOfFund);
+            errorArray[1] = epFunctionProgramProject.GetError(cmbxFPP);
+            errorArray[2] = epOthersFunctionProgramProject.GetError(cmbxOthersFPP);
+            errorArray[3] = epAllotmentClass.GetError(cmbxAllotmentClass);
+            errorArray[4] = epGeneralLedgerAcc.GetError(cmbxLedgerAccount);
+            errorArray[5] = epYear.GetError(nudYear);
+            errorArray[6] = epAmount.GetError(nudAmount);
+            errorArray[7] = epBudgetAppropriation.GetError(cmbxFPP);
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
@@ -132,6 +134,17 @@ namespace BudgetSystem.Views.BudgetAppropriations
             }
         }
 
+        internal void LoadTypeOfFund() 
+        {
+            try
+            {
+                HelperLoadRecords.TypeOfFundCombobox(Factory.FundsRepository().GetRecords(), cmbxTypeOfFund, "fund_name", "id");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
 
         #region Validations
 
@@ -259,6 +272,24 @@ namespace BudgetSystem.Views.BudgetAppropriations
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
 
+        private void nudYear_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epYear, nudYear, "Year");
+        }
+        private void nudYear_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorNumericUpDown(epYear, nudYear);
+        }
+
+        private void cmbxTypeOfFund_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epTypeOfFund, cmbxTypeOfFund, "Type of Fund");
+        }
+        private void cmbxTypeOfFund_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epTypeOfFund, cmbxTypeOfFund);
+        }
+
         #endregion Validations
 
         private void cmbxFPP_SelectedValueChanged(object sender, EventArgs e)
@@ -270,5 +301,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             LoadGeneralLedgerAccounts();
         }
+
     }
 }

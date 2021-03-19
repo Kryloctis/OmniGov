@@ -222,9 +222,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
 
         private System.Windows.Forms.DataGridView dgOthersFPP;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton btnAdd;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripButton toolStripBtnAdd;
         private System.Windows.Forms.ToolStripButton toolStripBtnEdit;
         private System.Windows.Forms.ToolStripButton toolStripBtnDelete;
