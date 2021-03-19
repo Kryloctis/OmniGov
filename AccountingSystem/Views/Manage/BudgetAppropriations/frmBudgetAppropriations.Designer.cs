@@ -1,5 +1,5 @@
 ﻿
-namespace BudgetSystem.Views.BudgetAppropriations
+namespace AccountingSystem.Views.Manage.BudgetAppropriations
 {
     partial class frmBudgetAppropriations
     {
@@ -31,204 +31,227 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             this.dgBudgetAppropriations = new System.Windows.Forms.DataGridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
-            this.txtStripSearch = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.btnAdd = new System.Windows.Forms.ToolStripButton();
+            this.btnEdit = new System.Windows.Forms.ToolStripButton();
+            this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.cmbxYear = new System.Windows.Forms.ToolStripComboBox();
+            this.cmbxFundType = new System.Windows.Forms.ToolStripComboBox();
+            this.cmbxAllotmentClass = new System.Windows.Forms.ToolStripComboBox();
+            this.dgFPP = new System.Windows.Forms.DataGridView();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.txtTotal = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetAppropriations)).BeginInit();
             this.toolStrip1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgFPP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgBudgetAppropriations
             // 
+            this.dgBudgetAppropriations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgBudgetAppropriations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgBudgetAppropriations.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgBudgetAppropriations.Location = new System.Drawing.Point(0, 50);
+            this.dgBudgetAppropriations.Location = new System.Drawing.Point(3, 53);
             this.dgBudgetAppropriations.Name = "dgBudgetAppropriations";
             this.dgBudgetAppropriations.RowTemplate.Height = 25;
-            this.dgBudgetAppropriations.Size = new System.Drawing.Size(951, 378);
-            this.dgBudgetAppropriations.TabIndex = 0;
+            this.dgBudgetAppropriations.Size = new System.Drawing.Size(818, 426);
+            this.dgBudgetAppropriations.TabIndex = 1;
+            this.dgBudgetAppropriations.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView1_ColumnAdded);
             this.dgBudgetAppropriations.SelectionChanged += new System.EventHandler(this.dgBudgetAppropriations_SelectionChanged);
             // 
             // toolStrip1
             // 
+            this.toolStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButtonAdd,
-            this.toolStripButtonEdit,
-            this.toolStripButtonDelete,
-            this.txtStripSearch,
-            this.toolStripLabel1});
+            this.btnAdd,
+            this.btnEdit,
+            this.btnDelete,
+            this.cmbxYear,
+            this.cmbxFundType,
+            this.cmbxAllotmentClass});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(951, 50);
-            this.toolStrip1.TabIndex = 1;
+            this.toolStrip1.Size = new System.Drawing.Size(833, 50);
+            this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButtonAdd
+            // btnAdd
             // 
-            this.toolStripButtonAdd.Image = global::AccountingSystem.Properties.Resources.add;
-            this.toolStripButtonAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonAdd.Name = "toolStripButtonAdd";
-            this.toolStripButtonAdd.Size = new System.Drawing.Size(42, 47);
-            this.toolStripButtonAdd.Text = "Add...";
-            this.toolStripButtonAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButtonAdd.Click += new System.EventHandler(this.toolStripButtonAdd_Click);
+            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.add;
+            this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(42, 47);
+            this.btnAdd.Text = "Add...";
+            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // toolStripButtonEdit
+            // btnEdit
             // 
-            this.toolStripButtonEdit.Image = global::AccountingSystem.Properties.Resources.edit;
-            this.toolStripButtonEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonEdit.Name = "toolStripButtonEdit";
-            this.toolStripButtonEdit.Size = new System.Drawing.Size(40, 47);
-            this.toolStripButtonEdit.Text = "Edit...";
-            this.toolStripButtonEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButtonEdit.Click += new System.EventHandler(this.toolStripButtonEdit_Click);
+            this.btnEdit.Enabled = false;
+            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.edit;
+            this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(40, 47);
+            this.btnEdit.Text = "Edit...";
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
-            // toolStripButtonDelete
+            // btnDelete
             // 
-            this.toolStripButtonDelete.Image = global::AccountingSystem.Properties.Resources.delete;
-            this.toolStripButtonDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonDelete.Name = "toolStripButtonDelete";
-            this.toolStripButtonDelete.Size = new System.Drawing.Size(44, 47);
-            this.toolStripButtonDelete.Text = "Delete";
-            this.toolStripButtonDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
+            this.btnDelete.Enabled = false;
+            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
+            this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(44, 47);
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // txtStripSearch
+            // cmbxYear
             // 
-            this.txtStripSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.txtStripSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtStripSearch.Name = "txtStripSearch";
-            this.txtStripSearch.Size = new System.Drawing.Size(200, 50);
+            this.cmbxYear.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.cmbxYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxYear.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.cmbxYear.Margin = new System.Windows.Forms.Padding(1, 0, 10, 0);
+            this.cmbxYear.Name = "cmbxYear";
+            this.cmbxYear.Size = new System.Drawing.Size(121, 50);
             // 
-            // toolStripLabel1
+            // cmbxFundType
             // 
-            this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(42, 47);
-            this.toolStripLabel1.Text = "Search";
+            this.cmbxFundType.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.cmbxFundType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxFundType.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.cmbxFundType.Margin = new System.Windows.Forms.Padding(1, 0, 10, 0);
+            this.cmbxFundType.Name = "cmbxFundType";
+            this.cmbxFundType.Size = new System.Drawing.Size(150, 50);
+            // 
+            // cmbxAllotmentClass
+            // 
+            this.cmbxAllotmentClass.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.cmbxAllotmentClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxAllotmentClass.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.cmbxAllotmentClass.Margin = new System.Windows.Forms.Padding(1, 0, 10, 0);
+            this.cmbxAllotmentClass.Name = "cmbxAllotmentClass";
+            this.cmbxAllotmentClass.Size = new System.Drawing.Size(150, 50);
+            // 
+            // dgFPP
+            // 
+            this.dgFPP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgFPP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgFPP.Location = new System.Drawing.Point(3, 3);
+            this.dgFPP.Name = "dgFPP";
+            this.dgFPP.RowTemplate.Height = 25;
+            this.dgFPP.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgFPP.Size = new System.Drawing.Size(294, 508);
+            this.dgFPP.TabIndex = 3;
+            this.dgFPP.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgFPP_RowHeaderMouseDoubleClick);
+            this.dgFPP.SelectionChanged += new System.EventHandler(this.dgFPP_SelectionChanged);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.IsSplitterFixed = true;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.dgFPP);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.txtTotal);
+            this.splitContainer1.Panel2.Controls.Add(this.label1);
+            this.splitContainer1.Panel2.Controls.Add(this.dgBudgetAppropriations);
+            this.splitContainer1.Panel2.Controls.Add(this.toolStrip1);
+            this.splitContainer1.Size = new System.Drawing.Size(1137, 514);
+            this.splitContainer1.SplitterDistance = 300;
+            this.splitContainer1.TabIndex = 7;
+            // 
+            // txtTotal
+            // 
+            this.txtTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTotal.Location = new System.Drawing.Point(689, 485);
+            this.txtTotal.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.ReadOnly = true;
+            this.txtTotal.Size = new System.Drawing.Size(132, 23);
+            this.txtTotal.TabIndex = 4;
+            this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtTotal.WordWrap = false;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(651, 488);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 15);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Total";
             // 
             // statusStrip1
             // 
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.lblRecordCount,
-            this.toolStripStatusLabel4,
-            this.toolStripStatusLabel2,
-            this.lblCreatedAt,
-            this.toolStripStatusLabel3,
-            this.lblUpdatedAt});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 514);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(951, 22);
-            this.statusStrip1.TabIndex = 10;
+            this.statusStrip1.Size = new System.Drawing.Size(1137, 22);
+            this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
-            this.toolStripStatusLabel1.Text = "Records:";
-            // 
-            // lblRecordCount
-            // 
-            this.lblRecordCount.Name = "lblRecordCount";
-            this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
-            this.lblRecordCount.Text = "0";
-            // 
-            // toolStripStatusLabel4
-            // 
-            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(741, 17);
-            this.toolStripStatusLabel4.Spring = true;
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(64, 17);
-            this.toolStripStatusLabel2.Text = "Created at:";
-            // 
-            // lblCreatedAt
-            // 
-            this.lblCreatedAt.Name = "lblCreatedAt";
-            this.lblCreatedAt.Size = new System.Drawing.Size(0, 17);
-            // 
-            // toolStripStatusLabel3
-            // 
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(68, 17);
-            this.toolStripStatusLabel3.Text = "Updated at:";
-            // 
-            // lblUpdatedAt
-            // 
-            this.lblUpdatedAt.Name = "lblUpdatedAt";
-            this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
             // 
             // frmBudgetAppropriations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(951, 450);
-            this.Controls.Add(this.dgBudgetAppropriations);
+            this.ClientSize = new System.Drawing.Size(1137, 536);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.toolStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(967, 489);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(962, 571);
             this.Name = "frmBudgetAppropriations";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Manage > Budget Appropriations ";
-            this.Load += new System.EventHandler(this.frmBudgetAppropriations_Load);
+            this.Text = "frmBudgetAppropriationsNew";
+            this.Load += new System.EventHandler(this.frmBudgetAppropriationsNew_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetAppropriations)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgFPP)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
         private System.Windows.Forms.DataGridView dgBudgetAppropriations;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        internal System.Windows.Forms.ToolStripButton toolStripButtonAdd;
-        internal System.Windows.Forms.ToolStripButton toolStripButtonEdit;
-        internal System.Windows.Forms.ToolStripButton toolStripButtonDelete;
-        internal System.Windows.Forms.ToolStripStatusLabel LabelCreatedAt;
-        internal System.Windows.Forms.ToolStripStatusLabel labelCreatedAtPlaceHolder;
-        internal System.Windows.Forms.ToolStripStatusLabel labelCreatedAt;
-        private System.Windows.Forms.ToolStripStatusLabel labelDivider;
-        private System.Windows.Forms.ToolStripStatusLabel labelUpdatedAtPlaceHolder;
+        internal System.Windows.Forms.ToolStripButton btnAdd;
+        internal System.Windows.Forms.ToolStripButton btnEdit;
+        internal System.Windows.Forms.ToolStripButton btnDelete;
+        internal System.Windows.Forms.ToolStripComboBox cmbxAllotmentClass;
+        private System.Windows.Forms.DataGridView dgFPP;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
-        private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        internal System.Windows.Forms.ToolStripTextBox txtStripSearch;
+        private System.Windows.Forms.TextBox txtTotal;
+        internal System.Windows.Forms.ToolStripComboBox cmbxFundType;
+        internal System.Windows.Forms.ToolStripComboBox cmbxYear;
     }
 }

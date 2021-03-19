@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem;
+using AccountingSystem.Views.Manage.BudgetAppropriations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,11 +15,11 @@ namespace BudgetSystem.Views.BudgetAppropriations
 {
     public partial class frmBudgetAppropriationsAdd : Form
     {
-        private frmBudgetAppropriations _frmBudgetAppropriations;
-        public frmBudgetAppropriationsAdd(frmBudgetAppropriations frmBudgetAppropriations)
+        private frmBudgetAppropriations _frmBudgetAppropriationsNew;
+        public frmBudgetAppropriationsAdd(frmBudgetAppropriations frmBudgetAppropriationsNew)
         {
             InitializeComponent();
-            _frmBudgetAppropriations = frmBudgetAppropriations;
+            _frmBudgetAppropriationsNew = frmBudgetAppropriationsNew;
         }
 
         private void LoadComboboxes()
@@ -28,7 +29,9 @@ namespace BudgetSystem.Views.BudgetAppropriations
             uc.LoadOtherFPPRecords();
             uc.LoadAllotmentClassRecords();
             uc.LoadGeneralLedgerAccounts();
+            uc.LoadTypeOfFund();
             uc.ResetForm();
+            uc.nudYear.Value = DateTime.Now.Year;
         }
 
         private bool SaveData() 
@@ -53,10 +56,12 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 // proceed to insert
                 var budgetAppropriationsModel = new BudgetAppropriationsModel()
                 {
+                    FundsId = Convert.ToInt32(uc.cmbxTypeOfFund.SelectedValue),
                     FunctionProgramProjectId = Convert.ToInt32(uc.cmbxFPP.SelectedValue),
                     OthersFPPId = othersFPPId,
                     AllotmentClassesId = Convert.ToInt32(uc.cmbxAllotmentClass.SelectedValue),
                     GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxLedgerAccount.SelectedValue),
+                    Year = Convert.ToInt16(uc.nudYear.Value),
                     DateEntry = uc.dtDateEntry.Value,
                     amount = uc.nudAmount.Value
                 };
@@ -78,7 +83,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             if (SaveData()) 
             {
                 uc.ResetForm();
-                _frmBudgetAppropriations.LoadRecords();
+                _frmBudgetAppropriationsNew.LoadRecords();
                 Helper.MessageBoxSuccess("Budget Appropriation has been saved."); 
             }
         }
