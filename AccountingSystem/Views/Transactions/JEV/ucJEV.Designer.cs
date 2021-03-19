@@ -32,9 +32,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupFunds = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelFunds = new System.Windows.Forms.FlowLayoutPanel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupJournals = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelJournals = new System.Windows.Forms.FlowLayoutPanel();
             this.btnRemoveAccount = new System.Windows.Forms.Button();
             this.btnEditAccount = new System.Windows.Forms.Button();
@@ -44,6 +44,17 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.lblRefNo = new System.Windows.Forms.Label();
             this.txtPayeeCollectingOfficer = new System.Windows.Forms.TextBox();
             this.dgAccounts = new System.Windows.Forms.DataGridView();
+            this.FPPId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GeneralLedgerId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SubsidiaryLedgerId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsDebit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsDeposit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FPP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AccountName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AccountCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Subsidiary = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Debit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtExplanation = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -58,36 +69,25 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.label6 = new System.Windows.Forms.Label();
             this.epRefNo = new System.Windows.Forms.ErrorProvider(this.components);
             this.epCollectingOfficerPayee = new System.Windows.Forms.ErrorProvider(this.components);
-            this.FPPId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GeneralLedgerId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SubsidiaryLedgerId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsDebit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsDeposit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FPP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AccountName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AccountCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Subsidiary = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Debit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.groupFunds.SuspendLayout();
+            this.groupJournals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAccounts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epJEV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epRefNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epCollectingOfficerPayee)).BeginInit();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // groupFunds
             // 
-            this.groupBox1.AutoSize = true;
-            this.groupBox1.Controls.Add(this.flowLayoutPanelFunds);
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(3, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(857, 61);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Funds";
+            this.groupFunds.AutoSize = true;
+            this.groupFunds.Controls.Add(this.flowLayoutPanelFunds);
+            this.groupFunds.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.groupFunds.Location = new System.Drawing.Point(3, 0);
+            this.groupFunds.Name = "groupFunds";
+            this.groupFunds.Size = new System.Drawing.Size(857, 61);
+            this.groupFunds.TabIndex = 9;
+            this.groupFunds.TabStop = false;
+            this.groupFunds.Text = "Funds";
             // 
             // flowLayoutPanelFunds
             // 
@@ -99,17 +99,17 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.flowLayoutPanelFunds.Size = new System.Drawing.Size(851, 39);
             this.flowLayoutPanelFunds.TabIndex = 0;
             // 
-            // groupBox2
+            // groupJournals
             // 
-            this.groupBox2.AutoSize = true;
-            this.groupBox2.Controls.Add(this.flowLayoutPanelJournals);
-            this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox2.Location = new System.Drawing.Point(3, 67);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(857, 94);
-            this.groupBox2.TabIndex = 10;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Journals";
+            this.groupJournals.AutoSize = true;
+            this.groupJournals.Controls.Add(this.flowLayoutPanelJournals);
+            this.groupJournals.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.groupJournals.Location = new System.Drawing.Point(3, 67);
+            this.groupJournals.Name = "groupJournals";
+            this.groupJournals.Size = new System.Drawing.Size(857, 94);
+            this.groupJournals.TabIndex = 10;
+            this.groupJournals.TabStop = false;
+            this.groupJournals.Text = "Journals";
             // 
             // flowLayoutPanelJournals
             // 
@@ -213,6 +213,91 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.dgAccounts.Size = new System.Drawing.Size(854, 191);
             this.dgAccounts.TabIndex = 37;
             this.dgAccounts.SelectionChanged += new System.EventHandler(this.dgAccounts_SelectionChanged);
+            // 
+            // FPPId
+            // 
+            this.FPPId.HeaderText = "FPPId";
+            this.FPPId.Name = "FPPId";
+            this.FPPId.ReadOnly = true;
+            this.FPPId.Visible = false;
+            // 
+            // GeneralLedgerId
+            // 
+            this.GeneralLedgerId.HeaderText = "GeneralLedgerId";
+            this.GeneralLedgerId.Name = "GeneralLedgerId";
+            this.GeneralLedgerId.ReadOnly = true;
+            this.GeneralLedgerId.Visible = false;
+            // 
+            // SubsidiaryLedgerId
+            // 
+            this.SubsidiaryLedgerId.HeaderText = "SubsidiaryLedgerId";
+            this.SubsidiaryLedgerId.Name = "SubsidiaryLedgerId";
+            this.SubsidiaryLedgerId.ReadOnly = true;
+            this.SubsidiaryLedgerId.Visible = false;
+            // 
+            // IsDebit
+            // 
+            this.IsDebit.HeaderText = "IsDebit";
+            this.IsDebit.Name = "IsDebit";
+            this.IsDebit.ReadOnly = true;
+            this.IsDebit.Visible = false;
+            // 
+            // IsDeposit
+            // 
+            this.IsDeposit.HeaderText = "IsDeposit";
+            this.IsDeposit.Name = "IsDeposit";
+            this.IsDeposit.ReadOnly = true;
+            this.IsDeposit.Visible = false;
+            // 
+            // FPP
+            // 
+            this.FPP.HeaderText = "FPP";
+            this.FPP.Name = "FPP";
+            this.FPP.ReadOnly = true;
+            this.FPP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // AccountName
+            // 
+            this.AccountName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.AccountName.HeaderText = "AccountName";
+            this.AccountName.Name = "AccountName";
+            this.AccountName.ReadOnly = true;
+            this.AccountName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // AccountCode
+            // 
+            this.AccountCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.AccountCode.HeaderText = "Account Code";
+            this.AccountCode.Name = "AccountCode";
+            this.AccountCode.ReadOnly = true;
+            this.AccountCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.AccountCode.Width = 89;
+            // 
+            // Subsidiary
+            // 
+            this.Subsidiary.HeaderText = "Subsidiary";
+            this.Subsidiary.Name = "Subsidiary";
+            this.Subsidiary.ReadOnly = true;
+            this.Subsidiary.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Subsidiary.Width = 200;
+            // 
+            // Debit
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Debit.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Debit.HeaderText = "Debit";
+            this.Debit.Name = "Debit";
+            this.Debit.ReadOnly = true;
+            this.Debit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Credit
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Credit.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Credit.HeaderText = "Credit";
+            this.Credit.Name = "Credit";
+            this.Credit.ReadOnly = true;
+            this.Credit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // txtExplanation
             // 
@@ -328,87 +413,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.epCollectingOfficerPayee.ContainerControl = this;
             // 
-            // FPPId
-            // 
-            this.FPPId.HeaderText = "FPPId";
-            this.FPPId.Name = "FPPId";
-            this.FPPId.ReadOnly = true;
-            this.FPPId.Visible = false;
-            // 
-            // GeneralLedgerId
-            // 
-            this.GeneralLedgerId.HeaderText = "GeneralLedgerId";
-            this.GeneralLedgerId.Name = "GeneralLedgerId";
-            this.GeneralLedgerId.ReadOnly = true;
-            // 
-            // SubsidiaryLedgerId
-            // 
-            this.SubsidiaryLedgerId.HeaderText = "SubsidiaryLedgerId";
-            this.SubsidiaryLedgerId.Name = "SubsidiaryLedgerId";
-            this.SubsidiaryLedgerId.ReadOnly = true;
-            // 
-            // IsDebit
-            // 
-            this.IsDebit.HeaderText = "IsDebit";
-            this.IsDebit.Name = "IsDebit";
-            this.IsDebit.ReadOnly = true;
-            // 
-            // IsDeposit
-            // 
-            this.IsDeposit.HeaderText = "IsDeposit";
-            this.IsDeposit.Name = "IsDeposit";
-            this.IsDeposit.ReadOnly = true;
-            // 
-            // FPP
-            // 
-            this.FPP.HeaderText = "FPP";
-            this.FPP.Name = "FPP";
-            this.FPP.ReadOnly = true;
-            this.FPP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // AccountName
-            // 
-            this.AccountName.HeaderText = "AccountName";
-            this.AccountName.Name = "AccountName";
-            this.AccountName.ReadOnly = true;
-            this.AccountName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.AccountName.Width = 200;
-            // 
-            // AccountCode
-            // 
-            this.AccountCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.AccountCode.HeaderText = "Account Code";
-            this.AccountCode.Name = "AccountCode";
-            this.AccountCode.ReadOnly = true;
-            this.AccountCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.AccountCode.Width = 89;
-            // 
-            // Subsidiary
-            // 
-            this.Subsidiary.HeaderText = "Subsidiary";
-            this.Subsidiary.Name = "Subsidiary";
-            this.Subsidiary.ReadOnly = true;
-            this.Subsidiary.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Subsidiary.Width = 200;
-            // 
-            // Debit
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Debit.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Debit.HeaderText = "Debit";
-            this.Debit.Name = "Debit";
-            this.Debit.ReadOnly = true;
-            this.Debit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Credit
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Credit.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Credit.HeaderText = "Credit";
-            this.Credit.Name = "Credit";
-            this.Credit.ReadOnly = true;
-            this.Credit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
             // ucJEV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -432,14 +436,14 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.Controls.Add(this.dtpDateEntry);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtJEVNo);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupJournals);
+            this.Controls.Add(this.groupFunds);
             this.Name = "ucJEV";
             this.Size = new System.Drawing.Size(886, 497);
             this.Load += new System.EventHandler(this.ucJEV_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
+            this.groupFunds.ResumeLayout(false);
+            this.groupFunds.PerformLayout();
+            this.groupJournals.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgAccounts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epJEV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epRefNo)).EndInit();
@@ -450,11 +454,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFunds;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelJournals;
         private System.Windows.Forms.Button btnRemoveAccount;
         private System.Windows.Forms.Button btnEditAccount;
         private System.Windows.Forms.Button btnAddAccount;
@@ -488,5 +487,9 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.DataGridViewTextBoxColumn Subsidiary;
         private System.Windows.Forms.DataGridViewTextBoxColumn Debit;
         private System.Windows.Forms.DataGridViewTextBoxColumn Credit;
+        internal System.Windows.Forms.GroupBox groupJournals;
+        internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFunds;
+        internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelJournals;
+        private System.Windows.Forms.GroupBox groupFunds;
     }
 }

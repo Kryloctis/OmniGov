@@ -202,7 +202,7 @@ namespace AccountingSystem
             else if (rowCount > 1)
                 message = $"Are you sure you want to delete {rowCount} records?";
 
-            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 return true;
 
             return false;

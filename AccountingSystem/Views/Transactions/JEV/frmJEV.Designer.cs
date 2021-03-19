@@ -64,9 +64,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnAdd.Size = new System.Drawing.Size(42, 47);
             this.btnAdd.Text = "&Add...";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
             // btnSave
             // 
+            this.btnSave.Enabled = false;
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save28px;
             this.btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -102,9 +104,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnSearch.Size = new System.Drawing.Size(46, 47);
             this.btnSearch.Text = "S&earch";
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
             // ucjev1
             // 
+            this.ucjev1.Enabled = false;
             this.ucjev1.Location = new System.Drawing.Point(12, 57);
             this.ucjev1.Name = "ucjev1";
             this.ucjev1.Size = new System.Drawing.Size(883, 489);
@@ -132,12 +136,12 @@ namespace AccountingSystem.Views.Transactions.JEV
         }
 
         #endregion
-        private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnAdd;
-        private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStripButton btnSearch;
-        private ucJEV ucjev1;
+        internal System.Windows.Forms.ToolStrip toolStrip1;
+        protected internal ucJEV ucjev1;
+        internal System.Windows.Forms.ToolStripButton btnSave;
+        internal System.Windows.Forms.ToolStripButton btnDelete;
     }
 }

@@ -38,8 +38,6 @@ namespace AccountingSystem.Views.Manage.Funds
             LoadRecords();
         }
 
-      
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
             _ = new frmFundAdd(this).ShowDialog();
@@ -54,8 +52,6 @@ namespace AccountingSystem.Views.Manage.Funds
             }
            
         }
-
-
 
         private void btnDelete_Click(object sender, EventArgs e)
         {

@@ -8,6 +8,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 {
     public partial class ucJEV : UserControl
     {
+        internal uint jevId;
         internal byte fundId = 0;
         internal byte journalId = 0;
         internal string journalName;
@@ -33,6 +34,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         internal void ResetForm()
         {
+
             txtJEVNo.Clear();
             txtRefNo.Clear();
             txtPayeeCollectingOfficer.Clear();
@@ -47,22 +49,35 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             foreach (DataRow fund in funds.Rows)
             {
-                var radFund = new RadioButton();
-                radFund.Text = fund["fund_name"].ToString();
-                radFund.Tag = fund["id"];
-                radFund.AutoSize = true;
-                radFund.Appearance = Appearance.Button;
-                radFund.TextImageRelation = TextImageRelation.ImageBeforeText;
+                var radFund = new RadioButton
+                {
+                    Text = fund["fund_name"].ToString(),
+                    Tag = fund["id"],
+                    AutoSize = true,
+                    Appearance = Appearance.Button,
+                    TextImageRelation = TextImageRelation.ImageBeforeText
+                };
+
+                if (fund["fund_name"].ToString() == "General Fund")
+                {
+                    radFund.Checked = true;
+                    fundId = Convert.ToByte(fund["id"]);
+                    ShowCheckIcon(radFund);
+
+                    GenerateJEVNumber(fund["fund_code"].ToString(), dtpDateEntry.Value.Year.ToString(), dtpDateEntry.Value.Month.ToString("00"));
+                }
+                    
 
                 flowLayoutPanelFunds.Controls.Add(radFund);
 
-                //radFund.Click += new EventHandler(radFunds_Click);
+                radFund.Click += new EventHandler(radioFunds_Click);
                 radFund.CheckedChanged += new EventHandler(radioFunds_CheckedChanged);
             }
         }
 
         internal void LoadJournals()
         {
+            string CheckedJournal = "General Journal";
             var journals = Factory.JournalsRepository().GetRecords();
 
             foreach (DataRow journal in journals.Rows)
@@ -74,9 +89,16 @@ namespace AccountingSystem.Views.Transactions.JEV
                 radJournal.Appearance = Appearance.Button;
                 radJournal.TextImageRelation = TextImageRelation.ImageBeforeText;
 
+                if (journal["journal_name"].ToString() == CheckedJournal)
+                {
+                    radJournal.Checked = true;
+                    journalId = Convert.ToByte(journal["id"]);
+                    ShowCheckIcon(radJournal);
+                }
+
                 flowLayoutPanelJournals.Controls.Add(radJournal);
 
-                //radJournal.Click += new EventHandler(radJournal_Click);
+                radJournal.Click += new EventHandler(radioJournals_Click);
                 radJournal.CheckedChanged += new EventHandler(radioJournals_CheckedChanged);
             }
         }
@@ -107,14 +129,25 @@ namespace AccountingSystem.Views.Transactions.JEV
             GenerateJEVNumber(fund["fund_code"]);
         }
 
-        private void radioFunds_CheckedChanged(object sender, EventArgs e)
+        private void radioFunds_Click(object sender, EventArgs e)
         {
             var radFund = sender as RadioButton;
             fundId = Convert.ToByte(radFund.Tag);
-            ShowCheckIcon(radFund);
             SetJEVNoOfFundCode();
+        }
+
+        private void radioFunds_CheckedChanged(object sender, EventArgs e)
+        {
+            var radFund = sender as RadioButton;
+            ShowCheckIcon(radFund);
 
             btnAddAccount.Enabled = true;
+        }
+
+        private void radioJournals_Click(object sender, EventArgs e)
+        {
+            var radJournals = sender as RadioButton;
+            journalId = Convert.ToByte(radJournals.Tag);
         }
 
         private void EnableDisableAdditionalFields(bool statusRefNo, bool statusPayee)
@@ -140,6 +173,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                 case "Cash Disbursements Journal":
                     EnableDisableAdditionalFields(false, false);
 
+                    epRefNo.SetError(txtRefNo, string.Empty);
+                    epCollectingOfficerPayee.SetError(txtPayeeCollectingOfficer, string.Empty);
                     break;
                 case "Cash Receipts Journal":
                     EnableDisableAdditionalFields(true, true);
@@ -157,6 +192,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     EnableDisableAdditionalFields(true, false);
 
                     lblRefNo.Text = "ADA No.";
+                    epCollectingOfficerPayee.SetError(txtPayeeCollectingOfficer, string.Empty);
                     break;
 
                 default:
@@ -169,9 +205,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             Helper.DatagridDefaultStyle(dgAccounts);
             LoadFunds();
             LoadJournals();
-            GenerateJEVNumber(null, dtpDateEntry.Value.Year.ToString(), dtpDateEntry.Value.Month.ToString("00"));
 
-            btnAddAccount.Enabled = false;
             btnEditAccount.Enabled = false;
             btnRemoveAccount.Enabled = false;
         }
@@ -200,7 +234,12 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
 
             string jevNo = $"{txtFundsJevNo.Text}-{txtJEVNo.Text}";
-            bool jevNoExist = Factory.JEVRepository().JevNumberExist(jevNo);
+            bool jevNoExist;
+            if (jevId == 0)
+                 jevNoExist = Factory.JEVRepository().JevNumberExist(jevNo);
+            else
+                jevNoExist = Factory.JEVRepository().JevNumberExist(jevNo, jevId);
+
             if (jevNoExist)
             {
                 epJEV.SetError(txtJEVNo, "JEV number already exist.");

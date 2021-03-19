@@ -21,6 +21,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void frmJEV_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIconAccounting(this);
+            this.btnDelete.Click += new EventHandler(this.BtnDelete_Click);
         }
 
         private ushort? ValidateNullSubsidiary(object subsidiaryCellValue)
@@ -122,12 +123,114 @@ namespace AccountingSystem.Views.Transactions.JEV
             return false;
         }
 
+        private bool UpadateData()
+        {
+            try
+            {
+                var user = Helper.GetLoggedInUserAccounting();
+                var uc = ucjev1;
+
+                // if no fund or journal selected, show error
+                if (uc.fundId == 0 || uc.journalId == 0)
+                {
+                    Helper.MessageBoxError(uc.GetFormErrors());
+                    return false;
+                }
+
+                // if error occurs, show messagebox error
+                if (!uc.ValidateChildren())
+                {
+                    Helper.MessageBoxError(uc.GetFormErrors());
+                    return false;
+                }
+
+                // if no rows in accounts datagrid, show error
+                if (uc.dgAccounts.Rows.Count == 0)
+                {
+                    Helper.MessageBoxError(uc.GetFormErrors());
+                    return false;
+                }
+
+                if (uc.txtDebitTotal.Text != uc.txtCreditTotal.Text)
+                {
+                    Helper.MessageBoxError("Debit & Credit amounts must be equal.");
+                    return false;
+                }
+
+                string jevNo = $"{uc.txtFundsJevNo.Text}-{uc.txtJEVNo.Text.Trim()}";
+                var jevModel = new JEVModel()
+                {
+                    Id = uc.jevId,
+                    FundsId = uc.fundId,
+                    JournalsId = uc.journalId,
+                    JEVNumber = jevNo,
+                    DateEntry = uc.dtpDateEntry.Value,
+                    Explanation = uc.txtExplanation.Text.Trim(),
+                    UpdatedBy = Convert.ToByte(user["id"])
+                };
+
+                return Factory.JEVRepository().Update(jevModel, JevAcountsModelList());
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return false;
+        }
+
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            var uc = ucjev1;
+            if (uc.jevId == 0)
+            {
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("JEV has been saved.");
+                    ucjev1.ResetForm();
+                    return;
+                }
+            }
+
+            if (UpadateData())
             {
                 Helper.MessageBoxSuccess("JEV has been saved.");
-                ucjev1.ResetForm();
+                return;
+            }
+        }
+
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            var uc = ucjev1;
+            btnSave.Enabled = true;
+            btnDelete.Enabled = false;
+            uc.Enabled = true;
+            uc.ResetForm();
+        }
+
+        private void BtnSearch_Click(object sender, EventArgs e)
+        {
+            _ = new frmJEVSearch(this).ShowDialog();
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var uc = ucjev1;
+                if (MessageBox.Show("Are you sure you want to delete this record?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    var jevModel = new JEVModel();
+                    jevModel.Id = uc.jevId;
+
+                    var jevRepository = Factory.JEVRepository();
+                    _ = jevRepository.Delete(jevModel);
+                    uc.ResetForm();
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
     }

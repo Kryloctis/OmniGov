@@ -44,6 +44,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 isDeposit = null;
 
             Dictionary<string, string> accountData = Factory.GeneralLedgerAccountsRepository().GetRecordByID(Convert.ToInt32(generalLedgerId));
+
             object[] accountRow;
             if (isDebit)
             {
@@ -57,7 +58,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     isDeposit,
                     fppName,
                     generalLedgerName,
-                    accountData["ledger_code"],
+                    accountData["account_code"],
                     subsidiaryName,
                     amount,
                     "",
@@ -75,7 +76,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     isDeposit,
                     fppName,
                     $"     {generalLedgerName}",
-                    accountData["ledger_code"],
+                    accountData["account_code"],
                     subsidiaryName,
                     "",
                     amount,

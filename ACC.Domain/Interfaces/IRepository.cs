@@ -9,8 +9,6 @@ namespace ACC.Domain.Interfaces
     {
         bool IdExist(int id);
         DataTable GetRecords();
-        
-
         DataTable GetRecordsBySearch(string searchText);
         Dictionary<string, string> GetRecordByID(int Id);
         int CountRecords();
