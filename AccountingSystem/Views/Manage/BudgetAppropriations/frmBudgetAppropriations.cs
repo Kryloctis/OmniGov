@@ -157,6 +157,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
                         _ = Factory.BudgetAppropriationsRepository().Delete(budgetAppropriationsModelList);
                         LoadRecords();
+                        HelperLoadRecords.FPPDatagridViewRecords(dgFPP);
+                        HelperLoadRecords.YearCombobox(Factory.BudgetAppropriationsRepository().GetYearsBudgetAppropriations(), cmbxYear, "year", "year");
                     }
                 }
             }
