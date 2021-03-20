@@ -240,18 +240,18 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView dgBudgetAppropriations;
         private System.Windows.Forms.ToolStrip toolStrip1;
         internal System.Windows.Forms.ToolStripButton btnAdd;
         internal System.Windows.Forms.ToolStripButton btnEdit;
         internal System.Windows.Forms.ToolStripButton btnDelete;
         internal System.Windows.Forms.ToolStripComboBox cmbxAllotmentClass;
-        private System.Windows.Forms.DataGridView dgFPP;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.TextBox txtTotal;
         internal System.Windows.Forms.ToolStripComboBox cmbxFundType;
         internal System.Windows.Forms.ToolStripComboBox cmbxYear;
+        internal System.Windows.Forms.DataGridView dgFPP;
+        internal System.Windows.Forms.DataGridView dgBudgetAppropriations;
     }
 }
