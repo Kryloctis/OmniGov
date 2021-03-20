@@ -80,10 +80,16 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             var uc = ucBudgetAppropriations1;
 
+            //If Save data is successful
             if (SaveData()) 
             {
                 uc.ResetForm();
+
+                //Update FPP datagrid, Appropriations datagrid and Combobox Year
+                HelperLoadRecords.FPPDatagridViewRecords(_frmBudgetAppropriationsNew.dgFPP);
                 _frmBudgetAppropriationsNew.LoadRecords();
+                HelperLoadRecords.YearCombobox(Factory.BudgetAppropriationsRepository().GetYearsBudgetAppropriations(), _frmBudgetAppropriationsNew.cmbxYear, "year", "year");
+
                 Helper.MessageBoxSuccess("Budget Appropriation has been saved."); 
             }
         }
