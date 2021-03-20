@@ -16,11 +16,11 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
 {
     public partial class frmBudgetAppropriationsEdit : Form
     {
-        private frmBudgetAppropriations _frmBudgetAppropriationsNew;
+        private frmBudgetAppropriations _frmBudgetAppropriations;
         public frmBudgetAppropriationsEdit(frmBudgetAppropriations frmBudgetAppropriationsNew)
         {
             InitializeComponent();
-            _frmBudgetAppropriationsNew = frmBudgetAppropriationsNew;
+            _frmBudgetAppropriations = frmBudgetAppropriationsNew;
         }
 
         private void LoadComboboxes()
@@ -118,10 +118,20 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
             {
                 var uc = ucBudgetAppropriations1;
 
+                //Initialze data references
+                int fppID = Convert.ToInt32(uc.cmbxFPP.SelectedValue);
+                int allotmentClassID = Convert.ToInt32(uc.cmbxAllotmentClass.SelectedValue);
+                int typeOfFundID = Convert.ToInt32(uc.cmbxTypeOfFund.SelectedValue);
+                short year = Convert.ToInt16(uc.nudYear.Value);
+
+                //Update FPP datagrid, Appropriations datagrid and Combobox Year before reseting user control
+                HelperLoadRecords.FPPDatagridViewRecords(_frmBudgetAppropriations.dgFPP);
+                HelperLoadRecords.YearCombobox(Factory.BudgetAppropriationsRepository().GetYearsBudgetAppropriations(), _frmBudgetAppropriations.cmbxYear, "year", "year");
+                HelperLoadRecords.BudgetAppropriationsDataGridView(_frmBudgetAppropriations.dgBudgetAppropriations, fppID, allotmentClassID, typeOfFundID, year);
+
+                //Reset User Control Form
                 uc.ResetForm();
-                Close(); 
                 Helper.MessageBoxSuccess("Budget Appropriation update has been saved.");
-                _frmBudgetAppropriationsNew.LoadRecords();
             }
         }
     }
