@@ -22,7 +22,12 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         internal void LoadRecords()
         {
-            HelperLoadRecords.BudgetAppropriationsDataGridView(dgBudgetAppropriations, dgFPP, cmbxAllotmentClass, cmbxFundType, cmbxYear);
+            int fppID = Convert.ToInt32(dgFPP.SelectedCells[0].Value);
+            int allotmentClassID = Convert.ToInt32(cmbxAllotmentClass.ComboBox.SelectedValue);
+            int typeOfFundID = Convert.ToInt32(cmbxFundType.ComboBox.SelectedValue);
+            short year = Convert.ToInt16(cmbxYear.ComboBox.SelectedValue);
+
+            HelperLoadRecords.BudgetAppropriationsDataGridView(dgBudgetAppropriations, fppID, allotmentClassID, typeOfFundID, year);
 
             //Show Total Value 
             txtTotal.Text = (from DataGridViewRow row in dgBudgetAppropriations.Rows

@@ -414,15 +414,10 @@ namespace AccountingSystem
 
         #region BudgetAppropriations
 
-        public static void BudgetAppropriationsDataGridView(DataGridView dgvBudgetAppropriations, DataGridView dgvFPP, ToolStripComboBox cmbxAllotmentClass, ToolStripComboBox cmbxTypeOfFunds, ToolStripComboBox cmbxYear)
+        public static void BudgetAppropriationsDataGridView(DataGridView dgvBudgetAppropriations, int fppID, int allotmentClassID, int typeOfFundsID, Int16 year)
         {
             try
             {
-                int fppID = Convert.ToInt32(dgvFPP.SelectedCells[0].Value);
-                int allotmentClassID = Convert.ToInt32(cmbxAllotmentClass.ComboBox.SelectedValue);
-                int typeOfFundsID = Convert.ToInt32(cmbxTypeOfFunds.ComboBox.SelectedValue);
-                short year = Convert.ToInt16(cmbxYear.ComboBox.SelectedValue);
-
                 //Clearing Datagrid View  Rows & Columns before Loading new one
                 dgvBudgetAppropriations.Rows.Clear();
                 dgvBudgetAppropriations.Columns.Clear();

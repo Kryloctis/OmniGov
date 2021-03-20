@@ -240,7 +240,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView dgBudgetAppropriations;
         private System.Windows.Forms.ToolStrip toolStrip1;
         internal System.Windows.Forms.ToolStripButton btnAdd;
         internal System.Windows.Forms.ToolStripButton btnEdit;
@@ -253,5 +252,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         internal System.Windows.Forms.ToolStripComboBox cmbxFundType;
         internal System.Windows.Forms.ToolStripComboBox cmbxYear;
         internal System.Windows.Forms.DataGridView dgFPP;
+        internal System.Windows.Forms.DataGridView dgBudgetAppropriations;
     }
 }
