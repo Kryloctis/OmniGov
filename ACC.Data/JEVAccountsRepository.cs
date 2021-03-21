@@ -115,7 +115,7 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetViewRecordsForGeneralJournal(byte fundId, byte journalId, DateTime dateEntry)
+        public DataTable GetViewRecordsByFundJournalDate(byte fundId, byte journalId, DateTime dateEntry)
         {
             try
             {

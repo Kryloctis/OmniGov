@@ -45,7 +45,6 @@ namespace AccountingSystem
             this.menuCollectingOfficer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBudgetAppropriation = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportGJ = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportCRJ = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,6 +52,7 @@ namespace AccountingSystem
             this.menuReportCDJ = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportCkDJ = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportADADJ = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -188,16 +188,6 @@ namespace AccountingSystem
             this.menuReports.Size = new System.Drawing.Size(59, 19);
             this.menuReports.Text = "Reports";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(0, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(163, 41);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Dashboard";
-            // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -247,6 +237,16 @@ namespace AccountingSystem
             this.menuReportADADJ.Size = new System.Drawing.Size(329, 22);
             this.menuReportADADJ.Text = "Advice to Debit Account Disbursement Journal...";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(0, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(163, 41);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Dashboard";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -288,13 +288,14 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuCollectingOfficer;
         private System.Windows.Forms.ToolStripMenuItem menuBudgetAppropriation;
         private System.Windows.Forms.ToolStripMenuItem menuJEV;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem menuReportJournals;
         private System.Windows.Forms.ToolStripMenuItem menuReportGJ;
         private System.Windows.Forms.ToolStripMenuItem menuReportCRJ;
         private System.Windows.Forms.ToolStripMenuItem menuReportPRJ;
         private System.Windows.Forms.ToolStripMenuItem menuReportCDJ;
         private System.Windows.Forms.ToolStripMenuItem menuReportCkDJ;
         private System.Windows.Forms.ToolStripMenuItem menuReportADADJ;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }
 

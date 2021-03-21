@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Reporting.WinForms;
 
@@ -38,7 +31,7 @@ namespace AccountingSystem.Views.Reports.Journals
             var dateYearMonth = dtpMonth.Value;
 
             var dtGeneralJournal = new dsLFS.dtGeneralJournalDataTable();
-            var dtGeneralJournalFromDB = Factory.JEVAccountsRepository().GetViewRecordsForGeneralJournal(fundId, journalId, dateYearMonth);
+            var dtGeneralJournalFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundId, journalId, dateYearMonth);
 
             string jevNo;
             string particulars;

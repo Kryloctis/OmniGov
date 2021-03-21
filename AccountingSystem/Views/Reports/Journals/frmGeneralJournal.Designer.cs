@@ -42,9 +42,9 @@ namespace AccountingSystem.Views.Reports.Journals
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Location = new System.Drawing.Point(12, 41);
+            this.panel1.Location = new System.Drawing.Point(12, 53);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(826, 467);
+            this.panel1.Size = new System.Drawing.Size(960, 496);
             this.panel1.TabIndex = 0;
             // 
             // btnRetrieve
@@ -79,8 +79,6 @@ namespace AccountingSystem.Views.Reports.Journals
             // 
             this.cmbFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFunds.FormattingEnabled = true;
-            this.cmbFunds.Items.AddRange(new object[] {
-            "Special Education Fund"});
             this.cmbFunds.Location = new System.Drawing.Point(93, 13);
             this.cmbFunds.Name = "cmbFunds";
             this.cmbFunds.Size = new System.Drawing.Size(183, 23);
@@ -100,16 +98,17 @@ namespace AccountingSystem.Views.Reports.Journals
             this.AcceptButton = this.btnRetrieve;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(850, 520);
+            this.ClientSize = new System.Drawing.Size(984, 561);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbFunds);
             this.Controls.Add(this.dtpMonth);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnRetrieve);
             this.Controls.Add(this.panel1);
+            this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "frmGeneralJournal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "General Journal";
+            this.Text = "Report > General Journal";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmGeneralJournal_Load);
             this.ResumeLayout(false);

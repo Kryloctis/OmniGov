@@ -21,6 +21,7 @@ namespace AccountingSystem
         {
             InitializeComponent();
             menuReportGJ.Click += new EventHandler(MenuReportGeneralJournal_Click);
+            menuReportCDJ.Click += new EventHandler(MenuReportCashDisbursementsJournal_Click);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -81,6 +82,11 @@ namespace AccountingSystem
         private void MenuReportGeneralJournal_Click(object sender, EventArgs e)
         {
             _ = new frmGeneralJournal().ShowDialog();
+        }
+
+        private void MenuReportCashDisbursementsJournal_Click(object sender, EventArgs e)
+        {
+            _ = new frmCashDisbursementJournalReport().ShowDialog();
         }
 
     }
