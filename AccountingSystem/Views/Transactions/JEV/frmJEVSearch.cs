@@ -33,7 +33,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void LoadJevAccounts()
         {
             var uc = frmJEV.ucjev1;
-            DataTable dtJEV = Factory.JEVAccountsRepository().GetRecordsByJevId(uc.jevId);
+            DataTable dtJEV = Factory.JEVAccountsRepository().GetViewRecordsByJevId(uc.jevId);
 
             foreach (DataRow item in dtJEV.Rows)
             {

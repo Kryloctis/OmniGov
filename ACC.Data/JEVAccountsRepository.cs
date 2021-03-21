@@ -1,10 +1,8 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
-using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
@@ -97,7 +95,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public DataTable GetRecordsByJevId(uint jevId)
+        public DataTable GetViewRecordsByJevId(uint jevId)
         {
             try
             {
@@ -110,6 +108,46 @@ namespace ACC.Data
 
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetViewRecordsByFundAndJournal(byte fundId, byte journalId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Byte, fundId},
+                    new object[] { "@journals_id", DbType.Byte, journalId},
+                };
+
+                string query = $"SELECT jev_id, date_entry, jev_no, explanation, ledger_name, account_code, is_deposit, is_debit, amount FROM {viewTableName} WHERE funds_id = @funds_id AND journals_id = @journals_id";
+
+                var dtGeneralLedgers = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int CountByJevId(uint jevId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@jev_id", DbType.UInt32, jevId},
+                };
+
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE jev_id = @jev_id";
+
+                return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
             }
             catch (Exception)
             {

@@ -8,7 +8,9 @@ namespace ACC.Domain.Interfaces
 {
     public interface IJEVAccountsRepository : IRepository<JEVAccountsModel>
     {
-        DataTable GetRecordsByJevId(uint jevId);
+        DataTable GetViewRecordsByJevId(uint jevId);
+        DataTable GetViewRecordsByFundAndJournal(byte fundId, byte journalId);
         bool DeleteByJevId(uint jevId);
+        int CountByJevId(uint jevId);
     }
 }

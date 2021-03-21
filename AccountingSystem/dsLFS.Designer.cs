@@ -279,7 +279,7 @@ namespace AccountingSystem {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class dtGeneralJournalDataTable : global::System.Data.TypedTableBase<dtGeneralJournalRow> {
             
-            private global::System.Data.DataColumn columndate;
+            private global::System.Data.DataColumn columndate_entry;
             
             private global::System.Data.DataColumn columnjev_no;
             
@@ -328,9 +328,9 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn dateColumn {
+            public global::System.Data.DataColumn date_entryColumn {
                 get {
-                    return this.columndate;
+                    return this.columndate_entry;
                 }
             }
             
@@ -419,10 +419,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtGeneralJournalRow AdddtGeneralJournalRow(System.DateTime date, string jev_no, string particulars, string account_code, string p, decimal debit, decimal credit) {
+            public dtGeneralJournalRow AdddtGeneralJournalRow(System.DateTime date_entry, string jev_no, string particulars, string account_code, string p, decimal debit, decimal credit) {
                 dtGeneralJournalRow rowdtGeneralJournalRow = ((dtGeneralJournalRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        date,
+                        date_entry,
                         jev_no,
                         particulars,
                         account_code,
@@ -451,7 +451,7 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
-                this.columndate = base.Columns["date"];
+                this.columndate_entry = base.Columns["date_entry"];
                 this.columnjev_no = base.Columns["jev_no"];
                 this.columnparticulars = base.Columns["particulars"];
                 this.columnaccount_code = base.Columns["account_code"];
@@ -463,8 +463,8 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             private void InitClass() {
-                this.columndate = new global::System.Data.DataColumn("date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndate);
+                this.columndate_entry = new global::System.Data.DataColumn("date_entry", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndate_entry);
                 this.columnjev_no = new global::System.Data.DataColumn("jev_no", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnjev_no);
                 this.columnparticulars = new global::System.Data.DataColumn("particulars", typeof(string), null, global::System.Data.MappingType.Element);
@@ -619,17 +619,17 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime date {
+            public System.DateTime date_entry {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tabledtGeneralJournal.dateColumn]));
+                        return ((global::System.DateTime)(this[this.tabledtGeneralJournal.date_entryColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'date\' in table \'dtGeneralJournal\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'date_entry\' in table \'dtGeneralJournal\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtGeneralJournal.dateColumn] = value;
+                    this[this.tabledtGeneralJournal.date_entryColumn] = value;
                 }
             }
             
@@ -731,14 +731,14 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsdateNull() {
-                return this.IsNull(this.tabledtGeneralJournal.dateColumn);
+            public bool Isdate_entryNull() {
+                return this.IsNull(this.tabledtGeneralJournal.date_entryColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetdateNull() {
-                this[this.tabledtGeneralJournal.dateColumn] = global::System.Convert.DBNull;
+            public void Setdate_entryNull() {
+                this[this.tabledtGeneralJournal.date_entryColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

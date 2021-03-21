@@ -10,6 +10,7 @@ using AccountingSystem.Views.Manage.Users.Roles;
 using AccountingSystem.Views.Manage.Users.List;
 using BudgetSystem.Views.BudgetAppropriations;
 using AccountingSystem.Views.Transactions.JEV;
+using AccountingSystem.Views.Reports.Journals;
 
 namespace AccountingSystem
 {
@@ -18,6 +19,7 @@ namespace AccountingSystem
         public MainForm()
         {
             InitializeComponent();
+            menuReportGJ.Click += new EventHandler(MenuReportGeneralJournal_Click);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -73,6 +75,11 @@ namespace AccountingSystem
         private void menuBudgetAppropriation_Click(object sender, EventArgs e) 
         {
             _ = new frmBudgetAppropriations().ShowDialog();
+        }
+
+        private void MenuReportGeneralJournal_Click(object sender, EventArgs e)
+        {
+            _ = new frmGeneralJournal().ShowDialog();
         }
 
     }

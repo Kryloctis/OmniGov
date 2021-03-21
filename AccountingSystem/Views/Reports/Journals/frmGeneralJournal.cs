@@ -1,0 +1,127 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Microsoft.Reporting.WinForms;
+
+namespace AccountingSystem.Views.Reports.Journals
+{
+    public partial class frmGeneralJournal : Form
+    {
+        private readonly ReportViewer reportViewer;
+
+        public frmGeneralJournal()
+        {
+            InitializeComponent();
+            reportViewer = new ReportViewer();
+            reportViewer.Dock = DockStyle.Fill;
+            panel1.Controls.Add(reportViewer);
+        }
+
+        private void LoadFunds()
+        {
+            cmbFunds.DataSource = Factory.FundsRepository().GetRecords();
+            cmbFunds.ValueMember = "id";
+            cmbFunds.DisplayMember = "fund_name";
+        }
+
+        private DataTable DataTableGeneralJournal()
+        {
+            byte fundId = (byte)cmbFunds.SelectedValue;
+            byte journalId = 1;
+
+            var dtGeneralJournal = new dsLFS.dtGeneralJournalDataTable();
+            var dtGeneralJournalFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundAndJournal(fundId, journalId);
+
+            string jevNo;
+            string particulars;
+            uint jevId;
+            byte i = 0;
+
+            foreach (DataRow item in dtGeneralJournalFromDB.Rows)
+            {
+                jevNo = item["jev_no"].ToString();
+                particulars = item["ledger_name"].ToString();
+
+                DataRow row = dtGeneralJournal.NewRow();
+                row["date_entry"] = item["date_entry"];
+                row["jev_no"] = jevNo;
+                row["account_code"] = item["account_code"];
+                ValidateDebitCreditRow(particulars, item, row);
+
+                dtGeneralJournal.Rows.Add(row);
+
+                i++;
+                jevId = (uint)item["jev_id"];
+                AddExplanationRow(dtGeneralJournal, jevNo, ref particulars, jevId, ref i, item);
+            }
+
+            return dtGeneralJournal;
+        }
+
+        private static void ValidateDebitCreditRow(string particulars, DataRow item, DataRow row)
+        {
+            if (Convert.ToBoolean(item["is_debit"]))
+            {
+                row["particulars"] = particulars;
+                row["debit"] = item["amount"];
+                row["credit"] = 0;
+            }
+            else
+            {
+                row["particulars"] = $"     {particulars}";
+                row["debit"] = 0;
+                row["credit"] = item["amount"];
+            }
+        }
+
+        private static void AddExplanationRow(dsLFS.dtGeneralJournalDataTable dtGeneralJournal, string jevNo, ref string particulars, uint jevId, ref byte i, DataRow item)
+        {
+            var countJevAccounts = Factory.JEVAccountsRepository().CountByJevId(jevId);
+            if (i == countJevAccounts)
+            {
+                particulars = $"          {item["explanation"]}";
+
+                DataRow explanationRow = dtGeneralJournal.NewRow();
+                explanationRow["date_entry"] = item["date_entry"];
+                explanationRow["jev_no"] = jevNo;
+                explanationRow["particulars"] = particulars;
+                explanationRow["debit"] = 0;
+                explanationRow["credit"] = 0;
+
+                i = 0;
+                dtGeneralJournal.Rows.Add(explanationRow);
+            }
+        }
+
+        private void LoadReport(LocalReport report)
+        {
+            var parameters = new[] { 
+                new ReportParameter("paramMonth", dtpMonth.Value.ToString())
+            };
+            using var fs = new FileStream("Reports\\general-journal.rdlc", FileMode.Open);
+            report.LoadReportDefinition(fs);
+
+            report.DataSources.Add(new ReportDataSource("dtGeneralJournal", DataTableGeneralJournal()));
+            report.SetParameters(parameters);
+        }
+
+        private void frmGeneralJournal_Load(object sender, EventArgs e)
+        {
+            Helper.LoadFormIconAccounting(this);
+            LoadFunds();
+
+            LoadReport(reportViewer.LocalReport);
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.Percent;
+            reportViewer.ZoomPercent = 100;
+            reportViewer.RefreshReport();
+        }
+    }
+}
