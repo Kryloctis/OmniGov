@@ -11,6 +11,7 @@ using AccountingSystem.Views.Manage.Users.List;
 using BudgetSystem.Views.BudgetAppropriations;
 using AccountingSystem.Views.Transactions.JEV;
 using AccountingSystem.Views.Reports.Journals;
+using AccountingSystem.Views.Manage.BudgetAppropriations;
 
 namespace AccountingSystem
 {

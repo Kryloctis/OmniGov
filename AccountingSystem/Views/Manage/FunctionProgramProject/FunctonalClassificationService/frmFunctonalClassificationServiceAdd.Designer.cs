@@ -110,7 +110,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private ucFunctonalClassificationServices ucFunctonalClassificationService1;
         private ucFunctonalClassificationServices ucFunctonalClassificationServices1;
     }
 }

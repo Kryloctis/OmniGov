@@ -57,7 +57,6 @@ namespace ACC.Data
         {
             try
             {
-               
                 string query = $"SELECT t1.id, t2.service_name, t1.fpp_code, t1.fpp_name, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
                  $" ON t2.id = t1.functional_classification_services_id";
 

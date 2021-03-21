@@ -13,6 +13,10 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecords();
         DataTable GetViewRecordsBySearch(string searchTxt);
+        DataTable GetViewRecordsByIds(int fppID, int allotmentClassID, int? othersFPPID, int typeOfFund, int year);
+        DataTable GetViewRecordsFPP();
+        DataTable GetExistedOthersFPPrecordsByFPPID(int fppID,int allotment_classes_id, int funds_id, Int16 year);
+        DataTable GetYearsBudgetAppropriations();
 
         Dictionary<string, string> GetRecordByIDs(int budgetAppID, int fppID, int? othersFPPID, int allotmentClassID, int genLedgerAccID);
     }
