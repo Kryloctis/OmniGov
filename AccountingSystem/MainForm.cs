@@ -11,6 +11,7 @@ using AccountingSystem.Views.Manage.Users.List;
 using BudgetSystem.Views.BudgetAppropriations;
 using AccountingSystem.Views.Transactions.JEV;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
+using AccountingSystem.Views.Manage.AllotmentRelease;
 
 namespace AccountingSystem
 {
@@ -19,6 +20,7 @@ namespace AccountingSystem
         public MainForm()
         {
             InitializeComponent();
+            menuAllotmentRelease.Click += new EventHandler(menuAllotmentRelease_Click);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -30,6 +32,7 @@ namespace AccountingSystem
         {
             _ = new frmJournals().ShowDialog();
         }
+
         private void menuFunds_Click(object sender, EventArgs e)
         {
             _ = new frmFunds().ShowDialog();
@@ -63,17 +66,25 @@ namespace AccountingSystem
         {
 
         }
+
         private void menuFunctionProgramProject_Click(object sender, EventArgs e)
         {
             _ = new frmFunctionProgramProject().ShowDialog();
         }        
+
         private void menuCollectingOfficer_Click(object sender, EventArgs e)
         {
             _ = new frmCollectingOfficer().ShowDialog();
         }
+
         private void menuBudgetAppropriation_Click(object sender, EventArgs e) 
         {
             _ = new frmBudgetAppropriations().ShowDialog();
+        }
+
+        private void menuAllotmentRelease_Click(object sender, EventArgs e) 
+        {
+            _ = new frmAllotmentRelease().ShowDialog();
         }
 
     }
