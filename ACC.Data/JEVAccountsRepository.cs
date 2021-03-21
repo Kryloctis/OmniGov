@@ -115,7 +115,7 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetViewRecordsByFundAndJournal(byte fundId, byte journalId)
+        public DataTable GetViewRecordsForGeneralJournal(byte fundId, byte journalId, DateTime dateEntry)
         {
             try
             {
@@ -123,9 +123,10 @@ namespace ACC.Data
                 {
                     new object[] { "@funds_id", DbType.Byte, fundId},
                     new object[] { "@journals_id", DbType.Byte, journalId},
+                    new object[] { "@date_entry", DbType.Date, dateEntry }
                 };
 
-                string query = $"SELECT jev_id, date_entry, jev_no, explanation, ledger_name, account_code, is_deposit, is_debit, amount FROM {viewTableName} WHERE funds_id = @funds_id AND journals_id = @journals_id";
+                string query = $"SELECT jev_id, date_entry, jev_no, explanation, ledger_name, account_code, is_deposit, is_debit, amount FROM {viewTableName} WHERE funds_id = @funds_id AND journals_id = @journals_id AND MONTH(date_entry) = MONTH(@date_entry) AND YEAR(date_entry) = YEAR(@date_entry)";
 
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);

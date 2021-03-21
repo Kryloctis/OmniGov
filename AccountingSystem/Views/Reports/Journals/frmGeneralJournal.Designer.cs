@@ -55,6 +55,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.btnRetrieve.TabIndex = 6;
             this.btnRetrieve.Text = "Retrieve";
             this.btnRetrieve.UseVisualStyleBackColor = true;
+            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
             // 
             // label1
             // 

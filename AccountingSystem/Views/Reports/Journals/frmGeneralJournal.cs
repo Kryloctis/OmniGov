@@ -35,9 +35,10 @@ namespace AccountingSystem.Views.Reports.Journals
         {
             byte fundId = (byte)cmbFunds.SelectedValue;
             byte journalId = 1;
+            var dateYearMonth = dtpMonth.Value;
 
             var dtGeneralJournal = new dsLFS.dtGeneralJournalDataTable();
-            var dtGeneralJournalFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundAndJournal(fundId, journalId);
+            var dtGeneralJournalFromDB = Factory.JEVAccountsRepository().GetViewRecordsForGeneralJournal(fundId, journalId, dateYearMonth);
 
             string jevNo;
             string particulars;
@@ -53,6 +54,7 @@ namespace AccountingSystem.Views.Reports.Journals
                 row["date_entry"] = item["date_entry"];
                 row["jev_no"] = jevNo;
                 row["account_code"] = item["account_code"];
+
                 ValidateDebitCreditRow(particulars, item, row);
 
                 dtGeneralJournal.Rows.Add(row);
@@ -102,21 +104,42 @@ namespace AccountingSystem.Views.Reports.Journals
 
         private void LoadReport(LocalReport report)
         {
-            var parameters = new[] { 
-                new ReportParameter("paramMonth", dtpMonth.Value.ToString())
-            };
-            using var fs = new FileStream("Reports\\general-journal.rdlc", FileMode.Open);
-            report.LoadReportDefinition(fs);
+            try
+            {
+                var lguDetails = Helper.LGUDetails();
+                var fundName = cmbFunds.Text;
+                var signatory = "MARY MAGDALYN T. REGANION, CPA";
 
-            report.DataSources.Add(new ReportDataSource("dtGeneralJournal", DataTableGeneralJournal()));
-            report.SetParameters(parameters);
+                var parameters = new[] {
+                new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
+                new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
+                new ReportParameter("paramFund", fundName),
+                new ReportParameter("paramSignatory", signatory)
+            };
+                //using var fs = new FileStream("Reports\\general-journal.rdlc", FileMode.Open);
+                //report.LoadReportDefinition(fs);
+
+                report.ReportPath = $"{Application.StartupPath}\\Reports\\general-journal.rdlc";
+                report.DataSources.Clear();
+
+                report.DataSources.Add(new ReportDataSource("dtGeneralJournal", DataTableGeneralJournal()));
+                report.SetParameters(parameters);
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void frmGeneralJournal_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIconAccounting(this);
             LoadFunds();
+        }
 
+        private void btnRetrieve_Click(object sender, EventArgs e)
+        {
             LoadReport(reportViewer.LocalReport);
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
             reportViewer.ZoomMode = ZoomMode.Percent;

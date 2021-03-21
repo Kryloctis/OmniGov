@@ -41,6 +41,16 @@ namespace AccountingSystem
             if (Fill == true) dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
+        public static Dictionary<string, string> LGUDetails()
+        {
+            var lguDict = new Dictionary<string, string>
+            {
+                { "lgu_name", "Municipality of Buug" }
+            };
+
+            return lguDict;
+        }
+
         internal static Dictionary<string, string> GetLoggedInUserAccounting()
         {
             var user = new Dictionary<string, string>();
