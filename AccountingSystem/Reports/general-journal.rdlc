@@ -1541,8 +1541,8 @@
                     <TextRun>
                       <Value>GENERAL JOURNAL</Value>
                       <Style>
-                        <FontFamily>Arial Black</FontFamily>
                         <FontSize>16pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>

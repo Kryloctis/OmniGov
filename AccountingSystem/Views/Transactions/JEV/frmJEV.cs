@@ -188,8 +188,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                 {
                     Helper.MessageBoxSuccess("JEV has been saved.");
                     ucjev1.ResetForm();
-                    return;
                 }
+                return;
             }
 
             if (UpadateData())
