@@ -8,11 +8,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.11" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ACC.Data\ACC.Data.csproj" />
-    <ProjectReference Include="C:\Users\Admin\Desktop\reportviewercore-master\Microsoft.ReportViewer.WinForms\Microsoft.ReportViewer.WinForms.csproj" />
   </ItemGroup>
 
   <ItemGroup>
