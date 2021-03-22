@@ -3201,7 +3201,7 @@
             <DataSetName>CashDisbursementsJournal</DataSetName>
             <Top>0.3937cm</Top>
             <Left>0.00001cm</Left>
-            <Height>4.43729cm</Height>
+            <Height>3.035cm</Height>
             <Width>30.1627cm</Width>
             <Style>
               <Border>
@@ -3224,8 +3224,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox20</rd:DefaultName>
-            <Top>6.06175cm</Top>
-            <Left>19.06483cm</Left>
+            <Top>4.48003cm</Top>
+            <Left>18.8086cm</Left>
             <Height>0.6cm</Height>
             <Width>4.24779cm</Width>
             <ZIndex>1</ZIndex>
@@ -3258,8 +3258,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox20</rd:DefaultName>
-            <Top>7.64347cm</Top>
-            <Left>21.97398cm</Left>
+            <Top>6.06175cm</Top>
+            <Left>21.71775cm</Left>
             <Height>0.6cm</Height>
             <Width>7.66092cm</Width>
             <ZIndex>2</ZIndex>
@@ -3292,8 +3292,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox20</rd:DefaultName>
-            <Top>7.04347cm</Top>
-            <Left>21.97398cm</Left>
+            <Top>5.46175cm</Top>
+            <Left>21.71775cm</Left>
             <Height>0.6cm</Height>
             <Width>7.66092cm</Width>
             <ZIndex>3</ZIndex>
@@ -3327,8 +3327,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox20</rd:DefaultName>
-            <Top>8.41985cm</Top>
-            <Left>21.97398cm</Left>
+            <Top>6.83813cm</Top>
+            <Left>21.71775cm</Left>
             <Height>0.6cm</Height>
             <Width>1.07279cm</Width>
             <ZIndex>4</ZIndex>
@@ -3357,8 +3357,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox67</rd:DefaultName>
-            <Top>8.41986cm</Top>
-            <Left>23.04677cm</Left>
+            <Top>6.83814cm</Top>
+            <Left>22.79054cm</Left>
             <Height>0.6cm</Height>
             <Width>2.1825cm</Width>
             <ZIndex>5</ZIndex>
@@ -3378,7 +3378,7 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>4.18959in</Height>
+        <Height>3.17917in</Height>
         <Style />
       </Body>
       <Width>11.87508in</Width>
