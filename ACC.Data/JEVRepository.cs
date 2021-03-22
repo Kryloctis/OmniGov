@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
 using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
@@ -46,11 +45,7 @@ namespace ACC.Data
                     {
                         new object[] { "@id", DbType.Int32, entity.Id},
                     };
-
-                    // delete first the jev accounts
-                    //_jevAccountsRepository.DeleteByJevId(entity.Id);
-
-                    // delete the jev
+                    
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
                     _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
 
