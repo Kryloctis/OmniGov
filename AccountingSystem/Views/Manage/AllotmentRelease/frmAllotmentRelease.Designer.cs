@@ -61,7 +61,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnDelete});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(913, 50);
+            this.toolStrip1.Size = new System.Drawing.Size(1038, 50);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -121,7 +121,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.lblUpdatedAt});
             this.statusStrip1.Location = new System.Drawing.Point(0, 488);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(913, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1038, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -140,7 +140,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // lblSpring
             // 
             this.lblSpring.Name = "lblSpring";
-            this.lblSpring.Size = new System.Drawing.Size(611, 17);
+            this.lblSpring.Size = new System.Drawing.Size(736, 17);
             this.lblSpring.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -207,7 +207,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.Name = "frmAllotmentRelease";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmAllotmentRelease";
+            this.Text = "Manage > Allotment Release";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

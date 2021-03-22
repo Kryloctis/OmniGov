@@ -40,8 +40,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             try
             {
                 HelperLoadRecords.AllomentToolStripCombobox(Factory.AllotmentClassesRepository().GetRecords(), cmbxAllotmentClass, "allotment_code", "id");
-                HelperLoadRecords.TypeOfFundsCombobox(Factory.FundsRepository().GetRecords(), cmbxFundType, "fund_name", "id");
-                HelperLoadRecords.YearCombobox(Factory.BudgetAppropriationsRepository().GetYearsBudgetAppropriations(), cmbxYear, "year", "year");
+                HelperLoadRecords.TypeOfFundsToolStripCombobox(Factory.FundsRepository().GetRecords(), cmbxFundType, "fund_name", "id");
+                HelperLoadRecords.YearToolStripCombobox(Factory.BudgetAppropriationsRepository().GetYearsBudgetAppropriations(), cmbxYear, "year", "year");
             }
             catch (Exception ex)
             {
@@ -163,7 +163,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                         _ = Factory.BudgetAppropriationsRepository().Delete(budgetAppropriationsModelList);
                         LoadRecords();
                         HelperLoadRecords.FPPDatagridViewRecords(dgFPP);
-                        HelperLoadRecords.YearCombobox(Factory.BudgetAppropriationsRepository().GetYearsBudgetAppropriations(), cmbxYear, "year", "year");
+                        HelperLoadRecords.YearToolStripCombobox(Factory.BudgetAppropriationsRepository().GetYearsBudgetAppropriations(), cmbxYear, "year", "year");
                     }
                 }
             }

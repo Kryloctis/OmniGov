@@ -424,7 +424,7 @@ namespace AccountingSystem
 
                 //Set up new Columns to Datagrid View
                 dgvBudgetAppropriations.Columns.Add(null, null);
-                dgvBudgetAppropriations.Columns.Add("budget_approrations_id", "Budget Appropriation ID");
+                dgvBudgetAppropriations.Columns.Add("budget_appropriations_id", "Budget Appropriation ID");
                 dgvBudgetAppropriations.Columns.Add("fpp_id", "FPP ID");
                 dgvBudgetAppropriations.Columns.Add("others_fpp_id", "Others FPP ID");
                 dgvBudgetAppropriations.Columns.Add("allotment_classes_id", "Allotment Classes ID");
@@ -455,7 +455,7 @@ namespace AccountingSystem
                 foreach (DataRow drGetViewRecordsByFFPIDByAllotmentClass in dtGetViewRecordsByFFPIDByAllotmentClass.Rows)
                 {
                     dgvBudgetAppropriations.Rows.Add(new object[] { null,
-                        drGetViewRecordsByFFPIDByAllotmentClass["budget_approrations_id"],
+                        drGetViewRecordsByFFPIDByAllotmentClass["budget_appropriations_id"],
                         drGetViewRecordsByFFPIDByAllotmentClass["fpp_id"],
                         drGetViewRecordsByFFPIDByAllotmentClass["others_fpp_id"],
                         drGetViewRecordsByFFPIDByAllotmentClass["allotment_classes_id"],
@@ -486,7 +486,7 @@ namespace AccountingSystem
                     foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByIds.Rows)
                     {
                         dgvBudgetAppropriations.Rows.Add(new object[] { null,
-                            drGetViewRecordsByIds["budget_approrations_id"],
+                            drGetViewRecordsByIds["budget_appropriations_id"],
                             drGetViewRecordsByIds["fpp_id"],
                             drGetViewRecordsByIds["others_fpp_id"],
                             drGetViewRecordsByIds["allotment_classes_id"],
@@ -558,8 +558,41 @@ namespace AccountingSystem
                 comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
             }
         }
+        public static void AllomentToolStripCombobox(DataTable dataTable, ToolStripComboBox toolStripComboBox, string displayMember, string valueMember)
+        {
+            toolStripComboBox.ComboBox.DataSource = dataTable;
+            toolStripComboBox.ComboBox.DisplayMember = displayMember;
+            toolStripComboBox.ComboBox.ValueMember = valueMember;
 
-        public static void TypeOfFundsCombobox(DataTable dataTable, ToolStripComboBox comboBox, string displayMember, string valueMember) 
+            if (toolStripComboBox.DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                // loop datatable to add items in autocompletesource
+                foreach (DataRow item in dataTable.Rows)
+                    toolStripComboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
+
+                toolStripComboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                toolStripComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            }
+        }
+
+        public static void TypeOfFundsCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+
+            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                // loop datatable to add items in autocompletesource
+                foreach (DataRow item in dataTable.Rows)
+                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
+
+                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            }
+
+        }
+        public static void TypeOfFundsToolStripCombobox(DataTable dataTable, ToolStripComboBox comboBox, string displayMember, string valueMember) 
         {
             comboBox.ComboBox.DataSource = dataTable;
             comboBox.ComboBox.DisplayMember = displayMember;
@@ -574,6 +607,20 @@ namespace AccountingSystem
                 comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
             }
+        }
+
+
+        public static void YearCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+        }
+        public static void YearToolStripCombobox(DataTable dataTable, ToolStripComboBox toolStripComboBox, string displayMember, string valueMember)
+        {
+            toolStripComboBox.ComboBox.DataSource = dataTable;
+            toolStripComboBox.ComboBox.DisplayMember = displayMember;
+            toolStripComboBox.ComboBox.ValueMember = valueMember;
         }
 
         public static void GeneralLedgerAccountsCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
@@ -591,23 +638,6 @@ namespace AccountingSystem
                 comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
                 comboBox.DropDownHeight = 200;
-            }
-        }
-
-        public static void AllomentToolStripCombobox(DataTable dataTable, ToolStripComboBox toolStripComboBox, string displayMember, string valueMember) 
-        {
-            toolStripComboBox.ComboBox.DataSource = dataTable;
-            toolStripComboBox.ComboBox.DisplayMember = displayMember;
-            toolStripComboBox.ComboBox.ValueMember = valueMember;
-
-            if (toolStripComboBox.DropDownStyle == ComboBoxStyle.DropDown)
-            {
-                // loop datatable to add items in autocompletesource
-                foreach (DataRow item in dataTable.Rows)
-                    toolStripComboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
-
-                toolStripComboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                toolStripComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
             }
         }
 
@@ -631,30 +661,7 @@ namespace AccountingSystem
             }
         }
 
-        public static void TypeOfFundCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-
-            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
-            {
-                // loop datatable to add items in autocompletesource
-                foreach (DataRow item in dataTable.Rows)
-                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
-
-                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            }
-
-        }
-
-        public static void YearCombobox(DataTable dataTable, ToolStripComboBox toolStripComboBox, string displayMember, string valueMember) 
-        {
-            toolStripComboBox.ComboBox.DataSource = dataTable;
-            toolStripComboBox.ComboBox.DisplayMember = displayMember;
-            toolStripComboBox.ComboBox.ValueMember = valueMember;
-        }
+     
 
         #endregion BudgetAppropriations
 

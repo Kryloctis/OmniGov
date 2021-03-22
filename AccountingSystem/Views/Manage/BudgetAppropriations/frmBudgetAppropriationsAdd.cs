@@ -91,7 +91,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
                 //Update FPP datagrid, Appropriations datagrid and Combobox Year before reseting user control
                 HelperLoadRecords.FPPDatagridViewRecords(_frmBudgetAppropriations.dgFPP);
-                HelperLoadRecords.YearCombobox(Factory.BudgetAppropriationsRepository().GetYearsBudgetAppropriations(), _frmBudgetAppropriations.cmbxYear, "year", "year");
+                HelperLoadRecords.YearToolStripCombobox(Factory.BudgetAppropriationsRepository().GetYearsBudgetAppropriations(), _frmBudgetAppropriations.cmbxYear, "year", "year");
                 HelperLoadRecords.BudgetAppropriationsDataGridView(_frmBudgetAppropriations.dgBudgetAppropriations, fppID, allotmentClassID, typeOfFundID, year);
 
                 //Reset User Control Form

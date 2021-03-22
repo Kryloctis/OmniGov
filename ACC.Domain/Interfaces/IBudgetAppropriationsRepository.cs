@@ -19,5 +19,6 @@ namespace ACC.Domain.Interfaces
         DataTable GetYearsBudgetAppropriations();
 
         Dictionary<string, string> GetRecordByIDs(int budgetAppID, int fppID, int? othersFPPID, int allotmentClassID, int genLedgerAccID);
+        Dictionary<string, string> GetViewRecordByIDs(int budgetAppID, int fppID, int? othersFPPID, int allotmentClassID, int genLedgerAccID);
     }
 }

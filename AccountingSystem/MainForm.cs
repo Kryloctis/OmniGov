@@ -84,7 +84,7 @@ namespace AccountingSystem
 
         private void menuAllotmentRelease_Click(object sender, EventArgs e) 
         {
-            _ = new frmAllotmentRelease().ShowDialog();
+            _ = new frmAllotmentRelease(this).ShowDialog();
         }
 
     }

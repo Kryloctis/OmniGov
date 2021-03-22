@@ -12,9 +12,17 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
     public partial class frmAllotmentRelease : Form
     {
-        public frmAllotmentRelease()
+        private MainForm _MainForm;
+        public frmAllotmentRelease(MainForm mainForm)
         {
             InitializeComponent();
+            _MainForm = mainForm;
+            btnAdd.Click += new EventHandler(btnAdd_Click);
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e) 
+        {
+            _ = new frmAllotmentReleaseAdd(this).ShowDialog(); ;
         }
     }
 }

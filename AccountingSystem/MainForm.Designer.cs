@@ -179,14 +179,14 @@ namespace AccountingSystem
             // 
             this.menuBudgetAppropriation.Name = "menuBudgetAppropriation";
             this.menuBudgetAppropriation.Size = new System.Drawing.Size(219, 22);
-            this.menuBudgetAppropriation.Text = "Budget Appropriations";
+            this.menuBudgetAppropriation.Text = "Budget Appropriations...";
             this.menuBudgetAppropriation.Click += new System.EventHandler(this.menuBudgetAppropriation_Click);
             // 
             // menuAllotmentRelease
             // 
             this.menuAllotmentRelease.Name = "menuAllotmentRelease";
             this.menuAllotmentRelease.Size = new System.Drawing.Size(219, 22);
-            this.menuAllotmentRelease.Text = "Allotment Release";
+            this.menuAllotmentRelease.Text = "Allotment Release...";
             // 
             // menuReports
             // 
