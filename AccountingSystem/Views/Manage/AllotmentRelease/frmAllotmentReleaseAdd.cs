@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,7 +33,19 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
-                return true;
+
+
+                // proceed to insert
+                var allotmentReleaseModel = new AllotmentReleaseModel()
+                {
+                    BudgetAppropriationsID = uc.budgetAppropriationID,
+                    ARONumber = uc.txtAllotmentReleaseNo.Text.Trim(),
+                    Purpose = uc.txtPurpose.Text.Trim(),
+                    DateIssued = uc.dtDateIssued.Value,
+                    amount = uc.nudAmount.Value,
+                };
+
+                return Factory.AllotmentReleaseRepository().Insert(allotmentReleaseModel);
 
             }
             catch (Exception ex)

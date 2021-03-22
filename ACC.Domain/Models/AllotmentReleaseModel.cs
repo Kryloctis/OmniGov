@@ -11,5 +11,6 @@ namespace ACC.Domain.Models
         public string ARONumber { get; set; }
         public string Purpose { get; set; }
         public DateTime DateIssued { get; set; }
+        public decimal amount { get; set; }
     }
 }

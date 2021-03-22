@@ -10,6 +10,7 @@ namespace ACC.Data
     public class AllotmentReleaseRepository : IAllotmentReleaseRepository
     {
         private MySqlGenericCommands mySqlGenericCommands;
+        private readonly string tableName = "allotment_release";
 
         public AllotmentReleaseRepository(MySqlGenericCommands mySqlGenericCommands)
         {
@@ -48,7 +49,24 @@ namespace ACC.Data
 
         public bool Insert(AllotmentReleaseModel entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+               {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, entity.BudgetAppropriationsID},
+                    new object[] { "@aro_no", DbType.String, entity.ARONumber},
+                    new object[] { "@purpose", DbType.String, entity.Purpose},
+                    new object[] { "@date_issued", DbType.DateTime, entity.DateIssued},
+                    new object[] { "@amount", DbType.Decimal, entity.amount}
+               };
+
+                string query = $"INSERT INTO {tableName} (budget_appropriations_id, aro_no, purpose, date_issued, amount) VALUES (@budget_appropriations_id, @aro_no, @purpose, @date_issued, @amount)";
+                return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Update(AllotmentReleaseModel entity)
