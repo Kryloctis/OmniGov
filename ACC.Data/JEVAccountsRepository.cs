@@ -22,7 +22,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool DeleteByJevId(uint jevId)
+        public bool DeleteByJevId(int jevId)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public DataTable GetViewRecordsByJevId(uint jevId)
+        public DataTable GetViewRecordsByJevId(int jevId)
         {
             try
             {
@@ -137,7 +137,7 @@ namespace ACC.Data
             }
         }
 
-        public int CountByJevId(uint jevId)
+        public int CountByJevId(int jevId)
         {
             try
             {

@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Reports.Journals
 
             string jevNo;
             string particulars;
-            uint jevId;
+            int jevId;
             byte i = 0;
 
             foreach (DataRow item in dtGeneralJournalFromDB.Rows)
@@ -53,7 +53,7 @@ namespace AccountingSystem.Views.Reports.Journals
                 dtGeneralJournal.Rows.Add(row);
 
                 i++;
-                jevId = (uint)item["jev_id"];
+                jevId = (int)item["jev_id"];
                 AddExplanationRow(dtGeneralJournal, jevNo, ref particulars, jevId, ref i, item);
             }
 
@@ -76,7 +76,7 @@ namespace AccountingSystem.Views.Reports.Journals
             }
         }
 
-        private static void AddExplanationRow(dsLFS.dtGeneralJournalDataTable dtGeneralJournal, string jevNo, ref string particulars, uint jevId, ref byte i, DataRow item)
+        private static void AddExplanationRow(dsLFS.dtGeneralJournalDataTable dtGeneralJournal, string jevNo, ref string particulars, int jevId, ref byte i, DataRow item)
         {
             var countJevAccounts = Factory.JEVAccountsRepository().CountByJevId(jevId);
             if (i == countJevAccounts)

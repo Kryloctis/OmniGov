@@ -6,7 +6,7 @@ namespace ACC.Domain.Models
 {
     public class JEVModel
     {
-        public uint Id { get; set; }
+        public int Id { get; set; }
         public byte FundsId { get; set; }
         public byte JournalsId { get; set; }
         public string JEVNumber { get; set; }

@@ -48,7 +48,7 @@ namespace ACC.Data
                     };
 
                     // delete first the jev accounts
-                    _jevAccountsRepository.DeleteByJevId(entity.Id);
+                    //_jevAccountsRepository.DeleteByJevId(entity.Id);
 
                     // delete the jev
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
@@ -157,6 +157,27 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
+        public bool UpdateWithCheckDisbursement(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, CheckDisbursementsJournalModel checkDisbursementsJournalModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    _ = Update(entity, jevAccountsModelList);
+
+                    _checkDisbursementsJournalRepository.UpdateByJevID(checkDisbursementsJournalModel);
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool Update(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList)
         {
             try
@@ -237,7 +258,7 @@ namespace ACC.Data
             return false;
         }
 
-        public bool JevNumberExist(string jevNo, uint id)
+        public bool JevNumberExist(string jevNo, int id)
         {
             try
             {

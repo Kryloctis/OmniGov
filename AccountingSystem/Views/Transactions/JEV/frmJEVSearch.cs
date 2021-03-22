@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using ACC.Domain.Interfaces;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
@@ -33,8 +34,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void LoadJevAccounts()
         {
             var uc = frmJEV.ucjev1;
-            DataTable dtJEV = Factory.JEVAccountsRepository().GetViewRecordsByJevId(uc.jevId);
 
+            DataTable dtJEV = Factory.JEVAccountsRepository().GetViewRecordsByJevId(uc.jevId);
             foreach (DataRow item in dtJEV.Rows)
             {
                 string fppId = item["fpp_id"].ToString();
@@ -115,8 +116,10 @@ namespace AccountingSystem.Views.Transactions.JEV
                     frmJEV.ucjev1.txtJEVNo.Text = jevNoSplit[3];
 
                     Dictionary<string, string> jevData = Factory.JEVRepository().GetRecordByJEV(jevNo);
+                    int jevId = Convert.ToInt32(jevData["id"]);
 
-                    uc.jevId = Convert.ToUInt32(jevData["id"]);
+                    LoadCheckDisbursementsDataIfExist(uc, jevId);
+                    uc.jevId = jevId;
                     uc.txtExplanation.Text = jevData["explanation"];
                     uc.dtpDateEntry.Value = Convert.ToDateTime(jevData["date_entry"]);
                     uc.fundId = Convert.ToByte(jevData["funds_id"]);
@@ -124,7 +127,9 @@ namespace AccountingSystem.Views.Transactions.JEV
                     CheckedFund(jevData["fund_name"]);
                     CheckedJournal(jevData["journal_name"]);
 
+                    uc.dgAccounts.Rows.Clear();
                     LoadJevAccounts();
+                    uc.SumDebitCredit();
 
                     Close();
                     return;
@@ -133,6 +138,19 @@ namespace AccountingSystem.Views.Transactions.JEV
                 Helper.MessageBoxError("JEV number doesn't exist.");
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private static void LoadCheckDisbursementsDataIfExist(ucJEV uc, int jevId)
+        {
+            var checkDisbursementsRepository = Factory.CheckDisbursementsJournalRepository();
+
+            if (checkDisbursementsRepository.JevIdExist(jevId))
+            {
+                Dictionary<string, string> checkDisbursementsData = checkDisbursementsRepository.GetRecordByJevID(jevId);
+
+                uc.txtRefNo.Text = checkDisbursementsData["check_number"];
+                uc.txtPayeeCollectingOfficer.Text = checkDisbursementsData["payee"];
+            }
         }
     }
 }
