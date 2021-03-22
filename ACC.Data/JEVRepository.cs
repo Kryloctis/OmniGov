@@ -259,7 +259,7 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.UInt32, id },
+                    new object[] { "@id", DbType.Int32, id },
                     new object[] { "@jev_no", DbType.String, jevNo },
                 };
 

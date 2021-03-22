@@ -28,7 +28,7 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.UInt32, jevId},
+                    new object[] { "@id", DbType.Int32, jevId},
                 };
 
                 string query = $"DELETE FROM {tableName} WHERE jev_id = @id";
@@ -143,7 +143,7 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@jev_id", DbType.UInt32, jevId},
+                    new object[] { "@jev_id", DbType.Int32, jevId},
                 };
 
                 string query = $"SELECT COUNT(*) FROM {tableName} WHERE jev_id = @jev_id";

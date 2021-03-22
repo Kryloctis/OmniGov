@@ -53,7 +53,7 @@ namespace AccountingSystem.Views.Reports.Journals
                 dtGeneralJournal.Rows.Add(row);
 
                 i++;
-                jevId = (int)item["jev_id"];
+                jevId = Convert.ToInt32(item["jev_id"]);
                 AddExplanationRow(dtGeneralJournal, jevNo, ref particulars, jevId, ref i, item);
             }
 
@@ -104,11 +104,11 @@ namespace AccountingSystem.Views.Reports.Journals
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
 
                 var parameters = new[] {
-                new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
-                new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                new ReportParameter("paramFund", fundName),
-                new ReportParameter("paramSignatory", signatory)
-            };
+                    new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
+                    new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
+                    new ReportParameter("paramFund", fundName),
+                    new ReportParameter("paramSignatory", signatory)
+                };
                 //using var fs = new FileStream("Reports\\general-journal.rdlc", FileMode.Open);
                 //report.LoadReportDefinition(fs);
 
