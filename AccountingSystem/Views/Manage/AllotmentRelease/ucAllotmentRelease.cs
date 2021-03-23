@@ -12,11 +12,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
     public partial class ucAllotmentRelease : UserControl
     {
+        internal int allotmentReleaseID = 0;
         internal int budgetAppropriationID = 0;
-        internal int fppID = 0;
-        internal int? othersFPPID = null;
-        internal int allotmentClassesID = 0;
-        internal int generalLedgerAccID = 0;
 
         public ucAllotmentRelease()
         {
@@ -36,10 +33,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal void ResetForm()
         {
             budgetAppropriationID = 0;
-            fppID = 0;
-            othersFPPID = null;
-            allotmentClassesID = 0;
-            generalLedgerAccID = 0;
             txtAllotmentReleaseNo.Clear();
             txtPurpose.Clear();
             dtDateIssued.Value = DateTime.Now;

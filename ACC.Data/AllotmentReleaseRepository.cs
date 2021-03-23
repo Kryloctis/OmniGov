@@ -52,7 +52,36 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new NotImplementedException();
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                   new object[] { "@id", DbType.Int32, Id},
+                };
+                string query = $"SELECT aro_no, purpose, date_issued, amount FROM {tableName} WHERE id = @id";
+
+                using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("aro_no", item[0].ToString());
+                        record.Add("purpose", item[1].ToString());
+                        record.Add("date_issued", item[2].ToString());
+                        record.Add("amount", item[3].ToString());
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
         }
 
         public DataTable GetRecords()
@@ -94,7 +123,24 @@ namespace ACC.Data
 
         public bool Update(AllotmentReleaseModel entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+               {
+                    new object[] { "@id", DbType.Int32, entity.ID},  
+                    new object[] { "@aro_no", DbType.String, entity.ARONumber},
+                    new object[] { "@purpose", DbType.String, entity.Purpose},
+                    new object[] { "@date_issued", DbType.DateTime, entity.DateIssued},
+                    new object[] { "@amount", DbType.Decimal, entity.amount}
+               };
+
+                string query = $"UPDATE {tableName} SET aro_no = @aro_no, purpose = @purpose, date_issued = @date_issued, amount = @amount WHERE id = @id";
+                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public DataTable GetRecordsByBudgetAppropriationID(int budgetAppropriationID)

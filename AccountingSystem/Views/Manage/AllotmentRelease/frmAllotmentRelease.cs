@@ -75,17 +75,17 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             var uc = frmAllotmentReleaseAddForm.ucAllotmentRelease1;
 
             uc.budgetAppropriationID = budgetAppropriationID;
-            uc.fppID = fppID;
-            uc.othersFPPID = othersFPPID;
-            uc.allotmentClassesID = allotmentClassesID;
-            uc.generalLedgerAccID = generalLedgerAccID;
 
             frmAllotmentReleaseAddForm.ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e) 
         {
-            
+            var frmAllotmentReleaseEditForm = new frmAllotmentReleaseEdit(this);
+            var uc = frmAllotmentReleaseEditForm.ucAllotmentRelease1;
+
+            uc.allotmentReleaseID = Convert.ToInt32(dgAllotmentRelease.SelectedCells[0].Value);
+            frmAllotmentReleaseEditForm.ShowDialog();
         }
 
         private void btnDelete_Click(object sender, EventArgs e) 
