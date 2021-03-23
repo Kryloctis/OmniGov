@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,11 +19,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal int allotmentClassesID;
         internal int generalLedgerAccID;
 
-
         public frmAllotmentRelease()
         {
             InitializeComponent();
             btnAdd.Click += new EventHandler(btnAdd_Click);
+            btnEdit.Click += new EventHandler(btnEdit_Click);
+            btnDelete.Click += new EventHandler(btnDelete_Click);
             txtSearch.TextChanged += new EventHandler(txtSearch_TextChanged);
         }
 
@@ -81,6 +83,45 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             frmAllotmentReleaseAddForm.ShowDialog();
         }
 
+        private void btnEdit_Click(object sender, EventArgs e) 
+        {
+            
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e) 
+        {
+            int selectedRowsCount = dgAllotmentRelease.SelectedRows.Count;
+
+            var allotmentModelList = new List<AllotmentReleaseModel>();
+
+            try
+            {
+                if (selectedRowsCount > 0)
+                {
+                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                    {
+                        foreach (DataGridViewRow row in dgAllotmentRelease.SelectedRows)
+                        {
+                            int allotmentReleaseID = int.Parse(row.Cells[0].Value.ToString());
+                            var allotmentReleaseModel = new AllotmentReleaseModel()
+                            {
+                                ID = allotmentReleaseID
+                            };
+
+                            allotmentModelList.Add(allotmentReleaseModel);
+                        }
+
+                        _ = Factory.AllotmentReleaseRepository().Delete(allotmentModelList);
+                        LoadAllotmentReleaseRecords();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
         private void txtSearch_TextChanged(object sender, EventArgs e) 
         {
             LoadAllotmentReleaseRecords();
@@ -109,6 +150,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             byte[] columnIndexTimestamp = { 4, 6, 7 };
             LocalShowRecordStatus(dgAllotmentRelease, columnIndexTimestamp, lblDateIssued ,lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgAllotmentRelease, btnEdit, btnDelete);
         }
     }
 }
