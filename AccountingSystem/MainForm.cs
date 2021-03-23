@@ -8,7 +8,6 @@ using AccountingSystem.Views.Manage.FunctionProgramProject;
 using AccountingSystem.Views.Manage.CollectingOfficer;
 using AccountingSystem.Views.Manage.Users.Roles;
 using AccountingSystem.Views.Manage.Users.List;
-using BudgetSystem.Views.BudgetAppropriations;
 using AccountingSystem.Views.Transactions.JEV;
 using AccountingSystem.Views.Reports.Journals;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
@@ -22,6 +21,7 @@ namespace AccountingSystem
             InitializeComponent();
             menuReportGJ.Click += new EventHandler(MenuReportGeneralJournal_Click);
             menuReportCDJ.Click += new EventHandler(MenuReportCashDisbursementsJournal_Click);
+            menuReportCkDJ.Click += new EventHandler(MenuReportCheckDisbursementsJournal_Click);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -87,6 +87,11 @@ namespace AccountingSystem
         private void MenuReportCashDisbursementsJournal_Click(object sender, EventArgs e)
         {
             _ = new frmCashDisbursementJournalReport().ShowDialog();
+        }
+
+        private void MenuReportCheckDisbursementsJournal_Click(object sender, EventArgs e)
+        {
+            _ = new frmCheckDisbursementsJournalReport().ShowDialog();
         }
 
     }
