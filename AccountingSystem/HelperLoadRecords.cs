@@ -661,7 +661,84 @@ namespace AccountingSystem
             }
         }
 
-     
+        public static void LoadBudgetAppropriationDetailsLabels(int budgetAppropriationID, int fppID, int? othersFPPID, int allotmentClassesID, int generalLedgerAccID, Label lblFPPCode, Label lblFPP, Label lblOtherFPP, Label lblAccountCode, Label lblAllotmentClass, Label lblGenLedgerAcc, Label lblYear, Label lblAmount) 
+        {
+            try
+            {
+                var selectedBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordByIDs(budgetAppropriationID, fppID, othersFPPID, allotmentClassesID, generalLedgerAccID);
+
+                lblFPPCode.Text = selectedBudgetAppropriation["fpp_code"].ToString();
+                lblFPP.Text = selectedBudgetAppropriation["fpp_name"].ToString();
+
+                //if others fpp was null
+                if (string.IsNullOrEmpty(selectedBudgetAppropriation["others_fpp_name"]))
+                    lblOtherFPP.Text = string.Empty;
+                else
+                    lblOtherFPP.Text = selectedBudgetAppropriation["others_fpp_name"];
+
+                lblAccountCode.Text = selectedBudgetAppropriation["account_code"].ToString();
+                lblAllotmentClass.Text = selectedBudgetAppropriation["allotment_code"].ToString();
+                lblGenLedgerAcc.Text = selectedBudgetAppropriation["ledger_name"].ToString();
+                lblYear.Text = selectedBudgetAppropriation["year"].ToString();
+                lblAmount.Text = Convert.ToDecimal(selectedBudgetAppropriation["amount"]).ToString("N2");
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        public static void dgAllotmentRelease(DataTable dataTable, DataGridView dgv, int budgetAppropriationID) 
+        {
+            try
+            {
+                //Clearing Datagrid View  Rows & Columns before Loading new one
+                dgv.Rows.Clear();
+                dgv.Columns.Clear();
+
+                //Set up new Columns to Datagrid View
+                dgv.Columns.Add("id","id");
+                dgv.Columns.Add("budget_appropriations_id", "Budget Appropriation ID");
+                dgv.Columns.Add("aro_no", "Allotment Release No.");
+                dgv.Columns.Add("purpose", "Purpose");
+                dgv.Columns.Add("date_issued", " Date Issued");
+                dgv.Columns.Add("amount", "Amount");
+                dgv.Columns.Add("created_at", "Created at");
+                dgv.Columns.Add("updated_at", "Updated at");
+
+                //Set up Column Format
+                dgv.Columns[0].Visible = false;
+                dgv.Columns[1].Visible = false;
+                dgv.Columns[4].Visible = false;
+                dgv.Columns[5].DefaultCellStyle.Format = "N2";
+                dgv.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dgv.Columns[6].Visible = false;
+                dgv.Columns[7].Visible = false;
+
+                //Load by loop All Budget Appropriations Records with Others FPP 
+                foreach (DataRow drAllotmentRelease in dataTable.Rows)
+                {
+                    dgv.Rows.Add(new object[] {
+                            drAllotmentRelease["id"],
+                            drAllotmentRelease["budget_appropriations_id"],
+                            drAllotmentRelease["aro_no"],
+                            drAllotmentRelease["purpose"],
+                            drAllotmentRelease["date_issued"],
+                            drAllotmentRelease["amount"],
+                            drAllotmentRelease["created_at"],
+                            drAllotmentRelease["updated_at"] });
+                }
+
+                dgv.ClearSelection();
+                Helper.DatagridDefaultStyle(dgv, true);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        
+        }
 
         #endregion BudgetAppropriations
 

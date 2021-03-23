@@ -45,7 +45,6 @@ namespace AccountingSystem
             this.menuCollectingOfficer = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuBudgetAppropriation = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuAllotmentRelease = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
@@ -99,8 +98,7 @@ namespace AccountingSystem
             this.menuFunctionProgramProject,
             this.menuCollectingOfficer,
             this.toolStripSeparator1,
-            this.menuBudgetAppropriation,
-            this.menuAllotmentRelease});
+            this.menuBudgetAppropriation});
             this.menuManage.Name = "menuManage";
             this.menuManage.Size = new System.Drawing.Size(62, 19);
             this.menuManage.Text = "Manage";
@@ -182,12 +180,6 @@ namespace AccountingSystem
             this.menuBudgetAppropriation.Text = "Budget Appropriations...";
             this.menuBudgetAppropriation.Click += new System.EventHandler(this.menuBudgetAppropriation_Click);
             // 
-            // menuAllotmentRelease
-            // 
-            this.menuAllotmentRelease.Name = "menuAllotmentRelease";
-            this.menuAllotmentRelease.Size = new System.Drawing.Size(219, 22);
-            this.menuAllotmentRelease.Text = "Allotment Release...";
-            // 
             // menuReports
             // 
             this.menuReports.Name = "menuReports";
@@ -246,7 +238,6 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuBudgetAppropriation;
         private System.Windows.Forms.ToolStripMenuItem menuJEV;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        internal System.Windows.Forms.ToolStripMenuItem menuAllotmentRelease;
     }
 }
 

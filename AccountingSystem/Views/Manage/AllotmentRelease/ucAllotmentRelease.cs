@@ -25,13 +25,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal string GetFormErrors()
         {
-            BudgetAppropriationValidation();
-
-            var errorArray = new string[4];
-            errorArray[0] = epBudgetAppropriations.GetError(groupBox1);
-            errorArray[1] = epARONo.GetError(txtAllotmentReleaseNo);
-            errorArray[2] = epPurpose.GetError(txtPurpose);
-            errorArray[3] = epAmount.GetError(nudAmount);
+            var errorArray = new string[3];
+            errorArray[0] = epARONo.GetError(txtAllotmentReleaseNo);
+            errorArray[1] = epPurpose.GetError(txtPurpose);
+            errorArray[2] = epAmount.GetError(nudAmount);
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
@@ -43,62 +40,13 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             othersFPPID = null;
             allotmentClassesID = 0;
             generalLedgerAccID = 0;
-            lblFPPCode.Text = "-";
-            lblFPP.Text = "-";
-            lblOtherFPP.Text = "-";
-            lblAccountCode.Text = "-";
-            lblAllotmentClass.Text = "-";
-            lblGenLedgerAcc.Text = "-";
-            lblYear.Text = "-";
-            lblAmount.Text = "-";
             txtAllotmentReleaseNo.Clear();
             txtPurpose.Clear();
             dtDateIssued.Value = DateTime.Now;
             nudAmount.Value = 0;
         }
 
-        internal void LoadSelected()
-        {
-            try
-            {
-                var selectedBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordByIDs(budgetAppropriationID, fppID, othersFPPID, allotmentClassesID, generalLedgerAccID);
-
-                lblFPPCode.Text = selectedBudgetAppropriation["fpp_code"].ToString();
-                lblFPP.Text = selectedBudgetAppropriation["fpp_name"].ToString();
-
-                //if others fpp was null
-                if (string.IsNullOrEmpty(selectedBudgetAppropriation["others_fpp_name"]))
-                    lblOtherFPP.Text = string.Empty;
-                else
-                    lblOtherFPP.Text = selectedBudgetAppropriation["others_fpp_name"];
-
-                lblAccountCode.Text = selectedBudgetAppropriation["account_code"].ToString();
-                lblAllotmentClass.Text = selectedBudgetAppropriation["allotment_code"].ToString();
-                lblGenLedgerAcc.Text = selectedBudgetAppropriation["ledger_name"].ToString();
-                lblYear.Text = selectedBudgetAppropriation["year"].ToString();
-                lblAmount.Text = Convert.ToDecimal(selectedBudgetAppropriation["amount"]).ToString("N2");
-
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
         #region Validations
-
-        //Overriden Validation
-        private void BudgetAppropriationValidation() 
-        {
-            if (budgetAppropriationID == 0)
-            {
-                epBudgetAppropriations.SetError(groupBox1, "Budget Appropriation is required.");
-            }
-            else 
-            {
-                epBudgetAppropriations.SetError(groupBox1, string.Empty);
-            }
-        }
 
         private void txtAllotmentReleaseNo_Validating(object sender, CancelEventArgs e)
         {

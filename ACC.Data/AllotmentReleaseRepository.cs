@@ -9,12 +9,12 @@ namespace ACC.Data
 {
     public class AllotmentReleaseRepository : IAllotmentReleaseRepository
     {
-        private MySqlGenericCommands mySqlGenericCommands;
+        private MySqlGenericCommands _mySqlGenericCommands;
         private readonly string tableName = "allotment_release";
 
         public AllotmentReleaseRepository(MySqlGenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            this._mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public int CountRecords()
@@ -61,7 +61,7 @@ namespace ACC.Data
                };
 
                 string query = $"INSERT INTO {tableName} (budget_appropriations_id, aro_no, purpose, date_issued, amount) VALUES (@budget_appropriations_id, @aro_no, @purpose, @date_issued, @amount)";
-                return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
             {
@@ -72,6 +72,47 @@ namespace ACC.Data
         public bool Update(AllotmentReleaseModel entity)
         {
             throw new NotImplementedException();
+        }
+
+        public DataTable GetRecordsByBudgetAppropriationID(int budgetAppropriationID)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] {"@budget_appropriations_id", DbType.Int32, budgetAppropriationID }
+                };
+
+                string query = $"SELECT id, budget_appropriations_id, aro_no, purpose, date_issued, amount, created_at, updated_at FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id";
+
+                var dtAllotmentClasses = new DataTable();
+                return _mySqlGenericCommands.FillBySearch(query, dtAllotmentClasses, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }        
+        }
+
+        public DataTable GetRecordsByBudgetAppropriationID(int budgetAppropriationID, string allotmentReleaseNum)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] {"@budget_appropriations_id", DbType.Int32, budgetAppropriationID },
+                    new object[] {"@aro_no", DbType.String, $"%{allotmentReleaseNum}%"}
+                };
+
+                string query = $"SELECT id, budget_appropriations_id, aro_no, purpose, date_issued, amount, created_at, updated_at FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id AND aro_no LIKE @aro_no";
+
+                var dtAllotmentClasses = new DataTable();
+                return _mySqlGenericCommands.FillBySearch(query, dtAllotmentClasses, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

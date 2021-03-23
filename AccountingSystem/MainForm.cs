@@ -20,7 +20,6 @@ namespace AccountingSystem
         public MainForm()
         {
             InitializeComponent();
-            menuAllotmentRelease.Click += new EventHandler(menuAllotmentRelease_Click);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -80,11 +79,6 @@ namespace AccountingSystem
         private void menuBudgetAppropriation_Click(object sender, EventArgs e) 
         {
             _ = new frmBudgetAppropriations().ShowDialog();
-        }
-
-        private void menuAllotmentRelease_Click(object sender, EventArgs e) 
-        {
-            _ = new frmAllotmentRelease(this).ShowDialog();
         }
 
     }

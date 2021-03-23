@@ -133,6 +133,16 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap give_money_28px {
+            get {
+                object obj = ResourceManager.GetObject("give_money_28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ok14px {
             get {
                 object obj = ResourceManager.GetObject("ok14px", resourceCulture);

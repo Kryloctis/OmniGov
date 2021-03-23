@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.AllotmentRelease;
 using BudgetSystem.Views.BudgetAppropriations;
 using BudgetSystem.Views.Manage.BudgetAppropriations;
 using System;
@@ -18,6 +19,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         public frmBudgetAppropriations()
         {
             InitializeComponent();
+            btnAllotmentRelease.Click += new EventHandler(btnAllotmentRelease_Click);
         }
 
         internal void LoadRecords()
@@ -58,6 +60,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             if (SelectedRows == 1 && dgv.SelectedCells[1].Value != null)
             {
                 btnEdit.Enabled = true;
+                btnAllotmentRelease.Enabled = true;
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
 
@@ -65,12 +68,14 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             else if (SelectedRows > 1 && dgv.SelectedCells[1].Value != null)
             {
                 btnEdit.Enabled = false;
+                btnAllotmentRelease.Enabled = false;
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
             }
             else
             {
                 btnEdit.Enabled = false;
+                btnAllotmentRelease.Enabled = false;
                 btnDelete.Enabled = false;
                 btnDelete.Text = "Delete";
             }
@@ -171,6 +176,31 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        private void btnAllotmentRelease_Click(object sender, EventArgs e) 
+        {
+            var frmAllotmentReleaseForm = new frmAllotmentRelease();
+
+            var budgetAppId = dgBudgetAppropriations.SelectedCells[1].Value;
+            var fppId = dgBudgetAppropriations.SelectedCells[2].Value;
+            var dgothersFPPId = dgBudgetAppropriations.SelectedCells[3].Value;
+            int? othersFPPId;
+            var allotmentClassesId = dgBudgetAppropriations.SelectedCells[4].Value;
+            var genLedgerAccId = dgBudgetAppropriations.SelectedCells[5].Value;
+
+            if (string.IsNullOrEmpty(dgothersFPPId.ToString()))
+                othersFPPId = null;
+            else
+                othersFPPId = Convert.ToInt32(dgothersFPPId);
+
+            frmAllotmentReleaseForm.budgetAppropriationID = Convert.ToInt32(budgetAppId);
+            frmAllotmentReleaseForm.fppID = Convert.ToInt32(fppId);
+            frmAllotmentReleaseForm.othersFPPID = othersFPPId;
+            frmAllotmentReleaseForm.allotmentClassesID = Convert.ToInt32(allotmentClassesId);
+            frmAllotmentReleaseForm.generalLedgerAccID = Convert.ToInt32(genLedgerAccId);
+
+            frmAllotmentReleaseForm.ShowDialog();
         }
 
         private void frmBudgetAppropriationsNew_Load(object sender, EventArgs e)

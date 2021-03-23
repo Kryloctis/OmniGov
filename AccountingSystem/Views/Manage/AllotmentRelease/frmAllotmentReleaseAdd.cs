@@ -19,7 +19,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             InitializeComponent();
             _frmAllotmentRelease = frmAllotmentRelease;
             var uc = ucAllotmentRelease1;
-            uc.lblSelectBudgetAppropriation.Click += new EventHandler(lblSelectBudgetAppropriation_Click);
         }
 
         private bool SaveData() 
@@ -55,11 +54,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return false;
         }
 
-        private void lblSelectBudgetAppropriation_Click(object sender, EventArgs e) 
-        {
-            _ = new frmSearchBudgetAppropriation(this).ShowDialog();
-        }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (SaveData()) 
@@ -67,6 +61,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 var uc = ucAllotmentRelease1;
                 uc.ResetForm();
                 Helper.MessageBoxSuccess("Allotment Release has been saved.");
+                _frmAllotmentRelease.LoadAllotmentReleaseRecords();
             }
         }
     }
