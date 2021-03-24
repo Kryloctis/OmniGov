@@ -11,6 +11,7 @@ using AccountingSystem.Views.Manage.Users.List;
 using AccountingSystem.Views.Transactions.JEV;
 using AccountingSystem.Views.Reports.Journals;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
+using AccountingSystem.Views.Manage.AllotmentRelease;
 
 namespace AccountingSystem
 {
@@ -33,6 +34,7 @@ namespace AccountingSystem
         {
             _ = new frmJournals().ShowDialog();
         }
+
         private void menuFunds_Click(object sender, EventArgs e)
         {
             _ = new frmFunds().ShowDialog();
@@ -66,14 +68,17 @@ namespace AccountingSystem
         {
 
         }
+
         private void menuFunctionProgramProject_Click(object sender, EventArgs e)
         {
             _ = new frmFunctionProgramProject().ShowDialog();
         }        
+
         private void menuCollectingOfficer_Click(object sender, EventArgs e)
         {
             _ = new frmCollectingOfficer().ShowDialog();
         }
+
         private void menuBudgetAppropriation_Click(object sender, EventArgs e) 
         {
             _ = new frmBudgetAppropriations().ShowDialog();
