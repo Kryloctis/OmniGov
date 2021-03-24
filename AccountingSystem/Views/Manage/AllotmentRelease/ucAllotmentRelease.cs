@@ -44,6 +44,19 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private void txtAllotmentReleaseNo_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epARONo, txtAllotmentReleaseNo, "Allotment Release No.");
+
+            bool itemNameExist;
+
+            if (allotmentReleaseID == 0)
+                itemNameExist = Factory.AllotmentReleaseRepository().allotmentReleaseNumExist(txtAllotmentReleaseNo.Text.Trim());
+            else
+                itemNameExist = Factory.AllotmentReleaseRepository().allotmentReleaseNumExist(allotmentReleaseID, txtAllotmentReleaseNo.Text.Trim());
+
+            if (itemNameExist)
+            {
+                epARONo.SetError(txtAllotmentReleaseNo, $"The Allotment Release No. You entered, \nIs already exist in your record.");
+                e.Cancel = true;
+            }
         }
         private void txtAllotmentReleaseNo_Validated(object sender, EventArgs e)
         {

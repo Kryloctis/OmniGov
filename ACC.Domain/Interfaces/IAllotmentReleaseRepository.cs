@@ -10,5 +10,8 @@ namespace ACC.Domain.Interfaces
     {
         DataTable GetRecordsByBudgetAppropriationID(int budgetAppropriationID);
         DataTable GetRecordsByBudgetAppropriationID(int budgetAppropriationID, string allotmentReleaseNum);
+
+        bool allotmentReleaseNumExist(string alltomentReleaseNum);
+        bool allotmentReleaseNumExist(int id , string alltomentReleaseNum);
     }
 }

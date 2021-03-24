@@ -183,5 +183,50 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public bool allotmentReleaseNumExist(string alltomentReleaseNum)
+        {
+            try
+            {
+                var parameters = new object[][]
+               {
+                    new object[] { "@aro_no", DbType.String, alltomentReleaseNum}
+               };
+
+                string query = $"SELECT id FROM {tableName} WHERE aro_no = @aro_no";
+                string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return false;
+        }
+
+        public bool allotmentReleaseNumExist(int id, string alltomentReleaseNum)
+        {
+            try
+            {
+                var parameters = new object[][]
+               {
+                    new object[] { "@id", DbType.String, id},
+                    new object[] { "@aro_no", DbType.String, alltomentReleaseNum}
+               };
+
+                string query = $"SELECT id FROM {tableName} WHERE  id <> @id AND aro_no = @aro_no";
+                string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return false;
+        }
     }
 }
