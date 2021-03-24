@@ -46,6 +46,13 @@ namespace AccountingSystem
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuBudgetAppropriation = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuReportGJ = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuReportCRJ = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuReportPRJ = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuReportCDJ = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuReportCkDJ = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuReportADADJ = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -182,9 +189,60 @@ namespace AccountingSystem
             // 
             // menuReports
             // 
+            this.menuReports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
             this.menuReports.Name = "menuReports";
             this.menuReports.Size = new System.Drawing.Size(59, 19);
             this.menuReports.Text = "Reports";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuReportGJ,
+            this.menuReportCRJ,
+            this.menuReportPRJ,
+            this.menuReportCDJ,
+            this.menuReportCkDJ,
+            this.menuReportADADJ});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
+            this.toolStripMenuItem1.Text = "Journals";
+            // 
+            // menuReportGJ
+            // 
+            this.menuReportGJ.Name = "menuReportGJ";
+            this.menuReportGJ.Size = new System.Drawing.Size(329, 22);
+            this.menuReportGJ.Text = "General Journal...";
+            // 
+            // menuReportCRJ
+            // 
+            this.menuReportCRJ.Name = "menuReportCRJ";
+            this.menuReportCRJ.Size = new System.Drawing.Size(329, 22);
+            this.menuReportCRJ.Text = "Cash Receipts Journal...";
+            // 
+            // menuReportPRJ
+            // 
+            this.menuReportPRJ.Name = "menuReportPRJ";
+            this.menuReportPRJ.Size = new System.Drawing.Size(329, 22);
+            this.menuReportPRJ.Text = "Procurement Received Journal...";
+            // 
+            // menuReportCDJ
+            // 
+            this.menuReportCDJ.Name = "menuReportCDJ";
+            this.menuReportCDJ.Size = new System.Drawing.Size(329, 22);
+            this.menuReportCDJ.Text = "Cash Disbursements Journal...";
+            // 
+            // menuReportCkDJ
+            // 
+            this.menuReportCkDJ.Name = "menuReportCkDJ";
+            this.menuReportCkDJ.Size = new System.Drawing.Size(329, 22);
+            this.menuReportCkDJ.Text = "Check Disbursements Journal...";
+            // 
+            // menuReportADADJ
+            // 
+            this.menuReportADADJ.Name = "menuReportADADJ";
+            this.menuReportADADJ.Size = new System.Drawing.Size(329, 22);
+            this.menuReportADADJ.Text = "Advice to Debit Account Disbursement Journal...";
             // 
             // label1
             // 
@@ -238,6 +296,14 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuBudgetAppropriation;
         private System.Windows.Forms.ToolStripMenuItem menuJEV;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem menuReportJournals;
+        private System.Windows.Forms.ToolStripMenuItem menuReportGJ;
+        private System.Windows.Forms.ToolStripMenuItem menuReportCRJ;
+        private System.Windows.Forms.ToolStripMenuItem menuReportPRJ;
+        private System.Windows.Forms.ToolStripMenuItem menuReportCDJ;
+        private System.Windows.Forms.ToolStripMenuItem menuReportCkDJ;
+        private System.Windows.Forms.ToolStripMenuItem menuReportADADJ;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }
 

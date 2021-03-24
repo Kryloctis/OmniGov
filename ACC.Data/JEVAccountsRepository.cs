@@ -1,10 +1,8 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
-using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
@@ -24,13 +22,13 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool DeleteByJevId(uint jevId)
+        public bool DeleteByJevId(int jevId)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.UInt32, jevId},
+                    new object[] { "@id", DbType.Int32, jevId},
                 };
 
                 string query = $"DELETE FROM {tableName} WHERE jev_id = @id";
@@ -97,7 +95,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public DataTable GetRecordsByJevId(uint jevId)
+        public DataTable GetViewRecordsByJevId(int jevId)
         {
             try
             {
@@ -110,6 +108,47 @@ namespace ACC.Data
 
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetViewRecordsByFundJournalDate(byte fundId, byte journalId, DateTime dateEntry)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Byte, fundId},
+                    new object[] { "@journals_id", DbType.Byte, journalId},
+                    new object[] { "@date_entry", DbType.Date, dateEntry }
+                };
+
+                string query = $"SELECT jev_id, date_entry, jev_no, explanation, ledger_name, account_code, is_deposit, is_debit, amount FROM {viewTableName} WHERE funds_id = @funds_id AND journals_id = @journals_id AND MONTH(date_entry) = MONTH(@date_entry) AND YEAR(date_entry) = YEAR(@date_entry)";
+
+                var dtGeneralLedgers = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int CountByJevId(int jevId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@jev_id", DbType.Int32, jevId},
+                };
+
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE jev_id = @jev_id";
+
+                return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
             }
             catch (Exception)
             {

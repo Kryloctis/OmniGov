@@ -41,6 +41,16 @@ namespace AccountingSystem
             if (Fill == true) dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
+        public static Dictionary<string, string> LGUDetails()
+        {
+            var lguDict = new Dictionary<string, string>
+            {
+                { "lgu_name", "Municipality of Buug" }
+            };
+
+            return lguDict;
+        }
+
         internal static Dictionary<string, string> GetLoggedInUserAccounting()
         {
             var user = new Dictionary<string, string>();
@@ -277,6 +287,25 @@ namespace AccountingSystem
         public static string TruncateString(string myString, int maxLength)
         {
             return myString.Length > maxLength ? $"{myString.Substring(0, 20)}..." : $"{myString}";
+        }
+
+        public static Dictionary<int, string> MonthsDatasource()
+        {
+            var month = new Dictionary<int, string>();
+            month.Add(1, "January");
+            month.Add(2, "February");
+            month.Add(3, "March");
+            month.Add(4, "April");
+            month.Add(5, "May");
+            month.Add(6, "June");
+            month.Add(7, "July");
+            month.Add(8, "August");
+            month.Add(9, "September");
+            month.Add(10, "October");
+            month.Add(11, "November");
+            month.Add(12, "December");
+
+            return month;
         }
     }
 }

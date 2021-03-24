@@ -8,7 +8,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 {
     public partial class ucJEV : UserControl
     {
-        internal uint jevId;
+        internal int jevId = 0;
         internal byte fundId = 0;
         internal byte journalId = 0;
         internal string journalName;

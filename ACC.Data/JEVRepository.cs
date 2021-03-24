@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
 using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
@@ -12,13 +11,18 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly IJEVAccountsRepository _jevAccountsRepository;
+        private readonly ICheckDisbursementsJournalRepository _checkDisbursementsJournalRepository;
         private const string tableName = "jev";
         private const string viewTableName = "view_jev";
 
-        public JEVRepository(IDbGenericCommands dbGenericCommands, IJEVAccountsRepository jevAccountsRepository)
+        public JEVRepository(
+            IDbGenericCommands dbGenericCommands,
+            IJEVAccountsRepository jevAccountsRepository,
+            ICheckDisbursementsJournalRepository checkDisbursementsJournalRepository)
         {
             _dbGenericCommands = dbGenericCommands;
             _jevAccountsRepository = jevAccountsRepository;
+            _checkDisbursementsJournalRepository = checkDisbursementsJournalRepository;
         }
 
         public int CountRecords()
@@ -41,11 +45,7 @@ namespace ACC.Data
                     {
                         new object[] { "@id", DbType.Int32, entity.Id},
                     };
-
-                    // delete first the jev accounts
-                    _jevAccountsRepository.DeleteByJevId(entity.Id);
-
-                    // delete the jev
+                    
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
                     _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
 
@@ -79,13 +79,36 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
+        public bool InsertWithCheckDisbursement(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, CheckDisbursementsJournalModel checkDisbursementsJournalModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    _ = Insert(entity, jevAccountsModelList);
+
+                    checkDisbursementsJournalModel.JevId = GetLastInsertedID();
+
+                    _checkDisbursementsJournalRepository.Insert(checkDisbursementsJournalModel);
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool Insert(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList)
         {
             try
             {
                 using (var scope = new TransactionScope())
                 {
-                    var parameters = new object[][]
+                    object[][] parameters = new object[][]
                     {
                         new object[] { "@funds_id", DbType.Byte, entity.FundsId },
                         new object[] { "@journals_id", DbType.Byte, entity.JournalsId },
@@ -127,6 +150,27 @@ namespace ACC.Data
         public bool Update(JEVModel entity)
         {
             throw new NotImplementedException();
+        }
+
+        public bool UpdateWithCheckDisbursement(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, CheckDisbursementsJournalModel checkDisbursementsJournalModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    _ = Update(entity, jevAccountsModelList);
+
+                    _checkDisbursementsJournalRepository.UpdateByJevID(checkDisbursementsJournalModel);
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Update(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList)
@@ -209,13 +253,13 @@ namespace ACC.Data
             return false;
         }
 
-        public bool JevNumberExist(string jevNo, uint id)
+        public bool JevNumberExist(string jevNo, int id)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.UInt32, id },
+                    new object[] { "@id", DbType.Int32, id },
                     new object[] { "@jev_no", DbType.String, jevNo },
                 };
 

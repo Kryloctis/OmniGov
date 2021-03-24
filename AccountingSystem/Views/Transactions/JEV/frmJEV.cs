@@ -24,7 +24,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnDelete.Click += new EventHandler(this.BtnDelete_Click);
         }
 
-        private ushort? ValidateNullSubsidiary(object subsidiaryCellValue)
+        private static ushort? ValidateNullSubsidiary(object subsidiaryCellValue)
         {
             if (subsidiaryCellValue != null)
             {
@@ -32,6 +32,72 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
 
             return null;
+        }
+
+        private bool SaveData()
+        {
+            try
+            {
+                var user = Helper.GetLoggedInUserAccounting();
+                var uc = ucjev1;
+
+                // validate form
+                if (uc.fundId == 0 || uc.journalId == 0 || !uc.ValidateChildren() || uc.dgAccounts.Rows.Count == 0)
+                {
+                    Helper.MessageBoxError(uc.GetFormErrors());
+                    return false;
+                }
+
+                // if debit & credit not equal, show error
+                if (uc.txtDebitTotal.Text != uc.txtCreditTotal.Text)
+                {
+                    Helper.MessageBoxError("Debit & Credit amounts must be equal.");
+                    return false;
+                }
+
+                switch (uc.journalName)
+                {
+                    case "General Journal":
+                    case "Procurement Received Journal":
+                    case "Cash Disbursements Journal":
+                        return InsertJournal(user, uc);
+
+                    case "Cash Receipts Journal":
+                        break;
+                    case "Check Disbursements Journal":
+                        return InsertCheckDisbursementJournal(user, uc);
+
+                    case "Advice to Debit Account Disbursement Journal":
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return false;
+        }
+
+        private static JEVModel ParseJEVModelData(Dictionary<string, string> user, ucJEV uc, bool isUpdate = false)
+        {
+            string jevNo = $"{uc.txtFundsJevNo.Text}-{uc.txtJEVNo.Text.Trim()}";
+            var jevModel = new JEVModel();
+
+            if (isUpdate) jevModel.Id = uc.jevId;
+
+            jevModel.FundsId = uc.fundId;
+            jevModel.JournalsId = uc.journalId;
+            jevModel.JEVNumber = jevNo;
+            jevModel.DateEntry = uc.dtpDateEntry.Value;
+            jevModel.Explanation = uc.txtExplanation.Text.Trim();
+
+            if (!isUpdate)
+                jevModel.CreatedBy = Convert.ToByte(user["id"]);
+            else
+                jevModel.UpdatedBy = Convert.ToByte(user["id"]);
+
+            return jevModel;
         }
 
         private List<JEVAccountsModel> JevAcountsModelList()
@@ -68,84 +134,56 @@ namespace AccountingSystem.Views.Transactions.JEV
             return jevAccountsModelList;
         }
 
-        private bool SaveData()
+        private bool InsertJournal(Dictionary<string, string> user, ucJEV uc)
         {
-            try
-            {
-                var user = Helper.GetLoggedInUserAccounting();
-                var uc = ucjev1;
+            JEVModel jevModel = ParseJEVModelData(user, uc);
 
-                // if no fund or journal selected, show error
-                if (uc.fundId == 0 || uc.journalId == 0)
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                // if error occurs, show messagebox error
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                // if no rows in accounts datagrid, show error
-                if (uc.dgAccounts.Rows.Count == 0)
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                if (uc.txtDebitTotal.Text != uc.txtCreditTotal.Text)
-                {
-                    Helper.MessageBoxError("Debit & Credit amounts must be equal.");
-                    return false;
-                }
-
-                string jevNo = $"{uc.txtFundsJevNo.Text}-{uc.txtJEVNo.Text.Trim()}";
-                var jevModel = new JEVModel()
-                {
-                    FundsId = uc.fundId,
-                    JournalsId = uc.journalId,
-                    JEVNumber = jevNo,
-                    DateEntry = uc.dtpDateEntry.Value,
-                    Explanation = uc.txtExplanation.Text.Trim(),
-                    CreatedBy = Convert.ToByte(user["id"])
-                };
-
-                return Factory.JEVRepository().Insert(jevModel, JevAcountsModelList());
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-
-            return false;
+            return Factory.JEVRepository().Insert(jevModel, JevAcountsModelList());
         }
 
-        private bool UpadateData()
+        private bool InsertCheckDisbursementJournal(Dictionary<string, string> user, ucJEV uc)
+        {
+            JEVModel jevModel = ParseJEVModelData(user, uc);
+
+            var checkDisbursementsModel = new CheckDisbursementsJournalModel()
+            {
+                CheckNumber = uc.txtRefNo.Text.Trim(),
+                Payee = uc.txtPayeeCollectingOfficer.Text.Trim()
+            };
+
+            return Factory.JEVRepository().InsertWithCheckDisbursement(jevModel, JevAcountsModelList(), checkDisbursementsModel);
+        }
+
+        private bool UpdateJournal(Dictionary<string, string> user, ucJEV uc)
+        {
+            JEVModel jevModel = ParseJEVModelData(user, uc, true);
+
+            return Factory.JEVRepository().Update(jevModel, JevAcountsModelList());
+        }
+
+        private bool UpdateCheckDisbursementJournal(Dictionary<string, string> user, ucJEV uc)
+        {
+            JEVModel jevModel = ParseJEVModelData(user, uc, true);
+
+            var checkDisbursementsModel = new CheckDisbursementsJournalModel()
+            {
+                JevId = uc.jevId,
+                CheckNumber = uc.txtRefNo.Text.Trim(),
+                Payee = uc.txtPayeeCollectingOfficer.Text.Trim()
+            };
+
+            return Factory.JEVRepository().UpdateWithCheckDisbursement(jevModel, JevAcountsModelList(), checkDisbursementsModel);
+        }
+
+        private bool UpdateData()
         {
             try
             {
                 var user = Helper.GetLoggedInUserAccounting();
                 var uc = ucjev1;
 
-                // if no fund or journal selected, show error
-                if (uc.fundId == 0 || uc.journalId == 0)
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                // if error occurs, show messagebox error
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                // if no rows in accounts datagrid, show error
-                if (uc.dgAccounts.Rows.Count == 0)
+                // validate form
+                if (uc.fundId == 0 || uc.journalId == 0 || !uc.ValidateChildren() || uc.dgAccounts.Rows.Count == 0)
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
@@ -157,19 +195,21 @@ namespace AccountingSystem.Views.Transactions.JEV
                     return false;
                 }
 
-                string jevNo = $"{uc.txtFundsJevNo.Text}-{uc.txtJEVNo.Text.Trim()}";
-                var jevModel = new JEVModel()
+                switch (uc.journalName)
                 {
-                    Id = uc.jevId,
-                    FundsId = uc.fundId,
-                    JournalsId = uc.journalId,
-                    JEVNumber = jevNo,
-                    DateEntry = uc.dtpDateEntry.Value,
-                    Explanation = uc.txtExplanation.Text.Trim(),
-                    UpdatedBy = Convert.ToByte(user["id"])
-                };
+                    case "General Journal":
+                    case "Procurement Received Journal":
+                    case "Cash Disbursements Journal":
+                        return UpdateJournal(user, uc);
 
-                return Factory.JEVRepository().Update(jevModel, JevAcountsModelList());
+                    case "Cash Receipts Journal":
+                        break;
+                    case "Check Disbursements Journal":
+                        return UpdateCheckDisbursementJournal(user, uc);
+
+                    case "Advice to Debit Account Disbursement Journal":
+                        break;
+                }
             }
             catch (Exception ex)
             {
@@ -188,11 +228,11 @@ namespace AccountingSystem.Views.Transactions.JEV
                 {
                     Helper.MessageBoxSuccess("JEV has been saved.");
                     ucjev1.ResetForm();
-                    return;
                 }
+                return;
             }
 
-            if (UpadateData())
+            if (UpdateData())
             {
                 Helper.MessageBoxSuccess("JEV has been saved.");
                 return;
