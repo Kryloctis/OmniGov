@@ -43,6 +43,7 @@ namespace AccountingSystem
             this.menuFunds = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFunctionProgramProject = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCollectingOfficer = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuBudgetAppropriation = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -103,6 +104,7 @@ namespace AccountingSystem
             this.menuFunds,
             this.menuFunctionProgramProject,
             this.menuCollectingOfficer,
+            this.toolStripSeparator1,
             this.menuBudgetAppropriation});
             this.menuManage.Name = "menuManage";
             this.menuManage.Size = new System.Drawing.Size(62, 19);
@@ -173,11 +175,16 @@ namespace AccountingSystem
             this.menuCollectingOfficer.Text = "Collecting Officer...";
             this.menuCollectingOfficer.Click += new System.EventHandler(this.menuCollectingOfficer_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(216, 6);
+            // 
             // menuBudgetAppropriation
             // 
             this.menuBudgetAppropriation.Name = "menuBudgetAppropriation";
             this.menuBudgetAppropriation.Size = new System.Drawing.Size(219, 22);
-            this.menuBudgetAppropriation.Text = "Budget Appropriations";
+            this.menuBudgetAppropriation.Text = "Budget Appropriations...";
             this.menuBudgetAppropriation.Click += new System.EventHandler(this.menuBudgetAppropriation_Click);
             // 
             // menuReports
@@ -288,6 +295,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuCollectingOfficer;
         private System.Windows.Forms.ToolStripMenuItem menuBudgetAppropriation;
         private System.Windows.Forms.ToolStripMenuItem menuJEV;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem menuReportJournals;
         private System.Windows.Forms.ToolStripMenuItem menuReportGJ;
         private System.Windows.Forms.ToolStripMenuItem menuReportCRJ;

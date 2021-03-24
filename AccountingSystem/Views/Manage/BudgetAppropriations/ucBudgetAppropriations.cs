@@ -138,7 +138,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             try
             {
-                HelperLoadRecords.TypeOfFundCombobox(Factory.FundsRepository().GetRecords(), cmbxTypeOfFund, "fund_name", "id");
+                HelperLoadRecords.TypeOfFundsCombobox(Factory.FundsRepository().GetRecords(), cmbxTypeOfFund, "fund_name", "id");
             }
             catch (Exception ex)
             {
