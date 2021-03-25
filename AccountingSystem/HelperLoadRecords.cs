@@ -411,7 +411,7 @@ namespace AccountingSystem
 
         #region BudgetAppropriations
 
-        public static void BudgetAppropriationsDataGridView(DataGridView dgvBudgetAppropriations, int fppID, int allotmentClassID, int typeOfFundsID, Int16 year)
+        public static void BudgetAppropriationsDataGridView(DataGridView dgvBudgetAppropriations, int fppID, int allotmentClassID, int typeOfFundsID, Int16 year, TextBox txtTotalAppropriation)
         {
             try
             {
@@ -507,6 +507,15 @@ namespace AccountingSystem
                         dgvBudgetAppropriations.Rows[row.Index].DefaultCellStyle.Font = new Font(DataGridView.DefaultFont, FontStyle.Bold);
                     }
                 }
+
+                //Show Total Value s
+                decimal totalAppropriation = 0;
+                for (int i = 0; i < dgvBudgetAppropriations.Rows.Count; i++)
+                {
+                    totalAppropriation += Convert.ToDecimal(dgvBudgetAppropriations.Rows[i].Cells[7].Value);
+                }
+
+                txtTotalAppropriation.Text = totalAppropriation.ToString("N2");
 
                 dgvBudgetAppropriations.ClearSelection();
                 Helper.DatagridDefaultStyle(dgvBudgetAppropriations, true);

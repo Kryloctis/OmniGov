@@ -127,6 +127,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             // btnAllotmentRelease
             // 
+            this.btnAllotmentRelease.Enabled = false;
             this.btnAllotmentRelease.Image = global::AccountingSystem.Properties.Resources.give_money_28px;
             this.btnAllotmentRelease.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAllotmentRelease.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -256,7 +257,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         internal System.Windows.Forms.ToolStripComboBox cmbxAllotmentClass;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtTotal;
         internal System.Windows.Forms.ToolStripComboBox cmbxFundType;
         internal System.Windows.Forms.ToolStripComboBox cmbxYear;
         internal System.Windows.Forms.DataGridView dgFPP;
@@ -264,5 +264,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnAllotment;
         internal System.Windows.Forms.ToolStripButton btnAllotmentRelease;
+        internal System.Windows.Forms.TextBox txtTotal;
     }
 }
