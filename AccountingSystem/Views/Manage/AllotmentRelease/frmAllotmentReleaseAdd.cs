@@ -37,7 +37,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 // proceed to insert
                 var allotmentReleaseModel = new AllotmentReleaseModel()
                 {
-                    ID = uc.allotmentReleaseID,
+                    BudgetAppropriationsID = uc.budgetAppropriationID,
                     ARONumber = uc.txtAllotmentReleaseNo.Text.Trim(),
                     Purpose = uc.txtPurpose.Text.Trim(),
                     DateIssued = uc.dtDateIssued.Value,
