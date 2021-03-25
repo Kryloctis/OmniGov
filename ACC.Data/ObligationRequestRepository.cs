@@ -9,6 +9,13 @@ namespace ACC.Data
 {
     public class ObligationRequestRepository : IObligationRequestRepository
     {
+        private MySqlGenericCommands mySqlGenericCommands;
+
+        public ObligationRequestRepository(MySqlGenericCommands mySqlGenericCommands)
+        {
+            this.mySqlGenericCommands = mySqlGenericCommands;
+        }
+
         public int CountRecords()
         {
             throw new NotImplementedException();
