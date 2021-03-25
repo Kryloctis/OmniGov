@@ -82,7 +82,9 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool InsertWithCheckDisbursement(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, CheckDisbursementsJournalModel checkDisbursementsJournalModel)
+        public bool InsertWithCheckDisbursement(JEVModel entity, 
+            List<JEVAccountsModel> jevAccountsModelList, 
+            CheckDisbursementsJournalModel checkDisbursementsJournalModel)
         {
             try
             {
@@ -105,7 +107,9 @@ namespace ACC.Data
             }
         }
 
-        public bool InsertWithCashReceipts(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, CashReceiptsJournalModel cashReceiptsJournalModel)
+        public bool InsertWithCashReceipts(JEVModel entity, 
+            List<JEVAccountsModel> jevAccountsModelList, 
+            CashReceiptsJournalModel cashReceiptsJournalModel)
         {
             try
             {
@@ -178,7 +182,9 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool UpdateWithCheckDisbursement(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, CheckDisbursementsJournalModel checkDisbursementsJournalModel)
+        public bool UpdateWithCheckDisbursement(JEVModel entity, 
+            List<JEVAccountsModel> jevAccountsModelList, 
+            CheckDisbursementsJournalModel checkDisbursementsJournalModel)
         {
             try
             {
@@ -187,6 +193,28 @@ namespace ACC.Data
                     _ = Update(entity, jevAccountsModelList);
 
                     _checkDisbursementsJournalRepository.UpdateByJevID(checkDisbursementsJournalModel);
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool UpdateWithCashReceipts(JEVModel entity, 
+            List<JEVAccountsModel> jevAccountsModelList,
+            CashReceiptsJournalModel cashReceiptsJournalModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    _ = Update(entity, jevAccountsModelList);
+
+                    _ = _cashReceiptsJournalRepository.UpdateByJevId(cashReceiptsJournalModel);
 
                     scope.Complete();
                     return true;

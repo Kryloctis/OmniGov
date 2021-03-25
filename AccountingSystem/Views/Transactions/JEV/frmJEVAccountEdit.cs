@@ -47,9 +47,10 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void CheckedCollectionsDeposits(bool? isDeposit)
         {
             var uc = ucjevAccount1;
-            if (!string.IsNullOrWhiteSpace(isDeposit.ToString()))
+            if ((bool)isDeposit)
             {
                 uc.radioDeposits.Checked = true;
+                return;
             }
 
             uc.radioCollections.Checked = true;

@@ -324,5 +324,10 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             _ = new frmJEVAccountEdit(this).ShowDialog();
         }
+
+        private void dgAccounts_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            _ = new frmJEVAccountEdit(this).ShowDialog();
+        }
     }
 }

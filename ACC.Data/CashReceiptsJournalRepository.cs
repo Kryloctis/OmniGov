@@ -70,5 +70,79 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
+
+        public bool UpdateByJevId(CashReceiptsJournalModel entity)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@jev_id", DbType.Int32, entity.JevId},
+                    new object[] { "@collecting_officers_id", DbType.Byte, entity.CollectingOfficerId},
+                    new object[] { "@rcd_number", DbType.String, entity.RCDNumber},
+                };
+
+                string query = $"UPDATE {tableName} SET collecting_officers_id = @collecting_officers_id, rcd_number = @rcd_number WHERE jev_id = @jev_id";
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Dictionary<string, string> GetRecordByJevID(int jevId)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@jev_id", DbType.Int32, jevId},
+                };
+
+                string query = $"SELECT id, collecting_officers_id, rcd_number FROM {tableName} WHERE jev_id = @jev_id";
+
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    record.Add("id", reader.Rows[0][0].ToString());
+                    record.Add("collecting_officers_id", reader.Rows[0][1].ToString());
+                    record.Add("rcd_number", reader.Rows[0][2].ToString());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
+        }
+
+        public bool JevIdExist(int jevId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@jev_id", DbType.Int32, jevId },
+                };
+
+                string query = $"SELECT id FROM {tableName} WHERE jev_id = @jev_id";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
     }
 }

@@ -119,6 +119,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     int jevId = Convert.ToInt32(jevData["id"]);
 
                     LoadCheckDisbursementsDataIfExist(uc, jevId);
+                    LoadCashReceiptsDataIfExist(uc, jevId);
                     uc.jevId = jevId;
                     uc.txtExplanation.Text = jevData["explanation"];
                     uc.dtpDateEntry.Value = Convert.ToDateTime(jevData["date_entry"]);
@@ -150,6 +151,19 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                 uc.txtRefNo.Text = checkDisbursementsData["check_number"];
                 uc.txtPayeeCollectingOfficer.Text = checkDisbursementsData["payee"];
+            }
+        }
+
+        private static void LoadCashReceiptsDataIfExist(ucJEV uc, int jevId)
+        {
+            var cashReceiptsJournalRepository = Factory.CashReceiptsJournalRepository();
+
+            if (cashReceiptsJournalRepository.JevIdExist(jevId))
+            {
+                Dictionary<string, string> checkDisbursementsData = cashReceiptsJournalRepository.GetRecordByJevID(jevId);
+
+                uc.txtRefNo.Text = checkDisbursementsData["rcd_number"];
+                uc.cmbCollectingOfficer.SelectedValue = checkDisbursementsData["collecting_officers_id"];
             }
         }
     }

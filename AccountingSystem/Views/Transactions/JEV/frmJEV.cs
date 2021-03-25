@@ -189,6 +189,20 @@ namespace AccountingSystem.Views.Transactions.JEV
             return Factory.JEVRepository().UpdateWithCheckDisbursement(jevModel, JevAcountsModelList(), checkDisbursementsModel);
         }
 
+        private bool UpdateCashReceiptsJournal(Dictionary<string, string> user, ucJEV uc)
+        {
+            JEVModel jevModel = ParseJEVModelData(user, uc, true);
+
+            var cashReceiptsJournalModel = new CashReceiptsJournalModel()
+            {
+                JevId = uc.jevId,
+                CollectingOfficerId = Convert.ToByte(uc.cmbCollectingOfficer.SelectedValue),
+                RCDNumber = uc.txtRefNo.Text.Trim()
+            };
+
+            return Factory.JEVRepository().UpdateWithCashReceipts(jevModel, JevAcountsModelList(), cashReceiptsJournalModel);
+        }
+
         private bool UpdateData()
         {
             try
@@ -217,7 +231,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                         return UpdateJournal(user, uc);
 
                     case "Cash Receipts Journal":
-                        break;
+                        return UpdateCashReceiptsJournal(user, uc);
+
                     case "Check Disbursements Journal":
                         return UpdateCheckDisbursementJournal(user, uc);
 
