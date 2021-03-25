@@ -75,7 +75,7 @@ namespace AccountingSystem.Views.Manage.Journals
 
         private void frmJournalsEdit_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIconAccounting(this);
+            Helper.LoadFormIcon(this);
             LoadSelectedRecord();
         }
 

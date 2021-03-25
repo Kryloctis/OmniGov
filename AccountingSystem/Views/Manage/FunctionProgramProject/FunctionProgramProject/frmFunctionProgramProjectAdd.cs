@@ -16,7 +16,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
 
         private void frmFunctionProgramProjectAdd_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIconAccounting(this);
+            Helper.LoadFormIcon(this);
             ucFunctionProgramProject1.LoadServiceNameComboBox();
 
         }

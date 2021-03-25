@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void frmSubsidiaryEdit_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIconAccounting(this);
+            Helper.LoadFormIcon(this);
             LoadSelectedRecord();
         }
 

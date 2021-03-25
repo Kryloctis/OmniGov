@@ -27,7 +27,7 @@ namespace AccountingSystem
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIconAccounting(this);
+            Helper.LoadFormIcon(this);
         }
 
         private void menuJournals_Click(object sender, EventArgs e)

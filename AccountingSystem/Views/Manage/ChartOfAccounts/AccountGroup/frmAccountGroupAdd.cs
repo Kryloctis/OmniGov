@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup
 
         private void frmAccountGroupAdd_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIconAccounting(this);
+            Helper.LoadFormIcon(this);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

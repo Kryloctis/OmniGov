@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void frmUsersAdd_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIconAccounting(this);
+            Helper.LoadFormIcon(this);
             //LoadRecords();
             
         }
@@ -88,7 +88,7 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void frmUsersAdd_Load_1(object sender, EventArgs e)
         {
-            Helper.LoadFormIconAccounting(this);
+            Helper.LoadFormIcon(this);
             ucUsers1.LoadRoleName();
         }
     }

@@ -18,7 +18,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void frmJEVSearch_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIconAccounting(this);
+            Helper.LoadFormIcon(this);
         }
 
         private void CheckedFund(string fundName)

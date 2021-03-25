@@ -96,7 +96,7 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void frmUsersEdit_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIconAccounting(this);
+            Helper.LoadFormIcon(this);
             ucUsers1.LoadRoleName();
             LoadSelectedRecord();
 

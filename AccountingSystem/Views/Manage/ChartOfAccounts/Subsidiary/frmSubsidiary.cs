@@ -48,7 +48,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void frmSubsidiary_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIconAccounting(this);
+            Helper.LoadFormIcon(this);
             Helper.DatagridDefaultStyle(dgSubsidiary);
             LoadFunds();
             LoadSelectedRecord();

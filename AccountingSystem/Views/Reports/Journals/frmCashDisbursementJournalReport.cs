@@ -93,7 +93,7 @@ namespace AccountingSystem.Views.Reports.Journals
 
         private void frmCashDisbursementJournalReport_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIconAccounting(this);
+            Helper.LoadFormIcon(this);
             LoadFunds();
         }
 
