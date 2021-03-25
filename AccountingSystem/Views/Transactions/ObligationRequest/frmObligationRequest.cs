@@ -15,6 +15,25 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         public frmObligationRequest()
         {
             InitializeComponent();
+            btnAdd.Click += new EventHandler(btnAdd_Click);
+            btnEdit.Click += new EventHandler(btnEdit_Click);
+            btnDelete.Click += new EventHandler(btnDelete_Click);
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e) 
+        {
+        
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e) 
+        {
+        
+        
         }
     }
 }
