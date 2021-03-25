@@ -53,7 +53,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
         private void frmAllotmentClassesAdd_Load(object sender, EventArgs e)
         {
             this.Visible = true;
-            Helper.LoadFormIconAccounting(this);
+            Helper.LoadFormIcon(this);
             
         }
 

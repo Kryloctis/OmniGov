@@ -135,7 +135,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void frmJEVAccountEdit_Load(object sender, EventArgs e)
         {
             var uc = ucjevAccount1;
-            Helper.LoadFormIconAccounting(this);
+            Helper.LoadFormIcon(this);
             uc.LoadFPP();
             uc.LoadGeneralLedgers();
             LoadSelectedRecord();

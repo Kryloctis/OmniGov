@@ -33,7 +33,7 @@ namespace AccountingSystem.Views.Manage.Journals
         private void frmJournals_Load(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Normal;
-            Helper.LoadFormIconAccounting(this);
+            Helper.LoadFormIcon(this);
             Helper.DatagridDefaultStyle(dgJournals);
             LoadRecords();
         }

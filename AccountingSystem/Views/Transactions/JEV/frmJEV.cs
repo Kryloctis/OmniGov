@@ -20,7 +20,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void frmJEV_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIconAccounting(this);
+            Helper.LoadFormIcon(this);
             this.btnDelete.Click += new EventHandler(this.BtnDelete_Click);
         }
 
@@ -38,7 +38,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             try
             {
-                var user = Helper.GetLoggedInUserAccounting();
+                var user = Helper.GetLoggedInUser();
                 var uc = ucjev1;
 
                 // validate form
@@ -179,7 +179,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             try
             {
-                var user = Helper.GetLoggedInUserAccounting();
+                var user = Helper.GetLoggedInUser();
                 var uc = ucjev1;
 
                 // validate form

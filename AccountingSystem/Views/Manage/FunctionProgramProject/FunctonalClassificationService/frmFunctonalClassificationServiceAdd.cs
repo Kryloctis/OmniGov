@@ -20,7 +20,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
 
         private void frmFunctonalClassificationServiceAdd_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIconAccounting(this);
+            Helper.LoadFormIcon(this);
            ucFunctonalClassificationServices1.LoadSectorNameComboBox();           
         }
 

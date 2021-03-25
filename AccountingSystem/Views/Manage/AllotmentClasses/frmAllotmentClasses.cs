@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
         private void frmAllotmentClasses_Load(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Normal;
-            Helper.LoadFormIconAccounting(this);
+            Helper.LoadFormIcon(this);
             Helper.DatagridDefaultStyle(dgAllotmentClasses);
             LoadRecords();
         }

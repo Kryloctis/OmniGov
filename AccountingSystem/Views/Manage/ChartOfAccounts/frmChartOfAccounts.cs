@@ -185,7 +185,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         private void frmChartOfAccounts_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIconAccounting(this);
+            Helper.LoadFormIcon(this);
             Helper.DatagridDefaultStyle(dgGeneralLedgerAccounts);
             Helper.DatagridDefaultStyle(dgAccountGroup);
             Helper.DatagridDefaultStyle(dgMajorAccountGroup);

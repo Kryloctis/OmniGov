@@ -76,7 +76,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
         private void frmAllotmentClassesEdit_Load(object sender, EventArgs e)
         {
             this.Visible = true;
-            Helper.LoadFormIconAccounting(this);
+            Helper.LoadFormIcon(this);
             LoadSelectedRecord();
 
         }

@@ -11,7 +11,7 @@ namespace AccountingSystem
 {
     public class Helper
     {
-        public static void LoadFormIconAccounting(Form form)
+        public static void LoadFormIcon(Form form)
         {
             form.Icon = Properties.Resources.accounting;
         }
@@ -51,7 +51,7 @@ namespace AccountingSystem
             return lguDict;
         }
 
-        internal static Dictionary<string, string> GetLoggedInUserAccounting()
+        internal static Dictionary<string, string> GetLoggedInUser()
         {
             var user = new Dictionary<string, string>();
 

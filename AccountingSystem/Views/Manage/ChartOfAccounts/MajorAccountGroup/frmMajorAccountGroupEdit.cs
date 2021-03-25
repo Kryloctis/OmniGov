@@ -67,7 +67,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
 
         private void frmMajorAccountGroupEdit_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIconAccounting(this);
+            Helper.LoadFormIcon(this);
             ucMajorAccountGroup1.LoadAccountGroup();
             LoadSelectedRecord();
         }
