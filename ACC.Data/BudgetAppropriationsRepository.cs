@@ -182,7 +182,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT budget_appropriations_id, fpp_id, fpp_code, fpp_name, others_fpp_id, others_fpp_name, allotment_classes_id, allotment_code, allotment_name, general_ledger_acc_id, ledger_code, ledger_name, is_contra_account, date_entry, amount, created_at, updated_at FROM {viewTableName}";
+                string query = $"SELECT budget_appropriations_id, fpp_id, fpp_code, fpp_name, others_fpp_id, others_fpp_name, allotment_classes_id, allotment_code, allotment_name, general_ledger_acc_id, ledger_code, ledger_name, is_contra_account, date_entry, appropriation,total_allotment_release, appropriation_balance, created_at, updated_at FROM {viewTableName}";
 
                 var dtPermissions = new DataTable();
                 return mySqlGenericCommands.Fill(query, dtPermissions);
@@ -197,7 +197,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT budget_appropriations_id, fpp_id, fpp_code, fpp_name, others_fpp_id, others_fpp_name, allotment_classes_id, allotment_code, allotment_name, general_ledger_acc_id, ledger_code, ledger_name, is_contra_account, date_entry, amount, created_at, updated_at FROM {viewTableName}";
+                string query = $"SELECT budget_appropriations_id, fpp_id, fpp_code, fpp_name, others_fpp_id, others_fpp_name, allotment_classes_id, allotment_code, allotment_name, general_ledger_acc_id, ledger_code, ledger_name, is_contra_account, date_entry, appropriation,total_allotment_release, appropriation_balance, created_at, updated_at FROM {viewTableName}";
 
                 var dtPermissions = new DataTable();
                 return mySqlGenericCommands.Fill(query, dtPermissions);
@@ -263,7 +263,7 @@ namespace ACC.Data
                    new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassID},
                    new object[] { "@general_ledger_acc_id", DbType.Int32, genLedgerAccID}
                 };
-                string query = $"SELECT budget_appropriations_id, funds_id, fund_code, fund_name, fpp_id, fpp_code, fpp_name, others_fpp_id, others_fpp_name, allotment_classes_id, allotment_code, allotment_name, general_ledger_acc_id, ledger_code, account_code, ledger_name, is_contra_account, date_entry, year, amount FROM {viewTableName} WHERE budget_appropriations_id = @budget_appropriations_id AND fpp_id = @fpp_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_acc_id = @general_ledger_acc_id";
+                string query = $"SELECT budget_appropriations_id, funds_id, fund_code, fund_name, fpp_id, fpp_code, fpp_name, others_fpp_id, others_fpp_name, allotment_classes_id, allotment_code, allotment_name, general_ledger_acc_id, ledger_code, account_code, ledger_name, is_contra_account, date_entry, year, appropriation FROM {viewTableName} WHERE budget_appropriations_id = @budget_appropriations_id AND fpp_id = @fpp_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_acc_id = @general_ledger_acc_id";
 
                 using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -291,7 +291,7 @@ namespace ACC.Data
                         record.Add("is_contra_account", item[16].ToString());
                         record.Add("date_entry", item[17].ToString());
                         record.Add("year", item[18].ToString());
-                        record.Add("amount", item[19].ToString());
+                        record.Add("appropriation", item[19].ToString());
                     }
                 }
             }
@@ -316,7 +316,7 @@ namespace ACC.Data
                     new object[] { "@year", DbType.Int16, year}
                 };
 
-                string query = $"SELECT budget_appropriations_id, funds_id, fpp_id, fpp_name, others_fpp_id, others_fpp_name, allotment_classes_id, allotment_code, allotment_name, general_ledger_acc_id, account_code, ledger_code, ledger_name, date_entry, year, amount, created_at, updated_at FROM {viewTableName} WHERE fpp_id = @fpp_id AND allotment_classes_id = @allotment_classes_id AND others_fpp_id <=> @others_fpp_id AND funds_id = @funds_id AND year = @year";
+                string query = $"SELECT budget_appropriations_id, funds_id, fpp_id, fpp_name, others_fpp_id, others_fpp_name, allotment_classes_id, allotment_code, allotment_name, general_ledger_acc_id, account_code, ledger_code, ledger_name, date_entry, year, appropriation,total_allotment_release, appropriation_balance, created_at, updated_at FROM {viewTableName} WHERE fpp_id = @fpp_id AND allotment_classes_id = @allotment_classes_id AND others_fpp_id <=> @others_fpp_id AND funds_id = @funds_id AND year = @year";
 
                 var dtPermissions = new DataTable();
                 return mySqlGenericCommands.FillBySearch(query, dtPermissions, parameters);

@@ -2,6 +2,7 @@
 using AccountingSystem.Views.Manage.AllotmentRelease;
 using BudgetSystem.Views.BudgetAppropriations;
 using BudgetSystem.Views.Manage.BudgetAppropriations;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,8 +34,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
             //Show Total Value 
             txtTotal.Text = (from DataGridViewRow row in dgBudgetAppropriations.Rows
-                             where !String.IsNullOrEmpty(row.Cells[8].FormattedValue.ToString())
-                             select Convert.ToDecimal(row.Cells[8].FormattedValue)).Sum().ToString("N2");
+                             where !String.IsNullOrEmpty(row.Cells[7].FormattedValue.ToString())
+                             select Convert.ToDecimal(row.Cells[7].FormattedValue)).Sum().ToString("N2");
         }
 
         internal void LoadComboboxes()
@@ -57,7 +58,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         {
             int SelectedRows = dgv.SelectedRows.Count;
 
-            if (SelectedRows == 1 && dgv.SelectedCells[1].Value != null)
+            if (SelectedRows == 1 && dgv.SelectedCells[0].Value != null)
             {
                 btnEdit.Enabled = true;
                 btnAllotmentRelease.Enabled = true;
@@ -65,7 +66,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
 
             }
-            else if (SelectedRows > 1 && dgv.SelectedCells[1].Value != null)
+            else if (SelectedRows > 1 && dgv.SelectedCells[0].Value != null)
             {
                 btnEdit.Enabled = false;
                 btnAllotmentRelease.Enabled = false;
@@ -82,7 +83,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
             foreach (DataGridViewRow row in dgBudgetAppropriations.SelectedRows)
             {
-                if (row.Cells[1].Value == null)
+                if (row.Cells[0].Value == null)
                 {
                     btnDelete.Enabled = false;
                     btnDelete.Text = "Delete";
@@ -121,12 +122,12 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             var frmBudgetAppropriationEdit = new frmBudgetAppropriationsEdit(this);
 
             var uc = frmBudgetAppropriationEdit.ucBudgetAppropriations1;
-            var budgetAppId = dgBudgetAppropriations.SelectedCells[1].Value;
-            var fppId = dgBudgetAppropriations.SelectedCells[2].Value;
-            var dgothersFPPId = dgBudgetAppropriations.SelectedCells[3].Value;
+            var budgetAppId = dgBudgetAppropriations.SelectedCells[0].Value;
+            var fppId = dgBudgetAppropriations.SelectedCells[1].Value;
+            var dgothersFPPId = dgBudgetAppropriations.SelectedCells[2].Value;
             int? othersFPPId;
-            var allotmentClassesId = dgBudgetAppropriations.SelectedCells[4].Value;
-            var genLedgerAccId = dgBudgetAppropriations.SelectedCells[5].Value;
+            var allotmentClassesId = dgBudgetAppropriations.SelectedCells[3].Value;
+            var genLedgerAccId = dgBudgetAppropriations.SelectedCells[4].Value;
 
             if (string.IsNullOrEmpty(dgothersFPPId.ToString()))
                 othersFPPId = null;
@@ -156,7 +157,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                     {
                         foreach (DataGridViewRow row in dgBudgetAppropriations.SelectedRows)
                         {
-                            int budgetAppID = int.Parse(row.Cells[1].Value.ToString());
+                            int budgetAppID = int.Parse(row.Cells[0].Value.ToString());
                             var budgetAppropriationsModel = new BudgetAppropriationsModel()
                             {
                                 ID = budgetAppID
@@ -172,6 +173,16 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                     }
                 }
             }
+            catch (MySqlException ex) 
+            {
+                switch (ex.Number)
+                {
+                    case 1451:
+                        Helper.MessageBoxError("Cannot Delete Budget Appropriation");
+                        break;
+                }
+            }
+
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
@@ -182,12 +193,12 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         {
             var frmAllotmentReleaseForm = new frmAllotmentRelease();
 
-            var budgetAppId = dgBudgetAppropriations.SelectedCells[1].Value;
-            var fppId = dgBudgetAppropriations.SelectedCells[2].Value;
-            var dgothersFPPId = dgBudgetAppropriations.SelectedCells[3].Value;
+            var budgetAppId = dgBudgetAppropriations.SelectedCells[0].Value;
+            var fppId = dgBudgetAppropriations.SelectedCells[1].Value;
+            var dgothersFPPId = dgBudgetAppropriations.SelectedCells[2].Value;
             int? othersFPPId;
-            var allotmentClassesId = dgBudgetAppropriations.SelectedCells[4].Value;
-            var genLedgerAccId = dgBudgetAppropriations.SelectedCells[5].Value;
+            var allotmentClassesId = dgBudgetAppropriations.SelectedCells[3].Value;
+            var genLedgerAccId = dgBudgetAppropriations.SelectedCells[4].Value;
 
             if (string.IsNullOrEmpty(dgothersFPPId.ToString()))
                 othersFPPId = null;
@@ -218,6 +229,15 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             dgBudgetAppropriations.Columns[e.Column.Index].SortMode = DataGridViewColumnSortMode.NotSortable;
         }
 
+        private void dgFPP_SelectionChanged(object sender, EventArgs e)
+        {
+            int selectedRows = dgFPP.SelectedRows.Count;
+            if (selectedRows > 0)
+                LoadRecords();
+
+            EnableDisableButtonsLocal(dgBudgetAppropriations, btnEdit, btnDelete);
+        }
+
         private void dgFPP_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             LoadRecords();
@@ -230,13 +250,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             EnableDisableButtonsLocal(dgBudgetAppropriations, btnEdit, btnDelete);
         }
 
-        private void dgFPP_SelectionChanged(object sender, EventArgs e)
-        {
-            int selectedRows = dgFPP.SelectedRows.Count;
-            if(selectedRows > 0)
-                LoadRecords();
-
-            EnableDisableButtonsLocal(dgBudgetAppropriations, btnEdit, btnDelete);
-        }
+     
     }
 }

@@ -215,11 +215,11 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(816, 503);
+            this.label1.Location = new System.Drawing.Point(739, 503);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 15);
+            this.label1.Size = new System.Drawing.Size(109, 15);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Total";
+            this.label1.Text = "Total Appropriation";
             // 
             // frmBudgetAppropriations
             // 
