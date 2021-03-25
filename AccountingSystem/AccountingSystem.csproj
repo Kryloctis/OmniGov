@@ -71,7 +71,6 @@
 
   <ItemGroup>
     <Folder Include="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\" />
-    <Folder Include="Views\Transactions\ObligationRequest\" />
   </ItemGroup>
 
 </Project>
