@@ -103,6 +103,12 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
+        internal void LoadCollectingOfficer()
+        {
+            var dtCollectingOfficer = Factory.CollectingOfficerRepository().GetRecords();
+            HelperLoadRecords.CollectingOfficerComboBox(dtCollectingOfficer, cmbCollectingOfficer, "fullname", "id");
+        }
+
         private void ShowCheckIcon(RadioButton radioButton)
         {
             if (radioButton.Checked)
@@ -150,13 +156,19 @@ namespace AccountingSystem.Views.Transactions.JEV
             journalId = Convert.ToByte(radJournals.Tag);
         }
 
-        private void EnableDisableAdditionalFields(bool statusRefNo, bool statusPayee)
+        private void EnableDisableAdditionalFields(bool statusRefNo, bool statusPayee, bool statusCollectingOfficer)
         {
             lblRefNo.Visible = statusRefNo;
             txtRefNo.Enabled = statusRefNo;
 
-            lblCollectingOfficerPayee.Visible = statusPayee;
+            if (statusPayee || statusCollectingOfficer)
+                lblCollectingOfficerPayee.Visible = true;
+            else
+                lblCollectingOfficerPayee.Visible = false;
+
+
             txtPayeeCollectingOfficer.Enabled = statusPayee;
+            cmbCollectingOfficer.Visible = statusCollectingOfficer;
         }
 
         private void radioJournals_CheckedChanged(object sender, EventArgs e)
@@ -171,25 +183,25 @@ namespace AccountingSystem.Views.Transactions.JEV
                 case "General Journal":
                 case "Procurement Received Journal":
                 case "Cash Disbursements Journal":
-                    EnableDisableAdditionalFields(false, false);
+                    EnableDisableAdditionalFields(false, false, false);
 
                     epRefNo.SetError(txtRefNo, string.Empty);
                     epCollectingOfficerPayee.SetError(txtPayeeCollectingOfficer, string.Empty);
                     break;
                 case "Cash Receipts Journal":
-                    EnableDisableAdditionalFields(true, true);
+                    EnableDisableAdditionalFields(true, false, true);
 
                     lblRefNo.Text = "RCD No.";
                     lblCollectingOfficerPayee.Text = "Collecting Officer";
                     break;
                 case "Check Disbursements Journal":
-                    EnableDisableAdditionalFields(true, true);
+                    EnableDisableAdditionalFields(true, true, false);
 
                     lblRefNo.Text = "Check No.";
                     lblCollectingOfficerPayee.Text = "Payee";
                     break;
                 case "Advice to Debit Account Disbursement Journal":
-                    EnableDisableAdditionalFields(true, false);
+                    EnableDisableAdditionalFields(true, false, false);
 
                     lblRefNo.Text = "ADA No.";
                     epCollectingOfficerPayee.SetError(txtPayeeCollectingOfficer, string.Empty);
@@ -205,6 +217,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             Helper.DatagridDefaultStyle(dgAccounts);
             LoadFunds();
             LoadJournals();
+            LoadCollectingOfficer();
 
             btnEditAccount.Enabled = false;
             btnRemoveAccount.Enabled = false;

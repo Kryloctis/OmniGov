@@ -12,17 +12,20 @@ namespace ACC.Data
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly IJEVAccountsRepository _jevAccountsRepository;
         private readonly ICheckDisbursementsJournalRepository _checkDisbursementsJournalRepository;
+        private readonly ICashReceiptsJournalRepository _cashReceiptsJournalRepository;
         private const string tableName = "jev";
         private const string viewTableName = "view_jev";
 
         public JEVRepository(
             IDbGenericCommands dbGenericCommands,
             IJEVAccountsRepository jevAccountsRepository,
-            ICheckDisbursementsJournalRepository checkDisbursementsJournalRepository)
+            ICheckDisbursementsJournalRepository checkDisbursementsJournalRepository,
+            ICashReceiptsJournalRepository cashReceiptsJournalRepository)
         {
             _dbGenericCommands = dbGenericCommands;
             _jevAccountsRepository = jevAccountsRepository;
             _checkDisbursementsJournalRepository = checkDisbursementsJournalRepository;
+            _cashReceiptsJournalRepository = cashReceiptsJournalRepository;
         }
 
         public int CountRecords()
@@ -90,6 +93,29 @@ namespace ACC.Data
                     checkDisbursementsJournalModel.JevId = GetLastInsertedID();
 
                     _checkDisbursementsJournalRepository.Insert(checkDisbursementsJournalModel);
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool InsertWithCashReceipts(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, CashReceiptsJournalModel cashReceiptsJournalModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    _ = Insert(entity, jevAccountsModelList);
+
+                    cashReceiptsJournalModel.JevId = GetLastInsertedID();
+
+                    _ = _cashReceiptsJournalRepository.Insert(cashReceiptsJournalModel);
 
                     scope.Complete();
                     return true;

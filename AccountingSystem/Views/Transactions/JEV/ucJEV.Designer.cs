@@ -30,8 +30,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupFunds = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelFunds = new System.Windows.Forms.FlowLayoutPanel();
             this.groupJournals = new System.Windows.Forms.GroupBox();
@@ -69,6 +69,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.label6 = new System.Windows.Forms.Label();
             this.epRefNo = new System.Windows.Forms.ErrorProvider(this.components);
             this.epCollectingOfficerPayee = new System.Windows.Forms.ErrorProvider(this.components);
+            this.cmbCollectingOfficer = new System.Windows.Forms.ComboBox();
             this.groupFunds.SuspendLayout();
             this.groupJournals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAccounts)).BeginInit();
@@ -283,8 +284,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // Debit
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Debit.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Debit.DefaultCellStyle = dataGridViewCellStyle3;
             this.Debit.HeaderText = "Debit";
             this.Debit.Name = "Debit";
             this.Debit.ReadOnly = true;
@@ -292,8 +293,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // Credit
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Credit.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Credit.DefaultCellStyle = dataGridViewCellStyle4;
             this.Credit.HeaderText = "Credit";
             this.Credit.Name = "Credit";
             this.Credit.ReadOnly = true;
@@ -413,10 +414,21 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.epCollectingOfficerPayee.ContainerControl = this;
             // 
+            // cmbCollectingOfficer
+            // 
+            this.cmbCollectingOfficer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCollectingOfficer.FormattingEnabled = true;
+            this.cmbCollectingOfficer.Location = new System.Drawing.Point(542, 226);
+            this.cmbCollectingOfficer.Name = "cmbCollectingOfficer";
+            this.cmbCollectingOfficer.Size = new System.Drawing.Size(315, 23);
+            this.cmbCollectingOfficer.TabIndex = 50;
+            this.cmbCollectingOfficer.Visible = false;
+            // 
             // ucJEV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cmbCollectingOfficer);
             this.Controls.Add(this.txtCreditTotal);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtDebitTotal);
@@ -491,5 +503,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFunds;
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelJournals;
         private System.Windows.Forms.GroupBox groupFunds;
+        internal System.Windows.Forms.ComboBox cmbCollectingOfficer;
     }
 }

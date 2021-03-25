@@ -15,12 +15,15 @@ namespace AccountingSystem
         public static IJEVRepository JEVRepository() => new JEVRepository(
                 mySqlGenericCommands,
                 Factory.JEVAccountsRepository(),
-                Factory.CheckDisbursementsJournalRepository()
+                Factory.CheckDisbursementsJournalRepository(),
+                Factory.CashReceiptsJournalRepository()
             );
 
         public static IJEVAccountsRepository JEVAccountsRepository() => new JEVAccountsRepository(mySqlGenericCommands);
 
         public static ICheckDisbursementsJournalRepository CheckDisbursementsJournalRepository() => new CheckDisbursementsJournalRepository(mySqlGenericCommands);
+
+        public static ICashReceiptsJournalRepository CashReceiptsJournalRepository() => new CashReceiptsJournalRepository(mySqlGenericCommands);
 
         public static ISubsidiaryLedgerAccountsRepository SubsidiaryLedgerAccountsRepository() => new SubsidiaryLedgerAccountsRepository(new MySqlGenericCommands());
 

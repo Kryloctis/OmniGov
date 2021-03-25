@@ -7,6 +7,7 @@ namespace ACC.Domain.Interfaces
     {
         bool InsertWithCheckDisbursement(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, CheckDisbursementsJournalModel checkDisbursementsJournalModel);
         bool UpdateWithCheckDisbursement(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, CheckDisbursementsJournalModel checkDisbursementsJournalModel);
+        bool InsertWithCashReceipts(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, CashReceiptsJournalModel cashReceiptsJournalModel);
         bool Insert(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList);
         bool Update(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList);
         bool Delete(JEVModel entity);
