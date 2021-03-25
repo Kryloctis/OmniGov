@@ -30,12 +30,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             int typeOfFundID = Convert.ToInt32(cmbxFundType.ComboBox.SelectedValue);
             short year = Convert.ToInt16(cmbxYear.ComboBox.SelectedValue);
 
-            HelperLoadRecords.BudgetAppropriationsDataGridView(dgBudgetAppropriations, fppID, allotmentClassID, typeOfFundID, year);
-
-            //Show Total Value 
-            txtTotal.Text = (from DataGridViewRow row in dgBudgetAppropriations.Rows
-                             where !String.IsNullOrEmpty(row.Cells[7].FormattedValue.ToString())
-                             select Convert.ToDecimal(row.Cells[7].FormattedValue)).Sum().ToString("N2");
+            HelperLoadRecords.BudgetAppropriationsDataGridView(dgBudgetAppropriations, fppID, allotmentClassID, typeOfFundID, year, txtTotal);
         }
 
         internal void LoadComboboxes()

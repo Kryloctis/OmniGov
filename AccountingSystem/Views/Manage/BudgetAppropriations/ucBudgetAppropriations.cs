@@ -27,6 +27,8 @@ namespace BudgetSystem.Views.BudgetAppropriations
         internal string GetFormErrors()
         {
             var errorArray = new string[8];
+
+            BudgetAppropriationsValidation();
             errorArray[0] = epTypeOfFund.GetError(cmbxTypeOfFund);
             errorArray[1] = epFunctionProgramProject.GetError(cmbxFPP);
             errorArray[2] = epOthersFunctionProgramProject.GetError(cmbxOthersFPP);
