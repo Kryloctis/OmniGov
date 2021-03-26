@@ -47,13 +47,15 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void CheckedCollectionsDeposits(bool? isDeposit)
         {
             var uc = ucjevAccount1;
-            if ((bool)isDeposit)
+            if (Convert.ToBoolean(isDeposit))
             {
-                uc.radioDeposits.Checked = true;
+                MessageBox.Show("Collections");
+                uc.radioCollections.Checked = true;
                 return;
             }
 
-            uc.radioCollections.Checked = true;
+            MessageBox.Show("Deposits");
+            uc.radioDeposits.Checked = true;
         }
 
         private void LoadSelectedRecord()
@@ -141,11 +143,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             uc.LoadGeneralLedgers();
             LoadSelectedRecord();
 
-            if (ucJEV.journalName == "Cash Receipts Journal")
-            {
-                uc.pnlCollectionsDeposits.Visible = true;
-            }
-            else
+            if (ucJEV.journalName != "Cash Receipts Journal")
             {
                 uc.pnlCollectionsDeposits.Visible = false;
                 uc.radioDeposits.Checked = false;

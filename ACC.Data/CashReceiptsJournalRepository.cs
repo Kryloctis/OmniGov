@@ -10,6 +10,7 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private const string tableName = "cash_receipts_journal";
+        private const string viewTableName = "view_cash_receipts_journal";
 
         public CashReceiptsJournalRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -91,7 +92,7 @@ namespace ACC.Data
             }
         }
 
-        public Dictionary<string, string> GetRecordByJevID(int jevId)
+        public Dictionary<string, string> GetViewRecordByJevID(int jevId)
         {
             var record = new Dictionary<string, string>();
 
@@ -102,7 +103,7 @@ namespace ACC.Data
                     new object[] { "@jev_id", DbType.Int32, jevId},
                 };
 
-                string query = $"SELECT id, collecting_officers_id, rcd_number FROM {tableName} WHERE jev_id = @jev_id";
+                string query = $"SELECT id, collecting_officers_id, rcd_number, first_name, mid_initial, last_name, full_name, job_title FROM {viewTableName} WHERE jev_id = @jev_id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -112,6 +113,11 @@ namespace ACC.Data
                     record.Add("id", reader.Rows[0][0].ToString());
                     record.Add("collecting_officers_id", reader.Rows[0][1].ToString());
                     record.Add("rcd_number", reader.Rows[0][2].ToString());
+                    record.Add("first_name", reader.Rows[0][3].ToString());
+                    record.Add("mid_initial", reader.Rows[0][4].ToString());
+                    record.Add("last_name", reader.Rows[0][5].ToString());
+                    record.Add("full_name", reader.Rows[0][6].ToString());
+                    record.Add("job_title", reader.Rows[0][7].ToString());
                 }
             }
             catch (Exception)

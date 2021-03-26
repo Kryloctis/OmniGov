@@ -160,7 +160,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             if (cashReceiptsJournalRepository.JevIdExist(jevId))
             {
-                Dictionary<string, string> checkDisbursementsData = cashReceiptsJournalRepository.GetRecordByJevID(jevId);
+                Dictionary<string, string> checkDisbursementsData = cashReceiptsJournalRepository.GetViewRecordByJevID(jevId);
 
                 uc.txtRefNo.Text = checkDisbursementsData["rcd_number"];
                 uc.cmbCollectingOfficer.SelectedValue = checkDisbursementsData["collecting_officers_id"];

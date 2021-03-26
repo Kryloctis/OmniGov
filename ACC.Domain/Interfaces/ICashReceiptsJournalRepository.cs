@@ -7,7 +7,7 @@ namespace ACC.Domain.Interfaces
 {
     public interface ICashReceiptsJournalRepository : IRepository<CashReceiptsJournalModel>
     {
-        Dictionary<string, string> GetRecordByJevID(int jevId);
+        Dictionary<string, string> GetViewRecordByJevID(int jevId);
 
         bool JevIdExist(int jevId);
 

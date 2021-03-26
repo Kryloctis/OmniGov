@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Reports.Journals
 {
-    partial class frmCashDisbursementJournalReport
+    partial class frmProcurementsReceivedJournalReport
     {
         /// <summary>
         /// Required designer variable.
@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.cmbFunds.Location = new System.Drawing.Point(12, 12);
             this.cmbFunds.Name = "cmbFunds";
             this.cmbFunds.Size = new System.Drawing.Size(183, 23);
-            this.cmbFunds.TabIndex = 15;
+            this.cmbFunds.TabIndex = 18;
             // 
             // dtpMonth
             // 
@@ -51,14 +51,14 @@ namespace AccountingSystem.Views.Reports.Journals
             this.dtpMonth.Location = new System.Drawing.Point(201, 12);
             this.dtpMonth.Name = "dtpMonth";
             this.dtpMonth.Size = new System.Drawing.Size(154, 23);
-            this.dtpMonth.TabIndex = 14;
+            this.dtpMonth.TabIndex = 17;
             // 
             // btnRetrieve
             // 
             this.btnRetrieve.Location = new System.Drawing.Point(361, 12);
             this.btnRetrieve.Name = "btnRetrieve";
             this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
-            this.btnRetrieve.TabIndex = 12;
+            this.btnRetrieve.TabIndex = 16;
             this.btnRetrieve.Text = "Retrieve";
             this.btnRetrieve.UseVisualStyleBackColor = true;
             this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
@@ -71,9 +71,9 @@ namespace AccountingSystem.Views.Reports.Journals
             this.panel1.Location = new System.Drawing.Point(12, 55);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(960, 494);
-            this.panel1.TabIndex = 16;
+            this.panel1.TabIndex = 19;
             // 
-            // frmCashDisbursementJournalReport
+            // frmProcurementsReceivedJournalReport
             // 
             this.AcceptButton = this.btnRetrieve;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -84,11 +84,11 @@ namespace AccountingSystem.Views.Reports.Journals
             this.Controls.Add(this.dtpMonth);
             this.Controls.Add(this.btnRetrieve);
             this.MinimumSize = new System.Drawing.Size(1000, 600);
-            this.Name = "frmCashDisbursementJournalReport";
+            this.Name = "frmProcurementsReceivedJournalReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Report > Cash Disbursements Journal";
+            this.Text = "Report > Procurements Received Journal";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.frmCashDisbursementJournalReport_Load);
+            this.Load += new System.EventHandler(this.frmProcurementsReceivedJournalReport_Load);
             this.ResumeLayout(false);
 
         }
