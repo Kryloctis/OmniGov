@@ -74,6 +74,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
             var uc = frmAllotmentReleaseAddForm.ucAllotmentRelease1;
 
+            MessageBox.Show(budgetAppropriationID.ToString());
             uc.budgetAppropriationID = budgetAppropriationID;
 
             frmAllotmentReleaseAddForm.ShowDialog();
