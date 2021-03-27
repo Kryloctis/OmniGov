@@ -116,7 +116,7 @@ namespace AccountingSystem
             this.menuUserList,
             this.menuRoles});
             this.menuUsers.Name = "menuUsers";
-            this.menuUsers.Size = new System.Drawing.Size(219, 22);
+            this.menuUsers.Size = new System.Drawing.Size(223, 22);
             this.menuUsers.Text = "Users";
             // 
             // menuUserList
@@ -136,54 +136,54 @@ namespace AccountingSystem
             // menuJournals
             // 
             this.menuJournals.Name = "menuJournals";
-            this.menuJournals.Size = new System.Drawing.Size(219, 22);
+            this.menuJournals.Size = new System.Drawing.Size(223, 22);
             this.menuJournals.Text = "Journals...";
             this.menuJournals.Click += new System.EventHandler(this.menuJournals_Click);
             // 
             // menuChartOfAccounts
             // 
             this.menuChartOfAccounts.Name = "menuChartOfAccounts";
-            this.menuChartOfAccounts.Size = new System.Drawing.Size(219, 22);
+            this.menuChartOfAccounts.Size = new System.Drawing.Size(223, 22);
             this.menuChartOfAccounts.Text = "Chart of Accounts...";
             this.menuChartOfAccounts.Click += new System.EventHandler(this.menuChartOfAccounts_Click);
             // 
             // menuAllotmentClasses
             // 
             this.menuAllotmentClasses.Name = "menuAllotmentClasses";
-            this.menuAllotmentClasses.Size = new System.Drawing.Size(219, 22);
+            this.menuAllotmentClasses.Size = new System.Drawing.Size(223, 22);
             this.menuAllotmentClasses.Text = "Allotment Classes...";
             this.menuAllotmentClasses.Click += new System.EventHandler(this.menuAllotmentClasses_Click);
             // 
             // menuFunds
             // 
             this.menuFunds.Name = "menuFunds";
-            this.menuFunds.Size = new System.Drawing.Size(219, 22);
+            this.menuFunds.Size = new System.Drawing.Size(223, 22);
             this.menuFunds.Text = "Funds...";
             this.menuFunds.Click += new System.EventHandler(this.menuFunds_Click);
             // 
             // menuFunctionProgramProject
             // 
             this.menuFunctionProgramProject.Name = "menuFunctionProgramProject";
-            this.menuFunctionProgramProject.Size = new System.Drawing.Size(219, 22);
-            this.menuFunctionProgramProject.Text = "Funtion, Program & Project...";
+            this.menuFunctionProgramProject.Size = new System.Drawing.Size(223, 22);
+            this.menuFunctionProgramProject.Text = "Function/Program/Project...";
             this.menuFunctionProgramProject.Click += new System.EventHandler(this.menuFunctionProgramProject_Click);
             // 
             // menuCollectingOfficer
             // 
             this.menuCollectingOfficer.Name = "menuCollectingOfficer";
-            this.menuCollectingOfficer.Size = new System.Drawing.Size(219, 22);
+            this.menuCollectingOfficer.Size = new System.Drawing.Size(223, 22);
             this.menuCollectingOfficer.Text = "Collecting Officer...";
             this.menuCollectingOfficer.Click += new System.EventHandler(this.menuCollectingOfficer_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(216, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(220, 6);
             // 
             // menuBudgetAppropriation
             // 
             this.menuBudgetAppropriation.Name = "menuBudgetAppropriation";
-            this.menuBudgetAppropriation.Size = new System.Drawing.Size(219, 22);
+            this.menuBudgetAppropriation.Size = new System.Drawing.Size(223, 22);
             this.menuBudgetAppropriation.Text = "Budget Appropriations...";
             this.menuBudgetAppropriation.Click += new System.EventHandler(this.menuBudgetAppropriation_Click);
             // 
