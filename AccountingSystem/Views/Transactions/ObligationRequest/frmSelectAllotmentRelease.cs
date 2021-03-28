@@ -12,9 +12,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 {
     public partial class frmSelectAllotmentRelease : Form
     {
-        public frmSelectAllotmentRelease()
+        private ucObligationRequest _ucObligationRequest;
+        public frmSelectAllotmentRelease(ucObligationRequest ucObligationRequest)
         {
             InitializeComponent();
+            _ucObligationRequest = ucObligationRequest;
             toolStripCmbxFunds.ComboBox.SelectedValueChanged += new EventHandler(toolStripCmbxFunds_SelectedValueChanged);
             toolStripCmbxAllotmentClass.ComboBox.SelectedValueChanged += new EventHandler(toolStripCmbxAllotmentClass_SelectedValueChanged);
             toolStripCmbxYear.ComboBox.SelectedValueChanged += new EventHandler(toolStripCmbxYear_SelectedValueChanged);
@@ -63,6 +65,22 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
         }
 
+        private void LoadSelectedRecord() 
+        {
+            _ucObligationRequest.lblTypeofFund.Text = dgAllotmentRelease.SelectedCells[6].Value.ToString();
+            _ucObligationRequest.lblFPPCode.Text = dgAllotmentRelease.SelectedCells[8].Value.ToString();
+            _ucObligationRequest.lblFPPName.Text = dgAllotmentRelease.SelectedCells[9].Value.ToString();
+            _ucObligationRequest.lblOtherFPP.Text = dgAllotmentRelease.SelectedCells[11].Value.ToString();
+            _ucObligationRequest.lblAllotmentClass.Text = dgAllotmentRelease.SelectedCells[13].Value.ToString();
+            _ucObligationRequest.lblAccount.Text = dgAllotmentRelease.SelectedCells[17].Value.ToString();
+
+            _ucObligationRequest.fundId = Convert.ToInt32(dgAllotmentRelease.SelectedCells[5].Value);
+            _ucObligationRequest.fppId = Convert.ToInt32(dgAllotmentRelease.SelectedCells[7].Value);
+            _ucObligationRequest.othersFPPId = string.IsNullOrEmpty(dgAllotmentRelease.SelectedCells[10].Value.ToString())? null: Convert.ToInt32(dgAllotmentRelease.SelectedCells[10].Value);
+            _ucObligationRequest.allotmentClassId = Convert.ToInt32(dgAllotmentRelease.SelectedCells[12].Value);
+            _ucObligationRequest.accountId = Convert.ToInt32(dgAllotmentRelease.SelectedCells[15].Value);
+        }
+
         private void frmSelectAllotmentRelease_Load(object sender, EventArgs e)
         {
             Helper.DatagridDefaultStyle(dgFPP, true);
@@ -100,6 +118,21 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private void dgAllotmentRelease_SelectionChanged(object sender, EventArgs e)
         {
             EnableDisableButtonsLocal();
+        }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            LoadSelectedRecord();
+            Close();
+        }
+
+        private void dgAllotmentRelease_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (dgAllotmentRelease.SelectedCells[4].Value != null)
+            {
+                LoadSelectedRecord();
+                Close();
+            }
         }
     }
 }

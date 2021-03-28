@@ -91,6 +91,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.dgAllotmentRelease.RowTemplate.Height = 25;
             this.dgAllotmentRelease.Size = new System.Drawing.Size(681, 432);
             this.dgAllotmentRelease.TabIndex = 1;
+            this.dgAllotmentRelease.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgAllotmentRelease_RowHeaderMouseDoubleClick);
             this.dgAllotmentRelease.SelectionChanged += new System.EventHandler(this.dgAllotmentRelease_SelectionChanged);
             // 
             // toolStrip1
@@ -166,6 +167,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnSelect.TabIndex = 3;
             this.btnSelect.Text = "Select";
             this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // frmSelectAllotmentRelease
             // 

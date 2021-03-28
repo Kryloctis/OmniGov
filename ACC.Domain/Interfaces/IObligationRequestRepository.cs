@@ -7,5 +7,7 @@ namespace ACC.Domain.Interfaces
 {
     public interface IObligationRequestRepository : IRepository<ObligationRequestModel>
     {
+        bool ObligationNumExist(string obligationNum);
+        bool ObligationNumExist(int id, string obligationNum);
     }
 }

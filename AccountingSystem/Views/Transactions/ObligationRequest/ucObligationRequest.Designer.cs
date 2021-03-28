@@ -53,13 +53,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.label8 = new System.Windows.Forms.Label();
             this.epObligationNum = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epAllotmentRelease = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epObligationNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epAllotmentRelease)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -256,6 +254,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.nudAmount.Size = new System.Drawing.Size(274, 23);
             this.nudAmount.TabIndex = 11;
             this.nudAmount.ThousandsSeparator = true;
+            this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
+            this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
             // 
             // label7
             // 
@@ -273,6 +273,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.mkTxtObligationNum.Name = "mkTxtObligationNum";
             this.mkTxtObligationNum.Size = new System.Drawing.Size(274, 23);
             this.mkTxtObligationNum.TabIndex = 9;
+            this.mkTxtObligationNum.Validating += new System.ComponentModel.CancelEventHandler(this.mkTxtObligationNum_Validating);
+            this.mkTxtObligationNum.Validated += new System.EventHandler(this.mkTxtObligationNum_Validated);
             // 
             // label8
             // 
@@ -291,11 +293,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             this.epAmount.ContainerControl = this;
             // 
-            // epAllotmentRelease
-            // 
-            this.epAllotmentRelease.ContainerControl = this;
-            // 
-            // ucObligationRequestNew
+            // ucObligationRequest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -304,7 +302,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.Controls.Add(this.mkTxtObligationNum);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.groupBox1);
-            this.Name = "ucObligationRequestNew";
+            this.Name = "ucObligationRequest";
             this.Size = new System.Drawing.Size(401, 277);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -313,7 +311,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epObligationNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epAllotmentRelease)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -336,7 +333,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ErrorProvider epObligationNum;
         private System.Windows.Forms.ErrorProvider epAmount;
-        private System.Windows.Forms.ErrorProvider epAllotmentRelease;
         private System.Windows.Forms.Label label9;
         internal System.Windows.Forms.Label lblTypeofFund;
         internal System.Windows.Forms.Label lblFPPName;
