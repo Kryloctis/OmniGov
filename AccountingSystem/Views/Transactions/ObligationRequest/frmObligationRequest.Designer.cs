@@ -67,6 +67,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnCancel
             // 
+            this.btnCancel.Enabled = false;
             this.btnCancel.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
             this.btnCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -82,6 +83,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnDelete
             // 
+            this.btnDelete.Enabled = false;
             this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;

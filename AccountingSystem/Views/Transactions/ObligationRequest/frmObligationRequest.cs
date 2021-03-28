@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,7 +30,21 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false; 
                 }
-                return true;
+
+                var user = Helper.GetLoggedInUser();
+                var obligationModel = new ObligationRequestModel
+                {
+                    FundID = uc.fundId,
+                    FPPId = uc.fppId,
+                    OtherFPPId = uc.othersFPPId,
+                    AllotmentClassesID = uc.allotmentClassId,
+                    GenLedgerAccID = uc.accountId,
+                    ObligationNo = uc.mkTxtObligationNum.Text,
+                    ObligationAmount = uc.nudAmount.Value,
+                    CreatedBy = 1,
+                };
+
+                return Factory.ObligationRequestRepository().Insert(obligationModel);
             }
             catch (Exception ex)
             {
@@ -42,7 +57,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             if (SaveData()) 
             {
+                var uc = ucObligationRequestNew1;
 
+                uc.ResetForm();
                 Helper.MessageBoxSuccess("Obligation Request has been saved.");
             }
         }

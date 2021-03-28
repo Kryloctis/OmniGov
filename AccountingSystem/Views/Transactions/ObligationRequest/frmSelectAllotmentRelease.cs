@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             int selectedRowsCount = dgAllotmentRelease.SelectedRows.Count;
 
-            if (selectedRowsCount == 1 && dgAllotmentRelease.SelectedCells[4].Value != null)
+            if (selectedRowsCount == 1 && dgAllotmentRelease.SelectedCells[7].Value != null)
             {
                 btnSelect.Enabled = true;
             }
@@ -74,7 +74,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             _ucObligationRequest.lblAllotmentClass.Text = dgAllotmentRelease.SelectedCells[13].Value.ToString();
             _ucObligationRequest.lblAccount.Text = dgAllotmentRelease.SelectedCells[17].Value.ToString();
 
-            _ucObligationRequest.fundId = Convert.ToInt32(dgAllotmentRelease.SelectedCells[5].Value);
+            _ucObligationRequest.fundId = Convert.ToInt32(dgAllotmentRelease.SelectedCells[4].Value);
             _ucObligationRequest.fppId = Convert.ToInt32(dgAllotmentRelease.SelectedCells[7].Value);
             _ucObligationRequest.othersFPPId = string.IsNullOrEmpty(dgAllotmentRelease.SelectedCells[10].Value.ToString())? null: Convert.ToInt32(dgAllotmentRelease.SelectedCells[10].Value);
             _ucObligationRequest.allotmentClassId = Convert.ToInt32(dgAllotmentRelease.SelectedCells[12].Value);
@@ -128,7 +128,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void dgAllotmentRelease_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (dgAllotmentRelease.SelectedCells[4].Value != null)
+            if (dgAllotmentRelease.SelectedCells[7].Value != null)
             {
                 LoadSelectedRecord();
                 Close();

@@ -50,7 +50,44 @@ namespace ACC.Data
 
         public bool Insert(ObligationRequestModel entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+               {
+                    new object[] { "@funds_id", DbType.Int32, entity.FundID },
+                    new object[] { "@function_program_project_id", DbType.Int32, entity.FPPId },
+                    new object[] { "@others_fpp_id", DbType.String, entity.OtherFPPId },
+                    new object[] { "@allotment_classes_id", DbType.Int32, entity.AllotmentClassesID },
+                    new object[] { "@general_ledger_accounts_id", DbType.Int32, entity.GenLedgerAccID},
+                    new object[] { "@obligation_no", DbType.String, entity.ObligationNo},
+                    new object[] { "@obligation_amount", DbType.Decimal, entity.ObligationAmount},
+                    new object[] { "@created_by", DbType.Int32, entity.CreatedBy}
+               };
+
+                string query = $"INSERT INTO {tableName} " +
+                    $"(funds_id, " +
+                    $"function_program_project_id, " +
+                    $"others_fpp_id, " +
+                    $"allotment_classes_id, " +
+                    $"general_ledger_accounts_id, " +
+                    $"obligation_no, " +
+                    $"obligation_amount, " +
+                    $"created_by) " +
+                    $"VALUES " +
+                    $"(@funds_id, " +
+                    $"@function_program_project_id, " +
+                    $"@others_fpp_id, " +
+                    $"@allotment_classes_id, " +
+                    $"@general_ledger_accounts_id, " +
+                    $"@obligation_no, " +
+                    $"@obligation_amount, " +
+                    $"@created_by)";
+                return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Update(ObligationRequestModel entity)

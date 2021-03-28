@@ -36,6 +36,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return _errors.GenerateErrorMessage();
         }
 
+        internal void ResetForm() 
+        {
+            mkTxtObligationNum.Clear();
+            nudAmount.Value = 0;
+        }
+
         private void lnklblAllotmentRelease_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             _ = new frmSelectAllotmentRelease(this).ShowDialog();
@@ -49,7 +55,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             {
                 if (obligationId == 0)
                 {
-                    if (Factory.ObligationRequestRepository().ObligationNumExist(maskedTextBox.Mask)) 
+                    if (Factory.ObligationRequestRepository().ObligationNumExist(maskedTextBox.Text)) 
                     {
                         ep.SetError(maskedTextBox,$"{fieldText} is already exist on your record.");
                         return true;
@@ -57,7 +63,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 }
                 else 
                 {
-                    if (Factory.ObligationRequestRepository().ObligationNumExist(obligationId, maskedTextBox.Mask))
+                    if (Factory.ObligationRequestRepository().ObligationNumExist(obligationId, maskedTextBox.Text))
                     {
                         ep.SetError(maskedTextBox, $"{fieldText} is already exist on your record.");
                         return true;
@@ -99,7 +105,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
-
 
         #endregion Validations
     }
