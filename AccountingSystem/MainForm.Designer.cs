@@ -54,6 +54,7 @@ namespace AccountingSystem
             this.menuReportCkDJ = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportADADJ = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
+            this.menuObligationRequest = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,7 +83,8 @@ namespace AccountingSystem
             // menuTransactions
             // 
             this.menuTransactions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuJEV});
+            this.menuJEV,
+            this.menuObligationRequest});
             this.menuTransactions.Name = "menuTransactions";
             this.menuTransactions.Size = new System.Drawing.Size(84, 19);
             this.menuTransactions.Text = "Transactions";
@@ -254,6 +256,12 @@ namespace AccountingSystem
             this.label1.TabIndex = 1;
             this.label1.Text = "Dashboard";
             // 
+            // menuObligationRequest
+            // 
+            this.menuObligationRequest.Name = "menuObligationRequest";
+            this.menuObligationRequest.Size = new System.Drawing.Size(197, 22);
+            this.menuObligationRequest.Text = "Obligation Request...";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -304,6 +312,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuReportCkDJ;
         private System.Windows.Forms.ToolStripMenuItem menuReportADADJ;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        internal System.Windows.Forms.ToolStripMenuItem menuObligationRequest;
     }
 }
 

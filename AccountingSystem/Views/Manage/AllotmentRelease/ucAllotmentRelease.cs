@@ -32,7 +32,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal void ResetForm()
         {
-            budgetAppropriationID = 0;
             txtAllotmentReleaseNo.Clear();
             txtPurpose.Clear();
             dtDateIssued.Value = DateTime.Now;

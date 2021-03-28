@@ -23,23 +23,23 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             btnAllotmentRelease.Click += new EventHandler(btnAllotmentRelease_Click);
         }
 
-        internal void LoadRecords()
+        internal void LoadBudgetAppropriationRecords()
         {
             int fppID = Convert.ToInt32(dgFPP.SelectedCells[0].Value);
             int allotmentClassID = Convert.ToInt32(cmbxAllotmentClass.ComboBox.SelectedValue);
             int typeOfFundID = Convert.ToInt32(cmbxFundType.ComboBox.SelectedValue);
             short year = Convert.ToInt16(cmbxYear.ComboBox.SelectedValue);
 
-            HelperLoadRecords.BudgetAppropriationsDataGridView(dgBudgetAppropriations, fppID, allotmentClassID, typeOfFundID, year, txtTotal);
+            HelperLoadRecords.BudgetAppropriationsDgV(dgBudgetAppropriations, fppID, allotmentClassID, typeOfFundID, year, txtTotal);
         }
 
         internal void LoadComboboxes()
         {
             try
             {
-                HelperLoadRecords.AllomentToolStripCombobox(Factory.AllotmentClassesRepository().GetRecords(), cmbxAllotmentClass, "allotment_code", "id");
-                HelperLoadRecords.TypeOfFundsToolStripCombobox(Factory.FundsRepository().GetRecords(), cmbxFundType, "fund_name", "id");
-                HelperLoadRecords.YearToolStripCombobox(Factory.BudgetAppropriationsRepository().GetYearsBudgetAppropriations(), cmbxYear, "year", "year");
+                HelperLoadRecords.AllomentToolStripCmbx(Factory.AllotmentClassesRepository().GetRecords(), cmbxAllotmentClass, "allotment_code", "id");
+                HelperLoadRecords.TypeOfFundsToolStripCmbx(Factory.FundsRepository().GetRecords(), cmbxFundType, "fund_name", "id");
+                HelperLoadRecords.YearToolStripCmbx(Factory.BudgetAppropriationsRepository().GetYearsBudgetAppropriations(), cmbxYear, "year", "year");
             }
             catch (Exception ex)
             {
@@ -92,19 +92,19 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         private void cmbxAllotmentClass_SelectedValueChanged(object sender, EventArgs e) 
         {
             if(dgFPP.SelectedRows.Count == 1)
-            LoadRecords();
+            LoadBudgetAppropriationRecords();
         }
 
         private void cmbxFundType_SelectedValueChanged(object sender, EventArgs e) 
         {
             if (dgFPP.SelectedRows.Count == 1)
-                LoadRecords();
+                LoadBudgetAppropriationRecords();
         }
 
         private void cmbxYear_SelectedValueChanged(object sender, EventArgs e) 
         {
             if (dgFPP.SelectedRows.Count == 1)
-                LoadRecords();
+                LoadBudgetAppropriationRecords();
         }
 
         private void btnAdd_Click(object sender, EventArgs e) 
@@ -162,9 +162,9 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                         }
 
                         _ = Factory.BudgetAppropriationsRepository().Delete(budgetAppropriationsModelList);
-                        LoadRecords();
-                        HelperLoadRecords.FPPDatagridViewRecords(dgFPP);
-                        HelperLoadRecords.YearToolStripCombobox(Factory.BudgetAppropriationsRepository().GetYearsBudgetAppropriations(), cmbxYear, "year", "year");
+                        LoadBudgetAppropriationRecords();
+                        HelperLoadRecords.FPPDgVBudgetAppropriations(dgFPP);
+                        HelperLoadRecords.YearToolStripCmbx(Factory.BudgetAppropriationsRepository().GetYearsBudgetAppropriations(), cmbxYear, "year", "year");
                     }
                 }
             }
@@ -211,8 +211,10 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         private void frmBudgetAppropriationsNew_Load(object sender, EventArgs e)
         {
-            HelperLoadRecords.FPPDatagridViewRecords(dgFPP);
+            Helper.DatagridDefaultStyle(dgFPP, true);
             Helper.DatagridDefaultStyle(dgBudgetAppropriations, true);
+
+            HelperLoadRecords.FPPDgVBudgetAppropriations(dgFPP);       
             LoadComboboxes();
             cmbxAllotmentClass.ComboBox.SelectedValueChanged += new EventHandler(cmbxAllotmentClass_SelectedValueChanged);
             cmbxFundType.ComboBox.SelectedValueChanged += new EventHandler(cmbxFundType_SelectedValueChanged);
@@ -228,14 +230,14 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         {
             int selectedRows = dgFPP.SelectedRows.Count;
             if (selectedRows > 0)
-                LoadRecords();
+                LoadBudgetAppropriationRecords();
 
             EnableDisableButtonsLocal(dgBudgetAppropriations, btnEdit, btnDelete);
         }
 
         private void dgFPP_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            LoadRecords();
+            LoadBudgetAppropriationRecords();
         }
 
         #endregion Events Method
@@ -244,7 +246,5 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         {
             EnableDisableButtonsLocal(dgBudgetAppropriations, btnEdit, btnDelete);
         }
-
-     
     }
 }

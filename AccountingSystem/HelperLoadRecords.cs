@@ -428,7 +428,7 @@ namespace AccountingSystem
 
         #region BudgetAppropriations
 
-        public static void BudgetAppropriationsDataGridView(DataGridView dgvBudgetAppropriations, int fppID, int allotmentClassID, int typeOfFundsID, Int16 year, TextBox txtTotalAppropriation)
+        internal static void BudgetAppropriationsDgV(DataGridView dgvBudgetAppropriations, int fppID, int allotmentClassID, int typeOfFundsID, Int16 year, TextBox txtTotalAppropriation)
         {
             try
             {
@@ -516,7 +516,7 @@ namespace AccountingSystem
                     }
                 }
 
-
+                //Change Font style for the header of Others FPP
                 foreach (DataGridViewRow row in dgvBudgetAppropriations.Rows)
                 {
                     if (row.Cells[1].Value == null)
@@ -543,7 +543,7 @@ namespace AccountingSystem
             }
         }
 
-        public static void FPPCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        internal static void OthersFPPCmbx(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
         {
             comboBox.DataSource = dataTable;
             comboBox.DisplayMember = displayMember;
@@ -560,7 +560,7 @@ namespace AccountingSystem
             }
         }
 
-        public static void OthersFPPCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
+        internal static void AllotmentCmbx(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
         {
             comboBox.DataSource = dataTable;
             comboBox.DisplayMember = displayMember;
@@ -576,24 +576,7 @@ namespace AccountingSystem
                 comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
             }
         }
-
-        public static void AllotmentCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-
-            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
-            {
-                // loop datatable to add items in autocompletesource
-                foreach (DataRow item in dataTable.Rows)
-                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
-
-                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            }
-        }
-        public static void AllomentToolStripCombobox(DataTable dataTable, ToolStripComboBox toolStripComboBox, string displayMember, string valueMember)
+        internal static void AllomentToolStripCmbx(DataTable dataTable, ToolStripComboBox toolStripComboBox, string displayMember, string valueMember)
         {
             toolStripComboBox.ComboBox.DataSource = dataTable;
             toolStripComboBox.ComboBox.DisplayMember = displayMember;
@@ -610,7 +593,7 @@ namespace AccountingSystem
             }
         }
 
-        public static void TypeOfFundsCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        internal static void TypeOfFundsCmbx(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
             comboBox.DataSource = dataTable;
             comboBox.DisplayMember = displayMember;
@@ -627,7 +610,7 @@ namespace AccountingSystem
             }
 
         }
-        public static void TypeOfFundsToolStripCombobox(DataTable dataTable, ToolStripComboBox comboBox, string displayMember, string valueMember) 
+        internal static void TypeOfFundsToolStripCmbx(DataTable dataTable, ToolStripComboBox comboBox, string displayMember, string valueMember) 
         {
             comboBox.ComboBox.DataSource = dataTable;
             comboBox.ComboBox.DisplayMember = displayMember;
@@ -644,14 +627,14 @@ namespace AccountingSystem
             }
         }
 
-        public static void YearToolStripCombobox(DataTable dataTable, ToolStripComboBox toolStripComboBox, string displayMember, string valueMember)
+        internal static void YearToolStripCmbx(DataTable dataTable, ToolStripComboBox toolStripComboBox, string displayMember, string valueMember)
         {
             toolStripComboBox.ComboBox.DataSource = dataTable;
             toolStripComboBox.ComboBox.DisplayMember = displayMember;
             toolStripComboBox.ComboBox.ValueMember = valueMember;
         }
 
-        public static void GeneralLedgerAccountsCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
+        internal static void GeneralLedgerAccountsCmbx(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
         {
             comboBox.DataSource = dataTable;
             comboBox.DisplayMember = displayMember;
@@ -669,11 +652,11 @@ namespace AccountingSystem
             }
         }
 
-        public static void FPPDatagridViewRecords(DataGridView dataGridView) 
+        internal static void FPPDgVBudgetAppropriations(DataGridView dataGridView) 
         {
             try
             {
-                dataGridView.DataSource = Factory.BudgetAppropriationsRepository().GetViewRecordsFPP();
+                dataGridView.DataSource = Factory.BudgetAppropriationsRepository().GetViewRecordsFPPWithBudgetAppropriations();
                 dataGridView.Columns[0].Visible = false;
                 dataGridView.Columns[1].HeaderText = "FPP Code";
                 dataGridView.Columns[2].HeaderText = "FPP Name";
@@ -693,7 +676,7 @@ namespace AccountingSystem
 
         #region Allotment Release
 
-        public static void dgAllotmentRelease(DataTable dataTable, DataGridView dgv, int budgetAppropriationID)
+        internal static void AllotmentReleaseDgV(DataTable dataTable, DataGridView dgv, int budgetAppropriationID)
         {
             try
             {
@@ -744,7 +727,7 @@ namespace AccountingSystem
 
         }
 
-        public static void LoadBudgetAppropriationDetailsLabels(int budgetAppropriationID, int fppID, int? othersFPPID, int allotmentClassesID, int generalLedgerAccID, Label lblFPPCode, Label lblFPP, Label lblOtherFPP, Label lblAccountCode, Label lblAllotmentClass, Label lblGenLedgerAcc, Label lblYear, Label lblAmount)
+        internal static void LoadBudgetAppropriationDetailsLabels(int budgetAppropriationID, int fppID, int? othersFPPID, int allotmentClassesID, int generalLedgerAccID, Label lblFPPCode, Label lblFPP, Label lblOtherFPP, Label lblAccountCode, Label lblAllotmentClass, Label lblGenLedgerAcc, Label lblYear, Label lblAmount)
         {
             try
             {
@@ -773,6 +756,171 @@ namespace AccountingSystem
         }
 
         #endregion Allotment Release
+
+        #region Obligation Request
+
+        internal static void FPPDgVObligationRequest(DataGridView dataGridView, DataTable dataTable) 
+        {
+            try
+            {
+                dataGridView.DataSource = dataTable;
+                dataGridView.Columns[0].Visible = false;
+                dataGridView.Columns[1].HeaderText = "FPP Code";
+                dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                dataGridView.Columns[2].HeaderText = "FPP Name";
+                dataGridView.ClearSelection();
+            }
+
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        internal static void AllotmentReleaseDgvObligationRequest(DataGridView dataGridView, int fppId, int fundsId, int allotmentClassId, short year) 
+        {
+            try
+            {
+                dataGridView.Columns.Clear();
+                dataGridView.Rows.Clear();
+
+                //Set up new Columns to Datagrid View
+                dataGridView.Columns.Add("total_allotment_release_amount", " Total Allotment Release Amount");
+                dataGridView.Columns.Add("budget_appropriations_id", "Budget Appropriation ID");
+                dataGridView.Columns.Add("budget_appropriations_year", "Budget Appropriation Year");
+                dataGridView.Columns.Add("budget_appropriations_amount", "Budget Appropriation Amount");
+                dataGridView.Columns.Add("fund_id", "Fund ID");
+                dataGridView.Columns.Add("fund_code", "Fund Code");
+                dataGridView.Columns.Add("fund_name", "Fund Name");
+                dataGridView.Columns.Add("fpp_id", "FPP ID");
+                dataGridView.Columns.Add("fpp_code", "FPP Code");
+                dataGridView.Columns.Add("fpp_name", "FPP Name");
+                dataGridView.Columns.Add("others_fpp_id", "Others FPP ID");
+                dataGridView.Columns.Add("others_fpp_name", "Others FPP Name");
+                dataGridView.Columns.Add("allotment_class_id", "Allotment Class ID");
+                dataGridView.Columns.Add("allotment_class_code", "Allotment Class Code");
+                dataGridView.Columns.Add("allotment_class_name", "Allotment Class Name");
+                dataGridView.Columns.Add("gen_ledger_acc_id", "Gen. Ledger Acc. ID");
+                dataGridView.Columns.Add("gen_ledger_code", "Gen. Ledger Acc. Code");
+                dataGridView.Columns.Add("account_code", "Account Code");
+                dataGridView.Columns.Add("gen_ledger_name", "Gen. Ledger Acc. Name");
+
+
+                dataGridView.Columns[0].DefaultCellStyle.Format = "N2";
+                dataGridView.Columns[1].Visible = false;
+                dataGridView.Columns[2].Visible = false;
+                dataGridView.Columns[3].Visible = false;
+                dataGridView.Columns[4].Visible = false;
+                dataGridView.Columns[5].Visible = false;
+                dataGridView.Columns[6].Visible = false;
+                dataGridView.Columns[7].Visible = false;
+                dataGridView.Columns[8].Visible = false;
+                dataGridView.Columns[9].Visible = false;
+                dataGridView.Columns[10].Visible = false;
+                dataGridView.Columns[11].Visible = false;
+                dataGridView.Columns[12].Visible = false;
+                dataGridView.Columns[13].Visible = false;
+                dataGridView.Columns[14].Visible = false;
+                dataGridView.Columns[15].Visible = false;
+                dataGridView.Columns[16].Visible = false;
+
+
+                //Initialize Repository Method
+                DataTable dtGetViewRecordsAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecords(fppId, null, fundsId, allotmentClassId, year);
+
+
+                //Load by loop All Budget Appropriations Records without Others FPP 
+                foreach (DataRow drGetViewRecords in dtGetViewRecordsAllotmentRelease.Rows)
+                {
+                    dataGridView.Rows.Add(new object[] 
+                    {
+                        drGetViewRecords["total_allotment_release_amount"],
+                        drGetViewRecords["budget_appropriations_id"],
+                        drGetViewRecords["budget_appropriations_year"],
+                        drGetViewRecords["budget_appropriations_amount"],
+                        drGetViewRecords["fund_id"],
+                        drGetViewRecords["fund_code"],
+                        drGetViewRecords["fund_name"],
+                        drGetViewRecords["fpp_id"],
+                        drGetViewRecords["fpp_code"],
+                        drGetViewRecords["fpp_name"],
+                        drGetViewRecords["others_fpp_id"],
+                        drGetViewRecords["others_fpp_name"],
+                        drGetViewRecords["allotment_class_id"],
+                        drGetViewRecords["allotment_class_code"],
+                        drGetViewRecords["allotment_class_name"],
+                        drGetViewRecords["gen_ledger_acc_id"],
+                        drGetViewRecords["gen_ledger_code"],
+                        drGetViewRecords["account_code"],
+                        drGetViewRecords["gen_ledger_name"],
+                    });
+                }
+
+
+
+                //Initialize Repository Method
+                DataTable dtGetOthersFPPRecords = Factory.AllotmentReleaseRepository().GetOthersFPPRecords(fppId ,allotmentClassId, fundsId, year);
+
+                //Load by loop All Budget Appropriations Records with Others FPP 
+                foreach (DataRow drGetOthersFPPRecords in dtGetOthersFPPRecords.Rows)
+                {
+                    string othersFPPName = drGetOthersFPPRecords["others_fpp_name"].ToString();
+                    int othersFPPID = Convert.ToInt32(drGetOthersFPPRecords["others_fpp_id"]);
+
+                    dataGridView.Rows.Add(new object[] { othersFPPName });
+
+                    //Initialize Repository Method for w Others FPP Records
+                    DataTable dtGetViewRecordsAllotmentReleaseOthersFPP = Factory.AllotmentReleaseRepository().GetViewRecords(fppId, othersFPPID, fundsId, allotmentClassId, year);
+
+
+                    //Load by loop All Budget Appropriations Records without Others FPP 
+                    foreach (DataRow drGetViewRecordsAllotmentReleaseOthersFPP in dtGetViewRecordsAllotmentReleaseOthersFPP.Rows)
+                    {
+                        dataGridView.Rows.Add(new object[]
+                        {
+                        drGetViewRecordsAllotmentReleaseOthersFPP["total_allotment_release_amount"],
+                        drGetViewRecordsAllotmentReleaseOthersFPP["budget_appropriations_id"],
+                        drGetViewRecordsAllotmentReleaseOthersFPP["budget_appropriations_year"],
+                        drGetViewRecordsAllotmentReleaseOthersFPP["budget_appropriations_amount"],
+                        drGetViewRecordsAllotmentReleaseOthersFPP["fund_id"],
+                        drGetViewRecordsAllotmentReleaseOthersFPP["fund_code"],
+                        drGetViewRecordsAllotmentReleaseOthersFPP["fund_name"],
+                        drGetViewRecordsAllotmentReleaseOthersFPP["fpp_id"],
+                        drGetViewRecordsAllotmentReleaseOthersFPP["fpp_code"],
+                        drGetViewRecordsAllotmentReleaseOthersFPP["fpp_name"],
+                        drGetViewRecordsAllotmentReleaseOthersFPP["others_fpp_id"],
+                        drGetViewRecordsAllotmentReleaseOthersFPP["others_fpp_name"],
+                        drGetViewRecordsAllotmentReleaseOthersFPP["allotment_class_id"],
+                        drGetViewRecordsAllotmentReleaseOthersFPP["allotment_class_code"],
+                        drGetViewRecordsAllotmentReleaseOthersFPP["allotment_class_name"],
+                        drGetViewRecordsAllotmentReleaseOthersFPP["gen_ledger_acc_id"],
+                        drGetViewRecordsAllotmentReleaseOthersFPP["gen_ledger_code"],
+                        drGetViewRecordsAllotmentReleaseOthersFPP["account_code"],
+                        drGetViewRecordsAllotmentReleaseOthersFPP["gen_ledger_name"],
+                        });
+                    }
+                }
+
+
+                //Change Font style for the header of Others FPP
+                foreach (DataGridViewRow row in dataGridView.Rows)
+                {
+                    if (row.Cells[4].Value == null)
+                    {
+                        dataGridView.Rows[row.Index].DefaultCellStyle.Font = new Font(DataGridView.DefaultFont, FontStyle.Bold);
+                    }
+                }
+
+                dataGridView.ClearSelection();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        
+        }
+
+        #endregion Obligation Request
 
     }
 }

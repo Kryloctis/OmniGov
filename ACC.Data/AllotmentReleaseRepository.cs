@@ -11,6 +11,7 @@ namespace ACC.Data
     public class AllotmentReleaseRepository : IAllotmentReleaseRepository
     {
         private MySqlGenericCommands _mySqlGenericCommands;
+        private readonly string viewTableName = "view_allotment_release";
         private readonly string tableName = "allotment_release";
 
         public AllotmentReleaseRepository(MySqlGenericCommands mySqlGenericCommands)
@@ -228,5 +229,135 @@ namespace ACC.Data
             }
             return false;
         }
+
+        public DataTable GetViewRecords()
+        {
+            try
+            {
+                string query = $"SELECT " +
+                    $"id, " +
+                    $"aro_no, " +
+                    $"allotment_release_purpose, " +
+                    $"allotment_release_date_issued, " +
+                    $"SUM(allotment_release_amount) AS allotment_release_amount, " +
+                    $"budget_appropriations_id, " +
+                    $"budget_appropriations_year, " +
+                    $"budget_appropriations_amount, " +
+                    $"fund_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"fpp_id, " +
+                    $"fpp_code, " +
+                    $"fpp_name, " +
+                    $"others_fpp_id, " +
+                    $"others_fpp_name, " +
+                    $"allotment_classes_id, " +
+                    $"allotment_code, " +
+                    $"allotment_name, " +
+                    $"gen_ledger_acc_id, " +
+                    $"gen_ledger_code, " +
+                    $"account_code, " +
+                    $"gen_ledger_name " +
+                    $"FROM {viewTableName} " +
+                    $"GROUP BY gen_ledger_acc_id , others_fpp_id , fpp_id , budget_appropriations_year";
+
+                var dtAllotmentClasses = new DataTable();
+                return _mySqlGenericCommands.Fill(query, dtAllotmentClasses);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetViewRecords(int fppId, int? othersFPPId, int fundsId, int allotmentClassId, short year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object [] { "@fpp_id", DbType.Int32, fppId},
+                    new object [] { "@fund_id", DbType.Int32, fundsId},
+                    new object [] { "@allotment_class_id", DbType.Int32, allotmentClassId},
+                    new object [] { "@others_fpp_id", DbType.String, othersFPPId},
+                    new object [] { "@budget_appropriations_year", DbType.Int32, year}
+                };
+
+                string query = $"SELECT " +
+                    $"SUM(allotment_release_amount) AS total_allotment_release_amount, " +
+                    $"budget_appropriations_id, " +
+                    $"budget_appropriations_year, " +
+                    $"budget_appropriations_amount, " +
+                    $"fund_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"fpp_id, " +
+                    $"fpp_code, " +
+                    $"fpp_name, " +
+                    $"others_fpp_id, " +
+                    $"others_fpp_name, " +
+                    $"allotment_class_id, " +
+                    $"allotment_class_code, " +
+                    $"allotment_class_name, " +
+                    $"gen_ledger_acc_id, " +
+                    $"gen_ledger_code, " +
+                    $"account_code, " +
+                    $"gen_ledger_name " +
+                    $"FROM {viewTableName} WHERE fpp_id = @fpp_id AND others_fpp_id <=> @others_fpp_id AND fund_id = @fund_id AND allotment_class_id = @allotment_class_id AND budget_appropriations_year = @budget_appropriations_year " +
+                    $"GROUP BY gen_ledger_acc_id , others_fpp_id , fpp_id , budget_appropriations_year";
+
+                var dtAllotmentClasses = new DataTable();
+                return _mySqlGenericCommands.FillBySearch(query, dtAllotmentClasses, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetFPPRecords()
+        {
+            try
+            {
+                string query = $"SELECT fpp_id, fpp_code, fpp_name FROM {viewTableName} GROUP BY fpp_id;";
+
+                var dtAllotmentClasses = new DataTable();
+                return _mySqlGenericCommands.Fill(query, dtAllotmentClasses);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetOthersFPPRecords(int fppId, int allotmentClassId, int fundId, short year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object [] { "@fpp_id", DbType.Int32, fppId},
+                    new object [] { "@fund_id", DbType.Int32, fundId},
+                    new object [] { "@allotment_class_id", DbType.Int32, allotmentClassId},
+                    new object [] { "@budget_appropriations_year", DbType.Int32, year}
+                };
+
+                string query = $"SELECT DISTINCT" +
+                    $" a.others_fpp_id," +
+                    $" a.others_fpp_name FROM view_allotment_release a " +
+                    $"JOIN " +
+                    $"others_fpp b ON a.others_fpp_id = b.id " +
+                    $"WHERE a.fpp_id = @fpp_id AND a.allotment_class_id = @allotment_class_id AND fund_id = @fund_id AND a.budget_appropriations_year = @budget_appropriations_year";
+
+                var dtAllotmentClasses = new DataTable();
+                return _mySqlGenericCommands.FillBySearch(query, dtAllotmentClasses, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

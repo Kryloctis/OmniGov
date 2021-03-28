@@ -14,7 +14,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecords();
         DataTable GetViewRecordsBySearch(string searchTxt);
         DataTable GetViewRecordsByIds(int fppID, int allotmentClassID, int? othersFPPID, int typeOfFund, int year);
-        DataTable GetViewRecordsFPP();
+        DataTable GetViewRecordsFPPWithBudgetAppropriations();
         DataTable GetExistedOthersFPPrecordsByFPPID(int fppID,int allotment_classes_id, int funds_id, Int16 year);
         DataTable GetYearsBudgetAppropriations();
 

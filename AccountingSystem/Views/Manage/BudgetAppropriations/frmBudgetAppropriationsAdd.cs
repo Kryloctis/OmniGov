@@ -90,9 +90,9 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 short year = Convert.ToInt16(uc.nudYear.Value);
 
                 //Update FPP datagrid, Appropriations datagrid and Combobox Year before reseting user control
-                HelperLoadRecords.FPPDatagridViewRecords(_frmBudgetAppropriations.dgFPP);
-                HelperLoadRecords.YearToolStripCombobox(Factory.BudgetAppropriationsRepository().GetYearsBudgetAppropriations(), _frmBudgetAppropriations.cmbxYear, "year", "year");
-                HelperLoadRecords.BudgetAppropriationsDataGridView(_frmBudgetAppropriations.dgBudgetAppropriations, fppID, allotmentClassID, typeOfFundID, year, _frmBudgetAppropriations.txtTotal);
+                HelperLoadRecords.FPPDgVBudgetAppropriations(_frmBudgetAppropriations.dgFPP);
+                HelperLoadRecords.YearToolStripCmbx(Factory.BudgetAppropriationsRepository().GetYearsBudgetAppropriations(), _frmBudgetAppropriations.cmbxYear, "year", "year");
+                HelperLoadRecords.BudgetAppropriationsDgV(_frmBudgetAppropriations.dgBudgetAppropriations, fppID, allotmentClassID, typeOfFundID, year, _frmBudgetAppropriations.txtTotal);
 
                 //Reset User Control Form
                 uc.ResetForm();
