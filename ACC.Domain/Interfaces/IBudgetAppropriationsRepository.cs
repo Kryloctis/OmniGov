@@ -17,6 +17,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecordsFPPWithBudgetAppropriations();
         DataTable GetExistedOthersFPPrecordsByFPPID(int fppID,int allotment_classes_id, int funds_id, Int16 year);
         DataTable GetYearsBudgetAppropriations();
+        Dictionary<string, string> GetTotalAppropriationBalanceRecord(int budgetAppropirationId);
 
         Dictionary<string, string> GetRecordByIDs(int budgetAppID, int fppID, int? othersFPPID, int allotmentClassID, int genLedgerAccID);
         Dictionary<string, string> GetViewRecordByIDs(int budgetAppID, int fppID, int? othersFPPID, int allotmentClassID, int genLedgerAccID);

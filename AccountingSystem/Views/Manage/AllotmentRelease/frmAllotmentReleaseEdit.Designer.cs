@@ -29,19 +29,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucAllotmentRelease1 = new AccountingSystem.Views.Manage.AllotmentRelease.ucAllotmentRelease();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.ucAllotmentRelease1 = new AccountingSystem.Views.Manage.AllotmentRelease.ucAllotmentRelease();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // ucAllotmentRelease1
-            // 
-            this.ucAllotmentRelease1.Location = new System.Drawing.Point(12, 12);
-            this.ucAllotmentRelease1.Name = "ucAllotmentRelease1";
-            this.ucAllotmentRelease1.Size = new System.Drawing.Size(471, 115);
-            this.ucAllotmentRelease1.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
@@ -50,14 +43,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 132);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 137);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(479, 30);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(439, 30);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(401, 3);
+            this.btnCancel.Location = new System.Drawing.Point(361, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 0;
@@ -67,7 +60,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // btnSave
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
-            this.btnSave.Location = new System.Drawing.Point(320, 3);
+            this.btnSave.Location = new System.Drawing.Point(280, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 1;
@@ -77,6 +70,13 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // ucAllotmentRelease1
+            // 
+            this.ucAllotmentRelease1.Location = new System.Drawing.Point(21, 12);
+            this.ucAllotmentRelease1.Name = "ucAllotmentRelease1";
+            this.ucAllotmentRelease1.Size = new System.Drawing.Size(415, 114);
+            this.ucAllotmentRelease1.TabIndex = 2;
+            // 
             // frmAllotmentReleaseEdit
             // 
             this.AcceptButton = this.btnSave;
@@ -84,9 +84,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(479, 162);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(439, 167);
             this.Controls.Add(this.ucAllotmentRelease1);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
