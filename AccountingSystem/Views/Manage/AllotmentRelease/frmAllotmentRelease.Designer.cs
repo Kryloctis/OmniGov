@@ -32,6 +32,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.lblAppropriationBalance = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.lblOtherFPP = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.lblFPP = new System.Windows.Forms.Label();
@@ -70,8 +72,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblAppropriationBalance = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -147,6 +147,27 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(339, 503);
             this.panel5.TabIndex = 6;
+            // 
+            // lblAppropriationBalance
+            // 
+            this.lblAppropriationBalance.AutoEllipsis = true;
+            this.lblAppropriationBalance.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblAppropriationBalance.Location = new System.Drawing.Point(146, 175);
+            this.lblAppropriationBalance.Margin = new System.Windows.Forms.Padding(3);
+            this.lblAppropriationBalance.Name = "lblAppropriationBalance";
+            this.lblAppropriationBalance.Size = new System.Drawing.Size(187, 15);
+            this.lblAppropriationBalance.TabIndex = 11;
+            this.lblAppropriationBalance.Text = "-";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 175);
+            this.label3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(48, 15);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Balance";
             // 
             // lblOtherFPP
             // 
@@ -508,27 +529,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             this.lblUpdatedAt.Name = "lblUpdatedAt";
             this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
-            // 
-            // lblAppropriationBalance
-            // 
-            this.lblAppropriationBalance.AutoEllipsis = true;
-            this.lblAppropriationBalance.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblAppropriationBalance.Location = new System.Drawing.Point(146, 175);
-            this.lblAppropriationBalance.Margin = new System.Windows.Forms.Padding(3);
-            this.lblAppropriationBalance.Name = "lblAppropriationBalance";
-            this.lblAppropriationBalance.Size = new System.Drawing.Size(187, 15);
-            this.lblAppropriationBalance.TabIndex = 11;
-            this.lblAppropriationBalance.Text = "-";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 175);
-            this.label3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(125, 15);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Appropriation Balance";
             // 
             // frmAllotmentRelease
             // 

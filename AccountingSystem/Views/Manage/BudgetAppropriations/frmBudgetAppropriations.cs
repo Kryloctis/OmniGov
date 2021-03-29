@@ -98,7 +98,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             var allotmentClassesId = Convert.ToInt32(dgBudgetAppropriations.SelectedCells[3].Value);
             var genLedgerAccId = Convert.ToInt32(dgBudgetAppropriations.SelectedCells[4].Value);
 
-            frmAllotmentReleaseForm.budgetAppropriationID =budgetAppId;
+            frmAllotmentReleaseForm.budgetAppropriationID = budgetAppId;
             frmAllotmentReleaseForm.fppID = fppId;
             frmAllotmentReleaseForm.othersFPPID = othersFPPId;
             frmAllotmentReleaseForm.allotmentClassesID = allotmentClassesId;

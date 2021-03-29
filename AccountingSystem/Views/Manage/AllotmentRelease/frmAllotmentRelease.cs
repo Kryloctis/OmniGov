@@ -68,6 +68,24 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                              select Convert.ToDecimal(row.Cells[5].FormattedValue)).Sum().ToString("N2");
         }
 
+        internal void LoadAppropriationDetails() 
+        {
+            HelperLoadRecords.LoadBudgetAppropriationDetailsLabels(
+                 budgetAppropriationID,
+                 fppID, othersFPPID,
+                 allotmentClassesID,
+                 generalLedgerAccID,
+                 lblFPPCode,
+                 lblFPP,
+                 lblOtherFPP,
+                 lblAccountCode,
+                 lblAllotmentClass,
+                 lblGenLedgerAcc,
+                 lblYear,
+                 lblAmount,
+                 lblAppropriationBalance);
+        }
+
         private void btnAdd_Click(object sender, EventArgs e) 
         {
             var frmAllotmentReleaseAddForm = new frmAllotmentReleaseAdd(this);
@@ -83,6 +101,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             var uc = frmAllotmentReleaseEditForm.ucAllotmentRelease1;
 
             uc.allotmentReleaseID = Convert.ToInt32(dgAllotmentRelease.SelectedCells[0].Value);
+            uc.budgetAppropriationID = budgetAppropriationID;
+            uc.currentAllotmentReleaseAmount = Convert.ToDecimal(dgAllotmentRelease.SelectedCells[5].Value);
             frmAllotmentReleaseEditForm.ShowDialog();
         }
 
@@ -127,21 +147,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void frmAllotmentRelease_Load(object sender, EventArgs e)
         {
-            HelperLoadRecords.LoadBudgetAppropriationDetailsLabels(
-              budgetAppropriationID,
-              fppID, othersFPPID,
-              allotmentClassesID,
-              generalLedgerAccID,
-              lblFPPCode,
-              lblFPP,
-              lblOtherFPP,
-              lblAccountCode,
-              lblAllotmentClass,
-              lblGenLedgerAcc,
-              lblYear,
-              lblAmount,
-              lblAppropriationBalance);
-
+            LoadAppropriationDetails();
             LoadAllotmentReleaseRecords();
         }
 

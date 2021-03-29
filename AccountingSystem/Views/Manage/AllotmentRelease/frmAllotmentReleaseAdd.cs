@@ -26,8 +26,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             try
             {
                 var uc = ucAllotmentRelease1;
+
                 //Validation
-                if (!uc.ValidateChildren()) 
+                if (!uc.ValidateChildren() ) 
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
@@ -61,6 +62,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 var uc = ucAllotmentRelease1;
                 uc.ResetForm();
                 Helper.MessageBoxSuccess("Allotment Release has been saved.");
+                _frmAllotmentRelease.LoadAppropriationDetails();
                 _frmAllotmentRelease.LoadAllotmentReleaseRecords();
             }
         }

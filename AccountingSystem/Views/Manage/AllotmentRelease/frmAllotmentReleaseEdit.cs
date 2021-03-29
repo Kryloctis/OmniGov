@@ -86,6 +86,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 var uc = ucAllotmentRelease1;
                 uc.ResetForm();
                 Helper.MessageBoxSuccess("Allotment Release has been updated");
+                _frmAllotmentRelease.LoadAppropriationDetails();
                 _frmAllotmentRelease.LoadAllotmentReleaseRecords();
                 Close();
             }

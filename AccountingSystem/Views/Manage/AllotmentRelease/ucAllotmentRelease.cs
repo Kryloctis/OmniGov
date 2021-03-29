@@ -1,5 +1,4 @@
-﻿using ACC.Domain.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +14,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
     {
         internal int allotmentReleaseID = 0;
         internal int budgetAppropriationID = 0;
+        internal decimal currentAllotmentReleaseAmount = 0;
 
         public ucAllotmentRelease()
         {
@@ -23,16 +23,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal string GetFormErrors()
         {
-            var totalAppropriationBalance = Factory.BudgetAppropriationsRepository().GetTotalAppropriationBalanceRecord(budgetAppropriationID);
 
-            var errorArray = new string[4];
+
+            var errorArray = new string[3];
             errorArray[0] = epARONo.GetError(txtAllotmentReleaseNo);
             errorArray[1] = epPurpose.GetError(txtPurpose);
             errorArray[2] = epAmount.GetError(nudAmount);
-            errorArray[3] = nudAmount.Value > Convert.ToDecimal(totalAppropriationBalance["appropriation_balance"])? "Insuficient Appropriation Balance.": string.Empty;
 
-            IError _errors = Factory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -44,6 +42,26 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         }
 
         #region Validations
+        private void AmountLogic(ErrorProvider ep, NumericUpDown numericUpDown, CancelEventArgs e) 
+        {
+            var totalAppropriationBalance = Factory.BudgetAppropriationsRepository().GetTotalAppropriationBalanceRecord(budgetAppropriationID);
+            decimal appropriationBalance = Convert.ToDecimal(totalAppropriationBalance["appropriation_balance"]);
+
+            if (allotmentReleaseID == 0)
+            {
+                string errorText = numericUpDown.Value > appropriationBalance ? "The amount you entered exceeds the appropriate balance." : string.Empty;
+                bool errorBoolean = numericUpDown.Value > appropriationBalance ? true : false;
+                ep.SetError(nudAmount, errorText);
+                e.Cancel = errorBoolean;
+            }
+            else
+            {
+                string errorText = numericUpDown.Value > appropriationBalance + currentAllotmentReleaseAmount ? "The amount you entered exceeds the appropriate balance." : string.Empty;
+                bool errorBoolean = numericUpDown.Value > appropriationBalance + currentAllotmentReleaseAmount ? true : false;
+                ep.SetError(nudAmount, errorText);
+                e.Cancel = errorBoolean;
+            }
+        }
 
         private void txtAllotmentReleaseNo_Validating(object sender, CancelEventArgs e)
         {
@@ -78,7 +96,19 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
+            if (string.IsNullOrEmpty(nudAmount.Text))
+            {
+                e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
+            }
+            else if (nudAmount.Value == 0)
+            {
+                epAmount.SetError(nudAmount, "Enter a valuable amount.");
+                e.Cancel = true;
+            }
+            else 
+            {
+                AmountLogic(epAmount, nudAmount, e);
+            }
         }
         private void nudAmount_Validated(object sender, EventArgs e)
         {
