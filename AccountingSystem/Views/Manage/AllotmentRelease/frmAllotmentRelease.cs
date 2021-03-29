@@ -51,13 +51,13 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 var allotmentReleaseNum = txtSearch.Text.Trim();
                 DataTable GetRecordsByBudgetAppropriationID = Factory.AllotmentReleaseRepository().GetRecordsByBudgetAppropriationID(budgetAppropriationID, allotmentReleaseNum);
 
-                HelperLoadRecords.dgAllotmentRelease(GetRecordsByBudgetAppropriationID, dgAllotmentRelease, budgetAppropriationID);
+                HelperLoadRecords.AllotmentReleaseDgV(GetRecordsByBudgetAppropriationID, dgAllotmentRelease, budgetAppropriationID);
             }
             else 
             {
                 DataTable GetRecordsByBudgetAppropriationID = Factory.AllotmentReleaseRepository().GetRecordsByBudgetAppropriationID(budgetAppropriationID);
 
-                HelperLoadRecords.dgAllotmentRelease(GetRecordsByBudgetAppropriationID, dgAllotmentRelease, budgetAppropriationID);
+                HelperLoadRecords.AllotmentReleaseDgV(GetRecordsByBudgetAppropriationID, dgAllotmentRelease, budgetAppropriationID);
             }
          
             lblRecordCount.Text = dgAllotmentRelease.Rows.Count.ToString();
@@ -71,12 +71,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private void btnAdd_Click(object sender, EventArgs e) 
         {
             var frmAllotmentReleaseAddForm = new frmAllotmentReleaseAdd(this);
-
             var uc = frmAllotmentReleaseAddForm.ucAllotmentRelease1;
 
-            MessageBox.Show(budgetAppropriationID.ToString());
             uc.budgetAppropriationID = budgetAppropriationID;
-
             frmAllotmentReleaseAddForm.ShowDialog();
         }
 

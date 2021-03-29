@@ -53,7 +53,11 @@ namespace AccountingSystem
 
         //A part of Budget System
         public static IBudgetAppropriationsRepository BudgetAppropriationsRepository() => new BudgetAppropriationsRepository(new MySqlGenericCommands());
+
         public static IAllotmentReleaseRepository AllotmentReleaseRepository() => new AllotmentReleaseRepository(new MySqlGenericCommands());
+
+        public static IObligationRequestRepository ObligationRequestRepository() => new ObligationRequestRepository(new MySqlGenericCommands());
+
 
         public static IError CreateErrors(Array errors) => new Error(errors);
     }

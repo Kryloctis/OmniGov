@@ -12,6 +12,7 @@ using AccountingSystem.Views.Transactions.JEV;
 using AccountingSystem.Views.Reports.Journals;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
 using AccountingSystem.Views.Manage.AllotmentRelease;
+using AccountingSystem.Views.Transactions.ObligationRequest;
 
 namespace AccountingSystem
 {
@@ -23,6 +24,7 @@ namespace AccountingSystem
             menuReportGJ.Click += new EventHandler(MenuReportGeneralJournal_Click);
             menuReportCDJ.Click += new EventHandler(MenuReportCashDisbursementsJournal_Click);
             menuReportCkDJ.Click += new EventHandler(MenuReportCheckDisbursementsJournal_Click);
+            menuObligationRequest.Click += new EventHandler(MenuObligationRequest_Click);
             menuReportCRJ.Click += new EventHandler(MenuReportCashReceiptsJournal_Click);
             menuReportPRJ.Click += new EventHandler(MenuReportProcurementsReceivedJournal_Click);
             menuReportADADJ.Click += new EventHandler(MenuReportADADisbursementsJournal_Click);
@@ -102,14 +104,20 @@ namespace AccountingSystem
             _ = new frmCheckDisbursementsJournalReport().ShowDialog();
         }
 
+        private void MenuObligationRequest_Click(object sender, EventArgs e) 
+        {
+           var frmObligationRequest = new frmObligationRequest();
+           frmObligationRequest.ShowDialog();
+        }
+        
         private void MenuReportCashReceiptsJournal_Click(object sender, EventArgs e)
         {
             _ = new frmCashReceiptsJournalReport().ShowDialog();
         }
-
         private void MenuReportProcurementsReceivedJournal_Click(object sender, EventArgs e)
         {
             _ = new frmProcurementsReceivedJournalReport().ShowDialog();
+
         }
 
         private void MenuReportADADisbursementsJournal_Click(object sender, EventArgs e)
