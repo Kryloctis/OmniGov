@@ -25,6 +25,8 @@ namespace AccountingSystem
             menuReportCDJ.Click += new EventHandler(MenuReportCashDisbursementsJournal_Click);
             menuReportCkDJ.Click += new EventHandler(MenuReportCheckDisbursementsJournal_Click);
             menuObligationRequest.Click += new EventHandler(MenuObligationRequest_Click);
+            menuReportCRJ.Click += new EventHandler(MenuReportCashReceiptsJournal_Click);
+            menuReportPRJ.Click += new EventHandler(MenuReportProcurementsReceivedJournal_Click);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -105,6 +107,16 @@ namespace AccountingSystem
         {
            var frmObligationRequest = new frmObligationRequest();
            frmObligationRequest.ShowDialog();
+        }
+        
+        private void MenuReportCashReceiptsJournal_Click(object sender, EventArgs e)
+        {
+            _ = new frmCashReceiptsJournalReport().ShowDialog();
+        }
+        private void MenuReportProcurementsReceivedJournal_Click(object sender, EventArgs e)
+        {
+            _ = new frmProcurementsReceivedJournalReport().ShowDialog();
+
         }
 
     }

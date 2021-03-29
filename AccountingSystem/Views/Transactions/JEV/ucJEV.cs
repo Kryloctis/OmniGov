@@ -41,6 +41,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             txtExplanation.Clear();
 
             dgAccounts.Rows.Clear();
+            txtDebitTotal.Clear();
+            txtCreditTotal.Clear();
         }
 
         internal void LoadFunds()
