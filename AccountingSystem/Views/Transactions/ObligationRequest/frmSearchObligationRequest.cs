@@ -48,6 +48,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
                 _frmObligationRequest.btnCancel.Enabled = true;
                 _frmObligationRequest.btnDelete.Enabled = true;
+                _frmObligationRequest.btnSave.Text = "Update";
             }
             catch (Exception ex)
             {

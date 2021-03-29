@@ -116,7 +116,29 @@ namespace ACC.Data
 
         public bool Update(ObligationRequestModel entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, entity.ID },
+                    new object[] { "@obligation_no", DbType.String, entity.ObligationNo },
+                    new object[] { "@obligation_amount", DbType.Decimal, entity.ObligationAmount },
+                    new object[] { "@updated_by", DbType.Int32, entity.UpdatedBy }
+                };
+
+                string query = $"UPDATE {tableName} " +
+                    $"SET " +
+                    $"obligation_no = @obligation_no, " +
+                    $"obligation_amount = @obligation_amount, " +
+                    $"updated_by = @updated_by" +
+                    $" WHERE id = @id";
+
+                return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         #region Validations

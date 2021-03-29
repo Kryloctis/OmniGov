@@ -63,11 +63,22 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void btnSave_Click(object sender, EventArgs e) 
         {
-            if (SaveData()) 
+            if (SaveData())
             {
                 var uc = ucObligationRequestNew1;
-                uc.ResetFields();
-                Helper.MessageBoxSuccess("Obligation Request has been saved.");
+                if (uc.isEdit == false)
+                {
+                    uc.ResetFields();
+                    Helper.MessageBoxSuccess("Obligation Request has been saved.");
+                }
+                else
+                {
+                    btnCancel.Enabled = false;
+                    btnDelete.Enabled = false;
+                    btnSave.Text = "Save";
+                    uc.ResetForm();
+                    Helper.MessageBoxSuccess("Obligation Request has been updated.");
+                }
             }
         }
 
@@ -77,6 +88,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
             btnCancel.Enabled = false;
             btnDelete.Enabled = false;
+            btnSave.Text = "Save";
 
             uc.ResetForm();
         }
@@ -101,7 +113,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     uc.ResetForm();
                     btnCancel.Enabled = false;
                     btnDelete.Enabled = false;
-
+                    btnSave.Text = "Save";
                 }
             }
             catch (Exception ex) 
