@@ -25,6 +25,7 @@ namespace AccountingSystem
             menuReportCkDJ.Click += new EventHandler(MenuReportCheckDisbursementsJournal_Click);
             menuReportCRJ.Click += new EventHandler(MenuReportCashReceiptsJournal_Click);
             menuReportPRJ.Click += new EventHandler(MenuReportProcurementsReceivedJournal_Click);
+            menuReportADADJ.Click += new EventHandler(MenuReportADADisbursementsJournal_Click);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -109,6 +110,11 @@ namespace AccountingSystem
         private void MenuReportProcurementsReceivedJournal_Click(object sender, EventArgs e)
         {
             _ = new frmProcurementsReceivedJournalReport().ShowDialog();
+        }
+
+        private void MenuReportADADisbursementsJournal_Click(object sender, EventArgs e)
+        {
+            _ = new frmADADisbursementsJournalReport().ShowDialog();
         }
 
     }

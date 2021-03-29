@@ -42,6 +42,36 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
+        public Dictionary<string, string> GetRecordByJevID(int jevId)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@jev_id", DbType.Int32, jevId},
+                };
+
+                string query = $"SELECT id, ada_no FROM {tableName} WHERE jev_id = @jev_id";
+
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    record.Add("id", reader.Rows[0][0].ToString());
+                    record.Add("ada_no", reader.Rows[0][1].ToString());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
+        }
+
         public bool IdExist(int id)
         {
             throw new NotImplementedException();

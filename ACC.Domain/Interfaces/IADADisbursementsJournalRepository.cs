@@ -7,6 +7,6 @@ namespace ACC.Domain.Interfaces
 {
     public interface IADADisbursementsJournalRepository : IRepository<ADADisbursementsJournalModel>
     {
-
+        Dictionary<string, string> GetRecordByJevID(int jevId);
     }
 }

@@ -1,15 +1,16 @@
-﻿using Microsoft.Reporting.WinForms;
-using System;
-using System.Data;
+﻿using System;
 using System.Windows.Forms;
+using Microsoft.Reporting.WinForms;
+using System.Data;
+
 
 namespace AccountingSystem.Views.Reports.Journals
 {
-    public partial class frmProcurementsReceivedJournalReport : Form
+    public partial class frmADADisbursementsJournalReport : Form
     {
         private readonly ReportViewer reportViewer;
 
-        public frmProcurementsReceivedJournalReport()
+        public frmADADisbursementsJournalReport()
         {
             InitializeComponent();
             reportViewer = new ReportViewer();
@@ -24,43 +25,46 @@ namespace AccountingSystem.Views.Reports.Journals
             cmbFunds.DisplayMember = "fund_name";
         }
 
-        private DataTable ProcurementsReceivedJournalDataTable()
+        private DataTable AuthorityToDebitAccountDisbursementsJournalDataTable()
         {
             byte fundId = (byte)cmbFunds.SelectedValue;
-            byte journalId = 3;
+            byte journalId = 6;
             var dateYearMonth = dtpMonth.Value;
 
-            var dtProcurementsReceivedJournal = new dsLFS.ProcurementsReceivedJournalDataTable();
-            var dtProcurementsReceivedFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundId, journalId, dateYearMonth);
+            var dtADADisbursementsJournal = new dsLFS.AuthorityToDebitAccountDisbursementsJournalDataTable();
+            var dtADADisbursementsFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundId, journalId, dateYearMonth);
 
+            int jevId;
             string jevNo;
-            string particulars;
 
-            foreach (DataRow item in dtProcurementsReceivedFromDB.Rows)
+            var aDADisbursementsJournalRepository = Factory.ADADisbursementsJournalRepository();
+            foreach (DataRow item in dtADADisbursementsFromDB.Rows)
             {
+                jevId = Convert.ToInt32(item["jev_id"]);
                 jevNo = item["jev_no"].ToString();
-                particulars = item["explanation"].ToString();
 
-                DataRow row = dtProcurementsReceivedJournal.NewRow();
+                var aDADDisbursementsDict = aDADisbursementsJournalRepository.GetRecordByJevID(jevId);
+                DataRow row = dtADADisbursementsJournal.NewRow();
                 row["date"] = item["date_entry"];
-                row["ref"] = jevNo;
-                row["particulars"] = particulars;
+                row["ada_no"] = aDADDisbursementsDict["ada_no"];
+                row["ref_no"] = jevNo;
+                row["particulars"] = item["explanation"];
 
                 if (Convert.ToBoolean(item["is_debit"]))
                 {
                     row["account_code_debit"] = item["account_code"];
-                    row["debit"] = item["amount"];
+                    row["amount_debit"] = item["amount"];
                 }
                 else
                 {
                     row["account_code_credit"] = item["account_code"];
-                    row["credit"] = item["amount"];
+                    row["amount_credit"] = item["amount"];
                 }
 
-                dtProcurementsReceivedJournal.Rows.Add(row);
+                dtADADisbursementsJournal.Rows.Add(row);
             }
 
-            return dtProcurementsReceivedJournal;
+            return dtADADisbursementsJournal;
         }
 
         private void LoadReport(LocalReport report)
@@ -78,10 +82,10 @@ namespace AccountingSystem.Views.Reports.Journals
                     new ReportParameter("paramSignatory", signatory)
                 };
 
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\procurements-received-journal.rdlc";
+                report.ReportPath = $"{Application.StartupPath}\\Reports\\authority-to-debit-account-disbursements.rdlc";
                 report.DataSources.Clear();
 
-                report.DataSources.Add(new ReportDataSource("ProcurementsReceivedJournal", ProcurementsReceivedJournalDataTable()));
+                report.DataSources.Add(new ReportDataSource("AuthorityToDebitAccountDisbursementsJournal", AuthorityToDebitAccountDisbursementsJournalDataTable()));
                 report.SetParameters(parameters);
 
             }
@@ -91,7 +95,7 @@ namespace AccountingSystem.Views.Reports.Journals
             }
         }
 
-        private void frmProcurementsReceivedJournalReport_Load(object sender, EventArgs e)
+        private void frmADADisbursementsJournalReport_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
             LoadFunds();

@@ -211,38 +211,38 @@ namespace AccountingSystem
             // menuReportGJ
             // 
             this.menuReportGJ.Name = "menuReportGJ";
-            this.menuReportGJ.Size = new System.Drawing.Size(329, 22);
+            this.menuReportGJ.Size = new System.Drawing.Size(348, 22);
             this.menuReportGJ.Text = "General Journal...";
             // 
             // menuReportCRJ
             // 
             this.menuReportCRJ.Name = "menuReportCRJ";
-            this.menuReportCRJ.Size = new System.Drawing.Size(329, 22);
+            this.menuReportCRJ.Size = new System.Drawing.Size(348, 22);
             this.menuReportCRJ.Text = "Cash Receipts Journal...";
             // 
             // menuReportPRJ
             // 
             this.menuReportPRJ.Name = "menuReportPRJ";
-            this.menuReportPRJ.Size = new System.Drawing.Size(329, 22);
+            this.menuReportPRJ.Size = new System.Drawing.Size(348, 22);
             this.menuReportPRJ.Text = "Procurement Received Journal...";
             // 
             // menuReportCDJ
             // 
             this.menuReportCDJ.Name = "menuReportCDJ";
-            this.menuReportCDJ.Size = new System.Drawing.Size(329, 22);
+            this.menuReportCDJ.Size = new System.Drawing.Size(348, 22);
             this.menuReportCDJ.Text = "Cash Disbursements Journal...";
             // 
             // menuReportCkDJ
             // 
             this.menuReportCkDJ.Name = "menuReportCkDJ";
-            this.menuReportCkDJ.Size = new System.Drawing.Size(329, 22);
+            this.menuReportCkDJ.Size = new System.Drawing.Size(348, 22);
             this.menuReportCkDJ.Text = "Check Disbursements Journal...";
             // 
             // menuReportADADJ
             // 
             this.menuReportADADJ.Name = "menuReportADADJ";
-            this.menuReportADADJ.Size = new System.Drawing.Size(329, 22);
-            this.menuReportADADJ.Text = "Advice to Debit Account Disbursement Journal...";
+            this.menuReportADADJ.Size = new System.Drawing.Size(348, 22);
+            this.menuReportADADJ.Text = "Authority to Debit Account Disbursements Journal...";
             // 
             // label1
             // 
