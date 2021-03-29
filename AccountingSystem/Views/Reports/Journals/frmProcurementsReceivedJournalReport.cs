@@ -24,24 +24,24 @@ namespace AccountingSystem.Views.Reports.Journals
             cmbFunds.DisplayMember = "fund_name";
         }
 
-        private DataTable ProcurementsReceivedJournalDataTable()
+        private DataTable AuthorityToDebitAccountDisbursementsJournalDataTable()
         {
             byte fundId = (byte)cmbFunds.SelectedValue;
-            byte journalId = 3;
+            byte journalId = 6;
             var dateYearMonth = dtpMonth.Value;
 
-            var dtProcurementsReceivedJournal = new dsLFS.ProcurementsReceivedJournalDataTable();
-            var dtProcurementsReceivedFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundId, journalId, dateYearMonth);
+            var authorityToDebitAccountDisbursementsJournal = new dsLFS.AuthorityToDebitAccountDisbursementsJournalDataTable();
+            var dtAuthorityToDebitAccountDisbursementsJournalFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundId, journalId, dateYearMonth);
 
             string jevNo;
             string particulars;
 
-            foreach (DataRow item in dtProcurementsReceivedFromDB.Rows)
+            foreach (DataRow item in dtAuthorityToDebitAccountDisbursementsJournalFromDB.Rows)
             {
                 jevNo = item["jev_no"].ToString();
                 particulars = item["explanation"].ToString();
 
-                DataRow row = dtProcurementsReceivedJournal.NewRow();
+                DataRow row = authorityToDebitAccountDisbursementsJournal.NewRow();
                 row["date"] = item["date_entry"];
                 row["ref"] = jevNo;
                 row["particulars"] = particulars;
@@ -57,10 +57,10 @@ namespace AccountingSystem.Views.Reports.Journals
                     row["credit"] = item["amount"];
                 }
 
-                dtProcurementsReceivedJournal.Rows.Add(row);
+                authorityToDebitAccountDisbursementsJournal.Rows.Add(row);
             }
 
-            return dtProcurementsReceivedJournal;
+            return authorityToDebitAccountDisbursementsJournal;
         }
 
         private void LoadReport(LocalReport report)
@@ -78,10 +78,10 @@ namespace AccountingSystem.Views.Reports.Journals
                     new ReportParameter("paramSignatory", signatory)
                 };
 
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\procurements-received-journal.rdlc";
+                report.ReportPath = $"{Application.StartupPath}\\Reports\\authority-to-debit-account-disbursements.rdlc";
                 report.DataSources.Clear();
 
-                report.DataSources.Add(new ReportDataSource("ProcurementsReceivedJournal", ProcurementsReceivedJournalDataTable()));
+                report.DataSources.Add(new ReportDataSource("AuthorityToDebitAccountDisbursementsJournal", AuthorityToDebitAccountDisbursementsJournalDataTable()));
                 report.SetParameters(parameters);
 
             }

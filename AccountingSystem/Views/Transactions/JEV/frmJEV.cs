@@ -68,7 +68,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         return InsertCheckDisbursementJournal(user, uc);
 
                     case "Advice to Debit Account Disbursement Journal":
-                        break;
+                        return InsertADADisbursementsJournal(user, uc);
                 }
             }
             catch (Exception ex)
@@ -166,6 +166,18 @@ namespace AccountingSystem.Views.Transactions.JEV
             };
 
             return Factory.JEVRepository().InsertWithCashReceipts(jevModel, JevAcountsModelList(), cashReceiptsJournalModel);
+        }
+
+        private bool InsertADADisbursementsJournal(Dictionary<string, string> user, ucJEV uc)
+        {
+            JEVModel jevModel = ParseJEVModelData(user, uc);
+
+            var aDADisbursementsJournalModel = new ADADisbursementsJournalModel()
+            {
+                ADANumber = uc.txtRefNo.Text.Trim()
+            };
+
+            return Factory.JEVRepository().InsertWithADADisbursements(jevModel, JevAcountsModelList(), aDADisbursementsJournalModel);
         }
 
         private bool UpdateJournal(Dictionary<string, string> user, ucJEV uc)

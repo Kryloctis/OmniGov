@@ -13,6 +13,8 @@ namespace ACC.Domain.Interfaces
 
         bool UpdateWithCashReceipts(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, CashReceiptsJournalModel cashReceiptsJournalModel);
 
+        bool InsertWithADADisbursements(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, ADADisbursementsJournalModel aDADisbursementsJournalModel);
+
         bool Insert(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList);
 
         bool Update(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList);
