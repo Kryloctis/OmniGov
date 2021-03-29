@@ -381,6 +381,35 @@ namespace ACC.Data
             }
         }
 
+        public Dictionary<string, string> GetTotalAppropriationBalanceRecord(int budgetAppropirationId)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                   new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropirationId},
+                };
+                string query = $"SELECT appropriation_balance FROM {viewTableName} WHERE budget_appropriations_id = @budget_appropriations_id";
+
+                using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("appropriation_balance", item[0].ToString());
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return record;
+        }
         #endregion Validations
     }
 }

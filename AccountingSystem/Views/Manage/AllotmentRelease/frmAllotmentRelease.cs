@@ -13,11 +13,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
     public partial class frmAllotmentRelease : Form
     {
-        internal int budgetAppropriationID;
-        internal int fppID;
-        internal int? othersFPPID;
-        internal int allotmentClassesID;
-        internal int generalLedgerAccID;
+        internal int budgetAppropriationID = 0;
+        internal int fppID = 0;
+        internal int? othersFPPID = null;
+        internal int allotmentClassesID = 0;
+        internal int generalLedgerAccID = 0;
 
         public frmAllotmentRelease()
         {

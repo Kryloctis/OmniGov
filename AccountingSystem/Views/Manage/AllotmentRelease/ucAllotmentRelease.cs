@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,12 +23,16 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[3];
+            var totalAppropriationBalance = Factory.BudgetAppropriationsRepository().GetTotalAppropriationBalanceRecord(budgetAppropriationID);
+
+            var errorArray = new string[4];
             errorArray[0] = epARONo.GetError(txtAllotmentReleaseNo);
             errorArray[1] = epPurpose.GetError(txtPurpose);
             errorArray[2] = epAmount.GetError(nudAmount);
+            errorArray[3] = nudAmount.Value > Convert.ToDecimal(totalAppropriationBalance["appropriation_balance"])? "Insuficient Appropriation Balance.": string.Empty;
 
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+            IError _errors = Factory.CreateErrors(errorArray);
+            return _errors.GenerateErrorMessage();
         }
 
         internal void ResetForm()
