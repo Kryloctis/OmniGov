@@ -327,7 +327,7 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetViewRecordsFPP()
+        public DataTable GetViewRecordsFPPWithBudgetAppropriations()
         {
             try
             {
@@ -346,7 +346,6 @@ namespace ACC.Data
         {
             try
             {
-
                 var parameters = new object[][]
                 {
                     new object[] { "@fpp_id", DbType.Int32, fppID },

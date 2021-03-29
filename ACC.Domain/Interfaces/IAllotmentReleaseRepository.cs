@@ -10,6 +10,11 @@ namespace ACC.Domain.Interfaces
     {
         DataTable GetRecordsByBudgetAppropriationID(int budgetAppropriationID);
         DataTable GetRecordsByBudgetAppropriationID(int budgetAppropriationID, string allotmentReleaseNum);
+        DataTable GetViewRecords();
+        DataTable GetViewRecords(int fppId, int? othersFPPId, int fundsId, int allotmentClassId, Int16 year);
+        DataTable GetFPPRecords();
+        DataTable GetOthersFPPRecords(int fppId, int allotmentClassId, int fundId, Int16 year);
+
 
         bool allotmentReleaseNumExist(string alltomentReleaseNum);
         bool allotmentReleaseNumExist(int id , string alltomentReleaseNum);

@@ -158,6 +158,16 @@ namespace AccountingSystem
             return false;
         }
 
+        public static bool ShowMaskedTextboxError(ErrorProvider ep, MaskedTextBox maskedTextBox, string fieldName)
+        {
+            if (!maskedTextBox.MaskCompleted)
+            {
+                ep.SetError(maskedTextBox, $"{fieldName} is required");
+                return true;
+            }
+            return false;
+        }
+
         public static void ClearErrorNumericUpDown(ErrorProvider ep, NumericUpDown numUpDown)
         {
             ep.SetError(numUpDown, string.Empty);
@@ -187,6 +197,12 @@ namespace AccountingSystem
         {
             ep.SetError(dgView, string.Empty);
         }
+
+        public static void ClearMaskedTextboxError(ErrorProvider ep, MaskedTextBox maskedTextBox)
+        {
+            ep.SetError(maskedTextBox, string.Empty);
+        }
+
 
         #endregion
 
