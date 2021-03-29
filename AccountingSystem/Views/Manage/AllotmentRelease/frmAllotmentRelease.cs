@@ -139,7 +139,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
               lblAllotmentClass,
               lblGenLedgerAcc,
               lblYear,
-              lblAmount);
+              lblAmount,
+              lblAppropriationBalance);
 
             LoadAllotmentReleaseRecords();
         }
