@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
 
             var errorArray = new string[3];
-            errorArray[0] = epARONo.GetError(txtAllotmentReleaseNo);
+            errorArray[0] = epARONo.GetError(mskTxtAroNo);
             errorArray[1] = epPurpose.GetError(txtPurpose);
             errorArray[2] = epAmount.GetError(nudAmount);
 
@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal void ResetForm()
         {
-            txtAllotmentReleaseNo.Clear();
+            mskTxtAroNo.Clear();
             txtPurpose.Clear();
             dtDateIssued.Value = DateTime.Now;
             nudAmount.Value = 0;
@@ -61,28 +61,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 ep.SetError(nudAmount, errorText);
                 e.Cancel = errorBoolean;
             }
-        }
-
-        private void txtAllotmentReleaseNo_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epARONo, txtAllotmentReleaseNo, "Allotment Release No.");
-
-            bool itemNameExist;
-
-            if (allotmentReleaseID == 0)
-                itemNameExist = Factory.AllotmentReleaseRepository().allotmentReleaseNumExist(txtAllotmentReleaseNo.Text.Trim());
-            else
-                itemNameExist = Factory.AllotmentReleaseRepository().allotmentReleaseNumExist(allotmentReleaseID, txtAllotmentReleaseNo.Text.Trim());
-
-            if (itemNameExist)
-            {
-                epARONo.SetError(txtAllotmentReleaseNo, $"The Allotment Release No. You entered, \nIs already exist in your record.");
-                e.Cancel = true;
-            }
-        }
-        private void txtAllotmentReleaseNo_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epARONo, txtAllotmentReleaseNo);
         }
 
         private void txtPurpose_Validating(object sender, CancelEventArgs e)
@@ -113,6 +91,28 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private void nudAmount_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
+        }
+
+        private void mskTxtAroNo_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowMaskedTextboxError(epARONo, mskTxtAroNo, "Allotment Release No.");
+
+            bool itemNameExist;
+
+            if (allotmentReleaseID == 0)
+                itemNameExist = Factory.AllotmentReleaseRepository().allotmentReleaseNumExist(mskTxtAroNo.Text.Trim());
+            else
+                itemNameExist = Factory.AllotmentReleaseRepository().allotmentReleaseNumExist(allotmentReleaseID, mskTxtAroNo.Text.Trim());
+
+            if (itemNameExist)
+            {
+                epARONo.SetError(mskTxtAroNo, $"The Allotment Release No. You entered, \nIs already exist in your record.");
+                e.Cancel = true;
+            }
+        }
+        private void mskTxtAroNo_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearMaskedTextboxError(epARONo, mskTxtAroNo);
         }
 
         #endregion Validations

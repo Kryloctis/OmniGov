@@ -39,7 +39,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 var allotmentReleaseModel = new AllotmentReleaseModel()
                 {
                     BudgetAppropriationsID = uc.budgetAppropriationID,
-                    ARONumber = uc.txtAllotmentReleaseNo.Text.Trim(),
+                    ARONumber = uc.mskTxtAroNo.Text.Trim(),
                     Purpose = uc.txtPurpose.Text.Trim(),
                     DateIssued = uc.dtDateIssued.Value,
                     amount = uc.nudAmount.Value,
