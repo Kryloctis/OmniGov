@@ -13,12 +13,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 {
     public partial class ucObligationRequest : UserControl
     {
+        internal bool isEdit = false;
         internal int obligationId = 0;
         internal int fundId = 0;
         internal int fppId = 0;
         internal int? othersFPPId = null;
         internal int allotmentClassId = 0;
         internal int accountId = 0;
+        internal string obligationNo = string.Empty;
 
         public ucObligationRequest()
         {
@@ -36,7 +38,34 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return _errors.GenerateErrorMessage();
         }
 
-        internal void ResetForm() 
+        internal void ResetForm()
+        {
+            isEdit = false;
+            obligationId = 0;
+            fundId = 0;
+            fppId = 0;
+            othersFPPId = null;
+            allotmentClassId = 0;
+            accountId = 0;
+            obligationNo = string.Empty;
+            lnklblAllotmentRelease.Enabled = true;
+
+            lblTypeofFund.Text = "-";
+            lblFPPCode.Text = "-";
+            lblFPPName.Text = "-";
+            lblOtherFPP.Text = "-";
+            lblAllotmentClass.Text = "-";
+            lblAccount.Text = "-";
+            lblBalance.Text = "-";
+
+            mkTxtObligationNum.Clear();
+            nudAmount.Value = 0;
+
+            epAmount.SetError(nudAmount, string.Empty);
+            epObligationNum.SetError(mkTxtObligationNum, string.Empty);
+        }
+
+        internal void ResetFields() 
         {
             mkTxtObligationNum.Clear();
             nudAmount.Value = 0;

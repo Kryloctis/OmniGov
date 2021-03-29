@@ -70,7 +70,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             _ucObligationRequest.lblTypeofFund.Text = dgAllotmentRelease.SelectedCells[6].Value.ToString();
             _ucObligationRequest.lblFPPCode.Text = dgAllotmentRelease.SelectedCells[8].Value.ToString();
             _ucObligationRequest.lblFPPName.Text = dgAllotmentRelease.SelectedCells[9].Value.ToString();
-            _ucObligationRequest.lblOtherFPP.Text = dgAllotmentRelease.SelectedCells[11].Value.ToString();
+            _ucObligationRequest.lblOtherFPP.Text = string.IsNullOrEmpty(dgAllotmentRelease.SelectedCells[11].Value.ToString())? "-": dgAllotmentRelease.SelectedCells[11].Value.ToString();
             _ucObligationRequest.lblAllotmentClass.Text = dgAllotmentRelease.SelectedCells[13].Value.ToString();
             _ucObligationRequest.lblAccount.Text = dgAllotmentRelease.SelectedCells[17].Value.ToString();
 

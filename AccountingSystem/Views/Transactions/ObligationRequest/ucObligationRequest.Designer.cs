@@ -326,7 +326,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.LinkLabel lnklblAllotmentRelease;
         internal System.Windows.Forms.NumericUpDown nudAmount;
         private System.Windows.Forms.Label label7;
         internal System.Windows.Forms.MaskedTextBox mkTxtObligationNum;
@@ -341,5 +340,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.Label lblBalance;
         internal System.Windows.Forms.Label lblAccount;
         internal System.Windows.Forms.Label lblAllotmentClass;
+        internal System.Windows.Forms.LinkLabel lnklblAllotmentRelease;
     }
 }
