@@ -14,6 +14,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
     {
         internal int allotmentReleaseID = 0;
         internal int budgetAppropriationID = 0;
+        internal decimal currentAllotmentReleaseAmount = 0;
 
         public ucAllotmentRelease()
         {
@@ -22,8 +23,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal string GetFormErrors()
         {
+
+
             var errorArray = new string[3];
-            errorArray[0] = epARONo.GetError(txtAllotmentReleaseNo);
+            errorArray[0] = epARONo.GetError(mskTxtAroNo);
             errorArray[1] = epPurpose.GetError(txtPurpose);
             errorArray[2] = epAmount.GetError(nudAmount);
 
@@ -32,34 +35,32 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal void ResetForm()
         {
-            txtAllotmentReleaseNo.Clear();
+            mskTxtAroNo.Clear();
             txtPurpose.Clear();
             dtDateIssued.Value = DateTime.Now;
             nudAmount.Value = 0;
         }
 
         #region Validations
-
-        private void txtAllotmentReleaseNo_Validating(object sender, CancelEventArgs e)
+        private void AmountLogic(ErrorProvider ep, NumericUpDown numericUpDown, CancelEventArgs e) 
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epARONo, txtAllotmentReleaseNo, "Allotment Release No.");
-
-            bool itemNameExist;
+            var totalAppropriationBalance = Factory.BudgetAppropriationsRepository().GetTotalAppropriationBalanceRecord(budgetAppropriationID);
+            decimal appropriationBalance = Convert.ToDecimal(totalAppropriationBalance["appropriation_balance"]);
 
             if (allotmentReleaseID == 0)
-                itemNameExist = Factory.AllotmentReleaseRepository().allotmentReleaseNumExist(txtAllotmentReleaseNo.Text.Trim());
-            else
-                itemNameExist = Factory.AllotmentReleaseRepository().allotmentReleaseNumExist(allotmentReleaseID, txtAllotmentReleaseNo.Text.Trim());
-
-            if (itemNameExist)
             {
-                epARONo.SetError(txtAllotmentReleaseNo, $"The Allotment Release No. You entered, \nIs already exist in your record.");
-                e.Cancel = true;
+                string errorText = numericUpDown.Value > appropriationBalance ? "The amount you entered exceeds the appropriate balance." : string.Empty;
+                bool errorBoolean = numericUpDown.Value > appropriationBalance ? true : false;
+                ep.SetError(nudAmount, errorText);
+                e.Cancel = errorBoolean;
             }
-        }
-        private void txtAllotmentReleaseNo_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epARONo, txtAllotmentReleaseNo);
+            else
+            {
+                string errorText = numericUpDown.Value > appropriationBalance + currentAllotmentReleaseAmount ? "The amount you entered exceeds the appropriate balance." : string.Empty;
+                bool errorBoolean = numericUpDown.Value > appropriationBalance + currentAllotmentReleaseAmount ? true : false;
+                ep.SetError(nudAmount, errorText);
+                e.Cancel = errorBoolean;
+            }
         }
 
         private void txtPurpose_Validating(object sender, CancelEventArgs e)
@@ -73,11 +74,45 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
+            if (string.IsNullOrEmpty(nudAmount.Text))
+            {
+                e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
+            }
+            else if (nudAmount.Value == 0)
+            {
+                epAmount.SetError(nudAmount, "Enter a valuable amount.");
+                e.Cancel = true;
+            }
+            else 
+            {
+                AmountLogic(epAmount, nudAmount, e);
+            }
         }
         private void nudAmount_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
+        }
+
+        private void mskTxtAroNo_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowMaskedTextboxError(epARONo, mskTxtAroNo, "Allotment Release No.");
+
+            bool itemNameExist;
+
+            if (allotmentReleaseID == 0)
+                itemNameExist = Factory.AllotmentReleaseRepository().allotmentReleaseNumExist(mskTxtAroNo.Text.Trim());
+            else
+                itemNameExist = Factory.AllotmentReleaseRepository().allotmentReleaseNumExist(allotmentReleaseID, mskTxtAroNo.Text.Trim());
+
+            if (itemNameExist)
+            {
+                epARONo.SetError(mskTxtAroNo, $"The Allotment Release No. You entered, \nIs already exist in your record.");
+                e.Cancel = true;
+            }
+        }
+        private void mskTxtAroNo_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearMaskedTextboxError(epARONo, mskTxtAroNo);
         }
 
         #endregion Validations

@@ -28,7 +28,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 var selectedAllotmentRelease = Factory.AllotmentReleaseRepository().GetRecordByID(uc.allotmentReleaseID);
 
                 // Set Values
-                uc.txtAllotmentReleaseNo.Text = selectedAllotmentRelease["aro_no"];
+                uc.mskTxtAroNo.Text = selectedAllotmentRelease["aro_no"];
                 uc.txtPurpose.Text = selectedAllotmentRelease["purpose"];
                 uc.dtDateIssued.Value = Convert.ToDateTime(selectedAllotmentRelease["date_issued"]);
                 uc.nudAmount.Value = Convert.ToDecimal(selectedAllotmentRelease["amount"]);
@@ -58,7 +58,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 {
                     ID = uc.allotmentReleaseID,
                     BudgetAppropriationsID = uc.budgetAppropriationID,
-                    ARONumber = uc.txtAllotmentReleaseNo.Text.Trim(),
+                    ARONumber = uc.mskTxtAroNo.Text.Trim(),
                     Purpose = uc.txtPurpose.Text.Trim(),
                     DateIssued = uc.dtDateIssued.Value,
                     amount = uc.nudAmount.Value,
@@ -86,6 +86,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 var uc = ucAllotmentRelease1;
                 uc.ResetForm();
                 Helper.MessageBoxSuccess("Allotment Release has been updated");
+                _frmAllotmentRelease.LoadAppropriationDetails();
                 _frmAllotmentRelease.LoadAllotmentReleaseRecords();
                 Close();
             }

@@ -87,6 +87,26 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         }
 
+        private void ShowAllotmentRelease()
+        {
+            var frmAllotmentReleaseForm = new frmAllotmentRelease();
+
+            var budgetAppId = Convert.ToInt32(dgBudgetAppropriations.SelectedCells[0].Value);
+            var fppId = Convert.ToInt32(dgBudgetAppropriations.SelectedCells[1].Value);
+            var dgothersFPPId = dgBudgetAppropriations.SelectedCells[2].Value;
+            int? othersFPPId = string.IsNullOrEmpty(dgothersFPPId.ToString()) ? null : Convert.ToInt32(dgothersFPPId);
+            var allotmentClassesId = Convert.ToInt32(dgBudgetAppropriations.SelectedCells[3].Value);
+            var genLedgerAccId = Convert.ToInt32(dgBudgetAppropriations.SelectedCells[4].Value);
+
+            frmAllotmentReleaseForm.budgetAppropriationID = budgetAppId;
+            frmAllotmentReleaseForm.fppID = fppId;
+            frmAllotmentReleaseForm.othersFPPID = othersFPPId;
+            frmAllotmentReleaseForm.allotmentClassesID = allotmentClassesId;
+            frmAllotmentReleaseForm.generalLedgerAccID = genLedgerAccId;
+
+            frmAllotmentReleaseForm.ShowDialog();
+        }
+
         #region Events Method
 
         private void cmbxAllotmentClass_SelectedValueChanged(object sender, EventArgs e) 
@@ -186,27 +206,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         private void btnAllotmentRelease_Click(object sender, EventArgs e) 
         {
-            var frmAllotmentReleaseForm = new frmAllotmentRelease();
-
-            var budgetAppId = dgBudgetAppropriations.SelectedCells[0].Value;
-            var fppId = dgBudgetAppropriations.SelectedCells[1].Value;
-            var dgothersFPPId = dgBudgetAppropriations.SelectedCells[2].Value;
-            int? othersFPPId;
-            var allotmentClassesId = dgBudgetAppropriations.SelectedCells[3].Value;
-            var genLedgerAccId = dgBudgetAppropriations.SelectedCells[4].Value;
-
-            if (string.IsNullOrEmpty(dgothersFPPId.ToString()))
-                othersFPPId = null;
-            else
-                othersFPPId = Convert.ToInt32(dgothersFPPId);
-
-            frmAllotmentReleaseForm.budgetAppropriationID = Convert.ToInt32(budgetAppId);
-            frmAllotmentReleaseForm.fppID = Convert.ToInt32(fppId);
-            frmAllotmentReleaseForm.othersFPPID = othersFPPId;
-            frmAllotmentReleaseForm.allotmentClassesID = Convert.ToInt32(allotmentClassesId);
-            frmAllotmentReleaseForm.generalLedgerAccID = Convert.ToInt32(genLedgerAccId);
-
-            frmAllotmentReleaseForm.ShowDialog();
+            ShowAllotmentRelease();
         }
 
         private void frmBudgetAppropriationsNew_Load(object sender, EventArgs e)

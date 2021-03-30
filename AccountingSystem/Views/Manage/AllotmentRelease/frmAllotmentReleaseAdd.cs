@@ -26,8 +26,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             try
             {
                 var uc = ucAllotmentRelease1;
+
                 //Validation
-                if (!uc.ValidateChildren()) 
+                if (!uc.ValidateChildren() ) 
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
@@ -38,7 +39,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 var allotmentReleaseModel = new AllotmentReleaseModel()
                 {
                     BudgetAppropriationsID = uc.budgetAppropriationID,
-                    ARONumber = uc.txtAllotmentReleaseNo.Text.Trim(),
+                    ARONumber = uc.mskTxtAroNo.Text.Trim(),
                     Purpose = uc.txtPurpose.Text.Trim(),
                     DateIssued = uc.dtDateIssued.Value,
                     amount = uc.nudAmount.Value,
@@ -61,6 +62,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 var uc = ucAllotmentRelease1;
                 uc.ResetForm();
                 Helper.MessageBoxSuccess("Allotment Release has been saved.");
+                _frmAllotmentRelease.LoadAppropriationDetails();
                 _frmAllotmentRelease.LoadAllotmentReleaseRecords();
             }
         }
