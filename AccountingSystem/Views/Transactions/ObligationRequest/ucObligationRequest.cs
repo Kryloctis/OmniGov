@@ -21,6 +21,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal int allotmentClassId = 0;
         internal int accountId = 0;
         internal string obligationNo = string.Empty;
+        internal short year = 0;
 
         public ucObligationRequest()
         {
@@ -49,6 +50,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             accountId = 0;
             obligationNo = string.Empty;
             lnklblAllotmentRelease.Enabled = true;
+            year = 0;
 
             lblTypeofFund.Text = "-";
             lblFPPCode.Text = "-";
@@ -56,6 +58,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             lblOtherFPP.Text = "-";
             lblAllotmentClass.Text = "-";
             lblAccount.Text = "-";
+            lblYear.Text = "-";
             lblBalance.Text = "-";
 
             mkTxtObligationNum.Clear();

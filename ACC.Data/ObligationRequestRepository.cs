@@ -83,6 +83,7 @@ namespace ACC.Data
                     new object[] { "@others_fpp_id", DbType.String, entity.OtherFPPId },
                     new object[] { "@allotment_classes_id", DbType.Int32, entity.AllotmentClassesID },
                     new object[] { "@general_ledger_accounts_id", DbType.Int32, entity.GenLedgerAccID},
+                    new object[] { "@year", DbType.Int16, entity.year},
                     new object[] { "@obligation_no", DbType.String, entity.ObligationNo},
                     new object[] { "@obligation_amount", DbType.Decimal, entity.ObligationAmount},
                     new object[] { "@created_by", DbType.Int32, entity.CreatedBy}
@@ -94,6 +95,7 @@ namespace ACC.Data
                     $"others_fpp_id, " +
                     $"allotment_classes_id, " +
                     $"general_ledger_accounts_id, " +
+                    $"year," +
                     $"obligation_no, " +
                     $"obligation_amount, " +
                     $"created_by) " +
@@ -103,6 +105,7 @@ namespace ACC.Data
                     $"@others_fpp_id, " +
                     $"@allotment_classes_id, " +
                     $"@general_ledger_accounts_id, " +
+                    $"@year," +
                     $"@obligation_no, " +
                     $"@obligation_amount, " +
                     $"@created_by)";

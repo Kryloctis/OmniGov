@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
-            this.ucObligationRequestNew1 = new AccountingSystem.Views.Transactions.ObligationRequest.ucObligationRequest();
+            this.ucObligationRequest1 = new AccountingSystem.Views.Transactions.ObligationRequest.ucObligationRequest();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,20 +104,20 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnSearch.Text = "Search";
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
-            // ucObligationRequestNew1
+            // ucObligationRequest1
             // 
-            this.ucObligationRequestNew1.Location = new System.Drawing.Point(18, 53);
-            this.ucObligationRequestNew1.Name = "ucObligationRequestNew1";
-            this.ucObligationRequestNew1.Size = new System.Drawing.Size(401, 277);
-            this.ucObligationRequestNew1.TabIndex = 1;
+            this.ucObligationRequest1.Location = new System.Drawing.Point(19, 53);
+            this.ucObligationRequest1.Name = "ucObligationRequest1";
+            this.ucObligationRequest1.Size = new System.Drawing.Size(401, 304);
+            this.ucObligationRequest1.TabIndex = 1;
             // 
             // frmObligationRequest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(420, 345);
-            this.Controls.Add(this.ucObligationRequestNew1);
+            this.ClientSize = new System.Drawing.Size(420, 366);
+            this.Controls.Add(this.ucObligationRequest1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -142,6 +142,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.ToolStripButton btnCancel;
         internal System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         internal System.Windows.Forms.ToolStripButton btnDelete;
-        internal ucObligationRequest ucObligationRequestNew1;
+        internal ucObligationRequest ucObligationRequest1;
     }
 }

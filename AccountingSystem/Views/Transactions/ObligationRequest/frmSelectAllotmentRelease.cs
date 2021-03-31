@@ -67,18 +67,35 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void LoadSelectedRecord() 
         {
-            _ucObligationRequest.lblTypeofFund.Text = dgAllotmentRelease.SelectedCells[6].Value.ToString();
-            _ucObligationRequest.lblFPPCode.Text = dgAllotmentRelease.SelectedCells[8].Value.ToString();
-            _ucObligationRequest.lblFPPName.Text = dgAllotmentRelease.SelectedCells[9].Value.ToString();
-            _ucObligationRequest.lblOtherFPP.Text = string.IsNullOrEmpty(dgAllotmentRelease.SelectedCells[11].Value.ToString())? "-": dgAllotmentRelease.SelectedCells[11].Value.ToString();
-            _ucObligationRequest.lblAllotmentClass.Text = dgAllotmentRelease.SelectedCells[13].Value.ToString();
-            _ucObligationRequest.lblAccount.Text = dgAllotmentRelease.SelectedCells[17].Value.ToString();
+            int rowIndex = dgAllotmentRelease.CurrentCell.RowIndex;
+            int fundID = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["fund_id"].Value);
+            int fppID = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["fpp_id"].Value);
+            int? othersFPPID = string.IsNullOrEmpty(dgAllotmentRelease.Rows[rowIndex].Cells["others_fpp_id"].Value.ToString()) ? null : Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["others_fpp_id"].Value);
+            int allotmentClassID = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["allotment_class_id"].Value);
+            int accountID = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["gen_ledger_acc_id"].Value);
 
-            _ucObligationRequest.fundId = Convert.ToInt32(dgAllotmentRelease.SelectedCells[4].Value);
-            _ucObligationRequest.fppId = Convert.ToInt32(dgAllotmentRelease.SelectedCells[7].Value);
-            _ucObligationRequest.othersFPPId = string.IsNullOrEmpty(dgAllotmentRelease.SelectedCells[10].Value.ToString())? null: Convert.ToInt32(dgAllotmentRelease.SelectedCells[10].Value);
-            _ucObligationRequest.allotmentClassId = Convert.ToInt32(dgAllotmentRelease.SelectedCells[12].Value);
-            _ucObligationRequest.accountId = Convert.ToInt32(dgAllotmentRelease.SelectedCells[15].Value);
+            string fundName = dgAllotmentRelease.Rows[rowIndex].Cells["fund_name"].Value.ToString();
+            string fppCode = dgAllotmentRelease.Rows[rowIndex].Cells["fpp_code"].Value.ToString();
+            string fppName = dgAllotmentRelease.Rows[rowIndex].Cells["fpp_name"].Value.ToString();
+            string otherFPPName = dgAllotmentRelease.Rows[rowIndex].Cells["others_fpp_name"].Value.ToString();
+            string allotmentClassesName = dgAllotmentRelease.Rows[rowIndex].Cells["allotment_class_code"].Value.ToString();
+            string accountName = dgAllotmentRelease.Rows[rowIndex].Cells["gen_ledger_name"].Value.ToString();
+            short year = Convert.ToInt16(toolStripCmbxYear.ComboBox.SelectedValue);
+
+            _ucObligationRequest.lblTypeofFund.Text = fundName;
+            _ucObligationRequest.lblFPPCode.Text = fppCode;
+            _ucObligationRequest.lblFPPName.Text = fppName;
+            _ucObligationRequest.lblOtherFPP.Text = string.IsNullOrEmpty(otherFPPName) ? "-": otherFPPName;
+            _ucObligationRequest.lblAllotmentClass.Text = allotmentClassesName;
+            _ucObligationRequest.lblAccount.Text = accountName;
+            _ucObligationRequest.lblYear.Text = year.ToString();
+
+            _ucObligationRequest.fundId = fundID;
+            _ucObligationRequest.fppId = fppID;
+            _ucObligationRequest.othersFPPId = othersFPPID;
+            _ucObligationRequest.allotmentClassId = allotmentClassID;
+            _ucObligationRequest.accountId = accountID;
+            _ucObligationRequest.year = year;
         }
 
         private void frmSelectAllotmentRelease_Load(object sender, EventArgs e)

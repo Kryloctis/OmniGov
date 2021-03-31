@@ -53,6 +53,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.label8 = new System.Windows.Forms.Label();
             this.epObligationNum = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
+            this.lblYear = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
@@ -68,7 +70,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(0, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(378, 206);
+            this.groupBox1.Size = new System.Drawing.Size(378, 231);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Allotment Release";
@@ -87,10 +89,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // panel1
             // 
             this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.lblYear);
             this.panel1.Controls.Add(this.lblBalance);
             this.panel1.Controls.Add(this.lblAccount);
             this.panel1.Controls.Add(this.lblAllotmentClass);
@@ -105,13 +109,13 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel1.Location = new System.Drawing.Point(3, 19);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(372, 184);
+            this.panel1.Size = new System.Drawing.Size(372, 209);
             this.panel1.TabIndex = 0;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 155);
+            this.label9.Location = new System.Drawing.Point(3, 180);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(48, 15);
             this.label9.TabIndex = 8;
@@ -147,7 +151,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // lblBalance
             // 
             this.lblBalance.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblBalance.Location = new System.Drawing.Point(101, 155);
+            this.lblBalance.Location = new System.Drawing.Point(101, 180);
             this.lblBalance.Margin = new System.Windows.Forms.Padding(5, 5, 3, 5);
             this.lblBalance.Name = "lblBalance";
             this.lblBalance.Size = new System.Drawing.Size(268, 15);
@@ -244,7 +248,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // nudAmount
             // 
             this.nudAmount.DecimalPlaces = 2;
-            this.nudAmount.Location = new System.Drawing.Point(104, 250);
+            this.nudAmount.Location = new System.Drawing.Point(104, 275);
             this.nudAmount.Maximum = new decimal(new int[] {
             999999999,
             0,
@@ -260,7 +264,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 252);
+            this.label7.Location = new System.Drawing.Point(6, 277);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(51, 15);
             this.label7.TabIndex = 10;
@@ -268,7 +272,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // mkTxtObligationNum
             // 
-            this.mkTxtObligationNum.Location = new System.Drawing.Point(104, 221);
+            this.mkTxtObligationNum.Location = new System.Drawing.Point(104, 246);
             this.mkTxtObligationNum.Mask = "0000-00-00-000";
             this.mkTxtObligationNum.Name = "mkTxtObligationNum";
             this.mkTxtObligationNum.Size = new System.Drawing.Size(274, 23);
@@ -279,7 +283,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 224);
+            this.label8.Location = new System.Drawing.Point(6, 249);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(85, 15);
             this.label8.TabIndex = 8;
@@ -293,6 +297,25 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             this.epAmount.ContainerControl = this;
             // 
+            // lblYear
+            // 
+            this.lblYear.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblYear.Location = new System.Drawing.Point(101, 155);
+            this.lblYear.Margin = new System.Windows.Forms.Padding(5, 5, 3, 5);
+            this.lblYear.Name = "lblYear";
+            this.lblYear.Size = new System.Drawing.Size(268, 15);
+            this.lblYear.TabIndex = 2;
+            this.lblYear.Text = "-";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 155);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(29, 15);
+            this.label11.TabIndex = 8;
+            this.label11.Text = "Year";
+            // 
             // ucObligationRequest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -303,7 +326,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.Controls.Add(this.label8);
             this.Controls.Add(this.groupBox1);
             this.Name = "ucObligationRequest";
-            this.Size = new System.Drawing.Size(401, 277);
+            this.Size = new System.Drawing.Size(401, 304);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -341,5 +364,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.Label lblAccount;
         internal System.Windows.Forms.Label lblAllotmentClass;
         internal System.Windows.Forms.LinkLabel lnklblAllotmentRelease;
+        private System.Windows.Forms.Label label11;
+        internal System.Windows.Forms.Label lblYear;
     }
 }

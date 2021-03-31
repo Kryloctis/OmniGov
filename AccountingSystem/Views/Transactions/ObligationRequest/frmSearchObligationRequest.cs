@@ -23,7 +23,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             try
             {
-                var uc = _frmObligationRequest.ucObligationRequestNew1;
+                var uc = _frmObligationRequest.ucObligationRequest1;
 
                 uc.isEdit = true;
                 uc.lnklblAllotmentRelease.Enabled = false;
