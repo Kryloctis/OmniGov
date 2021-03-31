@@ -66,7 +66,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.splitContainer1.Panel2.Controls.Add(this.dgAllotmentRelease);
             this.splitContainer1.Panel2.Controls.Add(this.toolStrip1);
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(3, 0, 5, 0);
-            this.splitContainer1.Size = new System.Drawing.Size(993, 466);
+            this.splitContainer1.Size = new System.Drawing.Size(1246, 466);
             this.splitContainer1.SplitterDistance = 300;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.dgAllotmentRelease.Location = new System.Drawing.Point(3, 34);
             this.dgAllotmentRelease.Name = "dgAllotmentRelease";
             this.dgAllotmentRelease.RowTemplate.Height = 25;
-            this.dgAllotmentRelease.Size = new System.Drawing.Size(681, 432);
+            this.dgAllotmentRelease.Size = new System.Drawing.Size(934, 432);
             this.dgAllotmentRelease.TabIndex = 1;
             this.dgAllotmentRelease.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgAllotmentRelease_RowHeaderMouseDoubleClick);
             this.dgAllotmentRelease.SelectionChanged += new System.EventHandler(this.dgAllotmentRelease_SelectionChanged);
@@ -106,7 +106,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip1.Size = new System.Drawing.Size(681, 34);
+            this.toolStrip1.Size = new System.Drawing.Size(934, 34);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -146,12 +146,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 466);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(993, 29);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1246, 29);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(915, 3);
+            this.btnCancel.Location = new System.Drawing.Point(1168, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 4;
@@ -161,7 +161,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // btnSelect
             // 
             this.btnSelect.Enabled = false;
-            this.btnSelect.Location = new System.Drawing.Point(834, 3);
+            this.btnSelect.Location = new System.Drawing.Point(1087, 3);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(75, 23);
             this.btnSelect.TabIndex = 3;
@@ -175,7 +175,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(993, 495);
+            this.ClientSize = new System.Drawing.Size(1246, 495);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.MinimizeBox = false;

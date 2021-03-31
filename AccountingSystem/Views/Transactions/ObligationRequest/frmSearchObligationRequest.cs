@@ -35,6 +35,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 uc.lblOtherFPP.Text = string.IsNullOrEmpty(selectedObligation["others_fpp_name"])? "-": selectedObligation["others_fpp_name"];
                 uc.lblAllotmentClass.Text = selectedObligation["allotment_code"];
                 uc.lblAccount.Text = selectedObligation["ledger_name"];
+                uc.lblYear.Text = selectedObligation["year"];
                 uc.mkTxtObligationNum.Text = selectedObligation["obligation_no"];
                 uc.nudAmount.Value = Convert.ToDecimal(selectedObligation["obligation_amount"]);
 

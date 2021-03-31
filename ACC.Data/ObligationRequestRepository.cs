@@ -217,6 +217,7 @@ namespace ACC.Data
                     $"ledger_code, " +
                     $"account_code, " +
                     $"ledger_name, " +
+                    $"year, " +
                     $"obligation_no, " +
                     $"obligation_amount, " +
                     $"created_at, " +
@@ -260,6 +261,50 @@ namespace ACC.Data
             catch (Exception)
             {
                     throw;
+            }
+            return record;
+        }
+
+        public Dictionary<string, string> GetTotalObligationAmount(int fundID, int fppID, int? otherFPPID, int allotmentClassesID, int general_ledger_accounts_id, short year)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Int32, fundID },
+                    new object[] { "@function_program_project_id", DbType.Int32, fppID },
+                    new object[] { "@others_fpp_id", DbType.String, otherFPPID},
+                    new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassesID },
+                    new object[] { "@general_ledger_accounts_id", DbType.Int32, general_ledger_accounts_id },
+                    new object[] { "@year", DbType.Int16, year}
+                };
+
+                string query = $"SELECT " +
+                    $"COALESCE(SUM(obligation_amount), 0.00) AS total_obligation_amount " +
+                    $"FROM {tableName} " +
+                    $"WHERE funds_id = @funds_id " +
+                    $"AND function_program_project_id = @function_program_project_id " +
+                    $"AND others_fpp_id <=> @others_fpp_id " +
+                    $"AND allotment_classes_id = @allotment_classes_id " +
+                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
+                    $"AND year = @year";
+
+                using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("total_obligation_amount", item[0].ToString());
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
             return record;
         }

@@ -21,6 +21,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal int allotmentClassId = 0;
         internal int accountId = 0;
         internal string obligationNo = string.Empty;
+        internal decimal unobligatedBalance = 0;
         internal short year = 0;
 
         public ucObligationRequest()
@@ -50,6 +51,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             accountId = 0;
             obligationNo = string.Empty;
             lnklblAllotmentRelease.Enabled = true;
+            unobligatedBalance = 0;
             year = 0;
 
             lblTypeofFund.Text = "-";

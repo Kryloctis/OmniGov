@@ -33,10 +33,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lnklblAllotmentRelease = new System.Windows.Forms.LinkLabel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.lblYear = new System.Windows.Forms.Label();
             this.lblBalance = new System.Windows.Forms.Label();
             this.lblAccount = new System.Windows.Forms.Label();
             this.lblAllotmentClass = new System.Windows.Forms.Label();
@@ -53,8 +55,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.label8 = new System.Windows.Forms.Label();
             this.epObligationNum = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
-            this.lblYear = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
@@ -77,13 +77,17 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // lnklblAllotmentRelease
             // 
+            this.lnklblAllotmentRelease.ActiveLinkColor = System.Drawing.Color.Magenta;
             this.lnklblAllotmentRelease.AutoSize = true;
+            this.lnklblAllotmentRelease.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnklblAllotmentRelease.LinkColor = System.Drawing.Color.DodgerBlue;
             this.lnklblAllotmentRelease.Location = new System.Drawing.Point(235, 0);
             this.lnklblAllotmentRelease.Name = "lnklblAllotmentRelease";
             this.lnklblAllotmentRelease.Size = new System.Drawing.Size(137, 15);
             this.lnklblAllotmentRelease.TabIndex = 1;
             this.lnklblAllotmentRelease.TabStop = true;
             this.lnklblAllotmentRelease.Text = "Select Allotment Release";
+            this.lnklblAllotmentRelease.VisitedLinkColor = System.Drawing.Color.Magenta;
             this.lnklblAllotmentRelease.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnklblAllotmentRelease_LinkClicked);
             // 
             // panel1
@@ -111,6 +115,15 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(372, 209);
             this.panel1.TabIndex = 0;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 155);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(29, 15);
+            this.label11.TabIndex = 8;
+            this.label11.Text = "Year";
             // 
             // label9
             // 
@@ -147,6 +160,16 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.label4.Size = new System.Drawing.Size(60, 15);
             this.label4.TabIndex = 4;
             this.label4.Text = "Other FPP";
+            // 
+            // lblYear
+            // 
+            this.lblYear.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblYear.Location = new System.Drawing.Point(101, 155);
+            this.lblYear.Margin = new System.Windows.Forms.Padding(5, 5, 3, 5);
+            this.lblYear.Name = "lblYear";
+            this.lblYear.Size = new System.Drawing.Size(268, 15);
+            this.lblYear.TabIndex = 2;
+            this.lblYear.Text = "-";
             // 
             // lblBalance
             // 
@@ -296,25 +319,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // epAmount
             // 
             this.epAmount.ContainerControl = this;
-            // 
-            // lblYear
-            // 
-            this.lblYear.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblYear.Location = new System.Drawing.Point(101, 155);
-            this.lblYear.Margin = new System.Windows.Forms.Padding(5, 5, 3, 5);
-            this.lblYear.Name = "lblYear";
-            this.lblYear.Size = new System.Drawing.Size(268, 15);
-            this.lblYear.TabIndex = 2;
-            this.lblYear.Text = "-";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 155);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(29, 15);
-            this.label11.TabIndex = 8;
-            this.label11.Text = "Year";
             // 
             // ucObligationRequest
             // 

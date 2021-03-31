@@ -73,6 +73,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             int? othersFPPID = string.IsNullOrEmpty(dgAllotmentRelease.Rows[rowIndex].Cells["others_fpp_id"].Value.ToString()) ? null : Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["others_fpp_id"].Value);
             int allotmentClassID = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["allotment_class_id"].Value);
             int accountID = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["gen_ledger_acc_id"].Value);
+            decimal unobligatedBalance = Convert.ToDecimal(dgAllotmentRelease.Rows[rowIndex].Cells["unobligated_balance"].Value);
 
             string fundName = dgAllotmentRelease.Rows[rowIndex].Cells["fund_name"].Value.ToString();
             string fppCode = dgAllotmentRelease.Rows[rowIndex].Cells["fpp_code"].Value.ToString();
@@ -88,6 +89,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             _ucObligationRequest.lblOtherFPP.Text = string.IsNullOrEmpty(otherFPPName) ? "-": otherFPPName;
             _ucObligationRequest.lblAllotmentClass.Text = allotmentClassesName;
             _ucObligationRequest.lblAccount.Text = accountName;
+            _ucObligationRequest.lblBalance.Text = unobligatedBalance.ToString("N2");
             _ucObligationRequest.lblYear.Text = year.ToString();
 
             _ucObligationRequest.fundId = fundID;
@@ -95,6 +97,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             _ucObligationRequest.othersFPPId = othersFPPID;
             _ucObligationRequest.allotmentClassId = allotmentClassID;
             _ucObligationRequest.accountId = accountID;
+            _ucObligationRequest.unobligatedBalance = unobligatedBalance;
             _ucObligationRequest.year = year;
         }
 
