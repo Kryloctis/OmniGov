@@ -1,6 +1,6 @@
 using System;
 using System.Windows.Forms;
-using AccountingSystem.Views.Transactions.JEV;
+using AccountingSystem.Views.Manage.BeginningBalances;
 
 namespace AccountingSystem
 {
@@ -15,7 +15,7 @@ namespace AccountingSystem
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new frmBeginningBalanceAdd());
         }
     }
 }

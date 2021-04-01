@@ -175,6 +175,18 @@ namespace AccountingSystem
 
             }
         }
+
+        internal static void GeneralLedgerListBox(DataTable dataTable, ListBox listBox)
+        {
+            foreach (DataRow item in dataTable.Rows)
+            {
+                item["ledger_name"] = $"{item["account_code"]} - {item["ledger_name"]}";
+            }
+
+            listBox.DisplayMember = "ledger_name";
+            listBox.ValueMember = "general_ledger_accounts_id";
+            listBox.DataSource = dataTable;
+        }
         #endregion
 
         #region Subsidiary Ledgers
@@ -194,9 +206,9 @@ namespace AccountingSystem
 
         internal static void SubsidiaryLedgerComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
-            comboBox.DataSource = dataTable;
             comboBox.DisplayMember = displayMember;
             comboBox.ValueMember = valueMember;
+            comboBox.DataSource = dataTable;
 
             if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
             {
