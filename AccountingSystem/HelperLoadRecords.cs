@@ -284,14 +284,13 @@ namespace AccountingSystem
         internal static void FuntionProjectProgramDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Service Name";
-            datagrid.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            datagrid.Columns[2].HeaderText = "Code";
-            datagrid.Columns[3].HeaderText = "Name";
-            datagrid.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            datagrid.Columns[4].Visible = false;
-            datagrid.Columns[5].Visible = false;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["service_name"].Visible = false;
+            datagrid.Columns["fpp_code"].HeaderText = "Code";
+            datagrid.Columns["fpp_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            datagrid.Columns["fpp_name"].HeaderText = "Name";
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
         }
 
         internal static void FPPComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
@@ -755,25 +754,7 @@ namespace AccountingSystem
 
         #region Obligation Request
 
-        internal static void FPPDgVObligationRequest(DataGridView dataGridView, DataTable dataTable) 
-        {
-            try
-            {
-                dataGridView.DataSource = dataTable;
-                dataGridView.Columns[0].Visible = false;
-                dataGridView.Columns[1].HeaderText = "FPP Code";
-                dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-                dataGridView.Columns[2].HeaderText = "FPP Name";
-                dataGridView.ClearSelection();
-            }
-
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        internal static void AllotmentReleaseDgvObligationRequest(DataGridView dataGridView, int fppId, int fundsId, int allotmentClassId, short year) 
+        internal static void AllotmentReleaseDgvObligationRequest(DataGridView dataGridView, int fppId, int fundID, int allotmentClassId, short year) 
         {
             try
             {
@@ -832,7 +813,7 @@ namespace AccountingSystem
 
 
                 //Initialize Repository Method
-                DataTable dtGetViewRecordsAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecords(fppId, null, fundsId, allotmentClassId, year);
+                DataTable dtGetViewRecordsAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecords(fppId, null, fundID, allotmentClassId, year);
 
                 //Load by loop All Budget Appropriations Records without Others FPP 
                 foreach (DataRow drGetViewRecords in dtGetViewRecordsAllotmentRelease.Rows)
@@ -876,7 +857,7 @@ namespace AccountingSystem
                 }
 
                 //Initialize Repository Method
-                DataTable dtGetOthersFPPRecords = Factory.AllotmentReleaseRepository().GetOthersFPPRecords(fppId ,allotmentClassId, fundsId, year);
+                DataTable dtGetOthersFPPRecords = Factory.AllotmentReleaseRepository().GetOthersFPPRecords(fppId ,allotmentClassId, fundID, year);
 
                 //Load by loop All Budget Appropriations Records with Others FPP 
                 foreach (DataRow drGetOthersFPPRecords in dtGetOthersFPPRecords.Rows)
@@ -887,7 +868,7 @@ namespace AccountingSystem
                     dataGridView.Rows.Add(new object[] { null, null, othersFPPName });
 
                     //Initialize Repository Method for w Others FPP Records
-                    DataTable dtGetViewRecordsAllotmentReleaseOthersFPP = Factory.AllotmentReleaseRepository().GetViewRecords(fppId, othersFPPID, fundsId, allotmentClassId, year);
+                    DataTable dtGetViewRecordsAllotmentReleaseOthersFPP = Factory.AllotmentReleaseRepository().GetViewRecords(fppId, othersFPPID, fundID, allotmentClassId, year);
 
 
                     //Load by loop All Budget Appropriations Records without Others FPP 

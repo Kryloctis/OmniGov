@@ -30,10 +30,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             {
                 int fppID = Convert.ToInt32(dgFPP.SelectedCells[0].Value);
                 int allotmentClassID = Convert.ToInt32(toolStripCmbxAllotmentClass.ComboBox.SelectedValue);
-                int typeOfFundID = Convert.ToInt32(toolStripCmbxFunds.ComboBox.SelectedValue);
+                int fundID = Convert.ToInt32(toolStripCmbxFunds.ComboBox.SelectedValue);
                 short year = Convert.ToInt16(toolStripCmbxYear.ComboBox.SelectedValue);
 
-                HelperLoadRecords.AllotmentReleaseDgvObligationRequest(dgAllotmentRelease, fppID, allotmentClassID, typeOfFundID, year);
+                HelperLoadRecords.AllotmentReleaseDgvObligationRequest(dgAllotmentRelease, fppID, allotmentClassID, fundID, year);
             }
         }
 
@@ -106,7 +106,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             Helper.DatagridDefaultStyle(dgFPP, true);
             Helper.DatagridDefaultStyle(dgAllotmentRelease, true);
 
-            HelperLoadRecords.FPPDgVObligationRequest(dgFPP,Factory.AllotmentReleaseRepository().GetFPPRecords());
+            HelperLoadRecords.FuntionProjectProgramDatagridView(Factory.FunctionProgramProjectRepository().GetRecords(), dgFPP);
             LoadComboboxes();
         }
 

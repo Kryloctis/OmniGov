@@ -270,14 +270,14 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetViewRecords(int fppId, int? othersFPPId, int fundsId, int allotmentClassId, short year)
+        public DataTable GetViewRecords(int fppId, int? othersFPPId, int fundID, int allotmentClassId, short year)
         {
             try
             {
                 var parameters = new object[][]
                 {
                     new object [] { "@fpp_id", DbType.Int32, fppId},
-                    new object [] { "@fund_id", DbType.Int32, fundsId},
+                    new object [] { "@fund_id", DbType.Int32, fundID},
                     new object [] { "@allotment_class_id", DbType.Int32, allotmentClassId},
                     new object [] { "@others_fpp_id", DbType.String, othersFPPId},
                     new object [] { "@budget_appropriations_year", DbType.Int32, year}

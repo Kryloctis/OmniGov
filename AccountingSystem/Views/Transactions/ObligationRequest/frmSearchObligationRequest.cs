@@ -28,8 +28,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 uc.isEdit = true;
                 uc.lnklblAllotmentRelease.Enabled = false;
 
-                var selectedObligation = Factory.ObligationRequestRepository().GetRecordByObligationNum(mkTxtObligationNum.Text);
-                uc.lblTypeofFund.Text = selectedObligation["fund_name"];
+                var selectedObligation = Factory.ObligationRequestRepository().GetViewRecordByObligationNum(mkTxtObligationNum.Text);
+                uc.lblTypeofFund.Text = selectedObligation["funds_name"];
                 uc.lblFPPCode.Text = selectedObligation["fpp_code"];
                 uc.lblFPPName.Text = selectedObligation["fpp_name"];
                 uc.lblOtherFPP.Text = string.IsNullOrEmpty(selectedObligation["others_fpp_name"])? "-": selectedObligation["others_fpp_name"];
@@ -57,21 +57,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
         }
 
-        private void mkTxtObligationNum_TextChanged(object sender, EventArgs e)
-        {
-            if (mkTxtObligationNum.MaskCompleted)
-            {
-                if (Factory.ObligationRequestRepository().ObligationNumExist(mkTxtObligationNum.Text))
-                {
-                    LoadSelectedObligationInfo();
-                    Close();
-                }
-                btnOk.Enabled = true;   
-            }
-            else
-                btnOk.Enabled = false;
-        }
-
         private void btnOk_Click(object sender, EventArgs e)
         {
             if (Factory.ObligationRequestRepository().ObligationNumExist(mkTxtObligationNum.Text))
@@ -81,6 +66,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
             else
                 Helper.MessageBoxError("Obligation No. Doesn't exist.");
+        }
+
+        private void mkTxtObligationNum_TextChanged(object sender, EventArgs e)
+        {
+            if (mkTxtObligationNum.MaskCompleted)
+                btnOk.Enabled = true;
+            else
+                btnOk.Enabled = false;
         }
     }
 }
