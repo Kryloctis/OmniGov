@@ -23,33 +23,16 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             try
             {
+
                 var uc = _frmObligationRequest.ucObligationRequest1;
 
-                uc.isEdit = true;
+                uc.ResetForm();
                 uc.lnklblAllotmentRelease.Enabled = false;
-
-                var selectedObligation = Factory.ObligationRequestRepository().GetViewRecordByObligationNum(mkTxtObligationNum.Text);
-                uc.lblTypeofFund.Text = selectedObligation["funds_name"];
-                uc.lblFPPCode.Text = selectedObligation["fpp_code"];
-                uc.lblFPPName.Text = selectedObligation["fpp_name"];
-                uc.lblOtherFPP.Text = string.IsNullOrEmpty(selectedObligation["others_fpp_name"])? "-": selectedObligation["others_fpp_name"];
-                uc.lblAllotmentClass.Text = selectedObligation["allotment_code"];
-                uc.lblAccount.Text = selectedObligation["ledger_name"];
-                uc.lblYear.Text = selectedObligation["year"];
-                uc.mkTxtObligationNum.Text = selectedObligation["obligation_no"];
-                uc.nudAmount.Value = Convert.ToDecimal(selectedObligation["obligation_amount"]);
-
-                uc.obligationId = Convert.ToInt32(selectedObligation["obligation_request_id"]);
-                uc.fundId = Convert.ToInt32(selectedObligation["funds_id"]);
-                uc.fppId = Convert.ToInt32(selectedObligation["function_program_project_id"]);
-                uc.othersFPPId = string.IsNullOrEmpty(selectedObligation["others_fpp_id"])? null : Convert.ToInt32(selectedObligation["others_fpp_id"]);
-                uc.allotmentClassId = Convert.ToInt32(selectedObligation["allotment_classes_id"]);
-                uc.accountId = Convert.ToInt32(selectedObligation["general_ledger_accounts_id"]);
-                uc.obligationNo = selectedObligation["obligation_no"].ToString();
-
                 _frmObligationRequest.btnCancel.Enabled = true;
                 _frmObligationRequest.btnDelete.Enabled = true;
                 _frmObligationRequest.btnSave.Text = "Update";
+                uc.obligationNo = mkTxtObligationNum.Text.Trim();
+                uc.LoadSearchRecord();
             }
             catch (Exception ex)
             {

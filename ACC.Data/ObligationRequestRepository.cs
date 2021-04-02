@@ -78,7 +78,7 @@
                 {
                     var parameters = new object[][]
                    {
-                        new object[] { "@fund_id", DbType.Int32, entity.FundID },
+                        new object[] { "@funds_id", DbType.Int32, entity.FundID },
                         new object[] { "@function_program_project_id", DbType.Int32, entity.FPPId },
                         new object[] { "@others_fpp_id", DbType.String, entity.OtherFPPId },
                         new object[] { "@allotment_classes_id", DbType.Int32, entity.AllotmentClassesID },
@@ -90,7 +90,7 @@
                    };
 
                     string query = $"INSERT INTO {tableName} " +
-                        $"(fund_id, " +
+                        $"(funds_id, " +
                         $"function_program_project_id, " +
                         $"others_fpp_id, " +
                         $"allotment_classes_id, " +
@@ -100,7 +100,7 @@
                         $"obligation_amount, " +
                         $"created_by) " +
                         $"VALUES " +
-                        $"(@fund_id, " +
+                        $"(@funds_id, " +
                         $"@function_program_project_id, " +
                         $"@others_fpp_id, " +
                         $"@allotment_classes_id, " +

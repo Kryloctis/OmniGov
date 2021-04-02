@@ -22,6 +22,22 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             toolStripCmbxYear.ComboBox.SelectedValueChanged += new EventHandler(toolStripCmbxYear_SelectedValueChanged);
         }
 
+       
+
+        private void EnableDisableButtonsLocal()
+        {
+            int selectedRowsCount = dgAllotmentRelease.SelectedRows.Count;
+
+            if (selectedRowsCount == 1 && dgAllotmentRelease.SelectedCells[7].Value != null)
+            {
+                btnSelect.Enabled = true;
+            }
+            else
+            {
+                btnSelect.Enabled = false;
+            }
+        }
+
         internal void LoadAllotmentReleaseRecords()
         {
             int dgFPPRowCount = dgFPP.SelectedRows.Count;
@@ -35,6 +51,26 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
                 HelperLoadRecords.AllotmentReleaseDgvObligationRequest(dgAllotmentRelease, fppID, allotmentClassID, fundID, year);
             }
+        }
+
+        private void LoadSelectedRecord()
+        {
+            int rowIndex = dgAllotmentRelease.CurrentCell.RowIndex;
+
+            int fundID = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["fund_id"].Value);
+            int fppID = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["fpp_id"].Value);
+            int? othersFPPID = string.IsNullOrEmpty(dgAllotmentRelease.Rows[rowIndex].Cells["others_fpp_id"].Value.ToString()) ? null : Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["others_fpp_id"].Value);
+            int allotmentClassID = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["allotment_class_id"].Value);
+            int accountID = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["gen_ledger_acc_id"].Value);
+            short year = Convert.ToInt16(toolStripCmbxYear.ComboBox.SelectedValue);
+
+            _ucObligationRequest.fundId = fundID;
+            _ucObligationRequest.fppId = fppID;
+            _ucObligationRequest.othersFPPId = othersFPPID;
+            _ucObligationRequest.allotmentClassId = allotmentClassID;
+            _ucObligationRequest.accountId = accountID;
+            _ucObligationRequest.year = year;
+            _ucObligationRequest.LoadSelectedRecord();
         }
 
         internal void LoadComboboxes()
@@ -51,63 +87,13 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
         }
 
-        private void EnableDisableButtonsLocal() 
-        {
-            int selectedRowsCount = dgAllotmentRelease.SelectedRows.Count;
-
-            if (selectedRowsCount == 1 && dgAllotmentRelease.SelectedCells[7].Value != null)
-            {
-                btnSelect.Enabled = true;
-            }
-            else
-            {
-                btnSelect.Enabled = false;
-            }
-        }
-
-        private void LoadSelectedRecord() 
-        {
-            int rowIndex = dgAllotmentRelease.CurrentCell.RowIndex;
-            int fundID = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["fund_id"].Value);
-            int fppID = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["fpp_id"].Value);
-            int? othersFPPID = string.IsNullOrEmpty(dgAllotmentRelease.Rows[rowIndex].Cells["others_fpp_id"].Value.ToString()) ? null : Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["others_fpp_id"].Value);
-            int allotmentClassID = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["allotment_class_id"].Value);
-            int accountID = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["gen_ledger_acc_id"].Value);
-            decimal unobligatedBalance = Convert.ToDecimal(dgAllotmentRelease.Rows[rowIndex].Cells["unobligated_balance"].Value);
-
-            string fundName = dgAllotmentRelease.Rows[rowIndex].Cells["fund_name"].Value.ToString();
-            string fppCode = dgAllotmentRelease.Rows[rowIndex].Cells["fpp_code"].Value.ToString();
-            string fppName = dgAllotmentRelease.Rows[rowIndex].Cells["fpp_name"].Value.ToString();
-            string otherFPPName = dgAllotmentRelease.Rows[rowIndex].Cells["others_fpp_name"].Value.ToString();
-            string allotmentClassesName = dgAllotmentRelease.Rows[rowIndex].Cells["allotment_class_code"].Value.ToString();
-            string accountName = dgAllotmentRelease.Rows[rowIndex].Cells["gen_ledger_name"].Value.ToString();
-            short year = Convert.ToInt16(toolStripCmbxYear.ComboBox.SelectedValue);
-
-            _ucObligationRequest.lblTypeofFund.Text = fundName;
-            _ucObligationRequest.lblFPPCode.Text = fppCode;
-            _ucObligationRequest.lblFPPName.Text = fppName;
-            _ucObligationRequest.lblOtherFPP.Text = string.IsNullOrEmpty(otherFPPName) ? "-": otherFPPName;
-            _ucObligationRequest.lblAllotmentClass.Text = allotmentClassesName;
-            _ucObligationRequest.lblAccount.Text = accountName;
-            _ucObligationRequest.lblBalance.Text = unobligatedBalance.ToString("N2");
-            _ucObligationRequest.lblYear.Text = year.ToString();
-
-            _ucObligationRequest.fundId = fundID;
-            _ucObligationRequest.fppId = fppID;
-            _ucObligationRequest.othersFPPId = othersFPPID;
-            _ucObligationRequest.allotmentClassId = allotmentClassID;
-            _ucObligationRequest.accountId = accountID;
-            _ucObligationRequest.unobligatedBalance = unobligatedBalance;
-            _ucObligationRequest.year = year;
-        }
-
         private void frmSelectAllotmentRelease_Load(object sender, EventArgs e)
         {
-            Helper.DatagridDefaultStyle(dgFPP, true);
-            Helper.DatagridDefaultStyle(dgAllotmentRelease, true);
-
-            HelperLoadRecords.FuntionProjectProgramDatagridView(Factory.FunctionProgramProjectRepository().GetRecords(), dgFPP);
+            Helper.DatagridFullRowSelectStyle(dgFPP, true);
+            Helper.DatagridFullRowSelectStyle(dgAllotmentRelease, true);
             LoadComboboxes();
+
+            HelperLoadRecords.FPPAllotmentReleaseDatagridView(Factory.FunctionProgramProjectRepository().GetRecords(), dgFPP);
         }
 
         private void dgFPP_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -153,6 +139,16 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 LoadSelectedRecord();
                 Close();
             }
+        }
+
+        private void dgFPP_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
+        }
+
+        private void dgAllotmentRelease_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
         }
     }
 }

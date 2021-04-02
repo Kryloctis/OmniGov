@@ -50,7 +50,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     UpdatedBy = 1
                 };
 
-                if (uc.isEdit == false)
+                if (uc.obligationId == 0)
                     return Factory.ObligationRequestRepository().Insert(obligationModel);
                 else 
                     return Factory.ObligationRequestRepository().Update(obligationModel);
@@ -67,9 +67,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             if (SaveData())
             {
                 var uc = ucObligationRequest1;
-                if (uc.isEdit == false)
+                if (uc.obligationId == 0)
                 {
                     uc.ResetFields();
+                    uc.LoadSelectedRecord();
                     Helper.MessageBoxSuccess("Obligation Request has been saved.");
                 }
                 else
@@ -99,7 +100,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             try
             {
                 var uc = ucObligationRequest1;
-                var message = $"Are you sure you want to delete Obligation No. {uc.obligationNo} record?";
+                var message = $"Are you sure you want to delete Obligation No. record?";
 
                 if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes) 
                 {

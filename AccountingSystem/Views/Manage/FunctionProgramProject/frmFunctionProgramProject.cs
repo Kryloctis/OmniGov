@@ -82,7 +82,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                 txtSearch.Clear();
                 byte id = Convert.ToByte(cmbServiceName.SelectedValue);
                 var dtfunctionProgramProjectRepository = Factory.FunctionProgramProjectRepository().GetViewRecordsByServiceNameId(id);
-                HelperLoadRecords.FuntionProjectProgramDatagridView(dtfunctionProgramProjectRepository, dgFunctionalProgramProject);
+                HelperLoadRecords.FunctionProjectProgramDatagridView(dtfunctionProgramProjectRepository, dgFunctionalProgramProject);
 
                 lblRecordCount.Text = dgFunctionalProgramProject.Rows.Count.ToString();
             }
@@ -113,7 +113,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                 byte id = Convert.ToByte(cmbSectorName.SelectedValue);
                 //GetRecordsWithFilter(id)
                 var dtfunctionProgramProjectRepository = Factory.FunctionProgramProjectRepository().GetRecords();
-                HelperLoadRecords.FuntionProjectProgramDatagridView(dtfunctionProgramProjectRepository, dgFunctionalProgramProject);
+                HelperLoadRecords.FunctionProjectProgramDatagridView(dtfunctionProgramProjectRepository, dgFunctionalProgramProject);
 
                 lblRecordCount.Text = Factory.FunctionProgramProjectRepository()
                                              .CountRecords()
@@ -292,7 +292,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             {
                 string searchkey = Convert.ToString(txtSearch.Text);
                 var dtfunctionProgramProjectRepository = Factory.FunctionProgramProjectRepository().GetRecordsBySearch(searchkey);
-                HelperLoadRecords.FuntionProjectProgramDatagridView(dtfunctionProgramProjectRepository, dgFunctionalProgramProject);
+                HelperLoadRecords.FunctionProjectProgramDatagridView(dtfunctionProgramProjectRepository, dgFunctionalProgramProject);
 
                 lblRecordCount.Text = dgFunctionalProgramProject.Rows.Count.ToString();
             }

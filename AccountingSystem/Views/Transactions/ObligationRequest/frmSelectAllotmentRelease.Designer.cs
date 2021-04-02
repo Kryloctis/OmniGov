@@ -29,6 +29,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgFPP = new System.Windows.Forms.DataGridView();
             this.dgAllotmentRelease = new System.Windows.Forms.DataGridView();
@@ -72,6 +73,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // dgFPP
             // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgFPP.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgFPP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgFPP.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgFPP.Location = new System.Drawing.Point(5, 5);
@@ -79,6 +88,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.dgFPP.RowTemplate.Height = 25;
             this.dgFPP.Size = new System.Drawing.Size(292, 461);
             this.dgFPP.TabIndex = 0;
+            this.dgFPP.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgFPP_ColumnAdded);
             this.dgFPP.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgFPP_RowHeaderMouseDoubleClick);
             this.dgFPP.SelectionChanged += new System.EventHandler(this.dgFPP_SelectionChanged);
             // 
@@ -91,6 +101,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.dgAllotmentRelease.RowTemplate.Height = 25;
             this.dgAllotmentRelease.Size = new System.Drawing.Size(934, 432);
             this.dgAllotmentRelease.TabIndex = 1;
+            this.dgAllotmentRelease.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgAllotmentRelease_ColumnAdded);
             this.dgAllotmentRelease.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgAllotmentRelease_RowHeaderMouseDoubleClick);
             this.dgAllotmentRelease.SelectionChanged += new System.EventHandler(this.dgAllotmentRelease_SelectionChanged);
             // 
