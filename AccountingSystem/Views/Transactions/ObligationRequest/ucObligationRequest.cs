@@ -21,10 +21,36 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal int accountId = 0;
         internal short year = 0;
         internal string obligationNo = string.Empty;
+        internal decimal currentObligationAmount = 0;
 
         public ucObligationRequest()
         {
             InitializeComponent();
+        }
+
+        //Amount Validation
+        private void AmountLogic(ErrorProvider ep, NumericUpDown numericUpDown, CancelEventArgs e)
+        {
+            var totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(fundId, fppId, othersFPPId, allotmentClassId, accountId, year);
+
+            var totalObligationRequestAmount = Factory.ObligationRequestRepository().GetTotalObligationAmount(fundId, fppId, othersFPPId, allotmentClassId, accountId, year);
+
+            decimal unobligatedBalance = Convert.ToDecimal(totalAllotmentRelease["total_allotment_release_amount"]) - Convert.ToDecimal(totalObligationRequestAmount["total_obligation_amount"]);
+
+            if (obligationId == 0)
+            {
+                string errorText = numericUpDown.Value > unobligatedBalance ? "The amount you entered exceeds the alloted balance." : string.Empty;
+                bool errorBoolean = numericUpDown.Value > unobligatedBalance ? true : false;
+                ep.SetError(nudAmount, errorText);
+                e.Cancel = errorBoolean;
+            }
+            else
+            {
+                string errorText = numericUpDown.Value > unobligatedBalance + currentObligationAmount ? "The amount you entered exceeds the alloted balance." : string.Empty;
+                bool errorBoolean = numericUpDown.Value > unobligatedBalance + currentObligationAmount ? true : false;
+                ep.SetError(nudAmount, errorText);
+                e.Cancel = errorBoolean;
+            }
         }
 
         //Load Record for Selected Allotment Record
@@ -84,6 +110,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 allotmentClassId = Convert.ToInt32(selectedObligationRequest["allotment_classes_id"]);
                 accountId = Convert.ToInt32(selectedObligationRequest["general_ledger_accounts_id"]);
                 year = Convert.ToInt16(selectedObligationRequest["year"]);
+                currentObligationAmount = Convert.ToDecimal(selectedObligationRequest["obligation_amount"]);
+
 
                 var obligationTotalAmount = Factory.ObligationRequestRepository().GetTotalObligationAmount(
                     fundId,
@@ -144,6 +172,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             lnklblAllotmentRelease.Enabled = true;
             year = 0;
             obligationNo = string.Empty;
+            currentObligationAmount = 0;
 
             lblTypeofFund.Text = "-";
             lblFPPCode.Text = "-";
@@ -219,12 +248,18 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
-
-            if (nudAmount.Value == 0)
+            if (string.IsNullOrEmpty(nudAmount.Text))
             {
-                epAmount.SetError(nudAmount, Helper.ErrorMessage("Valuable Amount"));
+                e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
+            }
+            else if (nudAmount.Value == 0)
+            {
+                epAmount.SetError(nudAmount, "Enter a valuable amount.");
                 e.Cancel = true;
+            }
+            else if(fppId != 0)
+            {
+                AmountLogic(epAmount, nudAmount, e);
             }
         }
         private void nudAmount_Validated(object sender, EventArgs e)

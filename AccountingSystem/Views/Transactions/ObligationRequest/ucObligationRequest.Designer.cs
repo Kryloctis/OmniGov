@@ -75,7 +75,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.groupBox1.Size = new System.Drawing.Size(378, 249);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Allotment Release";
+            this.groupBox1.Text = "Allotment Release Details";
             // 
             // lnklblAllotmentRelease
             // 

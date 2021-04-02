@@ -765,6 +765,7 @@ namespace AccountingSystem
             dataGridView.Columns["fpp_name"].HeaderText = "FPP Name";
             dataGridView.Columns["created_at"].Visible = false;
             dataGridView.Columns["updated_at"].Visible = false;
+            dataGridView.ClearSelection();
         }
 
         internal static void AllotmentReleaseDgvObligationRequest(DataGridView dataGridView, int fppId, int fundID, int allotmentClassId, short year) 
@@ -951,6 +952,9 @@ namespace AccountingSystem
                         dataGridView.Rows[row.Index].DefaultCellStyle.Font = new Font(DataGridView.DefaultFont, FontStyle.Bold);
                     }
                 }
+
+                dataGridView.ClearSelection();
+
             }
             catch (Exception ex)
             {
