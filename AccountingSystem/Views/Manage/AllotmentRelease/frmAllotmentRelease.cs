@@ -64,8 +64,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
             //Show Total Value 
             txtTotalAllotmentRelease.Text = (from DataGridViewRow row in dgAllotmentRelease.Rows
-                             where !String.IsNullOrEmpty(row.Cells[5].FormattedValue.ToString())
-                             select Convert.ToDecimal(row.Cells[5].FormattedValue)).Sum().ToString("N2");
+                             where !String.IsNullOrEmpty(row.Cells["amount"].FormattedValue.ToString())
+                             select Convert.ToDecimal(row.Cells["amount"].FormattedValue)).Sum().ToString("N2");
         }
 
         internal void LoadAppropriationDetails() 

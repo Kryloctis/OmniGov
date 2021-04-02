@@ -33,12 +33,16 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lnklblAllotmentRelease = new System.Windows.Forms.LinkLabel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.lblYear = new System.Windows.Forms.Label();
             this.lblBalance = new System.Windows.Forms.Label();
-            this.lblAccount = new System.Windows.Forms.Label();
+            this.lblAccountCode = new System.Windows.Forms.Label();
+            this.lblAccountName = new System.Windows.Forms.Label();
             this.lblAllotmentClass = new System.Windows.Forms.Label();
             this.lblOtherFPP = new System.Windows.Forms.Label();
             this.lblFPPName = new System.Windows.Forms.Label();
@@ -68,31 +72,39 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(0, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(378, 206);
+            this.groupBox1.Size = new System.Drawing.Size(378, 249);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Allotment Release";
+            this.groupBox1.Text = "Allotment Release Details";
             // 
             // lnklblAllotmentRelease
             // 
+            this.lnklblAllotmentRelease.ActiveLinkColor = System.Drawing.Color.Magenta;
             this.lnklblAllotmentRelease.AutoSize = true;
+            this.lnklblAllotmentRelease.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnklblAllotmentRelease.LinkColor = System.Drawing.Color.DodgerBlue;
             this.lnklblAllotmentRelease.Location = new System.Drawing.Point(235, 0);
             this.lnklblAllotmentRelease.Name = "lnklblAllotmentRelease";
             this.lnklblAllotmentRelease.Size = new System.Drawing.Size(137, 15);
             this.lnklblAllotmentRelease.TabIndex = 1;
             this.lnklblAllotmentRelease.TabStop = true;
             this.lnklblAllotmentRelease.Text = "Select Allotment Release";
+            this.lnklblAllotmentRelease.VisitedLinkColor = System.Drawing.Color.Magenta;
             this.lnklblAllotmentRelease.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnklblAllotmentRelease_LinkClicked);
             // 
             // panel1
             // 
             this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.lblYear);
             this.panel1.Controls.Add(this.lblBalance);
-            this.panel1.Controls.Add(this.lblAccount);
+            this.panel1.Controls.Add(this.lblAccountCode);
+            this.panel1.Controls.Add(this.lblAccountName);
             this.panel1.Controls.Add(this.lblAllotmentClass);
             this.panel1.Controls.Add(this.lblOtherFPP);
             this.panel1.Controls.Add(this.lblFPPName);
@@ -105,26 +117,44 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel1.Location = new System.Drawing.Point(3, 19);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(372, 184);
+            this.panel1.Size = new System.Drawing.Size(372, 227);
             this.panel1.TabIndex = 0;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 180);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(29, 15);
+            this.label11.TabIndex = 8;
+            this.label11.Text = "Year";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 155);
+            this.label9.Location = new System.Drawing.Point(3, 205);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(48, 15);
             this.label9.TabIndex = 8;
             this.label9.Text = "Balance";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 130);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(83, 15);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "Account Code";
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 130);
+            this.label6.Location = new System.Drawing.Point(3, 155);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 15);
+            this.label6.Size = new System.Drawing.Size(87, 15);
             this.label6.TabIndex = 6;
-            this.label6.Text = "Account";
+            this.label6.Text = "Account Name";
             // 
             // label5
             // 
@@ -144,25 +174,45 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.label4.TabIndex = 4;
             this.label4.Text = "Other FPP";
             // 
+            // lblYear
+            // 
+            this.lblYear.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblYear.Location = new System.Drawing.Point(101, 180);
+            this.lblYear.Margin = new System.Windows.Forms.Padding(5, 5, 3, 5);
+            this.lblYear.Name = "lblYear";
+            this.lblYear.Size = new System.Drawing.Size(268, 15);
+            this.lblYear.TabIndex = 2;
+            this.lblYear.Text = "-";
+            // 
             // lblBalance
             // 
             this.lblBalance.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblBalance.Location = new System.Drawing.Point(101, 155);
+            this.lblBalance.Location = new System.Drawing.Point(101, 205);
             this.lblBalance.Margin = new System.Windows.Forms.Padding(5, 5, 3, 5);
             this.lblBalance.Name = "lblBalance";
             this.lblBalance.Size = new System.Drawing.Size(268, 15);
             this.lblBalance.TabIndex = 2;
             this.lblBalance.Text = "-";
             // 
-            // lblAccount
+            // lblAccountCode
             // 
-            this.lblAccount.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblAccount.Location = new System.Drawing.Point(101, 130);
-            this.lblAccount.Margin = new System.Windows.Forms.Padding(5, 5, 3, 5);
-            this.lblAccount.Name = "lblAccount";
-            this.lblAccount.Size = new System.Drawing.Size(268, 15);
-            this.lblAccount.TabIndex = 2;
-            this.lblAccount.Text = "-";
+            this.lblAccountCode.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblAccountCode.Location = new System.Drawing.Point(101, 130);
+            this.lblAccountCode.Margin = new System.Windows.Forms.Padding(5, 5, 3, 5);
+            this.lblAccountCode.Name = "lblAccountCode";
+            this.lblAccountCode.Size = new System.Drawing.Size(268, 15);
+            this.lblAccountCode.TabIndex = 2;
+            this.lblAccountCode.Text = "-";
+            // 
+            // lblAccountName
+            // 
+            this.lblAccountName.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblAccountName.Location = new System.Drawing.Point(101, 155);
+            this.lblAccountName.Margin = new System.Windows.Forms.Padding(5, 5, 3, 5);
+            this.lblAccountName.Name = "lblAccountName";
+            this.lblAccountName.Size = new System.Drawing.Size(268, 15);
+            this.lblAccountName.TabIndex = 2;
+            this.lblAccountName.Text = "-";
             // 
             // lblAllotmentClass
             // 
@@ -244,7 +294,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // nudAmount
             // 
             this.nudAmount.DecimalPlaces = 2;
-            this.nudAmount.Location = new System.Drawing.Point(104, 250);
+            this.nudAmount.Location = new System.Drawing.Point(104, 293);
             this.nudAmount.Maximum = new decimal(new int[] {
             999999999,
             0,
@@ -260,7 +310,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 252);
+            this.label7.Location = new System.Drawing.Point(6, 295);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(51, 15);
             this.label7.TabIndex = 10;
@@ -268,7 +318,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // mkTxtObligationNum
             // 
-            this.mkTxtObligationNum.Location = new System.Drawing.Point(104, 221);
+            this.mkTxtObligationNum.Location = new System.Drawing.Point(104, 264);
             this.mkTxtObligationNum.Mask = "0000-00-00-000";
             this.mkTxtObligationNum.Name = "mkTxtObligationNum";
             this.mkTxtObligationNum.Size = new System.Drawing.Size(274, 23);
@@ -279,7 +329,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 224);
+            this.label8.Location = new System.Drawing.Point(6, 267);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(85, 15);
             this.label8.TabIndex = 8;
@@ -303,7 +353,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.Controls.Add(this.label8);
             this.Controls.Add(this.groupBox1);
             this.Name = "ucObligationRequest";
-            this.Size = new System.Drawing.Size(401, 277);
+            this.Size = new System.Drawing.Size(401, 324);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -338,8 +388,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.Label lblFPPCode;
         internal System.Windows.Forms.Label lblOtherFPP;
         internal System.Windows.Forms.Label lblBalance;
-        internal System.Windows.Forms.Label lblAccount;
+        internal System.Windows.Forms.Label lblAccountName;
         internal System.Windows.Forms.Label lblAllotmentClass;
         internal System.Windows.Forms.LinkLabel lnklblAllotmentRelease;
+        private System.Windows.Forms.Label label11;
+        internal System.Windows.Forms.Label lblYear;
+        private System.Windows.Forms.Label label12;
+        internal System.Windows.Forms.Label lblAccountCode;
     }
 }

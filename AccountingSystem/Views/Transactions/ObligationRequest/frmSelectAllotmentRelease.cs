@@ -22,6 +22,22 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             toolStripCmbxYear.ComboBox.SelectedValueChanged += new EventHandler(toolStripCmbxYear_SelectedValueChanged);
         }
 
+       
+
+        private void EnableDisableButtonsLocal()
+        {
+            int selectedRowsCount = dgAllotmentRelease.SelectedRows.Count;
+
+            if (selectedRowsCount == 1 && dgAllotmentRelease.SelectedCells[7].Value != null)
+            {
+                btnSelect.Enabled = true;
+            }
+            else
+            {
+                btnSelect.Enabled = false;
+            }
+        }
+
         internal void LoadAllotmentReleaseRecords()
         {
             int dgFPPRowCount = dgFPP.SelectedRows.Count;
@@ -30,11 +46,31 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             {
                 int fppID = Convert.ToInt32(dgFPP.SelectedCells[0].Value);
                 int allotmentClassID = Convert.ToInt32(toolStripCmbxAllotmentClass.ComboBox.SelectedValue);
-                int typeOfFundID = Convert.ToInt32(toolStripCmbxFunds.ComboBox.SelectedValue);
+                int fundID = Convert.ToInt32(toolStripCmbxFunds.ComboBox.SelectedValue);
                 short year = Convert.ToInt16(toolStripCmbxYear.ComboBox.SelectedValue);
 
-                HelperLoadRecords.AllotmentReleaseDgvObligationRequest(dgAllotmentRelease, fppID, allotmentClassID, typeOfFundID, year);
+                HelperLoadRecords.AllotmentReleaseDgvObligationRequest(dgAllotmentRelease, fppID, allotmentClassID, fundID, year);
             }
+        }
+
+        private void LoadSelectedRecord()
+        {
+            int rowIndex = dgAllotmentRelease.CurrentCell.RowIndex;
+
+            int fundID = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["fund_id"].Value);
+            int fppID = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["fpp_id"].Value);
+            int? othersFPPID = string.IsNullOrEmpty(dgAllotmentRelease.Rows[rowIndex].Cells["others_fpp_id"].Value.ToString()) ? null : Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["others_fpp_id"].Value);
+            int allotmentClassID = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["allotment_class_id"].Value);
+            int accountID = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["gen_ledger_acc_id"].Value);
+            short year = Convert.ToInt16(toolStripCmbxYear.ComboBox.SelectedValue);
+
+            _ucObligationRequest.fundId = fundID;
+            _ucObligationRequest.fppId = fppID;
+            _ucObligationRequest.othersFPPId = othersFPPID;
+            _ucObligationRequest.allotmentClassId = allotmentClassID;
+            _ucObligationRequest.accountId = accountID;
+            _ucObligationRequest.year = year;
+            _ucObligationRequest.LoadSelectedRecord();
         }
 
         internal void LoadComboboxes()
@@ -51,43 +87,13 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
         }
 
-        private void EnableDisableButtonsLocal() 
-        {
-            int selectedRowsCount = dgAllotmentRelease.SelectedRows.Count;
-
-            if (selectedRowsCount == 1 && dgAllotmentRelease.SelectedCells[7].Value != null)
-            {
-                btnSelect.Enabled = true;
-            }
-            else
-            {
-                btnSelect.Enabled = false;
-            }
-        }
-
-        private void LoadSelectedRecord() 
-        {
-            _ucObligationRequest.lblTypeofFund.Text = dgAllotmentRelease.SelectedCells[6].Value.ToString();
-            _ucObligationRequest.lblFPPCode.Text = dgAllotmentRelease.SelectedCells[8].Value.ToString();
-            _ucObligationRequest.lblFPPName.Text = dgAllotmentRelease.SelectedCells[9].Value.ToString();
-            _ucObligationRequest.lblOtherFPP.Text = string.IsNullOrEmpty(dgAllotmentRelease.SelectedCells[11].Value.ToString())? "-": dgAllotmentRelease.SelectedCells[11].Value.ToString();
-            _ucObligationRequest.lblAllotmentClass.Text = dgAllotmentRelease.SelectedCells[13].Value.ToString();
-            _ucObligationRequest.lblAccount.Text = dgAllotmentRelease.SelectedCells[17].Value.ToString();
-
-            _ucObligationRequest.fundId = Convert.ToInt32(dgAllotmentRelease.SelectedCells[4].Value);
-            _ucObligationRequest.fppId = Convert.ToInt32(dgAllotmentRelease.SelectedCells[7].Value);
-            _ucObligationRequest.othersFPPId = string.IsNullOrEmpty(dgAllotmentRelease.SelectedCells[10].Value.ToString())? null: Convert.ToInt32(dgAllotmentRelease.SelectedCells[10].Value);
-            _ucObligationRequest.allotmentClassId = Convert.ToInt32(dgAllotmentRelease.SelectedCells[12].Value);
-            _ucObligationRequest.accountId = Convert.ToInt32(dgAllotmentRelease.SelectedCells[15].Value);
-        }
-
         private void frmSelectAllotmentRelease_Load(object sender, EventArgs e)
         {
-            Helper.DatagridDefaultStyle(dgFPP, true);
-            Helper.DatagridDefaultStyle(dgAllotmentRelease, true);
-
-            HelperLoadRecords.FPPDgVObligationRequest(dgFPP,Factory.AllotmentReleaseRepository().GetFPPRecords());
+            Helper.DatagridFullRowSelectStyle(dgFPP, true);
+            Helper.DatagridFullRowSelectStyle(dgAllotmentRelease, true);
             LoadComboboxes();
+
+            HelperLoadRecords.FPPAllotmentReleaseDatagridView(Factory.FunctionProgramProjectRepository().GetRecords(), dgFPP);
         }
 
         private void dgFPP_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -133,6 +139,16 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 LoadSelectedRecord();
                 Close();
             }
+        }
+
+        private void dgFPP_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
+        }
+
+        private void dgAllotmentRelease_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
         }
     }
 }

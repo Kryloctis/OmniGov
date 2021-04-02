@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             try
             {
-                var uc = ucObligationRequestNew1;
+                var uc = ucObligationRequest1;
 
                 if (!uc.ValidateChildren() || uc.fppId == 0) 
                 {
@@ -45,11 +45,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     GenLedgerAccID = uc.accountId,
                     ObligationNo = uc.mkTxtObligationNum.Text,
                     ObligationAmount = uc.nudAmount.Value,
+                    year = uc.year,
                     CreatedBy = 1,
                     UpdatedBy = 1
                 };
 
-                if (uc.isEdit == false)
+                if (uc.obligationId == 0)
                     return Factory.ObligationRequestRepository().Insert(obligationModel);
                 else 
                     return Factory.ObligationRequestRepository().Update(obligationModel);
@@ -65,10 +66,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             if (SaveData())
             {
-                var uc = ucObligationRequestNew1;
-                if (uc.isEdit == false)
+                var uc = ucObligationRequest1;
+                if (uc.obligationId == 0)
                 {
                     uc.ResetFields();
+                    uc.LoadSelectedRecord();
                     Helper.MessageBoxSuccess("Obligation Request has been saved.");
                 }
                 else
@@ -84,7 +86,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            var uc = ucObligationRequestNew1;
+            var uc = ucObligationRequest1;
 
             btnCancel.Enabled = false;
             btnDelete.Enabled = false;
@@ -97,8 +99,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             try
             {
-                var uc = ucObligationRequestNew1;
-                var message = $"Are you sure you want to delete Obligation No. {uc.obligationNo} record?";
+                var uc = ucObligationRequest1;
+                var message = $"Are you sure you want to delete Obligation No. record?";
 
                 if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes) 
                 {
