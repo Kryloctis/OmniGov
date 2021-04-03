@@ -72,7 +72,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.cmbxFPP.Location = new System.Drawing.Point(140, 29);
             this.cmbxFPP.Name = "cmbxFPP";
             this.cmbxFPP.Size = new System.Drawing.Size(436, 23);
-            this.cmbxFPP.TabIndex = 0;
+            this.cmbxFPP.TabIndex = 1;
             this.cmbxFPP.SelectedValueChanged += new System.EventHandler(this.cmbxFPP_SelectedValueChanged);
             this.cmbxFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxFPP_Validating);
             this.cmbxFPP.Validated += new System.EventHandler(this.cmbxFPP_Validated);
@@ -92,7 +92,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.cmbxOthersFPP.Location = new System.Drawing.Point(140, 58);
             this.cmbxOthersFPP.Name = "cmbxOthersFPP";
             this.cmbxOthersFPP.Size = new System.Drawing.Size(436, 23);
-            this.cmbxOthersFPP.TabIndex = 1;
+            this.cmbxOthersFPP.TabIndex = 2;
             this.cmbxOthersFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxOthersFPP_Validating);
             this.cmbxOthersFPP.Validated += new System.EventHandler(this.cmbxOthersFPP_Validated);
             // 
@@ -111,7 +111,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.cmbxAllotmentClass.Location = new System.Drawing.Point(140, 87);
             this.cmbxAllotmentClass.Name = "cmbxAllotmentClass";
             this.cmbxAllotmentClass.Size = new System.Drawing.Size(436, 23);
-            this.cmbxAllotmentClass.TabIndex = 2;
+            this.cmbxAllotmentClass.TabIndex = 3;
             this.cmbxAllotmentClass.SelectedValueChanged += new System.EventHandler(this.cmbxAllotmentClass_SelectedValueChanged);
             this.cmbxAllotmentClass.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAllotmentClass_Validating);
             this.cmbxAllotmentClass.Validated += new System.EventHandler(this.cmbxAllotmentClass_Validated);
@@ -132,7 +132,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.cmbxLedgerAccount.Location = new System.Drawing.Point(140, 116);
             this.cmbxLedgerAccount.Name = "cmbxLedgerAccount";
             this.cmbxLedgerAccount.Size = new System.Drawing.Size(436, 23);
-            this.cmbxLedgerAccount.TabIndex = 3;
+            this.cmbxLedgerAccount.TabIndex = 4;
             this.cmbxLedgerAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxLedgerAccount_Validating);
             this.cmbxLedgerAccount.Validated += new System.EventHandler(this.cmbxLedgerAccount_Validated);
             // 
@@ -165,7 +165,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             0});
             this.nudAmount.Name = "nudAmount";
             this.nudAmount.Size = new System.Drawing.Size(436, 23);
-            this.nudAmount.TabIndex = 4;
+            this.nudAmount.TabIndex = 7;
             this.nudAmount.ThousandsSeparator = true;
             this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
             this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
@@ -199,7 +199,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.dtDateEntry.Location = new System.Drawing.Point(140, 174);
             this.dtDateEntry.Name = "dtDateEntry";
             this.dtDateEntry.Size = new System.Drawing.Size(436, 23);
-            this.dtDateEntry.TabIndex = 5;
+            this.dtDateEntry.TabIndex = 6;
             // 
             // label6
             // 
@@ -226,7 +226,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.cmbxTypeOfFund.Location = new System.Drawing.Point(140, 0);
             this.cmbxTypeOfFund.Name = "cmbxTypeOfFund";
             this.cmbxTypeOfFund.Size = new System.Drawing.Size(436, 23);
-            this.cmbxTypeOfFund.TabIndex = 6;
+            this.cmbxTypeOfFund.TabIndex = 0;
             this.cmbxTypeOfFund.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxTypeOfFund_Validating);
             this.cmbxTypeOfFund.Validated += new System.EventHandler(this.cmbxTypeOfFund_Validated);
             // 
@@ -254,7 +254,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             0});
             this.nudYear.Name = "nudYear";
             this.nudYear.Size = new System.Drawing.Size(436, 23);
-            this.nudYear.TabIndex = 7;
+            this.nudYear.TabIndex = 5;
             this.nudYear.Value = new decimal(new int[] {
             1753,
             0,

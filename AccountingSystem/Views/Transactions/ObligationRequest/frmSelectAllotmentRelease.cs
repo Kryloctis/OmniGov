@@ -77,9 +77,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             try
             {
-                HelperLoadRecords.AllomentToolStripCmbx(Factory.AllotmentClassesRepository().GetRecords(), toolStripCmbxAllotmentClass, "allotment_code", "id");
-                HelperLoadRecords.TypeOfFundsToolStripCmbx(Factory.FundsRepository().GetRecords(), toolStripCmbxFunds, "fund_name", "id");
-                HelperLoadRecords.YearToolStripCmbx(Factory.BudgetAppropriationsRepository().GetYearsBudgetAppropriations(), toolStripCmbxYear, "year", "year");
+                HelperLoadRecords.BudgetAppropriationsAllomentToolStripCombobox(Factory.AllotmentClassesRepository().GetRecords(), toolStripCmbxAllotmentClass, "allotment_code", "id");
+                HelperLoadRecords.BudgetAppropriationsTypeOfFundsToolStripCombobox(Factory.FundsRepository().GetRecords(), toolStripCmbxFunds, "fund_name", "id");
+                HelperLoadRecords.BudgetAppropriationsYearToolStripCombobox(Factory.BudgetAppropriationsRepository().GetYearsBudgetAppropriations(), toolStripCmbxYear, "year", "year");
             }
             catch (Exception ex)
             {

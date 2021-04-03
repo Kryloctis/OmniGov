@@ -76,7 +76,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 else 
                 {
                     int fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
-                    HelperLoadRecords.OthersFPPCmbx(Factory.OthersFPPRepository().GetRecordsByID(fppId), cmbxOthersFPP, "name", "id");
+                    HelperLoadRecords.BudgetAppropriationsOthersFPPCombobox(Factory.OthersFPPRepository().GetRecordsByID(fppId), cmbxOthersFPP, "name", "id");
                     cmbxOthersFPP.SelectedIndex = -1;
                     cmbxOthersFPP.Enabled = true;
                 }
@@ -93,7 +93,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             try
             {
                 cmbxAllotmentClass.SelectedValueChanged -= new EventHandler(cmbxAllotmentClass_SelectedValueChanged);
-                HelperLoadRecords.AllotmentCmbx(Factory.AllotmentClassesRepository().GetRecords(), cmbxAllotmentClass, "allotment_name", "id");
+                HelperLoadRecords.BudgetAppropriationsAllotmentCombobox(Factory.AllotmentClassesRepository().GetRecords(), cmbxAllotmentClass, "allotment_name", "id");
                 cmbxAllotmentClass.SelectedValueChanged += new EventHandler(cmbxAllotmentClass_SelectedValueChanged);
             }
             catch (Exception ex) 
@@ -117,11 +117,11 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 {
                     if (Convert.ToInt32(cmbxAllotmentClass.SelectedValue) == 4)
                     {
-                        HelperLoadRecords.GeneralLedgerAccountsCmbx(Factory.GeneralLedgerAccountsRepository().GetAllViewRecords(), cmbxLedgerAccount, "ledger_name", "general_ledger_accounts_id");
+                        HelperLoadRecords.BudgetAppropriationsGeneralLedgerAccountsCombobox(Factory.GeneralLedgerAccountsRepository().GetAllViewRecords(), cmbxLedgerAccount, "ledger_name", "general_ledger_accounts_id");
                     }
                     else 
                     {
-                        HelperLoadRecords.GeneralLedgerAccountsCmbx(Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajAccGroupName(cmbxAllotmentClass.Text.Trim()), cmbxLedgerAccount, "ledger_name", "general_ledger_accounts_id");
+                        HelperLoadRecords.BudgetAppropriationsGeneralLedgerAccountsCombobox(Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajAccGroupName(cmbxAllotmentClass.Text.Trim()), cmbxLedgerAccount, "ledger_name", "general_ledger_accounts_id");
                     }
                 
                     cmbxLedgerAccount.Enabled = true;
@@ -140,7 +140,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             try
             {
-                HelperLoadRecords.TypeOfFundsCmbx(Factory.FundsRepository().GetRecords(), cmbxTypeOfFund, "fund_name", "id");
+                HelperLoadRecords.BudgetAppropriationsTypeOfFundsCombobox(Factory.FundsRepository().GetRecords(), cmbxTypeOfFund, "fund_name", "id");
             }
             catch (Exception ex)
             {
