@@ -46,14 +46,14 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 248);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(612, 29);
-            this.flowLayoutPanel1.TabIndex = 0;
+            this.flowLayoutPanel1.TabIndex = 1;
             // 
             // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(534, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 0;
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -63,7 +63,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
             this.btnSave.Location = new System.Drawing.Point(453, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 1;
+            this.btnSave.TabIndex = 2;
             this.btnSave.Text = "Save";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -76,7 +76,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
             this.ucBudgetAppropriations1.Location = new System.Drawing.Point(12, 12);
             this.ucBudgetAppropriations1.Name = "ucBudgetAppropriations1";
             this.ucBudgetAppropriations1.Size = new System.Drawing.Size(601, 230);
-            this.ucBudgetAppropriations1.TabIndex = 1;
+            this.ucBudgetAppropriations1.TabIndex = 0;
             // 
             // frmBudgetAppropriationsEdit
             // 
