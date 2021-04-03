@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.BudgetAppropriations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,10 +19,13 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal int? othersFPPID = null;
         internal int allotmentClassesID = 0;
         internal int generalLedgerAccID = 0;
+        private frmBudgetAppropriations _frmBudgetAppropriations;
 
-        public frmAllotmentRelease()
+
+        public frmAllotmentRelease(frmBudgetAppropriations frmBudgetAppropriations)
         {
             InitializeComponent();
+            _frmBudgetAppropriations = frmBudgetAppropriations;
             btnAdd.Click += new EventHandler(btnAdd_Click);
             btnEdit.Click += new EventHandler(btnEdit_Click);
             btnDelete.Click += new EventHandler(btnDelete_Click);
@@ -88,7 +92,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void btnAdd_Click(object sender, EventArgs e) 
         {
-            var frmAllotmentReleaseAddForm = new frmAllotmentReleaseAdd(this);
+            var frmAllotmentReleaseAddForm = new frmAllotmentReleaseAdd(this, _frmBudgetAppropriations);
             var uc = frmAllotmentReleaseAddForm.ucAllotmentRelease1;
 
             uc.budgetAppropriationID = budgetAppropriationID;
@@ -97,7 +101,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void btnEdit_Click(object sender, EventArgs e) 
         {
-            var frmAllotmentReleaseEditForm = new frmAllotmentReleaseEdit(this);
+            var frmAllotmentReleaseEditForm = new frmAllotmentReleaseEdit(this, _frmBudgetAppropriations);
             var uc = frmAllotmentReleaseEditForm.ucAllotmentRelease1;
 
             uc.allotmentReleaseID = Convert.ToInt32(dgAllotmentRelease.SelectedCells[0].Value);
@@ -132,6 +136,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                         _ = Factory.AllotmentReleaseRepository().Delete(allotmentModelList);
                         LoadAllotmentReleaseRecords();
                         LoadAppropriationDetails();
+                        _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
                     }
                 }
             }

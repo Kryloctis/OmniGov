@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.BudgetAppropriations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,10 +15,27 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
     public partial class frmAllotmentReleaseEdit : Form
     {
         private frmAllotmentRelease _frmAllotmentRelease;
-        public frmAllotmentReleaseEdit(frmAllotmentRelease frmAllotmentRelease)
+        private frmBudgetAppropriations _frmBudgetAppropriations;
+        public frmAllotmentReleaseEdit(frmAllotmentRelease frmAllotmentRelease, frmBudgetAppropriations frmBudgetAppropriations)
         {
             InitializeComponent();
             _frmAllotmentRelease = frmAllotmentRelease;
+            _frmBudgetAppropriations = frmBudgetAppropriations;
+        }
+
+        private void LoadBudgetAppropriationRecords()
+        {
+            var uc = ucAllotmentRelease1;
+            _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
+
+            foreach (DataGridViewRow row in _frmBudgetAppropriations.dgBudgetAppropriations.Rows)
+            {
+                if (Convert.ToInt32(row.Cells["budget_appropriations_id"].Value) == uc.budgetAppropriationID)
+                {
+                    _frmBudgetAppropriations.dgBudgetAppropriations.CurrentCell = _frmBudgetAppropriations.dgBudgetAppropriations.Rows[row.Index].Cells["account_code"];
+                }
+            }
+
         }
 
         private void LoadSelectedRecord() 
@@ -88,6 +106,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 Helper.MessageBoxSuccess("Allotment Release has been updated");
                 _frmAllotmentRelease.LoadAppropriationDetails();
                 _frmAllotmentRelease.LoadAllotmentReleaseRecords();
+                LoadBudgetAppropriationRecords();
                 Close();
             }
         }

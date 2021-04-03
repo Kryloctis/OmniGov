@@ -109,7 +109,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         private void ShowAllotmentRelease()
         {
-            var frmAllotmentReleaseForm = new frmAllotmentRelease();
+            var frmAllotmentReleaseForm = new frmAllotmentRelease(this);
 
             var budgetAppId = Convert.ToInt32(dgBudgetAppropriations.SelectedCells[0].Value);
             var fppId = Convert.ToInt32(dgBudgetAppropriations.SelectedCells[1].Value);
