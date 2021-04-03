@@ -103,7 +103,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.txtPurpose.MaxLength = 100000;
             this.txtPurpose.Name = "txtPurpose";
             this.txtPurpose.Size = new System.Drawing.Size(316, 23);
-            this.txtPurpose.TabIndex = 3;
+            this.txtPurpose.TabIndex = 1;
             this.txtPurpose.Validating += new System.ComponentModel.CancelEventHandler(this.txtPurpose_Validating);
             this.txtPurpose.Validated += new System.EventHandler(this.txtPurpose_Validated);
             // 
@@ -112,7 +112,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.dtDateIssued.Location = new System.Drawing.Point(72, 58);
             this.dtDateIssued.Name = "dtDateIssued";
             this.dtDateIssued.Size = new System.Drawing.Size(316, 23);
-            this.dtDateIssued.TabIndex = 4;
+            this.dtDateIssued.TabIndex = 2;
             // 
             // nudAmount
             // 
@@ -125,7 +125,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             0});
             this.nudAmount.Name = "nudAmount";
             this.nudAmount.Size = new System.Drawing.Size(316, 23);
-            this.nudAmount.TabIndex = 5;
+            this.nudAmount.TabIndex = 3;
             this.nudAmount.ThousandsSeparator = true;
             this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
             this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
@@ -156,7 +156,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.mskTxtAroNo.Mask = "000-0000";
             this.mskTxtAroNo.Name = "mskTxtAroNo";
             this.mskTxtAroNo.Size = new System.Drawing.Size(316, 23);
-            this.mskTxtAroNo.TabIndex = 6;
+            this.mskTxtAroNo.TabIndex = 0;
             this.mskTxtAroNo.Validating += new System.ComponentModel.CancelEventHandler(this.mskTxtAroNo_Validating);
             this.mskTxtAroNo.Validated += new System.EventHandler(this.mskTxtAroNo_Validated);
             // 

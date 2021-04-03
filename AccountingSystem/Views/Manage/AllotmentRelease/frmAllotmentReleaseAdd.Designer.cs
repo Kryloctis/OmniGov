@@ -46,14 +46,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 137);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(439, 30);
-            this.flowLayoutPanel1.TabIndex = 0;
+            this.flowLayoutPanel1.TabIndex = 1;
             // 
             // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(361, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 0;
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnSave.Location = new System.Drawing.Point(280, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 1;
+            this.btnSave.TabIndex = 2;
             this.btnSave.Text = "Save";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -75,7 +75,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.ucAllotmentRelease1.Location = new System.Drawing.Point(20, 12);
             this.ucAllotmentRelease1.Name = "ucAllotmentRelease1";
             this.ucAllotmentRelease1.Size = new System.Drawing.Size(416, 119);
-            this.ucAllotmentRelease1.TabIndex = 1;
+            this.ucAllotmentRelease1.TabIndex = 0;
             // 
             // frmAllotmentReleaseAdd
             // 
