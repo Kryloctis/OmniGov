@@ -429,7 +429,140 @@ namespace AccountingSystem
 
         #region BudgetAppropriations
 
-        internal static void BudgetAppropriationsDgV(DataGridView dgvBudgetAppropriations, int fppID, int allotmentClassID, int typeOfFundsID, Int16 year, TextBox txtTotalAppropriation)
+        internal static void BudgetAppropriationsOthersFPPCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+
+            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                // loop datatable to add items in autocompletesource
+                foreach (DataRow item in dataTable.Rows)
+                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
+
+                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            }
+        }
+
+        internal static void BudgetAppropriationsAllotmentCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+
+            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                // loop datatable to add items in autocompletesource
+                foreach (DataRow item in dataTable.Rows)
+                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
+
+                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            }
+        }
+        internal static void BudgetAppropriationsAllomentToolStripCombobox(DataTable dataTable, ToolStripComboBox toolStripComboBox, string displayMember, string valueMember)
+        {
+            toolStripComboBox.ComboBox.DataSource = dataTable;
+            toolStripComboBox.ComboBox.DisplayMember = displayMember;
+            toolStripComboBox.ComboBox.ValueMember = valueMember;
+
+            if (toolStripComboBox.DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                // loop datatable to add items in autocompletesource
+                foreach (DataRow item in dataTable.Rows)
+                    toolStripComboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
+
+                toolStripComboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                toolStripComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            }
+        }
+
+        internal static void BudgetAppropriationsTypeOfFundsCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+
+            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                // loop datatable to add items in autocompletesource
+                foreach (DataRow item in dataTable.Rows)
+                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
+
+                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            }
+
+        }
+        internal static void BudgetAppropriationsTypeOfFundsToolStripCombobox(DataTable dataTable, ToolStripComboBox comboBox, string displayMember, string valueMember) 
+        {
+            comboBox.ComboBox.DataSource = dataTable;
+            comboBox.ComboBox.DisplayMember = displayMember;
+            comboBox.ComboBox.ValueMember = valueMember;
+
+            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                // loop datatable to add items in autocompletesource
+                foreach (DataRow item in dataTable.Rows)
+                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
+
+                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            }
+        }
+
+        internal static void BudgetAppropriationsYearToolStripCombobox(DataTable dataTable, ToolStripComboBox toolStripComboBox, string displayMember, string valueMember)
+        {
+            toolStripComboBox.ComboBox.DataSource = dataTable;
+            toolStripComboBox.ComboBox.DisplayMember = displayMember;
+            toolStripComboBox.ComboBox.ValueMember = valueMember;
+        }
+
+        internal static void BudgetAppropriationsGeneralLedgerAccountsCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+
+            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                // loop datatable to add items in autocompletesource
+                foreach (DataRow item in dataTable.Rows)
+                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
+
+                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+                comboBox.DropDownHeight = 200;
+            }
+        }
+
+        internal static void FPPBudgetAppropriationsDatagridView(DataTable dataTable, DataGridView dataGridView) 
+        {
+            try
+            {
+                dataGridView.DataSource = dataTable;
+                dataGridView.Columns["id"].Visible = false;
+                dataGridView.Columns["service_name"].Visible = false;
+                dataGridView.Columns["fpp_code"].HeaderText = "FPP Code";
+                dataGridView.Columns["fpp_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                dataGridView.Columns["fpp_name"].HeaderText = "FPP Name";
+                dataGridView.Columns["created_at"].Visible = false;
+                dataGridView.Columns["updated_at"].Visible = false;
+                dataGridView.ClearSelection();
+
+                dataGridView.Columns["fpp_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                dataGridView.Columns["fpp_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["fpp_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+            catch (Exception ex) 
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        internal static void BudgetAppropriationsDatagridView(DataGridView dgvBudgetAppropriations, int fppID, int allotmentClassID, int typeOfFundsID, Int16 year, TextBox txtTotalAppropriation)
         {
             try
             {
@@ -451,20 +584,22 @@ namespace AccountingSystem
                 dgvBudgetAppropriations.Columns.Add("created_at", "Created at");
                 dgvBudgetAppropriations.Columns.Add("updated_at", "Updated at");
 
-                //Set up Column Format 
-                dgvBudgetAppropriations.Columns[0].Visible = false;
-                dgvBudgetAppropriations.Columns[1].Visible = false;
-                dgvBudgetAppropriations.Columns[2].Visible = false;
-                dgvBudgetAppropriations.Columns[3].Visible = false;
-                dgvBudgetAppropriations.Columns[4].Visible = false;
-                dgvBudgetAppropriations.Columns[7].DefaultCellStyle.Format = "N2";
-                dgvBudgetAppropriations.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                dgvBudgetAppropriations.Columns[8].DefaultCellStyle.Format = "N2";
-                dgvBudgetAppropriations.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                dgvBudgetAppropriations.Columns[9].DefaultCellStyle.Format = "N2";
-                dgvBudgetAppropriations.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                dgvBudgetAppropriations.Columns[10].Visible = false;
-                dgvBudgetAppropriations.Columns[11].Visible = false;
+                //Column's Visibility
+                dgvBudgetAppropriations.Columns["budget_appropriations_id"].Visible = false;
+                dgvBudgetAppropriations.Columns["fpp_id"].Visible = false;
+                dgvBudgetAppropriations.Columns["others_fpp_id"].Visible = false;
+                dgvBudgetAppropriations.Columns["allotment_classes_id"].Visible = false;
+                dgvBudgetAppropriations.Columns["general_ledger_acc_id"].Visible = false;
+                dgvBudgetAppropriations.Columns["created_at"].Visible = false;
+                dgvBudgetAppropriations.Columns["updated_at"].Visible = false;
+
+                //Column's Format
+                dgvBudgetAppropriations.Columns["appropriation"].DefaultCellStyle.Format = "N2";
+                dgvBudgetAppropriations.Columns["appropriation"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dgvBudgetAppropriations.Columns["total_allotment_release"].DefaultCellStyle.Format = "N2";
+                dgvBudgetAppropriations.Columns["total_allotment_release"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dgvBudgetAppropriations.Columns["appropriation_balance"].DefaultCellStyle.Format = "N2";
+                dgvBudgetAppropriations.Columns["appropriation_balance"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
                 //Initialize Repository Method
                 DataTable dtGetViewRecordsByFFPIDByAllotmentClass = Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(fppID, allotmentClassID, null, typeOfFundsID, year);
@@ -520,154 +655,24 @@ namespace AccountingSystem
                 //Change Font style for the header of Others FPP
                 foreach (DataGridViewRow row in dgvBudgetAppropriations.Rows)
                 {
-                    if (row.Cells[1].Value == null)
+                    if (row.Cells["fpp_id"].Value == null)
                     {
                         dgvBudgetAppropriations.Rows[row.Index].DefaultCellStyle.Font = new Font(DataGridView.DefaultFont, FontStyle.Bold);
                     }
                 }
 
-                //Show Total Value s
+                //Show Total Values
                 decimal totalAppropriation = 0;
                 for (int i = 0; i < dgvBudgetAppropriations.Rows.Count; i++)
                 {
-                    totalAppropriation += Convert.ToDecimal(dgvBudgetAppropriations.Rows[i].Cells[7].Value);
+                    totalAppropriation += Convert.ToDecimal(dgvBudgetAppropriations.Rows[i].Cells["appropriation"].Value);
                 }
 
                 txtTotalAppropriation.Text = totalAppropriation.ToString("N2");
 
                 dgvBudgetAppropriations.ClearSelection();
-                Helper.DatagridDefaultStyle(dgvBudgetAppropriations, true);
             }
             catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        internal static void OthersFPPCmbx(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-
-            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
-            {
-                // loop datatable to add items in autocompletesource
-                foreach (DataRow item in dataTable.Rows)
-                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
-
-                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            }
-        }
-
-        internal static void AllotmentCmbx(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-
-            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
-            {
-                // loop datatable to add items in autocompletesource
-                foreach (DataRow item in dataTable.Rows)
-                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
-
-                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            }
-        }
-        internal static void AllomentToolStripCmbx(DataTable dataTable, ToolStripComboBox toolStripComboBox, string displayMember, string valueMember)
-        {
-            toolStripComboBox.ComboBox.DataSource = dataTable;
-            toolStripComboBox.ComboBox.DisplayMember = displayMember;
-            toolStripComboBox.ComboBox.ValueMember = valueMember;
-
-            if (toolStripComboBox.DropDownStyle == ComboBoxStyle.DropDown)
-            {
-                // loop datatable to add items in autocompletesource
-                foreach (DataRow item in dataTable.Rows)
-                    toolStripComboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
-
-                toolStripComboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                toolStripComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            }
-        }
-
-        internal static void TypeOfFundsCmbx(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-
-            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
-            {
-                // loop datatable to add items in autocompletesource
-                foreach (DataRow item in dataTable.Rows)
-                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
-
-                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            }
-
-        }
-        internal static void TypeOfFundsToolStripCmbx(DataTable dataTable, ToolStripComboBox comboBox, string displayMember, string valueMember) 
-        {
-            comboBox.ComboBox.DataSource = dataTable;
-            comboBox.ComboBox.DisplayMember = displayMember;
-            comboBox.ComboBox.ValueMember = valueMember;
-
-            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
-            {
-                // loop datatable to add items in autocompletesource
-                foreach (DataRow item in dataTable.Rows)
-                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
-
-                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            }
-        }
-
-        internal static void YearToolStripCmbx(DataTable dataTable, ToolStripComboBox toolStripComboBox, string displayMember, string valueMember)
-        {
-            toolStripComboBox.ComboBox.DataSource = dataTable;
-            toolStripComboBox.ComboBox.DisplayMember = displayMember;
-            toolStripComboBox.ComboBox.ValueMember = valueMember;
-        }
-
-        internal static void GeneralLedgerAccountsCmbx(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-
-            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
-            {
-                // loop datatable to add items in autocompletesource
-                foreach (DataRow item in dataTable.Rows)
-                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
-
-                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-                comboBox.DropDownHeight = 200;
-            }
-        }
-
-        internal static void FPPDgVBudgetAppropriations(DataGridView dataGridView) 
-        {
-            try
-            {
-                dataGridView.DataSource = Factory.BudgetAppropriationsRepository().GetViewRecordsFPPWithBudgetAppropriations();
-                dataGridView.Columns[0].Visible = false;
-                dataGridView.Columns[1].HeaderText = "FPP Code";
-                dataGridView.Columns[2].HeaderText = "FPP Name";
-                dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-                dataGridView.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns[2].SortMode = DataGridViewColumnSortMode.NotSortable;
-
-                Helper.DatagridDefaultStyle(dataGridView, true);
-            }
-            catch (Exception ex) 
             {
                 Helper.MessageBoxError(ex.Message);
             }

@@ -121,17 +121,16 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                 //Initialze data references
                 int fppID = Convert.ToInt32(uc.cmbxFPP.SelectedValue);
                 int allotmentClassID = Convert.ToInt32(uc.cmbxAllotmentClass.SelectedValue);
-                int typeOfFundID = Convert.ToInt32(uc.cmbxTypeOfFund.SelectedValue);
+                int fundID = Convert.ToInt32(uc.cmbxTypeOfFund.SelectedValue);
                 short year = Convert.ToInt16(uc.nudYear.Value);
 
-                //Update FPP datagrid, Appropriations datagrid and Combobox Year before reseting user control
-                HelperLoadRecords.FPPDgVBudgetAppropriations(_frmBudgetAppropriations.dgFPP);
-                HelperLoadRecords.YearToolStripCmbx(Factory.BudgetAppropriationsRepository().GetYearsBudgetAppropriations(), _frmBudgetAppropriations.cmbxYear, "year", "year");
-                HelperLoadRecords.BudgetAppropriationsDgV(_frmBudgetAppropriations.dgBudgetAppropriations, fppID, allotmentClassID, typeOfFundID, year, _frmBudgetAppropriations.txtTotal);
+                _frmBudgetAppropriations.RecordLocator(fppID, allotmentClassID, fundID, year);
+
+                Helper.MessageBoxSuccess("Budget Appropriation update has been saved.");
+                Close();
 
                 //Reset User Control Form
                 uc.ResetForm();
-                Helper.MessageBoxSuccess("Budget Appropriation update has been saved.");
             }
         }
     }
