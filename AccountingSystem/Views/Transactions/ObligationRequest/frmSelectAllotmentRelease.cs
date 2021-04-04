@@ -44,7 +44,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
             if (dgFPPRowCount > 0) 
             {
-                int fppID = Convert.ToInt32(dgFPP.SelectedCells[0].Value);
+                var rowIndex = dgFPP.CurrentCell.RowIndex;
+
+                int fppID = Convert.ToInt32(dgFPP.Rows[rowIndex].Cells["id"].Value);
                 int allotmentClassID = Convert.ToInt32(toolStripCmbxAllotmentClass.ComboBox.SelectedValue);
                 int fundID = Convert.ToInt32(toolStripCmbxFunds.ComboBox.SelectedValue);
                 short year = Convert.ToInt16(toolStripCmbxYear.ComboBox.SelectedValue);
@@ -77,8 +79,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             try
             {
-                HelperLoadRecords.BudgetAppropriationsAllomentToolStripCombobox(Factory.AllotmentClassesRepository().GetRecords(), toolStripCmbxAllotmentClass, "allotment_code", "id");
-                HelperLoadRecords.BudgetAppropriationsTypeOfFundsToolStripCombobox(Factory.FundsRepository().GetRecords(), toolStripCmbxFunds, "fund_name", "id");
+                HelperLoadRecords.BudgetAppropriationsAllomentToolStripCombobox(Factory.AllotmentClassesRepository().GetRecords(), toolStripCmbxFunds, "allotment_code", "id");
+                HelperLoadRecords.BudgetAppropriationsTypeOfFundsToolStripCombobox(Factory.FundsRepository().GetRecords(), toolStripCmbxAllotmentClass, "fund_name", "id");
                 HelperLoadRecords.BudgetAppropriationsYearToolStripCombobox(Factory.BudgetAppropriationsRepository().GetYearsBudgetAppropriations(), toolStripCmbxYear, "year", "year");
             }
             catch (Exception ex)
@@ -139,16 +141,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 LoadSelectedRecord();
                 Close();
             }
-        }
-
-        private void dgFPP_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
-        {
-            e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
-        }
-
-        private void dgAllotmentRelease_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
-        {
-            e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
         }
     }
 }

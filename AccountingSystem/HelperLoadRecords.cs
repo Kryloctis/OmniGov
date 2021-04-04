@@ -779,6 +779,10 @@ namespace AccountingSystem
             dataGridView.Columns["created_at"].Visible = false;
             dataGridView.Columns["updated_at"].Visible = false;
             dataGridView.ClearSelection();
+            
+            //disable sort mode
+            dataGridView.Columns["fpp_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dataGridView.Columns["fpp_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
         }
 
         internal static void AllotmentReleaseDgvObligationRequest(DataGridView dataGridView, int fppId, int fundID, int allotmentClassId, short year) 
@@ -810,6 +814,29 @@ namespace AccountingSystem
                 dataGridView.Columns.Add("allotment_class_id", "Allotment Class ID");
                 dataGridView.Columns.Add("allotment_class_code", "Allotment Class Code");
                 dataGridView.Columns.Add("allotment_class_name", "Allotment Class Name");
+
+                //disable sort mode
+                dataGridView.Columns["gen_ledger_acc_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["gen_ledger_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["account_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["gen_ledger_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["total_allotment_release_amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["total_obligation_amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["unobligated_balance"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["budget_appropriations_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["budget_appropriations_year"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["budget_appropriations_amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["fund_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["fund_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["fund_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["fpp_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["fpp_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["fpp_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["others_fpp_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["others_fpp_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["allotment_class_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["allotment_class_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["allotment_class_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
 
                 //Visibility of Columns
                 dataGridView.Columns["budget_appropriations_id"].Visible = false;
