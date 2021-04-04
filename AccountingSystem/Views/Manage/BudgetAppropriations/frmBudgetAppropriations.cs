@@ -45,7 +45,9 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         internal void LoadBudgetAppropriationRecords()
         {
-            int fppID = Convert.ToInt32(dgFPP.SelectedCells[0].Value);
+            var rowIndex = dgFPP.CurrentCell.RowIndex;
+
+            int fppID = Convert.ToInt32(dgFPP.Rows[rowIndex].Cells["id"].Value);
             int allotmentClassID = Convert.ToInt32(cmbxAllotmentClass.ComboBox.SelectedValue);
             int typeOfFundID = Convert.ToInt32(cmbxFundType.ComboBox.SelectedValue);
             short year = Convert.ToInt16(cmbxYear.ComboBox.SelectedValue);

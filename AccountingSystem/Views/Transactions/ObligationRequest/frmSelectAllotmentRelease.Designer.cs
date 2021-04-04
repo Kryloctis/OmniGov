@@ -88,7 +88,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.dgFPP.RowTemplate.Height = 25;
             this.dgFPP.Size = new System.Drawing.Size(292, 461);
             this.dgFPP.TabIndex = 0;
-            this.dgFPP.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgFPP_ColumnAdded);
             this.dgFPP.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgFPP_RowHeaderMouseDoubleClick);
             this.dgFPP.SelectionChanged += new System.EventHandler(this.dgFPP_SelectionChanged);
             // 
@@ -101,7 +100,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.dgAllotmentRelease.RowTemplate.Height = 25;
             this.dgAllotmentRelease.Size = new System.Drawing.Size(934, 432);
             this.dgAllotmentRelease.TabIndex = 1;
-            this.dgAllotmentRelease.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgAllotmentRelease_ColumnAdded);
             this.dgAllotmentRelease.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgAllotmentRelease_RowHeaderMouseDoubleClick);
             this.dgAllotmentRelease.SelectionChanged += new System.EventHandler(this.dgAllotmentRelease_SelectionChanged);
             // 
@@ -112,8 +110,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripCmbxYear,
-            this.toolStripCmbxAllotmentClass,
-            this.toolStripCmbxFunds});
+            this.toolStripCmbxFunds,
+            this.toolStripCmbxAllotmentClass});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);

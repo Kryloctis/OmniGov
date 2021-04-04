@@ -264,7 +264,7 @@ namespace ACC.Data
                     $"account_code, " +
                     $"gen_ledger_name " +
                     $"FROM {viewTableName} WHERE fpp_id = @fpp_id AND others_fpp_id <=> @others_fpp_id AND fund_id = @fund_id AND allotment_class_id = @allotment_class_id AND budget_appropriations_year = @budget_appropriations_year " +
-                    $"GROUP BY gen_ledger_acc_id , others_fpp_id , fpp_id , budget_appropriations_year";
+                    $"GROUP BY gen_ledger_acc_id , others_fpp_id , allotment_class_id, fpp_id , budget_appropriations_year";
 
                 var dtAllotmentClasses = new DataTable();
                 return _mySqlGenericCommands.FillBySearch(query, dtAllotmentClasses, parameters);
