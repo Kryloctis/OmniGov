@@ -13,11 +13,14 @@ namespace BudgetSystem.Views.BudgetAppropriations
 {
     public partial class ucBudgetAppropriations : UserControl
     {
+        internal int fundID = 0;
         internal int budgetAppropriationId = 0;
         internal int fppId = 0;
         internal int? othersFPPId = 0;
         internal int allotmentClassesId = 0;
         internal int generalLedgerAccId = 0;
+        internal Int16 year;
+        internal decimal totalAllotmentRelease = 0;
 
         public ucBudgetAppropriations()
         {
@@ -261,11 +264,19 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
 
-            if (nudAmount.Value == nudAmount.Minimum || nudAmount.Value == 0)
+            if (string.IsNullOrEmpty(nudAmount.Value.ToString()))
+            {
+                e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
+            }
+            else if (nudAmount.Value == 0)
             {
                 epAmount.SetError(nudAmount, Helper.ErrorMessage("Valuable Amount"));
+                e.Cancel = true;
+            }
+            else if(nudAmount.Value < totalAllotmentRelease)
+            {
+                epAmount.SetError(nudAmount, "Amount you entered is less than allotment released.");
                 e.Cancel = true;
             }
         }
