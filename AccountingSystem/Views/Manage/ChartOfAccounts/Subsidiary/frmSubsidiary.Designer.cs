@@ -40,6 +40,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSetBalance = new System.Windows.Forms.ToolStripButton();
             this.dgSubsidiary = new System.Windows.Forms.DataGridView();
             this.cmbFund = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
@@ -124,7 +126,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAdd,
             this.btnEdit,
-            this.btnDelete});
+            this.btnDelete,
+            this.toolStripSeparator1,
+            this.btnSetBalance});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(696, 50);
@@ -163,6 +167,21 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
+            // btnSetBalance
+            // 
+            this.btnSetBalance.Image = ((System.Drawing.Image)(resources.GetObject("btnSetBalance.Image")));
+            this.btnSetBalance.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSetBalance.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSetBalance.Name = "btnSetBalance";
+            this.btnSetBalance.Size = new System.Drawing.Size(80, 47);
+            this.btnSetBalance.Text = "Set Balance...";
+            this.btnSetBalance.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // dgSubsidiary
             // 
@@ -230,5 +249,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.DataGridView dgSubsidiary;
         private System.Windows.Forms.ComboBox cmbFund;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton btnSetBalance;
     }
 }

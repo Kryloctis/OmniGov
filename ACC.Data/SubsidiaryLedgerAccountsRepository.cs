@@ -12,7 +12,6 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "subsidiary_ledger_accounts";
-        private readonly string viewTableName = "view_subsidiary_ledger_accounts";
 
         public SubsidiaryLedgerAccountsRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -173,6 +172,29 @@ namespace ACC.Data
             {
                 throw;
             }
+        }
+
+        public bool HasSubsidiary(ushort generalLedgerId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId },
+                };
+
+                string query = $"SELECT id FROM {tableName} WHERE general_ledger_accounts_id = @general_ledger_accounts_id";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
         }
     }
 }

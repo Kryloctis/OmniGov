@@ -1,4 +1,6 @@
-﻿namespace ACC.Domain.Models
+﻿using System;
+
+namespace ACC.Domain.Models
 {
     public class BeginningBalancesModel
     {
@@ -6,7 +8,8 @@
         public byte FundsId { get; set; }
         public ushort GeneralLedgerId { get; set; }
         public ushort? SubsidiaryLedgerId { get; set; }
-        public short Year { get; set; }
+        public bool IsDebit { get; set; }
+        public DateTime DateEntry { get; set; }
         public decimal Amount { get; set; }
     }
 }

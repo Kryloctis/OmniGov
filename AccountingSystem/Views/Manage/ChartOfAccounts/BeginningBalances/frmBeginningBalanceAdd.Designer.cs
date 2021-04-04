@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             // 
             this.ucBeginningBalances1.Location = new System.Drawing.Point(12, 12);
             this.ucBeginningBalances1.Name = "ucBeginningBalances1";
-            this.ucBeginningBalances1.Size = new System.Drawing.Size(513, 330);
+            this.ucBeginningBalances1.Size = new System.Drawing.Size(513, 353);
             this.ucBeginningBalances1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -50,7 +50,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 355);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 371);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(528, 30);
             this.flowLayoutPanel1.TabIndex = 1;
@@ -83,7 +83,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(528, 385);
+            this.ClientSize = new System.Drawing.Size(528, 401);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ucBeginningBalances1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

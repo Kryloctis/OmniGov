@@ -14,6 +14,8 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
     public partial class UcBeginningBalances : UserControl
     {
         internal byte fundId = 0;
+        internal ushort generalLedgerId = 0;
+        internal ushort subsidiaryLedgerId = 0;
 
         public UcBeginningBalances()
         {
@@ -22,26 +24,16 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[4];
-            errorArray[0] = epGeneralAccount.GetError(lstBoxGeneralAccount);
-            errorArray[1] = epSubsidiaryAccount.GetError(cmbSubsidiaryAccount);
-            errorArray[2] = epYear.GetError(nudYear);
-            errorArray[3] = epAmount.GetError(nudAmount);
+            var errorArray = new string[2];
+            errorArray[0] = epYear.GetError(dtpDateEntry);
+            errorArray[1] = epAmount.GetError(nudAmount);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
         internal void ResetForm()
-        {
-            txtGeneralAccount.Clear();
-
-            lstBoxGeneralAccount.DataSource = null;
-            lstBoxGeneralAccount.Items.Clear();
-
-            cmbSubsidiaryAccount.DataSource = null;
-            cmbSubsidiaryAccount.Items.Clear();
-            
+        {            
             nudAmount.Value = 0;
         }
 
@@ -88,6 +80,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
         {
             var radFund = sender as RadioButton;
             fundId = Convert.ToByte(radFund.Tag);
+            LoadSelectedSubsidiaryAccount();
         }
 
         private void radioFunds_CheckedChanged(object sender, EventArgs e)
@@ -96,37 +89,23 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             ShowCheckIcon(radFund);
         }
 
-        private void LoadGeneralLedgerAccount()
+        internal void LoadSelectedGeneralLedger()
         {
-            var dtGeneralLedgerAccount = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(txtGeneralAccount.Text);
+            var generalLedgerAccount = Factory.GeneralLedgerAccountsRepository().GetRecordByID(generalLedgerId);
 
-            HelperLoadRecords.GeneralLedgerListBox(dtGeneralLedgerAccount, lstBoxGeneralAccount);
+            txtAccountCode.Text = generalLedgerAccount["account_code"];
+            txtAccountName.Text = generalLedgerAccount["ledger_name"];
         }
 
-        private void LoadSubsidiaryAccount()
+        internal void LoadSelectedSubsidiaryAccount()
         {
-            lstBoxGeneralAccount.SelectedValueChanged -= new EventHandler(lstBoxGeneralAccount_SelectedValueChanged);
-
-            var generalLedgerId = Convert.ToUInt16(lstBoxGeneralAccount.SelectedValue);
-            var dtSubsidiaryAccount = Factory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
-
-            HelperLoadRecords.SubsidiaryLedgerComboBox(dtSubsidiaryAccount, cmbSubsidiaryAccount, "sub_name", "id");
-
-            lstBoxGeneralAccount.SelectedValueChanged += new EventHandler(lstBoxGeneralAccount_SelectedValueChanged);
-        }
-
-        private void lstBoxGeneralAccount_Validating(object sender, CancelEventArgs e)
-        {
-            if (lstBoxGeneralAccount.SelectedItems.Count == 0)
+            if (subsidiaryLedgerId != 0)
             {
-                epGeneralAccount.SetError(lstBoxGeneralAccount, "General ledger account is required.");
-                e.Cancel = true;
+                var subsidiaryDict = Factory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
+                txtSubsidiaryCode.Text = subsidiaryDict["sub_code"];
+                txtSubsidiaryName.Text = subsidiaryDict["sub_name"];
+                
             }
-        }
-
-        private void lstBoxGeneralAccount_Validated(object sender, EventArgs e)
-        {
-            epGeneralAccount.SetError(lstBoxGeneralAccount, string.Empty);
         }
 
         private void cmbSubsidiaryAccount_Validating(object sender, CancelEventArgs e)
@@ -139,19 +118,9 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
 
         }
 
-        private void nudYear_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epYear, nudYear, "year");
-        }
-
-        private void nudYear_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorNumericUpDown(epYear, nudYear);
-        }
-
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "year");
+            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "amount");
         }
 
         private void nudAmount_Validated(object sender, EventArgs e)
@@ -159,22 +128,9 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
 
-        private void txtGeneralAccount_TextChanged(object sender, EventArgs e)
-        {
-            if (txtGeneralAccount.Text.Length > 2)
-            {
-                LoadGeneralLedgerAccount();
-                return;
-            }
-
-            lstBoxGeneralAccount.DataSource = null;
-            lstBoxGeneralAccount.Items.Clear();
-            
-        }
-
         private void lstBoxGeneralAccount_SelectedValueChanged(object sender, EventArgs e)
         {
-            LoadSubsidiaryAccount();
+            LoadSelectedSubsidiaryAccount();
         }
     }
 }
