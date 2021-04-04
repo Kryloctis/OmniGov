@@ -110,13 +110,13 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         private void ShowAllotmentRelease()
         {
             var frmAllotmentReleaseForm = new frmAllotmentRelease(this);
+            var rowIndex = dgBudgetAppropriations.CurrentCell.RowIndex;
 
-            var budgetAppId = Convert.ToInt32(dgBudgetAppropriations.SelectedCells[0].Value);
-            var fppId = Convert.ToInt32(dgBudgetAppropriations.SelectedCells[1].Value);
-            var dgothersFPPId = dgBudgetAppropriations.SelectedCells[2].Value;
-            int? othersFPPId = string.IsNullOrEmpty(dgothersFPPId.ToString()) ? null : Convert.ToInt32(dgothersFPPId);
-            var allotmentClassesId = Convert.ToInt32(dgBudgetAppropriations.SelectedCells[3].Value);
-            var genLedgerAccId = Convert.ToInt32(dgBudgetAppropriations.SelectedCells[4].Value);
+            int budgetAppId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["budget_appropriations_id"].Value);
+            int fppId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["fpp_id"].Value);
+            int? othersFPPId = string.IsNullOrEmpty(dgBudgetAppropriations.Rows[rowIndex].Cells["others_fpp_id"].Value.ToString()) ? null: Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["others_fpp_id"].Value);
+            int allotmentClassesId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["allotment_classes_id"].Value);
+            int genLedgerAccId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["general_ledger_acc_id"].Value);
 
             frmAllotmentReleaseForm.budgetAppropriationID = budgetAppId;
             frmAllotmentReleaseForm.fppID = fppId;
@@ -155,25 +155,26 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         private void btnEdit_Click(object sender, EventArgs e) 
         {
             var frmBudgetAppropriationEdit = new frmBudgetAppropriationsEdit(this);
-
             var uc = frmBudgetAppropriationEdit.ucBudgetAppropriations1;
-            var budgetAppId = dgBudgetAppropriations.SelectedCells[0].Value;
-            var fppId = dgBudgetAppropriations.SelectedCells[1].Value;
-            var dgothersFPPId = dgBudgetAppropriations.SelectedCells[2].Value;
-            int? othersFPPId;
-            var allotmentClassesId = dgBudgetAppropriations.SelectedCells[3].Value;
-            var genLedgerAccId = dgBudgetAppropriations.SelectedCells[4].Value;
+            var rowIndex = dgBudgetAppropriations.CurrentCell.RowIndex;
 
-            if (string.IsNullOrEmpty(dgothersFPPId.ToString()))
-                othersFPPId = null;
-            else
-                othersFPPId = Convert.ToInt32(dgothersFPPId);
-            
-            uc.budgetAppropriationId = Convert.ToInt32(budgetAppId);
-            uc.fppId = Convert.ToInt32(fppId);
+            int budgetAppId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["budget_appropriations_id"].Value);
+            int fundID = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["funds_id"].Value);
+            int fppId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["fpp_id"].Value);
+            short year = Convert.ToInt16(dgBudgetAppropriations.Rows[rowIndex].Cells["year"].Value);
+            int? othersFPPId = string.IsNullOrEmpty(dgBudgetAppropriations.Rows[rowIndex].Cells["others_fpp_id"].Value.ToString()) ? null : Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["others_fpp_id"].Value);
+            int allotmentClassesId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["allotment_classes_id"].Value);
+            int genLedgerAccId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["general_ledger_acc_id"].Value);
+            decimal totalAllotmentRelease = Convert.ToDecimal(dgBudgetAppropriations.Rows[rowIndex].Cells["total_allotment_release"].Value);
+
+            uc.budgetAppropriationId = budgetAppId;
+            uc.fundID = fundID;
+            uc.fppId = fppId;
+            uc.year = year;
             uc.othersFPPId = othersFPPId;
-            uc.allotmentClassesId = Convert.ToInt32(allotmentClassesId);
-            uc.generalLedgerAccId = Convert.ToInt32(genLedgerAccId);
+            uc.allotmentClassesId = allotmentClassesId;
+            uc.generalLedgerAccId = genLedgerAccId;
+            uc.totalAllotmentRelease = totalAllotmentRelease;
 
             frmBudgetAppropriationEdit.ShowDialog();
         }

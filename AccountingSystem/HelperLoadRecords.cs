@@ -572,7 +572,9 @@ namespace AccountingSystem
 
                 //Set up new Columns to Datagrid View
                 dgvBudgetAppropriations.Columns.Add("budget_appropriations_id", "Budget Appropriation ID");
+                dgvBudgetAppropriations.Columns.Add("funds_id", "Fund ID");
                 dgvBudgetAppropriations.Columns.Add("fpp_id", "FPP ID");
+                dgvBudgetAppropriations.Columns.Add("year", "Year");
                 dgvBudgetAppropriations.Columns.Add("others_fpp_id", "Others FPP ID");
                 dgvBudgetAppropriations.Columns.Add("allotment_classes_id", "Allotment Classes ID");
                 dgvBudgetAppropriations.Columns.Add("general_ledger_acc_id", "Gen. Ledger Acc. ID");
@@ -586,7 +588,9 @@ namespace AccountingSystem
 
                 //Column's Visibility
                 dgvBudgetAppropriations.Columns["budget_appropriations_id"].Visible = false;
+                dgvBudgetAppropriations.Columns["funds_id"].Visible = false;
                 dgvBudgetAppropriations.Columns["fpp_id"].Visible = false;
+                dgvBudgetAppropriations.Columns["year"].Visible = false;
                 dgvBudgetAppropriations.Columns["others_fpp_id"].Visible = false;
                 dgvBudgetAppropriations.Columns["allotment_classes_id"].Visible = false;
                 dgvBudgetAppropriations.Columns["general_ledger_acc_id"].Visible = false;
@@ -609,7 +613,9 @@ namespace AccountingSystem
                 {
                     dgvBudgetAppropriations.Rows.Add(new object[] {
                         drGetViewRecordsByIds["budget_appropriations_id"],
+                        drGetViewRecordsByIds["funds_id"],
                         drGetViewRecordsByIds["fpp_id"],
+                        drGetViewRecordsByIds["year"],
                         drGetViewRecordsByIds["others_fpp_id"],
                         drGetViewRecordsByIds["allotment_classes_id"],
                         drGetViewRecordsByIds["general_ledger_acc_id"],
@@ -631,14 +637,16 @@ namespace AccountingSystem
                     string othersFPPName = drGetRecordsOthersFPP["others_fpp_name"].ToString();
                     int othersFPPID = Convert.ToInt32(drGetRecordsOthersFPP["others_fpp_id"]);
                
-                    dgvBudgetAppropriations.Rows.Add(new object[] { null, null, null, null, null, othersFPPName });
+                    dgvBudgetAppropriations.Rows.Add(new object[] { null, null, null, null, null, null, null, othersFPPName });
 
                     DataTable dtGetViewRecordsByIds = Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(fppID, allotmentClassID, othersFPPID, typeOfFundsID, year);
                     foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByIds.Rows)
                     {
                         dgvBudgetAppropriations.Rows.Add(new object[] {
                         drGetViewRecordsByIds["budget_appropriations_id"],
+                        drGetViewRecordsByIds["funds_id"],
                         drGetViewRecordsByIds["fpp_id"],
+                        drGetViewRecordsByIds["year"],
                         drGetViewRecordsByIds["others_fpp_id"],
                         drGetViewRecordsByIds["allotment_classes_id"],
                         drGetViewRecordsByIds["general_ledger_acc_id"],

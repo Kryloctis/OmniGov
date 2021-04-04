@@ -11,10 +11,7 @@ namespace ACC.Domain.Interfaces
         bool BudgetAllotmentExist(int FPPId, int? othersFPPId, int allotmentClassID, int generalLedgerAccountId);
         bool BudgetAllotmentExist(int id, int FPPId, int? othersFPPId, int allotmentClassID, int generalLedgerAccountId);
 
-        DataTable GetViewRecords();
-        DataTable GetViewRecordsBySearch(string searchTxt);
         DataTable GetViewRecordsByIds(int fppID, int allotmentClassID, int? othersFPPID, int typeOfFund, int year);
-        DataTable GetViewRecordsFPPWithBudgetAppropriations();
         DataTable GetExistedOthersFPPrecordsByFPPID(int fppID,int allotment_classes_id, int funds_id, Int16 year);
         DataTable GetYearsBudgetAppropriations();
         Dictionary<string, string> GetTotalAppropriationBalanceRecord(int budgetAppropirationId);
