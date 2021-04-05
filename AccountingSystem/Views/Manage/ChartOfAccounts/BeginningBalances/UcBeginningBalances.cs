@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ACC.Domain.Interfaces;
 
@@ -13,9 +8,10 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
 {
     public partial class UcBeginningBalances : UserControl
     {
-        internal byte fundId = 0;
-        internal ushort generalLedgerId = 0;
-        internal ushort subsidiaryLedgerId = 0;
+        internal int beginningBalanceId;
+        internal byte fundId;
+        internal ushort generalLedgerId;
+        internal ushort subsidiaryLedgerId;
 
         public UcBeginningBalances()
         {
@@ -121,6 +117,12 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "amount");
+
+            if (nudAmount.Value < 1)
+            {
+                epAmount.SetError(nudAmount, "Please enter a non-zero balance.");
+                e.Cancel = true;
+            }
         }
 
         private void nudAmount_Validated(object sender, EventArgs e)

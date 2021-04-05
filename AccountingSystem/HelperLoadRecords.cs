@@ -260,15 +260,17 @@ namespace AccountingSystem
             }
 
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].Visible = false;
-            datagrid.Columns[2].Visible = false;
-            datagrid.Columns[3].HeaderText = "Code";
-            datagrid.Columns[3].Width = 200;
-            datagrid.Columns[4].HeaderText = "Name";
-            datagrid.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            datagrid.Columns[5].Visible = false;
-            datagrid.Columns[6].Visible = false;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["funds_id"].Visible = false;
+            datagrid.Columns["general_ledger_accounts_id"].Visible = false;
+            datagrid.Columns["sub_code"].HeaderText = "Code";
+            datagrid.Columns["sub_code"].Width = 200;
+            datagrid.Columns["sub_name"].HeaderText = "Name";
+            datagrid.Columns["sub_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["Balance"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["Balance"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
         }
 
         internal static void SubsidiaryLedgerComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)

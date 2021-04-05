@@ -6,6 +6,7 @@ using MySql.Data.MySqlClient;
 using AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup;
 using AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup;
 using AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary;
+using AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances;
 using AccountingSystem.Views.Manage.BeginningBalances;
 using System.Data;
 
@@ -13,6 +14,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 {
     public partial class frmChartOfAccounts : Form
     {
+        private byte fundId;
+        private short year;
 
         public frmChartOfAccounts()
         {
@@ -77,9 +80,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
                     else
                         dtGeneralLedgers = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(txtSearch.Text.Trim());
 
-                    byte fundsId = (byte)cmbFund.SelectedValue;
-                    short year = Convert.ToInt16(cmbYear.Text);
-                    HelperLoadRecords.GeneralLedgerAccountsWithBalancesDatagridView(dtGeneralLedgers, dgGeneralLedgerAccounts, fundsId, year);
+                    fundId = Convert.ToByte(cmbFund.SelectedValue);
+                    year = Convert.ToInt16(cmbYear.Text);
+                    HelperLoadRecords.GeneralLedgerAccountsWithBalancesDatagridView(dtGeneralLedgers, dgGeneralLedgerAccounts, fundId, year);
                     lblRecordCount.Text = dgGeneralLedgerAccounts.Rows.Count.ToString();
                 }
             }
@@ -302,11 +305,24 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
             {
                 ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.SelectedCells[0].Value);
+                year = Convert.ToInt16(cmbYear.Text);
+
                 bool hasSubsidiary = Factory.SubsidiaryLedgerAccountsRepository().HasSubsidiary(generalLedgerId);
                 if (hasSubsidiary)
+                {
                     ShowSubsidiaryForm();
-                else
-                    _ = new frmBeginningBalanceAdd(generalLedgerId).ShowDialog();
+                    return;
+                }
+
+                var generalLedgerBalanceExist = Factory.BeginningBalancesRepository().GeneralLedgerBalanceExist(fundId, generalLedgerId, year);
+
+                if (generalLedgerBalanceExist)
+                {
+                    _ = new frmBeginningBalanceEdit(fundId, generalLedgerId, year).ShowDialog();
+                    return;
+                }
+
+                _ = new frmBeginningBalanceAdd(generalLedgerId).ShowDialog();
             }
         }
 
@@ -356,6 +372,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             Helper.ShowRecordTimestamp(dataGrid, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dataGrid, btnEdit, btnDelete);
+
+            // this is temporary
+            btnAdd.Enabled = false;
+            btnEdit.Enabled = false;
+            btnDelete.Enabled = false;
         }
 
         private void dgGeneralLedgerAccounts_SelectionChanged(object sender, EventArgs e)

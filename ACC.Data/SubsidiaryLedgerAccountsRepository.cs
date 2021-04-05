@@ -68,12 +68,12 @@ namespace ACC.Data
                     if (reader.Rows.Count < 1)
                         return record;
 
-                    record.Add("funds_id", reader.Rows[0][0].ToString());
-                    record.Add("general_ledger_accounts_id", reader.Rows[0][1].ToString());
-                    record.Add("sub_code", reader.Rows[0][2].ToString());
-                    record.Add("sub_name", reader.Rows[0][3].ToString());
-                    record.Add("created_at", reader.Rows[0][4].ToString());
-                    record.Add("updated_at", reader.Rows[0][5].ToString());
+                    record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
+                    record.Add("general_ledger_accounts_id", reader.Rows[0]["general_ledger_accounts_id"].ToString());
+                    record.Add("sub_code", reader.Rows[0]["sub_code"].ToString());
+                    record.Add("sub_name", reader.Rows[0]["sub_name"].ToString());
+                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
                 }
             }
             catch (Exception)

@@ -41,7 +41,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.dgGeneralLedgerAccounts = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabGeneralLedgers = new System.Windows.Forms.TabPage();
-            this.btnRetrieve = new System.Windows.Forms.Button();
             this.cmbYear = new System.Windows.Forms.ComboBox();
             this.cmbFund = new System.Windows.Forms.ComboBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
@@ -63,6 +62,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.BtnSubsidiary = new System.Windows.Forms.ToolStripButton();
             this.BtnSetBalance = new System.Windows.Forms.ToolStripButton();
+            this.btnRetrieve = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgGeneralLedgerAccounts)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -185,16 +185,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.tabGeneralLedgers.Text = "General Ledgers";
             this.tabGeneralLedgers.UseVisualStyleBackColor = true;
             // 
-            // btnRetrieve
-            // 
-            this.btnRetrieve.Location = new System.Drawing.Point(1016, 3);
-            this.btnRetrieve.Name = "btnRetrieve";
-            this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
-            this.btnRetrieve.TabIndex = 9;
-            this.btnRetrieve.Text = "Retrieve";
-            this.btnRetrieve.UseVisualStyleBackColor = true;
-            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
-            // 
             // cmbYear
             // 
             this.cmbYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -208,9 +198,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             // 
             this.cmbFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFund.FormattingEnabled = true;
-            this.cmbFund.Location = new System.Drawing.Point(733, 3);
+            this.cmbFund.Location = new System.Drawing.Point(761, 3);
             this.cmbFund.Name = "cmbFund";
-            this.cmbFund.Size = new System.Drawing.Size(178, 23);
+            this.cmbFund.Size = new System.Drawing.Size(150, 23);
             this.cmbFund.TabIndex = 7;
             // 
             // txtSearch
@@ -424,6 +414,16 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.BtnSetBalance.Size = new System.Drawing.Size(80, 47);
             this.BtnSetBalance.Text = "Set Balance...";
             this.BtnSetBalance.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btnRetrieve
+            // 
+            this.btnRetrieve.Location = new System.Drawing.Point(1016, 3);
+            this.btnRetrieve.Name = "btnRetrieve";
+            this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
+            this.btnRetrieve.TabIndex = 9;
+            this.btnRetrieve.Text = "&Retrieve";
+            this.btnRetrieve.UseVisualStyleBackColor = true;
+            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
             // 
             // frmChartOfAccounts
             // 

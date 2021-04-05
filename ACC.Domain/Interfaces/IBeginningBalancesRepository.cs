@@ -10,5 +10,6 @@ namespace ACC.Domain.Interfaces
 
         Dictionary<string, string> GetRecordByGeneralLedgerAndFundsID(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null);
         decimal GetSumBalanceByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null);
+        bool GeneralLedgerBalanceExist(byte fundsId, ushort generalLedgerId, short year);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using ACC.Domain.Models;
 
@@ -47,6 +48,22 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             return false;
         }
 
+        private void CheckedFund()
+        {
+            if (uc.subsidiaryLedgerId != 0)
+            {
+                var subsidiaryDict = Factory.SubsidiaryLedgerAccountsRepository().GetRecordByID(uc.subsidiaryLedgerId);
+                byte fundId = Convert.ToByte(subsidiaryDict["funds_id"]);
+                uc.fundId = fundId;
+                var fundDict = Factory.FundsRepository().GetRecordByID(fundId);
+
+                _ = ucBeginningBalances1.flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(
+                    r => (r.Text == fundDict["fund_name"]) ? r.Checked = true : r.Checked = false);
+
+                uc.flowLayoutPanelFunds.Enabled = false;
+            }
+        }
+
         private void frmBeginningBalanceAdd_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
@@ -54,6 +71,8 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             uc.LoadSelectedGeneralLedger();
             uc.LoadSelectedSubsidiaryAccount();
             uc.radioDebit.Checked = true;
+
+            CheckedFund();
         }
 
         private void btnSave_Click(object sender, EventArgs e)

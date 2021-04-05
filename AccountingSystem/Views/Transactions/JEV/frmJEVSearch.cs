@@ -115,18 +115,18 @@ namespace AccountingSystem.Views.Transactions.JEV
                     frmJEV.ucjev1.txtFundsJevNo.Text = $"{jevNoSplit[0]}-{jevNoSplit[1]}-{jevNoSplit[2]}";
                     frmJEV.ucjev1.txtJEVNo.Text = jevNoSplit[3];
 
-                    Dictionary<string, string> jevData = Factory.JEVRepository().GetRecordByJEV(jevNo);
-                    int jevId = Convert.ToInt32(jevData["id"]);
+                    Dictionary<string, string> jevDict = Factory.JEVRepository().GetRecordByJEV(jevNo);
+                    int jevId = Convert.ToInt32(jevDict["id"]);
 
                     LoadCheckDisbursementsDataIfExist(uc, jevId);
                     LoadCashReceiptsDataIfExist(uc, jevId);
                     uc.jevId = jevId;
-                    uc.txtExplanation.Text = jevData["explanation"];
-                    uc.dtpDateEntry.Value = Convert.ToDateTime(jevData["date_entry"]);
-                    uc.fundId = Convert.ToByte(jevData["funds_id"]);
-                    uc.journalId = Convert.ToByte(jevData["journals_id"]);
-                    CheckedFund(jevData["fund_name"]);
-                    CheckedJournal(jevData["journal_name"]);
+                    uc.txtExplanation.Text = jevDict["explanation"];
+                    uc.dtpDateEntry.Value = Convert.ToDateTime(jevDict["date_entry"]);
+                    uc.fundId = Convert.ToByte(jevDict["funds_id"]);
+                    uc.journalId = Convert.ToByte(jevDict["journals_id"]);
+                    CheckedFund(jevDict["fund_name"]);
+                    CheckedJournal(jevDict["journal_name"]);
 
                     uc.dgAccounts.Rows.Clear();
                     LoadJevAccounts();

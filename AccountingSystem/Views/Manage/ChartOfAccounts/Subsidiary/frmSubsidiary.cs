@@ -42,6 +42,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void LoadYear()
+        {
+            HelperLoadRecords.YearComboBox(cmbYear);
+        }
+
         private void frmSubsidiary_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
@@ -49,9 +54,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             LoadFunds();
             LoadSelectedRecord();
             LoadSubsidiaryRecordsByFundAndGeneralLedger(1);
+            LoadYear();
 
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
+            btnSetBalance.Enabled = false;
         }
 
         private void dgSubsidiary_SelectionChanged(object sender, EventArgs e)
@@ -125,12 +132,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             }
         }
 
-        private void cmbFund_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            byte fundId = Convert.ToByte(cmbFund.SelectedValue);
-            LoadSubsidiaryRecordsByFundAndGeneralLedger(fundId);
-        }
-
         private void BtnSetBalance_Click(object sender, EventArgs e)
         {
             if (dgSubsidiary.SelectedRows.Count == 1)
@@ -139,6 +140,12 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
                 ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.Rows[rowIndex].Cells["id"].Value);
                 _ = new frmBeginningBalanceAdd(generalLedgerId, subsidiaryLedgerId).ShowDialog();
             }
+        }
+
+        private void btnRetrieve_Click(object sender, EventArgs e)
+        {
+            byte fundId = Convert.ToByte(cmbFund.SelectedValue);
+            LoadSubsidiaryRecordsByFundAndGeneralLedger(fundId);
         }
     }
 }
