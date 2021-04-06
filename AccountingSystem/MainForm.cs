@@ -13,6 +13,7 @@ using AccountingSystem.Views.Reports.Journals;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
 using AccountingSystem.Views.Manage.AllotmentRelease;
 using AccountingSystem.Views.Transactions.ObligationRequest;
+using AccountingSystem.Views.Reports.SAAOB;
 
 namespace AccountingSystem
 {
@@ -28,6 +29,7 @@ namespace AccountingSystem
             menuReportCRJ.Click += new EventHandler(MenuReportCashReceiptsJournal_Click);
             menuReportPRJ.Click += new EventHandler(MenuReportProcurementsReceivedJournal_Click);
             menuReportADADJ.Click += new EventHandler(MenuReportADADisbursementsJournal_Click);
+            menuSAAOB.Click += new EventHandler(menuSAAOB_Click);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -123,6 +125,11 @@ namespace AccountingSystem
         private void MenuReportADADisbursementsJournal_Click(object sender, EventArgs e)
         {
             _ = new frmADADisbursementsJournalReport().ShowDialog();
+        }
+
+        private void menuSAAOB_Click(object sender, EventArgs e) 
+        {
+            _ = new frmSAAOB().ShowDialog();
         }
 
     }
