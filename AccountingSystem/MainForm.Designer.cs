@@ -33,6 +33,7 @@ namespace AccountingSystem
             this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.menuTransactions = new System.Windows.Forms.ToolStripMenuItem();
             this.menuJEV = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuObligationRequest = new System.Windows.Forms.ToolStripMenuItem();
             this.menuManage = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUserList = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +55,7 @@ namespace AccountingSystem
             this.menuReportCkDJ = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportADADJ = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
-            this.menuObligationRequest = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuBeginningBalances = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,6 +97,12 @@ namespace AccountingSystem
             this.menuJEV.Text = "Journal Entry Voucher...";
             this.menuJEV.Click += new System.EventHandler(this.menuJEV_Click);
             // 
+            // menuObligationRequest
+            // 
+            this.menuObligationRequest.Name = "menuObligationRequest";
+            this.menuObligationRequest.Size = new System.Drawing.Size(197, 22);
+            this.menuObligationRequest.Text = "Obligation Request...";
+            // 
             // menuManage
             // 
             this.menuManage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -106,6 +113,7 @@ namespace AccountingSystem
             this.menuFunds,
             this.menuFunctionProgramProject,
             this.menuCollectingOfficer,
+            this.menuBeginningBalances,
             this.toolStripSeparator1,
             this.menuBudgetAppropriation});
             this.menuManage.Name = "menuManage";
@@ -256,11 +264,11 @@ namespace AccountingSystem
             this.label1.TabIndex = 1;
             this.label1.Text = "Dashboard";
             // 
-            // menuObligationRequest
+            // menuBeginningBalances
             // 
-            this.menuObligationRequest.Name = "menuObligationRequest";
-            this.menuObligationRequest.Size = new System.Drawing.Size(197, 22);
-            this.menuObligationRequest.Text = "Obligation Request...";
+            this.menuBeginningBalances.Name = "menuBeginningBalances";
+            this.menuBeginningBalances.Size = new System.Drawing.Size(223, 22);
+            this.menuBeginningBalances.Text = "Beginning Balances...";
             // 
             // MainForm
             // 
@@ -313,6 +321,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuReportADADJ;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         internal System.Windows.Forms.ToolStripMenuItem menuObligationRequest;
+        private System.Windows.Forms.ToolStripMenuItem menuBeginningBalances;
     }
 }
 

@@ -2,24 +2,20 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using AccountingSystem.Views.Manage.BeginningBalances;
 
 namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 {
     public partial class frmSubsidiary : Form
     {
-        private ushort generalLedgerId;
+        private readonly ushort generalLedgerId;
 
         public frmSubsidiary(ushort _generalLedgerId)
         {
             InitializeComponent();
             generalLedgerId = _generalLedgerId;
+            btnSetBalance.Click += new EventHandler(BtnSetBalance_Click);
         }
 
         private void LoadFunds()
@@ -40,10 +36,15 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             try
             {
                 var dtSubsidiary = Factory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
-                HelperLoadRecords.SubsidiaryLedgerAccountsDatagridView(dtSubsidiary, dgSubsidiary);
+                HelperLoadRecords.SubsidiaryLedgerAccountsDatagridView(dtSubsidiary, dgSubsidiary, fundId, 2021);
 
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void LoadYear()
+        {
+            HelperLoadRecords.YearComboBox(cmbYear);
         }
 
         private void frmSubsidiary_Load(object sender, EventArgs e)
@@ -53,14 +54,24 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             LoadFunds();
             LoadSelectedRecord();
             LoadSubsidiaryRecordsByFundAndGeneralLedger(1);
+            LoadYear();
 
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
+            btnSetBalance.Enabled = false;
         }
 
         private void dgSubsidiary_SelectionChanged(object sender, EventArgs e)
         {
             Helper.EnableDisableToolStripButtons(dgSubsidiary, btnEdit, btnDelete);
+
+            if (dgSubsidiary.SelectedRows.Count == 1)
+            {
+                btnSetBalance.Enabled = true;
+                return;
+            }
+
+            btnSetBalance.Enabled = false;
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -121,7 +132,17 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             }
         }
 
-        private void cmbFund_SelectionChangeCommitted(object sender, EventArgs e)
+        private void BtnSetBalance_Click(object sender, EventArgs e)
+        {
+            if (dgSubsidiary.SelectedRows.Count == 1)
+            {
+                int rowIndex = dgSubsidiary.CurrentCell.RowIndex;
+                ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.Rows[rowIndex].Cells["id"].Value);
+                _ = new frmBeginningBalanceAdd(generalLedgerId, subsidiaryLedgerId).ShowDialog();
+            }
+        }
+
+        private void btnRetrieve_Click(object sender, EventArgs e)
         {
             byte fundId = Convert.ToByte(cmbFund.SelectedValue);
             LoadSubsidiaryRecordsByFundAndGeneralLedger(fundId);

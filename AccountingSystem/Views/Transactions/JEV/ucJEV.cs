@@ -60,6 +60,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     TextImageRelation = TextImageRelation.ImageBeforeText
                 };
 
+                // making general fund as default
                 if (fund["fund_name"].ToString() == "General Fund")
                 {
                     radFund.Checked = true;

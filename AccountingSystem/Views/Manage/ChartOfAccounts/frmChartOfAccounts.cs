@@ -6,16 +6,21 @@ using MySql.Data.MySqlClient;
 using AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup;
 using AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup;
 using AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary;
+using AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances;
+using AccountingSystem.Views.Manage.BeginningBalances;
 using System.Data;
 
 namespace AccountingSystem.Views.Manage.ChartOfAccounts
 {
     public partial class frmChartOfAccounts : Form
     {
+        private byte fundId;
+        private short year;
 
         public frmChartOfAccounts()
         {
             InitializeComponent();
+            BtnSetBalance.Click += new EventHandler(BtnSetBalance_Click);
         }
 
         internal void LoadAccountGroup()
@@ -75,7 +80,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
                     else
                         dtGeneralLedgers = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(txtSearch.Text.Trim());
 
-                    HelperLoadRecords.GeneralLedgerAccountsDatagridView(dtGeneralLedgers, dgGeneralLedgerAccounts);
+                    fundId = Convert.ToByte(cmbFund.SelectedValue);
+                    year = Convert.ToInt16(cmbYear.Text);
+                    HelperLoadRecords.GeneralLedgerAccountsWithBalancesDatagridView(dtGeneralLedgers, dgGeneralLedgerAccounts, fundId, year);
                     lblRecordCount.Text = dgGeneralLedgerAccounts.Rows.Count.ToString();
                 }
             }
@@ -106,6 +113,17 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        private void LoadFunds()
+        {
+            var dtFunds = Factory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
+        }
+
+        private void LoadYear()
+        {
+            HelperLoadRecords.YearComboBox(cmbYear);
         }
 
         private void DeleteAccountGroupRecords()
@@ -193,6 +211,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
             LoadAccountGroupComboBox();
             LoadMajorAccountGroupComboBox();
+            LoadFunds();
+            LoadYear();
             LoadGeneralLedgers();
         }
 
@@ -280,6 +300,32 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             ShowSubsidiaryForm();
         }
 
+        private void BtnSetBalance_Click(object sender, EventArgs e)
+        {
+            if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
+            {
+                ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.SelectedCells[0].Value);
+                year = Convert.ToInt16(cmbYear.Text);
+
+                bool hasSubsidiary = Factory.SubsidiaryLedgerAccountsRepository().HasSubsidiary(generalLedgerId);
+                if (hasSubsidiary)
+                {
+                    ShowSubsidiaryForm();
+                    return;
+                }
+
+                var generalLedgerBalanceExist = Factory.BeginningBalancesRepository().GeneralLedgerBalanceExist(fundId, generalLedgerId, year);
+
+                if (generalLedgerBalanceExist)
+                {
+                    _ = new frmBeginningBalanceEdit(fundId, generalLedgerId, year).ShowDialog();
+                    return;
+                }
+
+                _ = new frmBeginningBalanceAdd(generalLedgerId).ShowDialog();
+            }
+        }
+
         private void dgGeneralLedgerAccounts_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             ShowSubsidiaryForm();
@@ -303,18 +349,21 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
                 LoadSubMajorAccountGroup();
                 DisableEditDeleteButtons();
                 BtnSubsidiary.Enabled = false;
+                BtnSetBalance.Enabled = false;
             } 
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
             {
                 LoadMajorAccountGroup();
                 DisableEditDeleteButtons();
                 BtnSubsidiary.Enabled = false;
+                BtnSetBalance.Enabled = false;
             }
             else
             {
                 LoadAccountGroup();
                 DisableEditDeleteButtons();
                 BtnSubsidiary.Enabled = false;
+                BtnSetBalance.Enabled = false;
             }
                 
         }
@@ -323,20 +372,27 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             Helper.ShowRecordTimestamp(dataGrid, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dataGrid, btnEdit, btnDelete);
+
+            // this is temporary
+            btnAdd.Enabled = false;
+            btnEdit.Enabled = false;
+            btnDelete.Enabled = false;
         }
 
         private void dgGeneralLedgerAccounts_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 4, 5 };
+            byte[] columnIndexTimestamp = { 3, 4 };
             SetActionControls(dgGeneralLedgerAccounts, columnIndexTimestamp);
 
             if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
             {
                 BtnSubsidiary.Enabled = true;
+                BtnSetBalance.Enabled = true;
                 return;
             }
 
             BtnSubsidiary.Enabled = false;
+            BtnSetBalance.Enabled = false;
         }
 
         private void dgAccountGroup_SelectionChanged(object sender, EventArgs e)
@@ -362,6 +418,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadGeneralLedgers();
+        }
+
+        private void btnRetrieve_Click(object sender, EventArgs e)
         {
             LoadGeneralLedgers();
         }

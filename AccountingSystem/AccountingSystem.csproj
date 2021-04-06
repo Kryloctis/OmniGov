@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
+    <EmbeddedResource Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
+    <None Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Reports\authority-to-debit-account-disbursements.rdlc~RF1f91e66e.TMP" />
   </ItemGroup>
 
@@ -83,10 +89,6 @@
     <None Update="Reports\procurements-received-journal.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\" />
   </ItemGroup>
 
 </Project>

@@ -12,7 +12,6 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "subsidiary_ledger_accounts";
-        private readonly string viewTableName = "view_subsidiary_ledger_accounts";
 
         public SubsidiaryLedgerAccountsRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -69,12 +68,12 @@ namespace ACC.Data
                     if (reader.Rows.Count < 1)
                         return record;
 
-                    record.Add("funds_id", reader.Rows[0][0].ToString());
-                    record.Add("general_ledger_accounts_id", reader.Rows[0][1].ToString());
-                    record.Add("sub_code", reader.Rows[0][2].ToString());
-                    record.Add("sub_name", reader.Rows[0][3].ToString());
-                    record.Add("created_at", reader.Rows[0][4].ToString());
-                    record.Add("updated_at", reader.Rows[0][5].ToString());
+                    record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
+                    record.Add("general_ledger_accounts_id", reader.Rows[0]["general_ledger_accounts_id"].ToString());
+                    record.Add("sub_code", reader.Rows[0]["sub_code"].ToString());
+                    record.Add("sub_name", reader.Rows[0]["sub_name"].ToString());
+                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
                 }
             }
             catch (Exception)
@@ -173,6 +172,29 @@ namespace ACC.Data
             {
                 throw;
             }
+        }
+
+        public bool HasSubsidiary(ushort generalLedgerId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId },
+                };
+
+                string query = $"SELECT id FROM {tableName} WHERE general_ledger_accounts_id = @general_ledger_accounts_id";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
         }
     }
 }

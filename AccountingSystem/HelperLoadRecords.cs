@@ -8,6 +8,16 @@ namespace AccountingSystem
 {
     public class HelperLoadRecords
     {
+
+        #region Year
+        internal static void YearComboBox(ComboBox comboBox)
+        {
+            _ = comboBox.Items.Add("2021");
+            comboBox.SelectedIndex = 0;
+        }
+
+        #endregion
+
         #region Account Group
         internal static void AccountGroupDatagridView(DataTable dataTable, DataGridView datagrid)
         {
@@ -146,17 +156,52 @@ namespace AccountingSystem
         #endregion
 
         #region General Ledger Accounts
-        internal static void GeneralLedgerAccountsDatagridView(DataTable dataTable, DataGridView datagrid)
+        internal static void GeneralLedgerAccountsWithBalancesDatagridView(DataTable dataTable, DataGridView datagrid, byte fundsId, short year)
         {
+            _ = dataTable.Columns.Add("Balance", typeof(decimal));
+            _ = dataTable.Columns.Add("Type", typeof(string));
+
+            foreach (DataRow item in dataTable.Rows)
+            {
+                ushort generalLedgerId = (ushort)item["general_ledger_accounts_id"];
+
+                var beginningBalanceRepository = Factory.BeginningBalancesRepository();
+                decimal generalLedgerBalance = beginningBalanceRepository.GetSumBalanceByGeneralLedgerId(fundsId, generalLedgerId, year);
+                var beginningBalanceDict = beginningBalanceRepository.GetRecordByGeneralLedgerAndFundsID(fundsId, generalLedgerId, year);
+                string debitCreditType = string.Empty;
+                debitCreditType = ValidateDebitOrCreditType(beginningBalanceDict, debitCreditType);
+
+                item["Balance"] = generalLedgerBalance;
+                item["Type"] = debitCreditType;
+            }
+
             datagrid.DataSource = dataTable;
             datagrid.Columns[0].Visible = false;
             datagrid.Columns[1].HeaderText = "Code";
             datagrid.Columns[2].HeaderText = "Name";
             datagrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            datagrid.Columns[3].HeaderText = "Sub Major Account";
-            datagrid.Columns[3].Width = 400;
+            datagrid.Columns[3].Visible = false;
             datagrid.Columns[4].Visible = false;
-            datagrid.Columns[5].Visible = false;
+            datagrid.Columns[5].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        }
+
+        private static string ValidateDebitOrCreditType(Dictionary<string, string> beginningBalanceDict, string debitCreditType)
+        {
+            // check if naay sulod ang dictionary
+            if (beginningBalanceDict.Count != 0)
+            {
+                // kung dili empty or null ang is_debit value
+                if (!string.IsNullOrWhiteSpace(beginningBalanceDict["is_debit"]))
+                {
+                    if (beginningBalanceDict["is_debit"] == "1")
+                        debitCreditType = "Debit";
+                    else
+                        debitCreditType = "Credit";
+                }
+            }
+
+            return debitCreditType;
         }
 
         internal static void GeneralLedgerComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
@@ -176,28 +221,63 @@ namespace AccountingSystem
 
             }
         }
+
+        internal static void GeneralLedgerListBox(DataTable dataTable, ListBox listBox)
+        {
+            foreach (DataRow item in dataTable.Rows)
+            {
+                item["ledger_name"] = $"{item["account_code"]} - {item["ledger_name"]}";
+            }
+
+            listBox.DisplayMember = "ledger_name";
+            listBox.ValueMember = "general_ledger_accounts_id";
+            listBox.DataSource = dataTable;
+        }
         #endregion
 
         #region Subsidiary Ledgers
-        internal static void SubsidiaryLedgerAccountsDatagridView(DataTable dataTable, DataGridView datagrid)
+        internal static void SubsidiaryLedgerAccountsDatagridView(DataTable dataTable, DataGridView datagrid, byte fundsId, short year)
         {
+            _ = dataTable.Columns.Add("Balance", typeof(decimal));
+            _ = dataTable.Columns.Add("Type", typeof(string));
+
+            foreach (DataRow item in dataTable.Rows)
+            {
+                ushort generalLedgerId = (ushort)item["general_ledger_accounts_id"];
+                ushort subsidiaryLedgerId = Convert.ToUInt16(item["id"]);
+                string debitCreditType = string.Empty;
+
+                var beginningBalanceRepository = Factory.BeginningBalancesRepository();
+                decimal generalLedgerBalance = beginningBalanceRepository.GetSumBalanceByGeneralLedgerId(fundsId, generalLedgerId, year, subsidiaryLedgerId);
+                var beginningBalanceDict = beginningBalanceRepository.GetRecordByGeneralLedgerAndFundsID(fundsId, generalLedgerId, year, subsidiaryLedgerId);
+
+                debitCreditType = ValidateDebitOrCreditType(beginningBalanceDict, debitCreditType);
+
+
+                item["Balance"] = generalLedgerBalance;
+                item["Type"] = debitCreditType;
+
+            }
+
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].Visible = false;
-            datagrid.Columns[2].Visible = false;
-            datagrid.Columns[3].HeaderText = "Code";
-            datagrid.Columns[3].Width = 200;
-            datagrid.Columns[4].HeaderText = "Name";
-            datagrid.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            datagrid.Columns[5].Visible = false;
-            datagrid.Columns[6].Visible = false;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["funds_id"].Visible = false;
+            datagrid.Columns["general_ledger_accounts_id"].Visible = false;
+            datagrid.Columns["sub_code"].HeaderText = "Code";
+            datagrid.Columns["sub_code"].Width = 200;
+            datagrid.Columns["sub_name"].HeaderText = "Name";
+            datagrid.Columns["sub_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["Balance"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["Balance"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
         }
 
         internal static void SubsidiaryLedgerComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
-            comboBox.DataSource = dataTable;
             comboBox.DisplayMember = displayMember;
             comboBox.ValueMember = valueMember;
+            comboBox.DataSource = dataTable;
 
             if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
             {

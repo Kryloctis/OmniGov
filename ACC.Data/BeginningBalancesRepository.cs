@@ -1,0 +1,259 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+
+namespace ACC.Data
+{
+    class BeginningBalancesRepository : IBeginningBalancesRepository
+    {
+        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly string tableName = "beginning_balances";
+
+        public BeginningBalancesRepository(IDbGenericCommands dbGenericCommands)
+        {
+            _dbGenericCommands = dbGenericCommands;
+        }
+
+        public int CountRecords()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(List<BeginningBalancesModel> entityList)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<string, string> GetRecordByGeneralLedgerAndFundsID(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Byte, fundsId},
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                    new object[] { "@year", DbType.Int16, year},
+                    new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryLedgerId},
+                };
+
+                string query = $"SELECT funds_id, id, subsidiary_ledger_accounts_id, is_debit, date_entry, amount, created_at, updated_at FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id";
+
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
+                    record.Add("id", reader.Rows[0]["id"].ToString());
+                    record.Add("subsidiary_ledger_accounts_id", reader.Rows[0]["subsidiary_ledger_accounts_id"].ToString());
+                    record.Add("is_debit", reader.Rows[0]["is_debit"].ToString());
+                    record.Add("date_entry", reader.Rows[0]["date_entry"].ToString());
+                    record.Add("amount", reader.Rows[0]["amount"].ToString());
+                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
+        }
+
+        public Dictionary<string, string> GetRecordByGeneralLedgerAndFundsID(byte fundsId, ushort generalLedgerId, short year)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Byte, fundsId},
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                    new object[] { "@year", DbType.Int16, year},
+                };
+
+                string query = $"SELECT funds_id, id, subsidiary_ledger_accounts_id, is_debit, date_entry, amount, created_at, updated_at FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year";
+
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
+                    record.Add("id", reader.Rows[0]["id"].ToString());
+                    record.Add("subsidiary_ledger_accounts_id", reader.Rows[0]["subsidiary_ledger_accounts_id"].ToString());
+                    record.Add("is_debit", reader.Rows[0]["is_debit"].ToString());
+                    record.Add("date_entry", reader.Rows[0]["date_entry"].ToString());
+                    record.Add("amount", reader.Rows[0]["amount"].ToString());
+                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
+        }
+
+        public Dictionary<string, string> GetRecordByID(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DataTable GetRecords()
+        {
+            try
+            {
+                string query = $"SELECT * FROM {tableName}";
+
+                var dtJournals = new DataTable();
+                return _dbGenericCommands.Fill(query, dtJournals);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetRecordsBySearch(string searchText)
+        {
+            throw new NotImplementedException();
+        }
+
+        public decimal GetSumBalanceByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null)
+        {
+            try
+            {
+                var parameters = new object[][] 
+                {
+                    new object[] { "@funds_id", DbType.Byte, fundsId},
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                    new object[] { "@year", DbType.Int16, year},
+                    new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryLedgerId},
+                };
+
+                string query = $"SELECT SUM(amount) FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id GROUP BY general_ledger_accounts_id";
+
+                string sumBalance = _dbGenericCommands.ExecuteScalar(query, parameters);
+                if (!string.IsNullOrWhiteSpace(sumBalance))
+                    return Convert.ToDecimal(sumBalance);
+
+                return 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public decimal GetSumBalanceByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Byte, fundsId},
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                    new object[] { "@year", DbType.Int16, year},
+                };
+
+                string query = $"SELECT SUM(amount) FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year GROUP BY general_ledger_accounts_id";
+
+                string sumBalance = _dbGenericCommands.ExecuteScalar(query, parameters);
+                if (!string.IsNullOrWhiteSpace(sumBalance))
+                    return Convert.ToDecimal(sumBalance);
+
+                return 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool IdExist(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Insert(BeginningBalancesModel entity)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Byte, entity.FundsId},
+                    new object[] { "@general_ledger_accounts_id", DbType.Int16, entity.GeneralLedgerId},
+                    new object[] { "@subsidiary_ledger_accounts_id", DbType.Int16, entity.SubsidiaryLedgerId},
+                    new object[] { "@is_debit", DbType.Boolean, entity.IsDebit},
+                    new object[] { "@date_entry", DbType.Date, entity.DateEntry},
+                    new object[] { "@amount", DbType.Decimal, entity.Amount},
+                };
+
+                string query = $"INSERT INTO {tableName} (funds_id, general_ledger_accounts_id, subsidiary_ledger_accounts_id, is_debit, date_entry, amount) VALUES (@funds_id, @general_ledger_accounts_id, @subsidiary_ledger_accounts_id, @is_debit, @date_entry, @amount)";
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool Update(BeginningBalancesModel entity)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, entity.Id},
+                    new object[] { "@funds_id", DbType.Byte, entity.FundsId},
+                    new object[] { "@general_ledger_accounts_id", DbType.Int16, entity.GeneralLedgerId},
+                    new object[] { "@subsidiary_ledger_accounts_id", DbType.Int16, entity.SubsidiaryLedgerId},
+                    new object[] { "@is_debit", DbType.Boolean, entity.IsDebit},
+                    new object[] { "@date_entry", DbType.Date, entity.DateEntry},
+                    new object[] { "@amount", DbType.Decimal, entity.Amount},
+                };
+
+                string query = $"UPDATE {tableName} SET funds_id = @funds_id, general_ledger_accounts_id = @general_ledger_accounts_id, subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id, is_debit = @is_debit, date_entry = @date_entry, amount = @amount WHERE id = @id";
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool GeneralLedgerBalanceExist(byte fundsId, ushort generalLedgerId, short year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Byte, fundsId},
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                    new object[] { "@year", DbType.Int16, year},
+                };
+
+                string query = $"SELECT id FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
+    }
+}

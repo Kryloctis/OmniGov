@@ -40,8 +40,12 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSetBalance = new System.Windows.Forms.ToolStripButton();
             this.dgSubsidiary = new System.Windows.Forms.DataGridView();
             this.cmbFund = new System.Windows.Forms.ComboBox();
+            this.cmbYear = new System.Windows.Forms.ComboBox();
+            this.btnRetrieve = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -124,7 +128,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAdd,
             this.btnEdit,
-            this.btnDelete});
+            this.btnDelete,
+            this.toolStripSeparator1,
+            this.btnSetBalance});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(696, 50);
@@ -164,6 +170,21 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
+            // btnSetBalance
+            // 
+            this.btnSetBalance.Image = ((System.Drawing.Image)(resources.GetObject("btnSetBalance.Image")));
+            this.btnSetBalance.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSetBalance.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSetBalance.Name = "btnSetBalance";
+            this.btnSetBalance.Size = new System.Drawing.Size(80, 47);
+            this.btnSetBalance.Text = "Set Balance...";
+            this.btnSetBalance.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
             // dgSubsidiary
             // 
             this.dgSubsidiary.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -186,15 +207,35 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.cmbFund.Location = new System.Drawing.Point(10, 138);
             this.cmbFund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbFund.Name = "cmbFund";
-            this.cmbFund.Size = new System.Drawing.Size(209, 23);
+            this.cmbFund.Size = new System.Drawing.Size(150, 23);
             this.cmbFund.TabIndex = 9;
-            this.cmbFund.SelectionChangeCommitted += new System.EventHandler(this.cmbFund_SelectionChangeCommitted);
+            // 
+            // cmbYear
+            // 
+            this.cmbYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbYear.FormattingEnabled = true;
+            this.cmbYear.Location = new System.Drawing.Point(166, 138);
+            this.cmbYear.Name = "cmbYear";
+            this.cmbYear.Size = new System.Drawing.Size(121, 23);
+            this.cmbYear.TabIndex = 10;
+            // 
+            // btnRetrieve
+            // 
+            this.btnRetrieve.Location = new System.Drawing.Point(293, 138);
+            this.btnRetrieve.Name = "btnRetrieve";
+            this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
+            this.btnRetrieve.TabIndex = 11;
+            this.btnRetrieve.Text = "&Retrieve";
+            this.btnRetrieve.UseVisualStyleBackColor = true;
+            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
             // 
             // frmSubsidiary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(696, 458);
+            this.Controls.Add(this.btnRetrieve);
+            this.Controls.Add(this.cmbYear);
             this.Controls.Add(this.cmbFund);
             this.Controls.Add(this.dgSubsidiary);
             this.Controls.Add(this.toolStrip1);
@@ -230,5 +271,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.DataGridView dgSubsidiary;
         private System.Windows.Forms.ComboBox cmbFund;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton btnSetBalance;
+        private System.Windows.Forms.ComboBox cmbYear;
+        private System.Windows.Forms.Button btnRetrieve;
     }
 }

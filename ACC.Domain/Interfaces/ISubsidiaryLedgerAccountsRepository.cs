@@ -9,5 +9,6 @@ namespace ACC.Domain.Interfaces
     public interface ISubsidiaryLedgerAccountsRepository : IRepository<SubsidiaryLedgerAccountsModel>
     {
         DataTable GetRecordsByFundAndGeneralLedger(byte fundId, ushort generalLedgerId);
+        bool HasSubsidiary(ushort generalLedgerId);
     }
 }
