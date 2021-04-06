@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             uc.obligationRequestAmount = Convert.ToDecimal(obligationRequestRecord["obligation_amount"]);
             uc.cmbxFunds.SelectedValue = Convert.ToInt32(obligationRequestRecord["funds_id"]);
             uc.cmbxFPP.SelectedValue = Convert.ToInt32(obligationRequestRecord["function_program_project_id"]);
-            uc.cmbxOthersFPP.SelectedValue = string.IsNullOrEmpty(obligationRequestRecord["others_fpp_id"].ToString())? null : Convert.ToInt32(obligationRequestRecord["others_fpp_id"]);
+            uc.cmbxOthersFPP.SelectedValue = string.IsNullOrEmpty(obligationRequestRecord["others_fpp_id"].ToString())? -1 : Convert.ToInt32(obligationRequestRecord["others_fpp_id"]);
             uc.cmbxAllotmentClasses.SelectedValue = Convert.ToInt32(obligationRequestRecord["allotment_classes_id"]);
             uc.cmbxAccount.SelectedValue = Convert.ToInt32(obligationRequestRecord["general_ledger_accounts_id"]);
             uc.dtPickerDateIssued.Value = Convert.ToDateTime(obligationRequestRecord["date_issued"]);
