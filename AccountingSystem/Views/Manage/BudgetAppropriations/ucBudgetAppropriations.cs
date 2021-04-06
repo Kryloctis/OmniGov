@@ -79,7 +79,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 else 
                 {
                     int fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
-                    HelperLoadRecords.BudgetAppropriationsOthersFPPCombobox(Factory.OthersFPPRepository().GetRecordsByID(fppId), cmbxOthersFPP, "name", "id");
+                    HelperLoadRecords.BudgetAppropriationsOthersFPPCombobox(Factory.OthersFPPRepository().GetRecordsByFPPID(fppId), cmbxOthersFPP, "name", "id");
                     cmbxOthersFPP.SelectedIndex = -1;
                     cmbxOthersFPP.Enabled = true;
                 }

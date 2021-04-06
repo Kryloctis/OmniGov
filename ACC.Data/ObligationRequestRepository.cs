@@ -1,4 +1,4 @@
-﻿    using ACC.Domain.Interfaces;
+﻿        using ACC.Domain.Interfaces;
     using ACC.Domain.Models;
     using System;
     using System.Collections.Generic;
@@ -13,7 +13,6 @@
             private MySqlGenericCommands mySqlGenericCommands;
             private readonly string tableName = "obligation_request";
             private readonly string viewTableName = "view_obligation_request";
-
 
             public ObligationRequestRepository(MySqlGenericCommands mySqlGenericCommands)
             {
@@ -83,7 +82,7 @@
                         new object[] { "@others_fpp_id", DbType.String, entity.OtherFPPId },
                         new object[] { "@allotment_classes_id", DbType.Int32, entity.AllotmentClassesID },
                         new object[] { "@general_ledger_accounts_id", DbType.Int32, entity.GenLedgerAccID},
-                        new object[] { "@year", DbType.Int16, entity.year},
+                        new object[] { "@date_issued", DbType.Date, entity.DateIssued},
                         new object[] { "@obligation_no", DbType.String, entity.ObligationNo},
                         new object[] { "@obligation_amount", DbType.Decimal, entity.ObligationAmount},
                         new object[] { "@created_by", DbType.Int32, entity.CreatedBy}
@@ -95,7 +94,7 @@
                         $"others_fpp_id, " +
                         $"allotment_classes_id, " +
                         $"general_ledger_accounts_id, " +
-                        $"year," +
+                        $"date_issued," +
                         $"obligation_no, " +
                         $"obligation_amount, " +
                         $"created_by) " +
@@ -105,7 +104,7 @@
                         $"@others_fpp_id, " +
                         $"@allotment_classes_id, " +
                         $"@general_ledger_accounts_id, " +
-                        $"@year," +
+                        $"@date_issued," +
                         $"@obligation_no, " +
                         $"@obligation_amount, " +
                         $"@created_by)";
@@ -144,7 +143,7 @@
                 }
             }
 
-            Dictionary<string, string> IObligationRequestRepository.GetViewRecordByObligationNum(string obligationNum)
+            Dictionary<string, string> IObligationRequestRepository.GetRecordByObligationNum(string obligationNum)
             {
                 var record = new Dictionary<string, string>();
 
@@ -156,31 +155,21 @@
                     };
 
                     string query = $"SELECT " +
-                        $"obligation_request_id, " +
-                        $"funds_id, " +
-                        $"funds_code, " +
-                        $"funds_name, " +
-                        $"function_program_project_id, " +
-                        $"fpp_code, " +
-                        $"fpp_name, " +
-                        $"others_fpp_id, " +
-                        $"others_fpp_name, " +
-                        $"allotment_classes_id, " +
-                        $"allotment_code, " +
-                        $"allotment_name, " +
-                        $"general_ledger_accounts_id, " +
-                        $"ledger_code, " +
-                        $"account_code, " +
-                        $"ledger_name, " +
-                        $"year, " +
-                        $"obligation_no, " +
-                        $"obligation_amount, " +
-                        $"created_at, " +
-                        $"created_by, " +
-                        $"updated_at, " +
-                        $"updated_by " +
-                        $"FROM {viewTableName} " +
-                        $"WHERE obligation_no = @obligation_no";
+                    $"id, " +
+                    $"funds_id, " +
+                    $"function_program_project_id, " +
+                    $"others_fpp_id, " +
+                    $"allotment_classes_id, " +
+                    $"general_ledger_accounts_id, " +
+                    $"date_issued, " +
+                    $"obligation_no, " +
+                    $"obligation_amount, " +
+                    $"created_at, " +
+                    $"created_by, " +
+                    $"updated_at, " +
+                    $"updated_by " +
+                    $"FROM {tableName} " +
+                    $"WHERE obligation_no = @obligation_no";
 
                     using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
                     {
@@ -189,73 +178,18 @@
 
                         foreach (DataRow item in reader.Rows)
                         {
-                            record.Add("obligation_request_id", item[0].ToString());
+                            record.Add("id", item[0].ToString());
                             record.Add("funds_id", item[1].ToString());
-                            record.Add("funds_code", item[2].ToString());
-                            record.Add("funds_name", item[3].ToString());
-                            record.Add("function_program_project_id", item[4].ToString());
-                            record.Add("fpp_code", item[5].ToString());
-                            record.Add("fpp_name", item[6].ToString());
-                            record.Add("others_fpp_id", item[7].ToString());
-                            record.Add("others_fpp_name", item[8].ToString());
-                            record.Add("allotment_classes_id", item[9].ToString());
-                            record.Add("allotment_code", item[10].ToString());
-                            record.Add("allotment_name", item[11].ToString());
-                            record.Add("general_ledger_accounts_id", item[12].ToString());
-                            record.Add("ledger_code", item[13].ToString());
-                            record.Add("account_code", item[14].ToString());
-                            record.Add("ledger_name", item[15].ToString());
-                            record.Add("year", item[16].ToString());
-                            record.Add("obligation_no", item[17].ToString());
-                            record.Add("obligation_amount", item[18].ToString());
-                            record.Add("created_at", item[19].ToString());
-                            record.Add("created_by", item[20].ToString());
-                            record.Add("updated_at", item[21].ToString());
-                            record.Add("updated_by", item[22].ToString());
-                        }
-                    }
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-                return record;
-            }
-
-            public Dictionary<string, string> GetTotalObligationAmount(int fundID, int fppID, int? otherFPPID, int allotmentClassesID, int general_ledger_accounts_id, short year)
-            {
-                var record = new Dictionary<string, string>();
-
-                try
-                {
-                    var parameters = new object[][]
-                    {
-                            new object[] { "@funds_id", DbType.Int32, fundID },
-                            new object[] { "@function_program_project_id", DbType.Int32, fppID },
-                            new object[] { "@others_fpp_id", DbType.String, otherFPPID},
-                            new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassesID },
-                            new object[] { "@general_ledger_accounts_id", DbType.Int32, general_ledger_accounts_id },
-                            new object[] { "@year", DbType.Int16, year}
-                    };
-
-                    string query = $"SELECT " +
-                        $"COALESCE(SUM(obligation_amount), 0.00) AS total_obligation_amount " +
-                        $"FROM {tableName} " +
-                        $"WHERE funds_id = @funds_id " +
-                        $"AND function_program_project_id = @function_program_project_id " +
-                        $"AND others_fpp_id <=> @others_fpp_id " +
-                        $"AND allotment_classes_id = @allotment_classes_id " +
-                        $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
-                        $"AND year = @year";
-
-                    using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
-                    {
-                        if (reader.Rows.Count < 1)
-                            return record;
-
-                        foreach (DataRow item in reader.Rows)
-                        {
-                            record.Add("total_obligation_amount", item[0].ToString());
+                            record.Add("function_program_project_id", item[2].ToString());
+                            record.Add("others_fpp_id", item[3].ToString());
+                            record.Add("allotment_classes_id", item[4].ToString());
+                            record.Add("general_ledger_accounts_id", item[5].ToString());
+                            record.Add("date_issued", item[6].ToString());
+                            record.Add("obligation_no", item[7].ToString());
+                            record.Add("obligation_amount", item[8].ToString());
+                            record.Add("created_at", item[9].ToString());
+                            record.Add("updated_at", item[10].ToString());
+                            record.Add("updated_by", item[11].ToString());
                         }
                     }
                 }
@@ -312,6 +246,52 @@
                 return false;
             }
 
-            #endregion Validations
+        public Dictionary<string, string> GetTotalObligationAmountByYear(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, short year)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                   new object[] { "@funds_id", DbType.Int32, fundID },
+                   new object[] { "@function_program_project_id", DbType.Int32, fppID },
+                   new object[] { "@others_fpp_id", DbType.String, othersFPPID },
+                   new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassID },
+                   new object[] { "@general_ledger_accounts_id", DbType.Int32, accountID },
+                   new object[] { "@year", DbType.Int16, year },
+                };
+
+                string query = $"SELECT " +
+                    $"COALESCE(SUM(obligation_amount),0.00) AS total_obligation_amount " +
+                    $"FROM {tableName} " +
+                    $"WHERE funds_id = @funds_id " +
+                    $"AND function_program_project_id = @function_program_project_id " +
+                    $"AND others_fpp_id <=> @others_fpp_id " +
+                    $"AND allotment_classes_id = @allotment_classes_id " +
+                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
+                    $"AND YEAR(date_issued) = @year";
+
+                using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("total_obligation_amount", item[0].ToString());
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
         }
+
+        #endregion Validations
+    }
     }

@@ -13,7 +13,7 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecords(int fppId, int? othersFPPId, int fundID, int allotmentClassId, Int16 year);
         Dictionary<string, string> GetViewRecord(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, short year);
-        Dictionary<string, string> GetTotalAllotmentReleaseAmount(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, short year);
+        Dictionary<string, string> GetTotalAllotmentReleaseAmount(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, DateTime dateIssued);
 
         DataTable GetOthersFPPRecords(int fppId, int allotmentClassId, int fundId, Int16 year);
 

@@ -848,239 +848,50 @@ namespace AccountingSystem
 
         #region Obligation Request
 
-        internal static void FPPAllotmentReleaseDatagridView(DataTable dataTable, DataGridView dataGridView) 
+        internal static void ObligationRequestFundsCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
         {
-            dataGridView.DataSource = dataTable;
-            dataGridView.Columns["id"].Visible = false;
-            dataGridView.Columns["service_name"].Visible = false;
-            dataGridView.Columns["fpp_code"].HeaderText = "FPP Code";
-            dataGridView.Columns["fpp_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridView.Columns["fpp_name"].HeaderText = "FPP Name";
-            dataGridView.Columns["created_at"].Visible = false;
-            dataGridView.Columns["updated_at"].Visible = false;
-            dataGridView.ClearSelection();
-            
-            //disable sort mode
-            dataGridView.Columns["fpp_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
-            dataGridView.Columns["fpp_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+            comboBox.DropDownHeight = 200;
         }
 
-        internal static void AllotmentReleaseDgvObligationRequest(DataGridView dataGridView, int fppId, int fundID, int allotmentClassId, short year) 
+        internal static void ObligationRequestFPPCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
-            try
-            {
-                dataGridView.Columns.Clear();
-                dataGridView.Rows.Clear();
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+            comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox.DropDownHeight = 200;
+        }
 
-                //Set up new Columns to Datagrid View
-                dataGridView.Columns.Add("gen_ledger_acc_id", "Ledger ID");
-                dataGridView.Columns.Add("gen_ledger_code", "Ledger Code");
-                dataGridView.Columns.Add("account_code", "Account Code");
-                dataGridView.Columns.Add("gen_ledger_name", "Account Name");
-                dataGridView.Columns.Add("total_allotment_release_amount", "Allotment Amount");
-                dataGridView.Columns.Add("total_obligation_amount", "Obligated Amount ");
-                dataGridView.Columns.Add("unobligated_balance", "Unobligated Balance");
-                dataGridView.Columns.Add("budget_appropriations_id", "Budget Appropriation ID");
-                dataGridView.Columns.Add("budget_appropriations_year", "Budget Appropriation Year");
-                dataGridView.Columns.Add("budget_appropriations_amount", "Budget Appropriation Amount");
-                dataGridView.Columns.Add("fund_id", "Fund ID");
-                dataGridView.Columns.Add("fund_code", "Fund Code");
-                dataGridView.Columns.Add("fund_name", "Fund Name");
-                dataGridView.Columns.Add("fpp_id", "FPP ID");
-                dataGridView.Columns.Add("fpp_code", "FPP Code");
-                dataGridView.Columns.Add("fpp_name", "FPP Name");
-                dataGridView.Columns.Add("others_fpp_id", "Others FPP ID");
-                dataGridView.Columns.Add("others_fpp_name", "Others FPP Name");
-                dataGridView.Columns.Add("allotment_class_id", "Allotment Class ID");
-                dataGridView.Columns.Add("allotment_class_code", "Allotment Class Code");
-                dataGridView.Columns.Add("allotment_class_name", "Allotment Class Name");
+        internal static void ObligationRequestOthersFPPCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+            comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox.DropDownHeight = 200;
+        }
 
-                //disable sort mode
-                dataGridView.Columns["gen_ledger_acc_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["gen_ledger_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["account_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["gen_ledger_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["total_allotment_release_amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["total_obligation_amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["unobligated_balance"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["budget_appropriations_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["budget_appropriations_year"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["budget_appropriations_amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["fund_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["fund_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["fund_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["fpp_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["fpp_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["fpp_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["others_fpp_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["others_fpp_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["allotment_class_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["allotment_class_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["allotment_class_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
+        internal static void ObligationRequestAllotmentClassesCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+            comboBox.DropDownHeight = 200;
+        }
 
-                //Visibility of Columns
-                dataGridView.Columns["budget_appropriations_id"].Visible = false;
-                dataGridView.Columns["budget_appropriations_year"].Visible = false;
-                dataGridView.Columns["budget_appropriations_amount"].Visible = false;
-                dataGridView.Columns["fund_id"].Visible = false;
-                dataGridView.Columns["fund_code"].Visible = false;
-                dataGridView.Columns["fund_name"].Visible = false;
-                dataGridView.Columns["fpp_id"].Visible = false;
-                dataGridView.Columns["fpp_code"].Visible = false;
-                dataGridView.Columns["fpp_name"].Visible = false;
-                dataGridView.Columns["others_fpp_id"].Visible = false;
-                dataGridView.Columns["others_fpp_name"].Visible = false;
-                dataGridView.Columns["allotment_class_id"].Visible = false;
-                dataGridView.Columns["allotment_class_code"].Visible = false;
-                dataGridView.Columns["allotment_class_name"].Visible = false;
-                dataGridView.Columns["gen_ledger_acc_id"].Visible = false;
-                dataGridView.Columns["gen_ledger_code"].Visible = false;
-
-                //Formatting of Columns
-                dataGridView.Columns["account_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-                dataGridView.Columns["unobligated_balance"].DefaultCellStyle.Format = "N2";
-                dataGridView.Columns["unobligated_balance"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                dataGridView.Columns["total_obligation_amount"].DefaultCellStyle.Format = "N2";
-                dataGridView.Columns["total_obligation_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                dataGridView.Columns["total_allotment_release_amount"].DefaultCellStyle.Format = "N2";
-                dataGridView.Columns["total_allotment_release_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-
-                //Initialize Repository Method
-                DataTable dtGetViewRecordsAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecords(fppId, null, fundID, allotmentClassId, year);
-
-                //Load by loop All Budget Appropriations Records without Others FPP 
-                foreach (DataRow drGetViewRecords in dtGetViewRecordsAllotmentRelease.Rows)
-                {
-                    var totalObligationAmount = Factory.ObligationRequestRepository().GetTotalObligationAmount(
-                          Convert.ToInt32(drGetViewRecords["fund_id"]),
-                          Convert.ToInt32(drGetViewRecords["fpp_id"]),
-                          null,
-                          Convert.ToInt32(drGetViewRecords["allotment_class_id"]),
-                          Convert.ToInt32(drGetViewRecords["gen_ledger_acc_id"]),
-                          year);
-                    
-                    var totalAllotmentReleaseAmount = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(
-                          Convert.ToInt32(drGetViewRecords["fund_id"]),
-                          Convert.ToInt32(drGetViewRecords["fpp_id"]),
-                          null,
-                          Convert.ToInt32(drGetViewRecords["allotment_class_id"]),
-                          Convert.ToInt32(drGetViewRecords["gen_ledger_acc_id"]),
-                          year);
-
-                    decimal unobligatedBalance = Convert.ToDecimal(totalAllotmentReleaseAmount["total_allotment_release_amount"]) - Convert.ToDecimal(totalObligationAmount["total_obligation_amount"]);
-
-                    var RowData = new object[]
-                    {
-                        drGetViewRecords["gen_ledger_acc_id"],
-                        drGetViewRecords["gen_ledger_code"],
-                        drGetViewRecords["account_code"],
-                        drGetViewRecords["gen_ledger_name"],
-                        Convert.ToDecimal(totalAllotmentReleaseAmount["total_allotment_release_amount"]),
-                        Convert.ToDecimal(totalObligationAmount["total_obligation_amount"]),
-                        unobligatedBalance,
-                        drGetViewRecords["budget_appropriations_id"],
-                        drGetViewRecords["budget_appropriations_year"],
-                        drGetViewRecords["budget_appropriations_amount"],
-                        drGetViewRecords["fund_id"],
-                        drGetViewRecords["fund_code"],
-                        drGetViewRecords["fund_name"],
-                        drGetViewRecords["fpp_id"],
-                        drGetViewRecords["fpp_code"],
-                        drGetViewRecords["fpp_name"],
-                        drGetViewRecords["others_fpp_id"],
-                        drGetViewRecords["others_fpp_name"],
-                        drGetViewRecords["allotment_class_id"],
-                        drGetViewRecords["allotment_class_code"],
-                        drGetViewRecords["allotment_class_name"],
-                    };
-
-                    dataGridView.Rows.Add(RowData);
-                }
-
-                //Initialize Repository Method
-                DataTable dtGetOthersFPPRecords = Factory.AllotmentReleaseRepository().GetOthersFPPRecords(fppId ,allotmentClassId, fundID, year);
-
-                //Load by loop All Budget Appropriations Records with Others FPP 
-                foreach (DataRow drGetOthersFPPRecords in dtGetOthersFPPRecords.Rows)
-                {
-                    string othersFPPName = drGetOthersFPPRecords["others_fpp_name"].ToString();
-                    int othersFPPID = Convert.ToInt32(drGetOthersFPPRecords["others_fpp_id"]);
-
-                    dataGridView.Rows.Add(new object[] { null, null, othersFPPName });
-
-                    //Initialize Repository Method for w Others FPP Records
-                    DataTable dtGetViewRecordsAllotmentReleaseOthersFPP = Factory.AllotmentReleaseRepository().GetViewRecords(fppId, othersFPPID, fundID, allotmentClassId, year);
-
-
-                    //Load by loop All Budget Appropriations Records without Others FPP 
-                    foreach (DataRow drGetViewRecordsAllotmentReleaseOthersFPP in dtGetViewRecordsAllotmentReleaseOthersFPP.Rows)
-                    {
-                        var obligationRepo = Factory.ObligationRequestRepository().GetTotalObligationAmount(
-                                Convert.ToInt32(drGetViewRecordsAllotmentReleaseOthersFPP["fund_id"]),
-                                Convert.ToInt32(drGetViewRecordsAllotmentReleaseOthersFPP["fpp_id"]),
-                                Convert.ToInt32(drGetViewRecordsAllotmentReleaseOthersFPP["others_fpp_id"]),
-                                Convert.ToInt32(drGetViewRecordsAllotmentReleaseOthersFPP["allotment_class_id"]),
-                                Convert.ToInt32(drGetViewRecordsAllotmentReleaseOthersFPP["gen_ledger_acc_id"]),
-                                year);
-
-                        var totalAllotmentReleaseAmount = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(
-                                Convert.ToInt32(drGetViewRecordsAllotmentReleaseOthersFPP["fund_id"]),
-                                Convert.ToInt32(drGetViewRecordsAllotmentReleaseOthersFPP["fpp_id"]),
-                                Convert.ToInt32(drGetViewRecordsAllotmentReleaseOthersFPP["others_fpp_id"]),
-                                Convert.ToInt32(drGetViewRecordsAllotmentReleaseOthersFPP["allotment_class_id"]),
-                                Convert.ToInt32(drGetViewRecordsAllotmentReleaseOthersFPP["gen_ledger_acc_id"]),
-                                year);
-
-                        decimal unobligatedBalance = Convert.ToDecimal(totalAllotmentReleaseAmount["total_allotment_release_amount"]) - Convert.ToDecimal(obligationRepo["total_obligation_amount"]);
-
-                        var RowData = new object[]
-                       {
-                            drGetViewRecordsAllotmentReleaseOthersFPP["gen_ledger_acc_id"],
-                            drGetViewRecordsAllotmentReleaseOthersFPP["gen_ledger_code"],
-                            drGetViewRecordsAllotmentReleaseOthersFPP["account_code"],
-                            drGetViewRecordsAllotmentReleaseOthersFPP["gen_ledger_name"],
-                            Convert.ToDecimal(totalAllotmentReleaseAmount["total_allotment_release_amount"]),
-                            Convert.ToDecimal(obligationRepo["total_obligation_amount"]),
-                            unobligatedBalance,
-                            drGetViewRecordsAllotmentReleaseOthersFPP["budget_appropriations_id"],
-                            drGetViewRecordsAllotmentReleaseOthersFPP["budget_appropriations_year"],
-                            drGetViewRecordsAllotmentReleaseOthersFPP["budget_appropriations_amount"],
-                            drGetViewRecordsAllotmentReleaseOthersFPP["fund_id"],
-                            drGetViewRecordsAllotmentReleaseOthersFPP["fund_code"],
-                            drGetViewRecordsAllotmentReleaseOthersFPP["fund_name"],
-                            drGetViewRecordsAllotmentReleaseOthersFPP["fpp_id"],
-                            drGetViewRecordsAllotmentReleaseOthersFPP["fpp_code"],
-                            drGetViewRecordsAllotmentReleaseOthersFPP["fpp_name"],
-                            drGetViewRecordsAllotmentReleaseOthersFPP["others_fpp_id"],
-                            drGetViewRecordsAllotmentReleaseOthersFPP["others_fpp_name"],
-                            drGetViewRecordsAllotmentReleaseOthersFPP["allotment_class_id"],
-                            drGetViewRecordsAllotmentReleaseOthersFPP["allotment_class_code"],
-                            drGetViewRecordsAllotmentReleaseOthersFPP["allotment_class_name"],
-                       };
-
-                        dataGridView.Rows.Add(RowData);
-                    }
-                }
-
-
-                //Change Font style for the header of Others FPP
-                foreach (DataGridViewRow row in dataGridView.Rows)
-                {
-                    if (row.Cells[4].Value == null)
-                    {
-                        dataGridView.Rows[row.Index].DefaultCellStyle.Font = new Font(DataGridView.DefaultFont, FontStyle.Bold);
-                    }
-                }
-
-                dataGridView.ClearSelection();
-
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        
+        internal static void ObligationRequestAccountCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+            comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox.DropDownHeight = 200;
         }
 
         #endregion Obligation Request

@@ -12,7 +12,7 @@ namespace ACC.Domain.Models
         public int? OtherFPPId { get; set; }
         public int AllotmentClassesID { get; set; }
         public int GenLedgerAccID { get; set; }
-        public short year { get; set; }
+        public DateTime DateIssued { get; set; }
         public string ObligationNo { get; set; }
         public decimal ObligationAmount { get; set; }
         public int CreatedBy { get; set; }

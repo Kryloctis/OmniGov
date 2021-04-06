@@ -8,8 +8,8 @@ namespace ACC.Domain.Interfaces
 {
     public interface IObligationRequestRepository : IRepository<ObligationRequestModel>
     {
-        Dictionary<string, string> GetViewRecordByObligationNum(string obligationNum);
-        Dictionary<string, string> GetTotalObligationAmount(int fundID, int fppID, int? otherFPPID, int allotmentClassesID, int general_ledger_accounts_id, short year);
+        Dictionary<string, string> GetRecordByObligationNum(string obligationNum);
+        Dictionary<string, string> GetTotalObligationAmountByYear(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, short year);
 
         bool ObligationNumExist(string obligationNum);
         bool ObligationNumExist(int id, string obligationNum);
