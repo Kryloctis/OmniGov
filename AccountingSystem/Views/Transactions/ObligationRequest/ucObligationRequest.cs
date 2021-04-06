@@ -14,6 +14,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
     public partial class ucObligationRequest : UserControl
     {
         internal int obligationID = 0;
+        internal decimal obligationRequestAmount = 0;
 
         public ucObligationRequest()
         {
@@ -37,10 +38,23 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         internal void ResetForm()
         {
-
+            obligationID = 0;
+            obligationRequestAmount = 0;
+            cmbxFunds.SelectedIndex = -1;
+            cmbxFPP.SelectedIndex = -1;
+            cmbxOthersFPP.SelectedIndex = -1;
+            cmbxAllotmentClasses.SelectedIndex = -1;
+            cmbxAccount.SelectedIndex = -1;
             dtPickerDateIssued.Value = DateTime.Now;
             mkTxtObligationNum.Clear();
             nudAmount.Value = 0;
+
+            cmbxFunds.Enabled = true;
+            cmbxFPP.Enabled = true;
+            cmbxOthersFPP.Enabled = true;
+            cmbxAllotmentClasses.Enabled = true;
+            cmbxAccount.Enabled = true;
+            dtPickerDateIssued.Enabled = true;
         }
 
         internal void ResetFields() 
@@ -116,7 +130,17 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void cmbxAllotmentClasses_SelectedValueChanged(object sender, EventArgs e) 
         {
-            LoadGeneralLedgerAccountsCombobox();
+            if (cmbxAllotmentClasses.SelectedIndex < 0)
+            {
+                cmbxAccount.Enabled = false;
+                cmbxAccount.SelectedIndex = -1;
+            }
+            else 
+            {
+                cmbxAccount.Enabled = true;
+                LoadGeneralLedgerAccountsCombobox();
+            }
+
         }
 
         #region Validations
@@ -167,11 +191,23 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
                 var totalAllotmentBalanceAmount = Convert.ToDecimal(totalAllotmentAmount["total_allotment_amount"]) - Convert.ToDecimal(totalObligationAmountByYear["total_obligation_amount"]);
 
-                if (numericUpDown.Value > Convert.ToDecimal(totalAllotmentBalanceAmount)) 
+                if (obligationID == 0)
                 {
-                    ep.SetError(numericUpDown, fieldText);
-                    return true;
+                    string errorText = numericUpDown.Value > Convert.ToDecimal(totalAllotmentBalanceAmount) ?  fieldText : string.Empty;
+                    bool errorBoolean = numericUpDown.Value > Convert.ToDecimal(totalAllotmentBalanceAmount) ? true : false;
+
+                    ep.SetError(numericUpDown, errorText);
+                    return errorBoolean;
                 }
+                else 
+                {
+                    string errorText = numericUpDown.Value > Convert.ToDecimal(totalAllotmentBalanceAmount) + obligationRequestAmount ? fieldText : string.Empty;
+                    bool errorBoolean = numericUpDown.Value > Convert.ToDecimal(totalAllotmentBalanceAmount) + obligationRequestAmount ? true : false;
+
+                    ep.SetError(numericUpDown, errorText);
+                    return errorBoolean;
+                }
+            
             }
             catch (Exception ex) 
             {

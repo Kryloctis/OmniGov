@@ -1,4 +1,4 @@
-﻿    using ACC.Domain.Interfaces;
+﻿        using ACC.Domain.Interfaces;
     using ACC.Domain.Models;
     using System;
     using System.Collections.Generic;
@@ -13,7 +13,6 @@
             private MySqlGenericCommands mySqlGenericCommands;
             private readonly string tableName = "obligation_request";
             private readonly string viewTableName = "view_obligation_request";
-
 
             public ObligationRequestRepository(MySqlGenericCommands mySqlGenericCommands)
             {
@@ -124,7 +123,6 @@
                     var parameters = new object[][]
                     {
                         new object[] { "@id", DbType.Int32, entity.ID },
-                        new object[] { "@date_issued", DbType.Date, entity.DateIssued},
                         new object[] { "@obligation_no", DbType.String, entity.ObligationNo },
                         new object[] { "@obligation_amount", DbType.Decimal, entity.ObligationAmount },
                         new object[] { "@updated_by", DbType.Int32, entity.UpdatedBy }
@@ -132,7 +130,6 @@
 
                     string query = $"UPDATE {tableName} " +
                         $"SET " +
-                        $"date_issued = date_issued, " +
                         $"obligation_no = @obligation_no, " +
                         $"obligation_amount = @obligation_amount, " +
                         $"updated_by = @updated_by" +
@@ -146,7 +143,7 @@
                 }
             }
 
-            Dictionary<string, string> IObligationRequestRepository.GetViewRecordByObligationNum(string obligationNum)
+            Dictionary<string, string> IObligationRequestRepository.GetRecordByObligationNum(string obligationNum)
             {
                 var record = new Dictionary<string, string>();
 
@@ -158,31 +155,21 @@
                     };
 
                     string query = $"SELECT " +
-                        $"obligation_request_id, " +
-                        $"funds_id, " +
-                        $"funds_code, " +
-                        $"funds_name, " +
-                        $"function_program_project_id, " +
-                        $"fpp_code, " +
-                        $"fpp_name, " +
-                        $"others_fpp_id, " +
-                        $"others_fpp_name, " +
-                        $"allotment_classes_id, " +
-                        $"allotment_code, " +
-                        $"allotment_name, " +
-                        $"general_ledger_accounts_id, " +
-                        $"ledger_code, " +
-                        $"account_code, " +
-                        $"ledger_name, " +
-                        $"year, " +
-                        $"obligation_no, " +
-                        $"obligation_amount, " +
-                        $"created_at, " +
-                        $"created_by, " +
-                        $"updated_at, " +
-                        $"updated_by " +
-                        $"FROM {viewTableName} " +
-                        $"WHERE obligation_no = @obligation_no";
+                    $"id, " +
+                    $"funds_id, " +
+                    $"function_program_project_id, " +
+                    $"others_fpp_id, " +
+                    $"allotment_classes_id, " +
+                    $"general_ledger_accounts_id, " +
+                    $"date_issued, " +
+                    $"obligation_no, " +
+                    $"obligation_amount, " +
+                    $"created_at, " +
+                    $"created_by, " +
+                    $"updated_at, " +
+                    $"updated_by " +
+                    $"FROM {tableName} " +
+                    $"WHERE obligation_no = @obligation_no";
 
                     using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
                     {
@@ -191,29 +178,18 @@
 
                         foreach (DataRow item in reader.Rows)
                         {
-                            record.Add("obligation_request_id", item[0].ToString());
+                            record.Add("id", item[0].ToString());
                             record.Add("funds_id", item[1].ToString());
-                            record.Add("funds_code", item[2].ToString());
-                            record.Add("funds_name", item[3].ToString());
-                            record.Add("function_program_project_id", item[4].ToString());
-                            record.Add("fpp_code", item[5].ToString());
-                            record.Add("fpp_name", item[6].ToString());
-                            record.Add("others_fpp_id", item[7].ToString());
-                            record.Add("others_fpp_name", item[8].ToString());
-                            record.Add("allotment_classes_id", item[9].ToString());
-                            record.Add("allotment_code", item[10].ToString());
-                            record.Add("allotment_name", item[11].ToString());
-                            record.Add("general_ledger_accounts_id", item[12].ToString());
-                            record.Add("ledger_code", item[13].ToString());
-                            record.Add("account_code", item[14].ToString());
-                            record.Add("ledger_name", item[15].ToString());
-                            record.Add("year", item[16].ToString());
-                            record.Add("obligation_no", item[17].ToString());
-                            record.Add("obligation_amount", item[18].ToString());
-                            record.Add("created_at", item[19].ToString());
-                            record.Add("created_by", item[20].ToString());
-                            record.Add("updated_at", item[21].ToString());
-                            record.Add("updated_by", item[22].ToString());
+                            record.Add("function_program_project_id", item[2].ToString());
+                            record.Add("others_fpp_id", item[3].ToString());
+                            record.Add("allotment_classes_id", item[4].ToString());
+                            record.Add("general_ledger_accounts_id", item[5].ToString());
+                            record.Add("date_issued", item[6].ToString());
+                            record.Add("obligation_no", item[7].ToString());
+                            record.Add("obligation_amount", item[8].ToString());
+                            record.Add("created_at", item[9].ToString());
+                            record.Add("updated_at", item[10].ToString());
+                            record.Add("updated_by", item[11].ToString());
                         }
                     }
                 }

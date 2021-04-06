@@ -142,6 +142,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.ToolStripButton btnCancel;
         internal System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         internal System.Windows.Forms.ToolStripButton btnDelete;
-        private ucObligationRequest ucObligationRequest1;
+        internal ucObligationRequest ucObligationRequest1;
     }
 }
