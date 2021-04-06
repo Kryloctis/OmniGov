@@ -29,15 +29,20 @@ namespace AccountingSystem.Views.Reports.SAAOB
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnRetrieve = new System.Windows.Forms.Button();
+            this.nudYear = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
             this.cmbxFPP = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.nudYear = new System.Windows.Forms.NumericUpDown();
-            this.btnRetrieve = new System.Windows.Forms.Button();
+            this.epYear = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epFPP = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epYear)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -53,43 +58,20 @@ namespace AccountingSystem.Views.Reports.SAAOB
             this.panel1.Size = new System.Drawing.Size(915, 47);
             this.panel1.TabIndex = 0;
             // 
-            // cmbxFPP
+            // btnRetrieve
             // 
-            this.cmbxFPP.FormattingEnabled = true;
-            this.cmbxFPP.Location = new System.Drawing.Point(45, 12);
-            this.cmbxFPP.Name = "cmbxFPP";
-            this.cmbxFPP.Size = new System.Drawing.Size(225, 23);
-            this.cmbxFPP.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(27, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "FPP";
-            // 
-            // panel2
-            // 
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 47);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(915, 638);
-            this.panel2.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(276, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 15);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Year";
+            this.btnRetrieve.Location = new System.Drawing.Point(471, 12);
+            this.btnRetrieve.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
+            this.btnRetrieve.Name = "btnRetrieve";
+            this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
+            this.btnRetrieve.TabIndex = 4;
+            this.btnRetrieve.Text = "Retrieve";
+            this.btnRetrieve.UseVisualStyleBackColor = true;
+            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
             // 
             // nudYear
             // 
-            this.nudYear.Location = new System.Drawing.Point(311, 12);
+            this.nudYear.Location = new System.Drawing.Point(328, 12);
             this.nudYear.Maximum = new decimal(new int[] {
             300000,
             0,
@@ -108,15 +90,53 @@ namespace AccountingSystem.Views.Reports.SAAOB
             0,
             0,
             0});
+            this.nudYear.Validating += new System.ComponentModel.CancelEventHandler(this.nudYear_Validating);
+            this.nudYear.Validated += new System.EventHandler(this.nudYear_Validated);
             // 
-            // btnRetrieve
+            // label2
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(437, 12);
-            this.btnRetrieve.Name = "btnRetrieve";
-            this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
-            this.btnRetrieve.TabIndex = 4;
-            this.btnRetrieve.Text = "Retrieve";
-            this.btnRetrieve.UseVisualStyleBackColor = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(293, 15);
+            this.label2.Margin = new System.Windows.Forms.Padding(20, 0, 3, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 15);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Year";
+            // 
+            // cmbxFPP
+            // 
+            this.cmbxFPP.FormattingEnabled = true;
+            this.cmbxFPP.Location = new System.Drawing.Point(45, 12);
+            this.cmbxFPP.Name = "cmbxFPP";
+            this.cmbxFPP.Size = new System.Drawing.Size(225, 23);
+            this.cmbxFPP.TabIndex = 1;
+            this.cmbxFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxFPP_Validating);
+            this.cmbxFPP.Validated += new System.EventHandler(this.cmbxFPP_Validated);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(27, 15);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "FPP";
+            // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 47);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(915, 638);
+            this.panel2.TabIndex = 1;
+            // 
+            // epYear
+            // 
+            this.epYear.ContainerControl = this;
+            // 
+            // epFPP
+            // 
+            this.epFPP.ContainerControl = this;
             // 
             // frmSAAOB
             // 
@@ -134,6 +154,8 @@ namespace AccountingSystem.Views.Reports.SAAOB
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epYear)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epFPP)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -147,5 +169,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
         internal System.Windows.Forms.NumericUpDown nudYear;
         internal System.Windows.Forms.ComboBox cmbxFPP;
         internal System.Windows.Forms.Button btnRetrieve;
+        private System.Windows.Forms.ErrorProvider epYear;
+        private System.Windows.Forms.ErrorProvider epFPP;
     }
 }

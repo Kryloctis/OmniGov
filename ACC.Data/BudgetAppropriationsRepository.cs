@@ -393,6 +393,29 @@ namespace ACC.Data
             }
             return record;
         }
+
+        public DataTable GetViewRecordsSAAOB(int fppID, short year)
+        {
+            try
+            {
+                var parameters = new object[][]
+           {
+                    new object[] { "@fpp_id", DbType.Int32, fppID},
+                    new object[] { "@year", DbType.Int16, year}
+           };
+
+                string query = $"SELECT * FROM lfsdb.view_budget_appropriations " +
+                    $"WHERE fpp_id = @fpp_id " +
+                    $"AND year = @year";
+
+                var dtPermissions = new DataTable();
+                return mySqlGenericCommands.FillBySearch(query, dtPermissions, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion Validations
     }
 }
