@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Subsidiary ledger has been saved.");
-                frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger(ucSubsidiary1.fundId);
+                frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
                 ucSubsidiary1.ResetForm();
             }
         }

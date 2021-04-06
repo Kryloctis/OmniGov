@@ -18,12 +18,13 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
         private readonly byte fundId;
         private readonly short year;
 
-        public frmBeginningBalanceEdit(byte fundId, ushort generalLedgerId, short year)
+        public frmBeginningBalanceEdit(byte fundId, ushort generalLedgerId, short year, ushort subsidiaryLedgerId = 0)
         {
             InitializeComponent();
             uc = ucBeginningBalances1;
             this.fundId = fundId;
             uc.generalLedgerId = generalLedgerId;
+            uc.subsidiaryLedgerId = subsidiaryLedgerId;
             this.year = year;
         }
 
@@ -32,7 +33,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
         {
             try
             {
-                var beginningBalanceDict = Factory.BeginningBalancesRepository().GetRecordByGeneralLedgerAndFundsID(fundId, uc.generalLedgerId, year);
+                Dictionary<string, string> beginningBalanceDict = new();
+                if (uc.subsidiaryLedgerId == 0)
+                    beginningBalanceDict = Factory.BeginningBalancesRepository().GetRecordByGeneralLedgerAndFundsID(fundId, uc.generalLedgerId, year);
+                else
+                    beginningBalanceDict = Factory.BeginningBalancesRepository().GetRecordByGeneralLedgerAndFundsID(fundId, uc.generalLedgerId, year, uc.subsidiaryLedgerId);
 
                 uc.beginningBalanceId = int.Parse(beginningBalanceDict["id"]);
                 CheckedFund();
@@ -77,7 +82,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
                 var beginningBalanceModel = new BeginningBalancesModel()
                 {
                     Id = uc.beginningBalanceId,
-                    FundsId = uc.fundId,
+                    FundsId = fundId,
                     GeneralLedgerId = uc.generalLedgerId,
                     SubsidiaryLedgerId = subsidiaryId != 0 ? subsidiaryId : null,
                     IsDebit = uc.radioDebit.Checked,
