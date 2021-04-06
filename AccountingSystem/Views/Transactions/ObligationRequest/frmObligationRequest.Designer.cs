@@ -50,7 +50,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnSearch});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(420, 50);
+            this.toolStrip1.Size = new System.Drawing.Size(416, 50);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -106,9 +106,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // ucObligationRequest1
             // 
-            this.ucObligationRequest1.Location = new System.Drawing.Point(19, 53);
+            this.ucObligationRequest1.Location = new System.Drawing.Point(12, 58);
             this.ucObligationRequest1.Name = "ucObligationRequest1";
-            this.ucObligationRequest1.Size = new System.Drawing.Size(401, 324);
+            this.ucObligationRequest1.Size = new System.Drawing.Size(401, 246);
             this.ucObligationRequest1.TabIndex = 1;
             // 
             // frmObligationRequest
@@ -116,7 +116,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(420, 391);
+            this.ClientSize = new System.Drawing.Size(416, 314);
             this.Controls.Add(this.ucObligationRequest1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -142,6 +142,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.ToolStripButton btnCancel;
         internal System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         internal System.Windows.Forms.ToolStripButton btnDelete;
-        internal ucObligationRequest ucObligationRequest1;
+        private ucObligationRequest ucObligationRequest1;
     }
 }

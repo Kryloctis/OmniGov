@@ -19,32 +19,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             _frmObligationRequest = frmObligationRequest;
         }
 
-        private void LoadSelectedObligationInfo() 
-        {
-            try
-            {
-
-                var uc = _frmObligationRequest.ucObligationRequest1;
-
-                uc.ResetForm();
-                uc.lnklblAllotmentRelease.Enabled = false;
-                _frmObligationRequest.btnCancel.Enabled = true;
-                _frmObligationRequest.btnDelete.Enabled = true;
-                _frmObligationRequest.btnSave.Text = "Update";
-                uc.obligationNo = mkTxtObligationNum.Text.Trim();
-                uc.LoadSearchRecord();
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
             if (Factory.ObligationRequestRepository().ObligationNumExist(mkTxtObligationNum.Text))
             {
-                LoadSelectedObligationInfo();
                 Close();
             }
             else

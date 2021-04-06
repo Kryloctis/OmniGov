@@ -13,6 +13,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 {
     public partial class frmObligationRequest : Form
     {
+  
         public frmObligationRequest()
         {
             InitializeComponent();
@@ -27,8 +28,16 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             try
             {
                 var uc = ucObligationRequest1;
+                int fundID = Convert.ToInt32(uc.cmbxFunds.SelectedValue);
+                int fppID = Convert.ToInt32(uc.cmbxFPP.SelectedValue);
+                int? othersFPPID = string.IsNullOrEmpty(uc.cmbxOthersFPP.Text.Trim()) ? null : Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue);
+                int allotmentClassID = Convert.ToInt32(uc.cmbxAllotmentClasses.SelectedValue);
+                int accountID = Convert.ToInt32(uc.cmbxAccount.SelectedValue);
+                string obligationNo = uc.mkTxtObligationNum.Text.Trim();
+                decimal obligationAmount = uc.nudAmount.Value;
+                DateTime dateIssued = uc.dtPickerDateIssued.Value;
 
-                if (!uc.ValidateChildren() || uc.fppId == 0) 
+                if (!uc.ValidateChildren()) 
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false; 
@@ -37,22 +46,22 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 var user = Helper.GetLoggedInUser();
                 var obligationModel = new ObligationRequestModel
                 {
-                    ID = uc.obligationId,
-                    FundID = uc.fundId,
-                    FPPId = uc.fppId,
-                    OtherFPPId = uc.othersFPPId,
-                    AllotmentClassesID = uc.allotmentClassId,
-                    GenLedgerAccID = uc.accountId,
-                    ObligationNo = uc.mkTxtObligationNum.Text,
-                    ObligationAmount = uc.nudAmount.Value,
-                    year = uc.year,
+                    ID = uc.obligationID,
+                    FundID = fundID,
+                    FPPId = fppID,
+                    OtherFPPId = othersFPPID,
+                    AllotmentClassesID = allotmentClassID,
+                    GenLedgerAccID = accountID,
+                    ObligationNo = obligationNo,
+                    ObligationAmount = obligationAmount,
+                    DateIssued = dateIssued,
                     CreatedBy = 1,
                     UpdatedBy = 1
                 };
 
-                if (uc.obligationId == 0)
+                if (uc.obligationID == 0)
                     return Factory.ObligationRequestRepository().Insert(obligationModel);
-                else 
+                else
                     return Factory.ObligationRequestRepository().Update(obligationModel);
             }
             catch (Exception ex)
@@ -67,10 +76,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             if (SaveData())
             {
                 var uc = ucObligationRequest1;
-                if (uc.obligationId == 0)
+                if (uc.obligationID == 0)
                 {
                     uc.ResetFields();
-                    uc.LoadSelectedRecord();
                     Helper.MessageBoxSuccess("Obligation Request has been saved.");
                 }
                 else
@@ -107,7 +115,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     var obligationRequestModelList = new List<ObligationRequestModel>();
                     var obligationRequestModel = new ObligationRequestModel()
                     {
-                        ID = uc.obligationId
+                        ID = uc.obligationID
                     };
                     obligationRequestModelList.Add(obligationRequestModel);
 
@@ -131,6 +139,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void frmObligationRequest_Load(object sender, EventArgs e)
         {
+            var uc = ucObligationRequest1;
+            Helper.LoadFormIcon(this);
+
+            uc.LoadComboboxes();
         }
     }
 }

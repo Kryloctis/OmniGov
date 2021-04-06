@@ -11,7 +11,7 @@ namespace ACC.Domain.Interfaces
         bool NameExist(string name);
         bool NameExist(int id, string name);
 
-        DataTable GetRecordsByID(int id);
+        DataTable GetRecordsByFPPID(int id);
 
         DataTable GetRecorsBySearchAndID(int id, string searchtxt);
     }

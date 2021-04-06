@@ -196,7 +196,7 @@ namespace ACC.Data
             return false;
         }
 
-        public DataTable GetRecordsByID(int id)
+        public DataTable GetRecordsByFPPID(int id)
         {
             try
             {

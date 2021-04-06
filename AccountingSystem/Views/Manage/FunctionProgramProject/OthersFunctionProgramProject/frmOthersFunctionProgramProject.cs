@@ -30,7 +30,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
                 }
                 else 
                 {
-                    dtOthersFPP = Factory.OthersFPPRepository().GetRecordsByID(functionProgramProjectID);
+                    dtOthersFPP = Factory.OthersFPPRepository().GetRecordsByFPPID(functionProgramProjectID);
                 }
 
                 HelperLoadRecords.OthersFPPDatagridView(dtOthersFPP, dgOthersFPP);
