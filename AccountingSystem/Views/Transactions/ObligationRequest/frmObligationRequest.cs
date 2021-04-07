@@ -36,11 +36,17 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 string obligationNo =$"{uc.mskObligationSeriesNo.Text}-{uc.mskTxtTemplateNo.Text}";
                 decimal obligationAmount = uc.nudAmount.Value;
                 DateTime dateIssued = uc.dtPickerDateIssued.Value;
+                bool obligationExist = Factory.ObligationRequestRepository().ObligationRequestExist(fundID, fppID, othersFPPID, allotmentClassID, accountID, dateIssued, obligationNo);
 
-                if (!uc.ValidateChildren()) 
+                if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
-                    return false; 
+                    return false;
+                }
+                else if (obligationExist) 
+                {
+                    Helper.MessageBoxError("Obligation Request is Already been recorded.");
+                    return false;
                 }
 
                 var user = Helper.GetLoggedInUser();
