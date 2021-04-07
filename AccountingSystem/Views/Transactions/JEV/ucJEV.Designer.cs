@@ -330,7 +330,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // dtpDateEntry
             // 
-            this.dtpDateEntry.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpDateEntry.Location = new System.Drawing.Point(542, 168);
             this.dtpDateEntry.Name = "dtpDateEntry";
             this.dtpDateEntry.Size = new System.Drawing.Size(315, 23);

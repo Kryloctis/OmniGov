@@ -87,7 +87,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
 
         internal void LoadSelectedGeneralLedger()
         {
-            var generalLedgerAccount = Factory.GeneralLedgerAccountsRepository().GetRecordByID(generalLedgerId);
+            var generalLedgerAccount = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
 
             txtAccountCode.Text = generalLedgerAccount["account_code"];
             txtAccountName.Text = generalLedgerAccount["ledger_name"];

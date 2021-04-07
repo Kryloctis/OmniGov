@@ -26,7 +26,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public Dictionary<string, string> GetRecordByGeneralLedgerAndFundsID(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null)
+        public Dictionary<string, string> GetRecordByFundsAndGeneralLedgerID(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null)
         {
             var record = new Dictionary<string, string>();
 
@@ -65,7 +65,7 @@ namespace ACC.Data
             return record;
         }
 
-        public Dictionary<string, string> GetRecordByGeneralLedgerAndFundsID(byte fundsId, ushort generalLedgerId, short year)
+        public Dictionary<string, string> GetRecordByFundsAndGeneralLedgerID(byte fundsId, ushort generalLedgerId, short year)
         {
             var record = new Dictionary<string, string>();
 

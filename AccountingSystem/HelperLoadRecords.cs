@@ -167,7 +167,7 @@ namespace AccountingSystem
 
                 var beginningBalanceRepository = Factory.BeginningBalancesRepository();
                 decimal generalLedgerBalance = beginningBalanceRepository.GetSumBalanceByGeneralLedgerId(fundsId, generalLedgerId, year);
-                var beginningBalanceDict = beginningBalanceRepository.GetRecordByGeneralLedgerAndFundsID(fundsId, generalLedgerId, year);
+                var beginningBalanceDict = beginningBalanceRepository.GetRecordByFundsAndGeneralLedgerID(fundsId, generalLedgerId, year);
                 string debitCreditType = string.Empty;
                 debitCreditType = ValidateDebitOrCreditType(beginningBalanceDict, debitCreditType);
 
@@ -249,7 +249,7 @@ namespace AccountingSystem
 
                 var beginningBalanceRepository = Factory.BeginningBalancesRepository();
                 decimal generalLedgerBalance = beginningBalanceRepository.GetSumBalanceByGeneralLedgerId(fundsId, generalLedgerId, year, subsidiaryLedgerId);
-                var beginningBalanceDict = beginningBalanceRepository.GetRecordByGeneralLedgerAndFundsID(fundsId, generalLedgerId, year, subsidiaryLedgerId);
+                var beginningBalanceDict = beginningBalanceRepository.GetRecordByFundsAndGeneralLedgerID(fundsId, generalLedgerId, year, subsidiaryLedgerId);
 
                 debitCreditType = ValidateDebitOrCreditType(beginningBalanceDict, debitCreditType);
 

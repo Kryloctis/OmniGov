@@ -9,8 +9,13 @@ namespace ACC.Domain.Interfaces
     public interface IJEVAccountsRepository : IRepository<JEVAccountsModel>
     {
         DataTable GetViewRecordsByJevId(int jevId);
+
         DataTable GetViewRecordsByFundJournalDate(byte fundId, byte journalId, DateTime dateEntry);
+
+        DataTable GetViewRecordsByFundAndGeneralLedger(byte fundId, ushort generalLedgerId);
+
         bool DeleteByJevId(int jevId);
+
         int CountByJevId(int jevId);
     }
 }

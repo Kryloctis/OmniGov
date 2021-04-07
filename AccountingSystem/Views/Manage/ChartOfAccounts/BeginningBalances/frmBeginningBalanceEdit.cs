@@ -2,12 +2,7 @@
 using AccountingSystem.Views.Manage.BeginningBalances;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
@@ -35,9 +30,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             {
                 Dictionary<string, string> beginningBalanceDict = new();
                 if (uc.subsidiaryLedgerId == 0)
-                    beginningBalanceDict = Factory.BeginningBalancesRepository().GetRecordByGeneralLedgerAndFundsID(fundId, uc.generalLedgerId, year);
+                    beginningBalanceDict = Factory.BeginningBalancesRepository().GetRecordByFundsAndGeneralLedgerID(fundId, uc.generalLedgerId, year);
                 else
-                    beginningBalanceDict = Factory.BeginningBalancesRepository().GetRecordByGeneralLedgerAndFundsID(fundId, uc.generalLedgerId, year, uc.subsidiaryLedgerId);
+                    beginningBalanceDict = Factory.BeginningBalancesRepository().GetRecordByFundsAndGeneralLedgerID(fundId, uc.generalLedgerId, year, uc.subsidiaryLedgerId);
 
                 uc.beginningBalanceId = int.Parse(beginningBalanceDict["id"]);
                 CheckedFund();

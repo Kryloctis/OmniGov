@@ -11,9 +11,9 @@ using AccountingSystem.Views.Manage.Users.List;
 using AccountingSystem.Views.Transactions.JEV;
 using AccountingSystem.Views.Reports.Journals;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
-using AccountingSystem.Views.Manage.AllotmentRelease;
 using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Reports.SAAOB;
+using AccountingSystem.Views.Reports.Ledgers;
 
 namespace AccountingSystem
 {
@@ -30,11 +30,13 @@ namespace AccountingSystem
             menuReportPRJ.Click += new EventHandler(MenuReportProcurementsReceivedJournal_Click);
             menuReportADADJ.Click += new EventHandler(MenuReportADADisbursementsJournal_Click);
             menuSAAOB.Click += new EventHandler(menuSAAOB_Click);
+            menuGeneralLedgerReport.Click += new EventHandler(menuGeneralLedgerReport_Click);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
+            menuSubsidiaryLedgerReport.Enabled = false;
         }
 
         private void menuJournals_Click(object sender, EventArgs e)
@@ -130,6 +132,11 @@ namespace AccountingSystem
         private void menuSAAOB_Click(object sender, EventArgs e) 
         {
             _ = new frmSAAOB().ShowDialog();
+        }
+
+        private void menuGeneralLedgerReport_Click(object sender, EventArgs e)
+        {
+            _ = new frmGeneralLedgerReport().ShowDialog();
         }
 
     }
