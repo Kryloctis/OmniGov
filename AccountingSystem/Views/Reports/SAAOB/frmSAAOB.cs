@@ -51,8 +51,8 @@ namespace AccountingSystem.Views.Reports.SAAOB
 
                 var dtSAAOB = Factory.BudgetAppropriationsRepository().GetViewRecordsSAAOB(fppID, year);
 
-                reportViewer.SetDisplayMode(DisplayMode.Normal);
-                reportViewer.ZoomMode = ZoomMode.PageWidth;
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.Percent;
                 reportViewer.ZoomPercent = 100;
 
                 var parameters = new[] {
