@@ -95,6 +95,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // btnSearch
             // 
             this.btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnSearch.Enabled = false;
             this.btnSearch.Image = global::AccountingSystem.Properties.Resources.find_doc;
             this.btnSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
