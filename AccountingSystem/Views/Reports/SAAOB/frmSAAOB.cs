@@ -51,14 +51,18 @@ namespace AccountingSystem.Views.Reports.SAAOB
 
                 var dtSAAOB = Factory.BudgetAppropriationsRepository().GetViewRecordsSAAOB(fppID, year);
 
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.SetDisplayMode(DisplayMode.Normal);
+                reportViewer.ZoomMode = ZoomMode.PageWidth;
                 reportViewer.ZoomPercent = 100;
 
+                var parameters = new[] {
+                    new ReportParameter("paramYear", nudYear.Value.ToString()),
+                };
 
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\status-of-appropriations-allotments-and-obligation.rdlc";
                 report.DataSources.Clear();
                 report.DataSources.Add(new ReportDataSource("dtSAAOB", dtSAAOB));
+                report.SetParameters(parameters);
 
                 reportViewer.RefreshReport();
 
