@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             errorArray[2] = epOthersFPP.GetError(cmbxOthersFPP);
             errorArray[3] = epAllotmentClass.GetError(cmbxAllotmentClasses);
             errorArray[4] = epAccount.GetError(cmbxAccount);
-            errorArray[5] = epObligationNum.GetError(mkTxtObligationNum);
+            errorArray[5] = epObligationNum.GetError(mskTxtTemplateNo);
             errorArray[6] = epAmount.GetError(nudAmount);
 
             IError _errors = Factory.CreateErrors(errorArray);
@@ -40,16 +40,13 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             obligationID = 0;
             obligationRequestAmount = 0;
-            cmbxFunds.SelectedIndex = -1;
             cmbxFPP.SelectedIndex = -1;
             cmbxOthersFPP.SelectedIndex = -1;
             cmbxAllotmentClasses.SelectedIndex = -1;
             cmbxAccount.SelectedIndex = -1;
             dtPickerDateIssued.Value = DateTime.Now;
-            mkTxtObligationNum.Clear();
             nudAmount.Value = 0;
 
-            cmbxFunds.Enabled = true;
             cmbxFPP.Enabled = true;
             cmbxOthersFPP.Enabled = true;
             cmbxAllotmentClasses.Enabled = true;
@@ -59,7 +56,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         internal void ResetFields() 
         {
-            mkTxtObligationNum.Clear();
+            cmbxAccount.SelectedIndex = -1;
             nudAmount.Value = 0;
         }
 
@@ -94,13 +91,13 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
              
                 HelperLoadRecords.ObligationRequestAllotmentClassesCombobox(Factory.AllotmentClassesRepository().GetRecords(), cmbxAllotmentClasses, "allotment_name", "id");
 
-
-                cmbxFunds.SelectedIndex = -1;
+                SetObligationNoOfFundCode();
                 cmbxFPP.SelectedIndex = -1;
                 cmbxAllotmentClasses.SelectedIndex = -1;
 
                 cmbxOthersFPP.Enabled = false;
                 cmbxAccount.Enabled = false;
+                cmbxFunds.SelectedValueChanged += new EventHandler(CmbxFunds_SelectedValueChanged);
                 cmbxFPP.SelectedValueChanged += new EventHandler(cmbxFPP_SelectedValueChanged);
                 cmbxFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
                 cmbxAllotmentClasses.SelectedValueChanged += new EventHandler(cmbxAllotmentClasses_SelectedValueChanged);
@@ -109,6 +106,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        private void CmbxFunds_SelectedValueChanged(object sender, EventArgs e) 
+        {
+            SetObligationNoOfFundCode();
         }
 
         private void cmbxFPP_SelectedValueChanged(object sender, EventArgs e) 
@@ -143,36 +145,25 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         }
 
+        private void GenerateObligationNumber( string seriesNo = null, string month = null, string year = null, string fundCode = null)
+        {
+            string templateNo = mskTxtTemplateNo.Text;
+            string[] part = templateNo.Split("-");
+  
+            month ??= part[0];
+            year ??= part[1];
+            fundCode ??= part[2];
+
+            mskTxtTemplateNo.Text = $"{month}-{year}-{fundCode}";
+        }
+
+        private void SetObligationNoOfFundCode()
+        {
+            var fund = Factory.FundsRepository().GetRecordByID(Convert.ToInt32(cmbxFunds.SelectedValue));
+            GenerateObligationNumber(mskObligationSeriesNo.Text, dtPickerDateIssued.Value.ToString("MM"), dtPickerDateIssued.Value.ToString("yy"),$"{fund["fund_code"]}0");
+        }
+
         #region Validations
-
-        //private bool ShowObligationNumExistError(ErrorProvider ep, MaskedTextBox maskedTextBox, string fieldText) 
-        //{
-        //    try
-        //    {
-        //        if (obligationID == 0)
-        //        {
-        //            if (Factory.ObligationRequestRepository().ObligationNumExist(maskedTextBox.Text)) 
-        //            {
-        //                ep.SetError(maskedTextBox,$"{fieldText} is already exist on your record.");
-        //                return true;
-        //            }
-        //        }
-        //        else 
-        //        {
-        //            if (Factory.ObligationRequestRepository().ObligationNumExist(obligationID, maskedTextBox.Text))
-        //            {
-        //                ep.SetError(maskedTextBox, $"{fieldText} is already exist on your record.");
-        //                return true;
-        //            }
-        //        }
-
-        //    }
-        //    catch (Exception ex) 
-        //    {
-        //        Helper.MessageBoxError(ex.Message);
-        //    }
-        //    return false;
-        //}
 
         private bool ShowAmountValidationError(ErrorProvider ep, NumericUpDown numericUpDown, string fieldText) 
         {
@@ -227,6 +218,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private void cmbxFunds_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(epFunds, cmbxFunds);
+
         }
 
         private void cmbxAllotmentClasses_Validating(object sender, CancelEventArgs e)
@@ -294,15 +286,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             Helper.ClearErrorComboBox(epAccount, cmbxAccount);
         }
 
-        private void mkTxtObligationNum_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowMaskedTextboxError(epObligationNum, mkTxtObligationNum, "Obligation No.");
-        }
-        private void mkTxtObligationNum_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearMaskedTextboxError(epObligationNum, mkTxtObligationNum);
-        }
-
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(nudAmount.Text))
@@ -325,5 +308,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         #endregion Validations
 
+        private void dtPickerDateIssued_ValueChanged(object sender, EventArgs e)
+        {
+            SetObligationNoOfFundCode();
+        }
     }
 }
