@@ -55,8 +55,11 @@ namespace AccountingSystem
             this.menuReportCDJ = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportCkDJ = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportADADJ = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuGeneralLedgerReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuSubsidiaryLedgerReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOB = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -208,6 +211,7 @@ namespace AccountingSystem
             // 
             this.menuReports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
+            this.toolStripMenuItem2,
             this.menuSAAOB});
             this.menuReports.Name = "menuReports";
             this.menuReports.Size = new System.Drawing.Size(59, 19);
@@ -262,6 +266,33 @@ namespace AccountingSystem
             this.menuReportADADJ.Size = new System.Drawing.Size(348, 22);
             this.menuReportADADJ.Text = "Authority to Debit Account Disbursements Journal...";
             // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuGeneralLedgerReport,
+            this.menuSubsidiaryLedgerReport});
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(117, 22);
+            this.toolStripMenuItem2.Text = "Ledgers";
+            // 
+            // menuGeneralLedgerReport
+            // 
+            this.menuGeneralLedgerReport.Name = "menuGeneralLedgerReport";
+            this.menuGeneralLedgerReport.Size = new System.Drawing.Size(176, 22);
+            this.menuGeneralLedgerReport.Text = "General Ledger...";
+            // 
+            // menuSubsidiaryLedgerReport
+            // 
+            this.menuSubsidiaryLedgerReport.Name = "menuSubsidiaryLedgerReport";
+            this.menuSubsidiaryLedgerReport.Size = new System.Drawing.Size(176, 22);
+            this.menuSubsidiaryLedgerReport.Text = "Subsidiary Ledger...";
+            // 
+            // menuSAAOB
+            // 
+            this.menuSAAOB.Name = "menuSAAOB";
+            this.menuSAAOB.Size = new System.Drawing.Size(117, 22);
+            this.menuSAAOB.Text = "SAAOB";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -271,12 +302,6 @@ namespace AccountingSystem
             this.label1.Size = new System.Drawing.Size(163, 41);
             this.label1.TabIndex = 1;
             this.label1.Text = "Dashboard";
-            // 
-            // menuSAAOB
-            // 
-            this.menuSAAOB.Name = "menuSAAOB";
-            this.menuSAAOB.Size = new System.Drawing.Size(117, 22);
-            this.menuSAAOB.Text = "SAAOB";
             // 
             // MainForm
             // 
@@ -331,6 +356,9 @@ namespace AccountingSystem
         internal System.Windows.Forms.ToolStripMenuItem menuObligationRequest;
         private System.Windows.Forms.ToolStripMenuItem menuBeginningBalances;
         internal System.Windows.Forms.ToolStripMenuItem menuSAAOB;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem menuGeneralLedgerReport;
+        private System.Windows.Forms.ToolStripMenuItem menuSubsidiaryLedgerReport;
     }
 }
 

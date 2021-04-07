@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
-    
+
     public partial class frmJEVAccountAdd : Form
     {
         private readonly ucJEV ucJEV;
@@ -43,7 +37,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             else
                 isDeposit = null;
 
-            Dictionary<string, string> accountData = Factory.GeneralLedgerAccountsRepository().GetRecordByID(Convert.ToInt32(generalLedgerId));
+            Dictionary<string, string> accountData = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(Convert.ToUInt16(generalLedgerId));
 
             object[] accountRow;
             if (isDebit)

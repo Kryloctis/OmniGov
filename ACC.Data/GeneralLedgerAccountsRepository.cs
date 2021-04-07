@@ -17,9 +17,14 @@ namespace ACC.Data
         public GeneralLedgerAccountsRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
-        }        
+        }
 
         public Dictionary<string, string> GetRecordByID(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<string, string> GetViewRecordByID(ushort generalLedgerId)
         {
             var record = new Dictionary<string, string>();
 
@@ -27,23 +32,23 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Int32, Id},
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
                 };
 
-                string query = $"SELECT sub_major_account_group_id, account_code, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {viewTableName} WHERE general_ledger_accounts_id = @id";
+                string query = $"SELECT sub_major_account_group_id, account_code, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {viewTableName} WHERE general_ledger_accounts_id = @general_ledger_accounts_id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
                         return record;
 
-                    record.Add("sub_major_account_group_id", reader.Rows[0][0].ToString());
-                    record.Add("account_code", reader.Rows[0][1].ToString());
-                    record.Add("ledger_code", reader.Rows[0][2].ToString());
-                    record.Add("ledger_name", reader.Rows[0][3].ToString());
-                    record.Add("is_contra_account", reader.Rows[0][4].ToString());
-                    record.Add("created_at", reader.Rows[0][5].ToString());
-                    record.Add("updated_at", reader.Rows[0][6].ToString());
+                    record.Add("sub_major_account_group_id", reader.Rows[0]["sub_major_account_group_id"].ToString());
+                    record.Add("account_code", reader.Rows[0]["account_code"].ToString());
+                    record.Add("ledger_code", reader.Rows[0]["ledger_code"].ToString());
+                    record.Add("ledger_name", reader.Rows[0]["ledger_name"].ToString());
+                    record.Add("is_contra_account", reader.Rows[0]["is_contra_account"].ToString());
+                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
                 }
             }
             catch (Exception)
@@ -233,6 +238,5 @@ namespace ACC.Data
                 throw;
             }
         }
-
     }
 }

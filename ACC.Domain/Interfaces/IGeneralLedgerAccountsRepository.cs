@@ -10,6 +10,8 @@ namespace ACC.Domain.Interfaces
     {
         DataTable GetViewRecords();
 
+        Dictionary<string, string> GetViewRecordByID(ushort generalLedgerId);
+
         DataTable GetViewRecordsBySearch(string searchText);
 
         //Budget System

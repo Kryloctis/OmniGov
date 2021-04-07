@@ -155,5 +155,26 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public DataTable GetViewRecordsByFundAndGeneralLedger(byte fundId, ushort generalLedgerId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Byte, fundId},
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                };
+
+                string query = $"SELECT jev_id, date_entry, MONTHNAME(date_entry) AS month_name, jev_no, journal_name, explanation, ledger_name, account_code, is_deposit, is_debit, SUM(amount) AS amount FROM {viewTableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id GROUP BY general_ledger_accounts_id, journals_id, MONTH(date_entry), is_debit ORDER BY MONTH(date_entry), journals_id ";
+
+                var dtGeneralLedgers = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
