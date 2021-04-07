@@ -1047,13 +1047,6 @@
                                   <Format>d</Format>
                                 </Style>
                               </TextRun>
-                              <TextRun>
-                                <Value>s</Value>
-                                <Style>
-                                  <FontSize>9pt</FontSize>
-                                  <Format>d</Format>
-                                </Style>
-                              </TextRun>
                             </TextRuns>
                             <Style>
                               <TextAlign>Left</TextAlign>
