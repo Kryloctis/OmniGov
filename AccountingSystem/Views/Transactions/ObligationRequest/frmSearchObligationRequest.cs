@@ -33,7 +33,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             uc.cmbxAllotmentClasses.SelectedValue = Convert.ToInt32(obligationRequestRecord["allotment_classes_id"]);
             uc.cmbxAccount.SelectedValue = Convert.ToInt32(obligationRequestRecord["general_ledger_accounts_id"]);
             uc.dtPickerDateIssued.Value = Convert.ToDateTime(obligationRequestRecord["date_issued"]);
-            uc.mkTxtObligationNum.Text = obligationRequestRecord["obligation_no"];
+            uc.mskTxtTemplateNo.Text = obligationRequestRecord["obligation_no"];
             uc.nudAmount.Value = Convert.ToDecimal(obligationRequestRecord["obligation_amount"]);
         }
 

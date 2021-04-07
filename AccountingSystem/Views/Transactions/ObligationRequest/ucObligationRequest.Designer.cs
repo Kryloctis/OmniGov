@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.components = new System.ComponentModel.Container();
             this.nudAmount = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
-            this.mkTxtObligationNum = new System.Windows.Forms.MaskedTextBox();
+            this.mskTxtTemplateNo = new System.Windows.Forms.MaskedTextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.epObligationNum = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
@@ -53,6 +53,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.epAccount = new System.Windows.Forms.ErrorProvider(this.components);
             this.epFunds = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAllotmentClass = new System.Windows.Forms.ErrorProvider(this.components);
+            this.mskObligationSeriesNo = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epObligationNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
@@ -88,15 +89,15 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.label7.TabIndex = 10;
             this.label7.Text = "Amount";
             // 
-            // mkTxtObligationNum
+            // mskTxtTemplateNo
             // 
-            this.mkTxtObligationNum.Location = new System.Drawing.Point(104, 186);
-            this.mkTxtObligationNum.Mask = "0000-00-00-000";
-            this.mkTxtObligationNum.Name = "mkTxtObligationNum";
-            this.mkTxtObligationNum.Size = new System.Drawing.Size(274, 23);
-            this.mkTxtObligationNum.TabIndex = 6;
-            this.mkTxtObligationNum.Validating += new System.ComponentModel.CancelEventHandler(this.mkTxtObligationNum_Validating);
-            this.mkTxtObligationNum.Validated += new System.EventHandler(this.mkTxtObligationNum_Validated);
+            this.mskTxtTemplateNo.Location = new System.Drawing.Point(151, 186);
+            this.mskTxtTemplateNo.Mask = "00-00-000";
+            this.mskTxtTemplateNo.Name = "mskTxtTemplateNo";
+            this.mskTxtTemplateNo.ReadOnly = true;
+            this.mskTxtTemplateNo.Size = new System.Drawing.Size(227, 23);
+            this.mskTxtTemplateNo.TabIndex = 6;
+            this.mskTxtTemplateNo.Text = "0000000";
             // 
             // label8
             // 
@@ -120,9 +121,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(6, 163);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(67, 15);
+            this.label10.Size = new System.Drawing.Size(61, 15);
             this.label10.TabIndex = 12;
-            this.label10.Text = "Date Issued";
+            this.label10.Text = "Date Entry";
             // 
             // dtPickerDateIssued
             // 
@@ -131,6 +132,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.dtPickerDateIssued.Name = "dtPickerDateIssued";
             this.dtPickerDateIssued.Size = new System.Drawing.Size(274, 23);
             this.dtPickerDateIssued.TabIndex = 5;
+            this.dtPickerDateIssued.ValueChanged += new System.EventHandler(this.dtPickerDateIssued_ValueChanged);
             // 
             // label1
             // 
@@ -249,10 +251,20 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             this.epAllotmentClass.ContainerControl = this;
             // 
+            // mskObligationSeriesNo
+            // 
+            this.mskObligationSeriesNo.Location = new System.Drawing.Point(104, 186);
+            this.mskObligationSeriesNo.Mask = "0000";
+            this.mskObligationSeriesNo.Name = "mskObligationSeriesNo";
+            this.mskObligationSeriesNo.Size = new System.Drawing.Size(41, 23);
+            this.mskObligationSeriesNo.TabIndex = 15;
+            this.mskObligationSeriesNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // ucObligationRequest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.mskObligationSeriesNo);
             this.Controls.Add(this.cmbxAccount);
             this.Controls.Add(this.cmbxAllotmentClasses);
             this.Controls.Add(this.cmbxOthersFPP);
@@ -267,10 +279,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.Controls.Add(this.label10);
             this.Controls.Add(this.nudAmount);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.mkTxtObligationNum);
+            this.Controls.Add(this.mskTxtTemplateNo);
             this.Controls.Add(this.label8);
             this.Name = "ucObligationRequest";
-            this.Size = new System.Drawing.Size(401, 246);
+            this.Size = new System.Drawing.Size(409, 246);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epObligationNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
@@ -287,7 +299,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         #endregion
         internal System.Windows.Forms.NumericUpDown nudAmount;
         private System.Windows.Forms.Label label7;
-        internal System.Windows.Forms.MaskedTextBox mkTxtObligationNum;
+        internal System.Windows.Forms.MaskedTextBox mskTxtTemplateNo;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ErrorProvider epObligationNum;
         private System.Windows.Forms.ErrorProvider epAmount;
@@ -308,5 +320,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private System.Windows.Forms.ErrorProvider epAccount;
         private System.Windows.Forms.ErrorProvider epFunds;
         private System.Windows.Forms.ErrorProvider epAllotmentClass;
+        internal System.Windows.Forms.MaskedTextBox mskObligationSeriesNo;
     }
 }

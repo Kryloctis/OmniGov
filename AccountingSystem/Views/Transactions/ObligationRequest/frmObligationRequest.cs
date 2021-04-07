@@ -33,7 +33,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 int? othersFPPID = string.IsNullOrEmpty(uc.cmbxOthersFPP.Text.Trim()) ? null : Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue);
                 int allotmentClassID = Convert.ToInt32(uc.cmbxAllotmentClasses.SelectedValue);
                 int accountID = Convert.ToInt32(uc.cmbxAccount.SelectedValue);
-                string obligationNo = uc.mkTxtObligationNum.Text.Trim();
+                string obligationNo =$"{uc.mskObligationSeriesNo.Text}-{uc.mskTxtTemplateNo.Text}";
                 decimal obligationAmount = uc.nudAmount.Value;
                 DateTime dateIssued = uc.dtPickerDateIssued.Value;
 
