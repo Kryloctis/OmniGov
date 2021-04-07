@@ -13,7 +13,7 @@
     <Shape ID="DesignTable:ProcurementsReceivedJournal" ZOrder="7" X="253" Y="224" Height="201" Width="177" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="197" />
     <Shape ID="DesignTable:AuthorityToDebitAccountDisbursementsJournal" ZOrder="6" X="467" Y="223" Height="239" Width="210" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="235" />
     <Shape ID="DesignTable:GeneralLedger" ZOrder="2" X="691" Y="11" Height="143" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="139" />
-    <Shape ID="DesignTable:dtSAAOB" ZOrder="1" X="708" Y="223" Height="334" Width="210" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="330" />
+    <Shape ID="DesignTable:dtSAAOB" ZOrder="1" X="708" Y="223" Height="239" Width="172" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="235" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

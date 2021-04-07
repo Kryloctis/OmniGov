@@ -145,34 +145,34 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         #region Validations
 
-        private bool ShowObligationNumExistError(ErrorProvider ep, MaskedTextBox maskedTextBox, string fieldText) 
-        {
-            try
-            {
-                if (obligationID == 0)
-                {
-                    if (Factory.ObligationRequestRepository().ObligationNumExist(maskedTextBox.Text)) 
-                    {
-                        ep.SetError(maskedTextBox,$"{fieldText} is already exist on your record.");
-                        return true;
-                    }
-                }
-                else 
-                {
-                    if (Factory.ObligationRequestRepository().ObligationNumExist(obligationID, maskedTextBox.Text))
-                    {
-                        ep.SetError(maskedTextBox, $"{fieldText} is already exist on your record.");
-                        return true;
-                    }
-                }
+        //private bool ShowObligationNumExistError(ErrorProvider ep, MaskedTextBox maskedTextBox, string fieldText) 
+        //{
+        //    try
+        //    {
+        //        if (obligationID == 0)
+        //        {
+        //            if (Factory.ObligationRequestRepository().ObligationNumExist(maskedTextBox.Text)) 
+        //            {
+        //                ep.SetError(maskedTextBox,$"{fieldText} is already exist on your record.");
+        //                return true;
+        //            }
+        //        }
+        //        else 
+        //        {
+        //            if (Factory.ObligationRequestRepository().ObligationNumExist(obligationID, maskedTextBox.Text))
+        //            {
+        //                ep.SetError(maskedTextBox, $"{fieldText} is already exist on your record.");
+        //                return true;
+        //            }
+        //        }
 
-            }
-            catch (Exception ex) 
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
+        //    }
+        //    catch (Exception ex) 
+        //    {
+        //        Helper.MessageBoxError(ex.Message);
+        //    }
+        //    return false;
+        //}
 
         private bool ShowAmountValidationError(ErrorProvider ep, NumericUpDown numericUpDown, string fieldText) 
         {
@@ -296,11 +296,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void mkTxtObligationNum_Validating(object sender, CancelEventArgs e)
         {
-            if(mkTxtObligationNum.MaskCompleted)
-                e.Cancel = ShowObligationNumExistError(epObligationNum, mkTxtObligationNum, "Obligation No.");
-            else
-                e.Cancel = Helper.ShowMaskedTextboxError(epObligationNum, mkTxtObligationNum, "Obligation No.");
-
+            e.Cancel = Helper.ShowMaskedTextboxError(epObligationNum, mkTxtObligationNum, "Obligation No.");
         }
         private void mkTxtObligationNum_Validated(object sender, EventArgs e)
         {

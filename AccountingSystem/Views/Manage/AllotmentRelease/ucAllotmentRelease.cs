@@ -97,18 +97,18 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             e.Cancel = Helper.ShowMaskedTextboxError(epARONo, mskTxtAroNo, "Allotment Release No.");
 
-            bool itemNameExist;
+            //bool itemNameExist;
 
-            if (allotmentReleaseID == 0)
-                itemNameExist = Factory.AllotmentReleaseRepository().allotmentReleaseNumExist(mskTxtAroNo.Text.Trim());
-            else
-                itemNameExist = Factory.AllotmentReleaseRepository().allotmentReleaseNumExist(allotmentReleaseID, mskTxtAroNo.Text.Trim());
+            //if (allotmentReleaseID == 0)
+            //    itemNameExist = Factory.AllotmentReleaseRepository().allotmentReleaseNumExist(mskTxtAroNo.Text.Trim());
+            //else
+            //    itemNameExist = Factory.AllotmentReleaseRepository().allotmentReleaseNumExist(allotmentReleaseID, mskTxtAroNo.Text.Trim());
 
-            if (itemNameExist)
-            {
-                epARONo.SetError(mskTxtAroNo, $"The Allotment Release No. You entered, \nIs already exist in your record.");
-                e.Cancel = true;
-            }
+            //if (itemNameExist)
+            //{
+            //    epARONo.SetError(mskTxtAroNo, $"The Allotment Release No. You entered, \nIs already exist in your record.");
+            //    e.Cancel = true;
+            //}
         }
         private void mskTxtAroNo_Validated(object sender, EventArgs e)
         {

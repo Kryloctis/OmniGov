@@ -406,7 +406,7 @@ namespace ACC.Data
 
                 string query = $"SELECT * FROM lfsdb.view_budget_appropriations " +
                     $"WHERE fpp_id = @fpp_id " +
-                    $"AND year = @year";
+                    $"AND year = @year ";
 
                 var dtPermissions = new DataTable();
                 return mySqlGenericCommands.FillBySearch(query, dtPermissions, parameters);

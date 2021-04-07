@@ -145,6 +145,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
             this.ClientSize = new System.Drawing.Size(915, 685);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(931, 628);
             this.Name = "frmSAAOB";
             this.ShowInTaskbar = false;
