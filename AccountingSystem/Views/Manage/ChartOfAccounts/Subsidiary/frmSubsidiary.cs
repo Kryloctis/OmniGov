@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void LoadSelectedGeneralLedger()
         {
-            var data = Factory.GeneralLedgerAccountsRepository().GetRecordByID(generalLedgerId);
+            var data = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
             txtCode.Text = data["ledger_code"];
             txtAccount.Text = data["ledger_name"];
         }
