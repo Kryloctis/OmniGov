@@ -69,10 +69,10 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // cmbxFPP
             // 
             this.cmbxFPP.FormattingEnabled = true;
-            this.cmbxFPP.Location = new System.Drawing.Point(140, 29);
+            this.cmbxFPP.Location = new System.Drawing.Point(140, 87);
             this.cmbxFPP.Name = "cmbxFPP";
             this.cmbxFPP.Size = new System.Drawing.Size(436, 23);
-            this.cmbxFPP.TabIndex = 1;
+            this.cmbxFPP.TabIndex = 3;
             this.cmbxFPP.SelectedValueChanged += new System.EventHandler(this.cmbxFPP_SelectedValueChanged);
             this.cmbxFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxFPP_Validating);
             this.cmbxFPP.Validated += new System.EventHandler(this.cmbxFPP_Validated);
@@ -80,7 +80,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 32);
+            this.label1.Location = new System.Drawing.Point(0, 90);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 15);
             this.label1.TabIndex = 1;
@@ -89,17 +89,17 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // cmbxOthersFPP
             // 
             this.cmbxOthersFPP.FormattingEnabled = true;
-            this.cmbxOthersFPP.Location = new System.Drawing.Point(140, 58);
+            this.cmbxOthersFPP.Location = new System.Drawing.Point(140, 116);
             this.cmbxOthersFPP.Name = "cmbxOthersFPP";
             this.cmbxOthersFPP.Size = new System.Drawing.Size(436, 23);
-            this.cmbxOthersFPP.TabIndex = 2;
+            this.cmbxOthersFPP.TabIndex = 4;
             this.cmbxOthersFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxOthersFPP_Validating);
             this.cmbxOthersFPP.Validated += new System.EventHandler(this.cmbxOthersFPP_Validated);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(0, 61);
+            this.label2.Location = new System.Drawing.Point(0, 119);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 15);
             this.label2.TabIndex = 1;
@@ -108,10 +108,10 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // cmbxAllotmentClass
             // 
             this.cmbxAllotmentClass.FormattingEnabled = true;
-            this.cmbxAllotmentClass.Location = new System.Drawing.Point(140, 87);
+            this.cmbxAllotmentClass.Location = new System.Drawing.Point(140, 145);
             this.cmbxAllotmentClass.Name = "cmbxAllotmentClass";
             this.cmbxAllotmentClass.Size = new System.Drawing.Size(436, 23);
-            this.cmbxAllotmentClass.TabIndex = 3;
+            this.cmbxAllotmentClass.TabIndex = 5;
             this.cmbxAllotmentClass.SelectedValueChanged += new System.EventHandler(this.cmbxAllotmentClass_SelectedValueChanged);
             this.cmbxAllotmentClass.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAllotmentClass_Validating);
             this.cmbxAllotmentClass.Validated += new System.EventHandler(this.cmbxAllotmentClass_Validated);
@@ -119,7 +119,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(0, 90);
+            this.label3.Location = new System.Drawing.Point(0, 148);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(90, 15);
             this.label3.TabIndex = 1;
@@ -129,17 +129,17 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // 
             this.cmbxLedgerAccount.FormattingEnabled = true;
             this.cmbxLedgerAccount.IntegralHeight = false;
-            this.cmbxLedgerAccount.Location = new System.Drawing.Point(140, 116);
+            this.cmbxLedgerAccount.Location = new System.Drawing.Point(140, 174);
             this.cmbxLedgerAccount.Name = "cmbxLedgerAccount";
             this.cmbxLedgerAccount.Size = new System.Drawing.Size(436, 23);
-            this.cmbxLedgerAccount.TabIndex = 4;
+            this.cmbxLedgerAccount.TabIndex = 6;
             this.cmbxLedgerAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxLedgerAccount_Validating);
             this.cmbxLedgerAccount.Validated += new System.EventHandler(this.cmbxLedgerAccount_Validated);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(0, 119);
+            this.label4.Location = new System.Drawing.Point(0, 177);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(134, 15);
             this.label4.TabIndex = 1;
@@ -165,7 +165,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             0});
             this.nudAmount.Name = "nudAmount";
             this.nudAmount.Size = new System.Drawing.Size(436, 23);
-            this.nudAmount.TabIndex = 7;
+            this.nudAmount.TabIndex = 8;
             this.nudAmount.ThousandsSeparator = true;
             this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
             this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
@@ -196,15 +196,15 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // 
             // dtDateEntry
             // 
-            this.dtDateEntry.Location = new System.Drawing.Point(140, 174);
+            this.dtDateEntry.Location = new System.Drawing.Point(140, 0);
             this.dtDateEntry.Name = "dtDateEntry";
             this.dtDateEntry.Size = new System.Drawing.Size(436, 23);
-            this.dtDateEntry.TabIndex = 6;
+            this.dtDateEntry.TabIndex = 0;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(0, 180);
+            this.label6.Location = new System.Drawing.Point(0, 6);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(61, 15);
             this.label6.TabIndex = 1;
@@ -213,7 +213,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(0, 3);
+            this.label7.Location = new System.Drawing.Point(0, 61);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(75, 15);
             this.label7.TabIndex = 1;
@@ -223,17 +223,17 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // 
             this.cmbxTypeOfFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxTypeOfFund.FormattingEnabled = true;
-            this.cmbxTypeOfFund.Location = new System.Drawing.Point(140, 0);
+            this.cmbxTypeOfFund.Location = new System.Drawing.Point(140, 58);
             this.cmbxTypeOfFund.Name = "cmbxTypeOfFund";
             this.cmbxTypeOfFund.Size = new System.Drawing.Size(436, 23);
-            this.cmbxTypeOfFund.TabIndex = 0;
+            this.cmbxTypeOfFund.TabIndex = 2;
             this.cmbxTypeOfFund.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxTypeOfFund_Validating);
             this.cmbxTypeOfFund.Validated += new System.EventHandler(this.cmbxTypeOfFund_Validated);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(0, 147);
+            this.label8.Location = new System.Drawing.Point(0, 31);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(29, 15);
             this.label8.TabIndex = 1;
@@ -241,7 +241,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // 
             // nudYear
             // 
-            this.nudYear.Location = new System.Drawing.Point(140, 145);
+            this.nudYear.Location = new System.Drawing.Point(140, 29);
             this.nudYear.Maximum = new decimal(new int[] {
             9998,
             0,
@@ -254,7 +254,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             0});
             this.nudYear.Name = "nudYear";
             this.nudYear.Size = new System.Drawing.Size(436, 23);
-            this.nudYear.TabIndex = 5;
+            this.nudYear.TabIndex = 1;
             this.nudYear.Value = new decimal(new int[] {
             1753,
             0,
@@ -293,7 +293,9 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.Controls.Add(this.cmbxOthersFPP);
             this.Controls.Add(this.cmbxFPP);
             this.Name = "ucBudgetAppropriations";
-            this.Size = new System.Drawing.Size(601, 230);
+            this.Size = new System.Drawing.Size(600, 230);
+            this.Validating += new System.ComponentModel.CancelEventHandler(this.ucBudgetAppropriations_Validating);
+            this.Validated += new System.EventHandler(this.ucBudgetAppropriations_Validated);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFunctionProgramProject)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFunctionProgramProject)).EndInit();
@@ -325,7 +327,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
         internal System.Windows.Forms.ComboBox cmbxAllotmentClass;
         internal System.Windows.Forms.ComboBox cmbxLedgerAccount;
         internal System.Windows.Forms.NumericUpDown nudAmount;
-        private System.Windows.Forms.ErrorProvider epBudgetAppropriation;
         private System.Windows.Forms.Label label6;
         internal System.Windows.Forms.DateTimePicker dtDateEntry;
         private System.Windows.Forms.Label label7;
@@ -334,5 +335,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
         private System.Windows.Forms.ErrorProvider epYear;
         internal System.Windows.Forms.NumericUpDown nudYear;
         internal System.Windows.Forms.ComboBox cmbxTypeOfFund;
+        internal System.Windows.Forms.ErrorProvider epBudgetAppropriation;
     }
 }

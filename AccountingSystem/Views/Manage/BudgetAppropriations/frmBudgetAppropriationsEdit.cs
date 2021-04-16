@@ -71,7 +71,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                 int? othersFPPId;
 
                 //Check Validation
-                if (!uc.ValidateChildren()) 
+                if (!uc.ValidateChildren() || !string.IsNullOrEmpty(uc.epBudgetAppropriation.GetError(uc.cmbxTypeOfFund))) 
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;

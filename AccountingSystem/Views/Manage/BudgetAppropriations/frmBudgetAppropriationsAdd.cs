@@ -39,26 +39,19 @@ namespace BudgetSystem.Views.BudgetAppropriations
             try
             {
                 var uc = ucBudgetAppropriations1;
-                int? othersFPPId;
 
-                if (!uc.ValidateChildren())
+                if (!uc.ValidateChildren() || !string.IsNullOrEmpty(uc.epBudgetAppropriation.GetError(uc.cmbxTypeOfFund)))
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
-
-
-                if (uc.cmbxOthersFPP.SelectedValue == null)
-                    othersFPPId = null;
-                else
-                    othersFPPId = Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue);
 
                 // proceed to insert
                 var budgetAppropriationsModel = new BudgetAppropriationsModel()
                 {
                     FundsId = Convert.ToInt32(uc.cmbxTypeOfFund.SelectedValue),
                     FunctionProgramProjectId = Convert.ToInt32(uc.cmbxFPP.SelectedValue),
-                    OthersFPPId = othersFPPId,
+                    OthersFPPId = uc.cmbxOthersFPP.SelectedValue == null? null : Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue),
                     AllotmentClassesId = Convert.ToInt32(uc.cmbxAllotmentClass.SelectedValue),
                     GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxLedgerAccount.SelectedValue),
                     Year = Convert.ToInt16(uc.nudYear.Value),
@@ -73,7 +66,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 Helper.MessageBoxError(ex.Message);
             }
             return false;
-        
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -92,7 +84,8 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 _frmBudgetAppropriations.RecordLocator(fppID, allotmentClassID, fundID, year);
 
                 //Reset User Control Form
-                uc.ResetForm();
+                uc.cmbxLedgerAccount.SelectedIndex = -1;
+                uc.nudAmount.Value = 0;
 
                 Helper.MessageBoxSuccess("Budget Appropriation has been saved."); 
             }
