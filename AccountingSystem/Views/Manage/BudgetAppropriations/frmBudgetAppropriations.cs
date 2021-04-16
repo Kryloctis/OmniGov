@@ -20,7 +20,9 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         public frmBudgetAppropriations()
         {
             InitializeComponent();
-            btnAllotmentReleaseDetails.Click += new EventHandler(btnAllotmentReleaseDetails_Click);
+            btnARODetails.Click += new EventHandler(btnAllotmentReleaseDetails_Click);
+            btnARO.Click += new EventHandler(BtnARO_Click);
+            Helper.LoadFormIcon(this);
         }
 
         internal void RecordLocator(int fppID, int allotmentClassID, int fundID, Int16 year) 
@@ -79,7 +81,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             if (SelectedRows == 1 && dgv.SelectedCells[0].Value != null)
             {
                 btnEdit.Enabled = true;
-                btnAllotmentReleaseDetails.Enabled = true;
+                btnARODetails.Enabled = true;
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
 
@@ -87,14 +89,14 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             else if (SelectedRows > 1 && dgv.SelectedCells[0].Value != null)
             {
                 btnEdit.Enabled = false;
-                btnAllotmentReleaseDetails.Enabled = false;
+                btnARODetails.Enabled = false;
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
             }
             else
             {
                 btnEdit.Enabled = false;
-                btnAllotmentReleaseDetails.Enabled = false;
+                btnARODetails.Enabled = false;
                 btnDelete.Enabled = false;
                 btnDelete.Text = "Delete";
             }
@@ -231,6 +233,11 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         private void btnAllotmentReleaseDetails_Click(object sender, EventArgs e) 
         {
             ShowAllotmentReleaseDetails();
+        }
+
+        private void BtnARO_Click(object sender, EventArgs e) 
+        {
+            _ = new frmAllotmentReleaseMain().ShowDialog();
         }
 
         private void frmBudgetAppropriationsNew_Load(object sender, EventArgs e)
