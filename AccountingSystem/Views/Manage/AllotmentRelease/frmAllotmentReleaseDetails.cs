@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
-    public partial class frmAllotmentRelease : Form
+    public partial class frmAllotmentReleaseDetails : Form
     {
         internal int budgetAppropriationID = 0;
         internal int fppID = 0;
@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private frmBudgetAppropriations _frmBudgetAppropriations;
 
 
-        public frmAllotmentRelease(frmBudgetAppropriations frmBudgetAppropriations)
+        public frmAllotmentReleaseDetails(frmBudgetAppropriations frmBudgetAppropriations)
         {
             InitializeComponent();
             _frmBudgetAppropriations = frmBudgetAppropriations;
@@ -92,7 +92,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void btnAdd_Click(object sender, EventArgs e) 
         {
-            var frmAllotmentReleaseAddForm = new frmAllotmentReleaseAdd(this, _frmBudgetAppropriations);
+            var frmAllotmentReleaseAddForm = new frmAllotmentReleaseAddDetails(this, _frmBudgetAppropriations);
             var uc = frmAllotmentReleaseAddForm.ucAllotmentRelease1;
 
             uc.budgetAppropriationID = budgetAppropriationID;
@@ -101,7 +101,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void btnEdit_Click(object sender, EventArgs e) 
         {
-            var frmAllotmentReleaseEditForm = new frmAllotmentReleaseEdit(this, _frmBudgetAppropriations);
+            var frmAllotmentReleaseEditForm = new frmAllotmentReleaseDetailsEdit(this, _frmBudgetAppropriations);
             var uc = frmAllotmentReleaseEditForm.ucAllotmentRelease1;
 
             uc.allotmentReleaseID = Convert.ToInt32(dgAllotmentRelease.SelectedCells[0].Value);

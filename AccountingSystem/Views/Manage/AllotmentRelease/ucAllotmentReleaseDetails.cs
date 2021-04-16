@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
-    public partial class ucAllotmentRelease : UserControl
+    public partial class ucAllotmentReleaseDetails : UserControl
     {
         internal int allotmentReleaseID = 0;
         internal int budgetAppropriationID = 0;
         internal decimal currentAllotmentReleaseAmount = 0;
 
-        public ucAllotmentRelease()
+        public ucAllotmentReleaseDetails()
         {
             InitializeComponent();
         }

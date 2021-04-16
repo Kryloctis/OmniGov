@@ -12,11 +12,11 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
-    public partial class frmAllotmentReleaseEdit : Form
+    public partial class frmAllotmentReleaseDetailsEdit : Form
     {
-        private frmAllotmentRelease _frmAllotmentRelease;
+        private frmAllotmentReleaseDetails _frmAllotmentRelease;
         private frmBudgetAppropriations _frmBudgetAppropriations;
-        public frmAllotmentReleaseEdit(frmAllotmentRelease frmAllotmentRelease, frmBudgetAppropriations frmBudgetAppropriations)
+        public frmAllotmentReleaseDetailsEdit(frmAllotmentReleaseDetails frmAllotmentRelease, frmBudgetAppropriations frmBudgetAppropriations)
         {
             InitializeComponent();
             _frmAllotmentRelease = frmAllotmentRelease;

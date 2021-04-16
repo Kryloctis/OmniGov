@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
-    partial class frmAllotmentRelease
+    partial class frmAllotmentReleaseDetails
     {
         /// <summary>
         /// Required designer variable.

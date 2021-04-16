@@ -20,7 +20,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         public frmBudgetAppropriations()
         {
             InitializeComponent();
-            btnAllotmentRelease.Click += new EventHandler(btnAllotmentRelease_Click);
+            btnAllotmentReleaseDetails.Click += new EventHandler(btnAllotmentReleaseDetails_Click);
         }
 
         internal void RecordLocator(int fppID, int allotmentClassID, int fundID, Int16 year) 
@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             if (SelectedRows == 1 && dgv.SelectedCells[0].Value != null)
             {
                 btnEdit.Enabled = true;
-                btnAllotmentRelease.Enabled = true;
+                btnAllotmentReleaseDetails.Enabled = true;
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
 
@@ -87,14 +87,14 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             else if (SelectedRows > 1 && dgv.SelectedCells[0].Value != null)
             {
                 btnEdit.Enabled = false;
-                btnAllotmentRelease.Enabled = false;
+                btnAllotmentReleaseDetails.Enabled = false;
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
             }
             else
             {
                 btnEdit.Enabled = false;
-                btnAllotmentRelease.Enabled = false;
+                btnAllotmentReleaseDetails.Enabled = false;
                 btnDelete.Enabled = false;
                 btnDelete.Text = "Delete";
             }
@@ -110,9 +110,9 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         }
 
-        private void ShowAllotmentRelease()
+        private void ShowAllotmentReleaseDetails()
         {
-            var frmAllotmentReleaseForm = new frmAllotmentRelease(this);
+            var frmAllotmentReleaseDetailsForm = new frmAllotmentReleaseDetails(this);
             var rowIndex = dgBudgetAppropriations.CurrentCell.RowIndex;
 
             int budgetAppId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["budget_appropriations_id"].Value);
@@ -121,13 +121,13 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             int allotmentClassesId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["allotment_classes_id"].Value);
             int genLedgerAccId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["general_ledger_acc_id"].Value);
 
-            frmAllotmentReleaseForm.budgetAppropriationID = budgetAppId;
-            frmAllotmentReleaseForm.fppID = fppId;
-            frmAllotmentReleaseForm.othersFPPID = othersFPPId;
-            frmAllotmentReleaseForm.allotmentClassesID = allotmentClassesId;
-            frmAllotmentReleaseForm.generalLedgerAccID = genLedgerAccId;
+            frmAllotmentReleaseDetailsForm.budgetAppropriationID = budgetAppId;
+            frmAllotmentReleaseDetailsForm.fppID = fppId;
+            frmAllotmentReleaseDetailsForm.othersFPPID = othersFPPId;
+            frmAllotmentReleaseDetailsForm.allotmentClassesID = allotmentClassesId;
+            frmAllotmentReleaseDetailsForm.generalLedgerAccID = genLedgerAccId;
 
-            frmAllotmentReleaseForm.ShowDialog();
+            frmAllotmentReleaseDetailsForm.ShowDialog();
         }
 
         #region Events Method
@@ -228,9 +228,9 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             }
         }
 
-        private void btnAllotmentRelease_Click(object sender, EventArgs e) 
+        private void btnAllotmentReleaseDetails_Click(object sender, EventArgs e) 
         {
-            ShowAllotmentRelease();
+            ShowAllotmentReleaseDetails();
         }
 
         private void frmBudgetAppropriationsNew_Load(object sender, EventArgs e)
