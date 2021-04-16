@@ -35,6 +35,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 if (Convert.ToInt32(row.Cells["id"].Value) == fppID)
                 {
                     dgFPP.CurrentCell = dgFPP.Rows[row.Index].Cells["fpp_code"];
+                    dgFPP.Rows[row.Index].Selected = true;
                 }
             }
 

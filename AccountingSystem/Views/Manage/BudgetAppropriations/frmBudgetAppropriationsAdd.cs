@@ -82,6 +82,9 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 short year = Convert.ToInt16(uc.nudYear.Value);
 
                 _frmBudgetAppropriations.RecordLocator(fppID, allotmentClassID, fundID, year);
+                _frmBudgetAppropriations.cmbxAllotmentClass.ComboBox.SelectedValue = allotmentClassID;
+                _frmBudgetAppropriations.cmbxFundType.ComboBox.SelectedValue = fundID;
+                _frmBudgetAppropriations.cmbxYear.ComboBox.SelectedValue = year;
 
                 //Reset User Control Form
                 uc.cmbxLedgerAccount.SelectedIndex = -1;
