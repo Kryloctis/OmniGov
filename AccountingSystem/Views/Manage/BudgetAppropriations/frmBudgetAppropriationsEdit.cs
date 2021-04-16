@@ -71,7 +71,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                 int? othersFPPId;
 
                 //Check Validation
-                if (!uc.ValidateChildren()) 
+                if (!uc.ValidateChildren() || !string.IsNullOrEmpty(uc.epBudgetAppropriation.GetError(uc.cmbxTypeOfFund))) 
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
@@ -125,6 +125,9 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                 short year = Convert.ToInt16(uc.nudYear.Value);
 
                 _frmBudgetAppropriations.RecordLocator(fppID, allotmentClassID, fundID, year);
+                _frmBudgetAppropriations.cmbxAllotmentClass.ComboBox.SelectedValue = allotmentClassID;
+                _frmBudgetAppropriations.cmbxFundType.ComboBox.SelectedValue = fundID;
+                _frmBudgetAppropriations.cmbxYear.ComboBox.SelectedValue = year;
 
                 Helper.MessageBoxSuccess("Budget Appropriation update has been saved.");
                 Close();

@@ -125,19 +125,21 @@ namespace ACC.Data
 
         #region Validations
 
-        public bool BudgetAllotmentExist(int FPPId, int? othersFPPId, int allotmentClassID, int generalLedgerAccountId)
+        public bool BudgetAllotmentExist(int fundID, int FPPId, int? othersFPPId, int allotmentClassID, int generalLedgerAccountId, short year)
         {
             try
             {
                 var parameters = new object[][]
                 {
+                    new object[] { "@funds_id", DbType.Int32, fundID},
                     new object[] { "@function_program_project_id", DbType.Int32, FPPId},
                     new object[] { "@others_fpp_id", DbType.String, othersFPPId },
                     new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassID},
                     new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerAccountId},
+                    new object[] { "@year",DbType.Int16, year}
                 };
 
-                string query = $"SELECT id FROM {tableName} WHERE function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id";
+                string query = $"SELECT id FROM {tableName} WHERE funds_id = @funds_id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND year = @year";
                 string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -150,21 +152,23 @@ namespace ACC.Data
             }
             return false;
         }
-
-        public bool BudgetAllotmentExist(int id, int FPPId, int? othersFPPId, int allotmentClassID, int generalLedgerAccountId)
+         
+        public bool BudgetAllotmentExist(int id, int fundID, int FPPId, int? othersFPPId, int allotmentClassID, int generalLedgerAccountId, short year)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "id", DbType.Int32, id},
+                    new object[] { "@id", DbType.Int32, id},
+                    new object[] { "@funds_id", DbType.Int32, fundID},
                     new object[] { "@function_program_project_id", DbType.Int32, FPPId},
                     new object[] { "@others_fpp_id", DbType.String, othersFPPId },
                     new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassID},
                     new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerAccountId},
+                    new object[] { "@year",DbType.Int16, year}
                 };
 
-                string query = $"SELECT id FROM {tableName} WHERE id <> @id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id";
+                string query = $"SELECT id FROM {tableName} WHERE id <> @id AND funds_id = @funds_id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND year = @year";
                 string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
