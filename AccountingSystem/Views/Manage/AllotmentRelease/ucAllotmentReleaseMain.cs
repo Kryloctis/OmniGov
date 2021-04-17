@@ -128,5 +128,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 Helper.DatagridDefaultStyle(dataGridView1, true);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _ = new frmAllotmentReleaseAdd().ShowDialog();
+        }
     }
 }
