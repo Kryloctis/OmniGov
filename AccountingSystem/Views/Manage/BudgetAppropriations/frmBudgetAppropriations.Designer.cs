@@ -35,7 +35,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnARO = new System.Windows.Forms.ToolStripButton();
             this.btnARODetails = new System.Windows.Forms.ToolStripButton();
             this.cmbxYear = new System.Windows.Forms.ToolStripComboBox();
             this.cmbxFundType = new System.Windows.Forms.ToolStripComboBox();
@@ -76,7 +75,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnEdit,
             this.btnDelete,
             this.toolStripSeparator1,
-            this.btnARO,
             this.btnARODetails,
             this.cmbxYear,
             this.cmbxFundType,
@@ -126,16 +124,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
-            // 
-            // btnARO
-            // 
-            this.btnARO.Image = global::AccountingSystem.Properties.Resources.give_money_28px;
-            this.btnARO.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnARO.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnARO.Name = "btnARO";
-            this.btnARO.Size = new System.Drawing.Size(115, 47);
-            this.btnARO.Text = "Allotment Release...";
-            this.btnARO.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // btnARODetails
             // 
@@ -277,6 +265,5 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         private System.Windows.Forms.ToolStripButton btnAllotment;
         internal System.Windows.Forms.ToolStripButton btnARODetails;
         internal System.Windows.Forms.TextBox txtTotal;
-        internal System.Windows.Forms.ToolStripButton btnARO;
     }
 }

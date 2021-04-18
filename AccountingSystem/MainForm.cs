@@ -14,6 +14,7 @@ using AccountingSystem.Views.Manage.BudgetAppropriations;
 using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.Ledgers;
+using AccountingSystem.Views.Manage.AllotmentRelease;
 
 namespace AccountingSystem
 {
@@ -29,8 +30,9 @@ namespace AccountingSystem
             menuReportCRJ.Click += new EventHandler(MenuReportCashReceiptsJournal_Click);
             menuReportPRJ.Click += new EventHandler(MenuReportProcurementsReceivedJournal_Click);
             menuReportADADJ.Click += new EventHandler(MenuReportADADisbursementsJournal_Click);
-            menuSAAOB.Click += new EventHandler(menuSAAOB_Click);
-            menuGeneralLedgerReport.Click += new EventHandler(menuGeneralLedgerReport_Click);
+            menuSAAOB.Click += new EventHandler(MenuSAAOB_Click);
+            menuGeneralLedgerReport.Click += new EventHandler(MenuGeneralLedgerReport_Click);
+            menuAllotmentRelease.Click += new EventHandler(MenuAllotmentRelease_Click);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -129,15 +131,19 @@ namespace AccountingSystem
             _ = new frmADADisbursementsJournalReport().ShowDialog();
         }
 
-        private void menuSAAOB_Click(object sender, EventArgs e) 
+        private void MenuSAAOB_Click(object sender, EventArgs e) 
         {
             _ = new frmSAAOB().ShowDialog();
         }
 
-        private void menuGeneralLedgerReport_Click(object sender, EventArgs e)
+        private void MenuGeneralLedgerReport_Click(object sender, EventArgs e)
         {
             _ = new frmGeneralLedgerReport().ShowDialog();
         }
 
+        private void MenuAllotmentRelease_Click(object sender, EventArgs e) 
+        {
+            _ = new frmAllotmentReleaseMain().ShowDialog();
+        }
     }
 }

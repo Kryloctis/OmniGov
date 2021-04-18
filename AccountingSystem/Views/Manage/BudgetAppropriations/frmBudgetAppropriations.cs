@@ -20,8 +20,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         public frmBudgetAppropriations()
         {
             InitializeComponent();
-            btnARODetails.Click += new EventHandler(BtnARODetails_Click);
-            btnARO.Click += new EventHandler(BtnARO_Click);
+            btnARODetails.Click += new EventHandler(BtnARODetails_Click);  
             Helper.LoadFormIcon(this);
         }
 
@@ -233,11 +232,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         private void BtnARODetails_Click(object sender, EventArgs e) 
         {
             ShowAllotmentReleaseDetails();
-        }
-
-        private void BtnARO_Click(object sender, EventArgs e) 
-        {
-            _ = new frmAllotmentReleaseMain().ShowDialog();
         }
 
         private void frmBudgetAppropriationsNew_Load(object sender, EventArgs e)
