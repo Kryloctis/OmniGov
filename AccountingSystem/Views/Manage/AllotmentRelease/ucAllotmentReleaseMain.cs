@@ -12,6 +12,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
     public partial class ucAllotmentReleaseMain : UserControl
     {
+        internal int fppId = 0;
         private int fundId = 0;
         private int allotmentClassId = 0;
 
@@ -81,6 +82,31 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
         }
 
+        internal void LoadFPPCombobox() 
+        {
+            try
+            {
+                HelperLoadRecords.FPPComboBox(Factory.FunctionProgramProjectRepository().GetRecords(), cmbxFPP, "fpp_name", "id");
+                cmbxFPP.SelectedValueChanged += new EventHandler(CmbxFPP_SelectedValueChanged);
+                cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TextChanged);
+                cmbxFPP.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        internal void LoadOthersFPPByFPPIdCombobox() 
+        {
+            var fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
+
+            HelperLoadRecords.OthersFPPCombobox(Factory.OthersFPPRepository().GetRecordsByFPPID(fppId), cmbxOthersFPP,"name","id");
+            cmbxOthersFPP.SelectedIndex = -1;
+            cmbxOthersFPP.Text = string.Empty;
+            cmbxOthersFPP.Enabled  = true;
+        }
+
         private void ShowCheckIcon(RadioButton radioButton)
         {
             if (radioButton.Checked)
@@ -125,13 +151,130 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 LoadFunds();
                 LoadAllotmentClasses();
                 mskYear.Text = dtDateIssued.Value.Year.ToString();
-                Helper.DatagridDefaultStyle(dataGridView1, true);
+                Helper.DatagridDefaultStyle(dgAllotmentRelease, true);
+                LoadFPPCombobox();
+
+                cmbxOthersFPP.Enabled = false;  
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAllotmentReleaseAdd().ShowDialog();
+            var allotmentReleaseAddForm = new frmAllotmentReleaseAdd();
+            allotmentReleaseAddForm.ShowDialog();
         }
+
+
+        //Combobox FPP
+
+        private void CmbxFPP_SelectedValueChanged(object sender, EventArgs e) 
+        {
+            LoadOthersFPPByFPPIdCombobox();
+        }
+
+        private void CmbxFPP_TextChanged(object sender, EventArgs e) 
+        {
+            if (ShowErrorFPPNameExist(epFPP, cmbxFPP)) 
+            {
+                cmbxOthersFPP.Enabled = false;
+                cmbxOthersFPP.SelectedIndex = -1;
+                cmbxOthersFPP.Text = string.Empty;
+            }
+        }
+
+        #region Custom Validation Controls
+
+        private bool ShowErrorFPPNameExist(ErrorProvider ep, ComboBox comboBox) 
+        {
+            try
+            {
+                if (cmbxFPP.FindStringExact(cmbxFPP.Text) < 0 && !string.IsNullOrEmpty(comboBox.Text))
+                {
+                    ep.SetError(comboBox, "FPP you entered, Doesn't exist in yout record.");
+                    return true;   
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;   
+        }
+
+        private bool ShowErrorOtherFPPNameExist(ErrorProvider ep, ComboBox comboBox) 
+        {
+            try
+            {
+                if (cmbxOthersFPP.FindStringExact(cmbxOthersFPP.Text) < 0 && !string.IsNullOrEmpty(comboBox.Text)) 
+                {
+                    ep.SetError(comboBox, "Other FPP you entered. Doesn't exist in yout record.");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private bool ShowErrorSeriesNo(ErrorProvider ep, MaskedTextBox maskedTxtSeriesNo, MaskedTextBox maskedTxtYear)
+        {
+            try
+            {
+                if (!maskedTxtSeriesNo.MaskCompleted)
+                {
+                    ep.SetError(maskedTxtYear, "Series No. is required.");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        #endregion Custom Validation Controls
+
+
+        #region Validations
+
+        private void cmbxFPP_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbxFPP.Text))
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP");
+            else
+                e.Cancel = ShowErrorFPPNameExist(epFPP, cmbxFPP);
+        }
+
+        private void cmbxFPP_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epFPP, cmbxFPP);
+        }
+
+
+        private void cmbxOthersFPP_Validating(object sender, CancelEventArgs e)
+        {
+             e.Cancel = ShowErrorOtherFPPNameExist(epOthersFPP, cmbxOthersFPP);
+        }
+
+        private void cmbxOthersFPP_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epOthersFPP, cmbxOthersFPP);
+        }
+
+
+        private void mskSeriesNo_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = ShowErrorSeriesNo(epARONo, mskSeriesNo, mskYear);
+        }
+
+        private void mskSeriesNo_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearMaskedTextboxError(epARONo, mskYear);
+        }
+
+        #endregion Validations
     }
 }

@@ -51,7 +51,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 0, 1, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(800, 50);
+            this.toolStrip1.Size = new System.Drawing.Size(501, 50);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -103,19 +103,17 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             // ucAllotmentReleaseMain1
             // 
-            this.ucAllotmentReleaseMain1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ucAllotmentReleaseMain1.Location = new System.Drawing.Point(12, 53);
+            this.ucAllotmentReleaseMain1.Location = new System.Drawing.Point(22, 53);
             this.ucAllotmentReleaseMain1.Name = "ucAllotmentReleaseMain1";
-            this.ucAllotmentReleaseMain1.Size = new System.Drawing.Size(776, 500);
+            this.ucAllotmentReleaseMain1.Size = new System.Drawing.Size(476, 565);
             this.ucAllotmentReleaseMain1.TabIndex = 2;
             // 
             // frmAllotmentReleaseMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 565);
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ClientSize = new System.Drawing.Size(501, 629);
             this.Controls.Add(this.ucAllotmentReleaseMain1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

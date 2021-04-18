@@ -505,6 +505,22 @@ namespace AccountingSystem
             Helper.DatagridDefaultStyle(dataGridView, true);
         }
 
+        internal static void OthersFPPCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
+        {
+            try
+            {
+                comboBox.DataSource = dataTable;
+                comboBox.DisplayMember = displayMember;
+                comboBox.ValueMember = valueMember;
+                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
         #endregion Others FPP
 
         #region BudgetAppropriations
@@ -768,7 +784,7 @@ namespace AccountingSystem
 
         #endregion BudgetAppropriations
 
-        #region Allotment Release
+        #region Allotment Release Details
 
         internal static void AllotmentReleaseDgV(DataTable dataTable, DataGridView dgv, int budgetAppropriationID)
         {
@@ -842,6 +858,19 @@ namespace AccountingSystem
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        #endregion Allotment Release Details
+
+        #region Allotment Release
+
+        internal static void ObjectExpendituresCombobox(ComboBox comboBox, DataTable dataTable, string displayMember, string valueMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+            comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
         #endregion Allotment Release
