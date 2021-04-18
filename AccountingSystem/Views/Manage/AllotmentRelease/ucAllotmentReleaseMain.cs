@@ -21,6 +21,17 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             InitializeComponent();
         }
 
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[3];
+
+            errorArray[0] = epFPP.GetError(cmbxFPP);
+            errorArray[1] = epOthersFPP.GetError(cmbxOthersFPP);
+            errorArray[2] = epARONo.GetError(mskYear);
+
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
         internal void LoadFunds()
         {
             var funds = Factory.FundsRepository().GetRecords();

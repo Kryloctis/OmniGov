@@ -18,6 +18,35 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             btnCancel.Enabled = false;
             btnDelete.Enabled = false;
             Helper.LoadFormIcon(this);
+
+            btnSave.Click += new EventHandler(BtnSave_Click);
+        }
+
+        private bool SaveData() 
+        {
+            try
+            {
+                var uc = ucAllotmentReleaseMain1;
+                if (!uc.ValidateChildren()) 
+                {
+                    Helper.MessageBoxError(uc.GetFormErrors());
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("Allotment release has been saved.");
+            }
         }
     }
 }
