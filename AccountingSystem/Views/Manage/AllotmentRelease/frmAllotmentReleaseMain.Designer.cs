@@ -119,7 +119,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.ucAllotmentReleaseMain1.Location = new System.Drawing.Point(22, 53);
             this.ucAllotmentReleaseMain1.Name = "ucAllotmentReleaseMain1";
             this.ucAllotmentReleaseMain1.Size = new System.Drawing.Size(476, 565);
-            this.ucAllotmentReleaseMain1.TabIndex = 2;
+            this.ucAllotmentReleaseMain1.TabIndex = 0;
             // 
             // frmAllotmentReleaseMain
             // 

@@ -12,11 +12,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
     public partial class ucAllotmentRelease : UserControl
     {
+        internal int aroId = 0;
         internal int fppID = 0;
         internal int? othersFPPId = null;
         internal int allotmentClassId = 0;
         internal int fundId = 0;
-        internal short year = Convert.ToInt16(DateTime.Now.Year);
+        internal DateTime dateIssued = DateTime.Now;
 
         public ucAllotmentRelease()
         {
@@ -36,7 +37,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                HelperLoadRecords.ComboboxBudgetAppropriations(Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(fppID, allotmentClassId, othersFPPId, fundId, year), cmbxAccount, "ledger_name", "budget_appropriations_id");
+                HelperLoadRecords.ComboboxBudgetAppropriations(Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(fppID, allotmentClassId, othersFPPId, fundId, dateIssued.Year), cmbxAccount, "ledger_name", "budget_appropriations_id");
                 cmbxAccount.SelectedValueChanged += new EventHandler(CmbxAccount_SelectedValueChanged);
                 cmbxAccount.TextChanged += new EventHandler(CmbxAccount_TextChanged);
                 cmbxAccount.SelectedIndex = -1;
@@ -48,16 +49,31 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
         }
 
+        private void DisplayBudgetAppropriationsDetails()
+        {
+            int budgetAppropriationId = Convert.ToInt32(cmbxAccount.SelectedValue);
+            var appropriationInfo = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
+
+            int accountId = Convert.ToInt32(appropriationInfo["general_ledger_accounts_id"]);
+            var allotmentReleaseInfo = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(fundId, fppID, othersFPPId,
+                allotmentClassId, accountId, dateIssued);
+
+            decimal appropriationAmount = Convert.ToDecimal(appropriationInfo["amount"]);
+            decimal totalAllotmentRelease = Convert.ToDecimal(allotmentReleaseInfo["total_allotment_amount"]);
+
+            decimal appropriationBalance = appropriationAmount - totalAllotmentRelease;
+
+            txtAppropriation.Text = appropriationAmount.ToString("N2");
+            txtBalance.Text = appropriationBalance.ToString("N2");
+        }
+
         private void CmbxAccount_SelectedValueChanged(object sender, EventArgs e)
         {
             try
             {
                 if (!string.IsNullOrEmpty(cmbxAccount.Text))
                 {
-                    int budgetAppropriationId = Convert.ToInt32(cmbxAccount.SelectedValue);
-                    var appropriationRepo = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
-
-                    txtAppropriation.Text = Convert.ToDecimal(appropriationRepo["amount"]).ToString("N2");
+                    DisplayBudgetAppropriationsDetails();
                 }
             }
             catch (Exception ex)
@@ -67,6 +83,39 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         }
 
         #region Custom Validations
+
+        private bool ShowErrorAmountExceeds(ErrorProvider ep, NumericUpDown numericUpDown)
+        {
+            try
+            {
+                int budgetAppropriationId = Convert.ToInt32(cmbxAccount.SelectedValue);
+
+                var budgetAppropriationInfo = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
+
+                int accountId = Convert.ToInt32(budgetAppropriationInfo["general_ledger_accounts_id"]);
+                var totalAllotmentReleaseInfo = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(fundId, fppID, othersFPPId, allotmentClassId, accountId, dateIssued);
+
+                decimal appropriatonAmount = Convert.ToDecimal(budgetAppropriationInfo["amount"]);
+                decimal totalAllotmentRelease = Convert.ToDecimal(totalAllotmentReleaseInfo["total_allotment_amount"]);
+
+                decimal appropriationBalance = appropriatonAmount - totalAllotmentRelease;
+
+                if (aroId == 0)
+                {
+                    if (numericUpDown.Value > appropriationBalance)
+                    {
+                        ep.SetError(numericUpDown, "Amount you entered, exceeds to the appropriate balance.");
+                        return true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
 
         private bool ShowErrorAccountEmpty(ErrorProvider ep, ComboBox comboBox, GroupBox groupBox) 
         {
@@ -147,6 +196,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount);
             else if (nudAmount.Value == 0)
                 e.Cancel = ShowErrorAmountIsZero(epAmount, nudAmount);
+            else
+                e.Cancel = ShowErrorAmountExceeds(epAmount, nudAmount);
         }
 
         private void nudAmount_Validated(object sender, EventArgs e)

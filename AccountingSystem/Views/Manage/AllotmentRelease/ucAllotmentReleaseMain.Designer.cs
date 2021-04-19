@@ -72,7 +72,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.dgAllotmentRelease.Name = "dgAllotmentRelease";
             this.dgAllotmentRelease.RowTemplate.Height = 25;
             this.dgAllotmentRelease.Size = new System.Drawing.Size(449, 276);
-            this.dgAllotmentRelease.TabIndex = 9;
+            this.dgAllotmentRelease.TabIndex = 6;
             // 
             // btnAdd
             // 
@@ -80,7 +80,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnAdd.Location = new System.Drawing.Point(225, 541);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 10;
+            this.btnAdd.TabIndex = 7;
             this.btnAdd.Text = "Add...";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
@@ -91,7 +91,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnEdit.Location = new System.Drawing.Point(306, 541);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(75, 23);
-            this.btnEdit.TabIndex = 11;
+            this.btnEdit.TabIndex = 8;
             this.btnEdit.Text = "Edit...";
             this.btnEdit.UseVisualStyleBackColor = true;
             // 
@@ -101,7 +101,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnRemove.Location = new System.Drawing.Point(387, 541);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(75, 23);
-            this.btnRemove.TabIndex = 12;
+            this.btnRemove.TabIndex = 9;
             this.btnRemove.Text = "Remove";
             this.btnRemove.UseVisualStyleBackColor = true;
             // 
@@ -120,7 +120,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.mskSeriesNo.Mask = "000";
             this.mskSeriesNo.Name = "mskSeriesNo";
             this.mskSeriesNo.Size = new System.Drawing.Size(27, 23);
-            this.mskSeriesNo.TabIndex = 6;
+            this.mskSeriesNo.TabIndex = 4;
             this.mskSeriesNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.mskSeriesNo.Validating += new System.ComponentModel.CancelEventHandler(this.mskSeriesNo_Validating);
             this.mskSeriesNo.Validated += new System.EventHandler(this.mskSeriesNo_Validated);
@@ -132,7 +132,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.mskYear.Name = "mskYear";
             this.mskYear.ReadOnly = true;
             this.mskYear.Size = new System.Drawing.Size(41, 23);
-            this.mskYear.TabIndex = 3;
+            this.mskYear.TabIndex = 32;
             this.mskYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
@@ -149,7 +149,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.dtDateIssued.Location = new System.Drawing.Point(258, 185);
             this.dtDateIssued.Name = "dtDateIssued";
             this.dtDateIssued.Size = new System.Drawing.Size(197, 23);
-            this.dtDateIssued.TabIndex = 7;
+            this.dtDateIssued.TabIndex = 5;
             this.dtDateIssued.ValueChanged += new System.EventHandler(this.dtDateIssued_ValueChanged);
             // 
             // label3
@@ -198,7 +198,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.flowLayoutPanelFunds.Location = new System.Drawing.Point(3, 19);
             this.flowLayoutPanelFunds.Name = "flowLayoutPanelFunds";
             this.flowLayoutPanelFunds.Size = new System.Drawing.Size(446, 31);
-            this.flowLayoutPanelFunds.TabIndex = 3;
+            this.flowLayoutPanelFunds.TabIndex = 2;
             // 
             // cmbxFPP
             // 
@@ -261,7 +261,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.panel1.Location = new System.Drawing.Point(6, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(477, 179);
-            this.panel1.TabIndex = 13;
+            this.panel1.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -281,7 +281,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.flowLayoutPanelAllotmentClass.Location = new System.Drawing.Point(3, 19);
             this.flowLayoutPanelAllotmentClass.Name = "flowLayoutPanelAllotmentClass";
             this.flowLayoutPanelAllotmentClass.Size = new System.Drawing.Size(446, 31);
-            this.flowLayoutPanelAllotmentClass.TabIndex = 5;
+            this.flowLayoutPanelAllotmentClass.TabIndex = 3;
             // 
             // ucAllotmentReleaseMain
             // 

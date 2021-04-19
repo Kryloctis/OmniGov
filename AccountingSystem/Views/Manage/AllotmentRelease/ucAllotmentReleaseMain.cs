@@ -221,7 +221,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 uc.othersFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
                 uc.fundId = fundId;
                 uc.allotmentClassId = Convert.ToInt32(allotmentClassId);
-                uc.year = Convert.ToInt16(dtDateIssued.Value.Year);
+                uc.dateIssued = dtDateIssued.Value;
 
                 allotmentReleaseAddForm.ShowDialog();
             }  
