@@ -46,7 +46,6 @@ namespace AccountingSystem
             this.menuCollectingOfficer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBeginningBalances = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBudgetAppropriation = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuAllotmentRelease = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportGJ = new System.Windows.Forms.ToolStripMenuItem();
@@ -118,8 +117,7 @@ namespace AccountingSystem
             this.menuFunctionProgramProject,
             this.menuCollectingOfficer,
             this.menuBeginningBalances,
-            this.menuBudgetAppropriation,
-            this.menuAllotmentRelease});
+            this.menuBudgetAppropriation});
             this.menuManage.Name = "menuManage";
             this.menuManage.Size = new System.Drawing.Size(62, 19);
             this.menuManage.Text = "Manage";
@@ -201,12 +199,6 @@ namespace AccountingSystem
             this.menuBudgetAppropriation.Size = new System.Drawing.Size(223, 22);
             this.menuBudgetAppropriation.Text = "Budget Appropriations...";
             this.menuBudgetAppropriation.Click += new System.EventHandler(this.menuBudgetAppropriation_Click);
-            // 
-            // menuAllotmentRelease
-            // 
-            this.menuAllotmentRelease.Name = "menuAllotmentRelease";
-            this.menuAllotmentRelease.Size = new System.Drawing.Size(223, 22);
-            this.menuAllotmentRelease.Text = "Allotment Release...";
             // 
             // menuReports
             // 
@@ -359,7 +351,6 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem menuGeneralLedgerReport;
         private System.Windows.Forms.ToolStripMenuItem menuSubsidiaryLedgerReport;
-        internal System.Windows.Forms.ToolStripMenuItem menuAllotmentRelease;
     }
 }
 

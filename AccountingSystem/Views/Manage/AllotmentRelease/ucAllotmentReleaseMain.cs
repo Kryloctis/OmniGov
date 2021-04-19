@@ -36,6 +36,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             var funds = Factory.FundsRepository().GetRecords();
 
+            flowLayoutPanelFunds.Controls.Clear();
+
             foreach (DataRow fund in funds.Rows)
             {
                 var radFund = new RadioButton
@@ -66,6 +68,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal void LoadAllotmentClasses()
         {
             var allotmentClasses = Factory.AllotmentClassesRepository().GetRecords();
+
+            flowLayoutPanelAllotmentClass.Controls.Clear();
 
             foreach (DataRow allotmentClass in allotmentClasses.Rows)
             {
@@ -118,6 +122,25 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             cmbxOthersFPP.Enabled  = true;
         }
 
+        private bool ShowAllotmentReleaseAdd()
+        {
+            try
+            {
+                if (!ValidateChildren())
+                {
+                    Helper.MessageBoxError(GetFormErrors());
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
         private void ShowCheckIcon(RadioButton radioButton)
         {
             if (radioButton.Checked)
@@ -165,14 +188,20 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 Helper.DatagridDefaultStyle(dgAllotmentRelease, true);
                 LoadFPPCombobox();
 
-                cmbxOthersFPP.Enabled = false;  
+                cmbxOthersFPP.Enabled = false;
+                btnRemove.Enabled = false;
+                btnEdit.Enabled = false;
             }
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            var allotmentReleaseAddForm = new frmAllotmentReleaseAdd();
-            allotmentReleaseAddForm.ShowDialog();
+            if (ShowAllotmentReleaseAdd()) 
+            {
+                panel1.Enabled = false;
+                var allotmentReleaseAddForm = new frmAllotmentReleaseAdd();
+                allotmentReleaseAddForm.ShowDialog();
+            }  
         }
 
 

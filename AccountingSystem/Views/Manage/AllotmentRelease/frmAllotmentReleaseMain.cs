@@ -20,6 +20,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             Helper.LoadFormIcon(this);
 
             btnSave.Click += new EventHandler(BtnSave_Click);
+            btnNew.Click += new EventHandler(BtnNew_Click);
         }
 
         private bool SaveData() 
@@ -47,6 +48,20 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             {
                 Helper.MessageBoxSuccess("Allotment release has been saved.");
             }
+        }
+
+        private void BtnNew_Click(object sender, EventArgs e) 
+        {
+            var uc = ucAllotmentReleaseMain1;
+            if (!uc.panel1.Enabled) 
+            {
+                uc.panel1.Enabled = true;
+                uc.mskSeriesNo.Text = string.Empty;
+                uc.dtDateIssued.Value = DateTime.Now;
+                uc.LoadFPPCombobox();
+                uc.LoadFunds();
+                uc.LoadAllotmentClasses();
+            }         
         }
     }
 }

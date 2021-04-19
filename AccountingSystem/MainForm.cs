@@ -32,7 +32,6 @@ namespace AccountingSystem
             menuReportADADJ.Click += new EventHandler(MenuReportADADisbursementsJournal_Click);
             menuSAAOB.Click += new EventHandler(MenuSAAOB_Click);
             menuGeneralLedgerReport.Click += new EventHandler(MenuGeneralLedgerReport_Click);
-            menuAllotmentRelease.Click += new EventHandler(MenuAllotmentRelease_Click);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -139,11 +138,6 @@ namespace AccountingSystem
         private void MenuGeneralLedgerReport_Click(object sender, EventArgs e)
         {
             _ = new frmGeneralLedgerReport().ShowDialog();
-        }
-
-        private void MenuAllotmentRelease_Click(object sender, EventArgs e) 
-        {
-            _ = new frmAllotmentReleaseMain().ShowDialog();
         }
     }
 }
