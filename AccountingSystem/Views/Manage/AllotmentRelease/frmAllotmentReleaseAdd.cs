@@ -12,9 +12,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
     public partial class frmAllotmentReleaseAdd : Form
     {
-        public frmAllotmentReleaseAdd()
+        private ucAllotmentReleaseMain _ucAllotmentReleaseMain;
+
+        public frmAllotmentReleaseAdd(ucAllotmentReleaseMain ucAllotmentReleaseMain)
         {
             InitializeComponent();
+            _ucAllotmentReleaseMain = ucAllotmentReleaseMain;
         }
 
         private void frmAllotmentReleaseAdd_Load(object sender, EventArgs e)
@@ -33,6 +36,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
+
+
+
                 return true;
             }
             catch (Exception ex)
@@ -47,6 +53,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             if (AddAllotmentRelease()) 
             {
                 Close();
+                _ucAllotmentReleaseMain.panel1.Enabled = false;
             }
         }
     }

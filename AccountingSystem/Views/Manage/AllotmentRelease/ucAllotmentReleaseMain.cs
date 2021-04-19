@@ -97,7 +97,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
         }
 
-        internal void LoadFPPCombobox() 
+        internal void LoadFPPCombobox()
         {
             try
             {
@@ -112,14 +112,31 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
         }
 
-        internal void LoadOthersFPPByFPPIdCombobox() 
+        internal void LoadOthersFPPByFPPIdCombobox()
         {
             var fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
 
-            HelperLoadRecords.OthersFPPCombobox(Factory.OthersFPPRepository().GetRecordsByFPPID(fppId), cmbxOthersFPP,"name","id");
+            HelperLoadRecords.OthersFPPCombobox(Factory.OthersFPPRepository().GetRecordsByFPPID(fppId), cmbxOthersFPP, "name", "id");
             cmbxOthersFPP.SelectedIndex = -1;
             cmbxOthersFPP.Text = string.Empty;
-            cmbxOthersFPP.Enabled  = true;
+            cmbxOthersFPP.Enabled = true;
+        }
+
+        private void LoadDatagridFormat() 
+        {
+            try
+            {
+                dgAllotmentRelease.Columns.Add("budget_appropriation_id", "");
+                dgAllotmentRelease.Columns.Add("account_code", "Account Code");
+                dgAllotmentRelease.Columns.Add("ledger_name", "Object of Expenditures");
+                dgAllotmentRelease.Columns.Add("allotment_amount", "Amount");
+
+                dgAllotmentRelease.Columns["budget_appropriation_id"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private bool ShowAllotmentReleaseAdd()
@@ -131,7 +148,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     Helper.MessageBoxError(GetFormErrors());
                     return false;
                 }
-
                 return true;
             }
             catch (Exception ex)
@@ -187,6 +203,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 mskYear.Text = dtDateIssued.Value.Year.ToString();
                 Helper.DatagridDefaultStyle(dgAllotmentRelease, true);
                 LoadFPPCombobox();
+                LoadDatagridFormat();
 
                 cmbxOthersFPP.Enabled = false;
                 btnRemove.Enabled = false;
@@ -198,8 +215,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             if (ShowAllotmentReleaseAdd()) 
             {
-                panel1.Enabled = false;
-                var allotmentReleaseAddForm = new frmAllotmentReleaseAdd();
+                var allotmentReleaseAddForm = new frmAllotmentReleaseAdd(this);
+                var uc = allotmentReleaseAddForm.ucAllotmentRelease1;
+                uc.fppID = Convert.ToInt32(cmbxFPP.SelectedValue);
+                uc.othersFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
+                uc.fundId = fundId;
+                uc.allotmentClassId = Convert.ToInt32(allotmentClassId);
+                uc.year = Convert.ToInt16(dtDateIssued.Value.Year);
+
                 allotmentReleaseAddForm.ShowDialog();
             }  
         }
@@ -228,10 +251,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                if (cmbxFPP.FindStringExact(cmbxFPP.Text) < 0 && !string.IsNullOrEmpty(comboBox.Text))
+                bool fppNameExist = Factory.FunctionProgramProjectRepository().NameExist(cmbxFPP.Text);
+
+                if (!fppNameExist && !string.IsNullOrEmpty(comboBox.Text))
                 {
                     ep.SetError(comboBox, "FPP you entered, Doesn't exist in yout record.");
-                    return true;   
+                    return true;
                 }
             }
             catch (Exception ex)
@@ -245,7 +270,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                if (cmbxOthersFPP.FindStringExact(cmbxOthersFPP.Text) < 0 && !string.IsNullOrEmpty(comboBox.Text)) 
+                bool otherFPPName = Factory.OthersFPPRepository().NameExist(cmbxOthersFPP.Text);
+
+                if (!otherFPPName && !string.IsNullOrEmpty(comboBox.Text)) 
                 {
                     ep.SetError(comboBox, "Other FPP you entered. Doesn't exist in yout record.");
                     return true;
@@ -293,7 +320,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             Helper.ClearErrorComboBox(epFPP, cmbxFPP);
         }
 
-
         private void cmbxOthersFPP_Validating(object sender, CancelEventArgs e)
         {
              e.Cancel = ShowErrorOtherFPPNameExist(epOthersFPP, cmbxOthersFPP);
@@ -303,7 +329,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             Helper.ClearErrorComboBox(epOthersFPP, cmbxOthersFPP);
         }
-
 
         private void mskSeriesNo_Validating(object sender, CancelEventArgs e)
         {

@@ -53,7 +53,40 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new NotImplementedException();
+            var record = new Dictionary<string, string>();
+            try
+            {
+                var parameters = new object[][]
+               {
+                   new object[] {"@id", DbType.Int32, Id},
+               };
+                string query = $"SELECT funds_id, function_program_project_id, others_fpp_id, allotment_classes_id, general_ledger_accounts_id, date_entry, year, amount, created_at, updated_at FROM {tableName} WHERE id = @id";
+
+                using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("funds_id", item[0].ToString());
+                        record.Add("function_program_project_id", item[1].ToString());
+                        record.Add("others_fpp_id", item[2].ToString());
+                        record.Add("allotment_classes_id", item[3].ToString());
+                        record.Add("general_ledger_accounts_id", item[4].ToString());
+                        record.Add("date_entry", item[5].ToString());
+                        record.Add("year", item[6].ToString());
+                        record.Add("amount", item[7].ToString());
+                        record.Add("created_at", item[8].ToString());
+                        record.Add("updated_at", item[9].ToString());
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return record;
         }
 
         public DataTable GetRecords()

@@ -30,13 +30,13 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private void InitializeComponent()
         {
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.btnNew = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.btnCancel = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
             this.ucAllotmentReleaseMain1 = new AccountingSystem.Views.Manage.AllotmentRelease.ucAllotmentReleaseMain();
-            this.btnNew = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,6 +57,21 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // btnNew
+            // 
+            this.btnNew.Image = global::AccountingSystem.Properties.Resources.create_new_28px;
+            this.btnNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(35, 47);
+            this.btnNew.Text = "&New";
+            this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
             // btnSave
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save28px;
@@ -66,11 +81,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnSave.Size = new System.Drawing.Size(35, 47);
             this.btnSave.Text = "&Save";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
             // 
             // btnDelete
             // 
@@ -111,16 +121,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.ucAllotmentReleaseMain1.Size = new System.Drawing.Size(476, 565);
             this.ucAllotmentReleaseMain1.TabIndex = 2;
             // 
-            // btnNew
-            // 
-            this.btnNew.Image = global::AccountingSystem.Properties.Resources.create_new_28px;
-            this.btnNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(35, 47);
-            this.btnNew.Text = "&New";
-            this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
             // frmAllotmentReleaseMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -150,7 +150,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStripButton btnCancel;
         internal System.Windows.Forms.ToolStripButton btnSearch;
-        private ucAllotmentReleaseMain ucAllotmentReleaseMain1;
         internal System.Windows.Forms.ToolStripButton btnNew;
+        internal ucAllotmentReleaseMain ucAllotmentReleaseMain1;
     }
 }

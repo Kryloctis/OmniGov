@@ -12,7 +12,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
     public partial class ucAllotmentRelease : UserControl
     {
-        internal int budgetAppropriationsId = 0;
+        internal int fppID = 0;
+        internal int? othersFPPId = null;
+        internal int allotmentClassId = 0;
+        internal int fundId = 0;
+        internal short year = Convert.ToInt16(DateTime.Now.Year);
 
         public ucAllotmentRelease()
         {
@@ -28,14 +32,33 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        private void LoadObjecExpenditures() 
+        internal void LoadAccounts() 
         {
             try
             {
-                //int fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
-                //int? othersFPPId = string.IsNullOrEmpty(cmbxOtherFPP.Text) ? null : Convert.ToInt32(cmbxOtherFPP.SelectedValue);
+                HelperLoadRecords.ComboboxBudgetAppropriations(Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(fppID, allotmentClassId, othersFPPId, fundId, year), cmbxAccount, "ledger_name", "budget_appropriations_id");
+                cmbxAccount.SelectedValueChanged += new EventHandler(CmbxAccount_SelectedValueChanged);
+                cmbxAccount.TextChanged += new EventHandler(CmbxAccount_TextChanged);
+                cmbxAccount.SelectedIndex = -1;
+                cmbxAccount.Text = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
 
-                //HelperLoadRecords.ObjectExpendituresCombobox(cmbxObjectExpenditures, Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(fppId,));
+        private void CmbxAccount_SelectedValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(cmbxAccount.Text))
+                {
+                    int budgetAppropriationId = Convert.ToInt32(cmbxAccount.SelectedValue);
+                    var appropriationRepo = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
+
+                    txtAppropriation.Text = Convert.ToDecimal(appropriationRepo["amount"]).ToString("N2");
+                }
             }
             catch (Exception ex)
             {
@@ -66,25 +89,17 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                if (budgetAppropriationsId == 0)
+                if (comboBox.FindStringExact(comboBox.Text) < 0 && !string.IsNullOrEmpty(cmbxAccount.Text)) 
                 {
-                    if (!comboBox.Items.Contains(comboBox.Text)) 
-                    {
-                        ep.SetError(groupBox, "Account you entered. Doesn't exist in your record.");
-                        return true;
-                    }
+                    ep.SetError(groupBox, "Account you entered. Doesn't exist in your record.");
+                    return false;
                 }
-                else
-                {
-                    
-                }
-                
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
-            return false;
+            return true;
         }
 
         private bool ShowErrorAmountIsZero(ErrorProvider ep, NumericUpDown numericUpDown) 
@@ -94,6 +109,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 if (numericUpDown.Value == 0)
                 {
                     ep.SetError(numericUpDown, "Valuable Amount is required.");
+                    return true;
                 }
             }
             catch (Exception ex)
@@ -117,7 +133,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             if (string.IsNullOrEmpty(cmbxAccount.Text))
                 e.Cancel = ShowErrorAccountEmpty(epAccount, cmbxAccount, groupBox1);
             else
-                e.Cancel = ShowAccountExist(epAccount, cmbxAccount, groupBox1);
+                e.Cancel = !ShowAccountExist(epAccount, cmbxAccount, groupBox1);
         }
 
         private void cmbxAccount_Validated(object sender, EventArgs e)
@@ -125,14 +141,36 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             ClearGroupboxError(epAccount, groupBox1);
         }
 
-        #endregion Validationses
-
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(nudAmount.Text))
                 e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount);
             else if (nudAmount.Value == 0)
                 e.Cancel = ShowErrorAmountIsZero(epAmount, nudAmount);
+        }
+
+        private void nudAmount_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
+        }
+
+        #endregion Validationses
+
+        private void ucAllotmentRelease_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode) 
+            {
+                LoadAccounts();
+            }
+        }
+
+        private void CmbxAccount_TextChanged(object sender, EventArgs e) 
+        {
+            if (!ShowAccountExist(epAccount, cmbxAccount, groupBox1)) 
+            {
+                txtAppropriation.Text = string.Empty;
+                txtBalance.Text = string.Empty;
+            }
         }
     }
 }

@@ -209,6 +209,7 @@ namespace AccountingSystem
             comboBox.DataSource = dataTable;
             comboBox.DisplayMember = displayMember;
             comboBox.ValueMember = valueMember;
+            comboBox.DropDownHeight = 150;
 
             if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
             {
@@ -524,6 +525,22 @@ namespace AccountingSystem
         #endregion Others FPP
 
         #region BudgetAppropriations
+
+        internal static void ComboboxBudgetAppropriations(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
+        {
+            try
+            {
+                comboBox.DataSource = dataTable;
+                comboBox.DisplayMember = displayMember;
+                comboBox.ValueMember = valueMember;
+                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
 
         internal static void BudgetAppropriationsOthersFPPCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
         {

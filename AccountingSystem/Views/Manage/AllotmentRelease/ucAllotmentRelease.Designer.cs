@@ -75,6 +75,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.nudAmount.Size = new System.Drawing.Size(273, 23);
             this.nudAmount.TabIndex = 1;
             this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
+            this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
             // 
             // epAmount
             // 
@@ -152,6 +153,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // cmbxAccount
             // 
             this.cmbxAccount.FormattingEnabled = true;
+            this.cmbxAccount.IntegralHeight = false;
             this.cmbxAccount.Location = new System.Drawing.Point(135, 3);
             this.cmbxAccount.Name = "cmbxAccount";
             this.cmbxAccount.Size = new System.Drawing.Size(266, 23);
@@ -175,11 +177,13 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.nudAmount);
             this.Controls.Add(this.label1);
             this.Name = "ucAllotmentRelease";
             this.Size = new System.Drawing.Size(434, 145);
+            this.Load += new System.EventHandler(this.ucAllotmentRelease_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
             this.groupBox1.ResumeLayout(false);
