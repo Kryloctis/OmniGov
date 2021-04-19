@@ -40,15 +40,15 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.cmbxObjectExpenditures = new System.Windows.Forms.ComboBox();
-            this.epObjectExpenditure = new System.Windows.Forms.ErrorProvider(this.components);
+            this.cmbxAccount = new System.Windows.Forms.ComboBox();
+            this.epAccount = new System.Windows.Forms.ErrorProvider(this.components);
             this.epFPP = new System.Windows.Forms.ErrorProvider(this.components);
             this.epOtherFPP = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.epObjectExpenditure)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAccount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epOtherFPP)).BeginInit();
             this.SuspendLayout();
@@ -98,7 +98,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.cmbxObjectExpenditures);
+            this.panel1.Controls.Add(this.cmbxAccount);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel1.Location = new System.Drawing.Point(3, 19);
@@ -145,23 +145,23 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(2, 6);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(127, 15);
+            this.label2.Size = new System.Drawing.Size(52, 15);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Object of Expenditures";
+            this.label2.Text = "Account";
             // 
-            // cmbxObjectExpenditures
+            // cmbxAccount
             // 
-            this.cmbxObjectExpenditures.FormattingEnabled = true;
-            this.cmbxObjectExpenditures.Location = new System.Drawing.Point(135, 3);
-            this.cmbxObjectExpenditures.Name = "cmbxObjectExpenditures";
-            this.cmbxObjectExpenditures.Size = new System.Drawing.Size(266, 23);
-            this.cmbxObjectExpenditures.TabIndex = 5;
-            this.cmbxObjectExpenditures.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxObjectExpenditures_Validating);
-            this.cmbxObjectExpenditures.Validated += new System.EventHandler(this.cmbxObjectExpenditures_Validated);
+            this.cmbxAccount.FormattingEnabled = true;
+            this.cmbxAccount.Location = new System.Drawing.Point(135, 3);
+            this.cmbxAccount.Name = "cmbxAccount";
+            this.cmbxAccount.Size = new System.Drawing.Size(266, 23);
+            this.cmbxAccount.TabIndex = 5;
+            this.cmbxAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAccount_Validating);
+            this.cmbxAccount.Validated += new System.EventHandler(this.cmbxAccount_Validated);
             // 
-            // epObjectExpenditure
+            // epAccount
             // 
-            this.epObjectExpenditure.ContainerControl = this;
+            this.epAccount.ContainerControl = this;
             // 
             // epFPP
             // 
@@ -185,7 +185,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.groupBox1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.epObjectExpenditure)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAccount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epOtherFPP)).EndInit();
             this.ResumeLayout(false);
@@ -204,9 +204,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private System.Windows.Forms.Label label4;
         internal System.Windows.Forms.TextBox txtAppropriation;
         internal System.Windows.Forms.TextBox txtBalance;
-        internal System.Windows.Forms.ComboBox cmbxObjectExpenditures;
+        internal System.Windows.Forms.ComboBox cmbxAccount;
         internal System.Windows.Forms.GroupBox groupBox1;
-        internal System.Windows.Forms.ErrorProvider epObjectExpenditure;
+        internal System.Windows.Forms.ErrorProvider epAccount;
         internal System.Windows.Forms.ErrorProvider epFPP;
         internal System.Windows.Forms.ErrorProvider epOtherFPP;
     }

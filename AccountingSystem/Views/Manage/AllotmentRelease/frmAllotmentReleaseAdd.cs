@@ -28,7 +28,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             {
                 var uc = ucAllotmentRelease1;
 
-                if (!uc.ValidateChildren() || !string.IsNullOrEmpty(uc.epObjectExpenditure.GetError(uc.groupBox1))) 
+                if (!uc.ValidateChildren() || !string.IsNullOrEmpty(uc.epAccount.GetError(uc.groupBox1))) 
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;

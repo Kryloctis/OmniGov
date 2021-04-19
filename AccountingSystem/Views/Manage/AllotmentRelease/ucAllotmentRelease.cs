@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal string GetFormErrors()
         {
             var errorArray = new string[2];
-            errorArray[0] = epObjectExpenditure.GetError(groupBox1);
+            errorArray[0] = epAccount.GetError(groupBox1);
             errorArray[1] = epAmount.GetError(nudAmount);
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
@@ -45,13 +45,13 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         #region Custom Validations
 
-        private bool ShowErrorObjectExpendituresEmpty(ErrorProvider ep, ComboBox comboBox, GroupBox groupBox) 
+        private bool ShowErrorAccountEmpty(ErrorProvider ep, ComboBox comboBox, GroupBox groupBox) 
         {
             try
             {
                 if (string.IsNullOrEmpty(comboBox.Text))
                 {
-                    ep.SetError(groupBox, "Object of Expenditure is required.");
+                    ep.SetError(groupBox, "Appropriation is required.");
                     return true;
                 }
             }
@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return false;
         }
 
-        private bool ShowObjectExpendituresExist(ErrorProvider ep, ComboBox comboBox, GroupBox groupBox) 
+        private bool ShowAccountExist(ErrorProvider ep, ComboBox comboBox, GroupBox groupBox) 
         {
             try
             {
@@ -70,7 +70,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 {
                     if (!comboBox.Items.Contains(comboBox.Text)) 
                     {
-                        ep.SetError(groupBox, "Object of Expenditure you entered. Doesn't exist in your record.");
+                        ep.SetError(groupBox, "Account you entered. Doesn't exist in your record.");
                         return true;
                     }
                 }
@@ -112,17 +112,17 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         #region Validations
 
-        private void cmbxObjectExpenditures_Validating(object sender, CancelEventArgs e)
+        private void cmbxAccount_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbxObjectExpenditures.Text))
-                e.Cancel = ShowErrorObjectExpendituresEmpty(epObjectExpenditure, cmbxObjectExpenditures, groupBox1);
+            if (string.IsNullOrEmpty(cmbxAccount.Text))
+                e.Cancel = ShowErrorAccountEmpty(epAccount, cmbxAccount, groupBox1);
             else
-                e.Cancel = ShowObjectExpendituresExist(epObjectExpenditure, cmbxObjectExpenditures, groupBox1);
+                e.Cancel = ShowAccountExist(epAccount, cmbxAccount, groupBox1);
         }
 
-        private void cmbxObjectExpenditures_Validated(object sender, EventArgs e)
+        private void cmbxAccount_Validated(object sender, EventArgs e)
         {
-            ClearGroupboxError(epObjectExpenditure, groupBox1);
+            ClearGroupboxError(epAccount, groupBox1);
         }
 
         #endregion Validationses
