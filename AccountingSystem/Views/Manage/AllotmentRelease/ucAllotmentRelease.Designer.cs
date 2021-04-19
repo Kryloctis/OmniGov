@@ -73,7 +73,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             0});
             this.nudAmount.Name = "nudAmount";
             this.nudAmount.Size = new System.Drawing.Size(273, 23);
-            this.nudAmount.TabIndex = 1;
+            this.nudAmount.TabIndex = 4;
             this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
             this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
             // 
@@ -113,7 +113,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.txtBalance.Name = "txtBalance";
             this.txtBalance.ReadOnly = true;
             this.txtBalance.Size = new System.Drawing.Size(266, 23);
-            this.txtBalance.TabIndex = 7;
+            this.txtBalance.TabIndex = 3;
             // 
             // txtAppropriation
             // 
@@ -121,7 +121,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.txtAppropriation.Name = "txtAppropriation";
             this.txtAppropriation.ReadOnly = true;
             this.txtAppropriation.Size = new System.Drawing.Size(266, 23);
-            this.txtAppropriation.TabIndex = 7;
+            this.txtAppropriation.TabIndex = 1;
             // 
             // label4
             // 
@@ -157,7 +157,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.cmbxAccount.Location = new System.Drawing.Point(135, 3);
             this.cmbxAccount.Name = "cmbxAccount";
             this.cmbxAccount.Size = new System.Drawing.Size(266, 23);
-            this.cmbxAccount.TabIndex = 5;
+            this.cmbxAccount.TabIndex = 0;
             this.cmbxAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAccount_Validating);
             this.cmbxAccount.Validated += new System.EventHandler(this.cmbxAccount_Validated);
             // 
