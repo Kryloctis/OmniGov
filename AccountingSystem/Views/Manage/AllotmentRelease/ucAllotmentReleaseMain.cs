@@ -23,11 +23,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[3];
+            var errorArray = new string[4];
 
             errorArray[0] = epFPP.GetError(cmbxFPP);
             errorArray[1] = epOthersFPP.GetError(cmbxOthersFPP);
             errorArray[2] = epARONo.GetError(mskYear);
+            errorArray[3] = dgAllotmentRelease.Tag.ToString();
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
@@ -309,6 +310,23 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return false;
         }
 
+        internal bool ShowErrorAllotmentReleaseListEmpty() 
+        {
+            try
+            {
+                if (dgAllotmentRelease.Rows.Count < 1) 
+                {
+                    dgAllotmentRelease.Tag = "Allotment release list is empty.";
+                    return true;               
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
         #endregion Custom Validation Controls
 
 
@@ -345,6 +363,16 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private void mskSeriesNo_Validated(object sender, EventArgs e)
         {
             Helper.ClearMaskedTextboxError(epARONo, mskYear);
+        }
+
+        private void ucAllotmentReleaseMain_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = ShowErrorAllotmentReleaseListEmpty();
+        }
+
+        private void ucAllotmentReleaseMain_Validated(object sender, EventArgs e)
+        {
+            dgAllotmentRelease.Tag = string.Empty;
         }
 
         #endregion Validations

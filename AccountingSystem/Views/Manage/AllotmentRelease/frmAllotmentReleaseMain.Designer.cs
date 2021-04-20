@@ -31,11 +31,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNew = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
-            this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.btnCancel = new System.Windows.Forms.ToolStripButton();
-            this.btnSearch = new System.Windows.Forms.ToolStripButton();
             this.ucAllotmentReleaseMain1 = new AccountingSystem.Views.Manage.AllotmentRelease.ucAllotmentReleaseMain();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -45,11 +41,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNew,
-            this.toolStripSeparator1,
-            this.btnSave,
-            this.btnDelete,
-            this.btnCancel,
-            this.btnSearch});
+            this.btnSave});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 0, 1, 0);
@@ -67,11 +59,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnNew.Text = "&New";
             this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
-            // 
             // btnSave
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save28px;
@@ -81,37 +68,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnSave.Size = new System.Drawing.Size(35, 47);
             this.btnSave.Text = "&Save";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
-            this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(44, 47);
-            this.btnDelete.Text = "&Delete";
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
-            this.btnCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(47, 47);
-            this.btnCancel.Text = "&Cancel";
-            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnSearch.Image = global::AccountingSystem.Properties.Resources.find_doc;
-            this.btnSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(55, 47);
-            this.btnSearch.Text = "&Search...";
-            this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // ucAllotmentReleaseMain1
             // 
@@ -145,11 +101,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         #endregion
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         internal System.Windows.Forms.ToolStripButton btnSave;
-        internal System.Windows.Forms.ToolStripButton btnDelete;
-        private System.Windows.Forms.ToolStripButton btnCancel;
-        internal System.Windows.Forms.ToolStripButton btnSearch;
         internal System.Windows.Forms.ToolStripButton btnNew;
         internal ucAllotmentReleaseMain ucAllotmentReleaseMain1;
     }

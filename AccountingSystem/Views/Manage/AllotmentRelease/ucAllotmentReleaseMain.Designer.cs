@@ -73,6 +73,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.dgAllotmentRelease.RowTemplate.Height = 25;
             this.dgAllotmentRelease.Size = new System.Drawing.Size(449, 276);
             this.dgAllotmentRelease.TabIndex = 6;
+            this.dgAllotmentRelease.Tag = "";
             // 
             // btnAdd
             // 
@@ -304,6 +305,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.Name = "ucAllotmentReleaseMain";
             this.Size = new System.Drawing.Size(483, 565);
             this.Load += new System.EventHandler(this.ucAllotmentReleaseMain_Load);
+            this.Validating += new System.ComponentModel.CancelEventHandler(this.ucAllotmentReleaseMain_Validating);
+            this.Validated += new System.EventHandler(this.ucAllotmentReleaseMain_Validated);
             ((System.ComponentModel.ISupportInitialize)(this.dgAllotmentRelease)).EndInit();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).EndInit();

@@ -232,7 +232,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         private void BtnARO_Click(object sender, EventArgs e) 
         {
-            _ = new frmAllotmentReleaseMain().ShowDialog();
+            _ = new frmAllotmentReleaseMain(this).ShowDialog();
         }
 
         private void BtnARODetails_Click(object sender, EventArgs e) 

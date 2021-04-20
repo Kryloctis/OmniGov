@@ -183,11 +183,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return false;
         }
 
-        private void ClearGroupboxError(ErrorProvider ep, GroupBox groupBox) 
-        {
-            ep.SetError(groupBox, string.Empty);
-        }
-
         #endregion Custom Validations
 
         #region Validations
@@ -203,7 +198,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void cmbxAccount_Validated(object sender, EventArgs e)
         {
-            ClearGroupboxError(epAccount, groupBox1);
+            Helper.ClearErrorComboBox(epAccount, cmbxAccount);
         }
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)

@@ -74,6 +74,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.nudAmount.Name = "nudAmount";
             this.nudAmount.Size = new System.Drawing.Size(266, 23);
             this.nudAmount.TabIndex = 4;
+            this.nudAmount.ThousandsSeparator = true;
             this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
             this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
             // 
