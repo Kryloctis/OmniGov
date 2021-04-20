@@ -13,8 +13,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
     public partial class ucAllotmentReleaseMain : UserControl
     {
         internal int fppId = 0;
-        private int fundId = 0;
-        private int allotmentClassId = 0;
+        internal int fundId = 0;
+        internal int allotmentClassId = 0;
 
         public ucAllotmentReleaseMain()
         {
@@ -127,11 +127,18 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             try
             {
                 dgAllotmentRelease.Columns.Add("budget_appropriation_id", "");
+                dgAllotmentRelease.Columns.Add("account_name", "Object of Expenditures");
                 dgAllotmentRelease.Columns.Add("account_code", "Account Code");
-                dgAllotmentRelease.Columns.Add("ledger_name", "Object of Expenditures");
                 dgAllotmentRelease.Columns.Add("allotment_amount", "Amount");
 
+                //Cell Format
                 dgAllotmentRelease.Columns["budget_appropriation_id"].Visible = false;
+                dgAllotmentRelease.Columns["account_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgAllotmentRelease.Columns["account_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgAllotmentRelease.Columns["allotment_amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgAllotmentRelease.Columns["allotment_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dgAllotmentRelease.Columns["allotment_amount"].DefaultCellStyle.Format = "N2";
+
             }
             catch (Exception ex)
             {

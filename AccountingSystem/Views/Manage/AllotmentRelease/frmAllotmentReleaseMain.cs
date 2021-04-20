@@ -61,6 +61,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 uc.LoadFPPCombobox();
                 uc.LoadFunds();
                 uc.LoadAllotmentClasses();
+                uc.dgAllotmentRelease.Rows.Clear();
             }         
         }
     }

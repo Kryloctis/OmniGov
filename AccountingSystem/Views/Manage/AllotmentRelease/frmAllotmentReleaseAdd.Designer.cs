@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucAllotmentRelease1 = new AccountingSystem.Views.Manage.AllotmentRelease.ucAllotmentRelease();
+            this.ucAllotmentRelease1 = new AccountingSystem.Views.Manage.AllotmentRelease.ucAllotmentRelease(this);
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
