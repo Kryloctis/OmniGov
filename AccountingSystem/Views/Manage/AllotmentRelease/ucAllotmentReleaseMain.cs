@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     TextImageRelation = TextImageRelation.ImageBeforeText
                 };
 
-                // making general fund as default
+                //making general fund as default
                 if (Convert.ToInt32(fund["id"]) == 1)
                 {
                     radFund.Checked = true;
@@ -82,7 +82,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     TextImageRelation = TextImageRelation.ImageBeforeText
                 };
 
-                // making general fund as default
+                //making general fund as default
                 if (Convert.ToInt32(allotmentClass["id"]) == 1)
                 {
                     radAllotmentClass.Checked = true;
@@ -122,7 +122,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             cmbxOthersFPP.Enabled = true;
         }
 
-        private void LoadDatagridFormat() 
+        private void LoadDatagridFormat()
         {
             try
             {
@@ -172,7 +172,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 radioButton.Image = null;
         }
 
-        private void radioFunds_Click(object sender, EventArgs e) 
+        private void radioFunds_Click(object sender, EventArgs e)
         {
             var radFund = sender as RadioButton;
             fundId = Convert.ToInt32(radFund.Tag);
@@ -184,13 +184,13 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             ShowCheckIcon(radFund);
         }
 
-        private void RadioAllotmentClass_Click(object sender, EventArgs e) 
+        private void RadioAllotmentClass_Click(object sender, EventArgs e)
         {
             var radAllotmentClass = sender as RadioButton;
             allotmentClassId = Convert.ToInt32(radAllotmentClass.Tag);
         }
 
-        private void RadioAllotmentClass_CheckedChanged(object sender, EventArgs e) 
+        private void RadioAllotmentClass_CheckedChanged(object sender, EventArgs e)
         {
             var radAllotmentClass = sender as RadioButton;
             ShowCheckIcon(radAllotmentClass);
@@ -203,7 +203,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void ucAllotmentReleaseMain_Load(object sender, EventArgs e)
         {
-            if (!DesignMode) 
+            if (!DesignMode)
             {
                 LoadFunds();
                 LoadAllotmentClasses();
@@ -220,7 +220,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            if (ShowAllotmentReleaseAdd()) 
+            if (ShowAllotmentReleaseAdd())
             {
                 var allotmentReleaseAddForm = new frmAllotmentReleaseAdd(this);
                 var uc = allotmentReleaseAddForm.ucAllotmentRelease1;
@@ -231,20 +231,20 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 uc.dateIssued = dtDateIssued.Value;
 
                 allotmentReleaseAddForm.ShowDialog();
-            }  
+            }
         }
 
 
         //Combobox FPP
 
-        private void CmbxFPP_SelectedValueChanged(object sender, EventArgs e) 
+        private void CmbxFPP_SelectedValueChanged(object sender, EventArgs e)
         {
             LoadOthersFPPByFPPIdCombobox();
         }
 
-        private void CmbxFPP_TextChanged(object sender, EventArgs e) 
+        private void CmbxFPP_TextChanged(object sender, EventArgs e)
         {
-            if (ShowErrorFPPNameExist(epFPP, cmbxFPP)) 
+            if (ShowErrorFPPNameExist(epFPP, cmbxFPP))
             {
                 cmbxOthersFPP.Enabled = false;
                 cmbxOthersFPP.SelectedIndex = -1;
@@ -254,7 +254,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         #region Custom Validation Controls
 
-        private bool ShowErrorFPPNameExist(ErrorProvider ep, ComboBox comboBox) 
+        private bool ShowErrorFPPNameExist(ErrorProvider ep, ComboBox comboBox)
         {
             try
             {
@@ -270,16 +270,16 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             {
                 Helper.MessageBoxError(ex.Message);
             }
-            return false;   
+            return false;
         }
 
-        private bool ShowErrorOtherFPPNameExist(ErrorProvider ep, ComboBox comboBox) 
+        private bool ShowErrorOtherFPPNameExist(ErrorProvider ep, ComboBox comboBox)
         {
             try
             {
                 bool otherFPPName = Factory.OthersFPPRepository().NameExist(cmbxOthersFPP.Text);
 
-                if (!otherFPPName && !string.IsNullOrEmpty(comboBox.Text)) 
+                if (!otherFPPName && !string.IsNullOrEmpty(comboBox.Text))
                 {
                     ep.SetError(comboBox, "Other FPP you entered. Doesn't exist in yout record.");
                     return true;
@@ -329,7 +329,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void cmbxOthersFPP_Validating(object sender, CancelEventArgs e)
         {
-             e.Cancel = ShowErrorOtherFPPNameExist(epOthersFPP, cmbxOthersFPP);
+            e.Cancel = ShowErrorOtherFPPNameExist(epOthersFPP, cmbxOthersFPP);
         }
 
         private void cmbxOthersFPP_Validated(object sender, EventArgs e)

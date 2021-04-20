@@ -72,7 +72,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             0,
             0});
             this.nudAmount.Name = "nudAmount";
-            this.nudAmount.Size = new System.Drawing.Size(273, 23);
+            this.nudAmount.Size = new System.Drawing.Size(266, 23);
             this.nudAmount.TabIndex = 4;
             this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
             this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
@@ -87,7 +87,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(411, 112);
+            this.groupBox1.Size = new System.Drawing.Size(428, 112);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Appropriation";
@@ -104,7 +104,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel1.Location = new System.Drawing.Point(3, 19);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(405, 90);
+            this.panel1.Size = new System.Drawing.Size(422, 90);
             this.panel1.TabIndex = 0;
             // 
             // txtBalance
@@ -182,7 +182,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.Controls.Add(this.nudAmount);
             this.Controls.Add(this.label1);
             this.Name = "ucAllotmentRelease";
-            this.Size = new System.Drawing.Size(434, 145);
+            this.Size = new System.Drawing.Size(431, 145);
             this.Load += new System.EventHandler(this.ucAllotmentRelease_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();

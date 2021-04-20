@@ -18,21 +18,51 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal int allotmentClassId = 0;
         internal int fundId = 0;
         internal DateTime dateIssued = DateTime.Now;
-        private frmAllotmentReleaseAdd _frmAllotmentReleaseAdd;
+        private ucAllotmentReleaseMain _ucAllotmentReleaseMain;
 
-        public ucAllotmentRelease(frmAllotmentReleaseAdd frmAllotmentReleaseAdd)
+        public ucAllotmentRelease()
         {
             InitializeComponent();
-            _frmAllotmentReleaseAdd = frmAllotmentReleaseAdd;
+        }
+
+        internal void LoadReference(ucAllotmentReleaseMain ucAllotmentReleaseMain) 
+        {
+            _ucAllotmentReleaseMain = ucAllotmentReleaseMain;
         }
 
         internal string GetFormErrors()
         {
             var errorArray = new string[2];
-            errorArray[0] = epAccount.GetError(groupBox1);
+            errorArray[0] = epAccount.GetError(cmbxAccount);
             errorArray[1] = epAmount.GetError(nudAmount);
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        private bool ShowErrorAppropriationExistOnList()
+        {
+            try
+            {
+                int budgetAppropriationId = Convert.ToInt32(cmbxAccount.SelectedValue);
+
+                foreach (DataGridViewRow row in _ucAllotmentReleaseMain.dgAllotmentRelease.Rows)
+                {
+                    int rowBudgetAppropriationId = Convert.ToInt32(row.Cells["budget_appropriation_id"].Value);
+                    bool budgetAppropriationIdExist = rowBudgetAppropriationId == budgetAppropriationId ? true : false;
+
+                    if (budgetAppropriationIdExist)
+                    {
+                        epAccount.SetError(cmbxAccount, "Account is already on the list.");
+                        return true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
         }
 
         internal void LoadAccounts() 
@@ -73,7 +103,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                if (!string.IsNullOrEmpty(cmbxAccount.Text))
+                if (cmbxAccount.SelectedIndex > -1)
                 {
                     DisplayBudgetAppropriationsDetails();
                 }
@@ -83,8 +113,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 Helper.MessageBoxError(ex.Message);
             }
         }
-
-    
 
         #region Custom Validations
 
@@ -121,56 +149,13 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return false;
         }
 
-        private bool ShowErrorAccountEmpty(ErrorProvider ep, ComboBox comboBox, GroupBox groupBox) 
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(comboBox.Text))
-                {
-                    ep.SetError(groupBox, "Appropriation is required.");
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private bool ShowErrorAppropriationExistOnList()
-        {
-            try
-            { 
-                int budgetAppropriationId = Convert.ToInt32(cmbxAccount.SelectedValue);
-
-                foreach (DataGridViewRow row in _frmAllotmentReleaseAdd._ucAllotmentReleaseMain.dgAllotmentRelease.Rows)
-                {
-                    int rowBudgetAppropriationId = Convert.ToInt32(row.Cells["budget_appropriation_id"].Value);
-                    bool budgetAppropriationIdExist = rowBudgetAppropriationId == budgetAppropriationId ? true : false;
-
-                    if (budgetAppropriationIdExist)
-                    {
-                        epAccount.SetError(groupBox1, "Account is already on the list.");
-                        return true;
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private bool ShowAccountExist(ErrorProvider ep, ComboBox comboBox, GroupBox groupBox) 
+        private bool ShowAccountExist(ErrorProvider ep, ComboBox comboBox) 
         {
             try
             {
                 if (comboBox.FindStringExact(comboBox.Text) < 0 && !string.IsNullOrEmpty(cmbxAccount.Text))
                 {
-                    ep.SetError(groupBox, "Account you entered. Doesn't exist in your record.");
+                    ep.SetError(comboBox, "Account you entered. Doesn't exist in your record.");
                     return false;
                 }
             }
@@ -210,10 +195,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private void cmbxAccount_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(cmbxAccount.Text))
-                e.Cancel = ShowErrorAccountEmpty(epAccount, cmbxAccount, groupBox1);
-            else if (!ShowAccountExist(epAccount, cmbxAccount, groupBox1))
-                e.Cancel = !ShowAccountExist(epAccount, cmbxAccount, groupBox1);
-
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbxAccount, "FPP");
+            else
+                e.Cancel = !ShowAccountExist(epAccount, cmbxAccount);
+            e.Cancel = ShowErrorAppropriationExistOnList();
         }
 
         private void cmbxAccount_Validated(object sender, EventArgs e)
@@ -229,7 +214,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 e.Cancel = ShowErrorAmountIsZero(epAmount, nudAmount);
             else
                 e.Cancel = ShowErrorAmountExceeds(epAmount, nudAmount);
-            e.Cancel = ShowErrorAppropriationExistOnList();
         }
 
         private void nudAmount_Validated(object sender, EventArgs e)
@@ -249,7 +233,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void CmbxAccount_TextChanged(object sender, EventArgs e) 
         {
-            if (!ShowAccountExist(epAccount, cmbxAccount, groupBox1)) 
+            if (!ShowAccountExist(epAccount, cmbxAccount) || string.IsNullOrEmpty(cmbxAccount.Text)) 
             {
                 txtAppropriation.Text = string.Empty;
                 txtBalance.Text = string.Empty;

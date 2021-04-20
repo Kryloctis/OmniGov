@@ -13,52 +13,26 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
     public partial class frmAllotmentReleaseAdd : Form
     {
         internal ucAllotmentReleaseMain _ucAllotmentReleaseMain;
+        private ucAllotmentRelease uc;
 
         public frmAllotmentReleaseAdd(ucAllotmentReleaseMain ucAllotmentReleaseMain)
         {
             InitializeComponent();
             _ucAllotmentReleaseMain = ucAllotmentReleaseMain;
+            uc = ucAllotmentRelease1;
         }
 
         private void frmAllotmentReleaseAdd_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
+            uc.LoadReference(_ucAllotmentReleaseMain);
         }
 
-        private bool ShowErrorAppropriationExistOnList()
+        private bool AddAllotmentRelease()
         {
             try
             {
-                var uc = ucAllotmentRelease1;
-                int budgetAppropriationId = Convert.ToInt32(uc.cmbxAccount.SelectedValue);
-;
-                foreach (DataGridViewRow row in _ucAllotmentReleaseMain.dgAllotmentRelease.Rows)
-                {
-                    int rowBudgetAppropriationId = Convert.ToInt32(row.Cells["budget_appropriation_id"]);
-                    bool budgetAppropriationIdExist = rowBudgetAppropriationId == budgetAppropriationId? true : false ;
-
-                    if (budgetAppropriationIdExist)
-                    {
-                        uc.epAccount.SetError(uc.groupBox1, "Account is already on the list.");
-                        return true;
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private bool AddAllotmentRelease() 
-        {
-            try
-            {
-                var uc = ucAllotmentRelease1;
-
-                if (!uc.ValidateChildren() || !string.IsNullOrEmpty(uc.epAccount.GetError(uc.groupBox1))) 
+                if (!uc.ValidateChildren() || !string.IsNullOrEmpty(uc.epAccount.GetError(uc.groupBox1)))
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
@@ -79,7 +53,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 string accountCode = viewBudgetAppropriationInfo["account_code"].ToString();
                 decimal amount = uc.nudAmount.Value;
 
-                _ucAllotmentReleaseMain.dgAllotmentRelease.Rows.Add(new object[] {  
+                _ucAllotmentReleaseMain.dgAllotmentRelease.Rows.Add(new object[] {
                     budgetAppropriationId,
                     accountName,
                     accountCode,
@@ -97,7 +71,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (AddAllotmentRelease()) 
+            if (AddAllotmentRelease())
             {
                 Close();
                 _ucAllotmentReleaseMain.panel1.Enabled = false;

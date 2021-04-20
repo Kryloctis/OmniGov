@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucAllotmentRelease1 = new AccountingSystem.Views.Manage.AllotmentRelease.ucAllotmentRelease(this);
+            this.ucAllotmentRelease1 = new AccountingSystem.Views.Manage.AllotmentRelease.ucAllotmentRelease();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,10 +70,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // ucAllotmentRelease1
             // 
             this.ucAllotmentRelease1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucAllotmentRelease1.Location = new System.Drawing.Point(17, 12);
+            this.ucAllotmentRelease1.Location = new System.Drawing.Point(9, 12);
             this.ucAllotmentRelease1.Name = "ucAllotmentRelease1";
-            this.ucAllotmentRelease1.Size = new System.Drawing.Size(434, 145);
-            this.ucAllotmentRelease1.TabIndex = 0;
+            this.ucAllotmentRelease1.Size = new System.Drawing.Size(431, 145);
+            this.ucAllotmentRelease1.TabIndex = 2;
             // 
             // frmAllotmentReleaseAdd
             // 
