@@ -71,14 +71,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.dgAllotmentRelease.Location = new System.Drawing.Point(6, 259);
             this.dgAllotmentRelease.Name = "dgAllotmentRelease";
             this.dgAllotmentRelease.RowTemplate.Height = 25;
-            this.dgAllotmentRelease.Size = new System.Drawing.Size(449, 276);
+            this.dgAllotmentRelease.Size = new System.Drawing.Size(537, 276);
             this.dgAllotmentRelease.TabIndex = 6;
             this.dgAllotmentRelease.Tag = "";
             // 
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.Location = new System.Drawing.Point(218, 541);
+            this.btnAdd.Location = new System.Drawing.Point(306, 541);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 7;
@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // btnEdit
             // 
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEdit.Location = new System.Drawing.Point(299, 541);
+            this.btnEdit.Location = new System.Drawing.Point(387, 541);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(75, 23);
             this.btnEdit.TabIndex = 8;
@@ -99,7 +99,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // btnRemove
             // 
             this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemove.Location = new System.Drawing.Point(380, 541);
+            this.btnRemove.Location = new System.Drawing.Point(468, 541);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(75, 23);
             this.btnRemove.TabIndex = 9;
@@ -112,7 +112,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(0, 64);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(452, 53);
+            this.groupBox1.Size = new System.Drawing.Size(537, 53);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Funds";
@@ -123,7 +123,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.flowLayoutPanelFunds.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.flowLayoutPanelFunds.Location = new System.Drawing.Point(3, 19);
             this.flowLayoutPanelFunds.Name = "flowLayoutPanelFunds";
-            this.flowLayoutPanelFunds.Size = new System.Drawing.Size(446, 31);
+            this.flowLayoutPanelFunds.Size = new System.Drawing.Size(531, 31);
             this.flowLayoutPanelFunds.TabIndex = 2;
             // 
             // cmbxFPP
@@ -131,7 +131,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.cmbxFPP.FormattingEnabled = true;
             this.cmbxFPP.Location = new System.Drawing.Point(66, 6);
             this.cmbxFPP.Name = "cmbxFPP";
-            this.cmbxFPP.Size = new System.Drawing.Size(383, 23);
+            this.cmbxFPP.Size = new System.Drawing.Size(471, 23);
             this.cmbxFPP.TabIndex = 0;
             this.cmbxFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxFPP_Validating);
             this.cmbxFPP.Validated += new System.EventHandler(this.cmbxFPP_Validated);
@@ -150,7 +150,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.cmbxOthersFPP.FormattingEnabled = true;
             this.cmbxOthersFPP.Location = new System.Drawing.Point(66, 35);
             this.cmbxOthersFPP.Name = "cmbxOthersFPP";
-            this.cmbxOthersFPP.Size = new System.Drawing.Size(383, 23);
+            this.cmbxOthersFPP.Size = new System.Drawing.Size(471, 23);
             this.cmbxOthersFPP.TabIndex = 1;
             this.cmbxOthersFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxOthersFPP_Validating);
             this.cmbxOthersFPP.Validated += new System.EventHandler(this.cmbxOthersFPP_Validated);
@@ -194,7 +194,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.panel1.Controls.Add(this.cmbxFPP);
             this.panel1.Location = new System.Drawing.Point(6, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(477, 253);
+            this.panel1.Size = new System.Drawing.Size(560, 253);
             this.panel1.TabIndex = 0;
             // 
             // txtPurpose
@@ -203,7 +203,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.txtPurpose.MaxLength = 200;
             this.txtPurpose.Multiline = true;
             this.txtPurpose.Name = "txtPurpose";
-            this.txtPurpose.Size = new System.Drawing.Size(383, 39);
+            this.txtPurpose.Size = new System.Drawing.Size(471, 39);
             this.txtPurpose.TabIndex = 39;
             // 
             // label4
@@ -227,7 +227,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             // dtDateIssued
             // 
-            this.dtDateIssued.Location = new System.Drawing.Point(252, 176);
+            this.dtDateIssued.Location = new System.Drawing.Point(340, 176);
             this.dtDateIssued.Name = "dtDateIssued";
             this.dtDateIssued.Size = new System.Drawing.Size(197, 23);
             this.dtDateIssued.TabIndex = 36;
@@ -236,7 +236,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(179, 181);
+            this.label2.Location = new System.Drawing.Point(267, 181);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 15);
             this.label2.TabIndex = 34;
@@ -278,7 +278,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox2.Location = new System.Drawing.Point(3, 120);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(452, 53);
+            this.groupBox2.Size = new System.Drawing.Size(534, 53);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Allotment";
@@ -289,7 +289,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.flowLayoutPanelAllotmentClass.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.flowLayoutPanelAllotmentClass.Location = new System.Drawing.Point(3, 19);
             this.flowLayoutPanelAllotmentClass.Name = "flowLayoutPanelAllotmentClass";
-            this.flowLayoutPanelAllotmentClass.Size = new System.Drawing.Size(446, 31);
+            this.flowLayoutPanelAllotmentClass.Size = new System.Drawing.Size(528, 31);
             this.flowLayoutPanelAllotmentClass.TabIndex = 3;
             // 
             // ucAllotmentReleaseMain
@@ -303,7 +303,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.dgAllotmentRelease);
             this.Name = "ucAllotmentReleaseMain";
-            this.Size = new System.Drawing.Size(483, 565);
+            this.Size = new System.Drawing.Size(566, 565);
             this.Load += new System.EventHandler(this.ucAllotmentReleaseMain_Load);
             this.Validating += new System.ComponentModel.CancelEventHandler(this.ucAllotmentReleaseMain_Validating);
             this.Validated += new System.EventHandler(this.ucAllotmentReleaseMain_Validated);

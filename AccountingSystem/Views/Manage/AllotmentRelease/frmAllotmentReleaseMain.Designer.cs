@@ -45,7 +45,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 0, 1, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(501, 50);
+            this.toolStrip1.Size = new System.Drawing.Size(579, 50);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -72,17 +72,17 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // ucAllotmentReleaseMain1
             // 
             this.ucAllotmentReleaseMain1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucAllotmentReleaseMain1.Location = new System.Drawing.Point(22, 53);
+            this.ucAllotmentReleaseMain1.Location = new System.Drawing.Point(12, 53);
             this.ucAllotmentReleaseMain1.Name = "ucAllotmentReleaseMain1";
-            this.ucAllotmentReleaseMain1.Size = new System.Drawing.Size(476, 565);
-            this.ucAllotmentReleaseMain1.TabIndex = 0;
+            this.ucAllotmentReleaseMain1.Size = new System.Drawing.Size(566, 565);
+            this.ucAllotmentReleaseMain1.TabIndex = 2;
             // 
             // frmAllotmentReleaseMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
-            this.ClientSize = new System.Drawing.Size(501, 629);
+            this.ClientSize = new System.Drawing.Size(579, 634);
             this.Controls.Add(this.ucAllotmentReleaseMain1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -103,6 +103,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private System.Windows.Forms.ToolStrip toolStrip1;
         internal System.Windows.Forms.ToolStripButton btnSave;
         internal System.Windows.Forms.ToolStripButton btnNew;
-        internal ucAllotmentReleaseMain ucAllotmentReleaseMain1;
+        private ucAllotmentReleaseMain ucAllotmentReleaseMain1;
     }
 }

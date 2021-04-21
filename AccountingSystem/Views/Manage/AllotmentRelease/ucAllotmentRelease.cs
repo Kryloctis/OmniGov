@@ -191,9 +191,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             if (string.IsNullOrEmpty(cmbxAccount.Text))
                 e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbxAccount, "FPP");
-            else
+            else if (!ShowAccountExist(epAccount, cmbxAccount))
                 e.Cancel = !ShowAccountExist(epAccount, cmbxAccount);
-            e.Cancel = ShowErrorAppropriationExistOnList();
+            else
+                e.Cancel = ShowErrorAppropriationExistOnList();
         }
 
         private void cmbxAccount_Validated(object sender, EventArgs e)

@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 124);
+            this.label1.Location = new System.Drawing.Point(7, 120);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(51, 15);
             this.label1.TabIndex = 0;
@@ -65,14 +65,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // nudAmount
             // 
             this.nudAmount.DecimalPlaces = 2;
-            this.nudAmount.Location = new System.Drawing.Point(138, 118);
+            this.nudAmount.Location = new System.Drawing.Point(94, 118);
             this.nudAmount.Maximum = new decimal(new int[] {
             1410065407,
             2,
             0,
             0});
             this.nudAmount.Name = "nudAmount";
-            this.nudAmount.Size = new System.Drawing.Size(266, 23);
+            this.nudAmount.Size = new System.Drawing.Size(384, 23);
             this.nudAmount.TabIndex = 4;
             this.nudAmount.ThousandsSeparator = true;
             this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
@@ -88,7 +88,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(428, 112);
+            this.groupBox1.Size = new System.Drawing.Size(500, 112);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Appropriation";
@@ -105,23 +105,23 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel1.Location = new System.Drawing.Point(3, 19);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(422, 90);
+            this.panel1.Size = new System.Drawing.Size(494, 90);
             this.panel1.TabIndex = 0;
             // 
             // txtBalance
             // 
-            this.txtBalance.Location = new System.Drawing.Point(135, 61);
+            this.txtBalance.Location = new System.Drawing.Point(91, 61);
             this.txtBalance.Name = "txtBalance";
             this.txtBalance.ReadOnly = true;
-            this.txtBalance.Size = new System.Drawing.Size(266, 23);
+            this.txtBalance.Size = new System.Drawing.Size(384, 23);
             this.txtBalance.TabIndex = 3;
             // 
             // txtAppropriation
             // 
-            this.txtAppropriation.Location = new System.Drawing.Point(135, 32);
+            this.txtAppropriation.Location = new System.Drawing.Point(91, 32);
             this.txtAppropriation.Name = "txtAppropriation";
             this.txtAppropriation.ReadOnly = true;
-            this.txtAppropriation.Size = new System.Drawing.Size(266, 23);
+            this.txtAppropriation.Size = new System.Drawing.Size(384, 23);
             this.txtAppropriation.TabIndex = 1;
             // 
             // label4
@@ -155,9 +155,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             this.cmbxAccount.FormattingEnabled = true;
             this.cmbxAccount.IntegralHeight = false;
-            this.cmbxAccount.Location = new System.Drawing.Point(135, 3);
+            this.cmbxAccount.Location = new System.Drawing.Point(91, 3);
             this.cmbxAccount.Name = "cmbxAccount";
-            this.cmbxAccount.Size = new System.Drawing.Size(266, 23);
+            this.cmbxAccount.Size = new System.Drawing.Size(384, 23);
             this.cmbxAccount.TabIndex = 0;
             this.cmbxAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAccount_Validating);
             this.cmbxAccount.Validated += new System.EventHandler(this.cmbxAccount_Validated);
@@ -183,7 +183,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.Controls.Add(this.nudAmount);
             this.Controls.Add(this.label1);
             this.Name = "ucAllotmentRelease";
-            this.Size = new System.Drawing.Size(431, 145);
+            this.Size = new System.Drawing.Size(503, 145);
             this.Load += new System.EventHandler(this.ucAllotmentRelease_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();

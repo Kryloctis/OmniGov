@@ -15,6 +15,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
     public partial class frmAllotmentReleaseMain : Form
     {
+        internal ucAllotmentReleaseMain uc;
 
         private frmBudgetAppropriations _frmBudgetAppropriations;
         public frmAllotmentReleaseMain(frmBudgetAppropriations frmBudgetAppropriations)
@@ -25,6 +26,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             _frmBudgetAppropriations = frmBudgetAppropriations;
             btnSave.Click += new EventHandler(BtnSave_Click);
             btnNew.Click += new EventHandler(BtnNew_Click);
+            uc = ucAllotmentReleaseMain1;
         }
 
         private bool SaveData() 
@@ -65,6 +67,22 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return false;
         }
 
+        private void UnsavedWorkPrompt()
+        {
+            var message = "Are you sure? Unsaved data will not be saved.";
+
+            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                uc.panel1.Enabled = true;
+                uc.mskSeriesNo.Text = string.Empty;
+                uc.dtDateIssued.Value = DateTime.Now;
+                uc.LoadFPPCombobox();
+                uc.LoadFunds();
+                uc.LoadAllotmentClasses();
+                uc.dgAllotmentRelease.Rows.Clear();
+            }
+        }
+
         private void BtnSave_Click(object sender, EventArgs e)
         {
             if (SaveData())
@@ -77,17 +95,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void BtnNew_Click(object sender, EventArgs e) 
         {
-            var uc = ucAllotmentReleaseMain1;
-            if (!uc.panel1.Enabled) 
+            if (!uc.panel1.Enabled)
             {
-                uc.panel1.Enabled = true;
-                uc.mskSeriesNo.Text = string.Empty;
-                uc.dtDateIssued.Value = DateTime.Now;
-                uc.LoadFPPCombobox();
-                uc.LoadFunds();
-                uc.LoadAllotmentClasses();
-                uc.dgAllotmentRelease.Rows.Clear();
-            }         
+                UnsavedWorkPrompt();
+            }
         }
     }
 }
