@@ -38,20 +38,16 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.txtPurpose = new System.Windows.Forms.TextBox();
             this.dtDateIssued = new System.Windows.Forms.DateTimePicker();
             this.nudAmount = new System.Windows.Forms.NumericUpDown();
-            this.epBudgetAppropriations = new System.Windows.Forms.ErrorProvider(this.components);
             this.epARONo = new System.Windows.Forms.ErrorProvider(this.components);
             this.epPurpose = new System.Windows.Forms.ErrorProvider(this.components);
             this.epDateIssued = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
             this.mskTxtAroNo = new System.Windows.Forms.MaskedTextBox();
-            this.epYear = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epBudgetAppropriations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epARONo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epPurpose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epDateIssued)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epYear)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -134,10 +130,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
             this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
             // 
-            // epBudgetAppropriations
-            // 
-            this.epBudgetAppropriations.ContainerControl = this;
-            // 
             // epARONo
             // 
             this.epARONo.ContainerControl = this;
@@ -164,10 +156,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.mskTxtAroNo.Validating += new System.ComponentModel.CancelEventHandler(this.mskTxtAroNo_Validating);
             this.mskTxtAroNo.Validated += new System.EventHandler(this.mskTxtAroNo_Validated);
             // 
-            // epYear
-            // 
-            this.epYear.ContainerControl = this;
-            // 
             // ucAllotmentReleaseDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -183,12 +171,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.Name = "ucAllotmentReleaseDetails";
             this.Size = new System.Drawing.Size(415, 114);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epBudgetAppropriations)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epARONo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epPurpose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epDateIssued)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epYear)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,13 +190,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal System.Windows.Forms.TextBox txtPurpose;
         internal System.Windows.Forms.DateTimePicker dtDateIssued;
         internal System.Windows.Forms.NumericUpDown nudAmount;
-        private System.Windows.Forms.ErrorProvider epBudgetAppropriations;
         private System.Windows.Forms.ErrorProvider epARONo;
         private System.Windows.Forms.ErrorProvider epPurpose;
         private System.Windows.Forms.ErrorProvider epDateIssued;
         private System.Windows.Forms.ErrorProvider epAmount;
         internal System.Windows.Forms.MaskedTextBox mskTxtAroNo;
-        internal System.Windows.Forms.ErrorProvider epAllotmentRelease;
-        internal System.Windows.Forms.ErrorProvider epYear;
     }
 }

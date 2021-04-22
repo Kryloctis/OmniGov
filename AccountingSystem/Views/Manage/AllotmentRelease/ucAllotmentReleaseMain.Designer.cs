@@ -54,6 +54,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelAllotmentClass = new System.Windows.Forms.FlowLayoutPanel();
+            this.epPurpose = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgAllotmentRelease)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
@@ -61,6 +62,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             ((System.ComponentModel.ISupportInitialize)(this.epARONo)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.epPurpose)).BeginInit();
             this.SuspendLayout();
             // 
             // dgAllotmentRelease
@@ -205,6 +207,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.txtPurpose.Name = "txtPurpose";
             this.txtPurpose.Size = new System.Drawing.Size(471, 39);
             this.txtPurpose.TabIndex = 39;
+            this.txtPurpose.Validating += new System.ComponentModel.CancelEventHandler(this.txtPurpose_Validating);
+            this.txtPurpose.Validated += new System.EventHandler(this.txtPurpose_Validated);
             // 
             // label4
             // 
@@ -292,6 +296,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.flowLayoutPanelAllotmentClass.Size = new System.Drawing.Size(528, 31);
             this.flowLayoutPanelAllotmentClass.TabIndex = 3;
             // 
+            // epPurpose
+            // 
+            this.epPurpose.ContainerControl = this;
+            // 
             // ucAllotmentReleaseMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -315,6 +323,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.epPurpose)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -346,5 +355,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal System.Windows.Forms.MaskedTextBox mskYear;
         internal System.Windows.Forms.MaskedTextBox mskSeriesNo;
         private System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.ErrorProvider epPurpose;
     }
 }

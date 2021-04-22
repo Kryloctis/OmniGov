@@ -24,12 +24,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal string GetFormErrors()
         {
-
-
-            var errorArray = new string[3];
+            var errorArray = new string[4];
             errorArray[0] = epARONo.GetError(mskTxtAroNo);
             errorArray[1] = epPurpose.GetError(txtPurpose);
             errorArray[2] = epAmount.GetError(nudAmount);
+            errorArray[3] = epDateIssued.GetError(dtDateIssued);
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
@@ -137,7 +136,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void dtDateIssued_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = ErrorYearIsLessThanApproprationYear(epYear, dtDateIssued);
+            e.Cancel = ErrorYearIsLessThanApproprationYear(epDateIssued, dtDateIssued);
         }
 
         private void ClearErrorDateTimePicker(ErrorProvider ep, DateTimePicker dateTimePicker) 
@@ -147,7 +146,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void dtDateIssued_Validated(object sender, EventArgs e)
         {
-            ClearErrorDateTimePicker(epYear, dtDateIssued);
+            ClearErrorDateTimePicker(epDateIssued, dtDateIssued);
         }
     }
 }
