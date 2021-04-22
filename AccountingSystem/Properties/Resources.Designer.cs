@@ -83,6 +83,16 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap create_new_28px {
+            get {
+                object obj = ResourceManager.GetObject("create_new_28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap delete {
             get {
                 object obj = ResourceManager.GetObject("delete", resourceCulture);
@@ -136,6 +146,16 @@ namespace AccountingSystem.Properties {
         internal static System.Drawing.Bitmap give_money_28px {
             get {
                 object obj = ResourceManager.GetObject("give_money_28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_banknotes_document_text_28px {
+            get {
+                object obj = ResourceManager.GetObject("money_banknotes_document_text_28px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

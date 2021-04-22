@@ -402,5 +402,38 @@ namespace ACC.Data
 
             return record;
         }
+
+        public bool BulkInsert(List<AllotmentReleaseModel> allotmentReleaseModelList)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope()) 
+                {
+                    foreach (var item in allotmentReleaseModelList) 
+                    {
+                        var parameters = new object[][]
+                        {
+                            new object[] { "@budget_appropriations_id", DbType.Int32, item.BudgetAppropriationsID},
+                            new object[] { "@aro_no", DbType.String, item.ARONumber},
+                            new object[] { "@purpose", DbType.String, item.Purpose},
+                            new object[] { "@date_issued", DbType.DateTime, item.DateIssued},
+                            new object[] { "@amount", DbType.Decimal, item.amount}
+                        };
+
+                        string query = $"INSERT INTO {tableName} (budget_appropriations_id, aro_no, purpose, date_issued, amount) VALUES (@budget_appropriations_id, @aro_no, @purpose, @date_issued, @amount)";
+                        _=_mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    }
+
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

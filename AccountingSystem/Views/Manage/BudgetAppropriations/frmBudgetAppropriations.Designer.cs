@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnAllotmentRelease = new System.Windows.Forms.ToolStripButton();
+            this.btnARODetails = new System.Windows.Forms.ToolStripButton();
             this.cmbxYear = new System.Windows.Forms.ToolStripComboBox();
             this.cmbxFundType = new System.Windows.Forms.ToolStripComboBox();
             this.cmbxAllotmentClass = new System.Windows.Forms.ToolStripComboBox();
@@ -43,6 +43,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnARO = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetAppropriations)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFPP)).BeginInit();
@@ -75,7 +76,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnEdit,
             this.btnDelete,
             this.toolStripSeparator1,
-            this.btnAllotmentRelease,
+            this.btnARO,
+            this.btnARODetails,
             this.cmbxYear,
             this.cmbxFundType,
             this.cmbxAllotmentClass});
@@ -92,7 +94,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(42, 47);
-            this.btnAdd.Text = "Add...";
+            this.btnAdd.Text = "&Add...";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -104,7 +106,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(40, 47);
-            this.btnEdit.Text = "Edit...";
+            this.btnEdit.Text = "&Edit...";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
@@ -116,7 +118,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(44, 47);
-            this.btnDelete.Text = "Delete";
+            this.btnDelete.Text = "&Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
@@ -125,16 +127,16 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
             // 
-            // btnAllotmentRelease
+            // btnARODetails
             // 
-            this.btnAllotmentRelease.Enabled = false;
-            this.btnAllotmentRelease.Image = global::AccountingSystem.Properties.Resources.give_money_28px;
-            this.btnAllotmentRelease.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnAllotmentRelease.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnAllotmentRelease.Name = "btnAllotmentRelease";
-            this.btnAllotmentRelease.Size = new System.Drawing.Size(115, 47);
-            this.btnAllotmentRelease.Text = "Allotment Release...";
-            this.btnAllotmentRelease.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnARODetails.Enabled = false;
+            this.btnARODetails.Image = global::AccountingSystem.Properties.Resources.money_banknotes_document_text_28px;
+            this.btnARODetails.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnARODetails.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnARODetails.Name = "btnARODetails";
+            this.btnARODetails.Size = new System.Drawing.Size(82, 47);
+            this.btnARODetails.Text = "&ARO Details...";
+            this.btnARODetails.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // cmbxYear
             // 
@@ -222,6 +224,16 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.label1.TabIndex = 3;
             this.label1.Text = "Total Appropriation";
             // 
+            // btnARO
+            // 
+            this.btnARO.Image = global::AccountingSystem.Properties.Resources.give_money_28px;
+            this.btnARO.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnARO.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnARO.Name = "btnARO";
+            this.btnARO.Size = new System.Drawing.Size(115, 47);
+            this.btnARO.Text = "&Allotment Release...";
+            this.btnARO.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
             // frmBudgetAppropriations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -263,7 +275,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         internal System.Windows.Forms.DataGridView dgBudgetAppropriations;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnAllotment;
-        internal System.Windows.Forms.ToolStripButton btnAllotmentRelease;
+        internal System.Windows.Forms.ToolStripButton btnARODetails;
         internal System.Windows.Forms.TextBox txtTotal;
+        internal System.Windows.Forms.ToolStripButton btnARO;
     }
 }

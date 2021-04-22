@@ -12,11 +12,11 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
-    public partial class frmAllotmentReleaseEdit : Form
+    public partial class frmAllotmentReleaseAddDetails : Form
     {
-        private frmAllotmentRelease _frmAllotmentRelease;
+        private frmAllotmentReleaseDetails _frmAllotmentRelease;
         private frmBudgetAppropriations _frmBudgetAppropriations;
-        public frmAllotmentReleaseEdit(frmAllotmentRelease frmAllotmentRelease, frmBudgetAppropriations frmBudgetAppropriations)
+        public frmAllotmentReleaseAddDetails(frmAllotmentReleaseDetails frmAllotmentRelease, frmBudgetAppropriations frmBudgetAppropriations)
         {
             InitializeComponent();
             _frmAllotmentRelease = frmAllotmentRelease;
@@ -38,43 +38,23 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         }
 
-        private void LoadSelectedRecord() 
-        {
-            try
-            {
-                var uc = ucAllotmentRelease1;
-                var selectedAllotmentRelease = Factory.AllotmentReleaseRepository().GetRecordByID(uc.allotmentReleaseID);
-
-                // Set Values
-                uc.mskTxtAroNo.Text = selectedAllotmentRelease["aro_no"];
-                uc.txtPurpose.Text = selectedAllotmentRelease["purpose"];
-                uc.dtDateIssued.Value = Convert.ToDateTime(selectedAllotmentRelease["date_issued"]);
-                uc.nudAmount.Value = Convert.ToDecimal(selectedAllotmentRelease["amount"]);
-
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-
-        }
-
         private bool SaveData() 
         {
             try
             {
                 var uc = ucAllotmentRelease1;
 
-                if (!uc.ValidateChildren())
+                //Validation
+                if (!uc.ValidateChildren() ) 
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
 
+
                 // proceed to insert
                 var allotmentReleaseModel = new AllotmentReleaseModel()
                 {
-                    ID = uc.allotmentReleaseID,
                     BudgetAppropriationsID = uc.budgetAppropriationID,
                     ARONumber = uc.mskTxtAroNo.Text.Trim(),
                     Purpose = uc.txtPurpose.Text.Trim(),
@@ -82,8 +62,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     amount = uc.nudAmount.Value,
                 };
 
+                return Factory.AllotmentReleaseRepository().Insert(allotmentReleaseModel);
 
-                return Factory.AllotmentReleaseRepository().Update(allotmentReleaseModel);
             }
             catch (Exception ex)
             {
@@ -92,22 +72,18 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return false;
         }
 
-        private void frmAllotmentReleaseEdit_Load(object sender, EventArgs e)
-        {
-            LoadSelectedRecord();
-        }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (SaveData()) 
             {
                 var uc = ucAllotmentRelease1;
                 uc.ResetForm();
-                Helper.MessageBoxSuccess("Allotment Release has been updated");
+                Helper.MessageBoxSuccess("Allotment Release has been saved.");
                 _frmAllotmentRelease.LoadAppropriationDetails();
                 _frmAllotmentRelease.LoadAllotmentReleaseRecords();
                 LoadBudgetAppropriationRecords();
-                Close();
+
+
             }
         }
     }

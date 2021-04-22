@@ -20,5 +20,6 @@ namespace ACC.Domain.Interfaces
 
         bool allotmentReleaseNumExist(string alltomentReleaseNum);
         bool allotmentReleaseNumExist(int id , string alltomentReleaseNum);
+        bool BulkInsert(List<AllotmentReleaseModel> allotmentReleaseModelList);
     }
 }

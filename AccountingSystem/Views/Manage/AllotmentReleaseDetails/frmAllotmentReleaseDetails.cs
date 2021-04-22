@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
-    public partial class frmAllotmentRelease : Form
+    public partial class frmAllotmentReleaseDetails : Form
     {
         internal int budgetAppropriationID = 0;
         internal int fppID = 0;
@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private frmBudgetAppropriations _frmBudgetAppropriations;
 
 
-        public frmAllotmentRelease(frmBudgetAppropriations frmBudgetAppropriations)
+        public frmAllotmentReleaseDetails(frmBudgetAppropriations frmBudgetAppropriations)
         {
             InitializeComponent();
             _frmBudgetAppropriations = frmBudgetAppropriations;
@@ -74,34 +74,53 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal void LoadAppropriationDetails() 
         {
-            HelperLoadRecords.LoadBudgetAppropriationDetailsLabels(
-                 budgetAppropriationID,
-                 fppID, othersFPPID,
-                 allotmentClassesID,
-                 generalLedgerAccID,
-                 lblFPPCode,
-                 lblFPP,
-                 lblOtherFPP,
-                 lblAccountCode,
-                 lblAllotmentClass,
-                 lblGenLedgerAcc,
-                 lblYear,
-                 lblAmount,
-                 lblAppropriationBalance);
+            try
+            {
+                var selectedBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordByIDs(budgetAppropriationID, fppID, othersFPPID, allotmentClassesID, generalLedgerAccID);
+
+                string fppCode = selectedBudgetAppropriation["fpp_code"].ToString();
+                string fppName = selectedBudgetAppropriation["fpp_name"].ToString();
+                string otherFPPName = string.IsNullOrEmpty(selectedBudgetAppropriation["others_fpp_name"]) ? "-" : selectedBudgetAppropriation["others_fpp_name"];
+                string accountCode = selectedBudgetAppropriation["account_code"].ToString();
+                string allotmentClassCode = selectedBudgetAppropriation["allotment_code"].ToString();
+                string ledgerName = selectedBudgetAppropriation["ledger_name"].ToString();
+                short year = Convert.ToInt16(selectedBudgetAppropriation["year"]);
+                decimal amount = Convert.ToDecimal(selectedBudgetAppropriation["appropriation"]);
+                decimal appropriationBalance = Convert.ToDecimal(selectedBudgetAppropriation["appropriation_balance"]);
+
+                lblFPPCode.Text = fppCode;
+                lblFPP.Text = fppName;
+                lblOtherFPP.Text = otherFPPName;
+                lblAccountCode.Text = accountCode;
+                lblAllotmentClass.Text = allotmentClassCode;
+                lblGenLedgerAcc.Text = ledgerName;
+                lblYear.Text = year.ToString();
+                lblAmount.Text = amount.ToString("N2");
+                lblAppropriationBalance.Text = appropriationBalance.ToString("N2");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e) 
         {
-            var frmAllotmentReleaseAddForm = new frmAllotmentReleaseAdd(this, _frmBudgetAppropriations);
+            var frmAllotmentReleaseAddForm = new frmAllotmentReleaseAddDetails(this, _frmBudgetAppropriations);
             var uc = frmAllotmentReleaseAddForm.ucAllotmentRelease1;
 
+            var selectedBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordByIDs(budgetAppropriationID, fppID, othersFPPID, allotmentClassesID, generalLedgerAccID);
+
+            short year = Convert.ToInt16(selectedBudgetAppropriation["year"]);
+
+            uc.year = year;
             uc.budgetAppropriationID = budgetAppropriationID;
             frmAllotmentReleaseAddForm.ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e) 
         {
-            var frmAllotmentReleaseEditForm = new frmAllotmentReleaseEdit(this, _frmBudgetAppropriations);
+            var frmAllotmentReleaseEditForm = new frmAllotmentReleaseDetailsEdit(this, _frmBudgetAppropriations);
             var uc = frmAllotmentReleaseEditForm.ucAllotmentRelease1;
 
             uc.allotmentReleaseID = Convert.ToInt32(dgAllotmentRelease.SelectedCells[0].Value);
