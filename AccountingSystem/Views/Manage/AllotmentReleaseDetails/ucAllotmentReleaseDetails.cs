@@ -15,6 +15,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal int allotmentReleaseID = 0;
         internal int budgetAppropriationID = 0;
         internal decimal currentAllotmentReleaseAmount = 0;
+        internal short year = Convert.ToInt16(DateTime.Now.Year);
 
         public ucAllotmentReleaseDetails()
         {
@@ -116,5 +117,37 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         }
 
         #endregion Validations
+
+        private bool ErrorYearIsLessThanApproprationYear(ErrorProvider ep, DateTimePicker dateTimePicker) 
+        {
+            try
+            {
+                if (dateTimePicker.Value.Year < year)
+                {
+                    ep.SetError(dateTimePicker, "Issued date you entered is less than the year of the appropriation.");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void dtDateIssued_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = ErrorYearIsLessThanApproprationYear(epYear, dtDateIssued);
+        }
+
+        private void ClearErrorDateTimePicker(ErrorProvider ep, DateTimePicker dateTimePicker) 
+        {
+            ep.SetError(dateTimePicker, string.Empty);
+        }
+
+        private void dtDateIssued_Validated(object sender, EventArgs e)
+        {
+            ClearErrorDateTimePicker(epYear, dtDateIssued);
+        }
     }
 }

@@ -854,29 +854,6 @@ namespace AccountingSystem
 
         }
 
-        internal static void LoadBudgetAppropriationDetailsLabels(int budgetAppropriationID, int fppID, int? othersFPPID, int allotmentClassesID, int generalLedgerAccID, Label lblFPPCode, Label lblFPP, Label lblOtherFPP, Label lblAccountCode, Label lblAllotmentClass, Label lblGenLedgerAcc, Label lblYear, Label lblAmount, Label AppropriationBalance)
-        {
-            try
-            {
-                var selectedBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordByIDs(budgetAppropriationID, fppID, othersFPPID, allotmentClassesID, generalLedgerAccID);
-
-                lblFPPCode.Text = selectedBudgetAppropriation["fpp_code"].ToString();
-                lblFPP.Text = selectedBudgetAppropriation["fpp_name"].ToString();
-                lblOtherFPP.Text = string.IsNullOrEmpty(selectedBudgetAppropriation["others_fpp_name"]) ? "-" : selectedBudgetAppropriation["others_fpp_name"];
-                lblAccountCode.Text = selectedBudgetAppropriation["account_code"].ToString();
-                lblAllotmentClass.Text = selectedBudgetAppropriation["allotment_code"].ToString();
-                lblGenLedgerAcc.Text = selectedBudgetAppropriation["ledger_name"].ToString();
-                lblYear.Text = selectedBudgetAppropriation["year"].ToString();
-                lblAmount.Text = Convert.ToDecimal(selectedBudgetAppropriation["appropriation"]).ToString("N2");
-                AppropriationBalance.Text = Convert.ToDecimal(selectedBudgetAppropriation["appropriation_balance"]).ToString("N2");
-
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
         #endregion Allotment Release Details
 
         #region Allotment Release
