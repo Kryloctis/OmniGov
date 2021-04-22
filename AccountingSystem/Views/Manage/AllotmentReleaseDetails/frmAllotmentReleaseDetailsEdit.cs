@@ -16,11 +16,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
     {
         private frmAllotmentReleaseDetails _frmAllotmentRelease;
         private frmBudgetAppropriations _frmBudgetAppropriations;
+        private ucAllotmentReleaseDetails uc;
+
         public frmAllotmentReleaseDetailsEdit(frmAllotmentReleaseDetails frmAllotmentRelease, frmBudgetAppropriations frmBudgetAppropriations)
         {
             InitializeComponent();
             _frmAllotmentRelease = frmAllotmentRelease;
             _frmBudgetAppropriations = frmBudgetAppropriations;
+            uc = ucAllotmentRelease1;
         }
 
         private void LoadBudgetAppropriationRecords()
@@ -42,11 +45,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                var uc = ucAllotmentRelease1;
                 var selectedAllotmentRelease = Factory.AllotmentReleaseRepository().GetRecordByID(uc.allotmentReleaseID);
 
                 // Set Values
-                uc.mskTxtAroNo.Text = selectedAllotmentRelease["aro_no"];
+                uc.mskTxtSeriesNo.Text = selectedAllotmentRelease["aro_no"];
                 uc.txtPurpose.Text = selectedAllotmentRelease["purpose"];
                 uc.dtDateIssued.Value = Convert.ToDateTime(selectedAllotmentRelease["date_issued"]);
                 uc.nudAmount.Value = Convert.ToDecimal(selectedAllotmentRelease["amount"]);
@@ -71,12 +73,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     return false;
                 }
 
+                string aroNo = $"{uc.mskTxtSeriesNo.Text}-{uc.mskTxtYear.Text}";
+
                 // proceed to insert
                 var allotmentReleaseModel = new AllotmentReleaseModel()
                 {
                     ID = uc.allotmentReleaseID,
                     BudgetAppropriationsID = uc.budgetAppropriationID,
-                    ARONumber = uc.mskTxtAroNo.Text.Trim(),
+                    ARONumber = aroNo,
                     Purpose = uc.txtPurpose.Text.Trim(),
                     DateIssued = uc.dtDateIssued.Value,
                     amount = uc.nudAmount.Value,

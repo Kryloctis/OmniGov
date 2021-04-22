@@ -51,12 +51,13 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     return false;
                 }
 
+                string aroNo = $"{uc.mskTxtSeriesNo.Text}-{uc.mskTxtYear.Text}";
 
                 // proceed to insert
                 var allotmentReleaseModel = new AllotmentReleaseModel()
                 {
                     BudgetAppropriationsID = uc.budgetAppropriationID,
-                    ARONumber = uc.mskTxtAroNo.Text.Trim(),
+                    ARONumber = aroNo,
                     Purpose = uc.txtPurpose.Text.Trim(),
                     DateIssued = uc.dtDateIssued.Value,
                     amount = uc.nudAmount.Value,
