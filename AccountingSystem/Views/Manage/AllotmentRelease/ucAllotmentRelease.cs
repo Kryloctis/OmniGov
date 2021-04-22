@@ -69,7 +69,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                HelperLoadRecords.ComboboxBudgetAppropriations(Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(fppID, allotmentClassId, othersFPPId, fundId, dateIssued.Year), cmbxAccount, "ledger_name", "budget_appropriations_id");
+                DataTable dtBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(fppID, allotmentClassId, othersFPPId, fundId, dateIssued.ToString("yyyy-MM-dd"));
+
+                HelperLoadRecords.ComboboxBudgetAppropriations(dtBudgetAppropriation, cmbxAccount, "ledger_name", "budget_appropriations_id");
+
                 cmbxAccount.SelectedValueChanged += new EventHandler(CmbxAccount_SelectedValueChanged);
                 cmbxAccount.TextChanged += new EventHandler(CmbxAccount_TextChanged);
                 cmbxAccount.SelectedIndex = -1;
