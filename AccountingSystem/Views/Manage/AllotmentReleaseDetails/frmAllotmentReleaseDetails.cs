@@ -87,6 +87,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 string accountCode = BudgetAppropriationInfo()["account_code"].ToString();
                 string allotmentClassCode = BudgetAppropriationInfo()["allotment_code"].ToString();
                 string ledgerName = BudgetAppropriationInfo()["ledger_name"].ToString();
+                DateTime dateEntry = Convert.ToDateTime(BudgetAppropriationInfo()["date_entry"]);
                 short year = Convert.ToInt16(BudgetAppropriationInfo()["year"]);
                 decimal amount = Convert.ToDecimal(BudgetAppropriationInfo()["appropriation"]);
                 decimal appropriationBalance = Convert.ToDecimal(BudgetAppropriationInfo()["appropriation_balance"]);
@@ -97,6 +98,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 lblAccountCode.Text = accountCode;
                 lblAllotmentClass.Text = allotmentClassCode;
                 lblGenLedgerAcc.Text = ledgerName;
+                lblDateEntry.Text = dateEntry.ToString("MMM-dd-yyyy");
                 lblYear.Text = year.ToString();
                 lblAmount.Text = amount.ToString("N2");
                 lblAppropriationBalance.Text = appropriationBalance.ToString("N2");
@@ -106,7 +108,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 Helper.MessageBoxError(ex.Message);
             }
         }
-
 
         private void btnAdd_Click(object sender, EventArgs e) 
         {
