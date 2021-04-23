@@ -185,6 +185,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.Name = "ucAllotmentRelease";
             this.Size = new System.Drawing.Size(503, 145);
             this.Load += new System.EventHandler(this.ucAllotmentRelease_Load);
+            this.Validating += new System.ComponentModel.CancelEventHandler(this.ucAllotmentRelease_Validating);
+            this.Validated += new System.EventHandler(this.ucAllotmentRelease_Validated);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -214,5 +216,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal System.Windows.Forms.ErrorProvider epAccount;
         internal System.Windows.Forms.ErrorProvider epFPP;
         internal System.Windows.Forms.ErrorProvider epOtherFPP;
+        internal System.Windows.Forms.ErrorProvider epAllotmentRelease;
     }
 }

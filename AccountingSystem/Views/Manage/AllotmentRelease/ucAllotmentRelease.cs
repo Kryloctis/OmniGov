@@ -18,7 +18,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal int allotmentClassId = 0;
         internal int fundId = 0;
         internal DateTime dateIssued = DateTime.Now;
-        private ucAllotmentReleaseMain _ucAllotmentReleaseMain;
+        private ucAllotmentReleaseMain ucAllotmentMain;
 
         public ucAllotmentRelease()
         {
@@ -27,14 +27,15 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal void LoadReference(ucAllotmentReleaseMain ucAllotmentReleaseMain) 
         {
-            _ucAllotmentReleaseMain = ucAllotmentReleaseMain;
+            ucAllotmentMain = ucAllotmentReleaseMain;
         }
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[2];
+            var errorArray = new string[3];
             errorArray[0] = epAccount.GetError(cmbxAccount);
             errorArray[1] = epAmount.GetError(nudAmount);
+            errorArray[2] = Tag.ToString();
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
@@ -45,7 +46,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             {
                 int budgetAppropriationId = Convert.ToInt32(cmbxAccount.SelectedValue);
 
-                foreach (DataGridViewRow row in _ucAllotmentReleaseMain.dgAllotmentRelease.Rows)
+                foreach (DataGridViewRow row in ucAllotmentMain.dgAllotmentRelease.Rows)
                 {
                     int rowBudgetAppropriationId = Convert.ToInt32(row.Cells["budget_appropriation_id"].Value);
                     bool budgetAppropriationIdExist = rowBudgetAppropriationId == budgetAppropriationId ? true : false;
@@ -237,6 +238,41 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 txtAppropriation.Text = string.Empty;
                 txtBalance.Text = string.Empty;
             }
+        }
+
+        private bool AllotmentReleaseExist() 
+        {
+            try
+            {
+                int budgetAppropriationId = Convert.ToInt32(cmbxAccount.SelectedValue);
+                DateTime dateIssued = ucAllotmentMain.dtDateIssued.Value;
+
+                var allotmentReleaseExist = Factory.AllotmentReleaseRepository().allotmentReleaseExist(budgetAppropriationId, dateIssued.ToString("yyyy-MM-dd"));
+
+                MessageBox.Show(allotmentReleaseExist.ToString());
+
+                if (allotmentReleaseExist) 
+                {
+                    Tag = "Allotment Release already exist in you record.";
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void ucAllotmentRelease_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = AllotmentReleaseExist();
+        }
+
+        private void ucAllotmentRelease_Validated(object sender, EventArgs e)
+        {
+           Tag = string.Empty;
         }
     }
 }

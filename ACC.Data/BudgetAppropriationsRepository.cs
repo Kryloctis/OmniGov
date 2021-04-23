@@ -405,7 +405,7 @@ namespace ACC.Data
                     $"AND allotment_classes_id = @allotment_classes_id " +
                     $"AND others_fpp_id <=> @others_fpp_id " +
                     $"AND funds_id = @funds_id " +
-                    $"AND date_entry >= @date_entry";
+                    $"AND date_entry <= @date_entry";
 
                 var dtPermissions = new DataTable();
                 return mySqlGenericCommands.FillBySearch(query, dtPermissions, parameters);

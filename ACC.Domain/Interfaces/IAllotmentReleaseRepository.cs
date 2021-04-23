@@ -17,7 +17,7 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetOthersFPPRecords(int fppId, int allotmentClassId, int fundId, Int16 year);
 
-
+        bool allotmentReleaseExist(int budgetAppropriationId, string dateIssued);
         bool allotmentReleaseNumExist(string alltomentReleaseNum);
         bool allotmentReleaseNumExist(int id , string alltomentReleaseNum);
         bool BulkInsert(List<AllotmentReleaseModel> allotmentReleaseModelList);

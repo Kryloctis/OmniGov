@@ -435,5 +435,28 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public bool allotmentReleaseExist(int budgetAppropriationId, string dateIssued)
+        {
+            try
+            {
+                var parameters = new object[][]
+             {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId},
+                    new object[] { "@date_issued", DbType.String, dateIssued }
+             };
+
+                string query = $"SELECT id FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id AND date_issued = @date_issued";
+                string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return false;
+        }
     }
 }
