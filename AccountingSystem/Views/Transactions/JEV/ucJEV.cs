@@ -25,8 +25,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             errorArray[1] = journalId == 0 ? "Please select the type of journal" : string.Empty;
             errorArray[2] = epJEV.GetError(txtJEVNo);
             errorArray[3] = dgAccounts.Rows.Count == 0 ? "Please add a FPP, account & amount in the table provided." : string.Empty;
-            errorArray[4] = epRefNo.GetError(txtRefNo);
-            errorArray[5] = epCollectingOfficerPayee.GetError(txtPayeeCollectingOfficer);
+            errorArray[4] = epRefNo.GetError(txtRCIORADA);
+            errorArray[5] = epCollectingOfficerPayee.GetError(txtPayee);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -36,8 +36,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
 
             txtJEVNo.Clear();
-            txtRefNo.Clear();
-            txtPayeeCollectingOfficer.Clear();
+            txtRCIORADA.Clear();
+            txtPayee.Clear();
             txtExplanation.Clear();
 
             dgAccounts.Rows.Clear();
@@ -159,19 +159,52 @@ namespace AccountingSystem.Views.Transactions.JEV
             journalId = Convert.ToByte(radJournals.Tag);
         }
 
-        private void EnableDisableAdditionalFields(bool statusRefNo, bool statusPayee, bool statusCollectingOfficer)
+        private void SetGeneralJournalFields()
         {
-            lblRefNo.Visible = statusRefNo;
-            txtRefNo.Enabled = statusRefNo;
+            lblCheckORPaidDate.Visible = false;
+            lblDVRCDNo.Visible = false;
+            lblCollectingAccountableOfficer.Visible = false;
+            lblRciOrADANo.Visible = false;
 
-            if (statusPayee || statusCollectingOfficer)
-                lblCollectingOfficerPayee.Visible = true;
-            else
-                lblCollectingOfficerPayee.Visible = false;
+            dtpCheckORPaid.Enabled = false;
+            txtRCIORADA.Enabled = false;
+            txtDVNo.Enabled = false;
+            cmbCollectingOfficer.Enabled = false;
 
 
-            txtPayeeCollectingOfficer.Enabled = statusPayee;
-            cmbCollectingOfficer.Visible = statusCollectingOfficer;
+        }
+
+        private void SetCashDisbursementsJournalFields()
+        {
+            lblCheckORPaidDate.Text = "Date Paid";
+            lblCollectingAccountableOfficer.Text = "Accountable Officer";
+
+            lblCheckORPaidDate.Visible = true;
+            dtpCheckORPaid.Enabled = true;
+            lblCollectingAccountableOfficer.Visible = true;
+            cmbCollectingOfficer.Enabled = true;
+
+            lblDVRCDNo.Visible = false;
+            txtDVNo.Enabled = false;
+            
+        }
+
+        private void SetCashReceiptsJournalFields()
+        {
+            lblCheckORPaidDate.Text = "OR Date";
+            lblRciOrADANo.Text = "OR No.";
+            lblDVRCDNo.Text = "RCD No.";
+            lblCollectingAccountableOfficer.Text = "Collecting Officer";
+
+            lblCheckORPaidDate.Visible = true;
+            lblDVRCDNo.Visible = true;
+            lblCollectingAccountableOfficer.Visible = true;
+            lblRciOrADANo.Visible = true;
+
+            dtpCheckORPaid.Enabled = true;
+            txtRCIORADA.Enabled = true;
+            txtDVNo.Enabled = true;
+            cmbCollectingOfficer.Enabled = true;
         }
 
         private void radioJournals_CheckedChanged(object sender, EventArgs e)
@@ -185,34 +218,63 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 case "General Journal":
                 case "Procurement Received Journal":
+                    SetGeneralJournalFields();
+                    break;
                 case "Cash Disbursements Journal":
-                    EnableDisableAdditionalFields(false, false, false);
+                    SetCashDisbursementsJournalFields();
 
-                    epRefNo.SetError(txtRefNo, string.Empty);
-                    epCollectingOfficerPayee.SetError(txtPayeeCollectingOfficer, string.Empty);
                     break;
                 case "Cash Receipts Journal":
-                    EnableDisableAdditionalFields(true, false, true);
+                    SetCashReceiptsJournalFields();
 
-                    lblRefNo.Text = "RCD No.";
-                    lblCollectingOfficerPayee.Text = "Collecting Officer";
                     break;
                 case "Check Disbursements Journal":
-                    EnableDisableAdditionalFields(true, true, false);
-
-                    lblRefNo.Text = "Check No.";
-                    lblCollectingOfficerPayee.Text = "Payee";
+                    SetCheckDisbursementsJournalFields();
                     break;
-                case "Advice to Debit Account Disbursement Journal":
-                    EnableDisableAdditionalFields(true, false, false);
-
-                    lblRefNo.Text = "ADA No.";
-                    epCollectingOfficerPayee.SetError(txtPayeeCollectingOfficer, string.Empty);
+                case "Authority to Debit Account Disbursement Journal":
+                    SetADAJournalFields();
+                    MessageBox.Show("ADa");
                     break;
 
                 default:
                     break;
             }
+        }
+
+        private void SetADAJournalFields()
+        {
+            lblRciOrADANo.Text = "ADA No.";
+            epCollectingOfficerPayee.SetError(txtPayee, string.Empty);
+
+            lblRciOrADANo.Visible = true;
+            txtRCIORADA.Enabled = true;
+
+            lblCheckORPaidDate.Visible = false;
+            dtpCheckORPaid.Enabled = false;
+
+            lblDVRCDNo.Visible = false;
+            txtDVNo.Enabled = false;
+
+            lblCollectingAccountableOfficer.Visible = false;
+            cmbCollectingOfficer.Enabled = false;
+        }
+
+        private void SetCheckDisbursementsJournalFields()
+        {
+            lblCheckORPaidDate.Text = "Check Date";
+            lblRciOrADANo.Text = "RCI No.";
+            lblDVRCDNo.Text = "DV No.";
+
+            lblCheckORPaidDate.Visible = true;
+            lblDVRCDNo.Visible = true;
+            lblRciOrADANo.Visible = true;
+
+            dtpCheckORPaid.Enabled = true;
+            txtRCIORADA.Enabled = true;
+            txtDVNo.Enabled = true;
+
+            lblCollectingAccountableOfficer.Visible = false;
+            cmbCollectingOfficer.Enabled = false;
         }
 
         private void ucJEV_Load(object sender, EventArgs e)
@@ -291,28 +353,28 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void txtRefNo_Validating(object sender, CancelEventArgs e)
         {
-            if (txtRefNo.Enabled)
+            if (txtRCIORADA.Enabled)
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epRefNo, txtRefNo, lblRefNo.Text);
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epRefNo, txtRCIORADA, lblRciOrADANo.Text);
             }
         }
 
         private void txtRefNo_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epRefNo, txtRefNo);
+            Helper.ClearErrorTextBox(epRefNo, txtRCIORADA);
         }
 
         private void txtPayeeCollectingOfficer_Validating(object sender, CancelEventArgs e)
         {
-            if (txtPayeeCollectingOfficer.Enabled)
+            if (txtPayee.Enabled)
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epCollectingOfficerPayee, txtPayeeCollectingOfficer, lblCollectingOfficerPayee.Text);
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epCollectingOfficerPayee, txtPayee, lblCollectingAccountableOfficer.Text);
             }
         }
 
         private void txtPayeeCollectingOfficer_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epCollectingOfficerPayee, txtPayeeCollectingOfficer);
+            Helper.ClearErrorTextBox(epCollectingOfficerPayee, txtPayee);
         }
 
         private void btnRemoveAccount_Click(object sender, EventArgs e)
