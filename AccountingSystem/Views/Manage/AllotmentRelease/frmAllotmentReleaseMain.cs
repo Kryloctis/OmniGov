@@ -80,6 +80,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 uc.LoadFunds();
                 uc.LoadAllotmentClasses();
                 uc.dgAllotmentRelease.Rows.Clear();
+                uc.txtPurpose.Text = string.Empty;
             }
         }
 
