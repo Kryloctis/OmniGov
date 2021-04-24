@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(500, 112);
-            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Appropriation";
             // 
@@ -122,7 +122,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.txtAppropriation.Name = "txtAppropriation";
             this.txtAppropriation.ReadOnly = true;
             this.txtAppropriation.Size = new System.Drawing.Size(384, 23);
-            this.txtAppropriation.TabIndex = 1;
+            this.txtAppropriation.TabIndex = 2;
             // 
             // label4
             // 
@@ -158,7 +158,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.cmbxAccount.Location = new System.Drawing.Point(91, 3);
             this.cmbxAccount.Name = "cmbxAccount";
             this.cmbxAccount.Size = new System.Drawing.Size(384, 23);
-            this.cmbxAccount.TabIndex = 0;
+            this.cmbxAccount.TabIndex = 1;
             this.cmbxAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAccount_Validating);
             this.cmbxAccount.Validated += new System.EventHandler(this.cmbxAccount_Validated);
             // 
@@ -178,7 +178,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.nudAmount);
             this.Controls.Add(this.label1);
@@ -214,5 +214,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal System.Windows.Forms.ErrorProvider epAccount;
         internal System.Windows.Forms.ErrorProvider epFPP;
         internal System.Windows.Forms.ErrorProvider epOtherFPP;
+        internal System.Windows.Forms.ErrorProvider epAllotmentRelease;
     }
 }

@@ -21,7 +21,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal int generalLedgerAccID = 0;
         private frmBudgetAppropriations _frmBudgetAppropriations;
 
-
         public frmAllotmentReleaseDetails(frmBudgetAppropriations frmBudgetAppropriations)
         {
             InitializeComponent();
@@ -30,6 +29,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             btnEdit.Click += new EventHandler(btnEdit_Click);
             btnDelete.Click += new EventHandler(btnDelete_Click);
             txtSearch.TextChanged += new EventHandler(txtSearch_TextChanged);
+        }
+
+        private Dictionary<string, string> BudgetAppropriationInfo()
+        {
+            var budgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordByIDs(budgetAppropriationID, fppID, othersFPPID, allotmentClassesID, generalLedgerAccID);
+            return budgetAppropriation;
         }
 
         private void LocalShowRecordStatus(DataGridView dataGridView, byte[] index, ToolStripStatusLabel  lblDateIssued, ToolStripStatusLabel lblCreatedAt, ToolStripStatusLabel lblUpdatedAt)
@@ -76,17 +81,16 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                var selectedBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordByIDs(budgetAppropriationID, fppID, othersFPPID, allotmentClassesID, generalLedgerAccID);
-
-                string fppCode = selectedBudgetAppropriation["fpp_code"].ToString();
-                string fppName = selectedBudgetAppropriation["fpp_name"].ToString();
-                string otherFPPName = string.IsNullOrEmpty(selectedBudgetAppropriation["others_fpp_name"]) ? "-" : selectedBudgetAppropriation["others_fpp_name"];
-                string accountCode = selectedBudgetAppropriation["account_code"].ToString();
-                string allotmentClassCode = selectedBudgetAppropriation["allotment_code"].ToString();
-                string ledgerName = selectedBudgetAppropriation["ledger_name"].ToString();
-                short year = Convert.ToInt16(selectedBudgetAppropriation["year"]);
-                decimal amount = Convert.ToDecimal(selectedBudgetAppropriation["appropriation"]);
-                decimal appropriationBalance = Convert.ToDecimal(selectedBudgetAppropriation["appropriation_balance"]);
+                string fppCode = BudgetAppropriationInfo()["fpp_code"].ToString();
+                string fppName = BudgetAppropriationInfo()["fpp_name"].ToString();
+                string otherFPPName = string.IsNullOrEmpty(BudgetAppropriationInfo()["others_fpp_name"]) ? "-" : BudgetAppropriationInfo()["others_fpp_name"];
+                string accountCode = BudgetAppropriationInfo()["account_code"].ToString();
+                string allotmentClassCode = BudgetAppropriationInfo()["allotment_code"].ToString();
+                string ledgerName = BudgetAppropriationInfo()["ledger_name"].ToString();
+                DateTime dateEntry = Convert.ToDateTime(BudgetAppropriationInfo()["date_entry"]);
+                short year = Convert.ToInt16(BudgetAppropriationInfo()["year"]);
+                decimal amount = Convert.ToDecimal(BudgetAppropriationInfo()["appropriation"]);
+                decimal appropriationBalance = Convert.ToDecimal(BudgetAppropriationInfo()["appropriation_balance"]);
 
                 lblFPPCode.Text = fppCode;
                 lblFPP.Text = fppName;
@@ -94,6 +98,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 lblAccountCode.Text = accountCode;
                 lblAllotmentClass.Text = allotmentClassCode;
                 lblGenLedgerAcc.Text = ledgerName;
+                lblDateEntry.Text = dateEntry.ToString("MMM-dd-yyyy");
                 lblYear.Text = year.ToString();
                 lblAmount.Text = amount.ToString("N2");
                 lblAppropriationBalance.Text = appropriationBalance.ToString("N2");
@@ -109,11 +114,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             var frmAllotmentReleaseAddForm = new frmAllotmentReleaseAddDetails(this, _frmBudgetAppropriations);
             var uc = frmAllotmentReleaseAddForm.ucAllotmentRelease1;
 
-            var selectedBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordByIDs(budgetAppropriationID, fppID, othersFPPID, allotmentClassesID, generalLedgerAccID);
+            DateTime dateEntry = Convert.ToDateTime(BudgetAppropriationInfo()["date_entry"]);
 
-            short year = Convert.ToInt16(selectedBudgetAppropriation["year"]);
-
-            uc.year = year;
+            uc.dateEntry = dateEntry;
             uc.budgetAppropriationID = budgetAppropriationID;
             frmAllotmentReleaseAddForm.ShowDialog();
         }
@@ -122,7 +125,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             var frmAllotmentReleaseEditForm = new frmAllotmentReleaseDetailsEdit(this, _frmBudgetAppropriations);
             var uc = frmAllotmentReleaseEditForm.ucAllotmentRelease1;
+            DateTime dateEntry = Convert.ToDateTime(BudgetAppropriationInfo()["date_entry"]);
 
+            uc.dateEntry = dateEntry;
             uc.allotmentReleaseID = Convert.ToInt32(dgAllotmentRelease.SelectedCells[0].Value);
             uc.budgetAppropriationID = budgetAppropriationID;
             uc.currentAllotmentReleaseAmount = Convert.ToDecimal(dgAllotmentRelease.SelectedCells[5].Value);

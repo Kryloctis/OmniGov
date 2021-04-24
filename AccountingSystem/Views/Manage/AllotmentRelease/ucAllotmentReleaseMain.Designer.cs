@@ -54,6 +54,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelAllotmentClass = new System.Windows.Forms.FlowLayoutPanel();
+            this.epPurpose = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgAllotmentRelease)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
@@ -61,6 +62,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             ((System.ComponentModel.ISupportInitialize)(this.epARONo)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.epPurpose)).BeginInit();
             this.SuspendLayout();
             // 
             // dgAllotmentRelease
@@ -72,7 +74,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.dgAllotmentRelease.Name = "dgAllotmentRelease";
             this.dgAllotmentRelease.RowTemplate.Height = 25;
             this.dgAllotmentRelease.Size = new System.Drawing.Size(537, 276);
-            this.dgAllotmentRelease.TabIndex = 6;
+            this.dgAllotmentRelease.TabIndex = 7;
             this.dgAllotmentRelease.Tag = "";
             // 
             // btnAdd
@@ -81,7 +83,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnAdd.Location = new System.Drawing.Point(306, 541);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 7;
+            this.btnAdd.TabIndex = 8;
             this.btnAdd.Text = "Add...";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
@@ -92,7 +94,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnEdit.Location = new System.Drawing.Point(387, 541);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(75, 23);
-            this.btnEdit.TabIndex = 8;
+            this.btnEdit.TabIndex = 9;
             this.btnEdit.Text = "Edit...";
             this.btnEdit.UseVisualStyleBackColor = true;
             // 
@@ -102,7 +104,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnRemove.Location = new System.Drawing.Point(468, 541);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(75, 23);
-            this.btnRemove.TabIndex = 9;
+            this.btnRemove.TabIndex = 10;
             this.btnRemove.Text = "Remove";
             this.btnRemove.UseVisualStyleBackColor = true;
             // 
@@ -204,7 +206,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.txtPurpose.Multiline = true;
             this.txtPurpose.Name = "txtPurpose";
             this.txtPurpose.Size = new System.Drawing.Size(471, 39);
-            this.txtPurpose.TabIndex = 39;
+            this.txtPurpose.TabIndex = 6;
+            this.txtPurpose.Validating += new System.ComponentModel.CancelEventHandler(this.txtPurpose_Validating);
+            this.txtPurpose.Validated += new System.EventHandler(this.txtPurpose_Validated);
             // 
             // label4
             // 
@@ -230,7 +234,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.dtDateIssued.Location = new System.Drawing.Point(340, 176);
             this.dtDateIssued.Name = "dtDateIssued";
             this.dtDateIssued.Size = new System.Drawing.Size(197, 23);
-            this.dtDateIssued.TabIndex = 36;
+            this.dtDateIssued.TabIndex = 5;
             this.dtDateIssued.ValueChanged += new System.EventHandler(this.dtDateIssued_ValueChanged);
             // 
             // label2
@@ -258,7 +262,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.mskSeriesNo.Mask = "000";
             this.mskSeriesNo.Name = "mskSeriesNo";
             this.mskSeriesNo.Size = new System.Drawing.Size(27, 23);
-            this.mskSeriesNo.TabIndex = 35;
+            this.mskSeriesNo.TabIndex = 4;
             this.mskSeriesNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.mskSeriesNo.Validating += new System.ComponentModel.CancelEventHandler(this.mskSeriesNo_Validating);
             this.mskSeriesNo.Validated += new System.EventHandler(this.mskSeriesNo_Validated);
@@ -279,7 +283,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.groupBox2.Location = new System.Drawing.Point(3, 120);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(534, 53);
-            this.groupBox2.TabIndex = 13;
+            this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Allotment";
             // 
@@ -291,6 +295,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.flowLayoutPanelAllotmentClass.Name = "flowLayoutPanelAllotmentClass";
             this.flowLayoutPanelAllotmentClass.Size = new System.Drawing.Size(528, 31);
             this.flowLayoutPanelAllotmentClass.TabIndex = 3;
+            // 
+            // epPurpose
+            // 
+            this.epPurpose.ContainerControl = this;
             // 
             // ucAllotmentReleaseMain
             // 
@@ -315,6 +323,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.epPurpose)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -346,5 +355,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal System.Windows.Forms.MaskedTextBox mskYear;
         internal System.Windows.Forms.MaskedTextBox mskSeriesNo;
         private System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.ErrorProvider epPurpose;
     }
 }

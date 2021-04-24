@@ -45,18 +45,19 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 var uc = ucAllotmentRelease1;
 
                 //Validation
-                if (!uc.ValidateChildren() ) 
+                if (!uc.ValidateChildren() || uc.AllotmentReleaseExist()) 
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
 
+                string aroNo = $"{uc.mskTxtSeriesNo.Text}-{uc.mskTxtYear.Text}";
 
                 // proceed to insert
                 var allotmentReleaseModel = new AllotmentReleaseModel()
                 {
                     BudgetAppropriationsID = uc.budgetAppropriationID,
-                    ARONumber = uc.mskTxtAroNo.Text.Trim(),
+                    ARONumber = aroNo,
                     Purpose = uc.txtPurpose.Text.Trim(),
                     DateIssued = uc.dtDateIssued.Value,
                     amount = uc.nudAmount.Value,

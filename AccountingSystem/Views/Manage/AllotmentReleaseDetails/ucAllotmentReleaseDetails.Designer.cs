@@ -38,20 +38,20 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.txtPurpose = new System.Windows.Forms.TextBox();
             this.dtDateIssued = new System.Windows.Forms.DateTimePicker();
             this.nudAmount = new System.Windows.Forms.NumericUpDown();
-            this.epBudgetAppropriations = new System.Windows.Forms.ErrorProvider(this.components);
             this.epARONo = new System.Windows.Forms.ErrorProvider(this.components);
             this.epPurpose = new System.Windows.Forms.ErrorProvider(this.components);
             this.epDateIssued = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
-            this.mskTxtAroNo = new System.Windows.Forms.MaskedTextBox();
-            this.epYear = new System.Windows.Forms.ErrorProvider(this.components);
+            this.mskTxtSeriesNo = new System.Windows.Forms.MaskedTextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.mskTxtYear = new System.Windows.Forms.MaskedTextBox();
+            this.epAllotmentRelease = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epBudgetAppropriations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epARONo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epPurpose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epDateIssued)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epYear)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAllotmentRelease)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -115,6 +115,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.dtDateIssued.Name = "dtDateIssued";
             this.dtDateIssued.Size = new System.Drawing.Size(316, 23);
             this.dtDateIssued.TabIndex = 2;
+            this.dtDateIssued.ValueChanged += new System.EventHandler(this.dtDateIssued_ValueChanged);
             this.dtDateIssued.Validating += new System.ComponentModel.CancelEventHandler(this.dtDateIssued_Validating);
             this.dtDateIssued.Validated += new System.EventHandler(this.dtDateIssued_Validated);
             // 
@@ -134,10 +135,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
             this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
             // 
-            // epBudgetAppropriations
-            // 
-            this.epBudgetAppropriations.ContainerControl = this;
-            // 
             // epARONo
             // 
             this.epARONo.ContainerControl = this;
@@ -154,41 +151,63 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             this.epAmount.ContainerControl = this;
             // 
-            // mskTxtAroNo
+            // mskTxtSeriesNo
             // 
-            this.mskTxtAroNo.Location = new System.Drawing.Point(72, 0);
-            this.mskTxtAroNo.Mask = "000-0000";
-            this.mskTxtAroNo.Name = "mskTxtAroNo";
-            this.mskTxtAroNo.Size = new System.Drawing.Size(316, 23);
-            this.mskTxtAroNo.TabIndex = 0;
-            this.mskTxtAroNo.Validating += new System.ComponentModel.CancelEventHandler(this.mskTxtAroNo_Validating);
-            this.mskTxtAroNo.Validated += new System.EventHandler(this.mskTxtAroNo_Validated);
+            this.mskTxtSeriesNo.Location = new System.Drawing.Point(72, 0);
+            this.mskTxtSeriesNo.Mask = "000";
+            this.mskTxtSeriesNo.Name = "mskTxtSeriesNo";
+            this.mskTxtSeriesNo.Size = new System.Drawing.Size(23, 23);
+            this.mskTxtSeriesNo.TabIndex = 0;
+            this.mskTxtSeriesNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.mskTxtSeriesNo.Validating += new System.ComponentModel.CancelEventHandler(this.mskTxtSeriesNo_Validating);
+            this.mskTxtSeriesNo.Validated += new System.EventHandler(this.mskTxtSeriesNo_Validated);
             // 
-            // epYear
+            // label6
             // 
-            this.epYear.ContainerControl = this;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(98, 3);
+            this.label6.Margin = new System.Windows.Forms.Padding(0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(12, 15);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "-";
+            // 
+            // mskTxtYear
+            // 
+            this.mskTxtYear.Location = new System.Drawing.Point(113, 0);
+            this.mskTxtYear.Mask = "0000";
+            this.mskTxtYear.Name = "mskTxtYear";
+            this.mskTxtYear.ReadOnly = true;
+            this.mskTxtYear.Size = new System.Drawing.Size(38, 23);
+            this.mskTxtYear.TabIndex = 5;
+            // 
+            // epAllotmentRelease
+            // 
+            this.epAllotmentRelease.ContainerControl = this;
             // 
             // ucAllotmentReleaseDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.mskTxtAroNo);
+            this.Controls.Add(this.mskTxtYear);
+            this.Controls.Add(this.mskTxtSeriesNo);
             this.Controls.Add(this.nudAmount);
             this.Controls.Add(this.dtDateIssued);
             this.Controls.Add(this.txtPurpose);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label1);
             this.Name = "ucAllotmentReleaseDetails";
-            this.Size = new System.Drawing.Size(415, 114);
+            this.Size = new System.Drawing.Size(409, 114);
+            this.Load += new System.EventHandler(this.ucAllotmentReleaseDetails_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epBudgetAppropriations)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epARONo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epPurpose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epDateIssued)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epYear)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAllotmentRelease)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,13 +223,13 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal System.Windows.Forms.TextBox txtPurpose;
         internal System.Windows.Forms.DateTimePicker dtDateIssued;
         internal System.Windows.Forms.NumericUpDown nudAmount;
-        private System.Windows.Forms.ErrorProvider epBudgetAppropriations;
         private System.Windows.Forms.ErrorProvider epARONo;
         private System.Windows.Forms.ErrorProvider epPurpose;
         private System.Windows.Forms.ErrorProvider epDateIssued;
         private System.Windows.Forms.ErrorProvider epAmount;
-        internal System.Windows.Forms.MaskedTextBox mskTxtAroNo;
+        private System.Windows.Forms.Label label6;
+        internal System.Windows.Forms.MaskedTextBox mskTxtYear;
+        internal System.Windows.Forms.MaskedTextBox mskTxtSeriesNo;
         internal System.Windows.Forms.ErrorProvider epAllotmentRelease;
-        internal System.Windows.Forms.ErrorProvider epYear;
     }
 }

@@ -18,7 +18,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal int allotmentClassId = 0;
         internal int fundId = 0;
         internal DateTime dateIssued = DateTime.Now;
-        private ucAllotmentReleaseMain _ucAllotmentReleaseMain;
+        private ucAllotmentReleaseMain ucAllotmentMain;
 
         public ucAllotmentRelease()
         {
@@ -27,14 +27,16 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal void LoadReference(ucAllotmentReleaseMain ucAllotmentReleaseMain) 
         {
-            _ucAllotmentReleaseMain = ucAllotmentReleaseMain;
+            ucAllotmentMain = ucAllotmentReleaseMain;
         }
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[2];
+            
+            var errorArray = new string[3];
             errorArray[0] = epAccount.GetError(cmbxAccount);
             errorArray[1] = epAmount.GetError(nudAmount);
+            errorArray[2] = AllotmentReleaseExist() ? Tag.ToString() : string.Empty;
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
@@ -45,7 +47,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             {
                 int budgetAppropriationId = Convert.ToInt32(cmbxAccount.SelectedValue);
 
-                foreach (DataGridViewRow row in _ucAllotmentReleaseMain.dgAllotmentRelease.Rows)
+                foreach (DataGridViewRow row in ucAllotmentMain.dgAllotmentRelease.Rows)
                 {
                     int rowBudgetAppropriationId = Convert.ToInt32(row.Cells["budget_appropriation_id"].Value);
                     bool budgetAppropriationIdExist = rowBudgetAppropriationId == budgetAppropriationId ? true : false;
@@ -69,7 +71,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                HelperLoadRecords.ComboboxBudgetAppropriations(Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(fppID, allotmentClassId, othersFPPId, fundId, dateIssued.Year), cmbxAccount, "ledger_name", "budget_appropriations_id");
+                DataTable dtBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(fppID, allotmentClassId, othersFPPId, fundId, dateIssued.ToString("yyyy-MM-dd"));
+
+                HelperLoadRecords.ComboboxBudgetAppropriations(dtBudgetAppropriation, cmbxAccount, "ledger_name", "budget_appropriations_id");
+
                 cmbxAccount.SelectedValueChanged += new EventHandler(CmbxAccount_SelectedValueChanged);
                 cmbxAccount.TextChanged += new EventHandler(CmbxAccount_TextChanged);
                 cmbxAccount.SelectedIndex = -1;
@@ -88,7 +93,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
             int accountId = Convert.ToInt32(appropriationInfo["general_ledger_accounts_id"]);
             var allotmentReleaseInfo = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(fundId, fppID, othersFPPId,
-                allotmentClassId, accountId, dateIssued);
+                allotmentClassId, accountId);
 
             decimal appropriationAmount = Convert.ToDecimal(appropriationInfo["amount"]);
             decimal totalAllotmentRelease = Convert.ToDecimal(allotmentReleaseInfo["total_allotment_amount"]);
@@ -125,7 +130,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 var budgetAppropriationInfo = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
 
                 int accountId = Convert.ToInt32(budgetAppropriationInfo["general_ledger_accounts_id"]);
-                var totalAllotmentReleaseInfo = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(fundId, fppID, othersFPPId, allotmentClassId, accountId, dateIssued);
+                var totalAllotmentReleaseInfo = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(fundId, fppID, othersFPPId, allotmentClassId, accountId);
 
                 decimal appropriatonAmount = Convert.ToDecimal(budgetAppropriationInfo["amount"]);
                 decimal totalAllotmentRelease = Convert.ToDecimal(totalAllotmentReleaseInfo["total_allotment_amount"]);
@@ -234,6 +239,29 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 txtAppropriation.Text = string.Empty;
                 txtBalance.Text = string.Empty;
             }
+        }
+
+        internal bool AllotmentReleaseExist() 
+        {
+            try
+            {
+                int budgetAppropriationId = Convert.ToInt32(cmbxAccount.SelectedValue);
+                DateTime dateIssued = ucAllotmentMain.dtDateIssued.Value;
+
+                var allotmentReleaseExist = Factory.AllotmentReleaseRepository().allotmentReleaseExist(budgetAppropriationId, dateIssued.ToString("yyyy-MM-dd"));
+
+                if (allotmentReleaseExist) 
+                {
+                    Tag = "Allotment Release already exist on the date it was issued.";
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
         }
     }
 }

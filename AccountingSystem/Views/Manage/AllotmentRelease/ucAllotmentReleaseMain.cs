@@ -23,12 +23,13 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[4];
+            var errorArray = new string[5];
 
             errorArray[0] = epFPP.GetError(cmbxFPP);
             errorArray[1] = epOthersFPP.GetError(cmbxOthersFPP);
             errorArray[2] = epARONo.GetError(mskYear);
             errorArray[3] = dgAllotmentRelease.Tag.ToString();
+            errorArray[4] = epPurpose.GetError(txtPurpose);
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
@@ -373,6 +374,16 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private void ucAllotmentReleaseMain_Validated(object sender, EventArgs e)
         {
             dgAllotmentRelease.Tag = string.Empty;
+        }
+
+        private void txtPurpose_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epPurpose, txtPurpose, "Purpose");
+        }
+
+        private void txtPurpose_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epPurpose, txtPurpose);
         }
 
         #endregion Validations

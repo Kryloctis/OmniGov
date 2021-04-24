@@ -12,37 +12,36 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
     public partial class frmAllotmentReleaseAdd : Form
     {
-        internal ucAllotmentReleaseMain _ucAllotmentReleaseMain;
+        internal ucAllotmentReleaseMain ucAllotmentReleaseMain;
         private ucAllotmentRelease uc;
 
         public frmAllotmentReleaseAdd(ucAllotmentReleaseMain ucAllotmentReleaseMain)
         {
             InitializeComponent();
-            _ucAllotmentReleaseMain = ucAllotmentReleaseMain;
+            this.ucAllotmentReleaseMain = ucAllotmentReleaseMain;
             uc = ucAllotmentRelease1;
         }
 
         private void frmAllotmentReleaseAdd_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            uc.LoadReference(_ucAllotmentReleaseMain);
+            uc.LoadReference(ucAllotmentReleaseMain);
         }
 
         private bool AddAllotmentRelease()
         {
             try
             {
-                if (!uc.ValidateChildren() || !string.IsNullOrEmpty(uc.epAccount.GetError(uc.groupBox1)))
+                if (!uc.ValidateChildren() || uc.AllotmentReleaseExist())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
 
-
                 int budgetAppropriationId = Convert.ToInt32(uc.cmbxAccount.SelectedValue);
-                int fppId = Convert.ToInt32(_ucAllotmentReleaseMain.cmbxFPP.SelectedValue);
-                int? othersFPPId = string.IsNullOrEmpty(_ucAllotmentReleaseMain.cmbxOthersFPP.Text) ? null : Convert.ToInt32(_ucAllotmentReleaseMain.cmbxOthersFPP.SelectedValue);
-                int allotmentClassId = Convert.ToInt32(_ucAllotmentReleaseMain.allotmentClassId);
+                int fppId = Convert.ToInt32(ucAllotmentReleaseMain.cmbxFPP.SelectedValue);
+                int? othersFPPId = string.IsNullOrEmpty(ucAllotmentReleaseMain.cmbxOthersFPP.Text) ? null : Convert.ToInt32(ucAllotmentReleaseMain.cmbxOthersFPP.SelectedValue);
+                int allotmentClassId = Convert.ToInt32(ucAllotmentReleaseMain.allotmentClassId);
 
                 var budgetAppropriationInfo = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
                 int genLedgerAccId = Convert.ToInt32(budgetAppropriationInfo["general_ledger_accounts_id"]);
@@ -53,12 +52,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 string accountCode = viewBudgetAppropriationInfo["account_code"].ToString();
                 decimal amount = uc.nudAmount.Value;
 
-                _ucAllotmentReleaseMain.dgAllotmentRelease.Rows.Add(new object[] {
+                ucAllotmentReleaseMain.dgAllotmentRelease.Rows.Add(new object[] {
                     budgetAppropriationId,
                     accountName,
                     accountCode,
                     amount});
-
 
                 return true;
             }
@@ -74,7 +72,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             if (AddAllotmentRelease())
             {
                 Close();
-                _ucAllotmentReleaseMain.panel1.Enabled = false;
+                ucAllotmentReleaseMain.panel1.Enabled = false;
             }
         }
     }
