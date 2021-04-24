@@ -53,7 +53,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnCancel.Location = new System.Drawing.Point(444, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 4;
+            this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnSave.Location = new System.Drawing.Point(363, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 3;
+            this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Add to list";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -73,7 +73,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.ucAllotmentRelease1.Location = new System.Drawing.Point(12, 12);
             this.ucAllotmentRelease1.Name = "ucAllotmentRelease1";
             this.ucAllotmentRelease1.Size = new System.Drawing.Size(507, 145);
-            this.ucAllotmentRelease1.TabIndex = 2;
+            this.ucAllotmentRelease1.TabIndex = 0;
             // 
             // frmAllotmentReleaseAdd
             // 

@@ -32,12 +32,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                if (!uc.ValidateChildren() || !string.IsNullOrEmpty((string)uc.Tag))
+                if (!uc.ValidateChildren() || uc.AllotmentReleaseExist())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
-
 
                 int budgetAppropriationId = Convert.ToInt32(uc.cmbxAccount.SelectedValue);
                 int fppId = Convert.ToInt32(ucAllotmentReleaseMain.cmbxFPP.SelectedValue);
@@ -58,7 +57,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     accountName,
                     accountCode,
                     amount});
-
 
                 return true;
             }

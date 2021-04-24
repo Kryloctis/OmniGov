@@ -403,6 +403,7 @@ namespace ACC.Data
             return record;
         }
 
+
         public bool BulkInsert(List<AllotmentReleaseModel> allotmentReleaseModelList)
         {
             try
@@ -457,6 +458,50 @@ namespace ACC.Data
                 throw;
             }
             return false;
+        }
+
+        public Dictionary<string, string> GetTotalAllotmentReleaseAmount(int fundID, int fppID, int? othersFPPID, int allotmentClassId, int AccountId)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id",DbType.Int32, fundID},
+                    new object[] { "@function_program_project_id",DbType.Int32,  fppID},
+                    new object[] { "@others_fpp_id", DbType.String, othersFPPID },
+                    new object[] { "@allotment_classes_id",DbType.String, allotmentClassId},
+                    new object[] { "@general_ledger_accounts_id", DbType.Int32, AccountId },
+                };
+
+                string query = $"SELECT " +
+                    $"COALESCE (SUM(a.amount), 0.00) AS total_allotment_amount " +
+                    $"FROM {tableName} a " +
+                    $"JOIN budget_appropriations b ON b.id = a.budget_appropriations_id " +
+                    $"WHERE b.funds_id = @funds_id " +
+                    $"AND b.function_program_project_id = @function_program_project_id " +
+                    $"AND b.others_fpp_id <=> @others_fpp_id " +
+                    $"AND b.allotment_classes_id = @allotment_classes_id " +
+                    $"AND b.general_ledger_accounts_id = @general_ledger_accounts_id";
+
+                using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("total_allotment_amount", item[0].ToString());
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
         }
     }
 }
