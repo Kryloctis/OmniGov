@@ -67,7 +67,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             {
                 var uc = ucAllotmentRelease1;
 
-                if (!uc.ValidateChildren())
+                if (!uc.ValidateChildren() || uc.AllotmentReleaseExist())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;

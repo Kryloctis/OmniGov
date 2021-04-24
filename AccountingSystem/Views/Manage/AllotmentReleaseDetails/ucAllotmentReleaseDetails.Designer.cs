@@ -45,11 +45,13 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.mskTxtSeriesNo = new System.Windows.Forms.MaskedTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.mskTxtYear = new System.Windows.Forms.MaskedTextBox();
+            this.epAllotmentRelease = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epARONo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epPurpose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epDateIssued)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAllotmentRelease)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -179,6 +181,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.mskTxtYear.Size = new System.Drawing.Size(38, 23);
             this.mskTxtYear.TabIndex = 5;
             // 
+            // epAllotmentRelease
+            // 
+            this.epAllotmentRelease.ContainerControl = this;
+            // 
             // ucAllotmentReleaseDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -201,6 +207,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             ((System.ComponentModel.ISupportInitialize)(this.epPurpose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epDateIssued)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAllotmentRelease)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -223,5 +230,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private System.Windows.Forms.Label label6;
         internal System.Windows.Forms.MaskedTextBox mskTxtYear;
         internal System.Windows.Forms.MaskedTextBox mskTxtSeriesNo;
+        internal System.Windows.Forms.ErrorProvider epAllotmentRelease;
     }
 }

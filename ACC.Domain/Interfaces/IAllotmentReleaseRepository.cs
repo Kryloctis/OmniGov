@@ -9,6 +9,7 @@ namespace ACC.Domain.Interfaces
     public interface IAllotmentReleaseRepository : IRepository<AllotmentReleaseModel>
     {
         DataTable GetRecordsByBudgetAppropriationID(int budgetAppropriationID);
+
         DataTable GetRecordsByBudgetAppropriationID(int budgetAppropriationID, string allotmentReleaseNum);
 
         DataTable GetViewRecords(int fppId, int? othersFPPId, int fundID, int allotmentClassId, short year);
@@ -19,8 +20,9 @@ namespace ACC.Domain.Interfaces
         DataTable GetOthersFPPRecords(int fppId, int allotmentClassId, int fundId, short year);
 
         bool allotmentReleaseExist(int budgetAppropriationId, string dateIssued);
-        bool allotmentReleaseNumExist(string alltomentReleaseNum);
-        bool allotmentReleaseNumExist(int id , string alltomentReleaseNum);
+
+        bool allotmentReleaseExist(int id, int budgetAppropriationId, string dateIssued);
+
         bool BulkInsert(List<AllotmentReleaseModel> allotmentReleaseModelList);
     }
 }

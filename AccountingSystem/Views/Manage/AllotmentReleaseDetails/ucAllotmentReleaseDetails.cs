@@ -24,11 +24,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[4];
+            var errorArray = new string[5];
             errorArray[0] = epARONo.GetError(mskTxtYear);
             errorArray[1] = epPurpose.GetError(txtPurpose);
             errorArray[2] = epAmount.GetError(nudAmount);
             errorArray[3] = epDateIssued.GetError(dtDateIssued);
+            errorArray[4] = AllotmentReleaseExist() ? Tag.ToString() : string.Empty; 
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
@@ -44,6 +45,33 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private void AROyearValue()
         {
             mskTxtYear.Text = dtDateIssued.Value.Year.ToString();
+        }
+
+        internal bool AllotmentReleaseExist()
+        {
+            try
+            {
+                DateTime dateIssued = dtDateIssued.Value;
+
+                bool allotmentReleaseExist;
+
+                if (allotmentReleaseID == 0)
+                 allotmentReleaseExist = Factory.AllotmentReleaseRepository().allotmentReleaseExist(budgetAppropriationID, dateIssued.ToString("yyyy-MM-dd"));
+                else
+                  allotmentReleaseExist = Factory.AllotmentReleaseRepository().allotmentReleaseExist(allotmentReleaseID, budgetAppropriationID, dateIssued.ToString("yyyy-MM-dd"));
+
+                if (allotmentReleaseExist)
+                {
+                    Tag = "Allotment Release already exist on the date it was issued.";
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
         }
 
         #region Validations

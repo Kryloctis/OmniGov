@@ -252,7 +252,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
                 if (allotmentReleaseExist) 
                 {
-                    Tag = "Allotment Release already exist in you record.";
+                    Tag = "Allotment Release already exist on the date it was issued.";
                     return true;
                 }
 
