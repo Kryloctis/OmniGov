@@ -216,7 +216,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
                 cmbxOthersFPP.Enabled = false;
                 btnRemove.Enabled = false;
-                btnEdit.Enabled = false;
             }
         }
 
@@ -387,5 +386,39 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         }
 
         #endregion Validations
+
+        private void EnableDisableButtons()
+        {
+            int selectedRowCount = dgAllotmentRelease.SelectedRows.Count;
+
+            if (selectedRowCount == 1)
+            {
+                btnRemove.Enabled = true;
+                btnRemove.Text = "Remove (" + selectedRowCount + ")";
+            }
+            else if (selectedRowCount > 1)
+            {
+                btnRemove.Enabled = true;
+                btnRemove.Text = "Remove (" + selectedRowCount + ")";
+            }
+            else
+            {
+                btnRemove.Enabled = false;
+                btnRemove.Text = "Remove";
+            }
+        }
+
+        private void dgAllotmentRelease_SelectionChanged(object sender, EventArgs e)
+        {
+            EnableDisableButtons();
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dgAllotmentRelease.SelectedRows) 
+            {
+                dgAllotmentRelease.Rows.Remove(row);
+            }
+        }
     }
 }
