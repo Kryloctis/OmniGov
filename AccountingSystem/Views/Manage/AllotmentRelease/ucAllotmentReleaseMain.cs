@@ -216,7 +216,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
                 cmbxOthersFPP.Enabled = false;
                 btnRemove.Enabled = false;
-                btnEdit.Enabled = false;
             }
         }
 
@@ -394,19 +393,16 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
             if (selectedRowCount == 1)
             {
-                btnEdit.Enabled = true;
                 btnRemove.Enabled = true;
                 btnRemove.Text = "Remove (" + selectedRowCount + ")";
             }
             else if (selectedRowCount > 1)
             {
-                btnEdit.Enabled = false;
                 btnRemove.Enabled = true;
                 btnRemove.Text = "Remove (" + selectedRowCount + ")";
             }
             else
             {
-                btnEdit.Enabled = false;
                 btnRemove.Enabled = false;
                 btnRemove.Text = "Remove";
             }
