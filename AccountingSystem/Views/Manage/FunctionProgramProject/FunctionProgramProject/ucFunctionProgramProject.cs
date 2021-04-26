@@ -8,13 +8,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
     public partial class ucFunctionProgramProject : UserControl
     {
         internal byte FppID = 0;
-        IFunctionProgramProjectRepository _functionProgramProjectRepository;
+
         public ucFunctionProgramProject()
         {
             InitializeComponent();
         }
-
-      
 
         internal string GetFormErrors()
         {
