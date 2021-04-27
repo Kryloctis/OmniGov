@@ -18,28 +18,10 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             uc = ucRoles1;
         }
 
-        internal void LoadPermissions()
-        {
-            try
-            {
-                var dtPermissions = Factory.PermissionsRepository().GetRecords();
-                foreach (DataRow row in dtPermissions.Rows)
-                {
-                    string permissionId = row["id"].ToString();
-                    string permissionName = row["permission_name"].ToString();
-                    uc.dgPermissions.Rows.Add(new string[] { permissionId, permissionName });
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
         private void frmRolesAdd_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            LoadPermissions();
+            uc.LoadPermissions();
         }
 
         private bool SaveData()
@@ -89,7 +71,8 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Role has been saved.");
-                _frmRoles.LoadRecords();
+                _frmRoles.LoadRoles();
+                uc.ResetForm();
             }
         }
 

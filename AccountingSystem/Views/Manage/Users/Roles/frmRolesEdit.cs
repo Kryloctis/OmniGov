@@ -77,7 +77,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Role has been saved.");
-                _frmRoles.LoadRecords();
+                _frmRoles.LoadRoles();
                 ucRoles1.ResetForm();
             }
         }

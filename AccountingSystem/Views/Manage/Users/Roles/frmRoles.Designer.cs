@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lstboxPermitted = new System.Windows.Forms.ListBox();
+            this.lstboxAuthorize = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgRoles)).BeginInit();
@@ -99,9 +99,6 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             // dgRoles
             // 
-            this.dgRoles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgRoles.Location = new System.Drawing.Point(10, 52);
             this.dgRoles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -109,7 +106,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.dgRoles.RowHeadersWidth = 51;
             this.dgRoles.RowTemplate.Height = 29;
             this.dgRoles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgRoles.Size = new System.Drawing.Size(436, 325);
+            this.dgRoles.Size = new System.Drawing.Size(493, 325);
             this.dgRoles.TabIndex = 3;
             this.dgRoles.SelectionChanged += new System.EventHandler(this.dgRoles_SelectionChanged);
             // 
@@ -172,19 +169,19 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.lblUpdatedAt.Name = "lblUpdatedAt";
             this.lblUpdatedAt.Size = new System.Drawing.Size(0, 20);
             // 
-            // lstboxPermitted
+            // lstboxAuthorize
             // 
-            this.lstboxPermitted.FormattingEnabled = true;
-            this.lstboxPermitted.ItemHeight = 15;
-            this.lstboxPermitted.Location = new System.Drawing.Point(452, 70);
-            this.lstboxPermitted.Name = "lstboxPermitted";
-            this.lstboxPermitted.Size = new System.Drawing.Size(235, 304);
-            this.lstboxPermitted.TabIndex = 6;
+            this.lstboxAuthorize.FormattingEnabled = true;
+            this.lstboxAuthorize.ItemHeight = 15;
+            this.lstboxAuthorize.Location = new System.Drawing.Point(509, 72);
+            this.lstboxAuthorize.Name = "lstboxAuthorize";
+            this.lstboxAuthorize.Size = new System.Drawing.Size(274, 304);
+            this.lstboxAuthorize.TabIndex = 6;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(452, 52);
+            this.label1.Location = new System.Drawing.Point(509, 54);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(112, 15);
             this.label1.TabIndex = 7;
@@ -195,16 +192,15 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(699, 401);
+            this.ClientSize = new System.Drawing.Size(795, 401);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.lstboxPermitted);
+            this.Controls.Add(this.lstboxAuthorize);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.dgRoles);
             this.Controls.Add(this.statusStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(715, 440);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(715, 440);
             this.Name = "frmRoles";
@@ -237,7 +233,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
-        private System.Windows.Forms.ListBox lstboxPermitted;
+        private System.Windows.Forms.ListBox lstboxAuthorize;
         private System.Windows.Forms.Label label1;
     }
 }
