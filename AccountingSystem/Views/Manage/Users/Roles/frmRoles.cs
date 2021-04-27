@@ -13,7 +13,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             InitializeComponent();
         }
 
-        internal void LoadRecords()
+        internal void LoadRoles()
         {
             try
             {
@@ -30,12 +30,27 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         {
             Helper.LoadFormIcon(this);
             Helper.DatagridDefaultStyle(dgRoles);
-            LoadRecords();
+            LoadRoles();
+        }
+
+        private void LoadPermissionsByRoleId(byte roleId)
+        {
+            lstboxAuthorize.DataSource = Factory.RoleHasPermissionsRepository().GetRecordsByRoleId(roleId);
+            lstboxAuthorize.DisplayMember = "permission_name";
+            lstboxAuthorize.ValueMember = "permissions_id";
         }
 
         private void dgRoles_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 2, 3 };
+            if (dgRoles.SelectedRows.Count == 1)
+                LoadPermissionsByRoleId(Convert.ToByte(dgRoles.SelectedCells[0].Value));
+            else
+            {
+                lstboxAuthorize.DataSource = null;
+                lstboxAuthorize.Items.Clear();
+            }
+
+            byte[] columnIndexTimestamp = { 3, 4 };
             Helper.ShowRecordTimestamp(dgRoles, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgRoles, btnEdit, btnDelete);
         }
@@ -69,7 +84,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
                         var rolesRepository = Factory.RolesRepository();
                         _ = rolesRepository.Delete(rolesModelList);
-                        LoadRecords();
+                        LoadRoles();
                     }
                 }
             }

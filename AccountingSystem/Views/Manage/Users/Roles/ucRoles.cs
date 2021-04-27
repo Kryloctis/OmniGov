@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Users.Roles
@@ -26,6 +27,26 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         internal void ResetForm()
         {
             txtName.Clear();
+            dgPermissionGranted.Rows.Clear();
+            LoadPermissions();
+        }
+
+        internal void LoadPermissions()
+        {
+            try
+            {
+                var dtPermissions = Factory.PermissionsRepository().GetRecords();
+                foreach (DataRow row in dtPermissions.Rows)
+                {
+                    string permissionId = row["id"].ToString();
+                    string permissionName = row["permission_name"].ToString();
+                    dgPermissions.Rows.Add(new string[] { permissionId, permissionName });
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         internal void CreateDatagridViewColumns(DataGridView datagrid)

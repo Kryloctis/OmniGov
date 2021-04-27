@@ -11,6 +11,7 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "role_has_permissions";
+        private readonly string viewTableName = "view_role_has_permissions";
 
         public RoleHasPermissionsRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -35,6 +36,25 @@ namespace ACC.Data
         public DataTable GetRecords()
         {
             throw new NotImplementedException();
+        }
+
+        public DataTable GetRecordsByRoleId(byte roleId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@roles_id", DbType.Byte, roleId},
+                };
+                string query = $"SELECT * FROM {viewTableName} WHERE roles_id = @roles_id";
+
+                var dtRoleHasPermissions = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtRoleHasPermissions, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public DataTable GetRecordsBySearch(string searchText)
