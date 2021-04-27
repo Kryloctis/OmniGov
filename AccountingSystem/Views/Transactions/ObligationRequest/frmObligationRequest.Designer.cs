@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
-            this.ucObligationRequest1 = new AccountingSystem.Views.Transactions.ObligationRequest.ucObligationRequest();
+            this.ucObligationRequest1 = new AccountingSystem.Views.Transactions.ObligationRequest.ucObligationRequestOld();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -143,6 +143,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.ToolStripButton btnCancel;
         internal System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         internal System.Windows.Forms.ToolStripButton btnDelete;
-        internal ucObligationRequest ucObligationRequest1;
+        internal ucObligationRequestOld ucObligationRequest1;
     }
 }
