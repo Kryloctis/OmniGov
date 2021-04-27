@@ -111,8 +111,8 @@ namespace AccountingSystem
 
         private void MenuObligationRequest_Click(object sender, EventArgs e) 
         {
-           var frmObligationRequest = new frmObligationRequest();
-           frmObligationRequest.ShowDialog();
+           var frmObligationRequestMain = new frmObligationRequestMain();
+            frmObligationRequestMain.ShowDialog();
         }
         
         private void MenuReportCashReceiptsJournal_Click(object sender, EventArgs e)
