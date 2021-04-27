@@ -216,7 +216,6 @@ namespace ACC.Data
             return false;
         }
 
-
         public bool NameExist(string roleName)
         {
             try

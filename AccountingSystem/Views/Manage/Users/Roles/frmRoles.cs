@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -86,6 +87,15 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                         _ = rolesRepository.Delete(rolesModelList);
                         LoadRoles();
                     }
+                }
+            }
+            catch (MySqlException mysqlEx)
+            {
+                switch (mysqlEx.Number)
+                {
+                    case 1451:
+                        Helper.MessageBoxError("Cannot delete role because it is referenced to another record.");
+                        break;
                 }
             }
             catch (Exception ex)
