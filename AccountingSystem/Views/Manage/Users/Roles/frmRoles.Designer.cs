@@ -29,7 +29,6 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRoles));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
@@ -43,7 +42,8 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.lstboxPermitted = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgRoles)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -60,39 +60,39 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.btnDelete});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(158, 51);
+            this.toolStrip1.Size = new System.Drawing.Size(699, 50);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // btnAdd
             // 
-            this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
+            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.add;
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(50, 48);
+            this.btnAdd.Size = new System.Drawing.Size(42, 47);
             this.btnAdd.Text = "Add...";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnEdit
             // 
-            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.edit;
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(48, 48);
+            this.btnEdit.Size = new System.Drawing.Size(40, 47);
             this.btnEdit.Text = "Edit...";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(57, 48);
+            this.btnDelete.Size = new System.Drawing.Size(44, 47);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -103,14 +103,14 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgRoles.Location = new System.Drawing.Point(11, 53);
+            this.dgRoles.Location = new System.Drawing.Point(10, 52);
+            this.dgRoles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgRoles.Name = "dgRoles";
             this.dgRoles.RowHeadersWidth = 51;
             this.dgRoles.RowTemplate.Height = 29;
             this.dgRoles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgRoles.Size = new System.Drawing.Size(771, 436);
+            this.dgRoles.Size = new System.Drawing.Size(436, 325);
             this.dgRoles.TabIndex = 3;
-            this.dgRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgRoles_CellContentClick);
             this.dgRoles.SelectionChanged += new System.EventHandler(this.dgRoles_SelectionChanged);
             // 
             // statusStrip1
@@ -124,9 +124,11 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.lblCreatedAt,
             this.toolStripStatusLabel3,
             this.lblUpdatedAt});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 501);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 379);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(797, 26);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(699, 22);
+            this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -145,7 +147,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(532, 20);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(489, 17);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -170,29 +172,43 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.lblUpdatedAt.Name = "lblUpdatedAt";
             this.lblUpdatedAt.Size = new System.Drawing.Size(0, 20);
             // 
-            // txtSearch
+            // lstboxPermitted
             // 
-            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSearch.Location = new System.Drawing.Point(528, 12);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.PlaceholderText = "Search";
-            this.txtSearch.Size = new System.Drawing.Size(256, 27);
-            this.txtSearch.TabIndex = 100;
-            
-            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            this.lstboxPermitted.FormattingEnabled = true;
+            this.lstboxPermitted.ItemHeight = 15;
+            this.lstboxPermitted.Location = new System.Drawing.Point(452, 70);
+            this.lstboxPermitted.Name = "lstboxPermitted";
+            this.lstboxPermitted.Size = new System.Drawing.Size(235, 304);
+            this.lstboxPermitted.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(452, 52);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(112, 15);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Authorize to access:";
             // 
             // frmRoles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(797, 527);
-            this.Controls.Add(this.txtSearch);
+            this.ClientSize = new System.Drawing.Size(699, 401);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lstboxPermitted);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.dgRoles);
             this.Controls.Add(this.statusStrip1);
-            this.MaximumSize = new System.Drawing.Size(815, 574);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(715, 440);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(715, 440);
             this.Name = "frmRoles";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Users > Roles";
             this.Load += new System.EventHandler(this.frmRoles_Load);
@@ -221,6 +237,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
-        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.ListBox lstboxPermitted;
+        private System.Windows.Forms.Label label1;
     }
 }
