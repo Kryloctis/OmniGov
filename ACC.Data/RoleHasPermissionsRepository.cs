@@ -1,0 +1,74 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using ACC.Domain.Models;
+using ACC.Domain.Interfaces;
+using System.Data;
+
+namespace ACC.Data
+{
+    public class RoleHasPermissionsRepository : IRoleHasPermissionsRepository
+    {
+        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly string tableName = "role_has_permissions";
+
+        public RoleHasPermissionsRepository(IDbGenericCommands dbGenericCommands)
+        {
+            _dbGenericCommands = dbGenericCommands;
+        }
+
+        public int CountRecords()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(List<RoleHasPermissionsModel> entityList)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<string, string> GetRecordByID(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DataTable GetRecords()
+        {
+            throw new NotImplementedException();
+        }
+
+        public DataTable GetRecordsBySearch(string searchText)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IdExist(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Insert(RoleHasPermissionsModel entity)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@role_id", DbType.Byte, entity.RolesId},
+                    new object[] { "@permission_id", DbType.Byte, entity.PermissionsId},
+                };
+
+                string query = $"INSERT INTO {tableName} (roles_id, permissions_id) VALUES (@role_id, @permission_id)";
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool Update(RoleHasPermissionsModel entity)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

@@ -10,13 +10,19 @@ namespace ACC.Data
     public class RolesRepository : IRolesRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IRoleHasPermissionsRepository roleHasPermissionsRepository;
         private readonly string tableName = "roles";
         
 
-        public RolesRepository(IDbGenericCommands dbGenericCommands)
+        public RolesRepository(
+            IDbGenericCommands dbGenericCommands,
+            IRoleHasPermissionsRepository _roleHasPermissionsRepository
+            )
         {
             _dbGenericCommands = dbGenericCommands;
+            roleHasPermissionsRepository = _roleHasPermissionsRepository;
         }
+
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var record = new Dictionary<string, string>();
@@ -80,18 +86,45 @@ namespace ACC.Data
             }
         }
 
+        public byte GetLastInsertedID()
+        {
+            try
+            {
+                string query = $"SELECT MAX(id) FROM {tableName}";
+                return byte.Parse(_dbGenericCommands.ExecuteScalar(query));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool Insert(RolesModel entity)
         {
             try
             {
-                var parameters = new object[][]
+                using (var scope = new TransactionScope())
                 {
-                    new object[] { "@role_name", DbType.String, entity.RoleName},
-                    
-                };
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@office", DbType.String, entity.Office},
+                        new object[] { "@role_name", DbType.String, entity.RoleName},
+                    };
 
-                string query = $"INSERT INTO {tableName} (role_name) VALUES (@role_name)";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                    string query = $"INSERT INTO {tableName} (office, role_name) VALUES (@office, @role_name)";
+                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+
+                    var roleHasPermissionModel = new RoleHasPermissionsModel();
+                    foreach (var permissionsModel in entity.PermissionsModels)
+                    {
+                        roleHasPermissionModel.RolesId = GetLastInsertedID();
+                        roleHasPermissionModel.PermissionsId = permissionsModel.Id;
+                        roleHasPermissionsRepository.Insert(roleHasPermissionModel);
+                    }
+
+                    scope.Complete();
+                    return true;
+                }
             }
             catch (Exception)
             {
@@ -106,11 +139,11 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@id", DbType.Int16, entity.Id},
+                    new object[] { "@office", DbType.String, entity.Office},
                     new object[] { "@role_name", DbType.String, entity.RoleName},
-                   
                 };
 
-                string query = $"UPDATE {tableName} SET role_name = @role_name WHERE id = @id";
+                string query = $"UPDATE {tableName} SET office = @office, role_name = @role_name WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)

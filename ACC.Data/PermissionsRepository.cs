@@ -12,11 +12,11 @@ namespace ACC.Data
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "permissions";
 
-
         public PermissionsRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }
+
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var record = new Dictionary<string, string>();
@@ -78,9 +78,6 @@ namespace ACC.Data
             }
         }
 
-
-
-
         public DataTable GetRecordsBySearch(string searchText)
         {
             try
@@ -100,23 +97,7 @@ namespace ACC.Data
 
         public bool Insert(PermissionsModel entity)
         {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@permission_name", DbType.String, entity.PermissionName},
-                    new object[] { "@permission_id", DbType.Byte, entity.Id},
-                    new object[] { "@role_id", DbType.Byte, entity.currentRole},
-
-                };
-
-                string query = $"INSERT INTO role_has_permissions (roles_id, permissions_id) VALUES (@role_id, @permission_id)";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            throw new NotImplementedException();
         }
 
         public bool Update(PermissionsModel entity)
