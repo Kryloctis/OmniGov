@@ -330,8 +330,15 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             var frmObligationRequestAdd = new frmObligationRequestAdd();
             var ucObligationRequestAdd = frmObligationRequestAdd.ucObligationRequest1;
+            int fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
+            int? otherFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
+            DateTime dateRequest = dtDateRequested.Value;
 
+            ucObligationRequestAdd.fundId = fundId;
+            ucObligationRequestAdd.fppId = fppId;
+            ucObligationRequestAdd.otherFPPId = otherFPPId;
             ucObligationRequestAdd.allotmentClassId = allotmentClassId;
+            ucObligationRequestAdd.dateIssued = dateRequest;
 
             frmObligationRequestAdd.ShowDialog();
         }
@@ -340,7 +347,5 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             ShowObligationRequestAdd();
         }   
-
-
     }   
 }

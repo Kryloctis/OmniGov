@@ -54,6 +54,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.cmbxAccount.Name = "cmbxAccount";
             this.cmbxAccount.Size = new System.Drawing.Size(299, 23);
             this.cmbxAccount.TabIndex = 1;
+            this.cmbxAccount.SelectedValueChanged += new System.EventHandler(this.cmbxAccount_SelectedValueChanged);
             this.cmbxAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAccount_Validating);
             this.cmbxAccount.Validated += new System.EventHandler(this.cmbxAccount_Validated);
             // 
@@ -89,6 +90,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.nudAmount.TabIndex = 3;
             this.nudAmount.ThousandsSeparator = true;
             this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
+            this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
             // 
             // epAccount
             // 
