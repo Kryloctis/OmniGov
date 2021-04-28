@@ -7,7 +7,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 {
     public partial class ucRoles : UserControl
     {
-        internal int roleId = 0;
+        internal byte roleId = 0;
 
         public ucRoles()
         {
@@ -31,6 +31,17 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             LoadPermissions();
         }
 
+        private bool AuthorizedPermissionExist(string permissionId)
+        {
+            foreach (DataGridViewRow row in dgPermissionGranted.Rows)
+            {
+                if (permissionId == row.Cells["id"].Value.ToString())
+                    return true;
+            }
+
+            return false;
+        }
+
         internal void LoadPermissions()
         {
             try
@@ -40,6 +51,9 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                 {
                     string permissionId = row["id"].ToString();
                     string permissionName = row["permission_name"].ToString();
+
+                    if (AuthorizedPermissionExist(permissionId)) continue;
+
                     dgPermissions.Rows.Add(new string[] { permissionId, permissionName });
                 }
             }

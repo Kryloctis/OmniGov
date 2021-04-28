@@ -102,49 +102,12 @@ namespace ACC.Data
 
         public bool Update(PermissionsModel entity)
         {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int16, entity.Id},
-                    new object[] { "@permission_name", DbType.String, entity.PermissionName},
-
-                };
-
-                string query = $"UPDATE {tableName} SET permission_name = @permission_name WHERE id = @id";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            throw new NotImplementedException();
         }
 
         public bool Delete(List<PermissionsModel> entityList)
         {
-            try
-            {
-                using (var scope = new TransactionScope())
-                {
-                    foreach (var entity in entityList)
-                    {
-                        var parameters = new object[][]
-                        {
-                            new object[] { "@id", DbType.Int16, entity.Id},
-                        };
-
-                        string query = $"DELETE FROM {tableName} WHERE id = @id";
-                        _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-                    }
-
-                    scope.Complete();
-                    return true;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            throw new NotImplementedException();
         }
 
         public int CountRecords()
@@ -183,6 +146,7 @@ namespace ACC.Data
 
             return false;
         }
+
         public bool PermissionExists(int id, int roleid)
         {
             try

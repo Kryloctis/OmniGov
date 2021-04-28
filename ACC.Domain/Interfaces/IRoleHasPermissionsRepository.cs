@@ -9,5 +9,7 @@ namespace ACC.Domain.Interfaces
     public interface IRoleHasPermissionsRepository : IRepository<RoleHasPermissionsModel>
     {
         DataTable GetRecordsByRoleId(byte roleId);
+
+        bool DeleteByRoleId(byte roleId);
     }
 }

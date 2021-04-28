@@ -34,16 +34,17 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT role_name, created_at, updated_at FROM {tableName} WHERE id = @id";
+                string query = $"SELECT office, role_name, created_at, updated_at FROM {tableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
                         return record;
 
-                    record.Add("role_name", reader.Rows[0][0].ToString());
-                    record.Add("created_at", reader.Rows[0][1].ToString());
-                    record.Add("updated_at", reader.Rows[0][2].ToString());
+                    record.Add("office", reader.Rows[0]["office"].ToString());
+                    record.Add("role_name", reader.Rows[0]["role_name"].ToString());
+                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
                 }
             }
             catch (Exception)
@@ -116,6 +117,7 @@ namespace ACC.Data
                     string query = $"INSERT INTO {tableName} (office, role_name) VALUES (@office, @role_name)";
                     _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
 
+                    // insert selected permissions
                     var roleHasPermissionModel = new RoleHasPermissionsModel();
                     foreach (var permissionsModel in entity.PermissionsModels)
                     {
@@ -138,15 +140,33 @@ namespace ACC.Data
         {
             try
             {
-                var parameters = new object[][]
+                using (var scope = new TransactionScope())
                 {
-                    new object[] { "@id", DbType.Int16, entity.Id},
-                    new object[] { "@office", DbType.String, entity.Office},
-                    new object[] { "@role_name", DbType.String, entity.RoleName},
-                };
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@id", DbType.Byte, entity.Id},
+                        new object[] { "@office", DbType.String, entity.Office},
+                        new object[] { "@role_name", DbType.String, entity.RoleName},
+                    };
 
-                string query = $"UPDATE {tableName} SET office = @office, role_name = @role_name WHERE id = @id";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                    string query = $"UPDATE {tableName} SET office = @office, role_name = @role_name WHERE id = @id";
+                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+
+                    // delete all permission by role id
+                    roleHasPermissionsRepository.DeleteByRoleId(entity.Id);
+
+                    // insert selected permissions
+                    var roleHasPermissionModel = new RoleHasPermissionsModel();
+                    foreach (var permissionsModel in entity.PermissionsModels)
+                    {
+                        roleHasPermissionModel.RolesId = entity.Id;
+                        roleHasPermissionModel.PermissionsId = permissionsModel.Id;
+                        roleHasPermissionsRepository.Insert(roleHasPermissionModel);
+                    }
+
+                    scope.Complete();
+                    return true;
+                }
             }
             catch (Exception)
             {
