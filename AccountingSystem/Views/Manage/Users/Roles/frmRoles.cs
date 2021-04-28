@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int roleId = int.Parse(dgRoles.SelectedCells[0].Value.ToString());
+            byte roleId = byte.Parse(dgRoles.SelectedCells[0].Value.ToString());
             _ = new frmRolesEdit(this, roleId).ShowDialog();
         }
 
@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                         var rolesModelList = new List<RolesModel>();
                         foreach (DataGridViewRow row in dgRoles.SelectedRows)
                         {
-                            int roleId = Convert.ToInt16(row.Cells[0].Value.ToString());
+                            byte roleId = Convert.ToByte(row.Cells[0].Value.ToString());
                             rolesModelList.Add(new RolesModel() { Id = roleId });
                         }
 

@@ -28,6 +28,24 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
+        public bool DeleteByRoleId(byte roleId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@roles_id", DbType.Byte, roleId},
+                };
+
+                string query = $"SET FOREIGN_KEY_CHECKS=0; DELETE FROM {tableName} WHERE roles_id = @roles_id; SET FOREIGN_KEY_CHECKS=1;";
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             throw new NotImplementedException();

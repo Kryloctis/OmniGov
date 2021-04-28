@@ -48,6 +48,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                 {
                     permissionModelList.Add(new PermissionsModel() { Id = Convert.ToByte(row.Cells["id"].Value) });
                 }
+
                 var roleModel = new RolesModel()
                 {
                     Office = uc.cmbOffice.Text,
@@ -55,8 +56,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                     PermissionsModels = permissionModelList
                 };
 
-                var rolesRepository = Factory.RolesRepository();
-                return rolesRepository.Insert(roleModel);
+                return Factory.RolesRepository().Insert(roleModel);
             }
             catch (Exception ex)
             {
