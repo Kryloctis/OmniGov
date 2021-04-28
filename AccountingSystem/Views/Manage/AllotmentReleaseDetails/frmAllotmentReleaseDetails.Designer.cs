@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
-    partial class frmAllotmentRelease
+    partial class frmAllotmentReleaseDetails
     {
         /// <summary>
         /// Required designer variable.
@@ -38,9 +38,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.label13 = new System.Windows.Forms.Label();
             this.lblFPP = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.lblDateEntry = new System.Windows.Forms.Label();
             this.lblAmount = new System.Windows.Forms.Label();
             this.lblFPPCode = new System.Windows.Forms.Label();
             this.lblGenLedgerAcc = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -129,9 +131,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.panel5.Controls.Add(this.label13);
             this.panel5.Controls.Add(this.lblFPP);
             this.panel5.Controls.Add(this.label9);
+            this.panel5.Controls.Add(this.lblDateEntry);
             this.panel5.Controls.Add(this.lblAmount);
             this.panel5.Controls.Add(this.lblFPPCode);
             this.panel5.Controls.Add(this.lblGenLedgerAcc);
+            this.panel5.Controls.Add(this.label2);
             this.panel5.Controls.Add(this.label6);
             this.panel5.Controls.Add(this.label21);
             this.panel5.Controls.Add(this.label15);
@@ -152,7 +156,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             this.lblAppropriationBalance.AutoEllipsis = true;
             this.lblAppropriationBalance.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblAppropriationBalance.Location = new System.Drawing.Point(146, 175);
+            this.lblAppropriationBalance.Location = new System.Drawing.Point(146, 196);
             this.lblAppropriationBalance.Margin = new System.Windows.Forms.Padding(3);
             this.lblAppropriationBalance.Name = "lblAppropriationBalance";
             this.lblAppropriationBalance.Size = new System.Drawing.Size(187, 15);
@@ -162,7 +166,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 175);
+            this.label3.Location = new System.Drawing.Point(3, 196);
             this.label3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 15);
@@ -210,11 +214,22 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.label9.TabIndex = 2;
             this.label9.Text = "FPP";
             // 
+            // lblDateEntry
+            // 
+            this.lblDateEntry.AutoEllipsis = true;
+            this.lblDateEntry.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblDateEntry.Location = new System.Drawing.Point(146, 133);
+            this.lblDateEntry.Margin = new System.Windows.Forms.Padding(3);
+            this.lblDateEntry.Name = "lblDateEntry";
+            this.lblDateEntry.Size = new System.Drawing.Size(187, 15);
+            this.lblDateEntry.TabIndex = 9;
+            this.lblDateEntry.Text = "-";
+            // 
             // lblAmount
             // 
             this.lblAmount.AutoEllipsis = true;
             this.lblAmount.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblAmount.Location = new System.Drawing.Point(146, 154);
+            this.lblAmount.Location = new System.Drawing.Point(146, 175);
             this.lblAmount.Margin = new System.Windows.Forms.Padding(3);
             this.lblAmount.Name = "lblAmount";
             this.lblAmount.Size = new System.Drawing.Size(187, 15);
@@ -243,6 +258,16 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.lblGenLedgerAcc.TabIndex = 3;
             this.lblGenLedgerAcc.Text = "-";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 133);
+            this.label2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(61, 15);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Date Entry";
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -255,7 +280,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(3, 154);
+            this.label21.Location = new System.Drawing.Point(3, 175);
             this.label21.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(51, 15);
@@ -316,7 +341,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             this.lblYear.AutoEllipsis = true;
             this.lblYear.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblYear.Location = new System.Drawing.Point(146, 133);
+            this.lblYear.Location = new System.Drawing.Point(146, 154);
             this.lblYear.Margin = new System.Windows.Forms.Padding(3);
             this.lblYear.Name = "lblYear";
             this.lblYear.Size = new System.Drawing.Size(187, 15);
@@ -326,7 +351,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(3, 133);
+            this.label17.Location = new System.Drawing.Point(3, 154);
             this.label17.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(29, 15);
@@ -530,7 +555,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.lblUpdatedAt.Name = "lblUpdatedAt";
             this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
             // 
-            // frmAllotmentRelease
+            // frmAllotmentReleaseDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -538,10 +563,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.Controls.Add(this.splitContainer1);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1323, 598);
-            this.Name = "frmAllotmentRelease";
+            this.Name = "frmAllotmentReleaseDetails";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Manage > Budget Appropriations > Allotment Release";
+            this.Text = "Manage > Budget Appropriations > Allotment Release Details";
             this.Load += new System.EventHandler(this.frmAllotmentRelease_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -607,5 +632,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private System.Windows.Forms.Panel panel5;
         internal System.Windows.Forms.Label lblAppropriationBalance;
         private System.Windows.Forms.Label label3;
+        internal System.Windows.Forms.Label lblDateEntry;
+        private System.Windows.Forms.Label label2;
     }
 }

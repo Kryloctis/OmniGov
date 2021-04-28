@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
-    partial class frmAllotmentReleaseEdit
+    partial class frmAllotmentReleaseAddDetails
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucAllotmentRelease1 = new AccountingSystem.Views.Manage.AllotmentRelease.ucAllotmentRelease();
+            this.ucAllotmentRelease1 = new AccountingSystem.Views.Manage.AllotmentRelease.ucAllotmentReleaseDetails();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,12 +72,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             // ucAllotmentRelease1
             // 
-            this.ucAllotmentRelease1.Location = new System.Drawing.Point(21, 12);
+            this.ucAllotmentRelease1.Location = new System.Drawing.Point(20, 12);
             this.ucAllotmentRelease1.Name = "ucAllotmentRelease1";
-            this.ucAllotmentRelease1.Size = new System.Drawing.Size(415, 114);
+            this.ucAllotmentRelease1.Size = new System.Drawing.Size(416, 119);
             this.ucAllotmentRelease1.TabIndex = 0;
             // 
-            // frmAllotmentReleaseEdit
+            // frmAllotmentReleaseAdd
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -90,21 +90,20 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmAllotmentReleaseEdit";
-            this.ShowIcon = false;
+            this.Name = "frmAllotmentReleaseAdd";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Edit Allotment Release";
-            this.Load += new System.EventHandler(this.frmAllotmentReleaseEdit_Load);
+            this.Text = "Add Allotment Release";
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        internal ucAllotmentRelease ucAllotmentRelease1;
+        internal ucAllotmentReleaseDetails ucAllotmentRelease1;
     }
 }

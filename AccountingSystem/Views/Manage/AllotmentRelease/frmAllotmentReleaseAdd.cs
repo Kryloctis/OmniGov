@@ -1,6 +1,4 @@
-﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.BudgetAppropriations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,56 +12,53 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
     public partial class frmAllotmentReleaseAdd : Form
     {
-        private frmAllotmentRelease _frmAllotmentRelease;
-        private frmBudgetAppropriations _frmBudgetAppropriations;
-        public frmAllotmentReleaseAdd(frmAllotmentRelease frmAllotmentRelease, frmBudgetAppropriations frmBudgetAppropriations)
+        internal ucAllotmentReleaseMain ucAllotmentReleaseMain;
+        private ucAllotmentRelease uc;
+
+        public frmAllotmentReleaseAdd(ucAllotmentReleaseMain ucAllotmentReleaseMain)
         {
             InitializeComponent();
-            _frmAllotmentRelease = frmAllotmentRelease;
-            _frmBudgetAppropriations = frmBudgetAppropriations;
+            this.ucAllotmentReleaseMain = ucAllotmentReleaseMain;
+            uc = ucAllotmentRelease1;
         }
 
-        private void LoadBudgetAppropriationRecords()
+        private void frmAllotmentReleaseAdd_Load(object sender, EventArgs e)
         {
-            var uc = ucAllotmentRelease1;
-            _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
-
-            foreach (DataGridViewRow row in _frmBudgetAppropriations.dgBudgetAppropriations.Rows)
-            {
-                if (Convert.ToInt32(row.Cells["budget_appropriations_id"].Value) == uc.budgetAppropriationID)
-                {
-                    _frmBudgetAppropriations.dgBudgetAppropriations.CurrentCell = _frmBudgetAppropriations.dgBudgetAppropriations.Rows[row.Index].Cells["account_code"];
-                }
-            }
-
+            Helper.LoadFormIcon(this);
+            uc.LoadReference(ucAllotmentReleaseMain);
         }
 
-        private bool SaveData() 
+        private bool AddAllotmentRelease()
         {
             try
             {
-                var uc = ucAllotmentRelease1;
-
-                //Validation
-                if (!uc.ValidateChildren() ) 
+                if (!uc.ValidateChildren() || uc.AllotmentReleaseExist())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
 
+                int budgetAppropriationId = Convert.ToInt32(uc.cmbxAccount.SelectedValue);
+                int fppId = Convert.ToInt32(ucAllotmentReleaseMain.cmbxFPP.SelectedValue);
+                int? othersFPPId = string.IsNullOrEmpty(ucAllotmentReleaseMain.cmbxOthersFPP.Text) ? null : Convert.ToInt32(ucAllotmentReleaseMain.cmbxOthersFPP.SelectedValue);
+                int allotmentClassId = Convert.ToInt32(ucAllotmentReleaseMain.allotmentClassId);
 
-                // proceed to insert
-                var allotmentReleaseModel = new AllotmentReleaseModel()
-                {
-                    BudgetAppropriationsID = uc.budgetAppropriationID,
-                    ARONumber = uc.mskTxtAroNo.Text.Trim(),
-                    Purpose = uc.txtPurpose.Text.Trim(),
-                    DateIssued = uc.dtDateIssued.Value,
-                    amount = uc.nudAmount.Value,
-                };
+                var budgetAppropriationInfo = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
+                int genLedgerAccId = Convert.ToInt32(budgetAppropriationInfo["general_ledger_accounts_id"]);
 
-                return Factory.AllotmentReleaseRepository().Insert(allotmentReleaseModel);
+                var viewBudgetAppropriationInfo = Factory.BudgetAppropriationsRepository().GetViewRecordByIDs(budgetAppropriationId, fppId, othersFPPId, allotmentClassId, genLedgerAccId);
 
+                string accountName = uc.cmbxAccount.Text;
+                string accountCode = viewBudgetAppropriationInfo["account_code"].ToString();
+                decimal amount = uc.nudAmount.Value;
+
+                ucAllotmentReleaseMain.dgAllotmentRelease.Rows.Add(new object[] {
+                    budgetAppropriationId,
+                    accountName,
+                    accountCode,
+                    amount});
+
+                return true;
             }
             catch (Exception ex)
             {
@@ -74,16 +69,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData()) 
+            if (AddAllotmentRelease())
             {
-                var uc = ucAllotmentRelease1;
-                uc.ResetForm();
-                Helper.MessageBoxSuccess("Allotment Release has been saved.");
-                _frmAllotmentRelease.LoadAppropriationDetails();
-                _frmAllotmentRelease.LoadAllotmentReleaseRecords();
-                LoadBudgetAppropriationRecords();
-
-
+                Close();
+                ucAllotmentReleaseMain.panel1.Enabled = false;
             }
         }
     }

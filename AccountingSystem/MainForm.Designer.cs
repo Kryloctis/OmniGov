@@ -45,7 +45,6 @@ namespace AccountingSystem
             this.menuFunctionProgramProject = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCollectingOfficer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBeginningBalances = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuBudgetAppropriation = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -118,7 +117,6 @@ namespace AccountingSystem
             this.menuFunctionProgramProject,
             this.menuCollectingOfficer,
             this.menuBeginningBalances,
-            this.toolStripSeparator1,
             this.menuBudgetAppropriation});
             this.menuManage.Name = "menuManage";
             this.menuManage.Size = new System.Drawing.Size(62, 19);
@@ -194,11 +192,6 @@ namespace AccountingSystem
             this.menuBeginningBalances.Name = "menuBeginningBalances";
             this.menuBeginningBalances.Size = new System.Drawing.Size(223, 22);
             this.menuBeginningBalances.Text = "Beginning Balances...";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(220, 6);
             // 
             // menuBudgetAppropriation
             // 
@@ -344,7 +337,6 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuCollectingOfficer;
         private System.Windows.Forms.ToolStripMenuItem menuBudgetAppropriation;
         private System.Windows.Forms.ToolStripMenuItem menuJEV;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem menuReportJournals;
         private System.Windows.Forms.ToolStripMenuItem menuReportGJ;
         private System.Windows.Forms.ToolStripMenuItem menuReportCRJ;

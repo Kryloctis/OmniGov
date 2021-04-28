@@ -185,51 +185,6 @@ namespace ACC.Data
             }
         }
 
-        public bool allotmentReleaseNumExist(string alltomentReleaseNum)
-        {
-            try
-            {
-                var parameters = new object[][]
-               {
-                    new object[] { "@aro_no", DbType.String, alltomentReleaseNum}
-               };
-
-                string query = $"SELECT id FROM {tableName} WHERE aro_no = @aro_no";
-                string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return false;
-        }
-
-        public bool allotmentReleaseNumExist(int id, string alltomentReleaseNum)
-        {
-            try
-            {
-                var parameters = new object[][]
-               {
-                    new object[] { "@id", DbType.String, id},
-                    new object[] { "@aro_no", DbType.String, alltomentReleaseNum}
-               };
-
-                string query = $"SELECT id FROM {tableName} WHERE  id <> @id AND aro_no = @aro_no";
-                string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return false;
-        }
-
         public DataTable GetViewRecords(int fppId, int? othersFPPId, int fundID, int allotmentClassId, short year)
         {
             try
@@ -401,6 +356,130 @@ namespace ACC.Data
             }
 
             return record;
+        }
+
+        public Dictionary<string, string> GetTotalAllotmentReleaseAmount(int fundID, int fppID, int? othersFPPID, int allotmentClassId, int AccountId)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id",DbType.Int32, fundID},
+                    new object[] { "@function_program_project_id",DbType.Int32,  fppID},
+                    new object[] { "@others_fpp_id", DbType.String, othersFPPID },
+                    new object[] { "@allotment_classes_id",DbType.String, allotmentClassId},
+                    new object[] { "@general_ledger_accounts_id", DbType.Int32, AccountId },
+                };
+
+                string query = $"SELECT " +
+                    $"COALESCE (SUM(a.amount), 0.00) AS total_allotment_amount " +
+                    $"FROM {tableName} a " +
+                    $"JOIN budget_appropriations b ON b.id = a.budget_appropriations_id " +
+                    $"WHERE b.funds_id = @funds_id " +
+                    $"AND b.function_program_project_id = @function_program_project_id " +
+                    $"AND b.others_fpp_id <=> @others_fpp_id " +
+                    $"AND b.allotment_classes_id = @allotment_classes_id " +
+                    $"AND b.general_ledger_accounts_id = @general_ledger_accounts_id";
+
+                using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("total_allotment_amount", item[0].ToString());
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
+        }
+
+        public bool BulkInsert(List<AllotmentReleaseModel> allotmentReleaseModelList)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope()) 
+                {
+                    foreach (var item in allotmentReleaseModelList) 
+                    {
+                        var parameters = new object[][]
+                        {
+                            new object[] { "@budget_appropriations_id", DbType.Int32, item.BudgetAppropriationsID},
+                            new object[] { "@aro_no", DbType.String, item.ARONumber},
+                            new object[] { "@purpose", DbType.String, item.Purpose},
+                            new object[] { "@date_issued", DbType.DateTime, item.DateIssued},
+                            new object[] { "@amount", DbType.Decimal, item.amount}
+                        };
+
+                        string query = $"INSERT INTO {tableName} (budget_appropriations_id, aro_no, purpose, date_issued, amount) VALUES (@budget_appropriations_id, @aro_no, @purpose, @date_issued, @amount)";
+                        _=_mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    }
+
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool allotmentReleaseExist(int budgetAppropriationId, string dateIssued)
+        {
+            try
+            {
+                var parameters = new object[][]
+             {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId},
+                    new object[] { "@date_issued", DbType.String, dateIssued }
+             };
+
+                string query = $"SELECT id FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id AND date_issued = @date_issued";
+                string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return false;
+        }
+
+        public bool allotmentReleaseExist(int id, int budgetAppropriationId, string dateIssued)
+        {
+            try
+            {
+                var parameters = new object[][]
+             {
+                    new object[] { "@id", DbType.Int32, id},
+                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId},
+                    new object[] { "@date_issued", DbType.String, dateIssued }
+             };
+
+                string query = $"SELECT id FROM {tableName} WHERE id <> @id AND budget_appropriations_id = @budget_appropriations_id AND date_issued = @date_issued";
+                string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return false;
         }
     }
 }

@@ -53,7 +53,40 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new NotImplementedException();
+            var record = new Dictionary<string, string>();
+            try
+            {
+                var parameters = new object[][]
+               {
+                   new object[] {"@id", DbType.Int32, Id},
+               };
+                string query = $"SELECT funds_id, function_program_project_id, others_fpp_id, allotment_classes_id, general_ledger_accounts_id, date_entry, year, amount, created_at, updated_at FROM {tableName} WHERE id = @id";
+
+                using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("funds_id", item[0].ToString());
+                        record.Add("function_program_project_id", item[1].ToString());
+                        record.Add("others_fpp_id", item[2].ToString());
+                        record.Add("allotment_classes_id", item[3].ToString());
+                        record.Add("general_ledger_accounts_id", item[4].ToString());
+                        record.Add("date_entry", item[5].ToString());
+                        record.Add("year", item[6].ToString());
+                        record.Add("amount", item[7].ToString());
+                        record.Add("created_at", item[8].ToString());
+                        record.Add("updated_at", item[9].ToString());
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return record;
         }
 
         public DataTable GetRecords()
@@ -223,6 +256,7 @@ namespace ACC.Data
 
             return record;
         }
+
         public Dictionary<string, string> GetViewRecordByIDs(int budgetAppID, int fppID, int? othersFPPID, int allotmentClassID, int genLedgerAccID)
         {
             var record = new Dictionary<string, string>();
@@ -330,6 +364,58 @@ namespace ACC.Data
             }
         }
 
+        public DataTable GetViewRecordsByIds(int fppID, int allotmentClassID, int? othersFPPID, int typeOfFund, string dateEntry)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@fpp_id", DbType.Int32, fppID},
+                    new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassID},
+                    new object[] { "@others_fpp_id", DbType.String, othersFPPID },
+                    new object[] { "@funds_id", DbType.Int32, typeOfFund},
+                    new object[] { "@date_entry", DbType.String, dateEntry}
+                };
+
+                string query = $"SELECT " +
+                    $"budget_appropriations_id, " +
+                    $"funds_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"fpp_id, " +
+                    $"fpp_name, " +
+                    $"others_fpp_id, " +
+                    $"others_fpp_name, " +
+                    $"allotment_classes_id, " +
+                    $"allotment_code, " +
+                    $"allotment_name, " +
+                    $"general_ledger_acc_id, " +
+                    $"account_code, " +
+                    $"ledger_code, " +
+                    $"ledger_name, " +
+                    $"date_entry, " +
+                    $"year, " +
+                    $"appropriation," +
+                    $"total_allotment_release, " +
+                    $"appropriation_balance, " +
+                    $"created_at, " +
+                    $"updated_at " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE fpp_id = @fpp_id " +
+                    $"AND allotment_classes_id = @allotment_classes_id " +
+                    $"AND others_fpp_id <=> @others_fpp_id " +
+                    $"AND funds_id = @funds_id " +
+                    $"AND date_entry <= @date_entry";
+
+                var dtPermissions = new DataTable();
+                return mySqlGenericCommands.FillBySearch(query, dtPermissions, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public DataTable GetExistedOthersFPPrecordsByFPPID(int fppID, int allotment_classes_id, int funds_id, Int16 year) 
         {
             try
@@ -420,6 +506,8 @@ namespace ACC.Data
                 throw;
             }
         }
+
+     
         #endregion Validations
     }
 }
