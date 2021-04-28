@@ -12,8 +12,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 {
     public partial class ucObligationRequestMain : UserControl
     {
-        int fundId = 0;
-        int allotmentClassId = 0;
+        internal int fundId = 0;
+        internal int allotmentClassId = 0;
 
         public ucObligationRequestMain()
         {
@@ -326,5 +326,21 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         #endregion Validations
 
-    }
+        private void ShowObligationRequestAdd()
+        {
+            var frmObligationRequestAdd = new frmObligationRequestAdd();
+            var ucObligationRequestAdd = frmObligationRequestAdd.ucObligationRequest1;
+
+            ucObligationRequestAdd.allotmentClassId = allotmentClassId;
+
+            frmObligationRequestAdd.ShowDialog();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            ShowObligationRequestAdd();
+        }   
+
+
+    }   
 }
