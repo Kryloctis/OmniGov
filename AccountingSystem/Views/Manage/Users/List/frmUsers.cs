@@ -1,12 +1,7 @@
 ﻿using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Users.List
@@ -89,6 +84,15 @@ namespace AccountingSystem.Views.Manage.Users.List
                         _ = usersRepository.Delete(usersModelList);
                         LoadRecords();
                     }
+                }
+            }
+            catch (MySqlException mysqlEx)
+            {
+                switch (mysqlEx.Number)
+                {
+                    case 1451:
+                        Helper.MessageBoxError("Cannot delete user because it is referenced to another record.");
+                        break;
                 }
             }
             catch (Exception ex)

@@ -29,7 +29,6 @@ namespace AccountingSystem.Views.Manage.Users.List
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUsersEdit));
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -44,19 +43,21 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 246);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 191);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(512, 36);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(494, 27);
             this.flowLayoutPanel1.TabIndex = 4;
             // 
             // btnCancel
             // 
             this.btnCancel.CausesValidation = false;
-            this.btnCancel.Location = new System.Drawing.Point(415, 3);
+            this.btnCancel.Location = new System.Drawing.Point(409, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnCancel.Size = new System.Drawing.Size(94, 29);
+            this.btnCancel.Size = new System.Drawing.Size(82, 22);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -64,12 +65,13 @@ namespace AccountingSystem.Views.Manage.Users.List
             // btnSave
             // 
             this.btnSave.CausesValidation = false;
-            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(315, 3);
+            this.btnSave.Location = new System.Drawing.Point(321, 2);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSave.Size = new System.Drawing.Size(94, 29);
+            this.btnSave.Size = new System.Drawing.Size(82, 22);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -77,23 +79,25 @@ namespace AccountingSystem.Views.Manage.Users.List
             // 
             // ucUsers1
             // 
-            this.ucUsers1.Location = new System.Drawing.Point(0, 7);
+            this.ucUsers1.Location = new System.Drawing.Point(12, 11);
+            this.ucUsers1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucUsers1.Name = "ucUsers1";
-            this.ucUsers1.Size = new System.Drawing.Size(509, 234);
+            this.ucUsers1.Size = new System.Drawing.Size(482, 176);
             this.ucUsers1.TabIndex = 5;
             // 
             // frmUsersEdit
             // 
             this.AcceptButton = this.btnSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(512, 282);
+            this.ClientSize = new System.Drawing.Size(494, 218);
             this.Controls.Add(this.ucUsers1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MinimumSize = new System.Drawing.Size(530, 329);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MinimumSize = new System.Drawing.Size(466, 257);
             this.Name = "frmUsersEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit User";
