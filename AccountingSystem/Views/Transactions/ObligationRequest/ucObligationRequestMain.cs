@@ -20,6 +20,22 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             InitializeComponent();
         }
 
+        internal void ResetForm()
+        {
+            panel1.Enabled = true;
+            dtDateRequested.Enabled = true;
+            LoadFPPCombobox();
+            LoadFunds();
+            LoadAllotmentClasses();
+            cmbxOthersFPP.Enabled = false;
+            mskObligationSeriesNo.Text = string.Empty;
+            dtDateRequested.Value = DateTime.Now;
+            txtPayee.Text = string.Empty;
+            txtExplanation.Text = string.Empty;
+            txtReferenceNo.Text = string.Empty;
+            dgObligationRequests.Rows.Clear();
+        }
+
         internal string GetFormErrors()
         {
             var errorArray = new string[6];
@@ -30,6 +46,16 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             errorArray[3] = epPayee.GetError(txtPayee);
             errorArray[4] = epExplanation.GetError(txtExplanation);
             errorArray[5] = epReferenceNo.GetError(txtReferenceNo);
+
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        internal string GetFormErrorsAddToList() 
+        {
+            var errorArray = new string[2];
+
+            errorArray[0] = epFPP.GetError(cmbxFPP);
+            errorArray[1] = epOtherFPP.GetError(cmbxOthersFPP);
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
@@ -254,11 +280,35 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             GenerateObligationNo(mskTxtObligationNoTemplate);
         }
 
+        private void LoadDatagridFormat() 
+        {
+            try
+            {
+                dgObligationRequests.Columns.Add("accountId", "Account ID");
+                dgObligationRequests.Columns.Add("accountName", "Account Name");
+                dgObligationRequests.Columns.Add("accountCode", "Account Code");
+                dgObligationRequests.Columns.Add("obligationAmount", "Amount");
+
+                //Cell Format
+                dgObligationRequests.Columns["accountId"].Visible = false;
+                dgObligationRequests.Columns["accountName"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgObligationRequests.Columns["accountCode"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgObligationRequests.Columns["obligationAmount"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgObligationRequests.Columns["obligationAmount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dgObligationRequests.Columns["obligationAmount"].DefaultCellStyle.Format = "N2";
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
         private void ucObligationRequestMain_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
                 Helper.DatagridDefaultStyle(dgObligationRequests, true);
+                LoadDatagridFormat();
                 LoadFPPCombobox();
                 LoadFunds();
                 LoadAllotmentClasses();
@@ -328,7 +378,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void ShowObligationRequestAdd()
         {
-            var frmObligationRequestAdd = new frmObligationRequestAdd();
+            var frmObligationRequestAdd = new frmObligationRequestAdd(this);
             var ucObligationRequestAdd = frmObligationRequestAdd.ucObligationRequest1;
             int fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
             int? otherFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
@@ -343,9 +393,32 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             frmObligationRequestAdd.ShowDialog();
         }
 
+        private bool CustomValidateAddToList() 
+        {
+            try
+            {
+                bool fppValidation = Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP") || FPPNameExist(epFPP, cmbxFPP);
+                bool otherFPPValidation = OthersFPPNameExist(epOtherFPP, cmbxOthersFPP);
+
+
+                if (fppValidation || otherFPPValidation) 
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            ShowObligationRequestAdd();
+            if (CustomValidateAddToList()) 
+                Helper.MessageBoxError(GetFormErrorsAddToList());
+            else
+                ShowObligationRequestAdd();
         }   
     }   
 }

@@ -19,8 +19,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             InitializeComponent();
             Helper.LoadFormIcon(this);
             btnSave.Click += new EventHandler(BtnSave_Click);
+            btnNew.Click += new EventHandler(BtnNew_Click);
             uc = ucObligationRequestMain1;
-        }   
+        }
+
+        private void BtnNew_Click(object sender, EventArgs e)
+        {
+            uc.ResetForm();
+        }
 
         private void frmObligationRequestMain_Load(object sender, EventArgs e)
         {

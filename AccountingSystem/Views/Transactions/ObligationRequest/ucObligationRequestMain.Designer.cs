@@ -256,6 +256,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.cmbxOthersFPP.Name = "cmbxOthersFPP";
             this.cmbxOthersFPP.Size = new System.Drawing.Size(477, 23);
             this.cmbxOthersFPP.TabIndex = 6;
+            this.cmbxOthersFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxOthersFPP_Validating);
+            this.cmbxOthersFPP.Validated += new System.EventHandler(this.cmbxOthersFPP_Validated);
             // 
             // cmbxFPP
             // 
@@ -264,6 +266,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.cmbxFPP.Name = "cmbxFPP";
             this.cmbxFPP.Size = new System.Drawing.Size(477, 23);
             this.cmbxFPP.TabIndex = 5;
+            this.cmbxFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxFPP_Validating);
+            this.cmbxFPP.Validated += new System.EventHandler(this.cmbxFPP_Validated);
             // 
             // label2
             // 
@@ -385,7 +389,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.TextBox txtExplanation;
         internal System.Windows.Forms.TextBox txtReferenceNo;
         internal System.Windows.Forms.ErrorProvider epReferenceNo;
-        private System.Windows.Forms.Panel panel1;
         internal System.Windows.Forms.ComboBox cmbxOthersFPP;
         internal System.Windows.Forms.ComboBox cmbxFPP;
         private System.Windows.Forms.Label label2;
@@ -394,5 +397,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelAllotment;
         private System.Windows.Forms.GroupBox groupBox1;
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFunds;
+        internal System.Windows.Forms.Panel panel1;
     }
 }

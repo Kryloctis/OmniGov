@@ -12,23 +12,43 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 {
     public partial class frmObligationRequestAdd : Form
     {
-        private ucObligationRequest uc;
-        public frmObligationRequestAdd()
+        private ucObligationRequestMain _ucObligationRequestMain;
+        private ucObligationRequest _ucObligationRequest;
+
+        public frmObligationRequestAdd(ucObligationRequestMain ucObligationRequestMain)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            uc = ucObligationRequest1;
+            _ucObligationRequest = ucObligationRequest1;
+            _ucObligationRequestMain = ucObligationRequestMain;
         }
 
         private bool AddToList() 
         {
             try
             {
-                if (!uc.ValidateChildren()) 
+                if (!_ucObligationRequest.ValidateChildren()) 
                 {
-                    Helper.MessageBoxError(uc.GetFormErrors());
+                    Helper.MessageBoxError(_ucObligationRequest.GetFormErrors());
                     return false;
                 }
+
+                ushort accountId = Convert.ToUInt16(_ucObligationRequest.cmbxAccount.SelectedValue);
+                string accountName = _ucObligationRequest.cmbxAccount.Text;
+                string accountCode = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(accountId)["account_code"];
+                decimal amount = _ucObligationRequest.nudAmount.Value;
+
+
+                var data = new object[]
+                {
+                    accountId,
+                    accountName,
+                    accountCode,
+                    amount
+                };
+
+                _ucObligationRequestMain.dgObligationRequests.Rows.Add(data);
+
                 return true;
             }
             catch (Exception ex)
@@ -36,6 +56,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 Helper.MessageBoxError(ex.Message);
             }
             return false;
+        }
+
+        private void DisableComponents()
+        {
+            _ucObligationRequestMain.panel1.Enabled = false;
+            _ucObligationRequestMain.dtDateRequested.Enabled = false;
         }
 
         private void frmObligationRequestAdd_Load(object sender, EventArgs e)
@@ -47,6 +73,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             if (AddToList()) 
             {
+                DisableComponents();
                 Close();
             }
         }
