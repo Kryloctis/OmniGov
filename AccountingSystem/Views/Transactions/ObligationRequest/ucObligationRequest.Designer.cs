@@ -54,7 +54,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.cmbxAccount.Name = "cmbxAccount";
             this.cmbxAccount.Size = new System.Drawing.Size(299, 23);
             this.cmbxAccount.TabIndex = 1;
-            this.cmbxAccount.SelectedValueChanged += new System.EventHandler(this.cmbxAccount_SelectedValueChanged);
             this.cmbxAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAccount_Validating);
             this.cmbxAccount.Validated += new System.EventHandler(this.cmbxAccount_Validated);
             // 

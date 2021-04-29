@@ -51,6 +51,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
                 cmbxAccount.Enabled = true;
                 cmbxAccount.SelectedIndex = -1;
+                cmbxAccount.SelectedValueChanged += new System.EventHandler(cmbxAccount_SelectedValueChanged);
             }
             catch (Exception ex)
             {
@@ -73,7 +74,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private decimal GetTotalAllotmentBalanceAmount()
         {
-            if (cmbxAccount.SelectedIndex > 0) 
+            if (cmbxAccount.SelectedIndex > -1) 
             {
                 int accountId = Convert.ToInt32(cmbxAccount.SelectedValue);
 
@@ -168,7 +169,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
-        
+
         #endregion Validations
     }
 }
