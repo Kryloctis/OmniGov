@@ -60,6 +60,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.flowLayoutPanelAllotment = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelFunds = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnEdit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgObligationRequests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epPayee)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
@@ -80,6 +81,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.dgObligationRequests.RowTemplate.Height = 25;
             this.dgObligationRequests.Size = new System.Drawing.Size(571, 185);
             this.dgObligationRequests.TabIndex = 11;
+            this.dgObligationRequests.SelectionChanged += new System.EventHandler(this.dgObligationRequests_SelectionChanged);
             // 
             // label3
             // 
@@ -149,7 +151,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(421, 506);
+            this.btnAdd.Location = new System.Drawing.Point(340, 506);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 12;
@@ -165,6 +167,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnRemove.TabIndex = 13;
             this.btnRemove.Text = "Remove";
             this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // txtPayee
             // 
@@ -327,6 +330,15 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.flowLayoutPanelFunds.Size = new System.Drawing.Size(563, 31);
             this.flowLayoutPanelFunds.TabIndex = 3;
             // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(421, 506);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnEdit.TabIndex = 12;
+            this.btnEdit.Text = "Edit...";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            // 
             // ucObligationRequestMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -337,6 +349,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.Controls.Add(this.txtReferenceNo);
             this.Controls.Add(this.txtPayee);
             this.Controls.Add(this.btnRemove);
+            this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.mskTxtObligationNoTemplate);
             this.Controls.Add(this.mskObligationSeriesNo);
@@ -398,5 +411,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private System.Windows.Forms.GroupBox groupBox1;
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFunds;
         internal System.Windows.Forms.Panel panel1;
+        internal System.Windows.Forms.Button btnEdit;
     }
 }

@@ -250,9 +250,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 LoadAllotmentClasses();
                 GenerateObligationNo(mskTxtObligationNoTemplate);
                 cmbxOthersFPP.Enabled = false;
+                btnEdit.Enabled = false;
+                btnRemove.Enabled = false;
             }
         }
-
 
         #region Validations
 
@@ -338,7 +339,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epPayee, txtPayee, "Payee");
         }
-
         private void txtPayee_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(epPayee, txtPayee);
@@ -435,6 +435,43 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 Helper.MessageBoxError(GetFormErrorsAddToList());
             else
                 ShowObligationRequestAdd();
-        }   
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dgObligationRequests.SelectedRows)
+            {
+                dgObligationRequests.Rows.Remove(row);
+            }
+        }
+
+        private void EnableDisableButtons()
+        {
+            int selectedRowCount = dgObligationRequests.SelectedRows.Count;
+
+            if (selectedRowCount == 1)
+            {
+                btnRemove.Enabled = true;
+                btnEdit.Enabled = true;
+                btnRemove.Text = "Remove (" + selectedRowCount + ")";
+            }
+            else if (selectedRowCount > 1)
+            {
+                btnRemove.Enabled = true;
+                btnEdit.Enabled = false;
+                btnRemove.Text = "Remove (" + selectedRowCount + ")";
+            }
+            else
+            {
+                btnRemove.Enabled = false;
+                btnEdit.Enabled = false;
+                btnRemove.Text = "Remove";
+            }
+        }
+
+        private void dgObligationRequests_SelectionChanged(object sender, EventArgs e)
+        {
+            EnableDisableButtons();
+        }
     }   
 }
