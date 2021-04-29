@@ -14,7 +14,6 @@ using AccountingSystem.Views.Manage.BudgetAppropriations;
 using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.Ledgers;
-using AccountingSystem.Views.Manage.AllotmentRelease;
 
 namespace AccountingSystem
 {
@@ -34,10 +33,18 @@ namespace AccountingSystem
             menuGeneralLedgerReport.Click += new EventHandler(MenuGeneralLedgerReport_Click);
         }
 
+        private void LoadFunds()
+        {
+            cmbFund.DataSource = Factory.FundsRepository().GetRecords();
+            cmbFund.DisplayMember = "fund_name";
+            cmbFund.ValueMember = "id";
+        }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
             menuSubsidiaryLedgerReport.Enabled = false;
+            LoadFunds();
         }
 
         private void menuJournals_Click(object sender, EventArgs e)

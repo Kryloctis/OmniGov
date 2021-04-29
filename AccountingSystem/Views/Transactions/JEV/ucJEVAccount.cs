@@ -10,7 +10,6 @@ namespace AccountingSystem.Views.Transactions.JEV
     {
         internal byte fundId;
 
-
         public ucJEVAccount()
         {
             InitializeComponent();
