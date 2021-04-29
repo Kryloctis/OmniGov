@@ -21,6 +21,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             Helper.LoadFormIcon(this);
             _ucObligationRequest = ucObligationRequest1;
             _ucObligationRequestMain = ucObligationRequestMain;
+            _ucObligationRequest.LoadReference(_ucObligationRequestMain);
         }
 
         private bool AddToList() 

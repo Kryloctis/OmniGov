@@ -34,11 +34,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             btnCancel.Enabled = false;
         }
 
-        private bool SaveObligationRequest() 
+        private bool SaveObligationRequest()
         {
             try
             {
-                if (!uc.ValidateChildren()) 
+                if (!uc.ValidateChildren() || uc.ObligationRequestListEmpty()) 
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;

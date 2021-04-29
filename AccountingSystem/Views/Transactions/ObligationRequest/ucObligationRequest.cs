@@ -18,10 +18,16 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal int? otherFPPId = null;
         internal int allotmentClassId = 0;
         internal DateTime dateIssued = DateTime.Now;
+        ucObligationRequestMain _ucObligationRequestMain;
 
         public ucObligationRequest()
         {
             InitializeComponent();
+        }
+
+        internal void LoadReference(ucObligationRequestMain ucObligationRequestMain)
+        {
+            _ucObligationRequestMain = ucObligationRequestMain;
         }
 
         internal string GetFormErrors()
@@ -91,6 +97,31 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         #region Validations
 
+        internal bool AccountExistOnList() 
+        {
+            try
+            {
+                int accountId = Convert.ToInt32(cmbxAccount.SelectedValue);
+
+                foreach (DataGridViewRow row in _ucObligationRequestMain.dgObligationRequests.Rows)
+                {
+                    int cellAccountId = Convert.ToInt32(row.Cells["accountId"].Value);
+                    bool accountExist = cellAccountId == accountId ? true : false;
+
+                    if (accountExist)
+                    {
+                        epAccount.SetError(cmbxAccount, "Account is already on the list.");
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        } 
+
         private bool AccountNotExist(ErrorProvider ep, ComboBox comboBox) 
         {
             try
@@ -112,8 +143,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             if (string.IsNullOrEmpty(cmbxAccount.Text))
                 e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbxAccount, "Account");
-            else
+            else if (AccountNotExist(epAccount, cmbxAccount))
                 e.Cancel = AccountNotExist(epAccount, cmbxAccount);
+            else
+                e.Cancel = AccountExistOnList();
         }
 
         private void cmbxAccount_Validated(object sender, EventArgs e)

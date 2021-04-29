@@ -38,14 +38,16 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[6];
+            var errorArray = new string[7];
 
+            ObligationRequestListEmpty();
             errorArray[0] = epFPP.GetError(cmbxFPP);
             errorArray[1] = epOtherFPP.GetError(cmbxOthersFPP);
             errorArray[2] = epObligationNo.GetError(mskTxtObligationNoTemplate);
             errorArray[3] = epPayee.GetError(txtPayee);
             errorArray[4] = epExplanation.GetError(txtExplanation);
             errorArray[5] = epReferenceNo.GetError(txtReferenceNo);
+            errorArray[6] = Tag == null ? string.Empty : Tag.ToString();
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
@@ -209,7 +211,64 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             maskedTextBox.Text = obligationNoTemplate;
         }
 
+        private void LoadDatagridFormat()
+        {
+            try
+            {
+                dgObligationRequests.Columns.Add("accountId", "Account ID");
+                dgObligationRequests.Columns.Add("accountName", "Account Name");
+                dgObligationRequests.Columns.Add("accountCode", "Account Code");
+                dgObligationRequests.Columns.Add("obligationAmount", "Amount");
+
+                //Cell Format
+                dgObligationRequests.Columns["accountId"].Visible = false;
+                dgObligationRequests.Columns["accountName"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgObligationRequests.Columns["accountCode"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgObligationRequests.Columns["obligationAmount"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgObligationRequests.Columns["obligationAmount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dgObligationRequests.Columns["obligationAmount"].DefaultCellStyle.Format = "N2";
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void dtDateRequested_ValueChanged(object sender, EventArgs e)
+        {
+            GenerateObligationNo(mskTxtObligationNoTemplate);
+        }
+
+        private void ucObligationRequestMain_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                Helper.DatagridDefaultStyle(dgObligationRequests, true);
+                LoadDatagridFormat();
+                LoadFPPCombobox();
+                LoadFunds();
+                LoadAllotmentClasses();
+                GenerateObligationNo(mskTxtObligationNoTemplate);
+                cmbxOthersFPP.Enabled = false;
+            }
+        }
+
+
         #region Validations
+
+        internal bool ObligationRequestListEmpty() 
+        {
+            if (dgObligationRequests.Rows.Count <= 0)
+            {
+              Tag = "Obligation Request list is empty";
+              return true;
+            }
+            else
+            {
+              Tag = string.Empty;
+              return false;
+            }
+        }
 
         private bool FPPNameExist(ErrorProvider ep, ComboBox comboBox)
         {
@@ -273,48 +332,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private void cmbxOthersFPP_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(epOtherFPP, cmbxOthersFPP);
-        }
-
-        private void dtDateRequested_ValueChanged(object sender, EventArgs e)
-        {
-            GenerateObligationNo(mskTxtObligationNoTemplate);
-        }
-
-        private void LoadDatagridFormat() 
-        {
-            try
-            {
-                dgObligationRequests.Columns.Add("accountId", "Account ID");
-                dgObligationRequests.Columns.Add("accountName", "Account Name");
-                dgObligationRequests.Columns.Add("accountCode", "Account Code");
-                dgObligationRequests.Columns.Add("obligationAmount", "Amount");
-
-                //Cell Format
-                dgObligationRequests.Columns["accountId"].Visible = false;
-                dgObligationRequests.Columns["accountName"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgObligationRequests.Columns["accountCode"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgObligationRequests.Columns["obligationAmount"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgObligationRequests.Columns["obligationAmount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                dgObligationRequests.Columns["obligationAmount"].DefaultCellStyle.Format = "N2";
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        private void ucObligationRequestMain_Load(object sender, EventArgs e)
-        {
-            if (!DesignMode)
-            {
-                Helper.DatagridDefaultStyle(dgObligationRequests, true);
-                LoadDatagridFormat();
-                LoadFPPCombobox();
-                LoadFunds();
-                LoadAllotmentClasses();
-                GenerateObligationNo(mskTxtObligationNoTemplate);
-                cmbxOthersFPP.Enabled = false;
-            }
         }
 
         private void txtPayee_Validating(object sender, CancelEventArgs e)
@@ -399,7 +416,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             {
                 bool fppValidation = Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP") || FPPNameExist(epFPP, cmbxFPP);
                 bool otherFPPValidation = OthersFPPNameExist(epOtherFPP, cmbxOthersFPP);
-
 
                 if (fppValidation || otherFPPValidation) 
                 {
