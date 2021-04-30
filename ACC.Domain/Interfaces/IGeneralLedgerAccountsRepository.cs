@@ -19,7 +19,6 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetAllViewRecords();
 
-
         bool NameExist(string txtName);
 
         bool NameExist(int id, string txtName);

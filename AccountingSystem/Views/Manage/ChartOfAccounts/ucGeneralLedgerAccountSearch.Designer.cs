@@ -43,9 +43,10 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.cmbGeneralLedgerAccount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbGeneralLedgerAccount.FormattingEnabled = true;
+            this.epAccount.SetIconPadding(this.cmbGeneralLedgerAccount, 35);
             this.cmbGeneralLedgerAccount.Location = new System.Drawing.Point(0, 0);
             this.cmbGeneralLedgerAccount.Name = "cmbGeneralLedgerAccount";
-            this.cmbGeneralLedgerAccount.Size = new System.Drawing.Size(320, 23);
+            this.cmbGeneralLedgerAccount.Size = new System.Drawing.Size(308, 23);
             this.cmbGeneralLedgerAccount.TabIndex = 4;
             this.cmbGeneralLedgerAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbGeneralLedgerAccount_Validating);
             this.cmbGeneralLedgerAccount.Validated += new System.EventHandler(this.cmbGeneralLedgerAccount_Validated);
@@ -54,7 +55,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             // 
             this.btnGet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGet.Image = ((System.Drawing.Image)(resources.GetObject("btnGet.Image")));
-            this.btnGet.Location = new System.Drawing.Point(326, -1);
+            this.btnGet.Location = new System.Drawing.Point(314, -1);
             this.btnGet.Name = "btnGet";
             this.btnGet.Size = new System.Drawing.Size(25, 23);
             this.btnGet.TabIndex = 5;
@@ -70,10 +71,12 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.Controls.Add(this.btnGet);
             this.Controls.Add(this.cmbGeneralLedgerAccount);
+            this.epAccount.SetIconPadding(this, 30);
             this.Name = "ucGeneralLedgerAccountSearch";
-            this.Size = new System.Drawing.Size(369, 31);
+            this.Size = new System.Drawing.Size(366, 31);
             ((System.ComponentModel.ISupportInitialize)(this.epAccount)).EndInit();
             this.ResumeLayout(false);
 

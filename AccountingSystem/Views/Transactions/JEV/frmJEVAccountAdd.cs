@@ -4,7 +4,6 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
-
     public partial class frmJEVAccountAdd : Form
     {
         private readonly ucJEV ucJEV;
@@ -25,7 +24,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             string generalLedgerId = uc.cmbAccount.SelectedValue.ToString();
             string subsidiaryId = !string.IsNullOrWhiteSpace(uc.cmbSubsidiary.Text) ? uc.cmbSubsidiary.SelectedValue.ToString() : null;
             string subsidiaryName = uc.cmbSubsidiary.Text;
-            string generalLedgerName = uc.cmbAccount.Text;
             string amount = uc.nudAmount.Value.ToString("N2");
             bool isDebit = uc.radioDebit.Checked;
             bool? isDeposit;
@@ -37,7 +35,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             else
                 isDeposit = null;
 
-            Dictionary<string, string> accountData = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(Convert.ToUInt16(generalLedgerId));
+            Dictionary<string, string> generalLedgerDict= Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(Convert.ToUInt16(generalLedgerId));
 
             object[] accountRow;
             if (isDebit)
@@ -51,8 +49,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                     isDebit,
                     isDeposit,
                     fppName,
-                    generalLedgerName,
-                    accountData["account_code"],
+                    generalLedgerDict["ledger_name"],
+                    generalLedgerDict["account_code"],
                     subsidiaryName,
                     amount,
                     "",
@@ -69,8 +67,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                     isDebit,
                     isDeposit,
                     fppName,
-                    $"     {generalLedgerName}",
-                    accountData["account_code"],
+                    $"     {generalLedgerDict["ledger_name"]}",
+                    generalLedgerDict["account_code"],
                     subsidiaryName,
                     "",
                     amount,
@@ -85,7 +83,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             var uc = ucjevAccount1;
             uc.LoadFPP();
-            uc.LoadGeneralLedgers();
             uc.cmbFPP.SelectedIndex = -1;
             uc.cmbAccount.SelectedIndex = -1;
 

@@ -12,7 +12,6 @@ namespace ACC.Data
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "general_ledger_accounts";
         private readonly string viewTableName = "view_general_ledger_accounts";
-        
 
         public GeneralLedgerAccountsRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -140,15 +139,31 @@ namespace ACC.Data
 
         public bool IdExist(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, id },
+                };
+
+                string query = $"SELECT id FROM {tableName} WHERE id = @id";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
             throw new NotImplementedException();
         }
-
-        #region Validations
 
         public bool NameExist(string txtName)
         {
@@ -183,7 +198,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, id }
                 };
 
-                string query = $"SELECT id FROM {tableName} WHERE id = @id AND ledger_name = @ledger_name";
+                string query = $"SELECT id FROM {tableName} WHERE id <> @id AND ledger_name = @ledger_name";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -197,10 +212,6 @@ namespace ACC.Data
             return false;
         }
 
-        #endregion Validations
-
-
-        //Budget System
         public DataTable GetViewRecordsByMajAccGroupName(string majAccGroupName)
         {
             try

@@ -31,6 +31,8 @@ namespace AccountingSystem
             menuReportADADJ.Click += new EventHandler(MenuReportADADisbursementsJournal_Click);
             menuSAAOB.Click += new EventHandler(MenuSAAOB_Click);
             menuGeneralLedgerReport.Click += new EventHandler(MenuGeneralLedgerReport_Click);
+            btnJournalEntry.Click += new EventHandler(BtnJournalEntry_Click);
+            btnObligationRequest.Click += new EventHandler(BtnObligationRequest_Click);
         }
 
         private void LoadFunds()
@@ -145,6 +147,16 @@ namespace AccountingSystem
         private void MenuGeneralLedgerReport_Click(object sender, EventArgs e)
         {
             _ = new frmGeneralLedgerReport().ShowDialog();
+        }
+
+        private void BtnJournalEntry_Click(object sender, EventArgs e)
+        {
+            _ = new frmJEV().ShowDialog();
+        }
+
+        private void BtnObligationRequest_Click(object sender, EventArgs e)
+        {
+            _ = new frmJEV().ShowDialog();
         }
     }
 }

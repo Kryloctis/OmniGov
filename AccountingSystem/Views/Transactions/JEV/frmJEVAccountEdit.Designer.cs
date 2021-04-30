@@ -86,6 +86,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(501, 211);
             this.Controls.Add(this.flowLayoutPanel1);

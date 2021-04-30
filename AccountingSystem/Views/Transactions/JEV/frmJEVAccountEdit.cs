@@ -13,12 +13,14 @@ namespace AccountingSystem.Views.Transactions.JEV
     public partial class frmJEVAccountEdit : Form
     {
         private readonly ucJEV ucJEV;
+        private readonly ucJEVAccount ucJEVAccount;
 
         public frmJEVAccountEdit(ucJEV ucJEV)
         {
             InitializeComponent();
             this.ucJEV = ucJEV;
-            this.ucjevAccount1.fundId = ucJEV.fundId;
+            ucJEVAccount = ucjevAccount1;
+            ucJEVAccount.fundId = ucJEV.fundId;
         }
 
         private decimal GetAmountDebitCredit(bool isDebit)
@@ -49,37 +51,47 @@ namespace AccountingSystem.Views.Transactions.JEV
             var uc = ucjevAccount1;
             if (Convert.ToBoolean(isDeposit))
             {
-                MessageBox.Show("Collections");
                 uc.radioCollections.Checked = true;
                 return;
             }
 
-            MessageBox.Show("Deposits");
             uc.radioDeposits.Checked = true;
+        }
+
+        private void LoadSelectedGeneralLedgerAccount(ushort accountId, string accountCode, string accountName)
+        {
+            var accountDict = new Dictionary<int, string>();
+            var concatAccountName = $"{accountCode} - {accountName}";
+            accountDict.Add(accountId, concatAccountName);
+
+            ucJEVAccount.cmbAccount.DataSource = new BindingSource(accountDict, null);
+            ucJEVAccount.cmbAccount.DisplayMember = "value";
+            ucJEVAccount.cmbAccount.ValueMember = "key";
         }
 
         private void LoadSelectedRecord()
         {
-            var uc = ucjevAccount1;
             int rowIndex = ucJEV.dgAccounts.CurrentCell.RowIndex;
 
             object fppId = ucJEV.dgAccounts.Rows[rowIndex].Cells["FPPId"].Value;
-            object generalLedgerId = ucJEV.dgAccounts.Rows[rowIndex].Cells["GeneralLedgerId"].Value;
+            ushort generalLedgerId = Convert.ToUInt16(ucJEV.dgAccounts.Rows[rowIndex].Cells["GeneralLedgerId"].Value);
+            string accountCode = ucJEV.dgAccounts.Rows[rowIndex].Cells["AccountCode"].Value.ToString();
+            string accountName = ucJEV.dgAccounts.Rows[rowIndex].Cells["AccountName"].Value.ToString();
             object subsidiaryLedgerId = ucJEV.dgAccounts.Rows[rowIndex].Cells["SubsidiaryLedgerId"].Value;
             bool isDebit = (bool)ucJEV.dgAccounts.Rows[rowIndex].Cells["IsDebit"].Value;
             bool? isDeposit = (bool?)ucJEV.dgAccounts.Rows[rowIndex].Cells["IsDeposit"].Value;
             decimal amount = GetAmountDebitCredit(isDebit);
 
-            uc.cmbFPP.SelectedValue = fppId;
-            uc.cmbAccount.SelectedValue = generalLedgerId;
+            ucJEVAccount.cmbFPP.SelectedValue = fppId;
+            LoadSelectedGeneralLedgerAccount(generalLedgerId, accountCode, accountName);
             CheckedDebitCredit(isDebit);
             CheckedCollectionsDeposits(isDeposit);
 
-            uc.nudAmount.Value = amount;
+            ucJEVAccount.nudAmount.Value = amount;
 
             // load subsidiaries and select item
-            ucjevAccount1.LoadSubsidiary(Convert.ToUInt16(generalLedgerId));
-            if (subsidiaryLedgerId != null) uc.cmbSubsidiary.SelectedValue = subsidiaryLedgerId;
+            ucjevAccount1.LoadSubsidiary(generalLedgerId);
+            if (subsidiaryLedgerId != null) ucJEVAccount.cmbSubsidiary.SelectedValue = subsidiaryLedgerId;
         }
 
         private void UpdateAccount()
@@ -90,10 +102,9 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                 string fppId = uc.cmbFPP.SelectedValue.ToString();
                 string fppName = uc.cmbFPP.Text;
-                string generalLedgerId = uc.cmbAccount.SelectedValue.ToString();
+                ushort generalLedgerId = Convert.ToUInt16(uc.cmbAccount.SelectedValue);
                 string subsidiaryId = !string.IsNullOrWhiteSpace(uc.cmbSubsidiary.Text) ? uc.cmbSubsidiary.SelectedValue.ToString() : null;
                 string subsidiaryName = uc.cmbSubsidiary.Text;
-                string generalLedgerName = uc.cmbAccount.Text;
                 string amount = uc.nudAmount.Value.ToString("N2");
                 bool isDebit = uc.radioDebit.Checked;
                 bool? isDeposit;
@@ -105,7 +116,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 else
                     isDeposit = null;
 
-                Dictionary<string, string> accountData = Factory.GeneralLedgerAccountsRepository().GetRecordByID(Convert.ToInt32(generalLedgerId));
+                Dictionary<string, string> accountDict = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
 
                 int rowIndex = ucJEV.dgAccounts.CurrentCell.RowIndex;
 
@@ -115,8 +126,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                 ucJEV.dgAccounts.Rows[rowIndex].Cells["IsDebit"].Value = isDebit;
                 ucJEV.dgAccounts.Rows[rowIndex].Cells["IsDeposit"].Value = isDeposit;
                 ucJEV.dgAccounts.Rows[rowIndex].Cells["FPP"].Value = fppName;
-                ucJEV.dgAccounts.Rows[rowIndex].Cells["AccountName"].Value = generalLedgerName;
-                ucJEV.dgAccounts.Rows[rowIndex].Cells["AccountCode"].Value = accountData["account_code"];
+                ucJEV.dgAccounts.Rows[rowIndex].Cells["AccountName"].Value = accountDict["ledger_name"];
+                ucJEV.dgAccounts.Rows[rowIndex].Cells["AccountCode"].Value = accountDict["account_code"];
                 ucJEV.dgAccounts.Rows[rowIndex].Cells["Subsidiary"].Value = subsidiaryName;
 
                 if (isDebit)
@@ -137,27 +148,24 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void frmJEVAccountEdit_Load(object sender, EventArgs e)
         {
-            var uc = ucjevAccount1;
             Helper.LoadFormIcon(this);
-            uc.LoadFPP();
-            uc.LoadGeneralLedgers();
+            ucJEVAccount.LoadFPP();
             LoadSelectedRecord();
 
             if (ucJEV.journalName != "Cash Receipts Journal")
             {
-                uc.pnlCollectionsDeposits.Visible = false;
-                uc.radioDeposits.Checked = false;
-                uc.radioCollections.Checked = false;
+                ucJEVAccount.pnlCollectionsDeposits.Visible = false;
+                ucJEVAccount.radioDeposits.Checked = false;
+                ucJEVAccount.radioCollections.Checked = false;
             }
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            var uc = ucjevAccount1;
             // show error kung naa
-            if (!uc.ValidateChildren())
+            if (!ucJEVAccount.ValidateChildren())
             {
-                Helper.MessageBoxError(uc.GetFormErrors());
+                Helper.MessageBoxError(ucJEVAccount.GetFormErrors());
                 return;
             }
 

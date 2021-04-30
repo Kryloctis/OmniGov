@@ -121,6 +121,7 @@ namespace AccountingSystem
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnJournalEntry = new System.Windows.Forms.ToolStripButton();
             this.btnObligationRequest = new System.Windows.Forms.ToolStripButton();
+            this.ucGeneralLedgerAccountSearch1 = new AccountingSystem.Views.Manage.ChartOfAccounts.ucGeneralLedgerAccountSearch();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel16.SuspendLayout();
@@ -1049,12 +1050,22 @@ namespace AccountingSystem
             this.btnObligationRequest.Size = new System.Drawing.Size(153, 36);
             this.btnObligationRequest.Text = "Obligation Request...";
             // 
+            // ucGeneralLedgerAccountSearch1
+            // 
+            this.ucGeneralLedgerAccountSearch1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ucGeneralLedgerAccountSearch1.Location = new System.Drawing.Point(163, 329);
+            this.ucGeneralLedgerAccountSearch1.Name = "ucGeneralLedgerAccountSearch1";
+            this.ucGeneralLedgerAccountSearch1.Size = new System.Drawing.Size(367, 28);
+            this.ucGeneralLedgerAccountSearch1.TabIndex = 5;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1110, 538);
+            this.Controls.Add(this.ucGeneralLedgerAccountSearch1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.cmbFund);
@@ -1207,6 +1218,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnJournalEntry;
         private System.Windows.Forms.ToolStripButton btnObligationRequest;
+        private Views.Manage.ChartOfAccounts.ucGeneralLedgerAccountSearch ucGeneralLedgerAccountSearch1;
     }
 }
 

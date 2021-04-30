@@ -16,10 +16,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             DataTable dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbGeneralLedgerAccount.Text);
 
-            if (dtAccounts.Rows.Count == 0)
-            {
-
-            }
+            if (dtAccounts.Rows.Count == 0 || string.IsNullOrWhiteSpace(cmbGeneralLedgerAccount.Text)) return;
 
             var accountDict = new Dictionary<int, string>();
             foreach (DataRow item in dtAccounts.Rows)
@@ -34,11 +31,26 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             cmbGeneralLedgerAccount.DisplayMember = "value";
             cmbGeneralLedgerAccount.ValueMember = "key";
             cmbGeneralLedgerAccount.DroppedDown = true;
+
+            Helper.ClearErrorComboBox(epAccount, cmbGeneralLedgerAccount);
         }
 
         private void cmbGeneralLedgerAccount_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbGeneralLedgerAccount, "account");
+
+            if (!string.IsNullOrWhiteSpace(cmbGeneralLedgerAccount.Text))
+            {
+                int generalLedgerId = Convert.ToInt32(cmbGeneralLedgerAccount.SelectedValue);
+
+                var idExist = Factory.GeneralLedgerAccountsRepository().IdExist(generalLedgerId);
+
+                if (!idExist)
+                {
+                    epAccount.SetError(cmbGeneralLedgerAccount, "Account does not exist.");
+                    e.Cancel = true;
+                }
+            }
         }
 
         private void cmbGeneralLedgerAccount_Validated(object sender, EventArgs e)

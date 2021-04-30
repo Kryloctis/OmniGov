@@ -92,7 +92,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.cmbAccount.Name = "cmbAccount";
             this.cmbAccount.Size = new System.Drawing.Size(370, 23);
             this.cmbAccount.TabIndex = 1;
-            this.cmbAccount.SelectedValueChanged += new System.EventHandler(this.cmbAccount_SelectedValueChanged);
+            this.cmbAccount.SelectionChangeCommitted += new System.EventHandler(this.cmbAccount_SelectionChangeCommitted);
+            this.cmbAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbAccount_KeyDown);
             this.cmbAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbAccount_Validating);
             this.cmbAccount.Validated += new System.EventHandler(this.cmbAccount_Validated);
             // 
