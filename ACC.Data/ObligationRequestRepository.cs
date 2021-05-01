@@ -153,63 +153,6 @@ public class ObligationRequestRepository : IObligationRequestRepository
         }
     }
 
-    Dictionary<string, string> IObligationRequestRepository.GetRecordByObligationNum(string obligationNum)
-    {
-        var record = new Dictionary<string, string>();
-
-        try
-        {
-            var parameters = new object[][]
-            {
-                    new object[] { "@obligation_no", DbType.String, obligationNum}
-            };
-
-            string query = $"SELECT " +
-            $"id, " +
-            $"funds_id, " +
-            $"function_program_project_id, " +
-            $"others_fpp_id, " +
-            $"allotment_classes_id, " +
-            $"general_ledger_accounts_id, " +
-            $"date_issued, " +
-            $"obligation_no, " +
-            $"obligation_amount, " +
-            $"created_at, " +
-            $"created_by, " +
-            $"updated_at, " +
-            $"updated_by " +
-            $"FROM {tableName} " +
-            $"WHERE obligation_no = @obligation_no";
-
-            using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
-            {
-                if (reader.Rows.Count < 1)
-                    return record;
-
-                foreach (DataRow item in reader.Rows)
-                {
-                    record.Add("id", item[0].ToString());
-                    record.Add("funds_id", item[1].ToString());
-                    record.Add("function_program_project_id", item[2].ToString());
-                    record.Add("others_fpp_id", item[3].ToString());
-                    record.Add("allotment_classes_id", item[4].ToString());
-                    record.Add("general_ledger_accounts_id", item[5].ToString());
-                    record.Add("date_issued", item[6].ToString());
-                    record.Add("obligation_no", item[7].ToString());
-                    record.Add("obligation_amount", item[8].ToString());
-                    record.Add("created_at", item[9].ToString());
-                    record.Add("updated_at", item[10].ToString());
-                    record.Add("updated_by", item[11].ToString());
-                }
-            }
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-        return record;
-    }
-
     #region Validations
 
     public bool ObligationNumExist(string obligationNum)
@@ -301,42 +244,6 @@ public class ObligationRequestRepository : IObligationRequestRepository
         }
 
         return record;
-    }
-
-    public bool ObligationRequestExist(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, DateTime dateIssued, string obligationNo)
-    {
-        try
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@funds_id", DbType.Int32, fundID },
-                new object[] { "@function_program_project_id",DbType.Int32, fppID },
-                new object[] { "@others_fpp_id",DbType.String, othersFPPID },
-                new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassID },
-                new object[] { "@general_ledger_accounts_id", DbType.Int32, accountID },
-                new object[] { "@date_issued", DbType.Date, dateIssued },
-                new object[] { "@obligation_no", DbType.String, obligationNo },
-            };
-
-            string query = $"SELECT * FROM {tableName} " +
-            $"WHERE funds_id = @funds_id " +
-            $"AND function_program_project_id = @function_program_project_id " +
-            $"AND others_fpp_id <=> @others_fpp_id " +
-            $"AND allotment_classes_id = @allotment_classes_id " +
-            $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
-            $"AND date_issued = @date_issued " +
-            $"AND obligation_no = @obligation_no";
-            string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
-
-            // if query is not null, means found some record, so true
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-        }
-        catch (Exception)
-        {
-
-            throw;
-        }
-        return false;
     }
 
     public bool BulkInsert(List<ObligationRequestModel> obligationRequestModelList)

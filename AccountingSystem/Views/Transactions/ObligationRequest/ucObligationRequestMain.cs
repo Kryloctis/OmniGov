@@ -371,11 +371,19 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-        private bool ShowErrorObligationNoExist(ErrorProvider ep, string obligationNo) 
+        private bool ShowErrorObligationNoExist(ErrorProvider ep, MaskedTextBox mskTxtSeriesNo, MaskedTextBox mskTxtObligationNoTemplate) 
         {
             try
             {
+                string obligationNo = $"{mskObligationSeriesNo.Text}-{mskTxtObligationNoTemplate.Text}";
+                bool obligationNoExist = Factory.ObligationRequestRepository().ObligationNumExist(obligationNo);
 
+                if (mskTxtSeriesNo.MaskCompleted && obligationNoExist) 
+                {
+                   
+                    ep.SetError(mskTxtObligationNoTemplate, "Obligation No. you entered already exist in your record");
+                    return obligationNoExist;
+                }
             }
             catch (Exception ex)
             {
@@ -386,12 +394,19 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void mskObligationSeriesNo_Validating(object sender, CancelEventArgs e)
         {
+          
             e.Cancel = ShowErrorObligationSeriesNoEmpty(epObligationNo, mskObligationSeriesNo, mskTxtObligationNoTemplate);
+            e.Cancel = ShowErrorObligationNoExist(epObligationNo, mskObligationSeriesNo, mskTxtObligationNoTemplate);
         }
 
         private void mskObligationSeriesNo_Validated(object sender, EventArgs e)
         {
             Helper.ClearMaskedTextboxError(epObligationNo, mskTxtObligationNoTemplate);
+        }
+
+        private void dtDateRequested_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = ShowErrorObligationNoExist(epObligationNo, mskObligationSeriesNo, mskTxtObligationNoTemplate);
         }
 
         private void txtReferenceNo_Validating(object sender, CancelEventArgs e)

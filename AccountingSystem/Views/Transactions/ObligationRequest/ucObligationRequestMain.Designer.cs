@@ -108,6 +108,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.dtDateRequested.Size = new System.Drawing.Size(209, 23);
             this.dtDateRequested.TabIndex = 7;
             this.dtDateRequested.ValueChanged += new System.EventHandler(this.dtDateRequested_ValueChanged);
+            this.dtDateRequested.Validating += new System.ComponentModel.CancelEventHandler(this.dtDateRequested_Validating);
             // 
             // label5
             // 
