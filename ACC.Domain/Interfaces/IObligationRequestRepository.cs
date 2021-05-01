@@ -15,5 +15,7 @@ namespace ACC.Domain.Interfaces
         bool ObligationRequestExist(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, DateTime dateIssued, string obligationNo);
         bool ObligationNumExist(string obligationNum);
         bool ObligationNumExist(int id, string obligationNum);
+
+        bool BulkInsert(List<ObligationRequestModel> obligationRequestModelList);
     }
 }

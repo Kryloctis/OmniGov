@@ -36,6 +36,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.btnCancel = new System.Windows.Forms.ToolStripButton();
             this.ucObligationRequestMain1 = new AccountingSystem.Views.Transactions.ObligationRequest.ucObligationRequestMain();
+            this.btnSearch = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +48,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.toolStripSeparator1,
             this.btnSave,
             this.btnDelete,
-            this.btnCancel});
+            this.btnCancel,
+            this.btnSearch});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(608, 50);
@@ -111,6 +113,19 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.ucObligationRequestMain1.Size = new System.Drawing.Size(597, 536);
             this.ucObligationRequestMain1.TabIndex = 1;
             // 
+            // btnSearch
+            // 
+            this.btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnSearch.Image = global::AccountingSystem.Properties.Resources.find_doc;
+            this.btnSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(46, 47);
+            this.btnSearch.Text = "&Search";
+            this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSearch.ToolTipText = "&Search";
+            // 
             // frmObligationRequestMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -143,5 +158,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.ToolStripButton btnNew;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         internal ucObligationRequestMain ucObligationRequestMain1;
+        internal System.Windows.Forms.ToolStripButton btnSearch;
     }
 }

@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     GenLedgerAccID = accountID,
                     ObligationNo = obligationNo,
                     ObligationAmount = obligationAmount,
-                    DateIssued = dateIssued,
+                    DateRequested = dateIssued,
                     CreatedBy = 1,
                     UpdatedBy = 1
                 };

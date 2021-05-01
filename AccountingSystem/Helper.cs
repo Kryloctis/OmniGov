@@ -94,7 +94,7 @@ namespace AccountingSystem
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message);
+                MessageBoxError(ex.Message);
             }
 
             return user;
