@@ -54,6 +54,7 @@ namespace AccountingSystem.Views.Manage.Funds
                 epName.SetError(txtName, "Fund name already exist in your records.");
                 e.Cancel = true;
             }
+
         }
 
         private void txtName_Validated(object sender, EventArgs e)

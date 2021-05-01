@@ -16,6 +16,9 @@ namespace AccountingSystem.Views.Manage.Funds
         public frmFunds()
         {
             InitializeComponent();
+            WindowState = FormWindowState.Normal;
+            Helper.LoadFormIcon(this);
+            Helper.DatagridDefaultStyle(dgFunds);
         }
 
         internal void LoadRecords()
@@ -32,9 +35,7 @@ namespace AccountingSystem.Views.Manage.Funds
         }
         private void frmFunds_Load(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Normal;
-            Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgFunds);
+           
             LoadRecords();
         }
 
@@ -93,5 +94,25 @@ namespace AccountingSystem.Views.Manage.Funds
             Helper.ShowRecordTimestamp(dgFunds, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgFunds, btnEdit, btnDelete);
         }
-	}
+
+        private void txtsearch_TextChanged(object sender, EventArgs e)
+        {
+            if(txtsearch.Text.Length > 0)
+            {
+                try
+                {
+                    string searchkey = Convert.ToString(txtsearch.Text.Trim());
+                    var dtFunds = Factory.FundsRepository().GetRecordsBySearch(searchkey);
+                    HelperLoadRecords.FundsDatagridView(dtFunds, dgFunds);
+
+                    lblRecordCount.Text = dgFunds.Rows.Count.ToString();
+                }
+                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            }
+            else
+            {
+                LoadRecords();
+            }
+        }
+    }
 }

@@ -337,6 +337,57 @@ namespace AccountingSystem
         }
 
         #endregion
+        #region Banks
+        internal static void BanksDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].HeaderText = "Account No.";
+            datagrid.Columns[2].HeaderText = "Bank Name";
+            datagrid.Columns[3].Visible = false;
+            datagrid.Columns[4].Visible = false; 
+
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        #region RCI
+        internal static void RCIDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].HeaderText = "Account No.";
+            datagrid.Columns[2].HeaderText = "Bank Name";
+            datagrid.Columns[3].HeaderText = "Check Date";
+            datagrid.Columns[4].HeaderText = "Check Number";
+            datagrid.Columns[5].HeaderText = "DV No.";
+            datagrid.Columns[6].HeaderText = "Payee";
+            datagrid.Columns[7].HeaderText = "Nature of Payment";
+            datagrid.Columns[8].HeaderText = "OBR No.";
+            datagrid.Columns[9].HeaderText = "Function";
+            datagrid.Columns[10].HeaderText = "Trust Liabilities";
+            datagrid.Columns[11].HeaderText = "BIR VAT/Non-VAT";
+            datagrid.Columns[12].HeaderText = "Net Amount";
+            datagrid.Columns[13].Visible = false;
+            datagrid.Columns[14].Visible = false;
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        #endregion
+        internal static void BanksComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+
+            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                // loop datatable to add items in autocompletesource
+                foreach (DataRow item in dataTable.Rows)
+                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
+
+                comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+                comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            }
+        }
+        #endregion
 
         #region Function/Program/Project
         internal static void FuntionalClassificationDatagridView(DataTable dataTable, DataGridView datagrid)

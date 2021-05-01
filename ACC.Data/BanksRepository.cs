@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Data;
 using System.Transactions;
 using ACC.Domain.Interfaces;
@@ -7,13 +8,12 @@ using ACC.Domain.Models;
 
 namespace ACC.Data
 {
-   public class FundsRepository : IFundsRepository
+    public class BanksRepository : IBanksRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
-        private readonly string tableName = "funds";
-        
+        private readonly string tableName = "banks";
 
-        public FundsRepository(IDbGenericCommands dbGenericCommands)
+        public BanksRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }
@@ -29,15 +29,15 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT fund_code,fund_name, created_at, updated_at FROM {tableName} WHERE id = @id";
+                string query = $"SELECT account_no,bank_name,created_at,updated_at FROM {tableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
                         return record;
 
-                    record.Add("fund_code", reader.Rows[0][0].ToString());
-                    record.Add("fund_name", reader.Rows[0][1].ToString());
+                    record.Add("account_no", reader.Rows[0][0].ToString());
+                    record.Add("bank_name", reader.Rows[0][1].ToString());
                     record.Add("created_at", reader.Rows[0][2].ToString());
                     record.Add("updated_at", reader.Rows[0][3].ToString());
                 }
@@ -56,43 +56,25 @@ namespace ACC.Data
             {
                 string query = $"SELECT * FROM {tableName}";
 
-                var dtFunds = new DataTable();
-                return _dbGenericCommands.Fill(query, dtFunds);
+                var dtBanks = new DataTable();
+                return _dbGenericCommands.Fill(query, dtBanks);
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
-        public DataTable GetRecordsBySearch(string searchText)
-        {
-            try
-            {
-                var srchtxt = searchText;
-
-                string query = $"SELECT * FROM {tableName} WHERE fund_code  LIKE'%" + srchtxt + "%' OR fund_name  LIKE'%" + srchtxt + "%'";
-
-                var dtFunds = new DataTable();
-                return _dbGenericCommands.Fill(query, dtFunds);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public bool Insert(FundsModel entity)
+        public bool Insert(BanksModel entity)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@fund_name", DbType.String, entity.FundName},
-                      new object[] { "@fund_code", DbType.String, entity.FundCode},
+                    new object[] { "@account_no", DbType.String, entity.AccountNo},
+                      new object[] { "@bank_name", DbType.String, entity.BankName},
                 };
 
-                string query = $"INSERT INTO {tableName} (fund_code,fund_name) VALUES (@fund_code,@fund_name)";
+                string query = $"INSERT INTO {tableName} (account_no,bank_name) VALUES (@account_no,@bank_name)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -102,18 +84,18 @@ namespace ACC.Data
         }
 
 
-        public bool Update(FundsModel entity)
+        public bool Update(BanksModel entity)
         {
             try
             {
                 var parameters = new object[][]
                 {
                     new object[] { "@id", DbType.Int16, entity.Id},
-                    new object[] { "@fund_name", DbType.String, entity.FundName},
-                     new object[] { "@fund_code", DbType.String, entity.FundCode},
+                    new object[] { "@account_no", DbType.String, entity.BankName},
+                     new object[] { "@bank_name", DbType.String, entity.BankName},
                 };
 
-                string query = $"UPDATE {tableName} SET fund_code = @fund_code, fund_name = @fund_name WHERE id = @id";
+                string query = $"UPDATE {tableName} SET account_no = @account_no, bank_name = @bank_name WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -123,7 +105,7 @@ namespace ACC.Data
         }
 
 
-        public bool Delete(List<FundsModel> entityList)
+        public bool Delete(List<BanksModel> entityList)
         {
             try
             {
@@ -188,17 +170,16 @@ namespace ACC.Data
             return false;
         }
 
-
-        public bool NameExist(string fundName)
+        public bool CodeExist(string accountCode)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@fund_name", DbType.String, fundName },
+                    new object[] { "@account_no", DbType.String, accountCode },
                 };
 
-                string query = $"SELECT fund_name FROM {tableName} WHERE fund_name = @fund_name";
+                string query = $"SELECT account_no FROM {tableName} WHERE account_no = @account_no";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -212,18 +193,17 @@ namespace ACC.Data
             return false;
         }
 
-
-        public bool NameExist(string fundName, int fundId)
+        public bool CodeExist(string accountCode, int bankId)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Int16, fundId },
-                    new object[] { "@fund_name", DbType.String, fundName },
+                    new object[] { "@id", DbType.Int16, bankId },
+                    new object[] { "@account_no", DbType.String, accountCode },
                 };
 
-                string query = $"SELECT fund_name FROM {tableName} WHERE id <> @id AND fund_name = @fund_name";
+                string query = $"SELECT account_no FROM {tableName} WHERE id <> @id AND account_no = @account_no";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -236,53 +216,21 @@ namespace ACC.Data
 
             return false;
         }
-
-        public bool CodeExist(string fundCode)
+        public DataTable GetRecordsBySearch(string searchText)
         {
             try
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@fund_code", DbType.String, fundCode },
-                };
+                var srchtxt = searchText;
 
-                string query = $"SELECT fund_code FROM {tableName} WHERE fund_code = @fund_code";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+                string query = $"SELECT * FROM {tableName} WHERE account_no  LIKE'%" + srchtxt + "%' OR bank_name  LIKE'%" + srchtxt + "%'";
 
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
+                var dtBanks = new DataTable();
+                return _dbGenericCommands.Fill(query, dtBanks);
             }
             catch (Exception)
             {
                 throw;
-            };
-
-            return false;
-        }
-
-        public bool CodeExist(string fundCode, int fundId)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int16, fundId },
-                    new object[] { "@fund_code", DbType.String, fundCode },
-                };
-
-                string query = $"SELECT fund_code FROM {tableName} WHERE id <> @id AND fund_code = @fund_code";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
             }
-            catch (Exception)
-            {
-                throw;
-            };
-
-            return false;
         }
-
     }
 }

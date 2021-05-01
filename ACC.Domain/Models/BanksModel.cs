@@ -4,11 +4,11 @@ using System.Text;
 
 namespace ACC.Domain.Models
 {
-    public class FunctionalClassificationModel
+    public class BanksModel
     {
         public int Id { get; set; }
-        public string SectorCode { get; set; }
-        public string SectorName { get; set; }
+        public string AccountNo { get; set; }
+        public string BankName { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }
