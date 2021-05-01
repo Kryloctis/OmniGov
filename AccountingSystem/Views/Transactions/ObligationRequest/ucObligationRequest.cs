@@ -86,7 +86,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
                 var totalAllotmentAmount = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(fundId, fppId, otherFPPId, allotmentClassId, accountId, dateIssued);
 
-                var totalObligationAmountByYear = Factory.ObligationRequestRepository().GetTotalObligationAmountByYear(fundId, fppId, otherFPPId, allotmentClassId, accountId, Convert.ToInt16(dateIssued.Year));
+                var totalObligationAmountByYear = Factory.ObligationRequestRepository().GetTotalObligationAmount(fundId, fppId, otherFPPId, allotmentClassId, accountId, dateIssued);
 
                 var totalAllotmentBalanceAmount = Convert.ToDecimal(totalAllotmentAmount["total_allotment_amount"]) - Convert.ToDecimal(totalObligationAmountByYear["total_obligation_amount"]);
 
@@ -97,11 +97,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         #region Validations
 
-        internal bool AccountExistOnList() 
+        private bool AccountExistOnList(ErrorProvider ep, ComboBox comboBox) 
         {
             try
             {
-                int accountId = Convert.ToInt32(cmbxAccount.SelectedValue);
+                int accountId = Convert.ToInt32(comboBox.SelectedValue);
 
                 foreach (DataGridViewRow row in _ucObligationRequestMain.dgObligationRequests.Rows)
                 {
@@ -110,7 +110,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
                     if (accountExist)
                     {
-                        epAccount.SetError(cmbxAccount, "Account is already on the list.");
+                        ep.SetError(comboBox, "Account is already on the list.");
                         return true;
                     }
                 }
@@ -120,13 +120,33 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 Helper.MessageBoxError(ex.Message);
             }
             return false;
-        } 
+        }
+
+        private bool AccountExist(ErrorProvider ep, ComboBox comboBox) 
+        {
+            try
+            {
+                int accountId = Convert.ToInt32(cmbxAccount.SelectedValue);
+                bool AccountExist = Factory.ObligationRequestRepository().AccountExist(accountId, dateIssued);
+
+                if (AccountExist && !string.IsNullOrEmpty(cmbxAccount.Text))
+                {
+                    ep.SetError(comboBox, "Account already exist on the date it was requested.");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
 
         private bool AccountNotExist(ErrorProvider ep, ComboBox comboBox) 
         {
             try
             {
-                if (cmbxAccount.FindStringExact(cmbxAccount.Text) < 0) 
+                if (cmbxAccount.FindStringExact(cmbxAccount.Text) < 0 && !string.IsNullOrEmpty(cmbxAccount.Text)) 
                 {
                     ep.SetError(comboBox, "Account Doesn't exist on the list.");
                     return true;
@@ -141,12 +161,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void cmbxAccount_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbxAccount.Text))
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbxAccount, "Account");
-            else if (AccountNotExist(epAccount, cmbxAccount))
-                e.Cancel = AccountNotExist(epAccount, cmbxAccount);
-            else
-                e.Cancel = AccountExistOnList();
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbxAccount, "Account");
+            e.Cancel = AccountNotExist(epAccount, cmbxAccount);
+            e.Cancel = AccountExistOnList(epAccount, cmbxAccount);
+            e.Cancel = AccountExist(epAccount, cmbxAccount);
         }
 
         private void cmbxAccount_Validated(object sender, EventArgs e)

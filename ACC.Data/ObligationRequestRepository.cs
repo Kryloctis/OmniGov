@@ -7,7 +7,6 @@ using System.Data;
 using System.Text;
 using System.Transactions;
 
-
 public class ObligationRequestRepository : IObligationRequestRepository
 {
     private MySqlGenericCommands _mySqlGenericCommands;
@@ -153,54 +152,7 @@ public class ObligationRequestRepository : IObligationRequestRepository
         }
     }
 
-    #region Validations
-
-    public bool ObligationNumExist(string obligationNum)
-    {
-        try
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@obligation_no", DbType.String, obligationNum }
-            };
-
-            string query = $"SELECT id FROM {tableName} WHERE obligation_no = @obligation_no";
-            string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
-
-            // if query is not null, means found some record, so true
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-        return false;
-    }
-
-    public bool ObligationNumExist(int id, string obligationNum)
-    {
-        try
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@id", DbType.Int32, id },
-                new object[] { "@obligation_no", DbType.String, obligationNum }
-            };
-
-            string query = $"SELECT id FROM {tableName} WHERE id <> @id AND obligation_no = @obligation_no";
-            string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
-
-            // if query is not null, means found some record, so true
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-        return false;
-    }
-
-    public Dictionary<string, string> GetTotalObligationAmountByYear(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, short year)
+    public Dictionary<string, string> GetTotalObligationAmount(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, DateTime dateRequested)
     {
         var record = new Dictionary<string, string>();
 
@@ -213,7 +165,7 @@ public class ObligationRequestRepository : IObligationRequestRepository
                 new object[] { "@others_fpp_id", DbType.String, othersFPPID },
                 new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassID },
                 new object[] { "@general_ledger_accounts_id", DbType.Int32, accountID },
-                new object[] { "@year", DbType.Int16, year },
+                new object[] { "@date_requested", DbType.Date, dateRequested.Date }
             };
 
             string query = $"SELECT " +
@@ -224,7 +176,7 @@ public class ObligationRequestRepository : IObligationRequestRepository
                 $"AND others_fpp_id <=> @others_fpp_id " +
                 $"AND allotment_classes_id = @allotment_classes_id " +
                 $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
-                $"AND YEAR(date_requested) = @year";
+                $"AND date_requested <= @date_requested";
 
             using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
             {
@@ -312,5 +264,99 @@ public class ObligationRequestRepository : IObligationRequestRepository
         }
     }
 
-#endregion Validations
+    #region Validations
+
+    public bool ObligationNumExist(string obligationNum)
+    {
+        try
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@obligation_no", DbType.String, obligationNum }
+            };
+
+            string query = $"SELECT id FROM {tableName} WHERE obligation_no = @obligation_no";
+            string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+            // if query is not null, means found some record, so true
+            if (!string.IsNullOrEmpty(queryResult)) return true;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        return false;
+    }
+
+    public bool ObligationNumExist(int id, string obligationNum)
+    {
+        try
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, id },
+                new object[] { "@obligation_no", DbType.String, obligationNum }
+            };
+
+            string query = $"SELECT id FROM {tableName} WHERE id <> @id AND obligation_no = @obligation_no";
+            string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+            // if query is not null, means found some record, so true
+            if (!string.IsNullOrEmpty(queryResult)) return true;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        return false;
+    }
+
+    public bool AccountExist(int accountId, DateTime dateRequested)
+    {
+        try
+        {
+            var parameters = new object[][]
+           {
+                new object[] { "@general_ledger_accounts_id", DbType.Int32, accountId},
+                new object[] { "@date_requested", DbType.Date,  dateRequested.Date}
+           };
+
+            string query = $"SELECT id FROM {tableName} WHERE general_ledger_accounts_id = @general_ledger_accounts_id AND date_requested = @date_requested";
+            string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+            // if query is not null, means found some record, so true
+            if (!string.IsNullOrEmpty(queryResult)) return true;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        return false;
+    }
+
+    public bool AccountExist(int id, int accountId, DateTime dateRequested)
+    {
+        try
+        {
+            var parameters = new object[][]
+           {
+                new object[] { "@id", DbType.Int32, id},
+                new object[] { "@general_ledger_accounts_id", DbType.Int32, accountId},
+                new object[] { "@date_requested", DbType.Date,  dateRequested.Date}
+           };
+
+            string query = $"SELECT id FROM {tableName} WHERE id <> @id general_ledger_accounts_id = @general_ledger_accounts_id AND date_requested = @date_requested";
+            string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+            // if query is not null, means found some record, so true
+            if (!string.IsNullOrEmpty(queryResult)) return true;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        return false;
+    }
+
+    #endregion Validations
 }
