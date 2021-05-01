@@ -354,7 +354,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             Helper.ClearErrorTextBox(epExplanation, txtExplanation);
         }
 
-        private bool ObligationSeriesNo(ErrorProvider ep, MaskedTextBox mskTxtSeriesNo, MaskedTextBox mskTxtObligationNoTemplate)
+        private bool ShowErrorObligationSeriesNoEmpty(ErrorProvider ep, MaskedTextBox mskTxtSeriesNo, MaskedTextBox mskTxtObligationNoTemplate)
         {
             try
             {
@@ -371,9 +371,22 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
+        private bool ShowErrorObligationNoExist(ErrorProvider ep, string obligationNo) 
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
         private void mskObligationSeriesNo_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = ObligationSeriesNo(epObligationNo, mskObligationSeriesNo, mskTxtObligationNoTemplate);
+            e.Cancel = ShowErrorObligationSeriesNoEmpty(epObligationNo, mskObligationSeriesNo, mskTxtObligationNoTemplate);
         }
 
         private void mskObligationSeriesNo_Validated(object sender, EventArgs e)
