@@ -71,7 +71,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                DataTable dtBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(fppID, allotmentClassId, othersFPPId, fundId, dateIssued.ToString("yyyy-MM-dd"));
+                DataTable dtBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(fppID, allotmentClassId, othersFPPId, fundId, dateIssued);
 
                 HelperLoadRecords.ComboboxBudgetAppropriations(dtBudgetAppropriation, cmbxAccount, "ledger_name", "budget_appropriations_id");
 
