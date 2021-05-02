@@ -364,7 +364,7 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetViewRecordsByIds(int fppID, int allotmentClassID, int? othersFPPID, int typeOfFund, string dateEntry)
+        public DataTable GetViewRecordsByIds(int fppID, int allotmentClassID, int? othersFPPID, int typeOfFund, DateTime dateEntry)
         {
             try
             {
@@ -374,7 +374,7 @@ namespace ACC.Data
                     new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassID},
                     new object[] { "@others_fpp_id", DbType.String, othersFPPID },
                     new object[] { "@funds_id", DbType.Int32, typeOfFund},
-                    new object[] { "@date_entry", DbType.String, dateEntry}
+                    new object[] { "@date_entry", DbType.Date, dateEntry.Date}
                 };
 
                 string query = $"SELECT " +
@@ -416,7 +416,7 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetExistedOthersFPPrecordsByFPPID(int fppID, int allotment_classes_id, int funds_id, Int16 year) 
+        public DataTable GetExistedOthersFPPrecordsByFPPID(int fppID, int allotment_classes_id, int funds_id, short year) 
         {
             try
             {

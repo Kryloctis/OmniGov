@@ -1,0 +1,505 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace AccountingSystem.Views.Transactions.ObligationRequest
+{
+    public partial class ucObligationRequestMain : UserControl
+    {
+        internal int fundId = 0;
+        internal int allotmentClassId = 0;
+
+        public ucObligationRequestMain()
+        {
+            InitializeComponent();
+        }
+
+        internal void ResetForm()
+        {
+            panel1.Enabled = true;
+            dtDateRequested.Enabled = true;
+            LoadFPPCombobox();
+            LoadFunds();
+            LoadAllotmentClasses();
+            cmbxOthersFPP.Enabled = false;
+            mskObligationSeriesNo.Text = string.Empty;
+            dtDateRequested.Value = DateTime.Now;
+            txtPayee.Text = string.Empty;
+            txtExplanation.Text = string.Empty;
+            txtReferenceNo.Text = string.Empty;
+            dgObligationRequests.Rows.Clear();
+        }
+
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[7];
+
+            ObligationRequestListEmpty();
+            errorArray[0] = epFPP.GetError(cmbxFPP);
+            errorArray[1] = epOtherFPP.GetError(cmbxOthersFPP);
+            errorArray[2] = epObligationNo.GetError(mskTxtObligationNoTemplate);
+            errorArray[3] = epPayee.GetError(txtPayee);
+            errorArray[4] = epExplanation.GetError(txtExplanation);
+            errorArray[5] = epReferenceNo.GetError(txtReferenceNo);
+            errorArray[6] = Tag == null ? string.Empty : Tag.ToString();
+
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        internal string GetFormErrorsAddToList() 
+        {
+            var errorArray = new string[2];
+
+            errorArray[0] = epFPP.GetError(cmbxFPP);
+            errorArray[1] = epOtherFPP.GetError(cmbxOthersFPP);
+
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        internal void LoadOthersFPPByFPPIdCombobox()
+        {
+            var fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
+
+            HelperLoadRecords.OthersFPPCombobox(Factory.OthersFPPRepository().GetRecordsByFPPID(fppId), cmbxOthersFPP, "name", "id");
+            cmbxOthersFPP.SelectedIndex = -1;
+            cmbxOthersFPP.Text = string.Empty;
+            cmbxOthersFPP.Enabled = true;
+        }
+
+        internal void LoadFPPCombobox()
+        {
+            try
+            {
+                HelperLoadRecords.FPPComboBox(Factory.FunctionProgramProjectRepository().GetRecords(), cmbxFPP, "fpp_name", "id");
+                cmbxFPP.SelectedValueChanged += new EventHandler(CmbxFPP_SelectedValueChanged);
+                cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TextChanged);
+                cmbxFPP.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void CmbxFPP_TextChanged(object sender, EventArgs e)
+        {
+            if (FPPNameExist(epFPP, cmbxFPP) || string.IsNullOrEmpty(cmbxFPP.Text))
+            {
+                cmbxOthersFPP.Enabled = false;
+                cmbxOthersFPP.SelectedIndex = -1;
+                cmbxOthersFPP.Text = string.Empty;
+            }
+        }
+
+        private void CmbxFPP_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadOthersFPPByFPPIdCombobox();
+        }
+
+        internal void LoadFunds()
+        {
+            var funds = Factory.FundsRepository().GetRecords();
+
+            flowLayoutPanelFunds.Controls.Clear();
+
+            foreach (DataRow fund in funds.Rows)
+            {
+                var radFund = new RadioButton
+                {
+                    Text = fund["fund_name"].ToString(),
+                    Tag = fund["id"],
+                    AutoSize = true,
+                    Appearance = Appearance.Button,
+                    TextImageRelation = TextImageRelation.ImageBeforeText
+                };
+
+                //making general fund as default
+                if (Convert.ToInt32(fund["id"]) == 1)
+                {
+                    radFund.Checked = true;
+                    fundId = Convert.ToByte(fund["id"]);
+                    ShowCheckIcon(radFund);
+                }
+
+
+                flowLayoutPanelFunds.Controls.Add(radFund);
+
+                radFund.Click += new EventHandler(RadioFunds_Click);
+                radFund.CheckedChanged += new EventHandler(RadioFunds_CheckedChanged);
+            }
+        }
+
+        internal void LoadAllotmentClasses()
+        {
+            var allotmentClasses = Factory.AllotmentClassesRepository().GetRecords();
+
+            flowLayoutPanelAllotment.Controls.Clear();
+
+            foreach (DataRow allotmentClass in allotmentClasses.Rows)
+            {
+                var radAllotmentClass = new RadioButton
+                {
+                    Text = allotmentClass["allotment_code"].ToString(),
+                    Tag = allotmentClass["id"],
+                    AutoSize = true,
+                    Appearance = Appearance.Button,
+                    TextImageRelation = TextImageRelation.ImageBeforeText
+                };
+
+                //making general fund as default
+                if (Convert.ToInt32(allotmentClass["id"]) == 1)
+                {
+                    radAllotmentClass.Checked = true;
+                    allotmentClassId = Convert.ToByte(allotmentClass["id"]);
+                    ShowCheckIcon(radAllotmentClass);
+                }
+
+                flowLayoutPanelAllotment.Controls.Add(radAllotmentClass);
+
+                radAllotmentClass.Click += new EventHandler(RadioAllotmentClass_Click);
+                radAllotmentClass.CheckedChanged += new EventHandler(RadioAllotmentClass_CheckedChanged);
+            }
+        }
+
+        private void ShowCheckIcon(RadioButton radioButton)
+        {
+            if (radioButton.Checked)
+                radioButton.Image = Properties.Resources.ok14px;
+            else
+                radioButton.Image = null;
+        }
+
+        private void RadioAllotmentClass_CheckedChanged(object sender, EventArgs e)
+        {
+            var radAllotment = sender as RadioButton;
+            ShowCheckIcon(radAllotment);
+        }
+
+        private void RadioAllotmentClass_Click(object sender, EventArgs e)
+        {
+            var radAllotment = sender as RadioButton;
+            allotmentClassId = Convert.ToInt32(radAllotment.Tag);
+        }
+
+        private void RadioFunds_CheckedChanged(object sender, EventArgs e)
+        {
+            var radFund = sender as RadioButton;
+            ShowCheckIcon(radFund);
+        }
+
+        private void RadioFunds_Click(object sender, EventArgs e)
+        {
+            var radFund = sender as RadioButton;
+            fundId = Convert.ToInt32(radFund.Tag);
+            GenerateObligationNo(mskTxtObligationNoTemplate);
+        }
+
+        private void GenerateObligationNo(MaskedTextBox maskedTextBox) 
+        {
+            string month = dtDateRequested.Value.ToString("MM");
+            string year = dtDateRequested.Value.ToString("yy");
+            string fundCode = Factory.FundsRepository().GetRecordByID(fundId)["fund_code"].ToString();
+
+            string obligationNoTemplate = $"{month}-{year}-{fundCode}0";
+
+            maskedTextBox.Text = obligationNoTemplate;
+        }
+
+        private void LoadDatagridFormat()
+        {
+            try
+            {
+                dgObligationRequests.Columns.Add("accountId", "Account ID");
+                dgObligationRequests.Columns.Add("accountName", "Account Name");
+                dgObligationRequests.Columns.Add("accountCode", "Account Code");
+                dgObligationRequests.Columns.Add("obligationAmount", "Amount");
+
+                //Cell Format
+                dgObligationRequests.Columns["accountId"].Visible = false;
+                dgObligationRequests.Columns["accountName"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgObligationRequests.Columns["accountCode"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgObligationRequests.Columns["obligationAmount"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgObligationRequests.Columns["obligationAmount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dgObligationRequests.Columns["obligationAmount"].DefaultCellStyle.Format = "N2";
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void dtDateRequested_ValueChanged(object sender, EventArgs e)
+        {
+            GenerateObligationNo(mskTxtObligationNoTemplate);
+        }
+
+        private void ucObligationRequestMain_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                Helper.DatagridDefaultStyle(dgObligationRequests, true);
+                LoadDatagridFormat();
+                LoadFPPCombobox();
+                LoadFunds();
+                LoadAllotmentClasses();
+                GenerateObligationNo(mskTxtObligationNoTemplate);
+                cmbxOthersFPP.Enabled = false;
+                btnEdit.Enabled = false;
+                btnRemove.Enabled = false;
+            }
+        }
+
+        #region Validations
+
+        internal bool ObligationRequestListEmpty() 
+        {
+            if (dgObligationRequests.Rows.Count <= 0)
+            {
+              Tag = "Obligation Request list is empty";
+              return true;
+            }
+            else
+            {
+              Tag = string.Empty;
+              return false;
+            }
+        }
+
+        private bool FPPNameExist(ErrorProvider ep, ComboBox comboBox)
+        {
+            try
+            {
+                string fppName = comboBox.Text;
+                bool fppNameExist = Factory.FunctionProgramProjectRepository().NameExist(fppName);
+
+                if (!fppNameExist && !string.IsNullOrEmpty(fppName))
+                {
+                    ep.SetError(comboBox, "FPP you entered. Doesn't exist in yout record.");
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void cmbxFPP_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbxFPP.Text))
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP");
+            else
+                e.Cancel = FPPNameExist(epFPP, cmbxFPP);
+        }
+
+        private void cmbxFPP_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epFPP, cmbxFPP);
+        }
+
+        private bool OthersFPPNameExist(ErrorProvider ep, ComboBox comboBox)
+        {
+            try
+            {
+                string otherFPPName = comboBox.Text;
+                bool otherFPPExist = Factory.OthersFPPRepository().NameExist(otherFPPName);
+
+                if (!otherFPPExist && !string.IsNullOrEmpty(otherFPPName))
+                {
+                    ep.SetError(comboBox, "Other FPP you entered. Doesn't exist in yout record.");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void cmbxOthersFPP_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = OthersFPPNameExist(epOtherFPP, cmbxOthersFPP);
+        }
+
+        private void cmbxOthersFPP_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epOtherFPP, cmbxOthersFPP);
+        }
+
+        private void txtPayee_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epPayee, txtPayee, "Payee");
+        }
+        private void txtPayee_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epPayee, txtPayee);
+        }
+
+        private void txtExplanation_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epExplanation, txtExplanation, "Explanation");
+        }
+
+        private void txtExplanation_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epExplanation, txtExplanation);
+        }
+
+        private bool ShowErrorObligationSeriesNoEmpty(ErrorProvider ep, MaskedTextBox mskTxtSeriesNo, MaskedTextBox mskTxtObligationNoTemplate)
+        {
+            try
+            {
+                if (!mskTxtSeriesNo.MaskCompleted)
+                {
+                    ep.SetError(mskTxtObligationNoTemplate, "Obligation Series No. is required.");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private bool ShowErrorObligationNoExist(ErrorProvider ep, MaskedTextBox mskTxtSeriesNo, MaskedTextBox mskTxtObligationNoTemplate) 
+        {
+            try
+            {
+                string obligationNo = $"{mskObligationSeriesNo.Text}-{mskTxtObligationNoTemplate.Text}";
+                bool obligationNoExist = Factory.ObligationRequestRepository().ObligationNumExist(obligationNo);
+
+                if (mskTxtSeriesNo.MaskCompleted && obligationNoExist) 
+                {
+                   
+                    ep.SetError(mskTxtObligationNoTemplate, "Obligation No. you entered already exist in your record");
+                    return obligationNoExist;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void mskObligationSeriesNo_Validating(object sender, CancelEventArgs e)
+        {
+          
+            e.Cancel = ShowErrorObligationSeriesNoEmpty(epObligationNo, mskObligationSeriesNo, mskTxtObligationNoTemplate);
+            e.Cancel = ShowErrorObligationNoExist(epObligationNo, mskObligationSeriesNo, mskTxtObligationNoTemplate);
+        }
+
+        private void mskObligationSeriesNo_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearMaskedTextboxError(epObligationNo, mskTxtObligationNoTemplate);
+        }
+
+        private void dtDateRequested_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = ShowErrorObligationNoExist(epObligationNo, mskObligationSeriesNo, mskTxtObligationNoTemplate);
+        }
+
+        private void txtReferenceNo_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epReferenceNo, txtReferenceNo, "Reference No.");
+        }
+
+        private void txtReferenceNo_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epReferenceNo, txtReferenceNo);
+        }
+
+        #endregion Validations
+
+        private void ShowObligationRequestAdd()
+        {
+            var frmObligationRequestAdd = new frmObligationRequestAdd(this);
+            var ucObligationRequestAdd = frmObligationRequestAdd.ucObligationRequest1;
+            int fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
+            int? otherFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
+            DateTime dateRequest = dtDateRequested.Value;
+
+            ucObligationRequestAdd.fundId = fundId;
+            ucObligationRequestAdd.fppId = fppId;
+            ucObligationRequestAdd.otherFPPId = otherFPPId;
+            ucObligationRequestAdd.allotmentClassId = allotmentClassId;
+            ucObligationRequestAdd.dateIssued = dateRequest;
+
+            frmObligationRequestAdd.ShowDialog();
+        }
+
+        private bool CustomValidateAddToList() 
+        {
+            try
+            {
+                bool fppValidation = Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP") || FPPNameExist(epFPP, cmbxFPP);
+                bool otherFPPValidation = OthersFPPNameExist(epOtherFPP, cmbxOthersFPP);
+
+                if (fppValidation || otherFPPValidation) 
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (CustomValidateAddToList()) 
+                Helper.MessageBoxError(GetFormErrorsAddToList());
+            else
+                ShowObligationRequestAdd();
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dgObligationRequests.SelectedRows)
+            {
+                dgObligationRequests.Rows.Remove(row);
+            }
+        }
+
+        private void EnableDisableButtons()
+        {
+            int selectedRowCount = dgObligationRequests.SelectedRows.Count;
+
+            if (selectedRowCount == 1)
+            {
+                btnRemove.Enabled = true;
+                btnEdit.Enabled = true;
+                btnRemove.Text = "Remove (" + selectedRowCount + ")";
+            }
+            else if (selectedRowCount > 1)
+            {
+                btnRemove.Enabled = true;
+                btnEdit.Enabled = false;
+                btnRemove.Text = "Remove (" + selectedRowCount + ")";
+            }
+            else
+            {
+                btnRemove.Enabled = false;
+                btnEdit.Enabled = false;
+                btnRemove.Text = "Remove";
+            }
+        }
+
+        private void dgObligationRequests_SelectionChanged(object sender, EventArgs e)
+        {
+            EnableDisableButtons();
+        }
+    }   
+}

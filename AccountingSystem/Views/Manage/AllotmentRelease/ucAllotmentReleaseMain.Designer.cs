@@ -108,7 +108,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.groupBox1.Size = new System.Drawing.Size(537, 53);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Funds";
+            this.groupBox1.Text = "Fund";
             // 
             // flowLayoutPanelFunds
             // 
