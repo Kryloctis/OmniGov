@@ -55,7 +55,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                 uc.dtDateEntry.Value = Convert.ToDateTime(selectedBudgetAppropriation["date_entry"]);
                 uc.nudYear.Value = Convert.ToDecimal(selectedBudgetAppropriation["year"]);
                 uc.nudAmount.Value = Convert.ToDecimal(selectedBudgetAppropriation["amount"]);
-
+                uc.chckbxContinuing.Checked = Convert.ToUInt16(selectedBudgetAppropriation["continuing"]) == 0 ? false : true;
             }
             catch (Exception ex)
             {
@@ -93,7 +93,8 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                     GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxLedgerAccount.SelectedValue),
                     DateEntry = uc.dtDateEntry.Value,
                     Year = Convert.ToInt16(uc.nudYear.Value),
-                    amount = uc.nudAmount.Value
+                    amount = uc.nudAmount.Value,
+                    continuing = uc.chckbxContinuing.Checked
                 };
 
                 return Factory.BudgetAppropriationsRepository().Update(budgetAppModel);

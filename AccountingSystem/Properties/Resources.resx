@@ -169,4 +169,13 @@
   <data name="money_banknotes_document_text_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\money-banknotes-document-text-28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="supplemental_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\supplemental-28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="action_arrow_right_filled_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\action-arrow-right-filled-14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="action_arrow_right_filled_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\action-arrow-right-filled-28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

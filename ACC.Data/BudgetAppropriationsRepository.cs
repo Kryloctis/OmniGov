@@ -19,9 +19,58 @@ namespace ACC.Data
             this.mySqlGenericCommands = mySqlGenericCommands;
         }
 
-        public int CountRecords()
+        public bool Insert(BudgetAppropriationsModel entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+               {
+                    new object[] { "@funds_id", DbType.Int32, entity.FundsId},
+                    new object[] { "@function_program_project_id", DbType.Int32, entity.FunctionProgramProjectId},
+                    new object[] { "@others_fpp_id", DbType.String, entity.OthersFPPId},
+                    new object[] { "@allotment_classes_id", DbType.Int32, entity.AllotmentClassesId},
+                    new object[] { "@general_ledger_accounts_id", DbType.Int32, entity.GeneralLedgerAccountsId},
+                    new object[] { "@year", DbType.Int16, entity.Year},
+                    new object[] { "@date_entry", DbType.Date, entity.DateEntry},
+                    new object[] { "@amount", DbType.Decimal, entity.amount},
+                    new object[] { "@continuing", DbType.Boolean, entity.continuing}
+               };
+
+                string query = $"INSERT INTO {tableName} (funds_id, function_program_project_id , others_fpp_id, allotment_classes_id, general_ledger_accounts_id, date_entry, year, amount, continuing) VALUES (@funds_id ,@function_program_project_id , @others_fpp_id, @allotment_classes_id, @general_ledger_accounts_id, @date_entry, @year, @amount, @continuing)";
+                return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
+        public bool Update(BudgetAppropriationsModel entity)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, entity.ID},
+                    new object[] { "@funds_id", DbType.Int32, entity.FundsId},
+                    new object[] { "@function_program_project_id", DbType.Int32, entity.FunctionProgramProjectId},
+                    new object[] { "@others_fpp_id", DbType.String, entity.OthersFPPId},
+                    new object[] { "@allotment_classes_id", DbType.Int32, entity.AllotmentClassesId},
+                    new object[] { "@general_ledger_accounts_id", DbType.Int32, entity.GeneralLedgerAccountsId},
+                    new object[] { "@date_entry", DbType.Date, entity.DateEntry},
+                    new object[] { "@year", DbType.Int16, entity.Year},
+                    new object[] { "@amount", DbType.Decimal, entity.amount},
+                    new object[] { "@continuing", DbType.Boolean, entity.continuing}
+                };
+
+                string query = $"UPDATE {tableName} SET function_program_project_id = @function_program_project_id, funds_id =@funds_id, others_fpp_id = @others_fpp_id, allotment_classes_id = @allotment_classes_id, general_ledger_accounts_id = @general_ledger_accounts_id, date_entry = @date_entry, year = @year, amount = @amount, continuing = @continuing WHERE id = @id";
+                return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Delete(List<BudgetAppropriationsModel> entityList)
@@ -49,6 +98,12 @@ namespace ACC.Data
             {
                 throw;
             }
+        }
+
+
+        public int CountRecords()
+        {
+            throw new NotImplementedException();
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -104,57 +159,6 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Insert(BudgetAppropriationsModel entity)
-        {
-            try
-            {
-                var parameters = new object[][]
-               {
-                    new object[] { "@funds_id", DbType.Int32, entity.FundsId},
-                    new object[] { "@function_program_project_id", DbType.Int32, entity.FunctionProgramProjectId},
-                    new object[] { "@others_fpp_id", DbType.String, entity.OthersFPPId},
-                    new object[] { "@allotment_classes_id", DbType.Int32, entity.AllotmentClassesId},
-                    new object[] { "@general_ledger_accounts_id", DbType.Int32, entity.GeneralLedgerAccountsId},
-                    new object[] { "@year", DbType.Int16, entity.Year},
-                    new object[] { "@date_entry", DbType.Date, entity.DateEntry},
-                    new object[] { "@amount", DbType.Decimal, entity.amount}
-               };
-
-                string query = $"INSERT INTO {tableName} (funds_id, function_program_project_id , others_fpp_id, allotment_classes_id, general_ledger_accounts_id, date_entry, year, amount) VALUES (@funds_id ,@function_program_project_id , @others_fpp_id, @allotment_classes_id, @general_ledger_accounts_id, @date_entry, @year, @amount)";
-                return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
- 
-        }
-
-        public bool Update(BudgetAppropriationsModel entity)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, entity.ID},
-                    new object[] { "@funds_id", DbType.Int32, entity.FundsId},
-                    new object[] { "@function_program_project_id", DbType.Int32, entity.FunctionProgramProjectId},
-                    new object[] { "@others_fpp_id", DbType.String, entity.OthersFPPId},
-                    new object[] { "@allotment_classes_id", DbType.Int32, entity.AllotmentClassesId},
-                    new object[] { "@general_ledger_accounts_id", DbType.Int32, entity.GeneralLedgerAccountsId},
-                    new object[] { "@date_entry", DbType.Date, entity.DateEntry},
-                    new object[] { "@year", DbType.Int16, entity.Year},
-                    new object[] { "@amount", DbType.Decimal, entity.amount}
-                };
-
-                string query = $"UPDATE {tableName} SET function_program_project_id = @function_program_project_id, funds_id =@funds_id, others_fpp_id = @others_fpp_id, allotment_classes_id = @allotment_classes_id, general_ledger_accounts_id = @general_ledger_accounts_id, date_entry = @date_entry, year = @year, amount = @amount WHERE id = @id";
-                return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
         #region Validations
 
@@ -229,7 +233,7 @@ namespace ACC.Data
                    new object[] {"@allotment_classes_id", DbType.Int32, allotmentClassID},
                    new object[] {"@general_ledger_accounts_id", DbType.Int32, genLedgerAccID }
                 };
-                string query = $"SELECT function_program_project_id, funds_id, others_fpp_id, allotment_classes_id, general_ledger_accounts_id, date_entry, year, amount FROM {tableName} WHERE id = @id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id";
+                string query = $"SELECT function_program_project_id, funds_id, others_fpp_id, allotment_classes_id, general_ledger_accounts_id, date_entry, year, amount, continuing FROM {tableName} WHERE id = @id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id";
 
                 using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -246,6 +250,7 @@ namespace ACC.Data
                         record.Add("date_entry", item[5].ToString());
                         record.Add("year", item[6].ToString());
                         record.Add("amount", item[7].ToString());
+                        record.Add("continuing", item[8].ToString());
                     }
                 }
             }
@@ -346,6 +351,7 @@ namespace ACC.Data
                     $"appropriation," +
                     $"total_allotment_release, " +
                     $"appropriation_balance, " +
+                    $"continuing," +
                     $"created_at, " +
                     $"updated_at " +
                     $"FROM {viewTableName} " +
