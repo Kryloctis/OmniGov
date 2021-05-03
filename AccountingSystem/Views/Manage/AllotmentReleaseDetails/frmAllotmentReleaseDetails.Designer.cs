@@ -364,10 +364,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgAllotmentRelease.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgAllotmentRelease.Location = new System.Drawing.Point(3, 50);
+            this.dgAllotmentRelease.Location = new System.Drawing.Point(3, 53);
             this.dgAllotmentRelease.Name = "dgAllotmentRelease";
             this.dgAllotmentRelease.RowTemplate.Height = 25;
-            this.dgAllotmentRelease.Size = new System.Drawing.Size(928, 452);
+            this.dgAllotmentRelease.Size = new System.Drawing.Size(928, 449);
             this.dgAllotmentRelease.TabIndex = 5;
             this.dgAllotmentRelease.SelectionChanged += new System.EventHandler(this.dgAllotmentRelease_SelectionChanged);
             // 

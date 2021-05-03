@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.AllotmentRelease;
+using AccountingSystem.Views.Manage.SupplementalAppropriations;
 using BudgetSystem.Views.BudgetAppropriations;
 using BudgetSystem.Views.Manage.BudgetAppropriations;
 using MySql.Data.MySqlClient;
@@ -28,7 +29,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         private void BtnSupplemental_Click(object sender, EventArgs e)
         {
-          
+            _ = new frmSupplementalAppropriations().ShowDialog();
         }
 
         internal void RecordLocator(int fppID, int allotmentClassID, int fundID, short year) 
