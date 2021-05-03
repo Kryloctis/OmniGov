@@ -20,11 +20,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             InitializeComponent();
             this.ucAllotmentReleaseMain = ucAllotmentReleaseMain;
             uc = ucAllotmentRelease1;
+            Helper.LoadFormIcon(this);
         }
 
         private void frmAllotmentReleaseAdd_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
             uc.LoadReference(ucAllotmentReleaseMain);
         }
 

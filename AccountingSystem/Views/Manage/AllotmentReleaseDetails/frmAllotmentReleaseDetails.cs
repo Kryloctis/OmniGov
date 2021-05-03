@@ -29,6 +29,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             btnEdit.Click += new EventHandler(btnEdit_Click);
             btnDelete.Click += new EventHandler(btnDelete_Click);
             txtSearch.TextChanged += new EventHandler(txtSearch_TextChanged);
+            Helper.LoadFormIcon(this);
         }
 
         private Dictionary<string, string> BudgetAppropriationInfo()
