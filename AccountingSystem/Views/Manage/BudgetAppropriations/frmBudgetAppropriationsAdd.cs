@@ -51,12 +51,13 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 {
                     FundsId = Convert.ToInt32(uc.cmbxTypeOfFund.SelectedValue),
                     FunctionProgramProjectId = Convert.ToInt32(uc.cmbxFPP.SelectedValue),
-                    OthersFPPId = uc.cmbxOthersFPP.SelectedValue == null? null : Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue),
+                    OthersFPPId = uc.cmbxOthersFPP.SelectedValue == null ? null : Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue),
                     AllotmentClassesId = Convert.ToInt32(uc.cmbxAllotmentClass.SelectedValue),
                     GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxLedgerAccount.SelectedValue),
                     Year = Convert.ToInt16(uc.nudYear.Value),
                     DateEntry = uc.dtDateEntry.Value,
-                    amount = uc.nudAmount.Value
+                    amount = uc.nudAmount.Value,
+                    continuing = uc.chckbxContinuing.Checked
                 };
 
                 return Factory.BudgetAppropriationsRepository().Insert(budgetAppropriationsModel);

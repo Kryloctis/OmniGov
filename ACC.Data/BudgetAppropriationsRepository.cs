@@ -233,7 +233,7 @@ namespace ACC.Data
                    new object[] {"@allotment_classes_id", DbType.Int32, allotmentClassID},
                    new object[] {"@general_ledger_accounts_id", DbType.Int32, genLedgerAccID }
                 };
-                string query = $"SELECT function_program_project_id, funds_id, others_fpp_id, allotment_classes_id, general_ledger_accounts_id, date_entry, year, amount FROM {tableName} WHERE id = @id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id";
+                string query = $"SELECT function_program_project_id, funds_id, others_fpp_id, allotment_classes_id, general_ledger_accounts_id, date_entry, year, amount, continuing FROM {tableName} WHERE id = @id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id";
 
                 using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -250,6 +250,7 @@ namespace ACC.Data
                         record.Add("date_entry", item[5].ToString());
                         record.Add("year", item[6].ToString());
                         record.Add("amount", item[7].ToString());
+                        record.Add("continuing", item[8].ToString());
                     }
                 }
             }
