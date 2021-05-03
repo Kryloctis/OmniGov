@@ -20,12 +20,18 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         public frmBudgetAppropriations()
         {
             InitializeComponent();
+            btnSupplemental.Click += new EventHandler(BtnSupplemental_Click);
             btnARODetails.Click += new EventHandler(BtnARODetails_Click);
             btnARO.Click += new EventHandler(BtnARO_Click);
             Helper.LoadFormIcon(this);
         }
 
-        internal void RecordLocator(int fppID, int allotmentClassID, int fundID, Int16 year) 
+        private void BtnSupplemental_Click(object sender, EventArgs e)
+        {
+          
+        }
+
+        internal void RecordLocator(int fppID, int allotmentClassID, int fundID, short year) 
         {
             dgFPP.ClearSelection();
 
