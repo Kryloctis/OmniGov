@@ -86,25 +86,25 @@ namespace AccountingSystem.Views.Manage.Banks
             Helper.EnableDisableToolStripButtons(dgBanks, btnEdit, btnDelete);
 
         }
-
+       
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            if(txtsearch.Text.Length > 0)
-            {
-                try
-                {
-                    string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                    var dtBanks = Factory.BanksRepository().GetRecordsBySearch(searchkey);
-                    HelperLoadRecords.BanksDatagridView(dtBanks, dgBanks);
+           if(txtsearch.Text.Length > 0)
+           {
+               try
+               {
+                   string searchkey = Convert.ToString(txtsearch.Text.Trim());
+                   var dtBanks = Factory.BanksRepository().GetRecordsBySearch(searchkey);
+                   HelperLoadRecords.BanksDatagridView(dtBanks, dgBanks);
 
-                    lblRecordCount.Text = dgBanks.Rows.Count.ToString();
-                }
-                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            }
-            else
-            {
-                LoadRecords();
-            }
+                   lblRecordCount.Text = dgBanks.Rows.Count.ToString();
+               }
+               catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+           }
+           else
+           {
+               LoadRecords();
+           }
         }
     }
 }

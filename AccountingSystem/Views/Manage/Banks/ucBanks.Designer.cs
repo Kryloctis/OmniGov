@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Manage.Banks
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 11);
+            this.label1.Location = new System.Drawing.Point(7, 11);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(97, 20);
             this.label1.TabIndex = 0;
@@ -50,7 +50,7 @@ namespace AccountingSystem.Views.Manage.Banks
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 52);
+            this.label2.Location = new System.Drawing.Point(9, 44);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(92, 20);
             this.label2.TabIndex = 1;
@@ -59,18 +59,20 @@ namespace AccountingSystem.Views.Manage.Banks
             // txtacode
             // 
             this.txtacode.Location = new System.Drawing.Point(112, 8);
+            this.txtacode.MaxLength = 45;
             this.txtacode.Name = "txtacode";
             this.txtacode.Size = new System.Drawing.Size(373, 27);
-            this.txtacode.TabIndex = 2;
+            this.txtacode.TabIndex = 0;
             this.txtacode.Validating += new System.ComponentModel.CancelEventHandler(this.txtacode_Validating);
             this.txtacode.Validated += new System.EventHandler(this.txtacode_Validated);
             // 
             // txtbankname
             // 
-            this.txtbankname.Location = new System.Drawing.Point(112, 49);
+            this.txtbankname.Location = new System.Drawing.Point(112, 41);
+            this.txtbankname.MaxLength = 99;
             this.txtbankname.Name = "txtbankname";
             this.txtbankname.Size = new System.Drawing.Size(373, 27);
-            this.txtbankname.TabIndex = 3;
+            this.txtbankname.TabIndex = 1;
             this.txtbankname.Validating += new System.ComponentModel.CancelEventHandler(this.txtbankname_Validating);
             this.txtbankname.Validated += new System.EventHandler(this.txtbankname_Validated);
             // 
@@ -87,7 +89,7 @@ namespace AccountingSystem.Views.Manage.Banks
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "ucBanks";
-            this.Size = new System.Drawing.Size(506, 89);
+            this.Size = new System.Drawing.Size(506, 82);
             this.Load += new System.EventHandler(this.ucBanks_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);

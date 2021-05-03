@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Manage.Banks
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.dgBanks = new System.Windows.Forms.DataGridView();
-            this.txtsearch = new System.Windows.Forms.ToolStripTextBox();
+            this.txtsearch = new System.Windows.Forms.TextBox();
             this.statusStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgBanks)).BeginInit();
@@ -112,8 +112,7 @@ namespace AccountingSystem.Views.Manage.Banks
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAdd,
             this.btnEdit,
-            this.btnDelete,
-            this.txtsearch});
+            this.btnDelete});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(5);
@@ -167,24 +166,27 @@ namespace AccountingSystem.Views.Manage.Banks
             this.dgBanks.RowHeadersWidth = 51;
             this.dgBanks.RowTemplate.Height = 29;
             this.dgBanks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgBanks.Size = new System.Drawing.Size(798, 427);
+            this.dgBanks.Size = new System.Drawing.Size(816, 427);
             this.dgBanks.TabIndex = 8;
             this.dgBanks.SelectionChanged += new System.EventHandler(this.dgBanks_SelectionChanged);
             // 
             // txtsearch
             // 
-            this.txtsearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.txtsearch.AutoSize = false;
+            this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtsearch.Location = new System.Drawing.Point(538, 21);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.Size = new System.Drawing.Size(300, 55);
-            this.txtsearch.Text = "Search...";
+            this.txtsearch.PlaceholderText = "Search...";
+            this.txtsearch.Size = new System.Drawing.Size(290, 27);
+            this.txtsearch.TabIndex = 9;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
             // frmBanks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(822, 527);
+            this.ClientSize = new System.Drawing.Size(840, 527);
+            this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.dgBanks);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip);
@@ -218,6 +220,6 @@ namespace AccountingSystem.Views.Manage.Banks
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.DataGridView dgBanks;
-        private System.Windows.Forms.ToolStripTextBox txtsearch;
+        private System.Windows.Forms.TextBox txtsearch;
     }
 }

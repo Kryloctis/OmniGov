@@ -33,7 +33,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.txtsearch = new System.Windows.Forms.ToolStripTextBox();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -43,6 +42,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgRCI = new System.Windows.Forms.DataGridView();
+            this.txtsearch = new System.Windows.Forms.TextBox();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgRCI)).BeginInit();
@@ -55,8 +55,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAdd,
             this.btnEdit,
-            this.btnDelete,
-            this.txtsearch});
+            this.btnDelete});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(5);
@@ -98,15 +97,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // txtsearch
-            // 
-            this.txtsearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.txtsearch.AutoSize = false;
-            this.txtsearch.Name = "txtsearch";
-            this.txtsearch.Size = new System.Drawing.Size(300, 55);
-            this.txtsearch.Text = "Search...";
-            this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
             // statusStrip
             // 
@@ -176,11 +166,23 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.dgRCI.TabIndex = 9;
             this.dgRCI.SelectionChanged += new System.EventHandler(this.dgRCI_SelectionChanged);
             // 
+            // txtsearch
+            // 
+            this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtsearch.Location = new System.Drawing.Point(884, 21);
+            this.txtsearch.Name = "txtsearch";
+            this.txtsearch.PlaceholderText = "Search...";
+            this.txtsearch.Size = new System.Drawing.Size(316, 27);
+            this.txtsearch.TabIndex = 10;
+            this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
+            // 
             // frmRCI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1212, 753);
+            this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.dgRCI);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip);
@@ -205,7 +207,6 @@ namespace AccountingSystem.Views.Transactions.RCI
         private System.Windows.Forms.ToolStripButton btnAdd;
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnDelete;
-        private System.Windows.Forms.ToolStripTextBox txtsearch;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
@@ -215,5 +216,6 @@ namespace AccountingSystem.Views.Transactions.RCI
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.DataGridView dgRCI;
+        private System.Windows.Forms.TextBox txtsearch;
     }
 }

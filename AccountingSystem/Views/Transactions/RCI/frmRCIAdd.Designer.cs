@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 461);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 399);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.flowLayoutPanel1.Size = new System.Drawing.Size(744, 36);
@@ -73,9 +73,9 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // ucrci1
             // 
-            this.ucrci1.Location = new System.Drawing.Point(0, 1);
+            this.ucrci1.Location = new System.Drawing.Point(0, -1);
             this.ucrci1.Name = "ucrci1";
-            this.ucrci1.Size = new System.Drawing.Size(744, 460);
+            this.ucrci1.Size = new System.Drawing.Size(744, 398);
             this.ucrci1.TabIndex = 5;
             // 
             // frmRCIAdd
@@ -84,11 +84,12 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(744, 497);
+            this.ClientSize = new System.Drawing.Size(744, 435);
             this.Controls.Add(this.ucrci1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmRCIAdd";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add RCI";
             this.Load += new System.EventHandler(this.frmRCIAdd_Load);
@@ -101,6 +102,6 @@ namespace AccountingSystem.Views.Transactions.RCI
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        internal ucRCI ucrci1;
+        private ucRCI ucrci1;
     }
 }

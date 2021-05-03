@@ -362,12 +362,13 @@ namespace AccountingSystem
             datagrid.Columns[6].HeaderText = "Payee";
             datagrid.Columns[7].HeaderText = "Nature of Payment";
             datagrid.Columns[8].HeaderText = "OBR No.";
-            datagrid.Columns[9].HeaderText = "Function";
+            datagrid.Columns[9].HeaderText = "Functional Code";
             datagrid.Columns[10].HeaderText = "Trust Liabilities";
             datagrid.Columns[11].HeaderText = "BIR VAT/Non-VAT";
-            datagrid.Columns[12].HeaderText = "Net Amount";
-            datagrid.Columns[13].Visible = false;
+            datagrid.Columns[12].HeaderText = "Amount";
+            datagrid.Columns[13].HeaderText = "Net Amount";
             datagrid.Columns[14].Visible = false;
+            datagrid.Columns[15].Visible = false;
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion

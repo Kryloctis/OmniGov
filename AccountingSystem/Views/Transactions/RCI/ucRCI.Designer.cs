@@ -67,7 +67,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 139);
+            this.label1.Location = new System.Drawing.Point(9, 115);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 20);
             this.label1.TabIndex = 0;
@@ -75,11 +75,12 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // txtbank
             // 
-            this.txtbank.Location = new System.Drawing.Point(103, 136);
+            this.errorProvider.SetIconAlignment(this.txtbank, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
+            this.txtbank.Location = new System.Drawing.Point(129, 112);
             this.txtbank.Name = "txtbank";
             this.txtbank.ReadOnly = true;
-            this.txtbank.Size = new System.Drawing.Size(588, 27);
-            this.txtbank.TabIndex = 1;
+            this.txtbank.Size = new System.Drawing.Size(562, 27);
+            this.txtbank.TabIndex = 4;
             this.txtbank.DoubleClick += new System.EventHandler(this.txtbank_DoubleClick);
             this.txtbank.Validating += new System.ComponentModel.CancelEventHandler(this.txtbank_Validating);
             this.txtbank.Validated += new System.EventHandler(this.txtbank_Validated);
@@ -87,10 +88,10 @@ namespace AccountingSystem.Views.Transactions.RCI
             // btncharge
             // 
             this.btncharge.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btncharge.Image = global::AccountingSystem.Properties.Resources.find;
-            this.btncharge.Location = new System.Drawing.Point(692, 134);
+            this.btncharge.Image = global::AccountingSystem.Properties.Resources.find1;
+            this.btncharge.Location = new System.Drawing.Point(690, 112);
             this.btncharge.Name = "btncharge";
-            this.btncharge.Size = new System.Drawing.Size(36, 33);
+            this.btncharge.Size = new System.Drawing.Size(36, 27);
             this.btncharge.TabIndex = 2;
             this.btncharge.UseVisualStyleBackColor = true;
             this.btncharge.Click += new System.EventHandler(this.btncharge_Click);
@@ -98,7 +99,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 60);
+            this.label2.Location = new System.Drawing.Point(9, 49);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 20);
             this.label2.TabIndex = 3;
@@ -107,7 +108,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 99);
+            this.label3.Location = new System.Drawing.Point(9, 82);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(72, 20);
             this.label3.TabIndex = 4;
@@ -116,21 +117,22 @@ namespace AccountingSystem.Views.Transactions.RCI
             // btnfund
             // 
             this.btnfund.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnfund.Image = global::AccountingSystem.Properties.Resources.find;
-            this.btnfund.Location = new System.Drawing.Point(692, 55);
+            this.btnfund.Image = global::AccountingSystem.Properties.Resources.find1;
+            this.btnfund.Location = new System.Drawing.Point(690, 46);
             this.btnfund.Name = "btnfund";
-            this.btnfund.Size = new System.Drawing.Size(36, 33);
+            this.btnfund.Size = new System.Drawing.Size(36, 27);
             this.btnfund.TabIndex = 6;
             this.btnfund.UseVisualStyleBackColor = true;
             this.btnfund.Click += new System.EventHandler(this.btnfund_Click);
             // 
             // txtfund
             // 
-            this.txtfund.Location = new System.Drawing.Point(103, 57);
+            this.errorProvider.SetIconAlignment(this.txtfund, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
+            this.txtfund.Location = new System.Drawing.Point(129, 46);
             this.txtfund.Name = "txtfund";
             this.txtfund.ReadOnly = true;
-            this.txtfund.Size = new System.Drawing.Size(588, 27);
-            this.txtfund.TabIndex = 5;
+            this.txtfund.Size = new System.Drawing.Size(562, 27);
+            this.txtfund.TabIndex = 2;
             this.txtfund.DoubleClick += new System.EventHandler(this.txtfund_DoubleClick);
             this.txtfund.Validating += new System.ComponentModel.CancelEventHandler(this.txtfund_Validating);
             this.txtfund.Validated += new System.EventHandler(this.txtfund_Validated);
@@ -138,21 +140,22 @@ namespace AccountingSystem.Views.Transactions.RCI
             // btnfunction
             // 
             this.btnfunction.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnfunction.Image = global::AccountingSystem.Properties.Resources.find;
-            this.btnfunction.Location = new System.Drawing.Point(692, 94);
+            this.btnfunction.Image = global::AccountingSystem.Properties.Resources.find1;
+            this.btnfunction.Location = new System.Drawing.Point(690, 79);
             this.btnfunction.Name = "btnfunction";
-            this.btnfunction.Size = new System.Drawing.Size(36, 33);
+            this.btnfunction.Size = new System.Drawing.Size(36, 27);
             this.btnfunction.TabIndex = 8;
             this.btnfunction.UseVisualStyleBackColor = true;
             this.btnfunction.Click += new System.EventHandler(this.btnfunction_Click);
             // 
             // txtfunction
             // 
-            this.txtfunction.Location = new System.Drawing.Point(103, 96);
+            this.errorProvider.SetIconAlignment(this.txtfunction, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
+            this.txtfunction.Location = new System.Drawing.Point(129, 79);
             this.txtfunction.Name = "txtfunction";
             this.txtfunction.ReadOnly = true;
-            this.txtfunction.Size = new System.Drawing.Size(588, 27);
-            this.txtfunction.TabIndex = 7;
+            this.txtfunction.Size = new System.Drawing.Size(562, 27);
+            this.txtfunction.TabIndex = 3;
             this.txtfunction.DoubleClick += new System.EventHandler(this.txtfunction_DoubleClick);
             this.txtfunction.Validating += new System.ComponentModel.CancelEventHandler(this.txtfunction_Validating);
             this.txtfunction.Validated += new System.EventHandler(this.txtfunction_Validated);
@@ -160,7 +163,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 180);
+            this.label4.Location = new System.Drawing.Point(9, 148);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(82, 20);
             this.label4.TabIndex = 9;
@@ -169,7 +172,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(377, 181);
+            this.label5.Location = new System.Drawing.Point(375, 148);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(91, 20);
             this.label5.TabIndex = 10;
@@ -177,20 +180,21 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // txtcheckno
             // 
-            this.txtcheckno.Location = new System.Drawing.Point(103, 178);
+            this.txtcheckno.Location = new System.Drawing.Point(129, 145);
+            this.txtcheckno.MaxLength = 15;
             this.txtcheckno.Name = "txtcheckno";
-            this.txtcheckno.Size = new System.Drawing.Size(268, 27);
-            this.txtcheckno.TabIndex = 11;
+            this.txtcheckno.Size = new System.Drawing.Size(242, 27);
+            this.txtcheckno.TabIndex = 5;
             this.txtcheckno.Validating += new System.ComponentModel.CancelEventHandler(this.txtcheckno_Validating);
             this.txtcheckno.Validated += new System.EventHandler(this.txtcheckno_Validated);
             // 
             // dtcheckdate
             // 
             this.dtcheckdate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtcheckdate.Location = new System.Drawing.Point(474, 178);
+            this.dtcheckdate.Location = new System.Drawing.Point(472, 145);
             this.dtcheckdate.Name = "dtcheckdate";
             this.dtcheckdate.Size = new System.Drawing.Size(254, 27);
-            this.dtcheckdate.TabIndex = 12;
+            this.dtcheckdate.TabIndex = 6;
             this.dtcheckdate.Validating += new System.ComponentModel.CancelEventHandler(this.dtcheckdate_Validating);
             this.dtcheckdate.Validated += new System.EventHandler(this.dtcheckdate_Validated);
             // 
@@ -215,25 +219,27 @@ namespace AccountingSystem.Views.Transactions.RCI
             // txtObno
             // 
             this.txtObno.Location = new System.Drawing.Point(129, 13);
+            this.txtObno.MaxLength = 20;
             this.txtObno.Name = "txtObno";
             this.txtObno.Size = new System.Drawing.Size(258, 27);
-            this.txtObno.TabIndex = 15;
+            this.txtObno.TabIndex = 0;
             this.txtObno.Validating += new System.ComponentModel.CancelEventHandler(this.txtObno_Validating);
             this.txtObno.Validated += new System.EventHandler(this.txtObno_Validated);
             // 
             // txtdvno
             // 
             this.txtdvno.Location = new System.Drawing.Point(461, 13);
+            this.txtdvno.MaxLength = 20;
             this.txtdvno.Name = "txtdvno";
-            this.txtdvno.Size = new System.Drawing.Size(267, 27);
-            this.txtdvno.TabIndex = 16;
+            this.txtdvno.Size = new System.Drawing.Size(265, 27);
+            this.txtdvno.TabIndex = 1;
             this.txtdvno.Validating += new System.ComponentModel.CancelEventHandler(this.txtdvno_Validating);
             this.txtdvno.Validated += new System.EventHandler(this.txtdvno_Validated);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(13, 222);
+            this.label8.Location = new System.Drawing.Point(9, 181);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(54, 20);
             this.label8.TabIndex = 17;
@@ -241,36 +247,37 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(13, 264);
+            this.label9.Location = new System.Drawing.Point(9, 214);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(139, 20);
+            this.label9.Size = new System.Drawing.Size(79, 47);
             this.label9.TabIndex = 18;
             this.label9.Text = "Nature of Payment :";
             // 
             // txtpayee
             // 
-            this.txtpayee.Location = new System.Drawing.Point(103, 219);
+            this.txtpayee.Location = new System.Drawing.Point(129, 178);
+            this.txtpayee.MaxLength = 150;
             this.txtpayee.Name = "txtpayee";
-            this.txtpayee.Size = new System.Drawing.Size(625, 27);
-            this.txtpayee.TabIndex = 21;
+            this.txtpayee.Size = new System.Drawing.Size(597, 27);
+            this.txtpayee.TabIndex = 7;
             this.txtpayee.Validating += new System.ComponentModel.CancelEventHandler(this.txtpayee_Validating);
             this.txtpayee.Validated += new System.EventHandler(this.txtpayee_Validated);
             // 
             // txtnature
             // 
-            this.txtnature.Location = new System.Drawing.Point(160, 261);
+            this.txtnature.Location = new System.Drawing.Point(129, 211);
+            this.txtnature.MaxLength = 150;
             this.txtnature.Multiline = true;
             this.txtnature.Name = "txtnature";
-            this.txtnature.Size = new System.Drawing.Size(568, 99);
-            this.txtnature.TabIndex = 22;
+            this.txtnature.Size = new System.Drawing.Size(597, 99);
+            this.txtnature.TabIndex = 8;
             this.txtnature.Validating += new System.ComponentModel.CancelEventHandler(this.txtnature_Validating);
             this.txtnature.Validated += new System.EventHandler(this.txtnature_Validated);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(13, 378);
+            this.label10.Location = new System.Drawing.Point(9, 318);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(114, 20);
             this.label10.TabIndex = 23;
@@ -279,7 +286,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(377, 379);
+            this.label11.Location = new System.Drawing.Point(375, 319);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(124, 20);
             this.label11.TabIndex = 24;
@@ -288,7 +295,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(377, 419);
+            this.label12.Location = new System.Drawing.Point(375, 359);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(97, 20);
             this.label12.TabIndex = 25;
@@ -301,10 +308,15 @@ namespace AccountingSystem.Views.Transactions.RCI
             // txttrust
             // 
             this.txttrust.DecimalPlaces = 2;
-            this.txttrust.Location = new System.Drawing.Point(160, 376);
+            this.txttrust.Location = new System.Drawing.Point(129, 316);
+            this.txttrust.Maximum = new decimal(new int[] {
+            1316134911,
+            2328,
+            0,
+            0});
             this.txttrust.Name = "txttrust";
-            this.txttrust.Size = new System.Drawing.Size(211, 27);
-            this.txttrust.TabIndex = 26;
+            this.txttrust.Size = new System.Drawing.Size(242, 27);
+            this.txttrust.TabIndex = 9;
             this.txttrust.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txttrust.Validating += new System.ComponentModel.CancelEventHandler(this.txttrust_Validating);
             this.txttrust.Validated += new System.EventHandler(this.txttrust_Validated);
@@ -312,19 +324,29 @@ namespace AccountingSystem.Views.Transactions.RCI
             // txtvat
             // 
             this.txtvat.DecimalPlaces = 2;
-            this.txtvat.Location = new System.Drawing.Point(507, 376);
+            this.txtvat.Location = new System.Drawing.Point(505, 316);
+            this.txtvat.Maximum = new decimal(new int[] {
+            1316134911,
+            2328,
+            0,
+            0});
             this.txtvat.Name = "txtvat";
             this.txtvat.Size = new System.Drawing.Size(221, 27);
-            this.txtvat.TabIndex = 27;
+            this.txtvat.TabIndex = 10;
             this.txtvat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtamount
             // 
             this.txtamount.DecimalPlaces = 2;
-            this.txtamount.Location = new System.Drawing.Point(507, 412);
+            this.txtamount.Location = new System.Drawing.Point(505, 352);
+            this.txtamount.Maximum = new decimal(new int[] {
+            1316134911,
+            2328,
+            0,
+            0});
             this.txtamount.Name = "txtamount";
             this.txtamount.Size = new System.Drawing.Size(221, 27);
-            this.txtamount.TabIndex = 28;
+            this.txtamount.TabIndex = 11;
             this.txtamount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // ucRCI
@@ -359,7 +381,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.Controls.Add(this.txtbank);
             this.Controls.Add(this.label1);
             this.Name = "ucRCI";
-            this.Size = new System.Drawing.Size(744, 458);
+            this.Size = new System.Drawing.Size(744, 389);
             this.Load += new System.EventHandler(this.ucRCI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txttrust)).EndInit();

@@ -163,7 +163,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtfund, "funding.!");
                 if (fundsId <= 0)
                 {
-                    errorProvider.SetError(txtfund, "Please select funding!");
+                    errorProvider.SetError(txtfund, "Please select funding!");                 
                     e.Cancel = true;
                 }
 
