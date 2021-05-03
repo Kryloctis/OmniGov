@@ -680,10 +680,18 @@ namespace AccountingSystem
             }
         }
 
-        internal static void BudgetAppropriationsDatagridView(DataGridView dgvBudgetAppropriations, int fppID, int allotmentClassID, int typeOfFundsID, Int16 year, TextBox txtTotalAppropriation)
+        internal static void BudgetAppropriationsDatagridView(DataGridView dgvBudgetAppropriations, int fppID, int allotmentClassID, int typeOfFundsID, short year, TextBox txtTotalAppropriation)
         {
             try
             {
+
+                Image continuingIcon = Properties.Resources.action_arrow_right_filled_14px; 
+
+                DataGridViewImageColumn imgColumn = new DataGridViewImageColumn();
+
+                imgColumn.HeaderText = "Continuing";
+                imgColumn.Name = "continuing";
+
                 //Clearing Datagrid View  Rows & Columns before Loading new one
                 dgvBudgetAppropriations.Rows.Clear();
                 dgvBudgetAppropriations.Columns.Clear();
@@ -701,8 +709,10 @@ namespace AccountingSystem
                 dgvBudgetAppropriations.Columns.Add("appropriation", "Appropriation");
                 dgvBudgetAppropriations.Columns.Add("total_allotment_release", "Total Allotment Release");
                 dgvBudgetAppropriations.Columns.Add("appropriation_balance", "Appropriation Balance");
+                dgvBudgetAppropriations.Columns.Add(imgColumn);
                 dgvBudgetAppropriations.Columns.Add("created_at", "Created at");
                 dgvBudgetAppropriations.Columns.Add("updated_at", "Updated at");
+              
 
                 //Column's Visibility
                 dgvBudgetAppropriations.Columns["budget_appropriations_id"].Visible = false;
@@ -723,6 +733,10 @@ namespace AccountingSystem
                 dgvBudgetAppropriations.Columns["appropriation_balance"].DefaultCellStyle.Format = "N2";
                 dgvBudgetAppropriations.Columns["appropriation_balance"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
+                dgvBudgetAppropriations.Columns["continuing"].DefaultCellStyle.NullValue = null;
+                dgvBudgetAppropriations.Columns["continuing"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgvBudgetAppropriations.Columns["continuing"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
                 //Initialize Repository Method
                 DataTable dtGetViewRecordsByFFPIDByAllotmentClass = Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(fppID, allotmentClassID, null, typeOfFundsID, year);
 
@@ -742,6 +756,7 @@ namespace AccountingSystem
                         drGetViewRecordsByIds["appropriation"],
                         drGetViewRecordsByIds["total_allotment_release"],
                         drGetViewRecordsByIds["appropriation_balance"],
+                        Convert.ToInt32(drGetViewRecordsByIds["continuing"]) == 1? continuingIcon : null,
                         drGetViewRecordsByIds["created_at"],
                         drGetViewRecordsByIds["updated_at"] });
                 }
@@ -773,6 +788,7 @@ namespace AccountingSystem
                         drGetViewRecordsByIds["appropriation"],
                         drGetViewRecordsByIds["total_allotment_release"],
                         drGetViewRecordsByIds["appropriation_balance"],
+                               Convert.ToInt32(drGetViewRecordsByIds["continuing"]) == 1? continuingIcon : null,
                         drGetViewRecordsByIds["created_at"],
                         drGetViewRecordsByIds["updated_at"] });
                     }

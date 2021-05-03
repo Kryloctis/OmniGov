@@ -351,6 +351,7 @@ namespace ACC.Data
                     $"appropriation," +
                     $"total_allotment_release, " +
                     $"appropriation_balance, " +
+                    $"continuing," +
                     $"created_at, " +
                     $"updated_at " +
                     $"FROM {viewTableName} " +
