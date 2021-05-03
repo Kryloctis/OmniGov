@@ -42,11 +42,18 @@ namespace AccountingSystem
             cmbFund.ValueMember = "id";
         }
 
+        private void LoadFPP()
+        {
+            var dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
+            HelperLoadRecords.FPPComboBox(dtFPP, cmbFPP, "fpp_name", "id");
+        }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
             menuSubsidiaryLedgerReport.Enabled = false;
             LoadFunds();
+            LoadFPP();
         }
 
         private void menuJournals_Click(object sender, EventArgs e)
@@ -156,7 +163,7 @@ namespace AccountingSystem
 
         private void BtnObligationRequest_Click(object sender, EventArgs e)
         {
-            _ = new frmJEV().ShowDialog();
+            _ = new frmObligationRequest().ShowDialog();
         }
     }
 }

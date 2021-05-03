@@ -85,12 +85,14 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             foreach (DataRow journal in journals.Rows)
             {
-                var radJournal = new RadioButton();
-                radJournal.Text = journal["journal_name"].ToString();
-                radJournal.Tag = journal["id"];
-                radJournal.AutoSize = true;
-                radJournal.Appearance = Appearance.Button;
-                radJournal.TextImageRelation = TextImageRelation.ImageBeforeText;
+                var radJournal = new RadioButton
+                {
+                    Text = journal["journal_name"].ToString(),
+                    Tag = journal["id"],
+                    AutoSize = true,
+                    Appearance = Appearance.Button,
+                    TextImageRelation = TextImageRelation.ImageBeforeText
+                };
 
                 if (journal["journal_name"].ToString() == CheckedJournal)
                 {
@@ -207,40 +209,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             cmbCollectingOfficer.Enabled = true;
         }
 
-        private void radioJournals_CheckedChanged(object sender, EventArgs e)
-        {
-            var radJournal = sender as RadioButton;
-            journalId = Convert.ToByte(radJournal.Tag);
-            ShowCheckIcon(radJournal);
-            journalName = radJournal.Text.Trim();
-
-            switch (journalName)
-            {
-                case "General Journal":
-                case "Procurement Received Journal":
-                    SetGeneralJournalFields();
-                    break;
-                case "Cash Disbursements Journal":
-                    SetCashDisbursementsJournalFields();
-
-                    break;
-                case "Cash Receipts Journal":
-                    SetCashReceiptsJournalFields();
-
-                    break;
-                case "Check Disbursements Journal":
-                    SetCheckDisbursementsJournalFields();
-                    break;
-                case "Authority to Debit Account Disbursement Journal":
-                    SetADAJournalFields();
-                    MessageBox.Show("ADa");
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
         private void SetADAJournalFields()
         {
             lblRciOrADANo.Text = "ADA No.";
@@ -275,6 +243,40 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             lblCollectingAccountableOfficer.Visible = false;
             cmbCollectingOfficer.Enabled = false;
+        }
+
+        private void radioJournals_CheckedChanged(object sender, EventArgs e)
+        {
+            var radJournal = sender as RadioButton;
+            journalId = Convert.ToByte(radJournal.Tag);
+            ShowCheckIcon(radJournal);
+            journalName = radJournal.Text.Trim();
+
+            switch (journalName)
+            {
+                case "General Journal":
+                case "Procurement Received Journal":
+                    SetGeneralJournalFields();
+                    break;
+                case "Cash Disbursements Journal":
+                    SetCashDisbursementsJournalFields();
+
+                    break;
+                case "Cash Receipts Journal":
+                    SetCashReceiptsJournalFields();
+
+                    break;
+                case "Check Disbursements Journal":
+                    SetCheckDisbursementsJournalFields();
+                    break;
+                case "Authority to Debit Account Disbursement Journal":
+                    SetADAJournalFields();
+                    MessageBox.Show("ADa");
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         private void ucJEV_Load(object sender, EventArgs e)

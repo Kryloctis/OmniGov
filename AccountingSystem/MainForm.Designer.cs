@@ -117,11 +117,18 @@ namespace AccountingSystem
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbFund = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbFPP = new System.Windows.Forms.ComboBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnJournalEntry = new System.Windows.Forms.ToolStripButton();
             this.btnObligationRequest = new System.Windows.Forms.ToolStripButton();
-            this.ucGeneralLedgerAccountSearch1 = new AccountingSystem.Views.Manage.ChartOfAccounts.ucGeneralLedgerAccountSearch();
+            this.panel21 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.panel22 = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel16.SuspendLayout();
@@ -145,6 +152,10 @@ namespace AccountingSystem
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.panel21.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel22.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -181,15 +192,15 @@ namespace AccountingSystem
             // menuJEV
             // 
             this.menuJEV.Name = "menuJEV";
-            this.menuJEV.Size = new System.Drawing.Size(197, 22);
-            this.menuJEV.Text = "Journal Entry Voucher...";
+            this.menuJEV.Size = new System.Drawing.Size(122, 22);
+            this.menuJEV.Text = "JEV...";
             this.menuJEV.Click += new System.EventHandler(this.menuJEV_Click);
             // 
             // menuObligationRequest
             // 
             this.menuObligationRequest.Name = "menuObligationRequest";
-            this.menuObligationRequest.Size = new System.Drawing.Size(197, 22);
-            this.menuObligationRequest.Text = "Obligation Request...";
+            this.menuObligationRequest.Size = new System.Drawing.Size(122, 22);
+            this.menuObligationRequest.Text = "CAFOA...";
             // 
             // menuManage
             // 
@@ -384,7 +395,7 @@ namespace AccountingSystem
             this.tableLayoutPanel1.Controls.Add(this.panel11, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 107);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 88);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -1007,28 +1018,29 @@ namespace AccountingSystem
             // 
             this.cmbFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFund.FormattingEnabled = true;
-            this.cmbFund.Location = new System.Drawing.Point(19, 78);
+            this.cmbFund.Location = new System.Drawing.Point(19, 62);
             this.cmbFund.Name = "cmbFund";
             this.cmbFund.Size = new System.Drawing.Size(156, 23);
             this.cmbFund.TabIndex = 2;
             // 
-            // comboBox1
+            // cmbFPP
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(181, 78);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(222, 23);
-            this.comboBox1.TabIndex = 3;
+            this.cmbFPP.FormattingEnabled = true;
+            this.cmbFPP.Location = new System.Drawing.Point(181, 62);
+            this.cmbFPP.Name = "cmbFPP";
+            this.cmbFPP.Size = new System.Drawing.Size(255, 23);
+            this.cmbFPP.TabIndex = 3;
             // 
             // toolStrip1
             // 
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnJournalEntry,
             this.btnObligationRequest});
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1110, 39);
+            this.toolStrip1.Size = new System.Drawing.Size(1110, 31);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -1038,25 +1050,100 @@ namespace AccountingSystem
             this.btnJournalEntry.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnJournalEntry.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnJournalEntry.Name = "btnJournalEntry";
-            this.btnJournalEntry.Size = new System.Drawing.Size(120, 36);
-            this.btnJournalEntry.Text = "Journal Entry...";
+            this.btnJournalEntry.Size = new System.Drawing.Size(61, 28);
+            this.btnJournalEntry.Text = "JEV...";
             // 
             // btnObligationRequest
             // 
             this.btnObligationRequest.Image = ((System.Drawing.Image)(resources.GetObject("btnObligationRequest.Image")));
-            this.btnObligationRequest.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnObligationRequest.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnObligationRequest.Name = "btnObligationRequest";
-            this.btnObligationRequest.Size = new System.Drawing.Size(153, 36);
-            this.btnObligationRequest.Text = "Obligation Request...";
+            this.btnObligationRequest.Size = new System.Drawing.Size(83, 28);
+            this.btnObligationRequest.Text = "CAFOA...";
             // 
-            // ucGeneralLedgerAccountSearch1
+            // panel21
             // 
-            this.ucGeneralLedgerAccountSearch1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucGeneralLedgerAccountSearch1.Location = new System.Drawing.Point(163, 329);
-            this.ucGeneralLedgerAccountSearch1.Name = "ucGeneralLedgerAccountSearch1";
-            this.ucGeneralLedgerAccountSearch1.Size = new System.Drawing.Size(367, 28);
-            this.ucGeneralLedgerAccountSearch1.TabIndex = 5;
+            this.panel21.BackColor = System.Drawing.Color.White;
+            this.panel21.Controls.Add(this.pictureBox1);
+            this.panel21.Controls.Add(this.label38);
+            this.panel21.Controls.Add(this.label37);
+            this.panel21.Location = new System.Drawing.Point(19, 272);
+            this.panel21.Name = "panel21";
+            this.panel21.Size = new System.Drawing.Size(160, 150);
+            this.panel21.TabIndex = 5;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(80, 70);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(80, 80);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label38.Location = new System.Drawing.Point(9, 46);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(66, 30);
+            this.label38.TabIndex = 6;
+            this.label38.Text = "Today\'s JEV\r\nCounter";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label37.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label37.Location = new System.Drawing.Point(9, 6);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(49, 40);
+            this.label37.TabIndex = 6;
+            this.label37.Text = "15";
+            // 
+            // panel22
+            // 
+            this.panel22.BackColor = System.Drawing.Color.White;
+            this.panel22.Controls.Add(this.pictureBox2);
+            this.panel22.Controls.Add(this.label39);
+            this.panel22.Controls.Add(this.label40);
+            this.panel22.Location = new System.Drawing.Point(191, 272);
+            this.panel22.Name = "panel22";
+            this.panel22.Size = new System.Drawing.Size(160, 150);
+            this.panel22.TabIndex = 6;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(80, 70);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(80, 80);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox2.TabIndex = 6;
+            this.pictureBox2.TabStop = false;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label39.Location = new System.Drawing.Point(9, 46);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(88, 30);
+            this.label39.TabIndex = 6;
+            this.label39.Text = "Today\'s CAFOA\nCounter";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label40.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label40.Location = new System.Drawing.Point(9, 6);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(33, 40);
+            this.label40.TabIndex = 6;
+            this.label40.Text = "6";
             // 
             // MainForm
             // 
@@ -1065,9 +1152,10 @@ namespace AccountingSystem
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1110, 538);
-            this.Controls.Add(this.ucGeneralLedgerAccountSearch1);
+            this.Controls.Add(this.panel22);
+            this.Controls.Add(this.panel21);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmbFPP);
             this.Controls.Add(this.cmbFund);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
@@ -1119,6 +1207,12 @@ namespace AccountingSystem
             this.panel5.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.panel21.ResumeLayout(false);
+            this.panel21.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel22.ResumeLayout(false);
+            this.panel22.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1214,11 +1308,18 @@ namespace AccountingSystem
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ComboBox cmbFund;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbFPP;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnJournalEntry;
         private System.Windows.Forms.ToolStripButton btnObligationRequest;
-        private Views.Manage.ChartOfAccounts.ucGeneralLedgerAccountSearch ucGeneralLedgerAccountSearch1;
+        private System.Windows.Forms.Panel panel21;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Panel panel22;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label40;
     }
 }
 
