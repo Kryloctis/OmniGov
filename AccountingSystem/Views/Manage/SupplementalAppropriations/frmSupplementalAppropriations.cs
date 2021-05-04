@@ -16,6 +16,12 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+            btnAdd.Click += new EventHandler(BtnAdd_Click);
+        }
+
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            _ = new frmSupplementalAppropriationAdd().ShowDialog();
         }
 
         private void frmSupplementalAppropriationsMain_Load(object sender, EventArgs e)

@@ -185,9 +185,9 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(307, 347);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(185, 15);
+            this.label1.Size = new System.Drawing.Size(189, 15);
             this.label1.TabIndex = 10;
-            this.label1.Text = "Total Supplemental Appropriation";
+            this.label1.Text = "Total Supplemented Appropriation";
             // 
             // frmSupplementalAppropriations
             // 
