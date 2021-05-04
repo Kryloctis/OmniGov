@@ -10,6 +10,7 @@ namespace ACC.Data
     public class SupplementalAppropriationsRepository : ISupplementalAppropriationsRepository
     {
         private MySqlGenericCommands _mySqlGenericCommands;
+        private readonly string tableName = "supplemental_appropriations";
 
         public SupplementalAppropriationsRepository(MySqlGenericCommands mySqlGenericCommands)
         {
@@ -48,7 +49,23 @@ namespace ACC.Data
 
         public bool Insert(SupplementalAppropriationsModel entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+              {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, entity.BudgetAppropriationID},
+                    new object[] { "@date_entry", DbType.Date, entity.date_entry.Date},
+                    new object[] { "@amount", DbType.Decimal, entity.amount},
+                    new object[] { "@remarks", DbType.String, entity.remarks},
+              };
+
+                string query = $"INSERT INTO {tableName} (budget_appropriations_id, date_entry, amount, remarks) VALUES (@budget_appropriations_id, @date_entry, @amount, @remarks)";
+                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Update(SupplementalAppropriationsModel entity)

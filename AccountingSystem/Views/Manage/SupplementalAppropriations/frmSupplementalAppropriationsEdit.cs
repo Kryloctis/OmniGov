@@ -12,9 +12,18 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 {
     public partial class frmSupplementalAppropriationsEdit : Form
     {
+        private ucSupplementalAppropriations uc;
+
         public frmSupplementalAppropriationsEdit()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
+            uc = ucSupplementalAppropriations1;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

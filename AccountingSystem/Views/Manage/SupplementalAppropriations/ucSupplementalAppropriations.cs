@@ -12,9 +12,19 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 {
     public partial class ucSupplementalAppropriations : UserControl
     {
+        internal int budgetAppropriationId;
+        internal DateTime dateEntry;
+
         public ucSupplementalAppropriations()
         {
             InitializeComponent();
+        }
+
+        internal void ResetForm() 
+        {
+            dtDateEntry.Value = DateTime.Now;
+            nudAmount.Value = 0;
+            txtRemarks.Text = string.Empty;
         }
 
         internal string GetFormErrors()
@@ -66,6 +76,14 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         private void txtRemarks_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(epRemarks, txtRemarks);
+        }
+
+        private void ucSupplementalAppropriations_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode) 
+            {
+                dtDateEntry.MinDate = dateEntry;
+            }
         }
     }
 }

@@ -68,9 +68,11 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // ucSupplementalAppropriations1
             // 
+            this.ucSupplementalAppropriations1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucSupplementalAppropriations1.Location = new System.Drawing.Point(15, 13);
             this.ucSupplementalAppropriations1.Name = "ucSupplementalAppropriations1";
             this.ucSupplementalAppropriations1.Size = new System.Drawing.Size(399, 97);

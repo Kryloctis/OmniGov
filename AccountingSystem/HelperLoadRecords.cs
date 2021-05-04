@@ -706,6 +706,7 @@ namespace AccountingSystem
                 dgvBudgetAppropriations.Columns.Add("general_ledger_acc_id", "Gen. Ledger Acc. ID");
                 dgvBudgetAppropriations.Columns.Add("ledger_name", "Object of Expenditures");
                 dgvBudgetAppropriations.Columns.Add("account_code", "Account Code");
+                dgvBudgetAppropriations.Columns.Add("date_entry", "Date Entry");
                 dgvBudgetAppropriations.Columns.Add("appropriation", "Appropriation");
                 dgvBudgetAppropriations.Columns.Add("total_allotment_release", "Total Allotment Release");
                 dgvBudgetAppropriations.Columns.Add("appropriation_balance", "Appropriation Balance");
@@ -722,6 +723,7 @@ namespace AccountingSystem
                 dgvBudgetAppropriations.Columns["others_fpp_id"].Visible = false;
                 dgvBudgetAppropriations.Columns["allotment_classes_id"].Visible = false;
                 dgvBudgetAppropriations.Columns["general_ledger_acc_id"].Visible = false;
+                dgvBudgetAppropriations.Columns["date_entry"].Visible = false;
                 dgvBudgetAppropriations.Columns["created_at"].Visible = false;
                 dgvBudgetAppropriations.Columns["updated_at"].Visible = false;
 
@@ -753,6 +755,7 @@ namespace AccountingSystem
                         drGetViewRecordsByIds["general_ledger_acc_id"],
                         drGetViewRecordsByIds["ledger_name"],
                         drGetViewRecordsByIds["account_code"],
+                        drGetViewRecordsByIds["date_entry"],
                         drGetViewRecordsByIds["appropriation"],
                         drGetViewRecordsByIds["total_allotment_release"],
                         drGetViewRecordsByIds["appropriation_balance"],
@@ -785,6 +788,7 @@ namespace AccountingSystem
                         drGetViewRecordsByIds["general_ledger_acc_id"],
                         drGetViewRecordsByIds["ledger_name"],
                         drGetViewRecordsByIds["account_code"],
+                        drGetViewRecordsByIds["date_entry"],
                         drGetViewRecordsByIds["appropriation"],
                         drGetViewRecordsByIds["total_allotment_release"],
                         drGetViewRecordsByIds["appropriation_balance"],

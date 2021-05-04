@@ -12,6 +12,9 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 {
     public partial class frmSupplementalAppropriations : Form
     {
+        internal int budgetAppropriationsId;
+        internal DateTime dateEntry;
+
         public frmSupplementalAppropriations()
         {
             InitializeComponent();
@@ -19,9 +22,19 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             btnAdd.Click += new EventHandler(BtnAdd_Click);
         }
 
+        private void ShowSupplementalAppropriationAdd() 
+        {
+            var frmSupplementalAppropriationAdd = new frmSupplementalAppropriationAdd();
+
+            frmSupplementalAppropriationAdd.uc.budgetAppropriationId = budgetAppropriationsId;
+            frmSupplementalAppropriationAdd.uc.dateEntry = dateEntry;
+
+            frmSupplementalAppropriationAdd.ShowDialog();
+        }
+
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmSupplementalAppropriationAdd().ShowDialog();
+            ShowSupplementalAppropriationAdd();
         }
 
         private void frmSupplementalAppropriationsMain_Load(object sender, EventArgs e)

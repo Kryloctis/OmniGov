@@ -31,7 +31,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         {
             this.components = new System.ComponentModel.Container();
             this.label2 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtDateEntry = new System.Windows.Forms.DateTimePicker();
             this.nudAmount = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -52,12 +52,12 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.label2.TabIndex = 0;
             this.label2.Text = "Date Entry";
             // 
-            // dateTimePicker1
+            // dtDateEntry
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(67, 8);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(310, 23);
-            this.dateTimePicker1.TabIndex = 1;
+            this.dtDateEntry.Location = new System.Drawing.Point(67, 8);
+            this.dtDateEntry.Name = "dtDateEntry";
+            this.dtDateEntry.Size = new System.Drawing.Size(310, 23);
+            this.dtDateEntry.TabIndex = 1;
             // 
             // nudAmount
             // 
@@ -118,11 +118,12 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.Controls.Add(this.txtRemarks);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.nudAmount);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dtDateEntry);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Name = "ucSupplementalAppropriations";
             this.Size = new System.Drawing.Size(399, 97);
+            this.Load += new System.EventHandler(this.ucSupplementalAppropriations_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epRemarks)).EndInit();
@@ -133,12 +134,12 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
         #endregion
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         internal System.Windows.Forms.TextBox txtRemarks;
         internal System.Windows.Forms.NumericUpDown nudAmount;
         internal System.Windows.Forms.ErrorProvider epAmount;
         internal System.Windows.Forms.ErrorProvider epRemarks;
+        internal System.Windows.Forms.DateTimePicker dtDateEntry;
     }
 }
