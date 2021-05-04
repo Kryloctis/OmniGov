@@ -17,6 +17,16 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             InitializeComponent();
         }
 
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[2];
+
+            errorArray[0] = epAmount.GetError(nudAmount);
+            errorArray[1] = epRemarks.GetError(txtRemarks);
+
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
         private bool AmountIsZero() 
         {
             try
