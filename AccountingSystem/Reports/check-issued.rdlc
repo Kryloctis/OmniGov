@@ -1110,7 +1110,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=IIf(Fields!fpp_code.Value="100",CDec(Fields!amount.Value),CDec(0))</Value>
+                                  <Value>=IIf(Fields!fund_code.Value="100",CDec(Fields!amount.Value),CDec(0))</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <Format>#,0.00;(#,0.00)</Format>
@@ -1144,7 +1144,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=IIf(Fields!fpp_code.Value="200",CDec(Fields!amount.Value),CDec(0))</Value>
+                                  <Value>=IIf(Fields!fund_code.Value="200",CDec(Fields!amount.Value),CDec(0))</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <Format>#,0.00;(#,0.00)</Format>
@@ -1178,7 +1178,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=IIf(Fields!fpp_code.Value="300",CDec(Fields!amount.Value),CDec(0))</Value>
+                                  <Value>=IIf(Fields!fund_code.Value="300",CDec(Fields!amount.Value),CDec(0))</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <Format>#,0.00;(#,0.00)</Format>
@@ -1394,7 +1394,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(IIf(Fields!fpp_code.Value="100",CDec(Fields!amount.Value),CDec(0)))</Value>
+                                  <Value>=Sum(IIf(Fields!fund_code.Value="100",CDec(Fields!amount.Value),CDec(0)))</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -1430,7 +1430,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(IIf(Fields!fpp_code.Value="200",CDec(Fields!amount.Value),CDec(0)))</Value>
+                                  <Value>=Sum(IIf(Fields!fund_code.Value="200",CDec(Fields!amount.Value),CDec(0)))</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -1466,7 +1466,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(IIf(Fields!fpp_code.Value="300",CDec(Fields!amount.Value),CDec(0)))</Value>
+                                  <Value>=Sum(IIf(Fields!fund_code.Value="300",CDec(Fields!amount.Value),CDec(0)))</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
