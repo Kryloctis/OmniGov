@@ -14,11 +14,15 @@ using AccountingSystem.Views.Manage.BudgetAppropriations;
 using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.Ledgers;
+using AccountingSystem.Views.Dashboard;
 
 namespace AccountingSystem
 {
     public partial class MainForm : Form
     {
+        internal byte userId;
+        private UcAccountingDashboard ucAccountingDashboard;
+
         public MainForm()
         {
             InitializeComponent();
@@ -33,27 +37,19 @@ namespace AccountingSystem
             menuGeneralLedgerReport.Click += new EventHandler(MenuGeneralLedgerReport_Click);
             btnJournalEntry.Click += new EventHandler(BtnJournalEntry_Click);
             btnObligationRequest.Click += new EventHandler(BtnObligationRequest_Click);
+
+            ucAccountingDashboard = new UcAccountingDashboard();
         }
 
-        private void LoadFunds()
-        {
-            cmbFund.DataSource = Factory.FundsRepository().GetRecords();
-            cmbFund.DisplayMember = "fund_name";
-            cmbFund.ValueMember = "id";
-        }
-
-        private void LoadFPP()
-        {
-            var dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
-            HelperLoadRecords.FPPComboBox(dtFPP, cmbFPP, "fpp_name", "id");
-        }
+        
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
             menuSubsidiaryLedgerReport.Enabled = false;
-            LoadFunds();
-            LoadFPP();
+            ucAccountingDashboard.LoadFunds();
+            ucAccountingDashboard.LoadFPP();
+            panel1.Controls.Add(ucAccountingDashboard);
         }
 
         private void menuJournals_Click(object sender, EventArgs e)

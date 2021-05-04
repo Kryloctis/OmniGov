@@ -11,12 +11,12 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "users";
-        
 
         public UsersRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }
+
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var record = new Dictionary<string, string>();
@@ -66,7 +66,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
       
         public DataTable GetRecordsBySearch(string searchText)
         {
@@ -100,7 +99,7 @@ namespace ACC.Data
 
                 };
 
-                string query = $"INSERT INTO {tableName} ( roles_id, first_name, mid_initial, last_name, username, password) VALUES (@roles_id, @first_name, @mid_initial, @last_name, @username, @password)";
+                string query = $"INSERT INTO {tableName} ( roles_id, first_name, mid_initial, last_name, username, password) VALUES (@roles_id, @first_name, @mid_initial, @last_name, @username, sha2(@password, 224))";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -125,7 +124,7 @@ namespace ACC.Data
 
                 };
 
-                string query = $"UPDATE {tableName} SET roles_id = @roles_id, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, username = @username, password = @password WHERE id = @id";
+                string query = $"UPDATE {tableName} SET roles_id = @roles_id, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, username = @username, password = sha2(@password, 224) WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -243,6 +242,30 @@ namespace ACC.Data
             };
 
             return false;
+        }
+
+        public byte ValidateLogin(string username, string password)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@username", DbType.String, username },
+                    new object[] { "@password", DbType.String, password },
+                };
+
+                string query = $"SELECT id FROM {tableName} WHERE username = @username AND password = sha2(@password, 224)";
+                byte userId = Convert.ToByte(_dbGenericCommands.ExecuteScalar(query, parameters));
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(userId.ToString())) return userId;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return 0;
         }
     }
 }

@@ -7,7 +7,9 @@ namespace ACC.Domain.Interfaces
     public interface IUsersRepository : IRepository<UsersModel>
     {
         bool NameExist(string name);
+
         bool NameExist(string name, int id);
-        
+
+        byte ValidateLogin(string username, string password);
     }
 }
