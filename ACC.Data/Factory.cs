@@ -68,6 +68,7 @@ namespace AccountingSystem
 
         public static IObligationRequestRepository ObligationRequestRepository() => new ObligationRequestRepository(new MySqlGenericCommands());
 
+        public static ISupplementalAppropriationsRepository SupplementalAppropriationsRepository() => new SupplementalAppropriationsRepository(new MySqlGenericCommands());
 
         public static IError CreateErrors(Array errors) => new Error(errors);
     }
