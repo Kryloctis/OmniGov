@@ -24,6 +24,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             _frmAllotmentRelease = frmAllotmentRelease;
             _frmBudgetAppropriations = frmBudgetAppropriations;
             uc = ucAllotmentRelease1;
+            Helper.LoadFormIcon(this);
         }
 
         private void LoadBudgetAppropriationRecords()

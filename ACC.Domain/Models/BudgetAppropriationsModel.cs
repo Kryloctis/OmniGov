@@ -15,5 +15,6 @@ namespace ACC.Domain.Models
         public short Year { get; set; }
         public DateTime DateEntry { get; set; }
         public decimal amount { get; set; }
+        public bool continuing { get; set; }
     }
 }

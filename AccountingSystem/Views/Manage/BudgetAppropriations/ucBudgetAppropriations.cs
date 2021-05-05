@@ -19,7 +19,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
         internal int? othersFPPId = 0;
         internal int allotmentClassesId = 0;
         internal int generalLedgerAccId = 0;
-        internal Int16 year;
+        internal short year;
         internal decimal totalAllotmentRelease = 0;
 
         public ucBudgetAppropriations()
@@ -389,5 +389,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             LoadGeneralLedgerAccounts();
         }
+
     }
 }

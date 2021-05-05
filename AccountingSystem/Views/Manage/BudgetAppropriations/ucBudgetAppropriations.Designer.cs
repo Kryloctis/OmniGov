@@ -54,6 +54,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.nudYear = new System.Windows.Forms.NumericUpDown();
             this.epTypeOfFund = new System.Windows.Forms.ErrorProvider(this.components);
             this.epYear = new System.Windows.Forms.ErrorProvider(this.components);
+            this.chckbxContinuing = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFunctionProgramProject)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFunctionProgramProject)).BeginInit();
@@ -165,7 +166,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             0});
             this.nudAmount.Name = "nudAmount";
             this.nudAmount.Size = new System.Drawing.Size(436, 23);
-            this.nudAmount.TabIndex = 8;
+            this.nudAmount.TabIndex = 7;
             this.nudAmount.ThousandsSeparator = true;
             this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
             this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
@@ -271,11 +272,22 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // 
             this.epYear.ContainerControl = this;
             // 
+            // chckbxContinuing
+            // 
+            this.chckbxContinuing.AutoSize = true;
+            this.chckbxContinuing.Location = new System.Drawing.Point(413, 232);
+            this.chckbxContinuing.Name = "chckbxContinuing";
+            this.chckbxContinuing.Size = new System.Drawing.Size(163, 19);
+            this.chckbxContinuing.TabIndex = 8;
+            this.chckbxContinuing.Text = "Continuing Appropriation";
+            this.chckbxContinuing.UseVisualStyleBackColor = true;
+            // 
             // ucBudgetAppropriations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.Controls.Add(this.chckbxContinuing);
             this.Controls.Add(this.nudYear);
             this.Controls.Add(this.cmbxTypeOfFund);
             this.Controls.Add(this.dtDateEntry);
@@ -293,7 +305,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.Controls.Add(this.cmbxOthersFPP);
             this.Controls.Add(this.cmbxFPP);
             this.Name = "ucBudgetAppropriations";
-            this.Size = new System.Drawing.Size(600, 230);
+            this.Size = new System.Drawing.Size(600, 252);
             this.Validating += new System.ComponentModel.CancelEventHandler(this.ucBudgetAppropriations_Validating);
             this.Validated += new System.EventHandler(this.ucBudgetAppropriations_Validated);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
@@ -336,5 +348,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
         internal System.Windows.Forms.NumericUpDown nudYear;
         internal System.Windows.Forms.ComboBox cmbxTypeOfFund;
         internal System.Windows.Forms.ErrorProvider epBudgetAppropriation;
+        internal System.Windows.Forms.CheckBox chckbxContinuing;
     }
 }

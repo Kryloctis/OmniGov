@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.AllotmentRelease;
+using AccountingSystem.Views.Manage.SupplementalAppropriations;
 using BudgetSystem.Views.BudgetAppropriations;
 using BudgetSystem.Views.Manage.BudgetAppropriations;
 using MySql.Data.MySqlClient;
@@ -20,12 +21,32 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         public frmBudgetAppropriations()
         {
             InitializeComponent();
+            btnSupplemental.Click += new EventHandler(BtnSupplemental_Click);
             btnARODetails.Click += new EventHandler(BtnARODetails_Click);
             btnARO.Click += new EventHandler(BtnARO_Click);
             Helper.LoadFormIcon(this);
         }
 
-        internal void RecordLocator(int fppID, int allotmentClassID, int fundID, Int16 year) 
+        private void ShowSupplementalAppropriationsForm() 
+        {
+            var frmSupplementalAppropriations = new frmSupplementalAppropriations();
+            var rowIndex = dgBudgetAppropriations.CurrentCell.RowIndex;
+
+            int budgetAppId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["budget_appropriations_id"].Value);
+            DateTime dateEntry = Convert.ToDateTime(dgBudgetAppropriations.Rows[rowIndex].Cells["date_entry"].Value);
+
+            frmSupplementalAppropriations.budgetAppropriationsId = budgetAppId;
+            frmSupplementalAppropriations.dateEntry = dateEntry;
+
+            frmSupplementalAppropriations.ShowDialog();
+        }
+
+        private void BtnSupplemental_Click(object sender, EventArgs e)
+        {
+            ShowSupplementalAppropriationsForm();
+        }
+
+        internal void RecordLocator(int fppID, int allotmentClassID, int fundID, short year) 
         {
             dgFPP.ClearSelection();
 
@@ -74,12 +95,13 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             }
         }
 
-        internal void EnableDisableButtonsLocal(DataGridView dgv, ToolStripButton btnEdit, ToolStripButton btnDelete)
+        internal void EnableDisableButtonsLocal(DataGridView dgv)
         {
             int SelectedRows = dgv.SelectedRows.Count;
 
             if (SelectedRows == 1 && dgv.SelectedCells[0].Value != null)
             {
+                btnSupplemental.Enabled = true;
                 btnEdit.Enabled = true;
                 btnARODetails.Enabled = true;
                 btnDelete.Enabled = true;
@@ -88,6 +110,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             }
             else if (SelectedRows > 1 && dgv.SelectedCells[0].Value != null)
             {
+                btnSupplemental.Enabled = false;
                 btnEdit.Enabled = false;
                 btnARODetails.Enabled = false;
                 btnDelete.Enabled = true;
@@ -95,6 +118,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             }
             else
             {
+                btnSupplemental.Enabled = false;
                 btnEdit.Enabled = false;
                 btnARODetails.Enabled = false;
                 btnDelete.Enabled = false;
@@ -265,7 +289,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             if (selectedRows > 0)
                 LoadBudgetAppropriationRecords();
 
-            EnableDisableButtonsLocal(dgBudgetAppropriations, btnEdit, btnDelete);
+            EnableDisableButtonsLocal(dgBudgetAppropriations);
         }
 
         private void dgFPP_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -275,7 +299,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         private void dgBudgetAppropriations_SelectionChanged(object sender, EventArgs e)
         {
-            EnableDisableButtonsLocal(dgBudgetAppropriations, btnEdit, btnDelete);
+            EnableDisableButtonsLocal(dgBudgetAppropriations);
         }
 
         #endregion Events Method

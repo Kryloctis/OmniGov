@@ -323,7 +323,7 @@ namespace ACC.Data
                     new object[] { "@others_fpp_id", DbType.String, othersFPPID },
                     new object[] { "@allotment_classes_id",DbType.String, allotmentClassID},
                     new object[] { "@general_ledger_accounts_id", DbType.Int32, accountID },
-                    new object[] { "@date_issued", DbType.Date, dateIssued }
+                    new object[] { "@date_issued", DbType.Date, dateIssued.Date }
                 };
 
                 string query = $"SELECT " +
