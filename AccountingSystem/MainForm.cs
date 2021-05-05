@@ -56,7 +56,7 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Manage Allotment Classes"))
                 menuAllotmentClasses.Visible = false;
 
-            if (!Helper.HasPermission("Manage Budget Appropriations")) 
+            if (!Helper.HasPermission("Manage Budget Appropriations") && !Helper.HasPermission("Manage Allotment Realeases"))
                 menuBudgetAppropriation.Visible = false;
 
             if (!Helper.HasPermission("Manage Chart of Accounts")) 
@@ -74,8 +74,14 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Manage Journals"))
                 menuJournals.Visible = false;
 
-            if (!Helper.HasPermission("Manage Users"))
+            if (!Helper.HasPermission("Manage Users") && !Helper.HasPermission("Manage Roles"))
                 menuUsers.Visible = false;
+
+            if (!Helper.HasPermission("Manage Users"))
+                menuUserList.Visible = false;
+
+            if (!Helper.HasPermission("Manage Roles"))
+                menuRoles.Visible = false;
 
             if (!Helper.HasPermission("Transaction JEV"))
                 btnJournalEntry.Visible = false;

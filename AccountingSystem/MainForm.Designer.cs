@@ -69,7 +69,6 @@ namespace AccountingSystem
             this.lblUserFullName = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUserRole = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuprintRCI = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
