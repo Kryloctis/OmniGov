@@ -48,6 +48,9 @@ namespace AccountingSystem.Views.Dashboard
             this.panel18 = new System.Windows.Forms.Panel();
             this.label30 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
+            this.panel19 = new System.Windows.Forms.Panel();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
             this.panel20 = new System.Windows.Forms.Panel();
             this.label34 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
@@ -94,9 +97,6 @@ namespace AccountingSystem.Views.Dashboard
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel19 = new System.Windows.Forms.Panel();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel22.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -106,6 +106,7 @@ namespace AccountingSystem.Views.Dashboard
             this.panel16.SuspendLayout();
             this.panel17.SuspendLayout();
             this.panel18.SuspendLayout();
+            this.panel19.SuspendLayout();
             this.panel20.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel12.SuspendLayout();
@@ -122,7 +123,6 @@ namespace AccountingSystem.Views.Dashboard
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.panel19.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -136,14 +136,14 @@ namespace AccountingSystem.Views.Dashboard
             this.panel22.Location = new System.Drawing.Point(179, 7);
             this.panel22.Margin = new System.Windows.Forms.Padding(7);
             this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(158, 178);
+            this.panel22.Size = new System.Drawing.Size(158, 171);
             this.panel22.TabIndex = 11;
             // 
             // pictureBox2
             // 
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(78, 98);
+            this.pictureBox2.Location = new System.Drawing.Point(78, 91);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(80, 80);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -181,14 +181,14 @@ namespace AccountingSystem.Views.Dashboard
             this.panel21.Location = new System.Drawing.Point(7, 7);
             this.panel21.Margin = new System.Windows.Forms.Padding(7);
             this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(158, 178);
+            this.panel21.Size = new System.Drawing.Size(158, 171);
             this.panel21.TabIndex = 10;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(78, 98);
+            this.pictureBox1.Location = new System.Drawing.Point(78, 91);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(80, 80);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -329,6 +329,35 @@ namespace AccountingSystem.Views.Dashboard
             this.label31.Size = new System.Drawing.Size(59, 15);
             this.label31.TabIndex = 0;
             this.label31.Text = "Obligated";
+            // 
+            // panel19
+            // 
+            this.panel19.Controls.Add(this.label32);
+            this.panel19.Controls.Add(this.label33);
+            this.panel19.Location = new System.Drawing.Point(0, 60);
+            this.panel19.Name = "panel19";
+            this.panel19.Size = new System.Drawing.Size(237, 25);
+            this.panel19.TabIndex = 3;
+            // 
+            // label32
+            // 
+            this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label32.Location = new System.Drawing.Point(296, 5);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(112, 15);
+            this.label32.TabIndex = 1;
+            this.label32.Text = "1,000,000,000,000.00";
+            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label33.Location = new System.Drawing.Point(3, 5);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(46, 15);
+            this.label33.TabIndex = 0;
+            this.label33.Text = "Release";
             // 
             // panel20
             // 
@@ -834,35 +863,6 @@ namespace AccountingSystem.Views.Dashboard
             this.label2.Text = "Personnel Services";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panel19
-            // 
-            this.panel19.Controls.Add(this.label32);
-            this.panel19.Controls.Add(this.label33);
-            this.panel19.Location = new System.Drawing.Point(0, 60);
-            this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(237, 25);
-            this.panel19.TabIndex = 3;
-            // 
-            // label32
-            // 
-            this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label32.Location = new System.Drawing.Point(296, 5);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(112, 15);
-            this.label32.TabIndex = 1;
-            this.label32.Text = "1,000,000,000,000.00";
-            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label33.Location = new System.Drawing.Point(3, 5);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(46, 15);
-            this.label33.TabIndex = 0;
-            this.label33.Text = "Release";
-            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
@@ -874,7 +874,7 @@ namespace AccountingSystem.Views.Dashboard
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(344, 192);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(344, 185);
             this.tableLayoutPanel2.TabIndex = 12;
             // 
             // UcAccountingDashboard
@@ -887,6 +887,7 @@ namespace AccountingSystem.Views.Dashboard
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "UcAccountingDashboard";
             this.Size = new System.Drawing.Size(1106, 601);
+            this.Load += new System.EventHandler(this.UcAccountingDashboard_Load);
             this.panel22.ResumeLayout(false);
             this.panel22.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -899,6 +900,8 @@ namespace AccountingSystem.Views.Dashboard
             this.panel17.PerformLayout();
             this.panel18.ResumeLayout(false);
             this.panel18.PerformLayout();
+            this.panel19.ResumeLayout(false);
+            this.panel19.PerformLayout();
             this.panel20.ResumeLayout(false);
             this.panel20.PerformLayout();
             this.panel11.ResumeLayout(false);
@@ -928,8 +931,6 @@ namespace AccountingSystem.Views.Dashboard
             this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.panel19.ResumeLayout(false);
-            this.panel19.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 

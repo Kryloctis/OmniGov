@@ -20,7 +20,6 @@ namespace AccountingSystem
 {
     public partial class MainForm : Form
     {
-        internal byte userId;
         private UcAccountingDashboard ucAccountingDashboard;
 
         public MainForm()
@@ -41,15 +40,80 @@ namespace AccountingSystem
             ucAccountingDashboard = new UcAccountingDashboard();
         }
 
-        
+        private void LoadLoggedInUser()
+        {
+            var userDict = Helper.LoggedInUserData();
+            lblUserFullName.Text = $"Welcome {userDict["first_name"]} {userDict["mid_initial"]} {userDict["last_name"]}";
+            lblUserRole.Text = userDict["role_name"];
+        }
+
+        private void ValidatePermissions()
+        {
+            if (!Helper.HasPermission("Manage Allotment Classes"))
+                menuAllotmentClasses.Visible = false;
+
+            if (!Helper.HasPermission("Manage Budget Appropriations")) 
+                menuBudgetAppropriation.Visible = false;
+
+            if (!Helper.HasPermission("Manage Chart of Accounts")) 
+                menuChartOfAccounts.Visible = false;
+
+            if (!Helper.HasPermission("Manage Function/Program/Project"))
+                menuFunctionProgramProject.Visible = false;
+
+            if (!Helper.HasPermission("Manage Collecting Officer"))
+                menuCollectingOfficer.Visible = false;
+
+            if (!Helper.HasPermission("Manage Funds"))
+                menuFunds.Visible = false;
+
+            if (!Helper.HasPermission("Manage Journals"))
+                menuJournals.Visible = false;
+
+            if (!Helper.HasPermission("Manage Users"))
+                menuUsers.Visible = false;
+
+            if (!Helper.HasPermission("Transaction JEV"))
+                btnJournalEntry.Visible = false;
+
+            if (!Helper.HasPermission("Transaction Obligation Request"))
+                btnObligationRequest.Visible = false;
+
+            if (!Helper.HasPermission("Report General Journal"))
+                menuReportGJ.Visible = false;
+
+            if (!Helper.HasPermission("Report Cash Receipts Journal"))
+                menuReportCRJ.Visible = false;
+
+            if (!Helper.HasPermission("Report Procurement Received Journal"))
+                menuReportPRJ.Visible = false;
+
+            if (!Helper.HasPermission("Report Cash Disbursements Journal"))
+                menuReportCDJ.Visible = false;
+
+            if (!Helper.HasPermission("Report Check Disbursements Journal"))
+                menuReportCkDJ.Visible = false;
+
+            if (!Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
+                menuReportADADJ.Visible = false;
+
+            if (!Helper.HasPermission("Report General Ledger"))
+                menuGeneralLedgerReport.Visible = false;
+
+            if (!Helper.HasPermission("Report Subsidiary Ledger"))
+                menuSubsidiaryLedgerReport.Visible = false;
+
+            if (!Helper.HasPermission("Report SAAOB"))
+                menuSAAOB.Visible = false;
+        }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
             menuSubsidiaryLedgerReport.Enabled = false;
-            ucAccountingDashboard.LoadFunds();
-            ucAccountingDashboard.LoadFPP();
             panel1.Controls.Add(ucAccountingDashboard);
+            LoadLoggedInUser();
+            ValidatePermissions();
         }
 
         private void menuJournals_Click(object sender, EventArgs e)

@@ -11,6 +11,7 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "users";
+        private readonly string viewTableName = "view_users";
 
         public UsersRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -28,21 +29,24 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT roles_id, first_name, mid_initial, last_name, username, password, is_deleted, created_at, updated_at FROM {tableName} WHERE id = @id";
+                string query = $"SELECT roles_id, first_name, mid_initial, last_name, username, password, is_deleted, created_at, updated_at, office, role_name, permission_name FROM {viewTableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
                         return record;
 
-                    record.Add("roles_id", reader.Rows[0][0].ToString());
-                    record.Add("first_name", reader.Rows[0][1].ToString());
-                    record.Add("mid_initial", reader.Rows[0][2].ToString());
-                    record.Add("last_name", reader.Rows[0][3].ToString());
-                    record.Add("username", reader.Rows[0][4].ToString());
-                    record.Add("password", reader.Rows[0][5].ToString());
-                    record.Add("created_at", reader.Rows[0][6].ToString());
-                    record.Add("updated_at", reader.Rows[0][7].ToString());
+                    record.Add("roles_id", reader.Rows[0]["roles_id"].ToString());
+                    record.Add("first_name", reader.Rows[0]["first_name"].ToString());
+                    record.Add("mid_initial", reader.Rows[0]["mid_initial"].ToString());
+                    record.Add("last_name", reader.Rows[0]["last_name"].ToString());
+                    record.Add("username", reader.Rows[0]["username"].ToString());
+                    record.Add("password", reader.Rows[0]["password"].ToString());
+                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+                    record.Add("office", reader.Rows[0]["office"].ToString());
+                    record.Add("role_name", reader.Rows[0]["role_name"].ToString());
+                    record.Add("permission_name", reader.Rows[0]["permission_name"].ToString());
                 }
             }
             catch (Exception)
@@ -255,10 +259,10 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT id FROM {tableName} WHERE username = @username AND password = sha2(@password, 224)";
-                byte userId = Convert.ToByte(_dbGenericCommands.ExecuteScalar(query, parameters));
+                string userId = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(userId.ToString())) return userId;
+                if (!string.IsNullOrEmpty(userId)) return Convert.ToByte(userId);
             }
             catch (Exception)
             {
@@ -266,6 +270,30 @@ namespace ACC.Data
             };
 
             return 0;
+        }
+
+        public bool HasPermission(byte userId, string permissionName)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Byte, userId },
+                    new object[] { "@permission_name", DbType.String, permissionName},
+                };
+
+                string query = $"SELECT id FROM {viewTableName} WHERE id = @id AND permission_name = @permission_name";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
         }
     }
 }

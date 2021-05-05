@@ -38,7 +38,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             try
             {
-                var user = Helper.GetLoggedInUser();
+                var user = Helper.LoggedInUserData();
                 var uc = ucjev1;
 
                 // validate form
@@ -219,7 +219,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             try
             {
-                var user = Helper.GetLoggedInUser();
+                var user = Helper.LoggedInUserData();
                 var uc = ucjev1;
 
                 // validate form

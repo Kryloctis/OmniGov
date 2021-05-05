@@ -48,14 +48,14 @@ namespace AccountingSystem
             this.menuBeginningBalances = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBudgetAppropriation = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuJournalsReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportGJ = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportCRJ = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportPRJ = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportCDJ = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportCkDJ = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportADADJ = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuLedgersReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuGeneralLedgerReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSubsidiaryLedgerReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOB = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,8 +64,11 @@ namespace AccountingSystem
             this.btnObligationRequest = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblUserFullName = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblUserRole = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -209,25 +212,25 @@ namespace AccountingSystem
             // menuReports
             // 
             this.menuReports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.toolStripMenuItem2,
+            this.menuJournalsReport,
+            this.menuLedgersReport,
             this.menuSAAOB});
             this.menuReports.Name = "menuReports";
             this.menuReports.Size = new System.Drawing.Size(59, 19);
             this.menuReports.Text = "Reports";
             // 
-            // toolStripMenuItem1
+            // menuJournalsReport
             // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuJournalsReport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuReportGJ,
             this.menuReportCRJ,
             this.menuReportPRJ,
             this.menuReportCDJ,
             this.menuReportCkDJ,
             this.menuReportADADJ});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
-            this.toolStripMenuItem1.Text = "Journals";
+            this.menuJournalsReport.Name = "menuJournalsReport";
+            this.menuJournalsReport.Size = new System.Drawing.Size(117, 22);
+            this.menuJournalsReport.Text = "Journals";
             // 
             // menuReportGJ
             // 
@@ -265,14 +268,14 @@ namespace AccountingSystem
             this.menuReportADADJ.Size = new System.Drawing.Size(348, 22);
             this.menuReportADADJ.Text = "Authority to Debit Account Disbursements Journal...";
             // 
-            // toolStripMenuItem2
+            // menuLedgersReport
             // 
-            this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuLedgersReport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuGeneralLedgerReport,
             this.menuSubsidiaryLedgerReport});
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(117, 22);
-            this.toolStripMenuItem2.Text = "Ledgers";
+            this.menuLedgersReport.Name = "menuLedgersReport";
+            this.menuLedgersReport.Size = new System.Drawing.Size(117, 22);
+            this.menuLedgersReport.Text = "Ledgers";
             // 
             // menuGeneralLedgerReport
             // 
@@ -332,11 +335,27 @@ namespace AccountingSystem
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 539);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblUserFullName,
+            this.lblUserRole});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 537);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1110, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1110, 24);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblUserFullName
+            // 
+            this.lblUserFullName.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.lblUserFullName.Name = "lblUserFullName";
+            this.lblUserFullName.Size = new System.Drawing.Size(82, 19);
+            this.lblUserFullName.Text = "lblUserDetails";
+            // 
+            // lblUserRole
+            // 
+            this.lblUserRole.Name = "lblUserRole";
+            this.lblUserRole.Size = new System.Drawing.Size(118, 19);
+            this.lblUserRole.Text = "toolStripStatusLabel2";
             // 
             // MainForm
             // 
@@ -361,6 +380,8 @@ namespace AccountingSystem
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -391,11 +412,11 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuReportCDJ;
         private System.Windows.Forms.ToolStripMenuItem menuReportCkDJ;
         private System.Windows.Forms.ToolStripMenuItem menuReportADADJ;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem menuJournalsReport;
         internal System.Windows.Forms.ToolStripMenuItem menuObligationRequest;
         private System.Windows.Forms.ToolStripMenuItem menuBeginningBalances;
         internal System.Windows.Forms.ToolStripMenuItem menuSAAOB;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem menuLedgersReport;
         private System.Windows.Forms.ToolStripMenuItem menuGeneralLedgerReport;
         private System.Windows.Forms.ToolStripMenuItem menuSubsidiaryLedgerReport;
         private System.Windows.Forms.ToolStrip toolStrip1;
@@ -403,6 +424,10 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripButton btnObligationRequest;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel lblUserFullName;
+        private System.Windows.Forms.ToolStripStatusLabel lblUserRole;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
     }
 }
 

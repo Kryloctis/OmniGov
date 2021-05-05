@@ -29,5 +29,12 @@ namespace AccountingSystem.Views.Dashboard
             var dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
             HelperLoadRecords.FPPComboBox(dtFPP, cmbFPP, "fpp_name", "id");
         }
+
+        private void UcAccountingDashboard_Load(object sender, EventArgs e)
+        {
+            LoadFunds();
+            LoadFPP();
+            Dock = DockStyle.Fill;
+        }
     }
 }

@@ -11,6 +11,8 @@ namespace AccountingSystem
 {
     public class Helper
     {
+        internal static byte UserId;
+
         public static void LoadFormIcon(Form form)
         {
             form.Icon = Properties.Resources.accounting;
@@ -83,21 +85,18 @@ namespace AccountingSystem
             return lguDict;
         }
 
-        internal static Dictionary<string, string> GetLoggedInUser()
+        internal static Dictionary<string, string> LoggedInUserData()
         {
-            var user = new Dictionary<string, string>();
-
             try
             {
-                user.Add("id", "1");
-
+                return Factory.UsersRepository().GetRecordByID(UserId);
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message);
+                MessageBoxError(ex.Message);
             }
 
-            return user;
+            return new Dictionary<string, string>();
         }
 
         #region ErrorProviders on Controls
@@ -354,6 +353,20 @@ namespace AccountingSystem
             month.Add(12, "December");
 
             return month;
+        }
+
+        public static bool HasPermission(string permissionName)
+        {
+            try
+            {
+                return Factory.UsersRepository().HasPermission(UserId, permissionName);
+            }
+            catch (Exception ex)
+            {
+                MessageBoxError(ex.Message);
+            }
+
+            return false;
         }
     }
 }

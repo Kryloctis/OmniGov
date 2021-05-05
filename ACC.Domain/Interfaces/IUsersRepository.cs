@@ -6,6 +6,7 @@ namespace ACC.Domain.Interfaces
 {
     public interface IUsersRepository : IRepository<UsersModel>
     {
+        bool HasPermission(byte userId, string permissionName);
         bool NameExist(string name);
 
         bool NameExist(string name, int id);

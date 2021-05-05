@@ -101,7 +101,7 @@ namespace AccountingSystem
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(115, 63);
+            this.label6.Location = new System.Drawing.Point(167, 68);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(116, 15);
             this.label6.TabIndex = 4;
@@ -112,7 +112,7 @@ namespace AccountingSystem
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(115, 48);
+            this.label5.Location = new System.Drawing.Point(167, 53);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(174, 15);
             this.label5.TabIndex = 3;
@@ -121,7 +121,7 @@ namespace AccountingSystem
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(22, 12);
+            this.pictureBox2.Location = new System.Drawing.Point(74, 17);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(84, 80);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -133,7 +133,7 @@ namespace AccountingSystem
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(112, 21);
+            this.label3.Location = new System.Drawing.Point(164, 26);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(189, 25);
             this.label3.TabIndex = 1;
@@ -153,7 +153,7 @@ namespace AccountingSystem
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(22, 134);
+            this.label4.Location = new System.Drawing.Point(22, 135);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(322, 15);
             this.label4.TabIndex = 6;
@@ -176,7 +176,7 @@ namespace AccountingSystem
             this.MinimizeBox = false;
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Login to Local Finance System";
+            this.Text = "Login";
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

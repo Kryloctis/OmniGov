@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     return false;
                 }
 
-                var user = Helper.GetLoggedInUser();
+                var user = Helper.LoggedInUserData();
                 var obligationModel = new ObligationRequestModel
                 {
                     ID = uc.obligationID,

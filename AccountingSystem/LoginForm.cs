@@ -27,17 +27,24 @@ namespace AccountingSystem
             string username = txtUsername.Text;
             string password = txtPassword.Text;
 
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            {
+                Helper.MessageBoxError("Please enter both username and password.");
+                return;
+            }
+
             var userId = Factory.UsersRepository().ValidateLogin(username, password);
 
             if (userId != 0)
             {
+                Helper.UserId = userId;
                 var mainForm = new MainForm();
-                mainForm.userId = userId;
                 mainForm.Show();
+                Hide();
                 return;
             }
 
-            MessageBox.Show("Login failed.");
+            Helper.MessageBoxError("Incorrect username or password.");
         }
     }
 }
