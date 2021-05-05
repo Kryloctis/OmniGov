@@ -25,8 +25,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             errorArray[1] = journalId == 0 ? "Please select the type of journal" : string.Empty;
             errorArray[2] = epJEV.GetError(txtJEVNo);
             errorArray[3] = dgAccounts.Rows.Count == 0 ? "Please add a FPP, account & amount in the table provided." : string.Empty;
-            errorArray[4] = epRefNo.GetError(txtRefNo);
-            errorArray[5] = epCollectingOfficerPayee.GetError(txtPayeeCollectingOfficer);
+            errorArray[4] = epRefNo.GetError(txtRCIORADA);
+            errorArray[5] = epCollectingOfficerPayee.GetError(txtPayee);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -36,8 +36,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
 
             txtJEVNo.Clear();
-            txtRefNo.Clear();
-            txtPayeeCollectingOfficer.Clear();
+            txtRCIORADA.Clear();
+            txtPayee.Clear();
             txtExplanation.Clear();
 
             dgAccounts.Rows.Clear();
@@ -69,7 +69,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                     GenerateJEVNumber(fund["fund_code"].ToString(), dtpDateEntry.Value.Year.ToString(), dtpDateEntry.Value.Month.ToString("00"));
                 }
-                    
+
 
                 flowLayoutPanelFunds.Controls.Add(radFund);
 
@@ -85,14 +85,12 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             foreach (DataRow journal in journals.Rows)
             {
-                var radJournal = new RadioButton
-                {
-                    Text = journal["journal_name"].ToString(),
-                    Tag = journal["id"],
-                    AutoSize = true,
-                    Appearance = Appearance.Button,
-                    TextImageRelation = TextImageRelation.ImageBeforeText
-                };
+                var radJournal = new RadioButton();
+                radJournal.Text = journal["journal_name"].ToString();
+                radJournal.Tag = journal["id"];
+                radJournal.AutoSize = true;
+                radJournal.Appearance = Appearance.Button;
+                radJournal.TextImageRelation = TextImageRelation.ImageBeforeText;
 
                 if (journal["journal_name"].ToString() == CheckedJournal)
                 {
@@ -161,19 +159,19 @@ namespace AccountingSystem.Views.Transactions.JEV
             journalId = Convert.ToByte(radJournals.Tag);
         }
 
-        private void EnableDisableAdditionalFields(bool statusRefNo, bool statusPayee, bool statusCollectingOfficer)
+        private void SetGeneralJournalFields()
         {
-            lblRefNo.Visible = statusRefNo;
-            txtRefNo.Enabled = statusRefNo;
+            lblCheckORPaidDate.Visible = false;
+            lblDVRCDNo.Visible = false;
+            lblCollectingAccountableOfficer.Visible = false;
+            lblRciOrADANo.Visible = false;
 
-            if (statusPayee || statusCollectingOfficer)
-                lblCollectingOfficerPayee.Visible = true;
-            else
-                lblCollectingOfficerPayee.Visible = false;
+            dtpCheckORPaid.Enabled = false;
+            txtRCIORADA.Enabled = false;
+            txtDVNo.Enabled = false;
+            cmbCollectingOfficer.Enabled = false;
 
 
-            txtPayeeCollectingOfficer.Enabled = statusPayee;
-            cmbCollectingOfficer.Visible = statusCollectingOfficer;
         }
 
         private void SetCashDisbursementsJournalFields()
@@ -188,7 +186,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             lblDVRCDNo.Visible = false;
             txtDVNo.Enabled = false;
-            
+
         }
 
         private void SetCashReceiptsJournalFields()
@@ -207,6 +205,40 @@ namespace AccountingSystem.Views.Transactions.JEV
             txtRCIORADA.Enabled = true;
             txtDVNo.Enabled = true;
             cmbCollectingOfficer.Enabled = true;
+        }
+
+        private void radioJournals_CheckedChanged(object sender, EventArgs e)
+        {
+            var radJournal = sender as RadioButton;
+            journalId = Convert.ToByte(radJournal.Tag);
+            ShowCheckIcon(radJournal);
+            journalName = radJournal.Text.Trim();
+
+            switch (journalName)
+            {
+                case "General Journal":
+                case "Procurement Received Journal":
+                    SetGeneralJournalFields();
+                    break;
+                case "Cash Disbursements Journal":
+                    SetCashDisbursementsJournalFields();
+
+                    break;
+                case "Cash Receipts Journal":
+                    SetCashReceiptsJournalFields();
+
+                    break;
+                case "Check Disbursements Journal":
+                    SetCheckDisbursementsJournalFields();
+                    break;
+                case "Authority to Debit Account Disbursement Journal":
+                    SetADAJournalFields();
+                    MessageBox.Show("ADa");
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         private void SetADAJournalFields()
@@ -243,40 +275,6 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             lblCollectingAccountableOfficer.Visible = false;
             cmbCollectingOfficer.Enabled = false;
-        }
-
-        private void radioJournals_CheckedChanged(object sender, EventArgs e)
-        {
-            var radJournal = sender as RadioButton;
-            journalId = Convert.ToByte(radJournal.Tag);
-            ShowCheckIcon(radJournal);
-            journalName = radJournal.Text.Trim();
-
-            switch (journalName)
-            {
-                case "General Journal":
-                case "Procurement Received Journal":
-                    SetGeneralJournalFields();
-                    break;
-                case "Cash Disbursements Journal":
-                    SetCashDisbursementsJournalFields();
-
-                    break;
-                case "Cash Receipts Journal":
-                    SetCashReceiptsJournalFields();
-
-                    break;
-                case "Check Disbursements Journal":
-                    SetCheckDisbursementsJournalFields();
-                    break;
-                case "Authority to Debit Account Disbursement Journal":
-                    SetADAJournalFields();
-                    MessageBox.Show("ADa");
-                    break;
-
-                default:
-                    break;
-            }
         }
 
         private void ucJEV_Load(object sender, EventArgs e)
@@ -316,7 +314,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             string jevNo = $"{txtFundsJevNo.Text}-{txtJEVNo.Text}";
             bool jevNoExist;
             if (jevId == 0)
-                 jevNoExist = Factory.JEVRepository().JevNumberExist(jevNo);
+                jevNoExist = Factory.JEVRepository().JevNumberExist(jevNo);
             else
                 jevNoExist = Factory.JEVRepository().JevNumberExist(jevNo, jevId);
 
@@ -355,28 +353,28 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void txtRefNo_Validating(object sender, CancelEventArgs e)
         {
-            if (txtRefNo.Enabled)
+            if (txtRCIORADA.Enabled)
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epRefNo, txtRefNo, lblRefNo.Text);
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epRefNo, txtRCIORADA, lblRciOrADANo.Text);
             }
         }
 
         private void txtRefNo_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epRefNo, txtRefNo);
+            Helper.ClearErrorTextBox(epRefNo, txtRCIORADA);
         }
 
         private void txtPayeeCollectingOfficer_Validating(object sender, CancelEventArgs e)
         {
-            if (txtPayeeCollectingOfficer.Enabled)
+            if (txtPayee.Enabled)
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epCollectingOfficerPayee, txtPayeeCollectingOfficer, lblCollectingOfficerPayee.Text);
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epCollectingOfficerPayee, txtPayee, lblCollectingAccountableOfficer.Text);
             }
         }
 
         private void txtPayeeCollectingOfficer_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epCollectingOfficerPayee, txtPayeeCollectingOfficer);
+            Helper.ClearErrorTextBox(epCollectingOfficerPayee, txtPayee);
         }
 
         private void btnRemoveAccount_Click(object sender, EventArgs e)

@@ -149,8 +149,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 Dictionary<string, string> checkDisbursementsData = checkDisbursementsRepository.GetRecordByJevID(jevId);
 
-                uc.txtRefNo.Text = checkDisbursementsData["check_number"];
-                uc.txtPayeeCollectingOfficer.Text = checkDisbursementsData["payee"];
+                uc.txtRCIORADA.Text = checkDisbursementsData["check_number"];
+                uc.txtPayee.Text = checkDisbursementsData["payee"];
             }
         }
 
@@ -162,7 +162,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 Dictionary<string, string> checkDisbursementsData = cashReceiptsJournalRepository.GetViewRecordByJevID(jevId);
 
-                uc.txtRefNo.Text = checkDisbursementsData["rcd_number"];
+                uc.txtRCIORADA.Text = checkDisbursementsData["rcd_number"];
                 uc.cmbCollectingOfficer.SelectedValue = checkDisbursementsData["collecting_officers_id"];
             }
         }

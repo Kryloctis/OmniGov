@@ -111,7 +111,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.ucjev1.Enabled = false;
             this.ucjev1.Location = new System.Drawing.Point(12, 57);
             this.ucjev1.Name = "ucjev1";
-            this.ucjev1.Size = new System.Drawing.Size(883, 489);
+            this.ucjev1.Size = new System.Drawing.Size(883, 556);
             this.ucjev1.TabIndex = 8;
             // 
             // frmJEV
@@ -119,7 +119,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(895, 558);
+            this.ClientSize = new System.Drawing.Size(895, 621);
             this.Controls.Add(this.ucjev1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

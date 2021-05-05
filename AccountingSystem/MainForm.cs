@@ -248,7 +248,7 @@ namespace AccountingSystem
 
         private void BtnObligationRequest_Click(object sender, EventArgs e)
         {
-            _ = new frmObligationRequest().ShowDialog();
+            _ = new frmObligationRequestMain().ShowDialog();
         }
     }
 }
