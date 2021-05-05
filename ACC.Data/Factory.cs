@@ -50,9 +50,7 @@ namespace AccountingSystem
 
         public static ICollectingOfficerRepository CollectingOfficerRepository() => new CollectingOfficerRepository(new MySqlGenericCommands());
 
-        public static IRoleHasPermissionsRepository RoleHasPermissionsRepository() => new RoleHasPermissionsRepository(mySqlGenericCommands);
-
-        public static IRolesRepository RolesRepository() => new RolesRepository(mySqlGenericCommands, RoleHasPermissionsRepository());
+        public static IRolesRepository RolesRepository() => new RolesRepository(new MySqlGenericCommands());
 
         public static IUsersRepository UsersRepository() => new UsersRepository(new MySqlGenericCommands());
 
@@ -70,5 +68,7 @@ namespace AccountingSystem
 
 
         public static IError CreateErrors(Array errors) => new Error(errors);
+        public static IBanksRepository BanksRepository() => new BanksRepository(new MySqlGenericCommands());
+        public static IRCIRepository RCIRepository() => new RCIRepository(new MySqlGenericCommands());
     }
 }

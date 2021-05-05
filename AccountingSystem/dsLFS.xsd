@@ -134,6 +134,25 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="dtRCI" msprop:Generator_TableClassName="dtRCIDataTable" msprop:Generator_TableVarName="tabledtRCI" msprop:Generator_RowChangedName="dtRCIRowChanged" msprop:Generator_TablePropName="dtRCI" msprop:Generator_RowDeletingName="dtRCIRowDeleting" msprop:Generator_RowChangingName="dtRCIRowChanging" msprop:Generator_RowEvHandlerName="dtRCIRowChangeEventHandler" msprop:Generator_RowDeletedName="dtRCIRowDeleted" msprop:Generator_RowClassName="dtRCIRow" msprop:Generator_UserTableName="dtRCI" msprop:Generator_RowEvArgName="dtRCIRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="account_no" msprop:Generator_ColumnVarNameInTable="columnaccount_no" msprop:Generator_ColumnPropNameInRow="account_no" msprop:Generator_ColumnPropNameInTable="account_noColumn" msprop:Generator_UserColumnName="account_no" type="xs:string" minOccurs="0" />
+              <xs:element name="bank_name" msprop:Generator_ColumnVarNameInTable="columnbank_name" msprop:Generator_ColumnPropNameInRow="bank_name" msprop:Generator_ColumnPropNameInTable="bank_nameColumn" msprop:Generator_UserColumnName="bank_name" type="xs:string" minOccurs="0" />
+              <xs:element name="check_no" msprop:Generator_ColumnVarNameInTable="columncheck_no" msprop:Generator_ColumnPropNameInRow="check_no" msprop:Generator_ColumnPropNameInTable="check_noColumn" msprop:Generator_UserColumnName="check_no" type="xs:string" minOccurs="0" />
+              <xs:element name="check_date" msprop:Generator_ColumnVarNameInTable="columncheck_date" msprop:Generator_ColumnPropNameInRow="check_date" msprop:Generator_ColumnPropNameInTable="check_dateColumn" msprop:Generator_UserColumnName="check_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="fund_code" msprop:Generator_ColumnVarNameInTable="columnfund_code" msprop:Generator_ColumnPropNameInRow="fund_code" msprop:Generator_ColumnPropNameInTable="fund_codeColumn" msprop:Generator_UserColumnName="fund_code" type="xs:string" minOccurs="0" />
+              <xs:element name="payee" msprop:Generator_ColumnVarNameInTable="columnpayee" msprop:Generator_ColumnPropNameInRow="payee" msprop:Generator_ColumnPropNameInTable="payeeColumn" msprop:Generator_UserColumnName="payee" type="xs:string" minOccurs="0" />
+              <xs:element name="nature_of_payment" msprop:Generator_ColumnVarNameInTable="columnnature_of_payment" msprop:Generator_ColumnPropNameInRow="nature_of_payment" msprop:Generator_ColumnPropNameInTable="nature_of_paymentColumn" msprop:Generator_UserColumnName="nature_of_payment" type="xs:string" minOccurs="0" />
+              <xs:element name="dv_no" msprop:Generator_ColumnVarNameInTable="columndv_no" msprop:Generator_ColumnPropNameInRow="dv_no" msprop:Generator_ColumnPropNameInTable="dv_noColumn" msprop:Generator_UserColumnName="dv_no" type="xs:string" minOccurs="0" />
+              <xs:element name="obligation_no" msprop:Generator_ColumnVarNameInTable="columnobligation_no" msprop:Generator_ColumnPropNameInRow="obligation_no" msprop:Generator_ColumnPropNameInTable="obligation_noColumn" msprop:Generator_UserColumnName="obligation_no" type="xs:string" minOccurs="0" />
+              <xs:element name="trust_liabilities" msprop:Generator_ColumnVarNameInTable="columntrust_liabilities" msprop:Generator_ColumnPropNameInRow="trust_liabilities" msprop:Generator_ColumnPropNameInTable="trust_liabilitiesColumn" msprop:Generator_UserColumnName="trust_liabilities" type="xs:decimal" minOccurs="0" />
+              <xs:element name="bir_vat_nonvat" msprop:Generator_ColumnVarNameInTable="columnbir_vat_nonvat" msprop:Generator_ColumnPropNameInRow="bir_vat_nonvat" msprop:Generator_ColumnPropNameInTable="bir_vat_nonvatColumn" msprop:Generator_UserColumnName="bir_vat_nonvat" type="xs:decimal" minOccurs="0" />
+              <xs:element name="amount" msprop:Generator_ColumnVarNameInTable="columnamount" msprop:Generator_ColumnPropNameInRow="amount" msprop:Generator_ColumnPropNameInTable="amountColumn" msprop:Generator_UserColumnName="amount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="fpp_code" msprop:Generator_ColumnVarNameInTable="columnfpp_code" msprop:Generator_ColumnPropNameInRow="fpp_code" msprop:Generator_ColumnPropNameInTable="fpp_codeColumn" msprop:Generator_UserColumnName="fpp_code" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>

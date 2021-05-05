@@ -10,5 +10,8 @@ namespace ACC.Domain.Models
         public int functionalClassificationId { get; set; }
         public string ServiceName { get; set; }
 
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+
     }
 }

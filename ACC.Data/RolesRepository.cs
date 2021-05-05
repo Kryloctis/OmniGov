@@ -10,19 +10,13 @@ namespace ACC.Data
     public class RolesRepository : IRolesRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
-        private readonly IRoleHasPermissionsRepository roleHasPermissionsRepository;
         private readonly string tableName = "roles";
         
 
-        public RolesRepository(
-            IDbGenericCommands dbGenericCommands,
-            IRoleHasPermissionsRepository _roleHasPermissionsRepository
-            )
+        public RolesRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
-            roleHasPermissionsRepository = _roleHasPermissionsRepository;
         }
-
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var record = new Dictionary<string, string>();
@@ -34,17 +28,16 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT office, role_name, created_at, updated_at FROM {tableName} WHERE id = @id";
+                string query = $"SELECT role_name, created_at, updated_at FROM {tableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
                         return record;
 
-                    record.Add("office", reader.Rows[0]["office"].ToString());
-                    record.Add("role_name", reader.Rows[0]["role_name"].ToString());
-                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
-                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+                    record.Add("role_name", reader.Rows[0][0].ToString());
+                    record.Add("created_at", reader.Rows[0][1].ToString());
+                    record.Add("updated_at", reader.Rows[0][2].ToString());
                 }
             }
             catch (Exception)
@@ -68,7 +61,9 @@ namespace ACC.Data
             {
                 throw;
             }
-        }    
+        }
+
+    
 
         public DataTable GetRecordsBySearch(string searchText)
         {
@@ -87,46 +82,18 @@ namespace ACC.Data
             }
         }
 
-        public byte GetLastInsertedID()
-        {
-            try
-            {
-                string query = $"SELECT MAX(id) FROM {tableName}";
-                return byte.Parse(_dbGenericCommands.ExecuteScalar(query));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         public bool Insert(RolesModel entity)
         {
             try
             {
-                using (var scope = new TransactionScope())
+                var parameters = new object[][]
                 {
-                    var parameters = new object[][]
-                    {
-                        new object[] { "@office", DbType.String, entity.Office},
-                        new object[] { "@role_name", DbType.String, entity.RoleName},
-                    };
+                    new object[] { "@role_name", DbType.String, entity.RoleName},
+                    
+                };
 
-                    string query = $"INSERT INTO {tableName} (office, role_name) VALUES (@office, @role_name)";
-                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-
-                    // insert selected permissions
-                    var roleHasPermissionModel = new RoleHasPermissionsModel();
-                    foreach (var permissionsModel in entity.PermissionsModels)
-                    {
-                        roleHasPermissionModel.RolesId = GetLastInsertedID();
-                        roleHasPermissionModel.PermissionsId = permissionsModel.Id;
-                        roleHasPermissionsRepository.Insert(roleHasPermissionModel);
-                    }
-
-                    scope.Complete();
-                    return true;
-                }
+                string query = $"INSERT INTO {tableName} (role_name) VALUES (@role_name)";
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
             {
@@ -138,33 +105,15 @@ namespace ACC.Data
         {
             try
             {
-                using (var scope = new TransactionScope())
+                var parameters = new object[][]
                 {
-                    var parameters = new object[][]
-                    {
-                        new object[] { "@id", DbType.Byte, entity.Id},
-                        new object[] { "@office", DbType.String, entity.Office},
-                        new object[] { "@role_name", DbType.String, entity.RoleName},
-                    };
+                    new object[] { "@id", DbType.Int16, entity.Id},
+                    new object[] { "@role_name", DbType.String, entity.RoleName},
+                   
+                };
 
-                    string query = $"UPDATE {tableName} SET office = @office, role_name = @role_name WHERE id = @id";
-                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-
-                    // delete all permission by role id
-                    roleHasPermissionsRepository.DeleteByRoleId(entity.Id);
-
-                    // insert selected permissions
-                    var roleHasPermissionModel = new RoleHasPermissionsModel();
-                    foreach (var permissionsModel in entity.PermissionsModels)
-                    {
-                        roleHasPermissionModel.RolesId = entity.Id;
-                        roleHasPermissionModel.PermissionsId = permissionsModel.Id;
-                        roleHasPermissionsRepository.Insert(roleHasPermissionModel);
-                    }
-
-                    scope.Complete();
-                    return true;
-                }
+                string query = $"UPDATE {tableName} SET role_name = @role_name WHERE id = @id";
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
             {
@@ -235,6 +184,7 @@ namespace ACC.Data
 
             return false;
         }
+
 
         public bool NameExist(string roleName)
         {

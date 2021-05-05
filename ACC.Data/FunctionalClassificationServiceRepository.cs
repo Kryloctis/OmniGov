@@ -57,7 +57,7 @@ namespace ACC.Data
             try
             {
                   string query = $"SELECT t1.id, t2.sector_name, t1.service_name, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
-                   $" ON t2.id = t1.functional_classifications_id ORDER BY service_name";
+                   $" ON t2.id = t1.functional_classifications_id";
 
                 var dtFunctionalClassificationService = new DataTable();
                 return _dbGenericCommands.Fill(query, dtFunctionalClassificationService);
@@ -67,6 +67,8 @@ namespace ACC.Data
                 throw;
             }
         }
+
+
 
         public DataTable GetRecordsBySearch(string searchText)
         {

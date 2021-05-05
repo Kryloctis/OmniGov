@@ -133,6 +133,7 @@ namespace AccountingSystem.Views.Reports.Journals
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
+            
             LoadReport(reportViewer.LocalReport);
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
             reportViewer.ZoomMode = ZoomMode.Percent;

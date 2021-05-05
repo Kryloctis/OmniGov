@@ -50,7 +50,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(97, 60);
+            this.txtName.Location = new System.Drawing.Point(97, 57);
             this.txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtName.MaxLength = 99;
             this.txtName.Name = "txtName";
@@ -61,7 +61,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // 
             // txtCode
             // 
-            this.txtCode.Location = new System.Drawing.Point(97, 33);
+            this.txtCode.Location = new System.Drawing.Point(97, 32);
             this.txtCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCode.MaxLength = 4;
             this.txtCode.Name = "txtCode";
@@ -85,7 +85,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 63);
+            this.label3.Location = new System.Drawing.Point(9, 57);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(39, 15);
             this.label3.TabIndex = 8;
@@ -94,7 +94,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 36);
+            this.label2.Location = new System.Drawing.Point(9, 34);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 15);
             this.label2.TabIndex = 7;
@@ -105,13 +105,13 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(9, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 15);
+            this.label1.Size = new System.Drawing.Size(79, 15);
             this.label1.TabIndex = 6;
-            this.label1.Text = "FPP Services";
+            this.label1.Text = "Service Name";
             // 
             // txtServiceId
             // 
-            this.txtServiceId.Location = new System.Drawing.Point(97, 87);
+            this.txtServiceId.Location = new System.Drawing.Point(98, 84);
             this.txtServiceId.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtServiceId.MaxLength = 99;
             this.txtServiceId.Name = "txtServiceId";
@@ -124,7 +124,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 90);
+            this.label4.Location = new System.Drawing.Point(10, 84);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 15);
             this.label4.TabIndex = 12;
@@ -160,7 +160,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "ucFunctionProgramProject";
-            this.Size = new System.Drawing.Size(445, 120);
+            this.Size = new System.Drawing.Size(445, 111);
             this.Load += new System.EventHandler(this.ucFunctionProgramProject_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epServiceName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epName)).EndInit();

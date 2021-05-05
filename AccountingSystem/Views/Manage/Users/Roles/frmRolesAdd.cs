@@ -1,7 +1,12 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Users.Roles
@@ -9,25 +14,17 @@ namespace AccountingSystem.Views.Manage.Users.Roles
     public partial class frmRolesAdd : Form
     {
         private frmRoles _frmRoles;
-        private ucRoles uc;
-
         public frmRolesAdd(frmRoles frmRoles)
         {
             InitializeComponent();
             _frmRoles = frmRoles;
-            uc = ucRoles1;
-        }
-
-        private void frmRolesAdd_Load(object sender, EventArgs e)
-        {
-            Helper.LoadFormIcon(this);
-            uc.LoadPermissions();
         }
 
         private bool SaveData()
         {
             try
             {
+                var uc = ucRoles1;
                 // if error occurs, show messagebox error
                 if (!uc.ValidateChildren())
                 {
@@ -35,28 +32,15 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                     return false;
                 }
 
-                // if no permission has been granted
-                if (uc.dgPermissionGranted.SelectedRows.Count == 0)
-                {
-                    Helper.MessageBoxError("Please select at least one permission.");
-                    return false;
-                }
-
                 // proceed to insert
-                var permissionModelList = new List<PermissionsModel>();
-                foreach (DataGridViewRow row in uc.dgPermissionGranted.Rows)
-                {
-                    permissionModelList.Add(new PermissionsModel() { Id = Convert.ToByte(row.Cells["id"].Value) });
-                }
-
                 var roleModel = new RolesModel()
                 {
-                    Office = uc.cmbOffice.Text,
-                    RoleName = uc.txtName.Text.Trim(),
-                    PermissionsModels = permissionModelList
+                    RoleName = uc.txtName.Text.Trim()
+                   
                 };
 
-                return Factory.RolesRepository().Insert(roleModel);
+                var rolesRepository = Factory.RolesRepository();
+                return rolesRepository.Insert(roleModel);
             }
             catch (Exception ex)
             {
@@ -66,13 +50,22 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             return false;
         }
 
+        private void frmRolesAdd_Load(object sender, EventArgs e)
+        {
+            Helper.LoadFormIcon(this);
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Role has been saved.");
-                _frmRoles.LoadRoles();
-                uc.ResetForm();
+                
+                _frmRoles.LoadRecords();
+                //ucRoles1.ResetForm();
+
+                
+                
             }
         }
 

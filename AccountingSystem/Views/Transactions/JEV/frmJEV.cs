@@ -147,8 +147,8 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             var checkDisbursementsModel = new CheckDisbursementsJournalModel()
             {
-                CheckNumber = uc.txtRCIORADA.Text.Trim(),
-                Payee = uc.txtPayee.Text.Trim()
+                CheckNumber = uc.txtRefNo.Text.Trim(),
+                Payee = uc.txtPayeeCollectingOfficer.Text.Trim()
             };
 
             return Factory.JEVRepository().InsertWithCheckDisbursement(jevModel, JevAcountsModelList(), checkDisbursementsModel);
@@ -162,7 +162,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
 
                 CollectingOfficerId = Convert.ToByte(uc.cmbCollectingOfficer.SelectedValue),
-                RCDNumber = uc.txtRCIORADA.Text.Trim()
+                RCDNumber = uc.txtRefNo.Text.Trim()
             };
 
             return Factory.JEVRepository().InsertWithCashReceipts(jevModel, JevAcountsModelList(), cashReceiptsJournalModel);
@@ -174,7 +174,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             var aDADisbursementsJournalModel = new ADADisbursementsJournalModel()
             {
-                ADANumber = uc.txtRCIORADA.Text.Trim()
+                ADANumber = uc.txtRefNo.Text.Trim()
             };
 
             return Factory.JEVRepository().InsertWithADADisbursements(jevModel, JevAcountsModelList(), aDADisbursementsJournalModel);
@@ -194,8 +194,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             var checkDisbursementsModel = new CheckDisbursementsJournalModel()
             {
                 JevId = uc.jevId,
-                CheckNumber = uc.txtRCIORADA.Text.Trim(),
-                Payee = uc.txtPayee.Text.Trim()
+                CheckNumber = uc.txtRefNo.Text.Trim(),
+                Payee = uc.txtPayeeCollectingOfficer.Text.Trim()
             };
 
             return Factory.JEVRepository().UpdateWithCheckDisbursement(jevModel, JevAcountsModelList(), checkDisbursementsModel);
@@ -209,7 +209,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 JevId = uc.jevId,
                 CollectingOfficerId = Convert.ToByte(uc.cmbCollectingOfficer.SelectedValue),
-                RCDNumber = uc.txtRCIORADA.Text.Trim()
+                RCDNumber = uc.txtRefNo.Text.Trim()
             };
 
             return Factory.JEVRepository().UpdateWithCashReceipts(jevModel, JevAcountsModelList(), cashReceiptsJournalModel);

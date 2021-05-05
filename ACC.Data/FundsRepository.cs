@@ -67,7 +67,19 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var srchtxt = searchText;
+
+                string query = $"SELECT * FROM {tableName} WHERE fund_code  LIKE'%" + srchtxt + "%' OR fund_name  LIKE'%" + srchtxt + "%'";
+
+                var dtFunds = new DataTable();
+                return _dbGenericCommands.Fill(query, dtFunds);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Insert(FundsModel entity)

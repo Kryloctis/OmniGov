@@ -12,11 +12,11 @@ namespace ACC.Data
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "permissions";
 
+
         public PermissionsRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }
-
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var record = new Dictionary<string, string>();
@@ -78,6 +78,9 @@ namespace ACC.Data
             }
         }
 
+
+
+
         public DataTable GetRecordsBySearch(string searchText)
         {
             try
@@ -97,17 +100,70 @@ namespace ACC.Data
 
         public bool Insert(PermissionsModel entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@permission_name", DbType.String, entity.PermissionName},
+                    new object[] { "@permission_id", DbType.Byte, entity.Id},
+                    new object[] { "@role_id", DbType.Byte, entity.currentRole},
+
+                };
+
+                string query = $"INSERT INTO role_has_permissions (roles_id, permissions_id) VALUES (@role_id, @permission_id)";
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Update(PermissionsModel entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int16, entity.Id},
+                    new object[] { "@permission_name", DbType.String, entity.PermissionName},
+
+                };
+
+                string query = $"UPDATE {tableName} SET permission_name = @permission_name WHERE id = @id";
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Delete(List<PermissionsModel> entityList)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    foreach (var entity in entityList)
+                    {
+                        var parameters = new object[][]
+                        {
+                            new object[] { "@id", DbType.Int16, entity.Id},
+                        };
+
+                        string query = $"DELETE FROM {tableName} WHERE id = @id";
+                        _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                    }
+
+                    scope.Complete();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public int CountRecords()
@@ -146,7 +202,6 @@ namespace ACC.Data
 
             return false;
         }
-
         public bool PermissionExists(int id, int roleid)
         {
             try

@@ -25,8 +25,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             errorArray[1] = journalId == 0 ? "Please select the type of journal" : string.Empty;
             errorArray[2] = epJEV.GetError(txtJEVNo);
             errorArray[3] = dgAccounts.Rows.Count == 0 ? "Please add a FPP, account & amount in the table provided." : string.Empty;
-            errorArray[4] = epRefNo.GetError(txtRCIORADA);
-            errorArray[5] = epCollectingOfficerPayee.GetError(txtPayee);
+            errorArray[4] = epRefNo.GetError(txtRefNo);
+            errorArray[5] = epCollectingOfficerPayee.GetError(txtPayeeCollectingOfficer);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -36,8 +36,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
 
             txtJEVNo.Clear();
-            txtRCIORADA.Clear();
-            txtPayee.Clear();
+            txtRefNo.Clear();
+            txtPayeeCollectingOfficer.Clear();
             txtExplanation.Clear();
 
             dgAccounts.Rows.Clear();
@@ -161,19 +161,19 @@ namespace AccountingSystem.Views.Transactions.JEV
             journalId = Convert.ToByte(radJournals.Tag);
         }
 
-        private void SetGeneralJournalFields()
+        private void EnableDisableAdditionalFields(bool statusRefNo, bool statusPayee, bool statusCollectingOfficer)
         {
-            lblCheckORPaidDate.Visible = false;
-            lblDVRCDNo.Visible = false;
-            lblCollectingAccountableOfficer.Visible = false;
-            lblRciOrADANo.Visible = false;
+            lblRefNo.Visible = statusRefNo;
+            txtRefNo.Enabled = statusRefNo;
 
-            dtpCheckORPaid.Enabled = false;
-            txtRCIORADA.Enabled = false;
-            txtDVNo.Enabled = false;
-            cmbCollectingOfficer.Enabled = false;
+            if (statusPayee || statusCollectingOfficer)
+                lblCollectingOfficerPayee.Visible = true;
+            else
+                lblCollectingOfficerPayee.Visible = false;
 
 
+            txtPayeeCollectingOfficer.Enabled = statusPayee;
+            cmbCollectingOfficer.Visible = statusCollectingOfficer;
         }
 
         private void SetCashDisbursementsJournalFields()
@@ -355,28 +355,28 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void txtRefNo_Validating(object sender, CancelEventArgs e)
         {
-            if (txtRCIORADA.Enabled)
+            if (txtRefNo.Enabled)
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epRefNo, txtRCIORADA, lblRciOrADANo.Text);
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epRefNo, txtRefNo, lblRefNo.Text);
             }
         }
 
         private void txtRefNo_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epRefNo, txtRCIORADA);
+            Helper.ClearErrorTextBox(epRefNo, txtRefNo);
         }
 
         private void txtPayeeCollectingOfficer_Validating(object sender, CancelEventArgs e)
         {
-            if (txtPayee.Enabled)
+            if (txtPayeeCollectingOfficer.Enabled)
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epCollectingOfficerPayee, txtPayee, lblCollectingAccountableOfficer.Text);
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epCollectingOfficerPayee, txtPayeeCollectingOfficer, lblCollectingOfficerPayee.Text);
             }
         }
 
         private void txtPayeeCollectingOfficer_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epCollectingOfficerPayee, txtPayee);
+            Helper.ClearErrorTextBox(epCollectingOfficerPayee, txtPayeeCollectingOfficer);
         }
 
         private void btnRemoveAccount_Click(object sender, EventArgs e)

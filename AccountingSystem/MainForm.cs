@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using AccountingSystem.Views.Manage.Journals;
 using AccountingSystem.Views.Manage.Funds;
+using AccountingSystem.Views.Manage.Banks;
 using AccountingSystem.Views.Manage.ChartOfAccounts;
 using AccountingSystem.Views.Manage.AllotmentClasses;
 using AccountingSystem.Views.Manage.FunctionProgramProject;
@@ -12,9 +13,12 @@ using AccountingSystem.Views.Transactions.JEV;
 using AccountingSystem.Views.Reports.Journals;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
 using AccountingSystem.Views.Transactions.ObligationRequest;
+using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.Ledgers;
 using AccountingSystem.Views.Dashboard;
+using AccountingSystem.Views.Manage.AllotmentRelease;
+using AccountingSystem.Views.Reports.RCI;
 
 namespace AccountingSystem
 {
@@ -214,6 +218,21 @@ namespace AccountingSystem
         private void MenuGeneralLedgerReport_Click(object sender, EventArgs e)
         {
             _ = new frmGeneralLedgerReport().ShowDialog();
+        }
+
+        private void menuBanks_Click(object sender, EventArgs e)
+        {
+            _ = new frmBanks().ShowDialog();
+        }
+
+        private void menuRCI_Click(object sender, EventArgs e)
+        {
+            _ = new frmRCI().ShowDialog();
+        }
+
+        private void menuprintRCI_Click(object sender, EventArgs e)
+        {
+            _ = new frmRCIReport().ShowDialog();
         }
 
         private void BtnJournalEntry_Click(object sender, EventArgs e)
