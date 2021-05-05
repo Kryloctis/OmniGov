@@ -19,6 +19,7 @@ namespace AccountingSystem
         #endregion
 
         #region Account Group
+
         internal static void AccountGroupDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -944,5 +945,65 @@ namespace AccountingSystem
 
         #endregion Obligation Request
 
+        #region Supplemental Appropriations
+
+        internal static void SupplementalDatagridView(DataTable dataTable, DataGridView dgv) 
+        {
+            try
+            {
+                Helper.DatagridDefaultStyle(dgv, true);
+
+                //Clearing Datagrid View  Rows & Columns before Loading new one
+                dgv.Rows.Clear();
+                dgv.Columns.Clear();
+
+                //Set up new Columns to Datagrid View
+                dgv.Columns.Add("id", "id");
+                dgv.Columns.Add("budget_appropriations_id", "Budget Appropriation ID");
+                dgv.Columns.Add("date_entry", "Date Entry");
+                dgv.Columns.Add("amount", "Amount");
+                dgv.Columns.Add("remarks", "Remarks");
+                dgv.Columns.Add("created_at", "Created at");
+                dgv.Columns.Add("updated_at", "Updated at");
+
+                //Set up Column Format
+                dgv.Columns["id"].Visible = false;
+                dgv.Columns["created_at"].Visible = false;
+                dgv.Columns["updated_at"].Visible = false;
+                dgv.Columns["budget_appropriations_id"].Visible = false;
+                dgv.Columns["date_entry"].Visible = false;
+                dgv.Columns["amount"].DefaultCellStyle.Format = "N2";
+
+                dgv.Columns["id"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["budget_appropriations_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["date_entry"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["remarks"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["created_at"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["updated_at"].SortMode = DataGridViewColumnSortMode.NotSortable;
+
+                //Load by loop All Budget Appropriations Records with Others FPP 
+                foreach (DataRow drAllotmentRelease in dataTable.Rows)
+                {
+                    dgv.Rows.Add(new object[] {
+                            drAllotmentRelease["id"],
+                            drAllotmentRelease["budget_appropriations_id"],
+                            drAllotmentRelease["date_entry"],
+                            drAllotmentRelease["amount"],
+                            drAllotmentRelease["remarks"],
+                            drAllotmentRelease["created_at"],
+                            drAllotmentRelease["updated_at"] });
+                }
+
+                dgv.ClearSelection();
+                Helper.DatagridDefaultStyle(dgv, true);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+        
+        #endregion Supplemental Appropriations
     }
 }

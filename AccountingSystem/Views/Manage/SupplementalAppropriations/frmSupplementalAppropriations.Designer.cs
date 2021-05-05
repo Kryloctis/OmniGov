@@ -35,15 +35,19 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.labelRecords = new System.Windows.Forms.ToolStripStatusLabel();
+            this.labelRecordsCountsPlaceHolder = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblRecordCounts = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblDateEntry = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblDateEntryPlaceHolder = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblCreatedAtPlaceHolder = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblUpdatedAtPlaceHolder = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtTotalSupplementalAppropriations = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblDateEntry = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -98,8 +102,8 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             // 
             // dataGridView1
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 53);
@@ -107,16 +111,21 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.Size = new System.Drawing.Size(678, 285);
             this.dataGridView1.TabIndex = 6;
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.labelRecords,
+            this.labelRecordsCountsPlaceHolder,
+            this.lblRecordCounts,
             this.toolStripStatusLabel1,
+            this.lblDateEntryPlaceHolder,
             this.lblDateEntry,
             this.toolStripStatusLabel3,
+            this.lblCreatedAtPlaceHolder,
             this.lblCreatedAt,
             this.toolStripStatusLabel2,
+            this.lblUpdatedAtPlaceHolder,
             this.lblUpdatedAt});
             this.statusStrip1.Location = new System.Drawing.Point(0, 374);
             this.statusStrip1.Name = "statusStrip1";
@@ -124,23 +133,29 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // labelRecords
+            // labelRecordsCountsPlaceHolder
             // 
-            this.labelRecords.Name = "labelRecords";
-            this.labelRecords.Size = new System.Drawing.Size(51, 17);
-            this.labelRecords.Text = "record/s";
+            this.labelRecordsCountsPlaceHolder.Name = "labelRecordsCountsPlaceHolder";
+            this.labelRecordsCountsPlaceHolder.Size = new System.Drawing.Size(49, 17);
+            this.labelRecordsCountsPlaceHolder.Text = "records:";
+            // 
+            // lblRecordCounts
+            // 
+            this.lblRecordCounts.Name = "lblRecordCounts";
+            this.lblRecordCounts.Size = new System.Drawing.Size(13, 17);
+            this.lblRecordCounts.Text = "0";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(420, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(409, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
-            // lblDateEntry
+            // lblDateEntryPlaceHolder
             // 
-            this.lblDateEntry.Name = "lblDateEntry";
-            this.lblDateEntry.Size = new System.Drawing.Size(64, 17);
-            this.lblDateEntry.Text = "Date Entry:";
+            this.lblDateEntryPlaceHolder.Name = "lblDateEntryPlaceHolder";
+            this.lblDateEntryPlaceHolder.Size = new System.Drawing.Size(64, 17);
+            this.lblDateEntryPlaceHolder.Text = "Date Entry:";
             // 
             // toolStripStatusLabel3
             // 
@@ -150,11 +165,11 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.toolStripStatusLabel3.Text = "|";
             this.toolStripStatusLabel3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // lblCreatedAt
+            // lblCreatedAtPlaceHolder
             // 
-            this.lblCreatedAt.Name = "lblCreatedAt";
-            this.lblCreatedAt.Size = new System.Drawing.Size(64, 17);
-            this.lblCreatedAt.Text = "Created at:";
+            this.lblCreatedAtPlaceHolder.Name = "lblCreatedAtPlaceHolder";
+            this.lblCreatedAtPlaceHolder.Size = new System.Drawing.Size(64, 17);
+            this.lblCreatedAtPlaceHolder.Text = "Created at:";
             // 
             // toolStripStatusLabel2
             // 
@@ -164,30 +179,46 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.toolStripStatusLabel2.Text = "|";
             this.toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // lblUpdatedAt
+            // lblUpdatedAtPlaceHolder
             // 
-            this.lblUpdatedAt.Name = "lblUpdatedAt";
-            this.lblUpdatedAt.Size = new System.Drawing.Size(68, 17);
-            this.lblUpdatedAt.Text = "Updated at:";
+            this.lblUpdatedAtPlaceHolder.Name = "lblUpdatedAtPlaceHolder";
+            this.lblUpdatedAtPlaceHolder.Size = new System.Drawing.Size(68, 17);
+            this.lblUpdatedAtPlaceHolder.Text = "Updated at:";
             // 
             // txtTotalSupplementalAppropriations
             // 
             this.txtTotalSupplementalAppropriations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTotalSupplementalAppropriations.Location = new System.Drawing.Point(498, 344);
+            this.txtTotalSupplementalAppropriations.Location = new System.Drawing.Point(532, 344);
             this.txtTotalSupplementalAppropriations.Name = "txtTotalSupplementalAppropriations";
             this.txtTotalSupplementalAppropriations.ReadOnly = true;
-            this.txtTotalSupplementalAppropriations.Size = new System.Drawing.Size(192, 23);
+            this.txtTotalSupplementalAppropriations.Size = new System.Drawing.Size(158, 23);
             this.txtTotalSupplementalAppropriations.TabIndex = 9;
+            this.txtTotalSupplementalAppropriations.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(307, 347);
+            this.label1.Location = new System.Drawing.Point(337, 347);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(189, 15);
             this.label1.TabIndex = 10;
             this.label1.Text = "Total Supplemented Appropriation";
+            // 
+            // lblUpdatedAt
+            // 
+            this.lblUpdatedAt.Name = "lblUpdatedAt";
+            this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
+            // 
+            // lblCreatedAt
+            // 
+            this.lblCreatedAt.Name = "lblCreatedAt";
+            this.lblCreatedAt.Size = new System.Drawing.Size(0, 17);
+            // 
+            // lblDateEntry
+            // 
+            this.lblDateEntry.Name = "lblDateEntry";
+            this.lblDateEntry.Size = new System.Drawing.Size(0, 17);
             // 
             // frmSupplementalAppropriations
             // 
@@ -227,12 +258,18 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         private System.Windows.Forms.StatusStrip statusStrip1;
         internal System.Windows.Forms.TextBox txtTotalSupplementalAppropriations;
         private System.Windows.Forms.Label label1;
-        internal System.Windows.Forms.ToolStripStatusLabel labelRecords;
+        internal System.Windows.Forms.ToolStripStatusLabel lblRecords;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         internal System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        internal System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
+        internal System.Windows.Forms.ToolStripStatusLabel lblUpdatedAtPlaceHolder;
         internal System.Windows.Forms.ToolStripStatusLabel lblDateEntry;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        internal System.Windows.Forms.ToolStripStatusLabel labelRecords;
+        internal System.Windows.Forms.ToolStripStatusLabel lblRecordCounts;
+        internal System.Windows.Forms.ToolStripStatusLabel labelRecordsCountsPlaceHolder;
+        internal System.Windows.Forms.ToolStripStatusLabel lblDateEntryPlaceHolder;
+        internal System.Windows.Forms.ToolStripStatusLabel lblCreatedAtPlaceHolder;
+        internal System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
     }
 }

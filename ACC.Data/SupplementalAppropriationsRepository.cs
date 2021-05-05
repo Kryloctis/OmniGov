@@ -72,5 +72,26 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
+
+        public DataTable GetRecordsById(int budgetAppropriationsId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@budget_appropriations_id",DbType.Int32, budgetAppropriationsId }
+                };
+
+                string query = $"SELECT id, budget_appropriations_id, date_entry, amount, remarks, created_at, updated_at FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id";
+
+                var dtSupplementalApprorpriation = new DataTable();
+
+                return _mySqlGenericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
