@@ -1,12 +1,7 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Users.Roles
@@ -14,28 +9,41 @@ namespace AccountingSystem.Views.Manage.Users.Roles
     public partial class frmRolesEdit : Form
     {
         private frmRoles _frmRoles;
-        public frmRolesEdit(frmRoles frmRoles, int roleId)
+        private ucRoles uc;
+
+        public frmRolesEdit(frmRoles frmRoles, byte roleId)
         {
             InitializeComponent();
+            uc = ucRoles1;
             _frmRoles = frmRoles;
-            ucRoles1.roleId = roleId;
+            uc.roleId = roleId;
         }
 
-        private void LoadSelectedRecord()
+        private void LoadSelectedRole()
         {
             try
             {
-                var uc = ucRoles1;
                 var rolesRepository = Factory.RolesRepository();
-                var roleData = rolesRepository.GetRecordByID(uc.roleId);
+                var roleDict = rolesRepository.GetRecordByID(uc.roleId);
 
-                uc.txtName.Text = roleData["role_name"];
-              
+                uc.cmbOffice.Text = roleDict["office"];
+                uc.txtName.Text = roleDict["role_name"];
+                
             }
             catch (Exception ex)
             {
-
                 Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void LoadPermissionsByRoleId()
+        {
+            var dtRolesHasPermissions = Factory.RoleHasPermissionsRepository().GetRecordsByRoleId(uc.roleId);
+            foreach (DataRow row in dtRolesHasPermissions.Rows)
+            {
+                string permissionId = row["permissions_id"].ToString();
+                string permissionName = row["permission_name"].ToString();
+                uc.dgPermissionGranted.Rows.Add(new string[] { permissionId, permissionName });
             }
         }
 
@@ -43,9 +51,6 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         {
             try
             {
-                var uc = ucRoles1;
-
-
                 // if error occurs, show messagebox error
                 if (!uc.ValidateChildren())
                 {
@@ -53,16 +58,30 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                     return false;
                 }
 
+                // if no permission has been granted
+                if (uc.dgPermissionGranted.SelectedRows.Count == 0)
+                {
+                    Helper.MessageBoxError("Please select at least one permission.");
+                    return false;
+                }
+
+                // get all the selected permissions
+                var permissionModelList = new List<PermissionsModel>();
+                foreach (DataGridViewRow row in uc.dgPermissionGranted.Rows)
+                {
+                    permissionModelList.Add(new PermissionsModel() { Id = Convert.ToByte(row.Cells["id"].Value) });
+                }
+
                 // proceed to update
                 var roleModel = new RolesModel()
                 {
                     Id = uc.roleId,
+                    Office = uc.cmbOffice.Text,
                     RoleName = uc.txtName.Text.Trim(),
-                  
+                    PermissionsModels = permissionModelList
                 };
 
-                var rolesRepository = Factory.RolesRepository();
-                return rolesRepository.Update(roleModel);
+                return Factory.RolesRepository().Update(roleModel);
             }
             catch (Exception ex)
             {
@@ -77,20 +96,16 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Role has been saved.");
-                _frmRoles.LoadRecords();
-                ucRoles1.ResetForm();
+                _frmRoles.LoadRoles();
             }
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void frmRolesEdit_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            LoadSelectedRecord();
+            LoadSelectedRole();
+            LoadPermissionsByRoleId();
+            uc.LoadPermissions();
         }
     }
 }

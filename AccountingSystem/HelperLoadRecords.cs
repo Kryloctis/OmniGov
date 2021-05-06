@@ -53,10 +53,11 @@ namespace AccountingSystem
         internal static void RolesDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Role Name";
-            datagrid.Columns[2].Visible = false;
-            datagrid.Columns[3].Visible = false;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["office"].HeaderText = "Office";
+            datagrid.Columns["role_name"].HeaderText = "Role Name";
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -102,10 +103,14 @@ namespace AccountingSystem
             checkedListBox.ValueMember = valueMember;
         }
 
-        internal static void AddedPermissionsDatagridView(DataTable dataTable, DataGridView datagrid)
+        internal static void PermissionsDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].HeaderText = "Permission Name";
+            //datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["permission_name"].HeaderText = "Permission";
+
+            datagrid.RowHeadersVisible = false;
+            datagrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
