@@ -29,11 +29,6 @@ namespace AccountingSystem.Views.Dashboard
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UcAccountingDashboard));
-            this.panel22 = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label39 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
             this.panel21 = new System.Windows.Forms.Panel();
             this.label38 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
@@ -97,8 +92,21 @@ namespace AccountingSystem.Views.Dashboard
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tlpJournals = new System.Windows.Forms.TableLayoutPanel();
-            this.panel22.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.panel26 = new System.Windows.Forms.Panel();
+            this.label47 = new System.Windows.Forms.Label();
+            this.label48 = new System.Windows.Forms.Label();
+            this.panel25 = new System.Windows.Forms.Panel();
+            this.label45 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.panel24 = new System.Windows.Forms.Panel();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.panel23 = new System.Windows.Forms.Panel();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.panel22 = new System.Windows.Forms.Panel();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
             this.panel21.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel16.SuspendLayout();
@@ -122,51 +130,12 @@ namespace AccountingSystem.Views.Dashboard
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
             this.tlpJournals.SuspendLayout();
+            this.panel26.SuspendLayout();
+            this.panel25.SuspendLayout();
+            this.panel24.SuspendLayout();
+            this.panel23.SuspendLayout();
+            this.panel22.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panel22
-            // 
-            this.panel22.BackColor = System.Drawing.Color.White;
-            this.panel22.Controls.Add(this.pictureBox2);
-            this.panel22.Controls.Add(this.label39);
-            this.panel22.Controls.Add(this.label40);
-            this.panel22.Location = new System.Drawing.Point(528, 369);
-            this.panel22.Margin = new System.Windows.Forms.Padding(7);
-            this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(158, 171);
-            this.panel22.TabIndex = 11;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(78, 91);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(80, 80);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox2.TabIndex = 6;
-            this.pictureBox2.TabStop = false;
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label39.Location = new System.Drawing.Point(9, 46);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(88, 30);
-            this.label39.TabIndex = 6;
-            this.label39.Text = "Today\'s CAFOA\nCounter";
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label40.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label40.Location = new System.Drawing.Point(9, 6);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(33, 40);
-            this.label40.TabIndex = 6;
-            this.label40.Text = "6";
             // 
             // panel21
             // 
@@ -174,20 +143,21 @@ namespace AccountingSystem.Views.Dashboard
             this.panel21.Controls.Add(this.label38);
             this.panel21.Controls.Add(this.label37);
             this.panel21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel21.Location = new System.Drawing.Point(7, 7);
-            this.panel21.Margin = new System.Windows.Forms.Padding(7);
+            this.panel21.Location = new System.Drawing.Point(137, 3);
             this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(139, 139);
+            this.panel21.Size = new System.Drawing.Size(128, 137);
             this.panel21.TabIndex = 10;
             // 
             // label38
             // 
-            this.label38.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label38.Location = new System.Drawing.Point(2, 76);
+            this.label38.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label38.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label38.Location = new System.Drawing.Point(2, 68);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(128, 50);
+            this.label38.Size = new System.Drawing.Size(126, 50);
             this.label38.TabIndex = 6;
-            this.label38.Text = "Authority to Debit Account Disbursement Journal";
+            this.label38.Text = "Cash Receipts Journal";
             this.label38.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label37
@@ -196,11 +166,11 @@ namespace AccountingSystem.Views.Dashboard
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label37.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label37.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label37.Location = new System.Drawing.Point(2, 25);
+            this.label37.Location = new System.Drawing.Point(2, 15);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(137, 40);
+            this.label37.Size = new System.Drawing.Size(126, 40);
             this.label37.TabIndex = 6;
-            this.label37.Text = "15";
+            this.label37.Text = "26";
             this.label37.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // cmbFPP
@@ -852,32 +822,215 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // tlpJournals
             // 
-            this.tlpJournals.ColumnCount = 2;
-            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpJournals.ColumnCount = 5;
+            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tlpJournals.Controls.Add(this.panel26, 0, 0);
+            this.tlpJournals.Controls.Add(this.panel25, 0, 0);
+            this.tlpJournals.Controls.Add(this.panel24, 0, 0);
+            this.tlpJournals.Controls.Add(this.panel23, 0, 0);
             this.tlpJournals.Controls.Add(this.panel21, 0, 0);
-            this.tlpJournals.Location = new System.Drawing.Point(0, 214);
+            this.tlpJournals.Location = new System.Drawing.Point(6, 211);
             this.tlpJournals.Name = "tlpJournals";
             this.tlpJournals.RowCount = 1;
-            this.tlpJournals.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpJournals.Size = new System.Drawing.Size(306, 153);
+            this.tlpJournals.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpJournals.Size = new System.Drawing.Size(674, 143);
             this.tlpJournals.TabIndex = 12;
+            // 
+            // panel26
+            // 
+            this.panel26.BackColor = System.Drawing.Color.White;
+            this.panel26.Controls.Add(this.label47);
+            this.panel26.Controls.Add(this.label48);
+            this.panel26.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel26.Location = new System.Drawing.Point(405, 3);
+            this.panel26.Name = "panel26";
+            this.panel26.Size = new System.Drawing.Size(128, 137);
+            this.panel26.TabIndex = 14;
+            // 
+            // label47
+            // 
+            this.label47.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label47.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label47.Location = new System.Drawing.Point(2, 68);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(125, 50);
+            this.label47.TabIndex = 6;
+            this.label47.Text = "Check Disbursements Journal";
+            this.label47.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label48
+            // 
+            this.label48.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label48.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label48.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label48.Location = new System.Drawing.Point(2, 15);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(125, 40);
+            this.label48.TabIndex = 6;
+            this.label48.Text = "19";
+            this.label48.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // panel25
+            // 
+            this.panel25.BackColor = System.Drawing.Color.White;
+            this.panel25.Controls.Add(this.label45);
+            this.panel25.Controls.Add(this.label46);
+            this.panel25.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel25.Location = new System.Drawing.Point(539, 3);
+            this.panel25.Name = "panel25";
+            this.panel25.Size = new System.Drawing.Size(132, 137);
+            this.panel25.TabIndex = 13;
+            // 
+            // label45
+            // 
+            this.label45.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label45.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label45.Location = new System.Drawing.Point(2, 68);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(130, 50);
+            this.label45.TabIndex = 6;
+            this.label45.Text = "Authority to Debit Account Disbursement Journal";
+            this.label45.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label46
+            // 
+            this.label46.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label46.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label46.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label46.Location = new System.Drawing.Point(2, 15);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(130, 40);
+            this.label46.TabIndex = 6;
+            this.label46.Text = "5";
+            this.label46.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // panel24
+            // 
+            this.panel24.BackColor = System.Drawing.Color.White;
+            this.panel24.Controls.Add(this.label43);
+            this.panel24.Controls.Add(this.label44);
+            this.panel24.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel24.Location = new System.Drawing.Point(271, 3);
+            this.panel24.Name = "panel24";
+            this.panel24.Size = new System.Drawing.Size(128, 137);
+            this.panel24.TabIndex = 12;
+            // 
+            // label43
+            // 
+            this.label43.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label43.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label43.Location = new System.Drawing.Point(2, 68);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(126, 50);
+            this.label43.TabIndex = 6;
+            this.label43.Text = "Procurement Received Journal";
+            this.label43.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label44
+            // 
+            this.label44.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label44.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label44.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label44.Location = new System.Drawing.Point(2, 15);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(126, 40);
+            this.label44.TabIndex = 6;
+            this.label44.Text = "2";
+            this.label44.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // panel23
+            // 
+            this.panel23.BackColor = System.Drawing.Color.White;
+            this.panel23.Controls.Add(this.label41);
+            this.panel23.Controls.Add(this.label42);
+            this.panel23.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel23.Location = new System.Drawing.Point(3, 3);
+            this.panel23.Name = "panel23";
+            this.panel23.Size = new System.Drawing.Size(128, 137);
+            this.panel23.TabIndex = 11;
+            // 
+            // label41
+            // 
+            this.label41.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label41.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label41.Location = new System.Drawing.Point(2, 68);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(126, 50);
+            this.label41.TabIndex = 6;
+            this.label41.Text = "General Journal";
+            this.label41.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label42
+            // 
+            this.label42.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label42.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label42.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label42.Location = new System.Drawing.Point(2, 15);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(126, 40);
+            this.label42.TabIndex = 6;
+            this.label42.Text = "15";
+            this.label42.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // panel22
+            // 
+            this.panel22.BackColor = System.Drawing.Color.White;
+            this.panel22.Controls.Add(this.label39);
+            this.panel22.Controls.Add(this.label40);
+            this.panel22.Location = new System.Drawing.Point(9, 360);
+            this.panel22.Name = "panel22";
+            this.panel22.Size = new System.Drawing.Size(128, 137);
+            this.panel22.TabIndex = 13;
+            // 
+            // label39
+            // 
+            this.label39.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label39.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label39.Location = new System.Drawing.Point(2, 68);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(126, 50);
+            this.label39.TabIndex = 6;
+            this.label39.Text = "CAFOA";
+            this.label39.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label40
+            // 
+            this.label40.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label40.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label40.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label40.Location = new System.Drawing.Point(2, 15);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(126, 40);
+            this.label40.TabIndex = 6;
+            this.label40.Text = "15";
+            this.label40.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // UcAccountingDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tlpJournals);
             this.Controls.Add(this.panel22);
+            this.Controls.Add(this.tlpJournals);
             this.Controls.Add(this.cmbFPP);
             this.Controls.Add(this.cmbFund);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "UcAccountingDashboard";
             this.Size = new System.Drawing.Size(1106, 601);
             this.Load += new System.EventHandler(this.UcAccountingDashboard_Load);
-            this.panel22.ResumeLayout(false);
-            this.panel22.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel21.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel16.ResumeLayout(false);
@@ -917,16 +1070,16 @@ namespace AccountingSystem.Views.Dashboard
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.tlpJournals.ResumeLayout(false);
+            this.panel26.ResumeLayout(false);
+            this.panel25.ResumeLayout(false);
+            this.panel24.ResumeLayout(false);
+            this.panel23.ResumeLayout(false);
+            this.panel22.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel22;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Panel panel21;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Label label37;
@@ -990,5 +1143,20 @@ namespace AccountingSystem.Views.Dashboard
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tlpJournals;
+        private System.Windows.Forms.Panel panel23;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Panel panel26;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.Panel panel25;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.Panel panel24;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Panel panel22;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label40;
     }
 }

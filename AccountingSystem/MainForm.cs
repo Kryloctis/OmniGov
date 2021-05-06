@@ -122,7 +122,14 @@ namespace AccountingSystem
             switch (userDict["office"])
             {
                 case "Budget":
+                case "Accounting":
                     panel1.Controls.Add(new UcAccountingDashboard(Helper.LoggedInUserData()));
+                    break;
+                case "Treasury":
+
+                    break;
+                case "Assessor":
+
                     break;
                 default:
                     break;
