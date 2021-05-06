@@ -20,7 +20,7 @@ namespace ACC.Domain.Interfaces
 
         Dictionary<string, string> GetTotalAppropriationBalanceRecord(int budgetAppropirationId);
 
-        Dictionary<string, string> GetRecordByIDs(int budgetAppID, int fppID, int? othersFPPID, int allotmentClassID, int genLedgerAccID);
+        Dictionary<string, string> GetRecordByIDs(int budgetAppropriationId, int fppId, int? othersFPPId, int allotmentClassId, int genLedgerAccId);
 
         Dictionary<string, string> GetViewRecordByIDs(int budgetAppId, int fppId, int? othersFPPId, int allotmentClassId, int genLedgerAccId);
 

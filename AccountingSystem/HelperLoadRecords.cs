@@ -812,7 +812,7 @@ namespace AccountingSystem
                     int rowId = Convert.ToInt32(drGetViewRecordsByIds["id"]);
                     int rowFundId = Convert.ToInt32(drGetViewRecordsByIds["funds_id"]);
                     int rowFPPId = Convert.ToInt32(drGetViewRecordsByIds["fpp_id"]);
-                    int? rowOthersFPPId = string.IsNullOrEmpty(drGetViewRecordsByIds["others_fpp_id"].ToString()) ? null : Convert.ToInt32(drGetViewRecordsByIds["others_fpp_id"]);
+                    int? rowOthersFPPId = string.IsNullOrWhiteSpace(drGetViewRecordsByIds["others_fpp_id"].ToString()) ? null : Convert.ToInt32(drGetViewRecordsByIds["others_fpp_id"]);
                     int rowAllotmentClassId = Convert.ToInt32(drGetViewRecordsByIds["allotment_class_id"]);
                     int rowAccountId = Convert.ToInt32(drGetViewRecordsByIds["general_ledger_accounts_id"]);
                     string rowAccountName = drGetViewRecordsByIds["general_ledger_accounts_name"].ToString();
@@ -821,13 +821,11 @@ namespace AccountingSystem
                     decimal rowAppropriationAmount = Convert.ToDecimal(drGetViewRecordsByIds["amount"]);
                     short rowYear = Convert.ToInt16(drGetViewRecordsByIds["year"]);
                     byte rowContinuing = Convert.ToByte(drGetViewRecordsByIds["continuing"]);
-                    DateTime rowCreatedAt = Convert.ToDateTime(drGetViewRecordsByIds["created_at"]);
-                    DateTime rowUpdatedAt = Convert.ToDateTime(drGetViewRecordsByIds["updated_at"]);
                     decimal totalSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountById(rowId);
 
                     decimal totalAppropriationAmount = totalSupplementalAppropriation + rowAppropriationAmount;
 
-                    decimal totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(rowFundId, rowFPPId, rowOthersFPPId, rowAllotmentClassId, rowAccountId);
+                    decimal totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(rowFundId, rowFPPId, rowOthersFPPId, rowAllotmentClassId, rowAccountId, rowYear);
 
                     decimal appropriationBalance = (totalSupplementalAppropriation + rowAppropriationAmount) - totalAllotmentRelease;
 
@@ -846,8 +844,8 @@ namespace AccountingSystem
                     appropriationBalance,
                     rowYear,
                     rowContinuing == 1? continuingIcon : null,
-                    rowCreatedAt,
-                    rowUpdatedAt });
+                    drGetViewRecordsByIds["created_at"],
+                    drGetViewRecordsByIds["updated_at"] });
                 }
 
             }

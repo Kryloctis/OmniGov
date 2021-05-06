@@ -233,7 +233,22 @@ namespace ACC.Data
                    new object[] {"@allotment_classes_id", DbType.Int32, allotmentClassID},
                    new object[] {"@general_ledger_accounts_id", DbType.Int32, genLedgerAccID }
                 };
-                string query = $"SELECT function_program_project_id, funds_id, others_fpp_id, allotment_classes_id, general_ledger_accounts_id, date_entry, year, amount, continuing FROM {tableName} WHERE id = @id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id";
+                string query = $"SELECT " +
+                    $"function_program_project_id, " +
+                    $"funds_id, " +
+                    $"others_fpp_id, " +
+                    $"allotment_classes_id, " +
+                    $"general_ledger_accounts_id, " +
+                    $"date_entry, " +
+                    $"year, " +
+                    $"amount, " +
+                    $"continuing " +
+                    $"FROM {tableName} " +
+                    $"WHERE id = @id " +
+                    $"AND function_program_project_id = @function_program_project_id " +
+                    $"AND others_fpp_id <=> @others_fpp_id " +
+                    $"AND allotment_classes_id = @allotment_classes_id " +
+                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id";
 
                 using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -270,13 +285,42 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                   new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppID},
+                   new object[] { "@id", DbType.Int32, budgetAppID},
                    new object[] { "@fpp_id", DbType.Int32, fppID},
                    new object[] { "@others_fpp_id", DbType.String, othersFPPID},
-                   new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassID},
-                   new object[] { "@general_ledger_acc_id", DbType.Int32, genLedgerAccID}
+                   new object[] { "@allotment_class_id", DbType.Int32, allotmentClassID},
+                   new object[] { "@general_ledger_accounts_id", DbType.Int32, genLedgerAccID}
                 };
-                string query = $"SELECT budget_appropriations_id, funds_id, fund_code, fund_name, fpp_id, fpp_code, fpp_name, others_fpp_id, others_fpp_name, allotment_classes_id, allotment_code, allotment_name, general_ledger_acc_id, ledger_code, account_code, ledger_name, is_contra_account, date_entry, year, appropriation, appropriation_balance FROM {viewTableName} WHERE budget_appropriations_id = @budget_appropriations_id AND fpp_id = @fpp_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_acc_id = @general_ledger_acc_id";
+                string query = $"SELECT " +
+                    $"id, " +
+                    $"funds_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"fpp_id, " +
+                    $"fpp_code, " +
+                    $"fpp_name, " +
+                    $"others_fpp_id, " +
+                    $"others_fpp_name, " +
+                    $"allotment_class_id, " +
+                    $"allotment_class_code, " +
+                    $"allotment_class_name, " +
+                    $"general_ledger_accounts_id, " +
+                    $"general_ledger_accounts_code, " +
+                    $"general_ledger_accounts_name, " +
+                    $"account_code, " +
+                    $"date_entry, " +
+                    $"year, " +
+                    $"amount, " +
+                    $"continuing, " +
+                    $"created_at, " +
+                    $"updated_at " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE " +
+                    $"id = @id " +
+                    $"AND fpp_id = @fpp_id " +
+                    $"AND others_fpp_id <=> @others_fpp_id " +
+                    $"AND allotment_class_id = @allotment_class_id " +
+                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id";
 
                 using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -285,7 +329,7 @@ namespace ACC.Data
 
                     foreach (DataRow item in reader.Rows)
                     {
-                        record.Add("budget_appropriations_id", item[0].ToString());
+                        record.Add("id", item[0].ToString());
                         record.Add("funds_id", item[1].ToString());
                         record.Add("fund_code", item[2].ToString());
                         record.Add("fund_name", item[3].ToString());
@@ -294,18 +338,16 @@ namespace ACC.Data
                         record.Add("fpp_name", item[6].ToString());
                         record.Add("others_fpp_id", item[7].ToString());
                         record.Add("others_fpp_name", item[8].ToString());
-                        record.Add("allotment_classes_id", item[9].ToString());
-                        record.Add("allotment_code", item[10].ToString());
-                        record.Add("allotment_name", item[11].ToString());
-                        record.Add("general_ledger_acc_id", item[12].ToString());
-                        record.Add("ledger_code", item[13].ToString());
+                        record.Add("allotment_class_id", item[9].ToString());
+                        record.Add("allotment_class_code", item[10].ToString());
+                        record.Add("allotment_class_name", item[11].ToString());
+                        record.Add("general_ledger_accounts_id", item[12].ToString());
+                        record.Add("general_ledger_accounts_code", item[13].ToString());
                         record.Add("account_code", item[14].ToString());
-                        record.Add("ledger_name", item[15].ToString());
-                        record.Add("is_contra_account", item[16].ToString());
-                        record.Add("date_entry", item[17].ToString());
-                        record.Add("year", item[18].ToString());
-                        record.Add("appropriation", item[19].ToString());
-                        record.Add("appropriation_balance", item[20].ToString());
+                        record.Add("general_ledger_accounts_name", item[15].ToString());
+                        record.Add("date_entry", item[16].ToString());
+                        record.Add("year", item[17].ToString());
+                        record.Add("amount", item[18].ToString());
                     }
                 }
             }

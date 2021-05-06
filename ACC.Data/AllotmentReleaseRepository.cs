@@ -342,5 +342,37 @@ namespace ACC.Data
             }
             return false;
         }
+
+        public decimal GetTotalAllotmentReleaseAmount(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int accountId, int year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@fund_id", DbType.Int32, fundId},
+                    new object[] { "@fpp_id", DbType.Int32,  fppId},
+                    new object[] { "@others_fpp_id", DbType.String, othersFPPId },
+                    new object[] { "@allotment_class_id", DbType.String, allotmentClassId},
+                    new object[] { "@gen_ledger_acc_id", DbType.Int32, accountId },
+                    new object[] { "@budget_appropriations_year", DbType.Int16, year}
+                };
+
+                string query = $"SELECT " +
+                    $"COALESCE(SUM(allotment_release_amount), 0) AS total_allotment_amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE fund_id = @fund_id " +
+                    $"AND fpp_id = @fpp_id " +
+                    $"AND others_fpp_id <=> @others_fpp_id " +
+                    $"AND allotment_class_id = @allotment_class_id " +
+                    $"AND gen_ledger_acc_id = @gen_ledger_acc_id " +
+                    $"AND budget_appropriations_year = @budget_appropriations_year";
+
+                return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
