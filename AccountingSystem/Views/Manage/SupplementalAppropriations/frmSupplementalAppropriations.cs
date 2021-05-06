@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccountingSystem.Views.Manage.BudgetAppropriations;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,19 +13,21 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 {
     public partial class frmSupplementalAppropriations : Form
     {
+        internal frmBudgetAppropriations _frmBudgetAppropriations;
         internal int budgetAppropriationsId;
         internal DateTime dateEntry;
 
-        public frmSupplementalAppropriations()
+        public frmSupplementalAppropriations(frmBudgetAppropriations frmBudgetAppropriations)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+            _frmBudgetAppropriations = frmBudgetAppropriations;
             btnAdd.Click += new EventHandler(BtnAdd_Click);
         }
 
         private void ShowSupplementalAppropriationAdd() 
         {
-            var frmSupplementalAppropriationAdd = new frmSupplementalAppropriationAdd();
+            var frmSupplementalAppropriationAdd = new frmSupplementalAppropriationAdd(this);
 
             frmSupplementalAppropriationAdd.uc.budgetAppropriationId = budgetAppropriationsId;
             frmSupplementalAppropriationAdd.uc.dateEntry = dateEntry;
@@ -52,7 +55,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             }
         }
 
-        private void LoadSupplementalApproprations() 
+        internal void LoadSupplementalApproprations() 
         {
             var supplementalRepo = Factory.SupplementalAppropriationsRepository().GetRecordsById(budgetAppropriationsId);
 
