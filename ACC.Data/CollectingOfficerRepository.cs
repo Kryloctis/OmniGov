@@ -144,7 +144,7 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@first_name", DbType.String, entity.FirstName},
-                    new object[] { "@mid_initial", DbType.String, entity.MiddleInitia},
+                    new object[] { "@mid_initial", DbType.String, entity.MiddleInitial},
                     new object[] { "@last_name", DbType.String, entity.LastName},
                     new object[] { "@job_title", DbType.String, entity.JobTitle},
                 };
@@ -167,7 +167,7 @@ namespace ACC.Data
                 {
                      new object[] { "@id", DbType.Int16, entity.Id},
                     new object[] { "@first_name", DbType.String, entity.FirstName},
-                    new object[] { "@mid_initial", DbType.String, entity.MiddleInitia},
+                    new object[] { "@mid_initial", DbType.String, entity.MiddleInitial},
                     new object[] { "@last_name", DbType.String, entity.LastName},
                     new object[] { "@job_title", DbType.String, entity.JobTitle},
                 };
@@ -186,7 +186,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool FullnameExist(string firstname, string middleinitial, string lastname, int id)
+        public bool FullNameExist(string firstname, string middleinitial, string lastname, int id)
         {
             try
             {
