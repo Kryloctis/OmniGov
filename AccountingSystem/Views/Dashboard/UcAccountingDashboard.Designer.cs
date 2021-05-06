@@ -35,7 +35,6 @@ namespace AccountingSystem.Views.Dashboard
             this.label39 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.panel21 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label38 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.cmbFPP = new System.Windows.Forms.ComboBox();
@@ -97,11 +96,10 @@ namespace AccountingSystem.Views.Dashboard
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpJournals = new System.Windows.Forms.TableLayoutPanel();
             this.panel22.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel21.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel16.SuspendLayout();
             this.panel17.SuspendLayout();
@@ -123,7 +121,7 @@ namespace AccountingSystem.Views.Dashboard
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
+            this.tlpJournals.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel22
@@ -132,8 +130,7 @@ namespace AccountingSystem.Views.Dashboard
             this.panel22.Controls.Add(this.pictureBox2);
             this.panel22.Controls.Add(this.label39);
             this.panel22.Controls.Add(this.label40);
-            this.panel22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel22.Location = new System.Drawing.Point(179, 7);
+            this.panel22.Location = new System.Drawing.Point(528, 369);
             this.panel22.Margin = new System.Windows.Forms.Padding(7);
             this.panel22.Name = "panel22";
             this.panel22.Size = new System.Drawing.Size(158, 171);
@@ -174,47 +171,37 @@ namespace AccountingSystem.Views.Dashboard
             // panel21
             // 
             this.panel21.BackColor = System.Drawing.Color.White;
-            this.panel21.Controls.Add(this.pictureBox1);
             this.panel21.Controls.Add(this.label38);
             this.panel21.Controls.Add(this.label37);
             this.panel21.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel21.Location = new System.Drawing.Point(7, 7);
             this.panel21.Margin = new System.Windows.Forms.Padding(7);
             this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(158, 171);
+            this.panel21.Size = new System.Drawing.Size(139, 139);
             this.panel21.TabIndex = 10;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(78, 91);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(80, 80);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
             // 
             // label38
             // 
-            this.label38.AutoSize = true;
             this.label38.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label38.Location = new System.Drawing.Point(9, 46);
+            this.label38.Location = new System.Drawing.Point(2, 76);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(66, 30);
+            this.label38.Size = new System.Drawing.Size(128, 50);
             this.label38.TabIndex = 6;
-            this.label38.Text = "Today\'s JEV\r\nCounter";
+            this.label38.Text = "Authority to Debit Account Disbursement Journal";
+            this.label38.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label37
             // 
-            this.label37.AutoSize = true;
+            this.label37.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label37.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label37.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label37.Location = new System.Drawing.Point(9, 6);
+            this.label37.Location = new System.Drawing.Point(2, 25);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(49, 40);
+            this.label37.Size = new System.Drawing.Size(137, 40);
             this.label37.TabIndex = 6;
             this.label37.Text = "15";
+            this.label37.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // cmbFPP
             // 
@@ -863,25 +850,25 @@ namespace AccountingSystem.Views.Dashboard
             this.label2.Text = "Personnel Services";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // tableLayoutPanel2
+            // tlpJournals
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.panel21, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.panel22, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 214);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(344, 185);
-            this.tableLayoutPanel2.TabIndex = 12;
+            this.tlpJournals.ColumnCount = 2;
+            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpJournals.Controls.Add(this.panel21, 0, 0);
+            this.tlpJournals.Location = new System.Drawing.Point(0, 214);
+            this.tlpJournals.Name = "tlpJournals";
+            this.tlpJournals.RowCount = 1;
+            this.tlpJournals.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpJournals.Size = new System.Drawing.Size(306, 153);
+            this.tlpJournals.TabIndex = 12;
             // 
             // UcAccountingDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tableLayoutPanel2);
+            this.Controls.Add(this.tlpJournals);
+            this.Controls.Add(this.panel22);
             this.Controls.Add(this.cmbFPP);
             this.Controls.Add(this.cmbFund);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -892,8 +879,6 @@ namespace AccountingSystem.Views.Dashboard
             this.panel22.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel21.ResumeLayout(false);
-            this.panel21.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel16.ResumeLayout(false);
             this.panel17.ResumeLayout(false);
@@ -931,7 +916,7 @@ namespace AccountingSystem.Views.Dashboard
             this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tlpJournals.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -943,7 +928,6 @@ namespace AccountingSystem.Views.Dashboard
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Panel panel21;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.ComboBox cmbFPP;
@@ -1005,6 +989,6 @@ namespace AccountingSystem.Views.Dashboard
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel tlpJournals;
     }
 }

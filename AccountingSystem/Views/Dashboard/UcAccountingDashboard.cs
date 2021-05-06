@@ -12,9 +12,11 @@ namespace AccountingSystem.Views.Dashboard
 {
     public partial class UcAccountingDashboard : UserControl
     {
-        public UcAccountingDashboard()
+        private Dictionary<string, string> userDict;
+        public UcAccountingDashboard(Dictionary<string, string> _userDict)
         {
             InitializeComponent();
+            userDict = _userDict;
         }
 
         internal void LoadFunds()
@@ -35,6 +37,11 @@ namespace AccountingSystem.Views.Dashboard
             LoadFunds();
             LoadFPP();
             Dock = DockStyle.Fill;
+
+            tlpJournals.Visible = false;
+
+            if (userDict["office"] == "Accounting")
+                tlpJournals.Visible = true;
         }
     }
 }

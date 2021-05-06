@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using AccountingSystem.Views.Manage.Journals;
 using AccountingSystem.Views.Manage.Funds;
@@ -24,7 +25,7 @@ namespace AccountingSystem
 {
     public partial class MainForm : Form
     {
-        private UcAccountingDashboard ucAccountingDashboard;
+        private Dictionary<string, string> userDict;
 
         public MainForm()
         {
@@ -41,12 +42,11 @@ namespace AccountingSystem
             btnJournalEntry.Click += new EventHandler(BtnJournalEntry_Click);
             btnObligationRequest.Click += new EventHandler(BtnObligationRequest_Click);
 
-            ucAccountingDashboard = new UcAccountingDashboard();
+            userDict = Helper.LoggedInUserData();
         }
 
         private void LoadLoggedInUser()
         {
-            var userDict = Helper.LoggedInUserData();
             lblUserFullName.Text = $"Welcome {userDict["first_name"]} {userDict["mid_initial"]} {userDict["last_name"]}";
             lblUserRole.Text = userDict["role_name"];
         }
@@ -117,13 +117,25 @@ namespace AccountingSystem
                 menuSAAOB.Visible = false;
         }
 
+        private void LoadDashboard()
+        {
+            switch (userDict["office"])
+            {
+                case "Budget":
+                    panel1.Controls.Add(new UcAccountingDashboard(Helper.LoggedInUserData()));
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
             menuSubsidiaryLedgerReport.Enabled = false;
-            panel1.Controls.Add(ucAccountingDashboard);
             LoadLoggedInUser();
             ValidatePermissions();
+            LoadDashboard();
         }
 
         private void menuJournals_Click(object sender, EventArgs e)
