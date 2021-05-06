@@ -41,37 +41,39 @@ namespace AccountingSystem.Views.Manage.Banks
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 11);
+            this.label1.Location = new System.Drawing.Point(6, 8);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 20);
+            this.label1.Size = new System.Drawing.Size(74, 15);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Account No. :";
+            this.label1.Text = "Account No.";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 44);
+            this.label2.Location = new System.Drawing.Point(6, 35);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 20);
+            this.label2.Size = new System.Drawing.Size(68, 15);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Bank Name :";
+            this.label2.Text = "Bank Name";
             // 
             // txtacode
             // 
-            this.txtacode.Location = new System.Drawing.Point(112, 8);
+            this.txtacode.Location = new System.Drawing.Point(86, 5);
+            this.txtacode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtacode.MaxLength = 45;
             this.txtacode.Name = "txtacode";
-            this.txtacode.Size = new System.Drawing.Size(373, 27);
+            this.txtacode.Size = new System.Drawing.Size(327, 23);
             this.txtacode.TabIndex = 0;
             this.txtacode.Validating += new System.ComponentModel.CancelEventHandler(this.txtacode_Validating);
             this.txtacode.Validated += new System.EventHandler(this.txtacode_Validated);
             // 
             // txtbankname
             // 
-            this.txtbankname.Location = new System.Drawing.Point(112, 41);
+            this.txtbankname.Location = new System.Drawing.Point(86, 32);
+            this.txtbankname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtbankname.MaxLength = 99;
             this.txtbankname.Name = "txtbankname";
-            this.txtbankname.Size = new System.Drawing.Size(373, 27);
+            this.txtbankname.Size = new System.Drawing.Size(327, 23);
             this.txtbankname.TabIndex = 1;
             this.txtbankname.Validating += new System.ComponentModel.CancelEventHandler(this.txtbankname_Validating);
             this.txtbankname.Validated += new System.EventHandler(this.txtbankname_Validated);
@@ -82,14 +84,15 @@ namespace AccountingSystem.Views.Manage.Banks
             // 
             // ucBanks
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.txtbankname);
             this.Controls.Add(this.txtacode);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucBanks";
-            this.Size = new System.Drawing.Size(506, 82);
+            this.Size = new System.Drawing.Size(438, 62);
             this.Load += new System.EventHandler(this.ucBanks_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
