@@ -18,8 +18,8 @@ using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.Ledgers;
 using AccountingSystem.Views.Dashboard;
-using AccountingSystem.Views.Manage.AllotmentRelease;
 using AccountingSystem.Views.Reports.RCI;
+using AccountingSystem.Views.Manage.DisbursingOfficer;
 
 namespace AccountingSystem
 {
@@ -41,6 +41,7 @@ namespace AccountingSystem
             menuGeneralLedgerReport.Click += new EventHandler(MenuGeneralLedgerReport_Click);
             btnJournalEntry.Click += new EventHandler(BtnJournalEntry_Click);
             btnObligationRequest.Click += new EventHandler(BtnObligationRequest_Click);
+            menuDisbursingOfficer.Click += new EventHandler(MenuDisbursingOffice_Click);
 
             userDict = Helper.LoggedInUserData();
         }
@@ -216,7 +217,6 @@ namespace AccountingSystem
 
         private void MenuObligationRequest_Click(object sender, EventArgs e) 
         {
-            //_ = new frmObligationRequest().ShowDialog();
             _ = new frmObligationRequestMain().ShowDialog();
         }
         
@@ -268,6 +268,11 @@ namespace AccountingSystem
         private void BtnObligationRequest_Click(object sender, EventArgs e)
         {
             _ = new frmObligationRequestMain().ShowDialog();
+        }
+
+        private void MenuDisbursingOffice_Click(object sender, EventArgs e)
+        {
+            _ = new frmDisbursingOfficer().ShowDialog();
         }
     }
 }

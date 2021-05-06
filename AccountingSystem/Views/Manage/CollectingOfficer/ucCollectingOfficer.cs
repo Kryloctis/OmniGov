@@ -50,7 +50,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             bool fullNameExist;
 
            
-                fullNameExist = collectingOfficerRepository.FullnameExist(fName,midInitial,lname,OfficerId); // add form
+                fullNameExist = collectingOfficerRepository.FullNameExist(fName,midInitial,lname,OfficerId); // add form
           
 
             if (fullNameExist)
@@ -81,7 +81,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             bool fullNameExist;
 
 
-            fullNameExist = collectingOfficerRepository.FullnameExist(fName, midInitial, lname, OfficerId); // add form
+            fullNameExist = collectingOfficerRepository.FullNameExist(fName, midInitial, lname, OfficerId); // add form
 
 
             if (fullNameExist)
@@ -102,7 +102,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             bool fullNameExist;
 
 
-            fullNameExist = collectingOfficerRepository.FullnameExist(fName, midInitial, lname, OfficerId); // add form
+            fullNameExist = collectingOfficerRepository.FullNameExist(fName, midInitial, lname, OfficerId); // add form
 
 
             if (fullNameExist)

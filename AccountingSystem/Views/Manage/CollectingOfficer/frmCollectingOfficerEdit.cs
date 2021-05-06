@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 {
                     Id = uc.OfficerId,
                     FirstName = uc.txtFname.Text.Trim(),
-                    MiddleInitia = uc.txtMI.Text.Trim(),
+                    MiddleInitial = uc.txtMI.Text.Trim(),
                     LastName = uc.txtLname.Text.Trim(),
                     JobTitle = uc.txtJobtitle.Text.Trim()
                 };
