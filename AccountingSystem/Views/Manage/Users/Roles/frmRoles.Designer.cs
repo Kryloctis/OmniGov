@@ -51,7 +51,6 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             // toolStrip1
             // 
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -60,7 +59,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.btnDelete});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(795, 50);
+            this.toolStrip1.Size = new System.Drawing.Size(767, 50);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -100,13 +99,13 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // dgRoles
             // 
             this.dgRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgRoles.Location = new System.Drawing.Point(10, 52);
+            this.dgRoles.Location = new System.Drawing.Point(12, 52);
             this.dgRoles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgRoles.Name = "dgRoles";
             this.dgRoles.RowHeadersWidth = 51;
             this.dgRoles.RowTemplate.Height = 29;
             this.dgRoles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgRoles.Size = new System.Drawing.Size(493, 325);
+            this.dgRoles.Size = new System.Drawing.Size(497, 368);
             this.dgRoles.TabIndex = 3;
             this.dgRoles.SelectionChanged += new System.EventHandler(this.dgRoles_SelectionChanged);
             // 
@@ -121,10 +120,10 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.lblCreatedAt,
             this.toolStripStatusLabel3,
             this.lblUpdatedAt});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 379);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 422);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(795, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(767, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
@@ -132,56 +131,57 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(65, 20);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
             this.toolStripStatusLabel1.Text = "Records:";
             // 
             // lblRecordCount
             // 
             this.lblRecordCount.Name = "lblRecordCount";
-            this.lblRecordCount.Size = new System.Drawing.Size(17, 20);
+            this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
             this.lblRecordCount.Text = "0";
             // 
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(585, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(559, 17);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(81, 20);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(64, 17);
             this.toolStripStatusLabel2.Text = "Created at:";
             // 
             // lblCreatedAt
             // 
             this.lblCreatedAt.Name = "lblCreatedAt";
-            this.lblCreatedAt.Size = new System.Drawing.Size(0, 20);
+            this.lblCreatedAt.Size = new System.Drawing.Size(0, 17);
             // 
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(87, 20);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(68, 17);
             this.toolStripStatusLabel3.Text = "Updated at:";
             // 
             // lblUpdatedAt
             // 
             this.lblUpdatedAt.Name = "lblUpdatedAt";
-            this.lblUpdatedAt.Size = new System.Drawing.Size(0, 20);
+            this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
             // 
             // lstboxAuthorize
             // 
             this.lstboxAuthorize.FormattingEnabled = true;
             this.lstboxAuthorize.ItemHeight = 15;
-            this.lstboxAuthorize.Location = new System.Drawing.Point(509, 72);
+            this.lstboxAuthorize.Location = new System.Drawing.Point(515, 67);
+            this.lstboxAuthorize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lstboxAuthorize.Name = "lstboxAuthorize";
-            this.lstboxAuthorize.Size = new System.Drawing.Size(274, 304);
+            this.lstboxAuthorize.Size = new System.Drawing.Size(240, 349);
             this.lstboxAuthorize.TabIndex = 6;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(509, 54);
+            this.label1.Location = new System.Drawing.Point(515, 50);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(112, 15);
             this.label1.TabIndex = 7;
@@ -189,10 +189,10 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             // frmRoles
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(795, 401);
+            this.ClientSize = new System.Drawing.Size(767, 444);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lstboxAuthorize);
             this.Controls.Add(this.toolStrip1);
@@ -202,7 +202,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(715, 440);
+            this.MinimumSize = new System.Drawing.Size(628, 340);
             this.Name = "frmRoles";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
