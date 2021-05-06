@@ -317,58 +317,6 @@ namespace ACC.Data
             return record;
         }
 
-        public DataTable GetViewRecordsByIds(int fppID, int allotmentClassID, int? othersFPPID, int typeOfFund, int year)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@fpp_id", DbType.Int32, fppID},
-                    new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassID},
-                    new object[] { "@others_fpp_id", DbType.String, othersFPPID },
-                    new object[] { "@funds_id", DbType.Int32, typeOfFund},
-                    new object[] { "@year", DbType.Int16, year}
-                };
-
-                string query = $"SELECT " +
-                    $"budget_appropriations_id, " +
-                    $"funds_id, " +
-                    $"fund_code, " +
-                    $"fund_name, " +
-                    $"fpp_id, " +
-                    $"fpp_name, " +
-                    $"others_fpp_id, " +
-                    $"others_fpp_name, " +
-                    $"allotment_classes_id, " +
-                    $"allotment_code, " +
-                    $"allotment_name, " +
-                    $"general_ledger_acc_id, " +
-                    $"account_code, " +
-                    $"ledger_code, " +
-                    $"ledger_name, " +
-                    $"date_entry, " +
-                    $"year, " +
-                    $"appropriation," +
-                    $"total_allotment_release, " +
-                    $"appropriation_balance, " +
-                    $"continuing," +
-                    $"created_at, " +
-                    $"updated_at " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE fpp_id = @fpp_id " +
-                    $"AND allotment_classes_id = @allotment_classes_id " +
-                    $"AND others_fpp_id <=> @others_fpp_id " +
-                    $"AND funds_id = @funds_id " +
-                    $"AND year = @year";
-
-                var dtPermissions = new DataTable();
-                return mySqlGenericCommands.FillBySearch(query, dtPermissions, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
         public DataTable GetViewRecordsByIds(int fppID, int allotmentClassID, int? othersFPPID, int typeOfFund, DateTime dateEntry)
         {
@@ -422,28 +370,6 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetExistedOthersFPPrecordsByFPPID(int fppID, int allotment_classes_id, int funds_id, short year) 
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@fpp_id", DbType.Int32, fppID },
-                    new object[] { "@allotment_classes_id", DbType.Int32, allotment_classes_id },
-                    new object[] { "@funds_id", DbType.Int32, funds_id },
-                    new object[] { "@year",DbType.Int16, year }, 
-                };
-
-                string query = $"SELECT distinct a.others_fpp_id, a.others_fpp_name  FROM {viewTableName} a INNER JOIN others_fpp b ON a.others_fpp_id = b.id WHERE a.fpp_id = @fpp_id AND a.allotment_classes_id = @allotment_classes_id AND funds_id = @funds_id AND a.year = @year";
-
-                var dtPermissions = new DataTable();
-                return mySqlGenericCommands.FillBySearch(query, dtPermissions, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
         public DataTable GetYearsBudgetAppropriations() 
         {
@@ -513,7 +439,84 @@ namespace ACC.Data
             }
         }
 
-     
+
+        //Budget Appropriations Display
+
+        public DataTable GetViewRecordsByIds(BudgetAppropriationsModel entity)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@fpp_id", DbType.Int32, entity.FunctionProgramProjectId},
+                    new object[] { "@others_fpp_id", DbType.String, entity.OthersFPPId },
+                    new object[] { "@allotment_class_id", DbType.Int32, entity.AllotmentClassesId},
+                    new object[] { "@funds_id", DbType.Int32, entity.FundsId},
+                    new object[] { "@year", DbType.Int16, entity.Year}
+                };
+
+                string query = $"SELECT " +
+                    $"id, " +
+                    $"funds_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"fpp_id, " +
+                    $"fpp_code, " +
+                    $"fpp_name, " +
+                    $"others_fpp_id, " +
+                    $"others_fpp_name, " +
+                    $"allotment_class_id, " +
+                    $"allotment_class_code, " +
+                    $"allotment_class_name, " +
+                    $"general_ledger_accounts_id, " +
+                    $"general_ledger_accounts_code, " +
+                    $"general_ledger_accounts_name, " +
+                    $"account_code, " +
+                    $"date_entry, " +
+                    $"year, " +
+                    $"amount, " +
+                    $"continuing, " +
+                    $"created_at, " +
+                    $"updated_at " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE fpp_id = @fpp_id " +
+                    $"AND allotment_class_id = @allotment_class_id " +
+                    $"AND others_fpp_id <=> @others_fpp_id " +
+                    $"AND funds_id = @funds_id " +
+                    $"AND year = @year";
+
+                var dtPermissions = new DataTable();
+                return mySqlGenericCommands.FillBySearch(query, dtPermissions, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetHeaderOthersFPP(int fppID, int allotment_classes_id, int funds_id, short year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@fpp_id", DbType.Int32, fppID },
+                    new object[] { "@allotment_class_id", DbType.Int32, allotment_classes_id },
+                    new object[] { "@funds_id", DbType.Int32, funds_id },
+                    new object[] { "@year",DbType.Int16, year },
+                };
+
+                string query = $"SELECT distinct a.others_fpp_id, a.others_fpp_name  FROM {viewTableName} a INNER JOIN others_fpp b ON a.others_fpp_id = b.id WHERE a.fpp_id = @fpp_id AND a.allotment_class_id = @allotment_class_id AND funds_id = @funds_id AND a.year = @year";
+
+                var dtPermissions = new DataTable();
+                return mySqlGenericCommands.FillBySearch(query, dtPermissions, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         #endregion Validations
     }
 }
