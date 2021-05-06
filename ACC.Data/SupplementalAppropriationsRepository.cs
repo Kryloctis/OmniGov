@@ -93,5 +93,27 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public decimal GetTotalSupplementalAmountById(int budgetAppropriationsId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationsId }
+                };
+
+                string query = $"SELECT COALESCE(SUM(amount),0) as total_supplemental_amount " +
+                    $"FROM lfsdb.supplemental_appropriations " +
+                    $"WHERE budget_appropriations_id = @budget_appropriations_id";
+
+                return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

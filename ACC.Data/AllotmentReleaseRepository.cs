@@ -185,131 +185,6 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetViewRecords(int fppId, int? othersFPPId, int fundID, int allotmentClassId, short year)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object [] { "@fpp_id", DbType.Int32, fppId},
-                    new object [] { "@fund_id", DbType.Int32, fundID},
-                    new object [] { "@allotment_class_id", DbType.Int32, allotmentClassId},
-                    new object [] { "@others_fpp_id", DbType.String, othersFPPId},
-                    new object [] { "@budget_appropriations_year", DbType.Int32, year}
-                };
-
-                string query = $"SELECT " +
-                    $"SUM(allotment_release_amount) AS total_allotment_release_amount, " +
-                    $"budget_appropriations_id, " +
-                    $"budget_appropriations_year, " +
-                    $"budget_appropriations_amount, " +
-                    $"fund_id, " +
-                    $"fund_code, " +
-                    $"fund_name, " +
-                    $"fpp_id, " +
-                    $"fpp_code, " +
-                    $"fpp_name, " +
-                    $"others_fpp_id, " +
-                    $"others_fpp_name, " +
-                    $"allotment_class_id, " +
-                    $"allotment_class_code, " +
-                    $"allotment_class_name, " +
-                    $"gen_ledger_acc_id, " +
-                    $"gen_ledger_code, " +
-                    $"account_code, " +
-                    $"gen_ledger_name " +
-                    $"FROM {viewTableName} WHERE fpp_id = @fpp_id AND others_fpp_id <=> @others_fpp_id AND fund_id = @fund_id AND allotment_class_id = @allotment_class_id AND budget_appropriations_year = @budget_appropriations_year " +
-                    $"GROUP BY gen_ledger_acc_id , others_fpp_id , allotment_class_id, fpp_id , budget_appropriations_year";
-
-                var dtAllotmentClasses = new DataTable();
-                return _mySqlGenericCommands.FillBySearch(query, dtAllotmentClasses, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public Dictionary<string, string> GetViewRecord(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, short year)
-        {
-            var record = new Dictionary<string, string>();
-
-            try
-            {
-                var parameters = new object[][]
-                {
-                   new object[] { "@fund_id", DbType.Int32, fundID},
-                   new object[] { "@fpp_id", DbType.Int32, fppID },
-                   new object[] { "@others_fpp_id", DbType.String, othersFPPID},
-                   new object[] { "@allotment_class_id", DbType.Int32, allotmentClassID},
-                   new object[] { "@gen_ledger_acc_id", DbType.Int32, accountID },
-                   new object[] { "@budget_appropriations_year", DbType.Int16, year }
-                };
-                string query = $"SELECT budget_appropriations_id, budget_appropriations_year, fund_id, fund_code, fund_name, fpp_id, fpp_code, fpp_name, others_fpp_id, others_fpp_name, allotment_class_id, allotment_class_code, allotment_class_name, gen_ledger_acc_id, gen_ledger_code, account_code, gen_ledger_name FROM {viewTableName} WHERE fund_id = @fund_id AND fpp_id = @fpp_id AND others_fpp_id <=> @others_fpp_id AND allotment_class_id = @allotment_class_id AND gen_ledger_acc_id = @gen_ledger_acc_id AND budget_appropriations_year = @budget_appropriations_year GROUP BY budget_appropriations_id";
-
-                using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-
-                    foreach (DataRow item in reader.Rows)
-                    {
-                        record.Add("budget_appropriations_id", item[0].ToString());
-                        record.Add("budget_appropriations_year", item[1].ToString());
-                        record.Add("fund_id", item[2].ToString());
-                        record.Add("fund_code", item[3].ToString()); 
-                        record.Add("fund_name", item[4].ToString());
-                        record.Add("fpp_id", item[5].ToString());
-                        record.Add("fpp_code", item[6].ToString());
-                        record.Add("fpp_name", item[7].ToString());
-                        record.Add("others_fpp_id", item[8].ToString());
-                        record.Add("others_fpp_name", item[9].ToString());
-                        record.Add("allotment_class_id", item[10].ToString());
-                        record.Add("allotment_class_code", item[11].ToString());
-                        record.Add("allotment_class_name", item[12].ToString());
-                        record.Add("gen_ledger_acc_id", item[13].ToString());
-                        record.Add("gen_ledger_code", item[14].ToString());
-                        record.Add("account_code", item[15].ToString());
-                        record.Add("gen_ledger_name", item[16].ToString());
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            return record;
-        }
-
-        public DataTable GetOthersFPPRecords(int fppId, int allotmentClassId, int fundId, short year)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object [] { "@fpp_id", DbType.Int32, fppId},
-                    new object [] { "@fund_id", DbType.Int32, fundId},
-                    new object [] { "@allotment_class_id", DbType.Int32, allotmentClassId},
-                    new object [] { "@budget_appropriations_year", DbType.Int32, year}
-                };
-
-                string query = $"SELECT DISTINCT" +
-                    $" a.others_fpp_id," +
-                    $" a.others_fpp_name FROM view_allotment_release a " +
-                    $"JOIN " +
-                    $"others_fpp b ON a.others_fpp_id = b.id " +
-                    $"WHERE a.fpp_id = @fpp_id AND a.allotment_class_id = @allotment_class_id AND fund_id = @fund_id AND a.budget_appropriations_year = @budget_appropriations_year";
-
-                var dtAllotmentClasses = new DataTable();
-                return _mySqlGenericCommands.FillBySearch(query, dtAllotmentClasses, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         public Dictionary<string, string> GetTotalAllotmentReleaseAmount(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, DateTime dateIssued)
         {
             var record = new Dictionary<string, string>();
@@ -358,48 +233,34 @@ namespace ACC.Data
             return record;
         }
 
-        public Dictionary<string, string> GetTotalAllotmentReleaseAmount(int fundID, int fppID, int? othersFPPID, int allotmentClassId, int AccountId)
+        public decimal GetTotalAllotmentReleaseAmount(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int AccountId)
         {
-            var record = new Dictionary<string, string>();
-
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@funds_id",DbType.Int32, fundID},
-                    new object[] { "@function_program_project_id",DbType.Int32,  fppID},
-                    new object[] { "@others_fpp_id", DbType.String, othersFPPID },
-                    new object[] { "@allotment_classes_id",DbType.String, allotmentClassId},
-                    new object[] { "@general_ledger_accounts_id", DbType.Int32, AccountId },
+                    new object[] { "@fund_id", DbType.Int32, fundId},
+                    new object[] { "@fpp_id", DbType.Int32,  fppId},
+                    new object[] { "@others_fpp_id", DbType.String, othersFPPId },
+                    new object[] { "@allotment_class_id", DbType.String, allotmentClassId},
+                    new object[] { "@gen_ledger_acc_id", DbType.Int32, AccountId },
                 };
 
                 string query = $"SELECT " +
-                    $"COALESCE (SUM(a.amount), 0.00) AS total_allotment_amount " +
-                    $"FROM {tableName} a " +
-                    $"JOIN budget_appropriations b ON b.id = a.budget_appropriations_id " +
-                    $"WHERE b.funds_id = @funds_id " +
-                    $"AND b.function_program_project_id = @function_program_project_id " +
-                    $"AND b.others_fpp_id <=> @others_fpp_id " +
-                    $"AND b.allotment_classes_id = @allotment_classes_id " +
-                    $"AND b.general_ledger_accounts_id = @general_ledger_accounts_id";
+                    $"COALESCE(SUM(allotment_release_amount), 0) AS total_allotment_amount " +
+                    $"FROM view_allotment_release " +
+                    $"WHERE fund_id = @fund_id " +
+                    $"AND fpp_id = @fpp_id " +
+                    $"AND others_fpp_id <=> @others_fpp_id " +
+                    $"AND allotment_class_id = @allotment_class_id " +
+                    $"AND gen_ledger_acc_id = @gen_ledger_acc_id";
 
-                using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-
-                    foreach (DataRow item in reader.Rows)
-                    {
-                        record.Add("total_allotment_amount", item[0].ToString());
-                    }
-                }
+                return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
             }
             catch (Exception)
             {
                 throw;
             }
-
-            return record;
         }
 
         public bool BulkInsert(List<AllotmentReleaseModel> allotmentReleaseModelList)
@@ -480,6 +341,38 @@ namespace ACC.Data
                 throw;
             }
             return false;
+        }
+
+        public decimal GetTotalAllotmentReleaseAmount(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int accountId, int year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@fund_id", DbType.Int32, fundId},
+                    new object[] { "@fpp_id", DbType.Int32,  fppId},
+                    new object[] { "@others_fpp_id", DbType.String, othersFPPId },
+                    new object[] { "@allotment_class_id", DbType.String, allotmentClassId},
+                    new object[] { "@gen_ledger_acc_id", DbType.Int32, accountId },
+                    new object[] { "@budget_appropriations_year", DbType.Int16, year}
+                };
+
+                string query = $"SELECT " +
+                    $"COALESCE(SUM(allotment_release_amount), 0) AS total_allotment_amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE fund_id = @fund_id " +
+                    $"AND fpp_id = @fpp_id " +
+                    $"AND others_fpp_id <=> @others_fpp_id " +
+                    $"AND allotment_class_id = @allotment_class_id " +
+                    $"AND gen_ledger_acc_id = @gen_ledger_acc_id " +
+                    $"AND budget_appropriations_year = @budget_appropriations_year";
+
+                return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

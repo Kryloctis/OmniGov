@@ -13,14 +13,14 @@ namespace BudgetSystem.Views.BudgetAppropriations
 {
     public partial class ucBudgetAppropriations : UserControl
     {
-        internal int fundID = 0;
-        internal int budgetAppropriationId = 0;
-        internal int fppId = 0;
-        internal int? othersFPPId = 0;
-        internal int allotmentClassesId = 0;
-        internal int generalLedgerAccId = 0;
+        internal int fundId;
+        internal int budgetAppropriationId;
+        internal int fppId;
+        internal int? othersFPPId;
+        internal int allotmentClassId;
+        internal int generalLedgerAccountId;
         internal short year;
-        internal decimal totalAllotmentRelease = 0;
+        internal decimal totalAllotmentRelease;
 
         public ucBudgetAppropriations()
         {
@@ -149,6 +149,16 @@ namespace BudgetSystem.Views.BudgetAppropriations
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        private void cmbxFPP_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadOtherFPPRecords();
+        }
+
+        private void cmbxAllotmentClass_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadGeneralLedgerAccounts();
         }
 
         #region Custom ErrorProvider Controls
@@ -379,16 +389,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
         }
 
         #endregion Validations
-
-        private void cmbxFPP_SelectedValueChanged(object sender, EventArgs e)
-        {
-            LoadOtherFPPRecords();
-        }
-
-        private void cmbxAllotmentClass_SelectedValueChanged(object sender, EventArgs e)
-        {
-            LoadGeneralLedgerAccounts();
-        }
 
     }
 }

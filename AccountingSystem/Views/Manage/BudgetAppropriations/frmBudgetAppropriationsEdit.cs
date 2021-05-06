@@ -17,10 +17,13 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
     public partial class frmBudgetAppropriationsEdit : Form
     {
         private frmBudgetAppropriations _frmBudgetAppropriations;
+        private ucBudgetAppropriations uc;
+
         public frmBudgetAppropriationsEdit(frmBudgetAppropriations frmBudgetAppropriationsNew)
         {
             InitializeComponent();
             _frmBudgetAppropriations = frmBudgetAppropriationsNew;
+            uc = ucBudgetAppropriations1;
         }
 
         private void LoadComboboxes()
@@ -38,24 +41,40 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
         {
             try
             {
-                var uc = ucBudgetAppropriations1;
-                var selectedBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetRecordByIDs(uc.budgetAppropriationId, uc.fppId, uc.othersFPPId, uc.allotmentClassesId, uc.generalLedgerAccId);
+                int ucBudgetAppropriationId = uc.budgetAppropriationId;
+                int ucFPPId = uc.fppId;
+                int? ucOtherFPPId = uc.othersFPPId;
+                int ucAllotmentClassId = uc.allotmentClassId;
+                int ucGeneralLedgerAccountId = uc.generalLedgerAccountId;
 
-                // Set Values
-                uc.cmbxTypeOfFund.SelectedValue = selectedBudgetAppropriation["funds_id"];
-                uc.cmbxFPP.SelectedValue = selectedBudgetAppropriation["function_program_project_id"];
-                //if others fpp was null
-                if (string.IsNullOrEmpty(selectedBudgetAppropriation["others_fpp_id"])) 
+           
+                var selectedBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetRecordByIDs(ucBudgetAppropriationId, ucFPPId, ucOtherFPPId, ucAllotmentClassId, ucGeneralLedgerAccountId);
+
+                int fundId = Convert.ToInt32(selectedBudgetAppropriation["funds_id"]);
+                int fppId = Convert.ToInt32(selectedBudgetAppropriation["function_program_project_id"]);
+                int? othersFPPId = string.IsNullOrEmpty(selectedBudgetAppropriation["others_fpp_id"]) ? null : Convert.ToInt32(selectedBudgetAppropriation["others_fpp_id"]);
+                int allotmentClassId = Convert.ToInt32(selectedBudgetAppropriation["allotment_classes_id"]);
+                int generalLedgerAccountId = Convert.ToInt32(selectedBudgetAppropriation["general_ledger_accounts_id"]);
+                DateTime dateEntry = Convert.ToDateTime(selectedBudgetAppropriation["date_entry"]);
+                short year = Convert.ToInt16(selectedBudgetAppropriation["year"]);
+                decimal appropriationAmount = Convert.ToDecimal(selectedBudgetAppropriation["amount"]);
+
+                bool continuing = Convert.ToByte(selectedBudgetAppropriation["continuing"]) == 0 ? false : true;
+
+                uc.cmbxTypeOfFund.SelectedValue = fundId;
+                uc.cmbxFPP.SelectedValue = fppId;
+
+                if (othersFPPId == null) 
                     uc.cmbxOthersFPP.SelectedIndex = -1;
                 else
-                    uc.cmbxOthersFPP.SelectedValue = Convert.ToInt32(selectedBudgetAppropriation["others_fpp_id"]);
+                    uc.cmbxOthersFPP.SelectedValue = othersFPPId;
 
-                uc.cmbxAllotmentClass.SelectedValue = selectedBudgetAppropriation["allotment_classes_id"];
-                uc.cmbxLedgerAccount.SelectedValue = selectedBudgetAppropriation["general_ledger_accounts_id"];
-                uc.dtDateEntry.Value = Convert.ToDateTime(selectedBudgetAppropriation["date_entry"]);
-                uc.nudYear.Value = Convert.ToDecimal(selectedBudgetAppropriation["year"]);
-                uc.nudAmount.Value = Convert.ToDecimal(selectedBudgetAppropriation["amount"]);
-                uc.chckbxContinuing.Checked = Convert.ToUInt16(selectedBudgetAppropriation["continuing"]) == 0 ? false : true;
+                uc.cmbxAllotmentClass.SelectedValue = allotmentClassId;
+                uc.cmbxLedgerAccount.SelectedValue = generalLedgerAccountId;
+                uc.dtDateEntry.Value = dateEntry;
+                uc.nudYear.Value = year;
+                uc.nudAmount.Value = appropriationAmount;
+                uc.chckbxContinuing.Checked = continuing;
             }
             catch (Exception ex)
             {

@@ -12,20 +12,25 @@ namespace ACC.Domain.Interfaces
 
         bool BudgetAllotmentExist(int id, int fundID, int FPPId, int? othersFPPId, int allotmentClassID, int generalLedgerAccountId, short year);
 
-        DataTable GetViewRecordsByIds(int fppID, int allotmentClassID, int? othersFPPID, int typeOfFund, int year);
 
         DataTable GetViewRecordsByIds(int fppID, int allotmentClassID, int? othersFPPID, int typeOfFund, DateTime dateEntry);
 
-        DataTable GetExistedOthersFPPrecordsByFPPID(int fppID,int allotment_classes_id, int funds_id, short year);
 
         DataTable GetYearsBudgetAppropriations();
 
         Dictionary<string, string> GetTotalAppropriationBalanceRecord(int budgetAppropirationId);
 
-        Dictionary<string, string> GetRecordByIDs(int budgetAppID, int fppID, int? othersFPPID, int allotmentClassID, int genLedgerAccID);
+        Dictionary<string, string> GetRecordByIDs(int budgetAppropriationId, int fppId, int? othersFPPId, int allotmentClassId, int genLedgerAccId);
 
-        Dictionary<string, string> GetViewRecordByIDs(int budgetAppID, int fppID, int? othersFPPID, int allotmentClassID, int genLedgerAccID);
+        Dictionary<string, string> GetViewRecordByIDs(int budgetAppId, int fppId, int? othersFPPId, int allotmentClassId, int genLedgerAccId);
 
         DataTable GetViewRecordsSAAOB(int fppID, short year);
+
+        //Budget Appropriations Display
+
+        DataTable GetViewRecordsByIds(BudgetAppropriationsModel entity);
+
+        DataTable GetHeaderOthersFPP(int fppID, int allotment_classes_id, int funds_id, short year);
+
     }
 }
