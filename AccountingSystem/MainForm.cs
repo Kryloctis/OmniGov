@@ -42,6 +42,7 @@ namespace AccountingSystem
             btnJournalEntry.Click += new EventHandler(BtnJournalEntry_Click);
             btnObligationRequest.Click += new EventHandler(BtnObligationRequest_Click);
             menuDisbursingOfficer.Click += new EventHandler(MenuDisbursingOffice_Click);
+            btnRCI.Click += new EventHandler(BtnRCI_Click);
 
             userDict = Helper.LoggedInUserData();
         }
@@ -85,7 +86,12 @@ namespace AccountingSystem
                 menuRoles.Visible = false;
 
             if (!Helper.HasPermission("Transaction JEV"))
+            {
                 btnJournalEntry.Visible = false;
+                menuJEV.Visible = false;
+                menuObligationRequest.Visible = false;
+            }
+                
 
             if (!Helper.HasPermission("Transaction Obligation Request"))
                 btnObligationRequest.Visible = false;
@@ -116,6 +122,19 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Report SAAOB"))
                 menuSAAOB.Visible = false;
+
+            if (!Helper.HasPermission("Manage Banks"))
+                menuBanks.Visible = false;
+
+            if (!Helper.HasPermission("Manage Disbursing Officer"))
+                menuDisbursingOfficer.Visible = false;
+
+            if (!Helper.HasPermission("Transaction RCI"))
+            {
+                btnRCI.Visible = false;
+                menuRCI.Visible = false;
+            }
+                
         }
 
         private void LoadDashboard()
@@ -273,6 +292,11 @@ namespace AccountingSystem
         private void MenuDisbursingOffice_Click(object sender, EventArgs e)
         {
             _ = new frmDisbursingOfficer().ShowDialog();
+        }
+
+        private void BtnRCI_Click(object sender, EventArgs e)
+        {
+            _ = new frmRCI().ShowDialog();
         }
     }
 }

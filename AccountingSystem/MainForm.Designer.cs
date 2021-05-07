@@ -65,6 +65,7 @@ namespace AccountingSystem
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnJournalEntry = new System.Windows.Forms.ToolStripButton();
             this.btnObligationRequest = new System.Windows.Forms.ToolStripButton();
+            this.btnRCI = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblUserFullName = new System.Windows.Forms.ToolStripStatusLabel();
@@ -328,10 +329,11 @@ namespace AccountingSystem
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnJournalEntry,
-            this.btnObligationRequest});
+            this.btnObligationRequest,
+            this.btnRCI});
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(971, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(971, 39);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -341,24 +343,34 @@ namespace AccountingSystem
             this.btnJournalEntry.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnJournalEntry.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnJournalEntry.Name = "btnJournalEntry";
-            this.btnJournalEntry.Size = new System.Drawing.Size(61, 28);
+            this.btnJournalEntry.Size = new System.Drawing.Size(69, 36);
             this.btnJournalEntry.Text = "JEV...";
             // 
             // btnObligationRequest
             // 
             this.btnObligationRequest.Image = ((System.Drawing.Image)(resources.GetObject("btnObligationRequest.Image")));
+            this.btnObligationRequest.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnObligationRequest.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnObligationRequest.Name = "btnObligationRequest";
-            this.btnObligationRequest.Size = new System.Drawing.Size(83, 28);
+            this.btnObligationRequest.Size = new System.Drawing.Size(91, 36);
             this.btnObligationRequest.Text = "CAFOA...";
+            // 
+            // btnRCI
+            // 
+            this.btnRCI.Image = ((System.Drawing.Image)(resources.GetObject("btnRCI.Image")));
+            this.btnRCI.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnRCI.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRCI.Name = "btnRCI";
+            this.btnRCI.Size = new System.Drawing.Size(70, 36);
+            this.btnRCI.Text = "RCI...";
             // 
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 56);
+            this.panel1.Location = new System.Drawing.Point(0, 64);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(971, 365);
+            this.panel1.Size = new System.Drawing.Size(971, 357);
             this.panel1.TabIndex = 5;
             // 
             // statusStrip1
@@ -460,6 +472,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuBanks;
         private System.Windows.Forms.ToolStripMenuItem menuRCI;
         private System.Windows.Forms.ToolStripMenuItem menuprintRCI;
+        private System.Windows.Forms.ToolStripButton btnRCI;
     }
 }
 
