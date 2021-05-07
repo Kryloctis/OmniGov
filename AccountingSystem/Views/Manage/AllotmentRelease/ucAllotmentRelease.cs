@@ -92,11 +92,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             var appropriationInfo = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
 
             int accountId = Convert.ToInt32(appropriationInfo["general_ledger_accounts_id"]);
-            var allotmentReleaseInfo = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(fundId, fppID, othersFPPId,
-                allotmentClassId, accountId);
+            var totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(fundId, fppID, othersFPPId, allotmentClassId, accountId);
 
             decimal appropriationAmount = Convert.ToDecimal(appropriationInfo["amount"]);
-            decimal totalAllotmentRelease = Convert.ToDecimal(allotmentReleaseInfo["total_allotment_amount"]);
 
             decimal appropriationBalance = appropriationAmount - totalAllotmentRelease;
 
@@ -130,10 +128,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 var budgetAppropriationInfo = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
 
                 int accountId = Convert.ToInt32(budgetAppropriationInfo["general_ledger_accounts_id"]);
-                var totalAllotmentReleaseInfo = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(fundId, fppID, othersFPPId, allotmentClassId, accountId);
+                var totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(fundId, fppID, othersFPPId, allotmentClassId, accountId);
 
                 decimal appropriatonAmount = Convert.ToDecimal(budgetAppropriationInfo["amount"]);
-                decimal totalAllotmentRelease = Convert.ToDecimal(totalAllotmentReleaseInfo["total_allotment_amount"]);
 
                 decimal appropriationBalance = appropriatonAmount - totalAllotmentRelease;
 

@@ -12,6 +12,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 {
     public partial class ucSupplementalAppropriations : UserControl
     {
+        internal int supplementalAppropriationId;
         internal int budgetAppropriationId;
         internal DateTime dateEntry;
 

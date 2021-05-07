@@ -56,8 +56,8 @@ namespace BudgetSystem.Views.BudgetAppropriations
                     GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxLedgerAccount.SelectedValue),
                     Year = Convert.ToInt16(uc.nudYear.Value),
                     DateEntry = uc.dtDateEntry.Value,
-                    amount = uc.nudAmount.Value,
-                    continuing = uc.chckbxContinuing.Checked
+                    Amount = uc.nudAmount.Value,
+                    Continuing = uc.chckbxContinuing.Checked
                 };
 
                 return Factory.BudgetAppropriationsRepository().Insert(budgetAppropriationsModel);

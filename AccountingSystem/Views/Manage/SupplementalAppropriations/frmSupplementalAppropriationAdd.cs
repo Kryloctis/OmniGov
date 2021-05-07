@@ -13,12 +13,14 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 {
     public partial class frmSupplementalAppropriationAdd : Form
     {
+        private frmSupplementalAppropriations _frmSupplementalAppropriations;
         internal ucSupplementalAppropriations uc;
 
-        public frmSupplementalAppropriationAdd()
+        public frmSupplementalAppropriationAdd(frmSupplementalAppropriations frmSupplementalAppropriations)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+            _frmSupplementalAppropriations = frmSupplementalAppropriations;
             uc = ucSupplementalAppropriations1;
         }
 
@@ -53,6 +55,8 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         {
             if (SaveData()) 
             {
+                _frmSupplementalAppropriations.LoadSupplementalApproprations();
+                _frmSupplementalAppropriations._frmBudgetAppropriations.LoadBudgetAppropriationRecords();
                 Helper.MessageBoxSuccess("Supplemental Appropriation has been saved.");
                 uc.ResetForm();
             }
