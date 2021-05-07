@@ -90,6 +90,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.Name = "frmSupplementalAppropriationsEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Supplementary Appropriation";
+            this.Load += new System.EventHandler(this.frmSupplementalAppropriationsEdit_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -100,6 +101,6 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         internal System.Windows.Forms.Button btnCancel;
         internal System.Windows.Forms.Button btnSave;
-        private ucSupplementalAppropriations ucSupplementalAppropriations1;
+        internal ucSupplementalAppropriations ucSupplementalAppropriations1;
     }
 }

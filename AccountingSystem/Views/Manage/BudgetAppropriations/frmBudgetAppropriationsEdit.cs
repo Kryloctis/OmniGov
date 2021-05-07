@@ -104,7 +104,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
 
                 var budgetAppModel = new BudgetAppropriationsModel()
                 {
-                    ID = uc.budgetAppropriationId,
+                    Id = uc.budgetAppropriationId,
                     FundsId = Convert.ToInt32(uc.cmbxTypeOfFund.SelectedValue),
                     FunctionProgramProjectId = Convert.ToInt32(uc.cmbxFPP.SelectedValue),
                     OthersFPPId = othersFPPId,
@@ -112,8 +112,8 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                     GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxLedgerAccount.SelectedValue),
                     DateEntry = uc.dtDateEntry.Value,
                     Year = Convert.ToInt16(uc.nudYear.Value),
-                    amount = uc.nudAmount.Value,
-                    continuing = uc.chckbxContinuing.Checked
+                    Amount = uc.nudAmount.Value,
+                    Continuing = uc.chckbxContinuing.Checked
                 };
 
                 return Factory.BudgetAppropriationsRepository().Update(budgetAppModel);

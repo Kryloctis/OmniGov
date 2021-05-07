@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         private void ShowSupplementalAppropriationsForm() 
         {
-            var frmSupplementalAppropriations = new frmSupplementalAppropriations();
+            var frmSupplementalAppropriations = new frmSupplementalAppropriations(this);
             var rowIndex = dgBudgetAppropriations.CurrentCell.RowIndex;
 
             int budgetAppId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["id"].Value);
@@ -230,7 +230,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                             int budgetAppID = int.Parse(row.Cells[0].Value.ToString());
                             var budgetAppropriationsModel = new BudgetAppropriationsModel()
                             {
-                                ID = budgetAppID
+                                Id = budgetAppID
                             };
 
                             budgetAppropriationsModelList.Add(budgetAppropriationsModel);

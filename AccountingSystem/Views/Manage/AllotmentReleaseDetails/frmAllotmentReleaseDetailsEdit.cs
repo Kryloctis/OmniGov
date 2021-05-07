@@ -34,7 +34,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
             foreach (DataGridViewRow row in _frmBudgetAppropriations.dgBudgetAppropriations.Rows)
             {
-                if (Convert.ToInt32(row.Cells["budget_appropriations_id"].Value) == uc.budgetAppropriationID)
+                if (Convert.ToInt32(row.Cells["id"].Value) == uc.budgetAppropriationID)
                 {
                     _frmBudgetAppropriations.dgBudgetAppropriations.CurrentCell = _frmBudgetAppropriations.dgBudgetAppropriations.Rows[row.Index].Cells["account_code"];
                 }

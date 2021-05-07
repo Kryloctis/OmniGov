@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.BudgetAppropriations;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,19 +15,104 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 {
     public partial class frmSupplementalAppropriations : Form
     {
+        internal frmBudgetAppropriations _frmBudgetAppropriations;
         internal int budgetAppropriationsId;
         internal DateTime dateEntry;
 
-        public frmSupplementalAppropriations()
+        public frmSupplementalAppropriations(frmBudgetAppropriations frmBudgetAppropriations)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+            _frmBudgetAppropriations = frmBudgetAppropriations;
             btnAdd.Click += new EventHandler(BtnAdd_Click);
+            btnEdit.Click += new EventHandler(BtnEdit_Click);
+            btnDelete.Click += new EventHandler(BtnDelete_Click);
+        }
+
+        private void ShowSupplementalAppropriationsEdit()
+        {
+            try
+            {
+                int rowIndex = dataGridView1.CurrentCell.RowIndex;
+
+                var frmSupplementalAppropriationEdit = new frmSupplementalAppropriationsEdit(this);
+                var ucfrmSupplementalAppropriationEdit = frmSupplementalAppropriationEdit.ucSupplementalAppropriations1;
+
+                int supplementalAppropriationId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["id"].Value);
+
+                ucfrmSupplementalAppropriationEdit.supplementalAppropriationId = supplementalAppropriationId;
+                ucfrmSupplementalAppropriationEdit.budgetAppropriationId = budgetAppropriationsId;
+                ucfrmSupplementalAppropriationEdit.dateEntry = dateEntry;
+
+                frmSupplementalAppropriationEdit.ShowDialog();
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void BtnEdit_Click(object sender, EventArgs e)
+        {
+            ShowSupplementalAppropriationsEdit();
+        }
+
+        private bool DeleteSupplementalRecords() 
+        {
+            try
+            {
+                var supplementalAppropriationsModelList = new List<SupplementalAppropriationsModel>();
+
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+                    int supplementalAppropriationId = int.Parse(row.Cells[0].Value.ToString());
+                    var supplementalAppropriationsModel = new SupplementalAppropriationsModel()
+                    {
+                        Id = supplementalAppropriationId
+                    };
+
+                    supplementalAppropriationsModelList.Add(supplementalAppropriationsModel);
+                }
+
+                return  Factory.SupplementalAppropriationsRepository().Delete(supplementalAppropriationsModelList);
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int selectedRowsCount = dataGridView1.SelectedRows.Count;
+
+                if (selectedRowsCount > 0)
+                {
+                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                    {
+                        if (DeleteSupplementalRecords())
+                        {
+                            LoadSupplementalApproprations();
+                            _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
+                            Helper.MessageBoxSuccess("Supplemental Appropriation has been deleted.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void ShowSupplementalAppropriationAdd() 
         {
-            var frmSupplementalAppropriationAdd = new frmSupplementalAppropriationAdd();
+            var frmSupplementalAppropriationAdd = new frmSupplementalAppropriationAdd(this);
 
             frmSupplementalAppropriationAdd.uc.budgetAppropriationId = budgetAppropriationsId;
             frmSupplementalAppropriationAdd.uc.dateEntry = dateEntry;
@@ -52,7 +140,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             }
         }
 
-        private void LoadSupplementalApproprations() 
+        internal void LoadSupplementalApproprations() 
         {
             var supplementalRepo = Factory.SupplementalAppropriationsRepository().GetRecordsById(budgetAppropriationsId);
 
