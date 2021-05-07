@@ -77,23 +77,23 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         #region Validations
         private void AmountLogic(ErrorProvider ep, NumericUpDown numericUpDown, CancelEventArgs e) 
         {
-            var totalAppropriationBalance = Factory.BudgetAppropriationsRepository().GetTotalAppropriationBalanceRecord(budgetAppropriationID);
-            decimal appropriationBalance = Convert.ToDecimal(totalAppropriationBalance["appropriation_balance"]);
+            //var totalAppropriationBalance = Factory.BudgetAppropriationsRepository().GetTotalAppropriationBalanceRecord(budgetAppropriationID);
+            //decimal appropriationBalance = Convert.ToDecimal(totalAppropriationBalance["appropriation_balance"]);
 
-            if (allotmentReleaseID == 0)
-            {
-                string errorText = numericUpDown.Value > appropriationBalance ? "The amount you entered exceeds the appropriate balance." : string.Empty;
-                bool errorBoolean = numericUpDown.Value > appropriationBalance ? true : false;
-                ep.SetError(nudAmount, errorText);
-                e.Cancel = errorBoolean;
-            }
-            else
-            {
-                string errorText = numericUpDown.Value > appropriationBalance + currentAllotmentReleaseAmount ? "The amount you entered exceeds the appropriate balance." : string.Empty;
-                bool errorBoolean = numericUpDown.Value > appropriationBalance + currentAllotmentReleaseAmount ? true : false;
-                ep.SetError(nudAmount, errorText);
-                e.Cancel = errorBoolean;
-            }
+            //if (allotmentReleaseID == 0)
+            //{
+            //    string errorText = numericUpDown.Value > appropriationBalance ? "The amount you entered exceeds the appropriate balance." : string.Empty;
+            //    bool errorBoolean = numericUpDown.Value > appropriationBalance ? true : false;
+            //    ep.SetError(nudAmount, errorText);
+            //    e.Cancel = errorBoolean;
+            //}
+            //else
+            //{
+            //    string errorText = numericUpDown.Value > appropriationBalance + currentAllotmentReleaseAmount ? "The amount you entered exceeds the appropriate balance." : string.Empty;
+            //    bool errorBoolean = numericUpDown.Value > appropriationBalance + currentAllotmentReleaseAmount ? true : false;
+            //    ep.SetError(nudAmount, errorText);
+            //    e.Cancel = errorBoolean;
+            //}
         }
 
         private void txtPurpose_Validating(object sender, CancelEventArgs e)

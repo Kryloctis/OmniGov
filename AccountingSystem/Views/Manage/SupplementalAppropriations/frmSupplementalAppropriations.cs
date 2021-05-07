@@ -1,4 +1,6 @@
-﻿using AccountingSystem.Views.Manage.BudgetAppropriations;
+﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.BudgetAppropriations;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,6 +25,59 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             Helper.LoadFormIcon(this);
             _frmBudgetAppropriations = frmBudgetAppropriations;
             btnAdd.Click += new EventHandler(BtnAdd_Click);
+            btnDelete.Click += new EventHandler(BtnDelete_Click);
+        }
+
+        private bool DeleteSupplementalRecords() 
+        {
+            try
+            {
+                var supplementalAppropriationsModelList = new List<SupplementalAppropriationsModel>();
+
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+                    int supplementalAppropriationId = int.Parse(row.Cells[0].Value.ToString());
+                    var supplementalAppropriationsModel = new SupplementalAppropriationsModel()
+                    {
+                        Id = supplementalAppropriationId
+                    };
+
+                    supplementalAppropriationsModelList.Add(supplementalAppropriationsModel);
+                }
+
+                return  Factory.SupplementalAppropriationsRepository().Delete(supplementalAppropriationsModelList);
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int selectedRowsCount = dataGridView1.SelectedRows.Count;
+
+                if (selectedRowsCount > 0)
+                {
+                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                    {
+                        if (DeleteSupplementalRecords())
+                        {
+                            LoadSupplementalApproprations();
+                            _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
+                            Helper.MessageBoxSuccess("Supplemental Appropriation has been deleted.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void ShowSupplementalAppropriationAdd() 
