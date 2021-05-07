@@ -52,7 +52,48 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new NotImplementedException();
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][] 
+                {
+                    new object[] { "@id", DbType.Int32, Id }
+                };
+
+                string query = $"SELECT " +
+                    $"id, " +
+                    $"budget_appropriations_id, " +
+                    $"date_entry, " +
+                    $"amount, " +
+                    $"remarks, " +
+                    $"created_at, " +
+                    $"updated_at " +
+                    $"FROM {tableName} " +
+                    $"WHERE id = @id";
+
+                using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("id", item[0].ToString());
+                        record.Add("budget_appropriations_id", item[1].ToString());
+                        record.Add("date_entry", item[2].ToString());
+                        record.Add("amount", item[3].ToString());
+                        record.Add("remarks", item[4].ToString());
+                        record.Add("created_at", item[5].ToString());
+                        record.Add("updated_at", item[6].ToString());
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return record;
         }
 
         public DataTable GetRecords()
@@ -93,7 +134,24 @@ namespace ACC.Data
 
         public bool Update(SupplementalAppropriationsModel entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, entity.Id },
+                    new object[] { "@date_entry", DbType.Date, entity.date_entry },
+                    new object[] { "@amount",DbType.Decimal, entity.amount },
+                    new object[] { "@remarks", DbType.String, entity.remarks }
+                };
+
+                string query = $"UPDATE {tableName} SET date_entry = @date_entry, amount = @amount, remarks = @remarks WHERE id = @id";
+
+                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public DataTable GetRecordsById(int budgetAppropriationsId)

@@ -25,7 +25,37 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             Helper.LoadFormIcon(this);
             _frmBudgetAppropriations = frmBudgetAppropriations;
             btnAdd.Click += new EventHandler(BtnAdd_Click);
+            btnEdit.Click += new EventHandler(BtnEdit_Click);
             btnDelete.Click += new EventHandler(BtnDelete_Click);
+        }
+
+        private void ShowSupplementalAppropriationsEdit()
+        {
+            try
+            {
+                int rowIndex = dataGridView1.CurrentCell.RowIndex;
+
+                var frmSupplementalAppropriationEdit = new frmSupplementalAppropriationsEdit(this);
+                var ucfrmSupplementalAppropriationEdit = frmSupplementalAppropriationEdit.ucSupplementalAppropriations1;
+
+                int supplementalAppropriationId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["id"].Value);
+
+                ucfrmSupplementalAppropriationEdit.supplementalAppropriationId = supplementalAppropriationId;
+                ucfrmSupplementalAppropriationEdit.budgetAppropriationId = budgetAppropriationsId;
+                ucfrmSupplementalAppropriationEdit.dateEntry = dateEntry;
+
+                frmSupplementalAppropriationEdit.ShowDialog();
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void BtnEdit_Click(object sender, EventArgs e)
+        {
+            ShowSupplementalAppropriationsEdit();
         }
 
         private bool DeleteSupplementalRecords() 

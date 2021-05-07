@@ -32,8 +32,8 @@ namespace ACC.Data
                     new object[] { "@general_ledger_accounts_id", DbType.Int32, entity.GeneralLedgerAccountsId},
                     new object[] { "@year", DbType.Int16, entity.Year},
                     new object[] { "@date_entry", DbType.Date, entity.DateEntry},
-                    new object[] { "@amount", DbType.Decimal, entity.amount},
-                    new object[] { "@continuing", DbType.Boolean, entity.continuing}
+                    new object[] { "@amount", DbType.Decimal, entity.Amount},
+                    new object[] { "@continuing", DbType.Boolean, entity.Continuing}
                };
 
                 string query = $"INSERT INTO {tableName} (funds_id, function_program_project_id , others_fpp_id, allotment_classes_id, general_ledger_accounts_id, date_entry, year, amount, continuing) VALUES (@funds_id ,@function_program_project_id , @others_fpp_id, @allotment_classes_id, @general_ledger_accounts_id, @date_entry, @year, @amount, @continuing)";
@@ -52,7 +52,7 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Int32, entity.ID},
+                    new object[] { "@id", DbType.Int32, entity.Id},
                     new object[] { "@funds_id", DbType.Int32, entity.FundsId},
                     new object[] { "@function_program_project_id", DbType.Int32, entity.FunctionProgramProjectId},
                     new object[] { "@others_fpp_id", DbType.String, entity.OthersFPPId},
@@ -60,8 +60,8 @@ namespace ACC.Data
                     new object[] { "@general_ledger_accounts_id", DbType.Int32, entity.GeneralLedgerAccountsId},
                     new object[] { "@date_entry", DbType.Date, entity.DateEntry},
                     new object[] { "@year", DbType.Int16, entity.Year},
-                    new object[] { "@amount", DbType.Decimal, entity.amount},
-                    new object[] { "@continuing", DbType.Boolean, entity.continuing}
+                    new object[] { "@amount", DbType.Decimal, entity.Amount},
+                    new object[] { "@continuing", DbType.Boolean, entity.Continuing}
                 };
 
                 string query = $"UPDATE {tableName} SET function_program_project_id = @function_program_project_id, funds_id =@funds_id, others_fpp_id = @others_fpp_id, allotment_classes_id = @allotment_classes_id, general_ledger_accounts_id = @general_ledger_accounts_id, date_entry = @date_entry, year = @year, amount = @amount, continuing = @continuing WHERE id = @id";
@@ -83,7 +83,7 @@ namespace ACC.Data
                     {
                         var parameters = new object[][]
                         {
-                            new object[] { "@id", DbType.Int32, entity.ID},
+                            new object[] { "@id", DbType.Int32, entity.Id},
                         };
 
                         string query = $"DELETE FROM {tableName} WHERE id = @id";

@@ -230,7 +230,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                             int budgetAppID = int.Parse(row.Cells[0].Value.ToString());
                             var budgetAppropriationsModel = new BudgetAppropriationsModel()
                             {
-                                ID = budgetAppID
+                                Id = budgetAppID
                             };
 
                             budgetAppropriationsModelList.Add(budgetAppropriationsModel);
