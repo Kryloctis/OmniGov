@@ -291,6 +291,9 @@ namespace ACC.Data
                         record.Add("date_entry", item[16].ToString());
                         record.Add("year", item[17].ToString());
                         record.Add("amount", item[18].ToString());
+                        record.Add("continuing", item[19].ToString());
+                        record.Add("created_at", item[20].ToString());
+                        record.Add("updated_at", item[21].ToString());
                     }
                 }
             }

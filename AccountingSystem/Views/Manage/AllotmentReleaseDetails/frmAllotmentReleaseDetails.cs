@@ -89,6 +89,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 DateTime dateEntry = Convert.ToDateTime(BudgetAppropriationInfo()["date_entry"]);
                 short year = Convert.ToInt16(BudgetAppropriationInfo()["year"]);
                 decimal appropriation = Convert.ToDecimal(BudgetAppropriationInfo()["amount"]);
+                bool isContinuing = Convert.ToByte(BudgetAppropriationInfo()["continuing"]) == 0 ? false : true;
                 decimal totalSupplementalAppropriationAmount = Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountById(budgetAppropriationId);
 
                 decimal totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountByYear(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, accountId);
@@ -106,6 +107,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 lblYear.Text = year.ToString();
                 lblAmount.Text = totalAppropriationAmount.ToString("N2");
                 lblAppropriationBalance.Text = totalAppropriationBalance.ToString("N2");
+                chckBoxContinuing.Checked = isContinuing;
             }
             catch (Exception ex)
             {
