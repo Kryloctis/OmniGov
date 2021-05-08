@@ -185,7 +185,7 @@ namespace ACC.Data
             }
         }
 
-        public Dictionary<string, string> GetTotalAllotmentReleaseAmount(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, DateTime dateIssued)
+        public decimal GetViewTotalAllotmentReleaseAmount(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, DateTime dateIssued)
         {
             var record = new Dictionary<string, string>();
 
@@ -193,44 +193,31 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@funds_id",DbType.Int32, fundID},
-                    new object[] { "@function_program_project_id",DbType.Int32,  fppID},
+                    new object[] { "@fund_id", DbType.Int32, fundID},
+                    new object[] { "@fpp_id", DbType.Int32,  fppID},
                     new object[] { "@others_fpp_id", DbType.String, othersFPPID },
-                    new object[] { "@allotment_classes_id",DbType.String, allotmentClassID},
-                    new object[] { "@general_ledger_accounts_id", DbType.Int32, accountID },
-                    new object[] { "@date_issued", DbType.Date, dateIssued.Date }
+                    new object[] { "@allotment_class_id", DbType.String, allotmentClassID},
+                    new object[] { "@gen_ledger_acc_id", DbType.Int32, accountID },
+                    new object[] { "@allotment_release_date_issued", DbType.Date, dateIssued.Date }
                 };
 
                 string query = $"SELECT " +
-                    $"COALESCE (SUM(a.amount), 0.00) AS total_allotment_amount " +
-                    $"FROM {tableName} a " +
-                    $"JOIN budget_appropriations b ON b.id = a.budget_appropriations_id " +
-                    $"WHERE b.funds_id = @funds_id " +
-                    $"AND b.function_program_project_id = @function_program_project_id " +
-                    $"AND b.others_fpp_id <=> @others_fpp_id " +
-                    $"AND b.allotment_classes_id = @allotment_classes_id " +
-                    $"AND b.general_ledger_accounts_id = @general_ledger_accounts_id " +
-                    $"AND a.date_issued <= @date_issued";
+                    $"COALESCE (SUM(allotment_release_amount), 0) AS total_allotment_amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE fund_id = @fund_id " +
+                    $"AND fpp_id = @fpp_id " +
+                    $"AND others_fpp_id <=> @others_fpp_id " +
+                    $"AND allotment_class_id = @allotment_class_id " +
+                    $"AND gen_ledger_acc_id = @gen_ledger_acc_id " +
+                    $"AND allotment_release_date_issued <= @allotment_release_date_issued ";
 
-                using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-
-                    foreach (DataRow item in reader.Rows)
-                    {
-                        record.Add("total_allotment_amount", item[0].ToString());
-                    }
-                }
-
+                return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
 
             }
             catch(Exception)
             {
                 throw;
             }
-
-            return record;
         }
 
         public decimal GetTotalAllotmentReleaseAmount(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int AccountId)
@@ -343,29 +330,29 @@ namespace ACC.Data
             return false;
         }
 
-        public decimal GetTotalAllotmentReleaseAmount(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int accountId, int year)
+        public decimal GetViewTotalAllotmentReleaseAmountByYear(int budgetAppropriationId, int fundId, int fppId, int? othersFPPId, int allotmentClassId, int accountId)
         {
             try
             {
                 var parameters = new object[][]
                 {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId },
                     new object[] { "@fund_id", DbType.Int32, fundId},
                     new object[] { "@fpp_id", DbType.Int32,  fppId},
                     new object[] { "@others_fpp_id", DbType.String, othersFPPId },
                     new object[] { "@allotment_class_id", DbType.String, allotmentClassId},
                     new object[] { "@gen_ledger_acc_id", DbType.Int32, accountId },
-                    new object[] { "@budget_appropriations_year", DbType.Int16, year}
                 };
 
                 string query = $"SELECT " +
                     $"COALESCE(SUM(allotment_release_amount), 0) AS total_allotment_amount " +
                     $"FROM {viewTableName} " +
-                    $"WHERE fund_id = @fund_id " +
+                    $"WHERE budget_appropriations_id = @budget_appropriations_id " +
+                    $"AND fund_id = @fund_id " +
                     $"AND fpp_id = @fpp_id " +
                     $"AND others_fpp_id <=> @others_fpp_id " +
                     $"AND allotment_class_id = @allotment_class_id " +
-                    $"AND gen_ledger_acc_id = @gen_ledger_acc_id " +
-                    $"AND budget_appropriations_year = @budget_appropriations_year";
+                    $"AND gen_ledger_acc_id = @gen_ledger_acc_id " ;
 
                 return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
             }

@@ -877,7 +877,7 @@ namespace AccountingSystem
 
                     decimal totalAppropriationAmount = totalSupplementalAppropriation + rowAppropriationAmount;
 
-                    decimal totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(rowFundId, rowFPPId, rowOthersFPPId, rowAllotmentClassId, rowAccountId, rowYear);
+                    decimal totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountByYear(rowId, rowFundId, rowFPPId, rowOthersFPPId, rowAllotmentClassId, rowAccountId);
 
                     decimal appropriationBalance = (totalSupplementalAppropriation + rowAppropriationAmount) - totalAllotmentRelease;
 
