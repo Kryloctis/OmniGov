@@ -157,7 +157,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.mskTxtSeriesNo.Location = new System.Drawing.Point(72, 0);
             this.mskTxtSeriesNo.Mask = "000";
             this.mskTxtSeriesNo.Name = "mskTxtSeriesNo";
-            this.mskTxtSeriesNo.Size = new System.Drawing.Size(23, 23);
+            this.mskTxtSeriesNo.Size = new System.Drawing.Size(28, 23);
             this.mskTxtSeriesNo.TabIndex = 0;
             this.mskTxtSeriesNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.mskTxtSeriesNo.Validating += new System.ComponentModel.CancelEventHandler(this.mskTxtSeriesNo_Validating);
@@ -166,7 +166,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(98, 3);
+            this.label6.Location = new System.Drawing.Point(103, 3);
             this.label6.Margin = new System.Windows.Forms.Padding(0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(12, 15);
@@ -175,7 +175,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             // mskTxtYear
             // 
-            this.mskTxtYear.Location = new System.Drawing.Point(113, 0);
+            this.mskTxtYear.Location = new System.Drawing.Point(118, 0);
             this.mskTxtYear.Mask = "0000";
             this.mskTxtYear.Name = "mskTxtYear";
             this.mskTxtYear.ReadOnly = true;
