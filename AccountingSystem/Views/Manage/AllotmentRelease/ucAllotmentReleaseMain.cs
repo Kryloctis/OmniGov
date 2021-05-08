@@ -148,24 +148,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
         }
 
-        private bool ShowAllotmentReleaseAdd()
-        {
-            try
-            {
-                if (!ValidateChildren())
-                {
-                    Helper.MessageBoxError(GetFormErrors());
-                    return false;
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
         private void ShowCheckIcon(RadioButton radioButton)
         {
             if (radioButton.Checked)
@@ -219,25 +201,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
         }
 
-        private void BtnAdd_Click(object sender, EventArgs e)
-        {
-            if (ShowAllotmentReleaseAdd())
-            {
-                var allotmentReleaseAddForm = new frmAllotmentReleaseAdd(this);
-                var uc = allotmentReleaseAddForm.ucAllotmentRelease1;
-                uc.fppID = Convert.ToInt32(cmbxFPP.SelectedValue);
-                uc.othersFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
-                uc.fundId = fundId;
-                uc.allotmentClassId = Convert.ToInt32(allotmentClassId);
-                uc.dateIssued = dtDateIssued.Value;
-
-                allotmentReleaseAddForm.ShowDialog();
-            }
-        }
-
-
-        //Combobox FPP
-
         private void CmbxFPP_SelectedValueChanged(object sender, EventArgs e)
         {
             LoadOthersFPPByFPPIdCombobox();
@@ -245,7 +208,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void CmbxFPP_TextChanged(object sender, EventArgs e)
         {
-            if (ShowErrorFPPNameExist(epFPP, cmbxFPP))
+            if (ShowErrorFPPNameNotExist(epFPP, cmbxFPP))
             {
                 cmbxOthersFPP.Enabled = false;
                 cmbxOthersFPP.SelectedIndex = -1;
@@ -253,9 +216,44 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
         }
 
+
+        private void EnableDisableButtons()
+        {
+            int selectedRowCount = dgAllotmentRelease.SelectedRows.Count;
+
+            if (selectedRowCount == 1)
+            {
+                btnRemove.Enabled = true;
+                btnRemove.Text = "Remove (" + selectedRowCount + ")";
+            }
+            else if (selectedRowCount > 1)
+            {
+                btnRemove.Enabled = true;
+                btnRemove.Text = "Remove (" + selectedRowCount + ")";
+            }
+            else
+            {
+                btnRemove.Enabled = false;
+                btnRemove.Text = "Remove";
+            }
+        }
+
+        private void dgAllotmentRelease_SelectionChanged(object sender, EventArgs e)
+        {
+            EnableDisableButtons();
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dgAllotmentRelease.SelectedRows)
+            {
+                dgAllotmentRelease.Rows.Remove(row);
+            }
+        }
+
         #region Custom Validation Controls
 
-        private bool ShowErrorFPPNameExist(ErrorProvider ep, ComboBox comboBox)
+        private bool ShowErrorFPPNameNotExist(ErrorProvider ep, ComboBox comboBox)
         {
             try
             {
@@ -274,7 +272,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return false;
         }
 
-        private bool ShowErrorOtherFPPNameExist(ErrorProvider ep, ComboBox comboBox)
+        private bool ShowErrorOtherFPPNameNotExist(ErrorProvider ep, ComboBox comboBox)
         {
             try
             {
@@ -291,6 +289,68 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 Helper.MessageBoxError(ex.Message);
             }
             return false;
+        }
+
+        private string GetFormErrorsOnAdd() 
+        {
+            var errorArray = new string[2];
+
+            errorArray[0] = epFPP.GetError(cmbxFPP);
+            errorArray[1] = epOthersFPP.GetError(cmbxOthersFPP);
+
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        private bool validateOnAdd()
+        {
+            try
+            {
+                if (Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP") || ShowErrorFPPNameNotExist(epFPP,cmbxFPP) || ShowErrorOtherFPPNameNotExist(epOthersFPP,cmbxOthersFPP)) 
+                {
+
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private bool ShowAllotmentReleaseAdd()
+        {
+            try
+            {
+                if (validateOnAdd())
+                {
+                    Helper.MessageBoxError(GetFormErrorsOnAdd());
+                    return false;
+                }
+
+                var allotmentReleaseAddForm = new frmAllotmentReleaseAdd(this);
+                var uc = allotmentReleaseAddForm.ucAllotmentRelease1;
+                uc.fppID = Convert.ToInt32(cmbxFPP.SelectedValue);
+                uc.othersFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
+                uc.fundId = fundId;
+                uc.allotmentClassId = Convert.ToInt32(allotmentClassId);
+                uc.dateIssued = dtDateIssued.Value;
+
+                allotmentReleaseAddForm.ShowDialog();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            ShowAllotmentReleaseAdd();
         }
 
         private bool ShowErrorSeriesNo(ErrorProvider ep, MaskedTextBox maskedTxtSeriesNo, MaskedTextBox maskedTxtYear)
@@ -337,7 +397,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             if (string.IsNullOrEmpty(cmbxFPP.Text))
                 e.Cancel = Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP");
             else
-                e.Cancel = ShowErrorFPPNameExist(epFPP, cmbxFPP);
+                e.Cancel = ShowErrorFPPNameNotExist(epFPP, cmbxFPP);
         }
 
         private void cmbxFPP_Validated(object sender, EventArgs e)
@@ -347,7 +407,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void cmbxOthersFPP_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = ShowErrorOtherFPPNameExist(epOthersFPP, cmbxOthersFPP);
+            e.Cancel = ShowErrorOtherFPPNameNotExist(epOthersFPP, cmbxOthersFPP);
         }
 
         private void cmbxOthersFPP_Validated(object sender, EventArgs e)
@@ -387,38 +447,5 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         #endregion Validations
 
-        private void EnableDisableButtons()
-        {
-            int selectedRowCount = dgAllotmentRelease.SelectedRows.Count;
-
-            if (selectedRowCount == 1)
-            {
-                btnRemove.Enabled = true;
-                btnRemove.Text = "Remove (" + selectedRowCount + ")";
-            }
-            else if (selectedRowCount > 1)
-            {
-                btnRemove.Enabled = true;
-                btnRemove.Text = "Remove (" + selectedRowCount + ")";
-            }
-            else
-            {
-                btnRemove.Enabled = false;
-                btnRemove.Text = "Remove";
-            }
-        }
-
-        private void dgAllotmentRelease_SelectionChanged(object sender, EventArgs e)
-        {
-            EnableDisableButtons();
-        }
-
-        private void btnRemove_Click(object sender, EventArgs e)
-        {
-            foreach (DataGridViewRow row in dgAllotmentRelease.SelectedRows) 
-            {
-                dgAllotmentRelease.Rows.Remove(row);
-            }
-        }
     }
 }
