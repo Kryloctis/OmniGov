@@ -23,7 +23,6 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
         internal void ResetForm() 
         {
-            dtDateEntry.Value = DateTime.Now;
             nudAmount.Value = 0;
             txtRemarks.Text = string.Empty;
         }

@@ -111,6 +111,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             // dtDateIssued
             // 
+            this.dtDateIssued.CustomFormat = "";
             this.dtDateIssued.Location = new System.Drawing.Point(72, 58);
             this.dtDateIssued.Name = "dtDateIssued";
             this.dtDateIssued.Size = new System.Drawing.Size(316, 23);

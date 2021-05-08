@@ -32,12 +32,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             Helper.LoadFormIcon(this);
         }
 
-        private Dictionary<string, string> BudgetAppropriationInfo()
-        {
-            var budgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordByIDs(budgetAppropriationId, fppId, othersFPPId, allotmentClassId, generalLedgerAccountsId);
-            return budgetAppropriation;
-        }
-
         private void LocalShowRecordStatus(DataGridView dataGridView, byte[] index, ToolStripStatusLabel  lblDateIssued, ToolStripStatusLabel lblCreatedAt, ToolStripStatusLabel lblUpdatedAt)
         {
             if (dataGridView.SelectedRows.Count == 1)
@@ -82,6 +76,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
+                int budgetAppropriationId = Convert.ToInt32(BudgetAppropriationInfo()["id"]);
                 int fundId = Convert.ToInt32(BudgetAppropriationInfo()["funds_id"]);
                 string fppCode = BudgetAppropriationInfo()["fpp_code"].ToString();
                 string fppName = BudgetAppropriationInfo()["fpp_name"].ToString();
@@ -96,7 +91,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 decimal appropriation = Convert.ToDecimal(BudgetAppropriationInfo()["amount"]);
                 decimal totalSupplementalAppropriationAmount = Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountById(budgetAppropriationId);
 
-                decimal totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(fundId, fppId, othersFPPId, allotmentClassId, accountId, year);
+                decimal totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountByYear(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, accountId);
 
                 decimal totalAppropriationAmount = appropriation + totalSupplementalAppropriationAmount;
                 decimal totalAppropriationBalance = totalAppropriationAmount - totalAllotmentRelease;
@@ -118,15 +113,24 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
         }
 
+        private Dictionary<string, string> BudgetAppropriationInfo()
+        {
+            var budgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordByIDs(budgetAppropriationId, fppId, othersFPPId, allotmentClassId, generalLedgerAccountsId);
+            return budgetAppropriation;
+        }
+
         private void btnAdd_Click(object sender, EventArgs e) 
         {
             var frmAllotmentReleaseAddForm = new frmAllotmentReleaseAddDetails(this, _frmBudgetAppropriations);
             var uc = frmAllotmentReleaseAddForm.ucAllotmentRelease1;
 
             DateTime dateEntry = Convert.ToDateTime(BudgetAppropriationInfo()["date_entry"]);
-
-            uc.dateEntry = dateEntry;
+            short year = Convert.ToInt16(BudgetAppropriationInfo()["year"]);
+          
             uc.budgetAppropriationID = budgetAppropriationId;
+            uc.dateEntry = dateEntry;
+            uc.year = year;
+
             frmAllotmentReleaseAddForm.ShowDialog();
         }
 
@@ -135,7 +139,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             var frmAllotmentReleaseEditForm = new frmAllotmentReleaseDetailsEdit(this, _frmBudgetAppropriations);
             var uc = frmAllotmentReleaseEditForm.ucAllotmentRelease1;
             DateTime dateEntry = Convert.ToDateTime(BudgetAppropriationInfo()["date_entry"]);
+            short year = Convert.ToInt16(BudgetAppropriationInfo()["year"]);
 
+            uc.year = year;
             uc.dateEntry = dateEntry;
             uc.allotmentReleaseID = Convert.ToInt32(dgAllotmentRelease.SelectedCells[0].Value);
             uc.budgetAppropriationID = budgetAppropriationId;
@@ -196,5 +202,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             LocalShowRecordStatus(dgAllotmentRelease, columnIndexTimestamp, lblDateIssued ,lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgAllotmentRelease, btnEdit, btnDelete);
         }
+
     }
 }

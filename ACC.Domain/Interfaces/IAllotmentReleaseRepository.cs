@@ -12,11 +12,11 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetRecordsByBudgetAppropriationID(int budgetAppropriationID, string allotmentReleaseNum);
 
-        Dictionary<string, string> GetTotalAllotmentReleaseAmount(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, DateTime dateIssued);
+        decimal GetViewTotalAllotmentReleaseAmount(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, DateTime dateIssued);
 
         decimal GetTotalAllotmentReleaseAmount(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int AccountId);
 
-        decimal GetTotalAllotmentReleaseAmount(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int accountId, int year);
+        decimal GetViewTotalAllotmentReleaseAmountByYear(int budgetAppropriationId ,int fundId, int fppId, int? othersFPPId, int allotmentClassId, int accountId);
 
         bool allotmentReleaseExist(int budgetAppropriationId, string dateIssued);
 

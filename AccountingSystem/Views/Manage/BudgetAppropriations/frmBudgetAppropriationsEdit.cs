@@ -42,13 +42,8 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
             try
             {
                 int ucBudgetAppropriationId = uc.budgetAppropriationId;
-                int ucFPPId = uc.fppId;
-                int? ucOtherFPPId = uc.othersFPPId;
-                int ucAllotmentClassId = uc.allotmentClassId;
-                int ucGeneralLedgerAccountId = uc.generalLedgerAccountId;
-
            
-                var selectedBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetRecordByIDs(ucBudgetAppropriationId, ucFPPId, ucOtherFPPId, ucAllotmentClassId, ucGeneralLedgerAccountId);
+                var selectedBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetRecordByID(ucBudgetAppropriationId);
 
                 int fundId = Convert.ToInt32(selectedBudgetAppropriation["funds_id"]);
                 int fppId = Convert.ToInt32(selectedBudgetAppropriation["function_program_project_id"]);
