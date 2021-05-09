@@ -159,68 +159,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        #region Validations
-
-        public bool BudgetAllotmentExist(int fundID, int FPPId, int? othersFPPId, int allotmentClassID, int generalLedgerAccountId, short year)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@funds_id", DbType.Int32, fundID},
-                    new object[] { "@function_program_project_id", DbType.Int32, FPPId},
-                    new object[] { "@others_fpp_id", DbType.String, othersFPPId },
-                    new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassID},
-                    new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerAccountId},
-                    new object[] { "@year",DbType.Int16, year}
-                };
-
-                string query = $"SELECT id FROM {tableName} WHERE funds_id = @funds_id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND year = @year";
-                string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return false;
-        }
-         
-        public bool BudgetAllotmentExist(int id, int fundID, int FPPId, int? othersFPPId, int allotmentClassID, int generalLedgerAccountId, short year)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, id},
-                    new object[] { "@funds_id", DbType.Int32, fundID},
-                    new object[] { "@function_program_project_id", DbType.Int32, FPPId},
-                    new object[] { "@others_fpp_id", DbType.String, othersFPPId },
-                    new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassID},
-                    new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerAccountId},
-                    new object[] { "@year",DbType.Int16, year}
-                };
-
-                string query = $"SELECT id FROM {tableName} WHERE id <> @id AND funds_id = @funds_id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND year = @year";
-                string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return false;
-        }
-
-        #endregion Validations
-
-        public Dictionary<string, string> GetViewRecordByIDs(int budgetAppID, int fppID, int? othersFPPID, int allotmentClassID, int genLedgerAccID)
+        public Dictionary<string, string> GetViewRecordByID(int budgetAppID)
         {
             var record = new Dictionary<string, string>();
 
@@ -229,10 +168,6 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                    new object[] { "@id", DbType.Int32, budgetAppID},
-                   new object[] { "@fpp_id", DbType.Int32, fppID},
-                   new object[] { "@others_fpp_id", DbType.String, othersFPPID},
-                   new object[] { "@allotment_class_id", DbType.Int32, allotmentClassID},
-                   new object[] { "@general_ledger_accounts_id", DbType.Int32, genLedgerAccID}
                 };
                 string query = $"SELECT " +
                     $"id, " +
@@ -259,11 +194,7 @@ namespace ACC.Data
                     $"updated_at " +
                     $"FROM {viewTableName} " +
                     $"WHERE " +
-                    $"id = @id " +
-                    $"AND fpp_id = @fpp_id " +
-                    $"AND others_fpp_id <=> @others_fpp_id " +
-                    $"AND allotment_class_id = @allotment_class_id " +
-                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id";
+                    $"id = @id ";
 
                 using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -305,59 +236,7 @@ namespace ACC.Data
             return record;
         }
 
-        public DataTable GetViewRecordsByIds(int fppID, int allotmentClassID, int? othersFPPID, int typeOfFund, DateTime dateEntry)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@fpp_id", DbType.Int32, fppID},
-                    new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassID},
-                    new object[] { "@others_fpp_id", DbType.String, othersFPPID },
-                    new object[] { "@funds_id", DbType.Int32, typeOfFund},
-                    new object[] { "@date_entry", DbType.Date, dateEntry.Date}
-                };
-
-                string query = $"SELECT " +
-                    $"budget_appropriations_id, " +
-                    $"funds_id, " +
-                    $"fund_code, " +
-                    $"fund_name, " +
-                    $"fpp_id, " +
-                    $"fpp_name, " +
-                    $"others_fpp_id, " +
-                    $"others_fpp_name, " +
-                    $"allotment_classes_id, " +
-                    $"allotment_code, " +
-                    $"allotment_name, " +
-                    $"general_ledger_acc_id, " +
-                    $"account_code, " +
-                    $"ledger_code, " +
-                    $"ledger_name, " +
-                    $"date_entry, " +
-                    $"year, " +
-                    $"appropriation," +
-                    $"total_allotment_release, " +
-                    $"appropriation_balance, " +
-                    $"created_at, " +
-                    $"updated_at " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE fpp_id = @fpp_id " +
-                    $"AND allotment_classes_id = @allotment_classes_id " +
-                    $"AND others_fpp_id <=> @others_fpp_id " +
-                    $"AND funds_id = @funds_id " +
-                    $"AND date_entry <= @date_entry";
-
-                var dtPermissions = new DataTable();
-                return mySqlGenericCommands.FillBySearch(query, dtPermissions, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public DataTable GetYearsBudgetAppropriations() 
+        public DataTable GetYearsBudgetAppropriations()
         {
             try
             {
@@ -394,7 +273,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
 
         //Budget Appropriations Display
 
@@ -472,6 +350,68 @@ namespace ACC.Data
                 throw;
             }
         }
+
+
+        #region Validations
+
+        public bool BudgetAllotmentExist(int fundID, int FPPId, int? othersFPPId, int allotmentClassID, int generalLedgerAccountId, short year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Int32, fundID},
+                    new object[] { "@function_program_project_id", DbType.Int32, FPPId},
+                    new object[] { "@others_fpp_id", DbType.String, othersFPPId },
+                    new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassID},
+                    new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerAccountId},
+                    new object[] { "@year",DbType.Int16, year}
+                };
+
+                string query = $"SELECT id FROM {tableName} WHERE funds_id = @funds_id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND year = @year";
+                string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return false;
+        }
+         
+        public bool BudgetAllotmentExist(int id, int fundID, int FPPId, int? othersFPPId, int allotmentClassID, int generalLedgerAccountId, short year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, id},
+                    new object[] { "@funds_id", DbType.Int32, fundID},
+                    new object[] { "@function_program_project_id", DbType.Int32, FPPId},
+                    new object[] { "@others_fpp_id", DbType.String, othersFPPId },
+                    new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassID},
+                    new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerAccountId},
+                    new object[] { "@year",DbType.Int16, year}
+                };
+
+                string query = $"SELECT id FROM {tableName} WHERE id <> @id AND funds_id = @funds_id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND year = @year";
+                string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return false;
+        }
+
+        #endregion Validations
 
     }
 }

@@ -17,8 +17,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal int budgetAppropriationId;
         internal int fppId;
         internal int? othersFPPId;
-        internal int allotmentClassId;
-        internal int generalLedgerAccountsId;
         private frmBudgetAppropriations _frmBudgetAppropriations;
 
         public frmAllotmentReleaseDetails(frmBudgetAppropriations frmBudgetAppropriations)
@@ -117,7 +115,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private Dictionary<string, string> BudgetAppropriationInfo()
         {
-            var budgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordByIDs(budgetAppropriationId, fppId, othersFPPId, allotmentClassId, generalLedgerAccountsId);
+            var budgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordByID(budgetAppropriationId);
             return budgetAppropriation;
         }
 
