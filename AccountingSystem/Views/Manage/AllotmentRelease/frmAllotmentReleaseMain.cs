@@ -18,6 +18,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal ucAllotmentReleaseMain uc;
 
         private frmBudgetAppropriations _frmBudgetAppropriations;
+
         public frmAllotmentReleaseMain(frmBudgetAppropriations frmBudgetAppropriations)
         {
             InitializeComponent();

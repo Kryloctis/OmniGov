@@ -585,7 +585,7 @@ namespace AccountingSystem
 
         #region BudgetAppropriations
 
-        internal static void ComboboxBudgetAppropriations(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
+        internal static void ComboboxAccounts(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
         {
             try
             {

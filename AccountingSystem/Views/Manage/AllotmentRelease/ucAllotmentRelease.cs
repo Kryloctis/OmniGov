@@ -12,12 +12,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
     public partial class ucAllotmentRelease : UserControl
     {
-        internal int aroId = 0;
-        internal int fppID = 0;
-        internal int? othersFPPId = null;
-        internal int allotmentClassId = 0;
-        internal int fundId = 0;
-        internal DateTime dateIssued = DateTime.Now;
+        internal int aroId;
+        internal int fppID;
+        internal int? othersFPPId;
+        internal int allotmentClassId;
+        internal int fundId;
+        internal DateTime dateIssued;
         private ucAllotmentReleaseMain ucAllotmentMain;
 
         public ucAllotmentRelease()
@@ -32,7 +32,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal string GetFormErrors()
         {
-            
             var errorArray = new string[3];
             errorArray[0] = epAccount.GetError(cmbxAccount);
             errorArray[1] = epAmount.GetError(nudAmount);
@@ -71,51 +70,70 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                DataTable dtBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(fppID, allotmentClassId, othersFPPId, fundId, dateIssued);
+                string accountName = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId)["allotment_name"];
 
-                HelperLoadRecords.ComboboxBudgetAppropriations(dtBudgetAppropriation, cmbxAccount, "ledger_name", "budget_appropriations_id");
+                if (Convert.ToInt32(allotmentClassId) == 4)
+                    HelperLoadRecords.ObligationRequestAccountCombobox(Factory.GeneralLedgerAccountsRepository().GetAllViewRecords(), cmbxAccount, "ledger_name", "general_ledger_accounts_id");
+                else
+                    HelperLoadRecords.BudgetAppropriationsGeneralLedgerAccountsCombobox(Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajAccGroupName(accountName), cmbxAccount, "ledger_name", "general_ledger_accounts_id");
 
+                cmbxAccount.Enabled = true;
+                cmbxAccount.SelectedIndex = -1;
                 cmbxAccount.SelectedValueChanged += new EventHandler(CmbxAccount_SelectedValueChanged);
                 cmbxAccount.TextChanged += new EventHandler(CmbxAccount_TextChanged);
-                cmbxAccount.SelectedIndex = -1;
-                cmbxAccount.Text = string.Empty;
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
-        }
-
-        private void DisplayBudgetAppropriationsDetails()
-        {
-            int budgetAppropriationId = Convert.ToInt32(cmbxAccount.SelectedValue);
-            var appropriationInfo = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
-
-            int accountId = Convert.ToInt32(appropriationInfo["general_ledger_accounts_id"]);
-            var totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(fundId, fppID, othersFPPId, allotmentClassId, accountId);
-
-            decimal appropriationAmount = Convert.ToDecimal(appropriationInfo["amount"]);
-
-            decimal appropriationBalance = appropriationAmount - totalAllotmentRelease;
-
-            txtAppropriation.Text = appropriationAmount.ToString("N2");
-            txtBalance.Text = appropriationBalance.ToString("N2");
         }
 
         private void CmbxAccount_SelectedValueChanged(object sender, EventArgs e)
         {
+            
+        }
+
+        private void CmbxAccount_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DisplayBudgetAppropriationsDetails()
+        {
+
+        }
+
+        private void ucAllotmentRelease_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadAccounts();
+            }
+        }
+
+        internal bool AllotmentReleaseExist()
+        {
             try
             {
-                if (cmbxAccount.SelectedIndex > -1)
+                int budgetAppropriationId = Convert.ToInt32(cmbxAccount.SelectedValue);
+                DateTime dateIssued = ucAllotmentMain.dtDateIssued.Value;
+
+                var allotmentReleaseExist = Factory.AllotmentReleaseRepository().allotmentReleaseExist(budgetAppropriationId, dateIssued.ToString("yyyy-MM-dd"));
+
+                if (allotmentReleaseExist)
                 {
-                    DisplayBudgetAppropriationsDetails();
+                    Tag = "Allotment Release already exist on the date it was issued.";
+                    return true;
                 }
+
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
+            return false;
         }
+
 
         #region Custom Validations
 
@@ -187,6 +205,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         #endregion Custom Validations
 
+
         #region Validations
 
         private void cmbxAccount_Validating(object sender, CancelEventArgs e)
@@ -220,45 +239,5 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         }
 
         #endregion Validationses
-
-        private void ucAllotmentRelease_Load(object sender, EventArgs e)
-        {
-            if (!DesignMode) 
-            {
-                LoadAccounts();
-            }
-        }
-
-        private void CmbxAccount_TextChanged(object sender, EventArgs e) 
-        {
-            if (!ShowAccountExist(epAccount, cmbxAccount) || string.IsNullOrEmpty(cmbxAccount.Text)) 
-            {
-                txtAppropriation.Text = string.Empty;
-                txtBalance.Text = string.Empty;
-            }
-        }
-
-        internal bool AllotmentReleaseExist() 
-        {
-            try
-            {
-                int budgetAppropriationId = Convert.ToInt32(cmbxAccount.SelectedValue);
-                DateTime dateIssued = ucAllotmentMain.dtDateIssued.Value;
-
-                var allotmentReleaseExist = Factory.AllotmentReleaseRepository().allotmentReleaseExist(budgetAppropriationId, dateIssued.ToString("yyyy-MM-dd"));
-
-                if (allotmentReleaseExist) 
-                {
-                    Tag = "Allotment Release already exist on the date it was issued.";
-                    return true;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
     }
 }

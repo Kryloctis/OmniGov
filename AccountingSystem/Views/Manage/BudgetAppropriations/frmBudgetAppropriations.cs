@@ -144,14 +144,10 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             int budgetAppId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["id"].Value);
             int fppId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["fpp_id"].Value);
             int? othersFPPId = dgBudgetAppropriations.Rows[rowIndex].Cells["others_fpp_id"].Value == null ? null: Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["others_fpp_id"].Value);
-            int allotmentClassesId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["allotment_class_id"].Value);
-            int genLedgerAccId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["general_ledger_accounts_id"].Value);
-
+       
             frmAllotmentReleaseDetailsForm.budgetAppropriationId = budgetAppId;
             frmAllotmentReleaseDetailsForm.fppId = fppId;
             frmAllotmentReleaseDetailsForm.othersFPPId = othersFPPId;
-            frmAllotmentReleaseDetailsForm.allotmentClassId = allotmentClassesId;
-            frmAllotmentReleaseDetailsForm.generalLedgerAccountsId = genLedgerAccId;
 
             frmAllotmentReleaseDetailsForm.ShowDialog();
         }

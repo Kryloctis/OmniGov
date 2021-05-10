@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 120);
+            this.label1.Location = new System.Drawing.Point(7, 116);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(51, 15);
             this.label1.TabIndex = 0;
@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // nudAmount
             // 
             this.nudAmount.DecimalPlaces = 2;
-            this.nudAmount.Location = new System.Drawing.Point(94, 118);
+            this.nudAmount.Location = new System.Drawing.Point(94, 114);
             this.nudAmount.Maximum = new decimal(new int[] {
             1410065407,
             2,
@@ -88,7 +88,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(500, 112);
+            this.groupBox1.Size = new System.Drawing.Size(500, 111);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Appropriation";
@@ -105,7 +105,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel1.Location = new System.Drawing.Point(3, 19);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(494, 90);
+            this.panel1.Size = new System.Drawing.Size(494, 89);
             this.panel1.TabIndex = 0;
             // 
             // txtBalance
@@ -145,7 +145,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(2, 6);
+            this.label2.Location = new System.Drawing.Point(4, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 15);
             this.label2.TabIndex = 4;
@@ -183,7 +183,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.Controls.Add(this.nudAmount);
             this.Controls.Add(this.label1);
             this.Name = "ucAllotmentRelease";
-            this.Size = new System.Drawing.Size(503, 145);
+            this.Size = new System.Drawing.Size(503, 141);
             this.Load += new System.EventHandler(this.ucAllotmentRelease_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
