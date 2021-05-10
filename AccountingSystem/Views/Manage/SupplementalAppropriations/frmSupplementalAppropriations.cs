@@ -126,13 +126,10 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
             if (dataGridView1.SelectedRows.Count == 1) 
             {
-                var rowDateEntry = dataGridView1.Rows[rowIndex].Cells["date_entry"].Value.ToString();
-                var rowCreatedAt = dataGridView1.Rows[rowIndex].Cells["created_at"].Value.ToString();
-                var rowUpdatedAt = dataGridView1.Rows[rowIndex].Cells["updated_at"].Value.ToString();
+                var dateEntry = dataGridView1.Rows[rowIndex].Cells["date_entry"].Value.ToString();
+                var createdAt = dataGridView1.Rows[rowIndex].Cells["created_at"].Value.ToString();
+                var updatedAt = dataGridView1.Rows[rowIndex].Cells["updated_at"].Value.ToString();
 
-                var dateEntry = string.IsNullOrEmpty(rowDateEntry) ? null : Convert.ToDateTime(rowDateEntry).ToString("MM/dd/yyyy");
-                var createdAt = string.IsNullOrEmpty(rowCreatedAt) ? null : Convert.ToDateTime(rowCreatedAt).ToString("MM/dd/yyyy");
-                var updatedAt = string.IsNullOrEmpty(rowUpdatedAt)? null : Convert.ToDateTime(rowUpdatedAt).ToString("MM/dd/yyyy");
 
                 lblDateEntry.Text = dateEntry;
                 lblCreatedAt.Text = createdAt;

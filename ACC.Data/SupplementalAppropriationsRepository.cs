@@ -185,8 +185,32 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT COALESCE(SUM(amount),0) as total_supplemental_amount " +
-                    $"FROM lfsdb.supplemental_appropriations " +
+                    $"FROM {tableName} " +
                     $"WHERE budget_appropriations_id = @budget_appropriations_id";
+
+                return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public decimal GetTotalSupplementalAmountByIdAndDateEntry(int budgetAppropriationsId, DateTime dateEntry)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationsId },
+                    new object[] { "@date_entry", DbType.Date, dateEntry}
+                };
+
+                string query = $"SELECT COALESCE(SUM(amount),0) as total_supplemental_amount " +
+                    $"FROM {tableName} " +
+                    $"WHERE budget_appropriations_id = @budget_appropriations_id " +
+                    $"AND date_entry <= @date_entry";
 
                 return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
 
