@@ -7,6 +7,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
 {
     public partial class ucDisbursingOfficer : UserControl
     {
+        internal int disbursingOfficerId = 0;
         public ucDisbursingOfficer()
         {
             InitializeComponent();

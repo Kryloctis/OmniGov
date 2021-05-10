@@ -33,12 +33,50 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new NotImplementedException();
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, Id},
+                };
+
+                string query = $"SELECT first_name, mid_initial, last_name, job_title, created_at, updated_at FROM {tableName} WHERE id = @id";
+
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    record.Add("first_name", reader.Rows[0]["first_name"].ToString());
+                    record.Add("mid_initial", reader.Rows[0]["mid_initial"].ToString());
+                    record.Add("last_name", reader.Rows[0]["last_name"].ToString());
+                    record.Add("job_title", reader.Rows[0]["job_title"].ToString());
+                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
         }
 
         public DataTable GetRecords()
         {
-            throw new NotImplementedException();
+            try
+            {
+                string query = $"SELECT id, CONCAT(`first_name`, ' ', `mid_initial`, ' ', `last_name`) as fullname, job_title,  created_at, updated_at FROM {tableName}";
+
+                return _dbGenericCommands.Fill(query, new DataTable());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -74,7 +112,24 @@ namespace ACC.Data
 
         public bool Update(DisbursingOfficerModel entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, entity.Id},
+                    new object[] { "@first_name", DbType.String, entity.FirstName},
+                    new object[] { "@mid_initial", DbType.String, entity.MiddleInitial},
+                    new object[] { "@last_name", DbType.String, entity.LastName},
+                    new object[] { "@job_title", DbType.String, entity.JobTitle},
+                };
+
+                string query = $"UPDATE {tableName} SET first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, job_title = @job_title WHERE id = @id";
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

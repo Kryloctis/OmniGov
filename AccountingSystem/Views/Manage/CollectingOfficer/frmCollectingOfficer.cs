@@ -42,6 +42,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         {
             _ = new frmCollectingOfficerAdd(this).ShowDialog();
         }
+
         private void btnEdit_Click(object sender, EventArgs e)
         {
             if (dgCollectingOfficer.Rows.Count > 0)
@@ -51,6 +52,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             }
          
         }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int selectedRowsCount = dgCollectingOfficer.SelectedRows.Count;

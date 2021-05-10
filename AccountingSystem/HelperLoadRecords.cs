@@ -344,6 +344,7 @@ namespace AccountingSystem
         }
 
         #endregion
+
         #region Banks
         internal static void BanksDatagridView(DataTable dataTable, DataGridView datagrid)
         {
@@ -531,6 +532,20 @@ namespace AccountingSystem
                 comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
                 comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
             }
+        }
+        #endregion
+
+        #region Disbursing Officer
+        internal static void DisbursingOfficerDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].HeaderText = "Full Name";
+            datagrid.Columns[2].HeaderText = "Job Title";
+            datagrid.Columns[3].Visible = false;
+            datagrid.Columns[4].Visible = false;
+
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
 

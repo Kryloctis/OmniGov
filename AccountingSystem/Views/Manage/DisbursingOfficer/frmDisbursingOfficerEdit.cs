@@ -1,0 +1,91 @@
+﻿using ACC.Domain.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace AccountingSystem.Views.Manage.DisbursingOfficer
+{
+    public partial class frmDisbursingOfficerEdit : Form
+    {
+        private readonly frmDisbursingOfficer frmDisbursingOfficer;
+        private readonly ucDisbursingOfficer uc;
+
+        public frmDisbursingOfficerEdit(frmDisbursingOfficer frmDisbursingOfficer, int disbursingOfficerId)
+        {
+            InitializeComponent();
+            Helper.LoadFormIcon(this);
+            this.frmDisbursingOfficer = frmDisbursingOfficer;
+
+            uc = ucDisbursingOfficer1;
+            uc.disbursingOfficerId = disbursingOfficerId;
+        }
+
+        private void LoadSelectedRecord()
+        {
+            try
+            {
+                var disbursingOfficerDict = Factory.DisbursingOfficerRepository().GetRecordByID(uc.disbursingOfficerId);
+
+                uc.txtFirstName.Text = disbursingOfficerDict["first_name"];
+                uc.txtMidInitial.Text = disbursingOfficerDict["mid_initial"];
+                uc.txtLastName.Text = disbursingOfficerDict["last_name"];
+                uc.txtJobTitle.Text = disbursingOfficerDict["job_title"];
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void frmDisbursingOfficerEdit_Load(object sender, EventArgs e)
+        {
+            LoadSelectedRecord();
+        }
+
+        private bool SaveData()
+        {
+            try
+            {
+                // if error occurs, show messagebox error
+                if (!uc.ValidateChildren())
+                {
+                    Helper.MessageBoxError(uc.GetFormErrors());
+                    return false;
+                }
+
+                // proceed to insert
+                var disbursingOfficerModel = new DisbursingOfficerModel()
+                {
+                    Id = uc.disbursingOfficerId,
+                    FirstName = uc.txtFirstName.Text.Trim(),
+                    MiddleInitial = uc.txtMidInitial.Text.Trim(),
+                    LastName = uc.txtLastName.Text.Trim(),
+                    JobTitle = uc.txtJobTitle.Text.Trim()
+                };
+
+                return Factory.DisbursingOfficerRepository().Update(disbursingOfficerModel);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return false;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("Disbursing officer has been saved.");
+                frmDisbursingOfficer.LoadRecords();
+            }
+        }
+    }
+}
