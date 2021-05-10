@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +20,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
 
             btnAdd.Click += new EventHandler(BtnAdd_Click);
             btnEdit.Click += new EventHandler(btnEdit_Click);
+            btnDelete.Click += new EventHandler(BtnDelete_Click);
 
             Helper.DatagridDefaultStyle(dgDisbursingOfficer);
         }
@@ -43,7 +45,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmDisbursingOfficerAdd().ShowDialog();
+            _ = new frmDisbursingOfficerAdd(this).ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -53,7 +55,33 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                 int disbursingOfficerId = int.Parse(dgDisbursingOfficer.SelectedCells[0].Value.ToString());
                 _ = new frmDisbursingOfficerEdit(this, disbursingOfficerId).ShowDialog();
             }
+        }
 
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            int selectedRowsCount = dgDisbursingOfficer.SelectedRows.Count;
+            try
+            {
+                if (selectedRowsCount > 0)
+                {
+                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                    {
+                        var modelList = new List<DisbursingOfficerModel>();
+                        foreach (DataGridViewRow row in dgDisbursingOfficer.SelectedRows)
+                        {
+                            int disbursingOfficerId = Convert.ToInt16(row.Cells[0].Value.ToString());
+                            modelList.Add(new DisbursingOfficerModel() { Id = disbursingOfficerId });
+                        }
+
+                        _ = Factory.DisbursingOfficerRepository().Delete(modelList);
+                        LoadRecords();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void dgDisbursingOfficer_SelectionChanged(object sender, EventArgs e)

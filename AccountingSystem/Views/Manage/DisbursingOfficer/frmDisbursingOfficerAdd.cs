@@ -7,11 +7,13 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
     public partial class frmDisbursingOfficerAdd : Form
     {
         private ucDisbursingOfficer uc;
+        private frmDisbursingOfficer frmDisbursingOfficer;
 
-        public frmDisbursingOfficerAdd()
+        public frmDisbursingOfficerAdd(frmDisbursingOfficer _frmDisbursingOfficer)
         {
             InitializeComponent();
             uc = ucDisbursingOfficer1;
+            frmDisbursingOfficer = _frmDisbursingOfficer;
             Helper.LoadFormIcon(this);
         }
 
@@ -55,6 +57,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Disbursing office has been saved.");
+                frmDisbursingOfficer.LoadRecords();
                 uc.ResetForm();
             }
         }

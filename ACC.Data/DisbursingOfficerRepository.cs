@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ACC.Domain.Models;
 using ACC.Domain.Interfaces;
 using System.Data;
+using System.Transactions;
 
 namespace ACC.Data
 {
@@ -23,7 +24,29 @@ namespace ACC.Data
 
         public bool Delete(List<DisbursingOfficerModel> entityList)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    foreach (var entity in entityList)
+                    {
+                        var parameters = new object[][]
+                        {
+                            new object[] { "@id", DbType.Int16, entity.Id},
+                        };
+
+                        string query = $"DELETE FROM {tableName} WHERE id = @id";
+                        _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                    }
+
+                    scope.Complete();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool FullNameExist(string firstName, string middleInitial, string lastName, int id)
