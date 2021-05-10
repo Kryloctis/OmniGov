@@ -117,6 +117,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
             this.statusStrip1.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 9;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -168,6 +169,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.dgDisbursingOfficer);
             this.Controls.Add(this.toolStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmDisbursingOfficer";

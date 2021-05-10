@@ -84,9 +84,11 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             // 
             // frmDisbursingOfficerEdit
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(494, 172);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ucDisbursingOfficer1);
