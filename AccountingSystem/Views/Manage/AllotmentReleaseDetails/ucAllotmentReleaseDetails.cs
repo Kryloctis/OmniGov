@@ -12,10 +12,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
     public partial class ucAllotmentReleaseDetails : UserControl
     {
-        internal int allotmentReleaseID = 0;
-        internal int budgetAppropriationID = 0;
-        internal decimal currentAllotmentReleaseAmount = 0;
-        internal DateTime dateEntry = DateTime.Now;
+        internal int allotmentReleaseID;
+        internal int budgetAppropriationID; 
+        internal decimal currentAllotmentReleaseAmount;
+        internal DateTime dateEntry;
+        internal short year;
 
         public ucAllotmentReleaseDetails()
         {
@@ -24,6 +25,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal string GetFormErrors()
         {
+
             var errorArray = new string[5];
             errorArray[0] = epARONo.GetError(mskTxtYear);
             errorArray[1] = epPurpose.GetError(txtPurpose);
@@ -32,14 +34,16 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             errorArray[4] = AllotmentReleaseExist() ? Tag.ToString() : string.Empty; 
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+
         }
 
         internal void ResetForm()
         {
+
             mskTxtSeriesNo.Clear();
             txtPurpose.Clear();
-            dtDateIssued.Value = DateTime.Now;
             nudAmount.Value = 0;
+
         }
 
         private void AROyearValue()
@@ -75,25 +79,48 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         }
 
         #region Validations
+
         private void AmountLogic(ErrorProvider ep, NumericUpDown numericUpDown, CancelEventArgs e) 
         {
-            //var totalAppropriationBalance = Factory.BudgetAppropriationsRepository().GetTotalAppropriationBalanceRecord(budgetAppropriationID);
-            //decimal appropriationBalance = Convert.ToDecimal(totalAppropriationBalance["appropriation_balance"]);
+            var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationID);
 
-            //if (allotmentReleaseID == 0)
-            //{
-            //    string errorText = numericUpDown.Value > appropriationBalance ? "The amount you entered exceeds the appropriate balance." : string.Empty;
-            //    bool errorBoolean = numericUpDown.Value > appropriationBalance ? true : false;
-            //    ep.SetError(nudAmount, errorText);
-            //    e.Cancel = errorBoolean;
-            //}
-            //else
-            //{
-            //    string errorText = numericUpDown.Value > appropriationBalance + currentAllotmentReleaseAmount ? "The amount you entered exceeds the appropriate balance." : string.Empty;
-            //    bool errorBoolean = numericUpDown.Value > appropriationBalance + currentAllotmentReleaseAmount ? true : false;
-            //    ep.SetError(nudAmount, errorText);
-            //    e.Cancel = errorBoolean;
-            //}
+            int fundId = Convert.ToInt32(budgetAppropriationRepo["funds_id"]);
+            int fppId = Convert.ToInt32(budgetAppropriationRepo["function_program_project_id"]);
+            int? othersFPPId = string.IsNullOrEmpty(budgetAppropriationRepo["others_fpp_id"]) ? null : Convert.ToInt32(budgetAppropriationRepo["others_fpp_id"]);
+            int allotmentClassId = Convert.ToInt32(budgetAppropriationRepo["allotment_classes_id"]);
+            int genLedgetAccountId = Convert.ToInt32(budgetAppropriationRepo["general_ledger_accounts_id"]);
+
+            //Get Total Appropriation
+            decimal appropriationAmount = Convert.ToDecimal(budgetAppropriationRepo["amount"]);
+
+            decimal supplementalAppropriationAmount = Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountById(budgetAppropriationID);
+
+            decimal totalAppropriationAmount = appropriationAmount + supplementalAppropriationAmount;
+
+            //Get total Allotment Release by date
+            decimal totalAllotmentReleaseAmount = Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountByYear(budgetAppropriationID, fundId,  fppId,  othersFPPId,  allotmentClassId,  genLedgetAccountId);
+
+            //Get Appropriation Balance
+            decimal appropriationBalance = totalAppropriationAmount - totalAllotmentReleaseAmount;
+
+
+            if (allotmentReleaseID == 0)
+            {
+
+                string errorText = numericUpDown.Value > appropriationBalance ? "The amount you entered exceeds the appropriate balance." : string.Empty;
+                bool errorBoolean = numericUpDown.Value > appropriationBalance ? true : false;
+                ep.SetError(nudAmount, errorText);
+                e.Cancel = errorBoolean;
+
+            }
+
+            else
+            {
+                string errorText = numericUpDown.Value > appropriationBalance + currentAllotmentReleaseAmount ? "The amount you entered exceeds the appropriate balance." : string.Empty;
+                bool errorBoolean = numericUpDown.Value > appropriationBalance + currentAllotmentReleaseAmount ? true : false;
+                ep.SetError(nudAmount, errorText);
+                e.Cancel = errorBoolean;
+            }
         }
 
         private void txtPurpose_Validating(object sender, CancelEventArgs e)
@@ -169,10 +196,23 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void ucAllotmentReleaseDetails_Load(object sender, EventArgs e)
         {
-            if (!DesignMode) 
+            if (!DesignMode)
             {
                 AROyearValue();
+                dtDateIssued.MinDate = dateEntry;
+                IsBudgetAppropriationContinuing();
             }
+        }
+
+        private void IsBudgetAppropriationContinuing()
+        {
+            DateTime maxDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
+            var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationID);
+            bool budgetAppropriationContinuing = Convert.ToByte(budgetAppropriationRepo["continuing"]) == 0? false : true;
+
+
+            if(!budgetAppropriationContinuing)
+                dtDateIssued.MaxDate = maxDate;
         }
 
         private bool ShowErrorSeriesNo(ErrorProvider ep, MaskedTextBox mskTxtSeriesNo, MaskedTextBox mskTxtYear) 

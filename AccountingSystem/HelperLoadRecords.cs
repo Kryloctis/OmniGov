@@ -600,7 +600,7 @@ namespace AccountingSystem
 
         #region BudgetAppropriations
 
-        internal static void ComboboxBudgetAppropriations(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
+        internal static void ComboboxAccounts(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
         {
             try
             {
@@ -892,7 +892,7 @@ namespace AccountingSystem
 
                     decimal totalAppropriationAmount = totalSupplementalAppropriation + rowAppropriationAmount;
 
-                    decimal totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(rowFundId, rowFPPId, rowOthersFPPId, rowAllotmentClassId, rowAccountId, rowYear);
+                    decimal totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountByYear(rowId, rowFundId, rowFPPId, rowOthersFPPId, rowAllotmentClassId, rowAccountId);
 
                     decimal appropriationBalance = (totalSupplementalAppropriation + rowAppropriationAmount) - totalAllotmentRelease;
 

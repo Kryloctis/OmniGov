@@ -46,6 +46,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
+
                 var selectedAllotmentRelease = Factory.AllotmentReleaseRepository().GetRecordByID(uc.allotmentReleaseID);
 
                 // Set Values

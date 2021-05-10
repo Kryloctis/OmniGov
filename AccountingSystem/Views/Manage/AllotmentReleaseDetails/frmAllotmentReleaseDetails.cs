@@ -17,8 +17,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal int budgetAppropriationId;
         internal int fppId;
         internal int? othersFPPId;
-        internal int allotmentClassId;
-        internal int generalLedgerAccountsId;
         private frmBudgetAppropriations _frmBudgetAppropriations;
 
         public frmAllotmentReleaseDetails(frmBudgetAppropriations frmBudgetAppropriations)
@@ -30,12 +28,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             btnDelete.Click += new EventHandler(btnDelete_Click);
             txtSearch.TextChanged += new EventHandler(txtSearch_TextChanged);
             Helper.LoadFormIcon(this);
-        }
-
-        private Dictionary<string, string> BudgetAppropriationInfo()
-        {
-            var budgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordByIDs(budgetAppropriationId, fppId, othersFPPId, allotmentClassId, generalLedgerAccountsId);
-            return budgetAppropriation;
         }
 
         private void LocalShowRecordStatus(DataGridView dataGridView, byte[] index, ToolStripStatusLabel  lblDateIssued, ToolStripStatusLabel lblCreatedAt, ToolStripStatusLabel lblUpdatedAt)
@@ -82,6 +74,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
+                int budgetAppropriationId = Convert.ToInt32(BudgetAppropriationInfo()["id"]);
                 int fundId = Convert.ToInt32(BudgetAppropriationInfo()["funds_id"]);
                 string fppCode = BudgetAppropriationInfo()["fpp_code"].ToString();
                 string fppName = BudgetAppropriationInfo()["fpp_name"].ToString();
@@ -94,9 +87,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 DateTime dateEntry = Convert.ToDateTime(BudgetAppropriationInfo()["date_entry"]);
                 short year = Convert.ToInt16(BudgetAppropriationInfo()["year"]);
                 decimal appropriation = Convert.ToDecimal(BudgetAppropriationInfo()["amount"]);
+                bool isContinuing = Convert.ToByte(BudgetAppropriationInfo()["continuing"]) == 0 ? false : true;
                 decimal totalSupplementalAppropriationAmount = Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountById(budgetAppropriationId);
 
-                decimal totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(fundId, fppId, othersFPPId, allotmentClassId, accountId, year);
+                decimal totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountByYear(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, accountId);
 
                 decimal totalAppropriationAmount = appropriation + totalSupplementalAppropriationAmount;
                 decimal totalAppropriationBalance = totalAppropriationAmount - totalAllotmentRelease;
@@ -111,11 +105,18 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 lblYear.Text = year.ToString();
                 lblAmount.Text = totalAppropriationAmount.ToString("N2");
                 lblAppropriationBalance.Text = totalAppropriationBalance.ToString("N2");
+                chckBoxContinuing.Checked = isContinuing;
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        private Dictionary<string, string> BudgetAppropriationInfo()
+        {
+            var budgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordByID(budgetAppropriationId);
+            return budgetAppropriation;
         }
 
         private void btnAdd_Click(object sender, EventArgs e) 
@@ -124,9 +125,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             var uc = frmAllotmentReleaseAddForm.ucAllotmentRelease1;
 
             DateTime dateEntry = Convert.ToDateTime(BudgetAppropriationInfo()["date_entry"]);
-
-            uc.dateEntry = dateEntry;
+            short year = Convert.ToInt16(BudgetAppropriationInfo()["year"]);
+          
             uc.budgetAppropriationID = budgetAppropriationId;
+            uc.dateEntry = dateEntry;
+            uc.year = year;
+
             frmAllotmentReleaseAddForm.ShowDialog();
         }
 
@@ -135,7 +139,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             var frmAllotmentReleaseEditForm = new frmAllotmentReleaseDetailsEdit(this, _frmBudgetAppropriations);
             var uc = frmAllotmentReleaseEditForm.ucAllotmentRelease1;
             DateTime dateEntry = Convert.ToDateTime(BudgetAppropriationInfo()["date_entry"]);
+            short year = Convert.ToInt16(BudgetAppropriationInfo()["year"]);
 
+            uc.year = year;
             uc.dateEntry = dateEntry;
             uc.allotmentReleaseID = Convert.ToInt32(dgAllotmentRelease.SelectedCells[0].Value);
             uc.budgetAppropriationID = budgetAppropriationId;
@@ -196,5 +202,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             LocalShowRecordStatus(dgAllotmentRelease, columnIndexTimestamp, lblDateIssued ,lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgAllotmentRelease, btnEdit, btnDelete);
         }
+
     }
 }

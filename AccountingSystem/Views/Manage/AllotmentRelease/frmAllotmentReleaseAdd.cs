@@ -28,52 +28,52 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             uc.LoadReference(ucAllotmentReleaseMain);
         }
 
-        private bool AddAllotmentRelease()
-        {
-            try
-            {
-                if (!uc.ValidateChildren() || uc.AllotmentReleaseExist())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
+        //private bool AddAllotmentRelease()
+        //{
+        //    try
+        //    {
+        //        if (!uc.ValidateChildren() || uc.AllotmentReleaseExist())
+        //        {
+        //            Helper.MessageBoxError(uc.GetFormErrors());
+        //            return false;
+        //        }
 
-                int budgetAppropriationId = Convert.ToInt32(uc.cmbxAccount.SelectedValue);
-                int fppId = Convert.ToInt32(ucAllotmentReleaseMain.cmbxFPP.SelectedValue);
-                int? othersFPPId = string.IsNullOrEmpty(ucAllotmentReleaseMain.cmbxOthersFPP.Text) ? null : Convert.ToInt32(ucAllotmentReleaseMain.cmbxOthersFPP.SelectedValue);
-                int allotmentClassId = Convert.ToInt32(ucAllotmentReleaseMain.allotmentClassId);
+        //        int budgetAppropriationId = Convert.ToInt32(uc.cmbxAccount.SelectedValue);
+        //        int fppId = Convert.ToInt32(ucAllotmentReleaseMain.cmbxFPP.SelectedValue);
+        //        int? othersFPPId = string.IsNullOrEmpty(ucAllotmentReleaseMain.cmbxOthersFPP.Text) ? null : Convert.ToInt32(ucAllotmentReleaseMain.cmbxOthersFPP.SelectedValue);
+        //        int allotmentClassId = Convert.ToInt32(ucAllotmentReleaseMain.allotmentClassId);
 
-                var budgetAppropriationInfo = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
-                int genLedgerAccId = Convert.ToInt32(budgetAppropriationInfo["general_ledger_accounts_id"]);
+        //        var budgetAppropriationInfo = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
+        //        int genLedgerAccId = Convert.ToInt32(budgetAppropriationInfo["general_ledger_accounts_id"]);
 
-                var viewBudgetAppropriationInfo = Factory.BudgetAppropriationsRepository().GetViewRecordByIDs(budgetAppropriationId, fppId, othersFPPId, allotmentClassId, genLedgerAccId);
+        //        var viewBudgetAppropriationInfo = Factory.BudgetAppropriationsRepository().GetViewRecordByIDs(budgetAppropriationId, fppId, othersFPPId, allotmentClassId, genLedgerAccId);
 
-                string accountName = uc.cmbxAccount.Text;
-                string accountCode = viewBudgetAppropriationInfo["account_code"].ToString();
-                decimal amount = uc.nudAmount.Value;
+        //        string accountName = uc.cmbxAccount.Text;
+        //        string accountCode = viewBudgetAppropriationInfo["account_code"].ToString();
+        //        decimal amount = uc.nudAmount.Value;
 
-                ucAllotmentReleaseMain.dgAllotmentRelease.Rows.Add(new object[] {
-                    budgetAppropriationId,
-                    accountName,
-                    accountCode,
-                    amount});
+        //        ucAllotmentReleaseMain.dgAllotmentRelease.Rows.Add(new object[] {
+        //            budgetAppropriationId,
+        //            accountName,
+        //            accountCode,
+        //            amount});
 
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Helper.MessageBoxError(ex.Message);
+        //    }
+        //    return false;
+        //}
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (AddAllotmentRelease())
-            {
-                Close();
-                ucAllotmentReleaseMain.panel1.Enabled = false;
-            }
+            //if (AddAllotmentRelease())
+            //{
+            //    Close();
+            //    ucAllotmentReleaseMain.panel1.Enabled = false;
+            //}
         }
     }
 }

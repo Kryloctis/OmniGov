@@ -32,6 +32,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.chckBoxContinuing = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.lblAppropriationBalance = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblOtherFPP = new System.Windows.Forms.Label();
@@ -125,6 +127,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.chckBoxContinuing);
+            this.panel5.Controls.Add(this.label4);
             this.panel5.Controls.Add(this.lblAppropriationBalance);
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.lblOtherFPP);
@@ -151,6 +155,26 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(339, 503);
             this.panel5.TabIndex = 6;
+            // 
+            // chckBoxContinuing
+            // 
+            this.chckBoxContinuing.AutoCheck = false;
+            this.chckBoxContinuing.AutoSize = true;
+            this.chckBoxContinuing.Location = new System.Drawing.Point(146, 219);
+            this.chckBoxContinuing.Name = "chckBoxContinuing";
+            this.chckBoxContinuing.Size = new System.Drawing.Size(15, 14);
+            this.chckBoxContinuing.TabIndex = 13;
+            this.chckBoxContinuing.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 218);
+            this.label4.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 15);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Continuing";
             // 
             // lblAppropriationBalance
             // 
@@ -634,5 +658,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private System.Windows.Forms.Label label3;
         internal System.Windows.Forms.Label lblDateEntry;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
+        internal System.Windows.Forms.CheckBox chckBoxContinuing;
     }
 }

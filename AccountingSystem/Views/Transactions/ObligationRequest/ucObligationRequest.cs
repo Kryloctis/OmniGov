@@ -84,11 +84,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             {
                 int accountId = Convert.ToInt32(cmbxAccount.SelectedValue);
 
-                var totalAllotmentAmount = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(fundId, fppId, otherFPPId, allotmentClassId, accountId, dateIssued);
+                decimal totalAllotmentAmount = Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmount(fundId, fppId, otherFPPId, allotmentClassId, accountId, dateIssued);
 
                 var totalObligationAmountByYear = Factory.ObligationRequestRepository().GetTotalObligationAmount(fundId, fppId, otherFPPId, allotmentClassId, accountId, dateIssued);
 
-                var totalAllotmentBalanceAmount = Convert.ToDecimal(totalAllotmentAmount["total_allotment_amount"]) - Convert.ToDecimal(totalObligationAmountByYear["total_obligation_amount"]);
+                var totalAllotmentBalanceAmount = totalAllotmentAmount - Convert.ToDecimal(totalObligationAmountByYear["total_obligation_amount"]);
 
                 return totalAllotmentBalanceAmount;
             }

@@ -350,6 +350,13 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
+
+            decimal totalSupplementalApprorpriationAmount = Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountById(budgetAppropriationId);
+
+            decimal appropriationAmount = nudAmount.Value;
+
+            decimal totalAppropriationAmount = totalSupplementalApprorpriationAmount + appropriationAmount;
+
             if (string.IsNullOrEmpty(nudAmount.Text))
             {
                 e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
@@ -359,7 +366,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 epAmount.SetError(nudAmount, Helper.ErrorMessage("Valuable Amount"));
                 e.Cancel = true;
             }
-            else if(nudAmount.Value < totalAllotmentRelease)
+            else if(totalAppropriationAmount < totalAllotmentRelease)
             {
                 epAmount.SetError(nudAmount, "Amount you entered is less than allotment released.");
                 e.Cancel = true;

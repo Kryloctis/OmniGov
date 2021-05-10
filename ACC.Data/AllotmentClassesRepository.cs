@@ -10,12 +10,14 @@ namespace ACC.Data
     public class AllotmentClassesRepository : IAllotmentClassesRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
+
         private readonly string tableName = "allotment_classes";
         
         public AllotmentClassesRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }
+
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var record = new Dictionary<string, string>();
