@@ -110,21 +110,21 @@ namespace AccountingSystem
             // menuJEV
             // 
             this.menuJEV.Name = "menuJEV";
-            this.menuJEV.Size = new System.Drawing.Size(200, 22);
+            this.menuJEV.Size = new System.Drawing.Size(122, 22);
             this.menuJEV.Text = "JEV...";
             this.menuJEV.Click += new System.EventHandler(this.menuJEV_Click);
             // 
             // menuObligationRequest
             // 
             this.menuObligationRequest.Name = "menuObligationRequest";
-            this.menuObligationRequest.Size = new System.Drawing.Size(200, 22);
+            this.menuObligationRequest.Size = new System.Drawing.Size(122, 22);
             this.menuObligationRequest.Text = "CAFOA...";
             // 
             // menuRCI
             // 
             this.menuRCI.Name = "menuRCI";
-            this.menuRCI.Size = new System.Drawing.Size(200, 22);
-            this.menuRCI.Text = "Report of Checks Issued";
+            this.menuRCI.Size = new System.Drawing.Size(122, 22);
+            this.menuRCI.Text = "RCI...";
             this.menuRCI.Click += new System.EventHandler(this.menuRCI_Click);
             // 
             // menuManage
@@ -213,7 +213,7 @@ namespace AccountingSystem
             // 
             this.menuDisbursingOfficer.Name = "menuDisbursingOfficer";
             this.menuDisbursingOfficer.Size = new System.Drawing.Size(223, 22);
-            this.menuDisbursingOfficer.Text = "Disbursing Officer...";
+            this.menuDisbursingOfficer.Text = "Disbursing Officers...";
             // 
             // menuBudgetAppropriation
             // 
