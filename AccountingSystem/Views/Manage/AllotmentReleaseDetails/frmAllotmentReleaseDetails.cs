@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 bool isContinuing = Convert.ToByte(BudgetAppropriationInfo()["continuing"]) == 0 ? false : true;
                 decimal totalSupplementalAppropriationAmount = Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountById(budgetAppropriationId);
 
-                decimal totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountByYear(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, accountId);
+                decimal totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountById(budgetAppropriationId);
 
                 decimal totalAppropriationAmount = appropriation + totalSupplementalAppropriationAmount;
                 decimal totalAppropriationBalance = totalAppropriationAmount - totalAllotmentRelease;

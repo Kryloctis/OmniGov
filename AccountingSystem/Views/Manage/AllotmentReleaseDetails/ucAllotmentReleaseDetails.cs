@@ -149,12 +149,13 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             //Get Total Appropriation
             decimal appropriationAmount = Convert.ToDecimal(budgetAppropriationRepo["amount"]);
 
+            //Get Total Supplemental Appropriation by date
             decimal supplementalAppropriationAmount = Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountByIdAndDateEntry(budgetAppropriationID, allotmentReleaseDateIssued);
 
             decimal totalAppropriationAmount = appropriationAmount + supplementalAppropriationAmount;
 
-            //Get total Allotment Release by date
-            decimal totalAllotmentReleaseAmount = Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountByYear(budgetAppropriationID, fundId, fppId, othersFPPId, allotmentClassId, genLedgetAccountId);
+
+            decimal totalAllotmentReleaseAmount = Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountById(budgetAppropriationID);
 
             //Get Appropriation Balance
             decimal appropriationBalance = totalAppropriationAmount - totalAllotmentReleaseAmount;

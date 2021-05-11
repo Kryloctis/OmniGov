@@ -18,6 +18,9 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecordsSAAOB(int fppID, short year);
 
+        Dictionary<string, string> GetViewRecord(int fppId, int? othersFPPId, int fundsId, int allotmentClassId, int generalLedgerAccountId, DateTime dateEntry, short year);
+
+
         //Budget Appropriations Display
 
         DataTable GetViewRecordsByIds(BudgetAppropriationsModel entity);
