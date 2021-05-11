@@ -128,7 +128,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                dgAllotmentRelease.Columns.Add("budget_appropriation_id", "");
+                dgAllotmentRelease.Columns.Add("budget_appropriation_id", "Budget Appropriations ID");
                 dgAllotmentRelease.Columns.Add("account_name", "Account Name");
                 dgAllotmentRelease.Columns.Add("account_code", "Account Code");
                 dgAllotmentRelease.Columns.Add("allotment_amount", "Amount");

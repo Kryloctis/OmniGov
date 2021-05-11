@@ -157,25 +157,29 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                //int budgetAppropriationId = Convert.ToInt32(cmbxAccount.SelectedValue);
+                int generalLedgerAccountId = Convert.ToInt32(cmbxAccount.SelectedValue);
 
-                //var budgetAppropriationInfo = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
+                var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetViewRecord(fppID, othersFPPId, fundId, allotmentClassId, generalLedgerAccountId, dateIssued, year);
 
-                //int accountId = Convert.ToInt32(budgetAppropriationInfo["general_ledger_accounts_id"]);
-                //var totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseAmount(fundId, fppID, othersFPPId, allotmentClassId, accountId);
+                decimal appropriationAmount = budgetAppropriationRepo.Count == 0 ? 0 : Convert.ToDecimal(budgetAppropriationRepo["amount"]);
 
-                //decimal appropriatonAmount = Convert.ToDecimal(budgetAppropriationInfo["amount"]);
+                decimal supplementalAppropriationAmount = budgetAppropriationRepo.Count == 0 ? 0 : Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountByIdAndDateEntry(Convert.ToInt32(budgetAppropriationRepo["id"]), dateIssued);
 
-                //decimal appropriationBalance = appropriatonAmount - totalAllotmentRelease;
+                decimal totalAllotmentReleaseAmount = budgetAppropriationRepo.Count == 0 ? 0 : Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountById(Convert.ToInt32(budgetAppropriationRepo["id"]));
 
-                //if (aroId == 0)
-                //{
-                //    if (numericUpDown.Value > appropriationBalance)
-                //    {
-                //        ep.SetError(numericUpDown, "Amount you entered, exceeds to the appropriate balance.");
-                //        return true;
-                //    }
-                //}
+
+                decimal totalAppropriation = appropriationAmount + supplementalAppropriationAmount;
+
+                decimal appropriationBalance = totalAppropriation - totalAllotmentReleaseAmount;
+
+                if (aroId == 0)
+                {
+                    if (numericUpDown.Value > appropriationBalance)
+                    {
+                        ep.SetError(numericUpDown, "The amount you entered exceeds the appropriate balance.");
+                        return true;
+                    }
+                }
 
             }
             catch (Exception ex)
