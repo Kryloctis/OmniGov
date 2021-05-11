@@ -351,6 +351,97 @@ namespace ACC.Data
             }
         }
 
+        public Dictionary<string, string> GetViewRecord(int fppId, int? othersFPPId, int fundsId, int allotmentClassId, int generalLedgerAccountId, DateTime dateEntry, short year)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@fpp_id", DbType.Int32, fppId },
+                    new object[] { "@others_fpp_id", DbType.String, othersFPPId },
+                    new object[] { "@funds_id", DbType.Int32, fundsId },
+                    new object[] { "@allotment_class_id", DbType.Int32, allotmentClassId },
+                    new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerAccountId },
+                    new object[] { "@date_entry", DbType.Date, dateEntry.Date },
+                    new object[] { "@year", DbType.Int16, year },
+                };
+
+                string query = $"SELECT " +
+                    $"id, " +
+                    $"funds_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"fpp_id, " +
+                    $"fpp_code, " +
+                    $"fpp_name, " +
+                    $"others_fpp_id, " +
+                    $"others_fpp_name, " +
+                    $"allotment_class_id, " +
+                    $"allotment_class_code, " +
+                    $"allotment_class_name, " +
+                    $"general_ledger_accounts_id, " +
+                    $"general_ledger_accounts_code, " +
+                    $"general_ledger_accounts_name, " +
+                    $"account_code, " +
+                    $"date_entry, " +
+                    $"year, " +
+                    $"amount, " +
+                    $"continuing, " +
+                    $"created_at, " +
+                    $"updated_at " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE " +
+                    $"fpp_id = @fpp_id " +
+                    $"AND others_fpp_id <=> @others_fpp_id  " +
+                    $"AND funds_id = @funds_id " +
+                    $"AND allotment_class_id = @allotment_class_id " +
+                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
+                    $"AND date_entry <= @date_entry " +
+                    $"AND year = @year ";
+
+                using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("id", item[0].ToString());
+                        record.Add("funds_id", item[1].ToString());
+                        record.Add("fund_code", item[2].ToString());
+                        record.Add("fund_name", item[3].ToString());
+                        record.Add("fpp_id", item[4].ToString());
+                        record.Add("fpp_code", item[5].ToString());
+                        record.Add("fpp_name", item[6].ToString());
+                        record.Add("others_fpp_id", item[7].ToString());
+                        record.Add("others_fpp_name", item[8].ToString());
+                        record.Add("allotment_class_id", item[9].ToString());
+                        record.Add("allotment_class_code", item[10].ToString());
+                        record.Add("allotment_class_name", item[11].ToString());
+                        record.Add("general_ledger_accounts_id", item[12].ToString());
+                        record.Add("general_ledger_accounts_code", item[13].ToString());
+                        record.Add("account_code", item[14].ToString());
+                        record.Add("general_ledger_accounts_name", item[15].ToString());
+                        record.Add("date_entry", item[16].ToString());
+                        record.Add("year", item[17].ToString());
+                        record.Add("amount", item[18].ToString());
+                        record.Add("continuing", item[19].ToString());
+                        record.Add("created_at", item[20].ToString());
+                        record.Add("updated_at", item[21].ToString());
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
+        }
+
+
 
         #region Validations
 

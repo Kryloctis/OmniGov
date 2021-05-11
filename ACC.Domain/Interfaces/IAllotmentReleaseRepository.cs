@@ -16,7 +16,7 @@ namespace ACC.Domain.Interfaces
 
         decimal GetTotalAllotmentReleaseAmount(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int AccountId);
 
-        decimal GetViewTotalAllotmentReleaseAmountByYear(int budgetAppropriationId ,int fundId, int fppId, int? othersFPPId, int allotmentClassId, int accountId);
+        decimal GetViewTotalAllotmentReleaseAmountById(int budgetAppropriationId);
 
         bool allotmentReleaseExist(int budgetAppropriationId, string dateIssued);
 

@@ -330,29 +330,21 @@ namespace ACC.Data
             return false;
         }
 
-        public decimal GetViewTotalAllotmentReleaseAmountByYear(int budgetAppropriationId, int fundId, int fppId, int? othersFPPId, int allotmentClassId, int accountId)
+        public decimal GetViewTotalAllotmentReleaseAmountById(int budgetAppropriationId)
         {
             try
             {
                 var parameters = new object[][]
                 {
                     new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId },
-                    new object[] { "@fund_id", DbType.Int32, fundId},
-                    new object[] { "@fpp_id", DbType.Int32,  fppId},
-                    new object[] { "@others_fpp_id", DbType.String, othersFPPId },
-                    new object[] { "@allotment_class_id", DbType.String, allotmentClassId},
-                    new object[] { "@gen_ledger_acc_id", DbType.Int32, accountId },
                 };
 
                 string query = $"SELECT " +
-                    $"COALESCE(SUM(allotment_release_amount), 0) AS total_allotment_amount " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE budget_appropriations_id = @budget_appropriations_id " +
-                    $"AND fund_id = @fund_id " +
-                    $"AND fpp_id = @fpp_id " +
-                    $"AND others_fpp_id <=> @others_fpp_id " +
-                    $"AND allotment_class_id = @allotment_class_id " +
-                    $"AND gen_ledger_acc_id = @gen_ledger_acc_id " ;
+                    $"COALESCE(SUM(amount), 0) AS total_allotment_amount " +
+                    $"FROM {tableName} " +
+                    $"WHERE " +
+                    $"budget_appropriations_id = @budget_appropriations_id ";
+
 
                 return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
             }

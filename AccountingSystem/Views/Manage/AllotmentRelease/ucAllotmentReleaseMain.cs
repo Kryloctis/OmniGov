@@ -128,13 +128,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                dgAllotmentRelease.Columns.Add("budget_appropriation_id", "");
+                dgAllotmentRelease.Columns.Add("budget_appropriation_id", "Budget Appropriations ID");
                 dgAllotmentRelease.Columns.Add("account_name", "Account Name");
                 dgAllotmentRelease.Columns.Add("account_code", "Account Code");
                 dgAllotmentRelease.Columns.Add("allotment_amount", "Amount");
 
                 //Cell Format
                 dgAllotmentRelease.Columns["budget_appropriation_id"].Visible = false;
+                dgAllotmentRelease.Columns["account_name"].Width = 300;
                 dgAllotmentRelease.Columns["account_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgAllotmentRelease.Columns["account_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgAllotmentRelease.Columns["allotment_amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -196,6 +197,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 LoadFPPCombobox();
                 LoadDatagridFormat();
 
+                nudYear.Value = DateTime.Now.Year;
                 cmbxOthersFPP.Enabled = false;
                 btnRemove.Enabled = false;
             }
@@ -251,45 +253,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
         }
 
-        #region Custom Validation Controls
-
-        private bool ShowErrorFPPNameNotExist(ErrorProvider ep, ComboBox comboBox)
-        {
-            try
-            {
-                bool fppNameExist = Factory.FunctionProgramProjectRepository().NameExist(cmbxFPP.Text);
-
-                if (!fppNameExist && !string.IsNullOrEmpty(comboBox.Text))
-                {
-                    ep.SetError(comboBox, "FPP you entered, Doesn't exist in yout record.");
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private bool ShowErrorOtherFPPNameNotExist(ErrorProvider ep, ComboBox comboBox)
-        {
-            try
-            {
-                bool otherFPPName = Factory.OthersFPPRepository().NameExist(cmbxOthersFPP.Text);
-
-                if (!otherFPPName && !string.IsNullOrEmpty(comboBox.Text))
-                {
-                    ep.SetError(comboBox, "Other FPP you entered. Doesn't exist in yout record.");
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
 
         private string GetFormErrorsOnAdd() 
         {
@@ -336,6 +299,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 uc.fundId = fundId;
                 uc.allotmentClassId = Convert.ToInt32(allotmentClassId);
                 uc.dateIssued = dtDateIssued.Value;
+                uc.year = Convert.ToInt16(nudYear.Value);
 
                 allotmentReleaseAddForm.ShowDialog();
 
@@ -352,23 +316,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             ShowAllotmentReleaseAdd();
         }
-
-        private bool ShowErrorSeriesNo(ErrorProvider ep, MaskedTextBox maskedTxtSeriesNo, MaskedTextBox maskedTxtYear)
-        {
-            try
-            {
-                if (!maskedTxtSeriesNo.MaskCompleted)
-                {
-                    ep.SetError(maskedTxtYear, "Series No. is required.");
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
+  
 
         internal bool ShowErrorAllotmentReleaseListEmpty() 
         {
@@ -387,10 +335,26 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return false;
         }
 
-        #endregion Custom Validation Controls
 
 
-        #region Validations
+        private bool ShowErrorFPPNameNotExist(ErrorProvider ep, ComboBox comboBox)
+        {
+            try
+            {
+                bool fppNameExist = Factory.FunctionProgramProjectRepository().NameExist(cmbxFPP.Text);
+
+                if (!fppNameExist && !string.IsNullOrEmpty(comboBox.Text))
+                {
+                    ep.SetError(comboBox, "FPP you entered, Doesn't exist in yout record.");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
 
         private void cmbxFPP_Validating(object sender, CancelEventArgs e)
         {
@@ -405,6 +369,27 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             Helper.ClearErrorComboBox(epFPP, cmbxFPP);
         }
 
+
+
+        private bool ShowErrorOtherFPPNameNotExist(ErrorProvider ep, ComboBox comboBox)
+        {
+            try
+            {
+                bool otherFPPName = Factory.OthersFPPRepository().NameExist(cmbxOthersFPP.Text);
+
+                if (!otherFPPName && !string.IsNullOrEmpty(comboBox.Text))
+                {
+                    ep.SetError(comboBox, "Other FPP you entered. Doesn't exist in yout record.");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
         private void cmbxOthersFPP_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = ShowErrorOtherFPPNameNotExist(epOthersFPP, cmbxOthersFPP);
@@ -413,6 +398,25 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private void cmbxOthersFPP_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(epOthersFPP, cmbxOthersFPP);
+        }
+
+
+
+        private bool ShowErrorSeriesNo(ErrorProvider ep, MaskedTextBox maskedTxtSeriesNo, MaskedTextBox maskedTxtYear)
+        {
+            try
+            {
+                if (!maskedTxtSeriesNo.MaskCompleted)
+                {
+                    ep.SetError(maskedTxtYear, "Series No. is required.");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
         }
 
         private void mskSeriesNo_Validating(object sender, CancelEventArgs e)
@@ -444,8 +448,5 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             Helper.ClearErrorTextBox(epPurpose, txtPurpose);
         }
-
-        #endregion Validations
-
     }
 }
