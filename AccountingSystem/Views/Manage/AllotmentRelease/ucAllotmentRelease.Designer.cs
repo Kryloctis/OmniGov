@@ -159,6 +159,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.cmbxAccount.Name = "cmbxAccount";
             this.cmbxAccount.Size = new System.Drawing.Size(419, 23);
             this.cmbxAccount.TabIndex = 1;
+            this.cmbxAccount.SelectionChangeCommitted += new System.EventHandler(this.cmbxAccount_SelectionChangeCommitted);
+            this.cmbxAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxAccount_KeyDown);
             this.cmbxAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAccount_Validating);
             this.cmbxAccount.Validated += new System.EventHandler(this.cmbxAccount_Validated);
             // 
@@ -184,7 +186,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.Controls.Add(this.label1);
             this.Name = "ucAllotmentRelease";
             this.Size = new System.Drawing.Size(542, 141);
-            this.Load += new System.EventHandler(this.ucAllotmentRelease_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
             this.groupBox1.ResumeLayout(false);

@@ -140,12 +140,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
             var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationID);
 
-            int fundId = Convert.ToInt32(budgetAppropriationRepo["funds_id"]);
-            int fppId = Convert.ToInt32(budgetAppropriationRepo["function_program_project_id"]);
-            int? othersFPPId = string.IsNullOrEmpty(budgetAppropriationRepo["others_fpp_id"]) ? null : Convert.ToInt32(budgetAppropriationRepo["others_fpp_id"]);
-            int allotmentClassId = Convert.ToInt32(budgetAppropriationRepo["allotment_classes_id"]);
-            int genLedgetAccountId = Convert.ToInt32(budgetAppropriationRepo["general_ledger_accounts_id"]);
-
             //Get Total Appropriation
             decimal appropriationAmount = Convert.ToDecimal(budgetAppropriationRepo["amount"]);
 
@@ -154,11 +148,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
             decimal totalAppropriationAmount = appropriationAmount + supplementalAppropriationAmount;
 
-
             decimal totalAllotmentReleaseAmount = Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountById(budgetAppropriationID);
+
 
             //Get Appropriation Balance
             decimal appropriationBalance = totalAppropriationAmount - totalAllotmentReleaseAmount;
+
 
             string errorText = "The amount you entered exceeds the appropriate balance \n or on the effective date of supplemental."; 
 
