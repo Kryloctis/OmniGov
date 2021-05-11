@@ -31,7 +31,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.btnAddToList = new System.Windows.Forms.Button();
             this.ucAllotmentRelease1 = new AccountingSystem.Views.Manage.AllotmentRelease.ucAllotmentRelease();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
-            this.flowLayoutPanel1.Controls.Add(this.btnSave);
+            this.flowLayoutPanel1.Controls.Add(this.btnAddToList);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 163);
@@ -57,15 +57,15 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // btnSave
+            // btnAddToList
             // 
-            this.btnSave.Location = new System.Drawing.Point(405, 3);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 1;
-            this.btnSave.Text = "Add to list";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnAddToList.Location = new System.Drawing.Point(405, 3);
+            this.btnAddToList.Name = "btnAddToList";
+            this.btnAddToList.Size = new System.Drawing.Size(75, 23);
+            this.btnAddToList.TabIndex = 1;
+            this.btnAddToList.Text = "Add to list";
+            this.btnAddToList.UseVisualStyleBackColor = true;
+            this.btnAddToList.Click += new System.EventHandler(this.BtnAddToList_Click);
             // 
             // ucAllotmentRelease1
             // 
@@ -77,7 +77,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             // frmAllotmentReleaseAdd
             // 
-            this.AcceptButton = this.btnSave;
+            this.AcceptButton = this.btnAddToList;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
@@ -101,7 +101,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         #endregion
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         internal System.Windows.Forms.Button btnCancel;
-        internal System.Windows.Forms.Button btnSave;
+        internal System.Windows.Forms.Button btnAddToList;
         internal ucAllotmentRelease ucAllotmentRelease1;
     }
 }

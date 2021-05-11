@@ -44,18 +44,18 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.epARONo = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.nudYear = new System.Windows.Forms.NumericUpDown();
-            this.txtPurpose = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.dtDateIssued = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
-            this.mskYear = new System.Windows.Forms.MaskedTextBox();
-            this.mskSeriesNo = new System.Windows.Forms.MaskedTextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelAllotmentClass = new System.Windows.Forms.FlowLayoutPanel();
             this.epPurpose = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label3 = new System.Windows.Forms.Label();
+            this.mskYear = new System.Windows.Forms.MaskedTextBox();
+            this.mskSeriesNo = new System.Windows.Forms.MaskedTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtPurpose = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgAllotmentRelease)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
@@ -72,10 +72,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.dgAllotmentRelease.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dgAllotmentRelease.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgAllotmentRelease.Location = new System.Drawing.Point(6, 287);
+            this.dgAllotmentRelease.Location = new System.Drawing.Point(6, 297);
             this.dgAllotmentRelease.Name = "dgAllotmentRelease";
             this.dgAllotmentRelease.RowTemplate.Height = 25;
-            this.dgAllotmentRelease.Size = new System.Drawing.Size(537, 245);
+            this.dgAllotmentRelease.Size = new System.Drawing.Size(641, 236);
             this.dgAllotmentRelease.TabIndex = 7;
             this.dgAllotmentRelease.Tag = "";
             this.dgAllotmentRelease.SelectionChanged += new System.EventHandler(this.dgAllotmentRelease_SelectionChanged);
@@ -83,7 +83,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.Location = new System.Drawing.Point(387, 538);
+            this.btnAdd.Location = new System.Drawing.Point(491, 539);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 8;
@@ -94,7 +94,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // btnRemove
             // 
             this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemove.Location = new System.Drawing.Point(468, 538);
+            this.btnRemove.Location = new System.Drawing.Point(572, 539);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(75, 23);
             this.btnRemove.TabIndex = 10;
@@ -108,7 +108,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(0, 64);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(537, 53);
+            this.groupBox1.Size = new System.Drawing.Size(647, 53);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Fund";
@@ -119,7 +119,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.flowLayoutPanelFunds.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.flowLayoutPanelFunds.Location = new System.Drawing.Point(3, 19);
             this.flowLayoutPanelFunds.Name = "flowLayoutPanelFunds";
-            this.flowLayoutPanelFunds.Size = new System.Drawing.Size(531, 31);
+            this.flowLayoutPanelFunds.Size = new System.Drawing.Size(641, 31);
             this.flowLayoutPanelFunds.TabIndex = 2;
             // 
             // cmbxFPP
@@ -127,7 +127,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.cmbxFPP.FormattingEnabled = true;
             this.cmbxFPP.Location = new System.Drawing.Point(66, 6);
             this.cmbxFPP.Name = "cmbxFPP";
-            this.cmbxFPP.Size = new System.Drawing.Size(471, 23);
+            this.cmbxFPP.Size = new System.Drawing.Size(581, 23);
             this.cmbxFPP.TabIndex = 0;
             this.cmbxFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxFPP_Validating);
             this.cmbxFPP.Validated += new System.EventHandler(this.cmbxFPP_Validated);
@@ -146,7 +146,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.cmbxOthersFPP.FormattingEnabled = true;
             this.cmbxOthersFPP.Location = new System.Drawing.Point(66, 35);
             this.cmbxOthersFPP.Name = "cmbxOthersFPP";
-            this.cmbxOthersFPP.Size = new System.Drawing.Size(471, 23);
+            this.cmbxOthersFPP.Size = new System.Drawing.Size(581, 23);
             this.cmbxOthersFPP.TabIndex = 1;
             this.cmbxOthersFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxOthersFPP_Validating);
             this.cmbxOthersFPP.Validated += new System.EventHandler(this.cmbxOthersFPP_Validated);
@@ -175,29 +175,23 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // panel1
             // 
             this.panel1.Controls.Add(this.nudYear);
-            this.panel1.Controls.Add(this.txtPurpose);
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.dtDateIssued);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.mskYear);
-            this.panel1.Controls.Add(this.mskSeriesNo);
-            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.cmbxOthersFPP);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.cmbxFPP);
-            this.panel1.Location = new System.Drawing.Point(6, 0);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(560, 281);
+            this.panel1.Size = new System.Drawing.Size(673, 208);
             this.panel1.TabIndex = 0;
             // 
             // nudYear
             // 
-            this.nudYear.Location = new System.Drawing.Point(66, 208);
+            this.nudYear.Location = new System.Drawing.Point(66, 179);
             this.nudYear.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -217,91 +211,31 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             0,
             0});
             // 
-            // txtPurpose
-            // 
-            this.txtPurpose.Location = new System.Drawing.Point(66, 237);
-            this.txtPurpose.MaxLength = 200;
-            this.txtPurpose.Multiline = true;
-            this.txtPurpose.Name = "txtPurpose";
-            this.txtPurpose.Size = new System.Drawing.Size(471, 39);
-            this.txtPurpose.TabIndex = 6;
-            this.txtPurpose.Validating += new System.ComponentModel.CancelEventHandler(this.txtPurpose_Validating);
-            this.txtPurpose.Validated += new System.EventHandler(this.txtPurpose_Validated);
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(0, 210);
+            this.label7.Location = new System.Drawing.Point(3, 181);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(29, 15);
             this.label7.TabIndex = 38;
             this.label7.Text = "Year";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(-3, 240);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(50, 15);
-            this.label4.TabIndex = 38;
-            this.label4.Text = "Purpose";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(96, 182);
-            this.label3.Margin = new System.Windows.Forms.Padding(0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(12, 15);
-            this.label3.TabIndex = 37;
-            this.label3.Text = "-";
-            // 
             // dtDateIssued
             // 
-            this.dtDateIssued.Location = new System.Drawing.Point(340, 208);
+            this.dtDateIssued.Location = new System.Drawing.Point(431, 179);
             this.dtDateIssued.Name = "dtDateIssued";
-            this.dtDateIssued.Size = new System.Drawing.Size(197, 23);
+            this.dtDateIssued.Size = new System.Drawing.Size(216, 23);
             this.dtDateIssued.TabIndex = 5;
             this.dtDateIssued.ValueChanged += new System.EventHandler(this.dtDateIssued_ValueChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(267, 213);
+            this.label2.Location = new System.Drawing.Point(358, 181);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 15);
             this.label2.TabIndex = 34;
             this.label2.Text = "Date Issued";
-            // 
-            // mskYear
-            // 
-            this.mskYear.Location = new System.Drawing.Point(111, 179);
-            this.mskYear.Mask = "0000";
-            this.mskYear.Name = "mskYear";
-            this.mskYear.ReadOnly = true;
-            this.mskYear.Size = new System.Drawing.Size(41, 23);
-            this.mskYear.TabIndex = 40;
-            this.mskYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // mskSeriesNo
-            // 
-            this.mskSeriesNo.Location = new System.Drawing.Point(66, 179);
-            this.mskSeriesNo.Mask = "000";
-            this.mskSeriesNo.Name = "mskSeriesNo";
-            this.mskSeriesNo.Size = new System.Drawing.Size(27, 23);
-            this.mskSeriesNo.TabIndex = 4;
-            this.mskSeriesNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.mskSeriesNo.Validating += new System.ComponentModel.CancelEventHandler(this.mskSeriesNo_Validating);
-            this.mskSeriesNo.Validated += new System.EventHandler(this.mskSeriesNo_Validated);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(-3, 182);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 15);
-            this.label1.TabIndex = 33;
-            this.label1.Text = "ARO No.";
             // 
             // groupBox2
             // 
@@ -309,7 +243,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox2.Location = new System.Drawing.Point(0, 120);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(537, 53);
+            this.groupBox2.Size = new System.Drawing.Size(647, 53);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Allotment";
@@ -320,24 +254,90 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.flowLayoutPanelAllotmentClass.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.flowLayoutPanelAllotmentClass.Location = new System.Drawing.Point(3, 19);
             this.flowLayoutPanelAllotmentClass.Name = "flowLayoutPanelAllotmentClass";
-            this.flowLayoutPanelAllotmentClass.Size = new System.Drawing.Size(531, 31);
+            this.flowLayoutPanelAllotmentClass.Size = new System.Drawing.Size(641, 31);
             this.flowLayoutPanelAllotmentClass.TabIndex = 3;
             // 
             // epPurpose
             // 
             this.epPurpose.ContainerControl = this;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(96, 217);
+            this.label3.Margin = new System.Windows.Forms.Padding(0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(12, 15);
+            this.label3.TabIndex = 43;
+            this.label3.Text = "-";
+            // 
+            // mskYear
+            // 
+            this.mskYear.Location = new System.Drawing.Point(111, 214);
+            this.mskYear.Mask = "0000";
+            this.mskYear.Name = "mskYear";
+            this.mskYear.ReadOnly = true;
+            this.mskYear.Size = new System.Drawing.Size(41, 23);
+            this.mskYear.TabIndex = 44;
+            this.mskYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // mskSeriesNo
+            // 
+            this.mskSeriesNo.Location = new System.Drawing.Point(66, 214);
+            this.mskSeriesNo.Mask = "000";
+            this.mskSeriesNo.Name = "mskSeriesNo";
+            this.mskSeriesNo.Size = new System.Drawing.Size(27, 23);
+            this.mskSeriesNo.TabIndex = 41;
+            this.mskSeriesNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.mskSeriesNo.Validating += new System.ComponentModel.CancelEventHandler(this.mskSeriesNo_Validating);
+            this.mskSeriesNo.Validated += new System.EventHandler(this.mskSeriesNo_Validated);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 217);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 15);
+            this.label1.TabIndex = 42;
+            this.label1.Text = "ARO No.";
+            // 
+            // txtPurpose
+            // 
+            this.txtPurpose.Location = new System.Drawing.Point(66, 243);
+            this.txtPurpose.MaxLength = 200;
+            this.txtPurpose.Multiline = true;
+            this.txtPurpose.Name = "txtPurpose";
+            this.txtPurpose.Size = new System.Drawing.Size(581, 39);
+            this.txtPurpose.TabIndex = 45;
+            this.txtPurpose.Validating += new System.ComponentModel.CancelEventHandler(this.txtPurpose_Validating);
+            this.txtPurpose.Validated += new System.EventHandler(this.txtPurpose_Validated);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 246);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(50, 15);
+            this.label4.TabIndex = 46;
+            this.label4.Text = "Purpose";
+            // 
             // ucAllotmentReleaseMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.Controls.Add(this.txtPurpose);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.mskYear);
+            this.Controls.Add(this.mskSeriesNo);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.dgAllotmentRelease);
             this.Name = "ucAllotmentReleaseMain";
-            this.Size = new System.Drawing.Size(566, 562);
+            this.Size = new System.Drawing.Size(670, 562);
             this.Load += new System.EventHandler(this.ucAllotmentReleaseMain_Load);
             this.Validating += new System.ComponentModel.CancelEventHandler(this.ucAllotmentReleaseMain_Validating);
             this.Validated += new System.EventHandler(this.ucAllotmentReleaseMain_Validated);
@@ -352,6 +352,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.epPurpose)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -373,16 +374,16 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelAllotmentClass;
         internal System.Windows.Forms.Panel panel1;
         internal System.Windows.Forms.DataGridView dgAllotmentRelease;
-        internal System.Windows.Forms.TextBox txtPurpose;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         internal System.Windows.Forms.DateTimePicker dtDateIssued;
         private System.Windows.Forms.Label label2;
-        internal System.Windows.Forms.MaskedTextBox mskYear;
-        internal System.Windows.Forms.MaskedTextBox mskSeriesNo;
-        private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.ErrorProvider epPurpose;
         private System.Windows.Forms.Label label7;
         internal System.Windows.Forms.NumericUpDown nudYear;
+        internal System.Windows.Forms.TextBox txtPurpose;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        internal System.Windows.Forms.MaskedTextBox mskYear;
+        internal System.Windows.Forms.MaskedTextBox mskSeriesNo;
+        private System.Windows.Forms.Label label1;
     }
 }

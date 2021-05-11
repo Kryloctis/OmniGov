@@ -135,6 +135,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
                 //Cell Format
                 dgAllotmentRelease.Columns["budget_appropriation_id"].Visible = false;
+                dgAllotmentRelease.Columns["account_name"].Width = 300;
                 dgAllotmentRelease.Columns["account_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgAllotmentRelease.Columns["account_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgAllotmentRelease.Columns["allotment_amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -447,6 +448,5 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             Helper.ClearErrorTextBox(epPurpose, txtPurpose);
         }
-
     }
 }
