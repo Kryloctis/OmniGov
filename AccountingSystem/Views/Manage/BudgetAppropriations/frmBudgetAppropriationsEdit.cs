@@ -26,17 +26,6 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
             uc = ucBudgetAppropriations1;
         }
 
-        private void LoadComboboxes()
-        {
-            var uc = ucBudgetAppropriations1;
-            uc.LoadFPPRecords();
-            uc.LoadOtherFPPRecords();
-            uc.LoadAllotmentClassRecords();
-            uc.LoadGeneralLedgerAccounts();
-            uc.LoadTypeOfFund();
-            uc.ResetForm();
-        }
-
         private void LoadSelected() 
         {
             try
@@ -81,11 +70,10 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
         {
             try
             {
-                var uc = ucBudgetAppropriations1;
                 int? othersFPPId;
 
                 //Check Validation
-                if (!uc.ValidateChildren() || !string.IsNullOrEmpty(uc.epBudgetAppropriation.GetError(uc.cmbxTypeOfFund))) 
+                if (!uc.ValidateChildren()) 
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
@@ -122,8 +110,6 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
 
         private void frmBudgetAppropriationsEdit_Load(object sender, EventArgs e)
         {
-            var uc = ucBudgetAppropriations1;
-            LoadComboboxes();
             LoadSelected();
         }
 
@@ -131,8 +117,6 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
         {
             if (SaveData()) 
             {
-                var uc = ucBudgetAppropriations1;
-
                 //Initialze data references
                 int fppID = Convert.ToInt32(uc.cmbxFPP.SelectedValue);
                 int allotmentClassID = Convert.ToInt32(uc.cmbxAllotmentClass.SelectedValue);

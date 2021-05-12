@@ -15,32 +15,23 @@ namespace BudgetSystem.Views.BudgetAppropriations
 {
     public partial class frmBudgetAppropriationsAdd : Form
     {
+        
         private frmBudgetAppropriations _frmBudgetAppropriations;
+        private ucBudgetAppropriations uc;
+
         public frmBudgetAppropriationsAdd(frmBudgetAppropriations frmBudgetAppropriationsNew)
         {
             InitializeComponent();
             _frmBudgetAppropriations = frmBudgetAppropriationsNew;
-        }
-
-        private void LoadComboboxes()
-        {
-            var uc = ucBudgetAppropriations1;
-            uc.LoadFPPRecords();
-            uc.LoadOtherFPPRecords();
-            uc.LoadAllotmentClassRecords();
-            uc.LoadGeneralLedgerAccounts();
-            uc.LoadTypeOfFund();
-            uc.ResetForm();
-            uc.nudYear.Value = DateTime.Now.Year;
+            uc = ucBudgetAppropriations1;
         }
 
         private bool SaveData() 
         {
             try
             {
-                var uc = ucBudgetAppropriations1;
 
-                if (!uc.ValidateChildren() || !string.IsNullOrEmpty(uc.epBudgetAppropriation.GetError(uc.cmbxTypeOfFund)))
+                if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
@@ -71,8 +62,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            var uc = ucBudgetAppropriations1;
-
             //If Save data is successful
             if (SaveData()) 
             {
@@ -93,11 +82,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
                 Helper.MessageBoxSuccess("Budget Appropriation has been saved."); 
             }
-        }
-
-        private void frmBudgetAppropriationsAdd_Load(object sender, EventArgs e)
-        {
-            LoadComboboxes();
         }
     }
 }

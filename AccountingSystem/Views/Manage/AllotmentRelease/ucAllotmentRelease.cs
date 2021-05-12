@@ -41,32 +41,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        private bool ShowErrorAppropriationExistOnList()
-        {
-            try
-            {
-                int budgetAppropriationId = Convert.ToInt32(cmbxAccount.SelectedValue);
-
-                foreach (DataGridViewRow row in ucAllotmentMain.dgAllotmentRelease.Rows)
-                {
-                    int rowBudgetAppropriationId = Convert.ToInt32(row.Cells["budget_appropriation_id"].Value);
-                    bool budgetAppropriationIdExist = rowBudgetAppropriationId == budgetAppropriationId ? true : false;
-
-                    if (budgetAppropriationIdExist)
-                    {
-                        epAccount.SetError(cmbxAccount, "Account is already on the list.");
-                        return true;
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
         private void DisplayBudgetAppropriationsDetails()
         {
             try

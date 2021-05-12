@@ -445,16 +445,16 @@ namespace ACC.Data
 
         #region Validations
 
-        public bool BudgetAllotmentExist(int fundID, int FPPId, int? othersFPPId, int allotmentClassID, int generalLedgerAccountId, short year)
+        public bool BudgetAppropriationExist(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int generalLedgerAccountId, short year)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@funds_id", DbType.Int32, fundID},
-                    new object[] { "@function_program_project_id", DbType.Int32, FPPId},
+                    new object[] { "@funds_id", DbType.Int32, fundId},
+                    new object[] { "@function_program_project_id", DbType.Int32, fppId},
                     new object[] { "@others_fpp_id", DbType.String, othersFPPId },
-                    new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassID},
+                    new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId},
                     new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerAccountId},
                     new object[] { "@year",DbType.Int16, year}
                 };
@@ -473,22 +473,97 @@ namespace ACC.Data
             return false;
         }
          
-        public bool BudgetAllotmentExist(int id, int fundID, int FPPId, int? othersFPPId, int allotmentClassID, int generalLedgerAccountId, short year)
+        public bool BudgetAppropriationExist(int id, int fundId, int FPPId, int? othersFPPId, int allotmentClassId, int generalLedgerAccountId, short year)
         {
             try
             {
                 var parameters = new object[][]
                 {
                     new object[] { "@id", DbType.Int32, id},
-                    new object[] { "@funds_id", DbType.Int32, fundID},
+                    new object[] { "@funds_id", DbType.Int32, fundId},
                     new object[] { "@function_program_project_id", DbType.Int32, FPPId},
                     new object[] { "@others_fpp_id", DbType.String, othersFPPId },
-                    new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassID},
+                    new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId},
                     new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerAccountId},
                     new object[] { "@year",DbType.Int16, year}
                 };
 
                 string query = $"SELECT id FROM {tableName} WHERE id <> @id AND funds_id = @funds_id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND year = @year";
+                string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return false;
+        }
+
+
+        public bool BudgetAppropriationContinuing(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int generalLedgerAccountId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                new object[] { "@funds_id", DbType.Int32, fundId},
+                new object[] { "@function_program_project_id", DbType.Int32, fppId},
+                new object[] { "@others_fpp_id", DbType.String, othersFPPId },
+                new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId},
+                new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerAccountId},
+                };
+
+                string query = $"SELECT " +
+                    $"id " +
+                    $"FROM {tableName} " +
+                    $"WHERE funds_id = @funds_id " +
+                    $"AND function_program_project_id = @function_program_project_id " +
+                    $"AND others_fpp_id <=> @others_fpp_id " +
+                    $"AND allotment_classes_id = @allotment_classes_id " +
+                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
+                    $"AND continuing = 1";
+
+                string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return false;
+        }
+
+        public bool BudgetAppropriationContinuing(int id, int fundId, int fppId, int? othersFPPId, int allotmentClassId, int generalLedgerAccountId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, id},
+                    new object[] { "@funds_id", DbType.Int32, fundId},
+                    new object[] { "@function_program_project_id", DbType.Int32, fppId},
+                    new object[] { "@others_fpp_id", DbType.String, othersFPPId },
+                    new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId},
+                    new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerAccountId},
+                };
+
+                string query = $"SELECT " +
+                    $"id " +
+                    $"FROM {tableName} " +
+                    $"WHERE id <> @id " +
+                    $"AND funds_id = @funds_id " +
+                    $"AND function_program_project_id = @function_program_project_id " +
+                    $"AND others_fpp_id <=> @others_fpp_id " +
+                    $"AND allotment_classes_id = @allotment_classes_id " +
+                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
+                    $"AND continuing = 1";
+
                 string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
