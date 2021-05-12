@@ -29,9 +29,8 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[8];
+            var errorArray = new string[7];
 
-            ShowErrorBudgetAppropriationExist(epBudgetAppropriation, cmbxTypeOfFund);
             errorArray[0] = epTypeOfFund.GetError(cmbxTypeOfFund);
             errorArray[1] = epFunctionProgramProject.GetError(cmbxFPP);
             errorArray[2] = epOthersFunctionProgramProject.GetError(cmbxOthersFPP);
@@ -39,7 +38,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             errorArray[4] = epGeneralLedgerAcc.GetError(cmbxLedgerAccount);
             errorArray[5] = epYear.GetError(nudYear);
             errorArray[6] = epAmount.GetError(nudAmount);
-            errorArray[7] = epBudgetAppropriation.GetError(cmbxTypeOfFund);
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
@@ -161,52 +159,8 @@ namespace BudgetSystem.Views.BudgetAppropriations
             LoadGeneralLedgerAccounts();
         }
 
-        #region Custom ErrorProvider Controls
 
-        private bool ShowErrorBudgetAppropriationExist(ErrorProvider ep, ComboBox comboBox)
-        {
-            try
-            {
-                #region Validation of Budget Appropriration Record
-
-                int fundID = Convert.ToInt32(cmbxTypeOfFund.SelectedValue);
-                int FPPId = Convert.ToInt32(cmbxFPP.SelectedValue);
-                int? othersFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text.ToString()) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
-                int allotmentClassId = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
-                int generalLedgerAccId = Convert.ToInt32(cmbxLedgerAccount.SelectedValue);
-                short year = Convert.ToInt16(nudYear.Value);
-
-                bool budgetAppropriationExist;
-
-                if (budgetAppropriationId == 0)
-                {
-                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAllotmentExist(fundID, FPPId, othersFPPId, allotmentClassId, generalLedgerAccId, year);
-                }
-                else
-                {
-                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAllotmentExist(budgetAppropriationId, fundID, FPPId, othersFPPId, allotmentClassId, generalLedgerAccId, year);
-                }
-
-                if (budgetAppropriationExist)
-                {
-                    ep.SetError(comboBox, "Budget Appropriation you entered is not allowed. Already exist on your record.");
-                    return true;
-                }
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-
-        }
-
-        private void ClearErrorBugetAppropriationExist(ErrorProvider ep, ComboBox comboBox)
-        {
-            ep.SetError(comboBox, string.Empty);
-        }
+        //combobox fpp
 
         private bool ShowErrorFPPNameExist(ErrorProvider ep, ComboBox comboBox, string fieldText)
         {
@@ -225,6 +179,27 @@ namespace BudgetSystem.Views.BudgetAppropriations
             return false;
         }
 
+        private void cmbxFPP_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbxFPP.Text))
+            {
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epFunctionProgramProject, cmbxFPP, "Function Program Project");
+            }
+            else 
+            {
+                e.Cancel = ShowErrorFPPNameExist(epFunctionProgramProject, cmbxFPP, "Invalid FPP. Please select on the list.");
+            }
+        }
+
+        private void cmbxFPP_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epFunctionProgramProject, cmbxFPP);
+        }
+
+
+
+        //combobox others fpp 
+
         private bool ShowErrorOthersFPPNameExist(ErrorProvider ep, ComboBox comboBox, string fieldText)
         {
             try
@@ -241,6 +216,19 @@ namespace BudgetSystem.Views.BudgetAppropriations
             }
             return false;
         }
+
+        private void cmbxOthersFPP_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = ShowErrorOthersFPPNameExist(epOthersFunctionProgramProject, cmbxOthersFPP, "Invalid Others FPP. Please select on the list.");
+        }
+
+        private void cmbxOthersFPP_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epOthersFunctionProgramProject, cmbxOthersFPP);
+        }
+
+
+        //combobox allotment classes
 
         private bool ShowErrorAllotmentClassNameExist(ErrorProvider ep, ComboBox comboBox, string fieldText)
         {
@@ -259,63 +247,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             return false;
         }
 
-        private bool ShowErrorLedgerNameExist(ErrorProvider ep, ComboBox comboBox, string fieldText) 
-        {
-            try
-            {
-                if (!Factory.GeneralLedgerAccountsRepository().NameExist(cmbxLedgerAccount.Text))
-                {
-                    ep.SetError(comboBox, fieldText);
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        #endregion Custom ErrorProvider Controls
-
-
-        #region Validations
-
-        private void ucBudgetAppropriations_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = ShowErrorBudgetAppropriationExist(epBudgetAppropriation, cmbxTypeOfFund);
-        }
-
-        private void ucBudgetAppropriations_Validated(object sender, EventArgs e)
-        {
-            ClearErrorBugetAppropriationExist(epBudgetAppropriation, cmbxTypeOfFund);
-        }
-
-        private void cmbxFPP_Validating(object sender, CancelEventArgs e)
-        {
-            if (string.IsNullOrEmpty(cmbxFPP.Text))
-            {
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(epFunctionProgramProject, cmbxFPP, "Function Program Project");
-            }
-            else 
-            {
-                e.Cancel = ShowErrorFPPNameExist(epFunctionProgramProject, cmbxFPP, "Invalid FPP. Please select on the list.");
-            }
-        }
-        private void cmbxFPP_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(epFunctionProgramProject, cmbxFPP);
-        }
-
-        private void cmbxOthersFPP_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = ShowErrorOthersFPPNameExist(epOthersFunctionProgramProject, cmbxOthersFPP, "Invalid Others FPP. Please select on the list.");
-        }
-        private void cmbxOthersFPP_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(epOthersFunctionProgramProject, cmbxOthersFPP);
-        }
-
         private void cmbxAllotmentClass_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(cmbxAllotmentClass.Text))
@@ -327,27 +258,127 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 e.Cancel = ShowErrorAllotmentClassNameExist(epAllotmentClass, cmbxAllotmentClass, "Invalid Allotment Class. Please select on the list.");
             }
         }
+
         private void cmbxAllotmentClass_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(epAllotmentClass, cmbxAllotmentClass);
         }
 
+        //combobox account
+
+        private bool ShowErrorLedgerNameExist()
+        {
+            try
+            {
+                if (!Factory.GeneralLedgerAccountsRepository().NameExist(cmbxLedgerAccount.Text))
+                {
+                    epGeneralLedgerAcc.SetError(cmbxLedgerAccount, "Invalid General Ledger Account. Please select on the list.");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private bool ShowErrorBudgetAppropriationContinuing()
+        {
+            try
+            {
+
+                int fundID = Convert.ToInt32(cmbxTypeOfFund.SelectedValue);
+                int FPPId = Convert.ToInt32(cmbxFPP.SelectedValue);
+                int? othersFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text.ToString()) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
+                int allotmentClassId = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
+                int generalLedgerAccId = Convert.ToInt32(cmbxLedgerAccount.SelectedValue);
+
+
+                bool budgetAppropriationExist;
+
+                if (budgetAppropriationId == 0)
+                {
+                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(fundID, FPPId, othersFPPId, allotmentClassId, generalLedgerAccId);
+                }
+                else
+                {
+                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(budgetAppropriationId, fundID, FPPId, othersFPPId, allotmentClassId, generalLedgerAccId);
+                }
+
+                if (budgetAppropriationExist)
+                {
+                    epGeneralLedgerAcc.SetError(cmbxLedgerAccount, "Account you entered is not allowed. Account has continuing appropriation already exist on your record.");
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private bool ShowErrorBudgetAppropriationExist()
+        {
+            try
+            {
+                #region Validation of Budget Appropriration Record
+
+                int fundID = Convert.ToInt32(cmbxTypeOfFund.SelectedValue);
+                int FPPId = Convert.ToInt32(cmbxFPP.SelectedValue);
+                int? othersFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text.ToString()) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
+                int allotmentClassId = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
+                int generalLedgerAccId = Convert.ToInt32(cmbxLedgerAccount.SelectedValue);
+                short year = Convert.ToInt16(nudYear.Value);
+
+                bool budgetAppropriationExist;
+
+                if (budgetAppropriationId == 0)
+                {
+                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationExist(fundID, FPPId, othersFPPId, allotmentClassId, generalLedgerAccId, year);
+                }
+                else
+                {
+                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationExist(budgetAppropriationId, fundID, FPPId, othersFPPId, allotmentClassId, generalLedgerAccId, year);
+                }
+
+                if (budgetAppropriationExist)
+                {
+                    epGeneralLedgerAcc.SetError(cmbxLedgerAccount, "Account you entered is not allowed. Budget appropriation already exist on your record.");
+                    return true;
+                }
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+
+        }
+
         private void cmbxLedgerAccount_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(cmbxLedgerAccount.Text))
-            {
                 e.Cancel = Helper.ShowErrorComboBoxEmpty(epGeneralLedgerAcc, cmbxLedgerAccount, "General Ledger Account");
-            }
+            else if (ShowErrorLedgerNameExist())
+                e.Cancel = ShowErrorLedgerNameExist();
+            else if(ShowErrorBudgetAppropriationContinuing())
+                e.Cancel = ShowErrorBudgetAppropriationContinuing();
             else
-            {
-                e.Cancel = ShowErrorLedgerNameExist(epGeneralLedgerAcc, cmbxLedgerAccount, "Invalid General Ledger Account. Please select on the list.");
-            }
+                e.Cancel = ShowErrorBudgetAppropriationExist();
         }
+
         private void cmbxLedgerAccount_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(epGeneralLedgerAcc, cmbxLedgerAccount);
         }
 
+
+        //numeric up down amounts
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
 
@@ -372,30 +403,33 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 e.Cancel = true;
             }
         }
+
         private void nudAmount_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
 
+        //numeric up down year
         private void nudYear_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epYear, nudYear, "Year");
         }
+
         private void nudYear_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorNumericUpDown(epYear, nudYear);
         }
 
+        //combobox funds
         private void cmbxTypeOfFund_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(epTypeOfFund, cmbxTypeOfFund, "Type of Fund");
         }
+
         private void cmbxTypeOfFund_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(epTypeOfFund, cmbxTypeOfFund);
         }
-
-        #endregion Validations
 
     }
 }

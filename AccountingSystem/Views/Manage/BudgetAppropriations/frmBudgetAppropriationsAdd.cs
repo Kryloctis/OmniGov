@@ -40,7 +40,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             {
                 var uc = ucBudgetAppropriations1;
 
-                if (!uc.ValidateChildren() || !string.IsNullOrEmpty(uc.epBudgetAppropriation.GetError(uc.cmbxTypeOfFund)))
+                if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
