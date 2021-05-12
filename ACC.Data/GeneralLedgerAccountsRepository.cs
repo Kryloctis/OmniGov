@@ -211,6 +211,39 @@ namespace ACC.Data
             }
             return false;
         }
+    
+
+        public DataTable GetAllViewRecords()
+        {
+            try
+            {
+                string query = $"SELECT " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_group_id, " +
+                    $"account_group_code, " +
+                    $"account_group_name, " +
+                    $"major_account_group_id, " +
+                    $"maj_acc_group_code, " +
+                    $"maj_acc_group_name, " +
+                    $"sub_maj_acc_group_code, " +
+                    $"sub_maj_acc_group_name, " +
+                    $"sub_major_account_group_id, " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_code, " +
+                    $"ledger_code, " +
+                    $"ledger_name, " +
+                    $"is_contra_account, " +
+                    $"created_at, " +
+                    $"updated_at FROM {viewTableName}";
+
+                var dtJournals = new DataTable();
+                return _dbGenericCommands.Fill(query, dtJournals);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public DataTable GetViewRecordsByMajAccGroupName(string majAccGroupName)
         {
@@ -224,6 +257,7 @@ namespace ACC.Data
 
 
                 string query = $"SELECT " +
+                    $"general_ledger_accounts_id, " +
                     $"account_group_id, " +
                     $"account_group_code, " +
                     $"account_group_name, " +
@@ -245,7 +279,7 @@ namespace ACC.Data
                     $"maj_acc_group_name = @maj_acc_group_name";
 
                 var dtJournals = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtJournals,parameters);
+                return _dbGenericCommands.FillBySearch(query, dtJournals, parameters);
             }
             catch (Exception)
             {
@@ -253,14 +287,43 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetAllViewRecords()
+        public DataTable GetViewRecordsByMajAccGroupNameSearch(string majAccGroupName, string searchText)
         {
             try
             {
-                string query = $"SELECT account_group_id, account_group_code, account_group_name, major_account_group_id, maj_acc_group_code, maj_acc_group_name, sub_maj_acc_group_code, sub_maj_acc_group_name, sub_major_account_group_id, general_ledger_accounts_id, account_code, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {viewTableName}";
+                var parameters = new object[][]
+                {
+                    new object[] { "@maj_acc_group_name", DbType.String, majAccGroupName},
+                    new object[] { "@searchText", DbType.String, $"%{searchText}%" }
+                };
+
+
+                string query = $"SELECT " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_group_id, " +
+                    $"account_group_code, " +
+                    $"account_group_name, " +
+                    $"major_account_group_id, " +
+                    $"maj_acc_group_code, " +
+                    $"maj_acc_group_name, " +
+                    $"sub_maj_acc_group_code, " +
+                    $"sub_maj_acc_group_name, " +
+                    $"sub_major_account_group_id, " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_code, " +
+                    $"ledger_code, " +
+                    $"ledger_name, " +
+                    $"is_contra_account, " +
+                    $"created_at, " +
+                    $"updated_at " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE " +
+                    $"maj_acc_group_name = @maj_acc_group_name " +
+                    $"AND (account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText " +
+                    $"OR ledger_name LIKE @searchText)";
 
                 var dtJournals = new DataTable();
-                return _dbGenericCommands.Fill(query, dtJournals);
+                return _dbGenericCommands.FillBySearch(query, dtJournals, parameters);
             }
             catch (Exception)
             {

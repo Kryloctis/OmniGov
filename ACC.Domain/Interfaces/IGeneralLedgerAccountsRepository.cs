@@ -15,9 +15,11 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecordsBySearch(string searchText);
 
         //Budget System
+        DataTable GetAllViewRecords();
+
         DataTable GetViewRecordsByMajAccGroupName(string majAccGroupName);
 
-        DataTable GetAllViewRecords();
+        DataTable GetViewRecordsByMajAccGroupNameSearch(string majAccGroupName, string searchText);
 
         bool NameExist(string txtName);
 

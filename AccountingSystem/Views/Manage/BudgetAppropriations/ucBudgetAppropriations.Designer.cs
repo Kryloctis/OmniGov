@@ -72,7 +72,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.cmbxFPP.Name = "cmbxFPP";
             this.cmbxFPP.Size = new System.Drawing.Size(436, 23);
             this.cmbxFPP.TabIndex = 3;
-            this.cmbxFPP.SelectedValueChanged += new System.EventHandler(this.cmbxFPP_SelectedValueChanged);
             this.cmbxFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxFPP_Validating);
             this.cmbxFPP.Validated += new System.EventHandler(this.cmbxFPP_Validated);
             // 
@@ -111,9 +110,8 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.cmbxAllotmentClass.Name = "cmbxAllotmentClass";
             this.cmbxAllotmentClass.Size = new System.Drawing.Size(436, 23);
             this.cmbxAllotmentClass.TabIndex = 5;
-            this.cmbxAllotmentClass.SelectedValueChanged += new System.EventHandler(this.cmbxAllotmentClass_SelectedValueChanged);
             this.cmbxAllotmentClass.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAllotmentClass_Validating);
-            this.cmbxAllotmentClass.Validated += new System.EventHandler(this.cmbxAllotmentClass_Validated);
+            this.cmbxAllotmentClass.Validated += new System.EventHandler(this.CmbxAllotmentClass_Validated);
             // 
             // label3
             // 
@@ -132,6 +130,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.cmbxLedgerAccount.Name = "cmbxLedgerAccount";
             this.cmbxLedgerAccount.Size = new System.Drawing.Size(436, 23);
             this.cmbxLedgerAccount.TabIndex = 6;
+            this.cmbxLedgerAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxLedgerAccount_KeyDown);
             this.cmbxLedgerAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxLedgerAccount_Validating);
             this.cmbxLedgerAccount.Validated += new System.EventHandler(this.cmbxLedgerAccount_Validated);
             // 
@@ -300,6 +299,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.Controls.Add(this.cmbxFPP);
             this.Name = "ucBudgetAppropriations";
             this.Size = new System.Drawing.Size(600, 252);
+            this.Load += new System.EventHandler(this.ucBudgetAppropriations_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFunctionProgramProject)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFunctionProgramProject)).EndInit();
