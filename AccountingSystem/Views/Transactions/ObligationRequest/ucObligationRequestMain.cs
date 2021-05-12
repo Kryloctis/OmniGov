@@ -222,6 +222,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
                 //Cell Format
                 dgObligationRequests.Columns["accountId"].Visible = false;
+                dgObligationRequests.Columns["accountName"].Width = 300;
                 dgObligationRequests.Columns["accountName"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgObligationRequests.Columns["accountCode"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgObligationRequests.Columns["obligationAmount"].SortMode = DataGridViewColumnSortMode.NotSortable;
