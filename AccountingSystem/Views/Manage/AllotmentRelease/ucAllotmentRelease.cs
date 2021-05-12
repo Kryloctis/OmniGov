@@ -94,6 +94,93 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         }
 
 
+        private void LoadAccounts()
+        {
+            try
+            {
+
+                var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
+
+                string allotmentClassName = allotmentClassRepo["allotment_name"];
+
+                DataTable dtAccounts;
+
+                if (allotmentClassId == 4)
+                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsBySearch(cmbxAccount.Text);
+                else
+                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajAccGroupNameSearch(allotmentClassName, cmbxAccount.Text);
+
+                var accountDict = new Dictionary<int, string>();
+                foreach (DataRow item in dtAccounts.Rows)
+                {
+                    int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
+                    string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
+
+                    accountDict.Add(accountId, accountName);
+                }
+
+                cmbxAccount.DataSource = new BindingSource(accountDict, null);
+                cmbxAccount.DisplayMember = "value";
+                cmbxAccount.ValueMember = "key";
+                cmbxAccount.SelectedIndex = -1;
+
+                Helper.ClearErrorComboBox(epAccount, cmbxAccount);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void cmbxAccount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (cmbxAccount.Text.Length < 4) return;
+
+            if (e.KeyCode == Keys.F1)
+            {
+                try
+                {
+                    var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
+
+                    string allotmentClassName = allotmentClassRepo["allotment_name"];
+
+                    DataTable dtAccounts;
+
+                    if (allotmentClassId == 4)
+                        dtAccounts = Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsBySearch(cmbxAccount.Text);
+                    else
+                        dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajAccGroupNameSearch(allotmentClassName, cmbxAccount.Text);
+
+                    if (dtAccounts.Rows.Count == 0 || string.IsNullOrWhiteSpace(cmbxAccount.Text.Trim())) return;
+
+                    var accountDict = new Dictionary<int, string>();
+                    foreach (DataRow item in dtAccounts.Rows)
+                    {
+                        int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
+                        string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
+
+                        accountDict.Add(accountId, accountName);
+                    }
+
+                    cmbxAccount.DataSource = new BindingSource(accountDict, null);
+                    cmbxAccount.DisplayMember = "value";
+                    cmbxAccount.ValueMember = "key";
+                    cmbxAccount.DroppedDown = true;
+
+                    Helper.ClearErrorComboBox(epAccount, cmbxAccount);
+                }
+                catch (Exception ex)
+                {
+                    Helper.MessageBoxError(ex.Message);
+                }
+            }
+        }
+
+        private void cmbxAccount_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            DisplayBudgetAppropriationsDetails();
+        }
+
         private bool ShowErrorAccountNotExist()
         {
             try
@@ -195,44 +282,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
 
-        private void cmbxAccount_KeyDown(object sender, KeyEventArgs e)
+        private void ucAllotmentRelease_Load(object sender, EventArgs e)
         {
-            if (cmbxAccount.Text.Length < 4) return;
-
-            if (e.KeyCode == Keys.F1)
+            if (!DesignMode)
             {
-                try
-                {
-                    DataTable dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbxAccount.Text.Trim());
-
-                    if (dtAccounts.Rows.Count == 0 || string.IsNullOrWhiteSpace(cmbxAccount.Text.Trim())) return;
-
-                    var accountDict = new Dictionary<int, string>();
-                    foreach (DataRow item in dtAccounts.Rows)
-                    {
-                        int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
-                        string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
-
-                        accountDict.Add(accountId, accountName);
-                    }
-                  
-                    cmbxAccount.DataSource = new BindingSource(accountDict, null);
-                    cmbxAccount.DisplayMember = "value";
-                    cmbxAccount.ValueMember = "key";
-                    cmbxAccount.DroppedDown = true;
-
-                    Helper.ClearErrorComboBox(epAccount, cmbxAccount);
-                }
-                catch (Exception ex)
-                {
-                    Helper.MessageBoxError(ex.Message);
-                }
+                LoadAccounts();
             }
-        }
-
-        private void cmbxAccount_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            DisplayBudgetAppropriationsDetails();
         }
     }
 }
