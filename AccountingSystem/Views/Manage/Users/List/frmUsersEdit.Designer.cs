@@ -99,6 +99,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinimumSize = new System.Drawing.Size(466, 257);
             this.Name = "frmUsersEdit";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit User";
             this.Load += new System.EventHandler(this.frmUsersEdit_Load);

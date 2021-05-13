@@ -99,6 +99,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinimumSize = new System.Drawing.Size(501, 289);
             this.Name = "frmUsersAdd";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add User";
             this.Load += new System.EventHandler(this.frmUsersAdd_Load_1);
