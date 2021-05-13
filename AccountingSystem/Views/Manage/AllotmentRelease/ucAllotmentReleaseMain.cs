@@ -129,12 +129,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             try
             {
                 dgAllotmentRelease.Columns.Add("budget_appropriation_id", "Budget Appropriations ID");
+                dgAllotmentRelease.Columns.Add("account_id", "Account ID");
                 dgAllotmentRelease.Columns.Add("account_name", "Account Name");
                 dgAllotmentRelease.Columns.Add("account_code", "Account Code");
                 dgAllotmentRelease.Columns.Add("allotment_amount", "Amount");
 
                 //Cell Format
                 dgAllotmentRelease.Columns["budget_appropriation_id"].Visible = false;
+                dgAllotmentRelease.Columns["account_id"].Visible = false;
                 dgAllotmentRelease.Columns["account_name"].Width = 300;
                 dgAllotmentRelease.Columns["account_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgAllotmentRelease.Columns["account_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -197,7 +199,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 LoadFPPCombobox();
                 LoadDatagridFormat();
 
-                nudYear.Value = DateTime.Now.Year;
                 cmbxOthersFPP.Enabled = false;
                 btnRemove.Enabled = false;
             }
@@ -299,7 +300,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 uc.fundId = fundId;
                 uc.allotmentClassId = Convert.ToInt32(allotmentClassId);
                 uc.dateIssued = dtDateIssued.Value;
-                uc.year = Convert.ToInt16(nudYear.Value);
 
                 allotmentReleaseAddForm.ShowDialog();
 

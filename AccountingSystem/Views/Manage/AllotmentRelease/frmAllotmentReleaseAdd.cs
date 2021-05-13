@@ -32,15 +32,17 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                if (!uc.ValidateChildren() || uc.AllotmentReleaseExist())
+                if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
 
-                int generalLedgerAccountId = Convert.ToInt32(uc.cmbxAccount.SelectedValue);
 
-                var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetViewRecord(uc.fppID, uc.othersFPPId, uc.fundId, uc.allotmentClassId, generalLedgerAccountId, uc.dateIssued, uc.year);
+                short year = (short)uc.nudYear.Value;
+                int accountId = Convert.ToInt32(uc.cmbxAccount.SelectedValue);
+
+                var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetViewRecord(uc.fppID, uc.othersFPPId, uc.fundId, uc.allotmentClassId, accountId, uc.dateIssued, year);
 
                 int budgetAppropriationId = Convert.ToInt32(budgetAppropriationRepo["id"]);
 
@@ -51,6 +53,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 ucAllotmentReleaseMain.dgAllotmentRelease.Rows.Add(new object[]
                 {
                     budgetAppropriationId,
+                    accountId,
                     accountCode,
                     accountName,
                     amount
@@ -71,6 +74,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             {
                 Close();
                 ucAllotmentReleaseMain.panel1.Enabled = false;
+                ucAllotmentReleaseMain.dtDateIssued.Enabled = false;
             }
         }
     }
