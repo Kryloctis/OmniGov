@@ -58,7 +58,7 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Manage Allotment Classes"))
                 menuAllotmentClasses.Visible = false;
 
-            if (!Helper.HasPermission("Manage Budget Appropriations") && !Helper.HasPermission("Manage Allotment Realeases"))
+            if (!Helper.HasPermission("Manage Budget Appropriations") && !Helper.HasPermission("Manage Allotment Releases"))
                 menuBudgetAppropriation.Visible = false;
 
             if (!Helper.HasPermission("Manage Chart of Accounts")) 
