@@ -9,12 +9,10 @@ namespace AccountingSystem.Views.Manage.Users.Roles
     public partial class ucRoles : UserControl
     {
         internal byte roleId = 0;
-        private readonly Dictionary<string, string> userDict;
 
         public ucRoles()
         {
             InitializeComponent();
-            userDict = Helper.LoggedInUserData();
         }
 
         internal string GetFormErrors()
@@ -52,6 +50,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                 dgPermissions.Rows.Clear();
 
                 var dtPermissions = new DataTable();
+                var userDict = Helper.LoggedInUserData();
 
                 if (userDict["office"] == "SysAdmin")
                     dtPermissions = Factory.PermissionsRepository().GetRecords();
@@ -76,6 +75,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
         internal void LoadOffice()
         {
+            var userDict = Helper.LoggedInUserData();
             switch (userDict["office"])
             {
                 case "SysAdmin":
