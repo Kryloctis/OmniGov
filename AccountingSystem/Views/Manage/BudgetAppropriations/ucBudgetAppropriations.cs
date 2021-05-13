@@ -361,7 +361,13 @@ namespace BudgetSystem.Views.BudgetAppropriations
             try
             {
                 string accountGroupName = cmbxAllotmentClass.Text;
-                DataTable dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajAccGroupName(accountGroupName);
+
+                DataTable dtAccounts;
+
+                if (Convert.ToInt32(cmbxAllotmentClass.SelectedValue) == 4)
+                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsBySearch(cmbxLedgerAccount.Text);
+                else
+                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajAccGroupNameSearch(cmbxAllotmentClass.Text, cmbxLedgerAccount.Text);
 
                 var accountDict = new Dictionary<int, string>();
                 foreach (DataRow item in dtAccounts.Rows)
@@ -396,7 +402,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
                     DataTable dtAccounts;
 
                     if (Convert.ToInt32(cmbxAllotmentClass.SelectedValue) == 4)
-                        dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbxLedgerAccount.Text);
+                        dtAccounts = Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsBySearch(cmbxLedgerAccount.Text);
                     else
                         dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajAccGroupNameSearch(cmbxAllotmentClass.Text, cmbxLedgerAccount.Text);
 

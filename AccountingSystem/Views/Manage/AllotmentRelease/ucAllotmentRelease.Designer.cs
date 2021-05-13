@@ -186,6 +186,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.Controls.Add(this.label1);
             this.Name = "ucAllotmentRelease";
             this.Size = new System.Drawing.Size(542, 141);
+            this.Load += new System.EventHandler(this.ucAllotmentRelease_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
             this.groupBox1.ResumeLayout(false);
