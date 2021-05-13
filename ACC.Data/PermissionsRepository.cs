@@ -62,22 +62,6 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetAddedPermissions(int currentRoleId)
-        {
-            try
-            {
-                var roleId = currentRoleId;
-                string query = $"SELECT distinct permissions.permission_name from role_has_permissions inner join permissions on permissions.id = role_has_permissions.permissions_id join roles on role_has_permissions.roles_id = roles.id where permissions.id = role_has_permissions.permissions_id and roles.id ='" + roleId + "'";
-
-                var dtPermissions = new DataTable();
-                return _dbGenericCommands.Fill(query, dtPermissions);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         public DataTable GetRecordsBySearch(string searchText)
         {
             try
@@ -223,7 +207,25 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        
+        public DataTable GetRecordsByOffice(string officeName)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@officeName", DbType.String, $"%{officeName}%" },
+                };
+
+                string query = $"SELECT * FROM {tableName} WHERE permission_office = 'All' AND permission_office = @officeName";
+
+                var dtGeneralLedgers = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
 

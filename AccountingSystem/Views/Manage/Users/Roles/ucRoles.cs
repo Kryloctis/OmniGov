@@ -46,7 +46,17 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         {
             try
             {
-                var dtPermissions = Factory.PermissionsRepository().GetRecords();
+                dgPermissions.DataSource = null;
+                dgPermissions.Rows.Clear();
+
+                var dtPermissions = new DataTable();
+                var userDict = Helper.LoggedInUserData();
+
+                if (userDict["office"] == "SysAdmin")
+                    dtPermissions = Factory.PermissionsRepository().GetRecords();
+                else
+                    dtPermissions = Factory.PermissionsRepository().GetRecordsByOffice(userDict["office"]);
+
                 foreach (DataRow row in dtPermissions.Rows)
                 {
                     string permissionId = row["id"].ToString();
