@@ -51,7 +51,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
                 var dtPermissions = new DataTable();
                 var userDict = Helper.LoggedInUserData();
-
+                MessageBox.Show(userDict["office"]);
                 if (userDict["office"] == "SysAdmin")
                     dtPermissions = Factory.PermissionsRepository().GetRecords();
                 else

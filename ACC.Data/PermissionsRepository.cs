@@ -216,7 +216,7 @@ namespace ACC.Data
                     new object[] { "@officeName", DbType.String, $"%{officeName}%" },
                 };
 
-                string query = $"SELECT * FROM {tableName} WHERE permission_office = 'All' AND permission_office = @officeName";
+                string query = $"SELECT * FROM {tableName} WHERE permission_office = 'All' OR permission_office LIKE @officeName";
 
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
