@@ -73,6 +73,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             uc.panel1.Enabled = true;
             uc.mskSeriesNo.Text = string.Empty;
             uc.dtDateIssued.Value = DateTime.Now;
+            uc.dtDateIssued.Enabled = true;
             uc.LoadFPPCombobox();
             uc.LoadFunds();
             uc.LoadAllotmentClasses();
