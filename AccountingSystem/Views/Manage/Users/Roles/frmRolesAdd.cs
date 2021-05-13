@@ -21,6 +21,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         private void frmRolesAdd_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
+            uc.LoadOffice();
             uc.LoadPermissions();
         }
 

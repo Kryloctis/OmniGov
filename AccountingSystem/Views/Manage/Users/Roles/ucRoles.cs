@@ -2,17 +2,19 @@
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace AccountingSystem.Views.Manage.Users.Roles
 {
     public partial class ucRoles : UserControl
     {
         internal byte roleId = 0;
+        private readonly Dictionary<string, string> userDict;
 
         public ucRoles()
         {
             InitializeComponent();
-            cmbOffice.SelectedIndex = 0;
+            userDict = Helper.LoggedInUserData();
         }
 
         internal string GetFormErrors()
@@ -50,8 +52,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                 dgPermissions.Rows.Clear();
 
                 var dtPermissions = new DataTable();
-                var userDict = Helper.LoggedInUserData();
-                MessageBox.Show(userDict["office"]);
+
                 if (userDict["office"] == "SysAdmin")
                     dtPermissions = Factory.PermissionsRepository().GetRecords();
                 else
@@ -71,6 +72,21 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        internal void LoadOffice()
+        {
+            switch (userDict["office"])
+            {
+                case "SysAdmin":
+                    cmbOffice.Items.AddRange(new string[] {"Budget", "Accounting", "Treasury"});
+                    break;
+                default:
+                    cmbOffice.Items.Add(userDict["office"]);
+                    break;
+            }
+
+            cmbOffice.SelectedIndex = 0;
         }
 
         internal void CreateDatagridViewColumns(DataGridView datagrid)
