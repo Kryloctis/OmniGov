@@ -14,32 +14,33 @@ namespace AccountingSystem.Views.Manage.Users.List
     public partial class frmUsersEdit : Form
     {
         private frmUsers _frmUsers;
+        private ucUsers uc;
+
         public frmUsersEdit(frmUsers frmUsers, int userId)
         {
             InitializeComponent();
             _frmUsers = frmUsers;
-            ucUsers1.userId = userId;
+            uc = ucUsers1;
+            uc.userId = userId;
+
         }
         private void LoadSelectedRecord()
         {
             try
             {
-                var uc = ucUsers1;
                 var usersRepository = Factory.UsersRepository();
                 var userData = usersRepository.GetRecordByID(uc.userId);
-
-
-               uc.txtUsername.Text = userData["username"];
-               uc.txtPassword.Text = userData["password"];
-                //uc.txtRole.Text = userData["roles_id"];
+                
+                uc.cmbRoles.SelectedValue = userData["roles_id"];
                 uc.txtFirstname.Text = userData["first_name"];
                 uc.txtMiddleInitial.Text = userData["mid_initial"];
                 uc.txtLastname.Text = userData["last_name"];
-                
+
+                uc.txtUsername.Text = userData["username"];
+
             }
             catch (Exception ex)
             {
-
                 Helper.MessageBoxError(ex.Message);
             }
         }
@@ -67,12 +68,14 @@ namespace AccountingSystem.Views.Manage.Users.List
                     FirstName = uc.txtFirstname.Text.Trim(),
                     MidInitial = uc.txtMiddleInitial.Text.Trim(),
                     LastName = uc.txtLastname.Text.Trim(),
-                    RoleId = ((byte)uc.cmbRoles.SelectedValue),
+                    RoleId = (byte)uc.cmbRoles.SelectedValue,
 
                 };
 
-                var usersRepository = Factory.UsersRepository();
-                return usersRepository.Update(userModel);
+                if (string.IsNullOrWhiteSpace(uc.txtPassword.Text))
+                    return Factory.UsersRepository().Update(userModel);
+                else
+                    return Factory.UsersRepository().UpdateWithPassword(userModel);
             }
             catch (Exception ex)
             {
@@ -82,24 +85,15 @@ namespace AccountingSystem.Views.Manage.Users.List
             return false;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-   
-
         private void frmUsersEdit_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            ucUsers1.LoadRoleName();
+            uc.LoadRoleName();
             LoadSelectedRecord();
 
+            uc.txtUsername.ReadOnly = true;
+            uc.lblPassword.Text = "New Password";
+            uc.lblConfirmPassword.Text = $"Confirm New{Environment.NewLine}Password";
         }
 
         private void btnSave_Click_1(object sender, EventArgs e)
@@ -107,6 +101,8 @@ namespace AccountingSystem.Views.Manage.Users.List
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("User has been saved.");
+                uc.txtPassword.Clear();
+                uc.txtConfirmPassword.Clear();
                 _frmUsers.LoadRecords();
                 
             }

@@ -12,5 +12,7 @@ namespace ACC.Domain.Interfaces
         bool NameExist(string name, int id);
 
         byte ValidateLogin(string username, string password);
+
+        bool UpdateWithPassword(UsersModel entity);
     }
 }
