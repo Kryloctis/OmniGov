@@ -42,18 +42,20 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 87);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 65);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(545, 36);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(477, 27);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(448, 3);
+            this.btnCancel.Location = new System.Drawing.Point(392, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnCancel.Size = new System.Drawing.Size(94, 29);
+            this.btnCancel.Size = new System.Drawing.Size(82, 22);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -62,10 +64,11 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(348, 3);
+            this.btnSave.Location = new System.Drawing.Point(304, 2);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSave.Size = new System.Drawing.Size(94, 29);
+            this.btnSave.Size = new System.Drawing.Size(82, 22);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -74,22 +77,25 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // ucAccountable1
             // 
             this.ucAccountable1.Location = new System.Drawing.Point(0, 0);
+            this.ucAccountable1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucAccountable1.Name = "ucAccountable1";
-            this.ucAccountable1.Size = new System.Drawing.Size(550, 86);
+            this.ucAccountable1.Size = new System.Drawing.Size(481, 64);
             this.ucAccountable1.TabIndex = 6;
             // 
             // frmAccountableEdit
             // 
             this.AcceptButton = this.btnSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(545, 123);
+            this.ClientSize = new System.Drawing.Size(477, 92);
             this.Controls.Add(this.ucAccountable1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmAccountableEdit";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Accountable Form";
             this.Load += new System.EventHandler(this.frmAccountableEdit_Load);
