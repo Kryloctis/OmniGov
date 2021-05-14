@@ -109,6 +109,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.dtDateRequested.TabIndex = 7;
             this.dtDateRequested.ValueChanged += new System.EventHandler(this.dtDateRequested_ValueChanged);
             this.dtDateRequested.Validating += new System.ComponentModel.CancelEventHandler(this.dtDateRequested_Validating);
+            this.dtDateRequested.Validated += new System.EventHandler(this.dtDateRequested_Validated);
             // 
             // label5
             // 

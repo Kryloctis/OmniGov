@@ -43,14 +43,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.flowLayoutPanel1.Controls.Add(this.btnAddToList);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 168);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 166);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(515, 30);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(510, 30);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(437, 3);
+            this.btnCancel.Location = new System.Drawing.Point(432, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 2;
@@ -59,7 +59,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnAddToList
             // 
-            this.btnAddToList.Location = new System.Drawing.Point(356, 3);
+            this.btnAddToList.Location = new System.Drawing.Point(351, 3);
             this.btnAddToList.Name = "btnAddToList";
             this.btnAddToList.Size = new System.Drawing.Size(75, 23);
             this.btnAddToList.TabIndex = 1;
@@ -81,7 +81,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(515, 198);
+            this.ClientSize = new System.Drawing.Size(510, 196);
             this.Controls.Add(this.ucObligationRequest1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

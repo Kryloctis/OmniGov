@@ -13,32 +13,31 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
     public partial class frmObligationRequestAdd : Form
     {
         private ucObligationRequestMain _ucObligationRequestMain;
-        private ucObligationRequest _ucObligationRequest;
+        private ucObligationRequest uc;
 
         public frmObligationRequestAdd(ucObligationRequestMain ucObligationRequestMain)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            _ucObligationRequest = ucObligationRequest1;
+            uc = ucObligationRequest1;
             _ucObligationRequestMain = ucObligationRequestMain;
-            _ucObligationRequest.LoadReference(_ucObligationRequestMain);
+            uc.LoadReference(_ucObligationRequestMain);
         }
 
         private bool AddToList() 
         {
             try
             {
-                if (!_ucObligationRequest.ValidateChildren()) 
+                if (!uc.ValidateChildren()) 
                 {
-                    Helper.MessageBoxError(_ucObligationRequest.GetFormErrors());
+                    Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
 
-                ushort accountId = Convert.ToUInt16(_ucObligationRequest.cmbxAccount.SelectedValue);
-                string accountName = _ucObligationRequest.cmbxAccount.Text;
+                ushort accountId = Convert.ToUInt16(uc.cmbxAccount.SelectedValue);
+                string accountName = uc.cmbxAccount.Text;
                 string accountCode = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(accountId)["account_code"];
-                decimal amount = _ucObligationRequest.nudAmount.Value;
-
+                decimal amount = uc.nudAmount.Value;
 
                 var data = new object[]
                 {

@@ -53,7 +53,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     int? otherFPPId = string.IsNullOrEmpty(uc.cmbxOthersFPP.Text) ? null : Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue);
                     int accountId = Convert.ToInt32(row.Cells["accountId"].Value);
                     decimal obligationAmount = Convert.ToDecimal(row.Cells["obligationAmount"].Value);
-                    int createdBy = Convert.ToInt32(Helper.LoggedInUserData()["id"]);
+                    int createdBy = Helper.UserId;
                     string obligationNo = $"{uc.mskObligationSeriesNo.Text}-{uc.mskTxtObligationNoTemplate.Text}";
 
                     var obligationRequestModel = new ObligationRequestModel()

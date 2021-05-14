@@ -51,7 +51,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // cmbxAccount
             // 
+            this.cmbxAccount.DropDownHeight = 300;
             this.cmbxAccount.FormattingEnabled = true;
+            this.cmbxAccount.IntegralHeight = false;
             this.cmbxAccount.Location = new System.Drawing.Point(61, 4);
             this.cmbxAccount.Name = "cmbxAccount";
             this.cmbxAccount.Size = new System.Drawing.Size(402, 23);
@@ -108,7 +110,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(492, 112);
+            this.groupBox1.Size = new System.Drawing.Size(489, 112);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Allotment Release Details";
@@ -125,7 +127,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel1.Location = new System.Drawing.Point(3, 19);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(486, 90);
+            this.panel1.Size = new System.Drawing.Size(483, 90);
             this.panel1.TabIndex = 0;
             // 
             // txtTotalAllotmentRelease
@@ -172,7 +174,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.Controls.Add(this.nudAmount);
             this.Controls.Add(this.label2);
             this.Name = "ucObligationRequest";
-            this.Size = new System.Drawing.Size(492, 146);
+            this.Size = new System.Drawing.Size(488, 146);
             this.Load += new System.EventHandler(this.ucObligationRequest_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAccount)).EndInit();

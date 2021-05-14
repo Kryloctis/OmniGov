@@ -256,172 +256,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
         }
 
-        #region Validations
-
-        internal bool ObligationRequestListEmpty() 
-        {
-            if (dgObligationRequests.Rows.Count <= 0)
-            {
-              Tag = "Obligation Request list is empty";
-              return true;
-            }
-            else
-            {
-              Tag = string.Empty;
-              return false;
-            }
-        }
-
-        private bool FPPNameExist(ErrorProvider ep, ComboBox comboBox)
-        {
-            try
-            {
-                string fppName = comboBox.Text;
-                bool fppNameExist = Factory.FunctionProgramProjectRepository().NameExist(fppName);
-
-                if (!fppNameExist && !string.IsNullOrEmpty(fppName))
-                {
-                    ep.SetError(comboBox, "FPP you entered. Doesn't exist in yout record.");
-                    return true;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private void cmbxFPP_Validating(object sender, CancelEventArgs e)
-        {
-            if (string.IsNullOrEmpty(cmbxFPP.Text))
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP");
-            else
-                e.Cancel = FPPNameExist(epFPP, cmbxFPP);
-        }
-
-        private void cmbxFPP_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(epFPP, cmbxFPP);
-        }
-
-        private bool OthersFPPNameExist(ErrorProvider ep, ComboBox comboBox)
-        {
-            try
-            {
-                string otherFPPName = comboBox.Text;
-                bool otherFPPExist = Factory.OthersFPPRepository().NameExist(otherFPPName);
-
-                if (!otherFPPExist && !string.IsNullOrEmpty(otherFPPName))
-                {
-                    ep.SetError(comboBox, "Other FPP you entered. Doesn't exist in yout record.");
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private void cmbxOthersFPP_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = OthersFPPNameExist(epOtherFPP, cmbxOthersFPP);
-        }
-
-        private void cmbxOthersFPP_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(epOtherFPP, cmbxOthersFPP);
-        }
-
-        private void txtPayee_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epPayee, txtPayee, "Payee");
-        }
-        private void txtPayee_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epPayee, txtPayee);
-        }
-
-        private void txtExplanation_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epExplanation, txtExplanation, "Explanation");
-        }
-
-        private void txtExplanation_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epExplanation, txtExplanation);
-        }
-
-        private bool ShowErrorObligationSeriesNoEmpty(ErrorProvider ep, MaskedTextBox mskTxtSeriesNo, MaskedTextBox mskTxtObligationNoTemplate)
-        {
-            try
-            {
-                if (!mskTxtSeriesNo.MaskCompleted)
-                {
-                    ep.SetError(mskTxtObligationNoTemplate, "Obligation Series No. is required.");
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private bool ShowErrorObligationNoExist(ErrorProvider ep, MaskedTextBox mskTxtSeriesNo, MaskedTextBox mskTxtObligationNoTemplate) 
-        {
-            try
-            {
-                string obligationNo = $"{mskObligationSeriesNo.Text}-{mskTxtObligationNoTemplate.Text}";
-                bool obligationNoExist = Factory.ObligationRequestRepository().ObligationNumExist(obligationNo);
-
-                if (mskTxtSeriesNo.MaskCompleted && obligationNoExist) 
-                {
-                   
-                    ep.SetError(mskTxtObligationNoTemplate, "Obligation No. you entered already exist in your record");
-                    return obligationNoExist;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private void mskObligationSeriesNo_Validating(object sender, CancelEventArgs e)
-        {
-          
-            e.Cancel = ShowErrorObligationSeriesNoEmpty(epObligationNo, mskObligationSeriesNo, mskTxtObligationNoTemplate);
-            e.Cancel = ShowErrorObligationNoExist(epObligationNo, mskObligationSeriesNo, mskTxtObligationNoTemplate);
-        }
-
-        private void mskObligationSeriesNo_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearMaskedTextboxError(epObligationNo, mskTxtObligationNoTemplate);
-        }
-
-        private void dtDateRequested_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = ShowErrorObligationNoExist(epObligationNo, mskObligationSeriesNo, mskTxtObligationNoTemplate);
-        }
-
-        private void txtReferenceNo_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epReferenceNo, txtReferenceNo, "Reference No.");
-        }
-
-        private void txtReferenceNo_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epReferenceNo, txtReferenceNo);
-        }
-
-        #endregion Validations
-
         private void ShowObligationRequestAdd()
         {
             var frmObligationRequestAdd = new frmObligationRequestAdd(this);
@@ -439,14 +273,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             frmObligationRequestAdd.ShowDialog();
         }
 
-        private bool CustomValidateAddToList() 
+        private bool CustomValidateAddToList()
         {
             try
             {
                 bool fppValidation = Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP") || FPPNameExist(epFPP, cmbxFPP);
                 bool otherFPPValidation = OthersFPPNameExist(epOtherFPP, cmbxOthersFPP);
 
-                if (fppValidation || otherFPPValidation) 
+                if (fppValidation || otherFPPValidation)
                 {
                     return true;
                 }
@@ -460,7 +294,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (CustomValidateAddToList()) 
+            if (CustomValidateAddToList())
                 Helper.MessageBoxError(GetFormErrorsAddToList());
             else
                 ShowObligationRequestAdd();
@@ -502,5 +336,193 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             EnableDisableButtons();
         }
+
+
+        #region Validations
+
+        internal bool ObligationRequestListEmpty() 
+        {
+            if (dgObligationRequests.Rows.Count <= 0)
+            {
+              Tag = "Obligation Request list is empty";
+              return true;
+            }
+            else
+            {
+              Tag = string.Empty;
+              return false;
+            }
+        }
+
+
+
+        private bool FPPNameExist(ErrorProvider ep, ComboBox comboBox)
+        {
+            try
+            {
+                string fppName = comboBox.Text;
+                bool fppNameExist = Factory.FunctionProgramProjectRepository().NameExist(fppName);
+
+                if (!fppNameExist && !string.IsNullOrEmpty(fppName))
+                {
+                    ep.SetError(comboBox, "FPP you entered. Doesn't exist in yout record.");
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void cmbxFPP_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbxFPP.Text))
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP");
+            else
+                e.Cancel = FPPNameExist(epFPP, cmbxFPP);
+        }
+
+        private void cmbxFPP_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epFPP, cmbxFPP);
+        }
+
+
+
+        private bool OthersFPPNameExist(ErrorProvider ep, ComboBox comboBox)
+        {
+            try
+            {
+                string otherFPPName = comboBox.Text;
+                bool otherFPPExist = Factory.OthersFPPRepository().NameExist(otherFPPName);
+
+                if (!otherFPPExist && !string.IsNullOrEmpty(otherFPPName))
+                {
+                    ep.SetError(comboBox, "Other FPP you entered. Doesn't exist in yout record.");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void cmbxOthersFPP_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = OthersFPPNameExist(epOtherFPP, cmbxOthersFPP);
+        }
+
+        private void cmbxOthersFPP_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epOtherFPP, cmbxOthersFPP);
+        }
+
+
+
+        private void txtPayee_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epPayee, txtPayee, "Payee");
+        }
+
+        private void txtPayee_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epPayee, txtPayee);
+        }
+
+
+
+        private void txtExplanation_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epExplanation, txtExplanation, "Explanation");
+        }
+
+        private void txtExplanation_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epExplanation, txtExplanation);
+        }
+
+
+
+
+        private bool ShowErrorObligationSeriesNoEmpty()
+        {
+            try
+            {
+                if (!mskObligationSeriesNo.MaskCompleted)
+                {
+                    epObligationNo.SetError(mskTxtObligationNoTemplate, "Obligation Series No. is required.");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private bool ShowErrorObligationNoExist() 
+        {
+            try
+            {
+                string obligationNo = $"{mskObligationSeriesNo.Text}-{mskTxtObligationNoTemplate.Text}";
+                bool obligationNoExist = Factory.ObligationRequestRepository().ObligationNumExist(obligationNo);
+
+                if (mskObligationSeriesNo.MaskCompleted && obligationNoExist) 
+                {
+
+                    epObligationNo.SetError(mskTxtObligationNoTemplate, "Obligation No. you entered already exist in your record");
+                    return obligationNoExist;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void mskObligationSeriesNo_Validating(object sender, CancelEventArgs e)
+        {
+            if(!mskObligationSeriesNo.MaskCompleted)
+            e.Cancel = ShowErrorObligationSeriesNoEmpty();
+            else
+            e.Cancel = ShowErrorObligationNoExist();
+        }
+
+        private void mskObligationSeriesNo_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearMaskedTextboxError(epObligationNo, mskTxtObligationNoTemplate);
+        }
+
+        private void dtDateRequested_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = ShowErrorObligationNoExist();
+        }
+
+        private void dtDateRequested_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearMaskedTextboxError(epObligationNo, mskTxtObligationNoTemplate);
+        }
+
+
+
+        private void txtReferenceNo_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epReferenceNo, txtReferenceNo, "Reference No.");
+        }
+
+        private void txtReferenceNo_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epReferenceNo, txtReferenceNo);
+        }
+
+        #endregion Validations
+
     }   
 }
