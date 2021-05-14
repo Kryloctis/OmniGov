@@ -41,37 +41,39 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 12);
+            this.label1.Location = new System.Drawing.Point(0, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 20);
+            this.label1.Size = new System.Drawing.Size(60, 15);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Form No. :";
+            this.label1.Text = "Form No. ";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 44);
+            this.label2.Location = new System.Drawing.Point(0, 31);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(130, 20);
+            this.label2.Size = new System.Drawing.Size(67, 15);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Form Description :";
+            this.label2.Text = "Description";
             // 
             // txtformno
             // 
-            this.txtformno.Location = new System.Drawing.Point(153, 9);
+            this.txtformno.Location = new System.Drawing.Point(73, 1);
+            this.txtformno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtformno.MaxLength = 4;
             this.txtformno.Name = "txtformno";
-            this.txtformno.Size = new System.Drawing.Size(375, 27);
+            this.txtformno.Size = new System.Drawing.Size(370, 23);
             this.txtformno.TabIndex = 0;
             this.txtformno.Validating += new System.ComponentModel.CancelEventHandler(this.txtformno_Validating);
             this.txtformno.Validated += new System.EventHandler(this.txtformno_Validated);
             // 
             // txtformdesc
             // 
-            this.txtformdesc.Location = new System.Drawing.Point(153, 42);
+            this.txtformdesc.Location = new System.Drawing.Point(73, 28);
+            this.txtformdesc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtformdesc.MaxLength = 45;
             this.txtformdesc.Name = "txtformdesc";
-            this.txtformdesc.Size = new System.Drawing.Size(375, 27);
+            this.txtformdesc.Size = new System.Drawing.Size(370, 23);
             this.txtformdesc.TabIndex = 1;
             this.txtformdesc.Validating += new System.ComponentModel.CancelEventHandler(this.txtformdesc_Validating);
             this.txtformdesc.Validated += new System.EventHandler(this.txtformdesc_Validated);
@@ -82,14 +84,15 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // 
             // ucAccountable
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.txtformdesc);
             this.Controls.Add(this.txtformno);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucAccountable";
-            this.Size = new System.Drawing.Size(542, 80);
+            this.Size = new System.Drawing.Size(468, 60);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
