@@ -20,6 +20,7 @@ using AccountingSystem.Views.Reports.Ledgers;
 using AccountingSystem.Views.Dashboard;
 using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Manage.DisbursingOfficer;
+using AccountingSystem.Views.Manage.AccountableForm;
 
 namespace AccountingSystem
 {
@@ -297,6 +298,11 @@ namespace AccountingSystem
         private void BtnRCI_Click(object sender, EventArgs e)
         {
             _ = new frmRCI().ShowDialog();
+        }
+
+        private void menuAccForm_Click(object sender, EventArgs e)
+        {
+            _ = new frmAccountable().ShowDialog();
         }
     }
 }

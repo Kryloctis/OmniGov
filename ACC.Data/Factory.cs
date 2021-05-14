@@ -75,5 +75,6 @@ namespace AccountingSystem
         public static IError CreateErrors(Array errors) => new Error(errors);
         public static IBanksRepository BanksRepository() => new BanksRepository(new MySqlGenericCommands());
         public static IRCIRepository RCIRepository() => new RCIRepository(new MySqlGenericCommands());
+        public static IAccountableRepository AccountableRepository() => new AccountableRepository(new MySqlGenericCommands());
     }
 }
