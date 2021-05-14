@@ -163,7 +163,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 Dictionary<string, string> checkDisbursementsData = cashReceiptsJournalRepository.GetViewRecordByJevID(jevId);
 
                 uc.txtRCIORADA.Text = checkDisbursementsData["rcd_number"];
-                uc.cmbCollectingOfficer.SelectedValue = checkDisbursementsData["collecting_officers_id"];
+                uc.cmbCollectingDisbursingOfficer.SelectedValue = checkDisbursementsData["collecting_officers_id"];
             }
         }
     }

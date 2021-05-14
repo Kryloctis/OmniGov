@@ -161,7 +161,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             var cashReceiptsJournalModel = new CashReceiptsJournalModel()
             {
 
-                CollectingOfficerId = Convert.ToByte(uc.cmbCollectingOfficer.SelectedValue),
+                CollectingOfficerId = Convert.ToByte(uc.cmbCollectingDisbursingOfficer.SelectedValue),
                 RCDNumber = uc.txtRCIORADA.Text.Trim()
             };
 
@@ -208,7 +208,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             var cashReceiptsJournalModel = new CashReceiptsJournalModel()
             {
                 JevId = uc.jevId,
-                CollectingOfficerId = Convert.ToByte(uc.cmbCollectingOfficer.SelectedValue),
+                CollectingOfficerId = Convert.ToByte(uc.cmbCollectingDisbursingOfficer.SelectedValue),
                 RCDNumber = uc.txtRCIORADA.Text.Trim()
             };
 

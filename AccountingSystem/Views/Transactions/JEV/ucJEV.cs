@@ -109,7 +109,13 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal void LoadCollectingOfficer()
         {
             var dtCollectingOfficer = Factory.CollectingOfficerRepository().GetRecords();
-            HelperLoadRecords.CollectingOfficerComboBox(dtCollectingOfficer, cmbCollectingOfficer, "fullname", "id");
+            HelperLoadRecords.CollectingOfficerComboBox(dtCollectingOfficer, cmbCollectingDisbursingOfficer, "fullname", "id");
+        }
+
+        internal void LoadDisbursingOfficer()
+        {
+            var dtDisbursingOfficer = Factory.DisbursingOfficerRepository().GetRecords();
+            HelperLoadRecords.DisbursingOfficerComboBox(dtDisbursingOfficer, cmbCollectingDisbursingOfficer, "fullname", "id");
         }
 
         private void ShowCheckIcon(RadioButton radioButton)
@@ -162,49 +168,126 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void SetGeneralJournalFields()
         {
             lblCheckORPaidDate.Visible = false;
-            lblDVRCDNo.Visible = false;
-            lblCollectingAccountableOfficer.Visible = false;
-            lblRciOrADANo.Visible = false;
-
             dtpCheckORPaid.Enabled = false;
+
+            lblCheckNo.Text = "Check No.";
+            lblCheckNo.Visible = true;
+            txtCheckNo.Enabled = true;
+
+            lblRciOrADANo.Text = "OR No.";
+            lblRciOrADANo.Visible = true;
+            txtRCIORADA.Enabled = true;
+
+            lblDVRCDNo.Text = "DV No.";
+            lblDVRCDNo.Visible = true;
+            txtDVRCDNo.Enabled = true;
+
+            lblCollectingDisbursingOfficer.Visible = false;
+            cmbCollectingDisbursingOfficer.Enabled = false;
+            
+        }
+
+        private void SetProcurementReceivedJournalFields()
+        {
+            lblCheckORPaidDate.Visible = false;
+            dtpCheckORPaid.Enabled = false;
+
+            lblCheckNo.Visible = false;
+            txtCheckNo.Enabled = false;
+
+            lblRciOrADANo.Visible = false;
             txtRCIORADA.Enabled = false;
-            txtDVNo.Enabled = false;
-            cmbCollectingOfficer.Enabled = false;
 
+            lblDVRCDNo.Visible = false;
+            txtDVRCDNo.Enabled = false;
 
+            lblCollectingDisbursingOfficer.Visible = false;
+            cmbCollectingDisbursingOfficer.Enabled = false;
         }
 
         private void SetCashDisbursementsJournalFields()
         {
             lblCheckORPaidDate.Text = "Date Paid";
-            lblCollectingAccountableOfficer.Text = "Accountable Officer";
-
             lblCheckORPaidDate.Visible = true;
             dtpCheckORPaid.Enabled = true;
-            lblCollectingAccountableOfficer.Visible = true;
-            cmbCollectingOfficer.Enabled = true;
 
-            lblDVRCDNo.Visible = false;
-            txtDVNo.Enabled = false;
+            lblCheckNo.Visible = false;
+            txtCheckNo.Enabled = false;
 
+            lblRciOrADANo.Visible = false;
+            txtRCIORADA.Enabled = false;
+
+            lblDVRCDNo.Text = "DV No.";
+            lblDVRCDNo.Visible = true;
+            txtDVRCDNo.Enabled = true;
+
+            lblCollectingDisbursingOfficer.Text = "Disbursing Officer";
+            lblCollectingDisbursingOfficer.Visible = true;
+            cmbCollectingDisbursingOfficer.Enabled = true;
         }
 
         private void SetCashReceiptsJournalFields()
         {
             lblCheckORPaidDate.Text = "OR Date";
-            lblRciOrADANo.Text = "OR No.";
-            lblDVRCDNo.Text = "RCD No.";
-            lblCollectingAccountableOfficer.Text = "Collecting Officer";
-
             lblCheckORPaidDate.Visible = true;
-            lblDVRCDNo.Visible = true;
-            lblCollectingAccountableOfficer.Visible = true;
-            lblRciOrADANo.Visible = true;
-
             dtpCheckORPaid.Enabled = true;
+
+            lblCheckNo.Visible = false;
+            txtCheckNo.Enabled = false;
+
+            lblRciOrADANo.Text = "OR No.";
+            lblRciOrADANo.Visible = true;
             txtRCIORADA.Enabled = true;
-            txtDVNo.Enabled = true;
-            cmbCollectingOfficer.Enabled = true;
+
+            lblDVRCDNo.Text = "RCD No.";
+            lblDVRCDNo.Visible = true;
+            txtDVRCDNo.Visible = true;
+
+            lblCollectingDisbursingOfficer.Text = "Collecting Officer";
+            lblCollectingDisbursingOfficer.Visible = true;
+            cmbCollectingDisbursingOfficer.Enabled = true;
+        }
+
+        private void SetADAJournalFields()
+        {
+            lblCheckORPaidDate.Visible = false;
+            dtpCheckORPaid.Enabled = false;
+
+            lblCheckNo.Visible = false;
+            txtCheckNo.Enabled = false;
+
+            lblRciOrADANo.Text = "ADA No.";
+            lblRciOrADANo.Visible = true;
+            txtRCIORADA.Enabled = true;
+
+            lblDVRCDNo.Text = "DV No.";
+            lblDVRCDNo.Visible = true;
+            txtDVRCDNo.Enabled = true;
+
+            lblCollectingDisbursingOfficer.Visible = false;
+            cmbCollectingDisbursingOfficer.Enabled = false;
+        }
+
+        private void SetCheckDisbursementsJournalFields()
+        {
+            lblCheckORPaidDate.Text = "Check Date";
+            lblCheckORPaidDate.Visible = true;
+            dtpCheckORPaid.Enabled = true;
+
+            lblCheckNo.Text = "Check No.";
+            lblCheckNo.Visible = true;
+            txtCheckNo.Enabled = true;
+
+            lblRciOrADANo.Text = "RCI No.";
+            lblRciOrADANo.Visible = true;
+            txtRCIORADA.Enabled = true;
+
+            lblDVRCDNo.Text = "DV No.";
+            lblDVRCDNo.Visible = true;
+            txtDVRCDNo.Enabled = true;
+
+            lblCollectingDisbursingOfficer.Visible = false;
+            cmbCollectingDisbursingOfficer.Enabled = false;
         }
 
         private void radioJournals_CheckedChanged(object sender, EventArgs e)
@@ -217,23 +300,24 @@ namespace AccountingSystem.Views.Transactions.JEV
             switch (journalName)
             {
                 case "General Journal":
-                case "Procurement Received Journal":
                     SetGeneralJournalFields();
+                    break;
+                case "Procurement Received Journal":
+                    SetProcurementReceivedJournalFields();
                     break;
                 case "Cash Disbursements Journal":
                     SetCashDisbursementsJournalFields();
-
+                    LoadDisbursingOfficer();
                     break;
                 case "Cash Receipts Journal":
                     SetCashReceiptsJournalFields();
-
+                    LoadCollectingOfficer();
                     break;
                 case "Check Disbursements Journal":
                     SetCheckDisbursementsJournalFields();
                     break;
                 case "Authority to Debit Account Disbursement Journal":
                     SetADAJournalFields();
-                    MessageBox.Show("ADa");
                     break;
 
                 default:
@@ -241,48 +325,12 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        private void SetADAJournalFields()
-        {
-            lblRciOrADANo.Text = "ADA No.";
-            epCollectingOfficerPayee.SetError(txtPayee, string.Empty);
-
-            lblRciOrADANo.Visible = true;
-            txtRCIORADA.Enabled = true;
-
-            lblCheckORPaidDate.Visible = false;
-            dtpCheckORPaid.Enabled = false;
-
-            lblDVRCDNo.Visible = false;
-            txtDVNo.Enabled = false;
-
-            lblCollectingAccountableOfficer.Visible = false;
-            cmbCollectingOfficer.Enabled = false;
-        }
-
-        private void SetCheckDisbursementsJournalFields()
-        {
-            lblCheckORPaidDate.Text = "Check Date";
-            lblRciOrADANo.Text = "RCI No.";
-            lblDVRCDNo.Text = "DV No.";
-
-            lblCheckORPaidDate.Visible = true;
-            lblDVRCDNo.Visible = true;
-            lblRciOrADANo.Visible = true;
-
-            dtpCheckORPaid.Enabled = true;
-            txtRCIORADA.Enabled = true;
-            txtDVNo.Enabled = true;
-
-            lblCollectingAccountableOfficer.Visible = false;
-            cmbCollectingOfficer.Enabled = false;
-        }
-
         private void ucJEV_Load(object sender, EventArgs e)
         {
             Helper.DatagridDefaultStyle(dgAccounts);
             LoadFunds();
             LoadJournals();
-            LoadCollectingOfficer();
+            SetGeneralJournalFields();
 
             btnEditAccount.Enabled = false;
             btnRemoveAccount.Enabled = false;
@@ -368,7 +416,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             if (txtPayee.Enabled)
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epCollectingOfficerPayee, txtPayee, lblCollectingAccountableOfficer.Text);
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epCollectingOfficerPayee, txtPayee, lblCollectingDisbursingOfficer.Text);
             }
         }
 
