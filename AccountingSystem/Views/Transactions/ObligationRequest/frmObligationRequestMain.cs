@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void BtnSearch_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            _ = new frmObligationRequestSearch().ShowDialog();
         }
 
         private void BtnNew_Click(object sender, EventArgs e)
