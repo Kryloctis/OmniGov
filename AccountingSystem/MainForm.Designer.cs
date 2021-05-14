@@ -32,6 +32,8 @@ namespace AccountingSystem
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuLogout = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuExitApp = new System.Windows.Forms.ToolStripMenuItem();
             this.menuTransactions = new System.Windows.Forms.ToolStripMenuItem();
             this.menuJEV = new System.Windows.Forms.ToolStripMenuItem();
             this.menuObligationRequest = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,6 +51,7 @@ namespace AccountingSystem
             this.menuDisbursingOfficer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBudgetAppropriation = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBanks = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuAccForm = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
             this.menuJournalsReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportGJ = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,7 +73,6 @@ namespace AccountingSystem
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblUserFullName = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUserRole = new System.Windows.Forms.ToolStripStatusLabel();
-            this.menuAccForm = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -86,17 +88,31 @@ namespace AccountingSystem
             this.menuReports});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 4, 0, 4);
-            this.menuStrip1.Size = new System.Drawing.Size(1110, 32);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 3, 0, 3);
+            this.menuStrip1.Size = new System.Drawing.Size(971, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // menuFile
             // 
+            this.menuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuLogout,
+            this.menuExitApp});
             this.menuFile.Name = "menuFile";
-            this.menuFile.Size = new System.Drawing.Size(46, 24);
+            this.menuFile.Size = new System.Drawing.Size(37, 19);
             this.menuFile.Text = "&File";
+            // 
+            // menuLogout
+            // 
+            this.menuLogout.Name = "menuLogout";
+            this.menuLogout.Size = new System.Drawing.Size(157, 22);
+            this.menuLogout.Text = "Logout";
+            // 
+            // menuExitApp
+            // 
+            this.menuExitApp.Name = "menuExitApp";
+            this.menuExitApp.Size = new System.Drawing.Size(157, 22);
+            this.menuExitApp.Text = "Exit Application";
             // 
             // menuTransactions
             // 
@@ -105,26 +121,26 @@ namespace AccountingSystem
             this.menuObligationRequest,
             this.menuRCI});
             this.menuTransactions.Name = "menuTransactions";
-            this.menuTransactions.Size = new System.Drawing.Size(104, 24);
+            this.menuTransactions.Size = new System.Drawing.Size(84, 19);
             this.menuTransactions.Text = "Transactions";
             // 
             // menuJEV
             // 
             this.menuJEV.Name = "menuJEV";
-            this.menuJEV.Size = new System.Drawing.Size(148, 26);
+            this.menuJEV.Size = new System.Drawing.Size(122, 22);
             this.menuJEV.Text = "JEV...";
             this.menuJEV.Click += new System.EventHandler(this.menuJEV_Click);
             // 
             // menuObligationRequest
             // 
             this.menuObligationRequest.Name = "menuObligationRequest";
-            this.menuObligationRequest.Size = new System.Drawing.Size(148, 26);
+            this.menuObligationRequest.Size = new System.Drawing.Size(122, 22);
             this.menuObligationRequest.Text = "CAFOA...";
             // 
             // menuRCI
             // 
             this.menuRCI.Name = "menuRCI";
-            this.menuRCI.Size = new System.Drawing.Size(148, 26);
+            this.menuRCI.Size = new System.Drawing.Size(122, 22);
             this.menuRCI.Text = "RCI...";
             this.menuRCI.Click += new System.EventHandler(this.menuRCI_Click);
             // 
@@ -143,7 +159,7 @@ namespace AccountingSystem
             this.menuBanks,
             this.menuAccForm});
             this.menuManage.Name = "menuManage";
-            this.menuManage.Size = new System.Drawing.Size(77, 24);
+            this.menuManage.Size = new System.Drawing.Size(62, 19);
             this.menuManage.Text = "Manage";
             // 
             // menuUsers
@@ -152,84 +168,91 @@ namespace AccountingSystem
             this.menuUserList,
             this.menuRoles});
             this.menuUsers.Name = "menuUsers";
-            this.menuUsers.Size = new System.Drawing.Size(272, 26);
+            this.menuUsers.Size = new System.Drawing.Size(223, 22);
             this.menuUsers.Text = "Users";
             // 
             // menuUserList
             // 
             this.menuUserList.Name = "menuUserList";
-            this.menuUserList.Size = new System.Drawing.Size(137, 26);
+            this.menuUserList.Size = new System.Drawing.Size(111, 22);
             this.menuUserList.Text = "List...";
             this.menuUserList.Click += new System.EventHandler(this.menuUserList_Click);
             // 
             // menuRoles
             // 
             this.menuRoles.Name = "menuRoles";
-            this.menuRoles.Size = new System.Drawing.Size(137, 26);
+            this.menuRoles.Size = new System.Drawing.Size(111, 22);
             this.menuRoles.Text = "Roles...";
             this.menuRoles.Click += new System.EventHandler(this.menuRoles_Click);
             // 
             // menuJournals
             // 
             this.menuJournals.Name = "menuJournals";
-            this.menuJournals.Size = new System.Drawing.Size(272, 26);
+            this.menuJournals.Size = new System.Drawing.Size(223, 22);
             this.menuJournals.Text = "Journals...";
             this.menuJournals.Click += new System.EventHandler(this.menuJournals_Click);
             // 
             // menuChartOfAccounts
             // 
             this.menuChartOfAccounts.Name = "menuChartOfAccounts";
-            this.menuChartOfAccounts.Size = new System.Drawing.Size(272, 26);
+            this.menuChartOfAccounts.Size = new System.Drawing.Size(223, 22);
             this.menuChartOfAccounts.Text = "Chart of Accounts...";
             this.menuChartOfAccounts.Click += new System.EventHandler(this.menuChartOfAccounts_Click);
             // 
             // menuAllotmentClasses
             // 
             this.menuAllotmentClasses.Name = "menuAllotmentClasses";
-            this.menuAllotmentClasses.Size = new System.Drawing.Size(272, 26);
+            this.menuAllotmentClasses.Size = new System.Drawing.Size(223, 22);
             this.menuAllotmentClasses.Text = "Allotment Classes...";
             this.menuAllotmentClasses.Click += new System.EventHandler(this.menuAllotmentClasses_Click);
             // 
             // menuFunds
             // 
             this.menuFunds.Name = "menuFunds";
-            this.menuFunds.Size = new System.Drawing.Size(272, 26);
+            this.menuFunds.Size = new System.Drawing.Size(223, 22);
             this.menuFunds.Text = "Funds...";
             this.menuFunds.Click += new System.EventHandler(this.menuFunds_Click);
             // 
             // menuFunctionProgramProject
             // 
             this.menuFunctionProgramProject.Name = "menuFunctionProgramProject";
-            this.menuFunctionProgramProject.Size = new System.Drawing.Size(272, 26);
+            this.menuFunctionProgramProject.Size = new System.Drawing.Size(223, 22);
             this.menuFunctionProgramProject.Text = "Function/Program/Project...";
             this.menuFunctionProgramProject.Click += new System.EventHandler(this.menuFunctionProgramProject_Click);
             // 
             // menuCollectingOfficer
             // 
             this.menuCollectingOfficer.Name = "menuCollectingOfficer";
-            this.menuCollectingOfficer.Size = new System.Drawing.Size(272, 26);
+            this.menuCollectingOfficer.Size = new System.Drawing.Size(223, 22);
             this.menuCollectingOfficer.Text = "Collecting Officer...";
             this.menuCollectingOfficer.Click += new System.EventHandler(this.menuCollectingOfficer_Click);
             // 
             // menuDisbursingOfficer
             // 
             this.menuDisbursingOfficer.Name = "menuDisbursingOfficer";
-            this.menuDisbursingOfficer.Size = new System.Drawing.Size(272, 26);
+            this.menuDisbursingOfficer.Size = new System.Drawing.Size(223, 22);
             this.menuDisbursingOfficer.Text = "Disbursing Officers...";
             // 
             // menuBudgetAppropriation
             // 
             this.menuBudgetAppropriation.Name = "menuBudgetAppropriation";
-            this.menuBudgetAppropriation.Size = new System.Drawing.Size(272, 26);
+            this.menuBudgetAppropriation.Size = new System.Drawing.Size(223, 22);
             this.menuBudgetAppropriation.Text = "Budget Appropriations...";
             this.menuBudgetAppropriation.Click += new System.EventHandler(this.menuBudgetAppropriation_Click);
             // 
             // menuBanks
             // 
             this.menuBanks.Name = "menuBanks";
-            this.menuBanks.Size = new System.Drawing.Size(272, 26);
+            this.menuBanks.Size = new System.Drawing.Size(223, 22);
             this.menuBanks.Text = "Banks...";
             this.menuBanks.Click += new System.EventHandler(this.menuBanks_Click);
+            // 
+            // menuAccForm
+            // 
+            this.menuAccForm.Name = "menuAccForm";
+            this.menuAccForm.Size = new System.Drawing.Size(223, 22);
+            this.menuAccForm.Text = "Accountable Form";
+            this.menuAccForm.Click += new System.EventHandler(this.menuAccForm_Click);
             // 
             // menuReports
             // 
@@ -239,7 +262,7 @@ namespace AccountingSystem
             this.menuSAAOB,
             this.menuprintRCI});
             this.menuReports.Name = "menuReports";
-            this.menuReports.Size = new System.Drawing.Size(74, 24);
+            this.menuReports.Size = new System.Drawing.Size(59, 19);
             this.menuReports.Text = "Reports";
             // 
             // menuJournalsReport
@@ -252,43 +275,43 @@ namespace AccountingSystem
             this.menuReportCkDJ,
             this.menuReportADADJ});
             this.menuJournalsReport.Name = "menuJournalsReport";
-            this.menuJournalsReport.Size = new System.Drawing.Size(249, 26);
+            this.menuJournalsReport.Size = new System.Drawing.Size(200, 22);
             this.menuJournalsReport.Text = "Journals";
             // 
             // menuReportGJ
             // 
             this.menuReportGJ.Name = "menuReportGJ";
-            this.menuReportGJ.Size = new System.Drawing.Size(431, 26);
+            this.menuReportGJ.Size = new System.Drawing.Size(348, 22);
             this.menuReportGJ.Text = "General Journal...";
             // 
             // menuReportCRJ
             // 
             this.menuReportCRJ.Name = "menuReportCRJ";
-            this.menuReportCRJ.Size = new System.Drawing.Size(431, 26);
+            this.menuReportCRJ.Size = new System.Drawing.Size(348, 22);
             this.menuReportCRJ.Text = "Cash Receipts Journal...";
             // 
             // menuReportPRJ
             // 
             this.menuReportPRJ.Name = "menuReportPRJ";
-            this.menuReportPRJ.Size = new System.Drawing.Size(431, 26);
+            this.menuReportPRJ.Size = new System.Drawing.Size(348, 22);
             this.menuReportPRJ.Text = "Procurement Received Journal...";
             // 
             // menuReportCDJ
             // 
             this.menuReportCDJ.Name = "menuReportCDJ";
-            this.menuReportCDJ.Size = new System.Drawing.Size(431, 26);
+            this.menuReportCDJ.Size = new System.Drawing.Size(348, 22);
             this.menuReportCDJ.Text = "Cash Disbursements Journal...";
             // 
             // menuReportCkDJ
             // 
             this.menuReportCkDJ.Name = "menuReportCkDJ";
-            this.menuReportCkDJ.Size = new System.Drawing.Size(431, 26);
+            this.menuReportCkDJ.Size = new System.Drawing.Size(348, 22);
             this.menuReportCkDJ.Text = "Check Disbursements Journal...";
             // 
             // menuReportADADJ
             // 
             this.menuReportADADJ.Name = "menuReportADADJ";
-            this.menuReportADADJ.Size = new System.Drawing.Size(431, 26);
+            this.menuReportADADJ.Size = new System.Drawing.Size(348, 22);
             this.menuReportADADJ.Text = "Authority to Debit Account Disbursements Journal...";
             // 
             // menuLedgersReport
@@ -297,31 +320,31 @@ namespace AccountingSystem
             this.menuGeneralLedgerReport,
             this.menuSubsidiaryLedgerReport});
             this.menuLedgersReport.Name = "menuLedgersReport";
-            this.menuLedgersReport.Size = new System.Drawing.Size(249, 26);
+            this.menuLedgersReport.Size = new System.Drawing.Size(200, 22);
             this.menuLedgersReport.Text = "Ledgers";
             // 
             // menuGeneralLedgerReport
             // 
             this.menuGeneralLedgerReport.Name = "menuGeneralLedgerReport";
-            this.menuGeneralLedgerReport.Size = new System.Drawing.Size(219, 26);
+            this.menuGeneralLedgerReport.Size = new System.Drawing.Size(176, 22);
             this.menuGeneralLedgerReport.Text = "General Ledger...";
             // 
             // menuSubsidiaryLedgerReport
             // 
             this.menuSubsidiaryLedgerReport.Name = "menuSubsidiaryLedgerReport";
-            this.menuSubsidiaryLedgerReport.Size = new System.Drawing.Size(219, 26);
+            this.menuSubsidiaryLedgerReport.Size = new System.Drawing.Size(176, 22);
             this.menuSubsidiaryLedgerReport.Text = "Subsidiary Ledger...";
             // 
             // menuSAAOB
             // 
             this.menuSAAOB.Name = "menuSAAOB";
-            this.menuSAAOB.Size = new System.Drawing.Size(249, 26);
+            this.menuSAAOB.Size = new System.Drawing.Size(200, 22);
             this.menuSAAOB.Text = "SAAOB";
             // 
             // menuprintRCI
             // 
             this.menuprintRCI.Name = "menuprintRCI";
-            this.menuprintRCI.Size = new System.Drawing.Size(249, 26);
+            this.menuprintRCI.Size = new System.Drawing.Size(200, 22);
             this.menuprintRCI.Text = "Report of Checks Issued";
             this.menuprintRCI.Click += new System.EventHandler(this.menuprintRCI_Click);
             // 
@@ -385,9 +408,10 @@ namespace AccountingSystem
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblUserFullName,
             this.lblUserRole});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 531);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 397);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1110, 30);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(971, 24);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -395,39 +419,34 @@ namespace AccountingSystem
             // 
             this.lblUserFullName.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.lblUserFullName.Name = "lblUserFullName";
-            this.lblUserFullName.Size = new System.Drawing.Size(105, 24);
+            this.lblUserFullName.Size = new System.Drawing.Size(82, 19);
             this.lblUserFullName.Text = "lblUserDetails";
             // 
             // lblUserRole
             // 
             this.lblUserRole.Name = "lblUserRole";
-            this.lblUserRole.Size = new System.Drawing.Size(151, 24);
+            this.lblUserRole.Size = new System.Drawing.Size(118, 19);
             this.lblUserRole.Text = "toolStripStatusLabel2";
-            // 
-            // menuAccForm
-            // 
-            this.menuAccForm.Name = "menuAccForm";
-            this.menuAccForm.Size = new System.Drawing.Size(272, 26);
-            this.menuAccForm.Text = "Accountable Form";
-            this.menuAccForm.Click += new System.EventHandler(this.menuAccForm_Click);
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(1110, 561);
+            this.ClientSize = new System.Drawing.Size(971, 421);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(1125, 598);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MinimumSize = new System.Drawing.Size(986, 458);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Local Finance System";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -486,6 +505,8 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuprintRCI;
         private System.Windows.Forms.ToolStripButton btnRCI;
         private System.Windows.Forms.ToolStripMenuItem menuAccForm;
+        private System.Windows.Forms.ToolStripMenuItem menuLogout;
+        private System.Windows.Forms.ToolStripMenuItem menuExitApp;
     }
 }
 
