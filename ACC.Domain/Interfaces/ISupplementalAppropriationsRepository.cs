@@ -12,5 +12,7 @@ namespace ACC.Domain.Interfaces
 
         decimal GetTotalSupplementalAmountById(int budgetAppropriationsId);
 
+        decimal GetTotalSupplementalAmountByIdAndDateEntry(int budgetAppropriationsId, DateTime dateEntry);
+
     }
 }

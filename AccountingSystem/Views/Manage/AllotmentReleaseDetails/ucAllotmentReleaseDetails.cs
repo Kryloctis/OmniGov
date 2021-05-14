@@ -78,48 +78,106 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return false;
         }
 
+        private void dtDateIssued_ValueChanged(object sender, EventArgs e)
+        {
+            AROyearValue();
+        }
+
+        private void ucAllotmentReleaseDetails_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                AROyearValue();
+                dtDateIssued.MinDate = dateEntry;
+                IsBudgetAppropriationContinuing();
+            }
+        }
+
+        private void IsBudgetAppropriationContinuing()
+        {
+            DateTime maxDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
+            var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationID);
+            bool budgetAppropriationContinuing = Convert.ToByte(budgetAppropriationRepo["continuing"]) == 0 ? false : true;
+
+
+            if (!budgetAppropriationContinuing)
+                dtDateIssued.MaxDate = maxDate;
+        }
+
+        private bool ShowErrorSeriesNo(ErrorProvider ep, MaskedTextBox mskTxtSeriesNo, MaskedTextBox mskTxtYear)
+        {
+            try
+            {
+                if (!mskTxtSeriesNo.MaskCompleted)
+                {
+                    ep.SetError(mskTxtYear, "ARO Series No. is required.");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void mskTxtSeriesNo_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = ShowErrorSeriesNo(epARONo, mskTxtSeriesNo, mskTxtYear);
+        }
+
+        private void mskTxtSeriesNo_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearMaskedTextboxError(epARONo, mskTxtYear);
+        }
+
+
         #region Validations
 
         private void AmountLogic(ErrorProvider ep, NumericUpDown numericUpDown, CancelEventArgs e) 
         {
-            var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationID);
+            DateTime allotmentReleaseDateIssued = dtDateIssued.Value;
 
-            int fundId = Convert.ToInt32(budgetAppropriationRepo["funds_id"]);
-            int fppId = Convert.ToInt32(budgetAppropriationRepo["function_program_project_id"]);
-            int? othersFPPId = string.IsNullOrEmpty(budgetAppropriationRepo["others_fpp_id"]) ? null : Convert.ToInt32(budgetAppropriationRepo["others_fpp_id"]);
-            int allotmentClassId = Convert.ToInt32(budgetAppropriationRepo["allotment_classes_id"]);
-            int genLedgetAccountId = Convert.ToInt32(budgetAppropriationRepo["general_ledger_accounts_id"]);
+            var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationID);
 
             //Get Total Appropriation
             decimal appropriationAmount = Convert.ToDecimal(budgetAppropriationRepo["amount"]);
 
-            decimal supplementalAppropriationAmount = Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountById(budgetAppropriationID);
+            //Get Total Supplemental Appropriation by date
+            decimal supplementalAppropriationAmount = Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountByIdAndDateEntry(budgetAppropriationID, allotmentReleaseDateIssued);
 
             decimal totalAppropriationAmount = appropriationAmount + supplementalAppropriationAmount;
 
-            //Get total Allotment Release by date
-            decimal totalAllotmentReleaseAmount = Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountByYear(budgetAppropriationID, fundId,  fppId,  othersFPPId,  allotmentClassId,  genLedgetAccountId);
+            decimal totalAllotmentReleaseAmount = Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountById(budgetAppropriationID);
+
 
             //Get Appropriation Balance
             decimal appropriationBalance = totalAppropriationAmount - totalAllotmentReleaseAmount;
 
 
+            string errorText = "The amount you entered exceeds the appropriate balance \n or on the effective date of supplemental."; 
+
             if (allotmentReleaseID == 0)
             {
+                bool amountExceeds = numericUpDown.Value > appropriationBalance;
 
-                string errorText = numericUpDown.Value > appropriationBalance ? "The amount you entered exceeds the appropriate balance." : string.Empty;
-                bool errorBoolean = numericUpDown.Value > appropriationBalance ? true : false;
-                ep.SetError(nudAmount, errorText);
-                e.Cancel = errorBoolean;
+                if (amountExceeds)
+                {
+                    ep.SetError(nudAmount, errorText);
+                    e.Cancel = amountExceeds;
+                }
 
             }
 
             else
             {
-                string errorText = numericUpDown.Value > appropriationBalance + currentAllotmentReleaseAmount ? "The amount you entered exceeds the appropriate balance." : string.Empty;
-                bool errorBoolean = numericUpDown.Value > appropriationBalance + currentAllotmentReleaseAmount ? true : false;
-                ep.SetError(nudAmount, errorText);
-                e.Cancel = errorBoolean;
+                bool amountExceeds = numericUpDown.Value > appropriationBalance + currentAllotmentReleaseAmount;
+
+                if (amountExceeds) 
+                {
+                    ep.SetError(nudAmount, errorText);
+                    e.Cancel = amountExceeds;
+                }
             }
         }
 
@@ -188,58 +246,5 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         }
 
         #endregion Validations
-
-        private void dtDateIssued_ValueChanged(object sender, EventArgs e)
-        {
-            AROyearValue();
-        }
-
-        private void ucAllotmentReleaseDetails_Load(object sender, EventArgs e)
-        {
-            if (!DesignMode)
-            {
-                AROyearValue();
-                dtDateIssued.MinDate = dateEntry;
-                IsBudgetAppropriationContinuing();
-            }
-        }
-
-        private void IsBudgetAppropriationContinuing()
-        {
-            DateTime maxDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
-            var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationID);
-            bool budgetAppropriationContinuing = Convert.ToByte(budgetAppropriationRepo["continuing"]) == 0? false : true;
-
-
-            if(!budgetAppropriationContinuing)
-                dtDateIssued.MaxDate = maxDate;
-        }
-
-        private bool ShowErrorSeriesNo(ErrorProvider ep, MaskedTextBox mskTxtSeriesNo, MaskedTextBox mskTxtYear) 
-        {
-            try
-            {
-                if (!mskTxtSeriesNo.MaskCompleted) 
-                {
-                    ep.SetError(mskTxtYear, "ARO Series No. is required.");
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private void mskTxtSeriesNo_Validating(object sender, CancelEventArgs e)
-        {
-           e.Cancel = ShowErrorSeriesNo(epARONo, mskTxtSeriesNo, mskTxtYear);
-        }
-
-        private void mskTxtSeriesNo_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearMaskedTextboxError(epARONo, mskTxtYear);
-        }
     }
 }

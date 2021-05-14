@@ -35,8 +35,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.btnCancel = new System.Windows.Forms.ToolStripButton();
-            this.ucObligationRequestMain1 = new AccountingSystem.Views.Transactions.ObligationRequest.ucObligationRequestMain();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
+            this.ucObligationRequestMain1 = new AccountingSystem.Views.Transactions.ObligationRequest.ucObligationRequestMain();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +52,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnSearch});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(608, 50);
+            this.toolStrip1.Size = new System.Drawing.Size(658, 50);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -104,15 +104,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
-            // ucObligationRequestMain1
-            // 
-            this.ucObligationRequestMain1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucObligationRequestMain1.Location = new System.Drawing.Point(11, 60);
-            this.ucObligationRequestMain1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.ucObligationRequestMain1.Name = "ucObligationRequestMain1";
-            this.ucObligationRequestMain1.Size = new System.Drawing.Size(597, 536);
-            this.ucObligationRequestMain1.TabIndex = 1;
-            // 
             // btnSearch
             // 
             this.btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -126,12 +117,21 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSearch.ToolTipText = "&Search";
             // 
+            // ucObligationRequestMain1
+            // 
+            this.ucObligationRequestMain1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ucObligationRequestMain1.Location = new System.Drawing.Point(17, 60);
+            this.ucObligationRequestMain1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.ucObligationRequestMain1.Name = "ucObligationRequestMain1";
+            this.ucObligationRequestMain1.Size = new System.Drawing.Size(640, 561);
+            this.ucObligationRequestMain1.TabIndex = 1;
+            // 
             // frmObligationRequestMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(608, 598);
+            this.ClientSize = new System.Drawing.Size(658, 633);
             this.Controls.Add(this.ucObligationRequestMain1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

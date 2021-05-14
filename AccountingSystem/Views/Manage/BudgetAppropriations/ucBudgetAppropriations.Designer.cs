@@ -45,7 +45,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.epAllotmentClass = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
             this.epGeneralLedgerAcc = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epBudgetAppropriation = new System.Windows.Forms.ErrorProvider(this.components);
             this.dtDateEntry = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -61,7 +60,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             ((System.ComponentModel.ISupportInitialize)(this.epAllotmentClass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epGeneralLedgerAcc)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epBudgetAppropriation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epTypeOfFund)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epYear)).BeginInit();
@@ -74,7 +72,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.cmbxFPP.Name = "cmbxFPP";
             this.cmbxFPP.Size = new System.Drawing.Size(436, 23);
             this.cmbxFPP.TabIndex = 3;
-            this.cmbxFPP.SelectedValueChanged += new System.EventHandler(this.cmbxFPP_SelectedValueChanged);
             this.cmbxFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxFPP_Validating);
             this.cmbxFPP.Validated += new System.EventHandler(this.cmbxFPP_Validated);
             // 
@@ -113,9 +110,8 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.cmbxAllotmentClass.Name = "cmbxAllotmentClass";
             this.cmbxAllotmentClass.Size = new System.Drawing.Size(436, 23);
             this.cmbxAllotmentClass.TabIndex = 5;
-            this.cmbxAllotmentClass.SelectedValueChanged += new System.EventHandler(this.cmbxAllotmentClass_SelectedValueChanged);
             this.cmbxAllotmentClass.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAllotmentClass_Validating);
-            this.cmbxAllotmentClass.Validated += new System.EventHandler(this.cmbxAllotmentClass_Validated);
+            this.cmbxAllotmentClass.Validated += new System.EventHandler(this.CmbxAllotmentClass_Validated);
             // 
             // label3
             // 
@@ -134,6 +130,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.cmbxLedgerAccount.Name = "cmbxLedgerAccount";
             this.cmbxLedgerAccount.Size = new System.Drawing.Size(436, 23);
             this.cmbxLedgerAccount.TabIndex = 6;
+            this.cmbxLedgerAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxLedgerAccount_KeyDown);
             this.cmbxLedgerAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxLedgerAccount_Validating);
             this.cmbxLedgerAccount.Validated += new System.EventHandler(this.cmbxLedgerAccount_Validated);
             // 
@@ -142,9 +139,9 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(0, 177);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(134, 15);
+            this.label4.Size = new System.Drawing.Size(52, 15);
             this.label4.TabIndex = 1;
-            this.label4.Text = "General Ledger Account";
+            this.label4.Text = "Account";
             // 
             // label5
             // 
@@ -190,10 +187,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // epGeneralLedgerAcc
             // 
             this.epGeneralLedgerAcc.ContainerControl = this;
-            // 
-            // epBudgetAppropriation
-            // 
-            this.epBudgetAppropriation.ContainerControl = this;
             // 
             // dtDateEntry
             // 
@@ -306,15 +299,13 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.Controls.Add(this.cmbxFPP);
             this.Name = "ucBudgetAppropriations";
             this.Size = new System.Drawing.Size(600, 252);
-            this.Validating += new System.ComponentModel.CancelEventHandler(this.ucBudgetAppropriations_Validating);
-            this.Validated += new System.EventHandler(this.ucBudgetAppropriations_Validated);
+            this.Load += new System.EventHandler(this.ucBudgetAppropriations_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFunctionProgramProject)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFunctionProgramProject)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAllotmentClass)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epGeneralLedgerAcc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epBudgetAppropriation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epTypeOfFund)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epYear)).EndInit();
@@ -347,7 +338,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
         private System.Windows.Forms.ErrorProvider epYear;
         internal System.Windows.Forms.NumericUpDown nudYear;
         internal System.Windows.Forms.ComboBox cmbxTypeOfFund;
-        internal System.Windows.Forms.ErrorProvider epBudgetAppropriation;
         internal System.Windows.Forms.CheckBox chckbxContinuing;
     }
 }
