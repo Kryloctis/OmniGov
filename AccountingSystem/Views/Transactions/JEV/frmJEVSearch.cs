@@ -171,10 +171,12 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             if (cashReceiptsJournalRepository.JevIdExist(jevId))
             {
-                Dictionary<string, string> checkDisbursementsData = cashReceiptsJournalRepository.GetViewRecordByJevID(jevId);
+                Dictionary<string, string> checkDisbursementsDict = cashReceiptsJournalRepository.GetViewRecordByJevID(jevId);
 
-                uc.txtRCIORADA.Text = checkDisbursementsData["rcd_number"];
-                uc.cmbCollectingDisbursingOfficer.SelectedValue = checkDisbursementsData["collecting_officers_id"];
+                uc.txtDVRCDNo.Text = checkDisbursementsDict["rcd_no"];
+                uc.cmbCollectingDisbursingOfficer.SelectedValue = checkDisbursementsDict["collecting_officers_id"];
+                uc.txtRCIORADA.Text = checkDisbursementsDict["or_no"];
+                uc.dtpCheckORPaid.Value = Convert.ToDateTime(checkDisbursementsDict["or_date"]);
             }
         }
 
