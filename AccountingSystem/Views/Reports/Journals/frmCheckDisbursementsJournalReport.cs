@@ -48,7 +48,7 @@ namespace AccountingSystem.Views.Reports.Journals
                 var checkDisbursementDict = checkDisbursementsRepository.GetRecordByJevID(jevId);
                 DataRow row = dtCheckDisbursementsJournal.NewRow();
                 row["date"] = item["date_entry"];
-                row["ref"] = checkDisbursementDict["check_number"];
+                row["ref"] = checkDisbursementDict["check_no"];
                 row["payee"] = checkDisbursementDict["payee"];
 
                 if (Convert.ToBoolean(item["is_debit"]))

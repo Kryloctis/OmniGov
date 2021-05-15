@@ -10,6 +10,7 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private const string tableName = "check_disbursements_journal";
+        private const string viewTableName = "view_check_disbursement_journal";
 
         public CheckDisbursementsJournalRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -106,7 +107,7 @@ namespace ACC.Data
                     new object[] { "@jev_id", DbType.Int32, jevId},
                 };
 
-                string query = $"SELECT id, check_date, check_no, dv_no, rci_no FROM {tableName} WHERE jev_id = @jev_id";
+                string query = $"SELECT id, payee, check_date, check_no, dv_no, rci_no FROM {viewTableName} WHERE jev_id = @jev_id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -114,6 +115,7 @@ namespace ACC.Data
                         return record;
 
                     record.Add("id", reader.Rows[0]["id"].ToString());
+                    record.Add("payee", reader.Rows[0]["payee"].ToString());
                     record.Add("check_date", reader.Rows[0]["check_date"].ToString());
                     record.Add("check_no", reader.Rows[0]["check_no"].ToString());
                     record.Add("dv_no", reader.Rows[0]["dv_no"].ToString());
