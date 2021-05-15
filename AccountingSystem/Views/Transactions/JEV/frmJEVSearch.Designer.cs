@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.txtJEV.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtJEV.Location = new System.Drawing.Point(12, 12);
-            this.txtJEV.Mask = "00-0000-00-0000";
+            this.txtJEV.Mask = "000-0000-00-0000";
             this.txtJEV.Name = "txtJEV";
             this.txtJEV.Size = new System.Drawing.Size(357, 35);
             this.txtJEV.TabIndex = 0;

@@ -38,7 +38,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             try
             {
-                var user = Helper.LoggedInUserData();
+                var userId = Helper.UserId;
                 var uc = ucjev1;
 
                 // validate form
@@ -60,15 +60,15 @@ namespace AccountingSystem.Views.Transactions.JEV
                     case "General Journal":
                     case "Procurement Received Journal":
                     case "Cash Disbursements Journal":
-                        return InsertJournal(user, uc);
+                        return InsertJournal(userId, uc);
 
                     case "Cash Receipts Journal":
-                        return InsertCashReceiptsJournal(user, uc);
+                        return InsertCashReceiptsJournal(userId, uc);
                     case "Check Disbursements Journal":
-                        return InsertCheckDisbursementJournal(user, uc);
+                        return InsertCheckDisbursementJournal(userId, uc);
 
                     case "Advice to Debit Account Disbursement Journal":
-                        return InsertADADisbursementsJournal(user, uc);
+                        return InsertADADisbursementsJournal(userId, uc);
                 }
             }
             catch (Exception ex)
@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             return false;
         }
 
-        private static JEVModel ParseJEVModelData(Dictionary<string, string> user, ucJEV uc, bool isUpdate = false)
+        private static JEVModel ParseJEVModelData(byte userId, ucJEV uc, bool isUpdate = false)
         {
             string jevNo = $"{uc.txtFundsJevNo.Text}-{uc.txtJEVNo.Text.Trim()}";
             var jevModel = new JEVModel();
@@ -90,12 +90,14 @@ namespace AccountingSystem.Views.Transactions.JEV
             jevModel.JournalsId = uc.journalId;
             jevModel.JEVNumber = jevNo;
             jevModel.DateEntry = uc.dtpDateEntry.Value;
+            jevModel.RefNo = uc.txtRefNo.Text.Trim();
+            jevModel.Payee = uc.txtPayee.Text.Trim();
             jevModel.Explanation = uc.txtExplanation.Text.Trim();
 
             if (!isUpdate)
-                jevModel.CreatedBy = Convert.ToByte(user["id"]);
+                jevModel.CreatedBy = userId;
             else
-                jevModel.UpdatedBy = Convert.ToByte(user["id"]);
+                jevModel.UpdatedBy = userId;
 
             return jevModel;
         }
@@ -134,29 +136,31 @@ namespace AccountingSystem.Views.Transactions.JEV
             return jevAccountsModelList;
         }
 
-        private bool InsertJournal(Dictionary<string, string> user, ucJEV uc)
+        private bool InsertJournal(byte userId, ucJEV uc)
         {
-            JEVModel jevModel = ParseJEVModelData(user, uc);
+            JEVModel jevModel = ParseJEVModelData(userId, uc);
 
             return Factory.JEVRepository().Insert(jevModel, JevAcountsModelList());
         }
 
-        private bool InsertCheckDisbursementJournal(Dictionary<string, string> user, ucJEV uc)
+        private bool InsertCheckDisbursementJournal(byte userId, ucJEV uc)
         {
-            JEVModel jevModel = ParseJEVModelData(user, uc);
+            JEVModel jevModel = ParseJEVModelData(userId, uc);
 
             var checkDisbursementsModel = new CheckDisbursementsJournalModel()
             {
-                CheckNumber = uc.txtRCIORADA.Text.Trim(),
-                Payee = uc.txtPayee.Text.Trim()
+                CheckDate = uc.dtpCheckORPaid.Value,
+                CheckNo = uc.txtCheckNo.Text.Trim(),
+                DVNo = uc.txtDVRCDNo.Text.Trim(),
+                RCINo = uc.txtRCIORADA.Text.Trim()
             };
 
             return Factory.JEVRepository().InsertWithCheckDisbursement(jevModel, JevAcountsModelList(), checkDisbursementsModel);
         }
 
-        private bool InsertCashReceiptsJournal(Dictionary<string, string> user, ucJEV uc)
+        private bool InsertCashReceiptsJournal(byte userId, ucJEV uc)
         {
-            JEVModel jevModel = ParseJEVModelData(user, uc);
+            JEVModel jevModel = ParseJEVModelData(userId, uc);
 
             var cashReceiptsJournalModel = new CashReceiptsJournalModel()
             {
@@ -168,9 +172,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             return Factory.JEVRepository().InsertWithCashReceipts(jevModel, JevAcountsModelList(), cashReceiptsJournalModel);
         }
 
-        private bool InsertADADisbursementsJournal(Dictionary<string, string> user, ucJEV uc)
+        private bool InsertADADisbursementsJournal(byte userId, ucJEV uc)
         {
-            JEVModel jevModel = ParseJEVModelData(user, uc);
+            JEVModel jevModel = ParseJEVModelData(userId, uc);
 
             var aDADisbursementsJournalModel = new ADADisbursementsJournalModel()
             {
@@ -180,30 +184,32 @@ namespace AccountingSystem.Views.Transactions.JEV
             return Factory.JEVRepository().InsertWithADADisbursements(jevModel, JevAcountsModelList(), aDADisbursementsJournalModel);
         }
 
-        private bool UpdateJournal(Dictionary<string, string> user, ucJEV uc)
+        private bool UpdateJournal(byte userId, ucJEV uc)
         {
-            JEVModel jevModel = ParseJEVModelData(user, uc, true);
+            JEVModel jevModel = ParseJEVModelData(userId, uc, true);
 
             return Factory.JEVRepository().Update(jevModel, JevAcountsModelList());
         }
 
-        private bool UpdateCheckDisbursementJournal(Dictionary<string, string> user, ucJEV uc)
+        private bool UpdateCheckDisbursementJournal(byte userId, ucJEV uc)
         {
-            JEVModel jevModel = ParseJEVModelData(user, uc, true);
+            JEVModel jevModel = ParseJEVModelData(userId, uc, true);
 
             var checkDisbursementsModel = new CheckDisbursementsJournalModel()
             {
                 JevId = uc.jevId,
-                CheckNumber = uc.txtRCIORADA.Text.Trim(),
-                Payee = uc.txtPayee.Text.Trim()
+                CheckDate = uc.dtpCheckORPaid.Value,
+                CheckNo = uc.txtCheckNo.Text.Trim(),
+                DVNo = uc.txtDVRCDNo.Text.Trim(),
+                RCINo = uc.txtRCIORADA.Text.Trim()
             };
 
             return Factory.JEVRepository().UpdateWithCheckDisbursement(jevModel, JevAcountsModelList(), checkDisbursementsModel);
         }
 
-        private bool UpdateCashReceiptsJournal(Dictionary<string, string> user, ucJEV uc)
+        private bool UpdateCashReceiptsJournal(byte userId, ucJEV uc)
         {
-            JEVModel jevModel = ParseJEVModelData(user, uc, true);
+            JEVModel jevModel = ParseJEVModelData(userId, uc, true);
 
             var cashReceiptsJournalModel = new CashReceiptsJournalModel()
             {
@@ -219,7 +225,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             try
             {
-                var user = Helper.LoggedInUserData();
+                var userId = Helper.UserId;
                 var uc = ucjev1;
 
                 // validate form
@@ -240,13 +246,13 @@ namespace AccountingSystem.Views.Transactions.JEV
                     case "General Journal":
                     case "Procurement Received Journal":
                     case "Cash Disbursements Journal":
-                        return UpdateJournal(user, uc);
+                        return UpdateJournal(userId, uc);
 
                     case "Cash Receipts Journal":
-                        return UpdateCashReceiptsJournal(user, uc);
+                        return UpdateCashReceiptsJournal(userId, uc);
 
                     case "Check Disbursements Journal":
-                        return UpdateCheckDisbursementJournal(user, uc);
+                        return UpdateCheckDisbursementJournal(userId, uc);
 
                     case "Advice to Debit Account Disbursement Journal":
                         break;

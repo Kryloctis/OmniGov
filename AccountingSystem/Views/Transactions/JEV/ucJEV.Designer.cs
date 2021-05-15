@@ -71,7 +71,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.epCollectingOfficerPayee = new System.Windows.Forms.ErrorProvider(this.components);
             this.cmbCollectingDisbursingOfficer = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtRefNo = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.lblCheckORPaidDate = new System.Windows.Forms.Label();
             this.dtpCheckORPaid = new System.Windows.Forms.DateTimePicker();
@@ -437,12 +437,12 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.label4.TabIndex = 51;
             this.label4.Text = "Payee";
             // 
-            // textBox1
+            // txtRefNo
             // 
-            this.textBox1.Location = new System.Drawing.Point(81, 197);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(315, 23);
-            this.textBox1.TabIndex = 52;
+            this.txtRefNo.Location = new System.Drawing.Point(81, 197);
+            this.txtRefNo.Name = "txtRefNo";
+            this.txtRefNo.Size = new System.Drawing.Size(315, 23);
+            this.txtRefNo.TabIndex = 52;
             // 
             // label7
             // 
@@ -514,7 +514,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.Controls.Add(this.lblCheckORPaidDate);
             this.Controls.Add(this.dtpCheckORPaid);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtRefNo);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cmbCollectingDisbursingOfficer);
             this.Controls.Add(this.txtCreditTotal);
@@ -592,7 +592,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelJournals;
         private System.Windows.Forms.GroupBox groupFunds;
         internal System.Windows.Forms.ComboBox cmbCollectingDisbursingOfficer;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblCheckORPaidDate;
@@ -601,5 +600,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.Label lblDVRCDNo;
         internal System.Windows.Forms.TextBox txtCheckNo;
         private System.Windows.Forms.Label lblCheckNo;
+        internal System.Windows.Forms.TextBox txtRefNo;
     }
 }

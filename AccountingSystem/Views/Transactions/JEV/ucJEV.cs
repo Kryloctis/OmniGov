@@ -184,6 +184,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             lblCollectingDisbursingOfficer.Visible = false;
             cmbCollectingDisbursingOfficer.Enabled = false;
+            cmbCollectingDisbursingOfficer.Text = string.Empty;
             
         }
 
@@ -203,6 +204,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             lblCollectingDisbursingOfficer.Visible = false;
             cmbCollectingDisbursingOfficer.Enabled = false;
+            cmbCollectingDisbursingOfficer.Text = string.Empty;
         }
 
         private void SetCashDisbursementsJournalFields()
@@ -266,6 +268,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             lblCollectingDisbursingOfficer.Visible = false;
             cmbCollectingDisbursingOfficer.Enabled = false;
+            cmbCollectingDisbursingOfficer.Text = string.Empty;
         }
 
         private void SetCheckDisbursementsJournalFields()
@@ -288,6 +291,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             lblCollectingDisbursingOfficer.Visible = false;
             cmbCollectingDisbursingOfficer.Enabled = false;
+            cmbCollectingDisbursingOfficer.Text = string.Empty;
         }
 
         private void radioJournals_CheckedChanged(object sender, EventArgs e)

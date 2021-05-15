@@ -8,7 +8,10 @@ namespace ACC.Domain.Models
     {
         public int Id { get; set; }
         public int JevId { get; set; }
-        public string CheckNumber { get; set; }
-        public string Payee { get; set; }
+        public DateTime CheckDate { get; set; }
+        public string CheckNo { get; set; }
+        public string DVNo { get; set; }
+        public string RCINo{ get; set; }
+
     }
 }

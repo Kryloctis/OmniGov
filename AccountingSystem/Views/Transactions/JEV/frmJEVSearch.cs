@@ -123,6 +123,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.jevId = jevId;
                     uc.txtExplanation.Text = jevDict["explanation"];
                     uc.dtpDateEntry.Value = Convert.ToDateTime(jevDict["date_entry"]);
+                    uc.txtRefNo.Text = jevDict["ref_no"];
+                    uc.txtPayee.Text = jevDict["payee"];
                     uc.fundId = Convert.ToByte(jevDict["funds_id"]);
                     uc.journalId = Convert.ToByte(jevDict["journals_id"]);
                     CheckedFund(jevDict["fund_name"]);
@@ -147,10 +149,12 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             if (checkDisbursementsRepository.JevIdExist(jevId))
             {
-                Dictionary<string, string> checkDisbursementsData = checkDisbursementsRepository.GetRecordByJevID(jevId);
+                Dictionary<string, string> checkDisbursementsDict = checkDisbursementsRepository.GetRecordByJevID(jevId);
 
-                uc.txtRCIORADA.Text = checkDisbursementsData["check_number"];
-                uc.txtPayee.Text = checkDisbursementsData["payee"];
+                uc.dtpCheckORPaid.Value = Convert.ToDateTime(checkDisbursementsDict["check_date"]);
+                uc.txtCheckNo.Text = checkDisbursementsDict["check_no"];
+                uc.txtDVRCDNo.Text = checkDisbursementsDict["dv_no"];
+                uc.txtRCIORADA.Text = checkDisbursementsDict["rci_no"];
             }
         }
 

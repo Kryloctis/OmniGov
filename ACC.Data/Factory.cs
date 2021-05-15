@@ -8,13 +8,11 @@ namespace AccountingSystem
     {
         private static MySqlGenericCommands mySqlGenericCommands = new MySqlGenericCommands();
 
-        public static IJEVRepository JEVRepository() => new JEVRepository(
-                mySqlGenericCommands,
-                JEVAccountsRepository(),
-                CheckDisbursementsJournalRepository(),
-                CashReceiptsJournalRepository(),
-                ADADisbursementsJournalRepository()
-            );
+        public static IJEVRepository JEVRepository() => new JEVRepository(mySqlGenericCommands,
+                                                                          JEVAccountsRepository(),
+                                                                          CheckDisbursementsJournalRepository(),
+                                                                          CashReceiptsJournalRepository(),
+                                                                          ADADisbursementsJournalRepository());
 
         public static IJEVAccountsRepository JEVAccountsRepository() => new JEVAccountsRepository(mySqlGenericCommands);
 
