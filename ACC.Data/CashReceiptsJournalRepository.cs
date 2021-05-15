@@ -55,10 +55,12 @@ namespace ACC.Data
                 {
                     new object[] { "@jev_id", DbType.Int32, entity.JevId},
                     new object[] { "@collecting_officers_id", DbType.Byte, entity.CollectingOfficerId},
-                    new object[] { "@rcd_number", DbType.String, entity.RCDNumber},
+                    new object[] { "@rcd_no", DbType.String, entity.RCDNo},
+                    new object[] { "@or_no", DbType.String, entity.ORNo},
+                    new object[] { "@or_date", DbType.Date, entity.ORDate},
                 };
 
-                string query = $"INSERT INTO {tableName} (jev_id, collecting_officers_id, rcd_number) VALUES (@jev_id, @collecting_officers_id, @rcd_number)";
+                string query = $"INSERT INTO {tableName} (jev_id, collecting_officers_id, rcd_no, or_no, or_date) VALUES (@jev_id, @collecting_officers_id, @rcd_no, @or_no, @or_date)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -80,10 +82,12 @@ namespace ACC.Data
                 {
                     new object[] { "@jev_id", DbType.Int32, entity.JevId},
                     new object[] { "@collecting_officers_id", DbType.Byte, entity.CollectingOfficerId},
-                    new object[] { "@rcd_number", DbType.String, entity.RCDNumber},
+                    new object[] { "@rcd_number", DbType.String, entity.RCDNo},
+                    new object[] { "@or_no", DbType.String, entity.ORNo},
+                    new object[] { "@or_date", DbType.Date, entity.ORDate},
                 };
 
-                string query = $"UPDATE {tableName} SET collecting_officers_id = @collecting_officers_id, rcd_number = @rcd_number WHERE jev_id = @jev_id";
+                string query = $"UPDATE {tableName} SET collecting_officers_id = @collecting_officers_id, rcd_no = @rcd_no, or_no = @or_no, or_date = @or_date WHERE jev_id = @jev_id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)

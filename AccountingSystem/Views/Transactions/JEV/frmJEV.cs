@@ -164,9 +164,10 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             var cashReceiptsJournalModel = new CashReceiptsJournalModel()
             {
-
                 CollectingOfficerId = Convert.ToByte(uc.cmbCollectingDisbursingOfficer.SelectedValue),
-                RCDNumber = uc.txtRCIORADA.Text.Trim()
+                RCDNo = uc.txtRCIORADA.Text.Trim(),
+                ORNo = uc.txtRCIORADA.Text.Trim(),
+                ORDate = uc.dtpCheckORPaid.Value
             };
 
             return Factory.JEVRepository().InsertWithCashReceipts(jevModel, JevAcountsModelList(), cashReceiptsJournalModel);
@@ -215,7 +216,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 JevId = uc.jevId,
                 CollectingOfficerId = Convert.ToByte(uc.cmbCollectingDisbursingOfficer.SelectedValue),
-                RCDNumber = uc.txtRCIORADA.Text.Trim()
+                RCDNo = uc.txtRCIORADA.Text.Trim(),
+                ORNo = uc.txtRCIORADA.Text.Trim(),
+                ORDate = uc.dtpCheckORPaid.Value
             };
 
             return Factory.JEVRepository().UpdateWithCashReceipts(jevModel, JevAcountsModelList(), cashReceiptsJournalModel);
