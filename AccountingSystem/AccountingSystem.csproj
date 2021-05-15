@@ -97,8 +97,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Transactions\ObligationRequest\" />
-  </ItemGroup>
-
 </Project>

@@ -20,6 +20,7 @@ using AccountingSystem.Views.Dashboard;
 using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Manage.DisbursingOfficer;
 using AccountingSystem.Views.Manage.AccountableForm;
+using AccountingSystem.Views.Transactions.ObligationRequest;
 
 namespace AccountingSystem
 {
@@ -235,7 +236,7 @@ namespace AccountingSystem
 
         private void MenuObligationRequest_Click(object sender, EventArgs e) 
         {
-           
+            _ = new frmObligationRequestMain().ShowDialog();
         }
         
         private void MenuReportCashReceiptsJournal_Click(object sender, EventArgs e)
@@ -285,7 +286,7 @@ namespace AccountingSystem
 
         private void BtnObligationRequest_Click(object sender, EventArgs e)
         {
-            
+            _ = new frmObligationRequestMain().ShowDialog();
         }
 
         private void MenuDisbursingOffice_Click(object sender, EventArgs e)
