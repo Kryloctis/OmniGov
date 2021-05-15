@@ -13,7 +13,6 @@ using AccountingSystem.Views.Manage.Users.List;
 using AccountingSystem.Views.Transactions.JEV;
 using AccountingSystem.Views.Reports.Journals;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
-using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.Ledgers;
@@ -236,7 +235,7 @@ namespace AccountingSystem
 
         private void MenuObligationRequest_Click(object sender, EventArgs e) 
         {
-            _ = new frmObligationRequestMain().ShowDialog();
+           
         }
         
         private void MenuReportCashReceiptsJournal_Click(object sender, EventArgs e)
@@ -286,7 +285,7 @@ namespace AccountingSystem
 
         private void BtnObligationRequest_Click(object sender, EventArgs e)
         {
-            _ = new frmObligationRequestMain().ShowDialog();
+            
         }
 
         private void MenuDisbursingOffice_Click(object sender, EventArgs e)
