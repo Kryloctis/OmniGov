@@ -77,7 +77,25 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@jev_no", DbType.String, $"%{searchText}%" },
+                    new object[] { "@ref_no", DbType.String, $"%{searchText}%" },
+                    new object[] { "@payee", DbType.String, $"%{searchText}%" },
+                    new object[] { "@explanation", DbType.String, $"%{searchText}%" },
+                };
+
+                string query = $"SELECT id, funds_id, journals_id, jev_no, date_entry, ref_no, payee, explanation, is_approved, created_at, created_by, updated_at, updated_by FROM {viewTableName} WHERE is_approved = 1 AND (jev_no LIKE @jev_no OR ref_no LIKE @ref_no OR payee LIKE @payee OR explanation LIKE @explanation)";
+
+                var dtGeneralLedgers = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool IdExist(int id)
@@ -111,9 +129,9 @@ namespace ACC.Data
             }
         }
 
-        public bool InsertWithCashReceipts(JEVModel entity, 
-            List<JEVAccountsModel> jevAccountsModelList, 
-            CashReceiptsJournalModel cashReceiptsJournalModel)
+        public bool InsertWithCashReceipts(JEVModel entity,
+                                           List<JEVAccountsModel> jevAccountsModelList,
+                                           CashReceiptsJournalModel cashReceiptsJournalModel)
         {
             try
             {
@@ -137,8 +155,8 @@ namespace ACC.Data
         }
 
         public bool InsertWithADADisbursements(JEVModel entity,
-            List<JEVAccountsModel> jevAccountsModelList,
-            ADADisbursementsJournalModel aDADisbursementsJournalModel)
+                                               List<JEVAccountsModel> jevAccountsModelList,
+                                               ADADisbursementsJournalModel aDADisbursementsJournalModel)
         {
             try
             {
@@ -208,9 +226,9 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool UpdateWithCheckDisbursement(JEVModel entity, 
-            List<JEVAccountsModel> jevAccountsModelList, 
-            CheckDisbursementsJournalModel checkDisbursementsJournalModel)
+        public bool UpdateWithCheckDisbursement(JEVModel entity,
+                                                List<JEVAccountsModel> jevAccountsModelList,
+                                                CheckDisbursementsJournalModel checkDisbursementsJournalModel)
         {
             try
             {
@@ -230,9 +248,9 @@ namespace ACC.Data
             }
         }
 
-        public bool UpdateWithCashReceipts(JEVModel entity, 
-            List<JEVAccountsModel> jevAccountsModelList,
-            CashReceiptsJournalModel cashReceiptsJournalModel)
+        public bool UpdateWithCashReceipts(JEVModel entity,
+                                           List<JEVAccountsModel> jevAccountsModelList,
+                                           CashReceiptsJournalModel cashReceiptsJournalModel)
         {
             try
             {
