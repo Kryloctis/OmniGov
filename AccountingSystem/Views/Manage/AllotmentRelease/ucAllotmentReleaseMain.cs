@@ -21,6 +21,19 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             InitializeComponent();
         }
 
+        internal void ResetForm()
+        {
+            panel1.Enabled = true;
+            mskSeriesNo.Text = string.Empty;
+            dtDateIssued.Value = DateTime.Now;
+            dtDateIssued.Enabled = true;
+            LoadFPPCombobox();
+            LoadFunds();
+            LoadAllotmentClasses();
+            dgAllotmentRelease.Rows.Clear();
+            txtPurpose.Text = string.Empty;
+        }
+
         internal string GetFormErrors()
         {
             var errorArray = new string[5];
