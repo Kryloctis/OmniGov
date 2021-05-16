@@ -299,6 +299,50 @@ namespace ACC.Data
             }
         }
 
+        public bool UpdateWithADADisbursements(JEVModel entity,
+                                               List<JEVAccountsModel> jevAccountsModelList,
+                                               ADADisbursementsJournalModel aDADisbursementsJournalModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    _ = Update(entity, jevAccountsModelList);
+
+                    _ = _aDADisbursementsJournalRepository.UpdateByJevId(aDADisbursementsJournalModel);
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool UpdateWithCashDisbursements(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    _ = Update(entity, jevAccountsModelList);
+
+                    _ = _cashDisbursementsJournalRepository.UpdateByJevId(cashDisbursementsJournalModel);
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool Update(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList)
         {
             try
@@ -455,27 +499,6 @@ namespace ACC.Data
             }
 
             return record;
-        }
-
-        public bool UpdateWithADADisbursements(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, ADADisbursementsJournalModel aDADisbursementsJournalModel)
-        {
-            try
-            {
-                using (var scope = new TransactionScope())
-                {
-                    _ = Update(entity, jevAccountsModelList);
-
-                    _ = _aDADisbursementsJournalRepository.UpdateByJevId(aDADisbursementsJournalModel);
-
-                    scope.Complete();
-                    return true;
-                }
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
         }
     }
 }

@@ -256,6 +256,21 @@ namespace AccountingSystem.Views.Transactions.JEV
             return Factory.JEVRepository().UpdateWithADADisbursements(jevModel, JevAcountsModelList(), aDADisbursementsJournalModel);
         }
 
+        private bool UpdateCashDisbursementsJournal(byte userId, ucJEV uc)
+        {
+            JEVModel jevModel = ParseJEVModelData(userId, uc, true);
+
+            var cashDisbursementsJournalModel = new CashDisbursementsJournalModel()
+            {
+                JevId = uc.jevId,
+                DisbursingOfficerId = Convert.ToInt32(uc.cmbCollectingDisbursingOfficer.SelectedValue),
+                DVNo = uc.txtDVRCDNo.Text.Trim(),
+                DatePaid = uc.dtpCheckORPaid.Value
+            };
+
+            return Factory.JEVRepository().UpdateWithCashDisbursements(jevModel, JevAcountsModelList(), cashDisbursementsJournalModel);
+        }
+
         private bool UpdateData()
         {
             try
@@ -280,8 +295,10 @@ namespace AccountingSystem.Views.Transactions.JEV
                 {
                     case "General Journal":
                     case "Procurement Received Journal":
-                    case "Cash Disbursements Journal":
                         return UpdateJournal(userId, uc);
+
+                    case "Cash Disbursements Journal":
+                        return UpdateCashDisbursementsJournal(userId, uc);
 
                     case "Cash Receipts Journal":
                         return UpdateCashReceiptsJournal(userId, uc);

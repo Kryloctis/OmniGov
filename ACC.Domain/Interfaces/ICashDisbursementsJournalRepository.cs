@@ -7,5 +7,10 @@ namespace ACC.Domain.Interfaces
 {
     public interface ICashDisbursementsJournalRepository : IRepository<CashDisbursementsJournalModel>
     {
+        bool UpdateByJevId(CashDisbursementsJournalModel entity);
+
+        bool JevIdExist(int jevId);
+
+        Dictionary<string, string> GetViewRecordByJevID(int jevId);
     }
 }
