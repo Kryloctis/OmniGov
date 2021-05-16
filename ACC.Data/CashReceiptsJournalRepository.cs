@@ -55,10 +55,12 @@ namespace ACC.Data
                 {
                     new object[] { "@jev_id", DbType.Int32, entity.JevId},
                     new object[] { "@collecting_officers_id", DbType.Byte, entity.CollectingOfficerId},
-                    new object[] { "@rcd_number", DbType.String, entity.RCDNumber},
+                    new object[] { "@rcd_no", DbType.String, entity.RCDNo},
+                    new object[] { "@or_no", DbType.String, entity.ORNo},
+                    new object[] { "@or_date", DbType.Date, entity.ORDate},
                 };
 
-                string query = $"INSERT INTO {tableName} (jev_id, collecting_officers_id, rcd_number) VALUES (@jev_id, @collecting_officers_id, @rcd_number)";
+                string query = $"INSERT INTO {tableName} (jev_id, collecting_officers_id, rcd_no, or_no, or_date) VALUES (@jev_id, @collecting_officers_id, @rcd_no, @or_no, @or_date)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -80,10 +82,12 @@ namespace ACC.Data
                 {
                     new object[] { "@jev_id", DbType.Int32, entity.JevId},
                     new object[] { "@collecting_officers_id", DbType.Byte, entity.CollectingOfficerId},
-                    new object[] { "@rcd_number", DbType.String, entity.RCDNumber},
+                    new object[] { "@rcd_no", DbType.String, entity.RCDNo},
+                    new object[] { "@or_no", DbType.String, entity.ORNo},
+                    new object[] { "@or_date", DbType.Date, entity.ORDate},
                 };
 
-                string query = $"UPDATE {tableName} SET collecting_officers_id = @collecting_officers_id, rcd_number = @rcd_number WHERE jev_id = @jev_id";
+                string query = $"UPDATE {tableName} SET collecting_officers_id = @collecting_officers_id, rcd_no = @rcd_no, or_no = @or_no, or_date = @or_date WHERE jev_id = @jev_id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -103,21 +107,23 @@ namespace ACC.Data
                     new object[] { "@jev_id", DbType.Int32, jevId},
                 };
 
-                string query = $"SELECT id, collecting_officers_id, rcd_number, first_name, mid_initial, last_name, full_name, job_title FROM {viewTableName} WHERE jev_id = @jev_id";
+                string query = $"SELECT id, collecting_officers_id, rcd_no, or_no, or_date, first_name, mid_initial, last_name, full_name, job_title FROM {viewTableName} WHERE jev_id = @jev_id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
                         return record;
 
-                    record.Add("id", reader.Rows[0][0].ToString());
-                    record.Add("collecting_officers_id", reader.Rows[0][1].ToString());
-                    record.Add("rcd_number", reader.Rows[0][2].ToString());
-                    record.Add("first_name", reader.Rows[0][3].ToString());
-                    record.Add("mid_initial", reader.Rows[0][4].ToString());
-                    record.Add("last_name", reader.Rows[0][5].ToString());
-                    record.Add("full_name", reader.Rows[0][6].ToString());
-                    record.Add("job_title", reader.Rows[0][7].ToString());
+                    record.Add("id", reader.Rows[0]["id"].ToString());
+                    record.Add("collecting_officers_id", reader.Rows[0]["collecting_officers_id"].ToString());
+                    record.Add("rcd_no", reader.Rows[0]["rcd_no"].ToString());
+                    record.Add("or_no", reader.Rows[0]["or_no"].ToString());
+                    record.Add("or_date", reader.Rows[0]["or_date"].ToString());
+                    record.Add("first_name", reader.Rows[0]["first_name"].ToString());
+                    record.Add("mid_initial", reader.Rows[0]["mid_initial"].ToString());
+                    record.Add("last_name", reader.Rows[0]["last_name"].ToString());
+                    record.Add("full_name", reader.Rows[0]["full_name"].ToString());
+                    record.Add("job_title", reader.Rows[0]["job_title"].ToString());
                 }
             }
             catch (Exception)

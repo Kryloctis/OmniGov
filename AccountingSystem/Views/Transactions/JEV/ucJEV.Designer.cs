@@ -30,8 +30,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupFunds = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelFunds = new System.Windows.Forms.FlowLayoutPanel();
             this.groupJournals = new System.Windows.Forms.GroupBox();
@@ -135,7 +135,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnRemoveAccount.Location = new System.Drawing.Point(783, 525);
             this.btnRemoveAccount.Name = "btnRemoveAccount";
             this.btnRemoveAccount.Size = new System.Drawing.Size(75, 23);
-            this.btnRemoveAccount.TabIndex = 7;
+            this.btnRemoveAccount.TabIndex = 12;
             this.btnRemoveAccount.Text = "Remove";
             this.btnRemoveAccount.UseVisualStyleBackColor = true;
             this.btnRemoveAccount.Click += new System.EventHandler(this.btnRemoveAccount_Click);
@@ -145,7 +145,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnEditAccount.Location = new System.Drawing.Point(702, 525);
             this.btnEditAccount.Name = "btnEditAccount";
             this.btnEditAccount.Size = new System.Drawing.Size(75, 23);
-            this.btnEditAccount.TabIndex = 6;
+            this.btnEditAccount.TabIndex = 11;
             this.btnEditAccount.Text = "Edit...";
             this.btnEditAccount.UseVisualStyleBackColor = true;
             this.btnEditAccount.Click += new System.EventHandler(this.btnEditAccount_Click);
@@ -155,7 +155,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnAddAccount.Location = new System.Drawing.Point(621, 525);
             this.btnAddAccount.Name = "btnAddAccount";
             this.btnAddAccount.Size = new System.Drawing.Size(75, 23);
-            this.btnAddAccount.TabIndex = 5;
+            this.btnAddAccount.TabIndex = 10;
             this.btnAddAccount.Text = "Add...";
             this.btnAddAccount.UseVisualStyleBackColor = true;
             this.btnAddAccount.Click += new System.EventHandler(this.btnAddAccount_Click);
@@ -175,7 +175,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.txtRCIORADA.MaxLength = 30;
             this.txtRCIORADA.Name = "txtRCIORADA";
             this.txtRCIORADA.Size = new System.Drawing.Size(315, 23);
-            this.txtRCIORADA.TabIndex = 3;
+            this.txtRCIORADA.TabIndex = 7;
             this.txtRCIORADA.Validating += new System.ComponentModel.CancelEventHandler(this.txtRefNo_Validating);
             this.txtRCIORADA.Validated += new System.EventHandler(this.txtRefNo_Validated);
             // 
@@ -194,7 +194,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.txtPayee.MaxLength = 99;
             this.txtPayee.Name = "txtPayee";
             this.txtPayee.Size = new System.Drawing.Size(315, 23);
-            this.txtPayee.TabIndex = 4;
+            this.txtPayee.TabIndex = 2;
             this.txtPayee.Validating += new System.ComponentModel.CancelEventHandler(this.txtPayeeCollectingOfficer_Validating);
             this.txtPayee.Validated += new System.EventHandler(this.txtPayeeCollectingOfficer_Validated);
             // 
@@ -290,8 +290,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // Debit
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Debit.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Debit.DefaultCellStyle = dataGridViewCellStyle1;
             this.Debit.HeaderText = "Debit";
             this.Debit.Name = "Debit";
             this.Debit.ReadOnly = true;
@@ -299,8 +299,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // Credit
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Credit.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Credit.DefaultCellStyle = dataGridViewCellStyle2;
             this.Credit.HeaderText = "Credit";
             this.Credit.Name = "Credit";
             this.Credit.ReadOnly = true;
@@ -313,7 +313,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.txtExplanation.Multiline = true;
             this.txtExplanation.Name = "txtExplanation";
             this.txtExplanation.Size = new System.Drawing.Size(315, 81);
-            this.txtExplanation.TabIndex = 1;
+            this.txtExplanation.TabIndex = 3;
             // 
             // label3
             // 
@@ -338,7 +338,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.dtpDateEntry.Location = new System.Drawing.Point(542, 168);
             this.dtpDateEntry.Name = "dtpDateEntry";
             this.dtpDateEntry.Size = new System.Drawing.Size(315, 23);
-            this.dtpDateEntry.TabIndex = 2;
+            this.dtpDateEntry.TabIndex = 4;
             this.dtpDateEntry.ValueChanged += new System.EventHandler(this.dtpDateEntry_ValueChanged);
             // 
             // label1
@@ -389,6 +389,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.txtDebitTotal.ReadOnly = true;
             this.txtDebitTotal.Size = new System.Drawing.Size(100, 23);
             this.txtDebitTotal.TabIndex = 47;
+            this.txtDebitTotal.TabStop = false;
             this.txtDebitTotal.Text = "0.00";
             this.txtDebitTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -399,6 +400,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.txtCreditTotal.ReadOnly = true;
             this.txtCreditTotal.Size = new System.Drawing.Size(100, 23);
             this.txtCreditTotal.TabIndex = 49;
+            this.txtCreditTotal.TabStop = false;
             this.txtCreditTotal.Text = "0.00";
             this.txtCreditTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -426,7 +428,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.cmbCollectingDisbursingOfficer.Location = new System.Drawing.Point(542, 313);
             this.cmbCollectingDisbursingOfficer.Name = "cmbCollectingDisbursingOfficer";
             this.cmbCollectingDisbursingOfficer.Size = new System.Drawing.Size(315, 23);
-            this.cmbCollectingDisbursingOfficer.TabIndex = 50;
+            this.cmbCollectingDisbursingOfficer.TabIndex = 9;
             // 
             // label4
             // 
@@ -442,7 +444,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.txtRefNo.Location = new System.Drawing.Point(81, 197);
             this.txtRefNo.Name = "txtRefNo";
             this.txtRefNo.Size = new System.Drawing.Size(315, 23);
-            this.txtRefNo.TabIndex = 52;
+            this.txtRefNo.TabIndex = 1;
             // 
             // label7
             // 
@@ -467,7 +469,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.dtpCheckORPaid.Location = new System.Drawing.Point(542, 197);
             this.dtpCheckORPaid.Name = "dtpCheckORPaid";
             this.dtpCheckORPaid.Size = new System.Drawing.Size(315, 23);
-            this.dtpCheckORPaid.TabIndex = 54;
+            this.dtpCheckORPaid.TabIndex = 5;
             // 
             // txtDVRCDNo
             // 
@@ -475,7 +477,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.txtDVRCDNo.MaxLength = 30;
             this.txtDVRCDNo.Name = "txtDVRCDNo";
             this.txtDVRCDNo.Size = new System.Drawing.Size(315, 23);
-            this.txtDVRCDNo.TabIndex = 56;
+            this.txtDVRCDNo.TabIndex = 8;
             // 
             // lblDVRCDNo
             // 
@@ -492,7 +494,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.txtCheckNo.MaxLength = 30;
             this.txtCheckNo.Name = "txtCheckNo";
             this.txtCheckNo.Size = new System.Drawing.Size(315, 23);
-            this.txtCheckNo.TabIndex = 60;
+            this.txtCheckNo.TabIndex = 6;
             // 
             // lblCheckNo
             // 
