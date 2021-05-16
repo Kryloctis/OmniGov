@@ -14,6 +14,7 @@ namespace ACC.Data
         private readonly ICheckDisbursementsJournalRepository _checkDisbursementsJournalRepository;
         private readonly ICashReceiptsJournalRepository _cashReceiptsJournalRepository;
         private readonly IADADisbursementsJournalRepository _aDADisbursementsJournalRepository;
+        private readonly ICashDisbursementsJournalRepository _cashDisbursementsJournalRepository;
         private const string tableName = "jev";
         private const string viewTableName = "view_jev";
 
@@ -22,13 +23,15 @@ namespace ACC.Data
             IJEVAccountsRepository jevAccountsRepository,
             ICheckDisbursementsJournalRepository checkDisbursementsJournalRepository,
             ICashReceiptsJournalRepository cashReceiptsJournalRepository,
-            IADADisbursementsJournalRepository aDADisbursementsJournalRepository)
+            IADADisbursementsJournalRepository aDADisbursementsJournalRepository,
+            ICashDisbursementsJournalRepository cashDisbursementsJournalRepository)
         {
             _dbGenericCommands = dbGenericCommands;
             _jevAccountsRepository = jevAccountsRepository;
             _checkDisbursementsJournalRepository = checkDisbursementsJournalRepository;
             _cashReceiptsJournalRepository = cashReceiptsJournalRepository;
             _aDADisbursementsJournalRepository = aDADisbursementsJournalRepository;
+            _cashDisbursementsJournalRepository = cashDisbursementsJournalRepository;
         }
 
         public int CountRecords()
@@ -167,6 +170,31 @@ namespace ACC.Data
                     aDADisbursementsJournalModel.JevId = GetLastInsertedID();
 
                     _ = _aDADisbursementsJournalRepository.Insert(aDADisbursementsJournalModel);
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool InsertWithCashDisbursements(JEVModel entity,
+                                               List<JEVAccountsModel> jevAccountsModelList,
+                                               CashDisbursementsJournalModel cashDisbursementsJournalModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    _ = Insert(entity, jevAccountsModelList);
+
+                    cashDisbursementsJournalModel.JevId = GetLastInsertedID();
+
+                    _ = _cashDisbursementsJournalRepository.Insert(cashDisbursementsJournalModel);
 
                     scope.Complete();
                     return true;

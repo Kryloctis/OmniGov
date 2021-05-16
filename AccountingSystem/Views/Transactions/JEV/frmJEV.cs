@@ -59,11 +59,14 @@ namespace AccountingSystem.Views.Transactions.JEV
                 {
                     case "General Journal":
                     case "Procurement Received Journal":
-                    case "Cash Disbursements Journal":
                         return InsertJournal(userId, uc);
+
+                    case "Cash Disbursements Journal":
+                        return InsertCashDisbursementsJournal(userId, uc);
 
                     case "Cash Receipts Journal":
                         return InsertCashReceiptsJournal(userId, uc);
+
                     case "Check Disbursements Journal":
                         return InsertCheckDisbursementJournal(userId, uc);
 
@@ -184,6 +187,20 @@ namespace AccountingSystem.Views.Transactions.JEV
             };
 
             return Factory.JEVRepository().InsertWithADADisbursements(jevModel, JevAcountsModelList(), aDADisbursementsJournalModel);
+        }
+
+        private bool InsertCashDisbursementsJournal(byte userId, ucJEV uc)
+        {
+            JEVModel jevModel = ParseJEVModelData(userId, uc);
+
+            var cashDisbursementsJournalModel = new CashDisbursementsJournalModel()
+            {
+                DisbursingOfficerId = Convert.ToInt32(uc.cmbCollectingDisbursingOfficer.SelectedValue),
+                DVNo = uc.txtDVRCDNo.Text.Trim(),
+                DatePaid = uc.dtpCheckORPaid.Value
+            };
+
+            return Factory.JEVRepository().InsertWithCashDisbursements(jevModel, JevAcountsModelList(), cashDisbursementsJournalModel);
         }
 
         private bool UpdateJournal(byte userId, ucJEV uc)

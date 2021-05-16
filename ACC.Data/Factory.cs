@@ -12,9 +12,12 @@ namespace AccountingSystem
                                                                           JEVAccountsRepository(),
                                                                           CheckDisbursementsJournalRepository(),
                                                                           CashReceiptsJournalRepository(),
-                                                                          ADADisbursementsJournalRepository());
+                                                                          ADADisbursementsJournalRepository(),
+                                                                          CashDisbursementsJournalRepository());
 
         public static IJEVAccountsRepository JEVAccountsRepository() => new JEVAccountsRepository(mySqlGenericCommands);
+
+        public static ICashDisbursementsJournalRepository CashDisbursementsJournalRepository() => new CashDisbursementsJournalRepository(mySqlGenericCommands);
 
         public static ICheckDisbursementsJournalRepository CheckDisbursementsJournalRepository() => new CheckDisbursementsJournalRepository(mySqlGenericCommands);
 

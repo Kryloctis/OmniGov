@@ -5,6 +5,8 @@ namespace ACC.Domain.Interfaces
 {
     public interface IJEVRepository : IRepository<JEVModel>
     {
+        bool InsertWithCashDisbursements(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel);
+
         bool InsertWithCheckDisbursement(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, CheckDisbursementsJournalModel checkDisbursementsJournalModel);
 
         bool UpdateWithCheckDisbursement(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, CheckDisbursementsJournalModel checkDisbursementsJournalModel);
