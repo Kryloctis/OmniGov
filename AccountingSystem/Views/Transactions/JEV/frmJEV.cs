@@ -165,7 +165,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             var cashReceiptsJournalModel = new CashReceiptsJournalModel()
             {
                 CollectingOfficerId = Convert.ToByte(uc.cmbCollectingDisbursingOfficer.SelectedValue),
-                RCDNo = uc.txtRCIORADA.Text.Trim(),
+                RCDNo = uc.txtDVRCDNo.Text.Trim(),
                 ORNo = uc.txtRCIORADA.Text.Trim(),
                 ORDate = uc.dtpCheckORPaid.Value
             };
