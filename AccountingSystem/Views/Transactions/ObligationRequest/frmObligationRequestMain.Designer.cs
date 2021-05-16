@@ -29,6 +29,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         /// </summary>
         private void InitializeComponent()
         {
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.ucObligationRequestMain1 = new AccountingSystem.Views.Transactions.ObligationRequest.ucObligationRequestMain();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
@@ -37,12 +38,20 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Location = new System.Drawing.Point(0, 642);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(793, 22);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
             // ucObligationRequestMain1
             // 
-            this.ucObligationRequestMain1.Location = new System.Drawing.Point(12, 65);
+            this.ucObligationRequestMain1.Location = new System.Drawing.Point(12, 53);
             this.ucObligationRequestMain1.Name = "ucObligationRequestMain1";
-            this.ucObligationRequestMain1.Size = new System.Drawing.Size(696, 551);
-            this.ucObligationRequestMain1.TabIndex = 0;
+            this.ucObligationRequestMain1.Size = new System.Drawing.Size(780, 576);
+            this.ucObligationRequestMain1.TabIndex = 2;
             // 
             // toolStrip1
             // 
@@ -53,8 +62,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnDelete});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(708, 50);
-            this.toolStrip1.TabIndex = 1;
+            this.toolStrip1.Size = new System.Drawing.Size(793, 50);
+            this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // btnAdd
@@ -85,7 +94,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(44, 47);
-            this.btnDelete.Text = "&Delete";
+            this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // frmObligationRequestMain
@@ -93,9 +102,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(708, 628);
+            this.ClientSize = new System.Drawing.Size(793, 664);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.ucObligationRequestMain1);
+            this.Controls.Add(this.statusStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -112,7 +122,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         }
 
         #endregion
-
+        private System.Windows.Forms.StatusStrip statusStrip1;
         private ucObligationRequestMain ucObligationRequestMain1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         internal System.Windows.Forms.ToolStripButton btnAdd;

@@ -49,8 +49,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.nudYear = new System.Windows.Forms.NumericUpDown();
             this.cmbxMonths = new System.Windows.Forms.ComboBox();
             this.btnLoadRecords = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.txtTotalObligation = new System.Windows.Forms.TextBox();
+            this.lblTotalObligation = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgObligationRequests)).BeginInit();
@@ -58,6 +59,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFPP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAccount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -74,7 +76,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.cmbxFPP.FormattingEnabled = true;
             this.cmbxFPP.Location = new System.Drawing.Point(105, 2);
             this.cmbxFPP.Name = "cmbxFPP";
-            this.cmbxFPP.Size = new System.Drawing.Size(568, 23);
+            this.cmbxFPP.Size = new System.Drawing.Size(653, 23);
             this.cmbxFPP.TabIndex = 0;
             this.cmbxFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxFPP_Validating);
             this.cmbxFPP.Validated += new System.EventHandler(this.cmbxFPP_Validated);
@@ -93,7 +95,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.cmbxOthersFPP.FormattingEnabled = true;
             this.cmbxOthersFPP.Location = new System.Drawing.Point(105, 31);
             this.cmbxOthersFPP.Name = "cmbxOthersFPP";
-            this.cmbxOthersFPP.Size = new System.Drawing.Size(568, 23);
+            this.cmbxOthersFPP.Size = new System.Drawing.Size(653, 23);
             this.cmbxOthersFPP.TabIndex = 1;
             this.cmbxOthersFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxOthersFPP_Validating);
             this.cmbxOthersFPP.Validated += new System.EventHandler(this.cmbxOthersFPP_Validated);
@@ -104,7 +106,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(6, 60);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(667, 55);
+            this.groupBox1.Size = new System.Drawing.Size(752, 55);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Funds";
@@ -115,7 +117,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.flowLayoutPanelFunds.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.flowLayoutPanelFunds.Location = new System.Drawing.Point(3, 19);
             this.flowLayoutPanelFunds.Name = "flowLayoutPanelFunds";
-            this.flowLayoutPanelFunds.Size = new System.Drawing.Size(661, 33);
+            this.flowLayoutPanelFunds.Size = new System.Drawing.Size(746, 33);
             this.flowLayoutPanelFunds.TabIndex = 2;
             // 
             // groupBox2
@@ -124,7 +126,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox2.Location = new System.Drawing.Point(6, 121);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(667, 55);
+            this.groupBox2.Size = new System.Drawing.Size(752, 55);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Allotment";
@@ -135,7 +137,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.flowLayoutPanelAllotment.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.flowLayoutPanelAllotment.Location = new System.Drawing.Point(3, 19);
             this.flowLayoutPanelAllotment.Name = "flowLayoutPanelAllotment";
-            this.flowLayoutPanelAllotment.Size = new System.Drawing.Size(661, 33);
+            this.flowLayoutPanelAllotment.Size = new System.Drawing.Size(746, 33);
             this.flowLayoutPanelAllotment.TabIndex = 3;
             // 
             // label3
@@ -152,7 +154,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.cmbxAccount.FormattingEnabled = true;
             this.cmbxAccount.Location = new System.Drawing.Point(105, 182);
             this.cmbxAccount.Name = "cmbxAccount";
-            this.cmbxAccount.Size = new System.Drawing.Size(568, 23);
+            this.cmbxAccount.Size = new System.Drawing.Size(653, 23);
             this.cmbxAccount.TabIndex = 4;
             this.cmbxAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxAccount_KeyDown);
             this.cmbxAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAccount_Validating);
@@ -161,11 +163,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // dgObligationRequests
             // 
             this.dgObligationRequests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgObligationRequests.Location = new System.Drawing.Point(9, 293);
-            this.dgObligationRequests.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.dgObligationRequests.Location = new System.Drawing.Point(9, 286);
             this.dgObligationRequests.Name = "dgObligationRequests";
             this.dgObligationRequests.RowTemplate.Height = 25;
-            this.dgObligationRequests.Size = new System.Drawing.Size(664, 216);
+            this.dgObligationRequests.Size = new System.Drawing.Size(749, 257);
             this.dgObligationRequests.TabIndex = 8;
             this.dgObligationRequests.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgObligationRequests_ColumnAdded);
             // 
@@ -193,7 +194,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(393, 214);
+            this.label5.Location = new System.Drawing.Point(478, 214);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 15);
             this.label5.TabIndex = 6;
@@ -201,7 +202,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // nudYear
             // 
-            this.nudYear.Location = new System.Drawing.Point(428, 211);
+            this.nudYear.Location = new System.Drawing.Point(513, 211);
             this.nudYear.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -232,7 +233,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnLoadRecords
             // 
-            this.btnLoadRecords.Location = new System.Drawing.Point(567, 257);
+            this.btnLoadRecords.Location = new System.Drawing.Point(652, 257);
             this.btnLoadRecords.Name = "btnLoadRecords";
             this.btnLoadRecords.Size = new System.Drawing.Size(106, 23);
             this.btnLoadRecords.TabIndex = 7;
@@ -240,32 +241,42 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnLoadRecords.UseVisualStyleBackColor = true;
             this.btnLoadRecords.Click += new System.EventHandler(this.btnLoadRecords_Click);
             // 
-            // textBox1
+            // flowLayoutPanel1
             // 
-            this.textBox1.Location = new System.Drawing.Point(483, 515);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(190, 23);
-            this.textBox1.TabIndex = 9;
+            this.flowLayoutPanel1.Controls.Add(this.txtTotalObligation);
+            this.flowLayoutPanel1.Controls.Add(this.lblTotalObligation);
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(9, 549);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(749, 27);
+            this.flowLayoutPanel1.TabIndex = 9;
             // 
-            // label6
+            // txtTotalObligation
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(331, 518);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(146, 15);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Total (Month) Obligations ";
+            this.txtTotalObligation.Location = new System.Drawing.Point(501, 3);
+            this.txtTotalObligation.Name = "txtTotalObligation";
+            this.txtTotalObligation.ReadOnly = true;
+            this.txtTotalObligation.Size = new System.Drawing.Size(245, 23);
+            this.txtTotalObligation.TabIndex = 11;
+            // 
+            // lblTotalObligation
+            // 
+            this.lblTotalObligation.AutoSize = true;
+            this.lblTotalObligation.Location = new System.Drawing.Point(390, 6);
+            this.lblTotalObligation.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            this.lblTotalObligation.Name = "lblTotalObligation";
+            this.lblTotalObligation.Size = new System.Drawing.Size(105, 15);
+            this.lblTotalObligation.TabIndex = 12;
+            this.lblTotalObligation.Text = "Total M Obligation";
             // 
             // ucObligationRequestMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.btnLoadRecords);
             this.Controls.Add(this.cmbxMonths);
             this.Controls.Add(this.nudYear);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dgObligationRequests);
@@ -278,7 +289,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "ucObligationRequestMain";
-            this.Size = new System.Drawing.Size(693, 551);
+            this.Size = new System.Drawing.Size(780, 576);
             this.Load += new System.EventHandler(this.ucObligationRequestMain_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -287,6 +298,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFPP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAccount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -310,11 +323,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.ErrorProvider epOthersFPP;
         internal System.Windows.Forms.ErrorProvider epAccount;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.NumericUpDown nudYear;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label6;
         internal System.Windows.Forms.ComboBox cmbxMonths;
         internal System.Windows.Forms.Button btnLoadRecords;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        internal System.Windows.Forms.Label lblTotalObligation;
+        internal System.Windows.Forms.TextBox txtTotalObligation;
+        internal System.Windows.Forms.NumericUpDown nudYear;
     }
 }

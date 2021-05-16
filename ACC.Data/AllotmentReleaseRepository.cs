@@ -185,7 +185,7 @@ namespace ACC.Data
             }
         }
 
-        public decimal GetViewTotalAllotmentReleaseAmount(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, DateTime dateIssued)
+        public decimal GetViewTotalAllotmentReleaseAmountYear(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, DateTime dateIssued)
         {
 
             try 

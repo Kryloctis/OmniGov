@@ -211,6 +211,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             cmbxMonths.ValueMember = "Key";
         }
 
+
         internal void LoadAllotmentClasses()
         {
             var funds = Factory.AllotmentClassesRepository().GetRecords();
@@ -248,6 +249,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             var radAllotment = sender as RadioButton;
             allotmentClassId = Convert.ToByte(radAllotment.Tag);
+            LoadAccounts();
             LoadAccounts();
         }
 
@@ -365,7 +367,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             else if (FPPNameNotExist())
                 e.Cancel = FPPNameNotExist();
         }
-
 
         private void cmbxFPP_Validated(object sender, EventArgs e)
         {
