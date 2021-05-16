@@ -15,9 +15,17 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal int fundId;
         internal int allotmentClassId;
 
+        private frmObligationRequestMain _frmObligationRequestMain;
+
         public ucObligationRequestMain()
         {
             InitializeComponent();
+        }
+
+
+        internal void LoadReferenceObligationRequestMain(frmObligationRequestMain frmObligationRequestMain) 
+        {
+            _frmObligationRequestMain = frmObligationRequestMain;
         }
 
         internal string GetFormErrors()
@@ -30,23 +38,61 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-
-        private void LoadDatagridFormat() 
+        private decimal GetTotalObligations() 
         {
+            decimal totalObligation = 0;
+
+            foreach (DataGridViewRow item in dgObligationRequests.Rows) 
+            {
+                totalObligation += Convert.ToDecimal(item.Cells["obligation_amount"].Value);
+            }
+
+            return totalObligation;
+        }
+
+        private void LoadObligationRequestRecords() 
+        {
+
+            int fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
+            int? otherFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
+            int accountId = Convert.ToInt32(cmbxAccount.SelectedValue);
+            byte month = Convert.ToByte(cmbxMonths.SelectedValue);
+            short year = Convert.ToInt16(nudYear.Value);
+
             dgObligationRequests.Rows.Clear();
+            dgObligationRequests.Columns.Clear();
 
-
+            dgObligationRequests.Columns.Add("obligation_request_id", "Obligation Request ID");
             dgObligationRequests.Columns.Add("obligation_no", "Obligation No.");
             dgObligationRequests.Columns.Add("account_code", "Account Code");
             dgObligationRequests.Columns.Add("account_name", "Account Name");
             dgObligationRequests.Columns.Add("date_requested", "Date of Request");
             dgObligationRequests.Columns.Add("obligation_amount", "Amount");
+            dgObligationRequests.Columns.Add("created_at", "Created at");
+            dgObligationRequests.Columns.Add("updated_at", "Updated at");
 
-            dgObligationRequests.Columns["obligation_no"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgObligationRequests.Columns["account_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgObligationRequests.Columns["date_requested"].DefaultCellStyle.Format = "dd/MMM/yyyy";
+
+            dgObligationRequests.Columns["created_at"].Visible = false;
+            dgObligationRequests.Columns["updated_at"].Visible = false;
+            dgObligationRequests.Columns["obligation_request_id"].Visible = false;
+            dgObligationRequests.Columns["obligation_no"].Width = 100;
+            dgObligationRequests.Columns["obligation_no"].Resizable = DataGridViewTriState.False;
+            dgObligationRequests.Columns["account_code"].Width = 100;
+            dgObligationRequests.Columns["account_code"].Resizable = DataGridViewTriState.False;
+            dgObligationRequests.Columns["date_requested"].DefaultCellStyle.Format = "MMM/dd/yyyy";
+            dgObligationRequests.Columns["date_requested"].Width = 100;
+            dgObligationRequests.Columns["date_requested"].Resizable = DataGridViewTriState.False;
             dgObligationRequests.Columns["obligation_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgObligationRequests.Columns["obligation_amount"].DefaultCellStyle.Format = "N2";
+
+
+            var dtObligationRequestRecords = Factory.ObligationRequestRepository().GetViewRecordsByIdsAndMonthAndYear(fppId, otherFPPId, fundId, allotmentClassId, accountId, month, year);
+            
+            HelperLoadRecords.ObligationRequestDatagridView(dtObligationRequestRecords,dgObligationRequests);
+
+            txtTotalObligation.Text = GetTotalObligations().ToString("N2");
+
+            _frmObligationRequestMain.lblRecordCount.Text = dgObligationRequests.Rows.Count.ToString(); 
         }
 
         private void LoadFPP()
@@ -327,7 +373,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 LoadFPP();
                 LoadAccounts();
 
-                LoadDatagridFormat();
+                LoadObligationRequestRecords();
                 nudYear.Value = Convert.ToInt16(DateTime.Now.Year);
                 Helper.DatagridDefaultStyle(dgObligationRequests, true);
             }
@@ -408,7 +454,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
 
 
-
         private bool ShowErrorAccountNotExist()
         {
             try
@@ -456,8 +501,16 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             if (ValidateRequirements()) 
             {
-                MessageBox.Show("Test");
+                LoadObligationRequestRecords();
             }
+        }
+
+
+        internal void dgObligationRequests_SelectionChanged(object sender, EventArgs e)
+        {
+            byte[] columnIndexTimestamp = { 6, 7 };
+            Helper.ShowRecordTimestamp(dgObligationRequests, columnIndexTimestamp, _frmObligationRequestMain.lblCreatedAt, _frmObligationRequestMain.lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgObligationRequests, _frmObligationRequestMain.btnEdit, _frmObligationRequestMain.btnDelete);
         }
     }
 }

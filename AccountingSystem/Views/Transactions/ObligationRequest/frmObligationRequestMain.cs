@@ -20,6 +20,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             Helper.LoadFormIcon(this);
             btnAdd.Click += new EventHandler(BtnAdd_Click);
             uc = ucObligationRequestMain1;
+            uc.LoadReferenceObligationRequestMain(this);
         }
 
         private bool ShowObligationRequestAdd() 
@@ -63,6 +64,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
 
         }
+
+
 
     }
 }

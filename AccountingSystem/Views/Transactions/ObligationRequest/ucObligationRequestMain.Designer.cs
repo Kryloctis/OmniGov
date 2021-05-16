@@ -169,6 +169,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.dgObligationRequests.Size = new System.Drawing.Size(749, 257);
             this.dgObligationRequests.TabIndex = 8;
             this.dgObligationRequests.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgObligationRequests_ColumnAdded);
+            this.dgObligationRequests.SelectionChanged += new System.EventHandler(this.dgObligationRequests_SelectionChanged);
             // 
             // epFPP
             // 
@@ -253,21 +254,22 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // txtTotalObligation
             // 
-            this.txtTotalObligation.Location = new System.Drawing.Point(501, 3);
+            this.txtTotalObligation.Location = new System.Drawing.Point(504, 3);
             this.txtTotalObligation.Name = "txtTotalObligation";
             this.txtTotalObligation.ReadOnly = true;
-            this.txtTotalObligation.Size = new System.Drawing.Size(245, 23);
+            this.txtTotalObligation.Size = new System.Drawing.Size(242, 23);
             this.txtTotalObligation.TabIndex = 11;
+            this.txtTotalObligation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblTotalObligation
             // 
             this.lblTotalObligation.AutoSize = true;
-            this.lblTotalObligation.Location = new System.Drawing.Point(390, 6);
+            this.lblTotalObligation.Location = new System.Drawing.Point(407, 6);
             this.lblTotalObligation.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
             this.lblTotalObligation.Name = "lblTotalObligation";
-            this.lblTotalObligation.Size = new System.Drawing.Size(105, 15);
+            this.lblTotalObligation.Size = new System.Drawing.Size(91, 15);
             this.lblTotalObligation.TabIndex = 12;
-            this.lblTotalObligation.Text = "Total M Obligation";
+            this.lblTotalObligation.Text = "Total Obligation";
             // 
             // ucObligationRequestMain
             // 

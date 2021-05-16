@@ -53,13 +53,13 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 var allotmentReleaseNum = txtSearch.Text.Trim();
                 DataTable GetRecordsByBudgetAppropriationID = Factory.AllotmentReleaseRepository().GetRecordsByBudgetAppropriationID(budgetAppropriationId, allotmentReleaseNum);
 
-                HelperLoadRecords.AllotmentReleaseDgV(GetRecordsByBudgetAppropriationID, dgAllotmentRelease, budgetAppropriationId);
+                HelperLoadRecords.AllotmentReleaseDatagridView(GetRecordsByBudgetAppropriationID, dgAllotmentRelease, budgetAppropriationId);
             }
             else 
             {
                 DataTable GetRecordsByBudgetAppropriationID = Factory.AllotmentReleaseRepository().GetRecordsByBudgetAppropriationID(budgetAppropriationId);
 
-                HelperLoadRecords.AllotmentReleaseDgV(GetRecordsByBudgetAppropriationID, dgAllotmentRelease, budgetAppropriationId);
+                HelperLoadRecords.AllotmentReleaseDatagridView(GetRecordsByBudgetAppropriationID, dgAllotmentRelease, budgetAppropriationId);
             }
          
             lblRecordCount.Text = dgAllotmentRelease.Rows.Count.ToString();

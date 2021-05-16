@@ -30,21 +30,77 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private void InitializeComponent()
         {
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.ucObligationRequestMain1 = new AccountingSystem.Views.Transactions.ObligationRequest.ucObligationRequestMain();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
             // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel3,
+            this.lblRecordCount,
+            this.toolStripStatusLabel5,
+            this.toolStripStatusLabel1,
+            this.lblCreatedAt,
+            this.toolStripStatusLabel2,
+            this.lblUpdatedAt});
             this.statusStrip1.Location = new System.Drawing.Point(0, 642);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(793, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(47, 17);
+            this.toolStripStatusLabel3.Text = "Record:";
+            // 
+            // lblRecordCount
+            // 
+            this.lblRecordCount.Name = "lblRecordCount";
+            this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
+            this.lblRecordCount.Text = "0";
+            // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(590, 17);
+            this.toolStripStatusLabel5.Spring = true;
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(67, 17);
+            this.toolStripStatusLabel1.Text = "Created by:";
+            // 
+            // lblCreatedAt
+            // 
+            this.lblCreatedAt.Name = "lblCreatedAt";
+            this.lblCreatedAt.Size = new System.Drawing.Size(0, 17);
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(61, 17);
+            this.toolStripStatusLabel2.Text = "Update at:";
+            // 
+            // lblUpdatedAt
+            // 
+            this.lblUpdatedAt.Name = "lblUpdatedAt";
+            this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
             // 
             // ucObligationRequestMain1
             // 
@@ -79,6 +135,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnEdit
             // 
+            this.btnEdit.Enabled = false;
             this.btnEdit.Image = global::AccountingSystem.Properties.Resources.edit;
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -89,6 +146,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnDelete
             // 
+            this.btnDelete.Enabled = false;
             this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -114,6 +172,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Obligation Request";
             this.Load += new System.EventHandler(this.frmObligationRequestMain_Load);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -128,5 +188,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.ToolStripButton btnAdd;
         internal System.Windows.Forms.ToolStripButton btnEdit;
         internal System.Windows.Forms.ToolStripButton btnDelete;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        internal System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        internal System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        internal System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
     }
 }
