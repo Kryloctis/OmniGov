@@ -5,6 +5,8 @@ namespace ACC.Domain.Interfaces
 {
     public interface IJEVRepository : IRepository<JEVModel>
     {
+        bool InsertWithGeneralJournal(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel);
+
         bool InsertWithCashDisbursements(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel);
 
         bool UpdateWithCashDisbursements(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel);
@@ -20,6 +22,8 @@ namespace ACC.Domain.Interfaces
         bool InsertWithADADisbursements(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, ADADisbursementsJournalModel aDADisbursementsJournalModel);
 
         bool UpdateWithADADisbursements(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, ADADisbursementsJournalModel aDADisbursementsJournalModel);
+
+        bool UpdateWithGeneralJournal(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel);
 
         bool Insert(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList);
 

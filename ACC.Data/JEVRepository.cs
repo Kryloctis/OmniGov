@@ -15,6 +15,7 @@ namespace ACC.Data
         private readonly ICashReceiptsJournalRepository _cashReceiptsJournalRepository;
         private readonly IADADisbursementsJournalRepository _aDADisbursementsJournalRepository;
         private readonly ICashDisbursementsJournalRepository _cashDisbursementsJournalRepository;
+        private readonly IGeneralJournalRepository _generalJournalRepository;
         private const string tableName = "jev";
         private const string viewTableName = "view_jev";
 
@@ -24,7 +25,8 @@ namespace ACC.Data
             ICheckDisbursementsJournalRepository checkDisbursementsJournalRepository,
             ICashReceiptsJournalRepository cashReceiptsJournalRepository,
             IADADisbursementsJournalRepository aDADisbursementsJournalRepository,
-            ICashDisbursementsJournalRepository cashDisbursementsJournalRepository)
+            ICashDisbursementsJournalRepository cashDisbursementsJournalRepository,
+            IGeneralJournalRepository generalJournalRepository)
         {
             _dbGenericCommands = dbGenericCommands;
             _jevAccountsRepository = jevAccountsRepository;
@@ -32,6 +34,7 @@ namespace ACC.Data
             _cashReceiptsJournalRepository = cashReceiptsJournalRepository;
             _aDADisbursementsJournalRepository = aDADisbursementsJournalRepository;
             _cashDisbursementsJournalRepository = cashDisbursementsJournalRepository;
+            _generalJournalRepository = generalJournalRepository;
         }
 
         public int CountRecords()
@@ -207,6 +210,31 @@ namespace ACC.Data
             }
         }
 
+        public bool InsertWithGeneralJournal(JEVModel entity,
+                                               List<JEVAccountsModel> jevAccountsModelList,
+                                               GeneralJournalModel generalJournalModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    _ = Insert(entity, jevAccountsModelList);
+
+                    generalJournalModel.JevId = GetLastInsertedID();
+
+                    _ = _generalJournalRepository.Insert(generalJournalModel);
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool Insert(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList)
         {
             try
@@ -331,6 +359,27 @@ namespace ACC.Data
                     _ = Update(entity, jevAccountsModelList);
 
                     _ = _cashDisbursementsJournalRepository.UpdateByJevId(cashDisbursementsJournalModel);
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool UpdateWithGeneralJournal(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    _ = Update(entity, jevAccountsModelList);
+
+                    _ = _generalJournalRepository.UpdateByJevId(generalJournalModel);
 
                     scope.Complete();
                     return true;
