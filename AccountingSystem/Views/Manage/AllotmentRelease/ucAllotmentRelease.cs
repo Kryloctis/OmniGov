@@ -226,7 +226,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             {
                 if (cmbxAccount.FindStringExact(cmbxAccount.Text) < 0 && !string.IsNullOrEmpty(cmbxAccount.Text))
                 {
-                    epAccount.SetError(cmbxAccount, "Account you entered. Doesn't exist in your record.");
+                    epAccount.SetError(cmbxAccount, "Account you entered doesn't exist on your record.");
                     return true;
                 }
             }

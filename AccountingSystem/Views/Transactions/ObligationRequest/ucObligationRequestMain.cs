@@ -20,6 +20,16 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             InitializeComponent();
         }
 
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[3];
+            errorArray[0] = epFPP.GetError(cmbxFPP);
+            errorArray[1] = epOthersFPP.GetError(cmbxOthersFPP);
+            errorArray[2] = epAccount.GetError(cmbxAccount);
+
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
 
         private void LoadDatagridFormat() 
         {
@@ -179,7 +189,26 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void LoadMonths() 
         {
-            
+
+            var months = new Dictionary<int, string>() 
+            {
+                { 1,"January"},
+                { 2,"February"},
+                { 3,"March"},
+                { 4,"April"},
+                { 5,"May"},
+                { 6,"June"},
+                { 7,"July"},
+                { 8,"August"},
+                { 9,"September"},
+                { 10,"October"},
+                { 11,"November"},
+                { 12,"December"}
+            };
+
+            cmbxMonths.DataSource = new BindingSource(months, null);
+            cmbxMonths.DisplayMember = "Value";
+            cmbxMonths.ValueMember = "Key";
         }
 
         internal void LoadAllotmentClasses()
@@ -305,6 +334,129 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private void dgObligationRequests_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
             e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
+        }
+
+
+
+
+        private bool FPPNameNotExist() 
+        {
+            try
+            {
+                var fppNameExist = Factory.FunctionProgramProjectRepository().NameExist(cmbxFPP.Text);
+
+                if (!fppNameExist && !string.IsNullOrEmpty(cmbxFPP.Text))
+                {
+                    epFPP.SetError(cmbxFPP, "FPP Name you entered doesn't exist on you record");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void cmbxFPP_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbxFPP.Text))
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP");
+            else if (FPPNameNotExist())
+                e.Cancel = FPPNameNotExist();
+        }
+
+
+        private void cmbxFPP_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epFPP, cmbxFPP);
+        }
+
+
+
+
+        private bool OtherFPPNameNotExist() 
+        {
+            try
+            {
+
+                bool otherFPPName = Factory.OthersFPPRepository().NameExist(cmbxOthersFPP.Text);
+
+                if (!otherFPPName && !string.IsNullOrEmpty(cmbxOthersFPP.Text))
+                {
+                    epOthersFPP.SetError(cmbxOthersFPP, "Other FPP you entered doesn't exist on your record.");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void cmbxOthersFPP_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = OtherFPPNameNotExist();
+        }
+
+        private void cmbxOthersFPP_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epOthersFPP, cmbxOthersFPP);
+        }
+
+
+
+
+        private bool ShowErrorAccountNotExist()
+        {
+            try
+            {
+                if (cmbxAccount.FindStringExact(cmbxAccount.Text) < 0 && !string.IsNullOrEmpty(cmbxAccount.Text))
+                {
+                    epAccount.SetError(cmbxAccount, "Account you entered doesn't exist on your record.");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void cmbxAccount_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbxAccount.Text))
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbxAccount, "Account.");
+            else if (ShowErrorAccountNotExist())
+                e.Cancel = ShowErrorAccountNotExist();
+        }
+
+        private void cmbxAccount_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epAccount, cmbxAccount);
+        }
+
+
+        private bool ValidateRequirements() 
+        {
+            if (!ValidateChildren())
+            {
+                Helper.MessageBoxError(GetFormErrors());
+                return false;
+            }
+            return true;
+ 
+        }
+
+
+        private void btnLoadRecords_Click(object sender, EventArgs e)
+        {
+            if (ValidateRequirements()) 
+            {
+                MessageBox.Show("Test");
+            }
         }
     }
 }

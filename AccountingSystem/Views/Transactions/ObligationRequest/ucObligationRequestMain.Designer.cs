@@ -76,6 +76,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.cmbxFPP.Name = "cmbxFPP";
             this.cmbxFPP.Size = new System.Drawing.Size(568, 23);
             this.cmbxFPP.TabIndex = 0;
+            this.cmbxFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxFPP_Validating);
+            this.cmbxFPP.Validated += new System.EventHandler(this.cmbxFPP_Validated);
             // 
             // label2
             // 
@@ -93,6 +95,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.cmbxOthersFPP.Name = "cmbxOthersFPP";
             this.cmbxOthersFPP.Size = new System.Drawing.Size(568, 23);
             this.cmbxOthersFPP.TabIndex = 1;
+            this.cmbxOthersFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxOthersFPP_Validating);
+            this.cmbxOthersFPP.Validated += new System.EventHandler(this.cmbxOthersFPP_Validated);
             // 
             // groupBox1
             // 
@@ -151,6 +155,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.cmbxAccount.Size = new System.Drawing.Size(568, 23);
             this.cmbxAccount.TabIndex = 4;
             this.cmbxAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxAccount_KeyDown);
+            this.cmbxAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAccount_Validating);
+            this.cmbxAccount.Validated += new System.EventHandler(this.cmbxAccount_Validated);
             // 
             // dgObligationRequests
             // 
@@ -232,10 +238,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnLoadRecords.TabIndex = 7;
             this.btnLoadRecords.Text = "Load Records";
             this.btnLoadRecords.UseVisualStyleBackColor = true;
+            this.btnLoadRecords.Click += new System.EventHandler(this.btnLoadRecords_Click);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(351, 515);
+            this.textBox1.Location = new System.Drawing.Point(483, 515);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(190, 23);
@@ -244,7 +251,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(199, 518);
+            this.label6.Location = new System.Drawing.Point(331, 518);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(146, 15);
             this.label6.TabIndex = 6;

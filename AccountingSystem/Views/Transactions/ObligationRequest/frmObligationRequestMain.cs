@@ -22,5 +22,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
 
         }
+
     }
 }

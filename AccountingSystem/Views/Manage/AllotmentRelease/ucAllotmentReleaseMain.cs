@@ -392,7 +392,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
                 if (!otherFPPName && !string.IsNullOrEmpty(comboBox.Text))
                 {
-                    ep.SetError(comboBox, "Other FPP you entered. Doesn't exist in yout record.");
+                    ep.SetError(comboBox, "Other FPP you entered doesn't exist on your record.");
                     return true;
                 }
             }

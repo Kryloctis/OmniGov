@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             this.ucObligationRequestMain1.Location = new System.Drawing.Point(12, 65);
             this.ucObligationRequestMain1.Name = "ucObligationRequestMain1";
-            this.ucObligationRequestMain1.Size = new System.Drawing.Size(762, 551);
+            this.ucObligationRequestMain1.Size = new System.Drawing.Size(696, 551);
             this.ucObligationRequestMain1.TabIndex = 0;
             // 
             // toolStrip1
@@ -53,7 +53,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnDelete});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(577, 50);
+            this.toolStrip1.Size = new System.Drawing.Size(708, 50);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -93,7 +93,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(577, 628);
+            this.ClientSize = new System.Drawing.Size(708, 628);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.ucObligationRequestMain1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
