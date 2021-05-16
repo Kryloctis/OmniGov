@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ACC.Domain.Models;
 
@@ -58,6 +52,9 @@ namespace AccountingSystem.Views.Transactions.JEV
                 switch (uc.journalName)
                 {
                     case "General Journal":
+                        MessageBox.Show("GJ");
+                        return InsertGeneralJournal(userId, uc);
+
                     case "Procurement Received Journal":
                         return InsertJournal(userId, uc);
 
@@ -203,6 +200,20 @@ namespace AccountingSystem.Views.Transactions.JEV
             return Factory.JEVRepository().InsertWithCashDisbursements(jevModel, JevAcountsModelList(), cashDisbursementsJournalModel);
         }
 
+        private bool InsertGeneralJournal(byte userId, ucJEV uc)
+        {
+            JEVModel jevModel = ParseJEVModelData(userId, uc);
+
+            var generalJournalModel = new GeneralJournalModel()
+            {
+                DVNo = uc.txtDVRCDNo.Text.Trim(),
+                CheckNo = uc.txtCheckNo.Text.Trim(),
+                ORNo = uc.txtRCIORADA.Text.Trim()
+            };
+
+            return Factory.JEVRepository().InsertWithGeneralJournal(jevModel, JevAcountsModelList(), generalJournalModel);
+        }
+
         private bool UpdateJournal(byte userId, ucJEV uc)
         {
             JEVModel jevModel = ParseJEVModelData(userId, uc, true);
@@ -271,6 +282,21 @@ namespace AccountingSystem.Views.Transactions.JEV
             return Factory.JEVRepository().UpdateWithCashDisbursements(jevModel, JevAcountsModelList(), cashDisbursementsJournalModel);
         }
 
+        private bool UpdateGeneralJournal(byte userId, ucJEV uc)
+        {
+            JEVModel jevModel = ParseJEVModelData(userId, uc, true);
+
+            var generalJournalModel = new GeneralJournalModel()
+            {
+                JevId = uc.jevId,
+                DVNo = uc.txtDVRCDNo.Text.Trim(),
+                CheckNo = uc.txtCheckNo.Text.Trim(),
+                ORNo = uc.txtRCIORADA.Text.Trim()
+            };
+
+            return Factory.JEVRepository().UpdateWithGeneralJournal(jevModel, JevAcountsModelList(), generalJournalModel);
+        }
+
         private bool UpdateData()
         {
             try
@@ -294,6 +320,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                 switch (uc.journalName)
                 {
                     case "General Journal":
+                        return UpdateGeneralJournal(userId, uc);
+
                     case "Procurement Received Journal":
                         return UpdateJournal(userId, uc);
 
