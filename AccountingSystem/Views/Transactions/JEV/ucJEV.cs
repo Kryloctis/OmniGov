@@ -36,9 +36,13 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
 
             txtJEVNo.Clear();
-            txtRCIORADA.Clear();
+            txtRefNo.Clear();
             txtPayee.Clear();
             txtExplanation.Clear();
+
+            txtCheckNo.Clear();
+            txtRCIORADA.Clear();
+            txtDVRCDNo.Clear();
 
             dgAccounts.Rows.Clear();
             txtDebitTotal.Clear();
