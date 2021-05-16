@@ -122,6 +122,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                     LoadCheckDisbursementsDataIfExist(uc, jevId);
                     LoadCashReceiptsDataIfExist(uc, jevId);
+                    LoadADADisbursementDataIfExist(uc, jevId);
                     uc.jevId = jevId;
                     uc.txtExplanation.Text = jevDict["explanation"];
                     uc.dtpDateEntry.Value = Convert.ToDateTime(jevDict["date_entry"]);
@@ -177,6 +178,19 @@ namespace AccountingSystem.Views.Transactions.JEV
                 uc.cmbCollectingDisbursingOfficer.SelectedValue = checkDisbursementsDict["collecting_officers_id"];
                 uc.txtRCIORADA.Text = checkDisbursementsDict["or_no"];
                 uc.dtpCheckORPaid.Value = Convert.ToDateTime(checkDisbursementsDict["or_date"]);
+            }
+        }
+
+        private static void LoadADADisbursementDataIfExist(ucJEV uc, int jevId)
+        {
+            var aDADisbursementsJournalRepository = Factory.ADADisbursementsJournalRepository();
+
+            if (aDADisbursementsJournalRepository.JevIdExist(jevId))
+            {
+                Dictionary<string, string> adaDisbursementsDict = aDADisbursementsJournalRepository.GetViewRecordByJevID(jevId);
+
+                uc.txtDVRCDNo.Text = adaDisbursementsDict["dv_no"];
+                uc.txtRCIORADA.Text = adaDisbursementsDict["ada_no"];
             }
         }
 

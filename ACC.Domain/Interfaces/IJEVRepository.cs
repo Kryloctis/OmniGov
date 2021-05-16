@@ -15,6 +15,8 @@ namespace ACC.Domain.Interfaces
 
         bool InsertWithADADisbursements(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, ADADisbursementsJournalModel aDADisbursementsJournalModel);
 
+        bool UpdateWithADADisbursements(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, ADADisbursementsJournalModel aDADisbursementsJournalModel);
+
         bool Insert(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList);
 
         bool Update(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList);
