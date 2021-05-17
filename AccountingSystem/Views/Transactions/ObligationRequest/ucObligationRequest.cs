@@ -20,6 +20,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal int accountId;
         internal byte month;
         internal short year;
+        internal decimal currentObligationAmount;
 
         public ucObligationRequest()
         {
@@ -198,7 +199,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 if (obligationRequestId == 0)
                     amountExceed = nudAmount.Value > GetAmounts()["allotment_release_balance"];
                 else
-                    amountExceed = nudAmount.Value > GetAmounts()["allotment_release_balance"];
+                    amountExceed = nudAmount.Value > GetAmounts()["allotment_release_balance"] + currentObligationAmount;
 
                 if (amountExceed) 
                 {

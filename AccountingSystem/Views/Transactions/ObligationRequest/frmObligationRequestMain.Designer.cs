@@ -42,6 +42,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -54,6 +55,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.toolStripStatusLabel5,
             this.toolStripStatusLabel1,
             this.lblCreatedAt,
+            this.toolStripStatusLabel4,
             this.toolStripStatusLabel2,
             this.lblUpdatedAt});
             this.statusStrip1.Location = new System.Drawing.Point(0, 642);
@@ -77,7 +79,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // toolStripStatusLabel5
             // 
             this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            this.toolStripStatusLabel5.Size = new System.Drawing.Size(590, 17);
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(580, 17);
             this.toolStripStatusLabel5.Spring = true;
             // 
             // toolStripStatusLabel1
@@ -155,6 +157,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
+            // toolStripStatusLabel4
+            // 
+            this.toolStripStatusLabel4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel4.Text = "|";
+            this.toolStripStatusLabel4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // frmObligationRequestMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -183,7 +193,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         #endregion
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private ucObligationRequestMain ucObligationRequestMain1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         internal System.Windows.Forms.ToolStripButton btnAdd;
         internal System.Windows.Forms.ToolStripButton btnEdit;
@@ -195,5 +204,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         internal System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        internal ucObligationRequestMain ucObligationRequestMain1;
     }
 }

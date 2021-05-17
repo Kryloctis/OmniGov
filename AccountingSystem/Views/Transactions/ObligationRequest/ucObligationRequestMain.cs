@@ -50,7 +50,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return totalObligation;
         }
 
-        private void LoadObligationRequestRecords() 
+        internal void LoadObligationRequestRecords() 
         {
 
             int fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
