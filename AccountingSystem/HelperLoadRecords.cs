@@ -1021,5 +1021,57 @@ namespace AccountingSystem
 
         #endregion Supplemental Appropriations
 
+        #region Obligation Request
+
+        internal static void ObligationRequestDatagridView(DataTable dataTable, DataGridView dataGridView)
+        {
+            try
+            {
+                foreach (DataRow dataRow in dataTable.Rows)
+                {
+                    dataGridView.Rows.Add(new object[] {
+                            dataRow["obligation_request_id"],
+                            dataRow["obligation_no"],
+                            dataRow["account_code"],
+                            dataRow["gen_ledger_acc_name"],
+                            dataRow["date_requested"],
+                            dataRow["obligation_amount"],
+                            dataRow["created_at"],
+                            dataRow["updated_at"],
+                    });
+                }
+
+
+                dataGridView.ClearSelection();
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        #endregion Obligation Request
+
+        #region JEV
+        internal static void JEVDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["funds_id"].Visible = false;
+            datagrid.Columns["journals_id"].Visible = false;
+            datagrid.Columns["jev_no"].HeaderText = "JEV No.";
+            datagrid.Columns["date_entry"].HeaderText = "Date";
+            datagrid.Columns["ref_no"].HeaderText = "Ref No.";
+            datagrid.Columns["payee"].HeaderText = "Payee";
+            datagrid.Columns["explanation"].HeaderText = "Explanation";
+            datagrid.Columns["explanation"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["is_approved"].Visible = false;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["created_by"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
+            datagrid.Columns["updated_by"].Visible = false;
+        }
+        #endregion
     }
 }
