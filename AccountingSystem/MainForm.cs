@@ -22,6 +22,7 @@ using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Manage.DisbursingOfficer;
 using AccountingSystem.Views.Manage.AccountableForm;
 using AccountingSystem.Views.Reports.PaymentCollection;
+using AccountingSystem.Views.Transactions.PaymentCollection;
 
 namespace AccountingSystem
 {
@@ -309,6 +310,11 @@ namespace AccountingSystem
         private void menuprintPC_Click(object sender, EventArgs e)
         {
             _ = new frmPCReport().ShowDialog();
+        }
+
+        private void menuPayments_Click(object sender, EventArgs e)
+        {
+            _ = new frmPaymentCollection().ShowDialog();
         }
     }
 }

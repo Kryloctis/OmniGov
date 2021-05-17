@@ -63,6 +63,7 @@ namespace AccountingSystem
             this.menuSubsidiaryLedgerReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOB = new System.Windows.Forms.ToolStripMenuItem();
             this.menuprintRCI = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuprintPC = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnJournalEntry = new System.Windows.Forms.ToolStripButton();
             this.btnObligationRequest = new System.Windows.Forms.ToolStripButton();
@@ -71,7 +72,7 @@ namespace AccountingSystem
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblUserFullName = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUserRole = new System.Windows.Forms.ToolStripStatusLabel();
-            this.menuprintPC = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuPayments = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -104,7 +105,8 @@ namespace AccountingSystem
             this.menuTransactions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuJEV,
             this.menuObligationRequest,
-            this.menuRCI});
+            this.menuRCI,
+            this.menuPayments});
             this.menuTransactions.Name = "menuTransactions";
             this.menuTransactions.Size = new System.Drawing.Size(104, 24);
             this.menuTransactions.Text = "Transactions";
@@ -112,20 +114,20 @@ namespace AccountingSystem
             // menuJEV
             // 
             this.menuJEV.Name = "menuJEV";
-            this.menuJEV.Size = new System.Drawing.Size(148, 26);
+            this.menuJEV.Size = new System.Drawing.Size(219, 26);
             this.menuJEV.Text = "JEV...";
             this.menuJEV.Click += new System.EventHandler(this.menuJEV_Click);
             // 
             // menuObligationRequest
             // 
             this.menuObligationRequest.Name = "menuObligationRequest";
-            this.menuObligationRequest.Size = new System.Drawing.Size(148, 26);
+            this.menuObligationRequest.Size = new System.Drawing.Size(219, 26);
             this.menuObligationRequest.Text = "CAFOA...";
             // 
             // menuRCI
             // 
             this.menuRCI.Name = "menuRCI";
-            this.menuRCI.Size = new System.Drawing.Size(148, 26);
+            this.menuRCI.Size = new System.Drawing.Size(219, 26);
             this.menuRCI.Text = "RCI...";
             this.menuRCI.Click += new System.EventHandler(this.menuRCI_Click);
             // 
@@ -334,6 +336,13 @@ namespace AccountingSystem
             this.menuprintRCI.Text = "Report of Checks Issued";
             this.menuprintRCI.Click += new System.EventHandler(this.menuprintRCI_Click);
             // 
+            // menuprintPC
+            // 
+            this.menuprintPC.Name = "menuprintPC";
+            this.menuprintPC.Size = new System.Drawing.Size(281, 26);
+            this.menuprintPC.Text = "Report of General Collection";
+            this.menuprintPC.Click += new System.EventHandler(this.menuprintPC_Click);
+            // 
             // toolStrip1
             // 
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
@@ -408,12 +417,12 @@ namespace AccountingSystem
             this.lblUserRole.Size = new System.Drawing.Size(151, 24);
             this.lblUserRole.Text = "toolStripStatusLabel2";
             // 
-            // menuprintPC
+            // menuPayments
             // 
-            this.menuprintPC.Name = "menuprintPC";
-            this.menuprintPC.Size = new System.Drawing.Size(281, 26);
-            this.menuprintPC.Text = "Report of General Collection";
-            this.menuprintPC.Click += new System.EventHandler(this.menuprintPC_Click);
+            this.menuPayments.Name = "menuPayments";
+            this.menuPayments.Size = new System.Drawing.Size(219, 26);
+            this.menuPayments.Text = "Payment Collection";
+            this.menuPayments.Click += new System.EventHandler(this.menuPayments_Click);
             // 
             // MainForm
             // 
@@ -491,6 +500,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripButton btnRCI;
         private System.Windows.Forms.ToolStripMenuItem menuAccForm;
         private System.Windows.Forms.ToolStripMenuItem menuprintPC;
+        private System.Windows.Forms.ToolStripMenuItem menuPayments;
     }
 }
 
