@@ -23,7 +23,7 @@ namespace AccountingSystem.Views.Transactions.RCI.Find
             dgSelect.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             table = find;
             frmrci = rci;
-            this.Text = String.Format("{0} > Find", table.ToUpper());
+            this.Text = String.Format("Find > {0}", table.ToUpper());
         }
 
         private void frmFind_Load(object sender, EventArgs e)

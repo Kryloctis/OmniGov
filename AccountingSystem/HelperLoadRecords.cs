@@ -380,6 +380,25 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
+        #region PaymentCollection
+        internal static void PaymentDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].HeaderText = "RCD No.";
+            datagrid.Columns[1].HeaderText = "Accountable Form";
+            datagrid.Columns[2].HeaderText = "General Ledger";
+            datagrid.Columns[3].HeaderText = "Payee";
+            datagrid.Columns[4].HeaderText = "Receipt No.";
+            datagrid.Columns[5].HeaderText = "Payment Date";
+            datagrid.Columns[6].HeaderText = "Amount";
+            datagrid.Columns[7].HeaderText = "Collector";
+            datagrid.Columns[8].Visible = false;
+            datagrid.Columns[9].Visible = false;
+            datagrid.Columns[10].Visible = false;
+            datagrid.Columns[11].Visible = false;
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        #endregion
         #region AccountableForm
         internal static void AccFormDatagridView(DataTable dataTable, DataGridView datagrid)
         {
@@ -387,6 +406,21 @@ namespace AccountingSystem
             datagrid.Columns[0].Visible = false;
             datagrid.Columns[1].HeaderText = "Form No.";
             datagrid.Columns[2].HeaderText = "Form Description";
+
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        #endregion
+        #region GeneralLedgerAccountSearch
+        internal static void GeneralLedgerSearchDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].Visible = false;
+            datagrid.Columns[2].HeaderText = "Ledger Code";
+            datagrid.Columns[3].HeaderText = "Ledger Name";
+            datagrid.Columns[4].Visible = false;
+            datagrid.Columns[5].Visible = false;
+            datagrid.Columns[6].Visible = false;
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }

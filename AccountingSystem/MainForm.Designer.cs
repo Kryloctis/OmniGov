@@ -49,6 +49,7 @@ namespace AccountingSystem
             this.menuDisbursingOfficer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBudgetAppropriation = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBanks = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuAccForm = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
             this.menuJournalsReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportGJ = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,7 +71,7 @@ namespace AccountingSystem
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblUserFullName = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUserRole = new System.Windows.Forms.ToolStripStatusLabel();
-            this.menuAccForm = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuprintPC = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -231,13 +232,21 @@ namespace AccountingSystem
             this.menuBanks.Text = "Banks...";
             this.menuBanks.Click += new System.EventHandler(this.menuBanks_Click);
             // 
+            // menuAccForm
+            // 
+            this.menuAccForm.Name = "menuAccForm";
+            this.menuAccForm.Size = new System.Drawing.Size(272, 26);
+            this.menuAccForm.Text = "Accountable Form";
+            this.menuAccForm.Click += new System.EventHandler(this.menuAccForm_Click);
+            // 
             // menuReports
             // 
             this.menuReports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuJournalsReport,
             this.menuLedgersReport,
             this.menuSAAOB,
-            this.menuprintRCI});
+            this.menuprintRCI,
+            this.menuprintPC});
             this.menuReports.Name = "menuReports";
             this.menuReports.Size = new System.Drawing.Size(74, 24);
             this.menuReports.Text = "Reports";
@@ -252,7 +261,7 @@ namespace AccountingSystem
             this.menuReportCkDJ,
             this.menuReportADADJ});
             this.menuJournalsReport.Name = "menuJournalsReport";
-            this.menuJournalsReport.Size = new System.Drawing.Size(249, 26);
+            this.menuJournalsReport.Size = new System.Drawing.Size(281, 26);
             this.menuJournalsReport.Text = "Journals";
             // 
             // menuReportGJ
@@ -297,7 +306,7 @@ namespace AccountingSystem
             this.menuGeneralLedgerReport,
             this.menuSubsidiaryLedgerReport});
             this.menuLedgersReport.Name = "menuLedgersReport";
-            this.menuLedgersReport.Size = new System.Drawing.Size(249, 26);
+            this.menuLedgersReport.Size = new System.Drawing.Size(281, 26);
             this.menuLedgersReport.Text = "Ledgers";
             // 
             // menuGeneralLedgerReport
@@ -315,13 +324,13 @@ namespace AccountingSystem
             // menuSAAOB
             // 
             this.menuSAAOB.Name = "menuSAAOB";
-            this.menuSAAOB.Size = new System.Drawing.Size(249, 26);
+            this.menuSAAOB.Size = new System.Drawing.Size(281, 26);
             this.menuSAAOB.Text = "SAAOB";
             // 
             // menuprintRCI
             // 
             this.menuprintRCI.Name = "menuprintRCI";
-            this.menuprintRCI.Size = new System.Drawing.Size(249, 26);
+            this.menuprintRCI.Size = new System.Drawing.Size(281, 26);
             this.menuprintRCI.Text = "Report of Checks Issued";
             this.menuprintRCI.Click += new System.EventHandler(this.menuprintRCI_Click);
             // 
@@ -399,12 +408,12 @@ namespace AccountingSystem
             this.lblUserRole.Size = new System.Drawing.Size(151, 24);
             this.lblUserRole.Text = "toolStripStatusLabel2";
             // 
-            // menuAccForm
+            // menuprintPC
             // 
-            this.menuAccForm.Name = "menuAccForm";
-            this.menuAccForm.Size = new System.Drawing.Size(272, 26);
-            this.menuAccForm.Text = "Accountable Form";
-            this.menuAccForm.Click += new System.EventHandler(this.menuAccForm_Click);
+            this.menuprintPC.Name = "menuprintPC";
+            this.menuprintPC.Size = new System.Drawing.Size(281, 26);
+            this.menuprintPC.Text = "Report of General Collection";
+            this.menuprintPC.Click += new System.EventHandler(this.menuprintPC_Click);
             // 
             // MainForm
             // 
@@ -481,6 +490,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuprintRCI;
         private System.Windows.Forms.ToolStripButton btnRCI;
         private System.Windows.Forms.ToolStripMenuItem menuAccForm;
+        private System.Windows.Forms.ToolStripMenuItem menuprintPC;
     }
 }
 

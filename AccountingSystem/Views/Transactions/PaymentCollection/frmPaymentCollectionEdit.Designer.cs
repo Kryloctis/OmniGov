@@ -1,7 +1,7 @@
 ﻿
-namespace AccountingSystem.Views.Manage.AccountableForm
+namespace AccountingSystem.Views.Transactions.PaymentCollection
 {
-    partial class frmAccountableAdd
+    partial class frmPaymentCollectionEdit
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucAccountable1 = new AccountingSystem.Views.Manage.AccountableForm.ucAccountable();
+            this.ucpc1 = new AccountingSystem.Views.Transactions.PaymentCollection.ucPC();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,15 +42,15 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 84);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 293);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(552, 36);
-            this.flowLayoutPanel1.TabIndex = 4;
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(725, 36);
+            this.flowLayoutPanel1.TabIndex = 5;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(455, 3);
+            this.btnCancel.Location = new System.Drawing.Point(628, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnCancel.Size = new System.Drawing.Size(94, 29);
@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(355, 3);
+            this.btnSave.Location = new System.Drawing.Point(528, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnSave.Size = new System.Drawing.Size(94, 29);
@@ -71,29 +71,29 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // ucAccountable1
+            // ucpc1
             // 
-            this.ucAccountable1.Location = new System.Drawing.Point(0, -1);
-            this.ucAccountable1.Name = "ucAccountable1";
-            this.ucAccountable1.Size = new System.Drawing.Size(542, 83);
-            this.ucAccountable1.TabIndex = 5;
+            this.ucpc1.Location = new System.Drawing.Point(0, -1);
+            this.ucpc1.Name = "ucpc1";
+            this.ucpc1.Size = new System.Drawing.Size(725, 291);
+            this.ucpc1.TabIndex = 6;
             // 
-            // frmAccountableAdd
+            // frmPaymentCollectionEdit
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(552, 120);
-            this.Controls.Add(this.ucAccountable1);
+            this.ClientSize = new System.Drawing.Size(725, 329);
+            this.Controls.Add(this.ucpc1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "frmAccountableAdd";
+            this.Name = "frmPaymentCollectionEdit";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Accountable Form";
-            this.Load += new System.EventHandler(this.frmAccountableAdd_Load);
+            this.Text = "Edit Payment Collection";
+            this.Load += new System.EventHandler(this.frmPaymentCollectionEdit_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -104,6 +104,6 @@ namespace AccountingSystem.Views.Manage.AccountableForm
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private ucAccountable ucAccountable1;
+        private ucPC ucpc1;
     }
 }

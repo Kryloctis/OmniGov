@@ -30,6 +30,9 @@ namespace AccountingSystem.Views.Transactions.RCI
                 var rcidata = rciRepository.GetRecordByID(uc.Id);
                 uc.txtObno.Text = rcidata["obligation_no"];
                 uc.txtdvno.Text = rcidata["dv_no"];
+                //uc.setSelectedValue(Convert.ToInt16(rcidata["banks_id"]), "banks");
+               // uc.setSelectedValue(Convert.ToInt16(rcidata["funds_id"]), "funds");
+                //uc.setSelectedValue(Convert.ToInt16(rcidata["function_program_project_id"]), "functions");
                 LoadSelectedRecord(uc, "banks", Convert.ToInt16(rcidata["banks_id"]));
                 LoadSelectedRecord(uc, "funds", Convert.ToInt16(rcidata["funds_id"]));
                 LoadSelectedRecord(uc, "functions", Convert.ToInt16(rcidata["function_program_project_id"]));

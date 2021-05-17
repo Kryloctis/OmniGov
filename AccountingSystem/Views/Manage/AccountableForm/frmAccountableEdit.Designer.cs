@@ -90,6 +90,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmAccountableEdit";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Accountable Form";
             this.Load += new System.EventHandler(this.frmAccountableEdit_Load);

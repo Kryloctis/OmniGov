@@ -331,6 +331,24 @@ namespace AccountingSystem
             }
         }
 
+        public static void ShowRecordTimestamp(DataGridView dataGridView, byte[] index, ToolStripStatusLabel lblCreatedAt, ToolStripStatusLabel lblUpdatedAt, ToolStripStatusLabel lblCreatedBy, ToolStripStatusLabel lblUpdatedBy)
+        {
+            if (dataGridView.SelectedRows.Count == 1)
+            {
+                lblCreatedAt.Text = dataGridView.SelectedCells[index[0]].Value.ToString();
+                lblUpdatedAt.Text = dataGridView.SelectedCells[index[1]].Value.ToString();
+                lblCreatedBy.Text = dataGridView.SelectedCells[index[2]].Value.ToString();
+                lblUpdatedBy.Text = dataGridView.SelectedCells[index[3]].Value.ToString();
+            }
+            else
+            {
+                lblCreatedAt.Text = string.Empty;
+                lblUpdatedAt.Text = string.Empty;
+                lblCreatedBy.Text = string.Empty;
+                lblUpdatedBy.Text = string.Empty;
+            }
+        }
+
         public static string TruncateString(string myString, int maxLength)
         {
             return myString.Length > maxLength ? $"{myString.Substring(0, 20)}..." : $"{myString}";
