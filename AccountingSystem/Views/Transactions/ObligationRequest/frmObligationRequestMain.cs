@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,8 +21,37 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             Helper.LoadFormIcon(this);
             btnAdd.Click += new EventHandler(BtnAdd_Click);
             btnEdit.Click += new EventHandler(BtnEdit_Click);
+            btnDelete.Click += new EventHandler(BtnDelete_Click);
             uc = ucObligationRequestMain1;
             uc.LoadReferenceObligationRequestMain(this);
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            int selectedRowsCount = uc.dgObligationRequests.SelectedRows.Count;
+            try
+            {
+                if (selectedRowsCount > 0)
+                {
+                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                    {
+                        var obligationRequestModeList = new List<ObligationRequestModel>();
+                        foreach (DataGridViewRow row in uc.dgObligationRequests.SelectedRows)
+                        {
+                            int obligationRequestId = Convert.ToInt16(row.Cells[0].Value.ToString());
+                            obligationRequestModeList.Add(new ObligationRequestModel() { ID = obligationRequestId });
+                        }
+
+                        var allotmentClassesRepository = Factory.ObligationRequestRepository();
+                        _ = allotmentClassesRepository.Delete(obligationRequestModeList);
+                        uc.LoadObligationRequestRecords();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void ShowObligationRequestEdit()
