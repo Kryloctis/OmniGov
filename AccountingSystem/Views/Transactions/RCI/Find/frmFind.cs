@@ -28,7 +28,7 @@ namespace AccountingSystem.Views.Transactions.RCI.Find
 
         private void frmFind_Load(object sender, EventArgs e)
         {
-            LoadList();
+            //LoadList();
         }
 
         private void LoadList()
@@ -87,7 +87,7 @@ namespace AccountingSystem.Views.Transactions.RCI.Find
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            if (txtSearch.Text.Length > 0)
+            if (txtSearch.Text.Length >= 3)
             {
                 if (!string.IsNullOrEmpty(table))
                 {

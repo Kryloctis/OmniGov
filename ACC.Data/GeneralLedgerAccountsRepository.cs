@@ -190,9 +190,20 @@ namespace ACC.Data
             return false;
         }
 
-        public DataTable GetRecordsBySearch(string searchText)
+        public DataTable GetRecordsBySearch(string srchtxt)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                string query = $"SELECT * FROM {tableName} WHERE ledger_code LIKE '%{srchtxt}%' OR ledger_name LIKE '%{srchtxt}%'";
+
+                var dtGeneralLedgers = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool NameExist(string txtName)

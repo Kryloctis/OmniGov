@@ -28,7 +28,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
 
         private void frmFind_Load(object sender, EventArgs e)
         {
-            LoadList();
+            //LoadList();
         }
 
         private void LoadList()
@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            if (txtsearch.Text.Length > 0)
+            if (txtsearch.Text.Length >= 3)
             {
                 if (!string.IsNullOrEmpty(table))
                 {

@@ -133,6 +133,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             this.txtpayee.Enabled = false;
             this.txtpayee.Location = new System.Drawing.Point(161, 113);
+            this.txtpayee.MaxLength = 200;
             this.txtpayee.Multiline = true;
             this.txtpayee.Name = "txtpayee";
             this.txtpayee.Size = new System.Drawing.Size(546, 94);
@@ -144,6 +145,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             this.txtreceipt.Enabled = false;
             this.txtreceipt.Location = new System.Drawing.Point(161, 213);
+            this.txtreceipt.MaxLength = 20;
             this.txtreceipt.Name = "txtreceipt";
             this.txtreceipt.Size = new System.Drawing.Size(212, 27);
             this.txtreceipt.TabIndex = 9;
