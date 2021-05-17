@@ -14,6 +14,8 @@ namespace ACC.Data
         private readonly ICheckDisbursementsJournalRepository _checkDisbursementsJournalRepository;
         private readonly ICashReceiptsJournalRepository _cashReceiptsJournalRepository;
         private readonly IADADisbursementsJournalRepository _aDADisbursementsJournalRepository;
+        private readonly ICashDisbursementsJournalRepository _cashDisbursementsJournalRepository;
+        private readonly IGeneralJournalRepository _generalJournalRepository;
         private const string tableName = "jev";
         private const string viewTableName = "view_jev";
 
@@ -22,13 +24,17 @@ namespace ACC.Data
             IJEVAccountsRepository jevAccountsRepository,
             ICheckDisbursementsJournalRepository checkDisbursementsJournalRepository,
             ICashReceiptsJournalRepository cashReceiptsJournalRepository,
-            IADADisbursementsJournalRepository aDADisbursementsJournalRepository)
+            IADADisbursementsJournalRepository aDADisbursementsJournalRepository,
+            ICashDisbursementsJournalRepository cashDisbursementsJournalRepository,
+            IGeneralJournalRepository generalJournalRepository)
         {
             _dbGenericCommands = dbGenericCommands;
             _jevAccountsRepository = jevAccountsRepository;
             _checkDisbursementsJournalRepository = checkDisbursementsJournalRepository;
             _cashReceiptsJournalRepository = cashReceiptsJournalRepository;
             _aDADisbursementsJournalRepository = aDADisbursementsJournalRepository;
+            _cashDisbursementsJournalRepository = cashDisbursementsJournalRepository;
+            _generalJournalRepository = generalJournalRepository;
         }
 
         public int CountRecords()
@@ -77,7 +83,25 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@jev_no", DbType.String, $"%{searchText}%" },
+                    new object[] { "@ref_no", DbType.String, $"%{searchText}%" },
+                    new object[] { "@payee", DbType.String, $"%{searchText}%" },
+                    new object[] { "@explanation", DbType.String, $"%{searchText}%" },
+                };
+
+                string query = $"SELECT id, funds_id, journals_id, jev_no, date_entry, ref_no, payee, explanation, is_approved, created_at, created_by, updated_at, updated_by FROM {viewTableName} WHERE is_approved = 1 AND (jev_no LIKE @jev_no OR ref_no LIKE @ref_no OR payee LIKE @payee OR explanation LIKE @explanation)";
+
+                var dtGeneralLedgers = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool IdExist(int id)
@@ -111,9 +135,9 @@ namespace ACC.Data
             }
         }
 
-        public bool InsertWithCashReceipts(JEVModel entity, 
-            List<JEVAccountsModel> jevAccountsModelList, 
-            CashReceiptsJournalModel cashReceiptsJournalModel)
+        public bool InsertWithCashReceipts(JEVModel entity,
+                                           List<JEVAccountsModel> jevAccountsModelList,
+                                           CashReceiptsJournalModel cashReceiptsJournalModel)
         {
             try
             {
@@ -137,8 +161,8 @@ namespace ACC.Data
         }
 
         public bool InsertWithADADisbursements(JEVModel entity,
-            List<JEVAccountsModel> jevAccountsModelList,
-            ADADisbursementsJournalModel aDADisbursementsJournalModel)
+                                               List<JEVAccountsModel> jevAccountsModelList,
+                                               ADADisbursementsJournalModel aDADisbursementsJournalModel)
         {
             try
             {
@@ -149,6 +173,56 @@ namespace ACC.Data
                     aDADisbursementsJournalModel.JevId = GetLastInsertedID();
 
                     _ = _aDADisbursementsJournalRepository.Insert(aDADisbursementsJournalModel);
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool InsertWithCashDisbursements(JEVModel entity,
+                                               List<JEVAccountsModel> jevAccountsModelList,
+                                               CashDisbursementsJournalModel cashDisbursementsJournalModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    _ = Insert(entity, jevAccountsModelList);
+
+                    cashDisbursementsJournalModel.JevId = GetLastInsertedID();
+
+                    _ = _cashDisbursementsJournalRepository.Insert(cashDisbursementsJournalModel);
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool InsertWithGeneralJournal(JEVModel entity,
+                                               List<JEVAccountsModel> jevAccountsModelList,
+                                               GeneralJournalModel generalJournalModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    _ = Insert(entity, jevAccountsModelList);
+
+                    generalJournalModel.JevId = GetLastInsertedID();
+
+                    _ = _generalJournalRepository.Insert(generalJournalModel);
 
                     scope.Complete();
                     return true;
@@ -208,9 +282,9 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool UpdateWithCheckDisbursement(JEVModel entity, 
-            List<JEVAccountsModel> jevAccountsModelList, 
-            CheckDisbursementsJournalModel checkDisbursementsJournalModel)
+        public bool UpdateWithCheckDisbursement(JEVModel entity,
+                                                List<JEVAccountsModel> jevAccountsModelList,
+                                                CheckDisbursementsJournalModel checkDisbursementsJournalModel)
         {
             try
             {
@@ -230,9 +304,9 @@ namespace ACC.Data
             }
         }
 
-        public bool UpdateWithCashReceipts(JEVModel entity, 
-            List<JEVAccountsModel> jevAccountsModelList,
-            CashReceiptsJournalModel cashReceiptsJournalModel)
+        public bool UpdateWithCashReceipts(JEVModel entity,
+                                           List<JEVAccountsModel> jevAccountsModelList,
+                                           CashReceiptsJournalModel cashReceiptsJournalModel)
         {
             try
             {
@@ -241,6 +315,71 @@ namespace ACC.Data
                     _ = Update(entity, jevAccountsModelList);
 
                     _ = _cashReceiptsJournalRepository.UpdateByJevId(cashReceiptsJournalModel);
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool UpdateWithADADisbursements(JEVModel entity,
+                                               List<JEVAccountsModel> jevAccountsModelList,
+                                               ADADisbursementsJournalModel aDADisbursementsJournalModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    _ = Update(entity, jevAccountsModelList);
+
+                    _ = _aDADisbursementsJournalRepository.UpdateByJevId(aDADisbursementsJournalModel);
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool UpdateWithCashDisbursements(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    _ = Update(entity, jevAccountsModelList);
+
+                    _ = _cashDisbursementsJournalRepository.UpdateByJevId(cashDisbursementsJournalModel);
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool UpdateWithGeneralJournal(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    _ = Update(entity, jevAccountsModelList);
+
+                    _ = _generalJournalRepository.UpdateByJevId(generalJournalModel);
 
                     scope.Complete();
                     return true;

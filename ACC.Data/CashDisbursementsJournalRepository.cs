@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using ACC.Domain.Interfaces;
+using System.Text;
 using ACC.Domain.Models;
+using ACC.Domain.Interfaces;
+using System.Data;
 
 namespace ACC.Data
 {
-    class CashReceiptsJournalRepository : ICashReceiptsJournalRepository
+    class CashDisbursementsJournalRepository : ICashDisbursementsJournalRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
-        private const string tableName = "cash_receipts_journal";
-        private const string viewTableName = "view_cash_receipts_journal";
+        private const string tableName = "cash_disbursement_journal";
+        private const string viewTableName = "view_cash_disbursement_journal";
 
-        public CashReceiptsJournalRepository(IDbGenericCommands dbGenericCommands)
+        public CashDisbursementsJournalRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }
@@ -22,7 +23,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Delete(List<CashReceiptsJournalModel> entityList)
+        public bool Delete(List<CashDisbursementsJournalModel> entityList)
         {
             throw new NotImplementedException();
         }
@@ -47,20 +48,19 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Insert(CashReceiptsJournalModel entity)
+        public bool Insert(CashDisbursementsJournalModel entity)
         {
             try
             {
                 var parameters = new object[][]
                 {
                     new object[] { "@jev_id", DbType.Int32, entity.JevId},
-                    new object[] { "@collecting_officers_id", DbType.Byte, entity.CollectingOfficerId},
-                    new object[] { "@rcd_no", DbType.String, entity.RCDNo},
-                    new object[] { "@or_no", DbType.String, entity.ORNo},
-                    new object[] { "@or_date", DbType.Date, entity.ORDate},
+                    new object[] { "@disbursing_officers_id", DbType.Byte, entity.DisbursingOfficerId},
+                    new object[] { "@dv_no", DbType.String, entity.DVNo},
+                    new object[] { "@date_paid", DbType.Date, entity.DatePaid},
                 };
 
-                string query = $"INSERT INTO {tableName} (jev_id, collecting_officers_id, rcd_no, or_no, or_date) VALUES (@jev_id, @collecting_officers_id, @rcd_no, @or_no, @or_date)";
+                string query = $"INSERT INTO {tableName} (jev_id, disbursing_officers_id, dv_no, date_paid) VALUES (@jev_id, @disbursing_officers_id, @dv_no, @date_paid)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -69,69 +69,30 @@ namespace ACC.Data
             }
         }
 
-        public bool Update(CashReceiptsJournalModel entity)
+        public bool Update(CashDisbursementsJournalModel entity)
         {
             throw new NotImplementedException();
         }
 
-        public bool UpdateByJevId(CashReceiptsJournalModel entity)
+        public bool UpdateByJevId(CashDisbursementsJournalModel entity)
         {
             try
             {
                 var parameters = new object[][]
                 {
                     new object[] { "@jev_id", DbType.Int32, entity.JevId},
-                    new object[] { "@collecting_officers_id", DbType.Byte, entity.CollectingOfficerId},
-                    new object[] { "@rcd_no", DbType.String, entity.RCDNo},
-                    new object[] { "@or_no", DbType.String, entity.ORNo},
-                    new object[] { "@or_date", DbType.Date, entity.ORDate},
+                    new object[] { "@disbursing_officers_id", DbType.Byte, entity.DisbursingOfficerId},
+                    new object[] { "@dv_no", DbType.String, entity.DVNo},
+                    new object[] { "@date_paid", DbType.Date, entity.DatePaid},
                 };
 
-                string query = $"UPDATE {tableName} SET collecting_officers_id = @collecting_officers_id, rcd_no = @rcd_no, or_no = @or_no, or_date = @or_date WHERE jev_id = @jev_id";
+                string query = $"UPDATE {tableName} SET disbursing_officers_id = @disbursing_officers_id, dv_no = @dv_no, date_paid = @date_paid WHERE jev_id = @jev_id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
             {
                 throw;
             }
-        }
-
-        public Dictionary<string, string> GetViewRecordByJevID(int jevId)
-        {
-            var record = new Dictionary<string, string>();
-
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@jev_id", DbType.Int32, jevId},
-                };
-
-                string query = $"SELECT id, collecting_officers_id, rcd_no, or_no, or_date, first_name, mid_initial, last_name, full_name, job_title FROM {viewTableName} WHERE jev_id = @jev_id";
-
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-
-                    record.Add("id", reader.Rows[0]["id"].ToString());
-                    record.Add("collecting_officers_id", reader.Rows[0]["collecting_officers_id"].ToString());
-                    record.Add("rcd_no", reader.Rows[0]["rcd_no"].ToString());
-                    record.Add("or_no", reader.Rows[0]["or_no"].ToString());
-                    record.Add("or_date", reader.Rows[0]["or_date"].ToString());
-                    record.Add("first_name", reader.Rows[0]["first_name"].ToString());
-                    record.Add("mid_initial", reader.Rows[0]["mid_initial"].ToString());
-                    record.Add("last_name", reader.Rows[0]["last_name"].ToString());
-                    record.Add("full_name", reader.Rows[0]["full_name"].ToString());
-                    record.Add("job_title", reader.Rows[0]["job_title"].ToString());
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            return record;
         }
 
         public bool JevIdExist(int jevId)
@@ -155,6 +116,43 @@ namespace ACC.Data
             };
 
             return false;
+        }
+
+        public Dictionary<string, string> GetViewRecordByJevID(int jevId)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@jev_id", DbType.Int32, jevId},
+                };
+
+                string query = $"SELECT id, disbursing_officers_id, dv_no, date_paid, first_name, mid_initial, last_name, full_name, job_title FROM {viewTableName} WHERE jev_id = @jev_id";
+
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    record.Add("id", reader.Rows[0]["id"].ToString());
+                    record.Add("disbursing_officers_id", reader.Rows[0]["disbursing_officers_id"].ToString());
+                    record.Add("dv_no", reader.Rows[0]["dv_no"].ToString());
+                    record.Add("date_paid", reader.Rows[0]["date_paid"].ToString());
+                    record.Add("first_name", reader.Rows[0]["first_name"].ToString());
+                    record.Add("mid_initial", reader.Rows[0]["mid_initial"].ToString());
+                    record.Add("last_name", reader.Rows[0]["last_name"].ToString());
+                    record.Add("full_name", reader.Rows[0]["full_name"].ToString());
+                    record.Add("job_title", reader.Rows[0]["job_title"].ToString());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
         }
     }
 }

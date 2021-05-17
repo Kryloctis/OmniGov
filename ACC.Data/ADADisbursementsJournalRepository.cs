@@ -85,9 +85,10 @@ namespace ACC.Data
                 {
                     new object[] { "@jev_id", DbType.Int32, entity.JevId},
                     new object[] { "@ada_no", DbType.String, entity.ADANumber},
+                    new object[] { "@dv_no", DbType.String, entity.DVNo},
                 };
 
-                string query = $"INSERT INTO {tableName} (jev_id, ada_no) VALUES (@jev_id, @ada_no)";
+                string query = $"INSERT INTO {tableName} (jev_id, ada_no, dv_no) VALUES (@jev_id, @ada_no, @dv_no)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -99,6 +100,80 @@ namespace ACC.Data
         public bool Update(ADADisbursementsJournalModel entity)
         {
             throw new NotImplementedException();
+        }
+
+        public bool UpdateByJevId(ADADisbursementsJournalModel entity)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@jev_id", DbType.Int32, entity.JevId},
+                    new object[] { "@ada_no", DbType.String, entity.ADANumber},
+                    new object[] { "@dv_no", DbType.String, entity.DVNo},
+                };
+
+                string query = $"UPDATE {tableName} SET ada_no = @ada_no, dv_no = @dv_no WHERE jev_id = @jev_id";
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Dictionary<string, string> GetViewRecordByJevID(int jevId)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@jev_id", DbType.Int32, jevId},
+                };
+
+                string query = $"SELECT id, ada_no, dv_no FROM {tableName} WHERE jev_id = @jev_id";
+
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    record.Add("id", reader.Rows[0]["id"].ToString());
+                    record.Add("ada_no", reader.Rows[0]["ada_no"].ToString());
+                    record.Add("dv_no", reader.Rows[0]["dv_no"].ToString());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
+        }
+
+        public bool JevIdExist(int jevId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@jev_id", DbType.Int32, jevId },
+                };
+
+                string query = $"SELECT id FROM {tableName} WHERE jev_id = @jev_id";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
         }
     }
 }

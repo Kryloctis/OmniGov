@@ -1021,36 +1021,5 @@ namespace AccountingSystem
 
         #endregion Supplemental Appropriations
 
-        #region Obligation Request
-
-        internal static void ObligationRequestDatagridView(DataTable dataTable, DataGridView dataGridView)
-        {
-            try
-            {
-                foreach (DataRow dataRow in dataTable.Rows)
-                {
-                    dataGridView.Rows.Add(new object[] {
-                            dataRow["obligation_request_id"],
-                            dataRow["obligation_no"],
-                            dataRow["account_code"],
-                            dataRow["gen_ledger_acc_name"],
-                            dataRow["date_requested"],
-                            dataRow["obligation_amount"],
-                            dataRow["created_at"],
-                            dataRow["updated_at"],
-                    });
-                }
-
-
-                dataGridView.ClearSelection();
-
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        #endregion Obligation Request
     }
 }

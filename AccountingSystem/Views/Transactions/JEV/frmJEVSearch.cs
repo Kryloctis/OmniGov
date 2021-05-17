@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using ACC.Domain.Interfaces;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
@@ -19,6 +18,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void frmJEVSearch_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
+            Helper.DatagridDefaultStyle(dgJEV);
+            dgJEV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
         private void CheckedFund(string fundName)
@@ -96,17 +97,18 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void LoadSelectedJEV()
         {
             var uc = frmJEV.ucjev1;
             try
             {
-                bool jevExist = Factory.JEVRepository().JevNumberExist(txtJEV.Text.Trim());
+                bool jevExist = Factory.JEVRepository().JevNumberExist(txtSearch.Text.Trim());
 
-                if (jevExist)
+                if (dgJEV.SelectedRows.Count == 1)
                 {
-                    string jevNo = txtJEV.Text;
-                    string[] jevNoSplit = txtJEV.Text.Split("-");
+                    int rowIndex = dgJEV.CurrentCell.RowIndex;
+                    string jevNo = dgJEV.Rows[rowIndex].Cells["jev_no"].Value.ToString();
+                    string[] jevNoSplit = jevNo.Split("-");
 
                     uc.Enabled = true;
                     frmJEV.btnSave.Enabled = true;
@@ -120,6 +122,10 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                     LoadCheckDisbursementsDataIfExist(uc, jevId);
                     LoadCashReceiptsDataIfExist(uc, jevId);
+                    LoadADADisbursementDataIfExist(uc, jevId);
+                    LoadCashDisbursementDataIfExist(uc, jevId);
+                    LoadGeneralJournalDataIfExist(uc, jevId);
+
                     uc.jevId = jevId;
                     uc.txtExplanation.Text = jevDict["explanation"];
                     uc.dtpDateEntry.Value = Convert.ToDateTime(jevDict["date_entry"]);
@@ -143,6 +149,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            LoadSelectedJEV();
+        }
+
         private static void LoadCheckDisbursementsDataIfExist(ucJEV uc, int jevId)
         {
             var checkDisbursementsRepository = Factory.CheckDisbursementsJournalRepository();
@@ -164,11 +175,65 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             if (cashReceiptsJournalRepository.JevIdExist(jevId))
             {
-                Dictionary<string, string> checkDisbursementsData = cashReceiptsJournalRepository.GetViewRecordByJevID(jevId);
+                Dictionary<string, string> checkDisbursementsDict = cashReceiptsJournalRepository.GetViewRecordByJevID(jevId);
 
-                uc.txtRCIORADA.Text = checkDisbursementsData["rcd_number"];
-                uc.cmbCollectingDisbursingOfficer.SelectedValue = checkDisbursementsData["collecting_officers_id"];
+                uc.txtDVRCDNo.Text = checkDisbursementsDict["rcd_no"];
+                uc.cmbCollectingDisbursingOfficer.SelectedValue = checkDisbursementsDict["collecting_officers_id"];
+                uc.txtRCIORADA.Text = checkDisbursementsDict["or_no"];
+                uc.dtpCheckORPaid.Value = Convert.ToDateTime(checkDisbursementsDict["or_date"]);
             }
+        }
+
+        private static void LoadADADisbursementDataIfExist(ucJEV uc, int jevId)
+        {
+            var aDADisbursementsJournalRepository = Factory.ADADisbursementsJournalRepository();
+
+            if (aDADisbursementsJournalRepository.JevIdExist(jevId))
+            {
+                Dictionary<string, string> adaDisbursementsDict = aDADisbursementsJournalRepository.GetViewRecordByJevID(jevId);
+
+                uc.txtDVRCDNo.Text = adaDisbursementsDict["dv_no"];
+                uc.txtRCIORADA.Text = adaDisbursementsDict["ada_no"];
+            }
+        }
+
+        private static void LoadCashDisbursementDataIfExist(ucJEV uc, int jevId)
+        {
+            var cashDisbursementsJournalRepository = Factory.CashDisbursementsJournalRepository();
+
+            if (cashDisbursementsJournalRepository.JevIdExist(jevId))
+            {
+                Dictionary<string, string> cashDisbursementsDict = cashDisbursementsJournalRepository.GetViewRecordByJevID(jevId);
+
+                uc.dtpCheckORPaid.Value = Convert.ToDateTime(cashDisbursementsDict["date_paid"]);
+                uc.txtDVRCDNo.Text = cashDisbursementsDict["dv_no"];
+                uc.cmbCollectingDisbursingOfficer.SelectedValue = Convert.ToInt32(cashDisbursementsDict["disbursing_officers_id"]);
+            }
+        }
+
+        private static void LoadGeneralJournalDataIfExist(ucJEV uc, int jevId)
+        {
+            var generalJournalRepository = Factory.GeneralJournalRepository();
+
+            if (generalJournalRepository.JevIdExist(jevId))
+            {
+                Dictionary<string, string> generalJournalDict = generalJournalRepository.GetViewRecordByJevID(jevId);
+
+                uc.txtCheckNo.Text = generalJournalDict["check_no"];
+                uc.txtDVRCDNo.Text = generalJournalDict["dv_no"];
+                uc.txtRCIORADA.Text = generalJournalDict["or_no"];
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            var dtJEV = Factory.JEVRepository().GetRecordsBySearch(txtSearch.Text.Trim());
+            HelperLoadRecords.JEVDatagridView(dtJEV, dgJEV);
+        }
+
+        private void dgJEV_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            LoadSelectedJEV();
         }
     }
 }
