@@ -15,7 +15,9 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void frmJEV_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            this.btnDelete.Click += new EventHandler(this.BtnDelete_Click);
+            MessageBox.Show($"{ucjev1.journalId} - {ucjev1.journalName}");
+
+            btnDelete.Click += new EventHandler(this.BtnDelete_Click);
         }
 
         private static ushort? ValidateNullSubsidiary(object subsidiaryCellValue)
@@ -52,7 +54,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 switch (uc.journalName)
                 {
                     case "General Journal":
-                        MessageBox.Show("GJ");
                         return InsertGeneralJournal(userId, uc);
 
                     case "Procurement Received Journal":

@@ -100,6 +100,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 {
                     radJournal.Checked = true;
                     journalId = Convert.ToByte(journal["id"]);
+                    journalName = CheckedJournal;
                     ShowCheckIcon(radJournal);
                 }
 
