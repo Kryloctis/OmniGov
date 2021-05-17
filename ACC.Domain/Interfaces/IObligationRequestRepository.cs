@@ -14,14 +14,8 @@ namespace ACC.Domain.Interfaces
 
         bool ObligationNumExist(int id, string obligationNum);
 
-        bool AccountExist(int accountId, DateTime dateRequested);
+        DataTable GetViewRecordsByIdsAndMonthAndYear(int fppId, int? otherFPPId, int fundId, int allotmentClassId, int accountId, byte month, short year);
 
-        bool AccountExist(int id, int accountId, DateTime dateRequested);
-
-        bool BulkInsert(List<ObligationRequestModel> obligationRequestModelList);
-
-        Dictionary <string, string> GetRecordByObligation(string obligationNo);
-
-        DataTable GetRecordsByObligation(string obligationNo);
+        Dictionary<string, string> GetViewRecordsById(int obligationId);
     }
 }
