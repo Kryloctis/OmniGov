@@ -3014,35 +3014,49 @@ namespace AccountingSystem {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class dtSAAOBDataTable : global::System.Data.TypedTableBase<dtSAAOBRow> {
             
+            private global::System.Data.DataColumn columnfund_id;
+            
             private global::System.Data.DataColumn columnfund_code;
             
             private global::System.Data.DataColumn columnfund_name;
+            
+            private global::System.Data.DataColumn columnfunction_classification_id;
+            
+            private global::System.Data.DataColumn columnfunction_classification_sector_code;
+            
+            private global::System.Data.DataColumn columnfunction_classification_sector_name;
+            
+            private global::System.Data.DataColumn columnfunction_classification_services_id;
+            
+            private global::System.Data.DataColumn columnfunction_classification_services_name;
+            
+            private global::System.Data.DataColumn columnfpp_id;
             
             private global::System.Data.DataColumn columnfpp_code;
             
             private global::System.Data.DataColumn columnfpp_name;
             
+            private global::System.Data.DataColumn columnothers_fpp_id;
+            
             private global::System.Data.DataColumn columnothers_fpp_name;
             
-            private global::System.Data.DataColumn columnallotment_id;
+            private global::System.Data.DataColumn columnallotment_class_id;
             
-            private global::System.Data.DataColumn columnallotment_classes_id;
+            private global::System.Data.DataColumn columnallotment_class_code;
             
-            private global::System.Data.DataColumn columnallotment_name;
+            private global::System.Data.DataColumn columnallotment_class_name;
             
             private global::System.Data.DataColumn columnaccount_code;
             
-            private global::System.Data.DataColumn columnledger_name;
+            private global::System.Data.DataColumn columnaccount_name;
             
             private global::System.Data.DataColumn columnyear;
             
-            private global::System.Data.DataColumn columnappropriation;
+            private global::System.Data.DataColumn columnappropriations;
             
-            private global::System.Data.DataColumn columnappropriation_balance;
+            private global::System.Data.DataColumn columnallotment_release;
             
-            private global::System.Data.DataColumn columntotal_allotment_release;
-            
-            private global::System.Data.DataColumn columntotal_obligation;
+            private global::System.Data.DataColumn columnobligations;
             
             private global::System.Data.DataColumn columnunobligated_balance;
             
@@ -3081,6 +3095,14 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn fund_idColumn {
+                get {
+                    return this.columnfund_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn fund_codeColumn {
                 get {
                     return this.columnfund_code;
@@ -3092,6 +3114,54 @@ namespace AccountingSystem {
             public global::System.Data.DataColumn fund_nameColumn {
                 get {
                     return this.columnfund_name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn function_classification_idColumn {
+                get {
+                    return this.columnfunction_classification_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn function_classification_sector_codeColumn {
+                get {
+                    return this.columnfunction_classification_sector_code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn function_classification_sector_nameColumn {
+                get {
+                    return this.columnfunction_classification_sector_name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn function_classification_services_idColumn {
+                get {
+                    return this.columnfunction_classification_services_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn function_classification_services_nameColumn {
+                get {
+                    return this.columnfunction_classification_services_name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn fpp_idColumn {
+                get {
+                    return this.columnfpp_id;
                 }
             }
             
@@ -3113,6 +3183,14 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn others_fpp_idColumn {
+                get {
+                    return this.columnothers_fpp_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn others_fpp_nameColumn {
                 get {
                     return this.columnothers_fpp_name;
@@ -3121,25 +3199,25 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn allotment_idColumn {
+            public global::System.Data.DataColumn allotment_class_idColumn {
                 get {
-                    return this.columnallotment_id;
+                    return this.columnallotment_class_id;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn allotment_classes_idColumn {
+            public global::System.Data.DataColumn allotment_class_codeColumn {
                 get {
-                    return this.columnallotment_classes_id;
+                    return this.columnallotment_class_code;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn allotment_nameColumn {
+            public global::System.Data.DataColumn allotment_class_nameColumn {
                 get {
-                    return this.columnallotment_name;
+                    return this.columnallotment_class_name;
                 }
             }
             
@@ -3153,9 +3231,9 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn ledger_nameColumn {
+            public global::System.Data.DataColumn account_nameColumn {
                 get {
-                    return this.columnledger_name;
+                    return this.columnaccount_name;
                 }
             }
             
@@ -3169,33 +3247,25 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn appropriationColumn {
+            public global::System.Data.DataColumn appropriationsColumn {
                 get {
-                    return this.columnappropriation;
+                    return this.columnappropriations;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn appropriation_balanceColumn {
+            public global::System.Data.DataColumn allotment_releaseColumn {
                 get {
-                    return this.columnappropriation_balance;
+                    return this.columnallotment_release;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn total_allotment_releaseColumn {
+            public global::System.Data.DataColumn obligationsColumn {
                 get {
-                    return this.columntotal_allotment_release;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn total_obligationColumn {
-                get {
-                    return this.columntotal_obligation;
+                    return this.columnobligations;
                 }
             }
             
@@ -3245,39 +3315,53 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public dtSAAOBRow AdddtSAAOBRow(
+                        string fund_id, 
                         string fund_code, 
                         string fund_name, 
+                        string function_classification_id, 
+                        string function_classification_sector_code, 
+                        string function_classification_sector_name, 
+                        string function_classification_services_id, 
+                        string function_classification_services_name, 
+                        string fpp_id, 
                         string fpp_code, 
                         string fpp_name, 
+                        string others_fpp_id, 
                         string others_fpp_name, 
-                        string allotment_id, 
-                        string allotment_classes_id, 
-                        string allotment_name, 
+                        string allotment_class_id, 
+                        string allotment_class_code, 
+                        string allotment_class_name, 
                         string account_code, 
-                        string ledger_name, 
+                        string account_name, 
                         string year, 
-                        string appropriation, 
-                        string appropriation_balance, 
-                        string total_allotment_release, 
-                        string total_obligation, 
+                        string appropriations, 
+                        string allotment_release, 
+                        string obligations, 
                         string unobligated_balance) {
                 dtSAAOBRow rowdtSAAOBRow = ((dtSAAOBRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
+                        fund_id,
                         fund_code,
                         fund_name,
+                        function_classification_id,
+                        function_classification_sector_code,
+                        function_classification_sector_name,
+                        function_classification_services_id,
+                        function_classification_services_name,
+                        fpp_id,
                         fpp_code,
                         fpp_name,
+                        others_fpp_id,
                         others_fpp_name,
-                        allotment_id,
-                        allotment_classes_id,
-                        allotment_name,
+                        allotment_class_id,
+                        allotment_class_code,
+                        allotment_class_name,
                         account_code,
-                        ledger_name,
+                        account_name,
                         year,
-                        appropriation,
-                        appropriation_balance,
-                        total_allotment_release,
-                        total_obligation,
+                        appropriations,
+                        allotment_release,
+                        obligations,
                         unobligated_balance};
                 rowdtSAAOBRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtSAAOBRow);
@@ -3301,57 +3385,78 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
+                this.columnfund_id = base.Columns["fund_id"];
                 this.columnfund_code = base.Columns["fund_code"];
                 this.columnfund_name = base.Columns["fund_name"];
+                this.columnfunction_classification_id = base.Columns["function_classification_id"];
+                this.columnfunction_classification_sector_code = base.Columns["function_classification_sector_code"];
+                this.columnfunction_classification_sector_name = base.Columns["function_classification_sector_name"];
+                this.columnfunction_classification_services_id = base.Columns["function_classification_services_id"];
+                this.columnfunction_classification_services_name = base.Columns["function_classification_services_name"];
+                this.columnfpp_id = base.Columns["fpp_id"];
                 this.columnfpp_code = base.Columns["fpp_code"];
                 this.columnfpp_name = base.Columns["fpp_name"];
+                this.columnothers_fpp_id = base.Columns["others_fpp_id"];
                 this.columnothers_fpp_name = base.Columns["others_fpp_name"];
-                this.columnallotment_id = base.Columns["allotment_id"];
-                this.columnallotment_classes_id = base.Columns["allotment_classes_id"];
-                this.columnallotment_name = base.Columns["allotment_name"];
+                this.columnallotment_class_id = base.Columns["allotment_class_id"];
+                this.columnallotment_class_code = base.Columns["allotment_class_code"];
+                this.columnallotment_class_name = base.Columns["allotment_class_name"];
                 this.columnaccount_code = base.Columns["account_code"];
-                this.columnledger_name = base.Columns["ledger_name"];
+                this.columnaccount_name = base.Columns["account_name"];
                 this.columnyear = base.Columns["year"];
-                this.columnappropriation = base.Columns["appropriation"];
-                this.columnappropriation_balance = base.Columns["appropriation_balance"];
-                this.columntotal_allotment_release = base.Columns["total_allotment_release"];
-                this.columntotal_obligation = base.Columns["total_obligation"];
+                this.columnappropriations = base.Columns["appropriations"];
+                this.columnallotment_release = base.Columns["allotment_release"];
+                this.columnobligations = base.Columns["obligations"];
                 this.columnunobligated_balance = base.Columns["unobligated_balance"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             private void InitClass() {
+                this.columnfund_id = new global::System.Data.DataColumn("fund_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfund_id);
                 this.columnfund_code = new global::System.Data.DataColumn("fund_code", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfund_code);
                 this.columnfund_name = new global::System.Data.DataColumn("fund_name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfund_name);
+                this.columnfunction_classification_id = new global::System.Data.DataColumn("function_classification_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfunction_classification_id);
+                this.columnfunction_classification_sector_code = new global::System.Data.DataColumn("function_classification_sector_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfunction_classification_sector_code);
+                this.columnfunction_classification_sector_name = new global::System.Data.DataColumn("function_classification_sector_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfunction_classification_sector_name);
+                this.columnfunction_classification_services_id = new global::System.Data.DataColumn("function_classification_services_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfunction_classification_services_id);
+                this.columnfunction_classification_services_name = new global::System.Data.DataColumn("function_classification_services_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfunction_classification_services_name);
+                this.columnfpp_id = new global::System.Data.DataColumn("fpp_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfpp_id);
                 this.columnfpp_code = new global::System.Data.DataColumn("fpp_code", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfpp_code);
                 this.columnfpp_name = new global::System.Data.DataColumn("fpp_name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfpp_name);
+                this.columnothers_fpp_id = new global::System.Data.DataColumn("others_fpp_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnothers_fpp_id);
                 this.columnothers_fpp_name = new global::System.Data.DataColumn("others_fpp_name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnothers_fpp_name);
-                this.columnallotment_id = new global::System.Data.DataColumn("allotment_id", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnallotment_id);
-                this.columnallotment_classes_id = new global::System.Data.DataColumn("allotment_classes_id", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnallotment_classes_id);
-                this.columnallotment_name = new global::System.Data.DataColumn("allotment_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnallotment_name);
+                this.columnallotment_class_id = new global::System.Data.DataColumn("allotment_class_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnallotment_class_id);
+                this.columnallotment_class_code = new global::System.Data.DataColumn("allotment_class_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnallotment_class_code);
+                this.columnallotment_class_name = new global::System.Data.DataColumn("allotment_class_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnallotment_class_name);
                 this.columnaccount_code = new global::System.Data.DataColumn("account_code", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnaccount_code);
-                this.columnledger_name = new global::System.Data.DataColumn("ledger_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnledger_name);
+                this.columnaccount_name = new global::System.Data.DataColumn("account_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaccount_name);
                 this.columnyear = new global::System.Data.DataColumn("year", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnyear);
-                this.columnappropriation = new global::System.Data.DataColumn("appropriation", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnappropriation);
-                this.columnappropriation_balance = new global::System.Data.DataColumn("appropriation_balance", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnappropriation_balance);
-                this.columntotal_allotment_release = new global::System.Data.DataColumn("total_allotment_release", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntotal_allotment_release);
-                this.columntotal_obligation = new global::System.Data.DataColumn("total_obligation", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntotal_obligation);
+                this.columnappropriations = new global::System.Data.DataColumn("appropriations", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnappropriations);
+                this.columnallotment_release = new global::System.Data.DataColumn("allotment_release", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnallotment_release);
+                this.columnobligations = new global::System.Data.DataColumn("obligations", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnobligations);
                 this.columnunobligated_balance = new global::System.Data.DataColumn("unobligated_balance", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnunobligated_balance);
             }
@@ -5666,6 +5771,22 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string fund_id {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSAAOB.fund_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'fund_id\' in table \'dtSAAOB\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSAAOB.fund_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public string fund_code {
                 get {
                     try {
@@ -5693,6 +5814,106 @@ namespace AccountingSystem {
                 }
                 set {
                     this[this.tabledtSAAOB.fund_nameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string function_classification_id {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSAAOB.function_classification_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'function_classification_id\' in table \'dtSAAOB\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSAAOB.function_classification_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string function_classification_sector_code {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSAAOB.function_classification_sector_codeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'function_classification_sector_code\' in table \'dtSAAOB\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSAAOB.function_classification_sector_codeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string function_classification_sector_name {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSAAOB.function_classification_sector_nameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'function_classification_sector_name\' in table \'dtSAAOB\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSAAOB.function_classification_sector_nameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string function_classification_services_id {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSAAOB.function_classification_services_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'function_classification_services_id\' in table \'dtSAAOB\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSAAOB.function_classification_services_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string function_classification_services_name {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSAAOB.function_classification_services_nameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'function_classification_services_name\' in table \'dtSAAOB\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSAAOB.function_classification_services_nameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string fpp_id {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSAAOB.fpp_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'fpp_id\' in table \'dtSAAOB\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSAAOB.fpp_idColumn] = value;
                 }
             }
             
@@ -5730,6 +5951,22 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string others_fpp_id {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSAAOB.others_fpp_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'others_fpp_id\' in table \'dtSAAOB\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSAAOB.others_fpp_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public string others_fpp_name {
                 get {
                     try {
@@ -5746,49 +5983,49 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string allotment_id {
+            public string allotment_class_id {
                 get {
                     try {
-                        return ((string)(this[this.tabledtSAAOB.allotment_idColumn]));
+                        return ((string)(this[this.tabledtSAAOB.allotment_class_idColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'allotment_id\' in table \'dtSAAOB\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'allotment_class_id\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtSAAOB.allotment_idColumn] = value;
+                    this[this.tabledtSAAOB.allotment_class_idColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string allotment_classes_id {
+            public string allotment_class_code {
                 get {
                     try {
-                        return ((string)(this[this.tabledtSAAOB.allotment_classes_idColumn]));
+                        return ((string)(this[this.tabledtSAAOB.allotment_class_codeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'allotment_classes_id\' in table \'dtSAAOB\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'allotment_class_code\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtSAAOB.allotment_classes_idColumn] = value;
+                    this[this.tabledtSAAOB.allotment_class_codeColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string allotment_name {
+            public string allotment_class_name {
                 get {
                     try {
-                        return ((string)(this[this.tabledtSAAOB.allotment_nameColumn]));
+                        return ((string)(this[this.tabledtSAAOB.allotment_class_nameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'allotment_name\' in table \'dtSAAOB\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'allotment_class_name\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtSAAOB.allotment_nameColumn] = value;
+                    this[this.tabledtSAAOB.allotment_class_nameColumn] = value;
                 }
             }
             
@@ -5810,17 +6047,17 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string ledger_name {
+            public string account_name {
                 get {
                     try {
-                        return ((string)(this[this.tabledtSAAOB.ledger_nameColumn]));
+                        return ((string)(this[this.tabledtSAAOB.account_nameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ledger_name\' in table \'dtSAAOB\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'account_name\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtSAAOB.ledger_nameColumn] = value;
+                    this[this.tabledtSAAOB.account_nameColumn] = value;
                 }
             }
             
@@ -5842,65 +6079,49 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string appropriation {
+            public string appropriations {
                 get {
                     try {
-                        return ((string)(this[this.tabledtSAAOB.appropriationColumn]));
+                        return ((string)(this[this.tabledtSAAOB.appropriationsColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'appropriation\' in table \'dtSAAOB\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'appropriations\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtSAAOB.appropriationColumn] = value;
+                    this[this.tabledtSAAOB.appropriationsColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string appropriation_balance {
+            public string allotment_release {
                 get {
                     try {
-                        return ((string)(this[this.tabledtSAAOB.appropriation_balanceColumn]));
+                        return ((string)(this[this.tabledtSAAOB.allotment_releaseColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'appropriation_balance\' in table \'dtSAAOB\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'allotment_release\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtSAAOB.appropriation_balanceColumn] = value;
+                    this[this.tabledtSAAOB.allotment_releaseColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string total_allotment_release {
+            public string obligations {
                 get {
                     try {
-                        return ((string)(this[this.tabledtSAAOB.total_allotment_releaseColumn]));
+                        return ((string)(this[this.tabledtSAAOB.obligationsColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'total_allotment_release\' in table \'dtSAAOB\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'obligations\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtSAAOB.total_allotment_releaseColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string total_obligation {
-                get {
-                    try {
-                        return ((string)(this[this.tabledtSAAOB.total_obligationColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'total_obligation\' in table \'dtSAAOB\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabledtSAAOB.total_obligationColumn] = value;
+                    this[this.tabledtSAAOB.obligationsColumn] = value;
                 }
             }
             
@@ -5918,6 +6139,18 @@ namespace AccountingSystem {
                 set {
                     this[this.tabledtSAAOB.unobligated_balanceColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isfund_idNull() {
+                return this.IsNull(this.tabledtSAAOB.fund_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setfund_idNull() {
+                this[this.tabledtSAAOB.fund_idColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5946,6 +6179,78 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isfunction_classification_idNull() {
+                return this.IsNull(this.tabledtSAAOB.function_classification_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setfunction_classification_idNull() {
+                this[this.tabledtSAAOB.function_classification_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isfunction_classification_sector_codeNull() {
+                return this.IsNull(this.tabledtSAAOB.function_classification_sector_codeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setfunction_classification_sector_codeNull() {
+                this[this.tabledtSAAOB.function_classification_sector_codeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isfunction_classification_sector_nameNull() {
+                return this.IsNull(this.tabledtSAAOB.function_classification_sector_nameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setfunction_classification_sector_nameNull() {
+                this[this.tabledtSAAOB.function_classification_sector_nameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isfunction_classification_services_idNull() {
+                return this.IsNull(this.tabledtSAAOB.function_classification_services_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setfunction_classification_services_idNull() {
+                this[this.tabledtSAAOB.function_classification_services_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isfunction_classification_services_nameNull() {
+                return this.IsNull(this.tabledtSAAOB.function_classification_services_nameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setfunction_classification_services_nameNull() {
+                this[this.tabledtSAAOB.function_classification_services_nameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isfpp_idNull() {
+                return this.IsNull(this.tabledtSAAOB.fpp_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setfpp_idNull() {
+                this[this.tabledtSAAOB.fpp_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool Isfpp_codeNull() {
                 return this.IsNull(this.tabledtSAAOB.fpp_codeColumn);
             }
@@ -5970,6 +6275,18 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isothers_fpp_idNull() {
+                return this.IsNull(this.tabledtSAAOB.others_fpp_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setothers_fpp_idNull() {
+                this[this.tabledtSAAOB.others_fpp_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool Isothers_fpp_nameNull() {
                 return this.IsNull(this.tabledtSAAOB.others_fpp_nameColumn);
             }
@@ -5982,38 +6299,38 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isallotment_idNull() {
-                return this.IsNull(this.tabledtSAAOB.allotment_idColumn);
+            public bool Isallotment_class_idNull() {
+                return this.IsNull(this.tabledtSAAOB.allotment_class_idColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setallotment_idNull() {
-                this[this.tabledtSAAOB.allotment_idColumn] = global::System.Convert.DBNull;
+            public void Setallotment_class_idNull() {
+                this[this.tabledtSAAOB.allotment_class_idColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isallotment_classes_idNull() {
-                return this.IsNull(this.tabledtSAAOB.allotment_classes_idColumn);
+            public bool Isallotment_class_codeNull() {
+                return this.IsNull(this.tabledtSAAOB.allotment_class_codeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setallotment_classes_idNull() {
-                this[this.tabledtSAAOB.allotment_classes_idColumn] = global::System.Convert.DBNull;
+            public void Setallotment_class_codeNull() {
+                this[this.tabledtSAAOB.allotment_class_codeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isallotment_nameNull() {
-                return this.IsNull(this.tabledtSAAOB.allotment_nameColumn);
+            public bool Isallotment_class_nameNull() {
+                return this.IsNull(this.tabledtSAAOB.allotment_class_nameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setallotment_nameNull() {
-                this[this.tabledtSAAOB.allotment_nameColumn] = global::System.Convert.DBNull;
+            public void Setallotment_class_nameNull() {
+                this[this.tabledtSAAOB.allotment_class_nameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6030,14 +6347,14 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isledger_nameNull() {
-                return this.IsNull(this.tabledtSAAOB.ledger_nameColumn);
+            public bool Isaccount_nameNull() {
+                return this.IsNull(this.tabledtSAAOB.account_nameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setledger_nameNull() {
-                this[this.tabledtSAAOB.ledger_nameColumn] = global::System.Convert.DBNull;
+            public void Setaccount_nameNull() {
+                this[this.tabledtSAAOB.account_nameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6054,50 +6371,38 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsappropriationNull() {
-                return this.IsNull(this.tabledtSAAOB.appropriationColumn);
+            public bool IsappropriationsNull() {
+                return this.IsNull(this.tabledtSAAOB.appropriationsColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetappropriationNull() {
-                this[this.tabledtSAAOB.appropriationColumn] = global::System.Convert.DBNull;
+            public void SetappropriationsNull() {
+                this[this.tabledtSAAOB.appropriationsColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isappropriation_balanceNull() {
-                return this.IsNull(this.tabledtSAAOB.appropriation_balanceColumn);
+            public bool Isallotment_releaseNull() {
+                return this.IsNull(this.tabledtSAAOB.allotment_releaseColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setappropriation_balanceNull() {
-                this[this.tabledtSAAOB.appropriation_balanceColumn] = global::System.Convert.DBNull;
+            public void Setallotment_releaseNull() {
+                this[this.tabledtSAAOB.allotment_releaseColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Istotal_allotment_releaseNull() {
-                return this.IsNull(this.tabledtSAAOB.total_allotment_releaseColumn);
+            public bool IsobligationsNull() {
+                return this.IsNull(this.tabledtSAAOB.obligationsColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Settotal_allotment_releaseNull() {
-                this[this.tabledtSAAOB.total_allotment_releaseColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Istotal_obligationNull() {
-                return this.IsNull(this.tabledtSAAOB.total_obligationColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Settotal_obligationNull() {
-                this[this.tabledtSAAOB.total_obligationColumn] = global::System.Convert.DBNull;
+            public void SetobligationsNull() {
+                this[this.tabledtSAAOB.obligationsColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
