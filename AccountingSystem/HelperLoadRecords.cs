@@ -1052,5 +1052,26 @@ namespace AccountingSystem
         }
 
         #endregion Obligation Request
+
+        #region JEV
+        internal static void JEVDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["funds_id"].Visible = false;
+            datagrid.Columns["journals_id"].Visible = false;
+            datagrid.Columns["jev_no"].HeaderText = "JEV No.";
+            datagrid.Columns["date_entry"].HeaderText = "Date";
+            datagrid.Columns["ref_no"].HeaderText = "Ref No.";
+            datagrid.Columns["payee"].HeaderText = "Payee";
+            datagrid.Columns["explanation"].HeaderText = "Explanation";
+            datagrid.Columns["explanation"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["is_approved"].Visible = false;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["created_by"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
+            datagrid.Columns["updated_by"].Visible = false;
+        }
+        #endregion
     }
 }
