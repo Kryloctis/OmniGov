@@ -92,7 +92,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
             txtTotalObligation.Text = GetTotalObligations().ToString("N2");
 
-            _frmObligationRequestMain.lblRecordCount.Text = dgObligationRequests.Rows.Count.ToString(); 
+            _frmObligationRequestMain.lblRecordCount.Text = dtObligationRequestRecords.Rows.Count.ToString(); 
         }
 
         private void LoadFPP()
