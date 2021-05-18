@@ -45,7 +45,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.label3 = new System.Windows.Forms.Label();
             this.cmbSubsidiary = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSubsidiaryLedger = new System.Windows.Forms.Button();
             this.epFPP = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAccount = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
@@ -203,14 +203,16 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.label4.TabIndex = 10;
             this.label4.Text = "Subsidiary";
             // 
-            // button1
+            // btnSubsidiaryLedger
             // 
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(443, 68);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(22, 22);
-            this.button1.TabIndex = 8;
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSubsidiaryLedger.Enabled = false;
+            this.btnSubsidiaryLedger.Image = ((System.Drawing.Image)(resources.GetObject("btnSubsidiaryLedger.Image")));
+            this.btnSubsidiaryLedger.Location = new System.Drawing.Point(443, 68);
+            this.btnSubsidiaryLedger.Name = "btnSubsidiaryLedger";
+            this.btnSubsidiaryLedger.Size = new System.Drawing.Size(22, 22);
+            this.btnSubsidiaryLedger.TabIndex = 8;
+            this.btnSubsidiaryLedger.UseVisualStyleBackColor = true;
+            this.btnSubsidiaryLedger.Click += new System.EventHandler(this.btnSubsidiaryLedger_Click);
             // 
             // epFPP
             // 
@@ -228,7 +230,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnSubsidiaryLedger);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cmbSubsidiary);
             this.Controls.Add(this.label3);
@@ -269,7 +271,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal System.Windows.Forms.NumericUpDown nudAmount;
         internal System.Windows.Forms.ComboBox cmbSubsidiary;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSubsidiaryLedger;
         internal System.Windows.Forms.Panel pnlCollectionsDeposits;
         private System.Windows.Forms.ErrorProvider epFPP;
         private System.Windows.Forms.ErrorProvider epAccount;

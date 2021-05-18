@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
@@ -112,6 +113,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             ushort generalLedgerId = Convert.ToUInt16(cmbAccount.SelectedValue);
             LoadSubsidiary(generalLedgerId);
+            btnSubsidiaryLedger.Enabled = true;
         }
 
         private void cmbAccount_KeyDown(object sender, KeyEventArgs e)
@@ -148,6 +150,12 @@ namespace AccountingSystem.Views.Transactions.JEV
                     Helper.MessageBoxError(ex.Message);
                 }
             }
+        }
+
+        private void btnSubsidiaryLedger_Click(object sender, EventArgs e)
+        {
+            ushort accountId = Convert.ToUInt16(cmbAccount.SelectedValue);
+            _ = new frmSubsidiary(accountId).ShowDialog();
         }
     }
 }

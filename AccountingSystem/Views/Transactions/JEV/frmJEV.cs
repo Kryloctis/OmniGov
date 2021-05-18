@@ -15,7 +15,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void frmJEV_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            MessageBox.Show($"{ucjev1.journalId} - {ucjev1.journalName}");
 
             btnDelete.Click += new EventHandler(this.BtnDelete_Click);
         }
