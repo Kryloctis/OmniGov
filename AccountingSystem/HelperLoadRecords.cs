@@ -281,6 +281,20 @@ namespace AccountingSystem
             datagrid.Columns["updated_at"].Visible = false;
         }
 
+        internal static void SubsidiaryLedgerAccountsDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].Visible = false;
+            datagrid.Columns[2].Visible = false;
+            datagrid.Columns[3].HeaderText = "Code";
+            datagrid.Columns[4].HeaderText = "Name";
+            datagrid.Columns[5].Visible = false;
+            datagrid.Columns[6].Visible = false;
+
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
         internal static void SubsidiaryLedgerComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
             comboBox.DisplayMember = displayMember;
@@ -385,17 +399,19 @@ namespace AccountingSystem
         {
             datagrid.DataSource = dataTable;
             datagrid.Columns[0].HeaderText = "RCD No.";
-            datagrid.Columns[1].HeaderText = "Accountable Form";
-            datagrid.Columns[2].HeaderText = "General Ledger";
-            datagrid.Columns[3].HeaderText = "Payee";
-            datagrid.Columns[4].HeaderText = "Receipt No.";
-            datagrid.Columns[5].HeaderText = "Payment Date";
-            datagrid.Columns[6].HeaderText = "Amount";
-            datagrid.Columns[7].HeaderText = "Collector";
-            datagrid.Columns[8].Visible = false;
-            datagrid.Columns[9].Visible = false;
+            datagrid.Columns[1].HeaderText = "Account Code";
+            datagrid.Columns[2].HeaderText = "Accountable Form";
+            datagrid.Columns[3].HeaderText = "Ledger";
+            datagrid.Columns[4].HeaderText = "Subsidiary";
+            datagrid.Columns[5].HeaderText = "Payee";
+            datagrid.Columns[6].HeaderText = "Receipt No.";
+            datagrid.Columns[7].HeaderText = "Payment Date";
+            datagrid.Columns[8].HeaderText = "Amount";
+            datagrid.Columns[9].HeaderText = "Collector";
             datagrid.Columns[10].Visible = false;
             datagrid.Columns[11].Visible = false;
+            datagrid.Columns[12].Visible = false;
+            datagrid.Columns[13].Visible = false;
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
@@ -588,6 +604,8 @@ namespace AccountingSystem
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
+
+
 
         internal static void DisbursingOfficerComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {

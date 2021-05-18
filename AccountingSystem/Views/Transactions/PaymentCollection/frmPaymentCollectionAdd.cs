@@ -42,6 +42,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     CoId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
                     AccId = uc.accId,
                     GlaId = uc.glaId,
+                    SlaId = uc.slaId,
                     Payee = uc.txtpayee.Text.Trim(),
                     ReceiptNo = uc.txtreceipt.Text.Trim(),
                     PaymentDate = Convert.ToDateTime(uc.dtdate.Text.Trim()),

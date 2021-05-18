@@ -38,9 +38,11 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 foreach (DataRow item in dt.Rows)
                 {
                     DataRow row = dtPC.NewRow();
-                    row["rcdno"] = item["id"];
+                    row["rcdno"] = item["rcdno"];
+                    row["account_code"] = item["account_code"];
+                    row["subsidiary"] = item["subsidiary"];
                     row["payee"] = item["payee"];
-                    row["acc_form_desc"] = item["acc_form_desc"];
+                    row["acc_form_desc"] = item["accform"];
                     row["ledger_name"] = item["ledger_name"];
                     row["payment_date"] = item["payment_date"];
                     row["receipt_no"] = item["receipt_no"];
