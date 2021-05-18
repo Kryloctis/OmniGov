@@ -10,6 +10,7 @@ namespace ACC.Domain.Models
         public int CoId { get; set; }
         public int AccId { get; set; }
         public int GlaId { get; set; }
+        public int SlaId { get; set; }
         public string Payee { get; set; }
         public string ReceiptNo { get; set; }
         public DateTime PaymentDate { get; set; }

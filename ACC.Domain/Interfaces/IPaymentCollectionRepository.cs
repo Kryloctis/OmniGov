@@ -9,5 +9,6 @@ namespace ACC.Domain.Interfaces
     public interface IPaymentCollectionRepository : IRepository<PaymentCollectionModel>
     {
         DataTable GetRecordByLedger(string month);
+        DataTable GetRecordsBySearch(string searchText);
     }
 }

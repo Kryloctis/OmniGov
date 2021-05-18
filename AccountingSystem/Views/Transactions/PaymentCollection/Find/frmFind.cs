@@ -46,7 +46,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
                     if (table.Equals("ledger"))
                     {
                         var ledgerRepository = Factory.GeneralLedgerAccountsRepository();
-                        var dtLedger = ledgerRepository.GetRecords();
+                        var dtLedger = ledgerRepository.GetRecordsBySearch("");
                         HelperLoadRecords.GeneralLedgerSearchDatagridView(dtLedger, dgSelect);
                     }
                 }

@@ -415,12 +415,8 @@ namespace AccountingSystem
         {
             datagrid.DataSource = dataTable;
             datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].Visible = false;
-            datagrid.Columns[2].HeaderText = "Ledger Code";
-            datagrid.Columns[3].HeaderText = "Ledger Name";
-            datagrid.Columns[4].Visible = false;
-            datagrid.Columns[5].Visible = false;
-            datagrid.Columns[6].Visible = false;
+            datagrid.Columns[1].HeaderText = "Account Code";
+            datagrid.Columns[2].HeaderText = "Ledger Name";
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
