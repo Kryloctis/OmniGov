@@ -139,6 +139,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     cmbAccount.DisplayMember = "value";
                     cmbAccount.ValueMember = "key";
                     cmbAccount.DroppedDown = true;
+                    Cursor.Current = Cursors.Default;
 
                     Helper.ClearErrorComboBox(epAccount, cmbAccount);
                 }

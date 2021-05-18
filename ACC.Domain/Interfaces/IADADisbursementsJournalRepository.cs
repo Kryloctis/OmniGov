@@ -8,5 +8,11 @@ namespace ACC.Domain.Interfaces
     public interface IADADisbursementsJournalRepository : IRepository<ADADisbursementsJournalModel>
     {
         Dictionary<string, string> GetRecordByJevID(int jevId);
+
+        bool UpdateByJevId(ADADisbursementsJournalModel entity);
+
+        Dictionary<string, string> GetViewRecordByJevID(int jevId);
+
+        bool JevIdExist(int jevId);
     }
 }

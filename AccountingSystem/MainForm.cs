@@ -13,7 +13,6 @@ using AccountingSystem.Views.Manage.Users.List;
 using AccountingSystem.Views.Transactions.JEV;
 using AccountingSystem.Views.Reports.Journals;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
-using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.Ledgers;
@@ -21,6 +20,7 @@ using AccountingSystem.Views.Dashboard;
 using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Manage.DisbursingOfficer;
 using AccountingSystem.Views.Manage.AccountableForm;
+using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Reports.PaymentCollection;
 using AccountingSystem.Views.Transactions.PaymentCollection;
 
@@ -29,8 +29,9 @@ namespace AccountingSystem
     public partial class MainForm : Form
     {
         private Dictionary<string, string> userDict;
+        private LoginForm loginForm;
 
-        public MainForm()
+        public MainForm(LoginForm _loginForm)
         {
             InitializeComponent();
             menuReportGJ.Click += new EventHandler(MenuReportGeneralJournal_Click);
@@ -46,8 +47,11 @@ namespace AccountingSystem
             btnObligationRequest.Click += new EventHandler(BtnObligationRequest_Click);
             menuDisbursingOfficer.Click += new EventHandler(MenuDisbursingOffice_Click);
             btnRCI.Click += new EventHandler(BtnRCI_Click);
+            menuLogout.Click += new EventHandler(menuLogout_Click);
+            menuExitApp.Click += new EventHandler(menuExitApp_Click);
 
             userDict = Helper.LoggedInUserData();
+            loginForm = _loginForm;
         }
 
         private void LoadLoggedInUser()
@@ -61,7 +65,7 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Manage Allotment Classes"))
                 menuAllotmentClasses.Visible = false;
 
-            if (!Helper.HasPermission("Manage Budget Appropriations") && !Helper.HasPermission("Manage Allotment Realeases"))
+            if (!Helper.HasPermission("Manage Budget Appropriations") && !Helper.HasPermission("Manage Allotment Releases"))
                 menuBudgetAppropriation.Visible = false;
 
             if (!Helper.HasPermission("Manage Chart of Accounts")) 
@@ -202,11 +206,6 @@ namespace AccountingSystem
             _ = new frmJEV().ShowDialog();
         }
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
         private void menuFunctionProgramProject_Click(object sender, EventArgs e)
         {
             _ = new frmFunctionProgramProject().ShowDialog();
@@ -306,7 +305,22 @@ namespace AccountingSystem
         {
             _ = new frmAccountable().ShowDialog();
         }
+        
+        private void menuLogout_Click(object sender, EventArgs e)
+        {
+            Close();
+            loginForm.Show();
+        }
 
+        private void menuExitApp_Click(object sender, EventArgs e)
+        {
+            loginForm.Close();
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            loginForm.Show();
+        }
         private void menuprintPC_Click(object sender, EventArgs e)
         {
             _ = new frmPCReport().ShowDialog();

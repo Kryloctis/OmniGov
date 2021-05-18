@@ -124,6 +124,30 @@ namespace ACC.Data
                     new object[] { "@mid_initial", DbType.String, entity.MidInitial},
                     new object[] { "@last_name", DbType.String, entity.LastName},
                     new object[] { "@username", DbType.String, entity.UserName},
+
+                };
+
+                string query = $"UPDATE {tableName} SET roles_id = @roles_id, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, username = @username WHERE id = @id";
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool UpdateWithPassword(UsersModel entity)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int16, entity.Id},
+                    new object[] { "@roles_id", DbType.Byte  , entity.RoleId},
+                    new object[] { "@first_name", DbType.String  , entity.FirstName},
+                    new object[] { "@mid_initial", DbType.String, entity.MidInitial},
+                    new object[] { "@last_name", DbType.String, entity.LastName},
+                    new object[] { "@username", DbType.String, entity.UserName},
                     new object[] { "@password", DbType.String, entity.Password},
 
                 };

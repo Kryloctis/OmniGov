@@ -31,7 +31,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnAddToList = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.ucObligationRequest1 = new AccountingSystem.Views.Transactions.ObligationRequest.ucObligationRequest();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -40,66 +40,71 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
-            this.flowLayoutPanel1.Controls.Add(this.btnAddToList);
+            this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 168);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 272);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(515, 30);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(613, 29);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(437, 3);
+            this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCancel.Location = new System.Drawing.Point(535, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 2;
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
+            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // btnAddToList
+            // btnSave
             // 
-            this.btnAddToList.Location = new System.Drawing.Point(356, 3);
-            this.btnAddToList.Name = "btnAddToList";
-            this.btnAddToList.Size = new System.Drawing.Size(75, 23);
-            this.btnAddToList.TabIndex = 1;
-            this.btnAddToList.Text = "Add to List";
-            this.btnAddToList.UseVisualStyleBackColor = true;
-            this.btnAddToList.Click += new System.EventHandler(this.btnAddToList_Click);
+            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSave.Location = new System.Drawing.Point(454, 3);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 2;
+            this.btnSave.Text = "Save";
+            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // ucObligationRequest1
             // 
-            this.ucObligationRequest1.Location = new System.Drawing.Point(12, 12);
+            this.ucObligationRequest1.Location = new System.Drawing.Point(21, 12);
             this.ucObligationRequest1.Name = "ucObligationRequest1";
-            this.ucObligationRequest1.Size = new System.Drawing.Size(495, 149);
-            this.ucObligationRequest1.TabIndex = 0;
+            this.ucObligationRequest1.Size = new System.Drawing.Size(589, 253);
+            this.ucObligationRequest1.TabIndex = 2;
             // 
             // frmObligationRequestAdd
             // 
-            this.AcceptButton = this.btnAddToList;
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(515, 198);
+            this.ClientSize = new System.Drawing.Size(613, 301);
             this.Controls.Add(this.ucObligationRequest1);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmObligationRequestAdd";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Obligation Request";
-            this.Load += new System.EventHandler(this.frmObligationRequestAdd_Load);
+            this.Text = "Add Obligation Request";
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        internal System.Windows.Forms.Button btnAddToList;
+        private System.Windows.Forms.Button btnSave;
         internal System.Windows.Forms.Button btnCancel;
         internal ucObligationRequest ucObligationRequest1;
     }

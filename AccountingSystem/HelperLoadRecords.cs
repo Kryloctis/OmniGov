@@ -588,6 +588,23 @@ namespace AccountingSystem
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
+
+        internal static void DisbursingOfficerComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+
+            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                // loop datatable to add items in autocompletesource
+                foreach (DataRow item in dataTable.Rows)
+                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
+
+                comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+                comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            }
+        }
         #endregion
 
         #region Users
@@ -641,39 +658,7 @@ namespace AccountingSystem
 
         #region BudgetAppropriations
 
-        internal static void ComboboxAccounts(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
-        {
-            try
-            {
-                comboBox.DataSource = dataTable;
-                comboBox.DisplayMember = displayMember;
-                comboBox.ValueMember = valueMember;
-                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        internal static void BudgetAppropriationsOthersFPPCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-
-            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
-            {
-                // loop datatable to add items in autocompletesource
-                foreach (DataRow item in dataTable.Rows)
-                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
-
-                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            }
-        }
-
+       
         internal static void BudgetAppropriationsAllotmentCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
         {
             comboBox.DataSource = dataTable;
@@ -748,23 +733,6 @@ namespace AccountingSystem
             toolStripComboBox.ComboBox.ValueMember = valueMember;
         }
 
-        internal static void BudgetAppropriationsGeneralLedgerAccountsCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-
-            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
-            {
-                // loop datatable to add items in autocompletesource
-                foreach (DataRow item in dataTable.Rows)
-                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
-
-                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-                comboBox.DropDownHeight = 200;
-            }
-        }
 
         internal static void FPPBudgetAppropriationsDatagridView(DataTable dataTable, DataGridView dataGridView) 
         {
@@ -968,7 +936,7 @@ namespace AccountingSystem
 
         #region Allotment Release Details
 
-        internal static void AllotmentReleaseDgV(DataTable dataTable, DataGridView dgv, int budgetAppropriationID)
+        internal static void AllotmentReleaseDatagridView(DataTable dataTable, DataGridView dgv, int budgetAppropriationID)
         {
             try
             {
@@ -1021,68 +989,6 @@ namespace AccountingSystem
 
         #endregion Allotment Release Details
 
-        #region Allotment Release
-
-        internal static void ObjectExpendituresCombobox(ComboBox comboBox, DataTable dataTable, string displayMember, string valueMember)
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-            comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-        }
-
-        #endregion Allotment Release
-
-        #region Obligation Request
-
-        internal static void ObligationRequestFundsCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-            comboBox.DropDownHeight = 200;
-        }
-
-        internal static void ObligationRequestFPPCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-            comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            comboBox.DropDownHeight = 200;
-        }
-
-        internal static void ObligationRequestOthersFPPCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-            comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            comboBox.DropDownHeight = 200;
-        }
-
-        internal static void ObligationRequestAllotmentClassesCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-            comboBox.DropDownHeight = 200;
-        }
-
-        internal static void ObligationRequestAccountCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember) 
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-            comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            comboBox.DropDownHeight = 200;
-        }
-
-        #endregion Obligation Request
 
         #region Supplemental Appropriations
 
@@ -1142,7 +1048,60 @@ namespace AccountingSystem
                 Helper.MessageBoxError(ex.Message);
             }
         }
-        
+
         #endregion Supplemental Appropriations
+
+        #region Obligation Request
+
+        internal static void ObligationRequestDatagridView(DataTable dataTable, DataGridView dataGridView)
+        {
+            try
+            {
+                foreach (DataRow dataRow in dataTable.Rows)
+                {
+                    dataGridView.Rows.Add(new object[] {
+                            dataRow["obligation_request_id"],
+                            dataRow["obligation_no"],
+                            dataRow["account_code"],
+                            dataRow["gen_ledger_acc_name"],
+                            dataRow["date_requested"],
+                            dataRow["obligation_amount"],
+                            dataRow["created_at"],
+                            dataRow["updated_at"],
+                    });
+                }
+
+
+                dataGridView.ClearSelection();
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        #endregion Obligation Request
+
+        #region JEV
+        internal static void JEVDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["funds_id"].Visible = false;
+            datagrid.Columns["journals_id"].Visible = false;
+            datagrid.Columns["jev_no"].HeaderText = "JEV No.";
+            datagrid.Columns["date_entry"].HeaderText = "Date";
+            datagrid.Columns["ref_no"].HeaderText = "Ref No.";
+            datagrid.Columns["payee"].HeaderText = "Payee";
+            datagrid.Columns["explanation"].HeaderText = "Explanation";
+            datagrid.Columns["explanation"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["is_approved"].Visible = false;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["created_by"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
+            datagrid.Columns["updated_by"].Visible = false;
+        }
+        #endregion
     }
 }

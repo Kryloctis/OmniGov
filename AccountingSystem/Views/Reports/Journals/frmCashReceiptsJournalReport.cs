@@ -45,7 +45,7 @@ namespace AccountingSystem.Views.Reports.Journals
                 var cashReceiptsDict = cashReceiptsJournalRepository.GetViewRecordByJevID(jevId);
                 DataRow row = dtCashReceiptsJournal.NewRow();
                 row["date"] = item["date_entry"];
-                row["rcd_no"] = cashReceiptsDict["rcd_number"];
+                row["rcd_no"] = cashReceiptsDict["rcd_no"];
                 row["collecting_officer"] = cashReceiptsDict["full_name"];
 
                 // if data is for collections columns

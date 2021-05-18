@@ -12,74 +12,169 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 {
     public partial class ucObligationRequestMain : UserControl
     {
-        internal int fundId = 0;
-        internal int allotmentClassId = 0;
+        internal int fundId;
+        internal int allotmentClassId;
+
+        private frmObligationRequestMain _frmObligationRequestMain;
 
         public ucObligationRequestMain()
         {
             InitializeComponent();
         }
 
-        internal void ResetForm()
+
+        internal void LoadReferenceObligationRequestMain(frmObligationRequestMain frmObligationRequestMain) 
         {
-            panel1.Enabled = true;
-            dtDateRequested.Enabled = true;
-            LoadFPPCombobox();
-            LoadFunds();
-            LoadAllotmentClasses();
-            cmbxOthersFPP.Enabled = false;
-            mskObligationSeriesNo.Text = string.Empty;
-            dtDateRequested.Value = DateTime.Now;
-            txtPayee.Text = string.Empty;
-            txtExplanation.Text = string.Empty;
-            txtReferenceNo.Text = string.Empty;
-            dgObligationRequests.Rows.Clear();
+            _frmObligationRequestMain = frmObligationRequestMain;
         }
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[7];
-
-            ObligationRequestListEmpty();
+            var errorArray = new string[3];
             errorArray[0] = epFPP.GetError(cmbxFPP);
-            errorArray[1] = epOtherFPP.GetError(cmbxOthersFPP);
-            errorArray[2] = epObligationNo.GetError(mskTxtObligationNoTemplate);
-            errorArray[3] = epPayee.GetError(txtPayee);
-            errorArray[4] = epExplanation.GetError(txtExplanation);
-            errorArray[5] = epReferenceNo.GetError(txtReferenceNo);
-            errorArray[6] = Tag == null ? string.Empty : Tag.ToString();
+            errorArray[1] = epOthersFPP.GetError(cmbxOthersFPP);
+            errorArray[2] = epAccount.GetError(cmbxAccount);
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        internal string GetFormErrorsAddToList() 
+        private decimal GetTotalObligations() 
         {
-            var errorArray = new string[2];
+            decimal totalObligation = 0;
 
-            errorArray[0] = epFPP.GetError(cmbxFPP);
-            errorArray[1] = epOtherFPP.GetError(cmbxOthersFPP);
+            foreach (DataGridViewRow item in dgObligationRequests.Rows) 
+            {
+                totalObligation += Convert.ToDecimal(item.Cells["obligation_amount"].Value);
+            }
 
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+            return totalObligation;
         }
 
-        internal void LoadOthersFPPByFPPIdCombobox()
+        internal void LoadObligationRequestRecords() 
         {
-            var fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
 
-            HelperLoadRecords.OthersFPPCombobox(Factory.OthersFPPRepository().GetRecordsByFPPID(fppId), cmbxOthersFPP, "name", "id");
+            int fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
+            int? otherFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
+            int accountId = Convert.ToInt32(cmbxAccount.SelectedValue);
+            byte month = Convert.ToByte(cmbxMonths.SelectedValue);
+            short year = Convert.ToInt16(nudYear.Value);
+
+            dgObligationRequests.Rows.Clear();
+            dgObligationRequests.Columns.Clear();
+
+            dgObligationRequests.Columns.Add("obligation_request_id", "Obligation Request ID");
+            dgObligationRequests.Columns.Add("obligation_no", "Obligation No.");
+            dgObligationRequests.Columns.Add("account_code", "Account Code");
+            dgObligationRequests.Columns.Add("account_name", "Account Name");
+            dgObligationRequests.Columns.Add("date_requested", "Date of Request");
+            dgObligationRequests.Columns.Add("obligation_amount", "Amount");
+            dgObligationRequests.Columns.Add("created_at", "Created at");
+            dgObligationRequests.Columns.Add("updated_at", "Updated at");
+
+
+            dgObligationRequests.Columns["created_at"].Visible = false;
+            dgObligationRequests.Columns["updated_at"].Visible = false;
+            dgObligationRequests.Columns["obligation_request_id"].Visible = false;
+            dgObligationRequests.Columns["obligation_no"].Width = 100;
+            dgObligationRequests.Columns["obligation_no"].Resizable = DataGridViewTriState.False;
+            dgObligationRequests.Columns["account_code"].Width = 100;
+            dgObligationRequests.Columns["account_code"].Resizable = DataGridViewTriState.False;
+            dgObligationRequests.Columns["date_requested"].DefaultCellStyle.Format = "MMM/dd/yyyy";
+            dgObligationRequests.Columns["date_requested"].Width = 100;
+            dgObligationRequests.Columns["date_requested"].Resizable = DataGridViewTriState.False;
+            dgObligationRequests.Columns["obligation_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgObligationRequests.Columns["obligation_amount"].DefaultCellStyle.Format = "N2";
+
+
+            var dtObligationRequestRecords = Factory.ObligationRequestRepository().GetViewRecordsByIdsAndMonthAndYear(fppId, otherFPPId, fundId, allotmentClassId, accountId, month, year);
+            
+            HelperLoadRecords.ObligationRequestDatagridView(dtObligationRequestRecords,dgObligationRequests);
+
+            txtTotalObligation.Text = GetTotalObligations().ToString("N2");
+
+            _frmObligationRequestMain.lblRecordCount.Text = dtObligationRequestRecords.Rows.Count.ToString(); 
+        }
+
+        private void LoadFPP()
+        {
+            cmbxFPP.TextChanged -= new EventHandler(CmbxFPP_TextChanged);
+            cmbxFPP.SelectedValueChanged -= new EventHandler(CmmbxFPP_SelectedValueChanged);
+
+            var fppRepo = Factory.FunctionProgramProjectRepository().GetRecords();
+            HelperLoadRecords.FPPComboBox(fppRepo, cmbxFPP, "fpp_name", "id");
+            cmbxFPP.SelectedIndex = -1;
+
+            cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TextChanged);
+            cmbxFPP.SelectedValueChanged += new EventHandler(CmmbxFPP_SelectedValueChanged);
+        }
+
+        private void CmbxFPP_TextChanged(object sender, EventArgs e)
+        {
+            var fppNameExist = Factory.FunctionProgramProjectRepository().NameExist(cmbxFPP.Text);
+
+            if (!fppNameExist)
+            {
+                cmbxOthersFPP.DataSource = null;
+                cmbxOthersFPP.Text = string.Empty;
+                cmbxOthersFPP.Enabled = false;
+            }
+            else
+                LoadOthersFPP();
+        }
+
+        private void CmmbxFPP_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadOthersFPP();
+        }
+
+
+        private void LoadOthersFPP()
+        {
+            int fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
+
+            var othersFPPRepo = Factory.OthersFPPRepository().GetRecordsByFPPID(fppId);
+            HelperLoadRecords.OthersFPPCombobox(othersFPPRepo, cmbxOthersFPP, "name", "id");
             cmbxOthersFPP.SelectedIndex = -1;
-            cmbxOthersFPP.Text = string.Empty;
             cmbxOthersFPP.Enabled = true;
         }
 
-        internal void LoadFPPCombobox()
+
+        private void LoadAccounts()
         {
             try
             {
-                HelperLoadRecords.FPPComboBox(Factory.FunctionProgramProjectRepository().GetRecords(), cmbxFPP, "fpp_name", "id");
-                cmbxFPP.SelectedValueChanged += new EventHandler(CmbxFPP_SelectedValueChanged);
-                cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TextChanged);
-                cmbxFPP.SelectedIndex = -1;
+
+                var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
+
+                string allotmentClassName = allotmentClassRepo["allotment_name"];
+
+                DataTable dtAccounts;
+
+                cmbxAccount.TextChanged -= new EventHandler(CmbxAccount_TextChanged);
+
+                if (allotmentClassId == 4)
+                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsBySearch(cmbxAccount.Text);
+                else
+                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajAccGroupNameSearch(allotmentClassName, cmbxAccount.Text);
+
+                var accountDict = new Dictionary<int, string>();
+                foreach (DataRow item in dtAccounts.Rows)
+                {
+                    int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
+                    string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
+
+                    accountDict.Add(accountId, accountName);
+                }
+
+                cmbxAccount.DataSource = new BindingSource(accountDict, null);
+                cmbxAccount.DisplayMember = "value";
+                cmbxAccount.ValueMember = "key";
+                cmbxAccount.SelectedIndex = -1;
+                cmbxAccount.DropDownHeight = 300;
+
+                cmbxAccount.TextChanged += new EventHandler(CmbxAccount_TextChanged);
+
+                Helper.ClearErrorComboBox(epAccount, cmbxAccount);
             }
             catch (Exception ex)
             {
@@ -87,26 +182,133 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
         }
 
-        private void CmbxFPP_TextChanged(object sender, EventArgs e)
+        private void CmbxAccount_TextChanged(object sender, EventArgs e)
         {
-            if (FPPNameExist(epFPP, cmbxFPP) || string.IsNullOrEmpty(cmbxFPP.Text))
+            if (string.IsNullOrEmpty(cmbxAccount.Text))
+                LoadAccounts();
+        }
+
+        private void cmbxAccount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (cmbxAccount.Text.Length < 4) return;
+
+            if (e.KeyCode == Keys.F1)
             {
-                cmbxOthersFPP.Enabled = false;
-                cmbxOthersFPP.SelectedIndex = -1;
-                cmbxOthersFPP.Text = string.Empty;
+                try
+                {
+                    var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
+
+                    string allotmentClassName = allotmentClassRepo["allotment_name"];
+
+                    DataTable dtAccounts;
+
+                    if (allotmentClassId == 4)
+                        dtAccounts = Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsBySearch(cmbxAccount.Text);
+                    else
+                        dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajAccGroupNameSearch(allotmentClassName, cmbxAccount.Text);
+
+                    if (dtAccounts.Rows.Count == 0 || string.IsNullOrWhiteSpace(cmbxAccount.Text.Trim())) return;
+
+                    var accountDict = new Dictionary<int, string>();
+                    foreach (DataRow item in dtAccounts.Rows)
+                    {
+                        int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
+                        string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
+
+                        accountDict.Add(accountId, accountName);
+                    }
+
+                    cmbxAccount.DataSource = new BindingSource(accountDict, null);
+                    cmbxAccount.DisplayMember = "value";
+                    cmbxAccount.ValueMember = "key";
+                    cmbxAccount.DroppedDown = true;
+
+                    Helper.ClearErrorComboBox(epAccount, cmbxAccount);
+                }
+                catch (Exception ex)
+                {
+                    Helper.MessageBoxError(ex.Message);
+                }
             }
         }
 
-        private void CmbxFPP_SelectedValueChanged(object sender, EventArgs e)
+
+        private void LoadMonths() 
         {
-            LoadOthersFPPByFPPIdCombobox();
+
+            var months = new Dictionary<int, string>() 
+            {
+                { 1,"January"},
+                { 2,"February"},
+                { 3,"March"},
+                { 4,"April"},
+                { 5,"May"},
+                { 6,"June"},
+                { 7,"July"},
+                { 8,"August"},
+                { 9,"September"},
+                { 10,"October"},
+                { 11,"November"},
+                { 12,"December"}
+            };
+
+            cmbxMonths.DataSource = new BindingSource(months, null);
+            cmbxMonths.DisplayMember = "Value";
+            cmbxMonths.ValueMember = "Key";
         }
+
+
+        internal void LoadAllotmentClasses()
+        {
+            var funds = Factory.AllotmentClassesRepository().GetRecords();
+
+            foreach (DataRow allotmentClass in funds.Rows)
+            {
+                var radAllotment = new RadioButton
+                {
+                    Text = allotmentClass["allotment_code"].ToString(),
+                    Tag = allotmentClass["id"],
+                    AutoSize = true,
+                    Appearance = Appearance.Button,
+                    TextImageRelation = TextImageRelation.ImageBeforeText
+                };
+
+                // making general fund as default
+                int radAllotmentClassId = Convert.ToInt32(allotmentClass["id"]);
+
+                if (radAllotmentClassId == 1)
+                {
+                    radAllotment.Checked = true;
+                    allotmentClassId = Convert.ToByte(allotmentClass["id"]);
+                    ShowCheckIcon(radAllotment);
+                }
+
+
+                flowLayoutPanelAllotment.Controls.Add(radAllotment);
+
+                radAllotment.Click += new EventHandler(radioAllotment_Click);
+                radAllotment.CheckedChanged += new EventHandler(radioAllotment_CheckedChanged);
+            }
+        }
+
+        private void radioAllotment_Click(object sender, EventArgs e)
+        {
+            var radAllotment = sender as RadioButton;
+            allotmentClassId = Convert.ToByte(radAllotment.Tag);
+            LoadAccounts();
+            LoadAccounts();
+        }
+
+        private void radioAllotment_CheckedChanged(object sender, EventArgs e)
+        {
+            var radAllotment = sender as RadioButton;
+            ShowCheckIcon(radAllotment);
+        }
+
 
         internal void LoadFunds()
         {
             var funds = Factory.FundsRepository().GetRecords();
-
-            flowLayoutPanelFunds.Controls.Clear();
 
             foreach (DataRow fund in funds.Rows)
             {
@@ -119,8 +321,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     TextImageRelation = TextImageRelation.ImageBeforeText
                 };
 
-                //making general fund as default
-                if (Convert.ToInt32(fund["id"]) == 1)
+                // making general fund as default
+                if (fund["fund_name"].ToString() == "General Fund")
                 {
                     radFund.Checked = true;
                     fundId = Convert.ToByte(fund["id"]);
@@ -130,42 +332,23 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
                 flowLayoutPanelFunds.Controls.Add(radFund);
 
-                radFund.Click += new EventHandler(RadioFunds_Click);
-                radFund.CheckedChanged += new EventHandler(RadioFunds_CheckedChanged);
+                radFund.Click += new EventHandler(radioFunds_Click);
+                radFund.CheckedChanged += new EventHandler(radioFunds_CheckedChanged);
             }
         }
 
-        internal void LoadAllotmentClasses()
+        private void radioFunds_Click(object sender, EventArgs e)
         {
-            var allotmentClasses = Factory.AllotmentClassesRepository().GetRecords();
-
-            flowLayoutPanelAllotment.Controls.Clear();
-
-            foreach (DataRow allotmentClass in allotmentClasses.Rows)
-            {
-                var radAllotmentClass = new RadioButton
-                {
-                    Text = allotmentClass["allotment_code"].ToString(),
-                    Tag = allotmentClass["id"],
-                    AutoSize = true,
-                    Appearance = Appearance.Button,
-                    TextImageRelation = TextImageRelation.ImageBeforeText
-                };
-
-                //making general fund as default
-                if (Convert.ToInt32(allotmentClass["id"]) == 1)
-                {
-                    radAllotmentClass.Checked = true;
-                    allotmentClassId = Convert.ToByte(allotmentClass["id"]);
-                    ShowCheckIcon(radAllotmentClass);
-                }
-
-                flowLayoutPanelAllotment.Controls.Add(radAllotmentClass);
-
-                radAllotmentClass.Click += new EventHandler(RadioAllotmentClass_Click);
-                radAllotmentClass.CheckedChanged += new EventHandler(RadioAllotmentClass_CheckedChanged);
-            }
+            var radFund = sender as RadioButton;
+            fundId = Convert.ToByte(radFund.Tag);
         }
+
+        private void radioFunds_CheckedChanged(object sender, EventArgs e)
+        {
+            var radFund = sender as RadioButton;
+            ShowCheckIcon(radFund);
+        }
+
 
         private void ShowCheckIcon(RadioButton radioButton)
         {
@@ -175,116 +358,46 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 radioButton.Image = null;
         }
 
-        private void RadioAllotmentClass_CheckedChanged(object sender, EventArgs e)
-        {
-            var radAllotment = sender as RadioButton;
-            ShowCheckIcon(radAllotment);
-        }
 
-        private void RadioAllotmentClass_Click(object sender, EventArgs e)
-        {
-            var radAllotment = sender as RadioButton;
-            allotmentClassId = Convert.ToInt32(radAllotment.Tag);
-        }
 
-        private void RadioFunds_CheckedChanged(object sender, EventArgs e)
-        {
-            var radFund = sender as RadioButton;
-            ShowCheckIcon(radFund);
-        }
-
-        private void RadioFunds_Click(object sender, EventArgs e)
-        {
-            var radFund = sender as RadioButton;
-            fundId = Convert.ToInt32(radFund.Tag);
-            GenerateObligationNo(mskTxtObligationNoTemplate);
-        }
-
-        private void GenerateObligationNo(MaskedTextBox maskedTextBox) 
-        {
-            string month = dtDateRequested.Value.ToString("MM");
-            string year = dtDateRequested.Value.ToString("yy");
-            string fundCode = Factory.FundsRepository().GetRecordByID(fundId)["fund_code"].ToString();
-
-            string obligationNoTemplate = $"{month}-{year}-{fundCode}0";
-
-            maskedTextBox.Text = obligationNoTemplate;
-        }
-
-        private void LoadDatagridFormat()
-        {
-            try
-            {
-                dgObligationRequests.Columns.Add("accountId", "Account ID");
-                dgObligationRequests.Columns.Add("accountName", "Account Name");
-                dgObligationRequests.Columns.Add("accountCode", "Account Code");
-                dgObligationRequests.Columns.Add("obligationAmount", "Amount");
-
-                //Cell Format
-                dgObligationRequests.Columns["accountId"].Visible = false;
-                dgObligationRequests.Columns["accountName"].Width = 300;
-                dgObligationRequests.Columns["accountName"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgObligationRequests.Columns["accountCode"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgObligationRequests.Columns["obligationAmount"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgObligationRequests.Columns["obligationAmount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                dgObligationRequests.Columns["obligationAmount"].DefaultCellStyle.Format = "N2";
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        private void dtDateRequested_ValueChanged(object sender, EventArgs e)
-        {
-            GenerateObligationNo(mskTxtObligationNoTemplate);
-        }
 
         private void ucObligationRequestMain_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
-                Helper.DatagridDefaultStyle(dgObligationRequests, true);
-                LoadDatagridFormat();
-                LoadFPPCombobox();
+                cmbxOthersFPP.Enabled = false;
+
                 LoadFunds();
                 LoadAllotmentClasses();
-                GenerateObligationNo(mskTxtObligationNoTemplate);
-                cmbxOthersFPP.Enabled = false;
-                btnEdit.Enabled = false;
-                btnRemove.Enabled = false;
+                LoadMonths();
+                LoadFPP();
+                LoadAccounts();
+
+                LoadObligationRequestRecords();
+                nudYear.Value = Convert.ToInt16(DateTime.Now.Year);
+                Helper.DatagridDefaultStyle(dgObligationRequests, true);
             }
         }
 
-        #region Validations
-
-        internal bool ObligationRequestListEmpty() 
+        private void dgObligationRequests_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
-            if (dgObligationRequests.Rows.Count <= 0)
-            {
-              Tag = "Obligation Request list is empty";
-              return true;
-            }
-            else
-            {
-              Tag = string.Empty;
-              return false;
-            }
+            e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
         }
 
-        private bool FPPNameExist(ErrorProvider ep, ComboBox comboBox)
+
+
+
+        private bool FPPNameNotExist() 
         {
             try
             {
-                string fppName = comboBox.Text;
-                bool fppNameExist = Factory.FunctionProgramProjectRepository().NameExist(fppName);
+                var fppNameExist = Factory.FunctionProgramProjectRepository().NameExist(cmbxFPP.Text);
 
-                if (!fppNameExist && !string.IsNullOrEmpty(fppName))
+                if (!fppNameExist && !string.IsNullOrEmpty(cmbxFPP.Text))
                 {
-                    ep.SetError(comboBox, "FPP you entered. Doesn't exist in yout record.");
+                    epFPP.SetError(cmbxFPP, "FPP Name you entered doesn't exist on you record");
                     return true;
                 }
-
             }
             catch (Exception ex)
             {
@@ -297,8 +410,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             if (string.IsNullOrEmpty(cmbxFPP.Text))
                 e.Cancel = Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP");
-            else
-                e.Cancel = FPPNameExist(epFPP, cmbxFPP);
+            else if (FPPNameNotExist())
+                e.Cancel = FPPNameNotExist();
         }
 
         private void cmbxFPP_Validated(object sender, EventArgs e)
@@ -306,16 +419,19 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             Helper.ClearErrorComboBox(epFPP, cmbxFPP);
         }
 
-        private bool OthersFPPNameExist(ErrorProvider ep, ComboBox comboBox)
+
+
+
+        private bool OtherFPPNameNotExist() 
         {
             try
             {
-                string otherFPPName = comboBox.Text;
-                bool otherFPPExist = Factory.OthersFPPRepository().NameExist(otherFPPName);
 
-                if (!otherFPPExist && !string.IsNullOrEmpty(otherFPPName))
+                bool otherFPPName = Factory.OthersFPPRepository().NameExist(cmbxOthersFPP.Text);
+
+                if (!otherFPPName && !string.IsNullOrEmpty(cmbxOthersFPP.Text))
                 {
-                    ep.SetError(comboBox, "Other FPP you entered. Doesn't exist in yout record.");
+                    epOthersFPP.SetError(cmbxOthersFPP, "Other FPP you entered doesn't exist on your record.");
                     return true;
                 }
             }
@@ -328,40 +444,23 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void cmbxOthersFPP_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = OthersFPPNameExist(epOtherFPP, cmbxOthersFPP);
+            e.Cancel = OtherFPPNameNotExist();
         }
 
         private void cmbxOthersFPP_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epOtherFPP, cmbxOthersFPP);
+            Helper.ClearErrorComboBox(epOthersFPP, cmbxOthersFPP);
         }
 
-        private void txtPayee_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epPayee, txtPayee, "Payee");
-        }
-        private void txtPayee_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epPayee, txtPayee);
-        }
 
-        private void txtExplanation_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epExplanation, txtExplanation, "Explanation");
-        }
 
-        private void txtExplanation_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epExplanation, txtExplanation);
-        }
-
-        private bool ShowErrorObligationSeriesNoEmpty(ErrorProvider ep, MaskedTextBox mskTxtSeriesNo, MaskedTextBox mskTxtObligationNoTemplate)
+        private bool ShowErrorAccountNotExist()
         {
             try
             {
-                if (!mskTxtSeriesNo.MaskCompleted)
+                if (cmbxAccount.FindStringExact(cmbxAccount.Text) < 0 && !string.IsNullOrEmpty(cmbxAccount.Text))
                 {
-                    ep.SetError(mskTxtObligationNoTemplate, "Obligation Series No. is required.");
+                    epAccount.SetError(cmbxAccount, "Account you entered doesn't exist on your record.");
                     return true;
                 }
             }
@@ -372,135 +471,46 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-        private bool ShowErrorObligationNoExist(ErrorProvider ep, MaskedTextBox mskTxtSeriesNo, MaskedTextBox mskTxtObligationNoTemplate) 
+        private void cmbxAccount_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                string obligationNo = $"{mskObligationSeriesNo.Text}-{mskTxtObligationNoTemplate.Text}";
-                bool obligationNoExist = Factory.ObligationRequestRepository().ObligationNumExist(obligationNo);
+            if (string.IsNullOrEmpty(cmbxAccount.Text))
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbxAccount, "Account.");
+            else if (ShowErrorAccountNotExist())
+                e.Cancel = ShowErrorAccountNotExist();
+        }
 
-                if (mskTxtSeriesNo.MaskCompleted && obligationNoExist) 
-                {
-                   
-                    ep.SetError(mskTxtObligationNoTemplate, "Obligation No. you entered already exist in your record");
-                    return obligationNoExist;
-                }
+        private void cmbxAccount_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epAccount, cmbxAccount);
+        }
+
+
+        private bool ValidateRequirements() 
+        {
+            if (!ValidateChildren())
+            {
+                Helper.MessageBoxError(GetFormErrors());
+                return false;
             }
-            catch (Exception ex)
+            return true;
+ 
+        }
+
+
+        private void btnLoadRecords_Click(object sender, EventArgs e)
+        {
+            if (ValidateRequirements()) 
             {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private void mskObligationSeriesNo_Validating(object sender, CancelEventArgs e)
-        {
-          
-            e.Cancel = ShowErrorObligationSeriesNoEmpty(epObligationNo, mskObligationSeriesNo, mskTxtObligationNoTemplate);
-            e.Cancel = ShowErrorObligationNoExist(epObligationNo, mskObligationSeriesNo, mskTxtObligationNoTemplate);
-        }
-
-        private void mskObligationSeriesNo_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearMaskedTextboxError(epObligationNo, mskTxtObligationNoTemplate);
-        }
-
-        private void dtDateRequested_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = ShowErrorObligationNoExist(epObligationNo, mskObligationSeriesNo, mskTxtObligationNoTemplate);
-        }
-
-        private void txtReferenceNo_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epReferenceNo, txtReferenceNo, "Reference No.");
-        }
-
-        private void txtReferenceNo_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epReferenceNo, txtReferenceNo);
-        }
-
-        #endregion Validations
-
-        private void ShowObligationRequestAdd()
-        {
-            var frmObligationRequestAdd = new frmObligationRequestAdd(this);
-            var ucObligationRequestAdd = frmObligationRequestAdd.ucObligationRequest1;
-            int fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
-            int? otherFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
-            DateTime dateRequest = dtDateRequested.Value;
-
-            ucObligationRequestAdd.fundId = fundId;
-            ucObligationRequestAdd.fppId = fppId;
-            ucObligationRequestAdd.otherFPPId = otherFPPId;
-            ucObligationRequestAdd.allotmentClassId = allotmentClassId;
-            ucObligationRequestAdd.dateIssued = dateRequest;
-
-            frmObligationRequestAdd.ShowDialog();
-        }
-
-        private bool CustomValidateAddToList() 
-        {
-            try
-            {
-                bool fppValidation = Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP") || FPPNameExist(epFPP, cmbxFPP);
-                bool otherFPPValidation = OthersFPPNameExist(epOtherFPP, cmbxOthersFPP);
-
-                if (fppValidation || otherFPPValidation) 
-                {
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            if (CustomValidateAddToList()) 
-                Helper.MessageBoxError(GetFormErrorsAddToList());
-            else
-                ShowObligationRequestAdd();
-        }
-
-        private void btnRemove_Click(object sender, EventArgs e)
-        {
-            foreach (DataGridViewRow row in dgObligationRequests.SelectedRows)
-            {
-                dgObligationRequests.Rows.Remove(row);
+                LoadObligationRequestRecords();
             }
         }
 
-        private void EnableDisableButtons()
-        {
-            int selectedRowCount = dgObligationRequests.SelectedRows.Count;
 
-            if (selectedRowCount == 1)
-            {
-                btnRemove.Enabled = true;
-                btnEdit.Enabled = true;
-                btnRemove.Text = "Remove (" + selectedRowCount + ")";
-            }
-            else if (selectedRowCount > 1)
-            {
-                btnRemove.Enabled = true;
-                btnEdit.Enabled = false;
-                btnRemove.Text = "Remove (" + selectedRowCount + ")";
-            }
-            else
-            {
-                btnRemove.Enabled = false;
-                btnEdit.Enabled = false;
-                btnRemove.Text = "Remove";
-            }
-        }
-
-        private void dgObligationRequests_SelectionChanged(object sender, EventArgs e)
+        internal void dgObligationRequests_SelectionChanged(object sender, EventArgs e)
         {
-            EnableDisableButtons();
+            byte[] columnIndexTimestamp = { 6, 7 };
+            Helper.ShowRecordTimestamp(dgObligationRequests, columnIndexTimestamp, _frmObligationRequestMain.lblCreatedAt, _frmObligationRequestMain.lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgObligationRequests, _frmObligationRequestMain.btnEdit, _frmObligationRequestMain.btnDelete);
         }
-    }   
+    }
 }

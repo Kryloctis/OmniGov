@@ -21,6 +21,19 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             InitializeComponent();
         }
 
+        internal void ResetForm()
+        {
+            panel1.Enabled = true;
+            mskSeriesNo.Text = string.Empty;
+            dtDateIssued.Value = DateTime.Now;
+            dtDateIssued.Enabled = true;
+            LoadFPPCombobox();
+            LoadFunds();
+            LoadAllotmentClasses();
+            dgAllotmentRelease.Rows.Clear();
+            txtPurpose.Text = string.Empty;
+        }
+
         internal string GetFormErrors()
         {
             var errorArray = new string[5];
@@ -129,12 +142,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             try
             {
                 dgAllotmentRelease.Columns.Add("budget_appropriation_id", "Budget Appropriations ID");
+                dgAllotmentRelease.Columns.Add("account_id", "Account ID");
                 dgAllotmentRelease.Columns.Add("account_name", "Account Name");
                 dgAllotmentRelease.Columns.Add("account_code", "Account Code");
                 dgAllotmentRelease.Columns.Add("allotment_amount", "Amount");
 
                 //Cell Format
                 dgAllotmentRelease.Columns["budget_appropriation_id"].Visible = false;
+                dgAllotmentRelease.Columns["account_id"].Visible = false;
                 dgAllotmentRelease.Columns["account_name"].Width = 300;
                 dgAllotmentRelease.Columns["account_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgAllotmentRelease.Columns["account_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -197,7 +212,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 LoadFPPCombobox();
                 LoadDatagridFormat();
 
-                nudYear.Value = DateTime.Now.Year;
                 cmbxOthersFPP.Enabled = false;
                 btnRemove.Enabled = false;
             }
@@ -299,7 +313,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 uc.fundId = fundId;
                 uc.allotmentClassId = Convert.ToInt32(allotmentClassId);
                 uc.dateIssued = dtDateIssued.Value;
-                uc.year = Convert.ToInt16(nudYear.Value);
 
                 allotmentReleaseAddForm.ShowDialog();
 
@@ -379,7 +392,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
                 if (!otherFPPName && !string.IsNullOrEmpty(comboBox.Text))
                 {
-                    ep.SetError(comboBox, "Other FPP you entered. Doesn't exist in yout record.");
+                    ep.SetError(comboBox, "Other FPP you entered doesn't exist on your record.");
                     return true;
                 }
             }

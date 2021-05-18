@@ -14,6 +14,8 @@ namespace ACC.Data
         private readonly ICheckDisbursementsJournalRepository _checkDisbursementsJournalRepository;
         private readonly ICashReceiptsJournalRepository _cashReceiptsJournalRepository;
         private readonly IADADisbursementsJournalRepository _aDADisbursementsJournalRepository;
+        private readonly ICashDisbursementsJournalRepository _cashDisbursementsJournalRepository;
+        private readonly IGeneralJournalRepository _generalJournalRepository;
         private const string tableName = "jev";
         private const string viewTableName = "view_jev";
 
@@ -22,13 +24,17 @@ namespace ACC.Data
             IJEVAccountsRepository jevAccountsRepository,
             ICheckDisbursementsJournalRepository checkDisbursementsJournalRepository,
             ICashReceiptsJournalRepository cashReceiptsJournalRepository,
-            IADADisbursementsJournalRepository aDADisbursementsJournalRepository)
+            IADADisbursementsJournalRepository aDADisbursementsJournalRepository,
+            ICashDisbursementsJournalRepository cashDisbursementsJournalRepository,
+            IGeneralJournalRepository generalJournalRepository)
         {
             _dbGenericCommands = dbGenericCommands;
             _jevAccountsRepository = jevAccountsRepository;
             _checkDisbursementsJournalRepository = checkDisbursementsJournalRepository;
             _cashReceiptsJournalRepository = cashReceiptsJournalRepository;
             _aDADisbursementsJournalRepository = aDADisbursementsJournalRepository;
+            _cashDisbursementsJournalRepository = cashDisbursementsJournalRepository;
+            _generalJournalRepository = generalJournalRepository;
         }
 
         public int CountRecords()
@@ -77,7 +83,25 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@jev_no", DbType.String, $"%{searchText}%" },
+                    new object[] { "@ref_no", DbType.String, $"%{searchText}%" },
+                    new object[] { "@payee", DbType.String, $"%{searchText}%" },
+                    new object[] { "@explanation", DbType.String, $"%{searchText}%" },
+                };
+
+                string query = $"SELECT id, funds_id, journals_id, jev_no, date_entry, ref_no, payee, explanation, is_approved, created_at, created_by, updated_at, updated_by FROM {viewTableName} WHERE is_approved = 1 AND (jev_no LIKE @jev_no OR ref_no LIKE @ref_no OR payee LIKE @payee OR explanation LIKE @explanation)";
+
+                var dtGeneralLedgers = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool IdExist(int id)
@@ -85,16 +109,17 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool InsertWithCheckDisbursement(JEVModel entity, 
-            List<JEVAccountsModel> jevAccountsModelList, 
-            CheckDisbursementsJournalModel checkDisbursementsJournalModel)
+        public bool InsertWithCheckDisbursement(JEVModel jevModel,
+                                                List<JEVAccountsModel> jevAccountsModelList,
+                                                CheckDisbursementsJournalModel checkDisbursementsJournalModel)
         {
             try
             {
                 using (var scope = new TransactionScope())
                 {
-                    _ = Insert(entity, jevAccountsModelList);
+                    _ = Insert(jevModel, jevAccountsModelList);
 
+                    // assigning jev_id kay karon paman nato makuha tungod sa na insert na sa taas
                     checkDisbursementsJournalModel.JevId = GetLastInsertedID();
 
                     _checkDisbursementsJournalRepository.Insert(checkDisbursementsJournalModel);
@@ -110,9 +135,9 @@ namespace ACC.Data
             }
         }
 
-        public bool InsertWithCashReceipts(JEVModel entity, 
-            List<JEVAccountsModel> jevAccountsModelList, 
-            CashReceiptsJournalModel cashReceiptsJournalModel)
+        public bool InsertWithCashReceipts(JEVModel entity,
+                                           List<JEVAccountsModel> jevAccountsModelList,
+                                           CashReceiptsJournalModel cashReceiptsJournalModel)
         {
             try
             {
@@ -136,8 +161,8 @@ namespace ACC.Data
         }
 
         public bool InsertWithADADisbursements(JEVModel entity,
-            List<JEVAccountsModel> jevAccountsModelList,
-            ADADisbursementsJournalModel aDADisbursementsJournalModel)
+                                               List<JEVAccountsModel> jevAccountsModelList,
+                                               ADADisbursementsJournalModel aDADisbursementsJournalModel)
         {
             try
             {
@@ -148,6 +173,56 @@ namespace ACC.Data
                     aDADisbursementsJournalModel.JevId = GetLastInsertedID();
 
                     _ = _aDADisbursementsJournalRepository.Insert(aDADisbursementsJournalModel);
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool InsertWithCashDisbursements(JEVModel entity,
+                                               List<JEVAccountsModel> jevAccountsModelList,
+                                               CashDisbursementsJournalModel cashDisbursementsJournalModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    _ = Insert(entity, jevAccountsModelList);
+
+                    cashDisbursementsJournalModel.JevId = GetLastInsertedID();
+
+                    _ = _cashDisbursementsJournalRepository.Insert(cashDisbursementsJournalModel);
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool InsertWithGeneralJournal(JEVModel entity,
+                                               List<JEVAccountsModel> jevAccountsModelList,
+                                               GeneralJournalModel generalJournalModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    _ = Insert(entity, jevAccountsModelList);
+
+                    generalJournalModel.JevId = GetLastInsertedID();
+
+                    _ = _generalJournalRepository.Insert(generalJournalModel);
 
                     scope.Complete();
                     return true;
@@ -172,11 +247,13 @@ namespace ACC.Data
                         new object[] { "@journals_id", DbType.Byte, entity.JournalsId },
                         new object[] { "@jev_no", DbType.String, entity.JEVNumber },
                         new object[] { "@date_entry", DbType.Date, entity.DateEntry },
+                        new object[] { "@ref_no", DbType.String, entity.RefNo },
+                        new object[] { "@payee", DbType.String, entity.Payee },
                         new object[] { "@explanation", DbType.String, entity.Explanation },
                         new object[] { "@created_by", DbType.Byte, entity.CreatedBy },
                     };
 
-                    string query = $"INSERT INTO {tableName} (funds_id, journals_id, jev_no, date_entry, explanation, created_by) VALUES (@funds_id, @journals_id, @jev_no, @date_entry, @explanation, @created_by);";
+                    string query = $"INSERT INTO {tableName} (funds_id, journals_id, jev_no, date_entry, ref_no, payee, explanation, created_by) VALUES (@funds_id, @journals_id, @jev_no, @date_entry, @ref_no, @payee, @explanation, @created_by);";
 
                     // save and get the last inserted id
                     _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
@@ -205,14 +282,9 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Update(JEVModel entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool UpdateWithCheckDisbursement(JEVModel entity, 
-            List<JEVAccountsModel> jevAccountsModelList, 
-            CheckDisbursementsJournalModel checkDisbursementsJournalModel)
+        public bool UpdateWithCheckDisbursement(JEVModel entity,
+                                                List<JEVAccountsModel> jevAccountsModelList,
+                                                CheckDisbursementsJournalModel checkDisbursementsJournalModel)
         {
             try
             {
@@ -232,9 +304,9 @@ namespace ACC.Data
             }
         }
 
-        public bool UpdateWithCashReceipts(JEVModel entity, 
-            List<JEVAccountsModel> jevAccountsModelList,
-            CashReceiptsJournalModel cashReceiptsJournalModel)
+        public bool UpdateWithCashReceipts(JEVModel entity,
+                                           List<JEVAccountsModel> jevAccountsModelList,
+                                           CashReceiptsJournalModel cashReceiptsJournalModel)
         {
             try
             {
@@ -255,6 +327,71 @@ namespace ACC.Data
             }
         }
 
+        public bool UpdateWithADADisbursements(JEVModel entity,
+                                               List<JEVAccountsModel> jevAccountsModelList,
+                                               ADADisbursementsJournalModel aDADisbursementsJournalModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    _ = Update(entity, jevAccountsModelList);
+
+                    _ = _aDADisbursementsJournalRepository.UpdateByJevId(aDADisbursementsJournalModel);
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool UpdateWithCashDisbursements(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    _ = Update(entity, jevAccountsModelList);
+
+                    _ = _cashDisbursementsJournalRepository.UpdateByJevId(cashDisbursementsJournalModel);
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool UpdateWithGeneralJournal(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    _ = Update(entity, jevAccountsModelList);
+
+                    _ = _generalJournalRepository.UpdateByJevId(generalJournalModel);
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool Update(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList)
         {
             try
@@ -263,16 +400,18 @@ namespace ACC.Data
                 {
                     var parameters = new object[][]
                     {
-                        new object[] { "@id", DbType.Byte, entity.Id },
+                        new object[] { "@id", DbType.Int32, entity.Id },
                         new object[] { "@funds_id", DbType.Byte, entity.FundsId },
                         new object[] { "@journals_id", DbType.Byte, entity.JournalsId },
                         new object[] { "@jev_no", DbType.String, entity.JEVNumber },
                         new object[] { "@date_entry", DbType.Date, entity.DateEntry },
+                        new object[] { "@ref_no", DbType.String, entity.RefNo },
+                        new object[] { "@payee", DbType.String, entity.Payee },
                         new object[] { "@explanation", DbType.String, entity.Explanation },
                         new object[] { "@updated_by", DbType.Byte, entity.UpdatedBy },
                     };
 
-                    string query = $"UPDATE {tableName} SET funds_id = @funds_id, journals_id = @journals_id, jev_no = @jev_no, date_entry = @date_entry, explanation = @explanation, updated_by = @updated_by WHERE id = @id";
+                    string query = $"UPDATE {tableName} SET funds_id = @funds_id, journals_id = @journals_id, jev_no = @jev_no, date_entry = @date_entry, ref_no = @ref_no, payee = @payee, explanation = @explanation, updated_by = @updated_by WHERE id = @id";
 
                     // save and get the last inserted id
                     _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
@@ -283,7 +422,7 @@ namespace ACC.Data
                     // loop jev accounts list then insert each using the latest Jev Id
                     foreach (var jevAccounts in jevAccountsModelList)
                     {
-                        jevAccounts.JEVId = GetLastInsertedID();
+                        jevAccounts.JEVId = entity.Id;
                         _ = _jevAccountsRepository.Insert(jevAccounts);
                     }
 
@@ -297,6 +436,11 @@ namespace ACC.Data
             {
                 throw;
             }
+        }
+
+        public bool Update(JEVModel entity)
+        {
+            throw new NotImplementedException();
         }
 
         public int GetLastInsertedID()
@@ -370,29 +514,31 @@ namespace ACC.Data
                     new object[] { "@jev_no", DbType.String, jevNo},
                 };
 
-                string query = $"SELECT id, funds_id, fund_code, fund_name, journals_id, journal_name, is_special, jev_no, date_entry, explanation, created_at, created_by, created_by_name, updated_at, updated_by, updated_by_name FROM {viewTableName} WHERE jev_no = @jev_no";
+                string query = $"SELECT id, funds_id, fund_code, fund_name, journals_id, journal_name, is_special, jev_no, date_entry, ref_no, payee, explanation, created_at, created_by, created_by_name, updated_at, updated_by, updated_by_name FROM {viewTableName} WHERE jev_no = @jev_no";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
                         return record;
 
-                    record.Add("id", reader.Rows[0][0].ToString());
-                    record.Add("funds_id", reader.Rows[0][1].ToString());
-                    record.Add("fund_code", reader.Rows[0][2].ToString());
-                    record.Add("fund_name", reader.Rows[0][3].ToString());
-                    record.Add("journals_id", reader.Rows[0][4].ToString());
-                    record.Add("journal_name", reader.Rows[0][5].ToString());
-                    record.Add("is_special", reader.Rows[0][6].ToString());
-                    record.Add("jev_no", reader.Rows[0][7].ToString());
-                    record.Add("date_entry", reader.Rows[0][8].ToString());
-                    record.Add("explanation", reader.Rows[0][9].ToString());
-                    record.Add("created_at", reader.Rows[0][10].ToString());
-                    record.Add("created_by", reader.Rows[0][11].ToString());
-                    record.Add("created_by_name", reader.Rows[0][12].ToString());
-                    record.Add("updated_at", reader.Rows[0][13].ToString());
-                    record.Add("updated_by", reader.Rows[0][14].ToString());
-                    record.Add("updated_by_name", reader.Rows[0][15].ToString());
+                    record.Add("id", reader.Rows[0]["id"].ToString());
+                    record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
+                    record.Add("fund_code", reader.Rows[0]["fund_code"].ToString());
+                    record.Add("fund_name", reader.Rows[0]["fund_name"].ToString());
+                    record.Add("journals_id", reader.Rows[0]["journals_id"].ToString());
+                    record.Add("journal_name", reader.Rows[0]["journal_name"].ToString());
+                    record.Add("is_special", reader.Rows[0]["is_special"].ToString());
+                    record.Add("jev_no", reader.Rows[0]["jev_no"].ToString());
+                    record.Add("date_entry", reader.Rows[0]["date_entry"].ToString());
+                    record.Add("ref_no", reader.Rows[0]["ref_no"].ToString());
+                    record.Add("payee", reader.Rows[0]["payee"].ToString());
+                    record.Add("explanation", reader.Rows[0]["explanation"].ToString());
+                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                    record.Add("created_by", reader.Rows[0]["created_by"].ToString());
+                    record.Add("created_by_name", reader.Rows[0]["created_by_name"].ToString());
+                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+                    record.Add("updated_by", reader.Rows[0]["updated_by"].ToString());
+                    record.Add("updated_by_name", reader.Rows[0]["updated_by_name"].ToString());
 
                 }
             }

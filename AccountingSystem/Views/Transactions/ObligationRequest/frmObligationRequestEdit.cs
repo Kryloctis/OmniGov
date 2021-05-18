@@ -11,12 +11,12 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ObligationRequest
 {
-    public partial class frmObligationRequestAdd : Form
+    public partial class frmObligationRequestEdit : Form
     {
         private ucObligationRequest uc;
         private frmObligationRequestMain _frmObligationRequestMain;
 
-        public frmObligationRequestAdd(frmObligationRequestMain frmObligationRequestMain)
+        public frmObligationRequestEdit(frmObligationRequestMain frmObligationRequestMain)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
@@ -24,7 +24,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             _frmObligationRequestMain = frmObligationRequestMain;
         }
 
-        private bool SaveData()
+
+        private bool SaveData() 
         {
             try
             {
@@ -34,27 +35,18 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     return false;
                 }
 
-                string obligationNo = $"{uc.mskTxtSeriesNo.Text}-{uc.GenerateObligationNoTemplate()}";
-                int userId =  Helper.UserId;
-
                 var obligationRequestModel = new ObligationRequestModel()
                 {
-                    FundID = uc.fundId,
-                    FPPId = uc.fppId,
-                    OtherFPPId = uc.otherFPPId,
-                    AllotmentClassesID = uc.allotmentClassId,
-                    GenLedgerAccID = uc.accountId,
-                    DateRequested = uc.dtDateRequest.Value,
-                    ObligationNo = obligationNo,
+                    ID = uc.obligationRequestId,
+                    ObligationNo = $"{uc.mskTxtSeriesNo.Text}-{uc.GenerateObligationNoTemplate()}",
                     Payee = uc.txtPayee.Text.Trim(),
-                    Explanation = uc.txtExplanation.Text.Trim(),
                     ReferencesNo = uc.txtReferenceNo.Text.Trim(),
                     ObligationAmount = uc.nudAmount.Value,
-                    CreatedBy = userId
+                    Explanation = uc.txtExplanation.Text.Trim(),
+                    UpdatedBy = Helper.UserId
                 };
 
-
-                return Factory.ObligationRequestRepository().Insert(obligationRequestModel);
+                return Factory.ObligationRequestRepository().Update(obligationRequestModel);
             }
             catch (Exception ex)
             {
@@ -62,14 +54,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
             return false;
         }
-
+  
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (SaveData()) 
             {
-                uc.ResetForm();
-                Helper.MessageBoxSuccess("Obligation Request has been saved.");
+                Helper.MessageBoxSuccess("Obligation Request has been updated.");
                 _frmObligationRequestMain.ucObligationRequestMain1.LoadObligationRequestRecords();
+                Close();
             }
         }
     }
