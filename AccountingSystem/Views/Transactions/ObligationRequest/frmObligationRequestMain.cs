@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ObligationRequest
 {
-    public partial class frmObligationRequest : Form
+    public partial class frmObligationRequestMain : Form
     {
-        public frmObligationRequest()
+        public frmObligationRequestMain()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);

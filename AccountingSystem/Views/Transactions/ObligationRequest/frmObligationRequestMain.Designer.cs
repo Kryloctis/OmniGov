@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Transactions.ObligationRequest
 {
-    partial class frmObligationRequest
+    partial class frmObligationRequestMain
     {
         /// <summary>
         /// Required designer variable.
