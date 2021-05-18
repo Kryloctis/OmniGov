@@ -130,6 +130,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.txtledger.ReadOnly = true;
             this.txtledger.Size = new System.Drawing.Size(506, 27);
             this.txtledger.TabIndex = 2;
+            this.txtledger.TextChanged += new System.EventHandler(this.txtledger_TextChanged);
             this.txtledger.DoubleClick += new System.EventHandler(this.txtledger_DoubleClick);
             this.txtledger.Validating += new System.ComponentModel.CancelEventHandler(this.txtledger_Validating);
             this.txtledger.Validated += new System.EventHandler(this.txtledger_Validated);

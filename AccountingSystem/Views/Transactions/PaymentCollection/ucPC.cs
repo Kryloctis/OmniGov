@@ -46,6 +46,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             slaId = 0;
             txtaccountable.Clear();
             txtledger.Clear();
+            txtsubsidiary.Clear();
             txtpayee.Clear();
             txtreceipt.Clear();
             dtdate.Value = DateTime.Now;
@@ -71,10 +72,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 txtaccountable.Enabled = true;
                 txtledger.Enabled = true;
-                txtsubsidiary.Enabled = true;
+               // txtsubsidiary.Enabled = true;
                 btnaccountable.Enabled = true;
                 btnledger.Enabled = true;
-                btnsubsidiary.Enabled = true;
+              //  btnsubsidiary.Enabled = true;
                 txtpayee.Enabled = true;
                 txtreceipt.Enabled = true;
                 dtdate.Enabled = true;
@@ -234,6 +235,20 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void txtsubsidiary_DoubleClick(object sender, EventArgs e)
         {
             btnsubsidiary.PerformClick();
+        }
+
+        private void txtledger_TextChanged(object sender, EventArgs e)
+        {
+            if(txtledger.Text.Length > 0 && glaId > 0)
+            {
+                txtsubsidiary.Enabled = true;
+                btnsubsidiary.Enabled = true;
+            }
+            else
+            {
+                txtsubsidiary.Enabled = false;
+                btnsubsidiary.Enabled = false;
+            }
         }
     }
 }

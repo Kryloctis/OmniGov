@@ -397,21 +397,22 @@ namespace AccountingSystem
         #region PaymentCollection
         internal static void PaymentDatagridView(DataTable dataTable, DataGridView datagrid)
         {
-            datagrid.DataSource = dataTable;
-            datagrid.Columns[0].HeaderText = "RCD No.";
-            datagrid.Columns[1].HeaderText = "Account Code";
-            datagrid.Columns[2].HeaderText = "Accountable Form";
-            datagrid.Columns[3].HeaderText = "Ledger";
-            datagrid.Columns[4].HeaderText = "Subsidiary";
-            datagrid.Columns[5].HeaderText = "Payee";
-            datagrid.Columns[6].HeaderText = "Receipt No.";
-            datagrid.Columns[7].HeaderText = "Payment Date";
-            datagrid.Columns[8].HeaderText = "Amount";
-            datagrid.Columns[9].HeaderText = "Collector";
-            datagrid.Columns[10].Visible = false;
+            datagrid.DataSource = dataTable;            
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].HeaderText = "RCD No.";
+            datagrid.Columns[2].HeaderText = "Account Code";
+            datagrid.Columns[3].HeaderText = "Accountable Form";
+            datagrid.Columns[4].HeaderText = "Ledger";
+            datagrid.Columns[5].HeaderText = "Subsidiary";
+            datagrid.Columns[6].HeaderText = "Payee";
+            datagrid.Columns[7].HeaderText = "Receipt No.";
+            datagrid.Columns[8].HeaderText = "Payment Date";
+            datagrid.Columns[9].HeaderText = "Amount";
+            datagrid.Columns[10].HeaderText = "Collector";
             datagrid.Columns[11].Visible = false;
             datagrid.Columns[12].Visible = false;
             datagrid.Columns[13].Visible = false;
+            datagrid.Columns[14].Visible = false;
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion

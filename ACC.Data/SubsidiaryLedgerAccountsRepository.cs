@@ -99,11 +99,41 @@ namespace ACC.Data
             }
         }
 
+        public DataTable GetRecordsByReference(int Id)
+        {
+            try
+            {
+                string query = $"SELECT * FROM {tableName} WHERE general_ledger_accounts_id='{Id}'";
+
+                var dtJournals = new DataTable();
+                return _dbGenericCommands.Fill(query, dtJournals);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public DataTable GetRecordsBySearch(string srchtxt)
         {
             try
             {
                 string query = $"SELECT * FROM {tableName} WHERE sub_code LIKE '%{srchtxt}%' OR sub_code LIKE '%{srchtxt}%'";
+
+                var dtJournals = new DataTable();
+                return _dbGenericCommands.Fill(query, dtJournals);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetRecordsBySearchByReference(string srchtxt,int Id)
+        {
+            try
+            {
+                string query = $"SELECT * FROM {tableName} WHERE general_ledger_accounts_id='{Id}' AND sub_code LIKE '%{srchtxt}%' OR sub_code LIKE '%{srchtxt}%'";
 
                 var dtJournals = new DataTable();
                 return _dbGenericCommands.Fill(query, dtJournals);

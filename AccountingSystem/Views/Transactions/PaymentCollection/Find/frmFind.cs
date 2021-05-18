@@ -52,7 +52,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
                     if (table.Equals("subsidiary"))
                     {
                         var subRepository = Factory.SubsidiaryLedgerAccountsRepository();
-                        var dtsub = subRepository.GetRecords();
+                        var dtsub = subRepository.GetRecordsByReference(frmpc.glaId);
                         HelperLoadRecords.SubsidiaryLedgerAccountsDatagridView(dtsub, dgSelect);
                     }
                 }
@@ -93,7 +93,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
                         try
                         {
                             string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                            var dtSub = Factory.SubsidiaryLedgerAccountsRepository().GetRecordsBySearch(searchkey);
+                            var dtSub = Factory.SubsidiaryLedgerAccountsRepository().GetRecordsBySearchByReference(searchkey,frmpc.glaId);
                             HelperLoadRecords.SubsidiaryLedgerAccountsDatagridView(dtSub, dgSelect);
 
                         }

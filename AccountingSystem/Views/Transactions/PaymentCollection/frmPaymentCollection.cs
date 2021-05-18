@@ -102,7 +102,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void dgpayments_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexData = { 10,11,12,13 };
+            byte[] columnIndexData = { 11,12,13,14 };
             Helper.ShowRecordTimestamp(dgpayments, columnIndexData, lblCreatedAt, lblUpdatedAt,lblCreatedBy,lblUpdatedBy);
             Helper.EnableDisableToolStripButtons(dgpayments, btnEdit, btnDelete);
         }
