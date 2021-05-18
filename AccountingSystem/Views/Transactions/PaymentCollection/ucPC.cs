@@ -224,7 +224,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void txtsubsidiary_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtsubsidiary, "Subsidiary!");
+            var subRepository = Factory.SubsidiaryLedgerAccountsRepository();
+            bool isubsidiary = subRepository.HasSubsidiary(Convert.ToUInt16(glaId));
+            if (isubsidiary)
+            {
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtsubsidiary, "Subsidiary!");
+            }
+               
         }
 
         private void txtsubsidiary_Validated(object sender, EventArgs e)
@@ -241,13 +247,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             if(txtledger.Text.Length > 0 && glaId > 0)
             {
-                txtsubsidiary.Enabled = true;
-                btnsubsidiary.Enabled = true;
-            }
-            else
-            {
-                txtsubsidiary.Enabled = false;
-                btnsubsidiary.Enabled = false;
+                var subRepository = Factory.SubsidiaryLedgerAccountsRepository();
+                bool isubsidiary = subRepository.HasSubsidiary(Convert.ToUInt16(glaId));
+                txtsubsidiary.Enabled = isubsidiary;
+                btnsubsidiary.Enabled = isubsidiary;
             }
         }
     }
