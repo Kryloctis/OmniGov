@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ACC.Domain.Models
 {
-    public class ObligationRequestModule
+    public class ObligationRequestModel
     {
         public int Id { get; set; }
         public int FundId { get; set; }
