@@ -236,7 +236,7 @@ namespace AccountingSystem
 
         private void MenuObligationRequest_Click(object sender, EventArgs e) 
         {
-            _ = new frmObligationRequestMain().ShowDialog();
+            _ = new frmObligationRequest().ShowDialog();
         }
         
         private void MenuReportCashReceiptsJournal_Click(object sender, EventArgs e)
@@ -286,7 +286,7 @@ namespace AccountingSystem
 
         private void BtnObligationRequest_Click(object sender, EventArgs e)
         {
-            _ = new frmObligationRequestMain().ShowDialog();
+            _ = new frmObligationRequest().ShowDialog();
         }
 
         private void MenuDisbursingOffice_Click(object sender, EventArgs e)
