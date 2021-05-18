@@ -18,11 +18,6 @@ namespace ACC.Data
             _dbGenericCommands = dbGenericCommands;
         }
 
-        public Dictionary<string, string> GetRecordByID(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
         public Dictionary<string, string> GetViewRecordByID(ushort generalLedgerId)
         {
             var record = new Dictionary<string, string>();
@@ -35,7 +30,7 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT sub_major_account_group_id, account_code, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {viewTableName} WHERE general_ledger_accounts_id = @general_ledger_accounts_id";
-
+                
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
@@ -43,6 +38,41 @@ namespace ACC.Data
 
                     record.Add("sub_major_account_group_id", reader.Rows[0]["sub_major_account_group_id"].ToString());
                     record.Add("account_code", reader.Rows[0]["account_code"].ToString());
+                    record.Add("ledger_code", reader.Rows[0]["ledger_code"].ToString());
+                    record.Add("ledger_name", reader.Rows[0]["ledger_name"].ToString());
+                    record.Add("is_contra_account", reader.Rows[0]["is_contra_account"].ToString());
+                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
+        }
+
+        public Dictionary<string, string> GetRecordByID(int Id)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, Id},
+                };
+
+                string query = $"SELECT sub_major_account_group_id, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {tableName} WHERE id = @general_ledger_accounts_id";
+                //, account_code
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    record.Add("sub_major_account_group_id", reader.Rows[0]["sub_major_account_group_id"].ToString());
+                   // record.Add("account_code", reader.Rows[0]["account_code"].ToString());
                     record.Add("ledger_code", reader.Rows[0]["ledger_code"].ToString());
                     record.Add("ledger_name", reader.Rows[0]["ledger_name"].ToString());
                     record.Add("is_contra_account", reader.Rows[0]["is_contra_account"].ToString());
@@ -160,9 +190,20 @@ namespace ACC.Data
             return false;
         }
 
-        public DataTable GetRecordsBySearch(string searchText)
+        public DataTable GetRecordsBySearch(string srchtxt)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                string query = $"SELECT * FROM {tableName} WHERE ledger_code LIKE '%{srchtxt}%' OR ledger_name LIKE '%{srchtxt}%'";
+
+                var dtGeneralLedgers = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool NameExist(string txtName)
