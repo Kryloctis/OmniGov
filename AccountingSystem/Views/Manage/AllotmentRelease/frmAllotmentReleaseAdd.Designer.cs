@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.flowLayoutPanel1.Controls.Add(this.btnAddToList);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 163);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 200);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(564, 29);
             this.flowLayoutPanel1.TabIndex = 1;
@@ -72,7 +72,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.ucAllotmentRelease1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucAllotmentRelease1.Location = new System.Drawing.Point(12, 12);
             this.ucAllotmentRelease1.Name = "ucAllotmentRelease1";
-            this.ucAllotmentRelease1.Size = new System.Drawing.Size(543, 145);
+            this.ucAllotmentRelease1.Size = new System.Drawing.Size(543, 177);
             this.ucAllotmentRelease1.TabIndex = 0;
             // 
             // frmAllotmentReleaseAdd
@@ -82,7 +82,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(564, 192);
+            this.ClientSize = new System.Drawing.Size(564, 229);
             this.Controls.Add(this.ucAllotmentRelease1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

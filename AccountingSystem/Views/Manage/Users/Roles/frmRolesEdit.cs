@@ -105,6 +105,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             Helper.LoadFormIcon(this);
             LoadSelectedRole();
             LoadPermissionsByRoleId();
+            uc.LoadOffice();
             uc.LoadPermissions();
         }
     }

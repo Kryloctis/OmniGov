@@ -11,6 +11,8 @@ namespace ACC.Domain.Models
         public byte JournalsId { get; set; }
         public string JEVNumber { get; set; }
         public DateTime DateEntry { get; set; }
+        public string RefNo { get; set; }
+        public string Payee { get; set; }
         public string Explanation { get; set; }
         public List<JEVAccountsModel> JEVAccountsModelList { get; set; }
         public byte CreatedBy { get; set; }

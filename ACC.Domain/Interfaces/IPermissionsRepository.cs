@@ -12,6 +12,6 @@ namespace ACC.Domain.Interfaces
         bool NameExist(string name);
         bool NameExist(string name, int id);
         bool PermissionExists(int permissionId, int currentRoleId);
-        DataTable GetAddedPermissions(int currentRoleId);
+        DataTable GetRecordsByOffice(string officeName);
     }
 }

@@ -68,28 +68,15 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return false;
         }
 
-        private void ResetForm()
-        {
-            uc.panel1.Enabled = true;
-            uc.mskSeriesNo.Text = string.Empty;
-            uc.dtDateIssued.Value = DateTime.Now;
-            uc.LoadFPPCombobox();
-            uc.LoadFunds();
-            uc.LoadAllotmentClasses();
-            uc.dgAllotmentRelease.Rows.Clear();
-            uc.txtPurpose.Text = string.Empty;
-        }
-
         private void UnsavedWorkPrompt()
         {
             var message = "Are you sure? Unsaved data will not be saved.";
 
             if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                ResetForm();
+                uc.ResetForm();
             }
         }
-
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
@@ -97,7 +84,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             {
                 Helper.MessageBoxSuccess("Allotment release has been saved.");
                 _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
-                ResetForm();
+                uc.ResetForm();
             }
         }
 

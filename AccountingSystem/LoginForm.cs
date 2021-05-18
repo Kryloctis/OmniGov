@@ -38,9 +38,11 @@ namespace AccountingSystem
             if (userId != 0)
             {
                 Helper.UserId = userId;
-                var mainForm = new MainForm();
+                var mainForm = new MainForm(this);
                 mainForm.Show();
                 Hide();
+                txtPassword.Clear();
+
                 return;
             }
 

@@ -80,11 +80,6 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             this.cmbOffice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOffice.FormattingEnabled = true;
-            this.cmbOffice.Items.AddRange(new object[] {
-            "Budget",
-            "Accounting",
-            "Treasury",
-            "Assessor"});
             this.cmbOffice.Location = new System.Drawing.Point(45, 6);
             this.cmbOffice.Name = "cmbOffice";
             this.cmbOffice.Size = new System.Drawing.Size(763, 23);

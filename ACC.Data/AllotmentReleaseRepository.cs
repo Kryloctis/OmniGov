@@ -185,9 +185,8 @@ namespace ACC.Data
             }
         }
 
-        public decimal GetViewTotalAllotmentReleaseAmount(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, DateTime dateIssued)
+        public decimal GetViewTotalAllotmentReleaseAmountYear(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, DateTime dateIssued)
         {
-            var record = new Dictionary<string, string>();
 
             try 
             {
@@ -198,7 +197,8 @@ namespace ACC.Data
                     new object[] { "@others_fpp_id", DbType.String, othersFPPID },
                     new object[] { "@allotment_class_id", DbType.String, allotmentClassID},
                     new object[] { "@gen_ledger_acc_id", DbType.Int32, accountID },
-                    new object[] { "@allotment_release_date_issued", DbType.Date, dateIssued.Date }
+                    new object[] { "@allotment_release_date_issued", DbType.Date, dateIssued.Date },
+                    new object[] { "@budget_appropriations_year",DbType.Int16, dateIssued.Date.Year}
                 };
 
                 string query = $"SELECT " +
@@ -209,7 +209,8 @@ namespace ACC.Data
                     $"AND others_fpp_id <=> @others_fpp_id " +
                     $"AND allotment_class_id = @allotment_class_id " +
                     $"AND gen_ledger_acc_id = @gen_ledger_acc_id " +
-                    $"AND allotment_release_date_issued <= @allotment_release_date_issued ";
+                    $"AND allotment_release_date_issued <= @allotment_release_date_issued " +
+                    $"AND budget_appropriations_year = @budget_appropriations_year ";
 
                 return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
 

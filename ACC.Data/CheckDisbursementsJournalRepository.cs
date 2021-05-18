@@ -10,6 +10,7 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private const string tableName = "check_disbursements_journal";
+        private const string viewTableName = "view_check_disbursement_journal";
 
         public CheckDisbursementsJournalRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -53,11 +54,13 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@jev_id", DbType.Int32, entity.JevId},
-                    new object[] { "@check_number", DbType.String, entity.CheckNumber},
-                    new object[] { "@payee", DbType.String, entity.Payee},
+                    new object[] { "@check_date", DbType.Date, entity.CheckDate},
+                    new object[] { "@check_no", DbType.String, entity.CheckNo},
+                    new object[] { "@dv_no", DbType.String, entity.DVNo},
+                    new object[] { "@rci_no", DbType.String, entity.RCINo},
                 };
 
-                string query = $"INSERT INTO {tableName} (jev_id, check_number, payee) VALUES (@jev_id, @check_number, @payee)";
+                string query = $"INSERT INTO {tableName} (jev_id, check_date, check_no, dv_no, rci_no) VALUES (@jev_id, @check_date, @check_no, @dv_no, @rci_no)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -78,11 +81,13 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@jev_id", DbType.Int32, entity.JevId},
-                    new object[] { "@check_number", DbType.String, entity.CheckNumber},
-                    new object[] { "@payee", DbType.String, entity.Payee},
+                    new object[] { "@check_date", DbType.Date, entity.CheckDate},
+                    new object[] { "@check_no", DbType.String, entity.CheckNo},
+                    new object[] { "@dv_no", DbType.String, entity.DVNo},
+                    new object[] { "@rci_no", DbType.String, entity.RCINo},
                 };
 
-                string query = $"UPDATE {tableName} SET jev_id = @jev_id, check_number = @check_number, payee = @payee WHERE jev_id = @jev_id";
+                string query = $"UPDATE {tableName} SET check_date = @check_date, check_no = @check_no, dv_no = @dv_no, rci_no = @rci_no WHERE jev_id = @jev_id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -102,16 +107,19 @@ namespace ACC.Data
                     new object[] { "@jev_id", DbType.Int32, jevId},
                 };
 
-                string query = $"SELECT id, check_number, payee FROM {tableName} WHERE jev_id = @jev_id";
+                string query = $"SELECT id, payee, check_date, check_no, dv_no, rci_no FROM {viewTableName} WHERE jev_id = @jev_id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
                         return record;
 
-                    record.Add("id", reader.Rows[0][0].ToString());
-                    record.Add("check_number", reader.Rows[0][1].ToString());
-                    record.Add("payee", reader.Rows[0][2].ToString());
+                    record.Add("id", reader.Rows[0]["id"].ToString());
+                    record.Add("payee", reader.Rows[0]["payee"].ToString());
+                    record.Add("check_date", reader.Rows[0]["check_date"].ToString());
+                    record.Add("check_no", reader.Rows[0]["check_no"].ToString());
+                    record.Add("dv_no", reader.Rows[0]["dv_no"].ToString());
+                    record.Add("rci_no", reader.Rows[0]["rci_no"].ToString());
                 }
             }
             catch (Exception)

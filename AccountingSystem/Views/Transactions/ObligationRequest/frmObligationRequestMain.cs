@@ -1,81 +1,138 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ObligationRequest
 {
     public partial class frmObligationRequestMain : Form
     {
-        private ucObligationRequestMain uc;
+        ucObligationRequestMain uc;
 
         public frmObligationRequestMain()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            btnSave.Click += new EventHandler(BtnSave_Click);
-            btnNew.Click += new EventHandler(BtnNew_Click);
-            btnSearch.Click += new EventHandler(BtnSearch_Click);
+            btnAdd.Click += new EventHandler(BtnAdd_Click);
+            btnEdit.Click += new EventHandler(BtnEdit_Click);
+            btnDelete.Click += new EventHandler(BtnDelete_Click);
             uc = ucObligationRequestMain1;
+            uc.LoadReferenceObligationRequestMain(this);
         }
 
-        private void BtnSearch_Click(object sender, EventArgs e)
+        private void BtnDelete_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            int selectedRowsCount = uc.dgObligationRequests.SelectedRows.Count;
+            try
+            {
+                if (selectedRowsCount > 0)
+                {
+                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                    {
+                        var obligationRequestModeList = new List<ObligationRequestModel>();
+                        foreach (DataGridViewRow row in uc.dgObligationRequests.SelectedRows)
+                        {
+                            int obligationRequestId = Convert.ToInt16(row.Cells[0].Value.ToString());
+                            obligationRequestModeList.Add(new ObligationRequestModel() { ID = obligationRequestId });
+                        }
+
+                        var allotmentClassesRepository = Factory.ObligationRequestRepository();
+                        _ = allotmentClassesRepository.Delete(obligationRequestModeList);
+                        uc.LoadObligationRequestRecords();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
-        private void BtnNew_Click(object sender, EventArgs e)
+        private void ShowObligationRequestEdit()
         {
-            uc.ResetForm();
+  
+            var frmObligationRequestEdit = new frmObligationRequestEdit(this);
+            var ucObligationRequestEdit = frmObligationRequestEdit.ucObligationRequest1;
+               
+            int rowIndex = uc.dgObligationRequests.CurrentCell.RowIndex;
+
+            int obligationRequestId = Convert.ToInt32(uc.dgObligationRequests.Rows[rowIndex].Cells["obligation_request_id"].Value);
+            var obligationRequestRepo = Factory.ObligationRequestRepository().GetViewRecordsById(obligationRequestId);
+
+            int fppId = Convert.ToInt32(obligationRequestRepo["fpp_id"]);
+            int? otherFPPId = string.IsNullOrEmpty(obligationRequestRepo["others_fpp_id"]) ? null : Convert.ToInt32(obligationRequestRepo["others_fpp_id"]);
+            int fundId = Convert.ToInt32(obligationRequestRepo["fund_id"]);
+            int allotmentClassId = Convert.ToInt32(obligationRequestRepo["allotment_class_id"]);
+            int accountId = Convert.ToInt32(obligationRequestRepo["gen_ledger_acc_id"]);
+            DateTime dateRequested = Convert.ToDateTime(obligationRequestRepo["date_requested"]);
+
+            string accountName = obligationRequestRepo["gen_ledger_acc_name"];
+            string seriesNo = obligationRequestRepo["obligation_no"];
+            string referenceNo = obligationRequestRepo["reference_no"];
+            string payee = obligationRequestRepo["payee"];
+            string explanation = obligationRequestRepo["explanation"];
+            decimal obligationAmount = Convert.ToDecimal(obligationRequestRepo["obligation_amount"]);
+
+
+            ucObligationRequestEdit.obligationRequestId = obligationRequestId;
+            ucObligationRequestEdit.fppId = fppId;
+            ucObligationRequestEdit.otherFPPId = otherFPPId;
+            ucObligationRequestEdit.fundId = fundId;
+            ucObligationRequestEdit.allotmentClassId = allotmentClassId;
+            ucObligationRequestEdit.accountId = accountId;
+            ucObligationRequestEdit.currentObligationAmount = obligationAmount;
+
+
+            ucObligationRequestEdit.month = Convert.ToByte(dateRequested.Month);
+            ucObligationRequestEdit.year = Convert.ToInt16(dateRequested.Year);
+            ucObligationRequestEdit.txtAccountName.Text = accountName;
+            ucObligationRequestEdit.mskTxtSeriesNo.Text = seriesNo;
+            ucObligationRequestEdit.txtReferenceNo.Text = referenceNo;
+            ucObligationRequestEdit.txtPayee.Text = payee;
+            ucObligationRequestEdit.txtExplanation.Text = explanation;
+            ucObligationRequestEdit.nudAmount.Value = obligationAmount;
+            ucObligationRequestEdit.dtDateRequest.Enabled = false;
+
+
+            frmObligationRequestEdit.ShowDialog();
+  
         }
 
-        private void frmObligationRequestMain_Load(object sender, EventArgs e)
+        private void BtnEdit_Click(object sender, EventArgs e)
         {
-            btnDelete.Enabled = false;
-            btnCancel.Enabled = false;
+            ShowObligationRequestEdit();
         }
 
-        private bool SaveObligationRequest()
+        private bool ShowObligationRequestAdd() 
         {
             try
             {
-                if (!uc.ValidateChildren() || uc.ObligationRequestListEmpty()) 
+                if (!uc.ValidateChildren()) 
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
 
-                var obligationRequestModelList = new List<ObligationRequestModel>();
+                var frmObligationAdd = new frmObligationRequestAdd(this);
+                var ucFrmObligationAdd = frmObligationAdd.ucObligationRequest1;
 
-                foreach (DataGridViewRow row in uc.dgObligationRequests.Rows)
-                { 
-                    int fppId = Convert.ToInt32(uc.cmbxFPP.SelectedValue);
-                    int? otherFPPId = string.IsNullOrEmpty(uc.cmbxOthersFPP.Text) ? null : Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue);
-                    int accountId = Convert.ToInt32(row.Cells["accountId"].Value);
-                    decimal obligationAmount = Convert.ToDecimal(row.Cells["obligationAmount"].Value);
-                    int createdBy = Convert.ToInt32(Helper.LoggedInUserData()["id"]);
-                    string obligationNo = $"{uc.mskObligationSeriesNo.Text}-{uc.mskTxtObligationNoTemplate.Text}";
+                ucFrmObligationAdd.fppId = Convert.ToInt32(uc.cmbxFPP.SelectedValue);
+                ucFrmObligationAdd.otherFPPId = string.IsNullOrEmpty(uc.cmbxOthersFPP.Text) ? null : Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue);
+                ucFrmObligationAdd.fundId = uc.fundId;
+                ucFrmObligationAdd.allotmentClassId = uc.allotmentClassId;
+                ucFrmObligationAdd.accountId = Convert.ToInt32(uc.cmbxAccount.SelectedValue);
+                ucFrmObligationAdd.txtAccountName.Text = uc.cmbxAccount.Text;
+                ucFrmObligationAdd.month = Convert.ToByte(uc.cmbxMonths.SelectedValue);
+                ucFrmObligationAdd.year = Convert.ToInt16(uc.nudYear.Value);
 
-                    var obligationRequestModel = new ObligationRequestModel()
-                    {
-                        FundID = uc.fundId,
-                        FPPId = fppId,
-                        OtherFPPId = otherFPPId,
-                        AllotmentClassesID = uc.allotmentClassId,
-                        GenLedgerAccID = accountId,
-                        DateRequested = uc.dtDateRequested.Value,
-                        ObligationNo = obligationNo,
-                        Payee = uc.txtPayee.Text,
-                        Explanation = uc.txtExplanation.Text,
-                        ReferencesNo = uc.txtReferenceNo.Text,
-                        ObligationAmount = obligationAmount,
-                        CreatedBy = createdBy
-                    };
-
-                    obligationRequestModelList.Add(obligationRequestModel);
-                }
-
-                return Factory.ObligationRequestRepository().BulkInsert(obligationRequestModelList);
+                frmObligationAdd.ShowDialog();
+                return true;
             }
             catch (Exception ex)
             {
@@ -84,13 +141,15 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-        private void BtnSave_Click(object sender, EventArgs e) 
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
-            if (SaveObligationRequest()) 
-            {
-                Helper.MessageBoxSuccess("Obligation Request has been saved.");
-                uc.ResetForm();
-            }
+            ShowObligationRequestAdd();
         }
+
+        private void frmObligationRequestMain_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

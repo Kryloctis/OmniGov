@@ -12,12 +12,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
     public partial class ucAllotmentRelease : UserControl
     {
-        internal int aroId;
         internal int fppID;
         internal int? othersFPPId;
         internal int allotmentClassId;
         internal int fundId;
-        internal short year;
         internal DateTime dateIssued;
         private ucAllotmentReleaseMain ucAllotmentMain;
 
@@ -33,10 +31,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[3];
+            var errorArray = new string[2];
             errorArray[0] = epAccount.GetError(cmbxAccount);
             errorArray[1] = epAmount.GetError(nudAmount);
-            errorArray[2] = AllotmentReleaseExist() ? Tag.ToString() : string.Empty;
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
@@ -45,6 +42,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
+                short year = (short)nudYear.Value;
+
                 int generalLedgerAccountId = Convert.ToInt32(cmbxAccount.SelectedValue);
 
                 var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetViewRecord(fppID, othersFPPId, fundId, allotmentClassId, generalLedgerAccountId, dateIssued, year);
@@ -74,17 +73,51 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                int budgetAppropriationId = Convert.ToInt32(cmbxAccount.SelectedValue);
-                DateTime dateIssued = ucAllotmentMain.dtDateIssued.Value;
 
-                var allotmentReleaseExist = Factory.AllotmentReleaseRepository().allotmentReleaseExist(budgetAppropriationId, dateIssued.ToString("yyyy-MM-dd"));
+                short year = (short)nudYear.Value;
 
-                if (allotmentReleaseExist)
+                int generalLedgerAccountId = Convert.ToInt32(cmbxAccount.SelectedValue);
+
+                var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetViewRecord(fppID, othersFPPId, fundId, allotmentClassId, generalLedgerAccountId, dateIssued, year);
+
+                if (budgetAppropriationRepo.Count > 0)
                 {
-                    Tag = "Allotment Release already exist on the date it was issued.";
-                    return true;
-                }
+                    int budgetAppropriationId = Convert.ToInt32(budgetAppropriationRepo["id"]);
 
+
+                    var allotmentReleaseExist = Factory.AllotmentReleaseRepository().allotmentReleaseExist(budgetAppropriationId, dateIssued.ToString("yyyy-MM-dd"));
+
+                    if (allotmentReleaseExist)
+                    {
+                        epAccount.SetError(cmbxAccount, "Account you entered has a allotment Release already exist on the date it was issued.");
+                        return true;
+                    }
+                }
+                else
+                    return false;
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        internal bool AccountExistOnList() 
+        {
+            try
+            {
+                int accountId = Convert.ToInt32(cmbxAccount.SelectedValue);
+
+                foreach (DataGridViewRow item in ucAllotmentMain.dgAllotmentRelease.Rows) 
+                {
+                    if (Convert.ToInt32(item.Cells["account_id"].Value) == accountId) 
+                    {
+                        epAccount.SetError(cmbxAccount, "Can't add account to the list. Account you entered was already on the List.");
+                        return true;                   
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -132,6 +165,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
         }
 
+        private void nudYear_ValueChanged(object sender, EventArgs e)
+        {
+            DisplayBudgetAppropriationsDetails();
+        }
+
         private void cmbxAccount_KeyDown(object sender, KeyEventArgs e)
         {
             if (cmbxAccount.Text.Length < 4) return;
@@ -166,6 +204,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     cmbxAccount.DisplayMember = "value";
                     cmbxAccount.ValueMember = "key";
                     cmbxAccount.DroppedDown = true;
+                    DisplayBudgetAppropriationsDetails();
 
                     Helper.ClearErrorComboBox(epAccount, cmbxAccount);
                 }
@@ -187,25 +226,27 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             {
                 if (cmbxAccount.FindStringExact(cmbxAccount.Text) < 0 && !string.IsNullOrEmpty(cmbxAccount.Text))
                 {
-                    epAccount.SetError(cmbxAccount, "Account you entered. Doesn't exist in your record.");
-                    return false;
+                    epAccount.SetError(cmbxAccount, "Account you entered doesn't exist on your record.");
+                    return true;
                 }
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
-            return true;
+            return false;
         }
 
         private void cmbxAccount_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(cmbxAccount.Text))
                 e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbxAccount, "Account.");
-            else if (!ShowErrorAccountNotExist())
-                e.Cancel = !ShowErrorAccountNotExist();
-            //else
-            //    e.Cancel = ShowErrorAppropriationExistOnList();
+            else if (ShowErrorAccountNotExist())
+                e.Cancel = ShowErrorAccountNotExist();
+            else if (AllotmentReleaseExist())
+                e.Cancel = AllotmentReleaseExist();
+            else
+                e.Cancel = AccountExistOnList();
         }
 
         private void cmbxAccount_Validated(object sender, EventArgs e)
@@ -218,6 +259,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
+                short year = (short)nudYear.Value;
+
                 int generalLedgerAccountId = Convert.ToInt32(cmbxAccount.SelectedValue);
 
                 var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetViewRecord(fppID, othersFPPId, fundId, allotmentClassId, generalLedgerAccountId, dateIssued, year);
@@ -233,13 +276,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
                 decimal appropriationBalance = totalAppropriation - totalAllotmentReleaseAmount;
 
-                if (aroId == 0)
+                if (numericUpDown.Value > appropriationBalance)
                 {
-                    if (numericUpDown.Value > appropriationBalance)
-                    {
-                        ep.SetError(numericUpDown, "The amount you entered exceeds the appropriate balance.");
-                        return true;
-                    }
+                    ep.SetError(numericUpDown, "The amount you entered exceeds the appropriate balance.");
+                    return true;
                 }
 
             }
@@ -287,7 +327,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             if (!DesignMode)
             {
                 LoadAccounts();
+                nudYear.Value = DateTime.Now.Year;
             }
         }
+
     }
 }

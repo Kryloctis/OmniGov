@@ -9,6 +9,7 @@ namespace AccountingSystem.Views.Manage.Users.List
     public partial class ucUsers : UserControl
     {
         internal int userId = 0;
+
         public ucUsers()
         {
             InitializeComponent();
@@ -29,14 +30,14 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[6];
+            var errorArray = new string[7];
             errorArray[0] = epRole.GetError(cmbRoles);
             errorArray[1] = epFirstName.GetError(txtFirstname);
             errorArray[2] = epMiddleInitial.GetError(txtMiddleInitial);
             errorArray[3] = epLastName.GetError(txtLastname);
             errorArray[4] = epUserName.GetError(txtUsername);
             errorArray[5] = epPassword.GetError(txtPassword);
-
+            errorArray[6] = epConfirmPassword.GetError(txtConfirmPassword);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -54,6 +55,16 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         }
 
+        private bool PasswordDoesNotMatch(ErrorProvider epPassword, TextBox txtBox)
+        {
+            if (txtPassword.Text != txtConfirmPassword.Text)
+            {
+                epPassword.SetError(txtBox, "Password does not match. Please try again.");
+                return true;
+            }
+
+            return false;
+        }
 
         private void txtUsername_Validating(object sender, CancelEventArgs e)
         {
@@ -74,9 +85,6 @@ namespace AccountingSystem.Views.Manage.Users.List
                 e.Cancel = true;
             }
         }
-
-
-
 
         private void txtUsername_Validated(object sender, EventArgs e)
         {
@@ -112,7 +120,7 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void txtFirstname_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epFirstName, txtFirstname, "firstname");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epFirstName, txtFirstname, "first name");
         }
 
         private void txtFirstname_Validated(object sender, EventArgs e)
@@ -132,17 +140,42 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void txtLastname_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epLastName, txtLastname, "lastname");
-        }
-
-        private void txtPassword_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epPassword, txtPassword, "password");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epLastName, txtLastname, "last name");
         }
 
         private void txtLastname_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(epLastName, txtLastname);
+        }
+
+        private void txtPassword_Validating(object sender, CancelEventArgs e)
+        {
+            if (Helper.ShowErrorTextBoxEmpty(epPassword, txtPassword, "password"))
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            if (PasswordDoesNotMatch(epPassword, txtPassword))
+            {
+                e.Cancel = true;
+                return;
+            }
+        }
+
+        private void txtPassword_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epPassword, txtPassword);
+        }
+
+        private void txtConfirmPassword_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epConfirmPassword, txtConfirmPassword, "confirm password");
+        }
+
+        private void txtConfirmPassword_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epConfirmPassword, txtConfirmPassword);
         }
     }
 }

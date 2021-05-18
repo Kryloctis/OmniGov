@@ -39,7 +39,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnRemoveAccount = new System.Windows.Forms.Button();
             this.btnEditAccount = new System.Windows.Forms.Button();
             this.btnAddAccount = new System.Windows.Forms.Button();
-            this.lblCollectingAccountableOfficer = new System.Windows.Forms.Label();
+            this.lblCollectingDisbursingOfficer = new System.Windows.Forms.Label();
             this.txtRCIORADA = new System.Windows.Forms.TextBox();
             this.lblRciOrADANo = new System.Windows.Forms.Label();
             this.txtPayee = new System.Windows.Forms.TextBox();
@@ -69,14 +69,16 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.label6 = new System.Windows.Forms.Label();
             this.epRefNo = new System.Windows.Forms.ErrorProvider(this.components);
             this.epCollectingOfficerPayee = new System.Windows.Forms.ErrorProvider(this.components);
-            this.cmbCollectingOfficer = new System.Windows.Forms.ComboBox();
+            this.cmbCollectingDisbursingOfficer = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtRefNo = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.lblCheckORPaidDate = new System.Windows.Forms.Label();
             this.dtpCheckORPaid = new System.Windows.Forms.DateTimePicker();
-            this.txtDVNo = new System.Windows.Forms.TextBox();
+            this.txtDVRCDNo = new System.Windows.Forms.TextBox();
             this.lblDVRCDNo = new System.Windows.Forms.Label();
+            this.txtCheckNo = new System.Windows.Forms.TextBox();
+            this.lblCheckNo = new System.Windows.Forms.Label();
             this.groupFunds.SuspendLayout();
             this.groupJournals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAccounts)).BeginInit();
@@ -133,7 +135,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnRemoveAccount.Location = new System.Drawing.Point(783, 525);
             this.btnRemoveAccount.Name = "btnRemoveAccount";
             this.btnRemoveAccount.Size = new System.Drawing.Size(75, 23);
-            this.btnRemoveAccount.TabIndex = 7;
+            this.btnRemoveAccount.TabIndex = 12;
             this.btnRemoveAccount.Text = "Remove";
             this.btnRemoveAccount.UseVisualStyleBackColor = true;
             this.btnRemoveAccount.Click += new System.EventHandler(this.btnRemoveAccount_Click);
@@ -143,7 +145,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnEditAccount.Location = new System.Drawing.Point(702, 525);
             this.btnEditAccount.Name = "btnEditAccount";
             this.btnEditAccount.Size = new System.Drawing.Size(75, 23);
-            this.btnEditAccount.TabIndex = 6;
+            this.btnEditAccount.TabIndex = 11;
             this.btnEditAccount.Text = "Edit...";
             this.btnEditAccount.UseVisualStyleBackColor = true;
             this.btnEditAccount.Click += new System.EventHandler(this.btnEditAccount_Click);
@@ -153,34 +155,34 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnAddAccount.Location = new System.Drawing.Point(621, 525);
             this.btnAddAccount.Name = "btnAddAccount";
             this.btnAddAccount.Size = new System.Drawing.Size(75, 23);
-            this.btnAddAccount.TabIndex = 5;
+            this.btnAddAccount.TabIndex = 10;
             this.btnAddAccount.Text = "Add...";
             this.btnAddAccount.UseVisualStyleBackColor = true;
             this.btnAddAccount.Click += new System.EventHandler(this.btnAddAccount_Click);
             // 
-            // lblCollectingAccountableOfficer
+            // lblCollectingDisbursingOfficer
             // 
-            this.lblCollectingAccountableOfficer.AutoSize = true;
-            this.lblCollectingAccountableOfficer.Location = new System.Drawing.Point(423, 287);
-            this.lblCollectingAccountableOfficer.Name = "lblCollectingAccountableOfficer";
-            this.lblCollectingAccountableOfficer.Size = new System.Drawing.Size(172, 15);
-            this.lblCollectingAccountableOfficer.TabIndex = 41;
-            this.lblCollectingAccountableOfficer.Text = "Collecting/Accountable Officer";
+            this.lblCollectingDisbursingOfficer.AutoSize = true;
+            this.lblCollectingDisbursingOfficer.Location = new System.Drawing.Point(423, 316);
+            this.lblCollectingDisbursingOfficer.Name = "lblCollectingDisbursingOfficer";
+            this.lblCollectingDisbursingOfficer.Size = new System.Drawing.Size(161, 15);
+            this.lblCollectingDisbursingOfficer.TabIndex = 41;
+            this.lblCollectingDisbursingOfficer.Text = "Collecting/Disbursing Officer";
             // 
             // txtRCIORADA
             // 
-            this.txtRCIORADA.Location = new System.Drawing.Point(542, 226);
+            this.txtRCIORADA.Location = new System.Drawing.Point(542, 255);
             this.txtRCIORADA.MaxLength = 30;
             this.txtRCIORADA.Name = "txtRCIORADA";
             this.txtRCIORADA.Size = new System.Drawing.Size(315, 23);
-            this.txtRCIORADA.TabIndex = 3;
+            this.txtRCIORADA.TabIndex = 7;
             this.txtRCIORADA.Validating += new System.ComponentModel.CancelEventHandler(this.txtRefNo_Validating);
             this.txtRCIORADA.Validated += new System.EventHandler(this.txtRefNo_Validated);
             // 
             // lblRciOrADANo
             // 
             this.lblRciOrADANo.AutoSize = true;
-            this.lblRciOrADANo.Location = new System.Drawing.Point(423, 229);
+            this.lblRciOrADANo.Location = new System.Drawing.Point(423, 258);
             this.lblRciOrADANo.Name = "lblRciOrADANo";
             this.lblRciOrADANo.Size = new System.Drawing.Size(97, 15);
             this.lblRciOrADANo.TabIndex = 39;
@@ -192,7 +194,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.txtPayee.MaxLength = 99;
             this.txtPayee.Name = "txtPayee";
             this.txtPayee.Size = new System.Drawing.Size(315, 23);
-            this.txtPayee.TabIndex = 4;
+            this.txtPayee.TabIndex = 2;
             this.txtPayee.Validating += new System.ComponentModel.CancelEventHandler(this.txtPayeeCollectingOfficer_Validating);
             this.txtPayee.Validated += new System.EventHandler(this.txtPayeeCollectingOfficer_Validated);
             // 
@@ -211,10 +213,10 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.Subsidiary,
             this.Debit,
             this.Credit});
-            this.dgAccounts.Location = new System.Drawing.Point(4, 328);
+            this.dgAccounts.Location = new System.Drawing.Point(4, 346);
             this.dgAccounts.Name = "dgAccounts";
             this.dgAccounts.RowTemplate.Height = 25;
-            this.dgAccounts.Size = new System.Drawing.Size(854, 191);
+            this.dgAccounts.Size = new System.Drawing.Size(854, 173);
             this.dgAccounts.TabIndex = 37;
             this.dgAccounts.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgAccounts_RowHeaderMouseDoubleClick);
             this.dgAccounts.SelectionChanged += new System.EventHandler(this.dgAccounts_SelectionChanged);
@@ -310,8 +312,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.txtExplanation.MaxLength = 250;
             this.txtExplanation.Multiline = true;
             this.txtExplanation.Name = "txtExplanation";
-            this.txtExplanation.Size = new System.Drawing.Size(315, 52);
-            this.txtExplanation.TabIndex = 1;
+            this.txtExplanation.Size = new System.Drawing.Size(315, 81);
+            this.txtExplanation.TabIndex = 3;
             // 
             // label3
             // 
@@ -336,7 +338,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.dtpDateEntry.Location = new System.Drawing.Point(542, 168);
             this.dtpDateEntry.Name = "dtpDateEntry";
             this.dtpDateEntry.Size = new System.Drawing.Size(315, 23);
-            this.dtpDateEntry.TabIndex = 2;
+            this.dtpDateEntry.TabIndex = 4;
             this.dtpDateEntry.ValueChanged += new System.EventHandler(this.dtpDateEntry_ValueChanged);
             // 
             // label1
@@ -387,6 +389,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.txtDebitTotal.ReadOnly = true;
             this.txtDebitTotal.Size = new System.Drawing.Size(100, 23);
             this.txtDebitTotal.TabIndex = 47;
+            this.txtDebitTotal.TabStop = false;
             this.txtDebitTotal.Text = "0.00";
             this.txtDebitTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -397,6 +400,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.txtCreditTotal.ReadOnly = true;
             this.txtCreditTotal.Size = new System.Drawing.Size(100, 23);
             this.txtCreditTotal.TabIndex = 49;
+            this.txtCreditTotal.TabStop = false;
             this.txtCreditTotal.Text = "0.00";
             this.txtCreditTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -417,14 +421,14 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.epCollectingOfficerPayee.ContainerControl = this;
             // 
-            // cmbCollectingOfficer
+            // cmbCollectingDisbursingOfficer
             // 
-            this.cmbCollectingOfficer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCollectingOfficer.FormattingEnabled = true;
-            this.cmbCollectingOfficer.Location = new System.Drawing.Point(542, 284);
-            this.cmbCollectingOfficer.Name = "cmbCollectingOfficer";
-            this.cmbCollectingOfficer.Size = new System.Drawing.Size(315, 23);
-            this.cmbCollectingOfficer.TabIndex = 50;
+            this.cmbCollectingDisbursingOfficer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCollectingDisbursingOfficer.FormattingEnabled = true;
+            this.cmbCollectingDisbursingOfficer.Location = new System.Drawing.Point(542, 313);
+            this.cmbCollectingDisbursingOfficer.Name = "cmbCollectingDisbursingOfficer";
+            this.cmbCollectingDisbursingOfficer.Size = new System.Drawing.Size(315, 23);
+            this.cmbCollectingDisbursingOfficer.TabIndex = 9;
             // 
             // label4
             // 
@@ -435,12 +439,12 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.label4.TabIndex = 51;
             this.label4.Text = "Payee";
             // 
-            // textBox1
+            // txtRefNo
             // 
-            this.textBox1.Location = new System.Drawing.Point(81, 197);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(315, 23);
-            this.textBox1.TabIndex = 52;
+            this.txtRefNo.Location = new System.Drawing.Point(81, 197);
+            this.txtRefNo.Name = "txtRefNo";
+            this.txtRefNo.Size = new System.Drawing.Size(315, 23);
+            this.txtRefNo.TabIndex = 1;
             // 
             // label7
             // 
@@ -465,37 +469,56 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.dtpCheckORPaid.Location = new System.Drawing.Point(542, 197);
             this.dtpCheckORPaid.Name = "dtpCheckORPaid";
             this.dtpCheckORPaid.Size = new System.Drawing.Size(315, 23);
-            this.dtpCheckORPaid.TabIndex = 54;
+            this.dtpCheckORPaid.TabIndex = 5;
             // 
-            // txtDVNo
+            // txtDVRCDNo
             // 
-            this.txtDVNo.Location = new System.Drawing.Point(542, 255);
-            this.txtDVNo.MaxLength = 30;
-            this.txtDVNo.Name = "txtDVNo";
-            this.txtDVNo.Size = new System.Drawing.Size(315, 23);
-            this.txtDVNo.TabIndex = 56;
+            this.txtDVRCDNo.Location = new System.Drawing.Point(542, 284);
+            this.txtDVRCDNo.MaxLength = 30;
+            this.txtDVRCDNo.Name = "txtDVRCDNo";
+            this.txtDVRCDNo.Size = new System.Drawing.Size(315, 23);
+            this.txtDVRCDNo.TabIndex = 8;
             // 
             // lblDVRCDNo
             // 
             this.lblDVRCDNo.AutoSize = true;
-            this.lblDVRCDNo.Location = new System.Drawing.Point(423, 258);
+            this.lblDVRCDNo.Location = new System.Drawing.Point(423, 287);
             this.lblDVRCDNo.Name = "lblDVRCDNo";
             this.lblDVRCDNo.Size = new System.Drawing.Size(72, 15);
             this.lblDVRCDNo.TabIndex = 57;
             this.lblDVRCDNo.Text = "DV/RCD No.";
             // 
+            // txtCheckNo
+            // 
+            this.txtCheckNo.Location = new System.Drawing.Point(542, 226);
+            this.txtCheckNo.MaxLength = 30;
+            this.txtCheckNo.Name = "txtCheckNo";
+            this.txtCheckNo.Size = new System.Drawing.Size(315, 23);
+            this.txtCheckNo.TabIndex = 6;
+            // 
+            // lblCheckNo
+            // 
+            this.lblCheckNo.AutoSize = true;
+            this.lblCheckNo.Location = new System.Drawing.Point(423, 229);
+            this.lblCheckNo.Name = "lblCheckNo";
+            this.lblCheckNo.Size = new System.Drawing.Size(62, 15);
+            this.lblCheckNo.TabIndex = 61;
+            this.lblCheckNo.Text = "Check No.";
+            // 
             // ucJEV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.txtDVNo);
+            this.Controls.Add(this.txtCheckNo);
+            this.Controls.Add(this.lblCheckNo);
+            this.Controls.Add(this.txtDVRCDNo);
             this.Controls.Add(this.lblDVRCDNo);
             this.Controls.Add(this.lblCheckORPaidDate);
             this.Controls.Add(this.dtpCheckORPaid);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtRefNo);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.cmbCollectingOfficer);
+            this.Controls.Add(this.cmbCollectingDisbursingOfficer);
             this.Controls.Add(this.txtCreditTotal);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtDebitTotal);
@@ -504,7 +527,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.Controls.Add(this.btnRemoveAccount);
             this.Controls.Add(this.btnEditAccount);
             this.Controls.Add(this.btnAddAccount);
-            this.Controls.Add(this.lblCollectingAccountableOfficer);
+            this.Controls.Add(this.lblCollectingDisbursingOfficer);
             this.Controls.Add(this.txtRCIORADA);
             this.Controls.Add(this.lblRciOrADANo);
             this.Controls.Add(this.txtPayee);
@@ -536,7 +559,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.Button btnRemoveAccount;
         private System.Windows.Forms.Button btnEditAccount;
         private System.Windows.Forms.Button btnAddAccount;
-        private System.Windows.Forms.Label lblCollectingAccountableOfficer;
+        private System.Windows.Forms.Label lblCollectingDisbursingOfficer;
         private System.Windows.Forms.Label lblRciOrADANo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -570,13 +593,15 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFunds;
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelJournals;
         private System.Windows.Forms.GroupBox groupFunds;
-        internal System.Windows.Forms.ComboBox cmbCollectingOfficer;
-        private System.Windows.Forms.TextBox textBox1;
+        internal System.Windows.Forms.ComboBox cmbCollectingDisbursingOfficer;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblCheckORPaidDate;
         internal System.Windows.Forms.DateTimePicker dtpCheckORPaid;
-        internal System.Windows.Forms.TextBox txtDVNo;
+        internal System.Windows.Forms.TextBox txtDVRCDNo;
         private System.Windows.Forms.Label lblDVRCDNo;
+        internal System.Windows.Forms.TextBox txtCheckNo;
+        private System.Windows.Forms.Label lblCheckNo;
+        internal System.Windows.Forms.TextBox txtRefNo;
     }
 }

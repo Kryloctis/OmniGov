@@ -24,6 +24,9 @@ namespace ACC.Domain.Interfaces
         DataTable GetHeaderOthersFPP(int fppID, int allotment_classes_id, int funds_id, short year);
 
 
+        DataTable GetViewRecords();
+
+
         #region Validations
 
         bool BudgetAppropriationExist(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int generalLedgerAccountId, short year);
