@@ -16,6 +16,34 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+            btnSave.Click += new EventHandler(BtnSave_Click);
+            btnDelete.Click += new EventHandler(BtnDelete_Click);
+            btnCancel.Click += new EventHandler(BtnCancel_CLick);
+            btnSearch.Click += new EventHandler(BtnSearch_Click);
+            btnCancel.Enabled = false;
+            btnDelete.Enabled = false;
         }
+
+
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnCancel_CLick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

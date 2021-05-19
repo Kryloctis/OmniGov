@@ -10,11 +10,15 @@ namespace ACC.Domain.Interfaces
     {
         DataTable GetRecordsByBudgetAppropriationID(int budgetAppropriationID);
 
+
+
         DataTable GetRecordsByBudgetAppropriationID(int budgetAppropriationID, string allotmentReleaseNum);
 
-        decimal GetViewTotalAllotmentReleaseAmountYear(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, DateTime dateIssued);
+        decimal GetTotalAllotmentReleaseByDateYear(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, DateTime dateIssued,  short year);
 
-        decimal GetTotalAllotmentReleaseAmount(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int AccountId);
+        decimal GetTotalAllotmentReleaseByYear(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int AccountId, short year);
+
+
 
         decimal GetViewTotalAllotmentReleaseAmountById(int budgetAppropriationId);
 

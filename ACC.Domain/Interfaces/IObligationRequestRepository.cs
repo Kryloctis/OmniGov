@@ -6,5 +6,10 @@ namespace ACC.Domain.Interfaces
 {
     public interface IObligationRequestRepository : IRepository<ObligationRequestModel>
     {
+        bool ObligationRequestNoExist(string obligationNo);
+
+        bool ObligationRequestNoExist(int Id, string obligationNo);
+
+        decimal TotalObligationRequestByYear(int fundsId, int fppId, int? otherFPPId, int allotmentClassId, short year);
     }
 }
