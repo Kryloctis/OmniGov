@@ -12,10 +12,68 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 {
     public partial class frmObligationRequestAdd : Form
     {
-        public frmObligationRequestAdd()
+        private ucObligationRequestMain _ucObligationRequestMain;
+        private ucObligationRequest uc;
+
+        public frmObligationRequestAdd(ucObligationRequestMain ucObligationRequestMain)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+            uc = ucObligationRequest1;
+            _ucObligationRequestMain = ucObligationRequestMain;
+            uc.LoadReferences(_ucObligationRequestMain);
+        }
+
+        private bool AddToListRecord() 
+        {
+            try
+            {
+                if (!uc.ValidateChildren()) 
+                {
+                    Helper.MessageBoxError(uc.GetFormErrors());
+                    return false;
+                }
+
+                int accountId = Convert.ToInt32(uc.cmbxAccount.SelectedValue);
+                string accountName = uc.cmbxAccount.Text;
+                decimal obligationAmount = uc.nudAmount.Value;
+
+                var items = new object[]
+                {
+                    accountId,
+                    accountName,
+                    obligationAmount
+                };
+
+                _ucObligationRequestMain.dataGridView1.Rows.Add(items);
+
+                return true;
+            
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void btnAddToList_Click(object sender, EventArgs e)
+        {
+            if (AddToListRecord()) 
+            {
+                uc.ResetForm();
+                uc.GetTotalAllotmentBalance();
+                _ucObligationRequestMain.cmbxFPP.Enabled = false;
+                _ucObligationRequestMain.cmbxOtherFPP.Enabled = false;
+                _ucObligationRequestMain.flowLayoutPanelFunds.Enabled = false;
+                _ucObligationRequestMain.flowLayoutPanelAllotmentClass.Enabled = false;
+                _ucObligationRequestMain.dtDateRequest.Enabled = false;
+            }
+        }
+
+        private void frmObligationRequestAdd_Load(object sender, EventArgs e)
+        {
+          
         }
     }
 }

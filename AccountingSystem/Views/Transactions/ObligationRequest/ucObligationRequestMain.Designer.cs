@@ -272,6 +272,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.Size = new System.Drawing.Size(541, 237);
             this.dataGridView1.TabIndex = 12;
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // btnRemove
             // 
@@ -281,6 +282,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnRemove.TabIndex = 15;
             this.btnRemove.Text = "Remove";
             this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // btnEdit
             // 
@@ -374,28 +376,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFunds;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelAllotmentClass;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         internal System.Windows.Forms.ComboBox cmbxOtherFPP;
         internal System.Windows.Forms.ComboBox cmbxFPP;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
         internal System.Windows.Forms.MaskedTextBox mskTxtObligationNoTemplate;
         internal System.Windows.Forms.DateTimePicker dtDateRequest;
         internal System.Windows.Forms.MaskedTextBox mskTxtObligationNoSeries;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
         internal System.Windows.Forms.TextBox txtExplanation;
         internal System.Windows.Forms.TextBox txtPayee;
         internal System.Windows.Forms.TextBox txtReferenceNo;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.DataGridView dataGridView1;
         internal System.Windows.Forms.Button btnAdd;
         internal System.Windows.Forms.Button btnEdit;
         internal System.Windows.Forms.Button btnRemove;
@@ -406,5 +394,18 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.ErrorProvider epExplanation;
         internal System.Windows.Forms.ErrorProvider epObligationRequest;
         internal System.Windows.Forms.ErrorProvider epPayee;
+        internal System.Windows.Forms.GroupBox groupBox1;
+        internal System.Windows.Forms.GroupBox groupBox2;
+        internal System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.Label label2;
+        internal System.Windows.Forms.Label label3;
+        internal System.Windows.Forms.Label label4;
+        internal System.Windows.Forms.Label label5;
+        internal System.Windows.Forms.Label label6;
+        internal System.Windows.Forms.Label label7;
+        internal System.Windows.Forms.Label label8;
+        internal System.Windows.Forms.DataGridView dataGridView1;
+        internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFunds;
+        internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelAllotmentClass;
     }
 }

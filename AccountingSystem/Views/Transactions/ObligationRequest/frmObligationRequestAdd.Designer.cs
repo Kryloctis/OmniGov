@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.ucObligationRequest1 = new AccountingSystem.Views.Transactions.ObligationRequest.ucObligationRequest();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnAddToList = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +47,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
-            this.flowLayoutPanel1.Controls.Add(this.btnAdd);
+            this.flowLayoutPanel1.Controls.Add(this.btnAddToList);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 169);
@@ -61,23 +61,26 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(91, 23);
             this.btnCancel.TabIndex = 1;
-            this.btnCancel.Text = "&Cancel";
+            this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // btnAdd
+            // btnAddToList
             // 
-            this.btnAdd.Location = new System.Drawing.Point(343, 3);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(91, 23);
-            this.btnAdd.TabIndex = 0;
-            this.btnAdd.Text = "&Add to List";
-            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAddToList.Location = new System.Drawing.Point(343, 3);
+            this.btnAddToList.Name = "btnAddToList";
+            this.btnAddToList.Size = new System.Drawing.Size(91, 23);
+            this.btnAddToList.TabIndex = 0;
+            this.btnAddToList.Text = "Add to List";
+            this.btnAddToList.UseVisualStyleBackColor = true;
+            this.btnAddToList.Click += new System.EventHandler(this.btnAddToList_Click);
             // 
             // frmObligationRequestAdd
             // 
+            this.AcceptButton = this.btnAddToList;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(534, 198);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ucObligationRequest1);
@@ -88,6 +91,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Obligation Request";
+            this.Load += new System.EventHandler(this.frmObligationRequestAdd_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -95,8 +99,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         #endregion
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button btnAdd;
         internal System.Windows.Forms.Button btnCancel;
         internal ucObligationRequest ucObligationRequest1;
+        internal System.Windows.Forms.Button btnAddToList;
     }
 }

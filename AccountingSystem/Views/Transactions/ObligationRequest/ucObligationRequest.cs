@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,12 +19,33 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal int fundId;
         internal int allotmentClassId;
         internal DateTime dateRequested;
+        private ucObligationRequestMain _ucObligationRequestMain;
+        private decimal totalAllotmentReleaseBalance;
 
         public ucObligationRequest()
         {
             InitializeComponent();
         }
 
+        internal void LoadReferences(ucObligationRequestMain ucObligationRequestMain) 
+        {
+            _ucObligationRequestMain = ucObligationRequestMain; 
+        }
+
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[2];
+            errorArray[0] = epAccount.GetError(cmbxAccount);
+            errorArray[1] = epAmount.GetError(nudAmount);
+
+            IError _errors = Factory.CreateErrors(errorArray);
+            return _errors.GenerateErrorMessage();
+        }
+
+        internal void ResetForm() 
+        {
+            nudAmount.Value = 0;
+        }
 
         private void GetTotalAllotmentRelease()
         {
@@ -35,25 +57,57 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             
         }
 
-        private void GetTotalAllotmentBalance() 
+        internal void GetTotalAllotmentBalance()
         {
             int accountId = Convert.ToInt32(cmbxAccount.SelectedValue);
 
+            //Get Total Allotment Release By Year and has if it is continuing or not
             decimal totalAllotmentReleaseByYear = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseByYear(fundId, fppId, otherFPPId, allotmentClassId, accountId, Convert.ToInt16(dateRequested.Year));
 
+            //Get Total Allotment Release By Date and has if it is continuing or not
             decimal totalAllotmentReleaseByDate = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseByDateYear(fundId, fppId, otherFPPId, allotmentClassId, accountId, dateRequested, Convert.ToInt16(dateRequested.Year));
 
+            // Get Total Obligations by year
             decimal totalObligations = Factory.ObligationRequestRepository().TotalObligationRequestByYear(fundId, fppId, otherFPPId, allotmentClassId, Convert.ToInt16(dateRequested.Year));
 
+            //Get Total Allotment Release Balance By Year
             decimal totalAllotmentReleaseBalanceByYear = totalAllotmentReleaseByYear - totalObligations;
 
-            decimal finalAllotmentReleaseBalance = totalAllotmentReleaseBalanceByYear > totalAllotmentReleaseByDate ? totalAllotmentReleaseByDate : totalAllotmentReleaseBalanceByYear;
+            decimal AllotmentReleaseBalanceByDate = totalAllotmentReleaseBalanceByYear > totalAllotmentReleaseByDate ? totalAllotmentReleaseByDate : totalAllotmentReleaseBalanceByYear;
 
-            txtBalance.Text = finalAllotmentReleaseBalance.ToString("N2");
+            decimal OnListItemsAmount = GetOnListItemsAmounts(accountId);
+
+            decimal finalAllotmenReleaseBalance = AllotmentReleaseBalanceByDate - OnListItemsAmount;
+            totalAllotmentReleaseBalance = finalAllotmenReleaseBalance;
+
+            txtBalance.Text = finalAllotmenReleaseBalance.ToString("N2");
 
             txtAllotmentAmount.Text = totalAllotmentReleaseByDate.ToString("N2");
 
-            //decimal totalObligations = Factory.ObligationAccountRepository().
+        }
+
+        private decimal GetOnListItemsAmounts(int accountId)
+        {
+            decimal OnListItemsAmount = 0;
+
+            if (_ucObligationRequestMain.dataGridView1.Rows.Count == 0)
+                OnListItemsAmount = 0;
+            else
+            {
+                foreach (DataGridViewRow item in _ucObligationRequestMain.dataGridView1.Rows)
+                {
+                    var rowIndex = _ucObligationRequestMain.dataGridView1.CurrentCell.RowIndex;
+                    int rowAccountId = Convert.ToInt32(_ucObligationRequestMain.dataGridView1.Rows[rowIndex].Cells["account_id"].Value);
+                    decimal rowAmount = Convert.ToDecimal(_ucObligationRequestMain.dataGridView1.Rows[rowIndex].Cells["amount"].Value);
+
+                    if (accountId == rowAccountId)
+                    {
+                        OnListItemsAmount += rowAmount;
+                    }
+                }
+            }
+            
+            return OnListItemsAmount;
         }
 
         private void LoadAccounts()
@@ -61,6 +115,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             try
             {
                 cmbxAccount.SelectedValueChanged -= new EventHandler(cmbxAccount_SelectedValueChanged);
+                cmbxAccount.TextChanged -= new EventHandler(cmbxAccount_TextChanged);
 
                 var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
 
@@ -99,12 +154,18 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void cmbxAccount_TextChanged(object sender, EventArgs e)
         {
-            if (AccountNameNotExist() || string.IsNullOrEmpty(cmbxAccount.Text))
+            if (string.IsNullOrEmpty(cmbxAccount.Text))
+            {
+                LoadAccounts();
+            }
+            else if (ShowErrorAccountNameNotExist() && string.IsNullOrEmpty(cmbxAccount.Text))
+            {
                 txtAllotmentAmount.Text = "0.00";
-
+                txtBalance.Text = "0.00";
+            }
         }
 
-        private bool AccountNameNotExist()
+        private bool ShowErrorAccountNameNotExist()
         {
             try
             {
@@ -125,50 +186,13 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             if (string.IsNullOrEmpty(cmbxAccount.Text))
                 e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbxAccount, "Account");
-            else if (AccountNameNotExist())
-                e.Cancel = AccountNameNotExist();
+            else if (ShowErrorAccountNameNotExist())
+                e.Cancel = ShowErrorAccountNameNotExist();
         }
 
         private void cmbxAccount_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(epAccount, cmbxAccount);
-        }
-
-
-
-        private bool AmountIsZero() 
-        {
-            try
-            {
-                if (nudAmount.Value == 0 && !string.IsNullOrEmpty(nudAmount.Text))
-                {
-                    epAmount.SetError(nudAmount, "Please enter a valuable amount.");
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private void nudAmount_Validating(object sender, CancelEventArgs e)
-        {
-            if (string.IsNullOrEmpty(nudAmount.Text))
-                e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
-            else if (AmountIsZero())
-                e.Cancel = AmountIsZero();
-        }
-
-        private void ucObligationRequest_Load(object sender, EventArgs e)
-        {
-            if (!DesignMode) 
-            {
-                LoadAccounts();
-                GetTotalAllotmentRelease();
-                GetTotalAllotmentBalance();
-            }
         }
 
         private void cmbxAccount_KeyDown(object sender, KeyEventArgs e)
@@ -224,6 +248,69 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             GetTotalAllotmentRelease();
             GetTotalAllotmentBalance();
+        }
+
+
+
+        private bool ShowErrorAmountIsZero()
+        {
+            try
+            {
+                if (nudAmount.Value == 0 && !string.IsNullOrEmpty(nudAmount.Text))
+                {
+                    epAmount.SetError(nudAmount, "Please enter a valuable amount.");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private bool ShowErrorAmountExceeds() 
+        {
+            try
+            {
+                if (nudAmount.Value > totalAllotmentReleaseBalance)
+                {
+                    epAmount.SetError(nudAmount, "Amount you entered exceeds to the alloted balance.");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void nudAmount_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(nudAmount.Text))
+                e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
+            else if (ShowErrorAmountIsZero())
+                e.Cancel = ShowErrorAmountIsZero();
+            else
+                e.Cancel = ShowErrorAmountExceeds();
+        }
+
+        private void nudAmount_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
+        }
+
+
+
+        private void ucObligationRequest_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadAccounts();
+                GetTotalAllotmentRelease();
+                GetTotalAllotmentBalance();
+            }
         }
     }
 }

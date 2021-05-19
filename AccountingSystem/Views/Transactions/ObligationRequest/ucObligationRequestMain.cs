@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,13 +15,59 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
     {
         internal int obligationRequestId = 0;
         internal int fundId;
-        internal int  allotmentClassId;
+        internal int allotmentClassId;
 
         public ucObligationRequestMain()
         {
             InitializeComponent();
         }
 
+
+        private void CheckedFund(int radFundId)
+        {
+            flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => (Convert.ToInt32(r.Tag) == radFundId) ? r.Checked = true : r.Checked = false);
+            fundId = radFundId;
+        }
+
+        private void CheckedAllotmentClass (int radAllotmentClassId)
+        {
+            flowLayoutPanelAllotmentClass.Controls.OfType<RadioButton>().FirstOrDefault(r => (Convert.ToInt32(r.Tag) == radAllotmentClassId) ? r.Checked = true : r.Checked = false);
+            allotmentClassId = radAllotmentClassId;
+        }
+
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[6];
+            errorArray[0] = epFPP.GetError(cmbxFPP);
+            errorArray[1] = epOtherFPP.GetError(cmbxOtherFPP);
+            errorArray[2] = epObligationNo.GetError(mskTxtObligationNoTemplate);
+            errorArray[3] = epReferenceNo.GetError(txtReferenceNo);
+            errorArray[4] = epPayee.GetError(txtPayee);
+            errorArray[5] = epExplanation.GetError(txtExplanation);
+
+            IError _errors = Factory.CreateErrors(errorArray);
+            return _errors.GenerateErrorMessage();
+        }
+
+
+        internal void ResetForm() 
+        {
+            cmbxFPP.Enabled = true;
+            cmbxOtherFPP.Enabled = true;
+            flowLayoutPanelFunds.Enabled = true;
+            flowLayoutPanelAllotmentClass.Enabled = true;
+            dtDateRequest.Enabled = true;
+            cmbxFPP.SelectedIndex = -1;
+            cmbxOtherFPP.SelectedIndex = -1;
+            CheckedFund(1);
+            CheckedAllotmentClass(1);
+            mskTxtObligationNoSeries.Text = string.Empty;
+            dtDateRequest.Value = DateTime.Now;
+            txtReferenceNo.Text = string.Empty;
+            txtPayee.Text = string.Empty;
+            txtExplanation.Text = string.Empty;
+            dataGridView1.Rows.Clear();
+        }
 
         private void LoadDatagridFormat()
         {
@@ -30,7 +77,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
             dataGridView1.Columns["account_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
             dataGridView1.Columns["account_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dataGridView1.Columns["account_name"].Width = 400;
             dataGridView1.Columns["amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dataGridView1.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView1.Columns["amount"].DefaultCellStyle.Format = "N2";
 
             dataGridView1.Columns["account_id"].Visible = false;
             Helper.DatagridDefaultStyle(dataGridView1, true);
@@ -76,7 +126,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 cmbxOtherFPP.Enabled = true;
             }
             else
+            {
                 cmbxOtherFPP.Enabled = false;
+                cmbxOtherFPP.SelectedIndex = -1;
+                cmbxOtherFPP.Text = string.Empty;
+            }
         }
 
         private void CmbxFPP_SelectedValueChanged(object sender, EventArgs e)
@@ -108,6 +162,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             else
                 radioButton.Image = null;
         }
+
 
 
 
@@ -214,6 +269,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 LoadDatagridFormat();
                 mskTxtObligationNoTemplate.Text = GenerateObligationRequestNoTemplate();
                 cmbxOtherFPP.Enabled = false;
+                btnEdit.Enabled = false;
+                btnRemove.Enabled = false;
             }
         }
 
@@ -224,7 +281,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
 
 
-        private bool FPPNameNotExist() 
+        private bool ShowErrorFPPNameNotExist() 
         {
             try
             {
@@ -251,7 +308,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             if (string.IsNullOrEmpty(cmbxFPP.Text))
                 e.Cancel = Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP");
             else
-                e.Cancel = FPPNameNotExist();
+                e.Cancel = ShowErrorFPPNameNotExist();
         }
 
         private void cmbxFPP_Validated(object sender, EventArgs e)
@@ -262,7 +319,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
 
 
-        private bool OthersFPPNameNotExist()
+        private bool ShowErrorOthersFPPNameNotExist()
         {
             try
             {
@@ -286,7 +343,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void cmbxOtherFPP_Validating(object sender, CancelEventArgs e)
         {
-                e.Cancel = OthersFPPNameNotExist();
+                e.Cancel = ShowErrorOthersFPPNameNotExist();
         }
 
         private void cmbxOtherFPP_Validated(object sender, EventArgs e)
@@ -297,7 +354,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
 
 
-        private bool ObligationRequestNoEmpty() 
+        private bool ShowErrorObligationRequestNoEmpty() 
         {
             if (!mskTxtObligationNoSeries.MaskCompleted)
             {
@@ -308,7 +365,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 return false;
         }
 
-        private bool ObligationRequestNoExist() 
+        private bool ShowErrorObligationRequestNoExist() 
         {
             try
             {
@@ -337,10 +394,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void mskTxtObligationNoSeries_Validating(object sender, CancelEventArgs e)
         {
-            if (ObligationRequestNoEmpty())
-                e.Cancel = ObligationRequestNoEmpty();
-            else if (ObligationRequestNoExist())
-                e.Cancel = ObligationRequestNoExist();
+            if (ShowErrorObligationRequestNoEmpty())
+                e.Cancel = ShowErrorObligationRequestNoEmpty();
+            else if (ShowErrorObligationRequestNoExist())
+                e.Cancel = ShowErrorObligationRequestNoExist();
 
         }
 
@@ -387,6 +444,39 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
 
 
+
+        internal string GetFormErrorsAdd()
+        {
+            var errorArray = new string[2];
+            errorArray[0] = epFPP.GetError(cmbxFPP);
+            errorArray[1] = epOtherFPP.GetError(cmbxOtherFPP);
+
+            IError _errors = Factory.CreateErrors(errorArray);
+            return _errors.GenerateErrorMessage();
+        }
+
+        private bool ValidateChildrenAdd()
+        {
+            try
+            {
+                if (ShowErrorFPPNameNotExist() || Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP") || ShowErrorOthersFPPNameNotExist())
+                {
+                    Helper.MessageBoxError(GetFormErrorsAdd());
+                    return false;
+                }
+
+                Helper.ClearErrorComboBox(epFPP, cmbxFPP);
+                Helper.ClearErrorComboBox(epOtherFPP, cmbxOtherFPP);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             ShowObligationRequestAdd();
@@ -394,16 +484,58 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void ShowObligationRequestAdd()
         {
-            var frmObligationRequestAdd = new frmObligationRequestAdd();
-            var ucObligationRequestAdd = frmObligationRequestAdd.ucObligationRequest1;
+            if (ValidateChildrenAdd()) 
+            {
+                var frmObligationRequestAdd = new frmObligationRequestAdd(this);
+                var ucObligationRequestAdd = frmObligationRequestAdd.ucObligationRequest1;
 
-            ucObligationRequestAdd.fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
-            ucObligationRequestAdd.otherFPPId = string.IsNullOrEmpty(cmbxOtherFPP.Text)? null : Convert.ToInt32(cmbxOtherFPP.SelectedValue);
-            ucObligationRequestAdd.fundId = fundId;
-            ucObligationRequestAdd.allotmentClassId = allotmentClassId;
-            ucObligationRequestAdd.dateRequested = dtDateRequest.Value;
+                ucObligationRequestAdd.fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
+                ucObligationRequestAdd.otherFPPId = string.IsNullOrEmpty(cmbxOtherFPP.Text) ? null : Convert.ToInt32(cmbxOtherFPP.SelectedValue);
+                ucObligationRequestAdd.fundId = fundId;
+                ucObligationRequestAdd.allotmentClassId = allotmentClassId;
+                ucObligationRequestAdd.dateRequested = dtDateRequest.Value;
 
-            frmObligationRequestAdd.ShowDialog();
+                frmObligationRequestAdd.ShowDialog();
+            }
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow item in dataGridView1.SelectedRows)
+            {
+                dataGridView1.Rows.Remove(item);
+            }
+        }
+
+
+
+        private void EnableDisableButtons()
+        {
+            int selectedRowCount = dataGridView1.SelectedRows.Count;
+
+            if (selectedRowCount == 1)
+            {
+                btnEdit.Enabled = true;
+                btnRemove.Enabled = true;
+                btnRemove.Text = "Remove (" + selectedRowCount + ")";
+            }
+            else if (selectedRowCount > 1)
+            {
+                btnEdit.Enabled = false;
+                btnRemove.Enabled = true;
+                btnRemove.Text = "Remove (" + selectedRowCount + ")";
+            }
+            else
+            {
+                btnEdit.Enabled = false;
+                btnRemove.Enabled = false;
+                btnRemove.Text = "Remove";
+            }
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            EnableDisableButtons();
         }
     }
 }

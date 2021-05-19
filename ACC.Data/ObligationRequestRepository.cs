@@ -8,11 +8,10 @@ namespace ACC.Data
 {
     public class ObligationRequestRepository : IObligationRequestRepository
     {
-
-        private MySqlGenericCommands _mySqlGenericCommands;
-
         private readonly string tableName = "obligation_request";
         private readonly string viewTableName = "view_obligation_request";
+
+        private MySqlGenericCommands _mySqlGenericCommands;
 
         public ObligationRequestRepository(MySqlGenericCommands mySqlGenericCommands)
         {
@@ -59,9 +58,6 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-
-
-        //Validations
 
         public bool ObligationRequestNoExist(string obligationNo)
         {

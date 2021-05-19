@@ -154,6 +154,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.nudAmount.TabIndex = 9;
             this.nudAmount.ThousandsSeparator = true;
             this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
+            this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
             // 
             // epAccount
             // 
