@@ -577,6 +577,44 @@ namespace ACC.Data
             return false;
         }
 
+        public DataTable GetViewRecords()
+        {
+            try
+            {
+                string query = $"SELECT " +
+                    $"id, " +
+                    $"funds_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"fpp_id, " +
+                    $"fpp_code, " +
+                    $"fpp_name, " +
+                    $"others_fpp_id, " +
+                    $"others_fpp_name, " +
+                    $"allotment_class_id, " +
+                    $"allotment_class_code, " +
+                    $"allotment_class_name, " +
+                    $"general_ledger_accounts_id, " +
+                    $"general_ledger_accounts_code, " +
+                    $"general_ledger_accounts_name, " +
+                    $"account_code, " +
+                    $"date_entry, " +
+                    $"year, " +
+                    $"amount, " +
+                    $"continuing, " +
+                    $"created_at, " +
+                    $"updated_at " +
+                    $"FROM {viewTableName} ";
+
+                var dtBudgetAppropriations = new DataTable();
+                return mySqlGenericCommands.Fill(query, dtBudgetAppropriations);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         #endregion Validations
 
     }

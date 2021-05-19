@@ -21,6 +21,8 @@ using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Manage.DisbursingOfficer;
 using AccountingSystem.Views.Manage.AccountableForm;
 using AccountingSystem.Views.Transactions.ObligationRequest;
+using AccountingSystem.Views.Reports.PaymentCollection;
+using AccountingSystem.Views.Transactions.PaymentCollection;
 
 namespace AccountingSystem
 {
@@ -307,7 +309,7 @@ namespace AccountingSystem
         {
             _ = new frmAccountable().ShowDialog();
         }
-
+        
         private void menuLogout_Click(object sender, EventArgs e)
         {
             Close();
@@ -322,6 +324,15 @@ namespace AccountingSystem
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             loginForm.Show();
+        }
+        private void menuprintPC_Click(object sender, EventArgs e)
+        {
+            _ = new frmPCReport().ShowDialog();
+        }
+
+        private void menuPayments_Click(object sender, EventArgs e)
+        {
+            _ = new frmPaymentCollection().ShowDialog();
         }
     }
 }
