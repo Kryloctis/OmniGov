@@ -141,6 +141,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             glaId = Id;
             txtledger.Text = value;
         }
+        public void loadSelectedSubsidiary(int Id, string value)
+        {
+            slaId= Id;
+            txtsubsidiary.Text = value;
+        }
 
         private void btnaccountable_Click(object sender, EventArgs e)
         {
