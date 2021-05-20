@@ -9,6 +9,8 @@ namespace ACC.Data
 {
     public class ObligationAccountRepository : IObligationAccountRepository
     {
+        private readonly string tableName = "obligation_account";
+
         private MySqlGenericCommands _mySqlGenericCommands;
 
         public ObligationAccountRepository(MySqlGenericCommands mySqlGenericCommands)
@@ -48,7 +50,30 @@ namespace ACC.Data
 
         public bool Insert(ObligationAccountModel entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@obligation_request_id",DbType.Int32, entity.ObligationRequestId },
+                    new object[] { "@general_ledger_accounts_id", DbType.Int32, entity.AccountId},
+                    new object[] { "@amount", DbType.Decimal, entity.Amount}
+                };
+
+                string query = $"INSERT INTO {tableName} " +
+                    $"(obligation_request_id, " +
+                    $"general_ledger_accounts_id, " +
+                    $"amount) " +
+                    $"VALUES " +
+                    $"(@obligation_request_id, " +
+                    $"@general_ledger_accounts_id, " +
+                    $"@amount) ";
+
+                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Update(ObligationAccountModel entity)

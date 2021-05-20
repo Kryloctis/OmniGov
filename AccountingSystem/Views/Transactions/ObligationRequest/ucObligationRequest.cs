@@ -68,14 +68,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             decimal totalAllotmentReleaseByDate = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseByDateYear(fundId, fppId, otherFPPId, allotmentClassId, accountId, dateRequested, Convert.ToInt16(dateRequested.Year));
 
             // Get Total Obligations by year
-            decimal totalObligations = Factory.ObligationRequestRepository().TotalObligationRequestByYear(fundId, fppId, otherFPPId, allotmentClassId, Convert.ToInt16(dateRequested.Year));
+            decimal totalObligations = Factory.ObligationRequestRepository().TotalObligationRequestByYear(fundId, fppId, otherFPPId, allotmentClassId, accountId, Convert.ToInt16(dateRequested.Year));
 
             //Get Total Allotment Release Balance By Year
             decimal totalAllotmentReleaseBalanceByYear = totalAllotmentReleaseByYear - totalObligations;
 
             decimal AllotmentReleaseBalanceByDate = totalAllotmentReleaseBalanceByYear > totalAllotmentReleaseByDate ? totalAllotmentReleaseByDate : totalAllotmentReleaseBalanceByYear;
 
-            decimal OnListItemsAmount = GetOnListItemsAmounts(accountId);
+            decimal OnListItemsAmount = GetTotalOnListItemsAmounts(accountId);
 
             decimal finalAllotmenReleaseBalance = AllotmentReleaseBalanceByDate - OnListItemsAmount;
             totalAllotmentReleaseBalance = finalAllotmenReleaseBalance;
@@ -86,7 +86,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         }
 
-        private decimal GetOnListItemsAmounts(int accountId)
+        private decimal GetTotalOnListItemsAmounts(int accountId)
         {
             decimal OnListItemsAmount = 0;
 
@@ -96,9 +96,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             {
                 foreach (DataGridViewRow item in _ucObligationRequestMain.dataGridView1.Rows)
                 {
-                    var rowIndex = _ucObligationRequestMain.dataGridView1.CurrentCell.RowIndex;
-                    int rowAccountId = Convert.ToInt32(_ucObligationRequestMain.dataGridView1.Rows[rowIndex].Cells["account_id"].Value);
-                    decimal rowAmount = Convert.ToDecimal(_ucObligationRequestMain.dataGridView1.Rows[rowIndex].Cells["amount"].Value);
+                    int rowAccountId = Convert.ToInt32(item.Cells["account_id"].Value);
+                    decimal rowAmount = Convert.ToDecimal(item.Cells["amount"].Value);
 
                     if (accountId == rowAccountId)
                     {
@@ -109,6 +108,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             
             return OnListItemsAmount;
         }
+
+
+
+
 
         private void LoadAccounts()
         {
@@ -182,12 +185,37 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
+        private bool ShowErrorAccountExistOnList() 
+        {
+            try
+            {
+                foreach (DataGridViewRow item in _ucObligationRequestMain.dataGridView1.Rows) 
+                {
+                    int accountId = Convert.ToInt32(cmbxAccount.SelectedValue);
+                    int rowAccountId = Convert.ToInt32(item.Cells["account_id"].Value);
+
+                    if (accountId == rowAccountId) 
+                    {
+                        epAccount.SetError(cmbxAccount, "Account already exist on the List");
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
         private void cmbxAccount_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(cmbxAccount.Text))
                 e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbxAccount, "Account");
             else if (ShowErrorAccountNameNotExist())
                 e.Cancel = ShowErrorAccountNameNotExist();
+            else
+                e.Cancel = ShowErrorAccountExistOnList();
         }
 
         private void cmbxAccount_Validated(object sender, EventArgs e)

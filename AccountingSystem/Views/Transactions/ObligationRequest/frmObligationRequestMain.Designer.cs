@@ -30,14 +30,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private void InitializeComponent()
         {
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnNew = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnCancel = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
             this.ucObligationRequestMain1 = new AccountingSystem.Views.Transactions.ObligationRequest.ucObligationRequestMain();
-            this.btnNew = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,6 +57,22 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.toolStrip1.Size = new System.Drawing.Size(585, 50);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnNew
+            // 
+            this.btnNew.Image = global::AccountingSystem.Properties.Resources.create_new_28px;
+            this.btnNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNew.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(35, 47);
+            this.btnNew.Text = "&New";
+            this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 50);
             // 
             // btnSave
             // 
@@ -100,6 +116,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnSearch.Image = global::AccountingSystem.Properties.Resources.find_doc;
             this.btnSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(55, 47);
             this.btnSearch.Text = "&Search...";
@@ -111,21 +128,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.ucObligationRequestMain1.Name = "ucObligationRequestMain1";
             this.ucObligationRequestMain1.Size = new System.Drawing.Size(561, 583);
             this.ucObligationRequestMain1.TabIndex = 0;
-            // 
-            // btnNew
-            // 
-            this.btnNew.Image = global::AccountingSystem.Properties.Resources.create_new_28px;
-            this.btnNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(35, 47);
-            this.btnNew.Text = "&New";
-            this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 50);
             // 
             // frmObligationRequestMain
             // 

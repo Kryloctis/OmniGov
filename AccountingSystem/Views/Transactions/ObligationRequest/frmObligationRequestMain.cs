@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -47,12 +48,35 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         }
 
 
+        private List<ObligationAccountModel> ObligationAccountsModelList() 
+        {
+            var obligationRequestModelList = new List<ObligationAccountModel>();
+
+            foreach (DataGridViewRow item in uc.dataGridView1.Rows) 
+            {
+
+                int accountId = Convert.ToInt32(item.Cells["account_id"].Value);
+                decimal amount = Convert.ToDecimal(item.Cells["amount"].Value);
+
+                var obligationAccountModel = new ObligationAccountModel()
+                {
+                    AccountId = accountId,
+                    Amount = amount
+                };
+
+
+                obligationRequestModelList.Add(obligationAccountModel);
+            }
+
+            return obligationRequestModelList;
+        } 
+
 
         private bool SaveData() 
         {
             try
             {
-                if (!uc.ValidateChildren()) 
+                if (!uc.ValidateChildren() || uc.ShowErrorListEmpty()) 
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
@@ -61,10 +85,20 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
                 var obligationRequestModel = new ObligationRequestModel()
                 {
-                    
+                    FPPId = Convert.ToInt32(uc.cmbxFPP.SelectedValue),
+                    OtherFPPId = string.IsNullOrEmpty(uc.cmbxOtherFPP.Text) ? null : Convert.ToInt32(uc.cmbxOtherFPP.SelectedValue),
+                    FundId = uc.fundId,
+                    AllotmentClassId = uc.allotmentClassId,
+                    DateRequested = uc.dtDateRequest.Value,
+                    ObligationNo = $"{uc.mskTxtObligationNoSeries.Text}-{uc.mskTxtObligationNoTemplate.Text}",
+                    Payee = uc.txtPayee.Text,
+                    Explanation = uc.txtExplanation.Text,
+                    ReferenceNo = uc.txtReferenceNo.Text,
+                    CreatedBy = Helper.UserId
                 };
 
-                return Factory.ObligationRequestRepository().Insert(obligationRequestModel);
+
+                return Factory.ObligationRequestRepository().Insert(obligationRequestModel, ObligationAccountsModelList());
             }
             catch (Exception ex)
             {

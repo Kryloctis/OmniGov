@@ -24,6 +24,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             uc.LoadReferences(_ucObligationRequestMain);
         }
 
+
         private bool AddToListRecord() 
         {
             try

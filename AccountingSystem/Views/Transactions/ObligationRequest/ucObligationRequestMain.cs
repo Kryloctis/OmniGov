@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             InitializeComponent();
         }
 
-
+        
         private void CheckedFund(int radFundId)
         {
             flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => (Convert.ToInt32(r.Tag) == radFundId) ? r.Checked = true : r.Checked = false);
@@ -37,18 +37,37 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[6];
+            var errorArray = new string[7];
+            ShowErrorListEmpty();
             errorArray[0] = epFPP.GetError(cmbxFPP);
             errorArray[1] = epOtherFPP.GetError(cmbxOtherFPP);
             errorArray[2] = epObligationNo.GetError(mskTxtObligationNoTemplate);
             errorArray[3] = epReferenceNo.GetError(txtReferenceNo);
             errorArray[4] = epPayee.GetError(txtPayee);
             errorArray[5] = epExplanation.GetError(txtExplanation);
+            errorArray[6] = dataGridView1.Tag.ToString();
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
+
+        internal bool ShowErrorListEmpty() 
+        {
+            try
+            {
+                if (dataGridView1.Rows.Count == 0) 
+                {
+                    dataGridView1.Tag = "No obligations has been saved. Obligation Request List is empty.";
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
 
         internal void ResetForm() 
         {
