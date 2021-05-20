@@ -21,6 +21,10 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             InitializeComponent();
             BtnSetBalance.Click += new EventHandler(BtnSetBalance_Click);
+
+            // validate if it has permission
+            if (!Helper.HasPermission("Manage Subsidiary Ledger Account"))
+                BtnSubsidiary.Visible = false;
         }
 
         internal void LoadAccountGroup()

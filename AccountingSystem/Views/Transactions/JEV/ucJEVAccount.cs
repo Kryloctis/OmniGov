@@ -15,6 +15,10 @@ namespace AccountingSystem.Views.Transactions.JEV
         public ucJEVAccount()
         {
             InitializeComponent();
+
+            // validate if it has permission
+            if (!Helper.HasPermission("Manage Subsidiary Ledger Account"))
+                btnSubsidiaryLedger.Visible = false;
         }
 
         internal string GetFormErrors()
@@ -142,6 +146,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     cmbAccount.ValueMember = "key";
                     cmbAccount.DroppedDown = true;
                     Cursor.Current = Cursors.Default;
+                    btnSubsidiaryLedger.Enabled = true;
 
                     Helper.ClearErrorComboBox(epAccount, cmbAccount);
                 }
