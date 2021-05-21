@@ -414,5 +414,34 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public bool Delete(int obligationRequestId)
+        {
+            try
+            {
+                using (var scope = new TransactionScope()) 
+                {
+                    _obligationAccountRepository.DeleteByObligationRequestId(obligationRequestId);
+
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@id", DbType.Int32, obligationRequestId} 
+                    };
+
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+
+                    _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+
+
+                    scope.Complete();
+                    return true;
+                };
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

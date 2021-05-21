@@ -72,7 +72,22 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (Helper.MessageBoxConfirmDelete(1))
+                {
+                    _ = Factory.ObligationRequestRepository().Delete(uc.obligationRequestId);
+                    btnNew.Enabled = true;
+                    btnSave.Text = "&Save";
+                    btnCancel.Enabled = false;
+                    btnDelete.Enabled = false;
+                    uc.ResetForm();
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
 

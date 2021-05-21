@@ -20,6 +20,8 @@ namespace ACC.Domain.Interfaces
 
         bool Update(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels);
 
+        bool Delete(int obligationRequestId);
+
         Dictionary<string, string> GetViewRecordByObligationNo(string obligationNo);
 
         DataTable GetViewRecordsById(int Id);
