@@ -371,6 +371,25 @@ namespace AccountingSystem
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
+        #endregion
+        #region Banks Deposits
+        internal static void DepositsDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].HeaderText = "Account No.";
+            datagrid.Columns[2].HeaderText = "Bank Name";
+            datagrid.Columns[3].HeaderText = "Reference";
+            datagrid.Columns[4].HeaderText = "Date";
+            datagrid.Columns[5].HeaderText = "Amount";
+            datagrid.Columns[6].Visible = false;
+            datagrid.Columns[7].Visible = false;
+            datagrid.Columns[8].Visible = false;
+            datagrid.Columns[9].Visible = false;
+
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        #endregion
         #region RCI
         internal static void RCIDatagridView(DataTable dataTable, DataGridView datagrid)
         {
@@ -456,7 +475,7 @@ namespace AccountingSystem
                 comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
             }
         }
-        #endregion
+        
 
         #region Function/Program/Project
         internal static void FuntionalClassificationDatagridView(DataTable dataTable, DataGridView datagrid)

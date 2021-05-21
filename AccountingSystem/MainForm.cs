@@ -23,6 +23,7 @@ using AccountingSystem.Views.Manage.AccountableForm;
 using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Reports.PaymentCollection;
 using AccountingSystem.Views.Transactions.PaymentCollection;
+using AccountingSystem.Views.Transactions.BankDeposits;
 
 namespace AccountingSystem
 {
@@ -333,6 +334,11 @@ namespace AccountingSystem
         private void menuPayments_Click(object sender, EventArgs e)
         {
             _ = new frmPaymentCollection().ShowDialog();
+        }
+
+        private void menuDeposits_Click(object sender, EventArgs e)
+        {
+            _ = new frmBankDeposits().ShowDialog();
         }
     }
 }

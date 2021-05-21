@@ -102,6 +102,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             var dtcode = Factory.GeneralLedgerAccountsRepository().GetRecordsBySearch();
             string filePath = Application.StartupPath + String.Format("report{0:yyyy-MM-ddhhmmsstt}.xlsx",DateTime.Now);
             Dictionary<string, string> record = new Dictionary<string, string>();
+            Dictionary<string, string> summary = new Dictionary<string, string>();
             using (SLDocument sl = new SLDocument())
             {
                 //Header
@@ -254,8 +255,18 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                         if (record.TryGetValue(dt.Rows[i]["account_code"].ToString(),out string value))
                         {
                             sl.SetCellValueNumeric(start, Convert.ToInt32(value), dt.Rows[i]["amount"].ToString());
-                        }
+                            if (summary.ContainsKey(value))
+                            {
 
+                                decimal total = Convert.ToDecimal(summary[value]);
+                                summary[value] = (total + Convert.ToDecimal(dt.Rows[i]["amount"])).ToString();
+                            }
+                            else
+                            {
+                                summary.Add(value, dt.Rows[i]["amount"].ToString());
+                            }
+                        }
+                        decimal sum =+ sl.GetCellValueAsDecimal(String.Format("E{0}", start));
                         for (int j = 0; j < dtcode.Rows.Count + 6; j++)
                         {
                             sl.SetCellStyle(start, j, rowstyle);
@@ -263,8 +274,11 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                             {
                                 sl.SetCellStyle(String.Format("D{0}", start + 1), colstyle);
                                 sl.SetCellValue(String.Format("D{0}", start + 1), "TOTAL");
-                                decimal sum =+ sl.GetCellValueAsDecimal(start, j);
-                                sl.SetCellValueNumeric(start + 1, j < 5? 5:j, sum.ToString());
+                                sl.SetCellValue(String.Format("E{0}", start + 1), sum.ToString());
+                                if (summary.ContainsKey(j.ToString()))
+                                {
+                                    sl.SetCellValueNumeric(start + 1, j < 6 ? 6 : j, summary[j.ToString()]);
+                                }                                    
                                 sl.SetCellStyle(start + 1, j, rowstyle);
                             }
                         }
