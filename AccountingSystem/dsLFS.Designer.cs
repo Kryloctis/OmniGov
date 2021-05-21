@@ -4058,6 +4058,10 @@ namespace AccountingSystem {
             
             private global::System.Data.DataColumn columncollector;
             
+            private global::System.Data.DataColumn columnaccount_code;
+            
+            private global::System.Data.DataColumn columnsubsidiary;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public dtPCDataTable() {
@@ -4157,6 +4161,22 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn account_codeColumn {
+                get {
+                    return this.columnaccount_code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn subsidiaryColumn {
+                get {
+                    return this.columnsubsidiary;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -4192,7 +4212,7 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtPCRow AdddtPCRow(string rcdno, string payee, string acc_form_desc, string ledger_name, System.DateTime payment_date, string receipt_no, decimal amount, string collector) {
+            public dtPCRow AdddtPCRow(string rcdno, string payee, string acc_form_desc, string ledger_name, System.DateTime payment_date, string receipt_no, decimal amount, string collector, string account_code, string subsidiary) {
                 dtPCRow rowdtPCRow = ((dtPCRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         rcdno,
@@ -4202,7 +4222,9 @@ namespace AccountingSystem {
                         payment_date,
                         receipt_no,
                         amount,
-                        collector};
+                        collector,
+                        account_code,
+                        subsidiary};
                 rowdtPCRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtPCRow);
                 return rowdtPCRow;
@@ -4233,6 +4255,8 @@ namespace AccountingSystem {
                 this.columnreceipt_no = base.Columns["receipt_no"];
                 this.columnamount = base.Columns["amount"];
                 this.columncollector = base.Columns["collector"];
+                this.columnaccount_code = base.Columns["account_code"];
+                this.columnsubsidiary = base.Columns["subsidiary"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4254,6 +4278,10 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnamount);
                 this.columncollector = new global::System.Data.DataColumn("collector", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncollector);
+                this.columnaccount_code = new global::System.Data.DataColumn("account_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaccount_code);
+                this.columnsubsidiary = new global::System.Data.DataColumn("subsidiary", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsubsidiary);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7321,6 +7349,38 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string account_code {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtPC.account_codeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'account_code\' in table \'dtPC\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtPC.account_codeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string subsidiary {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtPC.subsidiaryColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'subsidiary\' in table \'dtPC\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtPC.subsidiaryColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsrcdnoNull() {
                 return this.IsNull(this.tabledtPC.rcdnoColumn);
             }
@@ -7413,6 +7473,30 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetcollectorNull() {
                 this[this.tabledtPC.collectorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isaccount_codeNull() {
+                return this.IsNull(this.tabledtPC.account_codeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setaccount_codeNull() {
+                this[this.tabledtPC.account_codeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IssubsidiaryNull() {
+                return this.IsNull(this.tabledtPC.subsidiaryColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetsubsidiaryNull() {
+                this[this.tabledtPC.subsidiaryColumn] = global::System.Convert.DBNull;
             }
         }
         

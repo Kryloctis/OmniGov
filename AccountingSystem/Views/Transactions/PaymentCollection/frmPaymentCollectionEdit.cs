@@ -39,6 +39,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 uc.cmbcollector.SelectedValue = pcData["collecting_officers_id"];
                 uc.setSelectedValue(Convert.ToInt16(pcData["accountable_forms_id"]), "accountable");
                 uc.setSelectedValue(Convert.ToInt16(pcData["general_ledger_accounts_id"]), "ledger");
+                uc.setSelectedValue(Convert.ToInt16(pcData["subsidiary_ledger_accounts_id"]), "subsidiary");
                 uc.txtpayee.Text = pcData["payee"];
                 uc.txtreceipt.Text = pcData["receipt_no"];
                 uc.dtdate.Value = Convert.ToDateTime(pcData["payment_date"]);
@@ -63,6 +64,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     CoId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
                     AccId = uc.accId,
                     GlaId = uc.glaId,
+                    SlaId = uc.slaId,
                     Payee = uc.txtpayee.Text.Trim(),
                     ReceiptNo = uc.txtreceipt.Text.Trim(),
                     PaymentDate = Convert.ToDateTime(uc.dtdate.Text.Trim()),

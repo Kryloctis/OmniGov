@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 299);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 324);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.flowLayoutPanel1.Size = new System.Drawing.Size(726, 36);
@@ -75,7 +75,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             this.ucpc1.Location = new System.Drawing.Point(0, 0);
             this.ucpc1.Name = "ucpc1";
-            this.ucpc1.Size = new System.Drawing.Size(726, 293);
+            this.ucpc1.Size = new System.Drawing.Size(726, 322);
             this.ucpc1.TabIndex = 6;
             // 
             // frmPaymentCollectionAdd
@@ -85,7 +85,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(726, 335);
+            this.ClientSize = new System.Drawing.Size(726, 360);
             this.Controls.Add(this.ucpc1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

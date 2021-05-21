@@ -17,6 +17,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal int Id = 0;
         internal int accId = 0;
         internal int glaId = 0;
+        internal int slaId = 0;
         internal int userid = 0;
         public ucPC()
         {
@@ -28,10 +29,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             errorArray[0] = errorProvider.GetError(cmbcollector);
             errorArray[1] = errorProvider.GetError(txtaccountable);
             errorArray[2] = errorProvider.GetError(txtledger);
-            errorArray[3] = errorProvider.GetError(txtpayee);
-            errorArray[4] = errorProvider.GetError(txtreceipt);
-            errorArray[5] = errorProvider.GetError(dtdate);
-            errorArray[6] = errorProvider.GetError(txtamount);
+            errorArray[3] = errorProvider.GetError(txtsubsidiary);
+            errorArray[4] = errorProvider.GetError(txtpayee);
+            errorArray[5] = errorProvider.GetError(txtreceipt);
+            errorArray[6] = errorProvider.GetError(dtdate);
+            errorArray[7] = errorProvider.GetError(txtamount);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -41,8 +43,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             accId = 0;
             glaId = 0;
+            slaId = 0;
             txtaccountable.Clear();
             txtledger.Clear();
+            txtsubsidiary.Clear();
             txtpayee.Clear();
             txtreceipt.Clear();
             dtdate.Value = DateTime.Now;
@@ -54,8 +58,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 txtaccountable.Enabled = false;
                 txtledger.Enabled = false;
+                txtsubsidiary.Enabled = false;
                 btnaccountable.Enabled = false;
                 btnledger.Enabled = false;
+                btnsubsidiary.Enabled = false;
                 txtpayee.Enabled = false;
                 txtreceipt.Enabled = false;
                 dtdate.Enabled = false;
@@ -66,8 +72,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 txtaccountable.Enabled = true;
                 txtledger.Enabled = true;
+               // txtsubsidiary.Enabled = true;
                 btnaccountable.Enabled = true;
                 btnledger.Enabled = true;
+              //  btnsubsidiary.Enabled = true;
                 txtpayee.Enabled = true;
                 txtreceipt.Enabled = true;
                 dtdate.Enabled = true;
@@ -94,6 +102,14 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                         var ledgerData = ledgerRepository.GetRecordByID(Id);
                         glaId = Id;
                         txtledger.Text = String.Format("{0} - {1}", ledgerData["ledger_code"], ledgerData["ledger_name"]);
+                    }
+                    if (table.Equals("subsidiary"))
+                    {
+                        var subRepository = Factory.SubsidiaryLedgerAccountsRepository();
+                        var subData = subRepository.GetRecordByID(Id);
+                        slaId = Id;
+                        txtsubsidiary.Text = String.Format("{0} - {1}", subData["sub_code"], subData["sub_name"]);
+
                     }
 
                 }
@@ -124,6 +140,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             glaId = Id;
             txtledger.Text = value;
+        }
+        public void loadSelectedSubsidiary(int Id, string value)
+        {
+            slaId= Id;
+            txtsubsidiary.Text = value;
         }
 
         private void btnaccountable_Click(object sender, EventArgs e)
@@ -199,6 +220,43 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void txtreceipt_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider, txtreceipt);
+        }
+
+        private void btnsubsidiary_Click(object sender, EventArgs e)
+        {
+            _ = new frmFind(this, "subsidiary").ShowDialog();
+        }
+
+        private void txtsubsidiary_Validating(object sender, CancelEventArgs e)
+        {
+            var subRepository = Factory.SubsidiaryLedgerAccountsRepository();
+            bool isubsidiary = subRepository.HasSubsidiary(Convert.ToUInt16(glaId));
+            if (isubsidiary)
+            {
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtsubsidiary, "Subsidiary!");
+            }
+               
+        }
+
+        private void txtsubsidiary_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider, txtsubsidiary);
+        }
+
+        private void txtsubsidiary_DoubleClick(object sender, EventArgs e)
+        {
+            btnsubsidiary.PerformClick();
+        }
+
+        private void txtledger_TextChanged(object sender, EventArgs e)
+        {
+            if(txtledger.Text.Length > 0 && glaId > 0)
+            {
+                var subRepository = Factory.SubsidiaryLedgerAccountsRepository();
+                bool isubsidiary = subRepository.HasSubsidiary(Convert.ToUInt16(glaId));
+                txtsubsidiary.Enabled = isubsidiary;
+                btnsubsidiary.Enabled = isubsidiary;
+            }
         }
     }
 }

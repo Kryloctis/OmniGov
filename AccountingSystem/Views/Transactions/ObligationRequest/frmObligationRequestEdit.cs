@@ -1,5 +1,4 @@
-﻿using ACC.Domain.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,54 +12,38 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 {
     public partial class frmObligationRequestEdit : Form
     {
-        private ucObligationRequest uc;
-        private frmObligationRequestMain _frmObligationRequestMain;
 
-        public frmObligationRequestEdit(frmObligationRequestMain frmObligationRequestMain)
+        private ucObligationRequest uc;
+        private ucObligationRequestMain _ucObligationRequestMain;
+
+        public frmObligationRequestEdit(ucObligationRequestMain ucObligationRequestMain)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
             uc = ucObligationRequest1;
-            _frmObligationRequestMain = frmObligationRequestMain;
+            uc.cmbxAccount.Enabled = false;
+            _ucObligationRequestMain = ucObligationRequestMain;
+            uc.LoadReferences(_ucObligationRequestMain);
         }
 
 
-        private bool SaveData() 
+        private void frmObligationRequestEdit_Load(object sender, EventArgs e)
         {
-            try
-            {
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                var obligationRequestModel = new ObligationRequestModel()
-                {
-                    ID = uc.obligationRequestId,
-                    ObligationNo = $"{uc.mskTxtSeriesNo.Text}-{uc.GenerateObligationNoTemplate()}",
-                    Payee = uc.txtPayee.Text.Trim(),
-                    ReferencesNo = uc.txtReferenceNo.Text.Trim(),
-                    ObligationAmount = uc.nudAmount.Value,
-                    Explanation = uc.txtExplanation.Text.Trim(),
-                    UpdatedBy = Helper.UserId
-                };
-
-                return Factory.ObligationRequestRepository().Update(obligationRequestModel);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+            uc.LoadSelected();
         }
-  
-        private void btnSave_Click(object sender, EventArgs e)
+
+        private void btnOk_Click(object sender, EventArgs e)
         {
-            if (SaveData()) 
+            if (!uc.ValidateChildren())
             {
-                Helper.MessageBoxSuccess("Obligation Request has been updated.");
-                _frmObligationRequestMain.ucObligationRequestMain1.LoadObligationRequestRecords();
+                Helper.MessageBoxError(uc.GetFormErrors());
+            }
+            else
+            {
+                var rowIndex = _ucObligationRequestMain.dataGridView1.CurrentCell.RowIndex;
+                var amount = uc.nudAmount.Value;
+
+                _ucObligationRequestMain.dataGridView1.Rows[rowIndex].Cells["amount"].Value = amount;
                 Close();
             }
         }

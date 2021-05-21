@@ -187,8 +187,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             // txtsearch
             // 
-            this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtsearch.Location = new System.Drawing.Point(888, 21);
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.PlaceholderText = "Search...";
@@ -198,6 +197,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             // dgpayments
             // 
+            this.dgpayments.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgpayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgpayments.Location = new System.Drawing.Point(12, 68);
             this.dgpayments.Name = "dgpayments";
