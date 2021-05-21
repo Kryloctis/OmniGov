@@ -8,14 +8,22 @@ namespace ACC.Domain.Interfaces
 {
     public interface IObligationRequestRepository : IRepository<ObligationRequestModel>
     {
-        decimal GetTotalObligationAmountByYear(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, DateTime dateRequested);
+        bool ObligationRequestNoExist(string obligationNo);
 
-        bool ObligationNumExist(string obligationNum);
+        bool ObligationRequestNoExist(int Id, string obligationNo);
 
-        bool ObligationNumExist(int id, string obligationNum);
+        decimal TotalObligationRequestByYear(int fundsId, int fppId, int? otherFPPId, int allotmentClassId, int accountId, short year);
 
-        DataTable GetViewRecordsByIdsAndMonthAndYear(int fppId, int? otherFPPId, int fundId, int allotmentClassId, int accountId, byte month, short year);
+        int GetLastInsertedID();
 
-        Dictionary<string, string> GetViewRecordsById(int obligationId);
+        bool Insert(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels);
+
+        bool Update(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels);
+
+        bool Delete(int obligationRequestId);
+
+        Dictionary<string, string> GetViewRecordByObligationNo(string obligationNo);
+
+        DataTable GetViewRecordsById(int Id);
     }
 }

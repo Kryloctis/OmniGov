@@ -150,6 +150,8 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void txtPassword_Validating(object sender, CancelEventArgs e)
         {
+            if (userId != 0) return;
+
             if (Helper.ShowErrorTextBoxEmpty(epPassword, txtPassword, "password"))
             {
                 e.Cancel = true;
@@ -170,6 +172,8 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void txtConfirmPassword_Validating(object sender, CancelEventArgs e)
         {
+            if (userId != 0) return;
+
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epConfirmPassword, txtConfirmPassword, "confirm password");
         }
 

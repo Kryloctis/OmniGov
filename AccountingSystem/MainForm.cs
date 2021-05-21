@@ -62,6 +62,9 @@ namespace AccountingSystem
 
         private void ValidatePermissions()
         {
+            // mga permissions nga wala
+            //    - Transactions payment
+
             if (!Helper.HasPermission("Manage Allotment Classes"))
                 menuAllotmentClasses.Visible = false;
 
@@ -98,8 +101,7 @@ namespace AccountingSystem
                 menuJEV.Visible = false;
                 menuObligationRequest.Visible = false;
             }
-                
-
+            
             if (!Helper.HasPermission("Transaction Obligation Request"))
                 btnObligationRequest.Visible = false;
 
@@ -141,7 +143,9 @@ namespace AccountingSystem
                 btnRCI.Visible = false;
                 menuRCI.Visible = false;
             }
-                
+
+            if (!Helper.HasPermission("Manage Accountable Forms"))
+                menuAccForm.Visible = false;
         }
 
         private void LoadDashboard()

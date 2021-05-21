@@ -60,9 +60,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
             fundId = Convert.ToByte(cmbFund.SelectedValue);
             year = (short)Convert.ToUInt16(cmbYear.Text);
-            LoadSubsidiaryRecordsByFundAndGeneralLedger();
-            
-            
+            LoadSubsidiaryRecordsByFundAndGeneralLedger();            
 
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
