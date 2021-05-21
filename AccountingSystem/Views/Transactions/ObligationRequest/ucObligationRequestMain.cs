@@ -14,6 +14,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
     public partial class ucObligationRequestMain : UserControl
     {
         internal int obligationRequestId = 0;
+        internal string obligationNo;
         internal int fundId;
         internal int allotmentClassId;
 
@@ -22,7 +23,66 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             InitializeComponent();
         }
 
-        
+
+
+        internal void LoadSearched() 
+        {
+            try
+            {
+                var dicViewObligationRequest = Factory.ObligationRequestRepository().GetViewRecordByObligationNo(obligationNo);
+
+                int dicobligationRequestId = Convert.ToInt32(dicViewObligationRequest["obligation_request_id"]);
+                int fppId = Convert.ToInt32(dicViewObligationRequest["fpp_id"]);
+                int othersFPPId = string.IsNullOrEmpty(dicViewObligationRequest["others_fpp_id"]) ? 0 : Convert.ToInt32(dicViewObligationRequest["others_fpp_id"]);
+                int fundId = Convert.ToInt32(dicViewObligationRequest["funds_id"]);
+                int allotmentClassId = Convert.ToInt32(dicViewObligationRequest["allotment_classes_id"]);
+                string obligationNum = dicViewObligationRequest["obligation_no"].ToString();
+                DateTime dateRequested = Convert.ToDateTime(dicViewObligationRequest["date_requested"]);
+                string referenceNo = dicViewObligationRequest["reference_no"].ToString();
+                string payee = dicViewObligationRequest["payee"];
+                string explanation = dicViewObligationRequest["explanation"];
+
+                obligationRequestId = dicobligationRequestId;
+                cmbxFPP.SelectedValue = fppId;
+                cmbxOtherFPP.SelectedValue = othersFPPId;
+                CheckedFund(fundId);
+                CheckedAllotmentClass(allotmentClassId);
+                mskTxtObligationNoSeries.Text = obligationNo;
+                dtDateRequest.Value = dateRequested;
+                txtReferenceNo.Text = referenceNo;
+                txtPayee.Text = payee;
+                txtExplanation.Text = explanation;
+
+                LoadObligationRequests(dicobligationRequestId);
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void LoadObligationRequests(int dicobligationRequestId)
+        {
+            dataGridView1.Rows.Clear();
+
+            DataTable dtObligationRequest = Factory.ObligationRequestRepository().GetViewRecordsById(obligationRequestId);
+
+            foreach (DataRow item in dtObligationRequest.Rows)
+            {
+                var obligationRequest = new object[]
+                {
+                        item["general_ledger_accounts_id"],
+                        item["ledger_accounts_name"],
+                        item["obligation_requested_amount"]
+                };
+
+                dataGridView1.Rows.Add(obligationRequest);
+            }
+        }
+
+
+
         private void CheckedFund(int radFundId)
         {
             flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => (Convert.ToInt32(r.Tag) == radFundId) ? r.Checked = true : r.Checked = false);
@@ -86,6 +146,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             txtPayee.Text = string.Empty;
             txtExplanation.Text = string.Empty;
             dataGridView1.Rows.Clear();
+            obligationRequestId = 0;
+            obligationNo = string.Empty;
         }
 
         private void LoadDatagridFormat()
@@ -555,6 +617,41 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             EnableDisableButtons();
+        }
+
+
+
+
+
+        private void ShowObligationRequestEdit()
+        {
+            if (ValidateChildrenAdd())
+            {
+                var _frmObligationRequestEdit = new frmObligationRequestEdit(this);
+                var ucObligationRequestEdit = _frmObligationRequestEdit.ucObligationRequest1;
+
+
+                int rowIndex = dataGridView1.CurrentCell.RowIndex;
+                int accountId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["account_id"].Value);
+                decimal amount = Convert.ToDecimal(dataGridView1.Rows[rowIndex].Cells["amount"].Value);
+
+                ucObligationRequestEdit.selectedAccountId = accountId;
+
+                ucObligationRequestEdit.fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
+                ucObligationRequestEdit.otherFPPId = string.IsNullOrEmpty(cmbxOtherFPP.Text) ? null : Convert.ToInt32(cmbxOtherFPP.SelectedValue);
+                ucObligationRequestEdit.fundId = fundId;
+                ucObligationRequestEdit.allotmentClassId = allotmentClassId;
+                ucObligationRequestEdit.dateRequested = dtDateRequest.Value;
+                ucObligationRequestEdit.currentObligationAmount = amount;
+                ucObligationRequestEdit.nudAmount.Value = amount;
+
+                _frmObligationRequestEdit.ShowDialog();
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            ShowObligationRequestEdit();
         }
     }
 }

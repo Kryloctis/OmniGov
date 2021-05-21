@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace ACC.Domain.Interfaces
@@ -16,5 +17,11 @@ namespace ACC.Domain.Interfaces
         int GetLastInsertedID();
 
         bool Insert(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels);
+
+        bool Update(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels);
+
+        Dictionary<string, string> GetViewRecordByObligationNo(string obligationNo);
+
+        DataTable GetViewRecordsById(int Id);
     }
 }

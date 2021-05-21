@@ -100,7 +100,7 @@ namespace ACC.Data
                     new object[] { "@obligation_no", DbType.String, obligationNo }
                 };
 
-                string query = $"SELECT id FROM {tableName} WHERE id <> @id obligation_no = @obligation_no";
+                string query = $"SELECT id FROM {tableName} WHERE id <> @id AND obligation_no = @obligation_no";
                 string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -153,6 +153,143 @@ namespace ACC.Data
                 throw;
             }
         }
+
+
+
+
+        public Dictionary<string, string> GetViewRecordByObligationNo(string obligationNo)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@obligation_no", DbType.String, obligationNo }
+                };
+
+                string query = $"SELECT " +
+                    $"obligation_request_id, " +
+                    $"funds_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"fpp_id, " +
+                    $"fpp_code, " +
+                    $"fpp_name, " +
+                    $"others_fpp_id, " +
+                    $"others_fpp_name, " +
+                    $"allotment_classes_id, " +
+                    $"allotment_code, " +
+                    $"allotment_name, " +
+                    $"date_requested, " +
+                    $"obligation_no, " +
+                    $"payee, " +
+                    $"explanation, " +
+                    $"reference_no, " +
+                    $"obligation_requested_created_at, " +
+                    $"obligation_requested_created_by, " +
+                    $"obligation_requested_updated_at, " +
+                    $"obligation_requested_updated_by, " +
+                    $"obligation_account_id, " +
+                    $"general_ledger_accounts_id, " +
+                    $"COALESCE(SUM(obligation_requested_amount),0) AS obligation_requested_amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE " +
+                    $"obligation_no = @obligation_no " +
+                    $"GROUP BY obligation_request_id";
+
+
+                using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("obligation_request_id", item[0].ToString());
+                        record.Add("funds_id", item[1].ToString());
+                        record.Add("fund_code", item[2].ToString());
+                        record.Add("fund_name", item[3].ToString());
+                        record.Add("fpp_id", item[4].ToString());
+                        record.Add("fpp_code", item[5].ToString());
+                        record.Add("fpp_name", item[6].ToString());
+                        record.Add("others_fpp_id", item[7].ToString());
+                        record.Add("others_fpp_name", item[8].ToString());
+                        record.Add("allotment_classes_id", item[9].ToString());
+                        record.Add("allotment_code", item[10].ToString());
+                        record.Add("allotment_name", item[11].ToString());
+                        record.Add("date_requested", item[12].ToString());
+                        record.Add("obligation_no", item[13].ToString());
+                        record.Add("payee", item[14].ToString());
+                        record.Add("explanation", item[15].ToString());
+                        record.Add("reference_no", item[16].ToString());
+                        record.Add("obligation_requested_created_at", item[17].ToString());
+                        record.Add("obligation_requested_created_by", item[18].ToString());
+                        record.Add("obligation_requested_updated_at", item[19].ToString());
+                        record.Add("obligation_requested_updated_by", item[20].ToString());
+                        record.Add("obligation_account_id", item[21].ToString());
+                        record.Add("general_ledger_accounts_id", item[22].ToString());
+                        record.Add("obligation_requested_amount", item[23].ToString());
+                    }
+                }
+
+                return record;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetViewRecordsById(int Id)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@obligation_request_id", DbType.String, Id }
+                };
+
+                string query = $"SELECT " +
+                    $"obligation_request_id, " +
+                    $"funds_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"fpp_id, " +
+                    $"fpp_code, " +
+                    $"fpp_name, " +
+                    $"others_fpp_id, " +
+                    $"others_fpp_name, " +
+                    $"allotment_classes_id, " +
+                    $"allotment_code, " +
+                    $"allotment_name, " +
+                    $"date_requested, " +
+                    $"obligation_no, " +
+                    $"payee, " +
+                    $"explanation, " +
+                    $"reference_no, " +
+                    $"obligation_requested_created_at, " +
+                    $"obligation_requested_created_by, " +
+                    $"obligation_requested_updated_at, " +
+                    $"obligation_requested_updated_by, " +
+                    $"obligation_account_id, " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_code, " +
+                    $"ledger_accounts_name, " +
+                    $"obligation_requested_amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE " +
+                    $"obligation_request_id = @obligation_request_id";
+
+                var dtObligationRequests = new DataTable();
+                return _mySqlGenericCommands.FillBySearch(query, dtObligationRequests, parameters);
+            }
+            catch (Exception )
+            {
+                throw;
+            }
+        }
+
 
 
 
@@ -215,7 +352,7 @@ namespace ACC.Data
                     // save and get the last inserted id
                     _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
 
-                    // loop jev accounts list then insert each using the latest Jev Id
+                    // loop obligation  accounts list then insert each using the latest obligation request Id
                     foreach (var obligationAccounts in obligationAccountModels)
                     {
                         obligationAccounts.ObligationRequestId = GetLastInsertedID();
@@ -234,6 +371,48 @@ namespace ACC.Data
             }
         }
 
- 
+        public bool Update(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels)
+        {
+            try
+            {
+                using (var scope = new TransactionScope()) 
+                {
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@id",DbType.Int32, entity.Id},
+                        new object[] { "@payee", DbType.String, entity.Payee },
+                        new object[] { "@explanation", DbType.String, entity.Explanation },
+                        new object[] { "@reference_no", DbType.String, entity.ReferenceNo },
+                        new object[] { "@updated_by", DbType.Int32, entity.UpdatedBy },
+                    };
+
+                    string query = $"UPDATE {tableName} SET payee = @payee, explanation = @explanation, reference_no = @reference_no, updated_by = @updated_by WHERE id = @id";
+
+
+                    // save and get the last inserted id
+                    _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+
+                    // delete all the obligation accounts first
+                    _ = _obligationAccountRepository.DeleteByObligationRequestId(entity.Id);
+
+                    // loop obligation accounts list then insert each using the latest obligation request Id
+                    foreach (var obligationAccounts in obligationAccountModels)
+                    {
+                        obligationAccounts.ObligationRequestId = GetLastInsertedID();
+                        _ = _obligationAccountRepository.Insert(obligationAccounts);
+                    }
+
+
+                    scope.Complete();
+
+                    return true;
+                };
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

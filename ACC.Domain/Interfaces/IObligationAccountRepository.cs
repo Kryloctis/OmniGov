@@ -7,5 +7,6 @@ namespace ACC.Domain.Interfaces
 {
     public interface IObligationAccountRepository : IRepository<ObligationAccountModel>
     {
+        bool DeleteByObligationRequestId(int ObligationRequestId);
     }
 }

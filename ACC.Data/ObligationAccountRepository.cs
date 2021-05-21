@@ -28,6 +28,25 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
+        public bool DeleteByObligationRequestId(int ObligationRequestId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@obligation_request_id",DbType.Int32, ObligationRequestId}
+                };
+
+                string query = $"DELETE FROM {tableName} WHERE obligation_request_id = @obligation_request_id";
+
+                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             throw new NotImplementedException();

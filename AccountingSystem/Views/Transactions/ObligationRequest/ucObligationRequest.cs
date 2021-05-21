@@ -21,11 +21,22 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal DateTime dateRequested;
         private ucObligationRequestMain _ucObligationRequestMain;
         private decimal totalAllotmentReleaseBalance;
+        internal int selectedAccountId = 0;
+        internal decimal currentObligationAmount;
 
         public ucObligationRequest()
         {
             InitializeComponent();
         }
+
+
+        internal void LoadSelected()
+        {
+           cmbxAccount.SelectedValue = selectedAccountId;
+        }
+
+
+
 
         internal void LoadReferences(ucObligationRequestMain ucObligationRequestMain) 
         {
@@ -77,7 +88,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
             decimal OnListItemsAmount = GetTotalOnListItemsAmounts(accountId);
 
-            decimal finalAllotmenReleaseBalance = AllotmentReleaseBalanceByDate - OnListItemsAmount;
+            decimal currentBalance = _ucObligationRequestMain.obligationRequestId == 0 ? 0 : currentObligationAmount;
+
+            decimal finalAllotmenReleaseBalance = AllotmentReleaseBalanceByDate - OnListItemsAmount + currentBalance;
             totalAllotmentReleaseBalance = finalAllotmenReleaseBalance;
 
             txtBalance.Text = finalAllotmenReleaseBalance.ToString("N2");
@@ -90,7 +103,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             decimal OnListItemsAmount = 0;
 
-            if (_ucObligationRequestMain.dataGridView1.Rows.Count == 0)
+            if (_ucObligationRequestMain.dataGridView1.Rows.Count ==  0 ||  _ucObligationRequestMain.obligationRequestId > 0)
                 OnListItemsAmount = 0;
             else
             {
@@ -108,8 +121,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             
             return OnListItemsAmount;
         }
-
-
 
 
 
@@ -194,12 +205,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     int accountId = Convert.ToInt32(cmbxAccount.SelectedValue);
                     int rowAccountId = Convert.ToInt32(item.Cells["account_id"].Value);
 
-                    if (accountId == rowAccountId) 
+
+                    if (accountId == rowAccountId && _ucObligationRequestMain.obligationRequestId == 0) 
                     {
                         epAccount.SetError(cmbxAccount, "Account already exist on the List");
                         return true;
                     }
                 }
+
             }
             catch (Exception ex)
             {
