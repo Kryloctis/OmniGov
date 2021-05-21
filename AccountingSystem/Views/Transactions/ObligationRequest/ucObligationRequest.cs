@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,14 +13,15 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 {
     public partial class ucObligationRequest : UserControl
     {
-        internal int obligationRequestId = 0;
+
         internal int fppId;
         internal int? otherFPPId;
         internal int fundId;
         internal int allotmentClassId;
-        internal int accountId;
-        internal byte month;
-        internal short year;
+        internal DateTime dateRequested;
+        private ucObligationRequestMain _ucObligationRequestMain;
+        private decimal totalAllotmentReleaseBalance;
+        internal int selectedAccountId = 0;
         internal decimal currentObligationAmount;
 
         public ucObligationRequest()
@@ -28,89 +30,162 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         }
 
 
-        internal void ResetForm()
+        internal void LoadSelected()
         {
-            mskTxtSeriesNo.Text = string.Empty;
-            txtReferenceNo.Text = string.Empty;
-            txtPayee.Text = string.Empty;
-            txtExplanation.Text = string.Empty;
-            nudAmount.Value = 0;
-            txtAllotmentReleaseBalance.Text = GetAmounts()["allotment_release_balance"].ToString("N2");
+           cmbxAccount.SelectedValue = selectedAccountId;
         }
 
-        private Dictionary<string,decimal> GetAmounts() 
+
+
+
+        internal void LoadReferences(ucObligationRequestMain ucObligationRequestMain) 
         {
-
-            var records = new Dictionary<string, decimal>();
-
-            decimal totalAllotmentReleaseAmountByYear = Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountYear(fundId, fppId, otherFPPId, allotmentClassId, accountId, dtDateRequest.Value);
-
-            decimal totalObligationAmountByYear = Factory.ObligationRequestRepository().GetTotalObligationAmountByYear(fundId, fppId, otherFPPId, allotmentClassId, accountId, dtDateRequest.Value);
-
-            decimal allotmentReleaseBalance = totalAllotmentReleaseAmountByYear - totalObligationAmountByYear;
-
-            records.Add("allotment_release_balance", allotmentReleaseBalance);
-
-            return records;
+            _ucObligationRequestMain = ucObligationRequestMain; 
         }
 
-    
         internal string GetFormErrors()
         {
-            var errorArray = new string[5];
+            var errorArray = new string[2];
+            errorArray[0] = epAccount.GetError(cmbxAccount);
+            errorArray[1] = epAmount.GetError(nudAmount);
 
-            errorArray[0] = epObligationSeriesNo.GetError(mskTxtTemplate);
-            errorArray[1] = epReferenceNo.GetError(txtReferenceNo);
-            errorArray[2] = epPayee.GetError(txtPayee);
-            errorArray[3] = epExplanation.GetError(txtExplanation);
-            errorArray[4] = epAmount.GetError(nudAmount);
-
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+            IError _errors = Factory.CreateErrors(errorArray);
+            return _errors.GenerateErrorMessage();
         }
 
-        internal string  GenerateObligationNoTemplate() 
+        internal void ResetForm() 
         {
-            var fundsRepo = Factory.FundsRepository().GetRecordByID(fundId);
-
-            string obligationNoTemplate = $"{dtDateRequest.Value.ToString("MM")}-{dtDateRequest.Value.ToString("yy")}-{fundsRepo["fund_code"]}";
-
-            return obligationNoTemplate;
+            nudAmount.Value = 0;
         }
 
-        private void ucObligationRequest_Load(object sender, EventArgs e)
+        private void GetTotalAllotmentRelease()
         {
-            if (!DesignMode) 
+            int accountId = Convert.ToInt32(cmbxAccount.SelectedValue);
+
+            decimal  totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseByDateYear(fundId, fppId, otherFPPId, allotmentClassId, accountId, dateRequested ,Convert.ToInt16(dateRequested.Year));
+
+            txtAllotmentAmount.Text = totalAllotmentRelease.ToString("N2");
+            
+        }
+
+        internal void GetTotalAllotmentBalance()
+        {
+            int accountId = Convert.ToInt32(cmbxAccount.SelectedValue);
+
+            //Get Total Allotment Release By Year and has if it is continuing or not
+            decimal totalAllotmentReleaseByYear = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseByYear(fundId, fppId, otherFPPId, allotmentClassId, accountId, Convert.ToInt16(dateRequested.Year));
+
+            //Get Total Allotment Release By Date and has if it is continuing or not
+            decimal totalAllotmentReleaseByDate = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseByDateYear(fundId, fppId, otherFPPId, allotmentClassId, accountId, dateRequested, Convert.ToInt16(dateRequested.Year));
+
+            // Get Total Obligations by year
+            decimal totalObligations = Factory.ObligationRequestRepository().TotalObligationRequestByYear(fundId, fppId, otherFPPId, allotmentClassId, accountId, Convert.ToInt16(dateRequested.Year));
+
+            //Get Total Allotment Release Balance By Year
+            decimal totalAllotmentReleaseBalanceByYear = totalAllotmentReleaseByYear - totalObligations;
+
+            decimal AllotmentReleaseBalanceByDate = totalAllotmentReleaseBalanceByYear > totalAllotmentReleaseByDate ? totalAllotmentReleaseByDate : totalAllotmentReleaseBalanceByYear;
+
+            decimal OnListItemsAmount = GetTotalOnListItemsAmounts(accountId);
+
+            decimal currentBalance = _ucObligationRequestMain.obligationRequestId == 0 ? 0 : currentObligationAmount;
+
+            decimal finalAllotmenReleaseBalance = AllotmentReleaseBalanceByDate - OnListItemsAmount + currentBalance;
+            totalAllotmentReleaseBalance = finalAllotmenReleaseBalance;
+
+            txtBalance.Text = finalAllotmenReleaseBalance.ToString("N2");
+
+            txtAllotmentAmount.Text = totalAllotmentReleaseByDate.ToString("N2");
+
+        }
+
+        private decimal GetTotalOnListItemsAmounts(int accountId)
+        {
+            decimal OnListItemsAmount = 0;
+
+            if (_ucObligationRequestMain.dataGridView1.Rows.Count ==  0 ||  _ucObligationRequestMain.obligationRequestId > 0)
+                OnListItemsAmount = 0;
+            else
             {
-                mskTxtTemplate.Text = GenerateObligationNoTemplate();
-                dtDateRequest.MaxDate = new DateTime(year, month, DateTime.DaysInMonth(year, month));
-                dtDateRequest.MinDate = new DateTime(year, month, 1);
-                txtAllotmentReleaseBalance.Text = GetAmounts()["allotment_release_balance"].ToString("N2");
+                foreach (DataGridViewRow item in _ucObligationRequestMain.dataGridView1.Rows)
+                {
+                    int rowAccountId = Convert.ToInt32(item.Cells["account_id"].Value);
+                    decimal rowAmount = Convert.ToDecimal(item.Cells["amount"].Value);
+
+                    if (accountId == rowAccountId)
+                    {
+                        OnListItemsAmount += rowAmount;
+                    }
+                }
             }
-        }
-
-        private void dtDateRequest_ValueChanged(object sender, EventArgs e)
-        {
-           mskTxtTemplate.Text =  GenerateObligationNoTemplate();
+            
+            return OnListItemsAmount;
         }
 
 
 
-        private bool ObligationNoExist()
+        private void LoadAccounts()
         {
             try
             {
-                string obligationNo = $"{mskTxtSeriesNo.Text}-{mskTxtTemplate.Text}";
-                bool obligationNoExist;
+                cmbxAccount.SelectedValueChanged -= new EventHandler(cmbxAccount_SelectedValueChanged);
+                cmbxAccount.TextChanged -= new EventHandler(cmbxAccount_TextChanged);
 
-                if (obligationRequestId == 0)
-                    obligationNoExist = Factory.ObligationRequestRepository().ObligationNumExist(obligationNo);
+                var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
+
+                string allotmentClassName = allotmentClassRepo["allotment_name"];
+
+                DataTable dtAccounts;
+
+                if (allotmentClassId == 4)
+                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsBySearch(cmbxAccount.Text);
                 else
-                    obligationNoExist = Factory.ObligationRequestRepository().ObligationNumExist(obligationRequestId, obligationNo);
+                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajAccGroupNameSearch(allotmentClassName, cmbxAccount.Text);
 
-
-                if (obligationNoExist) 
+                var accountDict = new Dictionary<int, string>();
+                foreach (DataRow item in dtAccounts.Rows)
                 {
-                    epObligationSeriesNo.SetError(mskTxtTemplate, "Obligaton No. already exist on your record.");
+                    int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
+                    string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
+
+                    accountDict.Add(accountId, accountName);
+                }
+
+                cmbxAccount.DataSource = new BindingSource(accountDict, null);
+                cmbxAccount.DisplayMember = "value";
+                cmbxAccount.ValueMember = "key";
+                cmbxAccount.SelectedIndex = -1;
+                cmbxAccount.SelectedValueChanged += new EventHandler(cmbxAccount_SelectedValueChanged);
+                cmbxAccount.TextChanged += new EventHandler(cmbxAccount_TextChanged);
+
+                Helper.ClearErrorComboBox(epAccount, cmbxAccount);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void cmbxAccount_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbxAccount.Text))
+            {
+                LoadAccounts();
+            }
+            else if (ShowErrorAccountNameNotExist() && string.IsNullOrEmpty(cmbxAccount.Text))
+            {
+                txtAllotmentAmount.Text = "0.00";
+                txtBalance.Text = "0.00";
+            }
+        }
+
+        private bool ShowErrorAccountNameNotExist()
+        {
+            try
+            {
+                if (cmbxAccount.FindStringExact(cmbxAccount.Text) < 0 && !string.IsNullOrEmpty(cmbxAccount.Text))
+                {
+                    epAccount.SetError(cmbxAccount, "Account you entered doesn't exist on your record.");
                     return true;
                 }
             }
@@ -121,13 +196,110 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-        private bool ObligationSeriesNoEmpty() 
+        private bool ShowErrorAccountExistOnList() 
         {
             try
             {
-                if (!mskTxtSeriesNo.MaskCompleted)
+                foreach (DataGridViewRow item in _ucObligationRequestMain.dataGridView1.Rows) 
                 {
-                    epObligationSeriesNo.SetError(mskTxtTemplate, "Pleas put an Obligation Series No.");
+                    int accountId = Convert.ToInt32(cmbxAccount.SelectedValue);
+                    int rowAccountId = Convert.ToInt32(item.Cells["account_id"].Value);
+
+
+                    if (accountId == rowAccountId && _ucObligationRequestMain.obligationRequestId == 0) 
+                    {
+                        epAccount.SetError(cmbxAccount, "Account already exist on the List");
+                        return true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void cmbxAccount_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbxAccount.Text))
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbxAccount, "Account");
+            else if (ShowErrorAccountNameNotExist())
+                e.Cancel = ShowErrorAccountNameNotExist();
+            else
+                e.Cancel = ShowErrorAccountExistOnList();
+        }
+
+        private void cmbxAccount_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epAccount, cmbxAccount);
+        }
+
+        private void cmbxAccount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (cmbxAccount.Text.Length < 4) return;
+
+            if (e.KeyCode == Keys.F1)
+            {
+                try
+                {
+
+                    cmbxAccount.SelectedValueChanged -= new EventHandler(cmbxAccount_SelectedValueChanged);
+
+                    var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
+
+                    string allotmentClassName = allotmentClassRepo["allotment_name"];
+
+                    DataTable dtAccounts;
+
+                    if (allotmentClassId == 4)
+                        dtAccounts = Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsBySearch(cmbxAccount.Text);
+                    else
+                        dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajAccGroupNameSearch(allotmentClassName, cmbxAccount.Text);
+
+                    if (dtAccounts.Rows.Count == 0 || string.IsNullOrWhiteSpace(cmbxAccount.Text.Trim())) return;
+
+                    var accountDict = new Dictionary<int, string>();
+                    foreach (DataRow item in dtAccounts.Rows)
+                    {
+                        int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
+                        string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
+
+                        accountDict.Add(accountId, accountName);
+                    }
+
+                    cmbxAccount.DataSource = new BindingSource(accountDict, null);
+                    cmbxAccount.DisplayMember = "value";
+                    cmbxAccount.ValueMember = "key";
+                    cmbxAccount.DroppedDown = true;
+
+                    cmbxAccount.SelectedValueChanged += new EventHandler(cmbxAccount_SelectedValueChanged);
+
+                    Helper.ClearErrorComboBox(epAccount, cmbxAccount);
+                }
+                catch (Exception ex)
+                {
+                    Helper.MessageBoxError(ex.Message);
+                }
+            }
+        }
+
+        private void cmbxAccount_SelectedValueChanged(object sender, EventArgs e)
+        {
+            GetTotalAllotmentRelease();
+            GetTotalAllotmentBalance();
+        }
+
+
+
+        private bool ShowErrorAmountIsZero()
+        {
+            try
+            {
+                if (nudAmount.Value == 0 && !string.IsNullOrEmpty(nudAmount.Text))
+                {
+                    epAmount.SetError(nudAmount, "Please enter a valuable amount.");
                     return true;
                 }
             }
@@ -138,90 +310,13 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-        private void mskTxtSeriesNo_Validating(object sender, CancelEventArgs e)
-        {
-            if (!mskTxtSeriesNo.MaskCompleted)
-                e.Cancel = ObligationSeriesNoEmpty();
-            else if (ObligationNoExist())
-                e.Cancel = ObligationNoExist();
-        }
-
-        private void mskTxtSeriesNo_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearMaskedTextboxError(epObligationSeriesNo, mskTxtTemplate);
-        }
-
-
-
-        private void txtReferenceNo_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epReferenceNo, txtReferenceNo, "Reference No,");
-        }
-
-        private void txtReferenceNo_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epReferenceNo, txtReferenceNo);
-        }
-
-
-
-        private void txtPayee_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epPayee, txtPayee, "Payee");
-        }
-
-        private void txtPayee_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epPayee, txtPayee);
-        }
-
-
-
-        private void txtExplanation_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epExplanation, txtExplanation, "Explanation");
-        }
-
-        private void txtExplanation_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epExplanation, txtExplanation);
-        }
-
-
-
-        private bool AmountExceed() 
+        private bool ShowErrorAmountExceeds() 
         {
             try
             {
-
-                bool amountExceed;
-
-                if (obligationRequestId == 0)
-                    amountExceed = nudAmount.Value > GetAmounts()["allotment_release_balance"];
-                else
-                    amountExceed = nudAmount.Value > GetAmounts()["allotment_release_balance"] + currentObligationAmount;
-
-                if (amountExceed) 
+                if (nudAmount.Value > totalAllotmentReleaseBalance)
                 {
-                    epAmount.SetError(nudAmount, "Amount you entered exceeds to the allotment release balance.");
-                    return true;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);    
-            }
-            return false;
-        }
-
-        private bool AmountIsZero() 
-        {
-            try
-            {
-                if (nudAmount.Value == 0 && !string.IsNullOrEmpty(nudAmount.Text)) 
-                {
-                    epAmount.SetError(nudAmount, "Valuable amount is required.");
+                    epAmount.SetError(nudAmount, "Amount you entered exceeds to the alloted balance.");
                     return true;
                 }
             }
@@ -236,15 +331,27 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             if (string.IsNullOrEmpty(nudAmount.Text))
                 e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
-            else if (AmountIsZero())
-                e.Cancel = AmountIsZero();
-            else if (AmountExceed())
-                e.Cancel = AmountExceed();
+            else if (ShowErrorAmountIsZero())
+                e.Cancel = ShowErrorAmountIsZero();
+            else
+                e.Cancel = ShowErrorAmountExceeds();
         }
 
         private void nudAmount_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
+        }
+
+
+
+        private void ucObligationRequest_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadAccounts();
+                GetTotalAllotmentRelease();
+                GetTotalAllotmentBalance();
+            }
         }
     }
 }

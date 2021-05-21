@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,39 +14,74 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 {
     public partial class frmObligationRequestMain : Form
     {
-        ucObligationRequestMain uc;
+        private ucObligationRequestMain uc;
 
         public frmObligationRequestMain()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            btnAdd.Click += new EventHandler(BtnAdd_Click);
-            btnEdit.Click += new EventHandler(BtnEdit_Click);
-            btnDelete.Click += new EventHandler(BtnDelete_Click);
             uc = ucObligationRequestMain1;
-            uc.LoadReferenceObligationRequestMain(this);
+            btnNew.Click += new EventHandler(BtnNew_Click);
+            btnSave.Click += new EventHandler(BtnSave_Click);
+            btnDelete.Click += new EventHandler(BtnDelete_Click);
+            btnCancel.Click += new EventHandler(BtnCancel_CLick);
+            btnSearch.Click += new EventHandler(BtnSearch_Click);
+            btnCancel.Enabled = false;
+            btnDelete.Enabled = false;
+        }
+
+
+        private void UnsavedWorkPrompt()
+        {
+            var message = "Are you sure? Unsaved data will not be saved.";
+
+            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                uc.ResetForm();
+            }
+        }
+
+        private void BtnNew_Click(object sender, EventArgs e)
+        {
+            UnsavedWorkPrompt();
+        }
+
+
+        private List<ObligationAccountModel> ObligationAccountsModelList() 
+        {
+            var obligationRequestModelList = new List<ObligationAccountModel>();
+
+            foreach (DataGridViewRow item in uc.dataGridView1.Rows) 
+            {
+
+                int accountId = Convert.ToInt32(item.Cells["account_id"].Value);
+                decimal amount = Convert.ToDecimal(item.Cells["amount"].Value);
+
+                var obligationAccountModel = new ObligationAccountModel()
+                {
+                    AccountId = accountId,
+                    Amount = amount
+                };
+
+
+                obligationRequestModelList.Add(obligationAccountModel);
+            }
+
+            return obligationRequestModelList;
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            int selectedRowsCount = uc.dgObligationRequests.SelectedRows.Count;
             try
             {
-                if (selectedRowsCount > 0)
+                if (Helper.MessageBoxConfirmDelete(1))
                 {
-                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
-                    {
-                        var obligationRequestModeList = new List<ObligationRequestModel>();
-                        foreach (DataGridViewRow row in uc.dgObligationRequests.SelectedRows)
-                        {
-                            int obligationRequestId = Convert.ToInt16(row.Cells[0].Value.ToString());
-                            obligationRequestModeList.Add(new ObligationRequestModel() { ID = obligationRequestId });
-                        }
-
-                        var allotmentClassesRepository = Factory.ObligationRequestRepository();
-                        _ = allotmentClassesRepository.Delete(obligationRequestModeList);
-                        uc.LoadObligationRequestRecords();
-                    }
+                    _ = Factory.ObligationRequestRepository().Delete(uc.obligationRequestId);
+                    btnNew.Enabled = true;
+                    btnSave.Text = "&Save";
+                    btnCancel.Enabled = false;
+                    btnDelete.Enabled = false;
+                    uc.ResetForm();
                 }
             }
             catch (Exception ex)
@@ -54,85 +90,29 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
         }
 
-        private void ShowObligationRequestEdit()
-        {
-  
-            var frmObligationRequestEdit = new frmObligationRequestEdit(this);
-            var ucObligationRequestEdit = frmObligationRequestEdit.ucObligationRequest1;
-               
-            int rowIndex = uc.dgObligationRequests.CurrentCell.RowIndex;
-
-            int obligationRequestId = Convert.ToInt32(uc.dgObligationRequests.Rows[rowIndex].Cells["obligation_request_id"].Value);
-            var obligationRequestRepo = Factory.ObligationRequestRepository().GetViewRecordsById(obligationRequestId);
-
-            int fppId = Convert.ToInt32(obligationRequestRepo["fpp_id"]);
-            int? otherFPPId = string.IsNullOrEmpty(obligationRequestRepo["others_fpp_id"]) ? null : Convert.ToInt32(obligationRequestRepo["others_fpp_id"]);
-            int fundId = Convert.ToInt32(obligationRequestRepo["fund_id"]);
-            int allotmentClassId = Convert.ToInt32(obligationRequestRepo["allotment_class_id"]);
-            int accountId = Convert.ToInt32(obligationRequestRepo["gen_ledger_acc_id"]);
-            DateTime dateRequested = Convert.ToDateTime(obligationRequestRepo["date_requested"]);
-
-            string accountName = obligationRequestRepo["gen_ledger_acc_name"];
-            string seriesNo = obligationRequestRepo["obligation_no"];
-            string referenceNo = obligationRequestRepo["reference_no"];
-            string payee = obligationRequestRepo["payee"];
-            string explanation = obligationRequestRepo["explanation"];
-            decimal obligationAmount = Convert.ToDecimal(obligationRequestRepo["obligation_amount"]);
 
 
-            ucObligationRequestEdit.obligationRequestId = obligationRequestId;
-            ucObligationRequestEdit.fppId = fppId;
-            ucObligationRequestEdit.otherFPPId = otherFPPId;
-            ucObligationRequestEdit.fundId = fundId;
-            ucObligationRequestEdit.allotmentClassId = allotmentClassId;
-            ucObligationRequestEdit.accountId = accountId;
-            ucObligationRequestEdit.currentObligationAmount = obligationAmount;
-
-
-            ucObligationRequestEdit.month = Convert.ToByte(dateRequested.Month);
-            ucObligationRequestEdit.year = Convert.ToInt16(dateRequested.Year);
-            ucObligationRequestEdit.txtAccountName.Text = accountName;
-            ucObligationRequestEdit.mskTxtSeriesNo.Text = seriesNo;
-            ucObligationRequestEdit.txtReferenceNo.Text = referenceNo;
-            ucObligationRequestEdit.txtPayee.Text = payee;
-            ucObligationRequestEdit.txtExplanation.Text = explanation;
-            ucObligationRequestEdit.nudAmount.Value = obligationAmount;
-            ucObligationRequestEdit.dtDateRequest.Enabled = false;
-
-
-            frmObligationRequestEdit.ShowDialog();
-  
-        }
-
-        private void BtnEdit_Click(object sender, EventArgs e)
-        {
-            ShowObligationRequestEdit();
-        }
-
-        private bool ShowObligationRequestAdd() 
+        private bool InsertData() 
         {
             try
             {
-                if (!uc.ValidateChildren()) 
+
+                var obligationRequestModel = new ObligationRequestModel()
                 {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
+                    FPPId = Convert.ToInt32(uc.cmbxFPP.SelectedValue),
+                    OtherFPPId = string.IsNullOrEmpty(uc.cmbxOtherFPP.Text) ? null : Convert.ToInt32(uc.cmbxOtherFPP.SelectedValue),
+                    FundId = uc.fundId,
+                    AllotmentClassId = uc.allotmentClassId,
+                    DateRequested = uc.dtDateRequest.Value,
+                    ObligationNo = $"{uc.mskTxtObligationNoSeries.Text}-{uc.mskTxtObligationNoTemplate.Text}",
+                    Payee = uc.txtPayee.Text,
+                    Explanation = uc.txtExplanation.Text,
+                    ReferenceNo = uc.txtReferenceNo.Text,
+                    CreatedBy = Helper.UserId
+                };
 
-                var frmObligationAdd = new frmObligationRequestAdd(this);
-                var ucFrmObligationAdd = frmObligationAdd.ucObligationRequest1;
 
-                ucFrmObligationAdd.fppId = Convert.ToInt32(uc.cmbxFPP.SelectedValue);
-                ucFrmObligationAdd.otherFPPId = string.IsNullOrEmpty(uc.cmbxOthersFPP.Text) ? null : Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue);
-                ucFrmObligationAdd.fundId = uc.fundId;
-                ucFrmObligationAdd.allotmentClassId = uc.allotmentClassId;
-                ucFrmObligationAdd.accountId = Convert.ToInt32(uc.cmbxAccount.SelectedValue);
-                ucFrmObligationAdd.txtAccountName.Text = uc.cmbxAccount.Text;
-                ucFrmObligationAdd.month = Convert.ToByte(uc.cmbxMonths.SelectedValue);
-                ucFrmObligationAdd.year = Convert.ToInt16(uc.nudYear.Value);
-
-                frmObligationAdd.ShowDialog();
-                return true;
+                return Factory.ObligationRequestRepository().Insert(obligationRequestModel, ObligationAccountsModelList());
             }
             catch (Exception ex)
             {
@@ -141,14 +121,99 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-        private void BtnAdd_Click(object sender, EventArgs e)
+
+        private bool UpdateData() 
         {
-            ShowObligationRequestAdd();
+            try
+            {
+                var obligationRequestModel = new ObligationRequestModel()
+                {
+                    Id = uc.obligationRequestId,
+                    Payee = uc.txtPayee.Text,
+                    Explanation = uc.txtExplanation.Text,
+                    ReferenceNo = uc.txtReferenceNo.Text,
+                    UpdatedBy = Helper.UserId
+                };
+
+
+                return Factory.ObligationRequestRepository().Update(obligationRequestModel, ObligationAccountsModelList());
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.StackTrace);
+            }
+            return false;
         }
 
-        private void frmObligationRequestMain_Load(object sender, EventArgs e)
-        {
 
+
+        private bool SaveData() 
+        {
+            try
+            {
+                if (!uc.ValidateChildren() || uc.ShowErrorListEmpty()) 
+                {
+                    Helper.MessageBoxError(uc.GetFormErrors());
+                    return false;
+                }
+
+                bool saveData;
+
+                if (uc.obligationRequestId == 0)
+                    saveData = InsertData();
+                else
+                {
+                    saveData = UpdateData();
+                }
+
+
+                return saveData;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+
+        private void Actions()
+        {
+            if (uc.obligationRequestId == 0)
+                Helper.MessageBoxSuccess("Obligation Request has been saved.");
+            else
+            {
+                Helper.MessageBoxSuccess("Obligation Request has been updated.");
+                btnNew.Enabled = true;
+                btnSave.Text = "&Save";
+                btnDelete.Enabled = false;
+                btnCancel.Enabled = false;
+            }
+
+            uc.ResetForm();
+        }
+
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            if (SaveData())
+            {
+                Actions();
+            }
+        }
+
+
+        private void BtnCancel_CLick(object sender, EventArgs e)
+        {
+            btnSave.Text = "Save";
+            btnNew.Enabled = true;
+            btnCancel.Enabled = false;
+            btnDelete.Enabled = false;
+            uc.ResetForm();
+        }
+
+        private void BtnSearch_Click(object sender, EventArgs e)
+        {
+            _ = new frmObligationRequestSearch(this).ShowDialog();
         }
 
     }

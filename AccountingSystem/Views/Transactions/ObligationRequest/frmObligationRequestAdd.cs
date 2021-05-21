@@ -1,5 +1,4 @@
-﻿using ACC.Domain.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,48 +12,44 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 {
     public partial class frmObligationRequestAdd : Form
     {
+        private ucObligationRequestMain _ucObligationRequestMain;
         private ucObligationRequest uc;
-        private frmObligationRequestMain _frmObligationRequestMain;
 
-        public frmObligationRequestAdd(frmObligationRequestMain frmObligationRequestMain)
+        public frmObligationRequestAdd(ucObligationRequestMain ucObligationRequestMain)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
             uc = ucObligationRequest1;
-            _frmObligationRequestMain = frmObligationRequestMain;
+            _ucObligationRequestMain = ucObligationRequestMain;
+            uc.LoadReferences(_ucObligationRequestMain);
         }
 
-        private bool SaveData()
+
+        private bool AddToListRecord() 
         {
             try
             {
-                if (!uc.ValidateChildren())
+                if (!uc.ValidateChildren()) 
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
 
-                string obligationNo = $"{uc.mskTxtSeriesNo.Text}-{uc.GenerateObligationNoTemplate()}";
-                int userId =  Helper.UserId;
+                int accountId = Convert.ToInt32(uc.cmbxAccount.SelectedValue);
+                string accountName = uc.cmbxAccount.Text;
+                decimal obligationAmount = uc.nudAmount.Value;
 
-                var obligationRequestModel = new ObligationRequestModel()
+                var items = new object[]
                 {
-                    FundID = uc.fundId,
-                    FPPId = uc.fppId,
-                    OtherFPPId = uc.otherFPPId,
-                    AllotmentClassesID = uc.allotmentClassId,
-                    GenLedgerAccID = uc.accountId,
-                    DateRequested = uc.dtDateRequest.Value,
-                    ObligationNo = obligationNo,
-                    Payee = uc.txtPayee.Text.Trim(),
-                    Explanation = uc.txtExplanation.Text.Trim(),
-                    ReferencesNo = uc.txtReferenceNo.Text.Trim(),
-                    ObligationAmount = uc.nudAmount.Value,
-                    CreatedBy = userId
+                    accountId,
+                    accountName,
+                    obligationAmount
                 };
 
+                _ucObligationRequestMain.dataGridView1.Rows.Add(items);
 
-                return Factory.ObligationRequestRepository().Insert(obligationRequestModel);
+                return true;
+            
             }
             catch (Exception ex)
             {
@@ -63,14 +58,23 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnAddToList_Click(object sender, EventArgs e)
         {
-            if (SaveData()) 
+            if (AddToListRecord()) 
             {
                 uc.ResetForm();
-                Helper.MessageBoxSuccess("Obligation Request has been saved.");
-                _frmObligationRequestMain.ucObligationRequestMain1.LoadObligationRequestRecords();
+                uc.GetTotalAllotmentBalance();
+                _ucObligationRequestMain.cmbxFPP.Enabled = false;
+                _ucObligationRequestMain.cmbxOtherFPP.Enabled = false;
+                _ucObligationRequestMain.flowLayoutPanelFunds.Enabled = false;
+                _ucObligationRequestMain.flowLayoutPanelAllotmentClass.Enabled = false;
+                _ucObligationRequestMain.dtDateRequest.Enabled = false;
             }
+        }
+
+        private void frmObligationRequestAdd_Load(object sender, EventArgs e)
+        {
+          
         }
     }
 }
