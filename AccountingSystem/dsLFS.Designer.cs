@@ -10,9 +10,10 @@
 
 #pragma warning disable 1591
 
-namespace AccountingSystem {
-    
-    
+namespace AccountingSystem
+{
+
+
     /// <summary>
     ///Represents a strongly typed in-memory cache of data.
     ///</summary>
@@ -22,33 +23,35 @@ namespace AccountingSystem {
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
     [global::System.Xml.Serialization.XmlRootAttribute("dsLFS")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class dsLFS : global::System.Data.DataSet {
-        
+    public partial class dsLFS : global::System.Data.DataSet
+    {
+
         private dtGeneralJournalDataTable tabledtGeneralJournal;
-        
+
         private CashDisbursementsJournalDataTable tableCashDisbursementsJournal;
-        
+
         private CheckDisbursementsJournalDataTable tableCheckDisbursementsJournal;
-        
+
         private CashReceiptsJournalDataTable tableCashReceiptsJournal;
-        
+
         private ProcurementsReceivedJournalDataTable tableProcurementsReceivedJournal;
-        
+
         private AuthorityToDebitAccountDisbursementsJournalDataTable tableAuthorityToDebitAccountDisbursementsJournal;
-        
+
         private GeneralLedgerDataTable tableGeneralLedger;
-        
+
         private dtRCIDataTable tabledtRCI;
-        
+
         private dtPCDataTable tabledtPC;
-        
+
         private dtSAAOBDataTable tabledtSAAOB;
-        
+
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public dsLFS() {
+        public dsLFS()
+        {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -56,12 +59,14 @@ namespace AccountingSystem {
             base.Relations.CollectionChanged += schemaChangedHandler;
             this.EndInit();
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        protected dsLFS(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                base(info, context, false) {
-            if ((this.IsBinarySerialized(info, context) == true)) {
+        protected dsLFS(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
+                base(info, context, false)
+        {
+            if ((this.IsBinarySerialized(info, context) == true))
+            {
                 this.InitVars(false);
                 global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler1 = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
                 this.Tables.CollectionChanged += schemaChangedHandler1;
@@ -69,37 +74,48 @@ namespace AccountingSystem {
                 return;
             }
             string strSchema = ((string)(info.GetValue("XmlSchema", typeof(string))));
-            if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
+            if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema))
+            {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["dtGeneralJournal"] != null)) {
+                if ((ds.Tables["dtGeneralJournal"] != null))
+                {
                     base.Tables.Add(new dtGeneralJournalDataTable(ds.Tables["dtGeneralJournal"]));
                 }
-                if ((ds.Tables["CashDisbursementsJournal"] != null)) {
+                if ((ds.Tables["CashDisbursementsJournal"] != null))
+                {
                     base.Tables.Add(new CashDisbursementsJournalDataTable(ds.Tables["CashDisbursementsJournal"]));
                 }
-                if ((ds.Tables["CheckDisbursementsJournal"] != null)) {
+                if ((ds.Tables["CheckDisbursementsJournal"] != null))
+                {
                     base.Tables.Add(new CheckDisbursementsJournalDataTable(ds.Tables["CheckDisbursementsJournal"]));
                 }
-                if ((ds.Tables["CashReceiptsJournal"] != null)) {
+                if ((ds.Tables["CashReceiptsJournal"] != null))
+                {
                     base.Tables.Add(new CashReceiptsJournalDataTable(ds.Tables["CashReceiptsJournal"]));
                 }
-                if ((ds.Tables["ProcurementsReceivedJournal"] != null)) {
+                if ((ds.Tables["ProcurementsReceivedJournal"] != null))
+                {
                     base.Tables.Add(new ProcurementsReceivedJournalDataTable(ds.Tables["ProcurementsReceivedJournal"]));
                 }
-                if ((ds.Tables["AuthorityToDebitAccountDisbursementsJournal"] != null)) {
+                if ((ds.Tables["AuthorityToDebitAccountDisbursementsJournal"] != null))
+                {
                     base.Tables.Add(new AuthorityToDebitAccountDisbursementsJournalDataTable(ds.Tables["AuthorityToDebitAccountDisbursementsJournal"]));
                 }
-                if ((ds.Tables["GeneralLedger"] != null)) {
+                if ((ds.Tables["GeneralLedger"] != null))
+                {
                     base.Tables.Add(new GeneralLedgerDataTable(ds.Tables["GeneralLedger"]));
                 }
-                if ((ds.Tables["dtRCI"] != null)) {
+                if ((ds.Tables["dtRCI"] != null))
+                {
                     base.Tables.Add(new dtRCIDataTable(ds.Tables["dtRCI"]));
                 }
-                if ((ds.Tables["dtPC"] != null)) {
+                if ((ds.Tables["dtPC"] != null))
+                {
                     base.Tables.Add(new dtPCDataTable(ds.Tables["dtPC"]));
                 }
-                if ((ds.Tables["dtSAAOB"] != null)) {
+                if ((ds.Tables["dtSAAOB"] != null))
+                {
                     base.Tables.Add(new dtSAAOBDataTable(ds.Tables["dtSAAOB"]));
                 }
                 this.DataSetName = ds.DataSetName;
@@ -111,7 +127,8 @@ namespace AccountingSystem {
                 this.Merge(ds, false, global::System.Data.MissingSchemaAction.Add);
                 this.InitVars();
             }
-            else {
+            else
+            {
                 this.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
             }
             this.GetSerializationData(info, context);
@@ -119,202 +136,245 @@ namespace AccountingSystem {
             base.Tables.CollectionChanged += schemaChangedHandler;
             this.Relations.CollectionChanged += schemaChangedHandler;
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public dtGeneralJournalDataTable dtGeneralJournal {
-            get {
+        public dtGeneralJournalDataTable dtGeneralJournal
+        {
+            get
+            {
                 return this.tabledtGeneralJournal;
             }
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public CashDisbursementsJournalDataTable CashDisbursementsJournal {
-            get {
+        public CashDisbursementsJournalDataTable CashDisbursementsJournal
+        {
+            get
+            {
                 return this.tableCashDisbursementsJournal;
             }
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public CheckDisbursementsJournalDataTable CheckDisbursementsJournal {
-            get {
+        public CheckDisbursementsJournalDataTable CheckDisbursementsJournal
+        {
+            get
+            {
                 return this.tableCheckDisbursementsJournal;
             }
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public CashReceiptsJournalDataTable CashReceiptsJournal {
-            get {
+        public CashReceiptsJournalDataTable CashReceiptsJournal
+        {
+            get
+            {
                 return this.tableCashReceiptsJournal;
             }
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public ProcurementsReceivedJournalDataTable ProcurementsReceivedJournal {
-            get {
+        public ProcurementsReceivedJournalDataTable ProcurementsReceivedJournal
+        {
+            get
+            {
                 return this.tableProcurementsReceivedJournal;
             }
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public AuthorityToDebitAccountDisbursementsJournalDataTable AuthorityToDebitAccountDisbursementsJournal {
-            get {
+        public AuthorityToDebitAccountDisbursementsJournalDataTable AuthorityToDebitAccountDisbursementsJournal
+        {
+            get
+            {
                 return this.tableAuthorityToDebitAccountDisbursementsJournal;
             }
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public GeneralLedgerDataTable GeneralLedger {
-            get {
+        public GeneralLedgerDataTable GeneralLedger
+        {
+            get
+            {
                 return this.tableGeneralLedger;
             }
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public dtRCIDataTable dtRCI {
-            get {
+        public dtRCIDataTable dtRCI
+        {
+            get
+            {
                 return this.tabledtRCI;
             }
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public dtPCDataTable dtPC {
-            get {
+        public dtPCDataTable dtPC
+        {
+            get
+            {
                 return this.tabledtPC;
             }
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public dtSAAOBDataTable dtSAAOB {
-            get {
+        public dtSAAOBDataTable dtSAAOB
+        {
+            get
+            {
                 return this.tabledtSAAOB;
             }
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
-        public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
-            get {
+        public override global::System.Data.SchemaSerializationMode SchemaSerializationMode
+        {
+            get
+            {
                 return this._schemaSerializationMode;
             }
-            set {
+            set
+            {
                 this._schemaSerializationMode = value;
             }
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public new global::System.Data.DataTableCollection Tables {
-            get {
+        public new global::System.Data.DataTableCollection Tables
+        {
+            get
+            {
                 return base.Tables;
             }
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public new global::System.Data.DataRelationCollection Relations {
-            get {
+        public new global::System.Data.DataRelationCollection Relations
+        {
+            get
+            {
                 return base.Relations;
             }
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        protected override void InitializeDerivedDataSet() {
+        protected override void InitializeDerivedDataSet()
+        {
             this.BeginInit();
             this.InitClass();
             this.EndInit();
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public override global::System.Data.DataSet Clone() {
+        public override global::System.Data.DataSet Clone()
+        {
             dsLFS cln = ((dsLFS)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        protected override bool ShouldSerializeTables() {
+        protected override bool ShouldSerializeTables()
+        {
             return false;
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        protected override bool ShouldSerializeRelations() {
+        protected override bool ShouldSerializeRelations()
+        {
             return false;
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        protected override void ReadXmlSerializable(global::System.Xml.XmlReader reader) {
-            if ((this.DetermineSchemaSerializationMode(reader) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
+        protected override void ReadXmlSerializable(global::System.Xml.XmlReader reader)
+        {
+            if ((this.DetermineSchemaSerializationMode(reader) == global::System.Data.SchemaSerializationMode.IncludeSchema))
+            {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["dtGeneralJournal"] != null)) {
+                if ((ds.Tables["dtGeneralJournal"] != null))
+                {
                     base.Tables.Add(new dtGeneralJournalDataTable(ds.Tables["dtGeneralJournal"]));
                 }
-                if ((ds.Tables["CashDisbursementsJournal"] != null)) {
+                if ((ds.Tables["CashDisbursementsJournal"] != null))
+                {
                     base.Tables.Add(new CashDisbursementsJournalDataTable(ds.Tables["CashDisbursementsJournal"]));
                 }
-                if ((ds.Tables["CheckDisbursementsJournal"] != null)) {
+                if ((ds.Tables["CheckDisbursementsJournal"] != null))
+                {
                     base.Tables.Add(new CheckDisbursementsJournalDataTable(ds.Tables["CheckDisbursementsJournal"]));
                 }
-                if ((ds.Tables["CashReceiptsJournal"] != null)) {
+                if ((ds.Tables["CashReceiptsJournal"] != null))
+                {
                     base.Tables.Add(new CashReceiptsJournalDataTable(ds.Tables["CashReceiptsJournal"]));
                 }
-                if ((ds.Tables["ProcurementsReceivedJournal"] != null)) {
+                if ((ds.Tables["ProcurementsReceivedJournal"] != null))
+                {
                     base.Tables.Add(new ProcurementsReceivedJournalDataTable(ds.Tables["ProcurementsReceivedJournal"]));
                 }
-                if ((ds.Tables["AuthorityToDebitAccountDisbursementsJournal"] != null)) {
+                if ((ds.Tables["AuthorityToDebitAccountDisbursementsJournal"] != null))
+                {
                     base.Tables.Add(new AuthorityToDebitAccountDisbursementsJournalDataTable(ds.Tables["AuthorityToDebitAccountDisbursementsJournal"]));
                 }
-                if ((ds.Tables["GeneralLedger"] != null)) {
+                if ((ds.Tables["GeneralLedger"] != null))
+                {
                     base.Tables.Add(new GeneralLedgerDataTable(ds.Tables["GeneralLedger"]));
                 }
-                if ((ds.Tables["dtRCI"] != null)) {
+                if ((ds.Tables["dtRCI"] != null))
+                {
                     base.Tables.Add(new dtRCIDataTable(ds.Tables["dtRCI"]));
                 }
-                if ((ds.Tables["dtPC"] != null)) {
+                if ((ds.Tables["dtPC"] != null))
+                {
                     base.Tables.Add(new dtPCDataTable(ds.Tables["dtPC"]));
                 }
-                if ((ds.Tables["dtSAAOB"] != null)) {
+                if ((ds.Tables["dtSAAOB"] != null))
+                {
                     base.Tables.Add(new dtSAAOBDataTable(ds.Tables["dtSAAOB"]));
                 }
                 this.DataSetName = ds.DataSetName;
@@ -326,95 +386,120 @@ namespace AccountingSystem {
                 this.Merge(ds, false, global::System.Data.MissingSchemaAction.Add);
                 this.InitVars();
             }
-            else {
+            else
+            {
                 this.ReadXml(reader);
                 this.InitVars();
             }
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        protected override global::System.Xml.Schema.XmlSchema GetSchemaSerializable() {
+        protected override global::System.Xml.Schema.XmlSchema GetSchemaSerializable()
+        {
             global::System.IO.MemoryStream stream = new global::System.IO.MemoryStream();
             this.WriteXmlSchema(new global::System.Xml.XmlTextWriter(stream, null));
             stream.Position = 0;
             return global::System.Xml.Schema.XmlSchema.Read(new global::System.Xml.XmlTextReader(stream), null);
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        internal void InitVars() {
+        internal void InitVars()
+        {
             this.InitVars(true);
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        internal void InitVars(bool initTable) {
+        internal void InitVars(bool initTable)
+        {
             this.tabledtGeneralJournal = ((dtGeneralJournalDataTable)(base.Tables["dtGeneralJournal"]));
-            if ((initTable == true)) {
-                if ((this.tabledtGeneralJournal != null)) {
+            if ((initTable == true))
+            {
+                if ((this.tabledtGeneralJournal != null))
+                {
                     this.tabledtGeneralJournal.InitVars();
                 }
             }
             this.tableCashDisbursementsJournal = ((CashDisbursementsJournalDataTable)(base.Tables["CashDisbursementsJournal"]));
-            if ((initTable == true)) {
-                if ((this.tableCashDisbursementsJournal != null)) {
+            if ((initTable == true))
+            {
+                if ((this.tableCashDisbursementsJournal != null))
+                {
                     this.tableCashDisbursementsJournal.InitVars();
                 }
             }
             this.tableCheckDisbursementsJournal = ((CheckDisbursementsJournalDataTable)(base.Tables["CheckDisbursementsJournal"]));
-            if ((initTable == true)) {
-                if ((this.tableCheckDisbursementsJournal != null)) {
+            if ((initTable == true))
+            {
+                if ((this.tableCheckDisbursementsJournal != null))
+                {
                     this.tableCheckDisbursementsJournal.InitVars();
                 }
             }
             this.tableCashReceiptsJournal = ((CashReceiptsJournalDataTable)(base.Tables["CashReceiptsJournal"]));
-            if ((initTable == true)) {
-                if ((this.tableCashReceiptsJournal != null)) {
+            if ((initTable == true))
+            {
+                if ((this.tableCashReceiptsJournal != null))
+                {
                     this.tableCashReceiptsJournal.InitVars();
                 }
             }
             this.tableProcurementsReceivedJournal = ((ProcurementsReceivedJournalDataTable)(base.Tables["ProcurementsReceivedJournal"]));
-            if ((initTable == true)) {
-                if ((this.tableProcurementsReceivedJournal != null)) {
+            if ((initTable == true))
+            {
+                if ((this.tableProcurementsReceivedJournal != null))
+                {
                     this.tableProcurementsReceivedJournal.InitVars();
                 }
             }
             this.tableAuthorityToDebitAccountDisbursementsJournal = ((AuthorityToDebitAccountDisbursementsJournalDataTable)(base.Tables["AuthorityToDebitAccountDisbursementsJournal"]));
-            if ((initTable == true)) {
-                if ((this.tableAuthorityToDebitAccountDisbursementsJournal != null)) {
+            if ((initTable == true))
+            {
+                if ((this.tableAuthorityToDebitAccountDisbursementsJournal != null))
+                {
                     this.tableAuthorityToDebitAccountDisbursementsJournal.InitVars();
                 }
             }
             this.tableGeneralLedger = ((GeneralLedgerDataTable)(base.Tables["GeneralLedger"]));
-            if ((initTable == true)) {
-                if ((this.tableGeneralLedger != null)) {
+            if ((initTable == true))
+            {
+                if ((this.tableGeneralLedger != null))
+                {
                     this.tableGeneralLedger.InitVars();
                 }
             }
             this.tabledtRCI = ((dtRCIDataTable)(base.Tables["dtRCI"]));
-            if ((initTable == true)) {
-                if ((this.tabledtRCI != null)) {
+            if ((initTable == true))
+            {
+                if ((this.tabledtRCI != null))
+                {
                     this.tabledtRCI.InitVars();
                 }
             }
             this.tabledtPC = ((dtPCDataTable)(base.Tables["dtPC"]));
-            if ((initTable == true)) {
-                if ((this.tabledtPC != null)) {
+            if ((initTable == true))
+            {
+                if ((this.tabledtPC != null))
+                {
                     this.tabledtPC.InitVars();
                 }
             }
             this.tabledtSAAOB = ((dtSAAOBDataTable)(base.Tables["dtSAAOB"]));
-            if ((initTable == true)) {
-                if ((this.tabledtSAAOB != null)) {
+            if ((initTable == true))
+            {
+                if ((this.tabledtSAAOB != null))
+                {
                     this.tabledtSAAOB.InitVars();
                 }
             }
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private void InitClass() {
+        private void InitClass()
+        {
             this.DataSetName = "dsLFS";
             this.Prefix = "";
             this.Namespace = "http://tempuri.org/dsLFS.xsd";
@@ -441,78 +526,91 @@ namespace AccountingSystem {
             this.tabledtSAAOB = new dtSAAOBDataTable();
             base.Tables.Add(this.tabledtSAAOB);
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializedtGeneralJournal() {
+        private bool ShouldSerializedtGeneralJournal()
+        {
             return false;
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializeCashDisbursementsJournal() {
+        private bool ShouldSerializeCashDisbursementsJournal()
+        {
             return false;
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializeCheckDisbursementsJournal() {
+        private bool ShouldSerializeCheckDisbursementsJournal()
+        {
             return false;
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializeCashReceiptsJournal() {
+        private bool ShouldSerializeCashReceiptsJournal()
+        {
             return false;
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializeProcurementsReceivedJournal() {
+        private bool ShouldSerializeProcurementsReceivedJournal()
+        {
             return false;
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializeAuthorityToDebitAccountDisbursementsJournal() {
+        private bool ShouldSerializeAuthorityToDebitAccountDisbursementsJournal()
+        {
             return false;
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializeGeneralLedger() {
+        private bool ShouldSerializeGeneralLedger()
+        {
             return false;
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializedtRCI() {
+        private bool ShouldSerializedtRCI()
+        {
             return false;
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializedtPC() {
+        private bool ShouldSerializedtPC()
+        {
             return false;
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializedtSAAOB() {
+        private bool ShouldSerializedtSAAOB()
+        {
             return false;
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
-            if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
+        private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e)
+        {
+            if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove))
+            {
                 this.InitVars();
             }
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+        public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs)
+        {
             dsLFS ds = new dsLFS();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
@@ -521,34 +619,43 @@ namespace AccountingSystem {
             sequence.Items.Add(any);
             type.Particle = sequence;
             global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-            if (xs.Contains(dsSchema.TargetNamespace)) {
+            if (xs.Contains(dsSchema.TargetNamespace))
+            {
                 global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
                 global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                try {
+                try
+                {
                     global::System.Xml.Schema.XmlSchema schema = null;
                     dsSchema.Write(s1);
-                    for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                    for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
+                    {
                         schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                         s2.SetLength(0);
                         schema.Write(s2);
-                        if ((s1.Length == s2.Length)) {
+                        if ((s1.Length == s2.Length))
+                        {
                             s1.Position = 0;
                             s2.Position = 0;
-                            for (; ((s1.Position != s1.Length) 
-                                        && (s1.ReadByte() == s2.ReadByte())); ) {
+                            for (; ((s1.Position != s1.Length)
+                                        && (s1.ReadByte() == s2.ReadByte()));)
+                            {
                                 ;
                             }
-                            if ((s1.Position == s1.Length)) {
+                            if ((s1.Position == s1.Length))
+                            {
                                 return type;
                             }
                         }
                     }
                 }
-                finally {
-                    if ((s1 != null)) {
+                finally
+                {
+                    if ((s1 != null))
+                    {
                         s1.Close();
                     }
-                    if ((s2 != null)) {
+                    if ((s2 != null))
+                    {
                         s2.Close();
                     }
                 }
@@ -556,185 +663,212 @@ namespace AccountingSystem {
             xs.Add(dsSchema);
             return type;
         }
-        
+
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void dtGeneralJournalRowChangeEventHandler(object sender, dtGeneralJournalRowChangeEvent e);
-        
+
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void CashDisbursementsJournalRowChangeEventHandler(object sender, CashDisbursementsJournalRowChangeEvent e);
-        
+
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void CheckDisbursementsJournalRowChangeEventHandler(object sender, CheckDisbursementsJournalRowChangeEvent e);
-        
+
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void CashReceiptsJournalRowChangeEventHandler(object sender, CashReceiptsJournalRowChangeEvent e);
-        
+
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void ProcurementsReceivedJournalRowChangeEventHandler(object sender, ProcurementsReceivedJournalRowChangeEvent e);
-        
+
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void AuthorityToDebitAccountDisbursementsJournalRowChangeEventHandler(object sender, AuthorityToDebitAccountDisbursementsJournalRowChangeEvent e);
-        
+
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void GeneralLedgerRowChangeEventHandler(object sender, GeneralLedgerRowChangeEvent e);
-        
+
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void dtRCIRowChangeEventHandler(object sender, dtRCIRowChangeEvent e);
-        
+
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void dtPCRowChangeEventHandler(object sender, dtPCRowChangeEvent e);
-        
+
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void dtSAAOBRowChangeEventHandler(object sender, dtSAAOBRowChangeEvent e);
-        
+
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class dtGeneralJournalDataTable : global::System.Data.TypedTableBase<dtGeneralJournalRow> {
-            
+        public partial class dtGeneralJournalDataTable : global::System.Data.TypedTableBase<dtGeneralJournalRow>
+        {
+
             private global::System.Data.DataColumn columndate_entry;
-            
+
             private global::System.Data.DataColumn columnjev_no;
-            
+
             private global::System.Data.DataColumn columnparticulars;
-            
+
             private global::System.Data.DataColumn columnaccount_code;
-            
+
             private global::System.Data.DataColumn columnp;
-            
+
             private global::System.Data.DataColumn columndebit;
-            
+
             private global::System.Data.DataColumn columncredit;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtGeneralJournalDataTable() {
+            public dtGeneralJournalDataTable()
+            {
                 this.TableName = "dtGeneralJournal";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal dtGeneralJournalDataTable(global::System.Data.DataTable table) {
+            internal dtGeneralJournalDataTable(global::System.Data.DataTable table)
+            {
                 this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive))
+                {
                     this.CaseSensitive = table.CaseSensitive;
                 }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
+                {
                     this.Locale = table.Locale;
                 }
-                if ((table.Namespace != table.DataSet.Namespace)) {
+                if ((table.Namespace != table.DataSet.Namespace))
+                {
                     this.Namespace = table.Namespace;
                 }
                 this.Prefix = table.Prefix;
                 this.MinimumCapacity = table.MinimumCapacity;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected dtGeneralJournalDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
+            protected dtGeneralJournalDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
+                    base(info, context)
+            {
                 this.InitVars();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn date_entryColumn {
-                get {
+            public global::System.Data.DataColumn date_entryColumn
+            {
+                get
+                {
                     return this.columndate_entry;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn jev_noColumn {
-                get {
+            public global::System.Data.DataColumn jev_noColumn
+            {
+                get
+                {
                     return this.columnjev_no;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn particularsColumn {
-                get {
+            public global::System.Data.DataColumn particularsColumn
+            {
+                get
+                {
                     return this.columnparticulars;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_codeColumn {
-                get {
+            public global::System.Data.DataColumn account_codeColumn
+            {
+                get
+                {
                     return this.columnaccount_code;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn pColumn {
-                get {
+            public global::System.Data.DataColumn pColumn
+            {
+                get
+                {
                     return this.columnp;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn debitColumn {
-                get {
+            public global::System.Data.DataColumn debitColumn
+            {
+                get
+                {
                     return this.columndebit;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn creditColumn {
-                get {
+            public global::System.Data.DataColumn creditColumn
+            {
+                get
+                {
                     return this.columncredit;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
+            public int Count
+            {
+                get
+                {
                     return this.Rows.Count;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtGeneralJournalRow this[int index] {
-                get {
+            public dtGeneralJournalRow this[int index]
+            {
+                get
+                {
                     return ((dtGeneralJournalRow)(this.Rows[index]));
                 }
             }
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event dtGeneralJournalRowChangeEventHandler dtGeneralJournalRowChanging;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event dtGeneralJournalRowChangeEventHandler dtGeneralJournalRowChanged;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event dtGeneralJournalRowChangeEventHandler dtGeneralJournalRowDeleting;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event dtGeneralJournalRowChangeEventHandler dtGeneralJournalRowDeleted;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AdddtGeneralJournalRow(dtGeneralJournalRow row) {
+            public void AdddtGeneralJournalRow(dtGeneralJournalRow row)
+            {
                 this.Rows.Add(row);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtGeneralJournalRow AdddtGeneralJournalRow(System.DateTime date_entry, string jev_no, string particulars, string account_code, string p, decimal debit, decimal credit) {
+            public dtGeneralJournalRow AdddtGeneralJournalRow(System.DateTime date_entry, string jev_no, string particulars, string account_code, string p, decimal debit, decimal credit)
+            {
                 dtGeneralJournalRow rowdtGeneralJournalRow = ((dtGeneralJournalRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         date_entry,
@@ -748,24 +882,27 @@ namespace AccountingSystem {
                 this.Rows.Add(rowdtGeneralJournalRow);
                 return rowdtGeneralJournalRow;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
+            public override global::System.Data.DataTable Clone()
+            {
                 dtGeneralJournalDataTable cln = ((dtGeneralJournalDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
+            protected override global::System.Data.DataTable CreateInstance()
+            {
                 return new dtGeneralJournalDataTable();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal void InitVars() {
+            internal void InitVars()
+            {
                 this.columndate_entry = base.Columns["date_entry"];
                 this.columnjev_no = base.Columns["jev_no"];
                 this.columnparticulars = base.Columns["particulars"];
@@ -774,10 +911,11 @@ namespace AccountingSystem {
                 this.columndebit = base.Columns["debit"];
                 this.columncredit = base.Columns["credit"];
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            private void InitClass() {
+            private void InitClass()
+            {
                 this.columndate_entry = new global::System.Data.DataColumn("date_entry", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndate_entry);
                 this.columnjev_no = new global::System.Data.DataColumn("jev_no", typeof(string), null, global::System.Data.MappingType.Element);
@@ -793,70 +931,83 @@ namespace AccountingSystem {
                 this.columncredit = new global::System.Data.DataColumn("credit", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncredit);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtGeneralJournalRow NewdtGeneralJournalRow() {
+            public dtGeneralJournalRow NewdtGeneralJournalRow()
+            {
                 return ((dtGeneralJournalRow)(this.NewRow()));
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
+            {
                 return new dtGeneralJournalRow(builder);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Type GetRowType() {
+            protected override global::System.Type GetRowType()
+            {
                 return typeof(dtGeneralJournalRow);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanged(e);
-                if ((this.dtGeneralJournalRowChanged != null)) {
+                if ((this.dtGeneralJournalRowChanged != null))
+                {
                     this.dtGeneralJournalRowChanged(this, new dtGeneralJournalRowChangeEvent(((dtGeneralJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanging(e);
-                if ((this.dtGeneralJournalRowChanging != null)) {
+                if ((this.dtGeneralJournalRowChanging != null))
+                {
                     this.dtGeneralJournalRowChanging(this, new dtGeneralJournalRowChangeEvent(((dtGeneralJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleted(e);
-                if ((this.dtGeneralJournalRowDeleted != null)) {
+                if ((this.dtGeneralJournalRowDeleted != null))
+                {
                     this.dtGeneralJournalRowDeleted(this, new dtGeneralJournalRowChangeEvent(((dtGeneralJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleting(e);
-                if ((this.dtGeneralJournalRowDeleting != null)) {
+                if ((this.dtGeneralJournalRowDeleting != null))
+                {
                     this.dtGeneralJournalRowDeleting(this, new dtGeneralJournalRowChangeEvent(((dtGeneralJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemovedtGeneralJournalRow(dtGeneralJournalRow row) {
+            public void RemovedtGeneralJournalRow(dtGeneralJournalRow row)
+            {
                 this.Rows.Remove(row);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
+            {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
                 dsLFS ds = new dsLFS();
@@ -881,34 +1032,43 @@ namespace AccountingSystem {
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
+                if (xs.Contains(dsSchema.TargetNamespace))
+                {
                     global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
                     global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
+                    try
+                    {
                         global::System.Xml.Schema.XmlSchema schema = null;
                         dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
+                        {
                             schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                             s2.SetLength(0);
                             schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
+                            if ((s1.Length == s2.Length))
+                            {
                                 s1.Position = 0;
                                 s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                for (; ((s1.Position != s1.Length)
+                                            && (s1.ReadByte() == s2.ReadByte()));)
+                                {
                                     ;
                                 }
-                                if ((s1.Position == s1.Length)) {
+                                if ((s1.Position == s1.Length))
+                                {
                                     return type;
                                 }
                             }
                         }
                     }
-                    finally {
-                        if ((s1 != null)) {
+                    finally
+                    {
+                        if ((s1 != null))
+                        {
                             s1.Close();
                         }
-                        if ((s2 != null)) {
+                        if ((s2 != null))
+                        {
                             s2.Close();
                         }
                     }
@@ -917,165 +1077,194 @@ namespace AccountingSystem {
                 return type;
             }
         }
-        
+
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class CashDisbursementsJournalDataTable : global::System.Data.TypedTableBase<CashDisbursementsJournalRow> {
-            
+        public partial class CashDisbursementsJournalDataTable : global::System.Data.TypedTableBase<CashDisbursementsJournalRow>
+        {
+
             private global::System.Data.DataColumn columndate;
-            
+
             private global::System.Data.DataColumn columnref;
-            
+
             private global::System.Data.DataColumn columnparticulars;
-            
+
             private global::System.Data.DataColumn columnaccount_code_debit;
-            
+
             private global::System.Data.DataColumn columnaccount_code_credit;
-            
+
             private global::System.Data.DataColumn columnp;
-            
+
             private global::System.Data.DataColumn columndebit;
-            
+
             private global::System.Data.DataColumn columncredit;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CashDisbursementsJournalDataTable() {
+            public CashDisbursementsJournalDataTable()
+            {
                 this.TableName = "CashDisbursementsJournal";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal CashDisbursementsJournalDataTable(global::System.Data.DataTable table) {
+            internal CashDisbursementsJournalDataTable(global::System.Data.DataTable table)
+            {
                 this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive))
+                {
                     this.CaseSensitive = table.CaseSensitive;
                 }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
+                {
                     this.Locale = table.Locale;
                 }
-                if ((table.Namespace != table.DataSet.Namespace)) {
+                if ((table.Namespace != table.DataSet.Namespace))
+                {
                     this.Namespace = table.Namespace;
                 }
                 this.Prefix = table.Prefix;
                 this.MinimumCapacity = table.MinimumCapacity;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected CashDisbursementsJournalDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
+            protected CashDisbursementsJournalDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
+                    base(info, context)
+            {
                 this.InitVars();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn dateColumn {
-                get {
+            public global::System.Data.DataColumn dateColumn
+            {
+                get
+                {
                     return this.columndate;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn refColumn {
-                get {
+            public global::System.Data.DataColumn refColumn
+            {
+                get
+                {
                     return this.columnref;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn particularsColumn {
-                get {
+            public global::System.Data.DataColumn particularsColumn
+            {
+                get
+                {
                     return this.columnparticulars;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_code_debitColumn {
-                get {
+            public global::System.Data.DataColumn account_code_debitColumn
+            {
+                get
+                {
                     return this.columnaccount_code_debit;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_code_creditColumn {
-                get {
+            public global::System.Data.DataColumn account_code_creditColumn
+            {
+                get
+                {
                     return this.columnaccount_code_credit;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn pColumn {
-                get {
+            public global::System.Data.DataColumn pColumn
+            {
+                get
+                {
                     return this.columnp;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn debitColumn {
-                get {
+            public global::System.Data.DataColumn debitColumn
+            {
+                get
+                {
                     return this.columndebit;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn creditColumn {
-                get {
+            public global::System.Data.DataColumn creditColumn
+            {
+                get
+                {
                     return this.columncredit;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
+            public int Count
+            {
+                get
+                {
                     return this.Rows.Count;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CashDisbursementsJournalRow this[int index] {
-                get {
+            public CashDisbursementsJournalRow this[int index]
+            {
+                get
+                {
                     return ((CashDisbursementsJournalRow)(this.Rows[index]));
                 }
             }
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event CashDisbursementsJournalRowChangeEventHandler CashDisbursementsJournalRowChanging;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event CashDisbursementsJournalRowChangeEventHandler CashDisbursementsJournalRowChanged;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event CashDisbursementsJournalRowChangeEventHandler CashDisbursementsJournalRowDeleting;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event CashDisbursementsJournalRowChangeEventHandler CashDisbursementsJournalRowDeleted;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AddCashDisbursementsJournalRow(CashDisbursementsJournalRow row) {
+            public void AddCashDisbursementsJournalRow(CashDisbursementsJournalRow row)
+            {
                 this.Rows.Add(row);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CashDisbursementsJournalRow AddCashDisbursementsJournalRow(System.DateTime date, string _ref, string particulars, string account_code_debit, string account_code_credit, string p, decimal debit, decimal credit) {
+            public CashDisbursementsJournalRow AddCashDisbursementsJournalRow(System.DateTime date, string _ref, string particulars, string account_code_debit, string account_code_credit, string p, decimal debit, decimal credit)
+            {
                 CashDisbursementsJournalRow rowCashDisbursementsJournalRow = ((CashDisbursementsJournalRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         date,
@@ -1090,24 +1279,27 @@ namespace AccountingSystem {
                 this.Rows.Add(rowCashDisbursementsJournalRow);
                 return rowCashDisbursementsJournalRow;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
+            public override global::System.Data.DataTable Clone()
+            {
                 CashDisbursementsJournalDataTable cln = ((CashDisbursementsJournalDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
+            protected override global::System.Data.DataTable CreateInstance()
+            {
                 return new CashDisbursementsJournalDataTable();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal void InitVars() {
+            internal void InitVars()
+            {
                 this.columndate = base.Columns["date"];
                 this.columnref = base.Columns["ref"];
                 this.columnparticulars = base.Columns["particulars"];
@@ -1117,10 +1309,11 @@ namespace AccountingSystem {
                 this.columndebit = base.Columns["debit"];
                 this.columncredit = base.Columns["credit"];
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            private void InitClass() {
+            private void InitClass()
+            {
                 this.columndate = new global::System.Data.DataColumn("date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndate);
                 this.columnref = new global::System.Data.DataColumn("ref", typeof(string), null, global::System.Data.MappingType.Element);
@@ -1141,70 +1334,83 @@ namespace AccountingSystem {
                 this.columncredit = new global::System.Data.DataColumn("credit", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncredit);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CashDisbursementsJournalRow NewCashDisbursementsJournalRow() {
+            public CashDisbursementsJournalRow NewCashDisbursementsJournalRow()
+            {
                 return ((CashDisbursementsJournalRow)(this.NewRow()));
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
+            {
                 return new CashDisbursementsJournalRow(builder);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Type GetRowType() {
+            protected override global::System.Type GetRowType()
+            {
                 return typeof(CashDisbursementsJournalRow);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanged(e);
-                if ((this.CashDisbursementsJournalRowChanged != null)) {
+                if ((this.CashDisbursementsJournalRowChanged != null))
+                {
                     this.CashDisbursementsJournalRowChanged(this, new CashDisbursementsJournalRowChangeEvent(((CashDisbursementsJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanging(e);
-                if ((this.CashDisbursementsJournalRowChanging != null)) {
+                if ((this.CashDisbursementsJournalRowChanging != null))
+                {
                     this.CashDisbursementsJournalRowChanging(this, new CashDisbursementsJournalRowChangeEvent(((CashDisbursementsJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleted(e);
-                if ((this.CashDisbursementsJournalRowDeleted != null)) {
+                if ((this.CashDisbursementsJournalRowDeleted != null))
+                {
                     this.CashDisbursementsJournalRowDeleted(this, new CashDisbursementsJournalRowChangeEvent(((CashDisbursementsJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleting(e);
-                if ((this.CashDisbursementsJournalRowDeleting != null)) {
+                if ((this.CashDisbursementsJournalRowDeleting != null))
+                {
                     this.CashDisbursementsJournalRowDeleting(this, new CashDisbursementsJournalRowChangeEvent(((CashDisbursementsJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemoveCashDisbursementsJournalRow(CashDisbursementsJournalRow row) {
+            public void RemoveCashDisbursementsJournalRow(CashDisbursementsJournalRow row)
+            {
                 this.Rows.Remove(row);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
+            {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
                 dsLFS ds = new dsLFS();
@@ -1229,34 +1435,43 @@ namespace AccountingSystem {
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
+                if (xs.Contains(dsSchema.TargetNamespace))
+                {
                     global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
                     global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
+                    try
+                    {
                         global::System.Xml.Schema.XmlSchema schema = null;
                         dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
+                        {
                             schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                             s2.SetLength(0);
                             schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
+                            if ((s1.Length == s2.Length))
+                            {
                                 s1.Position = 0;
                                 s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                for (; ((s1.Position != s1.Length)
+                                            && (s1.ReadByte() == s2.ReadByte()));)
+                                {
                                     ;
                                 }
-                                if ((s1.Position == s1.Length)) {
+                                if ((s1.Position == s1.Length))
+                                {
                                     return type;
                                 }
                             }
                         }
                     }
-                    finally {
-                        if ((s1 != null)) {
+                    finally
+                    {
+                        if ((s1 != null))
+                        {
                             s1.Close();
                         }
-                        if ((s2 != null)) {
+                        if ((s2 != null))
+                        {
                             s2.Close();
                         }
                     }
@@ -1265,165 +1480,194 @@ namespace AccountingSystem {
                 return type;
             }
         }
-        
+
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class CheckDisbursementsJournalDataTable : global::System.Data.TypedTableBase<CheckDisbursementsJournalRow> {
-            
+        public partial class CheckDisbursementsJournalDataTable : global::System.Data.TypedTableBase<CheckDisbursementsJournalRow>
+        {
+
             private global::System.Data.DataColumn columndate;
-            
+
             private global::System.Data.DataColumn columnref;
-            
+
             private global::System.Data.DataColumn columnpayee;
-            
+
             private global::System.Data.DataColumn columnaccount_code_debit;
-            
+
             private global::System.Data.DataColumn columnaccount_code_credit;
-            
+
             private global::System.Data.DataColumn columnp;
-            
+
             private global::System.Data.DataColumn columndebit;
-            
+
             private global::System.Data.DataColumn columncredit;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CheckDisbursementsJournalDataTable() {
+            public CheckDisbursementsJournalDataTable()
+            {
                 this.TableName = "CheckDisbursementsJournal";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal CheckDisbursementsJournalDataTable(global::System.Data.DataTable table) {
+            internal CheckDisbursementsJournalDataTable(global::System.Data.DataTable table)
+            {
                 this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive))
+                {
                     this.CaseSensitive = table.CaseSensitive;
                 }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
+                {
                     this.Locale = table.Locale;
                 }
-                if ((table.Namespace != table.DataSet.Namespace)) {
+                if ((table.Namespace != table.DataSet.Namespace))
+                {
                     this.Namespace = table.Namespace;
                 }
                 this.Prefix = table.Prefix;
                 this.MinimumCapacity = table.MinimumCapacity;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected CheckDisbursementsJournalDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
+            protected CheckDisbursementsJournalDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
+                    base(info, context)
+            {
                 this.InitVars();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn dateColumn {
-                get {
+            public global::System.Data.DataColumn dateColumn
+            {
+                get
+                {
                     return this.columndate;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn refColumn {
-                get {
+            public global::System.Data.DataColumn refColumn
+            {
+                get
+                {
                     return this.columnref;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn payeeColumn {
-                get {
+            public global::System.Data.DataColumn payeeColumn
+            {
+                get
+                {
                     return this.columnpayee;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_code_debitColumn {
-                get {
+            public global::System.Data.DataColumn account_code_debitColumn
+            {
+                get
+                {
                     return this.columnaccount_code_debit;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_code_creditColumn {
-                get {
+            public global::System.Data.DataColumn account_code_creditColumn
+            {
+                get
+                {
                     return this.columnaccount_code_credit;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn pColumn {
-                get {
+            public global::System.Data.DataColumn pColumn
+            {
+                get
+                {
                     return this.columnp;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn debitColumn {
-                get {
+            public global::System.Data.DataColumn debitColumn
+            {
+                get
+                {
                     return this.columndebit;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn creditColumn {
-                get {
+            public global::System.Data.DataColumn creditColumn
+            {
+                get
+                {
                     return this.columncredit;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
+            public int Count
+            {
+                get
+                {
                     return this.Rows.Count;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CheckDisbursementsJournalRow this[int index] {
-                get {
+            public CheckDisbursementsJournalRow this[int index]
+            {
+                get
+                {
                     return ((CheckDisbursementsJournalRow)(this.Rows[index]));
                 }
             }
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event CheckDisbursementsJournalRowChangeEventHandler CheckDisbursementsJournalRowChanging;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event CheckDisbursementsJournalRowChangeEventHandler CheckDisbursementsJournalRowChanged;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event CheckDisbursementsJournalRowChangeEventHandler CheckDisbursementsJournalRowDeleting;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event CheckDisbursementsJournalRowChangeEventHandler CheckDisbursementsJournalRowDeleted;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AddCheckDisbursementsJournalRow(CheckDisbursementsJournalRow row) {
+            public void AddCheckDisbursementsJournalRow(CheckDisbursementsJournalRow row)
+            {
                 this.Rows.Add(row);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CheckDisbursementsJournalRow AddCheckDisbursementsJournalRow(System.DateTime date, string _ref, string payee, string account_code_debit, string account_code_credit, string p, decimal debit, decimal credit) {
+            public CheckDisbursementsJournalRow AddCheckDisbursementsJournalRow(System.DateTime date, string _ref, string payee, string account_code_debit, string account_code_credit, string p, decimal debit, decimal credit)
+            {
                 CheckDisbursementsJournalRow rowCheckDisbursementsJournalRow = ((CheckDisbursementsJournalRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         date,
@@ -1438,24 +1682,27 @@ namespace AccountingSystem {
                 this.Rows.Add(rowCheckDisbursementsJournalRow);
                 return rowCheckDisbursementsJournalRow;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
+            public override global::System.Data.DataTable Clone()
+            {
                 CheckDisbursementsJournalDataTable cln = ((CheckDisbursementsJournalDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
+            protected override global::System.Data.DataTable CreateInstance()
+            {
                 return new CheckDisbursementsJournalDataTable();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal void InitVars() {
+            internal void InitVars()
+            {
                 this.columndate = base.Columns["date"];
                 this.columnref = base.Columns["ref"];
                 this.columnpayee = base.Columns["payee"];
@@ -1465,10 +1712,11 @@ namespace AccountingSystem {
                 this.columndebit = base.Columns["debit"];
                 this.columncredit = base.Columns["credit"];
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            private void InitClass() {
+            private void InitClass()
+            {
                 this.columndate = new global::System.Data.DataColumn("date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndate);
                 this.columnref = new global::System.Data.DataColumn("ref", typeof(string), null, global::System.Data.MappingType.Element);
@@ -1489,70 +1737,83 @@ namespace AccountingSystem {
                 this.columncredit = new global::System.Data.DataColumn("credit", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncredit);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CheckDisbursementsJournalRow NewCheckDisbursementsJournalRow() {
+            public CheckDisbursementsJournalRow NewCheckDisbursementsJournalRow()
+            {
                 return ((CheckDisbursementsJournalRow)(this.NewRow()));
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
+            {
                 return new CheckDisbursementsJournalRow(builder);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Type GetRowType() {
+            protected override global::System.Type GetRowType()
+            {
                 return typeof(CheckDisbursementsJournalRow);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanged(e);
-                if ((this.CheckDisbursementsJournalRowChanged != null)) {
+                if ((this.CheckDisbursementsJournalRowChanged != null))
+                {
                     this.CheckDisbursementsJournalRowChanged(this, new CheckDisbursementsJournalRowChangeEvent(((CheckDisbursementsJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanging(e);
-                if ((this.CheckDisbursementsJournalRowChanging != null)) {
+                if ((this.CheckDisbursementsJournalRowChanging != null))
+                {
                     this.CheckDisbursementsJournalRowChanging(this, new CheckDisbursementsJournalRowChangeEvent(((CheckDisbursementsJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleted(e);
-                if ((this.CheckDisbursementsJournalRowDeleted != null)) {
+                if ((this.CheckDisbursementsJournalRowDeleted != null))
+                {
                     this.CheckDisbursementsJournalRowDeleted(this, new CheckDisbursementsJournalRowChangeEvent(((CheckDisbursementsJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleting(e);
-                if ((this.CheckDisbursementsJournalRowDeleting != null)) {
+                if ((this.CheckDisbursementsJournalRowDeleting != null))
+                {
                     this.CheckDisbursementsJournalRowDeleting(this, new CheckDisbursementsJournalRowChangeEvent(((CheckDisbursementsJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemoveCheckDisbursementsJournalRow(CheckDisbursementsJournalRow row) {
+            public void RemoveCheckDisbursementsJournalRow(CheckDisbursementsJournalRow row)
+            {
                 this.Rows.Remove(row);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
+            {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
                 dsLFS ds = new dsLFS();
@@ -1577,34 +1838,43 @@ namespace AccountingSystem {
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
+                if (xs.Contains(dsSchema.TargetNamespace))
+                {
                     global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
                     global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
+                    try
+                    {
                         global::System.Xml.Schema.XmlSchema schema = null;
                         dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
+                        {
                             schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                             s2.SetLength(0);
                             schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
+                            if ((s1.Length == s2.Length))
+                            {
                                 s1.Position = 0;
                                 s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                for (; ((s1.Position != s1.Length)
+                                            && (s1.ReadByte() == s2.ReadByte()));)
+                                {
                                     ;
                                 }
-                                if ((s1.Position == s1.Length)) {
+                                if ((s1.Position == s1.Length))
+                                {
                                     return type;
                                 }
                             }
                         }
                     }
-                    finally {
-                        if ((s1 != null)) {
+                    finally
+                    {
+                        if ((s1 != null))
+                        {
                             s1.Close();
                         }
-                        if ((s2 != null)) {
+                        if ((s2 != null))
+                        {
                             s2.Close();
                         }
                     }
@@ -1613,195 +1883,230 @@ namespace AccountingSystem {
                 return type;
             }
         }
-        
+
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class CashReceiptsJournalDataTable : global::System.Data.TypedTableBase<CashReceiptsJournalRow> {
-            
+        public partial class CashReceiptsJournalDataTable : global::System.Data.TypedTableBase<CashReceiptsJournalRow>
+        {
+
             private global::System.Data.DataColumn columndate;
-            
+
             private global::System.Data.DataColumn columnrcd_no;
-            
+
             private global::System.Data.DataColumn columncollecting_officer;
-            
+
             private global::System.Data.DataColumn columncollections_debit_amount;
-            
+
             private global::System.Data.DataColumn columncollections_credit_account_code;
-            
+
             private global::System.Data.DataColumn columncollections_credit_p;
-            
+
             private global::System.Data.DataColumn columncollections_credt_amount;
-            
+
             private global::System.Data.DataColumn columndeposit_debit_account_code;
-            
+
             private global::System.Data.DataColumn columndeposit_debit_p;
-            
+
             private global::System.Data.DataColumn columndeposit_debit_amount;
-            
+
             private global::System.Data.DataColumn columndeposit_credit_amount;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CashReceiptsJournalDataTable() {
+            public CashReceiptsJournalDataTable()
+            {
                 this.TableName = "CashReceiptsJournal";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal CashReceiptsJournalDataTable(global::System.Data.DataTable table) {
+            internal CashReceiptsJournalDataTable(global::System.Data.DataTable table)
+            {
                 this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive))
+                {
                     this.CaseSensitive = table.CaseSensitive;
                 }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
+                {
                     this.Locale = table.Locale;
                 }
-                if ((table.Namespace != table.DataSet.Namespace)) {
+                if ((table.Namespace != table.DataSet.Namespace))
+                {
                     this.Namespace = table.Namespace;
                 }
                 this.Prefix = table.Prefix;
                 this.MinimumCapacity = table.MinimumCapacity;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected CashReceiptsJournalDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
+            protected CashReceiptsJournalDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
+                    base(info, context)
+            {
                 this.InitVars();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn dateColumn {
-                get {
+            public global::System.Data.DataColumn dateColumn
+            {
+                get
+                {
                     return this.columndate;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn rcd_noColumn {
-                get {
+            public global::System.Data.DataColumn rcd_noColumn
+            {
+                get
+                {
                     return this.columnrcd_no;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn collecting_officerColumn {
-                get {
+            public global::System.Data.DataColumn collecting_officerColumn
+            {
+                get
+                {
                     return this.columncollecting_officer;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn collections_debit_amountColumn {
-                get {
+            public global::System.Data.DataColumn collections_debit_amountColumn
+            {
+                get
+                {
                     return this.columncollections_debit_amount;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn collections_credit_account_codeColumn {
-                get {
+            public global::System.Data.DataColumn collections_credit_account_codeColumn
+            {
+                get
+                {
                     return this.columncollections_credit_account_code;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn collections_credit_pColumn {
-                get {
+            public global::System.Data.DataColumn collections_credit_pColumn
+            {
+                get
+                {
                     return this.columncollections_credit_p;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn collections_credt_amountColumn {
-                get {
+            public global::System.Data.DataColumn collections_credt_amountColumn
+            {
+                get
+                {
                     return this.columncollections_credt_amount;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn deposit_debit_account_codeColumn {
-                get {
+            public global::System.Data.DataColumn deposit_debit_account_codeColumn
+            {
+                get
+                {
                     return this.columndeposit_debit_account_code;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn deposit_debit_pColumn {
-                get {
+            public global::System.Data.DataColumn deposit_debit_pColumn
+            {
+                get
+                {
                     return this.columndeposit_debit_p;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn deposit_debit_amountColumn {
-                get {
+            public global::System.Data.DataColumn deposit_debit_amountColumn
+            {
+                get
+                {
                     return this.columndeposit_debit_amount;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn deposit_credit_amountColumn {
-                get {
+            public global::System.Data.DataColumn deposit_credit_amountColumn
+            {
+                get
+                {
                     return this.columndeposit_credit_amount;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
+            public int Count
+            {
+                get
+                {
                     return this.Rows.Count;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CashReceiptsJournalRow this[int index] {
-                get {
+            public CashReceiptsJournalRow this[int index]
+            {
+                get
+                {
                     return ((CashReceiptsJournalRow)(this.Rows[index]));
                 }
             }
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event CashReceiptsJournalRowChangeEventHandler CashReceiptsJournalRowChanging;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event CashReceiptsJournalRowChangeEventHandler CashReceiptsJournalRowChanged;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event CashReceiptsJournalRowChangeEventHandler CashReceiptsJournalRowDeleting;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event CashReceiptsJournalRowChangeEventHandler CashReceiptsJournalRowDeleted;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AddCashReceiptsJournalRow(CashReceiptsJournalRow row) {
+            public void AddCashReceiptsJournalRow(CashReceiptsJournalRow row)
+            {
                 this.Rows.Add(row);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CashReceiptsJournalRow AddCashReceiptsJournalRow(System.DateTime date, string rcd_no, string collecting_officer, decimal collections_debit_amount, string collections_credit_account_code, string collections_credit_p, decimal collections_credt_amount, string deposit_debit_account_code, string deposit_debit_p, decimal deposit_debit_amount, decimal deposit_credit_amount) {
+            public CashReceiptsJournalRow AddCashReceiptsJournalRow(System.DateTime date, string rcd_no, string collecting_officer, decimal collections_debit_amount, string collections_credit_account_code, string collections_credit_p, decimal collections_credt_amount, string deposit_debit_account_code, string deposit_debit_p, decimal deposit_debit_amount, decimal deposit_credit_amount)
+            {
                 CashReceiptsJournalRow rowCashReceiptsJournalRow = ((CashReceiptsJournalRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         date,
@@ -1819,24 +2124,27 @@ namespace AccountingSystem {
                 this.Rows.Add(rowCashReceiptsJournalRow);
                 return rowCashReceiptsJournalRow;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
+            public override global::System.Data.DataTable Clone()
+            {
                 CashReceiptsJournalDataTable cln = ((CashReceiptsJournalDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
+            protected override global::System.Data.DataTable CreateInstance()
+            {
                 return new CashReceiptsJournalDataTable();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal void InitVars() {
+            internal void InitVars()
+            {
                 this.columndate = base.Columns["date"];
                 this.columnrcd_no = base.Columns["rcd_no"];
                 this.columncollecting_officer = base.Columns["collecting_officer"];
@@ -1849,10 +2157,11 @@ namespace AccountingSystem {
                 this.columndeposit_debit_amount = base.Columns["deposit_debit_amount"];
                 this.columndeposit_credit_amount = base.Columns["deposit_credit_amount"];
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            private void InitClass() {
+            private void InitClass()
+            {
                 this.columndate = new global::System.Data.DataColumn("date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndate);
                 this.columnrcd_no = new global::System.Data.DataColumn("rcd_no", typeof(string), null, global::System.Data.MappingType.Element);
@@ -1876,70 +2185,83 @@ namespace AccountingSystem {
                 this.columndeposit_credit_amount = new global::System.Data.DataColumn("deposit_credit_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndeposit_credit_amount);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CashReceiptsJournalRow NewCashReceiptsJournalRow() {
+            public CashReceiptsJournalRow NewCashReceiptsJournalRow()
+            {
                 return ((CashReceiptsJournalRow)(this.NewRow()));
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
+            {
                 return new CashReceiptsJournalRow(builder);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Type GetRowType() {
+            protected override global::System.Type GetRowType()
+            {
                 return typeof(CashReceiptsJournalRow);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanged(e);
-                if ((this.CashReceiptsJournalRowChanged != null)) {
+                if ((this.CashReceiptsJournalRowChanged != null))
+                {
                     this.CashReceiptsJournalRowChanged(this, new CashReceiptsJournalRowChangeEvent(((CashReceiptsJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanging(e);
-                if ((this.CashReceiptsJournalRowChanging != null)) {
+                if ((this.CashReceiptsJournalRowChanging != null))
+                {
                     this.CashReceiptsJournalRowChanging(this, new CashReceiptsJournalRowChangeEvent(((CashReceiptsJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleted(e);
-                if ((this.CashReceiptsJournalRowDeleted != null)) {
+                if ((this.CashReceiptsJournalRowDeleted != null))
+                {
                     this.CashReceiptsJournalRowDeleted(this, new CashReceiptsJournalRowChangeEvent(((CashReceiptsJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleting(e);
-                if ((this.CashReceiptsJournalRowDeleting != null)) {
+                if ((this.CashReceiptsJournalRowDeleting != null))
+                {
                     this.CashReceiptsJournalRowDeleting(this, new CashReceiptsJournalRowChangeEvent(((CashReceiptsJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemoveCashReceiptsJournalRow(CashReceiptsJournalRow row) {
+            public void RemoveCashReceiptsJournalRow(CashReceiptsJournalRow row)
+            {
                 this.Rows.Remove(row);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
+            {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
                 dsLFS ds = new dsLFS();
@@ -1964,34 +2286,43 @@ namespace AccountingSystem {
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
+                if (xs.Contains(dsSchema.TargetNamespace))
+                {
                     global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
                     global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
+                    try
+                    {
                         global::System.Xml.Schema.XmlSchema schema = null;
                         dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
+                        {
                             schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                             s2.SetLength(0);
                             schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
+                            if ((s1.Length == s2.Length))
+                            {
                                 s1.Position = 0;
                                 s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                for (; ((s1.Position != s1.Length)
+                                            && (s1.ReadByte() == s2.ReadByte()));)
+                                {
                                     ;
                                 }
-                                if ((s1.Position == s1.Length)) {
+                                if ((s1.Position == s1.Length))
+                                {
                                     return type;
                                 }
                             }
                         }
                     }
-                    finally {
-                        if ((s1 != null)) {
+                    finally
+                    {
+                        if ((s1 != null))
+                        {
                             s1.Close();
                         }
-                        if ((s2 != null)) {
+                        if ((s2 != null))
+                        {
                             s2.Close();
                         }
                     }
@@ -2000,165 +2331,194 @@ namespace AccountingSystem {
                 return type;
             }
         }
-        
+
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class ProcurementsReceivedJournalDataTable : global::System.Data.TypedTableBase<ProcurementsReceivedJournalRow> {
-            
+        public partial class ProcurementsReceivedJournalDataTable : global::System.Data.TypedTableBase<ProcurementsReceivedJournalRow>
+        {
+
             private global::System.Data.DataColumn columndate;
-            
+
             private global::System.Data.DataColumn columnref;
-            
+
             private global::System.Data.DataColumn columnparticulars;
-            
+
             private global::System.Data.DataColumn columnaccount_code_debit;
-            
+
             private global::System.Data.DataColumn columnaccount_code_credit;
-            
+
             private global::System.Data.DataColumn columnp;
-            
+
             private global::System.Data.DataColumn columndebit;
-            
+
             private global::System.Data.DataColumn columncredit;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ProcurementsReceivedJournalDataTable() {
+            public ProcurementsReceivedJournalDataTable()
+            {
                 this.TableName = "ProcurementsReceivedJournal";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal ProcurementsReceivedJournalDataTable(global::System.Data.DataTable table) {
+            internal ProcurementsReceivedJournalDataTable(global::System.Data.DataTable table)
+            {
                 this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive))
+                {
                     this.CaseSensitive = table.CaseSensitive;
                 }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
+                {
                     this.Locale = table.Locale;
                 }
-                if ((table.Namespace != table.DataSet.Namespace)) {
+                if ((table.Namespace != table.DataSet.Namespace))
+                {
                     this.Namespace = table.Namespace;
                 }
                 this.Prefix = table.Prefix;
                 this.MinimumCapacity = table.MinimumCapacity;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected ProcurementsReceivedJournalDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
+            protected ProcurementsReceivedJournalDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
+                    base(info, context)
+            {
                 this.InitVars();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn dateColumn {
-                get {
+            public global::System.Data.DataColumn dateColumn
+            {
+                get
+                {
                     return this.columndate;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn refColumn {
-                get {
+            public global::System.Data.DataColumn refColumn
+            {
+                get
+                {
                     return this.columnref;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn particularsColumn {
-                get {
+            public global::System.Data.DataColumn particularsColumn
+            {
+                get
+                {
                     return this.columnparticulars;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_code_debitColumn {
-                get {
+            public global::System.Data.DataColumn account_code_debitColumn
+            {
+                get
+                {
                     return this.columnaccount_code_debit;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_code_creditColumn {
-                get {
+            public global::System.Data.DataColumn account_code_creditColumn
+            {
+                get
+                {
                     return this.columnaccount_code_credit;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn pColumn {
-                get {
+            public global::System.Data.DataColumn pColumn
+            {
+                get
+                {
                     return this.columnp;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn debitColumn {
-                get {
+            public global::System.Data.DataColumn debitColumn
+            {
+                get
+                {
                     return this.columndebit;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn creditColumn {
-                get {
+            public global::System.Data.DataColumn creditColumn
+            {
+                get
+                {
                     return this.columncredit;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
+            public int Count
+            {
+                get
+                {
                     return this.Rows.Count;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ProcurementsReceivedJournalRow this[int index] {
-                get {
+            public ProcurementsReceivedJournalRow this[int index]
+            {
+                get
+                {
                     return ((ProcurementsReceivedJournalRow)(this.Rows[index]));
                 }
             }
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event ProcurementsReceivedJournalRowChangeEventHandler ProcurementsReceivedJournalRowChanging;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event ProcurementsReceivedJournalRowChangeEventHandler ProcurementsReceivedJournalRowChanged;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event ProcurementsReceivedJournalRowChangeEventHandler ProcurementsReceivedJournalRowDeleting;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event ProcurementsReceivedJournalRowChangeEventHandler ProcurementsReceivedJournalRowDeleted;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AddProcurementsReceivedJournalRow(ProcurementsReceivedJournalRow row) {
+            public void AddProcurementsReceivedJournalRow(ProcurementsReceivedJournalRow row)
+            {
                 this.Rows.Add(row);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ProcurementsReceivedJournalRow AddProcurementsReceivedJournalRow(System.DateTime date, string _ref, string particulars, string account_code_debit, string account_code_credit, string p, decimal debit, decimal credit) {
+            public ProcurementsReceivedJournalRow AddProcurementsReceivedJournalRow(System.DateTime date, string _ref, string particulars, string account_code_debit, string account_code_credit, string p, decimal debit, decimal credit)
+            {
                 ProcurementsReceivedJournalRow rowProcurementsReceivedJournalRow = ((ProcurementsReceivedJournalRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         date,
@@ -2173,24 +2533,27 @@ namespace AccountingSystem {
                 this.Rows.Add(rowProcurementsReceivedJournalRow);
                 return rowProcurementsReceivedJournalRow;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
+            public override global::System.Data.DataTable Clone()
+            {
                 ProcurementsReceivedJournalDataTable cln = ((ProcurementsReceivedJournalDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
+            protected override global::System.Data.DataTable CreateInstance()
+            {
                 return new ProcurementsReceivedJournalDataTable();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal void InitVars() {
+            internal void InitVars()
+            {
                 this.columndate = base.Columns["date"];
                 this.columnref = base.Columns["ref"];
                 this.columnparticulars = base.Columns["particulars"];
@@ -2200,10 +2563,11 @@ namespace AccountingSystem {
                 this.columndebit = base.Columns["debit"];
                 this.columncredit = base.Columns["credit"];
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            private void InitClass() {
+            private void InitClass()
+            {
                 this.columndate = new global::System.Data.DataColumn("date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndate);
                 this.columnref = new global::System.Data.DataColumn("ref", typeof(string), null, global::System.Data.MappingType.Element);
@@ -2224,70 +2588,83 @@ namespace AccountingSystem {
                 this.columncredit = new global::System.Data.DataColumn("credit", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncredit);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ProcurementsReceivedJournalRow NewProcurementsReceivedJournalRow() {
+            public ProcurementsReceivedJournalRow NewProcurementsReceivedJournalRow()
+            {
                 return ((ProcurementsReceivedJournalRow)(this.NewRow()));
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
+            {
                 return new ProcurementsReceivedJournalRow(builder);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Type GetRowType() {
+            protected override global::System.Type GetRowType()
+            {
                 return typeof(ProcurementsReceivedJournalRow);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanged(e);
-                if ((this.ProcurementsReceivedJournalRowChanged != null)) {
+                if ((this.ProcurementsReceivedJournalRowChanged != null))
+                {
                     this.ProcurementsReceivedJournalRowChanged(this, new ProcurementsReceivedJournalRowChangeEvent(((ProcurementsReceivedJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanging(e);
-                if ((this.ProcurementsReceivedJournalRowChanging != null)) {
+                if ((this.ProcurementsReceivedJournalRowChanging != null))
+                {
                     this.ProcurementsReceivedJournalRowChanging(this, new ProcurementsReceivedJournalRowChangeEvent(((ProcurementsReceivedJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleted(e);
-                if ((this.ProcurementsReceivedJournalRowDeleted != null)) {
+                if ((this.ProcurementsReceivedJournalRowDeleted != null))
+                {
                     this.ProcurementsReceivedJournalRowDeleted(this, new ProcurementsReceivedJournalRowChangeEvent(((ProcurementsReceivedJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleting(e);
-                if ((this.ProcurementsReceivedJournalRowDeleting != null)) {
+                if ((this.ProcurementsReceivedJournalRowDeleting != null))
+                {
                     this.ProcurementsReceivedJournalRowDeleting(this, new ProcurementsReceivedJournalRowChangeEvent(((ProcurementsReceivedJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemoveProcurementsReceivedJournalRow(ProcurementsReceivedJournalRow row) {
+            public void RemoveProcurementsReceivedJournalRow(ProcurementsReceivedJournalRow row)
+            {
                 this.Rows.Remove(row);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
+            {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
                 dsLFS ds = new dsLFS();
@@ -2312,34 +2689,43 @@ namespace AccountingSystem {
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
+                if (xs.Contains(dsSchema.TargetNamespace))
+                {
                     global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
                     global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
+                    try
+                    {
                         global::System.Xml.Schema.XmlSchema schema = null;
                         dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
+                        {
                             schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                             s2.SetLength(0);
                             schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
+                            if ((s1.Length == s2.Length))
+                            {
                                 s1.Position = 0;
                                 s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                for (; ((s1.Position != s1.Length)
+                                            && (s1.ReadByte() == s2.ReadByte()));)
+                                {
                                     ;
                                 }
-                                if ((s1.Position == s1.Length)) {
+                                if ((s1.Position == s1.Length))
+                                {
                                     return type;
                                 }
                             }
                         }
                     }
-                    finally {
-                        if ((s1 != null)) {
+                    finally
+                    {
+                        if ((s1 != null))
+                        {
                             s1.Close();
                         }
-                        if ((s2 != null)) {
+                        if ((s2 != null))
+                        {
                             s2.Close();
                         }
                     }
@@ -2348,185 +2734,218 @@ namespace AccountingSystem {
                 return type;
             }
         }
-        
+
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class AuthorityToDebitAccountDisbursementsJournalDataTable : global::System.Data.TypedTableBase<AuthorityToDebitAccountDisbursementsJournalRow> {
-            
+        public partial class AuthorityToDebitAccountDisbursementsJournalDataTable : global::System.Data.TypedTableBase<AuthorityToDebitAccountDisbursementsJournalRow>
+        {
+
             private global::System.Data.DataColumn columndate;
-            
+
             private global::System.Data.DataColumn columnada_no;
-            
+
             private global::System.Data.DataColumn columnref_no;
-            
+
             private global::System.Data.DataColumn columnparticulars;
-            
+
             private global::System.Data.DataColumn columnaccount_code_credit;
-            
+
             private global::System.Data.DataColumn columnp_credit;
-            
+
             private global::System.Data.DataColumn columnamount_credit;
-            
+
             private global::System.Data.DataColumn columnaccount_code_debit;
-            
+
             private global::System.Data.DataColumn columnp_debit;
-            
+
             private global::System.Data.DataColumn columnamount_debit;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public AuthorityToDebitAccountDisbursementsJournalDataTable() {
+            public AuthorityToDebitAccountDisbursementsJournalDataTable()
+            {
                 this.TableName = "AuthorityToDebitAccountDisbursementsJournal";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal AuthorityToDebitAccountDisbursementsJournalDataTable(global::System.Data.DataTable table) {
+            internal AuthorityToDebitAccountDisbursementsJournalDataTable(global::System.Data.DataTable table)
+            {
                 this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive))
+                {
                     this.CaseSensitive = table.CaseSensitive;
                 }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
+                {
                     this.Locale = table.Locale;
                 }
-                if ((table.Namespace != table.DataSet.Namespace)) {
+                if ((table.Namespace != table.DataSet.Namespace))
+                {
                     this.Namespace = table.Namespace;
                 }
                 this.Prefix = table.Prefix;
                 this.MinimumCapacity = table.MinimumCapacity;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected AuthorityToDebitAccountDisbursementsJournalDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
+            protected AuthorityToDebitAccountDisbursementsJournalDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
+                    base(info, context)
+            {
                 this.InitVars();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn dateColumn {
-                get {
+            public global::System.Data.DataColumn dateColumn
+            {
+                get
+                {
                     return this.columndate;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn ada_noColumn {
-                get {
+            public global::System.Data.DataColumn ada_noColumn
+            {
+                get
+                {
                     return this.columnada_no;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn ref_noColumn {
-                get {
+            public global::System.Data.DataColumn ref_noColumn
+            {
+                get
+                {
                     return this.columnref_no;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn particularsColumn {
-                get {
+            public global::System.Data.DataColumn particularsColumn
+            {
+                get
+                {
                     return this.columnparticulars;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_code_creditColumn {
-                get {
+            public global::System.Data.DataColumn account_code_creditColumn
+            {
+                get
+                {
                     return this.columnaccount_code_credit;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn p_creditColumn {
-                get {
+            public global::System.Data.DataColumn p_creditColumn
+            {
+                get
+                {
                     return this.columnp_credit;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn amount_creditColumn {
-                get {
+            public global::System.Data.DataColumn amount_creditColumn
+            {
+                get
+                {
                     return this.columnamount_credit;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_code_debitColumn {
-                get {
+            public global::System.Data.DataColumn account_code_debitColumn
+            {
+                get
+                {
                     return this.columnaccount_code_debit;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn p_debitColumn {
-                get {
+            public global::System.Data.DataColumn p_debitColumn
+            {
+                get
+                {
                     return this.columnp_debit;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn amount_debitColumn {
-                get {
+            public global::System.Data.DataColumn amount_debitColumn
+            {
+                get
+                {
                     return this.columnamount_debit;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
+            public int Count
+            {
+                get
+                {
                     return this.Rows.Count;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public AuthorityToDebitAccountDisbursementsJournalRow this[int index] {
-                get {
+            public AuthorityToDebitAccountDisbursementsJournalRow this[int index]
+            {
+                get
+                {
                     return ((AuthorityToDebitAccountDisbursementsJournalRow)(this.Rows[index]));
                 }
             }
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event AuthorityToDebitAccountDisbursementsJournalRowChangeEventHandler AuthorityToDebitAccountDisbursementsJournalRowChanging;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event AuthorityToDebitAccountDisbursementsJournalRowChangeEventHandler AuthorityToDebitAccountDisbursementsJournalRowChanged;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event AuthorityToDebitAccountDisbursementsJournalRowChangeEventHandler AuthorityToDebitAccountDisbursementsJournalRowDeleting;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event AuthorityToDebitAccountDisbursementsJournalRowChangeEventHandler AuthorityToDebitAccountDisbursementsJournalRowDeleted;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AddAuthorityToDebitAccountDisbursementsJournalRow(AuthorityToDebitAccountDisbursementsJournalRow row) {
+            public void AddAuthorityToDebitAccountDisbursementsJournalRow(AuthorityToDebitAccountDisbursementsJournalRow row)
+            {
                 this.Rows.Add(row);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public AuthorityToDebitAccountDisbursementsJournalRow AddAuthorityToDebitAccountDisbursementsJournalRow(System.DateTime date, string ada_no, string ref_no, string particulars, string account_code_credit, string p_credit, decimal amount_credit, string account_code_debit, string p_debit, decimal amount_debit) {
+            public AuthorityToDebitAccountDisbursementsJournalRow AddAuthorityToDebitAccountDisbursementsJournalRow(System.DateTime date, string ada_no, string ref_no, string particulars, string account_code_credit, string p_credit, decimal amount_credit, string account_code_debit, string p_debit, decimal amount_debit)
+            {
                 AuthorityToDebitAccountDisbursementsJournalRow rowAuthorityToDebitAccountDisbursementsJournalRow = ((AuthorityToDebitAccountDisbursementsJournalRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         date,
@@ -2543,24 +2962,27 @@ namespace AccountingSystem {
                 this.Rows.Add(rowAuthorityToDebitAccountDisbursementsJournalRow);
                 return rowAuthorityToDebitAccountDisbursementsJournalRow;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
+            public override global::System.Data.DataTable Clone()
+            {
                 AuthorityToDebitAccountDisbursementsJournalDataTable cln = ((AuthorityToDebitAccountDisbursementsJournalDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
+            protected override global::System.Data.DataTable CreateInstance()
+            {
                 return new AuthorityToDebitAccountDisbursementsJournalDataTable();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal void InitVars() {
+            internal void InitVars()
+            {
                 this.columndate = base.Columns["date"];
                 this.columnada_no = base.Columns["ada_no"];
                 this.columnref_no = base.Columns["ref_no"];
@@ -2572,10 +2994,11 @@ namespace AccountingSystem {
                 this.columnp_debit = base.Columns["p_debit"];
                 this.columnamount_debit = base.Columns["amount_debit"];
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            private void InitClass() {
+            private void InitClass()
+            {
                 this.columndate = new global::System.Data.DataColumn("date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndate);
                 this.columnada_no = new global::System.Data.DataColumn("ada_no", typeof(string), null, global::System.Data.MappingType.Element);
@@ -2597,70 +3020,83 @@ namespace AccountingSystem {
                 this.columnamount_debit = new global::System.Data.DataColumn("amount_debit", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnamount_debit);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public AuthorityToDebitAccountDisbursementsJournalRow NewAuthorityToDebitAccountDisbursementsJournalRow() {
+            public AuthorityToDebitAccountDisbursementsJournalRow NewAuthorityToDebitAccountDisbursementsJournalRow()
+            {
                 return ((AuthorityToDebitAccountDisbursementsJournalRow)(this.NewRow()));
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
+            {
                 return new AuthorityToDebitAccountDisbursementsJournalRow(builder);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Type GetRowType() {
+            protected override global::System.Type GetRowType()
+            {
                 return typeof(AuthorityToDebitAccountDisbursementsJournalRow);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanged(e);
-                if ((this.AuthorityToDebitAccountDisbursementsJournalRowChanged != null)) {
+                if ((this.AuthorityToDebitAccountDisbursementsJournalRowChanged != null))
+                {
                     this.AuthorityToDebitAccountDisbursementsJournalRowChanged(this, new AuthorityToDebitAccountDisbursementsJournalRowChangeEvent(((AuthorityToDebitAccountDisbursementsJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanging(e);
-                if ((this.AuthorityToDebitAccountDisbursementsJournalRowChanging != null)) {
+                if ((this.AuthorityToDebitAccountDisbursementsJournalRowChanging != null))
+                {
                     this.AuthorityToDebitAccountDisbursementsJournalRowChanging(this, new AuthorityToDebitAccountDisbursementsJournalRowChangeEvent(((AuthorityToDebitAccountDisbursementsJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleted(e);
-                if ((this.AuthorityToDebitAccountDisbursementsJournalRowDeleted != null)) {
+                if ((this.AuthorityToDebitAccountDisbursementsJournalRowDeleted != null))
+                {
                     this.AuthorityToDebitAccountDisbursementsJournalRowDeleted(this, new AuthorityToDebitAccountDisbursementsJournalRowChangeEvent(((AuthorityToDebitAccountDisbursementsJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleting(e);
-                if ((this.AuthorityToDebitAccountDisbursementsJournalRowDeleting != null)) {
+                if ((this.AuthorityToDebitAccountDisbursementsJournalRowDeleting != null))
+                {
                     this.AuthorityToDebitAccountDisbursementsJournalRowDeleting(this, new AuthorityToDebitAccountDisbursementsJournalRowChangeEvent(((AuthorityToDebitAccountDisbursementsJournalRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemoveAuthorityToDebitAccountDisbursementsJournalRow(AuthorityToDebitAccountDisbursementsJournalRow row) {
+            public void RemoveAuthorityToDebitAccountDisbursementsJournalRow(AuthorityToDebitAccountDisbursementsJournalRow row)
+            {
                 this.Rows.Remove(row);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
+            {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
                 dsLFS ds = new dsLFS();
@@ -2685,34 +3121,43 @@ namespace AccountingSystem {
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
+                if (xs.Contains(dsSchema.TargetNamespace))
+                {
                     global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
                     global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
+                    try
+                    {
                         global::System.Xml.Schema.XmlSchema schema = null;
                         dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
+                        {
                             schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                             s2.SetLength(0);
                             schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
+                            if ((s1.Length == s2.Length))
+                            {
                                 s1.Position = 0;
                                 s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                for (; ((s1.Position != s1.Length)
+                                            && (s1.ReadByte() == s2.ReadByte()));)
+                                {
                                     ;
                                 }
-                                if ((s1.Position == s1.Length)) {
+                                if ((s1.Position == s1.Length))
+                                {
                                     return type;
                                 }
                             }
                         }
                     }
-                    finally {
-                        if ((s1 != null)) {
+                    finally
+                    {
+                        if ((s1 != null))
+                        {
                             s1.Close();
                         }
-                        if ((s2 != null)) {
+                        if ((s2 != null))
+                        {
                             s2.Close();
                         }
                     }
@@ -2721,145 +3166,170 @@ namespace AccountingSystem {
                 return type;
             }
         }
-        
+
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class GeneralLedgerDataTable : global::System.Data.TypedTableBase<GeneralLedgerRow> {
-            
+        public partial class GeneralLedgerDataTable : global::System.Data.TypedTableBase<GeneralLedgerRow>
+        {
+
             private global::System.Data.DataColumn columndate;
-            
+
             private global::System.Data.DataColumn columnparticulars;
-            
+
             private global::System.Data.DataColumn columnref;
-            
+
             private global::System.Data.DataColumn columndebit_amount;
-            
+
             private global::System.Data.DataColumn columncredit_amount;
-            
+
             private global::System.Data.DataColumn columnbalance;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public GeneralLedgerDataTable() {
+            public GeneralLedgerDataTable()
+            {
                 this.TableName = "GeneralLedger";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal GeneralLedgerDataTable(global::System.Data.DataTable table) {
+            internal GeneralLedgerDataTable(global::System.Data.DataTable table)
+            {
                 this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive))
+                {
                     this.CaseSensitive = table.CaseSensitive;
                 }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
+                {
                     this.Locale = table.Locale;
                 }
-                if ((table.Namespace != table.DataSet.Namespace)) {
+                if ((table.Namespace != table.DataSet.Namespace))
+                {
                     this.Namespace = table.Namespace;
                 }
                 this.Prefix = table.Prefix;
                 this.MinimumCapacity = table.MinimumCapacity;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected GeneralLedgerDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
+            protected GeneralLedgerDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
+                    base(info, context)
+            {
                 this.InitVars();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn dateColumn {
-                get {
+            public global::System.Data.DataColumn dateColumn
+            {
+                get
+                {
                     return this.columndate;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn particularsColumn {
-                get {
+            public global::System.Data.DataColumn particularsColumn
+            {
+                get
+                {
                     return this.columnparticulars;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn refColumn {
-                get {
+            public global::System.Data.DataColumn refColumn
+            {
+                get
+                {
                     return this.columnref;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn debit_amountColumn {
-                get {
+            public global::System.Data.DataColumn debit_amountColumn
+            {
+                get
+                {
                     return this.columndebit_amount;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn credit_amountColumn {
-                get {
+            public global::System.Data.DataColumn credit_amountColumn
+            {
+                get
+                {
                     return this.columncredit_amount;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn balanceColumn {
-                get {
+            public global::System.Data.DataColumn balanceColumn
+            {
+                get
+                {
                     return this.columnbalance;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
+            public int Count
+            {
+                get
+                {
                     return this.Rows.Count;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public GeneralLedgerRow this[int index] {
-                get {
+            public GeneralLedgerRow this[int index]
+            {
+                get
+                {
                     return ((GeneralLedgerRow)(this.Rows[index]));
                 }
             }
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event GeneralLedgerRowChangeEventHandler GeneralLedgerRowChanging;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event GeneralLedgerRowChangeEventHandler GeneralLedgerRowChanged;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event GeneralLedgerRowChangeEventHandler GeneralLedgerRowDeleting;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event GeneralLedgerRowChangeEventHandler GeneralLedgerRowDeleted;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AddGeneralLedgerRow(GeneralLedgerRow row) {
+            public void AddGeneralLedgerRow(GeneralLedgerRow row)
+            {
                 this.Rows.Add(row);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public GeneralLedgerRow AddGeneralLedgerRow(System.DateTime date, string particulars, string _ref, decimal debit_amount, decimal credit_amount, decimal balance) {
+            public GeneralLedgerRow AddGeneralLedgerRow(System.DateTime date, string particulars, string _ref, decimal debit_amount, decimal credit_amount, decimal balance)
+            {
                 GeneralLedgerRow rowGeneralLedgerRow = ((GeneralLedgerRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         date,
@@ -2872,24 +3342,27 @@ namespace AccountingSystem {
                 this.Rows.Add(rowGeneralLedgerRow);
                 return rowGeneralLedgerRow;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
+            public override global::System.Data.DataTable Clone()
+            {
                 GeneralLedgerDataTable cln = ((GeneralLedgerDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
+            protected override global::System.Data.DataTable CreateInstance()
+            {
                 return new GeneralLedgerDataTable();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal void InitVars() {
+            internal void InitVars()
+            {
                 this.columndate = base.Columns["date"];
                 this.columnparticulars = base.Columns["particulars"];
                 this.columnref = base.Columns["ref"];
@@ -2897,10 +3370,11 @@ namespace AccountingSystem {
                 this.columncredit_amount = base.Columns["credit_amount"];
                 this.columnbalance = base.Columns["balance"];
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            private void InitClass() {
+            private void InitClass()
+            {
                 this.columndate = new global::System.Data.DataColumn("date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndate);
                 this.columnparticulars = new global::System.Data.DataColumn("particulars", typeof(string), null, global::System.Data.MappingType.Element);
@@ -2917,70 +3391,83 @@ namespace AccountingSystem {
                 this.columnbalance = new global::System.Data.DataColumn("balance", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnbalance);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public GeneralLedgerRow NewGeneralLedgerRow() {
+            public GeneralLedgerRow NewGeneralLedgerRow()
+            {
                 return ((GeneralLedgerRow)(this.NewRow()));
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
+            {
                 return new GeneralLedgerRow(builder);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Type GetRowType() {
+            protected override global::System.Type GetRowType()
+            {
                 return typeof(GeneralLedgerRow);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanged(e);
-                if ((this.GeneralLedgerRowChanged != null)) {
+                if ((this.GeneralLedgerRowChanged != null))
+                {
                     this.GeneralLedgerRowChanged(this, new GeneralLedgerRowChangeEvent(((GeneralLedgerRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanging(e);
-                if ((this.GeneralLedgerRowChanging != null)) {
+                if ((this.GeneralLedgerRowChanging != null))
+                {
                     this.GeneralLedgerRowChanging(this, new GeneralLedgerRowChangeEvent(((GeneralLedgerRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleted(e);
-                if ((this.GeneralLedgerRowDeleted != null)) {
+                if ((this.GeneralLedgerRowDeleted != null))
+                {
                     this.GeneralLedgerRowDeleted(this, new GeneralLedgerRowChangeEvent(((GeneralLedgerRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleting(e);
-                if ((this.GeneralLedgerRowDeleting != null)) {
+                if ((this.GeneralLedgerRowDeleting != null))
+                {
                     this.GeneralLedgerRowDeleting(this, new GeneralLedgerRowChangeEvent(((GeneralLedgerRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemoveGeneralLedgerRow(GeneralLedgerRow row) {
+            public void RemoveGeneralLedgerRow(GeneralLedgerRow row)
+            {
                 this.Rows.Remove(row);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
+            {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
                 dsLFS ds = new dsLFS();
@@ -3005,34 +3492,43 @@ namespace AccountingSystem {
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
+                if (xs.Contains(dsSchema.TargetNamespace))
+                {
                     global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
                     global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
+                    try
+                    {
                         global::System.Xml.Schema.XmlSchema schema = null;
                         dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
+                        {
                             schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                             s2.SetLength(0);
                             schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
+                            if ((s1.Length == s2.Length))
+                            {
                                 s1.Position = 0;
                                 s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                for (; ((s1.Position != s1.Length)
+                                            && (s1.ReadByte() == s2.ReadByte()));)
+                                {
                                     ;
                                 }
-                                if ((s1.Position == s1.Length)) {
+                                if ((s1.Position == s1.Length))
+                                {
                                     return type;
                                 }
                             }
                         }
                     }
-                    finally {
-                        if ((s1 != null)) {
+                    finally
+                    {
+                        if ((s1 != null))
+                        {
                             s1.Close();
                         }
-                        if ((s2 != null)) {
+                        if ((s2 != null))
+                        {
                             s2.Close();
                         }
                     }
@@ -3041,215 +3537,254 @@ namespace AccountingSystem {
                 return type;
             }
         }
-        
+
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class dtRCIDataTable : global::System.Data.TypedTableBase<dtRCIRow> {
-            
+        public partial class dtRCIDataTable : global::System.Data.TypedTableBase<dtRCIRow>
+        {
+
             private global::System.Data.DataColumn columnaccount_no;
-            
+
             private global::System.Data.DataColumn columnbank_name;
-            
+
             private global::System.Data.DataColumn columncheck_no;
-            
+
             private global::System.Data.DataColumn columncheck_date;
-            
+
             private global::System.Data.DataColumn columnfund_code;
-            
+
             private global::System.Data.DataColumn columnpayee;
-            
+
             private global::System.Data.DataColumn columnnature_of_payment;
-            
+
             private global::System.Data.DataColumn columndv_no;
-            
+
             private global::System.Data.DataColumn columnobligation_no;
-            
+
             private global::System.Data.DataColumn columntrust_liabilities;
-            
+
             private global::System.Data.DataColumn columnbir_vat_nonvat;
-            
+
             private global::System.Data.DataColumn columnamount;
-            
+
             private global::System.Data.DataColumn columnfpp_code;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtRCIDataTable() {
+            public dtRCIDataTable()
+            {
                 this.TableName = "dtRCI";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal dtRCIDataTable(global::System.Data.DataTable table) {
+            internal dtRCIDataTable(global::System.Data.DataTable table)
+            {
                 this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive))
+                {
                     this.CaseSensitive = table.CaseSensitive;
                 }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
+                {
                     this.Locale = table.Locale;
                 }
-                if ((table.Namespace != table.DataSet.Namespace)) {
+                if ((table.Namespace != table.DataSet.Namespace))
+                {
                     this.Namespace = table.Namespace;
                 }
                 this.Prefix = table.Prefix;
                 this.MinimumCapacity = table.MinimumCapacity;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected dtRCIDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
+            protected dtRCIDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
+                    base(info, context)
+            {
                 this.InitVars();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_noColumn {
-                get {
+            public global::System.Data.DataColumn account_noColumn
+            {
+                get
+                {
                     return this.columnaccount_no;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn bank_nameColumn {
-                get {
+            public global::System.Data.DataColumn bank_nameColumn
+            {
+                get
+                {
                     return this.columnbank_name;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn check_noColumn {
-                get {
+            public global::System.Data.DataColumn check_noColumn
+            {
+                get
+                {
                     return this.columncheck_no;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn check_dateColumn {
-                get {
+            public global::System.Data.DataColumn check_dateColumn
+            {
+                get
+                {
                     return this.columncheck_date;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn fund_codeColumn {
-                get {
+            public global::System.Data.DataColumn fund_codeColumn
+            {
+                get
+                {
                     return this.columnfund_code;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn payeeColumn {
-                get {
+            public global::System.Data.DataColumn payeeColumn
+            {
+                get
+                {
                     return this.columnpayee;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn nature_of_paymentColumn {
-                get {
+            public global::System.Data.DataColumn nature_of_paymentColumn
+            {
+                get
+                {
                     return this.columnnature_of_payment;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn dv_noColumn {
-                get {
+            public global::System.Data.DataColumn dv_noColumn
+            {
+                get
+                {
                     return this.columndv_no;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn obligation_noColumn {
-                get {
+            public global::System.Data.DataColumn obligation_noColumn
+            {
+                get
+                {
                     return this.columnobligation_no;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn trust_liabilitiesColumn {
-                get {
+            public global::System.Data.DataColumn trust_liabilitiesColumn
+            {
+                get
+                {
                     return this.columntrust_liabilities;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn bir_vat_nonvatColumn {
-                get {
+            public global::System.Data.DataColumn bir_vat_nonvatColumn
+            {
+                get
+                {
                     return this.columnbir_vat_nonvat;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn amountColumn {
-                get {
+            public global::System.Data.DataColumn amountColumn
+            {
+                get
+                {
                     return this.columnamount;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn fpp_codeColumn {
-                get {
+            public global::System.Data.DataColumn fpp_codeColumn
+            {
+                get
+                {
                     return this.columnfpp_code;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
+            public int Count
+            {
+                get
+                {
                     return this.Rows.Count;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtRCIRow this[int index] {
-                get {
+            public dtRCIRow this[int index]
+            {
+                get
+                {
                     return ((dtRCIRow)(this.Rows[index]));
                 }
             }
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event dtRCIRowChangeEventHandler dtRCIRowChanging;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event dtRCIRowChangeEventHandler dtRCIRowChanged;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event dtRCIRowChangeEventHandler dtRCIRowDeleting;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event dtRCIRowChangeEventHandler dtRCIRowDeleted;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AdddtRCIRow(dtRCIRow row) {
+            public void AdddtRCIRow(dtRCIRow row)
+            {
                 this.Rows.Add(row);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtRCIRow AdddtRCIRow(string account_no, string bank_name, string check_no, System.DateTime check_date, string fund_code, string payee, string nature_of_payment, string dv_no, string obligation_no, decimal trust_liabilities, decimal bir_vat_nonvat, decimal amount, string fpp_code) {
+            public dtRCIRow AdddtRCIRow(string account_no, string bank_name, string check_no, System.DateTime check_date, string fund_code, string payee, string nature_of_payment, string dv_no, string obligation_no, decimal trust_liabilities, decimal bir_vat_nonvat, decimal amount, string fpp_code)
+            {
                 dtRCIRow rowdtRCIRow = ((dtRCIRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         account_no,
@@ -3269,24 +3804,27 @@ namespace AccountingSystem {
                 this.Rows.Add(rowdtRCIRow);
                 return rowdtRCIRow;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
+            public override global::System.Data.DataTable Clone()
+            {
                 dtRCIDataTable cln = ((dtRCIDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
+            protected override global::System.Data.DataTable CreateInstance()
+            {
                 return new dtRCIDataTable();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal void InitVars() {
+            internal void InitVars()
+            {
                 this.columnaccount_no = base.Columns["account_no"];
                 this.columnbank_name = base.Columns["bank_name"];
                 this.columncheck_no = base.Columns["check_no"];
@@ -3301,10 +3839,11 @@ namespace AccountingSystem {
                 this.columnamount = base.Columns["amount"];
                 this.columnfpp_code = base.Columns["fpp_code"];
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            private void InitClass() {
+            private void InitClass()
+            {
                 this.columnaccount_no = new global::System.Data.DataColumn("account_no", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnaccount_no);
                 this.columnbank_name = new global::System.Data.DataColumn("bank_name", typeof(string), null, global::System.Data.MappingType.Element);
@@ -3332,70 +3871,83 @@ namespace AccountingSystem {
                 this.columnfpp_code = new global::System.Data.DataColumn("fpp_code", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfpp_code);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtRCIRow NewdtRCIRow() {
+            public dtRCIRow NewdtRCIRow()
+            {
                 return ((dtRCIRow)(this.NewRow()));
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
+            {
                 return new dtRCIRow(builder);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Type GetRowType() {
+            protected override global::System.Type GetRowType()
+            {
                 return typeof(dtRCIRow);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanged(e);
-                if ((this.dtRCIRowChanged != null)) {
+                if ((this.dtRCIRowChanged != null))
+                {
                     this.dtRCIRowChanged(this, new dtRCIRowChangeEvent(((dtRCIRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanging(e);
-                if ((this.dtRCIRowChanging != null)) {
+                if ((this.dtRCIRowChanging != null))
+                {
                     this.dtRCIRowChanging(this, new dtRCIRowChangeEvent(((dtRCIRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleted(e);
-                if ((this.dtRCIRowDeleted != null)) {
+                if ((this.dtRCIRowDeleted != null))
+                {
                     this.dtRCIRowDeleted(this, new dtRCIRowChangeEvent(((dtRCIRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleting(e);
-                if ((this.dtRCIRowDeleting != null)) {
+                if ((this.dtRCIRowDeleting != null))
+                {
                     this.dtRCIRowDeleting(this, new dtRCIRowChangeEvent(((dtRCIRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemovedtRCIRow(dtRCIRow row) {
+            public void RemovedtRCIRow(dtRCIRow row)
+            {
                 this.Rows.Remove(row);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
+            {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
                 dsLFS ds = new dsLFS();
@@ -3420,34 +3972,43 @@ namespace AccountingSystem {
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
+                if (xs.Contains(dsSchema.TargetNamespace))
+                {
                     global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
                     global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
+                    try
+                    {
                         global::System.Xml.Schema.XmlSchema schema = null;
                         dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
+                        {
                             schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                             s2.SetLength(0);
                             schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
+                            if ((s1.Length == s2.Length))
+                            {
                                 s1.Position = 0;
                                 s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                for (; ((s1.Position != s1.Length)
+                                            && (s1.ReadByte() == s2.ReadByte()));)
+                                {
                                     ;
                                 }
-                                if ((s1.Position == s1.Length)) {
+                                if ((s1.Position == s1.Length))
+                                {
                                     return type;
                                 }
                             }
                         }
                     }
-                    finally {
-                        if ((s1 != null)) {
+                    finally
+                    {
+                        if ((s1 != null))
+                        {
                             s1.Close();
                         }
-                        if ((s2 != null)) {
+                        if ((s2 != null))
+                        {
                             s2.Close();
                         }
                     }
@@ -3456,165 +4017,194 @@ namespace AccountingSystem {
                 return type;
             }
         }
-        
+
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class dtPCDataTable : global::System.Data.TypedTableBase<dtPCRow> {
-            
+        public partial class dtPCDataTable : global::System.Data.TypedTableBase<dtPCRow>
+        {
+
             private global::System.Data.DataColumn columnrcdno;
-            
+
             private global::System.Data.DataColumn columnpayee;
-            
+
             private global::System.Data.DataColumn columnacc_form_desc;
-            
+
             private global::System.Data.DataColumn columnledger_name;
-            
+
             private global::System.Data.DataColumn columnpayment_date;
-            
+
             private global::System.Data.DataColumn columnreceipt_no;
-            
+
             private global::System.Data.DataColumn columnamount;
-            
+
             private global::System.Data.DataColumn columncollector;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtPCDataTable() {
+            public dtPCDataTable()
+            {
                 this.TableName = "dtPC";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal dtPCDataTable(global::System.Data.DataTable table) {
+            internal dtPCDataTable(global::System.Data.DataTable table)
+            {
                 this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive))
+                {
                     this.CaseSensitive = table.CaseSensitive;
                 }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
+                {
                     this.Locale = table.Locale;
                 }
-                if ((table.Namespace != table.DataSet.Namespace)) {
+                if ((table.Namespace != table.DataSet.Namespace))
+                {
                     this.Namespace = table.Namespace;
                 }
                 this.Prefix = table.Prefix;
                 this.MinimumCapacity = table.MinimumCapacity;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected dtPCDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
+            protected dtPCDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
+                    base(info, context)
+            {
                 this.InitVars();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn rcdnoColumn {
-                get {
+            public global::System.Data.DataColumn rcdnoColumn
+            {
+                get
+                {
                     return this.columnrcdno;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn payeeColumn {
-                get {
+            public global::System.Data.DataColumn payeeColumn
+            {
+                get
+                {
                     return this.columnpayee;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn acc_form_descColumn {
-                get {
+            public global::System.Data.DataColumn acc_form_descColumn
+            {
+                get
+                {
                     return this.columnacc_form_desc;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn ledger_nameColumn {
-                get {
+            public global::System.Data.DataColumn ledger_nameColumn
+            {
+                get
+                {
                     return this.columnledger_name;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn payment_dateColumn {
-                get {
+            public global::System.Data.DataColumn payment_dateColumn
+            {
+                get
+                {
                     return this.columnpayment_date;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn receipt_noColumn {
-                get {
+            public global::System.Data.DataColumn receipt_noColumn
+            {
+                get
+                {
                     return this.columnreceipt_no;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn amountColumn {
-                get {
+            public global::System.Data.DataColumn amountColumn
+            {
+                get
+                {
                     return this.columnamount;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn collectorColumn {
-                get {
+            public global::System.Data.DataColumn collectorColumn
+            {
+                get
+                {
                     return this.columncollector;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
+            public int Count
+            {
+                get
+                {
                     return this.Rows.Count;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtPCRow this[int index] {
-                get {
+            public dtPCRow this[int index]
+            {
+                get
+                {
                     return ((dtPCRow)(this.Rows[index]));
                 }
             }
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event dtPCRowChangeEventHandler dtPCRowChanging;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event dtPCRowChangeEventHandler dtPCRowChanged;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event dtPCRowChangeEventHandler dtPCRowDeleting;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event dtPCRowChangeEventHandler dtPCRowDeleted;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AdddtPCRow(dtPCRow row) {
+            public void AdddtPCRow(dtPCRow row)
+            {
                 this.Rows.Add(row);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtPCRow AdddtPCRow(string rcdno, string payee, string acc_form_desc, string ledger_name, System.DateTime payment_date, string receipt_no, decimal amount, string collector) {
+            public dtPCRow AdddtPCRow(string rcdno, string payee, string acc_form_desc, string ledger_name, System.DateTime payment_date, string receipt_no, decimal amount, string collector)
+            {
                 dtPCRow rowdtPCRow = ((dtPCRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         rcdno,
@@ -3629,24 +4219,27 @@ namespace AccountingSystem {
                 this.Rows.Add(rowdtPCRow);
                 return rowdtPCRow;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
+            public override global::System.Data.DataTable Clone()
+            {
                 dtPCDataTable cln = ((dtPCDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
+            protected override global::System.Data.DataTable CreateInstance()
+            {
                 return new dtPCDataTable();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal void InitVars() {
+            internal void InitVars()
+            {
                 this.columnrcdno = base.Columns["rcdno"];
                 this.columnpayee = base.Columns["payee"];
                 this.columnacc_form_desc = base.Columns["acc_form_desc"];
@@ -3656,10 +4249,11 @@ namespace AccountingSystem {
                 this.columnamount = base.Columns["amount"];
                 this.columncollector = base.Columns["collector"];
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            private void InitClass() {
+            private void InitClass()
+            {
                 this.columnrcdno = new global::System.Data.DataColumn("rcdno", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnrcdno);
                 this.columnpayee = new global::System.Data.DataColumn("payee", typeof(string), null, global::System.Data.MappingType.Element);
@@ -3677,70 +4271,83 @@ namespace AccountingSystem {
                 this.columncollector = new global::System.Data.DataColumn("collector", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncollector);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtPCRow NewdtPCRow() {
+            public dtPCRow NewdtPCRow()
+            {
                 return ((dtPCRow)(this.NewRow()));
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
+            {
                 return new dtPCRow(builder);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Type GetRowType() {
+            protected override global::System.Type GetRowType()
+            {
                 return typeof(dtPCRow);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanged(e);
-                if ((this.dtPCRowChanged != null)) {
+                if ((this.dtPCRowChanged != null))
+                {
                     this.dtPCRowChanged(this, new dtPCRowChangeEvent(((dtPCRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanging(e);
-                if ((this.dtPCRowChanging != null)) {
+                if ((this.dtPCRowChanging != null))
+                {
                     this.dtPCRowChanging(this, new dtPCRowChangeEvent(((dtPCRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleted(e);
-                if ((this.dtPCRowDeleted != null)) {
+                if ((this.dtPCRowDeleted != null))
+                {
                     this.dtPCRowDeleted(this, new dtPCRowChangeEvent(((dtPCRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleting(e);
-                if ((this.dtPCRowDeleting != null)) {
+                if ((this.dtPCRowDeleting != null))
+                {
                     this.dtPCRowDeleting(this, new dtPCRowChangeEvent(((dtPCRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemovedtPCRow(dtPCRow row) {
+            public void RemovedtPCRow(dtPCRow row)
+            {
                 this.Rows.Remove(row);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
+            {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
                 dsLFS ds = new dsLFS();
@@ -3765,34 +4372,43 @@ namespace AccountingSystem {
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
+                if (xs.Contains(dsSchema.TargetNamespace))
+                {
                     global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
                     global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
+                    try
+                    {
                         global::System.Xml.Schema.XmlSchema schema = null;
                         dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
+                        {
                             schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                             s2.SetLength(0);
                             schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
+                            if ((s1.Length == s2.Length))
+                            {
                                 s1.Position = 0;
                                 s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                for (; ((s1.Position != s1.Length)
+                                            && (s1.ReadByte() == s2.ReadByte()));)
+                                {
                                     ;
                                 }
-                                if ((s1.Position == s1.Length)) {
+                                if ((s1.Position == s1.Length))
+                                {
                                     return type;
                                 }
                             }
                         }
                     }
-                    finally {
-                        if ((s1 != null)) {
+                    finally
+                    {
+                        if ((s1 != null))
+                        {
                             s1.Close();
                         }
-                        if ((s2 != null)) {
+                        if ((s2 != null))
+                        {
                             s2.Close();
                         }
                     }
@@ -3801,305 +4417,600 @@ namespace AccountingSystem {
                 return type;
             }
         }
-        
+
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class dtSAAOBDataTable : global::System.Data.TypedTableBase<dtSAAOBRow> {
-            
+        public partial class dtSAAOBDataTable : global::System.Data.TypedTableBase<dtSAAOBRow>
+        {
+
             private global::System.Data.DataColumn columnfund_id;
-            
+
             private global::System.Data.DataColumn columnfund_code;
-            
+
             private global::System.Data.DataColumn columnfund_name;
-            
+
             private global::System.Data.DataColumn columnfunction_classification_id;
-            
+
             private global::System.Data.DataColumn columnfunction_classification_sector_code;
-            
+
             private global::System.Data.DataColumn columnfunction_classification_sector_name;
-            
+
             private global::System.Data.DataColumn columnfunction_classification_services_id;
-            
+
             private global::System.Data.DataColumn columnfunction_classification_services_name;
-            
+
             private global::System.Data.DataColumn columnfpp_id;
-            
+
             private global::System.Data.DataColumn columnfpp_code;
-            
+
             private global::System.Data.DataColumn columnfpp_name;
-            
+
             private global::System.Data.DataColumn columnothers_fpp_id;
-            
+
             private global::System.Data.DataColumn columnothers_fpp_name;
-            
+
             private global::System.Data.DataColumn columnallotment_class_id;
-            
+
             private global::System.Data.DataColumn columnallotment_class_code;
-            
+
             private global::System.Data.DataColumn columnallotment_class_name;
-            
+
             private global::System.Data.DataColumn columnaccount_code;
-            
+
             private global::System.Data.DataColumn columnaccount_name;
-            
+
             private global::System.Data.DataColumn columnyear;
-            
+
             private global::System.Data.DataColumn columnappropriations;
-            
+
             private global::System.Data.DataColumn columnallotment_release;
-            
+
             private global::System.Data.DataColumn columnobligations;
-            
+
             private global::System.Data.DataColumn columnunobligated_balance;
-            
-            private global::System.Data.DataColumn columnaccount_code;
-            
-            private global::System.Data.DataColumn columnsubsidiary;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtSAAOBDataTable() {
+            public dtSAAOBDataTable()
+            {
                 this.TableName = "dtSAAOB";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal dtSAAOBDataTable(global::System.Data.DataTable table) {
+            internal dtSAAOBDataTable(global::System.Data.DataTable table)
+            {
                 this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive))
+                {
                     this.CaseSensitive = table.CaseSensitive;
                 }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
+                {
                     this.Locale = table.Locale;
                 }
-                if ((table.Namespace != table.DataSet.Namespace)) {
+                if ((table.Namespace != table.DataSet.Namespace))
+                {
                     this.Namespace = table.Namespace;
                 }
                 this.Prefix = table.Prefix;
                 this.MinimumCapacity = table.MinimumCapacity;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected dtSAAOBDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
+            protected dtSAAOBDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
+                    base(info, context)
+            {
                 this.InitVars();
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn fund_idColumn {
-                get {
+            public global::System.Data.DataColumn fund_idColumn
+            {
+                get
+                {
                     return this.columnfund_id;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn fund_codeColumn {
-                get {
+            public global::System.Data.DataColumn fund_codeColumn
+            {
+                get
+                {
                     return this.columnfund_code;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn fund_nameColumn {
-                get {
+            public global::System.Data.DataColumn fund_nameColumn
+            {
+                get
+                {
                     return this.columnfund_name;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn function_classification_idColumn {
-                get {
+            public global::System.Data.DataColumn function_classification_idColumn
+            {
+                get
+                {
                     return this.columnfunction_classification_id;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn function_classification_sector_codeColumn {
-                get {
+            public global::System.Data.DataColumn function_classification_sector_codeColumn
+            {
+                get
+                {
                     return this.columnfunction_classification_sector_code;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn function_classification_sector_nameColumn {
-                get {
+            public global::System.Data.DataColumn function_classification_sector_nameColumn
+            {
+                get
+                {
                     return this.columnfunction_classification_sector_name;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn function_classification_services_idColumn {
-                get {
+            public global::System.Data.DataColumn function_classification_services_idColumn
+            {
+                get
+                {
                     return this.columnfunction_classification_services_id;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn function_classification_services_nameColumn {
-                get {
+            public global::System.Data.DataColumn function_classification_services_nameColumn
+            {
+                get
+                {
                     return this.columnfunction_classification_services_name;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn fpp_idColumn
+            {
+                get
+                {
+                    return this.columnfpp_id;
+                }
+            }
 
-            public global::System.Data.DataColumn account_codeColumn {
-                get {
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn fpp_codeColumn
+            {
+                get
+                {
+                    return this.columnfpp_code;
+                }
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn fpp_nameColumn
+            {
+                get
+                {
+                    return this.columnfpp_name;
+                }
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn others_fpp_idColumn
+            {
+                get
+                {
+                    return this.columnothers_fpp_id;
+                }
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn others_fpp_nameColumn
+            {
+                get
+                {
+                    return this.columnothers_fpp_name;
+                }
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn allotment_class_idColumn
+            {
+                get
+                {
+                    return this.columnallotment_class_id;
+                }
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn allotment_class_codeColumn
+            {
+                get
+                {
+                    return this.columnallotment_class_code;
+                }
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn allotment_class_nameColumn
+            {
+                get
+                {
+                    return this.columnallotment_class_name;
+                }
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn account_codeColumn
+            {
+                get
+                {
                     return this.columnaccount_code;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-
+            public global::System.Data.DataColumn account_nameColumn
+            {
+                get
+                {
+                    return this.columnaccount_name;
                 }
             }
-            
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn yearColumn
+            {
+                get
+                {
+                    return this.columnyear;
+                }
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn appropriationsColumn
+            {
+                get
+                {
+                    return this.columnappropriations;
+                }
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn allotment_releaseColumn
+            {
+                get
+                {
+                    return this.columnallotment_release;
+                }
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn obligationsColumn
+            {
+                get
+                {
+                    return this.columnobligations;
+                }
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn unobligated_balanceColumn
+            {
+                get
+                {
+                    return this.columnunobligated_balance;
+                }
+            }
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
+            public int Count
+            {
+                get
+                {
                     return this.Rows.Count;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtSAAOBRow this[int index] {
-                get {
+            public dtSAAOBRow this[int index]
+            {
+                get
+                {
                     return ((dtSAAOBRow)(this.Rows[index]));
                 }
             }
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event dtSAAOBRowChangeEventHandler dtSAAOBRowChanging;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event dtSAAOBRowChangeEventHandler dtSAAOBRowChanged;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event dtSAAOBRowChangeEventHandler dtSAAOBRowDeleting;
-            
+
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event dtSAAOBRowChangeEventHandler dtSAAOBRowDeleted;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AdddtSAAOBRow(dtSAAOBRow row) {
+            public void AdddtSAAOBRow(dtSAAOBRow row)
+            {
                 this.Rows.Add(row);
             }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
 
-            }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
+            public dtSAAOBRow AdddtSAAOBRow(
+                        int fund_id,
+                        string fund_code,
+                        string fund_name,
+                        int function_classification_id,
+                        string function_classification_sector_code,
+                        string function_classification_sector_name,
+                        int function_classification_services_id,
+                        string function_classification_services_name,
+                        int fpp_id,
+                        string fpp_code,
+                        string fpp_name,
+                        string others_fpp_id,
+                        string others_fpp_name,
+                        int allotment_class_id,
+                        string allotment_class_code,
+                        string allotment_class_name,
+                        string account_code,
+                        string account_name,
+                        short year,
+                        decimal appropriations,
+                        decimal allotment_release,
+                        decimal obligations,
+                        decimal unobligated_balance)
+            {
+                dtSAAOBRow rowdtSAAOBRow = ((dtSAAOBRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        fund_id,
+                        fund_code,
+                        fund_name,
+                        function_classification_id,
+                        function_classification_sector_code,
+                        function_classification_sector_name,
+                        function_classification_services_id,
+                        function_classification_services_name,
+                        fpp_id,
+                        fpp_code,
+                        fpp_name,
+                        others_fpp_id,
+                        others_fpp_name,
+                        allotment_class_id,
+                        allotment_class_code,
+                        allotment_class_name,
+                        account_code,
+                        account_name,
+                        year,
+                        appropriations,
+                        allotment_release,
+                        obligations,
+                        unobligated_balance};
+                rowdtSAAOBRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtSAAOBRow);
+                return rowdtSAAOBRow;
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone()
+            {
                 dtSAAOBDataTable cln = ((dtSAAOBDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
+            protected override global::System.Data.DataTable CreateInstance()
+            {
                 return new dtSAAOBDataTable();
             }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal void InitVars() {
 
-            }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            private void InitClass() {
+            internal void InitVars()
+            {
+                this.columnfund_id = base.Columns["fund_id"];
+                this.columnfund_code = base.Columns["fund_code"];
+                this.columnfund_name = base.Columns["fund_name"];
+                this.columnfunction_classification_id = base.Columns["function_classification_id"];
+                this.columnfunction_classification_sector_code = base.Columns["function_classification_sector_code"];
+                this.columnfunction_classification_sector_name = base.Columns["function_classification_sector_name"];
+                this.columnfunction_classification_services_id = base.Columns["function_classification_services_id"];
+                this.columnfunction_classification_services_name = base.Columns["function_classification_services_name"];
+                this.columnfpp_id = base.Columns["fpp_id"];
+                this.columnfpp_code = base.Columns["fpp_code"];
+                this.columnfpp_name = base.Columns["fpp_name"];
+                this.columnothers_fpp_id = base.Columns["others_fpp_id"];
+                this.columnothers_fpp_name = base.Columns["others_fpp_name"];
+                this.columnallotment_class_id = base.Columns["allotment_class_id"];
+                this.columnallotment_class_code = base.Columns["allotment_class_code"];
+                this.columnallotment_class_name = base.Columns["allotment_class_name"];
+                this.columnaccount_code = base.Columns["account_code"];
+                this.columnaccount_name = base.Columns["account_name"];
+                this.columnyear = base.Columns["year"];
+                this.columnappropriations = base.Columns["appropriations"];
+                this.columnallotment_release = base.Columns["allotment_release"];
+                this.columnobligations = base.Columns["obligations"];
+                this.columnunobligated_balance = base.Columns["unobligated_balance"];
+            }
 
-            }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtSAAOBRow NewdtSAAOBRow() {
+            private void InitClass()
+            {
+                this.columnfund_id = new global::System.Data.DataColumn("fund_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfund_id);
+                this.columnfund_code = new global::System.Data.DataColumn("fund_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfund_code);
+                this.columnfund_name = new global::System.Data.DataColumn("fund_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfund_name);
+                this.columnfunction_classification_id = new global::System.Data.DataColumn("function_classification_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfunction_classification_id);
+                this.columnfunction_classification_sector_code = new global::System.Data.DataColumn("function_classification_sector_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfunction_classification_sector_code);
+                this.columnfunction_classification_sector_name = new global::System.Data.DataColumn("function_classification_sector_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfunction_classification_sector_name);
+                this.columnfunction_classification_services_id = new global::System.Data.DataColumn("function_classification_services_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfunction_classification_services_id);
+                this.columnfunction_classification_services_name = new global::System.Data.DataColumn("function_classification_services_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfunction_classification_services_name);
+                this.columnfpp_id = new global::System.Data.DataColumn("fpp_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfpp_id);
+                this.columnfpp_code = new global::System.Data.DataColumn("fpp_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfpp_code);
+                this.columnfpp_name = new global::System.Data.DataColumn("fpp_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfpp_name);
+                this.columnothers_fpp_id = new global::System.Data.DataColumn("others_fpp_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnothers_fpp_id);
+                this.columnothers_fpp_name = new global::System.Data.DataColumn("others_fpp_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnothers_fpp_name);
+                this.columnallotment_class_id = new global::System.Data.DataColumn("allotment_class_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnallotment_class_id);
+                this.columnallotment_class_code = new global::System.Data.DataColumn("allotment_class_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnallotment_class_code);
+                this.columnallotment_class_name = new global::System.Data.DataColumn("allotment_class_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnallotment_class_name);
+                this.columnaccount_code = new global::System.Data.DataColumn("account_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaccount_code);
+                this.columnaccount_name = new global::System.Data.DataColumn("account_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaccount_name);
+                this.columnyear = new global::System.Data.DataColumn("year", typeof(short), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnyear);
+                this.columnappropriations = new global::System.Data.DataColumn("appropriations", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnappropriations);
+                this.columnallotment_release = new global::System.Data.DataColumn("allotment_release", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnallotment_release);
+                this.columnobligations = new global::System.Data.DataColumn("obligations", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnobligations);
+                this.columnunobligated_balance = new global::System.Data.DataColumn("unobligated_balance", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnunobligated_balance);
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtSAAOBRow NewdtSAAOBRow()
+            {
                 return ((dtSAAOBRow)(this.NewRow()));
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
+            {
                 return new dtSAAOBRow(builder);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Type GetRowType() {
+            protected override global::System.Type GetRowType()
+            {
                 return typeof(dtSAAOBRow);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanged(e);
-                if ((this.dtSAAOBRowChanged != null)) {
+                if ((this.dtSAAOBRowChanged != null))
+                {
                     this.dtSAAOBRowChanged(this, new dtSAAOBRowChangeEvent(((dtSAAOBRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowChanging(e);
-                if ((this.dtSAAOBRowChanging != null)) {
+                if ((this.dtSAAOBRowChanging != null))
+                {
                     this.dtSAAOBRowChanging(this, new dtSAAOBRowChangeEvent(((dtSAAOBRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleted(e);
-                if ((this.dtSAAOBRowDeleted != null)) {
+                if ((this.dtSAAOBRowDeleted != null))
+                {
                     this.dtSAAOBRowDeleted(this, new dtSAAOBRowChangeEvent(((dtSAAOBRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
+            {
                 base.OnRowDeleting(e);
-                if ((this.dtSAAOBRowDeleting != null)) {
+                if ((this.dtSAAOBRowDeleting != null))
+                {
                     this.dtSAAOBRowDeleting(this, new dtSAAOBRowChangeEvent(((dtSAAOBRow)(e.Row)), e.Action));
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemovedtSAAOBRow(dtSAAOBRow row) {
+            public void RemovedtSAAOBRow(dtSAAOBRow row)
+            {
                 this.Rows.Remove(row);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
+            {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
                 dsLFS ds = new dsLFS();
@@ -4124,34 +5035,43 @@ namespace AccountingSystem {
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
+                if (xs.Contains(dsSchema.TargetNamespace))
+                {
                     global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
                     global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
+                    try
+                    {
                         global::System.Xml.Schema.XmlSchema schema = null;
                         dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext();)
+                        {
                             schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
                             s2.SetLength(0);
                             schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
+                            if ((s1.Length == s2.Length))
+                            {
                                 s1.Position = 0;
                                 s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                for (; ((s1.Position != s1.Length)
+                                            && (s1.ReadByte() == s2.ReadByte()));)
+                                {
                                     ;
                                 }
-                                if ((s1.Position == s1.Length)) {
+                                if ((s1.Position == s1.Length))
+                                {
                                     return type;
                                 }
                             }
                         }
                     }
-                    finally {
-                        if ((s1 != null)) {
+                    finally
+                    {
+                        if ((s1 != null))
+                        {
                             s1.Close();
                         }
-                        if ((s2 != null)) {
+                        if ((s2 != null))
+                        {
                             s2.Close();
                         }
                     }
@@ -4160,3401 +5080,4172 @@ namespace AccountingSystem {
                 return type;
             }
         }
-        
+
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class dtGeneralJournalRow : global::System.Data.DataRow {
-            
+        public partial class dtGeneralJournalRow : global::System.Data.DataRow
+        {
+
             private dtGeneralJournalDataTable tabledtGeneralJournal;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal dtGeneralJournalRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
+            internal dtGeneralJournalRow(global::System.Data.DataRowBuilder rb) :
+                    base(rb)
+            {
                 this.tabledtGeneralJournal = ((dtGeneralJournalDataTable)(this.Table));
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime date_entry {
-                get {
-                    try {
+            public System.DateTime date_entry
+            {
+                get
+                {
+                    try
+                    {
                         return ((global::System.DateTime)(this[this.tabledtGeneralJournal.date_entryColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'date_entry\' in table \'dtGeneralJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtGeneralJournal.date_entryColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string jev_no {
-                get {
-                    try {
+            public string jev_no
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtGeneralJournal.jev_noColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'jev_no\' in table \'dtGeneralJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtGeneralJournal.jev_noColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string particulars {
-                get {
-                    try {
+            public string particulars
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtGeneralJournal.particularsColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'particulars\' in table \'dtGeneralJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtGeneralJournal.particularsColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string account_code {
-                get {
-                    try {
+            public string account_code
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtGeneralJournal.account_codeColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'account_code\' in table \'dtGeneralJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtGeneralJournal.account_codeColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string p {
-                get {
-                    try {
+            public string p
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtGeneralJournal.pColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'p\' in table \'dtGeneralJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtGeneralJournal.pColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal debit {
-                get {
-                    try {
+            public decimal debit
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tabledtGeneralJournal.debitColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'debit\' in table \'dtGeneralJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtGeneralJournal.debitColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal credit {
-                get {
-                    try {
+            public decimal credit
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tabledtGeneralJournal.creditColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'credit\' in table \'dtGeneralJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtGeneralJournal.creditColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isdate_entryNull() {
+            public bool Isdate_entryNull()
+            {
                 return this.IsNull(this.tabledtGeneralJournal.date_entryColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setdate_entryNull() {
+            public void Setdate_entryNull()
+            {
                 this[this.tabledtGeneralJournal.date_entryColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isjev_noNull() {
+            public bool Isjev_noNull()
+            {
                 return this.IsNull(this.tabledtGeneralJournal.jev_noColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setjev_noNull() {
+            public void Setjev_noNull()
+            {
                 this[this.tabledtGeneralJournal.jev_noColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsparticularsNull() {
+            public bool IsparticularsNull()
+            {
                 return this.IsNull(this.tabledtGeneralJournal.particularsColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetparticularsNull() {
+            public void SetparticularsNull()
+            {
                 this[this.tabledtGeneralJournal.particularsColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_codeNull() {
+            public bool Isaccount_codeNull()
+            {
                 return this.IsNull(this.tabledtGeneralJournal.account_codeColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_codeNull() {
+            public void Setaccount_codeNull()
+            {
                 this[this.tabledtGeneralJournal.account_codeColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IspNull() {
+            public bool IspNull()
+            {
                 return this.IsNull(this.tabledtGeneralJournal.pColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetpNull() {
+            public void SetpNull()
+            {
                 this[this.tabledtGeneralJournal.pColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsdebitNull() {
+            public bool IsdebitNull()
+            {
                 return this.IsNull(this.tabledtGeneralJournal.debitColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetdebitNull() {
+            public void SetdebitNull()
+            {
                 this[this.tabledtGeneralJournal.debitColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IscreditNull() {
+            public bool IscreditNull()
+            {
                 return this.IsNull(this.tabledtGeneralJournal.creditColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetcreditNull() {
+            public void SetcreditNull()
+            {
                 this[this.tabledtGeneralJournal.creditColumn] = global::System.Convert.DBNull;
             }
         }
-        
+
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class CashDisbursementsJournalRow : global::System.Data.DataRow {
-            
+        public partial class CashDisbursementsJournalRow : global::System.Data.DataRow
+        {
+
             private CashDisbursementsJournalDataTable tableCashDisbursementsJournal;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal CashDisbursementsJournalRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
+            internal CashDisbursementsJournalRow(global::System.Data.DataRowBuilder rb) :
+                    base(rb)
+            {
                 this.tableCashDisbursementsJournal = ((CashDisbursementsJournalDataTable)(this.Table));
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime date {
-                get {
-                    try {
+            public System.DateTime date
+            {
+                get
+                {
+                    try
+                    {
                         return ((global::System.DateTime)(this[this.tableCashDisbursementsJournal.dateColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'date\' in table \'CashDisbursementsJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCashDisbursementsJournal.dateColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string _ref {
-                get {
-                    try {
+            public string _ref
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableCashDisbursementsJournal.refColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'ref\' in table \'CashDisbursementsJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCashDisbursementsJournal.refColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string particulars {
-                get {
-                    try {
+            public string particulars
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableCashDisbursementsJournal.particularsColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'particulars\' in table \'CashDisbursementsJournal\' is DBNull." +
                                 "", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCashDisbursementsJournal.particularsColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string account_code_debit {
-                get {
-                    try {
+            public string account_code_debit
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableCashDisbursementsJournal.account_code_debitColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'account_code_debit\' in table \'CashDisbursementsJournal\' is " +
                                 "DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCashDisbursementsJournal.account_code_debitColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string account_code_credit {
-                get {
-                    try {
+            public string account_code_credit
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableCashDisbursementsJournal.account_code_creditColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'account_code_credit\' in table \'CashDisbursementsJournal\' is" +
                                 " DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCashDisbursementsJournal.account_code_creditColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string p {
-                get {
-                    try {
+            public string p
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableCashDisbursementsJournal.pColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'p\' in table \'CashDisbursementsJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCashDisbursementsJournal.pColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal debit {
-                get {
-                    try {
+            public decimal debit
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tableCashDisbursementsJournal.debitColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'debit\' in table \'CashDisbursementsJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCashDisbursementsJournal.debitColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal credit {
-                get {
-                    try {
+            public decimal credit
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tableCashDisbursementsJournal.creditColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'credit\' in table \'CashDisbursementsJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCashDisbursementsJournal.creditColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsdateNull() {
+            public bool IsdateNull()
+            {
                 return this.IsNull(this.tableCashDisbursementsJournal.dateColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetdateNull() {
+            public void SetdateNull()
+            {
                 this[this.tableCashDisbursementsJournal.dateColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Is_refNull() {
+            public bool Is_refNull()
+            {
                 return this.IsNull(this.tableCashDisbursementsJournal.refColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Set_refNull() {
+            public void Set_refNull()
+            {
                 this[this.tableCashDisbursementsJournal.refColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsparticularsNull() {
+            public bool IsparticularsNull()
+            {
                 return this.IsNull(this.tableCashDisbursementsJournal.particularsColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetparticularsNull() {
+            public void SetparticularsNull()
+            {
                 this[this.tableCashDisbursementsJournal.particularsColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_code_debitNull() {
+            public bool Isaccount_code_debitNull()
+            {
                 return this.IsNull(this.tableCashDisbursementsJournal.account_code_debitColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_code_debitNull() {
+            public void Setaccount_code_debitNull()
+            {
                 this[this.tableCashDisbursementsJournal.account_code_debitColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_code_creditNull() {
+            public bool Isaccount_code_creditNull()
+            {
                 return this.IsNull(this.tableCashDisbursementsJournal.account_code_creditColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_code_creditNull() {
+            public void Setaccount_code_creditNull()
+            {
                 this[this.tableCashDisbursementsJournal.account_code_creditColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IspNull() {
+            public bool IspNull()
+            {
                 return this.IsNull(this.tableCashDisbursementsJournal.pColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetpNull() {
+            public void SetpNull()
+            {
                 this[this.tableCashDisbursementsJournal.pColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsdebitNull() {
+            public bool IsdebitNull()
+            {
                 return this.IsNull(this.tableCashDisbursementsJournal.debitColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetdebitNull() {
+            public void SetdebitNull()
+            {
                 this[this.tableCashDisbursementsJournal.debitColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IscreditNull() {
+            public bool IscreditNull()
+            {
                 return this.IsNull(this.tableCashDisbursementsJournal.creditColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetcreditNull() {
+            public void SetcreditNull()
+            {
                 this[this.tableCashDisbursementsJournal.creditColumn] = global::System.Convert.DBNull;
             }
         }
-        
+
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class CheckDisbursementsJournalRow : global::System.Data.DataRow {
-            
+        public partial class CheckDisbursementsJournalRow : global::System.Data.DataRow
+        {
+
             private CheckDisbursementsJournalDataTable tableCheckDisbursementsJournal;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal CheckDisbursementsJournalRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
+            internal CheckDisbursementsJournalRow(global::System.Data.DataRowBuilder rb) :
+                    base(rb)
+            {
                 this.tableCheckDisbursementsJournal = ((CheckDisbursementsJournalDataTable)(this.Table));
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime date {
-                get {
-                    try {
+            public System.DateTime date
+            {
+                get
+                {
+                    try
+                    {
                         return ((global::System.DateTime)(this[this.tableCheckDisbursementsJournal.dateColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'date\' in table \'CheckDisbursementsJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCheckDisbursementsJournal.dateColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string _ref {
-                get {
-                    try {
+            public string _ref
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableCheckDisbursementsJournal.refColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'ref\' in table \'CheckDisbursementsJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCheckDisbursementsJournal.refColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string payee {
-                get {
-                    try {
+            public string payee
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableCheckDisbursementsJournal.payeeColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'payee\' in table \'CheckDisbursementsJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCheckDisbursementsJournal.payeeColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string account_code_debit {
-                get {
-                    try {
+            public string account_code_debit
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableCheckDisbursementsJournal.account_code_debitColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'account_code_debit\' in table \'CheckDisbursementsJournal\' is" +
                                 " DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCheckDisbursementsJournal.account_code_debitColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string account_code_credit {
-                get {
-                    try {
+            public string account_code_credit
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableCheckDisbursementsJournal.account_code_creditColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'account_code_credit\' in table \'CheckDisbursementsJournal\' i" +
                                 "s DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCheckDisbursementsJournal.account_code_creditColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string p {
-                get {
-                    try {
+            public string p
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableCheckDisbursementsJournal.pColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'p\' in table \'CheckDisbursementsJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCheckDisbursementsJournal.pColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal debit {
-                get {
-                    try {
+            public decimal debit
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tableCheckDisbursementsJournal.debitColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'debit\' in table \'CheckDisbursementsJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCheckDisbursementsJournal.debitColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal credit {
-                get {
-                    try {
+            public decimal credit
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tableCheckDisbursementsJournal.creditColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'credit\' in table \'CheckDisbursementsJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCheckDisbursementsJournal.creditColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsdateNull() {
+            public bool IsdateNull()
+            {
                 return this.IsNull(this.tableCheckDisbursementsJournal.dateColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetdateNull() {
+            public void SetdateNull()
+            {
                 this[this.tableCheckDisbursementsJournal.dateColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Is_refNull() {
+            public bool Is_refNull()
+            {
                 return this.IsNull(this.tableCheckDisbursementsJournal.refColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Set_refNull() {
+            public void Set_refNull()
+            {
                 this[this.tableCheckDisbursementsJournal.refColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IspayeeNull() {
+            public bool IspayeeNull()
+            {
                 return this.IsNull(this.tableCheckDisbursementsJournal.payeeColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetpayeeNull() {
+            public void SetpayeeNull()
+            {
                 this[this.tableCheckDisbursementsJournal.payeeColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_code_debitNull() {
+            public bool Isaccount_code_debitNull()
+            {
                 return this.IsNull(this.tableCheckDisbursementsJournal.account_code_debitColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_code_debitNull() {
+            public void Setaccount_code_debitNull()
+            {
                 this[this.tableCheckDisbursementsJournal.account_code_debitColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_code_creditNull() {
+            public bool Isaccount_code_creditNull()
+            {
                 return this.IsNull(this.tableCheckDisbursementsJournal.account_code_creditColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_code_creditNull() {
+            public void Setaccount_code_creditNull()
+            {
                 this[this.tableCheckDisbursementsJournal.account_code_creditColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IspNull() {
+            public bool IspNull()
+            {
                 return this.IsNull(this.tableCheckDisbursementsJournal.pColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetpNull() {
+            public void SetpNull()
+            {
                 this[this.tableCheckDisbursementsJournal.pColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsdebitNull() {
+            public bool IsdebitNull()
+            {
                 return this.IsNull(this.tableCheckDisbursementsJournal.debitColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetdebitNull() {
+            public void SetdebitNull()
+            {
                 this[this.tableCheckDisbursementsJournal.debitColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IscreditNull() {
+            public bool IscreditNull()
+            {
                 return this.IsNull(this.tableCheckDisbursementsJournal.creditColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetcreditNull() {
+            public void SetcreditNull()
+            {
                 this[this.tableCheckDisbursementsJournal.creditColumn] = global::System.Convert.DBNull;
             }
         }
-        
+
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class CashReceiptsJournalRow : global::System.Data.DataRow {
-            
+        public partial class CashReceiptsJournalRow : global::System.Data.DataRow
+        {
+
             private CashReceiptsJournalDataTable tableCashReceiptsJournal;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal CashReceiptsJournalRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
+            internal CashReceiptsJournalRow(global::System.Data.DataRowBuilder rb) :
+                    base(rb)
+            {
                 this.tableCashReceiptsJournal = ((CashReceiptsJournalDataTable)(this.Table));
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime date {
-                get {
-                    try {
+            public System.DateTime date
+            {
+                get
+                {
+                    try
+                    {
                         return ((global::System.DateTime)(this[this.tableCashReceiptsJournal.dateColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'date\' in table \'CashReceiptsJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCashReceiptsJournal.dateColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string rcd_no {
-                get {
-                    try {
+            public string rcd_no
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableCashReceiptsJournal.rcd_noColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'rcd_no\' in table \'CashReceiptsJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCashReceiptsJournal.rcd_noColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string collecting_officer {
-                get {
-                    try {
+            public string collecting_officer
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableCashReceiptsJournal.collecting_officerColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'collecting_officer\' in table \'CashReceiptsJournal\' is DBNul" +
                                 "l.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCashReceiptsJournal.collecting_officerColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal collections_debit_amount {
-                get {
-                    try {
+            public decimal collections_debit_amount
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tableCashReceiptsJournal.collections_debit_amountColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'collections_debit_amount\' in table \'CashReceiptsJournal\' is" +
                                 " DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCashReceiptsJournal.collections_debit_amountColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string collections_credit_account_code {
-                get {
-                    try {
+            public string collections_credit_account_code
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableCashReceiptsJournal.collections_credit_account_codeColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'collections_credit_account_code\' in table \'CashReceiptsJour" +
                                 "nal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCashReceiptsJournal.collections_credit_account_codeColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string collections_credit_p {
-                get {
-                    try {
+            public string collections_credit_p
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableCashReceiptsJournal.collections_credit_pColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'collections_credit_p\' in table \'CashReceiptsJournal\' is DBN" +
                                 "ull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCashReceiptsJournal.collections_credit_pColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal collections_credt_amount {
-                get {
-                    try {
+            public decimal collections_credt_amount
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tableCashReceiptsJournal.collections_credt_amountColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'collections_credt_amount\' in table \'CashReceiptsJournal\' is" +
                                 " DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCashReceiptsJournal.collections_credt_amountColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string deposit_debit_account_code {
-                get {
-                    try {
+            public string deposit_debit_account_code
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableCashReceiptsJournal.deposit_debit_account_codeColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'deposit_debit_account_code\' in table \'CashReceiptsJournal\' " +
                                 "is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCashReceiptsJournal.deposit_debit_account_codeColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string deposit_debit_p {
-                get {
-                    try {
+            public string deposit_debit_p
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableCashReceiptsJournal.deposit_debit_pColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'deposit_debit_p\' in table \'CashReceiptsJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCashReceiptsJournal.deposit_debit_pColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal deposit_debit_amount {
-                get {
-                    try {
+            public decimal deposit_debit_amount
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tableCashReceiptsJournal.deposit_debit_amountColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'deposit_debit_amount\' in table \'CashReceiptsJournal\' is DBN" +
                                 "ull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCashReceiptsJournal.deposit_debit_amountColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal deposit_credit_amount {
-                get {
-                    try {
+            public decimal deposit_credit_amount
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tableCashReceiptsJournal.deposit_credit_amountColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'deposit_credit_amount\' in table \'CashReceiptsJournal\' is DB" +
                                 "Null.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableCashReceiptsJournal.deposit_credit_amountColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsdateNull() {
+            public bool IsdateNull()
+            {
                 return this.IsNull(this.tableCashReceiptsJournal.dateColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetdateNull() {
+            public void SetdateNull()
+            {
                 this[this.tableCashReceiptsJournal.dateColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isrcd_noNull() {
+            public bool Isrcd_noNull()
+            {
                 return this.IsNull(this.tableCashReceiptsJournal.rcd_noColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setrcd_noNull() {
+            public void Setrcd_noNull()
+            {
                 this[this.tableCashReceiptsJournal.rcd_noColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Iscollecting_officerNull() {
+            public bool Iscollecting_officerNull()
+            {
                 return this.IsNull(this.tableCashReceiptsJournal.collecting_officerColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setcollecting_officerNull() {
+            public void Setcollecting_officerNull()
+            {
                 this[this.tableCashReceiptsJournal.collecting_officerColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Iscollections_debit_amountNull() {
+            public bool Iscollections_debit_amountNull()
+            {
                 return this.IsNull(this.tableCashReceiptsJournal.collections_debit_amountColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setcollections_debit_amountNull() {
+            public void Setcollections_debit_amountNull()
+            {
                 this[this.tableCashReceiptsJournal.collections_debit_amountColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Iscollections_credit_account_codeNull() {
+            public bool Iscollections_credit_account_codeNull()
+            {
                 return this.IsNull(this.tableCashReceiptsJournal.collections_credit_account_codeColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setcollections_credit_account_codeNull() {
+            public void Setcollections_credit_account_codeNull()
+            {
                 this[this.tableCashReceiptsJournal.collections_credit_account_codeColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Iscollections_credit_pNull() {
+            public bool Iscollections_credit_pNull()
+            {
                 return this.IsNull(this.tableCashReceiptsJournal.collections_credit_pColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setcollections_credit_pNull() {
+            public void Setcollections_credit_pNull()
+            {
                 this[this.tableCashReceiptsJournal.collections_credit_pColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Iscollections_credt_amountNull() {
+            public bool Iscollections_credt_amountNull()
+            {
                 return this.IsNull(this.tableCashReceiptsJournal.collections_credt_amountColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setcollections_credt_amountNull() {
+            public void Setcollections_credt_amountNull()
+            {
                 this[this.tableCashReceiptsJournal.collections_credt_amountColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isdeposit_debit_account_codeNull() {
+            public bool Isdeposit_debit_account_codeNull()
+            {
                 return this.IsNull(this.tableCashReceiptsJournal.deposit_debit_account_codeColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setdeposit_debit_account_codeNull() {
+            public void Setdeposit_debit_account_codeNull()
+            {
                 this[this.tableCashReceiptsJournal.deposit_debit_account_codeColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isdeposit_debit_pNull() {
+            public bool Isdeposit_debit_pNull()
+            {
                 return this.IsNull(this.tableCashReceiptsJournal.deposit_debit_pColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setdeposit_debit_pNull() {
+            public void Setdeposit_debit_pNull()
+            {
                 this[this.tableCashReceiptsJournal.deposit_debit_pColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isdeposit_debit_amountNull() {
+            public bool Isdeposit_debit_amountNull()
+            {
                 return this.IsNull(this.tableCashReceiptsJournal.deposit_debit_amountColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setdeposit_debit_amountNull() {
+            public void Setdeposit_debit_amountNull()
+            {
                 this[this.tableCashReceiptsJournal.deposit_debit_amountColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isdeposit_credit_amountNull() {
+            public bool Isdeposit_credit_amountNull()
+            {
                 return this.IsNull(this.tableCashReceiptsJournal.deposit_credit_amountColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setdeposit_credit_amountNull() {
+            public void Setdeposit_credit_amountNull()
+            {
                 this[this.tableCashReceiptsJournal.deposit_credit_amountColumn] = global::System.Convert.DBNull;
             }
         }
-        
+
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class ProcurementsReceivedJournalRow : global::System.Data.DataRow {
-            
+        public partial class ProcurementsReceivedJournalRow : global::System.Data.DataRow
+        {
+
             private ProcurementsReceivedJournalDataTable tableProcurementsReceivedJournal;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal ProcurementsReceivedJournalRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
+            internal ProcurementsReceivedJournalRow(global::System.Data.DataRowBuilder rb) :
+                    base(rb)
+            {
                 this.tableProcurementsReceivedJournal = ((ProcurementsReceivedJournalDataTable)(this.Table));
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime date {
-                get {
-                    try {
+            public System.DateTime date
+            {
+                get
+                {
+                    try
+                    {
                         return ((global::System.DateTime)(this[this.tableProcurementsReceivedJournal.dateColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'date\' in table \'ProcurementsReceivedJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableProcurementsReceivedJournal.dateColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string _ref {
-                get {
-                    try {
+            public string _ref
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableProcurementsReceivedJournal.refColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'ref\' in table \'ProcurementsReceivedJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableProcurementsReceivedJournal.refColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string particulars {
-                get {
-                    try {
+            public string particulars
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableProcurementsReceivedJournal.particularsColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'particulars\' in table \'ProcurementsReceivedJournal\' is DBNu" +
                                 "ll.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableProcurementsReceivedJournal.particularsColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string account_code_debit {
-                get {
-                    try {
+            public string account_code_debit
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableProcurementsReceivedJournal.account_code_debitColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'account_code_debit\' in table \'ProcurementsReceivedJournal\' " +
                                 "is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableProcurementsReceivedJournal.account_code_debitColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string account_code_credit {
-                get {
-                    try {
+            public string account_code_credit
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableProcurementsReceivedJournal.account_code_creditColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'account_code_credit\' in table \'ProcurementsReceivedJournal\'" +
                                 " is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableProcurementsReceivedJournal.account_code_creditColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string p {
-                get {
-                    try {
+            public string p
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableProcurementsReceivedJournal.pColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'p\' in table \'ProcurementsReceivedJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableProcurementsReceivedJournal.pColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal debit {
-                get {
-                    try {
+            public decimal debit
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tableProcurementsReceivedJournal.debitColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'debit\' in table \'ProcurementsReceivedJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableProcurementsReceivedJournal.debitColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal credit {
-                get {
-                    try {
+            public decimal credit
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tableProcurementsReceivedJournal.creditColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'credit\' in table \'ProcurementsReceivedJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableProcurementsReceivedJournal.creditColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsdateNull() {
+            public bool IsdateNull()
+            {
                 return this.IsNull(this.tableProcurementsReceivedJournal.dateColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetdateNull() {
+            public void SetdateNull()
+            {
                 this[this.tableProcurementsReceivedJournal.dateColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Is_refNull() {
+            public bool Is_refNull()
+            {
                 return this.IsNull(this.tableProcurementsReceivedJournal.refColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Set_refNull() {
+            public void Set_refNull()
+            {
                 this[this.tableProcurementsReceivedJournal.refColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsparticularsNull() {
+            public bool IsparticularsNull()
+            {
                 return this.IsNull(this.tableProcurementsReceivedJournal.particularsColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetparticularsNull() {
+            public void SetparticularsNull()
+            {
                 this[this.tableProcurementsReceivedJournal.particularsColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_code_debitNull() {
+            public bool Isaccount_code_debitNull()
+            {
                 return this.IsNull(this.tableProcurementsReceivedJournal.account_code_debitColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_code_debitNull() {
+            public void Setaccount_code_debitNull()
+            {
                 this[this.tableProcurementsReceivedJournal.account_code_debitColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_code_creditNull() {
+            public bool Isaccount_code_creditNull()
+            {
                 return this.IsNull(this.tableProcurementsReceivedJournal.account_code_creditColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_code_creditNull() {
+            public void Setaccount_code_creditNull()
+            {
                 this[this.tableProcurementsReceivedJournal.account_code_creditColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IspNull() {
+            public bool IspNull()
+            {
                 return this.IsNull(this.tableProcurementsReceivedJournal.pColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetpNull() {
+            public void SetpNull()
+            {
                 this[this.tableProcurementsReceivedJournal.pColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsdebitNull() {
+            public bool IsdebitNull()
+            {
                 return this.IsNull(this.tableProcurementsReceivedJournal.debitColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetdebitNull() {
+            public void SetdebitNull()
+            {
                 this[this.tableProcurementsReceivedJournal.debitColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IscreditNull() {
+            public bool IscreditNull()
+            {
                 return this.IsNull(this.tableProcurementsReceivedJournal.creditColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetcreditNull() {
+            public void SetcreditNull()
+            {
                 this[this.tableProcurementsReceivedJournal.creditColumn] = global::System.Convert.DBNull;
             }
         }
-        
+
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class AuthorityToDebitAccountDisbursementsJournalRow : global::System.Data.DataRow {
-            
+        public partial class AuthorityToDebitAccountDisbursementsJournalRow : global::System.Data.DataRow
+        {
+
             private AuthorityToDebitAccountDisbursementsJournalDataTable tableAuthorityToDebitAccountDisbursementsJournal;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal AuthorityToDebitAccountDisbursementsJournalRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
+            internal AuthorityToDebitAccountDisbursementsJournalRow(global::System.Data.DataRowBuilder rb) :
+                    base(rb)
+            {
                 this.tableAuthorityToDebitAccountDisbursementsJournal = ((AuthorityToDebitAccountDisbursementsJournalDataTable)(this.Table));
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime date {
-                get {
-                    try {
+            public System.DateTime date
+            {
+                get
+                {
+                    try
+                    {
                         return ((global::System.DateTime)(this[this.tableAuthorityToDebitAccountDisbursementsJournal.dateColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'date\' in table \'AuthorityToDebitAccountDisbursementsJournal" +
                                 "\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableAuthorityToDebitAccountDisbursementsJournal.dateColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string ada_no {
-                get {
-                    try {
+            public string ada_no
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableAuthorityToDebitAccountDisbursementsJournal.ada_noColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'ada_no\' in table \'AuthorityToDebitAccountDisbursementsJourn" +
                                 "al\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableAuthorityToDebitAccountDisbursementsJournal.ada_noColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string ref_no {
-                get {
-                    try {
+            public string ref_no
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableAuthorityToDebitAccountDisbursementsJournal.ref_noColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'ref_no\' in table \'AuthorityToDebitAccountDisbursementsJourn" +
                                 "al\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableAuthorityToDebitAccountDisbursementsJournal.ref_noColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string particulars {
-                get {
-                    try {
+            public string particulars
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableAuthorityToDebitAccountDisbursementsJournal.particularsColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'particulars\' in table \'AuthorityToDebitAccountDisbursements" +
                                 "Journal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableAuthorityToDebitAccountDisbursementsJournal.particularsColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string account_code_credit {
-                get {
-                    try {
+            public string account_code_credit
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableAuthorityToDebitAccountDisbursementsJournal.account_code_creditColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'account_code_credit\' in table \'AuthorityToDebitAccountDisbu" +
                                 "rsementsJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableAuthorityToDebitAccountDisbursementsJournal.account_code_creditColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string p_credit {
-                get {
-                    try {
+            public string p_credit
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableAuthorityToDebitAccountDisbursementsJournal.p_creditColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'p_credit\' in table \'AuthorityToDebitAccountDisbursementsJou" +
                                 "rnal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableAuthorityToDebitAccountDisbursementsJournal.p_creditColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal amount_credit {
-                get {
-                    try {
+            public decimal amount_credit
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tableAuthorityToDebitAccountDisbursementsJournal.amount_creditColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'amount_credit\' in table \'AuthorityToDebitAccountDisbursemen" +
                                 "tsJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableAuthorityToDebitAccountDisbursementsJournal.amount_creditColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string account_code_debit {
-                get {
-                    try {
+            public string account_code_debit
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableAuthorityToDebitAccountDisbursementsJournal.account_code_debitColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'account_code_debit\' in table \'AuthorityToDebitAccountDisbur" +
                                 "sementsJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableAuthorityToDebitAccountDisbursementsJournal.account_code_debitColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string p_debit {
-                get {
-                    try {
+            public string p_debit
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableAuthorityToDebitAccountDisbursementsJournal.p_debitColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'p_debit\' in table \'AuthorityToDebitAccountDisbursementsJour" +
                                 "nal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableAuthorityToDebitAccountDisbursementsJournal.p_debitColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal amount_debit {
-                get {
-                    try {
+            public decimal amount_debit
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tableAuthorityToDebitAccountDisbursementsJournal.amount_debitColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'amount_debit\' in table \'AuthorityToDebitAccountDisbursement" +
                                 "sJournal\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableAuthorityToDebitAccountDisbursementsJournal.amount_debitColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsdateNull() {
+            public bool IsdateNull()
+            {
                 return this.IsNull(this.tableAuthorityToDebitAccountDisbursementsJournal.dateColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetdateNull() {
+            public void SetdateNull()
+            {
                 this[this.tableAuthorityToDebitAccountDisbursementsJournal.dateColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isada_noNull() {
+            public bool Isada_noNull()
+            {
                 return this.IsNull(this.tableAuthorityToDebitAccountDisbursementsJournal.ada_noColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setada_noNull() {
+            public void Setada_noNull()
+            {
                 this[this.tableAuthorityToDebitAccountDisbursementsJournal.ada_noColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isref_noNull() {
+            public bool Isref_noNull()
+            {
                 return this.IsNull(this.tableAuthorityToDebitAccountDisbursementsJournal.ref_noColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setref_noNull() {
+            public void Setref_noNull()
+            {
                 this[this.tableAuthorityToDebitAccountDisbursementsJournal.ref_noColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsparticularsNull() {
+            public bool IsparticularsNull()
+            {
                 return this.IsNull(this.tableAuthorityToDebitAccountDisbursementsJournal.particularsColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetparticularsNull() {
+            public void SetparticularsNull()
+            {
                 this[this.tableAuthorityToDebitAccountDisbursementsJournal.particularsColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_code_creditNull() {
+            public bool Isaccount_code_creditNull()
+            {
                 return this.IsNull(this.tableAuthorityToDebitAccountDisbursementsJournal.account_code_creditColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_code_creditNull() {
+            public void Setaccount_code_creditNull()
+            {
                 this[this.tableAuthorityToDebitAccountDisbursementsJournal.account_code_creditColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isp_creditNull() {
+            public bool Isp_creditNull()
+            {
                 return this.IsNull(this.tableAuthorityToDebitAccountDisbursementsJournal.p_creditColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setp_creditNull() {
+            public void Setp_creditNull()
+            {
                 this[this.tableAuthorityToDebitAccountDisbursementsJournal.p_creditColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isamount_creditNull() {
+            public bool Isamount_creditNull()
+            {
                 return this.IsNull(this.tableAuthorityToDebitAccountDisbursementsJournal.amount_creditColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setamount_creditNull() {
+            public void Setamount_creditNull()
+            {
                 this[this.tableAuthorityToDebitAccountDisbursementsJournal.amount_creditColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_code_debitNull() {
+            public bool Isaccount_code_debitNull()
+            {
                 return this.IsNull(this.tableAuthorityToDebitAccountDisbursementsJournal.account_code_debitColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_code_debitNull() {
+            public void Setaccount_code_debitNull()
+            {
                 this[this.tableAuthorityToDebitAccountDisbursementsJournal.account_code_debitColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isp_debitNull() {
+            public bool Isp_debitNull()
+            {
                 return this.IsNull(this.tableAuthorityToDebitAccountDisbursementsJournal.p_debitColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setp_debitNull() {
+            public void Setp_debitNull()
+            {
                 this[this.tableAuthorityToDebitAccountDisbursementsJournal.p_debitColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isamount_debitNull() {
+            public bool Isamount_debitNull()
+            {
                 return this.IsNull(this.tableAuthorityToDebitAccountDisbursementsJournal.amount_debitColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setamount_debitNull() {
+            public void Setamount_debitNull()
+            {
                 this[this.tableAuthorityToDebitAccountDisbursementsJournal.amount_debitColumn] = global::System.Convert.DBNull;
             }
         }
-        
+
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class GeneralLedgerRow : global::System.Data.DataRow {
-            
+        public partial class GeneralLedgerRow : global::System.Data.DataRow
+        {
+
             private GeneralLedgerDataTable tableGeneralLedger;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal GeneralLedgerRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
+            internal GeneralLedgerRow(global::System.Data.DataRowBuilder rb) :
+                    base(rb)
+            {
                 this.tableGeneralLedger = ((GeneralLedgerDataTable)(this.Table));
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime date {
-                get {
-                    try {
+            public System.DateTime date
+            {
+                get
+                {
+                    try
+                    {
                         return ((global::System.DateTime)(this[this.tableGeneralLedger.dateColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'date\' in table \'GeneralLedger\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableGeneralLedger.dateColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string particulars {
-                get {
-                    try {
+            public string particulars
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableGeneralLedger.particularsColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'particulars\' in table \'GeneralLedger\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableGeneralLedger.particularsColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string _ref {
-                get {
-                    try {
+            public string _ref
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tableGeneralLedger.refColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'ref\' in table \'GeneralLedger\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableGeneralLedger.refColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal debit_amount {
-                get {
-                    try {
+            public decimal debit_amount
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tableGeneralLedger.debit_amountColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'debit_amount\' in table \'GeneralLedger\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableGeneralLedger.debit_amountColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal credit_amount {
-                get {
-                    try {
+            public decimal credit_amount
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tableGeneralLedger.credit_amountColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'credit_amount\' in table \'GeneralLedger\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableGeneralLedger.credit_amountColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal balance {
-                get {
-                    try {
+            public decimal balance
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tableGeneralLedger.balanceColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'balance\' in table \'GeneralLedger\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tableGeneralLedger.balanceColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsdateNull() {
+            public bool IsdateNull()
+            {
                 return this.IsNull(this.tableGeneralLedger.dateColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetdateNull() {
+            public void SetdateNull()
+            {
                 this[this.tableGeneralLedger.dateColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsparticularsNull() {
+            public bool IsparticularsNull()
+            {
                 return this.IsNull(this.tableGeneralLedger.particularsColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetparticularsNull() {
+            public void SetparticularsNull()
+            {
                 this[this.tableGeneralLedger.particularsColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Is_refNull() {
+            public bool Is_refNull()
+            {
                 return this.IsNull(this.tableGeneralLedger.refColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Set_refNull() {
+            public void Set_refNull()
+            {
                 this[this.tableGeneralLedger.refColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isdebit_amountNull() {
+            public bool Isdebit_amountNull()
+            {
                 return this.IsNull(this.tableGeneralLedger.debit_amountColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setdebit_amountNull() {
+            public void Setdebit_amountNull()
+            {
                 this[this.tableGeneralLedger.debit_amountColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Iscredit_amountNull() {
+            public bool Iscredit_amountNull()
+            {
                 return this.IsNull(this.tableGeneralLedger.credit_amountColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setcredit_amountNull() {
+            public void Setcredit_amountNull()
+            {
                 this[this.tableGeneralLedger.credit_amountColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsbalanceNull() {
+            public bool IsbalanceNull()
+            {
                 return this.IsNull(this.tableGeneralLedger.balanceColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetbalanceNull() {
+            public void SetbalanceNull()
+            {
                 this[this.tableGeneralLedger.balanceColumn] = global::System.Convert.DBNull;
             }
         }
-        
+
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class dtRCIRow : global::System.Data.DataRow {
-            
+        public partial class dtRCIRow : global::System.Data.DataRow
+        {
+
             private dtRCIDataTable tabledtRCI;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal dtRCIRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
+            internal dtRCIRow(global::System.Data.DataRowBuilder rb) :
+                    base(rb)
+            {
                 this.tabledtRCI = ((dtRCIDataTable)(this.Table));
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string account_no {
-                get {
-                    try {
+            public string account_no
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtRCI.account_noColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'account_no\' in table \'dtRCI\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtRCI.account_noColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string bank_name {
-                get {
-                    try {
+            public string bank_name
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtRCI.bank_nameColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'bank_name\' in table \'dtRCI\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtRCI.bank_nameColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string check_no {
-                get {
-                    try {
+            public string check_no
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtRCI.check_noColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'check_no\' in table \'dtRCI\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtRCI.check_noColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime check_date {
-                get {
-                    try {
+            public System.DateTime check_date
+            {
+                get
+                {
+                    try
+                    {
                         return ((global::System.DateTime)(this[this.tabledtRCI.check_dateColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'check_date\' in table \'dtRCI\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtRCI.check_dateColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string fund_code {
-                get {
-                    try {
+            public string fund_code
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtRCI.fund_codeColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'fund_code\' in table \'dtRCI\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtRCI.fund_codeColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string payee {
-                get {
-                    try {
+            public string payee
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtRCI.payeeColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'payee\' in table \'dtRCI\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtRCI.payeeColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string nature_of_payment {
-                get {
-                    try {
+            public string nature_of_payment
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtRCI.nature_of_paymentColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'nature_of_payment\' in table \'dtRCI\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtRCI.nature_of_paymentColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string dv_no {
-                get {
-                    try {
+            public string dv_no
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtRCI.dv_noColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'dv_no\' in table \'dtRCI\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtRCI.dv_noColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string obligation_no {
-                get {
-                    try {
+            public string obligation_no
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtRCI.obligation_noColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'obligation_no\' in table \'dtRCI\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtRCI.obligation_noColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal trust_liabilities {
-                get {
-                    try {
+            public decimal trust_liabilities
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tabledtRCI.trust_liabilitiesColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'trust_liabilities\' in table \'dtRCI\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtRCI.trust_liabilitiesColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal bir_vat_nonvat {
-                get {
-                    try {
+            public decimal bir_vat_nonvat
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tabledtRCI.bir_vat_nonvatColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'bir_vat_nonvat\' in table \'dtRCI\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtRCI.bir_vat_nonvatColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal amount {
-                get {
-                    try {
+            public decimal amount
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tabledtRCI.amountColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'amount\' in table \'dtRCI\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtRCI.amountColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string fpp_code {
-                get {
-                    try {
+            public string fpp_code
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtRCI.fpp_codeColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'fpp_code\' in table \'dtRCI\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtRCI.fpp_codeColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_noNull() {
+            public bool Isaccount_noNull()
+            {
                 return this.IsNull(this.tabledtRCI.account_noColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_noNull() {
+            public void Setaccount_noNull()
+            {
                 this[this.tabledtRCI.account_noColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isbank_nameNull() {
+            public bool Isbank_nameNull()
+            {
                 return this.IsNull(this.tabledtRCI.bank_nameColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setbank_nameNull() {
+            public void Setbank_nameNull()
+            {
                 this[this.tabledtRCI.bank_nameColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Ischeck_noNull() {
+            public bool Ischeck_noNull()
+            {
                 return this.IsNull(this.tabledtRCI.check_noColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setcheck_noNull() {
+            public void Setcheck_noNull()
+            {
                 this[this.tabledtRCI.check_noColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Ischeck_dateNull() {
+            public bool Ischeck_dateNull()
+            {
                 return this.IsNull(this.tabledtRCI.check_dateColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setcheck_dateNull() {
+            public void Setcheck_dateNull()
+            {
                 this[this.tabledtRCI.check_dateColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isfund_codeNull() {
+            public bool Isfund_codeNull()
+            {
                 return this.IsNull(this.tabledtRCI.fund_codeColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setfund_codeNull() {
+            public void Setfund_codeNull()
+            {
                 this[this.tabledtRCI.fund_codeColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IspayeeNull() {
+            public bool IspayeeNull()
+            {
                 return this.IsNull(this.tabledtRCI.payeeColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetpayeeNull() {
+            public void SetpayeeNull()
+            {
                 this[this.tabledtRCI.payeeColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isnature_of_paymentNull() {
+            public bool Isnature_of_paymentNull()
+            {
                 return this.IsNull(this.tabledtRCI.nature_of_paymentColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setnature_of_paymentNull() {
+            public void Setnature_of_paymentNull()
+            {
                 this[this.tabledtRCI.nature_of_paymentColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isdv_noNull() {
+            public bool Isdv_noNull()
+            {
                 return this.IsNull(this.tabledtRCI.dv_noColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setdv_noNull() {
+            public void Setdv_noNull()
+            {
                 this[this.tabledtRCI.dv_noColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isobligation_noNull() {
+            public bool Isobligation_noNull()
+            {
                 return this.IsNull(this.tabledtRCI.obligation_noColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setobligation_noNull() {
+            public void Setobligation_noNull()
+            {
                 this[this.tabledtRCI.obligation_noColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Istrust_liabilitiesNull() {
+            public bool Istrust_liabilitiesNull()
+            {
                 return this.IsNull(this.tabledtRCI.trust_liabilitiesColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Settrust_liabilitiesNull() {
+            public void Settrust_liabilitiesNull()
+            {
                 this[this.tabledtRCI.trust_liabilitiesColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isbir_vat_nonvatNull() {
+            public bool Isbir_vat_nonvatNull()
+            {
                 return this.IsNull(this.tabledtRCI.bir_vat_nonvatColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setbir_vat_nonvatNull() {
+            public void Setbir_vat_nonvatNull()
+            {
                 this[this.tabledtRCI.bir_vat_nonvatColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsamountNull() {
+            public bool IsamountNull()
+            {
                 return this.IsNull(this.tabledtRCI.amountColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetamountNull() {
+            public void SetamountNull()
+            {
                 this[this.tabledtRCI.amountColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isfpp_codeNull() {
+            public bool Isfpp_codeNull()
+            {
                 return this.IsNull(this.tabledtRCI.fpp_codeColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setfpp_codeNull() {
+            public void Setfpp_codeNull()
+            {
                 this[this.tabledtRCI.fpp_codeColumn] = global::System.Convert.DBNull;
             }
         }
-        
+
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class dtPCRow : global::System.Data.DataRow {
-            
+        public partial class dtPCRow : global::System.Data.DataRow
+        {
+
             private dtPCDataTable tabledtPC;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal dtPCRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
+            internal dtPCRow(global::System.Data.DataRowBuilder rb) :
+                    base(rb)
+            {
                 this.tabledtPC = ((dtPCDataTable)(this.Table));
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string rcdno {
-                get {
-                    try {
+            public string rcdno
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtPC.rcdnoColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'rcdno\' in table \'dtPC\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtPC.rcdnoColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string payee {
-                get {
-                    try {
+            public string payee
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtPC.payeeColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'payee\' in table \'dtPC\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtPC.payeeColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string acc_form_desc {
-                get {
-                    try {
+            public string acc_form_desc
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtPC.acc_form_descColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'acc_form_desc\' in table \'dtPC\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtPC.acc_form_descColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string ledger_name {
-                get {
-                    try {
+            public string ledger_name
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtPC.ledger_nameColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'ledger_name\' in table \'dtPC\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtPC.ledger_nameColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime payment_date {
-                get {
-                    try {
+            public System.DateTime payment_date
+            {
+                get
+                {
+                    try
+                    {
                         return ((global::System.DateTime)(this[this.tabledtPC.payment_dateColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'payment_date\' in table \'dtPC\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtPC.payment_dateColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string receipt_no {
-                get {
-                    try {
+            public string receipt_no
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtPC.receipt_noColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'receipt_no\' in table \'dtPC\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtPC.receipt_noColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal amount {
-                get {
-                    try {
+            public decimal amount
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tabledtPC.amountColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'amount\' in table \'dtPC\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtPC.amountColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string collector {
-                get {
-                    try {
+            public string collector
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtPC.collectorColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'collector\' in table \'dtPC\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtPC.collectorColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsrcdnoNull() {
+            public bool IsrcdnoNull()
+            {
                 return this.IsNull(this.tabledtPC.rcdnoColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetrcdnoNull() {
+            public void SetrcdnoNull()
+            {
                 this[this.tabledtPC.rcdnoColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IspayeeNull() {
+            public bool IspayeeNull()
+            {
                 return this.IsNull(this.tabledtPC.payeeColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetpayeeNull() {
+            public void SetpayeeNull()
+            {
                 this[this.tabledtPC.payeeColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isacc_form_descNull() {
+            public bool Isacc_form_descNull()
+            {
                 return this.IsNull(this.tabledtPC.acc_form_descColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setacc_form_descNull() {
+            public void Setacc_form_descNull()
+            {
                 this[this.tabledtPC.acc_form_descColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isledger_nameNull() {
+            public bool Isledger_nameNull()
+            {
                 return this.IsNull(this.tabledtPC.ledger_nameColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setledger_nameNull() {
+            public void Setledger_nameNull()
+            {
                 this[this.tabledtPC.ledger_nameColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Ispayment_dateNull() {
+            public bool Ispayment_dateNull()
+            {
                 return this.IsNull(this.tabledtPC.payment_dateColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setpayment_dateNull() {
+            public void Setpayment_dateNull()
+            {
                 this[this.tabledtPC.payment_dateColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isreceipt_noNull() {
+            public bool Isreceipt_noNull()
+            {
                 return this.IsNull(this.tabledtPC.receipt_noColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setreceipt_noNull() {
+            public void Setreceipt_noNull()
+            {
                 this[this.tabledtPC.receipt_noColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsamountNull() {
+            public bool IsamountNull()
+            {
                 return this.IsNull(this.tabledtPC.amountColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetamountNull() {
+            public void SetamountNull()
+            {
                 this[this.tabledtPC.amountColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IscollectorNull() {
+            public bool IscollectorNull()
+            {
                 return this.IsNull(this.tabledtPC.collectorColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetcollectorNull() {
+            public void SetcollectorNull()
+            {
                 this[this.tabledtPC.collectorColumn] = global::System.Convert.DBNull;
             }
         }
-        
+
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class dtSAAOBRow : global::System.Data.DataRow {
-            
+        public partial class dtSAAOBRow : global::System.Data.DataRow
+        {
+
             private dtSAAOBDataTable tabledtSAAOB;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal dtSAAOBRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
+            internal dtSAAOBRow(global::System.Data.DataRowBuilder rb) :
+                    base(rb)
+            {
                 this.tabledtSAAOB = ((dtSAAOBDataTable)(this.Table));
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int fund_id {
-                get {
-                    try {
+            public int fund_id
+            {
+                get
+                {
+                    try
+                    {
                         return ((int)(this[this.tabledtSAAOB.fund_idColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'fund_id\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.fund_idColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string fund_code {
-                get {
-                    try {
+            public string fund_code
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtSAAOB.fund_codeColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'fund_code\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.fund_codeColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string fund_name {
-                get {
-                    try {
+            public string fund_name
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtSAAOB.fund_nameColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'fund_name\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.fund_nameColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int function_classification_id {
-                get {
-                    try {
+            public int function_classification_id
+            {
+                get
+                {
+                    try
+                    {
                         return ((int)(this[this.tabledtSAAOB.function_classification_idColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'function_classification_id\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.function_classification_idColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string function_classification_sector_code {
-                get {
-                    try {
+            public string function_classification_sector_code
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtSAAOB.function_classification_sector_codeColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'function_classification_sector_code\' in table \'dtSAAOB\' is " +
                                 "DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.function_classification_sector_codeColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string function_classification_sector_name {
-                get {
-                    try {
+            public string function_classification_sector_name
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtSAAOB.function_classification_sector_nameColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'function_classification_sector_name\' in table \'dtSAAOB\' is " +
                                 "DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.function_classification_sector_nameColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int function_classification_services_id {
-                get {
-                    try {
+            public int function_classification_services_id
+            {
+                get
+                {
+                    try
+                    {
                         return ((int)(this[this.tabledtSAAOB.function_classification_services_idColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'function_classification_services_id\' in table \'dtSAAOB\' is " +
                                 "DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.function_classification_services_idColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string function_classification_services_name {
-                get {
-                    try {
+            public string function_classification_services_name
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtSAAOB.function_classification_services_nameColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'function_classification_services_name\' in table \'dtSAAOB\' i" +
                                 "s DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.function_classification_services_nameColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int fpp_id {
-                get {
-                    try {
+            public int fpp_id
+            {
+                get
+                {
+                    try
+                    {
                         return ((int)(this[this.tabledtSAAOB.fpp_idColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'fpp_id\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.fpp_idColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string fpp_code {
-                get {
-                    try {
+            public string fpp_code
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtSAAOB.fpp_codeColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'fpp_code\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.fpp_codeColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string fpp_name {
-                get {
-                    try {
+            public string fpp_name
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtSAAOB.fpp_nameColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'fpp_name\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.fpp_nameColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string others_fpp_id {
-                get {
-                    try {
+            public string others_fpp_id
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtSAAOB.others_fpp_idColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'others_fpp_id\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.others_fpp_idColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string others_fpp_name {
-                get {
-                    try {
+            public string others_fpp_name
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtSAAOB.others_fpp_nameColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'others_fpp_name\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.others_fpp_nameColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int allotment_class_id {
-                get {
-                    try {
+            public int allotment_class_id
+            {
+                get
+                {
+                    try
+                    {
                         return ((int)(this[this.tabledtSAAOB.allotment_class_idColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'allotment_class_id\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.allotment_class_idColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string allotment_class_code {
-                get {
-                    try {
+            public string allotment_class_code
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtSAAOB.allotment_class_codeColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'allotment_class_code\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.allotment_class_codeColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string allotment_class_name {
-                get {
-                    try {
+            public string allotment_class_name
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtSAAOB.allotment_class_nameColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'allotment_class_name\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.allotment_class_nameColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string account_code {
-                get {
-                    try {
+            public string account_code
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtSAAOB.account_codeColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'account_code\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.account_codeColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string account_name {
-                get {
-                    try {
+            public string account_name
+            {
+                get
+                {
+                    try
+                    {
                         return ((string)(this[this.tabledtSAAOB.account_nameColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'account_name\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.account_nameColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public short year {
-                get {
-                    try {
+            public short year
+            {
+                get
+                {
+                    try
+                    {
                         return ((short)(this[this.tabledtSAAOB.yearColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'year\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.yearColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal appropriations {
-                get {
-                    try {
+            public decimal appropriations
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tabledtSAAOB.appropriationsColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'appropriations\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.appropriationsColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal allotment_release {
-                get {
-                    try {
+            public decimal allotment_release
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tabledtSAAOB.allotment_releaseColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'allotment_release\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.allotment_releaseColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal obligations {
-                get {
-                    try {
+            public decimal obligations
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tabledtSAAOB.obligationsColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'obligations\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.obligationsColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal unobligated_balance {
-                get {
-                    try {
+            public decimal unobligated_balance
+            {
+                get
+                {
+                    try
+                    {
                         return ((decimal)(this[this.tabledtSAAOB.unobligated_balanceColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
+                    catch (global::System.InvalidCastException e)
+                    {
                         throw new global::System.Data.StrongTypingException("The value for column \'unobligated_balance\' in table \'dtSAAOB\' is DBNull.", e);
                     }
                 }
-                set {
+                set
+                {
                     this[this.tabledtSAAOB.unobligated_balanceColumn] = value;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isfund_idNull() {
+            public bool Isfund_idNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.fund_idColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setfund_idNull() {
+            public void Setfund_idNull()
+            {
                 this[this.tabledtSAAOB.fund_idColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isfund_codeNull() {
+            public bool Isfund_codeNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.fund_codeColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setfund_codeNull() {
+            public void Setfund_codeNull()
+            {
                 this[this.tabledtSAAOB.fund_codeColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isfund_nameNull() {
+            public bool Isfund_nameNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.fund_nameColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setfund_nameNull() {
+            public void Setfund_nameNull()
+            {
                 this[this.tabledtSAAOB.fund_nameColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isfunction_classification_idNull() {
+            public bool Isfunction_classification_idNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.function_classification_idColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setfunction_classification_idNull() {
+            public void Setfunction_classification_idNull()
+            {
                 this[this.tabledtSAAOB.function_classification_idColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isfunction_classification_sector_codeNull() {
+            public bool Isfunction_classification_sector_codeNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.function_classification_sector_codeColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setfunction_classification_sector_codeNull() {
+            public void Setfunction_classification_sector_codeNull()
+            {
                 this[this.tabledtSAAOB.function_classification_sector_codeColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isfunction_classification_sector_nameNull() {
+            public bool Isfunction_classification_sector_nameNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.function_classification_sector_nameColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setfunction_classification_sector_nameNull() {
+            public void Setfunction_classification_sector_nameNull()
+            {
                 this[this.tabledtSAAOB.function_classification_sector_nameColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isfunction_classification_services_idNull() {
+            public bool Isfunction_classification_services_idNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.function_classification_services_idColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setfunction_classification_services_idNull() {
+            public void Setfunction_classification_services_idNull()
+            {
                 this[this.tabledtSAAOB.function_classification_services_idColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isfunction_classification_services_nameNull() {
+            public bool Isfunction_classification_services_nameNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.function_classification_services_nameColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setfunction_classification_services_nameNull() {
+            public void Setfunction_classification_services_nameNull()
+            {
                 this[this.tabledtSAAOB.function_classification_services_nameColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isfpp_idNull() {
+            public bool Isfpp_idNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.fpp_idColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setfpp_idNull() {
+            public void Setfpp_idNull()
+            {
                 this[this.tabledtSAAOB.fpp_idColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isfpp_codeNull() {
+            public bool Isfpp_codeNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.fpp_codeColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setfpp_codeNull() {
+            public void Setfpp_codeNull()
+            {
                 this[this.tabledtSAAOB.fpp_codeColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isfpp_nameNull() {
+            public bool Isfpp_nameNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.fpp_nameColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setfpp_nameNull() {
+            public void Setfpp_nameNull()
+            {
                 this[this.tabledtSAAOB.fpp_nameColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isothers_fpp_idNull() {
+            public bool Isothers_fpp_idNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.others_fpp_idColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setothers_fpp_idNull() {
+            public void Setothers_fpp_idNull()
+            {
                 this[this.tabledtSAAOB.others_fpp_idColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isothers_fpp_nameNull() {
+            public bool Isothers_fpp_nameNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.others_fpp_nameColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setothers_fpp_nameNull() {
+            public void Setothers_fpp_nameNull()
+            {
                 this[this.tabledtSAAOB.others_fpp_nameColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isallotment_class_idNull() {
+            public bool Isallotment_class_idNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.allotment_class_idColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setallotment_class_idNull() {
+            public void Setallotment_class_idNull()
+            {
                 this[this.tabledtSAAOB.allotment_class_idColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isallotment_class_codeNull() {
+            public bool Isallotment_class_codeNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.allotment_class_codeColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setallotment_class_codeNull() {
+            public void Setallotment_class_codeNull()
+            {
                 this[this.tabledtSAAOB.allotment_class_codeColumn] = global::System.Convert.DBNull;
             }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
 
-            }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setallotment_class_nameNull() {
+            public bool Isallotment_class_nameNull()
+            {
+                return this.IsNull(this.tabledtSAAOB.allotment_class_nameColumn);
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setallotment_class_nameNull()
+            {
                 this[this.tabledtSAAOB.allotment_class_nameColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_codeNull() {
+            public bool Isaccount_codeNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.account_codeColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_codeNull() {
+            public void Setaccount_codeNull()
+            {
                 this[this.tabledtSAAOB.account_codeColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_nameNull() {
+            public bool Isaccount_nameNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.account_nameColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_nameNull() {
+            public void Setaccount_nameNull()
+            {
                 this[this.tabledtSAAOB.account_nameColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsyearNull() {
+            public bool IsyearNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.yearColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetyearNull() {
+            public void SetyearNull()
+            {
                 this[this.tabledtSAAOB.yearColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsappropriationsNull() {
+            public bool IsappropriationsNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.appropriationsColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetappropriationsNull() {
+            public void SetappropriationsNull()
+            {
                 this[this.tabledtSAAOB.appropriationsColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isallotment_releaseNull() {
+            public bool Isallotment_releaseNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.allotment_releaseColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setallotment_releaseNull() {
+            public void Setallotment_releaseNull()
+            {
                 this[this.tabledtSAAOB.allotment_releaseColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsobligationsNull() {
+            public bool IsobligationsNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.obligationsColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetobligationsNull() {
+            public void SetobligationsNull()
+            {
                 this[this.tabledtSAAOB.obligationsColumn] = global::System.Convert.DBNull;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isunobligated_balanceNull() {
+            public bool Isunobligated_balanceNull()
+            {
                 return this.IsNull(this.tabledtSAAOB.unobligated_balanceColumn);
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setunobligated_balanceNull() {
+            public void Setunobligated_balanceNull()
+            {
                 this[this.tabledtSAAOB.unobligated_balanceColumn] = global::System.Convert.DBNull;
             }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_codeNull() {
-                return this.IsNull(this.tabledtPC.account_codeColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_codeNull() {
-                this[this.tabledtPC.account_codeColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IssubsidiaryNull() {
-                return this.IsNull(this.tabledtPC.subsidiaryColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetsubsidiaryNull() {
-                this[this.tabledtPC.subsidiaryColumn] = global::System.Convert.DBNull;
-            }
         }
-        
+
         /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class dtGeneralJournalRowChangeEvent : global::System.EventArgs {
-            
+        public class dtGeneralJournalRowChangeEvent : global::System.EventArgs
+        {
+
             private dtGeneralJournalRow eventRow;
-            
+
             private global::System.Data.DataRowAction eventAction;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtGeneralJournalRowChangeEvent(dtGeneralJournalRow row, global::System.Data.DataRowAction action) {
+            public dtGeneralJournalRowChangeEvent(dtGeneralJournalRow row, global::System.Data.DataRowAction action)
+            {
                 this.eventRow = row;
                 this.eventAction = action;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtGeneralJournalRow Row {
-                get {
+            public dtGeneralJournalRow Row
+            {
+                get
+                {
                     return this.eventRow;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
+            public global::System.Data.DataRowAction Action
+            {
+                get
+                {
                     return this.eventAction;
                 }
             }
         }
-        
+
         /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class CashDisbursementsJournalRowChangeEvent : global::System.EventArgs {
-            
+        public class CashDisbursementsJournalRowChangeEvent : global::System.EventArgs
+        {
+
             private CashDisbursementsJournalRow eventRow;
-            
+
             private global::System.Data.DataRowAction eventAction;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CashDisbursementsJournalRowChangeEvent(CashDisbursementsJournalRow row, global::System.Data.DataRowAction action) {
+            public CashDisbursementsJournalRowChangeEvent(CashDisbursementsJournalRow row, global::System.Data.DataRowAction action)
+            {
                 this.eventRow = row;
                 this.eventAction = action;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CashDisbursementsJournalRow Row {
-                get {
+            public CashDisbursementsJournalRow Row
+            {
+                get
+                {
                     return this.eventRow;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
+            public global::System.Data.DataRowAction Action
+            {
+                get
+                {
                     return this.eventAction;
                 }
             }
         }
-        
+
         /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class CheckDisbursementsJournalRowChangeEvent : global::System.EventArgs {
-            
+        public class CheckDisbursementsJournalRowChangeEvent : global::System.EventArgs
+        {
+
             private CheckDisbursementsJournalRow eventRow;
-            
+
             private global::System.Data.DataRowAction eventAction;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CheckDisbursementsJournalRowChangeEvent(CheckDisbursementsJournalRow row, global::System.Data.DataRowAction action) {
+            public CheckDisbursementsJournalRowChangeEvent(CheckDisbursementsJournalRow row, global::System.Data.DataRowAction action)
+            {
                 this.eventRow = row;
                 this.eventAction = action;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CheckDisbursementsJournalRow Row {
-                get {
+            public CheckDisbursementsJournalRow Row
+            {
+                get
+                {
                     return this.eventRow;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
+            public global::System.Data.DataRowAction Action
+            {
+                get
+                {
                     return this.eventAction;
                 }
             }
         }
-        
+
         /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class CashReceiptsJournalRowChangeEvent : global::System.EventArgs {
-            
+        public class CashReceiptsJournalRowChangeEvent : global::System.EventArgs
+        {
+
             private CashReceiptsJournalRow eventRow;
-            
+
             private global::System.Data.DataRowAction eventAction;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CashReceiptsJournalRowChangeEvent(CashReceiptsJournalRow row, global::System.Data.DataRowAction action) {
+            public CashReceiptsJournalRowChangeEvent(CashReceiptsJournalRow row, global::System.Data.DataRowAction action)
+            {
                 this.eventRow = row;
                 this.eventAction = action;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CashReceiptsJournalRow Row {
-                get {
+            public CashReceiptsJournalRow Row
+            {
+                get
+                {
                     return this.eventRow;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
+            public global::System.Data.DataRowAction Action
+            {
+                get
+                {
                     return this.eventAction;
                 }
             }
         }
-        
+
         /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class ProcurementsReceivedJournalRowChangeEvent : global::System.EventArgs {
-            
+        public class ProcurementsReceivedJournalRowChangeEvent : global::System.EventArgs
+        {
+
             private ProcurementsReceivedJournalRow eventRow;
-            
+
             private global::System.Data.DataRowAction eventAction;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ProcurementsReceivedJournalRowChangeEvent(ProcurementsReceivedJournalRow row, global::System.Data.DataRowAction action) {
+            public ProcurementsReceivedJournalRowChangeEvent(ProcurementsReceivedJournalRow row, global::System.Data.DataRowAction action)
+            {
                 this.eventRow = row;
                 this.eventAction = action;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ProcurementsReceivedJournalRow Row {
-                get {
+            public ProcurementsReceivedJournalRow Row
+            {
+                get
+                {
                     return this.eventRow;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
+            public global::System.Data.DataRowAction Action
+            {
+                get
+                {
                     return this.eventAction;
                 }
             }
         }
-        
+
         /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class AuthorityToDebitAccountDisbursementsJournalRowChangeEvent : global::System.EventArgs {
-            
+        public class AuthorityToDebitAccountDisbursementsJournalRowChangeEvent : global::System.EventArgs
+        {
+
             private AuthorityToDebitAccountDisbursementsJournalRow eventRow;
-            
+
             private global::System.Data.DataRowAction eventAction;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public AuthorityToDebitAccountDisbursementsJournalRowChangeEvent(AuthorityToDebitAccountDisbursementsJournalRow row, global::System.Data.DataRowAction action) {
+            public AuthorityToDebitAccountDisbursementsJournalRowChangeEvent(AuthorityToDebitAccountDisbursementsJournalRow row, global::System.Data.DataRowAction action)
+            {
                 this.eventRow = row;
                 this.eventAction = action;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public AuthorityToDebitAccountDisbursementsJournalRow Row {
-                get {
+            public AuthorityToDebitAccountDisbursementsJournalRow Row
+            {
+                get
+                {
                     return this.eventRow;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
+            public global::System.Data.DataRowAction Action
+            {
+                get
+                {
                     return this.eventAction;
                 }
             }
         }
-        
+
         /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class GeneralLedgerRowChangeEvent : global::System.EventArgs {
-            
+        public class GeneralLedgerRowChangeEvent : global::System.EventArgs
+        {
+
             private GeneralLedgerRow eventRow;
-            
+
             private global::System.Data.DataRowAction eventAction;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public GeneralLedgerRowChangeEvent(GeneralLedgerRow row, global::System.Data.DataRowAction action) {
+            public GeneralLedgerRowChangeEvent(GeneralLedgerRow row, global::System.Data.DataRowAction action)
+            {
                 this.eventRow = row;
                 this.eventAction = action;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public GeneralLedgerRow Row {
-                get {
+            public GeneralLedgerRow Row
+            {
+                get
+                {
                     return this.eventRow;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
+            public global::System.Data.DataRowAction Action
+            {
+                get
+                {
                     return this.eventAction;
                 }
             }
         }
-        
+
         /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class dtRCIRowChangeEvent : global::System.EventArgs {
-            
+        public class dtRCIRowChangeEvent : global::System.EventArgs
+        {
+
             private dtRCIRow eventRow;
-            
+
             private global::System.Data.DataRowAction eventAction;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtRCIRowChangeEvent(dtRCIRow row, global::System.Data.DataRowAction action) {
+            public dtRCIRowChangeEvent(dtRCIRow row, global::System.Data.DataRowAction action)
+            {
                 this.eventRow = row;
                 this.eventAction = action;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtRCIRow Row {
-                get {
+            public dtRCIRow Row
+            {
+                get
+                {
                     return this.eventRow;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
+            public global::System.Data.DataRowAction Action
+            {
+                get
+                {
                     return this.eventAction;
                 }
             }
         }
-        
+
         /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class dtPCRowChangeEvent : global::System.EventArgs {
-            
+        public class dtPCRowChangeEvent : global::System.EventArgs
+        {
+
             private dtPCRow eventRow;
-            
+
             private global::System.Data.DataRowAction eventAction;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtPCRowChangeEvent(dtPCRow row, global::System.Data.DataRowAction action) {
+            public dtPCRowChangeEvent(dtPCRow row, global::System.Data.DataRowAction action)
+            {
                 this.eventRow = row;
                 this.eventAction = action;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtPCRow Row {
-                get {
+            public dtPCRow Row
+            {
+                get
+                {
                     return this.eventRow;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
+            public global::System.Data.DataRowAction Action
+            {
+                get
+                {
                     return this.eventAction;
                 }
             }
         }
-        
+
         /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class dtSAAOBRowChangeEvent : global::System.EventArgs {
-            
+        public class dtSAAOBRowChangeEvent : global::System.EventArgs
+        {
+
             private dtSAAOBRow eventRow;
-            
+
             private global::System.Data.DataRowAction eventAction;
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtSAAOBRowChangeEvent(dtSAAOBRow row, global::System.Data.DataRowAction action) {
+            public dtSAAOBRowChangeEvent(dtSAAOBRow row, global::System.Data.DataRowAction action)
+            {
                 this.eventRow = row;
                 this.eventAction = action;
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtSAAOBRow Row {
-                get {
+            public dtSAAOBRow Row
+            {
+                get
+                {
                     return this.eventRow;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
+            public global::System.Data.DataRowAction Action
+            {
+                get
+                {
                     return this.eventAction;
                 }
             }
