@@ -12,8 +12,6 @@ namespace ACC.Domain.Interfaces
 
         Dictionary<string, string> GetViewRecordByID(int budgetAppId);
 
-        DataTable GetViewRecordsSAAOB(int fppID, short year);
-
         Dictionary<string, string> GetViewRecord(int fppId, int? othersFPPId, int fundsId, int allotmentClassId, int generalLedgerAccountId, DateTime dateEntry, short year);
 
 
@@ -24,7 +22,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetHeaderOthersFPP(int fppID, int allotment_classes_id, int funds_id, short year);
 
 
-        DataTable GetViewRecords();
+        DataTable GetViewRecordsByFundIdDateYear(int fundId, DateTime date, short year);
 
 
         #region Validations
