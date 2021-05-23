@@ -99,6 +99,51 @@ namespace ACC.Data
             }
         }
 
+        public DataTable GetRecordsByReference(int Id)
+        {
+            try
+            {
+                string query = $"SELECT * FROM {tableName} WHERE general_ledger_accounts_id='{Id}'";
+
+                var dtJournals = new DataTable();
+                return _dbGenericCommands.Fill(query, dtJournals);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetRecordsBySearch(string srchtxt)
+        {
+            try
+            {
+                string query = $"SELECT * FROM {tableName} WHERE sub_code LIKE '%{srchtxt}%' OR sub_code LIKE '%{srchtxt}%'";
+
+                var dtJournals = new DataTable();
+                return _dbGenericCommands.Fill(query, dtJournals);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetRecordsBySearchByReference(string srchtxt,int Id)
+        {
+            try
+            {
+                string query = $"SELECT * FROM {tableName} WHERE general_ledger_accounts_id='{Id}' AND sub_code LIKE '%{srchtxt}%' OR sub_code LIKE '%{srchtxt}%'";
+
+                var dtJournals = new DataTable();
+                return _dbGenericCommands.Fill(query, dtJournals);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public DataTable GetRecordsByFundAndGeneralLedger(byte fundId, ushort generalLedgerId)
         {
             try
@@ -109,7 +154,7 @@ namespace ACC.Data
                     new object[] { "@generalLedgerId", DbType.UInt16, generalLedgerId},
                 };
 
-                string query = $"SELECT * FROM {tableName} WHERe funds_id = @funds_id AND general_ledger_accounts_id = @generalLedgerId";
+                string query = $"SELECT * FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @generalLedgerId";
 
                 var dtJournals = new DataTable();
                 return _dbGenericCommands.ExecuteReader(query, parameters);
@@ -120,10 +165,7 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetRecordsBySearch(string searchText)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public bool IdExist(int id)
         {

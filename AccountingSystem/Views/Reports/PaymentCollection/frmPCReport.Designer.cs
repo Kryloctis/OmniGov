@@ -33,6 +33,8 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             this.label1 = new System.Windows.Forms.Label();
             this.btnRetrieve = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnexcel = new System.Windows.Forms.Button();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // dtpMonth
@@ -76,11 +78,23 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             this.panel1.Size = new System.Drawing.Size(1186, 820);
             this.panel1.TabIndex = 19;
             // 
+            // btnexcel
+            // 
+            this.btnexcel.Location = new System.Drawing.Point(348, 13);
+            this.btnexcel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnexcel.Name = "btnexcel";
+            this.btnexcel.Size = new System.Drawing.Size(134, 31);
+            this.btnexcel.TabIndex = 20;
+            this.btnexcel.Text = "Generate Excel";
+            this.btnexcel.UseVisualStyleBackColor = true;
+            this.btnexcel.Click += new System.EventHandler(this.btnexcel_Click);
+            // 
             // frmPCReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1215, 885);
+            this.Controls.Add(this.btnexcel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dtpMonth);
             this.Controls.Add(this.label1);
@@ -100,5 +114,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnRetrieve;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnexcel;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }

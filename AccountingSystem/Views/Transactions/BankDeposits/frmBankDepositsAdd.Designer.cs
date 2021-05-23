@@ -1,7 +1,7 @@
 ﻿
-namespace AccountingSystem.Views.Transactions.PaymentCollection
+namespace AccountingSystem.Views.Transactions.BankDeposits
 {
-    partial class frmPaymentCollectionAdd
+    partial class frmBankDepositsAdd
     {
         /// <summary>
         /// Required designer variable.
@@ -29,12 +29,19 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         /// </summary>
         private void InitializeComponent()
         {
+            this.ucbd1 = new AccountingSystem.Views.Transactions.BankDeposits.ucBD();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucpc1 = new AccountingSystem.Views.Transactions.PaymentCollection.ucPC();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // ucbd1
+            // 
+            this.ucbd1.Location = new System.Drawing.Point(-3, 0);
+            this.ucbd1.Name = "ucbd1";
+            this.ucbd1.Size = new System.Drawing.Size(620, 151);
+            this.ucbd1.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
@@ -42,15 +49,15 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 324);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 150);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(726, 36);
-            this.flowLayoutPanel1.TabIndex = 5;
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(616, 36);
+            this.flowLayoutPanel1.TabIndex = 6;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(629, 3);
+            this.btnCancel.Location = new System.Drawing.Point(519, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnCancel.Size = new System.Drawing.Size(94, 29);
@@ -62,7 +69,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(529, 3);
+            this.btnSave.Location = new System.Drawing.Point(419, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnSave.Size = new System.Drawing.Size(94, 29);
@@ -71,29 +78,22 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // ucpc1
-            // 
-            this.ucpc1.Location = new System.Drawing.Point(0, 0);
-            this.ucpc1.Name = "ucpc1";
-            this.ucpc1.Size = new System.Drawing.Size(726, 322);
-            this.ucpc1.TabIndex = 6;
-            // 
-            // frmPaymentCollectionAdd
+            // frmBankDepositsAdd
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(726, 360);
-            this.Controls.Add(this.ucpc1);
+            this.ClientSize = new System.Drawing.Size(616, 186);
             this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.ucbd1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "frmPaymentCollectionAdd";
+            this.Name = "frmBankDepositsAdd";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Payment Collection";
-            this.Load += new System.EventHandler(this.frmPaymentCollectionAdd_Load);
+            this.Text = "Add Bank Deposit";
+            this.Load += new System.EventHandler(this.frmBankDepositsAdd_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -101,9 +101,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         #endregion
 
+        private ucBD ucbd1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private ucPC ucpc1;
     }
 }

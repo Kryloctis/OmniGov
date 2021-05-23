@@ -46,8 +46,14 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
                     if (table.Equals("ledger"))
                     {
                         var ledgerRepository = Factory.GeneralLedgerAccountsRepository();
-                        var dtLedger = ledgerRepository.GetRecords();
+                        var dtLedger = ledgerRepository.GetRecordsBySearch();
                         HelperLoadRecords.GeneralLedgerSearchDatagridView(dtLedger, dgSelect);
+                    }
+                    if (table.Equals("subsidiary"))
+                    {
+                        var subRepository = Factory.SubsidiaryLedgerAccountsRepository();
+                        var dtsub = subRepository.GetRecordsByReference(frmpc.glaId);
+                        HelperLoadRecords.SubsidiaryLedgerAccountsDatagridView(dtsub, dgSelect);
                     }
                 }
             }
@@ -81,7 +87,18 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
 
                         }
                         catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-                    }                  
+                    }
+                    if (table.Equals("subsidiary"))
+                    {
+                        try
+                        {
+                            string searchkey = Convert.ToString(txtsearch.Text.Trim());
+                            var dtSub = Factory.SubsidiaryLedgerAccountsRepository().GetRecordsBySearchByReference(searchkey,frmpc.glaId);
+                            HelperLoadRecords.SubsidiaryLedgerAccountsDatagridView(dtSub, dgSelect);
+
+                        }
+                        catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+                    }
 
                 }
             }
@@ -107,6 +124,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
                         Id = Convert.ToInt16(row.Cells[0].Value.ToString());
                         selectedValue = String.Format("{0} - {1}", row.Cells[2].Value, row.Cells[3].Value);
                     }
+                    if (table.Equals("subsidiary"))
+                    {
+                        Id = Convert.ToInt16(row.Cells[0].Value.ToString());
+                        selectedValue = String.Format("{0} - {1}", row.Cells[3].Value, row.Cells[4].Value);
+                    }
                 }
             }
         }
@@ -121,6 +143,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
             if (table.Equals("ledger"))
             {
                 frmpc.loadSelectedLedger(Id, selectedValue);
+                saved = true;
+            }
+            if (table.Equals("subsidiary"))
+            {
+                frmpc.loadSelectedSubsidiary(Id, selectedValue);
                 saved = true;
             }
             return saved;

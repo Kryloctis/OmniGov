@@ -142,6 +142,8 @@
               <xs:element name="receipt_no" msprop:Generator_ColumnVarNameInTable="columnreceipt_no" msprop:Generator_ColumnPropNameInRow="receipt_no" msprop:Generator_ColumnPropNameInTable="receipt_noColumn" msprop:Generator_UserColumnName="receipt_no" type="xs:string" minOccurs="0" />
               <xs:element name="amount" msprop:Generator_ColumnVarNameInTable="columnamount" msprop:Generator_ColumnPropNameInRow="amount" msprop:Generator_ColumnPropNameInTable="amountColumn" msprop:Generator_UserColumnName="amount" type="xs:decimal" minOccurs="0" />
               <xs:element name="collector" msprop:Generator_ColumnVarNameInTable="columncollector" msprop:Generator_ColumnPropNameInRow="collector" msprop:Generator_ColumnPropNameInTable="collectorColumn" msprop:Generator_UserColumnName="collector" type="xs:string" minOccurs="0" />
+              <xs:element name="account_code" msprop:Generator_ColumnVarNameInTable="columnaccount_code" msprop:Generator_ColumnPropNameInRow="account_code" msprop:Generator_ColumnPropNameInTable="account_codeColumn" msprop:Generator_UserColumnName="account_code" type="xs:string" minOccurs="0" />
+              <xs:element name="subsidiary" msprop:Generator_ColumnVarNameInTable="columnsubsidiary" msprop:Generator_ColumnPropNameInRow="subsidiary" msprop:Generator_ColumnPropNameInTable="subsidiaryColumn" msprop:Generator_UserColumnName="subsidiary" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

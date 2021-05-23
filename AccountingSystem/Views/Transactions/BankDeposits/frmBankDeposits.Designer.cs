@@ -1,7 +1,7 @@
 ﻿
-namespace AccountingSystem.Views.Transactions.PaymentCollection
+namespace AccountingSystem.Views.Transactions.BankDeposits
 {
-    partial class frmPaymentCollection
+    partial class frmBankDeposits
     {
         /// <summary>
         /// Required designer variable.
@@ -33,6 +33,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.txtsearch = new System.Windows.Forms.TextBox();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -45,11 +46,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.lblCreatedBy = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedBy = new System.Windows.Forms.ToolStripStatusLabel();
-            this.txtsearch = new System.Windows.Forms.TextBox();
-            this.dgpayments = new System.Windows.Forms.DataGridView();
+            this.dgbankdeposits = new System.Windows.Forms.DataGridView();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgpayments)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgbankdeposits)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -63,8 +63,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(5);
-            this.toolStrip.Size = new System.Drawing.Size(1216, 65);
-            this.toolStrip.TabIndex = 8;
+            this.toolStrip.Size = new System.Drawing.Size(853, 65);
+            this.toolStrip.TabIndex = 9;
             this.toolStrip.Text = "toolStrip1";
             // 
             // btnAdd
@@ -102,6 +102,16 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+            // txtsearch
+            // 
+            this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtsearch.Location = new System.Drawing.Point(525, 12);
+            this.txtsearch.Name = "txtsearch";
+            this.txtsearch.PlaceholderText = "Search...";
+            this.txtsearch.Size = new System.Drawing.Size(316, 27);
+            this.txtsearch.TabIndex = 12;
+            this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
+            // 
             // statusStrip
             // 
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -117,10 +127,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.lblCreatedBy,
             this.toolStripStatusLabel7,
             this.lblUpdatedBy});
-            this.statusStrip.Location = new System.Drawing.Point(0, 723);
+            this.statusStrip.Location = new System.Drawing.Point(0, 671);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1216, 26);
-            this.statusStrip.TabIndex = 9;
+            this.statusStrip.Size = new System.Drawing.Size(1129, 26);
+            this.statusStrip.TabIndex = 13;
             this.statusStrip.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
@@ -138,7 +148,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(769, 20);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(682, 20);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -185,49 +195,39 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.lblUpdatedBy.Name = "lblUpdatedBy";
             this.lblUpdatedBy.Size = new System.Drawing.Size(0, 20);
             // 
-            // txtsearch
+            // dgbankdeposits
             // 
-            this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(888, 21);
-            this.txtsearch.Name = "txtsearch";
-            this.txtsearch.PlaceholderText = "Search...";
-            this.txtsearch.Size = new System.Drawing.Size(316, 27);
-            this.txtsearch.TabIndex = 11;
-            this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
-            // 
-            // dgpayments
-            // 
-            this.dgpayments.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgbankdeposits.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgpayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgpayments.Location = new System.Drawing.Point(12, 68);
-            this.dgpayments.Name = "dgpayments";
-            this.dgpayments.RowHeadersWidth = 51;
-            this.dgpayments.RowTemplate.Height = 29;
-            this.dgpayments.Size = new System.Drawing.Size(1188, 644);
-            this.dgpayments.TabIndex = 12;
-            this.dgpayments.SelectionChanged += new System.EventHandler(this.dgpayments_SelectionChanged);
+            this.dgbankdeposits.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgbankdeposits.Location = new System.Drawing.Point(12, 68);
+            this.dgbankdeposits.Name = "dgbankdeposits";
+            this.dgbankdeposits.RowHeadersWidth = 51;
+            this.dgbankdeposits.RowTemplate.Height = 29;
+            this.dgbankdeposits.Size = new System.Drawing.Size(829, 449);
+            this.dgbankdeposits.TabIndex = 14;
+            this.dgbankdeposits.SelectionChanged += new System.EventHandler(this.dgbankdeposits_SelectionChanged);
             // 
-            // frmPaymentCollection
+            // frmBankDeposits
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1216, 749);
-            this.Controls.Add(this.dgpayments);
-            this.Controls.Add(this.txtsearch);
+            this.ClientSize = new System.Drawing.Size(853, 558);
+            this.Controls.Add(this.dgbankdeposits);
             this.Controls.Add(this.statusStrip);
+            this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.toolStrip);
             this.MaximizeBox = false;
-            this.Name = "frmPaymentCollection";
+            this.Name = "frmBankDeposits";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Transactions > Payment Collections";
-            this.Load += new System.EventHandler(this.frmPaymentCollection_Load);
+            this.Text = "Transactions > Bank Deposits";
+            this.Load += new System.EventHandler(this.frmBankDeposits_Load);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgpayments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgbankdeposits)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -239,6 +239,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.ToolStripButton btnAdd;
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnDelete;
+        private System.Windows.Forms.TextBox txtsearch;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
@@ -247,11 +248,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
-        private System.Windows.Forms.TextBox txtsearch;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedBy;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel7;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedBy;
-        private System.Windows.Forms.DataGridView dgpayments;
+        private System.Windows.Forms.DataGridView dgbankdeposits;
     }
 }
