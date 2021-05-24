@@ -85,7 +85,7 @@ namespace ACC.Data
                     
                 };
 
-                string query = $"INSERT INTO {tableName} (banks_id,reference,date,amount,created_by) VALUES (@banks_id,@reference,date,@amount,@created_by)";
+                string query = $"INSERT INTO {tableName} (banks_id,reference,date,amount,created_by) VALUES (@banks_id,@reference,@date,@amount,@created_by)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)

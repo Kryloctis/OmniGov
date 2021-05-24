@@ -96,6 +96,9 @@
     <None Update="Reports\procurements-received-journal.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Reports\statement-of-appropriations-allotments-obligations-and-balances.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Reports\status-of-appropriations-allotments-and-obligation.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

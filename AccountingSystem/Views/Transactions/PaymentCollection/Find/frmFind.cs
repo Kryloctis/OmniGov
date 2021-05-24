@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            if (txtsearch.Text.Length >= 3)
+            if (txtsearch.Text.Length > 3)
             {
                 if (!string.IsNullOrEmpty(table))
                 {
@@ -122,7 +122,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
                     if (table.Equals("ledger"))
                     {
                         Id = Convert.ToInt16(row.Cells[0].Value.ToString());
-                        selectedValue = String.Format("{0} - {1}", row.Cells[2].Value, row.Cells[3].Value);
+                        selectedValue = String.Format("{0} - {1}", row.Cells[1].Value, row.Cells[2].Value);
                     }
                     if (table.Equals("subsidiary"))
                     {

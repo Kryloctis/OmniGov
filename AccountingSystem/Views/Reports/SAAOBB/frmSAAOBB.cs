@@ -1,5 +1,4 @@
-﻿using ACC.Domain.Interfaces;
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,51 +9,37 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Reports.SAAOB
+namespace AccountingSystem.Views.Reports.SAAOBB
 {
-    public partial class frmSAAOB : Form
+    public partial class frmSAAOBB : Form
     {
         private readonly ReportViewer reportViewer;
 
-        public frmSAAOB()
+        public frmSAAOBB()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
-            reportViewer.ShowPrintButton = false;
-            panel2.Controls.Add(reportViewer);
-            panelConfig.Enabled = false;
+            panelReport.Controls.Add(reportViewer);
+            dtAsOf.Value = DateTime.Now;
         }
 
-        private void LoadFunds() 
-        {
-            try
-            {
-                var dtFunds = Factory.FundsRepository().GetRecords();
-
-                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "fund_name", "id");
-
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        private DataTable DatatableSAAOB() 
+        private DataTable DatatableSAAOBB()
         {
 
-            var dataSet = new dsLFS();
-            DataTable dtSAAOB = dataSet.dtSAAOB;
+            var dataSet = new dsLFS();  
+            DataTable dtSAAOBB = dataSet.dtSAAOBB;
 
             int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
             DateTime date = dtAsOf.Value;
             short year = Convert.ToInt16(dtAsOf.Value.Year);
 
-            var dtBudgetAppropriations = Factory.BudgetAppropriationsRepository().GetViewRecordsByFundIdDateCurrentYear(fundId, date, year);
 
+            //Get Current Records
+            var dtCurrentBudgetAppropriations = Factory.BudgetAppropriationsRepository().GetViewRecordsByFundIdDate(fundId, date);
 
-            foreach (DataRow item in dtBudgetAppropriations.Rows)
+           foreach (DataRow item in dtCurrentBudgetAppropriations.Rows)
             {
                 int rowBudgetAppropriationId = Convert.ToInt32(item["id"]);
                 int rowFundId = Convert.ToInt32(item["funds_id"]);
@@ -68,7 +53,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
                 int rowFunctionalClassificationId = Convert.ToInt32(item["functional_classification_id"]);
                 string rowFunctionalClassificationSectorCode = item["functional_classification_sector_code"].ToString();
                 string rowFunctionalClassificationSectorName = item["functional_classification_sector_name"].ToString();
-                string rowOtherFPPId = item["others_fpp_id"] == null? string.Empty : item["others_fpp_id"].ToString();
+                string rowOtherFPPId = item["others_fpp_id"] == null ? string.Empty : item["others_fpp_id"].ToString();
                 string rowOtherFPPName = item["others_fpp_name"].ToString();
                 int rowAllotmentClassId = Convert.ToInt32(item["allotment_class_id"]);
                 string rowAllotmentClassCode = item["allotment_class_code"].ToString();
@@ -77,9 +62,10 @@ namespace AccountingSystem.Views.Reports.SAAOB
                 string rowAccountName = item["general_ledger_accounts_name"].ToString();
                 short rowYear = Convert.ToInt16(item["year"]);
                 int rowAccountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
+                bool isContinuing = Convert.ToBoolean(item["continuing"]);
 
 
-
+  
                 //Total budget Appropriation Amount
                 decimal budgetAppropriationAmount = Convert.ToDecimal(item["amount"]);
                 decimal totalSupplementalAmount = Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountByIdAndDateEntry(rowBudgetAppropriationId, date);
@@ -91,42 +77,37 @@ namespace AccountingSystem.Views.Reports.SAAOB
 
 
                 //Total Obligations
-                decimal totalObligations = Factory.ObligationRequestRepository().TotalObligationRequestByDateYear(rowFundId, rowFPPId, string.IsNullOrEmpty(rowOtherFPPId)? null : Convert.ToInt32(rowOtherFPPId), rowAllotmentClassId, rowAccountId, date, year);
+                decimal totalObligations = Factory.ObligationRequestRepository().TotalObligationRequestByDateYear(rowFundId, rowFPPId, string.IsNullOrEmpty(rowOtherFPPId) ? null : Convert.ToInt32(rowOtherFPPId), rowAllotmentClassId, rowAccountId, date, year);
 
-                //BudgetAppropriation Balance   
-                decimal unObligatedBalance = totalAllotmentRelease - totalObligations;
+                //Budget Appropriation Balance
+                decimal budgetAppropriationBalance = totalBudetAppropriations - totalObligations;
+
+                //Allotment Release Balance   
+                decimal allotmentReleaseBalance = totalAllotmentRelease - totalObligations;
 
                 var items = new object[]
                 {
-                    rowFundId, rowFundCode, rowFundName, rowFunctionalClassificationId, rowFunctionalClassificationSectorCode, rowFunctionalClassificationSectorName, rowFunctionalClassificationServiceId, rowFunctionalClassificationServiceName, rowFPPId, rowFPPCode, rowFPPName, rowOtherFPPId, rowOtherFPPName, rowAllotmentClassId, rowAllotmentClassCode, rowAllotmentClassName, rowAccountCode, rowAccountName, rowYear, totalBudetAppropriations, totalAllotmentRelease, totalObligations, unObligatedBalance
+                    rowFundId, rowFundCode, rowFundName, rowFunctionalClassificationId, rowFunctionalClassificationSectorCode, rowFunctionalClassificationSectorName, rowFunctionalClassificationServiceId, rowFunctionalClassificationServiceName, rowFPPId, rowFPPCode, rowFPPName, rowOtherFPPId, rowOtherFPPName, rowAllotmentClassId, rowAllotmentClassCode, rowAllotmentClassName, rowAccountCode, rowAccountName, rowYear, totalBudetAppropriations, budgetAppropriationBalance, totalAllotmentRelease, totalObligations, allotmentReleaseBalance, isContinuing
                 };
 
-                dtSAAOB.Rows.Add(items);
+
+                if (isContinuing == true)
+                    dtSAAOBB.Rows.Add(items);
+                else if(rowYear == dtAsOf.Value.Year)
+                    dtSAAOBB.Rows.Add(items);
             }
 
-            return dtSAAOB;
+            return dtSAAOBB;
         }
 
 
-        private void FilterReport(int filterLevel, LocalReport report) 
-        {
-            var parameters = new[] {
-                    new ReportParameter("paramFilterLevel",filterLevel.ToString())
-                };
-
-            report.SetParameters(parameters);
-
-            reportViewer.RefreshReport();
-        }
-
-        private bool LoadReport(LocalReport report) 
+        private bool LoadReport(LocalReport report)
         {
             try
             {
                 int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
                 DateTime AsOf = dtAsOf.Value;
 
-                //var dtSAAOB = Factory.BudgetAppropriationsRepository().GetViewRecordsSAAOB(fppID, year);
 
                 reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer.ZoomMode = ZoomMode.Percent;
@@ -144,12 +125,11 @@ namespace AccountingSystem.Views.Reports.SAAOB
                     new ReportParameter("paramDate", AsOf.ToString("MMM dd, yyyy")),
                     new ReportParameter("paramSignatoryName", userName),
                     new ReportParameter("paramSignatoryPosition", userRoleName),
-                    new ReportParameter("paramFilterLevel","6")
                 };
 
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\status-of-appropriations-allotments-and-obligation.rdlc";
+                report.ReportPath = $"{Application.StartupPath}\\Reports\\statement-of-appropriations-allotments-obligations-and-balances.rdlc";
                 report.DataSources.Clear();
-                report.DataSources.Add(new ReportDataSource("dtSAAOB", DatatableSAAOB()));
+                report.DataSources.Add(new ReportDataSource("dtSAAOBB", DatatableSAAOBB()));
                 report.SetParameters(parameters);
 
                 reportViewer.RefreshReport();
@@ -164,65 +144,29 @@ namespace AccountingSystem.Views.Reports.SAAOB
         }
 
 
-        private void btnRetrieve_Click(object sender, EventArgs e)
+        private void LoadFunds()
         {
-            if (LoadReport(reportViewer.LocalReport)) 
+            try
             {
-                panelConfig.Enabled = true;
+                var dtFunds = Factory.FundsRepository().GetRecords();
+
+                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "fund_name", "id");
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
-        private void frmSAAOB_Load(object sender, EventArgs e)
+        private void frmSAAOBB_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
             LoadFunds();
         }
 
-        private void btnOne_Click(object sender, EventArgs e)
+        private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            FilterReport(1, reportViewer.LocalReport);
-        }
-
-        private void btnTwo_Click(object sender, EventArgs e)
-        {
-            FilterReport(2, reportViewer.LocalReport);
-        }
-
-        private void btnThree_Click(object sender, EventArgs e)
-        {
-            FilterReport(3, reportViewer.LocalReport);
-        }
-
-        private void btnFour_Click(object sender, EventArgs e)
-        {
-            FilterReport(4, reportViewer.LocalReport);
-        }
-
-        private void btnFive_Click(object sender, EventArgs e)
-        {
-            FilterReport(5, reportViewer.LocalReport);
-        }
-
-        private void chkBxAdvanceMode_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkBxAdvanceMode.Checked)
-            {
-                reportViewer.SetDisplayMode(DisplayMode.Normal);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-            }
-
-            else
-            {
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-            }
-        }
-
-        private void btnPrint_Click(object sender, EventArgs e)
-        {
-            reportViewer.PrintDialog();
+            LoadReport(reportViewer.LocalReport);
         }
     }
 }
