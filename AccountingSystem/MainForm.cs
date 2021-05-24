@@ -15,6 +15,7 @@ using AccountingSystem.Views.Reports.Journals;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
 using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Reports.SAAOB;
+using AccountingSystem.Views.Reports.SAAOBB;
 using AccountingSystem.Views.Reports.Ledgers;
 using AccountingSystem.Views.Dashboard;
 using AccountingSystem.Views.Reports.RCI;
@@ -43,6 +44,7 @@ namespace AccountingSystem
             menuReportPRJ.Click += new EventHandler(MenuReportProcurementsReceivedJournal_Click);
             menuReportADADJ.Click += new EventHandler(MenuReportADADisbursementsJournal_Click);
             menuSAAOB.Click += new EventHandler(MenuSAAOB_Click);
+            menuSAAOBB.Click += new EventHandler(MenuSAAOBB_Click);
             menuGeneralLedgerReport.Click += new EventHandler(MenuGeneralLedgerReport_Click);
             btnJournalEntry.Click += new EventHandler(BtnJournalEntry_Click);
             btnObligationRequest.Click += new EventHandler(BtnObligationRequest_Click);
@@ -54,6 +56,7 @@ namespace AccountingSystem
             userDict = Helper.LoggedInUserData();
             loginForm = _loginForm;
         }
+
 
         private void LoadLoggedInUser()
         {
@@ -264,6 +267,11 @@ namespace AccountingSystem
         private void MenuSAAOB_Click(object sender, EventArgs e) 
         {
             _ = new frmSAAOB().ShowDialog();
+        }
+
+        private void MenuSAAOBB_Click(object sender, EventArgs e)
+        {
+            _ = new frmSAAOBB().ShowDialog();
         }
 
         private void MenuGeneralLedgerReport_Click(object sender, EventArgs e)
