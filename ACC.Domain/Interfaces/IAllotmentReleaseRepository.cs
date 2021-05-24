@@ -31,5 +31,8 @@ namespace ACC.Domain.Interfaces
         bool allotmentReleaseExist(int id, int budgetAppropriationId, string dateIssued);
 
         bool BulkInsert(List<AllotmentReleaseModel> allotmentReleaseModelList);
+
+        //Dashboard
+        decimal GetTotalAllotmentReleaseByIds(int fundId, int allotmentClassId, int fppId);
     }
 }

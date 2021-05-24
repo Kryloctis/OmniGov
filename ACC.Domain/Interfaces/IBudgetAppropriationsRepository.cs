@@ -27,7 +27,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecordsByFundIdDate(int fundId, DateTime date);
 
 
-        #region Validations
+       //Validations
 
         bool BudgetAppropriationExist(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int generalLedgerAccountId, short year);
 
@@ -37,7 +37,8 @@ namespace ACC.Domain.Interfaces
 
         bool BudgetAppropriationContinuing(int id, int fundId, int fppId, int? othersFPPId, int allotmentClassId, int generalLedgerAccountId);
 
-        #endregion Validations
 
+        //Dashboard 
+        decimal GetTotalBudgetAppropriationsByIds(int fundId, int allotmentClassId, int fppId);
     }
 }

@@ -28,5 +28,9 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecordsById(int Id);
 
+
+        //Dashboard
+        decimal GetTotalObligationsByIds(int fundId, int allotmentClassId, int fppId);
+
     }
 }
