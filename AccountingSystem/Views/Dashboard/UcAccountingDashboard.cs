@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Dashboard
 
             tlpJournals.Visible = false;
 
-            if (userDict["office"] == "Accounting")
+            if (userDict["office"] == "Accounting" || userDict["office"] == "SysAdmin")
                 tlpJournals.Visible = true;
         }
     }

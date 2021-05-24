@@ -50,6 +50,7 @@ namespace AccountingSystem
             btnRCI.Click += new EventHandler(BtnRCI_Click);
             menuLogout.Click += new EventHandler(menuLogout_Click);
             menuExitApp.Click += new EventHandler(menuExitApp_Click);
+            menuSubsidiaryLedgerReport.Click += new EventHandler(menuSubsidiaryLedgerReport_Click);
 
             userDict = Helper.LoggedInUserData();
             loginForm = _loginForm;
@@ -155,12 +156,10 @@ namespace AccountingSystem
             {
                 case "Budget":
                 case "Accounting":
+                case "SysAdmin":
                     panel1.Controls.Add(new UcAccountingDashboard(Helper.LoggedInUserData()));
                     break;
                 case "Treasury":
-
-                    break;
-                case "Assessor":
 
                     break;
                 default:
@@ -171,7 +170,6 @@ namespace AccountingSystem
         private void MainForm_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            menuSubsidiaryLedgerReport.Enabled = false;
             LoadLoggedInUser();
             ValidatePermissions();
             LoadDashboard();
@@ -339,6 +337,11 @@ namespace AccountingSystem
         private void menuDeposits_Click(object sender, EventArgs e)
         {
             _ = new frmBankDeposits().ShowDialog();
+        }
+
+        private void menuSubsidiaryLedgerReport_Click(object sender, EventArgs e)
+        {
+            _ = new frmSubsidiaryLedgerReport().ShowDialog();
         }
     }
 }

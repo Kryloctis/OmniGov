@@ -84,32 +84,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
             row["balance"] = balance;
         }
 
-        //private decimal BeginningBalanceRow(byte fundId, ushort generalLedgerId, short year, dsLFS.GeneralLedgerDataTable dtGeneralLedger)
-        //{
-        //    decimal beginningBalance = 0;
-        //    bool generalLedgerBalanceExist = Factory.BeginningBalancesRepository().GeneralLedgerBalanceExist(fundId, generalLedgerId, year);
-
-        //    DataRow balanceRow = dtGeneralLedger.NewRow();
-        //    balanceRow["particulars"] = "Beginning Balance";
-        //    if (generalLedgerBalanceExist)
-        //    {
-        //        var beginningBalanceDict = Factory.BeginningBalancesRepository().GetRecordByFundsAndGeneralLedgerID(fundId, generalLedgerId, year);
-
-        //        beginningBalance = Convert.ToDecimal(beginningBalanceDict["amount"]);
-        //        balanceRow["date"] = beginningBalanceDict["date_entry"];
-
-        //        if (beginningBalanceDict["is_debit"] == "1")
-        //            balanceRow["debit_amount"] = beginningBalance;
-        //        else
-        //            balanceRow["credit_amount"] = beginningBalance;
-
-        //        balanceRow["balance"] = beginningBalance;
-        //    }
-
-        //    dtGeneralLedger.Rows.Add(balanceRow);
-        //    return beginningBalance;
-        //}
-
         private string ParseParticulars(DataRow item)
         {
             string particulars;
@@ -128,7 +102,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             short year = Convert.ToInt16(cmbYear.Text);
 
             var dtGeneralLedger = new dsLFS.GeneralLedgerDataTable();
-            var dtGeneralLedgerFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
+            var dtGeneralLedgerFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundAndGeneralLedger(fundId, generalLedgerId, year);
 
             string particulars;
             foreach (DataRow item in dtGeneralLedgerFromDB.Rows)

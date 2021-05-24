@@ -1509,7 +1509,6 @@
                     <TextRun>
                       <Value>GENERAL LEDGER</Value>
                       <Style>
-                        <FontFamily />
                         <FontSize>16pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
