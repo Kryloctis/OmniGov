@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         }
         internal string GetFormErrors()
         {
-            var errorArray = new string[7];
+            var errorArray = new string[8];
             errorArray[0] = errorProvider.GetError(cmbcollector);
             errorArray[1] = errorProvider.GetError(txtaccountable);
             errorArray[2] = errorProvider.GetError(txtledger);
