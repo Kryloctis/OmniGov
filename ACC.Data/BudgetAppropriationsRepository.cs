@@ -583,7 +583,9 @@ namespace ACC.Data
             return false;
         }
 
-        public DataTable GetViewRecordsByFundIdDateYear(int fundId, DateTime date, short year)
+
+
+        public DataTable GetViewRecordsByFundIdDateCurrentYear(int fundId, DateTime date, short year)
         {
             try
             {
@@ -591,7 +593,7 @@ namespace ACC.Data
                 {
                     new object[] { "@funds_id",DbType.Int32, fundId},
                     new object[] { "@date_entry", DbType.Date, date.Date},
-                    new object[] { "@year",DbType.Int16, year}
+                    new object[] { "@year",DbType.Int16, year},
                 };
 
 
@@ -637,6 +639,60 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public DataTable GetViewRecordsByFundIdDate(int fundId, DateTime date)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id",DbType.Int32, fundId},
+                    new object[] { "@date_entry", DbType.Date, date.Date},
+                };
+
+
+                string query = $"SELECT " +
+                    $"id, " +
+                    $"funds_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"fpp_id, " +
+                    $"fpp_code, " +
+                    $"fpp_name, " +
+                    $"functional_classification_service_id, " +
+                    $"functional_classification_service_name, " +
+                    $"functional_classification_id, " +
+                    $"functional_classification_sector_code, " +
+                    $"functional_classification_sector_name, " +
+                    $"others_fpp_id, " +
+                    $"others_fpp_name, " +
+                    $"allotment_class_id, " +
+                    $"allotment_class_code, " +
+                    $"allotment_class_name, " +
+                    $"general_ledger_accounts_id, " +
+                    $"general_ledger_accounts_code, " +
+                    $"general_ledger_accounts_name, " +
+                    $"account_code, " +
+                    $"date_entry, " +
+                    $"year, " +
+                    $"amount, " +
+                    $"continuing, " +
+                    $"created_at, " +
+                    $"updated_at " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE " +
+                    $"funds_id = @funds_id " +
+                    $"AND date_entry <= @date_entry ";
+
+                var dtBudgetAppropriations = new DataTable();
+                return mySqlGenericCommands.FillBySearch(query, dtBudgetAppropriations, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         #endregion Validations
 

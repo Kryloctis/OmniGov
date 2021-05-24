@@ -21,8 +21,10 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetHeaderOthersFPP(int fppID, int allotment_classes_id, int funds_id, short year);
 
+        //Report
+        DataTable GetViewRecordsByFundIdDateCurrentYear(int fundId, DateTime date, short year);
 
-        DataTable GetViewRecordsByFundIdDateYear(int fundId, DateTime date, short year);
+        DataTable GetViewRecordsByFundIdDate(int fundId, DateTime date);
 
 
         #region Validations

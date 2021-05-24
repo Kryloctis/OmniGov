@@ -240,7 +240,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
             this.Controls.Add(this.panelConfig);
             this.Controls.Add(this.panel1);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(931, 628);
+            this.MinimumSize = new System.Drawing.Size(931, 724);
             this.Name = "frmSAAOB";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

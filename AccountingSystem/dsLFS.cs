@@ -1,0 +1,7 @@
+namespace AccountingSystem
+{
+}
+
+namespace AccountingSystem
+{
+}
