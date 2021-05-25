@@ -514,7 +514,7 @@ namespace ACC.Data
                     new object[] { "@jev_no", DbType.String, jevNo},
                 };
 
-                string query = $"SELECT id, funds_id, fund_code, fund_name, journals_id, journal_name, is_special, jev_no, date_entry, ref_no, payee, explanation, created_at, created_by, created_by_name, updated_at, updated_by, updated_by_name FROM {viewTableName} WHERE jev_no = @jev_no";
+                string query = $"SELECT id, funds_id, fund_code, fund_name, journals_id, journal_name, is_special, jev_no, date_entry, ref_no, payee, explanation, created_at, created_by, created_by_name, updated_at, updated_by, updated_by_name FROM {viewTableName} WHERE is_approved = 1 AND jev_no = @jev_no";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -548,6 +548,26 @@ namespace ACC.Data
             }
 
             return record;
+        }
+
+        public int JevCounter(byte journalId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@journals_id", DbType.Int32, journalId },
+                };
+
+                string query = $"SELECT id FROM {tableName} WHERE is_approved = 1 AND journals_id = @journals_id";
+                _ = int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return 0;
         }
     }
 }
