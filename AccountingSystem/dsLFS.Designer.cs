@@ -452,7 +452,6 @@ namespace AccountingSystem {
                     this.tabledtSAAOBB.InitVars();
                 }
             }
-        }
             this.tableSubsidiaryLedger = ((SubsidiaryLedgerDataTable)(base.Tables["SubsidiaryLedger"]));
             if ((initTable == true)) {
                 if ((this.tableSubsidiaryLedger != null)) {
