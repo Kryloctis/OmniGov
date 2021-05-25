@@ -34,6 +34,7 @@ namespace AccountingSystem.Views.Dashboard
                     VisibilityJournalCardsCounter(true);
 
                 LoadCardRecords();
+                LoadObligationRecordCount();
                 LoadJEVCounter();
             }
         }
@@ -45,6 +46,15 @@ namespace AccountingSystem.Views.Dashboard
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
+        }
+
+
+
+        private void LoadObligationRecordCount() 
+        {
+            int recordCount = Factory.ObligationAccountRepository().ObligationsRecordCount();
+
+            lblObligationRecordCount.Text = recordCount.ToString();
         }
 
         internal void LoadFunds()
