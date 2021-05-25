@@ -1034,14 +1034,6 @@ namespace AccountingSystem.Views.Dashboard
             this.lblObligationRecordCount.TabIndex = 6;
             this.lblObligationRecordCount.Text = "15";
             this.lblObligationRecordCount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label40.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label40.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label40.Location = new System.Drawing.Point(2, 15);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(148, 40);
-            this.label40.TabIndex = 6;
-            this.label40.Text = "15";
-            this.label40.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // epFPP
             // 
