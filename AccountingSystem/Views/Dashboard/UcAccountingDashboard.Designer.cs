@@ -29,6 +29,7 @@ namespace AccountingSystem.Views.Dashboard
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel21 = new System.Windows.Forms.Panel();
             this.label38 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
@@ -46,49 +47,49 @@ namespace AccountingSystem.Views.Dashboard
             this.label32 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
             this.panel20 = new System.Windows.Forms.Panel();
-            this.label34 = new System.Windows.Forms.Label();
+            this.lblFEAppropriations = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
-            this.label19 = new System.Windows.Forms.Label();
+            this.lblCOUnobligatedBalances = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.panel13 = new System.Windows.Forms.Panel();
-            this.label21 = new System.Windows.Forms.Label();
+            this.lblCOObligations = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.panel14 = new System.Windows.Forms.Panel();
-            this.label23 = new System.Windows.Forms.Label();
+            this.lblCOAllotmentReleases = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.panel15 = new System.Windows.Forms.Panel();
-            this.label25 = new System.Windows.Forms.Label();
+            this.lblCOAppropriatons = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblMOOEUnobligatedBalances = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label12 = new System.Windows.Forms.Label();
+            this.lblMOOEObligations = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.label14 = new System.Windows.Forms.Label();
+            this.lblMOOEAllotmentReleases = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.label16 = new System.Windows.Forms.Label();
+            this.lblMOOEAppropriations = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lblPSUnobligatedBalances = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblPSObligations = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblPSAllotmentReleases = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblPSAppropriations = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tlpJournals = new System.Windows.Forms.TableLayoutPanel();
@@ -107,6 +108,7 @@ namespace AccountingSystem.Views.Dashboard
             this.panel22 = new System.Windows.Forms.Panel();
             this.label39 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
+            this.epFPP = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel21.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel16.SuspendLayout();
@@ -135,6 +137,7 @@ namespace AccountingSystem.Views.Dashboard
             this.panel24.SuspendLayout();
             this.panel23.SuspendLayout();
             this.panel22.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
             this.SuspendLayout();
             // 
             // panel21
@@ -180,6 +183,8 @@ namespace AccountingSystem.Views.Dashboard
             this.cmbFPP.Name = "cmbFPP";
             this.cmbFPP.Size = new System.Drawing.Size(255, 23);
             this.cmbFPP.TabIndex = 9;
+            this.cmbFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbFPP_Validating);
+            this.cmbFPP.Validated += new System.EventHandler(this.cmbFPP_Validated);
             // 
             // cmbFund
             // 
@@ -320,22 +325,22 @@ namespace AccountingSystem.Views.Dashboard
             // 
             this.panel20.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel20.Controls.Add(this.label34);
+            this.panel20.Controls.Add(this.lblFEAppropriations);
             this.panel20.Controls.Add(this.label35);
             this.panel20.Location = new System.Drawing.Point(-1, 29);
             this.panel20.Name = "panel20";
             this.panel20.Size = new System.Drawing.Size(265, 25);
             this.panel20.TabIndex = 2;
             // 
-            // label34
+            // lblFEAppropriations
             // 
-            this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label34.Location = new System.Drawing.Point(153, 5);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(112, 15);
-            this.label34.TabIndex = 1;
-            this.label34.Text = "1,000,000,000,000.00";
-            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblFEAppropriations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblFEAppropriations.Location = new System.Drawing.Point(153, 5);
+            this.lblFEAppropriations.Name = "lblFEAppropriations";
+            this.lblFEAppropriations.Size = new System.Drawing.Size(112, 15);
+            this.lblFEAppropriations.TabIndex = 1;
+            this.lblFEAppropriations.Text = "1,000,000,000,000.00";
+            this.lblFEAppropriations.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label35
             // 
@@ -380,22 +385,22 @@ namespace AccountingSystem.Views.Dashboard
             // 
             this.panel12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel12.Controls.Add(this.label19);
+            this.panel12.Controls.Add(this.lblCOUnobligatedBalances);
             this.panel12.Controls.Add(this.label20);
             this.panel12.Location = new System.Drawing.Point(-1, 122);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(263, 25);
             this.panel12.TabIndex = 5;
             // 
-            // label19
+            // lblCOUnobligatedBalances
             // 
-            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label19.Location = new System.Drawing.Point(151, 5);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(112, 15);
-            this.label19.TabIndex = 1;
-            this.label19.Text = "999,347,125,105.00";
-            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCOUnobligatedBalances.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCOUnobligatedBalances.Location = new System.Drawing.Point(151, 5);
+            this.lblCOUnobligatedBalances.Name = "lblCOUnobligatedBalances";
+            this.lblCOUnobligatedBalances.Size = new System.Drawing.Size(112, 15);
+            this.lblCOUnobligatedBalances.TabIndex = 1;
+            this.lblCOUnobligatedBalances.Text = "999,347,125,105.00";
+            this.lblCOUnobligatedBalances.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label20
             // 
@@ -411,22 +416,22 @@ namespace AccountingSystem.Views.Dashboard
             // 
             this.panel13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel13.Controls.Add(this.label21);
+            this.panel13.Controls.Add(this.lblCOObligations);
             this.panel13.Controls.Add(this.label22);
             this.panel13.Location = new System.Drawing.Point(-1, 91);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(263, 25);
             this.panel13.TabIndex = 4;
             // 
-            // label21
+            // lblCOObligations
             // 
-            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label21.Location = new System.Drawing.Point(151, 5);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(112, 15);
-            this.label21.TabIndex = 1;
-            this.label21.Text = "652,874,895.00";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCOObligations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCOObligations.Location = new System.Drawing.Point(151, 5);
+            this.lblCOObligations.Name = "lblCOObligations";
+            this.lblCOObligations.Size = new System.Drawing.Size(112, 15);
+            this.lblCOObligations.TabIndex = 1;
+            this.lblCOObligations.Text = "652,874,895.00";
+            this.lblCOObligations.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label22
             // 
@@ -442,22 +447,22 @@ namespace AccountingSystem.Views.Dashboard
             // 
             this.panel14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel14.Controls.Add(this.label23);
+            this.panel14.Controls.Add(this.lblCOAllotmentReleases);
             this.panel14.Controls.Add(this.label24);
             this.panel14.Location = new System.Drawing.Point(-1, 60);
             this.panel14.Name = "panel14";
             this.panel14.Size = new System.Drawing.Size(263, 25);
             this.panel14.TabIndex = 3;
             // 
-            // label23
+            // lblCOAllotmentReleases
             // 
-            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label23.Location = new System.Drawing.Point(151, 5);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(112, 15);
-            this.label23.TabIndex = 1;
-            this.label23.Text = "1,000,000,000,000.00";
-            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCOAllotmentReleases.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCOAllotmentReleases.Location = new System.Drawing.Point(151, 5);
+            this.lblCOAllotmentReleases.Name = "lblCOAllotmentReleases";
+            this.lblCOAllotmentReleases.Size = new System.Drawing.Size(112, 15);
+            this.lblCOAllotmentReleases.TabIndex = 1;
+            this.lblCOAllotmentReleases.Text = "1,000,000,000,000.00";
+            this.lblCOAllotmentReleases.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label24
             // 
@@ -473,22 +478,22 @@ namespace AccountingSystem.Views.Dashboard
             // 
             this.panel15.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel15.Controls.Add(this.label25);
+            this.panel15.Controls.Add(this.lblCOAppropriatons);
             this.panel15.Controls.Add(this.label26);
             this.panel15.Location = new System.Drawing.Point(-1, 29);
             this.panel15.Name = "panel15";
             this.panel15.Size = new System.Drawing.Size(263, 25);
             this.panel15.TabIndex = 2;
             // 
-            // label25
+            // lblCOAppropriatons
             // 
-            this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label25.Location = new System.Drawing.Point(151, 5);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(112, 15);
-            this.label25.TabIndex = 1;
-            this.label25.Text = "1,000,000,000,000.00";
-            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCOAppropriatons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCOAppropriatons.Location = new System.Drawing.Point(151, 5);
+            this.lblCOAppropriatons.Name = "lblCOAppropriatons";
+            this.lblCOAppropriatons.Size = new System.Drawing.Size(112, 15);
+            this.lblCOAppropriatons.TabIndex = 1;
+            this.lblCOAppropriatons.Text = "1,000,000,000,000.00";
+            this.lblCOAppropriatons.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label26
             // 
@@ -533,22 +538,22 @@ namespace AccountingSystem.Views.Dashboard
             // 
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.lblMOOEUnobligatedBalances);
             this.panel3.Controls.Add(this.label11);
             this.panel3.Location = new System.Drawing.Point(-1, 122);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(263, 25);
             this.panel3.TabIndex = 5;
             // 
-            // label1
+            // lblMOOEUnobligatedBalances
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.Location = new System.Drawing.Point(151, 5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "999,347,125,105.00";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblMOOEUnobligatedBalances.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMOOEUnobligatedBalances.Location = new System.Drawing.Point(151, 5);
+            this.lblMOOEUnobligatedBalances.Name = "lblMOOEUnobligatedBalances";
+            this.lblMOOEUnobligatedBalances.Size = new System.Drawing.Size(112, 15);
+            this.lblMOOEUnobligatedBalances.TabIndex = 1;
+            this.lblMOOEUnobligatedBalances.Text = "999,347,125,105.00";
+            this.lblMOOEUnobligatedBalances.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label11
             // 
@@ -564,22 +569,22 @@ namespace AccountingSystem.Views.Dashboard
             // 
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel4.Controls.Add(this.label12);
+            this.panel4.Controls.Add(this.lblMOOEObligations);
             this.panel4.Controls.Add(this.label13);
             this.panel4.Location = new System.Drawing.Point(-1, 91);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(263, 25);
             this.panel4.TabIndex = 4;
             // 
-            // label12
+            // lblMOOEObligations
             // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label12.Location = new System.Drawing.Point(151, 5);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(112, 15);
-            this.label12.TabIndex = 1;
-            this.label12.Text = "652,874,895.00";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblMOOEObligations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMOOEObligations.Location = new System.Drawing.Point(151, 5);
+            this.lblMOOEObligations.Name = "lblMOOEObligations";
+            this.lblMOOEObligations.Size = new System.Drawing.Size(112, 15);
+            this.lblMOOEObligations.TabIndex = 1;
+            this.lblMOOEObligations.Text = "652,874,895.00";
+            this.lblMOOEObligations.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label13
             // 
@@ -595,22 +600,22 @@ namespace AccountingSystem.Views.Dashboard
             // 
             this.panel9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel9.Controls.Add(this.label14);
+            this.panel9.Controls.Add(this.lblMOOEAllotmentReleases);
             this.panel9.Controls.Add(this.label15);
             this.panel9.Location = new System.Drawing.Point(-1, 60);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(263, 25);
             this.panel9.TabIndex = 3;
             // 
-            // label14
+            // lblMOOEAllotmentReleases
             // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.Location = new System.Drawing.Point(151, 5);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(112, 15);
-            this.label14.TabIndex = 1;
-            this.label14.Text = "1,000,000,000,000.00";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblMOOEAllotmentReleases.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMOOEAllotmentReleases.Location = new System.Drawing.Point(151, 5);
+            this.lblMOOEAllotmentReleases.Name = "lblMOOEAllotmentReleases";
+            this.lblMOOEAllotmentReleases.Size = new System.Drawing.Size(112, 15);
+            this.lblMOOEAllotmentReleases.TabIndex = 1;
+            this.lblMOOEAllotmentReleases.Text = "1,000,000,000,000.00";
+            this.lblMOOEAllotmentReleases.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label15
             // 
@@ -626,22 +631,22 @@ namespace AccountingSystem.Views.Dashboard
             // 
             this.panel10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel10.Controls.Add(this.label16);
+            this.panel10.Controls.Add(this.lblMOOEAppropriations);
             this.panel10.Controls.Add(this.label17);
             this.panel10.Location = new System.Drawing.Point(-1, 29);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(263, 25);
             this.panel10.TabIndex = 2;
             // 
-            // label16
+            // lblMOOEAppropriations
             // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.Location = new System.Drawing.Point(151, 5);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(112, 15);
-            this.label16.TabIndex = 1;
-            this.label16.Text = "1,000,000,000,000.00";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblMOOEAppropriations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMOOEAppropriations.Location = new System.Drawing.Point(151, 5);
+            this.lblMOOEAppropriations.Name = "lblMOOEAppropriations";
+            this.lblMOOEAppropriations.Size = new System.Drawing.Size(112, 15);
+            this.lblMOOEAppropriations.TabIndex = 1;
+            this.lblMOOEAppropriations.Text = "1,000,000,000,000.00";
+            this.lblMOOEAppropriations.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label17
             // 
@@ -686,22 +691,22 @@ namespace AccountingSystem.Views.Dashboard
             // 
             this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel8.Controls.Add(this.label9);
+            this.panel8.Controls.Add(this.lblPSUnobligatedBalances);
             this.panel8.Controls.Add(this.label10);
             this.panel8.Location = new System.Drawing.Point(-1, 122);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(263, 25);
             this.panel8.TabIndex = 5;
             // 
-            // label9
+            // lblPSUnobligatedBalances
             // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.Location = new System.Drawing.Point(151, 5);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(112, 15);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "999,347,125,105.00";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblPSUnobligatedBalances.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPSUnobligatedBalances.Location = new System.Drawing.Point(151, 5);
+            this.lblPSUnobligatedBalances.Name = "lblPSUnobligatedBalances";
+            this.lblPSUnobligatedBalances.Size = new System.Drawing.Size(112, 15);
+            this.lblPSUnobligatedBalances.TabIndex = 1;
+            this.lblPSUnobligatedBalances.Text = "999,347,125,105.00";
+            this.lblPSUnobligatedBalances.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label10
             // 
@@ -717,22 +722,22 @@ namespace AccountingSystem.Views.Dashboard
             // 
             this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel7.Controls.Add(this.label7);
+            this.panel7.Controls.Add(this.lblPSObligations);
             this.panel7.Controls.Add(this.label8);
             this.panel7.Location = new System.Drawing.Point(-1, 91);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(263, 25);
             this.panel7.TabIndex = 4;
             // 
-            // label7
+            // lblPSObligations
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.Location = new System.Drawing.Point(151, 5);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(112, 15);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "652,874,895.00";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblPSObligations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPSObligations.Location = new System.Drawing.Point(151, 5);
+            this.lblPSObligations.Name = "lblPSObligations";
+            this.lblPSObligations.Size = new System.Drawing.Size(112, 15);
+            this.lblPSObligations.TabIndex = 1;
+            this.lblPSObligations.Text = "652,874,895.00";
+            this.lblPSObligations.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label8
             // 
@@ -748,22 +753,22 @@ namespace AccountingSystem.Views.Dashboard
             // 
             this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel6.Controls.Add(this.label5);
+            this.panel6.Controls.Add(this.lblPSAllotmentReleases);
             this.panel6.Controls.Add(this.label6);
             this.panel6.Location = new System.Drawing.Point(-1, 60);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(263, 25);
             this.panel6.TabIndex = 3;
             // 
-            // label5
+            // lblPSAllotmentReleases
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.Location = new System.Drawing.Point(151, 5);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(112, 15);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "1,000,000,000,000.00";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblPSAllotmentReleases.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPSAllotmentReleases.Location = new System.Drawing.Point(151, 5);
+            this.lblPSAllotmentReleases.Name = "lblPSAllotmentReleases";
+            this.lblPSAllotmentReleases.Size = new System.Drawing.Size(112, 15);
+            this.lblPSAllotmentReleases.TabIndex = 1;
+            this.lblPSAllotmentReleases.Text = "1,000,000,000,000.00";
+            this.lblPSAllotmentReleases.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label6
             // 
@@ -779,22 +784,22 @@ namespace AccountingSystem.Views.Dashboard
             // 
             this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel5.Controls.Add(this.label4);
+            this.panel5.Controls.Add(this.lblPSAppropriations);
             this.panel5.Controls.Add(this.label3);
             this.panel5.Location = new System.Drawing.Point(-1, 29);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(263, 25);
             this.panel5.TabIndex = 2;
             // 
-            // label4
+            // lblPSAppropriations
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.Location = new System.Drawing.Point(151, 5);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(112, 15);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "1,000,000,000,000.00";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblPSAppropriations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPSAppropriations.Location = new System.Drawing.Point(151, 5);
+            this.lblPSAppropriations.Name = "lblPSAppropriations";
+            this.lblPSAppropriations.Size = new System.Drawing.Size(112, 15);
+            this.lblPSAppropriations.TabIndex = 1;
+            this.lblPSAppropriations.Text = "1,000,000,000,000.00";
+            this.lblPSAppropriations.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label3
             // 
@@ -1019,6 +1024,10 @@ namespace AccountingSystem.Views.Dashboard
             this.label40.Text = "15";
             this.label40.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // epFPP
+            // 
+            this.epFPP.ContainerControl = this;
+            // 
             // UcAccountingDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1075,6 +1084,7 @@ namespace AccountingSystem.Views.Dashboard
             this.panel24.ResumeLayout(false);
             this.panel23.ResumeLayout(false);
             this.panel22.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.epFPP)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1097,49 +1107,36 @@ namespace AccountingSystem.Views.Dashboard
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Panel panel20;
-        private System.Windows.Forms.Label label34;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Panel panel13;
-        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Panel panel14;
-        private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Panel panel15;
-        private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tlpJournals;
@@ -1158,5 +1155,21 @@ namespace AccountingSystem.Views.Dashboard
         private System.Windows.Forms.Panel panel22;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label40;
+        internal System.Windows.Forms.Label lblPSAppropriations;
+        internal System.Windows.Forms.Label lblPSAllotmentReleases;
+        internal System.Windows.Forms.Label lblPSObligations;
+        internal System.Windows.Forms.Label lblPSAllotmentRelease;
+        internal System.Windows.Forms.Label lblPSunobligatedBalance;
+        internal System.Windows.Forms.Label lblMOOEAppropriations;
+        internal System.Windows.Forms.Label lblMOOEAllotmentReleases;
+        internal System.Windows.Forms.Label lblMOOEObligations;
+        internal System.Windows.Forms.Label lblPSUnobligatedBalances;
+        internal System.Windows.Forms.Label lblMOOEUnobligatedBalances;
+        internal System.Windows.Forms.Label lblCOAppropriatons;
+        internal System.Windows.Forms.Label lblCOAllotmentReleases;
+        internal System.Windows.Forms.Label lblCOObligations;
+        internal System.Windows.Forms.Label lblCOUnobligatedBalances;
+        internal System.Windows.Forms.Label lblFEAppropriations;
+        internal System.Windows.Forms.ErrorProvider epFPP;
     }
 }

@@ -367,7 +367,6 @@ namespace ACC.Data
 
 
 
-
         public decimal GetViewTotalAllotmentReleaseByIdDateYear(int budgetAppropriationId, DateTime dateIssued, short year)
         {
             try
@@ -395,5 +394,31 @@ namespace ACC.Data
         }
 
 
+        //Dashboard
+        public decimal GetTotalAllotmentReleaseByIds(int fundId, int allotmentClassId, int fppId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@fund_id", DbType.Int32, fundId},
+                    new object[] { "@allotment_class_id", DbType.Int32,allotmentClassId},
+                    new object[] { "@fpp_id", DbType.Int32, fppId}
+                };
+
+                string query = $"SELECT " +
+                    $"COALESCE(SUM(allotment_release_amount), 0) AS total_allotement_release " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE fund_id = @fund_id " +
+                    $"AND allotment_class_id = @allotment_class_id " +
+                    $"AND fpp_id = @fpp_id";
+
+                return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

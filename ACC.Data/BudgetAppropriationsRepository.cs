@@ -694,6 +694,34 @@ namespace ACC.Data
         }
 
 
+        //Dashboard
+        public decimal GetTotalBudgetAppropriationsByIds(int fundId, int allotmentClassId, int fppId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Int32, fundId},
+                    new object[] { "@allotment_classes_id", DbType.Int32,allotmentClassId},
+                    new object[] { "@function_program_project_id", DbType.Int32, fppId}
+                };
+
+                string query = $"SELECT " +
+                    $"COALESCE(SUM(amount), 0) AS total_budget_appropriation " +
+                    $"FROM {tableName} " +
+                    $"WHERE funds_id = @funds_id " +
+                    $"AND allotment_classes_id = @allotment_classes_id " +
+                    $"AND function_program_project_id = @function_program_project_id;";
+
+                return Convert.ToDecimal(mySqlGenericCommands.ExecuteScalar(query, parameters));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
         #endregion Validations
 
     }

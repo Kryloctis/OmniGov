@@ -485,5 +485,34 @@ namespace ACC.Data
                 throw;
             }
         }
+
+
+        //Dashboards
+
+        public decimal GetTotalObligationsByIds(int fundId, int allotmentClassId, int fppId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Int32, fundId},
+                    new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId},
+                    new object[] { "@fpp_id", DbType.Int32, fppId}
+                };
+
+                string query = $"SELECT " +
+                    $"COALESCE(SUM(obligation_requested_amount), 0) AS total_obligations " +
+                    $"FROM {viewTableName} WHERE " +
+                    $"funds_id = @funds_id " +
+                    $"AND allotment_classes_id = @allotment_classes_id " +
+                    $"AND fpp_id = @fpp_id;";
+
+                return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
