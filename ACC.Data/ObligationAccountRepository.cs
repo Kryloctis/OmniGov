@@ -95,6 +95,21 @@ namespace ACC.Data
             }
         }
 
+        public int ObligationsRecordCount()
+        {
+            try
+            {
+                string query = $"SELECT COUNT(*) FROM lfsdb.obligation_account";
+
+                return Convert.ToInt32(_mySqlGenericCommands.ExecuteScalar(query));
+            }
+
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool Update(ObligationAccountModel entity)
         {
             throw new NotImplementedException();

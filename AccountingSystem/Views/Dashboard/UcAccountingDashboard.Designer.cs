@@ -107,7 +107,7 @@ namespace AccountingSystem.Views.Dashboard
             this.label42 = new System.Windows.Forms.Label();
             this.panel22 = new System.Windows.Forms.Panel();
             this.label39 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
+            this.lblObligationRecordCount = new System.Windows.Forms.Label();
             this.epFPP = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel21.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -993,7 +993,7 @@ namespace AccountingSystem.Views.Dashboard
             // 
             this.panel22.BackColor = System.Drawing.Color.White;
             this.panel22.Controls.Add(this.label39);
-            this.panel22.Controls.Add(this.label40);
+            this.panel22.Controls.Add(this.lblObligationRecordCount);
             this.panel22.Location = new System.Drawing.Point(9, 360);
             this.panel22.Name = "panel22";
             this.panel22.Size = new System.Drawing.Size(128, 137);
@@ -1011,18 +1011,18 @@ namespace AccountingSystem.Views.Dashboard
             this.label39.Text = "CAFOA";
             this.label39.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label40
+            // lblObligationRecordCount
             // 
-            this.label40.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblObligationRecordCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label40.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label40.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label40.Location = new System.Drawing.Point(2, 15);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(126, 40);
-            this.label40.TabIndex = 6;
-            this.label40.Text = "15";
-            this.label40.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblObligationRecordCount.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblObligationRecordCount.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblObligationRecordCount.Location = new System.Drawing.Point(2, 15);
+            this.lblObligationRecordCount.Name = "lblObligationRecordCount";
+            this.lblObligationRecordCount.Size = new System.Drawing.Size(126, 40);
+            this.lblObligationRecordCount.TabIndex = 6;
+            this.lblObligationRecordCount.Text = "15";
+            this.lblObligationRecordCount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // epFPP
             // 
@@ -1154,7 +1154,6 @@ namespace AccountingSystem.Views.Dashboard
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Panel panel22;
         private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.Label label40;
         internal System.Windows.Forms.Label lblPSAppropriations;
         internal System.Windows.Forms.Label lblPSAllotmentReleases;
         internal System.Windows.Forms.Label lblPSObligations;
@@ -1171,5 +1170,6 @@ namespace AccountingSystem.Views.Dashboard
         internal System.Windows.Forms.Label lblCOUnobligatedBalances;
         internal System.Windows.Forms.Label lblFEAppropriations;
         internal System.Windows.Forms.ErrorProvider epFPP;
+        internal System.Windows.Forms.Label lblObligationRecordCount;
     }
 }

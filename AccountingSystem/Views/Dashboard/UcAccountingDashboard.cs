@@ -35,6 +35,7 @@ namespace AccountingSystem.Views.Dashboard
                     tlpJournals.Visible = true;
 
                 LoadCardRecords();
+                LoadObligationRecordCount();
             }
         }
 
@@ -47,6 +48,14 @@ namespace AccountingSystem.Views.Dashboard
             return _errors.GenerateErrorMessage();
         }
 
+
+
+        private void LoadObligationRecordCount() 
+        {
+            int recordCount = Factory.ObligationAccountRepository().ObligationsRecordCount();
+
+            lblObligationRecordCount.Text = recordCount.ToString();
+        }
 
         internal void LoadFunds()
         {
