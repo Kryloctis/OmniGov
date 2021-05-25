@@ -105,7 +105,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             errorArray[3] = epReferenceNo.GetError(txtReferenceNo);
             errorArray[4] = epPayee.GetError(txtPayee);
             errorArray[5] = epExplanation.GetError(txtExplanation);
-            errorArray[6] = dataGridView1.Tag.ToString();
+            errorArray[6] = dataGridView1.Tag == null? string.Empty: dataGridView1.Tag.ToString();
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
