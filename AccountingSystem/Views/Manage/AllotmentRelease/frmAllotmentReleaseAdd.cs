@@ -72,7 +72,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             if (AddAllotmentRelease())
             {
-                Close();
+                uc.ResetForm();
                 ucAllotmentReleaseMain.panel1.Enabled = false;
                 ucAllotmentReleaseMain.dtDateIssued.Enabled = false;
             }

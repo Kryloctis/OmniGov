@@ -29,6 +29,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             ucAllotmentMain = ucAllotmentReleaseMain;
         }
 
+        internal void ResetForm() 
+        {
+            LoadAccounts();
+            nudAmount.Value = 0;
+        }
+
         internal string GetFormErrors()
         {
             var errorArray = new string[2];
@@ -38,30 +44,41 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
+        private Dictionary<string, decimal> ShowAmounts() 
+        {
+           
+            short year = Convert.ToInt16(nudYear.Value);
+
+            int generalLedgerAccountId = Convert.ToInt32(cmbxAccount.SelectedValue);
+
+            var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetViewRecord(fppID, othersFPPId, fundId, allotmentClassId, generalLedgerAccountId, dateIssued, year);
+
+            decimal appropriationAmount = budgetAppropriationRepo.Count == 0 || (Convert.ToByte(budgetAppropriationRepo["continuing"]) == 0 && dateIssued.Year > year) ? 0 : Convert.ToDecimal(budgetAppropriationRepo["amount"]);
+
+            decimal supplementalAppropriationAmount = budgetAppropriationRepo.Count == 0 || (Convert.ToByte(budgetAppropriationRepo["continuing"]) == 0 && dateIssued.Year > year) ? 0 : Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountByIdAndDateEntry(Convert.ToInt32(budgetAppropriationRepo["id"]), dateIssued);
+
+            decimal totalAllotmentReleaseAmount = budgetAppropriationRepo.Count == 0 || (Convert.ToByte(budgetAppropriationRepo["continuing"]) == 0 && dateIssued.Year > year) ? 0 : Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountById(Convert.ToInt32(budgetAppropriationRepo["id"]));
+
+
+            decimal totalAppropriation = appropriationAmount + supplementalAppropriationAmount;
+
+            decimal appropriationBalance = totalAppropriation - totalAllotmentReleaseAmount;
+
+            var record = new Dictionary<string, decimal>()
+            {
+                {"totalAppropriation", totalAppropriation},
+                {"appropriationBalance", appropriationBalance}
+            };
+
+            return record;
+        }
+
         private void DisplayBudgetAppropriationsDetails()
         {
             try
             {
-                short year = (short)nudYear.Value;
-
-                int generalLedgerAccountId = Convert.ToInt32(cmbxAccount.SelectedValue);
-
-                var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetViewRecord(fppID, othersFPPId, fundId, allotmentClassId, generalLedgerAccountId, dateIssued, year);
-
-                decimal appropriationAmount = budgetAppropriationRepo.Count == 0 ? 0 : Convert.ToDecimal(budgetAppropriationRepo["amount"]);
-
-                decimal supplementalAppropriationAmount = budgetAppropriationRepo.Count == 0 ? 0 : Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountByIdAndDateEntry(Convert.ToInt32(budgetAppropriationRepo["id"]), dateIssued);
-
-                decimal totalAllotmentReleaseAmount = budgetAppropriationRepo.Count == 0 ? 0 : Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountById(Convert.ToInt32(budgetAppropriationRepo["id"]));
-
-
-                decimal totalAppropriation = appropriationAmount + supplementalAppropriationAmount;
-
-                decimal appropriationBalance = totalAppropriation - totalAllotmentReleaseAmount;
-
-                txtAppropriation.Text = totalAppropriation.ToString("N2");
-                txtBalance.Text = appropriationBalance.ToString("N2");
-
+                txtAppropriation.Text = ShowAmounts()["totalAppropriation"].ToString("N2");
+                txtBalance.Text = ShowAmounts()["appropriationBalance"].ToString("N2");
             }
             catch (Exception ex)
             {
@@ -259,24 +276,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                short year = (short)nudYear.Value;
-
-                int generalLedgerAccountId = Convert.ToInt32(cmbxAccount.SelectedValue);
-
-                var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetViewRecord(fppID, othersFPPId, fundId, allotmentClassId, generalLedgerAccountId, dateIssued, year);
-
-                decimal appropriationAmount = budgetAppropriationRepo.Count == 0 ? 0 : Convert.ToDecimal(budgetAppropriationRepo["amount"]);
-
-                decimal supplementalAppropriationAmount = budgetAppropriationRepo.Count == 0 ? 0 : Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountByIdAndDateEntry(Convert.ToInt32(budgetAppropriationRepo["id"]), dateIssued);
-
-                decimal totalAllotmentReleaseAmount = budgetAppropriationRepo.Count == 0 ? 0 : Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountById(Convert.ToInt32(budgetAppropriationRepo["id"]));
-
-
-                decimal totalAppropriation = appropriationAmount + supplementalAppropriationAmount;
-
-                decimal appropriationBalance = totalAppropriation - totalAllotmentReleaseAmount;
-
-                if (numericUpDown.Value > appropriationBalance)
+                if (numericUpDown.Value > ShowAmounts()["appropriationBalance"])
                 {
                     ep.SetError(numericUpDown, "The amount you entered exceeds the appropriate balance.");
                     return true;
