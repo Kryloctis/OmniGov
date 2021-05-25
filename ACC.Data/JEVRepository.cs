@@ -250,10 +250,11 @@ namespace ACC.Data
                         new object[] { "@ref_no", DbType.String, entity.RefNo },
                         new object[] { "@payee", DbType.String, entity.Payee },
                         new object[] { "@explanation", DbType.String, entity.Explanation },
+                        new object[] { "@is_approved", DbType.Boolean, entity.IsApproved },
                         new object[] { "@created_by", DbType.Byte, entity.CreatedBy },
                     };
 
-                    string query = $"INSERT INTO {tableName} (funds_id, journals_id, jev_no, date_entry, ref_no, payee, explanation, created_by) VALUES (@funds_id, @journals_id, @jev_no, @date_entry, @ref_no, @payee, @explanation, @created_by);";
+                    string query = $"INSERT INTO {tableName} (funds_id, journals_id, jev_no, date_entry, ref_no, payee, explanation, is_approved, created_by) VALUES (@funds_id, @journals_id, @jev_no, @date_entry, @ref_no, @payee, @explanation, @is_approved, @created_by);";
 
                     // save and get the last inserted id
                     _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);

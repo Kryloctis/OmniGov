@@ -93,6 +93,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             jevModel.RefNo = uc.txtRefNo.Text.Trim();
             jevModel.Payee = uc.txtPayee.Text.Trim();
             jevModel.Explanation = uc.txtExplanation.Text.Trim();
+            jevModel.IsApproved = true;
 
             if (!isUpdate)
                 jevModel.CreatedBy = userId;

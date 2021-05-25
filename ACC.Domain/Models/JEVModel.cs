@@ -14,6 +14,7 @@ namespace ACC.Domain.Models
         public string RefNo { get; set; }
         public string Payee { get; set; }
         public string Explanation { get; set; }
+        public bool IsApproved { get; set; }
         public List<JEVAccountsModel> JEVAccountsModelList { get; set; }
         public byte CreatedBy { get; set; }
         public byte UpdatedBy { get; set; }
