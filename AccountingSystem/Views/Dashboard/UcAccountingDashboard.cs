@@ -20,7 +20,6 @@ namespace AccountingSystem.Views.Dashboard
             userDict = _userDict;
         }
 
-
         private void UcAccountingDashboard_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
@@ -29,12 +28,13 @@ namespace AccountingSystem.Views.Dashboard
                 LoadFPP();
                 Dock = DockStyle.Fill;
 
-                tlpJournals.Visible = false;
+                VisibilityJournalCardsCounter(false);
 
                 if (userDict["office"] == "Accounting" || userDict["office"] == "SysAdmin")
-                    tlpJournals.Visible = true;
+                    VisibilityJournalCardsCounter(true);
 
                 LoadCardRecords();
+                LoadJEVCounter();
             }
         }
 
@@ -46,7 +46,6 @@ namespace AccountingSystem.Views.Dashboard
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
-
 
         internal void LoadFunds()
         {
@@ -162,6 +161,38 @@ namespace AccountingSystem.Views.Dashboard
         private void cmbFPP_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(epFPP, cmbFPP);
+        }
+
+        private void LoadJEVCounter()
+        {
+            var generalJournalCount = Factory.JEVRepository().JevCounter(1);
+            var cashReceiptsJournalCount = Factory.JEVRepository().JevCounter(2);
+            var procurementReceivedJournalCount = Factory.JEVRepository().JevCounter(3);
+            var cashDisbursementJournalCount = Factory.JEVRepository().JevCounter(4);
+            var checkDisbursementJournalCount = Factory.JEVRepository().JevCounter(5);
+            var authorityToDebitJournalCount = Factory.JEVRepository().JevCounter(6);
+
+            lblGJCounter.Text = generalJournalCount.ToString();
+            lblCRJCounter.Text = cashReceiptsJournalCount.ToString();
+            lblPRJCounter.Text = procurementReceivedJournalCount.ToString();
+            lblCDJCounter.Text = cashDisbursementJournalCount.ToString();
+            lblCkDJCounter.Text = checkDisbursementJournalCount.ToString();
+            lblADADJCounter.Text = authorityToDebitJournalCount.ToString();
+        }
+
+        private void btnRefreshCounter_Click(object sender, EventArgs e)
+        {
+            LoadJEVCounter();
+        }
+
+        private void VisibilityJournalCardsCounter(bool visible)
+        {
+            pnlGJ.Visible = visible;
+            pnlCRJ.Visible = visible;
+            pnlADADJ.Visible = visible;
+            pnlCDJ.Visible = visible;
+            pnlCkDJ.Visible = visible;
+            pnlPRJ.Visible = visible;
         }
     }
 }

@@ -559,15 +559,17 @@ namespace ACC.Data
                     new object[] { "@journals_id", DbType.Int32, journalId },
                 };
 
-                string query = $"SELECT id FROM {tableName} WHERE is_approved = 1 AND journals_id = @journals_id";
-                _ = int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved = 1 AND journals_id = @journals_id GROUP BY journals_id";
+
+                if (string.IsNullOrWhiteSpace(_dbGenericCommands.ExecuteScalar(query, parameters)))
+                    return 0;
+                else
+                    return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
             }
             catch (Exception)
             {
                 throw;
             };
-
-            return 0;
         }
     }
 }
