@@ -2864,7 +2864,7 @@
                                   </Style>
                                 </TextRun>
                                 <TextRun>
-                                  <Value>=Fields!allotment_class_name.Value</Value>
+                                  <Value>=IIf(ReportItems!txtOthersFPPName.Value = "",Fields!allotment_class_name.Value,Fields!others_fpp_name.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -2958,9 +2958,8 @@
                               <Style>Solid</Style>
                             </Border>
                             <BottomBorder>
-                              <Width>1pt</Width>
+                              <Width>2pt</Width>
                             </BottomBorder>
-                            <BackgroundColor>#e2efda</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -2998,9 +2997,8 @@
                               <Style>Solid</Style>
                             </Border>
                             <BottomBorder>
-                              <Width>1pt</Width>
+                              <Width>2pt</Width>
                             </BottomBorder>
-                            <BackgroundColor>#e2efda</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -3038,9 +3036,8 @@
                               <Style>Solid</Style>
                             </Border>
                             <BottomBorder>
-                              <Width>1pt</Width>
+                              <Width>2pt</Width>
                             </BottomBorder>
-                            <BackgroundColor>#e2efda</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -3078,9 +3075,8 @@
                               <Style>Solid</Style>
                             </Border>
                             <BottomBorder>
-                              <Width>1pt</Width>
+                              <Width>2pt</Width>
                             </BottomBorder>
-                            <BackgroundColor>#e2efda</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -6017,9 +6013,6 @@
                                   </Visibility>
                                 </TablixMember>
                                 <TablixMember>
-                                  <Visibility>
-                                    <Hidden>=IIf(ReportItems!txtOthersFPPName.Value = "",true,false)</Hidden>
-                                  </Visibility>
                                   <KeepWithGroup>Before</KeepWithGroup>
                                 </TablixMember>
                               </TablixMembers>
@@ -6035,6 +6028,9 @@
                               <KeepWithGroup>Before</KeepWithGroup>
                             </TablixMember>
                             <TablixMember>
+                              <Visibility>
+                                <Hidden>=IIf(ReportItems!txtOthersFPPName.Value = "",true,false)</Hidden>
+                              </Visibility>
                               <KeepWithGroup>Before</KeepWithGroup>
                             </TablixMember>
                           </TablixMembers>
@@ -6118,7 +6114,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>=UCase(Parameters!paramSignatoryName.Value)</Value>
+                        <Value>MARY MAGDALYN T. REGANION, CPA</Value>
                         <Style>
                           <FontFamily>calibri</FontFamily>
                           <FontWeight>ExtraBold</FontWeight>
@@ -6149,9 +6145,13 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>=Parameters!paramSignatoryPosition.Value</Value>
+                        <Value>Municipal Accountant</Value>
                         <Style>
-                          <FontFamily>calibri</FontFamily>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Calibri</FontFamily>
+                          <FontSize>11pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>None</TextDecoration>
                         </Style>
                       </TextRun>
                     </TextRuns>
