@@ -19,7 +19,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             Helper.LoadFormIcon(this);
             Helper.DatagridDefaultStyle(dgJEV);
-            dgJEV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
         private void CheckedFund(string fundName)
@@ -231,7 +230,18 @@ namespace AccountingSystem.Views.Transactions.JEV
             HelperLoadRecords.JEVDatagridView(dtJEV, dgJEV);
         }
 
-        private void dgJEV_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void dgJEV_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgJEV.SelectedRows.Count == 1)
+            {
+                btnOK.Enabled = true;
+                return;
+            }
+
+            btnOK.Enabled = false;
+        }
+
+        private void dgJEV_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             LoadSelectedJEV();
         }
