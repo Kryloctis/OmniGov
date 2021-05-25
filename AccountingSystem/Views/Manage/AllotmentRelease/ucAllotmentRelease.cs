@@ -32,6 +32,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal void ResetForm() 
         {
             LoadAccounts();
+            DisplayBudgetAppropriationsDetails();
             nudAmount.Value = 0;
         }
 
@@ -148,6 +149,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
+                cmbxAccount.DataSource = null;
 
                 var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
 
