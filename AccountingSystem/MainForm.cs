@@ -151,6 +151,12 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Manage Accountable Forms"))
                 menuAccForm.Visible = false;
+
+            if (!Helper.HasPermission("Transaction Bank Deposits"))
+                menuDeposits.Visible = false; 
+            
+            if (!Helper.HasPermission("Report SAAOBB"))
+                menuSAAOBB.Visible = false;
         }
 
         private void LoadDashboard()
