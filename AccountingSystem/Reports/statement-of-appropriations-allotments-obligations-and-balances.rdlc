@@ -2801,10 +2801,13 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>=Parameters!paramSignatoryName.Value</Value>
+                        <Value>MARY MAGDALYN T. REGANION, CPA</Value>
                         <Style>
-                          <FontFamily>calibri</FontFamily>
-                          <FontWeight>ExtraBold</FontWeight>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Calibri</FontFamily>
+                          <FontSize>11pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                          <TextDecoration>None</TextDecoration>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -2832,9 +2835,13 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>=Parameters!paramSignatoryPosition.Value</Value>
+                        <Value>Municipal Accountant</Value>
                         <Style>
-                          <FontFamily>calibri</FontFamily>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Calibri</FontFamily>
+                          <FontSize>11pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>None</TextDecoration>
                         </Style>
                       </TextRun>
                     </TextRuns>
