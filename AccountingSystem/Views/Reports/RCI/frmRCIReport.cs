@@ -84,7 +84,7 @@ namespace AccountingSystem.Views.Reports.RCI
                     new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
                     new ReportParameter("paramSignatory", signatory)
                 };
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\check-issued.rdlc";
+                report.ReportPath = $"{Application.StartupPath}Reports\\check-issued.rdlc";
                 report.DataSources.Clear();
 
                 report.DataSources.Add(new ReportDataSource("dtRCI", DataTableRCI()));

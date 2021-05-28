@@ -46,6 +46,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             this.dtpMonth.Name = "dtpMonth";
             this.dtpMonth.Size = new System.Drawing.Size(175, 27);
             this.dtpMonth.TabIndex = 18;
+            this.dtpMonth.Visible = false;
             // 
             // label1
             // 
@@ -55,6 +56,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             this.label1.Size = new System.Drawing.Size(52, 20);
             this.label1.TabIndex = 17;
             this.label1.Text = "Month";
+            this.label1.Visible = false;
             // 
             // btnRetrieve
             // 
@@ -65,6 +67,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             this.btnRetrieve.TabIndex = 16;
             this.btnRetrieve.Text = "Retrieve";
             this.btnRetrieve.UseVisualStyleBackColor = true;
+            this.btnRetrieve.Visible = false;
             this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
             // 
             // panel1
@@ -72,10 +75,10 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Location = new System.Drawing.Point(15, 52);
+            this.panel1.Location = new System.Drawing.Point(15, 13);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1186, 820);
+            this.panel1.Size = new System.Drawing.Size(1186, 859);
             this.panel1.TabIndex = 19;
             // 
             // btnexcel
@@ -87,6 +90,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             this.btnexcel.TabIndex = 20;
             this.btnexcel.Text = "Generate Excel";
             this.btnexcel.UseVisualStyleBackColor = true;
+            this.btnexcel.Visible = false;
             this.btnexcel.Click += new System.EventHandler(this.btnexcel_Click);
             // 
             // frmPCReport

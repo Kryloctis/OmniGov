@@ -84,5 +84,7 @@ namespace AccountingSystem
         public static IAccountableRepository AccountableRepository() => new AccountableRepository(new MySqlGenericCommands());
         public static IPaymentCollectionRepository PaymentCollectionRepository() => new PaymentCollectionRepository(new MySqlGenericCommands());
         public static IBankDepositsRepository BankDepositsRepository() => new BankDepositsRepository(new MySqlGenericCommands());
+        public static ICollectorReportRepository CollectorReportRepository() => new CollectorReportRepository(new MySqlGenericCommands());
+        public static ICollectorReportPaymentRepository CollectorReportPaymentRepository() => new CollectorReportPaymentsRepository(new MySqlGenericCommands());
     }
 }

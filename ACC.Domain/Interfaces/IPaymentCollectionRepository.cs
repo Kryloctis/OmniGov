@@ -11,5 +11,8 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordByLedger(string month);
         DataTable GetRecordByExcel(string month);
         DataTable GetRecordsBySearch(string searchText);
+        DataTable GetRecordByLedger(int Id, string month);
+        decimal SumRecords();
+        decimal SumRecords(int Id, string month);
     }
 }

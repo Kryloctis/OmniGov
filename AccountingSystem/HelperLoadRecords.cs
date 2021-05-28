@@ -390,6 +390,24 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
+        #region Collector Report
+        internal static void CollectorReportDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.Columns.Clear();
+            datagrid.DataSource = dataTable;
+           
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].HeaderText = "Report No.";
+            datagrid.Columns[2].HeaderText = "Date";
+            datagrid.Columns[3].HeaderText = "Collector";
+            DataGridViewCheckBoxColumn chk = new DataGridViewCheckBoxColumn();
+            datagrid.Columns.Add(chk);
+            chk.HeaderText = "Print";
+
+
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        #endregion
         #region RCI
         internal static void RCIDatagridView(DataTable dataTable, DataGridView datagrid)
         {
