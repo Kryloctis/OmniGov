@@ -36,8 +36,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
                 // proceed to insert
                 var othersFPPModel = new OthersFPPModel()
                 {
-                    Name = uc.txtName.Text.Trim(),
-                    functionProgramProjectId = uc.functionProgramProjectID
+                    functionProgramProjectId = uc.functionProgramProjectID,
+                    othersFPPCode = uc.txtCode.Text.Trim(),
+                    othersFPPName = uc.txtName.Text.Trim()
                 };
 
                 return Factory.OthersFPPRepository().Insert(othersFPPModel);
@@ -61,8 +62,5 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             }
         }
 
-        private void frmOthersFunctionProgramProjectAdd_Load(object sender, EventArgs e)
-        {
-        }
     }
 }
