@@ -11,8 +11,11 @@ namespace ACC.Domain.Interfaces
         bool NameExist(string name);
         bool NameExist(int id, string name);
 
+        bool CodeExist(string otherFPPCode);
+        bool CodeExist(int id, string otherFPPCode);
+
         DataTable GetRecordsByFPPID(int id);
 
-        DataTable GetRecorsBySearchAndID(int id, string searchtxt);
+        DataTable GetRecorsByIDSearchCode(int id, string searchtxt);
     }
 }

@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 45);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 73);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(442, 30);
             this.flowLayoutPanel1.TabIndex = 0;
@@ -74,7 +74,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             // 
             this.ucOthersFunctionProgramProject1.Location = new System.Drawing.Point(12, 12);
             this.ucOthersFunctionProgramProject1.Name = "ucOthersFunctionProgramProject1";
-            this.ucOthersFunctionProgramProject1.Size = new System.Drawing.Size(427, 25);
+            this.ucOthersFunctionProgramProject1.Size = new System.Drawing.Size(427, 57);
             this.ucOthersFunctionProgramProject1.TabIndex = 1;
             // 
             // frmOthersFunctionProgramProjectAdd
@@ -84,7 +84,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(442, 75);
+            this.ClientSize = new System.Drawing.Size(442, 103);
             this.Controls.Add(this.ucOthersFunctionProgramProject1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -94,7 +94,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Other Function, Program & Project";
-            this.Load += new System.EventHandler(this.frmOthersFunctionProgramProjectAdd_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

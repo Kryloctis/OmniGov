@@ -670,11 +670,12 @@ namespace AccountingSystem
         internal static void OthersFPPDatagridView(DataTable dataTable, DataGridView dataGridView) 
         {
             dataGridView.DataSource = dataTable;
-            dataGridView.Columns[0].Visible = false;
-            dataGridView.Columns[1].Visible = false;
-            dataGridView.Columns[2].HeaderText = "Name";
-            dataGridView.Columns[3].Visible = false;
-            dataGridView.Columns[4].Visible = false;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["function_program_project_id"].Visible = false;
+            dataGridView.Columns["others_fpp_code"].HeaderText = "Code";
+            dataGridView.Columns["name"].HeaderText = "Name";
+            dataGridView.Columns["created_at"].Visible = false;
+            dataGridView.Columns["updated_at"].Visible = false;
             Helper.DatagridDefaultStyle(dataGridView, true);
         }
 

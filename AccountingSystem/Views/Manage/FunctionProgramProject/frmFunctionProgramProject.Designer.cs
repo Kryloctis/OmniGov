@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripBtnOthers = new System.Windows.Forms.ToolStripButton();
+            this.btnSubFPP = new System.Windows.Forms.ToolStripButton();
             this.txtSearch = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tabControlFunctionProgramProject = new System.Windows.Forms.TabControl();
@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.btnEdit,
             this.btnDelete,
             this.toolStripSeparator1,
-            this.toolStripBtnOthers,
+            this.btnSubFPP,
             this.txtSearch,
             this.toolStripLabel1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -126,16 +126,16 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
             // 
-            // toolStripBtnOthers
+            // btnSubFPP
             // 
-            this.toolStripBtnOthers.Image = global::AccountingSystem.Properties.Resources.others;
-            this.toolStripBtnOthers.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripBtnOthers.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripBtnOthers.Name = "toolStripBtnOthers";
-            this.toolStripBtnOthers.Size = new System.Drawing.Size(55, 47);
-            this.toolStripBtnOthers.Text = "Others...";
-            this.toolStripBtnOthers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripBtnOthers.Click += new System.EventHandler(this.toolStripBtnOthers_Click);
+            this.btnSubFPP.Image = global::AccountingSystem.Properties.Resources.control_tree_filled_28px;
+            this.btnSubFPP.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSubFPP.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSubFPP.Name = "btnSubFPP";
+            this.btnSubFPP.Size = new System.Drawing.Size(63, 47);
+            this.btnSubFPP.Text = "Sub FPP...";
+            this.btnSubFPP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSubFPP.Click += new System.EventHandler(this.toolStripBtnOthers_Click);
             // 
             // txtSearch
             // 
@@ -146,7 +146,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.txtSearch.Margin = new System.Windows.Forms.Padding(1, 0, 10, 0);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(219, 50);
-            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // toolStripLabel1
             // 
@@ -389,6 +388,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(874, 537);
             this.Name = "frmFunctionProgramProject";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Function, Program & Project...";
             this.Load += new System.EventHandler(this.frmFunctionProgramProject_Load);
@@ -440,6 +440,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 		private System.Windows.Forms.DataGridView dgFuntionalClassificationService;
 		private System.Windows.Forms.ComboBox cmbServiceName;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton toolStripBtnOthers;
+        internal System.Windows.Forms.ToolStripButton btnSubFPP;
     }
 }
