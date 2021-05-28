@@ -25,8 +25,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             try
             {
                 var uc = ucOthersFunctionProgramProject1;
-                var selectedRole = Factory.OthersFPPRepository().GetRecordByID(uc.othersFPPID);
-                uc.txtName.Text = selectedRole["name"];
+                var dicOthersFPPRecord = Factory.OthersFPPRepository().GetRecordByID(uc.othersFPPID);
+                uc.txtCode.Text = dicOthersFPPRecord["others_fpp_code"];
+                uc.txtName.Text = dicOthersFPPRecord["name"];
             }
             catch (Exception ex)
             {
@@ -49,8 +50,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
 
                 var othersFPPModel = new OthersFPPModel()
                 {
-                    Name = uc.txtName.Text.Trim(),
-                    Id = uc.othersFPPID
+                    Id = uc.othersFPPID,
+                    othersFPPCode = uc.txtCode.Text.Trim(),
+                    othersFPPName = uc.txtName.Text.Trim()
                 };
 
                 return Factory.OthersFPPRepository().Update(othersFPPModel);

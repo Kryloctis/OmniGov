@@ -16,6 +16,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         public frmFunctionProgramProject()
         {
             InitializeComponent();
+            txtSearch.TextChanged += new System.EventHandler(txtSearch_TextChanged);
         }
 
         private void dgFunctionalClassification_SelectedIndexChanged(object sender, EventArgs e)
@@ -23,15 +24,21 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassification"])
             {
                 LoadFunctionalClassificationRecords();
-                toolStripBtnOthers.Enabled = false;
+                toolStripSeparator1.Visible = false;
+                btnSubFPP.Visible = false;
             }
             else if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassificationService"])
             {
                 LoadFunctionalClassificationServicesRecords();
-                toolStripBtnOthers.Enabled = false;
+                toolStripSeparator1.Visible = false;
+                btnSubFPP.Visible = false;
             }
             else
+            {
                 LoadFunctionProgramProjectRecords();
+                toolStripSeparator1.Visible = true;
+                btnSubFPP.Visible = true;
+            }
         }
 
         private void ShowOthersFPP() 
@@ -256,6 +263,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                 Helper.MessageBoxError(ex.Message);
             }
         }
+
         internal void LoadFunctionalClassificationRecordsBySearch()
         {
 
@@ -270,6 +278,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 
         }
+
         internal void LoadFunctionalClassificationServicesRecordsBySearch()
         {
 
@@ -313,6 +322,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             else
                 LoadFunctionProgramProjectRecordsBySearch();
         }
+
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassification"])
@@ -390,12 +400,14 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             Helper.ShowRecordTimestamp(dgFunctionalProgramProject, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgFunctionalProgramProject, btnEdit, btnDelete);
 
-            if (dgFunctionalProgramProject.SelectedRows.Count < 1)
-                toolStripBtnOthers.Enabled = false;
+            if (dgFunctionalProgramProject.SelectedRows.Count == 1) 
+                btnSubFPP.Enabled = true;
+            else if (dgFunctionalProgramProject.SelectedRows.Count < 1)
+                btnSubFPP.Enabled = false;
             else
-                toolStripBtnOthers.Enabled = true;
-
+                btnSubFPP.Enabled = false;
         }
+
         public void LoadSectorNameComboBox()
         {
             try
@@ -412,6 +424,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
 
         }
+
         public void LoadServiceNameComboBox()
         {
             try

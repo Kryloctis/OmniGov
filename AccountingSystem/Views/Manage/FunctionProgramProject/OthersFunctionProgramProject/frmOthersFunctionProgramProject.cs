@@ -22,11 +22,13 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
         internal void LoadRecords() 
         {
             DataTable dtOthersFPP;
+            string searchTxt = toolStripTxtSearch.Text.Trim();
+
             try
             {
                 if (toolStripTxtSearch.Text.Length > 3 && !string.IsNullOrEmpty(toolStripTxtSearch.Text))
                 {
-                    dtOthersFPP = Factory.OthersFPPRepository().GetRecorsBySearchAndID(functionProgramProjectID, toolStripTxtSearch.Text.Trim());
+                    dtOthersFPP = Factory.OthersFPPRepository().GetRecorsByIDSearchCode(functionProgramProjectID, searchTxt);
                 }
                 else 
                 {
@@ -116,7 +118,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
 
         private void dgOthersFPP_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 3, 4 };
+            byte[] columnIndexTimestamp = {4, 5};
             Helper.ShowRecordTimestamp(dgOthersFPP, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgOthersFPP, toolStripBtnEdit, toolStripBtnDelete); 
         }
