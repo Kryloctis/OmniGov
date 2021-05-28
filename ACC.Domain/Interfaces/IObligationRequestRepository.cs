@@ -14,6 +14,8 @@ namespace ACC.Domain.Interfaces
 
         decimal TotalObligationRequestByYear(int fundsId, int fppId, int? otherFPPId, int allotmentClassId, int accountId, short year);
 
+        decimal TotalObligationRequestByDateYear(int fundId, int fppId, int? otherFPPId, int allotmentClassId, int accountId, DateTime dateRequested, short year);
+
         int GetLastInsertedID();
 
         bool Insert(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels);
@@ -25,5 +27,10 @@ namespace ACC.Domain.Interfaces
         Dictionary<string, string> GetViewRecordByObligationNo(string obligationNo);
 
         DataTable GetViewRecordsById(int Id);
+
+
+        //Dashboard
+        decimal GetTotalObligationsByIds(int fundId, int allotmentClassId, int fppId);
+
     }
 }

@@ -113,49 +113,6 @@ namespace ACC.Data
             return false;
         }
 
-        public decimal TotalObligationRequestByYear(int fundsId, int fppId, int? otherFPPId, int allotmentClassId, int accountId, short year)
-        {
-            try
-            {
-                try
-                {
-                    var parameters = new object[][]
-                    {
-                        new object[] { "@funds_id", DbType.Int32, fundsId },
-                        new object[] { "@fpp_id", DbType.Int32, fppId },
-                        new object[] { "@others_fpp_id", DbType.String, otherFPPId },
-                        new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId },
-                        new object[] { "@general_ledger_accounts_id", DbType.Int32, accountId},
-                        new object[] { "@year",DbType.Int16, year}
-                    };
-
-                    string query = $"SELECT " +
-                        $"COALESCE(SUM(obligation_requested_amount), 0) AS total_allotment_amount " +
-                        $"FROM {viewTableName} " +
-                        $"WHERE " +
-                        $"funds_id = @funds_id " +
-                        $"AND fpp_id = @fpp_id " +
-                        $"AND others_fpp_id <=> others_fpp_id " +
-                        $"AND allotment_classes_id = @allotment_classes_id " +
-                        $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
-                        $"AND YEAR(date_requested) = @year";
-
-
-                    return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-
-
 
         public Dictionary<string, string> GetViewRecordByObligationNo(string obligationNo)
         {
@@ -439,6 +396,120 @@ namespace ACC.Data
 
             }
             catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
+        public decimal TotalObligationRequestByYear(int fundsId, int fppId, int? otherFPPId, int allotmentClassId, int accountId, short year)
+        {
+            try
+            {
+                try
+                {
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@funds_id", DbType.Int32, fundsId },
+                        new object[] { "@fpp_id", DbType.Int32, fppId },
+                        new object[] { "@others_fpp_id", DbType.String, otherFPPId },
+                        new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId },
+                        new object[] { "@general_ledger_accounts_id", DbType.Int32, accountId},
+                        new object[] { "@year",DbType.Int16, year}
+                    };
+
+                    string query = $"SELECT " +
+                        $"COALESCE(SUM(obligation_requested_amount), 0) AS total_obligation_request_amount " +
+                        $"FROM {viewTableName} " +
+                        $"WHERE " +
+                        $"funds_id = @funds_id " +
+                        $"AND fpp_id = @fpp_id " +
+                        $"AND others_fpp_id <=> others_fpp_id " +
+                        $"AND allotment_classes_id = @allotment_classes_id " +
+                        $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
+                        $"AND YEAR(date_requested) = @year";
+
+
+                    return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public decimal TotalObligationRequestByDateYear(int fundId, int fppId, int? otherFPPId, int allotmentClassId, int accountId, DateTime dateRequested, short year)
+        {
+            try
+            {
+                try
+                {
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@funds_id", DbType.Int32, fundId },
+                        new object[] { "@fpp_id", DbType.Int32, fppId },
+                        new object[] { "@others_fpp_id", DbType.String, otherFPPId },
+                        new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId },
+                        new object[] { "@general_ledger_accounts_id", DbType.Int32, accountId},
+                        new object[] { "@date_requested", DbType.Date, dateRequested.Date },
+                        new object[] { "@year",DbType.Int16, year}
+                    };
+
+                    string query = $"SELECT " +
+                        $"COALESCE(SUM(obligation_requested_amount), 0) AS total_obligation_request_amount " +
+                        $"FROM {viewTableName} " +
+                        $"WHERE " +
+                        $"funds_id = @funds_id " +
+                        $"AND fpp_id = @fpp_id " +
+                        $"AND others_fpp_id <=> others_fpp_id " +
+                        $"AND allotment_classes_id = @allotment_classes_id " +
+                        $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
+                        $"AND date_requested <= @date_requested " +
+                        $"AND YEAR(date_requested) = @year";
+
+
+                    return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        //Dashboards
+
+        public decimal GetTotalObligationsByIds(int fundId, int allotmentClassId, int fppId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Int32, fundId},
+                    new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId},
+                    new object[] { "@fpp_id", DbType.Int32, fppId}
+                };
+
+                string query = $"SELECT " +
+                    $"COALESCE(SUM(obligation_requested_amount), 0) AS total_obligations " +
+                    $"FROM {viewTableName} WHERE " +
+                    $"funds_id = @funds_id " +
+                    $"AND allotment_classes_id = @allotment_classes_id " +
+                    $"AND fpp_id = @fpp_id;";
+
+                return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+            }
+            catch (Exception)
             {
                 throw;
             }

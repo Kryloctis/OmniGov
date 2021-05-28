@@ -171,8 +171,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             if (string.IsNullOrEmpty(cmbxAccount.Text))
             {
                 LoadAccounts();
+                GetTotalAllotmentRelease();
+                GetTotalAllotmentBalance();
             }
-            else if (ShowErrorAccountNameNotExist() && string.IsNullOrEmpty(cmbxAccount.Text))
+            else if ((ShowErrorAccountNameNotExist() && !string.IsNullOrEmpty(cmbxAccount.Text)) || string.IsNullOrEmpty(cmbxAccount.Text))
             {
                 txtAllotmentAmount.Text = "0.00";
                 txtBalance.Text = "0.00";
@@ -275,6 +277,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     cmbxAccount.DroppedDown = true;
 
                     cmbxAccount.SelectedValueChanged += new EventHandler(cmbxAccount_SelectedValueChanged);
+                    GetTotalAllotmentRelease();
+                    GetTotalAllotmentBalance();
 
                     Helper.ClearErrorComboBox(epAccount, cmbxAccount);
                 }

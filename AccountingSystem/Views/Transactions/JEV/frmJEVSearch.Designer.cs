@@ -85,7 +85,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.dgJEV.RowTemplate.Height = 25;
             this.dgJEV.Size = new System.Drawing.Size(906, 337);
             this.dgJEV.TabIndex = 6;
-            this.dgJEV.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgJEV_CellMouseDoubleClick);
+            this.dgJEV.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgJEV_RowHeaderMouseDoubleClick);
+            this.dgJEV.SelectionChanged += new System.EventHandler(this.dgJEV_SelectionChanged);
             // 
             // txtSearch
             // 

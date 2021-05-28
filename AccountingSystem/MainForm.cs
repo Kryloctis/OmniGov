@@ -15,6 +15,7 @@ using AccountingSystem.Views.Reports.Journals;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
 using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Reports.SAAOB;
+using AccountingSystem.Views.Reports.SAAOBB;
 using AccountingSystem.Views.Reports.Ledgers;
 using AccountingSystem.Views.Dashboard;
 using AccountingSystem.Views.Reports.RCI;
@@ -44,6 +45,7 @@ namespace AccountingSystem
             menuReportPRJ.Click += new EventHandler(MenuReportProcurementsReceivedJournal_Click);
             menuReportADADJ.Click += new EventHandler(MenuReportADADisbursementsJournal_Click);
             menuSAAOB.Click += new EventHandler(MenuSAAOB_Click);
+            menuSAAOBB.Click += new EventHandler(MenuSAAOBB_Click);
             menuGeneralLedgerReport.Click += new EventHandler(MenuGeneralLedgerReport_Click);
             btnJournalEntry.Click += new EventHandler(BtnJournalEntry_Click);
             btnObligationRequest.Click += new EventHandler(BtnObligationRequest_Click);
@@ -51,10 +53,12 @@ namespace AccountingSystem
             btnRCI.Click += new EventHandler(BtnRCI_Click);
             menuLogout.Click += new EventHandler(menuLogout_Click);
             menuExitApp.Click += new EventHandler(menuExitApp_Click);
+            menuSubsidiaryLedgerReport.Click += new EventHandler(menuSubsidiaryLedgerReport_Click);
 
             userDict = Helper.LoggedInUserData();
             loginForm = _loginForm;
         }
+
 
         private void LoadLoggedInUser()
         {
@@ -148,6 +152,12 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Manage Accountable Forms"))
                 menuAccForm.Visible = false;
+
+            if (!Helper.HasPermission("Transaction Bank Deposits"))
+                menuDeposits.Visible = false; 
+            
+            if (!Helper.HasPermission("Report SAAOBB"))
+                menuSAAOBB.Visible = false;
         }
 
         private void LoadDashboard()
@@ -156,12 +166,10 @@ namespace AccountingSystem
             {
                 case "Budget":
                 case "Accounting":
+                case "SysAdmin":
                     panel1.Controls.Add(new UcAccountingDashboard(Helper.LoggedInUserData()));
                     break;
                 case "Treasury":
-
-                    break;
-                case "Assessor":
 
                     break;
                 default:
@@ -172,7 +180,6 @@ namespace AccountingSystem
         private void MainForm_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            menuSubsidiaryLedgerReport.Enabled = false;
             LoadLoggedInUser();
             ValidatePermissions();
             LoadDashboard();
@@ -267,6 +274,11 @@ namespace AccountingSystem
             _ = new frmSAAOB().ShowDialog();
         }
 
+        private void MenuSAAOBB_Click(object sender, EventArgs e)
+        {
+            _ = new frmSAAOBB().ShowDialog();
+        }
+
         private void MenuGeneralLedgerReport_Click(object sender, EventArgs e)
         {
             _ = new frmGeneralLedgerReport().ShowDialog();
@@ -340,6 +352,11 @@ namespace AccountingSystem
         private void menuDeposits_Click(object sender, EventArgs e)
         {
             _ = new frmBankDeposits().ShowDialog();
+        }
+
+        private void menuSubsidiaryLedgerReport_Click(object sender, EventArgs e)
+        {
+            _ = new frmSubsidiaryLedgerReport().ShowDialog();
         }
     }
 }

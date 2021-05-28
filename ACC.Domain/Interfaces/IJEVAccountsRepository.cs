@@ -12,7 +12,7 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecordsByFundJournalDate(byte fundId, byte journalId, DateTime dateEntry);
 
-        DataTable GetViewRecordsByFundAndGeneralLedger(byte fundId, ushort generalLedgerId);
+        DataTable GetViewRecordsByFundAndGeneralLedger(byte fundId, ushort generalLedgerId, short year);
 
         bool DeleteByJevId(int jevId);
 

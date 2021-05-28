@@ -165,8 +165,6 @@ namespace ACC.Data
             }
         }
 
-       
-
         public bool IdExist(int id)
         {
             throw new NotImplementedException();

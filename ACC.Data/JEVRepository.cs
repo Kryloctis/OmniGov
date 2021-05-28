@@ -250,10 +250,11 @@ namespace ACC.Data
                         new object[] { "@ref_no", DbType.String, entity.RefNo },
                         new object[] { "@payee", DbType.String, entity.Payee },
                         new object[] { "@explanation", DbType.String, entity.Explanation },
+                        new object[] { "@is_approved", DbType.Boolean, entity.IsApproved },
                         new object[] { "@created_by", DbType.Byte, entity.CreatedBy },
                     };
 
-                    string query = $"INSERT INTO {tableName} (funds_id, journals_id, jev_no, date_entry, ref_no, payee, explanation, created_by) VALUES (@funds_id, @journals_id, @jev_no, @date_entry, @ref_no, @payee, @explanation, @created_by);";
+                    string query = $"INSERT INTO {tableName} (funds_id, journals_id, jev_no, date_entry, ref_no, payee, explanation, is_approved, created_by) VALUES (@funds_id, @journals_id, @jev_no, @date_entry, @ref_no, @payee, @explanation, @is_approved, @created_by);";
 
                     // save and get the last inserted id
                     _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
@@ -514,7 +515,7 @@ namespace ACC.Data
                     new object[] { "@jev_no", DbType.String, jevNo},
                 };
 
-                string query = $"SELECT id, funds_id, fund_code, fund_name, journals_id, journal_name, is_special, jev_no, date_entry, ref_no, payee, explanation, created_at, created_by, created_by_name, updated_at, updated_by, updated_by_name FROM {viewTableName} WHERE jev_no = @jev_no";
+                string query = $"SELECT id, funds_id, fund_code, fund_name, journals_id, journal_name, is_special, jev_no, date_entry, ref_no, payee, explanation, created_at, created_by, created_by_name, updated_at, updated_by, updated_by_name FROM {viewTableName} WHERE is_approved = 1 AND jev_no = @jev_no";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -548,6 +549,28 @@ namespace ACC.Data
             }
 
             return record;
+        }
+
+        public int JevCounter(byte journalId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@journals_id", DbType.Int32, journalId },
+                };
+
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved = 1 AND journals_id = @journals_id GROUP BY journals_id";
+
+                if (string.IsNullOrWhiteSpace(_dbGenericCommands.ExecuteScalar(query, parameters)))
+                    return 0;
+                else
+                    return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
+            }
+            catch (Exception)
+            {
+                throw;
+            };
         }
     }
 }

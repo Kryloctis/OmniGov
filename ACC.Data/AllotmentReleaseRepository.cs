@@ -299,8 +299,6 @@ namespace ACC.Data
 
 
 
-        // For Obligation Request Module
-
         public decimal GetTotalAllotmentReleaseByDateYear(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, DateTime dateIssued, short year)
         {
             try
@@ -367,5 +365,60 @@ namespace ACC.Data
             }
         }
 
+
+
+        public decimal GetViewTotalAllotmentReleaseByIdDateYear(int budgetAppropriationId, DateTime dateIssued, short year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId },
+                    new object[] { "@allotment_release_date_issued", DbType.Date, dateIssued.Date },
+                    new object[] { "@year", DbType.Int16, year}
+                };
+
+                string query = $"SELECT COALESCE " +
+                    $"(SUM(allotment_release_amount), 0) AS total_allotment_amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE budget_appropriations_id = @budget_appropriations_id " +
+                    $"AND allotment_release_date_issued <= @allotment_release_date_issued " +
+                    $"AND budget_appropriations_year = @year";
+
+                return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        //Dashboard
+        public decimal GetTotalAllotmentReleaseByIds(int fundId, int allotmentClassId, int fppId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@fund_id", DbType.Int32, fundId},
+                    new object[] { "@allotment_class_id", DbType.Int32,allotmentClassId},
+                    new object[] { "@fpp_id", DbType.Int32, fppId}
+                };
+
+                string query = $"SELECT " +
+                    $"COALESCE(SUM(allotment_release_amount), 0) AS total_allotement_release " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE fund_id = @fund_id " +
+                    $"AND allotment_class_id = @allotment_class_id " +
+                    $"AND fpp_id = @fpp_id";
+
+                return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -12,8 +12,6 @@ namespace ACC.Domain.Interfaces
 
         Dictionary<string, string> GetViewRecordByID(int budgetAppId);
 
-        DataTable GetViewRecordsSAAOB(int fppID, short year);
-
         Dictionary<string, string> GetViewRecord(int fppId, int? othersFPPId, int fundsId, int allotmentClassId, int generalLedgerAccountId, DateTime dateEntry, short year);
 
 
@@ -23,11 +21,13 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetHeaderOthersFPP(int fppID, int allotment_classes_id, int funds_id, short year);
 
+        //Report
+        DataTable GetViewRecordsByFundIdDateCurrentYear(int fundId, DateTime date, short year);
 
-        DataTable GetViewRecords();
+        DataTable GetViewRecordsByFundIdDate(int fundId, DateTime date);
 
 
-        #region Validations
+       //Validations
 
         bool BudgetAppropriationExist(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int generalLedgerAccountId, short year);
 
@@ -37,7 +37,8 @@ namespace ACC.Domain.Interfaces
 
         bool BudgetAppropriationContinuing(int id, int fundId, int fppId, int? othersFPPId, int allotmentClassId, int generalLedgerAccountId);
 
-        #endregion Validations
 
+        //Dashboard 
+        decimal GetTotalBudgetAppropriationsByIds(int fundId, int allotmentClassId, int fppId);
     }
 }
