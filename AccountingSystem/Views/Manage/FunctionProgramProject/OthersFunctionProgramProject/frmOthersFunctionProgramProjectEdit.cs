@@ -13,6 +13,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
 {
     public partial class frmOthersFunctionProgramProjectEdit : Form
     {
+
         private frmOthersFunctionProgramProject _frmOthersFunctionProgramProject;
         public frmOthersFunctionProgramProjectEdit(frmOthersFunctionProgramProject frmOthersFunctionProgramProject)
         {
@@ -66,11 +67,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
             if (UpdateData()) 
             {
                 _frmOthersFunctionProgramProject.LoadRecords();
                 Helper.MessageBoxSuccess("Update has been saved.");
+                Close();
             }
         }
 
@@ -78,5 +79,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
         {
             LoadSelected();
         }
+
     }
 }
