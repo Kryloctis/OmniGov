@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             }
             else
             {
-                LoadFunctionProgramProjectRecords();
+                LoadFPP();
                 toolStripSeparator1.Visible = true;
                 btnSubFPP.Visible = true;
             }
@@ -80,23 +80,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
         }
 
-
-        internal void LoadFunctionProgramProjectRecordsByGroup()
-        {
-
-            try
-            {
-                txtSearch.Clear();
-                byte id = Convert.ToByte(cmbServiceName.SelectedValue);
-                var dtfunctionProgramProjectRepository = Factory.FunctionProgramProjectRepository().GetViewRecordsByServiceNameId(id);
-                HelperLoadRecords.FunctionProjectProgramDatagridView(dtfunctionProgramProjectRepository, dgFunctionalProgramProject);
-
-                lblRecordCount.Text = dgFunctionalProgramProject.Rows.Count.ToString();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-
-        }
-
         internal void LoadFunctionalClassificationServicesRecords()
         {
             try
@@ -112,6 +95,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        //FPP Datagrid
         internal void LoadFunctionProgramProjectRecords()
         {
             try
@@ -129,6 +113,72 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        internal void LoadFunctionProgramProjectRecordsByGroup()
+        {
+            try
+            {
+                txtSearch.Clear();
+                byte id = Convert.ToByte(cmbServiceName.SelectedValue);
+                var dtfunctionProgramProjectRepository = Factory.FunctionProgramProjectRepository().GetViewRecordsByServiceNameId(id);
+                HelperLoadRecords.FunctionProjectProgramDatagridView(dtfunctionProgramProjectRepository, dgFunctionalProgramProject);
+
+                lblRecordCount.Text = dgFunctionalProgramProject.Rows.Count.ToString();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+
+        public void LoadServiceNameComboBox()
+        {
+            try
+            {
+                cmbServiceName.SelectedValueChanged -= new EventHandler(CmbServiceName_SelectedValueChanged);
+                DataTable dtServiceName = new DataTable();
+
+                dtServiceName.Columns.Add("id");
+                dtServiceName.Columns.Add("service_name");
+
+                dtServiceName.Rows.Add(0, "All");
+
+                foreach (DataRow item in Factory.FunctionalClassificationServiceRepository().GetRecords().Rows)
+                {
+                    var items = new object[]
+                    {
+                       item["id"],
+                       item["service_name"]
+                    };
+
+                    dtServiceName.Rows.Add(items);
+                };
+
+                HelperLoadRecords.ServicesNameComboBox(dtServiceName, cmbServiceName, "service_name", "id");
+                cmbServiceName.SelectedValueChanged += new EventHandler(CmbServiceName_SelectedValueChanged);
+                //  byte id = Convert.ToByte(cmbSectorName.SelectedValue);
+                // txtCode.Text = Convert.ToString(id);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        internal void LoadFPP()
+        {
+            if (Convert.ToInt32(cmbServiceName.SelectedValue) == 0)
+            {
+                LoadFunctionProgramProjectRecords();
+            }
+            else
+                LoadFunctionProgramProjectRecordsByGroup();
+        }
+
+        private void CmbServiceName_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadFPP();
+        }
+
+   
+
         private void frmFunctionProgramProject_Load(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Normal;
@@ -141,12 +191,12 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             LoadSectorNameComboBox();
             LoadFunctionalClassificationServicesRecordsByGroup();
             LoadServiceNameComboBox();
-            LoadFunctionProgramProjectRecords();
 
+            LoadFPP();
             LoadFunctionalClassificationRecords();
 
-
         }
+
 
         private void DeleteFunctionalClassificationRecords()
         {
@@ -245,7 +295,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
                         var functionProgramProjectRepository = Factory.FunctionProgramProjectRepository();
                         _ = functionProgramProjectRepository.Delete(functionProgramProjectModelList);
-                        LoadFunctionProgramProjectRecords();
+                        LoadFunctionProgramProjectRecordsByGroup();
                     }
                 }
             }
@@ -425,31 +475,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
         }
 
-        public void LoadServiceNameComboBox()
-        {
-            try
-            {
-                DataTable dtServiceName = Factory.FunctionalClassificationServiceRepository().GetRecords();
-                HelperLoadRecords.ServicesNameComboBox(dtServiceName, cmbServiceName, "service_name", "id");
-                //  byte id = Convert.ToByte(cmbSectorName.SelectedValue);
-                // txtCode.Text = Convert.ToString(id);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-
-
-        }
+     
 
         private void btnLoadAll_Click(object sender, EventArgs e)
         {
             LoadFunctionalClassificationServicesRecords();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            LoadFunctionProgramProjectRecords();
         }
 
         private void cmbSectorName_SelectionChangeCommitted_2(object sender, EventArgs e)
@@ -464,11 +494,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             Helper.EnableDisableToolStripButtons(dgFuntionalClassificationService, btnEdit, btnDelete);
         }
        
-		private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
-		{
-            LoadFunctionProgramProjectRecordsByGroup();
-        }
-
         private void dgFunctionalProgramProject_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             ShowOthersFPP();

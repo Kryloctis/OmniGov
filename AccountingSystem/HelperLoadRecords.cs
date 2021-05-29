@@ -555,6 +555,7 @@ namespace AccountingSystem
             comboBox1.DataSource = dataTable;
             comboBox1.DisplayMember = displayMember1;
             comboBox1.ValueMember = valueMember1;
+            comboBox1.DropDownHeight = 300;
 
             if (comboBox1.DropDownStyle == ComboBoxStyle.DropDown)
             {
@@ -566,6 +567,7 @@ namespace AccountingSystem
                 comboBox1.AutoCompleteSource = AutoCompleteSource.CustomSource;
             }
         }
+
         #endregion
 
         #region Allotment Classes

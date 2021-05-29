@@ -78,7 +78,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Function Program Project has been saved.");
-                _frmFunctionProgramProject.LoadFunctionProgramProjectRecords();
+                _frmFunctionProgramProject.LoadFPP();
                
             }
         }

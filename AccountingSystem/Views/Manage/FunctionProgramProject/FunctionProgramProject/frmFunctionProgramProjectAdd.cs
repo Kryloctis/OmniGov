@@ -6,11 +6,13 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
 {
     public partial class frmFunctionProgramProjectAdd : Form
     {
+        private ucFunctionProgramProject uc;
         private frmFunctionProgramProject _frmFunctionProgramProject;
         public frmFunctionProgramProjectAdd(frmFunctionProgramProject frmFunctionProgramProject)
         {
             InitializeComponent();
             _frmFunctionProgramProject = frmFunctionProgramProject;
+            uc = ucFunctionProgramProject1;
         }
      
 
@@ -55,7 +57,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             {
                 Helper.MessageBoxSuccess("Function Program Project has been saved.");
                 ucFunctionProgramProject1.ResetForm();
-                _frmFunctionProgramProject.LoadFunctionProgramProjectRecords();
+                _frmFunctionProgramProject.cmbServiceName.SelectedValue = 0;
             }
         }
     }
