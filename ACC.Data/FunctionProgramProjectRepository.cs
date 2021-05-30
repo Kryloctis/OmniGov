@@ -31,7 +31,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT functional_classification_services_id,fpp_code, fpp_name, created_at, updated_at FROM {tableName} WHERE id = @id";
+                string query = $"SELECT functional_classification_services_id, fpp_code, fpp_name, is_special, created_at, updated_at FROM {tableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -41,8 +41,9 @@ namespace ACC.Data
                     record.Add("functional_classification_services_id", reader.Rows[0][0].ToString());
                     record.Add("fpp_code", reader.Rows[0][1].ToString());
                     record.Add("fpp_name", reader.Rows[0][2].ToString());
-                    record.Add("created_at", reader.Rows[0][3].ToString());
-                    record.Add("updated_at", reader.Rows[0][4].ToString());
+                    record.Add("is_special", reader.Rows[0][3].ToString());
+                    record.Add("created_at", reader.Rows[0][4].ToString());
+                    record.Add("updated_at", reader.Rows[0][5].ToString());
                 }
             }
             catch (Exception)
@@ -111,12 +112,13 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                new object[] { "@functional_classification_services_id", DbType.String, entity.functionalClassificationServiceId},
-                new object[] { "@fpp_code", DbType.String, entity.FppCode},
-                new object[] { "@fpp_name", DbType.String, entity.FppName},
+                    new object[] { "@functional_classification_services_id", DbType.String, entity.functionalClassificationServiceId},
+                    new object[] { "@fpp_code", DbType.String, entity.FppCode},
+                    new object[] { "@fpp_name", DbType.String, entity.FppName},
+                    new object[] { "@is_special", DbType.Boolean, entity.IsSpecial}
                 };
 
-                string query = $"INSERT INTO {tableName} (functional_classification_services_id, fpp_code, fpp_name) VALUES (@functional_classification_services_id,@fpp_code, @fpp_name)";
+                string query = $"INSERT INTO {tableName} (functional_classification_services_id, fpp_code, fpp_name, is_special) VALUES (@functional_classification_services_id,@fpp_code, @fpp_name, @is_special)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -134,10 +136,11 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Byte, entity.Id},
                     new object[] { "@functional_classification_services_id", DbType.String, entity.functionalClassificationServiceId},
                     new object[] { "@fpp_code", DbType.String, entity.FppCode},
-                     new object[] { "@fpp_name", DbType.String, entity.FppName},
+                    new object[] { "@fpp_name", DbType.String, entity.FppName},
+                    new object[] { "@is_special", DbType.Boolean, entity.IsSpecial}
                 };
 
-                string query = $"UPDATE {tableName} SET functional_classification_services_id = @functional_classification_services_id, fpp_code = @fpp_code, fpp_name = @fpp_name WHERE id = @id";
+                string query = $"UPDATE {tableName} SET functional_classification_services_id = @functional_classification_services_id, fpp_code = @fpp_code, fpp_name = @fpp_name, is_special = @is_special WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)

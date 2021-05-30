@@ -32,26 +32,22 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             this.components = new System.ComponentModel.Container();
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtCode = new System.Windows.Forms.TextBox();
-            this.cmbServiceName = new System.Windows.Forms.ComboBox();
+            this.cmbFunctionalClassificationService = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtServiceId = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.epServiceName = new System.Windows.Forms.ErrorProvider(this.components);
             this.epName = new System.Windows.Forms.ErrorProvider(this.components);
             this.epCode = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epServiceId = new System.Windows.Forms.ErrorProvider(this.components);
+            this.chckboxSpecial = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.epServiceName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epCode)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epServiceId)).BeginInit();
             this.SuspendLayout();
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(97, 57);
-            this.txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtName.Location = new System.Drawing.Point(97, 63);
             this.txtName.MaxLength = 99;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(324, 23);
@@ -61,8 +57,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // 
             // txtCode
             // 
-            this.txtCode.Location = new System.Drawing.Point(97, 32);
-            this.txtCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtCode.Location = new System.Drawing.Point(97, 34);
             this.txtCode.MaxLength = 4;
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(324, 23);
@@ -70,22 +65,23 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             this.txtCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtCode_Validating);
             this.txtCode.Validated += new System.EventHandler(this.txtCode_Validated);
             // 
-            // cmbServiceName
+            // cmbFunctionalClassificationService
             // 
-            this.cmbServiceName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbServiceName.FormattingEnabled = true;
-            this.cmbServiceName.Location = new System.Drawing.Point(97, 6);
-            this.cmbServiceName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbServiceName.Name = "cmbServiceName";
-            this.cmbServiceName.Size = new System.Drawing.Size(324, 23);
-            this.cmbServiceName.TabIndex = 9;
-            this.cmbServiceName.SelectionChangeCommitted += new System.EventHandler(this.cmbServiceName_SelectionChangeCommitted);
-            this.cmbServiceName.Validated += new System.EventHandler(this.cmbServiceName_Validated);
+            this.cmbFunctionalClassificationService.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFunctionalClassificationService.FormattingEnabled = true;
+            this.cmbFunctionalClassificationService.Location = new System.Drawing.Point(97, 6);
+            this.cmbFunctionalClassificationService.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbFunctionalClassificationService.Name = "cmbFunctionalClassificationService";
+            this.cmbFunctionalClassificationService.Size = new System.Drawing.Size(324, 23);
+            this.cmbFunctionalClassificationService.TabIndex = 9;
+            this.cmbFunctionalClassificationService.SelectionChangeCommitted += new System.EventHandler(this.cmbServiceName_SelectionChangeCommitted);
+            this.cmbFunctionalClassificationService.Validating += new System.ComponentModel.CancelEventHandler(this.cmbFunctionalClassificationService_Validating);
+            this.cmbFunctionalClassificationService.Validated += new System.EventHandler(this.cmbFunctionalClassificationService_Validated);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 57);
+            this.label3.Location = new System.Drawing.Point(9, 66);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(39, 15);
             this.label3.TabIndex = 8;
@@ -94,7 +90,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 34);
+            this.label2.Location = new System.Drawing.Point(9, 37);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 15);
             this.label2.TabIndex = 7;
@@ -109,28 +105,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             this.label1.TabIndex = 6;
             this.label1.Text = "Service Name";
             // 
-            // txtServiceId
-            // 
-            this.txtServiceId.Location = new System.Drawing.Point(98, 84);
-            this.txtServiceId.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtServiceId.MaxLength = 99;
-            this.txtServiceId.Name = "txtServiceId";
-            this.txtServiceId.Size = new System.Drawing.Size(324, 23);
-            this.txtServiceId.TabIndex = 13;
-            this.txtServiceId.Visible = false;
-            this.txtServiceId.Validating += new System.ComponentModel.CancelEventHandler(this.txtServiceId_Validating);
-            this.txtServiceId.Validated += new System.EventHandler(this.txtServiceId_Validated);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 84);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 15);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Service ID";
-            this.label4.Visible = false;
-            // 
             // epServiceName
             // 
             this.epServiceName.ContainerControl = this;
@@ -143,29 +117,33 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // 
             this.epCode.ContainerControl = this;
             // 
-            // epServiceId
+            // chckboxSpecial
             // 
-            this.epServiceId.ContainerControl = this;
+            this.chckboxSpecial.AutoSize = true;
+            this.chckboxSpecial.Location = new System.Drawing.Point(97, 92);
+            this.chckboxSpecial.Name = "chckboxSpecial";
+            this.chckboxSpecial.Size = new System.Drawing.Size(63, 19);
+            this.chckboxSpecial.TabIndex = 14;
+            this.chckboxSpecial.Text = "Special";
+            this.chckboxSpecial.UseVisualStyleBackColor = true;
             // 
             // ucFunctionProgramProject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.txtServiceId);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.chckboxSpecial);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.txtCode);
-            this.Controls.Add(this.cmbServiceName);
+            this.Controls.Add(this.cmbFunctionalClassificationService);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "ucFunctionProgramProject";
-            this.Size = new System.Drawing.Size(445, 111);
+            this.Size = new System.Drawing.Size(445, 116);
             this.Load += new System.EventHandler(this.ucFunctionProgramProject_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epServiceName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epCode)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epServiceId)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,15 +153,13 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
 
         internal System.Windows.Forms.TextBox txtName;
         internal System.Windows.Forms.TextBox txtCode;
-        internal System.Windows.Forms.ComboBox cmbServiceName;
+        internal System.Windows.Forms.ComboBox cmbFunctionalClassificationService;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        internal System.Windows.Forms.TextBox txtServiceId;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ErrorProvider epServiceName;
         private System.Windows.Forms.ErrorProvider epName;
         private System.Windows.Forms.ErrorProvider epCode;
-        private System.Windows.Forms.ErrorProvider epServiceId;
+        internal System.Windows.Forms.CheckBox chckboxSpecial;
     }
 }

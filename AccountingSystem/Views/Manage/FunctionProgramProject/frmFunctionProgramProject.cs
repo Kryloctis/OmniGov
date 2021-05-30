@@ -295,7 +295,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
                         var functionProgramProjectRepository = Factory.FunctionProgramProjectRepository();
                         _ = functionProgramProjectRepository.Delete(functionProgramProjectModelList);
-                        LoadFunctionProgramProjectRecordsByGroup();
+                        LoadFPP();
                     }
                 }
             }

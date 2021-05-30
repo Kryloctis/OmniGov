@@ -8,20 +8,18 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
     public partial class ucFunctionProgramProject : UserControl
     {
         internal byte FppID = 0;
-        IFunctionProgramProjectRepository _functionProgramProjectRepository;
         public ucFunctionProgramProject()
         {
             InitializeComponent();
         }
 
-      
 
         internal string GetFormErrors()
         {
             var errorArray = new string[3];
             errorArray[0] = epCode.GetError(txtCode);
             errorArray[1] = epName.GetError(txtName);
-            errorArray[2] = epName.GetError(txtServiceId);
+            errorArray[2] = epServiceName.GetError(cmbFunctionalClassificationService);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -34,9 +32,40 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             txtName.Clear();
         }
 
-        private void cmbServiceName_Validated(object sender, EventArgs e)
+        private bool FunctionClassificationServiceNameNotExist() 
         {
-            Helper.ClearErrorComboBox(epServiceName, cmbServiceName);
+            try
+            {
+                string functionClassificationServiceName = cmbFunctionalClassificationService.Text;
+                bool functionClassificationServiceNameExist = Factory.FunctionalClassificationServiceRepository().NameExist(functionClassificationServiceName);
+
+
+                if (!functionClassificationServiceNameExist)
+                {
+                    epServiceName.SetError(cmbFunctionalClassificationService, "Functional Classification Name you selected doesn't exist on your record.");
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void cmbFunctionalClassificationService_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbFunctionalClassificationService.Text))
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epServiceName, cmbFunctionalClassificationService, "Functional Classification Service");
+            else
+                e.Cancel = FunctionClassificationServiceNameNotExist();
+        }
+
+
+        private void cmbFunctionalClassificationService_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epServiceName, cmbFunctionalClassificationService);
         }
 
         private void txtCode_Validated(object sender, EventArgs e)
@@ -55,9 +84,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             try
             {
                 DataTable dtServiceName = Factory.FunctionalClassificationServiceRepository().GetRecords();
-                HelperLoadRecords.ServicesNameComboBox(dtServiceName, cmbServiceName, "service_name", "id");
-                byte id = Convert.ToByte(cmbServiceName.SelectedValue);
-                txtServiceId.Text = Convert.ToString(id);
+                HelperLoadRecords.ServicesNameComboBox(dtServiceName, cmbFunctionalClassificationService, "service_name", "id");
+                byte id = Convert.ToByte(cmbFunctionalClassificationService.SelectedValue);
             }
             catch (Exception ex)
             {
@@ -76,15 +104,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "name");
         }
 
-        private void txtServiceId_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epServiceId, txtServiceId);
-        }
-
-        private void txtServiceId_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epServiceId, txtServiceId, "code");
-        }
 
         private void ucFunctionProgramProject_Load(object sender, EventArgs e)
         {
@@ -95,13 +114,13 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
         {
             try
             {
-                byte id = Convert.ToByte(cmbServiceName.SelectedValue);
-                txtServiceId.Text = Convert.ToString(id);
+                byte id = Convert.ToByte(cmbFunctionalClassificationService.SelectedValue);
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
         }
+
     }
 }

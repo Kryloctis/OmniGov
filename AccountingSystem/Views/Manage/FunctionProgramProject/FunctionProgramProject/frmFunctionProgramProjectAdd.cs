@@ -8,14 +8,15 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
     {
         private ucFunctionProgramProject uc;
         private frmFunctionProgramProject _frmFunctionProgramProject;
+
         public frmFunctionProgramProjectAdd(frmFunctionProgramProject frmFunctionProgramProject)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             _frmFunctionProgramProject = frmFunctionProgramProject;
             uc = ucFunctionProgramProject1;
         }
      
-
         private void frmFunctionProgramProjectAdd_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
@@ -27,20 +28,20 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
         {
             try
             {
-                var uc = ucFunctionProgramProject1;
-                // if error occurs, show messagebox error
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
 
-                // proceed to insert
+                int functionalClassificationServiceId = Convert.ToInt32(uc.cmbFunctionalClassificationService.SelectedValue);
+
                 var functionProgramProjectModel = new FunctionProgramProjectModel()
                 {
-                    functionalClassificationServiceId = byte.Parse(uc.txtServiceId.Text.ToString()),
+                    functionalClassificationServiceId = functionalClassificationServiceId,
                     FppName = uc.txtName.Text.Trim(),
-                    FppCode = uc.txtCode.Text.Trim()
+                    FppCode = uc.txtCode.Text.Trim(),
+                    IsSpecial = uc.chckboxSpecial.Checked? true : false
                 };
 
                 var functionProgramProjectRepository = Factory.FunctionProgramProjectRepository();
@@ -57,7 +58,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             {
                 Helper.MessageBoxSuccess("Function Program Project has been saved.");
                 ucFunctionProgramProject1.ResetForm();
-                _frmFunctionProgramProject.cmbServiceName.SelectedValue = 0;
+                int serviceId = Convert.ToInt32(uc.cmbFunctionalClassificationService.SelectedValue);
+                _frmFunctionProgramProject.cmbServiceName.SelectedValue = serviceId;
+                _frmFunctionProgramProject.LoadFPP();
             }
         }
     }
