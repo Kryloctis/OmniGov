@@ -95,16 +95,18 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        //FPP Datagrid
+
+
+
+        //Function Program Project
         internal void LoadFunctionProgramProjectRecords()
         {
             try
             {
                 txtSearch.Clear();
                 byte id = Convert.ToByte(cmbSectorName.SelectedValue);
-                //GetRecordsWithFilter(id)
                 var dtfunctionProgramProjectRepository = Factory.FunctionProgramProjectRepository().GetRecords();
-                HelperLoadRecords.FunctionProjectProgramDatagridView(dtfunctionProgramProjectRepository, dgFunctionalProgramProject);
+                HelperLoadRecords.frmFunctionProjectProgramDatagridView(dtfunctionProgramProjectRepository, dgFunctionalProgramProject);
 
                 lblRecordCount.Text = Factory.FunctionProgramProjectRepository()
                                              .CountRecords()
@@ -120,13 +122,27 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                 txtSearch.Clear();
                 byte id = Convert.ToByte(cmbServiceName.SelectedValue);
                 var dtfunctionProgramProjectRepository = Factory.FunctionProgramProjectRepository().GetViewRecordsByServiceNameId(id);
-                HelperLoadRecords.FunctionProjectProgramDatagridView(dtfunctionProgramProjectRepository, dgFunctionalProgramProject);
+                HelperLoadRecords.frmFunctionProjectProgramDatagridView(dtfunctionProgramProjectRepository, dgFunctionalProgramProject);
 
                 lblRecordCount.Text = dgFunctionalProgramProject.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        internal void LoadFunctionProgramProjectRecordsBySearch()
+        {
+
+            try
+            {
+                string searchkey = Convert.ToString(txtSearch.Text);
+                var dtfunctionProgramProjectRepository = Factory.FunctionProgramProjectRepository().GetRecordsBySearch(searchkey);
+                HelperLoadRecords.frmFunctionProjectProgramDatagridView(dtfunctionProgramProjectRepository, dgFunctionalProgramProject);
+
+                lblRecordCount.Text = dgFunctionalProgramProject.Rows.Count.ToString();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+        }
 
         public void LoadServiceNameComboBox()
         {
@@ -153,8 +169,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
                 HelperLoadRecords.ServicesNameComboBox(dtServiceName, cmbServiceName, "service_name", "id");
                 cmbServiceName.SelectedValueChanged += new EventHandler(CmbServiceName_SelectedValueChanged);
-                //  byte id = Convert.ToByte(cmbSectorName.SelectedValue);
-                // txtCode.Text = Convert.ToString(id);
             }
             catch (Exception ex)
             {
@@ -177,7 +191,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             LoadFPP();
         }
 
-   
+        //Function Program Project
+
+
 
         private void frmFunctionProgramProject_Load(object sender, EventArgs e)
         {
@@ -196,7 +212,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             LoadFunctionalClassificationRecords();
 
         }
-
 
         private void DeleteFunctionalClassificationRecords()
         {
@@ -344,20 +359,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
         }
 
-        internal void LoadFunctionProgramProjectRecordsBySearch()
-        {
-
-            try
-            {
-                string searchkey = Convert.ToString(txtSearch.Text);
-                var dtfunctionProgramProjectRepository = Factory.FunctionProgramProjectRepository().GetRecordsBySearch(searchkey);
-                HelperLoadRecords.FunctionProjectProgramDatagridView(dtfunctionProgramProjectRepository, dgFunctionalProgramProject);
-
-                lblRecordCount.Text = dgFunctionalProgramProject.Rows.Count.ToString();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-
-        }
+     
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
@@ -408,9 +410,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                 byte fppID = byte.Parse(dgFunctionalProgramProject.SelectedCells[0].Value.ToString());
                 _ = new frmFunctionProgramProjectEdit(this, fppID).ShowDialog();
             }
-
-
-
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
@@ -446,7 +445,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
         private void dgFunctionalProgramProject_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 4, 5 };
+            byte[] columnIndexTimestamp = { 5, 6 };
             Helper.ShowRecordTimestamp(dgFunctionalProgramProject, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgFunctionalProgramProject, btnEdit, btnDelete);
 

@@ -372,6 +372,7 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
+
         #region Banks Deposits
         internal static void DepositsDatagridView(DataTable dataTable, DataGridView datagrid)
         {
@@ -390,6 +391,7 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
+
         #region RCI
         internal static void RCIDatagridView(DataTable dataTable, DataGridView datagrid)
         {
@@ -413,6 +415,7 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
+
         #region PaymentCollection
         internal static void PaymentDatagridView(DataTable dataTable, DataGridView datagrid)
         {
@@ -435,6 +438,7 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
+
         #region AccountableForm
         internal static void AccFormDatagridView(DataTable dataTable, DataGridView datagrid)
         {
@@ -446,6 +450,7 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
+
         #region GeneralLedgerAccountSearch
         internal static void GeneralLedgerSearchDatagridView(DataTable dataTable, DataGridView datagrid)
         {
@@ -459,6 +464,7 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
+
         internal static void BanksComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
             comboBox.DataSource = dataTable;
@@ -512,6 +518,65 @@ namespace AccountingSystem
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
             Helper.DatagridDefaultStyle(datagrid, true);
+        }
+
+        internal static void frmFunctionProjectProgramDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+
+            //Clearing Datagrid View  Rows & Columns before Loading new one
+            datagrid.Rows.Clear();
+            datagrid.Columns.Clear();
+
+
+            Image continuingIcon = Properties.Resources.ok14px;
+
+            DataGridViewImageColumn imgColumn = new DataGridViewImageColumn();
+
+            imgColumn.HeaderText = "Special";
+            imgColumn.Name = "is_special";
+
+
+            datagrid.Columns.Add("id", "FPP ID");
+            datagrid.Columns.Add("service_name", "Service Name");
+            datagrid.Columns.Add("fpp_code", "Code");
+            datagrid.Columns.Add("fpp_name", "Name");
+            datagrid.Columns.Add(imgColumn);
+            datagrid.Columns.Add("created_at", "Created at");
+            datagrid.Columns.Add("updated_at", "Updated at");
+
+
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["fpp_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
+
+            datagrid.Columns["is_special"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            datagrid.Columns["is_special"].DefaultCellStyle.NullValue = null;
+
+            foreach (DataRow item in dataTable.Rows) 
+            {
+                int fppId = Convert.ToInt32(item["id"]);
+                string serviceName = item["service_name"].ToString();
+                string fppCode = item["fpp_code"].ToString();
+                string fppName = item["fpp_name"].ToString();
+                byte isSpecial = Convert.ToByte(item["is_special"]);
+
+                var items = new object[]
+                {
+                    fppId,
+                    serviceName,
+                    fppCode,
+                    fppName,
+                    isSpecial == 0? null :  continuingIcon,
+                    item["created_at"],
+                    item["updated_at"]
+                };
+
+                datagrid.Rows.Add(items);
+                Helper.DatagridDefaultStyle(datagrid, true);
+                datagrid.ClearSelection();
+            }
+
         }
 
         internal static void FPPComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
@@ -881,6 +946,8 @@ namespace AccountingSystem
                     FieldData(dgvBudgetAppropriations, continuingIcon, drGetViewRecordsByIds);
                 }
 
+
+
                 //Initialize Repository Method for others fpp records
                 var dtGetRecordsOthersFPP = Factory.BudgetAppropriationsRepository().GetHeaderOthersFPP(fppID, allotmentClassID, fundId, year);
 
@@ -899,32 +966,9 @@ namespace AccountingSystem
 
                     foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByIds.Rows)
                     {
-
                         FieldData(dgvBudgetAppropriations, continuingIcon, drGetViewRecordsByIds);
-
                     }
                 }
-
-                //Change Font style for the header of Others FPP
-                foreach (DataGridViewRow row in dgvBudgetAppropriations.Rows)
-                {
-                    if (row.Cells["fpp_id"].Value == null)
-                    {
-                        dgvBudgetAppropriations.Rows[row.Index].DefaultCellStyle.Font = new Font(DataGridView.DefaultFont, FontStyle.Bold);
-                        dgvBudgetAppropriations.Rows[row.Index].HeaderCell.Style.BackColor = Color.LightBlue;
-                    }
-                }
-
-                //Show Total Values
-                decimal totalAppropriation = 0;
-                for (int i = 0; i < dgvBudgetAppropriations.Rows.Count; i++)
-                {
-                    totalAppropriation += Convert.ToDecimal(dgvBudgetAppropriations.Rows[i].Cells["amount"].Value);
-                }
-
-                txtTotalAppropriation.Text = totalAppropriation.ToString("N2");
-
-                dgvBudgetAppropriations.ClearSelection();
 
                 static void FieldData(DataGridView dgvBudgetAppropriations, Image continuingIcon, DataRow drGetViewRecordsByIds)
                 {
@@ -966,6 +1010,28 @@ namespace AccountingSystem
                     drGetViewRecordsByIds["created_at"],
                     drGetViewRecordsByIds["updated_at"] });
                 }
+
+
+                //Change Font style for the header of Others FPP
+                foreach (DataGridViewRow row in dgvBudgetAppropriations.Rows)
+                {
+                    if (row.Cells["fpp_id"].Value == null)
+                    {
+                        dgvBudgetAppropriations.Rows[row.Index].DefaultCellStyle.Font = new Font(DataGridView.DefaultFont, FontStyle.Bold);
+                        dgvBudgetAppropriations.Rows[row.Index].HeaderCell.Style.BackColor = Color.LightBlue;
+                    }
+                }
+
+                //Show Total Values
+                decimal totalAppropriation = 0;
+                for (int i = 0; i < dgvBudgetAppropriations.Rows.Count; i++)
+                {
+                    totalAppropriation += Convert.ToDecimal(dgvBudgetAppropriations.Rows[i].Cells["amount"].Value);
+                }
+
+                txtTotalAppropriation.Text = totalAppropriation.ToString("N2");
+
+                dgvBudgetAppropriations.ClearSelection();
 
             }
             catch (Exception ex)
@@ -1031,7 +1097,6 @@ namespace AccountingSystem
         }
 
         #endregion Allotment Release Details
-
 
         #region Supplemental Appropriations
 

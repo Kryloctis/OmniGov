@@ -58,7 +58,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT t1.id, t2.service_name, t1.fpp_code, t1.fpp_name, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
+                string query = $"SELECT t1.id, t2.service_name, t1.fpp_code, t1.fpp_name, t1.is_special, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
                  $" ON t2.id = t1.functional_classification_services_id";
 
                 var dtFunctionProjectProgram = new DataTable();
@@ -75,7 +75,7 @@ namespace ACC.Data
             try
             {
                 var srchtxt = searchText;               
-                string query = $"SELECT t1.id, t2.service_name,t1.fpp_code, t1.fpp_name, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
+                string query = $"SELECT t1.id, t2.service_name,t1.fpp_code, t1.fpp_name, t1.is_special, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
                 $" ON t2.id = t1.functional_classification_services_id  WHERE t1.fpp_code  LIKE'%" + srchtxt + "%' OR t1.fpp_name  LIKE'%" + srchtxt + "%'  OR t2.service_name  LIKE'%" + srchtxt + "%'";
 
                 var dtFunctionProjectProgram = new DataTable();
@@ -93,7 +93,7 @@ namespace ACC.Data
             try
             {
                 var Id = id;               
-                string query = $"SELECT t1.id, t2.service_name,t1.fpp_code, t1.fpp_name, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
+                string query = $"SELECT t1.id, t2.service_name,t1.fpp_code, t1.fpp_name, t1.is_special, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
                 $" ON t2.id = t1.functional_classification_services_id  WHERE t1.functional_classification_services_id  ='" + Id + "'";
 
 
