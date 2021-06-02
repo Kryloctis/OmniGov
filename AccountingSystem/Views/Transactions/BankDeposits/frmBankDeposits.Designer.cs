@@ -42,10 +42,6 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblCreatedBy = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblUpdatedBy = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgbankdeposits = new System.Windows.Forms.DataGridView();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -122,14 +118,10 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.toolStripStatusLabel2,
             this.lblCreatedAt,
             this.toolStripStatusLabel3,
-            this.lblUpdatedAt,
-            this.toolStripStatusLabel5,
-            this.lblCreatedBy,
-            this.toolStripStatusLabel7,
-            this.lblUpdatedBy});
-            this.statusStrip.Location = new System.Drawing.Point(0, 671);
+            this.lblUpdatedAt});
+            this.statusStrip.Location = new System.Drawing.Point(0, 532);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1129, 26);
+            this.statusStrip.Size = new System.Drawing.Size(853, 26);
             this.statusStrip.TabIndex = 13;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -148,7 +140,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(682, 20);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(406, 20);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -173,28 +165,6 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.lblUpdatedAt.Name = "lblUpdatedAt";
             this.lblUpdatedAt.Size = new System.Drawing.Size(0, 20);
             // 
-            // toolStripStatusLabel5
-            // 
-            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            this.toolStripStatusLabel5.Size = new System.Drawing.Size(88, 20);
-            this.toolStripStatusLabel5.Text = "Created By :";
-            // 
-            // lblCreatedBy
-            // 
-            this.lblCreatedBy.Name = "lblCreatedBy";
-            this.lblCreatedBy.Size = new System.Drawing.Size(0, 20);
-            // 
-            // toolStripStatusLabel7
-            // 
-            this.toolStripStatusLabel7.Name = "toolStripStatusLabel7";
-            this.toolStripStatusLabel7.Size = new System.Drawing.Size(94, 20);
-            this.toolStripStatusLabel7.Text = "Updated By :";
-            // 
-            // lblUpdatedBy
-            // 
-            this.lblUpdatedBy.Name = "lblUpdatedBy";
-            this.lblUpdatedBy.Size = new System.Drawing.Size(0, 20);
-            // 
             // dgbankdeposits
             // 
             this.dgbankdeposits.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -218,7 +188,9 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.toolStrip);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmBankDeposits";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Transactions > Bank Deposits";
@@ -248,10 +220,6 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
-        private System.Windows.Forms.ToolStripStatusLabel lblCreatedBy;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel7;
-        private System.Windows.Forms.ToolStripStatusLabel lblUpdatedBy;
         private System.Windows.Forms.DataGridView dgbankdeposits;
     }
 }

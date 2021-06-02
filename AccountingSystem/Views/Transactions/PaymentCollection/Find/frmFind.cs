@@ -28,7 +28,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
 
         private void frmFind_Load(object sender, EventArgs e)
         {
-            //LoadList();
+            if (!string.IsNullOrEmpty(table))
+                if (table.Equals("accountable"))
+                    LoadList();
+                if (table.Equals("subsidiary"))
+                    LoadList();
         }
 
         private void LoadList()
