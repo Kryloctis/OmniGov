@@ -445,6 +445,8 @@ namespace AccountingSystem
             datagrid.Columns[7].HeaderText = "Receipt No.";
             datagrid.Columns[8].HeaderText = "Payment Date";
             datagrid.Columns[9].HeaderText = "Amount";
+            datagrid.Columns[9].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns[10].HeaderText = "Collector";
             datagrid.Columns[11].Visible = false;
             datagrid.Columns[12].Visible = false;

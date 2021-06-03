@@ -106,10 +106,19 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     }
                     if (table.Equals("subsidiary"))
                     {
-                        var subRepository = Factory.SubsidiaryLedgerAccountsRepository();
-                        var subData = subRepository.GetRecordByID(Id);
-                        slaId = Id;
-                        txtsubsidiary.Text = String.Format("{0} - {1}", subData["sub_code"], subData["sub_name"]);
+                        if(Id > 0)
+                        {
+                            var subRepository = Factory.SubsidiaryLedgerAccountsRepository();
+                            var subData = subRepository.GetRecordByID(Id);
+                            slaId = Id;
+                            txtsubsidiary.Text = String.Format("{0} - {1}", subData["sub_code"], subData["sub_name"]);
+                        }
+                        else
+                        {
+                            slaId = Id;
+                            txtsubsidiary.Text = string.Empty;
+                        }
+                        
 
                     }
 
