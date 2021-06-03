@@ -28,7 +28,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits.Find
 
         private void frmFind_Load(object sender, EventArgs e)
         {
-
+            LoadList();
         }
 
         private void LoadList()
@@ -50,7 +50,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits.Find
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            if (txtsearch.Text.Length >= 3)
+            if (txtsearch.Text.Length > 3)
             {
                 if (!string.IsNullOrEmpty(table))
                 {

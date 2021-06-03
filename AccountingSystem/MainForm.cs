@@ -25,6 +25,7 @@ using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Reports.PaymentCollection;
 using AccountingSystem.Views.Transactions.PaymentCollection;
 using AccountingSystem.Views.Transactions.BankDeposits;
+using AccountingSystem.Views.Reports.RCD;
 
 namespace AccountingSystem
 {
@@ -340,7 +341,7 @@ namespace AccountingSystem
         }
         private void menuprintPC_Click(object sender, EventArgs e)
         {
-            _ = new frmPCReport().ShowDialog();
+            _ = new frmRCD().ShowDialog();
         }
 
         private void menuPayments_Click(object sender, EventArgs e)

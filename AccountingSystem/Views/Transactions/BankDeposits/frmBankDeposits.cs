@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         private void dgbankdeposits_SelectionChanged(object sender, EventArgs e)
         {
             byte[] columnIndexData = { 6, 7, 8, 9 };
-            Helper.ShowRecordTimestamp(dgbankdeposits, columnIndexData, lblCreatedAt, lblUpdatedAt, lblCreatedBy, lblUpdatedBy);
+            Helper.ShowRecordTimestamp(dgbankdeposits, columnIndexData, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgbankdeposits, btnEdit, btnDelete);
         }
 
