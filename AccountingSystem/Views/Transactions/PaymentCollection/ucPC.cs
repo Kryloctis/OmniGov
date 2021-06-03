@@ -19,13 +19,14 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal int glaId = 0;
         internal int slaId = 0;
         internal int userid = 0;
+        internal bool withsubsidiary = false;
         public ucPC()
         {
             InitializeComponent();
         }
         internal string GetFormErrors()
         {
-            var errorArray = new string[7];
+            var errorArray = new string[8];
             errorArray[0] = errorProvider.GetError(cmbcollector);
             errorArray[1] = errorProvider.GetError(txtaccountable);
             errorArray[2] = errorProvider.GetError(txtledger);
@@ -33,6 +34,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             errorArray[4] = errorProvider.GetError(txtreceipt);
             errorArray[5] = errorProvider.GetError(dtdate);
             errorArray[6] = errorProvider.GetError(txtamount);
+            errorArray[7] = errorProvider.GetError(txtsubsidiary);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -230,16 +232,17 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             /*var subRepository = Factory.SubsidiaryLedgerAccountsRepository();
             bool isubsidiary = subRepository.HasSubsidiary(Convert.ToUInt16(glaId));
-            if (isubsidiary)
+            */
+            if (withsubsidiary)
             {
                 e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtsubsidiary, "Subsidiary!");
-            }*/
+            }
                
         }
 
         private void txtsubsidiary_Validated(object sender, EventArgs e)
         {
-            //Helper.ClearErrorTextBox(errorProvider, txtsubsidiary);
+            Helper.ClearErrorTextBox(errorProvider, txtsubsidiary);
         }
 
         private void txtsubsidiary_DoubleClick(object sender, EventArgs e)
@@ -252,9 +255,14 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             if(txtledger.Text.Length > 0 && glaId > 0)
             {
                 var subRepository = Factory.SubsidiaryLedgerAccountsRepository();
-                bool isubsidiary = subRepository.HasSubsidiary(Convert.ToUInt16(glaId));
-                txtsubsidiary.Enabled = isubsidiary;
-                btnsubsidiary.Enabled = isubsidiary;
+                withsubsidiary = subRepository.HasSubsidiary(Convert.ToUInt16(glaId));
+                txtsubsidiary.Enabled = withsubsidiary;
+                btnsubsidiary.Enabled = withsubsidiary;
+                if (!withsubsidiary)
+                {
+                    txtsubsidiary.Clear();
+                    slaId = 0;
+                }
             }
         }
     }
