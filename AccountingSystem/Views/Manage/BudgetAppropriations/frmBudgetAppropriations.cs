@@ -21,7 +21,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         public frmBudgetAppropriations()
         {
             InitializeComponent();
-            btnSupplemental.Click += new EventHandler(BtnSupplemental_Click);
             btnARODetails.Click += new EventHandler(BtnARODetails_Click);
             Helper.LoadFormIcon(this);
         }
@@ -100,7 +99,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
             if (SelectedRows == 1 && dgv.SelectedCells[0].Value != null)
             {
-                btnSupplemental.Enabled = true;
                 btnEdit.Enabled = true;
                 btnARODetails.Enabled = true;
                 btnDelete.Enabled = true;
@@ -109,7 +107,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             }
             else if (SelectedRows > 1 && dgv.SelectedCells[0].Value != null)
             {
-                btnSupplemental.Enabled = false;
                 btnEdit.Enabled = false;
                 btnARODetails.Enabled = false;
                 btnDelete.Enabled = true;
@@ -117,7 +114,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             }
             else
             {
-                btnSupplemental.Enabled = false;
                 btnEdit.Enabled = false;
                 btnARODetails.Enabled = false;
                 btnDelete.Enabled = false;

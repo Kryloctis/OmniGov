@@ -167,6 +167,9 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             try
             {
+                cmbxAllotmentClass.SelectedValueChanged -= new EventHandler(CmbxAllotmentClass_SelectedValueChanged);
+                cmbxAllotmentClass.TextChanged -= new EventHandler(CmbxAllotmentClass_TextChanged);
+
                 HelperLoadRecords.BudgetAppropriationsAllotmentCombobox(Factory.AllotmentClassesRepository().GetRecords(), cmbxAllotmentClass, "allotment_name", "id");
 
                 cmbxAllotmentClass.SelectedValueChanged += new EventHandler(CmbxAllotmentClass_SelectedValueChanged);

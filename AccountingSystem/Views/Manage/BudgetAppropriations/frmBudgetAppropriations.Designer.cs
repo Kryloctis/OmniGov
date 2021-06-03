@@ -35,8 +35,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnSupplemental = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnARODetails = new System.Windows.Forms.ToolStripButton();
             this.cmbxYear = new System.Windows.Forms.ToolStripComboBox();
             this.cmbxFundType = new System.Windows.Forms.ToolStripComboBox();
@@ -77,8 +75,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnEdit,
             this.btnDelete,
             this.toolStripSeparator1,
-            this.btnSupplemental,
-            this.toolStripSeparator2,
             this.btnARODetails,
             this.cmbxYear,
             this.cmbxFundType,
@@ -128,21 +124,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
-            // 
-            // btnSupplemental
-            // 
-            this.btnSupplemental.Enabled = false;
-            this.btnSupplemental.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSupplemental.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSupplemental.Name = "btnSupplemental";
-            this.btnSupplemental.Size = new System.Drawing.Size(93, 47);
-            this.btnSupplemental.Text = "&Supplemental...";
-            this.btnSupplemental.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 50);
             // 
             // btnARODetails
             // 
@@ -254,6 +235,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Budget Appropriations";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmBudgetAppropriationsNew_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetAppropriations)).EndInit();
             this.toolStrip1.ResumeLayout(false);
@@ -283,8 +265,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnAllotment;
         internal System.Windows.Forms.TextBox txtTotal;
-        internal System.Windows.Forms.ToolStripButton btnSupplemental;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         internal System.Windows.Forms.ToolStripButton btnARODetails;
     }
 }
