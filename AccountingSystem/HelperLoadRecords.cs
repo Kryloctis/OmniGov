@@ -852,6 +852,7 @@ namespace AccountingSystem
                 dataGridView.Columns["fpp_code"].HeaderText = "FPP Code";
                 dataGridView.Columns["fpp_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
                 dataGridView.Columns["fpp_name"].HeaderText = "FPP Name";
+                dataGridView.Columns["is_special"].Visible = false;
                 dataGridView.Columns["created_at"].Visible = false;
                 dataGridView.Columns["updated_at"].Visible = false;
                 dataGridView.ClearSelection();

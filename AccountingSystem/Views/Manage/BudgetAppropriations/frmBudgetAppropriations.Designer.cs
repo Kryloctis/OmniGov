@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.dgBudgetAppropriations.Location = new System.Drawing.Point(3, 53);
             this.dgBudgetAppropriations.Name = "dgBudgetAppropriations";
             this.dgBudgetAppropriations.RowTemplate.Height = 25;
-            this.dgBudgetAppropriations.Size = new System.Drawing.Size(983, 441);
+            this.dgBudgetAppropriations.Size = new System.Drawing.Size(933, 441);
             this.dgBudgetAppropriations.TabIndex = 1;
             this.dgBudgetAppropriations.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView1_ColumnAdded);
             this.dgBudgetAppropriations.SelectionChanged += new System.EventHandler(this.dgBudgetAppropriations_SelectionChanged);
@@ -85,7 +85,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.cmbxAllotmentClass});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(998, 50);
+            this.toolStrip1.Size = new System.Drawing.Size(948, 50);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -192,7 +192,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.dgFPP.Name = "dgFPP";
             this.dgFPP.RowTemplate.Height = 25;
             this.dgFPP.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgFPP.Size = new System.Drawing.Size(284, 482);
+            this.dgFPP.Size = new System.Drawing.Size(334, 482);
             this.dgFPP.TabIndex = 3;
             this.dgFPP.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgFPP_RowHeaderMouseDoubleClick);
             this.dgFPP.SelectionChanged += new System.EventHandler(this.dgFPP_SelectionChanged);
@@ -216,13 +216,13 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.splitContainer1.Panel2.Controls.Add(this.dgBudgetAppropriations);
             this.splitContainer1.Panel2.Controls.Add(this.toolStrip1);
             this.splitContainer1.Size = new System.Drawing.Size(1302, 538);
-            this.splitContainer1.SplitterDistance = 300;
+            this.splitContainer1.SplitterDistance = 350;
             this.splitContainer1.TabIndex = 7;
             // 
             // txtTotal
             // 
             this.txtTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTotal.Location = new System.Drawing.Point(854, 500);
+            this.txtTotal.Location = new System.Drawing.Point(804, 500);
             this.txtTotal.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
@@ -235,7 +235,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(739, 503);
+            this.label1.Location = new System.Drawing.Point(689, 503);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(109, 15);
             this.label1.TabIndex = 3;
