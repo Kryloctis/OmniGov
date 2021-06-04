@@ -197,7 +197,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableName}.id,CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) AS account_code,{tableName}.ledger_name,{tableName3}.maj_acc_group_name,{tableName4}.sub_maj_acc_group_name FROM {tableName} LEFT JOIN {tableName4} ON {tableName}.sub_major_account_group_id={tableName4}.id LEFT JOIN {tableName3} ON {tableName4}.major_account_group_id={tableName3}.id LEFT JOIN {tableName2} ON {tableName3}.account_group_id={tableName2}.id AND {tableName2}.id='4'";
+                string query = $"SELECT {tableName}.id,CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) AS account_code,{tableName}.ledger_name FROM {tableName} LEFT JOIN {tableName4} ON {tableName}.sub_major_account_group_id={tableName4}.id LEFT JOIN {tableName3} ON {tableName4}.major_account_group_id={tableName3}.id LEFT JOIN {tableName2} ON ({tableName3}.account_group_id={tableName2}.id AND {tableName2}.id='4') WHERE CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) IS NOT NULL";
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers);
 
@@ -211,7 +211,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableName}.id,CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) AS account_code,{tableName}.ledger_name FROM {tableName} LEFT JOIN {tableName4} ON {tableName}.sub_major_account_group_id={tableName4}.id LEFT JOIN {tableName3} ON {tableName4}.major_account_group_id={tableName3}.id LEFT JOIN {tableName2} ON {tableName3}.account_group_id={tableName2}.id AND {tableName2}.id='4' WHERE CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) LIKE '%{srchtxt}%' OR ledger_name LIKE '%{srchtxt}%'";               
+                string query = $"SELECT {tableName}.id,CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) AS account_code,{tableName}.ledger_name FROM {tableName} LEFT JOIN {tableName4} ON {tableName}.sub_major_account_group_id={tableName4}.id LEFT JOIN {tableName3} ON {tableName4}.major_account_group_id={tableName3}.id LEFT JOIN {tableName2} ON ({tableName3}.account_group_id={tableName2}.id AND {tableName2}.id='4') WHERE CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) IS NOT NULL AND (CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) LIKE '%{srchtxt}%' OR ledger_name LIKE '%{srchtxt}%')";               
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers);
 

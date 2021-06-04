@@ -29,17 +29,17 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT account_no,bank_name,created_at,updated_at FROM {tableName} WHERE id = @id";
+                string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
                         return record;
 
-                    record.Add("account_no", reader.Rows[0][0].ToString());
-                    record.Add("bank_name", reader.Rows[0][1].ToString());
-                    record.Add("created_at", reader.Rows[0][2].ToString());
-                    record.Add("updated_at", reader.Rows[0][3].ToString());
+                    record.Add("account_no", reader.Rows[0]["account_no"].ToString());
+                    record.Add("bank_name", reader.Rows[0]["bank_name"].ToString());
+                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
                 }
             }
             catch (Exception)
@@ -91,7 +91,7 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@id", DbType.Int16, entity.Id},
-                    new object[] { "@account_no", DbType.String, entity.BankName},
+                    new object[] { "@account_no", DbType.String, entity.AccountNo},
                      new object[] { "@bank_name", DbType.String, entity.BankName},
                 };
 

@@ -107,8 +107,15 @@ namespace ACC.Data
                     new object[] { "@amount", DbType.Decimal, entity.Amount},
                     new object[] { "@created_by", DbType.Int16, entity.CreatedBy}                    
                 };
-
-                string query = $"INSERT INTO {tableName} (collecting_officers_id,accountable_forms_id,general_ledger_accounts_id,subsidiary_ledger_accounts_id,payee,receipt_no,payment_date,amount,created_by) VALUES (@collecting_officers_id,@accountable_forms_id,@general_ledger_accounts_id,@subsidiary_ledger_accounts_id,@payee,@receipt_no,@payment_date,@amount,@created_by)";
+                string query = string.Empty;
+                if(entity.SlaId > 0)
+                {
+                    query = $"INSERT INTO {tableName} (collecting_officers_id,accountable_forms_id,general_ledger_accounts_id,subsidiary_ledger_accounts_id,payee,receipt_no,payment_date,amount,created_by) VALUES (@collecting_officers_id,@accountable_forms_id,@general_ledger_accounts_id,@subsidiary_ledger_accounts_id,@payee,@receipt_no,@payment_date,@amount,@created_by)";
+                }
+                else
+                {
+                    query = $"INSERT INTO {tableName} (collecting_officers_id,accountable_forms_id,general_ledger_accounts_id,payee,receipt_no,payment_date,amount,created_by) VALUES (@collecting_officers_id,@accountable_forms_id,@general_ledger_accounts_id,@payee,@receipt_no,@payment_date,@amount,@created_by)";
+                }  
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -134,8 +141,15 @@ namespace ACC.Data
                     new object[] { "@amount", DbType.Decimal, entity.Amount},
                     new object[] { "@updated_by", DbType.Int16, entity.UpdatedBy}
                 };
-
-                string query = $"UPDATE {tableName} SET collecting_officers_id=@collecting_officers_id,accountable_forms_id=@accountable_forms_id,general_ledger_accounts_id=@general_ledger_accounts_id,subsidiary_ledger_accounts_id=@subsidiary_ledger_accounts_id,payee=@payee,receipt_no=@receipt_no,payment_date=@payment_date,amount=@amount,updated_by=@updated_by WHERE id = @id";
+                string query = string.Empty;
+                if (entity.SlaId > 0)
+                {
+                    query = $"UPDATE {tableName} SET collecting_officers_id=@collecting_officers_id,accountable_forms_id=@accountable_forms_id,general_ledger_accounts_id=@general_ledger_accounts_id,subsidiary_ledger_accounts_id=@subsidiary_ledger_accounts_id,payee=@payee,receipt_no=@receipt_no,payment_date=@payment_date,amount=@amount,updated_by=@updated_by WHERE id = @id";
+                }
+                else
+                {
+                    query = $"UPDATE {tableName} SET collecting_officers_id=@collecting_officers_id,accountable_forms_id=@accountable_forms_id,general_ledger_accounts_id=@general_ledger_accounts_id,subsidiary_ledger_accounts_id=NULL,payee=@payee,receipt_no=@receipt_no,payment_date=@payment_date,amount=@amount,updated_by=@updated_by WHERE id = @id";
+                }                    
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
