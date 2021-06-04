@@ -28,7 +28,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         private bool SaveData()
         {
-
             try
             {
                 if (!uc.ValidateChildren())
@@ -40,7 +39,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 // proceed to insert
                 var budgetAppropriationsModel = new BudgetAppropriationsModel()
                 {
-                    FundsId = Convert.ToInt32(uc.cmbxTypeOfFund.SelectedValue),
+                    FundsId = uc.fundId,
                     FunctionProgramProjectId = uc.fppId,
                     OthersFPPId = uc.cmbxOthersFPP.SelectedValue == null ? null : Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue),
                     AllotmentClassesId = Convert.ToInt32(uc.cmbxAllotmentClass.SelectedValue),
@@ -66,7 +65,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             if (SaveData()) 
             {
                 int allotmentClassID = Convert.ToInt32(uc.cmbxAllotmentClass.SelectedValue);
-                int fundID = Convert.ToInt32(uc.cmbxTypeOfFund.SelectedValue);
+                int fundID = uc.fundId;
                 short year = Convert.ToInt16(uc.nudYear.Value);
 
                 _frmBudgetAppropriations.cmbxAllotmentClass.ComboBox.SelectedValue = allotmentClassID;

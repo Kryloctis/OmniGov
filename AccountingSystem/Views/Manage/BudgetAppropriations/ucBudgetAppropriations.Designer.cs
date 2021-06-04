@@ -33,7 +33,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.label1 = new System.Windows.Forms.Label();
             this.cmbxOthersFPP = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cmbxAllotmentClass = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbxLedgerAccount = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -46,20 +45,19 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.dtDateEntry = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.cmbxTypeOfFund = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.nudYear = new System.Windows.Forms.NumericUpDown();
-            this.epTypeOfFund = new System.Windows.Forms.ErrorProvider(this.components);
             this.epYear = new System.Windows.Forms.ErrorProvider(this.components);
             this.chckbxContinuing = new System.Windows.Forms.CheckBox();
             this.txtFPP = new System.Windows.Forms.TextBox();
+            this.txtFund = new System.Windows.Forms.TextBox();
+            this.cmbxAllotmentClass = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFunctionProgramProject)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAllotmentClass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epGeneralLedgerAcc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epTypeOfFund)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epYear)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,16 +88,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.label2.Size = new System.Drawing.Size(65, 15);
             this.label2.TabIndex = 1;
             this.label2.Text = "Others FPP";
-            // 
-            // cmbxAllotmentClass
-            // 
-            this.cmbxAllotmentClass.FormattingEnabled = true;
-            this.cmbxAllotmentClass.Location = new System.Drawing.Point(140, 145);
-            this.cmbxAllotmentClass.Name = "cmbxAllotmentClass";
-            this.cmbxAllotmentClass.Size = new System.Drawing.Size(436, 23);
-            this.cmbxAllotmentClass.TabIndex = 5;
-            this.cmbxAllotmentClass.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAllotmentClass_Validating);
-            this.cmbxAllotmentClass.Validated += new System.EventHandler(this.CmbxAllotmentClass_Validated);
             // 
             // label3
             // 
@@ -197,17 +185,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.label7.TabIndex = 1;
             this.label7.Text = "Type of Fund";
             // 
-            // cmbxTypeOfFund
-            // 
-            this.cmbxTypeOfFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxTypeOfFund.FormattingEnabled = true;
-            this.cmbxTypeOfFund.Location = new System.Drawing.Point(140, 58);
-            this.cmbxTypeOfFund.Name = "cmbxTypeOfFund";
-            this.cmbxTypeOfFund.Size = new System.Drawing.Size(436, 23);
-            this.cmbxTypeOfFund.TabIndex = 2;
-            this.cmbxTypeOfFund.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxTypeOfFund_Validating);
-            this.cmbxTypeOfFund.Validated += new System.EventHandler(this.cmbxTypeOfFund_Validated);
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -241,10 +218,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.nudYear.Validating += new System.ComponentModel.CancelEventHandler(this.nudYear_Validating);
             this.nudYear.Validated += new System.EventHandler(this.nudYear_Validated);
             // 
-            // epTypeOfFund
-            // 
-            this.epTypeOfFund.ContainerControl = this;
-            // 
             // epYear
             // 
             this.epYear.ContainerControl = this;
@@ -267,15 +240,33 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.txtFPP.Size = new System.Drawing.Size(436, 23);
             this.txtFPP.TabIndex = 9;
             // 
+            // txtFund
+            // 
+            this.txtFund.Location = new System.Drawing.Point(140, 58);
+            this.txtFund.Name = "txtFund";
+            this.txtFund.ReadOnly = true;
+            this.txtFund.Size = new System.Drawing.Size(436, 23);
+            this.txtFund.TabIndex = 10;
+            // 
+            // cmbxAllotmentClass
+            // 
+            this.cmbxAllotmentClass.FormattingEnabled = true;
+            this.cmbxAllotmentClass.Location = new System.Drawing.Point(140, 145);
+            this.cmbxAllotmentClass.Name = "cmbxAllotmentClass";
+            this.cmbxAllotmentClass.Size = new System.Drawing.Size(436, 23);
+            this.cmbxAllotmentClass.TabIndex = 5;
+            this.cmbxAllotmentClass.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAllotmentClass_Validating);
+            this.cmbxAllotmentClass.Validated += new System.EventHandler(this.CmbxAllotmentClass_Validated);
+            // 
             // ucBudgetAppropriations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.Controls.Add(this.txtFund);
             this.Controls.Add(this.txtFPP);
             this.Controls.Add(this.chckbxContinuing);
             this.Controls.Add(this.nudYear);
-            this.Controls.Add(this.cmbxTypeOfFund);
             this.Controls.Add(this.dtDateEntry);
             this.Controls.Add(this.nudAmount);
             this.Controls.Add(this.label6);
@@ -298,7 +289,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epGeneralLedgerAcc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epTypeOfFund)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epYear)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -316,18 +306,17 @@ namespace BudgetSystem.Views.BudgetAppropriations
         private System.Windows.Forms.ErrorProvider epAmount;
         private System.Windows.Forms.ErrorProvider epGeneralLedgerAcc;
         internal System.Windows.Forms.ComboBox cmbxOthersFPP;
-        internal System.Windows.Forms.ComboBox cmbxAllotmentClass;
         internal System.Windows.Forms.ComboBox cmbxLedgerAccount;
         internal System.Windows.Forms.NumericUpDown nudAmount;
         private System.Windows.Forms.Label label6;
         internal System.Windows.Forms.DateTimePicker dtDateEntry;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ErrorProvider epTypeOfFund;
         private System.Windows.Forms.ErrorProvider epYear;
         internal System.Windows.Forms.NumericUpDown nudYear;
-        internal System.Windows.Forms.ComboBox cmbxTypeOfFund;
         internal System.Windows.Forms.CheckBox chckbxContinuing;
         internal System.Windows.Forms.TextBox txtFPP;
+        internal System.Windows.Forms.TextBox txtFund;
+        internal System.Windows.Forms.ComboBox cmbxAllotmentClass;
     }
 }

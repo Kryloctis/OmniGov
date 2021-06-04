@@ -13,10 +13,10 @@ namespace BudgetSystem.Views.BudgetAppropriations
 {
     public partial class ucBudgetAppropriations : UserControl
     {
-        internal int fundId;
         internal int budgetAppropriationId;
         internal int fppId;
         internal int? othersFPPId;
+        internal int fundId;
         internal int allotmentClassId;
         internal int generalLedgerAccountId;
         internal short year;
@@ -32,14 +32,13 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[6];
+            var errorArray = new string[5];
 
-            errorArray[0] = epTypeOfFund.GetError(cmbxTypeOfFund);
-            errorArray[1] = epOthersFunctionProgramProject.GetError(cmbxOthersFPP);
-            errorArray[2] = epAllotmentClass.GetError(cmbxAllotmentClass);
-            errorArray[3] = epGeneralLedgerAcc.GetError(cmbxLedgerAccount);
-            errorArray[4] = epYear.GetError(nudYear);
-            errorArray[5] = epAmount.GetError(nudAmount);
+            errorArray[0] = epOthersFunctionProgramProject.GetError(cmbxOthersFPP);
+            errorArray[1] = epAllotmentClass.GetError(cmbxAllotmentClass);
+            errorArray[2] = epGeneralLedgerAcc.GetError(cmbxLedgerAccount);
+            errorArray[3] = epYear.GetError(nudYear);
+            errorArray[4] = epAmount.GetError(nudAmount);
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
@@ -200,8 +199,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             try
             {
-
-                int fundID = Convert.ToInt32(cmbxTypeOfFund.SelectedValue);
                 int? othersFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text.ToString()) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
                 int allotmentClassId = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
                 int generalLedgerAccId = Convert.ToInt32(cmbxLedgerAccount.SelectedValue);
@@ -211,11 +208,11 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
                 if (budgetAppropriationId == 0)
                 {
-                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(fundID, fppId, othersFPPId, allotmentClassId, generalLedgerAccId);
+                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId);
                 }
                 else
                 {
-                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(budgetAppropriationId, fundID, fppId, othersFPPId, allotmentClassId, generalLedgerAccId);
+                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId);
                 }
 
                 if (budgetAppropriationExist)
@@ -238,7 +235,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             {
                 #region Validation of Budget Appropriration Record
 
-                int fundID = Convert.ToInt32(cmbxTypeOfFund.SelectedValue);
                 int? othersFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text.ToString()) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
                 int allotmentClassId = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
                 int generalLedgerAccId = Convert.ToInt32(cmbxLedgerAccount.SelectedValue);
@@ -248,11 +244,11 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
                 if (budgetAppropriationId == 0)
                 {
-                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationExist(fundID, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, year);
+                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationExist(fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, year);
                 }
                 else
                 {
-                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationExist(budgetAppropriationId, fundID, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, year);
+                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationExist(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, year);
                 }
 
                 if (budgetAppropriationExist)
@@ -408,43 +404,18 @@ namespace BudgetSystem.Views.BudgetAppropriations
             Helper.ClearErrorNumericUpDown(epYear, nudYear);
         }
 
-
-        //combobox funds
-
-        internal void LoadFunds()
-        {
-            try
-            {
-                HelperLoadRecords.BudgetAppropriationsTypeOfFundsCombobox(Factory.FundsRepository().GetRecords(), cmbxTypeOfFund, "fund_name", "id");
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        private void cmbxTypeOfFund_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epTypeOfFund, cmbxTypeOfFund, "Type of Fund");
-        }
-
-        private void cmbxTypeOfFund_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(epTypeOfFund, cmbxTypeOfFund);
-        }
-
-
-
         private void ucBudgetAppropriations_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
                 var fppRepo = Factory.FunctionProgramProjectRepository().GetRecordByID(fppId);
+                var fundRepo = Factory.FundsRepository().GetRecordByID(fundId);
                 txtFPP.Text = $"{fppRepo["fpp_code"]} - {fppRepo["fpp_name"]}";
+                txtFund.Text = $"{fundRepo["fund_code"]} - {fundRepo["fund_name"]}";
+
 
                 LoadAllotmentClassRecords();
                 LoadOthersFPPByFPPIdCombobox();
-                LoadFunds();
                 nudYear.Value = DateTime.Now.Year;
             }
         }

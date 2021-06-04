@@ -45,7 +45,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
 
                 bool continuing = Convert.ToByte(selectedBudgetAppropriation["continuing"]) == 0 ? false : true;
 
-                uc.cmbxTypeOfFund.SelectedValue = fundId;
+                uc.fundId = fundId;
                 uc.fppId = fppId;
 
                 if (othersFPPId == null) 
@@ -88,7 +88,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                 var budgetAppModel = new BudgetAppropriationsModel()
                 {
                     Id = uc.budgetAppropriationId,
-                    FundsId = Convert.ToInt32(uc.cmbxTypeOfFund.SelectedValue),
+                    FundsId = uc.fundId,
                     FunctionProgramProjectId = uc.fppId,
                     OthersFPPId = othersFPPId,
                     AllotmentClassesId = Convert.ToInt32(uc.cmbxAllotmentClass.SelectedValue),
@@ -120,7 +120,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                 //Initialze data references
                 int fppID = uc.fppId;
                 int allotmentClassID = Convert.ToInt32(uc.cmbxAllotmentClass.SelectedValue);
-                int fundID = Convert.ToInt32(uc.cmbxTypeOfFund.SelectedValue);
+                int fundID = uc.fundId;
                 short year = Convert.ToInt16(uc.nudYear.Value);
 
                 _frmBudgetAppropriations.cmbxAllotmentClass.ComboBox.SelectedValue = allotmentClassID;

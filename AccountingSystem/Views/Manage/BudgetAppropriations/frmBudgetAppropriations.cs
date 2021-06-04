@@ -18,6 +18,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 {
     public partial class frmBudgetAppropriations : Form
     {
+
         public frmBudgetAppropriations()
         {
             InitializeComponent();
@@ -134,7 +135,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             var ucBudgetAppropriationsAdd = frmBudgetAppropriationsAdd.ucBudgetAppropriations1;
             int rowIndex = dgFPP.CurrentCell.RowIndex;
 
-            ucBudgetAppropriationsAdd.fppId = Convert.ToInt32(dgFPP.Rows[rowIndex].Cells["id"].Value); 
+            ucBudgetAppropriationsAdd.fppId = Convert.ToInt32(dgFPP.Rows[rowIndex].Cells["id"].Value);
+            ucBudgetAppropriationsAdd.fundId = Convert.ToInt32(cmbxFundType.ComboBox.SelectedValue);
             
             frmBudgetAppropriationsAdd.ShowDialog();
         }
