@@ -137,6 +137,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
             ucBudgetAppropriationsAdd.fppId = Convert.ToInt32(dgFPP.Rows[rowIndex].Cells["id"].Value);
             ucBudgetAppropriationsAdd.fundId = Convert.ToInt32(cmbxFundType.ComboBox.SelectedValue);
+            ucBudgetAppropriationsAdd.allotmentClassId = Convert.ToInt32(cmbxAllotmentClass.ComboBox.SelectedValue);
             
             frmBudgetAppropriationsAdd.ShowDialog();
         }

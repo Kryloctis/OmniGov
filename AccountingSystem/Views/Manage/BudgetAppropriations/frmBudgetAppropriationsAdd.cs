@@ -42,7 +42,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
                     FundsId = uc.fundId,
                     FunctionProgramProjectId = uc.fppId,
                     OthersFPPId = uc.cmbxOthersFPP.SelectedValue == null ? null : Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue),
-                    AllotmentClassesId = Convert.ToInt32(uc.cmbxAllotmentClass.SelectedValue),
+                    AllotmentClassesId = uc.allotmentClassId,
                     GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxLedgerAccount.SelectedValue),
                     Year = Convert.ToInt16(uc.nudYear.Value),
                     DateEntry = uc.dtDateEntry.Value,
@@ -64,7 +64,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             //If Save data is successful
             if (SaveData()) 
             {
-                int allotmentClassID = Convert.ToInt32(uc.cmbxAllotmentClass.SelectedValue);
+                int allotmentClassID = uc.allotmentClassId;
                 int fundID = uc.fundId;
                 short year = Convert.ToInt16(uc.nudYear.Value);
 
