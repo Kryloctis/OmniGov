@@ -46,7 +46,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                 bool continuing = Convert.ToByte(selectedBudgetAppropriation["continuing"]) == 0 ? false : true;
 
                 uc.cmbxTypeOfFund.SelectedValue = fundId;
-                uc.cmbxFPP.SelectedValue = fppId;
+                uc.fppId = fppId;
 
                 if (othersFPPId == null) 
                     uc.cmbxOthersFPP.SelectedIndex = -1;
@@ -89,7 +89,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                 {
                     Id = uc.budgetAppropriationId,
                     FundsId = Convert.ToInt32(uc.cmbxTypeOfFund.SelectedValue),
-                    FunctionProgramProjectId = Convert.ToInt32(uc.cmbxFPP.SelectedValue),
+                    FunctionProgramProjectId = uc.fppId,
                     OthersFPPId = othersFPPId,
                     AllotmentClassesId = Convert.ToInt32(uc.cmbxAllotmentClass.SelectedValue),
                     GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxLedgerAccount.SelectedValue),
@@ -118,21 +118,18 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
             if (SaveData()) 
             {
                 //Initialze data references
-                int fppID = Convert.ToInt32(uc.cmbxFPP.SelectedValue);
+                int fppID = uc.fppId;
                 int allotmentClassID = Convert.ToInt32(uc.cmbxAllotmentClass.SelectedValue);
                 int fundID = Convert.ToInt32(uc.cmbxTypeOfFund.SelectedValue);
                 short year = Convert.ToInt16(uc.nudYear.Value);
 
-                _frmBudgetAppropriations.RecordLocator(fppID, allotmentClassID, fundID, year);
                 _frmBudgetAppropriations.cmbxAllotmentClass.ComboBox.SelectedValue = allotmentClassID;
                 _frmBudgetAppropriations.cmbxFundType.ComboBox.SelectedValue = fundID;
                 _frmBudgetAppropriations.cmbxYear.ComboBox.SelectedValue = year;
 
                 Helper.MessageBoxSuccess("Budget Appropriation update has been saved.");
+                _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
                 Close();
-
-                //Reset User Control Form
-                uc.ResetForm();
             }
         }
     }

@@ -30,7 +30,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.cmbxFPP = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbxOthersFPP = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,7 +39,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.nudAmount = new System.Windows.Forms.NumericUpDown();
-            this.epFunctionProgramProject = new System.Windows.Forms.ErrorProvider(this.components);
             this.epOthersFunctionProgramProject = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAllotmentClass = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
@@ -54,8 +52,8 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.epTypeOfFund = new System.Windows.Forms.ErrorProvider(this.components);
             this.epYear = new System.Windows.Forms.ErrorProvider(this.components);
             this.chckbxContinuing = new System.Windows.Forms.CheckBox();
+            this.txtFPP = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epFunctionProgramProject)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFunctionProgramProject)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAllotmentClass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
@@ -64,16 +62,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             ((System.ComponentModel.ISupportInitialize)(this.epTypeOfFund)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epYear)).BeginInit();
             this.SuspendLayout();
-            // 
-            // cmbxFPP
-            // 
-            this.cmbxFPP.FormattingEnabled = true;
-            this.cmbxFPP.Location = new System.Drawing.Point(140, 87);
-            this.cmbxFPP.Name = "cmbxFPP";
-            this.cmbxFPP.Size = new System.Drawing.Size(436, 23);
-            this.cmbxFPP.TabIndex = 3;
-            this.cmbxFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxFPP_Validating);
-            this.cmbxFPP.Validated += new System.EventHandler(this.cmbxFPP_Validated);
             // 
             // label1
             // 
@@ -167,10 +155,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.nudAmount.ThousandsSeparator = true;
             this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
             this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
-            // 
-            // epFunctionProgramProject
-            // 
-            this.epFunctionProgramProject.ContainerControl = this;
             // 
             // epOthersFunctionProgramProject
             // 
@@ -275,11 +259,20 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.chckbxContinuing.Text = "Continuing Appropriation";
             this.chckbxContinuing.UseVisualStyleBackColor = true;
             // 
+            // txtFPP
+            // 
+            this.txtFPP.Location = new System.Drawing.Point(140, 87);
+            this.txtFPP.Name = "txtFPP";
+            this.txtFPP.ReadOnly = true;
+            this.txtFPP.Size = new System.Drawing.Size(436, 23);
+            this.txtFPP.TabIndex = 9;
+            // 
             // ucBudgetAppropriations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.Controls.Add(this.txtFPP);
             this.Controls.Add(this.chckbxContinuing);
             this.Controls.Add(this.nudYear);
             this.Controls.Add(this.cmbxTypeOfFund);
@@ -296,12 +289,10 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.Controls.Add(this.cmbxLedgerAccount);
             this.Controls.Add(this.cmbxAllotmentClass);
             this.Controls.Add(this.cmbxOthersFPP);
-            this.Controls.Add(this.cmbxFPP);
             this.Name = "ucBudgetAppropriations";
             this.Size = new System.Drawing.Size(600, 252);
             this.Load += new System.EventHandler(this.ucBudgetAppropriations_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epFunctionProgramProject)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFunctionProgramProject)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAllotmentClass)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
@@ -320,12 +311,10 @@ namespace BudgetSystem.Views.BudgetAppropriations
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ErrorProvider epFunctionProgramProject;
         private System.Windows.Forms.ErrorProvider epOthersFunctionProgramProject;
         private System.Windows.Forms.ErrorProvider epAllotmentClass;
         private System.Windows.Forms.ErrorProvider epAmount;
         private System.Windows.Forms.ErrorProvider epGeneralLedgerAcc;
-        internal System.Windows.Forms.ComboBox cmbxFPP;
         internal System.Windows.Forms.ComboBox cmbxOthersFPP;
         internal System.Windows.Forms.ComboBox cmbxAllotmentClass;
         internal System.Windows.Forms.ComboBox cmbxLedgerAccount;
@@ -339,5 +328,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
         internal System.Windows.Forms.NumericUpDown nudYear;
         internal System.Windows.Forms.ComboBox cmbxTypeOfFund;
         internal System.Windows.Forms.CheckBox chckbxContinuing;
+        internal System.Windows.Forms.TextBox txtFPP;
     }
 }

@@ -25,110 +25,41 @@ namespace BudgetSystem.Views.BudgetAppropriations
         public ucBudgetAppropriations()
         {
             InitializeComponent();
+
+            cmbxOthersFPP.Enabled = false;
+            cmbxLedgerAccount.Enabled = false;
         }
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[7];
+            var errorArray = new string[6];
 
             errorArray[0] = epTypeOfFund.GetError(cmbxTypeOfFund);
-            errorArray[1] = epFunctionProgramProject.GetError(cmbxFPP);
-            errorArray[2] = epOthersFunctionProgramProject.GetError(cmbxOthersFPP);
-            errorArray[3] = epAllotmentClass.GetError(cmbxAllotmentClass);
-            errorArray[4] = epGeneralLedgerAcc.GetError(cmbxLedgerAccount);
-            errorArray[5] = epYear.GetError(nudYear);
-            errorArray[6] = epAmount.GetError(nudAmount);
+            errorArray[1] = epOthersFunctionProgramProject.GetError(cmbxOthersFPP);
+            errorArray[2] = epAllotmentClass.GetError(cmbxAllotmentClass);
+            errorArray[3] = epGeneralLedgerAcc.GetError(cmbxLedgerAccount);
+            errorArray[4] = epYear.GetError(nudYear);
+            errorArray[5] = epAmount.GetError(nudAmount);
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
         {
-            cmbxFPP.SelectedIndex = -1;
             cmbxOthersFPP.SelectedIndex = -1;
             cmbxAllotmentClass.SelectedIndex = -1;
             cmbxLedgerAccount.SelectedIndex = -1;
             nudAmount.Value = nudAmount.Minimum;
         }
 
-
-        //combobox fpp
-
-        internal void LoadFPPRecords()
-        {
-            try
-            {
-                HelperLoadRecords.FPPComboBox(Factory.FunctionProgramProjectRepository().GetRecords(), cmbxFPP, "fpp_name", "id");
-                cmbxFPP.SelectedValueChanged += new EventHandler(CmbxFPP_SelectedValueChanged);
-                cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TextChanged);
-                cmbxFPP.SelectedIndex = -1;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
         internal void LoadOthersFPPByFPPIdCombobox()
         {
-            var fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
-
             HelperLoadRecords.OthersFPPCombobox(Factory.OthersFPPRepository().GetRecordsByFPPID(fppId), cmbxOthersFPP, "name", "id");
             cmbxOthersFPP.SelectedIndex = -1;
             cmbxOthersFPP.Text = string.Empty;
             cmbxOthersFPP.Enabled = true;
         }
 
-        private bool ShowErrorFPPNameExist()
-        {
-            try
-            {
-                if (!Factory.FunctionProgramProjectRepository().NameExist(cmbxFPP.Text) && !string.IsNullOrEmpty(cmbxFPP.Text))
-                {
-                    epFunctionProgramProject.SetError(cmbxFPP, "Invalid FPP. Please select on the list.");
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private void CmbxFPP_TextChanged(object sender, EventArgs e)
-        {
-            if (ShowErrorFPPNameExist())
-            {
-                cmbxOthersFPP.Enabled = false;
-                cmbxOthersFPP.SelectedIndex = -1;
-                cmbxOthersFPP.Text = string.Empty;
-            }
-        }
-
-        private void CmbxFPP_SelectedValueChanged(object sender, EventArgs e)
-        {
-            LoadOthersFPPByFPPIdCombobox();
-        }
-
-        private void cmbxFPP_Validating(object sender, CancelEventArgs e)
-        {
-            if (string.IsNullOrEmpty(cmbxFPP.Text))
-            {
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(epFunctionProgramProject, cmbxFPP, "Function Program Project");
-            }
-            else 
-            {
-                e.Cancel = ShowErrorFPPNameExist();
-            }
-        }
-
-        private void cmbxFPP_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(epFunctionProgramProject, cmbxFPP);
-        }
-
-   
 
         //combobox others fpp 
 
@@ -158,7 +89,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             Helper.ClearErrorComboBox(epOthersFunctionProgramProject, cmbxOthersFPP);
         }
-
         
 
         //combobox allotment classes
@@ -171,6 +101,8 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 cmbxAllotmentClass.TextChanged -= new EventHandler(CmbxAllotmentClass_TextChanged);
 
                 HelperLoadRecords.BudgetAppropriationsAllotmentCombobox(Factory.AllotmentClassesRepository().GetRecords(), cmbxAllotmentClass, "allotment_name", "id");
+
+                cmbxAllotmentClass.SelectedIndex = -1;
 
                 cmbxAllotmentClass.SelectedValueChanged += new EventHandler(CmbxAllotmentClass_SelectedValueChanged);
                 cmbxAllotmentClass.TextChanged += new EventHandler(CmbxAllotmentClass_TextChanged);
@@ -245,7 +177,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
         }
 
 
-
         //combobox account
 
         private bool ShowErrorLedgerNameNotExist()
@@ -271,7 +202,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             {
 
                 int fundID = Convert.ToInt32(cmbxTypeOfFund.SelectedValue);
-                int FPPId = Convert.ToInt32(cmbxFPP.SelectedValue);
                 int? othersFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text.ToString()) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
                 int allotmentClassId = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
                 int generalLedgerAccId = Convert.ToInt32(cmbxLedgerAccount.SelectedValue);
@@ -281,11 +211,11 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
                 if (budgetAppropriationId == 0)
                 {
-                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(fundID, FPPId, othersFPPId, allotmentClassId, generalLedgerAccId);
+                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(fundID, fppId, othersFPPId, allotmentClassId, generalLedgerAccId);
                 }
                 else
                 {
-                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(budgetAppropriationId, fundID, FPPId, othersFPPId, allotmentClassId, generalLedgerAccId);
+                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(budgetAppropriationId, fundID, fppId, othersFPPId, allotmentClassId, generalLedgerAccId);
                 }
 
                 if (budgetAppropriationExist)
@@ -309,7 +239,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 #region Validation of Budget Appropriration Record
 
                 int fundID = Convert.ToInt32(cmbxTypeOfFund.SelectedValue);
-                int FPPId = Convert.ToInt32(cmbxFPP.SelectedValue);
                 int? othersFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text.ToString()) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
                 int allotmentClassId = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
                 int generalLedgerAccId = Convert.ToInt32(cmbxLedgerAccount.SelectedValue);
@@ -319,11 +248,11 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
                 if (budgetAppropriationId == 0)
                 {
-                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationExist(fundID, FPPId, othersFPPId, allotmentClassId, generalLedgerAccId, year);
+                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationExist(fundID, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, year);
                 }
                 else
                 {
-                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationExist(budgetAppropriationId, fundID, FPPId, othersFPPId, allotmentClassId, generalLedgerAccId, year);
+                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationExist(budgetAppropriationId, fundID, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, year);
                 }
 
                 if (budgetAppropriationExist)
@@ -436,7 +365,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
 
         //numeric up down amounts
-
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
 
@@ -468,7 +396,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
         }
 
 
-
         //numeric up down year
 
         private void nudYear_Validating(object sender, CancelEventArgs e)
@@ -480,7 +407,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             Helper.ClearErrorNumericUpDown(epYear, nudYear);
         }
-
 
 
         //combobox funds
@@ -511,16 +437,15 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         private void ucBudgetAppropriations_Load(object sender, EventArgs e)
         {
-            if (!DesignMode) 
+            if (!DesignMode)
             {
-                LoadFPPRecords();
-                LoadAllotmentClassRecords();
-                LoadFunds();
-                ResetForm();
-                nudYear.Value = DateTime.Now.Year;
+                var fppRepo = Factory.FunctionProgramProjectRepository().GetRecordByID(fppId);
+                txtFPP.Text = $"{fppRepo["fpp_code"]} - {fppRepo["fpp_name"]}";
 
-                cmbxOthersFPP.Enabled = false;
-                cmbxLedgerAccount.Enabled = false;
+                LoadAllotmentClassRecords();
+                LoadOthersFPPByFPPIdCombobox();
+                LoadFunds();
+                nudYear.Value = DateTime.Now.Year;
             }
         }
     }
