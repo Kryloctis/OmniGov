@@ -29,21 +29,13 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[4];
+            var errorArray = new string[3];
 
             errorArray[0] = epOthersFunctionProgramProject.GetError(cmbxOthersFPP);
             errorArray[1] = epGeneralLedgerAcc.GetError(cmbxLedgerAccount);
-            errorArray[2] = epYear.GetError(nudYear);
-            errorArray[3] = epAmount.GetError(nudAmount);
+            errorArray[2] = epAmount.GetError(nudAmount);
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
-        }
-
-        internal void ResetForm()
-        {
-            cmbxOthersFPP.SelectedIndex = -1;
-            cmbxLedgerAccount.SelectedIndex = -1;
-            nudAmount.Value = nudAmount.Minimum;
         }
 
         internal void LoadOthersFPPByFPPIdCombobox()
@@ -145,7 +137,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
                 int? othersFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text.ToString()) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
                 int generalLedgerAccId = Convert.ToInt32(cmbxLedgerAccount.SelectedValue);
-                short year = Convert.ToInt16(nudYear.Value);
 
                 bool budgetAppropriationExist;
 
@@ -272,6 +263,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
 
         //numeric up down amounts
+
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
 
@@ -303,18 +295,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
         }
 
 
-        //numeric up down year
-
-        private void nudYear_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epYear, nudYear, "Year");
-        }
-
-        private void nudYear_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorNumericUpDown(epYear, nudYear);
-        }
-
         private void ucBudgetAppropriations_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
@@ -325,10 +305,11 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 txtFPP.Text = $"{fppRepo["fpp_code"]} - {fppRepo["fpp_name"]}";
                 txtFund.Text = $"{fundRepo["fund_code"]} - {fundRepo["fund_name"]}";
                 txtAllotmentClass.Text = $"{allotmentClassRepo["allotment_code"]} - {allotmentClassRepo["allotment_name"]}";
+                txtYear.Text = year.ToString();
+                dtDateEntry.MaxDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
 
                 LoadOthersFPPByFPPIdCombobox();
                 LoadAccounts();
-                nudYear.Value = DateTime.Now.Year;
             }
         }
     }

@@ -121,6 +121,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             ucBudgetAppropriationsAdd.fppId = Convert.ToInt32(dgFPP.Rows[rowIndex].Cells["id"].Value);
             ucBudgetAppropriationsAdd.fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
             ucBudgetAppropriationsAdd.allotmentClassId = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
+            ucBudgetAppropriationsAdd.year = Convert.ToInt16(nudYear.Value);
             
             frmBudgetAppropriationsAdd.ShowDialog();
         }

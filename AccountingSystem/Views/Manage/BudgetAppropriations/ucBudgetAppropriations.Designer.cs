@@ -45,18 +45,15 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.nudYear = new System.Windows.Forms.NumericUpDown();
-            this.epYear = new System.Windows.Forms.ErrorProvider(this.components);
             this.chckbxContinuing = new System.Windows.Forms.CheckBox();
             this.txtFPP = new System.Windows.Forms.TextBox();
             this.txtFund = new System.Windows.Forms.TextBox();
             this.txtAllotmentClass = new System.Windows.Forms.TextBox();
+            this.txtYear = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFunctionProgramProject)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epGeneralLedgerAcc)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epYear)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -188,34 +185,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.label8.TabIndex = 1;
             this.label8.Text = "Year";
             // 
-            // nudYear
-            // 
-            this.nudYear.Location = new System.Drawing.Point(96, 29);
-            this.nudYear.Maximum = new decimal(new int[] {
-            9998,
-            0,
-            0,
-            0});
-            this.nudYear.Minimum = new decimal(new int[] {
-            1753,
-            0,
-            0,
-            0});
-            this.nudYear.Name = "nudYear";
-            this.nudYear.Size = new System.Drawing.Size(436, 23);
-            this.nudYear.TabIndex = 1;
-            this.nudYear.Value = new decimal(new int[] {
-            1753,
-            0,
-            0,
-            0});
-            this.nudYear.Validating += new System.ComponentModel.CancelEventHandler(this.nudYear_Validating);
-            this.nudYear.Validated += new System.EventHandler(this.nudYear_Validated);
-            // 
-            // epYear
-            // 
-            this.epYear.ContainerControl = this;
-            // 
             // chckbxContinuing
             // 
             this.chckbxContinuing.AutoSize = true;
@@ -250,16 +219,24 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.txtAllotmentClass.Size = new System.Drawing.Size(436, 23);
             this.txtAllotmentClass.TabIndex = 11;
             // 
+            // txtYear
+            // 
+            this.txtYear.Location = new System.Drawing.Point(96, 29);
+            this.txtYear.Name = "txtYear";
+            this.txtYear.ReadOnly = true;
+            this.txtYear.Size = new System.Drawing.Size(436, 23);
+            this.txtYear.TabIndex = 12;
+            // 
             // ucBudgetAppropriations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.Controls.Add(this.txtYear);
             this.Controls.Add(this.txtAllotmentClass);
             this.Controls.Add(this.txtFund);
             this.Controls.Add(this.txtFPP);
             this.Controls.Add(this.chckbxContinuing);
-            this.Controls.Add(this.nudYear);
             this.Controls.Add(this.dtDateEntry);
             this.Controls.Add(this.nudAmount);
             this.Controls.Add(this.label6);
@@ -279,8 +256,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFunctionProgramProject)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epGeneralLedgerAcc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epYear)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -302,12 +277,11 @@ namespace BudgetSystem.Views.BudgetAppropriations
         internal System.Windows.Forms.DateTimePicker dtDateEntry;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ErrorProvider epYear;
-        internal System.Windows.Forms.NumericUpDown nudYear;
         internal System.Windows.Forms.CheckBox chckbxContinuing;
         internal System.Windows.Forms.TextBox txtFPP;
         internal System.Windows.Forms.TextBox txtFund;
         internal System.Windows.Forms.TextBox t;
         internal System.Windows.Forms.TextBox txtAllotmentClass;
+        internal System.Windows.Forms.TextBox txtYear;
     }
 }

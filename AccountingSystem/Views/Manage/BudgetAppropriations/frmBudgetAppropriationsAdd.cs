@@ -44,7 +44,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
                     OthersFPPId = uc.cmbxOthersFPP.SelectedValue == null ? null : Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue),
                     AllotmentClassesId = uc.allotmentClassId,
                     GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxLedgerAccount.SelectedValue),
-                    Year = Convert.ToInt16(uc.nudYear.Value),
+                    Year = uc.year,
                     DateEntry = uc.dtDateEntry.Value,
                     Amount = uc.nudAmount.Value,
                     Continuing = uc.chckbxContinuing.Checked
@@ -66,7 +66,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             {
                 int allotmentClassID = uc.allotmentClassId;
                 int fundID = uc.fundId;
-                short year = Convert.ToInt16(uc.nudYear.Value);
 
                 _frmBudgetAppropriations.cmbxAllotmentClass.SelectedValue = allotmentClassID;
                 _frmBudgetAppropriations.cmbxFunds.SelectedValue = fundID;

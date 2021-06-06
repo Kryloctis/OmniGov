@@ -56,7 +56,8 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                 uc.allotmentClassId = allotmentClassId;
                 uc.cmbxLedgerAccount.SelectedValue = generalLedgerAccountId;
                 uc.dtDateEntry.Value = dateEntry;
-                uc.nudYear.Value = year;
+                uc.txtYear.Text = year.ToString();
+                uc.year = year;
                 uc.nudAmount.Value = appropriationAmount;
                 uc.chckbxContinuing.Checked = continuing;
             }
@@ -94,7 +95,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                     AllotmentClassesId = uc.allotmentClassId,
                     GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxLedgerAccount.SelectedValue),
                     DateEntry = uc.dtDateEntry.Value,
-                    Year = Convert.ToInt16(uc.nudYear.Value),
+                    Year = uc.year,
                     Amount = uc.nudAmount.Value,
                     Continuing = uc.chckbxContinuing.Checked
                 };
@@ -120,7 +121,6 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                 //Initialze data references
                 int allotmentClassID = uc.allotmentClassId;
                 int fundID = uc.fundId;
-                short year = Convert.ToInt16(uc.nudYear.Value);
 
                 _frmBudgetAppropriations.cmbxAllotmentClass.SelectedValue = allotmentClassID;
                 _frmBudgetAppropriations.cmbxFunds.SelectedValue = fundID;
