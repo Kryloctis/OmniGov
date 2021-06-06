@@ -259,21 +259,6 @@ namespace ACC.Data
             return record;
         }
 
-        public DataTable GetYearsBudgetAppropriations()
-        {
-            try
-            {
-                string query = $"SELECT year FROM {viewTableName} group by year;";
-
-                var dtPermissions = new DataTable();
-                return mySqlGenericCommands.Fill(query, dtPermissions);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
 
         //Budget Appropriations Display
 

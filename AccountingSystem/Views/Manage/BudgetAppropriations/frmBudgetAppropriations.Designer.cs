@@ -30,26 +30,25 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         private void InitializeComponent()
         {
             this.dgBudgetAppropriations = new System.Windows.Forms.DataGridView();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnAdd = new System.Windows.Forms.ToolStripButton();
-            this.btnEdit = new System.Windows.Forms.ToolStripButton();
-            this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnARODetails = new System.Windows.Forms.ToolStripButton();
-            this.cmbxYear = new System.Windows.Forms.ToolStripComboBox();
-            this.cmbxFundType = new System.Windows.Forms.ToolStripComboBox();
-            this.cmbxAllotmentClass = new System.Windows.Forms.ToolStripComboBox();
             this.dgFPP = new System.Windows.Forms.DataGridView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.nudYear = new System.Windows.Forms.NumericUpDown();
+            this.cmbxFunds = new System.Windows.Forms.ComboBox();
+            this.cmbxAllotmentClass = new System.Windows.Forms.ComboBox();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetAppropriations)).BeginInit();
-            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFPP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
             this.SuspendLayout();
             // 
             // dgBudgetAppropriations
@@ -58,110 +57,12 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgBudgetAppropriations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgBudgetAppropriations.Location = new System.Drawing.Point(3, 53);
+            this.dgBudgetAppropriations.Location = new System.Drawing.Point(3, 62);
             this.dgBudgetAppropriations.Name = "dgBudgetAppropriations";
             this.dgBudgetAppropriations.RowTemplate.Height = 25;
-            this.dgBudgetAppropriations.Size = new System.Drawing.Size(933, 441);
+            this.dgBudgetAppropriations.Size = new System.Drawing.Size(933, 443);
             this.dgBudgetAppropriations.TabIndex = 1;
             this.dgBudgetAppropriations.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView1_ColumnAdded);
-            this.dgBudgetAppropriations.SelectionChanged += new System.EventHandler(this.dgBudgetAppropriations_SelectionChanged);
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnAdd,
-            this.btnEdit,
-            this.btnDelete,
-            this.toolStripSeparator1,
-            this.btnARODetails,
-            this.cmbxYear,
-            this.cmbxFundType,
-            this.cmbxAllotmentClass});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(948, 50);
-            this.toolStrip1.TabIndex = 2;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.add;
-            this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(42, 47);
-            this.btnAdd.Text = "&Add...";
-            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Enabled = false;
-            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.edit;
-            this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(40, 47);
-            this.btnEdit.Text = "&Edit...";
-            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Enabled = false;
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
-            this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(44, 47);
-            this.btnDelete.Text = "&Delete";
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
-            // 
-            // btnARODetails
-            // 
-            this.btnARODetails.Enabled = false;
-            this.btnARODetails.Image = global::AccountingSystem.Properties.Resources.obligation_request_24px;
-            this.btnARODetails.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnARODetails.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnARODetails.Name = "btnARODetails";
-            this.btnARODetails.Size = new System.Drawing.Size(82, 47);
-            this.btnARODetails.Text = "&ARO Details...";
-            this.btnARODetails.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // cmbxYear
-            // 
-            this.cmbxYear.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.cmbxYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxYear.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.cmbxYear.Margin = new System.Windows.Forms.Padding(1, 0, 10, 0);
-            this.cmbxYear.Name = "cmbxYear";
-            this.cmbxYear.Size = new System.Drawing.Size(121, 50);
-            // 
-            // cmbxFundType
-            // 
-            this.cmbxFundType.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.cmbxFundType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxFundType.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.cmbxFundType.Margin = new System.Windows.Forms.Padding(1, 0, 10, 0);
-            this.cmbxFundType.Name = "cmbxFundType";
-            this.cmbxFundType.Size = new System.Drawing.Size(150, 50);
-            // 
-            // cmbxAllotmentClass
-            // 
-            this.cmbxAllotmentClass.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.cmbxAllotmentClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxAllotmentClass.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.cmbxAllotmentClass.Margin = new System.Windows.Forms.Padding(1, 0, 10, 0);
-            this.cmbxAllotmentClass.Name = "cmbxAllotmentClass";
-            this.cmbxAllotmentClass.Size = new System.Drawing.Size(150, 50);
             // 
             // dgFPP
             // 
@@ -173,7 +74,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.dgFPP.Name = "dgFPP";
             this.dgFPP.RowTemplate.Height = 25;
             this.dgFPP.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgFPP.Size = new System.Drawing.Size(334, 482);
+            this.dgFPP.Size = new System.Drawing.Size(334, 493);
             this.dgFPP.TabIndex = 3;
             this.dgFPP.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgFPP_RowHeaderMouseDoubleClick);
             this.dgFPP.SelectionChanged += new System.EventHandler(this.dgFPP_SelectionChanged);
@@ -192,18 +93,127 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.panel1);
             this.splitContainer1.Panel2.Controls.Add(this.txtTotal);
             this.splitContainer1.Panel2.Controls.Add(this.label1);
             this.splitContainer1.Panel2.Controls.Add(this.dgBudgetAppropriations);
-            this.splitContainer1.Panel2.Controls.Add(this.toolStrip1);
-            this.splitContainer1.Size = new System.Drawing.Size(1302, 538);
+            this.splitContainer1.Size = new System.Drawing.Size(1302, 540);
             this.splitContainer1.SplitterDistance = 350;
             this.splitContainer1.TabIndex = 7;
+            // 
+            // panel1
+            // 
+            this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.nudYear);
+            this.panel1.Controls.Add(this.cmbxFunds);
+            this.panel1.Controls.Add(this.cmbxAllotmentClass);
+            this.panel1.Controls.Add(this.btnAdd);
+            this.panel1.Controls.Add(this.btnEdit);
+            this.panel1.Controls.Add(this.btnDelete);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(948, 56);
+            this.panel1.TabIndex = 5;
+            // 
+            // nudYear
+            // 
+            this.nudYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudYear.Location = new System.Drawing.Point(790, 20);
+            this.nudYear.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.nudYear.Minimum = new decimal(new int[] {
+            1987,
+            0,
+            0,
+            0});
+            this.nudYear.Name = "nudYear";
+            this.nudYear.ReadOnly = true;
+            this.nudYear.Size = new System.Drawing.Size(146, 23);
+            this.nudYear.TabIndex = 9;
+            this.nudYear.Value = new decimal(new int[] {
+            1987,
+            0,
+            0,
+            0});
+            // 
+            // cmbxFunds
+            // 
+            this.cmbxFunds.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxFunds.FormattingEnabled = true;
+            this.cmbxFunds.Location = new System.Drawing.Point(638, 20);
+            this.cmbxFunds.Name = "cmbxFunds";
+            this.cmbxFunds.Size = new System.Drawing.Size(146, 23);
+            this.cmbxFunds.TabIndex = 8;
+            // 
+            // cmbxAllotmentClass
+            // 
+            this.cmbxAllotmentClass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbxAllotmentClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxAllotmentClass.FormattingEnabled = true;
+            this.cmbxAllotmentClass.Location = new System.Drawing.Point(486, 20);
+            this.cmbxAllotmentClass.Name = "cmbxAllotmentClass";
+            this.cmbxAllotmentClass.Size = new System.Drawing.Size(146, 23);
+            this.cmbxAllotmentClass.TabIndex = 6;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.FlatAppearance.BorderSize = 0;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.add;
+            this.btnAdd.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnAdd.Location = new System.Drawing.Point(3, 3);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(0);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(47, 53);
+            this.btnAdd.TabIndex = 3;
+            this.btnAdd.Text = "&Add...";
+            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.AutoSize = true;
+            this.btnEdit.FlatAppearance.BorderSize = 0;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.edit;
+            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnEdit.Location = new System.Drawing.Point(50, 3);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(0);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(49, 53);
+            this.btnEdit.TabIndex = 4;
+            this.btnEdit.Text = "&Edit...";
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.AutoSize = true;
+            this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
+            this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnDelete.Location = new System.Drawing.Point(99, 3);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(0);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(50, 53);
+            this.btnDelete.TabIndex = 5;
+            this.btnDelete.Text = "&Delete";
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // txtTotal
             // 
             this.txtTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTotal.Location = new System.Drawing.Point(804, 500);
+            this.txtTotal.Location = new System.Drawing.Point(804, 511);
             this.txtTotal.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
@@ -216,7 +226,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(689, 503);
+            this.label1.Location = new System.Drawing.Point(689, 514);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(109, 15);
             this.label1.TabIndex = 3;
@@ -227,7 +237,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(1302, 538);
+            this.ClientSize = new System.Drawing.Size(1302, 540);
             this.Controls.Add(this.splitContainer1);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1318, 575);
@@ -238,33 +248,32 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmBudgetAppropriationsNew_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetAppropriations)).EndInit();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFPP)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        internal System.Windows.Forms.ToolStripButton btnAdd;
-        internal System.Windows.Forms.ToolStripButton btnEdit;
-        internal System.Windows.Forms.ToolStripButton btnDelete;
-        internal System.Windows.Forms.ToolStripComboBox cmbxAllotmentClass;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label label1;
-        internal System.Windows.Forms.ToolStripComboBox cmbxFundType;
-        internal System.Windows.Forms.ToolStripComboBox cmbxYear;
         internal System.Windows.Forms.DataGridView dgFPP;
         internal System.Windows.Forms.DataGridView dgBudgetAppropriations;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnAllotment;
         internal System.Windows.Forms.TextBox txtTotal;
-        internal System.Windows.Forms.ToolStripButton btnARODetails;
+        private System.Windows.Forms.Panel panel1;
+        internal System.Windows.Forms.Button btnAdd;
+        internal System.Windows.Forms.Button btnEdit;
+        internal System.Windows.Forms.Button btnDelete;
+        internal System.Windows.Forms.ComboBox cmbxAllotmentClass;
+        internal System.Windows.Forms.ComboBox cmbxFunds;
+        internal System.Windows.Forms.NumericUpDown nudYear;
     }
 }

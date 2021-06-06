@@ -8,7 +8,6 @@ namespace ACC.Domain.Interfaces
 {
     public interface IBudgetAppropriationsRepository : IRepository<BudgetAppropriationsModel>
     {
-        DataTable GetYearsBudgetAppropriations();
 
         Dictionary<string, string> GetViewRecordByID(int budgetAppId);
 
