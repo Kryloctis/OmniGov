@@ -17,9 +17,12 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
     public partial class frmPCReport : Form
     {
         private readonly ReportViewer reportViewer;
-        public frmPCReport()
+        private string Ids = string.Empty;
+
+        public frmPCReport(string _Ids)
         {
             InitializeComponent();
+            Ids = _Ids;
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
@@ -28,7 +31,11 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 
         private void frmPCReport_Load(object sender, EventArgs e)
         {
-
+            LoadReport(reportViewer.LocalReport);
+            //reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.Percent;
+            reportViewer.ZoomPercent = 100;
+            reportViewer.RefreshReport();
         }
 
         private DataTable DataTablePC()
@@ -58,12 +65,39 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             return dtPC;
         }
 
+        private DataTable DataTablePC(string id)
+        {
+            
+            var dtPC = new dsLFS.dtPCDataTable();
+            var dt = Factory.CollectorReportPaymentRepository().GetRecordByLedger(id);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow item in dt.Rows)
+                {
+                    DataRow row = dtPC.NewRow();
+                    row["rcdno"] = item["report_no"];
+                    row["account_code"] = item["account_code"];
+                    row["subsidiary"] = item["subsidiary"];
+                    row["payee"] = item["payee"];
+                    row["acc_form_desc"] = item["accform"];
+                    row["ledger_name"] = item["ledger_name"];
+                    row["payment_date"] = item["payment_date"];
+                    row["receipt_no"] = item["receipt_no"];
+                    row["amount"] = item["amount"];
+                    row["collector"] = item["collector"];
+                    dtPC.Rows.Add(row);
+                }
+            }
+
+            return dtPC;
+        }
+
         private void LoadReport(LocalReport report)
         {
 
             try
             {
-                var lguDetails = Helper.LGUDetails();
+                /*var lguDetails = Helper.LGUDetails();
                 var signatory = "FELIX A. TRAPA";
 
                 var pcrepo = Factory.PaymentCollectionRepository();
@@ -71,11 +105,20 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                     new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
                     new ReportParameter("paramSignatory", signatory)
+                };*/
+                var lguDetails = Helper.LGUDetails();
+                var signatory = "FELIX A. TRAPA";
+
+                var pcrepo = Factory.PaymentCollectionRepository();
+                var parameters = new[] {
+                    new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
+                    new ReportParameter("paramMonth",DateTime.Now.ToString()),
+                    new ReportParameter("paramSignatory", signatory)
                 };
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\payment-collection.rdlc";
+                report.ReportPath = $"{Application.StartupPath}Reports\\payment-collection2.rdlc";
                 report.DataSources.Clear();
 
-                report.DataSources.Add(new ReportDataSource("dtPC", DataTablePC()));
+                report.DataSources.Add(new ReportDataSource("dtPC", DataTablePC(Ids)));
                 report.SetParameters(parameters);
 
             }

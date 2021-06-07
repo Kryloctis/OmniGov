@@ -28,7 +28,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
 
         private void frmFind_Load(object sender, EventArgs e)
         {
-            //LoadList();
+            if (!string.IsNullOrEmpty(table))
+                if (table.Equals("accountable"))
+                    LoadList();
+                if (table.Equals("subsidiary"))
+                    LoadList();
         }
 
         private void LoadList()
@@ -62,7 +66,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            if (txtsearch.Text.Length > 3)
+            if (txtsearch.Text.Length > 0)
             {
                 if (!string.IsNullOrEmpty(table))
                 {
@@ -76,6 +80,17 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
 
                         }
                         catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+                    }                    
+                    if (table.Equals("subsidiary"))
+                    {
+                        try
+                        {
+                            string searchkey = Convert.ToString(txtsearch.Text.Trim());
+                            var dtSub = Factory.SubsidiaryLedgerAccountsRepository().GetRecordsBySearchByReference(searchkey,frmpc.glaId);
+                            HelperLoadRecords.SubsidiaryLedgerAccountsDatagridView(dtSub, dgSelect);
+
+                        }
+                        catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
                     }
                     if (table.Equals("ledger"))
                     {
@@ -84,17 +99,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
                             string searchkey = Convert.ToString(txtsearch.Text.Trim());
                             var dtLedger = Factory.GeneralLedgerAccountsRepository().GetRecordsBySearch(searchkey);
                             HelperLoadRecords.GeneralLedgerSearchDatagridView(dtLedger, dgSelect);
-
-                        }
-                        catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-                    }
-                    if (table.Equals("subsidiary"))
-                    {
-                        try
-                        {
-                            string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                            var dtSub = Factory.SubsidiaryLedgerAccountsRepository().GetRecordsBySearchByReference(searchkey,frmpc.glaId);
-                            HelperLoadRecords.SubsidiaryLedgerAccountsDatagridView(dtSub, dgSelect);
 
                         }
                         catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

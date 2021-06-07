@@ -391,7 +391,24 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
+        #region Collector Report
+        internal static void CollectorReportDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.Columns.Clear();
+            datagrid.DataSource = dataTable;
+           
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].HeaderText = "Report No.";
+            datagrid.Columns[2].HeaderText = "Date";
+            datagrid.Columns[3].HeaderText = "Collector";
+            DataGridViewCheckBoxColumn chk = new DataGridViewCheckBoxColumn();
+            datagrid.Columns.Add(chk);
+            chk.HeaderText = "Print";
 
+
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        #endregion
         #region RCI
         internal static void RCIDatagridView(DataTable dataTable, DataGridView datagrid)
         {
@@ -430,6 +447,8 @@ namespace AccountingSystem
             datagrid.Columns[7].HeaderText = "Receipt No.";
             datagrid.Columns[8].HeaderText = "Payment Date";
             datagrid.Columns[9].HeaderText = "Amount";
+            datagrid.Columns[9].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns[10].HeaderText = "Collector";
             datagrid.Columns[11].Visible = false;
             datagrid.Columns[12].Visible = false;
@@ -458,8 +477,6 @@ namespace AccountingSystem
             datagrid.Columns[0].Visible = false;
             datagrid.Columns[1].HeaderText = "Account Code";
             datagrid.Columns[2].HeaderText = "Ledger Name";
-            datagrid.Columns[3].Visible = false;
-            datagrid.Columns[4].Visible = false;
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }

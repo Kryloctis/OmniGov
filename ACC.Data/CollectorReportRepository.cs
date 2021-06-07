@@ -1,19 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Data;
-using System.Transactions;
-using ACC.Domain.Interfaces;
+﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Text;
+using System.Transactions;
 
 namespace ACC.Data
 {
-    public class BanksRepository : IBanksRepository
+    class CollectorReportRepository:ICollectorReportRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
-        private readonly string tableName = "banks";
+        private readonly string tableName = "collector_report";
+        private readonly string tableName2 = "collecting_officers";
+        private readonly string tableName3 = "collector_report_payments";
+        private readonly string tableName4 = "payment_collections";
 
-        public BanksRepository(IDbGenericCommands dbGenericCommands)
+        public CollectorReportRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }
@@ -35,11 +38,41 @@ namespace ACC.Data
                 {
                     if (reader.Rows.Count < 1)
                         return record;
+                    record.Add("id", reader.Rows[0]["id"].ToString());
+                    record.Add("collecting_officers_id", reader.Rows[0]["collecting_officers_id"].ToString());
+                    record.Add("report_no", reader.Rows[0]["report_no"].ToString());
+                    record.Add("date", reader.Rows[0]["date"].ToString());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
-                    record.Add("account_no", reader.Rows[0]["account_no"].ToString());
-                    record.Add("bank_name", reader.Rows[0]["bank_name"].ToString());
-                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
-                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+            return record;
+        }
+
+        public Dictionary<string, string> GetRecordByID(string Id)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@report_no", DbType.String, Id},
+                };
+
+                string query = $"SELECT * FROM {tableName} WHERE report_no = @report_no";
+
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+                    record.Add("id", reader.Rows[0]["id"].ToString());
+                    record.Add("collecting_officers_id", reader.Rows[0]["collecting_officers_id"].ToString());
+                    record.Add("report_no", reader.Rows[0]["report_no"].ToString());
+                    record.Add("date", reader.Rows[0]["date"].ToString());
                 }
             }
             catch (Exception)
@@ -54,27 +87,30 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName}";
+                string query = $"SELECT {tableName}.id,{tableName}.report_no,{tableName}.date,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id ORDER BY {tableName}.date DESC";
 
-                var dtBanks = new DataTable();
-                return _dbGenericCommands.Fill(query, dtBanks);
+                var dtcr = new DataTable();
+                return _dbGenericCommands.Fill(query, dtcr);
             }
             catch (Exception)
             {
                 throw;
             }
         }
-        public bool Insert(BanksModel entity)
+
+       
+        public bool Insert(CollectorReportModel entity)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@account_no", DbType.String, entity.AccountNo},
-                      new object[] { "@bank_name", DbType.String, entity.BankName},
+                    new object[] { "@collecting_officers_id", DbType.Int16, entity.CoId},
+                    new object[] { "@report_no", DbType.String, entity.ReportNo},
+                    new object[] { "@date", DbType.Date, entity.Date},
                 };
 
-                string query = $"INSERT INTO {tableName} (account_no,bank_name) VALUES (@account_no,@bank_name)";
+                string query = $"INSERT INTO {tableName} (collecting_officers_id,report_no,date) VALUES (@collecting_officers_id,@report_no,@date)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -83,19 +119,19 @@ namespace ACC.Data
             }
         }
 
-
-        public bool Update(BanksModel entity)
+        public bool Update(CollectorReportModel entity)
         {
             try
             {
                 var parameters = new object[][]
                 {
                     new object[] { "@id", DbType.Int16, entity.Id},
-                    new object[] { "@account_no", DbType.String, entity.AccountNo},
-                     new object[] { "@bank_name", DbType.String, entity.BankName},
+                    new object[] { "@collecting_officers_id", DbType.Int16, entity.CoId},
+                    new object[] { "@report_no", DbType.String, entity.ReportNo},
+                    new object[] { "@date", DbType.Date, entity.Date},
                 };
 
-                string query = $"UPDATE {tableName} SET account_no = @account_no, bank_name = @bank_name WHERE id = @id";
+                string query = $"UPDATE {tableName} SET collecting_officers_id=@collecting_officers_id,report_no=@report_no,date=@date WHERE id=@id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -104,8 +140,7 @@ namespace ACC.Data
             }
         }
 
-
-        public bool Delete(List<BanksModel> entityList)
+        public bool Delete(List<CollectorReportModel> entityList)
         {
             try
             {
@@ -146,14 +181,13 @@ namespace ACC.Data
             }
         }
 
-
         public bool IdExist(int id)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Int32, id },
+                    new object[] { "@id", DbType.Int16, id },
                 };
 
                 string query = $"SELECT id FROM {tableName} WHERE id = @id";
@@ -170,16 +204,16 @@ namespace ACC.Data
             return false;
         }
 
-        public bool CodeExist(string accountCode)
+        public bool CodeExist(string id)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@account_no", DbType.String, accountCode },
+                    new object[] { "@report_no", DbType.String, id },
                 };
 
-                string query = $"SELECT account_no FROM {tableName} WHERE account_no = @account_no";
+                string query = $"SELECT report_no FROM {tableName} WHERE report_no = @report_no";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -193,17 +227,16 @@ namespace ACC.Data
             return false;
         }
 
-        public bool CodeExist(string accountCode, int bankId)
+        public bool HasGenerated(int id)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Int16, bankId },
-                    new object[] { "@account_no", DbType.String, accountCode },
+                    new object[] { "@collector_report_id", DbType.Int16, id },
                 };
 
-                string query = $"SELECT account_no FROM {tableName} WHERE id <> @id AND account_no = @account_no";
+                string query = $"SELECT * FROM {tableName3} WHERE collector_report_id = @collector_report_id";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -216,21 +249,24 @@ namespace ACC.Data
 
             return false;
         }
+
         public DataTable GetRecordsBySearch(string searchText)
         {
             try
             {
                 var srchtxt = searchText;
 
-                string query = $"SELECT * FROM {tableName} WHERE account_no  LIKE'%" + srchtxt + "%' OR bank_name  LIKE'%" + srchtxt + "%'";
+                string query = $"SELECT {tableName}.id,{tableName}.report_no,{tableName}.date,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id WHERE {tableName}.report_no LIKE '%{srchtxt}%' OR CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) LIKE '%{srchtxt}%' ORDER BY {tableName}.date DESC";
 
-                var dtBanks = new DataTable();
-                return _dbGenericCommands.Fill(query, dtBanks);
+                var dtpc = new DataTable();
+                return _dbGenericCommands.Fill(query, dtpc);
             }
             catch (Exception)
             {
                 throw;
             }
         }
+
+
     }
 }

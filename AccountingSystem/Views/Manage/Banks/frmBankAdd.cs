@@ -44,7 +44,15 @@ namespace AccountingSystem.Views.Manage.Banks
                 };
 
                 var banksrepository = Factory.BanksRepository();
-                return banksrepository.Insert(banksModel);
+                if (!banksrepository.CodeExist(uc.txtacode.Text.Trim()))
+                {
+                    return banksrepository.Insert(banksModel);
+                }
+                else
+                {
+                    Helper.ErrorMessage("Account Number already exists!");
+                    uc.txtacode.Focus();
+                }
             }
             catch (Exception ex)
             {

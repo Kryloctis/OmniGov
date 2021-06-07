@@ -19,6 +19,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal int glaId = 0;
         internal int slaId = 0;
         internal int userid = 0;
+        internal bool withsubsidiary = false;
         public ucPC()
         {
             InitializeComponent();
@@ -29,11 +30,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             errorArray[0] = errorProvider.GetError(cmbcollector);
             errorArray[1] = errorProvider.GetError(txtaccountable);
             errorArray[2] = errorProvider.GetError(txtledger);
-            errorArray[3] = errorProvider.GetError(txtsubsidiary);
-            errorArray[4] = errorProvider.GetError(txtpayee);
-            errorArray[5] = errorProvider.GetError(txtreceipt);
-            errorArray[6] = errorProvider.GetError(dtdate);
-            errorArray[7] = errorProvider.GetError(txtamount);
+            errorArray[3] = errorProvider.GetError(txtpayee);
+            errorArray[4] = errorProvider.GetError(txtreceipt);
+            errorArray[5] = errorProvider.GetError(dtdate);
+            errorArray[6] = errorProvider.GetError(txtamount);
+            errorArray[7] = errorProvider.GetError(txtsubsidiary);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -105,10 +106,19 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     }
                     if (table.Equals("subsidiary"))
                     {
-                        var subRepository = Factory.SubsidiaryLedgerAccountsRepository();
-                        var subData = subRepository.GetRecordByID(Id);
-                        slaId = Id;
-                        txtsubsidiary.Text = String.Format("{0} - {1}", subData["sub_code"], subData["sub_name"]);
+                        if(Id > 0)
+                        {
+                            var subRepository = Factory.SubsidiaryLedgerAccountsRepository();
+                            var subData = subRepository.GetRecordByID(Id);
+                            slaId = Id;
+                            txtsubsidiary.Text = String.Format("{0} - {1}", subData["sub_code"], subData["sub_name"]);
+                        }
+                        else
+                        {
+                            slaId = Id;
+                            txtsubsidiary.Text = string.Empty;
+                        }
+                        
 
                     }
 
@@ -229,9 +239,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void txtsubsidiary_Validating(object sender, CancelEventArgs e)
         {
-            var subRepository = Factory.SubsidiaryLedgerAccountsRepository();
+            /*var subRepository = Factory.SubsidiaryLedgerAccountsRepository();
             bool isubsidiary = subRepository.HasSubsidiary(Convert.ToUInt16(glaId));
-            if (isubsidiary)
+            */
+            if (withsubsidiary)
             {
                 e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtsubsidiary, "Subsidiary!");
             }
@@ -253,9 +264,14 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             if(txtledger.Text.Length > 0 && glaId > 0)
             {
                 var subRepository = Factory.SubsidiaryLedgerAccountsRepository();
-                bool isubsidiary = subRepository.HasSubsidiary(Convert.ToUInt16(glaId));
-                txtsubsidiary.Enabled = isubsidiary;
-                btnsubsidiary.Enabled = isubsidiary;
+                withsubsidiary = subRepository.HasSubsidiary(Convert.ToUInt16(glaId));
+                txtsubsidiary.Enabled = withsubsidiary;
+                btnsubsidiary.Enabled = withsubsidiary;
+                if (!withsubsidiary)
+                {
+                    txtsubsidiary.Clear();
+                    slaId = 0;
+                }
             }
         }
     }

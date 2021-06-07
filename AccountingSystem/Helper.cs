@@ -264,6 +264,15 @@ namespace AccountingSystem
 
             return false;
         }
+
+        public static bool MessageBoxConfirmRCDList()
+        {
+            string message = "Do you want to Generate Report of General Collection now?";
+            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                return true;
+
+            return false;
+        }
         #endregion
 
         #region EnableDisableButtons

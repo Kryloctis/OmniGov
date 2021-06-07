@@ -60,7 +60,15 @@ namespace AccountingSystem.Views.Manage.Banks
                 };
 
                 var banksrepository = Factory.BanksRepository();
-                return banksrepository.Update(banksModel);
+                if (!banksrepository.CodeExist(uc.txtacode.Text.Trim()))
+                {
+                    return banksrepository.Update(banksModel);
+                }
+                else
+                {
+                    Helper.ErrorMessage("Account Number already exists!");
+                    uc.txtacode.Focus();
+                }
             }
             catch (Exception ex)
             {
