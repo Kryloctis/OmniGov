@@ -103,6 +103,26 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap allotment_release_24px {
+            get {
+                object obj = ResourceManager.GetObject("allotment_release_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap budget_approprations_24px {
+            get {
+                object obj = ResourceManager.GetObject("budget_approprations_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap button_add_14px {
             get {
                 object obj = ResourceManager.GetObject("button_add_14px", resourceCulture);
@@ -213,9 +233,9 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap give_money_28px {
+        internal static System.Drawing.Bitmap money_banknotes_document_text_28px {
             get {
-                object obj = ResourceManager.GetObject("give_money_28px", resourceCulture);
+                object obj = ResourceManager.GetObject("money_banknotes_document_text_28px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -223,9 +243,9 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap money_banknotes_document_text_28px {
+        internal static System.Drawing.Bitmap obligation_request_24px {
             get {
-                object obj = ResourceManager.GetObject("money_banknotes_document_text_28px", resourceCulture);
+                object obj = ResourceManager.GetObject("obligation_request_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -326,6 +346,16 @@ namespace AccountingSystem.Properties {
         internal static System.Drawing.Bitmap supplemental_28px {
             get {
                 object obj = ResourceManager.GetObject("supplemental_28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap supplemental_appropriations_24px {
+            get {
+                object obj = ResourceManager.GetObject("supplemental_appropriations_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

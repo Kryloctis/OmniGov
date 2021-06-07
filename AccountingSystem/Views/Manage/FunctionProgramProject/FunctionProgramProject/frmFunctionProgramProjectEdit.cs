@@ -13,50 +13,52 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
 {
     public partial class frmFunctionProgramProjectEdit : Form
     {
+        private ucFunctionProgramProject uc;
         private frmFunctionProgramProject _frmFunctionProgramProject;
+
         public frmFunctionProgramProjectEdit(frmFunctionProgramProject frmFunctionProgramProject, byte fppID)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             _frmFunctionProgramProject = frmFunctionProgramProject;
             ucFunctionProgramProject1.FppID = fppID;
+            uc = ucFunctionProgramProject1;
         }
 
         private void LoadSelectedRecord()
         {
             try
             {
-                var uc = ucFunctionProgramProject1;
                 var functionProgramProjectRepository = Factory.FunctionProgramProjectRepository();
-                Dictionary<string, string> data = functionProgramProjectRepository.GetRecordByID(uc.FppID);
+                Dictionary<string, string> dicfunctionProgramProject = functionProgramProjectRepository.GetRecordByID(uc.FppID);
 
-                uc.cmbServiceName.SelectedValue = data["functional_classification_services_id"];
-                uc.txtCode.Text = data["fpp_code"];
-                uc.txtName.Text = data["fpp_name"];
-                uc.txtServiceId.Text = data["functional_classification_services_id"];
+                uc.cmbFunctionalClassificationService.SelectedValue = dicfunctionProgramProject["functional_classification_services_id"];
+                uc.txtCode.Text = dicfunctionProgramProject["fpp_code"];
+                uc.txtName.Text = dicfunctionProgramProject["fpp_name"];
+                uc.chckboxSpecial.Checked = Convert.ToByte(dicfunctionProgramProject["is_special"]) == 0? false : true;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-
-        private bool SaveData()
+        private bool UpdateData()
         {
             try
             {
-                var uc = ucFunctionProgramProject1;
-                // if error occurs, show messagebox error
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
 
-                // proceed to insert
+                int functionalClassificationServiceId = Convert.ToInt32(uc.cmbFunctionalClassificationService.SelectedValue);
+
                 var functionProgramProjectModel = new FunctionProgramProjectModel()
                 {
                     Id = ucFunctionProgramProject1.FppID,
-                    functionalClassificationServiceId = byte.Parse(uc.cmbServiceName.SelectedValue.ToString()),
+                    functionalClassificationServiceId = functionalClassificationServiceId,
                     FppName = uc.txtName.Text.Trim(),
                     FppCode = uc.txtCode.Text.Trim(),
+                    IsSpecial = uc.chckboxSpecial.Checked ? true : false
                 };
 
                 return Factory.FunctionProgramProjectRepository().Update(functionProgramProjectModel);
@@ -75,12 +77,13 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            if (UpdateData())
             {
                 Helper.MessageBoxSuccess("Function Program Project has been saved.");
-                _frmFunctionProgramProject.LoadFunctionProgramProjectRecords();
-               
+                Close();
+                _frmFunctionProgramProject.LoadFPP();
             }
         }
+
     }
 }

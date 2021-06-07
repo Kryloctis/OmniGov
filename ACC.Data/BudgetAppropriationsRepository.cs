@@ -33,10 +33,33 @@ namespace ACC.Data
                     new object[] { "@year", DbType.Int16, entity.Year},
                     new object[] { "@date_entry", DbType.Date, entity.DateEntry},
                     new object[] { "@amount", DbType.Decimal, entity.Amount},
-                    new object[] { "@continuing", DbType.Boolean, entity.Continuing}
+                    new object[] { "@continuing", DbType.Boolean, entity.Continuing},
+                    new object[] { "@remarks", DbType.String, entity.Remarks}    
                };
 
-                string query = $"INSERT INTO {tableName} (funds_id, function_program_project_id , others_fpp_id, allotment_classes_id, general_ledger_accounts_id, date_entry, year, amount, continuing) VALUES (@funds_id ,@function_program_project_id , @others_fpp_id, @allotment_classes_id, @general_ledger_accounts_id, @date_entry, @year, @amount, @continuing)";
+                string query = $"INSERT INTO {tableName} " +
+                    $"(funds_id, " +
+                    $"function_program_project_id , " +
+                    $"others_fpp_id, " +
+                    $"allotment_classes_id, " +
+                    $"general_ledger_accounts_id, " +
+                    $"date_entry, " +
+                    $"year, " +
+                    $"amount, " +
+                    $"continuing, " +
+                    $"remarks) " +
+                    $"VALUES " +
+                    $"(@funds_id, " +
+                    $"@function_program_project_id, " +
+                    $"@others_fpp_id, " +
+                    $"@allotment_classes_id, " +
+                    $"@general_ledger_accounts_id, " +
+                    $"@date_entry, " +
+                    $"@year, " +
+                    $"@amount, " +
+                    $"@continuing, " +
+                    $"@remarks)";
+
                 return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -61,10 +84,23 @@ namespace ACC.Data
                     new object[] { "@date_entry", DbType.Date, entity.DateEntry},
                     new object[] { "@year", DbType.Int16, entity.Year},
                     new object[] { "@amount", DbType.Decimal, entity.Amount},
-                    new object[] { "@continuing", DbType.Boolean, entity.Continuing}
+                    new object[] { "@continuing", DbType.Boolean, entity.Continuing},
+                    new object[] { "@remarks", DbType.String, entity.Remarks}
                 };
 
-                string query = $"UPDATE {tableName} SET function_program_project_id = @function_program_project_id, funds_id =@funds_id, others_fpp_id = @others_fpp_id, allotment_classes_id = @allotment_classes_id, general_ledger_accounts_id = @general_ledger_accounts_id, date_entry = @date_entry, year = @year, amount = @amount, continuing = @continuing WHERE id = @id";
+                string query = $"UPDATE {tableName} SET " +
+                    $"function_program_project_id = @function_program_project_id, " +
+                    $"funds_id = @funds_id, " +
+                    $"others_fpp_id = @others_fpp_id, " +
+                    $"allotment_classes_id = @allotment_classes_id, " +
+                    $"general_ledger_accounts_id = @general_ledger_accounts_id, " +
+                    $"date_entry = @date_entry, " +
+                    $"year = @year, " +
+                    $"amount = @amount, " +
+                    $"continuing = @continuing, " +
+                    $"remarks = @remarks " +
+                    $"WHERE id = @id";
+
                 return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -124,6 +160,7 @@ namespace ACC.Data
                     $"year, " +
                     $"amount, " +
                     $"continuing, " +
+                    $"remarks, " +
                     $"created_at, " +
                     $"updated_at " +
                     $"FROM {tableName} " +
@@ -145,8 +182,9 @@ namespace ACC.Data
                         record.Add("year", item[6].ToString());
                         record.Add("amount", item[7].ToString());
                         record.Add("continuing", item[8].ToString());
-                        record.Add("created_at", item[9].ToString());
-                        record.Add("updated_at", item[10].ToString());
+                        record.Add("remarks", item[9].ToString());
+                        record.Add("created_at", item[10].ToString());
+                        record.Add("updated_at", item[11].ToString());
                     }
                 }
             }
@@ -208,6 +246,7 @@ namespace ACC.Data
                     $"year, " +
                     $"amount, " +
                     $"continuing, " +
+                    $"remarks, " +
                     $"created_at, " +
                     $"updated_at " +
                     $"FROM {viewTableName} " +
@@ -246,8 +285,9 @@ namespace ACC.Data
                         record.Add("year", item[22].ToString());
                         record.Add("amount", item[23].ToString());
                         record.Add("continuing", item[24].ToString());
-                        record.Add("created_at", item[25].ToString());
-                        record.Add("updated_at", item[26].ToString());
+                        record.Add("remarks", item[25].ToString());
+                        record.Add("created_at", item[26].ToString());
+                        record.Add("updated_at", item[27].ToString());
                     }
                 }
             }
@@ -257,21 +297,6 @@ namespace ACC.Data
             }
 
             return record;
-        }
-
-        public DataTable GetYearsBudgetAppropriations()
-        {
-            try
-            {
-                string query = $"SELECT year FROM {viewTableName} group by year;";
-
-                var dtPermissions = new DataTable();
-                return mySqlGenericCommands.Fill(query, dtPermissions);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
         }
 
 
@@ -316,6 +341,7 @@ namespace ACC.Data
                     $"year, " +
                     $"amount, " +
                     $"continuing, " +
+                    $"remarks, " +
                     $"created_at, " +
                     $"updated_at " +
                     $"FROM {viewTableName} " +
@@ -395,6 +421,7 @@ namespace ACC.Data
                     $"year, " +
                     $"amount, " +
                     $"continuing, " +
+                    $"remarks, " +
                     $"created_at, " +
                     $"updated_at " +
                     $"FROM {viewTableName} " +
@@ -434,6 +461,7 @@ namespace ACC.Data
                         record.Add("year", item[17].ToString());
                         record.Add("amount", item[18].ToString());
                         record.Add("continuing", item[19].ToString());
+                        record.Add("remarks", item[20].ToString());
                         record.Add("created_at", item[20].ToString());
                         record.Add("updated_at", item[21].ToString());
                     }
@@ -623,6 +651,7 @@ namespace ACC.Data
                     $"year, " +
                     $"amount, " +
                     $"continuing, " +
+                    $"remarks, " +
                     $"created_at, " +
                     $"updated_at " +
                     $"FROM {viewTableName} " +
@@ -677,6 +706,7 @@ namespace ACC.Data
                     $"year, " +
                     $"amount, " +
                     $"continuing, " +
+                    $"remarks, " +
                     $"created_at, " +
                     $"updated_at " +
                     $"FROM {viewTableName} " +

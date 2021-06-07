@@ -16,5 +16,6 @@ namespace ACC.Domain.Models
         public DateTime DateEntry { get; set; }
         public decimal Amount { get; set; }
         public bool Continuing { get; set; }
+        public string Remarks { get; set; }
     }
 }

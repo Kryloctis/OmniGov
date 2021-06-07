@@ -45,20 +45,22 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
 
                 bool continuing = Convert.ToByte(selectedBudgetAppropriation["continuing"]) == 0 ? false : true;
 
-                uc.cmbxTypeOfFund.SelectedValue = fundId;
-                uc.cmbxFPP.SelectedValue = fppId;
+                uc.fundId = fundId;
+                uc.fppId = fppId;
 
                 if (othersFPPId == null) 
                     uc.cmbxOthersFPP.SelectedIndex = -1;
                 else
                     uc.cmbxOthersFPP.SelectedValue = othersFPPId;
 
-                uc.cmbxAllotmentClass.SelectedValue = allotmentClassId;
+                uc.allotmentClassId = allotmentClassId;
                 uc.cmbxLedgerAccount.SelectedValue = generalLedgerAccountId;
                 uc.dtDateEntry.Value = dateEntry;
-                uc.nudYear.Value = year;
+                uc.txtYear.Text = year.ToString();
+                uc.year = year;
                 uc.nudAmount.Value = appropriationAmount;
                 uc.chckbxContinuing.Checked = continuing;
+                uc.txtRemarks.Text = selectedBudgetAppropriation["remarks"];
             }
             catch (Exception ex)
             {
@@ -88,15 +90,16 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                 var budgetAppModel = new BudgetAppropriationsModel()
                 {
                     Id = uc.budgetAppropriationId,
-                    FundsId = Convert.ToInt32(uc.cmbxTypeOfFund.SelectedValue),
-                    FunctionProgramProjectId = Convert.ToInt32(uc.cmbxFPP.SelectedValue),
+                    FundsId = uc.fundId,
+                    FunctionProgramProjectId = uc.fppId,
                     OthersFPPId = othersFPPId,
-                    AllotmentClassesId = Convert.ToInt32(uc.cmbxAllotmentClass.SelectedValue),
+                    AllotmentClassesId = uc.allotmentClassId,
                     GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxLedgerAccount.SelectedValue),
                     DateEntry = uc.dtDateEntry.Value,
-                    Year = Convert.ToInt16(uc.nudYear.Value),
+                    Year = uc.year,
                     Amount = uc.nudAmount.Value,
-                    Continuing = uc.chckbxContinuing.Checked
+                    Continuing = uc.chckbxContinuing.Checked,
+                    Remarks = uc.txtRemarks.Text.Trim()
                 };
 
                 return Factory.BudgetAppropriationsRepository().Update(budgetAppModel);
@@ -118,21 +121,15 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
             if (SaveData()) 
             {
                 //Initialze data references
-                int fppID = Convert.ToInt32(uc.cmbxFPP.SelectedValue);
-                int allotmentClassID = Convert.ToInt32(uc.cmbxAllotmentClass.SelectedValue);
-                int fundID = Convert.ToInt32(uc.cmbxTypeOfFund.SelectedValue);
-                short year = Convert.ToInt16(uc.nudYear.Value);
+                int allotmentClassID = uc.allotmentClassId;
+                int fundID = uc.fundId;
 
-                _frmBudgetAppropriations.RecordLocator(fppID, allotmentClassID, fundID, year);
-                _frmBudgetAppropriations.cmbxAllotmentClass.ComboBox.SelectedValue = allotmentClassID;
-                _frmBudgetAppropriations.cmbxFundType.ComboBox.SelectedValue = fundID;
-                _frmBudgetAppropriations.cmbxYear.ComboBox.SelectedValue = year;
+                _frmBudgetAppropriations.cmbxAllotmentClass.SelectedValue = allotmentClassID;
+                _frmBudgetAppropriations.cmbxFunds.SelectedValue = fundID;
 
                 Helper.MessageBoxSuccess("Budget Appropriation update has been saved.");
+                _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
                 Close();
-
-                //Reset User Control Form
-                uc.ResetForm();
             }
         }
     }

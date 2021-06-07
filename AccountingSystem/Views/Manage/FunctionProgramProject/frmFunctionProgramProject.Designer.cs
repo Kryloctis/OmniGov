@@ -43,7 +43,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.label2 = new System.Windows.Forms.Label();
             this.cmbServiceName = new System.Windows.Forms.ComboBox();
             this.dgFunctionalProgramProject = new System.Windows.Forms.DataGridView();
-            this.btnLoadAllFpp = new System.Windows.Forms.Button();
             this.tabFunctionalClassificationService = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbSectorName = new System.Windows.Forms.ComboBox();
@@ -177,7 +176,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.tabFunctionProgramProject.Controls.Add(this.label2);
             this.tabFunctionProgramProject.Controls.Add(this.cmbServiceName);
             this.tabFunctionProgramProject.Controls.Add(this.dgFunctionalProgramProject);
-            this.tabFunctionProgramProject.Controls.Add(this.btnLoadAllFpp);
             this.tabFunctionProgramProject.Location = new System.Drawing.Point(4, 27);
             this.tabFunctionProgramProject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabFunctionProgramProject.Name = "tabFunctionProgramProject";
@@ -205,7 +203,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.cmbServiceName.Name = "cmbServiceName";
             this.cmbServiceName.Size = new System.Drawing.Size(237, 23);
             this.cmbServiceName.TabIndex = 19;
-            this.cmbServiceName.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
             // 
             // dgFunctionalProgramProject
             // 
@@ -222,17 +219,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.dgFunctionalProgramProject.TabIndex = 5;
             this.dgFunctionalProgramProject.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgFunctionalProgramProject_RowHeaderMouseDoubleClick);
             this.dgFunctionalProgramProject.SelectionChanged += new System.EventHandler(this.dgFunctionalProgramProject_SelectionChanged);
-            // 
-            // btnLoadAllFpp
-            // 
-            this.btnLoadAllFpp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoadAllFpp.Location = new System.Drawing.Point(774, 3);
-            this.btnLoadAllFpp.Name = "btnLoadAllFpp";
-            this.btnLoadAllFpp.Size = new System.Drawing.Size(75, 22);
-            this.btnLoadAllFpp.TabIndex = 18;
-            this.btnLoadAllFpp.Text = "Load All";
-            this.btnLoadAllFpp.UseVisualStyleBackColor = true;
-            this.btnLoadAllFpp.Click += new System.EventHandler(this.button1_Click);
             // 
             // tabFunctionalClassificationService
             // 
@@ -432,14 +418,13 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         private System.Windows.Forms.DataGridView dgFunctionalProgramProject;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button btnLoadAllFsc;
-		private System.Windows.Forms.Button btnLoadAllFpp;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.ToolStripTextBox txtSearch;
 		private System.Windows.Forms.ToolStripLabel toolStripLabel1;
 		private System.Windows.Forms.ComboBox cmbSectorName;
 		private System.Windows.Forms.DataGridView dgFuntionalClassificationService;
-		private System.Windows.Forms.ComboBox cmbServiceName;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         internal System.Windows.Forms.ToolStripButton btnSubFPP;
+        internal System.Windows.Forms.ComboBox cmbServiceName;
     }
 }

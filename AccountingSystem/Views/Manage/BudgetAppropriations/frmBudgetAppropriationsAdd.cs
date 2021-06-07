@@ -26,11 +26,10 @@ namespace BudgetSystem.Views.BudgetAppropriations
             uc = ucBudgetAppropriations1;
         }
 
-        private bool SaveData() 
+        private bool SaveData()
         {
             try
             {
-
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
@@ -40,15 +39,16 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 // proceed to insert
                 var budgetAppropriationsModel = new BudgetAppropriationsModel()
                 {
-                    FundsId = Convert.ToInt32(uc.cmbxTypeOfFund.SelectedValue),
-                    FunctionProgramProjectId = Convert.ToInt32(uc.cmbxFPP.SelectedValue),
+                    FundsId = uc.fundId,
+                    FunctionProgramProjectId = uc.fppId,
                     OthersFPPId = uc.cmbxOthersFPP.SelectedValue == null ? null : Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue),
-                    AllotmentClassesId = Convert.ToInt32(uc.cmbxAllotmentClass.SelectedValue),
+                    AllotmentClassesId = uc.allotmentClassId,
                     GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxLedgerAccount.SelectedValue),
-                    Year = Convert.ToInt16(uc.nudYear.Value),
+                    Year = uc.year,
                     DateEntry = uc.dtDateEntry.Value,
                     Amount = uc.nudAmount.Value,
-                    Continuing = uc.chckbxContinuing.Checked
+                    Continuing = uc.chckbxContinuing.Checked,
+                    Remarks = uc.txtRemarks.Text.Trim()
                 };
 
                 return Factory.BudgetAppropriationsRepository().Insert(budgetAppropriationsModel);
@@ -65,22 +65,18 @@ namespace BudgetSystem.Views.BudgetAppropriations
             //If Save data is successful
             if (SaveData()) 
             {
-                //Initialze data references
-                int fppID = Convert.ToInt32(uc.cmbxFPP.SelectedValue);
-                int allotmentClassID = Convert.ToInt32(uc.cmbxAllotmentClass.SelectedValue);
-                int fundID = Convert.ToInt32(uc.cmbxTypeOfFund.SelectedValue);
-                short year = Convert.ToInt16(uc.nudYear.Value);
+                int allotmentClassID = uc.allotmentClassId;
+                int fundID = uc.fundId;
 
-                _frmBudgetAppropriations.RecordLocator(fppID, allotmentClassID, fundID, year);
-                _frmBudgetAppropriations.cmbxAllotmentClass.ComboBox.SelectedValue = allotmentClassID;
-                _frmBudgetAppropriations.cmbxFundType.ComboBox.SelectedValue = fundID;
-                _frmBudgetAppropriations.cmbxYear.ComboBox.SelectedValue = year;
+                _frmBudgetAppropriations.cmbxAllotmentClass.SelectedValue = allotmentClassID;
+                _frmBudgetAppropriations.cmbxFunds.SelectedValue = fundID;
 
                 //Reset User Control Form
                 uc.cmbxLedgerAccount.SelectedIndex = -1;
                 uc.nudAmount.Value = 0;
 
-                Helper.MessageBoxSuccess("Budget Appropriation has been saved."); 
+                Helper.MessageBoxSuccess("Budget Appropriation has been saved.");
+                _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
             }
         }
     }
