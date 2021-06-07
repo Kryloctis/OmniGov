@@ -347,47 +347,6 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetViewRecordsByMajAccGroupName(string majAccGroupName)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@maj_acc_group_name", DbType.String, majAccGroupName},
-
-                };
-
-
-                string query = $"SELECT " +
-                    $"general_ledger_accounts_id, " +
-                    $"account_group_id, " +
-                    $"account_group_code, " +
-                    $"account_group_name, " +
-                    $"major_account_group_id, " +
-                    $"maj_acc_group_code, " +
-                    $"maj_acc_group_name, " +
-                    $"sub_maj_acc_group_code, " +
-                    $"sub_maj_acc_group_name, " +
-                    $"sub_major_account_group_id, " +
-                    $"general_ledger_accounts_id, " +
-                    $"account_code, " +
-                    $"ledger_code, " +
-                    $"ledger_name, " +
-                    $"is_contra_account, " +
-                    $"created_at, " +
-                    $"updated_at " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE " +
-                    $"maj_acc_group_name = @maj_acc_group_name";
-
-                var dtJournals = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtJournals, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
         public DataTable GetViewRecordsByMajAccGroupNameSearch(string majAccGroupName, string searchText)
         {
@@ -433,5 +392,45 @@ namespace ACC.Data
             }
         }
 
+
+        public DataTable GetViewRecordsByAccountGroupName(string accountGroupName)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@account_group_name", DbType.String, accountGroupName},
+                };
+
+                string query = $"SELECT " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_group_id, " +
+                    $"account_group_code, " +
+                    $"account_group_name, " +
+                    $"major_account_group_id, " +
+                    $"maj_acc_group_code, " +
+                    $"maj_acc_group_name, " +
+                    $"sub_maj_acc_group_code, " +
+                    $"sub_maj_acc_group_name, " +
+                    $"sub_major_account_group_id, " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_code, " +
+                    $"ledger_code, " +
+                    $"ledger_name, " +
+                    $"is_contra_account, " +
+                    $"created_at, " +
+                    $"updated_at " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE " +
+                    $"account_group_name = @account_group_name ";
+
+                var dtJournals = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtJournals, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

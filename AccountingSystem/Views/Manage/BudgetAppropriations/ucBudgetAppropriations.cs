@@ -192,7 +192,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 DataTable dtAccounts;
 
                 if (Convert.ToInt32(allotmentClassId) == 4)
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsBySearch(cmbxLedgerAccount.Text);
+                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroupName("Assets");
                 else
                     dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajAccGroupNameSearch(accountGroupName, cmbxLedgerAccount.Text);
 
