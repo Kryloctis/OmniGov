@@ -26,8 +26,19 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             nudYear.Value = DateTime.Now.Year;
         }
 
+        private void ShowRecordTimeStamp() 
+        {
+            int rowIndex = dgBudgetAppropriations.CurrentCell.RowIndex;
+            var createdAt =  dgBudgetAppropriations.Rows[rowIndex].Cells["created_at"].Value;
+            var updatedAt = dgBudgetAppropriations.Rows[rowIndex].Cells["updated_at"].Value;
+
+            lblCreatedAt.Text = createdAt == null ? null : createdAt.ToString();
+            lblUpdatedAt.Text = updatedAt == null ? null : updatedAt.ToString(); ;
+        }
+
         private void dgBudgetAppropriations_SelectionChanged(object sender, EventArgs e)
         {
+            ShowRecordTimeStamp();
             EnableDisableButtonsLocal(dgBudgetAppropriations);
         }
 
@@ -46,6 +57,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
             dgBudgetAppropriations.SelectionChanged += new System.EventHandler(dgBudgetAppropriations_SelectionChanged);
             EnableDisableButtonsLocal(dgBudgetAppropriations);
+            lblCreatedAt.Text = string.Empty;
+            lblUpdatedAt.Text = string.Empty;
         }
 
         internal void LoadComboboxes()
