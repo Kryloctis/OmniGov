@@ -121,9 +121,6 @@
   <data name="doc-write" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\doc-write.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="give_money_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\give-money-28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="create_new_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\create-new-28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -187,6 +184,20 @@
   <data name="others" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\others.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="action_arrow_right_filled_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\action-arrow-right-filled-14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="action_arrow_right_filled_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\action-arrow-right-filled-28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_add_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button-add-14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_delete_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button-delete-14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_edit_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button-edit-14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   <data name="supplemental_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\supplemental-28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -198,5 +209,17 @@
   </data>
   <data name="control_tree_filled_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\control-tree-filled-28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="allotment_release_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\allotment_release-24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="budget_approprations_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\budget-approprations-24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="obligation_request_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\obligation-request-24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="supplemental_appropriations_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\supplemental-appropriations-24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

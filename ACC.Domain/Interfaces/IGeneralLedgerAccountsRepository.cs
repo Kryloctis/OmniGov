@@ -17,9 +17,9 @@ namespace ACC.Domain.Interfaces
         //Budget System
         DataTable GetAllViewRecords();
 
-        DataTable GetAllViewRecordsBySearch(string searchText);
+        DataTable GetViewRecordsByAccountGroupName(string accountGroupName);
 
-        DataTable GetViewRecordsByMajAccGroupName(string majAccGroupName);
+        DataTable GetAllViewRecordsBySearch(string searchText);
 
         DataTable GetViewRecordsByMajAccGroupNameSearch(string majAccGroupName, string searchText);
 

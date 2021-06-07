@@ -29,7 +29,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT fund_code,fund_name, created_at, updated_at FROM {tableName} WHERE id = @id";
+                string query = $"SELECT fund_code, fund_name, created_at, updated_at FROM {tableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {

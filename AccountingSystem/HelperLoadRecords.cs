@@ -699,6 +699,7 @@ namespace AccountingSystem
         #endregion
 
         #region Disbursing Officer
+
         internal static void DisbursingOfficerDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -710,8 +711,6 @@ namespace AccountingSystem
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
-
-
 
         internal static void DisbursingOfficerComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
@@ -729,9 +728,11 @@ namespace AccountingSystem
                 comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
             }
         }
+
         #endregion
 
         #region Users
+
         internal static void UsersDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -747,6 +748,7 @@ namespace AccountingSystem
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
+
         #endregion
 
         #region Others FPP
@@ -800,22 +802,6 @@ namespace AccountingSystem
                 comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
             }
         }
-        internal static void BudgetAppropriationsAllomentToolStripCombobox(DataTable dataTable, ToolStripComboBox toolStripComboBox, string displayMember, string valueMember)
-        {
-            toolStripComboBox.ComboBox.DataSource = dataTable;
-            toolStripComboBox.ComboBox.DisplayMember = displayMember;
-            toolStripComboBox.ComboBox.ValueMember = valueMember;
-
-            if (toolStripComboBox.DropDownStyle == ComboBoxStyle.DropDown)
-            {
-                // loop datatable to add items in autocompletesource
-                foreach (DataRow item in dataTable.Rows)
-                    toolStripComboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
-
-                toolStripComboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                toolStripComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            }
-        }
 
         internal static void BudgetAppropriationsTypeOfFundsCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
@@ -834,30 +820,6 @@ namespace AccountingSystem
             }
 
         }
-        internal static void BudgetAppropriationsTypeOfFundsToolStripCombobox(DataTable dataTable, ToolStripComboBox comboBox, string displayMember, string valueMember) 
-        {
-            comboBox.ComboBox.DataSource = dataTable;
-            comboBox.ComboBox.DisplayMember = displayMember;
-            comboBox.ComboBox.ValueMember = valueMember;
-
-            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
-            {
-                // loop datatable to add items in autocompletesource
-                foreach (DataRow item in dataTable.Rows)
-                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
-
-                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            }
-        }
-
-        internal static void BudgetAppropriationsYearToolStripCombobox(DataTable dataTable, ToolStripComboBox toolStripComboBox, string displayMember, string valueMember)
-        {
-            toolStripComboBox.ComboBox.DataSource = dataTable;
-            toolStripComboBox.ComboBox.DisplayMember = displayMember;
-            toolStripComboBox.ComboBox.ValueMember = valueMember;
-        }
-
 
         internal static void FPPBudgetAppropriationsDatagridView(DataTable dataTable, DataGridView dataGridView) 
         {
@@ -869,6 +831,7 @@ namespace AccountingSystem
                 dataGridView.Columns["fpp_code"].HeaderText = "FPP Code";
                 dataGridView.Columns["fpp_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
                 dataGridView.Columns["fpp_name"].HeaderText = "FPP Name";
+                dataGridView.Columns["is_special"].Visible = false;
                 dataGridView.Columns["created_at"].Visible = false;
                 dataGridView.Columns["updated_at"].Visible = false;
                 dataGridView.ClearSelection();
@@ -887,12 +850,14 @@ namespace AccountingSystem
         {
             try
             {
-                Image continuingIcon = Properties.Resources.action_arrow_right_filled_14px; 
+                //Image Column
+                Image continuingIcon = Properties.Resources.ok14px; 
 
                 DataGridViewImageColumn imgColumn = new DataGridViewImageColumn();
 
                 imgColumn.HeaderText = "Continuing";
                 imgColumn.Name = "continuing";
+
 
                 //Clearing Datagrid View  Rows & Columns before Loading new one
                 dgvBudgetAppropriations.Rows.Clear();
@@ -929,7 +894,8 @@ namespace AccountingSystem
                 dgvBudgetAppropriations.Columns["updated_at"].Visible = false;
 
                 //Column's Format
-                dgvBudgetAppropriations.Columns["general_ledger_accounts_name"].Width = 300; 
+                dgvBudgetAppropriations.Columns["general_ledger_accounts_name"].Width = 300;
+                dgvBudgetAppropriations.Columns["account_code"].Width = 100;
                 dgvBudgetAppropriations.Columns["amount"].DefaultCellStyle.Format = "N2";
                 dgvBudgetAppropriations.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
@@ -941,7 +907,7 @@ namespace AccountingSystem
 
                 dgvBudgetAppropriations.Columns["continuing"].DefaultCellStyle.NullValue = null;
                 dgvBudgetAppropriations.Columns["continuing"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgvBudgetAppropriations.Columns["continuing"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                dgvBudgetAppropriations.Columns["continuing"].Width = 80;
 
                 //Initialize Repository Method
                 var budgetAppropriationsModel = new BudgetAppropriationsModel()
@@ -962,7 +928,6 @@ namespace AccountingSystem
                 {
                     FieldData(dgvBudgetAppropriations, continuingIcon, drGetViewRecordsByIds);
                 }
-
 
 
                 //Initialize Repository Method for others fpp records
@@ -1010,22 +975,22 @@ namespace AccountingSystem
                     decimal appropriationBalance = (totalSupplementalAppropriation + rowAppropriationAmount) - totalAllotmentRelease;
 
                     dgvBudgetAppropriations.Rows.Add(new object[] {
-                    rowId,
-                    rowFundId,
-                    rowFPPId,
-                    rowOthersFPPId,
-                    rowAllotmentClassId,
-                    rowAccountId,
-                    rowAccountName,
-                    rowAccountCode,
-                    rowDateEntry,
-                    totalAppropriationAmount,
-                    totalAllotmentRelease,
-                    appropriationBalance,
-                    rowYear,
-                    rowContinuing == 1? continuingIcon : null,
-                    drGetViewRecordsByIds["created_at"],
-                    drGetViewRecordsByIds["updated_at"] });
+                        rowId,
+                        rowFundId,
+                        rowFPPId,
+                        rowOthersFPPId,
+                        rowAllotmentClassId,
+                        rowAccountId,
+                        rowAccountName,
+                        rowAccountCode,
+                        rowDateEntry,
+                        totalAppropriationAmount,
+                        totalAllotmentRelease,
+                        appropriationBalance,
+                        rowYear,
+                        rowContinuing == 1? continuingIcon : null,
+                        drGetViewRecordsByIds["created_at"],
+                        drGetViewRecordsByIds["updated_at"] });
                 }
 
 

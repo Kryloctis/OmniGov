@@ -17,14 +17,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
     {
         internal ucAllotmentReleaseMain uc;
 
-        private frmBudgetAppropriations _frmBudgetAppropriations;
-
-        public frmAllotmentReleaseMain(frmBudgetAppropriations frmBudgetAppropriations)
+        public frmAllotmentReleaseMain()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
 
-            _frmBudgetAppropriations = frmBudgetAppropriations;
             btnSave.Click += new EventHandler(BtnSave_Click);
             btnNew.Click += new EventHandler(BtnNew_Click);
             uc = ucAllotmentReleaseMain1;
@@ -83,7 +80,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Allotment release has been saved.");
-                _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
                 uc.ResetForm();
             }
         }

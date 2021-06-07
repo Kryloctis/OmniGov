@@ -51,7 +51,6 @@ namespace AccountingSystem
             this.menuFunctionProgramProject = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCollectingOfficer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDisbursingOfficer = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuBudgetAppropriation = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBanks = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAccForm = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,20 +65,29 @@ namespace AccountingSystem
             this.menuGeneralLedgerReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSubsidiaryLedgerReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOB = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuSAAOBB = new System.Windows.Forms.ToolStripMenuItem();
             this.menuprintRCI = new System.Windows.Forms.ToolStripMenuItem();
             this.menuprintPC = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnJournalEntry = new System.Windows.Forms.ToolStripButton();
+            this.btnBudgetAppropriations = new System.Windows.Forms.ToolStripButton();
+            this.btnSupplementalAppropriations = new System.Windows.Forms.ToolStripButton();
+            this.btnAllotmentRelease = new System.Windows.Forms.ToolStripButton();
             this.btnObligationRequest = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnJournalEntry = new System.Windows.Forms.ToolStripButton();
             this.btnRCI = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblUserFullName = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUserRole = new System.Windows.Forms.ToolStripStatusLabel();
-            this.menuSAAOBB = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.radBtnBudget = new System.Windows.Forms.RadioButton();
+            this.radBtnAccouting = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -92,7 +100,7 @@ namespace AccountingSystem
             this.menuReports});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 3, 0, 3);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.menuStrip1.Size = new System.Drawing.Size(971, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
@@ -175,7 +183,6 @@ namespace AccountingSystem
             this.menuFunctionProgramProject,
             this.menuCollectingOfficer,
             this.menuDisbursingOfficer,
-            this.menuBudgetAppropriation,
             this.menuBanks,
             this.menuAccForm});
             this.menuManage.Name = "menuManage";
@@ -252,13 +259,6 @@ namespace AccountingSystem
             this.menuDisbursingOfficer.Name = "menuDisbursingOfficer";
             this.menuDisbursingOfficer.Size = new System.Drawing.Size(223, 22);
             this.menuDisbursingOfficer.Text = "Disbursing Officers...";
-            // 
-            // menuBudgetAppropriation
-            // 
-            this.menuBudgetAppropriation.Name = "menuBudgetAppropriation";
-            this.menuBudgetAppropriation.Size = new System.Drawing.Size(223, 22);
-            this.menuBudgetAppropriation.Text = "Budget Appropriations...";
-            this.menuBudgetAppropriation.Click += new System.EventHandler(this.menuBudgetAppropriation_Click);
             // 
             // menuBanks
             // 
@@ -363,6 +363,12 @@ namespace AccountingSystem
             this.menuSAAOB.Size = new System.Drawing.Size(223, 22);
             this.menuSAAOB.Text = "SAAOB";
             // 
+            // menuSAAOBB
+            // 
+            this.menuSAAOBB.Name = "menuSAAOBB";
+            this.menuSAAOBB.Size = new System.Drawing.Size(223, 22);
+            this.menuSAAOBB.Text = "SAAOBB";
+            // 
             // menuprintRCI
             // 
             this.menuprintRCI.Name = "menuprintRCI";
@@ -382,15 +388,64 @@ namespace AccountingSystem
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnJournalEntry,
+            this.btnBudgetAppropriations,
+            this.btnSupplementalAppropriations,
+            this.btnAllotmentRelease,
             this.btnObligationRequest,
+            this.toolStripSeparator1,
+            this.btnJournalEntry,
             this.btnRCI});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 0, 1, 0);
             this.toolStrip1.Size = new System.Drawing.Size(971, 31);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnBudgetAppropriations
+            // 
+            this.btnBudgetAppropriations.Image = global::AccountingSystem.Properties.Resources.budget_approprations_24px;
+            this.btnBudgetAppropriations.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnBudgetAppropriations.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnBudgetAppropriations.Name = "btnBudgetAppropriations";
+            this.btnBudgetAppropriations.Size = new System.Drawing.Size(155, 28);
+            this.btnBudgetAppropriations.Text = "Budget Appropriations";
+            this.btnBudgetAppropriations.Click += new System.EventHandler(this.btnBudgetAppropriations_Click);
+            // 
+            // btnSupplementalAppropriations
+            // 
+            this.btnSupplementalAppropriations.Image = global::AccountingSystem.Properties.Resources.supplemental_appropriations_24px;
+            this.btnSupplementalAppropriations.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSupplementalAppropriations.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSupplementalAppropriations.Name = "btnSupplementalAppropriations";
+            this.btnSupplementalAppropriations.Size = new System.Drawing.Size(190, 28);
+            this.btnSupplementalAppropriations.Text = "Supplemental Appropriations";
+            // 
+            // btnAllotmentRelease
+            // 
+            this.btnAllotmentRelease.Image = global::AccountingSystem.Properties.Resources.allotment_release_24px;
+            this.btnAllotmentRelease.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnAllotmentRelease.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAllotmentRelease.Name = "btnAllotmentRelease";
+            this.btnAllotmentRelease.Size = new System.Drawing.Size(130, 28);
+            this.btnAllotmentRelease.Text = "Allotment Release";
+            this.btnAllotmentRelease.Click += new System.EventHandler(this.btnAllotmentRelease_Click);
+            // 
+            // btnObligationRequest
+            // 
+            this.btnObligationRequest.Image = global::AccountingSystem.Properties.Resources.obligation_request_24px;
+            this.btnObligationRequest.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnObligationRequest.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnObligationRequest.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
+            this.btnObligationRequest.Name = "btnObligationRequest";
+            this.btnObligationRequest.Size = new System.Drawing.Size(80, 28);
+            this.btnObligationRequest.Text = "Obligate";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
             // 
             // btnJournalEntry
             // 
@@ -401,16 +456,6 @@ namespace AccountingSystem
             this.btnJournalEntry.Name = "btnJournalEntry";
             this.btnJournalEntry.Size = new System.Drawing.Size(52, 28);
             this.btnJournalEntry.Text = "JEV";
-            // 
-            // btnObligationRequest
-            // 
-            this.btnObligationRequest.Image = ((System.Drawing.Image)(resources.GetObject("btnObligationRequest.Image")));
-            this.btnObligationRequest.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnObligationRequest.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnObligationRequest.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
-            this.btnObligationRequest.Name = "btnObligationRequest";
-            this.btnObligationRequest.Size = new System.Drawing.Size(80, 28);
-            this.btnObligationRequest.Text = "Obligate";
             // 
             // btnRCI
             // 
@@ -425,10 +470,10 @@ namespace AccountingSystem
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 56);
+            this.panel1.Location = new System.Drawing.Point(0, 118);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(971, 365);
+            this.panel1.Size = new System.Drawing.Size(971, 346);
             this.panel1.TabIndex = 5;
             // 
             // statusStrip1
@@ -437,7 +482,7 @@ namespace AccountingSystem
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblUserFullName,
             this.lblUserRole});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 397);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 464);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
             this.statusStrip1.Size = new System.Drawing.Size(971, 24);
@@ -457,11 +502,50 @@ namespace AccountingSystem
             this.lblUserRole.Size = new System.Drawing.Size(118, 19);
             this.lblUserRole.Text = "toolStripStatusLabel2";
             // 
-            // menuSAAOBB
+            // label1
             // 
-            this.menuSAAOBB.Name = "menuSAAOBB";
-            this.menuSAAOBB.Size = new System.Drawing.Size(223, 22);
-            this.menuSAAOBB.Text = "SAAOBB";
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(0, 56);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(971, 37);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Dashboard";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.Controls.Add(this.radBtnBudget);
+            this.flowLayoutPanel1.Controls.Add(this.radBtnAccouting);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 93);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(971, 25);
+            this.flowLayoutPanel1.TabIndex = 8;
+            // 
+            // radBtnBudget
+            // 
+            this.radBtnBudget.AutoSize = true;
+            this.radBtnBudget.Checked = true;
+            this.radBtnBudget.Location = new System.Drawing.Point(8, 3);
+            this.radBtnBudget.Name = "radBtnBudget";
+            this.radBtnBudget.Size = new System.Drawing.Size(63, 19);
+            this.radBtnBudget.TabIndex = 0;
+            this.radBtnBudget.TabStop = true;
+            this.radBtnBudget.Text = "Budget";
+            this.radBtnBudget.UseVisualStyleBackColor = true;
+            // 
+            // radBtnAccouting
+            // 
+            this.radBtnAccouting.AutoSize = true;
+            this.radBtnAccouting.Location = new System.Drawing.Point(77, 3);
+            this.radBtnAccouting.Name = "radBtnAccouting";
+            this.radBtnAccouting.Size = new System.Drawing.Size(87, 19);
+            this.radBtnAccouting.TabIndex = 1;
+            this.radBtnAccouting.Text = "Accounting";
+            this.radBtnAccouting.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -469,9 +553,11 @@ namespace AccountingSystem
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(971, 421);
-            this.Controls.Add(this.statusStrip1);
+            this.ClientSize = new System.Drawing.Size(971, 488);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -489,6 +575,8 @@ namespace AccountingSystem
             this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -510,7 +598,6 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuRoles;
         private System.Windows.Forms.ToolStripMenuItem menuFunctionProgramProject;
         private System.Windows.Forms.ToolStripMenuItem menuCollectingOfficer;
-        private System.Windows.Forms.ToolStripMenuItem menuBudgetAppropriation;
         private System.Windows.Forms.ToolStripMenuItem menuJEV;
         private System.Windows.Forms.ToolStripMenuItem menuReportJournals;
         private System.Windows.Forms.ToolStripMenuItem menuReportGJ;
@@ -546,6 +633,14 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuPayments;
         private System.Windows.Forms.ToolStripMenuItem menuDeposits;
         internal System.Windows.Forms.ToolStripMenuItem menuSAAOBB;
+        internal System.Windows.Forms.ToolStripButton btnBudgetAppropriations;
+        internal System.Windows.Forms.ToolStripButton btnAllotmentRelease;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton btnSupplementalAppropriations;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        internal System.Windows.Forms.RadioButton radBtnBudget;
+        private System.Windows.Forms.RadioButton radBtnAccouting;
     }
 }
 

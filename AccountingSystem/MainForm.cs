@@ -25,6 +25,7 @@ using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Reports.PaymentCollection;
 using AccountingSystem.Views.Transactions.PaymentCollection;
 using AccountingSystem.Views.Transactions.BankDeposits;
+using AccountingSystem.Views.Manage.AllotmentRelease;
 using AccountingSystem.Views.Reports.RCD;
 
 namespace AccountingSystem
@@ -75,7 +76,7 @@ namespace AccountingSystem
                 menuAllotmentClasses.Visible = false;
 
             if (!Helper.HasPermission("Manage Budget Appropriations") && !Helper.HasPermission("Manage Allotment Releases"))
-                menuBudgetAppropriation.Visible = false;
+                btnBudgetAppropriations.Visible = false;
 
             if (!Helper.HasPermission("Manage Chart of Accounts")) 
                 menuChartOfAccounts.Visible = false;
@@ -229,10 +230,6 @@ namespace AccountingSystem
             _ = new frmCollectingOfficer().ShowDialog();
         }
 
-        private void menuBudgetAppropriation_Click(object sender, EventArgs e) 
-        {
-            _ = new frmBudgetAppropriations().ShowDialog();
-        }
 
         private void MenuReportGeneralJournal_Click(object sender, EventArgs e)
         {
@@ -357,6 +354,16 @@ namespace AccountingSystem
         private void menuSubsidiaryLedgerReport_Click(object sender, EventArgs e)
         {
             _ = new frmSubsidiaryLedgerReport().ShowDialog();
+        }
+
+        private void btnBudgetAppropriations_Click(object sender, EventArgs e)
+        {
+            _ = new frmBudgetAppropriations().ShowDialog();
+        }
+
+        private void btnAllotmentRelease_Click(object sender, EventArgs e)
+        {
+            _ = new frmAllotmentReleaseMain().ShowDialog();
         }
     }
 }
