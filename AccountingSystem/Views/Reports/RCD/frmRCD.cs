@@ -36,7 +36,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 var dtrcd = rcdRepository.GetRecords();
                 HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgrcd);
 
-                lblRecordCount.Text = rcdRepository.CountRecords().ToString();
+                lblRecordCount.Text = dgrcd.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -82,53 +82,34 @@ namespace AccountingSystem.Views.Reports.RCD
                 _ = new frmRCDEdit(this, Id).ShowDialog();
             }
         }
-
-        private void btnReport_Click(object sender, EventArgs e)
-        {
-            if (dgrcd.Rows.Count > 0 && dgrcd.SelectedRows.Count > 0)
-            {
-                string reportno = dgrcd.SelectedCells[1].Value.ToString();
-                _ = new frmGenerateRCD(this, reportno).ShowDialog();
-            }
-        }
-
-        private void btnReport_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private void dgrcd_SelectionChanged(object sender, EventArgs e)
-        {            
-            Helper.EnableDisableToolStripButtons(dgrcd, btnEdit, btnDelete);
-            try
+        {   
+            if(dgrcd.SelectedRows.Count > 0)
             {
-                int id = int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString());
-                var rcdRepository = Factory.CollectorReportRepository();                
-                if (dgrcd.SelectedRows.Count > 0)
+                Helper.EnableDisableToolStripButtons(dgrcd, btnEdit, btnDelete);
+                try
                 {
-                    btnReport.Enabled = rcdRepository.HasGenerated(id) ? false : true;
-                }
-                else
-                {
-                    btnReport.Enabled = false;
-                }
+                    int id = int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString());
 
+                }
+                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+           
             
         }
 
         private void dgrcd_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            btnReport.PerformClick();
+            btnEdit.PerformClick();
         }
 
         private void dgrcd_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             
-            if (e.ColumnIndex == 4)
+            if (e.ColumnIndex == 6)
             {
-                
+                bool isapproved = Convert.ToBoolean(dgrcd.CurrentRow.Cells[5].Value);
+
                 if (!Convert.ToBoolean(dgrcd.CurrentRow.Cells[e.ColumnIndex].Value))
                 {
                     dgrcd.CurrentRow.Cells[e.ColumnIndex].Value = true;
@@ -177,6 +158,19 @@ namespace AccountingSystem.Views.Reports.RCD
             else{
                 Helper.MessageBoxError("Please select reports to print!");
             }
+        }
+
+        private void dgrcd_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            foreach(DataGridViewRow row in dgrcd.Rows)
+            {
+                
+                if (Convert.ToBoolean(row.Cells[5].Value))
+                {
+                    row.DefaultCellStyle.BackColor = Color.LightGreen;
+                }
+            }
+           
         }
     }
 }

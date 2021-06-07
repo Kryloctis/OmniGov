@@ -18,6 +18,7 @@ namespace AccountingSystem.Views.Reports.RCD
         public ucRCD()
         {
             InitializeComponent();
+            Helper.DatagridDefaultStyle(dgvpayments);
         }
 
         private void ucRCD_Load(object sender, EventArgs e)
@@ -57,6 +58,28 @@ namespace AccountingSystem.Views.Reports.RCD
             cmbcollector.SelectedIndex = -1;
             txtreport.Clear();
             dtdate.Value = DateTime.Now;
+            dgvpayments.DataSource = null;
+        }
+
+        internal void LoadCollections()
+        {
+            try
+            {
+                if(txtreport.Text != string.Empty)
+                {
+                    var rcdRepository = Factory.CollectorReportPaymentRepository();
+                    var dtrcd = rcdRepository.GetRecords(txtreport.Text.Trim());
+                    HelperLoadRecords.RCDDatagridView(dtrcd, dgvpayments);
+
+                    txttotal.Value = rcdRepository.SumRecords(txtreport.Text.Trim());
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void cmbcollector_Validating(object sender, CancelEventArgs e)
@@ -77,6 +100,15 @@ namespace AccountingSystem.Views.Reports.RCD
         private void txtreport_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider, txtreport);
+        }
+
+        private void btnadd_Click(object sender, EventArgs e)
+        {
+            if(txtreport.Text.Length > 0)
+            {
+                _ = new frmGenerateRCD(this,Convert.ToInt16(cmbcollector.SelectedValue), txtreport.Text.Trim()).ShowDialog();
+            }
+            
         }
     }
 }

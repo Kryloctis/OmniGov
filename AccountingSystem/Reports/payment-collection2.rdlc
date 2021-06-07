@@ -25735,77 +25735,6 @@ ASSETS DUE TO PRICE CHANGE</Value>
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="Textbox2">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>Month:</Value>
-                      <Style />
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Left</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>1.00394cm</Top>
-              <Left>136.26649cm</Left>
-              <Height>0.6cm</Height>
-              <Width>1.29646cm</Width>
-              <ZIndex>1</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox10">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=MonthName(Month(Parameters!paramMonth.Value)) &amp;" "&amp; Year(Parameters!paramMonth.Value)</Value>
-                      <Style>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>1.00394cm</Top>
-              <Left>137.56295cm</Left>
-              <Height>0.6cm</Height>
-              <Width>3.42312cm</Width>
-              <ZIndex>2</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <BottomBorder>
-                  <Color>Black</Color>
-                  <Style>Solid</Style>
-                  <Width>1pt</Width>
-                </BottomBorder>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
             <Textbox Name="Textbox3">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
@@ -25827,7 +25756,7 @@ ASSETS DUE TO PRICE CHANGE</Value>
               <Left>0cm</Left>
               <Height>0.6cm</Height>
               <Width>1.26295cm</Width>
-              <ZIndex>3</ZIndex>
+              <ZIndex>1</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -25859,7 +25788,7 @@ ASSETS DUE TO PRICE CHANGE</Value>
               <Left>1.26295cm</Left>
               <Height>0.6cm</Height>
               <Width>5.33104cm</Width>
-              <ZIndex>4</ZIndex>
+              <ZIndex>2</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -25896,7 +25825,7 @@ ASSETS DUE TO PRICE CHANGE</Value>
               <Left>273.66826cm</Left>
               <Height>0.6cm</Height>
               <Width>1.8609cm</Width>
-              <ZIndex>5</ZIndex>
+              <ZIndex>3</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -25930,7 +25859,7 @@ ASSETS DUE TO PRICE CHANGE</Value>
               <Left>275.52916cm</Left>
               <Height>0.6cm</Height>
               <Width>2.12959cm</Width>
-              <ZIndex>6</ZIndex>
+              <ZIndex>4</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -25970,10 +25899,6 @@ ASSETS DUE TO PRICE CHANGE</Value>
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramMonth">
-      <DataType>String</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -25989,11 +25914,6 @@ ASSETS DUE TO PRICE CHANGE</Value>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>0</RowIndex>
           <ParameterName>paramSignatory</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>2</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>paramMonth</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

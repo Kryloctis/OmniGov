@@ -112,7 +112,6 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 var pcrepo = Factory.PaymentCollectionRepository();
                 var parameters = new[] {
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                    new ReportParameter("paramMonth",DateTime.Now.ToString()),
                     new ReportParameter("paramSignatory", signatory)
                 };
                 report.ReportPath = $"{Application.StartupPath}Reports\\payment-collection2.rdlc";

@@ -16,8 +16,8 @@
     <Shape ID="DesignTable:GeneralLedger" ZOrder="5" X="1864" Y="70" Height="143" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="86" />
     <Shape ID="DesignTable:dtRCI" ZOrder="4" X="2084" Y="70" Height="257" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="86" />
     <Shape ID="DesignTable:dtPC" ZOrder="3" X="2304" Y="70" Height="219" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="86" />
-    <Shape ID="DesignTable:dtSAAOB" ZOrder="2" X="2524" Y="70" Height="257" Width="244" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="253" />
-    <Shape ID="DesignTable:dtSAAOBB" ZOrder="1" X="2795" Y="74" Height="562" Width="227" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="24" SplitterPosition="558" />
+	<Shape ID="DesignTable:dtSAAOB" ZOrder="2" X="2524" Y="70" Height="257" Width="244" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="253" />
+	<Shape ID="DesignTable:dtSAAOBB" ZOrder="1" X="2795" Y="74" Height="562" Width="227" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="24" SplitterPosition="558" />
     <Shape ID="DesignTable:dtGeneralJournal" ZOrder="8" X="29" Y="7" Height="162" Width="166" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="158" />
     <Shape ID="DesignTable:CashDisbursementsJournal" ZOrder="7" X="234" Y="2" Height="201" Width="190" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="197" />
     <Shape ID="DesignTable:CheckDisbursementsJournal" ZOrder="6" X="460" Y="3" Height="201" Width="184" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="197" />

@@ -29,19 +29,12 @@ namespace AccountingSystem.Views.Reports.RCD
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucrcd1 = new AccountingSystem.Views.Reports.RCD.ucRCD();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.ucrcd1 = new AccountingSystem.Views.Reports.RCD.ucRCD();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // ucrcd1
-            // 
-            this.ucrcd1.Location = new System.Drawing.Point(-2, 0);
-            this.ucrcd1.Name = "ucrcd1";
-            this.ucrcd1.Size = new System.Drawing.Size(535, 155);
-            this.ucrcd1.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
@@ -49,15 +42,15 @@ namespace AccountingSystem.Views.Reports.RCD
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 127);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 672);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(528, 36);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1028, 36);
             this.flowLayoutPanel1.TabIndex = 7;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(431, 3);
+            this.btnCancel.Location = new System.Drawing.Point(931, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnCancel.Size = new System.Drawing.Size(94, 29);
@@ -69,7 +62,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(331, 3);
+            this.btnSave.Location = new System.Drawing.Point(831, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnSave.Size = new System.Drawing.Size(94, 29);
@@ -78,15 +71,22 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // ucrcd2
+            // 
+            this.ucrcd1.Location = new System.Drawing.Point(0, -1);
+            this.ucrcd1.Name = "ucrcd2";
+            this.ucrcd1.Size = new System.Drawing.Size(1033, 669);
+            this.ucrcd1.TabIndex = 8;
+            // 
             // frmRCDAdd
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(528, 163);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(1028, 708);
             this.Controls.Add(this.ucrcd1);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmRCDAdd";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -99,9 +99,9 @@ namespace AccountingSystem.Views.Reports.RCD
 
         #endregion
 
-        private ucRCD ucrcd1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
+        private ucRCD ucrcd1;
     }
 }

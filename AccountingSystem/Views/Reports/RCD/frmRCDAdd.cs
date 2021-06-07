@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Reports.RCD
         }
 
         private void frmRCDAdd_Load(object sender, EventArgs e)
-        {
+        {            
             ucrcd1.LoadCollectors();
         }
 
@@ -40,7 +40,8 @@ namespace AccountingSystem.Views.Reports.RCD
                 {
                     CoId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
                     ReportNo = uc.txtreport.Text.Trim(),
-                    Date = Convert.ToDateTime(uc.dtdate.Value)
+                    Date = Convert.ToDateTime(uc.dtdate.Value),
+                    Approved = Convert.ToInt16(uc.chckapproved.Checked),
                 };
                 var rcdRepository = Factory.CollectorReportRepository();
                 if (!rcdRepository.CodeExist(uc.txtreport.Text.Trim()))
@@ -71,7 +72,24 @@ namespace AccountingSystem.Views.Reports.RCD
             {
                 Helper.MessageBoxSuccess("RCD has been saved.");
                 _frmrcd.LoadRecords();
-                ucrcd1.ResetForm();
+                var uc = ucrcd1;
+                uc.cmbcollector.Enabled = false;
+                uc.txtreport.Enabled = false;
+                uc.btnadd.Enabled = true;
+                uc.btnprint.Enabled = true;
+                if (Helper.MessageBoxConfirmRCDList())
+                {                    
+                    _ = new frmGenerateRCD(uc, Convert.ToInt16(uc.cmbcollector.SelectedValue), uc.txtreport.Text.Trim()).ShowDialog();
+                }
+                else
+                {
+                    uc.ResetForm();
+                    uc.cmbcollector.Enabled = true;
+                    uc.txtreport.Enabled = true;
+                    uc.btnadd.Enabled = false;
+                    uc.btnprint.Enabled = false;
+                }
+
 
             }
         }

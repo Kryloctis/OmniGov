@@ -10,5 +10,6 @@ namespace ACC.Domain.Models
         public int CoId { get; set; }
         public string ReportNo { get; set; }
         public DateTime Date { get; set; }
+        public int Approved { get; set; }
     }
 }

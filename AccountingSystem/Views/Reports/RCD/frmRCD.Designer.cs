@@ -33,7 +33,6 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.btnReport = new System.Windows.Forms.ToolStripButton();
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -54,7 +53,6 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnAdd,
             this.btnEdit,
             this.btnDelete,
-            this.btnReport,
             this.btnPrint});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
@@ -97,18 +95,6 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnReport
-            // 
-            this.btnReport.Enabled = false;
-            this.btnReport.Image = global::AccountingSystem.Properties.Resources.rcd;
-            this.btnReport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnReport.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(58, 52);
-            this.btnReport.Text = "Report";
-            this.btnReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
             // btnPrint
             // 
@@ -177,6 +163,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.dgrcd.TabIndex = 16;
             this.dgrcd.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrcd_CellContentClick);
             this.dgrcd.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrcd_CellDoubleClick);
+            this.dgrcd.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgrcd_CellFormatting);
             this.dgrcd.SelectionChanged += new System.EventHandler(this.dgrcd_SelectionChanged);
             // 
             // frmRCD
@@ -215,7 +202,6 @@ namespace AccountingSystem.Views.Reports.RCD
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.TextBox txtsearch;
         private System.Windows.Forms.DataGridView dgrcd;
-        private System.Windows.Forms.ToolStripButton btnReport;
         private System.Windows.Forms.ToolStripButton btnPrint;
     }
 }

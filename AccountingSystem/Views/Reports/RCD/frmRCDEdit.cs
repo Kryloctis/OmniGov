@@ -46,7 +46,8 @@ namespace AccountingSystem.Views.Reports.RCD
                     Id = uc.Id,
                     CoId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
                     ReportNo = uc.txtreport.Text.Trim(),
-                    Date = Convert.ToDateTime(uc.dtdate.Value)
+                    Date = Convert.ToDateTime(uc.dtdate.Value),
+                    Approved = Convert.ToInt16(uc.chckapproved.Checked),
                 };
                 var rcdRepository = Factory.CollectorReportRepository();
                 return rcdRepository.Update(rcdModel);
@@ -62,6 +63,7 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             ucrcd1.LoadCollectors();
             LoadSelectedValue();
+         
         }
 
         private void LoadSelectedValue()
@@ -75,6 +77,14 @@ namespace AccountingSystem.Views.Reports.RCD
                 uc.cmbcollector.SelectedValue = rcdData["collecting_officers_id"];
                 uc.txtreport.Text = rcdData["report_no"];
                 uc.dtdate.Value = Convert.ToDateTime(rcdData["date"]);
+                uc.chckapproved.Checked = rcdData["is_approved"] == "0" ? false : true;
+
+                uc.LoadCollections();
+
+                uc.cmbcollector.Enabled = false;
+                uc.txtreport.Enabled = false;
+                uc.btnadd.Enabled = true;
+                uc.btnprint.Enabled = true;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

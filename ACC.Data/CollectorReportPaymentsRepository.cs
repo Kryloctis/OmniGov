@@ -65,7 +65,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableName}.id,CONCAT({tableName8}.account_group_code,'-',{tableName9}.maj_acc_group_code,'-',{tableName10}.sub_maj_acc_group_code,'-',{tableName6}.ledger_code) AS account_code,CONCAT({tableName5}.acc_form_no,'-',{tableName5}.acc_form_desc) AS accform,{tableName6}.ledger_name,CONCAT({tableName11}.sub_code,'-',{tableName11}.sub_name) AS subsidiary,{tableName3}.payee,{tableName3}.receipt_no,{tableName3}.payment_date,{tableName3}.amount,CONCAT({tableName4}.last_name,', ',{tableName4}.first_name,' ',{tableName4}.mid_initial) AS collector,{tableName2}.report_no,{tableName2}.date, FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id LEFT JOIN {tableName3} ON {tableName}.payment_collections_id={tableName3}.id LEFT JOIN {tableName5} ON {tableName3}.accountable_forms_id={tableName5}.id LEFT JOIN {tableName6} ON {tableName3}.general_ledger_accounts_id={tableName6}.id LEFT JOIN {tableName11} ON {tableName3}.subsidiary_ledger_accounts_id={tableName11}.id LEFT JOIN {tableName10} ON {tableName6}.sub_major_account_group_id={tableName10}.id LEFT JOIN {tableName9} ON {tableName10}.major_account_group_id={tableName9}.id LEFT JOIN {tableName8} ON {tableName9}.account_group_id = {tableName8}.id WHERE {tableName}.collector_report_id='{id}' ORDER BY {tableName}.id ASC";
+                string query = $"SELECT {tableName}.id,CONCAT({tableName8}.account_group_code,'-',{tableName9}.maj_acc_group_code,'-',{tableName10}.sub_maj_acc_group_code,'-',{tableName6}.ledger_code) AS account_code,CONCAT({tableName5}.acc_form_no,'-',{tableName5}.acc_form_desc) AS accform,{tableName6}.ledger_name,CONCAT({tableName11}.sub_code,'-',{tableName11}.sub_name) AS subsidiary,{tableName3}.payee,{tableName3}.receipt_no,{tableName3}.payment_date,{tableName3}.amount,CONCAT({tableName4}.last_name,', ',{tableName4}.first_name,' ',{tableName4}.mid_initial) AS collector FROM {tableName} LEFT JOIN {tableName2} ON {tableName}.collector_report_id={tableName2}.id LEFT JOIN {tableName3} ON {tableName}.payment_collections_id={tableName3}.id LEFT JOIN {tableName4} ON {tableName3}.collecting_officers_id={tableName4}.id LEFT JOIN {tableName5} ON {tableName3}.accountable_forms_id={tableName5}.id LEFT JOIN {tableName6} ON {tableName3}.general_ledger_accounts_id={tableName6}.id LEFT JOIN {tableName11} ON {tableName3}.subsidiary_ledger_accounts_id={tableName11}.id LEFT JOIN {tableName10} ON {tableName6}.sub_major_account_group_id={tableName10}.id LEFT JOIN {tableName9} ON {tableName10}.major_account_group_id={tableName9}.id LEFT JOIN {tableName8} ON {tableName9}.account_group_id = {tableName8}.id WHERE {tableName2}.id='{id}' ORDER BY {tableName}.id ASC";
 
                 var dtcrp = new DataTable();
                 return _dbGenericCommands.Fill(query, dtcrp);
@@ -75,7 +75,22 @@ namespace ACC.Data
                 throw;
             }
         }
-        
+
+        public DataTable GetRecords(string reportno)
+        {
+            try
+            {
+                string query = $"SELECT {tableName}.id,CONCAT({tableName8}.account_group_code,'-',{tableName9}.maj_acc_group_code,'-',{tableName10}.sub_maj_acc_group_code,'-',{tableName6}.ledger_code) AS account_code,CONCAT({tableName5}.acc_form_no,'-',{tableName5}.acc_form_desc) AS accform,{tableName6}.ledger_name,CONCAT({tableName11}.sub_code,'-',{tableName11}.sub_name) AS subsidiary,{tableName3}.payee,{tableName3}.receipt_no,{tableName3}.payment_date,{tableName3}.amount,CONCAT({tableName4}.last_name,', ',{tableName4}.first_name,' ',{tableName4}.mid_initial) AS collector FROM {tableName} LEFT JOIN {tableName2} ON {tableName}.collector_report_id={tableName2}.id LEFT JOIN {tableName3} ON {tableName}.payment_collections_id={tableName3}.id LEFT JOIN {tableName4} ON {tableName3}.collecting_officers_id={tableName4}.id LEFT JOIN {tableName5} ON {tableName3}.accountable_forms_id={tableName5}.id LEFT JOIN {tableName6} ON {tableName3}.general_ledger_accounts_id={tableName6}.id LEFT JOIN {tableName11} ON {tableName3}.subsidiary_ledger_accounts_id={tableName11}.id LEFT JOIN {tableName10} ON {tableName6}.sub_major_account_group_id={tableName10}.id LEFT JOIN {tableName9} ON {tableName10}.major_account_group_id={tableName9}.id LEFT JOIN {tableName8} ON {tableName9}.account_group_id = {tableName8}.id WHERE {tableName2}.report_no='{reportno}' ORDER BY {tableName}.id ASC";
+
+                var dtcrp = new DataTable();
+                return _dbGenericCommands.Fill(query, dtcrp);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool Insert(List<CollectorReportPaymentModel> entityList)
         {
             try
@@ -144,6 +159,7 @@ namespace ACC.Data
                     {
                         if (entity.Id > 0)
                         {
+
                             var parameters = new object[][]
                            {
                                 new object[] { "@id", DbType.Int16, entity.Id},
@@ -211,6 +227,20 @@ namespace ACC.Data
                 string query = $"SELECT COUNT(*) FROM {tableName} WHERE {tableName}.collector_report_id='{id}'";
 
                 return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public decimal SumRecords(string reportno)
+        {
+            try
+            {
+                string query = $"SELECT SUM({tableName3}.amount) FROM {tableName2} LEFT JOIN {tableName} ON {tableName}.collector_report_id={tableName2}.id LEFT JOIN {tableName3} ON {tableName}.payment_collections_id={tableName3}.id WHERE {tableName2}.report_no='{reportno}'";
+                string result = _dbGenericCommands.ExecuteScalar(query);
+                return !string.IsNullOrEmpty(result) ? decimal.Parse(result):decimal.Parse("0.00");
             }
             catch (Exception)
             {

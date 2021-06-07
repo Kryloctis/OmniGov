@@ -37,7 +37,15 @@ namespace AccountingSystem.Views.Reports.RCD
             this.txtreport = new System.Windows.Forms.TextBox();
             this.dtdate = new System.Windows.Forms.DateTimePicker();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.chckapproved = new System.Windows.Forms.CheckBox();
+            this.dgvpayments = new System.Windows.Forms.DataGridView();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txttotal = new System.Windows.Forms.NumericUpDown();
+            this.btnadd = new System.Windows.Forms.Button();
+            this.btnprint = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvpayments)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txttotal)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -99,10 +107,87 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // chckapproved
+            // 
+            this.chckapproved.AutoSize = true;
+            this.chckapproved.Location = new System.Drawing.Point(915, 15);
+            this.chckapproved.Name = "chckapproved";
+            this.chckapproved.Size = new System.Drawing.Size(97, 24);
+            this.chckapproved.TabIndex = 4;
+            this.chckapproved.Text = "Approved";
+            this.chckapproved.UseVisualStyleBackColor = true;
+            // 
+            // dgvpayments
+            // 
+            this.dgvpayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvpayments.Location = new System.Drawing.Point(11, 121);
+            this.dgvpayments.Name = "dgvpayments";
+            this.dgvpayments.RowHeadersWidth = 51;
+            this.dgvpayments.RowTemplate.Height = 29;
+            this.dgvpayments.Size = new System.Drawing.Size(1007, 506);
+            this.dgvpayments.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(674, 635);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 20);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Total :";
+            // 
+            // txttotal
+            // 
+            this.txttotal.DecimalPlaces = 2;
+            this.txttotal.Location = new System.Drawing.Point(729, 633);
+            this.txttotal.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
+            this.txttotal.Name = "txttotal";
+            this.txttotal.ReadOnly = true;
+            this.txttotal.Size = new System.Drawing.Size(289, 27);
+            this.txttotal.TabIndex = 7;
+            this.txttotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // btnadd
+            // 
+            this.btnadd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnadd.Enabled = false;
+            this.btnadd.Image = global::AccountingSystem.Properties.Resources.rcd1;
+            this.btnadd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnadd.Location = new System.Drawing.Point(857, 86);
+            this.btnadd.Name = "btnadd";
+            this.btnadd.Size = new System.Drawing.Size(161, 29);
+            this.btnadd.TabIndex = 8;
+            this.btnadd.Text = "Add Payments";
+            this.btnadd.UseVisualStyleBackColor = true;
+            this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
+            // 
+            // btnprint
+            // 
+            this.btnprint.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnprint.Enabled = false;
+            this.btnprint.Image = global::AccountingSystem.Properties.Resources.print_14px;
+            this.btnprint.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnprint.Location = new System.Drawing.Point(11, 633);
+            this.btnprint.Name = "btnprint";
+            this.btnprint.Size = new System.Drawing.Size(155, 29);
+            this.btnprint.TabIndex = 9;
+            this.btnprint.Text = "Print";
+            this.btnprint.UseVisualStyleBackColor = true;
+            // 
             // ucRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnprint);
+            this.Controls.Add(this.btnadd);
+            this.Controls.Add(this.txttotal);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.dgvpayments);
+            this.Controls.Add(this.chckapproved);
             this.Controls.Add(this.dtdate);
             this.Controls.Add(this.txtreport);
             this.Controls.Add(this.cmbcollector);
@@ -110,9 +195,11 @@ namespace AccountingSystem.Views.Reports.RCD
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "ucRCD";
-            this.Size = new System.Drawing.Size(525, 124);
+            this.Size = new System.Drawing.Size(1031, 670);
             this.Load += new System.EventHandler(this.ucRCD_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvpayments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txttotal)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -127,5 +214,11 @@ namespace AccountingSystem.Views.Reports.RCD
         internal System.Windows.Forms.ComboBox cmbcollector;
         internal System.Windows.Forms.TextBox txtreport;
         internal System.Windows.Forms.DateTimePicker dtdate;
+        internal System.Windows.Forms.NumericUpDown txttotal;
+        private System.Windows.Forms.Label label4;
+        internal System.Windows.Forms.CheckBox chckapproved;
+        internal System.Windows.Forms.Button btnadd;
+        internal System.Windows.Forms.Button btnprint;
+        internal System.Windows.Forms.DataGridView dgvpayments;
     }
 }

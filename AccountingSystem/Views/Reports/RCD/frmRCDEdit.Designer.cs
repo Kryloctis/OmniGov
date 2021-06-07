@@ -42,15 +42,15 @@ namespace AccountingSystem.Views.Reports.RCD
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 121);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 674);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(531, 36);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1032, 36);
             this.flowLayoutPanel1.TabIndex = 7;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(434, 3);
+            this.btnCancel.Location = new System.Drawing.Point(935, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnCancel.Size = new System.Drawing.Size(94, 29);
@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(334, 3);
+            this.btnSave.Location = new System.Drawing.Point(835, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnSave.Size = new System.Drawing.Size(94, 29);
@@ -73,9 +73,9 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // ucrcd1
             // 
-            this.ucrcd1.Location = new System.Drawing.Point(0, -3);
+            this.ucrcd1.Location = new System.Drawing.Point(2, 3);
             this.ucrcd1.Name = "ucrcd1";
-            this.ucrcd1.Size = new System.Drawing.Size(530, 124);
+            this.ucrcd1.Size = new System.Drawing.Size(1028, 670);
             this.ucrcd1.TabIndex = 8;
             // 
             // frmRCDEdit
@@ -84,7 +84,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(531, 157);
+            this.ClientSize = new System.Drawing.Size(1032, 710);
             this.Controls.Add(this.ucrcd1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

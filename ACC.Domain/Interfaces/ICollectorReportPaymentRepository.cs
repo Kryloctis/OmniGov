@@ -10,5 +10,9 @@ namespace ACC.Domain.Interfaces
     {
         bool Insert(List<CollectorReportPaymentModel> entityList);
         DataTable GetRecordByLedger(string Id);
+        DataTable GetRecords(int id);
+        DataTable GetRecords(string reportno);
+        decimal SumRecords(string reportno);
+        bool Append(List<CollectorReportPaymentModel> entityList);
     }
 }
