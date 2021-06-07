@@ -1,6 +1,5 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.AllotmentRelease;
-using AccountingSystem.Views.Manage.SupplementalAppropriations;
 using BudgetSystem.Views.BudgetAppropriations;
 using BudgetSystem.Views.Manage.BudgetAppropriations;
 using MySql.Data.MySqlClient;
