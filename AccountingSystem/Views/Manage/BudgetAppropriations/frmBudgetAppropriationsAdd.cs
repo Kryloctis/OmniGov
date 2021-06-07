@@ -47,7 +47,8 @@ namespace BudgetSystem.Views.BudgetAppropriations
                     Year = uc.year,
                     DateEntry = uc.dtDateEntry.Value,
                     Amount = uc.nudAmount.Value,
-                    Continuing = uc.chckbxContinuing.Checked
+                    Continuing = uc.chckbxContinuing.Checked,
+                    Remarks = uc.txtRemarks.Text.Trim()
                 };
 
                 return Factory.BudgetAppropriationsRepository().Insert(budgetAppropriationsModel);

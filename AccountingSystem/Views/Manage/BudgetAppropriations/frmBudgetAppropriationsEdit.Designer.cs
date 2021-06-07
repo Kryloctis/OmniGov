@@ -43,7 +43,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 271);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 300);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(565, 29);
             this.flowLayoutPanel1.TabIndex = 1;
@@ -75,7 +75,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
             this.ucBudgetAppropriations1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucBudgetAppropriations1.Location = new System.Drawing.Point(12, 12);
             this.ucBudgetAppropriations1.Name = "ucBudgetAppropriations1";
-            this.ucBudgetAppropriations1.Size = new System.Drawing.Size(553, 253);
+            this.ucBudgetAppropriations1.Size = new System.Drawing.Size(553, 286);
             this.ucBudgetAppropriations1.TabIndex = 0;
             // 
             // frmBudgetAppropriationsEdit
@@ -85,7 +85,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(565, 300);
+            this.ClientSize = new System.Drawing.Size(565, 329);
             this.Controls.Add(this.ucBudgetAppropriations1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

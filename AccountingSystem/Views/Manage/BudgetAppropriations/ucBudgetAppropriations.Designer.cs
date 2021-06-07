@@ -50,6 +50,8 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.txtFund = new System.Windows.Forms.TextBox();
             this.txtAllotmentClass = new System.Windows.Forms.TextBox();
             this.txtYear = new System.Windows.Forms.TextBox();
+            this.txtRemarks = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFunctionProgramProject)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
@@ -188,7 +190,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // chckbxContinuing
             // 
             this.chckbxContinuing.AutoSize = true;
-            this.chckbxContinuing.Location = new System.Drawing.Point(369, 235);
+            this.chckbxContinuing.Location = new System.Drawing.Point(369, 261);
             this.chckbxContinuing.Name = "chckbxContinuing";
             this.chckbxContinuing.Size = new System.Drawing.Size(163, 19);
             this.chckbxContinuing.TabIndex = 8;
@@ -227,11 +229,29 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.txtYear.Size = new System.Drawing.Size(436, 23);
             this.txtYear.TabIndex = 12;
             // 
+            // txtRemarks
+            // 
+            this.txtRemarks.Location = new System.Drawing.Point(96, 232);
+            this.txtRemarks.Name = "txtRemarks";
+            this.txtRemarks.Size = new System.Drawing.Size(436, 23);
+            this.txtRemarks.TabIndex = 13;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(1, 235);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(52, 15);
+            this.label9.TabIndex = 14;
+            this.label9.Text = "Remarks";
+            // 
             // ucBudgetAppropriations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.txtRemarks);
             this.Controls.Add(this.txtYear);
             this.Controls.Add(this.txtAllotmentClass);
             this.Controls.Add(this.txtFund);
@@ -250,7 +270,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.Controls.Add(this.cmbxLedgerAccount);
             this.Controls.Add(this.cmbxOthersFPP);
             this.Name = "ucBudgetAppropriations";
-            this.Size = new System.Drawing.Size(554, 257);
+            this.Size = new System.Drawing.Size(554, 284);
             this.Load += new System.EventHandler(this.ucBudgetAppropriations_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFunctionProgramProject)).EndInit();
@@ -283,5 +303,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
         internal System.Windows.Forms.TextBox t;
         internal System.Windows.Forms.TextBox txtAllotmentClass;
         internal System.Windows.Forms.TextBox txtYear;
+        private System.Windows.Forms.Label label9;
+        internal System.Windows.Forms.TextBox txtRemarks;
     }
 }

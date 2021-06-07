@@ -60,6 +60,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                 uc.year = year;
                 uc.nudAmount.Value = appropriationAmount;
                 uc.chckbxContinuing.Checked = continuing;
+                uc.txtRemarks.Text = selectedBudgetAppropriation["remarks"];
             }
             catch (Exception ex)
             {
@@ -97,7 +98,8 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                     DateEntry = uc.dtDateEntry.Value,
                     Year = uc.year,
                     Amount = uc.nudAmount.Value,
-                    Continuing = uc.chckbxContinuing.Checked
+                    Continuing = uc.chckbxContinuing.Checked,
+                    Remarks = uc.txtRemarks.Text.Trim()
                 };
 
                 return Factory.BudgetAppropriationsRepository().Update(budgetAppModel);
