@@ -878,6 +878,7 @@ namespace AccountingSystem
                 dgvBudgetAppropriations.Columns.Add("appropriationBalance", "Appropriation Balance");
                 dgvBudgetAppropriations.Columns.Add("year", "Year");
                 dgvBudgetAppropriations.Columns.Add(imgColumn);
+                dgvBudgetAppropriations.Columns.Add("remarks", "Remarks");
                 dgvBudgetAppropriations.Columns.Add("created_at", "Created at");
                 dgvBudgetAppropriations.Columns.Add("updated_at", "Updated at");
 
@@ -894,20 +895,38 @@ namespace AccountingSystem
                 dgvBudgetAppropriations.Columns["updated_at"].Visible = false;
 
                 //Column's Format
+                int amountColumWidth = 145;
                 dgvBudgetAppropriations.Columns["general_ledger_accounts_name"].Width = 300;
+
+                dgvBudgetAppropriations.Columns["account_code"].Resizable = DataGridViewTriState.False;
                 dgvBudgetAppropriations.Columns["account_code"].Width = 100;
+                dgvBudgetAppropriations.Columns["account_code"].MinimumWidth = 100;
+
+
+                dgvBudgetAppropriations.Columns["amount"].Resizable = DataGridViewTriState.False;
+                dgvBudgetAppropriations.Columns["amount"].Width = amountColumWidth;
+                dgvBudgetAppropriations.Columns["amount"].MinimumWidth = amountColumWidth;
                 dgvBudgetAppropriations.Columns["amount"].DefaultCellStyle.Format = "N2";
                 dgvBudgetAppropriations.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
+                dgvBudgetAppropriations.Columns["totalAllotmentRelease"].Resizable = DataGridViewTriState.False;
+                dgvBudgetAppropriations.Columns["totalAllotmentRelease"].Width = amountColumWidth;
+                dgvBudgetAppropriations.Columns["totalAllotmentRelease"].MinimumWidth = amountColumWidth;
                 dgvBudgetAppropriations.Columns["totalAllotmentRelease"].DefaultCellStyle.Format = "N2";
                 dgvBudgetAppropriations.Columns["totalAllotmentRelease"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
+                dgvBudgetAppropriations.Columns["appropriationBalance"].Resizable = DataGridViewTriState.False;
+                dgvBudgetAppropriations.Columns["appropriationBalance"].Width = amountColumWidth;
+                dgvBudgetAppropriations.Columns["appropriationBalance"].MinimumWidth = amountColumWidth;
                 dgvBudgetAppropriations.Columns["appropriationBalance"].DefaultCellStyle.Format = "N2";
                 dgvBudgetAppropriations.Columns["appropriationBalance"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
+
+                dgvBudgetAppropriations.Columns["continuing"].Resizable = DataGridViewTriState.False;
                 dgvBudgetAppropriations.Columns["continuing"].DefaultCellStyle.NullValue = null;
                 dgvBudgetAppropriations.Columns["continuing"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 dgvBudgetAppropriations.Columns["continuing"].Width = 80;
+                dgvBudgetAppropriations.Columns["continuing"].MinimumWidth = 80;
 
                 //Initialize Repository Method
                 var budgetAppropriationsModel = new BudgetAppropriationsModel()
@@ -966,6 +985,7 @@ namespace AccountingSystem
                     decimal rowAppropriationAmount = Convert.ToDecimal(drGetViewRecordsByIds["amount"]);
                     short rowYear = Convert.ToInt16(drGetViewRecordsByIds["year"]);
                     byte rowContinuing = Convert.ToByte(drGetViewRecordsByIds["continuing"]);
+                    string remarks = drGetViewRecordsByIds["remarks"].ToString();
                     decimal totalSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountById(rowId);
 
                     decimal totalAppropriationAmount = totalSupplementalAppropriation + rowAppropriationAmount;
@@ -981,7 +1001,7 @@ namespace AccountingSystem
                         rowOthersFPPId,
                         rowAllotmentClassId,
                         rowAccountId,
-                        rowAccountName,
+                        $"    {rowAccountName}",
                         rowAccountCode,
                         rowDateEntry,
                         totalAppropriationAmount,
@@ -989,6 +1009,7 @@ namespace AccountingSystem
                         appropriationBalance,
                         rowYear,
                         rowContinuing == 1? continuingIcon : null,
+                        remarks,
                         drGetViewRecordsByIds["created_at"],
                         drGetViewRecordsByIds["updated_at"] });
                 }
@@ -999,8 +1020,11 @@ namespace AccountingSystem
                 {
                     if (row.Cells["fpp_id"].Value == null)
                     {
-                        dgvBudgetAppropriations.Rows[row.Index].DefaultCellStyle.Font = new Font(DataGridView.DefaultFont, FontStyle.Bold);
-                        dgvBudgetAppropriations.Rows[row.Index].HeaderCell.Style.BackColor = Color.LightBlue;
+                        Color backgroundColor = Color.White;
+
+                        row.DefaultCellStyle.Font = new Font(DataGridView.DefaultFont, FontStyle.Bold);
+                        row.DefaultCellStyle.BackColor = backgroundColor;
+                        row.HeaderCell.Style.BackColor = backgroundColor;
                     }
                 }
 

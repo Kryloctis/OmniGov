@@ -175,7 +175,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                         _ = Factory.AllotmentReleaseRepository().Delete(allotmentModelList);
                         LoadAllotmentReleaseRecords();
                         LoadAppropriationDetails();
-                        _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
                     }
                 }
             }
