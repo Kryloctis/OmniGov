@@ -103,17 +103,12 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 int? othersFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text.ToString()) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
                 int generalLedgerAccId = Convert.ToInt32(cmbxLedgerAccount.SelectedValue);
 
-
                 bool budgetAppropriationExist;
 
                 if (budgetAppropriationId == 0)
-                {
                     budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId);
-                }
                 else
-                {
                     budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId);
-                }
 
                 if (budgetAppropriationExist)
                 {
@@ -133,22 +128,19 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             try
             {
-                #region Validation of Budget Appropriration Record
+                #region Validation of Budget Appropriation Record
 
                 int? othersFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text.ToString()) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
                 int generalLedgerAccId = Convert.ToInt32(cmbxLedgerAccount.SelectedValue);
+                string remarks = txtRemarks.Text;
 
                 bool budgetAppropriationExist;
 
                 if (budgetAppropriationId == 0)
-                {
-                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationExist(fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, year);
-                }
+                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationExist(fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, year, remarks);
                 else
-                {
-                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationExist(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, year);
-                }
-
+                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationExist(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, year, remarks);
+                
                 if (budgetAppropriationExist)
                 {
                     epGeneralLedgerAcc.SetError(cmbxLedgerAccount, "Account you entered is not allowed. Budget appropriation already exist on your record.");
