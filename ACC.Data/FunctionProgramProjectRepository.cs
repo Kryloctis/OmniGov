@@ -87,6 +87,26 @@ namespace ACC.Data
             }
         }
 
+        public DataTable GetRecordsByCodeName(string searchTxt)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%"}
+                };
+
+                string query = $"SELECT id, functional_classification_services_id, fpp_code, fpp_name, is_special, created_at, updated_at FROM {tableName} WHERE fpp_code LIKE @searchTxt OR fpp_name LIKE @searchTxt";
+
+                var dtFPP = new DataTable();
+
+                return _dbGenericCommands.FillBySearch(query, dtFPP, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public DataTable GetViewRecordsByServiceNameId(byte id)
         {
@@ -310,5 +330,6 @@ namespace ACC.Data
             return false;
         }
 
+      
     }
 }
