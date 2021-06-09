@@ -27,13 +27,17 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         private void ShowRecordTimeStamp() 
         {
+
             int rowIndex = dgBudgetAppropriations.CurrentCell.RowIndex;
-            
+
+            var dateEntry = dgBudgetAppropriations.Rows[rowIndex].Cells["date_entry"].Value;
             var createdAt = dgBudgetAppropriations.Rows[rowIndex].Cells["created_at"].Value;
             var updatedAt = dgBudgetAppropriations.Rows[rowIndex].Cells["updated_at"].Value;
 
+            lblDateEntry.Text = createdAt == null ? null : dateEntry.ToString();
             lblCreatedAt.Text = createdAt == null ? null : createdAt.ToString();
             lblUpdatedAt.Text = updatedAt == null ? null : updatedAt.ToString();
+
         }
 
         private void dgBudgetAppropriations_SelectionChanged(object sender, EventArgs e)
@@ -66,6 +70,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             }
 
             lblRecords.Text = recordCount.ToString();
+            lblDateEntry.Text = string.Empty;
             lblCreatedAt.Text = string.Empty;
             lblUpdatedAt.Text = string.Empty;
         }
@@ -167,8 +172,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         }
 
-
-        #region Events Method
 
         private void cmbxAllotmentClass_SelectedValueChanged(object sender, EventArgs e) 
         {
@@ -297,7 +300,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             dgBudgetAppropriations.Columns[e.Column.Index].SortMode = DataGridViewColumnSortMode.NotSortable;
         }
 
-        #endregion Events Methods
 
         private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
         {

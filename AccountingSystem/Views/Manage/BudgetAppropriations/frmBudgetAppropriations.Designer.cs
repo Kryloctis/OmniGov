@@ -49,6 +49,9 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblDateEntry = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetAppropriations)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
@@ -81,7 +84,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1201, 57);
+            this.panel1.Size = new System.Drawing.Size(1201, 56);
             this.panel1.TabIndex = 5;
             // 
             // cmbxFPP
@@ -148,7 +151,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Image = global::AccountingSystem.Properties.Resources.edit;
             this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnEdit.Location = new System.Drawing.Point(50, 4);
+            this.btnEdit.Location = new System.Drawing.Point(50, 3);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(0);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(49, 53);
@@ -219,6 +222,9 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.toolStripStatusLabel4,
             this.lblRecords,
             this.springLbl,
+            this.toolStripStatusLabel6,
+            this.lblDateEntry,
+            this.toolStripStatusLabel5,
             this.toolStripStatusLabel2,
             this.lblCreatedAt,
             this.toolStripStatusLabel1,
@@ -226,7 +232,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.lblUpdatedAt});
             this.statusStrip1.Location = new System.Drawing.Point(0, 518);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1302, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1201, 22);
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -245,7 +251,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // springLbl
             // 
             this.springLbl.Name = "springLbl";
-            this.springLbl.Size = new System.Drawing.Size(1088, 17);
+            this.springLbl.Size = new System.Drawing.Size(913, 17);
             this.springLbl.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -277,6 +283,25 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             this.lblUpdatedAt.Name = "lblUpdatedAt";
             this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
+            // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel5.Text = "|";
+            this.toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // toolStripStatusLabel6
+            // 
+            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(64, 17);
+            this.toolStripStatusLabel6.Text = "Date Entry:";
+            // 
+            // lblDateEntry
+            // 
+            this.lblDateEntry.Name = "lblDateEntry";
+            this.lblDateEntry.Size = new System.Drawing.Size(0, 17);
             // 
             // frmBudgetAppropriations
             // 
@@ -330,5 +355,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         internal System.Windows.Forms.ToolStripStatusLabel lblRecords;
         internal System.Windows.Forms.ComboBox cmbxFPP;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
+        internal System.Windows.Forms.ToolStripStatusLabel lblDateEntry;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
     }
 }
