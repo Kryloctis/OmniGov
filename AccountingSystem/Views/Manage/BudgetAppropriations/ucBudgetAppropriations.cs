@@ -174,20 +174,21 @@ namespace BudgetSystem.Views.BudgetAppropriations
             Helper.ClearErrorComboBox(epGeneralLedgerAcc, cmbxLedgerAccount);
         }
 
-        private void LoadAccounts() 
+        private void LoadAccount(ComboBox comboBox) 
         {
             try
             {
+
                 var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
                 string accountGroupName = allotmentClassRepo["allotment_name"];
 
                 DataTable dtAccounts;
 
-                if (Convert.ToInt32(allotmentClassId) == 4)
+                if (Convert.ToInt32(allotmentClassId) == 4 )
                     dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroupName("Assets");
                 else
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajAccGroupNameSearch(accountGroupName, cmbxLedgerAccount.Text);
-
+                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupName(accountGroupName);
+               
                 var accountDict = new Dictionary<int, string>();
                 foreach (DataRow item in dtAccounts.Rows)
                 {
@@ -197,12 +198,11 @@ namespace BudgetSystem.Views.BudgetAppropriations
                     accountDict.Add(accountId, accountName);
                 }
 
-                cmbxLedgerAccount.DataSource = new BindingSource(accountDict, null);
-                cmbxLedgerAccount.DisplayMember = "value";
-                cmbxLedgerAccount.ValueMember = "key";
-                cmbxLedgerAccount.SelectedIndex = -1;
+                comboBox.DataSource = new BindingSource(accountDict, null);
+                comboBox.DisplayMember = "value";
+                comboBox.ValueMember = "key";
 
-                Helper.ClearErrorComboBox(epGeneralLedgerAcc, cmbxLedgerAccount);
+                Helper.ClearErrorComboBox(epGeneralLedgerAcc, comboBox);
             }
             catch (Exception ex)
             {
@@ -210,47 +210,10 @@ namespace BudgetSystem.Views.BudgetAppropriations
             }
         }
 
+
         private void cmbxLedgerAccount_KeyDown(object sender, KeyEventArgs e)
         {
-            if (cmbxLedgerAccount.Text.Length < 4) return;
 
-            if (e.KeyCode == Keys.F1)
-            {
-                try
-                {
-                    var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
-                    string accountGroupName = allotmentClassRepo["allotment_name"];
-
-                    DataTable dtAccounts;
-
-                    if (Convert.ToInt32(allotmentClassId) == 4)
-                        dtAccounts = Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsBySearch(cmbxLedgerAccount.Text);
-                    else
-                        dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajAccGroupNameSearch(accountGroupName, cmbxLedgerAccount.Text);
-
-                    if (dtAccounts.Rows.Count == 0 || string.IsNullOrWhiteSpace(cmbxLedgerAccount.Text.Trim())) return;
-
-                    var accountDict = new Dictionary<int, string>();
-                    foreach (DataRow item in dtAccounts.Rows)
-                    {
-                        int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
-                        string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
-
-                        accountDict.Add(accountId, accountName);
-                    }
-
-                    cmbxLedgerAccount.DataSource = new BindingSource(accountDict, null);
-                    cmbxLedgerAccount.DisplayMember = "value";
-                    cmbxLedgerAccount.ValueMember = "key";
-                    cmbxLedgerAccount.DroppedDown = true;
-
-                    Helper.ClearErrorComboBox(epGeneralLedgerAcc, cmbxLedgerAccount);
-                }
-                catch (Exception ex)
-                {
-                    Helper.MessageBoxError(ex.Message);
-                }
-            }
         }
 
 
@@ -301,8 +264,14 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 dtDateEntry.MaxDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
 
                 LoadOthersFPPByFPPIdCombobox();
-                LoadAccounts();
+                LoadAccount(cmbxLedgerAccount);
+                cmbxLedgerAccount.SelectedIndex = -1;
             }
+        }
+
+        private void cmbxLedgerAccount_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

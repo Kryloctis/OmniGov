@@ -17,11 +17,13 @@ namespace ACC.Domain.Interfaces
         //Budget System
         DataTable GetAllViewRecords();
 
-        DataTable GetViewRecordsByAccountGroupName(string accountGroupName);
-
         DataTable GetAllViewRecordsBySearch(string searchText);
 
-        DataTable GetViewRecordsByMajAccGroupNameSearch(string majAccGroupName, string searchText);
+        DataTable GetViewRecordsByMajorAccGroupName(string majAccGroupName);
+
+        DataTable GetViewRecordsByMajorAccGroupNameSearch(string majAccGroupName, string searchText);
+
+        DataTable GetViewRecordsByAccountGroupName(string accountGroupName);
 
         bool NameExist(string txtName);
 

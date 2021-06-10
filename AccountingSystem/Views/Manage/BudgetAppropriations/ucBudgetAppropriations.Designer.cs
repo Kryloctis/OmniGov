@@ -103,6 +103,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.cmbxLedgerAccount.Name = "cmbxLedgerAccount";
             this.cmbxLedgerAccount.Size = new System.Drawing.Size(436, 23);
             this.cmbxLedgerAccount.TabIndex = 6;
+            this.cmbxLedgerAccount.TextChanged += new System.EventHandler(this.cmbxLedgerAccount_TextChanged);
             this.cmbxLedgerAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxLedgerAccount_KeyDown);
             this.cmbxLedgerAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxLedgerAccount_Validating);
             this.cmbxLedgerAccount.Validated += new System.EventHandler(this.cmbxLedgerAccount_Validated);
