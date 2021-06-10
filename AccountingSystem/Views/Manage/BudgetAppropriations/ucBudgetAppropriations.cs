@@ -174,48 +174,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             Helper.ClearErrorComboBox(epGeneralLedgerAcc, cmbxLedgerAccount);
         }
 
-        private void LoadAccount(ComboBox comboBox) 
-        {
-            try
-            {
-
-                var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
-                string accountGroupName = allotmentClassRepo["allotment_name"];
-
-                DataTable dtAccounts;
-
-                if (Convert.ToInt32(allotmentClassId) == 4 )
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroupName("Assets");
-                else
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupName(accountGroupName);
-               
-                var accountDict = new Dictionary<int, string>();
-                foreach (DataRow item in dtAccounts.Rows)
-                {
-                    int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
-                    string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
-
-                    accountDict.Add(accountId, accountName);
-                }
-
-                comboBox.DataSource = new BindingSource(accountDict, null);
-                comboBox.DisplayMember = "value";
-                comboBox.ValueMember = "key";
-
-                Helper.ClearErrorComboBox(epGeneralLedgerAcc, comboBox);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-
-        private void cmbxLedgerAccount_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-
+    
 
         //numeric up down amounts
 
@@ -266,12 +225,87 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 LoadOthersFPPByFPPIdCombobox();
                 LoadAccount(cmbxLedgerAccount);
                 cmbxLedgerAccount.SelectedIndex = -1;
+                cmbxLedgerAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChange);
             }
         }
 
-        private void cmbxLedgerAccount_TextChanged(object sender, EventArgs e)
-        {
 
+
+        //Match making Accounts Combobox
+        private DataTable DatatableAccounts()
+        {
+            var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
+            string accountGroupName = allotmentClassRepo["allotment_name"];
+
+            DataTable dtAccounts;
+
+            if (string.IsNullOrEmpty(cmbxLedgerAccount.Text))
+            {
+                if (Convert.ToInt32(allotmentClassId) == 4)
+                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroupName("Assets");
+                else
+                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupName(accountGroupName);
+            }
+            else
+            {
+                if (Convert.ToInt32(allotmentClassId) == 4)
+                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroupNameSearch("Assets", cmbxLedgerAccount.Text);
+                else
+                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupNameSearch(accountGroupName, cmbxLedgerAccount.Text);
+            }
+
+            return dtAccounts;
+        }
+
+        private void LoadAccount(ComboBox comboBox)
+        {
+            try
+            {
+                cmbxLedgerAccount.DroppedDown = false;
+
+                DataTable dtAccounts = DatatableAccounts();
+
+                var accountDict = new Dictionary<int, string>();
+                foreach (DataRow item in dtAccounts.Rows)
+                {
+                    int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
+                    string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
+
+                    accountDict.Add(accountId, accountName);
+                }
+
+                comboBox.DataSource = new BindingSource(accountDict.Count == 0 ? null : accountDict, null);
+                comboBox.DisplayMember = "value";
+                comboBox.ValueMember = "key";
+                Cursor.Current = Cursors.Default;
+
+                Helper.ClearErrorComboBox(epGeneralLedgerAcc, comboBox);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+        }
+
+        private void CmbxLedgerAccout_TextChange(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbxLedgerAccount.Text))
+            {
+                LoadAccount(cmbxLedgerAccount);
+                cmbxLedgerAccount.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChange);
+                cmbxLedgerAccount.SelectedIndex = -1;
+                cmbxLedgerAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChange);
+            }
+        }
+
+        private void cmbxLedgerAccount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1 && cmbxLedgerAccount.FindStringExact(cmbxLedgerAccount.Text) == -1)
+            {
+                LoadAccount(cmbxLedgerAccount);
+                cmbxLedgerAccount.DroppedDown = true;
+            }
         }
     }
 }
