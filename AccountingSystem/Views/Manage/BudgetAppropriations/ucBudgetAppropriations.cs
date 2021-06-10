@@ -225,7 +225,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 LoadOthersFPPByFPPIdCombobox();
                 LoadAccount(cmbxLedgerAccount);
                 cmbxLedgerAccount.SelectedIndex = -1;
-                cmbxLedgerAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChange);
+                cmbxLedgerAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
             }
         }
 
@@ -288,20 +288,20 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         }
 
-        private void CmbxLedgerAccout_TextChange(object sender, EventArgs e)
+        private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cmbxLedgerAccount.Text))
             {
+                cmbxLedgerAccount.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
                 LoadAccount(cmbxLedgerAccount);
-                cmbxLedgerAccount.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChange);
                 cmbxLedgerAccount.SelectedIndex = -1;
-                cmbxLedgerAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChange);
+                cmbxLedgerAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
             }
         }
 
         private void cmbxLedgerAccount_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F1 && cmbxLedgerAccount.FindStringExact(cmbxLedgerAccount.Text) == -1)
+            if (e.KeyCode == Keys.F1 && cmbxLedgerAccount.FindStringExact(cmbxLedgerAccount.Text) == -1 && !string.IsNullOrEmpty(cmbxLedgerAccount.Text))
             {
                 LoadAccount(cmbxLedgerAccount);
                 cmbxLedgerAccount.DroppedDown = true;

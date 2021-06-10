@@ -44,14 +44,14 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecords = new System.Windows.Forms.ToolStripStatusLabel();
             this.springLbl = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblDateEntry = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblDateEntry = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetAppropriations)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
@@ -254,6 +254,25 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.springLbl.Size = new System.Drawing.Size(913, 17);
             this.springLbl.Spring = true;
             // 
+            // toolStripStatusLabel6
+            // 
+            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(64, 17);
+            this.toolStripStatusLabel6.Text = "Date Entry:";
+            // 
+            // lblDateEntry
+            // 
+            this.lblDateEntry.Name = "lblDateEntry";
+            this.lblDateEntry.Size = new System.Drawing.Size(0, 17);
+            // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel5.Text = "|";
+            this.toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
@@ -283,25 +302,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             this.lblUpdatedAt.Name = "lblUpdatedAt";
             this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
-            // 
-            // toolStripStatusLabel5
-            // 
-            this.toolStripStatusLabel5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            this.toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
-            this.toolStripStatusLabel5.Text = "|";
-            this.toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // toolStripStatusLabel6
-            // 
-            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-            this.toolStripStatusLabel6.Size = new System.Drawing.Size(64, 17);
-            this.toolStripStatusLabel6.Text = "Date Entry:";
-            // 
-            // lblDateEntry
-            // 
-            this.lblDateEntry.Name = "lblDateEntry";
-            this.lblDateEntry.Size = new System.Drawing.Size(0, 17);
             // 
             // frmBudgetAppropriations
             // 

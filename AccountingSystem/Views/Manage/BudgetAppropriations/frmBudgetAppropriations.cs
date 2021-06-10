@@ -85,37 +85,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 var dtFunds = Factory.FundsRepository().GetRecords();
                 HelperLoadRecords.BudgetAppropriationsTypeOfFundsCombobox(dtFunds, cmbxFunds, "fund_name", "id");
 
-                cmbxFPP.TextChanged -= new EventHandler(CmbxFPP_TexChanged);
-                var dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
-                LoadFPP(dtFPP, cmbxFPP);
-                cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TexChanged);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        internal void LoadFPP(DataTable dataTable, ComboBox comboBox) 
-        {
-            try
-            {
-                cmbxFPP.SelectedValueChanged -= new EventHandler(CmbxFPP_SelectedValueChanged);
-
-                var fppDict = new Dictionary<int, string>();
-                foreach (DataRow item in dataTable.Rows)
-                {
-                    int fppId = Convert.ToInt32(item["id"]);
-                    string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
-
-                    fppDict.Add(fppId, fppName);
-                }
-
-                comboBox.DataSource = new BindingSource(fppDict, null);
-                comboBox.DisplayMember = "value";
-                comboBox.ValueMember = "key";
-                LoadBudgetAppropriationRecords();
-
+                LoadFPP(cmbxFPP);
+                cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TextChanged);
                 cmbxFPP.SelectedValueChanged += new EventHandler(CmbxFPP_SelectedValueChanged);
             }
             catch (Exception ex)
@@ -124,19 +95,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             }
         }
 
-        private void CmbxFPP_TexChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(cmbxFPP.Text))
-            {
-                var dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
-                LoadFPP(dtFPP, cmbxFPP);
-            }
-        }
 
-        private void CmbxFPP_SelectedValueChanged(object sender, EventArgs e)
-        {
-            LoadBudgetAppropriationRecords();
-        }
 
         internal void EnableDisableButtonsLocal(DataGridView dgv)
         {
@@ -170,19 +129,30 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Text = "Delete";
             }
 
+            if (cmbxFPP.SelectedIndex == -1 || cmbxAllotmentClass.SelectedIndex == -1 || cmbxFunds.SelectedIndex == -1)
+                btnAdd.Enabled = false;
+            else
+                btnAdd.Enabled = true;
+
         }
 
 
         private void cmbxAllotmentClass_SelectedValueChanged(object sender, EventArgs e) 
         {
-            if(Convert.ToInt32(cmbxFPP.SelectedValue) != 0)
-            LoadBudgetAppropriationRecords();
+            if (Convert.ToInt32(cmbxFPP.SelectedValue) != 0)
+            {
+                LoadBudgetAppropriationRecords();
+                EnableDisableButtonsLocal(dgBudgetAppropriations);
+            }
         }
 
         private void cmbxFundType_SelectedValueChanged(object sender, EventArgs e) 
         {
             if (Convert.ToInt32(cmbxFPP.SelectedValue) != 0)
+            {
                 LoadBudgetAppropriationRecords();
+                EnableDisableButtonsLocal(dgBudgetAppropriations);
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e) 
@@ -301,17 +271,71 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         }
 
 
-        private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
+        //Match making FPP Combobox
+        private DataTable DataTableFPP() 
         {
-            if (e.KeyCode == Keys.F1)
+            DataTable dtFPP;
+
+            if (string.IsNullOrEmpty(cmbxFPP.Text))
+                dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
+            else
+                dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text);
+
+            return dtFPP;
+        }
+
+        internal void LoadFPP(ComboBox comboBox)
+        {
+            try
             {
                 cmbxFPP.DroppedDown = false;
-                var dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text.Trim());
-                if (dtFPP.Rows.Count == 0 || string.IsNullOrEmpty(cmbxFPP.Text.Trim())) return;
 
-                LoadFPP(dtFPP, cmbxFPP);
-                cmbxFPP.DroppedDown = true;
+                var fppDict = new Dictionary<int, string>();
+                foreach (DataRow item in DataTableFPP().Rows)
+                {
+                    int fppId = Convert.ToInt32(item["id"]);
+                    string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
+
+                    fppDict.Add(fppId, fppName);
+                }
+
+                comboBox.DataSource = new BindingSource(fppDict.Count == 0? null : fppDict, null);
+                comboBox.DisplayMember = "value";
+                comboBox.ValueMember = "key";
                 Cursor.Current = Cursors.Default;
+
+
+                LoadBudgetAppropriationRecords();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void CmbxFPP_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbxFPP.Text))
+            {
+                cmbxFPP.TextChanged -= new EventHandler(CmbxFPP_TextChanged);
+                LoadFPP(cmbxFPP);
+                cmbxFPP.SelectedIndex = -1;
+                cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TextChanged);
+            }
+        }
+
+        private void CmbxFPP_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadBudgetAppropriationRecords();
+            EnableDisableButtonsLocal(dgBudgetAppropriations);
+        }
+
+        private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1 && cmbxFPP.FindStringExact(cmbxFPP.Text) == -1 && !string.IsNullOrEmpty(cmbxFPP.Text))
+            {
+                LoadFPP(cmbxFPP);
+                cmbxFPP.DroppedDown = true;
             } 
         }
     }
