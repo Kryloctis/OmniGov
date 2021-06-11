@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="dsLFS">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>233b7cb7-fe20-4fc1-be9f-73489ae2411c</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="dtRCD">
+      <Query>
+        <DataSourceName>dsLFS</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="accofficer">
+          <DataField>accofficer</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="rcdno">
+          <DataField>rcdno</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="date">
+          <DataField>date</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>dsLFS</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\user\Desktop\My Files\lgu suite\LocalFinanceSystem\AccountingSystem\dsLFS.xsd</rd:SchemaPath>
+        <rd:TableName>dtRCD</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -38,9 +77,14 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Subreport Name="Subreport1">
-            <ReportName />
-            <Top>0.30872in</Top>
+          <Subreport Name="subreportcollections">
+            <ReportName>subreportcollections</ReportName>
+            <Parameters>
+              <Parameter Name="paramRCDid">
+                <Value>=First(Fields!rcdno.Value, "dtRCD")</Value>
+              </Parameter>
+            </Parameters>
+            <Top>0.2976in</Top>
             <Left>0.01174in</Left>
             <Height>1.35in</Height>
             <Width>10.40538in</Width>
@@ -51,11 +95,16 @@
               </Border>
             </Style>
           </Subreport>
-          <Subreport Name="Subreport2">
-            <ReportName />
-            <Top>1.70038in</Top>
+          <Subreport Name="subrepotliquidation">
+            <ReportName>subrepotliquidation</ReportName>
+            <Parameters>
+              <Parameter Name="paramRCDid">
+                <Value>=First(Fields!rcdno.Value, "dtRCD")</Value>
+              </Parameter>
+            </Parameters>
+            <Top>1.67538in</Top>
             <Left>0.01174in</Left>
-            <Height>1.95in</Height>
+            <Height>1.54167in</Height>
             <Width>10.40538in</Width>
             <ZIndex>2</ZIndex>
             <Style>
@@ -83,7 +132,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>9.34253cm</Top>
+            <Top>8.19953cm</Top>
             <Left>0.02981cm</Left>
             <Height>0.6cm</Height>
             <Width>6.17362cm</Width>
@@ -98,9 +147,14 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Subreport Name="Subreport3">
-            <ReportName />
-            <Top>3.95605in</Top>
+          <Subreport Name="subreportdeposit">
+            <ReportName>subreportdeposit</ReportName>
+            <Parameters>
+              <Parameter Name="paramRCDid">
+                <Value>=First(Fields!rcdno.Value, "dtRCD")</Value>
+              </Parameter>
+            </Parameters>
+            <Top>3.49355in</Top>
             <Left>0.01174in</Left>
             <Height>1.94167in</Height>
             <Width>10.40538in</Width>
@@ -112,7 +166,7 @@
             </Style>
           </Subreport>
         </ReportItems>
-        <Height>5.94667in</Height>
+        <Height>5.47167in</Height>
         <Style />
       </Body>
       <Width>10.43472in</Width>
@@ -272,7 +326,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=Parameters!paramOfficer.Value</Value>
                       <Style>
                         <FontWeight>Bold</FontWeight>
                       </Style>
@@ -312,7 +366,9 @@
                   <TextRuns>
                     <TextRun>
                       <Value>REPORT NO:</Value>
-                      <Style />
+                      <Style>
+                        <FontFamily />
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
@@ -344,7 +400,9 @@
                   <TextRuns>
                     <TextRun>
                       <Value>SHEET NO:</Value>
-                      <Style />
+                      <Style>
+                        <FontFamily />
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
@@ -376,7 +434,9 @@
                   <TextRuns>
                     <TextRun>
                       <Value>DATE:</Value>
-                      <Style />
+                      <Style>
+                        <FontFamily />
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
@@ -407,7 +467,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=Parameters!paramRCDno.Value</Value>
                       <Style>
                         <FontWeight>Bold</FontWeight>
                       </Style>
@@ -446,7 +506,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=Globals!PageNumber</Value>
                       <Style>
                         <FontWeight>Bold</FontWeight>
                       </Style>
@@ -485,7 +545,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
+                      <Value>=Parameters!paramDate.Value</Value>
                       <Style>
                         <FontWeight>Bold</FontWeight>
                       </Style>
@@ -547,7 +607,9 @@
                   <TextRuns>
                     <TextRun>
                       <Value>NAME OF ACCOUNTABLE OFFICER:</Value>
-                      <Style />
+                      <Style>
+                        <FontFamily />
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
@@ -579,7 +641,9 @@
                   <TextRuns>
                     <TextRun>
                       <Value>FUND:</Value>
-                      <Style />
+                      <Style>
+                        <FontFamily />
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
@@ -610,16 +674,32 @@
             </Border>
           </Style>
         </PageHeader>
-        <LeftMargin>1in</LeftMargin>
-        <RightMargin>1in</RightMargin>
-        <TopMargin>1in</TopMargin>
-        <BottomMargin>1in</BottomMargin>
+        <LeftMargin>0.5in</LeftMargin>
+        <RightMargin>0.5in</RightMargin>
+        <TopMargin>0.5in</TopMargin>
+        <BottomMargin>0.5in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>
   </ReportSections>
   <ReportParameters>
     <ReportParameter Name="paramLGUName">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramOfficer">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramRCDno">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramDate">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramRCDid">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
@@ -633,6 +713,26 @@
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>0</RowIndex>
           <ParameterName>paramLGUName</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>paramOfficer</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>paramRCDno</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>paramDate</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>paramRCDid</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

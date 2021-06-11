@@ -201,13 +201,27 @@ namespace ACC.Data
                 {
                     foreach (var entity in entityList)
                     {
-                        var parameters = new object[][]
+                        if(entity.CoId > 0)
                         {
-                            new object[] { "@id", DbType.Int16, entity.Id},
-                        };
+                           var parameters = new object[][]
+                           {
+                                new object[] { "@collector_report_id", DbType.Int16, entity.CoId},
+                           };
 
-                        string query = $"DELETE FROM {tableName} WHERE id = @id";
-                        _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                            string query = $"DELETE FROM {tableName} WHERE collector_report_id = @collector_report_id";
+                            _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                        }
+                        if(entity.Id > 0)
+                        {
+                           var parameters = new object[][]
+                           {
+                                new object[] { "@id", DbType.Int16, entity.Id},
+                           };
+
+                            string query = $"DELETE FROM {tableName} WHERE id = @id";
+                            _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                        }
+                       
                     }
 
                     scope.Complete();

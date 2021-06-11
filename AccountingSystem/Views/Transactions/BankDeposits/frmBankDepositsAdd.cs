@@ -14,6 +14,8 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
     public partial class frmBankDepositsAdd : Form
     {
         private frmBankDeposits _frmbd;
+        public int Gcid = 0;
+        public decimal Gcamount = 0;
         public frmBankDepositsAdd(frmBankDeposits frmbd)
         {
             InitializeComponent();
@@ -23,7 +25,11 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
         private void frmBankDepositsAdd_Load(object sender, EventArgs e)
         {
-
+            if(Gcid > 0)
+            {
+                ucbd1.txtamount.Value = Gcamount;
+                ucbd1.txtamount.Enabled = false;
+            }
         }
 
         private bool SaveData()
@@ -36,18 +42,42 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
-
                 var bdModel = new BankDepositsModel()
                 {
                     bankId = uc.bankId,
                     Reference = uc.txtreference.Text.Trim(),
                     Date = Convert.ToDateTime(uc.dtdate.Text.Trim()),
                     Amount = Convert.ToDecimal(uc.txtamount.Value),
-                    CreatedBy = 2,
+                    CreatedBy = 2//uc.userid,
                 };
 
                 var bdrepository = Factory.BankDepositsRepository();
-                return bdrepository.Insert(bdModel);
+                if (Gcid > 0)
+                {
+                    int insertId = bdrepository.Deposits(bdModel);
+                    if (insertId > 0)
+                    {
+                        var gcdRepository = Factory.GeneralCollectionsDepositsRepository();
+                        var gcdModel = new GeneralCollectionsDepositsModel()
+                        {
+                            Bdid = insertId,
+                            Gcid = Gcid
+                        };
+                        if (!gcdRepository.IdExist(Gcid))
+                        {
+                            return gcdRepository.Insert(gcdModel);
+                        }
+                        else
+                        {
+                            Helper.MessageBoxSuccess("General Collection has already been deposited!");
+                        }
+                    }
+                }
+                else
+                {
+                    return bdrepository.Insert(bdModel);
+                }
+              
             }
             catch (Exception ex)
             {
@@ -60,9 +90,19 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         {
             if (SaveData())
             {
-                Helper.MessageBoxSuccess("Bank Deposit has been saved.");
-                _frmbd.LoadRecords();
-                ucbd1.ResetForm();
+                if(Gcid > 0)
+                {
+                    Helper.MessageBoxSuccess("General Collection Deposits has been saved.");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    Helper.MessageBoxSuccess("Bank Deposit has been saved.");
+                    _frmbd.LoadRecords();
+                    ucbd1.ResetForm();
+                }
+                
             }
         }
     }

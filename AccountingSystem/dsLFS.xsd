@@ -144,6 +144,7 @@
               <xs:element name="collector" msprop:Generator_ColumnVarNameInTable="columncollector" msprop:Generator_ColumnPropNameInRow="collector" msprop:Generator_ColumnPropNameInTable="collectorColumn" msprop:Generator_UserColumnName="collector" type="xs:string" minOccurs="0" />
               <xs:element name="account_code" msprop:Generator_ColumnVarNameInTable="columnaccount_code" msprop:Generator_ColumnPropNameInRow="account_code" msprop:Generator_ColumnPropNameInTable="account_codeColumn" msprop:Generator_UserColumnName="account_code" type="xs:string" minOccurs="0" />
               <xs:element name="subsidiary" msprop:Generator_ColumnVarNameInTable="columnsubsidiary" msprop:Generator_ColumnPropNameInRow="subsidiary" msprop:Generator_ColumnPropNameInTable="subsidiaryColumn" msprop:Generator_UserColumnName="subsidiary" type="xs:string" minOccurs="0" />
+              <xs:element name="reportno" msprop:Generator_ColumnVarNameInTable="columnreportno" msprop:Generator_ColumnPropNameInRow="reportno" msprop:Generator_ColumnPropNameInTable="reportnoColumn" msprop:Generator_UserColumnName="reportno" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -216,6 +217,46 @@
               <xs:element name="debit_amount" msprop:Generator_ColumnVarNameInTable="columndebit_amount" msprop:Generator_ColumnPropNameInRow="debit_amount" msprop:Generator_ColumnPropNameInTable="debit_amountColumn" msprop:Generator_UserColumnName="debit_amount" type="xs:decimal" minOccurs="0" />
               <xs:element name="credit_amount" msprop:Generator_ColumnVarNameInTable="columncredit_amount" msprop:Generator_ColumnPropNameInRow="credit_amount" msprop:Generator_ColumnPropNameInTable="credit_amountColumn" msprop:Generator_UserColumnName="credit_amount" type="xs:decimal" minOccurs="0" />
               <xs:element name="balance" msprop:Generator_ColumnVarNameInTable="columnbalance" msprop:Generator_ColumnPropNameInRow="balance" msprop:Generator_ColumnPropNameInTable="balanceColumn" msprop:Generator_UserColumnName="balance" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dtRCDCollectors" msprop:Generator_TableClassName="dtRCDCollectorsDataTable" msprop:Generator_TableVarName="tabledtRCDCollectors" msprop:Generator_RowChangedName="dtRCDCollectorsRowChanged" msprop:Generator_TablePropName="dtRCDCollectors" msprop:Generator_RowDeletingName="dtRCDCollectorsRowDeleting" msprop:Generator_RowChangingName="dtRCDCollectorsRowChanging" msprop:Generator_RowEvHandlerName="dtRCDCollectorsRowChangeEventHandler" msprop:Generator_RowDeletedName="dtRCDCollectorsRowDeleted" msprop:Generator_RowClassName="dtRCDCollectorsRow" msprop:Generator_UserTableName="dtRCDCollectors" msprop:Generator_RowEvArgName="dtRCDCollectorsRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="rcdno" msprop:Generator_ColumnVarNameInTable="columnrcdno" msprop:Generator_ColumnPropNameInRow="rcdno" msprop:Generator_ColumnPropNameInTable="rcdnoColumn" msprop:Generator_UserColumnName="rcdno" type="xs:string" minOccurs="0" />
+              <xs:element name="accform" msprop:Generator_ColumnVarNameInTable="columnaccform" msprop:Generator_ColumnPropNameInRow="accform" msprop:Generator_ColumnPropNameInTable="accformColumn" msprop:Generator_UserColumnName="accform" type="xs:string" minOccurs="0" />
+              <xs:element name="receiptfrom" msprop:Generator_ColumnVarNameInTable="columnreceiptfrom" msprop:Generator_ColumnPropNameInRow="receiptfrom" msprop:Generator_ColumnPropNameInTable="receiptfromColumn" msprop:Generator_UserColumnName="receiptfrom" type="xs:string" minOccurs="0" />
+              <xs:element name="receiptto" msprop:Generator_ColumnVarNameInTable="columnreceiptto" msprop:Generator_ColumnPropNameInRow="receiptto" msprop:Generator_ColumnPropNameInTable="receipttoColumn" msprop:Generator_UserColumnName="receiptto" type="xs:string" minOccurs="0" />
+              <xs:element name="amount" msprop:Generator_ColumnVarNameInTable="columnamount" msprop:Generator_ColumnPropNameInRow="amount" msprop:Generator_ColumnPropNameInTable="amountColumn" msprop:Generator_UserColumnName="amount" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dtRCDLiquidation" msprop:Generator_TableClassName="dtRCDLiquidationDataTable" msprop:Generator_TableVarName="tabledtRCDLiquidation" msprop:Generator_RowChangedName="dtRCDLiquidationRowChanged" msprop:Generator_TablePropName="dtRCDLiquidation" msprop:Generator_RowDeletingName="dtRCDLiquidationRowDeleting" msprop:Generator_RowChangingName="dtRCDLiquidationRowChanging" msprop:Generator_RowEvHandlerName="dtRCDLiquidationRowChangeEventHandler" msprop:Generator_RowDeletedName="dtRCDLiquidationRowDeleted" msprop:Generator_RowClassName="dtRCDLiquidationRow" msprop:Generator_UserTableName="dtRCDLiquidation" msprop:Generator_RowEvArgName="dtRCDLiquidationRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="rcdno" msprop:Generator_ColumnVarNameInTable="columnrcdno" msprop:Generator_ColumnPropNameInRow="rcdno" msprop:Generator_ColumnPropNameInTable="rcdnoColumn" msprop:Generator_UserColumnName="rcdno" type="xs:string" minOccurs="0" />
+              <xs:element name="collectorname" msprop:Generator_ColumnVarNameInTable="columncollectorname" msprop:Generator_ColumnPropNameInRow="collectorname" msprop:Generator_ColumnPropNameInTable="collectornameColumn" msprop:Generator_UserColumnName="collectorname" type="xs:string" minOccurs="0" />
+              <xs:element name="reportno" msprop:Generator_ColumnVarNameInTable="columnreportno" msprop:Generator_ColumnPropNameInRow="reportno" msprop:Generator_ColumnPropNameInTable="reportnoColumn" msprop:Generator_UserColumnName="reportno" type="xs:string" minOccurs="0" />
+              <xs:element name="amount" msprop:Generator_ColumnVarNameInTable="columnamount" msprop:Generator_ColumnPropNameInRow="amount" msprop:Generator_ColumnPropNameInTable="amountColumn" msprop:Generator_UserColumnName="amount" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="drRCDDeposits" msprop:Generator_TableClassName="drRCDDepositsDataTable" msprop:Generator_TableVarName="tabledrRCDDeposits" msprop:Generator_RowChangedName="drRCDDepositsRowChanged" msprop:Generator_TablePropName="drRCDDeposits" msprop:Generator_RowDeletingName="drRCDDepositsRowDeleting" msprop:Generator_RowChangingName="drRCDDepositsRowChanging" msprop:Generator_RowEvHandlerName="drRCDDepositsRowChangeEventHandler" msprop:Generator_RowDeletedName="drRCDDepositsRowDeleted" msprop:Generator_RowClassName="drRCDDepositsRow" msprop:Generator_UserTableName="drRCDDeposits" msprop:Generator_RowEvArgName="drRCDDepositsRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="rcdno" msprop:Generator_ColumnVarNameInTable="columnrcdno" msprop:Generator_ColumnPropNameInRow="rcdno" msprop:Generator_ColumnPropNameInTable="rcdnoColumn" msprop:Generator_UserColumnName="rcdno" type="xs:string" minOccurs="0" />
+              <xs:element name="bankname" msprop:Generator_ColumnVarNameInTable="columnbankname" msprop:Generator_ColumnPropNameInRow="bankname" msprop:Generator_ColumnPropNameInTable="banknameColumn" msprop:Generator_UserColumnName="bankname" type="xs:string" minOccurs="0" />
+              <xs:element name="reference" msprop:Generator_ColumnVarNameInTable="columnreference" msprop:Generator_ColumnPropNameInRow="reference" msprop:Generator_ColumnPropNameInTable="referenceColumn" msprop:Generator_UserColumnName="reference" type="xs:string" minOccurs="0" />
+              <xs:element name="amount" msprop:Generator_ColumnVarNameInTable="columnamount" msprop:Generator_ColumnPropNameInRow="amount" msprop:Generator_ColumnPropNameInTable="amountColumn" msprop:Generator_UserColumnName="amount" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dtRCD" msprop:Generator_TableClassName="dtRCDDataTable" msprop:Generator_TableVarName="tabledtRCD" msprop:Generator_RowChangedName="dtRCDRowChanged" msprop:Generator_TablePropName="dtRCD" msprop:Generator_RowDeletingName="dtRCDRowDeleting" msprop:Generator_RowChangingName="dtRCDRowChanging" msprop:Generator_RowEvHandlerName="dtRCDRowChangeEventHandler" msprop:Generator_RowDeletedName="dtRCDRowDeleted" msprop:Generator_RowClassName="dtRCDRow" msprop:Generator_UserTableName="dtRCD" msprop:Generator_RowEvArgName="dtRCDRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="accofficer" msprop:Generator_ColumnVarNameInTable="columnaccofficer" msprop:Generator_ColumnPropNameInRow="accofficer" msprop:Generator_ColumnPropNameInTable="accofficerColumn" msprop:Generator_UserColumnName="accofficer" type="xs:string" minOccurs="0" />
+              <xs:element name="rcdno" msprop:Generator_ColumnVarNameInTable="columnrcdno" msprop:Generator_ColumnPropNameInRow="rcdno" msprop:Generator_ColumnPropNameInTable="rcdnoColumn" msprop:Generator_UserColumnName="rcdno" type="xs:string" minOccurs="0" />
+              <xs:element name="date" msprop:Generator_ColumnVarNameInTable="columndate" msprop:Generator_ColumnPropNameInRow="date" msprop:Generator_ColumnPropNameInTable="dateColumn" msprop:Generator_UserColumnName="date" type="xs:dateTime" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

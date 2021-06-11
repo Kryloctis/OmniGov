@@ -14,7 +14,7 @@ namespace AccountingSystem.Views.Reports.RCD
 {
     public partial class frmRCD : Form
     {
-        Dictionary<int, string> forprint = new Dictionary<int, string>();
+        Dictionary<int, string> rcdgenerate = new Dictionary<int, string>();
         public frmRCD()
         {
             InitializeComponent();
@@ -109,21 +109,30 @@ namespace AccountingSystem.Views.Reports.RCD
             if (e.ColumnIndex == 6)
             {
                 bool isapproved = Convert.ToBoolean(dgrcd.CurrentRow.Cells[5].Value);
-
-                if (!Convert.ToBoolean(dgrcd.CurrentRow.Cells[e.ColumnIndex].Value))
+                var gcpRepository = Factory.GeneralCollectionsPaymentsRepository();
+                bool isgenerated = gcpRepository.IdExist(int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString()));
+                if (isapproved && !isgenerated)
                 {
-                    dgrcd.CurrentRow.Cells[e.ColumnIndex].Value = true;
-                    if (!forprint.ContainsKey(Convert.ToInt16(dgrcd.CurrentRow.Cells[0].Value)))
+                    if (!Convert.ToBoolean(dgrcd.CurrentRow.Cells[e.ColumnIndex].Value))
                     {
-                        forprint.Add(Convert.ToInt16(dgrcd.CurrentRow.Cells[0].Value), dgrcd.CurrentRow.Cells[1].Value.ToString());
+                        dgrcd.CurrentRow.Cells[e.ColumnIndex].Value = true;
+                        if (!rcdgenerate.ContainsKey(Convert.ToInt16(dgrcd.CurrentRow.Cells[0].Value)))
+                        {
+                            rcdgenerate.Add(Convert.ToInt16(dgrcd.CurrentRow.Cells[0].Value), dgrcd.CurrentRow.Cells[1].Value.ToString());
+                        }
                     }
-                }    
-                else
-                {
-                    dgrcd.CurrentRow.Cells[e.ColumnIndex].Value = false;
-                    forprint.Remove(Convert.ToInt16(dgrcd.CurrentRow.Cells[0].Value));
+                    else
+                    {
+                        dgrcd.CurrentRow.Cells[e.ColumnIndex].Value = false;
+                        rcdgenerate.Remove(Convert.ToInt16(dgrcd.CurrentRow.Cells[0].Value));
+                    }
+                    btnRCD.Enabled = rcdgenerate.Count > 0 ? true : false;
                 }
-                btnPrint.Enabled = forprint.Count > 0 ? true : false;
+                else
+                {                    
+                   dgrcd.CurrentRow.Cells[e.ColumnIndex].Value = false;
+                }
+              
             }
             
         }
@@ -150,13 +159,14 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            if(forprint.Count > 0)
+            if(rcdgenerate.Count > 0)
             {
-                string id = string.Join(",", forprint.Select(x => String.Format("'{0}'",x.Key)).ToArray());
-                _ = new frmPCReport(id).ShowDialog();
+                //string id = string.Join(",", rcdgenerate.Select(x => String.Format("'{0}'",x.Key)).ToArray());
+                //_ = new frmPCReport(id).ShowDialog();
+                _ = new frmGC(rcdgenerate).ShowDialog();
             }
             else{
-                Helper.MessageBoxError("Please select reports to print!");
+                Helper.MessageBoxError("Please select reports to Generate RCD!");
             }
         }
 
@@ -168,6 +178,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 if (Convert.ToBoolean(row.Cells[5].Value))
                 {
                     row.DefaultCellStyle.BackColor = Color.LightGreen;
+                    
                 }
             }
            

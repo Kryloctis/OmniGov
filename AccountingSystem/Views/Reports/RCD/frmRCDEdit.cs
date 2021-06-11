@@ -84,7 +84,6 @@ namespace AccountingSystem.Views.Reports.RCD
                 uc.cmbcollector.Enabled = false;
                 uc.txtreport.Enabled = false;
                 uc.btnadd.Enabled = true;
-                uc.btnprint.Enabled = true;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

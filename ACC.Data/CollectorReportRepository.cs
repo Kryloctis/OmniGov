@@ -89,7 +89,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableName}.id,{tableName}.report_no,{tableName}.date,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector,(SELECT SUM({tableName4}.amount) FROM {tableName3} LEFT JOIN {tableName4} ON {tableName3}.payment_collections_id={tableName4}.id AND {tableName3}.collector_report_id={tableName}.id) colamount,{tableName}.is_approved FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id ORDER BY {tableName}.date DESC";
+                string query = $"SELECT {tableName}.id,{tableName}.report_no,{tableName}.date,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector,(SELECT SUM({tableName4}.amount) FROM {tableName3} LEFT JOIN {tableName4} ON {tableName3}.payment_collections_id={tableName4}.id AND {tableName3}.collector_report_id={tableName}.id) AS colamount,{tableName}.is_approved FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id ORDER BY {tableName}.date DESC";
 
                 var dtcr = new DataTable();
                 return _dbGenericCommands.Fill(query, dtcr);
@@ -260,7 +260,7 @@ namespace ACC.Data
             {
                 var srchtxt = searchText;
 
-                string query = $"SELECT {tableName}.id,{tableName}.report_no,{tableName}.date,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector,(SELECT SUM({tableName4}.amount) FROM {tableName3} LEFT JOIN {tableName4} ON {tableName3}.payment_collections_id={tableName4}.id AND {tableName3}.collector_report_id={tableName}.id) colamount,{tableName}.is_approved FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id WHERE {tableName}.report_no LIKE '%{srchtxt}%' OR CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) LIKE '%{srchtxt}%' ORDER BY {tableName}.date DESC";
+                string query = $"SELECT {tableName}.id,{tableName}.report_no,{tableName}.date,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector,(SELECT SUM({tableName4}.amount) FROM {tableName3} LEFT JOIN {tableName4} ON {tableName3}.payment_collections_id={tableName4}.id AND {tableName3}.collector_report_id={tableName}.id) AS colamount,{tableName}.is_approved FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id WHERE {tableName}.report_no LIKE '%{srchtxt}%' OR CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) LIKE '%{srchtxt}%' ORDER BY {tableName}.date DESC";
 
                 var dtpc = new DataTable();
                 return _dbGenericCommands.Fill(query, dtpc);

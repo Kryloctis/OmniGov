@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.label4 = new System.Windows.Forms.Label();
             this.txttotal = new System.Windows.Forms.NumericUpDown();
             this.btnadd = new System.Windows.Forms.Button();
-            this.btnprint = new System.Windows.Forms.Button();
+            this.btnclear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvpayments)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txttotal)).BeginInit();
@@ -116,6 +116,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.chckapproved.TabIndex = 4;
             this.chckapproved.Text = "Approved";
             this.chckapproved.UseVisualStyleBackColor = true;
+            this.chckapproved.CheckedChanged += new System.EventHandler(this.chckapproved_CheckedChanged);
             // 
             // dgvpayments
             // 
@@ -157,7 +158,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnadd.Enabled = false;
             this.btnadd.Image = global::AccountingSystem.Properties.Resources.rcd1;
             this.btnadd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnadd.Location = new System.Drawing.Point(857, 86);
+            this.btnadd.Location = new System.Drawing.Point(690, 86);
             this.btnadd.Name = "btnadd";
             this.btnadd.Size = new System.Drawing.Size(161, 29);
             this.btnadd.TabIndex = 8;
@@ -165,24 +166,25 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnadd.UseVisualStyleBackColor = true;
             this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
             // 
-            // btnprint
+            // btnclear
             // 
-            this.btnprint.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnprint.Enabled = false;
-            this.btnprint.Image = global::AccountingSystem.Properties.Resources.print_14px;
-            this.btnprint.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnprint.Location = new System.Drawing.Point(11, 633);
-            this.btnprint.Name = "btnprint";
-            this.btnprint.Size = new System.Drawing.Size(155, 29);
-            this.btnprint.TabIndex = 9;
-            this.btnprint.Text = "Print";
-            this.btnprint.UseVisualStyleBackColor = true;
+            this.btnclear.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnclear.Enabled = false;
+            this.btnclear.Image = global::AccountingSystem.Properties.Resources.remove;
+            this.btnclear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnclear.Location = new System.Drawing.Point(857, 86);
+            this.btnclear.Name = "btnclear";
+            this.btnclear.Size = new System.Drawing.Size(161, 29);
+            this.btnclear.TabIndex = 9;
+            this.btnclear.Text = "Clear Payments";
+            this.btnclear.UseVisualStyleBackColor = true;
+            this.btnclear.Click += new System.EventHandler(this.btnclear_Click);
             // 
             // ucRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnprint);
+            this.Controls.Add(this.btnclear);
             this.Controls.Add(this.btnadd);
             this.Controls.Add(this.txttotal);
             this.Controls.Add(this.label4);
@@ -218,7 +220,7 @@ namespace AccountingSystem.Views.Reports.RCD
         private System.Windows.Forms.Label label4;
         internal System.Windows.Forms.CheckBox chckapproved;
         internal System.Windows.Forms.Button btnadd;
-        internal System.Windows.Forms.Button btnprint;
         internal System.Windows.Forms.DataGridView dgvpayments;
+        internal System.Windows.Forms.Button btnclear;
     }
 }

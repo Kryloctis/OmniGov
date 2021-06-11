@@ -16,14 +16,15 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 {
     public partial class frmPCReport : Form
     {
-        private readonly ReportViewer reportViewer;
+        private readonly ReportViewer reportViewer = new ReportViewer();
         private string Ids = string.Empty;
-
-        public frmPCReport(string _Ids)
+        private string type = string.Empty;
+        public frmPCReport(string name,string _type,string _Ids)
         {
             InitializeComponent();
+            Text = String.Format("Reports > {0}", name);
             Ids = _Ids;
-            reportViewer = new ReportViewer();
+            type = _type;
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
             Helper.LoadFormIcon(this);
@@ -31,11 +32,23 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 
         private void frmPCReport_Load(object sender, EventArgs e)
         {
-            LoadReport(reportViewer.LocalReport);
-            //reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
-            reportViewer.RefreshReport();
+            if (type.Equals("GC"))
+            {
+                LoadReport(reportViewer.LocalReport);
+                //reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
+                reportViewer.RefreshReport();
+            }
+            else
+            {
+                LoadReport(reportViewer.LocalReport);
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
+                reportViewer.RefreshReport();
+            }
+            
         }
 
         private DataTable DataTablePC()
@@ -65,17 +78,48 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             return dtPC;
         }
 
-        private DataTable DataTablePC(string id)
+        private DataTable DataTableGC(string id)
         {
             
             var dtPC = new dsLFS.dtPCDataTable();
-            var dt = Factory.CollectorReportPaymentRepository().GetRecordByLedger(id);
+            var dt = Factory.GeneralCollectionsRepository().GetRecordByGC(id);
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
                 {
                     DataRow row = dtPC.NewRow();
-                    row["rcdno"] = item["report_no"];
+                    row["id"] = item["id"];
+                    row["rcdno"] = item["rcd_no"];
+                    row["reportno"] = item["report_no"];
+                    row["account_code"] = item["account_code"];
+                    row["subsidiary"] = item["subsidiary"];
+                    row["payee"] = item["payee"];
+                    row["acc_form_desc"] = item["accform"];
+                    row["ledger_name"] = item["ledger_name"];
+                    row["payment_date"] = item["payment_date"];
+                    row["receipt_no"] = item["receipt_no"];
+                    row["amount"] = item["amount"];
+                    row["collector"] = item["collector"];
+                    dtPC.Rows.Add(row);
+                }
+            }
+
+            return dtPC;
+        }
+
+        private DataTable DataTableData(string id)
+        {
+
+            var dtPC = new dsLFS.dtRCIDataTable();
+            var dt = Factory.GeneralCollectionsRepository().GetRecordByGC(id);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow item in dt.Rows)
+                {
+                    DataRow row = dtPC.NewRow();
+                    row["id"] = item["id"];
+                    row["rcdno"] = item["rcd_no"];
+                    row["reportno"] = item["report_no"];
                     row["account_code"] = item["account_code"];
                     row["subsidiary"] = item["subsidiary"];
                     row["payee"] = item["payee"];
@@ -117,7 +161,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 report.ReportPath = $"{Application.StartupPath}Reports\\payment-collection2.rdlc";
                 report.DataSources.Clear();
 
-                report.DataSources.Add(new ReportDataSource("dtPC", DataTablePC(Ids)));
+                report.DataSources.Add(new ReportDataSource("dtPC", DataTableGC(Ids)));
                 report.SetParameters(parameters);
 
             }

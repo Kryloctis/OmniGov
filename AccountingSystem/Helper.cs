@@ -273,6 +273,14 @@ namespace AccountingSystem
 
             return false;
         }
+        public static bool MessageBoxConfirmGCDeposit()
+        {
+            string message = "Do you want to Deposit this record now?";
+            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                return true;
+
+            return false;
+        }
         #endregion
 
         #region EnableDisableButtons

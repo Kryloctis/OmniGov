@@ -73,10 +73,10 @@ namespace AccountingSystem.Views.Reports.RCD
                 Helper.MessageBoxSuccess("RCD has been saved.");
                 _frmrcd.LoadRecords();
                 var uc = ucrcd1;
+                uc.SetId(uc.txtreport.Text.Trim());
                 uc.cmbcollector.Enabled = false;
                 uc.txtreport.Enabled = false;
                 uc.btnadd.Enabled = true;
-                uc.btnprint.Enabled = true;
                 if (Helper.MessageBoxConfirmRCDList())
                 {                    
                     _ = new frmGenerateRCD(uc, Convert.ToInt16(uc.cmbcollector.SelectedValue), uc.txtreport.Text.Trim()).ShowDialog();
@@ -87,7 +87,6 @@ namespace AccountingSystem.Views.Reports.RCD
                     uc.cmbcollector.Enabled = true;
                     uc.txtreport.Enabled = true;
                     uc.btnadd.Enabled = false;
-                    uc.btnprint.Enabled = false;
                 }
 
 

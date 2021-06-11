@@ -1,7 +1,7 @@
 ﻿
-namespace AccountingSystem.Views.Reports.RCD
+namespace AccountingSystem.Views.Reports.PaymentCollection
 {
-    partial class frmRCD
+    partial class frmGCList
     {
         /// <summary>
         /// Required designer variable.
@@ -29,84 +29,86 @@ namespace AccountingSystem.Views.Reports.RCD
         /// </summary>
         private void InitializeComponent()
         {
+            this.dgvgc = new System.Windows.Forms.DataGridView();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.btnAdd = new System.Windows.Forms.ToolStripButton();
-            this.btnEdit = new System.Windows.Forms.ToolStripButton();
-            this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.btnDeposit = new System.Windows.Forms.ToolStripButton();
             this.btnRCD = new System.Windows.Forms.ToolStripButton();
+            this.btnGC = new System.Windows.Forms.ToolStripButton();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtsearch = new System.Windows.Forms.TextBox();
-            this.dgrcd = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvgc)).BeginInit();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgrcd)).BeginInit();
             this.SuspendLayout();
+            // 
+            // dgvgc
+            // 
+            this.dgvgc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvgc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvgc.Location = new System.Drawing.Point(12, 68);
+            this.dgvgc.Name = "dgvgc";
+            this.dgvgc.RowHeadersWidth = 51;
+            this.dgvgc.RowTemplate.Height = 29;
+            this.dgvgc.Size = new System.Drawing.Size(1012, 460);
+            this.dgvgc.TabIndex = 0;
+            this.dgvgc.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvgc_CellContentClick);
             // 
             // toolStrip
             // 
             this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnAdd,
-            this.btnEdit,
-            this.btnDelete,
-            this.btnRCD});
+            this.btnDeposit,
+            this.btnRCD,
+            this.btnGC});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(5);
-            this.toolStrip.Size = new System.Drawing.Size(1070, 65);
-            this.toolStrip.TabIndex = 10;
+            this.toolStrip.Size = new System.Drawing.Size(1036, 65);
+            this.toolStrip.TabIndex = 11;
             this.toolStrip.Text = "toolStrip1";
             // 
-            // btnAdd
+            // btnDeposit
             // 
-            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.add;
-            this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(50, 56);
-            this.btnAdd.Text = "Add...";
-            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Enabled = false;
-            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.edit;
-            this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(48, 56);
-            this.btnEdit.Text = "Edit...";
-            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Enabled = false;
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
-            this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(57, 56);
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDeposit.Enabled = false;
+            this.btnDeposit.Image = global::AccountingSystem.Properties.Resources.deposit;
+            this.btnDeposit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnDeposit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDeposit.Name = "btnDeposit";
+            this.btnDeposit.Size = new System.Drawing.Size(65, 52);
+            this.btnDeposit.Text = "Deposit";
+            this.btnDeposit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDeposit.Click += new System.EventHandler(this.btnDeposit_Click);
             // 
             // btnRCD
             // 
             this.btnRCD.Enabled = false;
-            this.btnRCD.Image = global::AccountingSystem.Properties.Resources.document;
+            this.btnRCD.Image = global::AccountingSystem.Properties.Resources.printer;
             this.btnRCD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnRCD.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRCD.Name = "btnRCD";
-            this.btnRCD.Size = new System.Drawing.Size(106, 52);
-            this.btnRCD.Text = "Generate RCD";
+            this.btnRCD.Size = new System.Drawing.Size(211, 52);
+            this.btnRCD.Text = "Print Collections and Deposits";
             this.btnRCD.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnRCD.Click += new System.EventHandler(this.btnPrint_Click);
+            this.btnRCD.ToolTipText = "Print Collections and Deposits";
+            this.btnRCD.Click += new System.EventHandler(this.btnRCD_Click);
+            // 
+            // btnGC
+            // 
+            this.btnGC.Enabled = false;
+            this.btnGC.Image = global::AccountingSystem.Properties.Resources.printer;
+            this.btnGC.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnGC.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnGC.Name = "btnGC";
+            this.btnGC.Size = new System.Drawing.Size(147, 52);
+            this.btnGC.Text = "Print Gen. Collection";
+            this.btnGC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnGC.Click += new System.EventHandler(this.btnGC_Click);
             // 
             // statusStrip
             // 
@@ -115,10 +117,10 @@ namespace AccountingSystem.Views.Reports.RCD
             this.toolStripStatusLabel1,
             this.lblRecordCount,
             this.toolStripStatusLabel4});
-            this.statusStrip.Location = new System.Drawing.Point(0, 592);
+            this.statusStrip.Location = new System.Drawing.Point(0, 540);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1070, 26);
-            this.statusStrip.TabIndex = 14;
+            this.statusStrip.Size = new System.Drawing.Size(1036, 26);
+            this.statusStrip.TabIndex = 15;
             this.statusStrip.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
@@ -136,55 +138,38 @@ namespace AccountingSystem.Views.Reports.RCD
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(973, 20);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(939, 20);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // txtsearch
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(742, 12);
+            this.txtsearch.Location = new System.Drawing.Point(708, 21);
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.PlaceholderText = "Search...";
             this.txtsearch.Size = new System.Drawing.Size(316, 27);
-            this.txtsearch.TabIndex = 15;
+            this.txtsearch.TabIndex = 16;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
-            // dgrcd
-            // 
-            this.dgrcd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgrcd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgrcd.Location = new System.Drawing.Point(12, 64);
-            this.dgrcd.Name = "dgrcd";
-            this.dgrcd.RowHeadersWidth = 51;
-            this.dgrcd.RowTemplate.Height = 29;
-            this.dgrcd.Size = new System.Drawing.Size(1046, 521);
-            this.dgrcd.TabIndex = 16;
-            this.dgrcd.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrcd_CellContentClick);
-            this.dgrcd.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrcd_CellDoubleClick);
-            this.dgrcd.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgrcd_CellFormatting);
-            this.dgrcd.SelectionChanged += new System.EventHandler(this.dgrcd_SelectionChanged);
-            // 
-            // frmRCD
+            // frmGCList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1070, 618);
-            this.Controls.Add(this.dgrcd);
+            this.ClientSize = new System.Drawing.Size(1036, 566);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip);
+            this.Controls.Add(this.dgvgc);
             this.MaximizeBox = false;
-            this.Name = "frmRCD";
+            this.Name = "frmGCList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Reports > Collector Reports";
-            this.Load += new System.EventHandler(this.frmRCD_Load);
+            this.Text = "Report > General Collections";
+            this.Load += new System.EventHandler(this.frmGCList_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvgc)).EndInit();
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgrcd)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -192,16 +177,15 @@ namespace AccountingSystem.Views.Reports.RCD
 
         #endregion
 
+        private System.Windows.Forms.DataGridView dgvgc;
         private System.Windows.Forms.ToolStrip toolStrip;
-        private System.Windows.Forms.ToolStripButton btnAdd;
-        private System.Windows.Forms.ToolStripButton btnEdit;
-        private System.Windows.Forms.ToolStripButton btnDelete;
+        private System.Windows.Forms.ToolStripButton btnRCD;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.ToolStripButton btnDeposit;
+        private System.Windows.Forms.ToolStripButton btnGC;
         private System.Windows.Forms.TextBox txtsearch;
-        private System.Windows.Forms.DataGridView dgrcd;
-        private System.Windows.Forms.ToolStripButton btnRCD;
     }
 }

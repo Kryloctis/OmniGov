@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -82,6 +83,20 @@ namespace AccountingSystem.Views.Reports.RCD
             }
         }
 
+        internal void SetId(string id)
+        {
+            try
+            {
+                var rcdRepository = Factory.CollectorReportRepository();
+                var rcdData = rcdRepository.GetRecordByID(id);
+                Id = int.Parse(rcdData["id"]);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
         private void cmbcollector_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbcollector, "Collector!");
@@ -106,9 +121,60 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             if(txtreport.Text.Length > 0)
             {
-                _ = new frmGenerateRCD(this,Convert.ToInt16(cmbcollector.SelectedValue), txtreport.Text.Trim()).ShowDialog();
+                if(dgvpayments.Rows.Count > 0)
+                {
+                    Helper.MessageBoxError("Report has existing payment records, please clear record first before loading payments!");
+                    dgvpayments.Focus();
+                }
+                else
+                {
+                    _ = new frmGenerateRCD(this, Convert.ToInt16(cmbcollector.SelectedValue), txtreport.Text.Trim()).ShowDialog();
+                }
+                
             }
             
+        }
+
+        private void chckapproved_CheckedChanged(object sender, EventArgs e)
+        {
+            if(dgvpayments.Rows.Count > 0)
+            {
+                if (chckapproved.Checked)
+                {
+                    btnadd.Enabled = false;
+                    btnclear.Enabled = false;
+                }
+                else
+                {
+                    btnadd.Enabled = true;
+                    btnclear.Enabled = true;
+                }
+            }
+            else
+            {
+                chckapproved.Checked = false;
+            }
+            
+        }
+
+        private void btnclear_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Helper.MessageBoxConfirmDelete(dgvpayments.Rows.Count))
+                {
+                    var rcdModelList = new List<CollectorReportPaymentModel>();
+                    var rcdRepository = Factory.CollectorReportPaymentRepository();
+                    rcdModelList.Add(new CollectorReportPaymentModel() { CoId=Id});
+                    _ = rcdRepository.Delete(rcdModelList);
+                    LoadCollections();
+                }
+            } 
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+          
         }
     }
 }

@@ -413,6 +413,29 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
+
+        #region General Collection
+        internal static void GeneralCollectionDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.Columns.Clear();
+            datagrid.DataSource = dataTable;
+
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].HeaderText = "RCD Number";
+            datagrid.Columns[2].HeaderText = "Date";
+            datagrid.Columns[3].HeaderText = "Liquidating Officer";
+            datagrid.Columns[4].HeaderText = "Total Amount";
+            datagrid.Columns[4].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[5].Visible = false;
+            DataGridViewCheckBoxColumn chk = new DataGridViewCheckBoxColumn();
+            datagrid.Columns.Add(chk);
+            chk.HeaderText = "Print";
+
+
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        #endregion
         #region RCI
         internal static void RCIDatagridView(DataTable dataTable, DataGridView datagrid)
         {

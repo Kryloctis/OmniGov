@@ -27,11 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="dsLFS.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>dsLFS.xsd</DependentUpon>
-    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -61,10 +56,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="dsLFS.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsLFS.Designer.cs</LastGenOutput>
-    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -97,6 +88,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Reports\procurements-received-journal.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\rcd.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\rcdcollectors.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\rcddeposits.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Reports\rcdliquidation.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Reports\statement-of-appropriations-allotments-obligations-and-balances.rdlc">
