@@ -1,5 +1,3 @@
-using AccountingSystem.Views.Reports.PaymentCollection;
-using AccountingSystem.Views.Reports.RCD;
 using System;
 using System.Windows.Forms;
 
@@ -16,7 +14,7 @@ namespace AccountingSystem
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmGCList());
+            Application.Run(new LoginForm());
         }
     }
 }
