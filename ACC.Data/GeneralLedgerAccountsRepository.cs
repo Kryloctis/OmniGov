@@ -348,7 +348,51 @@ namespace ACC.Data
         }
 
 
-        public DataTable GetViewRecordsByMajAccGroupNameSearch(string majAccGroupName, string searchText)
+
+
+        public DataTable GetViewRecordsByMajorAccGroupName(string majAccGroupName)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@maj_acc_group_name", DbType.String, majAccGroupName},
+                };
+
+
+                string query = $"SELECT " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_group_id, " +
+                    $"account_group_code, " +
+                    $"account_group_name, " +
+                    $"major_account_group_id, " +
+                    $"maj_acc_group_code, " +
+                    $"maj_acc_group_name, " +
+                    $"sub_maj_acc_group_code, " +
+                    $"sub_maj_acc_group_name, " +
+                    $"sub_major_account_group_id, " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_code, " +
+                    $"ledger_code, " +
+                    $"ledger_name, " +
+                    $"is_contra_account, " +
+                    $"created_at, " +
+                    $"updated_at " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE " +
+                    $"maj_acc_group_name = @maj_acc_group_name";
+
+                var dataTable = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        public DataTable GetViewRecordsByMajorAccGroupNameSearch(string majAccGroupName, string searchText)
         {
             try
             {
@@ -383,14 +427,16 @@ namespace ACC.Data
                     $"AND (account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText " +
                     $"OR ledger_name LIKE @searchText)";
 
-                var dtJournals = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtJournals, parameters);
+                var dataTable = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
             }
             catch (Exception)
             {
                 throw;
             }
         }
+
+
 
 
         public DataTable GetViewRecordsByAccountGroupName(string accountGroupName)
@@ -424,8 +470,52 @@ namespace ACC.Data
                     $"WHERE " +
                     $"account_group_name = @account_group_name ";
 
-                var dtJournals = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtJournals, parameters);
+                var dataTable = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetViewRecordsByAccountGroupNameSearch(string accountGroupName, string searchText)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@account_group_name", DbType.String, accountGroupName},
+                    new object[] { "@searchText", DbType.String, $"%{searchText}%" }
+                };
+
+                string query = $"SELECT " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_group_id, " +
+                    $"account_group_code, " +
+                    $"account_group_name, " +
+                    $"major_account_group_id, " +
+                    $"maj_acc_group_code, " +
+                    $"maj_acc_group_name, " +
+                    $"sub_maj_acc_group_code, " +
+                    $"sub_maj_acc_group_name, " +
+                    $"sub_major_account_group_id, " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_code, " +
+                    $"ledger_code, " +
+                    $"ledger_name, " +
+                    $"is_contra_account, " +
+                    $"created_at, " +
+                    $"updated_at " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE " +
+                    $"account_group_name = @account_group_name " +
+                    $"AND (account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText " +
+                    $"OR ledger_name LIKE @searchText)";
+
+
+                var dataTable = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
             }
             catch (Exception)
             {

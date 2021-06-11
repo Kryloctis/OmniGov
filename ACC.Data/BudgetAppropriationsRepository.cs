@@ -479,7 +479,7 @@ namespace ACC.Data
 
         #region Validations
 
-        public bool BudgetAppropriationExist(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int generalLedgerAccountId, short year)
+        public bool BudgetAppropriationExist(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int generalLedgerAccountId, short year, string remarks)
         {
             try
             {
@@ -490,10 +490,20 @@ namespace ACC.Data
                     new object[] { "@others_fpp_id", DbType.String, othersFPPId },
                     new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId},
                     new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerAccountId},
-                    new object[] { "@year",DbType.Int16, year}
+                    new object[] { "@year",DbType.Int16, year},
+                    new object[] { "@remarks",DbType.String, remarks}
                 };
 
-                string query = $"SELECT id FROM {tableName} WHERE funds_id = @funds_id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND year = @year";
+                string query = $"SELECT id FROM {tableName} " +
+                    $"WHERE " +
+                    $"funds_id = @funds_id " +
+                    $"AND function_program_project_id = @function_program_project_id " +
+                    $"AND others_fpp_id <=> @others_fpp_id " +
+                    $"AND allotment_classes_id = @allotment_classes_id " +
+                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
+                    $"AND year = @year " +
+                    $"AND remarks = @remarks";
+
                 string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -507,7 +517,7 @@ namespace ACC.Data
             return false;
         }
          
-        public bool BudgetAppropriationExist(int id, int fundId, int FPPId, int? othersFPPId, int allotmentClassId, int generalLedgerAccountId, short year)
+        public bool BudgetAppropriationExist(int id, int fundId, int FPPId, int? othersFPPId, int allotmentClassId, int generalLedgerAccountId, short year, string remarks)
         {
             try
             {
@@ -519,10 +529,20 @@ namespace ACC.Data
                     new object[] { "@others_fpp_id", DbType.String, othersFPPId },
                     new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId},
                     new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerAccountId},
-                    new object[] { "@year",DbType.Int16, year}
+                    new object[] { "@year",DbType.Int16, year},
+                    new object[] { "@remarks",DbType.String, remarks}
                 };
 
-                string query = $"SELECT id FROM {tableName} WHERE id <> @id AND funds_id = @funds_id AND function_program_project_id = @function_program_project_id AND others_fpp_id <=> @others_fpp_id AND allotment_classes_id = @allotment_classes_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND year = @year";
+                string query = $"SELECT id FROM {tableName} " +
+                    $"WHERE id <> @id " +
+                    $"AND funds_id = @funds_id " +
+                    $"AND function_program_project_id = @function_program_project_id " +
+                    $"AND others_fpp_id <=> @others_fpp_id " +
+                    $"AND allotment_classes_id = @allotment_classes_id " +
+                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
+                    $"AND year = @year " +
+                    $"AND remarks = @remarks";
+
                 string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true

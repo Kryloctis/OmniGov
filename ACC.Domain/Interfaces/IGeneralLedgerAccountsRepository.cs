@@ -13,15 +13,24 @@ namespace ACC.Domain.Interfaces
         Dictionary<string, string> GetViewRecordByID(ushort generalLedgerId);
 
         DataTable GetViewRecordsBySearch(string searchText);
-        DataTable GetRecordsBySearch();
-        //Budget System
-        DataTable GetAllViewRecords();
 
-        DataTable GetViewRecordsByAccountGroupName(string accountGroupName);
+        DataTable GetRecordsBySearch();
+
+        DataTable GetAllViewRecords();
 
         DataTable GetAllViewRecordsBySearch(string searchText);
 
-        DataTable GetViewRecordsByMajAccGroupNameSearch(string majAccGroupName, string searchText);
+
+
+        DataTable GetViewRecordsByMajorAccGroupName(string majAccGroupName);
+
+        DataTable GetViewRecordsByMajorAccGroupNameSearch(string majAccGroupName, string searchText);
+
+
+
+        DataTable GetViewRecordsByAccountGroupName(string accountGroupName);
+        DataTable GetViewRecordsByAccountGroupNameSearch(string accountGroupName, string searchText);
+
 
         bool NameExist(string txtName);
 

@@ -140,7 +140,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 if (allotmentClassId == 4)
                     dtAccounts = Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsBySearch(cmbxAccount.Text);
                 else
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajAccGroupNameSearch(allotmentClassName, cmbxAccount.Text);
+                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupNameSearch(allotmentClassName, cmbxAccount.Text);
 
                 var accountDict = new Dictionary<int, string>();
                 foreach (DataRow item in dtAccounts.Rows)
@@ -258,7 +258,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     if (allotmentClassId == 4)
                         dtAccounts = Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsBySearch(cmbxAccount.Text);
                     else
-                        dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajAccGroupNameSearch(allotmentClassName, cmbxAccount.Text);
+                        dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupNameSearch(allotmentClassName, cmbxAccount.Text);
 
                     if (dtAccounts.Rows.Count == 0 || string.IsNullOrWhiteSpace(cmbxAccount.Text.Trim())) return;
 
