@@ -27,7 +27,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private void LoadBudgetAppropriationRecords()
         {
             var uc = ucAllotmentRelease1;
-            _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
 
             foreach (DataGridViewRow row in _frmBudgetAppropriations.dgBudgetAppropriations.Rows)
             {
