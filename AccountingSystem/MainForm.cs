@@ -365,10 +365,5 @@ namespace AccountingSystem
         {
             _ = new frmAllotmentReleaseMain().ShowDialog();
         }
-
-        private void btnSupplementalAppropriations_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
