@@ -421,7 +421,6 @@ namespace AccountingSystem
             this.btnSupplementalAppropriations.Name = "btnSupplementalAppropriations";
             this.btnSupplementalAppropriations.Size = new System.Drawing.Size(190, 28);
             this.btnSupplementalAppropriations.Text = "Supplemental Appropriations";
-            this.btnSupplementalAppropriations.Click += new System.EventHandler(this.btnSupplementalAppropriations_Click);
             // 
             // btnAllotmentRelease
             // 
