@@ -353,6 +353,16 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap supplemental_appropriations_28px {
+            get {
+                object obj = ResourceManager.GetObject("supplemental_appropriations_28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap symbol_cancel_28px {
             get {
                 object obj = ResourceManager.GetObject("symbol_cancel_28px", resourceCulture);

@@ -115,6 +115,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnEdit.Enabled = true;
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
+                btnSupplementalAppropriations.Enabled = true;
 
             }
             else if (SelectedRows > 1 && dgv.SelectedCells[0].Value != null)
@@ -122,12 +123,14 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnEdit.Enabled = false;
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
+                btnSupplementalAppropriations.Enabled = false;
             }
             else
             {
                 btnEdit.Enabled = false;
                 btnDelete.Enabled = false;
                 btnDelete.Text = "Delete";
+                btnSupplementalAppropriations.Enabled = false;
             }
 
             if (cmbxFPP.SelectedIndex == -1 || cmbxAllotmentClass.SelectedIndex == -1 || cmbxFunds.SelectedIndex == -1)
@@ -136,7 +139,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnAdd.Enabled = true;
 
         }
-
 
         private void cmbxAllotmentClass_SelectedValueChanged(object sender, EventArgs e) 
         {
@@ -266,7 +268,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             LoadComboboxes();
         }
 
-        private void dataGridView1_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        private void dataGridView_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
             dgBudgetAppropriations.Columns[e.Column.Index].SortMode = DataGridViewColumnSortMode.NotSortable;
         }
@@ -339,5 +341,17 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 cmbxFPP.DroppedDown = true;
             } 
         }
+
+        private void btnSupplementalAppropriations_Click(object sender, EventArgs e)
+        {
+            int rowIndex = dgBudgetAppropriations.CurrentCell.RowIndex;
+            int budgetAppropriationsId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["id"].Value);
+
+            var frmSupplementalAppropriations = new frmSupplementalAppropriations(this);
+
+            frmSupplementalAppropriations.budgetAppropriationsId = budgetAppropriationsId;
+            frmSupplementalAppropriations.ShowDialog();
+        }
+
     }
 }
