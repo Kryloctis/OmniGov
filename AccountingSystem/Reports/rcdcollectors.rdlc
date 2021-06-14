@@ -11,37 +11,37 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="dtRCDCollectors">
+    <DataSet Name="dtRCDForms">
       <Query>
         <DataSourceName>dsLFS</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="rcdno">
-          <DataField>rcdno</DataField>
+        <Field Name="accforms">
+          <DataField>accforms</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="accform">
-          <DataField>accform</DataField>
+        <Field Name="orfrom">
+          <DataField>orfrom</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="receiptfrom">
-          <DataField>receiptfrom</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="receiptto">
-          <DataField>receiptto</DataField>
+        <Field Name="orto">
+          <DataField>orto</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="amount">
           <DataField>amount</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
+        <Field Name="rcdid">
+          <DataField>rcdid</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>dsLFS</rd:DataSetName>
         <rd:SchemaPath>C:\Users\user\Desktop\My Files\lgu suite\LocalFinanceSystem\AccountingSystem\dsLFS.xsd</rd:SchemaPath>
-        <rd:TableName>dtRCDCollectors</rd:TableName>
+        <rd:TableName>dtRCDForms</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />
@@ -61,6 +61,7 @@
                   <TextRun>
                     <Value>1. For Collectors</Value>
                     <Style>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -89,16 +90,16 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>3.79721in</Width>
+                  <Width>3.63888in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.44723in</Width>
+                  <Width>1.14723in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.51389in</Width>
+                  <Width>1.18889in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.74167in</Width>
+                  <Width>1.51667in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -116,6 +117,7 @@
                                 <TextRun>
                                   <Value>TYPE (FORM NO.)</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -154,6 +156,7 @@
                                 <TextRun>
                                   <Value>OFFICIAL RECEIPT NO./SERIAL NO.</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -191,6 +194,7 @@
                                 <TextRun>
                                   <Value>AMOUNT</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -233,7 +237,10 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value />
-                                  <Style />
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -267,8 +274,11 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
-                                  <Style />
+                                  <Value>FROM</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -299,8 +309,11 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
-                                  <Style />
+                                  <Value>TO</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -332,7 +345,10 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value />
-                                  <Style />
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -364,21 +380,23 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="accform">
+                        <Textbox Name="accforms">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!accform.Value</Value>
-                                  <Style />
+                                  <Value>=Fields!accforms.Value</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>accform</rd:DefaultName>
+                          <rd:DefaultName>accforms</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -394,15 +412,17 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="receiptfrom">
+                        <Textbox Name="orfrom">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!receiptfrom.Value</Value>
-                                  <Style />
+                                  <Value>=Fields!orfrom.Value</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -410,7 +430,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>receiptfrom</rd:DefaultName>
+                          <rd:DefaultName>orfrom</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -426,15 +446,17 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="receiptto">
+                        <Textbox Name="orto">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!receiptto.Value</Value>
-                                  <Style />
+                                  <Value>=Fields!orto.Value</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -442,7 +464,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>receiptto</rd:DefaultName>
+                          <rd:DefaultName>orto</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -467,6 +489,7 @@
                                 <TextRun>
                                   <Value>=Fields!amount.Value</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <Format>N2</Format>
                                   </Style>
                                 </TextRun>
@@ -597,7 +620,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox22">
+                        <Textbox Name="amount1">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -606,6 +629,7 @@
                                 <TextRun>
                                   <Value>=Sum(Fields!amount.Value)</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>N2</Format>
                                   </Style>
@@ -616,7 +640,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox22</rd:DefaultName>
+                          <rd:DefaultName>amount1</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -658,10 +682,10 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>dtRCDCollectors</DataSetName>
+            <DataSetName>dtRCDForms</DataSetName>
             <Top>0.27167in</Top>
             <Height>1.19166in</Height>
-            <Width>8.5in</Width>
+            <Width>7.49167in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -670,21 +694,21 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>1.48834in</Height>
+        <Height>1.46333in</Height>
         <Style />
       </Body>
-      <Width>8.5in</Width>
+      <Width>7.49167in</Width>
       <Page>
-        <LeftMargin>1in</LeftMargin>
-        <RightMargin>1in</RightMargin>
-        <TopMargin>1in</TopMargin>
-        <BottomMargin>1in</BottomMargin>
+        <LeftMargin>0.2in</LeftMargin>
+        <RightMargin>0.2in</RightMargin>
+        <TopMargin>0.2in</TopMargin>
+        <BottomMargin>0.2in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>
   </ReportSections>
   <ReportParameters>
-    <ReportParameter Name="paramRCDno">
+    <ReportParameter Name="rcdid">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
@@ -697,7 +721,7 @@
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>paramRCDno</ParameterName>
+          <ParameterName>rcdid</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

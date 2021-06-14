@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 HelperLoadRecords.PaymentDatagridView(dtpc, dgPreview);
 
                 txttotalamount.Value = pcRepository.SumRecords(CoId, dateFrom,dateTo);
-                lblRecordCount.Text = dgPreview.Rows.Count.ToString();
+                lblRecordCount.Text = dgPreview.Rows.Count > 0 ? dgPreview.Rows.Count.ToString():"0";
                 if (dtpc.Rows.Count > 0)
                 {
                     data = new List<CollectorReportPaymentModel>();

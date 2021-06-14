@@ -88,7 +88,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 foreach (DataRow item in dt.Rows)
                 {
                     DataRow row = dtPC.NewRow();
-                    row["id"] = item["id"];
+                    row["rcdid"] = item["id"];
                     row["rcdno"] = item["rcd_no"];
                     row["reportno"] = item["report_no"];
                     row["account_code"] = item["account_code"];
@@ -110,25 +110,81 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         private DataTable DataTableData(string id)
         {
 
-            var dtPC = new dsLFS.dtRCIDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByGC(id);
+            var dtPC = new dsLFS.dtRCDDataTable();
+            var dt = Factory.GeneralCollectionsRepository().GetRecordByData(id);
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
                 {
                     DataRow row = dtPC.NewRow();
-                    row["id"] = item["id"];
+                    row["rcdid"] = item["id"];
                     row["rcdno"] = item["rcd_no"];
+                    row["rcddate"] = item["rcd_date"];
+                    row["officer"] = item["officer"];
+                    dtPC.Rows.Add(row);
+                }
+            }
+
+            return dtPC;
+        }
+
+        private DataTable DataTableForms(int id)
+        {
+
+            var dtPC = new dsLFS.dtRCDFormsDataTable();
+            var dt = Factory.GeneralCollectionsRepository().GetRecordByForms(id);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow item in dt.Rows)
+                {
+                    DataRow row = dtPC.NewRow();
+                    row["rcdid"] = item["id"];
+                    row["accforms"] = String.Format("{0} - {1}",item["acc_form_no"], item["acc_form_desc"]);
+                    row["orfrom"] = item["orfrom"];
+                    row["orto"] = item["orto"];
+                    row["amount"] = item["total"];
+                    dtPC.Rows.Add(row);
+                }
+            }
+
+            return dtPC;
+        }
+
+        private DataTable DataTableCollections(int id)
+        {
+
+            var dtPC = new dsLFS.dtRCDCollectionsDataTable();
+            var dt = Factory.GeneralCollectionsRepository().GetRecordByCollections(id);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow item in dt.Rows)
+                {
+                    DataRow row = dtPC.NewRow();
+                    row["rcdid"] = item["id"];
+                    row["collectorname"] = item["collector"];
                     row["reportno"] = item["report_no"];
-                    row["account_code"] = item["account_code"];
-                    row["subsidiary"] = item["subsidiary"];
-                    row["payee"] = item["payee"];
-                    row["acc_form_desc"] = item["accform"];
-                    row["ledger_name"] = item["ledger_name"];
-                    row["payment_date"] = item["payment_date"];
-                    row["receipt_no"] = item["receipt_no"];
+                    row["amount"] = item["total"];
+                    dtPC.Rows.Add(row);
+                }
+            }
+
+            return dtPC;
+        }
+
+        private DataTable DataTableDeposits (int id)
+        {
+
+            var dtPC = new dsLFS.dtRCDDepositsDataTable();
+            var dt = Factory.GeneralCollectionsRepository().GetRecordByDeposits(id);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow item in dt.Rows)
+                {
+                    DataRow row = dtPC.NewRow();
+                    row["rcdid"] = item["id"];
+                    row["bankname"] = String.Format("{0} - {1}", item["bank_name"], item["account_no"]);
+                    row["reference"] = item["reference"];
                     row["amount"] = item["amount"];
-                    row["collector"] = item["collector"];
                     dtPC.Rows.Add(row);
                 }
             }
@@ -138,37 +194,54 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 
         private void LoadReport(LocalReport report)
         {
-
             try
             {
-                /*var lguDetails = Helper.LGUDetails();
-                var signatory = "FELIX A. TRAPA";
-
-                var pcrepo = Factory.PaymentCollectionRepository();
-                var parameters = new[] {
-                    new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                    new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
-                    new ReportParameter("paramSignatory", signatory)
-                };*/
                 var lguDetails = Helper.LGUDetails();
                 var signatory = "FELIX A. TRAPA";
+                if (type.Equals("GC"))
+                {
+                    var parameters = new[] {
+                            new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
+                            new ReportParameter("paramSignatory", signatory)
+                    };
+                    report.ReportPath = $"{Application.StartupPath}Reports\\payment-collection2.rdlc";
+                    report.DataSources.Clear();
+                    report.DataSources.Add(new ReportDataSource("dtPC", DataTableGC(Ids)));
+                    report.SetParameters(parameters);
+                    report.Refresh();
+                }
+                else
+                {
+                    var parameters = new[] {
+                            new ReportParameter("paramLGUName", lguDetails["lgu_name"])
+                    };
+                    report.ReportPath = $"{Application.StartupPath}Reports\\rcd.rdlc";
+                    report.DataSources.Clear();
+                    report.DataSources.Add(new ReportDataSource("dtRCD", DataTableData(Ids)));
+                    report.SubreportProcessing += Report_SubreportProcessing;
+                    
+                    report.SetParameters(parameters);
+                    report.Refresh();
+                }
 
-                var pcrepo = Factory.PaymentCollectionRepository();
-                var parameters = new[] {
-                    new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                    new ReportParameter("paramSignatory", signatory)
-                };
-                report.ReportPath = $"{Application.StartupPath}Reports\\payment-collection2.rdlc";
-                report.DataSources.Clear();
-
-                report.DataSources.Add(new ReportDataSource("dtPC", DataTableGC(Ids)));
-                report.SetParameters(parameters);
+               
 
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
+
+           
+        }
+
+        private void Report_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
+        {
+            int id = int.Parse(e.Parameters["rcdid"].Values[0].ToString());
+            e.DataSources.Add(new ReportDataSource("dtRCDForms", DataTableForms(id)));
+            e.DataSources.Add(new ReportDataSource("dtRCDCollections", DataTableCollections(id)));
+            e.DataSources.Add(new ReportDataSource("dtRCDDeposits", DataTableDeposits(id)));          
+
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)

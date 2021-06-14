@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,12 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
     {
         private int Id;
         Dictionary<int, string> _data = new Dictionary<int, string>();
-        public frmGC(Dictionary<int, string> data)
+        frmRCD frmrcd;
+        public frmGC(Dictionary<int, string> data,frmRCD _frmrcd)
         {
             InitializeComponent();
             _data = data;
+            frmrcd = _frmrcd;
         }
 
         private void frmGC_Load(object sender, EventArgs e)
@@ -119,6 +122,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                         fbd.Gcamount = gcsum;
                         if(fbd.ShowDialog() == DialogResult.OK)
                         {
+                            frmrcd.LoadRecords();
                             this.Close();
                         }
                     }

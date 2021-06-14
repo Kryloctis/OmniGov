@@ -11,7 +11,7 @@ namespace ACC.Domain.Interfaces
         bool CodeExist(string id);
         Dictionary<string, string> GetRecordByID(string Id);
         decimal SumRecords(int id);
-        DataTable GetRecordByData(int Id);
+        DataTable GetRecordByData(string Id);
         DataTable GetRecordByGC(string Id);
         DataTable GetRecordByForms(int Id);
         DataTable GetRecordByCollections(int Id);

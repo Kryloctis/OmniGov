@@ -132,7 +132,8 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         {
            if(print.Count > 0)
             {
-
+                string id = string.Join(",", print.Select(x => String.Format("'{0}'",x.Key)).ToArray());
+                _ = new frmPCReport("General Collections","GC",id).ShowDialog();
             }
         }
 
@@ -140,7 +141,8 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         {
             if (print.Count > 0)
             {
-
+                string id = string.Join(",", print.Select(x => String.Format("'{0}'", x.Key)).ToArray());
+                _ = new frmPCReport("Collections and Deposits", "RCD", id).ShowDialog();
             }
         }
     }

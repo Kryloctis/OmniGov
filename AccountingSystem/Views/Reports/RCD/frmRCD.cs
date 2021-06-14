@@ -28,7 +28,7 @@ namespace AccountingSystem.Views.Reports.RCD
             LoadRecords();
         }
 
-        internal void LoadRecords()
+        public void LoadRecords()
         {
             try
             {
@@ -163,7 +163,7 @@ namespace AccountingSystem.Views.Reports.RCD
             {
                 //string id = string.Join(",", rcdgenerate.Select(x => String.Format("'{0}'",x.Key)).ToArray());
                 //_ = new frmPCReport(id).ShowDialog();
-                _ = new frmGC(rcdgenerate).ShowDialog();
+                _ = new frmGC(rcdgenerate,this).ShowDialog();
             }
             else{
                 Helper.MessageBoxError("Please select reports to Generate RCD!");
