@@ -72,6 +72,8 @@ namespace AccountingSystem
 
         public static IAllotmentReleaseRepository AllotmentReleaseRepository() => new AllotmentReleaseRepository(new MySqlGenericCommands());
 
+        public static IAllotmentAccountRepository AllotmentAccountRepository() => new AllotmentAccountRepository(new MySqlGenericCommands());
+
         public static ISupplementalAppropriationsRepository SupplementalAppropriationsRepository() => new SupplementalAppropriationsRepository(new MySqlGenericCommands());
 
         public static IObligationRequestRepository ObligationRequestRepository() => new ObligationRequestRepository(new MySqlGenericCommands(), ObligationAccountRepository());
