@@ -87,7 +87,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
                 decimal totalBudetAppropriations = budgetAppropriationAmount + totalSupplementalAmount;
 
                 //Total Allotment Release
-                decimal totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseByIdDateYear(rowBudgetAppropriationId, date, year);
+                decimal totalAllotmentRelease = 0;
 
 
                 //Total Obligations

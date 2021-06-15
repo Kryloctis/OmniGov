@@ -7,5 +7,6 @@ namespace ACC.Domain.Interfaces
 {
     public interface IAllotmentAccountRepository  : IRepository<AllotmentAccountModel>
     {
+        decimal GetViewTotalAllotmentReleaseAmountById(int budgetAppropriationId);
     }
 }

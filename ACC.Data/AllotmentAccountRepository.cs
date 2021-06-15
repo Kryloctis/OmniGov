@@ -10,7 +10,7 @@ namespace ACC.Data
     public class AllotmentAccountRepository : IAllotmentAccountRepository
     {
         private MySqlGenericCommands _mySqlGenericCommands;
-        private readonly string TableName = "allotment_account";
+        private readonly string tableName = "allotment_account";
 
         public AllotmentAccountRepository(MySqlGenericCommands mySqlGenericCommands)
         {
@@ -55,6 +55,24 @@ namespace ACC.Data
         public bool Update(AllotmentAccountModel entity)
         {
             throw new NotImplementedException();
+        }
+
+        public decimal GetViewTotalAllotmentReleaseAmountById(int budgetAppropriationId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "budget_appropriations_id", DbType.Int32, budgetAppropriationId}
+                };
+
+                string query = $"Select COALESCE(SUM(amount), 0) AS total_allotment_amount FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id ";
+                return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

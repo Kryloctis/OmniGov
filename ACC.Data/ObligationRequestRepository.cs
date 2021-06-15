@@ -395,7 +395,7 @@ namespace ACC.Data
                 };
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

@@ -21,9 +21,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-
-            btnSave.Click += new EventHandler(BtnSave_Click);
-            btnNew.Click += new EventHandler(BtnNew_Click);
             uc = ucAllotmentReleaseMain1;
         }
 
@@ -37,25 +34,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
-
-                    var allotmentReleaseModelList = new List<AllotmentReleaseModel>();
-
-                    foreach (DataGridViewRow row in uc.dgAllotmentRelease.Rows)
-                    {
-                        var allotmentReleaseModel = new AllotmentReleaseModel()
-                        {
-                            BudgetAppropriationsID = Convert.ToInt32(row.Cells["budget_appropriation_id"].Value),
-                            ARONumber = $"{uc.mskSeriesNo.Text}-{uc.mskYear.Text}",
-                            Purpose = uc.txtPurpose.Text.Trim(),
-                            DateIssued = uc.dtDateIssued.Value,
-                            amount = Convert.ToDecimal(row.Cells["allotment_amount"].Value)
-                        };
-
-                    allotmentReleaseModelList.Add(allotmentReleaseModel);
-                    }
-
-                Factory.AllotmentReleaseRepository().BulkInsert(allotmentReleaseModelList);
-
                 return true;
             }
             catch (Exception ex)

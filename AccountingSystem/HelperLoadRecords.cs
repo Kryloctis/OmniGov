@@ -990,7 +990,7 @@ namespace AccountingSystem
 
                     decimal totalAppropriationAmount = totalSupplementalAppropriation + rowAppropriationAmount;
 
-                    decimal totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountById(rowId);
+                    decimal totalAllotmentRelease = Factory.AllotmentAccountRepository().GetViewTotalAllotmentReleaseAmountById(rowId);
 
                     decimal appropriationBalance = (totalSupplementalAppropriation + rowAppropriationAmount) - totalAllotmentRelease;
 

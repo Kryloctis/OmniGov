@@ -223,7 +223,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             try
             {
-                var dtOtherFPP = Factory.OthersFPPRepository().GetRecordsByFPPID(Convert.ToInt32(cmbxFPP.SelectedValue));
+                var dtOtherFPP = Factory.OthersFPPRepository().GetRecordsByFPPId(Convert.ToInt32(cmbxFPP.SelectedValue));
 
                 HelperLoadRecords.OthersFPPCombobox(dtOtherFPP, cmbxOtherFPP, "name", "id");
                 cmbxOtherFPP.SelectedIndex = -1;

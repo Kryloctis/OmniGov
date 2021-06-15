@@ -58,6 +58,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnNew.Size = new System.Drawing.Size(35, 47);
             this.btnNew.Text = "&New";
             this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNew.Click += new System.EventHandler(this.BtnNew_Click);
             // 
             // btnSave
             // 
@@ -68,6 +69,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnSave.Size = new System.Drawing.Size(35, 47);
             this.btnSave.Text = "&Save";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // ucAllotmentReleaseMain1
             // 
@@ -91,7 +93,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.Name = "frmAllotmentReleaseMain";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Manage > Budget Approprations > Allotment Release";
+            this.Text = "Allotment Release";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);

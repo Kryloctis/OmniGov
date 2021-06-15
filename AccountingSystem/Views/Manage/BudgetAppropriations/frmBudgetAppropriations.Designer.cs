@@ -350,7 +350,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Budget Appropriations";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.frmBudgetAppropriationsNew_Load);
+            this.Load += new System.EventHandler(this.frmBudgetAppropriations_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetAppropriations)).EndInit();
             this.panel1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);

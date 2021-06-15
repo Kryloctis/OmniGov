@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
 
                 short year = (short)uc.nudYear.Value;
-                int accountId = Convert.ToInt32(uc.cmbxAccount.SelectedValue);
+                int accountId = Convert.ToInt32(uc.cmbxBudgetAppropriations.SelectedValue);
 
                 var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetViewRecord(uc.fppID, uc.othersFPPId, uc.fundId, uc.allotmentClassId, accountId, uc.dateIssued, year);
 
@@ -72,7 +72,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             if (AddAllotmentRelease())
             {
-                uc.ResetForm();
                 ucAllotmentReleaseMain.panel1.Enabled = false;
                 ucAllotmentReleaseMain.dtDateIssued.Enabled = false;
             }

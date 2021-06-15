@@ -13,10 +13,12 @@ namespace ACC.Data
         private MySqlGenericCommands _mySqlGenericCommands;
         private readonly string viewTableName = "view_allotment_release";
         private readonly string tableName = "allotment_release";
+        private readonly IAllotmentAccountRepository _allotmentAccountRepository;
 
-        public AllotmentReleaseRepository(MySqlGenericCommands mySqlGenericCommands)
+        public AllotmentReleaseRepository(MySqlGenericCommands mySqlGenericCommands, IAllotmentAccountRepository allotmentAccountRepository)
         {
-            this._mySqlGenericCommands = mySqlGenericCommands;
+            _mySqlGenericCommands = mySqlGenericCommands;
+            _allotmentAccountRepository = allotmentAccountRepository;
         }
 
 
@@ -56,10 +58,6 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public decimal GetViewTotalAllotmentReleaseAmountById(int budgetAppropriationId)
-        {
-            throw new NotImplementedException();
-        }
 
         public decimal GetViewTotalAllotmentReleaseByIdDateYear(int budgetAppropriationId, DateTime dateIssued, short year)
         {
@@ -72,11 +70,6 @@ namespace ACC.Data
         }
 
         public bool allotmentReleaseExist(int id, int budgetAppropriationId, string dateIssued)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool BulkInsert(List<AllotmentReleaseModel> allotmentReleaseModelList)
         {
             throw new NotImplementedException();
         }

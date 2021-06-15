@@ -148,13 +148,13 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetRecordsByFPPID(int id)
+        public DataTable GetRecordsByFPPId(int fppId)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@function_program_project_id", DbType.Int32, id }
+                    new object[] { "@function_program_project_id", DbType.Int32, fppId }
                 };
 
                 string query = $"SELECT " +
@@ -168,8 +168,8 @@ namespace ACC.Data
                     $"WHERE " +
                     $"function_program_project_id = @function_program_project_id";
 
-                var dtOthersFPP = new DataTable();
-                return _mySqlGenericCommands.FillBySearch(query, dtOthersFPP, parameters);
+                var dataTable = new DataTable();
+                return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
             }
             catch (Exception)
             {
@@ -303,6 +303,37 @@ namespace ACC.Data
                 throw;
             }
             return false;
+        }
+
+        public DataTable GetRecordsByFPPIdCodeName(int fppId, string searchTxt)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@function_program_project_id", DbType.Int32, fppId },
+                    new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%" },
+                };
+
+
+                string query = $"SELECT " +
+                    $"id, " +
+                    $"function_program_project_id, " +
+                    $"others_fpp_code, " +
+                    $"name, " +
+                    $"created_at, " +
+                    $"updated_at " +
+                    $"FROM {tableName} " +
+                    $"WHERE " +
+                    $"function_program_project_id = @function_program_project_id AND (others_fpp_code LIKE @searchTxt OR name LIKE @searchTxt)";
+
+                var dataTable = new DataTable();
+                return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         #endregion Validations
