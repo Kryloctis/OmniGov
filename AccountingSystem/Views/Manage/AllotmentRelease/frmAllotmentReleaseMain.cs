@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,18 +25,55 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             uc = ucAllotmentReleaseMain1;
         }
 
+        private List<AllotmentAccountModel> AllotmentAccountModelList()
+        {
+            var allotmentAccountModelList = new List<AllotmentAccountModel>();
+
+            foreach (DataGridViewRow row in uc.dgAllotmentRelease.Rows) 
+            {
+                int budgetAppropriationsId = Convert.ToInt32(row.Cells["budget_appropriation_id"].Value);
+                decimal allotmentReleaseAmount = Convert.ToDecimal(row.Cells["allotment_amount"].Value);
+
+                var allotmentAccountModel = new AllotmentAccountModel()
+                {
+                    BudgetAppropriationsID = budgetAppropriationsId,
+                    Amount = allotmentReleaseAmount
+                };
+
+                allotmentAccountModelList.Add(allotmentAccountModel);
+            }
+
+            return allotmentAccountModelList;
+        } 
+
         private bool SaveData() 
         {
             try
             {
                 var uc = ucAllotmentReleaseMain1;
-                if (!uc.ValidateChildren()) 
+                if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
-                return true;
+
+                string allotmentReleaseNo = $"{uc.mskSeriesNo.Text}-{uc.mskYear.Text}";
+                string purpose = uc.txtPurpose.Text.Trim();
+
+                var allotmemtReleaseModel = new AllotmentReleaseModel()
+                {
+                    ARONumber = allotmentReleaseNo,
+                    Purpose = purpose,
+                    DateIssued = uc.dtDateIssued.Value
+                };
+
+                return Factory.AllotmentReleaseRepository().Insert(allotmemtReleaseModel, AllotmentAccountModelList());
             }
+            catch (MySqlException mysqlex)
+            {
+                Helper.MessageBoxError(mysqlex.Message);
+            }
+
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
@@ -43,7 +81,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return false;
         }
 
-        private void UnsavedWorkPrompt()
+        private void Prompt()
         {
             var message = "Are you sure? Unsaved data will not be saved.";
 
@@ -66,7 +104,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             if (!uc.panel1.Enabled)
             {
-                UnsavedWorkPrompt();
+                Prompt();
             }
         }
 

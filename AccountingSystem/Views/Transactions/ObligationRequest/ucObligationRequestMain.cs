@@ -24,7 +24,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         }
 
 
-
         internal void LoadSearched() 
         {
             try
@@ -246,7 +245,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
 
 
-
         internal void LoadFunds()
         {
             var funds = Factory.FundsRepository().GetRecords();
@@ -291,7 +289,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             var radFund = sender as RadioButton;
             ShowCheckIcon(radFund);
         }
-
 
 
 
@@ -399,7 +396,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
 
 
-
         private bool ShowErrorOthersFPPNameNotExist()
         {
             try
@@ -431,7 +427,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             Helper.ClearErrorComboBox(epOtherFPP, cmbxOtherFPP);
         }
-
 
 
 
@@ -522,7 +517,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             Helper.ClearErrorTextBox(epExplanation, txtExplanation);
         }
-
 
 
 
@@ -618,8 +612,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             EnableDisableButtons();
         }
-
-
 
 
 

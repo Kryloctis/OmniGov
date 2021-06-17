@@ -53,7 +53,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
             foreach (DataGridViewRow item in uc.dataGridView1.Rows) 
             {
-
                 int accountId = Convert.ToInt32(item.Cells["account_id"].Value);
                 decimal amount = Convert.ToDecimal(item.Cells["amount"].Value);
 
@@ -62,7 +61,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     AccountId = accountId,
                     Amount = amount
                 };
-
 
                 obligationRequestModelList.Add(obligationAccountModel);
             }

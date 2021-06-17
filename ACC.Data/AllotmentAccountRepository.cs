@@ -9,6 +9,7 @@ namespace ACC.Data
 {
     public class AllotmentAccountRepository : IAllotmentAccountRepository
     {
+
         private MySqlGenericCommands _mySqlGenericCommands;
         private readonly string tableName = "allotment_account";
 
@@ -49,7 +50,30 @@ namespace ACC.Data
 
         public bool Insert(AllotmentAccountModel entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][] 
+                {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, entity.BudgetAppropriationsID },
+                    new object[] { "@allotment_release_id", DbType.Int32, entity.AllotmentReleaseID },
+                    new object[] { "@amount", DbType.Decimal, entity.Amount}
+                };
+
+                string query = $"INSERT INTO allotment_account " +
+                    $"(budget_appropriations_id, " +
+                    $"allotment_release_id, " +
+                    $"amount) " +
+                    $"VALUES " +
+                    $"(@budget_appropriations_id, " +
+                    $"@allotment_release_id, " +
+                    $"@amount)";
+
+                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Update(AllotmentAccountModel entity)
@@ -74,5 +98,6 @@ namespace ACC.Data
                 throw;
             }
         }
+
     }
 }

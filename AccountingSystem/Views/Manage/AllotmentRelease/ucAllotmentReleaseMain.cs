@@ -393,6 +393,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
         }
 
+
+
+
         //VALIDATIONS BEFORE SHOWING ADD WINDOW
         private string GetFormErrorsOnAdd() 
         {
@@ -477,8 +480,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
             return false;
         }
-
-
 
 
         private bool ShowErrorFPPNameNotExist(ErrorProvider ep, ComboBox comboBox)

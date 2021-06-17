@@ -10,6 +10,7 @@ namespace ACC.Data
 {
     public class AllotmentReleaseRepository : IAllotmentReleaseRepository
     {
+
         private MySqlGenericCommands _mySqlGenericCommands;
         private readonly string viewTableName = "view_allotment_release";
         private readonly string tableName = "allotment_release";
@@ -104,6 +105,52 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-    
+
+        public int GetLastInsertedID()
+        {
+            try
+            {
+                string query = $"SELECT MAX(id) FROM {tableName}";
+                return int.Parse(_mySqlGenericCommands.ExecuteScalar(query));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool Insert(AllotmentReleaseModel entity, List<AllotmentAccountModel> listAllotmentAccount)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@aro_no", DbType.String, entity.ARONumber},
+                        new object[] { "@purpose", DbType.String, entity.Purpose},
+                        new object[] { "@date_issued", DbType.Date, entity.DateIssued.Date}
+                    };
+
+                    string query = $"INSERT INTO {tableName} (aro_no, purpose, date_issued) VALUES (@aro_no, @purpose, @date_issued)";
+
+                    _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+
+                    foreach (var allotmentAccount in listAllotmentAccount)
+                    {
+                        allotmentAccount.AllotmentReleaseID = GetLastInsertedID();
+                        _ = _allotmentAccountRepository.Insert(allotmentAccount);
+                    }
+
+                    scope.Complete();
+                    return true;
+                };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }
