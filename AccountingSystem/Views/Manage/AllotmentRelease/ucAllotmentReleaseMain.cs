@@ -196,8 +196,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             errorArray[0] = epFPP.GetError(cmbxFPP);
             errorArray[1] = epSubFPP.GetError(cmbxSubFPP);
             errorArray[2] = epARONo.GetError(mskYear);
-            errorArray[3] = dgAllotmentRelease.Tag.ToString();
-            errorArray[4] = epPurpose.GetError(txtPurpose);
+            errorArray[3] = epPurpose.GetError(txtPurpose);
+            errorArray[4] = dgAllotmentRelease.Tag.ToString();
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
@@ -272,14 +272,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             try
             {
                 dgAllotmentRelease.Columns.Add("budget_appropriation_id", "Budget Appropriations ID");
-                dgAllotmentRelease.Columns.Add("account_id", "Account ID");
                 dgAllotmentRelease.Columns.Add("account_name", "Account Name");
                 dgAllotmentRelease.Columns.Add("account_code", "Account Code");
                 dgAllotmentRelease.Columns.Add("allotment_amount", "Amount");
 
                 //Cell Format
                 dgAllotmentRelease.Columns["budget_appropriation_id"].Visible = false;
-                dgAllotmentRelease.Columns["account_id"].Visible = false;
                 dgAllotmentRelease.Columns["account_name"].Width = 300;
                 dgAllotmentRelease.Columns["account_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgAllotmentRelease.Columns["account_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -387,6 +385,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             {
                 dgAllotmentRelease.Rows.Remove(row);
             }
+
+            if (dgAllotmentRelease.Rows.Count == 0)
+            {
+                panel1.Enabled = true;
+                dtDateIssued.Enabled = true;
+            }
         }
 
         //VALIDATIONS BEFORE SHOWING ADD WINDOW
@@ -456,6 +460,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
 
         //VALIDATIONS
+
         internal bool ShowErrorAllotmentReleaseListEmpty() 
         {
             try
@@ -472,6 +477,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
             return false;
         }
+
+
 
 
         private bool ShowErrorFPPNameNotExist(ErrorProvider ep, ComboBox comboBox)
@@ -560,16 +567,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             Helper.ClearMaskedTextboxError(epARONo, mskYear);
         }
 
-        private void ucAllotmentReleaseMain_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = ShowErrorAllotmentReleaseListEmpty();
-        }
-
-        private void ucAllotmentReleaseMain_Validated(object sender, EventArgs e)
-        {
-            dgAllotmentRelease.Tag = string.Empty;
-        }
-
         private void txtPurpose_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epPurpose, txtPurpose, "Purpose");
@@ -578,6 +575,16 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private void txtPurpose_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(epPurpose, txtPurpose);
+        }
+
+        private void dgAllotmentRelease_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = ShowErrorAllotmentReleaseListEmpty();
+        }
+
+        private void dgAllotmentRelease_Validated(object sender, EventArgs e)
+        {
+            dgAllotmentRelease.Tag = string.Empty;
         }
     }
 }

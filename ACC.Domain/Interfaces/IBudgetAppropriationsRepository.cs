@@ -11,19 +11,18 @@ namespace ACC.Domain.Interfaces
 
         Dictionary<string, string> GetViewRecordByID(int budgetAppId);
 
-        Dictionary<string, string> GetViewRecord(int fppId, int? othersFPPId, int fundsId, int allotmentClassId, int generalLedgerAccountId, DateTime dateEntry, short year);
-
 
         //Budget Appropriations Display
 
+        DataTable GetViewRecords();
+
         DataTable GetViewRecordsByIds(BudgetAppropriationsModel entity);
 
+        DataTable GetViewRecordsByIdsSearch(BudgetAppropriationsModel entity, string searchTxt);
+
+        DataTable GetViewRecordsByIdsYear(BudgetAppropriationsModel entity);
+
         DataTable GetHeaderOthersFPP(int fppID, int allotment_classes_id, int funds_id, short year);
-
-        //Report
-        DataTable GetViewRecordsByFundIdDateCurrentYear(int fundId, DateTime date, short year);
-
-        DataTable GetViewRecordsByFundIdDate(int fundId, DateTime date);
 
 
        //Validations

@@ -47,62 +47,62 @@ namespace AccountingSystem.Views.Reports.SAAOB
             var dataSet = new dsLFS();
             DataTable dtSAAOB = dataSet.dtSAAOB;
 
-            int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
-            DateTime date = dtAsOf.Value;
-            short year = Convert.ToInt16(dtAsOf.Value.Year);
+            //int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
+            //DateTime date = dtAsOf.Value;
+            //short year = Convert.ToInt16(dtAsOf.Value.Year);
 
-            var dtBudgetAppropriations = Factory.BudgetAppropriationsRepository().GetViewRecordsByFundIdDateCurrentYear(fundId, date, year);
-
-
-            foreach (DataRow item in dtBudgetAppropriations.Rows)
-            {
-                int rowBudgetAppropriationId = Convert.ToInt32(item["id"]);
-                int rowFundId = Convert.ToInt32(item["funds_id"]);
-                string rowFundCode = item["fund_code"].ToString();
-                string rowFundName = item["fund_name"].ToString();
-                int rowFPPId = Convert.ToInt32(item["fpp_id"]);
-                string rowFPPCode = item["fpp_code"].ToString();
-                string rowFPPName = item["fpp_name"].ToString();
-                int rowFunctionalClassificationServiceId = Convert.ToInt32(item["functional_classification_service_id"]);
-                string rowFunctionalClassificationServiceName = item["functional_classification_service_name"].ToString();
-                int rowFunctionalClassificationId = Convert.ToInt32(item["functional_classification_id"]);
-                string rowFunctionalClassificationSectorCode = item["functional_classification_sector_code"].ToString();
-                string rowFunctionalClassificationSectorName = item["functional_classification_sector_name"].ToString();
-                string rowOtherFPPId = item["others_fpp_id"] == null? string.Empty : item["others_fpp_id"].ToString();
-                string rowOtherFPPName = item["others_fpp_name"].ToString();
-                int rowAllotmentClassId = Convert.ToInt32(item["allotment_class_id"]);
-                string rowAllotmentClassCode = item["allotment_class_code"].ToString();
-                string rowAllotmentClassName = item["allotment_class_name"].ToString();
-                string rowAccountCode = item["account_code"].ToString();
-                string rowAccountName = item["general_ledger_accounts_name"].ToString();
-                short rowYear = Convert.ToInt16(item["year"]);
-                int rowAccountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
+            //var dtBudgetAppropriations = Factory.BudgetAppropriationsRepository().GetViewRecordsByFundIdDateCurrentYear(fundId, date, year);
 
 
+            //foreach (DataRow item in dtBudgetAppropriations.Rows)
+            //{
+            //    int rowBudgetAppropriationId = Convert.ToInt32(item["id"]);
+            //    int rowFundId = Convert.ToInt32(item["funds_id"]);
+            //    string rowFundCode = item["fund_code"].ToString();
+            //    string rowFundName = item["fund_name"].ToString();
+            //    int rowFPPId = Convert.ToInt32(item["fpp_id"]);
+            //    string rowFPPCode = item["fpp_code"].ToString();
+            //    string rowFPPName = item["fpp_name"].ToString();
+            //    int rowFunctionalClassificationServiceId = Convert.ToInt32(item["functional_classification_service_id"]);
+            //    string rowFunctionalClassificationServiceName = item["functional_classification_service_name"].ToString();
+            //    int rowFunctionalClassificationId = Convert.ToInt32(item["functional_classification_id"]);
+            //    string rowFunctionalClassificationSectorCode = item["functional_classification_sector_code"].ToString();
+            //    string rowFunctionalClassificationSectorName = item["functional_classification_sector_name"].ToString();
+            //    string rowOtherFPPId = item["others_fpp_id"] == null? string.Empty : item["others_fpp_id"].ToString();
+            //    string rowOtherFPPName = item["others_fpp_name"].ToString();
+            //    int rowAllotmentClassId = Convert.ToInt32(item["allotment_class_id"]);
+            //    string rowAllotmentClassCode = item["allotment_class_code"].ToString();
+            //    string rowAllotmentClassName = item["allotment_class_name"].ToString();
+            //    string rowAccountCode = item["account_code"].ToString();
+            //    string rowAccountName = item["general_ledger_accounts_name"].ToString();
+            //    short rowYear = Convert.ToInt16(item["year"]);
+            //    int rowAccountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
 
-                //Total budget Appropriation Amount
-                decimal budgetAppropriationAmount = Convert.ToDecimal(item["amount"]);
-                decimal totalSupplementalAmount = Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountByIdAndDateEntry(rowBudgetAppropriationId, date);
-
-                decimal totalBudetAppropriations = budgetAppropriationAmount + totalSupplementalAmount;
-
-                //Total Allotment Release
-                decimal totalAllotmentRelease = 0;
 
 
-                //Total Obligations
-                decimal totalObligations = Factory.ObligationRequestRepository().TotalObligationRequestByDateYear(rowFundId, rowFPPId, string.IsNullOrEmpty(rowOtherFPPId)? null : Convert.ToInt32(rowOtherFPPId), rowAllotmentClassId, rowAccountId, date, year);
+            //    //Total budget Appropriation Amount
+            //    decimal budgetAppropriationAmount = Convert.ToDecimal(item["amount"]);
+            //    decimal totalSupplementalAmount = Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountByIdAndDateEntry(rowBudgetAppropriationId, date);
 
-                //BudgetAppropriation Balance   
-                decimal unObligatedBalance = totalAllotmentRelease - totalObligations;
+            //    decimal totalBudetAppropriations = budgetAppropriationAmount + totalSupplementalAmount;
 
-                var items = new object[]
-                {
-                    rowFundId, rowFundCode, rowFundName, rowFunctionalClassificationId, rowFunctionalClassificationSectorCode, rowFunctionalClassificationSectorName, rowFunctionalClassificationServiceId, rowFunctionalClassificationServiceName, rowFPPId, rowFPPCode, rowFPPName, rowOtherFPPId, rowOtherFPPName, rowAllotmentClassId, rowAllotmentClassCode, rowAllotmentClassName, rowAccountCode, rowAccountName, rowYear, totalBudetAppropriations, totalAllotmentRelease, totalObligations, unObligatedBalance
-                };
+            //    //Total Allotment Release
+            //    decimal totalAllotmentRelease = 0;
 
-                dtSAAOB.Rows.Add(items);
-            }
+
+            //    //Total Obligations
+            //    decimal totalObligations = Factory.ObligationRequestRepository().TotalObligationRequestByDateYear(rowFundId, rowFPPId, string.IsNullOrEmpty(rowOtherFPPId)? null : Convert.ToInt32(rowOtherFPPId), rowAllotmentClassId, rowAccountId, date, year);
+
+            //    //BudgetAppropriation Balance   
+            //    decimal unObligatedBalance = totalAllotmentRelease - totalObligations;
+
+            //    var items = new object[]
+            //    {
+            //        rowFundId, rowFundCode, rowFundName, rowFunctionalClassificationId, rowFunctionalClassificationSectorCode, rowFunctionalClassificationSectorName, rowFunctionalClassificationServiceId, rowFunctionalClassificationServiceName, rowFPPId, rowFPPCode, rowFPPName, rowOtherFPPId, rowOtherFPPName, rowAllotmentClassId, rowAllotmentClassCode, rowAllotmentClassName, rowAccountCode, rowAccountName, rowYear, totalBudetAppropriations, totalAllotmentRelease, totalObligations, unObligatedBalance
+            //    };
+
+            //    dtSAAOB.Rows.Add(items);
+            //}
 
             return dtSAAOB;
         }

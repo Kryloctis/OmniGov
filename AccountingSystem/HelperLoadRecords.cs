@@ -939,7 +939,7 @@ namespace AccountingSystem
 
                 budgetAppropriationsModel.OthersFPPId = null;
                 
-                var dtGetViewRecordsByFFPIDByAllotmentClass = Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(budgetAppropriationsModel);
+                var dtGetViewRecordsByFFPIDByAllotmentClass = Factory.BudgetAppropriationsRepository().GetViewRecordsByIdsYear(budgetAppropriationsModel);
 
 
                 //Load by loop All Budget Appropriations Records without Others FPP 
@@ -963,7 +963,7 @@ namespace AccountingSystem
 
 
                     budgetAppropriationsModel.OthersFPPId = othersFPPID;
-                    DataTable dtGetViewRecordsByIds = Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(budgetAppropriationsModel);
+                    DataTable dtGetViewRecordsByIds = Factory.BudgetAppropriationsRepository().GetViewRecordsByIdsYear(budgetAppropriationsModel);
 
                     foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByIds.Rows)
                     {

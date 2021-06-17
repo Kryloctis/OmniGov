@@ -128,6 +128,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             0,
             0,
             0});
+            this.nudYear.ValueChanged += new System.EventHandler(this.nudYear_ValueChanged);
             this.nudYear.Validating += new System.ComponentModel.CancelEventHandler(this.nudYear_Validating);
             this.nudYear.Validated += new System.EventHandler(this.nudYear_Validated);
             // 

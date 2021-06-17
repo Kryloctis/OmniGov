@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             try
             {
                 var uc = ucAllotmentReleaseMain1;
-                if (!uc.ValidateChildren() || uc.ShowErrorAllotmentReleaseListEmpty()) 
+                if (!uc.ValidateChildren()) 
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
