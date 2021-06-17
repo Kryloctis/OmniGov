@@ -23,6 +23,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             InitializeComponent();
             Helper.LoadFormIcon(this);
             uc = ucAllotmentReleaseMain1;
+            btnDelete.Enabled = false;
         }
 
         private List<AllotmentAccountModel> AllotmentAccountModelList()

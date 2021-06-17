@@ -59,7 +59,7 @@ namespace ACC.Data
                     new object[] { "@amount", DbType.Decimal, entity.Amount}
                 };
 
-                string query = $"INSERT INTO allotment_account " +
+                string query = $"INSERT INTO {tableName} " +
                     $"(budget_appropriations_id, " +
                     $"allotment_release_id, " +
                     $"amount) " +
@@ -79,24 +79,6 @@ namespace ACC.Data
         public bool Update(AllotmentAccountModel entity)
         {
             throw new NotImplementedException();
-        }
-
-        public decimal GetViewTotalAllotmentReleaseAmountById(int budgetAppropriationId)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "budget_appropriations_id", DbType.Int32, budgetAppropriationId}
-                };
-
-                string query = $"Select COALESCE(SUM(amount), 0) AS total_allotment_amount FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id ";
-                return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
         }
 
     }

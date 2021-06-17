@@ -986,11 +986,17 @@ namespace AccountingSystem
                     short rowYear = Convert.ToInt16(drGetViewRecordsByIds["year"]);
                     byte rowContinuing = Convert.ToByte(drGetViewRecordsByIds["continuing"]);
                     string remarks = drGetViewRecordsByIds["remarks"].ToString();
-                    decimal totalSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountById(rowId);
 
+                    //GET TOTAL SUPPLEMENTAL APPROPRIATIONS
+                    var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(rowId);
+                    decimal totalSupplementalAppropriation = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0? 0 : dtSupplementalAppropriation.Compute("Sum(amount)", string.Empty));
+
+                    //GET TOTAL ALLOTMENT RELEASE
+                    var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(rowId);
+                    decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("SUM(amount)", string.Empty));
+
+                    //GET TOTAL APPROPRIATION
                     decimal totalAppropriationAmount = totalSupplementalAppropriation + rowAppropriationAmount;
-
-                    decimal totalAllotmentRelease = Factory.AllotmentAccountRepository().GetViewTotalAllotmentReleaseAmountById(rowId);
 
                     decimal appropriationBalance = (totalSupplementalAppropriation + rowAppropriationAmount) - totalAllotmentRelease;
 

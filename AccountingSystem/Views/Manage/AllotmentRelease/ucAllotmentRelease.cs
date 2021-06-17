@@ -23,7 +23,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         public ucAllotmentRelease()
         {
             InitializeComponent();
-
         }
 
         internal void LoadReference(ucAllotmentReleaseMain ucAllotmentReleaseMain)
@@ -113,8 +112,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             {
                 int budgetAppropriationId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
                 var budgetAppropriationDict = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
+                var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
+                var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(budgetAppropriationId);
 
-                appropriationBalance = Convert.ToDecimal(budgetAppropriationDict["amount"]);
+                decimal budgetAppropriation = Convert.ToDecimal(budgetAppropriationDict["amount"]);
+                decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
+                decimal totalSupplementalAppropriation = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0? 0 : dtSupplementalAppropriation.Compute("Sum(amount)", string.Empty));
+
+                appropriationBalance = (budgetAppropriation + totalSupplementalAppropriation) - totalAllotmentRelease;
             }
 
             return appropriationBalance;
@@ -152,7 +157,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
 
 
-
         internal string GetFormErrors()
         {
             var errorArray = new string[3];
@@ -173,7 +177,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 txtBalance.Text = GetBudgetAppropriationBalance().ToString("N2");
             }
         }
-
 
         internal void ResetForm() 
         {

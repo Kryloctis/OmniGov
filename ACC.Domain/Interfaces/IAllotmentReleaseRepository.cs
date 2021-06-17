@@ -12,5 +12,7 @@ namespace ACC.Domain.Interfaces
         bool AllotmentReleaseNoExist(string allotmentReleaseNo);
 
         bool Insert(AllotmentReleaseModel entity, List<AllotmentAccountModel> listAllotmentAccount);
+
+        DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId);
     }
 }

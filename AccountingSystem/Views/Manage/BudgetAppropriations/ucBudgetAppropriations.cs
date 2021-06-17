@@ -180,20 +180,18 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
-
-            decimal totalSupplementalApprorpriationAmount = Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountById(budgetAppropriationId);
+            var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(budgetAppropriationId);
+            decimal totalSupplementalApprorpriationAmount = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0? 0 : dtSupplementalAppropriation.Compute("SUM(amount)", string.Empty));
 
             decimal appropriationAmount = nudAmount.Value;
 
             decimal totalAppropriationAmount = totalSupplementalApprorpriationAmount + appropriationAmount;
 
             if (string.IsNullOrEmpty(nudAmount.Text))
-            {
                 e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
-            }
             else if (nudAmount.Value == 0)
             {
-                epAmount.SetError(nudAmount, Helper.ErrorMessage("Valuable Amount"));
+                epAmount.SetError(nudAmount, Helper.ErrorMessage("Amount"));
                 e.Cancel = true;
             }
             else if(totalAppropriationAmount < totalAllotmentRelease)
@@ -206,27 +204,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
         private void nudAmount_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
-        }
-
-
-        private void ucBudgetAppropriations_Load(object sender, EventArgs e)
-        {
-            if (!DesignMode)
-            {
-                var fppRepo = Factory.FunctionProgramProjectRepository().GetRecordByID(fppId);
-                var fundRepo = Factory.FundsRepository().GetRecordByID(fundId);
-                var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
-                txtFPP.Text = $"{fppRepo["fpp_code"]} - {fppRepo["fpp_name"]}";
-                txtFund.Text = $"{fundRepo["fund_code"]} - {fundRepo["fund_name"]}";
-                txtAllotmentClass.Text = $"{allotmentClassRepo["allotment_code"]} - {allotmentClassRepo["allotment_name"]}";
-                txtYear.Text = year.ToString();
-                dtDateEntry.MaxDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
-
-                LoadOthersFPPByFPPIdCombobox();
-                LoadAccounts();
-                cmbxAccount.SelectedIndex = -1;
-                cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
-            }
         }
 
 
@@ -305,6 +282,28 @@ namespace BudgetSystem.Views.BudgetAppropriations
             {
                 LoadAccounts();
                 cmbxAccount.DroppedDown = true;
+            }
+        }
+
+
+
+        private void ucBudgetAppropriations_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                var fppRepo = Factory.FunctionProgramProjectRepository().GetRecordByID(fppId);
+                var fundRepo = Factory.FundsRepository().GetRecordByID(fundId);
+                var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
+                txtFPP.Text = $"{fppRepo["fpp_code"]} - {fppRepo["fpp_name"]}";
+                txtFund.Text = $"{fundRepo["fund_code"]} - {fundRepo["fund_name"]}";
+                txtAllotmentClass.Text = $"{allotmentClassRepo["allotment_code"]} - {allotmentClassRepo["allotment_name"]}";
+                txtYear.Text = year.ToString();
+                dtDateEntry.MaxDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
+
+                LoadOthersFPPByFPPIdCombobox();
+                LoadAccounts();
+                cmbxAccount.SelectedIndex = -1;
+                cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
             }
         }
     }
