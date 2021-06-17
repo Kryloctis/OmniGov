@@ -32,6 +32,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNew = new System.Windows.Forms.ToolStripButton();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.btnSearch = new System.Windows.Forms.ToolStripButton();
             this.ucAllotmentReleaseMain1 = new AccountingSystem.Views.Manage.AllotmentRelease.ucAllotmentReleaseMain();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -41,7 +42,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNew,
-            this.btnSave});
+            this.btnSave,
+            this.btnSearch});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 0, 1, 0);
@@ -54,6 +56,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnNew.Image = global::AccountingSystem.Properties.Resources.create_new_28px;
             this.btnNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNew.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(35, 47);
             this.btnNew.Text = "&New";
@@ -70,6 +73,19 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnSave.Text = "&Save";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnSearch.Image = global::AccountingSystem.Properties.Resources.find;
+            this.btnSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(55, 47);
+            this.btnSearch.Text = "&Search...";
+            this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // ucAllotmentReleaseMain1
             // 
@@ -106,5 +122,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal System.Windows.Forms.ToolStripButton btnSave;
         internal System.Windows.Forms.ToolStripButton btnNew;
         private ucAllotmentReleaseMain ucAllotmentReleaseMain1;
+        private System.Windows.Forms.ToolStripButton btnSearch;
     }
 }

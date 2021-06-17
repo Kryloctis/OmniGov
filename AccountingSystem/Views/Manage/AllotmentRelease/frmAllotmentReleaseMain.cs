@@ -69,5 +69,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 UnsavedWorkPrompt();
             }
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            _ = new frmAllotmentReleaseSearch().ShowDialog();
+        }
     }
 }
