@@ -541,13 +541,37 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         }
 
 
-        private bool ShowErrorSeriesNo(ErrorProvider ep, MaskedTextBox maskedTxtSeriesNo, MaskedTextBox maskedTxtYear)
+
+
+        private bool AllotmentNotReleaseExist() 
         {
             try
             {
-                if (!maskedTxtSeriesNo.MaskCompleted)
+                string allotmentReleaseNo = $"{mskSeriesNo.Text}-{mskYear.Text}";
+                var allotmentReleaseNoExist =  Factory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseNo);
+
+                if (allotmentReleaseNoExist) 
                 {
-                    ep.SetError(maskedTxtYear, "Series No. is required.");
+                    epARONo.SetError(mskYear, "ARO No. is already exist.");
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return false;
+        }
+
+        private bool ShowErrorSeriesNo()
+        {
+            try
+            {
+                if (!mskSeriesNo.MaskCompleted)
+                {
+                    epARONo.SetError(mskYear, "Series No. is required.");
                     return true;
                 }
             }
@@ -558,9 +582,20 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return false;
         }
 
+
+        private bool AllotmentReleaseValidation() 
+        {
+            if (ShowErrorSeriesNo())
+                return true;
+            else if (AllotmentNotReleaseExist())
+                return true;
+
+            return false;
+        }
+
         private void mskSeriesNo_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = ShowErrorSeriesNo(epARONo, mskSeriesNo, mskYear);
+            e.Cancel = AllotmentReleaseValidation();
         }
 
         private void mskSeriesNo_Validated(object sender, EventArgs e)

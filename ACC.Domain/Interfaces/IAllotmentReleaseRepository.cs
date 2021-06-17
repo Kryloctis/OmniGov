@@ -8,6 +8,9 @@ namespace ACC.Domain.Interfaces
 {
     public interface IAllotmentReleaseRepository : IRepository<AllotmentReleaseModel>
     {
+
+        bool AllotmentReleaseNoExist(string allotmentReleaseNo);
+
         bool Insert(AllotmentReleaseModel entity, List<AllotmentAccountModel> listAllotmentAccount);
     }
 }

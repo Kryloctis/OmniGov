@@ -38,53 +38,6 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-
-        public DataTable GetRecordsByBudgetAppropriationID(int budgetAppropriationID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public DataTable GetRecordsByBudgetAppropriationID(int budgetAppropriationID, string allotmentReleaseNum)
-        {
-            throw new NotImplementedException();
-        }
-
-        public decimal GetTotalAllotmentReleaseByDateYear(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, DateTime dateIssued, short year)
-        {
-            throw new NotImplementedException();
-        }
-
-        public decimal GetTotalAllotmentReleaseByYear(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int AccountId, short year)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public decimal GetViewTotalAllotmentReleaseByIdDateYear(int budgetAppropriationId, DateTime dateIssued, short year)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool allotmentReleaseExist(int budgetAppropriationId, string dateIssued)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool allotmentReleaseExist(int id, int budgetAppropriationId, string dateIssued)
-        {
-            throw new NotImplementedException();
-        }
-
-        public decimal GetTotalAllotmentReleaseByIds(int fundId, int allotmentClassId, int fppId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IdExist(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public DataTable GetRecords()
         {
             throw new NotImplementedException();
@@ -106,6 +59,7 @@ namespace ACC.Data
         }
 
 
+        //INSERT
         public int GetLastInsertedID()
         {
             try
@@ -152,5 +106,48 @@ namespace ACC.Data
             }
         }
 
+
+        //VALIDATIONS
+
+        public bool allotmentReleaseExist(int budgetAppropriationId, string dateIssued)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool allotmentReleaseExist(int id, int budgetAppropriationId, string dateIssued)
+        {
+            throw new NotImplementedException();
+        }
+
+        public decimal GetTotalAllotmentReleaseByIds(int fundId, int allotmentClassId, int fppId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IdExist(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AllotmentReleaseNoExist(string allotmentReleaseNo)
+        {
+            try
+            {
+                var parameters = new object[][] 
+                {
+                    new object[] { "@aro_no", DbType.String, allotmentReleaseNo }
+                };
+
+                string query = $"SELECT id FROM {tableName} WHERE aro_no = @aro_no";
+                string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return false;
+        }
     }
 }
