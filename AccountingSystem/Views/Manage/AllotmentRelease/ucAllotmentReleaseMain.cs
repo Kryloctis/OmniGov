@@ -12,6 +12,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
     public partial class ucAllotmentReleaseMain : UserControl
     {
+
+        internal int allotmentReleaseId = 0;
         internal int fppId = 0;
         internal int fundId = 0;
         internal int allotmentClassId = 0;
@@ -437,7 +439,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
                 var allotmentReleaseAddForm = new frmAllotmentReleaseAdd(this);
                 var uc = allotmentReleaseAddForm.ucAllotmentRelease1;
-                uc.fppID = Convert.ToInt32(cmbxFPP.SelectedValue);
+                uc.fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
                 uc.othersFPPId = string.IsNullOrEmpty(cmbxSubFPP.Text) ? null : Convert.ToInt32(cmbxSubFPP.SelectedValue);
                 uc.fundId = fundId;
                 uc.allotmentClassId = Convert.ToInt32(allotmentClassId);

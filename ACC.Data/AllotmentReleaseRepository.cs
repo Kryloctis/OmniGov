@@ -187,5 +187,54 @@ namespace ACC.Data
                throw;
             }
         }
+
+        public bool AllotmentReleaseExist(int budgetAppropriationId, DateTime dateIssued)
+        {
+            try
+            {
+                var parameters = new object[][] 
+                {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId },
+                    new object[] { "@date_issued", DbType.Date, dateIssued.Date }
+                };
+
+                string query = $"SELECT allotment_release_id FROM {viewTableName} WHERE budget_appropriations_id = @budget_appropriations_id AND date_issued = @date_issued";
+                string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return false;
+        }
+
+        public bool AllotmentReleaseExist(int Id, int budgetAppropriationId, DateTime dateIssued)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@allotment_release_id", DbType.Int32, Id },
+                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId },
+                    new object[] { "@date_issued", DbType.Date, dateIssued.Date }
+                };
+
+                string query = $"SELECT allotment_release_id FROM {viewTableName} WHERE allotment_release_id = @allotment_release_id AND budget_appropriations_id = @budget_appropriations_id AND date_issued = @date_issued";
+                string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return false;
+        }
     }
 }

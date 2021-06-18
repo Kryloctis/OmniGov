@@ -14,5 +14,9 @@ namespace ACC.Domain.Interfaces
         bool Insert(AllotmentReleaseModel entity, List<AllotmentAccountModel> listAllotmentAccount);
 
         DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId);
+
+        bool AllotmentReleaseExist(int budgetAppropriationId, DateTime dateIssued);
+
+        bool AllotmentReleaseExist(int Id ,int budgetAppropriationId, DateTime dateIssued);
     }
 }

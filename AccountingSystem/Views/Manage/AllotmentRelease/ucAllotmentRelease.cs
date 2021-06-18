@@ -13,7 +13,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
     public partial class ucAllotmentRelease : UserControl
     {
-        internal int fppID;
+        internal int fppId;
         internal int? othersFPPId;
         internal int allotmentClassId;
         internal int fundId;
@@ -39,7 +39,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
             var budgetAppropriationsModel = new BudgetAppropriationsModel()
             {
-                FunctionProgramProjectId = fppID,
+                FunctionProgramProjectId = fppId,
                 OthersFPPId = othersFPPId,
                 AllotmentClassesId = allotmentClassId,
                 FundsId = fundId,
@@ -249,6 +249,36 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         }
 
 
+        private bool AllotmentReleaseExist() 
+        {
+            try
+            {
+
+                bool allotmentReleaseExist;
+                int allotmentReleaseId = _ucAllotmentMain.allotmentReleaseId;
+                int budgetAppropriationId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
+                var dateIssued = _ucAllotmentMain.dtDateIssued.Value;
+
+                if (allotmentReleaseId == 0)
+                    allotmentReleaseExist = Factory.AllotmentReleaseRepository().AllotmentReleaseExist(budgetAppropriationId, dateIssued);
+                else
+                    allotmentReleaseExist = Factory.AllotmentReleaseRepository().AllotmentReleaseExist(allotmentReleaseId, budgetAppropriationId, dateIssued);
+
+                if (allotmentReleaseExist)
+                {
+                    epBudgetAppropriation.SetError(cmbxBudgetAppropriations, "Budget appropriation acount you entered has an allotment released on the date it was issued.");
+                    return allotmentReleaseExist;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
         private bool BudgetAppropriationExistOnList()
         {
             int budgetAppropriationId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
@@ -280,6 +310,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     return true;
                 }
                 else if (BudgetAppropriationExistOnList())
+                    return true;
+                else if (AllotmentReleaseExist())
                     return true;
             }
             catch (Exception ex)
