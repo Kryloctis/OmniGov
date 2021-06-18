@@ -251,10 +251,19 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal void ResetForm()
         {
             panel1.Enabled = true;
+    
             mskSeriesNo.Text = string.Empty;
             dtDateIssued.Value = DateTime.Now;
             dtDateIssued.Enabled = true;
+
+            //FPP
+            cmbxFPP.TextChanged -= new EventHandler(cmbxFPP_TextChanged);
+            cmbxFPP.SelectedValueChanged -= new EventHandler(cmbxFPP_SelectedValueChanged);
             LoadFPP();
+            cmbxFPP.SelectedIndex = -1;
+            cmbxFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
+            cmbxFPP.SelectedValueChanged += new EventHandler(cmbxFPP_SelectedValueChanged);
+
             LoadAllotmentClasses();
             dgAllotmentRelease.Rows.Clear();
             txtPurpose.Text = string.Empty;

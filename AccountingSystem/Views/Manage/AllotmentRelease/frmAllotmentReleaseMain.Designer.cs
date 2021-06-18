@@ -31,11 +31,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNew = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
-            this.ucAllotmentReleaseMain1 = new AccountingSystem.Views.Manage.AllotmentRelease.ucAllotmentReleaseMain();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ucAllotmentReleaseMain1 = new AccountingSystem.Views.Manage.AllotmentRelease.ucAllotmentReleaseMain();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,6 +67,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNew.Click += new System.EventHandler(this.BtnNew_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
             // btnSave
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save28px;
@@ -91,14 +96,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // ucAllotmentReleaseMain1
-            // 
-            this.ucAllotmentReleaseMain1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucAllotmentReleaseMain1.Location = new System.Drawing.Point(18, 53);
-            this.ucAllotmentReleaseMain1.Name = "ucAllotmentReleaseMain1";
-            this.ucAllotmentReleaseMain1.Size = new System.Drawing.Size(673, 565);
-            this.ucAllotmentReleaseMain1.TabIndex = 2;
-            // 
             // btnDelete
             // 
             this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
@@ -108,11 +105,15 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnDelete.Size = new System.Drawing.Size(44, 47);
             this.btnDelete.Text = "&Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // toolStripSeparator1
+            // ucAllotmentReleaseMain1
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            this.ucAllotmentReleaseMain1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ucAllotmentReleaseMain1.Location = new System.Drawing.Point(18, 53);
+            this.ucAllotmentReleaseMain1.Name = "ucAllotmentReleaseMain1";
+            this.ucAllotmentReleaseMain1.Size = new System.Drawing.Size(673, 565);
+            this.ucAllotmentReleaseMain1.TabIndex = 2;
             // 
             // frmAllotmentReleaseMain
             // 
@@ -142,7 +143,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal System.Windows.Forms.ToolStripButton btnNew;
         private ucAllotmentReleaseMain ucAllotmentReleaseMain1;
         private System.Windows.Forms.ToolStripButton btnSearch;
-        private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        internal System.Windows.Forms.ToolStripButton btnDelete;
     }
 }

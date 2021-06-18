@@ -134,6 +134,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 uc.ResetForm();
+                btnDelete.Enabled = false;
                 btnSave.Text = "Save";
             }
         }
@@ -159,6 +160,38 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private void btnSearch_Click(object sender, EventArgs e)
         {
             _ = new frmAllotmentReleaseSearch(this).ShowDialog();
+        }
+
+
+        private bool Delete() 
+        {
+            try
+            {
+                if (Helper.MessageBoxConfirmDelete(1))
+                {
+                    return Factory.AllotmentReleaseRepository().Delete(uc.allotmentReleaseId);
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return false;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (Delete()) 
+            {
+                Helper.MessageBoxSuccess($"Allotment Release records has been deleted.");
+                uc.ResetForm();
+                btnDelete.Enabled = false;
+                btnSave.Text = "Save";
+            }
         }
     }
 }

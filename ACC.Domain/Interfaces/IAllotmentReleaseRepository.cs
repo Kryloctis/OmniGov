@@ -9,13 +9,15 @@ namespace ACC.Domain.Interfaces
     public interface IAllotmentReleaseRepository : IRepository<AllotmentReleaseModel>
     {
 
-        bool AllotmentReleaseNoExist(string allotmentReleaseNo);
-
-        bool AllotmentReleaseNoExist(int Id, string allotmentReleaseNo);
-
         bool Insert(AllotmentReleaseModel entity, List<AllotmentAccountModel> listAllotmentAccount);
 
         bool Update(AllotmentReleaseModel entity, List<AllotmentAccountModel> listAllotmentAccount);
+
+        bool Delete(int allotmentReleaseId);
+
+        bool AllotmentReleaseNoExist(string allotmentReleaseNo);
+
+        bool AllotmentReleaseNoExist(int Id, string allotmentReleaseNo);
 
         DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId);
 

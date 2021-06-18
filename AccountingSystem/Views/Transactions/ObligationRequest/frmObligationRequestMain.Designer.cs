@@ -94,6 +94,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnDelete.Size = new System.Drawing.Size(44, 47);
             this.btnDelete.Text = "&Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click_1);
             // 
             // toolStripSeparator1
             // 
@@ -109,6 +110,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnCancel.Size = new System.Drawing.Size(47, 47);
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click_1);
             // 
             // btnSearch
             // 

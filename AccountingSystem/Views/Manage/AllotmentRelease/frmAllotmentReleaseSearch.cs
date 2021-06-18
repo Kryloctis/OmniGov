@@ -56,6 +56,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             if (AllotmentReleaseNoExist())
             {
                 _frmAllotmentReleaseMain.btnSave.Text = "Update";
+                _frmAllotmentReleaseMain.btnDelete.Enabled = true;
                 Close();
             }
         }

@@ -244,6 +244,33 @@ namespace ACC.Data
             }
         }
 
+        //DELETE
+        public bool Delete(int allotmentReleaseId)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope()) 
+                {
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@id", DbType.Int32, allotmentReleaseId}
+                    };
+
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = _allotmentAccountRepository.DeleteByAllotmentReleaseId(allotmentReleaseId);
+                    _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                   
+
+                    scope.Complete();
+                    return true;
+                };
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         //VALIDATIONS
 
@@ -395,7 +422,6 @@ namespace ACC.Data
 
             return false;
         }
-
 
     }
 }

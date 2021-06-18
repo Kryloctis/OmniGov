@@ -263,6 +263,8 @@ namespace ACC.Data
             }
         }
 
+
+        //INSERT
         public bool Insert(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels)
         {
             try
@@ -328,6 +330,7 @@ namespace ACC.Data
             }
         }
 
+        //UPDATE
         public bool Update(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels)
         {
             try
@@ -372,6 +375,7 @@ namespace ACC.Data
             }
         }
 
+        //DELETE
         public bool Delete(int obligationRequestId)
         {
             try
