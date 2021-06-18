@@ -34,7 +34,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.cmbxOthersFPP = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.cmbxLedgerAccount = new System.Windows.Forms.ComboBox();
+            this.cmbxAccount = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.nudAmount = new System.Windows.Forms.NumericUpDown();
@@ -95,17 +95,17 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.label3.TabIndex = 1;
             this.label3.Text = "Allotment Class";
             // 
-            // cmbxLedgerAccount
+            // cmbxAccount
             // 
-            this.cmbxLedgerAccount.FormattingEnabled = true;
-            this.cmbxLedgerAccount.IntegralHeight = false;
-            this.cmbxLedgerAccount.Location = new System.Drawing.Point(96, 174);
-            this.cmbxLedgerAccount.Name = "cmbxLedgerAccount";
-            this.cmbxLedgerAccount.Size = new System.Drawing.Size(436, 23);
-            this.cmbxLedgerAccount.TabIndex = 6;
-            this.cmbxLedgerAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxLedgerAccount_KeyDown);
-            this.cmbxLedgerAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxLedgerAccount_Validating);
-            this.cmbxLedgerAccount.Validated += new System.EventHandler(this.cmbxLedgerAccount_Validated);
+            this.cmbxAccount.FormattingEnabled = true;
+            this.cmbxAccount.IntegralHeight = false;
+            this.cmbxAccount.Location = new System.Drawing.Point(96, 174);
+            this.cmbxAccount.Name = "cmbxAccount";
+            this.cmbxAccount.Size = new System.Drawing.Size(436, 23);
+            this.cmbxAccount.TabIndex = 6;
+            this.cmbxAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxAccount_KeyDown);
+            this.cmbxAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAccount_Validating);
+            this.cmbxAccount.Validated += new System.EventHandler(this.cmbxAccount_Validated);
             // 
             // label4
             // 
@@ -267,7 +267,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.cmbxLedgerAccount);
+            this.Controls.Add(this.cmbxAccount);
             this.Controls.Add(this.cmbxOthersFPP);
             this.Name = "ucBudgetAppropriations";
             this.Size = new System.Drawing.Size(554, 284);
@@ -291,7 +291,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
         private System.Windows.Forms.ErrorProvider epAmount;
         private System.Windows.Forms.ErrorProvider epGeneralLedgerAcc;
         internal System.Windows.Forms.ComboBox cmbxOthersFPP;
-        internal System.Windows.Forms.ComboBox cmbxLedgerAccount;
+        internal System.Windows.Forms.ComboBox cmbxAccount;
         internal System.Windows.Forms.NumericUpDown nudAmount;
         private System.Windows.Forms.Label label6;
         internal System.Windows.Forms.DateTimePicker dtDateEntry;

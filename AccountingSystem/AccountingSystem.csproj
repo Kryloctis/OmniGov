@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Manage\AllotmentReleaseDetails\**" />
     <Compile Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
+    <EmbeddedResource Remove="Views\Manage\AllotmentReleaseDetails\**" />
     <EmbeddedResource Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
+    <None Remove="Views\Manage\AllotmentReleaseDetails\**" />
     <None Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
   </ItemGroup>
 

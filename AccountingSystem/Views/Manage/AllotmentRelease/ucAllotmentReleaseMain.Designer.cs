@@ -37,16 +37,16 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.flowLayoutPanelFunds = new System.Windows.Forms.FlowLayoutPanel();
             this.cmbxFPP = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.cmbxOthersFPP = new System.Windows.Forms.ComboBox();
+            this.cmbxSubFPP = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.epFPP = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epOthersFPP = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epSubFPP = new System.Windows.Forms.ErrorProvider(this.components);
             this.epARONo = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dtDateIssued = new System.Windows.Forms.DateTimePicker();
-            this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelAllotmentClass = new System.Windows.Forms.FlowLayoutPanel();
+            this.dtDateIssued = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
             this.epPurpose = new System.Windows.Forms.ErrorProvider(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.mskYear = new System.Windows.Forms.MaskedTextBox();
@@ -57,7 +57,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             ((System.ComponentModel.ISupportInitialize)(this.dgAllotmentRelease)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epOthersFPP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epSubFPP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epARONo)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -76,6 +76,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.dgAllotmentRelease.TabIndex = 7;
             this.dgAllotmentRelease.Tag = "";
             this.dgAllotmentRelease.SelectionChanged += new System.EventHandler(this.dgAllotmentRelease_SelectionChanged);
+            this.dgAllotmentRelease.Validating += new System.ComponentModel.CancelEventHandler(this.dgAllotmentRelease_Validating);
+            this.dgAllotmentRelease.Validated += new System.EventHandler(this.dgAllotmentRelease_Validated);
             // 
             // btnAdd
             // 
@@ -126,6 +128,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.cmbxFPP.Name = "cmbxFPP";
             this.cmbxFPP.Size = new System.Drawing.Size(581, 23);
             this.cmbxFPP.TabIndex = 0;
+            this.cmbxFPP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxFPP_KeyDown);
             this.cmbxFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxFPP_Validating);
             this.cmbxFPP.Validated += new System.EventHandler(this.cmbxFPP_Validated);
             // 
@@ -138,32 +141,33 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.label5.TabIndex = 12;
             this.label5.Text = "FPP";
             // 
-            // cmbxOthersFPP
+            // cmbxSubFPP
             // 
-            this.cmbxOthersFPP.FormattingEnabled = true;
-            this.cmbxOthersFPP.Location = new System.Drawing.Point(66, 35);
-            this.cmbxOthersFPP.Name = "cmbxOthersFPP";
-            this.cmbxOthersFPP.Size = new System.Drawing.Size(581, 23);
-            this.cmbxOthersFPP.TabIndex = 1;
-            this.cmbxOthersFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxOthersFPP_Validating);
-            this.cmbxOthersFPP.Validated += new System.EventHandler(this.cmbxOthersFPP_Validated);
+            this.cmbxSubFPP.FormattingEnabled = true;
+            this.cmbxSubFPP.Location = new System.Drawing.Point(66, 35);
+            this.cmbxSubFPP.Name = "cmbxSubFPP";
+            this.cmbxSubFPP.Size = new System.Drawing.Size(581, 23);
+            this.cmbxSubFPP.TabIndex = 1;
+            this.cmbxSubFPP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxSubFPP_KeyDown);
+            this.cmbxSubFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxSubFPP_Validating);
+            this.cmbxSubFPP.Validated += new System.EventHandler(this.cmbxSubFPP_Validated);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(0, 38);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(60, 15);
+            this.label6.Size = new System.Drawing.Size(50, 15);
             this.label6.TabIndex = 12;
-            this.label6.Text = "Other FPP";
+            this.label6.Text = "Sub FPP";
             // 
             // epFPP
             // 
             this.epFPP.ContainerControl = this;
             // 
-            // epOthersFPP
+            // epSubFPP
             // 
-            this.epOthersFPP.ContainerControl = this;
+            this.epSubFPP.ContainerControl = this;
             // 
             // epARONo
             // 
@@ -172,7 +176,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // panel1
             // 
             this.panel1.Controls.Add(this.groupBox2);
-            this.panel1.Controls.Add(this.cmbxOthersFPP);
+            this.panel1.Controls.Add(this.cmbxSubFPP);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.label5);
@@ -181,23 +185,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(673, 175);
             this.panel1.TabIndex = 0;
-            // 
-            // dtDateIssued
-            // 
-            this.dtDateIssued.Location = new System.Drawing.Point(431, 181);
-            this.dtDateIssued.Name = "dtDateIssued";
-            this.dtDateIssued.Size = new System.Drawing.Size(216, 23);
-            this.dtDateIssued.TabIndex = 5;
-            this.dtDateIssued.ValueChanged += new System.EventHandler(this.dtDateIssued_ValueChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(358, 183);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 15);
-            this.label2.TabIndex = 34;
-            this.label2.Text = "Date Issued";
             // 
             // groupBox2
             // 
@@ -218,6 +205,23 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.flowLayoutPanelAllotmentClass.Name = "flowLayoutPanelAllotmentClass";
             this.flowLayoutPanelAllotmentClass.Size = new System.Drawing.Size(641, 31);
             this.flowLayoutPanelAllotmentClass.TabIndex = 3;
+            // 
+            // dtDateIssued
+            // 
+            this.dtDateIssued.Location = new System.Drawing.Point(431, 181);
+            this.dtDateIssued.Name = "dtDateIssued";
+            this.dtDateIssued.Size = new System.Drawing.Size(216, 23);
+            this.dtDateIssued.TabIndex = 5;
+            this.dtDateIssued.ValueChanged += new System.EventHandler(this.dtDateIssued_ValueChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(358, 183);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(67, 15);
+            this.label2.TabIndex = 34;
+            this.label2.Text = "Date Issued";
             // 
             // epPurpose
             // 
@@ -303,12 +307,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.Name = "ucAllotmentReleaseMain";
             this.Size = new System.Drawing.Size(670, 562);
             this.Load += new System.EventHandler(this.ucAllotmentReleaseMain_Load);
-            this.Validating += new System.ComponentModel.CancelEventHandler(this.ucAllotmentReleaseMain_Validating);
-            this.Validated += new System.EventHandler(this.ucAllotmentReleaseMain_Validated);
             ((System.ComponentModel.ISupportInitialize)(this.dgAllotmentRelease)).EndInit();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epOthersFPP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epSubFPP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epARONo)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -327,9 +329,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal System.Windows.Forms.ComboBox cmbxFPP;
         private System.Windows.Forms.ComboBox CMB;
         private System.Windows.Forms.ComboBox cc;
-        internal System.Windows.Forms.ComboBox cmbxOthersFPP;
+        internal System.Windows.Forms.ComboBox cmbxSubFPP;
         internal System.Windows.Forms.ErrorProvider epFPP;
-        internal System.Windows.Forms.ErrorProvider epOthersFPP;
+        internal System.Windows.Forms.ErrorProvider epSubFPP;
         internal System.Windows.Forms.ErrorProvider epARONo;
         internal System.Windows.Forms.Button btnAdd;
         internal System.Windows.Forms.Button btnRemove;

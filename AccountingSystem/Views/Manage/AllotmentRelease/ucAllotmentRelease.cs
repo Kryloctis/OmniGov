@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,12 +13,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
     public partial class ucAllotmentRelease : UserControl
     {
-        internal int fppID;
+        internal int fppId;
         internal int? othersFPPId;
         internal int allotmentClassId;
         internal int fundId;
         internal DateTime dateIssued;
-        private ucAllotmentReleaseMain ucAllotmentMain;
+        private ucAllotmentReleaseMain _ucAllotmentMain;
 
         public ucAllotmentRelease()
         {
@@ -26,297 +27,220 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal void LoadReference(ucAllotmentReleaseMain ucAllotmentReleaseMain)
         {
-            ucAllotmentMain = ucAllotmentReleaseMain;
+            _ucAllotmentMain = ucAllotmentReleaseMain;
         }
 
-        internal void ResetForm() 
+
+        //ACCOUNT COMBOBOX
+
+        private DataTable DatatableBudgetAppropriations()
         {
-            LoadAccounts();
-            DisplayBudgetAppropriationsDetails();
-            nudAmount.Value = 0;
-        }
+            var dtBudgetAppropriation = new DataTable();
 
-        internal string GetFormErrors()
-        {
-            var errorArray = new string[2];
-            errorArray[0] = epAccount.GetError(cmbxAccount);
-            errorArray[1] = epAmount.GetError(nudAmount);
-
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
-        }
-
-        private Dictionary<string, decimal> ShowAmounts() 
-        {
-           
-            short year = Convert.ToInt16(nudYear.Value);
-
-            int generalLedgerAccountId = Convert.ToInt32(cmbxAccount.SelectedValue);
-
-            var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetViewRecord(fppID, othersFPPId, fundId, allotmentClassId, generalLedgerAccountId, dateIssued, year);
-
-            decimal appropriationAmount = budgetAppropriationRepo.Count == 0 || (Convert.ToByte(budgetAppropriationRepo["continuing"]) == 0 && dateIssued.Year > year) ? 0 : Convert.ToDecimal(budgetAppropriationRepo["amount"]);
-
-            decimal supplementalAppropriationAmount = budgetAppropriationRepo.Count == 0 || (Convert.ToByte(budgetAppropriationRepo["continuing"]) == 0 && dateIssued.Year > year) ? 0 : Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountByIdAndDateEntry(Convert.ToInt32(budgetAppropriationRepo["id"]), dateIssued);
-
-            decimal totalAllotmentReleaseAmount = budgetAppropriationRepo.Count == 0 || (Convert.ToByte(budgetAppropriationRepo["continuing"]) == 0 && dateIssued.Year > year) ? 0 : Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountById(Convert.ToInt32(budgetAppropriationRepo["id"]));
-
-
-            decimal totalAppropriation = appropriationAmount + supplementalAppropriationAmount;
-
-            decimal appropriationBalance = totalAppropriation - totalAllotmentReleaseAmount;
-
-            var record = new Dictionary<string, decimal>()
+            var budgetAppropriationsModel = new BudgetAppropriationsModel()
             {
-                {"totalAppropriation", totalAppropriation},
-                {"appropriationBalance", appropriationBalance}
+                FunctionProgramProjectId = fppId,
+                OthersFPPId = othersFPPId,
+                AllotmentClassesId = allotmentClassId,
+                FundsId = fundId,
+                Year = Convert.ToInt16(nudYear.Value)
             };
 
-            return record;
+            string searchTxt = cmbxBudgetAppropriations.Text.Trim();
+
+            if (string.IsNullOrEmpty(cmbxBudgetAppropriations.Text))
+                dtBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(budgetAppropriationsModel);
+            else
+                dtBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordsByIdsSearch(budgetAppropriationsModel, searchTxt);
+
+
+            return dtBudgetAppropriation;
         }
 
-        private void DisplayBudgetAppropriationsDetails()
+        private void LoadBudgetAppropriations()
         {
             try
             {
-                txtAppropriation.Text = ShowAmounts()["totalAppropriation"].ToString("N2");
-                txtBalance.Text = ShowAmounts()["appropriationBalance"].ToString("N2");
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
+                cmbxBudgetAppropriations.DroppedDown = false;
+                Cursor.Current = Cursors.Default;
 
-        internal bool AllotmentReleaseExist()
-        {
-            try
-            {
-
-                short year = (short)nudYear.Value;
-
-                int generalLedgerAccountId = Convert.ToInt32(cmbxAccount.SelectedValue);
-
-                var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetViewRecord(fppID, othersFPPId, fundId, allotmentClassId, generalLedgerAccountId, dateIssued, year);
-
-                if (budgetAppropriationRepo.Count > 0)
-                {
-                    int budgetAppropriationId = Convert.ToInt32(budgetAppropriationRepo["id"]);
-
-
-                    var allotmentReleaseExist = Factory.AllotmentReleaseRepository().allotmentReleaseExist(budgetAppropriationId, dateIssued.ToString("yyyy-MM-dd"));
-
-                    if (allotmentReleaseExist)
-                    {
-                        epAccount.SetError(cmbxAccount, "Account you entered has a allotment Release already exist on the date it was issued.");
-                        return true;
-                    }
-                }
-                else
-                    return false;
-
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        internal bool AccountExistOnList() 
-        {
-            try
-            {
-                int accountId = Convert.ToInt32(cmbxAccount.SelectedValue);
-
-                foreach (DataGridViewRow item in ucAllotmentMain.dgAllotmentRelease.Rows) 
-                {
-                    if (Convert.ToInt32(item.Cells["account_id"].Value) == accountId) 
-                    {
-                        epAccount.SetError(cmbxAccount, "Can't add account to the list. Account you entered was already on the List.");
-                        return true;                   
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-
-        private void LoadAccounts()
-        {
-            try
-            {
-                cmbxAccount.DataSource = null;
-
-                var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
-
-                string allotmentClassName = allotmentClassRepo["allotment_name"];
-
-                DataTable dtAccounts;
-
-                if (allotmentClassId == 4)
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsBySearch(cmbxAccount.Text);
-                else
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupNameSearch(allotmentClassName, cmbxAccount.Text);
+                if (DatatableBudgetAppropriations().Rows.Count == 0) return;
 
                 var accountDict = new Dictionary<int, string>();
-                foreach (DataRow item in dtAccounts.Rows)
+                foreach (DataRow item in DatatableBudgetAppropriations().Rows)
                 {
-                    int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
-                    string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
+                    int accountId = Convert.ToInt32(item["id"]);
+                    string remarks = string.IsNullOrEmpty(item["remarks"].ToString())? string.Empty : $"({item["remarks"]})";
+                    string accountName = $"{item["account_code"]} - {item["general_ledger_accounts_name"]} {remarks}";
+                    bool isContinuing = Convert.ToByte(item["continuing"]) == 1 ? true : false;
+                    short year = Convert.ToInt16(item["year"]);
 
-                    accountDict.Add(accountId, accountName);
+                    if(!isContinuing && year == nudYear.Value)
+                        accountDict.Add(accountId, accountName);
+                    else if(isContinuing && year <= nudYear.Value)
+                        accountDict.Add(accountId, accountName);
                 }
 
-                cmbxAccount.DataSource = new BindingSource(accountDict, null);
-                cmbxAccount.DisplayMember = "value";
-                cmbxAccount.ValueMember = "key";
-                cmbxAccount.SelectedIndex = -1;
+                cmbxBudgetAppropriations.DataSource = accountDict.Count == 0 ? null : new BindingSource(accountDict, null);
+                cmbxBudgetAppropriations.DisplayMember = "value";
+                cmbxBudgetAppropriations.ValueMember = "key";
 
-                Helper.ClearErrorComboBox(epAccount, cmbxAccount);
+
+                cmbxBudgetAppropriations.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
+                cmbxBudgetAppropriations.SelectedIndex = -1;
+                cmbxBudgetAppropriations.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
+                cmbxBudgetAppropriations.SelectedValueChanged += new EventHandler(cmbxBudgetAppropriations_SelectedValueChanged);
+
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError(ex.StackTrace);
+            }
+
+        }
+
+        private void cmbxBudgetAppropriations_SelectedValueChanged(object sender, EventArgs e)
+        {
+            txtBalance.Text = GetBudgetAppropriationBalance().ToString("N2");
+        }
+
+        private decimal GetBudgetAppropriationBalance() 
+        {
+            decimal appropriationBalance = 0;
+
+            if (cmbxBudgetAppropriations.SelectedIndex > -1)
+            {
+                int budgetAppropriationId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
+                var budgetAppropriationDict = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
+                var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
+                var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(budgetAppropriationId);
+
+                decimal budgetAppropriation = Convert.ToDecimal(budgetAppropriationDict["amount"]);
+                decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
+                decimal totalSupplementalAppropriation = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0? 0 : dtSupplementalAppropriation.Compute("Sum(amount)", string.Empty));
+
+                appropriationBalance = (budgetAppropriation + totalSupplementalAppropriation) - totalAllotmentRelease;
+            }
+
+            return appropriationBalance;
+        }
+
+        private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbxBudgetAppropriations.Text))
+            {
+                LoadBudgetAppropriations();
+            }
+        }
+
+        private void cmbxBudgetAppropriations_KeyDown(object sender, KeyEventArgs e)
+        {
+            string searchTxt = cmbxBudgetAppropriations.Text;
+
+            if (e.KeyCode == Keys.F1 && cmbxBudgetAppropriations.FindStringExact(searchTxt) == -1 && !string.IsNullOrEmpty(searchTxt))
+            {
+                LoadBudgetAppropriations();
+                cmbxBudgetAppropriations.SelectedIndex = 0;
+                cmbxBudgetAppropriations.DroppedDown = true;
             }
         }
 
         private void nudYear_ValueChanged(object sender, EventArgs e)
         {
-            DisplayBudgetAppropriationsDetails();
+            cmbxBudgetAppropriations.Text = string.Empty;
+            cmbxBudgetAppropriations.DataSource = null;
+            LoadBudgetAppropriations();
+            cmbxBudgetAppropriations.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
+            cmbxBudgetAppropriations.SelectedIndex = -1;
+            cmbxBudgetAppropriations.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
         }
 
-        private void cmbxAccount_KeyDown(object sender, KeyEventArgs e)
+
+
+        internal string GetFormErrors()
         {
-            if (cmbxAccount.Text.Length < 4) return;
+            var errorArray = new string[3];
+            errorArray[0] = epYear.GetError(nudYear);
+            errorArray[1] = epBudgetAppropriation.GetError(cmbxBudgetAppropriations);
+            errorArray[2] = epAmount.GetError(nudAmount);
 
-            if (e.KeyCode == Keys.F1)
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        private void ucAllotmentRelease_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
             {
-                try
-                {
-                    var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
-
-                    string allotmentClassName = allotmentClassRepo["allotment_name"];
-
-                    DataTable dtAccounts;
-
-                    if (allotmentClassId == 4)
-                        dtAccounts = Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsBySearch(cmbxAccount.Text);
-                    else
-                        dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupNameSearch(allotmentClassName, cmbxAccount.Text);
-
-                    if (dtAccounts.Rows.Count == 0 || string.IsNullOrWhiteSpace(cmbxAccount.Text.Trim())) return;
-
-                    var accountDict = new Dictionary<int, string>();
-                    foreach (DataRow item in dtAccounts.Rows)
-                    {
-                        int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
-                        string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
-
-                        accountDict.Add(accountId, accountName);
-                    }
-
-                    cmbxAccount.DataSource = new BindingSource(accountDict, null);
-                    cmbxAccount.DisplayMember = "value";
-                    cmbxAccount.ValueMember = "key";
-                    cmbxAccount.DroppedDown = true;
-                    DisplayBudgetAppropriationsDetails();
-
-                    Helper.ClearErrorComboBox(epAccount, cmbxAccount);
-                }
-                catch (Exception ex)
-                {
-                    Helper.MessageBoxError(ex.Message);
-                }
+                nudYear.Maximum = dateIssued.Year;
+                nudYear.Value = dateIssued.Year;
+                LoadBudgetAppropriations();
+                txtBalance.Text = GetBudgetAppropriationBalance().ToString("N2");
             }
         }
 
-        private void cmbxAccount_SelectionChangeCommitted(object sender, EventArgs e)
+        internal void ResetForm() 
         {
-            DisplayBudgetAppropriationsDetails();
+            cmbxBudgetAppropriations.DataSource = null;
+            LoadBudgetAppropriations();
+            cmbxBudgetAppropriations.SelectedIndex = -1;
+            cmbxBudgetAppropriations.Focus(); 
+            nudAmount.Value = 0;
         }
 
-        private bool ShowErrorAccountNotExist()
+
+        //VALIDATIONS
+    
+        private void nudYear_Validating(object sender, CancelEventArgs e)
         {
-            try
+            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epYear, nudYear, "Year");
+        }
+
+        private void nudYear_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorNumericUpDown(epYear, nudYear);
+        }
+
+
+        private bool AmountExceeds() 
+        {
+
+            if (nudAmount.Value > GetBudgetAppropriationBalance())
             {
-                if (cmbxAccount.FindStringExact(cmbxAccount.Text) < 0 && !string.IsNullOrEmpty(cmbxAccount.Text))
-                {
-                    epAccount.SetError(cmbxAccount, "Account you entered doesn't exist on your record.");
-                    return true;
-                }
+                epAmount.SetError(nudAmount, "Amount you entered exceeds to the appropriate balance.");
+                return true;
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+
             return false;
         }
 
-        private void cmbxAccount_Validating(object sender, CancelEventArgs e)
-        {
-            if (string.IsNullOrEmpty(cmbxAccount.Text))
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbxAccount, "Account.");
-            else if (ShowErrorAccountNotExist())
-                e.Cancel = ShowErrorAccountNotExist();
-            else if (AllotmentReleaseExist())
-                e.Cancel = AllotmentReleaseExist();
-            else
-                e.Cancel = AccountExistOnList();
-        }
-
-        private void cmbxAccount_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(epAccount, cmbxAccount);
-        }
-
-
-        private bool ShowErrorAmountExceeds(ErrorProvider ep, NumericUpDown numericUpDown)
+        private bool AmountNotValidated() 
         {
             try
             {
-                if (numericUpDown.Value > ShowAmounts()["appropriationBalance"])
+                var isEmpty = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
+
+                if (isEmpty)
                 {
-                    ep.SetError(numericUpDown, "The amount you entered exceeds the appropriate balance.");
                     return true;
                 }
-
+                else if (nudAmount.Value == 0)
+                {
+                    epAmount.SetError(nudAmount, Helper.ErrorMessage("Amount"));
+                    return true;
+                }
+                else if (AmountExceeds())
+                    return AmountExceeds();
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private bool ShowErrorAmountIsZero(ErrorProvider ep, NumericUpDown numericUpDown)
-        {
-            try
-            {
-                if (numericUpDown.Value == 0)
-                {
-                    ep.SetError(numericUpDown, "Valuable Amount is required.");
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError(ex.StackTrace);
             }
             return false;
         }
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(nudAmount.Text))
-                e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount);
-            else if (nudAmount.Value == 0)
-                e.Cancel = ShowErrorAmountIsZero(epAmount, nudAmount);
-            else
-                e.Cancel = ShowErrorAmountExceeds(epAmount, nudAmount);
+            e.Cancel = AmountNotValidated();
         }
 
         private void nudAmount_Validated(object sender, EventArgs e)
@@ -324,14 +248,88 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
 
-        private void ucAllotmentRelease_Load(object sender, EventArgs e)
+
+        private bool AllotmentReleaseExist() 
         {
-            if (!DesignMode)
+            try
             {
-                LoadAccounts();
-                nudYear.Value = DateTime.Now.Year;
+
+                bool allotmentReleaseExist;
+                int allotmentReleaseId = _ucAllotmentMain.allotmentReleaseId;
+                int budgetAppropriationId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
+                var dateIssued = _ucAllotmentMain.dtDateIssued.Value;
+
+                if (allotmentReleaseId == 0)
+                    allotmentReleaseExist = Factory.AllotmentReleaseRepository().AllotmentReleaseExist(budgetAppropriationId, dateIssued);
+                else
+                    allotmentReleaseExist = Factory.AllotmentReleaseRepository().AllotmentReleaseExist(allotmentReleaseId, budgetAppropriationId, dateIssued);
+
+                if (allotmentReleaseExist)
+                {
+                    epBudgetAppropriation.SetError(cmbxBudgetAppropriations, "Budget appropriation acount you entered has an allotment released on the date it was issued.");
+                    return allotmentReleaseExist;
+                }
+
+                return false;
             }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
         }
 
+        private bool BudgetAppropriationExistOnList()
+        {
+            int budgetAppropriationId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
+
+            foreach (DataGridViewRow row in _ucAllotmentMain.dgAllotmentRelease.Rows)
+            {
+                int rowBudgetAppropriationId = Convert.ToInt32(row.Cells["budget_appropriation_id"].Value);
+                if (rowBudgetAppropriationId == budgetAppropriationId)
+                {
+                    epBudgetAppropriation.SetError(cmbxBudgetAppropriations, "Budget Appropriation Account is already on the list.");
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool BudgetAppropriationNotValidated() 
+        {
+            try
+            {
+                var isEmpty = Helper.ShowErrorComboBoxEmpty(epBudgetAppropriation, cmbxBudgetAppropriations, "Budget Appropriation");
+
+                if (isEmpty)
+                    return true;
+                else if (cmbxBudgetAppropriations.FindStringExact(cmbxBudgetAppropriations.Text) < 0 && !string.IsNullOrEmpty(cmbxBudgetAppropriations.Text))
+                {
+                    epBudgetAppropriation.SetError(cmbxBudgetAppropriations, "Budget Appropriation doesn't exist in youe records");
+                    return true;
+                }
+                else if (BudgetAppropriationExistOnList())
+                    return true;
+                else if (AllotmentReleaseExist())
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.StackTrace);
+            }
+            return false;
+        }
+
+        private void cmbxBudgetAppropriations_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = BudgetAppropriationNotValidated();
+        }
+
+        private void cmbxBudgetAppropriations_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epBudgetAppropriation, cmbxBudgetAppropriations);
+        }
+ 
     }
 }

@@ -43,7 +43,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
                     FunctionProgramProjectId = uc.fppId,
                     OthersFPPId = uc.cmbxOthersFPP.SelectedValue == null ? null : Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue),
                     AllotmentClassesId = uc.allotmentClassId,
-                    GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxLedgerAccount.SelectedValue),
+                    GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxAccount.SelectedValue),
                     Year = uc.year,
                     DateEntry = uc.dtDateEntry.Value,
                     Amount = uc.nudAmount.Value,
@@ -72,7 +72,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 _frmBudgetAppropriations.cmbxFunds.SelectedValue = fundID;
 
                 //Reset User Control Form
-                uc.cmbxLedgerAccount.SelectedIndex = -1;
+                uc.cmbxAccount.SelectedIndex = -1;
                 uc.nudAmount.Value = 0;
 
                 Helper.MessageBoxSuccess("Budget Appropriation has been saved.");

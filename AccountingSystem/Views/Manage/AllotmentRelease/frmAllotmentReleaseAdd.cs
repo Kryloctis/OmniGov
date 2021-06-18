@@ -38,26 +38,24 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     return false;
                 }
 
+                int budgetAppropriationId = Convert.ToInt32(uc.cmbxBudgetAppropriations.SelectedValue);
+                var budgetAppropriationsDict = Factory.BudgetAppropriationsRepository().GetViewRecordByID(budgetAppropriationId);
 
-                short year = (short)uc.nudYear.Value;
-                int accountId = Convert.ToInt32(uc.cmbxAccount.SelectedValue);
-
-                var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetViewRecord(uc.fppID, uc.othersFPPId, uc.fundId, uc.allotmentClassId, accountId, uc.dateIssued, year);
-
-                int budgetAppropriationId = Convert.ToInt32(budgetAppropriationRepo["id"]);
-
-                string accountName = budgetAppropriationRepo["general_ledger_accounts_name"];
-                string accountCode = budgetAppropriationRepo["account_code"].ToString();
+                string remarks = string.IsNullOrEmpty(budgetAppropriationsDict["remarks"].ToString()) ? string.Empty : $"({budgetAppropriationsDict["remarks"]})";
+                string accountName = $"{budgetAppropriationsDict["general_ledger_accounts_name"]} {remarks}";
+                string accountCode = budgetAppropriationsDict["account_code"].ToString();
                 decimal amount = uc.nudAmount.Value;
+                short year = (short)uc.nudYear.Value;
 
-                ucAllotmentReleaseMain.dgAllotmentRelease.Rows.Add(new object[]
+                var items = new object[]
                 {
                     budgetAppropriationId,
-                    accountId,
-                    accountCode,
                     accountName,
+                    accountCode,
                     amount
-                });
+                };
+
+                ucAllotmentReleaseMain.dgAllotmentRelease.Rows.Add(items);
 
                 return true;
             }
@@ -72,9 +70,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             if (AddAllotmentRelease())
             {
-                uc.ResetForm();
                 ucAllotmentReleaseMain.panel1.Enabled = false;
                 ucAllotmentReleaseMain.dtDateIssued.Enabled = false;
+                uc.ResetForm();
             }
         }
     }

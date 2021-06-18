@@ -24,7 +24,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         }
 
 
-
         internal void LoadSearched() 
         {
             try
@@ -223,7 +222,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             try
             {
-                var dtOtherFPP = Factory.OthersFPPRepository().GetRecordsByFPPID(Convert.ToInt32(cmbxFPP.SelectedValue));
+                var dtOtherFPP = Factory.OthersFPPRepository().GetRecordsByFPPId(Convert.ToInt32(cmbxFPP.SelectedValue));
 
                 HelperLoadRecords.OthersFPPCombobox(dtOtherFPP, cmbxOtherFPP, "name", "id");
                 cmbxOtherFPP.SelectedIndex = -1;
@@ -243,7 +242,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             else
                 radioButton.Image = null;
         }
-
 
 
 
@@ -291,7 +289,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             var radFund = sender as RadioButton;
             ShowCheckIcon(radFund);
         }
-
 
 
 
@@ -399,7 +396,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
 
 
-
         private bool ShowErrorOthersFPPNameNotExist()
         {
             try
@@ -431,7 +427,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             Helper.ClearErrorComboBox(epOtherFPP, cmbxOtherFPP);
         }
-
 
 
 
@@ -522,7 +517,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             Helper.ClearErrorTextBox(epExplanation, txtExplanation);
         }
-
 
 
 
@@ -618,8 +612,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             EnableDisableButtons();
         }
-
-
 
 
 

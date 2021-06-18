@@ -63,7 +63,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             if (AddToListRecord()) 
             {
                 uc.ResetForm();
-                uc.GetTotalAllotmentBalance();
                 _ucObligationRequestMain.cmbxFPP.Enabled = false;
                 _ucObligationRequestMain.cmbxOtherFPP.Enabled = false;
                 _ucObligationRequestMain.flowLayoutPanelFunds.Enabled = false;

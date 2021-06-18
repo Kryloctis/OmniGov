@@ -139,7 +139,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
         internal void LoadSupplementalApproprations() 
         {
-            var supplementalRepo = Factory.SupplementalAppropriationsRepository().GetRecordsById(budgetAppropriationsId);
+            var supplementalRepo = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(budgetAppropriationsId);
 
             HelperLoadRecords.SupplementalDatagridView(supplementalRepo, dataGridView1);
 
