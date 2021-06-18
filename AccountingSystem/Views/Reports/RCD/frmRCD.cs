@@ -90,7 +90,8 @@ namespace AccountingSystem.Views.Reports.RCD
                 try
                 {
                     int id = int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString());
-
+                    var gcpRepository = Factory.GeneralCollectionsPaymentsRepository();
+                    btnDelete.Enabled = gcpRepository.IdExist(id) ? false : true;
                 }
                 catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             }
@@ -168,20 +169,6 @@ namespace AccountingSystem.Views.Reports.RCD
             else{
                 Helper.MessageBoxError("Please select reports to Generate RCD!");
             }
-        }
-
-        private void dgrcd_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            foreach(DataGridViewRow row in dgrcd.Rows)
-            {
-                
-                if (Convert.ToBoolean(row.Cells[5].Value))
-                {
-                    row.DefaultCellStyle.BackColor = Color.LightGreen;
-                    
-                }
-            }
-           
         }
     }
 }

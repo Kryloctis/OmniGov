@@ -407,7 +407,7 @@ namespace AccountingSystem
             datagrid.Columns[5].Visible = false;
             DataGridViewCheckBoxColumn chk = new DataGridViewCheckBoxColumn();
             datagrid.Columns.Add(chk);
-            chk.HeaderText = "Print";
+            chk.HeaderText = "Generate RCD";
 
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -488,18 +488,19 @@ namespace AccountingSystem
         {
             datagrid.DataSource = dataTable;
             datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Account Code";
-            datagrid.Columns[2].HeaderText = "Accountable Form";
-            datagrid.Columns[3].HeaderText = "Ledger";
-            datagrid.Columns[4].HeaderText = "Subsidiary";
-            datagrid.Columns[5].HeaderText = "Payee";
-            datagrid.Columns[6].HeaderText = "Receipt No.";
-            datagrid.Columns[7].HeaderText = "Payment Date";
-            datagrid.Columns[7].DefaultCellStyle.Format = "yyyy-MM-dd";
-            datagrid.Columns[8].HeaderText = "Amount";
-            datagrid.Columns[8].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[9].Visible = false;
+            datagrid.Columns[1].Visible = false;
+            datagrid.Columns[2].HeaderText = "Account Code";
+            datagrid.Columns[3].HeaderText = "Accountable Form";
+            datagrid.Columns[4].HeaderText = "Ledger";
+            datagrid.Columns[5].HeaderText = "Subsidiary";
+            datagrid.Columns[6].HeaderText = "Payee";
+            datagrid.Columns[7].HeaderText = "Receipt No.";
+            datagrid.Columns[8].HeaderText = "Payment Date";
+            datagrid.Columns[8].DefaultCellStyle.Format = "yyyy-MM-dd";
+            datagrid.Columns[9].HeaderText = "Amount";
+            datagrid.Columns[9].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[10].Visible = false;
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #region RCDGridView

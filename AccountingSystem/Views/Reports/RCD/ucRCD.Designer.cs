@@ -43,6 +43,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.txttotal = new System.Windows.Forms.NumericUpDown();
             this.btnadd = new System.Windows.Forms.Button();
             this.btnclear = new System.Windows.Forms.Button();
+            this.btndelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvpayments)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txttotal)).BeginInit();
@@ -127,6 +128,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.dgvpayments.RowTemplate.Height = 29;
             this.dgvpayments.Size = new System.Drawing.Size(1007, 506);
             this.dgvpayments.TabIndex = 5;
+            this.dgvpayments.SelectionChanged += new System.EventHandler(this.dgvpayments_SelectionChanged);
             // 
             // label4
             // 
@@ -155,35 +157,50 @@ namespace AccountingSystem.Views.Reports.RCD
             // btnadd
             // 
             this.btnadd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnadd.Enabled = false;
             this.btnadd.Image = global::AccountingSystem.Properties.Resources.rcd1;
-            this.btnadd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnadd.Location = new System.Drawing.Point(690, 86);
+            this.btnadd.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnadd.Location = new System.Drawing.Point(759, 69);
             this.btnadd.Name = "btnadd";
-            this.btnadd.Size = new System.Drawing.Size(161, 29);
+            this.btnadd.Size = new System.Drawing.Size(80, 46);
             this.btnadd.TabIndex = 8;
-            this.btnadd.Text = "Add Payments";
+            this.btnadd.Text = "Add";
+            this.btnadd.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnadd.UseVisualStyleBackColor = true;
             this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
             // 
             // btnclear
             // 
             this.btnclear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnclear.Enabled = false;
-            this.btnclear.Image = global::AccountingSystem.Properties.Resources.remove;
-            this.btnclear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnclear.Location = new System.Drawing.Point(857, 86);
+            this.btnclear.Image = global::AccountingSystem.Properties.Resources.clear;
+            this.btnclear.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnclear.Location = new System.Drawing.Point(935, 69);
             this.btnclear.Name = "btnclear";
-            this.btnclear.Size = new System.Drawing.Size(161, 29);
+            this.btnclear.Size = new System.Drawing.Size(84, 46);
             this.btnclear.TabIndex = 9;
-            this.btnclear.Text = "Clear Payments";
+            this.btnclear.Text = "Clear";
+            this.btnclear.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnclear.UseVisualStyleBackColor = true;
             this.btnclear.Click += new System.EventHandler(this.btnclear_Click);
+            // 
+            // btndelete
+            // 
+            this.btndelete.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btndelete.Image = global::AccountingSystem.Properties.Resources.remove;
+            this.btndelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btndelete.Location = new System.Drawing.Point(845, 69);
+            this.btndelete.Name = "btndelete";
+            this.btndelete.Size = new System.Drawing.Size(84, 46);
+            this.btndelete.TabIndex = 10;
+            this.btndelete.Text = "Delete";
+            this.btndelete.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btndelete.UseVisualStyleBackColor = true;
+            this.btndelete.Click += new System.EventHandler(this.btndelete_Click);
             // 
             // ucRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btndelete);
             this.Controls.Add(this.btnclear);
             this.Controls.Add(this.btnadd);
             this.Controls.Add(this.txttotal);
@@ -222,5 +239,6 @@ namespace AccountingSystem.Views.Reports.RCD
         internal System.Windows.Forms.Button btnadd;
         internal System.Windows.Forms.DataGridView dgvpayments;
         internal System.Windows.Forms.Button btnclear;
+        internal System.Windows.Forms.Button btndelete;
     }
 }

@@ -16,6 +16,7 @@ namespace AccountingSystem.Views.Reports.RCD
     {
         internal int Id = 0;
         internal int CoId = 0;
+        internal Dictionary<int, string> data = new Dictionary<int, string>();
         public ucRCD()
         {
             InitializeComponent();
@@ -66,16 +67,19 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
-                if(txtreport.Text != string.Empty)
+                var rcdRepository = Factory.CollectorReportPaymentRepository();
+                var dtrcd = rcdRepository.GetRecords(Id);
+                HelperLoadRecords.RCDDatagridView(dtrcd, dgvpayments);
+
+                txttotal.Value = rcdRepository.SumRecords(txtreport.Text.Trim());
+                if(dtrcd.Rows.Count > 0)
                 {
-                    var rcdRepository = Factory.CollectorReportPaymentRepository();
-                    var dtrcd = rcdRepository.GetRecords(txtreport.Text.Trim());
-                    HelperLoadRecords.RCDDatagridView(dtrcd, dgvpayments);
-
-                    txttotal.Value = rcdRepository.SumRecords(txtreport.Text.Trim());
-
+                    data.Clear();
+                    for(int i =0;i < dtrcd.Rows.Count; i++)
+                    {
+                        data.Add(int.Parse(dtrcd.Rows[i]["pid"].ToString()), dtrcd.Rows[i]["payee"].ToString());
+                    }
                 }
-
             }
             catch (Exception ex)
             {
@@ -83,19 +87,6 @@ namespace AccountingSystem.Views.Reports.RCD
             }
         }
 
-        internal void SetId(string id)
-        {
-            try
-            {
-                var rcdRepository = Factory.CollectorReportRepository();
-                var rcdData = rcdRepository.GetRecordByID(id);
-                Id = int.Parse(rcdData["id"]);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
 
         private void cmbcollector_Validating(object sender, CancelEventArgs e)
         {
@@ -119,18 +110,14 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnadd_Click(object sender, EventArgs e)
         {
-            if(txtreport.Text.Length > 0)
+            if(cmbcollector.SelectedIndex != -1)
             {
-                if(dgvpayments.Rows.Count > 0)
-                {
-                    Helper.MessageBoxError("Report has existing payment records, please clear record first before loading payments!");
-                    dgvpayments.Focus();
-                }
-                else
-                {
-                    _ = new frmGenerateRCD(this, Convert.ToInt16(cmbcollector.SelectedValue), txtreport.Text.Trim()).ShowDialog();
-                }
-                
+                _ = new frmGenerateRCD(this, Convert.ToInt16(cmbcollector.SelectedValue), data).ShowDialog();
+            }
+            else
+            {
+                Helper.MessageBoxError("Please select Collector!");
+                cmbcollector.Focus();
             }
             
         }
@@ -152,6 +139,7 @@ namespace AccountingSystem.Views.Reports.RCD
             }
             else
             {
+                Helper.MessageBoxError("Please Load Payment List!");
                 chckapproved.Checked = false;
             }
             
@@ -166,8 +154,10 @@ namespace AccountingSystem.Views.Reports.RCD
                     var rcdModelList = new List<CollectorReportPaymentModel>();
                     var rcdRepository = Factory.CollectorReportPaymentRepository();
                     rcdModelList.Add(new CollectorReportPaymentModel() { CoId=Id});
-                    _ = rcdRepository.Delete(rcdModelList);
-                    LoadCollections();
+                    if (rcdRepository.Delete(rcdModelList))
+                    {
+                        LoadCollections();
+                    }
                 }
             } 
             catch (Exception ex)
@@ -175,6 +165,49 @@ namespace AccountingSystem.Views.Reports.RCD
                 Helper.MessageBoxError(ex.Message);
             }
           
+        }
+
+        private void dgvpayments_SelectionChanged(object sender, EventArgs e)
+        {
+            if(dgvpayments.SelectedRows.Count > 0)
+            {
+                btndelete.Enabled = true;
+            }
+            else
+            {
+                btndelete.Enabled = false;
+            }
+        }
+
+        private void btndelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Helper.MessageBoxConfirmDelete(dgvpayments.SelectedRows.Count))
+                {
+                    int id = int.Parse(dgvpayments.CurrentRow.Cells[0].Value.ToString());
+                    if(id > 0)
+                    {
+                        var rcdModelList = new List<CollectorReportPaymentModel>();
+                        var rcdRepository = Factory.CollectorReportPaymentRepository();
+                        rcdModelList.Add(new CollectorReportPaymentModel() { Id = id });
+                        if (rcdRepository.Delete(rcdModelList))
+                        {
+                            dgvpayments.Rows.RemoveAt(dgvpayments.CurrentRow.Index);
+                        }                      
+                       // LoadCollections();
+                    }
+                    else
+                    {
+                        dgvpayments.Rows.RemoveAt(dgvpayments.CurrentRow.Index);
+                    }
+                   
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
     }
 }

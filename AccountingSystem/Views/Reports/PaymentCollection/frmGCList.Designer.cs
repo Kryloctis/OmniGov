@@ -57,6 +57,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             this.dgvgc.Size = new System.Drawing.Size(1012, 460);
             this.dgvgc.TabIndex = 0;
             this.dgvgc.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvgc_CellContentClick);
+            this.dgvgc.SelectionChanged += new System.EventHandler(this.dgvgc_SelectionChanged);
             // 
             // toolStrip
             // 

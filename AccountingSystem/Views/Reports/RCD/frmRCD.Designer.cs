@@ -67,7 +67,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(50, 56);
+            this.btnAdd.Size = new System.Drawing.Size(50, 52);
             this.btnAdd.Text = "Add...";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(48, 56);
+            this.btnEdit.Size = new System.Drawing.Size(48, 52);
             this.btnEdit.Text = "Edit...";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -91,7 +91,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(57, 56);
+            this.btnDelete.Size = new System.Drawing.Size(57, 52);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -163,7 +163,6 @@ namespace AccountingSystem.Views.Reports.RCD
             this.dgrcd.TabIndex = 16;
             this.dgrcd.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrcd_CellContentClick);
             this.dgrcd.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrcd_CellDoubleClick);
-            this.dgrcd.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgrcd_CellFormatting);
             this.dgrcd.SelectionChanged += new System.EventHandler(this.dgrcd_SelectionChanged);
             // 
             // frmRCD

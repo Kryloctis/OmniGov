@@ -14,6 +14,7 @@ namespace AccountingSystem.Views.Reports.RCD
     public partial class frmRCDAdd : Form
     {
         private frmRCD _frmrcd;
+        private List<CollectorReportPaymentModel> data;
         public frmRCDAdd(frmRCD frmrcd)
         {
             InitializeComponent();
@@ -35,24 +36,53 @@ namespace AccountingSystem.Views.Reports.RCD
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
+                else if (uc.dgvpayments.Rows.Count <= 0)
+                {
+                    Helper.MessageBoxError("Please Load Payment Collection list!");
+                    return false;
+                }
+                else{
+                    var rcdModel = new CollectorReportModel()
+                    {
+                        CoId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
+                        ReportNo = uc.txtreport.Text.Trim(),
+                        Date = Convert.ToDateTime(uc.dtdate.Value),
+                        Approved = Convert.ToInt16(uc.chckapproved.Checked),
+                    };
+                    var rcdRepository = Factory.CollectorReportRepository();
+                    if (!rcdRepository.CodeExist(uc.txtreport.Text.Trim()))
+                    {
+                        int id = rcdRepository.InsertId(rcdModel);
+                        if(id > 0)
+                        {
+                            if (uc.dgvpayments.Rows.Count > 0) 
+                            {
+                                data = new List<CollectorReportPaymentModel>();
+                                data.Clear(); 
+                                for (int i = 0; i < uc.dgvpayments.Rows.Count; i++)
+                                {
+                                    data.Add(new CollectorReportPaymentModel()
+                                    {
+                                        Id = Convert.ToInt16(uc.dgvpayments.Rows[i].Cells[0].Value),
+                                        CoId = id,
+                                        PcId = Convert.ToInt16(uc.dgvpayments.Rows[i].Cells[1].Value),
+                                    });
+                                }
 
-                var rcdModel = new CollectorReportModel()
-                {
-                    CoId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
-                    ReportNo = uc.txtreport.Text.Trim(),
-                    Date = Convert.ToDateTime(uc.dtdate.Value),
-                    Approved = Convert.ToInt16(uc.chckapproved.Checked),
-                };
-                var rcdRepository = Factory.CollectorReportRepository();
-                if (!rcdRepository.CodeExist(uc.txtreport.Text.Trim()))
-                {
-                    return rcdRepository.Insert(rcdModel);
+                                var crpRepository = Factory.CollectorReportPaymentRepository();
+                                return crpRepository.Append(data);
+                            }
+                           
+                        }
+
+                    }
+                    else
+                    {
+                        Helper.ErrorMessage("Report Number already exists!");
+                        uc.txtreport.Focus();
+                    }
                 }
-                else
-                {
-                    Helper.ErrorMessage("Report Number already exists!");
-                    uc.txtreport.Focus();
-                }
+              
             }
             catch (Exception ex)
             {
@@ -73,23 +103,9 @@ namespace AccountingSystem.Views.Reports.RCD
                 Helper.MessageBoxSuccess("RCD has been saved.");
                 _frmrcd.LoadRecords();
                 var uc = ucrcd1;
-                uc.SetId(uc.txtreport.Text.Trim());
-                uc.cmbcollector.Enabled = false;
-                uc.txtreport.Enabled = false;
-                uc.btnadd.Enabled = true;
-                if (Helper.MessageBoxConfirmRCDList())
-                {                    
-                    _ = new frmGenerateRCD(uc, Convert.ToInt16(uc.cmbcollector.SelectedValue), uc.txtreport.Text.Trim()).ShowDialog();
-                }
-                else
-                {
-                    uc.ResetForm();
-                    uc.cmbcollector.Enabled = true;
-                    uc.txtreport.Enabled = true;
-                    uc.btnadd.Enabled = false;
-                }
-
-
+                uc.ResetForm();
+                uc.cmbcollector.Enabled = true;
+                uc.txtreport.Enabled = true;
             }
         }
     }

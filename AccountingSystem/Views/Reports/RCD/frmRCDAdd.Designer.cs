@@ -71,10 +71,10 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // ucrcd2
+            // ucrcd1
             // 
             this.ucrcd1.Location = new System.Drawing.Point(0, -1);
-            this.ucrcd1.Name = "ucrcd2";
+            this.ucrcd1.Name = "ucrcd1";
             this.ucrcd1.Size = new System.Drawing.Size(1033, 669);
             this.ucrcd1.TabIndex = 8;
             // 
@@ -83,6 +83,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1028, 708);
             this.Controls.Add(this.ucrcd1);

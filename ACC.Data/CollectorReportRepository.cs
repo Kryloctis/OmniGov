@@ -122,6 +122,27 @@ namespace ACC.Data
             }
         }
 
+        public int InsertId(CollectorReportModel entity)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@collecting_officers_id", DbType.Int16, entity.CoId},
+                    new object[] { "@report_no", DbType.String, entity.ReportNo},
+                    new object[] { "@date", DbType.Date, entity.Date},
+                    new object[] { "@is_approved", DbType.Int16, entity.Approved},
+                };
+
+                string query = $"INSERT INTO {tableName} (collecting_officers_id,report_no,date,is_approved) VALUES (@collecting_officers_id,@report_no,@date,@is_approved)";
+                return _dbGenericCommands.ExecuteNonQueryId(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool Update(CollectorReportModel entity)
         {
             try

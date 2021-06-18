@@ -83,6 +83,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1032, 710);
             this.Controls.Add(this.ucrcd1);

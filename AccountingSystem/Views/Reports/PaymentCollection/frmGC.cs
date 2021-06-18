@@ -125,6 +125,14 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                             frmrcd.LoadRecords();
                             this.Close();
                         }
+                        else
+                        {
+                            this.Close();
+                        }
+                    }
+                    else
+                    {
+                        this.Close();
                     }
                 }
             }

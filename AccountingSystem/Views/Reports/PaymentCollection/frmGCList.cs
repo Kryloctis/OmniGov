@@ -29,14 +29,10 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 int id = int.Parse(dgvgc.CurrentRow.Cells[0].Value.ToString());
                 var gcdRepository = Factory.GeneralCollectionsDepositsRepository();
                 btnDeposit.Enabled = gcdRepository.IdExist(id) ? false:true;
-                btnGC.Enabled = true;
-                btnRCD.Enabled = true;
             }
             else
             {
                 btnDeposit.Enabled = false;
-                btnGC.Enabled = false;
-                btnRCD.Enabled = false;
             }
         }
 
