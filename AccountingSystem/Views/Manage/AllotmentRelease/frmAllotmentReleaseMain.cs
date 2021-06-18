@@ -45,19 +45,13 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
 
             return allotmentAccountModelList;
-        } 
+        }
 
-        private bool SaveData() 
+
+        private bool InsertData() 
         {
             try
             {
-                var uc = ucAllotmentReleaseMain1;
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
                 string allotmentReleaseNo = $"{uc.mskSeriesNo.Text}-{uc.mskYear.Text}";
                 string purpose = uc.txtPurpose.Text.Trim();
 
@@ -69,6 +63,57 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 };
 
                 return Factory.AllotmentReleaseRepository().Insert(allotmemtReleaseModel, AllotmentAccountModelList());
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private bool UpdateData() 
+        {
+            try
+            {
+                string allotmentReleaseNo = $"{uc.mskSeriesNo.Text}-{uc.mskYear.Text}";
+                string purpose = uc.txtPurpose.Text.Trim();
+
+                var allotmemtReleaseModel = new AllotmentReleaseModel()
+                {
+                    ID = uc.allotmentReleaseId,
+                    ARONumber = allotmentReleaseNo,
+                    Purpose = purpose,
+                    DateIssued = uc.dtDateIssued.Value
+                };
+
+
+                return Factory.AllotmentReleaseRepository().Update(allotmemtReleaseModel, AllotmentAccountModelList());
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+
+        private bool SaveData() 
+        {
+            try
+            {
+                bool saveData;
+                if (!uc.ValidateChildren())
+                {
+                    Helper.MessageBoxError(uc.GetFormErrors());
+                    return false;
+                }
+
+                if (uc.allotmentReleaseId == 0)
+                    saveData = InsertData();
+                else
+                    saveData = UpdateData();
+
+                return saveData;
             }
             catch (MySqlException mysqlex)
             {
@@ -89,6 +134,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 uc.ResetForm();
+                btnSave.Text = "Save";
             }
         }
 
@@ -98,6 +144,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             {
                 Helper.MessageBoxSuccess("Allotment release has been saved.");
                 uc.ResetForm();
+                btnSave.Text = "Save";
             }
         }
 
@@ -111,7 +158,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            _ = new frmAllotmentReleaseSearch().ShowDialog();
+            _ = new frmAllotmentReleaseSearch(this).ShowDialog();
         }
     }
 }

@@ -29,22 +29,22 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         /// </summary>
         private void InitializeComponent()
         {
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.mskAllotmentReleaseNo = new System.Windows.Forms.MaskedTextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // maskedTextBox1
+            // mskAllotmentReleaseNo
             // 
-            this.maskedTextBox1.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.maskedTextBox1.Location = new System.Drawing.Point(12, 12);
-            this.maskedTextBox1.Mask = "000-0000";
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(401, 50);
-            this.maskedTextBox1.TabIndex = 0;
-            this.maskedTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.mskAllotmentReleaseNo.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mskAllotmentReleaseNo.Location = new System.Drawing.Point(12, 12);
+            this.mskAllotmentReleaseNo.Mask = "000-0000";
+            this.mskAllotmentReleaseNo.Name = "mskAllotmentReleaseNo";
+            this.mskAllotmentReleaseNo.Size = new System.Drawing.Size(401, 50);
+            this.mskAllotmentReleaseNo.TabIndex = 0;
+            this.mskAllotmentReleaseNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // flowLayoutPanel1
             // 
@@ -80,6 +80,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnOk.Text = "OK";
             this.btnOk.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // frmAllotmentReleaseSearch
             // 
@@ -89,7 +90,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(425, 106);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.maskedTextBox1);
+            this.Controls.Add(this.mskAllotmentReleaseNo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -105,7 +106,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         #endregion
 
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.MaskedTextBox mskAllotmentReleaseNo;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         internal System.Windows.Forms.Button btnCancel;
         internal System.Windows.Forms.Button btnOk;

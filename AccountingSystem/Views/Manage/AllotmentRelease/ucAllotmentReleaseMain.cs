@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,6 +22,74 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         public ucAllotmentReleaseMain()
         {
             InitializeComponent();
+        }
+
+
+        private void CheckedFund(int radFundId)
+        {
+            flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => (Convert.ToInt32(r.Tag) == radFundId) ? r.Checked = true : r.Checked = false);
+            fundId = radFundId;
+        }
+
+        private void CheckedAllotmentClass(int radAllotmentClassId)
+        {
+            flowLayoutPanelAllotmentClass.Controls.OfType<RadioButton>().FirstOrDefault(r => (Convert.ToInt32(r.Tag) == radAllotmentClassId) ? r.Checked = true : r.Checked = false);
+            allotmentClassId = radAllotmentClassId;
+        }
+
+        internal void LoadSearched(string aroNo) 
+        {
+            try
+            {
+                var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByARONo(aroNo);
+                allotmentReleaseId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["allotment_release_id"]);
+                int fppId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["function_program_project_id"]);
+                var subFPPId = dtAllotmentRelease.Rows[0]["others_fpp_id"];
+                int fundId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["funds_id"]);
+                int allotmentClassId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["allotment_classes_id"]);
+                var dateIssued = Convert.ToDateTime(dtAllotmentRelease.Rows[0]["date_issued"]);
+                string purpose = dtAllotmentRelease.Rows[0]["purpose"].ToString();
+
+                cmbxFPP.SelectedValue = fppId;
+                cmbxSubFPP.SelectedValue = subFPPId == null? 0 : subFPPId;
+                CheckedFund(fundId);
+                CheckedAllotmentClass(allotmentClassId);
+                mskSeriesNo.Text = aroNo;
+                dtDateIssued.Value = dateIssued;
+                txtPurpose.Text = purpose;
+
+                dgAllotmentRelease.Rows.Clear();
+
+                panel1.Enabled = false;
+                dtDateIssued.Enabled = false;
+
+
+                foreach (DataRow row in dtAllotmentRelease.Rows) 
+                {
+                    int budgetAppropriationId = Convert.ToInt32(row["budget_appropriations_id"]);
+                    string accountName = row["ledger_name"].ToString();
+                    string accountCode = row["account_code"].ToString();
+                    decimal amount = Convert.ToDecimal(row["amount"]);
+
+                    var records = new object[]
+                    {
+                        budgetAppropriationId,
+                        accountName,
+                        accountCode,
+                        amount
+                    };
+
+                    dgAllotmentRelease.Rows.Add(records);
+                }
+            }
+            catch (MySqlException Mysqlex)
+            {
+                Helper.MessageBoxError(Mysqlex.Message);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.StackTrace);
+            }
         }
 
 
@@ -189,6 +258,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             LoadAllotmentClasses();
             dgAllotmentRelease.Rows.Clear();
             txtPurpose.Text = string.Empty;
+            allotmentReleaseId = 0;
+            epARONo.SetError(mskYear, string.Empty);
+            epFPP.SetError(cmbxFPP, string.Empty);
+            epSubFPP.SetError(cmbxSubFPP, string.Empty);
         }
 
         internal string GetFormErrors()
@@ -515,6 +588,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         }
 
 
+
         private bool ShowErrorOtherFPPNameNotExist(ErrorProvider ep, ComboBox comboBox)
         {
             try
@@ -544,13 +618,18 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
 
 
-
         private bool AllotmentNotReleaseExist() 
         {
             try
             {
                 string allotmentReleaseNo = $"{mskSeriesNo.Text}-{mskYear.Text}";
-                var allotmentReleaseNoExist =  Factory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseNo);
+                bool allotmentReleaseNoExist;
+
+                if (allotmentReleaseId == 0)
+                    allotmentReleaseNoExist = Factory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseNo);
+                else
+                    allotmentReleaseNoExist = Factory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseId, allotmentReleaseNo);
+
 
                 if (allotmentReleaseNoExist) 
                 {

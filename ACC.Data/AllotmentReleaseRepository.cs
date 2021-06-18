@@ -22,7 +22,6 @@ namespace ACC.Data
             _allotmentAccountRepository = allotmentAccountRepository;
         }
 
-
         public bool Insert(AllotmentReleaseModel entity)
         {
             throw new NotImplementedException();
@@ -40,7 +39,17 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            throw new NotImplementedException();
+            try
+            {
+                string query = $"SELECT id, aro_no, purpose, date_issued, created_at, updated_at FROM {tableName}";
+                var dataTable = new DataTable();
+
+                return _mySqlGenericCommands.Fill(query, dataTable);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -50,7 +59,92 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var record = new Dictionary<string, string>();
+
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, Id}
+                };
+
+                string query = $"SELECT id, aro_no, purpose, date_issued, created_at, updated_at FROM {tableName} id = @id";
+
+                using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("id", item[0].ToString());
+                        record.Add("aro_no", item[1].ToString());
+                        record.Add("purpose", item[2].ToString());
+                        record.Add("date_issued", item[3].ToString());
+                        record.Add("created_at", item[4].ToString());
+                        record.Add("updated_at", item[5].ToString());
+                    }
+                }
+                return record;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetViewRecordsByARONo(string aroNo)
+        {
+            try
+            {
+                var record = new Dictionary<string, string>();
+
+                var parameters = new object[][]
+                {
+                    new object[] { "@aro_no", DbType.String, aroNo }
+                };
+
+                string query = $"SELECT " +
+                    $"allotment_release_id, " +
+                    $"allotment_account_id, " +
+                    $"aro_no, " +
+                    $"purpose, "+ 
+                    $"date_issued, " +
+                    $"allotment_release_created_at, " +
+                    $"allotment_release_updated_at, " +
+                    $"budget_appropriations_id, " +
+                    $"funds_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"function_program_project_id, " +
+                    $"fpp_code, " +
+                    $"fpp_name, " +
+                    $"is_special, " +
+                    $"others_fpp_id, " +
+                    $"others_fpp_code, " +
+                    $"others_fpp_name, " +
+                    $"allotment_classes_id, " +
+                    $"allotment_code, " +
+                    $"allotment_name, " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_code, " +
+                    $"ledger_name, " +
+                    $"date_entry, " +
+                    $"year, " +
+                    $"continuing, " +
+                    $"remarks, " +
+                    $"amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE " +
+                    $"aro_no = @aro_no";
+
+                var dataTable = new DataTable();
+                return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public int CountRecords()
@@ -106,6 +200,50 @@ namespace ACC.Data
             }
         }
 
+        //UPDATE
+        public bool Update(AllotmentReleaseModel entity, List<AllotmentAccountModel> listAllotmentAccount)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@id",DbType.Int32, entity.ID},
+                        new object[] { "@aro_no", DbType.String, entity.ARONumber},
+                        new object[] { "@purpose", DbType.String, entity.Purpose},
+                        new object[] { "@date_issued", DbType.Date, entity.DateIssued.Date}
+                    };
+
+                    string query = $"UPDATE {tableName} " +
+                        $"SET " +
+                        $"aro_no = @aro_no, " +
+                        $"purpose = @purpose, " +
+                        $"date_issued = @date_issued " +
+                        $"WHERE id = @id";
+
+                    _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+
+                    _=_allotmentAccountRepository.DeleteByAllotmentReleaseId(entity.ID);
+
+                    foreach (var allotmentAccount in listAllotmentAccount)
+                    {
+                        allotmentAccount.AllotmentReleaseID = entity.ID;
+                        _ = _allotmentAccountRepository.Insert(allotmentAccount);
+                    }
+
+
+                    scope.Complete();
+                    return true;
+                };
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         //VALIDATIONS
 
@@ -135,6 +273,28 @@ namespace ACC.Data
             return false;
         }
 
+        public bool AllotmentReleaseNoExist(int Id, string allotmentReleaseNo)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id",   DbType.Int32, Id },
+                    new object[] { "@aro_no", DbType.String, allotmentReleaseNo }
+                };
+
+                string query = $"SELECT id FROM {tableName} WHERE id <> @id AND aro_no = @aro_no";
+                string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return false;
+        }
+
         public DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId)
         {
             try
@@ -149,6 +309,7 @@ namespace ACC.Data
                     $"allotment_release_id, " +
                     $"allotment_account_id, " +
                     $"aro_no, " +
+                    $"purpose, " +
                     $"date_issued, " +
                     $"allotment_release_created_at, " +
                     $"allotment_release_updated_at, " +
@@ -173,9 +334,7 @@ namespace ACC.Data
                     $"year, " +
                     $"continuing, " +
                     $"remarks, " +
-                    $"amount, " +
-                    $"allotment_account_created_at, " +
-                    $"allotment_account_updated_at " +
+                    $"amount " +
                     $"FROM {viewTableName} " +
                     $"WHERE budget_appropriations_id = @budget_appropriations_id";
 
@@ -236,5 +395,7 @@ namespace ACC.Data
 
             return false;
         }
+
+
     }
 }

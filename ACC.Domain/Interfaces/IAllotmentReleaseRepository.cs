@@ -11,9 +11,15 @@ namespace ACC.Domain.Interfaces
 
         bool AllotmentReleaseNoExist(string allotmentReleaseNo);
 
+        bool AllotmentReleaseNoExist(int Id, string allotmentReleaseNo);
+
         bool Insert(AllotmentReleaseModel entity, List<AllotmentAccountModel> listAllotmentAccount);
 
+        bool Update(AllotmentReleaseModel entity, List<AllotmentAccountModel> listAllotmentAccount);
+
         DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId);
+
+        DataTable GetViewRecordsByARONo(string aroNo);
 
         bool AllotmentReleaseExist(int budgetAppropriationId, DateTime dateIssued);
 

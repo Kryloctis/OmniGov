@@ -81,5 +81,23 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
+        public bool DeleteByAllotmentReleaseId(int allotmentReleaseId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@allotment_release_id", DbType.Int32, allotmentReleaseId}
+                };
+
+                string query = $"DELETE FROM {tableName} WHERE allotment_release_id = @allotment_release_id ";
+
+                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
