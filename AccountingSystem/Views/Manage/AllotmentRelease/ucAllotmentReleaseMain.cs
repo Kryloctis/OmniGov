@@ -478,7 +478,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 dgAllotmentRelease.Rows.Remove(row);
             }
 
-            if (dgAllotmentRelease.Rows.Count == 0)
+            if (dgAllotmentRelease.Rows.Count == 0 && allotmentReleaseId == 0)
             {
                 panel1.Enabled = true;
                 dtDateIssued.Enabled = true;
