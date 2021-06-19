@@ -54,6 +54,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.label1 = new System.Windows.Forms.Label();
             this.txtPurpose = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnEdit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgAllotmentRelease)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
@@ -82,7 +83,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.Location = new System.Drawing.Point(491, 539);
+            this.btnAdd.Location = new System.Drawing.Point(410, 539);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 8;
@@ -287,6 +288,17 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.label4.TabIndex = 46;
             this.label4.Text = "Purpose";
             // 
+            // btnEdit
+            // 
+            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEdit.Location = new System.Drawing.Point(491, 539);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnEdit.TabIndex = 8;
+            this.btnEdit.Text = "Edit...";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
             // ucAllotmentReleaseMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -302,6 +314,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnRemove);
+            this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.dgAllotmentRelease);
             this.Name = "ucAllotmentReleaseMain";
@@ -348,5 +361,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal System.Windows.Forms.MaskedTextBox mskYear;
         internal System.Windows.Forms.MaskedTextBox mskSeriesNo;
         private System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.Button btnEdit;
     }
 }

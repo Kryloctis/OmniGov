@@ -66,6 +66,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
                 foreach (DataRow row in dtAllotmentRelease.Rows) 
                 {
+                    short year = Convert.ToInt16(row["year"]);
                     int budgetAppropriationId = Convert.ToInt32(row["budget_appropriations_id"]);
                     string accountName = row["ledger_name"].ToString();
                     string accountCode = row["account_code"].ToString();
@@ -73,6 +74,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
                     var records = new object[]
                     {
+                        year,
                         budgetAppropriationId,
                         accountName,
                         accountCode,
@@ -355,12 +357,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
+                dgAllotmentRelease.Columns.Add("year","Year");
                 dgAllotmentRelease.Columns.Add("budget_appropriation_id", "Budget Appropriations ID");
                 dgAllotmentRelease.Columns.Add("account_name", "Account Name");
                 dgAllotmentRelease.Columns.Add("account_code", "Account Code");
                 dgAllotmentRelease.Columns.Add("allotment_amount", "Amount");
 
                 //Cell Format
+                dgAllotmentRelease.Columns["year"].Visible = false;
                 dgAllotmentRelease.Columns["budget_appropriation_id"].Visible = false;
                 dgAllotmentRelease.Columns["account_name"].Width = 300;
                 dgAllotmentRelease.Columns["account_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -433,6 +437,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
                 cmbxSubFPP.Enabled = false;
                 btnRemove.Enabled = false;
+                btnEdit.Enabled = false;
             }
         }
 
@@ -443,16 +448,19 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
             if (selectedRowCount == 1)
             {
+                btnEdit.Enabled = true;
                 btnRemove.Enabled = true;
                 btnRemove.Text = "Remove (" + selectedRowCount + ")";
             }
             else if (selectedRowCount > 1)
             {
+                btnEdit.Enabled = false;
                 btnRemove.Enabled = true;
                 btnRemove.Text = "Remove (" + selectedRowCount + ")";
             }
             else
             {
+                btnEdit.Enabled = false;
                 btnRemove.Enabled = false;
                 btnRemove.Text = "Remove";
             }
@@ -491,14 +499,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        private bool validateOnAdd()
+        private bool Validation()
         {
             try
             {
                 if (Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP") || ShowErrorFPPNameNotExist(epFPP,cmbxFPP) || ShowErrorOtherFPPNameNotExist(epSubFPP,cmbxSubFPP)) 
                 {
-
-
                     return true;
                 }
             }
@@ -513,7 +519,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                if (validateOnAdd())
+                if (Validation())
                 {
                     Helper.MessageBoxError(GetFormErrorsOnAdd());
                     return false;
@@ -543,7 +549,58 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             ShowAllotmentReleaseAdd();
         }
-  
+
+
+
+        //VALIDATIONS BEFORE SHOWING EDIT WINDOW 
+
+        private bool ShowAllotmentReleaseEdit() 
+        {
+            try
+            {
+                int rowIndex = dgAllotmentRelease.CurrentCell.RowIndex;
+
+                short year = Convert.ToInt16(dgAllotmentRelease.Rows[rowIndex].Cells["year"].Value);
+                int budgetAppropriationId = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["budget_appropriation_id"].Value);
+                decimal amount = Convert.ToDecimal(dgAllotmentRelease.Rows[rowIndex].Cells["allotment_amount"].Value);
+
+
+                if (Validation())
+                {
+                    Helper.MessageBoxError(GetFormErrorsOnAdd());
+                    return false;
+                }
+
+                var allotmentReleaseEditForm = new frmAllotmentReleaseEdit(this);
+                var uc = allotmentReleaseEditForm.ucAllotmentRelease1;
+                uc.fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
+                uc.othersFPPId = string.IsNullOrEmpty(cmbxSubFPP.Text) ? null : Convert.ToInt32(cmbxSubFPP.SelectedValue);
+                uc.fundId = fundId;
+                uc.allotmentClassId = Convert.ToInt32(allotmentClassId);
+                uc.dateIssued = dtDateIssued.Value;
+
+                uc._budgetAppropriationId = budgetAppropriationId;
+                uc._amount = amount;
+
+                uc.nudYear.Value = year;
+                uc.cmbxBudgetAppropriations.SelectedValue = budgetAppropriationId;
+                uc.nudAmount.Value = amount;
+
+                allotmentReleaseEditForm.ShowDialog();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            ShowAllotmentReleaseEdit();
+        }
+
 
 
         //VALIDATIONS
@@ -712,5 +769,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             dgAllotmentRelease.Tag = string.Empty;
         }
+
     }
 }

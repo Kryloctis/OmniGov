@@ -143,7 +143,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             if (SaveData())
             {
-                Helper.MessageBoxSuccess("Allotment release has been saved.");
+                string message = uc.allotmentReleaseId == 0? "saved" : "updated";
+                Helper.MessageBoxSuccess($"Allotment release has been {message}.");
                 uc.ResetForm();
                 btnSave.Text = "Save";
             }

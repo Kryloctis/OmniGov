@@ -192,7 +192,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.nudAmount);
             this.Controls.Add(this.label1);
