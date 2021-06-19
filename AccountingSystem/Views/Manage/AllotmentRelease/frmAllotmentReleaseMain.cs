@@ -24,6 +24,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             Helper.LoadFormIcon(this);
             uc = ucAllotmentReleaseMain1;
             btnDelete.Enabled = false;
+            btnCancel.Enabled = false;
         }
 
         private List<AllotmentAccountModel> AllotmentAccountModelList()
@@ -135,6 +136,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             {
                 uc.ResetForm();
                 btnDelete.Enabled = false;
+                btnCancel.Enabled = false;
                 btnSave.Text = "Save";
             }
         }
@@ -143,13 +145,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             if (SaveData())
             {
-                Helper.MessageBoxSuccess("Allotment release has been saved.");
+                string message = uc.allotmentReleaseId == 0? "saved" : "updated";
+                Helper.MessageBoxSuccess($"Allotment release has been {message}.");
                 uc.ResetForm();
                 btnSave.Text = "Save";
             }
         }
 
-        private void BtnNew_Click(object sender, EventArgs e) 
+        private void BtnCancel_Click(object sender, EventArgs e) 
         {
             if (!uc.panel1.Enabled)
             {

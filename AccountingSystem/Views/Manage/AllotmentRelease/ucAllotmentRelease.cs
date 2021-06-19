@@ -20,6 +20,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal DateTime dateIssued;
         private ucAllotmentReleaseMain _ucAllotmentMain;
 
+        internal int _budgetAppropriationId = 0;
+        internal decimal _amount = 0;
+
         public ucAllotmentRelease()
         {
             InitializeComponent();
@@ -119,7 +122,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
                 decimal totalSupplementalAppropriation = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0? 0 : dtSupplementalAppropriation.Compute("Sum(amount)", string.Empty));
 
-                appropriationBalance = (budgetAppropriation + totalSupplementalAppropriation) - totalAllotmentRelease;
+                appropriationBalance = ((budgetAppropriation + totalSupplementalAppropriation) - totalAllotmentRelease) + (budgetAppropriationId == _budgetAppropriationId? _amount : 0);
+                
             }
 
             return appropriationBalance;
@@ -185,6 +189,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             cmbxBudgetAppropriations.SelectedIndex = -1;
             cmbxBudgetAppropriations.Focus(); 
             nudAmount.Value = 0;
+            _budgetAppropriationId = 0;
+            _amount = 0;
         }
 
 
@@ -264,7 +270,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 else
                     allotmentReleaseExist = Factory.AllotmentReleaseRepository().AllotmentReleaseExist(allotmentReleaseId, budgetAppropriationId, dateIssued);
 
-                if (allotmentReleaseExist)
+                if (allotmentReleaseExist && budgetAppropriationId != _budgetAppropriationId)
                 {
                     epBudgetAppropriation.SetError(cmbxBudgetAppropriations, "Budget appropriation acount you entered has an allotment released on the date it was issued.");
                     return allotmentReleaseExist;
@@ -286,7 +292,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             foreach (DataGridViewRow row in _ucAllotmentMain.dgAllotmentRelease.Rows)
             {
                 int rowBudgetAppropriationId = Convert.ToInt32(row.Cells["budget_appropriation_id"].Value);
-                if (rowBudgetAppropriationId == budgetAppropriationId)
+
+                if (rowBudgetAppropriationId == budgetAppropriationId && rowBudgetAppropriationId != _budgetAppropriationId)
                 {
                     epBudgetAppropriation.SetError(cmbxBudgetAppropriations, "Budget Appropriation Account is already on the list.");
                     return true;
@@ -306,7 +313,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     return true;
                 else if (cmbxBudgetAppropriations.FindStringExact(cmbxBudgetAppropriations.Text) < 0 && !string.IsNullOrEmpty(cmbxBudgetAppropriations.Text))
                 {
-                    epBudgetAppropriation.SetError(cmbxBudgetAppropriations, "Budget Appropriation doesn't exist in youe records");
+                    epBudgetAppropriation.SetError(cmbxBudgetAppropriations, "Budget Appropriation doesn't exist in your records");
                     return true;
                 }
                 else if (BudgetAppropriationExistOnList())

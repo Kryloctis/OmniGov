@@ -30,7 +30,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private void InitializeComponent()
         {
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnNew = new System.Windows.Forms.ToolStripButton();
+            this.btnCancel = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
@@ -43,11 +43,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnNew,
-            this.toolStripSeparator1,
             this.btnSave,
             this.btnSearch,
-            this.btnDelete});
+            this.btnDelete,
+            this.toolStripSeparator1,
+            this.btnCancel});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 0, 1, 0);
@@ -55,17 +55,16 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // btnNew
+            // btnCancel
             // 
-            this.btnNew.Image = global::AccountingSystem.Properties.Resources.create_new_28px;
-            this.btnNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNew.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(35, 47);
-            this.btnNew.Text = "&New";
-            this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnNew.Click += new System.EventHandler(this.BtnNew_Click);
+            this.btnCancel.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
+            this.btnCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(47, 47);
+            this.btnCancel.Text = "&Cancel";
+            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // toolStripSeparator1
             // 
@@ -77,6 +76,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save28px;
             this.btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSave.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(35, 47);
             this.btnSave.Text = "&Save";
@@ -140,7 +140,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         #endregion
         private System.Windows.Forms.ToolStrip toolStrip1;
         internal System.Windows.Forms.ToolStripButton btnSave;
-        internal System.Windows.Forms.ToolStripButton btnNew;
+        internal System.Windows.Forms.ToolStripButton btnCancel;
         private ucAllotmentReleaseMain ucAllotmentReleaseMain1;
         private System.Windows.Forms.ToolStripButton btnSearch;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
