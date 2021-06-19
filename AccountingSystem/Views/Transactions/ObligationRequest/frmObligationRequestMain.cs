@@ -98,7 +98,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 var obligationRequestModel = new ObligationRequestModel()
                 {
                     FPPId = Convert.ToInt32(uc.cmbxFPP.SelectedValue),
-                    OtherFPPId = string.IsNullOrEmpty(uc.cmbxOtherFPP.Text) ? null : Convert.ToInt32(uc.cmbxOtherFPP.SelectedValue),
+                    OtherFPPId = string.IsNullOrEmpty(uc.cmbxSubFPP.Text) ? null : Convert.ToInt32(uc.cmbxSubFPP.SelectedValue),
                     FundId = uc.fundId,
                     AllotmentClassId = uc.allotmentClassId,
                     DateRequested = uc.dtDateRequest.Value,

@@ -37,7 +37,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.label1 = new System.Windows.Forms.Label();
             this.cmbxFPP = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cmbxOtherFPP = new System.Windows.Forms.ComboBox();
+            this.cmbxSubFPP = new System.Windows.Forms.ComboBox();
             this.dtDateRequest = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.mskTxtObligationNoSeries = new System.Windows.Forms.MaskedTextBox();
@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.epFPP = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epOtherFPP = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epSubFPP = new System.Windows.Forms.ErrorProvider(this.components);
             this.epObligationNo = new System.Windows.Forms.ErrorProvider(this.components);
             this.epReferenceNo = new System.Windows.Forms.ErrorProvider(this.components);
             this.epExplanation = new System.Windows.Forms.ErrorProvider(this.components);
@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epOtherFPP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epSubFPP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epObligationNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epReferenceNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epExplanation)).BeginInit();
@@ -138,19 +138,19 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(0, 42);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 15);
+            this.label2.Size = new System.Drawing.Size(50, 15);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Other FPP";
+            this.label2.Text = "Sub FPP";
             // 
-            // cmbxOtherFPP
+            // cmbxSubFPP
             // 
-            this.cmbxOtherFPP.FormattingEnabled = true;
-            this.cmbxOtherFPP.Location = new System.Drawing.Point(92, 39);
-            this.cmbxOtherFPP.Name = "cmbxOtherFPP";
-            this.cmbxOtherFPP.Size = new System.Drawing.Size(449, 23);
-            this.cmbxOtherFPP.TabIndex = 1;
-            this.cmbxOtherFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxOtherFPP_Validating);
-            this.cmbxOtherFPP.Validated += new System.EventHandler(this.cmbxOtherFPP_Validated);
+            this.cmbxSubFPP.FormattingEnabled = true;
+            this.cmbxSubFPP.Location = new System.Drawing.Point(92, 39);
+            this.cmbxSubFPP.Name = "cmbxSubFPP";
+            this.cmbxSubFPP.Size = new System.Drawing.Size(449, 23);
+            this.cmbxSubFPP.TabIndex = 1;
+            this.cmbxSubFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxSubFPP_Validating);
+            this.cmbxSubFPP.Validated += new System.EventHandler(this.cmbxSubFPP_Validated);
             // 
             // dtDateRequest
             // 
@@ -308,9 +308,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             this.epFPP.ContainerControl = this;
             // 
-            // epOtherFPP
+            // epSubFPP
             // 
-            this.epOtherFPP.ContainerControl = this;
+            this.epSubFPP.ContainerControl = this;
             // 
             // epObligationNo
             // 
@@ -353,7 +353,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dtDateRequest);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.cmbxOtherFPP);
+            this.Controls.Add(this.cmbxSubFPP);
             this.Controls.Add(this.cmbxFPP);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox2);
@@ -365,7 +365,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epOtherFPP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epSubFPP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epObligationNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epReferenceNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epExplanation)).EndInit();
@@ -377,7 +377,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         }
 
         #endregion
-        internal System.Windows.Forms.ComboBox cmbxOtherFPP;
+        internal System.Windows.Forms.ComboBox cmbxSubFPP;
         internal System.Windows.Forms.ComboBox cmbxFPP;
         internal System.Windows.Forms.MaskedTextBox mskTxtObligationNoTemplate;
         internal System.Windows.Forms.DateTimePicker dtDateRequest;
@@ -389,7 +389,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.Button btnEdit;
         internal System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.ErrorProvider epFPP;
-        internal System.Windows.Forms.ErrorProvider epOtherFPP;
+        internal System.Windows.Forms.ErrorProvider epSubFPP;
         internal System.Windows.Forms.ErrorProvider epObligationNo;
         internal System.Windows.Forms.ErrorProvider epReferenceNo;
         internal System.Windows.Forms.ErrorProvider epExplanation;

@@ -64,7 +64,7 @@ namespace AccountingSystem
 
         public static IPermissionsRepository PermissionsRepository() => new PermissionsRepository(new MySqlGenericCommands());
 
-        public static IOthersFPPRepository OthersFPPRepository() => new OthersFPPRepository(new MySqlGenericCommands());
+        public static ISubFPPRepository SubFPPRepository() => new SubFPPRepository(new MySqlGenericCommands());
 
 
         //A part of Budget System

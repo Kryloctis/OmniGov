@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
                 obligationRequestId = dicobligationRequestId;
                 cmbxFPP.SelectedValue = fppId;
-                cmbxOtherFPP.SelectedValue = othersFPPId;
+                cmbxSubFPP.SelectedValue = othersFPPId;
                 CheckedFund(fundId);
                 CheckedAllotmentClass(allotmentClassId);
                 mskTxtObligationNoSeries.Text = obligationNo;
@@ -99,7 +99,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             var errorArray = new string[7];
             ShowErrorListEmpty();
             errorArray[0] = epFPP.GetError(cmbxFPP);
-            errorArray[1] = epOtherFPP.GetError(cmbxOtherFPP);
+            errorArray[1] = epSubFPP.GetError(cmbxSubFPP);
             errorArray[2] = epObligationNo.GetError(mskTxtObligationNoTemplate);
             errorArray[3] = epReferenceNo.GetError(txtReferenceNo);
             errorArray[4] = epPayee.GetError(txtPayee);
@@ -131,12 +131,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal void ResetForm() 
         {
             cmbxFPP.Enabled = true;
-            cmbxOtherFPP.Enabled = true;
+            cmbxSubFPP.Enabled = true;
             flowLayoutPanelFunds.Enabled = true;
             flowLayoutPanelAllotmentClass.Enabled = true;
             dtDateRequest.Enabled = true;
             cmbxFPP.SelectedIndex = -1;
-            cmbxOtherFPP.SelectedIndex = -1;
+            cmbxSubFPP.SelectedIndex = -1;
             CheckedFund(1);
             CheckedAllotmentClass(1);
             mskTxtObligationNoSeries.Text = string.Empty;
@@ -186,7 +186,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 cmbxFPP.TextChanged -= new EventHandler(CmbxFPP_TextChanged);
                 HelperLoadRecords.FPPComboBox(dtFPP, cmbxFPP , "fpp_name", "id");
                 cmbxFPP.SelectedIndex = -1;
-                cmbxOtherFPP.Text = string.Empty;
+                cmbxSubFPP.Text = string.Empty;
                 cmbxFPP.SelectedValueChanged += new EventHandler(CmbxFPP_SelectedValueChanged);
                 cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TextChanged);
             }
@@ -202,31 +202,33 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
             if (fppNameExist)
             {
-                LoadOtherFPP();
-                cmbxOtherFPP.Enabled = true;
+                LoadSubFPP();
+                cmbxSubFPP.Enabled = true;
             }
             else
             {
-                cmbxOtherFPP.Enabled = false;
-                cmbxOtherFPP.SelectedIndex = -1;
-                cmbxOtherFPP.Text = string.Empty;
+                cmbxSubFPP.Enabled = false;
+                cmbxSubFPP.SelectedIndex = -1;
+                cmbxSubFPP.Text = string.Empty;
             }
         }
 
         private void CmbxFPP_SelectedValueChanged(object sender, EventArgs e)
         {
-            LoadOtherFPP();
+            LoadSubFPP();
         }
 
-        private void LoadOtherFPP() 
+
+        //SUB FPP
+        private void LoadSubFPP() 
         {
             try
             {
-                var dtOtherFPP = Factory.OthersFPPRepository().GetRecordsByFPPId(Convert.ToInt32(cmbxFPP.SelectedValue));
+                var dtOtherFPP = Factory.SubFPPRepository().GetRecordsByFPPId(Convert.ToInt32(cmbxFPP.SelectedValue));
 
-                HelperLoadRecords.OthersFPPCombobox(dtOtherFPP, cmbxOtherFPP, "name", "id");
-                cmbxOtherFPP.SelectedIndex = -1;
-                cmbxOtherFPP.Text = string.Empty;
+                HelperLoadRecords.OthersFPPCombobox(dtOtherFPP, cmbxSubFPP, "name", "id");
+                cmbxSubFPP.SelectedIndex = -1;
+                cmbxSubFPP.Text = string.Empty;
             }
             catch (Exception ex)
             {
@@ -346,7 +348,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 LoadAllotmentClasses();
                 LoadDatagridFormat();
                 mskTxtObligationNoTemplate.Text = GenerateObligationRequestNoTemplate();
-                cmbxOtherFPP.Enabled = false;
+                cmbxSubFPP.Enabled = false;
                 btnEdit.Enabled = false;
                 btnRemove.Enabled = false;
             }
@@ -358,6 +360,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         }
 
 
+
+
+        //VALIDATIONS
 
         private bool ShowErrorFPPNameNotExist() 
         {
@@ -396,17 +401,17 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
 
 
-        private bool ShowErrorOthersFPPNameNotExist()
+        private bool ShowErrorSubFPPNameNotExist()
         {
             try
             {
-                string otherFPPName = cmbxOtherFPP.Text;
+                string otherFPPName = cmbxSubFPP.Text;
 
-                bool otherFPPNameExist = Factory.OthersFPPRepository().NameExist(otherFPPName);
+                bool otherFPPNameExist = Factory.SubFPPRepository().NameExist(otherFPPName);
 
                 if (!otherFPPNameExist && !string.IsNullOrEmpty(otherFPPName))
                 {
-                    epOtherFPP.SetError(cmbxOtherFPP, "Other FPP you entered doesn't exist on your record");
+                    epSubFPP.SetError(cmbxSubFPP, "Other FPP you entered doesn't exist on your record");
                     return true;
                 }
 
@@ -418,14 +423,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-        private void cmbxOtherFPP_Validating(object sender, CancelEventArgs e)
+        private void cmbxSubFPP_Validating(object sender, CancelEventArgs e)
         {
-                e.Cancel = ShowErrorOthersFPPNameNotExist();
+                e.Cancel = ShowErrorSubFPPNameNotExist();
         }
 
-        private void cmbxOtherFPP_Validated(object sender, EventArgs e)
+        private void cmbxSubFPP_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epOtherFPP, cmbxOtherFPP);
+            Helper.ClearErrorComboBox(epSubFPP, cmbxSubFPP);
         }
 
 
@@ -524,7 +529,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             var errorArray = new string[2];
             errorArray[0] = epFPP.GetError(cmbxFPP);
-            errorArray[1] = epOtherFPP.GetError(cmbxOtherFPP);
+            errorArray[1] = epSubFPP.GetError(cmbxSubFPP);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -534,14 +539,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             try
             {
-                if (ShowErrorFPPNameNotExist() || Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP") || ShowErrorOthersFPPNameNotExist())
+                if (ShowErrorFPPNameNotExist() || Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP") || ShowErrorSubFPPNameNotExist())
                 {
                     Helper.MessageBoxError(GetFormErrorsAdd());
                     return false;
                 }
 
                 Helper.ClearErrorComboBox(epFPP, cmbxFPP);
-                Helper.ClearErrorComboBox(epOtherFPP, cmbxOtherFPP);
+                Helper.ClearErrorComboBox(epSubFPP, cmbxSubFPP);
 
                 return true;
             }
@@ -565,7 +570,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 var ucObligationRequestAdd = frmObligationRequestAdd.ucObligationRequest1;
 
                 ucObligationRequestAdd.fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
-                ucObligationRequestAdd.otherFPPId = string.IsNullOrEmpty(cmbxOtherFPP.Text) ? null : Convert.ToInt32(cmbxOtherFPP.SelectedValue);
+                ucObligationRequestAdd.otherFPPId = string.IsNullOrEmpty(cmbxSubFPP.Text) ? null : Convert.ToInt32(cmbxSubFPP.SelectedValue);
                 ucObligationRequestAdd.fundId = fundId;
                 ucObligationRequestAdd.allotmentClassId = allotmentClassId;
                 ucObligationRequestAdd.dateRequested = dtDateRequest.Value;
@@ -630,7 +635,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 ucObligationRequestEdit.selectedAccountId = accountId;
 
                 ucObligationRequestEdit.fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
-                ucObligationRequestEdit.otherFPPId = string.IsNullOrEmpty(cmbxOtherFPP.Text) ? null : Convert.ToInt32(cmbxOtherFPP.SelectedValue);
+                ucObligationRequestEdit.otherFPPId = string.IsNullOrEmpty(cmbxSubFPP.Text) ? null : Convert.ToInt32(cmbxSubFPP.SelectedValue);
                 ucObligationRequestEdit.fundId = fundId;
                 ucObligationRequestEdit.allotmentClassId = allotmentClassId;
                 ucObligationRequestEdit.dateRequested = dtDateRequest.Value;

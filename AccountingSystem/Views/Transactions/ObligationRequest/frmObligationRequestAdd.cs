@@ -64,7 +64,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             {
                 uc.ResetForm();
                 _ucObligationRequestMain.cmbxFPP.Enabled = false;
-                _ucObligationRequestMain.cmbxOtherFPP.Enabled = false;
+                _ucObligationRequestMain.cmbxSubFPP.Enabled = false;
                 _ucObligationRequestMain.flowLayoutPanelFunds.Enabled = false;
                 _ucObligationRequestMain.flowLayoutPanelAllotmentClass.Enabled = false;
                 _ucObligationRequestMain.dtDateRequest.Enabled = false;

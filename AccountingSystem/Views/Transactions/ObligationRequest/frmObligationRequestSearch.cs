@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 _frmObligationRequestMain.btnCancel.Enabled = true;
                 _frmObligationRequestMain.btnDelete.Enabled = true;
                 _ucObligationRequestMain.cmbxFPP.Enabled = false;
-                _ucObligationRequestMain.cmbxOtherFPP.Enabled = false;
+                _ucObligationRequestMain.cmbxSubFPP.Enabled = false;
                 _ucObligationRequestMain.flowLayoutPanelFunds.Enabled = false;
                 _ucObligationRequestMain.flowLayoutPanelAllotmentClass.Enabled = false;
                 _ucObligationRequestMain.dtDateRequest.Enabled = false;

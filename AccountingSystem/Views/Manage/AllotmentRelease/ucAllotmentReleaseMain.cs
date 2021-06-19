@@ -173,9 +173,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             var fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
 
             if (string.IsNullOrWhiteSpace(cmbxSubFPP.Text))
-                dtSubFPP = Factory.OthersFPPRepository().GetRecordsByFPPId(fppId);
+                dtSubFPP = Factory.SubFPPRepository().GetRecordsByFPPId(fppId);
             else
-                dtSubFPP = Factory.OthersFPPRepository().GetRecordsByFPPIdCodeName(fppId , cmbxSubFPP.Text);
+                dtSubFPP = Factory.SubFPPRepository().GetRecordsByFPPIdCodeName(fppId , cmbxSubFPP.Text);
 
             return dtSubFPP;
         }

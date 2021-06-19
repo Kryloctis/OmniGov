@@ -40,7 +40,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         internal void LoadOthersFPPByFPPIdCombobox()
         {
-            HelperLoadRecords.OthersFPPCombobox(Factory.OthersFPPRepository().GetRecordsByFPPId(fppId), cmbxOthersFPP, "name", "id");
+            HelperLoadRecords.OthersFPPCombobox(Factory.SubFPPRepository().GetRecordsByFPPId(fppId), cmbxOthersFPP, "name", "id");
             cmbxOthersFPP.SelectedIndex = -1;
             cmbxOthersFPP.Text = string.Empty;
             cmbxOthersFPP.Enabled = true;
@@ -53,7 +53,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             try
             {
-                if (!Factory.OthersFPPRepository().NameExist(cmbxOthersFPP.Text) && !string.IsNullOrWhiteSpace(cmbxOthersFPP.Text))
+                if (!Factory.SubFPPRepository().NameExist(cmbxOthersFPP.Text) && !string.IsNullOrWhiteSpace(cmbxOthersFPP.Text))
                 {
                     ep.SetError(comboBox, fieldText);
                     return true;
