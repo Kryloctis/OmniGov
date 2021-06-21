@@ -23,6 +23,19 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             InitializeComponent();
         }
 
+        internal void GetTotalObligations() 
+        {
+            decimal totalObligation = 0;
+
+            foreach (DataGridViewRow row in dgObligationRequests.Rows) 
+            {
+                totalObligation += Convert.ToDecimal(row.Cells["amount"].Value);
+            
+            }
+
+            txtTotalObligations.Text = totalObligation.ToString("N2");
+        }
+
 
         internal void LoadSearched() 
         {
@@ -63,7 +76,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void LoadObligationRequests(int dicobligationRequestId)
         {
-            dataGridView1.Rows.Clear();
+            dgObligationRequests.Rows.Clear();
 
             DataTable dtObligationRequest = Factory.ObligationRequestRepository().GetViewRecordsById(obligationRequestId);
 
@@ -76,7 +89,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                         item["obligation_requested_amount"]
                 };
 
-                dataGridView1.Rows.Add(obligationRequest);
+                dgObligationRequests.Rows.Add(obligationRequest);
             }
         }
 
@@ -104,7 +117,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             errorArray[3] = epReferenceNo.GetError(txtReferenceNo);
             errorArray[4] = epPayee.GetError(txtPayee);
             errorArray[5] = epExplanation.GetError(txtExplanation);
-            errorArray[6] = dataGridView1.Tag == null? string.Empty: dataGridView1.Tag.ToString();
+            errorArray[6] = dgObligationRequests.Tag == null? string.Empty: dgObligationRequests.Tag.ToString();
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -115,9 +128,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             try
             {
-                if (dataGridView1.Rows.Count == 0) 
+                if (dgObligationRequests.Rows.Count == 0) 
                 {
-                    dataGridView1.Tag = "No obligations has been saved. Obligation Request List is empty.";
+                    dgObligationRequests.Tag = "No obligations has been saved. Obligation Request List is empty.";
                     return true;
                 }
             }
@@ -144,26 +157,26 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             txtReferenceNo.Text = string.Empty;
             txtPayee.Text = string.Empty;
             txtExplanation.Text = string.Empty;
-            dataGridView1.Rows.Clear();
+            dgObligationRequests.Rows.Clear();
             obligationRequestId = 0;
             obligationNo = string.Empty;
         }
 
         private void LoadDatagridFormat()
         {
-            dataGridView1.Columns.Add("account_id", "Account ID");
-            dataGridView1.Columns.Add("account_name", "Account Name");
-            dataGridView1.Columns.Add("amount", "Amount");
+            dgObligationRequests.Columns.Add("account_id", "Account ID");
+            dgObligationRequests.Columns.Add("account_name", "Account Name");
+            dgObligationRequests.Columns.Add("amount", "Amount");
 
-            dataGridView1.Columns["account_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
-            dataGridView1.Columns["account_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
-            dataGridView1.Columns["account_name"].Width = 400;
-            dataGridView1.Columns["amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
-            dataGridView1.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridView1.Columns["amount"].DefaultCellStyle.Format = "N2";
+            dgObligationRequests.Columns["account_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dgObligationRequests.Columns["account_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dgObligationRequests.Columns["account_name"].Width = 400;
+            dgObligationRequests.Columns["amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dgObligationRequests.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgObligationRequests.Columns["amount"].DefaultCellStyle.Format = "N2";
 
-            dataGridView1.Columns["account_id"].Visible = false;
-            Helper.DatagridDefaultStyle(dataGridView1, true);
+            dgObligationRequests.Columns["account_id"].Visible = false;
+            Helper.DatagridDefaultStyle(dgObligationRequests, true);
         }
 
 
@@ -570,7 +583,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 var ucObligationRequestAdd = frmObligationRequestAdd.ucObligationRequest1;
 
                 ucObligationRequestAdd.fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
-                ucObligationRequestAdd.otherFPPId = string.IsNullOrEmpty(cmbxSubFPP.Text) ? null : Convert.ToInt32(cmbxSubFPP.SelectedValue);
+                ucObligationRequestAdd.subFPPId = string.IsNullOrEmpty(cmbxSubFPP.Text) ? null : Convert.ToInt32(cmbxSubFPP.SelectedValue);
                 ucObligationRequestAdd.fundId = fundId;
                 ucObligationRequestAdd.allotmentClassId = allotmentClassId;
                 ucObligationRequestAdd.dateRequested = dtDateRequest.Value;
@@ -581,9 +594,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow item in dataGridView1.SelectedRows)
+            foreach (DataGridViewRow item in dgObligationRequests.SelectedRows)
             {
-                dataGridView1.Rows.Remove(item);
+                dgObligationRequests.Rows.Remove(item);
             }
         }
 
@@ -591,7 +604,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void EnableDisableButtons()
         {
-            int selectedRowCount = dataGridView1.SelectedRows.Count;
+            int selectedRowCount = dgObligationRequests.SelectedRows.Count;
 
             if (selectedRowCount == 1)
             {
@@ -628,14 +641,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 var ucObligationRequestEdit = _frmObligationRequestEdit.ucObligationRequest1;
 
 
-                int rowIndex = dataGridView1.CurrentCell.RowIndex;
-                int accountId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["account_id"].Value);
-                decimal amount = Convert.ToDecimal(dataGridView1.Rows[rowIndex].Cells["amount"].Value);
+                int rowIndex = dgObligationRequests.CurrentCell.RowIndex;
+                int accountId = Convert.ToInt32(dgObligationRequests.Rows[rowIndex].Cells["account_id"].Value);
+                decimal amount = Convert.ToDecimal(dgObligationRequests.Rows[rowIndex].Cells["amount"].Value);
 
                 ucObligationRequestEdit.selectedAccountId = accountId;
 
                 ucObligationRequestEdit.fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
-                ucObligationRequestEdit.otherFPPId = string.IsNullOrEmpty(cmbxSubFPP.Text) ? null : Convert.ToInt32(cmbxSubFPP.SelectedValue);
+                ucObligationRequestEdit.subFPPId = string.IsNullOrEmpty(cmbxSubFPP.Text) ? null : Convert.ToInt32(cmbxSubFPP.SelectedValue);
                 ucObligationRequestEdit.fundId = fundId;
                 ucObligationRequestEdit.allotmentClassId = allotmentClassId;
                 ucObligationRequestEdit.dateRequested = dtDateRequest.Value;

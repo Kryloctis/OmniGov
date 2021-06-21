@@ -35,8 +35,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     return false;
                 }
 
-                int accountId = Convert.ToInt32(uc.cmbxAccount.SelectedValue);
-                string accountName = uc.cmbxAccount.Text;
+                int accountId = Convert.ToInt32(uc.cmbxBudgetAppropriations.SelectedValue);
+                string accountName = uc.cmbxBudgetAppropriations.Text;
                 decimal obligationAmount = uc.nudAmount.Value;
 
                 var items = new object[]
@@ -45,8 +45,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     accountName,
                     obligationAmount
                 };
-
-                _ucObligationRequestMain.dataGridView1.Rows.Add(items);
+                               
+                _ucObligationRequestMain.dgObligationRequests.Rows.Add(items);
+                _ucObligationRequestMain.GetTotalObligations();
 
                 return true;
             
@@ -71,9 +72,5 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
         }
 
-        private void frmObligationRequestAdd_Load(object sender, EventArgs e)
-        {
-          
-        }
     }
 }

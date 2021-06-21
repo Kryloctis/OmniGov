@@ -50,7 +50,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.txtExplanation = new System.Windows.Forms.TextBox();
             this.txtReferenceNo = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgObligationRequests = new System.Windows.Forms.DataGridView();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -61,9 +61,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.epExplanation = new System.Windows.Forms.ErrorProvider(this.components);
             this.epObligationRequest = new System.Windows.Forms.ErrorProvider(this.components);
             this.epPayee = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtTotalObligations = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgObligationRequests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epSubFPP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epObligationNo)).BeginInit();
@@ -80,7 +82,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.groupBox1.Location = new System.Drawing.Point(0, 70);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(541, 54);
+            this.groupBox1.Size = new System.Drawing.Size(551, 54);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Funds";
@@ -91,7 +93,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.flowLayoutPanelFunds.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.flowLayoutPanelFunds.Location = new System.Drawing.Point(3, 19);
             this.flowLayoutPanelFunds.Name = "flowLayoutPanelFunds";
-            this.flowLayoutPanelFunds.Size = new System.Drawing.Size(535, 32);
+            this.flowLayoutPanelFunds.Size = new System.Drawing.Size(545, 32);
             this.flowLayoutPanelFunds.TabIndex = 3;
             // 
             // groupBox2
@@ -100,7 +102,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox2.Location = new System.Drawing.Point(0, 127);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(541, 54);
+            this.groupBox2.Size = new System.Drawing.Size(551, 54);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Allotment Class";
@@ -111,7 +113,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.flowLayoutPanelAllotmentClass.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.flowLayoutPanelAllotmentClass.Location = new System.Drawing.Point(3, 19);
             this.flowLayoutPanelAllotmentClass.Name = "flowLayoutPanelAllotmentClass";
-            this.flowLayoutPanelAllotmentClass.Size = new System.Drawing.Size(535, 32);
+            this.flowLayoutPanelAllotmentClass.Size = new System.Drawing.Size(545, 32);
             this.flowLayoutPanelAllotmentClass.TabIndex = 5;
             // 
             // label1
@@ -126,7 +128,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // cmbxFPP
             // 
             this.cmbxFPP.FormattingEnabled = true;
-            this.cmbxFPP.Location = new System.Drawing.Point(92, 10);
+            this.cmbxFPP.Location = new System.Drawing.Point(102, 10);
             this.cmbxFPP.Name = "cmbxFPP";
             this.cmbxFPP.Size = new System.Drawing.Size(449, 23);
             this.cmbxFPP.TabIndex = 0;
@@ -145,7 +147,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // cmbxSubFPP
             // 
             this.cmbxSubFPP.FormattingEnabled = true;
-            this.cmbxSubFPP.Location = new System.Drawing.Point(92, 39);
+            this.cmbxSubFPP.Location = new System.Drawing.Point(102, 39);
             this.cmbxSubFPP.Name = "cmbxSubFPP";
             this.cmbxSubFPP.Size = new System.Drawing.Size(449, 23);
             this.cmbxSubFPP.TabIndex = 1;
@@ -154,7 +156,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // dtDateRequest
             // 
-            this.dtDateRequest.Location = new System.Drawing.Point(332, 184);
+            this.dtDateRequest.Location = new System.Drawing.Point(342, 184);
             this.dtDateRequest.Name = "dtDateRequest";
             this.dtDateRequest.Size = new System.Drawing.Size(209, 23);
             this.dtDateRequest.TabIndex = 8;
@@ -163,7 +165,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(236, 188);
+            this.label3.Location = new System.Drawing.Point(246, 188);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(90, 15);
             this.label3.TabIndex = 6;
@@ -171,7 +173,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // mskTxtObligationNoSeries
             // 
-            this.mskTxtObligationNoSeries.Location = new System.Drawing.Point(92, 184);
+            this.mskTxtObligationNoSeries.Location = new System.Drawing.Point(102, 184);
             this.mskTxtObligationNoSeries.Mask = "0000";
             this.mskTxtObligationNoSeries.Name = "mskTxtObligationNoSeries";
             this.mskTxtObligationNoSeries.Size = new System.Drawing.Size(33, 23);
@@ -182,7 +184,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // mskTxtObligationNoTemplate
             // 
-            this.mskTxtObligationNoTemplate.Location = new System.Drawing.Point(143, 184);
+            this.mskTxtObligationNoTemplate.Location = new System.Drawing.Point(153, 184);
             this.mskTxtObligationNoTemplate.Mask = "00-00-000";
             this.mskTxtObligationNoTemplate.Name = "mskTxtObligationNoTemplate";
             this.mskTxtObligationNoTemplate.ReadOnly = true;
@@ -193,7 +195,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(128, 187);
+            this.label4.Location = new System.Drawing.Point(138, 187);
             this.label4.Margin = new System.Windows.Forms.Padding(0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(12, 15);
@@ -211,7 +213,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // txtPayee
             // 
-            this.txtPayee.Location = new System.Drawing.Point(92, 242);
+            this.txtPayee.Location = new System.Drawing.Point(102, 242);
             this.txtPayee.Name = "txtPayee";
             this.txtPayee.Size = new System.Drawing.Size(449, 23);
             this.txtPayee.TabIndex = 10;
@@ -238,7 +240,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // txtExplanation
             // 
-            this.txtExplanation.Location = new System.Drawing.Point(92, 271);
+            this.txtExplanation.Location = new System.Drawing.Point(102, 271);
             this.txtExplanation.Multiline = true;
             this.txtExplanation.Name = "txtExplanation";
             this.txtExplanation.Size = new System.Drawing.Size(449, 36);
@@ -248,7 +250,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // txtReferenceNo
             // 
-            this.txtReferenceNo.Location = new System.Drawing.Point(92, 213);
+            this.txtReferenceNo.Location = new System.Drawing.Point(102, 213);
             this.txtReferenceNo.Name = "txtReferenceNo";
             this.txtReferenceNo.Size = new System.Drawing.Size(449, 23);
             this.txtReferenceNo.TabIndex = 9;
@@ -264,42 +266,42 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.label8.TabIndex = 12;
             this.label8.Text = "Reference No.";
             // 
-            // dataGridView1
+            // dgObligationRequests
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 313);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(541, 237);
-            this.dataGridView1.TabIndex = 12;
-            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
+            this.dgObligationRequests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgObligationRequests.Location = new System.Drawing.Point(3, 313);
+            this.dgObligationRequests.Name = "dgObligationRequests";
+            this.dgObligationRequests.RowTemplate.Height = 25;
+            this.dgObligationRequests.Size = new System.Drawing.Size(548, 237);
+            this.dgObligationRequests.TabIndex = 12;
+            this.dgObligationRequests.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(466, 556);
+            this.btnRemove.Location = new System.Drawing.Point(476, 555);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(75, 23);
-            this.btnRemove.TabIndex = 15;
+            this.btnRemove.TabIndex = 16;
             this.btnRemove.Text = "Remove";
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(385, 556);
+            this.btnEdit.Location = new System.Drawing.Point(398, 555);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(75, 23);
-            this.btnEdit.TabIndex = 14;
+            this.btnEdit.TabIndex = 15;
             this.btnEdit.Text = "Edit...";
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(304, 556);
+            this.btnAdd.Location = new System.Drawing.Point(317, 555);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 13;
+            this.btnAdd.TabIndex = 14;
             this.btnAdd.Text = "Add...";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -332,14 +334,34 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             this.epPayee.ContainerControl = this;
             // 
+            // txtTotalObligations
+            // 
+            this.txtTotalObligations.Location = new System.Drawing.Point(102, 556);
+            this.txtTotalObligations.MaxLength = 999999999;
+            this.txtTotalObligations.Name = "txtTotalObligations";
+            this.txtTotalObligations.ReadOnly = true;
+            this.txtTotalObligations.Size = new System.Drawing.Size(159, 23);
+            this.txtTotalObligations.TabIndex = 13;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(0, 559);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(96, 15);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "Total Obligations";
+            // 
             // ucObligationRequestMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.txtTotalObligations);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnRemove);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgObligationRequests);
             this.Controls.Add(this.txtExplanation);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label8);
@@ -359,11 +381,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "ucObligationRequestMain";
-            this.Size = new System.Drawing.Size(561, 583);
+            this.Size = new System.Drawing.Size(572, 594);
             this.Load += new System.EventHandler(this.ucObligationRequestMain_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgObligationRequests)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epSubFPP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epObligationNo)).EndInit();
@@ -405,8 +427,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.Label label6;
         internal System.Windows.Forms.Label label7;
         internal System.Windows.Forms.Label label8;
-        internal System.Windows.Forms.DataGridView dataGridView1;
+        internal System.Windows.Forms.DataGridView dgObligationRequests;
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFunds;
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelAllotmentClass;
+        private System.Windows.Forms.Label label9;
+        internal System.Windows.Forms.TextBox txtTotalObligations;
     }
 }

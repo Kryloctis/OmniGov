@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             InitializeComponent();
             Helper.LoadFormIcon(this);
             uc = ucObligationRequest1;
-            uc.cmbxAccount.Enabled = false;
+            uc.cmbxBudgetAppropriations.Enabled = false;
             _ucObligationRequestMain = ucObligationRequestMain;
             uc.LoadReferences(_ucObligationRequestMain);
         }
@@ -40,10 +40,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
             else
             {
-                var rowIndex = _ucObligationRequestMain.dataGridView1.CurrentCell.RowIndex;
+                var rowIndex = _ucObligationRequestMain.dgObligationRequests.CurrentCell.RowIndex;
                 var amount = uc.nudAmount.Value;
 
-                _ucObligationRequestMain.dataGridView1.Rows[rowIndex].Cells["amount"].Value = amount;
+                _ucObligationRequestMain.dgObligationRequests.Rows[rowIndex].Cells["amount"].Value = amount;
                 Close();
             }
         }

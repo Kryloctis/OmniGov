@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
     {
 
         internal int fppId;
-        internal int? otherFPPId;
+        internal int? subFPPId;
         internal int fundId;
         internal int allotmentClassId;
         internal DateTime dateRequested;
@@ -30,13 +31,128 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         }
 
 
-        internal void LoadSelected()
+        //ACCOUNT COMBOBOX
+
+        private DataTable DatatableBudgetAppropriations()
         {
-           cmbxAccount.SelectedValue = selectedAccountId;
+            var dtBudgetAppropriation = new DataTable();
+
+            var budgetAppropriationsModel = new BudgetAppropriationsModel()
+            {
+                FunctionProgramProjectId = fppId,
+                OthersFPPId = subFPPId,
+                AllotmentClassesId = allotmentClassId,
+                FundsId = fundId,
+                Year = Convert.ToInt16(dateRequested.Year)
+            };
+
+            string searchTxt = cmbxBudgetAppropriations.Text.Trim();
+
+            if (string.IsNullOrEmpty(cmbxBudgetAppropriations.Text))
+                dtBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(budgetAppropriationsModel);
+            else
+                dtBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordsByIdsSearch(budgetAppropriationsModel, searchTxt);
+
+
+            return dtBudgetAppropriation;
+        }
+
+        private void LoadBudgetAppropriations()
+        {
+            try
+            {
+                cmbxBudgetAppropriations.DroppedDown = false;
+                Cursor.Current = Cursors.Default;
+
+                if (DatatableBudgetAppropriations().Rows.Count == 0) return;
+
+                var accountDict = new Dictionary<int, string>();
+                foreach (DataRow item in DatatableBudgetAppropriations().Rows)
+                {
+                    int accountId = Convert.ToInt32(item["id"]);
+                    string remarks = string.IsNullOrEmpty(item["remarks"].ToString()) ? string.Empty : $"({item["remarks"]})";
+                    string accountName = $"{item["account_code"]} - {item["general_ledger_accounts_name"]} {remarks}";
+                    bool isContinuing = Convert.ToByte(item["continuing"]) == 1 ? true : false;
+                    short year = Convert.ToInt16(item["year"]);
+
+                    if (!isContinuing && year == dateRequested.Year)
+                        accountDict.Add(accountId, accountName);
+                    else if (isContinuing && year <= dateRequested.Year)
+                        accountDict.Add(accountId, accountName);
+                }
+
+                cmbxBudgetAppropriations.DataSource = accountDict.Count == 0 ? null : new BindingSource(accountDict, null);
+                cmbxBudgetAppropriations.DisplayMember = "value";
+                cmbxBudgetAppropriations.ValueMember = "key";
+
+
+                cmbxBudgetAppropriations.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
+                cmbxBudgetAppropriations.SelectedIndex = -1;
+                cmbxBudgetAppropriations.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
+                cmbxBudgetAppropriations.SelectedValueChanged += new EventHandler(cmbxBudgetAppropriations_SelectedValueChanged);
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.StackTrace);
+            }
+
+        }
+
+        private void cmbxBudgetAppropriations_SelectedValueChanged(object sender, EventArgs e)
+        {
+            txtUnobligatedBalance.Text = GetBudgetAppropriationBalance().ToString("N2");
+        }
+
+        private decimal GetBudgetAppropriationBalance()
+        {
+            decimal appropriationBalance = 0;
+
+            if (cmbxBudgetAppropriations.SelectedIndex > -1)
+            {
+                int budgetAppropriationId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
+                var budgetAppropriationDict = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
+                var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
+                var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(budgetAppropriationId);
+
+                decimal budgetAppropriation = Convert.ToDecimal(budgetAppropriationDict["amount"]);
+                decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
+                decimal totalSupplementalAppropriation = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0 ? 0 : dtSupplementalAppropriation.Compute("Sum(amount)", string.Empty));
+
+                appropriationBalance = (budgetAppropriation + totalSupplementalAppropriation) - totalAllotmentRelease;
+
+            }
+
+            return appropriationBalance;
+        }
+
+        private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbxBudgetAppropriations.Text))
+            {
+                LoadBudgetAppropriations();
+            }
+        }
+
+        private void cmbxBudgetAppropriations_KeyDown(object sender, KeyEventArgs e)
+        {
+            string searchTxt = cmbxBudgetAppropriations.Text;
+
+            if (e.KeyCode == Keys.F1 && cmbxBudgetAppropriations.FindStringExact(searchTxt) == -1 && !string.IsNullOrEmpty(searchTxt))
+            {
+                LoadBudgetAppropriations();
+                cmbxBudgetAppropriations.SelectedIndex = 0;
+                cmbxBudgetAppropriations.DroppedDown = true;
+            }
         }
 
 
 
+
+        internal void LoadSelected()
+        {
+           cmbxBudgetAppropriations.SelectedValue = selectedAccountId;
+        }
 
         internal void LoadReferences(ucObligationRequestMain ucObligationRequestMain) 
         {
@@ -46,7 +162,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal string GetFormErrors()
         {
             var errorArray = new string[2];
-            errorArray[0] = epAccount.GetError(cmbxAccount);
+            errorArray[0] = epAccount.GetError(cmbxBudgetAppropriations);
             errorArray[1] = epAmount.GetError(nudAmount);
 
             IError _errors = Factory.CreateErrors(errorArray);
@@ -58,93 +174,26 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             nudAmount.Value = 0;
         }
 
-        private decimal GetTotalOnListItemsAmounts(int accountId)
+
+        private void ucObligationRequest_Load(object sender, EventArgs e)
         {
-            decimal OnListItemsAmount = 0;
-
-            if (_ucObligationRequestMain.dataGridView1.Rows.Count ==  0 ||  _ucObligationRequestMain.obligationRequestId > 0)
-                OnListItemsAmount = 0;
-            else
+            if (!DesignMode)
             {
-                foreach (DataGridViewRow item in _ucObligationRequestMain.dataGridView1.Rows)
-                {
-                    int rowAccountId = Convert.ToInt32(item.Cells["account_id"].Value);
-                    decimal rowAmount = Convert.ToDecimal(item.Cells["amount"].Value);
-
-                    if (accountId == rowAccountId)
-                    {
-                        OnListItemsAmount += rowAmount;
-                    }
-                }
+                LoadBudgetAppropriations();
             }
-            
-            return OnListItemsAmount;
         }
 
 
 
-        private void LoadAccounts()
-        {
-            try
-            {
-                cmbxAccount.SelectedValueChanged -= new EventHandler(cmbxAccount_SelectedValueChanged);
-                cmbxAccount.TextChanged -= new EventHandler(cmbxAccount_TextChanged);
-
-                var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
-
-                string allotmentClassName = allotmentClassRepo["allotment_name"];
-
-                DataTable dtAccounts;
-
-                if (allotmentClassId == 4)
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsBySearch(cmbxAccount.Text);
-                else
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupNameSearch(allotmentClassName, cmbxAccount.Text);
-
-                var accountDict = new Dictionary<int, string>();
-                foreach (DataRow item in dtAccounts.Rows)
-                {
-                    int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
-                    string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
-
-                    accountDict.Add(accountId, accountName);
-                }
-
-                cmbxAccount.DataSource = new BindingSource(accountDict, null);
-                cmbxAccount.DisplayMember = "value";
-                cmbxAccount.ValueMember = "key";
-                cmbxAccount.SelectedIndex = -1;
-                cmbxAccount.SelectedValueChanged += new EventHandler(cmbxAccount_SelectedValueChanged);
-                cmbxAccount.TextChanged += new EventHandler(cmbxAccount_TextChanged);
-
-                Helper.ClearErrorComboBox(epAccount, cmbxAccount);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        private void cmbxAccount_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(cmbxAccount.Text))
-            {
-                LoadAccounts();
-            }
-            else if ((ShowErrorAccountNameNotExist() && !string.IsNullOrEmpty(cmbxAccount.Text)) || string.IsNullOrEmpty(cmbxAccount.Text))
-            {
-                txtAllotmentAmount.Text = "0.00";
-                txtBalance.Text = "0.00";
-            }
-        }
+        //VALIDATIONS
 
         private bool ShowErrorAccountNameNotExist()
         {
             try
             {
-                if (cmbxAccount.FindStringExact(cmbxAccount.Text) < 0 && !string.IsNullOrEmpty(cmbxAccount.Text))
+                if (cmbxBudgetAppropriations.FindStringExact(cmbxBudgetAppropriations.Text) < 0 && !string.IsNullOrEmpty(cmbxBudgetAppropriations.Text))
                 {
-                    epAccount.SetError(cmbxAccount, "Account you entered doesn't exist on your record.");
+                    epAccount.SetError(cmbxBudgetAppropriations, "Account you entered doesn't exist on your record.");
                     return true;
                 }
             }
@@ -159,15 +208,15 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             try
             {
-                foreach (DataGridViewRow item in _ucObligationRequestMain.dataGridView1.Rows) 
+                foreach (DataGridViewRow item in _ucObligationRequestMain.dgObligationRequests.Rows) 
                 {
-                    int accountId = Convert.ToInt32(cmbxAccount.SelectedValue);
+                    int accountId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
                     int rowAccountId = Convert.ToInt32(item.Cells["account_id"].Value);
 
 
                     if (accountId == rowAccountId && _ucObligationRequestMain.obligationRequestId == 0) 
                     {
-                        epAccount.SetError(cmbxAccount, "Account already exist on the List");
+                        epAccount.SetError(cmbxBudgetAppropriations, "Account already exist on the List");
                         return true;
                     }
                 }
@@ -182,8 +231,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void cmbxAccount_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbxAccount.Text))
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbxAccount, "Account");
+            if (string.IsNullOrEmpty(cmbxBudgetAppropriations.Text))
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbxBudgetAppropriations, "Account");
             else if (ShowErrorAccountNameNotExist())
                 e.Cancel = ShowErrorAccountNameNotExist();
             else
@@ -192,62 +241,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void cmbxAccount_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epAccount, cmbxAccount);
+            Helper.ClearErrorComboBox(epAccount, cmbxBudgetAppropriations);
         }
-
-        private void cmbxAccount_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (cmbxAccount.Text.Length < 4) return;
-
-            if (e.KeyCode == Keys.F1)
-            {
-                try
-                {
-
-                    cmbxAccount.SelectedValueChanged -= new EventHandler(cmbxAccount_SelectedValueChanged);
-
-                    var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
-
-                    string allotmentClassName = allotmentClassRepo["allotment_name"];
-
-                    DataTable dtAccounts;
-
-                    if (allotmentClassId == 4)
-                        dtAccounts = Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsBySearch(cmbxAccount.Text);
-                    else
-                        dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupNameSearch(allotmentClassName, cmbxAccount.Text);
-
-                    if (dtAccounts.Rows.Count == 0 || string.IsNullOrWhiteSpace(cmbxAccount.Text.Trim())) return;
-
-                    var accountDict = new Dictionary<int, string>();
-                    foreach (DataRow item in dtAccounts.Rows)
-                    {
-                        int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
-                        string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
-
-                        accountDict.Add(accountId, accountName);
-                    }
-
-                    cmbxAccount.DataSource = new BindingSource(accountDict, null);
-                    cmbxAccount.DisplayMember = "value";
-                    cmbxAccount.ValueMember = "key";
-                    cmbxAccount.DroppedDown = true;
-
-                    cmbxAccount.SelectedValueChanged += new EventHandler(cmbxAccount_SelectedValueChanged);
-
-                    Helper.ClearErrorComboBox(epAccount, cmbxAccount);
-                }
-                catch (Exception ex)
-                {
-                    Helper.MessageBoxError(ex.Message);
-                }
-            }
-        }
-
-        private void cmbxAccount_SelectedValueChanged(object sender, EventArgs e)
-        {
-        }
-
 
 
         private bool ShowErrorAmountIsZero()
@@ -299,14 +294,5 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
 
-
-
-        private void ucObligationRequest_Load(object sender, EventArgs e)
-        {
-            if (!DesignMode)
-            {
-                LoadAccounts();
-            }
-        }
     }
 }
