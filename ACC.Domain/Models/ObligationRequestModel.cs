@@ -6,7 +6,7 @@ namespace ACC.Domain.Models
 {
     public class ObligationRequestModel
     {
-        public int Id { get; set }
+        public int Id { get; set; }
         public string ObligationNo { get; set; }
         public string Payee { get; set; }
         public string Explanation { get; set; }

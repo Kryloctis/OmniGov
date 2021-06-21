@@ -29,8 +29,6 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
-
-  
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             throw new NotImplementedException();
@@ -273,39 +271,28 @@ namespace ACC.Data
                 {
                     object[][] parameters = new object[][]
                     {
-                        new object[] { "@function_program_project_id", DbType.Int32, entity.FPPId },
-                        new object[] { "@others_fpp_id", DbType.String, entity.OtherFPPId },
-                        new object[] { "@funds_id", DbType.Int32, entity.FundId },
-                        new object[] { "@allotment_classes_id", DbType.Int32, entity.AllotmentClassId },
-                        new object[] { "@date_requested", DbType.Date, entity.DateRequested.Date },
+                        
                         new object[] { "@obligation_no", DbType.String, entity.ObligationNo },
                         new object[] { "@payee", DbType.String, entity.Payee },
                         new object[] { "@explanation", DbType.String, entity.Explanation },
                         new object[] { "@reference_no", DbType.String, entity.ReferenceNo },
+                        new object[] { "@date_requested", DbType.Date, entity.DateRequested.Date },
                         new object[] { "@created_by", DbType.Int32, entity.CreatedBy },
                     };
 
                     string query = $"INSERT INTO {tableName} " +
-                        $"(funds_id, " +
-                        $"function_program_project_id, " +
-                        $"others_fpp_id, " +
-                        $"allotment_classes_id, " +
-                        $"date_requested, " +
-                        $"obligation_no, " +
+                        $"(obligation_no, " +
                         $"payee, " +
                         $"explanation, " +
                         $"reference_no, " +
+                        $"date_requested, " +
                         $"created_by) " +
-                        $"VALUES(" +
-                        $"@funds_id, " +
-                        $"@function_program_project_id, " +
-                        $"@others_fpp_id, " +
-                        $"@allotment_classes_id, " +
-                        $"@date_requested, " +
-                        $"@obligation_no, " +
+                        $"VALUES " +
+                        $"(@obligation_no, " +
                         $"@payee, " +
                         $"@explanation, " +
                         $"@reference_no, " +
+                        $"@date_requested, " +
                         $"@created_by)";
 
                     // save and get the last inserted id
@@ -340,13 +327,15 @@ namespace ACC.Data
                     var parameters = new object[][]
                     {
                         new object[] { "@id",DbType.Int32, entity.Id},
+                        new object[] { "@obligation_no", DbType.String, entity.ObligationNo },
                         new object[] { "@payee", DbType.String, entity.Payee },
                         new object[] { "@explanation", DbType.String, entity.Explanation },
                         new object[] { "@reference_no", DbType.String, entity.ReferenceNo },
+                        new object[] { "@date_requested", DbType.Date, entity.DateRequested.Date },
                         new object[] { "@updated_by", DbType.Int32, entity.UpdatedBy },
                     };
 
-                    string query = $"UPDATE {tableName} SET payee = @payee, explanation = @explanation, reference_no = @reference_no, updated_by = @updated_by WHERE id = @id";
+                    string query = $"UPDATE {tableName} SET obligation_no = @obligation_no, payee = @payee, explanation = @explanation, reference_no = @reference_no, date_requested = @date_requested, updated_by = @updated_by WHERE id = @id";
 
 
                     // save and get the last inserted id

@@ -153,7 +153,7 @@ namespace ACC.Data
         }
 
 
-        //INSERT
+        
         public int GetLastInsertedID()
         {
             try
@@ -167,6 +167,7 @@ namespace ACC.Data
             }
         }
 
+        //INSERT
         public bool Insert(AllotmentReleaseModel entity, List<AllotmentAccountModel> listAllotmentAccount)
         {
             try
