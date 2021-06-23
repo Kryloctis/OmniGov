@@ -154,7 +154,7 @@ namespace ACC.Data
 
 
         
-        public int GetLastInsertedID()
+        private int GetLastInsertedID()
         {
             try
             {

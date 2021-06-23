@@ -87,26 +87,20 @@ namespace AccountingSystem.Views.Dashboard
                 {
                     decimal TotalbudgetAppropriations = Factory.BudgetAppropriationsRepository().GetTotalBudgetAppropriationsByIds(fundId, allotmentClassId, fppId);
 
-                    decimal TotalObligations = Factory.ObligationRequestRepository().GetTotalObligationsByIds(fundId, allotmentClassId, fppId);
-
-
-                    decimal UnobligatedAppropriationBalance = TotalbudgetAppropriations - TotalObligations;
+                    decimal UnobligatedAppropriationBalance = TotalbudgetAppropriations;
 
                     switch (allotmentClassId) 
                     {
                         case 1:
                             lblPSAppropriations.Text = TotalbudgetAppropriations.ToString("N2");
-                            lblPSObligations.Text = TotalObligations.ToString("N2");
                             lblPSUnobligatedBalances.Text = UnobligatedAppropriationBalance.ToString("N2");
                             break;
                         case 2:
                             lblMOOEAppropriations.Text = TotalbudgetAppropriations.ToString("N2");
-                            lblMOOEObligations.Text = TotalObligations.ToString("N2");
                             lblMOOEUnobligatedBalances.Text = UnobligatedAppropriationBalance.ToString("N2");
                             break;
                         case 3:
                             lblCOAppropriatons.Text = TotalbudgetAppropriations.ToString("N2");
-                            lblCOObligations.Text = TotalObligations.ToString("N2");
                             lblCOUnobligatedBalances.Text = UnobligatedAppropriationBalance.ToString("N2");
                             break;
                         case 4:

@@ -21,19 +21,77 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal int allotmentClassId;
         internal DateTime dateRequested;
         private ucObligationRequestMain _ucObligationRequestMain;
-        private decimal totalAllotmentReleaseBalance;
-        internal int selectedAccountId = 0;
-        internal decimal currentObligationAmount;
+
+        internal int _budgetAppropriationsId = 0;
+        internal decimal _amount = 0;
 
         public ucObligationRequest()
         {
             InitializeComponent();
         }
 
+        private decimal GetCurrentBalance() 
+        {
+            decimal currentBalance = 0;
+            
+            decimal currentAmount = nudAmount.Value;
+            decimal unobligatedBalance = GetAllotmentReleaseBalance();
 
-        //ACCOUNT COMBOBOX
+            currentBalance = unobligatedBalance - currentAmount;
 
-        private DataTable DatatableBudgetAppropriations()
+            return currentBalance < 0? 0 : currentBalance;
+        }
+
+        internal void LoadSelected()
+        {
+
+        }
+
+        internal void LoadReferences(ucObligationRequestMain ucObligationRequestMain)
+        {
+            _ucObligationRequestMain = ucObligationRequestMain;
+        }
+
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[2];
+            errorArray[0] = epObjectOfExpenditure.GetError(cmbxObjectOfExpenditure);
+            errorArray[1] = epAmount.GetError(nudAmount);
+
+            IError _errors = Factory.CreateErrors(errorArray);
+            return _errors.GenerateErrorMessage();
+        }
+
+        internal void ResetForm()
+        {
+            LoadObjectOfExpenditures();
+            cmbxObjectOfExpenditure.SelectedIndex = -1;
+            cmbxObjectOfExpenditure.Text = string.Empty;
+            nudAmount.Value = 0;
+        }
+
+
+        private void ucObligationRequest_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadObjectOfExpenditures();
+                txtUnobligatedBalance.Text = GetAllotmentReleaseBalance().ToString("N2");
+                txtRemainingBalance.Text = GetCurrentBalance().ToString("N2");
+            }
+        }
+
+
+        private void nudAmount_ValueChanged(object sender, EventArgs e)
+        {
+            txtRemainingBalance.Text = GetCurrentBalance().ToString("N2");
+        }
+
+
+
+        //OBJECT OF EXPENDITURE COMBOBOX
+
+        private DataTable DatatableObjectOfExpenditures()
         {
             var dtBudgetAppropriation = new DataTable();
 
@@ -46,9 +104,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 Year = Convert.ToInt16(dateRequested.Year)
             };
 
-            string searchTxt = cmbxBudgetAppropriations.Text.Trim();
+            string searchTxt = cmbxObjectOfExpenditure.Text.Trim();
 
-            if (string.IsNullOrEmpty(cmbxBudgetAppropriations.Text))
+            if (string.IsNullOrEmpty(cmbxObjectOfExpenditure.Text))
                 dtBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(budgetAppropriationsModel);
             else
                 dtBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordsByIdsSearch(budgetAppropriationsModel, searchTxt);
@@ -57,17 +115,17 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return dtBudgetAppropriation;
         }
 
-        private void LoadBudgetAppropriations()
+        private void LoadObjectOfExpenditures()
         {
             try
             {
-                cmbxBudgetAppropriations.DroppedDown = false;
+                cmbxObjectOfExpenditure.DroppedDown = false;
                 Cursor.Current = Cursors.Default;
 
-                if (DatatableBudgetAppropriations().Rows.Count == 0) return;
+                if (DatatableObjectOfExpenditures().Rows.Count == 0) return;
 
                 var accountDict = new Dictionary<int, string>();
-                foreach (DataRow item in DatatableBudgetAppropriations().Rows)
+                foreach (DataRow item in DatatableObjectOfExpenditures().Rows)
                 {
                     int accountId = Convert.ToInt32(item["id"]);
                     string remarks = string.IsNullOrEmpty(item["remarks"].ToString()) ? string.Empty : $"({item["remarks"]})";
@@ -81,16 +139,15 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                         accountDict.Add(accountId, accountName);
                 }
 
-                cmbxBudgetAppropriations.DataSource = accountDict.Count == 0 ? null : new BindingSource(accountDict, null);
-                cmbxBudgetAppropriations.DisplayMember = "value";
-                cmbxBudgetAppropriations.ValueMember = "key";
+                cmbxObjectOfExpenditure.DataSource = accountDict.Count == 0 ? null : new BindingSource(accountDict, null);
+                cmbxObjectOfExpenditure.DisplayMember = "value";
+                cmbxObjectOfExpenditure.ValueMember = "key";
 
 
-                cmbxBudgetAppropriations.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
-                cmbxBudgetAppropriations.SelectedIndex = -1;
-                cmbxBudgetAppropriations.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
-                cmbxBudgetAppropriations.SelectedValueChanged += new EventHandler(cmbxBudgetAppropriations_SelectedValueChanged);
-
+                cmbxObjectOfExpenditure.TextChanged -= new EventHandler(CmbxObjectOfExpenditure_TextChanged);
+                cmbxObjectOfExpenditure.SelectedValue = _budgetAppropriationsId;
+                cmbxObjectOfExpenditure.TextChanged += new EventHandler(CmbxObjectOfExpenditure_TextChanged);
+                cmbxObjectOfExpenditure.SelectedValueChanged += new EventHandler(cmbxObjectOfExpenditure_SelectedValueChanged);
             }
             catch (Exception ex)
             {
@@ -99,87 +156,46 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         }
 
-        private void cmbxBudgetAppropriations_SelectedValueChanged(object sender, EventArgs e)
+        private void cmbxObjectOfExpenditure_SelectedValueChanged(object sender, EventArgs e)
         {
-            txtUnobligatedBalance.Text = GetBudgetAppropriationBalance().ToString("N2");
+            txtUnobligatedBalance.Text = GetAllotmentReleaseBalance().ToString("N2");
+            txtRemainingBalance.Text = GetCurrentBalance().ToString("N2");
         }
 
-        private decimal GetBudgetAppropriationBalance()
+        private decimal GetAllotmentReleaseBalance()
         {
-            decimal appropriationBalance = 0;
+            decimal allotmentReleaseBalance = 0;
 
-            if (cmbxBudgetAppropriations.SelectedIndex > -1)
+            if (cmbxObjectOfExpenditure.SelectedIndex > -1)
             {
-                int budgetAppropriationId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
-                var budgetAppropriationDict = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
+                int budgetAppropriationId = Convert.ToInt32(cmbxObjectOfExpenditure.SelectedValue);
                 var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
-                var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(budgetAppropriationId);
 
-                decimal budgetAppropriation = Convert.ToDecimal(budgetAppropriationDict["amount"]);
                 decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
-                decimal totalSupplementalAppropriation = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0 ? 0 : dtSupplementalAppropriation.Compute("Sum(amount)", string.Empty));
 
-                appropriationBalance = (budgetAppropriation + totalSupplementalAppropriation) - totalAllotmentRelease;
-
+                allotmentReleaseBalance = totalAllotmentRelease;
             }
 
-            return appropriationBalance;
+            return allotmentReleaseBalance;
         }
 
-        private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
+        private void CmbxObjectOfExpenditure_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbxBudgetAppropriations.Text))
+            if (string.IsNullOrEmpty(cmbxObjectOfExpenditure.Text))
             {
-                LoadBudgetAppropriations();
+                LoadObjectOfExpenditures();
             }
         }
 
-        private void cmbxBudgetAppropriations_KeyDown(object sender, KeyEventArgs e)
+        private void cmbxObjectOfExpenditure_KeyDown(object sender, KeyEventArgs e)
         {
-            string searchTxt = cmbxBudgetAppropriations.Text;
+            string searchTxt = cmbxObjectOfExpenditure.Text;
 
-            if (e.KeyCode == Keys.F1 && cmbxBudgetAppropriations.FindStringExact(searchTxt) == -1 && !string.IsNullOrEmpty(searchTxt))
+            if (e.KeyCode == Keys.F1 && cmbxObjectOfExpenditure.FindStringExact(searchTxt) == -1 && !string.IsNullOrEmpty(searchTxt))
             {
-                LoadBudgetAppropriations();
-                cmbxBudgetAppropriations.SelectedIndex = 0;
-                cmbxBudgetAppropriations.DroppedDown = true;
-            }
-        }
-
-
-
-
-        internal void LoadSelected()
-        {
-           cmbxBudgetAppropriations.SelectedValue = selectedAccountId;
-        }
-
-        internal void LoadReferences(ucObligationRequestMain ucObligationRequestMain) 
-        {
-            _ucObligationRequestMain = ucObligationRequestMain; 
-        }
-
-        internal string GetFormErrors()
-        {
-            var errorArray = new string[2];
-            errorArray[0] = epAccount.GetError(cmbxBudgetAppropriations);
-            errorArray[1] = epAmount.GetError(nudAmount);
-
-            IError _errors = Factory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
-        }
-
-        internal void ResetForm() 
-        {
-            nudAmount.Value = 0;
-        }
-
-
-        private void ucObligationRequest_Load(object sender, EventArgs e)
-        {
-            if (!DesignMode)
-            {
-                LoadBudgetAppropriations();
+                LoadObjectOfExpenditures();
+                cmbxObjectOfExpenditure.SelectedIndex = 0;
+                cmbxObjectOfExpenditure.DroppedDown = true;
             }
         }
 
@@ -187,13 +203,13 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         //VALIDATIONS
 
-        private bool ShowErrorAccountNameNotExist()
+        private bool ShowErrorObjectExpenditureNotExist()
         {
             try
             {
-                if (cmbxBudgetAppropriations.FindStringExact(cmbxBudgetAppropriations.Text) < 0 && !string.IsNullOrEmpty(cmbxBudgetAppropriations.Text))
+                if (cmbxObjectOfExpenditure.FindStringExact(cmbxObjectOfExpenditure.Text) < 0 && !string.IsNullOrEmpty(cmbxObjectOfExpenditure.Text))
                 {
-                    epAccount.SetError(cmbxBudgetAppropriations, "Account you entered doesn't exist on your record.");
+                    epObjectOfExpenditure.SetError(cmbxObjectOfExpenditure, "Object of Expenditure you entered doesn't exist on your record.");
                     return true;
                 }
             }
@@ -204,19 +220,19 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-        private bool ShowErrorAccountExistOnList() 
+        private bool ShowErrorObjectExpenditureExistOnList() 
         {
             try
             {
                 foreach (DataGridViewRow item in _ucObligationRequestMain.dgObligationRequests.Rows) 
                 {
-                    int accountId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
-                    int rowAccountId = Convert.ToInt32(item.Cells["account_id"].Value);
+                    int budgetAppriationId = Convert.ToInt32(cmbxObjectOfExpenditure.SelectedValue);
+                    int rowBudgetAppropriationId = Convert.ToInt32(item.Cells["budget_appropriation_id"].Value);
 
 
-                    if (accountId == rowAccountId && _ucObligationRequestMain.obligationRequestId == 0) 
+                    if (budgetAppriationId == rowBudgetAppropriationId && _ucObligationRequestMain.obligationRequestId == 0 && rowBudgetAppropriationId  != _budgetAppropriationsId) 
                     {
-                        epAccount.SetError(cmbxBudgetAppropriations, "Account already exist on the List");
+                        epObjectOfExpenditure.SetError(cmbxObjectOfExpenditure, "Object of Expenditure already exist on the List");
                         return true;
                     }
                 }
@@ -229,19 +245,19 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-        private void cmbxAccount_Validating(object sender, CancelEventArgs e)
+        private void cmbxObjectOfExpenditure_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbxBudgetAppropriations.Text))
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbxBudgetAppropriations, "Account");
-            else if (ShowErrorAccountNameNotExist())
-                e.Cancel = ShowErrorAccountNameNotExist();
+            if (string.IsNullOrEmpty(cmbxObjectOfExpenditure.Text))
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epObjectOfExpenditure, cmbxObjectOfExpenditure, "Object of Expenditure.");
+            else if (ShowErrorObjectExpenditureNotExist())
+                e.Cancel = ShowErrorObjectExpenditureNotExist();
             else
-                e.Cancel = ShowErrorAccountExistOnList();
+                e.Cancel = ShowErrorObjectExpenditureExistOnList();
         }
 
-        private void cmbxAccount_Validated(object sender, EventArgs e)
+        private void cmbxObjectOfExpenditure_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epAccount, cmbxBudgetAppropriations);
+            Helper.ClearErrorComboBox(epObjectOfExpenditure, cmbxObjectOfExpenditure);
         }
 
 
@@ -266,9 +282,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             try
             {
-                if (nudAmount.Value > totalAllotmentReleaseBalance)
+                if (nudAmount.Value > GetAllotmentReleaseBalance())
                 {
-                    epAmount.SetError(nudAmount, "Amount you entered exceeds to the alloted balance.");
+                    epAmount.SetError(nudAmount, "Amount you entered exceeds the unobligated balance.");
                     return true;
                 }
             }
@@ -293,6 +309,5 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
-
     }
 }

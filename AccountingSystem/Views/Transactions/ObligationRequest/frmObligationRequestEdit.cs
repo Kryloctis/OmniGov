@@ -21,7 +21,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             InitializeComponent();
             Helper.LoadFormIcon(this);
             uc = ucObligationRequest1;
-            uc.cmbxBudgetAppropriations.Enabled = false;
             _ucObligationRequestMain = ucObligationRequestMain;
             uc.LoadReferences(_ucObligationRequestMain);
         }
@@ -29,7 +28,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void frmObligationRequestEdit_Load(object sender, EventArgs e)
         {
-            uc.LoadSelected();
         }
 
         private void btnOk_Click(object sender, EventArgs e)

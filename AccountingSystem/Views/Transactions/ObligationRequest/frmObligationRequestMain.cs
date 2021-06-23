@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -53,13 +54,13 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
             foreach (DataGridViewRow item in uc.dgObligationRequests.Rows) 
             {
-                int accountId = Convert.ToInt32(item.Cells["account_id"].Value);
-                decimal amount = Convert.ToDecimal(item.Cells["amount"].Value);
+                int budgetAppropriationId = Convert.ToInt32(item.Cells["budget_appropriation_id"].Value);
+                decimal obligationAmount = Convert.ToDecimal(item.Cells["obligation_amount"].Value);
 
                 var obligationAccountModel = new ObligationAccountModel()
                 {
-                    AccountId = accountId,
-                    Amount = amount
+                    BudgetAppropriationId = budgetAppropriationId,
+                    Amount = obligationAmount
                 };
 
                 obligationRequestModelList.Add(obligationAccountModel);
@@ -68,6 +69,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return obligationRequestModelList;
         }
 
+        //DELETE
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             try
@@ -88,29 +90,29 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
         }
 
-
-
+        //INSERT
         private bool InsertData() 
         {
             try
             {
+                string obligationNo = $"{uc.mskTxtObligationNoSeries.Text}-{uc.mskTxtObligationNoTemplate.Text}";
 
                 var obligationRequestModel = new ObligationRequestModel()
                 {
-                    FPPId = Convert.ToInt32(uc.cmbxFPP.SelectedValue),
-                    OtherFPPId = string.IsNullOrEmpty(uc.cmbxSubFPP.Text) ? null : Convert.ToInt32(uc.cmbxSubFPP.SelectedValue),
-                    FundId = uc.fundId,
-                    AllotmentClassId = uc.allotmentClassId,
-                    DateRequested = uc.dtDateRequest.Value,
-                    ObligationNo = $"{uc.mskTxtObligationNoSeries.Text}-{uc.mskTxtObligationNoTemplate.Text}",
+                    ObligationNo = obligationNo,
                     Payee = uc.txtPayee.Text,
                     Explanation = uc.txtExplanation.Text,
                     ReferenceNo = uc.txtReferenceNo.Text,
+                    DateRequested = uc.dtDateRequest.Value,
                     CreatedBy = Helper.UserId
                 };
 
 
                 return Factory.ObligationRequestRepository().Insert(obligationRequestModel, ObligationAccountsModelList());
+            }
+            catch (MySqlException ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
             catch (Exception ex)
             {
@@ -119,7 +121,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-
+        //UPDATE
         private bool UpdateData() 
         {
             try
@@ -144,12 +146,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         }
 
 
-
         private bool SaveData() 
         {
             try
             {
-                if (!uc.ValidateChildren() || uc.ShowErrorListEmpty()) 
+                if (!uc.ValidateChildren()) 
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;

@@ -132,6 +132,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.cmbxFPP.Name = "cmbxFPP";
             this.cmbxFPP.Size = new System.Drawing.Size(449, 23);
             this.cmbxFPP.TabIndex = 0;
+            this.cmbxFPP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxFPP_KeyDown);
             this.cmbxFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxFPP_Validating);
             this.cmbxFPP.Validated += new System.EventHandler(this.cmbxFPP_Validated);
             // 
@@ -151,6 +152,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.cmbxSubFPP.Name = "cmbxSubFPP";
             this.cmbxSubFPP.Size = new System.Drawing.Size(449, 23);
             this.cmbxSubFPP.TabIndex = 1;
+            this.cmbxSubFPP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxSubFPP_KeyDown);
             this.cmbxSubFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxSubFPP_Validating);
             this.cmbxSubFPP.Validated += new System.EventHandler(this.cmbxSubFPP_Validated);
             // 
@@ -274,7 +276,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.dgObligationRequests.RowTemplate.Height = 25;
             this.dgObligationRequests.Size = new System.Drawing.Size(548, 237);
             this.dgObligationRequests.TabIndex = 12;
-            this.dgObligationRequests.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
+            this.dgObligationRequests.SelectionChanged += new System.EventHandler(this.dgObligationRequests_SelectionChanged);
+            this.dgObligationRequests.Validating += new System.ComponentModel.CancelEventHandler(this.dgObligationRequests_Validating);
+            this.dgObligationRequests.Validated += new System.EventHandler(this.dgObligationRequests_Validated);
             // 
             // btnRemove
             // 

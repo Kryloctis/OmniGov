@@ -35,14 +35,20 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     return false;
                 }
 
-                int accountId = Convert.ToInt32(uc.cmbxBudgetAppropriations.SelectedValue);
-                string accountName = uc.cmbxBudgetAppropriations.Text;
+                int budgetAppropriationId = Convert.ToInt32(uc.cmbxObjectOfExpenditure.SelectedValue);
+                var budgetAppropriationsDict = Factory.BudgetAppropriationsRepository().GetViewRecordByID(budgetAppropriationId);
+
+                string remarks = string.IsNullOrEmpty(budgetAppropriationsDict["remarks"].ToString()) ? string.Empty : $"({budgetAppropriationsDict["remarks"]})";
+
+                string objectOfExpenditure = $"{budgetAppropriationsDict["general_ledger_accounts_name"]} {remarks}";
+                string accountCode = budgetAppropriationsDict["account_code"].ToString();
                 decimal obligationAmount = uc.nudAmount.Value;
 
                 var items = new object[]
                 {
-                    accountId,
-                    accountName,
+                    budgetAppropriationId,
+                    objectOfExpenditure,
+                    accountCode,
                     obligationAmount
                 };
                                

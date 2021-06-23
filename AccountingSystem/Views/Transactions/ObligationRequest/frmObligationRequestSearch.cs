@@ -43,7 +43,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
             else
             {
-                _ucObligationRequestMain.obligationNo = mskTxtObligationNo.Text;
                 _ucObligationRequestMain.LoadSearched();
                 _frmObligationRequestMain.btnNew.Enabled = false;
                 _frmObligationRequestMain.btnCancel.Enabled = true;

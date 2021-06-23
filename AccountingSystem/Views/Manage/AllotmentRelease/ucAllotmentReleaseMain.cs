@@ -583,7 +583,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 uc._amount = amount;
 
                 uc.nudYear.Value = year;
-                uc.cmbxBudgetAppropriations.SelectedValue = budgetAppropriationId;
                 uc.nudAmount.Value = amount;
 
                 allotmentReleaseEditForm.ShowDialog();
