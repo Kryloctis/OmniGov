@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.AllotmentRelease;
+using AccountingSystem.Views.Manage.SupplementalAppropriations;
 using BudgetSystem.Views.BudgetAppropriations;
 using BudgetSystem.Views.Manage.BudgetAppropriations;
 using MySql.Data.MySqlClient;
@@ -85,7 +86,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 var dtFunds = Factory.FundsRepository().GetRecords();
                 HelperLoadRecords.BudgetAppropriationsTypeOfFundsCombobox(dtFunds, cmbxFunds, "fund_name", "id");
 
-                LoadFPP(cmbxFPP);
+                LoadFPP();
                 cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TextChanged);
                 cmbxFPP.SelectedValueChanged += new EventHandler(CmbxFPP_SelectedValueChanged);
             }
@@ -114,6 +115,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnEdit.Enabled = true;
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
+                btnSupplementalAppropriations.Enabled = true;
 
             }
             else if (SelectedRows > 1 && dgv.SelectedCells[0].Value != null)
@@ -121,12 +123,14 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnEdit.Enabled = false;
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
+                btnSupplementalAppropriations.Enabled = false;
             }
             else
             {
                 btnEdit.Enabled = false;
                 btnDelete.Enabled = false;
                 btnDelete.Text = "Delete";
+                btnSupplementalAppropriations.Enabled = false;
             }
 
             if (cmbxFPP.SelectedIndex == -1 || cmbxAllotmentClass.SelectedIndex == -1 || cmbxFunds.SelectedIndex == -1)
@@ -135,7 +139,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnAdd.Enabled = true;
 
         }
-
 
         private void cmbxAllotmentClass_SelectedValueChanged(object sender, EventArgs e) 
         {
@@ -259,13 +262,13 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             LoadBudgetAppropriationRecords();
         }
 
-        private void frmBudgetAppropriationsNew_Load(object sender, EventArgs e)
+        private void frmBudgetAppropriations_Load(object sender, EventArgs e)
         {
             Helper.DatagridFullRowSelectStyle(dgBudgetAppropriations, true);
             LoadComboboxes();
         }
 
-        private void dataGridView1_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        private void dataGridView_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
             dgBudgetAppropriations.Columns[e.Column.Index].SortMode = DataGridViewColumnSortMode.NotSortable;
         }
@@ -284,11 +287,14 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             return dtFPP;
         }
 
-        internal void LoadFPP(ComboBox comboBox)
+        internal void LoadFPP()
         {
             try
             {
                 cmbxFPP.DroppedDown = false;
+                Cursor.Current = Cursors.Default;
+
+                if (DataTableFPP().Rows.Count == 0) return;
 
                 var fppDict = new Dictionary<int, string>();
                 foreach (DataRow item in DataTableFPP().Rows)
@@ -299,11 +305,9 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                     fppDict.Add(fppId, fppName);
                 }
 
-                comboBox.DataSource = new BindingSource(fppDict.Count == 0? null : fppDict, null);
-                comboBox.DisplayMember = "value";
-                comboBox.ValueMember = "key";
-                Cursor.Current = Cursors.Default;
-
+                cmbxFPP.DataSource = new BindingSource(fppDict, null);
+                cmbxFPP.DisplayMember = "value";
+                cmbxFPP.ValueMember = "key";
 
                 LoadBudgetAppropriationRecords();
             }
@@ -318,7 +322,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             if (string.IsNullOrEmpty(cmbxFPP.Text))
             {
                 cmbxFPP.TextChanged -= new EventHandler(CmbxFPP_TextChanged);
-                LoadFPP(cmbxFPP);
+                LoadFPP();
                 cmbxFPP.SelectedIndex = -1;
                 cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TextChanged);
             }
@@ -334,9 +338,21 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         {
             if (e.KeyCode == Keys.F1 && cmbxFPP.FindStringExact(cmbxFPP.Text) == -1 && !string.IsNullOrEmpty(cmbxFPP.Text))
             {
-                LoadFPP(cmbxFPP);
+                LoadFPP();
                 cmbxFPP.DroppedDown = true;
             } 
         }
+
+        private void btnSupplementalAppropriations_Click(object sender, EventArgs e)
+        {
+            int rowIndex = dgBudgetAppropriations.CurrentCell.RowIndex;
+            int budgetAppropriationsId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["id"].Value);
+
+            var frmSupplementalAppropriations = new frmSupplementalAppropriations(this);
+
+            frmSupplementalAppropriations.budgetAppropriationsId = budgetAppropriationsId;
+            frmSupplementalAppropriations.ShowDialog();
+        }
+
     }
 }

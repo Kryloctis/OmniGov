@@ -58,47 +58,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             nudAmount.Value = 0;
         }
 
-        private void GetTotalAllotmentRelease()
-        {
-            int accountId = Convert.ToInt32(cmbxAccount.SelectedValue);
-
-            decimal  totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseByDateYear(fundId, fppId, otherFPPId, allotmentClassId, accountId, dateRequested ,Convert.ToInt16(dateRequested.Year));
-
-            txtAllotmentAmount.Text = totalAllotmentRelease.ToString("N2");
-            
-        }
-
-        internal void GetTotalAllotmentBalance()
-        {
-            int accountId = Convert.ToInt32(cmbxAccount.SelectedValue);
-
-            //Get Total Allotment Release By Year and has if it is continuing or not
-            decimal totalAllotmentReleaseByYear = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseByYear(fundId, fppId, otherFPPId, allotmentClassId, accountId, Convert.ToInt16(dateRequested.Year));
-
-            //Get Total Allotment Release By Date and has if it is continuing or not
-            decimal totalAllotmentReleaseByDate = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseByDateYear(fundId, fppId, otherFPPId, allotmentClassId, accountId, dateRequested, Convert.ToInt16(dateRequested.Year));
-
-            // Get Total Obligations by year
-            decimal totalObligations = Factory.ObligationRequestRepository().TotalObligationRequestByYear(fundId, fppId, otherFPPId, allotmentClassId, accountId, Convert.ToInt16(dateRequested.Year));
-
-            //Get Total Allotment Release Balance By Year
-            decimal totalAllotmentReleaseBalanceByYear = totalAllotmentReleaseByYear - totalObligations;
-
-            decimal AllotmentReleaseBalanceByDate = totalAllotmentReleaseBalanceByYear > totalAllotmentReleaseByDate ? totalAllotmentReleaseByDate : totalAllotmentReleaseBalanceByYear;
-
-            decimal OnListItemsAmount = GetTotalOnListItemsAmounts(accountId);
-
-            decimal currentBalance = _ucObligationRequestMain.obligationRequestId == 0 ? 0 : currentObligationAmount;
-
-            decimal finalAllotmenReleaseBalance = AllotmentReleaseBalanceByDate - OnListItemsAmount + currentBalance;
-            totalAllotmentReleaseBalance = finalAllotmenReleaseBalance;
-
-            txtBalance.Text = finalAllotmenReleaseBalance.ToString("N2");
-
-            txtAllotmentAmount.Text = totalAllotmentReleaseByDate.ToString("N2");
-
-        }
-
         private decimal GetTotalOnListItemsAmounts(int accountId)
         {
             decimal OnListItemsAmount = 0;
@@ -171,8 +130,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             if (string.IsNullOrEmpty(cmbxAccount.Text))
             {
                 LoadAccounts();
-                GetTotalAllotmentRelease();
-                GetTotalAllotmentBalance();
             }
             else if ((ShowErrorAccountNameNotExist() && !string.IsNullOrEmpty(cmbxAccount.Text)) || string.IsNullOrEmpty(cmbxAccount.Text))
             {
@@ -277,8 +234,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     cmbxAccount.DroppedDown = true;
 
                     cmbxAccount.SelectedValueChanged += new EventHandler(cmbxAccount_SelectedValueChanged);
-                    GetTotalAllotmentRelease();
-                    GetTotalAllotmentBalance();
 
                     Helper.ClearErrorComboBox(epAccount, cmbxAccount);
                 }
@@ -291,8 +246,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void cmbxAccount_SelectedValueChanged(object sender, EventArgs e)
         {
-            GetTotalAllotmentRelease();
-            GetTotalAllotmentBalance();
         }
 
 
@@ -353,8 +306,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             if (!DesignMode)
             {
                 LoadAccounts();
-                GetTotalAllotmentRelease();
-                GetTotalAllotmentBalance();
             }
         }
     }

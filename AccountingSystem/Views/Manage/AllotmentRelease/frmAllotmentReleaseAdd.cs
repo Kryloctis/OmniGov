@@ -12,20 +12,20 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
     public partial class frmAllotmentReleaseAdd : Form
     {
-        internal ucAllotmentReleaseMain ucAllotmentReleaseMain;
+        internal ucAllotmentReleaseMain _ucAllotmentReleaseMain;
         private ucAllotmentRelease uc;
 
         public frmAllotmentReleaseAdd(ucAllotmentReleaseMain ucAllotmentReleaseMain)
         {
             InitializeComponent();
-            this.ucAllotmentReleaseMain = ucAllotmentReleaseMain;
+            this._ucAllotmentReleaseMain = ucAllotmentReleaseMain;
             uc = ucAllotmentRelease1;
             Helper.LoadFormIcon(this);
         }
 
         private void frmAllotmentReleaseAdd_Load(object sender, EventArgs e)
         {
-            uc.LoadReference(ucAllotmentReleaseMain);
+            uc.LoadReference(_ucAllotmentReleaseMain);
         }
 
         private bool AddAllotmentRelease()
@@ -38,26 +38,25 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     return false;
                 }
 
+                int budgetAppropriationId = Convert.ToInt32(uc.cmbxBudgetAppropriations.SelectedValue);
+                var budgetAppropriationsDict = Factory.BudgetAppropriationsRepository().GetViewRecordByID(budgetAppropriationId);
 
-                short year = (short)uc.nudYear.Value;
-                int accountId = Convert.ToInt32(uc.cmbxAccount.SelectedValue);
-
-                var budgetAppropriationRepo = Factory.BudgetAppropriationsRepository().GetViewRecord(uc.fppID, uc.othersFPPId, uc.fundId, uc.allotmentClassId, accountId, uc.dateIssued, year);
-
-                int budgetAppropriationId = Convert.ToInt32(budgetAppropriationRepo["id"]);
-
-                string accountName = budgetAppropriationRepo["general_ledger_accounts_name"];
-                string accountCode = budgetAppropriationRepo["account_code"].ToString();
+                string remarks = string.IsNullOrEmpty(budgetAppropriationsDict["remarks"].ToString()) ? string.Empty : $"({budgetAppropriationsDict["remarks"]})";
+                string accountName = $"{budgetAppropriationsDict["general_ledger_accounts_name"]} {remarks}";
+                string accountCode = budgetAppropriationsDict["account_code"].ToString();
                 decimal amount = uc.nudAmount.Value;
+                short year = (short)uc.nudYear.Value;
 
-                ucAllotmentReleaseMain.dgAllotmentRelease.Rows.Add(new object[]
+                var items = new object[]
                 {
+                    year,
                     budgetAppropriationId,
-                    accountId,
-                    accountCode,
                     accountName,
+                    accountCode,
                     amount
-                });
+                };
+
+                _ucAllotmentReleaseMain.dgAllotmentRelease.Rows.Add(items);
 
                 return true;
             }
@@ -72,9 +71,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             if (AddAllotmentRelease())
             {
+                _ucAllotmentReleaseMain.panel1.Enabled = false;
+                _ucAllotmentReleaseMain.dtDateIssued.Enabled = false;
                 uc.ResetForm();
-                ucAllotmentReleaseMain.panel1.Enabled = false;
-                ucAllotmentReleaseMain.dtDateIssued.Enabled = false;
             }
         }
     }

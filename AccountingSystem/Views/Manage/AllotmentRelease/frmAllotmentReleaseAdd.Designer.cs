@@ -43,14 +43,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.flowLayoutPanel1.Controls.Add(this.btnAddToList);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 200);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 159);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(564, 29);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(602, 29);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(486, 3);
+            this.btnCancel.Location = new System.Drawing.Point(524, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 2;
@@ -59,7 +59,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             // btnAddToList
             // 
-            this.btnAddToList.Location = new System.Drawing.Point(405, 3);
+            this.btnAddToList.Location = new System.Drawing.Point(443, 3);
             this.btnAddToList.Name = "btnAddToList";
             this.btnAddToList.Size = new System.Drawing.Size(75, 23);
             this.btnAddToList.TabIndex = 1;
@@ -69,10 +69,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             // ucAllotmentRelease1
             // 
+            this.ucAllotmentRelease1.AutoSize = true;
             this.ucAllotmentRelease1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucAllotmentRelease1.Location = new System.Drawing.Point(12, 12);
             this.ucAllotmentRelease1.Name = "ucAllotmentRelease1";
-            this.ucAllotmentRelease1.Size = new System.Drawing.Size(543, 177);
+            this.ucAllotmentRelease1.Size = new System.Drawing.Size(579, 140);
             this.ucAllotmentRelease1.TabIndex = 0;
             // 
             // frmAllotmentReleaseAdd
@@ -82,7 +83,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(564, 229);
+            this.ClientSize = new System.Drawing.Size(602, 188);
             this.Controls.Add(this.ucAllotmentRelease1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -95,6 +96,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.Load += new System.EventHandler(this.frmAllotmentReleaseAdd_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

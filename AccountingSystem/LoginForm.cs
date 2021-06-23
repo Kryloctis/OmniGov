@@ -15,6 +15,8 @@ namespace AccountingSystem
         public LoginForm()
         {
             InitializeComponent();
+            txtUsername.Text = "user";
+            txtPassword.Text = "password";
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
