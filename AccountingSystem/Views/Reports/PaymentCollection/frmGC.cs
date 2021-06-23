@@ -63,8 +63,8 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 {
                     Rcdno = txtrcd.Text.Trim(),
                     Rcddate = Convert.ToDateTime(dtdate.Value),
-                    Userid = 2
-                    //Userid=Helper.UserId
+                    //Userid = 2
+                    Userid=Helper.UserId
                 };
                 var gcRepository = Factory.GeneralCollectionsRepository();
                 if (!gcRepository.CodeExist(txtrcd.Text.Trim()))
@@ -123,15 +123,20 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                         if(fbd.ShowDialog() == DialogResult.OK)
                         {
                             frmrcd.LoadRecords();
+                            frmrcd.rcdgenerate.Clear();
                             this.Close();
                         }
                         else
                         {
+                            frmrcd.LoadRecords();
+                            frmrcd.rcdgenerate.Clear();
                             this.Close();
                         }
                     }
                     else
                     {
+                        frmrcd.LoadRecords();
+                        frmrcd.rcdgenerate.Clear();
                         this.Close();
                     }
                 }

@@ -71,7 +71,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 var dtrcd = rcdRepository.GetRecords(Id);
                 HelperLoadRecords.RCDDatagridView(dtrcd, dgvpayments);
 
-                txttotal.Value = rcdRepository.SumRecords(txtreport.Text.Trim());
+                txttotal.Text = String.Format("{0:N2}",rcdRepository.SumRecords(Id));
                 if(dtrcd.Rows.Count > 0)
                 {
                     data.Clear();
@@ -147,23 +147,28 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnclear_Click(object sender, EventArgs e)
         {
-            try
+            if(dgvpayments.Rows.Count > 0)
             {
-                if (Helper.MessageBoxConfirmDelete(dgvpayments.Rows.Count))
+                try
                 {
-                    var rcdModelList = new List<CollectorReportPaymentModel>();
-                    var rcdRepository = Factory.CollectorReportPaymentRepository();
-                    rcdModelList.Add(new CollectorReportPaymentModel() { CoId=Id});
-                    if (rcdRepository.Delete(rcdModelList))
+                    if (Helper.MessageBoxConfirmDelete(dgvpayments.Rows.Count))
                     {
-                        LoadCollections();
+                        var rcdModelList = new List<CollectorReportPaymentModel>();
+                        var rcdRepository = Factory.CollectorReportPaymentRepository();
+                        rcdModelList.Add(new CollectorReportPaymentModel() { CoId = Id });
+                        if (rcdRepository.Delete(rcdModelList))
+                        {
+                            LoadCollections();
+                            txttotal.Text = String.Format("{0:N2}", rcdRepository.SumRecords(Id));
+                        }
                     }
                 }
-            } 
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                catch (Exception ex)
+                {
+                    Helper.MessageBoxError(ex.Message);
+                }
             }
+       
           
         }
 
@@ -171,43 +176,51 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             if(dgvpayments.SelectedRows.Count > 0)
             {
-                btndelete.Enabled = true;
+                btndelete.Enabled = chckapproved.Checked ? false: true;
+                btnclear.Enabled = chckapproved.Checked ? false : true;
             }
             else
             {
+                btnclear.Enabled = false;
                 btndelete.Enabled = false;
             }
         }
 
         private void btndelete_Click(object sender, EventArgs e)
         {
-            try
+            if(dgvpayments.SelectedRows.Count > 0)
             {
-                if (Helper.MessageBoxConfirmDelete(dgvpayments.SelectedRows.Count))
+                try
                 {
-                    int id = int.Parse(dgvpayments.CurrentRow.Cells[0].Value.ToString());
-                    if(id > 0)
+                    if (Helper.MessageBoxConfirmDelete(dgvpayments.SelectedRows.Count))
                     {
-                        var rcdModelList = new List<CollectorReportPaymentModel>();
-                        var rcdRepository = Factory.CollectorReportPaymentRepository();
-                        rcdModelList.Add(new CollectorReportPaymentModel() { Id = id });
-                        if (rcdRepository.Delete(rcdModelList))
+                        int id = int.Parse(dgvpayments.CurrentRow.Cells[0].Value.ToString());
+                        if (id > 0)
+                        {
+                            var rcdModelList = new List<CollectorReportPaymentModel>();
+                            var rcdRepository = Factory.CollectorReportPaymentRepository();
+                            rcdModelList.Add(new CollectorReportPaymentModel() { Id = id });
+                            if (rcdRepository.Delete(rcdModelList))
+                            {
+                                dgvpayments.Rows.RemoveAt(dgvpayments.CurrentRow.Index);
+                                txttotal.Text = String.Format("{0:N2}",dgvpayments.Rows.Cast<DataGridViewRow>().Sum(x =>Convert.ToDouble(x.Cells[9].Value)));
+                            }
+                            // LoadCollections();
+                        }
+                        else
                         {
                             dgvpayments.Rows.RemoveAt(dgvpayments.CurrentRow.Index);
-                        }                      
-                       // LoadCollections();
+                            txttotal.Text = String.Format("{0:N2}", dgvpayments.Rows.Cast<DataGridViewRow>().Sum(x => Convert.ToDouble(x.Cells[9].Value)));
+                        }
+
                     }
-                    else
-                    {
-                        dgvpayments.Rows.RemoveAt(dgvpayments.CurrentRow.Index);
-                    }
-                   
+                }
+                catch (Exception ex)
+                {
+                    Helper.MessageBoxError(ex.Message);
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            
         }
     }
 }

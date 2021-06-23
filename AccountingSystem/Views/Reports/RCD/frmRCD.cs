@@ -14,7 +14,7 @@ namespace AccountingSystem.Views.Reports.RCD
 {
     public partial class frmRCD : Form
     {
-        Dictionary<int, string> rcdgenerate = new Dictionary<int, string>();
+        public Dictionary<int, string> rcdgenerate = new Dictionary<int, string>();
         public frmRCD()
         {
             InitializeComponent();
@@ -164,7 +164,8 @@ namespace AccountingSystem.Views.Reports.RCD
             {
                 //string id = string.Join(",", rcdgenerate.Select(x => String.Format("'{0}'",x.Key)).ToArray());
                 //_ = new frmPCReport(id).ShowDialog();
-                _ = new frmGC(rcdgenerate,this).ShowDialog();
+                _ = new frmGC(rcdgenerate, this).ShowDialog();               
+                
             }
             else{
                 Helper.MessageBoxError("Please select reports to Generate RCD!");

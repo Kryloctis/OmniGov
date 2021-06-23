@@ -280,6 +280,21 @@ namespace ACC.Data
             }
         }
 
+        public DataTable GetRecordByGC(string from,string to)
+        {
+            try
+            {
+                string query = $"SELECT {tableName}.id,{tableName}.rcd_no,{tableName15}.report_no,CONCAT({tableName11}.account_group_code,'-',{tableName12}.maj_acc_group_code,'-',{tableName13}.sub_maj_acc_group_code,'-',{tableName10}.ledger_code) AS account_code,CONCAT({tableName9}.acc_form_no,'-',{tableName9}.acc_form_desc) AS accform,{tableName10}.ledger_name,CONCAT({tableName14}.sub_code,'-',{tableName14}.sub_name) AS subsidiary,{tableName5}.payee,{tableName5}.receipt_no,{tableName5}.payment_date,{tableName5}.amount,CONCAT({tableName8}.last_name,', ',{tableName8}.first_name,' ',{tableName8}.mid_initial) AS collector,{tableName5}.created_at,{tableName5}.updated_at,CONCAT(u1.last_name,', ',u1.first_name,' ',u1.mid_initial) AS createdby,CONCAT(u2.last_name,', ',u2.first_name,' ',u2.mid_initial) AS updatedby,CONCAT(u3.last_name,', ',u3.first_name,' ',u3.mid_initial) AS officer FROM {tableName} LEFT JOIN {tableName3} ON {tableName3}.general_collections_id={tableName}.id LEFT JOIN {tableName4} ON {tableName4}.collector_report_id={tableName3}.collector_report_id LEFT JOIN {tableName5} ON {tableName5}.id={tableName4}.payment_collections_id LEFT JOIN {tableName15} ON {tableName4}.collector_report_id={tableName15}.id LEFT JOIN {tableName9} ON {tableName5}.accountable_forms_id={tableName9}.id LEFT JOIN {tableName10} ON {tableName5}.general_ledger_accounts_id={tableName10}.id LEFT JOIN {tableName2} u1 ON u1.id={tableName5}.created_by LEFT JOIN {tableName2} u2 ON u2.id={tableName5}.updated_by LEFT JOIN {tableName2} u3 ON u3.id={tableName}.users_id LEFT JOIN {tableName13} ON {tableName13}.id={tableName10}.sub_major_account_group_id LEFT JOIN {tableName12} ON {tableName13}.major_account_group_id={tableName12}.id LEFT JOIN {tableName11} ON {tableName12}.account_group_id={tableName11}.id LEFT JOIN {tableName14} ON {tableName5}.subsidiary_ledger_accounts_id={tableName14}.id LEFT JOIN {tableName8} ON {tableName8}.id={tableName5}.collecting_officers_id WHERE ({tableName}.rcd_date BETWEEN CAST('{from}' AS DATE) AND CAST('{to}' AS DATE))";
+
+                var dtpc = new DataTable();
+                return _dbGenericCommands.Fill(query, dtpc);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public DataTable GetRecordByData(string Id)
         {
             try

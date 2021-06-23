@@ -17,14 +17,9 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
     public partial class frmPCReport : Form
     {
         private readonly ReportViewer reportViewer = new ReportViewer();
-        private string Ids = string.Empty;
-        private string type = string.Empty;
-        public frmPCReport(string name,string _type,string _Ids)
+        public frmPCReport()
         {
             InitializeComponent();
-            Text = String.Format("Reports > {0}", name);
-            Ids = _Ids;
-            type = _type;
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
             Helper.LoadFormIcon(this);
@@ -32,22 +27,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 
         private void frmPCReport_Load(object sender, EventArgs e)
         {
-            if (type.Equals("GC"))
-            {
-                LoadReport(reportViewer.LocalReport);
-                //reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-                reportViewer.RefreshReport();
-            }
-            else
-            {
-                LoadReport(reportViewer.LocalReport);
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-                reportViewer.RefreshReport();
-            }
+           
             
         }
 
@@ -78,11 +58,11 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             return dtPC;
         }
 
-        private DataTable DataTableGC(string id)
+        private DataTable DataTableGC(string from,string to)
         {
             
             var dtPC = new dsLFS.dtPCDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByGC(id);
+            var dt = Factory.GeneralCollectionsRepository().GetRecordByGC(from,to);
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
@@ -107,124 +87,25 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             return dtPC;
         }
 
-        private DataTable DataTableData(string id)
-        {
-
-            var dtPC = new dsLFS.dtRCDDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByData(id);
-            if (dt.Rows.Count > 0)
-            {
-                foreach (DataRow item in dt.Rows)
-                {
-                    DataRow row = dtPC.NewRow();
-                    row["rcdid"] = item["id"];
-                    row["rcdno"] = item["rcd_no"];
-                    row["rcddate"] = item["rcd_date"];
-                    row["officer"] = item["officer"];
-                    dtPC.Rows.Add(row);
-                }
-            }
-
-            return dtPC;
-        }
-
-        private DataTable DataTableForms(int id)
-        {
-
-            var dtPC = new dsLFS.dtRCDFormsDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByForms(id);
-            if (dt.Rows.Count > 0)
-            {
-                foreach (DataRow item in dt.Rows)
-                {
-                    DataRow row = dtPC.NewRow();
-                    row["rcdid"] = item["id"];
-                    row["accforms"] = String.Format("{0} - {1}",item["acc_form_no"], item["acc_form_desc"]);
-                    row["orfrom"] = item["orfrom"];
-                    row["orto"] = item["orto"];
-                    row["amount"] = item["total"];
-                    dtPC.Rows.Add(row);
-                }
-            }
-
-            return dtPC;
-        }
-
-        private DataTable DataTableCollections(int id)
-        {
-
-            var dtPC = new dsLFS.dtRCDCollectionsDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByCollections(id);
-            if (dt.Rows.Count > 0)
-            {
-                foreach (DataRow item in dt.Rows)
-                {
-                    DataRow row = dtPC.NewRow();
-                    row["rcdid"] = item["id"];
-                    row["collectorname"] = item["collector"];
-                    row["reportno"] = item["report_no"];
-                    row["amount"] = item["total"];
-                    dtPC.Rows.Add(row);
-                }
-            }
-
-            return dtPC;
-        }
-
-        private DataTable DataTableDeposits (int id)
-        {
-
-            var dtPC = new dsLFS.dtRCDDepositsDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByDeposits(id);
-            if (dt.Rows.Count > 0)
-            {
-                foreach (DataRow item in dt.Rows)
-                {
-                    DataRow row = dtPC.NewRow();
-                    row["rcdid"] = item["id"];
-                    row["bankname"] = String.Format("{0} - {1}", item["bank_name"], item["account_no"]);
-                    row["reference"] = item["reference"];
-                    row["amount"] = item["amount"];
-                    dtPC.Rows.Add(row);
-                }
-            }
-
-            return dtPC;
-        }
 
         private void LoadReport(LocalReport report)
         {
             try
             {
+                string from = String.Format("{0:yyyy-MM-dd}", dtpMonth.Value);
+                string to = String.Format("{0:yyyy-MM-dd}", dtto.Value);
                 var lguDetails = Helper.LGUDetails();
                 var signatory = "FELIX A. TRAPA";
-                if (type.Equals("GC"))
-                {
-                    var parameters = new[] {
+                var parameters = new[] {
                             new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                             new ReportParameter("paramSignatory", signatory)
                     };
-                    report.ReportPath = $"{Application.StartupPath}Reports\\payment-collection2.rdlc";
-                    report.DataSources.Clear();
-                    report.DataSources.Add(new ReportDataSource("dtPC", DataTableGC(Ids)));
-                    report.SetParameters(parameters);
-                    report.Refresh();
-                }
-                else
-                {
-                    var parameters = new[] {
-                            new ReportParameter("paramLGUName", lguDetails["lgu_name"])
-                    };
-                    report.ReportPath = $"{Application.StartupPath}Reports\\rcd.rdlc";
-                    report.DataSources.Clear();
-                    report.DataSources.Add(new ReportDataSource("dtRCD", DataTableData(Ids)));
-                    report.SubreportProcessing += Report_SubreportProcessing;
-                    
-                    report.SetParameters(parameters);
-                    report.Refresh();
-                }
+                report.ReportPath = $"{Application.StartupPath}Reports\\payment-collection2.rdlc";
+                report.DataSources.Clear();
+                report.DataSources.Add(new ReportDataSource("dtPC", DataTableGC(from,to)));
+                report.SetParameters(parameters);
+                report.Refresh();
 
-               
 
             }
             catch (Exception ex)
@@ -235,19 +116,12 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
            
         }
 
-        private void Report_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
-        {
-            int id = int.Parse(e.Parameters["rcdid"].Values[0].ToString());
-            e.DataSources.Add(new ReportDataSource("dtRCDForms", DataTableForms(id)));
-            e.DataSources.Add(new ReportDataSource("dtRCDCollections", DataTableCollections(id)));
-            e.DataSources.Add(new ReportDataSource("dtRCDDeposits", DataTableDeposits(id)));          
-
-        }
+       
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
             LoadReport(reportViewer.LocalReport);
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            //reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
             reportViewer.ZoomMode = ZoomMode.Percent;
             reportViewer.ZoomPercent = 100;
             reportViewer.RefreshReport();

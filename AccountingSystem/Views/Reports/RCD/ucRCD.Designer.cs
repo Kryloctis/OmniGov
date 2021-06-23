@@ -40,13 +40,12 @@ namespace AccountingSystem.Views.Reports.RCD
             this.chckapproved = new System.Windows.Forms.CheckBox();
             this.dgvpayments = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
-            this.txttotal = new System.Windows.Forms.NumericUpDown();
             this.btnadd = new System.Windows.Forms.Button();
             this.btnclear = new System.Windows.Forms.Button();
             this.btndelete = new System.Windows.Forms.Button();
+            this.txttotal = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvpayments)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txttotal)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -133,26 +132,11 @@ namespace AccountingSystem.Views.Reports.RCD
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(674, 635);
+            this.label4.Location = new System.Drawing.Point(703, 635);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 20);
             this.label4.TabIndex = 6;
             this.label4.Text = "Total :";
-            // 
-            // txttotal
-            // 
-            this.txttotal.DecimalPlaces = 2;
-            this.txttotal.Location = new System.Drawing.Point(729, 633);
-            this.txttotal.Maximum = new decimal(new int[] {
-            999999999,
-            0,
-            0,
-            0});
-            this.txttotal.Name = "txttotal";
-            this.txttotal.ReadOnly = true;
-            this.txttotal.Size = new System.Drawing.Size(289, 27);
-            this.txttotal.TabIndex = 7;
-            this.txttotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btnadd
             // 
@@ -196,14 +180,24 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btndelete.UseVisualStyleBackColor = true;
             this.btndelete.Click += new System.EventHandler(this.btndelete_Click);
             // 
+            // txttotal
+            // 
+            this.txttotal.Location = new System.Drawing.Point(758, 633);
+            this.txttotal.Name = "txttotal";
+            this.txttotal.ReadOnly = true;
+            this.txttotal.Size = new System.Drawing.Size(261, 27);
+            this.txttotal.TabIndex = 11;
+            this.txttotal.Text = "0.00";
+            this.txttotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // ucRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.txttotal);
             this.Controls.Add(this.btndelete);
             this.Controls.Add(this.btnclear);
             this.Controls.Add(this.btnadd);
-            this.Controls.Add(this.txttotal);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dgvpayments);
             this.Controls.Add(this.chckapproved);
@@ -218,7 +212,6 @@ namespace AccountingSystem.Views.Reports.RCD
             this.Load += new System.EventHandler(this.ucRCD_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvpayments)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txttotal)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -233,12 +226,12 @@ namespace AccountingSystem.Views.Reports.RCD
         internal System.Windows.Forms.ComboBox cmbcollector;
         internal System.Windows.Forms.TextBox txtreport;
         internal System.Windows.Forms.DateTimePicker dtdate;
-        internal System.Windows.Forms.NumericUpDown txttotal;
         private System.Windows.Forms.Label label4;
         internal System.Windows.Forms.CheckBox chckapproved;
         internal System.Windows.Forms.Button btnadd;
         internal System.Windows.Forms.DataGridView dgvpayments;
         internal System.Windows.Forms.Button btnclear;
         internal System.Windows.Forms.Button btndelete;
+        internal System.Windows.Forms.TextBox txttotal;
     }
 }

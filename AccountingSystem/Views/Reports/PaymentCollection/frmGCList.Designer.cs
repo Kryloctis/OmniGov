@@ -33,7 +33,6 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.btnDeposit = new System.Windows.Forms.ToolStripButton();
             this.btnRCD = new System.Windows.Forms.ToolStripButton();
-            this.btnGC = new System.Windows.Forms.ToolStripButton();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -65,8 +64,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnDeposit,
-            this.btnRCD,
-            this.btnGC});
+            this.btnRCD});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(5);
@@ -98,18 +96,6 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             this.btnRCD.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnRCD.ToolTipText = "Print Collections and Deposits";
             this.btnRCD.Click += new System.EventHandler(this.btnRCD_Click);
-            // 
-            // btnGC
-            // 
-            this.btnGC.Enabled = false;
-            this.btnGC.Image = global::AccountingSystem.Properties.Resources.printer;
-            this.btnGC.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnGC.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnGC.Name = "btnGC";
-            this.btnGC.Size = new System.Drawing.Size(147, 52);
-            this.btnGC.Text = "Print Gen. Collection";
-            this.btnGC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnGC.Click += new System.EventHandler(this.btnGC_Click);
             // 
             // statusStrip
             // 
@@ -164,7 +150,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             this.MaximizeBox = false;
             this.Name = "frmGCList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Report > General Collections";
+            this.Text = "Report of Collections and Deposits";
             this.Load += new System.EventHandler(this.frmGCList_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvgc)).EndInit();
             this.toolStrip.ResumeLayout(false);
@@ -186,7 +172,6 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripButton btnDeposit;
-        private System.Windows.Forms.ToolStripButton btnGC;
         private System.Windows.Forms.TextBox txtsearch;
     }
 }

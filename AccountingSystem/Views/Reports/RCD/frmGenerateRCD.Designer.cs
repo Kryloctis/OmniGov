@@ -36,7 +36,6 @@ namespace AccountingSystem.Views.Reports.RCD
             this.label4 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnGenerate = new System.Windows.Forms.Button();
-            this.txttotalamount = new System.Windows.Forms.NumericUpDown();
             this.btnPreview = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.label3 = new System.Windows.Forms.Label();
@@ -45,9 +44,9 @@ namespace AccountingSystem.Views.Reports.RCD
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.txttotalamount = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgPreview)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txttotalamount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -113,21 +112,6 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnGenerate.UseVisualStyleBackColor = true;
             this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
-            // txttotalamount
-            // 
-            this.txttotalamount.DecimalPlaces = 2;
-            this.txttotalamount.Location = new System.Drawing.Point(868, 579);
-            this.txttotalamount.Maximum = new decimal(new int[] {
-            999999999,
-            0,
-            0,
-            0});
-            this.txttotalamount.Name = "txttotalamount";
-            this.txttotalamount.ReadOnly = true;
-            this.txttotalamount.Size = new System.Drawing.Size(245, 27);
-            this.txttotalamount.TabIndex = 29;
-            this.txttotalamount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // btnPreview
             // 
             this.btnPreview.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -191,15 +175,25 @@ namespace AccountingSystem.Views.Reports.RCD
             this.toolStripStatusLabel4.Size = new System.Drawing.Size(1028, 20);
             this.toolStripStatusLabel4.Spring = true;
             // 
+            // txttotalamount
+            // 
+            this.txttotalamount.Location = new System.Drawing.Point(868, 578);
+            this.txttotalamount.Name = "txttotalamount";
+            this.txttotalamount.ReadOnly = true;
+            this.txttotalamount.Size = new System.Drawing.Size(245, 27);
+            this.txttotalamount.TabIndex = 34;
+            this.txttotalamount.Text = "0.00";
+            this.txttotalamount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // frmGenerateRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1125, 673);
+            this.Controls.Add(this.txttotalamount);
             this.Controls.Add(this.dtto);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnPreview);
-            this.Controls.Add(this.txttotalamount);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dgPreview);
@@ -214,7 +208,6 @@ namespace AccountingSystem.Views.Reports.RCD
             this.Load += new System.EventHandler(this.frmGenerateRCD_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgPreview)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txttotalamount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
@@ -231,7 +224,6 @@ namespace AccountingSystem.Views.Reports.RCD
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnGenerate;
-        private System.Windows.Forms.NumericUpDown txttotalamount;
         private System.Windows.Forms.Button btnPreview;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.DateTimePicker dtto;
@@ -240,5 +232,6 @@ namespace AccountingSystem.Views.Reports.RCD
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.TextBox txttotalamount;
     }
 }

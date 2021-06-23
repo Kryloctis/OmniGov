@@ -47,7 +47,7 @@ namespace AccountingSystem.Views.Reports.RCD
                     list = pcRepository.GetRecordByLedger(CoId, dateFrom, dateTo,id);
                     HelperLoadRecords.PaymentDatagridView(list, dgPreview);
 
-                    txttotalamount.Value = pcRepository.SumRecords(CoId, dateFrom, dateTo,id);
+                    txttotalamount.Text = String.Format("{0:N2}",pcRepository.SumRecords(CoId, dateFrom, dateTo,id));
                     lblRecordCount.Text = dgPreview.Rows.Count.ToString();
                 }
                 else
@@ -58,7 +58,7 @@ namespace AccountingSystem.Views.Reports.RCD
                     list = pcRepository.GetRecordByLedger(CoId, dateFrom, dateTo);
                     HelperLoadRecords.PaymentDatagridView(list, dgPreview);
 
-                    txttotalamount.Value = pcRepository.SumRecords(CoId, dateFrom, dateTo);
+                    txttotalamount.Text = String.Format("{0:N2}", pcRepository.SumRecords(CoId, dateFrom, dateTo));
                     lblRecordCount.Text = dgPreview.Rows.Count.ToString();
                 }               
                 
@@ -78,65 +78,39 @@ namespace AccountingSystem.Views.Reports.RCD
                 
                 if (_ucrcd.dgvpayments.Rows.Count > 0)
                 {
-                    if(list.Rows.Count > 0)
-                    {
+                    DataTable newtable = convertToGrid(_ucrcd.dgvpayments);
+                    if (list.Rows.Count > 0)
+                    {                        
                         for (int i = 0; i < list.Rows.Count; i++)
                         {
-                            DataGridViewRow row = (DataGridViewRow)_ucrcd.dgvpayments.RowTemplate.Clone();
-                            row.Cells[0].Value = 0;
-                            row.Cells[1].Value = list.Rows[i]["id"];
-                            row.Cells[2].Value = list.Rows[i]["account_code"];
-                            row.Cells[3].Value = list.Rows[i]["accform"];
-                            row.Cells[4].Value = list.Rows[i]["ledger_name"];
-                            row.Cells[5].Value = list.Rows[i]["subsidiary"];
-                            row.Cells[6].Value = list.Rows[i]["payee"];
-                            row.Cells[7].Value = list.Rows[i]["receipt_no"];
-                            row.Cells[8].Value = list.Rows[i]["payment_date"];
-                            row.Cells[9].Value = list.Rows[i]["amount"];
-                            row.Cells[10].Value = list.Rows[i]["collector"];
-                            _ucrcd.dgvpayments.Rows.Add(row);
-                            /*
-                            var update = from DataGridViewRow r in _ucrcd.dgvpayments.Rows where r.Cells[1].Value.Equals(list.Rows[i]["id"]) select r;
-                            if(update.Count() > 0)
-                            {
-                                foreach (var item in update)
-                                {
-                                    item.Cells[1].Value = list.Rows[i]["id"];
-                                    item.Cells[2].Value = list.Rows[i]["account_code"];
-                                    item.Cells[3].Value = list.Rows[i]["accform"];
-                                    item.Cells[4].Value = list.Rows[i]["ledger_name"];
-                                    item.Cells[5].Value = list.Rows[i]["subsidiary"];
-                                    item.Cells[6].Value = list.Rows[i]["payee"];
-                                    item.Cells[7].Value = list.Rows[i]["receipt_no"];
-                                    item.Cells[8].Value = list.Rows[i]["payment_date"];
-                                    item.Cells[9].Value = list.Rows[i]["amount"];
-                                    item.Cells[10].Value = list.Rows[i]["collector"];
-                                }
-                            }
-                            else
-                            {
-                               
-                            }*/
-
-
+                            DataRow row = newtable.NewRow();
+                            row[0] = 0;
+                            row[1]= list.Rows[i]["id"];
+                            row[2]= list.Rows[i]["account_code"];
+                            row[3] = list.Rows[i]["accform"];
+                            row[4] = list.Rows[i]["ledger_name"];
+                            row[5] = list.Rows[i]["subsidiary"];
+                            row[6] = list.Rows[i]["payee"];
+                            row[7] = list.Rows[i]["receipt_no"];
+                            row[8]= list.Rows[i]["payment_date"];
+                            row[9] = list.Rows[i]["amount"];
+                            row[10]= list.Rows[i]["collector"];
+                            newtable.Rows.Add(row);
+                            newtable.AcceptChanges();
                         }
+                        _ucrcd.dgvpayments.DataSource = newtable;
                     }
+                    _ucrcd.txttotal.Text = String.Format("{0:N2}", _ucrcd.dgvpayments.Rows.Cast<DataGridViewRow>().Sum(x => Convert.ToDouble(x.Cells[9].Value)));
                     this.Close();
                 }
                 else
                 {
                     DataTable dt = convertList(list);
                     HelperLoadRecords.RCDDatagridView(dt, _ucrcd.dgvpayments);
+                    _ucrcd.txttotal.Text = String.Format("{0:N2}", _ucrcd.dgvpayments.Rows.Cast<DataGridViewRow>().Sum(x => Convert.ToDouble(x.Cells[9].Value)));
                     this.Close();
                 }
-                
-                /*var rcdRepository = Factory.CollectorReportPaymentRepository();
-                if (rcdRepository.Append(data))
-                {
-                    Helper.MessageBoxSuccess("Collection Report Generated Successfully!");
-                    _ucrcd.LoadCollections(); 
-                    this.Close();
-                }*/
+
             }
         }
 
@@ -145,20 +119,39 @@ namespace AccountingSystem.Views.Reports.RCD
            
         }
 
+        private DataTable convertToGrid(DataGridView view)
+        {
+            DataTable dt = new DataTable();
+            foreach (DataGridViewColumn column in view.Columns)
+            {
+                dt.Columns.Add(column.HeaderText, column.ValueType);
+            }
+
+            foreach (DataGridViewRow row in view.Rows)
+            {
+                dt.Rows.Add();
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    dt.Rows[dt.Rows.Count - 1][cell.ColumnIndex] = cell.Value.ToString();
+                }
+            }
+            return dt;
+        }
+
         private DataTable convertList(DataTable data)
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("id", typeof(int));
             dt.Columns.Add("pid", typeof(int));
-            dt.Columns.Add("account_code", typeof(object));
-            dt.Columns.Add("accform", typeof(object));
-            dt.Columns.Add("ledger_name", typeof(object));
-            dt.Columns.Add("subsidiary", typeof(object));
-            dt.Columns.Add("payee", typeof(object));
-            dt.Columns.Add("receipt_no", typeof(object));
+            dt.Columns.Add("account_code", typeof(string));
+            dt.Columns.Add("accform", typeof(string));
+            dt.Columns.Add("ledger_name", typeof(string));
+            dt.Columns.Add("subsidiary", typeof(string));
+            dt.Columns.Add("payee", typeof(string));
+            dt.Columns.Add("receipt_no", typeof(string));
             dt.Columns.Add("payment_date", typeof(DateTime));
             dt.Columns.Add("amount", typeof(decimal));
-            dt.Columns.Add("collector", typeof(object));
+            dt.Columns.Add("collector", typeof(string));
             if (data.Rows.Count > 0)
             {
                 for (int i = 0; i < data.Rows.Count; i++)

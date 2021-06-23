@@ -262,6 +262,20 @@ namespace ACC.Data
             }
         }
 
+        public decimal SumRecords(int id)
+        {
+            try
+            {
+                string query = $"SELECT SUM({tableName3}.amount) FROM {tableName2} LEFT JOIN {tableName} ON {tableName}.collector_report_id={tableName2}.id LEFT JOIN {tableName3} ON {tableName}.payment_collections_id={tableName3}.id WHERE {tableName2}.id='{id}'";
+                string result = _dbGenericCommands.ExecuteScalar(query);
+                return !string.IsNullOrEmpty(result) ? decimal.Parse(result) : decimal.Parse("0.00");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public DataTable GetRecordByLedger(string Id)
         {
             try

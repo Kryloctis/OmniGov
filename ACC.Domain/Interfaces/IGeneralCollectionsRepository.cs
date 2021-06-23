@@ -16,5 +16,6 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordByForms(int Id);
         DataTable GetRecordByCollections(int Id);
         DataTable GetRecordByDeposits(int Id);
+        DataTable GetRecordByGC(string from, string to);
     }
 }
