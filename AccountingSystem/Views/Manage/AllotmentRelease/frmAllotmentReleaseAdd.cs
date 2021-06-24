@@ -57,7 +57,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 };
 
                 _ucAllotmentReleaseMain.dgAllotmentRelease.Rows.Add(items);
-
+                _ucAllotmentReleaseMain.DisplayTotalAllotmentRelease();
                 return true;
             }
             catch (Exception ex)
@@ -72,7 +72,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             if (AddAllotmentRelease())
             {
                 _ucAllotmentReleaseMain.panel1.Enabled = false;
-                _ucAllotmentReleaseMain.dtDateIssued.Enabled = false;
+                _ucAllotmentReleaseMain.dtDateIssued.Enabled = false; 
                 uc.ResetForm();
             }
         }

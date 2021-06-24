@@ -58,6 +58,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 _frmAllotmentReleaseMain.btnSave.Text = "Update";
                 _frmAllotmentReleaseMain.btnDelete.Enabled = true;
                 _frmAllotmentReleaseMain.btnCancel.Enabled = true;
+                _frmAllotmentReleaseMain.ucAllotmentReleaseMain1.DisplayTotalAllotmentRelease();
                 Close();
             }
         }

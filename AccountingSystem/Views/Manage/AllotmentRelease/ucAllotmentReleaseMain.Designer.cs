@@ -55,6 +55,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.txtPurpose = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnEdit = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtTotalAllotmentRelease = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgAllotmentRelease)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
@@ -67,13 +69,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             // dgAllotmentRelease
             // 
-            this.dgAllotmentRelease.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.dgAllotmentRelease.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgAllotmentRelease.Location = new System.Drawing.Point(6, 263);
+            this.dgAllotmentRelease.Location = new System.Drawing.Point(6, 255);
             this.dgAllotmentRelease.Name = "dgAllotmentRelease";
             this.dgAllotmentRelease.RowTemplate.Height = 25;
-            this.dgAllotmentRelease.Size = new System.Drawing.Size(641, 270);
+            this.dgAllotmentRelease.Size = new System.Drawing.Size(641, 265);
             this.dgAllotmentRelease.TabIndex = 7;
             this.dgAllotmentRelease.Tag = "";
             this.dgAllotmentRelease.SelectionChanged += new System.EventHandler(this.dgAllotmentRelease_SelectionChanged);
@@ -82,8 +82,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             // btnAdd
             // 
-            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.Location = new System.Drawing.Point(410, 539);
+            this.btnAdd.Location = new System.Drawing.Point(410, 526);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 8;
@@ -93,8 +92,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             // btnRemove
             // 
-            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemove.Location = new System.Drawing.Point(572, 539);
+            this.btnRemove.Location = new System.Drawing.Point(572, 526);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(75, 23);
             this.btnRemove.TabIndex = 10;
@@ -184,7 +182,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.panel1.Controls.Add(this.cmbxFPP);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(673, 175);
+            this.panel1.Size = new System.Drawing.Size(667, 175);
             this.panel1.TabIndex = 0;
             // 
             // groupBox2
@@ -290,8 +288,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             // btnEdit
             // 
-            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEdit.Location = new System.Drawing.Point(491, 539);
+            this.btnEdit.Location = new System.Drawing.Point(491, 526);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(75, 23);
             this.btnEdit.TabIndex = 8;
@@ -299,11 +296,31 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(5, 529);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(130, 15);
+            this.label7.TabIndex = 47;
+            this.label7.Text = "Total Allotment Release";
+            // 
+            // txtTotalAllotmentRelease
+            // 
+            this.txtTotalAllotmentRelease.Location = new System.Drawing.Point(141, 526);
+            this.txtTotalAllotmentRelease.Name = "txtTotalAllotmentRelease";
+            this.txtTotalAllotmentRelease.ReadOnly = true;
+            this.txtTotalAllotmentRelease.Size = new System.Drawing.Size(194, 23);
+            this.txtTotalAllotmentRelease.TabIndex = 48;
+            // 
             // ucAllotmentReleaseMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.Controls.Add(this.txtTotalAllotmentRelease);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.dtDateIssued);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtPurpose);
@@ -318,7 +335,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.dgAllotmentRelease);
             this.Name = "ucAllotmentReleaseMain";
-            this.Size = new System.Drawing.Size(670, 562);
+            this.Size = new System.Drawing.Size(670, 560);
             this.Load += new System.EventHandler(this.ucAllotmentReleaseMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgAllotmentRelease)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -362,5 +379,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal System.Windows.Forms.MaskedTextBox mskSeriesNo;
         private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Label label7;
+        internal System.Windows.Forms.TextBox txtTotalAllotmentRelease;
     }
 }

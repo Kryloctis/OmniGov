@@ -273,6 +273,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             epARONo.SetError(mskYear, string.Empty);
             epFPP.SetError(cmbxFPP, string.Empty);
             epSubFPP.SetError(cmbxSubFPP, string.Empty);
+
+            DisplayTotalAllotmentRelease();
         }
 
         internal string GetFormErrors()
@@ -351,6 +353,18 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 radAllotmentClass.Click += new EventHandler(RadioAllotmentClass_Click);
                 radAllotmentClass.CheckedChanged += new EventHandler(RadioAllotmentClass_CheckedChanged);
             }
+        }
+
+        internal void DisplayTotalAllotmentRelease() 
+        {
+            decimal totalAllotmentRelease = 0;
+
+            foreach (DataGridViewRow row in dgAllotmentRelease.Rows) 
+            {
+                totalAllotmentRelease += Convert.ToDecimal(row.Cells["allotment_amount"].Value);
+            }
+
+            txtTotalAllotmentRelease.Text = totalAllotmentRelease.ToString("N2");
         }
 
         private void LoadDatagridFormat()
@@ -438,6 +452,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 cmbxSubFPP.Enabled = false;
                 btnRemove.Enabled = false;
                 btnEdit.Enabled = false;
+
+                DisplayTotalAllotmentRelease();
             }
         }
 

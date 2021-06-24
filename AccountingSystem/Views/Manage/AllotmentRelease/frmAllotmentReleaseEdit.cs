@@ -44,6 +44,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 _ucAllotmentReleaseMain.dgAllotmentRelease.Rows[rowIndex].Cells["account_name"].Value = accountName;
                 _ucAllotmentReleaseMain.dgAllotmentRelease.Rows[rowIndex].Cells["account_code"].Value = accountCode;
                 _ucAllotmentReleaseMain.dgAllotmentRelease.Rows[rowIndex].Cells["allotment_amount"].Value = uc.nudAmount.Value;
+                _ucAllotmentReleaseMain.DisplayTotalAllotmentRelease();
                 return true;
             }
             catch (Exception ex)
