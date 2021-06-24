@@ -422,16 +422,6 @@ namespace AccountingSystem
             this.btnBudgetAppropriations.Text = "Budget Appropriations";
             this.btnBudgetAppropriations.Click += new System.EventHandler(this.btnBudgetAppropriations_Click);
             // 
-            // btnSupplementalAppropriations
-            // 
-            this.btnSupplementalAppropriations.Image = global::AccountingSystem.Properties.Resources.supplemental_appropriations_24px;
-            this.btnSupplementalAppropriations.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSupplementalAppropriations.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSupplementalAppropriations.Name = "btnSupplementalAppropriations";
-            this.btnSupplementalAppropriations.Size = new System.Drawing.Size(233, 28);
-            this.btnSupplementalAppropriations.Text = "Supplemental Appropriations";
-            this.btnSupplementalAppropriations.Click += new System.EventHandler(this.btnSupplementalAppropriations_Click);
-            // 
             // btnAllotmentRelease
             // 
             this.btnAllotmentRelease.Image = global::AccountingSystem.Properties.Resources.allotment_release_24px;
