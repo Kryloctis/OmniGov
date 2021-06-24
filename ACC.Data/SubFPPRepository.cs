@@ -8,13 +8,13 @@ using System.Transactions;
 
 namespace ACC.Data
 {
-    public class OthersFPPRepository : IOthersFPPRepository
+    public class SubFPPRepository : ISubFPPRepository
     {
         private readonly string tableName = "others_fpp";
 
         private MySqlGenericCommands _mySqlGenericCommands;
 
-        public OthersFPPRepository(MySqlGenericCommands mySqlGenericCommands)
+        public SubFPPRepository(MySqlGenericCommands mySqlGenericCommands)
         {
             this._mySqlGenericCommands = mySqlGenericCommands;
         }
@@ -24,7 +24,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Delete(List<OthersFPPModel> entityList)
+        public bool Delete(List<SubFPPModel> entityList)
         {
             try
             {
@@ -108,7 +108,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Insert(OthersFPPModel entity)
+        public bool Insert(SubFPPModel entity)
         {
             try
             {
@@ -128,7 +128,7 @@ namespace ACC.Data
             }
         }
 
-        public bool Update(OthersFPPModel entity)
+        public bool Update(SubFPPModel entity)
         {
             try
             {

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IOthersFPPRepository : IRepository<OthersFPPModel>
+    public interface ISubFPPRepository : IRepository<SubFPPModel>
     {
         bool NameExist(string name);
         bool NameExist(int id, string name);

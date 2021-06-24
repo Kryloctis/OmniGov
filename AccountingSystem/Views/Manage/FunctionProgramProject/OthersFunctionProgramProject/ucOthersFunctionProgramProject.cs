@@ -42,9 +42,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
                 bool nameExist;
 
                 if (othersFPPID == 0)
-                    nameExist = Factory.OthersFPPRepository().NameExist(name);
+                    nameExist = Factory.SubFPPRepository().NameExist(name);
                 else
-                    nameExist = Factory.OthersFPPRepository().NameExist(othersFPPID, name);
+                    nameExist = Factory.SubFPPRepository().NameExist(othersFPPID, name);
 
                 if (nameExist)
                 {
@@ -82,9 +82,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
                 bool codeExist;
 
                 if (othersFPPID == 0)
-                    codeExist = Factory.OthersFPPRepository().CodeExist(othersFPPCode);
+                    codeExist = Factory.SubFPPRepository().CodeExist(othersFPPCode);
                 else
-                    codeExist = Factory.OthersFPPRepository().CodeExist(othersFPPID, othersFPPCode);
+                    codeExist = Factory.SubFPPRepository().CodeExist(othersFPPID, othersFPPCode);
 
                 if (codeExist)
                 {

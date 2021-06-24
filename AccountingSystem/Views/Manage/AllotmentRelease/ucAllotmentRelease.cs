@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
 
                 cmbxBudgetAppropriations.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
-                cmbxBudgetAppropriations.SelectedIndex = -1;
+                cmbxBudgetAppropriations.SelectedValue = _budgetAppropriationId;
                 cmbxBudgetAppropriations.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
                 cmbxBudgetAppropriations.SelectedValueChanged += new EventHandler(cmbxBudgetAppropriations_SelectedValueChanged);
 

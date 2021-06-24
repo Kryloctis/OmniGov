@@ -27,26 +27,7 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
-
-        public bool DeleteByObligationRequestId(int ObligationRequestId)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@obligation_request_id",DbType.Int32, ObligationRequestId}
-                };
-
-                string query = $"DELETE FROM {tableName} WHERE obligation_request_id = @obligation_request_id";
-
-                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
+    
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             throw new NotImplementedException();
@@ -67,32 +48,9 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Insert(ObligationAccountModel entity)
+        public bool Update(ObligationAccountModel entity)
         {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@obligation_request_id",DbType.Int32, entity.ObligationRequestId },
-                    new object[] { "@general_ledger_accounts_id", DbType.Int32, entity.AccountId},
-                    new object[] { "@amount", DbType.Decimal, entity.Amount}
-                };
-
-                string query = $"INSERT INTO {tableName} " +
-                    $"(obligation_request_id, " +
-                    $"general_ledger_accounts_id, " +
-                    $"amount) " +
-                    $"VALUES " +
-                    $"(@obligation_request_id, " +
-                    $"@general_ledger_accounts_id, " +
-                    $"@amount) ";
-
-                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            throw new NotImplementedException();
         }
 
         public int ObligationsRecordCount()
@@ -110,9 +68,55 @@ namespace ACC.Data
             }
         }
 
-        public bool Update(ObligationAccountModel entity)
+
+        //INSERT
+        public bool Insert(ObligationAccountModel entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@obligation_request_id",DbType.Int32, entity.ObligationRequestId },
+                    new object[] { "@budget_appropriations_id", DbType.Int32, entity.BudgetAppropriationId},
+                    new object[] { "@amount", DbType.Decimal, entity.Amount}
+                };
+
+                string query = $"INSERT INTO {tableName} " +
+                    $"(obligation_request_id, " +
+                    $"budget_appropriations_id, " +
+                    $"amount) " +
+                    $"VALUES " +
+                    $"(@obligation_request_id, " +
+                    $"@budget_appropriations_id, " +
+                    $"@amount)";
+
+                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
+        
+        //DELETE    
+        public bool DeleteByObligationRequestId(int ObligationRequestId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@obligation_request_id",DbType.Int32, ObligationRequestId}
+                };
+
+                string query = $"DELETE FROM {tableName} WHERE obligation_request_id = @obligation_request_id";
+
+                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }
