@@ -368,10 +368,10 @@ namespace AccountingSystem.Views.Transactions.JEV
                 e.Cancel = true;
             }
 
-            string jevNo = $"{txtFundsJevNo.Text}-{txtJEVNo.Text}";
+            string jevNo = txtJEVNo.Text;
             bool jevNoExist;
             if (jevId == 0)
-                jevNoExist = Factory.JEVRepository().JevNumberExist(jevNo);
+                jevNoExist = Factory.JEVRepository().JevNumberAndYearExist(jevNo, dtpDateEntry.Value.Year);
             else
                 jevNoExist = Factory.JEVRepository().JevNumberExist(jevNo, jevId);
 

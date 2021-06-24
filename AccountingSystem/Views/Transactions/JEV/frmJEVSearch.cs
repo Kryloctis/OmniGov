@@ -101,8 +101,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             var uc = frmJEV.ucjev1;
             try
             {
-                bool jevExist = Factory.JEVRepository().JevNumberExist(txtSearch.Text.Trim());
-
                 if (dgJEV.SelectedRows.Count == 1)
                 {
                     int rowIndex = dgJEV.CurrentCell.RowIndex;
@@ -130,7 +128,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.dtpDateEntry.Value = Convert.ToDateTime(jevDict["date_entry"]);
                     uc.txtRefNo.Text = jevDict["ref_no"];
                     uc.txtPayee.Text = jevDict["payee"];
-                    uc.fundId = Convert.ToByte(jevDict["funds_id"]);
+                    uc.fundId = Convert.ToByte(jevDict["funds_id"]);s
                     uc.journalId = Convert.ToByte(jevDict["journals_id"]);
                     CheckedFund(jevDict["fund_name"]);
                     CheckedJournal(jevDict["journal_name"]);

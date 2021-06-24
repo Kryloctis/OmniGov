@@ -81,7 +81,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private static JEVModel ParseJEVModelData(byte userId, ucJEV uc, bool isUpdate = false)
         {
-            string jevNo = $"{uc.txtFundsJevNo.Text}-{uc.txtJEVNo.Text.Trim()}";
+            string jevNo = uc.txtJEVNo.Text.Trim();
             var jevModel = new JEVModel();
 
             if (isUpdate) jevModel.Id = uc.jevId;
