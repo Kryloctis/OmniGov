@@ -148,7 +148,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 {
                     uc.ResetForm();
                     btnDelete.Enabled = false;
-                    btnCancel.Enabled = false;
                     btnSave.Text = "Save";
                 }
             }

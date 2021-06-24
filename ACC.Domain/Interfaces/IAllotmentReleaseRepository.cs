@@ -21,7 +21,7 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId);
 
-        DataTable GetViewRecordsByARONo(string aroNo);
+        DataTable GetViewRecordsById(int Id);
 
         bool AllotmentReleaseExist(int budgetAppropriationId, DateTime dateIssued);
 

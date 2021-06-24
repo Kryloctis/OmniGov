@@ -37,16 +37,16 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             allotmentClassId = radAllotmentClassId;
         }
 
-        internal void LoadSearched(string aroNo) 
+        internal void LoadSelected() 
         {
             try
             {
-                var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByARONo(aroNo);
-                allotmentReleaseId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["allotment_release_id"]);
+                var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsById(allotmentReleaseId);
                 int fppId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["function_program_project_id"]);
                 var subFPPId = dtAllotmentRelease.Rows[0]["others_fpp_id"];
                 int fundId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["funds_id"]);
                 int allotmentClassId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["allotment_classes_id"]);
+                string aroNo = dtAllotmentRelease.Rows[0]["aro_no"].ToString();
                 var dateIssued = Convert.ToDateTime(dtAllotmentRelease.Rows[0]["date_issued"]);
                 string purpose = dtAllotmentRelease.Rows[0]["purpose"].ToString();
 
