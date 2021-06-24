@@ -30,11 +30,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private void InitializeComponent()
         {
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnCancel = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnCancel = new System.Windows.Forms.ToolStripButton();
             this.ucAllotmentReleaseMain1 = new AccountingSystem.Views.Manage.AllotmentRelease.ucAllotmentReleaseMain();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -51,25 +51,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 0, 1, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(690, 50);
+            this.toolStrip1.Size = new System.Drawing.Size(679, 50);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
-            this.btnCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(47, 47);
-            this.btnCancel.Text = "&Cancel";
-            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
             // 
             // btnSave
             // 
@@ -89,7 +73,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnSearch.Image = global::AccountingSystem.Properties.Resources.find;
             this.btnSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(0, 1, 15, 2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(55, 47);
             this.btnSearch.Text = "&Search...";
@@ -107,12 +91,29 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
+            this.btnCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(47, 47);
+            this.btnCancel.Text = "&Cancel";
+            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
             // ucAllotmentReleaseMain1
             // 
+            this.ucAllotmentReleaseMain1.AutoSize = true;
             this.ucAllotmentReleaseMain1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucAllotmentReleaseMain1.Location = new System.Drawing.Point(18, 53);
+            this.ucAllotmentReleaseMain1.Location = new System.Drawing.Point(12, 53);
             this.ucAllotmentReleaseMain1.Name = "ucAllotmentReleaseMain1";
-            this.ucAllotmentReleaseMain1.Size = new System.Drawing.Size(673, 565);
+            this.ucAllotmentReleaseMain1.Size = new System.Drawing.Size(670, 552);
             this.ucAllotmentReleaseMain1.TabIndex = 2;
             // 
             // frmAllotmentReleaseMain
@@ -120,7 +121,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
-            this.ClientSize = new System.Drawing.Size(690, 631);
+            this.ClientSize = new System.Drawing.Size(679, 616);
             this.Controls.Add(this.ucAllotmentReleaseMain1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -141,9 +142,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private System.Windows.Forms.ToolStrip toolStrip1;
         internal System.Windows.Forms.ToolStripButton btnSave;
         internal System.Windows.Forms.ToolStripButton btnCancel;
-        private ucAllotmentReleaseMain ucAllotmentReleaseMain1;
         private System.Windows.Forms.ToolStripButton btnSearch;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         internal System.Windows.Forms.ToolStripButton btnDelete;
+        internal ucAllotmentReleaseMain ucAllotmentReleaseMain1;
     }
 }

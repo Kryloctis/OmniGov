@@ -24,7 +24,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             Helper.LoadFormIcon(this);
             uc = ucAllotmentReleaseMain1;
             btnDelete.Enabled = false;
-            btnCancel.Enabled = false;
         }
 
         private List<AllotmentAccountModel> AllotmentAccountModelList()
@@ -47,7 +46,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
             return allotmentAccountModelList;
         }
-
 
         private bool InsertData() 
         {
@@ -128,18 +126,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return false;
         }
 
-        private void Prompt()
-        {
-            var message = "Are you sure? Unsaved data will not be saved.";
-
-            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                uc.ResetForm();
-                btnDelete.Enabled = false;
-                btnCancel.Enabled = false;
-                btnSave.Text = "Save";
-            }
-        }
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
@@ -152,12 +138,24 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
         }
 
+
+        private void CanceAction()
+        {
+            var message = "Are you sure? Changes cannot be undone.";
+            if (uc.allotmentReleaseId > 0 || uc.dgAllotmentRelease.Rows.Count > 0)
+            {
+                if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    uc.ResetForm();
+                    btnDelete.Enabled = false;
+                    btnSave.Text = "Save";
+                }
+            }
+        }
+
         private void BtnCancel_Click(object sender, EventArgs e) 
         {
-            if (!uc.panel1.Enabled)
-            {
-                Prompt();
-            }
+            CanceAction();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

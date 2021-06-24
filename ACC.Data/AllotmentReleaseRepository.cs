@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -54,7 +55,27 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][] 
+                {
+                    new object[] { "@searchTxt", DbType.String, $"%{searchText}%" }
+                };
+
+                string query = $"SELECT id, aro_no, purpose, date_issued, created_at, updated_at FROM {tableName} WHERE aro_no LIKE @searchTxt OR purpose LIKE  @searchTxt";
+
+                var dataTable = new DataTable();
+
+                return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -93,7 +114,7 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetViewRecordsByARONo(string aroNo)
+        public DataTable GetViewRecordsById(int Id)
         {
             try
             {
@@ -101,7 +122,7 @@ namespace ACC.Data
 
                 var parameters = new object[][]
                 {
-                    new object[] { "@aro_no", DbType.String, aroNo }
+                    new object[] { "@allotment_release_id", DbType.Int32, Id }
                 };
 
                 string query = $"SELECT " +
@@ -136,7 +157,7 @@ namespace ACC.Data
                     $"amount " +
                     $"FROM {viewTableName} " +
                     $"WHERE " +
-                    $"aro_no = @aro_no";
+                    $"allotment_release_id = @allotment_release_id";
 
                 var dataTable = new DataTable();
                 return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
