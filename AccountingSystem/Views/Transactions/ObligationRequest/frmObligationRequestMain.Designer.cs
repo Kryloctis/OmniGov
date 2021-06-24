@@ -30,8 +30,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private void InitializeComponent()
         {
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnNew = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -45,8 +43,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnNew,
-            this.toolStripSeparator2,
             this.btnSave,
             this.btnDelete,
             this.toolStripSeparator1,
@@ -58,22 +54,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // btnNew
-            // 
-            this.btnNew.Image = global::AccountingSystem.Properties.Resources.create_new_28px;
-            this.btnNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNew.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(35, 47);
-            this.btnNew.Text = "&New";
-            this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 50);
-            // 
             // btnSave
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save28px;
@@ -84,6 +64,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnSave.Size = new System.Drawing.Size(35, 47);
             this.btnSave.Text = "&Save";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // btnDelete
             // 
@@ -94,7 +75,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnDelete.Size = new System.Drawing.Size(44, 47);
             this.btnDelete.Text = "&Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click_1);
+            this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // toolStripSeparator1
             // 
@@ -110,7 +91,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnCancel.Size = new System.Drawing.Size(47, 47);
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click_1);
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // btnSearch
             // 
@@ -118,17 +99,18 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnSearch.Image = global::AccountingSystem.Properties.Resources.find_doc;
             this.btnSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(0, 1, 15, 2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(55, 47);
             this.btnSearch.Text = "&Search...";
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
             // ucObligationRequestMain1
             // 
-            this.ucObligationRequestMain1.Location = new System.Drawing.Point(21, 55);
+            this.ucObligationRequestMain1.Location = new System.Drawing.Point(13, 53);
             this.ucObligationRequestMain1.Name = "ucObligationRequestMain1";
-            this.ucObligationRequestMain1.Size = new System.Drawing.Size(561, 583);
+            this.ucObligationRequestMain1.Size = new System.Drawing.Size(571, 562);
             this.ucObligationRequestMain1.TabIndex = 0;
             // 
             // frmObligationRequestMain
@@ -136,7 +118,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(585, 646);
+            this.ClientSize = new System.Drawing.Size(585, 617);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.ucObligationRequestMain1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -161,7 +143,5 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.ToolStripButton btnCancel;
         internal System.Windows.Forms.ToolStripButton btnDelete;
         internal ucObligationRequestMain ucObligationRequestMain1;
-        internal System.Windows.Forms.ToolStripButton btnNew;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }

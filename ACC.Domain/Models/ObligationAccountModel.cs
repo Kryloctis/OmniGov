@@ -8,7 +8,7 @@ namespace ACC.Domain.Models
     {
         public int Id { get; set; }
         public int ObligationRequestId { get; set; }
-        public int AccountId {get; set;}
+        public int BudgetAppropriationId {get; set;}
         public decimal Amount { get; set; }
     }
 }
