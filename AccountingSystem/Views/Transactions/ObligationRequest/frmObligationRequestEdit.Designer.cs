@@ -95,7 +95,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Obligation Request";
-            this.Load += new System.EventHandler(this.frmObligationRequestEdit_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

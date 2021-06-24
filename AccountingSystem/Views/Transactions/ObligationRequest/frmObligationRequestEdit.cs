@@ -26,10 +26,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         }
 
 
-        private void frmObligationRequestEdit_Load(object sender, EventArgs e)
-        {
-        }
-
         private void btnOk_Click(object sender, EventArgs e)
         {
             if (!uc.ValidateChildren())

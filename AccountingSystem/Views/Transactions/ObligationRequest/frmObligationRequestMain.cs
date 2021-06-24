@@ -22,31 +22,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             InitializeComponent();
             Helper.LoadFormIcon(this);
             uc = ucObligationRequestMain1;
-            btnNew.Click += new EventHandler(BtnNew_Click);
-            btnSave.Click += new EventHandler(BtnSave_Click);
-            btnDelete.Click += new EventHandler(BtnDelete_Click);
-            btnCancel.Click += new EventHandler(BtnCancel_CLick);
-            btnSearch.Click += new EventHandler(BtnSearch_Click);
-            btnCancel.Enabled = false;
             btnDelete.Enabled = false;
         }
-
-
-        private void UnsavedWorkPrompt()
-        {
-            var message = "Are you sure? Unsaved data will not be saved.";
-
-            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                uc.ResetForm();
-            }
-        }
-
-        private void BtnNew_Click(object sender, EventArgs e)
-        {
-            UnsavedWorkPrompt();
-        }
-
 
         private List<ObligationAccountModel> ObligationAccountsModelList() 
         {
@@ -69,6 +46,23 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return obligationRequestModelList;
         }
 
+        internal void EnableDisableButtons() 
+        {
+            if (uc.obligationRequestId == 0)
+            {
+                btnSave.Enabled = true;
+                btnDelete.Enabled = false;
+                btnCancel.Enabled = false;
+            }
+            else
+            {
+                btnSave.Enabled = true;
+                btnDelete.Enabled = true;
+                btnCancel.Enabled = true;
+            }
+        }
+
+
         //DELETE
         private void BtnDelete_Click(object sender, EventArgs e)
         {
@@ -77,9 +71,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 if (Helper.MessageBoxConfirmDelete(1))
                 {
                     _ = Factory.ObligationRequestRepository().Delete(uc.obligationRequestId);
-                    btnNew.Enabled = true;
                     btnSave.Text = "&Save";
-                    btnCancel.Enabled = false;
                     btnDelete.Enabled = false;
                     uc.ResetForm();
                 }
@@ -183,9 +175,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             else
             {
                 Helper.MessageBoxSuccess("Obligation Request has been updated.");
-                btnNew.Enabled = true;
                 btnSave.Text = "&Save";
-                btnDelete.Enabled = false;
                 btnCancel.Enabled = false;
             }
 
@@ -201,28 +191,30 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         }
 
 
-        private void BtnCancel_CLick(object sender, EventArgs e)
+
+        private void CancelAction() 
         {
-            btnSave.Text = "Save";
-            btnNew.Enabled = true;
-            btnCancel.Enabled = false;
-            btnDelete.Enabled = false;
-            uc.ResetForm();
+            string message = "Are you sure? Changes cannot be undone.";
+
+            if (uc.obligationRequestId > 0 || uc.dgObligationRequests.Rows.Count > 0)
+            {
+                if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    btnSave.Text = "Save";
+                    btnDelete.Enabled = false;
+                    uc.ResetForm();
+                }
+            }
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            CancelAction();
         }
 
         private void BtnSearch_Click(object sender, EventArgs e)
         {
             _ = new frmObligationRequestSearch(this).ShowDialog();
-        }
-
-        private void btnDelete_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnCancel_Click_1(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -36,6 +36,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 LoadAllotmentClasses();
                 LoadDatagridFormat();
                 mskTxtObligationNoTemplate.Text = GenerateObligationRequestNoTemplate();
+                GetTotalObligations();
                 cmbxSubFPP.Enabled = false;
                 btnEdit.Enabled = false;
                 btnRemove.Enabled = false;
@@ -59,13 +60,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         internal void ResetForm()
         {
-            cmbxFPP.Enabled = true;
-            cmbxSubFPP.Enabled = true;
-            flowLayoutPanelFunds.Enabled = true;
-            flowLayoutPanelAllotmentClass.Enabled = true;
-            dtDateRequest.Enabled = true;
-            cmbxFPP.SelectedIndex = -1;
-            cmbxSubFPP.SelectedIndex = -1;
+            EnableDisableComponents(true);
+
+            cmbxFPP.SelectedValue = 0;
+            cmbxFPP.Text = string.Empty;
+            cmbxSubFPP.SelectedValue = 0;
+            cmbxSubFPP.Text = string.Empty;
             CheckedFund(1);
             CheckedAllotmentClass(1);
             mskTxtObligationNoSeries.Text = string.Empty;
@@ -75,6 +75,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             txtExplanation.Text = string.Empty;
             dgObligationRequests.Rows.Clear();
             obligationRequestId = 0;
+            txtTotalObligations.Text = "0.00";
         }
 
         internal void GetTotalObligations()
@@ -97,14 +98,24 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             dgObligationRequests.Columns.Add("obligation_amount", "Amount");
 
             dgObligationRequests.Columns["object_expenditure"].SortMode = DataGridViewColumnSortMode.NotSortable;
-            dgObligationRequests.Columns["object_expenditure"].Width = 400;
+            dgObligationRequests.Columns["object_expenditure"].Width = 500;
             dgObligationRequests.Columns["account_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dgObligationRequests.Columns["account_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgObligationRequests.Columns["obligation_amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
             dgObligationRequests.Columns["obligation_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgObligationRequests.Columns["obligation_amount"].DefaultCellStyle.Format = "N2";
 
             dgObligationRequests.Columns["budget_appropriation_id"].Visible = false;
             Helper.DatagridDefaultStyle(dgObligationRequests, true);
+        }
+
+        internal void EnableDisableComponents(bool enableComponents) 
+        {
+            cmbxFPP.Enabled = enableComponents;
+            cmbxSubFPP.Enabled = enableComponents;
+            flowLayoutPanelFunds.Enabled = enableComponents;
+            flowLayoutPanelAllotmentClass.Enabled = enableComponents;
+            dtDateRequest.Enabled = enableComponents;
         }
 
         private void EnableDisableButtons()
@@ -289,37 +300,57 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
         }
 
+
         //LOAD SEARCHED OBLIGATIONS
-        private void LoadObligationRequests(int dicobligationRequestId)
-        {
-            dgObligationRequests.Rows.Clear();
-
-            DataTable dtObligationRequest = Factory.ObligationRequestRepository().GetViewRecordsById(obligationRequestId);
-
-            foreach (DataRow item in dtObligationRequest.Rows)
-            {
-                var obligationRequest = new object[]
-                {
-                        item["general_ledger_accounts_id"],
-                        item["ledger_accounts_name"],
-                        item["obligation_requested_amount"]
-                };
-
-                dgObligationRequests.Rows.Add(obligationRequest);
-            }
-        }
-
         internal void LoadSearched()
         {
             try
             {
-                
+                dgObligationRequests.Rows.Clear();
+
+                DataTable dtObligationRequest = Factory.ObligationRequestRepository().GetViewRecordsById(obligationRequestId);
+
+                int fppId = Convert.ToInt32(dtObligationRequest.Rows[0]["function_program_project_id"]);
+                var subFPPId = dtObligationRequest.Rows[0]["others_fpp_id"];
+                int fundId = Convert.ToInt32(dtObligationRequest.Rows[0]["funds_id"]);
+                int allotmentClassId = Convert.ToInt32(dtObligationRequest.Rows[0]["allotment_classes_id"]);
+                string obligationRequestNo = dtObligationRequest.Rows[0]["obligation_no"].ToString();
+                DateTime dateOfRequest = Convert.ToDateTime(dtObligationRequest.Rows[0]["date_requested"]);
+                string referenceNo = dtObligationRequest.Rows[0]["reference_no"].ToString();
+                string payee = dtObligationRequest.Rows[0]["payee"].ToString();
+                string explanation = dtObligationRequest.Rows[0]["explanation"].ToString();
+
+                cmbxFPP.SelectedValue = fppId;
+                cmbxSubFPP.SelectedValue = subFPPId == null? 0 :subFPPId;
+                CheckedFund(fundId);
+                CheckedAllotmentClass(allotmentClassId);
+                mskTxtObligationNoSeries.Text = obligationRequestNo;
+                dtDateRequest.Value = dateOfRequest;
+                txtReferenceNo.Text = referenceNo;
+                txtPayee.Text = payee;
+                txtExplanation.Text = explanation;
+
+                foreach (DataRow item in dtObligationRequest.Rows)
+                {
+                    string remarks = string.IsNullOrEmpty(item["remarks"].ToString()) ? string.Empty : $"({item["remarks"]})";
+
+                    var obligationRequest = new object[]
+                    {
+                        item["budget_appropriations_id"],
+                        $"{item["ledger_name"]}{remarks}",
+                        item["account_code"],
+                        item["amount"]
+                    };
+
+                    dgObligationRequests.Rows.Add(obligationRequest);
+                    GetTotalObligations();
+                }
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
-        } 
+        }
 
         private void CheckedFund(int radFundId)
         {
@@ -332,8 +363,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             flowLayoutPanelAllotmentClass.Controls.OfType<RadioButton>().FirstOrDefault(r => (Convert.ToInt32(r.Tag) == radAllotmentClassId) ? r.Checked = true : r.Checked = false);
             allotmentClassId = radAllotmentClassId;
         }
-
-
 
 
         private void ShowCheckIcon(RadioButton radioButton)
@@ -550,6 +579,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         #region VALIDATIONS
 
+
         //OBLIGATION LIST EMPTY
         internal bool ShowErrorObligationRequestsListEmpty()
         {
@@ -737,6 +767,5 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         }
 
         #endregion VALIDATIONS
-
     }
 }

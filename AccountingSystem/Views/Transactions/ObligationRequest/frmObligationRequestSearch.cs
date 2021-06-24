@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,87 +23,63 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             Helper.LoadFormIcon(this);
             _frmObligationRequestMain = frmObligationRequestMain;
             _ucObligationRequestMain = _frmObligationRequestMain.ucObligationRequestMain1;
+            btnSelect.Enabled = false;
         }
 
-
-        internal string GetFormErrors()
-        {
-            var errorArray = new string[1];
-            errorArray[0] = mskTxtObligationNo.Tag.ToString();
-
-            IError _errors = Factory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
-        }
-
-
-        private void btnOk_Click(object sender, EventArgs e)
-        {
-            if (!ValidateChildren())
-            {
-                Helper.MessageBoxError(GetFormErrors());
-            }
-            else
-            {
-                _ucObligationRequestMain.LoadSearched();
-                _frmObligationRequestMain.btnNew.Enabled = false;
-                _frmObligationRequestMain.btnCancel.Enabled = true;
-                _frmObligationRequestMain.btnDelete.Enabled = true;
-                _ucObligationRequestMain.cmbxFPP.Enabled = false;
-                _ucObligationRequestMain.cmbxSubFPP.Enabled = false;
-                _ucObligationRequestMain.flowLayoutPanelFunds.Enabled = false;
-                _ucObligationRequestMain.flowLayoutPanelAllotmentClass.Enabled = false;
-                _ucObligationRequestMain.dtDateRequest.Enabled = false;
-
-                _frmObligationRequestMain.btnSave.Text = "&Update";
-                Close();
-            }
-        }
-
-
-        private bool ObligationEmpty()
+        private void LoadObligationRequests() 
         {
             try
             {
-                if (!mskTxtObligationNo.MaskCompleted)
-                {
-                    mskTxtObligationNo.Tag = "Please enter Obligation No.";
-                    return true;
-                }
-                return false;
+                string searchTxt = txtSearch.Text.Trim();
+                HelperLoadRecords.ObligationRequestDatagridView(dgObligationRequests, searchTxt);
+            }
+            catch (MySqlException ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
-            return false;
         }
 
-        private bool ObligationNoNotExist()
+        private void dgObligationRequests_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                bool obligationNoExist = Factory.ObligationRequestRepository().ObligationRequestNoExist(mskTxtObligationNo.Text);
-
-                if (!obligationNoExist)
-                {
-                    mskTxtObligationNo.Tag = "Obligation No. you entered doesn't exist on you record";
-                    return true;
-                }
-                return false;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private void mskTxtObligationNo_Validating(object sender, CancelEventArgs e)
-        {
-            if (!mskTxtObligationNo.MaskCompleted)
-                e.Cancel = ObligationEmpty();
+            if (dgObligationRequests.SelectedRows.Count == 1)
+                btnSelect.Enabled = true;
             else
-                e.Cancel = ObligationNoNotExist();
+                btnSelect.Enabled = false;
+        }
+
+        private void LoadSelected() 
+        {
+            int rowIndex = dgObligationRequests.CurrentCell.RowIndex;
+            int obligationRequestId = Convert.ToInt32(dgObligationRequests.Rows[rowIndex].Cells["id"].Value);
+            _ucObligationRequestMain.obligationRequestId = obligationRequestId;
+            _ucObligationRequestMain.LoadSearched();
+            _frmObligationRequestMain.EnableDisableButtons();
+            _ucObligationRequestMain.EnableDisableComponents(false);
+            Close();
+        }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            LoadSelected();
+        }
+
+        private void dgObligationRequests_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            LoadSelected();
+        }
+
+        private void frmObligationRequestSearch_Load(object sender, EventArgs e)
+        {
+            Helper.DatagridDefaultStyle(dgObligationRequests, true);
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadObligationRequests();
         }
     }
 }

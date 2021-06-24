@@ -99,7 +99,9 @@ namespace AccountingSystem
             return new Dictionary<string, string>();
         }
 
+
         #region ErrorProviders on Controls
+
         private static string GetFirstLetter(string word)
         {
             return word.Substring(0, 1);

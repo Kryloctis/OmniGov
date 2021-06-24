@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -42,7 +43,42 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][] 
+                {
+                    new object[] { "@searchTxt", DbType.String, $"%{searchText}%"}
+                };
+
+                string query = $"SELECT " +
+                    $"id, " +
+                    $"obligation_no, " +
+                    $"payee, " +
+                    $"explanation, " +
+                    $"reference_no, " +
+                    $"date_requested, " +
+                    $"created_at, " +
+                    $"created_by, " +
+                    $"updated_at, " +
+                    $"updated_by " +
+                    $"FROM " +
+                    $"{tableName} " +
+                    $"WHERE " +
+                    $"obligation_no LIKE @searchTxt " +
+                    $"OR payee LIKE @searchTxt " +
+                    $"OR reference_no LIKE @searchTxt OR YEAR(date_requested) LIKE @searchTxt";
+
+                var dataTable = new DataTable();
+                return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            }
+            catch (MySqlException) 
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool IdExist(int id)
@@ -115,12 +151,15 @@ namespace ACC.Data
                 var dtObligationRequests = new DataTable();
                 return _mySqlGenericCommands.FillBySearch(query, dtObligationRequests, parameters);
             }
+            catch (MySqlException) 
+            {
+                throw;
+            }
             catch (Exception)
             {
                 throw;
             }
         }
-
 
         private int GetLastInsertedID()
         {
@@ -311,6 +350,5 @@ namespace ACC.Data
 
             return false;
         }
-
     }
 }
