@@ -14,6 +14,7 @@ namespace AccountingSystem.Views.Reports.RCD
     public partial class frmRCDEdit : Form
     {
         private frmRCD _frmrcd;
+        private List<CollectorReportPaymentModel> data;
         public frmRCDEdit(frmRCD frmrcd, int Id)
         {
             InitializeComponent();
@@ -26,6 +27,7 @@ namespace AccountingSystem.Views.Reports.RCD
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("RCD has been updated.");
+                ucrcd1.LoadCollections();
                 _frmrcd.LoadRecords();
                 
             }
@@ -46,10 +48,32 @@ namespace AccountingSystem.Views.Reports.RCD
                     Id = uc.Id,
                     CoId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
                     ReportNo = uc.txtreport.Text.Trim(),
-                    Date = Convert.ToDateTime(uc.dtdate.Value)
+                    Date = Convert.ToDateTime(uc.dtdate.Value),
+                    Approved = Convert.ToInt16(uc.chckapproved.Checked),
                 };
                 var rcdRepository = Factory.CollectorReportRepository();
-                return rcdRepository.Update(rcdModel);
+                bool saved = rcdRepository.Update(rcdModel);
+                if (saved)
+                {
+                    if (uc.dgvpayments.Rows.Count > 0)
+                    {
+                        data = new List<CollectorReportPaymentModel>();
+                        data.Clear();
+                        for (int i = 0; i < uc.dgvpayments.Rows.Count; i++)
+                        {
+                            data.Add(new CollectorReportPaymentModel()
+                            {
+                                Id = Convert.ToInt16(uc.dgvpayments.Rows[i].Cells[0].Value),
+                                CoId = uc.Id,
+                                PcId = Convert.ToInt16(uc.dgvpayments.Rows[i].Cells[1].Value),
+                            });
+                        }
+
+                        var crpRepository = Factory.CollectorReportPaymentRepository();
+                        return crpRepository.Append(data);
+                    }
+                }
+
             }
             catch (Exception ex)
             {
@@ -62,6 +86,7 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             ucrcd1.LoadCollectors();
             LoadSelectedValue();
+         
         }
 
         private void LoadSelectedValue()
@@ -74,7 +99,12 @@ namespace AccountingSystem.Views.Reports.RCD
                 uc.CoId = Convert.ToInt16(rcdData["collecting_officers_id"]);
                 uc.cmbcollector.SelectedValue = rcdData["collecting_officers_id"];
                 uc.txtreport.Text = rcdData["report_no"];
-                uc.dtdate.Value = Convert.ToDateTime(rcdData["date"]);
+                uc.dtdate.Value = Convert.ToDateTime(rcdData["date"]);                
+
+                uc.LoadCollections();
+                uc.chckapproved.Checked = rcdData["is_approved"] == "0" ? false : true;
+                uc.cmbcollector.Enabled = false;
+                uc.txtreport.Enabled = false;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

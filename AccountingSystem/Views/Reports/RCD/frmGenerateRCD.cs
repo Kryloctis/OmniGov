@@ -13,119 +13,165 @@ namespace AccountingSystem.Views.Reports.RCD
 {
     public partial class frmGenerateRCD : Form
     {
-        private frmRCD _frmrcd;
-        private int Id;
-        private string _reportno;
-        List<CollectorReportPaymentModel> data = new List<CollectorReportPaymentModel>();
-        public frmGenerateRCD(frmRCD frmrcd,string reportno)
+        private ucRCD _ucrcd;
+        private Dictionary<int, string> data;
+        private int CoId = 0;
+        private DataTable list;
+        public frmGenerateRCD(ucRCD ucrcd,int Coid, Dictionary<int,string> _data)
         {
             InitializeComponent();            
             WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
             Helper.DatagridDefaultStyle(dgPreview);
-            _frmrcd = frmrcd;
-            _reportno = reportno;
-            this.Text = String.Format("Collection Report > {0}", reportno);
-        }
-        private void LoadCollectors()
-        {
-            try
-            {
-                var colRepository = Factory.CollectingOfficerRepository();
-                var dtCol = colRepository.GetRecords();
-                cmbcollector.DataSource = dtCol;
-                cmbcollector.ValueMember = "id";
-                cmbcollector.DisplayMember = "fullname";
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            _ucrcd = ucrcd;
+            CoId = Coid;
+            data = _data;
+            this.Text = "Generate Collections";
         }
         private void frmGenerateRCD_Load(object sender, EventArgs e)
         {
-            LoadCollectors();
-            SelectedReportValue();
-        }
+            
+        }        
+      
 
-        private void SelectedReportValue()
+        private void btnPreview_Click(object sender, EventArgs e)
         {
             try
             {
-                var rcdRepository = Factory.CollectorReportRepository();
-                var rcdData = rcdRepository.GetRecordByID(_reportno);
-                Id = Convert.ToInt16(rcdData["id"]);
-                cmbcollector.SelectedValue = rcdData["collecting_officers_id"];
-                cmbcollector.Enabled = false;
+                if(data.Count > 0)
+                {
+                    string id = string.Join(",", data.Select(x => String.Format("'{0}'", x.Key)).ToArray());
+                    var pcRepository = Factory.PaymentCollectionRepository();
+                    var dateFrom = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtfrom.Value));
+                    var dateTo = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtto.Value));
+                    list = pcRepository.GetRecordByLedger(CoId, dateFrom, dateTo,id);
+                    HelperLoadRecords.PaymentDatagridView(list, dgPreview);
+
+                    txttotalamount.Text = String.Format("{0:N2}",pcRepository.SumRecords(CoId, dateFrom, dateTo,id));
+                    lblRecordCount.Text = dgPreview.Rows.Count.ToString();
+                }
+                else
+                {                    
+                    var pcRepository = Factory.PaymentCollectionRepository();
+                    var dateFrom = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtfrom.Value));
+                    var dateTo = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtto.Value));
+                    list = pcRepository.GetRecordByLedger(CoId, dateFrom, dateTo);
+                    HelperLoadRecords.PaymentDatagridView(list, dgPreview);
+
+                    txttotalamount.Text = String.Format("{0:N2}", pcRepository.SumRecords(CoId, dateFrom, dateTo));
+                    lblRecordCount.Text = dgPreview.Rows.Count.ToString();
+                }               
+                
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void btnPreview_Click(object sender, EventArgs e)
-        {
-            if(cmbcollector.SelectedIndex == -1)
-            {
-                errorProvider.SetError(cmbcollector, "Please select collector!");
-                cmbcollector.Focus();
-            }
-            else
-            {
-                try
-                {
-                    var pcRepository = Factory.PaymentCollectionRepository();
-                    var dateYearMonth = String.Format("{0:MMMM}-{0:yyyy}", Convert.ToDateTime(dtpMonth.Value));
-                    var dtpc = pcRepository.GetRecordByLedger(Id, dateYearMonth);
-                    HelperLoadRecords.PaymentDatagridView(dtpc, dgPreview);
-
-                    txttotalamount.Value = pcRepository.SumRecords(Id, dateYearMonth);
-                    if(dtpc.Rows.Count > 0)
-                    {
-                        data.Clear();
-                        for(int i=0;i < dtpc.Rows.Count; i++)
-                        {
-                            data.Add(new CollectorReportPaymentModel()
-                            {
-                                CoId = Id,
-                                PcId = Convert.ToInt16(dtpc.Rows[i]["id"]),
-                            });
-                        }
-                    }
-                }
-                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            }
-        }
-
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-            if(dgPreview.Rows.Count <= 0)
+            if(dgPreview.Rows.Count <= 0 && list.Rows.Count <= 0)
             {
-                errorProvider.SetError(dgPreview, "Please Load Payment Collection list!");
+                Helper.MessageBoxError("Please Load Payment Collection list!");
                 dgPreview.Focus();
-            }
-            else if (cmbcollector.SelectedIndex == -1)
-            {
-                errorProvider.SetError(cmbcollector, "Please select collector!");
-                cmbcollector.Focus();
             }
             else
             {
-                if (Helper.MessageBoxConfirmRCDList())
+                
+                if (_ucrcd.dgvpayments.Rows.Count > 0)
                 {
-                    var rcdRepository = Factory.CollectorReportPaymentRepository();
-                    if (rcdRepository.Insert(data))
-                    {
-                        Helper.MessageBoxSuccess("Collection Report Generated Successfully!");
-                        _frmrcd.LoadRecords();
-                        this.Close();
+                    DataTable newtable = convertToGrid(_ucrcd.dgvpayments);
+                    if (list.Rows.Count > 0)
+                    {                        
+                        for (int i = 0; i < list.Rows.Count; i++)
+                        {
+                            DataRow row = newtable.NewRow();
+                            row[0] = 0;
+                            row[1]= list.Rows[i]["id"];
+                            row[2]= list.Rows[i]["account_code"];
+                            row[3] = list.Rows[i]["accform"];
+                            row[4] = list.Rows[i]["ledger_name"];
+                            row[5] = list.Rows[i]["subsidiary"];
+                            row[6] = list.Rows[i]["payee"];
+                            row[7] = list.Rows[i]["receipt_no"];
+                            row[8]= list.Rows[i]["payment_date"];
+                            row[9] = list.Rows[i]["amount"];
+                            row[10]= list.Rows[i]["collector"];
+                            newtable.Rows.Add(row);
+                            newtable.AcceptChanges();
+                        }
+                        _ucrcd.dgvpayments.DataSource = newtable;
                     }
+                    _ucrcd.txttotal.Text = String.Format("{0:N2}", _ucrcd.dgvpayments.Rows.Cast<DataGridViewRow>().Sum(x => Convert.ToDouble(x.Cells[9].Value)));
+                    this.Close();
                 }
+                else
+                {
+                    DataTable dt = convertList(list);
+                    HelperLoadRecords.RCDDatagridView(dt, _ucrcd.dgvpayments);
+                    _ucrcd.txttotal.Text = String.Format("{0:N2}", _ucrcd.dgvpayments.Rows.Cast<DataGridViewRow>().Sum(x => Convert.ToDouble(x.Cells[9].Value)));
+                    this.Close();
+                }
+
             }
         }
 
         private void dgPreview_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexData = { 11, 12, 13, 14 };
-            Helper.ShowRecordTimestamp(dgPreview, columnIndexData, lblCreatedAt, lblUpdatedAt, lblCreatedBy, lblUpdatedBy);
+           
+        }
+
+        private DataTable convertToGrid(DataGridView view)
+        {
+            DataTable dt = new DataTable();
+            foreach (DataGridViewColumn column in view.Columns)
+            {
+                dt.Columns.Add(column.HeaderText, column.ValueType);
+            }
+
+            foreach (DataGridViewRow row in view.Rows)
+            {
+                dt.Rows.Add();
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    dt.Rows[dt.Rows.Count - 1][cell.ColumnIndex] = cell.Value.ToString();
+                }
+            }
+            return dt;
+        }
+
+        private DataTable convertList(DataTable data)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("id", typeof(int));
+            dt.Columns.Add("pid", typeof(int));
+            dt.Columns.Add("account_code", typeof(string));
+            dt.Columns.Add("accform", typeof(string));
+            dt.Columns.Add("ledger_name", typeof(string));
+            dt.Columns.Add("subsidiary", typeof(string));
+            dt.Columns.Add("payee", typeof(string));
+            dt.Columns.Add("receipt_no", typeof(string));
+            dt.Columns.Add("payment_date", typeof(DateTime));
+            dt.Columns.Add("amount", typeof(decimal));
+            dt.Columns.Add("collector", typeof(string));
+            if (data.Rows.Count > 0)
+            {
+                for (int i = 0; i < data.Rows.Count; i++)
+                {
+                    DataRow row = dt.NewRow();
+                    row["id"] = 0;
+                    row["pid"] = data.Rows[i]["id"];
+                    row["account_code"] = data.Rows[i]["account_code"];
+                    row["accform"] = data.Rows[i]["accform"];
+                    row["ledger_name"] = data.Rows[i]["ledger_name"];
+                    row["subsidiary"] = data.Rows[i]["subsidiary"];
+                    row["payee"] = data.Rows[i]["payee"];
+                    row["receipt_no"] = data.Rows[i]["receipt_no"];
+                    row["payment_date"] = data.Rows[i]["payment_date"];
+                    row["amount"] = data.Rows[i]["amount"];
+                    row["collector"] = data.Rows[i]["collector"];
+                    dt.Rows.Add(row);
+                }
+            }
+            return dt;
         }
     }
 }

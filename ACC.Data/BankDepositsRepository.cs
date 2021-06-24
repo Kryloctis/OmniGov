@@ -94,6 +94,29 @@ namespace ACC.Data
             }
         }
 
+        public int Deposits(BankDepositsModel entity)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@banks_id", DbType.Int16, entity.bankId},
+                    new object[] { "@reference", DbType.String, entity.Reference},
+                    new object[] { "@date", DbType.Date, entity.Date},
+                    new object[] { "@amount", DbType.Decimal, entity.Amount},
+                    new object[] { "@created_by", DbType.Int16, entity.CreatedBy},
+
+                };
+
+                string query = $"INSERT INTO {tableName} (banks_id,reference,date,amount,created_by) VALUES (@banks_id,@reference,@date,@amount,@created_by)";
+                return _dbGenericCommands.ExecuteNonQueryId(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         public bool Update(BankDepositsModel entity)
         {

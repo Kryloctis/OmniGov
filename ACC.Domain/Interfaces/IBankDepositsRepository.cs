@@ -7,5 +7,6 @@ namespace ACC.Domain.Interfaces
 {
     public interface IBankDepositsRepository : IRepository<BankDepositsModel>
     {
+        int Deposits(BankDepositsModel entity);
     }
 }

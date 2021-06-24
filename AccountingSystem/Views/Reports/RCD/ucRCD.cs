@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,9 +16,11 @@ namespace AccountingSystem.Views.Reports.RCD
     {
         internal int Id = 0;
         internal int CoId = 0;
+        internal Dictionary<int, string> data = new Dictionary<int, string>();
         public ucRCD()
         {
             InitializeComponent();
+            Helper.DatagridDefaultStyle(dgvpayments);
         }
 
         private void ucRCD_Load(object sender, EventArgs e)
@@ -57,7 +60,33 @@ namespace AccountingSystem.Views.Reports.RCD
             cmbcollector.SelectedIndex = -1;
             txtreport.Clear();
             dtdate.Value = DateTime.Now;
+            dgvpayments.DataSource = null;
         }
+
+        internal void LoadCollections()
+        {
+            try
+            {
+                var rcdRepository = Factory.CollectorReportPaymentRepository();
+                var dtrcd = rcdRepository.GetRecords(Id);
+                HelperLoadRecords.RCDDatagridView(dtrcd, dgvpayments);
+
+                txttotal.Text = String.Format("{0:N2}",rcdRepository.SumRecords(Id));
+                if(dtrcd.Rows.Count > 0)
+                {
+                    data.Clear();
+                    for(int i =0;i < dtrcd.Rows.Count; i++)
+                    {
+                        data.Add(int.Parse(dtrcd.Rows[i]["pid"].ToString()), dtrcd.Rows[i]["payee"].ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
 
         private void cmbcollector_Validating(object sender, CancelEventArgs e)
         {
@@ -77,6 +106,121 @@ namespace AccountingSystem.Views.Reports.RCD
         private void txtreport_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider, txtreport);
+        }
+
+        private void btnadd_Click(object sender, EventArgs e)
+        {
+            if(cmbcollector.SelectedIndex != -1)
+            {
+                _ = new frmGenerateRCD(this, Convert.ToInt16(cmbcollector.SelectedValue), data).ShowDialog();
+            }
+            else
+            {
+                Helper.MessageBoxError("Please select Collector!");
+                cmbcollector.Focus();
+            }
+            
+        }
+
+        private void chckapproved_CheckedChanged(object sender, EventArgs e)
+        {
+            if(dgvpayments.Rows.Count > 0)
+            {
+                if (chckapproved.Checked)
+                {
+                    btnadd.Enabled = false;
+                    btnclear.Enabled = false;
+                }
+                else
+                {
+                    btnadd.Enabled = true;
+                    btnclear.Enabled = true;
+                }
+            }
+            else
+            {
+                Helper.MessageBoxError("Please Load Payment List!");
+                chckapproved.Checked = false;
+            }
+            
+        }
+
+        private void btnclear_Click(object sender, EventArgs e)
+        {
+            if(dgvpayments.Rows.Count > 0)
+            {
+                try
+                {
+                    if (Helper.MessageBoxConfirmDelete(dgvpayments.Rows.Count))
+                    {
+                        var rcdModelList = new List<CollectorReportPaymentModel>();
+                        var rcdRepository = Factory.CollectorReportPaymentRepository();
+                        rcdModelList.Add(new CollectorReportPaymentModel() { CoId = Id });
+                        if (rcdRepository.Delete(rcdModelList))
+                        {
+                            LoadCollections();
+                            txttotal.Text = String.Format("{0:N2}", rcdRepository.SumRecords(Id));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Helper.MessageBoxError(ex.Message);
+                }
+            }
+       
+          
+        }
+
+        private void dgvpayments_SelectionChanged(object sender, EventArgs e)
+        {
+            if(dgvpayments.SelectedRows.Count > 0)
+            {
+                btndelete.Enabled = chckapproved.Checked ? false: true;
+                btnclear.Enabled = chckapproved.Checked ? false : true;
+            }
+            else
+            {
+                btnclear.Enabled = false;
+                btndelete.Enabled = false;
+            }
+        }
+
+        private void btndelete_Click(object sender, EventArgs e)
+        {
+            if(dgvpayments.SelectedRows.Count > 0)
+            {
+                try
+                {
+                    if (Helper.MessageBoxConfirmDelete(dgvpayments.SelectedRows.Count))
+                    {
+                        int id = int.Parse(dgvpayments.CurrentRow.Cells[0].Value.ToString());
+                        if (id > 0)
+                        {
+                            var rcdModelList = new List<CollectorReportPaymentModel>();
+                            var rcdRepository = Factory.CollectorReportPaymentRepository();
+                            rcdModelList.Add(new CollectorReportPaymentModel() { Id = id });
+                            if (rcdRepository.Delete(rcdModelList))
+                            {
+                                dgvpayments.Rows.RemoveAt(dgvpayments.CurrentRow.Index);
+                                txttotal.Text = String.Format("{0:N2}",dgvpayments.Rows.Cast<DataGridViewRow>().Sum(x =>Convert.ToDouble(x.Cells[9].Value)));
+                            }
+                            // LoadCollections();
+                        }
+                        else
+                        {
+                            dgvpayments.Rows.RemoveAt(dgvpayments.CurrentRow.Index);
+                            txttotal.Text = String.Format("{0:N2}", dgvpayments.Rows.Cast<DataGridViewRow>().Sum(x => Convert.ToDouble(x.Cells[9].Value)));
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Helper.MessageBoxError(ex.Message);
+                }
+            }
+            
         }
     }
 }

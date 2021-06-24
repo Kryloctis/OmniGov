@@ -37,7 +37,15 @@ namespace AccountingSystem.Views.Reports.RCD
             this.txtreport = new System.Windows.Forms.TextBox();
             this.dtdate = new System.Windows.Forms.DateTimePicker();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.chckapproved = new System.Windows.Forms.CheckBox();
+            this.dgvpayments = new System.Windows.Forms.DataGridView();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnadd = new System.Windows.Forms.Button();
+            this.btnclear = new System.Windows.Forms.Button();
+            this.btndelete = new System.Windows.Forms.Button();
+            this.txttotal = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvpayments)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -99,10 +107,100 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // chckapproved
+            // 
+            this.chckapproved.AutoSize = true;
+            this.chckapproved.Location = new System.Drawing.Point(915, 15);
+            this.chckapproved.Name = "chckapproved";
+            this.chckapproved.Size = new System.Drawing.Size(97, 24);
+            this.chckapproved.TabIndex = 4;
+            this.chckapproved.Text = "Approved";
+            this.chckapproved.UseVisualStyleBackColor = true;
+            this.chckapproved.CheckedChanged += new System.EventHandler(this.chckapproved_CheckedChanged);
+            // 
+            // dgvpayments
+            // 
+            this.dgvpayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvpayments.Location = new System.Drawing.Point(11, 121);
+            this.dgvpayments.Name = "dgvpayments";
+            this.dgvpayments.RowHeadersWidth = 51;
+            this.dgvpayments.RowTemplate.Height = 29;
+            this.dgvpayments.Size = new System.Drawing.Size(1007, 506);
+            this.dgvpayments.TabIndex = 5;
+            this.dgvpayments.SelectionChanged += new System.EventHandler(this.dgvpayments_SelectionChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(703, 635);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 20);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Total :";
+            // 
+            // btnadd
+            // 
+            this.btnadd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnadd.Image = global::AccountingSystem.Properties.Resources.rcd1;
+            this.btnadd.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnadd.Location = new System.Drawing.Point(759, 69);
+            this.btnadd.Name = "btnadd";
+            this.btnadd.Size = new System.Drawing.Size(80, 46);
+            this.btnadd.TabIndex = 8;
+            this.btnadd.Text = "Add";
+            this.btnadd.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnadd.UseVisualStyleBackColor = true;
+            this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
+            // 
+            // btnclear
+            // 
+            this.btnclear.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnclear.Image = global::AccountingSystem.Properties.Resources.clear;
+            this.btnclear.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnclear.Location = new System.Drawing.Point(935, 69);
+            this.btnclear.Name = "btnclear";
+            this.btnclear.Size = new System.Drawing.Size(84, 46);
+            this.btnclear.TabIndex = 9;
+            this.btnclear.Text = "Clear";
+            this.btnclear.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnclear.UseVisualStyleBackColor = true;
+            this.btnclear.Click += new System.EventHandler(this.btnclear_Click);
+            // 
+            // btndelete
+            // 
+            this.btndelete.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btndelete.Image = global::AccountingSystem.Properties.Resources.remove;
+            this.btndelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btndelete.Location = new System.Drawing.Point(845, 69);
+            this.btndelete.Name = "btndelete";
+            this.btndelete.Size = new System.Drawing.Size(84, 46);
+            this.btndelete.TabIndex = 10;
+            this.btndelete.Text = "Delete";
+            this.btndelete.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btndelete.UseVisualStyleBackColor = true;
+            this.btndelete.Click += new System.EventHandler(this.btndelete_Click);
+            // 
+            // txttotal
+            // 
+            this.txttotal.Location = new System.Drawing.Point(758, 633);
+            this.txttotal.Name = "txttotal";
+            this.txttotal.ReadOnly = true;
+            this.txttotal.Size = new System.Drawing.Size(261, 27);
+            this.txttotal.TabIndex = 11;
+            this.txttotal.Text = "0.00";
+            this.txttotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // ucRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.txttotal);
+            this.Controls.Add(this.btndelete);
+            this.Controls.Add(this.btnclear);
+            this.Controls.Add(this.btnadd);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.dgvpayments);
+            this.Controls.Add(this.chckapproved);
             this.Controls.Add(this.dtdate);
             this.Controls.Add(this.txtreport);
             this.Controls.Add(this.cmbcollector);
@@ -110,9 +208,10 @@ namespace AccountingSystem.Views.Reports.RCD
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "ucRCD";
-            this.Size = new System.Drawing.Size(525, 124);
+            this.Size = new System.Drawing.Size(1031, 670);
             this.Load += new System.EventHandler(this.ucRCD_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvpayments)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -127,5 +226,12 @@ namespace AccountingSystem.Views.Reports.RCD
         internal System.Windows.Forms.ComboBox cmbcollector;
         internal System.Windows.Forms.TextBox txtreport;
         internal System.Windows.Forms.DateTimePicker dtdate;
+        private System.Windows.Forms.Label label4;
+        internal System.Windows.Forms.CheckBox chckapproved;
+        internal System.Windows.Forms.Button btnadd;
+        internal System.Windows.Forms.DataGridView dgvpayments;
+        internal System.Windows.Forms.Button btnclear;
+        internal System.Windows.Forms.Button btndelete;
+        internal System.Windows.Forms.TextBox txttotal;
     }
 }

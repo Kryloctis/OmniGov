@@ -12,5 +12,6 @@ namespace ACC.Domain.Interfaces
         bool ExecuteNonQuery(string query, params object[][] parameters);
         DataTable ExecuteReader(string query, params object[][] parameters);
         string ExecuteScalar(string query, params object[][] parameters);
+        int ExecuteNonQueryId(string query, params object[][] parameters);
     }
 }

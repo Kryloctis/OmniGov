@@ -33,8 +33,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.btnReport = new System.Windows.Forms.ToolStripButton();
-            this.btnPrint = new System.Windows.Forms.ToolStripButton();
+            this.btnRCD = new System.Windows.Forms.ToolStripButton();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -54,12 +53,11 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnAdd,
             this.btnEdit,
             this.btnDelete,
-            this.btnReport,
-            this.btnPrint});
+            this.btnRCD});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(5);
-            this.toolStrip.Size = new System.Drawing.Size(801, 65);
+            this.toolStrip.Size = new System.Drawing.Size(1070, 65);
             this.toolStrip.TabIndex = 10;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -98,29 +96,17 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // btnReport
+            // btnRCD
             // 
-            this.btnReport.Enabled = false;
-            this.btnReport.Image = global::AccountingSystem.Properties.Resources.rcd;
-            this.btnReport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnReport.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(58, 52);
-            this.btnReport.Text = "Report";
-            this.btnReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.Enabled = false;
-            this.btnPrint.Image = global::AccountingSystem.Properties.Resources.printer;
-            this.btnPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(43, 52);
-            this.btnPrint.Text = "Print";
-            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            this.btnRCD.Enabled = false;
+            this.btnRCD.Image = global::AccountingSystem.Properties.Resources.document;
+            this.btnRCD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnRCD.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRCD.Name = "btnRCD";
+            this.btnRCD.Size = new System.Drawing.Size(106, 52);
+            this.btnRCD.Text = "Generate RCD";
+            this.btnRCD.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRCD.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // statusStrip
             // 
@@ -129,9 +115,9 @@ namespace AccountingSystem.Views.Reports.RCD
             this.toolStripStatusLabel1,
             this.lblRecordCount,
             this.toolStripStatusLabel4});
-            this.statusStrip.Location = new System.Drawing.Point(0, 444);
+            this.statusStrip.Location = new System.Drawing.Point(0, 592);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(801, 26);
+            this.statusStrip.Size = new System.Drawing.Size(1070, 26);
             this.statusStrip.TabIndex = 14;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -150,13 +136,13 @@ namespace AccountingSystem.Views.Reports.RCD
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(704, 20);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(973, 20);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // txtsearch
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(473, 12);
+            this.txtsearch.Location = new System.Drawing.Point(742, 12);
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.PlaceholderText = "Search...";
             this.txtsearch.Size = new System.Drawing.Size(316, 27);
@@ -173,7 +159,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.dgrcd.Name = "dgrcd";
             this.dgrcd.RowHeadersWidth = 51;
             this.dgrcd.RowTemplate.Height = 29;
-            this.dgrcd.Size = new System.Drawing.Size(777, 373);
+            this.dgrcd.Size = new System.Drawing.Size(1046, 521);
             this.dgrcd.TabIndex = 16;
             this.dgrcd.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrcd_CellContentClick);
             this.dgrcd.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrcd_CellDoubleClick);
@@ -183,7 +169,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(801, 470);
+            this.ClientSize = new System.Drawing.Size(1070, 618);
             this.Controls.Add(this.dgrcd);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.statusStrip);
@@ -215,7 +201,6 @@ namespace AccountingSystem.Views.Reports.RCD
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.TextBox txtsearch;
         private System.Windows.Forms.DataGridView dgrcd;
-        private System.Windows.Forms.ToolStripButton btnReport;
-        private System.Windows.Forms.ToolStripButton btnPrint;
+        private System.Windows.Forms.ToolStripButton btnRCD;
     }
 }

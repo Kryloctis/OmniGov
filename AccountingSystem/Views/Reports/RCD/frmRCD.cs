@@ -14,7 +14,7 @@ namespace AccountingSystem.Views.Reports.RCD
 {
     public partial class frmRCD : Form
     {
-        Dictionary<int, string> forprint = new Dictionary<int, string>();
+        public Dictionary<int, string> rcdgenerate = new Dictionary<int, string>();
         public frmRCD()
         {
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace AccountingSystem.Views.Reports.RCD
             LoadRecords();
         }
 
-        internal void LoadRecords()
+        public void LoadRecords()
         {
             try
             {
@@ -36,7 +36,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 var dtrcd = rcdRepository.GetRecords();
                 HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgrcd);
 
-                lblRecordCount.Text = rcdRepository.CountRecords().ToString();
+                lblRecordCount.Text = dgrcd.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -82,67 +82,58 @@ namespace AccountingSystem.Views.Reports.RCD
                 _ = new frmRCDEdit(this, Id).ShowDialog();
             }
         }
-
-        private void btnReport_Click(object sender, EventArgs e)
-        {
-            if (dgrcd.Rows.Count > 0 && dgrcd.SelectedRows.Count > 0)
-            {
-                string reportno = dgrcd.SelectedCells[1].Value.ToString();
-                _ = new frmGenerateRCD(this, reportno).ShowDialog();
-            }
-        }
-
-        private void btnReport_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private void dgrcd_SelectionChanged(object sender, EventArgs e)
-        {            
-            Helper.EnableDisableToolStripButtons(dgrcd, btnEdit, btnDelete);
-            try
+        {   
+            if(dgrcd.SelectedRows.Count > 0)
             {
-                int id = int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString());
-                var rcdRepository = Factory.CollectorReportRepository();                
-                if (dgrcd.SelectedRows.Count > 0)
+                Helper.EnableDisableToolStripButtons(dgrcd, btnEdit, btnDelete);
+                try
                 {
-                    btnReport.Enabled = rcdRepository.HasGenerated(id) ? false : true;
+                    int id = int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString());
+                    var gcpRepository = Factory.GeneralCollectionsPaymentsRepository();
+                    btnDelete.Enabled = gcpRepository.IdExist(id) ? false : true;
                 }
-                else
-                {
-                    btnReport.Enabled = false;
-                }
-
+                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+           
             
         }
 
         private void dgrcd_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            btnReport.PerformClick();
+            btnEdit.PerformClick();
         }
 
         private void dgrcd_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             
-            if (e.ColumnIndex == 4)
+            if (e.ColumnIndex == 6)
             {
-                
-                if (!Convert.ToBoolean(dgrcd.CurrentRow.Cells[e.ColumnIndex].Value))
+                bool isapproved = Convert.ToBoolean(dgrcd.CurrentRow.Cells[5].Value);
+                var gcpRepository = Factory.GeneralCollectionsPaymentsRepository();
+                bool isgenerated = gcpRepository.IdExist(int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString()));
+                if (isapproved && !isgenerated)
                 {
-                    dgrcd.CurrentRow.Cells[e.ColumnIndex].Value = true;
-                    if (!forprint.ContainsKey(Convert.ToInt16(dgrcd.CurrentRow.Cells[0].Value)))
+                    if (!Convert.ToBoolean(dgrcd.CurrentRow.Cells[e.ColumnIndex].Value))
                     {
-                        forprint.Add(Convert.ToInt16(dgrcd.CurrentRow.Cells[0].Value), dgrcd.CurrentRow.Cells[1].Value.ToString());
+                        dgrcd.CurrentRow.Cells[e.ColumnIndex].Value = true;
+                        if (!rcdgenerate.ContainsKey(Convert.ToInt16(dgrcd.CurrentRow.Cells[0].Value)))
+                        {
+                            rcdgenerate.Add(Convert.ToInt16(dgrcd.CurrentRow.Cells[0].Value), dgrcd.CurrentRow.Cells[1].Value.ToString());
+                        }
                     }
-                }    
-                else
-                {
-                    dgrcd.CurrentRow.Cells[e.ColumnIndex].Value = false;
-                    forprint.Remove(Convert.ToInt16(dgrcd.CurrentRow.Cells[0].Value));
+                    else
+                    {
+                        dgrcd.CurrentRow.Cells[e.ColumnIndex].Value = false;
+                        rcdgenerate.Remove(Convert.ToInt16(dgrcd.CurrentRow.Cells[0].Value));
+                    }
+                    btnRCD.Enabled = rcdgenerate.Count > 0 ? true : false;
                 }
-                btnPrint.Enabled = forprint.Count > 0 ? true : false;
+                else
+                {                    
+                   dgrcd.CurrentRow.Cells[e.ColumnIndex].Value = false;
+                }
+              
             }
             
         }
@@ -169,13 +160,15 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            if(forprint.Count > 0)
+            if(rcdgenerate.Count > 0)
             {
-                string id = string.Join(",", forprint.Select(x => String.Format("'{0}'",x.Key)).ToArray());
-                _ = new frmPCReport(id).ShowDialog();
+                //string id = string.Join(",", rcdgenerate.Select(x => String.Format("'{0}'",x.Key)).ToArray());
+                //_ = new frmPCReport(id).ShowDialog();
+                _ = new frmGC(rcdgenerate, this).ShowDialog();               
+                
             }
             else{
-                Helper.MessageBoxError("Please select reports to print!");
+                Helper.MessageBoxError("Please select reports to Generate RCD!");
             }
         }
     }

@@ -338,7 +338,7 @@ namespace AccountingSystem
         }
         private void menuprintPC_Click(object sender, EventArgs e)
         {
-            _ = new frmRCD().ShowDialog();
+            _ = new frmGCList().ShowDialog();
         }
 
         private void menuPayments_Click(object sender, EventArgs e)
@@ -364,6 +364,21 @@ namespace AccountingSystem
         private void btnAllotmentRelease_Click(object sender, EventArgs e)
         {
             _ = new frmAllotmentReleaseMain().ShowDialog();
+        }
+
+        private void btnSupplementalAppropriations_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menuGencoldeposits_Click(object sender, EventArgs e)
+        {
+            _ = new frmRCD().ShowDialog();
+        }
+
+        private void menuprintGC_Click(object sender, EventArgs e)
+        {
+            _ = new frmPCReport().ShowDialog();
         }
     }
 }

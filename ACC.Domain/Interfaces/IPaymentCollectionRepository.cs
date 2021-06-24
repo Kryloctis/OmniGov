@@ -12,7 +12,11 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordByExcel(string month);
         DataTable GetRecordsBySearch(string searchText);
         DataTable GetRecordByLedger(int Id, string month);
+        DataTable GetRecordByLedger(int Id, string from,string to);
         decimal SumRecords();
         decimal SumRecords(int Id, string month);
+        decimal SumRecords(int Id, string from,string to);
+        decimal SumRecords(int Id, string from, string to, string ids);
+        DataTable GetRecordByLedger(int Id, string from, string to, string ids);
     }
 }

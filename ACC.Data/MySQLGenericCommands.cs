@@ -71,6 +71,23 @@ namespace ACC.Data
             }
         }
 
+        public int ExecuteNonQueryId(string query, params object[][] parameters)
+        {
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    foreach (var param in parameters)
+                        AddDbParameter(command, param);
+
+                    connection.Open();
+                    if (command.ExecuteNonQuery() > 0)
+                        return int.Parse(command.LastInsertedId.ToString());
+                    return 0;
+                }
+            }
+        }
+
         public DataTable ExecuteReader(string query, object[][] parameters)
         {
             using (var connection = new MySqlConnection(connectionString))
