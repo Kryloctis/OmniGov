@@ -110,7 +110,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.Enabled = true;
                     frmJEV.btnSave.Enabled = true;
                     frmJEV.btnDelete.Enabled = true;
-
+                    
                     frmJEV.ucjev1.txtFundsJevNo.Text = $"{jevNoSplit[0]}-{jevNoSplit[1]}-{jevNoSplit[2]}";
                     frmJEV.ucjev1.txtJEVNo.Text = jevNoSplit[3];
 
@@ -128,7 +128,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.dtpDateEntry.Value = Convert.ToDateTime(jevDict["date_entry"]);
                     uc.txtRefNo.Text = jevDict["ref_no"];
                     uc.txtPayee.Text = jevDict["payee"];
-                    uc.fundId = Convert.ToByte(jevDict["funds_id"]);s
+                    uc.fundId = Convert.ToByte(jevDict["funds_id"]);
                     uc.journalId = Convert.ToByte(jevDict["journals_id"]);
                     CheckedFund(jevDict["fund_name"]);
                     CheckedJournal(jevDict["journal_name"]);
