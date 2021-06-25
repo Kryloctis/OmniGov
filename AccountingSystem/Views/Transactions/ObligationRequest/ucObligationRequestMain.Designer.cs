@@ -55,14 +55,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.epPayee = new System.Windows.Forms.ErrorProvider(this.components);
             this.txtTotalObligations = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cmbxSubFPP = new System.Windows.Forms.ComboBox();
             this.cmbxFPP = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelAllotmentClass = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelFunds = new System.Windows.Forms.FlowLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbxSubFPP = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgObligationRequests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epSubFPP)).BeginInit();
@@ -275,26 +275,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.label9.TabIndex = 17;
             this.label9.Text = "Total Obligations";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(2, 35);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 15);
-            this.label2.TabIndex = 22;
-            this.label2.Text = "Sub FPP";
-            // 
-            // cmbxSubFPP
-            // 
-            this.cmbxSubFPP.FormattingEnabled = true;
-            this.cmbxSubFPP.Location = new System.Drawing.Point(104, 32);
-            this.cmbxSubFPP.Name = "cmbxSubFPP";
-            this.cmbxSubFPP.Size = new System.Drawing.Size(449, 23);
-            this.cmbxSubFPP.TabIndex = 19;
-            this.cmbxSubFPP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxSubFPP_KeyDown);
-            this.cmbxSubFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxSubFPP_Validating);
-            this.cmbxSubFPP.Validated += new System.EventHandler(this.cmbxSubFPP_Validated);
-            // 
             // cmbxFPP
             // 
             this.cmbxFPP.FormattingEnabled = true;
@@ -356,6 +336,26 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.flowLayoutPanelFunds.Size = new System.Drawing.Size(545, 32);
             this.flowLayoutPanelFunds.TabIndex = 3;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(2, 35);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 15);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "Sub FPP";
+            // 
+            // cmbxSubFPP
+            // 
+            this.cmbxSubFPP.FormattingEnabled = true;
+            this.cmbxSubFPP.Location = new System.Drawing.Point(104, 32);
+            this.cmbxSubFPP.Name = "cmbxSubFPP";
+            this.cmbxSubFPP.Size = new System.Drawing.Size(449, 23);
+            this.cmbxSubFPP.TabIndex = 19;
+            this.cmbxSubFPP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxSubFPP_KeyDown);
+            this.cmbxSubFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxSubFPP_Validating);
+            this.cmbxSubFPP.Validated += new System.EventHandler(this.cmbxSubFPP_Validated);
+            // 
             // ucObligationRequestMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -412,7 +412,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.Button btnAdd;
         internal System.Windows.Forms.Button btnEdit;
         internal System.Windows.Forms.Button btnRemove;
-        private System.Windows.Forms.ErrorProvider epFPP;
         internal System.Windows.Forms.ErrorProvider epSubFPP;
         internal System.Windows.Forms.ErrorProvider epObligationNo;
         internal System.Windows.Forms.ErrorProvider epReferenceNo;
@@ -428,13 +427,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.DataGridView dgObligationRequests;
         private System.Windows.Forms.Label label9;
         internal System.Windows.Forms.TextBox txtTotalObligations;
-        internal System.Windows.Forms.Label label2;
-        internal System.Windows.Forms.ComboBox cmbxSubFPP;
         internal System.Windows.Forms.ComboBox cmbxFPP;
         internal System.Windows.Forms.Label label1;
         internal System.Windows.Forms.GroupBox groupBox2;
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelAllotmentClass;
         internal System.Windows.Forms.GroupBox groupBox1;
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFunds;
+        internal System.Windows.Forms.ErrorProvider epFPP;
+        internal System.Windows.Forms.Label label2;
+        internal System.Windows.Forms.ComboBox cmbxSubFPP;
     }
 }

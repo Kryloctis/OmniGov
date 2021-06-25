@@ -118,12 +118,16 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             try
             {
+                string obligationNo = $"{uc.mskTxtObligationNoSeries.Text}-{uc.mskTxtObligationNoTemplate.Text}";
+
                 var obligationRequestModel = new ObligationRequestModel()
                 {
                     Id = uc.obligationRequestId,
+                    ObligationNo = obligationNo,
                     Payee = uc.txtPayee.Text,
                     Explanation = uc.txtExplanation.Text,
                     ReferenceNo = uc.txtReferenceNo.Text,
+                    DateRequested = uc.dtDateRequest.Value,
                     UpdatedBy = Helper.UserId
                 };
 

@@ -42,11 +42,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return currentBalance < 0? 0 : currentBalance;
         }
 
-        internal void LoadSelected()
-        {
-
-        }
-
         internal void LoadReferences(ucObligationRequestMain ucObligationRequestMain)
         {
             _ucObligationRequestMain = ucObligationRequestMain;
@@ -229,12 +224,24 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     int budgetAppriationId = Convert.ToInt32(cmbxObjectOfExpenditure.SelectedValue);
                     int rowBudgetAppropriationId = Convert.ToInt32(item.Cells["budget_appropriation_id"].Value);
 
-
-                    if (budgetAppriationId == rowBudgetAppropriationId && _ucObligationRequestMain.obligationRequestId == 0 && rowBudgetAppropriationId  != _budgetAppropriationsId) 
+                    if (_ucObligationRequestMain.obligationRequestId == 0)
                     {
-                        epObjectOfExpenditure.SetError(cmbxObjectOfExpenditure, "Object of Expenditure already exist on the List");
-                        return true;
+                        if (budgetAppriationId == rowBudgetAppropriationId)
+                        {
+                            epObjectOfExpenditure.SetError(cmbxObjectOfExpenditure, "Object of Expenditure already exist on the List");
+                            return true;
+                        }
+
                     }
+                    else
+                    {
+                        if (budgetAppriationId == rowBudgetAppropriationId && rowBudgetAppropriationId != _budgetAppropriationsId)
+                        {
+                            epObjectOfExpenditure.SetError(cmbxObjectOfExpenditure, "Object of Expenditure already exist on the List");
+                            return true;
+                        }
+                    }
+                 
                 }
 
             }

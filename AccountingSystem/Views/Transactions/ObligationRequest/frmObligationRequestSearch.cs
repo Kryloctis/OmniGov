@@ -59,6 +59,15 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             _ucObligationRequestMain.LoadSearched();
             _frmObligationRequestMain.EnableDisableButtons();
             _ucObligationRequestMain.EnableDisableComponents(false);
+            _frmObligationRequestMain.btnSave.Text = "Update";
+
+            Helper.ClearErrorComboBox(_ucObligationRequestMain.epFPP, _ucObligationRequestMain.cmbxFPP);
+            Helper.ClearMaskedTextboxError(_ucObligationRequestMain.epObligationNo, _ucObligationRequestMain.mskTxtObligationNoTemplate);
+            Helper.ClearMaskedTextboxError(_ucObligationRequestMain.epObligationRequest, _ucObligationRequestMain.mskTxtObligationNoTemplate);
+            Helper.ClearErrorTextBox(_ucObligationRequestMain.epPayee, _ucObligationRequestMain.txtPayee);
+            Helper.ClearErrorTextBox(_ucObligationRequestMain.epReferenceNo, _ucObligationRequestMain.txtReferenceNo);
+            Helper.ClearErrorTextBox(_ucObligationRequestMain.epExplanation, _ucObligationRequestMain.txtExplanation);
+
             Close();
         }
 
