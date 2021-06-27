@@ -57,11 +57,9 @@ namespace AccountingSystem.Views.Reports.Cashbook
                     row["date"] = item["date"];
                     row["particulars"] = String.Format("Deposit - {0} - {1}",item["bank_name"], item["account_no"]);
                     row["reference"] = item["reference"];
-                    row["debit"] = item["amount"];
-                    debit += Convert.ToDecimal(item["amount"]);
-                    balance = debit - credit;
+                    row["debit"] = item["amount"];                    
                    // row["credit"] = 0;
-                    row["balance"] = balance;
+                   // row["balance"] = balance;
                     dtCB.Rows.Add(row);
                 }
 
@@ -72,11 +70,20 @@ namespace AccountingSystem.Views.Reports.Cashbook
                     row["particulars"] = String.Format("Check Issued - {0} - {1}", item["payee"], item["nature_of_payment"]);
                     row["reference"] = String.Format("{0} - {1}", item["check_no"], item["dv_no"]);
                     row["credit"] = item["amount"];
-                    credit += Convert.ToDecimal(item["amount"]);
-                    balance = debit - credit;
                     //  row["debit"] = 0;
-                    row["balance"] = balance;
+                   // row["balance"] = balance;
                     dtCB.Rows.Add(row);
+                }
+                dtCB.Select(string.Empty, "date ASC");
+                if(dtCB.Rows.Count > 0)
+                {
+                    foreach (DataRow item in dtCB.Rows)
+                    {
+                        debit += item["debit"].Equals(DBNull.Value) ? 0: Convert.ToDecimal(item["debit"]);
+                        credit += item["credit"].Equals(DBNull.Value) ? 0 : Convert.ToDecimal(item["credit"]);
+                        balance = debit - credit;
+                        item["balance"] = balance;
+                    }
                 }
             }
             return dtCB;
