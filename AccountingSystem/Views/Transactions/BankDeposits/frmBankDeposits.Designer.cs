@@ -43,6 +43,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgbankdeposits = new System.Windows.Forms.DataGridView();
+            this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgbankdeposits)).BeginInit();
@@ -55,7 +56,8 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAdd,
             this.btnEdit,
-            this.btnDelete});
+            this.btnDelete,
+            this.btnRefresh});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(5);
@@ -140,7 +142,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(406, 20);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(588, 20);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -178,6 +180,17 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.dgbankdeposits.Size = new System.Drawing.Size(829, 449);
             this.dgbankdeposits.TabIndex = 14;
             this.dgbankdeposits.SelectionChanged += new System.EventHandler(this.dgbankdeposits_SelectionChanged);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.refresh;
+            this.btnRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(62, 52);
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // frmBankDeposits
             // 
@@ -221,5 +234,6 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.DataGridView dgbankdeposits;
+        private System.Windows.Forms.ToolStripButton btnRefresh;
     }
 }

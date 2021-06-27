@@ -171,5 +171,10 @@ namespace AccountingSystem.Views.Reports.RCD
                 Helper.MessageBoxError("Please select reports to Generate RCD!");
             }
         }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
     }
 }
