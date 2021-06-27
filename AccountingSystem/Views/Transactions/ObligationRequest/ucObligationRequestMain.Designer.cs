@@ -61,8 +61,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.flowLayoutPanelAllotmentClass = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelFunds = new System.Windows.Forms.FlowLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cmbxSubFPP = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgObligationRequests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epSubFPP)).BeginInit();
@@ -77,7 +75,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // dtDateRequest
             // 
-            this.dtDateRequest.Location = new System.Drawing.Point(344, 184);
+            this.dtDateRequest.Location = new System.Drawing.Point(345, 155);
             this.dtDateRequest.Name = "dtDateRequest";
             this.dtDateRequest.Size = new System.Drawing.Size(209, 23);
             this.dtDateRequest.TabIndex = 8;
@@ -86,7 +84,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(248, 188);
+            this.label3.Location = new System.Drawing.Point(249, 159);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(90, 15);
             this.label3.TabIndex = 6;
@@ -94,7 +92,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // mskTxtObligationNoSeries
             // 
-            this.mskTxtObligationNoSeries.Location = new System.Drawing.Point(104, 184);
+            this.mskTxtObligationNoSeries.Location = new System.Drawing.Point(105, 155);
             this.mskTxtObligationNoSeries.Mask = "0000";
             this.mskTxtObligationNoSeries.Name = "mskTxtObligationNoSeries";
             this.mskTxtObligationNoSeries.Size = new System.Drawing.Size(34, 23);
@@ -105,7 +103,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // mskTxtObligationNoTemplate
             // 
-            this.mskTxtObligationNoTemplate.Location = new System.Drawing.Point(156, 184);
+            this.mskTxtObligationNoTemplate.Location = new System.Drawing.Point(157, 155);
             this.mskTxtObligationNoTemplate.Mask = "00-00-000";
             this.mskTxtObligationNoTemplate.Name = "mskTxtObligationNoTemplate";
             this.mskTxtObligationNoTemplate.ReadOnly = true;
@@ -116,7 +114,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(141, 187);
+            this.label4.Location = new System.Drawing.Point(142, 158);
             this.label4.Margin = new System.Windows.Forms.Padding(0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(12, 15);
@@ -126,7 +124,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 187);
+            this.label5.Location = new System.Drawing.Point(4, 158);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(85, 15);
             this.label5.TabIndex = 10;
@@ -134,7 +132,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // txtPayee
             // 
-            this.txtPayee.Location = new System.Drawing.Point(104, 242);
+            this.txtPayee.Location = new System.Drawing.Point(105, 213);
             this.txtPayee.Name = "txtPayee";
             this.txtPayee.Size = new System.Drawing.Size(449, 23);
             this.txtPayee.TabIndex = 10;
@@ -144,7 +142,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 245);
+            this.label6.Location = new System.Drawing.Point(4, 216);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(38, 15);
             this.label6.TabIndex = 12;
@@ -153,7 +151,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 274);
+            this.label7.Location = new System.Drawing.Point(4, 245);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(69, 15);
             this.label7.TabIndex = 13;
@@ -161,7 +159,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // txtExplanation
             // 
-            this.txtExplanation.Location = new System.Drawing.Point(104, 271);
+            this.txtExplanation.Location = new System.Drawing.Point(105, 242);
             this.txtExplanation.Multiline = true;
             this.txtExplanation.Name = "txtExplanation";
             this.txtExplanation.Size = new System.Drawing.Size(449, 36);
@@ -171,7 +169,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // txtReferenceNo
             // 
-            this.txtReferenceNo.Location = new System.Drawing.Point(104, 213);
+            this.txtReferenceNo.Location = new System.Drawing.Point(105, 184);
             this.txtReferenceNo.Name = "txtReferenceNo";
             this.txtReferenceNo.Size = new System.Drawing.Size(449, 23);
             this.txtReferenceNo.TabIndex = 9;
@@ -181,7 +179,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 216);
+            this.label8.Location = new System.Drawing.Point(4, 187);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(81, 15);
             this.label8.TabIndex = 12;
@@ -190,7 +188,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // dgObligationRequests
             // 
             this.dgObligationRequests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgObligationRequests.Location = new System.Drawing.Point(5, 312);
+            this.dgObligationRequests.Location = new System.Drawing.Point(6, 283);
             this.dgObligationRequests.Name = "dgObligationRequests";
             this.dgObligationRequests.RowTemplate.Height = 25;
             this.dgObligationRequests.Size = new System.Drawing.Size(548, 208);
@@ -201,7 +199,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(478, 526);
+            this.btnRemove.Location = new System.Drawing.Point(479, 497);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(75, 23);
             this.btnRemove.TabIndex = 16;
@@ -211,7 +209,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(400, 526);
+            this.btnEdit.Location = new System.Drawing.Point(401, 497);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(75, 23);
             this.btnEdit.TabIndex = 15;
@@ -221,7 +219,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(319, 526);
+            this.btnAdd.Location = new System.Drawing.Point(320, 497);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 14;
@@ -259,7 +257,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // txtTotalObligations
             // 
-            this.txtTotalObligations.Location = new System.Drawing.Point(104, 526);
+            this.txtTotalObligations.Location = new System.Drawing.Point(105, 497);
             this.txtTotalObligations.MaxLength = 999999999;
             this.txtTotalObligations.Name = "txtTotalObligations";
             this.txtTotalObligations.ReadOnly = true;
@@ -269,7 +267,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(2, 529);
+            this.label9.Location = new System.Drawing.Point(3, 500);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(96, 15);
             this.label9.TabIndex = 17;
@@ -299,7 +297,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             this.groupBox2.Controls.Add(this.flowLayoutPanelAllotmentClass);
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox2.Location = new System.Drawing.Point(2, 120);
+            this.groupBox2.Location = new System.Drawing.Point(3, 91);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(551, 54);
             this.groupBox2.TabIndex = 23;
@@ -319,7 +317,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             this.groupBox1.Controls.Add(this.flowLayoutPanelFunds);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(2, 63);
+            this.groupBox1.Location = new System.Drawing.Point(3, 34);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(551, 54);
@@ -336,32 +334,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.flowLayoutPanelFunds.Size = new System.Drawing.Size(545, 32);
             this.flowLayoutPanelFunds.TabIndex = 3;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(2, 35);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 15);
-            this.label2.TabIndex = 22;
-            this.label2.Text = "Sub FPP";
-            // 
-            // cmbxSubFPP
-            // 
-            this.cmbxSubFPP.FormattingEnabled = true;
-            this.cmbxSubFPP.Location = new System.Drawing.Point(104, 32);
-            this.cmbxSubFPP.Name = "cmbxSubFPP";
-            this.cmbxSubFPP.Size = new System.Drawing.Size(449, 23);
-            this.cmbxSubFPP.TabIndex = 19;
-            this.cmbxSubFPP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxSubFPP_KeyDown);
-            this.cmbxSubFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxSubFPP_Validating);
-            this.cmbxSubFPP.Validated += new System.EventHandler(this.cmbxSubFPP_Validated);
-            // 
             // ucObligationRequestMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.cmbxSubFPP);
+            this.AutoSize = true;
             this.Controls.Add(this.cmbxFPP);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox2);
@@ -385,7 +362,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dtDateRequest);
             this.Name = "ucObligationRequestMain";
-            this.Size = new System.Drawing.Size(573, 559);
+            this.Size = new System.Drawing.Size(573, 523);
             this.Load += new System.EventHandler(this.ucObligationRequestMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgObligationRequests)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).EndInit();
@@ -434,7 +411,5 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.GroupBox groupBox1;
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFunds;
         internal System.Windows.Forms.ErrorProvider epFPP;
-        internal System.Windows.Forms.Label label2;
-        internal System.Windows.Forms.ComboBox cmbxSubFPP;
     }
 }

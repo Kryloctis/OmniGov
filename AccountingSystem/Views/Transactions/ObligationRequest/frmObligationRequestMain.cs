@@ -157,10 +157,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 if (uc.obligationRequestId == 0)
                     saveData = InsertData();
                 else
-                {
                     saveData = UpdateData();
-                }
-
 
                 return saveData;
             }
@@ -171,26 +168,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-
-        private void Actions()
-        {
-            if (uc.obligationRequestId == 0)
-                Helper.MessageBoxSuccess("Obligation Request has been saved.");
-            else
-            {
-                Helper.MessageBoxSuccess("Obligation Request has been updated.");
-                btnSave.Text = "&Save";
-                btnCancel.Enabled = false;
-            }
-
-            uc.ResetForm();
-        }
-
         private void BtnSave_Click(object sender, EventArgs e)
         {
             if (SaveData())
             {
-                Actions();
+                string message = uc.obligationRequestId == 0 ? "saved" : "updated";
+                Helper.MessageBoxSuccess($"Obligation Request has been {message}.");
+                uc.ResetForm();
+                btnSave.Text = "Save";
             }
         }
 

@@ -19,5 +19,7 @@ namespace ACC.Domain.Interfaces
         bool Delete(int obligationRequestId);
 
         DataTable GetViewRecordsById(int Id);
+
+        DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId);
     }
 }

@@ -108,7 +108,7 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@obligation_request_id", DbType.String, Id }
+                    new object[] { "@obligation_request_id", DbType.Int32, Id }
                 };
 
                 string query = $"SELECT " +
@@ -152,6 +152,65 @@ namespace ACC.Data
                 return _mySqlGenericCommands.FillBySearch(query, dtObligationRequests, parameters);
             }
             catch (MySqlException) 
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId }
+                };
+
+                string query = $"SELECT " +
+                    $"obligation_request_id, " +
+                    $"obligation_account_id, " +
+                    $"obligation_no, " +
+                    $"payee, " +
+                    $"explanation, " +
+                    $"reference_no, " +
+                    $"date_requested, " +
+                    $"obligation_request_created_at, " +
+                    $"created_by, " +
+                    $"obligation_request_updated_at, " +
+                    $"updated_by, " +
+                    $"budget_appropriations_id, " +
+                    $"funds_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"function_program_project_id, " +
+                    $"fpp_code, " +
+                    $"fpp_name, " +
+                    $"others_fpp_id, " +
+                    $"others_fpp_code, " +
+                    $"others_fpp_name, " +
+                    $"allotment_classes_id, " +
+                    $"allotment_code, " +
+                    $"allotment_name, " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_code, " +
+                    $"ledger_name, " +
+                    $"is_contra_account, " +
+                    $"year, " +
+                    $"continuing, " +
+                    $"remarks, " +
+                    $"amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE " +
+                    $"budget_appropriations_id = @budget_appropriations_id";
+
+                var dtObligationRequests = new DataTable();
+                return _mySqlGenericCommands.FillBySearch(query, dtObligationRequests, parameters);
+            }
+            catch (MySqlException)
             {
                 throw;
             }

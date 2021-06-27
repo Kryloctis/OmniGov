@@ -116,8 +116,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 cmbxFPP.DroppedDown = false;
                 Cursor.Current = Cursors.Default;
 
-                if (DataTableFPP().Rows.Count == 0) return;
-
                 var fppDict = new Dictionary<int, string>();
                 foreach (DataRow item in DataTableFPP().Rows)
                 {
@@ -127,7 +125,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     fppDict.Add(fppId, fppName);
                 }
 
-                cmbxFPP.DataSource = new BindingSource(fppDict, null);
+                cmbxFPP.DataSource = DataTableFPP().Rows.Count == 0? null : new BindingSource(fppDict, null);
                 cmbxFPP.DisplayMember = "value";
                 cmbxFPP.ValueMember = "key";
 
@@ -139,16 +137,30 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
         }
 
+        private void LoadFPPCombobox()
+        {
+            LoadFPP();
+            cmbxFPP.TextChanged -= new EventHandler(cmbxFPP_TextChanged);
+            cmbxFPP.Text = string.Empty;
+            cmbxFPP.SelectedIndex = -1;
+            cmbxFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
+        }
+
         private void cmbxFPP_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbxFPP.Text))
+            if (string.IsNullOrEmpty(cmbxFPP.Text)) 
             {
-                cmbxFPP.TextChanged -= new EventHandler(cmbxFPP_TextChanged);
-                LoadFPP();
-                cmbxFPP.SelectedIndex = -1;
-                cmbxFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
+                LoadFPPCombobox();
+                cmbxSubFPP.Enabled = false;
+            }
+
+            if (cmbxFPP.FindStringExact(cmbxFPP.Text.Trim()) == -1)
+            {
+                cmbxSubFPP.Enabled = false;
             }
         }
+
+      
 
         private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
         {
@@ -196,7 +208,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     subFPPDict.Add(subFPPId, subFPPName);
                 }
 
-                cmbxSubFPP.DataSource = new BindingSource(subFPPDict.Count == 0? null : subFPPDict, null);
+                cmbxSubFPP.DataSource = subFPPDict.Count == 0 ? null : new BindingSource(subFPPDict, null);
                 cmbxSubFPP.DisplayMember = "value";
                 cmbxSubFPP.ValueMember = "key";
             }
@@ -208,42 +220,27 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal void LoadSubFPPCombobox()
         {
-            if (cmbxFPP.SelectedIndex > -1)
-            {
-                LoadSubFPP();
+            LoadSubFPP();
 
-                cmbxSubFPP.TextChanged -= new EventHandler(cmbxSubFPP_TextChanged);
-                cmbxSubFPP.SelectedIndex = -1;
-                cmbxSubFPP.Text = string.Empty;
-                epSubFPP.SetError(cmbxSubFPP, string.Empty);
-                cmbxSubFPP.TextChanged += new EventHandler(cmbxSubFPP_TextChanged);
-                cmbxSubFPP.Enabled = true;
-            }
-            else
-            {
-                cmbxSubFPP.SelectedIndex = -1;
-                cmbxSubFPP.Text = string.Empty;
-                cmbxSubFPP.Enabled = false;
-            }
+            cmbxSubFPP.TextChanged -= new EventHandler(cmbxSubFPP_TextChanged);
+            cmbxSubFPP.Text = string.Empty;
+            cmbxSubFPP.SelectedIndex = -1;
+            epSubFPP.SetError(cmbxSubFPP, string.Empty);
+            cmbxSubFPP.TextChanged += new EventHandler(cmbxSubFPP_TextChanged);
+            cmbxSubFPP.Enabled = true;
         }
 
         private void cmbxSubFPP_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbxSubFPP.Text))
-            {
-                cmbxSubFPP.TextChanged -= new EventHandler(cmbxFPP_TextChanged);
-                LoadSubFPPCombobox();
-                cmbxSubFPP.SelectedIndex = -1;
-                cmbxSubFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
-            }
+            if (string.IsNullOrEmpty(cmbxSubFPP.Text)) LoadSubFPPCombobox();
         }
 
         private void cmbxSubFPP_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F1 && cmbxSubFPP.FindStringExact(cmbxSubFPP.Text) == -1 && !string.IsNullOrEmpty(cmbxSubFPP.Text))
             {
-                LoadSubFPPCombobox();
-                cmbxSubFPP.SelectedIndex = 0;
+                LoadSubFPP();
+                cmbxSubFPP.SelectedIndex =  cmbxSubFPP.Items.Count == 0 ?   -1 : 0;
                 cmbxSubFPP.DroppedDown = true;
             }
         }
@@ -636,7 +633,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
             return false;
         }
-
 
         private bool ShowErrorFPPNameNotExist(ErrorProvider ep, ComboBox comboBox)
         {

@@ -71,7 +71,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             {
                 uc.ResetForm();
                 _ucObligationRequestMain.EnableDisableComponents(false);
-                _ucObligationRequestMain.cmbxSubFPP.Enabled = true;
             }
         }
 
