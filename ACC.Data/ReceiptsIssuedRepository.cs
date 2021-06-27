@@ -135,7 +135,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName5} LEFT JOIN {tableName} ON {tableName}.receipts_id={tableName5}.id LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id WHERE {tableName}.collecting_officers_id='{coid}' AND {tableName5}.accountable_forms_id='{formid}' AND IF(IFNULL({tableName}.is_returned,0)>0,1,0)=0 AND {tableName5}.receiptsto <> {tableName5}.last_issued";
+                string query = $"SELECT * FROM {tableName5} LEFT JOIN {tableName} ON {tableName}.receipts_id={tableName5}.id LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id WHERE {tableName}.collecting_officers_id='{coid}' AND {tableName5}.accountable_forms_id='{formid}' AND IF(IFNULL({tableName}.is_returned,0)>0,1,0)=0 AND IF({tableName5}.receiptsto={tableName5}.last_issued,true,false)=false";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
@@ -150,7 +150,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName4} WHERE id IN (SELECT {tableName5}.accountable_forms_id FROM {tableName5} LEFT JOIN {tableName} ON {tableName}.receipts_id={tableName5}.id LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id WHERE {tableName}.collecting_officers_id='{id}' AND IF(IFNULL({tableName}.is_returned,0)>0,1,0)=0)";
+                string query = $"SELECT * FROM {tableName4} WHERE id IN (SELECT {tableName5}.accountable_forms_id FROM {tableName5} LEFT JOIN {tableName} ON {tableName}.receipts_id={tableName5}.id LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id WHERE {tableName}.collecting_officers_id='{id}' AND IF(IFNULL({tableName}.is_returned,0)>0,1,0)=0 AND IF({tableName5}.receiptsto={tableName5}.last_issued,true,false)=false)";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);

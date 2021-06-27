@@ -59,7 +59,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             txtreceipt.Clear();
             dtdate.Value = DateTime.Now;
             txtamount.Value = Convert.ToDecimal("0.00");
-        }
+            minreceipt = 0;
+            maxreceipt = 0;
+            receipt = 0;
+    }
         internal void LoadForms(string id)
         {
             try
@@ -307,19 +310,22 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                             {
                                 receiptto = Convert.ToInt32(dtrc.Rows[i]["receiptsto"]);
                                 maxreceipt = Convert.ToInt32(dtrc.Rows[i]["receiptsto"]);
-                                if (dtrc.Rows[i]["last_issued"].Equals(DBNull.Value))
-                                {
-                                    receiptlast = 0;
-                                    minreceipt = Convert.ToInt32(dtrc.Rows[i]["receiptsfrom"]);
-                                }                                    
-                                else
-                                    receiptlast = Convert.ToInt32(dtrc.Rows[i]["last_issued"]);
-                                    minreceipt = Convert.ToInt32(dtrc.Rows[i]["last_issued"]);
+                                minreceipt = Convert.ToInt32(dtrc.Rows[i]["receiptsfrom"]);
+                                receiptlast = dtrc.Rows[i]["last_issued"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtrc.Rows[i]["last_issued"]);
+
                             }
                             if (receiptto.Equals(receiptlast))
                                 txtreceipt.Text = "0";
                             else
-                                txtreceipt.Text = (receiptlast + 1).ToString();
+                            {
+                                if (receiptlast < minreceipt)
+                                    txtreceipt.Text = minreceipt.ToString();
+                                else if (receiptlast.Equals(minreceipt))
+                                    txtreceipt.Text = (receiptlast + 1).ToString();
+                                else
+                                    txtreceipt.Text = (receiptlast + 1).ToString();
+                            }
+
                         }
                         else
                         {
@@ -342,21 +348,24 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                                 int receiptlast = 0;
                                 for (int i = 0; i < dtrc.Rows.Count; i++)
                                 {
+
                                     receiptto = Convert.ToInt32(dtrc.Rows[i]["receiptsto"]);
                                     maxreceipt = Convert.ToInt32(dtrc.Rows[i]["receiptsto"]);
-                                    if (dtrc.Rows[i]["last_issued"].Equals(DBNull.Value))
-                                    {
-                                        receiptlast = 0;
-                                        minreceipt = Convert.ToInt32(dtrc.Rows[i]["receiptsfrom"]);
-                                    }
-                                    else
-                                        receiptlast = Convert.ToInt32(dtrc.Rows[i]["last_issued"]);
-                                    minreceipt = Convert.ToInt32(dtrc.Rows[i]["last_issued"]);
+                                    minreceipt = Convert.ToInt32(dtrc.Rows[i]["receiptsfrom"]);
+                                    receiptlast = dtrc.Rows[i]["last_issued"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtrc.Rows[i]["last_issued"]);
                                 }
                                 if (receiptto.Equals(receiptlast))
                                     txtreceipt.Text = "0";
                                 else
-                                    txtreceipt.Text = (receiptlast + 1).ToString();
+                                {
+                                    if (receiptlast < minreceipt)
+                                        txtreceipt.Text = minreceipt.ToString();
+                                    else if (receiptlast.Equals(minreceipt))
+                                        txtreceipt.Text = (receiptlast + 1).ToString();
+                                    else
+                                        txtreceipt.Text = (receiptlast + 1).ToString();
+                                }
+
                             }
                             else
                             {
