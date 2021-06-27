@@ -55,6 +55,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             _frmAllotmentReleaseMain.ucAllotmentReleaseMain1.allotmentReleaseId = allotmentReleaseId;
             _frmAllotmentReleaseMain.ucAllotmentReleaseMain1.LoadSelected();
             _frmAllotmentReleaseMain.ucAllotmentReleaseMain1.DisplayTotalAllotmentRelease();
+            _frmAllotmentReleaseMain.btnSave.Text = "Update";
             Close();
         }
 

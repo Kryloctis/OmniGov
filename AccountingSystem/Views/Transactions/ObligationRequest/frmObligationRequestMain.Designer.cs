@@ -108,6 +108,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // ucObligationRequestMain1
             // 
+            this.ucObligationRequestMain1.AutoSize = true;
             this.ucObligationRequestMain1.Location = new System.Drawing.Point(13, 53);
             this.ucObligationRequestMain1.Name = "ucObligationRequestMain1";
             this.ucObligationRequestMain1.Size = new System.Drawing.Size(571, 562);
@@ -118,7 +119,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(585, 617);
+            this.ClientSize = new System.Drawing.Size(585, 586);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.ucObligationRequestMain1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

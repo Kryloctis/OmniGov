@@ -16,12 +16,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
     {
 
         internal int fppId;
-        internal int? subFPPId;
         internal int fundId;
         internal int allotmentClassId;
         internal DateTime dateRequested;
         private ucObligationRequestMain _ucObligationRequestMain;
 
+        internal int? _subFPPId = null;
         internal int _budgetAppropriationsId = 0;
         internal decimal _amount = 0;
 
@@ -42,9 +42,23 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return currentBalance < 0? 0 : currentBalance;
         }
 
-        internal void LoadSelected()
+        private decimal GetAllotmentReleaseBalance()
         {
+            decimal allotmentReleaseBalance = 0;
 
+            if (cmbxObjectOfExpenditure.SelectedIndex > -1)
+            {
+                int budgetAppropriationId = Convert.ToInt32(cmbxObjectOfExpenditure.SelectedValue);
+                var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
+                var dtObligationRequests = Factory.ObligationRequestRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
+
+                decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
+                decimal totalObligations = Convert.ToDecimal(dtObligationRequests.Rows.Count == 0 ? 0 : dtObligationRequests.Compute("SUM(amount)", string.Empty));
+
+                allotmentReleaseBalance = (totalAllotmentRelease - totalObligations) + (budgetAppropriationId == _budgetAppropriationsId ? _amount : 0);
+            }
+
+            return allotmentReleaseBalance;
         }
 
         internal void LoadReferences(ucObligationRequestMain ucObligationRequestMain)
@@ -65,9 +79,17 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal void ResetForm()
         {
             LoadObjectOfExpenditures();
-            cmbxObjectOfExpenditure.SelectedIndex = -1;
+
+            _subFPPId = null;
+            _budgetAppropriationsId = 0;
+            _amount = 0;
+            nudAmount.Value = _amount;
+
+            cmbxSubFPP.Text = string.Empty;
+            cmbxSubFPP.SelectedValue = _subFPPId == null ? 0 : _subFPPId;
+
             cmbxObjectOfExpenditure.Text = string.Empty;
-            nudAmount.Value = 0;
+            cmbxObjectOfExpenditure.SelectedValue = _budgetAppropriationsId;
         }
 
 
@@ -75,7 +97,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             if (!DesignMode)
             {
-                LoadObjectOfExpenditures();
+                //SUB FPP
+                LoadSubFPPCombobox();
+
                 txtUnobligatedBalance.Text = GetAllotmentReleaseBalance().ToString("N2");
                 txtRemainingBalance.Text = GetCurrentBalance().ToString("N2");
             }
@@ -88,17 +112,89 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         }
 
 
+        //SUB FPP COMBOBOX
+
+        private DataTable DataTableSubFPP()
+        {
+            DataTable dtSubFPP;
+
+            if (string.IsNullOrWhiteSpace(cmbxSubFPP.Text))
+                dtSubFPP = Factory.SubFPPRepository().GetRecordsByFPPId(fppId);
+            else
+                dtSubFPP = Factory.SubFPPRepository().GetRecordsByFPPIdCodeName(fppId, cmbxSubFPP.Text);
+
+            return dtSubFPP;
+        }
+
+        private void LoadSubFPP()
+        {
+            try
+            {
+                cmbxSubFPP.DroppedDown = false;
+                Cursor.Current = Cursors.Default;
+                LoadObjectOfExpendituresCombobox();
+
+                var subFPPDict = new Dictionary<int, string>();
+                foreach (DataRow item in DataTableSubFPP().Rows)
+                {
+                    int subFPPId = Convert.ToInt32(item["id"]);
+                    string subFPPName = $"{item["others_fpp_code"]} - {item["name"]}";
+
+                    subFPPDict.Add(subFPPId, subFPPName);
+                }
+
+                cmbxSubFPP.DataSource = DataTableSubFPP().Rows.Count == 0? null : new BindingSource(subFPPDict, null);
+                cmbxSubFPP.DisplayMember = "value";
+                cmbxSubFPP.ValueMember = "key";
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void LoadSubFPPCombobox() 
+        {
+            LoadSubFPP();
+            cmbxSubFPP.TextChanged -= new EventHandler(cmbxSubFPP_TextChanged);
+            cmbxSubFPP.Text = string.Empty;
+            cmbxSubFPP.SelectedIndex = -1;
+            cmbxSubFPP.TextChanged += new EventHandler(cmbxSubFPP_TextChanged);
+            cmbxSubFPP.SelectedValueChanged += new EventHandler(cmbxSubFPP_SelectedValueChanged);
+            cmbxSubFPP.SelectedValue = _subFPPId == null ? 0 : _subFPPId;
+        }
+
+        private void cmbxSubFPP_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbxSubFPP.Text)) LoadSubFPPCombobox();
+        }
+
+        private void cmbxSubFPP_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1 && cmbxSubFPP.FindStringExact(cmbxSubFPP.Text) == -1 && !string.IsNullOrEmpty(cmbxSubFPP.Text))
+            {
+                LoadSubFPP();
+                cmbxSubFPP.DroppedDown = true;
+            }
+        }
+
+        private void cmbxSubFPP_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadObjectOfExpendituresCombobox();
+        }
+
 
         //OBJECT OF EXPENDITURE COMBOBOX
 
         private DataTable DatatableObjectOfExpenditures()
         {
             var dtBudgetAppropriation = new DataTable();
+            int subFPPId = Convert.ToInt32(cmbxSubFPP.SelectedValue);
 
             var budgetAppropriationsModel = new BudgetAppropriationsModel()
             {
                 FunctionProgramProjectId = fppId,
-                OthersFPPId = subFPPId,
+                OthersFPPId = string.IsNullOrWhiteSpace(cmbxSubFPP.Text)? null : subFPPId,
                 AllotmentClassesId = allotmentClassId,
                 FundsId = fundId,
                 Year = Convert.ToInt16(dateRequested.Year)
@@ -122,38 +218,48 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 cmbxObjectOfExpenditure.DroppedDown = false;
                 Cursor.Current = Cursors.Default;
 
-                if (DatatableObjectOfExpenditures().Rows.Count == 0) return;
-
-                var accountDict = new Dictionary<int, string>();
+                var objectOfExependituresDict = new Dictionary<int, string>();
                 foreach (DataRow item in DatatableObjectOfExpenditures().Rows)
                 {
-                    int accountId = Convert.ToInt32(item["id"]);
                     string remarks = string.IsNullOrEmpty(item["remarks"].ToString()) ? string.Empty : $"({item["remarks"]})";
-                    string accountName = $"{item["account_code"]} - {item["general_ledger_accounts_name"]} {remarks}";
+                    int appropriationId = Convert.ToInt32(item["id"]);
+                    string appropriationName = $"{item["account_code"]} - {item["general_ledger_accounts_name"]} {remarks}";
+
                     bool isContinuing = Convert.ToByte(item["continuing"]) == 1 ? true : false;
                     short year = Convert.ToInt16(item["year"]);
 
                     if (!isContinuing && year == dateRequested.Year)
-                        accountDict.Add(accountId, accountName);
+                        objectOfExependituresDict.Add(appropriationId, appropriationName);
                     else if (isContinuing && year <= dateRequested.Year)
-                        accountDict.Add(accountId, accountName);
+                        objectOfExependituresDict.Add(appropriationId, appropriationName);
+
                 }
 
-                cmbxObjectOfExpenditure.DataSource = accountDict.Count == 0 ? null : new BindingSource(accountDict, null);
+                var dataSource = objectOfExependituresDict.Count == 0 ? null : new BindingSource(objectOfExependituresDict, null);
+
+                cmbxObjectOfExpenditure.DataSource = dataSource;
                 cmbxObjectOfExpenditure.DisplayMember = "value";
                 cmbxObjectOfExpenditure.ValueMember = "key";
-
-
-                cmbxObjectOfExpenditure.TextChanged -= new EventHandler(CmbxObjectOfExpenditure_TextChanged);
-                cmbxObjectOfExpenditure.SelectedValue = _budgetAppropriationsId;
-                cmbxObjectOfExpenditure.TextChanged += new EventHandler(CmbxObjectOfExpenditure_TextChanged);
-                cmbxObjectOfExpenditure.SelectedValueChanged += new EventHandler(cmbxObjectOfExpenditure_SelectedValueChanged);
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.StackTrace);
+                Helper.MessageBoxError(ex.Message);
             }
 
+        }
+
+        internal void LoadObjectOfExpendituresCombobox()
+        {
+            LoadObjectOfExpenditures();
+
+            cmbxObjectOfExpenditure.TextChanged -= new EventHandler(CmbxObjectOfExpenditure_TextChanged);
+            cmbxObjectOfExpenditure.Text = string.Empty;
+            cmbxObjectOfExpenditure.SelectedIndex = -1;
+            epObjectOfExpenditure.SetError(cmbxSubFPP, string.Empty);
+            cmbxObjectOfExpenditure.TextChanged += new EventHandler(CmbxObjectOfExpenditure_TextChanged);
+            cmbxObjectOfExpenditure.SelectedValueChanged += new EventHandler(cmbxObjectOfExpenditure_SelectedValueChanged);
+            cmbxObjectOfExpenditure.Enabled = true;
+            cmbxObjectOfExpenditure.SelectedValue = _budgetAppropriationsId;
         }
 
         private void cmbxObjectOfExpenditure_SelectedValueChanged(object sender, EventArgs e)
@@ -162,29 +268,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             txtRemainingBalance.Text = GetCurrentBalance().ToString("N2");
         }
 
-        private decimal GetAllotmentReleaseBalance()
-        {
-            decimal allotmentReleaseBalance = 0;
-
-            if (cmbxObjectOfExpenditure.SelectedIndex > -1)
-            {
-                int budgetAppropriationId = Convert.ToInt32(cmbxObjectOfExpenditure.SelectedValue);
-                var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
-
-                decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
-
-                allotmentReleaseBalance = totalAllotmentRelease;
-            }
-
-            return allotmentReleaseBalance;
-        }
-
         private void CmbxObjectOfExpenditure_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbxObjectOfExpenditure.Text))
-            {
-                LoadObjectOfExpenditures();
-            }
+            if (string.IsNullOrEmpty(cmbxObjectOfExpenditure.Text)) LoadObjectOfExpendituresCombobox();
         }
 
         private void cmbxObjectOfExpenditure_KeyDown(object sender, KeyEventArgs e)
@@ -194,11 +280,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             if (e.KeyCode == Keys.F1 && cmbxObjectOfExpenditure.FindStringExact(searchTxt) == -1 && !string.IsNullOrEmpty(searchTxt))
             {
                 LoadObjectOfExpenditures();
-                cmbxObjectOfExpenditure.SelectedIndex = 0;
+                cmbxObjectOfExpenditure.SelectedIndex = cmbxObjectOfExpenditure.Items.Count == 0 ? -1 : 0;
                 cmbxObjectOfExpenditure.DroppedDown = true;
             }
         }
-
 
 
         //VALIDATIONS
@@ -229,12 +314,24 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     int budgetAppriationId = Convert.ToInt32(cmbxObjectOfExpenditure.SelectedValue);
                     int rowBudgetAppropriationId = Convert.ToInt32(item.Cells["budget_appropriation_id"].Value);
 
-
-                    if (budgetAppriationId == rowBudgetAppropriationId && _ucObligationRequestMain.obligationRequestId == 0 && rowBudgetAppropriationId  != _budgetAppropriationsId) 
+                    if (_ucObligationRequestMain.obligationRequestId == 0)
                     {
-                        epObjectOfExpenditure.SetError(cmbxObjectOfExpenditure, "Object of Expenditure already exist on the List");
-                        return true;
+                        if (budgetAppriationId == rowBudgetAppropriationId)
+                        {
+                            epObjectOfExpenditure.SetError(cmbxObjectOfExpenditure, "Object of Expenditure already exist on the List");
+                            return true;
+                        }
+
                     }
+                    else
+                    {
+                        if (budgetAppriationId == rowBudgetAppropriationId && rowBudgetAppropriationId != _budgetAppropriationsId)
+                        {
+                            epObjectOfExpenditure.SetError(cmbxObjectOfExpenditure, "Object of Expenditure already exist on the List");
+                            return true;
+                        }
+                    }
+                 
                 }
 
             }

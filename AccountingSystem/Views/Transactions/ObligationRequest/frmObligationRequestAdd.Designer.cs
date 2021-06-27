@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.ucObligationRequest1.AutoSize = true;
             this.ucObligationRequest1.Location = new System.Drawing.Point(12, 12);
             this.ucObligationRequest1.Name = "ucObligationRequest1";
-            this.ucObligationRequest1.Size = new System.Drawing.Size(567, 121);
+            this.ucObligationRequest1.Size = new System.Drawing.Size(567, 142);
             this.ucObligationRequest1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -51,7 +51,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.flowLayoutPanel1.Controls.Add(this.btnAddToList);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 136);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 163);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(582, 29);
             this.flowLayoutPanel1.TabIndex = 1;
@@ -82,7 +82,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(582, 165);
+            this.ClientSize = new System.Drawing.Size(582, 192);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ucObligationRequest1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
