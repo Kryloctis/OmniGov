@@ -23,7 +23,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void frmPaymentCollectionAdd_Load(object sender, EventArgs e)
         {
+            ucpc1.LoadForms();
             ucpc1.LoadCollectors();
+            ucpc1.LoadFunds();
         }
 
         private bool SaveData()
@@ -39,8 +41,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
                 var pcModel = new PaymentCollectionModel()
                 {
-                    CoId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
-                    AccId = uc.accId,
+                    CoId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
+                    FId = Convert.ToInt32(uc.cmbfund.SelectedValue),
+                    AccId = Convert.ToInt32(uc.cmbforms.SelectedValue),
                     GlaId = uc.glaId,
                     SlaId = uc.slaId,
                     Payee = uc.txtpayee.Text.Trim(),
@@ -51,7 +54,40 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 };
 
                 var pcrepository = Factory.PaymentCollectionRepository();
-                return pcrepository.Insert(pcModel);
+                if (pcrepository.ReceiptExist(uc.txtreceipt.Text.Trim(), Convert.ToInt32(uc.cmbforms.SelectedValue)))
+                {
+                    Helper.MessageBoxSuccess("Receipt already exists!.");
+                    uc.txtreceipt.Focus();
+                    return false;
+                }
+                else
+                {
+                    if (pcrepository.Insert(pcModel))
+                    {
+                        var riRepository = Factory.ReceiptsIssuedRepository();
+                        var rcRepository = Factory.ReceiptsRepository();
+                        var dtri = riRepository.GetRecords(uc.cmbcollector.SelectedValue.ToString(), uc.cmbforms.SelectedValue.ToString());
+                        if (dtri.Rows.Count > 0)
+                        {
+                            int rid = 0;
+                            for (int i = 0; i < dtri.Rows.Count; i++)
+                            {
+                                rid = Convert.ToInt32(dtri.Rows[i]["id"]);
+                            }
+                            var rcModel = new ReceiptsModel()
+                            {
+                                Id = rid,
+                                Last_issued = Convert.ToInt32(uc.txtreceipt.Text.Trim())
+                            };
+                            return rcRepository.UpdateCurrentIssued(rcModel);
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                
             }
             catch (Exception ex)
             {

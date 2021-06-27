@@ -33,8 +33,8 @@ namespace AccountingSystem.Views.Transactions.RCI
                 //uc.setSelectedValue(Convert.ToInt16(rcidata["banks_id"]), "banks");
                // uc.setSelectedValue(Convert.ToInt16(rcidata["funds_id"]), "funds");
                 //uc.setSelectedValue(Convert.ToInt16(rcidata["function_program_project_id"]), "functions");
-                LoadSelectedRecord(uc, "banks", Convert.ToInt16(rcidata["banks_id"]));
-                LoadSelectedRecord(uc, "funds", Convert.ToInt16(rcidata["funds_id"]));
+                uc.cmbbank.SelectedValue = rcidata["banks_id"];
+                uc.cmbfund.SelectedValue = rcidata["funds_id"];
                 LoadSelectedRecord(uc, "functions", Convert.ToInt16(rcidata["function_program_project_id"]));
                 uc.txtcheckno.Text = rcidata["check_no"];
                 uc.dtcheckdate.Value = Convert.ToDateTime(rcidata["check_date"]);
@@ -53,20 +53,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             {
                 if (!string.IsNullOrEmpty(table))
                 {
-                    if (table.Equals("banks"))
-                    {
-                        var banksrepository = Factory.BanksRepository();
-                        var bankdata = banksrepository.GetRecordByID(Id);
-                        uc.bankId = Id;
-                        uc.txtbank.Text = String.Format("{0} - {1}", bankdata["account_no"], bankdata["bank_name"]);
-                    }
-                    if (table.Equals("funds"))
-                    {
-                        var fundsrepository = Factory.FundsRepository();
-                        var funddata = fundsrepository.GetRecordByID(Id);
-                        uc.fundsId = Id;
-                        uc.txtfund.Text = String.Format("{0} - {1}", funddata["fund_code"], funddata["fund_name"]);
-                    }
+
                     if (table.Equals("functions"))
                     {
                         var functionreposity = Factory.FunctionProgramProjectRepository();
@@ -82,6 +69,8 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void frmRCIEdit_Load(object sender, EventArgs e)
         {
+            ucrci1.LoadFunds();
+            ucrci1.LoadBanks();
             LoadSelectedValue();
         }
 
@@ -99,8 +88,8 @@ namespace AccountingSystem.Views.Transactions.RCI
                 var rciModel = new RCIModel()
                 {
                     Id = uc.Id,
-                    BankId = uc.bankId,
-                    FundsId = uc.fundsId,
+                    BankId = Convert.ToInt32(uc.cmbbank.SelectedValue),
+                    FundsId = Convert.ToInt32(uc.cmbfund.SelectedValue),
                     FunctionProgramProjectId = uc.functionId,
                     CheckNo = uc.txtcheckno.Text.Trim(),
                     CheckDate = Convert.ToDateTime(uc.dtcheckdate.Text.Trim()),

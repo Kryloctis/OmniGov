@@ -107,9 +107,9 @@ namespace AccountingSystem.Views.Reports.RCD
         private void dgrcd_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             
-            if (e.ColumnIndex == 6)
+            if (e.ColumnIndex == 7)
             {
-                bool isapproved = Convert.ToBoolean(dgrcd.CurrentRow.Cells[5].Value);
+                bool isapproved = Convert.ToBoolean(dgrcd.CurrentRow.Cells[6].Value);
                 var gcpRepository = Factory.GeneralCollectionsPaymentsRepository();
                 bool isgenerated = gcpRepository.IdExist(int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString()));
                 if (isapproved && !isgenerated)

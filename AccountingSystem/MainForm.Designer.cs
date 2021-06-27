@@ -41,6 +41,7 @@ namespace AccountingSystem
             this.menuPayments = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDeposits = new System.Windows.Forms.ToolStripMenuItem();
             this.menuGencoldeposits = new System.Windows.Forms.ToolStripMenuItem();
+            this.menureceiptsissued = new System.Windows.Forms.ToolStripMenuItem();
             this.menuManage = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUserList = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,6 +55,7 @@ namespace AccountingSystem
             this.menuDisbursingOfficer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBanks = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAccForm = new System.Windows.Forms.ToolStripMenuItem();
+            this.menureceipts = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
             this.menuJournalsReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportGJ = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,6 +71,8 @@ namespace AccountingSystem
             this.menuSAAOBB = new System.Windows.Forms.ToolStripMenuItem();
             this.menuprintRCI = new System.Windows.Forms.ToolStripMenuItem();
             this.menuprintPC = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuprintGC = new System.Windows.Forms.ToolStripMenuItem();
+            this.menucashbook = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnBudgetAppropriations = new System.Windows.Forms.ToolStripButton();
             this.btnSupplementalAppropriations = new System.Windows.Forms.ToolStripButton();
@@ -85,7 +89,6 @@ namespace AccountingSystem
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.radBtnBudget = new System.Windows.Forms.RadioButton();
             this.radBtnAccouting = new System.Windows.Forms.RadioButton();
-            this.menuprintGC = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -136,7 +139,8 @@ namespace AccountingSystem
             this.menuRCI,
             this.menuPayments,
             this.menuDeposits,
-            this.menuGencoldeposits});
+            this.menuGencoldeposits,
+            this.menureceiptsissued});
             this.menuTransactions.Name = "menuTransactions";
             this.menuTransactions.Size = new System.Drawing.Size(104, 24);
             this.menuTransactions.Text = "Transactions";
@@ -182,6 +186,13 @@ namespace AccountingSystem
             this.menuGencoldeposits.Text = "Generate Gen. Collections and Deposits";
             this.menuGencoldeposits.Click += new System.EventHandler(this.menuGencoldeposits_Click);
             // 
+            // menureceiptsissued
+            // 
+            this.menureceiptsissued.Name = "menureceiptsissued";
+            this.menureceiptsissued.Size = new System.Drawing.Size(353, 26);
+            this.menureceiptsissued.Text = "Receipts Issued";
+            this.menureceiptsissued.Click += new System.EventHandler(this.menureceiptsissued_Click);
+            // 
             // menuManage
             // 
             this.menuManage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -194,7 +205,8 @@ namespace AccountingSystem
             this.menuCollectingOfficer,
             this.menuDisbursingOfficer,
             this.menuBanks,
-            this.menuAccForm});
+            this.menuAccForm,
+            this.menureceipts});
             this.menuManage.Name = "menuManage";
             this.menuManage.Size = new System.Drawing.Size(77, 24);
             this.menuManage.Text = "Manage";
@@ -284,6 +296,13 @@ namespace AccountingSystem
             this.menuAccForm.Text = "Accountable Form";
             this.menuAccForm.Click += new System.EventHandler(this.menuAccForm_Click);
             // 
+            // menureceipts
+            // 
+            this.menureceipts.Name = "menureceipts";
+            this.menureceipts.Size = new System.Drawing.Size(272, 26);
+            this.menureceipts.Text = "Receipts";
+            this.menureceipts.Click += new System.EventHandler(this.menureceipts_Click);
+            // 
             // menuReports
             // 
             this.menuReports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -293,7 +312,8 @@ namespace AccountingSystem
             this.menuSAAOBB,
             this.menuprintRCI,
             this.menuprintPC,
-            this.menuprintGC});
+            this.menuprintGC,
+            this.menucashbook});
             this.menuReports.Name = "menuReports";
             this.menuReports.Size = new System.Drawing.Size(74, 24);
             this.menuReports.Text = "Reports";
@@ -393,6 +413,20 @@ namespace AccountingSystem
             this.menuprintPC.Size = new System.Drawing.Size(323, 26);
             this.menuprintPC.Text = "Report of Collections and Deposits";
             this.menuprintPC.Click += new System.EventHandler(this.menuprintPC_Click);
+            // 
+            // menuprintGC
+            // 
+            this.menuprintGC.Name = "menuprintGC";
+            this.menuprintGC.Size = new System.Drawing.Size(323, 26);
+            this.menuprintGC.Text = "Reports of General Collections";
+            this.menuprintGC.Click += new System.EventHandler(this.menuprintGC_Click);
+            // 
+            // menucashbook
+            // 
+            this.menucashbook.Name = "menucashbook";
+            this.menucashbook.Size = new System.Drawing.Size(323, 26);
+            this.menucashbook.Text = "Bank Cashbook";
+            this.menucashbook.Click += new System.EventHandler(this.menucashbook_Click);
             // 
             // toolStrip1
             // 
@@ -560,13 +594,6 @@ namespace AccountingSystem
             this.radBtnAccouting.Text = "Accounting";
             this.radBtnAccouting.UseVisualStyleBackColor = true;
             // 
-            // menuprintGC
-            // 
-            this.menuprintGC.Name = "menuprintGC";
-            this.menuprintGC.Size = new System.Drawing.Size(323, 26);
-            this.menuprintGC.Text = "Reports of General Collections";
-            this.menuprintGC.Click += new System.EventHandler(this.menuprintGC_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -662,6 +689,9 @@ namespace AccountingSystem
         private System.Windows.Forms.RadioButton radBtnAccouting;
         private System.Windows.Forms.ToolStripMenuItem menuGencoldeposits;
         private System.Windows.Forms.ToolStripMenuItem menuprintGC;
+        private System.Windows.Forms.ToolStripMenuItem menureceiptsissued;
+        private System.Windows.Forms.ToolStripMenuItem menureceipts;
+        private System.Windows.Forms.ToolStripMenuItem menucashbook;
     }
 }
 

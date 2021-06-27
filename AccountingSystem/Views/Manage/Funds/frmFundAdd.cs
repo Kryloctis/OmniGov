@@ -18,7 +18,7 @@ namespace AccountingSystem.Views.Manage.Funds
         public frmFundAdd(frmFunds frmFunds)
         {
             InitializeComponent();
-            _frmFunds = frmFunds;
+            _frmFunds = frmFunds;            
         }
 
         private bool SaveData()
@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Manage.Funds
 
         private void frmFundAdd_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
+            
         }
 
         private void btnSave_Click_1(object sender, EventArgs e)

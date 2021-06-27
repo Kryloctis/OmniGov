@@ -1,9 +1,11 @@
 ﻿using ACC.Domain.Models;
+using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
     public interface ICollectingOfficerRepository : IRepository<CollectingOfficerModel>
     {       
-        bool FullNameExist(string firstname, string middleinitial, string lastname, int id);        
+        bool FullNameExist(string firstname, string middleinitial, string lastname, int id);
+        DataTable GetRecordsBySearch(string searchText);
     }
 }

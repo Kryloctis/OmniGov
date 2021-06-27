@@ -327,7 +327,44 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
+        #region ReceiptsIssued
+        internal static void ReceiptsIssuedDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].HeaderText = "Collector";
+            datagrid.Columns[2].HeaderText = "Receipt (Form)";
+            datagrid.Columns[3].HeaderText = "# From";
+            datagrid.Columns[4].HeaderText = "# To";
+            datagrid.Columns[5].HeaderText = "Date Issued";
+            datagrid.Columns[5].DefaultCellStyle.Format = "yyyy-MM-dd";
+            datagrid.Columns[6].HeaderText = "Quantity";
+            datagrid.Columns[7].HeaderText = "Last Issued #";
+            datagrid.Columns[8].HeaderText = "Is Returned";
+            datagrid.Columns[9].HeaderText = "Returned Date";
+            datagrid.Columns[9].DefaultCellStyle.Format = "yyyy-MM-dd";
+            datagrid.Columns[10].HeaderText = "User/Officer";
 
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        #endregion
+        #region Receipts
+        internal static void ReceiptsDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].HeaderText = "Receipt (Form)";
+            datagrid.Columns[2].HeaderText = "# From";
+            datagrid.Columns[3].HeaderText = "# To";
+            datagrid.Columns[4].HeaderText = "Received Date";
+            datagrid.Columns[4].DefaultCellStyle.Format = "yyyy-MM-dd";
+            datagrid.Columns[5].HeaderText = "Quantity";
+            datagrid.Columns[6].HeaderText = "Last Issued #";
+            datagrid.Columns[7].HeaderText = "User/Officer";
+
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        #endregion
         #region Funds
         internal static void FundsDatagridView(DataTable dataTable, DataGridView datagrid)
         {
@@ -399,12 +436,13 @@ namespace AccountingSystem
            
             datagrid.Columns[0].Visible = false;
             datagrid.Columns[1].HeaderText = "Report No.";
-            datagrid.Columns[2].HeaderText = "Date";
-            datagrid.Columns[3].HeaderText = "Collector";
-            datagrid.Columns[4].HeaderText = "Total Amount";
-            datagrid.Columns[4].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[5].Visible = false;
+            datagrid.Columns[2].HeaderText = "Fund";
+            datagrid.Columns[3].HeaderText = "Date";
+            datagrid.Columns[4].HeaderText = "Collector";
+            datagrid.Columns[5].HeaderText = "Total Amount";
+            datagrid.Columns[5].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[6].Visible = false;
             DataGridViewCheckBoxColumn chk = new DataGridViewCheckBoxColumn();
             datagrid.Columns.Add(chk);
             chk.HeaderText = "Generate RCD";
@@ -451,9 +489,15 @@ namespace AccountingSystem
             datagrid.Columns[8].HeaderText = "OBR No.";
             datagrid.Columns[9].HeaderText = "Functional Code";
             datagrid.Columns[10].HeaderText = "Trust Liabilities";
+            datagrid.Columns[10].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[10].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns[11].HeaderText = "BIR VAT/Non-VAT";
+            datagrid.Columns[11].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[11].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns[12].HeaderText = "Amount";
-            datagrid.Columns[13].HeaderText = "Net Amount";
+            datagrid.Columns[12].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[12].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[13].Visible = false;
             datagrid.Columns[14].Visible = false;
             datagrid.Columns[15].Visible = false;
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -465,22 +509,23 @@ namespace AccountingSystem
         {
             datagrid.DataSource = dataTable;            
             datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Account Code";
-            datagrid.Columns[2].HeaderText = "Accountable Form";
-            datagrid.Columns[3].HeaderText = "Ledger";
-            datagrid.Columns[4].HeaderText = "Subsidiary";
-            datagrid.Columns[5].HeaderText = "Payee";
-            datagrid.Columns[6].HeaderText = "Receipt No.";
-            datagrid.Columns[7].HeaderText = "Payment Date";
-            datagrid.Columns[7].DefaultCellStyle.Format = "yyyy-MM-dd";
-            datagrid.Columns[8].HeaderText = "Amount";
-            datagrid.Columns[8].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[9].HeaderText = "Collector";
-            datagrid.Columns[10].Visible = false;
+            datagrid.Columns[1].HeaderText = "Fund";
+            datagrid.Columns[2].HeaderText = "Account Code";
+            datagrid.Columns[3].HeaderText = "Accountable Form";
+            datagrid.Columns[4].HeaderText = "Ledger";
+            datagrid.Columns[5].HeaderText = "Subsidiary";
+            datagrid.Columns[6].HeaderText = "Payee";
+            datagrid.Columns[7].HeaderText = "Receipt No.";
+            datagrid.Columns[8].HeaderText = "Payment Date";
+            datagrid.Columns[8].DefaultCellStyle.Format = "yyyy-MM-dd";
+            datagrid.Columns[9].HeaderText = "Amount";
+            datagrid.Columns[9].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[10].HeaderText = "Collector";
             datagrid.Columns[11].Visible = false;
             datagrid.Columns[12].Visible = false;
             datagrid.Columns[13].Visible = false;
+            datagrid.Columns[14].Visible = false;
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
@@ -580,6 +625,7 @@ namespace AccountingSystem
             datagrid.Columns["fpp_code"].HeaderText = "Code";
             datagrid.Columns["fpp_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             datagrid.Columns["fpp_name"].HeaderText = "Name";
+            datagrid.Columns["is_special"].Visible = false;
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
             Helper.DatagridDefaultStyle(datagrid, true);

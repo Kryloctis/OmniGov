@@ -24,6 +24,7 @@ namespace AccountingSystem.Views.Reports.RCD
         private void frmRCDAdd_Load(object sender, EventArgs e)
         {            
             ucrcd1.LoadCollectors();
+            ucrcd1.LoadFunds();
         }
 
         private bool SaveData()

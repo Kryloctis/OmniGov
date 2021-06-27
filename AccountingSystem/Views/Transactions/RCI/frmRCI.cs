@@ -107,5 +107,10 @@ namespace AccountingSystem.Views.Transactions.RCI
             Helper.ShowRecordTimestamp(dgRCI, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgRCI, btnEdit, btnDelete);
         }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
     }
 }

@@ -32,9 +32,9 @@ namespace AccountingSystem.Views.Transactions.RCI
             var errorArray = new string[12];
             errorArray[0] = errorProvider.GetError(txtObno);
             errorArray[1] = errorProvider.GetError(txtdvno);
-            errorArray[2] = errorProvider.GetError(txtfund);
+            errorArray[2] = errorProvider.GetError(cmbfund);
             errorArray[3] = errorProvider.GetError(txtfunction);
-            errorArray[4] = errorProvider.GetError(txtbank);
+            errorArray[4] = errorProvider.GetError(cmbbank);
             errorArray[5] = errorProvider.GetError(txtcheckno);
             errorArray[6] = errorProvider.GetError(dtcheckdate);
             errorArray[7] = errorProvider.GetError(txtpayee);
@@ -51,9 +51,9 @@ namespace AccountingSystem.Views.Transactions.RCI
             txtObno.Clear();
             txtdvno.Clear();
             bankId=fundsId=functionId=0;
-            txtfund.Clear();
+            cmbbank.SelectedIndex = -1;
             txtfunction.Clear();
-            txtbank.Clear();
+            cmbfund.SelectedIndex = -1;
             txtcheckno.Clear();
             dtcheckdate.Value = DateTime.Now;
             txtpayee.Clear();
@@ -62,26 +62,39 @@ namespace AccountingSystem.Views.Transactions.RCI
             txtvat.Value = Convert.ToDecimal("0.00");
             txtamount.Value = Convert.ToDecimal("0.00");
         }
+        internal void LoadFunds()
+        {
+            try
+            {
+                var fundRepository = Factory.FundsRepository();
+                var dtFund = fundRepository.GetRecords();
+                dtFund.Columns.Add("funddisplay", typeof(string), "fund_code + ' - ' + fund_name");
+                cmbfund.DataSource = dtFund;
+                cmbfund.ValueMember = "id";
+                cmbfund.DisplayMember = "funddisplay";
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        internal void LoadBanks()
+        {
+            try
+            {
+                var fundRepository = Factory.BanksRepository();
+                var dtBank = fundRepository.GetRecords();
+                dtBank.Columns.Add("bankdisplay", typeof(string), "bank_name + ' - ' + account_no");
+                cmbbank.DataSource = dtBank;
+                cmbbank.ValueMember = "id";
+                cmbbank.DisplayMember = "bankdisplay";
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
         internal void setSelectedValue(int Id, string table)
         {
             try
             {
                if(!string.IsNullOrEmpty(table) || Id > 0)
                 {
-                    if (table.Equals("banks"))
-                    {
-                        var banksRepository = Factory.BanksRepository();
-                        var bankData = banksRepository.GetRecordByID(Id);
-                        bankId = Convert.ToInt16(bankData["id"]);
-                        txtbank.Text = String.Format("{0} - {1}", bankData["account_no"],bankData["bank_name"]);
-                    }
-                    if (table.Equals("funds"))
-                    {
-                        var fundsRepository = Factory.FundsRepository();
-                        var fundsData = fundsRepository.GetRecordByID(Id);
-                        fundsId = Convert.ToInt16(fundsData["id"]);
-                        txtfund.Text = String.Format("{0} - {1}", fundsData["fund_code"], fundsData["fund_name"]);
-                    }
                     if (table.Equals("functions"))
                     {
                         var functionRepository = Factory.FunctionProgramProjectRepository();
@@ -95,40 +108,16 @@ namespace AccountingSystem.Views.Transactions.RCI
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        public void loadSelectedBank(int Id,string value)
-        {
-            bankId = Id;
-            txtbank.Text = value;
-        }
-
-        public void loadSelectedFund(int Id, string value)
-        {
-            fundsId = Id;
-            txtfund.Text = value;
-            
-        }
-
         public void loadSelectedFunction(int Id,string value)
         {
             functionId = Id;
             txtfunction.Text = value;
         }
-        
 
-        private void txtbank_DoubleClick(object sender, EventArgs e)
-        {
-            btncharge.PerformClick();
-        }
 
         private void btncharge_Click(object sender, EventArgs e)
         {
             _ = new frmFind(this, "banks").ShowDialog();
-        }
-
-        private void txtfund_DoubleClick(object sender, EventArgs e)
-        {
-
-             btnfund.PerformClick();
         }
 
         private void txtfunction_DoubleClick(object sender, EventArgs e)
@@ -156,25 +145,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtdvno, "disbursement no.!");
         }
 
-        private void txtfund_Validating(object sender, CancelEventArgs e)
-        {
-            if (!btnfund.Focused)
-            {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtfund, "funding.!");
-                if (fundsId <= 0)
-                {
-                    errorProvider.SetError(txtfund, "Please select funding!");                 
-                    e.Cancel = true;
-                }
-
-            }
-            else
-            {
-                e.Cancel = false;
-            }
-
-        }
-
         private void txtfunction_Validating(object sender, CancelEventArgs e)
         {
             if (!txtfunction.Focused)
@@ -192,25 +162,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             }
             
         }
-
-        private void txtbank_Validating(object sender, CancelEventArgs e)
-        {
-            if (!txtbank.Focused)
-            {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtbank, "bank.!");
-                if (bankId <= 0)
-                {
-                    errorProvider.SetError(txtbank, "Please select bank account!");
-                    e.Cancel = true;
-                }
-            }
-            else
-            {
-                e.Cancel = false;
-            }
-           
-        }
-
         private void txtcheckno_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtcheckno, "check no.!");
@@ -246,19 +197,10 @@ namespace AccountingSystem.Views.Transactions.RCI
             Helper.ClearErrorTextBox(errorProvider, txtdvno);
         }
 
-        private void txtfund_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider, txtfund);
-        }
-
+     
         private void txtfunction_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider, txtfunction);
-        }
-
-        private void txtbank_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider, txtbank);
         }
 
         private void txtcheckno_Validated(object sender, EventArgs e)
@@ -284,6 +226,26 @@ namespace AccountingSystem.Views.Transactions.RCI
         private void txttrust_Validated(object sender, EventArgs e)
         {
 
+        }
+
+        private void cmbfund_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider, cmbfund);
+        }
+
+        private void cmbfund_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbfund, "Fund!");
+        }
+
+        private void cmbbank_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider, cmbbank);
+        }
+
+        private void cmbbank_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbbank, "Bank!");
         }
     }
 }

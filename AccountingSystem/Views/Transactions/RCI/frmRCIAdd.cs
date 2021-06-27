@@ -22,7 +22,8 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void frmRCIAdd_Load(object sender, EventArgs e)
         {
-
+            ucrci1.LoadBanks();
+            ucrci1.LoadFunds();
         }
 
         private bool SaveData()
@@ -38,8 +39,8 @@ namespace AccountingSystem.Views.Transactions.RCI
 
                 var rciModel = new RCIModel()
                 {
-                    BankId = uc.bankId,
-                    FundsId = uc.fundsId,
+                    BankId = Convert.ToInt32(uc.cmbbank.SelectedValue),
+                    FundsId = Convert.ToInt32(uc.cmbfund.SelectedValue),
                     FunctionProgramProjectId = uc.functionId,
                     CheckNo = uc.txtcheckno.Text.Trim(),
                     CheckDate = Convert.ToDateTime(uc.dtcheckdate.Text.Trim()),
