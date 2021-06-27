@@ -74,7 +74,12 @@ namespace AccountingSystem.Views.Manage.Receipts
                 };
 
                 var rcRepository = Factory.ReceiptsRepository();
-                return rcRepository.Update(rModel);
+                if (Convert.ToInt16(uc.txtfrom.Text.Trim()) > Convert.ToInt16(uc.txtto.Text.Trim()))
+                {
+                    Helper.MessageBoxError("Invalid Receipt!");
+                    return false;
+                }
+                else return rcRepository.Update(rModel);
             }
             catch (Exception ex)
             {

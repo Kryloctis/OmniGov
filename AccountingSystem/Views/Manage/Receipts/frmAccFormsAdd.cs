@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                     uc.cmbforms.Focus();
                     return false;
                 }
-                else if (Convert.ToInt16(uc.txtto.Text.Trim()) > Convert.ToInt16(uc.txtfrom.Text.Trim()))
+                else if (Convert.ToInt16(uc.txtfrom.Text.Trim()) > Convert.ToInt16(uc.txtto.Text.Trim()))
                 {
                     Helper.MessageBoxError("Invalid Receipt!");
                     return false;
