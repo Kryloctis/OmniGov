@@ -295,6 +295,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 ORNo = uc.txtRCIORADA.Text.Trim()
             };
 
+
             return Factory.JEVRepository().UpdateWithGeneralJournal(jevModel, JevAcountsModelList(), generalJournalModel);
         }
 
@@ -338,6 +339,12 @@ namespace AccountingSystem.Views.Transactions.JEV
                     case "Authority to Debit Account Disbursement Journal":
                         return UpdateADADisbursementsJournal(userId, uc);
                 }
+
+
+                if (uc.journalId != uc.oldJournalId)
+                {
+
+                }
             }
             catch (Exception ex)
             {
@@ -363,7 +370,101 @@ namespace AccountingSystem.Views.Transactions.JEV
             if (UpdateData())
             {
                 Helper.MessageBoxSuccess("JEV has been saved.");
+
+                if (uc.journalId != uc.oldJournalId) //CHECK IF THE PREVIOUS JOURNAL ID IS NOT EQUAL TO NEW SELECTED JOURNAL ID
+                { 
+                    switch (uc.oldJournalId)
+                    {
+                        case 1:
+                            Factory.GeneralJournalRepository().DeleteGeneralJournalByJevID(uc.jevId);
+                            TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
+                            return;
+                        case 2:
+                            Factory.CashReceiptsJournalRepository().DeleteCashReceiptsJournalByJevID(uc.jevId);
+                            TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
+                            return;
+                        case 3:
+                            //Factory.GeneralJournalRepository().DeleteGeneralJournalByJevID(uc.jevId);
+                            return; 
+                        case 4:
+                            Factory.CashDisbursementsJournalRepository().DeleteCashDisbursementJournalByJevID(uc.jevId);
+                            TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
+                            return;
+                        case 5:
+                            Factory.CheckDisbursementsJournalRepository().DeleteCheckDisbursementJournalByJevID(uc.jevId);
+                            TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
+                            return; 
+                        case 6:
+                            //Factory.GeneralJournalRepository().DeleteGeneralJournalByJevID(uc.jevId);
+                            return;
+                    }
+
+                }
                 return;
+            }
+        }
+
+        private void TransferJournalToNewJournal()
+        {
+            var userId = Helper.UserId;
+            var uc = ucjev1;
+
+            switch (uc.journalId)
+            {
+                case 1:
+                    JEVModel jevModel = ParseJEVModelData(userId, uc);
+                    var generalJournalModel = new GeneralJournalModel()
+                    {
+                        JevId = uc.jevId,
+                        DVNo = uc.txtDVRCDNo.Text.Trim(),
+                        CheckNo = uc.txtCheckNo.Text.Trim(),
+                        ORNo = uc.txtRCIORADA.Text.Trim()
+                    };
+
+                    Factory.GeneralJournalRepository().Insert(generalJournalModel);
+                    return;
+                case 2:
+                    var cashReceiptsJournalModel = new CashReceiptsJournalModel()
+                    {
+                        JevId = uc.jevId,
+                        CollectingOfficerId = Convert.ToByte(uc.cmbCollectingDisbursingOfficer.SelectedValue),
+                        RCDNo = uc.txtDVRCDNo.Text.Trim(),
+                        ORNo = uc.txtRCIORADA.Text.Trim(),
+                        ORDate = uc.dtpCheckORPaid.Value
+                    };
+
+                    Factory.CashReceiptsJournalRepository().Insert(cashReceiptsJournalModel);
+                    return;
+                case 3:
+                    //DO NOTHING
+                    return;
+                case 4:
+                    var cashDisbursementsJournalModel = new CashDisbursementsJournalModel()
+                    {
+                        JevId = uc.jevId,
+                        DisbursingOfficerId = Convert.ToInt32(uc.cmbCollectingDisbursingOfficer.SelectedValue),
+                        DVNo = uc.txtDVRCDNo.Text.Trim(),
+                        DatePaid = uc.dtpCheckORPaid.Value
+                    };
+
+                    Factory.CashDisbursementsJournalRepository().Insert(cashDisbursementsJournalModel);
+                    return;
+                case 5:
+
+                    var checkDisbursementsModel = new CheckDisbursementsJournalModel()
+                    {
+                        JevId = uc.jevId,
+                        CheckDate = uc.dtpCheckORPaid.Value,
+                        CheckNo = uc.txtCheckNo.Text.Trim(),
+                        DVNo = uc.txtDVRCDNo.Text.Trim(),
+                        RCINo = uc.txtRCIORADA.Text.Trim()
+                    };
+
+                    Factory.CheckDisbursementsJournalRepository().Insert(checkDisbursementsModel);
+                    return;
+                case 6:
+                    //DO NOTHING
+                    return;
             }
         }
 

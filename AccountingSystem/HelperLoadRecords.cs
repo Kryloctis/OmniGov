@@ -1193,6 +1193,7 @@ namespace AccountingSystem
             datagrid.Columns["payee"].HeaderText = "Payee";
             datagrid.Columns["explanation"].HeaderText = "Explanation";
             datagrid.Columns["explanation"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["fund_code"].Visible = false;
             datagrid.Columns["is_approved"].Visible = false;
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["created_by"].Visible = false;
