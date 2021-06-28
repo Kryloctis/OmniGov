@@ -225,6 +225,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 errorProvider.SetError(txtreceipt, "Receipt No. invalid!");
                 e.Cancel = true;
             }
+            else if(Convert.ToInt32(txtreceipt.Text.Trim()) <= 0)
+            {
+                errorProvider.SetError(txtreceipt, "Receipt No. invalid!");
+                e.Cancel = true;
+            }
         }
 
         private void txtreceipt_Validated(object sender, EventArgs e)
@@ -391,7 +396,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 cmbforms.Enabled = true;
                 btnledger.Enabled = true;
                 txtpayee.Enabled = true;
-                txtreceipt.Enabled = true;
+                //txtreceipt.Enabled = true;
                 dtdate.Enabled = true;
                 txtamount.Enabled = true;
                 txtledger.Enabled = true;
