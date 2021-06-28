@@ -15,11 +15,70 @@ namespace AccountingSystem.Views.Transactions.JEV
         public ucJEVAccount()
         {
             InitializeComponent();
-
-            // validate if it has permission
-            if (!Helper.HasPermission("Manage Subsidiary Ledger Account"))
-                btnSubsidiaryLedger.Visible = false;
         }
+
+        //FPP
+        private DataTable DataTableFPP()
+        {
+            DataTable dtFPP;
+
+            if (string.IsNullOrEmpty(cmbFPP.Text))
+                dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
+            else
+                dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbFPP.Text);
+
+            return dtFPP;
+        }
+
+        internal void LoadFPP()
+        {
+            try
+            {
+                cmbFPP.DroppedDown = false;
+                Cursor.Current = Cursors.Default;
+
+                if (DataTableFPP().Rows.Count == 0) return;
+
+                var fppDict = new Dictionary<int, string>();
+                foreach (DataRow item in DataTableFPP().Rows)
+                {
+                    int fppId = Convert.ToInt32(item["id"]);
+                    string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
+
+                    fppDict.Add(fppId, fppName);
+                }
+
+                cmbFPP.DataSource = new BindingSource(fppDict, null);
+                cmbFPP.DisplayMember = "value";
+                cmbFPP.ValueMember = "key";
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        internal void cmbxFPP_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbFPP.Text))
+            {
+                cmbFPP.TextChanged -= new EventHandler(cmbxFPP_TextChanged);
+                LoadFPP();
+                cmbFPP.SelectedIndex = -1;
+                cmbFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
+            }
+        }
+
+        private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1 && cmbFPP.FindStringExact(cmbFPP.Text) == -1 && !string.IsNullOrEmpty(cmbFPP.Text))
+            {
+                LoadFPP();
+                cmbFPP.DroppedDown = true;
+            }
+        }
+
+
 
         internal string GetFormErrors()
         {
@@ -37,21 +96,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             nudAmount.Value = 0;
 
-        }
-
-        internal void LoadFPP()
-        {
-            try
-            {
-                DataTable dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
-
-                HelperLoadRecords.FPPComboBox(dtFPP, cmbFPP, "fpp_name", "id");
-                
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
         }
 
         internal void LoadSubsidiary(ushort generalLedgerId)
@@ -161,6 +205,16 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             ushort accountId = Convert.ToUInt16(cmbAccount.SelectedValue);
             _ = new frmSubsidiary(accountId).ShowDialog();
+        }
+
+        private void ucJEVAccount_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                // validate if it has permission
+                if (!Helper.HasPermission("Manage Subsidiary Ledger Account"))
+                    btnSubsidiaryLedger.Visible = false;
+            }
         }
     }
 }
