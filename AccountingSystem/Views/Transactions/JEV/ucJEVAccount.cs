@@ -172,9 +172,26 @@ namespace AccountingSystem.Views.Transactions.JEV
 
 
         //VALIDATIONS
+
+        private bool FPPNameNotExist() 
+        {
+            string fppName = cmbFPP.Text.Trim();
+
+            if (cmbFPP.FindStringExact(fppName) == -1 && !string.IsNullOrWhiteSpace(fppName)) 
+            {
+                epFPP.SetError(cmbFPP, "FPP you entered doesn't exist.");
+                return true;
+            }
+
+            return false;
+        }
+
         private void cmbFPP_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epFPP, cmbFPP, "FPP");
+            if (string.IsNullOrEmpty(cmbFPP.Text))
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epFPP, cmbFPP, "FPP");
+            else
+                e.Cancel = FPPNameNotExist();
         }
 
         private void cmbFPP_Validated(object sender, EventArgs e)
