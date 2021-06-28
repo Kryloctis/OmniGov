@@ -29,8 +29,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
         private void frmFind_Load(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(table))
-                if (table.Equals("accountable"))
-                    LoadList();
                 if (table.Equals("subsidiary"))
                     LoadList();
         }
@@ -41,12 +39,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
             {
                 if (!string.IsNullOrEmpty(table))
                 {
-                    if (table.Equals("accountable"))
-                    {
-                        var accRepository = Factory.AccountableRepository();
-                        var dtAcc = accRepository.GetRecords();
-                        HelperLoadRecords.AccFormDatagridView(dtAcc, dgSelect);
-                    }
                     if (table.Equals("ledger"))
                     {
                         var ledgerRepository = Factory.GeneralLedgerAccountsRepository();
@@ -69,18 +61,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
             if (txtsearch.Text.Length > 0)
             {
                 if (!string.IsNullOrEmpty(table))
-                {
-                    if (table.Equals("accountable"))
-                    {
-                        try
-                        {
-                            string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                            var dtAcc = Factory.AccountableRepository().GetRecordsBySearch(searchkey);
-                            HelperLoadRecords.AccFormDatagridView(dtAcc, dgSelect);
-
-                        }
-                        catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-                    }                    
+                {                  
                     if (table.Equals("subsidiary"))
                     {
                         try
@@ -118,11 +99,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
             {
                 foreach (DataGridViewRow row in dgSelect.SelectedRows)
                 {
-                    if (table.Equals("accountable"))
-                    {
-                        Id = Convert.ToInt16(row.Cells[0].Value.ToString());
-                        selectedValue = String.Format("{0} - {1}", row.Cells[1].Value, row.Cells[2].Value);
-                    }
                     if (table.Equals("ledger"))
                     {
                         Id = Convert.ToInt16(row.Cells[0].Value.ToString());
@@ -139,11 +115,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
         private bool Save()
         {
             bool saved = false;
-            if (table.Equals("accountable"))
-            {
-                frmpc.loadSelectedAccountable(Id, selectedValue);
-                saved = true;
-            }
             if (table.Equals("ledger"))
             {
                 frmpc.loadSelectedLedger(Id, selectedValue);

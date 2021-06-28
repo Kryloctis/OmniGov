@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
@@ -37,7 +38,7 @@ namespace ACC.Domain.Interfaces
 
         Dictionary<string, string> GetRecordByJEV(string jevNo);
 
-        bool JevNumberExist(string jevNo);
+        bool JevNumberAndYearExist(string jevNo, int jevEntryDate);
 
         bool JevNumberExist(string jevNo, int jevId);
 

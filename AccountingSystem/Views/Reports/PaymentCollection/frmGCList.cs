@@ -133,5 +133,10 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 _ = new frmCDReport(id).ShowDialog();
             }
         }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadGC();
+        }
     }
 }

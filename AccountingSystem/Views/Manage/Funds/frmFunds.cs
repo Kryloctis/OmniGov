@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Manage.Funds
                 var dtFunds = fundsRepository.GetRecords();
                 HelperLoadRecords.FundsDatagridView(dtFunds, dgFunds);
 
-                lblRecordCount.Text = fundsRepository.CountRecords().ToString();
+                lblRecordCount.Text = dgFunds.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -113,6 +113,11 @@ namespace AccountingSystem.Views.Manage.Funds
             {
                 LoadRecords();
             }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadRecords();
         }
     }
 }

@@ -15,26 +15,31 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
     public partial class ucPC : UserControl
     {
         internal int Id = 0;
+        internal int fundId = 0;
         internal int accId = 0;
         internal int glaId = 0;
         internal int slaId = 0;
         internal int userid = 0;
         internal bool withsubsidiary = false;
+        internal int minreceipt = 0;
+        internal int maxreceipt = 0;
+        internal int receipt = 0;
         public ucPC()
         {
             InitializeComponent();
         }
         internal string GetFormErrors()
         {
-            var errorArray = new string[8];
+            var errorArray = new string[9];
             errorArray[0] = errorProvider.GetError(cmbcollector);
-            errorArray[1] = errorProvider.GetError(txtaccountable);
-            errorArray[2] = errorProvider.GetError(txtledger);
-            errorArray[3] = errorProvider.GetError(txtpayee);
-            errorArray[4] = errorProvider.GetError(txtreceipt);
-            errorArray[5] = errorProvider.GetError(dtdate);
-            errorArray[6] = errorProvider.GetError(txtamount);
-            errorArray[7] = errorProvider.GetError(txtsubsidiary);
+            errorArray[1] = errorProvider.GetError(cmbfund);
+            errorArray[2] = errorProvider.GetError(cmbforms);
+            errorArray[3]= errorProvider.GetError(txtledger);
+            errorArray[4] = errorProvider.GetError(txtpayee);
+            errorArray[5] = errorProvider.GetError(txtreceipt);
+            errorArray[6] = errorProvider.GetError(dtdate);
+            errorArray[7] = errorProvider.GetError(txtamount);
+            errorArray[8] = errorProvider.GetError(txtsubsidiary);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -42,46 +47,34 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         internal void ResetForm()
         {
+            fundId = 0;
             accId = 0;
             glaId = 0;
             slaId = 0;
-            txtaccountable.Clear();
+            cmbforms.SelectedIndex = -1;
+            cmbfund.SelectedIndex = -1;
             txtledger.Clear();
             txtsubsidiary.Clear();
             txtpayee.Clear();
             txtreceipt.Clear();
             dtdate.Value = DateTime.Now;
             txtamount.Value = Convert.ToDecimal("0.00");
-        }
-        private void cmbcollector_SelectedIndexChanged(object sender, EventArgs e)
+            minreceipt = 0;
+            maxreceipt = 0;
+            receipt = 0;
+    }
+        internal void LoadForms(string id)
         {
-            if(cmbcollector.SelectedIndex == -1)
+            try
             {
-                txtaccountable.Enabled = false;
-                txtledger.Enabled = false;
-                txtsubsidiary.Enabled = false;
-                btnaccountable.Enabled = false;
-                btnledger.Enabled = false;
-                btnsubsidiary.Enabled = false;
-                txtpayee.Enabled = false;
-                txtreceipt.Enabled = false;
-                dtdate.Enabled = false;
-                txtamount.Enabled = false;
-                
+                var formRepository = Factory.ReceiptsIssuedRepository();
+                var dtforms = formRepository.GetRecordsReceipts(id);
+                dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
+                cmbforms.DataSource = dtforms;
+                cmbforms.ValueMember = "id";
+                cmbforms.DisplayMember = "formdisplay";
             }
-            else
-            {
-                txtaccountable.Enabled = true;
-                txtledger.Enabled = true;
-               // txtsubsidiary.Enabled = true;
-                btnaccountable.Enabled = true;
-                btnledger.Enabled = true;
-              //  btnsubsidiary.Enabled = true;
-                txtpayee.Enabled = true;
-                txtreceipt.Enabled = true;
-                dtdate.Enabled = true;
-                txtamount.Enabled = true;
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
         internal void setSelectedValue(int Id, string table)
         {
@@ -90,13 +83,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 if (!string.IsNullOrEmpty(table) || Id > 0)
                 {
-                    if (table.Equals("accountable"))
-                    {
-                        var accRepository = Factory.AccountableRepository();
-                        var accData = accRepository.GetRecordByID(Id);
-                        accId = Id;
-                        txtaccountable.Text = String.Format("{0} - {1}", accData["acc_form_no"], accData["acc_form_desc"]);
-                    }
                     if (table.Equals("ledger"))
                     {
                         var ledgerRepository = Factory.GeneralLedgerAccountsRepository();
@@ -138,14 +124,39 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 cmbcollector.DisplayMember = "fullname";
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
+        }    
 
-        public void loadSelectedAccountable(int Id, string value)
+        internal bool isbetween(int num)
         {
-            accId = Id;
-            txtaccountable.Text = value;
+            return num >= minreceipt && num <= maxreceipt;
         }
 
+        internal void LoadFunds()
+        {
+            try
+            {
+                var fundRepository = Factory.FundsRepository();
+                var dtFund = fundRepository.GetRecords();
+                dtFund.Columns.Add("funddisplay", typeof(string), "fund_code + ' - ' + fund_name");
+                cmbfund.DataSource = dtFund;
+                cmbfund.ValueMember = "id";
+                cmbfund.DisplayMember = "funddisplay";
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+        internal void LoadForms()
+        {
+            try
+            {
+                var formRepository = Factory.AccountableRepository();
+                var dtforms = formRepository.GetRecords();
+                dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
+                cmbforms.DataSource = dtforms;
+                cmbforms.ValueMember = "id";
+                cmbforms.DisplayMember = "formdisplay";
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
         public void loadSelectedLedger(int Id, string value)
         {
             glaId = Id;
@@ -166,12 +177,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             _ = new frmFind(this, "ledger").ShowDialog();
         }
-
-        private void txtaccountable_DoubleClick(object sender, EventArgs e)
-        {
-            btnaccountable.PerformClick();
-        }
-
         private void txtledger_DoubleClick(object sender, EventArgs e)
         {
             btnledger.PerformClick();
@@ -190,16 +195,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void cmbcollector_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbcollector, "Collecting Officer!");
-        }
-
-        private void txtaccountable_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtaccountable, "Accountable Form!");
-        }
-
-        private void txtaccountable_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider, txtaccountable);
         }
 
         private void txtledger_Validating(object sender, CancelEventArgs e)
@@ -225,6 +220,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void txtreceipt_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtreceipt, "Receipt No!");
+            if (!isbetween(Convert.ToInt32(txtreceipt.Text.Trim())))
+            {
+                errorProvider.SetError(txtreceipt, "Receipt No. invalid!");
+                e.Cancel = true;
+            }
         }
 
         private void txtreceipt_Validated(object sender, EventArgs e)
@@ -239,9 +239,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void txtsubsidiary_Validating(object sender, CancelEventArgs e)
         {
-            /*var subRepository = Factory.SubsidiaryLedgerAccountsRepository();
-            bool isubsidiary = subRepository.HasSubsidiary(Convert.ToUInt16(glaId));
-            */
             if (withsubsidiary)
             {
                 e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtsubsidiary, "Subsidiary!");
@@ -272,6 +269,158 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     txtsubsidiary.Clear();
                     slaId = 0;
                 }
+            }
+        }
+
+        private void cmbfund_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbfund, "Funds!");
+        }
+
+        private void cmbfund_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider, cmbfund);
+        }
+
+        private void cmbforms_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider, cmbforms);
+        }
+
+        private void cmbforms_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbforms, "Accountable Forms!");
+        }
+
+        private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbforms.SelectedIndex != -1 && cmbforms.Focused)
+            {
+                if (Id <= 0)
+                {
+                    try
+                    {
+                        var rcRepository = Factory.ReceiptsIssuedRepository();
+                        var dtrc = rcRepository.GetRecords(cmbcollector.SelectedValue.ToString(), cmbforms.SelectedValue.ToString());
+                        if (dtrc.Rows.Count > 0)
+                        {
+                            int receiptto = 0;
+                            int receiptlast = 0;
+                            for (int i = 0; i < dtrc.Rows.Count; i++)
+                            {
+                                receiptto = Convert.ToInt32(dtrc.Rows[i]["receiptsto"]);
+                                maxreceipt = Convert.ToInt32(dtrc.Rows[i]["receiptsto"]);
+                                minreceipt = Convert.ToInt32(dtrc.Rows[i]["receiptsfrom"]);
+                                receiptlast = dtrc.Rows[i]["last_issued"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtrc.Rows[i]["last_issued"]);
+
+                            }
+                            if (receiptto.Equals(receiptlast))
+                                txtreceipt.Text = "0";
+                            else
+                            {
+                                if (receiptlast < minreceipt)
+                                    txtreceipt.Text = minreceipt.ToString();
+                                else if (receiptlast.Equals(minreceipt))
+                                    txtreceipt.Text = (receiptlast + 1).ToString();
+                                else
+                                    txtreceipt.Text = (receiptlast + 1).ToString();
+                            }
+
+                        }
+                        else
+                        {
+                            txtreceipt.Text = "0";
+                        }
+                    }
+                    catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+                }
+                else
+                {
+                    if (accId != Convert.ToInt32(cmbforms.SelectedValue))
+                    {
+                        try
+                        {
+                            var rcRepository = Factory.ReceiptsIssuedRepository();
+                            var dtrc = rcRepository.GetRecords(cmbcollector.SelectedValue.ToString(), cmbforms.SelectedValue.ToString());
+                            if (dtrc.Rows.Count > 0)
+                            {
+                                int receiptto = 0;
+                                int receiptlast = 0;
+                                for (int i = 0; i < dtrc.Rows.Count; i++)
+                                {
+
+                                    receiptto = Convert.ToInt32(dtrc.Rows[i]["receiptsto"]);
+                                    maxreceipt = Convert.ToInt32(dtrc.Rows[i]["receiptsto"]);
+                                    minreceipt = Convert.ToInt32(dtrc.Rows[i]["receiptsfrom"]);
+                                    receiptlast = dtrc.Rows[i]["last_issued"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtrc.Rows[i]["last_issued"]);
+                                }
+                                if (receiptto.Equals(receiptlast))
+                                    txtreceipt.Text = "0";
+                                else
+                                {
+                                    if (receiptlast < minreceipt)
+                                        txtreceipt.Text = minreceipt.ToString();
+                                    else if (receiptlast.Equals(minreceipt))
+                                        txtreceipt.Text = (receiptlast + 1).ToString();
+                                    else
+                                        txtreceipt.Text = (receiptlast + 1).ToString();
+                                }
+
+                            }
+                            else
+                            {
+                                txtreceipt.Text = "0";
+                            }
+                        }
+                        catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+                    }
+                    else
+                    {
+                        txtreceipt.Text = receipt.ToString();
+                    }
+                }
+                
+            }
+        }
+
+        private void cmbcollector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cmbcollector.SelectedIndex != -1)
+            {
+                cmbfund.Enabled = true;
+                cmbforms.Enabled = true;
+                btnledger.Enabled = true;
+                txtpayee.Enabled = true;
+                txtreceipt.Enabled = true;
+                dtdate.Enabled = true;
+                txtamount.Enabled = true;
+                txtledger.Enabled = true;
+                btnledger.Enabled = true;
+                txtsubsidiary.Enabled = true;
+                btnsubsidiary.Enabled = true;
+            }
+            else
+            {
+                cmbfund.Enabled = false;
+                cmbforms.Enabled = false;
+                btnledger.Enabled = false;
+                txtpayee.Enabled = false;
+                txtreceipt.Enabled = false;
+                dtdate.Enabled = false;
+                txtamount.Enabled = false;
+                txtledger.Enabled = false;
+                btnledger.Enabled = false;
+                txtsubsidiary.Enabled = false;
+                btnsubsidiary.Enabled = false;
+            }
+        }
+
+        private void txtreceipt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+
             }
         }
     }

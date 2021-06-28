@@ -42,7 +42,8 @@ namespace AccountingSystem.Views.Manage.Funds
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.dgFunds = new System.Windows.Forms.DataGridView();
-            this.txtsearch = new System.Windows.Forms.ToolStripTextBox();
+            this.txtsearch = new System.Windows.Forms.TextBox();
+            this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFunds)).BeginInit();
@@ -113,7 +114,7 @@ namespace AccountingSystem.Views.Manage.Funds
             this.btnAdd,
             this.btnEdit,
             this.btnDelete,
-            this.txtsearch});
+            this.btnRefresh});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(5);
@@ -168,23 +169,38 @@ namespace AccountingSystem.Views.Manage.Funds
             this.dgFunds.RowHeadersWidth = 51;
             this.dgFunds.RowTemplate.Height = 29;
             this.dgFunds.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgFunds.Size = new System.Drawing.Size(773, 439);
+            this.dgFunds.Size = new System.Drawing.Size(777, 439);
             this.dgFunds.TabIndex = 6;
             this.dgFunds.SelectionChanged += new System.EventHandler(this.dgFunds_SelectionChanged);
             // 
             // txtsearch
             // 
-            this.txtsearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtsearch.Location = new System.Drawing.Point(452, 18);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.Size = new System.Drawing.Size(300, 55);
-            this.txtsearch.Text = "Search...";
+            this.txtsearch.PlaceholderText = "Search...";
+            this.txtsearch.Size = new System.Drawing.Size(335, 27);
+            this.txtsearch.TabIndex = 11;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.refresh;
+            this.btnRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(62, 52);
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // frmFunds
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(799, 535);
+            this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.dgFunds);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
@@ -220,6 +236,7 @@ namespace AccountingSystem.Views.Manage.Funds
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnDelete;
 		private System.Windows.Forms.DataGridView dgFunds;
-        private System.Windows.Forms.ToolStripTextBox txtsearch;
+        private System.Windows.Forms.TextBox txtsearch;
+        private System.Windows.Forms.ToolStripButton btnRefresh;
     }
 }

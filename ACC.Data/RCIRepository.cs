@@ -238,5 +238,20 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public DataTable GetRecords(int id)
+        {
+            try
+            {
+                string query = $"SELECT {tableName}.id,{tableName2}.account_no,{tableName2}.bank_name,{tableName}.check_date,{tableName}.check_no,{tableName}.dv_no,{tableName}.payee,{tableName}.nature_of_payment,{tableName}.obligation_no,{tableName4}.fpp_code,{tableName}.trust_liabilities,{tableName}.bir_vat_nonvat,{tableName}.amount,{tableName}.amount-{tableName}.bir_vat_nonvat AS netamount,{tableName}.created_at,{tableName}.updated_at FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.banks_id LEFT JOIN {tableName3} ON {tableName3}.id={tableName}.funds_id LEFT JOIN {tableName4} ON {tableName4}.id={tableName}.function_program_project_id LEFT JOIN {tableName5} ON {tableName5}.id={tableName4}.functional_classification_services_id LEFT JOIN {tableName6} ON {tableName6}.id={tableName5}.functional_classifications_id WHERE {tableName}.banks_id='{id}'";
+
+                var dtRCI = new DataTable();
+                return _dbGenericCommands.Fill(query, dtRCI);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

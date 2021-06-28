@@ -11,5 +11,6 @@ namespace ACC.Domain.Models
         public string ReportNo { get; set; }
         public DateTime Date { get; set; }
         public int Approved { get; set; }
+        public int Fid { get; set; }
     }
 }
