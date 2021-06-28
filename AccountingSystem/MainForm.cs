@@ -27,6 +27,9 @@ using AccountingSystem.Views.Transactions.PaymentCollection;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Manage.AllotmentRelease;
 using AccountingSystem.Views.Reports.RCD;
+using AccountingSystem.Views.Manage.Receipts;
+using AccountingSystem.Views.Transactions.ReceiptsIssued;
+using AccountingSystem.Views.Reports.Cashbook;
 
 namespace AccountingSystem
 {
@@ -379,6 +382,21 @@ namespace AccountingSystem
         private void menuprintGC_Click(object sender, EventArgs e)
         {
             _ = new frmPCReport().ShowDialog();
+        }
+
+        private void menureceipts_Click(object sender, EventArgs e)
+        {
+            _ = new frmAccForms().ShowDialog();
+        }
+
+        private void menureceiptsissued_Click(object sender, EventArgs e)
+        {
+            _ = new frmReceipts().ShowDialog();
+        }
+
+        private void menucashbook_Click(object sender, EventArgs e)
+        {
+            _ = new frmCashbook().ShowDialog();
         }
     }
 }

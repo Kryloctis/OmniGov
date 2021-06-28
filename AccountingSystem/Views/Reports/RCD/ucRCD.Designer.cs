@@ -44,6 +44,8 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnclear = new System.Windows.Forms.Button();
             this.btndelete = new System.Windows.Forms.Button();
             this.txttotal = new System.Windows.Forms.TextBox();
+            this.cmbfund = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvpayments)).BeginInit();
             this.SuspendLayout();
@@ -60,7 +62,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 53);
+            this.label2.Location = new System.Drawing.Point(11, 87);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(85, 20);
             this.label2.TabIndex = 1;
@@ -69,7 +71,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 88);
+            this.label3.Location = new System.Drawing.Point(11, 122);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 20);
             this.label3.TabIndex = 2;
@@ -88,7 +90,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // txtreport
             // 
-            this.txtreport.Location = new System.Drawing.Point(105, 50);
+            this.txtreport.Location = new System.Drawing.Point(105, 84);
             this.txtreport.MaxLength = 20;
             this.txtreport.Name = "txtreport";
             this.txtreport.Size = new System.Drawing.Size(407, 27);
@@ -98,7 +100,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // dtdate
             // 
-            this.dtdate.Location = new System.Drawing.Point(105, 83);
+            this.dtdate.Location = new System.Drawing.Point(105, 117);
             this.dtdate.Name = "dtdate";
             this.dtdate.Size = new System.Drawing.Size(407, 27);
             this.dtdate.TabIndex = 2;
@@ -121,11 +123,11 @@ namespace AccountingSystem.Views.Reports.RCD
             // dgvpayments
             // 
             this.dgvpayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvpayments.Location = new System.Drawing.Point(11, 121);
+            this.dgvpayments.Location = new System.Drawing.Point(11, 155);
             this.dgvpayments.Name = "dgvpayments";
             this.dgvpayments.RowHeadersWidth = 51;
             this.dgvpayments.RowTemplate.Height = 29;
-            this.dgvpayments.Size = new System.Drawing.Size(1007, 506);
+            this.dgvpayments.Size = new System.Drawing.Size(1007, 472);
             this.dgvpayments.TabIndex = 5;
             this.dgvpayments.SelectionChanged += new System.EventHandler(this.dgvpayments_SelectionChanged);
             // 
@@ -143,7 +145,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnadd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnadd.Image = global::AccountingSystem.Properties.Resources.rcd1;
             this.btnadd.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnadd.Location = new System.Drawing.Point(759, 69);
+            this.btnadd.Location = new System.Drawing.Point(759, 103);
             this.btnadd.Name = "btnadd";
             this.btnadd.Size = new System.Drawing.Size(80, 46);
             this.btnadd.TabIndex = 8;
@@ -157,7 +159,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnclear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnclear.Image = global::AccountingSystem.Properties.Resources.clear;
             this.btnclear.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnclear.Location = new System.Drawing.Point(935, 69);
+            this.btnclear.Location = new System.Drawing.Point(935, 103);
             this.btnclear.Name = "btnclear";
             this.btnclear.Size = new System.Drawing.Size(84, 46);
             this.btnclear.TabIndex = 9;
@@ -171,7 +173,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btndelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btndelete.Image = global::AccountingSystem.Properties.Resources.remove;
             this.btndelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btndelete.Location = new System.Drawing.Point(845, 69);
+            this.btndelete.Location = new System.Drawing.Point(845, 103);
             this.btndelete.Name = "btndelete";
             this.btndelete.Size = new System.Drawing.Size(84, 46);
             this.btndelete.TabIndex = 10;
@@ -190,10 +192,32 @@ namespace AccountingSystem.Views.Reports.RCD
             this.txttotal.Text = "0.00";
             this.txttotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // cmbfund
+            // 
+            this.cmbfund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbfund.FormattingEnabled = true;
+            this.cmbfund.Location = new System.Drawing.Point(105, 50);
+            this.cmbfund.Name = "cmbfund";
+            this.cmbfund.Size = new System.Drawing.Size(407, 28);
+            this.cmbfund.TabIndex = 12;
+            this.cmbfund.Validating += new System.ComponentModel.CancelEventHandler(this.cmbfund_Validating);
+            this.cmbfund.Validated += new System.EventHandler(this.cmbfund_Validated);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(11, 53);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(48, 20);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Fund :";
+            // 
             // ucRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.cmbfund);
             this.Controls.Add(this.txttotal);
             this.Controls.Add(this.btndelete);
             this.Controls.Add(this.btnclear);
@@ -233,5 +257,7 @@ namespace AccountingSystem.Views.Reports.RCD
         internal System.Windows.Forms.Button btnclear;
         internal System.Windows.Forms.Button btndelete;
         internal System.Windows.Forms.TextBox txttotal;
+        private System.Windows.Forms.Label label5;
+        internal System.Windows.Forms.ComboBox cmbfund;
     }
 }

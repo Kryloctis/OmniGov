@@ -110,7 +110,17 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string query = $"SELECT id, CONCAT(`first_name`, ' ', `mid_initial`, ' ', `last_name`) as fullname,job_title, created_at, updated_at FROM {tableName} WHERE CONCAT(`first_name`, ' ', `mid_initial`, ' ', `last_name`) LIKE '%{searchText}%' OR job_title LIKE '%{searchText}%'";
+
+                var dtFunds = new DataTable();
+                return _dbGenericCommands.Fill(query, dtFunds);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool IdExist(int id)

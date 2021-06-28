@@ -9,5 +9,6 @@ namespace ACC.Domain.Interfaces
     public interface IRCIRepository:IRepository<RCIModel>
     {
         DataTable GetRecordsbyaccountid(int Id,string month);
+        DataTable GetRecords(int id);
     }
 }

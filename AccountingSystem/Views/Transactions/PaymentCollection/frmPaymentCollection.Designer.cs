@@ -33,6 +33,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.btnrefresh = new System.Windows.Forms.ToolStripButton();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -47,9 +48,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.lblUpdatedBy = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtsearch = new System.Windows.Forms.TextBox();
             this.dgpayments = new System.Windows.Forms.DataGridView();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.dtpdate = new System.Windows.Forms.DateTimePicker();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgpayments)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -59,7 +63,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAdd,
             this.btnEdit,
-            this.btnDelete});
+            this.btnDelete,
+            this.btnrefresh});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(5);
@@ -101,6 +106,17 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnrefresh
+            // 
+            this.btnrefresh.Image = global::AccountingSystem.Properties.Resources.refresh;
+            this.btnrefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnrefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnrefresh.Name = "btnrefresh";
+            this.btnrefresh.Size = new System.Drawing.Size(62, 52);
+            this.btnrefresh.Text = "Refresh";
+            this.btnrefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnrefresh.Click += new System.EventHandler(this.btnrefresh_Click);
             // 
             // statusStrip
             // 
@@ -188,10 +204,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // txtsearch
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(888, 21);
+            this.txtsearch.Location = new System.Drawing.Point(8, 8);
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.PlaceholderText = "Search...";
-            this.txtsearch.Size = new System.Drawing.Size(316, 27);
+            this.txtsearch.Size = new System.Drawing.Size(550, 27);
             this.txtsearch.TabIndex = 11;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
@@ -201,21 +217,42 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgpayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgpayments.Location = new System.Drawing.Point(12, 68);
+            this.dgpayments.Location = new System.Drawing.Point(12, 121);
             this.dgpayments.Name = "dgpayments";
             this.dgpayments.RowHeadersWidth = 51;
             this.dgpayments.RowTemplate.Height = 29;
-            this.dgpayments.Size = new System.Drawing.Size(1188, 644);
+            this.dgpayments.Size = new System.Drawing.Size(1188, 591);
             this.dgpayments.TabIndex = 12;
+            this.dgpayments.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgpayments_CellDoubleClick);
             this.dgpayments.SelectionChanged += new System.EventHandler(this.dgpayments_SelectionChanged);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanel1.Controls.Add(this.txtsearch);
+            this.flowLayoutPanel1.Controls.Add(this.dtpdate);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 69);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(5);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1188, 46);
+            this.flowLayoutPanel1.TabIndex = 13;
+            // 
+            // dtpdate
+            // 
+            this.dtpdate.Location = new System.Drawing.Point(564, 8);
+            this.dtpdate.Name = "dtpdate";
+            this.dtpdate.Size = new System.Drawing.Size(408, 27);
+            this.dtpdate.TabIndex = 12;
+            this.dtpdate.ValueChanged += new System.EventHandler(this.dtpdate_ValueChanged);
             // 
             // frmPaymentCollection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1216, 749);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.dgpayments);
-            this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip);
             this.MaximizeBox = false;
@@ -228,6 +265,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgpayments)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -253,5 +292,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel7;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedBy;
         private System.Windows.Forms.DataGridView dgpayments;
+        private System.Windows.Forms.ToolStripButton btnrefresh;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.DateTimePicker dtpdate;
     }
 }

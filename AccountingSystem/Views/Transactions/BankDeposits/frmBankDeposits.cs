@@ -107,5 +107,10 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 _ = new frmBankDepositsEdit(this, Id).ShowDialog();
             }
         }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
     }
 }

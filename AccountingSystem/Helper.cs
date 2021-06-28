@@ -11,7 +11,7 @@ namespace AccountingSystem
 {
     public class Helper
     {
-        internal static byte UserId;
+        internal static byte UserId = 2;
 
         public static void LoadFormIcon(Form form)
         {

@@ -40,6 +40,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtsearch = new System.Windows.Forms.TextBox();
             this.dgrcd = new System.Windows.Forms.DataGridView();
+            this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgrcd)).BeginInit();
@@ -53,7 +54,8 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnAdd,
             this.btnEdit,
             this.btnDelete,
-            this.btnRCD});
+            this.btnRCD,
+            this.btnRefresh});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(5);
@@ -165,6 +167,17 @@ namespace AccountingSystem.Views.Reports.RCD
             this.dgrcd.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrcd_CellDoubleClick);
             this.dgrcd.SelectionChanged += new System.EventHandler(this.dgrcd_SelectionChanged);
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.refresh;
+            this.btnRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(62, 52);
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // frmRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -202,5 +215,6 @@ namespace AccountingSystem.Views.Reports.RCD
         private System.Windows.Forms.TextBox txtsearch;
         private System.Windows.Forms.DataGridView dgrcd;
         private System.Windows.Forms.ToolStripButton btnRCD;
+        private System.Windows.Forms.ToolStripButton btnRefresh;
     }
 }

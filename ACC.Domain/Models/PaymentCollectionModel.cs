@@ -8,6 +8,7 @@ namespace ACC.Domain.Models
     {
         public int Id { get; set; }
         public int CoId { get; set; }
+        public int FId { get; set; }
         public int AccId { get; set; }
         public int GlaId { get; set; }
         public int SlaId { get; set; }

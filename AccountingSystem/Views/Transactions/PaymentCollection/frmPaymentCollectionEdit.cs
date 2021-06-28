@@ -14,17 +14,21 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
     public partial class frmPaymentCollectionEdit : Form
     {
         private frmPaymentCollection _frmpc;
+        private string receipt = string.Empty;
         public frmPaymentCollectionEdit(frmPaymentCollection frmpc,int Id)
         {
             InitializeComponent();
             _frmpc = frmpc;
             ucpc1.Id = Id;
             ucpc1.userid = Helper.UserId;
+           
         }
 
         private void frmPaymentCollectionEdit_Load(object sender, EventArgs e)
         {
+            ucpc1.LoadForms();
             ucpc1.LoadCollectors();
+            ucpc1.LoadFunds();
             LoadSelectedValue();
         }
 
@@ -37,13 +41,17 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 var pcRepository = Factory.PaymentCollectionRepository();
                 var pcData = pcRepository.GetRecordByID(uc.Id);
                 uc.cmbcollector.SelectedValue = pcData["collecting_officers_id"];
-                uc.setSelectedValue(Convert.ToInt16(pcData["accountable_forms_id"]), "accountable");
-                uc.setSelectedValue(Convert.ToInt16(pcData["general_ledger_accounts_id"]), "ledger");
-                uc.setSelectedValue(Convert.ToInt16(pcData["subsidiary_ledger_accounts_id"] == string.Empty ? 0: pcData["subsidiary_ledger_accounts_id"]), "subsidiary");
+                uc.cmbfund.SelectedValue = pcData["funds_id"];
+                uc.cmbforms.SelectedValue = pcData["accountable_forms_id"];
+                uc.setSelectedValue(Convert.ToInt32(pcData["general_ledger_accounts_id"]), "ledger");
+                uc.setSelectedValue(Convert.ToInt32(pcData["subsidiary_ledger_accounts_id"] == string.Empty ? 0: pcData["subsidiary_ledger_accounts_id"]), "subsidiary");
                 uc.txtpayee.Text = pcData["payee"];
                 uc.txtreceipt.Text = pcData["receipt_no"];
                 uc.dtdate.Value = Convert.ToDateTime(pcData["payment_date"]);
                 uc.txtamount.Value = Convert.ToDecimal(pcData["amount"]);
+                receipt = pcData["receipt_no"];
+                uc.accId = Convert.ToInt32(pcData["accountable_forms_id"]);
+                uc.receipt = Convert.ToInt32(pcData["receipt_no"]);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -61,8 +69,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 var pcModel = new PaymentCollectionModel()
                 {
                     Id = uc.Id,
-                    CoId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
-                    AccId = uc.accId,
+                    CoId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
+                    FId = Convert.ToInt32(uc.cmbfund.SelectedValue),
+                    AccId = Convert.ToInt32(uc.cmbforms.SelectedValue),
                     GlaId = uc.glaId,
                     SlaId = uc.slaId,
                     Payee = uc.txtpayee.Text.Trim(),
@@ -73,7 +82,35 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 };
 
                 var pcrepository = Factory.PaymentCollectionRepository();
-                return pcrepository.Update(pcModel);
+                if (!receipt.Equals(uc.txtreceipt.Text.Trim()))
+                {
+                    if (pcrepository.Update(pcModel))
+                    {
+                        var riRepository = Factory.ReceiptsIssuedRepository();
+                        var rcRepository = Factory.ReceiptsRepository();
+                        var dtri = riRepository.GetRecords(uc.cmbcollector.SelectedValue.ToString(), uc.cmbforms.SelectedValue.ToString());
+                        if (dtri.Rows.Count > 0)
+                        {
+                            int rid = 0;
+                            for (int i = 0; i < dtri.Rows.Count; i++)
+                            {
+                                rid = Convert.ToInt32(dtri.Rows[i]["id"]);
+                            }
+                            var rcModel = new ReceiptsModel()
+                            {
+                                Id = rid,
+                                Last_issued = Convert.ToInt32(uc.txtreceipt.Text.Trim())
+                            };
+                            return rcRepository.UpdateCurrentIssued(rcModel);
+                        }
+                    }                       
+                    else return false;
+                }
+                else
+                {
+                    return pcrepository.Update(pcModel);
+                }
+                
             }
             catch (Exception ex)
             {

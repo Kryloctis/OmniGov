@@ -17,6 +17,9 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         public frmCollectingOfficer()
         {
             InitializeComponent();
+            WindowState = FormWindowState.Normal;
+            Helper.LoadFormIcon(this);
+            Helper.DatagridDefaultStyle(dgCollectingOfficer);
         }
         internal void LoadRecords()
         {
@@ -26,15 +29,12 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 var dt = repository.GetRecords();
                 HelperLoadRecords.CollectingOfficerDatagridView(dt, dgCollectingOfficer);
 
-                lblRecordCount.Text = repository.CountRecords().ToString();
+                lblRecordCount.Text = dgCollectingOfficer.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
         private void frmCollectingOfficer_Load(object sender, EventArgs e)
-        {
-            WindowState = FormWindowState.Normal;
-            Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgCollectingOfficer);
+        {           
             LoadRecords();
         }
 
@@ -86,6 +86,34 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             byte[] columnIndexTimestamp = { 3, 4 };
             Helper.ShowRecordTimestamp(dgCollectingOfficer, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgCollectingOfficer, btnEdit, btnDelete);
+        }
+
+        private void txtsearch_TextChanged(object sender, EventArgs e)
+        {
+            if(txtsearch.Text.Length > 0)
+            {
+                try
+                {
+                    var repository = Factory.CollectingOfficerRepository();
+                    var dt = repository.GetRecordsBySearch(txtsearch.Text.Trim());
+                    HelperLoadRecords.CollectingOfficerDatagridView(dt, dgCollectingOfficer);
+
+                    lblRecordCount.Text = dgCollectingOfficer.Rows.Count.ToString();
+                }
+                catch (Exception ex)
+                {
+                    Helper.MessageBoxError(ex.Message);
+                }
+            }
+            else
+            {
+                LoadRecords();
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadRecords();
         }
     }
 }

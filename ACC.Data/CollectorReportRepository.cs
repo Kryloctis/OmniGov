@@ -15,6 +15,7 @@ namespace ACC.Data
         private readonly string tableName2 = "collecting_officers";
         private readonly string tableName3 = "collector_report_payments";
         private readonly string tableName4 = "payment_collections";
+        private readonly string tableName5 = "funds";
 
         public CollectorReportRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -43,6 +44,7 @@ namespace ACC.Data
                     record.Add("report_no", reader.Rows[0]["report_no"].ToString());
                     record.Add("date", reader.Rows[0]["date"].ToString());
                     record.Add("is_approved", reader.Rows[0]["is_approved"].ToString());
+                    record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
                 }
             }
             catch (Exception)
@@ -75,6 +77,7 @@ namespace ACC.Data
                     record.Add("report_no", reader.Rows[0]["report_no"].ToString());
                     record.Add("date", reader.Rows[0]["date"].ToString());
                     record.Add("is_approved", reader.Rows[0]["is_approved"].ToString());
+                    record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
                 }
             }
             catch (Exception)
@@ -89,7 +92,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableName}.id,{tableName}.report_no,{tableName}.date,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector,(SELECT SUM({tableName4}.amount) FROM {tableName3} LEFT JOIN {tableName4} ON {tableName3}.payment_collections_id={tableName4}.id AND {tableName3}.collector_report_id={tableName}.id) AS colamount,{tableName}.is_approved FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id ORDER BY {tableName}.date DESC";
+                string query = $"SELECT {tableName}.id,{tableName}.report_no,({tableName5}.fund_code,'-',{tableName5}.fund_name) AS fund,{tableName}.date,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector,(SELECT SUM({tableName4}.amount) FROM {tableName3} LEFT JOIN {tableName4} ON {tableName3}.payment_collections_id={tableName4}.id AND {tableName3}.collector_report_id={tableName}.id) AS colamount,{tableName}.is_approved FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id LEFT JOIN {tableName5} ON {tableName}.funds_id={tableName5}.id ORDER BY {tableName}.date DESC";
 
                 var dtcr = new DataTable();
                 return _dbGenericCommands.Fill(query, dtcr);
@@ -111,9 +114,10 @@ namespace ACC.Data
                     new object[] { "@report_no", DbType.String, entity.ReportNo},
                     new object[] { "@date", DbType.Date, entity.Date},
                     new object[] { "@is_approved", DbType.Int16, entity.Approved},
+                    new object[] { "@funds_id", DbType.Int16, entity.Fid}
                 };
 
-                string query = $"INSERT INTO {tableName} (collecting_officers_id,report_no,date,is_approved) VALUES (@collecting_officers_id,@report_no,@date,@is_approved)";
+                string query = $"INSERT INTO {tableName} (collecting_officers_id,report_no,date,is_approved,funds_id) VALUES (@collecting_officers_id,@report_no,@date,@is_approved,@funds_id)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -132,9 +136,10 @@ namespace ACC.Data
                     new object[] { "@report_no", DbType.String, entity.ReportNo},
                     new object[] { "@date", DbType.Date, entity.Date},
                     new object[] { "@is_approved", DbType.Int16, entity.Approved},
+                    new object[] { "@funds_id", DbType.Int16, entity.Fid}
                 };
 
-                string query = $"INSERT INTO {tableName} (collecting_officers_id,report_no,date,is_approved) VALUES (@collecting_officers_id,@report_no,@date,@is_approved)";
+                string query = $"INSERT INTO {tableName} (collecting_officers_id,report_no,date,is_approved,funds_id) VALUES (@collecting_officers_id,@report_no,@date,@is_approved,@funds_id)";
                 return _dbGenericCommands.ExecuteNonQueryId(query, parameters);
             }
             catch (Exception)
@@ -154,9 +159,10 @@ namespace ACC.Data
                     new object[] { "@report_no", DbType.String, entity.ReportNo},
                     new object[] { "@date", DbType.Date, entity.Date},
                     new object[] { "@is_approved", DbType.Int16, entity.Approved},
+                    new object[] { "@funds_id", DbType.Int16, entity.Fid}
                 };
 
-                string query = $"UPDATE {tableName} SET collecting_officers_id=@collecting_officers_id,report_no=@report_no,date=@date,is_approved=@is_approved WHERE id=@id";
+                string query = $"UPDATE {tableName} SET collecting_officers_id=@collecting_officers_id,report_no=@report_no,date=@date,is_approved=@is_approved,funds_id=@funds_id WHERE id=@id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -275,13 +281,36 @@ namespace ACC.Data
             return false;
         }
 
+        public bool HasReported(int id)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@payment_collections_id", DbType.Int16, id },
+                };
+
+                string query = $"SELECT * FROM {tableName3} WHERE payment_collections_id = @payment_collections_id";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
+
         public DataTable GetRecordsBySearch(string searchText)
         {
             try
             {
                 var srchtxt = searchText;
 
-                string query = $"SELECT {tableName}.id,{tableName}.report_no,{tableName}.date,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector,(SELECT SUM({tableName4}.amount) FROM {tableName3} LEFT JOIN {tableName4} ON {tableName3}.payment_collections_id={tableName4}.id AND {tableName3}.collector_report_id={tableName}.id) AS colamount,{tableName}.is_approved FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id WHERE {tableName}.report_no LIKE '%{srchtxt}%' OR CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) LIKE '%{srchtxt}%' ORDER BY {tableName}.date DESC";
+                string query = $"SELECT {tableName}.id,{tableName}.report_no,({tableName5}.fund_code,'-',{tableName5}.fund_name) AS fund,{tableName}.date,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector,(SELECT SUM({tableName4}.amount) FROM {tableName3} LEFT JOIN {tableName4} ON {tableName3}.payment_collections_id={tableName4}.id AND {tableName3}.collector_report_id={tableName}.id) AS colamount,{tableName}.is_approved FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id LEFT JOIN {tableName5} ON {tableName}.funds_id={tableName5}.id WHERE {tableName}.report_no LIKE '%{srchtxt}%' OR CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) LIKE '%{srchtxt}%' OR ({tableName5}.fund_code,'-',{tableName5}.fund_name) LIKE '%{searchText}%' ORDER BY {tableName}.date DESC";
 
                 var dtpc = new DataTable();
                 return _dbGenericCommands.Fill(query, dtpc);

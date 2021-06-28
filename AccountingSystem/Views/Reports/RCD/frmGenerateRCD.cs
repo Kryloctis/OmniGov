@@ -16,8 +16,9 @@ namespace AccountingSystem.Views.Reports.RCD
         private ucRCD _ucrcd;
         private Dictionary<int, string> data;
         private int CoId = 0;
+        private int FId = 0;
         private DataTable list;
-        public frmGenerateRCD(ucRCD ucrcd,int Coid, Dictionary<int,string> _data)
+        public frmGenerateRCD(ucRCD ucrcd,int Coid,int Fid, Dictionary<int,string> _data)
         {
             InitializeComponent();            
             WindowState = FormWindowState.Normal;
@@ -25,6 +26,7 @@ namespace AccountingSystem.Views.Reports.RCD
             Helper.DatagridDefaultStyle(dgPreview);
             _ucrcd = ucrcd;
             CoId = Coid;
+            FId = Fid;
             data = _data;
             this.Text = "Generate Collections";
         }
@@ -44,10 +46,10 @@ namespace AccountingSystem.Views.Reports.RCD
                     var pcRepository = Factory.PaymentCollectionRepository();
                     var dateFrom = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtfrom.Value));
                     var dateTo = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtto.Value));
-                    list = pcRepository.GetRecordByLedger(CoId, dateFrom, dateTo,id);
+                    list = pcRepository.GetRecordByLedger(CoId, FId,dateFrom, dateTo,id);
                     HelperLoadRecords.PaymentDatagridView(list, dgPreview);
 
-                    txttotalamount.Text = String.Format("{0:N2}",pcRepository.SumRecords(CoId, dateFrom, dateTo,id));
+                    txttotalamount.Text = String.Format("{0:N2}",pcRepository.SumRecords(CoId, FId,dateFrom, dateTo,id));
                     lblRecordCount.Text = dgPreview.Rows.Count.ToString();
                 }
                 else
@@ -55,10 +57,10 @@ namespace AccountingSystem.Views.Reports.RCD
                     var pcRepository = Factory.PaymentCollectionRepository();
                     var dateFrom = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtfrom.Value));
                     var dateTo = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtto.Value));
-                    list = pcRepository.GetRecordByLedger(CoId, dateFrom, dateTo);
+                    list = pcRepository.GetRecordByLedger(CoId, FId, dateFrom, dateTo);
                     HelperLoadRecords.PaymentDatagridView(list, dgPreview);
 
-                    txttotalamount.Text = String.Format("{0:N2}", pcRepository.SumRecords(CoId, dateFrom, dateTo));
+                    txttotalamount.Text = String.Format("{0:N2}", pcRepository.SumRecords(CoId, FId, dateFrom, dateTo));
                     lblRecordCount.Text = dgPreview.Rows.Count.ToString();
                 }               
                 

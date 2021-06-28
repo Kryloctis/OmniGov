@@ -85,6 +85,7 @@ namespace AccountingSystem.Views.Reports.RCD
         private void frmRCDEdit_Load(object sender, EventArgs e)
         {
             ucrcd1.LoadCollectors();
+            ucrcd1.LoadFunds();
             LoadSelectedValue();
          
         }
@@ -97,6 +98,8 @@ namespace AccountingSystem.Views.Reports.RCD
                 var rcdRepository = Factory.CollectorReportRepository();
                 var rcdData = rcdRepository.GetRecordByID(uc.Id);
                 uc.CoId = Convert.ToInt16(rcdData["collecting_officers_id"]);
+                uc.Fid = Convert.ToInt32(rcdData["funds_id"]);
+                uc.cmbfund.SelectedValue = rcdData["funds_id"];
                 uc.cmbcollector.SelectedValue = rcdData["collecting_officers_id"];
                 uc.txtreport.Text = rcdData["report_no"];
                 uc.dtdate.Value = Convert.ToDateTime(rcdData["date"]);                
@@ -104,6 +107,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 uc.LoadCollections();
                 uc.chckapproved.Checked = rcdData["is_approved"] == "0" ? false : true;
                 uc.cmbcollector.Enabled = false;
+                uc.cmbfund.Enabled = false;
                 uc.txtreport.Enabled = false;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

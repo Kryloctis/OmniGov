@@ -64,17 +64,7 @@ namespace AccountingSystem.Views.Transactions.RCI.Find
         private bool Save()
         {
             bool saved = false;
-            if (table.Equals("banks"))
-            {
-                frmrci.loadSelectedBank(Id, selectedValue);
-                saved = true;
-            }
-            if (table.Equals("funds"))
-            {
-                frmrci.loadSelectedFund(Id, selectedValue);
-                saved = true;
-            }
-        
+       
             if (table.Equals("functions"))
             {
                 frmrci.loadSelectedFunction(Id, selectedValue);

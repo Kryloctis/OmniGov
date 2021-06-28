@@ -16,6 +16,7 @@ namespace AccountingSystem.Views.Reports.RCD
     {
         internal int Id = 0;
         internal int CoId = 0;
+        internal int Fid = 0;
         internal Dictionary<int, string> data = new Dictionary<int, string>();
         public ucRCD()
         {
@@ -29,9 +30,10 @@ namespace AccountingSystem.Views.Reports.RCD
         }
         internal string GetFormErrors()
         {
-            var errorArray = new string[2];
+            var errorArray = new string[3];
             errorArray[0] = errorProvider.GetError(cmbcollector);
-            errorArray[1] = errorProvider.GetError(txtreport);
+            errorArray[1] = errorProvider.GetError(cmbfund);
+            errorArray[2] = errorProvider.GetError(txtreport);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -51,6 +53,20 @@ namespace AccountingSystem.Views.Reports.RCD
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        internal void LoadFunds()
+        {
+            try
+            {
+                var fundRepository = Factory.FundsRepository();
+                var dtFund = fundRepository.GetRecords();
+                dtFund.Columns.Add("funddisplay", typeof(string), "fund_code + ' - ' + fund_name");
+                cmbfund.DataSource = dtFund;
+                cmbfund.ValueMember = "id";
+                cmbfund.DisplayMember = "funddisplay";
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void ResetForm()
@@ -110,14 +126,20 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnadd_Click(object sender, EventArgs e)
         {
-            if(cmbcollector.SelectedIndex != -1)
-            {
-                _ = new frmGenerateRCD(this, Convert.ToInt16(cmbcollector.SelectedValue), data).ShowDialog();
-            }
-            else
+            if(cmbcollector.SelectedIndex == -1)
             {
                 Helper.MessageBoxError("Please select Collector!");
                 cmbcollector.Focus();
+               
+            }
+            else if(cmbfund.SelectedIndex == -1)
+            {
+                Helper.MessageBoxError("Please select Fund!");
+                cmbfund.Focus();
+            }
+            else
+            {
+                _ = new frmGenerateRCD(this, Convert.ToInt16(cmbcollector.SelectedValue), Convert.ToInt16(cmbfund.SelectedValue), data).ShowDialog();
             }
             
         }
@@ -221,6 +243,16 @@ namespace AccountingSystem.Views.Reports.RCD
                 }
             }
             
+        }
+
+        private void cmbfund_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbfund, "Fund!");
+        }
+
+        private void cmbfund_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider, cmbfund);
         }
     }
 }

@@ -38,7 +38,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 var dtpayments = pcRepository.GetRecords();
                 HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
 
-                lblRecordCount.Text = pcRepository.CountRecords().ToString();
+                lblRecordCount.Text = dgpayments.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -67,10 +67,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                             int pcId = Convert.ToInt16(row.Cells[0].Value.ToString());
                             pcModelList.Add(new PaymentCollectionModel() { Id = pcId });
                         }
-
                         var pcRepository = Factory.PaymentCollectionRepository();
-                        _ = pcRepository.Delete(pcModelList);
-                        LoadRecords();
+                        if (pcRepository.Delete(pcModelList))
+                        {
+                            dgpayments.Rows.RemoveAt(dgpayments.CurrentRow.Index);
+                            lblRecordCount.Text = dgpayments.Rows.Count.ToString();
+                        }
+                     
                     }
                 }
             }
@@ -102,9 +105,48 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void dgpayments_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexData = { 11,12,13,14 };
-            Helper.ShowRecordTimestamp(dgpayments, columnIndexData, lblCreatedAt, lblUpdatedAt,lblCreatedBy,lblUpdatedBy);
-            Helper.EnableDisableToolStripButtons(dgpayments, btnEdit, btnDelete);
+            if(dgpayments.SelectedRows.Count > 0)
+            {
+                int id = int.Parse(dgpayments.CurrentRow.Cells[0].Value.ToString());
+                byte[] columnIndexData = { 11, 12, 13, 14 };
+                Helper.ShowRecordTimestamp(dgpayments, columnIndexData, lblCreatedAt, lblUpdatedAt, lblCreatedBy, lblUpdatedBy);
+                Helper.EnableDisableToolStripButtons(dgpayments, btnEdit, btnDelete);
+
+                var crRepository = Factory.CollectorReportRepository();
+                btnEdit.Enabled = crRepository.HasReported(id) ? false : true;
+                btnDelete.Enabled = crRepository.HasReported(id) ? false : true;
+            }
+            else
+            {
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = false;
+            }
+            
+        }
+
+        private void btnrefresh_Click(object sender, EventArgs e)
+        {
+            txtsearch.Text = string.Empty;
+            dtpdate.Value = DateTime.Now;
+            LoadRecords();
+        }
+
+        private void dgpayments_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnEdit.PerformClick();
+        }
+
+        private void dtpdate_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string date = String.Format("{0:yyyy-MM-dd}",dtpdate.Value);
+                var dtpayments = Factory.PaymentCollectionRepository().GetRecords(date);
+                HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
+
+                lblRecordCount.Text = dgpayments.Rows.Count.ToString();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
