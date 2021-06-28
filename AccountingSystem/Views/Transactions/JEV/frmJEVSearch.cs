@@ -101,20 +101,20 @@ namespace AccountingSystem.Views.Transactions.JEV
             var uc = frmJEV.ucjev1;
             try
             {
-                bool jevExist = Factory.JEVRepository().JevNumberExist(txtSearch.Text.Trim());
-
                 if (dgJEV.SelectedRows.Count == 1)
                 {
                     int rowIndex = dgJEV.CurrentCell.RowIndex;
-                    string jevNo = dgJEV.Rows[rowIndex].Cells["jev_no"].Value.ToString();
-                    string[] jevNoSplit = jevNo.Split("-");
+
+                    string jevNo =  dgJEV.Rows[rowIndex].Cells["jev_no"].Value.ToString();
+                    string jevDateOfEntry = dgJEV.Rows[rowIndex].Cells["date_entry"].Value.ToString();
+                    string jevFundCode = dgJEV.Rows[rowIndex].Cells["fund_code"].Value.ToString();
 
                     uc.Enabled = true;
                     frmJEV.btnSave.Enabled = true;
                     frmJEV.btnDelete.Enabled = true;
-
-                    frmJEV.ucjev1.txtFundsJevNo.Text = $"{jevNoSplit[0]}-{jevNoSplit[1]}-{jevNoSplit[2]}";
-                    frmJEV.ucjev1.txtJEVNo.Text = jevNoSplit[3];
+                    
+                    frmJEV.ucjev1.txtFundsJevNo.Text = $"{jevFundCode}-{Convert.ToDateTime(jevDateOfEntry).Year}{Convert.ToDateTime(jevDateOfEntry).Month}";
+                    frmJEV.ucjev1.txtJEVNo.Text = jevNo;
 
                     Dictionary<string, string> jevDict = Factory.JEVRepository().GetRecordByJEV(jevNo);
                     int jevId = Convert.ToInt32(jevDict["id"]);
@@ -132,6 +132,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.txtPayee.Text = jevDict["payee"];
                     uc.fundId = Convert.ToByte(jevDict["funds_id"]);
                     uc.journalId = Convert.ToByte(jevDict["journals_id"]);
+                    uc.oldJournalId = Convert.ToByte(jevDict["journals_id"]);
                     CheckedFund(jevDict["fund_name"]);
                     CheckedJournal(jevDict["journal_name"]);
 
