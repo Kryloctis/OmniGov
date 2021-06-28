@@ -38,11 +38,26 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
         {
             try
             {
+                fundId = Convert.ToByte(cmbFund.SelectedValue);
+                year = (short)Convert.ToUInt16(cmbYear.Text);
                 var dtSubsidiary = Factory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
-                HelperLoadRecords.SubsidiaryLedgerAccountsDatagridView(dtSubsidiary, dgSubsidiary, fundId, year);
 
+                HelperLoadRecords.SubsidiaryLedgerAccountsDatagridView(dtSubsidiary, dgSubsidiary, fundId, year);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) 
+            { 
+                Helper.MessageBoxError(ex.Message); 
+            }
+        }
+
+        private void cmbFund_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadSubsidiaryRecordsByFundAndGeneralLedger();
+        }
+
+        private void cmbYear_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadSubsidiaryRecordsByFundAndGeneralLedger();
         }
 
         private void LoadYear()
@@ -60,7 +75,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
             fundId = Convert.ToByte(cmbFund.SelectedValue);
             year = (short)Convert.ToUInt16(cmbYear.Text);
-            LoadSubsidiaryRecordsByFundAndGeneralLedger();            
+            LoadSubsidiaryRecordsByFundAndGeneralLedger();
 
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
@@ -144,7 +159,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             {
                 int rowIndex = dgSubsidiary.CurrentCell.RowIndex;
                 ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.Rows[rowIndex].Cells["id"].Value);
-                
+
 
                 var subsidiaryLedgerBalanceExist = Factory.BeginningBalancesRepository().SubsidiaryLedgerBalanceExist(fundId, generalLedgerId, year, subsidiaryLedgerId);
 
@@ -158,11 +173,5 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             }
         }
 
-        private void btnRetrieve_Click(object sender, EventArgs e)
-        {
-            fundId = Convert.ToByte(cmbFund.SelectedValue);
-            year = (short)Convert.ToUInt16(cmbYear.Text);
-            LoadSubsidiaryRecordsByFundAndGeneralLedger();
-        }
     }
 }
