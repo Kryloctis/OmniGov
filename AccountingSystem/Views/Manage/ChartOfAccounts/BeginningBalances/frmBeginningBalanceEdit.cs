@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.BeginningBalances;
+using AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +13,18 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
         private readonly UcBeginningBalances uc;
         private readonly byte fundId;
         private readonly short year;
+        frmSubsidiary _frmSubsidiary;
 
-        public frmBeginningBalanceEdit(byte fundId, ushort generalLedgerId, short year, ushort subsidiaryLedgerId = 0)
+        public frmBeginningBalanceEdit(frmSubsidiary frmSubsidiary, byte fundId, ushort generalLedgerId, short year, ushort subsidiaryLedgerId = 0)
         {
             InitializeComponent();
+            _frmSubsidiary = frmSubsidiary;
             uc = ucBeginningBalances1;
             this.fundId = fundId;
             uc.generalLedgerId = generalLedgerId;
             uc.subsidiaryLedgerId = subsidiaryLedgerId;
             this.year = year;
         }
-
 
         private void LoadSelectedRecord()
         {
@@ -110,6 +112,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             if (UpdateData())
             {
                 Helper.MessageBoxSuccess("Balance has been saved.");
+
+                if(_frmSubsidiary != null)
+                    _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
             }
         }
     }

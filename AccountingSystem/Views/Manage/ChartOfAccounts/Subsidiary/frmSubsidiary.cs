@@ -18,7 +18,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
         {
             InitializeComponent();
             generalLedgerId = _generalLedgerId;
-            btnSetBalance.Click += new EventHandler(BtnSetBalance_Click);
         }
 
         private void LoadFunds()
@@ -165,13 +164,12 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
                 if (subsidiaryLedgerBalanceExist)
                 {
-                    _ = new frmBeginningBalanceEdit(fundId, generalLedgerId, year, subsidiaryLedgerId).ShowDialog();
+                    _ = new frmBeginningBalanceEdit(this, fundId, generalLedgerId, year, subsidiaryLedgerId).ShowDialog();
                     return;
                 }
 
-                _ = new frmBeginningBalanceAdd(generalLedgerId, subsidiaryLedgerId).ShowDialog();
+                _ = new frmBeginningBalanceAdd(this, generalLedgerId, subsidiaryLedgerId).ShowDialog();
             }
         }
-
     }
 }

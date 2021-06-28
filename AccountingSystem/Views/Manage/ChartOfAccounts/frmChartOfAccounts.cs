@@ -322,11 +322,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
                 if (generalLedgerBalanceExist)
                 {
-                    _ = new frmBeginningBalanceEdit(fundId, generalLedgerId, year).ShowDialog();
+                    _ = new frmBeginningBalanceEdit(null,fundId, generalLedgerId, year).ShowDialog();
                     return;
                 }
 
-                _ = new frmBeginningBalanceAdd(generalLedgerId).ShowDialog();
+                _ = new frmBeginningBalanceAdd(null,generalLedgerId).ShowDialog();
             }
         }
 

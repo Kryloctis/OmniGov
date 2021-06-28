@@ -308,6 +308,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.radioCredit);
@@ -318,7 +319,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             this.Controls.Add(this.nudAmount);
             this.Controls.Add(this.label3);
             this.Name = "UcBeginningBalances";
-            this.Size = new System.Drawing.Size(515, 364);
+            this.Size = new System.Drawing.Size(502, 337);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epGeneralAccount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epYear)).EndInit();

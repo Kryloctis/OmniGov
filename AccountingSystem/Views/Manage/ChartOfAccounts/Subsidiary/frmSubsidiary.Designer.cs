@@ -183,6 +183,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.btnSetBalance.Size = new System.Drawing.Size(80, 47);
             this.btnSetBalance.Text = "Set Balance...";
             this.btnSetBalance.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSetBalance.Click += new System.EventHandler(this.BtnSetBalance_Click);
             // 
             // dgSubsidiary
             // 
