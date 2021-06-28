@@ -60,6 +60,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnAdd.Image = global::AccountingSystem.Properties.Resources.add;
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(33, 47);
             this.btnAdd.Text = "&Add";
@@ -100,6 +101,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnSearch.Image = global::AccountingSystem.Properties.Resources.find_doc;
             this.btnSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(46, 47);
             this.btnSearch.Text = "S&earch";

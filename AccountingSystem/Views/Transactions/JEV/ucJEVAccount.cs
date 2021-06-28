@@ -15,10 +15,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         public ucJEVAccount()
         {
             InitializeComponent();
-
-            // validate if it has permission
-            if (!Helper.HasPermission("Manage Subsidiary Ledger Account"))
-                btnSubsidiaryLedger.Visible = false;
         }
 
         internal string GetFormErrors()
@@ -161,6 +157,16 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             ushort accountId = Convert.ToUInt16(cmbAccount.SelectedValue);
             _ = new frmSubsidiary(accountId).ShowDialog();
+        }
+
+        private void ucJEVAccount_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                // validate if it has permission
+                if (!Helper.HasPermission("Manage Subsidiary Ledger Account"))
+                    btnSubsidiaryLedger.Visible = false;
+            }
         }
     }
 }
