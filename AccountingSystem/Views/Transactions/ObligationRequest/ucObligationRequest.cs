@@ -78,8 +78,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         internal void ResetForm()
         {
-            LoadObjectOfExpenditures();
-
             _subFPPId = null;
             _budgetAppropriationsId = 0;
             _amount = 0;
@@ -88,8 +86,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             cmbxSubFPP.Text = string.Empty;
             cmbxSubFPP.SelectedValue = _subFPPId == null ? 0 : _subFPPId;
 
-            cmbxObjectOfExpenditure.Text = string.Empty;
-            cmbxObjectOfExpenditure.SelectedValue = _budgetAppropriationsId;
+            LoadObjectOfExpendituresCombobox();
         }
 
 
