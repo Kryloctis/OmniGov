@@ -1,4 +1,3 @@
-using AccountingSystem.Views.Transactions.PaymentCollection;
 using System;
 using System.Windows.Forms;
 
@@ -15,7 +14,7 @@ namespace AccountingSystem
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmPaymentCollection()); 
+            Application.Run(new LoginForm()); 
         }
     }
 }
