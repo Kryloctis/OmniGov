@@ -8,5 +8,8 @@ namespace ACC.Domain.Interfaces
         Dictionary<string, string> GetRecordByJevID(int jevId);
         bool JevIdExist(int jevId);
         bool UpdateByJevID(CheckDisbursementsJournalModel entity);
+
+        bool DeleteCheckDisbursementJournalByJevID(int jevId);
+        
     }
 }
