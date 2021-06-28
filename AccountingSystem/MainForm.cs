@@ -136,9 +136,6 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Report Subsidiary Ledger"))
                 menuSubsidiaryLedgerReport.Visible = false;
 
-            if (!Helper.HasPermission("Report SAAOB"))
-                menuSAAOB.Visible = false;
-
             if (!Helper.HasPermission("Manage Banks"))
                 menuBanks.Visible = false;
 
@@ -155,10 +152,13 @@ namespace AccountingSystem
                 menuAccForm.Visible = false;
 
             if (!Helper.HasPermission("Transaction Bank Deposits"))
-                menuDeposits.Visible = false; 
-            
-            if (!Helper.HasPermission("Report SAAOBB"))
-                menuSAAOBB.Visible = false;
+                menuDeposits.Visible = false;
+
+            if (!Helper.HasPermission("Report SAAOB"))
+                menuSAAOB.Visible = false;
+
+            //if (!Helper.HasPermission("Report SAAOBB"))
+            //    menuSAAOBB.Visible = false;
         }
 
         private void LoadDashboard()
