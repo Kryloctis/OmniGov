@@ -447,6 +447,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 dgAccounts.Rows.Remove(row);
             }
+            SumDebitCredit();
         }
 
         private void btnEditAccount_Click(object sender, EventArgs e)
