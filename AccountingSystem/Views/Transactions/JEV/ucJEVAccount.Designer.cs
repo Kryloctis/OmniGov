@@ -73,6 +73,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.cmbFPP.Name = "cmbFPP";
             this.cmbFPP.Size = new System.Drawing.Size(370, 23);
             this.cmbFPP.TabIndex = 0;
+            this.cmbFPP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxFPP_KeyDown);
             this.cmbFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbFPP_Validating);
             this.cmbFPP.Validated += new System.EventHandler(this.cmbFPP_Validated);
             // 

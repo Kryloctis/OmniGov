@@ -84,6 +84,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             var uc = ucjevAccount1;
             uc.LoadFPP();
             uc.cmbFPP.SelectedIndex = -1;
+            uc.cmbFPP.TextChanged += new EventHandler(uc.cmbxFPP_TextChanged);
             uc.cmbAccount.SelectedIndex = -1;
 
 

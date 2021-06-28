@@ -150,6 +150,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             Helper.LoadFormIcon(this);
             ucJEVAccount.LoadFPP();
+            ucJEVAccount.cmbFPP.TextChanged += new EventHandler(ucJEVAccount.cmbxFPP_TextChanged);
+
             LoadSelectedRecord();
 
             if (ucJEV.journalName != "Cash Receipts Journal")
