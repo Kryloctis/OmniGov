@@ -308,6 +308,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 cmbxFPP.DataSource = new BindingSource(fppDict, null);
                 cmbxFPP.DisplayMember = "value";
                 cmbxFPP.ValueMember = "key";
+                cmbxFPP.DropDownHeight = 400;
 
                 LoadBudgetAppropriationRecords();
             }

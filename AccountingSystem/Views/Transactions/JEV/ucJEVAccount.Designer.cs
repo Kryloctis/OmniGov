@@ -232,6 +232,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.Controls.Add(this.btnSubsidiaryLedger);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cmbSubsidiary);
@@ -276,8 +277,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnSubsidiaryLedger;
         internal System.Windows.Forms.Panel pnlCollectionsDeposits;
-        private System.Windows.Forms.ErrorProvider epFPP;
         private System.Windows.Forms.ErrorProvider epAccount;
         private System.Windows.Forms.ErrorProvider epAmount;
+        internal System.Windows.Forms.ErrorProvider epFPP;
     }
 }

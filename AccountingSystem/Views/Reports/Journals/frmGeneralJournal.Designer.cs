@@ -68,7 +68,7 @@ namespace AccountingSystem.Views.Reports.Journals
             // 
             // dtpMonth
             // 
-            this.dtpMonth.CustomFormat = "MMMM-yyyy";
+            this.dtpMonth.CustomFormat = "MMMMyyyy";
             this.dtpMonth.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpMonth.Location = new System.Drawing.Point(331, 12);
             this.dtpMonth.Name = "dtpMonth";
