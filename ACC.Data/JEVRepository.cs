@@ -470,29 +470,7 @@ namespace ACC.Data
             }
         }
 
-        public bool JevNumberExist(string jevNo)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@jev_no", DbType.String, jevNo },
-                    new object[] { "@jev_date_of_entry", DbType.Int16, jevEntryDate },
-                };
 
-                string query = $"SELECT * FROM {tableName} WHERE jev_no = @jev_no AND YEAR(date_entry) = @jev_date_of_entry";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            };
-
-            return false;
-        }
 
         public bool JevNumberExist(string jevNo, int id)
         {
@@ -587,5 +565,28 @@ namespace ACC.Data
             };
         }
 
+        public bool JevNumberAndYearExist(string jevNo, int jevEntryDate)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@jev_no", DbType.String, jevNo },
+                    new object[] { "@jev_date_of_entry", DbType.Int16, jevEntryDate },
+                };
+
+                string query = $"SELECT * FROM {tableName} WHERE jev_no = @jev_no AND YEAR(date_entry) = @jev_date_of_entry";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
     }
 }
