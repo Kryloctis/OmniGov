@@ -47,8 +47,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             txtDebitTotal.Clear();
             txtCreditTotal.Clear();
 
+            txtJEVNo.Text = GetJEVSeriesNo();
         }
-
 
         internal void LoadFunds()
         {
@@ -341,10 +341,15 @@ namespace AccountingSystem.Views.Transactions.JEV
             Helper.DatagridDefaultStyle(dgAccounts);
             LoadFunds();
             LoadJournals();
-            SetGeneralJournalFields();
 
             btnEditAccount.Enabled = false;
             btnRemoveAccount.Enabled = false;
+        }
+
+        private string GetJEVSeriesNo()
+        {
+            var jev = Factory.JEVRepository().GetLastJevNoSeries();
+            return jev.ToString();
         }
 
         private void btnAddAccount_Click(object sender, EventArgs e)

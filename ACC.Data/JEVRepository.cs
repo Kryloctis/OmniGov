@@ -457,6 +457,19 @@ namespace ACC.Data
             }
         }
 
+        public string GetLastJevNoSeries() 
+        {
+            try
+            {
+                string query = $"SELECT LPAD(MAX(jev_no)+1, 4, '0') AS jev_no FROM {tableName}";
+                return _dbGenericCommands.ExecuteScalar(query);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool JevNumberExist(string jevNo)
         {
             try
