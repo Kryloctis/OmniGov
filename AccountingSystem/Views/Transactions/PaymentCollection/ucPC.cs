@@ -396,7 +396,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 cmbforms.Enabled = true;
                 btnledger.Enabled = true;
                 txtpayee.Enabled = true;
-                txtreceipt.Enabled = true;
+                //txtreceipt.Enabled = true;
                 dtdate.Enabled = true;
                 txtamount.Enabled = true;
                 txtledger.Enabled = true;
