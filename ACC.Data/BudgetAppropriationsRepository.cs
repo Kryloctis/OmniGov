@@ -231,6 +231,7 @@ namespace ACC.Data
                      $"functional_classification_sector_code, " +
                      $"functional_classification_sector_name, " +
                      $"others_fpp_id, " +
+                     $"others_fpp_code, " +
                      $"others_fpp_name, " +
                      $"allotment_class_id, " +
                      $"allotment_class_code, " +
