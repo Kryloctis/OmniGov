@@ -35,18 +35,25 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     return false;
                 }
 
-                int accountId = Convert.ToInt32(uc.cmbxAccount.SelectedValue);
-                string accountName = uc.cmbxAccount.Text;
+                int budgetAppropriationId = Convert.ToInt32(uc.cmbxObjectOfExpenditure.SelectedValue);
+                var budgetAppropriationsDict = Factory.BudgetAppropriationsRepository().GetViewRecordByID(budgetAppropriationId);
+
+                string remarks = string.IsNullOrEmpty(budgetAppropriationsDict["remarks"].ToString()) ? string.Empty : $"({budgetAppropriationsDict["remarks"]})";
+
+                string objectOfExpenditure = $"{budgetAppropriationsDict["general_ledger_accounts_name"]} {remarks}";
+                string accountCode = budgetAppropriationsDict["account_code"].ToString();
                 decimal obligationAmount = uc.nudAmount.Value;
 
                 var items = new object[]
                 {
-                    accountId,
-                    accountName,
+                    budgetAppropriationId,
+                    objectOfExpenditure,
+                    accountCode,
                     obligationAmount
                 };
-
-                _ucObligationRequestMain.dataGridView1.Rows.Add(items);
+                               
+                _ucObligationRequestMain.dgObligationRequests.Rows.Add(items);
+                _ucObligationRequestMain.GetTotalObligations();
 
                 return true;
             
@@ -63,18 +70,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             if (AddToListRecord()) 
             {
                 uc.ResetForm();
-                uc.GetTotalAllotmentBalance();
-                _ucObligationRequestMain.cmbxFPP.Enabled = false;
-                _ucObligationRequestMain.cmbxOtherFPP.Enabled = false;
-                _ucObligationRequestMain.flowLayoutPanelFunds.Enabled = false;
-                _ucObligationRequestMain.flowLayoutPanelAllotmentClass.Enabled = false;
-                _ucObligationRequestMain.dtDateRequest.Enabled = false;
+                _ucObligationRequestMain.EnableDisableComponents(false);
             }
         }
 
-        private void frmObligationRequestAdd_Load(object sender, EventArgs e)
-        {
-          
-        }
     }
 }

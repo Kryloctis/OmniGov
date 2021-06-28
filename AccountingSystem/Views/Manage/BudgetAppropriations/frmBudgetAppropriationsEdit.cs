@@ -54,7 +54,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                     uc.cmbxOthersFPP.SelectedValue = othersFPPId;
 
                 uc.allotmentClassId = allotmentClassId;
-                uc.cmbxLedgerAccount.SelectedValue = generalLedgerAccountId;
+                uc.cmbxAccount.SelectedValue = generalLedgerAccountId;
                 uc.dtDateEntry.Value = dateEntry;
                 uc.txtYear.Text = year.ToString();
                 uc.year = year;
@@ -94,7 +94,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                     FunctionProgramProjectId = uc.fppId,
                     OthersFPPId = othersFPPId,
                     AllotmentClassesId = uc.allotmentClassId,
-                    GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxLedgerAccount.SelectedValue),
+                    GeneralLedgerAccountsId = Convert.ToInt32(uc.cmbxAccount.SelectedValue),
                     DateEntry = uc.dtDateEntry.Value,
                     Year = uc.year,
                     Amount = uc.nudAmount.Value,

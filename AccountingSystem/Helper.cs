@@ -99,7 +99,9 @@ namespace AccountingSystem
             return new Dictionary<string, string>();
         }
 
+
         #region ErrorProviders on Controls
+
         private static string GetFirstLetter(string word)
         {
             return word.Substring(0, 1);
@@ -117,9 +119,9 @@ namespace AccountingSystem
         public static string ErrorMessage(string fieldName) 
         {
             if (GetFirstLetter(fieldName) == "A")
-                return $"Please enter an {fieldName}";
+                return $"Please enter an {fieldName}.";
             else
-                return $"Please enter a {fieldName}";
+                return $"Please enter a {fieldName}.";
         }
 
         public static bool ShowErrorTextBoxEmpty(ErrorProvider ep, TextBox txtBox, string fieldName = "Field")

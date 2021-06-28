@@ -28,11 +28,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             {
                 if (toolStripTxtSearch.Text.Length > 3 && !string.IsNullOrEmpty(toolStripTxtSearch.Text))
                 {
-                    dtOthersFPP = Factory.OthersFPPRepository().GetRecorsByIDSearchCode(functionProgramProjectID, searchTxt);
+                    dtOthersFPP = Factory.SubFPPRepository().GetRecorsByIDSearchCode(functionProgramProjectID, searchTxt);
                 }
                 else 
                 {
-                    dtOthersFPP = Factory.OthersFPPRepository().GetRecordsByFPPID(functionProgramProjectID);
+                    dtOthersFPP = Factory.SubFPPRepository().GetRecordsByFPPId(functionProgramProjectID);
                 }
 
                 HelperLoadRecords.OthersFPPDatagridView(dtOthersFPP, dgOthersFPP);
@@ -76,7 +76,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
         {
             int selectedRowsCount = dgOthersFPP.SelectedRows.Count;
            
-            var otherFPPModelList = new List<OthersFPPModel>();
+            var otherFPPModelList = new List<SubFPPModel>();
 
             try
             {
@@ -87,7 +87,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
                         foreach (DataGridViewRow row in dgOthersFPP.SelectedRows)
                         {
                             int otherFPPId= int.Parse(row.Cells[0].Value.ToString());
-                            var otherFPPModel = new OthersFPPModel()
+                            var otherFPPModel = new SubFPPModel()
                             {
                                 Id = otherFPPId
                             };
@@ -95,7 +95,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
                             otherFPPModelList.Add(otherFPPModel);
                         }
 
-                        _ = Factory.OthersFPPRepository().Delete(otherFPPModelList);
+                        _ = Factory.SubFPPRepository().Delete(otherFPPModelList);
                         LoadRecords();
                     }
                 }

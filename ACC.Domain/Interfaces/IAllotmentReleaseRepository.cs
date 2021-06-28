@@ -8,31 +8,23 @@ namespace ACC.Domain.Interfaces
 {
     public interface IAllotmentReleaseRepository : IRepository<AllotmentReleaseModel>
     {
-        DataTable GetRecordsByBudgetAppropriationID(int budgetAppropriationID);
 
-        DataTable GetRecordsByBudgetAppropriationID(int budgetAppropriationID, string allotmentReleaseNum);
+        bool Insert(AllotmentReleaseModel entity, List<AllotmentAccountModel> listAllotmentAccount);
 
+        bool Update(AllotmentReleaseModel entity, List<AllotmentAccountModel> listAllotmentAccount);
 
+        bool Delete(int allotmentReleaseId);
 
-        //For Obligation Request Module
-        decimal GetTotalAllotmentReleaseByDateYear(int fundID, int fppID, int? othersFPPID, int allotmentClassID, int accountID, DateTime dateIssued,  short year);
+        bool AllotmentReleaseNoExist(string allotmentReleaseNo);
 
-        decimal GetTotalAllotmentReleaseByYear(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int AccountId, short year);
+        bool AllotmentReleaseNoExist(int Id, string allotmentReleaseNo);
 
+        DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId);
 
+        DataTable GetViewRecordsById(int Id);
 
-        decimal GetViewTotalAllotmentReleaseAmountById(int budgetAppropriationId);
+        bool AllotmentReleaseExist(int budgetAppropriationId, DateTime dateIssued);
 
-        decimal GetViewTotalAllotmentReleaseByIdDateYear(int budgetAppropriationId, DateTime dateIssued, short year);
-
-
-        bool allotmentReleaseExist(int budgetAppropriationId, string dateIssued);
-
-        bool allotmentReleaseExist(int id, int budgetAppropriationId, string dateIssued);
-
-        bool BulkInsert(List<AllotmentReleaseModel> allotmentReleaseModelList);
-
-        //Dashboard
-        decimal GetTotalAllotmentReleaseByIds(int fundId, int allotmentClassId, int fppId);
+        bool AllotmentReleaseExist(int Id ,int budgetAppropriationId, DateTime dateIssued);
     }
 }

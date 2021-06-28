@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ACC.Domain.Models
 {
-    public class OthersFPPModel
+    public class SubFPPModel
     {
         public int Id { get; set; }
         public int functionProgramProjectId { get; set; }

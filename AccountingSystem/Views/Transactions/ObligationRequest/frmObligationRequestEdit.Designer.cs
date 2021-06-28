@@ -38,9 +38,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // ucObligationRequest1
             // 
+            this.ucObligationRequest1.AutoSize = true;
             this.ucObligationRequest1.Location = new System.Drawing.Point(12, 12);
             this.ucObligationRequest1.Name = "ucObligationRequest1";
-            this.ucObligationRequest1.Size = new System.Drawing.Size(510, 149);
+            this.ucObligationRequest1.Size = new System.Drawing.Size(567, 142);
             this.ucObligationRequest1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -50,14 +51,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.flowLayoutPanel1.Controls.Add(this.btnOk);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 169);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 163);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(534, 29);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(582, 29);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(440, 3);
+            this.btnCancel.Location = new System.Drawing.Point(488, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(91, 23);
             this.btnCancel.TabIndex = 1;
@@ -68,7 +69,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             this.btnOk.Image = global::AccountingSystem.Properties.Resources.ok14px;
             this.btnOk.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnOk.Location = new System.Drawing.Point(343, 3);
+            this.btnOk.Location = new System.Drawing.Point(391, 3);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(91, 23);
             this.btnOk.TabIndex = 0;
@@ -84,7 +85,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(534, 198);
+            this.ClientSize = new System.Drawing.Size(582, 192);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ucObligationRequest1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -94,9 +95,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Obligation Request";
-            this.Load += new System.EventHandler(this.frmObligationRequestEdit_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

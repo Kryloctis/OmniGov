@@ -8,13 +8,13 @@ using System.Transactions;
 
 namespace ACC.Data
 {
-    public class OthersFPPRepository : IOthersFPPRepository
+    public class SubFPPRepository : ISubFPPRepository
     {
         private readonly string tableName = "others_fpp";
 
         private MySqlGenericCommands _mySqlGenericCommands;
 
-        public OthersFPPRepository(MySqlGenericCommands mySqlGenericCommands)
+        public SubFPPRepository(MySqlGenericCommands mySqlGenericCommands)
         {
             this._mySqlGenericCommands = mySqlGenericCommands;
         }
@@ -24,7 +24,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Delete(List<OthersFPPModel> entityList)
+        public bool Delete(List<SubFPPModel> entityList)
         {
             try
             {
@@ -108,7 +108,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Insert(OthersFPPModel entity)
+        public bool Insert(SubFPPModel entity)
         {
             try
             {
@@ -128,7 +128,7 @@ namespace ACC.Data
             }
         }
 
-        public bool Update(OthersFPPModel entity)
+        public bool Update(SubFPPModel entity)
         {
             try
             {
@@ -148,13 +148,13 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetRecordsByFPPID(int id)
+        public DataTable GetRecordsByFPPId(int fppId)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@function_program_project_id", DbType.Int32, id }
+                    new object[] { "@function_program_project_id", DbType.Int32, fppId }
                 };
 
                 string query = $"SELECT " +
@@ -168,8 +168,8 @@ namespace ACC.Data
                     $"WHERE " +
                     $"function_program_project_id = @function_program_project_id";
 
-                var dtOthersFPP = new DataTable();
-                return _mySqlGenericCommands.FillBySearch(query, dtOthersFPP, parameters);
+                var dataTable = new DataTable();
+                return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
             }
             catch (Exception)
             {
@@ -303,6 +303,37 @@ namespace ACC.Data
                 throw;
             }
             return false;
+        }
+
+        public DataTable GetRecordsByFPPIdCodeName(int fppId, string searchTxt)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@function_program_project_id", DbType.Int32, fppId },
+                    new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%" },
+                };
+
+
+                string query = $"SELECT " +
+                    $"id, " +
+                    $"function_program_project_id, " +
+                    $"others_fpp_code, " +
+                    $"name, " +
+                    $"created_at, " +
+                    $"updated_at " +
+                    $"FROM {tableName} " +
+                    $"WHERE " +
+                    $"function_program_project_id = @function_program_project_id AND (others_fpp_code LIKE @searchTxt OR name LIKE @searchTxt)";
+
+                var dataTable = new DataTable();
+                return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         #endregion Validations

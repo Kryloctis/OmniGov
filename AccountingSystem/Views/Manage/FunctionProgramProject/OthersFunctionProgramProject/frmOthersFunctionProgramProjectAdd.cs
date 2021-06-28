@@ -34,14 +34,14 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
                 }
 
                 // proceed to insert
-                var othersFPPModel = new OthersFPPModel()
+                var othersFPPModel = new SubFPPModel()
                 {
                     functionProgramProjectId = uc.functionProgramProjectID,
                     othersFPPCode = uc.txtCode.Text.Trim(),
                     othersFPPName = uc.txtName.Text.Trim()
                 };
 
-                return Factory.OthersFPPRepository().Insert(othersFPPModel);
+                return Factory.SubFPPRepository().Insert(othersFPPModel);
             }
             catch (Exception ex)
             {

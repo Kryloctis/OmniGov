@@ -32,7 +32,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             var errorArray = new string[3];
 
             errorArray[0] = epOthersFunctionProgramProject.GetError(cmbxOthersFPP);
-            errorArray[1] = epGeneralLedgerAcc.GetError(cmbxLedgerAccount);
+            errorArray[1] = epGeneralLedgerAcc.GetError(cmbxAccount);
             errorArray[2] = epAmount.GetError(nudAmount);
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
@@ -40,20 +40,20 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         internal void LoadOthersFPPByFPPIdCombobox()
         {
-            HelperLoadRecords.OthersFPPCombobox(Factory.OthersFPPRepository().GetRecordsByFPPID(fppId), cmbxOthersFPP, "name", "id");
+            HelperLoadRecords.OthersFPPCombobox(Factory.SubFPPRepository().GetRecordsByFPPId(fppId), cmbxOthersFPP, "name", "id");
             cmbxOthersFPP.SelectedIndex = -1;
             cmbxOthersFPP.Text = string.Empty;
             cmbxOthersFPP.Enabled = true;
         }
 
 
-        //combobox others fpp 
+        //SUB FPP VALIDATION
 
         private bool ShowErrorOthersFPPNameExist(ErrorProvider ep, ComboBox comboBox, string fieldText)
         {
             try
             {
-                if (!Factory.OthersFPPRepository().NameExist(cmbxOthersFPP.Text) && !string.IsNullOrWhiteSpace(cmbxOthersFPP.Text))
+                if (!Factory.SubFPPRepository().NameExist(cmbxOthersFPP.Text) && !string.IsNullOrWhiteSpace(cmbxOthersFPP.Text))
                 {
                     ep.SetError(comboBox, fieldText);
                     return true;
@@ -77,15 +77,15 @@ namespace BudgetSystem.Views.BudgetAppropriations
         }
         
 
-        //combobox account
+        //ACCOUNT VALIDATION
 
         private bool ShowErrorLedgerNameNotExist()
         {
             try
             {
-                if (cmbxLedgerAccount.FindStringExact(cmbxLedgerAccount.Text) < 0 && !string.IsNullOrEmpty(cmbxLedgerAccount.Text))
+                if (cmbxAccount.FindStringExact(cmbxAccount.Text) < 0 && !string.IsNullOrEmpty(cmbxAccount.Text))
                 {
-                    epGeneralLedgerAcc.SetError(cmbxLedgerAccount, "Invalid General Ledger Account. Please select on the list.");
+                    epGeneralLedgerAcc.SetError(cmbxAccount, "Invalid General Ledger Account. Please select on the list.");
                     return true;
                 }
             }
@@ -101,7 +101,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             try
             {
                 int? othersFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text.ToString()) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
-                int generalLedgerAccId = Convert.ToInt32(cmbxLedgerAccount.SelectedValue);
+                int generalLedgerAccId = Convert.ToInt32(cmbxAccount.SelectedValue);
 
                 bool budgetAppropriationExist;
 
@@ -112,7 +112,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
                 if (budgetAppropriationExist)
                 {
-                    epGeneralLedgerAcc.SetError(cmbxLedgerAccount, "Account you entered is not allowed. Account has continuing appropriation already exist on your record.");
+                    epGeneralLedgerAcc.SetError(cmbxAccount, "Account you entered is not allowed. Account has continuing appropriation already exist on your record.");
                     return true;
                 }
 
@@ -131,7 +131,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 #region Validation of Budget Appropriation Record
 
                 int? othersFPPId = string.IsNullOrEmpty(cmbxOthersFPP.Text.ToString()) ? null : Convert.ToInt32(cmbxOthersFPP.SelectedValue);
-                int generalLedgerAccId = Convert.ToInt32(cmbxLedgerAccount.SelectedValue);
+                int generalLedgerAccId = Convert.ToInt32(cmbxAccount.SelectedValue);
                 string remarks = txtRemarks.Text;
 
                 bool budgetAppropriationExist;
@@ -143,7 +143,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 
                 if (budgetAppropriationExist)
                 {
-                    epGeneralLedgerAcc.SetError(cmbxLedgerAccount, "Account you entered is not allowed. Budget appropriation already exist on your record.");
+                    epGeneralLedgerAcc.SetError(cmbxAccount, "Account you entered is not allowed. Budget appropriation already exist on your record.");
                     return true;
                 }
 
@@ -157,10 +157,10 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         }
 
-        private void cmbxLedgerAccount_Validating(object sender, CancelEventArgs e)
+        private void cmbxAccount_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbxLedgerAccount.Text))
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(epGeneralLedgerAcc, cmbxLedgerAccount, "General Ledger Account");
+            if (string.IsNullOrEmpty(cmbxAccount.Text))
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epGeneralLedgerAcc, cmbxAccount, "General Ledger Account");
             else if (ShowErrorLedgerNameNotExist())
                 e.Cancel = ShowErrorLedgerNameNotExist();
             else if(ShowErrorBudgetAppropriationContinuing())
@@ -169,31 +169,29 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 e.Cancel = ShowErrorBudgetAppropriationExist();
         }
 
-        private void cmbxLedgerAccount_Validated(object sender, EventArgs e)
+        private void cmbxAccount_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epGeneralLedgerAcc, cmbxLedgerAccount);
+            Helper.ClearErrorComboBox(epGeneralLedgerAcc, cmbxAccount);
         }
 
     
 
-        //numeric up down amounts
+        //AMOUNT VALIDATION
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
-
-            decimal totalSupplementalApprorpriationAmount = Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountById(budgetAppropriationId);
+            var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(budgetAppropriationId);
+            decimal totalSupplementalApprorpriationAmount = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0? 0 : dtSupplementalAppropriation.Compute("SUM(amount)", string.Empty));
 
             decimal appropriationAmount = nudAmount.Value;
 
             decimal totalAppropriationAmount = totalSupplementalApprorpriationAmount + appropriationAmount;
 
             if (string.IsNullOrEmpty(nudAmount.Text))
-            {
                 e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
-            }
             else if (nudAmount.Value == 0)
             {
-                epAmount.SetError(nudAmount, Helper.ErrorMessage("Valuable Amount"));
+                epAmount.SetError(nudAmount, Helper.ErrorMessage("Amount"));
                 e.Cancel = true;
             }
             else if(totalAppropriationAmount < totalAllotmentRelease)
@@ -207,6 +205,86 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
+
+
+
+        //ACCOUNT COMBOBOX
+        private DataTable DatatableAccounts()
+        {
+            var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
+            string accountGroupName = allotmentClassRepo["allotment_name"];
+
+            DataTable dtAccounts;
+
+            if (string.IsNullOrEmpty(cmbxAccount.Text))
+            {
+                if (Convert.ToInt32(allotmentClassId) == 4)
+                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroupName("Assets");
+                else
+                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupName(accountGroupName);
+            }
+            else
+            {
+                if (Convert.ToInt32(allotmentClassId) == 4)
+                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroupNameSearch("Assets", cmbxAccount.Text);
+                else
+                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupNameSearch(accountGroupName, cmbxAccount.Text);
+            }
+
+            return dtAccounts;
+        }
+
+        private void LoadAccounts()
+        {
+            try
+            {
+                cmbxAccount.DroppedDown = false;
+
+                if (DatatableAccounts().Rows.Count == 0) return;
+
+                var accountDict = new Dictionary<int, string>();
+                foreach (DataRow item in DatatableAccounts().Rows)
+                {
+                    int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
+                    string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
+
+                    accountDict.Add(accountId, accountName);
+                }
+
+                cmbxAccount.DataSource = new BindingSource(accountDict, null);
+                cmbxAccount.DisplayMember = "value";
+                cmbxAccount.ValueMember = "key";
+                Cursor.Current = Cursors.Default;
+
+                Helper.ClearErrorComboBox(epGeneralLedgerAcc, cmbxAccount);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+        }
+
+        private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbxAccount.Text))
+            {
+                cmbxAccount.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
+                LoadAccounts();
+                cmbxAccount.SelectedIndex = -1;
+                cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
+            }
+        }
+
+        private void cmbxAccount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1 && cmbxAccount.FindStringExact(cmbxAccount.Text) == -1 && !string.IsNullOrEmpty(cmbxAccount.Text))
+            {
+                LoadAccounts();
+                cmbxAccount.DroppedDown = true;
+            }
+        }
+
 
 
         private void ucBudgetAppropriations_Load(object sender, EventArgs e)
@@ -223,88 +301,9 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 dtDateEntry.MaxDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
 
                 LoadOthersFPPByFPPIdCombobox();
-                LoadAccount(cmbxLedgerAccount);
-                cmbxLedgerAccount.SelectedIndex = -1;
-                cmbxLedgerAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
-            }
-        }
-
-
-
-        //Match making Accounts Combobox
-        private DataTable DatatableAccounts()
-        {
-            var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
-            string accountGroupName = allotmentClassRepo["allotment_name"];
-
-            DataTable dtAccounts;
-
-            if (string.IsNullOrEmpty(cmbxLedgerAccount.Text))
-            {
-                if (Convert.ToInt32(allotmentClassId) == 4)
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroupName("Assets");
-                else
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupName(accountGroupName);
-            }
-            else
-            {
-                if (Convert.ToInt32(allotmentClassId) == 4)
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroupNameSearch("Assets", cmbxLedgerAccount.Text);
-                else
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupNameSearch(accountGroupName, cmbxLedgerAccount.Text);
-            }
-
-            return dtAccounts;
-        }
-
-        private void LoadAccount(ComboBox comboBox)
-        {
-            try
-            {
-                cmbxLedgerAccount.DroppedDown = false;
-
-                DataTable dtAccounts = DatatableAccounts();
-
-                var accountDict = new Dictionary<int, string>();
-                foreach (DataRow item in dtAccounts.Rows)
-                {
-                    int accountId = Convert.ToInt32(item["general_ledger_accounts_id"]);
-                    string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
-
-                    accountDict.Add(accountId, accountName);
-                }
-
-                comboBox.DataSource = new BindingSource(accountDict.Count == 0 ? null : accountDict, null);
-                comboBox.DisplayMember = "value";
-                comboBox.ValueMember = "key";
-                Cursor.Current = Cursors.Default;
-
-                Helper.ClearErrorComboBox(epGeneralLedgerAcc, comboBox);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-
-        }
-
-        private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(cmbxLedgerAccount.Text))
-            {
-                cmbxLedgerAccount.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
-                LoadAccount(cmbxLedgerAccount);
-                cmbxLedgerAccount.SelectedIndex = -1;
-                cmbxLedgerAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
-            }
-        }
-
-        private void cmbxLedgerAccount_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F1 && cmbxLedgerAccount.FindStringExact(cmbxLedgerAccount.Text) == -1 && !string.IsNullOrEmpty(cmbxLedgerAccount.Text))
-            {
-                LoadAccount(cmbxLedgerAccount);
-                cmbxLedgerAccount.DroppedDown = true;
+                LoadAccounts();
+                cmbxAccount.SelectedIndex = -1;
+                cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
             }
         }
     }

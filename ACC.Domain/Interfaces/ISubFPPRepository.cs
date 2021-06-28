@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IOthersFPPRepository : IRepository<OthersFPPModel>
+    public interface ISubFPPRepository : IRepository<SubFPPModel>
     {
         bool NameExist(string name);
         bool NameExist(int id, string name);
@@ -14,7 +14,9 @@ namespace ACC.Domain.Interfaces
         bool CodeExist(string otherFPPCode);
         bool CodeExist(int id, string otherFPPCode);
 
-        DataTable GetRecordsByFPPID(int id);
+        DataTable GetRecordsByFPPId(int id);
+
+        DataTable GetRecordsByFPPIdCodeName(int fppId, string searchTxt);
 
         DataTable GetRecorsByIDSearchCode(int id, string searchtxt);
     }

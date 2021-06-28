@@ -915,31 +915,6 @@ namespace AccountingSystem
 
         }
 
-        internal static void FPPBudgetAppropriationsDatagridView(DataTable dataTable, DataGridView dataGridView) 
-        {
-            try
-            {
-                dataGridView.DataSource = dataTable;
-                dataGridView.Columns["id"].Visible = false;
-                dataGridView.Columns["service_name"].Visible = false;
-                dataGridView.Columns["fpp_code"].HeaderText = "FPP Code";
-                dataGridView.Columns["fpp_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-                dataGridView.Columns["fpp_name"].HeaderText = "FPP Name";
-                dataGridView.Columns["is_special"].Visible = false;
-                dataGridView.Columns["created_at"].Visible = false;
-                dataGridView.Columns["updated_at"].Visible = false;
-                dataGridView.ClearSelection();
-
-                dataGridView.Columns["fpp_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-                dataGridView.Columns["fpp_code"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["fpp_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
-            catch (Exception ex) 
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
         internal static void BudgetAppropriationsDatagridView(DataGridView dgvBudgetAppropriations, int fppID, int allotmentClassID, int fundId, short year, TextBox txtTotalAppropriation)
         {
             try
@@ -1033,7 +1008,7 @@ namespace AccountingSystem
 
                 budgetAppropriationsModel.OthersFPPId = null;
                 
-                var dtGetViewRecordsByFFPIDByAllotmentClass = Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(budgetAppropriationsModel);
+                var dtGetViewRecordsByFFPIDByAllotmentClass = Factory.BudgetAppropriationsRepository().GetViewRecordsByIdsYear(budgetAppropriationsModel);
 
 
                 //Load by loop All Budget Appropriations Records without Others FPP 
@@ -1057,7 +1032,7 @@ namespace AccountingSystem
 
 
                     budgetAppropriationsModel.OthersFPPId = othersFPPID;
-                    DataTable dtGetViewRecordsByIds = Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(budgetAppropriationsModel);
+                    DataTable dtGetViewRecordsByIds = Factory.BudgetAppropriationsRepository().GetViewRecordsByIdsYear(budgetAppropriationsModel);
 
                     foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByIds.Rows)
                     {
@@ -1080,11 +1055,17 @@ namespace AccountingSystem
                     short rowYear = Convert.ToInt16(drGetViewRecordsByIds["year"]);
                     byte rowContinuing = Convert.ToByte(drGetViewRecordsByIds["continuing"]);
                     string remarks = drGetViewRecordsByIds["remarks"].ToString();
-                    decimal totalSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetTotalSupplementalAmountById(rowId);
 
+                    //GET TOTAL SUPPLEMENTAL APPROPRIATIONS
+                    var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(rowId);
+                    decimal totalSupplementalAppropriation = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0? 0 : dtSupplementalAppropriation.Compute("Sum(amount)", string.Empty));
+
+                    //GET TOTAL ALLOTMENT RELEASE
+                    var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(rowId);
+                    decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("SUM(amount)", string.Empty));
+
+                    //GET TOTAL APPROPRIATION
                     decimal totalAppropriationAmount = totalSupplementalAppropriation + rowAppropriationAmount;
-
-                    decimal totalAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewTotalAllotmentReleaseAmountById(rowId);
 
                     decimal appropriationBalance = (totalSupplementalAppropriation + rowAppropriationAmount) - totalAllotmentRelease;
 
@@ -1142,61 +1123,6 @@ namespace AccountingSystem
         }
 
         #endregion BudgetAppropriations
-
-        #region Allotment Release Details
-
-        internal static void AllotmentReleaseDatagridView(DataTable dataTable, DataGridView dgv, int budgetAppropriationID)
-        {
-            try
-            {
-                //Clearing Datagrid View  Rows & Columns before Loading new one
-                dgv.Rows.Clear();
-                dgv.Columns.Clear();
-
-                //Set up new Columns to Datagrid View
-                dgv.Columns.Add("id", "id");
-                dgv.Columns.Add("budget_appropriations_id", "Budget Appropriation ID");
-                dgv.Columns.Add("aro_no", "Allotment Release No.");
-                dgv.Columns.Add("purpose", "Purpose");
-                dgv.Columns.Add("date_issued", " Date Issued");
-                dgv.Columns.Add("amount", "Amount");
-                dgv.Columns.Add("created_at", "Created at");
-                dgv.Columns.Add("updated_at", "Updated at");
-
-                //Set up Column Format
-                dgv.Columns[0].Visible = false;
-                dgv.Columns[1].Visible = false;
-                dgv.Columns[4].Visible = false;
-                dgv.Columns[5].DefaultCellStyle.Format = "N2";
-                dgv.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                dgv.Columns[6].Visible = false;
-                dgv.Columns[7].Visible = false;
-
-                //Load by loop All Budget Appropriations Records with Others FPP 
-                foreach (DataRow drAllotmentRelease in dataTable.Rows)
-                {
-                    dgv.Rows.Add(new object[] {
-                            drAllotmentRelease["id"],
-                            drAllotmentRelease["budget_appropriations_id"],
-                            drAllotmentRelease["aro_no"],
-                            drAllotmentRelease["purpose"],
-                            drAllotmentRelease["date_issued"],
-                            drAllotmentRelease["amount"],
-                            drAllotmentRelease["created_at"],
-                            drAllotmentRelease["updated_at"] });
-                }
-
-                dgv.ClearSelection();
-                Helper.DatagridDefaultStyle(dgv, true);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-
-        }
-
-        #endregion Allotment Release Details
 
         #region Supplemental Appropriations
 
@@ -1261,24 +1187,33 @@ namespace AccountingSystem
 
         #region Obligation Request
 
-        internal static void ObligationRequestDatagridView(DataTable dataTable, DataGridView dataGridView)
+        internal static void ObligationRequestDatagridView(DataGridView dataGridView, string searchTxt)
         {
             try
             {
-                foreach (DataRow dataRow in dataTable.Rows)
-                {
-                    dataGridView.Rows.Add(new object[] {
-                            dataRow["obligation_request_id"],
-                            dataRow["obligation_no"],
-                            dataRow["account_code"],
-                            dataRow["gen_ledger_acc_name"],
-                            dataRow["date_requested"],
-                            dataRow["obligation_amount"],
-                            dataRow["created_at"],
-                            dataRow["updated_at"],
-                    });
-                }
+                dataGridView.DataSource = Factory.ObligationRequestRepository().GetRecordsBySearch(searchTxt);
 
+                dataGridView.Columns["obligation_no"].HeaderText = "Obligation No.";
+                dataGridView.Columns["payee"].HeaderText = "Payee";
+                dataGridView.Columns["explanation"].HeaderText = "Explanation";
+                dataGridView.Columns["reference_no"].HeaderText = "Reference No.";
+                dataGridView.Columns["id"].Visible = false;
+                dataGridView.Columns["date_requested"].Visible = false;
+                dataGridView.Columns["created_at"].Visible = false;
+                dataGridView.Columns["created_by"].Visible = false;
+                dataGridView.Columns["updated_at"].Visible = false;
+                dataGridView.Columns["updated_by"].Visible = false;
+
+                dataGridView.Columns["id"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["obligation_no"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["payee"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["explanation"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["reference_no"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["date_requested"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["created_at"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["created_by"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["updated_at"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["updated_by"].SortMode = DataGridViewColumnSortMode.NotSortable;
 
                 dataGridView.ClearSelection();
 

@@ -75,7 +75,6 @@ namespace AccountingSystem
             this.menucashbook = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnBudgetAppropriations = new System.Windows.Forms.ToolStripButton();
-            this.btnSupplementalAppropriations = new System.Windows.Forms.ToolStripButton();
             this.btnAllotmentRelease = new System.Windows.Forms.ToolStripButton();
             this.btnObligationRequest = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -434,7 +433,6 @@ namespace AccountingSystem
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnBudgetAppropriations,
-            this.btnSupplementalAppropriations,
             this.btnAllotmentRelease,
             this.btnObligationRequest,
             this.toolStripSeparator1,
@@ -457,16 +455,6 @@ namespace AccountingSystem
             this.btnBudgetAppropriations.Size = new System.Drawing.Size(189, 28);
             this.btnBudgetAppropriations.Text = "Budget Appropriations";
             this.btnBudgetAppropriations.Click += new System.EventHandler(this.btnBudgetAppropriations_Click);
-            // 
-            // btnSupplementalAppropriations
-            // 
-            this.btnSupplementalAppropriations.Image = global::AccountingSystem.Properties.Resources.supplemental_appropriations_24px;
-            this.btnSupplementalAppropriations.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSupplementalAppropriations.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSupplementalAppropriations.Name = "btnSupplementalAppropriations";
-            this.btnSupplementalAppropriations.Size = new System.Drawing.Size(233, 28);
-            this.btnSupplementalAppropriations.Text = "Supplemental Appropriations";
-            this.btnSupplementalAppropriations.Click += new System.EventHandler(this.btnSupplementalAppropriations_Click);
             // 
             // btnAllotmentRelease
             // 
@@ -682,7 +670,6 @@ namespace AccountingSystem
         internal System.Windows.Forms.ToolStripButton btnBudgetAppropriations;
         internal System.Windows.Forms.ToolStripButton btnAllotmentRelease;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton btnSupplementalAppropriations;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         internal System.Windows.Forms.RadioButton radBtnBudget;

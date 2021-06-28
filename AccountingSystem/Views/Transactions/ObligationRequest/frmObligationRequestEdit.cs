@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,29 +22,52 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             InitializeComponent();
             Helper.LoadFormIcon(this);
             uc = ucObligationRequest1;
-            uc.cmbxAccount.Enabled = false;
             _ucObligationRequestMain = ucObligationRequestMain;
             uc.LoadReferences(_ucObligationRequestMain);
         }
 
 
-        private void frmObligationRequestEdit_Load(object sender, EventArgs e)
+        private bool ApplyEdited() 
         {
-            uc.LoadSelected();
+            try
+            {
+                if (!uc.ValidateChildren())
+                {
+                    Helper.MessageBoxError(uc.GetFormErrors());
+                    return false;
+                }
+
+                var rowIndex = _ucObligationRequestMain.dgObligationRequests.CurrentCell.RowIndex;
+
+                int budgetAppropriationId = Convert.ToInt32(uc.cmbxObjectOfExpenditure.SelectedValue);
+                var budgetAppropriationsDict = Factory.BudgetAppropriationsRepository().GetViewRecordByID(budgetAppropriationId);
+
+                string remarks = string.IsNullOrEmpty(budgetAppropriationsDict["remarks"].ToString()) ? string.Empty : $"({budgetAppropriationsDict["remarks"]})";
+
+                string objectOfExpenditure = $"{budgetAppropriationsDict["general_ledger_accounts_name"]} {remarks}";
+                string accountCode = budgetAppropriationsDict["account_code"].ToString();
+
+                var amount = uc.nudAmount.Value;
+
+                _ucObligationRequestMain.dgObligationRequests.Rows[rowIndex].Cells["budget_appropriation_id"].Value = budgetAppropriationId;
+                _ucObligationRequestMain.dgObligationRequests.Rows[rowIndex].Cells["object_expenditure"].Value = objectOfExpenditure;
+                _ucObligationRequestMain.dgObligationRequests.Rows[rowIndex].Cells["account_code"].Value = accountCode;
+                _ucObligationRequestMain.dgObligationRequests.Rows[rowIndex].Cells["obligation_amount"].Value = amount;
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
         }
+
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if (!uc.ValidateChildren())
+            if (ApplyEdited())
             {
-                Helper.MessageBoxError(uc.GetFormErrors());
-            }
-            else
-            {
-                var rowIndex = _ucObligationRequestMain.dataGridView1.CurrentCell.RowIndex;
-                var amount = uc.nudAmount.Value;
-
-                _ucObligationRequestMain.dataGridView1.Rows[rowIndex].Cells["amount"].Value = amount;
                 Close();
             }
         }

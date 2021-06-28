@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,48 +22,23 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             InitializeComponent();
             Helper.LoadFormIcon(this);
             uc = ucObligationRequestMain1;
-            btnNew.Click += new EventHandler(BtnNew_Click);
-            btnSave.Click += new EventHandler(BtnSave_Click);
-            btnDelete.Click += new EventHandler(BtnDelete_Click);
-            btnCancel.Click += new EventHandler(BtnCancel_CLick);
-            btnSearch.Click += new EventHandler(BtnSearch_Click);
-            btnCancel.Enabled = false;
             btnDelete.Enabled = false;
         }
-
-
-        private void UnsavedWorkPrompt()
-        {
-            var message = "Are you sure? Unsaved data will not be saved.";
-
-            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                uc.ResetForm();
-            }
-        }
-
-        private void BtnNew_Click(object sender, EventArgs e)
-        {
-            UnsavedWorkPrompt();
-        }
-
 
         private List<ObligationAccountModel> ObligationAccountsModelList() 
         {
             var obligationRequestModelList = new List<ObligationAccountModel>();
 
-            foreach (DataGridViewRow item in uc.dataGridView1.Rows) 
+            foreach (DataGridViewRow item in uc.dgObligationRequests.Rows) 
             {
-
-                int accountId = Convert.ToInt32(item.Cells["account_id"].Value);
-                decimal amount = Convert.ToDecimal(item.Cells["amount"].Value);
+                int budgetAppropriationId = Convert.ToInt32(item.Cells["budget_appropriation_id"].Value);
+                decimal obligationAmount = Convert.ToDecimal(item.Cells["obligation_amount"].Value);
 
                 var obligationAccountModel = new ObligationAccountModel()
                 {
-                    AccountId = accountId,
-                    Amount = amount
+                    BudgetAppropriationId = budgetAppropriationId,
+                    Amount = obligationAmount
                 };
-
 
                 obligationRequestModelList.Add(obligationAccountModel);
             }
@@ -70,6 +46,24 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return obligationRequestModelList;
         }
 
+        internal void EnableDisableButtons() 
+        {
+            if (uc.obligationRequestId == 0)
+            {
+                btnSave.Enabled = true;
+                btnDelete.Enabled = false;
+                btnCancel.Enabled = false;
+            }
+            else
+            {
+                btnSave.Enabled = true;
+                btnDelete.Enabled = true;
+                btnCancel.Enabled = true;
+            }
+        }
+
+
+        //DELETE
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             try
@@ -77,9 +71,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 if (Helper.MessageBoxConfirmDelete(1))
                 {
                     _ = Factory.ObligationRequestRepository().Delete(uc.obligationRequestId);
-                    btnNew.Enabled = true;
                     btnSave.Text = "&Save";
-                    btnCancel.Enabled = false;
                     btnDelete.Enabled = false;
                     uc.ResetForm();
                 }
@@ -90,29 +82,29 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
         }
 
-
-
+        //INSERT
         private bool InsertData() 
         {
             try
             {
+                string obligationNo = $"{uc.mskTxtObligationNoSeries.Text}-{uc.mskTxtObligationNoTemplate.Text}";
 
                 var obligationRequestModel = new ObligationRequestModel()
                 {
-                    FPPId = Convert.ToInt32(uc.cmbxFPP.SelectedValue),
-                    OtherFPPId = string.IsNullOrEmpty(uc.cmbxOtherFPP.Text) ? null : Convert.ToInt32(uc.cmbxOtherFPP.SelectedValue),
-                    FundId = uc.fundId,
-                    AllotmentClassId = uc.allotmentClassId,
-                    DateRequested = uc.dtDateRequest.Value,
-                    ObligationNo = $"{uc.mskTxtObligationNoSeries.Text}-{uc.mskTxtObligationNoTemplate.Text}",
+                    ObligationNo = obligationNo,
                     Payee = uc.txtPayee.Text,
                     Explanation = uc.txtExplanation.Text,
                     ReferenceNo = uc.txtReferenceNo.Text,
+                    DateRequested = uc.dtDateRequest.Value,
                     CreatedBy = Helper.UserId
                 };
 
 
                 return Factory.ObligationRequestRepository().Insert(obligationRequestModel, ObligationAccountsModelList());
+            }
+            catch (MySqlException ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
             catch (Exception ex)
             {
@@ -121,17 +113,21 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-
+        //UPDATE
         private bool UpdateData() 
         {
             try
             {
+                string obligationNo = $"{uc.mskTxtObligationNoSeries.Text}-{uc.mskTxtObligationNoTemplate.Text}";
+
                 var obligationRequestModel = new ObligationRequestModel()
                 {
                     Id = uc.obligationRequestId,
+                    ObligationNo = obligationNo,
                     Payee = uc.txtPayee.Text,
                     Explanation = uc.txtExplanation.Text,
                     ReferenceNo = uc.txtReferenceNo.Text,
+                    DateRequested = uc.dtDateRequest.Value,
                     UpdatedBy = Helper.UserId
                 };
 
@@ -146,12 +142,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         }
 
 
-
         private bool SaveData() 
         {
             try
             {
-                if (!uc.ValidateChildren() || uc.ShowErrorListEmpty()) 
+                if (!uc.ValidateChildren()) 
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
@@ -162,10 +157,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 if (uc.obligationRequestId == 0)
                     saveData = InsertData();
                 else
-                {
                     saveData = UpdateData();
-                }
-
 
                 return saveData;
             }
@@ -176,45 +168,42 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-
-        private void Actions()
-        {
-            if (uc.obligationRequestId == 0)
-                Helper.MessageBoxSuccess("Obligation Request has been saved.");
-            else
-            {
-                Helper.MessageBoxSuccess("Obligation Request has been updated.");
-                btnNew.Enabled = true;
-                btnSave.Text = "&Save";
-                btnDelete.Enabled = false;
-                btnCancel.Enabled = false;
-            }
-
-            uc.ResetForm();
-        }
-
         private void BtnSave_Click(object sender, EventArgs e)
         {
             if (SaveData())
             {
-                Actions();
+                string message = uc.obligationRequestId == 0 ? "saved" : "updated";
+                Helper.MessageBoxSuccess($"Obligation Request has been {message}.");
+                uc.ResetForm();
+                btnSave.Text = "Save";
             }
         }
 
 
-        private void BtnCancel_CLick(object sender, EventArgs e)
+
+        private void CancelAction() 
         {
-            btnSave.Text = "Save";
-            btnNew.Enabled = true;
-            btnCancel.Enabled = false;
-            btnDelete.Enabled = false;
-            uc.ResetForm();
+            string message = "Are you sure? Changes cannot be undone.";
+
+            if (uc.obligationRequestId > 0 || uc.dgObligationRequests.Rows.Count > 0)
+            {
+                if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    btnSave.Text = "Save";
+                    btnDelete.Enabled = false;
+                    uc.ResetForm();
+                }
+            }
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            CancelAction();
         }
 
         private void BtnSearch_Click(object sender, EventArgs e)
         {
             _ = new frmObligationRequestSearch(this).ShowDialog();
         }
-
     }
 }
