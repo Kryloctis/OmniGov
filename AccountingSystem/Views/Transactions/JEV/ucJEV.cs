@@ -111,6 +111,9 @@ namespace AccountingSystem.Views.Transactions.JEV
                 radJournal.Click += new EventHandler(radioJournals_Click);
                 radJournal.CheckedChanged += new EventHandler(radioJournals_CheckedChanged);
             }
+
+            SetGeneralJournalFields();
+
         }
 
         internal void LoadCollectingOfficer()
@@ -171,6 +174,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             var radJournals = sender as RadioButton;
             journalId = Convert.ToByte(radJournals.Tag);
+            ClearErrors();
         }
 
         private void SetGeneralJournalFields()
@@ -343,6 +347,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             LoadFunds();
             LoadJournals();
 
+
             btnEditAccount.Enabled = false;
             btnRemoveAccount.Enabled = false;
         }
@@ -436,6 +441,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 e.Cancel = Helper.ShowErrorTextBoxEmpty(epExplanation, txtExplanation, lblExplanation.Text);
             }
         }
+
         private void txtExplanation_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(epExplanation, txtExplanation);
@@ -460,6 +466,14 @@ namespace AccountingSystem.Views.Transactions.JEV
             _ = new frmJEVAccountEdit(this).ShowDialog();
         }
 
- 
+        internal void ClearErrors()
+        { 
+            Helper.ClearErrorTextBox(epPayee, txtPayee);
+            Helper.ClearMaskedTextboxError(epJEV, txtJEVNo);
+            Helper.ClearErrorTextBox(epExplanation, txtExplanation);
+        }
+
+
+
     }
 }
