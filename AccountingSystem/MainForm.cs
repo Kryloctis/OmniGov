@@ -160,8 +160,8 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Report SAAOB"))
                 menuSAAOB.Visible = false;
 
-            //if (!Helper.HasPermission("Report SAAOBB"))
-            //    menuSAAOBB.Visible = false;
+            if (!Helper.HasPermission("Report SAAOBB"))
+                menuSAAOBB.Visible = false;
         }
 
         private void LoadDashboard()

@@ -93,7 +93,7 @@ namespace ACC.Data
                     new object[] { "@explanation", DbType.String, $"%{searchText}%" },
                 };
 
-                string query = $"SELECT id, funds_id, journals_id, jev_no, date_entry, ref_no, payee, explanation, is_approved, created_at, created_by, updated_at, updated_by FROM {viewTableName} WHERE is_approved = 1 AND (jev_no LIKE @jev_no OR ref_no LIKE @ref_no OR payee LIKE @payee OR explanation LIKE @explanation)";
+                string query = $"SELECT id, funds_id, journals_id, jev_no, date_entry, ref_no, payee, explanation, fund_code ,is_approved, created_at, created_by, updated_at, updated_by FROM {viewTableName} WHERE is_approved = 1 AND (jev_no LIKE @jev_no OR ref_no LIKE @ref_no OR payee LIKE @payee OR explanation LIKE @explanation)";
 
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
@@ -457,28 +457,20 @@ namespace ACC.Data
             }
         }
 
-        public bool JevNumberExist(string jevNo)
+        public string GetLastJevNoSeries() 
         {
             try
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@jev_no", DbType.String, jevNo },
-                };
-
-                string query = $"SELECT id FROM {tableName} WHERE jev_no = @jev_no";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
+                string query = $"SELECT LPAD(MAX(jev_no)+1, 4, '0') AS jev_no FROM {tableName}";
+                return _dbGenericCommands.ExecuteScalar(query);
             }
             catch (Exception)
             {
                 throw;
-            };
-
-            return false;
+            }
         }
+
+
 
         public bool JevNumberExist(string jevNo, int id)
         {
@@ -571,6 +563,30 @@ namespace ACC.Data
             {
                 throw;
             };
+        }
+
+        public bool JevNumberAndYearExist(string jevNo, int jevEntryDate)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@jev_no", DbType.String, jevNo },
+                    new object[] { "@jev_date_of_entry", DbType.Int16, jevEntryDate },
+                };
+
+                string query = $"SELECT * FROM {tableName} WHERE jev_no = @jev_no AND YEAR(date_entry) = @jev_date_of_entry";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
         }
     }
 }

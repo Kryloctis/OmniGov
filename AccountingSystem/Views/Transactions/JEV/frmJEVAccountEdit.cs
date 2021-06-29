@@ -82,7 +82,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             bool? isDeposit = (bool?)ucJEV.dgAccounts.Rows[rowIndex].Cells["IsDeposit"].Value;
             decimal amount = GetAmountDebitCredit(isDebit);
 
-            ucJEVAccount.cmbFPP.SelectedValue = fppId;
+            ucJEVAccount.cmbFPP.SelectedValue = Convert.ToInt32(fppId);
             LoadSelectedGeneralLedgerAccount(generalLedgerId, accountCode, accountName);
             CheckedDebitCredit(isDebit);
             CheckedCollectionsDeposits(isDeposit);
@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             ucJEVAccount.nudAmount.Value = amount;
 
             // load subsidiaries and select item
-            ucjevAccount1.LoadSubsidiary(generalLedgerId);
+            ucjevAccount1.LoadSubsidiary();
             if (subsidiaryLedgerId != null) ucJEVAccount.cmbSubsidiary.SelectedValue = subsidiaryLedgerId;
         }
 
@@ -151,6 +151,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             Helper.LoadFormIcon(this);
             ucJEVAccount.LoadFPP();
             LoadSelectedRecord();
+            ucJEVAccount.cmbFPP.TextChanged += new EventHandler(ucJEVAccount.cmbxFPP_TextChanged);
 
             if (ucJEV.journalName != "Cash Receipts Journal")
             {

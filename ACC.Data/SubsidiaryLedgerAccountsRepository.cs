@@ -5,6 +5,7 @@ using System.Text;
 using System.Transactions;
 using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 
 namespace ACC.Data
 {
@@ -158,6 +159,10 @@ namespace ACC.Data
 
                 var dtJournals = new DataTable();
                 return _dbGenericCommands.ExecuteReader(query, parameters);
+            }
+            catch(MySqlException)
+            {
+                throw; 
             }
             catch (Exception)
             {

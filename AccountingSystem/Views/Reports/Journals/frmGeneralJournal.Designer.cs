@@ -68,7 +68,7 @@ namespace AccountingSystem.Views.Reports.Journals
             // 
             // dtpMonth
             // 
-            this.dtpMonth.CustomFormat = "MMMM-yyyy";
+            this.dtpMonth.CustomFormat = "MMMMyyyy";
             this.dtpMonth.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpMonth.Location = new System.Drawing.Point(331, 12);
             this.dtpMonth.Name = "dtpMonth";
@@ -107,6 +107,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.Controls.Add(this.panel1);
             this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "frmGeneralJournal";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Report > General Journal";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

@@ -2,16 +2,20 @@
 using System.Linq;
 using System.Windows.Forms;
 using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.ChartOfAccounts;
+using AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary;
 
 namespace AccountingSystem.Views.Manage.BeginningBalances
 {
     public partial class frmBeginningBalanceAdd : Form
     {
         private readonly UcBeginningBalances uc;
+        frmSubsidiary _frmSubsidiary;
 
-        public frmBeginningBalanceAdd(ushort generalLedgerId, ushort subsidiaryLedgerId = 0)
+        public frmBeginningBalanceAdd(frmSubsidiary frmSubsidiary,ushort generalLedgerId, ushort subsidiaryLedgerId = 0)
         {
             InitializeComponent();
+            _frmSubsidiary = frmSubsidiary;
             uc = ucBeginningBalances1;
             uc.generalLedgerId = generalLedgerId;
             uc.subsidiaryLedgerId = subsidiaryLedgerId;
@@ -80,6 +84,9 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Beginning balance has been saved.");
+
+                if(_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
+
                 uc.ResetForm();
             }
         }

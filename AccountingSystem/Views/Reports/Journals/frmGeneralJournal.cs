@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Reports.Journals
 
             foreach (DataRow item in dtGeneralJournalFromDB.Rows)
             {
-                jevNo = item["jev_no"].ToString();
+                jevNo = item["full_jev_no"].ToString();
                 particulars = item["ledger_name"].ToString();
 
                 DataRow row = dtGeneralJournal.NewRow();

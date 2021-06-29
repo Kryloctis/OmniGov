@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 12);
+            this.label1.Location = new System.Drawing.Point(-1, 3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 15);
             this.label1.TabIndex = 0;
@@ -69,17 +69,18 @@ namespace AccountingSystem.Views.Transactions.JEV
             // cmbFPP
             // 
             this.cmbFPP.FormattingEnabled = true;
-            this.cmbFPP.Location = new System.Drawing.Point(67, 9);
+            this.cmbFPP.Location = new System.Drawing.Point(66, 0);
             this.cmbFPP.Name = "cmbFPP";
             this.cmbFPP.Size = new System.Drawing.Size(370, 23);
             this.cmbFPP.TabIndex = 0;
+            this.cmbFPP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxFPP_KeyDown);
             this.cmbFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbFPP_Validating);
             this.cmbFPP.Validated += new System.EventHandler(this.cmbFPP_Validated);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(0, 41);
+            this.label2.Location = new System.Drawing.Point(-1, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 15);
             this.label2.TabIndex = 2;
@@ -88,7 +89,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // cmbAccount
             // 
             this.cmbAccount.FormattingEnabled = true;
-            this.cmbAccount.Location = new System.Drawing.Point(67, 38);
+            this.cmbAccount.Location = new System.Drawing.Point(66, 29);
             this.cmbAccount.Name = "cmbAccount";
             this.cmbAccount.Size = new System.Drawing.Size(370, 23);
             this.cmbAccount.TabIndex = 1;
@@ -113,7 +114,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.panel1.Controls.Add(this.radioCredit);
             this.panel1.Controls.Add(this.radioDebit);
-            this.panel1.Location = new System.Drawing.Point(67, 96);
+            this.panel1.Location = new System.Drawing.Point(66, 87);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(143, 27);
             this.panel1.TabIndex = 5;
@@ -132,7 +133,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.pnlCollectionsDeposits.Controls.Add(this.radioDeposits);
             this.pnlCollectionsDeposits.Controls.Add(this.radioCollections);
-            this.pnlCollectionsDeposits.Location = new System.Drawing.Point(239, 96);
+            this.pnlCollectionsDeposits.Location = new System.Drawing.Point(238, 87);
             this.pnlCollectionsDeposits.Name = "pnlCollectionsDeposits";
             this.pnlCollectionsDeposits.Size = new System.Drawing.Size(198, 27);
             this.pnlCollectionsDeposits.TabIndex = 6;
@@ -162,7 +163,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // nudAmount
             // 
             this.nudAmount.DecimalPlaces = 2;
-            this.nudAmount.Location = new System.Drawing.Point(67, 129);
+            this.nudAmount.Location = new System.Drawing.Point(66, 120);
             this.nudAmount.Maximum = new decimal(new int[] {
             -727379968,
             232,
@@ -179,7 +180,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1, 131);
+            this.label3.Location = new System.Drawing.Point(0, 122);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(51, 15);
             this.label3.TabIndex = 8;
@@ -189,7 +190,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.cmbSubsidiary.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSubsidiary.FormattingEnabled = true;
-            this.cmbSubsidiary.Location = new System.Drawing.Point(67, 67);
+            this.cmbSubsidiary.Location = new System.Drawing.Point(66, 58);
             this.cmbSubsidiary.Name = "cmbSubsidiary";
             this.cmbSubsidiary.Size = new System.Drawing.Size(370, 23);
             this.cmbSubsidiary.TabIndex = 2;
@@ -197,7 +198,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(0, 70);
+            this.label4.Location = new System.Drawing.Point(-1, 61);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(61, 15);
             this.label4.TabIndex = 10;
@@ -207,7 +208,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.btnSubsidiaryLedger.Enabled = false;
             this.btnSubsidiaryLedger.Image = ((System.Drawing.Image)(resources.GetObject("btnSubsidiaryLedger.Image")));
-            this.btnSubsidiaryLedger.Location = new System.Drawing.Point(443, 68);
+            this.btnSubsidiaryLedger.Location = new System.Drawing.Point(442, 59);
             this.btnSubsidiaryLedger.Name = "btnSubsidiaryLedger";
             this.btnSubsidiaryLedger.Size = new System.Drawing.Size(22, 22);
             this.btnSubsidiaryLedger.TabIndex = 8;
@@ -230,6 +231,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.Controls.Add(this.btnSubsidiaryLedger);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cmbSubsidiary);
@@ -242,7 +245,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.Controls.Add(this.cmbFPP);
             this.Controls.Add(this.label1);
             this.Name = "ucJEVAccount";
-            this.Size = new System.Drawing.Size(489, 164);
+            this.Size = new System.Drawing.Size(467, 146);
+            this.Load += new System.EventHandler(this.ucJEVAccount_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.pnlCollectionsDeposits.ResumeLayout(false);
@@ -273,8 +277,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnSubsidiaryLedger;
         internal System.Windows.Forms.Panel pnlCollectionsDeposits;
-        private System.Windows.Forms.ErrorProvider epFPP;
         private System.Windows.Forms.ErrorProvider epAccount;
         private System.Windows.Forms.ErrorProvider epAmount;
+        internal System.Windows.Forms.ErrorProvider epFPP;
     }
 }
