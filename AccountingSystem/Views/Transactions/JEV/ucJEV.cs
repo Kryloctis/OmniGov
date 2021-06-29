@@ -112,6 +112,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                 radJournal.CheckedChanged += new EventHandler(radioJournals_CheckedChanged);
             }
 
+            SetGeneralJournalFields();
+
         }
 
         internal void LoadCollectingOfficer()
@@ -345,6 +347,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             LoadFunds();
             LoadJournals();
 
+
             btnEditAccount.Enabled = false;
             btnRemoveAccount.Enabled = false;
         }
@@ -438,6 +441,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 e.Cancel = Helper.ShowErrorTextBoxEmpty(epExplanation, txtExplanation, lblExplanation.Text);
             }
         }
+
         private void txtExplanation_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(epExplanation, txtExplanation);
