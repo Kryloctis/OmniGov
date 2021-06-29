@@ -84,6 +84,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.Controls.Add(this.dtpMonth);
             this.Controls.Add(this.btnRetrieve);
             this.Name = "frmCashReceiptsJournalReport";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Report > Cash Receipts Journal";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

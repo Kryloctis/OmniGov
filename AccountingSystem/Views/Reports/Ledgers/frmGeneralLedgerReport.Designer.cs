@@ -95,6 +95,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "frmGeneralLedgerReport";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Report > General Ledger";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
