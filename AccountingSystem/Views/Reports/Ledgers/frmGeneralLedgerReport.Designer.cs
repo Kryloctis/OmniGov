@@ -53,6 +53,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             this.cmbAccount.Name = "cmbAccount";
             this.cmbAccount.Size = new System.Drawing.Size(370, 23);
             this.cmbAccount.TabIndex = 3;
+            this.cmbAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxAccount_KeyDown);
             // 
             // btnRetrieve
             // 
