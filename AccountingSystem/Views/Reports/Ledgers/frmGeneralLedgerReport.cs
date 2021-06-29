@@ -24,17 +24,80 @@ namespace AccountingSystem.Views.Reports.Ledgers
             panel1.Controls.Add(reportViewer);
         }
 
+
+
+        //ACCOUNT COMBOBOX
+        private DataTable DatatableAccounts()
+        {
+            DataTable dtAccounts;
+
+            if (string.IsNullOrEmpty(cmbAccount.Text))
+            {
+                dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
+            }
+            else
+            {
+                dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbAccount.Text);
+            }
+
+            return dtAccounts;
+        }
+
+        private void LoadAccounts()
+        {
+            try
+            {
+                cmbAccount.DroppedDown = false;
+
+                if (DatatableAccounts().Rows.Count == 0) return;
+
+                var accountDict = new Dictionary<ushort, string>();
+                foreach (DataRow item in DatatableAccounts().Rows)
+                {
+                    ushort accountId = Convert.ToUInt16(item["general_ledger_accounts_id"]);
+                    string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
+
+                    accountDict.Add(accountId, accountName);
+                }
+
+                cmbAccount.DataSource = new BindingSource(accountDict, null);
+                cmbAccount.DisplayMember = "value";
+                cmbAccount.ValueMember = "key";
+                Cursor.Current = Cursors.Default;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+        }
+
+        private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbAccount.Text))
+            {
+                cmbAccount.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
+                LoadAccounts();
+                cmbAccount.SelectedIndex = -1;
+                cmbAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
+            }
+        }
+
+        private void cmbxAccount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1 && cmbAccount.FindStringExact(cmbAccount.Text) == -1 && !string.IsNullOrEmpty(cmbAccount.Text))
+            {
+                LoadAccounts();
+                cmbAccount.DroppedDown = true;
+            }
+        }
+
+
         private void LoadFunds()
         {
             cmbFunds.DataSource = Factory.FundsRepository().GetRecords();
             cmbFunds.ValueMember = "id";
             cmbFunds.DisplayMember = "fund_name";
-        }
-
-        private void LoadGeneralLedgerAccounts()
-        {
-            var dtGeneralLedger = Factory.GeneralLedgerAccountsRepository().GetRecords();
-            HelperLoadRecords.GeneralLedgerComboBox(dtGeneralLedger, cmbAccount, "ledger_name", "id");
         }
 
         private void LoadYear()
@@ -183,21 +246,83 @@ namespace AccountingSystem.Views.Reports.Ledgers
             }
         }
 
+
         private void frmGeneralLedgerReport_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
             LoadFunds();
-            LoadGeneralLedgerAccounts();
+
+            //ACCOUNTS
+            LoadAccounts();
+            cmbAccount.SelectedIndex = -1;
+            cmbAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
+
             LoadYear();
         }
 
+
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
+            if (AccountComboboxEmpty() || !AccountExist() || FundsComboboxEmpty() || !FundExist()) 
+            {
+                Helper.MessageBoxError($"{cmbAccount.Tag}");
+                return;
+            }
+
             LoadReport(reportViewer.LocalReport);
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
             reportViewer.ZoomMode = ZoomMode.Percent;
             reportViewer.ZoomPercent = 100;
             reportViewer.RefreshReport();
+        }
+
+
+        //VALIDATIONS
+        private bool AccountComboboxEmpty()
+        {
+            if (string.IsNullOrEmpty(cmbAccount.Text.Trim()))
+            {
+                cmbAccount.Tag = "Please enter an account.";
+                return true;
+            }
+            else
+                return false;
+        }
+
+        private bool AccountExist()
+        {
+            string accountName = cmbAccount.Text.Trim();
+
+            if (cmbAccount.FindStringExact(accountName) == -1 && !string.IsNullOrEmpty(accountName))
+            {
+                cmbAccount.Tag = "Account you entered doesn't exist";
+                return false;
+            }
+            return true;
+        }
+
+
+        private bool FundsComboboxEmpty() 
+        {
+            if (string.IsNullOrEmpty(cmbAccount.Text.Trim()))
+            {
+                cmbAccount.Tag = "Please enter a Fund.";
+                return true;
+            }
+            else
+                return false;
+        }
+
+        private bool FundExist() 
+        {
+            string fundName = cmbFunds.Text.Trim();
+
+            if (cmbFunds.FindStringExact(fundName) == -1 && !string.IsNullOrEmpty(fundName))
+            {
+                cmbAccount.Tag = "Fund you entered doesn't exist";
+                return false;
+            }
+            return true;
         }
     }
 }

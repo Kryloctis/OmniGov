@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             ucJEVAccount.nudAmount.Value = amount;
 
             // load subsidiaries and select item
-            ucjevAccount1.LoadSubsidiary(generalLedgerId);
+            ucjevAccount1.LoadSubsidiary();
             if (subsidiaryLedgerId != null) ucJEVAccount.cmbSubsidiary.SelectedValue = subsidiaryLedgerId;
         }
 

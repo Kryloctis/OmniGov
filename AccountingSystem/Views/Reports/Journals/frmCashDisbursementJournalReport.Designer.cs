@@ -85,6 +85,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.Controls.Add(this.btnRetrieve);
             this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "frmCashDisbursementJournalReport";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Report > Cash Disbursements Journal";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
