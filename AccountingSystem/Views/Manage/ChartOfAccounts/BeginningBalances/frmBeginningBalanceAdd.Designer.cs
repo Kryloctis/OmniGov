@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             // 
             this.ucBeginningBalances1.Location = new System.Drawing.Point(12, 12);
             this.ucBeginningBalances1.Name = "ucBeginningBalances1";
-            this.ucBeginningBalances1.Size = new System.Drawing.Size(513, 353);
+            this.ucBeginningBalances1.Size = new System.Drawing.Size(502, 337);
             this.ucBeginningBalances1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -50,14 +50,14 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 371);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 359);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(528, 30);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(515, 30);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(443, 3);
+            this.btnCancel.Location = new System.Drawing.Point(430, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(82, 23);
             this.btnCancel.TabIndex = 0;
@@ -67,12 +67,13 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             // btnSave
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(355, 3);
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSave.Location = new System.Drawing.Point(342, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(82, 23);
             this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Save";
+            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -83,7 +84,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(528, 401);
+            this.ClientSize = new System.Drawing.Size(515, 389);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ucBeginningBalances1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

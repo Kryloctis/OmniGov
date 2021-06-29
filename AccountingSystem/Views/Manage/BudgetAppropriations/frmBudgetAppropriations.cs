@@ -274,7 +274,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         }
 
 
-        //Match making FPP Combobox
+        //FPP
         private DataTable DataTableFPP() 
         {
             DataTable dtFPP;
@@ -308,6 +308,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 cmbxFPP.DataSource = new BindingSource(fppDict, null);
                 cmbxFPP.DisplayMember = "value";
                 cmbxFPP.ValueMember = "key";
+                cmbxFPP.DropDownHeight = 400;
 
                 LoadBudgetAppropriationRecords();
             }
@@ -342,6 +343,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 cmbxFPP.DroppedDown = true;
             } 
         }
+
 
         private void btnSupplementalAppropriations_Click(object sender, EventArgs e)
         {

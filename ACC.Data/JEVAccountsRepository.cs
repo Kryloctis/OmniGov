@@ -104,7 +104,20 @@ namespace ACC.Data
                     new object[] { "@jev_id", DbType.Int32, jevId },
                 };
 
-                string query = $"SELECT id, fpp_id, general_ledger_accounts_id, subsidiary_ledger_accounts_id, is_debit, is_deposit, fpp_name, ledger_name, account_code, sub_name, amount FROM {viewTableName} WHERE jev_id = @jev_id";
+                string query = $"SELECT " +
+                    $"id, " +
+                    $"fpp_id, " +
+                    $"general_ledger_accounts_id, " +
+                    $"subsidiary_ledger_accounts_id, " +
+                    $"is_debit, " +
+                    $"is_deposit, " +
+                    $"fpp_name, " +
+                    $"ledger_name, " +
+                    $"account_code, " +
+                    $"sub_name, " +
+                    $"amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE jev_id = @jev_id";
 
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
@@ -126,7 +139,23 @@ namespace ACC.Data
                     new object[] { "@date_entry", DbType.Date, dateEntry }
                 };
 
-                string query = $"SELECT jev_id, date_entry, jev_no, explanation, ledger_name, account_code, is_deposit, is_debit, amount FROM {viewTableName} WHERE funds_id = @funds_id AND journals_id = @journals_id AND MONTH(date_entry) = MONTH(@date_entry) AND YEAR(date_entry) = YEAR(@date_entry)";
+                string query = $"SELECT " +
+                    $"jev_id, " +
+                    $"date_entry, " +
+                    $"jev_no, " +
+                    $"full_jev_no, " +
+                    $"explanation, " +
+                    $"ledger_name, " +
+                    $"account_code, " +
+                    $"is_deposit, " +
+                    $"is_debit, " +
+                    $"amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE " +
+                    $"funds_id = @funds_id " +
+                    $"AND journals_id = @journals_id " +
+                    $"AND MONTH(date_entry) = MONTH(@date_entry) " +
+                    $"AND YEAR(date_entry) = YEAR(@date_entry)";
 
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
@@ -167,7 +196,31 @@ namespace ACC.Data
                     new object[] { "@year", DbType.Int16, year},
                 };
 
-                string query = $"SELECT jev_id, date_entry, MONTHNAME(date_entry) AS month_name, jev_no, journal_name, explanation, ledger_name, account_code, is_deposit, is_debit, SUM(amount) AS amount FROM {viewTableName} WHERE is_approved = 1 AND funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year GROUP BY general_ledger_accounts_id, journals_id, MONTH(date_entry), is_debit ORDER BY MONTH(date_entry), journals_id";
+                string query = $"SELECT " +
+                    $"jev_id, date_entry, " +
+                    $"MONTHNAME(date_entry) AS month_name, " +
+                    $"jev_no, " +
+                    $"full_jev_no, " +
+                    $"journal_name, " +
+                    $"explanation, " +
+                    $"ledger_name, " +
+                    $"account_code, " +
+                    $"is_deposit, " +
+                    $"is_debit, " +
+                    $"SUM(amount) AS amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE is_approved = 1 " +
+                    $"AND funds_id = @funds_id " +
+                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
+                    $"AND YEAR(date_entry) = @year " +
+                    $"GROUP BY " +
+                    $"general_ledger_accounts_id, " +
+                    $"journals_id, " +
+                    $"MONTH(date_entry), " +
+                    $"is_debit " +
+                    $"ORDER BY " +
+                    $"MONTH(date_entry), " +
+                    $"journals_id";
 
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);

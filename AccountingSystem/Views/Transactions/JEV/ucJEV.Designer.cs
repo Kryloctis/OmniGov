@@ -509,6 +509,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.Controls.Add(this.txtCheckNo);
             this.Controls.Add(this.lblCheckNo);
             this.Controls.Add(this.txtDVRCDNo);
@@ -541,7 +542,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.Controls.Add(this.groupJournals);
             this.Controls.Add(this.groupFunds);
             this.Name = "ucJEV";
-            this.Size = new System.Drawing.Size(886, 566);
+            this.Size = new System.Drawing.Size(877, 551);
             this.Load += new System.EventHandler(this.ucJEV_Load);
             this.groupFunds.ResumeLayout(false);
             this.groupFunds.PerformLayout();
