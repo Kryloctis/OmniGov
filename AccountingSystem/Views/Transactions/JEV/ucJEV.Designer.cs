@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.Debit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtExplanation = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblExplanation = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dtpDateEntry = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
@@ -67,10 +67,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.txtDebitTotal = new System.Windows.Forms.TextBox();
             this.txtCreditTotal = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.epRefNo = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epCollectingOfficerPayee = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epPayee = new System.Windows.Forms.ErrorProvider(this.components);
             this.cmbCollectingDisbursingOfficer = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblPayee = new System.Windows.Forms.Label();
             this.txtRefNo = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.lblCheckORPaidDate = new System.Windows.Forms.Label();
@@ -79,12 +78,13 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.lblDVRCDNo = new System.Windows.Forms.Label();
             this.txtCheckNo = new System.Windows.Forms.TextBox();
             this.lblCheckNo = new System.Windows.Forms.Label();
+            this.epExplanation = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupFunds.SuspendLayout();
             this.groupJournals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAccounts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epJEV)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epRefNo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epCollectingOfficerPayee)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epPayee)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epExplanation)).BeginInit();
             this.SuspendLayout();
             // 
             // groupFunds
@@ -176,8 +176,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.txtRCIORADA.Name = "txtRCIORADA";
             this.txtRCIORADA.Size = new System.Drawing.Size(315, 23);
             this.txtRCIORADA.TabIndex = 7;
-            this.txtRCIORADA.Validating += new System.ComponentModel.CancelEventHandler(this.txtRefNo_Validating);
-            this.txtRCIORADA.Validated += new System.EventHandler(this.txtRefNo_Validated);
             // 
             // lblRciOrADANo
             // 
@@ -195,8 +193,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.txtPayee.Name = "txtPayee";
             this.txtPayee.Size = new System.Drawing.Size(315, 23);
             this.txtPayee.TabIndex = 2;
-            this.txtPayee.Validating += new System.ComponentModel.CancelEventHandler(this.txtPayeeCollectingOfficer_Validating);
-            this.txtPayee.Validated += new System.EventHandler(this.txtPayeeCollectingOfficer_Validated);
+            this.txtPayee.Validating += new System.ComponentModel.CancelEventHandler(this.txtPayee_Validating);
+            this.txtPayee.Validated += new System.EventHandler(this.txtPayee_Validated);
             // 
             // dgAccounts
             // 
@@ -314,15 +312,17 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.txtExplanation.Name = "txtExplanation";
             this.txtExplanation.Size = new System.Drawing.Size(315, 81);
             this.txtExplanation.TabIndex = 3;
+            this.txtExplanation.Validating += new System.ComponentModel.CancelEventHandler(this.txtExplanation_Validating);
+            this.txtExplanation.Validated += new System.EventHandler(this.txtExplanation_Validated);
             // 
-            // label3
+            // lblExplanation
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(0, 258);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 15);
-            this.label3.TabIndex = 35;
-            this.label3.Text = "Explanation";
+            this.lblExplanation.AutoSize = true;
+            this.lblExplanation.Location = new System.Drawing.Point(0, 258);
+            this.lblExplanation.Name = "lblExplanation";
+            this.lblExplanation.Size = new System.Drawing.Size(69, 15);
+            this.lblExplanation.TabIndex = 35;
+            this.lblExplanation.Text = "Explanation";
             // 
             // label2
             // 
@@ -413,13 +413,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.label6.TabIndex = 48;
             this.label6.Text = "Credit";
             // 
-            // epRefNo
+            // epPayee
             // 
-            this.epRefNo.ContainerControl = this;
-            // 
-            // epCollectingOfficerPayee
-            // 
-            this.epCollectingOfficerPayee.ContainerControl = this;
+            this.epPayee.ContainerControl = this;
             // 
             // cmbCollectingDisbursingOfficer
             // 
@@ -430,14 +426,14 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.cmbCollectingDisbursingOfficer.Size = new System.Drawing.Size(315, 23);
             this.cmbCollectingDisbursingOfficer.TabIndex = 9;
             // 
-            // label4
+            // lblPayee
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(0, 229);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 15);
-            this.label4.TabIndex = 51;
-            this.label4.Text = "Payee";
+            this.lblPayee.AutoSize = true;
+            this.lblPayee.Location = new System.Drawing.Point(0, 229);
+            this.lblPayee.Name = "lblPayee";
+            this.lblPayee.Size = new System.Drawing.Size(38, 15);
+            this.lblPayee.TabIndex = 51;
+            this.lblPayee.Text = "Payee";
             // 
             // txtRefNo
             // 
@@ -505,6 +501,10 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.lblCheckNo.TabIndex = 61;
             this.lblCheckNo.Text = "Check No.";
             // 
+            // epExplanation
+            // 
+            this.epExplanation.ContainerControl = this;
+            // 
             // ucJEV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -518,7 +518,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.Controls.Add(this.dtpCheckORPaid);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtRefNo);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblPayee);
             this.Controls.Add(this.cmbCollectingDisbursingOfficer);
             this.Controls.Add(this.txtCreditTotal);
             this.Controls.Add(this.label6);
@@ -534,7 +534,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.Controls.Add(this.txtPayee);
             this.Controls.Add(this.dgAccounts);
             this.Controls.Add(this.txtExplanation);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblExplanation);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dtpDateEntry);
             this.Controls.Add(this.label1);
@@ -549,8 +549,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.groupJournals.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgAccounts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epJEV)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epRefNo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epCollectingOfficerPayee)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epPayee)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epExplanation)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -562,7 +562,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.Button btnAddAccount;
         private System.Windows.Forms.Label lblCollectingDisbursingOfficer;
         private System.Windows.Forms.Label lblRciOrADANo;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblExplanation;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.TextBox txtRCIORADA;
@@ -575,8 +575,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         internal System.Windows.Forms.TextBox txtFundsJevNo;
-        private System.Windows.Forms.ErrorProvider epRefNo;
-        private System.Windows.Forms.ErrorProvider epCollectingOfficerPayee;
+        private System.Windows.Forms.ErrorProvider epPayee;
         internal System.Windows.Forms.TextBox txtCreditTotal;
         internal System.Windows.Forms.TextBox txtDebitTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn FPPId;
@@ -595,7 +594,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelJournals;
         private System.Windows.Forms.GroupBox groupFunds;
         internal System.Windows.Forms.ComboBox cmbCollectingDisbursingOfficer;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblPayee;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblCheckORPaidDate;
         internal System.Windows.Forms.DateTimePicker dtpCheckORPaid;
@@ -604,5 +603,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal System.Windows.Forms.TextBox txtCheckNo;
         private System.Windows.Forms.Label lblCheckNo;
         internal System.Windows.Forms.TextBox txtRefNo;
+        private System.Windows.Forms.ErrorProvider epExplanation;
     }
 }

@@ -26,16 +26,15 @@ namespace AccountingSystem.Views.Transactions.JEV
             errorArray[1] = journalId == 0 ? "Please select the type of journal" : string.Empty;
             errorArray[2] = epJEV.GetError(txtJEVNo);
             errorArray[3] = dgAccounts.Rows.Count == 0 ? "Please add a FPP, account & amount in the table provided." : string.Empty;
-            errorArray[4] = epRefNo.GetError(txtRCIORADA);
-            errorArray[5] = epCollectingOfficerPayee.GetError(txtPayee);
-
+            errorArray[4] = epPayee.GetError(txtPayee);
+            errorArray[5] = epExplanation.GetError(txtExplanation);
+            
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
         internal void ResetForm()
         {
-
             txtJEVNo.Clear();
             txtRefNo.Clear();
             txtPayee.Clear();
@@ -48,6 +47,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             dgAccounts.Rows.Clear();
             txtDebitTotal.Clear();
             txtCreditTotal.Clear();
+
+            txtJEVNo.Text = GetJEVSeriesNo();
         }
 
         internal void LoadFunds()
@@ -163,6 +164,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             ShowCheckIcon(radFund);
 
             btnAddAccount.Enabled = true;
+            ResetForm();
         }
 
         private void radioJournals_Click(object sender, EventArgs e)
@@ -340,10 +342,15 @@ namespace AccountingSystem.Views.Transactions.JEV
             Helper.DatagridDefaultStyle(dgAccounts);
             LoadFunds();
             LoadJournals();
-            SetGeneralJournalFields();
 
             btnEditAccount.Enabled = false;
             btnRemoveAccount.Enabled = false;
+        }
+
+        private string GetJEVSeriesNo()
+        {
+            var jev = Factory.JEVRepository().GetLastJevNoSeries();
+            return jev.ToString();
         }
 
         private void btnAddAccount_Click(object sender, EventArgs e)
@@ -409,30 +416,29 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        private void txtRefNo_Validating(object sender, CancelEventArgs e)
-        {
-            if (txtRCIORADA.Enabled)
-            {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epRefNo, txtRCIORADA, lblRciOrADANo.Text);
-            }
-        }
-
-        private void txtRefNo_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epRefNo, txtRCIORADA);
-        }
-
-        private void txtPayeeCollectingOfficer_Validating(object sender, CancelEventArgs e)
+        private void txtPayee_Validating(object sender, CancelEventArgs e)
         {
             if (txtPayee.Enabled)
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epCollectingOfficerPayee, txtPayee, lblCollectingDisbursingOfficer.Text);
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epPayee, txtPayee, lblPayee.Text);
             }
         }
 
-        private void txtPayeeCollectingOfficer_Validated(object sender, EventArgs e)
+        private void txtPayee_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epCollectingOfficerPayee, txtPayee);
+            Helper.ClearErrorTextBox(epPayee, txtPayee);
+        }
+
+        private void txtExplanation_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtExplanation.Enabled)
+            {
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epExplanation, txtExplanation, lblExplanation.Text);
+            }
+        }
+        private void txtExplanation_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epExplanation, txtExplanation);
         }
 
         private void btnRemoveAccount_Click(object sender, EventArgs e)
@@ -441,6 +447,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 dgAccounts.Rows.Remove(row);
             }
+            SumDebitCredit();
         }
 
         private void btnEditAccount_Click(object sender, EventArgs e)
@@ -452,5 +459,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             _ = new frmJEVAccountEdit(this).ShowDialog();
         }
+
+ 
     }
 }

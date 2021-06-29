@@ -34,6 +34,8 @@ namespace ACC.Domain.Interfaces
 
         int GetLastInsertedID();
 
+        string GetLastJevNoSeries();
+
         Dictionary<string, string> GetRecordByJEV(string jevNo);
 
         bool JevNumberAndYearExist(string jevNo, int jevEntryDate);
