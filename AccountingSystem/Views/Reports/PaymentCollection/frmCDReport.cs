@@ -48,6 +48,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                     row["rcdno"] = item["rcd_no"];
                     row["rcddate"] = item["rcd_date"];
                     row["officer"] = item["officer"];
+                    row["fund"] = item["fund"];
                     dtPC.Rows.Add(row);
                 }
             }

@@ -5669,6 +5669,8 @@ namespace AccountingSystem {
             
             private global::System.Data.DataColumn columnrcdid;
             
+            private global::System.Data.DataColumn columnfund;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public dtRCDDataTable() {
@@ -5736,6 +5738,14 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn fundColumn {
+                get {
+                    return this.columnfund;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -5771,13 +5781,14 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtRCDRow AdddtRCDRow(string rcdno, System.DateTime rcddate, string officer, short rcdid) {
+            public dtRCDRow AdddtRCDRow(string rcdno, System.DateTime rcddate, string officer, short rcdid, string fund) {
                 dtRCDRow rowdtRCDRow = ((dtRCDRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         rcdno,
                         rcddate,
                         officer,
-                        rcdid};
+                        rcdid,
+                        fund};
                 rowdtRCDRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtRCDRow);
                 return rowdtRCDRow;
@@ -5804,6 +5815,7 @@ namespace AccountingSystem {
                 this.columnrcddate = base.Columns["rcddate"];
                 this.columnofficer = base.Columns["officer"];
                 this.columnrcdid = base.Columns["rcdid"];
+                this.columnfund = base.Columns["fund"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5817,6 +5829,8 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnofficer);
                 this.columnrcdid = new global::System.Data.DataColumn("rcdid", typeof(short), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnrcdid);
+                this.columnfund = new global::System.Data.DataColumn("fund", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfund);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11355,6 +11369,22 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string fund {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtRCD.fundColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'fund\' in table \'dtRCD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRCD.fundColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsrcdnoNull() {
                 return this.IsNull(this.tabledtRCD.rcdnoColumn);
             }
@@ -11399,6 +11429,18 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetrcdidNull() {
                 this[this.tabledtRCD.rcdidColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsfundNull() {
+                return this.IsNull(this.tabledtRCD.fundColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetfundNull() {
+                this[this.tabledtRCD.fundColumn] = global::System.Convert.DBNull;
             }
         }
         
