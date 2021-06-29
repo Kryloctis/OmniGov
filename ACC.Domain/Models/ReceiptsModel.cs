@@ -11,7 +11,6 @@ namespace ACC.Domain.Models
         public int Rto { get; set; }
         public DateTime Rdate { get; set; }
         public int Quantity { get; set; }
-        public int Last_issued { get; set; }
         public string Remarks { get; set; }
         public int UserId { get; set; }
         public int AccId { get; set; }

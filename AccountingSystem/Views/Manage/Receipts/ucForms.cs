@@ -127,5 +127,19 @@ namespace AccountingSystem.Views.Manage.Receipts
                 e.Handled = true;
             }
         }
+
+        private void txtfrom_KeyUp(object sender, KeyEventArgs e)
+        {
+            int from = txtfrom.Text.Length > 0 ? Convert.ToInt32(txtfrom.Text.Trim()) : 0;
+            int to = txtto.Text.Length > 0 ? Convert.ToInt32(txtto.Text.Trim()) : 0;
+            txtquantity.Text = from.Equals(1) ? ((from + to) - from).ToString() : (to - from).ToString();
+        }
+
+        private void txtto_KeyUp(object sender, KeyEventArgs e)
+        {
+            int from = txtfrom.Text.Length > 0 ? Convert.ToInt32(txtfrom.Text.Trim()) : 0;
+            int to = txtto.Text.Length > 0 ? Convert.ToInt32(txtto.Text.Trim()) : 0;
+            txtquantity.Text = from.Equals(1) ? ((from + to) - from).ToString() : (to - from).ToString();
+        }
     }
 }

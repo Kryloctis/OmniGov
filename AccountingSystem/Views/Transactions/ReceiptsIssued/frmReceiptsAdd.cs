@@ -25,12 +25,12 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private void frmReceiptsAdd_Load(object sender, EventArgs e)
         {
             ucReceipts1.LoadCollectors();
-            ucReceipts1.LoadReceipts();
             if(Rid > 0)
             {
                 ucReceipts1.cmbreceipt.SelectedValue = Rid;
             }
         }
+
 
         private bool SaveData()
         {
@@ -47,13 +47,22 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 {
                    CoId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
                    RId = Convert.ToInt16(uc.cmbreceipt.SelectedValue),
-                   Issued = uc.dtpissued.Value
+                   Issued = uc.dtpissued.Value,
+                   IssuedFrom = Convert.ToInt32(uc.txtfrom.Text.Trim()),
+                   IssuedTo = Convert.ToInt32(uc.txtto.Text.Trim()),
+                   Quantity = Convert.ToInt32(uc.txtquantity.Text.Trim())
+                   
                 };
 
                 var riRepository = Factory.ReceiptsIssuedRepository();
-                if (riRepository.IssuedExist(Convert.ToInt16(uc.cmbcollector.SelectedValue), Convert.ToInt16(uc.cmbreceipt.SelectedValue))){
+                if (riRepository.IssuedExist(riModel)){
                     Helper.MessageBoxError("Receipt already issued!");
                     uc.cmbreceipt.Focus();
+                    return false;
+                }
+                else if (Convert.ToInt16(uc.txtfrom.Text.Trim()) > Convert.ToInt16(uc.txtto.Text.Trim()))
+                {
+                    Helper.MessageBoxError("Invalid Receipt!");
                     return false;
                 }
                 else

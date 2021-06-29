@@ -137,6 +137,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.txtfrom.Size = new System.Drawing.Size(184, 27);
             this.txtfrom.TabIndex = 12;
             this.txtfrom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtfrom_KeyPress);
+            this.txtfrom.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtfrom_KeyUp);
             this.txtfrom.Validating += new System.ComponentModel.CancelEventHandler(this.txtfrom_Validating);
             this.txtfrom.Validated += new System.EventHandler(this.txtfrom_Validated);
             // 
@@ -147,6 +148,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.txtto.Size = new System.Drawing.Size(189, 27);
             this.txtto.TabIndex = 13;
             this.txtto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtto_KeyPress);
+            this.txtto.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtto_KeyUp);
             this.txtto.Validating += new System.ComponentModel.CancelEventHandler(this.txtto_Validating);
             this.txtto.Validated += new System.EventHandler(this.txtto_Validated);
             // 
@@ -154,6 +156,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             this.txtquantity.Location = new System.Drawing.Point(160, 117);
             this.txtquantity.Name = "txtquantity";
+            this.txtquantity.ReadOnly = true;
             this.txtquantity.Size = new System.Drawing.Size(430, 27);
             this.txtquantity.TabIndex = 14;
             this.txtquantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtquantity_KeyPress);

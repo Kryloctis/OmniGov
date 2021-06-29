@@ -14,6 +14,7 @@ namespace ACC.Data
         private readonly string tableName = "receipts";
         private readonly string tableName2 = "users";
         private readonly string tableName3 = "accountable_forms";
+        private readonly string tableName4 = "receipts_issued";
         public ReceiptsRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -86,7 +87,6 @@ namespace ACC.Data
                     record.Add("remarks", reader.Rows[0]["remarks"].ToString());
                     record.Add("users_id", reader.Rows[0]["users_id"].ToString());
                     record.Add("accountable_forms_id", reader.Rows[0]["accountable_forms_id"].ToString());
-                    record.Add("last_issued", reader.Rows[0]["last_issued"].ToString());
                 }
             }
             catch (Exception)
@@ -101,7 +101,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableName}.id,CONCAT({tableName3}.acc_form_no,' - ',{tableName3}.acc_form_desc) AS receipt,{tableName}.receiptsfrom,{tableName}.receiptsto,{tableName}.received_date,{tableName}.quantity,{tableName}.last_issued,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS officer FROM {tableName} LEFT JOIN {tableName2} ON {tableName}.users_id={tableName2}.id LEFT JOIN {tableName3} ON {tableName}.accountable_forms_id={tableName3}.id ORDER BY {tableName}.received_date DESC";
+                string query = $"SELECT {tableName}.id,CONCAT({tableName3}.acc_form_no,' - ',{tableName3}.acc_form_desc) AS receipt,{tableName}.receiptsfrom,{tableName}.receiptsto,{tableName}.received_date,{tableName}.quantity,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS officer FROM {tableName} LEFT JOIN {tableName2} ON {tableName}.users_id={tableName2}.id LEFT JOIN {tableName3} ON {tableName}.accountable_forms_id={tableName3}.id ORDER BY {tableName}.received_date DESC";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
@@ -116,7 +116,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableName}.id,CONCAT({tableName3}.acc_form_no,' - ',{tableName3}.acc_form_desc) AS receipt,{tableName}.receiptsfrom,{tableName}.receiptsto,{tableName}.received_date,{tableName}.quantity,{tableName}.last_issued,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS officer FROM {tableName} LEFT JOIN {tableName2} ON {tableName}.users_id={tableName2}.id LEFT JOIN {tableName3} ON {tableName}.accountable_forms_id={tableName3}.id WHERE {tableName}.receiptsfrom LIKE '%{searchText}%' OR {tableName}.receiptsto LIKE '%{searchText}%' OR {tableName}.remarks LIKE '%{searchText}%' OR CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) LIKE '%{searchText}%' OR CONCAT({tableName3}.acc_form_no,' - ',{tableName3}.acc_form_desc) LIKE '%{searchText}%' ORDER BY {tableName}.received_date DESC";
+                string query = $"SELECT {tableName}.id,CONCAT({tableName3}.acc_form_no,' - ',{tableName3}.acc_form_desc) AS receipt,{tableName}.receiptsfrom,{tableName}.receiptsto,{tableName}.received_date,{tableName}.quantity,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS officer FROM {tableName} LEFT JOIN {tableName2} ON {tableName}.users_id={tableName2}.id LEFT JOIN {tableName3} ON {tableName}.accountable_forms_id={tableName3}.id WHERE {tableName}.receiptsfrom LIKE '%{searchText}%' OR {tableName}.receiptsto LIKE '%{searchText}%' OR {tableName}.remarks LIKE '%{searchText}%' OR CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) LIKE '%{searchText}%' OR CONCAT({tableName3}.acc_form_no,' - ',{tableName3}.acc_form_desc) LIKE '%{searchText}%' ORDER BY {tableName}.received_date DESC";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
@@ -184,7 +184,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int16, id },
                 };
 
-                string query = $"SELECT * FROM {tableName} WHERE id = @id AND receiptsto=last_issued";
+                string query = $"SELECT * FROM {tableName} WHERE id = @id AND receiptsto=(SELECT SUM(IF(IFNULL(last_issued,0)>0,issueto-last_issued,0)) FROM {tableName4} WHERE receipts_id=id AND IF(IFNULL(is_returned,true),false,true)=false)";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -196,6 +196,22 @@ namespace ACC.Data
             };
 
             return false;
+        }
+
+        public DataTable NextReceipt(int id)
+        {
+            try
+            {
+                string query = $"SELECT MAX(issueto) AS issuelast FROM {tableName4} WHERE receipts_id='{id}'";
+
+                var dtri = new DataTable();
+                return _dbGenericCommands.Fill(query, dtri);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
         }
 
 
@@ -249,23 +265,6 @@ namespace ACC.Data
             }
         }
 
-        public bool UpdateCurrentIssued(ReceiptsModel entity)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int16, entity.Id},
-                    new object[] { "@last_issued", DbType.Int16, entity.Last_issued}
-                };
-
-                string query = $"UPDATE {tableName} SET last_issued=@last_issued WHERE id = @id";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        
     }
 }

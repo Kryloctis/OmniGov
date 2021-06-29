@@ -141,6 +141,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.txtreceipt.Location = new System.Drawing.Point(161, 283);
             this.txtreceipt.MaxLength = 20;
             this.txtreceipt.Name = "txtreceipt";
+            this.txtreceipt.ReadOnly = true;
             this.txtreceipt.Size = new System.Drawing.Size(212, 27);
             this.txtreceipt.TabIndex = 5;
             this.txtreceipt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtreceipt_KeyPress);

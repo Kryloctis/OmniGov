@@ -31,6 +31,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             var errorArray = new string[2];
             errorArray[0] = errorProvider.GetError(cmbcollector);
             errorArray[1] = errorProvider.GetError(cmbreceipt);
+            errorArray[2] = errorProvider.GetError(txtfrom);
+            errorArray[3] = errorProvider.GetError(txtto);
+            errorArray[4] = errorProvider.GetError(txtquantity);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -58,12 +61,12 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        internal void LoadReceipts()
+        internal void LoadReceipts(int id)
         {
             try
             {
                 var riRepository = Factory.ReceiptsIssuedRepository();
-                var dtri = riRepository.GetRecords(Convert.ToInt16(cmbcollector.SelectedValue));
+                var dtri = riRepository.GetRecords(id);
                 dtri.Columns.Add("details", typeof(string), "acc_form_no +'-'+acc_form_desc+' ('+receiptsfrom+'-'+receiptsto+')'");
                 cmbreceipt.DataSource = dtri;
                 cmbreceipt.ValueMember = "id";
@@ -90,6 +93,116 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private void cmbreceipt_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbreceipt, "Receipt!");
+        }
+
+        private void txtfrom_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider, txtfrom);
+        }
+
+        private void txtfrom_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtfrom, "Receipt No. From!");
+        }
+
+        private void txtto_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider, txtto);
+        }
+
+        private void txtto_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtto, "Receipt No. To!");
+        }
+
+        private void txtquantity_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider, txtquantity);
+        }
+
+        private void txtquantity_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtquantity, "Quantity!");
+        }
+
+        private void txtfrom_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+
+            }
+        }
+
+        private void txtto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+
+            }
+        }
+
+        private void txtfrom_KeyUp(object sender, KeyEventArgs e)
+        {
+            int from = txtfrom.Text.Length > 0 ? Convert.ToInt32(txtfrom.Text.Trim()) : 0;
+            int to = txtto.Text.Length > 0 ? Convert.ToInt32(txtto.Text.Trim()) : 0;
+            txtquantity.Text = from.Equals(1) ? ((from + to) - from).ToString() : (to - from).ToString();
+        }
+
+        private void txtto_KeyUp(object sender, KeyEventArgs e)
+        {
+            int from = txtfrom.Text.Length > 0 ? Convert.ToInt32(txtfrom.Text.Trim()) : 0;
+            int to = txtto.Text.Length > 0 ? Convert.ToInt32(txtto.Text.Trim()) : 0;
+            txtquantity.Text = from.Equals(1) ? ((from + to) - from).ToString() : (to - from).ToString();
+        }
+
+
+        internal string NextReceipt(int id)
+        {
+            string data = string.Empty;
+            try
+            {
+                var riRepository = Factory.ReceiptsRepository();
+                var dtri = riRepository.NextReceipt(id);
+                if (dtri.Rows.Count > 0)
+                {
+                    int last = 0;
+                    for (int i = 0; i < dtri.Rows.Count; i++)
+                    {
+                        last = dtri.Rows[i]["issuelast"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtri.Rows[i]["issuelast"]);
+                    }
+                    data = (last + 1).ToString();
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            return data;
+        }
+
+        private void cmbreceipt_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cmbreceipt.SelectedIndex != -1)
+            {
+                DataRowView item = cmbreceipt.SelectedItem as DataRowView;
+                if(item != null)
+                {
+                    txtfrom.Text = NextReceipt(Convert.ToInt16(item[0]));
+                }
+                
+            }
+        }
+
+        private void cmbcollector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cmbcollector.SelectedIndex != -1)
+            {
+                DataRowView item = cmbcollector.SelectedItem as DataRowView;
+                if(item != null)
+                {
+                    LoadReceipts(Convert.ToInt16(item[0]));
+                }
+             
+            }
         }
     }
 }

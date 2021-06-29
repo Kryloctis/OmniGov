@@ -359,8 +359,7 @@ namespace AccountingSystem
             datagrid.Columns[4].HeaderText = "Received Date";
             datagrid.Columns[4].DefaultCellStyle.Format = "yyyy-MM-dd";
             datagrid.Columns[5].HeaderText = "Quantity";
-            datagrid.Columns[6].HeaderText = "Last Issued #";
-            datagrid.Columns[7].HeaderText = "User/Officer";
+            datagrid.Columns[6].HeaderText = "User/Officer";
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
