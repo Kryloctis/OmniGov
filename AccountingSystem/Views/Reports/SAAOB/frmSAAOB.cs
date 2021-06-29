@@ -85,18 +85,22 @@ namespace AccountingSystem.Views.Reports.SAAOB
                 decimal rowAppropriation = Convert.ToDecimal(row["amount"]);
 
                 //SUPPLEMENTED AMOUNT
+                var dtSupplemtedAmount = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(rowBudgetAppropriationId);
+                decimal supplementedAmount = Convert.ToDecimal(dtSupplemtedAmount.Rows.Count == 0 ? 0 : dtSupplemtedAmount.Compute("SUM(amount)", string.Empty));
 
+                decimal TotalBudgetAppropraition = rowAppropriation + supplementedAmount;
 
                 //ALLOTMENT RELEASE
                 var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(rowBudgetAppropriationId);
                 decimal allotmentReleaseAmount = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0? 0 : dtAllotmentRelease.Compute("SUM(amount)", string.Empty));
+
 
                 //OBLIGATIONS
                 var dtObligation = Factory.ObligationRequestRepository().GetViewRecordsByBudgetAppropriationId(rowBudgetAppropriationId);
                 decimal obligationRequestAmount = Convert.ToDecimal(dtObligation.Rows.Count == 0 ? 0 : dtObligation.Compute("SUM(amount)", string.Empty));
 
                 //UNOBLIGATED BALANCE
-
+                decimal unobligatedBalance = TotalBudgetAppropraition - obligationRequestAmount;
 
                 var items = new object[]
                 {
@@ -122,9 +126,10 @@ namespace AccountingSystem.Views.Reports.SAAOB
                     rowAccountName,
                     rowYear,
                     rowRemarks,
-                    rowAppropriation,
+                    TotalBudgetAppropraition,
                     allotmentReleaseAmount,
-                    obligationRequestAmount
+                    obligationRequestAmount,
+                    unobligatedBalance
                 };
 
                 dtSAAOB.Rows.Add(items);
