@@ -286,6 +286,8 @@
               <xs:element name="receiptto" msprop:Generator_ColumnVarNameInTable="columnreceiptto" msprop:Generator_ColumnPropNameInRow="receiptto" msprop:Generator_ColumnPropNameInTable="receipttoColumn" msprop:Generator_UserColumnName="receiptto" type="xs:int" minOccurs="0" />
               <xs:element name="issuefrom" msprop:Generator_ColumnVarNameInTable="columnissuefrom" msprop:Generator_ColumnPropNameInRow="issuefrom" msprop:Generator_ColumnPropNameInTable="issuefromColumn" msprop:Generator_UserColumnName="issuefrom" type="xs:int" minOccurs="0" />
               <xs:element name="issueto" msprop:Generator_ColumnVarNameInTable="columnissueto" msprop:Generator_ColumnPropNameInRow="issueto" msprop:Generator_ColumnPropNameInTable="issuetoColumn" msprop:Generator_UserColumnName="issueto" type="xs:int" minOccurs="0" />
+              <xs:element name="usedfrom" msprop:Generator_ColumnVarNameInTable="columnusedfrom" msprop:Generator_ColumnPropNameInRow="usedfrom" msprop:Generator_ColumnPropNameInTable="usedfromColumn" msprop:Generator_UserColumnName="usedfrom" type="xs:int" minOccurs="0" />
+              <xs:element name="usedto" msprop:Generator_ColumnVarNameInTable="columnusedto" msprop:Generator_ColumnPropNameInRow="usedto" msprop:Generator_ColumnPropNameInTable="usedtoColumn" msprop:Generator_UserColumnName="usedto" type="xs:int" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
