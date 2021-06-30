@@ -72,9 +72,6 @@ namespace AccountingSystem
 
         private void ValidatePermissions()
         {
-            // mga permissions nga wala
-            //    - Transactions payment
-
             if (!Helper.HasPermission("Manage Allotment Classes"))
                 menuAllotmentClasses.Visible = false;
 
