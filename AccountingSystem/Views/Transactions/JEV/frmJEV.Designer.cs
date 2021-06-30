@@ -36,6 +36,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
             this.ucjev1 = new AccountingSystem.Views.Transactions.JEV.ucJEV();
+            this.btnPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,7 +49,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnSave,
             this.toolStripSeparator1,
             this.btnDelete,
-            this.btnSearch});
+            this.btnSearch,
+            this.btnPrint});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(891, 50);
@@ -117,6 +119,17 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.ucjev1.Size = new System.Drawing.Size(877, 551);
             this.ucjev1.TabIndex = 8;
             // 
+            // btnPrint
+            // 
+            this.btnPrint.Image = global::AccountingSystem.Properties.Resources.printer;
+            this.btnPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(36, 47);
+            this.btnPrint.Text = "&Print";
+            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // frmJEV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -147,5 +160,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal System.Windows.Forms.ToolStripButton btnSave;
         internal System.Windows.Forms.ToolStripButton btnDelete;
         protected internal ucJEV ucjev1;
+        private System.Windows.Forms.ToolStripButton btnPrint;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using ACC.Domain.Models;
+using AccountingSystem.Views.Reports.JEV;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
@@ -501,6 +502,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            _ = new frmJEVReport().ShowDialog();
         }
     }
 }
