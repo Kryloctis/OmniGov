@@ -85,7 +85,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
                     decimal rowAppropriation = Convert.ToDecimal(row["amount"]);
 
                     //SUPPLEMENTED AMOUNT
-                    var dtSupplemtedAmount = Factory.SupplementalAppropriationsRepository().GetRecords(rowBudgetAppropriationId, date);
+                    var dtSupplemtedAmount = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationIdDateEntry(rowBudgetAppropriationId, date);
                     decimal supplementedAmount = Convert.ToDecimal(dtSupplemtedAmount.Rows.Count == 0 ? 0 : dtSupplemtedAmount.Compute("SUM(amount)", string.Empty));
 
                     decimal TotalBudgetAppropraition = rowAppropriation + supplementedAmount;
