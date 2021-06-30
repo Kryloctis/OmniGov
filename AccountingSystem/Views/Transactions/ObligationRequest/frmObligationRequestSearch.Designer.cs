@@ -74,10 +74,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(349, 12);
+            this.txtSearch.Location = new System.Drawing.Point(329, 12);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.PlaceholderText = "Search...";
-            this.txtSearch.Size = new System.Drawing.Size(215, 23);
+            this.txtSearch.Size = new System.Drawing.Size(235, 23);
             this.txtSearch.TabIndex = 0;
             // 
             // btnSearch
