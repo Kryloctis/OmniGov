@@ -256,6 +256,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal void ResetForm()
         {
             allotmentReleaseId = 0;
+            cmbxFPP.Text = string.Empty;
+            cmbxFPP.SelectedIndex = -1;
 
             //FPP
             LoadFPPCombobox();
