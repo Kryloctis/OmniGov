@@ -47,8 +47,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             RId = 0;
             cmbcollector.SelectedIndex = -1;
             cmbreceipt.SelectedIndex = -1;
+            txtfrom.Text = string.Empty;
+            txtto.Text = string.Empty;
+            txtquantity.Text = string.Empty;
             dtpissued.Value = DateTime.Now;
-    }
+        }
 
         internal void LoadCollectors()
         {
@@ -178,27 +181,33 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 var riRepository = Factory.ReceiptsRepository();
                 var dtri2 = riRepository.FirstReceipt(id);
                 var dtri = riRepository.NextReceipt(id);
-                if (dtri2.Rows.Count > 0)
-                {
-                    int last = 0;
-                    for (int i = 0; i < dtri2.Rows.Count; i++)
-                    {
-                        last = dtri2.Rows[i]["receiptsfrom"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtri2.Rows[i]["receiptsfrom"]);
-                        maxreceipt = dtri2.Rows[i]["receiptsto"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtri2.Rows[i]["receiptsto"]);
-                    }
-                    startingreceipt = last;
-                    data = last.ToString();
-                }                
+                int last = 0;
+                int first = 0;
                 if (dtri.Rows.Count > 0)
-                {
-                    int last = 0;
+                {                    
                     for (int i = 0; i < dtri.Rows.Count; i++)
                     {
                         last = dtri.Rows[i]["issuelast"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtri.Rows[i]["issuelast"]);
                     }
-                    startingreceipt = last + 1;
+                    startingreceipt = last;
                     data = (last + 1).ToString();
                 }
+                if (dtri2.Rows.Count > 0)
+                {
+
+                    for (int i = 0; i < dtri2.Rows.Count; i++)
+                    {
+                        first = dtri2.Rows[i]["receiptsfrom"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtri2.Rows[i]["receiptsfrom"]);
+                        maxreceipt = dtri2.Rows[i]["receiptsto"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtri2.Rows[i]["receiptsto"]);
+                    }
+                    if(startingreceipt <= 0)
+                    {
+                        startingreceipt = first;
+                        data = first.ToString();
+                    }
+              
+                }
+             
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             return data;
