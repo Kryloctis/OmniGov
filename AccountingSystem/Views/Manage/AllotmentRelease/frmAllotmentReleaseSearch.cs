@@ -66,9 +66,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             ucMain.LoadSelected();
             ucMain.DisplayTotalAllotmentRelease();
             ucMain.ClearErrors();
+            _frmAllotmentReleaseMain.btnDelete.Enabled = true;
             _frmAllotmentReleaseMain.btnSave.Text = "Update";
             Close();
         }
+
         private void dgAllotmentRelease_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             ApplySelected();

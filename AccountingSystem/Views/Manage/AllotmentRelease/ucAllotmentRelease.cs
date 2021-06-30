@@ -114,11 +114,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             if (cmbxBudgetAppropriations.SelectedIndex > -1)
             {
                 int budgetAppropriationId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
-                var budgetAppropriationDict = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
+                var budgetAppropriationDict = Factory.BudgetAppropriationsRepository().GetViewRecordByIdDateEntry(budgetAppropriationId, dateIssued);
                 var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
-                var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(budgetAppropriationId);
+                var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationIdDateEntry(budgetAppropriationId, dateIssued);
 
-                decimal budgetAppropriation = Convert.ToDecimal(budgetAppropriationDict["amount"]);
+                decimal budgetAppropriation = budgetAppropriationDict.Values.Count == 0? 0 : Convert.ToDecimal(budgetAppropriationDict["amount"]);
                 decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
                 decimal totalSupplementalAppropriation = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0? 0 : dtSupplementalAppropriation.Compute("Sum(amount)", string.Empty));
 

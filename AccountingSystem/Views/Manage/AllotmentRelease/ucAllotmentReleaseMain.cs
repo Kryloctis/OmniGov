@@ -258,6 +258,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             allotmentReleaseId = 0;
             cmbxFPP.Text = string.Empty;
             cmbxFPP.SelectedIndex = -1;
+            panel1.Enabled = true;
+            mskSeriesNo.Text = string.Empty;
+            dtDateIssued.Value = DateTime.Now;
+            dtDateIssued.Enabled = true;
+            dgAllotmentRelease.Rows.Clear();
+            txtPurpose.Text = string.Empty;
 
             //FPP
             LoadFPPCombobox();
@@ -266,14 +272,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             LoadAllotmentClasses();
             ClearErrors();
             DisplayTotalAllotmentRelease();
-
-            panel1.Enabled = true;
-    
-            mskSeriesNo.Text = string.Empty;
-            dtDateIssued.Value = DateTime.Now;
-            dtDateIssued.Enabled = true;
-            dgAllotmentRelease.Rows.Clear();
-            txtPurpose.Text = string.Empty;
         }
 
         internal string GetFormErrors()
