@@ -19,6 +19,8 @@ namespace ACC.Domain.Interfaces
 
         bool AllotmentReleaseNoExist(int Id, string allotmentReleaseNo);
 
+        DataTable GetViewRecords(int budgetAppropriationId, DateTime dateIssued);
+
         DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId);
 
         DataTable GetViewRecordsById(int Id);

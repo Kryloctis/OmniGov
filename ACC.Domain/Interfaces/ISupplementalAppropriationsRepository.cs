@@ -9,5 +9,7 @@ namespace ACC.Domain.Interfaces
     public interface ISupplementalAppropriationsRepository : IRepository<SupplementalAppropriationsModel>
     {
         DataTable GetRecordsByBudgetAppropriationId(int budgetAppropriationsId);
+
+        DataTable GetRecords(int budgetAppropriationId, DateTime dateEntry);
     }
 }

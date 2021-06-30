@@ -144,8 +144,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnSearch;
         internal System.Windows.Forms.ToolStrip toolStrip1;
-        protected internal ucJEV ucjev1;
         internal System.Windows.Forms.ToolStripButton btnSave;
         internal System.Windows.Forms.ToolStripButton btnDelete;
+        protected internal ucJEV ucjev1;
     }
 }

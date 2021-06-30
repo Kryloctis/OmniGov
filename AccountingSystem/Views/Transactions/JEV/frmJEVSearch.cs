@@ -139,6 +139,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.dgAccounts.Rows.Clear();
                     LoadJevAccounts();
                     uc.SumDebitCredit();
+                    uc.ClearErrors();
 
                     Close();
                     return;
