@@ -7207,6 +7207,10 @@ namespace AccountingSystem {
             
             private global::System.Data.DataColumn columnissueto;
             
+            private global::System.Data.DataColumn columnusedfrom;
+            
+            private global::System.Data.DataColumn columnusedto;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public dtReceiptsDataTable() {
@@ -7282,6 +7286,22 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn usedfromColumn {
+                get {
+                    return this.columnusedfrom;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn usedtoColumn {
+                get {
+                    return this.columnusedto;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -7317,14 +7337,16 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtReceiptsRow AdddtReceiptsRow(string form, int receiptfrom, int receiptto, int issuefrom, int issueto) {
+            public dtReceiptsRow AdddtReceiptsRow(string form, int receiptfrom, int receiptto, int issuefrom, int issueto, int usedfrom, int usedto) {
                 dtReceiptsRow rowdtReceiptsRow = ((dtReceiptsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         form,
                         receiptfrom,
                         receiptto,
                         issuefrom,
-                        issueto};
+                        issueto,
+                        usedfrom,
+                        usedto};
                 rowdtReceiptsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtReceiptsRow);
                 return rowdtReceiptsRow;
@@ -7352,6 +7374,8 @@ namespace AccountingSystem {
                 this.columnreceiptto = base.Columns["receiptto"];
                 this.columnissuefrom = base.Columns["issuefrom"];
                 this.columnissueto = base.Columns["issueto"];
+                this.columnusedfrom = base.Columns["usedfrom"];
+                this.columnusedto = base.Columns["usedto"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7367,6 +7391,10 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnissuefrom);
                 this.columnissueto = new global::System.Data.DataColumn("issueto", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnissueto);
+                this.columnusedfrom = new global::System.Data.DataColumn("usedfrom", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnusedfrom);
+                this.columnusedto = new global::System.Data.DataColumn("usedto", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnusedto);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12470,6 +12498,38 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int usedfrom {
+                get {
+                    try {
+                        return ((int)(this[this.tabledtReceipts.usedfromColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'usedfrom\' in table \'dtReceipts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtReceipts.usedfromColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int usedto {
+                get {
+                    try {
+                        return ((int)(this[this.tabledtReceipts.usedtoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'usedto\' in table \'dtReceipts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtReceipts.usedtoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsformNull() {
                 return this.IsNull(this.tabledtReceipts.formColumn);
             }
@@ -12526,6 +12586,30 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetissuetoNull() {
                 this[this.tabledtReceipts.issuetoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsusedfromNull() {
+                return this.IsNull(this.tabledtReceipts.usedfromColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetusedfromNull() {
+                this[this.tabledtReceipts.usedfromColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsusedtoNull() {
+                return this.IsNull(this.tabledtReceipts.usedtoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetusedtoNull() {
+                this[this.tabledtReceipts.usedtoColumn] = global::System.Convert.DBNull;
             }
         }
         

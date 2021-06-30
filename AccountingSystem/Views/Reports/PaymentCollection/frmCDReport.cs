@@ -120,6 +120,30 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             return dtPC;
         }
 
+        private DataTable DataTableReceipts(int id)
+        {
+
+            var dtRC = new dsLFS.dtReceiptsDataTable();
+            var dt = Factory.GeneralCollectionsRepository().GetRecordByReceipts(id);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow item in dt.Rows)
+                {
+                    DataRow row = dtRC.NewRow();
+                    row["form"] = item["form"];
+                    row["receiptfrom"] = item["receiptsfrom"];
+                    row["receiptto"] = item["receiptsto"];
+                    row["issuefrom"] = item["issuefrom"];
+                    row["issueto"] = item["issueto"];
+                    row["usedfrom"] = item["ifrom"];
+                    row["usedto"] = item["ito"];
+                    dtRC.Rows.Add(row);
+                }
+            }
+
+            return dtRC;
+        }
+
         private void LoadReport(LocalReport report)
         {
             try
@@ -148,6 +172,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             e.DataSources.Add(new ReportDataSource("dtRCDForms", DataTableForms(id)));
             e.DataSources.Add(new ReportDataSource("dtRCDCollections", DataTableCollections(id)));
             e.DataSources.Add(new ReportDataSource("dtRCDDeposits", DataTableDeposits(id)));
+            e.DataSources.Add(new ReportDataSource("dtReceipts", DataTableReceipts(id)));
 
         }
     }
