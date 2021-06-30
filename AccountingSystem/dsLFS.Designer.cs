@@ -7193,6 +7193,8 @@ namespace AccountingSystem {
             
             private global::System.Data.DataColumn columndebit;
             
+            private global::System.Data.DataColumn columncredit;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public dtJournalVoucherDataTable() {
@@ -7268,6 +7270,14 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn creditColumn {
+                get {
+                    return this.columncredit;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -7303,14 +7313,15 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtJournalVoucherRow AdddtJournalVoucherRow(string fpp, string account_and_explanation, string account_code, string pr, string debit) {
+            public dtJournalVoucherRow AdddtJournalVoucherRow(string fpp, string account_and_explanation, string account_code, string pr, decimal debit, decimal credit) {
                 dtJournalVoucherRow rowdtJournalVoucherRow = ((dtJournalVoucherRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         fpp,
                         account_and_explanation,
                         account_code,
                         pr,
-                        debit};
+                        debit,
+                        credit};
                 rowdtJournalVoucherRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtJournalVoucherRow);
                 return rowdtJournalVoucherRow;
@@ -7338,6 +7349,7 @@ namespace AccountingSystem {
                 this.columnaccount_code = base.Columns["account_code"];
                 this.columnpr = base.Columns["pr"];
                 this.columndebit = base.Columns["debit"];
+                this.columncredit = base.Columns["credit"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7351,8 +7363,10 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnaccount_code);
                 this.columnpr = new global::System.Data.DataColumn("pr", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnpr);
-                this.columndebit = new global::System.Data.DataColumn("debit", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columndebit = new global::System.Data.DataColumn("debit", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndebit);
+                this.columncredit = new global::System.Data.DataColumn("credit", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncredit);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12413,10 +12427,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string debit {
+            public decimal debit {
                 get {
                     try {
-                        return ((string)(this[this.tabledtJournalVoucher.debitColumn]));
+                        return ((decimal)(this[this.tabledtJournalVoucher.debitColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'debit\' in table \'dtJournalVoucher\' is DBNull.", e);
@@ -12424,6 +12438,22 @@ namespace AccountingSystem {
                 }
                 set {
                     this[this.tabledtJournalVoucher.debitColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal credit {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtJournalVoucher.creditColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'credit\' in table \'dtJournalVoucher\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtJournalVoucher.creditColumn] = value;
                 }
             }
             
@@ -12485,6 +12515,18 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetdebitNull() {
                 this[this.tabledtJournalVoucher.debitColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IscreditNull() {
+                return this.IsNull(this.tabledtJournalVoucher.creditColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetcreditNull() {
+                this[this.tabledtJournalVoucher.creditColumn] = global::System.Convert.DBNull;
             }
         }
         

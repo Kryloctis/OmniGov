@@ -25,15 +25,26 @@ namespace AccountingSystem.Views.Reports.JEV
                 //var fundName = cmbFunds.Text;
                 //var signatory = "MARY MAGDALYN T. REGANION, CPA";
 
+                var data = Factory.JEVRepository().GetRecordByJEV("0011");
+
                 var parameters = new[] {
-                    new ReportParameter("paramSample", "SAMPLE TEXT"),
+                    new ReportParameter("paramLGU", "BUUG"),
+                    new ReportParameter("paramFund", data["fund_name"]),
+                    new ReportParameter("paramJournalType", data["journal_name"]),
+                    new ReportParameter("paramJEVNo", data["jev_no"]),
+                    new ReportParameter("paramJEVDate", Convert.ToDateTime(data["date_entry"]).ToString("MM/dd/yy")),
+
+                    new ReportParameter("paramPayee", data["payee"]),
+                    new ReportParameter("paramExplanation", data["explanation"])
+
                 };
 
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\journal-entry-voucher.rdlc";
-                //report.DataSources.Clear();
+                report.DataSources.Clear();
 
-                //report.DataSources.Add(new ReportDataSource("AuthorityToDebitAccountDisbursementsJournal", AuthorityToDebitAccountDisbursementsJournalDataTable()));
-                //report.SetParameters(parameters);
+
+                report.DataSources.Add(new ReportDataSource("dtJournalVoucher", DataTableJournalEntryVoucherAccount()));
+                report.SetParameters(parameters);
 
             }
             catch (Exception ex)
@@ -42,11 +53,39 @@ namespace AccountingSystem.Views.Reports.JEV
             }
         }
 
+        private DataTable DataTableJournalEntryVoucherAccount()
+        {
+            var dtJEVAccounts = new dsLFS.dtJournalVoucherDataTable();
+            var dtJEVAccountsFromDB = Factory.JEVAccountsRepository().GetViewRecordsByJevId(57);
+
+            byte i = 0;
+
+            foreach (DataRow item in dtJEVAccountsFromDB.Rows)
+            {
+                DataRow row = dtJEVAccounts.NewRow();
+
+                row["fpp"] = item["fpp_code"];
+                row["account_and_explanation"] = item["ledger_name"];
+                row["account_code"] = item["account_code"];
+
+
+                if (Convert.ToBoolean(item["is_debit"]))
+                    row["debit"] = item["amount"];
+                else
+                    row["credit"] = item["amount"];
+              
+                dtJEVAccounts.Rows.Add(row);
+
+                i++;
+            }
+            return dtJEVAccounts;
+        }
+
         private void LoadJournals()
         {
-            //cmbFunds.DataSource = Factory.FundsRepository().GetRecords();
-            //cmbFunds.ValueMember = "id";
-            //cmbFunds.DisplayMember = "fund_name";
+            cmbFunds.DataSource = Factory.JournalsRepository().GetRecords();
+            cmbFunds.ValueMember = "id";
+            cmbFunds.DisplayMember = "journal_name";
         }
 
         private void frmJEVReport_Load(object sender, EventArgs e)
