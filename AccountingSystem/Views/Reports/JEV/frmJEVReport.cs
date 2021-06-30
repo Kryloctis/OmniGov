@@ -25,14 +25,11 @@ namespace AccountingSystem.Views.Reports.JEV
                 //var fundName = cmbFunds.Text;
                 //var signatory = "MARY MAGDALYN T. REGANION, CPA";
 
-                //var parameters = new[] {
-                //    new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
-                //    new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                //    new ReportParameter("paramFund", fundName),
-                //    new ReportParameter("paramSignatory", signatory)
-                //};
+                var parameters = new[] {
+                    new ReportParameter("paramSample", "SAMPLE TEXT"),
+                };
 
-                //report.ReportPath = $"{Application.StartupPath}\\Reports\\authority-to-debit-account-disbursements.rdlc";
+                report.ReportPath = $"{Application.StartupPath}\\Reports\\journal-entry-voucher.rdlc";
                 //report.DataSources.Clear();
 
                 //report.DataSources.Add(new ReportDataSource("AuthorityToDebitAccountDisbursementsJournal", AuthorityToDebitAccountDisbursementsJournalDataTable()));
