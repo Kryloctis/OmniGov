@@ -16,6 +16,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         internal int Id = 0;
         internal int CoId = 0;
         internal int RId = 0;
+        internal int startingreceipt = 0;
+        internal int maxreceipt = 0;
         public ucReceipts()
         {
             InitializeComponent();
@@ -28,7 +30,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[2];
+            var errorArray = new string[5];
             errorArray[0] = errorProvider.GetError(cmbcollector);
             errorArray[1] = errorProvider.GetError(cmbreceipt);
             errorArray[2] = errorProvider.GetError(txtfrom);
@@ -103,6 +105,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private void txtfrom_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtfrom, "Receipt No. From!");
+            if(Convert.ToInt32(txtfrom.Text.Trim()) < startingreceipt)
+            {
+                errorProvider.SetError(txtfrom, "Invalid Receipt Number!");
+                e.Cancel = true;
+            }
         }
 
         private void txtto_Validated(object sender, EventArgs e)
@@ -113,6 +120,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private void txtto_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtto, "Receipt No. To!");
+            if (Convert.ToInt32(txtto.Text.Trim()) > maxreceipt)
+            {
+                errorProvider.SetError(txtto, "Invalid Receipt Number!");
+                e.Cancel = true;
+            }
         }
 
         private void txtquantity_Validated(object sender, EventArgs e)
@@ -164,7 +176,19 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             try
             {
                 var riRepository = Factory.ReceiptsRepository();
+                var dtri2 = riRepository.FirstReceipt(id);
                 var dtri = riRepository.NextReceipt(id);
+                if (dtri2.Rows.Count > 0)
+                {
+                    int last = 0;
+                    for (int i = 0; i < dtri2.Rows.Count; i++)
+                    {
+                        last = dtri2.Rows[i]["receiptsfrom"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtri2.Rows[i]["receiptsfrom"]);
+                        maxreceipt = dtri2.Rows[i]["receiptsto"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtri2.Rows[i]["receiptsto"]);
+                    }
+                    startingreceipt = last;
+                    data = last.ToString();
+                }                
                 if (dtri.Rows.Count > 0)
                 {
                     int last = 0;
@@ -172,6 +196,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                     {
                         last = dtri.Rows[i]["issuelast"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtri.Rows[i]["issuelast"]);
                     }
+                    startingreceipt = last + 1;
                     data = (last + 1).ToString();
                 }
             }

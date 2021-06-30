@@ -214,6 +214,22 @@ namespace ACC.Data
             
         }
 
+        public DataTable FirstReceipt(int id)
+        {
+            try
+            {
+                string query = $"SELECT * FROM {tableName} WHERE id='{id}'";
+
+                var dtri = new DataTable();
+                return _dbGenericCommands.Fill(query, dtri);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
 
 
         public bool Insert(ReceiptsModel entity)

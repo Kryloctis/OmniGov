@@ -29,6 +29,7 @@ namespace ACC.Data
         private readonly string tableName16 = "general_collections_deposits";
         private readonly string tableName17 = "banks";
         private readonly string tableName18 = "funds";
+        private readonly string tableName19 = "receipts";
         public GeneralCollectionsRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -341,6 +342,21 @@ namespace ACC.Data
         }
 
         public DataTable GetRecordByDeposits(int Id)
+        {
+            try
+            {
+                string query = $"SELECT {tableName}.id,{tableName17}.bank_name,{tableName17}.account_no,{tableName7}.reference,{tableName7}.amount FROM {tableName} LEFT JOIN {tableName16} ON {tableName16}.general_collections_id={tableName}.id LEFT JOIN {tableName7} ON {tableName16}.bank_deposits_id={tableName7}.id LEFT JOIN {tableName17} ON {tableName7}.banks_id={tableName17}.id WHERE {tableName}.id='{Id}'";
+
+                var dtpc = new DataTable();
+                return _dbGenericCommands.Fill(query, dtpc);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetRecordByReceipts(int Id)
         {
             try
             {

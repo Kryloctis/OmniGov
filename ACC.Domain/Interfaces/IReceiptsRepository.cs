@@ -11,5 +11,6 @@ namespace ACC.Domain.Interfaces
         bool ReceiptExist(int accid, int from, int to);
         bool ReceiptConsumed(int id);
         DataTable NextReceipt(int id);
+        DataTable FirstReceipt(int id);
     }
 }
