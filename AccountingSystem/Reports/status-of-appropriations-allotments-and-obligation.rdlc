@@ -291,6 +291,7 @@
                     <Style>
                       <FontFamily>Calibri</FontFamily>
                       <FontWeight>Bold</FontWeight>
+                      <Format>MMMM d, yyyy</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -300,7 +301,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.28287in</Top>
+            <Top>1.2697in</Top>
             <Height>0.19169in</Height>
             <Width>7.69792in</Width>
             <ZIndex>4</ZIndex>
@@ -733,14 +734,130 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox141">
+                        <Textbox Name="txtFunctionClassificationServicesName">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!fund_name.Value</Value>
+                                  <Value>= Switch(
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 1, "I",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 2, "II",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 3, "III",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 4, "IV",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 5, "V",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 6, "VI",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 7, "VII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 8, "VIII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 9, "IX",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 10, "X",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 11, "XI",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 12, "XII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 13, "XIII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 14, "XIV",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 15, "XV",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 16, "XVI",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 17, "XVII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 18, "XVIII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 19, "XIX",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 20, "XX",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 21, "XXI",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 22, "XXII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 23, "XXIII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 24, "XIV",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 25, "XXV",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 26, "XXVI",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 27, "XXVII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 28, "XXVIII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 29, "XXIX",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 30, "XXX",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 31, "XXXI",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 32, "XXXII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 33, "XXXIII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 34, "XXXIV",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 35, "XXXV",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 36, "XXXVI",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 37, "XXXVII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 38, "XXXVIII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 39, "XXXIX",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 40, "XL",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 41, "XLI",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 42, "XLII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 43, "XLIII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 44, "XLIV",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 45, "XLV",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 46, "XLVI",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 47, "XLVII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 48, "XLVIII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 49, "XLIX",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 50, "L",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 51, "LI",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 52, "LII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 53, "LIII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 54, "LIV",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 55, "LV",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 56, "LVI",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 57, "LVII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 58, "LVIII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 59, "LIX",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 60, "LX",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 61, "LXI",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 62, "LXII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 63, "LXIII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 64, "LXIV",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 65, "LXV",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 66, "LXI",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 67, "LXII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 68, "LXIII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 69, "LXIX",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 70, "LXX",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 71, "LXXI",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 72, "LXXII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 73, "LXXIII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 74, "LXXIV",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 75, "LXXV",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 76, "LXXVI",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 77, "LXXVII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 78, "LXXVIII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 79, "LXXIX",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 80, "LXXX",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 81, "LXXXI",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 82, "LXXXII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 83, "LXXXIII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 84, "LXXXIV",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 85, "LXXXV",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 86, "LXXXVI",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 87, "LXXXVII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 88, "LXXXVIII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 89, "LXXXIX",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 90, "XC",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 91, "XCI",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 92, "XCII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 93, "XCIII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 94, "XCIV",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 95, "XCV",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 96, "XCVI",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 97, "XCVII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 98, "XCVII",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 99, "XCVIX",
+RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"dtSAAOB") = 100, "C"
+)</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>. </Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Label>function_classification_services_name</Label>
+                                  <Value>=UCase(Fields!function_classification_services_name.Value)</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -750,7 +867,6 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox141</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -1007,12 +1123,26 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox19">
+                        <Textbox Name="txtFppName">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
+                                <TextRun>
+                                  <Value>=RunningValue(Fields!fpp_name.Value,CountDistinct,"function_classification_services_name")</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>. </Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
                                 <TextRun>
                                   <Value>=Fields!fpp_name.Value</Value>
                                   <Style>
@@ -1024,7 +1154,6 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox19</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -1282,7 +1411,7 @@
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox30">
+                        <Textbox Name="txtAllotmentClassName">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -1299,7 +1428,6 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox30</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -1830,7 +1958,7 @@
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox59">
+                        <Textbox Name="txtAccount">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -1846,7 +1974,6 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox59</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -4493,7 +4620,7 @@
                                   </Style>
                                 </TextRun>
                                 <TextRun>
-                                  <Value>=Fields!fund_name.Value</Value>
+                                  <Value>=Fields!function_classification_services_name.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -4573,7 +4700,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!appropriations.Value, "fund_name")</Value>
+                                  <Value>=Sum(Fields!appropriations.Value, "function_classification_services_name")</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -4622,7 +4749,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!allotment_release.Value, "fund_name")</Value>
+                                  <Value>=Sum(Fields!allotment_release.Value, "function_classification_services_name")</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -4671,7 +4798,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!obligations.Value, "fund_name")</Value>
+                                  <Value>=Sum(Fields!obligations.Value, "function_classification_services_name")</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -4720,7 +4847,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!unobligated_balance.Value, "fund_name")</Value>
+                                  <Value>=Sum(Fields!unobligated_balance.Value, "function_classification_services_name")</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -5183,9 +5310,9 @@
               <TablixMembers>
                 <TablixMember />
                 <TablixMember>
-                  <Group Name="fund_name">
+                  <Group Name="function_classification_services_name">
                     <GroupExpressions>
-                      <GroupExpression>=Fields!fund_name.Value</GroupExpression>
+                      <GroupExpression>=Fields!function_classification_services_name.Value</GroupExpression>
                     </GroupExpressions>
                   </Group>
                   <SortExpressions>
@@ -5261,14 +5388,14 @@
                                         </GroupExpressions>
                                       </Group>
                                       <Visibility>
-                                        <Hidden>=IIf(ReportItems!remarks.Value = "", true, false)</Hidden>
+                                        <Hidden>=IIF(ReportItems!remarks.Value = "", true, false)</Hidden>
                                       </Visibility>
                                     </TablixMember>
                                   </TablixMembers>
                                 </TablixMember>
                                 <TablixMember>
                                   <Visibility>
-                                    <Hidden>=IIf(ReportItems!subFPPName.Value = "", true, false)</Hidden>
+                                    <Hidden>=IIf(Parameters!paramFilterLevel.Value = 4 OR ReportItems!subFPPName.Value = "", true, false)</Hidden>
                                   </Visibility>
                                   <KeepWithGroup>Before</KeepWithGroup>
                                 </TablixMember>
@@ -5279,14 +5406,30 @@
                                   <KeepWithGroup>Before</KeepWithGroup>
                                 </TablixMember>
                               </TablixMembers>
+                              <Visibility>
+                                <Hidden>=IIF(Parameters!paramFilterLevel.Value = 3, true, false)</Hidden>
+                                <ToggleItem>txtAllotmentClassName</ToggleItem>
+                              </Visibility>
+                            </TablixMember>
+                            <TablixMember>
+                              <Visibility>
+                                <Hidden>=IIF(Parameters!paramFilterLevel.Value = 4, true, false)</Hidden>
+                              </Visibility>
                             </TablixMember>
                             <TablixMember />
-                            <TablixMember />
                           </TablixMembers>
+                          <Visibility>
+                            <Hidden>=IIF(Parameters!paramFilterLevel.Value = 2, true, false)</Hidden>
+                            <ToggleItem>txtFppName</ToggleItem>
+                          </Visibility>
                         </TablixMember>
                         <TablixMember />
                         <TablixMember />
                       </TablixMembers>
+                      <Visibility>
+                        <Hidden>=IIF(Parameters!paramFilterLevel.Value = 1, true, false)</Hidden>
+                        <ToggleItem>txtFunctionClassificationServicesName</ToggleItem>
+                      </Visibility>
                     </TablixMember>
                     <TablixMember />
                     <TablixMember />
@@ -5296,7 +5439,7 @@
             </TablixRowHierarchy>
             <DataSetName>dtSAAOB</DataSetName>
             <Top>1.63417in</Top>
-            <Height>3.5878in</Height>
+            <Height>3.58779in</Height>
             <Width>7.69795in</Width>
             <ZIndex>6</ZIndex>
             <Style>
@@ -5377,7 +5520,7 @@
         <PageWidth>8.27in</PageWidth>
         <LeftMargin>0.25in</LeftMargin>
         <RightMargin>0.25in</RightMargin>
-        <TopMargin>1in</TopMargin>
+        <TopMargin>0.25in</TopMargin>
         <BottomMargin>0.25in</BottomMargin>
         <Style />
       </Page>

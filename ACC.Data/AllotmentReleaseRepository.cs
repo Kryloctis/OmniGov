@@ -396,6 +396,60 @@ namespace ACC.Data
             }
         }
 
+        public DataTable GetViewRecords(int budgetAppropriationId, DateTime dateIssued)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId },
+                    new object[] { "@date_issued", DbType.Date, dateIssued.Date}
+                };
+
+
+                string query = $"SELECT " +
+                    $"allotment_release_id, " +
+                    $"allotment_account_id, " +
+                    $"aro_no, " +
+                    $"purpose, " +
+                    $"date_issued, " +
+                    $"allotment_release_created_at, " +
+                    $"allotment_release_updated_at, " +
+                    $"budget_appropriations_id, " +
+                    $"funds_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"function_program_project_id, " +
+                    $"fpp_code, " +
+                    $"fpp_name, " +
+                    $"is_special, " +
+                    $"others_fpp_id, " +
+                    $"others_fpp_code, " +
+                    $"others_fpp_name, " +
+                    $"allotment_classes_id, " +
+                    $"allotment_code, " +
+                    $"allotment_name, " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_code, " +
+                    $"ledger_name, " +
+                    $"date_entry, " +
+                    $"year, " +
+                    $"continuing, " +
+                    $"remarks, " +
+                    $"amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE budget_appropriations_id = @budget_appropriations_id " +
+                    $"AND date_issued <= @date_issued";
+
+                var dataTable = new DataTable();
+                return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool AllotmentReleaseExist(int budgetAppropriationId, DateTime dateIssued)
         {
             try

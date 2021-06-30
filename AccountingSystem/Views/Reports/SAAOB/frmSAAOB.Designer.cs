@@ -41,13 +41,13 @@ namespace AccountingSystem.Views.Reports.SAAOB
             this.epFPP = new System.Windows.Forms.ErrorProvider(this.components);
             this.panelConfig = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnOne = new System.Windows.Forms.Button();
-            this.btnTwo = new System.Windows.Forms.Button();
-            this.btnThree = new System.Windows.Forms.Button();
-            this.btnFour = new System.Windows.Forms.Button();
-            this.btnFive = new System.Windows.Forms.Button();
             this.chkBxAdvanceMode = new System.Windows.Forms.CheckBox();
             this.btnPrint = new System.Windows.Forms.Button();
+            this.radBtn1 = new System.Windows.Forms.RadioButton();
+            this.radBtn2 = new System.Windows.Forms.RadioButton();
+            this.radBtn3 = new System.Windows.Forms.RadioButton();
+            this.radBtn4 = new System.Windows.Forms.RadioButton();
+            this.radBtn5 = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.epYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
@@ -132,12 +132,12 @@ namespace AccountingSystem.Views.Reports.SAAOB
             // 
             // panelConfig
             // 
+            this.panelConfig.Controls.Add(this.radBtn5);
+            this.panelConfig.Controls.Add(this.radBtn4);
+            this.panelConfig.Controls.Add(this.radBtn3);
+            this.panelConfig.Controls.Add(this.radBtn2);
+            this.panelConfig.Controls.Add(this.radBtn1);
             this.panelConfig.Controls.Add(this.label3);
-            this.panelConfig.Controls.Add(this.btnOne);
-            this.panelConfig.Controls.Add(this.btnTwo);
-            this.panelConfig.Controls.Add(this.btnThree);
-            this.panelConfig.Controls.Add(this.btnFour);
-            this.panelConfig.Controls.Add(this.btnFive);
             this.panelConfig.Controls.Add(this.chkBxAdvanceMode);
             this.panelConfig.Controls.Add(this.btnPrint);
             this.panelConfig.Dock = System.Windows.Forms.DockStyle.Top;
@@ -155,56 +155,6 @@ namespace AccountingSystem.Views.Reports.SAAOB
             this.label3.Size = new System.Drawing.Size(63, 15);
             this.label3.TabIndex = 15;
             this.label3.Text = "Filter Level";
-            // 
-            // btnOne
-            // 
-            this.btnOne.Location = new System.Drawing.Point(81, 6);
-            this.btnOne.Name = "btnOne";
-            this.btnOne.Size = new System.Drawing.Size(27, 23);
-            this.btnOne.TabIndex = 9;
-            this.btnOne.Text = "1";
-            this.btnOne.UseVisualStyleBackColor = true;
-            this.btnOne.Click += new System.EventHandler(this.btnOne_Click);
-            // 
-            // btnTwo
-            // 
-            this.btnTwo.Location = new System.Drawing.Point(114, 6);
-            this.btnTwo.Name = "btnTwo";
-            this.btnTwo.Size = new System.Drawing.Size(27, 23);
-            this.btnTwo.TabIndex = 10;
-            this.btnTwo.Text = "2";
-            this.btnTwo.UseVisualStyleBackColor = true;
-            this.btnTwo.Click += new System.EventHandler(this.btnTwo_Click);
-            // 
-            // btnThree
-            // 
-            this.btnThree.Location = new System.Drawing.Point(147, 6);
-            this.btnThree.Name = "btnThree";
-            this.btnThree.Size = new System.Drawing.Size(27, 23);
-            this.btnThree.TabIndex = 11;
-            this.btnThree.Text = "3";
-            this.btnThree.UseVisualStyleBackColor = true;
-            this.btnThree.Click += new System.EventHandler(this.btnThree_Click);
-            // 
-            // btnFour
-            // 
-            this.btnFour.Location = new System.Drawing.Point(180, 6);
-            this.btnFour.Name = "btnFour";
-            this.btnFour.Size = new System.Drawing.Size(27, 23);
-            this.btnFour.TabIndex = 12;
-            this.btnFour.Text = "4";
-            this.btnFour.UseVisualStyleBackColor = true;
-            this.btnFour.Click += new System.EventHandler(this.btnFour_Click);
-            // 
-            // btnFive
-            // 
-            this.btnFive.Location = new System.Drawing.Point(213, 6);
-            this.btnFive.Name = "btnFive";
-            this.btnFive.Size = new System.Drawing.Size(27, 23);
-            this.btnFive.TabIndex = 13;
-            this.btnFive.Text = "5";
-            this.btnFive.UseVisualStyleBackColor = true;
-            this.btnFive.Click += new System.EventHandler(this.btnFive_Click);
             // 
             // chkBxAdvanceMode
             // 
@@ -230,6 +180,63 @@ namespace AccountingSystem.Views.Reports.SAAOB
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // radBtn1
+            // 
+            this.radBtn1.AutoSize = true;
+            this.radBtn1.Location = new System.Drawing.Point(81, 8);
+            this.radBtn1.Name = "radBtn1";
+            this.radBtn1.Size = new System.Drawing.Size(31, 19);
+            this.radBtn1.TabIndex = 18;
+            this.radBtn1.Text = "1";
+            this.radBtn1.UseVisualStyleBackColor = true;
+            this.radBtn1.CheckedChanged += new System.EventHandler(this.radBtn1_CheckedChanged);
+            // 
+            // radBtn2
+            // 
+            this.radBtn2.AutoSize = true;
+            this.radBtn2.Location = new System.Drawing.Point(118, 8);
+            this.radBtn2.Name = "radBtn2";
+            this.radBtn2.Size = new System.Drawing.Size(31, 19);
+            this.radBtn2.TabIndex = 18;
+            this.radBtn2.Text = "2";
+            this.radBtn2.UseVisualStyleBackColor = true;
+            this.radBtn2.CheckedChanged += new System.EventHandler(this.radBtn2_CheckedChanged);
+            // 
+            // radBtn3
+            // 
+            this.radBtn3.AutoSize = true;
+            this.radBtn3.Location = new System.Drawing.Point(155, 8);
+            this.radBtn3.Name = "radBtn3";
+            this.radBtn3.Size = new System.Drawing.Size(31, 19);
+            this.radBtn3.TabIndex = 18;
+            this.radBtn3.Text = "3";
+            this.radBtn3.UseVisualStyleBackColor = true;
+            this.radBtn3.CheckedChanged += new System.EventHandler(this.radBtn3_CheckedChanged);
+            // 
+            // radBtn4
+            // 
+            this.radBtn4.AutoSize = true;
+            this.radBtn4.Location = new System.Drawing.Point(192, 8);
+            this.radBtn4.Name = "radBtn4";
+            this.radBtn4.Size = new System.Drawing.Size(31, 19);
+            this.radBtn4.TabIndex = 18;
+            this.radBtn4.Text = "4";
+            this.radBtn4.UseVisualStyleBackColor = true;
+            this.radBtn4.CheckedChanged += new System.EventHandler(this.radBtn4_CheckedChanged);
+            // 
+            // radBtn5
+            // 
+            this.radBtn5.AutoSize = true;
+            this.radBtn5.Checked = true;
+            this.radBtn5.Location = new System.Drawing.Point(229, 8);
+            this.radBtn5.Name = "radBtn5";
+            this.radBtn5.Size = new System.Drawing.Size(31, 19);
+            this.radBtn5.TabIndex = 18;
+            this.radBtn5.TabStop = true;
+            this.radBtn5.Text = "5";
+            this.radBtn5.UseVisualStyleBackColor = true;
+            this.radBtn5.CheckedChanged += new System.EventHandler(this.radBtn5_CheckedChanged);
             // 
             // frmSAAOB
             // 
@@ -269,13 +276,13 @@ namespace AccountingSystem.Views.Reports.SAAOB
         internal System.Windows.Forms.ComboBox cmbxFund;
         internal System.Windows.Forms.DateTimePicker dtAsOf;
         private System.Windows.Forms.Label label3;
-        internal System.Windows.Forms.Button btnOne;
-        internal System.Windows.Forms.Button btnTwo;
-        internal System.Windows.Forms.Button btnThree;
-        internal System.Windows.Forms.Button btnFour;
-        internal System.Windows.Forms.Button btnFive;
         internal System.Windows.Forms.CheckBox chkBxAdvanceMode;
         internal System.Windows.Forms.Button btnPrint;
         internal System.Windows.Forms.Panel panelConfig;
+        internal System.Windows.Forms.RadioButton radBtn1;
+        internal System.Windows.Forms.RadioButton radBtn5;
+        internal System.Windows.Forms.RadioButton radBtn4;
+        internal System.Windows.Forms.RadioButton radBtn3;
+        internal System.Windows.Forms.RadioButton radBtn2;
     }
 }

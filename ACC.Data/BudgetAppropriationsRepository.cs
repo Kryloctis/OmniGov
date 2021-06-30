@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -225,6 +226,7 @@ namespace ACC.Data
                      $"fpp_id, " +
                      $"fpp_code, " +
                      $"fpp_name, " +
+                     $"fpp_is_special, " +
                      $"functional_classification_service_id, " +
                      $"functional_classification_service_name, " +
                      $"functional_classification_id, " +
@@ -258,6 +260,73 @@ namespace ACC.Data
             }
         }
 
+        public DataTable GetViewRecords(int fundId, DateTime dateEntry, short year, byte isContinuing, byte isSpecial)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Int32, fundId},
+                    new object[] { "@date_entry", DbType.Date, dateEntry.Date},
+                    new object[] { "@year", DbType.Int16, year},
+                    new object[] { "@continuing", DbType.Byte, isContinuing},
+                    new object[] { "@fpp_is_special", DbType.Byte, isSpecial}
+                };
+
+
+                string query = $"SELECT " +
+                     $"id, " +
+                     $"funds_id, " +
+                     $"fund_code, " +
+                     $"fund_name, " +
+                     $"fpp_id, " +
+                     $"fpp_code, " +
+                     $"fpp_name, " +
+                     $"fpp_is_special, " +
+                     $"functional_classification_service_id, " +
+                     $"functional_classification_service_name, " +
+                     $"functional_classification_id, " +
+                     $"functional_classification_sector_code, " +
+                     $"functional_classification_sector_name, " +
+                     $"others_fpp_id, " +
+                     $"others_fpp_code, " +
+                     $"others_fpp_name, " +
+                     $"allotment_class_id, " +
+                     $"allotment_class_code, " +
+                     $"allotment_class_name, " +
+                     $"general_ledger_accounts_id, " +
+                     $"general_ledger_accounts_code, " +
+                     $"general_ledger_accounts_name, " +
+                     $"account_code, " +
+                     $"date_entry, " +
+                     $"year, " +
+                     $"amount, " +
+                     $"continuing, " +
+                     $"remarks, " +
+                     $"created_at, " +
+                     $"updated_at " +
+                     $"FROM {viewTableName} " +
+                     $"WHERE " +
+                     $"funds_id = @funds_id " +
+                     $"AND date_entry <= @date_entry " +
+                     $"AND year = @year " +
+                     $"AND continuing = @continuing " +
+                     $"AND fpp_is_special = @fpp_is_special";
+
+                var dataTable = new DataTable();
+                return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
         public DataTable GetViewRecordsByIds(BudgetAppropriationsModel entity)
         {
             try
@@ -278,12 +347,14 @@ namespace ACC.Data
                     $"fpp_id, " +
                     $"fpp_code, " +
                     $"fpp_name, " +
+                    $"fpp_is_special, " +
                     $"functional_classification_service_id, " +
                     $"functional_classification_service_name, " +
                     $"functional_classification_id, " +
                     $"functional_classification_sector_code, " +
                     $"functional_classification_sector_name, " +
                     $"others_fpp_id, " +
+                    $"others_fpp_code, " +
                     $"others_fpp_name, " +
                     $"allotment_class_id, " +
                     $"allotment_class_code, " +
@@ -335,12 +406,14 @@ namespace ACC.Data
                     $"fpp_id, " +
                     $"fpp_code, " +
                     $"fpp_name, " +
+                    $"fpp_is_special, " +
                     $"functional_classification_service_id, " +
                     $"functional_classification_service_name, " +
                     $"functional_classification_id, " +
                     $"functional_classification_sector_code, " +
                     $"functional_classification_sector_name, " +
                     $"others_fpp_id, " +
+                    $"others_fpp_code, " +
                     $"others_fpp_name, " +
                     $"allotment_class_id, " +
                     $"allotment_class_code, " +
@@ -360,7 +433,8 @@ namespace ACC.Data
                     $"WHERE fpp_id = @fpp_id " +
                     $"AND allotment_class_id = @allotment_class_id " +
                     $"AND others_fpp_id <=> @others_fpp_id " +
-                    $"AND funds_id = @funds_id AND (account_code LIKE @searchTxt OR general_ledger_accounts_name LIKE @searchTxt)";
+                    $"AND funds_id = @funds_id " +
+                    $"AND (account_code LIKE @searchTxt OR general_ledger_accounts_name LIKE @searchTxt)";
 
                 var dataTable = new DataTable();
                 return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
@@ -392,12 +466,14 @@ namespace ACC.Data
                     $"fpp_id, " +
                     $"fpp_code, " +
                     $"fpp_name, " +
+                    $"fpp_is_special, " +
                     $"functional_classification_service_id, " +
                     $"functional_classification_service_name, " +
                     $"functional_classification_id, " +
                     $"functional_classification_sector_code, " +
                     $"functional_classification_sector_name, " +
                     $"others_fpp_id, " +
+                    $"others_fpp_code, " +
                     $"others_fpp_name, " +
                     $"allotment_class_id, " +
                     $"allotment_class_code, " +
@@ -724,6 +800,7 @@ namespace ACC.Data
             return false;
         }
 
+     
         #endregion Validations
 
     }
