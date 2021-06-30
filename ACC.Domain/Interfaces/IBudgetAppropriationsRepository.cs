@@ -16,6 +16,8 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecords();
 
+        DataTable GetViewRecords(int fundId, DateTime dateEntry, short year, byte isContinuing, byte isSpecial);
+
         DataTable GetViewRecordsByIds(BudgetAppropriationsModel entity);
 
         DataTable GetViewRecordsByIdsSearch(BudgetAppropriationsModel entity, string searchTxt);
@@ -23,6 +25,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecordsByIdsYear(BudgetAppropriationsModel entity);
 
         DataTable GetHeaderOthersFPP(int fppID, int allotment_classes_id, int funds_id, short year);
+
 
 
        //Validations
