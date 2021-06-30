@@ -87,10 +87,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(165, 12);
+            this.txtSearch.Location = new System.Drawing.Point(12, 12);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.PlaceholderText = "Search...";
-            this.txtSearch.Size = new System.Drawing.Size(198, 23);
+            this.txtSearch.Size = new System.Drawing.Size(351, 23);
             this.txtSearch.TabIndex = 0;
             // 
             // btnSearch

@@ -47,24 +47,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             Helper.DatagridDefaultStyle(dgAllotmentRelease, true);
         }
 
-        private void ApplySelected() 
-        {
-            int rowIndex = dgAllotmentRelease.CurrentCell.RowIndex;
-            int allotmentReleaseId = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["id"].Value);
-
-            _frmAllotmentReleaseMain.ucAllotmentReleaseMain1.allotmentReleaseId = allotmentReleaseId;
-            _frmAllotmentReleaseMain.ucAllotmentReleaseMain1.LoadSelected();
-            _frmAllotmentReleaseMain.ucAllotmentReleaseMain1.DisplayTotalAllotmentRelease();
-            _frmAllotmentReleaseMain.btnSave.Text = "Update";
-            Close();
-        }
-
-
-        private void btnSelect_Click(object sender, EventArgs e)
-        {
-            ApplySelected();
-        }
-
         private void dgAllotmentRelease_SelectionChanged(object sender, EventArgs e)
         {
             if (dgAllotmentRelease.SelectedRows.Count == 1)
@@ -73,9 +55,30 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 btnSelect.Enabled = false;
         }
 
+
+        private void ApplySelected() 
+        {
+            var ucMain = _frmAllotmentReleaseMain.ucAllotmentReleaseMain1;
+            int rowIndex = dgAllotmentRelease.CurrentCell.RowIndex;
+            int allotmentReleaseId = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["id"].Value);
+
+            ucMain.allotmentReleaseId = allotmentReleaseId;
+            ucMain.LoadSelected();
+            ucMain.DisplayTotalAllotmentRelease();
+            ucMain.ClearErrors();
+            _frmAllotmentReleaseMain.btnSave.Text = "Update";
+            Close();
+        }
         private void dgAllotmentRelease_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            ApplySelected();    
+            ApplySelected();
         }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            ApplySelected();
+        }
+
+       
     }
 }
