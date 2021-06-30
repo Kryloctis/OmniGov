@@ -116,7 +116,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName5} LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id WHERE {tableName5}.receiptsto<>(SELECT SUM(IF(IFNULL(ri.last_issued,0)>0,ri.issueto-ri.last_issued,0)) FROM {tableName} ri WHERE ri.receipts_id={tableName5}.id AND IF(IFNULL(ri.is_returned,true),false,true)=false) AND {tableName5}.id NOT IN (SELECT {tableName}.receipts_id FROM {tableName} WHERE {tableName}.collecting_officers_id='{id}' AND IF(IFNULL({tableName}.is_returned,0)>0,1,0)=0)";
+                string query = $"SELECT * FROM {tableName5} LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id WHERE {tableName5}.receiptsto<>IFNULL((SELECT SUM(IF(IFNULL(ri.last_issued,0)>0,ri.issueto-ri.last_issued,0)) FROM {tableName} ri WHERE ri.receipts_id={tableName5}.id AND IF(IFNULL(ri.is_returned,true),false,true)=false),0) AND {tableName5}.id NOT IN (SELECT {tableName}.receipts_id FROM {tableName} WHERE {tableName}.collecting_officers_id='{id}' AND IF(IFNULL({tableName}.is_returned,0)>0,1,0)=0)";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
