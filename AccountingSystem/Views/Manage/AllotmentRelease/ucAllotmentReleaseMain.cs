@@ -51,7 +51,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 string purpose = dtAllotmentRelease.Rows[0]["purpose"].ToString();
 
                 cmbxFPP.SelectedValue = fppId;
-                cmbxSubFPP.SelectedValue = subFPPId == null? 0 : subFPPId;
+                cmbxSubFPP.SelectedValue = subFPPId == null? 0 : Convert.ToInt32(subFPPId);
                 CheckedFund(fundId);
                 CheckedAllotmentClass(allotmentClassId);
                 mskSeriesNo.Text = aroNo;
