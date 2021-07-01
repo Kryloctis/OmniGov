@@ -1246,6 +1246,12 @@ namespace AccountingSystem
             datagrid.Columns["updated_at"].Visible = false;
             datagrid.Columns["updated_by"].Visible = false;
         }
+
+        internal static void JEVDatagrid(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns["jev_no"].HeaderText = "JEV No.";;
+        }
         #endregion
     }
 }

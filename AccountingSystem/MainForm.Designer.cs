@@ -73,6 +73,7 @@ namespace AccountingSystem
             this.menuprintPC = new System.Windows.Forms.ToolStripMenuItem();
             this.menuprintGC = new System.Windows.Forms.ToolStripMenuItem();
             this.menucashbook = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuJEVS = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnBudgetAppropriations = new System.Windows.Forms.ToolStripButton();
             this.btnAllotmentRelease = new System.Windows.Forms.ToolStripButton();
@@ -309,6 +310,7 @@ namespace AccountingSystem
             this.menuLedgersReport,
             this.menuSAAOB,
             this.menuSAAOBB,
+            this.menuJEVS,
             this.menuprintRCI,
             this.menuprintPC,
             this.menuprintGC,
@@ -426,6 +428,12 @@ namespace AccountingSystem
             this.menucashbook.Size = new System.Drawing.Size(256, 22);
             this.menucashbook.Text = "Bank Cashbook";
             this.menucashbook.Click += new System.EventHandler(this.menucashbook_Click);
+            // 
+            // menuJEVS
+            // 
+            this.menuJEVS.Name = "menuJEVS";
+            this.menuJEVS.Size = new System.Drawing.Size(256, 22);
+            this.menuJEVS.Text = "JEVs";
             // 
             // toolStrip1
             // 
@@ -679,6 +687,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menureceiptsissued;
         private System.Windows.Forms.ToolStripMenuItem menureceipts;
         private System.Windows.Forms.ToolStripMenuItem menucashbook;
+        private System.Windows.Forms.ToolStripMenuItem menuJEVS;
     }
 }
 

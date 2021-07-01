@@ -30,6 +30,7 @@ using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Manage.Receipts;
 using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using AccountingSystem.Views.Reports.Cashbook;
+using AccountingSystem.Views.Reports.JEV;
 
 namespace AccountingSystem
 {
@@ -58,6 +59,7 @@ namespace AccountingSystem
             menuLogout.Click += new EventHandler(menuLogout_Click);
             menuExitApp.Click += new EventHandler(menuExitApp_Click);
             menuSubsidiaryLedgerReport.Click += new EventHandler(menuSubsidiaryLedgerReport_Click);
+            menuJEVS.Click += new EventHandler(menuJEVs_Click);
 
             userDict = Helper.LoggedInUserData();
             loginForm = _loginForm;
@@ -221,6 +223,10 @@ namespace AccountingSystem
         private void menuJEV_Click(object sender, EventArgs e)
         {
             _ = new frmJEV().ShowDialog();
+        }
+        private void  menuJEVs_Click(object sender, EventArgs e)
+        {
+            _ = new frmJEVReport(null).ShowDialog();
         }
 
         private void menuFunctionProgramProject_Click(object sender, EventArgs e)

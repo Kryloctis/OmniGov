@@ -17,7 +17,8 @@ namespace AccountingSystem.Views.Reports.JEV
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
 
-            _jevNo = jevNo;
+            //_jevNo = jevNo;
+
         }
 
 
@@ -25,6 +26,7 @@ namespace AccountingSystem.Views.Reports.JEV
         {
             try
             {
+
                 var data = Factory.JEVRepository().GetRecordByJEV(_jevNo);
 
                 var parameters = new[] {
@@ -75,7 +77,7 @@ namespace AccountingSystem.Views.Reports.JEV
                     row["debit"] = item["amount"];
                 else
                     row["credit"] = item["amount"];
-              
+
                 dtJEVAccounts.Rows.Add(row);
 
                 i++;
@@ -86,20 +88,39 @@ namespace AccountingSystem.Views.Reports.JEV
         private void frmJEVReport_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
+            Helper.DatagridDefaultStyle(dgJEV);
+            LoadJEVS();
+        }
+
+        private void LoadJEVS()
+        {
+            var dtJEV = Factory.JEVRepository().GetAllJEV();
+            HelperLoadRecords.JEVDatagrid(dtJEV, dgJEV);
+            dgJEV.ClearSelection();
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
             LoadReport(reportViewer.LocalReport);
+            SetReportViewerProperties();
+        }
+
+        private void dgJEV_SelectionChanged(object sender, EventArgs e)
+        {
+            int rowIndex = dgJEV.CurrentCell.RowIndex;
+            _jevNo = dgJEV.Rows[rowIndex].Cells["jev_no"].Value.ToString();
+
+            LoadReport(reportViewer.LocalReport);
+            SetReportViewerProperties();
+
+        }
+
+        private void SetReportViewerProperties()
+        {
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
             reportViewer.ZoomMode = ZoomMode.Percent;
             reportViewer.ZoomPercent = 100;
             reportViewer.RefreshReport();
-        }
-
-        private void listBox1_SelectedValueChanged(object sender, EventArgs e)
-        {
-            //LoadJEVs
         }
     }
 }
