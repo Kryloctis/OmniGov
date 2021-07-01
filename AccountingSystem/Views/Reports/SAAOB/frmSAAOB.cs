@@ -91,7 +91,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
                     decimal TotalBudgetAppropraition = rowAppropriation + supplementedAmount;
 
                     //ALLOTMENT RELEASE
-                    var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecords(rowBudgetAppropriationId, date);
+                    var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationIdDateIssued(rowBudgetAppropriationId, date);
                     decimal allotmentReleaseAmount = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("SUM(amount)", string.Empty));
 
 
