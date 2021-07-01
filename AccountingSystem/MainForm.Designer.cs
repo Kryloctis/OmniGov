@@ -77,9 +77,7 @@ namespace AccountingSystem
             this.btnBudgetAppropriations = new System.Windows.Forms.ToolStripButton();
             this.btnAllotmentRelease = new System.Windows.Forms.ToolStripButton();
             this.btnObligationRequest = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnJournalEntry = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnIssueCheck = new System.Windows.Forms.ToolStripButton();
             this.btnPaymentCollection = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -149,48 +147,48 @@ namespace AccountingSystem
             // menuJEV
             // 
             this.menuJEV.Name = "menuJEV";
-            this.menuJEV.Size = new System.Drawing.Size(180, 22);
+            this.menuJEV.Size = new System.Drawing.Size(178, 22);
             this.menuJEV.Text = "JEV";
             this.menuJEV.Click += new System.EventHandler(this.menuJEV_Click);
             // 
             // menuObligationRequest
             // 
             this.menuObligationRequest.Name = "menuObligationRequest";
-            this.menuObligationRequest.Size = new System.Drawing.Size(180, 22);
+            this.menuObligationRequest.Size = new System.Drawing.Size(178, 22);
             this.menuObligationRequest.Text = "CAFOA";
             // 
             // menuIssueCheck
             // 
             this.menuIssueCheck.Name = "menuIssueCheck";
-            this.menuIssueCheck.Size = new System.Drawing.Size(180, 22);
+            this.menuIssueCheck.Size = new System.Drawing.Size(178, 22);
             this.menuIssueCheck.Text = "Issue Check";
             this.menuIssueCheck.Click += new System.EventHandler(this.menuRCI_Click);
             // 
             // menuPayments
             // 
             this.menuPayments.Name = "menuPayments";
-            this.menuPayments.Size = new System.Drawing.Size(180, 22);
+            this.menuPayments.Size = new System.Drawing.Size(178, 22);
             this.menuPayments.Text = "Payment Collection";
             this.menuPayments.Click += new System.EventHandler(this.menuPayments_Click);
             // 
             // menuDeposits
             // 
             this.menuDeposits.Name = "menuDeposits";
-            this.menuDeposits.Size = new System.Drawing.Size(180, 22);
+            this.menuDeposits.Size = new System.Drawing.Size(178, 22);
             this.menuDeposits.Text = "Bank Deposits";
             this.menuDeposits.Click += new System.EventHandler(this.menuDeposits_Click);
             // 
             // menuGenerateRCD
             // 
             this.menuGenerateRCD.Name = "menuGenerateRCD";
-            this.menuGenerateRCD.Size = new System.Drawing.Size(180, 22);
+            this.menuGenerateRCD.Size = new System.Drawing.Size(178, 22);
             this.menuGenerateRCD.Text = "Generate RCD";
             this.menuGenerateRCD.Click += new System.EventHandler(this.menuGenerateRCD_Click);
             // 
             // menuIssueReceipts
             // 
             this.menuIssueReceipts.Name = "menuIssueReceipts";
-            this.menuIssueReceipts.Size = new System.Drawing.Size(180, 22);
+            this.menuIssueReceipts.Size = new System.Drawing.Size(178, 22);
             this.menuIssueReceipts.Text = "Issue Receipts";
             this.menuIssueReceipts.Click += new System.EventHandler(this.menureceiptsissued_Click);
             // 
@@ -437,9 +435,7 @@ namespace AccountingSystem
             this.btnBudgetAppropriations,
             this.btnAllotmentRelease,
             this.btnObligationRequest,
-            this.toolStripSeparator1,
             this.btnJournalEntry,
-            this.toolStripSeparator2,
             this.btnIssueCheck,
             this.btnPaymentCollection});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
@@ -480,11 +476,6 @@ namespace AccountingSystem
             this.btnObligationRequest.Size = new System.Drawing.Size(80, 28);
             this.btnObligationRequest.Text = "Obligate";
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
-            // 
             // btnJournalEntry
             // 
             this.btnJournalEntry.Image = ((System.Drawing.Image)(resources.GetObject("btnJournalEntry.Image")));
@@ -494,11 +485,6 @@ namespace AccountingSystem
             this.btnJournalEntry.Name = "btnJournalEntry";
             this.btnJournalEntry.Size = new System.Drawing.Size(52, 28);
             this.btnJournalEntry.Text = "JEV";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
             // 
             // btnIssueCheck
             // 
@@ -689,7 +675,6 @@ namespace AccountingSystem
         internal System.Windows.Forms.ToolStripMenuItem menuSAAOBB;
         internal System.Windows.Forms.ToolStripButton btnBudgetAppropriations;
         internal System.Windows.Forms.ToolStripButton btnAllotmentRelease;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         internal System.Windows.Forms.RadioButton radBtnBudget;
@@ -699,7 +684,6 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuIssueReceipts;
         private System.Windows.Forms.ToolStripMenuItem menuReceipts;
         private System.Windows.Forms.ToolStripMenuItem menucashbook;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton btnPaymentCollection;
     }
 }
