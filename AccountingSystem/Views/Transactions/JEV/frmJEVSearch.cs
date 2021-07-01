@@ -112,7 +112,9 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.Enabled = true;
                     frmJEV.btnSave.Enabled = true;
                     frmJEV.btnDelete.Enabled = true;
-                    
+                    frmJEV.btnPrint.Enabled = true;
+
+
                     frmJEV.ucjev1.txtFundsJevNo.Text = $"{jevFundCode}-{Convert.ToDateTime(jevDateOfEntry).Year}{Convert.ToDateTime(jevDateOfEntry).Month}";
                     frmJEV.ucjev1.txtJEVNo.Text = jevNo;
 

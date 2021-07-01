@@ -35,8 +35,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
-            this.ucjev1 = new AccountingSystem.Views.Transactions.JEV.ucJEV();
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
+            this.ucjev1 = new AccountingSystem.Views.Transactions.JEV.ucJEV();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -110,17 +110,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
-            // ucjev1
-            // 
-            this.ucjev1.AutoSize = true;
-            this.ucjev1.Enabled = false;
-            this.ucjev1.Location = new System.Drawing.Point(12, 58);
-            this.ucjev1.Name = "ucjev1";
-            this.ucjev1.Size = new System.Drawing.Size(877, 551);
-            this.ucjev1.TabIndex = 8;
-            // 
             // btnPrint
             // 
+            this.btnPrint.Enabled = false;
             this.btnPrint.Image = global::AccountingSystem.Properties.Resources.printer;
             this.btnPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -129,6 +121,15 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnPrint.Text = "&Print";
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // ucjev1
+            // 
+            this.ucjev1.AutoSize = true;
+            this.ucjev1.Enabled = false;
+            this.ucjev1.Location = new System.Drawing.Point(12, 58);
+            this.ucjev1.Name = "ucjev1";
+            this.ucjev1.Size = new System.Drawing.Size(877, 551);
+            this.ucjev1.TabIndex = 8;
             // 
             // frmJEV
             // 
@@ -160,6 +161,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal System.Windows.Forms.ToolStripButton btnSave;
         internal System.Windows.Forms.ToolStripButton btnDelete;
         protected internal ucJEV ucjev1;
-        private System.Windows.Forms.ToolStripButton btnPrint;
+        internal System.Windows.Forms.ToolStripButton btnPrint;
     }
 }
