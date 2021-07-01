@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             if (cmbxObjectOfExpenditure.SelectedIndex > -1)
             {
                 int budgetAppropriationId = Convert.ToInt32(cmbxObjectOfExpenditure.SelectedValue);
-                var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
+                var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationIdDateIssued(budgetAppropriationId, dateRequested);
                 var dtObligationRequests = Factory.ObligationRequestRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
 
                 decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
@@ -247,10 +247,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         internal void LoadObjectOfExpendituresCombobox()
         {
+            cmbxObjectOfExpenditure.Text = string.Empty;
             LoadObjectOfExpenditures();
-
             cmbxObjectOfExpenditure.TextChanged -= new EventHandler(CmbxObjectOfExpenditure_TextChanged);
             cmbxObjectOfExpenditure.Text = string.Empty;
+
             cmbxObjectOfExpenditure.SelectedIndex = -1;
             epObjectOfExpenditure.SetError(cmbxSubFPP, string.Empty);
             cmbxObjectOfExpenditure.TextChanged += new EventHandler(CmbxObjectOfExpenditure_TextChanged);
