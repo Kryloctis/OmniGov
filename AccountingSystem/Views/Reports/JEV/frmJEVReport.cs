@@ -29,15 +29,24 @@ namespace AccountingSystem.Views.Reports.JEV
             {
                 var data = Factory.JEVRepository().GetRecordByJEV(_jevNo);
 
+                var lguDetails = Helper.LGUDetails();
+                var signatory = "MARY MAGDALYN T. REGANION, CPA";
+                var preparedBy = "JOHN CENA";
+                var full_jev = $"{data["fund_code"]}-{Convert.ToDateTime(data["date_entry"]).Year}-{Convert.ToDateTime(data["date_entry"]).Month}-{data["jev_no"]}";
+
+
                 var parameters = new[] {
-                    new ReportParameter("paramLGU", "BUUG"),
+                    new ReportParameter("paramLGU",  lguDetails["lgu_name"]),
                     new ReportParameter("paramFund", data["fund_name"]),
                     new ReportParameter("paramJournalType", data["journal_name"]),
-                    new ReportParameter("paramJEVNo", data["jev_no"]),
+                    new ReportParameter("paramJEVNo", full_jev),
                     new ReportParameter("paramJEVDate", Convert.ToDateTime(data["date_entry"]).ToString("MM/dd/yy")),
 
                     new ReportParameter("paramPayee", data["payee"]),
-                    new ReportParameter("paramExplanation", data["explanation"])
+                    new ReportParameter("paramExplanation", data["explanation"]),
+
+                    new ReportParameter("paramPreparedBy",preparedBy),
+                    new ReportParameter("paramCertifiedBy", signatory)
 
 
                 };
@@ -89,6 +98,15 @@ namespace AccountingSystem.Views.Reports.JEV
         {
             Helper.LoadFormIcon(this);
             Helper.DatagridDefaultStyle(dgJEV);
+
+            if (_jevId != 0)
+            {
+                LoadReport(reportViewer.LocalReport);
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
+                reportViewer.RefreshReport();
+            }
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
