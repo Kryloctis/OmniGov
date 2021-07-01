@@ -43,19 +43,18 @@ namespace AccountingSystem.Views.Reports.JEV
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Location = new System.Drawing.Point(177, 41);
+            this.panel1.Location = new System.Drawing.Point(225, 13);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(795, 508);
+            this.panel1.Size = new System.Drawing.Size(747, 536);
             this.panel1.TabIndex = 24;
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRetrieve.Location = new System.Drawing.Point(897, 12);
+            this.btnRetrieve.Location = new System.Drawing.Point(144, 13);
             this.btnRetrieve.Name = "btnRetrieve";
             this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
             this.btnRetrieve.TabIndex = 26;
-            this.btnRetrieve.Text = "Retrieve";
+            this.btnRetrieve.Text = "Search";
             this.btnRetrieve.UseVisualStyleBackColor = true;
             this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
             // 
@@ -66,7 +65,7 @@ namespace AccountingSystem.Views.Reports.JEV
             this.panel2.Controls.Add(this.dgJEV);
             this.panel2.Location = new System.Drawing.Point(12, 41);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(159, 508);
+            this.panel2.Size = new System.Drawing.Size(207, 508);
             this.panel2.TabIndex = 27;
             // 
             // dgJEV
@@ -76,7 +75,7 @@ namespace AccountingSystem.Views.Reports.JEV
             this.dgJEV.Location = new System.Drawing.Point(0, 0);
             this.dgJEV.Name = "dgJEV";
             this.dgJEV.RowTemplate.Height = 25;
-            this.dgJEV.Size = new System.Drawing.Size(159, 508);
+            this.dgJEV.Size = new System.Drawing.Size(207, 508);
             this.dgJEV.TabIndex = 0;
             this.dgJEV.SelectionChanged += new System.EventHandler(this.dgJEV_SelectionChanged);
             // 
@@ -84,8 +83,7 @@ namespace AccountingSystem.Views.Reports.JEV
             // 
             this.textBox1.Location = new System.Drawing.Point(12, 13);
             this.textBox1.Name = "textBox1";
-            this.textBox1.PlaceholderText = "Search JEV No.";
-            this.textBox1.Size = new System.Drawing.Size(159, 23);
+            this.textBox1.Size = new System.Drawing.Size(126, 23);
             this.textBox1.TabIndex = 28;
             // 
             // frmJEVReport

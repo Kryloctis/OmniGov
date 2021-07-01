@@ -59,7 +59,6 @@ namespace AccountingSystem
             menuLogout.Click += new EventHandler(menuLogout_Click);
             menuExitApp.Click += new EventHandler(menuExitApp_Click);
             menuSubsidiaryLedgerReport.Click += new EventHandler(menuSubsidiaryLedgerReport_Click);
-            menuJEVS.Click += new EventHandler(menuJEVs_Click);
 
             userDict = Helper.LoggedInUserData();
             loginForm = _loginForm;
@@ -223,10 +222,6 @@ namespace AccountingSystem
         private void menuJEV_Click(object sender, EventArgs e)
         {
             _ = new frmJEV().ShowDialog();
-        }
-        private void  menuJEVs_Click(object sender, EventArgs e)
-        {
-            _ = new frmJEVReport(null).ShowDialog();
         }
 
         private void menuFunctionProgramProject_Click(object sender, EventArgs e)
@@ -405,5 +400,9 @@ namespace AccountingSystem
             _ = new frmCashbook().ShowDialog();
         }
 
+        private void menuJEVS_Click_1(object sender, EventArgs e)
+        {
+            _ = new frmJEVReport(0, null).ShowDialog();
+        }
     }
 }

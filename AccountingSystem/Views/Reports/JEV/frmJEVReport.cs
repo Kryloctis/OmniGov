@@ -8,17 +8,18 @@ namespace AccountingSystem.Views.Reports.JEV
     public partial class frmJEVReport : Form
     {
         private readonly ReportViewer reportViewer;
+        private int _jevId;
         private string _jevNo;
 
-        public frmJEVReport(string jevNo)
+        public frmJEVReport(int jevId, string jevNo)
         {
             InitializeComponent();
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
 
-            //_jevNo = jevNo;
-
+            _jevId = jevId;
+            _jevNo = jevNo;
         }
 
 
@@ -26,7 +27,6 @@ namespace AccountingSystem.Views.Reports.JEV
         {
             try
             {
-
                 var data = Factory.JEVRepository().GetRecordByJEV(_jevNo);
 
                 var parameters = new[] {
@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Reports.JEV
         private DataTable DataTableJournalEntryVoucherAccount()
         {
             var dtJEVAccounts = new dsLFS.dtJournalVoucherDataTable();
-            var dtJEVAccountsFromDB = Factory.JEVAccountsRepository().GetViewRecordsByJevId(57);
+            var dtJEVAccountsFromDB = Factory.JEVAccountsRepository().GetViewRecordsByJevId(_jevId);
 
             byte i = 0;
 
@@ -89,38 +89,31 @@ namespace AccountingSystem.Views.Reports.JEV
         {
             Helper.LoadFormIcon(this);
             Helper.DatagridDefaultStyle(dgJEV);
-            LoadJEVS();
-        }
-
-        private void LoadJEVS()
-        {
-            var dtJEV = Factory.JEVRepository().GetAllJEV();
-            HelperLoadRecords.JEVDatagrid(dtJEV, dgJEV);
-            dgJEV.ClearSelection();
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            LoadReport(reportViewer.LocalReport);
-            SetReportViewerProperties();
+            var dtJEV = Factory.JEVRepository().GetRecordsBySearch(textBox1.Text.Trim());
+            HelperLoadRecords.JEVDatagridView(dtJEV, dgJEV);
         }
 
         private void dgJEV_SelectionChanged(object sender, EventArgs e)
         {
-            int rowIndex = dgJEV.CurrentCell.RowIndex;
-            _jevNo = dgJEV.Rows[rowIndex].Cells["jev_no"].Value.ToString();
+            if (dgJEV.SelectedCells.Count > 0)
+            {
+                int selectedIndex = dgJEV.SelectedCells[0].RowIndex;
 
-            LoadReport(reportViewer.LocalReport);
-            SetReportViewerProperties();
+                DataGridViewRow selectedRow = dgJEV.Rows[selectedIndex];
 
-        }
+                _jevNo = Convert.ToString(selectedRow.Cells["jev_no"].Value);
+                _jevId = Convert.ToInt32(selectedRow.Cells["id"].Value);
 
-        private void SetReportViewerProperties()
-        {
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
-            reportViewer.RefreshReport();
+                LoadReport(reportViewer.LocalReport);
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
+                reportViewer.RefreshReport();
+            }
         }
     }
 }
