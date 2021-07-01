@@ -61,7 +61,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableName}.id, {tableName}.first_name, {tableName}.mid_initial, {tableName}.last_name, {tableName}.username, roles.role_name, {tableName}.created_at, {tableName}.updated_at FROM {tableName} inner join roles on {tableName}.roles_id  = roles.id";
+                string query = $"SELECT a.id, a.first_name, a.mid_initial, a.last_name, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id  = b.id WHERE b.role_name <> 'System Administrator'";
                 var dtUsers = new DataTable();
                 return _dbGenericCommands.Fill(query, dtUsers);
             }
