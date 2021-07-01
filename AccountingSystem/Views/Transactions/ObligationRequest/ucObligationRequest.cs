@@ -247,10 +247,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         internal void LoadObjectOfExpendituresCombobox()
         {
+            cmbxObjectOfExpenditure.Text = string.Empty;
             LoadObjectOfExpenditures();
-
             cmbxObjectOfExpenditure.TextChanged -= new EventHandler(CmbxObjectOfExpenditure_TextChanged);
             cmbxObjectOfExpenditure.Text = string.Empty;
+
             cmbxObjectOfExpenditure.SelectedIndex = -1;
             epObjectOfExpenditure.SetError(cmbxSubFPP, string.Empty);
             cmbxObjectOfExpenditure.TextChanged += new EventHandler(CmbxObjectOfExpenditure_TextChanged);

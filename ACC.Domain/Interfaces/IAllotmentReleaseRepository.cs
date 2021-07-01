@@ -29,8 +29,6 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId);
 
-        DataTable GetViewRecords(int budgetAppropriationId, DateTime dateIssued);
-
         DataTable GetViewRecordsById(int Id);
     }
 }
