@@ -107,28 +107,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             txtBalance.Text = GetBudgetAppropriationBalance().ToString("N2");
         }
 
-        private decimal GetBudgetAppropriationBalance() 
-        {
-            decimal appropriationBalance = 0;
-
-            if (cmbxBudgetAppropriations.SelectedIndex > -1)
-            {
-                int budgetAppropriationId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
-                var budgetAppropriationDict = Factory.BudgetAppropriationsRepository().GetViewRecordByIdDateEntry(budgetAppropriationId, dateIssued);
-                var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
-                var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationIdDateEntry(budgetAppropriationId, dateIssued);
-
-                decimal budgetAppropriation = budgetAppropriationDict.Values.Count == 0? 0 : Convert.ToDecimal(budgetAppropriationDict["amount"]);
-                decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
-                decimal totalSupplementalAppropriation = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0? 0 : dtSupplementalAppropriation.Compute("Sum(amount)", string.Empty));
-
-                appropriationBalance = ((budgetAppropriation + totalSupplementalAppropriation) - totalAllotmentRelease) + (budgetAppropriationId == _budgetAppropriationId? _amount : 0);
-                
-            }
-
-            return appropriationBalance;
-        }
-
         private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cmbxBudgetAppropriations.Text))
@@ -206,6 +184,29 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             Helper.ClearErrorNumericUpDown(epYear, nudYear);
         }
 
+
+
+        private decimal GetBudgetAppropriationBalance()
+        {
+            decimal appropriationBalance = 0;
+
+            if (cmbxBudgetAppropriations.SelectedIndex > -1)
+            {
+                int budgetAppropriationId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
+                var budgetAppropriationDict = Factory.BudgetAppropriationsRepository().GetViewRecordByIdDateEntry(budgetAppropriationId, dateIssued);
+                var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
+                var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationIdDateEntry(budgetAppropriationId, dateIssued);
+
+                decimal budgetAppropriation = budgetAppropriationDict.Values.Count == 0 ? 0 : Convert.ToDecimal(budgetAppropriationDict["amount"]);
+                decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
+                decimal totalSupplementalAppropriation = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0 ? 0 : dtSupplementalAppropriation.Compute("Sum(amount)", string.Empty));
+
+                appropriationBalance = ((budgetAppropriation + totalSupplementalAppropriation) - totalAllotmentRelease) + (budgetAppropriationId == _budgetAppropriationId ? _amount : 0);
+
+            }
+
+            return appropriationBalance;
+        }
 
         private bool AmountExceeds() 
         {
