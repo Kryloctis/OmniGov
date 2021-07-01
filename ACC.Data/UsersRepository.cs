@@ -61,7 +61,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT a.id, a.first_name, a.mid_initial, a.last_name, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id  = b.id WHERE b.role_name <> 'System Administrator'";
+                string query = $"SELECT a.id, a.first_name, a.mid_initial, a.last_name, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id = b.id WHERE b.role_name <> 'System Administrator'";
                 var dtUsers = new DataTable();
                 return _dbGenericCommands.Fill(query, dtUsers);
             }
@@ -75,12 +75,17 @@ namespace ACC.Data
         {
             try
             {
+                var parameters = new object[][]
+                {
+                    new object[] { "@search_text", DbType.String, $"%{searchText}%"},
+                };
+
                 var srchtxt = searchText;
                
-                string query = $"SELECT {tableName}.id, {tableName}.first_name, {tableName}.mid_initial, {tableName}.last_name, {tableName}.username, roles.role_name, {tableName}.created_at, {tableName}.updated_at FROM {tableName} inner join roles on {tableName}.roles_id  = roles.id WHERE last_name  LIKE'%" + srchtxt + "%' OR first_name  LIKE'%" + srchtxt + "%' OR mid_initial  LIKE'%" + srchtxt + "%' OR role_name  LIKE'%" + srchtxt + "%'";
+                string query = $"SELECT a.id, a.first_name, a.mid_initial, a.last_name, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id  = b.id WHERE (a.last_name LIKE @search_text OR a.first_name LIKE @search_text OR a.mid_initial LIKE @search_text OR b.role_name LIKE @search_text) AND b.role_name <> 'System Administrator'";
 
                 var dtUsers = new DataTable();
-                return _dbGenericCommands.Fill(query, dtUsers);
+                return _dbGenericCommands.FillBySearch(query, dtUsers, parameters);
             }
             catch (Exception)
             {
