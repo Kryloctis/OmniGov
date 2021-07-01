@@ -133,6 +133,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.fundId = Convert.ToByte(jevDict["funds_id"]);
                     uc.journalId = Convert.ToByte(jevDict["journals_id"]);
                     uc.oldJournalId = Convert.ToByte(jevDict["journals_id"]);
+                    uc.jevNo = jevDict["jev_no"];
                     CheckedFund(jevDict["fund_name"]);
                     CheckedJournal(jevDict["journal_name"]);
 

@@ -8,24 +8,24 @@ namespace AccountingSystem.Views.Reports.JEV
     public partial class frmJEVReport : Form
     {
         private readonly ReportViewer reportViewer;
+        private string _jevNo;
 
-        public frmJEVReport()
+        public frmJEVReport(string jevNo)
         {
             InitializeComponent();
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
+
+            _jevNo = jevNo;
         }
+
 
         private void LoadReport(LocalReport report)
         {
             try
             {
-                //var lguDetails = Helper.LGUDetails();
-                //var fundName = cmbFunds.Text;
-                //var signatory = "MARY MAGDALYN T. REGANION, CPA";
-
-                var data = Factory.JEVRepository().GetRecordByJEV("0011");
+                var data = Factory.JEVRepository().GetRecordByJEV(_jevNo);
 
                 var parameters = new[] {
                     new ReportParameter("paramLGU", "BUUG"),
@@ -37,6 +37,7 @@ namespace AccountingSystem.Views.Reports.JEV
                     new ReportParameter("paramPayee", data["payee"]),
                     new ReportParameter("paramExplanation", data["explanation"])
 
+
                 };
 
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\journal-entry-voucher.rdlc";
@@ -45,6 +46,7 @@ namespace AccountingSystem.Views.Reports.JEV
 
                 report.DataSources.Add(new ReportDataSource("dtJournalVoucher", DataTableJournalEntryVoucherAccount()));
                 report.SetParameters(parameters);
+
 
             }
             catch (Exception ex)
@@ -81,17 +83,9 @@ namespace AccountingSystem.Views.Reports.JEV
             return dtJEVAccounts;
         }
 
-        private void LoadJournals()
-        {
-            cmbFunds.DataSource = Factory.JournalsRepository().GetRecords();
-            cmbFunds.ValueMember = "id";
-            cmbFunds.DisplayMember = "journal_name";
-        }
-
         private void frmJEVReport_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            LoadJournals();
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
@@ -101,6 +95,11 @@ namespace AccountingSystem.Views.Reports.JEV
             reportViewer.ZoomMode = ZoomMode.Percent;
             reportViewer.ZoomPercent = 100;
             reportViewer.RefreshReport();
+        }
+
+        private void listBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            //LoadJEVs
         }
     }
 }

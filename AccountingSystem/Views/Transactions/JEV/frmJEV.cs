@@ -506,7 +506,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            _ = new frmJEVReport().ShowDialog();
+            _ = new frmJEVReport(ucjev1.jevNo).ShowDialog();
         }
     }
 }
