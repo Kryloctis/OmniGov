@@ -115,7 +115,8 @@ namespace ACC.Data
                     $"ledger_name, " +
                     $"account_code, " +
                     $"sub_name, " +
-                    $"amount " +
+                    $"amount, " +
+                    $"fpp_code " +
                     $"FROM {viewTableName} " +
                     $"WHERE jev_id = @jev_id";
 

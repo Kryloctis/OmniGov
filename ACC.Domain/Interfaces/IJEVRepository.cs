@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
@@ -33,6 +34,8 @@ namespace ACC.Domain.Interfaces
         bool Delete(JEVModel entity);
 
         int GetLastInsertedID();
+
+        DataTable GetAllJEV();
 
         string GetLastJevNoSeries();
 

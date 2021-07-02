@@ -69,6 +69,7 @@ namespace AccountingSystem
             this.menuSubsidiaryLedgerReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOB = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOBB = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuJEVS = new System.Windows.Forms.ToolStripMenuItem();
             this.menuprintRCI = new System.Windows.Forms.ToolStripMenuItem();
             this.menuprintPC = new System.Windows.Forms.ToolStripMenuItem();
             this.menuprintGC = new System.Windows.Forms.ToolStripMenuItem();
@@ -309,6 +310,7 @@ namespace AccountingSystem
             this.menuLedgersReport,
             this.menuSAAOB,
             this.menuSAAOBB,
+            this.menuJEVS,
             this.menuprintRCI,
             this.menuprintPC,
             this.menuprintGC,
@@ -398,6 +400,13 @@ namespace AccountingSystem
             this.menuSAAOBB.Name = "menuSAAOBB";
             this.menuSAAOBB.Size = new System.Drawing.Size(256, 22);
             this.menuSAAOBB.Text = "SAAOBB";
+            // 
+            // menuJEVS
+            // 
+            this.menuJEVS.Name = "menuJEVS";
+            this.menuJEVS.Size = new System.Drawing.Size(256, 22);
+            this.menuJEVS.Text = "JEVs";
+            this.menuJEVS.Click += new System.EventHandler(this.menuJEVS_Click_1);
             // 
             // menuprintRCI
             // 
@@ -497,7 +506,7 @@ namespace AccountingSystem
             this.btnIssueCheck.Text = "Issue Check";
             // 
             // btnPaymentCollection
-            // 
+            //
             this.btnPaymentCollection.Image = ((System.Drawing.Image)(resources.GetObject("btnPaymentCollection.Image")));
             this.btnPaymentCollection.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnPaymentCollection.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -684,6 +693,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuIssueReceipts;
         private System.Windows.Forms.ToolStripMenuItem menuReceipts;
         private System.Windows.Forms.ToolStripMenuItem menucashbook;
+        private System.Windows.Forms.ToolStripMenuItem menuJEVS;
         private System.Windows.Forms.ToolStripButton btnPaymentCollection;
     }
 }

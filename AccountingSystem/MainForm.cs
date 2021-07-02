@@ -30,6 +30,7 @@ using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Manage.Receipts;
 using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using AccountingSystem.Views.Reports.Cashbook;
+using AccountingSystem.Views.Reports.JEV;
 
 namespace AccountingSystem
 {
@@ -410,6 +411,10 @@ namespace AccountingSystem
             _ = new frmCashbook().ShowDialog();
         }
 
+        private void menuJEVS_Click_1(object sender, EventArgs e)
+        {
+            _ = new frmJEVReport(0, null).ShowDialog();
+        }
         private void btnPaymentCollection_Click(object sender, EventArgs e)
         {
             _ = new frmPaymentCollection().ShowDialog();
