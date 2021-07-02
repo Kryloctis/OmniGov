@@ -77,6 +77,7 @@ namespace AccountingSystem.Views.Reports.RCD
             txtreport.Clear();
             dtdate.Value = DateTime.Now;
             dgvpayments.DataSource = null;
+            txttotal.Text = "0.00";
         }
 
         internal void LoadCollections()

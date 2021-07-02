@@ -55,7 +55,7 @@ namespace AccountingSystem
             btnJournalEntry.Click += new EventHandler(BtnJournalEntry_Click);
             btnObligationRequest.Click += new EventHandler(BtnObligationRequest_Click);
             menuDisbursingOfficer.Click += new EventHandler(MenuDisbursingOffice_Click);
-            btnRCI.Click += new EventHandler(BtnRCI_Click);
+            btnIssueCheck.Click += new EventHandler(BtnRCI_Click);
             menuLogout.Click += new EventHandler(menuLogout_Click);
             menuExitApp.Click += new EventHandler(menuExitApp_Click);
             menuSubsidiaryLedgerReport.Click += new EventHandler(menuSubsidiaryLedgerReport_Click);
@@ -73,14 +73,14 @@ namespace AccountingSystem
 
         private void ValidatePermissions()
         {
-            // mga permissions nga wala
-            //    - Transactions payment
-
             if (!Helper.HasPermission("Manage Allotment Classes"))
                 menuAllotmentClasses.Visible = false;
 
-            if (!Helper.HasPermission("Manage Budget Appropriations") && !Helper.HasPermission("Manage Allotment Releases"))
+            if (!Helper.HasPermission("Manage Budget Appropriations"))
                 btnBudgetAppropriations.Visible = false;
+
+            if (!Helper.HasPermission("Manage Allotment Releases"))
+                btnAllotmentRelease.Visible = false;
 
             if (!Helper.HasPermission("Manage Chart of Accounts")) 
                 menuChartOfAccounts.Visible = false;
@@ -146,10 +146,10 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Manage Disbursing Officer"))
                 menuDisbursingOfficer.Visible = false;
 
-            if (!Helper.HasPermission("Transaction RCI"))
+            if (!Helper.HasPermission("Transaction Issue Check"))
             {
-                btnRCI.Visible = false;
-                menuRCI.Visible = false;
+                btnIssueCheck.Visible = false;
+                menuIssueCheck.Visible = false;
             }
 
             if (!Helper.HasPermission("Manage Accountable Forms"))
@@ -163,6 +163,22 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Report SAAOBB"))
                 menuSAAOBB.Visible = false;
+
+            if (!Helper.HasPermission("Transaction Payments"))
+            {
+                btnPaymentCollection.Visible = false;
+                menuPayments.Visible = false;
+            }
+
+            if (!Helper.HasPermission("Manage Receipts"))
+                menuReceipts.Visible = false;
+
+            if (!Helper.HasPermission("Transaction Issue Receipt"))
+                menuIssueReceipts.Visible = false;
+
+            if (!Helper.HasPermission("Transaction Generate RCD"))
+                menuGenerateRCD.Visible = false;
+
         }
 
         private void LoadDashboard()
@@ -375,11 +391,6 @@ namespace AccountingSystem
 
         }
 
-        private void menuGencoldeposits_Click(object sender, EventArgs e)
-        {
-            _ = new frmRCD().ShowDialog();
-        }
-
         private void menuprintGC_Click(object sender, EventArgs e)
         {
             _ = new frmPCReport().ShowDialog();
@@ -403,6 +414,15 @@ namespace AccountingSystem
         private void menuJEVS_Click_1(object sender, EventArgs e)
         {
             _ = new frmJEVReport(0, null).ShowDialog();
+        }
+        private void btnPaymentCollection_Click(object sender, EventArgs e)
+        {
+            _ = new frmPaymentCollection().ShowDialog();
+        }
+
+        private void menuGenerateRCD_Click(object sender, EventArgs e)
+        {
+            _ = new frmRCD().ShowDialog();
         }
     }
 }

@@ -106,6 +106,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             this.Controls.Add(this.cmbAccount);
             this.Controls.Add(this.panel1);
             this.Name = "frmSubsidiaryLedgerReport";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Report > Subsidiary Ledger";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

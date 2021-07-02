@@ -13,6 +13,10 @@ namespace ACC.Domain.Models
         public DateTime Returned_date { get; set; }
         public DateTime Issued { get; set; }
         public int RId { get; set; }
+        public int IssuedFrom { get; set; }
+        public int IssuedTo { get; set; }
+        public int Last_issued { get; set; }
+        public int Quantity { get; set; }
        
     }
 }

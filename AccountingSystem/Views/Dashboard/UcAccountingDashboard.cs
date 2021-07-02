@@ -85,7 +85,7 @@ namespace AccountingSystem.Views.Dashboard
 
                 foreach (int allotmentClassId in allotmentClassIds)
                 {
-                    decimal TotalbudgetAppropriations = Factory.BudgetAppropriationsRepository().GetTotalBudgetAppropriationsByIds(fundId, allotmentClassId, fppId);
+                    decimal TotalbudgetAppropriations = 0;
 
                     decimal UnobligatedAppropriationBalance = TotalbudgetAppropriations;
 

@@ -14,5 +14,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecords(int id);
         DataTable GetRecords(string coid, string formid);
         DataTable GetRecordsReceipts(string id);
+        bool UpdateCurrentIssued(ReceiptsIssuedModel entity);
+        bool IssuedExist(ReceiptsIssuedModel entity);
     }
 }

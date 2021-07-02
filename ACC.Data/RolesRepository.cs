@@ -59,7 +59,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName}";
+                string query = $"SELECT * FROM {tableName} WHERE role_name <> 'System Administrator'";
 
                 var dtRoles = new DataTable();
                 return _dbGenericCommands.Fill(query, dtRoles);
@@ -76,12 +76,17 @@ namespace ACC.Data
         {
             try
             {
+                var parameters = new object[][]
+                {
+                    new object[] { "@search_text", DbType.String, $"%{searchText}%"},
+                };
+
                 var srchtxt = searchText;
 
-                string query = $"SELECT * FROM {tableName} WHERE role_name  LIKE'%" + srchtxt + "%'";
+                string query = $"SELECT * FROM {tableName} WHERE role_name <> 'System Administrator' AND role_name  LIKE @search_text";
 
                 var dtUsers = new DataTable();
-                return _dbGenericCommands.Fill(query, dtUsers);
+                return _dbGenericCommands.FillBySearch(query, dtUsers, parameters);
             }
             catch (Exception)
             {

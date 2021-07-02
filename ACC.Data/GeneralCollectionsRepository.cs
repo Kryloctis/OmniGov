@@ -28,6 +28,9 @@ namespace ACC.Data
         private readonly string tableName15 = "collector_report";
         private readonly string tableName16 = "general_collections_deposits";
         private readonly string tableName17 = "banks";
+        private readonly string tableName18 = "funds";
+        private readonly string tableName19 = "receipts";
+        private readonly string tableName20 = "receipts_issued";
         public GeneralCollectionsRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -299,7 +302,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableName}.id,{tableName}.rcd_no,{tableName}.rcd_date,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS officer,(SELECT SUM({tableName5}.amount) FROM {tableName5} LEFT JOIN {tableName4} ON {tableName4}.payment_collections_id={tableName5}.id LEFT JOIN {tableName3} ON {tableName3}.collector_report_id={tableName4}.collector_report_id WHERE {tableName3}.general_collections_id={tableName}.id) AS colamount,(SELECT IF(COUNT({tableName6}.id)>0,true,false) FROM {tableName6} WHERE {tableName6}.general_collections_id={tableName}.id) AS deposited FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.users_id WHERE {tableName}.id IN ({Id})";
+                string query = $"SELECT {tableName}.id,{tableName}.rcd_no,{tableName}.rcd_date,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS officer,(SELECT SUM({tableName5}.amount) FROM {tableName5} LEFT JOIN {tableName4} ON {tableName4}.payment_collections_id={tableName5}.id LEFT JOIN {tableName3} ON {tableName3}.collector_report_id={tableName4}.collector_report_id WHERE {tableName3}.general_collections_id={tableName}.id) AS colamount,(SELECT IF(COUNT({tableName6}.id)>0,true,false) FROM {tableName6} WHERE {tableName6}.general_collections_id={tableName}.id) AS deposited,CONCAT({tableName18}.fund_code,'-',{tableName18}.fund_name) AS fund FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.users_id LEFT JOIN {tableName3} ON {tableName}.id={tableName3}.general_collections_id LEFT JOIN {tableName15} ON {tableName3}.collector_report_id={tableName15}.id LEFT JOIN {tableName18} ON {tableName15}.funds_id={tableName18}.id WHERE {tableName}.id IN ({Id})";
 
                 var dtcr = new DataTable();
                 return _dbGenericCommands.Fill(query, dtcr);
@@ -344,6 +347,21 @@ namespace ACC.Data
             try
             {
                 string query = $"SELECT {tableName}.id,{tableName17}.bank_name,{tableName17}.account_no,{tableName7}.reference,{tableName7}.amount FROM {tableName} LEFT JOIN {tableName16} ON {tableName16}.general_collections_id={tableName}.id LEFT JOIN {tableName7} ON {tableName16}.bank_deposits_id={tableName7}.id LEFT JOIN {tableName17} ON {tableName7}.banks_id={tableName17}.id WHERE {tableName}.id='{Id}'";
+
+                var dtpc = new DataTable();
+                return _dbGenericCommands.Fill(query, dtpc);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetRecordByReceipts(int Id)
+        {
+            try
+            {
+                string query = $"SELECT CONCAT({tableName9}.acc_form_no,'-',{tableName9}.acc_form_desc) AS form,{tableName19}.receiptsfrom,{tableName19}.receiptsto,{tableName20}.issuefrom,{tableName20}.issueto,(SELECT receipt_no FROM {tableName5} WHERE accountable_forms_id={tableName9}.id AND receipt_no BETWEEN {tableName20}.issuefrom-1 AND {tableName20}.issueto+1 ORDER BY receipt_no ASC LIMIT 1) AS ifrom,(SELECT receipt_no FROM {tableName5} WHERE accountable_forms_id={tableName9}.id AND receipt_no BETWEEN {tableName20}.issuefrom-1 AND {tableName20}.issueto+1 ORDER BY receipt_no DESC LIMIT 1) AS ito FROM {tableName9} LEFT JOIN {tableName19} ON {tableName19}.accountable_forms_id={tableName9}.id LEFT JOIN {tableName20} ON {tableName20}.receipts_id={tableName19}.id WHERE {tableName9}.id IN (SELECT {tableName5}.accountable_forms_id FROM {tableName5} LEFT JOIN {tableName4} ON {tableName5}.id={tableName4}.payment_collections_id LEFT JOIN {tableName3} ON {tableName3}.collector_report_id={tableName4}.collector_report_id WHERE {tableName3}.general_collections_id='{Id}' AND {tableName5}.receipt_no BETWEEN {tableName20}.issuefrom-1 AND {tableName20}.issueto+1)";
 
                 var dtpc = new DataTable();
                 return _dbGenericCommands.Fill(query, dtpc);

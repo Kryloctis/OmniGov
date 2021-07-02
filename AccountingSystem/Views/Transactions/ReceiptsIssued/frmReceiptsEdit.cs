@@ -25,7 +25,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private void frmReceiptsEdit_Load(object sender, EventArgs e)
         {
             ucReceipts1.LoadCollectors();
-            ucReceipts1.LoadReceipts();
             LoadSelectedValue();
         }
 
@@ -39,6 +38,12 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 uc.cmbcollector.SelectedValue = riData["collecting_officers_id"];
                 uc.cmbreceipt.SelectedValue = riData["receipts_id"];
                 uc.dtpissued.Value = Convert.ToDateTime(riData["date_issued"]);
+                uc.txtfrom.Text = riData["issuefrom"];
+                uc.txtto.Text = riData["issueto"];
+                uc.txtquantity.Text = riData["quantity"];
+
+                uc.txtfrom.ReadOnly = true;
+                uc.txtto.ReadOnly = true;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -58,11 +63,19 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                     Id = uc.Id,
                     CoId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
                     RId = Convert.ToInt16(uc.cmbreceipt.SelectedValue),
-                    Issued = uc.dtpissued.Value
+                    Issued = uc.dtpissued.Value,
+                    IssuedFrom = Convert.ToInt32(uc.txtfrom.Text.Trim()),
+                    IssuedTo = Convert.ToInt32(uc.txtto.Text.Trim()),
+                    Quantity = Convert.ToInt32(uc.txtquantity.Text.Trim())
                 };
 
                 var riRepository = Factory.ReceiptsIssuedRepository();
-                return riRepository.Update(riModel);
+                if (Convert.ToInt16(uc.txtfrom.Text.Trim()) > Convert.ToInt16(uc.txtto.Text.Trim()))
+                {
+                    Helper.MessageBoxError("Invalid Receipt!");
+                    return false;
+                }
+                else return riRepository.Update(riModel);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             return false; 

@@ -87,7 +87,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     if (pcrepository.Update(pcModel))
                     {
                         var riRepository = Factory.ReceiptsIssuedRepository();
-                        var rcRepository = Factory.ReceiptsRepository();
                         var dtri = riRepository.GetRecords(uc.cmbcollector.SelectedValue.ToString(), uc.cmbforms.SelectedValue.ToString());
                         if (dtri.Rows.Count > 0)
                         {
@@ -96,12 +95,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                             {
                                 rid = Convert.ToInt32(dtri.Rows[i]["id"]);
                             }
-                            var rcModel = new ReceiptsModel()
+                            var rcModel = new ReceiptsIssuedModel()
                             {
                                 Id = rid,
                                 Last_issued = Convert.ToInt32(uc.txtreceipt.Text.Trim())
                             };
-                            return rcRepository.UpdateCurrentIssued(rcModel);
+                            return riRepository.UpdateCurrentIssued(rcModel);
                         }
                     }                       
                     else return false;

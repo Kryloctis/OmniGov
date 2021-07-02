@@ -299,65 +299,29 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbforms.SelectedIndex != -1 && cmbforms.Focused)
+            if (cmbforms.SelectedIndex != -1)
             {
-                if (Id <= 0)
+                DataRowView forms = cmbforms.SelectedItem as DataRowView;
+                DataRowView collector = cmbcollector.SelectedItem as DataRowView;
+                if (forms != null && collector != null)
                 {
-                    try
-                    {
-                        var rcRepository = Factory.ReceiptsIssuedRepository();
-                        var dtrc = rcRepository.GetRecords(cmbcollector.SelectedValue.ToString(), cmbforms.SelectedValue.ToString());
-                        if (dtrc.Rows.Count > 0)
-                        {
-                            int receiptto = 0;
-                            int receiptlast = 0;
-                            for (int i = 0; i < dtrc.Rows.Count; i++)
-                            {
-                                receiptto = Convert.ToInt32(dtrc.Rows[i]["receiptsto"]);
-                                maxreceipt = Convert.ToInt32(dtrc.Rows[i]["receiptsto"]);
-                                minreceipt = Convert.ToInt32(dtrc.Rows[i]["receiptsfrom"]);
-                                receiptlast = dtrc.Rows[i]["last_issued"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtrc.Rows[i]["last_issued"]);
-
-                            }
-                            if (receiptto.Equals(receiptlast))
-                                txtreceipt.Text = "0";
-                            else
-                            {
-                                if (receiptlast < minreceipt)
-                                    txtreceipt.Text = minreceipt.ToString();
-                                else if (receiptlast.Equals(minreceipt))
-                                    txtreceipt.Text = (receiptlast + 1).ToString();
-                                else
-                                    txtreceipt.Text = (receiptlast + 1).ToString();
-                            }
-
-                        }
-                        else
-                        {
-                            txtreceipt.Text = "0";
-                        }
-                    }
-                    catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-                }
-                else
-                {
-                    if (accId != Convert.ToInt32(cmbforms.SelectedValue))
+                    if (Id <= 0)
                     {
                         try
                         {
                             var rcRepository = Factory.ReceiptsIssuedRepository();
-                            var dtrc = rcRepository.GetRecords(cmbcollector.SelectedValue.ToString(), cmbforms.SelectedValue.ToString());
+                            var dtrc = rcRepository.GetRecords(collector[0].ToString(), forms[0].ToString());
                             if (dtrc.Rows.Count > 0)
                             {
                                 int receiptto = 0;
                                 int receiptlast = 0;
                                 for (int i = 0; i < dtrc.Rows.Count; i++)
                                 {
-
-                                    receiptto = Convert.ToInt32(dtrc.Rows[i]["receiptsto"]);
-                                    maxreceipt = Convert.ToInt32(dtrc.Rows[i]["receiptsto"]);
-                                    minreceipt = Convert.ToInt32(dtrc.Rows[i]["receiptsfrom"]);
+                                    receiptto = Convert.ToInt32(dtrc.Rows[i]["issueto"]);
+                                    maxreceipt = Convert.ToInt32(dtrc.Rows[i]["issueto"]);
+                                    minreceipt = Convert.ToInt32(dtrc.Rows[i]["issuefrom"]);
                                     receiptlast = dtrc.Rows[i]["last_issued"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtrc.Rows[i]["last_issued"]);
+
                                 }
                                 if (receiptto.Equals(receiptlast))
                                     txtreceipt.Text = "0";
@@ -381,9 +345,51 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     }
                     else
                     {
-                        txtreceipt.Text = receipt.ToString();
+                        if (accId != Convert.ToInt32(cmbforms.SelectedValue))
+                        {
+                            try
+                            {
+                                var rcRepository = Factory.ReceiptsIssuedRepository();
+                                var dtrc = rcRepository.GetRecords(collector[0].ToString(), forms[0].ToString());
+                                if (dtrc.Rows.Count > 0)
+                                {
+                                    int receiptto = 0;
+                                    int receiptlast = 0;
+                                    for (int i = 0; i < dtrc.Rows.Count; i++)
+                                    {
+
+                                        receiptto = Convert.ToInt32(dtrc.Rows[i]["issueto"]);
+                                        maxreceipt = Convert.ToInt32(dtrc.Rows[i]["issueto"]);
+                                        minreceipt = Convert.ToInt32(dtrc.Rows[i]["issuefrom"]);
+                                        receiptlast = dtrc.Rows[i]["last_issued"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtrc.Rows[i]["last_issued"]);
+                                    }
+                                    if (receiptto.Equals(receiptlast))
+                                        txtreceipt.Text = "0";
+                                    else
+                                    {
+                                        if (receiptlast < minreceipt)
+                                            txtreceipt.Text = minreceipt.ToString();
+                                        else if (receiptlast.Equals(minreceipt))
+                                            txtreceipt.Text = (receiptlast + 1).ToString();
+                                        else
+                                            txtreceipt.Text = (receiptlast + 1).ToString();
+                                    }
+
+                                }
+                                else
+                                {
+                                    txtreceipt.Text = "0";
+                                }
+                            }
+                            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+                        }
+                        else
+                        {
+                            txtreceipt.Text = receipt.ToString();
+                        }
                     }
                 }
+                
                 
             }
         }
@@ -410,7 +416,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 cmbforms.Enabled = false;
                 btnledger.Enabled = false;
                 txtpayee.Enabled = false;
-                txtreceipt.Enabled = false;
+                //txtreceipt.Enabled = false;
                 dtdate.Enabled = false;
                 txtamount.Enabled = false;
                 txtledger.Enabled = false;
