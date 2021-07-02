@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Reports.JEV
                 report.DataSources.Clear();
 
 
-                report.DataSources.Add(new ReportDataSource("dtJournalVoucher", DataTableJournalEntryVoucherAccount()));
+                //report.DataSources.Add(new ReportDataSource("dtJournalVoucher", DataTableJournalEntryVoucherAccount()));
                 report.SetParameters(parameters);
 
 
@@ -66,33 +66,33 @@ namespace AccountingSystem.Views.Reports.JEV
             }
         }
 
-        private DataTable DataTableJournalEntryVoucherAccount()
-        {
-            var dtJEVAccounts = new dsLFS.dtJournalVoucherDataTable();
-            var dtJEVAccountsFromDB = Factory.JEVAccountsRepository().GetViewRecordsByJevId(_jevId);
+        //private DataTable DataTableJournalEntryVoucherAccount()
+        //{
+        //    var dtJEVAccounts = new dsLFS.dtJournalVoucherDataTable();
+        //    var dtJEVAccountsFromDB = Factory.JEVAccountsRepository().GetViewRecordsByJevId(_jevId);
 
-            byte i = 0;
+        //    byte i = 0;
 
-            foreach (DataRow item in dtJEVAccountsFromDB.Rows)
-            {
-                DataRow row = dtJEVAccounts.NewRow();
+        //    foreach (DataRow item in dtJEVAccountsFromDB.Rows)
+        //    {
+        //        DataRow row = dtJEVAccounts.NewRow();
 
-                row["fpp"] = item["fpp_code"];
-                row["account_and_explanation"] = item["ledger_name"];
-                row["account_code"] = item["account_code"];
+        //        row["fpp"] = item["fpp_code"];
+        //        row["account_and_explanation"] = item["ledger_name"];
+        //        row["account_code"] = item["account_code"];
 
 
-                if (Convert.ToBoolean(item["is_debit"]))
-                    row["debit"] = item["amount"];
-                else
-                    row["credit"] = item["amount"];
+        //        if (Convert.ToBoolean(item["is_debit"]))
+        //            row["debit"] = item["amount"];
+        //        else
+        //            row["credit"] = item["amount"];
 
-                dtJEVAccounts.Rows.Add(row);
+        //        dtJEVAccounts.Rows.Add(row);
 
-                i++;
-            }
-            return dtJEVAccounts;
-        }
+        //        i++;
+        //    }
+        //    return dtJEVAccounts;
+        //}
 
         private void frmJEVReport_Load(object sender, EventArgs e)
         {
