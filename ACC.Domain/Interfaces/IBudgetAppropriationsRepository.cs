@@ -12,6 +12,8 @@ namespace ACC.Domain.Interfaces
 
         Dictionary<string, string> GetViewRecordByID(int budgetAppId);
 
+        DataTable GetViewRecords(int fundId, DateTime dateEntry, byte isSpecial);
+
         DataTable GetViewRecords(int fundId, DateTime dateEntry, short year, byte isContinuing, byte isSpecial);
 
         DataTable GetViewRecordsByIds(BudgetAppropriationsModel entity);

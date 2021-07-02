@@ -15,7 +15,7 @@
     <Shape ID="DesignTable:GeneralLedger" ZOrder="17" X="913" Y="266" Height="144" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
     <Shape ID="DesignTable:dtRCI" ZOrder="18" X="1686" Y="50" Height="257" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="253" />
     <Shape ID="DesignTable:dtPC" ZOrder="16" X="1155" Y="27" Height="257" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="253" />
-    <Shape ID="DesignTable:dtSAAOB" ZOrder="10" X="1408" Y="50" Height="257" Width="238" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="253" />
+    <Shape ID="DesignTable:dtSAAOB" ZOrder="10" X="1408" Y="50" Height="257" Width="244" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="253" />
     <Shape ID="DesignTable:dtSAAOBB" ZOrder="9" X="1408" Y="330" Height="257" Width="244" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="253" />
     <Shape ID="DesignTable:SubsidiaryLedger" ZOrder="14" X="1153" Y="301" Height="143" Width="166" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="139" />
     <Shape ID="DesignTable:dtRCD" ZOrder="2" X="1866" Y="49" Height="148" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="144" />
