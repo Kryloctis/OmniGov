@@ -214,6 +214,68 @@ namespace ACC.Data
 
         //USING VIEWS
 
+        public DataTable GetViewRecords(int fundId, DateTime dateEntry, byte isSpecial)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Int32, fundId},
+                    new object[] { "@date_entry", DbType.Date, dateEntry.Date},
+                    new object[] { "@fpp_is_special", DbType.Byte, isSpecial}
+                };
+
+
+                string query = $"SELECT " +
+                     $"id, " +
+                     $"funds_id, " +
+                     $"fund_code, " +
+                     $"fund_name, " +
+                     $"fpp_id, " +
+                     $"fpp_code, " +
+                     $"fpp_name, " +
+                     $"fpp_is_special, " +
+                     $"functional_classification_service_id, " +
+                     $"functional_classification_service_name, " +
+                     $"functional_classification_id, " +
+                     $"functional_classification_sector_code, " +
+                     $"functional_classification_sector_name, " +
+                     $"others_fpp_id, " +
+                     $"others_fpp_code, " +
+                     $"others_fpp_name, " +
+                     $"allotment_class_id, " +
+                     $"allotment_class_code, " +
+                     $"allotment_class_name, " +
+                     $"general_ledger_accounts_id, " +
+                     $"general_ledger_accounts_code, " +
+                     $"general_ledger_accounts_name, " +
+                     $"account_code, " +
+                     $"date_entry, " +
+                     $"year, " +
+                     $"amount, " +
+                     $"continuing, " +
+                     $"remarks, " +
+                     $"created_at, " +
+                     $"updated_at " +
+                     $"FROM {viewTableName} " +
+                     $"WHERE " +
+                     $"funds_id = @funds_id " +
+                     $"AND date_entry <= @date_entry " +
+                     $"AND fpp_is_special = @fpp_is_special";
+
+                var dataTable = new DataTable();
+                return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public DataTable GetViewRecords(int fundId, DateTime dateEntry, short year, byte isContinuing, byte isSpecial)
         {
             try
