@@ -58,7 +58,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                     Reference = uc.txtreference.Text.Trim(),
                     Date = Convert.ToDateTime(uc.dtdate.Text.Trim()),
                     Amount = Convert.ToDecimal(uc.txtamount.Value),
-                    UpdatedBy = 2,
+                    UpdatedBy = uc.userid,
                 };
 
                 var bdrepository = Factory.BankDepositsRepository();

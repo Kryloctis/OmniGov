@@ -14,6 +14,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
     public partial class ucCollectingOfficer : UserControl
     {
         internal int OfficerId = 0;
+        internal int UserId = 0;
         public ucCollectingOfficer()
         {
             InitializeComponent();
@@ -115,6 +116,11 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         private void txtLname_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(epLname, txtLname);
+        }
+
+        private void ucCollectingOfficer_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
