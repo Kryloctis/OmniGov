@@ -26,6 +26,8 @@ namespace AccountingSystem.Views.Reports.RCD
         private void frmRCD_Load(object sender, EventArgs e)
         {
             LoadRecords();
+            var uRepository = Factory.UsersRepository();
+            dgrcd.Columns[7].Visible = uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer" ? true : false;
         }
 
         public void LoadRecords()
@@ -35,6 +37,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 var rcdRepository = Factory.CollectorReportRepository();
                 var dtrcd = rcdRepository.GetRecords();
                 HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgrcd);
+                
 
                 lblRecordCount.Text = dgrcd.Rows.Count.ToString();
             }
@@ -93,9 +96,9 @@ namespace AccountingSystem.Views.Reports.RCD
                     bool isapproved = Convert.ToBoolean(dgrcd.CurrentRow.Cells[6].Value);
                     var gcpRepository = Factory.GeneralCollectionsPaymentsRepository();
                     var uRepository = Factory.UsersRepository();
-                    btnDelete.Visible = uRepository.GetUserRole(Helper.UserId) == "Disbursing Officer" ? true : false;
+                    btnDelete.Visible = uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer" ? true : false;
                     btnDelete.Enabled = gcpRepository.IdExist(id) ? false : true;
-                    btnApproved.Visible = uRepository.GetUserRole(Helper.UserId) == "Disbursing Officer" ? true : false;
+                    btnApproved.Visible = uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer" ? true : false;
                     btnApproved.Text = isapproved ? "Disapproved" : "Approved";
                 }
                 catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

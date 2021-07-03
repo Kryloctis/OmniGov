@@ -35,8 +35,8 @@ namespace AccountingSystem.Views.Reports.RCD
                     ucrcd1.cmbcollector.SelectedValue = data["id"];
                     ucrcd1.cmbcollector.Enabled = false;
                 }
-                ucrcd1.chckapproved.Visible = uRepository.GetUserRole(Helper.UserId) == "Disbursing Officer" ? true : false; 
-                if(uRepository.GetUserRole(Helper.UserId) == "Disbursing Officer")
+                ucrcd1.chckapproved.Visible = uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer" ? true : false; 
+                if(uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer")
                 {
                     ucrcd1.btnadd.Visible = false;
                     ucrcd1.btndelete.Visible = false;

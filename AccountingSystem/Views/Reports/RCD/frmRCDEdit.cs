@@ -112,8 +112,8 @@ namespace AccountingSystem.Views.Reports.RCD
                 uc.txtreport.Enabled = false;
 
                 var uRepository = Factory.UsersRepository();
-                uc.chckapproved.Visible = uRepository.GetUserRole(Helper.UserId) == "Disbursing Officer" ? true : false;
-                if (uRepository.GetUserRole(Helper.UserId) == "Disbursing Officer")
+                uc.chckapproved.Visible = uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer" ? true : false;
+                if (uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer")
                 {
                     uc.btnadd.Visible = false;
                     uc.btndelete.Visible = false;
