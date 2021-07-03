@@ -1951,6 +1951,7 @@ RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"d
                           </Style>
                         </Textbox>
                         <ColSpan>4</ColSpan>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell />
@@ -2221,6 +2222,7 @@ RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"d
                           </Style>
                         </Textbox>
                         <ColSpan>5</ColSpan>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell />
@@ -5374,7 +5376,7 @@ RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"d
                                   </Group>
                                   <SortExpressions>
                                     <SortExpression>
-                                      <Value>=Fields!account_name.Value</Value>
+                                      <Value>=Fields!account_code.Value</Value>
                                     </SortExpression>
                                   </SortExpressions>
                                   <TablixMembers>
@@ -5382,7 +5384,7 @@ RunningValue(Fields!function_classification_services_name.Value,CountDistinct,"d
                                       <KeepWithGroup>After</KeepWithGroup>
                                     </TablixMember>
                                     <TablixMember>
-                                      <Group Name="Details">
+                                      <Group Name="remarks">
                                         <GroupExpressions>
                                           <GroupExpression>=Fields!remarks.Value</GroupExpression>
                                         </GroupExpressions>

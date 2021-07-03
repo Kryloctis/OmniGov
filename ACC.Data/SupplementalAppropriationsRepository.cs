@@ -175,7 +175,7 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetRecords(int budgetAppropriationId, DateTime dateEntry)
+        public DataTable GetRecordsByBudgetAppropriationIdDateEntry(int budgetAppropriationId, DateTime dateEntry)
         {
             try
             {

@@ -8,13 +8,11 @@ namespace ACC.Domain.Interfaces
 {
     public interface IBudgetAppropriationsRepository : IRepository<BudgetAppropriationsModel>
     {
+        Dictionary<string, string> GetViewRecordByIdDateEntry(int budgetAppropriationId, DateTime dateEntry);
 
         Dictionary<string, string> GetViewRecordByID(int budgetAppId);
 
-
-        //Budget Appropriations Display
-
-        DataTable GetViewRecords();
+        DataTable GetViewRecords(int fundId, DateTime dateEntry, byte isSpecial);
 
         DataTable GetViewRecords(int fundId, DateTime dateEntry, short year, byte isContinuing, byte isSpecial);
 
@@ -38,8 +36,5 @@ namespace ACC.Domain.Interfaces
 
         bool BudgetAppropriationContinuing(int id, int fundId, int fppId, int? othersFPPId, int allotmentClassId, int generalLedgerAccountId);
 
-
-        //Dashboard 
-        decimal GetTotalBudgetAppropriationsByIds(int fundId, int allotmentClassId, int fppId);
     }
 }

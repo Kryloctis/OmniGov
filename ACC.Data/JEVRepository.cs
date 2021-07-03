@@ -78,7 +78,32 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            throw new NotImplementedException();
+            try
+            {
+                string query = $"SELECT * FROM {tableName}";
+
+                var dtJournals = new DataTable();
+                return _dbGenericCommands.Fill(query, dtJournals);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetAllJEV()
+        {
+            try
+            {
+                string query = $"SELECT jev_no FROM {tableName}";
+
+                var dtJournals = new DataTable();
+                return _dbGenericCommands.Fill(query, dtJournals);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public DataTable GetRecordsBySearch(string searchText)

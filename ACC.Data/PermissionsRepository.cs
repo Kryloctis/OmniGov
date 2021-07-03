@@ -51,7 +51,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName}";
+                string query = $"SELECT * FROM {tableName} ORDER BY permission_name";
 
                 var dtPermissions = new DataTable();
                 return _dbGenericCommands.Fill(query, dtPermissions);
@@ -216,7 +216,7 @@ namespace ACC.Data
                     new object[] { "@officeName", DbType.String, $"%{officeName}%" },
                 };
 
-                string query = $"SELECT * FROM {tableName} WHERE permission_office = 'All' OR permission_office LIKE @officeName";
+                string query = $"SELECT * FROM {tableName} WHERE permission_office = 'All' OR permission_office LIKE @officeName ORDER BY permission_name";
 
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);

@@ -10,6 +10,6 @@ namespace ACC.Domain.Interfaces
     {
         DataTable GetRecordsByBudgetAppropriationId(int budgetAppropriationsId);
 
-        DataTable GetRecords(int budgetAppropriationId, DateTime dateEntry);
+        DataTable GetRecordsByBudgetAppropriationIdDateEntry(int budgetAppropriationId, DateTime dateEntry);
     }
 }

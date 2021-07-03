@@ -35,6 +35,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
+            this.btnPrint = new System.Windows.Forms.ToolStripButton();
             this.ucjev1 = new AccountingSystem.Views.Transactions.JEV.ucJEV();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -48,7 +49,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnSave,
             this.toolStripSeparator1,
             this.btnDelete,
-            this.btnSearch});
+            this.btnSearch,
+            this.btnPrint});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(891, 50);
@@ -108,6 +110,18 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
+            // btnPrint
+            // 
+            this.btnPrint.Enabled = false;
+            this.btnPrint.Image = global::AccountingSystem.Properties.Resources.printer;
+            this.btnPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(36, 47);
+            this.btnPrint.Text = "&Print";
+            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // ucjev1
             // 
             this.ucjev1.AutoSize = true;
@@ -147,5 +161,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal System.Windows.Forms.ToolStripButton btnSave;
         internal System.Windows.Forms.ToolStripButton btnDelete;
         protected internal ucJEV ucjev1;
+        internal System.Windows.Forms.ToolStripButton btnPrint;
     }
 }
