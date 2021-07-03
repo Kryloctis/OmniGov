@@ -142,12 +142,14 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // linkuser
             // 
             this.linkuser.AutoSize = true;
+            this.linkuser.Cursor = System.Windows.Forms.Cursors.Hand;
             this.linkuser.Location = new System.Drawing.Point(14, 165);
             this.linkuser.Name = "linkuser";
             this.linkuser.Size = new System.Drawing.Size(82, 20);
             this.linkuser.TabIndex = 14;
             this.linkuser.TabStop = true;
             this.linkuser.Text = "+ Link User";
+            this.linkuser.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkuser_LinkClicked);
             // 
             // ucCollectingOfficer
             // 
@@ -189,6 +191,6 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         private System.Windows.Forms.ErrorProvider epMI;
         private System.Windows.Forms.ErrorProvider epLname;
         private System.Windows.Forms.ErrorProvider epJobtitle;
-        private System.Windows.Forms.LinkLabel linkuser;
+        internal System.Windows.Forms.LinkLabel linkuser;
     }
 }

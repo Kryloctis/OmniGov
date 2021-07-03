@@ -115,5 +115,6 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         {
             LoadRecords();
         }
+
     }
 }

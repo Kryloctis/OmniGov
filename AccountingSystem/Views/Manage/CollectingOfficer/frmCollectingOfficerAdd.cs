@@ -39,8 +39,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                     FirstName = uc.txtFname.Text.Trim(),
                     MiddleInitial = uc.txtMI.Text.Trim(),
                     LastName = uc.txtLname.Text.Trim(),
-                    JobTitle = uc.txtJobtitle.Text.Trim()
-
+                    JobTitle = uc.txtJobtitle.Text.Trim(),
+                    UserId = uc.UserId
                 };
 
                 var repository = Factory.CollectingOfficerRepository();

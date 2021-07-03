@@ -11,6 +11,9 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "users";
+        private readonly string tableName2 = "collecting_officers";
+        private readonly string tableName3 = "disbursing_officers";
+        private readonly string tableName4 = "roles";
         private readonly string viewTableName = "view_users";
 
         public UsersRepository(IDbGenericCommands dbGenericCommands)
@@ -57,6 +60,43 @@ namespace ACC.Data
             return record;
         }
 
+        public Dictionary<string, string> GetUserByID(int Id)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, Id},
+                };
+
+                string query = $"SELECT * FROM {tableName} WHERE id = @id";
+
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    record.Add("roles_id", reader.Rows[0]["roles_id"].ToString());
+                    record.Add("first_name", reader.Rows[0]["first_name"].ToString());
+                    record.Add("mid_initial", reader.Rows[0]["mid_initial"].ToString());
+                    record.Add("last_name", reader.Rows[0]["last_name"].ToString());
+                    record.Add("username", reader.Rows[0]["username"].ToString());
+                    record.Add("password", reader.Rows[0]["password"].ToString());
+                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
+        }
+
+
         public DataTable GetRecords()
         {
             try
@@ -70,7 +110,100 @@ namespace ACC.Data
                 throw;
             }
         }
-      
+
+        public string GetUserRole(int id)
+        {
+            string data = string.Empty;
+            try
+            {
+                string query = $"SELECT {tableName4}.role_name FROM {tableName} LEFT JOIN {tableName4} ON {tableName}.roles_id={tableName4}.id WHERE {tableName}.id='{id}'";
+                DataTable dt = _dbGenericCommands.Fill(query,new DataTable());
+                if(dt.Rows.Count > 0)
+                {
+                    for(int i=0;i < dt.Rows.Count; i++)
+                    {
+                        data = dt.Rows[i]["role_name"].ToString();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return data;
+        }
+
+        public string GetCollectorByUserId(int id)
+        {
+            string data = string.Empty;
+            try
+            {
+                string query = $"SELECT id FROM {tableName2} WHERE users_id='{id}'";
+                DataTable dt = _dbGenericCommands.Fill(query, new DataTable());
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        data = dt.Rows[i]["id"].ToString();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return data;
+        }
+        public string GetDisbursingByUserId(int id)
+        {
+            string data = string.Empty;
+            try
+            {
+                string query = $"SELECT id FROM {tableName3} WHERE users_id='{id}'";
+                DataTable dt = _dbGenericCommands.Fill(query, new DataTable());
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        data = dt.Rows[i]["id"].ToString();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return data;
+        }
+
+        public DataTable GetLinksCollectingOfficers()
+        {
+            try
+            {
+                string query = $"SELECT a.id, a.first_name, a.mid_initial, a.last_name, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id = b.id WHERE a.id NOT IN(SELECT users_id FROM {tableName2}) AND b.role_name <> 'System Administrator'";
+                var dtUsers = new DataTable();
+                return _dbGenericCommands.Fill(query, dtUsers);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetLinksDisbursingOfficers()
+        {
+            try
+            {
+                string query = $"SELECT a.id, a.first_name, a.mid_initial, a.last_name, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id = b.id WHERE a.id NOT IN(SELECT users_id FROM {tableName3}) AND b.role_name <> 'System Administrator'";
+                var dtUsers = new DataTable();
+                return _dbGenericCommands.Fill(query, dtUsers);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public DataTable GetRecordsBySearch(string searchText)
         {
             try
@@ -217,6 +350,52 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT id FROM {tableName} WHERE id = @id";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
+
+        public bool LinkedCollector(int id)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@users_id", DbType.Int32, id },
+                };
+
+                string query = $"SELECT id FROM {tableName2} WHERE users_id = @users_id";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
+
+        public bool LinkedDisburser(int id)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@users_id", DbType.Int32, id },
+                };
+
+                string query = $"SELECT id FROM {tableName3} WHERE users_id = @users_id";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true

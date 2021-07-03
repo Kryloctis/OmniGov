@@ -45,12 +45,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.cmbcollector = new System.Windows.Forms.ComboBox();
             this.btnledger = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtsubsidiary = new System.Windows.Forms.TextBox();
-            this.btnsubsidiary = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.cmbforms = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.cmbfund = new System.Windows.Forms.ComboBox();
+            this.cmbsubsidiary = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.txtamount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
@@ -208,31 +207,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // txtsubsidiary
-            // 
-            this.txtsubsidiary.Enabled = false;
-            this.errorProvider.SetIconAlignment(this.txtsubsidiary, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
-            this.txtsubsidiary.Location = new System.Drawing.Point(161, 150);
-            this.txtsubsidiary.Name = "txtsubsidiary";
-            this.txtsubsidiary.ReadOnly = true;
-            this.txtsubsidiary.Size = new System.Drawing.Size(506, 27);
-            this.txtsubsidiary.TabIndex = 3;
-            this.txtsubsidiary.DoubleClick += new System.EventHandler(this.txtsubsidiary_DoubleClick);
-            this.txtsubsidiary.Validating += new System.ComponentModel.CancelEventHandler(this.txtsubsidiary_Validating);
-            this.txtsubsidiary.Validated += new System.EventHandler(this.txtsubsidiary_Validated);
-            // 
-            // btnsubsidiary
-            // 
-            this.btnsubsidiary.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnsubsidiary.Enabled = false;
-            this.btnsubsidiary.Image = global::AccountingSystem.Properties.Resources.find1;
-            this.btnsubsidiary.Location = new System.Drawing.Point(673, 150);
-            this.btnsubsidiary.Name = "btnsubsidiary";
-            this.btnsubsidiary.Size = new System.Drawing.Size(34, 27);
-            this.btnsubsidiary.TabIndex = 18;
-            this.btnsubsidiary.UseVisualStyleBackColor = true;
-            this.btnsubsidiary.Click += new System.EventHandler(this.btnsubsidiary_Click);
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -275,15 +249,25 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.cmbfund.Validating += new System.ComponentModel.CancelEventHandler(this.cmbfund_Validating);
             this.cmbfund.Validated += new System.EventHandler(this.cmbfund_Validated);
             // 
+            // cmbsubsidiary
+            // 
+            this.cmbsubsidiary.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbsubsidiary.FormattingEnabled = true;
+            this.cmbsubsidiary.Location = new System.Drawing.Point(161, 149);
+            this.cmbsubsidiary.Name = "cmbsubsidiary";
+            this.cmbsubsidiary.Size = new System.Drawing.Size(546, 28);
+            this.cmbsubsidiary.TabIndex = 22;
+            this.cmbsubsidiary.Validating += new System.ComponentModel.CancelEventHandler(this.cmbsubsidiary_Validating);
+            this.cmbsubsidiary.Validated += new System.EventHandler(this.cmbsubsidiary_Validated);
+            // 
             // ucPC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cmbsubsidiary);
             this.Controls.Add(this.cmbfund);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.cmbforms);
-            this.Controls.Add(this.btnsubsidiary);
-            this.Controls.Add(this.txtsubsidiary);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.btnledger);
             this.Controls.Add(this.cmbcollector);
@@ -300,7 +284,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "ucPC";
-            this.Size = new System.Drawing.Size(721, 358);
+            this.Size = new System.Drawing.Size(721, 355);
             this.Load += new System.EventHandler(this.ucPC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtamount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
@@ -326,11 +310,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal System.Windows.Forms.NumericUpDown txtamount;
         private System.Windows.Forms.ErrorProvider errorProvider;
         internal System.Windows.Forms.ComboBox cmbcollector;
-        private System.Windows.Forms.Button btnsubsidiary;
-        internal System.Windows.Forms.TextBox txtsubsidiary;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         internal System.Windows.Forms.ComboBox cmbfund;
         internal System.Windows.Forms.ComboBox cmbforms;
+        internal System.Windows.Forms.ComboBox cmbsubsidiary;
     }
 }

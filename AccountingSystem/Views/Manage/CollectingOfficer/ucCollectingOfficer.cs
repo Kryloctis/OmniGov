@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
+using AccountingSystem.Views.Manage.LinkUser;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -121,6 +122,57 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         private void ucCollectingOfficer_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void linkuser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (UserId > 0)
+            {
+                UserId = 0;
+                linkuser.Text = "+ Link User";
+            }
+            else
+            {
+                frmlinkuser fuser = new frmlinkuser();
+                fuser.table = "collector";
+                if (fuser.ShowDialog() == DialogResult.OK)
+                {
+                    UserId = fuser.UserId;
+                    linkuser.Text = String.Format("@{0}", fuser.Username);
+                    if(txtLname.Text == string.Empty && txtFname.Text == string.Empty && txtMI.Text == string.Empty)
+                    {
+                        txtLname.Text = fuser.lname;
+                        txtFname.Text = fuser.fname;
+                        txtMI.Text = fuser.mname;
+                    }
+                }
+            }
+
+        }
+
+
+        internal void LoadLink(int id)
+        {
+            try
+            {
+                var userRepository = Factory.UsersRepository();
+                var data = userRepository.GetUserByID(id);
+                if(data.Count > 0)
+                {
+                    UserId = id;
+                    linkuser.Text = String.Format("@{0}", data["username"]);
+                }
+                else
+                {
+                    UserId = 0;
+                    linkuser.Text = "+ Link User";
+                }                
+                
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
     }
 }

@@ -26,6 +26,19 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             ucpc1.LoadForms();
             ucpc1.LoadCollectors();
             ucpc1.LoadFunds();
+
+            if(ucpc1.cmbcollector.Items.Count > 0)
+            {
+                var uRepository = Factory.UsersRepository();
+                if (uRepository.LinkedCollector(Helper.UserId))
+                {
+                    var colRepository = Factory.CollectingOfficerRepository();
+                    var data = colRepository.GetRecordByUserID(Helper.UserId);
+                    ucpc1.cmbcollector.SelectedValue = data["id"];
+                    ucpc1.cmbcollector.Enabled = false;
+                }
+            }
+           
         }
 
         private bool SaveData()
@@ -45,7 +58,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     FId = Convert.ToInt32(uc.cmbfund.SelectedValue),
                     AccId = Convert.ToInt32(uc.cmbforms.SelectedValue),
                     GlaId = uc.glaId,
-                    SlaId = uc.slaId,
+                    SlaId = Convert.ToInt32(uc.cmbsubsidiary.SelectedValue),
                     Payee = uc.txtpayee.Text.Trim(),
                     ReceiptNo = uc.txtreceipt.Text.Trim(),
                     PaymentDate = Convert.ToDateTime(uc.dtdate.Text.Trim()),

@@ -31,8 +31,6 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         {
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtbank = new System.Windows.Forms.TextBox();
-            this.btnbank = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.txtreference = new System.Windows.Forms.TextBox();
@@ -40,6 +38,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtamount = new System.Windows.Forms.NumericUpDown();
+            this.cmbbanks = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtamount)).BeginInit();
             this.SuspendLayout();
@@ -52,29 +51,6 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.label1.Size = new System.Drawing.Size(48, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Bank :";
-            // 
-            // txtbank
-            // 
-            this.errorProvider.SetIconAlignment(this.txtbank, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
-            this.txtbank.Location = new System.Drawing.Point(101, 11);
-            this.txtbank.Name = "txtbank";
-            this.txtbank.ReadOnly = true;
-            this.txtbank.Size = new System.Drawing.Size(461, 27);
-            this.txtbank.TabIndex = 1;
-            this.txtbank.DoubleClick += new System.EventHandler(this.txtbank_DoubleClick);
-            this.txtbank.Validating += new System.ComponentModel.CancelEventHandler(this.txtbank_Validating);
-            this.txtbank.Validated += new System.EventHandler(this.txtbank_Validated);
-            // 
-            // btnbank
-            // 
-            this.btnbank.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnbank.Image = global::AccountingSystem.Properties.Resources.find1;
-            this.btnbank.Location = new System.Drawing.Point(568, 11);
-            this.btnbank.Name = "btnbank";
-            this.btnbank.Size = new System.Drawing.Size(34, 27);
-            this.btnbank.TabIndex = 19;
-            this.btnbank.UseVisualStyleBackColor = true;
-            this.btnbank.Click += new System.EventHandler(this.btnbank_Click);
             // 
             // errorProvider
             // 
@@ -138,21 +114,31 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.txtamount.TabIndex = 25;
             this.txtamount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // cmbbanks
+            // 
+            this.cmbbanks.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbbanks.FormattingEnabled = true;
+            this.cmbbanks.Location = new System.Drawing.Point(101, 11);
+            this.cmbbanks.Name = "cmbbanks";
+            this.cmbbanks.Size = new System.Drawing.Size(501, 28);
+            this.cmbbanks.TabIndex = 26;
+            this.cmbbanks.Validating += new System.ComponentModel.CancelEventHandler(this.cmbbanks_Validating);
+            this.cmbbanks.Validated += new System.EventHandler(this.cmbbanks_Validated);
+            // 
             // ucBD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cmbbanks);
             this.Controls.Add(this.txtamount);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dtdate);
             this.Controls.Add(this.txtreference);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnbank);
-            this.Controls.Add(this.txtbank);
             this.Controls.Add(this.label1);
             this.Name = "ucBD";
-            this.Size = new System.Drawing.Size(618, 151);
+            this.Size = new System.Drawing.Size(618, 152);
             this.Load += new System.EventHandler(this.ucBD_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtamount)).EndInit();
@@ -164,14 +150,13 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnbank;
         private System.Windows.Forms.ErrorProvider errorProvider;
-        internal System.Windows.Forms.TextBox txtbank;
         internal System.Windows.Forms.NumericUpDown txtamount;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         internal System.Windows.Forms.DateTimePicker dtdate;
         internal System.Windows.Forms.TextBox txtreference;
         private System.Windows.Forms.Label label2;
+        internal System.Windows.Forms.ComboBox cmbbanks;
     }
 }

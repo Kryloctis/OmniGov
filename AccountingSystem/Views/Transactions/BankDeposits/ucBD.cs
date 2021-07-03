@@ -1,5 +1,4 @@
 ﻿using ACC.Domain.Interfaces;
-using AccountingSystem.Views.Transactions.BankDeposits.Find;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,7 +23,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         internal string GetFormErrors()
         {
             var errorArray = new string[4];
-            errorArray[0] = errorProvider.GetError(txtbank);
+            errorArray[0] = errorProvider.GetError(cmbbanks);
             errorArray[1] = errorProvider.GetError(txtreference);
             errorArray[2] = errorProvider.GetError(dtdate);
             errorArray[3] = errorProvider.GetError(txtamount);
@@ -39,55 +38,29 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
         internal void ResetForm()
         {
-            bankId = 0;
-            txtbank.Clear();
+            cmbbanks.SelectedIndex = -1;
             txtreference.Clear();
             dtdate.Value = DateTime.Now;
             txtamount.Value = Convert.ToDecimal("0.00");
         }
 
-        internal void setSelectedValue(int Id, string table)
+        internal void LoadBanks()
         {
             try
             {
-                if (!string.IsNullOrEmpty(table) || Id > 0)
-                {
-                    if (table.Equals("banks"))
-                    {
-                        var bankRepository = Factory.BanksRepository();
-                        var bankData = bankRepository.GetRecordByID(Id);
-                        bankId = Id;
-                        txtbank.Text = String.Format("{0} - {1}", bankData["account_no"], bankData["bank_name"]);
-                    }
-                }
+                var bankRepository = Factory.BanksRepository();
+                var dtBank = bankRepository.GetRecords();
+                dtBank.Columns.Add("bankdetails", typeof(string), "bank_name +'-'+account_no");
+                cmbbanks.DataSource = dtBank;
+                cmbbanks.ValueMember = "id";
+                cmbbanks.DisplayMember = "bankdetails";
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+       
 
-        public void loadSelectedBank(int Id, string value)
-        {
-            bankId = Id;
-            txtbank.Text = value;
-        }
 
-        private void btnbank_Click(object sender, EventArgs e)
-        {
-            _ = new frmFind(this, "banks").ShowDialog();
-        }
-
-        private void txtbank_DoubleClick(object sender, EventArgs e)
-        {
-            btnbank.PerformClick();
-        }
-
-        private void txtbank_Validating(object sender, CancelEventArgs e)
-        {
-           e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtbank, "Bank!");
-        }
-        private void txtbank_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider, txtbank);
-        }
+        
         private void txtreference_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtreference, "Reference!");
@@ -95,6 +68,16 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         private void txtreference_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider, txtreference);
+        }
+
+        private void cmbbanks_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbbanks, "Banks!");
+        }
+
+        private void cmbbanks_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider, cmbbanks);
         }
     }
 }
