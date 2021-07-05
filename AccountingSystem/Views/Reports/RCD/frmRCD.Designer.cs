@@ -34,13 +34,14 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.btnRCD = new System.Windows.Forms.ToolStripButton();
+            this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtsearch = new System.Windows.Forms.TextBox();
             this.dgrcd = new System.Windows.Forms.DataGridView();
-            this.btnRefresh = new System.Windows.Forms.ToolStripButton();
+            this.btnApproved = new System.Windows.Forms.ToolStripButton();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgrcd)).BeginInit();
@@ -55,6 +56,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnEdit,
             this.btnDelete,
             this.btnRCD,
+            this.btnApproved,
             this.btnRefresh});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
@@ -109,6 +111,17 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnRCD.Text = "Generate RCD";
             this.btnRCD.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnRCD.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.refresh;
+            this.btnRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(62, 52);
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // statusStrip
             // 
@@ -167,16 +180,17 @@ namespace AccountingSystem.Views.Reports.RCD
             this.dgrcd.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrcd_CellDoubleClick);
             this.dgrcd.SelectionChanged += new System.EventHandler(this.dgrcd_SelectionChanged);
             // 
-            // btnRefresh
+            // btnApproved
             // 
-            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.refresh;
-            this.btnRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(62, 52);
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            this.btnApproved.Image = global::AccountingSystem.Properties.Resources.approval;
+            this.btnApproved.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnApproved.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnApproved.Name = "btnApproved";
+            this.btnApproved.Size = new System.Drawing.Size(79, 52);
+            this.btnApproved.Text = "Approved";
+            this.btnApproved.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnApproved.Visible = false;
+            this.btnApproved.Click += new System.EventHandler(this.btnApproved_Click);
             // 
             // frmRCD
             // 
@@ -216,5 +230,6 @@ namespace AccountingSystem.Views.Reports.RCD
         private System.Windows.Forms.DataGridView dgrcd;
         private System.Windows.Forms.ToolStripButton btnRCD;
         private System.Windows.Forms.ToolStripButton btnRefresh;
+        private System.Windows.Forms.ToolStripButton btnApproved;
     }
 }

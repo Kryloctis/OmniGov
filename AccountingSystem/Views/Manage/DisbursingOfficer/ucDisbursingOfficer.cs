@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
+using AccountingSystem.Views.Manage.LinkUser;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -8,6 +9,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
     public partial class ucDisbursingOfficer : UserControl
     {
         internal int disbursingOfficerId = 0;
+        internal int UserId = 0;
         public ucDisbursingOfficer()
         {
             InitializeComponent();
@@ -71,6 +73,56 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
         private void txtJobTitle_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(epJobTitle, txtJobTitle);
+        }
+
+        private void linkuser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if(UserId > 0)
+            {
+                UserId = 0;
+                linkuser.Text = "+ Link User";
+            }
+            else
+            {
+                frmlinkuser fuser = new frmlinkuser();
+                fuser.table = "disburser";
+                if (fuser.ShowDialog() == DialogResult.OK)
+                {
+                    UserId = fuser.UserId;
+                    linkuser.Text = String.Format("@{0}", fuser.Username);
+                    if (txtLastName.Text == string.Empty && txtFirstName.Text == string.Empty && txtMidInitial.Text == string.Empty)
+                    {
+                        txtLastName.Text = fuser.lname;
+                        txtFirstName.Text = fuser.fname;
+                        txtMidInitial.Text = fuser.mname;
+                    }
+                }
+            }
+        
+        }
+
+        internal void LoadLink(int id)
+        {
+            try
+            {
+                var userRepository = Factory.UsersRepository();
+                var data = userRepository.GetUserByID(id);
+                if (data.Count > 0)
+                {
+                    UserId = id;
+                    linkuser.Text = String.Format("@{0}", data["username"]);
+                }
+                else
+                {
+                    UserId = 0;
+                    linkuser.Text = "+ Link User";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
     }
 }

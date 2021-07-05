@@ -1,4 +1,3 @@
-using AccountingSystem.Views.Reports.JEV;
 using System;
 using System.Windows.Forms;
 
@@ -16,7 +15,6 @@ namespace AccountingSystem
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginForm());
-            //Application.Run(new frmJEVReport());
         }
     }
 }

@@ -156,7 +156,10 @@ namespace AccountingSystem
                 menuAccForm.Visible = false;
 
             if (!Helper.HasPermission("Transaction Bank Deposits"))
+            {
                 menuDeposits.Visible = false;
+                btnBankDeposit.Visible = false;
+            }
 
             if (!Helper.HasPermission("Report SAAOB"))
                 menuSAAOB.Visible = false;
@@ -177,7 +180,10 @@ namespace AccountingSystem
                 menuIssueReceipts.Visible = false;
 
             if (!Helper.HasPermission("Transaction Generate RCD"))
+            {
                 menuGenerateRCD.Visible = false;
+                btnGenerateRCD.Visible = false;
+            }
 
         }
 
@@ -453,5 +459,14 @@ namespace AccountingSystem
             _ = new frmRCD().ShowDialog();
         }
 
+        private void btnGenerateRCD_Click(object sender, EventArgs e)
+        {
+            _ = new frmRCD().ShowDialog();
+        }
+
+        private void btnBankDeposit_Click(object sender, EventArgs e)
+        {
+            _ = new frmBankDeposits().ShowDialog();
+        }
     }
 }

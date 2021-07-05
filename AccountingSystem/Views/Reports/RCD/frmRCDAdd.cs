@@ -24,7 +24,31 @@ namespace AccountingSystem.Views.Reports.RCD
         private void frmRCDAdd_Load(object sender, EventArgs e)
         {            
             ucrcd1.LoadCollectors();
-            ucrcd1.LoadFunds();
+            ucrcd1.LoadFunds();            
+            if (ucrcd1.cmbcollector.Items.Count > 0)
+            {                
+                var uRepository = Factory.UsersRepository();
+                if (uRepository.LinkedCollector(Helper.UserId))
+                {
+                    var colRepository = Factory.CollectingOfficerRepository();
+                    var data = colRepository.GetRecordByUserID(Helper.UserId);
+                    ucrcd1.cmbcollector.SelectedValue = data["id"];
+                    ucrcd1.cmbcollector.Enabled = false;
+                }
+                ucrcd1.chckapproved.Visible = uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer" ? true : false; 
+                if(uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer")
+                {
+                    ucrcd1.btnadd.Visible = false;
+                    ucrcd1.btndelete.Visible = false;
+                    ucrcd1.btnclear.Visible = false;
+                }
+                else
+                {
+                    ucrcd1.btnadd.Visible = true;
+                    ucrcd1.btndelete.Visible = true;
+                    ucrcd1.btnclear.Visible = true;
+                }                
+            }
         }
 
         private bool SaveData()

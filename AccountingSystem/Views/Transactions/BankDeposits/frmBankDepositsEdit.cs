@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.BankDeposits
@@ -24,6 +17,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
         private void frmBankDepositsEdit_Load(object sender, EventArgs e)
         {
+            ucbd1.LoadBanks();
             LoadSelectedValue();
         }
         private void LoadSelectedValue()
@@ -33,7 +27,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 var uc = ucbd1;
                 var bdRepository = Factory.BankDepositsRepository();
                 var bdData = bdRepository.GetRecordByID(uc.Id);
-                uc.setSelectedValue(Convert.ToInt16(bdData["banks_id"]), "banks");
+                uc.cmbbanks.SelectedValue = bdData["banks_id"];
                 uc.txtreference.Text = bdData["reference"];
                 uc.dtdate.Value = Convert.ToDateTime(bdData["date"]);
                 uc.txtamount.Value = Convert.ToDecimal(bdData["amount"]);
@@ -54,11 +48,11 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 var bdModel = new BankDepositsModel()
                 {
                     Id = uc.Id,
-                    bankId = uc.bankId,
+                    bankId = Convert.ToInt16(uc.cmbbanks.SelectedValue),
                     Reference = uc.txtreference.Text.Trim(),
                     Date = Convert.ToDateTime(uc.dtdate.Text.Trim()),
                     Amount = Convert.ToDecimal(uc.txtamount.Value),
-                    UpdatedBy = 2,
+                    UpdatedBy = uc.userid,
                 };
 
                 var bdrepository = Factory.BankDepositsRepository();

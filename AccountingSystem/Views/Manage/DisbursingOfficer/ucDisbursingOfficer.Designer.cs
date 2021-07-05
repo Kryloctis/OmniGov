@@ -42,6 +42,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             this.epMidInitial = new System.Windows.Forms.ErrorProvider(this.components);
             this.epLastName = new System.Windows.Forms.ErrorProvider(this.components);
             this.epJobTitle = new System.Windows.Forms.ErrorProvider(this.components);
+            this.linkuser = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.epFirstName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epMidInitial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epLastName)).BeginInit();
@@ -50,10 +51,11 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             // 
             // txtFirstName
             // 
-            this.txtFirstName.Location = new System.Drawing.Point(82, 0);
+            this.txtFirstName.Location = new System.Drawing.Point(94, 0);
+            this.txtFirstName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtFirstName.MaxLength = 45;
             this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(370, 23);
+            this.txtFirstName.Size = new System.Drawing.Size(422, 27);
             this.txtFirstName.TabIndex = 0;
             this.txtFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.txtFirstName_Validating);
             this.txtFirstName.Validated += new System.EventHandler(this.txtFirstName_Validated);
@@ -61,27 +63,28 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             // lblFirstName
             // 
             this.lblFirstName.AutoSize = true;
-            this.lblFirstName.Location = new System.Drawing.Point(0, 3);
+            this.lblFirstName.Location = new System.Drawing.Point(0, 4);
             this.lblFirstName.Name = "lblFirstName";
-            this.lblFirstName.Size = new System.Drawing.Size(64, 15);
+            this.lblFirstName.Size = new System.Drawing.Size(80, 20);
             this.lblFirstName.TabIndex = 1;
             this.lblFirstName.Text = "First Name";
             // 
             // lblMidInitial
             // 
             this.lblMidInitial.AutoSize = true;
-            this.lblMidInitial.Location = new System.Drawing.Point(0, 32);
+            this.lblMidInitial.Location = new System.Drawing.Point(0, 43);
             this.lblMidInitial.Name = "lblMidInitial";
-            this.lblMidInitial.Size = new System.Drawing.Size(76, 15);
+            this.lblMidInitial.Size = new System.Drawing.Size(97, 20);
             this.lblMidInitial.TabIndex = 3;
             this.lblMidInitial.Text = "Middle Initial";
             // 
             // txtMidInitial
             // 
-            this.txtMidInitial.Location = new System.Drawing.Point(82, 29);
+            this.txtMidInitial.Location = new System.Drawing.Point(94, 39);
+            this.txtMidInitial.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtMidInitial.MaxLength = 3;
             this.txtMidInitial.Name = "txtMidInitial";
-            this.txtMidInitial.Size = new System.Drawing.Size(370, 23);
+            this.txtMidInitial.Size = new System.Drawing.Size(422, 27);
             this.txtMidInitial.TabIndex = 2;
             this.txtMidInitial.Validating += new System.ComponentModel.CancelEventHandler(this.txtMidInitial_Validating);
             this.txtMidInitial.Validated += new System.EventHandler(this.txtMidInitial_Validated);
@@ -89,18 +92,19 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             // lblLastName
             // 
             this.lblLastName.AutoSize = true;
-            this.lblLastName.Location = new System.Drawing.Point(0, 61);
+            this.lblLastName.Location = new System.Drawing.Point(0, 81);
             this.lblLastName.Name = "lblLastName";
-            this.lblLastName.Size = new System.Drawing.Size(63, 15);
+            this.lblLastName.Size = new System.Drawing.Size(79, 20);
             this.lblLastName.TabIndex = 5;
             this.lblLastName.Text = "Last Name";
             // 
             // txtLastName
             // 
-            this.txtLastName.Location = new System.Drawing.Point(82, 58);
+            this.txtLastName.Location = new System.Drawing.Point(94, 77);
+            this.txtLastName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtLastName.MaxLength = 45;
             this.txtLastName.Name = "txtLastName";
-            this.txtLastName.Size = new System.Drawing.Size(370, 23);
+            this.txtLastName.Size = new System.Drawing.Size(422, 27);
             this.txtLastName.TabIndex = 4;
             this.txtLastName.Validating += new System.ComponentModel.CancelEventHandler(this.txtLastName_Validating);
             this.txtLastName.Validated += new System.EventHandler(this.txtLastName_Validated);
@@ -108,18 +112,19 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             // lblJobTitle
             // 
             this.lblJobTitle.AutoSize = true;
-            this.lblJobTitle.Location = new System.Drawing.Point(0, 90);
+            this.lblJobTitle.Location = new System.Drawing.Point(0, 120);
             this.lblJobTitle.Name = "lblJobTitle";
-            this.lblJobTitle.Size = new System.Drawing.Size(50, 15);
+            this.lblJobTitle.Size = new System.Drawing.Size(65, 20);
             this.lblJobTitle.TabIndex = 7;
             this.lblJobTitle.Text = "Job Title";
             // 
             // txtJobTitle
             // 
-            this.txtJobTitle.Location = new System.Drawing.Point(82, 87);
+            this.txtJobTitle.Location = new System.Drawing.Point(94, 116);
+            this.txtJobTitle.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtJobTitle.MaxLength = 99;
             this.txtJobTitle.Name = "txtJobTitle";
-            this.txtJobTitle.Size = new System.Drawing.Size(370, 23);
+            this.txtJobTitle.Size = new System.Drawing.Size(422, 27);
             this.txtJobTitle.TabIndex = 6;
             this.txtJobTitle.Validating += new System.ComponentModel.CancelEventHandler(this.txtJobTitle_Validating);
             this.txtJobTitle.Validated += new System.EventHandler(this.txtJobTitle_Validated);
@@ -140,10 +145,23 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             // 
             this.epJobTitle.ContainerControl = this;
             // 
+            // linkuser
+            // 
+            this.linkuser.AutoSize = true;
+            this.linkuser.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.linkuser.Location = new System.Drawing.Point(6, 162);
+            this.linkuser.Name = "linkuser";
+            this.linkuser.Size = new System.Drawing.Size(82, 20);
+            this.linkuser.TabIndex = 15;
+            this.linkuser.TabStop = true;
+            this.linkuser.Text = "+ Link User";
+            this.linkuser.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkuser_LinkClicked);
+            // 
             // ucDisbursingOfficer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.linkuser);
             this.Controls.Add(this.lblJobTitle);
             this.Controls.Add(this.txtJobTitle);
             this.Controls.Add(this.lblLastName);
@@ -152,8 +170,9 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             this.Controls.Add(this.txtMidInitial);
             this.Controls.Add(this.lblFirstName);
             this.Controls.Add(this.txtFirstName);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ucDisbursingOfficer";
-            this.Size = new System.Drawing.Size(479, 119);
+            this.Size = new System.Drawing.Size(547, 191);
             ((System.ComponentModel.ISupportInitialize)(this.epFirstName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epMidInitial)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epLastName)).EndInit();
@@ -176,5 +195,6 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
         private System.Windows.Forms.ErrorProvider epMidInitial;
         private System.Windows.Forms.ErrorProvider epLastName;
         private System.Windows.Forms.ErrorProvider epJobTitle;
+        internal System.Windows.Forms.LinkLabel linkuser;
     }
 }

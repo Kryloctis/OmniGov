@@ -11,5 +11,6 @@ namespace ACC.Domain.Models
         public string MiddleInitial { get; set; }
         public string LastName { get; set; }
         public string JobTitle { get; set; }
+        public int UserId { get; set; }
     }
 }

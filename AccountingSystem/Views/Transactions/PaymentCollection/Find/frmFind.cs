@@ -120,11 +120,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
                 frmpc.loadSelectedLedger(Id, selectedValue);
                 saved = true;
             }
-            if (table.Equals("subsidiary"))
-            {
-                frmpc.loadSelectedSubsidiary(Id, selectedValue);
-                saved = true;
-            }
             return saved;
         }
         private void dgSelect_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

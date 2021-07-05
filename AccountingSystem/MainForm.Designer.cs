@@ -81,6 +81,9 @@ namespace AccountingSystem
             this.btnJournalEntry = new System.Windows.Forms.ToolStripButton();
             this.btnIssueCheck = new System.Windows.Forms.ToolStripButton();
             this.btnPaymentCollection = new System.Windows.Forms.ToolStripButton();
+            this.btnBankDeposit = new System.Windows.Forms.ToolStripButton();
+            this.btnGenerateRCD = new System.Windows.Forms.ToolStripButton();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblUserFullName = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUserRole = new System.Windows.Forms.ToolStripStatusLabel();
@@ -446,7 +449,9 @@ namespace AccountingSystem
             this.btnObligationRequest,
             this.btnJournalEntry,
             this.btnIssueCheck,
-            this.btnPaymentCollection});
+            this.btnPaymentCollection,
+            this.btnBankDeposit,
+            this.btnGenerateRCD});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
@@ -515,6 +520,37 @@ namespace AccountingSystem
             this.btnPaymentCollection.Size = new System.Drawing.Size(139, 28);
             this.btnPaymentCollection.Text = "Payment Collection";
             this.btnPaymentCollection.Click += new System.EventHandler(this.btnPaymentCollection_Click);
+            // 
+            // btnBankDeposit
+            // 
+            this.btnBankDeposit.Image = ((System.Drawing.Image)(resources.GetObject("btnBankDeposit.Image")));
+            this.btnBankDeposit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnBankDeposit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnBankDeposit.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
+            this.btnBankDeposit.Name = "btnBankDeposit";
+            this.btnBankDeposit.Size = new System.Drawing.Size(104, 28);
+            this.btnBankDeposit.Text = "Bank Deposit";
+            this.btnBankDeposit.Click += new System.EventHandler(this.btnBankDeposit_Click);
+            // 
+            // btnGenerateRCD
+            // 
+            this.btnGenerateRCD.Image = ((System.Drawing.Image)(resources.GetObject("btnGenerateRCD.Image")));
+            this.btnGenerateRCD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnGenerateRCD.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnGenerateRCD.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
+            this.btnGenerateRCD.Name = "btnGenerateRCD";
+            this.btnGenerateRCD.Size = new System.Drawing.Size(108, 28);
+            this.btnGenerateRCD.Text = "Generate RCD";
+            this.btnGenerateRCD.Click += new System.EventHandler(this.btnGenerateRCD_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 118);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1168, 346);
+            this.panel1.TabIndex = 5;
             // 
             // statusStrip1
             // 
@@ -697,6 +733,8 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menucashbook;
         private System.Windows.Forms.ToolStripMenuItem menuJEVS;
         private System.Windows.Forms.ToolStripButton btnPaymentCollection;
+        private System.Windows.Forms.ToolStripButton btnBankDeposit;
+        private System.Windows.Forms.ToolStripButton btnGenerateRCD;
         private System.Windows.Forms.Panel panel1;
     }
 }

@@ -26,6 +26,8 @@ namespace AccountingSystem.Views.Reports.RCD
         private void frmRCD_Load(object sender, EventArgs e)
         {
             LoadRecords();
+            var uRepository = Factory.UsersRepository();
+            dgrcd.Columns[7].Visible = uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer" ? true : false;
         }
 
         public void LoadRecords()
@@ -35,6 +37,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 var rcdRepository = Factory.CollectorReportRepository();
                 var dtrcd = rcdRepository.GetRecords();
                 HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgrcd);
+                
 
                 lblRecordCount.Text = dgrcd.Rows.Count.ToString();
             }
@@ -90,8 +93,13 @@ namespace AccountingSystem.Views.Reports.RCD
                 try
                 {
                     int id = int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString());
+                    bool isapproved = Convert.ToBoolean(dgrcd.CurrentRow.Cells[6].Value);
                     var gcpRepository = Factory.GeneralCollectionsPaymentsRepository();
+                    var uRepository = Factory.UsersRepository();
+                    btnDelete.Visible = uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer" ? true : false;
                     btnDelete.Enabled = gcpRepository.IdExist(id) ? false : true;
+                    btnApproved.Visible = uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer" ? true : false;
+                    btnApproved.Text = isapproved ? "Disapproved" : "Approved";
                 }
                 catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             }
@@ -175,6 +183,31 @@ namespace AccountingSystem.Views.Reports.RCD
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadRecords();
+        }
+
+        private void btnApproved_Click(object sender, EventArgs e)
+        {
+            if(dgrcd.SelectedRows.Count > 0)
+            {
+                bool isapproved = Convert.ToBoolean(dgrcd.CurrentRow.Cells[6].Value);
+                try
+                {
+                    if (Helper.MessageBoxConfirmRCDApproved(isapproved))
+                    {
+                        var rcdRepository = Factory.CollectorReportRepository();
+                        var rcdModel = new CollectorReportModel()
+                        {
+                            Id = int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString()),
+                            Approved = isapproved ? 0 : 1,
+                        };
+                        if (rcdRepository.Approved(rcdModel))
+                        {
+                            LoadRecords();
+                        }
+                    }
+                }
+                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            }
         }
     }
 }

@@ -88,7 +88,7 @@ namespace AccountingSystem.Views.Reports.RCD
             ucrcd1.LoadCollectors();
             ucrcd1.LoadFunds();
             LoadSelectedValue();
-         
+            
         }
 
         private void LoadSelectedValue()
@@ -110,6 +110,21 @@ namespace AccountingSystem.Views.Reports.RCD
                 uc.cmbcollector.Enabled = false;
                 uc.cmbfund.Enabled = false;
                 uc.txtreport.Enabled = false;
+
+                var uRepository = Factory.UsersRepository();
+                uc.chckapproved.Visible = uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer" ? true : false;
+                if (uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer")
+                {
+                    uc.btnadd.Visible = false;
+                    uc.btndelete.Visible = false;
+                    ucrcd1.btnclear.Visible = false;
+                }
+                else
+                {
+                    uc.btnadd.Visible = true;
+                    uc.btndelete.Visible = true;
+                    uc.btnclear.Visible = true;
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

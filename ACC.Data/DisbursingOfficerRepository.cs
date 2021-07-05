@@ -65,7 +65,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT first_name, mid_initial, last_name, job_title, created_at, updated_at FROM {tableName} WHERE id = @id";
+                string query = $"SELECT first_name, mid_initial, last_name, job_title, created_at, updated_at,users_id FROM {tableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -78,6 +78,42 @@ namespace ACC.Data
                     record.Add("job_title", reader.Rows[0]["job_title"].ToString());
                     record.Add("created_at", reader.Rows[0]["created_at"].ToString());
                     record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+                    record.Add("users_id", reader.Rows[0]["users_id"].ToString());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
+        }
+
+        public Dictionary<string, string> GetRecordByUserID(int Id)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@users_id", DbType.Int32, Id},
+                };
+
+                string query = $"SELECT id,first_name, mid_initial, last_name, job_title, created_at, updated_at,users_id FROM {tableName} WHERE users_id = @users_id";
+
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+                    record.Add("id", reader.Rows[0]["id"].ToString());
+                    record.Add("first_name", reader.Rows[0]["first_name"].ToString());
+                    record.Add("mid_initial", reader.Rows[0]["mid_initial"].ToString());
+                    record.Add("last_name", reader.Rows[0]["last_name"].ToString());
+                    record.Add("job_title", reader.Rows[0]["job_title"].ToString());
+                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+                    record.Add("users_id", reader.Rows[0]["users_id"].ToString());
                 }
             }
             catch (Exception)
@@ -122,9 +158,10 @@ namespace ACC.Data
                     new object[] { "@mid_initial", DbType.String, entity.MiddleInitial},
                     new object[] { "@last_name", DbType.String, entity.LastName},
                     new object[] { "@job_title", DbType.String, entity.JobTitle},
+                    new object[] { "@users_id", DbType.Int16, entity.UserId <= 0 ? (object)DBNull.Value : entity.UserId }
                 };
 
-                string query = $"INSERT INTO {tableName} (first_name, mid_initial, last_name, job_title) VALUES (@first_name, @mid_initial, @last_name, @job_title)";
+                string query = $"INSERT INTO {tableName} (first_name, mid_initial, last_name, job_title,users_id) VALUES (@first_name, @mid_initial, @last_name, @job_title,@users_id)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -144,9 +181,10 @@ namespace ACC.Data
                     new object[] { "@mid_initial", DbType.String, entity.MiddleInitial},
                     new object[] { "@last_name", DbType.String, entity.LastName},
                     new object[] { "@job_title", DbType.String, entity.JobTitle},
+                    new object[] { "@users_id", DbType.Int16, entity.UserId <= 0 ? (object)DBNull.Value : entity.UserId }
                 };
 
-                string query = $"UPDATE {tableName} SET first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, job_title = @job_title WHERE id = @id";
+                string query = $"UPDATE {tableName} SET first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, job_title = @job_title,users_id=@users_id WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)

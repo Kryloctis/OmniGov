@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 namespace ACC.Domain.Interfaces
 {
@@ -14,5 +15,13 @@ namespace ACC.Domain.Interfaces
         byte ValidateLogin(string username, string password);
 
         bool UpdateWithPassword(UsersModel entity);
+        Dictionary<string, string> GetUserByID(int Id);
+        DataTable GetLinksCollectingOfficers();
+        DataTable GetLinksDisbursingOfficers();
+        bool LinkedCollector(int id);
+        bool LinkedDisburser(int id);
+        string GetUserRole(int id);
+        string GetCollectorByUserId(int id);
+        string GetDisbursingByUserId(int id);
     }
 }
