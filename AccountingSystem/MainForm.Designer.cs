@@ -529,6 +529,7 @@ namespace AccountingSystem
             this.btnBankDeposit.Name = "btnBankDeposit";
             this.btnBankDeposit.Size = new System.Drawing.Size(104, 28);
             this.btnBankDeposit.Text = "Bank Deposit";
+            this.btnBankDeposit.Click += new System.EventHandler(this.btnBankDeposit_Click);
             // 
             // btnGenerateRCD
             // 

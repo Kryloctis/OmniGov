@@ -435,5 +435,10 @@ namespace AccountingSystem
         {
             _ = new frmRCD().ShowDialog();
         }
+
+        private void btnBankDeposit_Click(object sender, EventArgs e)
+        {
+            _ = new frmBankDeposits().ShowDialog();
+        }
     }
 }
