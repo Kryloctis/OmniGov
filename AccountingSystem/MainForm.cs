@@ -180,7 +180,10 @@ namespace AccountingSystem
                 menuIssueReceipts.Visible = false;
 
             if (!Helper.HasPermission("Transaction Generate RCD"))
+            {
                 menuGenerateRCD.Visible = false;
+                btnGenerateRCD.Visible = false;
+            }
 
         }
 
@@ -424,6 +427,11 @@ namespace AccountingSystem
         }
 
         private void menuGenerateRCD_Click(object sender, EventArgs e)
+        {
+            _ = new frmRCD().ShowDialog();
+        }
+
+        private void btnGenerateRCD_Click(object sender, EventArgs e)
         {
             _ = new frmRCD().ShowDialog();
         }
