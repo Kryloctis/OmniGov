@@ -507,7 +507,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void btnPrint_Click(object sender, EventArgs e)
         {
             var uc =  ucjev1;
-            _ = new frmJEVReport(uc.jevId, uc.jevNo).ShowDialog();
+            _ = new frmJEVReport(uc.jevId, uc.jevNo, uc.journalId).ShowDialog();
         }
     }
 }

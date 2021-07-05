@@ -413,7 +413,7 @@ namespace AccountingSystem
 
         private void menuJEVS_Click_1(object sender, EventArgs e)
         {
-            _ = new frmJEVReport(0, null).ShowDialog();
+            _ = new frmJEVReport(0, null, 0).ShowDialog();
         }
         private void btnPaymentCollection_Click(object sender, EventArgs e)
         {
