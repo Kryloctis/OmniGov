@@ -34,6 +34,7 @@ namespace AccountingSystem.Views.Reports.JEV
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgJEV = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.cbMonths = new System.Windows.Forms.ComboBox();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgJEV)).BeginInit();
             this.SuspendLayout();
@@ -50,7 +51,7 @@ namespace AccountingSystem.Views.Reports.JEV
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(144, 13);
+            this.btnRetrieve.Location = new System.Drawing.Point(144, 38);
             this.btnRetrieve.Name = "btnRetrieve";
             this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
             this.btnRetrieve.TabIndex = 26;
@@ -63,9 +64,9 @@ namespace AccountingSystem.Views.Reports.JEV
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel2.Controls.Add(this.dgJEV);
-            this.panel2.Location = new System.Drawing.Point(12, 41);
+            this.panel2.Location = new System.Drawing.Point(12, 67);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(207, 508);
+            this.panel2.Size = new System.Drawing.Size(207, 482);
             this.panel2.TabIndex = 27;
             // 
             // dgJEV
@@ -75,22 +76,33 @@ namespace AccountingSystem.Views.Reports.JEV
             this.dgJEV.Location = new System.Drawing.Point(0, 0);
             this.dgJEV.Name = "dgJEV";
             this.dgJEV.RowTemplate.Height = 25;
-            this.dgJEV.Size = new System.Drawing.Size(207, 508);
+            this.dgJEV.Size = new System.Drawing.Size(207, 482);
             this.dgJEV.TabIndex = 0;
             this.dgJEV.SelectionChanged += new System.EventHandler(this.dgJEV_SelectionChanged);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 13);
+            this.textBox1.Location = new System.Drawing.Point(12, 38);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(126, 23);
             this.textBox1.TabIndex = 28;
+            // 
+            // cbMonths
+            // 
+            this.cbMonths.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMonths.FormattingEnabled = true;
+            this.cbMonths.Location = new System.Drawing.Point(12, 12);
+            this.cbMonths.Name = "cbMonths";
+            this.cbMonths.Size = new System.Drawing.Size(207, 23);
+            this.cbMonths.TabIndex = 0;
+            this.cbMonths.SelectedIndexChanged += new System.EventHandler(this.cbMonths_SelectedIndexChanged);
             // 
             // frmJEVReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 561);
+            this.Controls.Add(this.cbMonths);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.btnRetrieve);
@@ -114,5 +126,6 @@ namespace AccountingSystem.Views.Reports.JEV
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DataGridView dgJEV;
+        private System.Windows.Forms.ComboBox cbMonths;
     }
 }

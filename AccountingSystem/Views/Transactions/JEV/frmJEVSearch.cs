@@ -113,6 +113,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     frmJEV.btnSave.Enabled = true;
                     frmJEV.btnDelete.Enabled = true;
                     frmJEV.btnPrint.Enabled = true;
+                    frmJEV.btnApprove.Enabled = true;
 
 
                     frmJEV.ucjev1.txtFundsJevNo.Text = $"{jevFundCode}-{Convert.ToDateTime(jevDateOfEntry).Year}{Convert.ToDateTime(jevDateOfEntry).Month}";
@@ -231,7 +232,12 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            var dtJEV = Factory.JEVRepository().GetRecordsBySearch(txtSearch.Text.Trim());
+            DataTable dtJEV;
+            if (cbApprove.Checked)
+                dtJEV = Factory.JEVRepository().GetApprovedJEV(txtSearch.Text.Trim());
+            else
+                dtJEV = Factory.JEVRepository().GetRecordsBySearch(txtSearch.Text.Trim());
+
             HelperLoadRecords.JEVDatagridView(dtJEV, dgJEV);
         }
 
@@ -249,6 +255,17 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void dgJEV_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             LoadSelectedJEV();
+        }
+
+        private void cbApprove_CheckedChanged(object sender, EventArgs e)
+        {
+            DataTable dtJEV;
+            if (cbApprove.Checked)
+                dtJEV = Factory.JEVRepository().GetApprovedJEV(txtSearch.Text.Trim());
+            else
+                dtJEV = Factory.JEVRepository().GetRecordsBySearch(txtSearch.Text.Trim());
+
+            HelperLoadRecords.JEVDatagridView(dtJEV, dgJEV);
         }
     }
 }
