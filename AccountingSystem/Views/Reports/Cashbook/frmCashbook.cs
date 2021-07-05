@@ -48,9 +48,9 @@ namespace AccountingSystem.Views.Reports.Cashbook
             var dtRC = Factory.RCIRepository().GetRecords(id);
             if(dtBD.Rows.Count > 0 || dtRC.Rows.Count > 0)
             {
-                decimal balance = 0;
-                decimal debit = 0;
-                decimal credit = 0;
+                //decimal balance = 0;
+                //decimal debit = 0;
+                //decimal credit = 0;
                 foreach (DataRow item in dtBD.Rows)
                 {
                     DataRow row = dtCB.NewRow();
@@ -75,7 +75,7 @@ namespace AccountingSystem.Views.Reports.Cashbook
                     dtCB.Rows.Add(row);
                 }
                 dtCB.Select(string.Empty, "date ASC");
-                if(dtCB.Rows.Count > 0)
+                /*if(dtCB.Rows.Count > 0)
                 {
                     foreach (DataRow item in dtCB.Rows)
                     {
@@ -84,7 +84,7 @@ namespace AccountingSystem.Views.Reports.Cashbook
                         balance = debit - credit;
                         item["balance"] = balance;
                     }
-                }
+                }*/
             }
             return dtCB;
         }
