@@ -91,7 +91,6 @@ namespace AccountingSystem
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.radBtnBudget = new System.Windows.Forms.RadioButton();
             this.radBtnAccounting = new System.Windows.Forms.RadioButton();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -226,14 +225,14 @@ namespace AccountingSystem
             // menuUserList
             // 
             this.menuUserList.Name = "menuUserList";
-            this.menuUserList.Size = new System.Drawing.Size(111, 22);
+            this.menuUserList.Size = new System.Drawing.Size(180, 22);
             this.menuUserList.Text = "List...";
             this.menuUserList.Click += new System.EventHandler(this.menuUserList_Click);
             // 
             // menuRoles
             // 
             this.menuRoles.Name = "menuRoles";
-            this.menuRoles.Size = new System.Drawing.Size(111, 22);
+            this.menuRoles.Size = new System.Drawing.Size(180, 22);
             this.menuRoles.Text = "Roles...";
             this.menuRoles.Click += new System.EventHandler(this.menuRoles_Click);
             // 
@@ -549,8 +548,8 @@ namespace AccountingSystem
             this.panel1.Location = new System.Drawing.Point(0, 118);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1168, 346);
-            this.panel1.TabIndex = 5;
+            this.panel1.Size = new System.Drawing.Size(1184, 396);
+            this.panel1.TabIndex = 9;
             // 
             // statusStrip1
             // 
@@ -626,14 +625,6 @@ namespace AccountingSystem
             this.radBtnAccounting.Text = "Accounting";
             this.radBtnAccounting.UseVisualStyleBackColor = true;
             this.radBtnAccounting.CheckedChanged += new System.EventHandler(this.radBtnAccounting_CheckedChanged);
-            // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 118);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1184, 396);
-            this.panel1.TabIndex = 9;
             // 
             // MainForm
             // 

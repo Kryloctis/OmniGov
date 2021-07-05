@@ -199,6 +199,9 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Reports of General Collections"))
                 menuprintGC.Visible = false;
+
+            if (!Helper.HasPermission("Report JEVs"))
+                menuJEVS.Visible = false;
         }
 
         private void RadioButtonVisibility()
