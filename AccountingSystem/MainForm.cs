@@ -134,11 +134,17 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
                 menuReportADADJ.Visible = false;
 
+            if (!Helper.HasPermission("Report General Journal") && !Helper.HasPermission("Report Cash Receipts Journal") && !Helper.HasPermission("Report Procurement Received Journal") && !Helper.HasPermission("Report Cash Disbursements Journal") && !Helper.HasPermission("Report Check Disbursements Journal") && !Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
+                menuJournalsReport.Visible = false;
+
             if (!Helper.HasPermission("Report General Ledger"))
                 menuGeneralLedgerReport.Visible = false;
 
             if (!Helper.HasPermission("Report Subsidiary Ledger"))
                 menuSubsidiaryLedgerReport.Visible = false;
+
+            if (!Helper.HasPermission("Report General Ledger") && !Helper.HasPermission("Report Subsidiary Ledger"))
+                menuLedgersReport.Visible = false;
 
             if (!Helper.HasPermission("Manage Banks"))
                 menuBanks.Visible = false;
@@ -185,6 +191,14 @@ namespace AccountingSystem
                 btnGenerateRCD.Visible = false;
             }
 
+            if (!Helper.HasPermission("Report of Checks Issued"))
+                menuprintRCI.Visible = false;
+
+            if (!Helper.HasPermission("Report of Collections and Deposits"))
+                menuprintPC.Visible = false;
+
+            if (!Helper.HasPermission("Reports of General Collections"))
+                menuprintGC.Visible = false;
         }
 
         private void LoadDashboard()

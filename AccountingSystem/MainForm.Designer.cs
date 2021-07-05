@@ -331,7 +331,7 @@ namespace AccountingSystem
             this.menuReportCkDJ,
             this.menuReportADADJ});
             this.menuJournalsReport.Name = "menuJournalsReport";
-            this.menuJournalsReport.Size = new System.Drawing.Size(256, 22);
+            this.menuJournalsReport.Size = new System.Drawing.Size(233, 22);
             this.menuJournalsReport.Text = "Journals";
             // 
             // menuReportGJ
@@ -376,7 +376,7 @@ namespace AccountingSystem
             this.menuGeneralLedgerReport,
             this.menuSubsidiaryLedgerReport});
             this.menuLedgersReport.Name = "menuLedgersReport";
-            this.menuLedgersReport.Size = new System.Drawing.Size(256, 22);
+            this.menuLedgersReport.Size = new System.Drawing.Size(233, 22);
             this.menuLedgersReport.Text = "Ledgers";
             // 
             // menuGeneralLedgerReport
@@ -394,47 +394,47 @@ namespace AccountingSystem
             // menuSAAOB
             // 
             this.menuSAAOB.Name = "menuSAAOB";
-            this.menuSAAOB.Size = new System.Drawing.Size(256, 22);
+            this.menuSAAOB.Size = new System.Drawing.Size(233, 22);
             this.menuSAAOB.Text = "SAAOB";
             // 
             // menuSAAOBB
             // 
             this.menuSAAOBB.Name = "menuSAAOBB";
-            this.menuSAAOBB.Size = new System.Drawing.Size(256, 22);
+            this.menuSAAOBB.Size = new System.Drawing.Size(233, 22);
             this.menuSAAOBB.Text = "SAAOBB";
             // 
             // menuJEVS
             // 
             this.menuJEVS.Name = "menuJEVS";
-            this.menuJEVS.Size = new System.Drawing.Size(256, 22);
+            this.menuJEVS.Size = new System.Drawing.Size(233, 22);
             this.menuJEVS.Text = "JEVs";
             this.menuJEVS.Click += new System.EventHandler(this.menuJEVS_Click_1);
             // 
             // menuprintRCI
             // 
             this.menuprintRCI.Name = "menuprintRCI";
-            this.menuprintRCI.Size = new System.Drawing.Size(256, 22);
-            this.menuprintRCI.Text = "Report of Checks Issued";
+            this.menuprintRCI.Size = new System.Drawing.Size(233, 22);
+            this.menuprintRCI.Text = "RCI";
             this.menuprintRCI.Click += new System.EventHandler(this.menuprintRCI_Click);
             // 
             // menuprintPC
             // 
             this.menuprintPC.Name = "menuprintPC";
-            this.menuprintPC.Size = new System.Drawing.Size(256, 22);
-            this.menuprintPC.Text = "Report of Collections and Deposits";
+            this.menuprintPC.Size = new System.Drawing.Size(233, 22);
+            this.menuprintPC.Text = "RCD";
             this.menuprintPC.Click += new System.EventHandler(this.menuprintPC_Click);
             // 
             // menuprintGC
             // 
             this.menuprintGC.Name = "menuprintGC";
-            this.menuprintGC.Size = new System.Drawing.Size(256, 22);
+            this.menuprintGC.Size = new System.Drawing.Size(233, 22);
             this.menuprintGC.Text = "Reports of General Collections";
             this.menuprintGC.Click += new System.EventHandler(this.menuprintGC_Click);
             // 
             // menucashbook
             // 
             this.menucashbook.Name = "menucashbook";
-            this.menucashbook.Size = new System.Drawing.Size(256, 22);
+            this.menucashbook.Size = new System.Drawing.Size(233, 22);
             this.menucashbook.Text = "Bank Cashbook";
             this.menucashbook.Click += new System.EventHandler(this.menucashbook_Click);
             // 
