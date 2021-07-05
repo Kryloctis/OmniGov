@@ -33,7 +33,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 uc.txtMI.Text = data["mid_initial"];
                 uc.txtLname.Text = data["last_name"];
                 uc.txtJobtitle.Text = data["job_title"];
-
+                uc.UserId = data["users_id"] == string.Empty ? 0 : Convert.ToInt16(data["users_id"]);                
+                uc.LoadLink(uc.UserId);
 
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -62,7 +63,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                     FirstName = uc.txtFname.Text.Trim(),
                     MiddleInitial = uc.txtMI.Text.Trim(),
                     LastName = uc.txtLname.Text.Trim(),
-                    JobTitle = uc.txtJobtitle.Text.Trim()
+                    JobTitle = uc.txtJobtitle.Text.Trim(),
+                    UserId = uc.UserId
                 };
 
                 var collectingrepository = Factory.CollectingOfficerRepository();

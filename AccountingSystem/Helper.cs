@@ -11,7 +11,7 @@ namespace AccountingSystem
 {
     public class Helper
     {
-        internal static byte UserId = 2;
+        internal static byte UserId = Factory.UserId = 2;
 
         public static void LoadFormIcon(Form form)
         {
@@ -283,6 +283,15 @@ namespace AccountingSystem
 
             return false;
         }
+
+        public static bool MessageBoxConfirmRCDApproved(bool isapproved)
+        {
+            string message = isapproved ? "Do you want to Disapproved this record now?" : "Do you want to Approved this record now?";
+            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                return true;
+
+            return false;
+        }
         #endregion
 
         #region EnableDisableButtons
@@ -396,6 +405,7 @@ namespace AccountingSystem
         {
             try
             {
+
                 return Factory.UsersRepository().HasPermission(UserId, permissionName);
             }
             catch (Exception ex)

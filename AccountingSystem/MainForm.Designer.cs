@@ -81,6 +81,8 @@ namespace AccountingSystem
             this.btnJournalEntry = new System.Windows.Forms.ToolStripButton();
             this.btnIssueCheck = new System.Windows.Forms.ToolStripButton();
             this.btnPaymentCollection = new System.Windows.Forms.ToolStripButton();
+            this.btnBankDeposit = new System.Windows.Forms.ToolStripButton();
+            this.btnGenerateRCD = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblUserFullName = new System.Windows.Forms.ToolStripStatusLabel();
@@ -88,7 +90,8 @@ namespace AccountingSystem
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.radBtnBudget = new System.Windows.Forms.RadioButton();
-            this.radBtnAccouting = new System.Windows.Forms.RadioButton();
+            this.radBtnAccounting = new System.Windows.Forms.RadioButton();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -106,7 +109,7 @@ namespace AccountingSystem
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(971, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(1184, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -329,7 +332,7 @@ namespace AccountingSystem
             this.menuReportCkDJ,
             this.menuReportADADJ});
             this.menuJournalsReport.Name = "menuJournalsReport";
-            this.menuJournalsReport.Size = new System.Drawing.Size(256, 22);
+            this.menuJournalsReport.Size = new System.Drawing.Size(233, 22);
             this.menuJournalsReport.Text = "Journals";
             // 
             // menuReportGJ
@@ -374,7 +377,7 @@ namespace AccountingSystem
             this.menuGeneralLedgerReport,
             this.menuSubsidiaryLedgerReport});
             this.menuLedgersReport.Name = "menuLedgersReport";
-            this.menuLedgersReport.Size = new System.Drawing.Size(256, 22);
+            this.menuLedgersReport.Size = new System.Drawing.Size(233, 22);
             this.menuLedgersReport.Text = "Ledgers";
             // 
             // menuGeneralLedgerReport
@@ -392,47 +395,47 @@ namespace AccountingSystem
             // menuSAAOB
             // 
             this.menuSAAOB.Name = "menuSAAOB";
-            this.menuSAAOB.Size = new System.Drawing.Size(256, 22);
+            this.menuSAAOB.Size = new System.Drawing.Size(233, 22);
             this.menuSAAOB.Text = "SAAOB";
             // 
             // menuSAAOBB
             // 
             this.menuSAAOBB.Name = "menuSAAOBB";
-            this.menuSAAOBB.Size = new System.Drawing.Size(256, 22);
+            this.menuSAAOBB.Size = new System.Drawing.Size(233, 22);
             this.menuSAAOBB.Text = "SAAOBB";
             // 
             // menuJEVS
             // 
             this.menuJEVS.Name = "menuJEVS";
-            this.menuJEVS.Size = new System.Drawing.Size(256, 22);
+            this.menuJEVS.Size = new System.Drawing.Size(233, 22);
             this.menuJEVS.Text = "JEVs";
             this.menuJEVS.Click += new System.EventHandler(this.menuJEVS_Click_1);
             // 
             // menuprintRCI
             // 
             this.menuprintRCI.Name = "menuprintRCI";
-            this.menuprintRCI.Size = new System.Drawing.Size(256, 22);
-            this.menuprintRCI.Text = "Report of Checks Issued";
+            this.menuprintRCI.Size = new System.Drawing.Size(233, 22);
+            this.menuprintRCI.Text = "RCI";
             this.menuprintRCI.Click += new System.EventHandler(this.menuprintRCI_Click);
             // 
             // menuprintPC
             // 
             this.menuprintPC.Name = "menuprintPC";
-            this.menuprintPC.Size = new System.Drawing.Size(256, 22);
-            this.menuprintPC.Text = "Report of Collections and Deposits";
+            this.menuprintPC.Size = new System.Drawing.Size(233, 22);
+            this.menuprintPC.Text = "RCD";
             this.menuprintPC.Click += new System.EventHandler(this.menuprintPC_Click);
             // 
             // menuprintGC
             // 
             this.menuprintGC.Name = "menuprintGC";
-            this.menuprintGC.Size = new System.Drawing.Size(256, 22);
+            this.menuprintGC.Size = new System.Drawing.Size(233, 22);
             this.menuprintGC.Text = "Reports of General Collections";
             this.menuprintGC.Click += new System.EventHandler(this.menuprintGC_Click);
             // 
             // menucashbook
             // 
             this.menucashbook.Name = "menucashbook";
-            this.menucashbook.Size = new System.Drawing.Size(256, 22);
+            this.menucashbook.Size = new System.Drawing.Size(233, 22);
             this.menucashbook.Text = "Bank Cashbook";
             this.menucashbook.Click += new System.EventHandler(this.menucashbook_Click);
             // 
@@ -446,12 +449,14 @@ namespace AccountingSystem
             this.btnObligationRequest,
             this.btnJournalEntry,
             this.btnIssueCheck,
-            this.btnPaymentCollection});
+            this.btnPaymentCollection,
+            this.btnBankDeposit,
+            this.btnGenerateRCD});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 0, 1, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(971, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(1184, 31);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -506,7 +511,7 @@ namespace AccountingSystem
             this.btnIssueCheck.Text = "Issue Check";
             // 
             // btnPaymentCollection
-            //
+            // 
             this.btnPaymentCollection.Image = ((System.Drawing.Image)(resources.GetObject("btnPaymentCollection.Image")));
             this.btnPaymentCollection.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnPaymentCollection.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -516,13 +521,35 @@ namespace AccountingSystem
             this.btnPaymentCollection.Text = "Payment Collection";
             this.btnPaymentCollection.Click += new System.EventHandler(this.btnPaymentCollection_Click);
             // 
+            // btnBankDeposit
+            // 
+            this.btnBankDeposit.Image = ((System.Drawing.Image)(resources.GetObject("btnBankDeposit.Image")));
+            this.btnBankDeposit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnBankDeposit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnBankDeposit.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
+            this.btnBankDeposit.Name = "btnBankDeposit";
+            this.btnBankDeposit.Size = new System.Drawing.Size(104, 28);
+            this.btnBankDeposit.Text = "Bank Deposit";
+            this.btnBankDeposit.Click += new System.EventHandler(this.btnBankDeposit_Click);
+            // 
+            // btnGenerateRCD
+            // 
+            this.btnGenerateRCD.Image = ((System.Drawing.Image)(resources.GetObject("btnGenerateRCD.Image")));
+            this.btnGenerateRCD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnGenerateRCD.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnGenerateRCD.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
+            this.btnGenerateRCD.Name = "btnGenerateRCD";
+            this.btnGenerateRCD.Size = new System.Drawing.Size(108, 28);
+            this.btnGenerateRCD.Text = "Generate RCD";
+            this.btnGenerateRCD.Click += new System.EventHandler(this.btnGenerateRCD_Click);
+            // 
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 118);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(971, 346);
+            this.panel1.Size = new System.Drawing.Size(1168, 346);
             this.panel1.TabIndex = 5;
             // 
             // statusStrip1
@@ -531,10 +558,10 @@ namespace AccountingSystem
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblUserFullName,
             this.lblUserRole});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 464);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 514);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(971, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(1184, 24);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -557,7 +584,7 @@ namespace AccountingSystem
             this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(0, 56);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(971, 37);
+            this.label1.Size = new System.Drawing.Size(1184, 37);
             this.label1.TabIndex = 7;
             this.label1.Text = "Dashboard";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -566,18 +593,19 @@ namespace AccountingSystem
             // 
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.Controls.Add(this.radBtnBudget);
-            this.flowLayoutPanel1.Controls.Add(this.radBtnAccouting);
+            this.flowLayoutPanel1.Controls.Add(this.radBtnAccounting);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 93);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(971, 25);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1184, 25);
             this.flowLayoutPanel1.TabIndex = 8;
             // 
             // radBtnBudget
             // 
             this.radBtnBudget.AutoSize = true;
             this.radBtnBudget.Checked = true;
+            this.radBtnBudget.ForeColor = System.Drawing.Color.Black;
             this.radBtnBudget.Location = new System.Drawing.Point(8, 3);
             this.radBtnBudget.Name = "radBtnBudget";
             this.radBtnBudget.Size = new System.Drawing.Size(63, 19);
@@ -585,16 +613,27 @@ namespace AccountingSystem
             this.radBtnBudget.TabStop = true;
             this.radBtnBudget.Text = "Budget";
             this.radBtnBudget.UseVisualStyleBackColor = true;
+            this.radBtnBudget.CheckedChanged += new System.EventHandler(this.radBtnBudget_CheckedChanged);
             // 
-            // radBtnAccouting
+            // radBtnAccounting
             // 
-            this.radBtnAccouting.AutoSize = true;
-            this.radBtnAccouting.Location = new System.Drawing.Point(77, 3);
-            this.radBtnAccouting.Name = "radBtnAccouting";
-            this.radBtnAccouting.Size = new System.Drawing.Size(87, 19);
-            this.radBtnAccouting.TabIndex = 1;
-            this.radBtnAccouting.Text = "Accounting";
-            this.radBtnAccouting.UseVisualStyleBackColor = true;
+            this.radBtnAccounting.AutoSize = true;
+            this.radBtnAccounting.ForeColor = System.Drawing.Color.Black;
+            this.radBtnAccounting.Location = new System.Drawing.Point(77, 3);
+            this.radBtnAccounting.Name = "radBtnAccounting";
+            this.radBtnAccounting.Size = new System.Drawing.Size(87, 19);
+            this.radBtnAccounting.TabIndex = 1;
+            this.radBtnAccounting.Text = "Accounting";
+            this.radBtnAccounting.UseVisualStyleBackColor = true;
+            this.radBtnAccounting.CheckedChanged += new System.EventHandler(this.radBtnAccounting_CheckedChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 118);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1184, 396);
+            this.panel1.TabIndex = 9;
             // 
             // MainForm
             // 
@@ -602,7 +641,7 @@ namespace AccountingSystem
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(971, 488);
+            this.ClientSize = new System.Drawing.Size(1184, 538);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label1);
@@ -611,7 +650,7 @@ namespace AccountingSystem
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MinimumSize = new System.Drawing.Size(986, 454);
+            this.MinimumSize = new System.Drawing.Size(1200, 577);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Local Finance System";
@@ -665,7 +704,6 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnJournalEntry;
         private System.Windows.Forms.ToolStripButton btnObligationRequest;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblUserFullName;
         private System.Windows.Forms.ToolStripStatusLabel lblUserRole;
@@ -687,7 +725,7 @@ namespace AccountingSystem
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         internal System.Windows.Forms.RadioButton radBtnBudget;
-        private System.Windows.Forms.RadioButton radBtnAccouting;
+        private System.Windows.Forms.RadioButton radBtnAccounting;
         private System.Windows.Forms.ToolStripMenuItem menuGenerateRCD;
         private System.Windows.Forms.ToolStripMenuItem menuprintGC;
         private System.Windows.Forms.ToolStripMenuItem menuIssueReceipts;
@@ -695,6 +733,9 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menucashbook;
         private System.Windows.Forms.ToolStripMenuItem menuJEVS;
         private System.Windows.Forms.ToolStripButton btnPaymentCollection;
+        private System.Windows.Forms.ToolStripButton btnBankDeposit;
+        private System.Windows.Forms.ToolStripButton btnGenerateRCD;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

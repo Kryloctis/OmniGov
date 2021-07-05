@@ -39,7 +39,8 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                     FirstName = uc.txtFirstName.Text.Trim(),
                     MiddleInitial = uc.txtMidInitial.Text.Trim(),
                     LastName = uc.txtLastName.Text.Trim(),
-                    JobTitle = uc.txtJobTitle.Text.Trim()
+                    JobTitle = uc.txtJobTitle.Text.Trim(),
+                    UserId = uc.UserId
                 };
 
                 return Factory.DisbursingOfficerRepository().Insert(disbursingOfficerModel);

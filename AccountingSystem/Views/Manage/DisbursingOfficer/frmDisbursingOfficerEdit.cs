@@ -36,6 +36,8 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                 uc.txtMidInitial.Text = disbursingOfficerDict["mid_initial"];
                 uc.txtLastName.Text = disbursingOfficerDict["last_name"];
                 uc.txtJobTitle.Text = disbursingOfficerDict["job_title"];
+                uc.UserId = disbursingOfficerDict["users_id"] == string.Empty ? 0 : Convert.ToInt16(disbursingOfficerDict["users_id"]);
+                uc.LoadLink(uc.UserId);
             }
             catch (Exception ex)
             {
@@ -66,7 +68,8 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                     FirstName = uc.txtFirstName.Text.Trim(),
                     MiddleInitial = uc.txtMidInitial.Text.Trim(),
                     LastName = uc.txtLastName.Text.Trim(),
-                    JobTitle = uc.txtJobTitle.Text.Trim()
+                    JobTitle = uc.txtJobTitle.Text.Trim(),
+                    UserId = uc.UserId
                 };
 
                 return Factory.DisbursingOfficerRepository().Update(disbursingOfficerModel);

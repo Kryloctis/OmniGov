@@ -82,7 +82,7 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Manage Allotment Releases"))
                 btnAllotmentRelease.Visible = false;
 
-            if (!Helper.HasPermission("Manage Chart of Accounts")) 
+            if (!Helper.HasPermission("Manage Chart of Accounts"))
                 menuChartOfAccounts.Visible = false;
 
             if (!Helper.HasPermission("Manage Function/Program/Project"))
@@ -112,7 +112,7 @@ namespace AccountingSystem
                 menuJEV.Visible = false;
                 menuObligationRequest.Visible = false;
             }
-            
+
             if (!Helper.HasPermission("Transaction Obligation Request"))
                 btnObligationRequest.Visible = false;
 
@@ -134,11 +134,17 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
                 menuReportADADJ.Visible = false;
 
+            if (!Helper.HasPermission("Report General Journal") && !Helper.HasPermission("Report Cash Receipts Journal") && !Helper.HasPermission("Report Procurement Received Journal") && !Helper.HasPermission("Report Cash Disbursements Journal") && !Helper.HasPermission("Report Check Disbursements Journal") && !Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
+                menuJournalsReport.Visible = false;
+
             if (!Helper.HasPermission("Report General Ledger"))
                 menuGeneralLedgerReport.Visible = false;
 
             if (!Helper.HasPermission("Report Subsidiary Ledger"))
                 menuSubsidiaryLedgerReport.Visible = false;
+
+            if (!Helper.HasPermission("Report General Ledger") && !Helper.HasPermission("Report Subsidiary Ledger"))
+                menuLedgersReport.Visible = false;
 
             if (!Helper.HasPermission("Manage Banks"))
                 menuBanks.Visible = false;
@@ -156,7 +162,10 @@ namespace AccountingSystem
                 menuAccForm.Visible = false;
 
             if (!Helper.HasPermission("Transaction Bank Deposits"))
+            {
                 menuDeposits.Visible = false;
+                btnBankDeposit.Visible = false;
+            }
 
             if (!Helper.HasPermission("Report SAAOB"))
                 menuSAAOB.Visible = false;
@@ -177,18 +186,36 @@ namespace AccountingSystem
                 menuIssueReceipts.Visible = false;
 
             if (!Helper.HasPermission("Transaction Generate RCD"))
+            {
                 menuGenerateRCD.Visible = false;
+                btnGenerateRCD.Visible = false;
+            }
 
+            if (!Helper.HasPermission("Report of Checks Issued"))
+                menuprintRCI.Visible = false;
+
+            if (!Helper.HasPermission("Report of Collections and Deposits"))
+                menuprintPC.Visible = false;
+
+            if (!Helper.HasPermission("Reports of General Collections"))
+                menuprintGC.Visible = false;
         }
 
-        private void LoadDashboard()
+        private void RadioButtonVisibility()
         {
             switch (userDict["office"])
             {
                 case "Budget":
+                    radBtnBudget.Visible = true;
+                    radBtnAccounting.Visible = false;
+                    break;
                 case "Accounting":
+                    radBtnBudget.Visible = true;
+                    radBtnAccounting.Visible = true;
+                    break;
                 case "SysAdmin":
-                    panel1.Controls.Add(new UcAccountingDashboard(Helper.LoggedInUserData()));
+                    radBtnBudget.Visible = true;
+                    radBtnAccounting.Visible = true;
                     break;
                 case "Treasury":
 
@@ -196,14 +223,35 @@ namespace AccountingSystem
                 default:
                     break;
             }
+
         }
+
+        private void LoadDashboard(UserControl userControl)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            panel1.Controls.Clear();
+            panel1.Controls.Add(userControl);
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void radBtnBudget_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadDashboard(new UcBudgetDashboard());
+        }
+
+        private void radBtnAccounting_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadDashboard(new UcAccountingDashboard(Helper.LoggedInUserData()));
+        }
+
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
             LoadLoggedInUser();
             ValidatePermissions();
-            LoadDashboard();
+            RadioButtonVisibility();
+            LoadDashboard(new UcBudgetDashboard());
         }
 
         private void menuJournals_Click(object sender, EventArgs e)
@@ -423,6 +471,16 @@ namespace AccountingSystem
         private void menuGenerateRCD_Click(object sender, EventArgs e)
         {
             _ = new frmRCD().ShowDialog();
+        }
+
+        private void btnGenerateRCD_Click(object sender, EventArgs e)
+        {
+            _ = new frmRCD().ShowDialog();
+        }
+
+        private void btnBankDeposit_Click(object sender, EventArgs e)
+        {
+            _ = new frmBankDeposits().ShowDialog();
         }
     }
 }

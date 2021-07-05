@@ -12,5 +12,6 @@ namespace ACC.Domain.Interfaces
         bool HasGenerated(int id);
         int InsertId(CollectorReportModel entity);
         bool HasReported(int id);
+        bool Approved(CollectorReportModel entity);
     }
 }
