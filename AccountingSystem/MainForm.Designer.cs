@@ -89,6 +89,7 @@ namespace AccountingSystem
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.radBtnBudget = new System.Windows.Forms.RadioButton();
             this.radBtnAccouting = new System.Windows.Forms.RadioButton();
+            this.btnBankDeposit = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -106,7 +107,7 @@ namespace AccountingSystem
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(971, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(1168, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -446,12 +447,13 @@ namespace AccountingSystem
             this.btnObligationRequest,
             this.btnJournalEntry,
             this.btnIssueCheck,
-            this.btnPaymentCollection});
+            this.btnPaymentCollection,
+            this.btnBankDeposit});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 0, 1, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(971, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(1168, 31);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -506,7 +508,7 @@ namespace AccountingSystem
             this.btnIssueCheck.Text = "Issue Check";
             // 
             // btnPaymentCollection
-            //
+            // 
             this.btnPaymentCollection.Image = ((System.Drawing.Image)(resources.GetObject("btnPaymentCollection.Image")));
             this.btnPaymentCollection.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnPaymentCollection.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -522,7 +524,7 @@ namespace AccountingSystem
             this.panel1.Location = new System.Drawing.Point(0, 118);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(971, 346);
+            this.panel1.Size = new System.Drawing.Size(1168, 346);
             this.panel1.TabIndex = 5;
             // 
             // statusStrip1
@@ -534,7 +536,7 @@ namespace AccountingSystem
             this.statusStrip1.Location = new System.Drawing.Point(0, 464);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(971, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(1168, 24);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -557,7 +559,7 @@ namespace AccountingSystem
             this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(0, 56);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(971, 37);
+            this.label1.Size = new System.Drawing.Size(1168, 37);
             this.label1.TabIndex = 7;
             this.label1.Text = "Dashboard";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -571,7 +573,7 @@ namespace AccountingSystem
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 93);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(971, 25);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1168, 25);
             this.flowLayoutPanel1.TabIndex = 8;
             // 
             // radBtnBudget
@@ -596,13 +598,23 @@ namespace AccountingSystem
             this.radBtnAccouting.Text = "Accounting";
             this.radBtnAccouting.UseVisualStyleBackColor = true;
             // 
+            // btnBankDeposit
+            // 
+            this.btnBankDeposit.Image = ((System.Drawing.Image)(resources.GetObject("btnBankDeposit.Image")));
+            this.btnBankDeposit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnBankDeposit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnBankDeposit.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
+            this.btnBankDeposit.Name = "btnBankDeposit";
+            this.btnBankDeposit.Size = new System.Drawing.Size(104, 28);
+            this.btnBankDeposit.Text = "Bank Deposit";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(971, 488);
+            this.ClientSize = new System.Drawing.Size(1168, 488);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label1);
@@ -695,6 +707,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menucashbook;
         private System.Windows.Forms.ToolStripMenuItem menuJEVS;
         private System.Windows.Forms.ToolStripButton btnPaymentCollection;
+        private System.Windows.Forms.ToolStripButton btnBankDeposit;
     }
 }
 

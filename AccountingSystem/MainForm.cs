@@ -156,7 +156,10 @@ namespace AccountingSystem
                 menuAccForm.Visible = false;
 
             if (!Helper.HasPermission("Transaction Bank Deposits"))
+            {
                 menuDeposits.Visible = false;
+                btnBankDeposit.Visible = false;
+            }
 
             if (!Helper.HasPermission("Report SAAOB"))
                 menuSAAOB.Visible = false;
