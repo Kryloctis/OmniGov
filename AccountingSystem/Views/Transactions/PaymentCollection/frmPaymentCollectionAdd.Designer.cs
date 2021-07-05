@@ -42,18 +42,20 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 367);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 297);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(726, 36);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(658, 27);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(629, 3);
+            this.btnCancel.Location = new System.Drawing.Point(573, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnCancel.Size = new System.Drawing.Size(94, 29);
+            this.btnCancel.Size = new System.Drawing.Size(82, 22);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -62,10 +64,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(529, 3);
+            this.btnSave.Location = new System.Drawing.Point(485, 2);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSave.Size = new System.Drawing.Size(94, 29);
+            this.btnSave.Size = new System.Drawing.Size(82, 22);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -73,22 +76,24 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             // ucpc1
             // 
-            this.ucpc1.Location = new System.Drawing.Point(0, 0);
+            this.ucpc1.Location = new System.Drawing.Point(11, 11);
+            this.ucpc1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucpc1.Name = "ucpc1";
-            this.ucpc1.Size = new System.Drawing.Size(726, 359);
+            this.ucpc1.Size = new System.Drawing.Size(647, 274);
             this.ucpc1.TabIndex = 6;
             // 
             // frmPaymentCollectionAdd
             // 
             this.AcceptButton = this.btnSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(726, 403);
+            this.ClientSize = new System.Drawing.Size(658, 324);
             this.Controls.Add(this.ucpc1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmPaymentCollectionAdd";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

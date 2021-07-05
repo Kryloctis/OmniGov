@@ -67,8 +67,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.btnrefresh});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Padding = new System.Windows.Forms.Padding(5);
-            this.toolStrip.Size = new System.Drawing.Size(1216, 65);
+            this.toolStrip.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.toolStrip.Size = new System.Drawing.Size(1064, 58);
             this.toolStrip.TabIndex = 8;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -78,7 +78,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(50, 52);
+            this.btnAdd.Size = new System.Drawing.Size(42, 47);
             this.btnAdd.Text = "Add...";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(48, 52);
+            this.btnEdit.Size = new System.Drawing.Size(40, 47);
             this.btnEdit.Text = "Edit...";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -102,7 +102,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(57, 52);
+            this.btnDelete.Size = new System.Drawing.Size(44, 47);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -113,7 +113,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.btnrefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnrefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnrefresh.Name = "btnrefresh";
-            this.btnrefresh.Size = new System.Drawing.Size(62, 52);
+            this.btnrefresh.Size = new System.Drawing.Size(50, 47);
             this.btnrefresh.Text = "Refresh";
             this.btnrefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnrefresh.Click += new System.EventHandler(this.btnrefresh_Click);
@@ -133,81 +133,83 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.lblCreatedBy,
             this.toolStripStatusLabel7,
             this.lblUpdatedBy});
-            this.statusStrip.Location = new System.Drawing.Point(0, 723);
+            this.statusStrip.Location = new System.Drawing.Point(0, 540);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1216, 26);
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
+            this.statusStrip.Size = new System.Drawing.Size(1064, 22);
             this.statusStrip.TabIndex = 9;
             this.statusStrip.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(65, 20);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
             this.toolStripStatusLabel1.Text = "Records:";
             // 
             // lblRecordCount
             // 
             this.lblRecordCount.Name = "lblRecordCount";
-            this.lblRecordCount.Size = new System.Drawing.Size(17, 20);
+            this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
             this.lblRecordCount.Text = "0";
             // 
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(769, 20);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(710, 17);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(81, 20);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(64, 17);
             this.toolStripStatusLabel2.Text = "Created at:";
             // 
             // lblCreatedAt
             // 
             this.lblCreatedAt.Name = "lblCreatedAt";
-            this.lblCreatedAt.Size = new System.Drawing.Size(0, 20);
+            this.lblCreatedAt.Size = new System.Drawing.Size(0, 17);
             // 
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(87, 20);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(68, 17);
             this.toolStripStatusLabel3.Text = "Updated at:";
             // 
             // lblUpdatedAt
             // 
             this.lblUpdatedAt.Name = "lblUpdatedAt";
-            this.lblUpdatedAt.Size = new System.Drawing.Size(0, 20);
+            this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
             // 
             // toolStripStatusLabel5
             // 
             this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            this.toolStripStatusLabel5.Size = new System.Drawing.Size(88, 20);
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(70, 17);
             this.toolStripStatusLabel5.Text = "Created By :";
             // 
             // lblCreatedBy
             // 
             this.lblCreatedBy.Name = "lblCreatedBy";
-            this.lblCreatedBy.Size = new System.Drawing.Size(0, 20);
+            this.lblCreatedBy.Size = new System.Drawing.Size(0, 17);
             // 
             // toolStripStatusLabel7
             // 
             this.toolStripStatusLabel7.Name = "toolStripStatusLabel7";
-            this.toolStripStatusLabel7.Size = new System.Drawing.Size(94, 20);
+            this.toolStripStatusLabel7.Size = new System.Drawing.Size(74, 17);
             this.toolStripStatusLabel7.Text = "Updated By :";
             // 
             // lblUpdatedBy
             // 
             this.lblUpdatedBy.Name = "lblUpdatedBy";
-            this.lblUpdatedBy.Size = new System.Drawing.Size(0, 20);
+            this.lblUpdatedBy.Size = new System.Drawing.Size(0, 17);
             // 
             // txtsearch
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(8, 8);
+            this.txtsearch.Location = new System.Drawing.Point(7, 6);
+            this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.PlaceholderText = "Search...";
-            this.txtsearch.Size = new System.Drawing.Size(550, 27);
+            this.txtsearch.Size = new System.Drawing.Size(482, 23);
             this.txtsearch.TabIndex = 11;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
@@ -217,11 +219,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgpayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgpayments.Location = new System.Drawing.Point(12, 121);
+            this.dgpayments.Location = new System.Drawing.Point(10, 91);
+            this.dgpayments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgpayments.Name = "dgpayments";
             this.dgpayments.RowHeadersWidth = 51;
             this.dgpayments.RowTemplate.Height = 29;
-            this.dgpayments.Size = new System.Drawing.Size(1188, 591);
+            this.dgpayments.Size = new System.Drawing.Size(1040, 443);
             this.dgpayments.TabIndex = 12;
             this.dgpayments.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgpayments_CellDoubleClick);
             this.dgpayments.SelectionChanged += new System.EventHandler(this.dgpayments_SelectionChanged);
@@ -232,31 +235,35 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel1.Controls.Add(this.txtsearch);
             this.flowLayoutPanel1.Controls.Add(this.dtpdate);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 69);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(10, 52);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(5);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1188, 46);
+            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1040, 34);
             this.flowLayoutPanel1.TabIndex = 13;
             // 
             // dtpdate
             // 
-            this.dtpdate.Location = new System.Drawing.Point(564, 8);
+            this.dtpdate.Location = new System.Drawing.Point(495, 6);
+            this.dtpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpdate.Name = "dtpdate";
-            this.dtpdate.Size = new System.Drawing.Size(408, 27);
+            this.dtpdate.Size = new System.Drawing.Size(358, 23);
             this.dtpdate.TabIndex = 12;
             this.dtpdate.ValueChanged += new System.EventHandler(this.dtpdate_ValueChanged);
             // 
             // frmPaymentCollection
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1216, 749);
+            this.ClientSize = new System.Drawing.Size(1064, 562);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.dgpayments);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "frmPaymentCollection";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Transactions > Payment Collections";
             this.Load += new System.EventHandler(this.frmPaymentCollection_Load);

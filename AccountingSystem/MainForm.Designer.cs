@@ -73,7 +73,7 @@ namespace AccountingSystem
             this.menuprintRCI = new System.Windows.Forms.ToolStripMenuItem();
             this.menuprintPC = new System.Windows.Forms.ToolStripMenuItem();
             this.menuprintGC = new System.Windows.Forms.ToolStripMenuItem();
-            this.menucashbook = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuBankCashBook = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnBudgetAppropriations = new System.Windows.Forms.ToolStripButton();
             this.btnAllotmentRelease = new System.Windows.Forms.ToolStripButton();
@@ -225,14 +225,14 @@ namespace AccountingSystem
             // menuUserList
             // 
             this.menuUserList.Name = "menuUserList";
-            this.menuUserList.Size = new System.Drawing.Size(180, 22);
+            this.menuUserList.Size = new System.Drawing.Size(111, 22);
             this.menuUserList.Text = "List...";
             this.menuUserList.Click += new System.EventHandler(this.menuUserList_Click);
             // 
             // menuRoles
             // 
             this.menuRoles.Name = "menuRoles";
-            this.menuRoles.Size = new System.Drawing.Size(180, 22);
+            this.menuRoles.Size = new System.Drawing.Size(111, 22);
             this.menuRoles.Text = "Roles...";
             this.menuRoles.Click += new System.EventHandler(this.menuRoles_Click);
             // 
@@ -316,7 +316,7 @@ namespace AccountingSystem
             this.menuprintRCI,
             this.menuprintPC,
             this.menuprintGC,
-            this.menucashbook});
+            this.menuBankCashBook});
             this.menuReports.Name = "menuReports";
             this.menuReports.Size = new System.Drawing.Size(59, 19);
             this.menuReports.Text = "Reports";
@@ -431,12 +431,12 @@ namespace AccountingSystem
             this.menuprintGC.Text = "Reports of General Collections";
             this.menuprintGC.Click += new System.EventHandler(this.menuprintGC_Click);
             // 
-            // menucashbook
+            // menuBankCashBook
             // 
-            this.menucashbook.Name = "menucashbook";
-            this.menucashbook.Size = new System.Drawing.Size(233, 22);
-            this.menucashbook.Text = "Bank Cashbook";
-            this.menucashbook.Click += new System.EventHandler(this.menucashbook_Click);
+            this.menuBankCashBook.Name = "menuBankCashBook";
+            this.menuBankCashBook.Size = new System.Drawing.Size(233, 22);
+            this.menuBankCashBook.Text = "Bank Cashbook";
+            this.menuBankCashBook.Click += new System.EventHandler(this.menucashbook_Click);
             // 
             // toolStrip1
             // 
@@ -721,7 +721,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuprintGC;
         private System.Windows.Forms.ToolStripMenuItem menuIssueReceipts;
         private System.Windows.Forms.ToolStripMenuItem menuReceipts;
-        private System.Windows.Forms.ToolStripMenuItem menucashbook;
+        private System.Windows.Forms.ToolStripMenuItem menuBankCashBook;
         private System.Windows.Forms.ToolStripMenuItem menuJEVS;
         private System.Windows.Forms.ToolStripButton btnPaymentCollection;
         private System.Windows.Forms.ToolStripButton btnBankDeposit;

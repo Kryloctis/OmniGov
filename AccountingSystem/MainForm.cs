@@ -202,6 +202,9 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Report JEVs"))
                 menuJEVS.Visible = false;
+
+            if (!Helper.HasPermission("Report Bank Cashbook"))
+                menuBankCashBook.Visible = false;
         }
 
         private void RadioButtonVisibility()
