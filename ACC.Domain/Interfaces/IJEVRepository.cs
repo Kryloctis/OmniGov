@@ -31,7 +31,6 @@ namespace ACC.Domain.Interfaces
 
         bool Update(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList);
 
-
         bool Delete(JEVModel entity);
 
         int GetLastInsertedID();
@@ -42,6 +41,8 @@ namespace ACC.Domain.Interfaces
 
         Dictionary<string, string> GetRecordByJEV(string jevNo);
 
+        DataTable GetRecordsByJEVNoAndDate(string searchText, sbyte jevDate);
+
         bool JevNumberAndYearExist(string jevNo, int jevEntryDate);
 
         bool JevNumberExist(string jevNo, int jevId);
@@ -51,5 +52,7 @@ namespace ACC.Domain.Interfaces
         bool SetJEVToApprove(int jevId);
 
         DataTable GetApprovedJEV(string searchText);
+
+
     }
 }

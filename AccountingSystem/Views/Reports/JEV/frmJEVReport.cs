@@ -197,6 +197,12 @@ namespace AccountingSystem.Views.Reports.JEV
             Helper.LoadFormIcon(this);
             Helper.DatagridDefaultStyle(dgJEV);
 
+          
+            foreach (var item in Helper.MonthsDatasource().Values)
+                cbMonths.Items.Add(item);
+
+            LoadJEVReport(textBox1.Text.Trim(), (sbyte)DateTime.Now.Month);
+
             if (_jevId != 0)
             {
                 LoadReport(reportViewer.LocalReport);
@@ -205,12 +211,13 @@ namespace AccountingSystem.Views.Reports.JEV
                 reportViewer.ZoomPercent = 100;
                 reportViewer.RefreshReport();
             }
+
+
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            var dtJEV = Factory.JEVRepository().GetRecordsBySearch(textBox1.Text.Trim());
-            HelperLoadRecords.JEVDatagridView(dtJEV, dgJEV);
+            LoadJEVReport(textBox1.Text.Trim(), (sbyte)(cbMonths.SelectedIndex+1));
         }
 
         private void dgJEV_SelectionChanged(object sender, EventArgs e)
@@ -222,7 +229,7 @@ namespace AccountingSystem.Views.Reports.JEV
                 DataGridViewRow selectedRow = dgJEV.Rows[selectedIndex];
 
                 _jevNo = Convert.ToString(selectedRow.Cells["jev_no"].Value);
-                _jevId = Convert.ToInt32(selectedRow.Cells["id"].Value);
+                _jevId = Convert.ToInt32(selectedRow.Cells["id"].Value  );
                 _journalId = Convert.ToByte(selectedRow.Cells["journals_id"].Value);
 
                 LoadReport(reportViewer.LocalReport);
@@ -231,6 +238,16 @@ namespace AccountingSystem.Views.Reports.JEV
                 reportViewer.ZoomPercent = 100;
                 reportViewer.RefreshReport();
             }
+        }
+
+        private void cbMonths_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadJEVReport(textBox1.Text.Trim(), (sbyte)(cbMonths.SelectedIndex+1));
+        }
+
+        private void LoadJEVReport(string txtSearch, sbyte monthIndex) {
+            var dtJEV = Factory.JEVRepository().GetRecordsByJEVNoAndDate(txtSearch, monthIndex);
+            HelperLoadRecords.JEVREportDataGridView(dtJEV, dgJEV);
         }
     }
 }
