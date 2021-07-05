@@ -206,42 +206,23 @@ namespace AccountingSystem
 
         }
 
-        private UserControl Dashboard()
-        { 
-            var dashBoard = new UserControl();
-            dashBoard.Dock = DockStyle.Fill;
-    
-            var ucBudgetDashboard = new UcBudgetDashboard();
-            ucBudgetDashboard.Dock = DockStyle.Fill;
-            var ucAccountingDashboard = new UcAccountingDashboard(Helper.LoggedInUserData());
-
-            if (radBtnBudget.Checked)
-                dashBoard = ucBudgetDashboard;
-            else if (radBtnAccounting.Checked)
-                dashBoard = ucAccountingDashboard;
-
-            return dashBoard;
-        }
-
-        private void LoadDashboard()
+        private void LoadDashboard(UserControl userControl)
         {
-            panel1.Visible = false;
+            Cursor.Current = Cursors.WaitCursor;
             panel1.Controls.Clear();
-            panel1.Controls.Add(Dashboard());
-            panel1.Visible = true;
+            panel1.Controls.Add(userControl);
+            Cursor.Current = Cursors.Default;
         }
 
         private void radBtnBudget_CheckedChanged(object sender, EventArgs e)
         {
-            LoadDashboard();
+            LoadDashboard(new UcBudgetDashboard());
         }
 
         private void radBtnAccounting_CheckedChanged(object sender, EventArgs e)
         {
-            LoadDashboard();
+            LoadDashboard(new UcAccountingDashboard(Helper.LoggedInUserData()));
         }
-
-
 
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -250,7 +231,7 @@ namespace AccountingSystem
             LoadLoggedInUser();
             ValidatePermissions();
             RadioButtonVisibility();
-            LoadDashboard();
+            LoadDashboard(new UcBudgetDashboard());
         }
 
         private void menuJournals_Click(object sender, EventArgs e)

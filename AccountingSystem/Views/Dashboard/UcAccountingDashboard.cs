@@ -24,8 +24,6 @@ namespace AccountingSystem.Views.Dashboard
         {
             if (!DesignMode)
             {
-                LoadFunds();
-                LoadFPP();
                 Dock = DockStyle.Fill;
 
                 VisibilityJournalCardsCounter(false);
@@ -33,21 +31,10 @@ namespace AccountingSystem.Views.Dashboard
                 if (userDict["office"] == "Accounting" || userDict["office"] == "SysAdmin")
                     VisibilityJournalCardsCounter(true);
 
-                LoadCardRecords();
                 LoadObligationRecordCount();
                 LoadJEVCounter();
             }
         }
-
-        internal string GetFormErrors()
-        {
-            var errorArray = new string[1];
-            errorArray[0] = epFPP.GetError(cmbFPP);
-
-            IError _errors = Factory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
-        }
-
 
 
         private void LoadObligationRecordCount() 
@@ -55,111 +42,6 @@ namespace AccountingSystem.Views.Dashboard
             int recordCount = Factory.ObligationAccountRepository().ObligationsRecordCount();
 
             lblObligationRecordCount.Text = recordCount.ToString();
-        }
-
-        internal void LoadFunds()
-        {
-            cmbFund.DataSource = Factory.FundsRepository().GetRecords();
-            cmbFund.DisplayMember = "fund_name";
-            cmbFund.ValueMember = "id";
-
-            cmbFund.SelectedValueChanged += new System.EventHandler(cmbFund_SelectedValueChanged);
-        }
-
-        internal void LoadFPP()
-        {
-            cmbFPP.SelectedValueChanged -= new System.EventHandler(cmbFPP_SelectedValueChanged);
-            var dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
-            HelperLoadRecords.FPPComboBox(dtFPP, cmbFPP, "fpp_name", "id");
-            cmbFPP.SelectedValueChanged += new System.EventHandler(cmbFPP_SelectedValueChanged);
-        }
-
-        private void LoadCardRecords() 
-        {
-            try
-            {
-                int fundId = Convert.ToInt32(cmbFund.SelectedValue);
-                int fppId = Convert.ToInt32(cmbFPP.SelectedValue);
-                int[] allotmentClassIds = new int[] {1,2,3,4,};
-
-
-                foreach (int allotmentClassId in allotmentClassIds)
-                {
-                    decimal TotalbudgetAppropriations = 0;
-
-                    decimal UnobligatedAppropriationBalance = TotalbudgetAppropriations;
-
-                    switch (allotmentClassId) 
-                    {
-                        case 1:
-                            lblPSAppropriations.Text = TotalbudgetAppropriations.ToString("N2");
-                            lblPSUnobligatedBalances.Text = UnobligatedAppropriationBalance.ToString("N2");
-                            break;
-                        case 2:
-                            lblMOOEAppropriations.Text = TotalbudgetAppropriations.ToString("N2");
-                            lblMOOEUnobligatedBalances.Text = UnobligatedAppropriationBalance.ToString("N2");
-                            break;
-                        case 3:
-                            lblCOAppropriatons.Text = TotalbudgetAppropriations.ToString("N2");
-                            lblCOUnobligatedBalances.Text = UnobligatedAppropriationBalance.ToString("N2");
-                            break;
-                        case 4:
-                            lblFEAppropriations.Text = TotalbudgetAppropriations.ToString("N2");
-                            break;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        
-        private bool fppNameNotExist()
-        {
-            try
-            {
-                bool fppNameExist = Factory.FunctionProgramProjectRepository().NameExist(cmbFPP.Text);
-
-                if (!fppNameExist && !string.IsNullOrEmpty(cmbFPP.Text)) 
-                {
-                    epFPP.SetError(cmbFPP,"FPP you entered doesn't exist on your system.");
-                    return true;
-                }
-
-                return false;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private void cmbFund_SelectedValueChanged(object sender, EventArgs e)
-        {
-            LoadCardRecords();
-        }
-
-        private void cmbFPP_SelectedValueChanged(object sender, EventArgs e)
-        {
-            if (!ValidateChildren())
-            {
-                Helper.MessageBoxError(GetFormErrors());
-            }
-            else
-                LoadCardRecords();
-        }
-
-        private void cmbFPP_Validating(object sender, CancelEventArgs e)
-        {
-            if (fppNameNotExist())
-                e.Cancel = fppNameNotExist();
-        }
-
-        private void cmbFPP_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(epFPP, cmbFPP);
         }
 
         private void LoadJEVCounter()

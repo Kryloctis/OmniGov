@@ -593,11 +593,8 @@ namespace AccountingSystem
             // 
             // panel1
             // 
-            this.panel1.AutoSize = true;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panel1.Location = new System.Drawing.Point(0, 118);
-            this.panel1.MinimumSize = new System.Drawing.Size(1100, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1184, 396);
             this.panel1.TabIndex = 9;
