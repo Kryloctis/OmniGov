@@ -18,6 +18,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             Helper.LoadFormIcon(this);
 
             btnDelete.Click += new EventHandler(this.BtnDelete_Click);
+
+            if (!Helper.HasPermission("Transaction JEV Approved"))
+                btnApprove.Visible = false;
         }
 
         private static ushort? ValidateNullSubsidiary(object subsidiaryCellValue)
@@ -508,6 +511,62 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             var uc =  ucjev1;
             _ = new frmJEVReport(uc.jevId, uc.jevNo, uc.journalId).ShowDialog();
+        }
+
+        private void btnApprove_Click(object sender, EventArgs e)
+        {
+            var uc = ucjev1;
+            if (uc.jevId != 0)
+            {
+                if (MessageBox.Show("Are you sure you want to approved this JEV?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    if (SetJEVToApproved())
+                    {
+                        Helper.MessageBoxSuccess("JEV has been approved.");
+                        ucjev1.ResetForm();
+                    }
+                    return;
+                }
+                
+            }
+
+        }
+
+        private bool SetJEVToApproved()
+        {
+            try
+            {
+                var userId = Helper.UserId;
+                var uc = ucjev1;
+
+                // validate form
+                if (uc.fundId == 0 || uc.journalId == 0 || !uc.ValidateChildren() || uc.dgAccounts.Rows.Count == 0)
+                {
+                    Helper.MessageBoxError(uc.GetFormErrors());
+                    return false;
+                }
+
+                if (uc.txtDebitTotal.Text != uc.txtCreditTotal.Text)
+                {
+                    Helper.MessageBoxError("Debit & Credit amounts must be equal.");
+                    return false;
+                }
+
+                var isApproved = Factory.JEVRepository().SetJEVToApprove(uc.jevId);
+
+                //return isApproved ? true : false;
+                if (isApproved)
+                    return true;
+                else
+                    return false;
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return false;
         }
     }
 }
