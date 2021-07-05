@@ -91,7 +91,6 @@ namespace AccountingSystem
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.radBtnBudget = new System.Windows.Forms.RadioButton();
             this.radBtnAccounting = new System.Windows.Forms.RadioButton();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -549,8 +548,8 @@ namespace AccountingSystem
             this.panel1.Location = new System.Drawing.Point(0, 118);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1168, 346);
-            this.panel1.TabIndex = 5;
+            this.panel1.Size = new System.Drawing.Size(1184, 396);
+            this.panel1.TabIndex = 9;
             // 
             // statusStrip1
             // 
@@ -604,13 +603,11 @@ namespace AccountingSystem
             // radBtnBudget
             // 
             this.radBtnBudget.AutoSize = true;
-            this.radBtnBudget.Checked = true;
             this.radBtnBudget.ForeColor = System.Drawing.Color.Black;
             this.radBtnBudget.Location = new System.Drawing.Point(8, 3);
             this.radBtnBudget.Name = "radBtnBudget";
             this.radBtnBudget.Size = new System.Drawing.Size(63, 19);
             this.radBtnBudget.TabIndex = 0;
-            this.radBtnBudget.TabStop = true;
             this.radBtnBudget.Text = "Budget";
             this.radBtnBudget.UseVisualStyleBackColor = true;
             this.radBtnBudget.CheckedChanged += new System.EventHandler(this.radBtnBudget_CheckedChanged);
@@ -626,14 +623,6 @@ namespace AccountingSystem
             this.radBtnAccounting.Text = "Accounting";
             this.radBtnAccounting.UseVisualStyleBackColor = true;
             this.radBtnAccounting.CheckedChanged += new System.EventHandler(this.radBtnAccounting_CheckedChanged);
-            // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 118);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1184, 396);
-            this.panel1.TabIndex = 9;
             // 
             // MainForm
             // 
