@@ -82,7 +82,7 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Manage Allotment Releases"))
                 btnAllotmentRelease.Visible = false;
 
-            if (!Helper.HasPermission("Manage Chart of Accounts")) 
+            if (!Helper.HasPermission("Manage Chart of Accounts"))
                 menuChartOfAccounts.Visible = false;
 
             if (!Helper.HasPermission("Manage Function/Program/Project"))
@@ -112,7 +112,7 @@ namespace AccountingSystem
                 menuJEV.Visible = false;
                 menuObligationRequest.Visible = false;
             }
-            
+
             if (!Helper.HasPermission("Transaction Obligation Request"))
                 btnObligationRequest.Visible = false;
 
@@ -187,14 +187,21 @@ namespace AccountingSystem
 
         }
 
-        private void LoadDashboard()
+        private void RadioButtonVisibility()
         {
             switch (userDict["office"])
             {
                 case "Budget":
+                    radBtnBudget.Visible = true;
+                    radBtnAccounting.Visible = false;
+                    break;
                 case "Accounting":
+                    radBtnBudget.Visible = true;
+                    radBtnAccounting.Visible = true;
+                    break;
                 case "SysAdmin":
-                    panel1.Controls.Add(new UcAccountingDashboard(Helper.LoggedInUserData()));
+                    radBtnBudget.Visible = true;
+                    radBtnAccounting.Visible = true;
                     break;
                 case "Treasury":
 
@@ -202,14 +209,35 @@ namespace AccountingSystem
                 default:
                     break;
             }
+
         }
+
+        private void LoadDashboard(UserControl userControl)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            panel1.Controls.Clear();
+            panel1.Controls.Add(userControl);
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void radBtnBudget_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadDashboard(new UcBudgetDashboard());
+        }
+
+        private void radBtnAccounting_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadDashboard(new UcAccountingDashboard(Helper.LoggedInUserData()));
+        }
+
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
             LoadLoggedInUser();
             ValidatePermissions();
-            LoadDashboard();
+            RadioButtonVisibility();
+            LoadDashboard(new UcBudgetDashboard());
         }
 
         private void menuJournals_Click(object sender, EventArgs e)
