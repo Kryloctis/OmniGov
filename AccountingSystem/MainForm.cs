@@ -211,27 +211,41 @@ namespace AccountingSystem
                 case "Budget":
                     radBtnBudget.Visible = true;
                     radBtnAccounting.Visible = false;
+                    radBtnBudget.Checked = true;
                     break;
                 case "Accounting":
                     radBtnBudget.Visible = true;
                     radBtnAccounting.Visible = true;
+                    radBtnBudget.Checked = true;
                     break;
                 case "SysAdmin":
                     radBtnBudget.Visible = true;
                     radBtnAccounting.Visible = true;
-                    break;
-                case "Treasury":
-
+                    radBtnBudget.Checked = true;
                     break;
                 default:
+                    radBtnBudget.Checked = false;
+                    radBtnBudget.Visible = false;
+                    radBtnBudget.Visible = false;
+                    radBtnAccounting.Visible = false;
                     break;
             }
 
+            LoadDashboard();
         }
 
-        private void LoadDashboard(UserControl userControl)
+        private void LoadDashboard()
         {
             Cursor.Current = Cursors.WaitCursor;
+            var userControl = new UserControl();
+
+            if (radBtnBudget.Checked)
+                userControl = new UcBudgetDashboard();
+            else if(radBtnAccounting.Checked)
+                userControl = new UcAccountingDashboard(Helper.LoggedInUserData());
+            else
+                panel1.Controls.Clear();
+
             panel1.Controls.Clear();
             panel1.Controls.Add(userControl);
             Cursor.Current = Cursors.Default;
@@ -239,12 +253,12 @@ namespace AccountingSystem
 
         private void radBtnBudget_CheckedChanged(object sender, EventArgs e)
         {
-            LoadDashboard(new UcBudgetDashboard());
+            LoadDashboard();
         }
 
         private void radBtnAccounting_CheckedChanged(object sender, EventArgs e)
         {
-            LoadDashboard(new UcAccountingDashboard(Helper.LoggedInUserData()));
+            LoadDashboard();
         }
 
 
@@ -254,7 +268,6 @@ namespace AccountingSystem
             LoadLoggedInUser();
             ValidatePermissions();
             RadioButtonVisibility();
-            LoadDashboard(new UcBudgetDashboard());
         }
 
         private void menuJournals_Click(object sender, EventArgs e)

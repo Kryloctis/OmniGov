@@ -603,13 +603,11 @@ namespace AccountingSystem
             // radBtnBudget
             // 
             this.radBtnBudget.AutoSize = true;
-            this.radBtnBudget.Checked = true;
             this.radBtnBudget.ForeColor = System.Drawing.Color.Black;
             this.radBtnBudget.Location = new System.Drawing.Point(8, 3);
             this.radBtnBudget.Name = "radBtnBudget";
             this.radBtnBudget.Size = new System.Drawing.Size(63, 19);
             this.radBtnBudget.TabIndex = 0;
-            this.radBtnBudget.TabStop = true;
             this.radBtnBudget.Text = "Budget";
             this.radBtnBudget.UseVisualStyleBackColor = true;
             this.radBtnBudget.CheckedChanged += new System.EventHandler(this.radBtnBudget_CheckedChanged);
