@@ -118,6 +118,29 @@ namespace ACC.Data
                     new object[] { "@explanation", DbType.String, $"%{searchText}%" },
                 };
 
+                string query = $"SELECT id, funds_id, journals_id, jev_no, date_entry, ref_no, payee, explanation, fund_code ,is_approved, created_at, created_by, updated_at, updated_by FROM {viewTableName} WHERE (jev_no LIKE @jev_no OR ref_no LIKE @ref_no OR payee LIKE @payee OR explanation LIKE @explanation)";
+
+                var dtGeneralLedgers = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetApprovedJEV(string searchText)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@jev_no", DbType.String, $"%{searchText}%" },
+                    new object[] { "@ref_no", DbType.String, $"%{searchText}%" },
+                    new object[] { "@payee", DbType.String, $"%{searchText}%" },
+                    new object[] { "@explanation", DbType.String, $"%{searchText}%" },
+                };
+
                 string query = $"SELECT id, funds_id, journals_id, jev_no, date_entry, ref_no, payee, explanation, fund_code ,is_approved, created_at, created_by, updated_at, updated_by FROM {viewTableName} WHERE is_approved = 1 AND (jev_no LIKE @jev_no OR ref_no LIKE @ref_no OR payee LIKE @payee OR explanation LIKE @explanation)";
 
                 var dtGeneralLedgers = new DataTable();
@@ -613,5 +636,6 @@ namespace ACC.Data
 
             return false;
         }
+
     }
 }

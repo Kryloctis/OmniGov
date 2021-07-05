@@ -35,6 +35,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.dgJEV = new System.Windows.Forms.DataGridView();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.cbApprove = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgJEV)).BeginInit();
             this.SuspendLayout();
@@ -106,6 +107,17 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
+            // cbApprove
+            // 
+            this.cbApprove.AutoSize = true;
+            this.cbApprove.Location = new System.Drawing.Point(395, 14);
+            this.cbApprove.Name = "cbApprove";
+            this.cbApprove.Size = new System.Drawing.Size(103, 19);
+            this.cbApprove.TabIndex = 9;
+            this.cbApprove.Text = "Approved JEVs";
+            this.cbApprove.UseVisualStyleBackColor = true;
+            this.cbApprove.CheckedChanged += new System.EventHandler(this.cbApprove_CheckedChanged);
+            // 
             // frmJEVSearch
             // 
             this.AcceptButton = this.btnSearch;
@@ -113,6 +125,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(930, 410);
+            this.Controls.Add(this.cbApprove);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.dgJEV);
@@ -139,5 +152,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.DataGridView dgJEV;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.CheckBox cbApprove;
     }
 }

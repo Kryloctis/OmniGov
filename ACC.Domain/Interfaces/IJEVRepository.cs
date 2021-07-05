@@ -46,5 +46,7 @@ namespace ACC.Domain.Interfaces
         bool JevNumberExist(string jevNo, int jevId);
 
         int JevCounter(byte journalId);
+
+        DataTable GetApprovedJEV(string searchText);
     }
 }
