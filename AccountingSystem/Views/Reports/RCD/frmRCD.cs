@@ -18,7 +18,6 @@ namespace AccountingSystem.Views.Reports.RCD
         public frmRCD()
         {
             InitializeComponent();
-            WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
             Helper.DatagridDefaultStyle(dgrcd);
         }

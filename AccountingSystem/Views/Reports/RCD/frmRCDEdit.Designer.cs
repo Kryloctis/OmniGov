@@ -42,18 +42,20 @@ namespace AccountingSystem.Views.Reports.RCD
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 674);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 524);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1032, 36);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(932, 27);
             this.flowLayoutPanel1.TabIndex = 7;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(935, 3);
+            this.btnCancel.Location = new System.Drawing.Point(847, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnCancel.Size = new System.Drawing.Size(94, 29);
+            this.btnCancel.Size = new System.Drawing.Size(82, 22);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -62,10 +64,11 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(835, 3);
+            this.btnSave.Location = new System.Drawing.Point(759, 2);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSave.Size = new System.Drawing.Size(94, 29);
+            this.btnSave.Size = new System.Drawing.Size(82, 22);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -73,22 +76,24 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // ucrcd1
             // 
-            this.ucrcd1.Location = new System.Drawing.Point(2, 3);
+            this.ucrcd1.Location = new System.Drawing.Point(12, 11);
+            this.ucrcd1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucrcd1.Name = "ucrcd1";
-            this.ucrcd1.Size = new System.Drawing.Size(1028, 670);
+            this.ucrcd1.Size = new System.Drawing.Size(900, 502);
             this.ucrcd1.TabIndex = 8;
             // 
             // frmRCDEdit
             // 
             this.AcceptButton = this.btnSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1032, 710);
+            this.ClientSize = new System.Drawing.Size(932, 551);
             this.Controls.Add(this.ucrcd1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmRCDEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RCD Edit";
