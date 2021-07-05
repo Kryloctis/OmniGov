@@ -45,8 +45,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
                 var riModel = new ReceiptsIssuedModel()
                 {
-                   CoId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
-                   RId = Convert.ToInt16(uc.cmbreceipt.SelectedValue),
+                   CoId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
+                   RId = Convert.ToInt32(uc.cmbreceipt.SelectedValue),
                    Issued = uc.dtpissued.Value,
                    IssuedFrom = Convert.ToInt32(uc.txtfrom.Text.Trim()),
                    IssuedTo = Convert.ToInt32(uc.txtto.Text.Trim()),
@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                     uc.cmbreceipt.Focus();
                     return false;
                 }
-                else if (Convert.ToInt16(uc.txtfrom.Text.Trim()) > Convert.ToInt16(uc.txtto.Text.Trim()))
+                else if (Convert.ToInt32(uc.txtfrom.Text.Trim()) > Convert.ToInt32(uc.txtto.Text.Trim()))
                 {
                     Helper.MessageBoxError("Invalid Receipt!");
                     return false;

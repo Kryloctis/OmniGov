@@ -39,24 +39,24 @@ namespace AccountingSystem.Views.Manage.Receipts
                 }
                 var rModel = new ReceiptsModel()
                 {
-                    AccId = Convert.ToInt16(uc.cmbforms.SelectedValue),
-                    Rfrom = Convert.ToInt16(uc.txtfrom.Text.Trim()),
-                    Rto = Convert.ToInt16(uc.txtto.Text.Trim()),
+                    AccId = Convert.ToInt32(uc.cmbforms.SelectedValue),
+                    Rfrom = Convert.ToInt32(uc.txtfrom.Text.Trim()),
+                    Rto = Convert.ToInt32(uc.txtto.Text.Trim()),
                     Rdate = uc.dtpreceived.Value,
-                    Quantity = Convert.ToInt16(uc.txtquantity.Text.Trim()),
+                    Quantity = Convert.ToInt32(uc.txtquantity.Text.Trim()),
                     Remarks = uc.txtremarks.Text.Trim(),
                     UserId = UserId
 
                 };
 
                 var rcRepository = Factory.ReceiptsRepository();
-                if (rcRepository.ReceiptExist(Convert.ToInt16(uc.cmbforms.SelectedValue), Convert.ToInt16(uc.txtfrom.Text.Trim()), Convert.ToInt16(uc.txtto.Text.Trim())))
+                if (rcRepository.ReceiptExist(Convert.ToInt32(uc.cmbforms.SelectedValue), Convert.ToInt32(uc.txtfrom.Text.Trim()), Convert.ToInt32(uc.txtto.Text.Trim())))
                 {
                     Helper.MessageBoxError("Receipt already exists!");
                     uc.cmbforms.Focus();
                     return false;
                 }
-                else if (Convert.ToInt16(uc.txtfrom.Text.Trim()) > Convert.ToInt16(uc.txtto.Text.Trim()))
+                else if (Convert.ToInt32(uc.txtfrom.Text.Trim()) > Convert.ToInt32(uc.txtto.Text.Trim()))
                 {
                     Helper.MessageBoxError("Invalid Receipt!");
                     return false;
