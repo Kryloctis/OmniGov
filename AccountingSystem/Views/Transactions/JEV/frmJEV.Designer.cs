@@ -36,6 +36,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
+            this.btnApprove = new System.Windows.Forms.ToolStripButton();
             this.ucjev1 = new AccountingSystem.Views.Transactions.JEV.ucJEV();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -50,7 +51,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.toolStripSeparator1,
             this.btnDelete,
             this.btnSearch,
-            this.btnPrint});
+            this.btnPrint,
+            this.btnApprove});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(891, 50);
@@ -122,6 +124,19 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
+            // btnApprove
+            // 
+            this.btnApprove.Enabled = false;
+            this.btnApprove.Image = global::AccountingSystem.Properties.Resources.create_new_28px;
+            this.btnApprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnApprove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnApprove.Name = "btnApprove";
+            this.btnApprove.Size = new System.Drawing.Size(56, 47);
+            this.btnApprove.Text = "&Approve";
+            this.btnApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnApprove.ToolTipText = "Approve";
+            this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
+            // 
             // ucjev1
             // 
             this.ucjev1.AutoSize = true;
@@ -162,5 +177,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal System.Windows.Forms.ToolStripButton btnDelete;
         protected internal ucJEV ucjev1;
         internal System.Windows.Forms.ToolStripButton btnPrint;
+        internal System.Windows.Forms.ToolStripButton btnApprove;
     }
 }
