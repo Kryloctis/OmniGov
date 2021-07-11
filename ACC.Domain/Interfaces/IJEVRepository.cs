@@ -49,6 +49,10 @@ namespace ACC.Domain.Interfaces
 
         int JevCounter(byte journalId);
 
+        int TotalApproveJEV();
+
+        int TotalPendingJEV();
+
         bool SetJEVToApprove(int jevId);
 
         DataTable GetApprovedJEV(string searchText);

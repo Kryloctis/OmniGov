@@ -39,7 +39,16 @@ namespace ACC.Data
 
         public int CountRecords()
         {
-            throw new NotImplementedException();
+            try
+            {
+                string query = $"SELECT COUNT(*) FROM {tableName}";
+
+                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Delete(List<JEVModel> entityList)
@@ -680,6 +689,32 @@ namespace ACC.Data
             }
         }
 
+        public int TotalApproveJEV()
+        {
+            try
+            {
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved=1";
 
+                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int TotalPendingJEV()
+        {
+            try
+            {
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved=0";
+
+                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
