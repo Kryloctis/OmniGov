@@ -15,11 +15,14 @@ namespace ACC.Domain.Interfaces
         //SAOOBB
         DataTable GetViewRecords(int fundId, DateTime dateEntry, byte isSpecial);
 
-        //DASHBOARD
-        DataTable GetViewRecords(int fppId, int fundId, DateTime dateEntry);
-
         //SAAOB
         DataTable GetViewRecords(int fundId, DateTime dateEntry, short year, byte isContinuing, byte isSpecial);
+
+        //DASHBOARD
+        DataTable GetViewRecordsFPPIdFundIdDateEntry(int fppId, int fundId, DateTime dateEntry);
+
+        decimal GetBudgetAppropriations(string fppId, int fundId, DateTime dateEntry, int allotment_classes_id, byte isContinuing);
+
 
         DataTable GetViewRecordsByIds(BudgetAppropriationsModel entity);
 

@@ -101,68 +101,6 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-
-        public DataTable GetViewRecords(int budgetAppropriationId, DateTime dateRequested)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId },
-                    new object[] { "@date_requested", DbType.Date, dateRequested.Date}
-                };
-
-                string query = $"SELECT " +
-                    $"obligation_request_id, " +
-                    $"obligation_account_id, " +
-                    $"obligation_no, " +
-                    $"payee, " +
-                    $"explanation, " +
-                    $"reference_no, " +
-                    $"date_requested, " +
-                    $"obligation_request_created_at, " +
-                    $"created_by, " +
-                    $"obligation_request_updated_at, " +
-                    $"updated_by, " +
-                    $"budget_appropriations_id, " +
-                    $"funds_id, " +
-                    $"fund_code, " +
-                    $"fund_name, " +
-                    $"function_program_project_id, " +
-                    $"fpp_code, " +
-                    $"fpp_name, " +
-                    $"others_fpp_id, " +
-                    $"others_fpp_code, " +
-                    $"others_fpp_name, " +
-                    $"allotment_classes_id, " +
-                    $"allotment_code, " +
-                    $"allotment_name, " +
-                    $"general_ledger_accounts_id, " +
-                    $"account_code, " +
-                    $"ledger_name, " +
-                    $"is_contra_account, " +
-                    $"year, " +
-                    $"continuing, " +
-                    $"remarks, " +
-                    $"amount " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE " +
-                    $"budget_appropriations_id = @budget_appropriations_id " +
-                    $"AND date_requested <= @date_requested";
-
-                var dtObligationRequests = new DataTable();
-                return _mySqlGenericCommands.FillBySearch(query, dtObligationRequests, parameters);
-            }
-            catch (MySqlException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         public DataTable GetViewRecordsById(int Id)
         {
             try
@@ -280,6 +218,173 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        //SAAOB and SAAOBB
+        public DataTable GetViewRecords(int budgetAppropriationId, DateTime dateRequested)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId },
+                    new object[] { "@date_requested", DbType.Date, dateRequested.Date}
+                };
+
+                string query = $"SELECT " +
+                    $"obligation_request_id, " +
+                    $"obligation_account_id, " +
+                    $"obligation_no, " +
+                    $"payee, " +
+                    $"explanation, " +
+                    $"reference_no, " +
+                    $"date_requested, " +
+                    $"obligation_request_created_at, " +
+                    $"created_by, " +
+                    $"obligation_request_updated_at, " +
+                    $"updated_by, " +
+                    $"budget_appropriations_id, " +
+                    $"funds_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"function_program_project_id, " +
+                    $"fpp_code, " +
+                    $"fpp_name, " +
+                    $"others_fpp_id, " +
+                    $"others_fpp_code, " +
+                    $"others_fpp_name, " +
+                    $"allotment_classes_id, " +
+                    $"allotment_code, " +
+                    $"allotment_name, " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_code, " +
+                    $"ledger_name, " +
+                    $"is_contra_account, " +
+                    $"year, " +
+                    $"continuing, " +
+                    $"remarks, " +
+                    $"amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE " +
+                    $"budget_appropriations_id = @budget_appropriations_id " +
+                    $"AND date_requested <= @date_requested";
+
+                var dtObligationRequests = new DataTable();
+                return _mySqlGenericCommands.FillBySearch(query, dtObligationRequests, parameters);
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //DASHBOARD
+        public DataTable GetViewRecordsFPPIdFundIdDateEntry(int fppId, int fundId, DateTime dateIssued)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@function_program_project_id", DbType.Int32, fppId },
+                    new object[] { "@funds_id", DbType.Int32, fundId },
+                    new object[] { "@date_requested", DbType.Date, dateIssued.Date }
+                };
+
+                string query = $"SELECT " +
+                    $"obligation_request_id, " +
+                    $"obligation_account_id, " +
+                    $"obligation_no, " +
+                    $"payee, " +
+                    $"explanation, " +
+                    $"reference_no, " +
+                    $"date_requested, " +
+                    $"obligation_request_created_at, " +
+                    $"created_by, " +
+                    $"obligation_request_updated_at, " +
+                    $"updated_by, " +
+                    $"budget_appropriations_id, " +
+                    $"funds_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"function_program_project_id, " +
+                    $"fpp_code, " +
+                    $"fpp_name, " +
+                    $"others_fpp_id, " +
+                    $"others_fpp_code, " +
+                    $"others_fpp_name, " +
+                    $"allotment_classes_id, " +
+                    $"allotment_code, " +
+                    $"allotment_name, " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_code, " +
+                    $"ledger_name, " +
+                    $"is_contra_account, " +
+                    $"year, " +
+                    $"continuing, " +
+                    $"remarks, " +
+                    $"amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE " +
+                    $"function_program_project_id = @function_program_project_id " +
+                    $"AND funds_id = @funds_id " +
+                    $"AND date_requested <= @date_requested";
+
+                var dtObligationRequests = new DataTable();
+                return _mySqlGenericCommands.FillBySearch(query, dtObligationRequests, parameters);
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public decimal GetObligations(string fppId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@function_program_project_id", DbType.String, fppId },
+                    new object[] { "@funds_id", DbType.Int32, fundId },
+                    new object[] { "@date_requested", DbType.Date, dateIssued.Date },
+                    new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId},
+                    new object[] { "@continuing", DbType.Byte, isContinuing},
+                    new object[] { "@year", DbType.Int16, dateIssued.Year}
+                };
+
+                string fppWhereQuery = fppId == "all" ? string.Empty : "function_program_project_id = @function_program_project_id AND";
+                string isContinuingQuery = isContinuing == 0 ? "year = @year" : "year <= @year";
+
+                string query = $"SELECT COALESCE(SUM(amount), 0) AS amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE " +
+                    $"{fppWhereQuery} " +
+                    $"funds_id = @funds_id " +
+                    $"AND date_requested <= @date_requested " +
+                    $"AND allotment_classes_id = @allotment_classes_id " +
+                    $"AND continuing = @continuing " +
+                    $"AND {isContinuingQuery}";
+
+                decimal obligations = Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+                return obligations;
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         private int GetLastInsertedID()
         {
