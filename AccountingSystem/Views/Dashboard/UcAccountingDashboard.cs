@@ -46,6 +46,9 @@ namespace AccountingSystem.Views.Dashboard
             var cashDisbursementJournalCount = Factory.JEVRepository().JevCounter(4);
             var checkDisbursementJournalCount = Factory.JEVRepository().JevCounter(5);
             var authorityToDebitJournalCount = Factory.JEVRepository().JevCounter(6);
+            var jevCount = Factory.JEVRepository().CountRecords();
+            var approvedJEVCount = Factory.JEVRepository().TotalApproveJEV();
+            var pendingJEVCount = Factory.JEVRepository().TotalPendingJEV();
 
             lblGJCounter.Text = generalJournalCount.ToString();
             lblCRJCounter.Text = cashReceiptsJournalCount.ToString();
@@ -53,6 +56,10 @@ namespace AccountingSystem.Views.Dashboard
             lblCDJCounter.Text = cashDisbursementJournalCount.ToString();
             lblCkDJCounter.Text = checkDisbursementJournalCount.ToString();
             lblADADJCounter.Text = authorityToDebitJournalCount.ToString();
+            lblJEVCounter.Text = jevCount.ToString();
+            lblApprovedJEVCounter.Text = approvedJEVCount.ToString();
+            lblPendingJEVCounter.Text = pendingJEVCount.ToString();
+            
         }
 
         private void btnRefreshCounter_Click(object sender, EventArgs e)
