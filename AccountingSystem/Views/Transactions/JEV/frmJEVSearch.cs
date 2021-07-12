@@ -13,17 +13,16 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             InitializeComponent();
             this.frmJEV = frmJEV;
+
+            foreach (var item in Helper.MonthsDatasource().Values)
+                cbMonth.Items.Add(item);
+            cbMonth.SelectedIndex = DateTime.Now.Month - 1;
         }
 
         private void frmJEVSearch_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
             Helper.DatagridDefaultStyle(dgJEV);
-
-            foreach (var item in Helper.MonthsDatasource().Values)
-                cbMonth.Items.Add(item);
-
-
         }
 
         private void CheckedFund(string fundName)
@@ -126,7 +125,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                     Dictionary<string, string> jevDict = Factory.JEVRepository().GetRecordByJEV(jevNo);
                     int jevId = Convert.ToInt32(jevDict["id"]);
-
+                  
                     LoadCheckDisbursementsDataIfExist(uc, jevId);
                     LoadCashReceiptsDataIfExist(uc, jevId);
                     LoadADADisbursementDataIfExist(uc, jevId);
@@ -237,13 +236,18 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            LoadJEVList();
+        }
 
+        internal void LoadJEVList()
+        {
+           
             var jevStatus = gbSearchFilter.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Tag.ToString();
             var txtSeach = txtSearch.Text;
-            var jevMonth = Convert.ToInt32(cbMonth.SelectedIndex+1).ToString();
+            var jevMonth = Convert.ToInt32(cbMonth.SelectedIndex + 1).ToString();
             var jevYear = nudYear.Value.ToString();
 
-            string[] searchParameters = new string[4] {jevStatus, txtSeach, jevMonth, jevYear};
+            string[] searchParameters = new string[4] { jevStatus, txtSeach, jevMonth, jevYear };
 
             DataTable dtJEV = Factory.JEVRepository().FilterRecords(searchParameters);
             HelperLoadRecords.JEVDatagridView(dtJEV, dgJEV);

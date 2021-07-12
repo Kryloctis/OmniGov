@@ -211,8 +211,6 @@ namespace AccountingSystem.Views.Reports.JEV
                 reportViewer.ZoomPercent = 100;
                 reportViewer.RefreshReport();
             }
-
-
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)

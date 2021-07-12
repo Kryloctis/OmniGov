@@ -35,13 +35,13 @@ namespace AccountingSystem.Views.Dashboard
             this.lblCRJCounter = new System.Windows.Forms.Label();
             this.tlpJournals = new System.Windows.Forms.TableLayoutPanel();
             this.pnlJEV = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lnkJEV = new System.Windows.Forms.LinkLabel();
             this.lblJEVCounter = new System.Windows.Forms.Label();
             this.pnlPendingJEV = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lnkPending = new System.Windows.Forms.LinkLabel();
             this.lblPendingJEVCounter = new System.Windows.Forms.Label();
             this.pnlApprovedJEV = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lnkApproved = new System.Windows.Forms.LinkLabel();
             this.lblApprovedJEVCounter = new System.Windows.Forms.Label();
             this.pnlCDJ = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -144,7 +144,7 @@ namespace AccountingSystem.Views.Dashboard
             // pnlJEV
             // 
             this.pnlJEV.BackColor = System.Drawing.Color.White;
-            this.pnlJEV.Controls.Add(this.label6);
+            this.pnlJEV.Controls.Add(this.lnkJEV);
             this.pnlJEV.Controls.Add(this.lblJEVCounter);
             this.pnlJEV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlJEV.Location = new System.Drawing.Point(3, 121);
@@ -152,17 +152,18 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlJEV.Size = new System.Drawing.Size(150, 113);
             this.pnlJEV.TabIndex = 18;
             // 
-            // label6
+            // lnkJEV
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label6.Location = new System.Drawing.Point(2, 68);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(148, 50);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "JEV";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lnkJEV.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lnkJEV.AutoSize = true;
+            this.lnkJEV.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkJEV.Location = new System.Drawing.Point(60, 68);
+            this.lnkJEV.Name = "lnkJEV";
+            this.lnkJEV.Size = new System.Drawing.Size(24, 15);
+            this.lnkJEV.TabIndex = 15;
+            this.lnkJEV.TabStop = true;
+            this.lnkJEV.Text = "JEV";
+            this.lnkJEV.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkJEV_LinkClicked);
             // 
             // lblJEVCounter
             // 
@@ -180,7 +181,7 @@ namespace AccountingSystem.Views.Dashboard
             // pnlPendingJEV
             // 
             this.pnlPendingJEV.BackColor = System.Drawing.Color.White;
-            this.pnlPendingJEV.Controls.Add(this.label4);
+            this.pnlPendingJEV.Controls.Add(this.lnkPending);
             this.pnlPendingJEV.Controls.Add(this.lblPendingJEVCounter);
             this.pnlPendingJEV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPendingJEV.Location = new System.Drawing.Point(315, 121);
@@ -188,17 +189,18 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlPendingJEV.Size = new System.Drawing.Size(150, 113);
             this.pnlPendingJEV.TabIndex = 17;
             // 
-            // label4
+            // lnkPending
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label4.Location = new System.Drawing.Point(2, 68);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(148, 50);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Pending JEVs";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lnkPending.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lnkPending.AutoSize = true;
+            this.lnkPending.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkPending.Location = new System.Drawing.Point(36, 68);
+            this.lnkPending.Name = "lnkPending";
+            this.lnkPending.Size = new System.Drawing.Size(76, 15);
+            this.lnkPending.TabIndex = 15;
+            this.lnkPending.TabStop = true;
+            this.lnkPending.Text = "Pending JEVs";
+            this.lnkPending.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkPending_LinkClicked);
             // 
             // lblPendingJEVCounter
             // 
@@ -216,7 +218,7 @@ namespace AccountingSystem.Views.Dashboard
             // pnlApprovedJEV
             // 
             this.pnlApprovedJEV.BackColor = System.Drawing.Color.White;
-            this.pnlApprovedJEV.Controls.Add(this.label2);
+            this.pnlApprovedJEV.Controls.Add(this.lnkApproved);
             this.pnlApprovedJEV.Controls.Add(this.lblApprovedJEVCounter);
             this.pnlApprovedJEV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlApprovedJEV.Location = new System.Drawing.Point(159, 121);
@@ -224,17 +226,18 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlApprovedJEV.Size = new System.Drawing.Size(150, 113);
             this.pnlApprovedJEV.TabIndex = 16;
             // 
-            // label2
+            // lnkApproved
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label2.Location = new System.Drawing.Point(2, 68);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(148, 50);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Approved JEVs";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lnkApproved.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lnkApproved.AutoSize = true;
+            this.lnkApproved.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkApproved.Location = new System.Drawing.Point(31, 68);
+            this.lnkApproved.Name = "lnkApproved";
+            this.lnkApproved.Size = new System.Drawing.Size(84, 15);
+            this.lnkApproved.TabIndex = 14;
+            this.lnkApproved.TabStop = true;
+            this.lnkApproved.Text = "Approved JEVs";
+            this.lnkApproved.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkApproved_LinkClicked);
             // 
             // lblApprovedJEVCounter
             // 
@@ -492,8 +495,11 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlCRJ.ResumeLayout(false);
             this.tlpJournals.ResumeLayout(false);
             this.pnlJEV.ResumeLayout(false);
+            this.pnlJEV.PerformLayout();
             this.pnlPendingJEV.ResumeLayout(false);
+            this.pnlPendingJEV.PerformLayout();
             this.pnlApprovedJEV.ResumeLayout(false);
+            this.pnlApprovedJEV.PerformLayout();
             this.pnlCDJ.ResumeLayout(false);
             this.pnlCkDJ.ResumeLayout(false);
             this.pnlPRJ.ResumeLayout(false);
@@ -531,13 +537,13 @@ namespace AccountingSystem.Views.Dashboard
         private System.Windows.Forms.Label lblCDJCounter;
         private System.Windows.Forms.Button btnRefreshCounter;
         private System.Windows.Forms.Panel pnlApprovedJEV;
-        private System.Windows.Forms.Label label2;
         internal System.Windows.Forms.Label lblApprovedJEVCounter;
         private System.Windows.Forms.Panel pnlPendingJEV;
-        private System.Windows.Forms.Label label4;
         internal System.Windows.Forms.Label lblPendingJEVCounter;
         private System.Windows.Forms.Panel pnlJEV;
-        private System.Windows.Forms.Label label6;
         internal System.Windows.Forms.Label lblJEVCounter;
+        private System.Windows.Forms.LinkLabel lnkApproved;
+        private System.Windows.Forms.LinkLabel lnkPending;
+        private System.Windows.Forms.LinkLabel lnkJEV;
     }
 }

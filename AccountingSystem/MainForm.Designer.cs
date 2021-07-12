@@ -93,13 +93,13 @@ namespace AccountingSystem
             this.tabBudgetDashboard = new System.Windows.Forms.TabPage();
             this.ucBudgetDashboard1 = new AccountingSystem.Views.Dashboard.UcBudgetDashboard();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.dtAsOf = new System.Windows.Forms.DateTimePicker();
             this.cmbxFPP = new System.Windows.Forms.ComboBox();
             this.cmbxFunds = new System.Windows.Forms.ComboBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.tabAccountingDashboard = new System.Windows.Forms.TabPage();
             this.ucAccountingDashboard1 = new AccountingSystem.Views.Dashboard.UcAccountingDashboard();
-            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -693,6 +693,15 @@ namespace AccountingSystem
             this.panel1.Size = new System.Drawing.Size(1170, 29);
             this.panel1.TabIndex = 2;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(5, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 67;
+            this.button1.Text = "Detailed";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // dtAsOf
             // 
             this.dtAsOf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -758,15 +767,6 @@ namespace AccountingSystem
             this.ucAccountingDashboard1.Name = "ucAccountingDashboard1";
             this.ucAccountingDashboard1.Size = new System.Drawing.Size(1170, 456);
             this.ucAccountingDashboard1.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(5, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 67;
-            this.button1.Text = "Detailed";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
