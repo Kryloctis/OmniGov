@@ -66,6 +66,7 @@ namespace ACC.Data
                     $"WHERE " +
                     $"obligation_no LIKE @searchTxt " +
                     $"OR payee LIKE @searchTxt " +
+                    $"OR explanation LIKE @searchTxt " +
                     $"OR reference_no LIKE @searchTxt OR YEAR(date_requested) LIKE @searchTxt";
 
                 var dataTable = new DataTable();
