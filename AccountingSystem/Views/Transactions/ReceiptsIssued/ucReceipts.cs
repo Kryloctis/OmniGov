@@ -220,7 +220,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 DataRowView item = cmbreceipt.SelectedItem as DataRowView;
                 if(item != null)
                 {
-                    txtfrom.Text = NextReceipt(Convert.ToInt16(item[0]));
+                    txtfrom.Text = NextReceipt(Convert.ToInt32(item[0]));
                 }
                 
             }
@@ -233,7 +233,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 DataRowView item = cmbcollector.SelectedItem as DataRowView;
                 if(item != null)
                 {
-                    LoadReceipts(Convert.ToInt16(item[0]));
+                    LoadReceipts(Convert.ToInt32(item[0]));
                 }
              
             }
