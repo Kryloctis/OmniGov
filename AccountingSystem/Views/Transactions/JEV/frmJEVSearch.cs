@@ -19,6 +19,11 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             Helper.LoadFormIcon(this);
             Helper.DatagridDefaultStyle(dgJEV);
+
+            foreach (var item in Helper.MonthsDatasource().Values)
+                cbMonth.Items.Add(item);
+
+
         }
 
         private void CheckedFund(string fundName)
@@ -232,12 +237,15 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            DataTable dtJEV;
-            if (cbApprove.Checked)
-                dtJEV = Factory.JEVRepository().GetApprovedJEV(txtSearch.Text.Trim());
-            else
-                dtJEV = Factory.JEVRepository().GetRecordsBySearch(txtSearch.Text.Trim());
 
+            var jevStatus = gbSearchFilter.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Tag.ToString();
+            var txtSeach = txtSearch.Text;
+            var jevMonth = Convert.ToInt32(cbMonth.SelectedIndex+1).ToString();
+            var jevYear = nudYear.Value.ToString();
+
+            string[] searchParameters = new string[4] {jevStatus, txtSeach, jevMonth, jevYear};
+
+            DataTable dtJEV = Factory.JEVRepository().FilterRecords(searchParameters);
             HelperLoadRecords.JEVDatagridView(dtJEV, dgJEV);
         }
 
@@ -257,15 +265,5 @@ namespace AccountingSystem.Views.Transactions.JEV
             LoadSelectedJEV();
         }
 
-        private void cbApprove_CheckedChanged(object sender, EventArgs e)
-        {
-            DataTable dtJEV;
-            if (cbApprove.Checked)
-                dtJEV = Factory.JEVRepository().GetApprovedJEV(txtSearch.Text.Trim());
-            else
-                dtJEV = Factory.JEVRepository().GetRecordsBySearch(txtSearch.Text.Trim());
-
-            HelperLoadRecords.JEVDatagridView(dtJEV, dgJEV);
-        }
     }
 }

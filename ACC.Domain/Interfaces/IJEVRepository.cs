@@ -57,6 +57,6 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetApprovedJEV(string searchText);
 
-
+        DataTable FilterRecords(string[] searchParameters);
     }
 }
