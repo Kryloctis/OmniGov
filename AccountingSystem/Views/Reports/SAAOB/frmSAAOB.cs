@@ -21,7 +21,6 @@ namespace AccountingSystem.Views.Reports.SAAOB
             InitializeComponent();
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
-            reportViewer.ShowPrintButton = false;
             panel2.Controls.Add(reportViewer);
             panelConfig.Enabled = false;
         }
@@ -214,28 +213,6 @@ namespace AccountingSystem.Views.Reports.SAAOB
             LoadFunds();
         }
 
-
-        private void chkBxAdvanceMode_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkBxAdvanceMode.Checked)
-            {
-                reportViewer.SetDisplayMode(DisplayMode.Normal);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-            }
-
-            else
-            {
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-            }
-        }
-
-        private void btnPrint_Click(object sender, EventArgs e)
-        {
-            reportViewer.PrintDialog();
-        }
 
         //FILTER
         private void radBtn1_CheckedChanged(object sender, EventArgs e)
