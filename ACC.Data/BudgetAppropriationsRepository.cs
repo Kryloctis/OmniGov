@@ -275,69 +275,6 @@ namespace ACC.Data
             }
         }
 
-        //DASHBOARD
-        public DataTable GetViewRecords(int fppId, int fundId, DateTime dateEntry)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@fpp_id", DbType.Int32, fppId},
-                    new object[] { "@funds_id", DbType.Int32, fundId},
-                    new object[] { "@date_entry", DbType.Date, dateEntry.Date},
-                };
-
-
-                string query = $"SELECT " +
-                     $"id, " +
-                     $"funds_id, " +
-                     $"fund_code, " +
-                     $"fund_name, " +
-                     $"fpp_id, " +
-                     $"fpp_code, " +
-                     $"fpp_name, " +
-                     $"fpp_is_special, " +
-                     $"functional_classification_service_id, " +
-                     $"functional_classification_service_name, " +
-                     $"functional_classification_id, " +
-                     $"functional_classification_sector_code, " +
-                     $"functional_classification_sector_name, " +
-                     $"others_fpp_id, " +
-                     $"others_fpp_code, " +
-                     $"others_fpp_name, " +
-                     $"allotment_class_id, " +
-                     $"allotment_class_code, " +
-                     $"allotment_class_name, " +
-                     $"general_ledger_accounts_id, " +
-                     $"general_ledger_accounts_code, " +
-                     $"general_ledger_accounts_name, " +
-                     $"account_code, " +
-                     $"date_entry, " +
-                     $"year, " +
-                     $"amount, " +
-                     $"continuing, " +
-                     $"remarks, " +
-                     $"created_at, " +
-                     $"updated_at " +
-                     $"FROM {viewTableName} " +
-                     $"WHERE " +
-                     $"fpp_id = @fpp_id " +
-                     $"AND funds_id = @funds_id " +
-                     $"AND date_entry <= @date_entry ";
-
-                var dataTable = new DataTable();
-                return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
-            }
-            catch (MySqlException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         //SAAOB
         public DataTable GetViewRecords(int fundId, DateTime dateEntry, short year, byte isContinuing, byte isSpecial)
         {
@@ -404,6 +341,114 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        //DASHBOARD
+        public DataTable GetViewRecordsFPPIdFundIdDateEntry(int fppId, int fundId, DateTime dateEntry)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@fpp_id", DbType.Int32, fppId},
+                    new object[] { "@funds_id", DbType.Int32, fundId},
+                    new object[] { "@date_entry", DbType.Date, dateEntry.Date},
+                    new object[] { "@year", DbType.Int16, dateEntry.Year}
+                };
+
+
+                string query = $"SELECT " +
+                     $"id, " +
+                     $"funds_id, " +
+                     $"fund_code, " +
+                     $"fund_name, " +
+                     $"fpp_id, " +
+                     $"fpp_code, " +
+                     $"fpp_name, " +
+                     $"fpp_is_special, " +
+                     $"functional_classification_service_id, " +
+                     $"functional_classification_service_name, " +
+                     $"functional_classification_id, " +
+                     $"functional_classification_sector_code, " +
+                     $"functional_classification_sector_name, " +
+                     $"others_fpp_id, " +
+                     $"others_fpp_code, " +
+                     $"others_fpp_name, " +
+                     $"allotment_class_id, " +
+                     $"allotment_class_code, " +
+                     $"allotment_class_name, " +
+                     $"general_ledger_accounts_id, " +
+                     $"general_ledger_accounts_code, " +
+                     $"general_ledger_accounts_name, " +
+                     $"account_code, " +
+                     $"date_entry, " +
+                     $"year, " +
+                     $"amount, " +
+                     $"continuing, " +
+                     $"remarks, " +
+                     $"created_at, " +
+                     $"updated_at " +
+                     $"FROM {viewTableName} " +
+                     $"WHERE " +
+                     $"fpp_id = @fpp_id " +
+                     $"AND funds_id = @funds_id " +
+                     $"AND date_entry <= @date_entry " +
+                     $"AND year = @year";
+
+                var dataTable = new DataTable();
+                return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public decimal GetBudgetAppropriations(string fppId, int fundId, DateTime dateEntry, int allotment_classes_id, byte isContinuing)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@fpp_id", DbType.String, fppId},
+                    new object[] { "@funds_id", DbType.Int32, fundId},
+                    new object[] { "@date_entry", DbType.Date, dateEntry.Date},
+                    new object[] { "@allotment_class_id", DbType.Int32, allotment_classes_id },
+                    new object[] { "@continuing", DbType.Byte, isContinuing},
+                    new object[] { "@year", DbType.Int16, dateEntry.Year}
+                };
+
+                string fppWhereQuery = fppId == "all" ? string.Empty : "fpp_id = @fpp_id AND";
+                string isContinuingQuery = isContinuing == 0 ? "year = @year" : "year <= @year";
+
+                string query = $"SELECT COALESCE(SUM(amount), 0) AS amount " +
+                     $"FROM {viewTableName} " +
+                     $"WHERE " +
+                     $"{fppWhereQuery} " +
+                     $"funds_id = @funds_id " +
+                     $"AND date_entry <= @date_entry " +
+                     $"AND allotment_class_id = @allotment_class_id " +
+                     $"AND continuing = @continuing " +
+                     $"AND {isContinuingQuery}";
+
+
+                decimal budgetAppropriations = Convert.ToDecimal(mySqlGenericCommands.ExecuteScalar(query, parameters));
+
+                return budgetAppropriations;
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
 
         public DataTable GetViewRecordsByIds(BudgetAppropriationsModel entity)
@@ -942,6 +987,7 @@ namespace ACC.Data
             return false;
         }
 
+      
         #endregion Validations
 
     }

@@ -33,10 +33,8 @@ namespace AccountingSystem.Views.Dashboard
             this.ucBudgetCardsCY = new AccountingSystem.Views.Dashboard.BudgetDashboard.UcBudgetCardsByAllotmentClass();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel13 = new System.Windows.Forms.Panel();
-            this.lblGrandTotalAllotmentBalance = new System.Windows.Forms.Label();
             this.label104 = new System.Windows.Forms.Label();
             this.panel12 = new System.Windows.Forms.Panel();
-            this.lblGrandTotalAppropriationBalance = new System.Windows.Forms.Label();
             this.label103 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -50,10 +48,10 @@ namespace AccountingSystem.Views.Dashboard
             this.label8 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblGrandTotalAllotmentBalance = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblGrandTotalAppropriationBalance = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
             this.lblGrandTotalObligations = new System.Windows.Forms.Label();
@@ -123,23 +121,12 @@ namespace AccountingSystem.Views.Dashboard
             // panel13
             // 
             this.panel13.BackColor = System.Drawing.Color.White;
-            this.panel13.Controls.Add(this.lblGrandTotalAllotmentBalance);
             this.panel13.Controls.Add(this.label104);
             this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel13.Location = new System.Drawing.Point(162, 3);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(35, 94);
             this.panel13.TabIndex = 4;
-            // 
-            // lblGrandTotalAllotmentBalance
-            // 
-            this.lblGrandTotalAllotmentBalance.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblGrandTotalAllotmentBalance.Location = new System.Drawing.Point(5, 24);
-            this.lblGrandTotalAllotmentBalance.Margin = new System.Windows.Forms.Padding(5);
-            this.lblGrandTotalAllotmentBalance.Name = "lblGrandTotalAllotmentBalance";
-            this.lblGrandTotalAllotmentBalance.Size = new System.Drawing.Size(82, 15);
-            this.lblGrandTotalAllotmentBalance.TabIndex = 2;
-            this.lblGrandTotalAllotmentBalance.Text = "000,000,000.00";
             // 
             // label104
             // 
@@ -158,23 +145,12 @@ namespace AccountingSystem.Views.Dashboard
             // panel12
             // 
             this.panel12.BackColor = System.Drawing.Color.White;
-            this.panel12.Controls.Add(this.lblGrandTotalAppropriationBalance);
             this.panel12.Controls.Add(this.label103);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel12.Location = new System.Drawing.Point(122, 3);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(34, 94);
             this.panel12.TabIndex = 3;
-            // 
-            // lblGrandTotalAppropriationBalance
-            // 
-            this.lblGrandTotalAppropriationBalance.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblGrandTotalAppropriationBalance.Location = new System.Drawing.Point(5, 24);
-            this.lblGrandTotalAppropriationBalance.Margin = new System.Windows.Forms.Padding(5);
-            this.lblGrandTotalAppropriationBalance.Name = "lblGrandTotalAppropriationBalance";
-            this.lblGrandTotalAppropriationBalance.Size = new System.Drawing.Size(82, 15);
-            this.lblGrandTotalAppropriationBalance.TabIndex = 2;
-            this.lblGrandTotalAppropriationBalance.Text = "000,000,000.00";
             // 
             // label103
             // 
@@ -339,7 +315,7 @@ namespace AccountingSystem.Views.Dashboard
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.lblGrandTotalAllotmentBalance);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(806, 3);
@@ -347,15 +323,15 @@ namespace AccountingSystem.Views.Dashboard
             this.panel2.Size = new System.Drawing.Size(197, 46);
             this.panel2.TabIndex = 4;
             // 
-            // label1
+            // lblGrandTotalAllotmentBalance
             // 
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label1.Location = new System.Drawing.Point(5, 24);
-            this.label1.Margin = new System.Windows.Forms.Padding(5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 15);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "0.00";
+            this.lblGrandTotalAllotmentBalance.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblGrandTotalAllotmentBalance.Location = new System.Drawing.Point(5, 24);
+            this.lblGrandTotalAllotmentBalance.Margin = new System.Windows.Forms.Padding(5);
+            this.lblGrandTotalAllotmentBalance.Name = "lblGrandTotalAllotmentBalance";
+            this.lblGrandTotalAllotmentBalance.Size = new System.Drawing.Size(82, 15);
+            this.lblGrandTotalAllotmentBalance.TabIndex = 2;
+            this.lblGrandTotalAllotmentBalance.Text = "0.00";
             // 
             // label2
             // 
@@ -374,7 +350,7 @@ namespace AccountingSystem.Views.Dashboard
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.White;
-            this.panel4.Controls.Add(this.label3);
+            this.panel4.Controls.Add(this.lblGrandTotalAppropriationBalance);
             this.panel4.Controls.Add(this.label4);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(605, 3);
@@ -382,15 +358,15 @@ namespace AccountingSystem.Views.Dashboard
             this.panel4.Size = new System.Drawing.Size(195, 46);
             this.panel4.TabIndex = 3;
             // 
-            // label3
+            // lblGrandTotalAppropriationBalance
             // 
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label3.Location = new System.Drawing.Point(5, 24);
-            this.label3.Margin = new System.Windows.Forms.Padding(5);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "0.00";
+            this.lblGrandTotalAppropriationBalance.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblGrandTotalAppropriationBalance.Location = new System.Drawing.Point(5, 24);
+            this.lblGrandTotalAppropriationBalance.Margin = new System.Windows.Forms.Padding(5);
+            this.lblGrandTotalAppropriationBalance.Name = "lblGrandTotalAppropriationBalance";
+            this.lblGrandTotalAppropriationBalance.Size = new System.Drawing.Size(82, 15);
+            this.lblGrandTotalAppropriationBalance.TabIndex = 2;
+            this.lblGrandTotalAppropriationBalance.Text = "0.00";
             // 
             // label4
             // 
@@ -551,6 +527,7 @@ namespace AccountingSystem.Views.Dashboard
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "UcBudgetDashboard";
             this.Size = new System.Drawing.Size(1009, 501);
+            this.Load += new System.EventHandler(this.UcBudgetDashboard_Load);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
             this.panel12.ResumeLayout(false);
@@ -572,10 +549,8 @@ namespace AccountingSystem.Views.Dashboard
         internal BudgetDashboard.UcBudgetCardsByAllotmentClass ucBudgetCardsCON;
         internal BudgetDashboard.UcBudgetCardsByAllotmentClass ucBudgetCardsCY;
         internal System.Windows.Forms.Panel panel13;
-        internal System.Windows.Forms.Label lblGrandTotalAllotmentBalance;
         internal System.Windows.Forms.Label label104;
         internal System.Windows.Forms.Panel panel12;
-        internal System.Windows.Forms.Label lblGrandTotalAppropriationBalance;
         internal System.Windows.Forms.Label label103;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         internal System.Windows.Forms.Label label9;
@@ -590,10 +565,10 @@ namespace AccountingSystem.Views.Dashboard
         internal System.Windows.Forms.Label label8;
         internal System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         internal System.Windows.Forms.Panel panel2;
-        internal System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.Label lblGrandTotalAllotmentBalance;
         internal System.Windows.Forms.Label label2;
         internal System.Windows.Forms.Panel panel4;
-        internal System.Windows.Forms.Label label3;
+        internal System.Windows.Forms.Label lblGrandTotalAppropriationBalance;
         internal System.Windows.Forms.Label label4;
         internal System.Windows.Forms.Panel panel11;
         internal System.Windows.Forms.Label lblGrandTotalObligations;

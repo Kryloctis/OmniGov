@@ -99,6 +99,7 @@ namespace AccountingSystem
             this.btnRefresh = new System.Windows.Forms.Button();
             this.tabAccountingDashboard = new System.Windows.Forms.TabPage();
             this.ucAccountingDashboard1 = new AccountingSystem.Views.Dashboard.UcAccountingDashboard();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -136,14 +137,14 @@ namespace AccountingSystem
             // menuLogout
             // 
             this.menuLogout.Name = "menuLogout";
-            this.menuLogout.Size = new System.Drawing.Size(180, 22);
+            this.menuLogout.Size = new System.Drawing.Size(157, 22);
             this.menuLogout.Text = "Logout";
             this.menuLogout.Click += new System.EventHandler(this.menuLogout_Click);
             // 
             // menuExitApp
             // 
             this.menuExitApp.Name = "menuExitApp";
-            this.menuExitApp.Size = new System.Drawing.Size(180, 22);
+            this.menuExitApp.Size = new System.Drawing.Size(157, 22);
             this.menuExitApp.Text = "Exit Application";
             this.menuExitApp.Click += new System.EventHandler(this.menuExitApp_Click);
             // 
@@ -396,14 +397,14 @@ namespace AccountingSystem
             // menuGeneralLedgerReport
             // 
             this.menuGeneralLedgerReport.Name = "menuGeneralLedgerReport";
-            this.menuGeneralLedgerReport.Size = new System.Drawing.Size(180, 22);
+            this.menuGeneralLedgerReport.Size = new System.Drawing.Size(176, 22);
             this.menuGeneralLedgerReport.Text = "General Ledger...";
             this.menuGeneralLedgerReport.Click += new System.EventHandler(this.MenuGeneralLedgerReport_Click);
             // 
             // menuSubsidiaryLedgerReport
             // 
             this.menuSubsidiaryLedgerReport.Name = "menuSubsidiaryLedgerReport";
-            this.menuSubsidiaryLedgerReport.Size = new System.Drawing.Size(180, 22);
+            this.menuSubsidiaryLedgerReport.Size = new System.Drawing.Size(176, 22);
             this.menuSubsidiaryLedgerReport.Text = "Subsidiary Ledger...";
             this.menuSubsidiaryLedgerReport.Click += new System.EventHandler(this.menuSubsidiaryLedgerReport_Click);
             // 
@@ -681,6 +682,7 @@ namespace AccountingSystem
             // panel1
             // 
             this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.dtAsOf);
             this.panel1.Controls.Add(this.cmbxFPP);
             this.panel1.Controls.Add(this.cmbxFunds);
@@ -735,6 +737,7 @@ namespace AccountingSystem
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // tabAccountingDashboard
             // 
@@ -755,6 +758,15 @@ namespace AccountingSystem
             this.ucAccountingDashboard1.Name = "ucAccountingDashboard1";
             this.ucAccountingDashboard1.Size = new System.Drawing.Size(1170, 456);
             this.ucAccountingDashboard1.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(5, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 67;
+            this.button1.Text = "Detailed";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -871,6 +883,7 @@ namespace AccountingSystem
         internal System.Windows.Forms.ComboBox cmbxFunds;
         internal System.Windows.Forms.Button btnRefresh;
         private Views.Dashboard.UcAccountingDashboard ucAccountingDashboard1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

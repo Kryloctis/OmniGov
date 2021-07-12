@@ -51,98 +51,128 @@ namespace AccountingSystem
 
         #region DASHBOARD
        
-            #region COMBOBOXES
+        #region COMBOBOXES
 
-            //FUNDS
-            internal void LoadFunds()
+        //FUNDS
+        internal void LoadFunds()
+        {
+            cmbxFunds.DataSource = Factory.FundsRepository().GetRecords();
+            cmbxFunds.DisplayMember = "fund_name";
+            cmbxFunds.ValueMember = "id";
+        }
+
+
+        //FPP
+        private DataTable DataTableFPP()
+        {
+            DataTable dtFPP;
+
+            if (string.IsNullOrEmpty(cmbxFPP.Text))
+                dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
+            else
+                dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text);
+
+            return dtFPP;
+        }
+
+        internal void LoadFPP()
+        {
+            try
             {
-                cmbxFunds.DataSource = Factory.FundsRepository().GetRecords();
-                cmbxFunds.DisplayMember = "fund_name";
-                cmbxFunds.ValueMember = "id";
-            }
+                cmbxFPP.DroppedDown = false;
+                Cursor.Current = Cursors.Default;
 
+                if (DataTableFPP().Rows.Count == 0) return;
 
-            //FPP
-            private DataTable DataTableFPP()
-            {
-                DataTable dtFPP;
+                var fppDict = new Dictionary<string, string>();
 
-                if (string.IsNullOrEmpty(cmbxFPP.Text))
-                    dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
-                else
-                    dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text);
-
-                return dtFPP;
-            }
-
-            internal void LoadFPP()
-            {
-                try
+                fppDict.Add("all", "All");
+                foreach (DataRow item in DataTableFPP().Rows)
                 {
-                    cmbxFPP.DroppedDown = false;
-                    Cursor.Current = Cursors.Default;
+                    string fppId = item["id"].ToString();
+                    string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
 
-                    if (DataTableFPP().Rows.Count == 0) return;
-
-                    var fppDict = new Dictionary<string, string>();
-
-                    fppDict.Add("all", "All");
-                    foreach (DataRow item in DataTableFPP().Rows)
-                    {
-                        string fppId = item["id"].ToString();
-                        string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
-
-                        fppDict.Add(fppId, fppName);
-                    }
-
-                    cmbxFPP.DataSource = new BindingSource(fppDict, null);
-                    cmbxFPP.DisplayMember = "value";
-                    cmbxFPP.ValueMember = "key";
-                    cmbxFPP.DropDownHeight = 400;
+                    fppDict.Add(fppId, fppName);
                 }
-                catch (Exception ex)
-                {
-                    Helper.MessageBoxError(ex.Message);
-                }
+
+                cmbxFPP.DataSource = new BindingSource(fppDict, null);
+                cmbxFPP.DisplayMember = "value";
+                cmbxFPP.ValueMember = "key";
+                cmbxFPP.DropDownHeight = 400;
             }
-
-            private void CmbxFPP_TextChanged(object sender, EventArgs e)
+            catch (Exception ex)
             {
-                if (string.IsNullOrEmpty(cmbxFPP.Text))
-                {
-                    cmbxFPP.TextChanged -= new EventHandler(CmbxFPP_TextChanged);
-                    LoadFPP();
-                    cmbxFPP.SelectedIndex = -1;
-                    cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TextChanged);
-                }
+                Helper.MessageBoxError(ex.Message);
             }
+        }
 
-            private void CmbxFPP_SelectedValueChanged(object sender, EventArgs e)
+        private void CmbxFPP_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbxFPP.Text))
             {
-            }
-
-            private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
-            {
-                if (e.KeyCode == Keys.F1 && cmbxFPP.FindStringExact(cmbxFPP.Text) == -1 && !string.IsNullOrEmpty(cmbxFPP.Text))
-                {
-                    LoadFPP();
-                    cmbxFPP.DroppedDown = true;
-                }
-            }
-
-            #endregion
-
-            private void LoadDashboard() 
-            {
-                //BUDGET
-                LoadFunds();
+                cmbxFPP.TextChanged -= new EventHandler(CmbxFPP_TextChanged);
                 LoadFPP();
+                cmbxFPP.SelectedIndex = -1;
                 cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TextChanged);
-                cmbxFPP.SelectedValueChanged += new EventHandler(CmbxFPP_SelectedValueChanged);  
-
-                //ACCOUNTING
-                ucAccountingDashboard1.userDict = userDict;
             }
+        }
+
+        private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1 && cmbxFPP.FindStringExact(cmbxFPP.Text) == -1 && !string.IsNullOrEmpty(cmbxFPP.Text))
+            {
+                LoadFPP();
+                cmbxFPP.DroppedDown = true;
+            }
+        }
+
+        #endregion
+
+        #region BUDGET DASHBOARD
+
+        private void LoadBudgetDashboardContents()
+        {
+            try
+            {
+                string fppId = cmbxFPP.SelectedValue.ToString();
+                int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+                DateTime dateAsOf = dtAsOf.Value;
+
+                ucBudgetDashboard1.fppId = fppId;
+                ucBudgetDashboard1.fundId = fundId;
+                ucBudgetDashboard1.DateAsOf = dateAsOf;
+                ucBudgetDashboard1.LoadInformation();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.StackTrace);
+            }
+        }
+
+        private void LoadBudgetDashboardComboboxes()
+        {
+            LoadFPP();
+            LoadFunds();
+            cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TextChanged);
+
+            LoadBudgetDashboardContents();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadBudgetDashboardContents();
+        }
+
+        #endregion
+
+        #region ACCOUNTING DASHBOARD
+
+        private void LoadAccountingDashboard()
+        {
+            ucAccountingDashboard1.userDict = userDict;
+        } 
+
+        #endregion
 
         #endregion
 
@@ -313,7 +343,8 @@ namespace AccountingSystem
         private void MainForm_Load(object sender, EventArgs e)
         {
             LoadLoggedInUser();
-            LoadDashboard();
+            LoadBudgetDashboardComboboxes();
+            LoadAccountingDashboard();
             ValidatePermissions();
         }
 
