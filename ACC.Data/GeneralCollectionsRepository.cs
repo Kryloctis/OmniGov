@@ -381,7 +381,7 @@ namespace ACC.Data
                 var dtpc = new DataTable();
                 return _dbGenericCommands.Fill(query, dtpc);
             }
-            catch (Exception)
+            catch (Exception) 
             {
                 throw;
             }

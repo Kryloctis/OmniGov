@@ -1168,7 +1168,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=IIf(Fields!receiptfrom.Value=1,(Fields!receiptto.Value-Fields!receiptfrom.Value)+1,Fields!receiptto.Value-Fields!receiptfrom.Value)</Value>
+                                  <Value>=IIF(Fields!issuefrom.Value=1,(Fields!issueto.Value-Fields!issuefrom.Value)+1,Fields!issueto.Value-Fields!issuefrom.Value)</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -1193,14 +1193,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="receiptfrom">
+                        <Textbox Name="issuefrom1">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!receiptfrom.Value</Value>
+                                  <Value>=Fields!issuefrom.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -1209,7 +1209,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>receiptfrom</rd:DefaultName>
+                          <rd:DefaultName>issuefrom1</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -1225,14 +1225,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="receiptto">
+                        <Textbox Name="issueto1">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!receiptto.Value</Value>
+                                  <Value>=Fields!issueto.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -1241,7 +1241,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>receiptto</rd:DefaultName>
+                          <rd:DefaultName>issueto1</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -1264,7 +1264,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=IIF(Fields!issuefrom.Value=1,(Fields!issueto.Value-Fields!issuefrom.Value)+1,Fields!issueto.Value-Fields!issuefrom.Value)</Value>
+                                  <Value />
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -1296,7 +1296,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!issuefrom.Value</Value>
+                                  <Value />
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -1328,7 +1328,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!issueto.Value</Value>
+                                  <Value />
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -1456,7 +1456,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!receiptto.Value-(Fields!usedto.Value+1)</Value>
+                                  <Value>=Fields!issueto.Value-(Fields!usedto.Value+1)</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -1513,14 +1513,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="receiptto1">
+                        <Textbox Name="issueto2">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!receiptto.Value</Value>
+                                  <Value>=Fields!issueto.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -1529,7 +1529,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>receiptto1</rd:DefaultName>
+                          <rd:DefaultName>issueto2</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -1586,7 +1586,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIf(Fields!receiptfrom.Value=1,(Fields!receiptto.Value-Fields!receiptfrom.Value)+1,Fields!receiptto.Value-Fields!receiptfrom.Value))</Value>
+                                  <Value>=SUM(IIF(Fields!issuefrom.Value=1,(Fields!issueto.Value-Fields!issuefrom.Value)+1,Fields!issueto.Value-Fields!issuefrom.Value))</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -1688,7 +1688,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!issuefrom.Value=1,(Fields!issueto.Value-Fields!issuefrom.Value)+1,Fields!issueto.Value-Fields!issuefrom.Value))</Value>
+                                  <Value />
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -1892,7 +1892,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(Fields!receiptto.Value-(Fields!usedto.Value+1))</Value>
+                                  <Value>=SUM(Fields!issueto.Value-(Fields!usedto.Value+1))</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
