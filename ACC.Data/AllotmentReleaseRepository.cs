@@ -172,9 +172,8 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
-
-
         
+
         private int GetLastInsertedID()
         {
             try
@@ -293,6 +292,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
 
         //VALIDATIONS
 
@@ -508,5 +508,154 @@ namespace ACC.Data
             }
         }
 
+        public DataTable GetViewRecords()
+        {
+            try
+            {
+                string query = $"SELECT " +
+                    $"allotment_release_id, " +
+                    $"allotment_account_id, " +
+                    $"aro_no, " +
+                    $"purpose, " +
+                    $"date_issued, " +
+                    $"allotment_release_created_at, " +
+                    $"allotment_release_updated_at, " +
+                    $"budget_appropriations_id, " +
+                    $"funds_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"function_program_project_id, " +
+                    $"fpp_code, " +
+                    $"fpp_name, " +
+                    $"is_special, " +
+                    $"others_fpp_id, " +
+                    $"others_fpp_code, " +
+                    $"others_fpp_name, " +
+                    $"allotment_classes_id, " +
+                    $"allotment_code, " +
+                    $"allotment_name, " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_code, " +
+                    $"ledger_name, " +
+                    $"date_entry, " +
+                    $"year, " +
+                    $"continuing, " +
+                    $"remarks, " +
+                    $"amount " +
+                    $"FROM {viewTableName} ";
+
+                var dataTable = new DataTable();
+                return _mySqlGenericCommands.Fill(query, dataTable);
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        //DASHBOARD
+        public DataTable GetViewRecordsFPPIdFundIdDateEntry(int fppId, int fundId, DateTime dateIssued)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@function_program_project_id", DbType.Int32, fppId },
+                    new object[] { "@funds_id", DbType.Int32, fundId },
+                    new object[] { "@date_issued", DbType.Date, dateIssued.Date },
+                };
+
+
+                string query = $"SELECT " +
+                    $"allotment_release_id, " +
+                    $"allotment_account_id, " +
+                    $"aro_no, " +
+                    $"purpose, " +
+                    $"date_issued, " +
+                    $"allotment_release_created_at, " +
+                    $"allotment_release_updated_at, " +
+                    $"budget_appropriations_id, " +
+                    $"funds_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"function_program_project_id, " +
+                    $"fpp_code, " +
+                    $"fpp_name, " +
+                    $"is_special, " +
+                    $"others_fpp_id, " +
+                    $"others_fpp_code, " +
+                    $"others_fpp_name, " +
+                    $"allotment_classes_id, " +
+                    $"allotment_code, " +
+                    $"allotment_name, " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_code, " +
+                    $"ledger_name, " +
+                    $"date_entry, " +
+                    $"year, " +
+                    $"continuing, " +
+                    $"remarks, " +
+                    $"amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE function_program_project_id = @function_program_project_id " +
+                    $"AND funds_id = @funds_id " +
+                    $"AND date_issued <= @date_issued";
+
+                var dataTable = new DataTable();
+                return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public decimal GetAllotments(string fppId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@function_program_project_id", DbType.String, fppId },
+                    new object[] { "@funds_id", DbType.Int32, fundId },
+                    new object[] { "@date_issued", DbType.Date, dateIssued.Date },
+                    new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId},
+                    new object[] { "@continuing", DbType.Byte, isContinuing},
+                    new object[] { "@year", DbType.Int16, dateIssued.Year}
+                };
+
+                string fppWhereQuery = fppId == "all" ? string.Empty : "function_program_project_id = @function_program_project_id AND";
+                string isContinuingQuery = isContinuing == 0 ? "year = @year" : "year <= @year";
+
+                string query = $"SELECT COALESCE(SUM(amount), 0) AS amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE {fppWhereQuery} " +
+                    $"funds_id = @funds_id " +
+                    $"AND date_issued <= @date_issued " +
+                    $"AND allotment_classes_id = @allotment_classes_id " +
+                    $"AND continuing = @continuing " +
+                    $"AND {isContinuingQuery}";
+
+                decimal allotments = Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+                return allotments;
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -31,6 +31,7 @@ using AccountingSystem.Views.Manage.Receipts;
 using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using AccountingSystem.Views.Reports.Cashbook;
 using AccountingSystem.Views.Reports.JEV;
+using System.Data;
 
 namespace AccountingSystem
 {
@@ -42,28 +43,138 @@ namespace AccountingSystem
         public MainForm(LoginForm _loginForm)
         {
             InitializeComponent();
-            menuReportGJ.Click += new EventHandler(MenuReportGeneralJournal_Click);
-            menuReportCDJ.Click += new EventHandler(MenuReportCashDisbursementsJournal_Click);
-            menuReportCkDJ.Click += new EventHandler(MenuReportCheckDisbursementsJournal_Click);
-            menuObligationRequest.Click += new EventHandler(MenuObligationRequest_Click);
-            menuReportCRJ.Click += new EventHandler(MenuReportCashReceiptsJournal_Click);
-            menuReportPRJ.Click += new EventHandler(MenuReportProcurementsReceivedJournal_Click);
-            menuReportADADJ.Click += new EventHandler(MenuReportADADisbursementsJournal_Click);
-            menuSAAOB.Click += new EventHandler(MenuSAAOB_Click);
-            menuSAAOBB.Click += new EventHandler(MenuSAAOBB_Click);
-            menuGeneralLedgerReport.Click += new EventHandler(MenuGeneralLedgerReport_Click);
-            btnJournalEntry.Click += new EventHandler(BtnJournalEntry_Click);
-            btnObligationRequest.Click += new EventHandler(BtnObligationRequest_Click);
-            menuDisbursingOfficer.Click += new EventHandler(MenuDisbursingOffice_Click);
-            btnIssueCheck.Click += new EventHandler(BtnRCI_Click);
-            menuLogout.Click += new EventHandler(menuLogout_Click);
-            menuExitApp.Click += new EventHandler(menuExitApp_Click);
-            menuSubsidiaryLedgerReport.Click += new EventHandler(menuSubsidiaryLedgerReport_Click);
+            Helper.LoadFormIcon(this);
 
             userDict = Helper.LoggedInUserData();
             loginForm = _loginForm;
         }
 
+        #region DASHBOARD
+       
+        #region COMBOBOXES
+
+        //FUNDS
+        internal void LoadFunds()
+        {
+            cmbxFunds.DataSource = Factory.FundsRepository().GetRecords();
+            cmbxFunds.DisplayMember = "fund_name";
+            cmbxFunds.ValueMember = "id";
+        }
+
+
+        //FPP
+        private DataTable DataTableFPP()
+        {
+            DataTable dtFPP;
+
+            if (string.IsNullOrEmpty(cmbxFPP.Text))
+                dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
+            else
+                dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text);
+
+            return dtFPP;
+        }
+
+        internal void LoadFPP()
+        {
+            try
+            {
+                cmbxFPP.DroppedDown = false;
+                Cursor.Current = Cursors.Default;
+
+                if (DataTableFPP().Rows.Count == 0) return;
+
+                var fppDict = new Dictionary<string, string>();
+
+                fppDict.Add("all", "All");
+                foreach (DataRow item in DataTableFPP().Rows)
+                {
+                    string fppId = item["id"].ToString();
+                    string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
+
+                    fppDict.Add(fppId, fppName);
+                }
+
+                cmbxFPP.DataSource = new BindingSource(fppDict, null);
+                cmbxFPP.DisplayMember = "value";
+                cmbxFPP.ValueMember = "key";
+                cmbxFPP.DropDownHeight = 400;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void CmbxFPP_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbxFPP.Text))
+            {
+                cmbxFPP.TextChanged -= new EventHandler(CmbxFPP_TextChanged);
+                LoadFPP();
+                cmbxFPP.SelectedIndex = -1;
+                cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TextChanged);
+            }
+        }
+
+        private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1 && cmbxFPP.FindStringExact(cmbxFPP.Text) == -1 && !string.IsNullOrEmpty(cmbxFPP.Text))
+            {
+                LoadFPP();
+                cmbxFPP.DroppedDown = true;
+            }
+        }
+
+        #endregion
+
+        #region BUDGET DASHBOARD
+
+        private void LoadBudgetDashboardContents()
+        {
+            try
+            {
+                string fppId = cmbxFPP.SelectedValue.ToString();
+                int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+                DateTime dateAsOf = dtAsOf.Value;
+
+                ucBudgetDashboard1.fppId = fppId;
+                ucBudgetDashboard1.fundId = fundId;
+                ucBudgetDashboard1.DateAsOf = dateAsOf;
+                ucBudgetDashboard1.LoadInformation();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.StackTrace);
+            }
+        }
+
+        private void LoadBudgetDashboardComboboxes()
+        {
+            LoadFPP();
+            LoadFunds();
+            cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TextChanged);
+
+            LoadBudgetDashboardContents();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadBudgetDashboardContents();
+        }
+
+        #endregion
+
+        #region ACCOUNTING DASHBOARD
+
+        private void LoadAccountingDashboard()
+        {
+            ucAccountingDashboard1.userDict = userDict;
+        } 
+
+        #endregion
+
+        #endregion
 
         private void LoadLoggedInUser()
         {
@@ -110,7 +221,6 @@ namespace AccountingSystem
             {
                 btnJournalEntry.Visible = false;
                 menuJEV.Visible = false;
-                menuObligationRequest.Visible = false;
             }
 
             if (!Helper.HasPermission("Transaction Obligation Request"))
@@ -205,72 +315,37 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Report Bank Cashbook"))
                 menuBankCashBook.Visible = false;
-        }
 
-        private void RadioButtonVisibility()
-        {
-            switch (userDict["office"])
+            if (!Helper.HasPermission("Budget Dashboard"))
             {
-                case "Budget":
-                    radBtnBudget.Visible = true;
-                    radBtnAccounting.Visible = false;
-                    radBtnBudget.Checked = true;
-                    break;
-                case "Accounting":
-                    radBtnBudget.Visible = true;
-                    radBtnAccounting.Visible = true;
-                    radBtnBudget.Checked = true;
-                    break;
-                case "SysAdmin":
-                    radBtnBudget.Visible = true;
-                    radBtnAccounting.Visible = true;
-                    radBtnBudget.Checked = true;
-                    break;
-                default:
-                    radBtnBudget.Checked = false;
-                    radBtnBudget.Visible = false;
-                    radBtnBudget.Visible = false;
-                    radBtnAccounting.Visible = false;
-                    break;
+                radBtnBudget.Visible = false;
+                tabControl1.TabPages.Remove(tabBudgetDashboard);
             }
 
-            LoadDashboard();
-        }
-
-        private void LoadDashboard()
-        {
-            Cursor.Current = Cursors.WaitCursor;
-            var userControl = new UserControl();
-
-            if (radBtnBudget.Checked)
-                userControl = new UcBudgetDashboard();
-            else if(radBtnAccounting.Checked)
-                userControl = new UcAccountingDashboard(Helper.LoggedInUserData());
-            else
-                panel1.Controls.Clear();
-
-            panel1.Controls.Clear();
-            panel1.Controls.Add(userControl);
-            Cursor.Current = Cursors.Default;
+            if (!Helper.HasPermission("Accounting Dashboard"))
+            {
+                radBtnAccounting.Visible = false;
+                tabControl1.TabPages.Remove(tabAccountingDashboard);
+            }
         }
 
         private void radBtnBudget_CheckedChanged(object sender, EventArgs e)
         {
-            LoadDashboard();
+            tabControl1.SelectedTab = tabBudgetDashboard;
         }
 
         private void radBtnAccounting_CheckedChanged(object sender, EventArgs e)
         {
-            LoadDashboard();
+            tabControl1.SelectedTab = tabAccountingDashboard;
         }
 
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
             LoadLoggedInUser();
+            LoadBudgetDashboardComboboxes();
+            LoadAccountingDashboard();
             ValidatePermissions();
-            RadioButtonVisibility();
         }
 
         private void menuJournals_Click(object sender, EventArgs e)
@@ -451,11 +526,6 @@ namespace AccountingSystem
         private void btnAllotmentRelease_Click(object sender, EventArgs e)
         {
             _ = new frmAllotmentReleaseMain().ShowDialog();
-        }
-
-        private void btnSupplementalAppropriations_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void menuprintGC_Click(object sender, EventArgs e)

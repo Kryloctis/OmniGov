@@ -108,11 +108,13 @@ namespace AccountingSystem.Views.Dashboard
             this.lblCRJCounter.Name = "lblCRJCounter";
             this.lblCRJCounter.Size = new System.Drawing.Size(148, 40);
             this.lblCRJCounter.TabIndex = 6;
-            this.lblCRJCounter.Text = "26";
+            this.lblCRJCounter.Text = "0";
             this.lblCRJCounter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // tlpJournals
             // 
+            this.tlpJournals.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpJournals.ColumnCount = 7;
             this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
             this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28572F));
@@ -280,7 +282,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblCDJCounter.Name = "lblCDJCounter";
             this.lblCDJCounter.Size = new System.Drawing.Size(148, 40);
             this.lblCDJCounter.TabIndex = 6;
-            this.lblCDJCounter.Text = "5";
+            this.lblCDJCounter.Text = "0";
             this.lblCDJCounter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // pnlCkDJ
@@ -316,7 +318,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblCkDJCounter.Name = "lblCkDJCounter";
             this.lblCkDJCounter.Size = new System.Drawing.Size(147, 40);
             this.lblCkDJCounter.TabIndex = 6;
-            this.lblCkDJCounter.Text = "19";
+            this.lblCkDJCounter.Text = "0";
             this.lblCkDJCounter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // pnlPRJ
@@ -352,7 +354,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblPRJCounter.Name = "lblPRJCounter";
             this.lblPRJCounter.Size = new System.Drawing.Size(148, 40);
             this.lblPRJCounter.TabIndex = 6;
-            this.lblPRJCounter.Text = "2";
+            this.lblPRJCounter.Text = "0";
             this.lblPRJCounter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // pnlGJ
@@ -389,7 +391,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblGJCounter.Name = "lblGJCounter";
             this.lblGJCounter.Size = new System.Drawing.Size(148, 40);
             this.lblGJCounter.TabIndex = 6;
-            this.lblGJCounter.Text = "15";
+            this.lblGJCounter.Text = "0";
             this.lblGJCounter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // pnlADADJ
@@ -425,7 +427,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblADADJCounter.Name = "lblADADJCounter";
             this.lblADADJCounter.Size = new System.Drawing.Size(149, 40);
             this.lblADADJCounter.TabIndex = 6;
-            this.lblADADJCounter.Text = "5";
+            this.lblADADJCounter.Text = "0";
             this.lblADADJCounter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // panel22
@@ -461,18 +463,19 @@ namespace AccountingSystem.Views.Dashboard
             this.lblObligationRecordCount.Name = "lblObligationRecordCount";
             this.lblObligationRecordCount.Size = new System.Drawing.Size(150, 40);
             this.lblObligationRecordCount.TabIndex = 6;
-            this.lblObligationRecordCount.Text = "15";
+            this.lblObligationRecordCount.Text = "0";
             this.lblObligationRecordCount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // btnRefreshCounter
             // 
             this.btnRefreshCounter.Image = ((System.Drawing.Image)(resources.GetObject("btnRefreshCounter.Image")));
-            this.btnRefreshCounter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRefreshCounter.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnRefreshCounter.Location = new System.Drawing.Point(3, 3);
             this.btnRefreshCounter.Name = "btnRefreshCounter";
             this.btnRefreshCounter.Size = new System.Drawing.Size(135, 23);
             this.btnRefreshCounter.TabIndex = 13;
             this.btnRefreshCounter.Text = "Refresh Counter";
+            this.btnRefreshCounter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefreshCounter.UseVisualStyleBackColor = true;
             this.btnRefreshCounter.Click += new System.EventHandler(this.btnRefreshCounter_Click);
             // 

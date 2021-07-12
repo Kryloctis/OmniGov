@@ -25,10 +25,17 @@ namespace ACC.Domain.Interfaces
 
 
         //VIEWS
+        DataTable GetViewRecords();
+
         DataTable GetViewRecordsByBudgetAppropriationIdDateIssued(int budgetAppropriationId, DateTime dateIssued);
 
         DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId);
 
         DataTable GetViewRecordsById(int Id);
+
+
+        //DASHBOARD
+        DataTable GetViewRecordsFPPIdFundIdDateEntry(int fppId, int fundId, DateTime dateIssued);
+        decimal GetAllotments(string fppId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing);
     }
 }

@@ -13,11 +13,11 @@ namespace AccountingSystem.Views.Dashboard
 {
     public partial class UcAccountingDashboard : UserControl
     {
-        private Dictionary<string, string> userDict;
-        public UcAccountingDashboard(Dictionary<string, string> _userDict)
+        internal Dictionary<string, string> userDict;
+
+        public UcAccountingDashboard()
         {
             InitializeComponent();
-            userDict = _userDict;
         }
 
         private void UcAccountingDashboard_Load(object sender, EventArgs e)
@@ -25,12 +25,6 @@ namespace AccountingSystem.Views.Dashboard
             if (!DesignMode)
             {
                 Dock = DockStyle.Fill;
-
-                VisibilityJournalCardsCounter(false);
-
-                if (userDict["office"] == "Accounting" || userDict["office"] == "SysAdmin")
-                    VisibilityJournalCardsCounter(true);
-
                 LoadObligationRecordCount();
                 LoadJEVCounter();
             }
@@ -71,24 +65,6 @@ namespace AccountingSystem.Views.Dashboard
         private void btnRefreshCounter_Click(object sender, EventArgs e)
         {
             LoadJEVCounter();
-        }
-
-        private void VisibilityJournalCardsCounter(bool visible)
-        {
-            pnlGJ.Visible = visible;
-            pnlCRJ.Visible = visible;
-            pnlADADJ.Visible = visible;
-            pnlCDJ.Visible = visible;
-            pnlCkDJ.Visible = visible;
-            pnlPRJ.Visible = visible;
-            pnlJEV.Visible = visible;
-            pnlApprovedJEV.Visible = visible;
-            pnlPendingJEV.Visible = visible;
-        }
-
-        private void panel22_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

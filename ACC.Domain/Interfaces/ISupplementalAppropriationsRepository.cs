@@ -11,5 +11,10 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordsByBudgetAppropriationId(int budgetAppropriationsId);
 
         DataTable GetRecordsByBudgetAppropriationIdDateEntry(int budgetAppropriationId, DateTime dateEntry);
+
+        //DASHBOARD
+        DataTable GetViewRecordsByFPPIdFundIdDateEntry(int fppId, int fundId, DateTime dateEntry);
+
+        decimal GetSupplementalAppropriations(string fppId, int fundId, DateTime dateEntry, int allotmentClassId, Byte isContinuing);
     }
 }
