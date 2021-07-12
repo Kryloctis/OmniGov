@@ -35,9 +35,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.dgJEV = new System.Windows.Forms.DataGridView();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.rbAll = new System.Windows.Forms.RadioButton();
+            this.rbApproved = new System.Windows.Forms.RadioButton();
+            this.rbPending = new System.Windows.Forms.RadioButton();
             this.gbSearchFilter = new System.Windows.Forms.GroupBox();
             this.nudYear = new System.Windows.Forms.NumericUpDown();
             this.cbMonth = new System.Windows.Forms.ComboBox();
@@ -98,10 +97,10 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(505, 21);
+            this.txtSearch.Location = new System.Drawing.Point(461, 21);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PlaceholderText = "Search here";
-            this.txtSearch.Size = new System.Drawing.Size(314, 23);
+            this.txtSearch.Size = new System.Drawing.Size(358, 23);
             this.txtSearch.TabIndex = 7;
             // 
             // btnSearch
@@ -114,43 +113,31 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // radioButton2
+            // rbApproved
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton2.Location = new System.Drawing.Point(57, 21);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(77, 19);
-            this.radioButton2.TabIndex = 17;
-            this.radioButton2.Tag = "1";
-            this.radioButton2.Text = "Approved";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rbApproved.AutoSize = true;
+            this.rbApproved.Checked = true;
+            this.rbApproved.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.rbApproved.Location = new System.Drawing.Point(13, 21);
+            this.rbApproved.Name = "rbApproved";
+            this.rbApproved.Size = new System.Drawing.Size(77, 19);
+            this.rbApproved.TabIndex = 17;
+            this.rbApproved.TabStop = true;
+            this.rbApproved.Tag = "1";
+            this.rbApproved.Text = "Approved";
+            this.rbApproved.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // rbPending
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioButton1.Location = new System.Drawing.Point(155, 21);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(69, 19);
-            this.radioButton1.TabIndex = 16;
-            this.radioButton1.Tag = "0";
-            this.radioButton1.Text = "Pending";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // rbAll
-            // 
-            this.rbAll.AutoSize = true;
-            this.rbAll.Checked = true;
-            this.rbAll.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.rbAll.Location = new System.Drawing.Point(6, 21);
-            this.rbAll.Name = "rbAll";
-            this.rbAll.Size = new System.Drawing.Size(39, 19);
-            this.rbAll.TabIndex = 15;
-            this.rbAll.TabStop = true;
-            this.rbAll.Tag = "2";
-            this.rbAll.Text = "All";
-            this.rbAll.UseVisualStyleBackColor = true;
+            this.rbPending.AutoSize = true;
+            this.rbPending.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.rbPending.Location = new System.Drawing.Point(111, 21);
+            this.rbPending.Name = "rbPending";
+            this.rbPending.Size = new System.Drawing.Size(69, 19);
+            this.rbPending.TabIndex = 16;
+            this.rbPending.Tag = "0";
+            this.rbPending.Text = "Pending";
+            this.rbPending.UseVisualStyleBackColor = true;
             // 
             // gbSearchFilter
             // 
@@ -158,9 +145,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.gbSearchFilter.Controls.Add(this.cbMonth);
             this.gbSearchFilter.Controls.Add(this.btnSearch);
             this.gbSearchFilter.Controls.Add(this.txtSearch);
-            this.gbSearchFilter.Controls.Add(this.rbAll);
-            this.gbSearchFilter.Controls.Add(this.radioButton1);
-            this.gbSearchFilter.Controls.Add(this.radioButton2);
+            this.gbSearchFilter.Controls.Add(this.rbPending);
+            this.gbSearchFilter.Controls.Add(this.rbApproved);
             this.gbSearchFilter.Location = new System.Drawing.Point(12, 4);
             this.gbSearchFilter.Name = "gbSearchFilter";
             this.gbSearchFilter.Size = new System.Drawing.Size(906, 49);
@@ -171,7 +157,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // nudYear
             // 
             this.nudYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudYear.Location = new System.Drawing.Point(390, 21);
+            this.nudYear.Location = new System.Drawing.Point(346, 21);
             this.nudYear.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -196,7 +182,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.cbMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMonth.FormattingEnabled = true;
-            this.cbMonth.Location = new System.Drawing.Point(230, 21);
+            this.cbMonth.Location = new System.Drawing.Point(186, 21);
             this.cbMonth.Name = "cbMonth";
             this.cbMonth.Size = new System.Drawing.Size(154, 23);
             this.cbMonth.TabIndex = 20;
@@ -235,9 +221,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.DataGridView dgJEV;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton rbAll;
+        private System.Windows.Forms.RadioButton rbApproved;
+        private System.Windows.Forms.RadioButton rbPending;
         private System.Windows.Forms.GroupBox gbSearchFilter;
         private System.Windows.Forms.ComboBox cbMonth;
         internal System.Windows.Forms.NumericUpDown nudYear;
