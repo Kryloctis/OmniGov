@@ -31,7 +31,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chkbxSpecialFPP = new System.Windows.Forms.CheckBox();
             this.dtAsOf = new System.Windows.Forms.DateTimePicker();
             this.cmbxFund = new System.Windows.Forms.ComboBox();
             this.btnRetrieve = new System.Windows.Forms.Button();
@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.checkBox1);
+            this.panel1.Controls.Add(this.chkbxSpecialFPP);
             this.panel1.Controls.Add(this.dtAsOf);
             this.panel1.Controls.Add(this.cmbxFund);
             this.panel1.Controls.Add(this.btnRetrieve);
@@ -68,15 +68,15 @@ namespace AccountingSystem.Views.Reports.SAAOB
             this.panel1.Size = new System.Drawing.Size(915, 47);
             this.panel1.TabIndex = 0;
             // 
-            // checkBox1
+            // chkbxSpecialFPP
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(596, 14);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(116, 19);
-            this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "Special Accounts";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkbxSpecialFPP.AutoSize = true;
+            this.chkbxSpecialFPP.Location = new System.Drawing.Point(596, 14);
+            this.chkbxSpecialFPP.Name = "chkbxSpecialFPP";
+            this.chkbxSpecialFPP.Size = new System.Drawing.Size(116, 19);
+            this.chkbxSpecialFPP.TabIndex = 7;
+            this.chkbxSpecialFPP.Text = "Special Accounts";
+            this.chkbxSpecialFPP.UseVisualStyleBackColor = true;
             // 
             // dtAsOf
             // 
@@ -265,6 +265,6 @@ namespace AccountingSystem.Views.Reports.SAAOB
         internal System.Windows.Forms.RadioButton radBtn4;
         internal System.Windows.Forms.RadioButton radBtn3;
         internal System.Windows.Forms.RadioButton radBtn2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chkbxSpecialFPP;
     }
 }

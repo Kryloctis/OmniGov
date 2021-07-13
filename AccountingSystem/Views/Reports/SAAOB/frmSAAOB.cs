@@ -47,11 +47,11 @@ namespace AccountingSystem.Views.Reports.SAAOB
             int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
             DateTime date = dtAsOf.Value;
             short year = Convert.ToInt16(dtAsOf.Value.Year);
+            int fppSpecial = chkbxSpecialFPP.Checked? 1 : 0;
 
             try
             {
-               
-                var dtBudgetAppropriations = Factory.BudgetAppropriationsRepository().GetViewRecords(fundId, date, year, 0, 0);
+                var dtBudgetAppropriations = Factory.BudgetAppropriationsRepository().GetViewRecords(fundId, date, year, 0, (byte)fppSpecial);
 
 
                 foreach (DataRow row in dtBudgetAppropriations.Rows)
@@ -173,13 +173,13 @@ namespace AccountingSystem.Views.Reports.SAAOB
                 var fundRepo = Factory.FundsRepository().GetRecordByID(fundId);
 
                 var parameters = new[] {
-
                     new ReportParameter("paramFundName", fundRepo["fund_name"]),
                     new ReportParameter("paramFundCode", fundRepo["fund_code"]),
                     new ReportParameter("paramDate", AsOf.ToString("MMMM dd, yyyy")),
                     new ReportParameter("paramSignatoryName", userName),
                     new ReportParameter("paramSignatoryPosition", userRoleName),
-                    new ReportParameter("paramFilterLevel","5")
+                    new ReportParameter("paramFilterLevel","5"),
+                    new ReportParameter("paramFPPIsSpecial", (chkbxSpecialFPP.Checked? 1 : 0).ToString())
                 };
 
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\status-of-appropriations-allotments-and-obligation.rdlc";
