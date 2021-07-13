@@ -21,7 +21,6 @@ namespace AccountingSystem.Views.Reports.JEV
         internal string dv;
         internal string officer;
 
-        internal string paramDateOfEntry;
         internal string paramCheckDate;
         internal string paramCheckNo;
         internal string paramORNo;
@@ -197,7 +196,12 @@ namespace AccountingSystem.Views.Reports.JEV
             Helper.LoadFormIcon(this);
             Helper.DatagridDefaultStyle(dgJEV);
 
-          
+            if (_jevId != 0)
+            {
+                leftPanel.Visible = false;
+                panel1.Dock = DockStyle.Fill;
+            }
+            
             foreach (var item in Helper.MonthsDatasource().Values)
                 cbMonths.Items.Add(item);
 
