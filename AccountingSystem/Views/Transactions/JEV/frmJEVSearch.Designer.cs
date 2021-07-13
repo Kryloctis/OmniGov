@@ -224,7 +224,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.GroupBox gbSearchFilter;
         private System.Windows.Forms.ComboBox cbMonth;
         internal System.Windows.Forms.NumericUpDown nudYear;
-        internal System.Windows.Forms.RadioButton rbApproved;
         internal System.Windows.Forms.RadioButton rbPending;
+        public System.Windows.Forms.RadioButton rbApproved;
     }
 }

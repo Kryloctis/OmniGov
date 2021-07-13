@@ -40,6 +40,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             var uc = frmJEV.ucjev1;
 
             DataTable dtJEV = Factory.JEVAccountsRepository().GetViewRecordsByJevId(uc.jevId);
+
             foreach (DataRow item in dtJEV.Rows)
             {
                 string fppId = item["fpp_id"].ToString();

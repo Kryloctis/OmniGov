@@ -67,11 +67,12 @@ namespace AccountingSystem.Views.Dashboard
         {
             LoadJEVCounter();
         }
+
         private void lnkJEV_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var frmJEVSearch = new frmJEVSearch(new frmJEV());
             var frmJEV = new frmJEV();
             frmJEV.Show();
+            var frmJEVSearch = new frmJEVSearch(frmJEV);
 
             frmJEVSearch.rbApproved.Checked = true;
             frmJEVSearch.LoadJEVList();
@@ -80,7 +81,10 @@ namespace AccountingSystem.Views.Dashboard
 
         private void lnkApproved_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var frmJEVSearch = new frmJEVSearch(new frmJEV());
+            var frmJEV = new frmJEV();
+            frmJEV.Show();
+            var frmJEVSearch = new frmJEVSearch(frmJEV);
+
             frmJEVSearch.rbApproved.Checked = true;
             frmJEVSearch.LoadJEVList();
             frmJEVSearch.ShowDialog();
@@ -88,12 +92,14 @@ namespace AccountingSystem.Views.Dashboard
 
         private void lnkPending_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var frmJEVSearch = new frmJEVSearch(new frmJEV());
+            var frmJEV = new frmJEV();
+            frmJEV.Show();
+            var frmJEVSearch = new frmJEVSearch(frmJEV);
+
             frmJEVSearch.rbPending.Checked = true;
             frmJEVSearch.LoadJEVList();
             frmJEVSearch.ShowDialog();
         }
 
-  
     }
 }
