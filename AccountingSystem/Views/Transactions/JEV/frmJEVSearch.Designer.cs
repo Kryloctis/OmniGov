@@ -221,10 +221,10 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.DataGridView dgJEV;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.RadioButton rbApproved;
-        private System.Windows.Forms.RadioButton rbPending;
         private System.Windows.Forms.GroupBox gbSearchFilter;
         private System.Windows.Forms.ComboBox cbMonth;
         internal System.Windows.Forms.NumericUpDown nudYear;
+        internal System.Windows.Forms.RadioButton rbPending;
+        public System.Windows.Forms.RadioButton rbApproved;
     }
 }

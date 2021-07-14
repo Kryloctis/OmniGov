@@ -30,8 +30,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupFunds = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelFunds = new System.Windows.Forms.FlowLayoutPanel();
             this.groupJournals = new System.Windows.Forms.GroupBox();
@@ -288,8 +288,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // Debit
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Debit.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Debit.DefaultCellStyle = dataGridViewCellStyle3;
             this.Debit.HeaderText = "Debit";
             this.Debit.Name = "Debit";
             this.Debit.ReadOnly = true;
@@ -297,8 +297,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // Credit
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Credit.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Credit.DefaultCellStyle = dataGridViewCellStyle4;
             this.Credit.HeaderText = "Credit";
             this.Credit.Name = "Credit";
             this.Credit.ReadOnly = true;
@@ -352,7 +352,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // txtJEVNo
             // 
-            this.txtJEVNo.Location = new System.Drawing.Point(159, 168);
+            this.txtJEVNo.Location = new System.Drawing.Point(164, 168);
             this.txtJEVNo.Mask = "0000";
             this.txtJEVNo.Name = "txtJEVNo";
             this.txtJEVNo.Size = new System.Drawing.Size(39, 23);
@@ -365,9 +365,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.txtFundsJevNo.Location = new System.Drawing.Point(81, 168);
             this.txtFundsJevNo.Name = "txtFundsJevNo";
             this.txtFundsJevNo.ReadOnly = true;
-            this.txtFundsJevNo.Size = new System.Drawing.Size(72, 23);
+            this.txtFundsJevNo.Size = new System.Drawing.Size(79, 23);
             this.txtFundsJevNo.TabIndex = 45;
-            this.txtFundsJevNo.Text = "00-0000-00";
+            this.txtFundsJevNo.Text = "000-0000-00";
             // 
             // epJEV
             // 

@@ -35,8 +35,10 @@ namespace AccountingSystem.Views.Reports.JEV
             this.dgJEV = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.cbMonths = new System.Windows.Forms.ComboBox();
+            this.leftPanel = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgJEV)).BeginInit();
+            this.leftPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -44,16 +46,17 @@ namespace AccountingSystem.Views.Reports.JEV
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Location = new System.Drawing.Point(225, 13);
+            this.panel1.AutoSize = true;
+            this.panel1.Location = new System.Drawing.Point(218, 13);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(747, 536);
+            this.panel1.Size = new System.Drawing.Size(754, 536);
             this.panel1.TabIndex = 24;
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(144, 38);
+            this.btnRetrieve.Location = new System.Drawing.Point(135, 29);
             this.btnRetrieve.Name = "btnRetrieve";
-            this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
+            this.btnRetrieve.Size = new System.Drawing.Size(62, 23);
             this.btnRetrieve.TabIndex = 26;
             this.btnRetrieve.Text = "Search";
             this.btnRetrieve.UseVisualStyleBackColor = true;
@@ -64,9 +67,9 @@ namespace AccountingSystem.Views.Reports.JEV
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel2.Controls.Add(this.dgJEV);
-            this.panel2.Location = new System.Drawing.Point(12, 67);
+            this.panel2.Location = new System.Drawing.Point(3, 58);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(207, 482);
+            this.panel2.Size = new System.Drawing.Size(194, 475);
             this.panel2.TabIndex = 27;
             // 
             // dgJEV
@@ -76,13 +79,13 @@ namespace AccountingSystem.Views.Reports.JEV
             this.dgJEV.Location = new System.Drawing.Point(0, 0);
             this.dgJEV.Name = "dgJEV";
             this.dgJEV.RowTemplate.Height = 25;
-            this.dgJEV.Size = new System.Drawing.Size(207, 482);
+            this.dgJEV.Size = new System.Drawing.Size(194, 475);
             this.dgJEV.TabIndex = 0;
             this.dgJEV.SelectionChanged += new System.EventHandler(this.dgJEV_SelectionChanged);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 38);
+            this.textBox1.Location = new System.Drawing.Point(3, 29);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(126, 23);
             this.textBox1.TabIndex = 28;
@@ -91,21 +94,31 @@ namespace AccountingSystem.Views.Reports.JEV
             // 
             this.cbMonths.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMonths.FormattingEnabled = true;
-            this.cbMonths.Location = new System.Drawing.Point(12, 12);
+            this.cbMonths.Location = new System.Drawing.Point(3, 3);
             this.cbMonths.Name = "cbMonths";
-            this.cbMonths.Size = new System.Drawing.Size(207, 23);
+            this.cbMonths.Size = new System.Drawing.Size(194, 23);
             this.cbMonths.TabIndex = 0;
             this.cbMonths.SelectedIndexChanged += new System.EventHandler(this.cbMonths_SelectedIndexChanged);
+            // 
+            // leftPanel
+            // 
+            this.leftPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.leftPanel.Controls.Add(this.cbMonths);
+            this.leftPanel.Controls.Add(this.textBox1);
+            this.leftPanel.Controls.Add(this.panel2);
+            this.leftPanel.Controls.Add(this.btnRetrieve);
+            this.leftPanel.Location = new System.Drawing.Point(12, 13);
+            this.leftPanel.Name = "leftPanel";
+            this.leftPanel.Size = new System.Drawing.Size(200, 536);
+            this.leftPanel.TabIndex = 29;
             // 
             // frmJEVReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 561);
-            this.Controls.Add(this.cbMonths);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.btnRetrieve);
+            this.Controls.Add(this.leftPanel);
             this.Controls.Add(this.panel1);
             this.MinimizeBox = false;
             this.Name = "frmJEVReport";
@@ -114,6 +127,8 @@ namespace AccountingSystem.Views.Reports.JEV
             this.Load += new System.EventHandler(this.frmJEVReport_Load);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgJEV)).EndInit();
+            this.leftPanel.ResumeLayout(false);
+            this.leftPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -127,5 +142,6 @@ namespace AccountingSystem.Views.Reports.JEV
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DataGridView dgJEV;
         private System.Windows.Forms.ComboBox cbMonths;
+        private System.Windows.Forms.Panel leftPanel;
     }
 }
