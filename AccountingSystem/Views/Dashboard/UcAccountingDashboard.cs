@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AccountingSystem.Views.Transactions.JEV;
 
 namespace AccountingSystem.Views.Dashboard
 {
@@ -66,5 +67,39 @@ namespace AccountingSystem.Views.Dashboard
         {
             LoadJEVCounter();
         }
+
+        private void lnkJEV_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var frmJEV = new frmJEV();
+            frmJEV.Show();
+            var frmJEVSearch = new frmJEVSearch(frmJEV);
+
+            frmJEVSearch.rbApproved.Checked = true;
+            frmJEVSearch.LoadJEVList();
+            frmJEVSearch.ShowDialog();
+        }
+
+        private void lnkApproved_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var frmJEV = new frmJEV();
+            frmJEV.Show();
+            var frmJEVSearch = new frmJEVSearch(frmJEV);
+
+            frmJEVSearch.rbApproved.Checked = true;
+            frmJEVSearch.LoadJEVList();
+            frmJEVSearch.ShowDialog();
+        }
+
+        private void lnkPending_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var frmJEV = new frmJEV();
+            frmJEV.Show();
+            var frmJEVSearch = new frmJEVSearch(frmJEV);
+
+            frmJEVSearch.rbPending.Checked = true;
+            frmJEVSearch.LoadJEVList();
+            frmJEVSearch.ShowDialog();
+        }
+
     }
 }
