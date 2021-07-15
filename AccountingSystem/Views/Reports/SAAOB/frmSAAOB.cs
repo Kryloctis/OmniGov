@@ -99,7 +99,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
                     decimal obligationRequestAmount = Convert.ToDecimal(dtObligation.Rows.Count == 0 ? 0 : dtObligation.Compute("SUM(amount)", string.Empty));
 
                     //UNOBLIGATED BALANCE
-                    decimal unobligatedBalance = TotalBudgetAppropraition - obligationRequestAmount;
+                    decimal unobligatedBalance = allotmentReleaseAmount - obligationRequestAmount;
 
                     var items = new object[]
                     {
