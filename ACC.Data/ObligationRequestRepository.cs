@@ -346,7 +346,7 @@ namespace ACC.Data
             }
         }
 
-        public decimal GetObligations(string fppId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing)
+        public decimal GetSumObligations(string fppId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing)
         {
             try
             {

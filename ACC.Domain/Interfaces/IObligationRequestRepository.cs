@@ -23,7 +23,7 @@ namespace ACC.Domain.Interfaces
 
         //DASHBOARD
         DataTable GetViewRecordsFPPIdFundIdDateEntry(int fppId, int fundId, DateTime dateIssued);
-        decimal GetObligations(string fppId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing);
+        decimal GetSumObligations(string fppId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing);
 
         DataTable GetViewRecordsById(int Id);
 

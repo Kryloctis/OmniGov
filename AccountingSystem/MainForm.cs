@@ -32,6 +32,7 @@ using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using AccountingSystem.Views.Reports.Cashbook;
 using AccountingSystem.Views.Reports.JEV;
 using System.Data;
+using AccountingSystem.Views.Manage.Augmentation;
 
 namespace AccountingSystem
 {
