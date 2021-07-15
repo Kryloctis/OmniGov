@@ -30,12 +30,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         private void InitializeComponent()
         {
             this.dgBudgetAppropriations = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnSupplementalAppropriations = new System.Windows.Forms.Button();
             this.cmbxFPP = new System.Windows.Forms.ComboBox();
             this.nudYear = new System.Windows.Forms.NumericUpDown();
             this.cmbxFunds = new System.Windows.Forms.ComboBox();
@@ -54,11 +48,17 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnAdd = new System.Windows.Forms.ToolStripButton();
+            this.btnEdit = new System.Windows.Forms.ToolStripButton();
+            this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSupplementalAppropriations = new System.Windows.Forms.ToolStripButton();
+            this.btnAugmentation = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetAppropriations)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgBudgetAppropriations
@@ -67,110 +67,18 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgBudgetAppropriations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgBudgetAppropriations.Location = new System.Drawing.Point(12, 62);
+            this.dgBudgetAppropriations.Location = new System.Drawing.Point(12, 53);
             this.dgBudgetAppropriations.Name = "dgBudgetAppropriations";
             this.dgBudgetAppropriations.RowTemplate.Height = 25;
-            this.dgBudgetAppropriations.Size = new System.Drawing.Size(1177, 421);
+            this.dgBudgetAppropriations.Size = new System.Drawing.Size(1177, 430);
             this.dgBudgetAppropriations.TabIndex = 1;
             this.dgBudgetAppropriations.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView_ColumnAdded);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.flowLayoutPanel1);
-            this.panel1.Controls.Add(this.cmbxFPP);
-            this.panel1.Controls.Add(this.nudYear);
-            this.panel1.Controls.Add(this.cmbxFunds);
-            this.panel1.Controls.Add(this.cmbxAllotmentClass);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1201, 56);
-            this.panel1.TabIndex = 5;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.btnAdd);
-            this.flowLayoutPanel1.Controls.Add(this.btnEdit);
-            this.flowLayoutPanel1.Controls.Add(this.btnDelete);
-            this.flowLayoutPanel1.Controls.Add(this.btnSupplementalAppropriations);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(458, 56);
-            this.flowLayoutPanel1.TabIndex = 11;
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.AutoSize = true;
-            this.btnEdit.FlatAppearance.BorderSize = 0;
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.edit;
-            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnEdit.Location = new System.Drawing.Point(47, 0);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(0);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(49, 53);
-            this.btnEdit.TabIndex = 13;
-            this.btnEdit.Text = "&Edit...";
-            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.FlatAppearance.BorderSize = 0;
-            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.add;
-            this.btnAdd.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnAdd.Location = new System.Drawing.Point(0, 0);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(0);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(47, 53);
-            this.btnAdd.TabIndex = 12;
-            this.btnAdd.Text = "&Add...";
-            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.AutoSize = true;
-            this.btnDelete.FlatAppearance.BorderSize = 0;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
-            this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnDelete.Location = new System.Drawing.Point(96, 0);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(0);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(50, 53);
-            this.btnDelete.TabIndex = 14;
-            this.btnDelete.Text = "&Delete";
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnSupplementalAppropriations
-            // 
-            this.btnSupplementalAppropriations.AutoSize = true;
-            this.btnSupplementalAppropriations.FlatAppearance.BorderSize = 0;
-            this.btnSupplementalAppropriations.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSupplementalAppropriations.Image = global::AccountingSystem.Properties.Resources.supplemental_appropriations_28px;
-            this.btnSupplementalAppropriations.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSupplementalAppropriations.Location = new System.Drawing.Point(146, 0);
-            this.btnSupplementalAppropriations.Margin = new System.Windows.Forms.Padding(0);
-            this.btnSupplementalAppropriations.Name = "btnSupplementalAppropriations";
-            this.btnSupplementalAppropriations.Size = new System.Drawing.Size(102, 53);
-            this.btnSupplementalAppropriations.TabIndex = 15;
-            this.btnSupplementalAppropriations.Text = "&Supplemental ...";
-            this.btnSupplementalAppropriations.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSupplementalAppropriations.UseVisualStyleBackColor = true;
-            this.btnSupplementalAppropriations.Click += new System.EventHandler(this.btnSupplementalAppropriations_Click);
             // 
             // cmbxFPP
             // 
             this.cmbxFPP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbxFPP.FormattingEnabled = true;
-            this.cmbxFPP.Location = new System.Drawing.Point(474, 20);
+            this.cmbxFPP.Location = new System.Drawing.Point(474, 12);
             this.cmbxFPP.Name = "cmbxFPP";
             this.cmbxFPP.Size = new System.Drawing.Size(259, 23);
             this.cmbxFPP.TabIndex = 10;
@@ -179,7 +87,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // nudYear
             // 
             this.nudYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudYear.Location = new System.Drawing.Point(1043, 20);
+            this.nudYear.Location = new System.Drawing.Point(1043, 12);
             this.nudYear.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -206,7 +114,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.cmbxFunds.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxFunds.FormattingEnabled = true;
-            this.cmbxFunds.Location = new System.Drawing.Point(891, 20);
+            this.cmbxFunds.Location = new System.Drawing.Point(891, 12);
             this.cmbxFunds.Name = "cmbxFunds";
             this.cmbxFunds.Size = new System.Drawing.Size(146, 23);
             this.cmbxFunds.TabIndex = 8;
@@ -217,7 +125,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.cmbxAllotmentClass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbxAllotmentClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxAllotmentClass.FormattingEnabled = true;
-            this.cmbxAllotmentClass.Location = new System.Drawing.Point(739, 20);
+            this.cmbxAllotmentClass.Location = new System.Drawing.Point(739, 12);
             this.cmbxAllotmentClass.Name = "cmbxAllotmentClass";
             this.cmbxAllotmentClass.Size = new System.Drawing.Size(146, 23);
             this.cmbxAllotmentClass.TabIndex = 6;
@@ -332,6 +240,83 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.lblUpdatedAt.Name = "lblUpdatedAt";
             this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnAdd,
+            this.btnEdit,
+            this.btnDelete,
+            this.toolStripSeparator1,
+            this.btnSupplementalAppropriations,
+            this.btnAugmentation});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1201, 50);
+            this.toolStrip1.TabIndex = 9;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.add;
+            this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnAdd.Size = new System.Drawing.Size(43, 47);
+            this.btnAdd.Text = "Add";
+            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.edit;
+            this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(32, 47);
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
+            this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(44, 47);
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
+            // btnSupplementalAppropriations
+            // 
+            this.btnSupplementalAppropriations.Image = global::AccountingSystem.Properties.Resources.supplemental_appropriations_28px;
+            this.btnSupplementalAppropriations.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSupplementalAppropriations.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSupplementalAppropriations.Name = "btnSupplementalAppropriations";
+            this.btnSupplementalAppropriations.Size = new System.Drawing.Size(84, 47);
+            this.btnSupplementalAppropriations.Text = "Supplemental";
+            this.btnSupplementalAppropriations.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSupplementalAppropriations.Click += new System.EventHandler(this.btnSupplementalAppropriations_Click);
+            // 
+            // btnAugmentation
+            // 
+            this.btnAugmentation.Image = global::AccountingSystem.Properties.Resources.augmentation_28px;
+            this.btnAugmentation.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnAugmentation.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAugmentation.Name = "btnAugmentation";
+            this.btnAugmentation.Size = new System.Drawing.Size(88, 47);
+            this.btnAugmentation.Text = "Augmentation";
+            this.btnAugmentation.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAugmentation.Click += new System.EventHandler(this.btnAugmentation_Click);
+            // 
             // frmBudgetAppropriations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -339,10 +324,14 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(1201, 540);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.cmbxFPP);
+            this.Controls.Add(this.nudYear);
+            this.Controls.Add(this.cmbxAllotmentClass);
+            this.Controls.Add(this.cmbxFunds);
             this.Controls.Add(this.txtTotal);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.dgBudgetAppropriations);
             this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.toolStrip1);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1217, 579);
             this.Name = "frmBudgetAppropriations";
@@ -352,12 +341,11 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmBudgetAppropriations_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetAppropriations)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -368,7 +356,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         internal System.Windows.Forms.DataGridView dgBudgetAppropriations;
         private System.Windows.Forms.ToolStripButton btnAllotment;
         internal System.Windows.Forms.TextBox txtTotal;
-        private System.Windows.Forms.Panel panel1;
         internal System.Windows.Forms.ComboBox cmbxAllotmentClass;
         internal System.Windows.Forms.ComboBox cmbxFunds;
         internal System.Windows.Forms.NumericUpDown nudYear;
@@ -385,10 +372,12 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
         internal System.Windows.Forms.ToolStripStatusLabel lblDateEntry;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        internal System.Windows.Forms.Button btnEdit;
-        internal System.Windows.Forms.Button btnAdd;
-        internal System.Windows.Forms.Button btnDelete;
-        internal System.Windows.Forms.Button btnSupplementalAppropriations;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton btnAdd;
+        private System.Windows.Forms.ToolStripButton btnEdit;
+        private System.Windows.Forms.ToolStripButton btnDelete;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton btnSupplementalAppropriations;
+        private System.Windows.Forms.ToolStripButton btnAugmentation;
     }
 }

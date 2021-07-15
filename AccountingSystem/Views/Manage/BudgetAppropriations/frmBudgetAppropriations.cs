@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.AllotmentRelease;
+using AccountingSystem.Views.Manage.Augmentation;
 using AccountingSystem.Views.Manage.SupplementalAppropriations;
 using BudgetSystem.Views.BudgetAppropriations;
 using BudgetSystem.Views.Manage.BudgetAppropriations;
@@ -116,6 +117,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
                 btnSupplementalAppropriations.Enabled = true;
+                btnAugmentation.Enabled = true;
 
             }
             else if (SelectedRows > 1 && dgv.SelectedCells[0].Value != null)
@@ -124,6 +126,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
                 btnSupplementalAppropriations.Enabled = false;
+                btnAugmentation.Enabled = false;
             }
             else
             {
@@ -131,6 +134,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Enabled = false;
                 btnDelete.Text = "Delete";
                 btnSupplementalAppropriations.Enabled = false;
+                btnAugmentation.Enabled = false;
             }
 
             if (cmbxFPP.SelectedIndex == -1 || cmbxAllotmentClass.SelectedIndex == -1 || cmbxFunds.SelectedIndex == -1)
@@ -205,56 +209,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         private void btnDelete_Click(object sender, EventArgs e) 
         {
-            int selectedRows =0;
 
-            var budgetAppropriationsModelList = new List<BudgetAppropriationsModel>();
-
-     
-            foreach (DataGridViewRow row in dgBudgetAppropriations.SelectedRows)
-            {
-                if (row.Cells[0].Value != null)
-                    selectedRows += 1;
-            }
-
-            try
-            {
-                if (selectedRows > 0)
-                {
-                    if (Helper.MessageBoxConfirmDelete(selectedRows))
-                    {
-                        foreach (DataGridViewRow row in dgBudgetAppropriations.SelectedRows)
-                        {
-                            if (row.Cells[0].Value != null)
-                            {
-                                int budgetAppID = int.Parse(row.Cells[0].Value.ToString());
-                                var budgetAppropriationsModel = new BudgetAppropriationsModel()
-                                {
-                                    Id = budgetAppID
-                                };
-
-                                budgetAppropriationsModelList.Add(budgetAppropriationsModel);
-                            }
-                        }
-
-                        _ = Factory.BudgetAppropriationsRepository().Delete(budgetAppropriationsModelList);
-                        LoadBudgetAppropriationRecords();
-                    }
-                }
-            }
-            catch (MySqlException ex) 
-            {
-                switch (ex.Number)
-                {
-                    case 1451:
-                        Helper.MessageBoxError("Cannot Delete Budget Appropriation");
-                        break;
-                }
-            }
-
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
         }
 
         private void NudYear_ValueChanged(object sender, EventArgs e)
@@ -356,5 +311,9 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             frmSupplementalAppropriations.ShowDialog();
         }
 
+        private void btnAugmentation_Click(object sender, EventArgs e)
+        {
+            _ = new frmAugmentation().ShowDialog();
+        }
     }
 }
