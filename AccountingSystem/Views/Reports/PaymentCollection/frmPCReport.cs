@@ -95,7 +95,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 string from = String.Format("{0:yyyy-MM-dd}", dtpMonth.Value);
                 string to = String.Format("{0:yyyy-MM-dd}", dtto.Value);
                 var lguDetails = Helper.LGUDetails();
-                var signatory = "FELIX A. TRAPA";
+                var signatory = "ENSIGN S. UBA";
                 var parameters = new[] {
                             new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                             new ReportParameter("paramSignatory", signatory)

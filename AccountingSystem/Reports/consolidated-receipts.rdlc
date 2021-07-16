@@ -68,43 +68,43 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.70731in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.83822in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.83186in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.65209in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.875in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.8766in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.65327in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.75611in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.79167in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.69167in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.79167in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.79167in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.11667in</Width>
+                  <Width>1.85834in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -122,6 +122,7 @@
                                 <TextRun>
                                   <Value>BEGINNING BALANCE</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -160,6 +161,7 @@
                                 <TextRun>
                                   <Value>RECEIPTS</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -198,6 +200,7 @@
                                 <TextRun>
                                   <Value>ISSUED</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -236,6 +239,7 @@
                                 <TextRun>
                                   <Value>ENDING BALANCE</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -274,6 +278,7 @@
                                 <TextRun>
                                   <Value>ACCOUNTABLE OFFICERS</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -324,6 +329,7 @@
                                 <TextRun>
                                   <Value>QTY</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -366,6 +372,7 @@
                                 <TextRun>
                                   <Value>INCLUSIVE SERIAL NOS.</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -403,6 +410,7 @@
                                 <TextRun>
                                   <Value>QTY</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -445,6 +453,7 @@
                                 <TextRun>
                                   <Value>INCLUSIVE SERIAL NOS.</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -482,6 +491,7 @@
                                 <TextRun>
                                   <Value>QTY</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -524,6 +534,7 @@
                                 <TextRun>
                                   <Value>INCLUSIVE SERIAL NOS.</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -561,6 +572,7 @@
                                 <TextRun>
                                   <Value>QTY</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -603,6 +615,7 @@
                                 <TextRun>
                                   <Value>INCLUSIVE SERIAL NOS.</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -640,6 +653,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -687,6 +701,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -726,6 +741,7 @@
                                 <TextRun>
                                   <Value>FROM</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -761,6 +777,7 @@
                                 <TextRun>
                                   <Value>TO</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -796,6 +813,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -835,6 +853,7 @@
                                 <TextRun>
                                   <Value>FROM</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -870,6 +889,7 @@
                                 <TextRun>
                                   <Value>TO</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -905,6 +925,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -944,6 +965,7 @@
                                 <TextRun>
                                   <Value>FROM</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -979,6 +1001,7 @@
                                 <TextRun>
                                   <Value>TO</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1014,6 +1037,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1053,6 +1077,7 @@
                                 <TextRun>
                                   <Value>FROM</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1088,6 +1113,7 @@
                                 <TextRun>
                                   <Value>TO</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1123,6 +1149,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1169,7 +1196,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=IIF(Fields!issuefrom.Value=1,(Fields!issueto.Value-Fields!issuefrom.Value)+1,Fields!issueto.Value-Fields!issuefrom.Value)</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -1201,7 +1230,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!issuefrom.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -1233,7 +1264,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!issueto.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -1265,7 +1298,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value />
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -1297,7 +1332,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value />
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -1329,7 +1366,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value />
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -1361,7 +1400,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=IIF(Fields!usedfrom.Value=1,(Fields!usedto.Value-Fields!usedfrom.Value)+1,Fields!usedto.Value-Fields!usedfrom.Value)</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -1393,7 +1434,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!usedfrom.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -1425,7 +1468,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!usedto.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -1457,7 +1502,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!issueto.Value-(Fields!usedto.Value+1)</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -1489,7 +1536,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!usedto.Value+1</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -1521,7 +1570,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!issueto.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -1553,7 +1604,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!officers.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -1588,6 +1641,7 @@
                                 <TextRun>
                                   <Value>=SUM(IIF(Fields!issuefrom.Value=1,(Fields!issueto.Value-Fields!issuefrom.Value)+1,Fields!issueto.Value-Fields!issuefrom.Value))</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1622,6 +1676,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1656,6 +1711,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1690,6 +1746,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1724,6 +1781,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1758,6 +1816,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1792,6 +1851,7 @@
                                 <TextRun>
                                   <Value>=Sum(IIF(Fields!usedfrom.Value=1,(Fields!usedto.Value-Fields!usedfrom.Value)+1,Fields!usedto.Value-Fields!usedfrom.Value))</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1826,6 +1886,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1860,6 +1921,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1894,6 +1956,7 @@
                                 <TextRun>
                                   <Value>=SUM(Fields!issueto.Value-(Fields!usedto.Value+1))</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1928,6 +1991,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1962,6 +2026,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1996,6 +2061,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -2052,6 +2118,7 @@
                               <TextRun>
                                 <Value>NAME OF FORM</Value>
                                 <Style>
+                                  <FontSize>8pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>
                               </TextRun>
@@ -2111,7 +2178,9 @@
                             <TextRuns>
                               <TextRun>
                                 <Value>=Fields!form.Value</Value>
-                                <Style />
+                                <Style>
+                                  <FontSize>8pt</FontSize>
+                                </Style>
                               </TextRun>
                             </TextRuns>
                             <Style />
@@ -2149,6 +2218,7 @@
                               <TextRun>
                                 <Value>TOTAL</Value>
                                 <Style>
+                                  <FontSize>8pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>
                               </TextRun>
@@ -2178,7 +2248,7 @@
             </TablixRowHierarchy>
             <DataSetName>dtReceiptsConsolidated</DataSetName>
             <Height>1.25in</Height>
-            <Width>15.26667in</Width>
+            <Width>12.26546in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2205,7 +2275,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox20</rd:DefaultName>
             <Top>6.07554cm</Top>
-            <Left>23.68683cm</Left>
+            <Left>19.55933cm</Left>
             <Height>0.6cm</Height>
             <Width>7.66092cm</Width>
             <ZIndex>1</ZIndex>
@@ -2239,7 +2309,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox20</rd:DefaultName>
             <Top>5.47554cm</Top>
-            <Left>23.68683cm</Left>
+            <Left>19.55933cm</Left>
             <Height>0.6cm</Height>
             <Width>7.66092cm</Width>
             <ZIndex>2</ZIndex>
@@ -2278,7 +2348,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox20</rd:DefaultName>
             <Top>6.07554cm</Top>
-            <Left>8.001cm</Left>
+            <Left>3.8735cm</Left>
             <Height>0.6cm</Height>
             <Width>7.66092cm</Width>
             <ZIndex>3</ZIndex>
@@ -2312,7 +2382,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox20</rd:DefaultName>
             <Top>5.47554cm</Top>
-            <Left>8.001cm</Left>
+            <Left>3.8735cm</Left>
             <Height>0.6cm</Height>
             <Width>7.66092cm</Width>
             <ZIndex>4</ZIndex>
@@ -2335,7 +2405,7 @@
         <Height>2.8in</Height>
         <Style />
       </Body>
-      <Width>15.26667in</Width>
+      <Width>12.26666in</Width>
       <Page>
         <PageHeader>
           <Height>1.30833in</Height>
@@ -2364,7 +2434,7 @@
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Left>0cm</Left>
               <Height>0.89105cm</Height>
-              <Width>38.77733cm</Width>
+              <Width>31.15426cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -2393,7 +2463,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>1.52633cm</Top>
-              <Left>18.65746cm</Left>
+              <Left>15.48246cm</Left>
               <Height>0.6cm</Height>
               <Width>1.26295cm</Width>
               <ZIndex>1</ZIndex>
@@ -2427,7 +2497,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
               <Top>0.89105cm</Top>
-              <Left>16.08924cm</Left>
+              <Left>12.91424cm</Left>
               <Height>0.6cm</Height>
               <Width>6.28354cm</Width>
               <ZIndex>2</ZIndex>
@@ -2530,7 +2600,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>2.54678cm</Top>
-              <Left>34.15184cm</Left>
+              <Left>26.84934cm</Left>
               <Height>0.6cm</Height>
               <Width>1.8609cm</Width>
               <ZIndex>5</ZIndex>
@@ -2564,7 +2634,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
               <Top>2.54678cm</Top>
-              <Left>36.01274cm</Left>
+              <Left>28.71024cm</Left>
               <Height>0.6cm</Height>
               <Width>2.12959cm</Width>
               <ZIndex>6</ZIndex>
@@ -2599,7 +2669,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox20</rd:DefaultName>
               <Top>2.54677cm</Top>
-              <Left>16.08924cm</Left>
+              <Left>12.91424cm</Left>
               <Height>0.6cm</Height>
               <Width>1.07279cm</Width>
               <ZIndex>7</ZIndex>
@@ -2631,7 +2701,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox67</rd:DefaultName>
               <Top>2.54678cm</Top>
-              <Left>17.19731cm</Left>
+              <Left>14.02231cm</Left>
               <Height>0.6cm</Height>
               <Width>5.17547cm</Width>
               <ZIndex>8</ZIndex>
@@ -2657,10 +2727,12 @@
             </Border>
           </Style>
         </PageHeader>
-        <LeftMargin>1in</LeftMargin>
-        <RightMargin>1in</RightMargin>
-        <TopMargin>1in</TopMargin>
-        <BottomMargin>1in</BottomMargin>
+        <PageHeight>8.5in</PageHeight>
+        <PageWidth>13in</PageWidth>
+        <LeftMargin>0.2in</LeftMargin>
+        <RightMargin>0.2in</RightMargin>
+        <TopMargin>0.2in</TopMargin>
+        <BottomMargin>0.2in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>

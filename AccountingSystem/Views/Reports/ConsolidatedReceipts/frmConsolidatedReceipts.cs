@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
             LoadReport(reportViewer.LocalReport);
-            //reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
             reportViewer.ZoomMode = ZoomMode.Percent;
             reportViewer.ZoomPercent = 100;
             reportViewer.RefreshReport();
