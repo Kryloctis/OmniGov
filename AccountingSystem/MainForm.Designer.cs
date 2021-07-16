@@ -171,9 +171,9 @@ namespace AccountingSystem
             // 
             // menuObligationRequest
             // 
-            //this.menuObligationRequest.Name = "menuObligationRequest";
-           // this.menuObligationRequest.Size = new System.Drawing.Size(219, 26);
-           // this.menuObligationRequest.Text = "CAFOA";
+            this.menuObligationRequest.Name = "menuObligationRequest";
+            this.menuObligationRequest.Size = new System.Drawing.Size(219, 26);
+            this.menuObligationRequest.Text = "CAFOA";
             // 
             // menuIssueCheck
             // 
@@ -836,6 +836,7 @@ namespace AccountingSystem
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem menuObligationRequest;
         private System.Windows.Forms.ToolStripMenuItem menuFile;
         private System.Windows.Forms.ToolStripMenuItem menuManage;
         private System.Windows.Forms.ToolStripMenuItem menuJournals;
