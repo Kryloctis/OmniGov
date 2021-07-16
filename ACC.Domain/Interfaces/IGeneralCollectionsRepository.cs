@@ -17,6 +17,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordByCollections(int Id);
         DataTable GetRecordByDeposits(int Id);
         DataTable GetRecordByGC(string from, string to);
-        DataTable GetRecordByReceipts(int Id);
+        DataTable GetRecordByReceipts(int Id); 
+        DataTable GetRecordByReceiptsConsolidated(string to);
     }
 }
