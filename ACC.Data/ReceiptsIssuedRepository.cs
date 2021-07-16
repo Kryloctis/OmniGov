@@ -81,7 +81,7 @@ namespace ACC.Data
                     {
                         var parameters = new object[][]
                         {
-                            new object[] { "@id", DbType.Int32, entity.Id},
+                            new object[] { "@id", DbType.Int16, entity.Id},
                         };
 
                         string query = $"DELETE FROM {tableName} WHERE id = @id";
@@ -178,7 +178,7 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Int32, id },
+                    new object[] { "@id", DbType.Int16, id },
                 };
 
                 string query = $"SELECT id FROM {tableName} WHERE id = @id";
@@ -201,8 +201,8 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@collecting_officers_id", DbType.Int32, entity.CoId },
-                    new object[] { "@receipts_id", DbType.Int32, entity.RId },
+                    new object[] { "@collecting_officers_id", DbType.Int16, entity.CoId },
+                    new object[] { "@receipts_id", DbType.Int16, entity.RId },
                     new object[] { "@issuefrom", DbType.Int32, entity.IssuedFrom },
                     new object[] { "@issueto", DbType.Int32, entity.IssuedTo }
                 };
@@ -227,8 +227,8 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@collecting_officers_id", DbType.Int32, coid },
-                    new object[] { "@receipts_id", DbType.Int32, id },
+                    new object[] { "@collecting_officers_id", DbType.Int16, coid },
+                    new object[] { "@receipts_id", DbType.Int16, id },
                 };
 
                 string query = $"SELECT * FROM {tableName} WHERE {tableName}.collecting_officers_id = @collecting_officers_id AND {tableName}.receipts_id=@receipts_id AND IF(IFNULL({tableName}.is_returned,0)<1,true,false)=true";
@@ -251,7 +251,7 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@receipts_id", DbType.Int32, id },
+                    new object[] { "@receipts_id", DbType.Int16, id },
                 };
 
                 string query = $"SELECT * FROM {tableName} WHERE receipts_id=@receipts_id";
@@ -274,8 +274,8 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@receipts_id", DbType.Int32, entity.RId},
-                    new object[] { "@collecting_officers_id", DbType.Int32, entity.CoId},
+                    new object[] { "@receipts_id", DbType.Int16, entity.RId},
+                    new object[] { "@collecting_officers_id", DbType.Int16, entity.CoId},
                     new object[] { "@date_issued", DbType.Date, entity.Issued},
                     new object[] { "@issuefrom", DbType.Int32, entity.IssuedFrom},
                     new object[] { "@issueto", DbType.Int32, entity.IssuedTo},
@@ -297,9 +297,9 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Int32, entity.Id},
-                    new object[] { "@receipts_id", DbType.Int32, entity.RId},
-                    new object[] { "@collecting_officers_id", DbType.Int32, entity.CoId},
+                    new object[] { "@id", DbType.Int16, entity.Id},
+                    new object[] { "@receipts_id", DbType.Int16, entity.RId},
+                    new object[] { "@collecting_officers_id", DbType.Int16, entity.CoId},
                     new object[] { "@date_issued", DbType.Date, entity.Issued},
                     new object[] { "@issuefrom", DbType.Int32, entity.IssuedFrom},
                     new object[] { "@issueto", DbType.Int32, entity.IssuedTo},
@@ -321,8 +321,8 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Int32, entity.Id},
-                    new object[] { "@is_returned", DbType.Int32, entity.Is_returned},
+                    new object[] { "@id", DbType.Int16, entity.Id},
+                    new object[] { "@is_returned", DbType.Int16, entity.Is_returned},
                     new object[] { "@returned_date", DbType.Date, entity.Returned_date}
                 };
 
@@ -341,8 +341,8 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Int32, entity.Id},
-                    new object[] { "@last_issued", DbType.Int32, entity.Last_issued}
+                    new object[] { "@id", DbType.Int16, entity.Id},
+                    new object[] { "@last_issued", DbType.Int16, entity.Last_issued}
                 };
 
                 string query = $"UPDATE {tableName} SET last_issued=@last_issued WHERE id = @id";

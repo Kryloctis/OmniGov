@@ -371,21 +371,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
-        public DataTable GetRecordByReceiptsConsolidated(string to)
-        {
-            try
-            {
-                string query = $"SELECT CONCAT({tableName9}.acc_form_no,'-',{tableName9}.acc_form_desc) AS form,{tableName19}.receiptsfrom,{tableName19}.receiptsto,{tableName20}.issuefrom,{tableName20}.issueto,(SELECT receipt_no FROM {tableName5} WHERE accountable_forms_id={tableName9}.id AND collecting_officers_id={tableName8}.id AND payment_date <= CAST('{to}' AS DATE) ORDER BY receipt_no ASC LIMIT 1) AS ifrom,(SELECT receipt_no FROM {tableName5} WHERE accountable_forms_id={tableName9}.id AND collecting_officers_id={tableName8}.id AND payment_date <= CAST('{to}' AS DATE) ORDER BY receipt_no DESC LIMIT 1) AS ito,CONCAT({tableName8}.last_name,', ',{tableName8}.first_name,' ',{tableName8}.mid_initial) AS officers FROM {tableName9} LEFT JOIN {tableName19} ON {tableName19}.accountable_forms_id={tableName9}.id LEFT JOIN {tableName20} ON {tableName20}.receipts_id={tableName19}.id LEFT JOIN {tableName8} ON {tableName20}.collecting_officers_id={tableName8}.id WHERE {tableName9}.id IN (SELECT accountable_forms_id FROM {tableName5} WHERE payment_date <= CAST('{to}' AS DATE))";
-
-                var dtpc = new DataTable();
-                return _dbGenericCommands.Fill(query, dtpc);
-            }
-            catch (Exception) 
-            {
-                throw;
-            }
-        }
     }
 }
  

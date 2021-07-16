@@ -33,7 +33,6 @@ using AccountingSystem.Views.Reports.Cashbook;
 using AccountingSystem.Views.Reports.JEV;
 using System.Data;
 using AccountingSystem.Views.Manage.Augmentation;
-using AccountingSystem.Views.Reports.ConsolidatedReceipts;
 
 namespace AccountingSystem
 {
@@ -572,11 +571,6 @@ namespace AccountingSystem
         private void btnBankDeposit_Click(object sender, EventArgs e)
         {
             _ = new frmBankDeposits().ShowDialog();
-        }
-
-        private void menuReceiptsConsolidated_Click(object sender, EventArgs e)
-        {
-            _ = new frmConsolidatedReceipts().ShowDialog();
         }
     }
 }

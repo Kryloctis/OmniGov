@@ -44,7 +44,7 @@ namespace ACC.Data
                     {
                         var parameters = new object[][]
                         {
-                            new object[] { "@id", DbType.Int32, entity.Id},
+                            new object[] { "@id", DbType.Int16, entity.Id},
                         };
 
                         string query = $"DELETE FROM {tableName} WHERE id = @id";
@@ -133,7 +133,7 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Int32, id },
+                    new object[] { "@id", DbType.Int16, id },
                 };
 
                 string query = $"SELECT id FROM {tableName} WHERE id = @id";
@@ -156,9 +156,9 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@accountable_forms_id", DbType.Int32, accid },
-                    new object[] { "@receiptsfrom", DbType.Int32, from },
-                    new object[] { "@receiptsto", DbType.Int32, to }
+                    new object[] { "@accountable_forms_id", DbType.Int16, accid },
+                    new object[] { "@receiptsfrom", DbType.Int16, from },
+                    new object[] { "@receiptsto", DbType.Int16, to }
                 };
 
                 string query = $"SELECT * FROM {tableName} WHERE accountable_forms_id = @accountable_forms_id AND receiptsfrom=@receiptsfrom AND receiptsto=@receiptsto";
@@ -181,7 +181,7 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Int32, id },
+                    new object[] { "@id", DbType.Int16, id },
                 };
 
                 string query = $"SELECT * FROM {tableName} WHERE id = @id AND receiptsto=(SELECT SUM(IF(IFNULL(last_issued,0)>0,issueto-last_issued,0)) FROM {tableName4} WHERE receipts_id=id AND IF(IFNULL(is_returned,true),false,true)=false)";
@@ -238,12 +238,12 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@users_id", DbType.Int32, entity.UserId},
-                    new object[] { "@accountable_forms_id", DbType.Int32, entity.AccId},
-                    new object[] { "@receiptsfrom", DbType.Int32, entity.Rfrom},
-                    new object[] { "@receiptsto", DbType.Int32, entity.Rto},
+                    new object[] { "@users_id", DbType.Int16, entity.UserId},
+                    new object[] { "@accountable_forms_id", DbType.Int16, entity.AccId},
+                    new object[] { "@receiptsfrom", DbType.Int16, entity.Rfrom},
+                    new object[] { "@receiptsto", DbType.Int16, entity.Rto},
                     new object[] { "@received_date", DbType.Date, entity.Rdate},
-                    new object[] { "@quantity", DbType.Int32, entity.Quantity},
+                    new object[] { "@quantity", DbType.Int16, entity.Quantity},
                     new object[] { "@remarks", DbType.String, entity.Remarks}
                 };
 
@@ -262,13 +262,13 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Int32, entity.Id},
-                    new object[] { "@users_id", DbType.Int32, entity.UserId},
-                    new object[] { "@accountable_forms_id", DbType.Int32, entity.AccId},
-                    new object[] { "@receiptsfrom", DbType.Int32, entity.Rfrom},
-                    new object[] { "@receiptsto", DbType.Int32, entity.Rto},
+                    new object[] { "@id", DbType.Int16, entity.Id},
+                    new object[] { "@users_id", DbType.Int16, entity.UserId},
+                    new object[] { "@accountable_forms_id", DbType.Int16, entity.AccId},
+                    new object[] { "@receiptsfrom", DbType.Int16, entity.Rfrom},
+                    new object[] { "@receiptsto", DbType.Int16, entity.Rto},
                     new object[] { "@received_date", DbType.Date, entity.Rdate},
-                    new object[] { "@quantity", DbType.Int32, entity.Quantity},
+                    new object[] { "@quantity", DbType.Int16, entity.Quantity},
                     new object[] { "@remarks", DbType.String, entity.Remarks}
                 };
 
