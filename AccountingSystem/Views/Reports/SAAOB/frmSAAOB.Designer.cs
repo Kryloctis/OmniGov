@@ -31,6 +31,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chkbxSpecialFPP = new System.Windows.Forms.CheckBox();
             this.dtAsOf = new System.Windows.Forms.DateTimePicker();
             this.cmbxFund = new System.Windows.Forms.ComboBox();
             this.btnRetrieve = new System.Windows.Forms.Button();
@@ -40,14 +41,12 @@ namespace AccountingSystem.Views.Reports.SAAOB
             this.epYear = new System.Windows.Forms.ErrorProvider(this.components);
             this.epFPP = new System.Windows.Forms.ErrorProvider(this.components);
             this.panelConfig = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.chkBxAdvanceMode = new System.Windows.Forms.CheckBox();
-            this.btnPrint = new System.Windows.Forms.Button();
-            this.radBtn1 = new System.Windows.Forms.RadioButton();
-            this.radBtn2 = new System.Windows.Forms.RadioButton();
-            this.radBtn3 = new System.Windows.Forms.RadioButton();
-            this.radBtn4 = new System.Windows.Forms.RadioButton();
             this.radBtn5 = new System.Windows.Forms.RadioButton();
+            this.radBtn4 = new System.Windows.Forms.RadioButton();
+            this.radBtn3 = new System.Windows.Forms.RadioButton();
+            this.radBtn2 = new System.Windows.Forms.RadioButton();
+            this.radBtn1 = new System.Windows.Forms.RadioButton();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.epYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
@@ -57,6 +56,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.chkbxSpecialFPP);
             this.panel1.Controls.Add(this.dtAsOf);
             this.panel1.Controls.Add(this.cmbxFund);
             this.panel1.Controls.Add(this.btnRetrieve);
@@ -68,9 +68,19 @@ namespace AccountingSystem.Views.Reports.SAAOB
             this.panel1.Size = new System.Drawing.Size(915, 47);
             this.panel1.TabIndex = 0;
             // 
+            // chkbxSpecialFPP
+            // 
+            this.chkbxSpecialFPP.AutoSize = true;
+            this.chkbxSpecialFPP.Location = new System.Drawing.Point(596, 14);
+            this.chkbxSpecialFPP.Name = "chkbxSpecialFPP";
+            this.chkbxSpecialFPP.Size = new System.Drawing.Size(116, 19);
+            this.chkbxSpecialFPP.TabIndex = 7;
+            this.chkbxSpecialFPP.Text = "Special Accounts";
+            this.chkbxSpecialFPP.UseVisualStyleBackColor = true;
+            // 
             // dtAsOf
             // 
-            this.dtAsOf.Location = new System.Drawing.Point(362, 12);
+            this.dtAsOf.Location = new System.Drawing.Point(362, 11);
             this.dtAsOf.Name = "dtAsOf";
             this.dtAsOf.Size = new System.Drawing.Size(211, 23);
             this.dtAsOf.TabIndex = 6;
@@ -86,7 +96,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(596, 12);
+            this.btnRetrieve.Location = new System.Drawing.Point(735, 12);
             this.btnRetrieve.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
             this.btnRetrieve.Name = "btnRetrieve";
             this.btnRetrieve.Size = new System.Drawing.Size(92, 23);
@@ -98,7 +108,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(322, 16);
+            this.label2.Location = new System.Drawing.Point(322, 15);
             this.label2.Margin = new System.Windows.Forms.Padding(20, 0, 3, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 15);
@@ -138,92 +148,11 @@ namespace AccountingSystem.Views.Reports.SAAOB
             this.panelConfig.Controls.Add(this.radBtn2);
             this.panelConfig.Controls.Add(this.radBtn1);
             this.panelConfig.Controls.Add(this.label3);
-            this.panelConfig.Controls.Add(this.chkBxAdvanceMode);
-            this.panelConfig.Controls.Add(this.btnPrint);
             this.panelConfig.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelConfig.Location = new System.Drawing.Point(0, 47);
             this.panelConfig.Name = "panelConfig";
             this.panelConfig.Size = new System.Drawing.Size(915, 35);
             this.panelConfig.TabIndex = 2;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 10);
-            this.label3.Margin = new System.Windows.Forms.Padding(10, 7, 3, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 15);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "Filter Level";
-            // 
-            // chkBxAdvanceMode
-            // 
-            this.chkBxAdvanceMode.AutoSize = true;
-            this.chkBxAdvanceMode.Location = new System.Drawing.Point(362, 10);
-            this.chkBxAdvanceMode.Margin = new System.Windows.Forms.Padding(17, 7, 3, 3);
-            this.chkBxAdvanceMode.Name = "chkBxAdvanceMode";
-            this.chkBxAdvanceMode.Size = new System.Drawing.Size(106, 19);
-            this.chkBxAdvanceMode.TabIndex = 16;
-            this.chkBxAdvanceMode.Text = "Advance Mode";
-            this.chkBxAdvanceMode.UseVisualStyleBackColor = true;
-            this.chkBxAdvanceMode.CheckedChanged += new System.EventHandler(this.chkBxAdvanceMode_CheckedChanged);
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.Image = global::AccountingSystem.Properties.Resources.print_14px;
-            this.btnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrint.Location = new System.Drawing.Point(596, 6);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(92, 23);
-            this.btnPrint.TabIndex = 17;
-            this.btnPrint.Text = "Print";
-            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // radBtn1
-            // 
-            this.radBtn1.AutoSize = true;
-            this.radBtn1.Location = new System.Drawing.Point(81, 8);
-            this.radBtn1.Name = "radBtn1";
-            this.radBtn1.Size = new System.Drawing.Size(31, 19);
-            this.radBtn1.TabIndex = 18;
-            this.radBtn1.Text = "1";
-            this.radBtn1.UseVisualStyleBackColor = true;
-            this.radBtn1.CheckedChanged += new System.EventHandler(this.radBtn1_CheckedChanged);
-            // 
-            // radBtn2
-            // 
-            this.radBtn2.AutoSize = true;
-            this.radBtn2.Location = new System.Drawing.Point(118, 8);
-            this.radBtn2.Name = "radBtn2";
-            this.radBtn2.Size = new System.Drawing.Size(31, 19);
-            this.radBtn2.TabIndex = 18;
-            this.radBtn2.Text = "2";
-            this.radBtn2.UseVisualStyleBackColor = true;
-            this.radBtn2.CheckedChanged += new System.EventHandler(this.radBtn2_CheckedChanged);
-            // 
-            // radBtn3
-            // 
-            this.radBtn3.AutoSize = true;
-            this.radBtn3.Location = new System.Drawing.Point(155, 8);
-            this.radBtn3.Name = "radBtn3";
-            this.radBtn3.Size = new System.Drawing.Size(31, 19);
-            this.radBtn3.TabIndex = 18;
-            this.radBtn3.Text = "3";
-            this.radBtn3.UseVisualStyleBackColor = true;
-            this.radBtn3.CheckedChanged += new System.EventHandler(this.radBtn3_CheckedChanged);
-            // 
-            // radBtn4
-            // 
-            this.radBtn4.AutoSize = true;
-            this.radBtn4.Location = new System.Drawing.Point(192, 8);
-            this.radBtn4.Name = "radBtn4";
-            this.radBtn4.Size = new System.Drawing.Size(31, 19);
-            this.radBtn4.TabIndex = 18;
-            this.radBtn4.Text = "4";
-            this.radBtn4.UseVisualStyleBackColor = true;
-            this.radBtn4.CheckedChanged += new System.EventHandler(this.radBtn4_CheckedChanged);
             // 
             // radBtn5
             // 
@@ -237,6 +166,60 @@ namespace AccountingSystem.Views.Reports.SAAOB
             this.radBtn5.Text = "5";
             this.radBtn5.UseVisualStyleBackColor = true;
             this.radBtn5.CheckedChanged += new System.EventHandler(this.radBtn5_CheckedChanged);
+            // 
+            // radBtn4
+            // 
+            this.radBtn4.AutoSize = true;
+            this.radBtn4.Location = new System.Drawing.Point(192, 8);
+            this.radBtn4.Name = "radBtn4";
+            this.radBtn4.Size = new System.Drawing.Size(31, 19);
+            this.radBtn4.TabIndex = 18;
+            this.radBtn4.Text = "4";
+            this.radBtn4.UseVisualStyleBackColor = true;
+            this.radBtn4.CheckedChanged += new System.EventHandler(this.radBtn4_CheckedChanged);
+            // 
+            // radBtn3
+            // 
+            this.radBtn3.AutoSize = true;
+            this.radBtn3.Location = new System.Drawing.Point(155, 8);
+            this.radBtn3.Name = "radBtn3";
+            this.radBtn3.Size = new System.Drawing.Size(31, 19);
+            this.radBtn3.TabIndex = 18;
+            this.radBtn3.Text = "3";
+            this.radBtn3.UseVisualStyleBackColor = true;
+            this.radBtn3.CheckedChanged += new System.EventHandler(this.radBtn3_CheckedChanged);
+            // 
+            // radBtn2
+            // 
+            this.radBtn2.AutoSize = true;
+            this.radBtn2.Location = new System.Drawing.Point(118, 8);
+            this.radBtn2.Name = "radBtn2";
+            this.radBtn2.Size = new System.Drawing.Size(31, 19);
+            this.radBtn2.TabIndex = 18;
+            this.radBtn2.Text = "2";
+            this.radBtn2.UseVisualStyleBackColor = true;
+            this.radBtn2.CheckedChanged += new System.EventHandler(this.radBtn2_CheckedChanged);
+            // 
+            // radBtn1
+            // 
+            this.radBtn1.AutoSize = true;
+            this.radBtn1.Location = new System.Drawing.Point(81, 8);
+            this.radBtn1.Name = "radBtn1";
+            this.radBtn1.Size = new System.Drawing.Size(31, 19);
+            this.radBtn1.TabIndex = 18;
+            this.radBtn1.Text = "1";
+            this.radBtn1.UseVisualStyleBackColor = true;
+            this.radBtn1.CheckedChanged += new System.EventHandler(this.radBtn1_CheckedChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 10);
+            this.label3.Margin = new System.Windows.Forms.Padding(10, 7, 3, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(63, 15);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Filter Level";
             // 
             // frmSAAOB
             // 
@@ -276,13 +259,12 @@ namespace AccountingSystem.Views.Reports.SAAOB
         internal System.Windows.Forms.ComboBox cmbxFund;
         internal System.Windows.Forms.DateTimePicker dtAsOf;
         private System.Windows.Forms.Label label3;
-        internal System.Windows.Forms.CheckBox chkBxAdvanceMode;
-        internal System.Windows.Forms.Button btnPrint;
         internal System.Windows.Forms.Panel panelConfig;
         internal System.Windows.Forms.RadioButton radBtn1;
         internal System.Windows.Forms.RadioButton radBtn5;
         internal System.Windows.Forms.RadioButton radBtn4;
         internal System.Windows.Forms.RadioButton radBtn3;
         internal System.Windows.Forms.RadioButton radBtn2;
+        private System.Windows.Forms.CheckBox chkbxSpecialFPP;
     }
 }

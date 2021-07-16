@@ -34,6 +34,15 @@ namespace AccountingSystem.Views.Dashboard
             this.label38 = new System.Windows.Forms.Label();
             this.lblCRJCounter = new System.Windows.Forms.Label();
             this.tlpJournals = new System.Windows.Forms.TableLayoutPanel();
+            this.pnlJEV = new System.Windows.Forms.Panel();
+            this.lnkJEV = new System.Windows.Forms.LinkLabel();
+            this.lblJEVCounter = new System.Windows.Forms.Label();
+            this.pnlPendingJEV = new System.Windows.Forms.Panel();
+            this.lnkPending = new System.Windows.Forms.LinkLabel();
+            this.lblPendingJEVCounter = new System.Windows.Forms.Label();
+            this.pnlApprovedJEV = new System.Windows.Forms.Panel();
+            this.lnkApproved = new System.Windows.Forms.LinkLabel();
+            this.lblApprovedJEVCounter = new System.Windows.Forms.Label();
             this.pnlCDJ = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.lblCDJCounter = new System.Windows.Forms.Label();
@@ -55,6 +64,9 @@ namespace AccountingSystem.Views.Dashboard
             this.btnRefreshCounter = new System.Windows.Forms.Button();
             this.pnlCRJ.SuspendLayout();
             this.tlpJournals.SuspendLayout();
+            this.pnlJEV.SuspendLayout();
+            this.pnlPendingJEV.SuspendLayout();
+            this.pnlApprovedJEV.SuspendLayout();
             this.pnlCDJ.SuspendLayout();
             this.pnlCkDJ.SuspendLayout();
             this.pnlPRJ.SuspendLayout();
@@ -71,7 +83,7 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlCRJ.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCRJ.Location = new System.Drawing.Point(315, 3);
             this.pnlCRJ.Name = "pnlCRJ";
-            this.pnlCRJ.Size = new System.Drawing.Size(150, 137);
+            this.pnlCRJ.Size = new System.Drawing.Size(150, 112);
             this.pnlCRJ.TabIndex = 10;
             // 
             // label38
@@ -96,19 +108,24 @@ namespace AccountingSystem.Views.Dashboard
             this.lblCRJCounter.Name = "lblCRJCounter";
             this.lblCRJCounter.Size = new System.Drawing.Size(148, 40);
             this.lblCRJCounter.TabIndex = 6;
-            this.lblCRJCounter.Text = "26";
+            this.lblCRJCounter.Text = "0";
             this.lblCRJCounter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // tlpJournals
             // 
+            this.tlpJournals.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpJournals.ColumnCount = 7;
             this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28572F));
+            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28572F));
+            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28572F));
+            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28572F));
+            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28572F));
+            this.tlpJournals.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28572F));
+            this.tlpJournals.Controls.Add(this.pnlJEV, 0, 1);
+            this.tlpJournals.Controls.Add(this.pnlPendingJEV, 0, 1);
+            this.tlpJournals.Controls.Add(this.pnlApprovedJEV, 0, 1);
             this.tlpJournals.Controls.Add(this.pnlCDJ, 4, 0);
             this.tlpJournals.Controls.Add(this.pnlCkDJ, 3, 0);
             this.tlpJournals.Controls.Add(this.pnlPRJ, 4, 0);
@@ -118,10 +135,122 @@ namespace AccountingSystem.Views.Dashboard
             this.tlpJournals.Controls.Add(this.panel22, 0, 0);
             this.tlpJournals.Location = new System.Drawing.Point(2, 32);
             this.tlpJournals.Name = "tlpJournals";
-            this.tlpJournals.RowCount = 1;
-            this.tlpJournals.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpJournals.Size = new System.Drawing.Size(1093, 143);
+            this.tlpJournals.RowCount = 2;
+            this.tlpJournals.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpJournals.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpJournals.Size = new System.Drawing.Size(1093, 237);
             this.tlpJournals.TabIndex = 12;
+            // 
+            // pnlJEV
+            // 
+            this.pnlJEV.BackColor = System.Drawing.Color.White;
+            this.pnlJEV.Controls.Add(this.lnkJEV);
+            this.pnlJEV.Controls.Add(this.lblJEVCounter);
+            this.pnlJEV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlJEV.Location = new System.Drawing.Point(3, 121);
+            this.pnlJEV.Name = "pnlJEV";
+            this.pnlJEV.Size = new System.Drawing.Size(150, 113);
+            this.pnlJEV.TabIndex = 18;
+            // 
+            // lnkJEV
+            // 
+            this.lnkJEV.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lnkJEV.AutoSize = true;
+            this.lnkJEV.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkJEV.Location = new System.Drawing.Point(60, 68);
+            this.lnkJEV.Name = "lnkJEV";
+            this.lnkJEV.Size = new System.Drawing.Size(24, 15);
+            this.lnkJEV.TabIndex = 15;
+            this.lnkJEV.TabStop = true;
+            this.lnkJEV.Text = "JEV";
+            this.lnkJEV.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkJEV_LinkClicked);
+            // 
+            // lblJEVCounter
+            // 
+            this.lblJEVCounter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblJEVCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblJEVCounter.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblJEVCounter.Location = new System.Drawing.Point(0, 15);
+            this.lblJEVCounter.Name = "lblJEVCounter";
+            this.lblJEVCounter.Size = new System.Drawing.Size(150, 40);
+            this.lblJEVCounter.TabIndex = 6;
+            this.lblJEVCounter.Text = "0";
+            this.lblJEVCounter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // pnlPendingJEV
+            // 
+            this.pnlPendingJEV.BackColor = System.Drawing.Color.White;
+            this.pnlPendingJEV.Controls.Add(this.lnkPending);
+            this.pnlPendingJEV.Controls.Add(this.lblPendingJEVCounter);
+            this.pnlPendingJEV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlPendingJEV.Location = new System.Drawing.Point(315, 121);
+            this.pnlPendingJEV.Name = "pnlPendingJEV";
+            this.pnlPendingJEV.Size = new System.Drawing.Size(150, 113);
+            this.pnlPendingJEV.TabIndex = 17;
+            // 
+            // lnkPending
+            // 
+            this.lnkPending.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lnkPending.AutoSize = true;
+            this.lnkPending.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkPending.Location = new System.Drawing.Point(36, 68);
+            this.lnkPending.Name = "lnkPending";
+            this.lnkPending.Size = new System.Drawing.Size(76, 15);
+            this.lnkPending.TabIndex = 15;
+            this.lnkPending.TabStop = true;
+            this.lnkPending.Text = "Pending JEVs";
+            this.lnkPending.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkPending_LinkClicked);
+            // 
+            // lblPendingJEVCounter
+            // 
+            this.lblPendingJEVCounter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPendingJEVCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblPendingJEVCounter.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblPendingJEVCounter.Location = new System.Drawing.Point(0, 15);
+            this.lblPendingJEVCounter.Name = "lblPendingJEVCounter";
+            this.lblPendingJEVCounter.Size = new System.Drawing.Size(150, 40);
+            this.lblPendingJEVCounter.TabIndex = 6;
+            this.lblPendingJEVCounter.Text = "0";
+            this.lblPendingJEVCounter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // pnlApprovedJEV
+            // 
+            this.pnlApprovedJEV.BackColor = System.Drawing.Color.White;
+            this.pnlApprovedJEV.Controls.Add(this.lnkApproved);
+            this.pnlApprovedJEV.Controls.Add(this.lblApprovedJEVCounter);
+            this.pnlApprovedJEV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlApprovedJEV.Location = new System.Drawing.Point(159, 121);
+            this.pnlApprovedJEV.Name = "pnlApprovedJEV";
+            this.pnlApprovedJEV.Size = new System.Drawing.Size(150, 113);
+            this.pnlApprovedJEV.TabIndex = 16;
+            // 
+            // lnkApproved
+            // 
+            this.lnkApproved.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lnkApproved.AutoSize = true;
+            this.lnkApproved.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkApproved.Location = new System.Drawing.Point(31, 68);
+            this.lnkApproved.Name = "lnkApproved";
+            this.lnkApproved.Size = new System.Drawing.Size(84, 15);
+            this.lnkApproved.TabIndex = 14;
+            this.lnkApproved.TabStop = true;
+            this.lnkApproved.Text = "Approved JEVs";
+            this.lnkApproved.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkApproved_LinkClicked);
+            // 
+            // lblApprovedJEVCounter
+            // 
+            this.lblApprovedJEVCounter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblApprovedJEVCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblApprovedJEVCounter.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblApprovedJEVCounter.Location = new System.Drawing.Point(0, 15);
+            this.lblApprovedJEVCounter.Name = "lblApprovedJEVCounter";
+            this.lblApprovedJEVCounter.Size = new System.Drawing.Size(150, 40);
+            this.lblApprovedJEVCounter.TabIndex = 6;
+            this.lblApprovedJEVCounter.Text = "0";
+            this.lblApprovedJEVCounter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // pnlCDJ
             // 
@@ -129,9 +258,9 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlCDJ.Controls.Add(this.label1);
             this.pnlCDJ.Controls.Add(this.lblCDJCounter);
             this.pnlCDJ.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCDJ.Location = new System.Drawing.Point(627, 3);
+            this.pnlCDJ.Location = new System.Drawing.Point(783, 3);
             this.pnlCDJ.Name = "pnlCDJ";
-            this.pnlCDJ.Size = new System.Drawing.Size(150, 137);
+            this.pnlCDJ.Size = new System.Drawing.Size(150, 112);
             this.pnlCDJ.TabIndex = 15;
             // 
             // label1
@@ -156,7 +285,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblCDJCounter.Name = "lblCDJCounter";
             this.lblCDJCounter.Size = new System.Drawing.Size(148, 40);
             this.lblCDJCounter.TabIndex = 6;
-            this.lblCDJCounter.Text = "5";
+            this.lblCDJCounter.Text = "0";
             this.lblCDJCounter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // pnlCkDJ
@@ -167,7 +296,7 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlCkDJ.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCkDJ.Location = new System.Drawing.Point(471, 3);
             this.pnlCkDJ.Name = "pnlCkDJ";
-            this.pnlCkDJ.Size = new System.Drawing.Size(150, 137);
+            this.pnlCkDJ.Size = new System.Drawing.Size(150, 112);
             this.pnlCkDJ.TabIndex = 14;
             // 
             // label47
@@ -192,7 +321,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblCkDJCounter.Name = "lblCkDJCounter";
             this.lblCkDJCounter.Size = new System.Drawing.Size(147, 40);
             this.lblCkDJCounter.TabIndex = 6;
-            this.lblCkDJCounter.Text = "19";
+            this.lblCkDJCounter.Text = "0";
             this.lblCkDJCounter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // pnlPRJ
@@ -201,9 +330,9 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlPRJ.Controls.Add(this.label43);
             this.pnlPRJ.Controls.Add(this.lblPRJCounter);
             this.pnlPRJ.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPRJ.Location = new System.Drawing.Point(783, 3);
+            this.pnlPRJ.Location = new System.Drawing.Point(627, 3);
             this.pnlPRJ.Name = "pnlPRJ";
-            this.pnlPRJ.Size = new System.Drawing.Size(150, 137);
+            this.pnlPRJ.Size = new System.Drawing.Size(150, 112);
             this.pnlPRJ.TabIndex = 12;
             // 
             // label43
@@ -228,7 +357,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblPRJCounter.Name = "lblPRJCounter";
             this.lblPRJCounter.Size = new System.Drawing.Size(148, 40);
             this.lblPRJCounter.TabIndex = 6;
-            this.lblPRJCounter.Text = "2";
+            this.lblPRJCounter.Text = "0";
             this.lblPRJCounter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // pnlGJ
@@ -239,7 +368,7 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlGJ.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlGJ.Location = new System.Drawing.Point(159, 3);
             this.pnlGJ.Name = "pnlGJ";
-            this.pnlGJ.Size = new System.Drawing.Size(150, 137);
+            this.pnlGJ.Size = new System.Drawing.Size(150, 112);
             this.pnlGJ.TabIndex = 11;
             // 
             // label41
@@ -265,7 +394,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblGJCounter.Name = "lblGJCounter";
             this.lblGJCounter.Size = new System.Drawing.Size(148, 40);
             this.lblGJCounter.TabIndex = 6;
-            this.lblGJCounter.Text = "15";
+            this.lblGJCounter.Text = "0";
             this.lblGJCounter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // pnlADADJ
@@ -276,7 +405,7 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlADADJ.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlADADJ.Location = new System.Drawing.Point(939, 3);
             this.pnlADADJ.Name = "pnlADADJ";
-            this.pnlADADJ.Size = new System.Drawing.Size(151, 137);
+            this.pnlADADJ.Size = new System.Drawing.Size(151, 112);
             this.pnlADADJ.TabIndex = 13;
             // 
             // label45
@@ -301,7 +430,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblADADJCounter.Name = "lblADADJCounter";
             this.lblADADJCounter.Size = new System.Drawing.Size(149, 40);
             this.lblADADJCounter.TabIndex = 6;
-            this.lblADADJCounter.Text = "5";
+            this.lblADADJCounter.Text = "0";
             this.lblADADJCounter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // panel22
@@ -309,9 +438,10 @@ namespace AccountingSystem.Views.Dashboard
             this.panel22.BackColor = System.Drawing.Color.White;
             this.panel22.Controls.Add(this.label39);
             this.panel22.Controls.Add(this.lblObligationRecordCount);
+            this.panel22.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel22.Location = new System.Drawing.Point(3, 3);
             this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(150, 137);
+            this.panel22.Size = new System.Drawing.Size(150, 112);
             this.panel22.TabIndex = 13;
             // 
             // label39
@@ -336,18 +466,19 @@ namespace AccountingSystem.Views.Dashboard
             this.lblObligationRecordCount.Name = "lblObligationRecordCount";
             this.lblObligationRecordCount.Size = new System.Drawing.Size(150, 40);
             this.lblObligationRecordCount.TabIndex = 6;
-            this.lblObligationRecordCount.Text = "15";
+            this.lblObligationRecordCount.Text = "0";
             this.lblObligationRecordCount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // btnRefreshCounter
             // 
             this.btnRefreshCounter.Image = ((System.Drawing.Image)(resources.GetObject("btnRefreshCounter.Image")));
-            this.btnRefreshCounter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRefreshCounter.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnRefreshCounter.Location = new System.Drawing.Point(3, 3);
             this.btnRefreshCounter.Name = "btnRefreshCounter";
             this.btnRefreshCounter.Size = new System.Drawing.Size(135, 23);
             this.btnRefreshCounter.TabIndex = 13;
             this.btnRefreshCounter.Text = "Refresh Counter";
+            this.btnRefreshCounter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefreshCounter.UseVisualStyleBackColor = true;
             this.btnRefreshCounter.Click += new System.EventHandler(this.btnRefreshCounter_Click);
             // 
@@ -359,10 +490,16 @@ namespace AccountingSystem.Views.Dashboard
             this.Controls.Add(this.btnRefreshCounter);
             this.Controls.Add(this.tlpJournals);
             this.Name = "UcAccountingDashboard";
-            this.Size = new System.Drawing.Size(1098, 178);
+            this.Size = new System.Drawing.Size(1098, 326);
             this.Load += new System.EventHandler(this.UcAccountingDashboard_Load);
             this.pnlCRJ.ResumeLayout(false);
             this.tlpJournals.ResumeLayout(false);
+            this.pnlJEV.ResumeLayout(false);
+            this.pnlJEV.PerformLayout();
+            this.pnlPendingJEV.ResumeLayout(false);
+            this.pnlPendingJEV.PerformLayout();
+            this.pnlApprovedJEV.ResumeLayout(false);
+            this.pnlApprovedJEV.PerformLayout();
             this.pnlCDJ.ResumeLayout(false);
             this.pnlCkDJ.ResumeLayout(false);
             this.pnlPRJ.ResumeLayout(false);
@@ -399,5 +536,14 @@ namespace AccountingSystem.Views.Dashboard
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblCDJCounter;
         private System.Windows.Forms.Button btnRefreshCounter;
+        private System.Windows.Forms.Panel pnlApprovedJEV;
+        internal System.Windows.Forms.Label lblApprovedJEVCounter;
+        private System.Windows.Forms.Panel pnlPendingJEV;
+        internal System.Windows.Forms.Label lblPendingJEVCounter;
+        private System.Windows.Forms.Panel pnlJEV;
+        internal System.Windows.Forms.Label lblJEVCounter;
+        private System.Windows.Forms.LinkLabel lnkApproved;
+        private System.Windows.Forms.LinkLabel lnkPending;
+        private System.Windows.Forms.LinkLabel lnkJEV;
     }
 }

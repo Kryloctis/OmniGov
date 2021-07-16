@@ -18,7 +18,12 @@ namespace ACC.Domain.Interfaces
 
         bool Delete(int obligationRequestId);
 
+        //SAAOB and SAAOBB
         DataTable GetViewRecords(int budgetAppropriationId, DateTime dateRequested);
+
+        //DASHBOARD
+        DataTable GetViewRecordsFPPIdFundIdDateEntry(int fppId, int fundId, DateTime dateIssued);
+        decimal GetSumObligations(string fppId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing);
 
         DataTable GetViewRecordsById(int Id);
 

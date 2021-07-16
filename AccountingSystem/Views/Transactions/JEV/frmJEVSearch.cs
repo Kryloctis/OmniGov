@@ -13,6 +13,10 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             InitializeComponent();
             this.frmJEV = frmJEV;
+
+            foreach (var item in Helper.MonthsDatasource().Values)
+                cbMonth.Items.Add(item);
+            cbMonth.SelectedIndex = DateTime.Now.Month - 1;
         }
 
         private void frmJEVSearch_Load(object sender, EventArgs e)
@@ -36,6 +40,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             var uc = frmJEV.ucjev1;
 
             DataTable dtJEV = Factory.JEVAccountsRepository().GetViewRecordsByJevId(uc.jevId);
+
             foreach (DataRow item in dtJEV.Rows)
             {
                 string fppId = item["fpp_id"].ToString();
@@ -121,7 +126,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                     Dictionary<string, string> jevDict = Factory.JEVRepository().GetRecordByJEV(jevNo);
                     int jevId = Convert.ToInt32(jevDict["id"]);
-
+                  
                     LoadCheckDisbursementsDataIfExist(uc, jevId);
                     LoadCashReceiptsDataIfExist(uc, jevId);
                     LoadADADisbursementDataIfExist(uc, jevId);
@@ -232,12 +237,20 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            DataTable dtJEV;
-            if (cbApprove.Checked)
-                dtJEV = Factory.JEVRepository().GetApprovedJEV(txtSearch.Text.Trim());
-            else
-                dtJEV = Factory.JEVRepository().GetRecordsBySearch(txtSearch.Text.Trim());
+            LoadJEVList();
+        }
 
+        internal void LoadJEVList()
+        {
+           
+            var jevStatus = gbSearchFilter.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Tag.ToString();
+            var txtSeach = txtSearch.Text;
+            var jevMonth = Convert.ToInt32(cbMonth.SelectedIndex + 1).ToString();
+            var jevYear = nudYear.Value.ToString();
+
+            string[] searchParameters = new string[4] { jevStatus, txtSeach, jevMonth, jevYear };
+
+            DataTable dtJEV = Factory.JEVRepository().FilterRecords(searchParameters);
             HelperLoadRecords.JEVDatagridView(dtJEV, dgJEV);
         }
 
@@ -257,15 +270,5 @@ namespace AccountingSystem.Views.Transactions.JEV
             LoadSelectedJEV();
         }
 
-        private void cbApprove_CheckedChanged(object sender, EventArgs e)
-        {
-            DataTable dtJEV;
-            if (cbApprove.Checked)
-                dtJEV = Factory.JEVRepository().GetApprovedJEV(txtSearch.Text.Trim());
-            else
-                dtJEV = Factory.JEVRepository().GetRecordsBySearch(txtSearch.Text.Trim());
-
-            HelperLoadRecords.JEVDatagridView(dtJEV, dgJEV);
-        }
     }
 }

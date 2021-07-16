@@ -21,7 +21,6 @@ namespace AccountingSystem.Views.Reports.SAAOB
             InitializeComponent();
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
-            reportViewer.ShowPrintButton = false;
             panel2.Controls.Add(reportViewer);
             panelConfig.Enabled = false;
         }
@@ -48,11 +47,11 @@ namespace AccountingSystem.Views.Reports.SAAOB
             int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
             DateTime date = dtAsOf.Value;
             short year = Convert.ToInt16(dtAsOf.Value.Year);
+            int fppSpecial = chkbxSpecialFPP.Checked? 1 : 0;
 
             try
             {
-               
-                var dtBudgetAppropriations = Factory.BudgetAppropriationsRepository().GetViewRecords(fundId, date, year, 0, 0);
+                var dtBudgetAppropriations = Factory.BudgetAppropriationsRepository().GetViewRecords(fundId, date, year, 0, (byte)fppSpecial);
 
 
                 foreach (DataRow row in dtBudgetAppropriations.Rows)
@@ -100,7 +99,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
                     decimal obligationRequestAmount = Convert.ToDecimal(dtObligation.Rows.Count == 0 ? 0 : dtObligation.Compute("SUM(amount)", string.Empty));
 
                     //UNOBLIGATED BALANCE
-                    decimal unobligatedBalance = TotalBudgetAppropraition - obligationRequestAmount;
+                    decimal unobligatedBalance = allotmentReleaseAmount - obligationRequestAmount;
 
                     var items = new object[]
                     {
@@ -174,13 +173,13 @@ namespace AccountingSystem.Views.Reports.SAAOB
                 var fundRepo = Factory.FundsRepository().GetRecordByID(fundId);
 
                 var parameters = new[] {
-
                     new ReportParameter("paramFundName", fundRepo["fund_name"]),
                     new ReportParameter("paramFundCode", fundRepo["fund_code"]),
                     new ReportParameter("paramDate", AsOf.ToString("MMMM dd, yyyy")),
                     new ReportParameter("paramSignatoryName", userName),
                     new ReportParameter("paramSignatoryPosition", userRoleName),
-                    new ReportParameter("paramFilterLevel","5")
+                    new ReportParameter("paramFilterLevel","5"),
+                    new ReportParameter("paramFPPIsSpecial", (chkbxSpecialFPP.Checked? 1 : 0).ToString())
                 };
 
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\status-of-appropriations-allotments-and-obligation.rdlc";
@@ -214,28 +213,6 @@ namespace AccountingSystem.Views.Reports.SAAOB
             LoadFunds();
         }
 
-
-        private void chkBxAdvanceMode_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkBxAdvanceMode.Checked)
-            {
-                reportViewer.SetDisplayMode(DisplayMode.Normal);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-            }
-
-            else
-            {
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-            }
-        }
-
-        private void btnPrint_Click(object sender, EventArgs e)
-        {
-            reportViewer.PrintDialog();
-        }
 
         //FILTER
         private void radBtn1_CheckedChanged(object sender, EventArgs e)

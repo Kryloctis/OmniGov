@@ -21,7 +21,6 @@ namespace AccountingSystem.Views.Reports.JEV
         internal string dv;
         internal string officer;
 
-        internal string paramDateOfEntry;
         internal string paramCheckDate;
         internal string paramCheckNo;
         internal string paramORNo;
@@ -115,7 +114,8 @@ namespace AccountingSystem.Views.Reports.JEV
 
                 var lguDetails = Helper.LGUDetails();
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
-                var preparedBy = "JOHN CENA";
+                var preparedByData = Helper.LoggedInUserData();
+                var preparedByFullName = $"{preparedByData["first_name"]} {preparedByData["mid_initial"]} {preparedByData["last_name"]}";
                 var full_jev = $"{data["fund_code"]}-{Convert.ToDateTime(data["date_entry"]).Year}-{Convert.ToDateTime(data["date_entry"]).Month}-{data["jev_no"]}";
 
                 SetJournalCustomFields();
@@ -128,7 +128,7 @@ namespace AccountingSystem.Views.Reports.JEV
                     new ReportParameter("paramJEVDate", Convert.ToDateTime(data["date_entry"]).ToString("MM/dd/yy")),
                     new ReportParameter("paramPayee", data["payee"]),
                     new ReportParameter("paramExplanation", data["explanation"]),
-                    new ReportParameter("paramPreparedBy",preparedBy),
+                    new ReportParameter("paramPreparedBy",preparedByFullName),
                     new ReportParameter("paramCertifiedBy", signatory),
                     new ReportParameter("paramDateEntry", Convert.ToDateTime(data["date_entry"]).ToString("MM/dd/yy")),
 
@@ -197,7 +197,12 @@ namespace AccountingSystem.Views.Reports.JEV
             Helper.LoadFormIcon(this);
             Helper.DatagridDefaultStyle(dgJEV);
 
-          
+            if (_jevId != 0)
+            {
+                leftPanel.Visible = false;
+                panel1.Dock = DockStyle.Fill;
+            }
+            
             foreach (var item in Helper.MonthsDatasource().Values)
                 cbMonths.Items.Add(item);
 
@@ -211,8 +216,6 @@ namespace AccountingSystem.Views.Reports.JEV
                 reportViewer.ZoomPercent = 100;
                 reportViewer.RefreshReport();
             }
-
-
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)

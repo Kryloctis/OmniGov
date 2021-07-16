@@ -39,7 +39,16 @@ namespace ACC.Data
 
         public int CountRecords()
         {
-            throw new NotImplementedException();
+            try
+            {
+                string query = $"SELECT COUNT(*) FROM {tableName}";
+
+                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Delete(List<JEVModel> entityList)
@@ -142,7 +151,7 @@ namespace ACC.Data
                     new object[] { "@date", DbType.String, $"%{searchText}%" },
                 };
 
-                string query = $"SELECT id, funds_id, journals_id, jev_no, date_entry, ref_no, payee, explanation, fund_code ,is_approved, created_at, created_by, updated_at, updated_by, CONCAT_WS('-', fund_code,YEAR(date_entry),MONTH(date_entry),jev_no) AS full_jev_no FROM {viewTableName} WHERE is_approved=1 AND (jev_no LIKE @jev_no OR ref_no LIKE @ref_no OR payee LIKE @payee OR explanation LIKE @explanation)";
+                string query = $"SELECT id, funds_id, journals_id, jev_no, full_jev_no, date_entry, ref_no, payee, explanation, fund_code ,is_approved, created_at, created_by, updated_at, updated_by FROM {viewTableName} WHERE is_approved=1 AND (jev_no LIKE @jev_no OR ref_no LIKE @ref_no OR payee LIKE @payee OR explanation LIKE @explanation)";
 
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
@@ -680,6 +689,55 @@ namespace ACC.Data
             }
         }
 
+        public int TotalApproveJEV()
+        {
+            try
+            {
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved=1";
 
+                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int TotalPendingJEV()
+        {
+            try
+            {
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved=0";
+
+                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable FilterRecords(string[] searchParameters)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@jev_status", DbType.String, searchParameters[0]},
+                    new object[] { "@search_all", DbType.String, $"%{searchParameters[1]}%" },
+                    new object[] { "@jev_month", DbType.String, searchParameters[2]},
+                    new object[] { "@jev_year", DbType.String, searchParameters[3]}
+                };
+
+                string query = $"SELECT id, funds_id, journals_id, jev_no, full_jev_no, date_entry, ref_no, payee, explanation, fund_code ,is_approved, created_at, created_by, updated_at, updated_by FROM {viewTableName} WHERE is_approved=@jev_status AND MONTH(date_entry) = @jev_month AND YEAR(date_entry) = @jev_year AND (jev_no LIKE @search_all OR ref_no LIKE @search_all OR payee LIKE @search_all OR explanation LIKE @search_all)";
+
+                var dtGeneralLedgers = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

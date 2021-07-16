@@ -8,16 +8,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AccountingSystem.Views.Transactions.JEV;
 
 namespace AccountingSystem.Views.Dashboard
 {
     public partial class UcAccountingDashboard : UserControl
     {
-        private Dictionary<string, string> userDict;
-        public UcAccountingDashboard(Dictionary<string, string> _userDict)
+        internal Dictionary<string, string> userDict;
+
+        public UcAccountingDashboard()
         {
             InitializeComponent();
-            userDict = _userDict;
         }
 
         private void UcAccountingDashboard_Load(object sender, EventArgs e)
@@ -25,12 +26,6 @@ namespace AccountingSystem.Views.Dashboard
             if (!DesignMode)
             {
                 Dock = DockStyle.Fill;
-
-                VisibilityJournalCardsCounter(false);
-
-                if (userDict["office"] == "Accounting" || userDict["office"] == "SysAdmin")
-                    VisibilityJournalCardsCounter(true);
-
                 LoadObligationRecordCount();
                 LoadJEVCounter();
             }
@@ -52,6 +47,9 @@ namespace AccountingSystem.Views.Dashboard
             var cashDisbursementJournalCount = Factory.JEVRepository().JevCounter(4);
             var checkDisbursementJournalCount = Factory.JEVRepository().JevCounter(5);
             var authorityToDebitJournalCount = Factory.JEVRepository().JevCounter(6);
+            var jevCount = Factory.JEVRepository().CountRecords();
+            var approvedJEVCount = Factory.JEVRepository().TotalApproveJEV();
+            var pendingJEVCount = Factory.JEVRepository().TotalPendingJEV();
 
             lblGJCounter.Text = generalJournalCount.ToString();
             lblCRJCounter.Text = cashReceiptsJournalCount.ToString();
@@ -59,6 +57,10 @@ namespace AccountingSystem.Views.Dashboard
             lblCDJCounter.Text = cashDisbursementJournalCount.ToString();
             lblCkDJCounter.Text = checkDisbursementJournalCount.ToString();
             lblADADJCounter.Text = authorityToDebitJournalCount.ToString();
+            lblJEVCounter.Text = jevCount.ToString();
+            lblApprovedJEVCounter.Text = approvedJEVCount.ToString();
+            lblPendingJEVCounter.Text = pendingJEVCount.ToString();
+            
         }
 
         private void btnRefreshCounter_Click(object sender, EventArgs e)
@@ -66,14 +68,38 @@ namespace AccountingSystem.Views.Dashboard
             LoadJEVCounter();
         }
 
-        private void VisibilityJournalCardsCounter(bool visible)
+        private void lnkJEV_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            pnlGJ.Visible = visible;
-            pnlCRJ.Visible = visible;
-            pnlADADJ.Visible = visible;
-            pnlCDJ.Visible = visible;
-            pnlCkDJ.Visible = visible;
-            pnlPRJ.Visible = visible;
+            var frmJEV = new frmJEV();
+            frmJEV.Show();
+            var frmJEVSearch = new frmJEVSearch(frmJEV);
+
+            frmJEVSearch.rbApproved.Checked = true;
+            frmJEVSearch.LoadJEVList();
+            frmJEVSearch.ShowDialog();
         }
+
+        private void lnkApproved_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var frmJEV = new frmJEV();
+            frmJEV.Show();
+            var frmJEVSearch = new frmJEVSearch(frmJEV);
+
+            frmJEVSearch.rbApproved.Checked = true;
+            frmJEVSearch.LoadJEVList();
+            frmJEVSearch.ShowDialog();
+        }
+
+        private void lnkPending_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var frmJEV = new frmJEV();
+            frmJEV.Show();
+            var frmJEVSearch = new frmJEVSearch(frmJEV);
+
+            frmJEVSearch.rbPending.Checked = true;
+            frmJEVSearch.LoadJEVList();
+            frmJEVSearch.ShowDialog();
+        }
+
     }
 }

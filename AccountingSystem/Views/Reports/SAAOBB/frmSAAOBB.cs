@@ -34,10 +34,10 @@ namespace AccountingSystem.Views.Reports.SAAOBB
             int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
             DateTime date = dtAsOf.Value;
             short year = Convert.ToInt16(dtAsOf.Value.Year);
-
+            int ffpIsSpecial = chkbxSpecialAccounts.Checked ? 1 : 0; 
 
             //Get Current Records
-            var dtBudgetAppropriations = Factory.BudgetAppropriationsRepository().GetViewRecords(fundId, date, 0);
+            var dtBudgetAppropriations = Factory.BudgetAppropriationsRepository().GetViewRecords(fundId, date, (byte)ffpIsSpecial);
 
             foreach (DataRow item in dtBudgetAppropriations.Rows)
             {

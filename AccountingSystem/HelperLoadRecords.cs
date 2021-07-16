@@ -1256,7 +1256,8 @@ namespace AccountingSystem
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["funds_id"].Visible = false;
             datagrid.Columns["journals_id"].Visible = false;
-            datagrid.Columns["jev_no"].HeaderText = "JEV No.";
+            datagrid.Columns["jev_no"].Visible = false;
+            datagrid.Columns["full_jev_no"].HeaderText = "JEV No.";
             datagrid.Columns["date_entry"].HeaderText = "Date";
             datagrid.Columns["ref_no"].HeaderText = "Ref No.";
             datagrid.Columns["payee"].HeaderText = "Payee";

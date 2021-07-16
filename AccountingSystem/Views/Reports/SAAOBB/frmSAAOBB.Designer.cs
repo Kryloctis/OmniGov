@@ -36,12 +36,14 @@ namespace AccountingSystem.Views.Reports.SAAOBB
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panelReport = new System.Windows.Forms.Panel();
+            this.chkbxSpecialAccounts = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.chkbxSpecialAccounts);
             this.panel1.Controls.Add(this.dtAsOf);
             this.panel1.Controls.Add(this.cmbxFund);
             this.panel1.Controls.Add(this.btnRetrieve);
@@ -56,6 +58,7 @@ namespace AccountingSystem.Views.Reports.SAAOBB
             // dtAsOf
             // 
             this.dtAsOf.Location = new System.Drawing.Point(333, 11);
+            this.dtAsOf.Margin = new System.Windows.Forms.Padding(3, 3, 20, 3);
             this.dtAsOf.Name = "dtAsOf";
             this.dtAsOf.Size = new System.Drawing.Size(211, 23);
             this.dtAsOf.TabIndex = 6;
@@ -71,7 +74,7 @@ namespace AccountingSystem.Views.Reports.SAAOBB
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(567, 11);
+            this.btnRetrieve.Location = new System.Drawing.Point(706, 12);
             this.btnRetrieve.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
             this.btnRetrieve.Name = "btnRetrieve";
             this.btnRetrieve.Size = new System.Drawing.Size(92, 23);
@@ -107,6 +110,16 @@ namespace AccountingSystem.Views.Reports.SAAOBB
             this.panelReport.Size = new System.Drawing.Size(915, 638);
             this.panelReport.TabIndex = 2;
             // 
+            // chkbxSpecialAccounts
+            // 
+            this.chkbxSpecialAccounts.AutoSize = true;
+            this.chkbxSpecialAccounts.Location = new System.Drawing.Point(567, 14);
+            this.chkbxSpecialAccounts.Name = "chkbxSpecialAccounts";
+            this.chkbxSpecialAccounts.Size = new System.Drawing.Size(116, 19);
+            this.chkbxSpecialAccounts.TabIndex = 7;
+            this.chkbxSpecialAccounts.Text = "Special Accounts";
+            this.chkbxSpecialAccounts.UseVisualStyleBackColor = true;
+            // 
             // frmSAAOBB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -139,5 +152,6 @@ namespace AccountingSystem.Views.Reports.SAAOBB
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.Panel panelReport;
+        private System.Windows.Forms.CheckBox chkbxSpecialAccounts;
     }
 }
