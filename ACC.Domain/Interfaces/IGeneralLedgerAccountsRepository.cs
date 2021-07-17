@@ -20,7 +20,9 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetAllViewRecordsBySearch(string searchText);
 
+        DataTable GetViewRecordsByAccountGroup(int accountGroupId);
 
+        DataTable GetViewRecordsBySearchAndAccountGroup(int accountGroupId, string searchText);
 
         DataTable GetViewRecordsByMajorAccGroupName(string majAccGroupName);
 

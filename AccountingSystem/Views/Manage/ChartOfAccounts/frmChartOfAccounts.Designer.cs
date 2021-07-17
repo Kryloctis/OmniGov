@@ -41,6 +41,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.dgGeneralLedgerAccounts = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabGeneralLedgers = new System.Windows.Forms.TabPage();
+            this.cmbxGenLedgAccountGroup = new System.Windows.Forms.ComboBox();
             this.btnRetrieve = new System.Windows.Forms.Button();
             this.cmbYear = new System.Windows.Forms.ComboBox();
             this.cmbFund = new System.Windows.Forms.ComboBox();
@@ -167,6 +168,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             // 
             // tabGeneralLedgers
             // 
+            this.tabGeneralLedgers.Controls.Add(this.cmbxGenLedgAccountGroup);
             this.tabGeneralLedgers.Controls.Add(this.btnRetrieve);
             this.tabGeneralLedgers.Controls.Add(this.cmbYear);
             this.tabGeneralLedgers.Controls.Add(this.cmbFund);
@@ -181,6 +183,16 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.tabGeneralLedgers.TabIndex = 0;
             this.tabGeneralLedgers.Text = "General Ledgers";
             this.tabGeneralLedgers.UseVisualStyleBackColor = true;
+            // 
+            // cmbxGenLedgAccountGroup
+            // 
+            this.cmbxGenLedgAccountGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxGenLedgAccountGroup.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.cmbxGenLedgAccountGroup.FormattingEnabled = true;
+            this.cmbxGenLedgAccountGroup.Location = new System.Drawing.Point(286, 7);
+            this.cmbxGenLedgAccountGroup.Name = "cmbxGenLedgAccountGroup";
+            this.cmbxGenLedgAccountGroup.Size = new System.Drawing.Size(177, 23);
+            this.cmbxGenLedgAccountGroup.TabIndex = 10;
             // 
             // btnRetrieve
             // 
@@ -496,5 +508,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         private System.Windows.Forms.ComboBox cmbFund;
         private System.Windows.Forms.ComboBox cmbYear;
         private System.Windows.Forms.Button btnRetrieve;
+        private System.Windows.Forms.ComboBox cmbxGenLedgAccountGroup;
     }
 }
