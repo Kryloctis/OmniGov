@@ -31,7 +31,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.dtAsOf = new System.Windows.Forms.DateTimePicker();
-            this.cmbxFund = new System.Windows.Forms.ComboBox();
+            this.cmbFund = new System.Windows.Forms.ComboBox();
             this.btnRetrieve = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.dtAsOf);
-            this.panel1.Controls.Add(this.cmbxFund);
+            this.panel1.Controls.Add(this.cmbFund);
             this.panel1.Controls.Add(this.btnRetrieve);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
@@ -61,19 +61,19 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             this.dtAsOf.Size = new System.Drawing.Size(211, 23);
             this.dtAsOf.TabIndex = 6;
             // 
-            // cmbxFund
+            // cmbFund
             // 
-            this.cmbxFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxFund.FormattingEnabled = true;
-            this.cmbxFund.Location = new System.Drawing.Point(52, 12);
-            this.cmbxFund.Name = "cmbxFund";
-            this.cmbxFund.Size = new System.Drawing.Size(218, 23);
-            this.cmbxFund.TabIndex = 5;
+            this.cmbFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFund.FormattingEnabled = true;
+            this.cmbFund.Location = new System.Drawing.Point(52, 12);
+            this.cmbFund.Name = "cmbFund";
+            this.cmbFund.Size = new System.Drawing.Size(218, 23);
+            this.cmbFund.TabIndex = 5;
             // 
             // btnRetrieve
             // 
             this.btnRetrieve.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRetrieve.Location = new System.Drawing.Point(811, 12);
+            this.btnRetrieve.Location = new System.Drawing.Point(555, 11);
             this.btnRetrieve.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
             this.btnRetrieve.Name = "btnRetrieve";
             this.btnRetrieve.Size = new System.Drawing.Size(92, 23);
@@ -120,6 +120,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             this.Name = "frmTrialBalance";
             this.Text = "Pre Closing Trial Balance";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmTrialBalance_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -130,7 +131,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         private System.Windows.Forms.Panel panel1;
         internal System.Windows.Forms.DateTimePicker dtAsOf;
-        internal System.Windows.Forms.ComboBox cmbxFund;
+        internal System.Windows.Forms.ComboBox cmbFund;
         internal System.Windows.Forms.Button btnRetrieve;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;

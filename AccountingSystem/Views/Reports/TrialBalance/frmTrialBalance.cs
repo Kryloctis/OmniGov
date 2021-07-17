@@ -15,6 +15,8 @@ namespace AccountingSystem.Views.Reports.TrialBalance
     {
 
         private readonly ReportViewer reportViewer;
+        private byte fundId;
+        private short year;
 
         public frmTrialBalance()
         {
@@ -45,12 +47,14 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                 report.DataSources.Add(new ReportDataSource("dtPreTrialBalance", DataTablePreTrialBalance()));
 
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
-                var fundName = "GENERAL FUND";
+                var fundName = cmbFund.Text.ToUpper();
+                var asOfDate = dtAsOf.Value.ToString("MMMM dd, yyyyy");
 
                 var parameters = new[] {
                     new ReportParameter("paramLGUName", lguDict["lgu_name"]),
                     new ReportParameter("paramFund", fundName),
-                    new ReportParameter("paramSignatory", signatory)
+                    new ReportParameter("paramSignatory", signatory),
+                    new ReportParameter("paramAsOf", asOfDate),
                   };
                 report.SetParameters(parameters);
 
@@ -68,6 +72,9 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             var dtPreTrialBalance = new dsLFS.dtPreTrialBalanceDataTable();
             var dtPreTrialBalanceFromDB = Factory.GeneralLedgerAccountsRepository().GetAllViewRecords();
 
+            fundId = Convert.ToByte(cmbFund.SelectedValue);
+            year = Convert.ToInt16(dtAsOf.Value.Year);
+
             foreach (DataRow item in dtPreTrialBalanceFromDB.Rows)
             {
 
@@ -77,8 +84,8 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
 
                 var beginningBalanceRepository = Factory.BeginningBalancesRepository();
-                decimal generalLedgerBalance = beginningBalanceRepository.GetSumBalanceByGeneralLedgerId(1, (ushort)item["general_ledger_accounts_id"], 2021);
-                var beginningBalanceDict = beginningBalanceRepository.GetRecordByFundsAndGeneralLedgerID(1, (ushort)item["general_ledger_accounts_id"], 2021);
+                decimal generalLedgerBalance = beginningBalanceRepository.GetSumBalanceByGeneralLedgerId(fundId, (ushort)item["general_ledger_accounts_id"], 2021);
+                var beginningBalanceDict = beginningBalanceRepository.GetRecordByFundsAndGeneralLedgerID(fundId, (ushort)item["general_ledger_accounts_id"], 2021);
 
                 string debitCreditType = string.Empty;
                 debitCreditType = HelperLoadRecords.ValidateDebitOrCreditType(beginningBalanceDict, debitCreditType);
@@ -93,6 +100,17 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             }
 
             return dtPreTrialBalance;
+        }
+
+        private void LoadFunds()
+        {
+            var dtFunds = Factory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
+        }
+
+        private void frmTrialBalance_Load(object sender, EventArgs e)
+        {
+            LoadFunds();
         }
     }
 }
