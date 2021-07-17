@@ -26,6 +26,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                 var rolesRepository = Factory.RolesRepository();
                 var roleDict = rolesRepository.GetRecordByID(uc.roleId);
 
+
                 uc.cmbOffice.Text = roleDict["office"];
                 uc.txtName.Text = roleDict["role_name"];
                 
@@ -103,10 +104,10 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         private void frmRolesEdit_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            LoadSelectedRole();
             LoadPermissionsByRoleId();
             uc.LoadOffice();
             uc.LoadPermissions();
+            LoadSelectedRole();
         }
     }
 }
