@@ -522,5 +522,49 @@ namespace ACC.Data
                 throw;
             }
         }
+
+
+        //CHART OF ACCOUNTS
+        public DataTable GetViewRecordsByAccountGroup(int accountGroupId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@account_group_id", DbType.Int32, accountGroupId}
+                };
+
+                string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, created_at, updated_at FROM {viewTableName} WHERE account_group_id = @account_group_id";
+
+                var dtJournals = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtJournals, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetViewRecordsBySearchAndAccountGroup(int accountGroupId, string searchText)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@account_group_id", DbType.Int32, accountGroupId },
+                    new object[] { "@searchText", DbType.String, $"%{searchText}%" }
+                };
+
+
+                string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, sub_maj_acc_group_name, created_at, updated_at FROM {viewTableName} WHERE account_group_id = @account_group_id AND account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText";
+
+                var dtJournals = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtJournals, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

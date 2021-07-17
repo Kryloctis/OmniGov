@@ -50,31 +50,37 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         internal void LoadBudgetAppropriationRecords()
         {
-            dgBudgetAppropriations.SelectionChanged -= new System.EventHandler(dgBudgetAppropriations_SelectionChanged);
-
-            int recordCount = 0;
-            int fppID = Convert.ToInt32(cmbxFPP.SelectedValue);
-            int allotmentClassID = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
-            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-            short year = Convert.ToInt16(nudYear.Value);
-
-            HelperLoadRecords.BudgetAppropriationsDatagridView(dgBudgetAppropriations, fppID, allotmentClassID, fundId, year, txtTotal);
-
-            dgBudgetAppropriations.SelectionChanged += new System.EventHandler(dgBudgetAppropriations_SelectionChanged);
-            EnableDisableButtonsLocal(dgBudgetAppropriations);
-
-            foreach (DataGridViewRow item in dgBudgetAppropriations.Rows)
+            if (!DesignMode)
             {
-                if (item.Cells["id"].Value != null)
-                {
-                    recordCount += 1;
-                }
-            }
+                Cursor.Current = Cursors.WaitCursor;
+                dgBudgetAppropriations.SelectionChanged -= new System.EventHandler(dgBudgetAppropriations_SelectionChanged);
 
-            lblRecords.Text = recordCount.ToString();
-            lblDateEntry.Text = string.Empty;
-            lblCreatedAt.Text = string.Empty;
-            lblUpdatedAt.Text = string.Empty;
+                int recordCount = 0;
+                int fppID = Convert.ToInt32(cmbxFPP.SelectedValue);
+                int allotmentClassID = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
+                int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+                short year = Convert.ToInt16(nudYear.Value);
+
+                HelperLoadRecords.BudgetAppropriationsDatagridView(dgBudgetAppropriations, fppID, allotmentClassID, fundId, year, txtTotal);
+
+                dgBudgetAppropriations.SelectionChanged += new System.EventHandler(dgBudgetAppropriations_SelectionChanged);
+                EnableDisableButtonsLocal(dgBudgetAppropriations);
+
+                foreach (DataGridViewRow item in dgBudgetAppropriations.Rows)
+                {
+                    if (item.Cells["id"].Value != null)
+                    {
+                        recordCount += 1;
+                    }
+                }
+
+                lblRecords.Text = recordCount.ToString();
+                lblDateEntry.Text = string.Empty;
+                lblCreatedAt.Text = string.Empty;
+                lblUpdatedAt.Text = string.Empty;
+                Cursor.Current = Cursors.Default;
+            }
+          
         }
 
         internal void LoadComboboxes()
@@ -209,7 +215,56 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         private void btnDelete_Click(object sender, EventArgs e) 
         {
+            int selectedRows = 0;
 
+            var budgetAppropriationsModelList = new List<BudgetAppropriationsModel>();
+
+
+            foreach (DataGridViewRow row in dgBudgetAppropriations.SelectedRows)
+            {
+                if (row.Cells[0].Value != null)
+                    selectedRows += 1;
+            }
+
+            try
+            {
+                if (selectedRows > 0)
+                {
+                    if (Helper.MessageBoxConfirmDelete(selectedRows))
+                    {
+                        foreach (DataGridViewRow row in dgBudgetAppropriations.SelectedRows)
+                        {
+                            if (row.Cells[0].Value != null)
+                            {
+                                int budgetAppID = int.Parse(row.Cells[0].Value.ToString());
+                                var budgetAppropriationsModel = new BudgetAppropriationsModel()
+                                {
+                                    Id = budgetAppID
+                                };
+
+                                budgetAppropriationsModelList.Add(budgetAppropriationsModel);
+                            }
+                        }
+
+                        _ = Factory.BudgetAppropriationsRepository().Delete(budgetAppropriationsModelList);
+                        LoadBudgetAppropriationRecords();
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                switch (ex.Number)
+                {
+                    case 1451:
+                        Helper.MessageBoxError($"Cannot Delete Budget Appropriation.");
+                        break;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void NudYear_ValueChanged(object sender, EventArgs e)

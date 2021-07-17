@@ -75,12 +75,14 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             try
             {
-                if (txtSearch.Text.Length > 3 || string.IsNullOrWhiteSpace(txtSearch.Text.Trim()))
+                if (txtSearch.Text.Length > 3 || string.IsNullOrWhiteSpace(txtSearch.Text.Trim()) && !DesignMode)
                 {
+                    Cursor.Current = Cursors.WaitCursor;
                     var dtGeneralLedgers = new DataTable();
+                    int accountGroupId = Convert.ToInt32(cmbAccountGroup.SelectedValue);
 
                     if (string.IsNullOrWhiteSpace(txtSearch.Text.Trim()))
-                        dtGeneralLedgers = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
+                        dtGeneralLedgers = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroup(accountGroupId);
                     else
                         dtGeneralLedgers = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(txtSearch.Text.Trim());
 
@@ -88,6 +90,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
                     year = Convert.ToInt16(cmbYear.Text);
                     HelperLoadRecords.GeneralLedgerAccountsWithBalancesDatagridView(dtGeneralLedgers, dgGeneralLedgerAccounts, fundId, year);
                     lblRecordCount.Text = dgGeneralLedgerAccounts.Rows.Count.ToString();
+                    Cursor.Current = Cursors.Default;
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -99,6 +102,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             {
                 DataTable dtAccountGroup = Factory.AccountGroupRepository().GetRecords();
                 HelperLoadRecords.AccountGroupComboBox(dtAccountGroup, cmbAccountGroup, "account_group_name", "id");
+                HelperLoadRecords.AccountGroupComboBox(dtAccountGroup, cmbxGenLedgAccountGroup, "account_group_name", "id");
             }
             catch (Exception ex)
             {
