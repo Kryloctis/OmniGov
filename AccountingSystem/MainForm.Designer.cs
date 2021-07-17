@@ -69,6 +69,9 @@ namespace AccountingSystem
             this.menuSAAOB = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOBB = new System.Windows.Forms.ToolStripMenuItem();
             this.menuJEVS = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuTrialBalance = new System.Windows.Forms.ToolStripMenuItem();
+            this.menupreClosingTrialBalance = new System.Windows.Forms.ToolStripMenuItem();
+            this.menupostClosingTrialBalance = new System.Windows.Forms.ToolStripMenuItem();
             this.menuprintRCI = new System.Windows.Forms.ToolStripMenuItem();
             this.menuprintPC = new System.Windows.Forms.ToolStripMenuItem();
             this.menuprintGC = new System.Windows.Forms.ToolStripMenuItem();
@@ -323,6 +326,7 @@ namespace AccountingSystem
             this.menuSAAOB,
             this.menuSAAOBB,
             this.menuJEVS,
+            this.menuTrialBalance,
             this.menuprintRCI,
             this.menuprintPC,
             this.menuprintGC,
@@ -430,6 +434,28 @@ namespace AccountingSystem
             this.menuJEVS.Size = new System.Drawing.Size(233, 22);
             this.menuJEVS.Text = "JEVs";
             this.menuJEVS.Click += new System.EventHandler(this.menuJEVS_Click_1);
+            // 
+            // menuTrialBalance
+            // 
+            this.menuTrialBalance.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menupreClosingTrialBalance,
+            this.menupostClosingTrialBalance});
+            this.menuTrialBalance.Name = "menuTrialBalance";
+            this.menuTrialBalance.Size = new System.Drawing.Size(233, 22);
+            this.menuTrialBalance.Text = "Trial Balance";
+            // 
+            // menupreClosingTrialBalance
+            // 
+            this.menupreClosingTrialBalance.Name = "menupreClosingTrialBalance";
+            this.menupreClosingTrialBalance.Size = new System.Drawing.Size(208, 22);
+            this.menupreClosingTrialBalance.Text = "Pre Closing Trial Balance";
+            this.menupreClosingTrialBalance.Click += new System.EventHandler(this.menupreClosingTrialBalance_Click);
+            // 
+            // menupostClosingTrialBalance
+            // 
+            this.menupostClosingTrialBalance.Name = "menupostClosingTrialBalance";
+            this.menupostClosingTrialBalance.Size = new System.Drawing.Size(208, 22);
+            this.menupostClosingTrialBalance.Text = "Post Closing Trial Balance";
             // 
             // menuprintRCI
             // 
@@ -906,6 +932,9 @@ namespace AccountingSystem
         private Views.Dashboard.UcAccountingDashboard ucAccountingDashboard1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem menuReceiptsConsolidated;
+        private System.Windows.Forms.ToolStripMenuItem menuTrialBalance;
+        private System.Windows.Forms.ToolStripMenuItem menupreClosingTrialBalance;
+        private System.Windows.Forms.ToolStripMenuItem menupostClosingTrialBalance;
     }
 }
 

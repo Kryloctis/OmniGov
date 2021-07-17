@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             InitializeComponent();
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
-            panel1.Controls.Add(reportViewer);
+            panelReport.Controls.Add(reportViewer);
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
@@ -42,19 +42,17 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\pre-trial-balance.rdlc";
                 report.DataSources.Clear();
 
-                report.DataSources.Add(new ReportDataSource("dsPreTrialBalance", DataTablePreTrialBalance()));
+                report.DataSources.Add(new ReportDataSource("dtPreTrialBalance", DataTablePreTrialBalance()));
 
-                //var parameters = new[] {
-                //    new ReportParameter("paramLGUName", lguDict["lgu_name"]),
-                //    new ReportParameter("paramFund", fundName),
-                //    new ReportParameter("paramAccountName", generalLedgerDict["ledger_name"]),
-                //    new ReportParameter("paramAccountCode", generalLedgerDict["account_code"]),
-                //    new ReportParameter("paramBalanceDate", balanceDate),
-                //    new ReportParameter("paramBalanceDebit", balanceDebit),
-                //    new ReportParameter("paramBalanceCredit", balanceCredit),
-                //    new ReportParameter("paramBalance", balance)
-                //  };
-                //report.SetParameters(parameters);
+                var signatory = "MARY MAGDALYN T. REGANION, CPA";
+                var fundName = "GENERAL FUND";
+
+                var parameters = new[] {
+                    new ReportParameter("paramLGUName", lguDict["lgu_name"]),
+                    new ReportParameter("paramFund", fundName),
+                    new ReportParameter("paramSignatory", signatory)
+                  };
+                report.SetParameters(parameters);
 
             }
             catch (Exception ex)
@@ -79,17 +77,17 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
 
                 var beginningBalanceRepository = Factory.BeginningBalancesRepository();
-                decimal generalLedgerBalance = beginningBalanceRepository.GetSumBalanceByGeneralLedgerId(1, (ushort)item["ïd"], 2021);
-                var beginningBalanceDict = beginningBalanceRepository.GetRecordByFundsAndGeneralLedgerID(1, (ushort)item["ïd"], 2021);
+                decimal generalLedgerBalance = beginningBalanceRepository.GetSumBalanceByGeneralLedgerId(1, (ushort)item["general_ledger_accounts_id"], 2021);
+                var beginningBalanceDict = beginningBalanceRepository.GetRecordByFundsAndGeneralLedgerID(1, (ushort)item["general_ledger_accounts_id"], 2021);
 
                 string debitCreditType = string.Empty;
                 debitCreditType = HelperLoadRecords.ValidateDebitOrCreditType(beginningBalanceDict, debitCreditType);
 
 
                 if (debitCreditType == "Debit")
-                    row["debit"] = generalLedgerBalance;
+                    row["debit"] = generalLedgerBalance.ToString("N2");
                 else
-                    row["credit"] = generalLedgerBalance;
+                    row["credit"] = generalLedgerBalance.ToString("N2");
 
                 dtPreTrialBalance.Rows.Add(row);
             }

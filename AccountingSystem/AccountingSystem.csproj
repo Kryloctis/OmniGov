@@ -109,6 +109,9 @@
     <None Update="Reports\payment-collection2.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Reports\pre-trial-balance.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Reports\procurements-received-journal.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

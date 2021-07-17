@@ -30,7 +30,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.chkbxSpecialAccounts = new System.Windows.Forms.CheckBox();
             this.dtAsOf = new System.Windows.Forms.DateTimePicker();
             this.cmbxFund = new System.Windows.Forms.ComboBox();
             this.btnRetrieve = new System.Windows.Forms.Button();
@@ -43,7 +42,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.chkbxSpecialAccounts);
             this.panel1.Controls.Add(this.dtAsOf);
             this.panel1.Controls.Add(this.cmbxFund);
             this.panel1.Controls.Add(this.btnRetrieve);
@@ -54,16 +52,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(915, 47);
             this.panel1.TabIndex = 2;
-            // 
-            // chkbxSpecialAccounts
-            // 
-            this.chkbxSpecialAccounts.AutoSize = true;
-            this.chkbxSpecialAccounts.Location = new System.Drawing.Point(567, 14);
-            this.chkbxSpecialAccounts.Name = "chkbxSpecialAccounts";
-            this.chkbxSpecialAccounts.Size = new System.Drawing.Size(116, 19);
-            this.chkbxSpecialAccounts.TabIndex = 7;
-            this.chkbxSpecialAccounts.Text = "Special Accounts";
-            this.chkbxSpecialAccounts.UseVisualStyleBackColor = true;
             // 
             // dtAsOf
             // 
@@ -84,7 +72,8 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(706, 12);
+            this.btnRetrieve.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRetrieve.Location = new System.Drawing.Point(811, 12);
             this.btnRetrieve.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
             this.btnRetrieve.Name = "btnRetrieve";
             this.btnRetrieve.Size = new System.Drawing.Size(92, 23);
@@ -130,6 +119,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             this.MinimizeBox = false;
             this.Name = "frmTrialBalance";
             this.Text = "Pre Closing Trial Balance";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -139,7 +129,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.CheckBox chkbxSpecialAccounts;
         internal System.Windows.Forms.DateTimePicker dtAsOf;
         internal System.Windows.Forms.ComboBox cmbxFund;
         internal System.Windows.Forms.Button btnRetrieve;

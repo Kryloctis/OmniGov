@@ -8465,7 +8465,7 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtPreTrialBalanceRow AdddtPreTrialBalanceRow(string account_title, string account_code, string debit, string credit) {
+            public dtPreTrialBalanceRow AdddtPreTrialBalanceRow(string account_title, string account_code, decimal debit, decimal credit) {
                 dtPreTrialBalanceRow rowdtPreTrialBalanceRow = ((dtPreTrialBalanceRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         account_title,
@@ -8507,9 +8507,9 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnaccount_title);
                 this.columnaccount_code = new global::System.Data.DataColumn("account_code", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnaccount_code);
-                this.columndebit = new global::System.Data.DataColumn("debit", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columndebit = new global::System.Data.DataColumn("debit", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndebit);
-                this.columncredit = new global::System.Data.DataColumn("credit", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columncredit = new global::System.Data.DataColumn("credit", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncredit);
             }
             
@@ -14312,10 +14312,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string debit {
+            public decimal debit {
                 get {
                     try {
-                        return ((string)(this[this.tabledtPreTrialBalance.debitColumn]));
+                        return ((decimal)(this[this.tabledtPreTrialBalance.debitColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'debit\' in table \'dtPreTrialBalance\' is DBNull.", e);
@@ -14328,10 +14328,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string credit {
+            public decimal credit {
                 get {
                     try {
-                        return ((string)(this[this.tabledtPreTrialBalance.creditColumn]));
+                        return ((decimal)(this[this.tabledtPreTrialBalance.creditColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'credit\' in table \'dtPreTrialBalance\' is DBNull.", e);
