@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Reports.TrialBalance
 {
-    partial class frmTrialBalance
+    partial class frmPreClosingTrialBalance
     {
         /// <summary>
         /// Required designer variable.

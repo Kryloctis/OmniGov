@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.TrialBalance
 {
-    public partial class frmTrialBalance : Form
+    public partial class frmPreClosingTrialBalance : Form
     {
 
         private readonly ReportViewer reportViewer;
         private byte fundId;
         private short year;
 
-        public frmTrialBalance()
+        public frmPreClosingTrialBalance()
         {
             InitializeComponent();
             reportViewer = new ReportViewer();
