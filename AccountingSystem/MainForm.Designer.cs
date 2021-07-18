@@ -141,14 +141,14 @@ namespace AccountingSystem
             // menuLogout
             // 
             this.menuLogout.Name = "menuLogout";
-            this.menuLogout.Size = new System.Drawing.Size(157, 22);
+            this.menuLogout.Size = new System.Drawing.Size(156, 22);
             this.menuLogout.Text = "Logout";
             this.menuLogout.Click += new System.EventHandler(this.menuLogout_Click);
             // 
             // menuExitApp
             // 
             this.menuExitApp.Name = "menuExitApp";
-            this.menuExitApp.Size = new System.Drawing.Size(157, 22);
+            this.menuExitApp.Size = new System.Drawing.Size(156, 22);
             this.menuExitApp.Text = "Exit Application";
             this.menuExitApp.Click += new System.EventHandler(this.menuExitApp_Click);
             // 
@@ -162,7 +162,7 @@ namespace AccountingSystem
             this.menuGenerateRCD,
             this.menuIssueReceipts});
             this.menuTransactions.Name = "menuTransactions";
-            this.menuTransactions.Size = new System.Drawing.Size(84, 19);
+            this.menuTransactions.Size = new System.Drawing.Size(85, 19);
             this.menuTransactions.Text = "Transactions";
             // 
             // menuJEV
@@ -447,15 +447,16 @@ namespace AccountingSystem
             // menupreClosingTrialBalance
             // 
             this.menupreClosingTrialBalance.Name = "menupreClosingTrialBalance";
-            this.menupreClosingTrialBalance.Size = new System.Drawing.Size(208, 22);
+            this.menupreClosingTrialBalance.Size = new System.Drawing.Size(209, 22);
             this.menupreClosingTrialBalance.Text = "Pre Closing Trial Balance";
             this.menupreClosingTrialBalance.Click += new System.EventHandler(this.menupreClosingTrialBalance_Click);
             // 
             // menupostClosingTrialBalance
             // 
             this.menupostClosingTrialBalance.Name = "menupostClosingTrialBalance";
-            this.menupostClosingTrialBalance.Size = new System.Drawing.Size(208, 22);
+            this.menupostClosingTrialBalance.Size = new System.Drawing.Size(209, 22);
             this.menupostClosingTrialBalance.Text = "Post Closing Trial Balance";
+            this.menupostClosingTrialBalance.Click += new System.EventHandler(this.menupostClosingTrialBalance_Click);
             // 
             // menuprintRCI
             // 

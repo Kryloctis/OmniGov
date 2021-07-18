@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Reports.TrialBalance
 {
-    partial class frmPreClosingTrialBalance
+    partial class frmPostClosingTrialBalance
     {
         /// <summary>
         /// Required designer variable.
@@ -51,7 +51,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(915, 47);
-            this.panel1.TabIndex = 2;
+            this.panel1.TabIndex = 3;
             // 
             // dtAsOf
             // 
@@ -106,9 +106,9 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             this.panelReport.Location = new System.Drawing.Point(0, 47);
             this.panelReport.Name = "panelReport";
             this.panelReport.Size = new System.Drawing.Size(915, 638);
-            this.panelReport.TabIndex = 3;
+            this.panelReport.TabIndex = 4;
             // 
-            // frmPreClosingTrialBalance
+            // frmPostClosingTrialBalance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -116,10 +116,10 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             this.Controls.Add(this.panelReport);
             this.Controls.Add(this.panel1);
             this.MinimizeBox = false;
-            this.Name = "frmPreClosingTrialBalance";
+            this.Name = "frmPostClosingTrialBalance";
             this.Text = "Pre Closing Trial Balance";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.frmTrialBalance_Load);
+            this.Load += new System.EventHandler(this.frmPostClosingTrialBalance_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

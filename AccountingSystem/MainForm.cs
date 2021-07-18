@@ -584,5 +584,10 @@ namespace AccountingSystem
         {
             _ = new frmPreClosingTrialBalance().ShowDialog();
         }
+
+        private void menupostClosingTrialBalance_Click(object sender, EventArgs e)
+        {
+            _ = new frmPostClosingTrialBalance().ShowDialog();
+        }
     }
 }
