@@ -4,7 +4,6 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
 
 namespace ACC.Data
@@ -57,7 +56,7 @@ namespace ACC.Data
         {
             try
             {
-                var parameters = new object[][] 
+                var parameters = new object[][]
                 {
                     new object[] { "@searchTxt", DbType.String, $"%{searchText}%" }
                 };
@@ -129,7 +128,7 @@ namespace ACC.Data
                     $"allotment_release_id, " +
                     $"allotment_account_id, " +
                     $"aro_no, " +
-                    $"purpose, "+ 
+                    $"purpose, " +
                     $"date_issued, " +
                     $"allotment_release_created_at, " +
                     $"allotment_release_updated_at, " +
@@ -172,7 +171,7 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
-        
+
 
         private int GetLastInsertedID()
         {
@@ -245,7 +244,7 @@ namespace ACC.Data
 
                     _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
 
-                    _=_allotmentAccountRepository.DeleteByAllotmentReleaseId(entity.ID);
+                    _ = _allotmentAccountRepository.DeleteByAllotmentReleaseId(entity.ID);
 
                     foreach (var allotmentAccount in listAllotmentAccount)
                     {
@@ -270,7 +269,7 @@ namespace ACC.Data
         {
             try
             {
-                using (TransactionScope scope = new TransactionScope()) 
+                using (TransactionScope scope = new TransactionScope())
                 {
                     var parameters = new object[][]
                     {
@@ -280,7 +279,7 @@ namespace ACC.Data
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
                     _ = _allotmentAccountRepository.DeleteByAllotmentReleaseId(allotmentReleaseId);
                     _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-                   
+
 
                     scope.Complete();
                     return true;
@@ -305,7 +304,7 @@ namespace ACC.Data
         {
             try
             {
-                var parameters = new object[][] 
+                var parameters = new object[][]
                 {
                     new object[] { "@aro_no", DbType.String, allotmentReleaseNo }
                 };
@@ -348,7 +347,7 @@ namespace ACC.Data
         {
             try
             {
-                var parameters = new object[][] 
+                var parameters = new object[][]
                 {
                     new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId },
                     new object[] { "@date_issued", DbType.Date, dateIssued.Date }
@@ -558,68 +557,11 @@ namespace ACC.Data
         }
 
 
-        //DASHBOARD
-        public DataTable GetViewRecordsFPPIdFundIdDateEntry(int fppId, int fundId, DateTime dateIssued)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@function_program_project_id", DbType.Int32, fppId },
-                    new object[] { "@funds_id", DbType.Int32, fundId },
-                    new object[] { "@date_issued", DbType.Date, dateIssued.Date },
-                };
+        //DASHBOARD//
 
-
-                string query = $"SELECT " +
-                    $"allotment_release_id, " +
-                    $"allotment_account_id, " +
-                    $"aro_no, " +
-                    $"purpose, " +
-                    $"date_issued, " +
-                    $"allotment_release_created_at, " +
-                    $"allotment_release_updated_at, " +
-                    $"budget_appropriations_id, " +
-                    $"funds_id, " +
-                    $"fund_code, " +
-                    $"fund_name, " +
-                    $"function_program_project_id, " +
-                    $"fpp_code, " +
-                    $"fpp_name, " +
-                    $"is_special, " +
-                    $"others_fpp_id, " +
-                    $"others_fpp_code, " +
-                    $"others_fpp_name, " +
-                    $"allotment_classes_id, " +
-                    $"allotment_code, " +
-                    $"allotment_name, " +
-                    $"general_ledger_accounts_id, " +
-                    $"account_code, " +
-                    $"ledger_name, " +
-                    $"date_entry, " +
-                    $"year, " +
-                    $"continuing, " +
-                    $"remarks, " +
-                    $"amount " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE function_program_project_id = @function_program_project_id " +
-                    $"AND funds_id = @funds_id " +
-                    $"AND date_issued <= @date_issued";
-
-                var dataTable = new DataTable();
-                return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
-            }
-            catch (MySqlException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public decimal GetAllotments(string fppId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing)
+        #region BUDGET DASHBOARD METHODS
+        //SUMMARY
+        public decimal GetSumAllotments(string fppId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing)
         {
             try
             {
@@ -657,5 +599,34 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        //DETAILED  
+        public decimal GetSumAllotments(int budgetAppropriationId, DateTime dateIssued)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId },
+                    new object[] { "@date_issued",DbType.Date, dateIssued.Date }
+                };
+
+                string query = $"SELECT COALESCE(SUM(amount), 0) AS amount FROM {viewTableName} " +
+                    $"WHERE budget_appropriations_id = @budget_appropriations_id " +
+                    $"AND date_issued <= @date_issued";
+
+                decimal allotments = Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+                return allotments;
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
     }
 }

@@ -4,7 +4,6 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
 
 namespace ACC.Data
@@ -45,7 +44,7 @@ namespace ACC.Data
         {
             try
             {
-                var parameters = new object[][] 
+                var parameters = new object[][]
                 {
                     new object[] { "@searchTxt", DbType.String, $"%{searchText}%"}
                 };
@@ -72,7 +71,7 @@ namespace ACC.Data
                 var dataTable = new DataTable();
                 return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
             }
-            catch (MySqlException) 
+            catch (MySqlException)
             {
                 throw;
             }
@@ -151,7 +150,7 @@ namespace ACC.Data
                 var dtObligationRequests = new DataTable();
                 return _mySqlGenericCommands.FillBySearch(query, dtObligationRequests, parameters);
             }
-            catch (MySqlException) 
+            catch (MySqlException)
             {
                 throw;
             }
@@ -283,58 +282,24 @@ namespace ACC.Data
         }
 
         //DASHBOARD
-        public DataTable GetViewRecordsFPPIdFundIdDateEntry(int fppId, int fundId, DateTime dateIssued)
+        #region DASHBOARD BUDGET
+        //DETAILED
+        public decimal GetSumObligationsByAppropriationId(int appropriationId, DateTime dateRequested)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@function_program_project_id", DbType.Int32, fppId },
-                    new object[] { "@funds_id", DbType.Int32, fundId },
-                    new object[] { "@date_requested", DbType.Date, dateIssued.Date }
+                    new object[] { "@budget_appropriations_id", DbType.Int32, appropriationId},
+                    new object[] { "@date_requested", DbType.Date, dateRequested.Date}
                 };
 
-                string query = $"SELECT " +
-                    $"obligation_request_id, " +
-                    $"obligation_account_id, " +
-                    $"obligation_no, " +
-                    $"payee, " +
-                    $"explanation, " +
-                    $"reference_no, " +
-                    $"date_requested, " +
-                    $"obligation_request_created_at, " +
-                    $"created_by, " +
-                    $"obligation_request_updated_at, " +
-                    $"updated_by, " +
-                    $"budget_appropriations_id, " +
-                    $"funds_id, " +
-                    $"fund_code, " +
-                    $"fund_name, " +
-                    $"function_program_project_id, " +
-                    $"fpp_code, " +
-                    $"fpp_name, " +
-                    $"others_fpp_id, " +
-                    $"others_fpp_code, " +
-                    $"others_fpp_name, " +
-                    $"allotment_classes_id, " +
-                    $"allotment_code, " +
-                    $"allotment_name, " +
-                    $"general_ledger_accounts_id, " +
-                    $"account_code, " +
-                    $"ledger_name, " +
-                    $"is_contra_account, " +
-                    $"year, " +
-                    $"continuing, " +
-                    $"remarks, " +
-                    $"amount " +
+                string query = $"SELECT COALESCE(SUM(amount), 0) AS amount " +
                     $"FROM {viewTableName} " +
-                    $"WHERE " +
-                    $"function_program_project_id = @function_program_project_id " +
-                    $"AND funds_id = @funds_id " +
-                    $"AND date_requested <= @date_requested";
+                    $"WHERE budget_appropriations_id = @budget_appropriations_id AND date_requested <= @date_requested";
 
-                var dtObligationRequests = new DataTable();
-                return _mySqlGenericCommands.FillBySearch(query, dtObligationRequests, parameters);
+                decimal obligations = Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+                return obligations;
             }
             catch (MySqlException)
             {
@@ -345,7 +310,7 @@ namespace ACC.Data
                 throw;
             }
         }
-
+        //SUMMARY
         public decimal GetSumObligations(string fppId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing)
         {
             try
@@ -385,6 +350,7 @@ namespace ACC.Data
                 throw;
             }
         }
+        #endregion
 
 
         private int GetLastInsertedID()
@@ -576,6 +542,5 @@ namespace ACC.Data
 
             return false;
         }
-
     }
 }
