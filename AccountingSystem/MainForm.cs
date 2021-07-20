@@ -34,6 +34,7 @@ using AccountingSystem.Views.Reports.JEV;
 using System.Data;
 using AccountingSystem.Views.Manage.Augmentation;
 using AccountingSystem.Views.Reports.ConsolidatedReceipts;
+using AccountingSystem.Views.Reports.DailyCashReport;
 
 namespace AccountingSystem
 {
@@ -577,6 +578,11 @@ namespace AccountingSystem
         private void menuReceiptsConsolidated_Click(object sender, EventArgs e)
         {
             _ = new frmConsolidatedReceipts().ShowDialog();
+        }
+
+        private void menuDailyCash_Click(object sender, EventArgs e)
+        {
+            _ = new frmDailyCash().ShowDialog();
         }
     }
 }

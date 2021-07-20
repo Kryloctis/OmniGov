@@ -11,8 +11,9 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "funds";
-        
-
+        private readonly string tableName2 = "payment_collections";
+        private readonly string tableName3 = "bank_deposits";
+ 
         public FundsRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -55,6 +56,21 @@ namespace ACC.Data
             try
             {
                 string query = $"SELECT * FROM {tableName}";
+
+                var dtFunds = new DataTable();
+                return _dbGenericCommands.Fill(query, dtFunds);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetRecordsPrintCashposition(string date)
+        {
+            try
+            {
+                string query = $"SELECT {tableName}.id,CONCAT({tableName}.fund_name,'(',{tableName}.fund_code,')') AS fund,(SELECT IFNULL(SUM(amount),0) FROM {tableName3} WHERE funds_id={tableName}.id AND date < CAST('{date}' AS DATE)) AS beginning,(SELECT IFNULL(SUM(amount),0) FROM {tableName2} WHERE funds_id={tableName}.id AND payment_date=CAST('{date}' AS DATE)) AS collection,(SELECT IFNULL(SUM(amount),0) FROM {tableName3} WHERE funds_id={tableName}.id AND date = CAST('{date}' AS DATE)) AS deposited FROM {tableName}";
 
                 var dtFunds = new DataTable();
                 return _dbGenericCommands.Fill(query, dtFunds);

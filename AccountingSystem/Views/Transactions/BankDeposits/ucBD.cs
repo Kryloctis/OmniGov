@@ -15,6 +15,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
     {
         internal int Id = 0;
         internal int bankId = 0;
+        internal int fundId = 0;
         internal int userid = 0;
         public ucBD()
         {
@@ -22,11 +23,12 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         }
         internal string GetFormErrors()
         {
-            var errorArray = new string[4];
+            var errorArray = new string[5];
             errorArray[0] = errorProvider.GetError(cmbbanks);
-            errorArray[1] = errorProvider.GetError(txtreference);
-            errorArray[2] = errorProvider.GetError(dtdate);
-            errorArray[3] = errorProvider.GetError(txtamount);
+            errorArray[1] = errorProvider.GetError(cmbfunds);
+            errorArray[2] = errorProvider.GetError(txtreference);
+            errorArray[3] = errorProvider.GetError(dtdate);
+            errorArray[4] = errorProvider.GetError(txtamount);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -39,6 +41,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         internal void ResetForm()
         {
             cmbbanks.SelectedIndex = -1;
+            cmbfunds.SelectedIndex = -1;
             txtreference.Clear();
             dtdate.Value = DateTime.Now;
             txtamount.Value = Convert.ToDecimal("0.00");
@@ -57,10 +60,20 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-       
 
-
-        
+        internal void LoadFunds()
+        {
+            try
+            {
+                var fundsRepository = Factory.FundsRepository();
+                var dtfunds = fundsRepository.GetRecords();
+                dtfunds.Columns.Add("funddetails", typeof(string), "fund_code +'-'+fund_name");
+                cmbfunds.DataSource = dtfunds;
+                cmbfunds.ValueMember = "id";
+                cmbfunds.DisplayMember = "funddetails";
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        } 
         private void txtreference_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtreference, "Reference!");
@@ -78,6 +91,16 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         private void cmbbanks_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(errorProvider, cmbbanks);
+        }
+
+        private void cmbfunds_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbfunds, "Fund!");
+        }
+
+        private void cmbfunds_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider, cmbfunds);
         }
     }
 }

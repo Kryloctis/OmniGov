@@ -19,6 +19,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         private void frmBankDepositsAdd_Load(object sender, EventArgs e)
         {
             ucbd1.LoadBanks();
+            ucbd1.LoadFunds();
             if(Gcid > 0)
             {
                 ucbd1.txtamount.Value = Gcamount;
@@ -39,6 +40,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 var bdModel = new BankDepositsModel()
                 {
                     bankId = Convert.ToInt16(uc.cmbbanks.SelectedValue),
+                    fundId = Convert.ToInt16(uc.cmbfunds.SelectedValue),                     
                     Reference = uc.txtreference.Text.Trim(),
                     Date = Convert.ToDateTime(uc.dtdate.Text.Trim()),
                     Amount = Convert.ToDecimal(uc.txtamount.Value),

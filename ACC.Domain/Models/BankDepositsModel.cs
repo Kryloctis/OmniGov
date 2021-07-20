@@ -15,5 +15,6 @@ namespace ACC.Domain.Models
         public int CreatedBy { get; set; }
         public DateTime UpdatedAt { get; set; }
         public int UpdatedBy { get; set; }
+        public int fundId { get; set; }
     }
 }

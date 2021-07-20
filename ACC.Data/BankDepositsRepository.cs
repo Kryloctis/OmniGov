@@ -14,6 +14,7 @@ namespace ACC.Data
         private readonly string tableName = "bank_deposits";
         private readonly string tableName2 = "banks";
         private readonly string tableName3 = "users";
+        private readonly string tableName4 = "funds";
 
         public BankDepositsRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -46,6 +47,7 @@ namespace ACC.Data
                     record.Add("created_by", reader.Rows[0]["created_by"].ToString());
                     record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
                     record.Add("updated_by", reader.Rows[0]["updated_by"].ToString());
+                    record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
                 }
             }
             catch (Exception)
@@ -82,10 +84,10 @@ namespace ACC.Data
                     new object[] { "@date", DbType.Date, entity.Date},
                     new object[] { "@amount", DbType.Decimal, entity.Amount},
                     new object[] { "@created_by", DbType.Int16, entity.CreatedBy},
-                    
+                    new object[] { "@funds_id", DbType.Int16, entity.fundId},
                 };
 
-                string query = $"INSERT INTO {tableName} (banks_id,reference,date,amount,created_by) VALUES (@banks_id,@reference,@date,@amount,@created_by)";
+                string query = $"INSERT INTO {tableName} (banks_id,reference,date,amount,created_by,funds_id) VALUES (@banks_id,@reference,@date,@amount,@created_by,@funds_id)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -105,10 +107,10 @@ namespace ACC.Data
                     new object[] { "@date", DbType.Date, entity.Date},
                     new object[] { "@amount", DbType.Decimal, entity.Amount},
                     new object[] { "@created_by", DbType.Int16, entity.CreatedBy},
-
+                    new object[] { "@funds_id", DbType.Int16, entity.fundId},
                 };
 
-                string query = $"INSERT INTO {tableName} (banks_id,reference,date,amount,created_by) VALUES (@banks_id,@reference,@date,@amount,@created_by)";
+                string query = $"INSERT INTO {tableName} (banks_id,reference,date,amount,created_by,funds_id) VALUES (@banks_id,@reference,@date,@amount,@created_by,@funds_id)";
                 return _dbGenericCommands.ExecuteNonQueryId(query, parameters);
             }
             catch (Exception)
@@ -130,9 +132,10 @@ namespace ACC.Data
                     new object[] { "@date", DbType.Date, entity.Date},
                     new object[] { "@amount", DbType.Decimal, entity.Amount},
                     new object[] { "@updated_by", DbType.Int16, entity.UpdatedBy},
+                    new object[] { "@funds_id", DbType.Int16, entity.fundId},
                 };
 
-                string query = $"UPDATE {tableName} SET banks_id=@banks_id,reference=@banks_id,date=@date,amount=@amount,updated_by=@updated_by WHERE id = @id";
+                string query = $"UPDATE {tableName} SET banks_id=@banks_id,reference=@banks_id,date=@date,amount=@amount,updated_by=@updated_by,funds_id=@funds_id WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
