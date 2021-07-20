@@ -1,9 +1,9 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
 
 namespace ACC.Data
@@ -57,7 +57,7 @@ namespace ACC.Data
 
             try
             {
-                var parameters = new object[][] 
+                var parameters = new object[][]
                 {
                     new object[] { "@id", DbType.Int32, Id }
                 };
@@ -211,56 +211,11 @@ namespace ACC.Data
         }
 
         //DASHBOARD
-        public DataTable GetViewRecordsByFPPIdFundIdDateEntry(int fppId, int fundId, DateTime dateEntry)
+
+        #region BUDGET DASHBOARD
+        //SUMMARY
+        public decimal GetSumSupplementalAppropriations(string fppId, int fundId, DateTime dateEntry, int allotmentClassId, Byte isContinuing)
         {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@function_program_project_id", DbType.Int32, fppId },
-                    new object[] { "@funds_id", DbType.Int32, fundId },
-                    new object[] { "@date_entry", DbType.Date, dateEntry.Date}
-                };
-
-                string query = $"SELECT " +
-                    $"supplemental_appropriations_id, " +
-                    $"budget_appropriations_id, " +
-                    $"funds_id, " +
-                    $"fund_code, " +
-                    $"fund_name, " +
-                    $"function_program_project_id, " +
-                    $"fpp_code, " +
-                    $"fpp_name, " +
-                    $"others_fpp_id, " +
-                    $"others_fpp_code, " +
-                    $"others_fpp_name, " +
-                    $"allotment_classes_id, " +
-                    $"allotment_code, " +
-                    $"allotment_name, " +
-                    $"date_entry, " +
-                    $"appropriation_year, " +
-                    $"amount, " +
-                    $"continuing, " +
-                    $"remarks, " +
-                    $"created_at, " +
-                    $"updated_at " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE function_program_project_id = @function_program_project_id " +
-                    $"AND funds_id = @funds_id " +
-                    $"AND date_entry <= @date_entry";
-
-                var dtSupplementalApprorpriation = new DataTable();
-
-                return _mySqlGenericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public decimal GetSupplementalAppropriations(string fppId, int fundId, DateTime dateEntry, int allotmentClassId, Byte isContinuing)
-        {   
             try
             {
                 var parameters = new object[][]
@@ -281,7 +236,7 @@ namespace ACC.Data
                     $"WHERE {fppWhereQuery} " +
                     $"funds_id = @funds_id " +
                     $"AND date_entry <= @date_entry " +
-                    $"AND allotment_classes_id = @allotment_classes_id " +  
+                    $"AND allotment_classes_id = @allotment_classes_id " +
                     $"AND continuing = @continuing " +
                     $"AND {isContinuingQuery}";
 
@@ -294,5 +249,32 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        //DETAILED
+        public decimal GetSumSupplementalAppropriations(int budgetAppropriationId, DateTime dateEntry)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId },
+                    new object[] { "@date_entry",DbType.Date, dateEntry.Date}
+                };
+                string query = $"SELECT COALESCE(SUM(amount),0) AS amount FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id AND date_entry <= @date_entry";
+                decimal supplementalAmount = Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+                return supplementalAmount;
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        #endregion    
     }
+
 }

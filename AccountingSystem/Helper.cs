@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem
@@ -109,14 +105,14 @@ namespace AccountingSystem
 
         private static string ErrorMessageForEmpty(string fieldName)
         {
-            
+
             if (GetFirstLetter(fieldName) == "A" || GetFirstLetter(fieldName) == "a")
                 return $"Please enter an {fieldName.ToLower()}";
             else
                 return $"Please enter a {fieldName.ToLower()}";
         }
 
-        public static string ErrorMessage(string fieldName) 
+        public static string ErrorMessage(string fieldName)
         {
             if (GetFirstLetter(fieldName) == "A")
                 return $"Please enter an {fieldName}.";
@@ -130,7 +126,7 @@ namespace AccountingSystem
             {
                 ep.SetError(txtBox, $"{ErrorMessageForEmpty(fieldName)}");
                 return true;
-                
+
             }
 
             return false;

@@ -29,6 +29,9 @@ namespace AccountingSystem.Views.Dashboard
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ucBudgetCardsCON = new AccountingSystem.Views.Dashboard.BudgetDashboard.UcBudgetCardsByAllotmentClass();
             this.ucBudgetCardsCY = new AccountingSystem.Views.Dashboard.BudgetDashboard.UcBudgetCardsByAllotmentClass();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -36,9 +39,6 @@ namespace AccountingSystem.Views.Dashboard
             this.label104 = new System.Windows.Forms.Label();
             this.panel12 = new System.Windows.Forms.Panel();
             this.label103 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
@@ -46,6 +46,11 @@ namespace AccountingSystem.Views.Dashboard
             this.panel3 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.tabBudgetDetailed = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tabBudgetSummary = new System.Windows.Forms.TabPage();
+            this.ucBudgetCardsByAllotmentClassCY = new AccountingSystem.Views.Dashboard.BudgetDashboard.UcBudgetCardsByAllotmentClass();
+            this.ucBudgetCardsByAllotmentClassCON = new AccountingSystem.Views.Dashboard.BudgetDashboard.UcBudgetCardsByAllotmentClass();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblGrandTotalAllotmentBalance = new System.Windows.Forms.Label();
@@ -62,20 +67,36 @@ namespace AccountingSystem.Views.Dashboard
             this.panel9 = new System.Windows.Forms.Panel();
             this.lblGrandTotalAppropriations = new System.Windows.Forms.Label();
             this.label100 = new System.Windows.Forms.Label();
-            this.ucBudgetCardsByAllotmentClassCON = new AccountingSystem.Views.Dashboard.BudgetDashboard.UcBudgetCardsByAllotmentClass();
-            this.ucBudgetCardsByAllotmentClassCY = new AccountingSystem.Views.Dashboard.BudgetDashboard.UcBudgetCardsByAllotmentClass();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.dtAsOf = new System.Windows.Forms.DateTimePicker();
+            this.cmbxFunds = new System.Windows.Forms.ComboBox();
+            this.cmbxAllotmentClasses = new System.Windows.Forms.ComboBox();
+            this.cmbxFPP = new System.Windows.Forms.ComboBox();
+            this.chkbxDetailed = new System.Windows.Forms.CheckBox();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3.SuspendLayout();
             this.panel13.SuspendLayout();
             this.panel12.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.tabBudgetDetailed.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tabBudgetSummary.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel10.SuspendLayout();
             this.panel9.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // ucBudgetCardsCON
@@ -166,41 +187,6 @@ namespace AccountingSystem.Views.Dashboard
             this.label103.Text = "Appropriation Balance";
             this.label103.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label9.Location = new System.Drawing.Point(3, 1);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(106, 20);
-            this.label9.TabIndex = 46;
-            this.label9.Text = "GRAND TOTAL";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label10.Location = new System.Drawing.Point(3, 295);
-            this.label10.Margin = new System.Windows.Forms.Padding(3, 15, 3, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(102, 20);
-            this.label10.TabIndex = 47;
-            this.label10.Text = "CONTINUING";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label11.Location = new System.Drawing.Point(3, 91);
-            this.label11.Margin = new System.Windows.Forms.Padding(3, 15, 3, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(115, 20);
-            this.label11.TabIndex = 48;
-            this.label11.Text = "CURRENT YEAR";
-            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -289,6 +275,93 @@ namespace AccountingSystem.Views.Dashboard
             this.label8.Text = "Appropriation Balance";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // tabBudgetDetailed
+            // 
+            this.tabBudgetDetailed.Controls.Add(this.dataGridView1);
+            this.tabBudgetDetailed.Location = new System.Drawing.Point(4, 5);
+            this.tabBudgetDetailed.Margin = new System.Windows.Forms.Padding(0);
+            this.tabBudgetDetailed.Name = "tabBudgetDetailed";
+            this.tabBudgetDetailed.Size = new System.Drawing.Size(990, 500);
+            this.tabBudgetDetailed.TabIndex = 1;
+            this.tabBudgetDetailed.Text = "tabBudgetDetailed";
+            this.tabBudgetDetailed.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Name = "dataGridView1";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(990, 500);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // tabBudgetSummary
+            // 
+            this.tabBudgetSummary.AutoScroll = true;
+            this.tabBudgetSummary.Controls.Add(this.ucBudgetCardsByAllotmentClassCY);
+            this.tabBudgetSummary.Controls.Add(this.ucBudgetCardsByAllotmentClassCON);
+            this.tabBudgetSummary.Controls.Add(this.tableLayoutPanel1);
+            this.tabBudgetSummary.Controls.Add(this.label9);
+            this.tabBudgetSummary.Controls.Add(this.label10);
+            this.tabBudgetSummary.Controls.Add(this.label11);
+            this.tabBudgetSummary.Location = new System.Drawing.Point(4, 5);
+            this.tabBudgetSummary.Margin = new System.Windows.Forms.Padding(0);
+            this.tabBudgetSummary.Name = "tabBudgetSummary";
+            this.tabBudgetSummary.Size = new System.Drawing.Size(990, 500);
+            this.tabBudgetSummary.TabIndex = 0;
+            this.tabBudgetSummary.Text = "tabBudgetSummary";
+            this.tabBudgetSummary.UseVisualStyleBackColor = true;
+            // 
+            // ucBudgetCardsByAllotmentClassCY
+            // 
+            this.ucBudgetCardsByAllotmentClassCY.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ucBudgetCardsByAllotmentClassCY.AutoSize = true;
+            this.ucBudgetCardsByAllotmentClassCY.Location = new System.Drawing.Point(-4, 116);
+            this.ucBudgetCardsByAllotmentClassCY.Margin = new System.Windows.Forms.Padding(0);
+            this.ucBudgetCardsByAllotmentClassCY.MinimumSize = new System.Drawing.Size(974, 166);
+            this.ucBudgetCardsByAllotmentClassCY.Name = "ucBudgetCardsByAllotmentClassCY";
+            this.ucBudgetCardsByAllotmentClassCY.Size = new System.Drawing.Size(991, 166);
+            this.ucBudgetCardsByAllotmentClassCY.TabIndex = 61;
+            // 
+            // ucBudgetCardsByAllotmentClassCON
+            // 
+            this.ucBudgetCardsByAllotmentClassCON.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ucBudgetCardsByAllotmentClassCON.AutoSize = true;
+            this.ucBudgetCardsByAllotmentClassCON.Location = new System.Drawing.Point(-4, 320);
+            this.ucBudgetCardsByAllotmentClassCON.Margin = new System.Windows.Forms.Padding(0);
+            this.ucBudgetCardsByAllotmentClassCON.MinimumSize = new System.Drawing.Size(974, 166);
+            this.ucBudgetCardsByAllotmentClassCON.Name = "ucBudgetCardsByAllotmentClassCON";
+            this.ucBudgetCardsByAllotmentClassCON.Size = new System.Drawing.Size(991, 166);
+            this.ucBudgetCardsByAllotmentClassCON.TabIndex = 62;
+            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -304,13 +377,14 @@ namespace AccountingSystem.Views.Dashboard
             this.tableLayoutPanel1.Controls.Add(this.panel11, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel10, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel9, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 24);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 26);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel1.MinimumSize = new System.Drawing.Size(970, 52);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1006, 52);
-            this.tableLayoutPanel1.TabIndex = 55;
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(987, 52);
+            this.tableLayoutPanel1.TabIndex = 60;
             // 
             // panel2
             // 
@@ -318,9 +392,9 @@ namespace AccountingSystem.Views.Dashboard
             this.panel2.Controls.Add(this.lblGrandTotalAllotmentBalance);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(806, 3);
+            this.panel2.Location = new System.Drawing.Point(791, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(197, 46);
+            this.panel2.Size = new System.Drawing.Size(193, 46);
             this.panel2.TabIndex = 4;
             // 
             // lblGrandTotalAllotmentBalance
@@ -329,7 +403,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblGrandTotalAllotmentBalance.Location = new System.Drawing.Point(5, 24);
             this.lblGrandTotalAllotmentBalance.Margin = new System.Windows.Forms.Padding(5);
             this.lblGrandTotalAllotmentBalance.Name = "lblGrandTotalAllotmentBalance";
-            this.lblGrandTotalAllotmentBalance.Size = new System.Drawing.Size(82, 15);
+            this.lblGrandTotalAllotmentBalance.Size = new System.Drawing.Size(181, 15);
             this.lblGrandTotalAllotmentBalance.TabIndex = 2;
             this.lblGrandTotalAllotmentBalance.Text = "0.00";
             // 
@@ -342,7 +416,7 @@ namespace AccountingSystem.Views.Dashboard
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label2.Size = new System.Drawing.Size(197, 19);
+            this.label2.Size = new System.Drawing.Size(193, 19);
             this.label2.TabIndex = 1;
             this.label2.Text = "Allotment Balance";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -353,9 +427,9 @@ namespace AccountingSystem.Views.Dashboard
             this.panel4.Controls.Add(this.lblGrandTotalAppropriationBalance);
             this.panel4.Controls.Add(this.label4);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(605, 3);
+            this.panel4.Location = new System.Drawing.Point(594, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(195, 46);
+            this.panel4.Size = new System.Drawing.Size(191, 46);
             this.panel4.TabIndex = 3;
             // 
             // lblGrandTotalAppropriationBalance
@@ -364,7 +438,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblGrandTotalAppropriationBalance.Location = new System.Drawing.Point(5, 24);
             this.lblGrandTotalAppropriationBalance.Margin = new System.Windows.Forms.Padding(5);
             this.lblGrandTotalAppropriationBalance.Name = "lblGrandTotalAppropriationBalance";
-            this.lblGrandTotalAppropriationBalance.Size = new System.Drawing.Size(82, 15);
+            this.lblGrandTotalAppropriationBalance.Size = new System.Drawing.Size(181, 15);
             this.lblGrandTotalAppropriationBalance.TabIndex = 2;
             this.lblGrandTotalAppropriationBalance.Text = "0.00";
             // 
@@ -377,7 +451,7 @@ namespace AccountingSystem.Views.Dashboard
             this.label4.Location = new System.Drawing.Point(0, 0);
             this.label4.Name = "label4";
             this.label4.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label4.Size = new System.Drawing.Size(195, 19);
+            this.label4.Size = new System.Drawing.Size(191, 19);
             this.label4.TabIndex = 1;
             this.label4.Text = "Appropriation Balance";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -388,9 +462,9 @@ namespace AccountingSystem.Views.Dashboard
             this.panel11.Controls.Add(this.lblGrandTotalObligations);
             this.panel11.Controls.Add(this.label102);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel11.Location = new System.Drawing.Point(404, 3);
+            this.panel11.Location = new System.Drawing.Point(397, 3);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(195, 46);
+            this.panel11.Size = new System.Drawing.Size(191, 46);
             this.panel11.TabIndex = 2;
             // 
             // lblGrandTotalObligations
@@ -399,7 +473,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblGrandTotalObligations.Location = new System.Drawing.Point(5, 24);
             this.lblGrandTotalObligations.Margin = new System.Windows.Forms.Padding(5);
             this.lblGrandTotalObligations.Name = "lblGrandTotalObligations";
-            this.lblGrandTotalObligations.Size = new System.Drawing.Size(82, 15);
+            this.lblGrandTotalObligations.Size = new System.Drawing.Size(181, 15);
             this.lblGrandTotalObligations.TabIndex = 2;
             this.lblGrandTotalObligations.Text = "0.00";
             // 
@@ -412,7 +486,7 @@ namespace AccountingSystem.Views.Dashboard
             this.label102.Location = new System.Drawing.Point(0, 0);
             this.label102.Name = "label102";
             this.label102.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label102.Size = new System.Drawing.Size(195, 19);
+            this.label102.Size = new System.Drawing.Size(191, 19);
             this.label102.TabIndex = 1;
             this.label102.Text = "Obligations";
             this.label102.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -423,9 +497,9 @@ namespace AccountingSystem.Views.Dashboard
             this.panel10.Controls.Add(this.lblGrandTotalAllotments);
             this.panel10.Controls.Add(this.label101);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel10.Location = new System.Drawing.Point(197, 3);
+            this.panel10.Location = new System.Drawing.Point(194, 3);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(201, 46);
+            this.panel10.Size = new System.Drawing.Size(197, 46);
             this.panel10.TabIndex = 1;
             // 
             // lblGrandTotalAllotments
@@ -434,7 +508,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblGrandTotalAllotments.Location = new System.Drawing.Point(5, 24);
             this.lblGrandTotalAllotments.Margin = new System.Windows.Forms.Padding(5);
             this.lblGrandTotalAllotments.Name = "lblGrandTotalAllotments";
-            this.lblGrandTotalAllotments.Size = new System.Drawing.Size(82, 15);
+            this.lblGrandTotalAllotments.Size = new System.Drawing.Size(181, 15);
             this.lblGrandTotalAllotments.TabIndex = 2;
             this.lblGrandTotalAllotments.Text = "0.00";
             // 
@@ -447,7 +521,7 @@ namespace AccountingSystem.Views.Dashboard
             this.label101.Location = new System.Drawing.Point(0, 0);
             this.label101.Name = "label101";
             this.label101.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label101.Size = new System.Drawing.Size(201, 19);
+            this.label101.Size = new System.Drawing.Size(197, 19);
             this.label101.TabIndex = 1;
             this.label101.Text = "Allotments";
             this.label101.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -460,7 +534,7 @@ namespace AccountingSystem.Views.Dashboard
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(3, 3);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(188, 46);
+            this.panel9.Size = new System.Drawing.Size(185, 46);
             this.panel9.TabIndex = 0;
             // 
             // lblGrandTotalAppropriations
@@ -469,7 +543,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblGrandTotalAppropriations.Location = new System.Drawing.Point(5, 24);
             this.lblGrandTotalAppropriations.Margin = new System.Windows.Forms.Padding(5);
             this.lblGrandTotalAppropriations.Name = "lblGrandTotalAppropriations";
-            this.lblGrandTotalAppropriations.Size = new System.Drawing.Size(82, 15);
+            this.lblGrandTotalAppropriations.Size = new System.Drawing.Size(181, 15);
             this.lblGrandTotalAppropriations.TabIndex = 2;
             this.lblGrandTotalAppropriations.Text = "0.00";
             // 
@@ -482,51 +556,174 @@ namespace AccountingSystem.Views.Dashboard
             this.label100.Location = new System.Drawing.Point(0, 0);
             this.label100.Name = "label100";
             this.label100.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label100.Size = new System.Drawing.Size(188, 19);
+            this.label100.Size = new System.Drawing.Size(185, 19);
             this.label100.TabIndex = 1;
             this.label100.Text = "Appropriations";
             this.label100.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // ucBudgetCardsByAllotmentClassCON
+            // label9
             // 
-            this.ucBudgetCardsByAllotmentClassCON.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ucBudgetCardsByAllotmentClassCON.AutoSize = true;
-            this.ucBudgetCardsByAllotmentClassCON.Location = new System.Drawing.Point(6, 315);
-            this.ucBudgetCardsByAllotmentClassCON.Margin = new System.Windows.Forms.Padding(0);
-            this.ucBudgetCardsByAllotmentClassCON.MinimumSize = new System.Drawing.Size(974, 166);
-            this.ucBudgetCardsByAllotmentClassCON.Name = "ucBudgetCardsByAllotmentClassCON";
-            this.ucBudgetCardsByAllotmentClassCON.Size = new System.Drawing.Size(1003, 166);
-            this.ucBudgetCardsByAllotmentClassCON.TabIndex = 56;
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label9.Location = new System.Drawing.Point(3, 6);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(106, 20);
+            this.label9.TabIndex = 57;
+            this.label9.Text = "GRAND TOTAL";
             // 
-            // ucBudgetCardsByAllotmentClassCY
+            // label10
             // 
-            this.ucBudgetCardsByAllotmentClassCY.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ucBudgetCardsByAllotmentClassCY.AutoSize = true;
-            this.ucBudgetCardsByAllotmentClassCY.Location = new System.Drawing.Point(3, 111);
-            this.ucBudgetCardsByAllotmentClassCY.Margin = new System.Windows.Forms.Padding(0);
-            this.ucBudgetCardsByAllotmentClassCY.MinimumSize = new System.Drawing.Size(974, 166);
-            this.ucBudgetCardsByAllotmentClassCY.Name = "ucBudgetCardsByAllotmentClassCY";
-            this.ucBudgetCardsByAllotmentClassCY.Size = new System.Drawing.Size(1006, 166);
-            this.ucBudgetCardsByAllotmentClassCY.TabIndex = 56;
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label10.Location = new System.Drawing.Point(3, 300);
+            this.label10.Margin = new System.Windows.Forms.Padding(3, 15, 3, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(102, 20);
+            this.label10.TabIndex = 58;
+            this.label10.Text = "CONTINUING";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label11.Location = new System.Drawing.Point(3, 96);
+            this.label11.Margin = new System.Windows.Forms.Padding(3, 15, 3, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(115, 20);
+            this.label11.TabIndex = 59;
+            this.label11.Text = "CURRENT YEAR";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.tabControl1.Controls.Add(this.tabBudgetSummary);
+            this.tabControl1.Controls.Add(this.tabBudgetDetailed);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.ItemSize = new System.Drawing.Size(0, 1);
+            this.tabControl1.Location = new System.Drawing.Point(0, 52);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
+            this.tabControl1.Multiline = true;
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.Padding = new System.Drawing.Point(0, 0);
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(998, 509);
+            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tabControl1.TabIndex = 0;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.Controls.Add(this.btnRefresh);
+            this.flowLayoutPanel1.Controls.Add(this.dtAsOf);
+            this.flowLayoutPanel1.Controls.Add(this.cmbxFunds);
+            this.flowLayoutPanel1.Controls.Add(this.cmbxAllotmentClasses);
+            this.flowLayoutPanel1.Controls.Add(this.cmbxFPP);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(998, 27);
+            this.flowLayoutPanel1.TabIndex = 0;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRefresh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.symbol_refresh_14px;
+            this.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRefresh.Location = new System.Drawing.Point(917, 2);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(78, 23);
+            this.btnRefresh.TabIndex = 5;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // dtAsOf
+            // 
+            this.dtAsOf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtAsOf.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.dtAsOf.Location = new System.Drawing.Point(697, 2);
+            this.dtAsOf.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtAsOf.Name = "dtAsOf";
+            this.dtAsOf.Size = new System.Drawing.Size(214, 23);
+            this.dtAsOf.TabIndex = 4;
+            // 
+            // cmbxFunds
+            // 
+            this.cmbxFunds.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxFunds.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cmbxFunds.FormattingEnabled = true;
+            this.cmbxFunds.Location = new System.Drawing.Point(560, 2);
+            this.cmbxFunds.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbxFunds.Name = "cmbxFunds";
+            this.cmbxFunds.Size = new System.Drawing.Size(131, 23);
+            this.cmbxFunds.TabIndex = 3;
+            // 
+            // cmbxAllotmentClasses
+            // 
+            this.cmbxAllotmentClasses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxAllotmentClasses.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cmbxAllotmentClasses.FormattingEnabled = true;
+            this.cmbxAllotmentClasses.Location = new System.Drawing.Point(408, 2);
+            this.cmbxAllotmentClasses.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbxAllotmentClasses.Name = "cmbxAllotmentClasses";
+            this.cmbxAllotmentClasses.Size = new System.Drawing.Size(146, 23);
+            this.cmbxAllotmentClasses.TabIndex = 2;
+            this.cmbxAllotmentClasses.Visible = false;
+            // 
+            // cmbxFPP
+            // 
+            this.cmbxFPP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbxFPP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cmbxFPP.FormattingEnabled = true;
+            this.cmbxFPP.Location = new System.Drawing.Point(142, 2);
+            this.cmbxFPP.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbxFPP.Name = "cmbxFPP";
+            this.cmbxFPP.Size = new System.Drawing.Size(260, 23);
+            this.cmbxFPP.TabIndex = 1;
+            this.cmbxFPP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxFPP_KeyDown);
+            // 
+            // chkbxDetailed
+            // 
+            this.chkbxDetailed.AutoSize = true;
+            this.chkbxDetailed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.chkbxDetailed.Location = new System.Drawing.Point(4, 3);
+            this.chkbxDetailed.Name = "chkbxDetailed";
+            this.chkbxDetailed.Size = new System.Drawing.Size(69, 19);
+            this.chkbxDetailed.TabIndex = 6;
+            this.chkbxDetailed.Text = "Detailed";
+            this.chkbxDetailed.UseVisualStyleBackColor = true;
+            this.chkbxDetailed.CheckedChanged += new System.EventHandler(this.chkbxDetailed_CheckedChanged);
+            // 
+            // panel5
+            // 
+            this.panel5.AutoSize = true;
+            this.panel5.Controls.Add(this.chkbxDetailed);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(0, 27);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(998, 25);
+            this.panel5.TabIndex = 2;
             // 
             // UcBudgetDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
-            this.AutoScrollMinSize = new System.Drawing.Size(1009, 501);
             this.AutoSize = true;
-            this.Controls.Add(this.ucBudgetCardsByAllotmentClassCY);
-            this.Controls.Add(this.ucBudgetCardsByAllotmentClassCON);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label11);
+            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.panel5);
+            this.Controls.Add(this.flowLayoutPanel1);
+            this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "UcBudgetDashboard";
-            this.Size = new System.Drawing.Size(1009, 501);
+            this.Size = new System.Drawing.Size(998, 561);
             this.Load += new System.EventHandler(this.UcBudgetDashboard_Load);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
@@ -534,12 +731,20 @@ namespace AccountingSystem.Views.Dashboard
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.tabBudgetDetailed.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tabBudgetSummary.ResumeLayout(false);
+            this.tabBudgetSummary.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -553,9 +758,6 @@ namespace AccountingSystem.Views.Dashboard
         internal System.Windows.Forms.Panel panel12;
         internal System.Windows.Forms.Label label103;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        internal System.Windows.Forms.Label label9;
-        internal System.Windows.Forms.Label label10;
-        internal System.Windows.Forms.Label label11;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         internal System.Windows.Forms.Panel panel1;
         internal System.Windows.Forms.Label label5;
@@ -563,6 +765,10 @@ namespace AccountingSystem.Views.Dashboard
         internal System.Windows.Forms.Panel panel3;
         internal System.Windows.Forms.Label label7;
         internal System.Windows.Forms.Label label8;
+        internal System.Windows.Forms.TabPage tabBudgetDetailed;
+        internal System.Windows.Forms.TabPage tabBudgetSummary;
+        private BudgetDashboard.UcBudgetCardsByAllotmentClass ucBudgetCardsByAllotmentClassCY;
+        private BudgetDashboard.UcBudgetCardsByAllotmentClass ucBudgetCardsByAllotmentClassCON;
         internal System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         internal System.Windows.Forms.Panel panel2;
         internal System.Windows.Forms.Label lblGrandTotalAllotmentBalance;
@@ -579,7 +785,18 @@ namespace AccountingSystem.Views.Dashboard
         internal System.Windows.Forms.Panel panel9;
         internal System.Windows.Forms.Label lblGrandTotalAppropriations;
         internal System.Windows.Forms.Label label100;
-        private BudgetDashboard.UcBudgetCardsByAllotmentClass ucBudgetCardsByAllotmentClassCON;
-        private BudgetDashboard.UcBudgetCardsByAllotmentClass ucBudgetCardsByAllotmentClassCY;
+        internal System.Windows.Forms.Label label9;
+        internal System.Windows.Forms.Label label10;
+        internal System.Windows.Forms.Label label11;
+        internal System.Windows.Forms.TabControl tabControl1;
+        internal System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        internal System.Windows.Forms.DateTimePicker dtAsOf;
+        internal System.Windows.Forms.ComboBox cmbxFPP;
+        internal System.Windows.Forms.ComboBox cmbxFunds;
+        internal System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.CheckBox chkbxDetailed;
+        internal System.Windows.Forms.ComboBox cmbxAllotmentClasses;
+        private System.Windows.Forms.Panel panel5;
     }
 }
