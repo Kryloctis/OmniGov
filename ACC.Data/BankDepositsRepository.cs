@@ -40,6 +40,7 @@ namespace ACC.Data
                         return record;
 
                     record.Add("banks_id", reader.Rows[0]["banks_id"].ToString());
+                    record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
                     record.Add("reference", reader.Rows[0]["reference"].ToString());
                     record.Add("date", reader.Rows[0]["date"].ToString());
                     record.Add("amount", reader.Rows[0]["amount"].ToString());
@@ -47,7 +48,6 @@ namespace ACC.Data
                     record.Add("created_by", reader.Rows[0]["created_by"].ToString());
                     record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
                     record.Add("updated_by", reader.Rows[0]["updated_by"].ToString());
-                    record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
                 }
             }
             catch (Exception)
@@ -135,7 +135,7 @@ namespace ACC.Data
                     new object[] { "@funds_id", DbType.Int16, entity.fundId},
                 };
 
-                string query = $"UPDATE {tableName} SET banks_id=@banks_id,reference=@banks_id,date=@date,amount=@amount,updated_by=@updated_by,funds_id=@funds_id WHERE id = @id";
+                string query = $"UPDATE {tableName} SET banks_id=@banks_id,reference=@reference,date=@date,amount=@amount,updated_by=@updated_by,funds_id=@funds_id WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
