@@ -95,6 +95,9 @@ namespace AccountingSystem
             this.ucBudgetDashboard1 = new AccountingSystem.Views.Dashboard.UcBudgetDashboard();
             this.tabAccountingDashboard = new System.Windows.Forms.TabPage();
             this.ucAccountingDashboard1 = new AccountingSystem.Views.Dashboard.UcAccountingDashboard();
+            this.menuTrialBalance = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuPreClosingTrialBalance = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuPostClosingTrialBalance = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -316,6 +319,7 @@ namespace AccountingSystem
             this.menuSAAOB,
             this.menuSAAOBB,
             this.menuJEVS,
+            this.menuTrialBalance,
             this.menuprintRCI,
             this.menuprintPC,
             this.menuprintGC,
@@ -703,6 +707,29 @@ namespace AccountingSystem
             this.ucAccountingDashboard1.Size = new System.Drawing.Size(1166, 383);
             this.ucAccountingDashboard1.TabIndex = 0;
             // 
+            // menuTrialBalance
+            // 
+            this.menuTrialBalance.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuPreClosingTrialBalance,
+            this.menuPostClosingTrialBalance});
+            this.menuTrialBalance.Name = "menuTrialBalance";
+            this.menuTrialBalance.Size = new System.Drawing.Size(233, 22);
+            this.menuTrialBalance.Text = "Trial Balance";
+            // 
+            // menuPreClosingTrialBalance
+            // 
+            this.menuPreClosingTrialBalance.Name = "menuPreClosingTrialBalance";
+            this.menuPreClosingTrialBalance.Size = new System.Drawing.Size(208, 22);
+            this.menuPreClosingTrialBalance.Text = "Pre Closing Trial Balance";
+            this.menuPreClosingTrialBalance.Click += new System.EventHandler(this.menuPreClosingTrialBalance_Click);
+            // 
+            // menuPostClosingTrialBalance
+            // 
+            this.menuPostClosingTrialBalance.Name = "menuPostClosingTrialBalance";
+            this.menuPostClosingTrialBalance.Size = new System.Drawing.Size(208, 22);
+            this.menuPostClosingTrialBalance.Text = "Post Closing Trial Balance";
+            this.menuPostClosingTrialBalance.Click += new System.EventHandler(this.menuPostClosingTrialBalance_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -816,6 +843,9 @@ namespace AccountingSystem
         private Views.Dashboard.UcAccountingDashboard ucAccountingDashboard1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem menuReceiptsConsolidated;
+        private System.Windows.Forms.ToolStripMenuItem menuTrialBalance;
+        private System.Windows.Forms.ToolStripMenuItem menuPreClosingTrialBalance;
+        private System.Windows.Forms.ToolStripMenuItem menuPostClosingTrialBalance;
     }
 }
 
