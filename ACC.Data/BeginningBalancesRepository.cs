@@ -281,5 +281,65 @@ namespace ACC.Data
 
             return false;
         }
+
+        public Dictionary<string, string> GetDebitAndCreditOfTemporaryAccounts(byte fundsId)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Byte, fundsId}
+                };
+
+                string query = $"SELECT FORMAT(SUM(IF(bb.is_debit=1, bb.amount, 0)),2) AS total_debit, FORMAT(SUM(IF(bb.is_debit=0, bb.amount, 0)),2) AS total_credit FROM beginning_balances AS bb INNER JOIN view_general_ledger_accounts AS gla ON bb.general_ledger_accounts_id = gla.general_ledger_accounts_id WHERE gla.account_group_code = 3 OR gla.account_group_code = 4 OR gla.account_group_code = 5 AND bb.funds_id=@funds_id";
+
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    record.Add("debit", reader.Rows[0]["total_debit"].ToString());
+                    record.Add("credit", reader.Rows[0]["total_credit"].ToString());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
+        }
+
+        public Dictionary<string, string> GetDebitAndCreditOfPermanentAccounts(byte fundsId)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Byte, fundsId}
+                };
+
+                string query = $"SELECT FORMAT(SUM(IF(bb.is_debit=1, bb.amount, '')),2) AS total_debit, FORMAT(SUM(IF(bb.is_debit=0, bb.amount, '')),2) AS total_credit FROM beginning_balances AS bb INNER JOIN view_general_ledger_accounts AS gla ON bb.general_ledger_accounts_id = gla.general_ledger_accounts_id WHERE gla.account_group_code = 1 OR gla.account_group_code = 2";
+
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    record.Add("debit", reader.Rows[0]["total_debit"].ToString());
+                    record.Add("credit", reader.Rows[0]["total_credit"].ToString());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
+        }
     }
 }
