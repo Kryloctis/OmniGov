@@ -419,6 +419,8 @@ namespace AccountingSystem
             datagrid.Columns[3].HeaderText = "Reference";
             datagrid.Columns[4].HeaderText = "Date";
             datagrid.Columns[5].HeaderText = "Amount";
+            datagrid.Columns[5].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns[6].Visible = false;
             datagrid.Columns[7].Visible = false;
             datagrid.Columns[8].Visible = false;
