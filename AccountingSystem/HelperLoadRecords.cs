@@ -165,6 +165,8 @@ namespace AccountingSystem
         #region General Ledger Accounts
         internal static void GeneralLedgerAccountsWithBalancesDatagridView(DataTable dataTable, DataGridView datagrid, byte fundsId, short year)
         {
+            _ = dataTable.Columns.Add("Debit", typeof(decimal));
+            _ = dataTable.Columns.Add("Credit", typeof(decimal));
             _ = dataTable.Columns.Add("Balance", typeof(decimal));
             _ = dataTable.Columns.Add("Type", typeof(string));
 
