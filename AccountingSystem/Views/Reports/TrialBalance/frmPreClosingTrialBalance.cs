@@ -84,18 +84,19 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
 
                 var beginningBalanceRepository = Factory.BeginningBalancesRepository();
-                decimal generalLedgerBalance = beginningBalanceRepository.GetSumBalanceByGeneralLedgerId(fundId, (ushort)item["general_ledger_accounts_id"], 2021);
-                var beginningBalanceDict = beginningBalanceRepository.GetRecordByFundsAndGeneralLedgerID(fundId, (ushort)item["general_ledger_accounts_id"], 2021);
 
-                string debitCreditType = string.Empty;
-                debitCreditType = HelperLoadRecords.ValidateDebitOrCreditType(beginningBalanceDict, debitCreditType);
+                var subsidiaryDebitBeginningBalance = beginningBalanceRepository.GetDebitSumOfSubsidiaryLedger(fundId, (ushort)item["general_ledger_accounts_id"], year);
+                var subsidiaryCreditBeginningBalance = beginningBalanceRepository.GetCreditSumOfSubsidiaryLedger(fundId, (ushort)item["general_ledger_accounts_id"], year);
 
+                var accountBeginningBalance = Math.Max(subsidiaryDebitBeginningBalance, subsidiaryCreditBeginningBalance) - Math.Min(subsidiaryDebitBeginningBalance, subsidiaryCreditBeginningBalance);
 
-                if (debitCreditType == "Debit")
-                    row["debit"] = generalLedgerBalance.ToString("N2");
+                var isDebitColumn = subsidiaryDebitBeginningBalance > subsidiaryCreditBeginningBalance ? true : false;
+
+                if (isDebitColumn)
+                    row["debit"] = accountBeginningBalance.ToString("N2");
                 else
-                    row["credit"] = generalLedgerBalance.ToString("N2");
-
+                   row["credit"] = accountBeginningBalance.ToString("N2");
+              
                 dtPreTrialBalance.Rows.Add(row);
             }
 

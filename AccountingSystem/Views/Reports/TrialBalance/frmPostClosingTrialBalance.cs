@@ -139,7 +139,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             return dtPreTrialBalance;
         }
 
-
         private decimal GetSumOfPermanentAccounts()
         {
 

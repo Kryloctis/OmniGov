@@ -468,7 +468,7 @@ namespace AccountingSystem
 
         private void menuPreClosingTrialBalance_Click(object sender, EventArgs e)
         {
-            _ = new frmPostClosingTrialBalance().ShowDialog();
+            _ = new frmPreClosingTrialBalance().ShowDialog();
         }
 
         private void menuPostClosingTrialBalance_Click(object sender, EventArgs e)
