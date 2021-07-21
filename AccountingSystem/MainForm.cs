@@ -465,5 +465,15 @@ namespace AccountingSystem
         {
             _ = new frmConsolidatedReceipts().ShowDialog();
         }
+
+        private void menuPreClosingTrialBalance_Click(object sender, EventArgs e)
+        {
+            _ = new frmPostClosingTrialBalance().ShowDialog();
+        }
+
+        private void menuPostClosingTrialBalance_Click(object sender, EventArgs e)
+        {
+            _ = new frmPostClosingTrialBalance().ShowDialog();
+        }
     }
 }
