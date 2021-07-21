@@ -115,6 +115,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.txtamount.Size = new System.Drawing.Size(400, 27);
             this.txtamount.TabIndex = 4;
             this.txtamount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtamount.ThousandsSeparator = true;
             // 
             // cmbbanks
             // 
