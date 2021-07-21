@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -128,8 +129,33 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
+        #region CHART OF ACCOUNTS
+        public decimal GetSumBalances(byte fundsId, ushort generalLedgerId, short year, byte isDebit)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Byte, fundsId},
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                    new object[] { "@year", DbType.Int16, year},
+                    new object[] { "@is_debit", DbType.Byte, isDebit},
+                };
+                string query = $"SELECT COALESCE(SUM(amount), 0) AS amount FROM {tableName} WHERE funds_id = @funds_id AND YEAR(date_entry) = @year AND general_ledger_accounts_id = @general_ledger_accounts_id AND is_debit = @is_debit";
+                decimal debit = Convert.ToDecimal(_dbGenericCommands.ExecuteScalar(query, parameters));
+                return debit;
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
 
-        //CHART OF ACCOUNTS
         public decimal GetSumBalanceByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null)
         {
             try
