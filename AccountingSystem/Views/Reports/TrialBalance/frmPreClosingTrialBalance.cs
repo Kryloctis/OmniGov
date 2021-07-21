@@ -90,13 +90,17 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
                 var accountBeginningBalance = Math.Max(subsidiaryDebitBeginningBalance, subsidiaryCreditBeginningBalance) - Math.Min(subsidiaryDebitBeginningBalance, subsidiaryCreditBeginningBalance);
 
+                var accountTransactionsTotalAmount = Factory.JEVAccountsRepository().GetJEVSumByGeneralLedgerId(fundId, (ushort)item["general_ledger_accounts_id"], year);
+
+                var accountAdjustedBalance = accountBeginningBalance - accountTransactionsTotalAmount;
+
                 var isDebitColumn = subsidiaryDebitBeginningBalance > subsidiaryCreditBeginningBalance ? true : false;
 
                 if (isDebitColumn)
-                    row["debit"] = accountBeginningBalance.ToString("N2");
+                    row["debit"] = Math.Abs(accountAdjustedBalance).ToString("N2");
                 else
-                   row["credit"] = accountBeginningBalance.ToString("N2");
-              
+                    row["credit"] = Math.Abs(accountAdjustedBalance).ToString("N2");
+
                 dtPreTrialBalance.Rows.Add(row);
             }
 

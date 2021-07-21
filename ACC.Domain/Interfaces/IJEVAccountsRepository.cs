@@ -17,5 +17,7 @@ namespace ACC.Domain.Interfaces
         bool DeleteByJevId(int jevId);
 
         int CountByJevId(int jevId);
+
+        decimal GetJEVSumByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year);
     }
 }

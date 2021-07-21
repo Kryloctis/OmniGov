@@ -231,5 +231,30 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public decimal GetJEVSumByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Byte, fundsId},
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                    new object[] { "@year", DbType.Int16, year},
+                };
+
+                string query = $"SELECT SUM(amount) FROM view_jev_accounts WHERE is_approved=1 AND funds_id = @funds_id AND general_ledger_accounts_id=@general_ledger_accounts_id AND YEAR(date_entry)=@year";
+
+                string sumBalance = _dbGenericCommands.ExecuteScalar(query, parameters);
+                if (!string.IsNullOrWhiteSpace(sumBalance))
+                    return Convert.ToDecimal(sumBalance);
+
+                return 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

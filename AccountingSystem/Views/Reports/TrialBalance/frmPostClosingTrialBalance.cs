@@ -92,7 +92,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             {
                 var account_group_type = item["account_group_code"].ToString();
 
-                if (account_group_type == "3" || account_group_type == "3" || account_group_type == "5")
+                if (account_group_type == "3" || account_group_type == "4" || account_group_type == "5")
                     break;
 
                 DataRow row = dtPreTrialBalance.NewRow();
@@ -101,18 +101,26 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
 
                 var beginningBalanceRepository = Factory.BeginningBalancesRepository();
-                decimal generalLedgerBalance = beginningBalanceRepository.GetSumBalanceByGeneralLedgerId(fundId, (ushort)item["general_ledger_accounts_id"], year);
-                var beginningBalanceDict = beginningBalanceRepository.GetRecordByFundsAndGeneralLedgerID(fundId, (ushort)item["general_ledger_accounts_id"], year);
 
-                string debitCreditType = string.Empty;
-                debitCreditType = HelperLoadRecords.ValidateDebitOrCreditType(beginningBalanceDict, debitCreditType);
-                
-                if (debitCreditType == "Debit")
-                    row["debit"] = generalLedgerBalance.ToString("N2");
+                var subsidiaryDebitBeginningBalance = beginningBalanceRepository.GetDebitSumOfSubsidiaryLedger(fundId, (ushort)item["general_ledger_accounts_id"], year);
+                var subsidiaryCreditBeginningBalance = beginningBalanceRepository.GetCreditSumOfSubsidiaryLedger(fundId, (ushort)item["general_ledger_accounts_id"], year);
+
+                var accountBeginningBalance = Math.Max(subsidiaryDebitBeginningBalance, subsidiaryCreditBeginningBalance) - Math.Min(subsidiaryDebitBeginningBalance, subsidiaryCreditBeginningBalance);
+
+
+                var accountTransactionsTotalAmount = Factory.JEVAccountsRepository().GetJEVSumByGeneralLedgerId(fundId, (ushort)item["general_ledger_accounts_id"], year);
+
+                var accountAdjustedBalance = accountBeginningBalance - accountTransactionsTotalAmount;
+
+
+                var isDebitColumn = subsidiaryDebitBeginningBalance > subsidiaryCreditBeginningBalance;
+
+                if (isDebitColumn)
+                    row["debit"] = Math.Abs(accountAdjustedBalance).ToString("N2");
                 else
-                    row["credit"] = generalLedgerBalance.ToString("N2");
-               
-                    
+                    row["credit"] = Math.Abs(accountAdjustedBalance).ToString("N2");
+
+
 
 
                 dtPreTrialBalance.Rows.Add(row);
