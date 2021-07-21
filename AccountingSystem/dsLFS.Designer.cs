@@ -692,7 +692,6 @@ namespace AccountingSystem {
                     this.tabledtCashreport.InitVars();
                 }
             }
-        }
             this.tabledtPreTrialBalance = ((dtPreTrialBalanceDataTable)(base.Tables["dtPreTrialBalance"]));
             if ((initTable == true)) {
                 if ((this.tabledtPreTrialBalance != null)) {
@@ -14742,8 +14741,6 @@ namespace AccountingSystem {
             public void SetcreditNull() {
                 this[this.tabledtPreTrialBalance.creditColumn] = global::System.Convert.DBNull;
             }
-        }
-        
         }
         
         /// <summary>
