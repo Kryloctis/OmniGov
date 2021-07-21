@@ -1,8 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
@@ -13,8 +11,11 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordsByBudgetAppropriationIdDateEntry(int budgetAppropriationId, DateTime dateEntry);
 
         //DASHBOARD
-        DataTable GetViewRecordsByFPPIdFundIdDateEntry(int fppId, int fundId, DateTime dateEntry);
-
-        decimal GetSupplementalAppropriations(string fppId, int fundId, DateTime dateEntry, int allotmentClassId, Byte isContinuing);
+        #region DASHBOARD BUDGET
+        //DETAILED
+        decimal GetSumSupplementalAppropriations(int budgetAppropriationId, DateTime dateEntry);
+        //SUMMARY
+        decimal GetSumSupplementalAppropriations(string fppId, int fundId, DateTime dateEntry, int allotmentClassId, Byte isContinuing);
+        #endregion
     }
 }

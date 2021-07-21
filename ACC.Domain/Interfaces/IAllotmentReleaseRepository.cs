@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
@@ -21,7 +20,7 @@ namespace ACC.Domain.Interfaces
 
         bool AllotmentReleaseExist(int budgetAppropriationId, DateTime dateIssued);
 
-        bool AllotmentReleaseExist(int Id ,int budgetAppropriationId, DateTime dateIssued);
+        bool AllotmentReleaseExist(int Id, int budgetAppropriationId, DateTime dateIssued);
 
 
         //VIEWS
@@ -35,7 +34,13 @@ namespace ACC.Domain.Interfaces
 
 
         //DASHBOARD
-        DataTable GetViewRecordsFPPIdFundIdDateEntry(int fppId, int fundId, DateTime dateIssued);
-        decimal GetAllotments(string fppId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing);
+
+        #region BUDGET DASHBOARD
+        //SUMMARY
+        decimal GetSumAllotments(int budgetAppropriationId, DateTime dateIssued);
+
+        //DETAILED
+        decimal GetSumAllotments(string fppId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing);
+        #endregion
     }
 }

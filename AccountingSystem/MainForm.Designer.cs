@@ -96,12 +96,6 @@ namespace AccountingSystem
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabBudgetDashboard = new System.Windows.Forms.TabPage();
             this.ucBudgetDashboard1 = new AccountingSystem.Views.Dashboard.UcBudgetDashboard();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dtAsOf = new System.Windows.Forms.DateTimePicker();
-            this.cmbxFPP = new System.Windows.Forms.ComboBox();
-            this.cmbxFunds = new System.Windows.Forms.ComboBox();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.tabAccountingDashboard = new System.Windows.Forms.TabPage();
             this.ucAccountingDashboard1 = new AccountingSystem.Views.Dashboard.UcAccountingDashboard();
             this.menuStrip1.SuspendLayout();
@@ -110,7 +104,6 @@ namespace AccountingSystem
             this.flowLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabBudgetDashboard.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.tabAccountingDashboard.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -688,6 +681,7 @@ namespace AccountingSystem
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
+            this.tabControl1.Padding = new System.Drawing.Point(0, 0);
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1180, 396);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
@@ -696,11 +690,9 @@ namespace AccountingSystem
             // tabBudgetDashboard
             // 
             this.tabBudgetDashboard.Controls.Add(this.ucBudgetDashboard1);
-            this.tabBudgetDashboard.Controls.Add(this.panel1);
             this.tabBudgetDashboard.Location = new System.Drawing.Point(4, 5);
-            this.tabBudgetDashboard.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabBudgetDashboard.Margin = new System.Windows.Forms.Padding(0);
             this.tabBudgetDashboard.Name = "tabBudgetDashboard";
-            this.tabBudgetDashboard.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabBudgetDashboard.Size = new System.Drawing.Size(1172, 387);
             this.tabBudgetDashboard.TabIndex = 0;
             this.tabBudgetDashboard.UseVisualStyleBackColor = true;
@@ -708,90 +700,13 @@ namespace AccountingSystem
             // ucBudgetDashboard1
             // 
             this.ucBudgetDashboard1.AutoScroll = true;
-            this.ucBudgetDashboard1.AutoScrollMinSize = new System.Drawing.Size(990, 448);
             this.ucBudgetDashboard1.AutoSize = true;
             this.ucBudgetDashboard1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucBudgetDashboard1.Location = new System.Drawing.Point(3, 29);
+            this.ucBudgetDashboard1.Location = new System.Drawing.Point(0, 0);
             this.ucBudgetDashboard1.Margin = new System.Windows.Forms.Padding(0);
             this.ucBudgetDashboard1.Name = "ucBudgetDashboard1";
-            this.ucBudgetDashboard1.Padding = new System.Windows.Forms.Padding(4);
-            this.ucBudgetDashboard1.Size = new System.Drawing.Size(1166, 356);
+            this.ucBudgetDashboard1.Size = new System.Drawing.Size(1172, 387);
             this.ucBudgetDashboard1.TabIndex = 1;
-            // 
-            // panel1
-            // 
-            this.panel1.AutoSize = true;
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.dtAsOf);
-            this.panel1.Controls.Add(this.cmbxFPP);
-            this.panel1.Controls.Add(this.cmbxFunds);
-            this.panel1.Controls.Add(this.btnRefresh);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 2);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1166, 27);
-            this.panel1.TabIndex = 2;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(4, 2);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(66, 23);
-            this.button1.TabIndex = 67;
-            this.button1.Text = "Detailed";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // dtAsOf
-            // 
-            this.dtAsOf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtAsOf.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.dtAsOf.Location = new System.Drawing.Point(864, 2);
-            this.dtAsOf.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dtAsOf.Name = "dtAsOf";
-            this.dtAsOf.Size = new System.Drawing.Size(214, 23);
-            this.dtAsOf.TabIndex = 66;
-            // 
-            // cmbxFPP
-            // 
-            this.cmbxFPP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbxFPP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.cmbxFPP.FormattingEnabled = true;
-            this.cmbxFPP.Location = new System.Drawing.Point(461, 2);
-            this.cmbxFPP.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbxFPP.Name = "cmbxFPP";
-            this.cmbxFPP.Size = new System.Drawing.Size(260, 23);
-            this.cmbxFPP.TabIndex = 65;
-            this.cmbxFPP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxFPP_KeyDown);
-            // 
-            // cmbxFunds
-            // 
-            this.cmbxFunds.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxFunds.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.cmbxFunds.FormattingEnabled = true;
-            this.cmbxFunds.Location = new System.Drawing.Point(727, 2);
-            this.cmbxFunds.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbxFunds.Name = "cmbxFunds";
-            this.cmbxFunds.Size = new System.Drawing.Size(131, 23);
-            this.cmbxFunds.TabIndex = 64;
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefresh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.symbol_refresh_14px;
-            this.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRefresh.Location = new System.Drawing.Point(1083, 2);
-            this.btnRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(78, 23);
-            this.btnRefresh.TabIndex = 63;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // tabAccountingDashboard
             // 
@@ -828,6 +743,7 @@ namespace AccountingSystem
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinimumSize = new System.Drawing.Size(1196, 562);
@@ -848,7 +764,6 @@ namespace AccountingSystem
             this.tabControl1.ResumeLayout(false);
             this.tabBudgetDashboard.ResumeLayout(false);
             this.tabBudgetDashboard.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.tabAccountingDashboard.ResumeLayout(false);
             this.tabAccountingDashboard.PerformLayout();
             this.ResumeLayout(false);
@@ -925,11 +840,6 @@ namespace AccountingSystem
         internal System.Windows.Forms.TabPage tabBudgetDashboard;
         internal System.Windows.Forms.TabPage tabAccountingDashboard;
         private Views.Dashboard.UcBudgetDashboard ucBudgetDashboard1;
-        private System.Windows.Forms.Panel panel1;
-        internal System.Windows.Forms.DateTimePicker dtAsOf;
-        internal System.Windows.Forms.ComboBox cmbxFPP;
-        internal System.Windows.Forms.ComboBox cmbxFunds;
-        internal System.Windows.Forms.Button btnRefresh;
         private Views.Dashboard.UcAccountingDashboard ucAccountingDashboard1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem menuReceiptsConsolidated;
