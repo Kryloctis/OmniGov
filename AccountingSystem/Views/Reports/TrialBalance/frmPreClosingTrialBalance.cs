@@ -21,6 +21,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         public frmPreClosingTrialBalance()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panelReport.Controls.Add(reportViewer);
@@ -48,7 +49,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
                 var fundName = cmbFund.Text.ToUpper();
-                var asOfDate = dtAsOf.Value.ToString("MMMM dd, yyyyy");
+                var asOfDate = dtAsOf.Value.ToString("MMMM dd, yyyy");
 
                 var parameters = new[] {
                     new ReportParameter("paramLGUName", lguDict["lgu_name"]),

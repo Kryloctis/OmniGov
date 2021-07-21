@@ -22,6 +22,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         public frmPostClosingTrialBalance()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panelReport.Controls.Add(reportViewer);
@@ -61,7 +62,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
                 var fundName = cmbFund.Text.ToUpper();
-                var asOfDate = dtAsOf.Value.ToString("MMMM dd, yyyyy");
+                var asOfDate = dtAsOf.Value.ToString("MMMM dd, yyyy");
 
                 var parameters = new[] {
                     new ReportParameter("paramLGUName", lguDict["lgu_name"]),
@@ -120,9 +121,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                 else
                     row["credit"] = Math.Abs(accountAdjustedBalance).ToString("N2");
 
-
-
-
                 dtPreTrialBalance.Rows.Add(row);
             }
 
@@ -137,10 +135,10 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             smallerColumnValue = smallerColumnValue + GetSumOfTemporaryAccounts();
 
             if (isDebitColumnBigger)
-                row1["debit"] = amount - smallerColumnValue;
+                row1["debit"] = Math.Abs(amount - smallerColumnValue).ToString("N2");
             else
-                row1["credit"] = amount - smallerColumnValue;
-            
+                row1["credit"] = Math.Abs(amount - smallerColumnValue).ToString("N2");
+
             dtPreTrialBalance.Rows.Add(row1);
             #endregion
 
