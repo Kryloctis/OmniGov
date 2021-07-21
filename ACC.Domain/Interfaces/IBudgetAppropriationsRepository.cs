@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
@@ -19,10 +18,14 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecords(int fundId, DateTime dateEntry, short year, byte isContinuing, byte isSpecial);
 
         //DASHBOARD
-        DataTable GetViewRecordsFPPIdFundIdDateEntry(int fppId, int fundId, DateTime dateEntry);
+        #region BUDGET DASHBOARD
+        //DETAILED
+        DataTable GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(string fppId, int? subFPPId, int funds_id, int allotment_class_id, DateTime date_entry);
+        DataTable GetHeaderOthersFPP(string fppID, int allotment_classes_id, int funds_id, short year);
 
-        decimal GetBudgetAppropriations(string fppId, int fundId, DateTime dateEntry, int allotment_classes_id, byte isContinuing);
-
+        //SUMMARY
+        decimal GetSumBudgetAppropriations(string fppId, int fundId, DateTime dateEntry, int allotment_classes_id, byte isContinuing);
+        #endregion
 
         DataTable GetViewRecordsByIds(BudgetAppropriationsModel entity);
 
@@ -34,7 +37,7 @@ namespace ACC.Domain.Interfaces
 
 
 
-       //Validations
+        //Validations
 
         bool BudgetAppropriationExist(int fundId, int fppId, int? othersFPPId, int allotmentClassId, int generalLedgerAccountId, short year, string remarks);
 
