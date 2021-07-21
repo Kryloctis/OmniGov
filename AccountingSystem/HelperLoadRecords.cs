@@ -195,7 +195,7 @@ namespace AccountingSystem
             datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
-        private static string ValidateDebitOrCreditType(Dictionary<string, string> beginningBalanceDict, string debitCreditType)
+        internal static string ValidateDebitOrCreditType(Dictionary<string, string> beginningBalanceDict, string debitCreditType)
         {
             // check if naay sulod ang dictionary
             if (beginningBalanceDict.Count != 0)

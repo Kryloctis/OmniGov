@@ -34,6 +34,7 @@ using AccountingSystem.Views.Reports.JEV;
 using System.Data;
 using AccountingSystem.Views.Manage.Augmentation;
 using AccountingSystem.Views.Reports.ConsolidatedReceipts;
+using AccountingSystem.Views.Reports.TrialBalance;
 
 namespace AccountingSystem
 {
@@ -464,7 +465,5 @@ namespace AccountingSystem
         {
             _ = new frmConsolidatedReceipts().ShowDialog();
         }
-
-     
     }
 }

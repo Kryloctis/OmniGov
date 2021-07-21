@@ -321,6 +321,16 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="dtPreTrialBalance" msprop:Generator_TableClassName="dtPreTrialBalanceDataTable" msprop:Generator_TableVarName="tabledtPreTrialBalance" msprop:Generator_RowChangedName="dtPreTrialBalanceRowChanged" msprop:Generator_TablePropName="dtPreTrialBalance" msprop:Generator_RowDeletingName="dtPreTrialBalanceRowDeleting" msprop:Generator_RowChangingName="dtPreTrialBalanceRowChanging" msprop:Generator_RowEvHandlerName="dtPreTrialBalanceRowChangeEventHandler" msprop:Generator_RowDeletedName="dtPreTrialBalanceRowDeleted" msprop:Generator_RowClassName="dtPreTrialBalanceRow" msprop:Generator_UserTableName="dtPreTrialBalance" msprop:Generator_RowEvArgName="dtPreTrialBalanceRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="account_title" msprop:Generator_ColumnVarNameInTable="columnaccount_title" msprop:Generator_ColumnPropNameInRow="account_title" msprop:Generator_ColumnPropNameInTable="account_titleColumn" msprop:Generator_UserColumnName="account_title" type="xs:string" minOccurs="0" />
+              <xs:element name="account_code" msprop:Generator_ColumnVarNameInTable="columnaccount_code" msprop:Generator_ColumnPropNameInRow="account_code" msprop:Generator_ColumnPropNameInTable="account_codeColumn" msprop:Generator_UserColumnName="account_code" type="xs:string" minOccurs="0" />
+              <xs:element name="debit" msprop:Generator_ColumnVarNameInTable="columndebit" msprop:Generator_ColumnPropNameInRow="debit" msprop:Generator_ColumnPropNameInTable="debitColumn" msprop:Generator_UserColumnName="debit" type="xs:decimal" minOccurs="0" />
+              <xs:element name="credit" msprop:Generator_ColumnVarNameInTable="columncredit" msprop:Generator_ColumnPropNameInRow="credit" msprop:Generator_ColumnPropNameInTable="creditColumn" msprop:Generator_UserColumnName="credit" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>
