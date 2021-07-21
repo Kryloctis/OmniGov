@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
@@ -128,11 +128,13 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
+
+        //CHART OF ACCOUNTS
         public decimal GetSumBalanceByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null)
         {
             try
             {
-                var parameters = new object[][] 
+                var parameters = new object[][]
                 {
                     new object[] { "@funds_id", DbType.Byte, fundsId},
                     new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
