@@ -64,9 +64,11 @@ namespace AccountingSystem {
         
         private dtReceiptsConsolidatedDataTable tabledtReceiptsConsolidated;
         
+        private dtPreTrialBalanceDataTable tabledtPreTrialBalance;
+        
         private dtCashreportDataTable tabledtCashreport;
         
-        private dtPreTrialBalanceDataTable tabledtPreTrialBalance;
+        private dtStatementOfFinancialPositionDataTable tabledtStatementOfFinancialPosition;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -156,11 +158,14 @@ namespace AccountingSystem {
                 if ((ds.Tables["dtReceiptsConsolidated"] != null)) {
                     base.Tables.Add(new dtReceiptsConsolidatedDataTable(ds.Tables["dtReceiptsConsolidated"]));
                 }
+                if ((ds.Tables["dtPreTrialBalance"] != null)) {
+                    base.Tables.Add(new dtPreTrialBalanceDataTable(ds.Tables["dtPreTrialBalance"]));
+                }
                 if ((ds.Tables["dtCashreport"] != null)) {
                     base.Tables.Add(new dtCashreportDataTable(ds.Tables["dtCashreport"]));
                 }
-                if ((ds.Tables["dtPreTrialBalance"] != null)) {
-                    base.Tables.Add(new dtPreTrialBalanceDataTable(ds.Tables["dtPreTrialBalance"]));
+                if ((ds.Tables["dtStatementOfFinancialPosition"] != null)) {
+                    base.Tables.Add(new dtStatementOfFinancialPositionDataTable(ds.Tables["dtStatementOfFinancialPosition"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -402,6 +407,16 @@ namespace AccountingSystem {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public dtStatementOfFinancialPositionDataTable dtStatementOfFinancialPosition {
+            get {
+                return this.tabledtStatementOfFinancialPosition;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -527,11 +542,14 @@ namespace AccountingSystem {
                 if ((ds.Tables["dtReceiptsConsolidated"] != null)) {
                     base.Tables.Add(new dtReceiptsConsolidatedDataTable(ds.Tables["dtReceiptsConsolidated"]));
                 }
+                if ((ds.Tables["dtPreTrialBalance"] != null)) {
+                    base.Tables.Add(new dtPreTrialBalanceDataTable(ds.Tables["dtPreTrialBalance"]));
+                }
                 if ((ds.Tables["dtCashreport"] != null)) {
                     base.Tables.Add(new dtCashreportDataTable(ds.Tables["dtCashreport"]));
                 }
-                if ((ds.Tables["dtPreTrialBalance"] != null)) {
-                    base.Tables.Add(new dtPreTrialBalanceDataTable(ds.Tables["dtPreTrialBalance"]));
+                if ((ds.Tables["dtStatementOfFinancialPosition"] != null)) {
+                    base.Tables.Add(new dtStatementOfFinancialPositionDataTable(ds.Tables["dtStatementOfFinancialPosition"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -686,16 +704,22 @@ namespace AccountingSystem {
                     this.tabledtReceiptsConsolidated.InitVars();
                 }
             }
+            this.tabledtPreTrialBalance = ((dtPreTrialBalanceDataTable)(base.Tables["dtPreTrialBalance"]));
+            if ((initTable == true)) {
+                if ((this.tabledtPreTrialBalance != null)) {
+                    this.tabledtPreTrialBalance.InitVars();
+                }
+            }
             this.tabledtCashreport = ((dtCashreportDataTable)(base.Tables["dtCashreport"]));
             if ((initTable == true)) {
                 if ((this.tabledtCashreport != null)) {
                     this.tabledtCashreport.InitVars();
                 }
             }
-            this.tabledtPreTrialBalance = ((dtPreTrialBalanceDataTable)(base.Tables["dtPreTrialBalance"]));
+            this.tabledtStatementOfFinancialPosition = ((dtStatementOfFinancialPositionDataTable)(base.Tables["dtStatementOfFinancialPosition"]));
             if ((initTable == true)) {
-                if ((this.tabledtPreTrialBalance != null)) {
-                    this.tabledtPreTrialBalance.InitVars();
+                if ((this.tabledtStatementOfFinancialPosition != null)) {
+                    this.tabledtStatementOfFinancialPosition.InitVars();
                 }
             }
         }
@@ -748,10 +772,12 @@ namespace AccountingSystem {
             base.Tables.Add(this.tabledtJournalVoucher);
             this.tabledtReceiptsConsolidated = new dtReceiptsConsolidatedDataTable();
             base.Tables.Add(this.tabledtReceiptsConsolidated);
-            this.tabledtCashreport = new dtCashreportDataTable();
-            base.Tables.Add(this.tabledtCashreport);
             this.tabledtPreTrialBalance = new dtPreTrialBalanceDataTable();
             base.Tables.Add(this.tabledtPreTrialBalance);
+            this.tabledtCashreport = new dtCashreportDataTable();
+            base.Tables.Add(this.tabledtCashreport);
+            this.tabledtStatementOfFinancialPosition = new dtStatementOfFinancialPositionDataTable();
+            base.Tables.Add(this.tabledtStatementOfFinancialPosition);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -876,13 +902,19 @@ namespace AccountingSystem {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private bool ShouldSerializedtPreTrialBalance() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private bool ShouldSerializedtCashreport() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializedtPreTrialBalance() {
+        private bool ShouldSerializedtStatementOfFinancialPosition() {
             return false;
         }
         
@@ -1006,6 +1038,9 @@ namespace AccountingSystem {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void dtCashreportRowChangeEventHandler(object sender, dtCashreportRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public delegate void dtStatementOfFinancialPositionRowChangeEventHandler(object sender, dtStatementOfFinancialPositionRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -8990,6 +9025,323 @@ namespace AccountingSystem {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class dtStatementOfFinancialPositionDataTable : global::System.Data.TypedTableBase<dtStatementOfFinancialPositionRow> {
+            
+            private global::System.Data.DataColumn columnaccountId;
+            
+            private global::System.Data.DataColumn columnaccountCode;
+            
+            private global::System.Data.DataColumn columnaccountName;
+            
+            private global::System.Data.DataColumn columnaccountGroup;
+            
+            private global::System.Data.DataColumn columncurrentAmount;
+            
+            private global::System.Data.DataColumn columnlastYearAmount;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtStatementOfFinancialPositionDataTable() {
+                this.TableName = "dtStatementOfFinancialPosition";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal dtStatementOfFinancialPositionDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected dtStatementOfFinancialPositionDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn accountIdColumn {
+                get {
+                    return this.columnaccountId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn accountCodeColumn {
+                get {
+                    return this.columnaccountCode;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn accountNameColumn {
+                get {
+                    return this.columnaccountName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn accountGroupColumn {
+                get {
+                    return this.columnaccountGroup;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn currentAmountColumn {
+                get {
+                    return this.columncurrentAmount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn lastYearAmountColumn {
+                get {
+                    return this.columnlastYearAmount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtStatementOfFinancialPositionRow this[int index] {
+                get {
+                    return ((dtStatementOfFinancialPositionRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtStatementOfFinancialPositionRowChangeEventHandler dtStatementOfFinancialPositionRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtStatementOfFinancialPositionRowChangeEventHandler dtStatementOfFinancialPositionRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtStatementOfFinancialPositionRowChangeEventHandler dtStatementOfFinancialPositionRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtStatementOfFinancialPositionRowChangeEventHandler dtStatementOfFinancialPositionRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void AdddtStatementOfFinancialPositionRow(dtStatementOfFinancialPositionRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtStatementOfFinancialPositionRow AdddtStatementOfFinancialPositionRow(string accountId, string accountCode, string accountName, string accountGroup, string currentAmount, string lastYearAmount) {
+                dtStatementOfFinancialPositionRow rowdtStatementOfFinancialPositionRow = ((dtStatementOfFinancialPositionRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        accountId,
+                        accountCode,
+                        accountName,
+                        accountGroup,
+                        currentAmount,
+                        lastYearAmount};
+                rowdtStatementOfFinancialPositionRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtStatementOfFinancialPositionRow);
+                return rowdtStatementOfFinancialPositionRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                dtStatementOfFinancialPositionDataTable cln = ((dtStatementOfFinancialPositionDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new dtStatementOfFinancialPositionDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal void InitVars() {
+                this.columnaccountId = base.Columns["accountId"];
+                this.columnaccountCode = base.Columns["accountCode"];
+                this.columnaccountName = base.Columns["accountName"];
+                this.columnaccountGroup = base.Columns["accountGroup"];
+                this.columncurrentAmount = base.Columns["currentAmount"];
+                this.columnlastYearAmount = base.Columns["lastYearAmount"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            private void InitClass() {
+                this.columnaccountId = new global::System.Data.DataColumn("accountId", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaccountId);
+                this.columnaccountCode = new global::System.Data.DataColumn("accountCode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaccountCode);
+                this.columnaccountName = new global::System.Data.DataColumn("accountName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaccountName);
+                this.columnaccountGroup = new global::System.Data.DataColumn("accountGroup", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaccountGroup);
+                this.columncurrentAmount = new global::System.Data.DataColumn("currentAmount", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncurrentAmount);
+                this.columnlastYearAmount = new global::System.Data.DataColumn("lastYearAmount", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnlastYearAmount);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtStatementOfFinancialPositionRow NewdtStatementOfFinancialPositionRow() {
+                return ((dtStatementOfFinancialPositionRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new dtStatementOfFinancialPositionRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(dtStatementOfFinancialPositionRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.dtStatementOfFinancialPositionRowChanged != null)) {
+                    this.dtStatementOfFinancialPositionRowChanged(this, new dtStatementOfFinancialPositionRowChangeEvent(((dtStatementOfFinancialPositionRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.dtStatementOfFinancialPositionRowChanging != null)) {
+                    this.dtStatementOfFinancialPositionRowChanging(this, new dtStatementOfFinancialPositionRowChangeEvent(((dtStatementOfFinancialPositionRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.dtStatementOfFinancialPositionRowDeleted != null)) {
+                    this.dtStatementOfFinancialPositionRowDeleted(this, new dtStatementOfFinancialPositionRowChangeEvent(((dtStatementOfFinancialPositionRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.dtStatementOfFinancialPositionRowDeleting != null)) {
+                    this.dtStatementOfFinancialPositionRowDeleting(this, new dtStatementOfFinancialPositionRowChangeEvent(((dtStatementOfFinancialPositionRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void RemovedtStatementOfFinancialPositionRow(dtStatementOfFinancialPositionRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsLFS ds = new dsLFS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "dtStatementOfFinancialPositionDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class dtGeneralJournalRow : global::System.Data.DataRow {
@@ -14927,6 +15279,195 @@ namespace AccountingSystem {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class dtStatementOfFinancialPositionRow : global::System.Data.DataRow {
+            
+            private dtStatementOfFinancialPositionDataTable tabledtStatementOfFinancialPosition;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal dtStatementOfFinancialPositionRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tabledtStatementOfFinancialPosition = ((dtStatementOfFinancialPositionDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string accountId {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtStatementOfFinancialPosition.accountIdColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'accountId\' in table \'dtStatementOfFinancialPosition\' is DBN" +
+                                "ull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPosition.accountIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string accountCode {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtStatementOfFinancialPosition.accountCodeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'accountCode\' in table \'dtStatementOfFinancialPosition\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPosition.accountCodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string accountName {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtStatementOfFinancialPosition.accountNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'accountName\' in table \'dtStatementOfFinancialPosition\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPosition.accountNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string accountGroup {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtStatementOfFinancialPosition.accountGroupColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'accountGroup\' in table \'dtStatementOfFinancialPosition\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPosition.accountGroupColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string currentAmount {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtStatementOfFinancialPosition.currentAmountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'currentAmount\' in table \'dtStatementOfFinancialPosition\' is" +
+                                " DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPosition.currentAmountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string lastYearAmount {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtStatementOfFinancialPosition.lastYearAmountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'lastYearAmount\' in table \'dtStatementOfFinancialPosition\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPosition.lastYearAmountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsaccountIdNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPosition.accountIdColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetaccountIdNull() {
+                this[this.tabledtStatementOfFinancialPosition.accountIdColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsaccountCodeNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPosition.accountCodeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetaccountCodeNull() {
+                this[this.tabledtStatementOfFinancialPosition.accountCodeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsaccountNameNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPosition.accountNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetaccountNameNull() {
+                this[this.tabledtStatementOfFinancialPosition.accountNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsaccountGroupNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPosition.accountGroupColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetaccountGroupNull() {
+                this[this.tabledtStatementOfFinancialPosition.accountGroupColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IscurrentAmountNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPosition.currentAmountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetcurrentAmountNull() {
+                this[this.tabledtStatementOfFinancialPosition.currentAmountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IslastYearAmountNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPosition.lastYearAmountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetlastYearAmountNull() {
+                this[this.tabledtStatementOfFinancialPosition.lastYearAmountColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -15610,6 +16151,40 @@ namespace AccountingSystem {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public class dtPreTrialBalanceRowChangeEvent : global::System.EventArgs {
+            
+            private dtPreTrialBalanceRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtPreTrialBalanceRowChangeEvent(dtPreTrialBalanceRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtPreTrialBalanceRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public class dtCashreportRowChangeEvent : global::System.EventArgs {
             
             private dtCashreportRow eventRow;
@@ -15644,22 +16219,22 @@ namespace AccountingSystem {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class dtPreTrialBalanceRowChangeEvent : global::System.EventArgs {
+        public class dtStatementOfFinancialPositionRowChangeEvent : global::System.EventArgs {
             
-            private dtPreTrialBalanceRow eventRow;
+            private dtStatementOfFinancialPositionRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtPreTrialBalanceRowChangeEvent(dtPreTrialBalanceRow row, global::System.Data.DataRowAction action) {
+            public dtStatementOfFinancialPositionRowChangeEvent(dtStatementOfFinancialPositionRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtPreTrialBalanceRow Row {
+            public dtStatementOfFinancialPositionRow Row {
                 get {
                     return this.eventRow;
                 }
