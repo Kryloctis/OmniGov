@@ -685,11 +685,12 @@ namespace AccountingSystem
             // label1
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label1.Location = new System.Drawing.Point(0, 56);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(1, 0, 0, 0);
-            this.label1.Size = new System.Drawing.Size(1180, 37);
+            this.label1.Size = new System.Drawing.Size(1180, 39);
             this.label1.TabIndex = 7;
             this.label1.Text = "Dashboard";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -700,7 +701,7 @@ namespace AccountingSystem
             this.flowLayoutPanel1.Controls.Add(this.radBtnBudget);
             this.flowLayoutPanel1.Controls.Add(this.radBtnAccounting);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 93);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 95);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1180, 25);
@@ -710,7 +711,7 @@ namespace AccountingSystem
             // 
             this.radBtnBudget.AutoSize = true;
             this.radBtnBudget.Checked = true;
-            this.radBtnBudget.ForeColor = System.Drawing.Color.Black;
+            this.radBtnBudget.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.radBtnBudget.Location = new System.Drawing.Point(8, 3);
             this.radBtnBudget.Name = "radBtnBudget";
             this.radBtnBudget.Size = new System.Drawing.Size(63, 19);
@@ -723,7 +724,7 @@ namespace AccountingSystem
             // radBtnAccounting
             // 
             this.radBtnAccounting.AutoSize = true;
-            this.radBtnAccounting.ForeColor = System.Drawing.Color.Black;
+            this.radBtnAccounting.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.radBtnAccounting.Location = new System.Drawing.Point(77, 3);
             this.radBtnAccounting.Name = "radBtnAccounting";
             this.radBtnAccounting.Size = new System.Drawing.Size(87, 19);
@@ -740,13 +741,13 @@ namespace AccountingSystem
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabControl1.ItemSize = new System.Drawing.Size(0, 1);
-            this.tabControl1.Location = new System.Drawing.Point(0, 118);
+            this.tabControl1.Location = new System.Drawing.Point(0, 120);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(0, 0);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1180, 396);
+            this.tabControl1.Size = new System.Drawing.Size(1180, 394);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 9;
             // 
@@ -778,7 +779,7 @@ namespace AccountingSystem
             this.tabAccountingDashboard.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabAccountingDashboard.Name = "tabAccountingDashboard";
             this.tabAccountingDashboard.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabAccountingDashboard.Size = new System.Drawing.Size(1172, 387);
+            this.tabAccountingDashboard.Size = new System.Drawing.Size(1172, 385);
             this.tabAccountingDashboard.TabIndex = 1;
             this.tabAccountingDashboard.Text = "tabPage2";
             this.tabAccountingDashboard.UseVisualStyleBackColor = true;
@@ -790,7 +791,7 @@ namespace AccountingSystem
             this.ucAccountingDashboard1.Location = new System.Drawing.Point(3, 2);
             this.ucAccountingDashboard1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucAccountingDashboard1.Name = "ucAccountingDashboard1";
-            this.ucAccountingDashboard1.Size = new System.Drawing.Size(1166, 383);
+            this.ucAccountingDashboard1.Size = new System.Drawing.Size(1166, 381);
             this.ucAccountingDashboard1.TabIndex = 0;
             // 
             // MainForm

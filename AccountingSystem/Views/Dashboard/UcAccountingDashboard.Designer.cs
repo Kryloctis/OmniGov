@@ -103,7 +103,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblCRJCounter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCRJCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblCRJCounter.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblCRJCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblCRJCounter.Location = new System.Drawing.Point(2, 15);
             this.lblCRJCounter.Name = "lblCRJCounter";
             this.lblCRJCounter.Size = new System.Drawing.Size(148, 40);
@@ -154,9 +154,12 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // lnkJEV
             // 
+            this.lnkJEV.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
             this.lnkJEV.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lnkJEV.AutoSize = true;
+            this.lnkJEV.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lnkJEV.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkJEV.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lnkJEV.Location = new System.Drawing.Point(60, 68);
             this.lnkJEV.Name = "lnkJEV";
             this.lnkJEV.Size = new System.Drawing.Size(24, 15);
@@ -170,7 +173,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblJEVCounter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblJEVCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblJEVCounter.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblJEVCounter.Location = new System.Drawing.Point(0, 15);
             this.lblJEVCounter.Name = "lblJEVCounter";
             this.lblJEVCounter.Size = new System.Drawing.Size(150, 40);
@@ -191,9 +194,12 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // lnkPending
             // 
+            this.lnkPending.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
             this.lnkPending.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lnkPending.AutoSize = true;
+            this.lnkPending.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lnkPending.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkPending.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lnkPending.Location = new System.Drawing.Point(36, 68);
             this.lnkPending.Name = "lnkPending";
             this.lnkPending.Size = new System.Drawing.Size(76, 15);
@@ -207,7 +213,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblPendingJEVCounter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPendingJEVCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblPendingJEVCounter.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblPendingJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblPendingJEVCounter.Location = new System.Drawing.Point(0, 15);
             this.lblPendingJEVCounter.Name = "lblPendingJEVCounter";
             this.lblPendingJEVCounter.Size = new System.Drawing.Size(150, 40);
@@ -228,9 +234,12 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // lnkApproved
             // 
+            this.lnkApproved.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
             this.lnkApproved.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lnkApproved.AutoSize = true;
+            this.lnkApproved.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lnkApproved.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkApproved.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lnkApproved.Location = new System.Drawing.Point(31, 68);
             this.lnkApproved.Name = "lnkApproved";
             this.lnkApproved.Size = new System.Drawing.Size(84, 15);
@@ -244,7 +253,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblApprovedJEVCounter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblApprovedJEVCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblApprovedJEVCounter.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblApprovedJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblApprovedJEVCounter.Location = new System.Drawing.Point(0, 15);
             this.lblApprovedJEVCounter.Name = "lblApprovedJEVCounter";
             this.lblApprovedJEVCounter.Size = new System.Drawing.Size(150, 40);
@@ -280,7 +289,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblCDJCounter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCDJCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblCDJCounter.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblCDJCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblCDJCounter.Location = new System.Drawing.Point(2, 15);
             this.lblCDJCounter.Name = "lblCDJCounter";
             this.lblCDJCounter.Size = new System.Drawing.Size(148, 40);
@@ -316,7 +325,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblCkDJCounter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCkDJCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblCkDJCounter.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblCkDJCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblCkDJCounter.Location = new System.Drawing.Point(2, 15);
             this.lblCkDJCounter.Name = "lblCkDJCounter";
             this.lblCkDJCounter.Size = new System.Drawing.Size(147, 40);
@@ -352,7 +361,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblPRJCounter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPRJCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblPRJCounter.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblPRJCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblPRJCounter.Location = new System.Drawing.Point(2, 15);
             this.lblPRJCounter.Name = "lblPRJCounter";
             this.lblPRJCounter.Size = new System.Drawing.Size(148, 40);
@@ -389,7 +398,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblGJCounter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblGJCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblGJCounter.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblGJCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblGJCounter.Location = new System.Drawing.Point(2, 15);
             this.lblGJCounter.Name = "lblGJCounter";
             this.lblGJCounter.Size = new System.Drawing.Size(148, 40);
@@ -425,7 +434,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblADADJCounter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblADADJCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblADADJCounter.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblADADJCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblADADJCounter.Location = new System.Drawing.Point(2, 15);
             this.lblADADJCounter.Name = "lblADADJCounter";
             this.lblADADJCounter.Size = new System.Drawing.Size(149, 40);
@@ -461,7 +470,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblObligationRecordCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblObligationRecordCount.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblObligationRecordCount.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblObligationRecordCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblObligationRecordCount.Location = new System.Drawing.Point(0, 15);
             this.lblObligationRecordCount.Name = "lblObligationRecordCount";
             this.lblObligationRecordCount.Size = new System.Drawing.Size(150, 40);
@@ -471,6 +480,7 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // btnRefreshCounter
             // 
+            this.btnRefreshCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnRefreshCounter.Image = ((System.Drawing.Image)(resources.GetObject("btnRefreshCounter.Image")));
             this.btnRefreshCounter.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnRefreshCounter.Location = new System.Drawing.Point(3, 3);

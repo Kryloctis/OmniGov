@@ -343,11 +343,11 @@ namespace AccountingSystem.Views.Dashboard
             this.ucBudgetCardsByAllotmentClassCY.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ucBudgetCardsByAllotmentClassCY.AutoSize = true;
-            this.ucBudgetCardsByAllotmentClassCY.Location = new System.Drawing.Point(-4, 116);
+            this.ucBudgetCardsByAllotmentClassCY.Location = new System.Drawing.Point(0, 116);
             this.ucBudgetCardsByAllotmentClassCY.Margin = new System.Windows.Forms.Padding(0);
             this.ucBudgetCardsByAllotmentClassCY.MinimumSize = new System.Drawing.Size(974, 166);
             this.ucBudgetCardsByAllotmentClassCY.Name = "ucBudgetCardsByAllotmentClassCY";
-            this.ucBudgetCardsByAllotmentClassCY.Size = new System.Drawing.Size(991, 166);
+            this.ucBudgetCardsByAllotmentClassCY.Size = new System.Drawing.Size(987, 166);
             this.ucBudgetCardsByAllotmentClassCY.TabIndex = 61;
             // 
             // ucBudgetCardsByAllotmentClassCON
@@ -355,11 +355,11 @@ namespace AccountingSystem.Views.Dashboard
             this.ucBudgetCardsByAllotmentClassCON.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ucBudgetCardsByAllotmentClassCON.AutoSize = true;
-            this.ucBudgetCardsByAllotmentClassCON.Location = new System.Drawing.Point(-4, 320);
+            this.ucBudgetCardsByAllotmentClassCON.Location = new System.Drawing.Point(0, 320);
             this.ucBudgetCardsByAllotmentClassCON.Margin = new System.Windows.Forms.Padding(0);
             this.ucBudgetCardsByAllotmentClassCON.MinimumSize = new System.Drawing.Size(974, 166);
             this.ucBudgetCardsByAllotmentClassCON.Name = "ucBudgetCardsByAllotmentClassCON";
-            this.ucBudgetCardsByAllotmentClassCON.Size = new System.Drawing.Size(991, 166);
+            this.ucBudgetCardsByAllotmentClassCON.Size = new System.Drawing.Size(987, 166);
             this.ucBudgetCardsByAllotmentClassCON.TabIndex = 62;
             // 
             // tableLayoutPanel1
@@ -647,6 +647,7 @@ namespace AccountingSystem.Views.Dashboard
             // dtAsOf
             // 
             this.dtAsOf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtAsOf.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.dtAsOf.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.dtAsOf.Location = new System.Drawing.Point(697, 2);
             this.dtAsOf.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -694,7 +695,7 @@ namespace AccountingSystem.Views.Dashboard
             // 
             this.chkbxDetailed.AutoSize = true;
             this.chkbxDetailed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.chkbxDetailed.Location = new System.Drawing.Point(4, 3);
+            this.chkbxDetailed.Location = new System.Drawing.Point(7, 3);
             this.chkbxDetailed.Name = "chkbxDetailed";
             this.chkbxDetailed.Size = new System.Drawing.Size(69, 19);
             this.chkbxDetailed.TabIndex = 6;
