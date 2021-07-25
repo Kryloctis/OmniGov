@@ -1,12 +1,7 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Ledgers
@@ -126,9 +121,10 @@ namespace AccountingSystem.Views.Reports.Ledgers
             return "";
         }
 
-        private static void ValidateDebitCreditRow(string particulars, DataRow item, DataRow row, ref decimal balance)
+        private void ValidateDebitCreditRow(byte fundId, ushort generalLedgerId, short year, string particulars, DataRow item, DataRow row, ref decimal balance)
         {
             decimal amount = Convert.ToDecimal(item["amount"]);
+
             if (Convert.ToBoolean(item["is_debit"]))
             {
                 row["particulars"] = particulars;
@@ -143,7 +139,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 row["credit_amount"] = item["amount"];
                 balance -= amount;
             }
-
             row["balance"] = balance;
         }
 
@@ -176,7 +171,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 row["date"] = item["date_entry"];
                 row["ref"] = GetJournalAcronym(item["journal_name"].ToString());
 
-                ValidateDebitCreditRow(particulars, item, row, ref beginningBalance);
+                ValidateDebitCreditRow(fundId, generalLedgerId, year, particulars, item, row, ref beginningBalance);
 
                 dtGeneralLedger.Rows.Add(row);
             }
@@ -186,6 +181,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void BeginningBalanceRow(byte fundId, short year, ushort generalLedgerId, out string balanceDate, out string balanceDebit, out string balanceCredit, out string balance)
         {
+            beginningBalance = 0;
             balanceDate = string.Empty;
             balanceDebit = string.Empty;
             balanceCredit = string.Empty;
@@ -263,7 +259,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            if (AccountComboboxEmpty() || !AccountExist() || FundsComboboxEmpty() || !FundExist()) 
+            if (AccountComboboxEmpty() || !AccountExist() || FundsComboboxEmpty() || !FundExist())
             {
                 Helper.MessageBoxError($"{cmbAccount.Tag}");
                 return;
@@ -302,7 +298,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
         }
 
 
-        private bool FundsComboboxEmpty() 
+        private bool FundsComboboxEmpty()
         {
             if (string.IsNullOrEmpty(cmbAccount.Text.Trim()))
             {
@@ -313,7 +309,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 return false;
         }
 
-        private bool FundExist() 
+        private bool FundExist()
         {
             string fundName = cmbFunds.Text.Trim();
 

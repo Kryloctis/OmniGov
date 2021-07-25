@@ -60,13 +60,13 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>1.10925in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>1.10925in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>1.10925in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -279,14 +279,15 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox82">
+                        <Textbox Name="txtDebitBeginningBalance">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Parameters!paramBalanceDebit.Value</Value>
+                                  <Label>beginning_debit</Label>
+                                  <Value>=IIF(string.IsNullOrEmpty(Parameters!paramBalanceDebit.Value), 0,Parameters!paramBalanceDebit.Value)</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <Format>#,0.00;(#,0.00);''</Format>
@@ -298,7 +299,6 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox82</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -321,14 +321,15 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox83">
+                        <Textbox Name="txtBeginningCredit">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Parameters!paramBalanceCredit.Value</Value>
+                                  <Label>beginning_credit</Label>
+                                  <Value>=IIF(string.IsNullOrEmpty(Parameters!paramBalanceCredit.Value), 0, Parameters!paramBalanceCredit.Value)</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <Format>#,0.00;(#,0.00);''</Format>
@@ -340,7 +341,6 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox83</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -410,7 +410,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.22916in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -588,7 +588,8 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!debit_amount.Value)</Value>
+                                  <Label>total_debit_by_month</Label>
+                                  <Value>=Sum(Fields!debit_amount.Value, "date")+ReportItems!txtDebitBeginningBalance.Value+Previous(Sum(Fields!debit_amount.Value, "date"))</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -644,7 +645,8 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!credit_amount.Value)</Value>
+                                  <Label>total_credit_by_month</Label>
+                                  <Value>=Sum(Fields!credit_amount.Value, "date")+ReportItems!txtBeginningCredit.Value+Previous(Sum(Fields!credit_amount.Value, "date"))</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -742,7 +744,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.86458in</Size>
+                    <Size>0.69283in</Size>
                     <CellContents>
                       <Textbox Name="Textbox37">
                         <CanGrow>true</CanGrow>
@@ -789,7 +791,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>2.9852in</Size>
+                        <Size>2.75975in</Size>
                         <CellContents>
                           <Textbox Name="Textbox52">
                             <CanGrow>true</CanGrow>
@@ -890,7 +892,7 @@
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.86458in</Size>
+                    <Size>0.69283in</Size>
                     <CellContents>
                       <Textbox Name="Textbox38">
                         <CanGrow>true</CanGrow>
@@ -935,7 +937,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>2.9852in</Size>
+                        <Size>2.75975in</Size>
                         <CellContents>
                           <Textbox Name="Textbox53">
                             <CanGrow>true</CanGrow>
@@ -1032,7 +1034,7 @@
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.86458in</Size>
+                    <Size>0.69283in</Size>
                     <CellContents>
                       <Textbox Name="Textbox79">
                         <CanGrow>true</CanGrow>
@@ -1077,7 +1079,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>2.9852in</Size>
+                        <Size>2.75975in</Size>
                         <CellContents>
                           <Textbox Name="Textbox80">
                             <CanGrow>true</CanGrow>
@@ -1176,7 +1178,7 @@
                     </GroupExpressions>
                   </Group>
                   <TablixHeader>
-                    <Size>0.86458in</Size>
+                    <Size>0.69283in</Size>
                     <CellContents>
                       <Textbox Name="date1">
                         <CanGrow>true</CanGrow>
@@ -1237,7 +1239,7 @@
                         </GroupExpressions>
                       </Group>
                       <TablixHeader>
-                        <Size>2.9852in</Size>
+                        <Size>2.75975in</Size>
                         <CellContents>
                           <Textbox Name="particulars1">
                             <CanGrow>true</CanGrow>
@@ -1362,7 +1364,7 @@
                     </TablixMember>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>2.9852in</Size>
+                        <Size>2.75975in</Size>
                         <CellContents>
                           <Textbox Name="Textbox72">
                             <CanGrow>true</CanGrow>
@@ -1481,8 +1483,8 @@
             </TablixRowHierarchy>
             <DataSetName>GeneralLedger</DataSetName>
             <Top>0.16542in</Top>
-            <Height>1.25in</Height>
-            <Width>7.4in</Width>
+            <Height>1.22916in</Height>
+            <Width>7.33055in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
