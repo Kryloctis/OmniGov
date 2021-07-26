@@ -60,18 +60,18 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>2.44708cm</Width>
+                  <Width>1.37546in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.44708cm</Width>
+                  <Width>1.37546in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>1.37546in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.6cm</Height>
+                  <Height>0.24032in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -133,7 +133,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.6cm</Height>
+                  <Height>0.24032in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -278,21 +278,22 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.6cm</Height>
+                  <Height>0.24032in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox52">
+                        <Textbox Name="txtBeginningDebit">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Parameters!paramBalanceDebit.Value</Value>
+                                  <Label>beginning_debit_balance</Label>
+                                  <Value>=IIF(string.IsNullOrEmpty(Parameters!paramBalanceDebit.Value), 0, Parameters!paramBalanceDebit.Value)</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
-                                    <Format>#,0.00;(#,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00);''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -301,7 +302,6 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox52</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -317,6 +317,7 @@
                               <Style>Solid</Style>
                             </RightBorder>
                             <BackgroundColor>Gainsboro</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -327,17 +328,18 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox53">
+                        <Textbox Name="txtBeginningCredit">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Parameters!paramBalanceCredit.Value</Value>
+                                  <Label>beginning_credit_balance</Label>
+                                  <Value>=IIF(string.IsNullOrEmpty(Parameters!paramBalanceCredit.Value), 0, Parameters!paramBalanceCredit.Value)</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
-                                    <Format>#,0.00;(#,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00);''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -346,7 +348,6 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox53</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -359,6 +360,7 @@
                               <Style>Solid</Style>
                             </RightBorder>
                             <BackgroundColor>Gainsboro</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -369,17 +371,18 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox168">
+                        <Textbox Name="txtBeginningTotal">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
+                                  <Label>beginning_balance</Label>
                                   <Value>=Parameters!paramBalance.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
-                                    <Format>#,0.00;(#,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00);''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -388,7 +391,6 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox168</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -401,6 +403,7 @@
                               <Style>Solid</Style>
                             </RightBorder>
                             <BackgroundColor>Gainsboro</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -412,7 +415,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.6cm</Height>
+                  <Height>0.24032in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -427,7 +430,7 @@
                                   <Value>=Fields!debit_amount.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
-                                    <Format>#,0.00;(#,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00);''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -470,7 +473,7 @@
                                   <Value>=Fields!credit_amount.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
-                                    <Format>#,0.00;(#,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00);''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -510,7 +513,7 @@
                                   <Value>=Fields!balance.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
-                                    <Format>#,0.00;(#,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00);''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -541,7 +544,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.6cm</Height>
+                  <Height>0.24032in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -552,11 +555,12 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!debit_amount.Value)</Value>
+                                  <Label>total_debit_by_month</Label>
+                                  <Value>=Sum(Fields!debit_amount.Value, "date")+ReportItems!txtBeginningDebit.Value+Previous(Sum(Fields!debit_amount.Value, "date"))</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>#,0.00;(#,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00);''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -597,11 +601,12 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!credit_amount.Value)</Value>
+                                  <Label>total_credit_by_month</Label>
+                                  <Value>=Sum(Fields!credit_amount.Value, "date")+ReportItems!txtBeginningCredit.Value+Previous(Sum(Fields!credit_amount.Value, "date"))</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>#,0.00;(#,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00);''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -643,7 +648,7 @@
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>#,0.00;(#,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00);''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -687,7 +692,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>2.5cm</Size>
+                    <Size>0.75046in</Size>
                     <CellContents>
                       <Textbox Name="Textbox130">
                         <CanGrow>true</CanGrow>
@@ -742,7 +747,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>5.86797cm</Size>
+                        <Size>1.73267in</Size>
                         <CellContents>
                           <Textbox Name="Textbox231">
                             <CanGrow>true</CanGrow>
@@ -796,7 +801,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>2.5cm</Size>
+                            <Size>0.62731in</Size>
                             <CellContents>
                               <Textbox Name="Textbox236">
                                 <CanGrow>true</CanGrow>
@@ -857,7 +862,7 @@
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>2.5cm</Size>
+                    <Size>0.75046in</Size>
                     <CellContents>
                       <Textbox Name="Textbox131">
                         <CanGrow>true</CanGrow>
@@ -908,7 +913,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>5.86797cm</Size>
+                        <Size>1.73267in</Size>
                         <CellContents>
                           <Textbox Name="Textbox232">
                             <CanGrow>true</CanGrow>
@@ -959,7 +964,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>2.5cm</Size>
+                            <Size>0.62731in</Size>
                             <CellContents>
                               <Textbox Name="Textbox237">
                                 <CanGrow>true</CanGrow>
@@ -1017,7 +1022,7 @@
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>2.5cm</Size>
+                    <Size>0.75046in</Size>
                     <CellContents>
                       <Textbox Name="Textbox132">
                         <CanGrow>true</CanGrow>
@@ -1054,6 +1059,7 @@
                             <Style>Solid</Style>
                           </RightBorder>
                           <BackgroundColor>Gainsboro</BackgroundColor>
+                          <VerticalAlign>Middle</VerticalAlign>
                           <PaddingLeft>2pt</PaddingLeft>
                           <PaddingRight>2pt</PaddingRight>
                           <PaddingTop>2pt</PaddingTop>
@@ -1065,7 +1071,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>5.86797cm</Size>
+                        <Size>1.73267in</Size>
                         <CellContents>
                           <Textbox Name="Textbox233">
                             <CanGrow>true</CanGrow>
@@ -1101,6 +1107,7 @@
                                 <Style>Solid</Style>
                               </RightBorder>
                               <BackgroundColor>Gainsboro</BackgroundColor>
+                              <VerticalAlign>Middle</VerticalAlign>
                               <PaddingLeft>2pt</PaddingLeft>
                               <PaddingRight>2pt</PaddingRight>
                               <PaddingTop>2pt</PaddingTop>
@@ -1112,7 +1119,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>2.5cm</Size>
+                            <Size>0.62731in</Size>
                             <CellContents>
                               <Textbox Name="Textbox238">
                                 <CanGrow>true</CanGrow>
@@ -1148,6 +1155,7 @@
                                     <Style>Solid</Style>
                                   </RightBorder>
                                   <BackgroundColor>Gainsboro</BackgroundColor>
+                                  <VerticalAlign>Middle</VerticalAlign>
                                   <PaddingLeft>2pt</PaddingLeft>
                                   <PaddingRight>2pt</PaddingRight>
                                   <PaddingTop>2pt</PaddingTop>
@@ -1173,10 +1181,11 @@
                   <SortExpressions>
                     <SortExpression>
                       <Value>=Fields!date.Value</Value>
+                      <Direction>Descending</Direction>
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>2.5cm</Size>
+                    <Size>0.75046in</Size>
                     <CellContents>
                       <Textbox Name="date">
                         <CanGrow>true</CanGrow>
@@ -1237,7 +1246,7 @@
                         </SortExpression>
                       </SortExpressions>
                       <TablixHeader>
-                        <Size>5.86797cm</Size>
+                        <Size>1.73267in</Size>
                         <CellContents>
                           <Textbox Name="particulars1">
                             <CanGrow>true</CanGrow>
@@ -1298,7 +1307,7 @@
                             </SortExpression>
                           </SortExpressions>
                           <TablixHeader>
-                            <Size>2.5cm</Size>
+                            <Size>0.62731in</Size>
                             <CellContents>
                               <Textbox Name="ref1">
                                 <CanGrow>true</CanGrow>
@@ -1354,7 +1363,7 @@
                     </TablixMember>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>5.86797cm</Size>
+                        <Size>1.73267in</Size>
                         <CellContents>
                           <Textbox Name="Textbox248">
                             <CanGrow>true</CanGrow>
@@ -1407,7 +1416,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>2.5cm</Size>
+                            <Size>0.62731in</Size>
                             <CellContents>
                               <Textbox Name="Textbox249">
                                 <CanGrow>true</CanGrow>
@@ -1467,8 +1476,8 @@
             </TablixRowHierarchy>
             <DataSetName>SubsidiaryLedger</DataSetName>
             <Top>0.36105cm</Top>
-            <Height>3cm</Height>
-            <Width>18.26213cm</Width>
+            <Height>1.2016in</Height>
+            <Width>7.23681in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1476,10 +1485,10 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>2.28125in</Height>
+        <Height>1.65625in</Height>
         <Style />
       </Body>
-      <Width>7.18981in</Width>
+      <Width>7.23681in</Width>
       <Page>
         <PageHeader>
           <Height>4.11965cm</Height>
@@ -1507,9 +1516,9 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Left>0.12699cm</Left>
+              <Left>0cm</Left>
               <Height>0.89105cm</Height>
-              <Width>18.034cm</Width>
+              <Width>18.3815cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1538,7 +1547,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>0.97cm</Top>
-              <Left>0.12699cm</Left>
+              <Left>0cm</Left>
               <Height>0.6cm</Height>
               <Width>1.10244cm</Width>
               <ZIndex>1</ZIndex>
@@ -1571,9 +1580,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
               <Top>0.97cm</Top>
-              <Left>1.26471cm</Left>
+              <Left>1.13772cm</Left>
               <Height>0.6cm</Height>
-              <Width>7.07729cm</Width>
+              <Width>9.41443cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -1608,7 +1617,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>0.94326cm</Top>
-              <Left>11.9833cm</Left>
+              <Left>12.20381cm</Left>
               <Height>0.6cm</Height>
               <Width>1.33175cm</Width>
               <ZIndex>3</ZIndex>
@@ -1641,9 +1650,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
               <Top>0.97cm</Top>
-              <Left>13.38561cm</Left>
-              <Height>0.6cm</Height>
-              <Width>3.21437cm</Width>
+              <Left>13.60612cm</Left>
+              <Height>0.57326cm</Height>
+              <Width>4.77538cm</Width>
               <ZIndex>4</ZIndex>
               <Style>
                 <Border>
@@ -1678,7 +1687,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>1.71965cm</Top>
-              <Left>0.12699cm</Left>
+              <Left>0cm</Left>
               <Height>0.6cm</Height>
               <Width>3.29847cm</Width>
               <ZIndex>5</ZIndex>
@@ -1711,7 +1720,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
               <Top>1.71965cm</Top>
-              <Left>3.60185cm</Left>
+              <Left>3.47486cm</Left>
               <Height>0.6cm</Height>
               <Width>7.07729cm</Width>
               <ZIndex>6</ZIndex>
@@ -1748,7 +1757,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>2.31965cm</Top>
-              <Left>0.12699cm</Left>
+              <Left>0cm</Left>
               <Height>0.6cm</Height>
               <Width>3.29847cm</Width>
               <ZIndex>7</ZIndex>
@@ -1780,7 +1789,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>2.91965cm</Top>
-              <Left>0.12699cm</Left>
+              <Left>0cm</Left>
               <Height>0.6cm</Height>
               <Width>3.29847cm</Width>
               <ZIndex>8</ZIndex>
@@ -1812,7 +1821,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>3.51965cm</Top>
-              <Left>0.12699cm</Left>
+              <Left>0cm</Left>
               <Height>0.6cm</Height>
               <Width>3.29847cm</Width>
               <ZIndex>9</ZIndex>
@@ -1845,7 +1854,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
               <Top>2.31965cm</Top>
-              <Left>3.60185cm</Left>
+              <Left>3.47486cm</Left>
               <Height>0.6cm</Height>
               <Width>7.07729cm</Width>
               <ZIndex>10</ZIndex>
@@ -1883,7 +1892,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
               <Top>2.91965cm</Top>
-              <Left>3.60185cm</Left>
+              <Left>3.47486cm</Left>
               <Height>0.6cm</Height>
               <Width>7.07729cm</Width>
               <ZIndex>11</ZIndex>
@@ -1921,7 +1930,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
               <Top>3.51965cm</Top>
-              <Left>3.60185cm</Left>
+              <Left>3.47486cm</Left>
               <Height>0.6cm</Height>
               <Width>7.07729cm</Width>
               <ZIndex>12</ZIndex>
@@ -1958,9 +1967,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>1.71965cm</Top>
-              <Left>11.9833cm</Left>
+              <Left>12.20381cm</Left>
               <Height>0.6cm</Height>
-              <Width>5.56507cm</Width>
+              <Width>6.17769cm</Width>
               <ZIndex>13</ZIndex>
               <Style>
                 <Border>
@@ -1990,7 +1999,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>2.31965cm</Top>
-              <Left>11.9833cm</Left>
+              <Left>12.20381cm</Left>
               <Height>0.6cm</Height>
               <Width>0.82903cm</Width>
               <ZIndex>14</ZIndex>
@@ -2023,7 +2032,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
               <Top>2.31965cm</Top>
-              <Left>12.81233cm</Left>
+              <Left>13.03284cm</Left>
               <Height>0.6cm</Height>
               <Width>5.34866cm</Width>
               <ZIndex>15</ZIndex>
@@ -2060,7 +2069,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>2.91965cm</Top>
-              <Left>11.9833cm</Left>
+              <Left>12.20381cm</Left>
               <Height>0.6cm</Height>
               <Width>0.82903cm</Width>
               <ZIndex>16</ZIndex>
@@ -2093,7 +2102,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
               <Top>2.91965cm</Top>
-              <Left>12.81233cm</Left>
+              <Left>13.03284cm</Left>
               <Height>0.6cm</Height>
               <Width>5.34866cm</Width>
               <ZIndex>17</ZIndex>
@@ -2119,8 +2128,8 @@
             </Border>
           </Style>
         </PageHeader>
-        <PageHeight>11.7in</PageHeight>
-        <PageWidth>8.3in</PageWidth>
+        <PageHeight>29.718cm</PageHeight>
+        <PageWidth>21.082cm</PageWidth>
         <LeftMargin>0.5in</LeftMargin>
         <RightMargin>0.5in</RightMargin>
         <TopMargin>0.5in</TopMargin>
