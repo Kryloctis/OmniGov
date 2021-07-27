@@ -117,7 +117,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             this.Controls.Add(this.panel1);
             this.MinimizeBox = false;
             this.Name = "frmPostClosingTrialBalance";
-            this.Text = "Pre Closing Trial Balance";
+            this.Text = "Post  Closing Trial Balance";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmPostClosingTrialBalance_Load);
             this.panel1.ResumeLayout(false);

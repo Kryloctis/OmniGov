@@ -14,10 +14,14 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecordsByFundAndGeneralLedger(byte fundId, ushort generalLedgerId, short year);
 
+        DataTable GetJEVAmount(byte fundId, ushort generalLedgerId, short year);
+
         bool DeleteByJevId(int jevId);
 
         int CountByJevId(int jevId);
 
         decimal GetJEVSumByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year);
+
+        bool IsTransactionDebit(byte fundsId, ushort generalLedgerId, short year);
     }
 }

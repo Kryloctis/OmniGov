@@ -276,23 +276,15 @@ namespace ACC.Data
             try
             {
                 string query = $"SELECT " +
-                    $"general_ledger_accounts_id, " +
-                    $"account_group_id, " +
-                    $"account_group_code, " +
-                    $"account_group_name, " +
-                    $"major_account_group_id, " +
-                    $"maj_acc_group_code, " +
-                    $"maj_acc_group_name, " +
-                    $"sub_maj_acc_group_code, " +
-                    $"sub_maj_acc_group_name, " +
-                    $"sub_major_account_group_id, " +
-                    $"general_ledger_accounts_id, " +
-                    $"account_code, " +
-                    $"ledger_code, " +
-                    $"ledger_name, " +
-                    $"is_contra_account, " +
-                    $"created_at, " +
-                    $"updated_at FROM {viewTableName}";
+                    $"gl.general_ledger_accounts_id, " +
+                    $"gl.ledger_name, " +
+                    $"gl.account_code, " +
+                    $"SUM(IF(bb.is_debit=1, bb.amount, 0))-SUM(IF(bb.is_debit=0, bb.amount, 0)) AS beginning_bal, " +
+                    $"gl.account_group_code " +
+                    $"FROM {viewTableName} AS gl " +
+                    $"LEFT JOIN beginning_balances AS bb " +
+                    $"ON bb.general_ledger_accounts_id = gl.general_ledger_accounts_id " +
+                    $"GROUP BY gl.ledger_name";
 
                 var dtJournals = new DataTable();
                 return _dbGenericCommands.Fill(query, dtJournals);

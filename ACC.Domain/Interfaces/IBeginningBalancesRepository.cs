@@ -25,5 +25,7 @@ namespace ACC.Domain.Interfaces
 
         decimal GetCreditSumOfSubsidiaryLedger(byte fundsId, ushort generalLedgerId, short year);
 
+        
+        decimal GetGovernmentEquityBalance(byte fundsId, ushort generalLedgerId, short year);
     }
 }

@@ -17,6 +17,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         private readonly ReportViewer reportViewer;
         private byte fundId;
         private short year;
+        private ushort generalLedgerId;
 
         public frmPreClosingTrialBalance()
         {
@@ -68,39 +69,58 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         private DataTable DataTablePreTrialBalance()
         {
-
+            fundId = Convert.ToByte(cmbFund.SelectedValue);
+            year = Convert.ToInt16(dtAsOf.Value.Year);
 
             var dtPreTrialBalance = new dsLFS.dtPreTrialBalanceDataTable();
             var dtPreTrialBalanceFromDB = Factory.GeneralLedgerAccountsRepository().GetAllViewRecords();
 
-            fundId = Convert.ToByte(cmbFund.SelectedValue);
-            year = Convert.ToInt16(dtAsOf.Value.Year);
-
             foreach (DataRow item in dtPreTrialBalanceFromDB.Rows)
             {
+                generalLedgerId = (ushort)item["general_ledger_accounts_id"];
+                var account_group_type = item["account_group_code"].ToString();
 
                 DataRow row = dtPreTrialBalance.NewRow();
                 row["account_title"] = item["ledger_name"];
                 row["account_code"] = item["account_code"];
 
+                var beginning_balance = Convert.ToDecimal(item["beginning_bal"]);
 
-                var beginningBalanceRepository = Factory.BeginningBalancesRepository();
+                var jevAccount = Factory.JEVAccountsRepository().GetJEVAmount(fundId, generalLedgerId, year);
 
-                var subsidiaryDebitBeginningBalance = beginningBalanceRepository.GetDebitSumOfSubsidiaryLedger(fundId, (ushort)item["general_ledger_accounts_id"], year);
-                var subsidiaryCreditBeginningBalance = beginningBalanceRepository.GetCreditSumOfSubsidiaryLedger(fundId, (ushort)item["general_ledger_accounts_id"], year);
+                var assignToDebit = 0.0m;
+                var assignToCredit = 0.0m;
 
-                var accountBeginningBalance = Math.Max(subsidiaryDebitBeginningBalance, subsidiaryCreditBeginningBalance) - Math.Min(subsidiaryDebitBeginningBalance, subsidiaryCreditBeginningBalance);
 
-                var accountTransactionsTotalAmount = Factory.JEVAccountsRepository().GetJEVSumByGeneralLedgerId(fundId, (ushort)item["general_ledger_accounts_id"], year);
+                if (jevAccount.Rows.Count != 0)
+                {
+                    foreach (DataRow amountItem in jevAccount.Rows)
+                    {
+                        if (Convert.ToBoolean(amountItem["is_debit"]))
+                        {
+                            beginning_balance += Convert.ToDecimal(amountItem["amount"]);
+                            assignToDebit += Convert.ToDecimal(amountItem["amount"]);
+                        }
+                        else
+                        {
+                            beginning_balance = Math.Abs(beginning_balance);
+                            beginning_balance -= Convert.ToDecimal(amountItem["amount"]);
+                            assignToCredit += Convert.ToDecimal(amountItem["amount"]);
+                        }
+                    }
 
-                var accountAdjustedBalance = accountBeginningBalance - accountTransactionsTotalAmount;
-
-                var isDebitColumn = subsidiaryDebitBeginningBalance > subsidiaryCreditBeginningBalance ? true : false;
-
-                if (isDebitColumn)
-                    row["debit"] = Math.Abs(accountAdjustedBalance).ToString("N2");
-                else
-                    row["credit"] = Math.Abs(accountAdjustedBalance).ToString("N2");
+                    if (assignToDebit > assignToCredit)
+                        row["debit"] = Math.Abs(beginning_balance);
+                    else
+                        row["credit"] = Math.Abs(beginning_balance);
+                }
+                else //IF NO JEV RECORDS
+                {
+                    if (beginning_balance > 0)
+                        row["debit"] = Math.Abs(beginning_balance);
+                    else
+                        row["credit"] = Math.Abs(beginning_balance);
+                }
 
                 dtPreTrialBalance.Rows.Add(row);
             }
@@ -118,5 +138,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         {
             LoadFunds();
         }
+
+
     }
 }
