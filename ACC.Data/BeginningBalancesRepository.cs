@@ -168,7 +168,7 @@ namespace ACC.Data
                     new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryLedgerId},
                 };
 
-                string query = $"SELECT SUM(amount) FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id GROUP BY general_ledger_accounts_id";
+                string query = $"SELECT COALESCE(SUM(amount)) FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id GROUP BY general_ledger_accounts_id";
 
                 string sumBalance = _dbGenericCommands.ExecuteScalar(query, parameters);
                 if (!string.IsNullOrWhiteSpace(sumBalance))
@@ -193,7 +193,7 @@ namespace ACC.Data
                     new object[] { "@year", DbType.Int16, year},
                 };
 
-                string query = $"SELECT SUM(amount) FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year GROUP BY general_ledger_accounts_id";
+                string query = $"SELECT COALESCE(SUM(amount),0) FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year GROUP BY general_ledger_accounts_id";
 
                 string sumBalance = _dbGenericCommands.ExecuteScalar(query, parameters);
                 if (!string.IsNullOrWhiteSpace(sumBalance))
@@ -321,7 +321,7 @@ namespace ACC.Data
                     new object[] { "@funds_id", DbType.Byte, fundsId}
                 };
 
-                string query = $"SELECT FORMAT(SUM(IF(bb.is_debit=1, bb.amount, 0)),2) AS total_debit, FORMAT(SUM(IF(bb.is_debit=0, bb.amount, 0)),2) AS total_credit FROM beginning_balances AS bb INNER JOIN view_general_ledger_accounts AS gla ON bb.general_ledger_accounts_id = gla.general_ledger_accounts_id WHERE (gla.account_group_code = 3 AND bb.general_ledger_accounts_id <> 331) OR gla.account_group_code = 4 OR gla.account_group_code = 5 AND bb.funds_id=@funds_id";
+                string query = $"SELECT COALESCE(FORMAT(SUM(IF(bb.is_debit=1, bb.amount, 0)),2),0) AS total_debit, COALESCE(FORMAT(SUM(IF(bb.is_debit=0, bb.amount, 0)),2),0) AS total_credit FROM beginning_balances AS bb INNER JOIN view_general_ledger_accounts AS gla ON bb.general_ledger_accounts_id = gla.general_ledger_accounts_id WHERE (gla.account_group_code = 3 AND bb.general_ledger_accounts_id <> 331) OR gla.account_group_code = 4 OR gla.account_group_code = 5 AND bb.funds_id=@funds_id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -351,7 +351,7 @@ namespace ACC.Data
                     new object[] { "@funds_id", DbType.Byte, fundsId}
                 };
 
-                string query = $"SELECT FORMAT(SUM(IF(bb.is_debit=1, bb.amount, '')),2) AS total_debit, FORMAT(SUM(IF(bb.is_debit=0, bb.amount, '')),2) AS total_credit FROM beginning_balances AS bb INNER JOIN view_general_ledger_accounts AS gla ON bb.general_ledger_accounts_id = gla.general_ledger_accounts_id WHERE gla.account_group_code = 1 OR gla.account_group_code = 2";
+                string query = $"SELECT COALESCE(FORMAT(SUM(IF(bb.is_debit=1, bb.amount, '')),2),0) AS total_debit, COALESCE(FORMAT(SUM(IF(bb.is_debit=0, bb.amount, '')),2),0) AS total_credit FROM beginning_balances AS bb INNER JOIN view_general_ledger_accounts AS gla ON bb.general_ledger_accounts_id = gla.general_ledger_accounts_id WHERE gla.account_group_code = 1 OR gla.account_group_code = 2";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -381,7 +381,7 @@ namespace ACC.Data
                     new object[] { "@year", DbType.Int16, year},
                 };
 
-                string query = $"SELECT SUM(amount) FROM {tableName} WHERE funds_id=@funds_id AND general_ledger_accounts_id=@general_ledger_accounts_id AND YEAR(date_entry)=@year AND is_debit=1";
+                string query = $"SELECT COALESCE(SUM(amount),0) FROM {tableName} WHERE funds_id=@funds_id AND general_ledger_accounts_id=@general_ledger_accounts_id AND YEAR(date_entry)=@year AND is_debit=1";
 
                 string sumBalance = _dbGenericCommands.ExecuteScalar(query, parameters);
                 if (!string.IsNullOrWhiteSpace(sumBalance))
@@ -406,7 +406,7 @@ namespace ACC.Data
                     new object[] { "@year", DbType.Int16, year},
                 };
 
-                string query = $"SELECT SUM(amount) FROM {tableName} WHERE funds_id=@funds_id AND general_ledger_accounts_id=@general_ledger_accounts_id AND YEAR(date_entry)=@year AND is_debit=0";
+                string query = $"SELECT COALESCE(SUM(amount),0) FROM {tableName} WHERE funds_id=@funds_id AND general_ledger_accounts_id=@general_ledger_accounts_id AND YEAR(date_entry)=@year AND is_debit=0";
 
                 string sumBalance = _dbGenericCommands.ExecuteScalar(query, parameters);
                 if (!string.IsNullOrWhiteSpace(sumBalance))
@@ -456,7 +456,7 @@ namespace ACC.Data
                     new object[] { "@year", DbType.Int16, year},
                 };
 
-                string query = $"SELECT SUM(amount) FROM {tableName} WHERE funds_id=@funds_id AND general_ledger_accounts_id=@general_ledger_accounts_id AND YEAR(date_entry)=@year";
+                string query = $"SELECT COALESCE(SUM(amount),0) FROM {tableName} WHERE funds_id=@funds_id AND general_ledger_accounts_id=@general_ledger_accounts_id AND YEAR(date_entry)=@year";
 
                 string sumBalance = _dbGenericCommands.ExecuteScalar(query, parameters);
                 if (!string.IsNullOrWhiteSpace(sumBalance))
