@@ -177,7 +177,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox20</rd:DefaultName>
-            <Top>5.5661cm</Top>
+            <Top>7.7886cm</Top>
             <Left>8.78419cm</Left>
             <Height>0.6cm</Height>
             <Width>4.24779cm</Width>
@@ -211,7 +211,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox20</rd:DefaultName>
-            <Top>6.83032cm</Top>
+            <Top>9.05282cm</Top>
             <Left>11.69334cm</Left>
             <Height>0.6cm</Height>
             <Width>7.66092cm</Width>
@@ -245,7 +245,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox20</rd:DefaultName>
-            <Top>6.23032cm</Top>
+            <Top>8.45282cm</Top>
             <Left>11.69334cm</Left>
             <Height>0.6cm</Height>
             <Width>7.66092cm</Width>
@@ -280,7 +280,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox20</rd:DefaultName>
-            <Top>7.57144cm</Top>
+            <Top>9.79394cm</Top>
             <Left>8.78419cm</Left>
             <Height>0.59999cm</Height>
             <Width>1.07279cm</Width>
@@ -310,7 +310,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox67</rd:DefaultName>
-            <Top>7.57143cm</Top>
+            <Top>9.79393cm</Top>
             <Left>11.69334cm</Left>
             <Height>0.6cm</Height>
             <Width>3.58479cm</Width>
@@ -334,27 +334,27 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>10.15314cm</Width>
+                  <Width>10.08158cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.65884cm</Width>
+                  <Width>2.58728cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.59941cm</Width>
+                  <Width>0.52785cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.6817cm</Width>
+                  <Width>2.61014cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.57359cm</Width>
+                  <Width>0.50203cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.73822cm</Width>
+                  <Width>2.66666cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.78521cm</Height>
+                  <Height>0.86459cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -569,7 +569,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.6cm</Height>
+                  <Height>0.67938cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -677,7 +677,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!debit.Value</Value>
+                                  <Value>=IIF(Fields!debit.Value=0,"", Fields!debit.Value)</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <Format>n2</Format>
@@ -744,7 +744,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!credit.Value</Value>
+                                  <Value>=IIF(Fields!credit.Value=0,"", Fields!credit.Value)</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <Format>n2</Format>
@@ -772,7 +772,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.6cm</Height>
+                  <Height>0.67938cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -1007,9 +1007,9 @@
             </TablixRowHierarchy>
             <DataSetName>dtPreTrialBalance</DataSetName>
             <Top>3.1686cm</Top>
-            <Left>0.22cm</Left>
-            <Height>1.98521cm</Height>
-            <Width>19.4049cm</Width>
+            <Left>0.37875cm</Left>
+            <Height>2.22335cm</Height>
+            <Width>18.97554cm</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
@@ -1073,18 +1073,18 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>3.53695in</Height>
+        <Height>4.45691in</Height>
         <Style />
       </Body>
       <Width>7.80313in</Width>
       <Page>
-        <PageHeight>29.7cm</PageHeight>
-        <PageWidth>21cm</PageWidth>
-        <LeftMargin>0.25in</LeftMargin>
-        <RightMargin>0.25in</RightMargin>
+        <PageHeight>11.69in</PageHeight>
+        <PageWidth>8.27in</PageWidth>
+        <LeftMargin>0.2in</LeftMargin>
+        <RightMargin>0.2in</RightMargin>
         <TopMargin>0.25in</TopMargin>
         <BottomMargin>0.25in</BottomMargin>
-        <ColumnSpacing>0.13cm</ColumnSpacing>
+        <ColumnSpacing>0.05118in</ColumnSpacing>
         <Style />
       </Page>
     </ReportSection>
@@ -1143,6 +1143,7 @@
       </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
-  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>8c681cbc-0661-498f-9dc2-b09e56b9ebcb</rd:ReportID>
 </Report>

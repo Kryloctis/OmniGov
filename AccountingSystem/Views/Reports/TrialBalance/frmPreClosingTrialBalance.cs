@@ -17,10 +17,12 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         private readonly ReportViewer reportViewer;
         private byte fundId;
         private short year;
+        private ushort generalLedgerId;
 
         public frmPreClosingTrialBalance()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panelReport.Controls.Add(reportViewer);
@@ -48,7 +50,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
                 var fundName = cmbFund.Text.ToUpper();
-                var asOfDate = dtAsOf.Value.ToString("MMMM dd, yyyyy");
+                var asOfDate = dtAsOf.Value.ToString("MMMM dd, yyyy");
 
                 var parameters = new[] {
                     new ReportParameter("paramLGUName", lguDict["lgu_name"]),
@@ -67,34 +69,58 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         private DataTable DataTablePreTrialBalance()
         {
-
+            fundId = Convert.ToByte(cmbFund.SelectedValue);
+            year = Convert.ToInt16(dtAsOf.Value.Year);
 
             var dtPreTrialBalance = new dsLFS.dtPreTrialBalanceDataTable();
             var dtPreTrialBalanceFromDB = Factory.GeneralLedgerAccountsRepository().GetAllViewRecords();
 
-            fundId = Convert.ToByte(cmbFund.SelectedValue);
-            year = Convert.ToInt16(dtAsOf.Value.Year);
-
             foreach (DataRow item in dtPreTrialBalanceFromDB.Rows)
             {
+                generalLedgerId = (ushort)item["general_ledger_accounts_id"];
+                var account_group_type = item["account_group_code"].ToString();
 
                 DataRow row = dtPreTrialBalance.NewRow();
                 row["account_title"] = item["ledger_name"];
                 row["account_code"] = item["account_code"];
 
+                var beginning_balance = Convert.ToDecimal(item["beginning_bal"]);
 
-                var beginningBalanceRepository = Factory.BeginningBalancesRepository();
-                decimal generalLedgerBalance = beginningBalanceRepository.GetSumBalanceByGeneralLedgerId(fundId, (ushort)item["general_ledger_accounts_id"], 2021);
-                var beginningBalanceDict = beginningBalanceRepository.GetRecordByFundsAndGeneralLedgerID(fundId, (ushort)item["general_ledger_accounts_id"], 2021);
+                var jevAccount = Factory.JEVAccountsRepository().GetJEVAmount(fundId, generalLedgerId, year);
 
-                string debitCreditType = string.Empty;
-                debitCreditType = HelperLoadRecords.ValidateDebitOrCreditType(beginningBalanceDict, debitCreditType);
+                var assignToDebit = 0.0m;
+                var assignToCredit = 0.0m;
 
 
-                if (debitCreditType == "Debit")
-                    row["debit"] = generalLedgerBalance.ToString("N2");
-                else
-                    row["credit"] = generalLedgerBalance.ToString("N2");
+                if (jevAccount.Rows.Count != 0)
+                {
+                    foreach (DataRow amountItem in jevAccount.Rows)
+                    {
+                        if (Convert.ToBoolean(amountItem["is_debit"]))
+                        {
+                            beginning_balance += Convert.ToDecimal(amountItem["amount"]);
+                            assignToDebit += Convert.ToDecimal(amountItem["amount"]);
+                        }
+                        else
+                        {
+                            beginning_balance = Math.Abs(beginning_balance);
+                            beginning_balance -= Convert.ToDecimal(amountItem["amount"]);
+                            assignToCredit += Convert.ToDecimal(amountItem["amount"]);
+                        }
+                    }
+
+                    if (assignToDebit > assignToCredit)
+                        row["debit"] = Math.Abs(beginning_balance);
+                    else
+                        row["credit"] = Math.Abs(beginning_balance);
+                }
+                else //IF NO JEV RECORDS
+                {
+                    if (beginning_balance > 0)
+                        row["debit"] = Math.Abs(beginning_balance);
+                    else
+                        row["credit"] = Math.Abs(beginning_balance);
+                }
 
                 dtPreTrialBalance.Rows.Add(row);
             }
@@ -112,5 +138,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         {
             LoadFunds();
         }
+
+
     }
 }
