@@ -14,6 +14,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal byte journalId = 0;
         internal byte oldJournalId = 0;
         internal string journalName;
+        internal byte jevStatus = 0;
 
         public ucJEV()
         {

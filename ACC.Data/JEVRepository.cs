@@ -588,7 +588,7 @@ namespace ACC.Data
                     new object[] { "@jev_no", DbType.String, jevNo},
                 };
 
-                string query = $"SELECT id, funds_id, fund_code, fund_name, journals_id, journal_name, is_special, jev_no, date_entry, ref_no, payee, explanation, created_at, created_by, created_by_name, updated_at, updated_by, updated_by_name FROM {viewTableName} WHERE is_approved = 1 AND jev_no = @jev_no";
+                string query = $"SELECT id, funds_id, fund_code, fund_name, journals_id, journal_name, is_special, jev_no, date_entry, ref_no, payee, explanation, is_approved, created_at, created_by, created_by_name, updated_at, updated_by, updated_by_name FROM {viewTableName} WHERE jev_no = @jev_no";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -607,6 +607,7 @@ namespace ACC.Data
                     record.Add("ref_no", reader.Rows[0]["ref_no"].ToString());
                     record.Add("payee", reader.Rows[0]["payee"].ToString());
                     record.Add("explanation", reader.Rows[0]["explanation"].ToString());
+                    record.Add("is_approved", reader.Rows[0]["is_approved"].ToString());
                     record.Add("created_at", reader.Rows[0]["created_at"].ToString());
                     record.Add("created_by", reader.Rows[0]["created_by"].ToString());
                     record.Add("created_by_name", reader.Rows[0]["created_by_name"].ToString());

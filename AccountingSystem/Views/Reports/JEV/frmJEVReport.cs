@@ -64,42 +64,43 @@ namespace AccountingSystem.Views.Reports.JEV
                     return;
                 case 2:
                     journalDict = Factory.CashReceiptsJournalRepository().GetViewRecordByJevID(_jevId);
-                    paramCheckNo = "";
+
+
                     paramCheckDate = Convert.ToDateTime(journalDict["or_date"]).ToString("MM/dd/yy");
                     paramORNo = journalDict["or_no"];
+                    paramCheckNo = "";
                     paramDVNo = journalDict["rcd_no"];
                     paramOfficer = journalDict["full_name"];
-                    SetJournalData("OR Date ", "", "OR No. ", "RCD No. ", "Collecting Officer ");
+                    SetJournalData("OR Date :", "", "OR No. :", "RCD No. :", "Collecting Officer: ");
                     return;
-                case 3:
-                    SetJournalData("Date of Entry ", "", "", "", "");
+
+                case 3:     //NO OTHER FIELDS ASIDE FROM DATE OF ENTRY
                     return;
                 case 4:
                     journalDict = Factory.CashDisbursementsJournalRepository().GetViewRecordByJevID(_jevId);
+                    paramCheckDate = Convert.ToDateTime(journalDict["date_paid"]).ToString("MM/dd/yy");
+                    paramCheckNo = "";
                     paramORNo = "";
-                    paramCheckDate = Convert.ToDateTime(journalDict["check_date"]).ToString("MM/dd/yy");
-                    paramCheckNo = journalDict["check_no"];
                     paramDVNo = journalDict["dv_no"];
                     paramOfficer = journalDict["full_name"];
 
-                    SetJournalData("Date Paid ", "", "", "DV No. ", "Disburse officer ");
+                    SetJournalData("Date Paid:", "", "", "DV No. ", "Disburse officer: ");
                    
                     return;
                 case 5:
                     journalDict = Factory.CheckDisbursementsJournalRepository().GetRecordByJevID(_jevId);
-                    //SetJournalData("Date of Entry ", "Check Date ", "Check No ", "RCI No. ", "DV No. ");
-                    SetJournalData("Check Date ", "Check No ", "RCI No. ", "DV No.", "");
-
-                    paramORNo = "";
+                   
                     paramCheckDate = Convert.ToDateTime(journalDict["check_date"]).ToString("MM/dd/yy"); 
                     paramCheckNo = journalDict["check_no"];
                     paramORNo = journalDict["rci_no"];
                     paramDVNo = journalDict["dv_no"];
+
+                    SetJournalData("Check Date: ", "Check No: ", "RCI No. : ", "DV No. :", "");
                     return;
 
                 case 6:
                     journalDict = Factory.ADADisbursementsJournalRepository().GetViewRecordByJevID(_jevId);
-                    SetJournalData("Date of Entry ", "", "ADA No. ", "DV No. ", "");
+                    SetJournalData("", "", "ADA No. :", "DV No. :", "");
                     return;
                 default:
                     break;
