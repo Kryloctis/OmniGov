@@ -11,12 +11,11 @@ namespace AccountingSystem.Views.Transactions.JEV
         public frmJEV()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
         }
 
         private void frmJEV_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
-
             btnDelete.Click += new EventHandler(this.BtnDelete_Click);
 
             if (!Helper.HasPermission("Transaction JEV Approved"))
@@ -97,7 +96,12 @@ namespace AccountingSystem.Views.Transactions.JEV
             jevModel.RefNo = uc.txtRefNo.Text.Trim();
             jevModel.Payee = uc.txtPayee.Text.Trim();
             jevModel.Explanation = uc.txtExplanation.Text.Trim();
-            jevModel.IsApproved = true;
+
+
+            if (!Helper.HasPermission("Transaction JEV Approved"))
+                jevModel.IsApproved = false;
+            else
+                jevModel.IsApproved = true;
 
             if (!isUpdate)
                 jevModel.CreatedBy = userId;
@@ -523,6 +527,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     if (SetJEVToApproved())
                     {
                         Helper.MessageBoxSuccess("JEV has been approved.");
+                        btnPrint.Enabled = true;
                         ucjev1.ResetForm();
                     }
                     return;

@@ -127,7 +127,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // btnApprove
             // 
             this.btnApprove.Enabled = false;
-            this.btnApprove.Image = global::AccountingSystem.Properties.Resources.create_new_28px;
+            this.btnApprove.Image = global::AccountingSystem.Properties.Resources.approval;
             this.btnApprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnApprove.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnApprove.Name = "btnApprove";
