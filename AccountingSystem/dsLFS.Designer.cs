@@ -9031,17 +9031,23 @@ namespace AccountingSystem {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class dtStatementOfFinancialPositionDataTable : global::System.Data.TypedTableBase<dtStatementOfFinancialPositionRow> {
             
-            private global::System.Data.DataColumn columnaccountId;
+            private global::System.Data.DataColumn columnaccount_group_id;
             
-            private global::System.Data.DataColumn columnaccountCode;
+            private global::System.Data.DataColumn columnaccount_group_code;
             
-            private global::System.Data.DataColumn columnaccountName;
+            private global::System.Data.DataColumn columnaccount_group_name;
             
-            private global::System.Data.DataColumn columnaccountGroup;
+            private global::System.Data.DataColumn columnmajor_account_group_id;
             
-            private global::System.Data.DataColumn columncurrentAmount;
+            private global::System.Data.DataColumn columnmajor_account_group_code;
             
-            private global::System.Data.DataColumn columnlastYearAmount;
+            private global::System.Data.DataColumn columnmajor_account_group_name;
+            
+            private global::System.Data.DataColumn columncurrent_amount;
+            
+            private global::System.Data.DataColumn columnlast_year_amount;
+            
+            private global::System.Data.DataColumn columnis_current;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -9078,49 +9084,73 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn accountIdColumn {
+            public global::System.Data.DataColumn account_group_idColumn {
                 get {
-                    return this.columnaccountId;
+                    return this.columnaccount_group_id;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn accountCodeColumn {
+            public global::System.Data.DataColumn account_group_codeColumn {
                 get {
-                    return this.columnaccountCode;
+                    return this.columnaccount_group_code;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn accountNameColumn {
+            public global::System.Data.DataColumn account_group_nameColumn {
                 get {
-                    return this.columnaccountName;
+                    return this.columnaccount_group_name;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn accountGroupColumn {
+            public global::System.Data.DataColumn major_account_group_idColumn {
                 get {
-                    return this.columnaccountGroup;
+                    return this.columnmajor_account_group_id;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn currentAmountColumn {
+            public global::System.Data.DataColumn major_account_group_codeColumn {
                 get {
-                    return this.columncurrentAmount;
+                    return this.columnmajor_account_group_code;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn lastYearAmountColumn {
+            public global::System.Data.DataColumn major_account_group_nameColumn {
                 get {
-                    return this.columnlastYearAmount;
+                    return this.columnmajor_account_group_name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn current_amountColumn {
+                get {
+                    return this.columncurrent_amount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn last_year_amountColumn {
+                get {
+                    return this.columnlast_year_amount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn is_currentColumn {
+                get {
+                    return this.columnis_current;
                 }
             }
             
@@ -9161,15 +9191,18 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtStatementOfFinancialPositionRow AdddtStatementOfFinancialPositionRow(string accountId, string accountCode, string accountName, string accountGroup, string currentAmount, string lastYearAmount) {
+            public dtStatementOfFinancialPositionRow AdddtStatementOfFinancialPositionRow(int account_group_id, string account_group_code, string account_group_name, int major_account_group_id, string major_account_group_code, string major_account_group_name, decimal current_amount, decimal last_year_amount, string is_current) {
                 dtStatementOfFinancialPositionRow rowdtStatementOfFinancialPositionRow = ((dtStatementOfFinancialPositionRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        accountId,
-                        accountCode,
-                        accountName,
-                        accountGroup,
-                        currentAmount,
-                        lastYearAmount};
+                        account_group_id,
+                        account_group_code,
+                        account_group_name,
+                        major_account_group_id,
+                        major_account_group_code,
+                        major_account_group_name,
+                        current_amount,
+                        last_year_amount,
+                        is_current};
                 rowdtStatementOfFinancialPositionRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtStatementOfFinancialPositionRow);
                 return rowdtStatementOfFinancialPositionRow;
@@ -9192,29 +9225,38 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
-                this.columnaccountId = base.Columns["accountId"];
-                this.columnaccountCode = base.Columns["accountCode"];
-                this.columnaccountName = base.Columns["accountName"];
-                this.columnaccountGroup = base.Columns["accountGroup"];
-                this.columncurrentAmount = base.Columns["currentAmount"];
-                this.columnlastYearAmount = base.Columns["lastYearAmount"];
+                this.columnaccount_group_id = base.Columns["account_group_id"];
+                this.columnaccount_group_code = base.Columns["account_group_code"];
+                this.columnaccount_group_name = base.Columns["account_group_name"];
+                this.columnmajor_account_group_id = base.Columns["major_account_group_id"];
+                this.columnmajor_account_group_code = base.Columns["major_account_group_code"];
+                this.columnmajor_account_group_name = base.Columns["major_account_group_name"];
+                this.columncurrent_amount = base.Columns["current_amount"];
+                this.columnlast_year_amount = base.Columns["last_year_amount"];
+                this.columnis_current = base.Columns["is_current"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             private void InitClass() {
-                this.columnaccountId = new global::System.Data.DataColumn("accountId", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnaccountId);
-                this.columnaccountCode = new global::System.Data.DataColumn("accountCode", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnaccountCode);
-                this.columnaccountName = new global::System.Data.DataColumn("accountName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnaccountName);
-                this.columnaccountGroup = new global::System.Data.DataColumn("accountGroup", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnaccountGroup);
-                this.columncurrentAmount = new global::System.Data.DataColumn("currentAmount", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncurrentAmount);
-                this.columnlastYearAmount = new global::System.Data.DataColumn("lastYearAmount", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnlastYearAmount);
+                this.columnaccount_group_id = new global::System.Data.DataColumn("account_group_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaccount_group_id);
+                this.columnaccount_group_code = new global::System.Data.DataColumn("account_group_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaccount_group_code);
+                this.columnaccount_group_name = new global::System.Data.DataColumn("account_group_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaccount_group_name);
+                this.columnmajor_account_group_id = new global::System.Data.DataColumn("major_account_group_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmajor_account_group_id);
+                this.columnmajor_account_group_code = new global::System.Data.DataColumn("major_account_group_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmajor_account_group_code);
+                this.columnmajor_account_group_name = new global::System.Data.DataColumn("major_account_group_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmajor_account_group_name);
+                this.columncurrent_amount = new global::System.Data.DataColumn("current_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncurrent_amount);
+                this.columnlast_year_amount = new global::System.Data.DataColumn("last_year_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnlast_year_amount);
+                this.columnis_current = new global::System.Data.DataColumn("is_current", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnis_current);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -15294,176 +15336,263 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string accountId {
+            public int account_group_id {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfFinancialPosition.accountIdColumn]));
+                        return ((int)(this[this.tabledtStatementOfFinancialPosition.account_group_idColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'accountId\' in table \'dtStatementOfFinancialPosition\' is DBN" +
-                                "ull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'account_group_id\' in table \'dtStatementOfFinancialPosition\'" +
+                                " is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfFinancialPosition.accountIdColumn] = value;
+                    this[this.tabledtStatementOfFinancialPosition.account_group_idColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string accountCode {
+            public string account_group_code {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfFinancialPosition.accountCodeColumn]));
+                        return ((string)(this[this.tabledtStatementOfFinancialPosition.account_group_codeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'accountCode\' in table \'dtStatementOfFinancialPosition\' is D" +
-                                "BNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'account_group_code\' in table \'dtStatementOfFinancialPositio" +
+                                "n\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfFinancialPosition.accountCodeColumn] = value;
+                    this[this.tabledtStatementOfFinancialPosition.account_group_codeColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string accountName {
+            public string account_group_name {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfFinancialPosition.accountNameColumn]));
+                        return ((string)(this[this.tabledtStatementOfFinancialPosition.account_group_nameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'accountName\' in table \'dtStatementOfFinancialPosition\' is D" +
-                                "BNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'account_group_name\' in table \'dtStatementOfFinancialPositio" +
+                                "n\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfFinancialPosition.accountNameColumn] = value;
+                    this[this.tabledtStatementOfFinancialPosition.account_group_nameColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string accountGroup {
+            public int major_account_group_id {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfFinancialPosition.accountGroupColumn]));
+                        return ((int)(this[this.tabledtStatementOfFinancialPosition.major_account_group_idColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'accountGroup\' in table \'dtStatementOfFinancialPosition\' is " +
-                                "DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'major_account_group_id\' in table \'dtStatementOfFinancialPos" +
+                                "ition\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfFinancialPosition.accountGroupColumn] = value;
+                    this[this.tabledtStatementOfFinancialPosition.major_account_group_idColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string currentAmount {
+            public string major_account_group_code {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfFinancialPosition.currentAmountColumn]));
+                        return ((string)(this[this.tabledtStatementOfFinancialPosition.major_account_group_codeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'currentAmount\' in table \'dtStatementOfFinancialPosition\' is" +
-                                " DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'major_account_group_code\' in table \'dtStatementOfFinancialP" +
+                                "osition\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfFinancialPosition.currentAmountColumn] = value;
+                    this[this.tabledtStatementOfFinancialPosition.major_account_group_codeColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string lastYearAmount {
+            public string major_account_group_name {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfFinancialPosition.lastYearAmountColumn]));
+                        return ((string)(this[this.tabledtStatementOfFinancialPosition.major_account_group_nameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'lastYearAmount\' in table \'dtStatementOfFinancialPosition\' i" +
+                        throw new global::System.Data.StrongTypingException("The value for column \'major_account_group_name\' in table \'dtStatementOfFinancialP" +
+                                "osition\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPosition.major_account_group_nameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal current_amount {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPosition.current_amountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'current_amount\' in table \'dtStatementOfFinancialPosition\' i" +
                                 "s DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfFinancialPosition.lastYearAmountColumn] = value;
+                    this[this.tabledtStatementOfFinancialPosition.current_amountColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsaccountIdNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPosition.accountIdColumn);
+            public decimal last_year_amount {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPosition.last_year_amountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'last_year_amount\' in table \'dtStatementOfFinancialPosition\'" +
+                                " is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPosition.last_year_amountColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetaccountIdNull() {
-                this[this.tabledtStatementOfFinancialPosition.accountIdColumn] = global::System.Convert.DBNull;
+            public string is_current {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtStatementOfFinancialPosition.is_currentColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'is_current\' in table \'dtStatementOfFinancialPosition\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPosition.is_currentColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsaccountCodeNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPosition.accountCodeColumn);
+            public bool Isaccount_group_idNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPosition.account_group_idColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetaccountCodeNull() {
-                this[this.tabledtStatementOfFinancialPosition.accountCodeColumn] = global::System.Convert.DBNull;
+            public void Setaccount_group_idNull() {
+                this[this.tabledtStatementOfFinancialPosition.account_group_idColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsaccountNameNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPosition.accountNameColumn);
+            public bool Isaccount_group_codeNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPosition.account_group_codeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetaccountNameNull() {
-                this[this.tabledtStatementOfFinancialPosition.accountNameColumn] = global::System.Convert.DBNull;
+            public void Setaccount_group_codeNull() {
+                this[this.tabledtStatementOfFinancialPosition.account_group_codeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsaccountGroupNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPosition.accountGroupColumn);
+            public bool Isaccount_group_nameNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPosition.account_group_nameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetaccountGroupNull() {
-                this[this.tabledtStatementOfFinancialPosition.accountGroupColumn] = global::System.Convert.DBNull;
+            public void Setaccount_group_nameNull() {
+                this[this.tabledtStatementOfFinancialPosition.account_group_nameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IscurrentAmountNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPosition.currentAmountColumn);
+            public bool Ismajor_account_group_idNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPosition.major_account_group_idColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetcurrentAmountNull() {
-                this[this.tabledtStatementOfFinancialPosition.currentAmountColumn] = global::System.Convert.DBNull;
+            public void Setmajor_account_group_idNull() {
+                this[this.tabledtStatementOfFinancialPosition.major_account_group_idColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IslastYearAmountNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPosition.lastYearAmountColumn);
+            public bool Ismajor_account_group_codeNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPosition.major_account_group_codeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetlastYearAmountNull() {
-                this[this.tabledtStatementOfFinancialPosition.lastYearAmountColumn] = global::System.Convert.DBNull;
+            public void Setmajor_account_group_codeNull() {
+                this[this.tabledtStatementOfFinancialPosition.major_account_group_codeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ismajor_account_group_nameNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPosition.major_account_group_nameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setmajor_account_group_nameNull() {
+                this[this.tabledtStatementOfFinancialPosition.major_account_group_nameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Iscurrent_amountNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPosition.current_amountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setcurrent_amountNull() {
+                this[this.tabledtStatementOfFinancialPosition.current_amountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Islast_year_amountNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPosition.last_year_amountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setlast_year_amountNull() {
+                this[this.tabledtStatementOfFinancialPosition.last_year_amountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isis_currentNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPosition.is_currentColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setis_currentNull() {
+                this[this.tabledtStatementOfFinancialPosition.is_currentColumn] = global::System.Convert.DBNull;
             }
         }
         

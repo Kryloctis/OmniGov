@@ -28,7 +28,7 @@
     <Shape ID="DesignTable:dtReceiptsConsolidated" ZOrder="4" X="4978" Y="70" Height="181" Width="203" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="177" />
     <Shape ID="DesignTable:dtPreTrialBalance" ZOrder="3" X="5251" Y="70" Height="105" Width="168" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="86" />
     <Shape ID="DesignTable:dtCashreport" ZOrder="2" X="5489" Y="70" Height="143" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="139" />
-    <Shape ID="DesignTable:dtStatementOfFinancialPosition" ZOrder="1" X="5248" Y="251" Height="143" Width="251" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="139" />
+    <Shape ID="DesignTable:dtStatementOfFinancialPosition" ZOrder="1" X="5204" Y="254" Height="200" Width="251" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="196" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

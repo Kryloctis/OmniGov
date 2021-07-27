@@ -308,6 +308,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             // btnAugmentation
             // 
+            this.btnAugmentation.Enabled = false;
             this.btnAugmentation.Image = global::AccountingSystem.Properties.Resources.augmentation_28px;
             this.btnAugmentation.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAugmentation.ImageTransparentColor = System.Drawing.Color.Magenta;

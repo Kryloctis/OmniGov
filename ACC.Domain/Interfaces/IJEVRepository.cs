@@ -1,7 +1,7 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
@@ -58,5 +58,10 @@ namespace ACC.Domain.Interfaces
         DataTable GetApprovedJEV(string searchText);
 
         DataTable FilterRecords(string[] searchParameters);
+
+        //SFPs
+        decimal GetSumByMajorAccountGroup(int fundId, int majorAccountGroupId, byte isDebit, DateTime dateEntry);
+
+        decimal GetSumPreviousYearTransactionsByFundIdAndMajAccountGroupId(int fundId, int majorAccountGroupId, byte isDebit, DateTime dateEntry);
     }
 }

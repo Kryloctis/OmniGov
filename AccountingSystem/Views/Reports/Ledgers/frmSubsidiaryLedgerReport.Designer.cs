@@ -44,14 +44,14 @@ namespace AccountingSystem.Views.Reports.Ledgers
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Location = new System.Drawing.Point(12, 51);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(960, 498);
+            this.panel1.Size = new System.Drawing.Size(1140, 498);
             this.panel1.TabIndex = 0;
             // 
             // cmbYear
             // 
             this.cmbYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbYear.FormattingEnabled = true;
-            this.cmbYear.Location = new System.Drawing.Point(751, 12);
+            this.cmbYear.Location = new System.Drawing.Point(833, 12);
             this.cmbYear.Name = "cmbYear";
             this.cmbYear.Size = new System.Drawing.Size(93, 23);
             this.cmbYear.TabIndex = 17;
@@ -67,7 +67,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(850, 12);
+            this.btnRetrieve.Location = new System.Drawing.Point(932, 12);
             this.btnRetrieve.Name = "btnRetrieve";
             this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
             this.btnRetrieve.TabIndex = 15;
@@ -80,7 +80,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             this.cmbAccount.FormattingEnabled = true;
             this.cmbAccount.Location = new System.Drawing.Point(168, 12);
             this.cmbAccount.Name = "cmbAccount";
-            this.cmbAccount.Size = new System.Drawing.Size(288, 23);
+            this.cmbAccount.Size = new System.Drawing.Size(370, 23);
             this.cmbAccount.TabIndex = 14;
             this.cmbAccount.SelectionChangeCommitted += new System.EventHandler(this.cmbAccount_SelectionChangeCommitted);
             this.cmbAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbAccount_KeyDown);
@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             // 
             this.cmbSubsidiaryLedger.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSubsidiaryLedger.FormattingEnabled = true;
-            this.cmbSubsidiaryLedger.Location = new System.Drawing.Point(462, 12);
+            this.cmbSubsidiaryLedger.Location = new System.Drawing.Point(544, 12);
             this.cmbSubsidiaryLedger.Name = "cmbSubsidiaryLedger";
             this.cmbSubsidiaryLedger.Size = new System.Drawing.Size(283, 23);
             this.cmbSubsidiaryLedger.TabIndex = 18;
@@ -98,7 +98,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 561);
+            this.ClientSize = new System.Drawing.Size(1164, 561);
             this.Controls.Add(this.cmbSubsidiaryLedger);
             this.Controls.Add(this.cmbYear);
             this.Controls.Add(this.cmbFunds);

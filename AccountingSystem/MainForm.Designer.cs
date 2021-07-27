@@ -481,6 +481,7 @@ namespace AccountingSystem
             // 
             // statementOfFinancialPerformanceToolStripMenuItem
             // 
+            this.statementOfFinancialPerformanceToolStripMenuItem.Enabled = false;
             this.statementOfFinancialPerformanceToolStripMenuItem.Name = "statementOfFinancialPerformanceToolStripMenuItem";
             this.statementOfFinancialPerformanceToolStripMenuItem.Size = new System.Drawing.Size(377, 22);
             this.statementOfFinancialPerformanceToolStripMenuItem.Text = "Statement of Financial Performance";
@@ -488,6 +489,7 @@ namespace AccountingSystem
             // 
             // statementOfChangesInNetAssetsEquityToolStripMenuItem
             // 
+            this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Enabled = false;
             this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Name = "statementOfChangesInNetAssetsEquityToolStripMenuItem";
             this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Size = new System.Drawing.Size(377, 22);
             this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Text = "Statement of Changes in Net Assets/Equity";
@@ -495,6 +497,7 @@ namespace AccountingSystem
             // 
             // statementOfCashFlowsToolStripMenuItem
             // 
+            this.statementOfCashFlowsToolStripMenuItem.Enabled = false;
             this.statementOfCashFlowsToolStripMenuItem.Name = "statementOfCashFlowsToolStripMenuItem";
             this.statementOfCashFlowsToolStripMenuItem.Size = new System.Drawing.Size(377, 22);
             this.statementOfCashFlowsToolStripMenuItem.Text = "Statement of Cash Flows";
@@ -502,6 +505,7 @@ namespace AccountingSystem
             // 
             // statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem
             // 
+            this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Enabled = false;
             this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Name = "statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem";
             this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Size = new System.Drawing.Size(377, 22);
             this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Text = "Statement of Comparison of Budget and Actual Amounts";
@@ -757,7 +761,7 @@ namespace AccountingSystem
             this.tabBudgetDashboard.Location = new System.Drawing.Point(4, 5);
             this.tabBudgetDashboard.Margin = new System.Windows.Forms.Padding(0);
             this.tabBudgetDashboard.Name = "tabBudgetDashboard";
-            this.tabBudgetDashboard.Size = new System.Drawing.Size(1172, 387);
+            this.tabBudgetDashboard.Size = new System.Drawing.Size(1172, 385);
             this.tabBudgetDashboard.TabIndex = 0;
             this.tabBudgetDashboard.UseVisualStyleBackColor = true;
             // 
@@ -769,7 +773,7 @@ namespace AccountingSystem
             this.ucBudgetDashboard1.Location = new System.Drawing.Point(0, 0);
             this.ucBudgetDashboard1.Margin = new System.Windows.Forms.Padding(0);
             this.ucBudgetDashboard1.Name = "ucBudgetDashboard1";
-            this.ucBudgetDashboard1.Size = new System.Drawing.Size(1172, 387);
+            this.ucBudgetDashboard1.Size = new System.Drawing.Size(1172, 385);
             this.ucBudgetDashboard1.TabIndex = 1;
             // 
             // tabAccountingDashboard

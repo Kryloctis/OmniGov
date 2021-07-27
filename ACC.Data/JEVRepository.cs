@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
@@ -66,7 +66,7 @@ namespace ACC.Data
                     {
                         new object[] { "@id", DbType.Int32, entity.Id},
                     };
-                    
+
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
                     _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
 
@@ -538,7 +538,7 @@ namespace ACC.Data
             }
         }
 
-        public string GetLastJevNoSeries() 
+        public string GetLastJevNoSeries()
         {
             try
             {
@@ -734,6 +734,50 @@ namespace ACC.Data
 
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //SFPs
+        public decimal GetSumByMajorAccountGroup(int fundId, int majorAccountGroupId, byte isDebit, DateTime dateEntry)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Int32, fundId},
+                    new object[] { "@major_account_group_id",DbType.Int32, majorAccountGroupId},
+                    new object[] { "@is_debit",DbType.Byte, isDebit},
+                    new object[] { "@date_entry", DbType.Date, dateEntry.Date },
+                    new object[] { "@year", DbType.Int16, dateEntry.Year}
+                };
+                string query = $"SELECT COALESCE(SUM(b.amount), 0) AS amount FROM jev a JOIN jev_accounts b ON b.jev_id = a.id JOIN general_ledger_accounts c ON c.id = b.general_ledger_accounts_id JOIN sub_major_account_group d ON d.id = c.sub_major_account_group_id JOIN major_account_group e ON e.id = d.major_account_group_id JOIN account_group f ON f.id = e.account_group_id WHERE a.funds_id = @funds_id AND a.date_entry <= @date_entry AND YEAR(a.date_entry) = @year AND e.id  = @major_account_group_id AND b.is_debit = @is_debit";
+                decimal amount = Convert.ToDecimal(_dbGenericCommands.ExecuteScalar(query, parameters));
+                return amount;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public decimal GetSumPreviousYearTransactionsByFundIdAndMajAccountGroupId(int fundId, int majorAccountGroupId, byte isDebit, DateTime dateEntry)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Int32, fundId},
+                    new object[] { "@major_account_group_id",DbType.Int32, majorAccountGroupId},
+                    new object[] { "@year", DbType.Int16, dateEntry.Year -1},
+                    new object[] { "@is_debit", DbType.Byte, isDebit}
+                };
+                string query = $"SELECT COALESCE(SUM(b.amount), 0) AS amount FROM jev a JOIN jev_accounts b ON b.jev_id = a.id JOIN general_ledger_accounts c ON c.id = b.general_ledger_accounts_id JOIN sub_major_account_group d ON d.id = c.sub_major_account_group_id JOIN major_account_group e ON e.id = d.major_account_group_id JOIN account_group f ON f.id = e.account_group_id WHERE a.funds_id = @funds_id AND YEAR(a.date_entry) = @year AND e.id  = @major_account_group_id AND b.is_debit = @is_debit";
+                decimal amount = Convert.ToDecimal(_dbGenericCommands.ExecuteScalar(query, parameters));
+                return amount;
             }
             catch (Exception)
             {
