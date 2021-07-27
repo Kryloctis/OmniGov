@@ -216,6 +216,16 @@ namespace AccountingSystem
                 radBtnAccounting.Visible = false;
                 tabControl1.TabPages.Remove(tabAccountingDashboard);
             }
+
+            if (!Helper.HasPermission("Report Trial Balance"))
+            {
+                menuTrialBalance.Visible = false;
+            }
+
+            if (!Helper.HasPermission("Report Financial Statements"))
+            {
+                financialStatementsToolStripMenuItem.Visible = false;
+            }
         }
 
         private void radBtnBudget_CheckedChanged(object sender, EventArgs e)
