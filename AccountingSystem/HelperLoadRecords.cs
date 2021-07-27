@@ -165,34 +165,39 @@ namespace AccountingSystem
         #region General Ledger Accounts
         internal static void GeneralLedgerAccountsWithBalancesDatagridView(DataTable dataTable, DataGridView datagrid, byte fundsId, short year)
         {
-            _ = dataTable.Columns.Add("Debit", typeof(decimal));
-            _ = dataTable.Columns.Add("Credit", typeof(decimal));
-            _ = dataTable.Columns.Add("Balance", typeof(decimal));
-            _ = dataTable.Columns.Add("Type", typeof(string));
-
-            foreach (DataRow item in dataTable.Rows)
+            try
             {
-                ushort generalLedgerId = (ushort)item["general_ledger_accounts_id"];
+                _ = dataTable.Columns.Add("Debit", typeof(decimal));
+                _ = dataTable.Columns.Add("Credit", typeof(decimal));
 
-                var beginningBalanceRepository = Factory.BeginningBalancesRepository();
-                decimal generalLedgerBalance = beginningBalanceRepository.GetSumBalanceByGeneralLedgerId(fundsId, generalLedgerId, year);
-                var beginningBalanceDict = beginningBalanceRepository.GetRecordByFundsAndGeneralLedgerID(fundsId, generalLedgerId, year);
-                string debitCreditType = string.Empty;
-                debitCreditType = ValidateDebitOrCreditType(beginningBalanceDict, debitCreditType);
+                foreach (DataRow item in dataTable.Rows)
+                {
+                    ushort generalLedgerId = (ushort)item["general_ledger_accounts_id"];
 
-                item["Balance"] = generalLedgerBalance;
-                item["Type"] = debitCreditType;
+                    var beginningBalanceRepository = Factory.BeginningBalancesRepository();
+                    decimal debit = beginningBalanceRepository.GetSumBalances(fundsId, generalLedgerId, year, 1);
+                    decimal credit = beginningBalanceRepository.GetSumBalances(fundsId, generalLedgerId, year, 0);
+
+                    item["Debit"] = debit;
+                    item["Credit"] = credit;
+                }
+
+                datagrid.DataSource = dataTable;
+                datagrid.Columns[0].Visible = false;
+                datagrid.Columns[1].HeaderText = "Code";
+                datagrid.Columns[2].HeaderText = "Name";
+                datagrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                datagrid.Columns[3].Visible = false;
+                datagrid.Columns[4].Visible = false;
+                datagrid.Columns[5].DefaultCellStyle.Format = "N2";
+                datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                datagrid.Columns["Credit"].DefaultCellStyle.Format = "N2";
+                datagrid.Columns["Credit"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
-
-            datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Code";
-            datagrid.Columns[2].HeaderText = "Name";
-            datagrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            datagrid.Columns[3].Visible = false;
-            datagrid.Columns[4].Visible = false;
-            datagrid.Columns[5].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.StackTrace);
+            }
         }
 
         internal static string ValidateDebitOrCreditType(Dictionary<string, string> beginningBalanceDict, string debitCreditType)
@@ -424,6 +429,8 @@ namespace AccountingSystem
             datagrid.Columns[3].HeaderText = "Reference";
             datagrid.Columns[4].HeaderText = "Date";
             datagrid.Columns[5].HeaderText = "Amount";
+            datagrid.Columns[5].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns[6].Visible = false;
             datagrid.Columns[7].Visible = false;
             datagrid.Columns[8].Visible = false;

@@ -18,6 +18,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         private void frmBankDepositsEdit_Load(object sender, EventArgs e)
         {
             ucbd1.LoadBanks();
+            ucbd1.LoadFunds();
             LoadSelectedValue();
         }
         private void LoadSelectedValue()
@@ -28,6 +29,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 var bdRepository = Factory.BankDepositsRepository();
                 var bdData = bdRepository.GetRecordByID(uc.Id);
                 uc.cmbbanks.SelectedValue = bdData["banks_id"];
+                uc.cmbfunds.SelectedValue = bdData["funds_id"];
                 uc.txtreference.Text = bdData["reference"];
                 uc.dtdate.Value = Convert.ToDateTime(bdData["date"]);
                 uc.txtamount.Value = Convert.ToDecimal(bdData["amount"]);
@@ -49,6 +51,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 {
                     Id = uc.Id,
                     bankId = Convert.ToInt16(uc.cmbbanks.SelectedValue),
+                    fundId = Convert.ToInt16(uc.cmbfunds.SelectedValue),
                     Reference = uc.txtreference.Text.Trim(),
                     Date = Convert.ToDateTime(uc.dtdate.Text.Trim()),
                     Amount = Convert.ToDecimal(uc.txtamount.Value),

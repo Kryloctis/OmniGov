@@ -11,8 +11,15 @@ namespace ACC.Domain.Interfaces
 
         decimal GetSumBalanceByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year);
 
-        
+
+        #region CHART OF ACCOUNTS
+
+        decimal GetSumBalances(byte fundsId, ushort generalLedgerId, short year, byte isDebit);
+
+        #endregion
+
         decimal GetSumBalanceByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null);
+
         bool GeneralLedgerBalanceExist(byte fundsId, ushort generalLedgerId, short year);
 
         bool SubsidiaryLedgerBalanceExist(byte fundsId, ushort generalLedgerId, short year, ushort subsidiaryLedgerId);

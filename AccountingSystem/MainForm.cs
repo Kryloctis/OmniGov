@@ -1,40 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using AccountingSystem.Views.Manage.Journals;
-using AccountingSystem.Views.Manage.Funds;
-using AccountingSystem.Views.Manage.Banks;
-using AccountingSystem.Views.Manage.ChartOfAccounts;
+﻿using AccountingSystem.Views.Manage.AccountableForm;
 using AccountingSystem.Views.Manage.AllotmentClasses;
-using AccountingSystem.Views.Manage.FunctionProgramProject;
-using AccountingSystem.Views.Manage.CollectingOfficer;
-using AccountingSystem.Views.Manage.Users.Roles;
-using AccountingSystem.Views.Manage.Users.List;
-using AccountingSystem.Views.Transactions.JEV;
-using AccountingSystem.Views.Reports.Journals;
+using AccountingSystem.Views.Manage.AllotmentRelease;
+using AccountingSystem.Views.Manage.Banks;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
-using AccountingSystem.Views.Transactions.RCI;
+using AccountingSystem.Views.Manage.ChartOfAccounts;
+using AccountingSystem.Views.Manage.CollectingOfficer;
+using AccountingSystem.Views.Manage.DisbursingOfficer;
+using AccountingSystem.Views.Manage.FunctionProgramProject;
+using AccountingSystem.Views.Manage.Funds;
+using AccountingSystem.Views.Manage.Journals;
+using AccountingSystem.Views.Manage.Receipts;
+using AccountingSystem.Views.Manage.Users.List;
+using AccountingSystem.Views.Manage.Users.Roles;
+using AccountingSystem.Views.Reports.Cashbook;
+using AccountingSystem.Views.Reports.ConsolidatedReceipts;
+using AccountingSystem.Views.Reports.DailyCashReport;
+using AccountingSystem.Views.Reports.Financial_Statements;
+using AccountingSystem.Views.Reports.JEV;
+using AccountingSystem.Views.Reports.Journals;
+using AccountingSystem.Views.Reports.Ledgers;
+using AccountingSystem.Views.Reports.PaymentCollection;
+using AccountingSystem.Views.Reports.RCD;
+using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.SAAOBB;
-using AccountingSystem.Views.Reports.Ledgers;
-using AccountingSystem.Views.Dashboard;
-using AccountingSystem.Views.Reports.RCI;
-using AccountingSystem.Views.Manage.DisbursingOfficer;
-using AccountingSystem.Views.Manage.AccountableForm;
-using AccountingSystem.Views.Transactions.ObligationRequest;
-using AccountingSystem.Views.Reports.PaymentCollection;
-using AccountingSystem.Views.Transactions.PaymentCollection;
-using AccountingSystem.Views.Transactions.BankDeposits;
-using AccountingSystem.Views.Manage.AllotmentRelease;
-using AccountingSystem.Views.Reports.RCD;
-using AccountingSystem.Views.Manage.Receipts;
-using AccountingSystem.Views.Transactions.ReceiptsIssued;
-using AccountingSystem.Views.Reports.Cashbook;
-using AccountingSystem.Views.Reports.JEV;
-using System.Data;
-using AccountingSystem.Views.Manage.Augmentation;
-using AccountingSystem.Views.Reports.ConsolidatedReceipts;
 using AccountingSystem.Views.Reports.TrialBalance;
+using AccountingSystem.Views.Transactions.BankDeposits;
+using AccountingSystem.Views.Transactions.JEV;
+using AccountingSystem.Views.Transactions.ObligationRequest;
+using AccountingSystem.Views.Transactions.PaymentCollection;
+using AccountingSystem.Views.Transactions.RCI;
+using AccountingSystem.Views.Transactions.ReceiptsIssued;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace AccountingSystem
 {
@@ -53,14 +52,14 @@ namespace AccountingSystem
         }
 
         #region DASHBOARD
-      
+
 
         #region ACCOUNTING DASHBOARD
 
         private void LoadAccountingDashboard()
         {
             ucAccountingDashboard1.userDict = userDict;
-        } 
+        }
 
         #endregion
 
@@ -274,7 +273,7 @@ namespace AccountingSystem
         private void menuFunctionProgramProject_Click(object sender, EventArgs e)
         {
             _ = new frmFunctionProgramProject().ShowDialog();
-        }        
+        }
 
         private void menuCollectingOfficer_Click(object sender, EventArgs e)
         {
@@ -297,11 +296,11 @@ namespace AccountingSystem
             _ = new frmCheckDisbursementsJournalReport().ShowDialog();
         }
 
-        private void MenuObligationRequest_Click(object sender, EventArgs e) 
+        private void MenuObligationRequest_Click(object sender, EventArgs e)
         {
             _ = new frmObligationRequestMain().ShowDialog();
         }
-        
+
         private void MenuReportCashReceiptsJournal_Click(object sender, EventArgs e)
         {
             _ = new frmCashReceiptsJournalReport().ShowDialog();
@@ -317,15 +316,7 @@ namespace AccountingSystem
             _ = new frmADADisbursementsJournalReport().ShowDialog();
         }
 
-        private void MenuSAAOB_Click(object sender, EventArgs e) 
-        {
-            _ = new frmSAAOB().ShowDialog();
-        }
 
-        private void MenuSAAOBB_Click(object sender, EventArgs e)
-        {
-            _ = new frmSAAOBB().ShowDialog();
-        }
 
         private void MenuGeneralLedgerReport_Click(object sender, EventArgs e)
         {
@@ -371,7 +362,7 @@ namespace AccountingSystem
         {
             _ = new frmAccountable().ShowDialog();
         }
-        
+
         private void menuLogout_Click(object sender, EventArgs e)
         {
             Close();
@@ -475,5 +466,50 @@ namespace AccountingSystem
         {
             _ = new frmPostClosingTrialBalance().ShowDialog();
         }
+
+        private void menuDailyCash_Click(object sender, EventArgs e)
+        {
+            _ = new frmDailyCash().ShowDialog();
+        }
+
+        #region BUDGET REPORTS
+
+        private void MenuSAAOB_Click(object sender, EventArgs e)
+        {
+            _ = new frmSAAOB().ShowDialog();
+        }
+        private void MenuSAAOBB_Click(object sender, EventArgs e)
+        {
+            _ = new frmSAAOBB().ShowDialog();
+        }
+
+        #endregion
+
+        #region FINANCIAL STATEMENTS
+        private void statementOfFinancialPositionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmStatementOfFinancialPosition().ShowDialog();
+        }
+
+        private void statementOfFinancialPerformanceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmStatementOfFinancialPerformance().ShowDialog();
+        }
+
+        private void statementOfChangesInNetAssetsEquityToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmStatementOfChangesInNetAssetsEquity().ShowDialog();
+        }
+
+        private void statementOfCashFlowsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmStatementOfCashFlows().ShowDialog();
+        }
+
+        private void statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmStatementOfComparisonOfBudgetAndActualAmounts().ShowDialog();
+        }
+        #endregion
     }
 }
