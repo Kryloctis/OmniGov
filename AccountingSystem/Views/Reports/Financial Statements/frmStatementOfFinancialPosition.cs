@@ -1,5 +1,6 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Financial_Statements
@@ -31,6 +32,38 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        private DataTable StatementOfFinancialPositionReport()
+        {
+            var dataSet = new dsLFS();
+            var dtStatementOfFinancialPosition = dataSet.dtStatementOfFinancialPosition;
+            int fundId = (int)cmbxFunds.SelectedValue;
+            var dtAccountGroup = Factory.AccountGroupRepository().GetRecords();
+            try
+            {
+                foreach (DataRow row in dtAccountGroup.Rows)
+                {
+                    if (Convert.ToInt32(row["id"]) == 1 || Convert.ToInt32(row["id"]) == 2)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                }
+                var items = new object[]
+                {
+
+                };
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return null;
         }
 
         private void LoadReport(LocalReport report)
