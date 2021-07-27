@@ -321,7 +321,7 @@ namespace ACC.Data
                     new object[] { "@funds_id", DbType.Byte, fundsId}
                 };
 
-                string query = $"SELECT FORMAT(SUM(IF(bb.is_debit=1, bb.amount, 0)),2) AS total_debit, FORMAT(SUM(IF(bb.is_debit=0, bb.amount, 0)),2) AS total_credit FROM beginning_balances AS bb INNER JOIN view_general_ledger_accounts AS gla ON bb.general_ledger_accounts_id = gla.general_ledger_accounts_id WHERE gla.account_group_code = 3 OR gla.account_group_code = 4 OR gla.account_group_code = 5 AND bb.funds_id=@funds_id";
+                string query = $"SELECT FORMAT(SUM(IF(bb.is_debit=1, bb.amount, 0)),2) AS total_debit, FORMAT(SUM(IF(bb.is_debit=0, bb.amount, 0)),2) AS total_credit FROM beginning_balances AS bb INNER JOIN view_general_ledger_accounts AS gla ON bb.general_ledger_accounts_id = gla.general_ledger_accounts_id WHERE (gla.account_group_code = 3 AND bb.general_ledger_accounts_id <> 331) OR gla.account_group_code = 4 OR gla.account_group_code = 5 AND bb.funds_id=@funds_id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -368,6 +368,106 @@ namespace ACC.Data
             }
 
             return record;
+        }
+
+        public decimal GetDebitSumOfSubsidiaryLedger(byte fundsId, ushort generalLedgerId, short year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Byte, fundsId},
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                    new object[] { "@year", DbType.Int16, year},
+                };
+
+                string query = $"SELECT SUM(amount) FROM {tableName} WHERE funds_id=@funds_id AND general_ledger_accounts_id=@general_ledger_accounts_id AND YEAR(date_entry)=@year AND is_debit=1";
+
+                string sumBalance = _dbGenericCommands.ExecuteScalar(query, parameters);
+                if (!string.IsNullOrWhiteSpace(sumBalance))
+                    return Convert.ToDecimal(sumBalance);
+
+                return 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public decimal GetCreditSumOfSubsidiaryLedger(byte fundsId, ushort generalLedgerId, short year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Byte, fundsId},
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                    new object[] { "@year", DbType.Int16, year},
+                };
+
+                string query = $"SELECT SUM(amount) FROM {tableName} WHERE funds_id=@funds_id AND general_ledger_accounts_id=@general_ledger_accounts_id AND YEAR(date_entry)=@year AND is_debit=0";
+
+                string sumBalance = _dbGenericCommands.ExecuteScalar(query, parameters);
+                if (!string.IsNullOrWhiteSpace(sumBalance))
+                    return Convert.ToDecimal(sumBalance);
+
+                return 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public decimal GetBeginningBalanceOfAccount(byte fundsId, ushort generalLedgerId, short year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Byte, fundsId},
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                    new object[] { "@year", DbType.Int16, year},
+                };
+
+                string query = $"SELECT GREATEST( SUM(CASE WHEN bb.is_debit=1 AND bb.funds_id=@funds_id AND bb.general_ledger_accounts_id=@general_ledger_accounts_id THEN bb.amount END), SUM(CASE WHEN bb.is_debit=0 AND bb.funds_id=@funds_id AND bb.general_ledger_accounts_id=@general_ledger_accounts_id THEN bb.amount END)) - LEAST(SUM(CASE WHEN bb.is_debit=1 AND bb.funds_id=@funds_id AND bb.general_ledger_accounts_id=1 THEN bb.amount END), SUM(CASE WHEN bb.is_debit=0 AND bb.funds_id=@funds_id AND bb.general_ledger_accounts_id=@general_ledger_accounts_id THEN bb.amount END)) AS beginning_balance FROM {tableName} AS bb LEFT JOIN view_general_ledger_accounts  AS gl ON gl.general_ledger_accounts_id = bb.general_ledger_accounts_id WHERE bb.funds_id=@funds_id AND gl.general_ledger_accounts_id=@general_ledger_accounts_id AND YEAR(bb.date_entry)=@year ";
+
+                string sumBalance = _dbGenericCommands.ExecuteScalar(query, parameters);
+                if (!string.IsNullOrWhiteSpace(sumBalance))
+                    return Convert.ToDecimal(sumBalance);
+
+                return 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public decimal GetGovernmentEquityBalance(byte fundsId, ushort generalLedgerId, short year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Byte, fundsId},
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                    new object[] { "@year", DbType.Int16, year},
+                };
+
+                string query = $"SELECT SUM(amount) FROM {tableName} WHERE funds_id=@funds_id AND general_ledger_accounts_id=@general_ledger_accounts_id AND YEAR(date_entry)=@year";
+
+                string sumBalance = _dbGenericCommands.ExecuteScalar(query, parameters);
+                if (!string.IsNullOrWhiteSpace(sumBalance))
+                    return Convert.ToDecimal(sumBalance);
+
+                return 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

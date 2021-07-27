@@ -434,5 +434,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             LoadGeneralLedgers();
         }
+
     }
 }

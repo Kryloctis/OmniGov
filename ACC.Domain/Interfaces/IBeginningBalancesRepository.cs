@@ -27,5 +27,12 @@ namespace ACC.Domain.Interfaces
         Dictionary<string, string> GetDebitAndCreditOfTemporaryAccounts(byte fundsId);
 
         Dictionary<string, string> GetDebitAndCreditOfPermanentAccounts(byte fundsId);
+
+        decimal GetDebitSumOfSubsidiaryLedger(byte fundsId, ushort generalLedgerId, short year);
+
+        decimal GetCreditSumOfSubsidiaryLedger(byte fundsId, ushort generalLedgerId, short year);
+
+        
+        decimal GetGovernmentEquityBalance(byte fundsId, ushort generalLedgerId, short year);
     }
 }

@@ -231,5 +231,77 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public decimal GetJEVSumByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Byte, fundsId},
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                    new object[] { "@year", DbType.Int16, year},
+                };
+
+                string query = $"SELECT ABS((SUM(IF(is_debit = 1, amount, 0)) - SUM(IF(is_debit = 0, amount, 0)))) AS Total FROM view_jev_accounts WHERE is_approved = 1 AND funds_id=@funds_id AND general_ledger_accounts_id=@general_ledger_accounts_id AND YEAR(date_entry)=@year";
+
+                string sumBalance = _dbGenericCommands.ExecuteScalar(query, parameters);
+                if (!string.IsNullOrWhiteSpace(sumBalance))
+                    return Convert.ToDecimal(sumBalance);
+
+                return 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool IsTransactionDebit(byte fundsId, ushort generalLedgerId, short year)
+        {
+            try
+            {
+                var parameters = new object[][]
+               {
+                    new object[] { "@funds_id", DbType.Byte, fundsId},
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                    new object[] { "@year", DbType.Int16, year},
+               };
+
+               string query = $"SELECT is_debit FROM {viewTableName} WHERE is_approved = 1 AND funds_id=@funds_id AND general_ledger_accounts_id=@general_ledger_accounts_id AND YEAR(date_entry)=@year";
+               string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (queryResult == "1") return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
+
+        public DataTable GetJEVAmount(byte fundId, ushort generalLedgerId, short year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Byte, fundId},
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                    new object[] { "@year", DbType.Int16, year},
+                };
+
+                string query = $"SELECT amount, is_debit FROM view_jev_accounts WHERE is_approved=1 AND funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year";
+
+                var dtGeneralLedgers = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
