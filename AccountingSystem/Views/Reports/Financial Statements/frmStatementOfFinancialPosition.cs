@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 {
                     GetAssetsAndLiabilities(dtStatementOfFinancialPosition, fundId, dateAsOf, accountGroupId, accountGroupCode, accountGroupName, dtMajorAccountGroup);
                 }
-                else
+                else if (accountGroupId == 3 || accountGroupId == 4 || accountGroupId == 5)
                 {
                     GetRevenuesExpenses(fundId, dateAsOf, accountGroupId, accountGroupCode, accountGroupName, dtMajorAccountGroup);
                 }
@@ -110,8 +110,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             foreach (DataRow rowMajorAccountGroup in dtMajorAccountGroup.Rows)
             {
                 int majorAccountGroupId = Convert.ToInt32(rowMajorAccountGroup["maj_acc_group_id"]);
-                string majorAccountGroupCode = rowMajorAccountGroup["maj_acc_group_code"].ToString();
-                string majorAccountGroupName = rowMajorAccountGroup["maj_acc_group_name"].ToString();
 
                 decimal currentDebitAmount = Factory.JEVRepository().GetSumByMajorAccountGroup(fundId, majorAccountGroupId, 1, dateAsOf);
                 decimal currentCreditAmoubt = Factory.JEVRepository().GetSumByMajorAccountGroup(fundId, majorAccountGroupId, 0, dateAsOf);

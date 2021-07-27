@@ -12,6 +12,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         public frmJEVSearch(frmJEV frmJEV)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             this.frmJEV = frmJEV;
 
             foreach (var item in Helper.MonthsDatasource().Values)
@@ -21,7 +22,6 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void frmJEVSearch_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
             Helper.DatagridDefaultStyle(dgJEV);
         }
 
@@ -141,6 +141,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.fundId = Convert.ToByte(jevDict["funds_id"]);
                     uc.journalId = Convert.ToByte(jevDict["journals_id"]);
                     uc.oldJournalId = Convert.ToByte(jevDict["journals_id"]);
+                    uc.jevStatus = Convert.ToByte(jevDict["is_approved"]);
                     uc.jevNo = jevDict["jev_no"];
                     CheckedFund(jevDict["fund_name"]);
                     CheckedJournal(jevDict["journal_name"]);
@@ -149,6 +150,9 @@ namespace AccountingSystem.Views.Transactions.JEV
                     LoadJevAccounts();
                     uc.SumDebitCredit();
                     uc.ClearErrors();
+
+                    if (uc.jevStatus != 1)
+                        frmJEV.btnPrint.Enabled = false;
 
                     Close();
                     return;
