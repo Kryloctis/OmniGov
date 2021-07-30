@@ -88,6 +88,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmMajorAccountGroupEdit";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Major Account Group";
             this.Load += new System.EventHandler(this.frmMajorAccountGroupEdit_Load);

@@ -9,14 +9,15 @@ namespace ACC.Domain.Interfaces
 
         Dictionary<string, string> GetRecordByFundsAndGeneralLedgerID(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null);
 
-        decimal GetSumBalanceByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year);
-
-
         #region CHART OF ACCOUNTS
 
         decimal GetSumBalances(byte fundsId, ushort generalLedgerId, short year, byte isDebit);
 
         #endregion
+
+        #region SETBALANCE
+        bool DeleteById(int Id);
+        #endregion    
 
         decimal GetSumBalanceByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null);
 
@@ -28,11 +29,6 @@ namespace ACC.Domain.Interfaces
 
         Dictionary<string, string> GetDebitAndCreditOfPermanentAccounts(byte fundsId);
 
-        decimal GetDebitSumOfSubsidiaryLedger(byte fundsId, ushort generalLedgerId, short year);
-
-        decimal GetCreditSumOfSubsidiaryLedger(byte fundsId, ushort generalLedgerId, short year);
-
-        
         decimal GetGovernmentEquityBalance(byte fundsId, ushort generalLedgerId, short year);
     }
 }

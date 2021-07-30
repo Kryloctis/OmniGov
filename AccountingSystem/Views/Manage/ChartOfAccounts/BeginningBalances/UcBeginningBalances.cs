@@ -1,8 +1,7 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using System;
 using System.ComponentModel;
-using System.Data;
 using System.Windows.Forms;
-using ACC.Domain.Interfaces;
 
 namespace AccountingSystem.Views.Manage.BeginningBalances
 {
@@ -12,6 +11,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
         internal byte fundId;
         internal ushort generalLedgerId;
         internal ushort subsidiaryLedgerId;
+        internal short year;
 
         public UcBeginningBalances()
         {
@@ -29,60 +29,8 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
         }
 
         internal void ResetForm()
-        {            
+        {
             nudAmount.Value = 0;
-        }
-
-        private void ShowCheckIcon(RadioButton radioButton)
-        {
-            if (radioButton.Checked)
-                radioButton.Image = Properties.Resources.ok14px;
-            else
-                radioButton.Image = null;
-        }
-
-        internal void LoadFunds()
-        {
-            var funds = Factory.FundsRepository().GetRecords();
-
-            foreach (DataRow fund in funds.Rows)
-            {
-                var radFund = new RadioButton
-                {
-                    Text = fund["fund_name"].ToString(),
-                    Tag = fund["id"],
-                    AutoSize = true,
-                    Appearance = Appearance.Button,
-                    TextImageRelation = TextImageRelation.ImageBeforeText
-                };
-
-                // making general fund as default
-                if (fund["fund_name"].ToString() == "General Fund")
-                {
-                    radFund.Checked = true;
-                    fundId = Convert.ToByte(fund["id"]);
-                    ShowCheckIcon(radFund);
-                }
-
-
-                flowLayoutPanelFunds.Controls.Add(radFund);
-
-                radFund.Click += new EventHandler(radioFunds_Click);
-                radFund.CheckedChanged += new EventHandler(radioFunds_CheckedChanged);
-            }
-        }
-
-        private void radioFunds_Click(object sender, EventArgs e)
-        {
-            var radFund = sender as RadioButton;
-            fundId = Convert.ToByte(radFund.Tag);
-            LoadSelectedSubsidiaryAccount();
-        }
-
-        private void radioFunds_CheckedChanged(object sender, EventArgs e)
-        {
-            var radFund = sender as RadioButton;
-            ShowCheckIcon(radFund);
         }
 
         internal void LoadSelectedGeneralLedger()
@@ -100,18 +48,8 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
                 var subsidiaryDict = Factory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
                 txtSubsidiaryCode.Text = subsidiaryDict["sub_code"];
                 txtSubsidiaryName.Text = subsidiaryDict["sub_name"];
-                
+
             }
-        }
-
-        private void cmbSubsidiaryAccount_Validating(object sender, CancelEventArgs e)
-        {
-
-        }
-
-        private void cmbSubsidiaryAccount_Validated(object sender, EventArgs e)
-        {
-
         }
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
@@ -130,9 +68,14 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
 
-        private void lstBoxGeneralAccount_SelectedValueChanged(object sender, EventArgs e)
+        private void UcBeginningBalances_Load(object sender, EventArgs e)
         {
-            LoadSelectedSubsidiaryAccount();
+            if (!DesignMode)
+            {
+                var dtFund = Factory.FundsRepository().GetRecordByID(fundId);
+                txtFunName.Text = dtFund["fund_name"];
+                txtYear.Text = year.ToString();
+            }
         }
     }
 }

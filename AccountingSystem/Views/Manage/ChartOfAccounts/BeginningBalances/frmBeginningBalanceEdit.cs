@@ -3,7 +3,6 @@ using AccountingSystem.Views.Manage.BeginningBalances;
 using AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
@@ -21,9 +20,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             _frmSubsidiary = frmSubsidiary;
             uc = ucBeginningBalances1;
             this.fundId = fundId;
+            uc.fundId = fundId;
             uc.generalLedgerId = generalLedgerId;
             uc.subsidiaryLedgerId = subsidiaryLedgerId;
             this.year = year;
+            uc.year = year;
         }
 
         private void LoadSelectedRecord()
@@ -37,7 +38,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
                     beginningBalanceDict = Factory.BeginningBalancesRepository().GetRecordByFundsAndGeneralLedgerID(fundId, uc.generalLedgerId, year, uc.subsidiaryLedgerId);
 
                 uc.beginningBalanceId = int.Parse(beginningBalanceDict["id"]);
-                CheckedFund();
                 CheckedDebitCredit(beginningBalanceDict["is_debit"]);
                 uc.dtpDateEntry.Value = Convert.ToDateTime(beginningBalanceDict["date_entry"]);
                 uc.nudAmount.Value = Convert.ToDecimal(beginningBalanceDict["amount"]);
@@ -46,12 +46,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void CheckedFund()
-        {
-            var fundDict = Factory.FundsRepository().GetRecordByID(fundId);
-            _ = uc.flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => (r.Text == fundDict["fund_name"]) ? r.Checked = true : r.Checked = false);
         }
 
         private void CheckedDebitCredit(string isDebit)
@@ -100,7 +94,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
         private void frmBeginningBalanceEdit_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            uc.LoadFunds();
             uc.LoadSelectedGeneralLedger();
             uc.LoadSelectedSubsidiaryAccount();
 
@@ -113,8 +106,34 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             {
                 Helper.MessageBoxSuccess("Balance has been saved.");
 
-                if(_frmSubsidiary != null)
+                if (_frmSubsidiary != null)
                     _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
+            }
+        }
+
+        private bool Delete()
+        {
+            string message = "Are you sure you want to delete the balance?";
+            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                return Factory.BeginningBalancesRepository().DeleteById(uc.beginningBalanceId);
+
+            return false;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Delete())
+                {
+                    Helper.MessageBoxSuccess($"Balance has been deleted.");
+                    if (_frmSubsidiary != null)
+                        _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
     }

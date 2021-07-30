@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
-using AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
@@ -53,13 +52,13 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void cmbAccount_SelectionChangeCommitted(object sender, EventArgs e)
         {
-          
+
         }
 
         private void btnSubsidiaryLedger_Click(object sender, EventArgs e)
         {
-            ushort accountId = Convert.ToUInt16(cmbAccount.SelectedValue);
-            _ = new frmSubsidiary(accountId).ShowDialog();
+            //ushort accountId = Convert.ToUInt16(cmbAccount.SelectedValue);
+            //_ = new frmSubsidiary(fundId, accountId, 2021).ShowDialog();
         }
 
         private void ucJEVAccount_Load(object sender, EventArgs e)
@@ -138,7 +137,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         //ACCOUNT
 
-        private void LoadAccounts() 
+        private void LoadAccounts()
         {
             try
             {
@@ -191,11 +190,11 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         //VALIDATIONS
 
-        private bool FPPNameNotExist() 
+        private bool FPPNameNotExist()
         {
             string fppName = cmbFPP.Text.Trim();
 
-            if (cmbFPP.FindStringExact(fppName) == -1 && !string.IsNullOrWhiteSpace(fppName)) 
+            if (cmbFPP.FindStringExact(fppName) == -1 && !string.IsNullOrWhiteSpace(fppName))
             {
                 epFPP.SetError(cmbFPP, "FPP you entered doesn't exist.");
                 return true;
@@ -247,7 +246,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             if (nudAmount.Value < 1)
             {
                 epAmount.SetError(nudAmount, "Plase enter a non-zero amount.");
-;            }
+                ;
+            }
         }
 
         private void nudAmount_Validated(object sender, EventArgs e)
