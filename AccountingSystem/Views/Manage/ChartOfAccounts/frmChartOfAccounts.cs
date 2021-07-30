@@ -1,14 +1,14 @@
-﻿using System;
-using System.Windows.Forms;
-using ACC.Domain.Models;
-using System.Collections.Generic;
-using MySql.Data.MySqlClient;
+﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.BeginningBalances;
 using AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup;
+using AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances;
 using AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup;
 using AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary;
-using AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances;
-using AccountingSystem.Views.Manage.BeginningBalances;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.ChartOfAccounts
 {
@@ -280,7 +280,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             }
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
             {
-               
+
             }
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
             {
@@ -326,11 +326,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
                 if (generalLedgerBalanceExist)
                 {
-                    _ = new frmBeginningBalanceEdit(null,fundId, generalLedgerId, year).ShowDialog();
+                    _ = new frmBeginningBalanceEdit(null, fundId, generalLedgerId, year).ShowDialog();
                     return;
                 }
 
-                _ = new frmBeginningBalanceAdd(null,generalLedgerId).ShowDialog();
+                _ = new frmBeginningBalanceAdd(null, generalLedgerId).ShowDialog();
             }
         }
 
@@ -358,7 +358,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
                 DisableEditDeleteButtons();
                 BtnSubsidiary.Enabled = false;
                 BtnSetBalance.Enabled = false;
-            } 
+            }
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
             {
                 LoadMajorAccountGroup();
@@ -373,7 +373,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
                 BtnSubsidiary.Enabled = false;
                 BtnSetBalance.Enabled = false;
             }
-                
+
         }
 
         private void SetActionControls(DataGridView dataGrid, byte[] columnIndexTimestamp)
@@ -387,15 +387,31 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             btnDelete.Enabled = false;
         }
 
+        private void EnableDisableSubsidiaryButton()
+        {
+            byte fundId = Convert.ToByte(cmbFund.SelectedValue);
+            ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.SelectedCells[0].Value);
+            short year = Convert.ToInt16(cmbYear.Text);
+            bool generalLedgerBalanceExist = Factory.BeginningBalancesRepository().GeneralLedgerBalanceExist(fundId, generalLedgerId, year);
+
+            if (generalLedgerBalanceExist)
+                BtnSubsidiary.Enabled = false;
+            else
+                BtnSubsidiary.Enabled = true;
+        }
+
         private void dgGeneralLedgerAccounts_SelectionChanged(object sender, EventArgs e)
         {
             byte[] columnIndexTimestamp = { 3, 4 };
             SetActionControls(dgGeneralLedgerAccounts, columnIndexTimestamp);
 
+
+
             if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
             {
                 BtnSubsidiary.Enabled = true;
                 BtnSetBalance.Enabled = true;
+                EnableDisableSubsidiaryButton();
                 return;
             }
 

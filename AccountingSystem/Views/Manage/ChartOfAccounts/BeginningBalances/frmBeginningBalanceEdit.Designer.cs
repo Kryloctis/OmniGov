@@ -33,11 +33,13 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ucBeginningBalances1
             // 
+            this.ucBeginningBalances1.AutoSize = true;
             this.ucBeginningBalances1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucBeginningBalances1.Location = new System.Drawing.Point(12, 12);
             this.ucBeginningBalances1.Name = "ucBeginningBalances1";
@@ -48,6 +50,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
+            this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
@@ -69,7 +72,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSave.Location = new System.Drawing.Point(342, 3);
+            this.btnSave.Location = new System.Drawing.Point(261, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(82, 23);
             this.btnSave.TabIndex = 0;
@@ -77,6 +80,15 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(349, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Delete";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // frmBeginningBalanceEdit
             // 
@@ -97,6 +109,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             this.Load += new System.EventHandler(this.frmBeginningBalanceEdit_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -106,5 +119,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button button1;
     }
 }
