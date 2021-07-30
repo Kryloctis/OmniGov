@@ -113,8 +113,34 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             {
                 Helper.MessageBoxSuccess("Balance has been saved.");
 
-                if(_frmSubsidiary != null)
+                if (_frmSubsidiary != null)
                     _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
+            }
+        }
+
+        private bool Delete()
+        {
+            string message = "Are you sure you want to delete the balance?";
+            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                return Factory.BeginningBalancesRepository().DeleteById(uc.beginningBalanceId);
+
+            return false;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Delete())
+                {
+                    Helper.MessageBoxSuccess($"Balance has been deleted.");
+                    if (_frmSubsidiary != null)
+                        _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
     }

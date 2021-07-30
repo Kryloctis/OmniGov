@@ -15,6 +15,10 @@ namespace ACC.Domain.Interfaces
 
         #endregion
 
+        #region SETBALANCE
+        bool DeleteById(int Id);
+        #endregion    
+
         decimal GetSumBalanceByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null);
 
         bool GeneralLedgerBalanceExist(byte fundsId, ushort generalLedgerId, short year);

@@ -369,5 +369,26 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public bool DeleteById(int Id)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, Id}
+                };
+                string query = $"DELETE FROM {tableName} WHERE id = @id";
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

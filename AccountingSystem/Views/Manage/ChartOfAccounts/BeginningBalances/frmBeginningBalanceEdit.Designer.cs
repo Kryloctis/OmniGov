@@ -33,15 +33,17 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.flowLayoutPanel1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ucBeginningBalances1
             // 
             this.ucBeginningBalances1.AutoSize = true;
             this.ucBeginningBalances1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucBeginningBalances1.Location = new System.Drawing.Point(12, 12);
+            this.ucBeginningBalances1.Location = new System.Drawing.Point(10, 53);
             this.ucBeginningBalances1.Name = "ucBeginningBalances1";
             this.ucBeginningBalances1.Size = new System.Drawing.Size(502, 337);
             this.ucBeginningBalances1.TabIndex = 0;
@@ -50,11 +52,10 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
-            this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 359);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 403);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(515, 30);
             this.flowLayoutPanel1.TabIndex = 2;
@@ -72,7 +73,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSave.Location = new System.Drawing.Point(261, 3);
+            this.btnSave.Location = new System.Drawing.Point(342, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(82, 23);
             this.btnSave.TabIndex = 0;
@@ -81,14 +82,28 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // button1
+            // toolStrip1
             // 
-            this.button1.Location = new System.Drawing.Point(349, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Delete";
-            this.button1.UseVisualStyleBackColor = true;
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnDelete});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(515, 50);
+            this.toolStrip1.TabIndex = 3;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
+            this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(44, 47);
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // frmBeginningBalanceEdit
             // 
@@ -97,7 +112,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(515, 389);
+            this.ClientSize = new System.Drawing.Size(515, 433);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ucBeginningBalances1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -108,6 +124,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             this.Text = "Edit Beginning Balance";
             this.Load += new System.EventHandler(this.frmBeginningBalanceEdit_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -119,6 +137,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton btnDelete;
     }
 }
