@@ -333,11 +333,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             }
         }
 
-        private void dgGeneralLedgerAccounts_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            ShowSubsidiaryForm();
-        }
-
         private void DisableEditDeleteButtons()
         {
             btnEdit.Enabled = false;

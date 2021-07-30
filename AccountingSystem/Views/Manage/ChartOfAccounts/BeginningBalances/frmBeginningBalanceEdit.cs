@@ -130,6 +130,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
                     if (_frmSubsidiary != null)
                         _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
                 }
+                Close();
             }
             catch (Exception ex)
             {
