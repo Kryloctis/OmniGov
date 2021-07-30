@@ -98,6 +98,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmAccountGroupEdit";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Account Group";
             this.Load += new System.EventHandler(this.frmAccountGroupEdit_Load);

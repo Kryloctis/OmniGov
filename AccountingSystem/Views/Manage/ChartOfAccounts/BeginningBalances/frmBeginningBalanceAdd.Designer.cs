@@ -38,6 +38,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             // 
             // ucBeginningBalances1
             // 
+            this.ucBeginningBalances1.AutoSize = true;
             this.ucBeginningBalances1.Location = new System.Drawing.Point(12, 12);
             this.ucBeginningBalances1.Name = "ucBeginningBalances1";
             this.ucBeginningBalances1.Size = new System.Drawing.Size(502, 337);
@@ -91,11 +92,13 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmBeginningBalanceAdd";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Set Beginning Balance";
             this.Load += new System.EventHandler(this.frmBeginningBalanceAdd_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

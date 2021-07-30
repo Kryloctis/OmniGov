@@ -98,6 +98,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmSubsidiaryAdd";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Subsidiary";
             this.Load += new System.EventHandler(this.frmSubsidiaryAdd_Load);

@@ -20,7 +20,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         public frmChartOfAccounts()
         {
             InitializeComponent();
-            BtnSetBalance.Click += new EventHandler(BtnSetBalance_Click);
 
             // validate if it has permission
             if (!Helper.HasPermission("Manage Subsidiary Ledger Account"))
@@ -299,7 +298,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
             {
                 ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.SelectedCells[0].Value);
-                _ = new frmSubsidiary(generalLedgerId).ShowDialog();
+                _ = new frmSubsidiary(fundId, generalLedgerId, year).ShowDialog();
             }
         }
 
@@ -330,7 +329,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
                     return;
                 }
 
-                _ = new frmBeginningBalanceAdd(null, generalLedgerId).ShowDialog();
+                _ = new frmBeginningBalanceAdd(null, fundId, generalLedgerId, year).ShowDialog();
             }
         }
 
@@ -450,6 +449,5 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             LoadGeneralLedgers();
         }
-
     }
 }

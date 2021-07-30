@@ -38,13 +38,15 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             this.epGeneralAccount = new System.Windows.Forms.ErrorProvider(this.components);
             this.epYear = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
-            this.groupFunds = new System.Windows.Forms.GroupBox();
-            this.flowLayoutPanelFunds = new System.Windows.Forms.FlowLayoutPanel();
             this.dtpDateEntry = new System.Windows.Forms.DateTimePicker();
             this.radioDebit = new System.Windows.Forms.RadioButton();
             this.radioCredit = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtYear = new System.Windows.Forms.TextBox();
+            this.txtFunName = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.txtAccountName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtAccountCode = new System.Windows.Forms.TextBox();
@@ -59,7 +61,6 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             ((System.ComponentModel.ISupportInitialize)(this.epGeneralAccount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
-            this.groupFunds.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -69,7 +70,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(0, 259);
+            this.label3.Location = new System.Drawing.Point(9, 243);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 15);
             this.label3.TabIndex = 6;
@@ -78,7 +79,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             // nudAmount
             // 
             this.nudAmount.DecimalPlaces = 2;
-            this.nudAmount.Location = new System.Drawing.Point(115, 311);
+            this.nudAmount.Location = new System.Drawing.Point(115, 297);
             this.nudAmount.Maximum = new decimal(new int[] {
             1316134911,
             2328,
@@ -95,7 +96,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(0, 313);
+            this.label4.Location = new System.Drawing.Point(9, 297);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 15);
             this.label4.TabIndex = 8;
@@ -129,31 +130,9 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             // 
             this.epAmount.ContainerControl = this;
             // 
-            // groupFunds
-            // 
-            this.groupFunds.AutoSize = true;
-            this.groupFunds.Controls.Add(this.flowLayoutPanelFunds);
-            this.groupFunds.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupFunds.Location = new System.Drawing.Point(3, 190);
-            this.groupFunds.Name = "groupFunds";
-            this.groupFunds.Size = new System.Drawing.Size(482, 61);
-            this.groupFunds.TabIndex = 13;
-            this.groupFunds.TabStop = false;
-            this.groupFunds.Text = "Funds";
-            // 
-            // flowLayoutPanelFunds
-            // 
-            this.flowLayoutPanelFunds.AutoSize = true;
-            this.flowLayoutPanelFunds.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelFunds.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.flowLayoutPanelFunds.Location = new System.Drawing.Point(3, 19);
-            this.flowLayoutPanelFunds.Name = "flowLayoutPanelFunds";
-            this.flowLayoutPanelFunds.Size = new System.Drawing.Size(476, 39);
-            this.flowLayoutPanelFunds.TabIndex = 0;
-            // 
             // dtpDateEntry
             // 
-            this.dtpDateEntry.Location = new System.Drawing.Point(115, 257);
+            this.dtpDateEntry.Location = new System.Drawing.Point(115, 243);
             this.dtpDateEntry.Name = "dtpDateEntry";
             this.dtpDateEntry.Size = new System.Drawing.Size(370, 23);
             this.dtpDateEntry.TabIndex = 1;
@@ -161,7 +140,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             // radioDebit
             // 
             this.radioDebit.AutoSize = true;
-            this.radioDebit.Location = new System.Drawing.Point(115, 286);
+            this.radioDebit.Location = new System.Drawing.Point(115, 272);
             this.radioDebit.Name = "radioDebit";
             this.radioDebit.Size = new System.Drawing.Size(53, 19);
             this.radioDebit.TabIndex = 2;
@@ -174,7 +153,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             // radioCredit
             // 
             this.radioCredit.AutoSize = true;
-            this.radioCredit.Location = new System.Drawing.Point(174, 286);
+            this.radioCredit.Location = new System.Drawing.Point(174, 272);
             this.radioCredit.Name = "radioCredit";
             this.radioCredit.Size = new System.Drawing.Size(57, 19);
             this.radioCredit.TabIndex = 3;
@@ -190,13 +169,17 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(3, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(482, 89);
+            this.groupBox1.Size = new System.Drawing.Size(482, 145);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General Ledger Details";
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.txtYear);
+            this.panel1.Controls.Add(this.txtFunName);
+            this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.txtAccountName);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.txtAccountCode);
@@ -205,8 +188,42 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel1.Location = new System.Drawing.Point(3, 19);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(476, 67);
+            this.panel1.Size = new System.Drawing.Size(476, 123);
             this.panel1.TabIndex = 0;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 92);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(29, 15);
+            this.label8.TabIndex = 6;
+            this.label8.Text = "Year";
+            // 
+            // txtYear
+            // 
+            this.txtYear.Location = new System.Drawing.Point(48, 90);
+            this.txtYear.Name = "txtYear";
+            this.txtYear.ReadOnly = true;
+            this.txtYear.Size = new System.Drawing.Size(418, 23);
+            this.txtYear.TabIndex = 5;
+            // 
+            // txtFunName
+            // 
+            this.txtFunName.Location = new System.Drawing.Point(48, 61);
+            this.txtFunName.Name = "txtFunName";
+            this.txtFunName.ReadOnly = true;
+            this.txtFunName.Size = new System.Drawing.Size(418, 23);
+            this.txtFunName.TabIndex = 5;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 64);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(34, 15);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "Fund";
             // 
             // txtAccountName
             // 
@@ -248,7 +265,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             // 
             this.groupBox2.Controls.Add(this.panel2);
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox2.Location = new System.Drawing.Point(3, 95);
+            this.groupBox2.Location = new System.Drawing.Point(3, 151);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(482, 89);
             this.groupBox2.TabIndex = 18;
@@ -314,18 +331,16 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             this.Controls.Add(this.radioCredit);
             this.Controls.Add(this.radioDebit);
             this.Controls.Add(this.dtpDateEntry);
-            this.Controls.Add(this.groupFunds);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.nudAmount);
             this.Controls.Add(this.label3);
             this.Name = "UcBeginningBalances";
-            this.Size = new System.Drawing.Size(502, 337);
+            this.Size = new System.Drawing.Size(502, 323);
+            this.Load += new System.EventHandler(this.UcBeginningBalances_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epGeneralAccount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epYear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
-            this.groupFunds.ResumeLayout(false);
-            this.groupFunds.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -345,8 +360,6 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
         private System.Windows.Forms.ErrorProvider epGeneralAccount;
         private System.Windows.Forms.ErrorProvider epYear;
         private System.Windows.Forms.ErrorProvider epAmount;
-        private System.Windows.Forms.GroupBox groupFunds;
-        internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFunds;
         internal System.Windows.Forms.NumericUpDown nudAmount;
         internal System.Windows.Forms.DateTimePicker dtpDateEntry;
         internal System.Windows.Forms.RadioButton radioCredit;
@@ -363,5 +376,9 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
         private System.Windows.Forms.Label label6;
         internal System.Windows.Forms.TextBox txtSubsidiaryName;
         internal System.Windows.Forms.TextBox txtSubsidiaryCode;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        internal System.Windows.Forms.TextBox txtYear;
+        internal System.Windows.Forms.TextBox txtFunName;
     }
 }

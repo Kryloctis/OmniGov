@@ -43,8 +43,10 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSetBalance = new System.Windows.Forms.ToolStripButton();
             this.dgSubsidiary = new System.Windows.Forms.DataGridView();
-            this.cmbFund = new System.Windows.Forms.ComboBox();
-            this.cmbYear = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtFund = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtYear = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -61,13 +63,17 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(673, 82);
+            this.groupBox1.Size = new System.Drawing.Size(673, 132);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General Ledger Account Details";
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.txtYear);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.txtFund);
+            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.txtCode);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.txtAccount);
@@ -77,7 +83,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.panel1.Location = new System.Drawing.Point(3, 18);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(667, 62);
+            this.panel1.Size = new System.Drawing.Size(667, 112);
             this.panel1.TabIndex = 0;
             // 
             // txtCode
@@ -191,49 +197,61 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgSubsidiary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgSubsidiary.Location = new System.Drawing.Point(10, 165);
+            this.dgSubsidiary.Location = new System.Drawing.Point(10, 188);
             this.dgSubsidiary.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgSubsidiary.Name = "dgSubsidiary";
             this.dgSubsidiary.RowHeadersWidth = 51;
             this.dgSubsidiary.RowTemplate.Height = 29;
-            this.dgSubsidiary.Size = new System.Drawing.Size(673, 278);
+            this.dgSubsidiary.Size = new System.Drawing.Size(673, 302);
             this.dgSubsidiary.TabIndex = 8;
             this.dgSubsidiary.SelectionChanged += new System.EventHandler(this.dgSubsidiary_SelectionChanged);
             // 
-            // cmbFund
+            // label3
             // 
-            this.cmbFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFund.FormattingEnabled = true;
-            this.cmbFund.Location = new System.Drawing.Point(10, 138);
-            this.cmbFund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbFund.Name = "cmbFund";
-            this.cmbFund.Size = new System.Drawing.Size(150, 23);
-            this.cmbFund.TabIndex = 9;
-            this.cmbFund.SelectionChangeCommitted += new System.EventHandler(this.cmbFund_SelectionChangeCommitted);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(2, 60);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(34, 15);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Fund";
             // 
-            // cmbYear
+            // txtFund
             // 
-            this.cmbYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbYear.FormattingEnabled = true;
-            this.cmbYear.Location = new System.Drawing.Point(166, 138);
-            this.cmbYear.Name = "cmbYear";
-            this.cmbYear.Size = new System.Drawing.Size(121, 23);
-            this.cmbYear.TabIndex = 10;
-            this.cmbYear.SelectionChangeCommitted += new System.EventHandler(this.cmbYear_SelectionChangeCommitted);
+            this.txtFund.Location = new System.Drawing.Point(62, 57);
+            this.txtFund.Name = "txtFund";
+            this.txtFund.ReadOnly = true;
+            this.txtFund.Size = new System.Drawing.Size(602, 23);
+            this.txtFund.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 89);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 15);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Year";
+            // 
+            // txtYear
+            // 
+            this.txtYear.Location = new System.Drawing.Point(62, 86);
+            this.txtYear.Name = "txtYear";
+            this.txtYear.ReadOnly = true;
+            this.txtYear.Size = new System.Drawing.Size(602, 23);
+            this.txtYear.TabIndex = 6;
             // 
             // frmSubsidiary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(696, 458);
-            this.Controls.Add(this.cmbYear);
-            this.Controls.Add(this.cmbFund);
+            this.ClientSize = new System.Drawing.Size(696, 505);
             this.Controls.Add(this.dgSubsidiary);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinimumSize = new System.Drawing.Size(712, 497);
             this.Name = "frmSubsidiary";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Subsidiary Ledgers";
             this.Load += new System.EventHandler(this.frmSubsidiary_Load);
@@ -261,9 +279,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.DataGridView dgSubsidiary;
-        private System.Windows.Forms.ComboBox cmbFund;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnSetBalance;
-        private System.Windows.Forms.ComboBox cmbYear;
+        private System.Windows.Forms.TextBox txtFund;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtYear;
+        private System.Windows.Forms.Label label4;
     }
 }

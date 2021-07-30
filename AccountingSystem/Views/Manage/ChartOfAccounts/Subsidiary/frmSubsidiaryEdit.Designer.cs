@@ -96,6 +96,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmSubsidiaryEdit";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Subsidiary";
             this.Load += new System.EventHandler(this.frmSubsidiaryEdit_Load);

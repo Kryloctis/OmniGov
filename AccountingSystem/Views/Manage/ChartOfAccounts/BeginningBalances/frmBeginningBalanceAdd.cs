@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Windows.Forms;
-using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.ChartOfAccounts;
+﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary;
+using System;
+using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BeginningBalances
 {
@@ -12,12 +10,14 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
         private readonly UcBeginningBalances uc;
         frmSubsidiary _frmSubsidiary;
 
-        public frmBeginningBalanceAdd(frmSubsidiary frmSubsidiary,ushort generalLedgerId, ushort subsidiaryLedgerId = 0)
+        public frmBeginningBalanceAdd(frmSubsidiary frmSubsidiary, byte fundId, ushort generalLedgerId, short year, ushort subsidiaryLedgerId = 0)
         {
             InitializeComponent();
             _frmSubsidiary = frmSubsidiary;
             uc = ucBeginningBalances1;
+            uc.fundId = fundId;
             uc.generalLedgerId = generalLedgerId;
+            uc.year = year;
             uc.subsidiaryLedgerId = subsidiaryLedgerId;
         }
 
@@ -52,31 +52,12 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             return false;
         }
 
-        private void CheckedFund()
-        {
-            if (uc.subsidiaryLedgerId != 0)
-            {
-                var subsidiaryDict = Factory.SubsidiaryLedgerAccountsRepository().GetRecordByID(uc.subsidiaryLedgerId);
-                byte fundId = Convert.ToByte(subsidiaryDict["funds_id"]);
-                uc.fundId = fundId;
-                var fundDict = Factory.FundsRepository().GetRecordByID(fundId);
-
-                _ = ucBeginningBalances1.flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(
-                    r => (r.Text == fundDict["fund_name"]) ? r.Checked = true : r.Checked = false);
-
-                uc.flowLayoutPanelFunds.Enabled = false;
-            }
-        }
-
         private void frmBeginningBalanceAdd_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            uc.LoadFunds();
             uc.LoadSelectedGeneralLedger();
             uc.LoadSelectedSubsidiaryAccount();
             uc.radioDebit.Checked = true;
-
-            CheckedFund();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -85,7 +66,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             {
                 Helper.MessageBoxSuccess("Beginning balance has been saved.");
 
-                if(_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
+                if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
 
                 uc.ResetForm();
             }

@@ -436,6 +436,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.BtnSetBalance.Size = new System.Drawing.Size(80, 47);
             this.BtnSetBalance.Text = "Set Balance...";
             this.BtnSetBalance.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.BtnSetBalance.Click += new System.EventHandler(this.BtnSetBalance_Click);
             // 
             // frmChartOfAccounts
             // 

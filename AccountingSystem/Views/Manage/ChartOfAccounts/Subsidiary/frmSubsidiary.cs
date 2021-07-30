@@ -1,10 +1,10 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.BeginningBalances;
+using AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using AccountingSystem.Views.Manage.BeginningBalances;
-using AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances;
 
 namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 {
@@ -14,16 +14,12 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
         internal short year;
         private readonly ushort generalLedgerId;
 
-        public frmSubsidiary(ushort _generalLedgerId)
+        public frmSubsidiary(byte fundId, ushort _generalLedgerId, short year)
         {
             InitializeComponent();
+            this.fundId = fundId;
             generalLedgerId = _generalLedgerId;
-        }
-
-        private void LoadFunds()
-        {
-            var dtFunds = Factory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
+            this.year = year;
         }
 
         private void LoadSelectedGeneralLedger()
@@ -37,44 +33,25 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
         {
             try
             {
-                fundId = Convert.ToByte(cmbFund.SelectedValue);
-                year = (short)Convert.ToUInt16(cmbYear.Text);
                 var dtSubsidiary = Factory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
 
                 HelperLoadRecords.SubsidiaryLedgerAccountsDatagridView(dtSubsidiary, dgSubsidiary, fundId, year);
             }
-            catch (Exception ex) 
-            { 
-                Helper.MessageBoxError(ex.Message); 
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
-        }
-
-        private void cmbFund_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadSubsidiaryRecordsByFundAndGeneralLedger();
-        }
-
-        private void cmbYear_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadSubsidiaryRecordsByFundAndGeneralLedger();
-        }
-
-        private void LoadYear()
-        {
-            HelperLoadRecords.YearComboBox(cmbYear);
         }
 
         private void frmSubsidiary_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
             Helper.DatagridDefaultStyle(dgSubsidiary);
-            LoadFunds();
-            LoadYear();
             LoadSelectedGeneralLedger();
-
-            fundId = Convert.ToByte(cmbFund.SelectedValue);
-            year = (short)Convert.ToUInt16(cmbYear.Text);
             LoadSubsidiaryRecordsByFundAndGeneralLedger();
+            var dtFunds = Factory.FundsRepository().GetRecordByID(fundId);
+            txtFund.Text = dtFunds["fund_name"].ToString();
+            txtYear.Text = year.ToString();
 
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
@@ -96,7 +73,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            byte fundId = Convert.ToByte(cmbFund.SelectedValue);
             _ = new frmSubsidiaryAdd(this, fundId, generalLedgerId).ShowDialog();
         }
 
@@ -104,7 +80,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
         {
             if (dgSubsidiary.SelectedRows.Count == 1)
             {
-                byte fundId = Convert.ToByte(cmbFund.SelectedValue);
                 ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.SelectedCells[0].Value);
 
                 _ = new frmSubsidiaryEdit(this, fundId, generalLedgerId, subsidiaryLedgerId).ShowDialog();
@@ -113,8 +88,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            byte fundId = Convert.ToByte(cmbFund.SelectedValue);
-
             int selectedRowsCount = dgSubsidiary.SelectedRows.Count;
             try
             {
@@ -168,7 +141,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
                     return;
                 }
 
-                _ = new frmBeginningBalanceAdd(this, generalLedgerId, subsidiaryLedgerId).ShowDialog();
+                _ = new frmBeginningBalanceAdd(this, fundId, generalLedgerId, year, subsidiaryLedgerId).ShowDialog();
             }
         }
     }
