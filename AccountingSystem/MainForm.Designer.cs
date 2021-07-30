@@ -708,17 +708,18 @@ namespace AccountingSystem
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 95);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1180, 25);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1180, 31);
             this.flowLayoutPanel1.TabIndex = 8;
             // 
             // radBtnBudget
             // 
+            this.radBtnBudget.Appearance = System.Windows.Forms.Appearance.Button;
             this.radBtnBudget.AutoSize = true;
             this.radBtnBudget.Checked = true;
             this.radBtnBudget.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.radBtnBudget.Location = new System.Drawing.Point(8, 3);
             this.radBtnBudget.Name = "radBtnBudget";
-            this.radBtnBudget.Size = new System.Drawing.Size(63, 19);
+            this.radBtnBudget.Size = new System.Drawing.Size(55, 25);
             this.radBtnBudget.TabIndex = 0;
             this.radBtnBudget.TabStop = true;
             this.radBtnBudget.Text = "Budget";
@@ -727,11 +728,12 @@ namespace AccountingSystem
             // 
             // radBtnAccounting
             // 
+            this.radBtnAccounting.Appearance = System.Windows.Forms.Appearance.Button;
             this.radBtnAccounting.AutoSize = true;
             this.radBtnAccounting.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.radBtnAccounting.Location = new System.Drawing.Point(77, 3);
+            this.radBtnAccounting.Location = new System.Drawing.Point(69, 3);
             this.radBtnAccounting.Name = "radBtnAccounting";
-            this.radBtnAccounting.Size = new System.Drawing.Size(87, 19);
+            this.radBtnAccounting.Size = new System.Drawing.Size(79, 25);
             this.radBtnAccounting.TabIndex = 1;
             this.radBtnAccounting.Text = "Accounting";
             this.radBtnAccounting.UseVisualStyleBackColor = true;
@@ -745,13 +747,13 @@ namespace AccountingSystem
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabControl1.ItemSize = new System.Drawing.Size(0, 1);
-            this.tabControl1.Location = new System.Drawing.Point(0, 120);
+            this.tabControl1.Location = new System.Drawing.Point(0, 126);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(0, 0);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1180, 394);
+            this.tabControl1.Size = new System.Drawing.Size(1180, 388);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 9;
             // 
@@ -761,7 +763,7 @@ namespace AccountingSystem
             this.tabBudgetDashboard.Location = new System.Drawing.Point(4, 5);
             this.tabBudgetDashboard.Margin = new System.Windows.Forms.Padding(0);
             this.tabBudgetDashboard.Name = "tabBudgetDashboard";
-            this.tabBudgetDashboard.Size = new System.Drawing.Size(1172, 385);
+            this.tabBudgetDashboard.Size = new System.Drawing.Size(1172, 379);
             this.tabBudgetDashboard.TabIndex = 0;
             this.tabBudgetDashboard.UseVisualStyleBackColor = true;
             // 
@@ -773,7 +775,7 @@ namespace AccountingSystem
             this.ucBudgetDashboard1.Location = new System.Drawing.Point(0, 0);
             this.ucBudgetDashboard1.Margin = new System.Windows.Forms.Padding(0);
             this.ucBudgetDashboard1.Name = "ucBudgetDashboard1";
-            this.ucBudgetDashboard1.Size = new System.Drawing.Size(1172, 385);
+            this.ucBudgetDashboard1.Size = new System.Drawing.Size(1172, 379);
             this.ucBudgetDashboard1.TabIndex = 1;
             // 
             // tabAccountingDashboard
