@@ -67,8 +67,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
                 Helper.MessageBoxSuccess("Beginning balance has been saved.");
 
                 if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
-
-                uc.ResetForm();
+                Close();
             }
         }
     }
