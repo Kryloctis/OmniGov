@@ -13,10 +13,12 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
         private readonly byte fundId;
         private readonly short year;
         frmSubsidiary _frmSubsidiary;
+        frmChartOfAccounts _frmChartOfAccounts;
 
-        public frmBeginningBalanceEdit(frmSubsidiary frmSubsidiary, byte fundId, ushort generalLedgerId, short year, ushort subsidiaryLedgerId = 0)
+        public frmBeginningBalanceEdit(frmChartOfAccounts frmChartOfAccounts, frmSubsidiary frmSubsidiary, byte fundId, ushort generalLedgerId, short year, ushort subsidiaryLedgerId = 0)
         {
             InitializeComponent();
+            _frmChartOfAccounts = frmChartOfAccounts;
             _frmSubsidiary = frmSubsidiary;
             uc = ucBeginningBalances1;
             this.fundId = fundId;
@@ -106,8 +108,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             {
                 Helper.MessageBoxSuccess("Balance has been saved.");
 
-                if (_frmSubsidiary != null)
-                    _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
+                if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
+                if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers();
+                Close();
             }
         }
 
@@ -127,8 +130,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
                 if (Delete())
                 {
                     Helper.MessageBoxSuccess($"Balance has been deleted.");
-                    if (_frmSubsidiary != null)
-                        _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
+                    if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
+                    if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers();
                 }
                 Close();
             }

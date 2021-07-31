@@ -13,10 +13,13 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
         internal byte fundId;
         internal short year;
         private readonly ushort generalLedgerId;
+        private frmChartOfAccounts _frmChartOfAccounts;
 
-        public frmSubsidiary(byte fundId, ushort _generalLedgerId, short year)
+        public frmSubsidiary(frmChartOfAccounts frmChartOfAccounts, byte fundId, ushort _generalLedgerId, short year)
         {
             InitializeComponent();
+            _frmChartOfAccounts = frmChartOfAccounts;
+
             this.fundId = fundId;
             generalLedgerId = _generalLedgerId;
             this.year = year;
@@ -137,11 +140,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
                 if (subsidiaryLedgerBalanceExist)
                 {
-                    _ = new frmBeginningBalanceEdit(this, fundId, generalLedgerId, year, subsidiaryLedgerId).ShowDialog();
+                    _ = new frmBeginningBalanceEdit(_frmChartOfAccounts, this, fundId, generalLedgerId, year, subsidiaryLedgerId).ShowDialog();
                     return;
                 }
 
-                _ = new frmBeginningBalanceAdd(this, fundId, generalLedgerId, year, subsidiaryLedgerId).ShowDialog();
+                _ = new frmBeginningBalanceAdd(_frmChartOfAccounts, this, fundId, generalLedgerId, year, subsidiaryLedgerId).ShowDialog();
             }
         }
     }
