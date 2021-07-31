@@ -177,9 +177,9 @@ namespace AccountingSystem
                     var beginningBalanceRepository = Factory.BeginningBalancesRepository();
                     decimal debit = beginningBalanceRepository.GetSumBalances(fundsId, generalLedgerId, year, 1);
                     decimal credit = beginningBalanceRepository.GetSumBalances(fundsId, generalLedgerId, year, 0);
-                    
-                    item["Debit"] = debit > credit? debit - credit : 0;
-                    item["Credit"] = credit > debit? credit - debit : 0;
+
+                    item["Debit"] = debit > credit ? debit - credit : 0;
+                    item["Credit"] = credit > debit ? credit - debit : 0;
                 }
 
                 datagrid.DataSource = dataTable;

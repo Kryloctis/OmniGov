@@ -211,10 +211,10 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         private void frmChartOfAccounts_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgGeneralLedgerAccounts);
-            Helper.DatagridDefaultStyle(dgAccountGroup);
-            Helper.DatagridDefaultStyle(dgMajorAccountGroup);
-            Helper.DatagridDefaultStyle(dgSubMajorAccount);
+            Helper.DatagridFullRowSelectStyle(dgGeneralLedgerAccounts, true);
+            Helper.DatagridFullRowSelectStyle(dgAccountGroup);
+            Helper.DatagridFullRowSelectStyle(dgMajorAccountGroup);
+            Helper.DatagridFullRowSelectStyle(dgSubMajorAccount);
 
             LoadAccountGroupComboBox();
             LoadMajorAccountGroupComboBox();
@@ -298,7 +298,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
             {
                 ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.SelectedCells[0].Value);
-                _ = new frmSubsidiary(fundId, generalLedgerId, year).ShowDialog();
+                _ = new frmSubsidiary(this, fundId, generalLedgerId, year).ShowDialog();
             }
         }
 
@@ -325,11 +325,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
                 if (generalLedgerBalanceExist)
                 {
-                    _ = new frmBeginningBalanceEdit(null, fundId, generalLedgerId, year).ShowDialog();
+                    _ = new frmBeginningBalanceEdit(this, null, fundId, generalLedgerId, year).ShowDialog();
                     return;
                 }
 
-                _ = new frmBeginningBalanceAdd(null, fundId, generalLedgerId, year).ShowDialog();
+                _ = new frmBeginningBalanceAdd(this, null, fundId, generalLedgerId, year).ShowDialog();
             }
         }
 
