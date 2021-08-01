@@ -30,8 +30,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupFunds = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelFunds = new System.Windows.Forms.FlowLayoutPanel();
             this.groupJournals = new System.Windows.Forms.GroupBox();
@@ -76,9 +76,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.dtpCheckORPaid = new System.Windows.Forms.DateTimePicker();
             this.txtDVRCDNo = new System.Windows.Forms.TextBox();
             this.lblDVRCDNo = new System.Windows.Forms.Label();
-            this.txtCheckNo = new System.Windows.Forms.TextBox();
             this.lblCheckNo = new System.Windows.Forms.Label();
             this.epExplanation = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtCheckNo = new System.Windows.Forms.TextBox();
             this.groupFunds.SuspendLayout();
             this.groupJournals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAccounts)).BeginInit();
@@ -288,8 +288,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // Debit
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Debit.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Debit.DefaultCellStyle = dataGridViewCellStyle1;
             this.Debit.HeaderText = "Debit";
             this.Debit.Name = "Debit";
             this.Debit.ReadOnly = true;
@@ -297,8 +297,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // Credit
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Credit.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Credit.DefaultCellStyle = dataGridViewCellStyle2;
             this.Credit.HeaderText = "Credit";
             this.Credit.Name = "Credit";
             this.Credit.ReadOnly = true;
@@ -484,14 +484,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.lblDVRCDNo.TabIndex = 57;
             this.lblDVRCDNo.Text = "DV/RCD No.";
             // 
-            // txtCheckNo
-            // 
-            this.txtCheckNo.Location = new System.Drawing.Point(542, 226);
-            this.txtCheckNo.MaxLength = 30;
-            this.txtCheckNo.Name = "txtCheckNo";
-            this.txtCheckNo.Size = new System.Drawing.Size(315, 23);
-            this.txtCheckNo.TabIndex = 6;
-            // 
             // lblCheckNo
             // 
             this.lblCheckNo.AutoSize = true;
@@ -504,6 +496,13 @@ namespace AccountingSystem.Views.Transactions.JEV
             // epExplanation
             // 
             this.epExplanation.ContainerControl = this;
+            // 
+            // txtCheckNo
+            // 
+            this.txtCheckNo.Location = new System.Drawing.Point(542, 226);
+            this.txtCheckNo.Name = "txtCheckNo";
+            this.txtCheckNo.Size = new System.Drawing.Size(315, 23);
+            this.txtCheckNo.TabIndex = 62;
             // 
             // ucJEV
             // 
@@ -600,9 +599,9 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal System.Windows.Forms.DateTimePicker dtpCheckORPaid;
         internal System.Windows.Forms.TextBox txtDVRCDNo;
         private System.Windows.Forms.Label lblDVRCDNo;
-        internal System.Windows.Forms.TextBox txtCheckNo;
         private System.Windows.Forms.Label lblCheckNo;
         internal System.Windows.Forms.TextBox txtRefNo;
         private System.Windows.Forms.ErrorProvider epExplanation;
+        internal System.Windows.Forms.TextBox txtCheckNo;
     }
 }

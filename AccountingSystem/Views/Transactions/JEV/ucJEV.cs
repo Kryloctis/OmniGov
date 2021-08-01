@@ -30,7 +30,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             errorArray[3] = dgAccounts.Rows.Count == 0 ? "Please add a FPP, account & amount in the table provided." : string.Empty;
             errorArray[4] = epPayee.GetError(txtPayee);
             errorArray[5] = epExplanation.GetError(txtExplanation);
-            
+
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
@@ -167,9 +167,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             var radFund = sender as RadioButton;
             ShowCheckIcon(radFund);
-
             btnAddAccount.Enabled = true;
-            ResetForm();
         }
 
         private void radioJournals_Click(object sender, EventArgs e)
@@ -196,10 +194,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             lblDVRCDNo.Visible = true;
             txtDVRCDNo.Enabled = true;
 
+
             lblCollectingDisbursingOfficer.Visible = false;
             cmbCollectingDisbursingOfficer.Enabled = false;
+            cmbCollectingDisbursingOfficer.DataSource = null;
             cmbCollectingDisbursingOfficer.Text = string.Empty;
-            
         }
 
         private void SetProcurementReceivedJournalFields()
@@ -209,15 +208,19 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             lblCheckNo.Visible = false;
             txtCheckNo.Enabled = false;
+            txtCheckNo.Text = string.Empty;
 
             lblRciOrADANo.Visible = false;
             txtRCIORADA.Enabled = false;
+            txtRCIORADA.Text = string.Empty;
 
             lblDVRCDNo.Visible = false;
             txtDVRCDNo.Enabled = false;
+            txtDVRCDNo.Text = string.Empty;
 
             lblCollectingDisbursingOfficer.Visible = false;
             cmbCollectingDisbursingOfficer.Enabled = false;
+            cmbCollectingDisbursingOfficer.DataSource = null;
             cmbCollectingDisbursingOfficer.Text = string.Empty;
         }
 
@@ -229,9 +232,11 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             lblCheckNo.Visible = false;
             txtCheckNo.Enabled = false;
+            txtCheckNo.Text = string.Empty;
 
             lblRciOrADANo.Visible = false;
             txtRCIORADA.Enabled = false;
+            txtRCIORADA.Text = string.Empty;
 
             lblDVRCDNo.Text = "DV No.";
             lblDVRCDNo.Visible = true;
@@ -250,6 +255,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             lblCheckNo.Visible = false;
             txtCheckNo.Enabled = false;
+            txtCheckNo.Text = string.Empty;
 
             lblRciOrADANo.Text = "OR No.";
             lblRciOrADANo.Visible = true;
@@ -271,6 +277,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             lblCheckNo.Visible = false;
             txtCheckNo.Enabled = false;
+            txtCheckNo.Text = string.Empty;
 
             lblRciOrADANo.Text = "ADA No.";
             lblRciOrADANo.Visible = true;
@@ -282,6 +289,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             lblCollectingDisbursingOfficer.Visible = false;
             cmbCollectingDisbursingOfficer.Enabled = false;
+            cmbCollectingDisbursingOfficer.DataSource = null;
             cmbCollectingDisbursingOfficer.Text = string.Empty;
         }
 
@@ -305,6 +313,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             lblCollectingDisbursingOfficer.Visible = false;
             cmbCollectingDisbursingOfficer.Enabled = false;
+            cmbCollectingDisbursingOfficer.DataSource = null;
             cmbCollectingDisbursingOfficer.Text = string.Empty;
         }
 
@@ -469,13 +478,11 @@ namespace AccountingSystem.Views.Transactions.JEV
         }
 
         internal void ClearErrors()
-        { 
+        {
             Helper.ClearErrorTextBox(epPayee, txtPayee);
             Helper.ClearMaskedTextboxError(epJEV, txtJEVNo);
             Helper.ClearErrorTextBox(epExplanation, txtExplanation);
         }
-
-
 
     }
 }
