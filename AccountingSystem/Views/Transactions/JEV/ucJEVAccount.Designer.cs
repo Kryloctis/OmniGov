@@ -71,7 +71,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.cmbFPP.FormattingEnabled = true;
             this.cmbFPP.Location = new System.Drawing.Point(66, 0);
             this.cmbFPP.Name = "cmbFPP";
-            this.cmbFPP.Size = new System.Drawing.Size(370, 23);
+            this.cmbFPP.Size = new System.Drawing.Size(491, 23);
             this.cmbFPP.TabIndex = 0;
             this.cmbFPP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxFPP_KeyDown);
             this.cmbFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbFPP_Validating);
@@ -88,13 +88,13 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // cmbAccount
             // 
+            this.cmbAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbAccount.FormattingEnabled = true;
             this.cmbAccount.Location = new System.Drawing.Point(66, 29);
             this.cmbAccount.Name = "cmbAccount";
-            this.cmbAccount.Size = new System.Drawing.Size(370, 23);
+            this.cmbAccount.Size = new System.Drawing.Size(491, 23);
             this.cmbAccount.TabIndex = 1;
-            this.cmbAccount.SelectionChangeCommitted += new System.EventHandler(this.cmbAccount_SelectionChangeCommitted);
-            this.cmbAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbAccount_KeyDown);
             this.cmbAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbAccount_Validating);
             this.cmbAccount.Validated += new System.EventHandler(this.cmbAccount_Validated);
             // 
@@ -133,7 +133,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.pnlCollectionsDeposits.Controls.Add(this.radioDeposits);
             this.pnlCollectionsDeposits.Controls.Add(this.radioCollections);
-            this.pnlCollectionsDeposits.Location = new System.Drawing.Point(238, 87);
+            this.pnlCollectionsDeposits.Location = new System.Drawing.Point(359, 87);
             this.pnlCollectionsDeposits.Name = "pnlCollectionsDeposits";
             this.pnlCollectionsDeposits.Size = new System.Drawing.Size(198, 27);
             this.pnlCollectionsDeposits.TabIndex = 6;
@@ -170,7 +170,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             0,
             0});
             this.nudAmount.Name = "nudAmount";
-            this.nudAmount.Size = new System.Drawing.Size(370, 23);
+            this.nudAmount.Size = new System.Drawing.Size(491, 23);
             this.nudAmount.TabIndex = 5;
             this.nudAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudAmount.ThousandsSeparator = true;
@@ -188,11 +188,15 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // cmbSubsidiary
             // 
+            this.cmbSubsidiary.AutoCompleteCustomSource.AddRange(new string[] {
+            "[1] wait",
+            "[2] go"});
+            this.cmbSubsidiary.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.cmbSubsidiary.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSubsidiary.FormattingEnabled = true;
             this.cmbSubsidiary.Location = new System.Drawing.Point(66, 58);
             this.cmbSubsidiary.Name = "cmbSubsidiary";
-            this.cmbSubsidiary.Size = new System.Drawing.Size(370, 23);
+            this.cmbSubsidiary.Size = new System.Drawing.Size(491, 23);
             this.cmbSubsidiary.TabIndex = 2;
             // 
             // label4
@@ -208,7 +212,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.btnSubsidiaryLedger.Enabled = false;
             this.btnSubsidiaryLedger.Image = ((System.Drawing.Image)(resources.GetObject("btnSubsidiaryLedger.Image")));
-            this.btnSubsidiaryLedger.Location = new System.Drawing.Point(442, 59);
+            this.btnSubsidiaryLedger.Location = new System.Drawing.Point(563, 58);
             this.btnSubsidiaryLedger.Name = "btnSubsidiaryLedger";
             this.btnSubsidiaryLedger.Size = new System.Drawing.Size(22, 22);
             this.btnSubsidiaryLedger.TabIndex = 8;
@@ -245,7 +249,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.Controls.Add(this.cmbFPP);
             this.Controls.Add(this.label1);
             this.Name = "ucJEVAccount";
-            this.Size = new System.Drawing.Size(467, 146);
+            this.Size = new System.Drawing.Size(588, 146);
             this.Load += new System.EventHandler(this.ucJEVAccount_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

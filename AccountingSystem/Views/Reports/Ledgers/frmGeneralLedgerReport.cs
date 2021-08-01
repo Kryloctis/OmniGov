@@ -19,8 +19,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
             panel1.Controls.Add(reportViewer);
         }
 
-
-
         //ACCOUNT COMBOBOX
         private DataTable DatatableAccounts()
         {
