@@ -23,13 +23,14 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[6];
+            var errorArray = new string[7];
             errorArray[0] = fundId == 0 ? "Please select a fund source" : string.Empty;
             errorArray[1] = journalId == 0 ? "Please select the type of journal" : string.Empty;
             errorArray[2] = epJEV.GetError(txtJEVNo);
             errorArray[3] = dgAccounts.Rows.Count == 0 ? "Please add a FPP, account & amount in the table provided." : string.Empty;
             errorArray[4] = epPayee.GetError(txtPayee);
             errorArray[5] = epExplanation.GetError(txtExplanation);
+            errorArray[6] = epCollectingDisbursing.GetError(cmbCollectingDisbursingOfficer);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -482,7 +483,22 @@ namespace AccountingSystem.Views.Transactions.JEV
             Helper.ClearErrorTextBox(epPayee, txtPayee);
             Helper.ClearMaskedTextboxError(epJEV, txtJEVNo);
             Helper.ClearErrorTextBox(epExplanation, txtExplanation);
+            Helper.ClearErrorComboBox(epCollectingDisbursing, cmbCollectingDisbursingOfficer);
         }
 
+        private void cmbCollectingDisbursingOfficer_Validating(object sender, CancelEventArgs e)
+        {
+            if (journalName == "Cash Disbursements Journal" || journalName == "Cash Receipts Journal")
+            {
+                string message = journalName == "Cash Disbursements Journal" ? "Disbursing Officer" : "Collecting Officer";
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epCollectingDisbursing, cmbCollectingDisbursingOfficer, message);
+            }
+
+        }
+
+        private void cmbCollectingDisbursingOfficer_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epCollectingDisbursing, cmbCollectingDisbursingOfficer);
+        }
     }
 }

@@ -30,8 +30,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupFunds = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelFunds = new System.Windows.Forms.FlowLayoutPanel();
             this.groupJournals = new System.Windows.Forms.GroupBox();
@@ -79,12 +79,14 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.lblCheckNo = new System.Windows.Forms.Label();
             this.epExplanation = new System.Windows.Forms.ErrorProvider(this.components);
             this.txtCheckNo = new System.Windows.Forms.TextBox();
+            this.epCollectingDisbursing = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupFunds.SuspendLayout();
             this.groupJournals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAccounts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epJEV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epPayee)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epExplanation)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCollectingDisbursing)).BeginInit();
             this.SuspendLayout();
             // 
             // groupFunds
@@ -288,8 +290,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // Debit
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Debit.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Debit.DefaultCellStyle = dataGridViewCellStyle3;
             this.Debit.HeaderText = "Debit";
             this.Debit.Name = "Debit";
             this.Debit.ReadOnly = true;
@@ -297,8 +299,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // Credit
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Credit.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Credit.DefaultCellStyle = dataGridViewCellStyle4;
             this.Credit.HeaderText = "Credit";
             this.Credit.Name = "Credit";
             this.Credit.ReadOnly = true;
@@ -425,6 +427,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.cmbCollectingDisbursingOfficer.Name = "cmbCollectingDisbursingOfficer";
             this.cmbCollectingDisbursingOfficer.Size = new System.Drawing.Size(315, 23);
             this.cmbCollectingDisbursingOfficer.TabIndex = 9;
+            this.cmbCollectingDisbursingOfficer.Validating += new System.ComponentModel.CancelEventHandler(this.cmbCollectingDisbursingOfficer_Validating);
+            this.cmbCollectingDisbursingOfficer.Validated += new System.EventHandler(this.cmbCollectingDisbursingOfficer_Validated);
             // 
             // lblPayee
             // 
@@ -504,6 +508,10 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.txtCheckNo.Size = new System.Drawing.Size(315, 23);
             this.txtCheckNo.TabIndex = 62;
             // 
+            // epCollectingDisbursing
+            // 
+            this.epCollectingDisbursing.ContainerControl = this;
+            // 
             // ucJEV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -550,6 +558,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             ((System.ComponentModel.ISupportInitialize)(this.epJEV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epPayee)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epExplanation)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCollectingDisbursing)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -603,5 +612,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal System.Windows.Forms.TextBox txtRefNo;
         private System.Windows.Forms.ErrorProvider epExplanation;
         internal System.Windows.Forms.TextBox txtCheckNo;
+        internal System.Windows.Forms.ErrorProvider epCollectingDisbursing;
     }
 }
