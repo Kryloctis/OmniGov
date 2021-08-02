@@ -80,36 +80,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             }
         }
 
-        private static void ValidateDebitCreditRow(byte fundId, ushort generalLedgerId, short year, DataRow rows, DataRow items, DataTable dtPreTrialBalance)
-        {
-            var dtGeneralLedgerFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundAndGeneralLedger(fundId, generalLedgerId, year);
-
-            foreach (DataRow item in dtGeneralLedgerFromDB.Rows)
-            {
-
-                DataRow row = dtPreTrialBalance.NewRow();
-                row["debit"] = item["amount"];
-
-                dtPreTrialBalance.Rows.Add(row);
-            }
-
-            //decimal amount = Convert.ToDecimal(item["amount"]);
-            //if (Convert.ToBoolean(item["is_debit"]))
-            //{
-            //    row["debit_amount"] = item["amount"];
-            //    row["credit_amount"] = 0;
-            //    balance += amount;
-            //}
-            //else
-            //{
-            //    row["debit_amount"] = 0;
-            //    row["credit_amount"] = item["amount"];
-            //    balance -= amount;
-            //}
-
-            //row["balance"] = balance;
-        }
-
         private DataTable DataTablePostTrialBalance()
         {
             fundId = Convert.ToByte(cmbFund.SelectedValue);
@@ -130,36 +100,33 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                 row["account_title"] = item["ledger_name"];
                 row["account_code"] = item["account_code"];
 
-                var beginning_balance = Convert.ToDecimal(item["beginning_bal"]);
+                var debit_beginning_bal = Convert.ToDecimal(item["debit_beginning_bal"]);
+                var credit_beginning_bal = Convert.ToDecimal(item["credit_beginning_bal"]);
 
+                var beginning_balance = debit_beginning_bal - credit_beginning_bal;
                 var jevAccount = Factory.JEVAccountsRepository().GetJEVAmount(fundId, generalLedgerId, year);
-
-                var assignToDebit = 0.0m;
-                var assignToCredit = 0.0m;
-
 
                 if (jevAccount.Rows.Count != 0)
                 {
-                    foreach (DataRow amountItem in jevAccount.Rows)
-                    {
-                        if (Convert.ToBoolean(amountItem["is_debit"]))
-                        {
-                            beginning_balance += Convert.ToDecimal(amountItem["amount"]);
-                            assignToDebit += Convert.ToDecimal(amountItem["amount"]);
-                        }
-                        else
-                        {
-                            beginning_balance = Math.Abs(beginning_balance);
-                            beginning_balance -= Convert.ToDecimal(amountItem["amount"]);
-                            assignToCredit += Convert.ToDecimal(amountItem["amount"]);
-                        }
-                    }
+                    var adjustedDebitbalance = 0.0m;
+                    var adjustedCreditbalance = 0.0m;
 
-                    if (assignToDebit > assignToCredit)
-                        row["debit"] = Math.Abs(beginning_balance);
+                    foreach (DataRow items in jevAccount.Rows)
+                    {
+                        if (Convert.ToBoolean(items["is_debit"]))
+                            adjustedDebitbalance = debit_beginning_bal + Convert.ToDecimal(items["amount"]);
+                        else
+                            adjustedCreditbalance  = credit_beginning_bal + Convert.ToDecimal(items["amount"]);
+                    }
+                    var endingBalance = Math.Max(adjustedDebitbalance, adjustedCreditbalance) - Math.Min(adjustedDebitbalance, adjustedCreditbalance); 
+
+                    //ENDING BALANCE.
+                    if (adjustedDebitbalance > adjustedCreditbalance)
+                        row["debit"] = endingBalance;
                     else
-                        row["credit"] = Math.Abs(beginning_balance);
+                        row["credit"] = endingBalance;
                 }
+
                 else //IF NO JEV RECORDS
                 {
                     if (beginning_balance > 0)
@@ -178,27 +145,22 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         private void GovernmentEquityRow(byte fundId, short year, ushort generalLedgerId, DataTable dtGovernmentFromDB, DataTable dtGovernmentEquity)
         {
-            var amount = 0.0m;
-
-            foreach (DataRow item in dtGovernmentFromDB.Rows)
-            {
-                var account_code = item["account_group_code"].ToString();
-                if (account_code == "3" || account_code == "4" || account_code == "5")
-                {
-                    amount += 0;
-                }
-            }
             GetSumOfPermanentAccounts();
             var governmentEquityBeginningBalance = Factory.BeginningBalancesRepository().GetGovernmentEquityBalance(fundId, 331, year);
 
             DataRow row = dtGovernmentEquity.NewRow();
             row["account_title"] = "Government Equity";
             row["account_code"] = "3-01-01-010";
-            row["debit"] = governmentEquityBeginningBalance + GetSumOfTemporaryAccounts();
 
+            var govEquityBeginningBalance = GetSumOfTemporaryAccounts() - governmentEquityBeginningBalance;
+           
+            //For column assignment, If value is less than zero, then credit else debit.
+            if (govEquityBeginningBalance > 0)
+                row["debit"] = Math.Abs(govEquityBeginningBalance);
+            else
+                row["credit"] = Math.Abs(govEquityBeginningBalance);
 
             dtGovernmentEquity.Rows.Add(row);
-
         }
 
         private decimal GetSumOfPermanentAccounts()
@@ -236,27 +198,10 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                 return _ =  total_debit - total_credit;
             else
                 return _ = total_credit - total_debit;
+
         }
 
         
-
-
-        private decimal GetTotalTransaction(byte fundId, ushort generalLedgerId, short year, decimal accountBeginningBalance)
-        {
-            var dtGeneralLedger = Factory.JEVAccountsRepository().GetViewRecordsByFundAndGeneralLedger(fundId, generalLedgerId, year);
-
-
-
-            foreach (DataRow item in dtGeneralLedger.Rows)
-            {
-                if (Convert.ToBoolean(item["is_debit"]))
-                    accountBeginningBalance += Convert.ToDecimal(item["amount"]);
-                else
-                    accountBeginningBalance -= Convert.ToDecimal(item["amount"]);
-            }
-
-            return accountBeginningBalance;
-        }
 
     }
 }
