@@ -57,7 +57,7 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetApprovedJEV(string searchText);
 
-        DataTable FilterRecords(string[] searchParameters);
+        DataTable FilterRecords(byte isApproved, string searchTxt, short month, short year);
 
         //SFPs
         decimal GetSumByMajorAccountGroup(int fundId, int majorAccountGroupId, byte isDebit, DateTime dateEntry);

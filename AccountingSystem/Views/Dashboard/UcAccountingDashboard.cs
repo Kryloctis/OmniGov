@@ -45,7 +45,7 @@ namespace AccountingSystem.Views.Dashboard
             frmJEV.Show();
             var frmJEVSearch = new frmJEVSearch(frmJEV);
 
-            frmJEVSearch.rbApproved.Checked = true;
+            frmJEVSearch.cmbxJevStatus.SelectedIndex = 0;
             frmJEVSearch.LoadJEVList();
             frmJEVSearch.ShowDialog();
         }
@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Dashboard
             frmJEV.Show();
             var frmJEVSearch = new frmJEVSearch(frmJEV);
 
-            frmJEVSearch.rbApproved.Checked = true;
+            frmJEVSearch.cmbxJevStatus.SelectedIndex = 1;
             frmJEVSearch.LoadJEVList();
             frmJEVSearch.ShowDialog();
         }
@@ -66,8 +66,7 @@ namespace AccountingSystem.Views.Dashboard
             var frmJEV = new frmJEV();
             frmJEV.Show();
             var frmJEVSearch = new frmJEVSearch(frmJEV);
-
-            frmJEVSearch.rbPending.Checked = true;
+            frmJEVSearch.cmbxJevStatus.SelectedIndex = 0;
             frmJEVSearch.LoadJEVList();
             frmJEVSearch.ShowDialog();
         }

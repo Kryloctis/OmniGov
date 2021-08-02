@@ -33,16 +33,15 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.dgJEV = new System.Windows.Forms.DataGridView();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.rbApproved = new System.Windows.Forms.RadioButton();
-            this.rbPending = new System.Windows.Forms.RadioButton();
-            this.gbSearchFilter = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.cmbxJevStatus = new System.Windows.Forms.ComboBox();
             this.nudYear = new System.Windows.Forms.NumericUpDown();
             this.cbMonth = new System.Windows.Forms.ComboBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgJEV)).BeginInit();
-            this.gbSearchFilter.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,6 +72,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // btnOK
             // 
             this.btnOK.Image = global::AccountingSystem.Properties.Resources.ok14px;
+            this.btnOK.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnOK.Location = new System.Drawing.Point(757, 2);
             this.btnOK.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnOK.Name = "btnOK";
@@ -87,77 +87,45 @@ namespace AccountingSystem.Views.Transactions.JEV
             // dgJEV
             // 
             this.dgJEV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgJEV.Location = new System.Drawing.Point(12, 59);
+            this.dgJEV.Location = new System.Drawing.Point(3, 32);
             this.dgJEV.Name = "dgJEV";
             this.dgJEV.RowTemplate.Height = 25;
-            this.dgJEV.Size = new System.Drawing.Size(906, 319);
+            this.dgJEV.Size = new System.Drawing.Size(924, 346);
             this.dgJEV.TabIndex = 6;
             this.dgJEV.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgJEV_RowHeaderMouseDoubleClick);
             this.dgJEV.SelectionChanged += new System.EventHandler(this.dgJEV_SelectionChanged);
             // 
-            // txtSearch
+            // panel1
             // 
-            this.txtSearch.Location = new System.Drawing.Point(461, 21);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.PlaceholderText = "Search here";
-            this.txtSearch.Size = new System.Drawing.Size(358, 23);
-            this.txtSearch.TabIndex = 7;
+            this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.cmbxJevStatus);
+            this.panel1.Controls.Add(this.nudYear);
+            this.panel1.Controls.Add(this.cbMonth);
+            this.panel1.Controls.Add(this.btnSearch);
+            this.panel1.Controls.Add(this.txtSearch);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(930, 29);
+            this.panel1.TabIndex = 7;
             // 
-            // btnSearch
+            // cmbxJevStatus
             // 
-            this.btnSearch.Location = new System.Drawing.Point(825, 21);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 8;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // rbApproved
-            // 
-            this.rbApproved.AutoSize = true;
-            this.rbApproved.Checked = true;
-            this.rbApproved.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.rbApproved.Location = new System.Drawing.Point(13, 21);
-            this.rbApproved.Name = "rbApproved";
-            this.rbApproved.Size = new System.Drawing.Size(77, 19);
-            this.rbApproved.TabIndex = 17;
-            this.rbApproved.TabStop = true;
-            this.rbApproved.Tag = "1";
-            this.rbApproved.Text = "Approved";
-            this.rbApproved.UseVisualStyleBackColor = true;
-            // 
-            // rbPending
-            // 
-            this.rbPending.AutoSize = true;
-            this.rbPending.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.rbPending.Location = new System.Drawing.Point(111, 21);
-            this.rbPending.Name = "rbPending";
-            this.rbPending.Size = new System.Drawing.Size(69, 19);
-            this.rbPending.TabIndex = 16;
-            this.rbPending.Tag = "0";
-            this.rbPending.Text = "Pending";
-            this.rbPending.UseVisualStyleBackColor = true;
-            // 
-            // gbSearchFilter
-            // 
-            this.gbSearchFilter.Controls.Add(this.nudYear);
-            this.gbSearchFilter.Controls.Add(this.cbMonth);
-            this.gbSearchFilter.Controls.Add(this.btnSearch);
-            this.gbSearchFilter.Controls.Add(this.txtSearch);
-            this.gbSearchFilter.Controls.Add(this.rbPending);
-            this.gbSearchFilter.Controls.Add(this.rbApproved);
-            this.gbSearchFilter.Location = new System.Drawing.Point(12, 4);
-            this.gbSearchFilter.Name = "gbSearchFilter";
-            this.gbSearchFilter.Size = new System.Drawing.Size(906, 49);
-            this.gbSearchFilter.TabIndex = 20;
-            this.gbSearchFilter.TabStop = false;
-            this.gbSearchFilter.Text = "JEV Search Filter";
+            this.cmbxJevStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxJevStatus.FormattingEnabled = true;
+            this.cmbxJevStatus.Items.AddRange(new object[] {
+            "Pending",
+            "Approved",
+            "Dissaproved"});
+            this.cmbxJevStatus.Location = new System.Drawing.Point(3, 3);
+            this.cmbxJevStatus.Name = "cmbxJevStatus";
+            this.cmbxJevStatus.Size = new System.Drawing.Size(152, 23);
+            this.cmbxJevStatus.TabIndex = 28;
             // 
             // nudYear
             // 
             this.nudYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudYear.Location = new System.Drawing.Point(346, 21);
+            this.nudYear.Location = new System.Drawing.Point(321, 3);
             this.nudYear.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -171,7 +139,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.nudYear.Name = "nudYear";
             this.nudYear.ReadOnly = true;
             this.nudYear.Size = new System.Drawing.Size(109, 23);
-            this.nudYear.TabIndex = 21;
+            this.nudYear.TabIndex = 27;
             this.nudYear.Value = new decimal(new int[] {
             2021,
             0,
@@ -182,19 +150,35 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.cbMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMonth.FormattingEnabled = true;
-            this.cbMonth.Location = new System.Drawing.Point(186, 21);
+            this.cbMonth.Location = new System.Drawing.Point(161, 3);
             this.cbMonth.Name = "cbMonth";
             this.cbMonth.Size = new System.Drawing.Size(154, 23);
-            this.cbMonth.TabIndex = 20;
+            this.cbMonth.TabIndex = 26;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(852, 3);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 23;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(488, 3);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(358, 23);
+            this.txtSearch.TabIndex = 22;
             // 
             // frmJEVSearch
             // 
-            this.AcceptButton = this.btnSearch;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(930, 410);
-            this.Controls.Add(this.gbSearchFilter);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.dgJEV);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -207,10 +191,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.Load += new System.EventHandler(this.frmJEVSearch_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgJEV)).EndInit();
-            this.gbSearchFilter.ResumeLayout(false);
-            this.gbSearchFilter.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -219,12 +204,11 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.DataGridView dgJEV;
-        private System.Windows.Forms.TextBox txtSearch;
-        private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.GroupBox gbSearchFilter;
-        private System.Windows.Forms.ComboBox cbMonth;
+        private System.Windows.Forms.Panel panel1;
         internal System.Windows.Forms.NumericUpDown nudYear;
-        internal System.Windows.Forms.RadioButton rbPending;
-        public System.Windows.Forms.RadioButton rbApproved;
+        private System.Windows.Forms.ComboBox cbMonth;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSearch;
+        internal System.Windows.Forms.ComboBox cmbxJevStatus;
     }
 }

@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.ucjevAccount1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucjevAccount1.Location = new System.Drawing.Point(12, 12);
             this.ucjevAccount1.Name = "ucjevAccount1";
-            this.ucjevAccount1.Size = new System.Drawing.Size(588, 146);
+            this.ucjevAccount1.Size = new System.Drawing.Size(588, 175);
             this.ucjevAccount1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -51,7 +51,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnOK);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 166);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 192);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(607, 193);
+            this.ClientSize = new System.Drawing.Size(607, 219);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ucjevAccount1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

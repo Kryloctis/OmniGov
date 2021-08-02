@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Reports.JEV;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using ACC.Domain.Models;
-using AccountingSystem.Views.Reports.JEV;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
@@ -120,6 +120,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 int fppId = Convert.ToInt32(item.Cells["FPPId"].Value);
                 ushort generalLedgerId = Convert.ToUInt16(item.Cells["GeneralLedgerId"].Value);
                 ushort? subsidiaryLedgerId = ValidateNullSubsidiary(item.Cells["SubsidiaryLedgerId"].Value);
+                string obligationNo = item.Cells["obligationNo"].Value.ToString();
                 bool isDebit = Convert.ToBoolean(item.Cells["IsDebit"].Value);
                 bool? isDeposit = (bool?)item.Cells["IsDeposit"].Value;
 
@@ -134,6 +135,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     FPPId = fppId,
                     GeneralLedgerId = generalLedgerId,
                     SubsidiaryLedgerId = subsidiaryLedgerId,
+                    ObligationNo = obligationNo,
                     IsDeposit = isDeposit,
                     IsDebit = isDebit,
                     Amount = amount
@@ -145,6 +147,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             return jevAccountsModelList;
         }
 
+        //INSERT
         private bool InsertJournal(byte userId, ucJEV uc)
         {
             JEVModel jevModel = ParseJEVModelData(userId, uc);
@@ -223,6 +226,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             return Factory.JEVRepository().InsertWithGeneralJournal(jevModel, JevAcountsModelList(), generalJournalModel);
         }
 
+        //UPDATE
         private bool UpdateJournal(byte userId, ucJEV uc)
         {
             JEVModel jevModel = ParseJEVModelData(userId, uc, true);
@@ -362,6 +366,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             return false;
         }
 
+
         private void BtnSave_Click(object sender, EventArgs e)
         {
             var uc = ucjev1;
@@ -380,7 +385,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 Helper.MessageBoxSuccess("JEV has been saved.");
 
                 if (uc.journalId != uc.oldJournalId) //CHECK IF THE PREVIOUS JOURNAL ID IS NOT EQUAL TO NEW SELECTED JOURNAL ID
-                { 
+                {
                     switch (uc.oldJournalId)
                     {
                         case 1:
@@ -393,7 +398,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                             return;
                         case 3:
                             //Factory.GeneralJournalRepository().DeleteGeneralJournalByJevID(uc.jevId);
-                            return; 
+                            return;
                         case 4:
                             Factory.CashDisbursementsJournalRepository().DeleteCashDisbursementJournalByJevID(uc.jevId);
                             TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
@@ -401,7 +406,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         case 5:
                             Factory.CheckDisbursementsJournalRepository().DeleteCheckDisbursementJournalByJevID(uc.jevId);
                             TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
-                            return; 
+                            return;
                         case 6:
                             //Factory.GeneralJournalRepository().DeleteGeneralJournalByJevID(uc.jevId);
                             return;
@@ -487,7 +492,9 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void BtnSearch_Click(object sender, EventArgs e)
         {
-            _ = new frmJEVSearch(this).ShowDialog();
+            var frmJevSearch = new frmJEVSearch(this);
+            frmJevSearch.cmbxJevStatus.SelectedIndex = 0;
+            frmJevSearch.ShowDialog();
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
@@ -513,7 +520,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            var uc =  ucjev1;
+            var uc = ucjev1;
             _ = new frmJEVReport(uc.jevId, uc.jevNo, uc.journalId).ShowDialog();
         }
 
@@ -532,7 +539,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     }
                     return;
                 }
-                
+
             }
 
         }

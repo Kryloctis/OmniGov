@@ -49,18 +49,22 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.epFPP = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAccount = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtObligationNo = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.epObligationNo = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             this.pnlCollectionsDeposits.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAccount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epObligationNo)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(-1, 3);
+            this.label1.Location = new System.Drawing.Point(-1, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 15);
             this.label1.TabIndex = 0;
@@ -69,10 +73,10 @@ namespace AccountingSystem.Views.Transactions.JEV
             // cmbFPP
             // 
             this.cmbFPP.FormattingEnabled = true;
-            this.cmbFPP.Location = new System.Drawing.Point(66, 0);
+            this.cmbFPP.Location = new System.Drawing.Point(91, 29);
             this.cmbFPP.Name = "cmbFPP";
-            this.cmbFPP.Size = new System.Drawing.Size(491, 23);
-            this.cmbFPP.TabIndex = 0;
+            this.cmbFPP.Size = new System.Drawing.Size(466, 23);
+            this.cmbFPP.TabIndex = 1;
             this.cmbFPP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxFPP_KeyDown);
             this.cmbFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbFPP_Validating);
             this.cmbFPP.Validated += new System.EventHandler(this.cmbFPP_Validated);
@@ -80,7 +84,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(-1, 32);
+            this.label2.Location = new System.Drawing.Point(-1, 61);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 15);
             this.label2.TabIndex = 2;
@@ -91,10 +95,10 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.cmbAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbAccount.FormattingEnabled = true;
-            this.cmbAccount.Location = new System.Drawing.Point(66, 29);
+            this.cmbAccount.Location = new System.Drawing.Point(91, 58);
             this.cmbAccount.Name = "cmbAccount";
-            this.cmbAccount.Size = new System.Drawing.Size(491, 23);
-            this.cmbAccount.TabIndex = 1;
+            this.cmbAccount.Size = new System.Drawing.Size(466, 23);
+            this.cmbAccount.TabIndex = 2;
             this.cmbAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbAccount_Validating);
             this.cmbAccount.Validated += new System.EventHandler(this.cmbAccount_Validated);
             // 
@@ -105,7 +109,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.radioDebit.Location = new System.Drawing.Point(3, 3);
             this.radioDebit.Name = "radioDebit";
             this.radioDebit.Size = new System.Drawing.Size(53, 19);
-            this.radioDebit.TabIndex = 3;
+            this.radioDebit.TabIndex = 4;
             this.radioDebit.TabStop = true;
             this.radioDebit.Text = "Debit";
             this.radioDebit.UseVisualStyleBackColor = true;
@@ -114,7 +118,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.panel1.Controls.Add(this.radioCredit);
             this.panel1.Controls.Add(this.radioDebit);
-            this.panel1.Location = new System.Drawing.Point(66, 87);
+            this.panel1.Location = new System.Drawing.Point(91, 116);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(143, 27);
             this.panel1.TabIndex = 5;
@@ -125,7 +129,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.radioCredit.Location = new System.Drawing.Point(62, 3);
             this.radioCredit.Name = "radioCredit";
             this.radioCredit.Size = new System.Drawing.Size(57, 19);
-            this.radioCredit.TabIndex = 4;
+            this.radioCredit.TabIndex = 5;
             this.radioCredit.Text = "Credit";
             this.radioCredit.UseVisualStyleBackColor = true;
             // 
@@ -133,7 +137,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.pnlCollectionsDeposits.Controls.Add(this.radioDeposits);
             this.pnlCollectionsDeposits.Controls.Add(this.radioCollections);
-            this.pnlCollectionsDeposits.Location = new System.Drawing.Point(359, 87);
+            this.pnlCollectionsDeposits.Location = new System.Drawing.Point(359, 116);
             this.pnlCollectionsDeposits.Name = "pnlCollectionsDeposits";
             this.pnlCollectionsDeposits.Size = new System.Drawing.Size(198, 27);
             this.pnlCollectionsDeposits.TabIndex = 6;
@@ -163,15 +167,15 @@ namespace AccountingSystem.Views.Transactions.JEV
             // nudAmount
             // 
             this.nudAmount.DecimalPlaces = 2;
-            this.nudAmount.Location = new System.Drawing.Point(66, 120);
+            this.nudAmount.Location = new System.Drawing.Point(91, 149);
             this.nudAmount.Maximum = new decimal(new int[] {
             -727379968,
             232,
             0,
             0});
             this.nudAmount.Name = "nudAmount";
-            this.nudAmount.Size = new System.Drawing.Size(491, 23);
-            this.nudAmount.TabIndex = 5;
+            this.nudAmount.Size = new System.Drawing.Size(466, 23);
+            this.nudAmount.TabIndex = 8;
             this.nudAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudAmount.ThousandsSeparator = true;
             this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
@@ -180,7 +184,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(0, 122);
+            this.label3.Location = new System.Drawing.Point(0, 151);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(51, 15);
             this.label3.TabIndex = 8;
@@ -194,15 +198,15 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.cmbSubsidiary.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.cmbSubsidiary.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSubsidiary.FormattingEnabled = true;
-            this.cmbSubsidiary.Location = new System.Drawing.Point(66, 58);
+            this.cmbSubsidiary.Location = new System.Drawing.Point(91, 87);
             this.cmbSubsidiary.Name = "cmbSubsidiary";
-            this.cmbSubsidiary.Size = new System.Drawing.Size(491, 23);
-            this.cmbSubsidiary.TabIndex = 2;
+            this.cmbSubsidiary.Size = new System.Drawing.Size(466, 23);
+            this.cmbSubsidiary.TabIndex = 3;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(-1, 61);
+            this.label4.Location = new System.Drawing.Point(-1, 90);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(61, 15);
             this.label4.TabIndex = 10;
@@ -212,10 +216,10 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.btnSubsidiaryLedger.Enabled = false;
             this.btnSubsidiaryLedger.Image = ((System.Drawing.Image)(resources.GetObject("btnSubsidiaryLedger.Image")));
-            this.btnSubsidiaryLedger.Location = new System.Drawing.Point(563, 58);
+            this.btnSubsidiaryLedger.Location = new System.Drawing.Point(563, 87);
             this.btnSubsidiaryLedger.Name = "btnSubsidiaryLedger";
             this.btnSubsidiaryLedger.Size = new System.Drawing.Size(22, 22);
-            this.btnSubsidiaryLedger.TabIndex = 8;
+            this.btnSubsidiaryLedger.TabIndex = 9;
             this.btnSubsidiaryLedger.UseVisualStyleBackColor = true;
             this.btnSubsidiaryLedger.Click += new System.EventHandler(this.btnSubsidiaryLedger_Click);
             // 
@@ -231,12 +235,35 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.epAmount.ContainerControl = this;
             // 
+            // txtObligationNo
+            // 
+            this.txtObligationNo.Location = new System.Drawing.Point(91, 0);
+            this.txtObligationNo.Name = "txtObligationNo";
+            this.txtObligationNo.Size = new System.Drawing.Size(466, 23);
+            this.txtObligationNo.TabIndex = 0;
+            this.txtObligationNo.Validating += new System.ComponentModel.CancelEventHandler(this.txtObligationNo_Validating);
+            this.txtObligationNo.Validated += new System.EventHandler(this.txtObligationNo_Validated);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(0, 3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(85, 15);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Obligation No.";
+            // 
+            // epObligationNo
+            // 
+            this.epObligationNo.ContainerControl = this;
+            // 
             // ucJEVAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.Controls.Add(this.txtObligationNo);
             this.Controls.Add(this.btnSubsidiaryLedger);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cmbSubsidiary);
@@ -247,9 +274,10 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.Controls.Add(this.cmbAccount);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbFPP);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
             this.Name = "ucJEVAccount";
-            this.Size = new System.Drawing.Size(588, 146);
+            this.Size = new System.Drawing.Size(588, 175);
             this.Load += new System.EventHandler(this.ucJEVAccount_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -259,6 +287,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAccount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epObligationNo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -284,5 +313,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.ErrorProvider epAccount;
         private System.Windows.Forms.ErrorProvider epAmount;
         internal System.Windows.Forms.ErrorProvider epFPP;
+        private System.Windows.Forms.Label label5;
+        internal System.Windows.Forms.TextBox txtObligationNo;
+        internal System.Windows.Forms.ErrorProvider epObligationNo;
     }
 }

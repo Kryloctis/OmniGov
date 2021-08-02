@@ -355,7 +355,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void ucJEV_Load(object sender, EventArgs e)
         {
-            Helper.DatagridDefaultStyle(dgAccounts);
+            Helper.DatagridFullRowSelectStyle(dgAccounts, true);
             LoadFunds();
             LoadJournals();
 

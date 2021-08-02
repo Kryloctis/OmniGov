@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ACC.Domain.Models
+﻿namespace ACC.Domain.Models
 {
     public class JEVAccountsModel
     {
@@ -11,6 +7,7 @@ namespace ACC.Domain.Models
         public int FPPId { get; set; }
         public ushort GeneralLedgerId { get; set; }
         public ushort? SubsidiaryLedgerId { get; set; }
+        public string ObligationNo { get; set; }
         public bool? IsDeposit { get; set; }
         public bool IsDebit { get; set; }
         public decimal Amount { get; set; }

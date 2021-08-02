@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.JEV
@@ -78,10 +72,12 @@ namespace AccountingSystem.Views.Transactions.JEV
             string accountCode = ucJEV.dgAccounts.Rows[rowIndex].Cells["AccountCode"].Value.ToString();
             string accountName = ucJEV.dgAccounts.Rows[rowIndex].Cells["AccountName"].Value.ToString();
             object subsidiaryLedgerId = ucJEV.dgAccounts.Rows[rowIndex].Cells["SubsidiaryLedgerId"].Value;
+            string obligationNo = ucJEV.dgAccounts.Rows[rowIndex].Cells["obligationNo"].Value.ToString();
             bool isDebit = (bool)ucJEV.dgAccounts.Rows[rowIndex].Cells["IsDebit"].Value;
             bool? isDeposit = (bool?)ucJEV.dgAccounts.Rows[rowIndex].Cells["IsDeposit"].Value;
             decimal amount = GetAmountDebitCredit(isDebit);
 
+            ucJEVAccount.txtObligationNo.Text = obligationNo;
             ucJEVAccount.cmbFPP.SelectedValue = Convert.ToInt32(fppId);
             LoadSelectedGeneralLedgerAccount(generalLedgerId, accountCode, accountName);
             CheckedDebitCredit(isDebit);
@@ -105,6 +101,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 ushort generalLedgerId = Convert.ToUInt16(uc.cmbAccount.SelectedValue);
                 string subsidiaryId = !string.IsNullOrWhiteSpace(uc.cmbSubsidiary.Text) ? uc.cmbSubsidiary.SelectedValue.ToString() : null;
                 string subsidiaryName = uc.cmbSubsidiary.Text;
+                string obligationNo = uc.txtObligationNo.Text;
                 string amount = uc.nudAmount.Value.ToString("N2");
                 bool isDebit = uc.radioDebit.Checked;
                 bool? isDeposit;
@@ -129,6 +126,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 ucJEV.dgAccounts.Rows[rowIndex].Cells["AccountName"].Value = accountDict["ledger_name"];
                 ucJEV.dgAccounts.Rows[rowIndex].Cells["AccountCode"].Value = accountDict["account_code"];
                 ucJEV.dgAccounts.Rows[rowIndex].Cells["Subsidiary"].Value = subsidiaryName;
+                ucJEV.dgAccounts.Rows[rowIndex].Cells["obligationNo"].Value = obligationNo;
 
                 if (isDebit)
                 {

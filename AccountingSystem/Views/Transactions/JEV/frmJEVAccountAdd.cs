@@ -24,6 +24,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             string generalLedgerId = uc.cmbAccount.SelectedValue.ToString();
             string subsidiaryId = !string.IsNullOrWhiteSpace(uc.cmbSubsidiary.Text) ? uc.cmbSubsidiary.SelectedValue.ToString() : null;
             string subsidiaryName = uc.cmbSubsidiary.Text;
+            string obligationNo = uc.txtObligationNo.Text.Trim();
             string amount = uc.nudAmount.Value.ToString("N2");
             bool isDebit = uc.radioDebit.Checked;
             bool? isDeposit;
@@ -35,7 +36,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             else
                 isDeposit = null;
 
-            Dictionary<string, string> generalLedgerDict= Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(Convert.ToUInt16(generalLedgerId));
+            Dictionary<string, string> generalLedgerDict = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(Convert.ToUInt16(generalLedgerId));
 
             object[] accountRow;
             if (isDebit)
@@ -52,6 +53,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     generalLedgerDict["ledger_name"],
                     generalLedgerDict["account_code"],
                     subsidiaryName,
+                    obligationNo,
                     amount,
                     "",
                 };
@@ -70,6 +72,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     $"     {generalLedgerDict["ledger_name"]}",
                     generalLedgerDict["account_code"],
                     subsidiaryName,
+                    obligationNo,
                     "",
                     amount,
                 };

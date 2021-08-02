@@ -718,19 +718,39 @@ namespace ACC.Data
             }
         }
 
-        public DataTable FilterRecords(string[] searchParameters)
+        public DataTable FilterRecords(byte isApproved, string searchTxt, short month, short year)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@jev_status", DbType.String, searchParameters[0]},
-                    new object[] { "@search_all", DbType.String, $"%{searchParameters[1]}%" },
-                    new object[] { "@jev_month", DbType.String, searchParameters[2]},
-                    new object[] { "@jev_year", DbType.String, searchParameters[3]}
+                    new object[] { "@is_approved", DbType.Byte, isApproved},
+                    new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%"},
+                    new object[] { "@month", DbType.Int16, month},
+                    new object[] { "@year", DbType.Int16, year}
                 };
 
-                string query = $"SELECT id, funds_id, journals_id, jev_no, full_jev_no, date_entry, ref_no, payee, explanation, fund_code ,is_approved, created_at, created_by, updated_at, updated_by FROM {viewTableName} WHERE is_approved=@jev_status AND MONTH(date_entry) = @jev_month AND YEAR(date_entry) = @jev_year AND (jev_no LIKE @search_all OR ref_no LIKE @search_all OR payee LIKE @search_all OR explanation LIKE @search_all)";
+                string query = $"SELECT " +
+                    $"id, " +
+                    $"funds_id, " +
+                    $"journals_id, " +
+                    $"jev_no, " +
+                    $"full_jev_no, " +
+                    $"date_entry, " +
+                    $"ref_no, " +
+                    $"payee, " +
+                    $"explanation, " +
+                    $"fund_code ," +
+                    $"is_approved, " +
+                    $"created_at, " +
+                    $"created_by, " +
+                    $"updated_at, " +
+                    $"updated_by " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE is_approved = @is_approved " +
+                    $"AND MONTH(date_entry) = @month " +
+                    $"AND YEAR(date_entry) = @year " +
+                    $"AND (jev_no LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt)";
 
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
