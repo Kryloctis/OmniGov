@@ -41,7 +41,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         {
             try
             {
-
                 var lguDict = Helper.LGUDetails();
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\pre-trial-balance.rdlc";
                 report.DataSources.Clear();
@@ -83,45 +82,50 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                 row["account_title"] = item["ledger_name"];
                 row["account_code"] = item["account_code"];
 
-                var debit_beginning_bal = Convert.ToDecimal(item["debit_beginning_bal"]);
-                var credit_beginning_bal = Convert.ToDecimal(item["credit_beginning_bal"]);
-
-                var beginning_balance = debit_beginning_bal - credit_beginning_bal;
-                var jevAccount = Factory.JEVAccountsRepository().GetJEVAmount(fundId, generalLedgerId, year);
-
-                if (jevAccount.Rows.Count != 0)
-                {
-                    var adjustedDebitbalance = 0.0m;
-                    var adjustedCreditbalance = 0.0m;
-
-                    foreach (DataRow items in jevAccount.Rows)
-                    {
-                        if (Convert.ToBoolean(items["is_debit"]))
-                            adjustedDebitbalance = debit_beginning_bal + Convert.ToDecimal(items["amount"]);
-                        else
-                            adjustedCreditbalance = credit_beginning_bal + Convert.ToDecimal(items["amount"]);
-                    }
-                    var endingBalance = Math.Max(adjustedDebitbalance, adjustedCreditbalance) - Math.Min(adjustedDebitbalance, adjustedCreditbalance);
-
-                    //ENDING BALANCE.
-                    if (adjustedDebitbalance > adjustedCreditbalance)
-                        row["debit"] = endingBalance;
-                    else
-                        row["credit"] = endingBalance;
-                }
-
-                else //IF NO JEV RECORDS
-                {
-                    if (beginning_balance > 0)
-                        row["debit"] = Math.Abs(beginning_balance);
-                    else
-                        row["credit"] = Math.Abs(beginning_balance);
-                }
+                ProcessDebitCreditValues(item, row);
 
                 dtPreTrialBalance.Rows.Add(row);
             }
 
             return dtPreTrialBalance;
+        }
+
+        private void ProcessDebitCreditValues(DataRow item, DataRow row)
+        {
+            var debit_beginning_bal = Convert.ToDecimal(item["debit_beginning_bal"]);
+            var credit_beginning_bal = Convert.ToDecimal(item["credit_beginning_bal"]);
+
+            var beginning_balance = debit_beginning_bal - credit_beginning_bal;
+            var jevAccount = Factory.JEVAccountsRepository().GetJEVAmount(fundId, generalLedgerId, year);
+
+            if (jevAccount.Rows.Count != 0)
+            {
+                var adjustedDebitbalance = 0.0m;
+                var adjustedCreditbalance = 0.0m;
+
+                foreach (DataRow items in jevAccount.Rows)
+                {
+                    if (Convert.ToBoolean(items["is_debit"]))
+                        adjustedDebitbalance = debit_beginning_bal + Convert.ToDecimal(items["amount"]);
+                    else
+                        adjustedCreditbalance = credit_beginning_bal + Convert.ToDecimal(items["amount"]);
+                }
+                var endingBalance = Math.Max(adjustedDebitbalance, adjustedCreditbalance) - Math.Min(adjustedDebitbalance, adjustedCreditbalance);
+
+                //ENDING BALANCE.
+                if (adjustedDebitbalance > adjustedCreditbalance)
+                    row["debit"] = endingBalance;
+                else
+                    row["credit"] = endingBalance;
+            }
+
+            else //IF NO JEV RECORDS
+            {
+                if (beginning_balance > 0)
+                    row["debit"] = Math.Abs(beginning_balance);
+                else
+                    row["credit"] = Math.Abs(beginning_balance);
+            }
         }
 
         private void LoadFunds()
