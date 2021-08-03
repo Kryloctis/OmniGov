@@ -279,8 +279,10 @@ namespace ACC.Data
                     $"gl.general_ledger_accounts_id, " +
                     $"gl.ledger_name, " +
                     $"gl.account_code, " +
-                    $"SUM(IF(bb.is_debit=1, bb.amount, 0))-SUM(IF(bb.is_debit=0, bb.amount, 0)) AS beginning_bal, " +
-                    $"gl.account_group_code " +
+                    $"gl.account_group_code, " +
+                    $"SUM(IF(bb.is_debit=1, bb.amount, 0)) AS debit_beginning_bal, " +
+                    $"SUM(IF(bb.is_debit=0, bb.amount, 0)) AS credit_beginning_bal " + 
+                  
                     $"FROM {viewTableName} AS gl " +
                     $"LEFT JOIN beginning_balances AS bb " +
                     $"ON bb.general_ledger_accounts_id = gl.general_ledger_accounts_id " +

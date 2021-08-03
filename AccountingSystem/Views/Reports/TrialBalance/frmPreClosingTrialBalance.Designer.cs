@@ -117,6 +117,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             this.Controls.Add(this.panel1);
             this.MinimizeBox = false;
             this.Name = "frmPreClosingTrialBalance";
+            this.ShowInTaskbar = false;
             this.Text = "Pre Closing Trial Balance";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmTrialBalance_Load);
