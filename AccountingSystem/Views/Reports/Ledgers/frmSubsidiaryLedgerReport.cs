@@ -118,21 +118,21 @@ namespace AccountingSystem.Views.Reports.Ledgers
             balanceCredit = string.Empty;
             balance = string.Empty;
 
-            bool generalLedgerBalanceExist = Factory.BeginningBalancesRepository().GeneralLedgerBalanceExist(fundId, (ushort)generalLedgerId, year);
-            if (generalLedgerBalanceExist)
-            {
-                var beginningBalanceDict = Factory.BeginningBalancesRepository().GetRecordByFundsAndGeneralLedgerID(fundId, (ushort)generalLedgerId, year);
+            var subsidiaryId = Convert.ToInt16(cmbSubsidiaryLedger.SelectedValue);
 
-                balanceDate = Convert.ToDateTime(beginningBalanceDict["date_entry"]).ToShortDateString();
 
-                if (beginningBalanceDict["is_debit"] == "1")
-                    balanceDebit = Convert.ToDecimal(beginningBalanceDict["amount"]).ToString("N2");
-                else
-                    balanceCredit = Convert.ToDecimal(beginningBalanceDict["amount"]).ToString("N2");
+            var subsidiaryDict = Factory.BeginningBalancesRepository().GetRecordByFundsAndGeneralLedgerID(fundId, generalLedgerId, year, (ushort)subsidiaryId);
 
-                balance = Convert.ToDecimal(beginningBalanceDict["amount"]).ToString("N2");
-                beginningBalance = Convert.ToDecimal(beginningBalanceDict["amount"]);
-            }
+            balanceDate = Convert.ToDateTime(subsidiaryDict["date_entry"]).ToShortDateString();
+
+            if (subsidiaryDict["is_debit"] == "1")
+                balanceDebit = Convert.ToDecimal(subsidiaryDict["amount"]).ToString("N2");
+            else
+                balanceCredit = Convert.ToDecimal(subsidiaryDict["amount"]).ToString("N2");
+
+            balance = Convert.ToDecimal(subsidiaryDict["amount"]).ToString("N2");
+            beginningBalance = Convert.ToDecimal(subsidiaryDict["amount"]);
+            beginningBalance = Convert.ToDecimal(balance);
         }
 
         private void LoadReport(LocalReport report)

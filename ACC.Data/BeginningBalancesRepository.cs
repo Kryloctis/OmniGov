@@ -285,6 +285,37 @@ namespace ACC.Data
             return false;
         }
 
+        public Dictionary<string, string> GetDebitAndCreditOfAllAccounts(byte fundsId)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Byte, fundsId}
+                };
+
+                string query = $"SELECT COALESCE(FORMAT(SUM(IF(bb.is_debit=1, bb.amount, '')),2),0) AS total_debit, COALESCE(FORMAT(SUM(IF(bb.is_debit=0, bb.amount, '')),2),0) AS total_credit, bb.date_entry FROM beginning_balances AS bb INNER JOIN view_general_ledger_accounts AS gla ON bb.general_ledger_accounts_id = gla.general_ledger_accounts_id";
+
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    record.Add("debit", reader.Rows[0]["total_debit"].ToString());
+                    record.Add("credit", reader.Rows[0]["total_credit"].ToString());
+                    record.Add("date", reader.Rows[0]["date_entry"].ToString());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
+        }
+
         public Dictionary<string, string> GetDebitAndCreditOfTemporaryAccounts(byte fundsId)
         {
             var record = new Dictionary<string, string>();
@@ -326,7 +357,7 @@ namespace ACC.Data
                     new object[] { "@funds_id", DbType.Byte, fundsId}
                 };
 
-                string query = $"SELECT COALESCE(FORMAT(SUM(IF(bb.is_debit=1, bb.amount, '')),2),0) AS total_debit, COALESCE(FORMAT(SUM(IF(bb.is_debit=0, bb.amount, '')),2),0) AS total_credit FROM beginning_balances AS bb INNER JOIN view_general_ledger_accounts AS gla ON bb.general_ledger_accounts_id = gla.general_ledger_accounts_id WHERE gla.account_group_code = 1 OR gla.account_group_code = 2";
+                string query = $"SELECT COALESCE(FORMAT(SUM(IF(bb.is_debit=1, bb.amount, '')),2),0) AS total_debit, COALESCE(FORMAT(SUM(IF(bb.is_debit=0, bb.amount, '')),2),0) AS total_credit, bb.date_entry FROM beginning_balances AS bb INNER JOIN view_general_ledger_accounts AS gla ON bb.general_ledger_accounts_id = gla.general_ledger_accounts_id WHERE gla.account_group_code = 1 OR gla.account_group_code = 2";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -335,6 +366,7 @@ namespace ACC.Data
 
                     record.Add("debit", reader.Rows[0]["total_debit"].ToString());
                     record.Add("credit", reader.Rows[0]["total_credit"].ToString());
+                    record.Add("date", reader.Rows[0]["date_entry"].ToString());
                 }
             }
             catch (Exception)
@@ -390,5 +422,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
+
     }
 }
