@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public int JEVId { get; set; }
-        public int FPPId { get; set; }
+        public int? FPPId { get; set; }
         public ushort GeneralLedgerId { get; set; }
         public ushort? SubsidiaryLedgerId { get; set; }
         public string ObligationNo { get; set; }

@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -588,7 +589,7 @@ namespace ACC.Data
                     new object[] { "@jev_no", DbType.String, jevNo},
                 };
 
-                string query = $"SELECT id, funds_id, fund_code, fund_name, journals_id, journal_name, is_special, jev_no, date_entry, ref_no, payee, explanation, is_approved, created_at, created_by, created_by_name, updated_at, updated_by, updated_by_name FROM {viewTableName} WHERE jev_no = @jev_no";
+                string query = $"SELECT id, funds_id, fund_code, fund_name, journals_id, journal_name, is_special, jev_no, date_entry, ref_no, payee, explanation, is_approved, is_disapproved, created_at, created_by, created_by_name, updated_at, updated_by, updated_by_name FROM {viewTableName} WHERE jev_no = @jev_no";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -608,6 +609,7 @@ namespace ACC.Data
                     record.Add("payee", reader.Rows[0]["payee"].ToString());
                     record.Add("explanation", reader.Rows[0]["explanation"].ToString());
                     record.Add("is_approved", reader.Rows[0]["is_approved"].ToString());
+                    record.Add("is_disapproved", reader.Rows[0]["is_disapproved"].ToString());
                     record.Add("created_at", reader.Rows[0]["created_at"].ToString());
                     record.Add("created_by", reader.Rows[0]["created_by"].ToString());
                     record.Add("created_by_name", reader.Rows[0]["created_by_name"].ToString());
@@ -671,17 +673,22 @@ namespace ACC.Data
             return false;
         }
 
-        public bool SetJEVToApprove(int jevId)
+        public bool SetJEVStatus(int jevId, byte jevStatus)
         {
             try
             {
                 var parameters = new object[][]
                 {
                     new object[] { "@jev_id", DbType.Int64, jevId},
-
                 };
 
-                string query = $"UPDATE {tableName} SET is_approved = 1 WHERE id = @jev_id";
+                string queryStatus = string.Empty;
+                if (jevStatus == 1)
+                    queryStatus = $"is_approved = 1, is_disapproved = 0";
+                else if (jevStatus == 2)
+                    queryStatus = $"is_approved = 0, is_disapproved = 1";
+
+                string query = $"UPDATE {tableName} SET {queryStatus} WHERE id = @jev_id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -718,18 +725,30 @@ namespace ACC.Data
             }
         }
 
-        public DataTable FilterRecords(byte isApproved, string searchTxt, short month, short year)
+        public DataTable FilterRecords(byte jevStatus, string searchTxt, short month, short year)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@is_approved", DbType.Byte, isApproved},
                     new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%"},
                     new object[] { "@month", DbType.Int16, month},
                     new object[] { "@year", DbType.Int16, year}
                 };
+                string jevStatusQuery = string.Empty;
+                switch (jevStatus)
+                {
+                    case 2:
+                        jevStatusQuery = $"is_disapproved = 1";
+                        break;
+                    case 0:
+                        jevStatusQuery = $"is_approved = 0 AND is_disapproved = 0";
+                        break;
+                    case 1:
+                        jevStatusQuery = $"is_approved = 1";
+                        break;
 
+                }
                 string query = $"SELECT " +
                     $"id, " +
                     $"funds_id, " +
@@ -742,12 +761,13 @@ namespace ACC.Data
                     $"explanation, " +
                     $"fund_code ," +
                     $"is_approved, " +
+                    $"is_disapproved, " +
                     $"created_at, " +
                     $"created_by, " +
                     $"updated_at, " +
                     $"updated_by " +
                     $"FROM {viewTableName} " +
-                    $"WHERE is_approved = @is_approved " +
+                    $"WHERE {jevStatusQuery} " +
                     $"AND MONTH(date_entry) = @month " +
                     $"AND YEAR(date_entry) = @year " +
                     $"AND (jev_no LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt)";
@@ -798,6 +818,42 @@ namespace ACC.Data
                 string query = $"SELECT COALESCE(SUM(b.amount), 0) AS amount FROM jev a JOIN jev_accounts b ON b.jev_id = a.id JOIN general_ledger_accounts c ON c.id = b.general_ledger_accounts_id JOIN sub_major_account_group d ON d.id = c.sub_major_account_group_id JOIN major_account_group e ON e.id = d.major_account_group_id JOIN account_group f ON f.id = e.account_group_id WHERE a.funds_id = @funds_id AND YEAR(a.date_entry) = @year AND e.id  = @major_account_group_id AND b.is_debit = @is_debit";
                 decimal amount = Convert.ToDecimal(_dbGenericCommands.ExecuteScalar(query, parameters));
                 return amount;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public byte GetJevStatus(int jevId)
+        {
+            var record = new Dictionary<string, byte>();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@jev_id", DbType.Int32, jevId}
+                };
+                string query = $"SELECT is_approved, is_disapproved FROM {tableName} WHERE id = @jev_id";
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("is_approved", Convert.ToByte(item[0]));
+                        record.Add("is_disapproved", Convert.ToByte(item[1]));
+                    }
+                }
+
+                if (record["is_disapproved"] == 1)
+                    return 2;
+                else if (record["is_approved"] == 0)
+                    return 0;
+                else
+                    return 1;
+            }
+            catch (MySqlException)
+            {
+                throw;
             }
             catch (Exception)
             {

@@ -46,19 +46,19 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.cmbSubsidiary = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnSubsidiaryLedger = new System.Windows.Forms.Button();
-            this.epFPP = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAccount = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
             this.txtObligationNo = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.epObligationNo = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epFPP = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             this.pnlCollectionsDeposits.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAccount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epObligationNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -223,10 +223,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnSubsidiaryLedger.UseVisualStyleBackColor = true;
             this.btnSubsidiaryLedger.Click += new System.EventHandler(this.btnSubsidiaryLedger_Click);
             // 
-            // epFPP
-            // 
-            this.epFPP.ContainerControl = this;
-            // 
             // epAccount
             // 
             this.epAccount.ContainerControl = this;
@@ -257,6 +253,10 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.epObligationNo.ContainerControl = this;
             // 
+            // epFPP
+            // 
+            this.epFPP.ContainerControl = this;
+            // 
             // ucJEVAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -284,10 +284,10 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.pnlCollectionsDeposits.ResumeLayout(false);
             this.pnlCollectionsDeposits.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epFPP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAccount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epObligationNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epFPP)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -312,9 +312,9 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal System.Windows.Forms.Panel pnlCollectionsDeposits;
         private System.Windows.Forms.ErrorProvider epAccount;
         private System.Windows.Forms.ErrorProvider epAmount;
-        internal System.Windows.Forms.ErrorProvider epFPP;
         private System.Windows.Forms.Label label5;
         internal System.Windows.Forms.TextBox txtObligationNo;
         internal System.Windows.Forms.ErrorProvider epObligationNo;
+        internal System.Windows.Forms.ErrorProvider epFPP;
     }
 }

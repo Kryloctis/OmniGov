@@ -96,7 +96,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 var uc = ucjevAccount1;
 
-                string fppId = uc.cmbFPP.SelectedValue.ToString();
+                string fppId = string.IsNullOrWhiteSpace(uc.cmbFPP.Text) ? string.Empty : uc.cmbFPP.SelectedValue.ToString();
                 string fppName = uc.cmbFPP.Text;
                 ushort generalLedgerId = Convert.ToUInt16(uc.cmbAccount.SelectedValue);
                 string subsidiaryId = !string.IsNullOrWhiteSpace(uc.cmbSubsidiary.Text) ? uc.cmbSubsidiary.SelectedValue.ToString() : null;

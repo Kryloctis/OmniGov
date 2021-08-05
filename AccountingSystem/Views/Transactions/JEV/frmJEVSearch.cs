@@ -23,6 +23,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void frmJEVSearch_Load(object sender, EventArgs e)
         {
             Helper.DatagridDefaultStyle(dgJEV);
+            LoadJEVList();
         }
 
         private void CheckedFund(string fundName)
@@ -144,7 +145,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.fundId = Convert.ToByte(jevDict["funds_id"]);
                     uc.journalId = Convert.ToByte(jevDict["journals_id"]);
                     uc.oldJournalId = Convert.ToByte(jevDict["journals_id"]);
-                    uc.jevStatus = Convert.ToByte(jevDict["is_approved"]);
+                    uc.isApproved = Convert.ToByte(jevDict["is_approved"]);
+                    uc.isDisapproved = Convert.ToByte(jevDict["is_disapproved"]);
                     uc.jevNo = jevDict["jev_no"];
                     CheckedFund(jevDict["fund_name"]);
                     CheckedJournal(jevDict["journal_name"]);
@@ -154,8 +156,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.SumDebitCredit();
                     uc.ClearErrors();
 
-                    if (uc.jevStatus != 1)
-                        frmJEV.btnPrint.Enabled = false;
+                    frmJEV.CheckJevStatus(jevId);
 
                     Close();
                     return;
@@ -163,7 +164,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                 Helper.MessageBoxError("JEV number doesn't exist.");
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -250,12 +251,11 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal void LoadJEVList()
         {
             byte jevStatus = (byte)cmbxJevStatus.SelectedIndex;
-            byte isApproved = Convert.ToByte(jevStatus == 0 ? 0 : 1);
             string searchTxt = txtSearch.Text;
             short month = Convert.ToInt16(cbMonth.SelectedIndex + 1);
-            short year = (short)nudYear.Value;
+            short year = Convert.ToInt16(nudYear.Value);
 
-            DataTable dtJEV = Factory.JEVRepository().FilterRecords(isApproved, searchTxt, month, year);
+            DataTable dtJEV = Factory.JEVRepository().FilterRecords(jevStatus, searchTxt, month, year);
             HelperLoadRecords.JEVDatagridView(dtJEV, dgJEV);
         }
 

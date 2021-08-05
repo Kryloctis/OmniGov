@@ -72,7 +72,7 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@jev_id", DbType.Int32, entity.JEVId},
-                    new object[] { "@fpp_id", DbType.Int32, entity.FPPId},
+                    new object[] { "@fpp_id", DbType.String, entity.FPPId},
                     new object[] { "@general_ledger_accounts_id", DbType.UInt16, entity.GeneralLedgerId},
                     new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, entity.SubsidiaryLedgerId},
                     new object[] { "@obligation_no", DbType.String, entity.ObligationNo},

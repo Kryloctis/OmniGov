@@ -575,9 +575,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         }
 
         #endregion
-        private System.Windows.Forms.Button btnRemoveAccount;
-        private System.Windows.Forms.Button btnEditAccount;
-        private System.Windows.Forms.Button btnAddAccount;
         private System.Windows.Forms.Label lblCollectingDisbursingOfficer;
         private System.Windows.Forms.Label lblRciOrADANo;
         private System.Windows.Forms.Label lblExplanation;
@@ -624,5 +621,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.DataGridViewTextBoxColumn obligationNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Debit;
         private System.Windows.Forms.DataGridViewTextBoxColumn Credit;
+        internal System.Windows.Forms.Button btnRemoveAccount;
+        internal System.Windows.Forms.Button btnEditAccount;
+        internal System.Windows.Forms.Button btnAddAccount;
     }
 }

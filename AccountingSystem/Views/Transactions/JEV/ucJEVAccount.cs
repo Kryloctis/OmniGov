@@ -20,10 +20,11 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[3];
+            var errorArray = new string[4];
             errorArray[0] = epFPP.GetError(cmbFPP);
             errorArray[1] = epAccount.GetError(cmbAccount);
             errorArray[2] = epAmount.GetError(nudAmount);
+            errorArray[3] = epObligationNo.GetError(txtObligationNo);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -216,10 +217,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void cmbFPP_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbFPP.Text))
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(epFPP, cmbFPP, "FPP");
-            else
-                e.Cancel = FPPNameNotExist();
+            e.Cancel = FPPNameNotExist();
         }
 
         private void cmbFPP_Validated(object sender, EventArgs e)

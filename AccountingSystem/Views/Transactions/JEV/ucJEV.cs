@@ -14,7 +14,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal byte journalId = 0;
         internal byte oldJournalId = 0;
         internal string journalName;
-        internal byte jevStatus = 0;
+        internal byte isApproved = 0;
+        internal byte isDisapproved = 0;
 
         public ucJEV()
         {
@@ -355,16 +356,19 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void ucJEV_Load(object sender, EventArgs e)
         {
-            Helper.DatagridFullRowSelectStyle(dgAccounts, true);
-            LoadFunds();
-            LoadJournals();
+            if (!DesignMode)
+            {
+                Helper.DatagridFullRowSelectStyle(dgAccounts, true);
+                LoadFunds();
+                LoadJournals();
 
-
-            btnEditAccount.Enabled = false;
-            btnRemoveAccount.Enabled = false;
+                txtJEVNo.Text = GetJEVSeriesNo();
+                btnEditAccount.Enabled = false;
+                btnRemoveAccount.Enabled = false;
+            }
         }
 
-        private string GetJEVSeriesNo()
+        internal string GetJEVSeriesNo()
         {
             var jev = Factory.JEVRepository().GetLastJevNoSeries();
             return jev.ToString();

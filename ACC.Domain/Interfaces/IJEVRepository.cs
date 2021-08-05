@@ -53,11 +53,13 @@ namespace ACC.Domain.Interfaces
 
         int TotalPendingJEV();
 
-        bool SetJEVToApprove(int jevId);
+        bool SetJEVStatus(int jevId, byte jevStatus);
 
         DataTable GetApprovedJEV(string searchText);
 
-        DataTable FilterRecords(byte isApproved, string searchTxt, short month, short year);
+        DataTable FilterRecords(byte jevStatus, string searchTxt, short month, short year);
+
+        byte GetJevStatus(int jevId);
 
         //SFPs
         decimal GetSumByMajorAccountGroup(int fundId, int majorAccountGroupId, byte isDebit, DateTime dateEntry);
