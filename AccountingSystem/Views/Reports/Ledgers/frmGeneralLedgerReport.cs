@@ -185,21 +185,30 @@ namespace AccountingSystem.Views.Reports.Ledgers
             balanceCredit = string.Empty;
             balance = string.Empty;
 
-            bool generalLedgerBalanceExist = Factory.BeginningBalancesRepository().GeneralLedgerBalanceExist(fundId, generalLedgerId, year);
-            if (generalLedgerBalanceExist)
+
+            var DebitBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundId, generalLedgerId, year, 1);
+            var CreditBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundId, generalLedgerId, year, 0);
+
+
+            balanceDebit = Convert.ToDecimal(DebitBeginningBalance).ToString("N2");
+            balanceCredit = Convert.ToDecimal(CreditBeginningBalance).ToString("N2");
+
+            balance = (Math.Max(Convert.ToDecimal(balanceDebit), Convert.ToDecimal(balanceCredit)) - Math.Min(Convert.ToDecimal(balanceDebit), Convert.ToDecimal(balanceCredit))).ToString("N2");
+
+
+            if (Convert.ToDecimal(balanceDebit) > Convert.ToDecimal(balanceCredit))
             {
-                var beginningBalanceDict = Factory.BeginningBalancesRepository().GetRecordByFundsAndGeneralLedgerID(fundId, generalLedgerId, year);
-
-                balanceDate = beginningBalanceDict["date_entry"];
-
-                if (beginningBalanceDict["is_debit"] == "1")
-                    balanceDebit = Convert.ToDecimal(beginningBalanceDict["amount"]).ToString("N2");
-                else
-                    balanceCredit = Convert.ToDecimal(beginningBalanceDict["amount"]).ToString("N2");
-
-                balance = Convert.ToDecimal(beginningBalanceDict["amount"]).ToString("N2");
-                beginningBalance = Convert.ToDecimal(beginningBalanceDict["amount"]);
+                balanceDebit = balance;
+                balanceCredit = "0";
             }
+            else
+            {
+                balanceDebit = "0";
+                balanceCredit = balance;
+            }
+
+            beginningBalance = Convert.ToDecimal(balance);
+
         }
 
         private void LoadReport(LocalReport report)
@@ -212,7 +221,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
                 string balanceDate, balanceDebit, balanceCredit, balance;
                 BeginningBalanceRow(fundId, year, generalLedgerId, out balanceDate, out balanceDebit, out balanceCredit, out balance);
-
                 var lguDict = Helper.LGUDetails();
                 var generalLedgerDict = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
                 var fundName = cmbFunds.Text;
