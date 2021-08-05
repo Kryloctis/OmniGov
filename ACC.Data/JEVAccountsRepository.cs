@@ -72,15 +72,16 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@jev_id", DbType.Int32, entity.JEVId},
-                    new object[] { "@fpp_id", DbType.Int32, entity.FPPId},
+                    new object[] { "@fpp_id", DbType.String, entity.FPPId},
                     new object[] { "@general_ledger_accounts_id", DbType.UInt16, entity.GeneralLedgerId},
                     new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, entity.SubsidiaryLedgerId},
+                    new object[] { "@obligation_no", DbType.String, entity.ObligationNo},
                     new object[] { "@is_deposit", DbType.Boolean, entity.IsDeposit},
                     new object[] { "@is_debit", DbType.Boolean, entity.IsDebit},
                     new object[] { "@amount", DbType.Decimal, entity.Amount},
                 };
 
-                string query = $"INSERT INTO {tableName} (jev_id, function_program_project_id, general_ledger_accounts_id, subsidiary_ledger_accounts_id, is_deposit, is_debit, amount) VALUES (@jev_id, @fpp_id, @general_ledger_accounts_id, @subsidiary_ledger_accounts_id, @is_deposit, @is_debit, @amount);";
+                string query = $"INSERT INTO {tableName} (jev_id, function_program_project_id, general_ledger_accounts_id, subsidiary_ledger_accounts_id, obligation_no, is_deposit, is_debit, amount) VALUES (@jev_id, @fpp_id, @general_ledger_accounts_id, @subsidiary_ledger_accounts_id,  @obligation_no, @is_deposit, @is_debit, @amount);";
 
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
@@ -109,6 +110,7 @@ namespace ACC.Data
                     $"fpp_id, " +
                     $"general_ledger_accounts_id, " +
                     $"subsidiary_ledger_accounts_id, " +
+                    $"obligation_no, " +
                     $"is_debit, " +
                     $"is_deposit, " +
                     $"fpp_name, " +
@@ -268,8 +270,8 @@ namespace ACC.Data
                     new object[] { "@year", DbType.Int16, year},
                };
 
-               string query = $"SELECT is_debit FROM {viewTableName} WHERE is_approved = 1 AND funds_id=@funds_id AND general_ledger_accounts_id=@general_ledger_accounts_id AND YEAR(date_entry)=@year";
-               string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+                string query = $"SELECT is_debit FROM {viewTableName} WHERE is_approved = 1 AND funds_id=@funds_id AND general_ledger_accounts_id=@general_ledger_accounts_id AND YEAR(date_entry)=@year";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
                 if (queryResult == "1") return true;
