@@ -287,7 +287,7 @@
                               <TextRuns>
                                 <TextRun>
                                   <Label>beginning_debit</Label>
-                                  <Value>=IIF(string.IsNullOrEmpty(Parameters!paramBalanceDebit.Value), 0,Parameters!paramBalanceDebit.Value)</Value>
+                                  <Value>=CDec(IIF(string.IsNullOrEmpty(Parameters!paramBalanceDebit.Value), 0,Parameters!paramBalanceDebit.Value))</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <Format>#,0.00;(#,0.00);''</Format>
@@ -336,7 +336,7 @@
                               <TextRuns>
                                 <TextRun>
                                   <Label>beginning_credit</Label>
-                                  <Value>=IIF(string.IsNullOrEmpty(Parameters!paramBalanceCredit.Value), 0, Parameters!paramBalanceCredit.Value)</Value>
+                                  <Value>=CDec(IIF(string.IsNullOrEmpty(Parameters!paramBalanceCredit.Value), 0, Parameters!paramBalanceCredit.Value))</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <Format>#,0.00;(#,0.00);''</Format>
@@ -758,7 +758,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Date</Value>
+                                <Value>As of</Value>
                                 <Style>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>
@@ -1048,7 +1048,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>=Fields!date.Value</Value>
+                                <Value>=CDate(Parameters!paramBalanceDate.Value)</Value>
                                 <Style>
                                   <FontSize>9pt</FontSize>
                                   <Format>d</Format>

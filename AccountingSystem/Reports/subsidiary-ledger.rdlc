@@ -290,7 +290,7 @@
                               <TextRuns>
                                 <TextRun>
                                   <Label>beginning_debit_balance</Label>
-                                  <Value>=IIF(string.IsNullOrEmpty(Parameters!paramBalanceDebit.Value), 0, Parameters!paramBalanceDebit.Value)</Value>
+                                  <Value>=CDec(IIF(string.IsNullOrEmpty(Parameters!paramBalanceDebit.Value), 0, Parameters!paramBalanceDebit.Value))</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <Format>#,0.00;(#,0.00);''</Format>
@@ -336,7 +336,7 @@
                               <TextRuns>
                                 <TextRun>
                                   <Label>beginning_credit_balance</Label>
-                                  <Value>=IIF(string.IsNullOrEmpty(Parameters!paramBalanceCredit.Value), 0, Parameters!paramBalanceCredit.Value)</Value>
+                                  <Value>=CDec(IIF(string.IsNullOrEmpty(Parameters!paramBalanceCredit.Value), 0, Parameters!paramBalanceCredit.Value))</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <Format>#,0.00;(#,0.00);''</Format>
@@ -701,7 +701,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Date</Value>
+                                <Value>As of</Value>
                                 <Style>
                                   <FontSize>9pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
@@ -1477,7 +1477,7 @@
             <DataSetName>SubsidiaryLedger</DataSetName>
             <Top>0.36105cm</Top>
             <Height>1.2016in</Height>
-            <Width>7.23681in</Width>
+            <Width>7.23682in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1488,7 +1488,7 @@
         <Height>1.65625in</Height>
         <Style />
       </Body>
-      <Width>7.23681in</Width>
+      <Width>7.23682in</Width>
       <Page>
         <PageHeader>
           <Height>4.11965cm</Height>
@@ -1516,7 +1516,6 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Left>0cm</Left>
               <Height>0.89105cm</Height>
               <Width>18.3815cm</Width>
               <Style>
@@ -1547,7 +1546,6 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>0.97cm</Top>
-              <Left>0cm</Left>
               <Height>0.6cm</Height>
               <Width>1.10244cm</Width>
               <ZIndex>1</ZIndex>
@@ -1687,7 +1685,6 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>1.71965cm</Top>
-              <Left>0cm</Left>
               <Height>0.6cm</Height>
               <Width>3.29847cm</Width>
               <ZIndex>5</ZIndex>
@@ -1757,7 +1754,6 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>2.31965cm</Top>
-              <Left>0cm</Left>
               <Height>0.6cm</Height>
               <Width>3.29847cm</Width>
               <ZIndex>7</ZIndex>
@@ -1789,7 +1785,6 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>2.91965cm</Top>
-              <Left>0cm</Left>
               <Height>0.6cm</Height>
               <Width>3.29847cm</Width>
               <ZIndex>8</ZIndex>
@@ -1821,7 +1816,6 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>3.51965cm</Top>
-              <Left>0cm</Left>
               <Height>0.6cm</Height>
               <Width>3.29847cm</Width>
               <ZIndex>9</ZIndex>

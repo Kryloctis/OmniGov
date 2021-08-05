@@ -190,6 +190,9 @@ namespace AccountingSystem.Views.Reports.Ledgers
             var CreditBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundId, generalLedgerId, year, 0);
 
 
+            var dateDict = Factory.BeginningBalancesRepository().GetRecordByFundsAndGeneralLedgerID(fundId, generalLedgerId, year);
+            balanceDate = Convert.ToDateTime(dateDict["date_entry"]).ToShortDateString();
+
             balanceDebit = Convert.ToDecimal(DebitBeginningBalance).ToString("N2");
             balanceCredit = Convert.ToDecimal(CreditBeginningBalance).ToString("N2");
 
