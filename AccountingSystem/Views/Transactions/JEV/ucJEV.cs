@@ -14,7 +14,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal byte journalId = 0;
         internal byte oldJournalId = 0;
         internal string journalName;
-        internal byte jevStatus = 0;
+        internal byte isApproved = 0;
+        internal byte isDisapproved = 0;
 
         public ucJEV()
         {
@@ -23,14 +24,15 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[6];
+            var errorArray = new string[7];
             errorArray[0] = fundId == 0 ? "Please select a fund source" : string.Empty;
             errorArray[1] = journalId == 0 ? "Please select the type of journal" : string.Empty;
             errorArray[2] = epJEV.GetError(txtJEVNo);
             errorArray[3] = dgAccounts.Rows.Count == 0 ? "Please add a FPP, account & amount in the table provided." : string.Empty;
             errorArray[4] = epPayee.GetError(txtPayee);
             errorArray[5] = epExplanation.GetError(txtExplanation);
-            
+            errorArray[6] = epCollectingDisbursing.GetError(cmbCollectingDisbursingOfficer);
+
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
@@ -167,9 +169,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             var radFund = sender as RadioButton;
             ShowCheckIcon(radFund);
-
             btnAddAccount.Enabled = true;
-            ResetForm();
         }
 
         private void radioJournals_Click(object sender, EventArgs e)
@@ -196,10 +196,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             lblDVRCDNo.Visible = true;
             txtDVRCDNo.Enabled = true;
 
+
             lblCollectingDisbursingOfficer.Visible = false;
             cmbCollectingDisbursingOfficer.Enabled = false;
+            cmbCollectingDisbursingOfficer.DataSource = null;
             cmbCollectingDisbursingOfficer.Text = string.Empty;
-            
         }
 
         private void SetProcurementReceivedJournalFields()
@@ -209,15 +210,19 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             lblCheckNo.Visible = false;
             txtCheckNo.Enabled = false;
+            txtCheckNo.Text = string.Empty;
 
             lblRciOrADANo.Visible = false;
             txtRCIORADA.Enabled = false;
+            txtRCIORADA.Text = string.Empty;
 
             lblDVRCDNo.Visible = false;
             txtDVRCDNo.Enabled = false;
+            txtDVRCDNo.Text = string.Empty;
 
             lblCollectingDisbursingOfficer.Visible = false;
             cmbCollectingDisbursingOfficer.Enabled = false;
+            cmbCollectingDisbursingOfficer.DataSource = null;
             cmbCollectingDisbursingOfficer.Text = string.Empty;
         }
 
@@ -229,9 +234,11 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             lblCheckNo.Visible = false;
             txtCheckNo.Enabled = false;
+            txtCheckNo.Text = string.Empty;
 
             lblRciOrADANo.Visible = false;
             txtRCIORADA.Enabled = false;
+            txtRCIORADA.Text = string.Empty;
 
             lblDVRCDNo.Text = "DV No.";
             lblDVRCDNo.Visible = true;
@@ -250,6 +257,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             lblCheckNo.Visible = false;
             txtCheckNo.Enabled = false;
+            txtCheckNo.Text = string.Empty;
 
             lblRciOrADANo.Text = "OR No.";
             lblRciOrADANo.Visible = true;
@@ -271,6 +279,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             lblCheckNo.Visible = false;
             txtCheckNo.Enabled = false;
+            txtCheckNo.Text = string.Empty;
 
             lblRciOrADANo.Text = "ADA No.";
             lblRciOrADANo.Visible = true;
@@ -282,6 +291,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             lblCollectingDisbursingOfficer.Visible = false;
             cmbCollectingDisbursingOfficer.Enabled = false;
+            cmbCollectingDisbursingOfficer.DataSource = null;
             cmbCollectingDisbursingOfficer.Text = string.Empty;
         }
 
@@ -305,6 +315,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             lblCollectingDisbursingOfficer.Visible = false;
             cmbCollectingDisbursingOfficer.Enabled = false;
+            cmbCollectingDisbursingOfficer.DataSource = null;
             cmbCollectingDisbursingOfficer.Text = string.Empty;
         }
 
@@ -345,16 +356,19 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void ucJEV_Load(object sender, EventArgs e)
         {
-            Helper.DatagridDefaultStyle(dgAccounts);
-            LoadFunds();
-            LoadJournals();
+            if (!DesignMode)
+            {
+                Helper.DatagridFullRowSelectStyle(dgAccounts, true);
+                LoadFunds();
+                LoadJournals();
 
-
-            btnEditAccount.Enabled = false;
-            btnRemoveAccount.Enabled = false;
+                txtJEVNo.Text = GetJEVSeriesNo();
+                btnEditAccount.Enabled = false;
+                btnRemoveAccount.Enabled = false;
+            }
         }
 
-        private string GetJEVSeriesNo()
+        internal string GetJEVSeriesNo()
         {
             var jev = Factory.JEVRepository().GetLastJevNoSeries();
             return jev.ToString();
@@ -469,13 +483,26 @@ namespace AccountingSystem.Views.Transactions.JEV
         }
 
         internal void ClearErrors()
-        { 
+        {
             Helper.ClearErrorTextBox(epPayee, txtPayee);
             Helper.ClearMaskedTextboxError(epJEV, txtJEVNo);
             Helper.ClearErrorTextBox(epExplanation, txtExplanation);
+            Helper.ClearErrorComboBox(epCollectingDisbursing, cmbCollectingDisbursingOfficer);
         }
 
+        private void cmbCollectingDisbursingOfficer_Validating(object sender, CancelEventArgs e)
+        {
+            if (journalName == "Cash Disbursements Journal" || journalName == "Cash Receipts Journal")
+            {
+                string message = journalName == "Cash Disbursements Journal" ? "Disbursing Officer" : "Collecting Officer";
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epCollectingDisbursing, cmbCollectingDisbursingOfficer, message);
+            }
 
+        }
 
+        private void cmbCollectingDisbursingOfficer_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epCollectingDisbursing, cmbCollectingDisbursingOfficer);
+        }
     }
 }

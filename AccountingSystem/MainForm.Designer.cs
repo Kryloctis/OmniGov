@@ -607,7 +607,7 @@ namespace AccountingSystem
             // 
             // btnJournalEntry
             // 
-            this.btnJournalEntry.Image = ((System.Drawing.Image)(resources.GetObject("btnJournalEntry.Image")));
+            this.btnJournalEntry.Image = global::AccountingSystem.Properties.Resources.document_delivery_24px;
             this.btnJournalEntry.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnJournalEntry.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnJournalEntry.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
@@ -785,7 +785,7 @@ namespace AccountingSystem
             this.tabAccountingDashboard.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabAccountingDashboard.Name = "tabAccountingDashboard";
             this.tabAccountingDashboard.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabAccountingDashboard.Size = new System.Drawing.Size(1172, 385);
+            this.tabAccountingDashboard.Size = new System.Drawing.Size(1172, 379);
             this.tabAccountingDashboard.TabIndex = 1;
             this.tabAccountingDashboard.Text = "tabPage2";
             this.tabAccountingDashboard.UseVisualStyleBackColor = true;
@@ -797,7 +797,7 @@ namespace AccountingSystem
             this.ucAccountingDashboard1.Location = new System.Drawing.Point(3, 2);
             this.ucAccountingDashboard1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucAccountingDashboard1.Name = "ucAccountingDashboard1";
-            this.ucAccountingDashboard1.Size = new System.Drawing.Size(1166, 381);
+            this.ucAccountingDashboard1.Size = new System.Drawing.Size(1166, 375);
             this.ucAccountingDashboard1.TabIndex = 0;
             // 
             // MainForm

@@ -23,6 +23,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void frmJEVSearch_Load(object sender, EventArgs e)
         {
             Helper.DatagridDefaultStyle(dgJEV);
+            LoadJEVList();
         }
 
         private void CheckedFund(string fundName)
@@ -48,6 +49,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 string generalLedgerId = item["general_ledger_accounts_id"].ToString();
                 string subsidiaryId = !string.IsNullOrWhiteSpace(item["subsidiary_ledger_accounts_id"].ToString()) ? item["subsidiary_ledger_accounts_id"].ToString() : null;
                 string subsidiaryName = item["sub_name"].ToString();
+                string obligationNo = item["obligation_no"].ToString();
                 string generalLedgerName = item["ledger_name"].ToString();
                 string accountCode = item["account_code"].ToString();
                 decimal amount = Convert.ToDecimal(item["amount"]);
@@ -74,6 +76,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         generalLedgerName,
                         accountCode,
                         subsidiaryName,
+                        obligationNo,
                         amount.ToString("N2"),
                         "",
                     };
@@ -92,6 +95,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         $"     {generalLedgerName}",
                         accountCode,
                         subsidiaryName,
+                        obligationNo,
                         "",
                         amount.ToString("N2")
                     };
@@ -110,7 +114,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 {
                     int rowIndex = dgJEV.CurrentCell.RowIndex;
 
-                    string jevNo =  dgJEV.Rows[rowIndex].Cells["jev_no"].Value.ToString();
+                    string jevNo = dgJEV.Rows[rowIndex].Cells["jev_no"].Value.ToString();
                     string jevDateOfEntry = dgJEV.Rows[rowIndex].Cells["date_entry"].Value.ToString();
                     string jevFundCode = dgJEV.Rows[rowIndex].Cells["fund_code"].Value.ToString();
 
@@ -126,7 +130,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                     Dictionary<string, string> jevDict = Factory.JEVRepository().GetRecordByJEV(jevNo);
                     int jevId = Convert.ToInt32(jevDict["id"]);
-                  
+
                     LoadCheckDisbursementsDataIfExist(uc, jevId);
                     LoadCashReceiptsDataIfExist(uc, jevId);
                     LoadADADisbursementDataIfExist(uc, jevId);
@@ -141,7 +145,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.fundId = Convert.ToByte(jevDict["funds_id"]);
                     uc.journalId = Convert.ToByte(jevDict["journals_id"]);
                     uc.oldJournalId = Convert.ToByte(jevDict["journals_id"]);
-                    uc.jevStatus = Convert.ToByte(jevDict["is_approved"]);
+                    uc.isApproved = Convert.ToByte(jevDict["is_approved"]);
+                    uc.isDisapproved = Convert.ToByte(jevDict["is_disapproved"]);
                     uc.jevNo = jevDict["jev_no"];
                     CheckedFund(jevDict["fund_name"]);
                     CheckedJournal(jevDict["journal_name"]);
@@ -151,8 +156,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.SumDebitCredit();
                     uc.ClearErrors();
 
-                    if (uc.jevStatus != 1)
-                        frmJEV.btnPrint.Enabled = false;
+                    frmJEV.CheckJevStatus(jevId);
 
                     Close();
                     return;
@@ -246,15 +250,12 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         internal void LoadJEVList()
         {
-           
-            var jevStatus = gbSearchFilter.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Tag.ToString();
-            var txtSeach = txtSearch.Text;
-            var jevMonth = Convert.ToInt32(cbMonth.SelectedIndex + 1).ToString();
-            var jevYear = nudYear.Value.ToString();
+            byte jevStatus = (byte)cmbxJevStatus.SelectedIndex;
+            string searchTxt = txtSearch.Text;
+            short month = Convert.ToInt16(cbMonth.SelectedIndex + 1);
+            short year = Convert.ToInt16(nudYear.Value);
 
-            string[] searchParameters = new string[4] { jevStatus, txtSeach, jevMonth, jevYear };
-
-            DataTable dtJEV = Factory.JEVRepository().FilterRecords(searchParameters);
+            DataTable dtJEV = Factory.JEVRepository().FilterRecords(jevStatus, searchTxt, month, year);
             HelperLoadRecords.JEVDatagridView(dtJEV, dgJEV);
         }
 

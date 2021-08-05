@@ -247,4 +247,25 @@
   <data name="augmentation_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\augmentation-28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="document_approval_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-approval-28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_delivery_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-delivery-24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document__cancel_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document--cancel-24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_cancel_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-cancel-28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hourglass_18px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hourglass-18px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="symbol_ok_18px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\symbol-ok-18px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="warning_sign_filled_18px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\warning-sign-filled-18px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
