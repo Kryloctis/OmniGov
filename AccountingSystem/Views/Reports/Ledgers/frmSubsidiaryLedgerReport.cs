@@ -69,14 +69,14 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 row["particulars"] = particulars;
                 row["debit_amount"] = item["amount"];
                 row["credit_amount"] = 0;
-                balance += amount;
+                balance -= amount;
             }
             else
             {
                 row["particulars"] = $"{particulars}";
                 row["debit_amount"] = 0;
                 row["credit_amount"] = item["amount"];
-                balance -= amount;
+                balance += amount;
             }
 
             row["balance"] = balance;
@@ -126,13 +126,21 @@ namespace AccountingSystem.Views.Reports.Ledgers
             balanceDate = Convert.ToDateTime(subsidiaryDict["date_entry"]).ToShortDateString();
 
             if (subsidiaryDict["is_debit"] == "1")
+            {
                 balanceDebit = Convert.ToDecimal(subsidiaryDict["amount"]).ToString("N2");
+                balanceCredit = "0";
+            }
+
             else
+            {
                 balanceCredit = Convert.ToDecimal(subsidiaryDict["amount"]).ToString("N2");
+                balanceDebit = "0";
+            }
+            
 
             balance = Convert.ToDecimal(subsidiaryDict["amount"]).ToString("N2");
             beginningBalance = Convert.ToDecimal(subsidiaryDict["amount"]);
-            beginningBalance = Convert.ToDecimal(balance);
+            //beginningBalance = Convert.ToDecimal(balance);
         }
 
         private void LoadReport(LocalReport report)
