@@ -124,8 +124,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                     frmJEV.btnPrint.Enabled = true;
                     frmJEV.btnApprove.Enabled = true;
 
-
-                    frmJEV.ucjev1.txtFundsJevNo.Text = $"{jevFundCode}-{Convert.ToDateTime(jevDateOfEntry).Year}{Convert.ToDateTime(jevDateOfEntry).Month}";
                     frmJEV.ucjev1.txtJEVNo.Text = jevNo;
 
                     Dictionary<string, string> jevDict = Factory.JEVRepository().GetRecordByJEV(jevNo);
@@ -147,6 +145,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.oldJournalId = Convert.ToByte(jevDict["journals_id"]);
                     uc.isApproved = Convert.ToByte(jevDict["is_approved"]);
                     uc.isDisapproved = Convert.ToByte(jevDict["is_disapproved"]);
+                    uc.isCancelled = Convert.ToByte(jevDict["is_cancelled"]);
                     uc.jevNo = jevDict["jev_no"];
                     CheckedFund(jevDict["fund_name"]);
                     CheckedJournal(jevDict["journal_name"]);
@@ -157,7 +156,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.ClearErrors();
 
                     frmJEV.CheckJevStatus(jevId);
-
+                    frmJEV.btnSave.Text = "Update";
                     Close();
                     return;
                 }
@@ -274,6 +273,5 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             LoadSelectedJEV();
         }
-
     }
 }

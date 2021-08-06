@@ -72,6 +72,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // btnOK
             // 
             this.btnOK.Image = global::AccountingSystem.Properties.Resources.ok14px;
+            this.btnOK.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnOK.Location = new System.Drawing.Point(434, 2);
             this.btnOK.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnOK.Name = "btnOK";

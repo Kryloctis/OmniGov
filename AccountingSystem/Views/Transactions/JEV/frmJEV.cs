@@ -24,6 +24,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 btnApprove.Visible = false;
                 btnDisapprove.Visible = false;
+                btnCancelJEV.Visible = false;
                 toolStripSeparator2.Visible = false;
             }
 
@@ -61,45 +62,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
 
             return true;
-        }
-
-
-        private bool SaveData()
-        {
-            try
-            {
-                var userId = Helper.UserId;
-
-                if (!FormValidations())
-                    return false;
-
-                switch (uc.journalName)
-                {
-                    case "General Journal":
-                        return InsertGeneralJournal(userId);
-
-                    case "Procurement Received Journal":
-                        return InsertJournal(userId);
-
-                    case "Cash Disbursements Journal":
-                        return InsertCashDisbursementsJournal(userId);
-
-                    case "Cash Receipts Journal":
-                        return InsertCashReceiptsJournal(userId);
-
-                    case "Check Disbursements Journal":
-                        return InsertCheckDisbursementJournal(userId);
-
-                    case "Authority to Debit Account Disbursement Journal":
-                        return InsertADADisbursementsJournal(userId);
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-
-            return false;
         }
 
         private JEVModel ParseJEVModelData(byte userId, bool isUpdate = false)
@@ -164,48 +126,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
 
             return jevAccountsModelList;
-        }
-
-        internal void CheckJevStatus(int jevId)
-        {
-            switch (Factory.JEVRepository().GetJevStatus(jevId))
-            {
-                case 0:
-                    //PENDING
-                    lblJevStatus.Text = "Pending";
-                    lblJevStatus.ForeColor = Color.Gold;
-                    lblShowMessage.Visible = false;
-                    btnPrint.Enabled = false;
-                    btnApprove.Enabled = true;
-                    btnDisapprove.Enabled = true;
-                    ucjev1.Enabled = true;
-                    btnSave.Enabled = true;
-                    break;
-                case 1:
-                    //APPROVED
-                    lblJevStatus.Text = "Approved";
-                    lblJevStatus.ForeColor = System.Drawing.Color.Green;
-                    lblShowMessage.Visible = false;
-                    btnApprove.Enabled = false;
-                    btnDisapprove.Enabled = false;
-                    btnPrint.Enabled = true;
-                    btnSave.Enabled = true;
-                    ucjev1.Enabled = false;
-                    btnDelete.Enabled = false;
-                    btnSave.Enabled = false;
-                    break;
-                case 2:
-                    //DISSAPROVED
-                    lblJevStatus.Text = "Disapproved";
-                    lblJevStatus.ForeColor = Color.Firebrick;
-                    lblShowMessage.Visible = true;
-                    btnDisapprove.Enabled = false;
-                    btnPrint.Enabled = false;
-                    btnSave.Enabled = false;
-                    btnDelete.Enabled = false;
-                    ucjev1.Enabled = false;
-                    break;
-            }
         }
 
         //INSERT
@@ -372,6 +292,45 @@ namespace AccountingSystem.Views.Transactions.JEV
             return Factory.JEVRepository().UpdateWithGeneralJournal(jevModel, JevAcountsModelList(), generalJournalModel);
         }
 
+
+        private bool InsertData()
+        {
+            try
+            {
+                var userId = Helper.UserId;
+
+                if (!FormValidations())
+                    return false;
+
+                switch (uc.journalName)
+                {
+                    case "General Journal":
+                        return InsertGeneralJournal(userId);
+
+                    case "Procurement Received Journal":
+                        return InsertJournal(userId);
+
+                    case "Cash Disbursements Journal":
+                        return InsertCashDisbursementsJournal(userId);
+
+                    case "Cash Receipts Journal":
+                        return InsertCashReceiptsJournal(userId);
+
+                    case "Check Disbursements Journal":
+                        return InsertCheckDisbursementJournal(userId);
+
+                    case "Authority to Debit Account Disbursement Journal":
+                        return InsertADADisbursementsJournal(userId);
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return false;
+        }
+
         private bool UpdateData()
         {
             try
@@ -389,6 +348,12 @@ namespace AccountingSystem.Views.Transactions.JEV
                 {
                     Helper.MessageBoxError("Debit & Credit amounts must be equal.");
                     return false;
+                }
+
+                if (uc.isDisapproved == 1)
+                {
+                    MessageBox.Show("This JEV will be send back to pending.", "Message", MessageBoxButtons.OK);
+                    SetJEVStatus(0);
                 }
 
                 switch (uc.journalName)
@@ -426,7 +391,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             if (uc.jevId == 0)
             {
-                if (SaveData())
+                if (InsertData())
                 {
                     Helper.MessageBoxSuccess("JEV has been saved.");
                     ucjev1.ResetForm();
@@ -437,6 +402,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             if (UpdateData())
             {
                 Helper.MessageBoxSuccess("JEV has been saved.");
+                CheckJevStatus(uc.jevId);
 
                 if (uc.journalId != uc.oldJournalId) //CHECK IF THE PREVIOUS JOURNAL ID IS NOT EQUAL TO NEW SELECTED JOURNAL ID
                 {
@@ -534,17 +500,25 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        private void BtnCancel_Click(object sender, EventArgs e)
+        internal void ResetForm()
         {
             btnSave.Enabled = true;
             btnDelete.Enabled = false;
             btnApprove.Enabled = false;
             btnDisapprove.Enabled = false;
+            btnCancelJEV.Enabled = false;
             btnPrint.Enabled = false;
+            btnSave.Text = "Save";
+
             uc.Enabled = true;
             lblJevStatus.ForeColor = Color.Black;
             lblJevStatus.Text = "--";
             lblShowMessage.Visible = false;
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            ResetForm();
             uc.ResetForm();
         }
 
@@ -566,6 +540,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                     var jevRepository = Factory.JEVRepository();
                     _ = jevRepository.Delete(jevModel);
+                    ResetForm();
                     uc.ResetForm();
                 }
             }
@@ -580,13 +555,96 @@ namespace AccountingSystem.Views.Transactions.JEV
             _ = new frmJEVReport(uc.jevId, uc.jevNo, uc.journalId).ShowDialog();
         }
 
+        //CHECK JEV STATUS
+        internal void CheckJevStatus(int jevId)
+        {
+            switch (Factory.JEVRepository().GetJevStatus(jevId))
+            {
+                case 0:
+                    //PENDING
+                    lblJevStatus.Text = "PENDING";
+                    lblJevStatus.ForeColor = Color.DarkGoldenrod;
+                    lblShowMessage.Visible = false;
+                    btnPrint.Enabled = false;
+                    btnApprove.Enabled = true;
+                    btnDisapprove.Enabled = true;
+                    btnCancelJEV.Enabled = true;
+                    btnDelete.Enabled = true;
+                    ucjev1.Enabled = true;
+                    btnSave.Enabled = true;
+                    break;
+                case 1:
+                    //APPROVED
+                    lblJevStatus.Text = "APPROVED";
+                    lblJevStatus.ForeColor = System.Drawing.Color.Green;
+                    lblShowMessage.Visible = false;
+                    btnApprove.Enabled = false;
+                    btnDisapprove.Enabled = false;
+                    btnCancelJEV.Enabled = true;
+                    btnPrint.Enabled = true;
+                    btnSave.Enabled = true;
+                    ucjev1.Enabled = false;
+                    btnDelete.Enabled = false;
+                    btnSave.Enabled = false;
+                    break;
+                case 2:
+                    //DISSAPROVED
+                    lblJevStatus.Text = "DISAPPROVED";
+                    lblJevStatus.ForeColor = Color.Firebrick;
+                    lblShowMessage.Visible = true;
+                    btnDisapprove.Enabled = false;
+                    btnCancelJEV.Enabled = true;
+                    btnPrint.Enabled = false;
+                    btnSave.Enabled = false;
+                    btnDelete.Enabled = false;
+                    ucjev1.Enabled = false;
+                    break;
+                case 3:
+                    //CANCELLED
+                    lblJevStatus.Text = "CANCELLED";
+                    lblJevStatus.ForeColor = Color.Firebrick;
+                    lblShowMessage.Visible = false;
+                    btnApprove.Enabled = false;
+                    btnDisapprove.Enabled = false;
+                    btnCancelJEV.Enabled = false;
+                    btnPrint.Enabled = false;
+                    btnSave.Enabled = false;
+                    btnDelete.Enabled = false;
+                    ucjev1.Enabled = false;
+                    break;
+            }
+        }
+
+        //Set JEV Status
+        private bool SetJEVStatus(byte jevStatus)
+        {
+            try
+            {
+                var userId = Helper.UserId;
+
+                if (!FormValidations())
+                    return false;
+
+                var status = Factory.JEVRepository().SetJEVStatus(uc.jevId, jevStatus);
+
+                return status;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return false;
+        }
+
+        //APPROVE
         private void btnApprove_Click(object sender, EventArgs e)
         {
             if (uc.jevId != 0)
             {
                 if (MessageBox.Show("Are you sure you want to approved this JEV?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    if (SetJEVToApproved())
+                    if (SetJEVStatus(1))
                     {
                         Helper.MessageBoxSuccess("JEV has been approved.");
                         CheckJevStatus(uc.jevId);
@@ -597,41 +655,46 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        private bool SetJEVToApproved()
+        //DISAPPROVE
+        private void btnDisapprove_Click(object sender, EventArgs e)
         {
-            try
+            if (uc.jevId != 0)
             {
-                var userId = Helper.UserId;
-
-                if (!FormValidations())
-                    return false;
-
-                var isApproved = Factory.JEVRepository().SetJEVStatus(uc.jevId, 1);
-
-                //return isApproved ? true : false;
-                return isApproved;
-
+                var frmRemarks = new frmRemarks(this);
+                frmRemarks.isDissaprove = true;
+                frmRemarks.btnAccept.Text = "Disapprove";
+                frmRemarks.ShowDialog();
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-
-            return false;
         }
 
         private void lblShowMessage_Click(object sender, EventArgs e)
         {
-            _ = new frmRemarks(this).ShowDialog();
+            var frmRemarks = new frmRemarks(this);
+            if (ucjev1.Enabled)
+            {
+                frmRemarks.btnAccept.Visible = false;
+                frmRemarks.btnCancel.Text = "Close";
+            }
+            frmRemarks.ShowDialog();
+
         }
 
-        private void btnDisapprove_Click(object sender, EventArgs e)
+        //CANCEL
+        private void btnCancelJEV_Click(object sender, EventArgs e)
         {
-            var frmRemarks = new frmRemarks(this);
-            frmRemarks.isDissaprove = true;
-            frmRemarks.Text = "Disapproval Message";
-            frmRemarks.btnAccept.Text = "Disapprove";
-            frmRemarks.ShowDialog();
+            if (uc.jevId != 0)
+            {
+                if (MessageBox.Show("Are you sure you want to cancel this JEV?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    if (SetJEVStatus(3))
+                    {
+                        Helper.MessageBoxSuccess("JEV has been cancelled.");
+                        CheckJevStatus(uc.jevId);
+                    }
+                    return;
+                }
+
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Transactions;
 
 namespace ACC.Data
 {
+
     public class JEVRepository : IJEVRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
@@ -101,21 +102,6 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetAllJEV()
-        {
-            try
-            {
-                string query = $"SELECT jev_no FROM {tableName}";
-
-                var dtJournals = new DataTable();
-                return _dbGenericCommands.Fill(query, dtJournals);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         public DataTable GetRecordsByJEVNoAndDate(string searchText, sbyte jevDate)
         {
 
@@ -127,7 +113,27 @@ namespace ACC.Data
                     new object[] { "@date", DbType.String, $"%{jevDate}%" },
                 };
 
-                string query = $"SELECT id, funds_id, journals_id, jev_no, ref_no, payee, explanation, fund_code ,is_approved, created_at, created_by, updated_at, updated_by, CONCAT_WS('-', fund_code,YEAR(date_entry),MONTH(date_entry),jev_no) AS full_jev_no, date_entry FROM {viewTableName} WHERE is_approved=1 AND (jev_no LIKE @jev_no AND MONTH(date_entry) LIKE @date)";
+                string query = $"SELECT " +
+                    $"id, " +
+                    $"funds_id, " +
+                    $"journals_id, " +
+                    $"jev_no, " +
+                    $"ref_no, " +
+                    $"payee, " +
+                    $"explanation, " +
+                    $"fund_code, " +
+                    $"is_approved, " +
+                    $"is_disapproved, " +
+                    $"is_cancelled, " +
+                    $"created_at, " +
+                    $"created_by, " +
+                    $"updated_at, " +
+                    $"updated_by, " +
+                    $"CONCAT_WS('-', fund_code,YEAR(date_entry),MONTH(date_entry),jev_no) AS full_jev_no, " +
+                    $"date_entry " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE is_approved=1 " +
+                    $"AND (jev_no LIKE @jev_no AND MONTH(date_entry) LIKE @date)";
 
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
@@ -152,30 +158,27 @@ namespace ACC.Data
                     new object[] { "@date", DbType.String, $"%{searchText}%" },
                 };
 
-                string query = $"SELECT id, funds_id, journals_id, jev_no, full_jev_no, date_entry, ref_no, payee, explanation, fund_code ,is_approved, created_at, created_by, updated_at, updated_by FROM {viewTableName} WHERE is_approved=1 AND (jev_no LIKE @jev_no OR ref_no LIKE @ref_no OR payee LIKE @payee OR explanation LIKE @explanation)";
-
-                var dtGeneralLedgers = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public DataTable GetApprovedJEV(string searchText)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@jev_no", DbType.String, $"%{searchText}%" },
-                    new object[] { "@ref_no", DbType.String, $"%{searchText}%" },
-                    new object[] { "@payee", DbType.String, $"%{searchText}%" },
-                    new object[] { "@explanation", DbType.String, $"%{searchText}%" },
-                };
-
-                string query = $"SELECT id, funds_id, journals_id, jev_no, date_entry, ref_no, payee, explanation, fund_code ,is_approved, created_at, created_by, updated_at, updated_by FROM {viewTableName} WHERE is_approved = 1 AND (jev_no LIKE @jev_no OR ref_no LIKE @ref_no OR payee LIKE @payee OR explanation LIKE @explanation)";
+                string query = $"SELECT " +
+                    $"id, " +
+                    $"funds_id, " +
+                    $"journals_id, " +
+                    $"jev_no, " +
+                    $"full_jev_no, " +
+                    $"date_entry, " +
+                    $"ref_no, " +
+                    $"payee, " +
+                    $"explanation, " +
+                    $"fund_code, " +
+                    $"is_approved, " +
+                    $"is_disapproved, " +
+                    $"is_cancelled, " +
+                    $"created_at, " +
+                    $"created_by, " +
+                    $"updated_at, " +
+                    $"updated_by " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE is_approved=1 " +
+                    $"AND (jev_no LIKE @jev_no OR ref_no LIKE @ref_no OR payee LIKE @payee OR explanation LIKE @explanation)";
 
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
@@ -589,7 +592,29 @@ namespace ACC.Data
                     new object[] { "@jev_no", DbType.String, jevNo},
                 };
 
-                string query = $"SELECT id, funds_id, fund_code, fund_name, journals_id, journal_name, is_special, jev_no, date_entry, ref_no, payee, explanation, is_approved, is_disapproved, created_at, created_by, created_by_name, updated_at, updated_by, updated_by_name FROM {viewTableName} WHERE jev_no = @jev_no";
+                string query = $"SELECT id, " +
+                    $"funds_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"journals_id, " +
+                    $"journal_name, " +
+                    $"is_special, " +
+                    $"jev_no, " +
+                    $"date_entry, " +
+                    $"ref_no, " +
+                    $"payee, " +
+                    $"explanation, " +
+                    $"is_approved, " +
+                    $"is_disapproved, " +
+                    $"is_cancelled, " +
+                    $"created_at, " +
+                    $"created_by, " +
+                    $"created_by_name, " +
+                    $"updated_at, " +
+                    $"updated_by, " +
+                    $"updated_by_name " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE jev_no = @jev_no";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -610,6 +635,7 @@ namespace ACC.Data
                     record.Add("explanation", reader.Rows[0]["explanation"].ToString());
                     record.Add("is_approved", reader.Rows[0]["is_approved"].ToString());
                     record.Add("is_disapproved", reader.Rows[0]["is_disapproved"].ToString());
+                    record.Add("is_cancelled", reader.Rows[0]["is_cancelled"].ToString());
                     record.Add("created_at", reader.Rows[0]["created_at"].ToString());
                     record.Add("created_by", reader.Rows[0]["created_by"].ToString());
                     record.Add("created_by_name", reader.Rows[0]["created_by_name"].ToString());
@@ -683,10 +709,14 @@ namespace ACC.Data
                 };
 
                 string queryStatus = string.Empty;
-                if (jevStatus == 1)
-                    queryStatus = $"is_approved = 1, is_disapproved = 0";
+                if (jevStatus == 0)
+                    queryStatus = $"is_approved = 0, is_disapproved = 0, is_cancelled = 0";
+                else if (jevStatus == 1)
+                    queryStatus = $"is_approved = 1, is_disapproved = 0, is_cancelled = 0";
                 else if (jevStatus == 2)
-                    queryStatus = $"is_approved = 0, is_disapproved = 1";
+                    queryStatus = $"is_approved = 0, is_disapproved = 1, is_cancelled = 0";
+                else if (jevStatus == 3)
+                    queryStatus = $"is_approved = 0, is_disapproved = 0, is_cancelled = 1";
 
                 string query = $"UPDATE {tableName} SET {queryStatus} WHERE id = @jev_id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
@@ -696,6 +726,8 @@ namespace ACC.Data
                 throw;
             }
         }
+
+
 
         public int TotalApproveJEV()
         {
@@ -738,14 +770,17 @@ namespace ACC.Data
                 string jevStatusQuery = string.Empty;
                 switch (jevStatus)
                 {
-                    case 2:
-                        jevStatusQuery = $"is_disapproved = 1";
-                        break;
                     case 0:
-                        jevStatusQuery = $"is_approved = 0 AND is_disapproved = 0";
+                        jevStatusQuery = $"is_approved = 0 AND is_disapproved = 0 AND is_cancelled = 0";
                         break;
                     case 1:
-                        jevStatusQuery = $"is_approved = 1";
+                        jevStatusQuery = $"is_approved = 1 AND is_disapproved = 0 AND is_cancelled = 0";
+                        break;
+                    case 2:
+                        jevStatusQuery = $"is_approved = 0 AND is_disapproved = 1 AND is_cancelled = 0";
+                        break;
+                    case 3:
+                        jevStatusQuery = $"is_approved = 0 AND is_disapproved = 0 AND is_cancelled = 1";
                         break;
 
                 }
@@ -762,6 +797,7 @@ namespace ACC.Data
                     $"fund_code ," +
                     $"is_approved, " +
                     $"is_disapproved, " +
+                    $"is_cancelled," +
                     $"created_at, " +
                     $"created_by, " +
                     $"updated_at, " +
@@ -834,17 +870,19 @@ namespace ACC.Data
                 {
                     new object[] { "@jev_id", DbType.Int32, jevId}
                 };
-                string query = $"SELECT is_approved, is_disapproved FROM {tableName} WHERE id = @jev_id";
+                string query = $"SELECT is_approved, is_disapproved, is_cancelled FROM {tableName} WHERE id = @jev_id";
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
                     foreach (DataRow item in reader.Rows)
                     {
                         record.Add("is_approved", Convert.ToByte(item[0]));
                         record.Add("is_disapproved", Convert.ToByte(item[1]));
+                        record.Add("is_cancelled", Convert.ToByte(item[2]));
                     }
                 }
-
-                if (record["is_disapproved"] == 1)
+                if (record["is_cancelled"] == 1)
+                    return 3;
+                else if (record["is_disapproved"] == 1)
                     return 2;
                 else if (record["is_approved"] == 0)
                     return 0;
@@ -854,6 +892,49 @@ namespace ACC.Data
             catch (MySqlException)
             {
                 throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //REMARKS
+        public bool SetRemarks(int jevId, string remarks)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, jevId},
+                    new object[] { "@remarks", DbType.String, remarks}
+                };
+
+                string query = $"UPDATE {tableName} SET remarks = @remarks WHERE id = @id";
+
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public string GetRemarks(int jevId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, jevId}
+                };
+
+                string query = $"SELECT remarks FROM {tableName} WHERE id = @id";
+                return _dbGenericCommands.ExecuteScalar(query, parameters).ToString();
             }
             catch (Exception)
             {

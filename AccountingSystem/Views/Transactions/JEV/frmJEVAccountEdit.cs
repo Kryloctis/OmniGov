@@ -78,7 +78,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             decimal amount = GetAmountDebitCredit(isDebit);
 
             ucJEVAccount.txtObligationNo.Text = obligationNo;
-            ucJEVAccount.cmbFPP.SelectedValue = Convert.ToInt32(fppId);
+            ucJEVAccount.cmbFPP.SelectedValue = string.IsNullOrEmpty(fppId.ToString()) ? 0 : Convert.ToInt32(fppId);
             LoadSelectedGeneralLedgerAccount(generalLedgerId, accountCode, accountName);
             CheckedDebitCredit(isDebit);
             CheckedCollectionsDeposits(isDeposit);
