@@ -8,6 +8,7 @@ using System.Transactions;
 
 namespace ACC.Data
 {
+
     public class JEVRepository : IJEVRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
@@ -726,6 +727,8 @@ namespace ACC.Data
             }
         }
 
+
+
         public int TotalApproveJEV()
         {
             try
@@ -889,6 +892,49 @@ namespace ACC.Data
             catch (MySqlException)
             {
                 throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //REMARKS
+        public bool SetRemarks(int jevId, string remarks)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, jevId},
+                    new object[] { "@remarks", DbType.String, remarks}
+                };
+
+                string query = $"UPDATE {tableName} SET remarks = @remarks WHERE id = @id";
+
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public string GetRemarks(int jevId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, jevId}
+                };
+
+                string query = $"SELECT remarks FROM {tableName} WHERE id = @id";
+                return _dbGenericCommands.ExecuteScalar(query, parameters).ToString();
             }
             catch (Exception)
             {

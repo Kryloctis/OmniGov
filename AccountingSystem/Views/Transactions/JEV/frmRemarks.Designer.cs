@@ -29,20 +29,20 @@ namespace AccountingSystem.Views.Transactions.JEV
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtRemarks = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAccept = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txtRemarks
             // 
-            this.textBox1.Location = new System.Drawing.Point(9, 11);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(609, 225);
-            this.textBox1.TabIndex = 0;
+            this.txtRemarks.Location = new System.Drawing.Point(9, 11);
+            this.txtRemarks.Multiline = true;
+            this.txtRemarks.Name = "txtRemarks";
+            this.txtRemarks.Size = new System.Drawing.Size(609, 225);
+            this.txtRemarks.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
@@ -82,7 +82,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(629, 272);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtRemarks);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -99,7 +99,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtRemarks;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         internal System.Windows.Forms.Button btnAccept;
         internal System.Windows.Forms.Button btnCancel;

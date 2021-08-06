@@ -145,6 +145,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.oldJournalId = Convert.ToByte(jevDict["journals_id"]);
                     uc.isApproved = Convert.ToByte(jevDict["is_approved"]);
                     uc.isDisapproved = Convert.ToByte(jevDict["is_disapproved"]);
+                    uc.isCancelled = Convert.ToByte(jevDict["is_cancelled"]);
                     uc.jevNo = jevDict["jev_no"];
                     CheckedFund(jevDict["fund_name"]);
                     CheckedJournal(jevDict["journal_name"]);

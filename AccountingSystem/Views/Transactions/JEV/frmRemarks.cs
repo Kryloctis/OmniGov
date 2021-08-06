@@ -6,7 +6,7 @@ namespace AccountingSystem.Views.Transactions.JEV
     public partial class frmRemarks : Form
     {
         internal bool isDissaprove;
-        private bool isAccepted = false;
+
         frmJEV _frmJEV;
 
         public frmRemarks(frmJEV frmjev)
@@ -18,7 +18,27 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void frmRemarks_Load(object sender, EventArgs e)
         {
+            int jevId = _frmJEV.ucjev1.jevId;
+            txtRemarks.Text = Factory.JEVRepository().GetRemarks(jevId);
+        }
 
+        private bool SetRemarks()
+        {
+            try
+            {
+                if (!_frmJEV.FormValidations())
+                    return false;
+
+                int jevId = _frmJEV.ucjev1.jevId;
+                var remarks = Factory.JEVRepository().SetRemarks(jevId, txtRemarks.Text.Trim());
+
+                return remarks;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
         }
 
         private bool SetJEVToDisapproved()
@@ -26,13 +46,13 @@ namespace AccountingSystem.Views.Transactions.JEV
             try
             {
                 var userId = Helper.UserId;
+                int jevId = _frmJEV.ucjev1.jevId;
 
                 if (!_frmJEV.FormValidations())
                     return false;
 
-                var isDisapproved = Factory.JEVRepository().SetJEVStatus(_frmJEV.ucjev1.jevId, 2);
+                var isDisapproved = Factory.JEVRepository().SetJEVStatus(jevId, 2);
 
-                //return isApproved ? true : false;
                 return isDisapproved;
 
             }
@@ -44,6 +64,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             return false;
         }
 
+
         private void btnAccept_Click(object sender, EventArgs e)
         {
             if (isDissaprove)
@@ -51,9 +72,10 @@ namespace AccountingSystem.Views.Transactions.JEV
                 if (MessageBox.Show("Are you sure you want to disapproved this JEV?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
 
-                    if (SetJEVToDisapproved())
+                    if (SetJEVToDisapproved() && SetRemarks())
                     {
                         Helper.MessageBoxSuccess("JEV has been disapproved.");
+                        _frmJEV.ucjev1.isDisapproved = 1;
                         _frmJEV.CheckJevStatus(_frmJEV.ucjev1.jevId);
                         Close();
                     }

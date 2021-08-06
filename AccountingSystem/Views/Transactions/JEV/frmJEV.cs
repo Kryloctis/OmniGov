@@ -569,6 +569,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     btnApprove.Enabled = true;
                     btnDisapprove.Enabled = true;
                     btnCancelJEV.Enabled = true;
+                    btnDelete.Enabled = true;
                     ucjev1.Enabled = true;
                     btnSave.Enabled = true;
                     break;
@@ -614,6 +615,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
+        //Set JEV Status
         private bool SetJEVStatus(byte jevStatus)
         {
             try
@@ -634,6 +636,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             return false;
         }
+
         //APPROVE
         private void btnApprove_Click(object sender, EventArgs e)
         {

@@ -53,6 +53,11 @@ namespace ACC.Domain.Interfaces
 
         bool SetJEVStatus(int jevId, byte jevStatus);
 
+        //REMARKS
+        bool SetRemarks(int jevId, string remarks);
+        string GetRemarks(int jevId);
+
+
         DataTable FilterRecords(byte jevStatus, string searchTxt, short month, short year);
 
         byte GetJevStatus(int jevId);

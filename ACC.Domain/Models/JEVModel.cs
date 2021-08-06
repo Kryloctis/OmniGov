@@ -16,6 +16,7 @@ namespace ACC.Domain.Models
         public bool IsApproved { get; set; }
         public bool IsDisapproved { get; set; }
         public bool IsCancelled { get; set; }
+        public string remarks { get; set; }
         public List<JEVAccountsModel> JEVAccountsModelList { get; set; }
         public byte CreatedBy { get; set; }
         public byte UpdatedBy { get; set; }
