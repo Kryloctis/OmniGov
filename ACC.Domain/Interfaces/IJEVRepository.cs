@@ -35,8 +35,6 @@ namespace ACC.Domain.Interfaces
 
         int GetLastInsertedID();
 
-        DataTable GetAllJEV();
-
         string GetLastJevNoSeries();
 
         Dictionary<string, string> GetRecordByJEV(string jevNo);
@@ -54,8 +52,6 @@ namespace ACC.Domain.Interfaces
         int TotalPendingJEV();
 
         bool SetJEVStatus(int jevId, byte jevStatus);
-
-        DataTable GetApprovedJEV(string searchText);
 
         DataTable FilterRecords(byte jevStatus, string searchTxt, short month, short year);
 

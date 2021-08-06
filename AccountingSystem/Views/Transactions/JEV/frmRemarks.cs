@@ -6,6 +6,7 @@ namespace AccountingSystem.Views.Transactions.JEV
     public partial class frmRemarks : Form
     {
         internal bool isDissaprove;
+        private bool isAccepted = false;
         frmJEV _frmJEV;
 
         public frmRemarks(frmJEV frmjev)
@@ -45,15 +46,25 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to disapproved this JEV?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (isDissaprove)
             {
-
-                if (SetJEVToDisapproved())
+                if (MessageBox.Show("Are you sure you want to disapproved this JEV?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    Helper.MessageBoxSuccess("JEV has been disapproved.");
-                    _frmJEV.CheckJevStatus(_frmJEV.ucjev1.jevId);
-                    Close();
+
+                    if (SetJEVToDisapproved())
+                    {
+                        Helper.MessageBoxSuccess("JEV has been disapproved.");
+                        _frmJEV.CheckJevStatus(_frmJEV.ucjev1.jevId);
+                        Close();
+                    }
                 }
+            }
+            else
+            {
+                _frmJEV.btnSave.Enabled = true;
+                _frmJEV.btnSave.Text = "Update";
+                _frmJEV.ucjev1.Enabled = true;
+                Close();
             }
         }
     }

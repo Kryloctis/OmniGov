@@ -70,5 +70,6 @@ namespace AccountingSystem.Views.Dashboard
             frmJEVSearch.LoadJEVList();
             frmJEVSearch.ShowDialog();
         }
+
     }
 }

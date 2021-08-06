@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.JEV
@@ -16,6 +17,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal string journalName;
         internal byte isApproved = 0;
         internal byte isDisapproved = 0;
+        internal byte isCancelled = 0;
 
         public ucJEV()
         {
@@ -39,18 +41,30 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         internal void ResetForm()
         {
-            txtJEVNo.Clear();
-            txtRefNo.Clear();
-            txtPayee.Clear();
-            txtExplanation.Clear();
+            jevId = 0;
+            jevNo = string.Empty;
+            oldJournalId = 0;
+            journalName = string.Empty;
+            isApproved = 0;
+            isDisapproved = 0;
+            isCancelled = 0;
 
-            txtCheckNo.Clear();
-            txtRCIORADA.Clear();
-            txtDVRCDNo.Clear();
+            txtJEVNo.Text = string.Empty;
+            txtRefNo.Text = string.Empty;
+            txtPayee.Text = string.Empty;
+            txtExplanation.Text = string.Empty;
+
+            txtCheckNo.Text = string.Empty;
+            txtRCIORADA.Text = string.Empty;
+            txtDVRCDNo.Text = string.Empty;
 
             dgAccounts.Rows.Clear();
-            txtDebitTotal.Clear();
-            txtCreditTotal.Clear();
+            txtDebitTotal.Text = 0.ToString("N2");
+            txtCreditTotal.Text = 0.ToString("N2");
+            flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => ((byte)r.Tag == 1) ? r.Checked = true : r.Checked = false);
+            flowLayoutPanelJournals.Controls.OfType<RadioButton>().FirstOrDefault(r => ((byte)r.Tag == 1) ? r.Checked = true : r.Checked = false);
+
+            dtpDateEntry.Value = DateTime.Now;
 
             txtJEVNo.Text = GetJEVSeriesNo();
         }
@@ -77,7 +91,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     fundId = Convert.ToByte(fund["id"]);
                     ShowCheckIcon(radFund);
 
-                    GenerateJEVNumber(fund["fund_code"].ToString(), dtpDateEntry.Value.Year.ToString(), dtpDateEntry.Value.Month.ToString("00"));
+                    GenerateJEVNumber();
                 }
 
 
@@ -140,29 +154,22 @@ namespace AccountingSystem.Views.Transactions.JEV
                 radioButton.Image = null;
         }
 
-        private void GenerateJEVNumber(string fundCode = null, string year = null, string month = null, string seriesNo = null)
-        {
-            string jevNo = txtFundsJevNo.Text;
-            string[] part = jevNo.Split("-");
-
-            fundCode ??= part[0];
-            year ??= part[1];
-            month ??= part[2];
-
-            txtFundsJevNo.Text = $"{fundCode}-{year}-{month}";
-        }
-
-        private void SetJEVNoOfFundCode()
+        private void GenerateJEVNumber()
         {
             var fund = Factory.FundsRepository().GetRecordByID(fundId);
-            GenerateJEVNumber(fund["fund_code"]);
+            string fundCode = fund["fund_code"];
+
+            string year = dtpDateEntry.Value.Year.ToString();
+            string month = dtpDateEntry.Value.ToString("MM");
+
+            txtFundsJevNo.Text = $"{fundCode}-{year}-{month}";
         }
 
         private void radioFunds_Click(object sender, EventArgs e)
         {
             var radFund = sender as RadioButton;
             fundId = Convert.ToByte(radFund.Tag);
-            SetJEVNoOfFundCode();
+            GenerateJEVNumber();
         }
 
         private void radioFunds_CheckedChanged(object sender, EventArgs e)
@@ -381,7 +388,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void dtpDateEntry_ValueChanged(object sender, EventArgs e)
         {
-            GenerateJEVNumber(null, dtpDateEntry.Value.Year.ToString(), dtpDateEntry.Value.Month.ToString("00"));
+            GenerateJEVNumber();
         }
 
         private void dgAccounts_SelectionChanged(object sender, EventArgs e)

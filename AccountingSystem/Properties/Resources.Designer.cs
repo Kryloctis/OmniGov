@@ -263,19 +263,9 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap document__cancel_24px {
+        internal static System.Drawing.Bitmap document_approve_28px {
             get {
-                object obj = ResourceManager.GetObject("document__cancel_24px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap document_approval_28px {
-            get {
-                object obj = ResourceManager.GetObject("document_approval_28px", resourceCulture);
+                object obj = ResourceManager.GetObject("document_approve_28px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -296,6 +286,16 @@ namespace AccountingSystem.Properties {
         internal static System.Drawing.Bitmap document_delivery_24px {
             get {
                 object obj = ResourceManager.GetObject("document_delivery_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_disapprove_28px {
+            get {
+                object obj = ResourceManager.GetObject("document_disapprove_28px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

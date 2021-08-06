@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ACC.Domain.Models
 {
@@ -15,6 +14,8 @@ namespace ACC.Domain.Models
         public string Payee { get; set; }
         public string Explanation { get; set; }
         public bool IsApproved { get; set; }
+        public bool IsDisapproved { get; set; }
+        public bool IsCancelled { get; set; }
         public List<JEVAccountsModel> JEVAccountsModelList { get; set; }
         public byte CreatedBy { get; set; }
         public byte UpdatedBy { get; set; }

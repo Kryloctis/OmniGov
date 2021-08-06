@@ -116,7 +116,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.cmbxJevStatus.Items.AddRange(new object[] {
             "Pending",
             "Approved",
-            "Dissaproved"});
+            "Dissaproved",
+            "Cancelled"});
             this.cmbxJevStatus.Location = new System.Drawing.Point(3, 3);
             this.cmbxJevStatus.Name = "cmbxJevStatus";
             this.cmbxJevStatus.Size = new System.Drawing.Size(152, 23);
