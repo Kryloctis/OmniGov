@@ -123,6 +123,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
         {
             decimal amount = Convert.ToDecimal(item["amount"]);
 
+
             if (Convert.ToBoolean(item["is_debit"]))
             {
                 row["particulars"] = particulars;
@@ -189,22 +190,26 @@ namespace AccountingSystem.Views.Reports.Ledgers
             var DebitBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundId, generalLedgerId, year, 1);
             var CreditBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundId, generalLedgerId, year, 0);
 
+            balance = (DebitBeginningBalance - CreditBeginningBalance).ToString("N2");
+            
 
-            balanceDebit = Convert.ToDecimal(DebitBeginningBalance).ToString("N2");
-            balanceCredit = Convert.ToDecimal(CreditBeginningBalance).ToString("N2");
+            var dateDict = Factory.BeginningBalancesRepository().GetRecordByFundsAndGeneralLedgerID(fundId, generalLedgerId, year);
+            balanceDate = Convert.ToDateTime(dateDict["date_entry"]).ToShortDateString();
 
-            balance = (Math.Max(Convert.ToDecimal(balanceDebit), Convert.ToDecimal(balanceCredit)) - Math.Min(Convert.ToDecimal(balanceDebit), Convert.ToDecimal(balanceCredit))).ToString("N2");
+            balanceDebit = DebitBeginningBalance.ToString("N2");
+            balanceCredit = CreditBeginningBalance.ToString("N2");
 
+            //balance = (Math.Max(Convert.ToDecimal(balanceDebit), Convert.ToDecimal(balanceCredit)) - Math.Min(Convert.ToDecimal(balanceDebit), Convert.ToDecimal(balanceCredit))).ToString("N2");
 
             if (Convert.ToDecimal(balanceDebit) > Convert.ToDecimal(balanceCredit))
             {
-                balanceDebit = balance;
+                balanceDebit = Math.Abs(Convert.ToDecimal(balance)).ToString();
                 balanceCredit = "0";
             }
             else
             {
                 balanceDebit = "0";
-                balanceCredit = balance;
+                balanceCredit = Math.Abs(Convert.ToDecimal(balance)).ToString();
             }
 
             beginningBalance = Convert.ToDecimal(balance);
@@ -247,7 +252,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 Helper.MessageBoxError(ex.Message);
             }
         }
-
 
         private void frmGeneralLedgerReport_Load(object sender, EventArgs e)
         {

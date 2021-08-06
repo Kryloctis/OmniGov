@@ -201,7 +201,7 @@ namespace ACC.Data
 
                 string query = $"SELECT " +
                     $"jev_id, date_entry, " +
-                    $"MONTHNAME(date_entry) AS month_name, " +
+                    $"MONTHNAME(MAX(date_entry)) AS month_name, " +
                     $"jev_no, " +
                     $"full_jev_no, " +
                     $"journal_name, " +
@@ -210,7 +210,7 @@ namespace ACC.Data
                     $"account_code, " +
                     $"is_deposit, " +
                     $"is_debit, " +
-                    $"SUM(amount) AS amount " +
+                    $"SUM(amount) AS amount " + 
                     $"FROM {viewTableName} " +
                     $"WHERE is_approved = 1 " +
                     $"AND funds_id = @funds_id " +
