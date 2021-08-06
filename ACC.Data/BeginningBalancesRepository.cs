@@ -41,7 +41,7 @@ namespace ACC.Data
                     new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryLedgerId},
                 };
 
-                string query = $"SELECT funds_id, id, subsidiary_ledger_accounts_id, is_debit, date_entry, amount, created_at, updated_at FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id";
+                string query = $"SELECT funds_id, id, subsidiary_ledger_accounts_id, is_debit, MAX(date_entry) AS date_entry, amount, created_at, updated_at FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -79,7 +79,7 @@ namespace ACC.Data
                     new object[] { "@year", DbType.Int16, year},
                 };
 
-                string query = $"SELECT funds_id, id, subsidiary_ledger_accounts_id, is_debit, date_entry, amount, created_at, updated_at FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year";
+                string query = $"SELECT funds_id, id, subsidiary_ledger_accounts_id, is_debit, MAX(date_entry) AS date_entry, amount, created_at, updated_at FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
