@@ -691,7 +691,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!debit_amount.Value)</Value>
+                                  <Value>=Sum(Fields!debit_amount.Value)+Parameters!paramBalanceDebit.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -725,7 +725,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -858,7 +857,9 @@
                             <Color>Black</Color>
                           </TopBorder>
                           <BottomBorder>
-                            <Style>None</Style>
+                            <Color>Black</Color>
+                            <Style>Solid</Style>
+                            <Width>2pt</Width>
                           </BottomBorder>
                           <LeftBorder>
                             <Color>Black</Color>
@@ -871,6 +872,7 @@
                             <Width>1pt</Width>
                           </RightBorder>
                           <BackgroundColor>LightGrey</BackgroundColor>
+                          <VerticalAlign>Middle</VerticalAlign>
                           <PaddingLeft>2pt</PaddingLeft>
                           <PaddingRight>2pt</PaddingRight>
                           <PaddingTop>2pt</PaddingTop>
@@ -912,7 +914,9 @@
                                 <Color>Black</Color>
                               </TopBorder>
                               <BottomBorder>
-                                <Style>None</Style>
+                                <Color>Black</Color>
+                                <Style>Solid</Style>
+                                <Width>2pt</Width>
                               </BottomBorder>
                               <LeftBorder>
                                 <Color>Black</Color>
@@ -925,6 +929,7 @@
                                 <Width>1pt</Width>
                               </RightBorder>
                               <BackgroundColor>LightGrey</BackgroundColor>
+                              <VerticalAlign>Middle</VerticalAlign>
                               <PaddingLeft>2pt</PaddingLeft>
                               <PaddingRight>2pt</PaddingRight>
                               <PaddingTop>2pt</PaddingTop>
@@ -966,7 +971,9 @@
                                     <Color>Black</Color>
                                   </TopBorder>
                                   <BottomBorder>
-                                    <Style>None</Style>
+                                    <Color>Black</Color>
+                                    <Style>Solid</Style>
+                                    <Width>2pt</Width>
                                   </BottomBorder>
                                   <LeftBorder>
                                     <Color>Black</Color>
@@ -979,6 +986,7 @@
                                     <Width>1pt</Width>
                                   </RightBorder>
                                   <BackgroundColor>LightGrey</BackgroundColor>
+                                  <VerticalAlign>Middle</VerticalAlign>
                                   <PaddingLeft>2pt</PaddingLeft>
                                   <PaddingRight>2pt</PaddingRight>
                                   <PaddingTop>2pt</PaddingTop>
@@ -989,165 +997,6 @@
                           </TablixHeader>
                           <TablixMembers>
                             <TablixMember />
-                          </TablixMembers>
-                        </TablixMember>
-                      </TablixMembers>
-                    </TablixMember>
-                  </TablixMembers>
-                </TablixMember>
-                <TablixMember>
-                  <TablixHeader>
-                    <Size>0.75046in</Size>
-                    <CellContents>
-                      <Textbox Name="Textbox131">
-                        <CanGrow>true</CanGrow>
-                        <KeepTogether>true</KeepTogether>
-                        <Paragraphs>
-                          <Paragraph>
-                            <TextRuns>
-                              <TextRun>
-                                <Value />
-                                <Style>
-                                  <FontSize>9pt</FontSize>
-                                  <FontWeight>Bold</FontWeight>
-                                </Style>
-                              </TextRun>
-                            </TextRuns>
-                            <Style />
-                          </Paragraph>
-                        </Paragraphs>
-                        <rd:DefaultName>Textbox131</rd:DefaultName>
-                        <Style>
-                          <Border>
-                            <Style>None</Style>
-                          </Border>
-                          <BottomBorder>
-                            <Color>Black</Color>
-                            <Style>Solid</Style>
-                            <Width>1.5pt</Width>
-                          </BottomBorder>
-                          <LeftBorder>
-                            <Color>Black</Color>
-                            <Style>Solid</Style>
-                            <Width>1pt</Width>
-                          </LeftBorder>
-                          <RightBorder>
-                            <Color>Black</Color>
-                            <Style>Solid</Style>
-                            <Width>1pt</Width>
-                          </RightBorder>
-                          <BackgroundColor>LightGrey</BackgroundColor>
-                          <PaddingLeft>2pt</PaddingLeft>
-                          <PaddingRight>2pt</PaddingRight>
-                          <PaddingTop>2pt</PaddingTop>
-                          <PaddingBottom>2pt</PaddingBottom>
-                        </Style>
-                      </Textbox>
-                    </CellContents>
-                  </TablixHeader>
-                  <TablixMembers>
-                    <TablixMember>
-                      <TablixHeader>
-                        <Size>1.73267in</Size>
-                        <CellContents>
-                          <Textbox Name="Textbox232">
-                            <CanGrow>true</CanGrow>
-                            <KeepTogether>true</KeepTogether>
-                            <Paragraphs>
-                              <Paragraph>
-                                <TextRuns>
-                                  <TextRun>
-                                    <Value />
-                                    <Style>
-                                      <FontSize>9pt</FontSize>
-                                      <FontWeight>Bold</FontWeight>
-                                    </Style>
-                                  </TextRun>
-                                </TextRuns>
-                                <Style />
-                              </Paragraph>
-                            </Paragraphs>
-                            <rd:DefaultName>Textbox232</rd:DefaultName>
-                            <Style>
-                              <Border>
-                                <Style>None</Style>
-                              </Border>
-                              <BottomBorder>
-                                <Color>Black</Color>
-                                <Style>Solid</Style>
-                                <Width>1.5pt</Width>
-                              </BottomBorder>
-                              <LeftBorder>
-                                <Color>Black</Color>
-                                <Style>Solid</Style>
-                                <Width>1pt</Width>
-                              </LeftBorder>
-                              <RightBorder>
-                                <Color>Black</Color>
-                                <Style>Solid</Style>
-                                <Width>1pt</Width>
-                              </RightBorder>
-                              <BackgroundColor>LightGrey</BackgroundColor>
-                              <PaddingLeft>2pt</PaddingLeft>
-                              <PaddingRight>2pt</PaddingRight>
-                              <PaddingTop>2pt</PaddingTop>
-                              <PaddingBottom>2pt</PaddingBottom>
-                            </Style>
-                          </Textbox>
-                        </CellContents>
-                      </TablixHeader>
-                      <TablixMembers>
-                        <TablixMember>
-                          <TablixHeader>
-                            <Size>0.62731in</Size>
-                            <CellContents>
-                              <Textbox Name="Textbox237">
-                                <CanGrow>true</CanGrow>
-                                <KeepTogether>true</KeepTogether>
-                                <Paragraphs>
-                                  <Paragraph>
-                                    <TextRuns>
-                                      <TextRun>
-                                        <Value />
-                                        <Style>
-                                          <FontSize>9pt</FontSize>
-                                          <FontWeight>Bold</FontWeight>
-                                        </Style>
-                                      </TextRun>
-                                    </TextRuns>
-                                    <Style />
-                                  </Paragraph>
-                                </Paragraphs>
-                                <rd:DefaultName>Textbox237</rd:DefaultName>
-                                <Style>
-                                  <Border>
-                                    <Style>None</Style>
-                                  </Border>
-                                  <BottomBorder>
-                                    <Color>Black</Color>
-                                    <Style>Solid</Style>
-                                    <Width>1.5pt</Width>
-                                  </BottomBorder>
-                                  <LeftBorder>
-                                    <Color>Black</Color>
-                                    <Style>Solid</Style>
-                                    <Width>1pt</Width>
-                                  </LeftBorder>
-                                  <RightBorder>
-                                    <Color>Black</Color>
-                                    <Style>Solid</Style>
-                                    <Width>1pt</Width>
-                                  </RightBorder>
-                                  <BackgroundColor>LightGrey</BackgroundColor>
-                                  <PaddingLeft>2pt</PaddingLeft>
-                                  <PaddingRight>2pt</PaddingRight>
-                                  <PaddingTop>2pt</PaddingTop>
-                                  <PaddingBottom>2pt</PaddingBottom>
-                                </Style>
-                              </Textbox>
-                            </CellContents>
-                          </TablixHeader>
-                          <TablixMembers>
                             <TablixMember />
                           </TablixMembers>
                         </TablixMember>
@@ -1166,10 +1015,11 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>=CDate(Parameters!paramBalanceDate.Value)</Value>
+                                <Label>date</Label>
+                                <Value>=Parameters!paramBalanceDate.Value</Value>
                                 <Style>
                                   <FontSize>9pt</FontSize>
-                                  <Format>d</Format>
+                                  <Format>MMM d, yyyy</Format>
                                 </Style>
                               </TextRun>
                             </TextRuns>
@@ -1310,13 +1160,12 @@
                 <TablixMember>
                   <Group Name="date">
                     <GroupExpressions>
-                      <GroupExpression>=Fields!date.Value</GroupExpression>
+                      <GroupExpression>=Month(Fields!date.Value)</GroupExpression>
                     </GroupExpressions>
                   </Group>
                   <SortExpressions>
                     <SortExpression>
                       <Value>=Fields!date.Value</Value>
-                      <Direction>Descending</Direction>
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
@@ -1329,7 +1178,8 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>=Fields!date.Value</Value>
+                                <Label>date</Label>
+                                <Value>=CDate(Fields!date.Value)</Value>
                                 <Style>
                                   <FontSize>9pt</FontSize>
                                   <Format>MMM yyyy</Format>
@@ -1376,11 +1226,6 @@
                           <GroupExpression>=Fields!particulars.Value</GroupExpression>
                         </GroupExpressions>
                       </Group>
-                      <SortExpressions>
-                        <SortExpression>
-                          <Value>=Fields!particulars.Value</Value>
-                        </SortExpression>
-                      </SortExpressions>
                       <TablixHeader>
                         <Size>1.73267in</Size>
                         <CellContents>
@@ -1439,7 +1284,8 @@
                           </Group>
                           <SortExpressions>
                             <SortExpression>
-                              <Value>=Fields!ref.Value</Value>
+                              <Value>Fields!ref.Value</Value>
+                              <Direction>Descending</Direction>
                             </SortExpression>
                           </SortExpressions>
                           <TablixHeader>

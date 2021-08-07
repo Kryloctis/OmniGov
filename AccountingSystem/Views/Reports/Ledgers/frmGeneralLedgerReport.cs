@@ -191,15 +191,13 @@ namespace AccountingSystem.Views.Reports.Ledgers
             var CreditBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundId, generalLedgerId, year, 0);
 
             balance = (DebitBeginningBalance - CreditBeginningBalance).ToString("N2");
-            
+
 
             var dateDict = Factory.BeginningBalancesRepository().GetRecordByFundsAndGeneralLedgerID(fundId, generalLedgerId, year);
             balanceDate = Convert.ToDateTime(dateDict["date_entry"]).ToShortDateString();
 
             balanceDebit = DebitBeginningBalance.ToString("N2");
             balanceCredit = CreditBeginningBalance.ToString("N2");
-
-            //balance = (Math.Max(Convert.ToDecimal(balanceDebit), Convert.ToDecimal(balanceCredit)) - Math.Min(Convert.ToDecimal(balanceDebit), Convert.ToDecimal(balanceCredit))).ToString("N2");
 
             if (Convert.ToDecimal(balanceDebit) > Convert.ToDecimal(balanceCredit))
             {
