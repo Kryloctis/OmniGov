@@ -741,14 +741,15 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox42">
+                        <Textbox Name="txtGrandTotalDebit">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!debit_amount.Value)</Value>
+                                  <Label>Grand Debit Total</Label>
+                                  <Value>=Sum(Fields!debit_amount.Value) + ReportItems!txtDebitBeginningBalance.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -761,7 +762,6 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox42</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -797,14 +797,15 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox43">
+                        <Textbox Name="txtGrandTotalCredit">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!credit_amount.Value)</Value>
+                                  <Label>Grand Credit Total</Label>
+                                  <Value>=Sum(Fields!credit_amount.Value) + ReportItems!txtBeginningCredit.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -817,7 +818,6 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox43</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -849,7 +849,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -861,7 +860,8 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Last(Fields!balance.Value)</Value>
+                                  <Label>Grand Balance Total</Label>
+                                  <Value>=ReportItems!txtGrandTotalDebit.Value - ReportItems!txtGrandTotalCredit.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -1222,7 +1222,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>=CDate(Parameters!paramBalanceDate.Value)</Value>
+                                <Value>=Parameters!paramBalanceDate.Value</Value>
                                 <Style>
                                   <FontSize>9pt</FontSize>
                                   <Format>d</Format>

@@ -63,22 +63,23 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private static void ValidateDebitCreditRow(string particulars, DataRow item, DataRow row, ref decimal balance)
         {
-            decimal amount = (decimal)item["amount"];
+            decimal amount = Convert.ToDecimal(item["amount"]);
+
+
             if (Convert.ToBoolean(item["is_debit"]))
             {
                 row["particulars"] = particulars;
                 row["debit_amount"] = item["amount"];
                 row["credit_amount"] = 0;
-                balance -= amount;
+                balance += amount;
             }
             else
             {
                 row["particulars"] = $"{particulars}";
                 row["debit_amount"] = 0;
                 row["credit_amount"] = item["amount"];
-                balance += amount;
+                balance -= amount;
             }
-
             row["balance"] = balance;
         }
 
@@ -86,21 +87,20 @@ namespace AccountingSystem.Views.Reports.Ledgers
         {
             byte fundId = (byte)cmbFunds.SelectedValue;
             ushort generalLedgerId = (ushort)cmbAccount.SelectedValue;
-            int subsidiaryLedgerId = (int)cmbSubsidiaryLedger.SelectedValue;
+            ushort subsidiaryLedgerId = Convert.ToUInt16(cmbSubsidiaryLedger.SelectedValue);
             short year = Convert.ToInt16(cmbYear.Text);
 
             var dtSubsidiaryLedger = new dsLFS.SubsidiaryLedgerDataTable();
-            var dtSubsidiaryLedgerFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundAndGeneralLedger(fundId, generalLedgerId, year);
+            var dtSubsidiaryLedgerFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundAndSubsidiaryLedgerAndSubsidiaryLedger(fundId, generalLedgerId, subsidiaryLedgerId, year);
 
             string particulars;
             foreach (DataRow item in dtSubsidiaryLedgerFromDB.Rows)
             {
-                //particulars = ParseParticulars(item);
                 particulars = item["explanation"].ToString();
 
                 DataRow row = dtSubsidiaryLedger.NewRow();
-                row["date"] = item["month_name"];
-                row["ref"] = item["jev_no"].ToString();
+                row["date"] = item["date_entry"];
+                row["ref"] = item["jev_no"];
 
                 ValidateDebitCreditRow(particulars, item, row, ref beginningBalance);
 
@@ -120,27 +120,25 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
             var subsidiaryId = Convert.ToInt16(cmbSubsidiaryLedger.SelectedValue);
 
-
             var subsidiaryDict = Factory.BeginningBalancesRepository().GetRecordByFundsAndGeneralLedgerID(fundId, generalLedgerId, year, (ushort)subsidiaryId);
 
-            balanceDate = Convert.ToDateTime(subsidiaryDict["date_entry"]).ToShortDateString();
+            balanceDate = string.IsNullOrEmpty(subsidiaryDict["date_entry"]) ? string.Empty : Convert.ToDateTime(subsidiaryDict["date_entry"]).ToString("MMM,dd,yyyy");
 
             if (subsidiaryDict["is_debit"] == "1")
             {
-                balanceDebit = Convert.ToDecimal(subsidiaryDict["amount"]).ToString("N2");
+                balanceDebit = string.IsNullOrEmpty(subsidiaryDict["amount"]) ? string.Empty : Convert.ToDecimal(subsidiaryDict["amount"]).ToString("N2");
                 balanceCredit = "0";
             }
 
             else
             {
-                balanceCredit = Convert.ToDecimal(subsidiaryDict["amount"]).ToString("N2");
+                balanceCredit = string.IsNullOrEmpty(subsidiaryDict["amount"]) ? string.Empty : Convert.ToDecimal(subsidiaryDict["amount"]).ToString("N2");
                 balanceDebit = "0";
             }
-            
 
-            balance = Convert.ToDecimal(subsidiaryDict["amount"]).ToString("N2");
-            beginningBalance = Convert.ToDecimal(subsidiaryDict["amount"]);
-            //beginningBalance = Convert.ToDecimal(balance);
+
+            balance = string.IsNullOrEmpty(subsidiaryDict["amount"]) ? string.Empty : Convert.ToDecimal(subsidiaryDict["amount"]).ToString("N2");
+            beginningBalance = string.IsNullOrEmpty(subsidiaryDict["amount"]) ? 0 : Convert.ToDecimal(balance);
         }
 
         private void LoadReport(LocalReport report)
@@ -183,7 +181,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.StackTrace);
+                Helper.MessageBoxError($"{ex.Message} /////// {ex.StackTrace}");
             }
         }
 

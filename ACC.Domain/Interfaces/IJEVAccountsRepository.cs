@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ACC.Domain.Models;
+using System;
 using System.Data;
-using System.Text;
-using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
@@ -13,6 +11,8 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecordsByFundJournalDate(byte fundId, byte journalId, DateTime dateEntry);
 
         DataTable GetViewRecordsByFundAndGeneralLedger(byte fundId, ushort generalLedgerId, short year);
+
+        DataTable GetViewRecordsByFundAndSubsidiaryLedgerAndSubsidiaryLedger(byte fundId, ushort generalLedgerId, ushort subsidiaryLedgerId, short year);
 
         DataTable GetJEVAmount(byte fundId, ushort generalLedgerId, short year);
 

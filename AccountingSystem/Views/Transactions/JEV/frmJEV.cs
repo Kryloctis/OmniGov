@@ -352,9 +352,9 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                 if (uc.isDisapproved == 1)
                 {
-                    MessageBox.Show("This JEV will be send back to pending.", "Message", MessageBoxButtons.OK);
-                    SetJEVStatus(0);
+                    return SetJEVStatus(0);
                 }
+
 
                 switch (uc.journalName)
                 {
@@ -401,7 +401,9 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             if (UpdateData())
             {
-                Helper.MessageBoxSuccess("JEV has been saved.");
+                string message = uc.isDisapproved == 1 ? "This JEV will be send back to pending." : "JEV has been saved.";
+
+                Helper.MessageBoxSuccess(message);
                 CheckJevStatus(uc.jevId);
 
                 if (uc.journalId != uc.oldJournalId) //CHECK IF THE PREVIOUS JOURNAL ID IS NOT EQUAL TO NEW SELECTED JOURNAL ID
