@@ -194,7 +194,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
 
             var dateDict = Factory.BeginningBalancesRepository().GetRecordByFundsAndGeneralLedgerID(fundId, generalLedgerId, year);
-            balanceDate = Convert.ToDateTime(dateDict["date_entry"]).ToShortDateString();
+            balanceDate = string.IsNullOrEmpty(dateDict["date_entry"]) ? string.Empty : Convert.ToDateTime(dateDict["date_entry"]).ToString("MMM,dd,yyyy");
 
             balanceDebit = DebitBeginningBalance.ToString("N2");
             balanceCredit = CreditBeginningBalance.ToString("N2");
