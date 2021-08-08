@@ -716,7 +716,7 @@ namespace ACC.Data
                 else if (jevStatus == 2)
                     queryStatus = $"is_approved = 0, is_disapproved = 1, is_cancelled = 0";
                 else if (jevStatus == 3)
-                    queryStatus = $"is_approved = 0, is_disapproved = 0, is_cancelled = 1";
+                    queryStatus = $"is_cancelled = 1";
 
                 string query = $"UPDATE {tableName} SET {queryStatus} WHERE id = @jev_id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);

@@ -154,8 +154,10 @@ namespace ACC.Data
                     $"is_debit, " +
                     $"amount " +
                     $"FROM {viewTableName} " +
-                    $"WHERE " +
-                    $"funds_id = @funds_id " +
+                    $"WHERE is_approved = 1 " +
+                    $"AND is_cancelled = 0 " +
+                    $"AND is_disapproved = 0 " +
+                    $"AND funds_id = @funds_id " +
                     $"AND journals_id = @journals_id " +
                     $"AND MONTH(date_entry) = MONTH(@date_entry) " +
                     $"AND YEAR(date_entry) = YEAR(@date_entry)";
@@ -214,6 +216,8 @@ namespace ACC.Data
                     $"SUM(amount) AS amount " +
                     $"FROM {viewTableName} " +
                     $"WHERE is_approved = 1 " +
+                    $"AND is_cancelled = 0 " +
+                    $"AND is_disapproved = 0 " +
                     $"AND funds_id = @funds_id " +
                     $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
                     $"AND YEAR(date_entry) = @year " +
@@ -262,6 +266,8 @@ namespace ACC.Data
                     $"SUM(amount) AS amount " +
                     $"FROM {viewTableName} " +
                     $"WHERE is_approved = 1 " +
+                    $"AND is_cancelled = 0 " +
+                    $"AND is_disapproved = 0 " +
                     $"AND funds_id = @funds_id " +
                     $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
                     $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id " +
@@ -355,7 +361,5 @@ namespace ACC.Data
                 throw;
             }
         }
-
-
     }
 }
