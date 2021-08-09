@@ -16,5 +16,10 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         {
             InitializeComponent();
         }
+
+        private void frmTrialBalance_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
