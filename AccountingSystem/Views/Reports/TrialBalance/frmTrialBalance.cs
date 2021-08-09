@@ -53,18 +53,24 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         private void ShowPostTrialBalance()
         {
-            var frmPostTrialBalance = new frmPostClosingTrialBalance();
-            frmPostTrialBalance.TopLevel = false;
-            frmPostTrialBalance.AutoScroll = true;
+            var frmPostTrialBalance = new frmPostClosingTrialBalance
+            {
+                TopLevel = false,
+                AutoScroll = true
+            };
+
             panelReport.Controls.Add(frmPostTrialBalance);
             frmPostTrialBalance.Show();
         }
 
         private void ShowPreTrialBalance()
         {
-            var frmPreTrialBalance = new frmPreClosingTrialBalance();
-            frmPreTrialBalance.TopLevel = false;
-            frmPreTrialBalance.AutoScroll = true;
+            var frmPreTrialBalance = new frmPreClosingTrialBalance
+            {
+                TopLevel = false,
+                AutoScroll = true
+            };
+
             panelReport.Controls.Add(frmPreTrialBalance);
             frmPreTrialBalance.Show();
         }
