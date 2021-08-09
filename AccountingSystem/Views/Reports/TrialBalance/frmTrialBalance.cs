@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Reporting.WinForms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,11 +16,39 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         public frmTrialBalance()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
         }
 
         private void frmTrialBalance_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void radioPreTB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioPreTB.Checked)
+                ShowPreTrialBalance();
+            else
+                ShowPostTrialBalance();
+        }
+
+        private void ShowPostTrialBalance()
+        {
+            var frmPreTrialBalance = new frmPreClosingTrialBalance();
+            frmPreTrialBalance.TopLevel = false;
+            frmPreTrialBalance.AutoScroll = true;
+            panelReport.Controls.Add(frmPreTrialBalance);
+            frmPreTrialBalance.Show();
+        }
+
+        private void ShowPreTrialBalance()
+        {
+
+            var frmPostTrialBalance = new frmPostClosingTrialBalance();
+            frmPostTrialBalance.TopLevel = false;
+            frmPostTrialBalance.AutoScroll = true;
+            panelReport.Controls.Add(frmPostTrialBalance);
+            frmPostTrialBalance.Show();
         }
     }
 }
