@@ -36,7 +36,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             reportViewer.ZoomPercent = 100;
             reportViewer.RefreshReport();
         }
-
         private void LoadReport(LocalReport report)
         {
             try
@@ -66,13 +65,21 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             }
         }
 
+        private DataTable RecordsFilter()
+        {
+            if (cbHideZeroBalance.Checked)
+                return Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsWithBeginningBalances();
+            else
+                return Factory.GeneralLedgerAccountsRepository().GetAllViewRecords();
+        }
+
         private DataTable DataTablePreTrialBalance()
         {
             fundId = Convert.ToByte(cmbFund.SelectedValue);
             year = Convert.ToInt16(dtAsOf.Value.Year);
 
             var dtPreTrialBalance = new dsLFS.dtPreTrialBalanceDataTable();
-            var dtPreTrialBalanceFromDB = Factory.GeneralLedgerAccountsRepository().GetAllViewRecords();
+            var dtPreTrialBalanceFromDB = RecordsFilter();
 
             foreach (DataRow item in dtPreTrialBalanceFromDB.Rows)
             {

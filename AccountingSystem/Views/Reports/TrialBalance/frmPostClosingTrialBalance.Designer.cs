@@ -30,7 +30,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.cbHideZeroBalance = new System.Windows.Forms.CheckBox();
             this.dtAsOf = new System.Windows.Forms.DateTimePicker();
             this.cmbFund = new System.Windows.Forms.ComboBox();
             this.btnRetrieve = new System.Windows.Forms.Button();
@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.checkBox1);
+            this.panel1.Controls.Add(this.cbHideZeroBalance);
             this.panel1.Controls.Add(this.dtAsOf);
             this.panel1.Controls.Add(this.cmbFund);
             this.panel1.Controls.Add(this.btnRetrieve);
@@ -55,15 +55,15 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             this.panel1.Size = new System.Drawing.Size(915, 47);
             this.panel1.TabIndex = 3;
             // 
-            // checkBox1
+            // cbHideZeroBalance
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(556, 15);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(127, 19);
-            this.checkBox1.TabIndex = 9;
-            this.checkBox1.Text = "Hide Zero Balances";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.cbHideZeroBalance.AutoSize = true;
+            this.cbHideZeroBalance.Location = new System.Drawing.Point(556, 15);
+            this.cbHideZeroBalance.Name = "cbHideZeroBalance";
+            this.cbHideZeroBalance.Size = new System.Drawing.Size(127, 19);
+            this.cbHideZeroBalance.TabIndex = 9;
+            this.cbHideZeroBalance.Text = "Hide Zero Balances";
+            this.cbHideZeroBalance.UseVisualStyleBackColor = true;
             // 
             // dtAsOf
             // 
@@ -149,6 +149,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.Panel panelReport;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox cbHideZeroBalance;
     }
 }

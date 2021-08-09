@@ -24,15 +24,43 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         }
 
-        private void radioPreTB_CheckedChanged(object sender, EventArgs e)
+        private void ChangePanelDisplayForm()
         {
             if (radioPreTB.Checked)
+            {
                 ShowPreTrialBalance();
+                radioPreTB.Image = Properties.Resources.ok14px;
+                radioPostTB.Image = null;
+            }
+
             else
+            {
                 ShowPostTrialBalance();
+                radioPostTB.Image = Properties.Resources.ok14px;
+                radioPreTB.Image = null;
+            }
+        }
+
+        private void radioPostTB_CheckedChanged(object sender, EventArgs e)
+        {
+            ChangePanelDisplayForm();
+        }
+
+        private void radioPreTB_CheckedChanged(object sender, EventArgs e)
+        {
+            ChangePanelDisplayForm();
         }
 
         private void ShowPostTrialBalance()
+        {
+            var frmPostTrialBalance = new frmPostClosingTrialBalance();
+            frmPostTrialBalance.TopLevel = false;
+            frmPostTrialBalance.AutoScroll = true;
+            panelReport.Controls.Add(frmPostTrialBalance);
+            frmPostTrialBalance.Show();
+        }
+
+        private void ShowPreTrialBalance()
         {
             var frmPreTrialBalance = new frmPreClosingTrialBalance();
             frmPreTrialBalance.TopLevel = false;
@@ -41,14 +69,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             frmPreTrialBalance.Show();
         }
 
-        private void ShowPreTrialBalance()
-        {
 
-            var frmPostTrialBalance = new frmPostClosingTrialBalance();
-            frmPostTrialBalance.TopLevel = false;
-            frmPostTrialBalance.AutoScroll = true;
-            panelReport.Controls.Add(frmPostTrialBalance);
-            frmPostTrialBalance.Show();
-        }
     }
 }

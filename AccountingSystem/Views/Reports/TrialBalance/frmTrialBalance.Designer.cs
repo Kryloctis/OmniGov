@@ -51,12 +51,14 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // 
             this.radioPostTB.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioPostTB.AutoSize = true;
-            this.radioPostTB.Location = new System.Drawing.Point(118, 10);
+            this.radioPostTB.Location = new System.Drawing.Point(131, 10);
             this.radioPostTB.Name = "radioPostTB";
             this.radioPostTB.Size = new System.Drawing.Size(109, 25);
             this.radioPostTB.TabIndex = 5;
             this.radioPostTB.Text = "Post Trial Balance";
+            this.radioPostTB.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.radioPostTB.UseVisualStyleBackColor = true;
+            this.radioPostTB.CheckedChanged += new System.EventHandler(this.radioPostTB_CheckedChanged);
             // 
             // radioPreTB
             // 
@@ -69,6 +71,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             this.radioPreTB.TabIndex = 4;
             this.radioPreTB.TabStop = true;
             this.radioPreTB.Text = "Pre Trial Balance";
+            this.radioPreTB.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.radioPreTB.UseVisualStyleBackColor = true;
             this.radioPreTB.CheckedChanged += new System.EventHandler(this.radioPreTB_CheckedChanged);
             // 
