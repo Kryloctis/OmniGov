@@ -50,12 +50,12 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // radioPostTB
             // 
             this.radioPostTB.Appearance = System.Windows.Forms.Appearance.Button;
-            this.radioPostTB.AutoSize = true;
-            this.radioPostTB.Location = new System.Drawing.Point(131, 10);
+            this.radioPostTB.Location = new System.Drawing.Point(139, 10);
             this.radioPostTB.Name = "radioPostTB";
-            this.radioPostTB.Size = new System.Drawing.Size(109, 25);
+            this.radioPostTB.Size = new System.Drawing.Size(124, 25);
             this.radioPostTB.TabIndex = 5;
             this.radioPostTB.Text = "Post Trial Balance";
+            this.radioPostTB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.radioPostTB.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.radioPostTB.UseVisualStyleBackColor = true;
             this.radioPostTB.CheckedChanged += new System.EventHandler(this.radioPostTB_CheckedChanged);
@@ -63,14 +63,14 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // radioPreTB
             // 
             this.radioPreTB.Appearance = System.Windows.Forms.Appearance.Button;
-            this.radioPreTB.AutoSize = true;
             this.radioPreTB.Checked = true;
             this.radioPreTB.Location = new System.Drawing.Point(9, 10);
             this.radioPreTB.Name = "radioPreTB";
-            this.radioPreTB.Size = new System.Drawing.Size(103, 25);
+            this.radioPreTB.Size = new System.Drawing.Size(124, 25);
             this.radioPreTB.TabIndex = 4;
             this.radioPreTB.TabStop = true;
             this.radioPreTB.Text = "Pre Trial Balance";
+            this.radioPreTB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.radioPreTB.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.radioPreTB.UseVisualStyleBackColor = true;
             this.radioPreTB.CheckedChanged += new System.EventHandler(this.radioPreTB_CheckedChanged);
@@ -99,7 +99,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmTrialBalance_Load);
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }

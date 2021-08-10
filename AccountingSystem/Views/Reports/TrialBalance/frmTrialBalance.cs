@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         private void frmTrialBalance_Load(object sender, EventArgs e)
         {
-
+            ChangePanelDisplayForm();
         }
 
         private void ChangePanelDisplayForm()
