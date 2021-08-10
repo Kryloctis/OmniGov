@@ -105,6 +105,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             this.Controls.Add(this.btnRetrieve);
             this.Controls.Add(this.cmbAccount);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmSubsidiaryLedgerReport";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

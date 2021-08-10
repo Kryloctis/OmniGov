@@ -137,10 +137,10 @@ namespace AccountingSystem
                 menuJournalsReport.Visible = false;
 
             if (!Helper.HasPermission("Report General Ledger"))
-                menuGeneralLedgerReport.Visible = false;
+                menuLedgersReport.Visible = false;
 
             if (!Helper.HasPermission("Report Subsidiary Ledger"))
-                menuSubsidiaryLedgerReport.Visible = false;
+                menuLedgersReport.Visible = false;
 
             if (!Helper.HasPermission("Report General Ledger") && !Helper.HasPermission("Report Subsidiary Ledger"))
                 menuLedgersReport.Visible = false;
@@ -515,8 +515,12 @@ namespace AccountingSystem
         {
             _ = new frmStatementOfComparisonOfBudgetAndActualAmounts().ShowDialog();
         }
+
         #endregion
 
-
+        private void menuLedgersReport_Click(object sender, EventArgs e)
+        {
+            _ = new frmLedger().ShowDialog();
+        }
     }
 }
