@@ -467,14 +467,9 @@ namespace AccountingSystem
             _ = new frmConsolidatedReceipts().ShowDialog();
         }
 
-        private void menuPreClosingTrialBalance_Click(object sender, EventArgs e)
+        private void menuTrialBalance_Click(object sender, EventArgs e)
         {
-            _ = new frmPreClosingTrialBalance().ShowDialog();
-        }
-
-        private void menuPostClosingTrialBalance_Click(object sender, EventArgs e)
-        {
-            _ = new frmPostClosingTrialBalance().ShowDialog();
+            _ = new frmTrialBalance().ShowDialog();
         }
 
         private void menuDailyCash_Click(object sender, EventArgs e)
@@ -521,5 +516,7 @@ namespace AccountingSystem
             _ = new frmStatementOfComparisonOfBudgetAndActualAmounts().ShowDialog();
         }
         #endregion
+
+
     }
 }
