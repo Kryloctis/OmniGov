@@ -64,8 +64,6 @@ namespace AccountingSystem
             this.menuReportCkDJ = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportADADJ = new System.Windows.Forms.ToolStripMenuItem();
             this.menuLedgersReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuGeneralLedgerReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuSubsidiaryLedgerReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOB = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOBB = new System.Windows.Forms.ToolStripMenuItem();
             this.menuJEVS = new System.Windows.Forms.ToolStripMenuItem();
@@ -393,26 +391,10 @@ namespace AccountingSystem
             // 
             // menuLedgersReport
             // 
-            this.menuLedgersReport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuGeneralLedgerReport,
-            this.menuSubsidiaryLedgerReport});
             this.menuLedgersReport.Name = "menuLedgersReport";
             this.menuLedgersReport.Size = new System.Drawing.Size(233, 22);
             this.menuLedgersReport.Text = "Ledgers";
-            // 
-            // menuGeneralLedgerReport
-            // 
-            this.menuGeneralLedgerReport.Name = "menuGeneralLedgerReport";
-            this.menuGeneralLedgerReport.Size = new System.Drawing.Size(176, 22);
-            this.menuGeneralLedgerReport.Text = "General Ledger...";
-            this.menuGeneralLedgerReport.Click += new System.EventHandler(this.MenuGeneralLedgerReport_Click);
-            // 
-            // menuSubsidiaryLedgerReport
-            // 
-            this.menuSubsidiaryLedgerReport.Name = "menuSubsidiaryLedgerReport";
-            this.menuSubsidiaryLedgerReport.Size = new System.Drawing.Size(176, 22);
-            this.menuSubsidiaryLedgerReport.Text = "Subsidiary Ledger...";
-            this.menuSubsidiaryLedgerReport.Click += new System.EventHandler(this.menuSubsidiaryLedgerReport_Click);
+            this.menuLedgersReport.Click += new System.EventHandler(this.menuLedgersReport_Click);
             // 
             // menuSAAOB
             // 
@@ -852,8 +834,6 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuDisbursingOfficer;
         internal System.Windows.Forms.ToolStripMenuItem menuSAAOB;
         private System.Windows.Forms.ToolStripMenuItem menuLedgersReport;
-        private System.Windows.Forms.ToolStripMenuItem menuGeneralLedgerReport;
-        private System.Windows.Forms.ToolStripMenuItem menuSubsidiaryLedgerReport;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnJournalEntry;
         private System.Windows.Forms.ToolStripButton btnObligationRequest;
