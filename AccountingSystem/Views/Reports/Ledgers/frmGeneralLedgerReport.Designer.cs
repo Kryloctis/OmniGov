@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Location = new System.Drawing.Point(12, 59);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(960, 490);
+            this.panel1.Size = new System.Drawing.Size(976, 529);
             this.panel1.TabIndex = 1;
             // 
             // cmbAccount
@@ -93,6 +93,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             this.Controls.Add(this.btnRetrieve);
             this.Controls.Add(this.cmbAccount);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "frmGeneralLedgerReport";

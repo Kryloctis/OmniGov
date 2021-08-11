@@ -1,12 +1,6 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.TrialBalance
@@ -66,13 +60,21 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             }
         }
 
+        private DataTable RecordsFilter()
+        {
+            if (cbHideZeroBalance.Checked)
+                return Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsWithBeginningBalances();
+            else
+                return Factory.GeneralLedgerAccountsRepository().GetAllViewRecords();
+        }
+
         private DataTable DataTablePreTrialBalance()
         {
             fundId = Convert.ToByte(cmbFund.SelectedValue);
             year = Convert.ToInt16(dtAsOf.Value.Year);
 
             var dtPreTrialBalance = new dsLFS.dtPreTrialBalanceDataTable();
-            var dtPreTrialBalanceFromDB = Factory.GeneralLedgerAccountsRepository().GetAllViewRecords();
+            var dtPreTrialBalanceFromDB = RecordsFilter();
 
             foreach (DataRow item in dtPreTrialBalanceFromDB.Rows)
             {

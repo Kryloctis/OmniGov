@@ -41,7 +41,20 @@ namespace ACC.Data
                     new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryLedgerId},
                 };
 
-                string query = $"SELECT funds_id, id, subsidiary_ledger_accounts_id, is_debit, MAX(date_entry) AS date_entry, amount, created_at, updated_at FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id";
+                string query = $"SELECT " +
+                    $"funds_id, " +
+                    $"id, " +
+                    $"subsidiary_ledger_accounts_id, " +
+                    $"is_debit, " +
+                    $"MAX(date_entry) AS date_entry, " +
+                    $"amount, " +
+                    $"created_at, " +
+                    $"updated_at " +
+                    $"FROM {tableName} " +
+                    $"WHERE funds_id = @funds_id " +
+                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
+                    $"AND YEAR(date_entry) = @year " +
+                    $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -285,37 +298,7 @@ namespace ACC.Data
             return false;
         }
 
-        public Dictionary<string, string> GetDebitAndCreditOfAllAccounts(byte fundsId)
-        {
-            var record = new Dictionary<string, string>();
-
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@funds_id", DbType.Byte, fundsId}
-                };
-
-                string query = $"SELECT COALESCE(FORMAT(SUM(IF(bb.is_debit=1, bb.amount, '')),2),0) AS total_debit, COALESCE(FORMAT(SUM(IF(bb.is_debit=0, bb.amount, '')),2),0) AS total_credit, bb.date_entry FROM beginning_balances AS bb INNER JOIN view_general_ledger_accounts AS gla ON bb.general_ledger_accounts_id = gla.general_ledger_accounts_id";
-
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-
-                    record.Add("debit", reader.Rows[0]["total_debit"].ToString());
-                    record.Add("credit", reader.Rows[0]["total_credit"].ToString());
-                    record.Add("date", reader.Rows[0]["date_entry"].ToString());
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            return record;
-        }
-
+        #region TRIAL BALANCE
         public Dictionary<string, string> GetDebitAndCreditOfTemporaryAccounts(byte fundsId)
         {
             var record = new Dictionary<string, string>();
@@ -401,6 +384,7 @@ namespace ACC.Data
                 throw;
             }
         }
+        #endregion
 
         public bool DeleteById(int Id)
         {
@@ -422,7 +406,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
 
     }
 }

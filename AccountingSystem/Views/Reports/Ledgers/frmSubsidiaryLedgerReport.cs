@@ -85,13 +85,13 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private DataTable DataTableSubsidiaryLedger()
         {
-            byte fundId = (byte)cmbFunds.SelectedValue;
-            ushort generalLedgerId = (ushort)cmbAccount.SelectedValue;
-            ushort subsidiaryLedgerId = Convert.ToUInt16(cmbSubsidiaryLedger.SelectedValue);
+            int fundId = Convert.ToInt32(cmbFunds.SelectedValue);
+            int generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
+            int subsidiaryLedgerId = Convert.ToInt32(cmbSubsidiaryLedger.SelectedValue);
             short year = Convert.ToInt16(cmbYear.Text);
 
             var dtSubsidiaryLedger = new dsLFS.SubsidiaryLedgerDataTable();
-            var dtSubsidiaryLedgerFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundAndSubsidiaryLedgerAndSubsidiaryLedger(fundId, generalLedgerId, subsidiaryLedgerId, year);
+            var dtSubsidiaryLedgerFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundAndSubsidiaryLedgerAndSubsidiaryLedgerAndYear(fundId, generalLedgerId, subsidiaryLedgerId, year);
 
             string particulars;
             foreach (DataRow item in dtSubsidiaryLedgerFromDB.Rows)

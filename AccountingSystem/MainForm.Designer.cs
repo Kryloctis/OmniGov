@@ -64,14 +64,10 @@ namespace AccountingSystem
             this.menuReportCkDJ = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportADADJ = new System.Windows.Forms.ToolStripMenuItem();
             this.menuLedgersReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuGeneralLedgerReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuSubsidiaryLedgerReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOB = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOBB = new System.Windows.Forms.ToolStripMenuItem();
             this.menuJEVS = new System.Windows.Forms.ToolStripMenuItem();
             this.menuTrialBalance = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuPreClosingTrialBalance = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuPostClosingTrialBalance = new System.Windows.Forms.ToolStripMenuItem();
             this.financialStatementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statementOfFinancialPositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statementOfFinancialPerformanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -141,14 +137,14 @@ namespace AccountingSystem
             // menuLogout
             // 
             this.menuLogout.Name = "menuLogout";
-            this.menuLogout.Size = new System.Drawing.Size(157, 22);
+            this.menuLogout.Size = new System.Drawing.Size(156, 22);
             this.menuLogout.Text = "Logout";
             this.menuLogout.Click += new System.EventHandler(this.menuLogout_Click);
             // 
             // menuExitApp
             // 
             this.menuExitApp.Name = "menuExitApp";
-            this.menuExitApp.Size = new System.Drawing.Size(157, 22);
+            this.menuExitApp.Size = new System.Drawing.Size(156, 22);
             this.menuExitApp.Text = "Exit Application";
             this.menuExitApp.Click += new System.EventHandler(this.menuExitApp_Click);
             // 
@@ -162,7 +158,7 @@ namespace AccountingSystem
             this.menuGenerateRCD,
             this.menuIssueReceipts});
             this.menuTransactions.Name = "menuTransactions";
-            this.menuTransactions.Size = new System.Drawing.Size(84, 19);
+            this.menuTransactions.Size = new System.Drawing.Size(85, 19);
             this.menuTransactions.Text = "Transactions";
             // 
             // menuJEV
@@ -395,26 +391,10 @@ namespace AccountingSystem
             // 
             // menuLedgersReport
             // 
-            this.menuLedgersReport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuGeneralLedgerReport,
-            this.menuSubsidiaryLedgerReport});
             this.menuLedgersReport.Name = "menuLedgersReport";
             this.menuLedgersReport.Size = new System.Drawing.Size(233, 22);
             this.menuLedgersReport.Text = "Ledgers";
-            // 
-            // menuGeneralLedgerReport
-            // 
-            this.menuGeneralLedgerReport.Name = "menuGeneralLedgerReport";
-            this.menuGeneralLedgerReport.Size = new System.Drawing.Size(176, 22);
-            this.menuGeneralLedgerReport.Text = "General Ledger...";
-            this.menuGeneralLedgerReport.Click += new System.EventHandler(this.MenuGeneralLedgerReport_Click);
-            // 
-            // menuSubsidiaryLedgerReport
-            // 
-            this.menuSubsidiaryLedgerReport.Name = "menuSubsidiaryLedgerReport";
-            this.menuSubsidiaryLedgerReport.Size = new System.Drawing.Size(176, 22);
-            this.menuSubsidiaryLedgerReport.Text = "Subsidiary Ledger...";
-            this.menuSubsidiaryLedgerReport.Click += new System.EventHandler(this.menuSubsidiaryLedgerReport_Click);
+            this.menuLedgersReport.Click += new System.EventHandler(this.menuLedgersReport_Click);
             // 
             // menuSAAOB
             // 
@@ -439,26 +419,10 @@ namespace AccountingSystem
             // 
             // menuTrialBalance
             // 
-            this.menuTrialBalance.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuPreClosingTrialBalance,
-            this.menuPostClosingTrialBalance});
             this.menuTrialBalance.Name = "menuTrialBalance";
             this.menuTrialBalance.Size = new System.Drawing.Size(233, 22);
             this.menuTrialBalance.Text = "Trial Balance";
-            // 
-            // menuPreClosingTrialBalance
-            // 
-            this.menuPreClosingTrialBalance.Name = "menuPreClosingTrialBalance";
-            this.menuPreClosingTrialBalance.Size = new System.Drawing.Size(208, 22);
-            this.menuPreClosingTrialBalance.Text = "Pre Closing Trial Balance";
-            this.menuPreClosingTrialBalance.Click += new System.EventHandler(this.menuPreClosingTrialBalance_Click);
-            // 
-            // menuPostClosingTrialBalance
-            // 
-            this.menuPostClosingTrialBalance.Name = "menuPostClosingTrialBalance";
-            this.menuPostClosingTrialBalance.Size = new System.Drawing.Size(208, 22);
-            this.menuPostClosingTrialBalance.Text = "Post Closing Trial Balance";
-            this.menuPostClosingTrialBalance.Click += new System.EventHandler(this.menuPostClosingTrialBalance_Click);
+            this.menuTrialBalance.Click += new System.EventHandler(this.menuTrialBalance_Click);
             // 
             // financialStatementsToolStripMenuItem
             // 
@@ -872,8 +836,6 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuDisbursingOfficer;
         internal System.Windows.Forms.ToolStripMenuItem menuSAAOB;
         private System.Windows.Forms.ToolStripMenuItem menuLedgersReport;
-        private System.Windows.Forms.ToolStripMenuItem menuGeneralLedgerReport;
-        private System.Windows.Forms.ToolStripMenuItem menuSubsidiaryLedgerReport;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnJournalEntry;
         private System.Windows.Forms.ToolStripButton btnObligationRequest;
@@ -916,8 +878,6 @@ namespace AccountingSystem
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem menuReceiptsConsolidated;
         private System.Windows.Forms.ToolStripMenuItem menuTrialBalance;
-        private System.Windows.Forms.ToolStripMenuItem menuPreClosingTrialBalance;
-        private System.Windows.Forms.ToolStripMenuItem menuPostClosingTrialBalance;
         private System.Windows.Forms.ToolStripMenuItem menuDailyCash;
         private System.Windows.Forms.ToolStripMenuItem financialStatementsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem statementOfFinancialPositionToolStripMenuItem;

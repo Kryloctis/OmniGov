@@ -1,9 +1,8 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
@@ -33,7 +32,7 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT sub_major_account_group_id, account_code, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {viewTableName} WHERE general_ledger_accounts_id = @general_ledger_accounts_id";
-                
+
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
@@ -75,7 +74,7 @@ namespace ACC.Data
                         return record;
 
                     record.Add("sub_major_account_group_id", reader.Rows[0]["sub_major_account_group_id"].ToString());
-                   // record.Add("account_code", reader.Rows[0]["account_code"].ToString());
+                    // record.Add("account_code", reader.Rows[0]["account_code"].ToString());
                     record.Add("ledger_code", reader.Rows[0]["ledger_code"].ToString());
                     record.Add("ledger_name", reader.Rows[0]["ledger_name"].ToString());
                     record.Add("is_contra_account", reader.Rows[0]["is_contra_account"].ToString());
@@ -105,12 +104,30 @@ namespace ACC.Data
                 throw;
             }
         }
-        
+
         public DataTable GetViewRecords()
         {
             try
             {
-                string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, created_at, updated_at FROM {viewTableName}";
+                string query = $"SELECT " +
+                    $"account_group_id, " +
+                    $"account_group_code, " +
+                    $"account_group_name, " +
+                    $"major_account_group_id, " +
+                    $"maj_acc_group_code, " +
+                    $"maj_acc_group_name, " +
+                    $"sub_maj_acc_group_code, " +
+                    $"sub_maj_acc_group_name, " +
+                    $"sub_major_account_group_id, " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_code, " +
+                    $"ledger_code, " +
+                    $"ledger_name, " +
+                    $"is_contra_account, " +
+                    $"created_at, " +
+                    $"updated_at " +
+                    $"FROM " +
+                    $"{viewTableName}";
 
                 var dtJournals = new DataTable();
                 return _dbGenericCommands.Fill(query, dtJournals);
@@ -211,7 +228,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableName}.id,CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) AS account_code,{tableName}.ledger_name FROM {tableName} LEFT JOIN {tableName4} ON {tableName}.sub_major_account_group_id={tableName4}.id LEFT JOIN {tableName3} ON {tableName4}.major_account_group_id={tableName3}.id LEFT JOIN {tableName2} ON ({tableName3}.account_group_id={tableName2}.id AND {tableName2}.id='4') WHERE CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) IS NOT NULL AND (CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) LIKE '%{srchtxt}%' OR ledger_name LIKE '%{srchtxt}%')";               
+                string query = $"SELECT {tableName}.id,CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) AS account_code,{tableName}.ledger_name FROM {tableName} LEFT JOIN {tableName4} ON {tableName}.sub_major_account_group_id={tableName4}.id LEFT JOIN {tableName3} ON {tableName4}.major_account_group_id={tableName3}.id LEFT JOIN {tableName2} ON ({tableName3}.account_group_id={tableName2}.id AND {tableName2}.id='4') WHERE CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) IS NOT NULL AND (CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) LIKE '%{srchtxt}%' OR ledger_name LIKE '%{srchtxt}%')";
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers);
 
@@ -221,127 +238,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
-
-        public bool NameExist(string txtName)
-        {
-            try
-            {
-                var parameters = new object[][]
-               {
-                    new object[] { "@ledger_name", DbType.String, txtName},
-               };
-
-                string query = $"SELECT id FROM {tableName} WHERE ledger_name = @ledger_name";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return false;
-        }
-
-        public bool NameExist(int id, string txtName)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@ledger_name", DbType.String, txtName},
-                    new object[] { "@id", DbType.Int32, id }
-                };
-
-                string query = $"SELECT id FROM {tableName} WHERE id <> @id AND ledger_name = @ledger_name";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return false;
-        }
-    
-
-        public DataTable GetAllViewRecords()
-        {
-            try
-            {
-                string query = $"SELECT " +
-                    $"gl.general_ledger_accounts_id, " +
-                    $"gl.ledger_name, " +
-                    $"gl.account_code, " +
-                    $"gl.account_group_code, " +
-                    $"SUM(IF(bb.is_debit=1, bb.amount, 0)) AS debit_beginning_bal, " +
-                    $"SUM(IF(bb.is_debit=0, bb.amount, 0)) AS credit_beginning_bal " + 
-                  
-                    $"FROM {viewTableName} AS gl " +
-                    $"LEFT JOIN beginning_balances AS bb " +
-                    $"ON bb.general_ledger_accounts_id = gl.general_ledger_accounts_id " +
-                    $"GROUP BY gl.ledger_name";
-
-                var dtJournals = new DataTable();
-                return _dbGenericCommands.Fill(query, dtJournals);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-
-        public DataTable GetAllViewRecordsBySearch(string searchText)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@searchText", DbType.String, $"%{searchText}%" }
-                };
-
-
-                string query = $"SELECT " +
-                    $"general_ledger_accounts_id, " +
-                    $"account_group_id, " +
-                    $"account_group_code, " +
-                    $"account_group_name, " +
-                    $"major_account_group_id, " +
-                    $"maj_acc_group_code, " +
-                    $"maj_acc_group_name, " +
-                    $"sub_maj_acc_group_code, " +
-                    $"sub_maj_acc_group_name, " +
-                    $"sub_major_account_group_id, " +
-                    $"general_ledger_accounts_id, " +
-                    $"account_code, " +
-                    $"ledger_code, " +
-                    $"ledger_name, " +
-                    $"is_contra_account, " +
-                    $"created_at, " +
-                    $"updated_at " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE " +
-                    $"account_code LIKE @searchText " +
-                    $"OR REPLACE(account_code, '-', '') LIKE @searchText " +
-                    $"OR ledger_name LIKE @searchText";
-
-                var dtJournals = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtJournals, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-
 
 
         public DataTable GetViewRecordsByMajorAccGroupName(string majAccGroupName)
@@ -429,7 +325,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
 
 
 
@@ -539,21 +434,51 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetViewRecordsBySearchAndAccountGroup(int accountGroupId, string searchText)
+        //TRIAL BALANCE
+        public DataTable GetAllViewRecords()
         {
             try
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@account_group_id", DbType.Int32, accountGroupId },
-                    new object[] { "@searchText", DbType.String, $"%{searchText}%" }
-                };
-
-
-                string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, sub_maj_acc_group_name, created_at, updated_at FROM {viewTableName} WHERE account_group_id = @account_group_id AND account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText";
+                string query = $"SELECT " +
+                    $"gl.general_ledger_accounts_id, " +
+                    $"gl.ledger_name, " +
+                    $"gl.account_code, " +
+                    $"gl.account_group_code, " +
+                    $"SUM(IF(bb.is_debit=1, bb.amount, 0)) AS debit_beginning_bal, " +
+                    $"SUM(IF(bb.is_debit=0, bb.amount, 0)) AS credit_beginning_bal " +
+                    $"FROM {viewTableName} AS gl " +
+                    $"LEFT JOIN beginning_balances AS bb " +
+                    $"ON bb.general_ledger_accounts_id = gl.general_ledger_accounts_id " +
+                    $"GROUP BY gl.ledger_name";
 
                 var dtJournals = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtJournals, parameters);
+                return _dbGenericCommands.Fill(query, dtJournals);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //TRIAL BALANCE
+        public DataTable GetAllViewRecordsWithBeginningBalances()
+        {
+            try
+            {
+                string query = $"SELECT " +
+                    $"gl.general_ledger_accounts_id, " +
+                    $"gl.ledger_name, " +
+                    $"gl.account_code, " +
+                    $"gl.account_group_code, " +
+                    $"SUM(IF(bb.is_debit=1, bb.amount, 0)) AS debit_beginning_bal, " +
+                    $"SUM(IF(bb.is_debit=0, bb.amount, 0)) AS credit_beginning_bal " +
+                    $"FROM {viewTableName} AS gl " +
+                    $"INNER JOIN beginning_balances AS bb " +
+                    $"ON bb.general_ledger_accounts_id = gl.general_ledger_accounts_id " +
+                    $"GROUP BY gl.ledger_name";
+
+                var dtJournals = new DataTable();
+                return _dbGenericCommands.Fill(query, dtJournals);
             }
             catch (Exception)
             {

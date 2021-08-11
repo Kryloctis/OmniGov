@@ -19,10 +19,56 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             panel1.Controls.Add(reportViewer);
         }
 
+        private decimal GetBalances(int fundId, int generalLedgerAccountId, DateTime dateEntry)
+        {
+            decimal transactionDebit = Factory.JEVAccountsRepository().GetSumTransactionsByFundAndAccountAndIsDebitAndDateEntry(fundId, generalLedgerAccountId, true, dateEntry);
+            decimal transactionCredit = Factory.JEVAccountsRepository().GetSumTransactionsByFundAndAccountAndIsDebitAndDateEntry(fundId, generalLedgerAccountId, false, dateEntry);
+
+            decimal transactionBalance = Math.Max(transactionDebit, transactionCredit) - Math.Min(transactionDebit, transactionCredit);
+
+            return transactionBalance;
+        }
+
+
         private DataTable StatementOfFinancialPerformanceDatatable()
         {
             var dataSet = new dsLFS();
             var dtStatementOfFinancialPerformance = dataSet.dtStatementOfFinancialPerformance;
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            var dateEnded = dtPickerDateEnds.Value;
+
+            try
+            {
+                var dtGeneralLedgerAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
+                foreach (DataRow row in dtGeneralLedgerAccounts.Rows)
+                {
+                    var items = new object[]
+                    {
+                    null,
+                    null,
+                    null,
+                    row["account_group_id"],
+                    row["account_group_code"],
+                    row["account_group_name"],
+                    row["major_account_group_id"],
+                    row["maj_acc_group_code"],
+                    row["maj_acc_group_name"],
+                    row["sub_major_account_group_id"],
+                    row["sub_maj_acc_group_code"],
+                    row["sub_maj_acc_group_name"],
+                    row["general_ledger_accounts_id"],
+                    row["account_code"],
+                    row["ledger_name"],
+                    null,
+                    GetBalances(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), dateEnded)
+                    };
+                    dtStatementOfFinancialPerformance.Rows.Add(items);
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
 
             return dtStatementOfFinancialPerformance;
         }

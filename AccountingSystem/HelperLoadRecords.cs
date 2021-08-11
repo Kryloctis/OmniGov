@@ -16,11 +16,9 @@ namespace AccountingSystem
             _ = comboBox.Items.Add("2021");
             comboBox.SelectedIndex = 0;
         }
-
         #endregion
 
         #region Account Group
-
         internal static void AccountGroupDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -78,41 +76,6 @@ namespace AccountingSystem
                 comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
                 comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
             }
-        }
-
-        internal static void PermissionsComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-
-            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
-            {
-                // loop datatable to add items in autocompletesource
-                foreach (DataRow item in dataTable.Rows)
-                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
-
-                comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
-                comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            }
-        }
-
-        internal static void PermissionCheckedListBox(DataTable dataTable, CheckedListBox checkedListBox, string displayMember, string valueMember)
-        {
-            checkedListBox.DataSource = dataTable;
-            checkedListBox.DisplayMember = displayMember;
-            checkedListBox.ValueMember = valueMember;
-        }
-
-        internal static void PermissionsDatagridView(DataTable dataTable, DataGridView datagrid)
-        {
-            datagrid.DataSource = dataTable;
-            //datagrid.Columns["id"].Visible = false;
-            datagrid.Columns["permission_name"].HeaderText = "Permission";
-
-            datagrid.RowHeadersVisible = false;
-            datagrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
 
@@ -216,37 +179,6 @@ namespace AccountingSystem
             }
 
             return debitCreditType;
-        }
-
-        internal static void GeneralLedgerComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-            comboBox.DropDownHeight = 150;
-
-            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
-            {
-                // loop datatable to add items in autocompletesource
-                foreach (DataRow item in dataTable.Rows)
-                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
-
-                comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
-                comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
-            }
-        }
-
-        internal static void GeneralLedgerListBox(DataTable dataTable, ListBox listBox)
-        {
-            foreach (DataRow item in dataTable.Rows)
-            {
-                item["ledger_name"] = $"{item["account_code"]} - {item["ledger_name"]}";
-            }
-
-            listBox.DisplayMember = "ledger_name";
-            listBox.ValueMember = "general_ledger_accounts_id";
-            listBox.DataSource = dataTable;
         }
         #endregion
 
@@ -375,6 +307,7 @@ namespace AccountingSystem
         #endregion
 
         #region Funds
+
         internal static void FundsDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -543,6 +476,7 @@ namespace AccountingSystem
         }
         #endregion
 
+        #region RCDGridView
         internal static void RCDDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -562,8 +496,6 @@ namespace AccountingSystem
             datagrid.Columns[10].Visible = false;
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
-
-        #region RCDGridView
         #endregion
 
         #region AccountableForm
@@ -589,24 +521,6 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
-
-        internal static void BanksComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-
-            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
-            {
-                // loop datatable to add items in autocompletesource
-                foreach (DataRow item in dataTable.Rows)
-                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
-
-                comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
-                comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            }
-        }
-
 
         #region Function/Program/Project
         internal static void FuntionalClassificationDatagridView(DataTable dataTable, DataGridView datagrid)
@@ -703,24 +617,6 @@ namespace AccountingSystem
                 datagrid.ClearSelection();
             }
 
-        }
-
-        internal static void FPPComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
-        {
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-
-            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
-            {
-                // loop datatable to add items in autocompletesource
-                foreach (DataRow item in dataTable.Rows)
-                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
-
-                comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
-                comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
-            }
         }
 
         internal static void SectorNameComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
@@ -893,7 +789,6 @@ namespace AccountingSystem
         #endregion Others FPP
 
         #region BUDGET APPROPRIATIONS
-
 
         internal static void BudgetAppropriationsAllotmentCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
@@ -1524,11 +1419,6 @@ namespace AccountingSystem
             datagrid.Columns["updated_by"].Visible = false;
         }
 
-        internal static void JEVDatagrid(DataTable dataTable, DataGridView datagrid)
-        {
-            datagrid.DataSource = dataTable;
-            datagrid.Columns["jev_no"].HeaderText = "JEV No."; ;
-        }
         #endregion
     }
 }

@@ -10,9 +10,15 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecordsByFundJournalDate(byte fundId, byte journalId, DateTime dateEntry);
 
-        DataTable GetViewRecordsByFundAndGeneralLedger(byte fundId, ushort generalLedgerId, short year);
+        //GENERAL LEDGER
+        DataTable GetViewRecordsByFundAndGeneralLedgerAndYear(int fundId, int generalLedgerId, short year);
 
-        DataTable GetViewRecordsByFundAndSubsidiaryLedgerAndSubsidiaryLedger(byte fundId, ushort generalLedgerId, ushort subsidiaryLedgerId, short year);
+        //SUBSIDIARY LEDGER
+        DataTable GetViewRecordsByFundAndSubsidiaryLedgerAndSubsidiaryLedgerAndYear(int fundId, int generalLedgerId, int subsidiaryLedgerId, short year);
+
+        //STATEMENT OF FINANCIAL PERFORMANCE
+        Decimal GetSumTransactionsByFundAndAccountAndIsDebitAndDateEntry(int fundId, int generalLedgerId, bool isDebit, DateTime dateEntry);
+
 
         DataTable GetJEVAmount(byte fundId, ushort generalLedgerId, short year);
 

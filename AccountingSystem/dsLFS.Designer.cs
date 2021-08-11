@@ -9449,15 +9449,13 @@ namespace AccountingSystem {
             
             private global::System.Data.DataColumn columnsub_major_account_group_name;
             
-            private global::System.Data.DataColumn columnjev_id;
-            
-            private global::System.Data.DataColumn columndate_entry;
-            
             private global::System.Data.DataColumn columnaccount_id;
             
             private global::System.Data.DataColumn columnaccount_code;
             
             private global::System.Data.DataColumn columnaccount_name;
+            
+            private global::System.Data.DataColumn columnnote;
             
             private global::System.Data.DataColumn columncurrent_amount;
             
@@ -9594,22 +9592,6 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn jev_idColumn {
-                get {
-                    return this.columnjev_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn date_entryColumn {
-                get {
-                    return this.columndate_entry;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn account_idColumn {
                 get {
                     return this.columnaccount_id;
@@ -9629,6 +9611,14 @@ namespace AccountingSystem {
             public global::System.Data.DataColumn account_nameColumn {
                 get {
                     return this.columnaccount_name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn noteColumn {
+                get {
+                    return this.columnnote;
                 }
             }
             
@@ -9698,11 +9688,10 @@ namespace AccountingSystem {
                         int sub_major_account_group_id, 
                         string sub_major_account_group_code, 
                         string sub_major_account_group_name, 
-                        int jev_id, 
-                        System.DateTime date_entry, 
                         int account_id, 
                         string account_code, 
                         string account_name, 
+                        string note, 
                         decimal current_amount, 
                         decimal previous_amount) {
                 dtStatementOfFinancialPerformanceRow rowdtStatementOfFinancialPerformanceRow = ((dtStatementOfFinancialPerformanceRow)(this.NewRow()));
@@ -9719,11 +9708,10 @@ namespace AccountingSystem {
                         sub_major_account_group_id,
                         sub_major_account_group_code,
                         sub_major_account_group_name,
-                        jev_id,
-                        date_entry,
                         account_id,
                         account_code,
                         account_name,
+                        note,
                         current_amount,
                         previous_amount};
                 rowdtStatementOfFinancialPerformanceRow.ItemArray = columnValuesArray;
@@ -9760,11 +9748,10 @@ namespace AccountingSystem {
                 this.columnsub_major_account_group_id = base.Columns["sub_major_account_group_id"];
                 this.columnsub_major_account_group_code = base.Columns["sub_major_account_group_code"];
                 this.columnsub_major_account_group_name = base.Columns["sub_major_account_group_name"];
-                this.columnjev_id = base.Columns["jev_id"];
-                this.columndate_entry = base.Columns["date_entry"];
                 this.columnaccount_id = base.Columns["account_id"];
                 this.columnaccount_code = base.Columns["account_code"];
                 this.columnaccount_name = base.Columns["account_name"];
+                this.columnnote = base.Columns["note"];
                 this.columncurrent_amount = base.Columns["current_amount"];
                 this.columnprevious_amount = base.Columns["previous_amount"];
             }
@@ -9796,16 +9783,14 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnsub_major_account_group_code);
                 this.columnsub_major_account_group_name = new global::System.Data.DataColumn("sub_major_account_group_name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsub_major_account_group_name);
-                this.columnjev_id = new global::System.Data.DataColumn("jev_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnjev_id);
-                this.columndate_entry = new global::System.Data.DataColumn("date_entry", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndate_entry);
                 this.columnaccount_id = new global::System.Data.DataColumn("account_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnaccount_id);
                 this.columnaccount_code = new global::System.Data.DataColumn("account_code", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnaccount_code);
                 this.columnaccount_name = new global::System.Data.DataColumn("account_name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnaccount_name);
+                this.columnnote = new global::System.Data.DataColumn("note", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnote);
                 this.columncurrent_amount = new global::System.Data.DataColumn("current_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncurrent_amount);
                 this.columnprevious_amount = new global::System.Data.DataColumn("previous_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
@@ -16369,40 +16354,6 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int jev_id {
-                get {
-                    try {
-                        return ((int)(this[this.tabledtStatementOfFinancialPerformance.jev_idColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'jev_id\' in table \'dtStatementOfFinancialPerformance\' is DBN" +
-                                "ull.", e);
-                    }
-                }
-                set {
-                    this[this.tabledtStatementOfFinancialPerformance.jev_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime date_entry {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tabledtStatementOfFinancialPerformance.date_entryColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'date_entry\' in table \'dtStatementOfFinancialPerformance\' is" +
-                                " DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabledtStatementOfFinancialPerformance.date_entryColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public int account_id {
                 get {
                     try {
@@ -16449,6 +16400,23 @@ namespace AccountingSystem {
                 }
                 set {
                     this[this.tabledtStatementOfFinancialPerformance.account_nameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string note {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtStatementOfFinancialPerformance.noteColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'note\' in table \'dtStatementOfFinancialPerformance\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.noteColumn] = value;
                 }
             }
             
@@ -16632,30 +16600,6 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isjev_idNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPerformance.jev_idColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setjev_idNull() {
-                this[this.tabledtStatementOfFinancialPerformance.jev_idColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isdate_entryNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPerformance.date_entryColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setdate_entryNull() {
-                this[this.tabledtStatementOfFinancialPerformance.date_entryColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool Isaccount_idNull() {
                 return this.IsNull(this.tabledtStatementOfFinancialPerformance.account_idColumn);
             }
@@ -16688,6 +16632,18 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void Setaccount_nameNull() {
                 this[this.tabledtStatementOfFinancialPerformance.account_nameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsnoteNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.noteColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetnoteNull() {
+                this[this.tabledtStatementOfFinancialPerformance.noteColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
