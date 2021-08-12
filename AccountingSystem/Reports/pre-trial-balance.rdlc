@@ -36,7 +36,7 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>dsLFS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Home\Desktop\LFS Final\LFS\AccountingSystem\dsLFS.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\Home\Desktop\New LFS\AccountingSystem\dsLFS.xsd</rd:SchemaPath>
         <rd:TableName>dtPreTrialBalance</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -562,10 +562,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=IIF(Fields!debit.Value=0,"", Fields!debit.Value)</Value>
+                                  <Value>=Fields!debit.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <Format>n2</Format>
+                                    <Format>#,0.00;(#,0.00);''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -629,10 +629,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=IIF(Fields!credit.Value=0,"", Fields!credit.Value)</Value>
+                                  <Value>=Fields!credit.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <Format>n2</Format>
+                                    <Format>#,0.00;(#,0.00);''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -885,6 +885,9 @@
                 </TablixMember>
                 <TablixMember>
                   <Group Name="Details" />
+                  <Visibility>
+                    <Hidden>=IIF(Fields!debit.Value = 0 AND Fields!credit.Value = 0 , true , false) AND IIf(Parameters!paramHideZeroBalance.Value="1", true, false)</Hidden>
+                  </Visibility>
                 </TablixMember>
                 <TablixMember>
                   <KeepWithGroup>Before</KeepWithGroup>
@@ -1123,6 +1126,12 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="paramHideZeroBalance">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -1148,6 +1157,11 @@
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>0</RowIndex>
           <ParameterName>paramAsOf</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>paramHideZeroBalance</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

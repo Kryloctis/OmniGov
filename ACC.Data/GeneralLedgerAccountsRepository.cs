@@ -270,7 +270,6 @@ namespace ACC.Data
             return false;
         }
     
-
         public DataTable GetAllViewRecords()
         {
             try
@@ -295,7 +294,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
 
         public DataTable GetAllViewRecordsBySearch(string searchText)
         {
@@ -553,31 +551,6 @@ namespace ACC.Data
 
                 var dtJournals = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtJournals, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public DataTable GetAllViewRecordsWithBeginningBalances()
-        {
-            try
-            {
-                string query = $"SELECT " +
-                    $"gl.general_ledger_accounts_id, " +
-                    $"gl.ledger_name, " +
-                    $"gl.account_code, " +
-                    $"gl.account_group_code, " +
-                    $"SUM(IF(bb.is_debit=1, bb.amount, 0)) AS debit_beginning_bal, " +
-                    $"SUM(IF(bb.is_debit=0, bb.amount, 0)) AS credit_beginning_bal " +
-                    $"FROM {viewTableName} AS gl " +
-                    $"INNER JOIN beginning_balances AS bb " +
-                    $"ON bb.general_ledger_accounts_id = gl.general_ledger_accounts_id " +
-                    $"GROUP BY gl.ledger_name";
-
-                var dtJournals = new DataTable();
-                return _dbGenericCommands.Fill(query, dtJournals);
             }
             catch (Exception)
             {

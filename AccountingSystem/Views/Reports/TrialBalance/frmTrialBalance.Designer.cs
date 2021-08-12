@@ -44,13 +44,13 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1120, 47);
+            this.panel2.Size = new System.Drawing.Size(1120, 32);
             this.panel2.TabIndex = 3;
             // 
             // radioPostTB
             // 
             this.radioPostTB.Appearance = System.Windows.Forms.Appearance.Button;
-            this.radioPostTB.Location = new System.Drawing.Point(139, 10);
+            this.radioPostTB.Location = new System.Drawing.Point(134, 4);
             this.radioPostTB.Name = "radioPostTB";
             this.radioPostTB.Size = new System.Drawing.Size(124, 25);
             this.radioPostTB.TabIndex = 5;
@@ -64,7 +64,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // 
             this.radioPreTB.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioPreTB.Checked = true;
-            this.radioPreTB.Location = new System.Drawing.Point(9, 10);
+            this.radioPreTB.Location = new System.Drawing.Point(4, 4);
             this.radioPreTB.Name = "radioPreTB";
             this.radioPreTB.Size = new System.Drawing.Size(124, 25);
             this.radioPreTB.TabIndex = 4;
@@ -78,9 +78,9 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // panelReport
             // 
             this.panelReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelReport.Location = new System.Drawing.Point(0, 47);
+            this.panelReport.Location = new System.Drawing.Point(0, 32);
             this.panelReport.Name = "panelReport";
-            this.panelReport.Size = new System.Drawing.Size(1120, 638);
+            this.panelReport.Size = new System.Drawing.Size(1120, 653);
             this.panelReport.TabIndex = 4;
             // 
             // frmTrialBalance
