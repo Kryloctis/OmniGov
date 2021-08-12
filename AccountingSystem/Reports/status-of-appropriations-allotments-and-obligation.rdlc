@@ -5484,6 +5484,7 @@ RunningValue(Fields!function_classification_sector_name.Value,CountDistinct,"dtS
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
             <Top>0.40972in</Top>
+            <Left>0.00008cm</Left>
             <Height>0.20833in</Height>
             <Width>7.69792in</Width>
             <ZIndex>7</ZIndex>

@@ -30,6 +30,8 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
+            cbHideZeroBalance.Enabled = true; 
+
             LoadReport(reportViewer.LocalReport);
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
             reportViewer.ZoomMode = ZoomMode.Percent;
@@ -65,13 +67,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             }
         }
 
-        private DataTable RecordsFilter()
-        {
-            if (cbHideZeroBalance.Checked)
-                return Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsWithBeginningBalances();
-            else
-                return Factory.GeneralLedgerAccountsRepository().GetAllViewRecords();
-        }
 
         private DataTable DataTablePreTrialBalance()
         {
@@ -79,7 +74,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             year = Convert.ToInt16(dtAsOf.Value.Year);
 
             var dtPreTrialBalance = new dsLFS.dtPreTrialBalanceDataTable();
-            var dtPreTrialBalanceFromDB = RecordsFilter();
+            var dtPreTrialBalanceFromDB = Factory.GeneralLedgerAccountsRepository().GetAllViewRecords();
 
             foreach (DataRow item in dtPreTrialBalanceFromDB.Rows)
             {
@@ -146,6 +141,23 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             LoadFunds();
         }
 
+        private void RecordsFilter(LocalReport report, byte hideZeroBalance)
+        {
+            var parameters = new[] {
+                    new ReportParameter("paramHideZeroBalance", hideZeroBalance.ToString())
+            };
 
+            reportViewer.LocalReport.SetParameters(parameters);
+            reportViewer.RefreshReport();
+        }
+
+        private void cbHideZeroBalance_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbHideZeroBalance.Checked)
+                RecordsFilter(reportViewer.LocalReport, 1);
+            else
+                RecordsFilter(reportViewer.LocalReport, 0);
+
+        }
     }
 }

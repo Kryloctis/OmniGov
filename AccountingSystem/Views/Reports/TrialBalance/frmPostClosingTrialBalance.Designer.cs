@@ -58,12 +58,14 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // cbHideZeroBalance
             // 
             this.cbHideZeroBalance.AutoSize = true;
+            this.cbHideZeroBalance.Enabled = false;
             this.cbHideZeroBalance.Location = new System.Drawing.Point(556, 15);
             this.cbHideZeroBalance.Name = "cbHideZeroBalance";
             this.cbHideZeroBalance.Size = new System.Drawing.Size(127, 19);
             this.cbHideZeroBalance.TabIndex = 9;
             this.cbHideZeroBalance.Text = "Hide Zero Balances";
             this.cbHideZeroBalance.UseVisualStyleBackColor = true;
+            this.cbHideZeroBalance.CheckedChanged += new System.EventHandler(this.cbHideZeroBalance_CheckedChanged);
             // 
             // dtAsOf
             // 

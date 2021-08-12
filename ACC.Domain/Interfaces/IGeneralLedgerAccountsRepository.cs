@@ -18,8 +18,6 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetAllViewRecords();
 
-        DataTable GetAllViewRecordsWithBeginningBalances();
-
         DataTable GetAllViewRecordsBySearch(string searchText);
 
         DataTable GetViewRecordsByAccountGroup(int accountGroupId);
