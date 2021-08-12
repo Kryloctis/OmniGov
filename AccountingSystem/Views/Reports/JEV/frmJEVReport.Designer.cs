@@ -124,6 +124,7 @@ namespace AccountingSystem.Views.Reports.JEV
             this.Controls.Add(this.panel1);
             this.MinimizeBox = false;
             this.Name = "frmJEVReport";
+            this.ShowInTaskbar = false;
             this.Text = "Reports > Journal Entry Voucher";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmJEVReport_Load);
