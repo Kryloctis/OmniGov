@@ -253,5 +253,10 @@ namespace AccountingSystem.Views.Reports.JEV
             var dtJEV = Factory.JEVRepository().GetRecordsByJEVNoAndDate(txtSearch, monthIndex);
             HelperLoadRecords.JEVREportDataGridView(dtJEV, dgJEV);
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

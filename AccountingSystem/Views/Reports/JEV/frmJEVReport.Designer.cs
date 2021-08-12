@@ -51,6 +51,7 @@ namespace AccountingSystem.Views.Reports.JEV
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(754, 536);
             this.panel1.TabIndex = 24;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // btnRetrieve
             // 
