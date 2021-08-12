@@ -51,6 +51,7 @@ namespace AccountingSystem.Views.Reports.JEV
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(754, 536);
             this.panel1.TabIndex = 24;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // btnRetrieve
             // 
@@ -115,6 +116,7 @@ namespace AccountingSystem.Views.Reports.JEV
             // 
             // frmJEVReport
             // 
+            this.AcceptButton = this.btnRetrieve;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 561);
@@ -122,6 +124,7 @@ namespace AccountingSystem.Views.Reports.JEV
             this.Controls.Add(this.panel1);
             this.MinimizeBox = false;
             this.Name = "frmJEVReport";
+            this.ShowInTaskbar = false;
             this.Text = "Reports > Journal Entry Voucher";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmJEVReport_Load);

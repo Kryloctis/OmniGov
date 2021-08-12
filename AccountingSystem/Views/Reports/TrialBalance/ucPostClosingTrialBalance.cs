@@ -11,8 +11,9 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.TrialBalance
 {
-    public partial class frmPostClosingTrialBalance : Form
+    public partial class ucPostClosingTrialBalance : UserControl
     {
+
         private readonly ReportViewer reportViewer;
         private byte fundId;
         private short year;
@@ -21,10 +22,9 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         private bool isDebitColumnBigger;
         private decimal beginningBalance;
 
-        public frmPostClosingTrialBalance()
+        public ucPostClosingTrialBalance()
         {
             InitializeComponent();
-            Helper.LoadFormIcon(this);
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panelReport.Controls.Add(reportViewer);
@@ -32,13 +32,13 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
+            cbHideZeroBalance.Enabled = true;
             LoadReport(reportViewer.LocalReport);
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
             reportViewer.ZoomMode = ZoomMode.Percent;
             reportViewer.ZoomPercent = 100;
             reportViewer.RefreshReport();
         }
-
 
         private void LoadFunds()
         {
@@ -79,13 +79,14 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                 Helper.MessageBoxError(ex.Message);
             }
         }
-
-        private DataTable RecordsFilter()
+        private void RecordsFilter(LocalReport report, byte hideZeroBalance)
         {
-            if (cbHideZeroBalance.Checked)
-                return Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsWithBeginningBalances();
-            else
-                return Factory.GeneralLedgerAccountsRepository().GetAllViewRecords();
+            var parameters = new[] {
+                    new ReportParameter("paramHideZeroBalance", hideZeroBalance.ToString())
+            };
+
+            reportViewer.LocalReport.SetParameters(parameters);
+            reportViewer.RefreshReport();
         }
 
         private DataTable DataTablePostTrialBalance()
@@ -94,7 +95,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             year = Convert.ToInt16(dtAsOf.Value.Year);
 
             var dtPreTrialBalance = new dsLFS.dtPreTrialBalanceDataTable();
-            var dtPreTrialBalanceFromDB = RecordsFilter();
+            var dtPreTrialBalanceFromDB = Factory.GeneralLedgerAccountsRepository().GetAllViewRecords();
 
 
             foreach (DataRow item in dtPreTrialBalanceFromDB.Rows)
@@ -168,7 +169,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             row["account_code"] = "3-01-01-010";
 
             var govEquityBeginningBalance = GetSumOfTemporaryAccounts() - governmentEquityBeginningBalance;
-           
+
             //For column assignment, If value is less than zero, then credit else debit.
             if (govEquityBeginningBalance > 0)
                 row["debit"] = Math.Abs(govEquityBeginningBalance);
@@ -190,11 +191,13 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
             permanentAccountLesserValue = Math.Min(total_debit, total_credit);
 
-            if (total_debit > total_credit) {
+            if (total_debit > total_credit)
+            {
                 isDebitColumnBigger = true;
                 return total_debit;
             }
-            else {
+            else
+            {
                 isDebitColumnBigger = false;
                 return total_credit;
             }
@@ -210,13 +213,27 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             var total_credit = Convert.ToDecimal(amount["credit"]);
 
             if (total_debit > total_credit)
-                return _ =  total_debit - total_credit;
+                return _ = total_debit - total_credit;
             else
                 return _ = total_credit - total_debit;
 
         }
 
-        
+        private void cbHideZeroBalance_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbHideZeroBalance.Checked)
+                RecordsFilter(reportViewer.LocalReport, 1);
+            else
+                RecordsFilter(reportViewer.LocalReport, 0);
+        }
 
+        private void ucPostClosingTrialBalance_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                var dtFunds = Factory.FundsRepository().GetRecords();
+                HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
+            }
+        }
     }
 }

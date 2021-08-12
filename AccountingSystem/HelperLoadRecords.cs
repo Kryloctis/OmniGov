@@ -1387,6 +1387,8 @@ namespace AccountingSystem
             datagrid.Columns["jev_no"].Visible = false;
             datagrid.Columns["fund_code"].Visible = false;
             datagrid.Columns["is_approved"].Visible = false;
+            datagrid.Columns["is_disapproved"].Visible = false;
+            datagrid.Columns["is_cancelled"].Visible = false;
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["created_by"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;

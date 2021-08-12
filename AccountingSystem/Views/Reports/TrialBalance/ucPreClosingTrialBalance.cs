@@ -1,11 +1,17 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.TrialBalance
 {
-    public partial class frmPreClosingTrialBalance : Form
+    public partial class ucPreClosingTrialBalance : UserControl
     {
 
         private readonly ReportViewer reportViewer;
@@ -13,10 +19,9 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         private short year;
         private ushort generalLedgerId;
 
-        public frmPreClosingTrialBalance()
+        public ucPreClosingTrialBalance()
         {
             InitializeComponent();
-            Helper.LoadFormIcon(this);
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panelReport.Controls.Add(reportViewer);
@@ -24,6 +29,8 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
+            cbHideZeroBalance.Enabled = true;
+
             LoadReport(reportViewer.LocalReport);
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
             reportViewer.ZoomMode = ZoomMode.Percent;
@@ -60,21 +67,13 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             }
         }
 
-        private DataTable RecordsFilter()
-        {
-            if (cbHideZeroBalance.Checked)
-                return Factory.GeneralLedgerAccountsRepository().GetAllViewRecordsWithBeginningBalances();
-            else
-                return Factory.GeneralLedgerAccountsRepository().GetAllViewRecords();
-        }
-
         private DataTable DataTablePreTrialBalance()
         {
             fundId = Convert.ToByte(cmbFund.SelectedValue);
             year = Convert.ToInt16(dtAsOf.Value.Year);
 
             var dtPreTrialBalance = new dsLFS.dtPreTrialBalanceDataTable();
-            var dtPreTrialBalanceFromDB = RecordsFilter();
+            var dtPreTrialBalanceFromDB = Factory.GeneralLedgerAccountsRepository().GetAllViewRecords();
 
             foreach (DataRow item in dtPreTrialBalanceFromDB.Rows)
             {
@@ -130,17 +129,33 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             }
         }
 
-        private void LoadFunds()
+        private void RecordsFilter(LocalReport report, byte hideZeroBalance)
         {
-            var dtFunds = Factory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
+            var parameters = new[] {
+                    new ReportParameter("paramHideZeroBalance", hideZeroBalance.ToString())
+            };
+
+            reportViewer.LocalReport.SetParameters(parameters);
+            reportViewer.RefreshReport();
         }
 
-        private void frmTrialBalance_Load(object sender, EventArgs e)
+        private void cbHideZeroBalance_CheckedChanged(object sender, EventArgs e)
         {
-            LoadFunds();
+            if (cbHideZeroBalance.Checked)
+                RecordsFilter(reportViewer.LocalReport, 1);
+            else
+                RecordsFilter(reportViewer.LocalReport, 0);
+
         }
 
-
+        private void ucPreClosingTrialBalance_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                var dtFunds = Factory.FundsRepository().GetRecords();
+                HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
+            }
+            
+        }
     }
 }

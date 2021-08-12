@@ -132,7 +132,9 @@ namespace ACC.Data
                     $"CONCAT_WS('-', fund_code,YEAR(date_entry),MONTH(date_entry),jev_no) AS full_jev_no, " +
                     $"date_entry " +
                     $"FROM {viewTableName} " +
-                    $"WHERE is_approved=1 " +
+                    $"WHERE is_approved = 1 " +
+                    $"AND is_disapproved = 0 " + 
+                    $"AND is_cancelled =  0 " +
                     $"AND (jev_no LIKE @jev_no AND MONTH(date_entry) LIKE @date)";
 
                 var dtGeneralLedgers = new DataTable();

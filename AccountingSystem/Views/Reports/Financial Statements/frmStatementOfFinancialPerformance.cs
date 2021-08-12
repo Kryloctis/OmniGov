@@ -32,6 +32,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
         private DataTable StatementOfFinancialPerformanceDatatable()
         {
+            Cursor.Current = Cursors.WaitCursor;
             var dataSet = new dsLFS();
             var dtStatementOfFinancialPerformance = dataSet.dtStatementOfFinancialPerformance;
             int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
@@ -71,6 +72,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             }
 
             return dtStatementOfFinancialPerformance;
+            Cursor.Current = Cursors.Default;
         }
 
         private void LoadReport(LocalReport report)

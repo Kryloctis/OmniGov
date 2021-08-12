@@ -1,12 +1,4 @@
-﻿using Microsoft.Reporting.WinForms;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.TrialBalance
@@ -21,23 +13,22 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         private void frmTrialBalance_Load(object sender, EventArgs e)
         {
-            ChangePanelDisplayForm();
         }
 
         private void ChangePanelDisplayForm()
         {
             if (radioPreTB.Checked)
             {
-                ShowPreTrialBalance();
+                tabTrialBalance.SelectedTab = tabPagePreTrial;
                 radioPreTB.Image = Properties.Resources.ok14px;
                 radioPostTB.Image = null;
             }
-
             else
             {
-                ShowPostTrialBalance();
+                tabTrialBalance.SelectedTab = tabPagePostTrial;
                 radioPostTB.Image = Properties.Resources.ok14px;
                 radioPreTB.Image = null;
+
             }
         }
 
@@ -50,31 +41,5 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         {
             ChangePanelDisplayForm();
         }
-
-        private void ShowPostTrialBalance()
-        {
-            var frmPostTrialBalance = new frmPostClosingTrialBalance
-            {
-                TopLevel = false,
-                AutoScroll = true
-            };
-
-            panelReport.Controls.Add(frmPostTrialBalance);
-            frmPostTrialBalance.Show();
-        }
-
-        private void ShowPreTrialBalance()
-        {
-            var frmPreTrialBalance = new frmPreClosingTrialBalance
-            {
-                TopLevel = false,
-                AutoScroll = true
-            };
-
-            panelReport.Controls.Add(frmPreTrialBalance);
-            frmPreTrialBalance.Show();
-        }
-
-
     }
 }
