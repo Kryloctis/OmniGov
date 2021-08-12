@@ -11,20 +11,17 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.TrialBalance
 {
-    public partial class frmPostClosingTrialBalance : Form
+    public partial class ucPreClosingTrialBalance : UserControl
     {
+
         private readonly ReportViewer reportViewer;
         private byte fundId;
         private short year;
         private ushort generalLedgerId;
-        private decimal permanentAccountLesserValue;
-        private bool isDebitColumnBigger;
-        private decimal beginningBalance;
 
-        public frmPostClosingTrialBalance()
+        public ucPreClosingTrialBalance()
         {
             InitializeComponent();
-            Helper.LoadFormIcon(this);
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panelReport.Controls.Add(reportViewer);
@@ -33,6 +30,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
             cbHideZeroBalance.Enabled = true;
+
             LoadReport(reportViewer.LocalReport);
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
             reportViewer.ZoomMode = ZoomMode.Percent;
@@ -40,28 +38,15 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             reportViewer.RefreshReport();
         }
 
-
-        private void LoadFunds()
-        {
-            var dtFunds = Factory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
-        }
-
-        private void frmPostClosingTrialBalance_Load(object sender, EventArgs e)
-        {
-            LoadFunds();
-        }
-
         private void LoadReport(LocalReport report)
         {
             try
             {
-
                 var lguDict = Helper.LGUDetails();
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\post-trial-balance.rdlc";
+                report.ReportPath = $"{Application.StartupPath}\\Reports\\pre-trial-balance.rdlc";
                 report.DataSources.Clear();
 
-                report.DataSources.Add(new ReportDataSource("dtPreTrialBalance", DataTablePostTrialBalance()));
+                report.DataSources.Add(new ReportDataSource("dtPreTrialBalance", DataTablePreTrialBalance()));
 
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
                 var fundName = cmbFund.Text.ToUpper();
@@ -74,23 +59,15 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                     new ReportParameter("paramAsOf", asOfDate),
                   };
                 report.SetParameters(parameters);
+
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
         }
-        private void RecordsFilter(LocalReport report, byte hideZeroBalance)
-        {
-            var parameters = new[] {
-                    new ReportParameter("paramHideZeroBalance", hideZeroBalance.ToString())
-            };
 
-            reportViewer.LocalReport.SetParameters(parameters);
-            reportViewer.RefreshReport();
-        }
-
-        private DataTable DataTablePostTrialBalance()
+        private DataTable DataTablePreTrialBalance()
         {
             fundId = Convert.ToByte(cmbFund.SelectedValue);
             year = Convert.ToInt16(dtAsOf.Value.Year);
@@ -98,15 +75,9 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             var dtPreTrialBalance = new dsLFS.dtPreTrialBalanceDataTable();
             var dtPreTrialBalanceFromDB = Factory.GeneralLedgerAccountsRepository().GetAllViewRecords();
 
-
             foreach (DataRow item in dtPreTrialBalanceFromDB.Rows)
             {
                 generalLedgerId = (ushort)item["general_ledger_accounts_id"];
-
-                var account_group_type = item["account_group_code"].ToString();
-
-                if (account_group_type == "3" || account_group_type == "4" || account_group_type == "5")
-                    break;
 
                 DataRow row = dtPreTrialBalance.NewRow();
                 row["account_title"] = item["ledger_name"];
@@ -116,8 +87,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
                 dtPreTrialBalance.Rows.Add(row);
             }
-
-            GovernmentEquityRow(fundId, year, generalLedgerId, dtPreTrialBalanceFromDB, dtPreTrialBalance);
 
             return dtPreTrialBalance;
         }
@@ -160,62 +129,14 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             }
         }
 
-        private void GovernmentEquityRow(byte fundId, short year, ushort generalLedgerId, DataTable dtGovernmentFromDB, DataTable dtGovernmentEquity)
+        private void RecordsFilter(LocalReport report, byte hideZeroBalance)
         {
-            GetSumOfPermanentAccounts();
-            var governmentEquityBeginningBalance = Factory.BeginningBalancesRepository().GetGovernmentEquityBalance(fundId, 331, year);
+            var parameters = new[] {
+                    new ReportParameter("paramHideZeroBalance", hideZeroBalance.ToString())
+            };
 
-            DataRow row = dtGovernmentEquity.NewRow();
-            row["account_title"] = "Government Equity";
-            row["account_code"] = "3-01-01-010";
-
-            var govEquityBeginningBalance = GetSumOfTemporaryAccounts() - governmentEquityBeginningBalance;
-           
-            //For column assignment, If value is less than zero, then credit else debit.
-            if (govEquityBeginningBalance > 0)
-                row["debit"] = Math.Abs(govEquityBeginningBalance);
-            else
-                row["credit"] = Math.Abs(govEquityBeginningBalance);
-
-            dtGovernmentEquity.Rows.Add(row);
-        }
-
-        private decimal GetSumOfPermanentAccounts()
-        {
-            var beginningBalanceRepository = Factory.BeginningBalancesRepository();
-            var amount = beginningBalanceRepository.GetDebitAndCreditOfPermanentAccounts(1);
-
-            var total_debit = Convert.ToDecimal(amount["debit"]);
-            var total_credit = Convert.ToDecimal(amount["credit"]);
-
-            _ = total_debit + total_credit;
-
-            permanentAccountLesserValue = Math.Min(total_debit, total_credit);
-
-            if (total_debit > total_credit) {
-                isDebitColumnBigger = true;
-                return total_debit;
-            }
-            else {
-                isDebitColumnBigger = false;
-                return total_credit;
-            }
-        }
-
-        private decimal GetSumOfTemporaryAccounts()
-        {
-
-            var beginningBalanceRepository = Factory.BeginningBalancesRepository();
-            var amount = beginningBalanceRepository.GetDebitAndCreditOfTemporaryAccounts(fundId);
-
-            var total_debit = Convert.ToDecimal(amount["debit"]);
-            var total_credit = Convert.ToDecimal(amount["credit"]);
-
-            if (total_debit > total_credit)
-                return _ =  total_debit - total_credit;
-            else
-                return _ = total_credit - total_debit;
-
+            reportViewer.LocalReport.SetParameters(parameters);
+            reportViewer.RefreshReport();
         }
 
         private void cbHideZeroBalance_CheckedChanged(object sender, EventArgs e)
@@ -224,7 +145,17 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                 RecordsFilter(reportViewer.LocalReport, 1);
             else
                 RecordsFilter(reportViewer.LocalReport, 0);
+
         }
 
+        private void ucPreClosingTrialBalance_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                var dtFunds = Factory.FundsRepository().GetRecords();
+                HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
+            }
+            
+        }
     }
 }
