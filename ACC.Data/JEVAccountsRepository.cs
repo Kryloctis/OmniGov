@@ -190,15 +190,16 @@ namespace ACC.Data
             }
         }
 
+
         //GENERAL LEDGER
-        public DataTable GetViewRecordsByFundAndGeneralLedger(byte fundId, ushort generalLedgerId, short year)
+        public DataTable GetViewRecordsByFundAndGeneralLedgerAndYear(int fundId, int generalLedgerId, short year)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@funds_id", DbType.Byte, fundId},
-                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                    new object[] { "@funds_id", DbType.Int32, fundId},
+                    new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerId},
                     new object[] { "@year", DbType.Int16, year},
                 };
 
@@ -240,15 +241,15 @@ namespace ACC.Data
         }
 
         //SUBSIDIARY LEDGER
-        public DataTable GetViewRecordsByFundAndSubsidiaryLedgerAndSubsidiaryLedger(byte fundId, ushort generalLedgerId, ushort subsidiaryLedgerId, short year)
+        public DataTable GetViewRecordsByFundAndSubsidiaryLedgerAndSubsidiaryLedgerAndYear(int fundId, int generalLedgerId, int subsidiaryLedgerId, short year)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@funds_id", DbType.Byte, fundId},
-                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
-                    new object[] { "@subsidiary_ledger_accounts_id",DbType.UInt16, subsidiaryLedgerId},
+                    new object[] { "@funds_id", DbType.Int32, fundId},
+                    new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerId},
+                    new object[] { "@subsidiary_ledger_accounts_id",DbType.Int32, subsidiaryLedgerId},
                     new object[] { "@year", DbType.Int16, year},
                 };
 
@@ -289,6 +290,41 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        //STATEMENT OF FINANCIAL PERFORMANCE
+        public decimal GetSumTransactionsByFundAndAccountAndIsDebitAndDateEntry(int fundId, int generalLedgerId, bool isDebit, DateTime dateEntry)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Int32, fundId},
+                    new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerId},
+                    new object[] { "@is_debit", DbType.Boolean, isDebit},
+                    new object[] { "@date_entry",DbType.Date, dateEntry.Date},
+                    new object[] { "@year",DbType.Int16, dateEntry.Year}
+                };
+
+                string query = $"SELECT COALESCE(SUM(amount),0) AS amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE funds_id = @funds_id " +
+                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
+                    $"AND is_debit = @is_debit " +
+                    $"AND is_approved = 1 " +
+                    $"AND is_disapproved = 0 " +
+                    $"AND is_cancelled = 0 " +
+                    $"AND date_entry <= @date_entry " +
+                    $"AND YEAR(date_entry) = @year";
+
+                decimal amount = Convert.ToDecimal(_dbGenericCommands.ExecuteScalar(query, parameters));
+                return amount;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         public decimal GetJEVSumByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year)
         {

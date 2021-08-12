@@ -149,7 +149,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.StackTrace);
+                Helper.MessageBoxError(ex.Message);
             }
         }
 

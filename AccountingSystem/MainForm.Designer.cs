@@ -445,7 +445,6 @@ namespace AccountingSystem
             // 
             // statementOfFinancialPerformanceToolStripMenuItem
             // 
-            this.statementOfFinancialPerformanceToolStripMenuItem.Enabled = false;
             this.statementOfFinancialPerformanceToolStripMenuItem.Name = "statementOfFinancialPerformanceToolStripMenuItem";
             this.statementOfFinancialPerformanceToolStripMenuItem.Size = new System.Drawing.Size(377, 22);
             this.statementOfFinancialPerformanceToolStripMenuItem.Text = "Statement of Financial Performance";
@@ -457,6 +456,7 @@ namespace AccountingSystem
             this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Name = "statementOfChangesInNetAssetsEquityToolStripMenuItem";
             this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Size = new System.Drawing.Size(377, 22);
             this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Text = "Statement of Changes in Net Assets/Equity";
+            this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Visible = false;
             this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Click += new System.EventHandler(this.statementOfChangesInNetAssetsEquityToolStripMenuItem_Click);
             // 
             // statementOfCashFlowsToolStripMenuItem
@@ -465,6 +465,7 @@ namespace AccountingSystem
             this.statementOfCashFlowsToolStripMenuItem.Name = "statementOfCashFlowsToolStripMenuItem";
             this.statementOfCashFlowsToolStripMenuItem.Size = new System.Drawing.Size(377, 22);
             this.statementOfCashFlowsToolStripMenuItem.Text = "Statement of Cash Flows";
+            this.statementOfCashFlowsToolStripMenuItem.Visible = false;
             this.statementOfCashFlowsToolStripMenuItem.Click += new System.EventHandler(this.statementOfCashFlowsToolStripMenuItem_Click);
             // 
             // statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem
@@ -473,6 +474,7 @@ namespace AccountingSystem
             this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Name = "statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem";
             this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Size = new System.Drawing.Size(377, 22);
             this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Text = "Statement of Comparison of Budget and Actual Amounts";
+            this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Visible = false;
             this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Click += new System.EventHandler(this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem_Click);
             // 
             // menuprintRCI

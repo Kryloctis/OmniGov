@@ -119,7 +119,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             return "";
         }
 
-        private void ValidateDebitCreditRow(byte fundId, ushort generalLedgerId, short year, string particulars, DataRow item, DataRow row, ref decimal balance)
+        private void ValidateDebitCreditRow(int fundId, int generalLedgerId, short year, string particulars, DataRow item, DataRow row, ref decimal balance)
         {
             decimal amount = Convert.ToDecimal(item["amount"]);
 
@@ -154,12 +154,12 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private DataTable DataTableGeneralLedger()
         {
-            byte fundId = (byte)cmbFunds.SelectedValue;
-            ushort generalLedgerId = (ushort)cmbAccount.SelectedValue;
+            int fundId = Convert.ToInt32(cmbFunds.SelectedValue);
+            int generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
             short year = Convert.ToInt16(cmbYear.Text);
 
             var dtGeneralLedger = new dsLFS.GeneralLedgerDataTable();
-            var dtGeneralLedgerFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundAndGeneralLedger(fundId, generalLedgerId, year);
+            var dtGeneralLedgerFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundAndGeneralLedgerAndYear(fundId, generalLedgerId, year);
 
             string particulars;
             foreach (DataRow item in dtGeneralLedgerFromDB.Rows)

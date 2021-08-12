@@ -26,8 +26,6 @@ namespace ACC.Domain.Interfaces
         bool SubsidiaryLedgerBalanceExist(byte fundsId, ushort generalLedgerId, short year, ushort subsidiaryLedgerId);
 
 
-        Dictionary<string, string> GetDebitAndCreditOfAllAccounts(byte fundsId);
-
         Dictionary<string, string> GetDebitAndCreditOfTemporaryAccounts(byte fundsId);
 
         Dictionary<string, string> GetDebitAndCreditOfPermanentAccounts(byte fundsId);

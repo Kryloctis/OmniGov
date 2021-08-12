@@ -1,8 +1,6 @@
-﻿using System;
+﻿using ACC.Domain.Models;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
-using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
@@ -18,11 +16,7 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetAllViewRecords();
 
-        DataTable GetAllViewRecordsBySearch(string searchText);
-
         DataTable GetViewRecordsByAccountGroup(int accountGroupId);
-
-        DataTable GetViewRecordsBySearchAndAccountGroup(int accountGroupId, string searchText);
 
         DataTable GetViewRecordsByMajorAccGroupName(string majAccGroupName);
 
@@ -32,10 +26,5 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecordsByAccountGroupName(string accountGroupName);
         DataTable GetViewRecordsByAccountGroupNameSearch(string accountGroupName, string searchText);
-
-
-        bool NameExist(string txtName);
-
-        bool NameExist(int id, string txtName);
     }
 }
