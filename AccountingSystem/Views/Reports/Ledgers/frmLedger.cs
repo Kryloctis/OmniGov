@@ -28,51 +28,22 @@ namespace AccountingSystem.Views.Reports.Ledgers
             switch (radioSelected)
             {
                 case "1":
-                    ShowGeneralLedger();
+                    tabControlLedger.SelectedTab = tabPageGeneralLedger;
                     radioGeneralLedger.Image = Properties.Resources.ok14px;
                     break;
 
                 case "2":
-                    ShowSubsidiaryLedger();
+                    tabControlLedger.SelectedTab = tabPageSubsidiaryLedger;
                     radioSubsidiaryLedger.Image = Properties.Resources.ok14px;
                     break;
 
                 case "3":
-                    ShowTransactionLog();
+                    //Show Transaction Log form.
                     radioTransactionLog.Image = Properties.Resources.ok14px;
                     break;
                 default:
                     break;
             }
-        }
-
-        private void ShowTransactionLog()
-        {
-            panelReport.Controls.Clear();
-        }
-
-        private void ShowSubsidiaryLedger()
-        {
-            var frmSubsidiaryLedger = new frmSubsidiaryLedgerReport
-            {
-                TopLevel = false,
-                AutoScroll = true
-            };
-
-            panelReport.Controls.Add(frmSubsidiaryLedger);
-            frmSubsidiaryLedger.Show();
-        }
-
-        private void ShowGeneralLedger()
-        {
-            var frmGeneralLEdger = new frmGeneralLedgerReport
-            {
-                TopLevel = false,
-                AutoScroll = true
-            };
-
-            panelReport.Controls.Add(frmGeneralLEdger);
-            frmGeneralLEdger.Show();
         }
 
         private void radioGeneralLedger_CheckedChanged(object sender, EventArgs e)
