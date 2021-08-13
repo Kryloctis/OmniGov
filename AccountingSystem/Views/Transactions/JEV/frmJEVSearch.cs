@@ -273,5 +273,20 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             LoadSelectedJEV();
         }
+
+        private void cmbxJevStatus_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadJEVList();
+        }
+
+        private void cbMonth_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadJEVList();
+        }
+
+        private void nudYear_ValueChanged(object sender, EventArgs e)
+        {
+            LoadJEVList();
+        }
     }
 }
