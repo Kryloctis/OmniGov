@@ -326,13 +326,6 @@ namespace AccountingSystem
             _ = new frmADADisbursementsJournalReport().ShowDialog();
         }
 
-
-
-        private void MenuGeneralLedgerReport_Click(object sender, EventArgs e)
-        {
-            _ = new frmGeneralLedgerReport().ShowDialog();
-        }
-
         private void menuBanks_Click(object sender, EventArgs e)
         {
             _ = new frmBanks().ShowDialog();
@@ -401,11 +394,6 @@ namespace AccountingSystem
         private void menuDeposits_Click(object sender, EventArgs e)
         {
             _ = new frmBankDeposits().ShowDialog();
-        }
-
-        private void menuSubsidiaryLedgerReport_Click(object sender, EventArgs e)
-        {
-            _ = new frmSubsidiaryLedgerReport().ShowDialog();
         }
 
         private void btnBudgetAppropriations_Click(object sender, EventArgs e)
