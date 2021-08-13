@@ -1,22 +1,41 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Ledgers
 {
-    public partial class frmSubsidiaryLedgerReport : Form
+    public partial class ucSubsidiaryLedger : UserControl
     {
         private readonly ReportViewer reportViewer;
         private decimal beginningBalance;
 
-        public frmSubsidiaryLedgerReport()
+        public ucSubsidiaryLedger()
         {
             InitializeComponent();
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
+        }
+
+        private void ucSubsidiaryLedger_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                //ACCOUNTS
+                LoadAccounts();
+                cmbAccount.SelectedIndex = -1;
+                cmbAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
+
+                LoadFunds();
+                LoadYear();
+            }
         }
 
         private void LoadFunds()
@@ -35,19 +54,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
         {
             var dtSubsidiaryLedger = Factory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
             HelperLoadRecords.SubsidiaryLedgerComboBox(dtSubsidiaryLedger, cmbSubsidiaryLedger, "sub_name", "id");
-        }
-
-        private void frmSubsidiaryLedgerReport_Load(object sender, EventArgs e)
-        {
-            Helper.LoadFormIcon(this);
-
-            //ACCOUNTS
-            LoadAccounts();
-            cmbAccount.SelectedIndex = -1;
-            cmbAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
-
-            LoadFunds();
-            LoadYear();
         }
 
         private string ParseParticulars(DataRow item)
@@ -185,21 +191,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
             }
         }
 
-        private void btnRetrieve_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(cmbAccount.Text) || string.IsNullOrWhiteSpace(cmbSubsidiaryLedger.Text))
-            {
-                Helper.MessageBoxError("Please select a subsidiary ledger account.");
-                return;
-            }
-
-            LoadReport(reportViewer.LocalReport);
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
-            reportViewer.RefreshReport();
-        }
-
         private void cmbAccount_SelectionChangeCommitted(object sender, EventArgs e)
         {
             byte fundId = (byte)cmbFunds.SelectedValue;
@@ -272,5 +263,21 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 cmbAccount.DroppedDown = true;
             }
         }
+
+        private void btnRetrieve_Click_1(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(cmbAccount.Text) || string.IsNullOrWhiteSpace(cmbSubsidiaryLedger.Text))
+            {
+                Helper.MessageBoxError("Please select a subsidiary ledger account.");
+                return;
+            }
+
+            LoadReport(reportViewer.LocalReport);
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.Percent;
+            reportViewer.ZoomPercent = 100;
+            reportViewer.RefreshReport();
+        }
+
     }
 }

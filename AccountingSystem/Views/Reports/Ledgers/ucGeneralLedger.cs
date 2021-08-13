@@ -1,17 +1,22 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Ledgers
 {
-    public partial class frmGeneralLedgerReport : Form
+    public partial class ucGeneralLedger : UserControl
     {
         private readonly ReportViewer reportViewer;
         private decimal beginningBalance;
 
-        public frmGeneralLedgerReport()
+        public ucGeneralLedger()
         {
             InitializeComponent();
             reportViewer = new ReportViewer();
@@ -19,7 +24,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
             panel1.Controls.Add(reportViewer);
         }
 
-        //ACCOUNT COMBOBOX
         private DataTable DatatableAccounts()
         {
             DataTable dtAccounts;
@@ -75,16 +79,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 cmbAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
             }
         }
-
-        private void cmbxAccount_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F1 && cmbAccount.FindStringExact(cmbAccount.Text) == -1 && !string.IsNullOrEmpty(cmbAccount.Text))
-            {
-                LoadAccounts();
-                cmbAccount.DroppedDown = true;
-            }
-        }
-
 
         private void LoadFunds()
         {
@@ -251,34 +245,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
             }
         }
 
-        private void frmGeneralLedgerReport_Load(object sender, EventArgs e)
-        {
-            Helper.LoadFormIcon(this);
-            LoadFunds();
-
-            //ACCOUNTS
-            LoadAccounts();
-            cmbAccount.SelectedIndex = -1;
-            cmbAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
-
-            LoadYear();
-        }
-
-
-        private void btnRetrieve_Click(object sender, EventArgs e)
-        {
-            if (AccountComboboxEmpty() || !AccountExist() || FundsComboboxEmpty() || !FundExist())
-            {
-                Helper.MessageBoxError($"{cmbAccount.Tag}");
-                return;
-            }
-
-            LoadReport(reportViewer.LocalReport);
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
-            reportViewer.RefreshReport();
-        }
 
 
         //VALIDATIONS
@@ -327,6 +293,44 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 return false;
             }
             return true;
+        }
+
+        private void ucGeneralLedger_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadFunds();
+
+                //ACCOUNTS
+                LoadAccounts();
+                cmbAccount.SelectedIndex = -1;
+                cmbAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
+
+                LoadYear();
+            }
+        }
+        private void btnRetrieve_Click(object sender, EventArgs e)
+        {
+            if (AccountComboboxEmpty() || !AccountExist() || FundsComboboxEmpty() || !FundExist())
+            {
+                Helper.MessageBoxError($"{cmbAccount.Tag}");
+                return;
+            }
+
+            LoadReport(reportViewer.LocalReport);
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.Percent;
+            reportViewer.ZoomPercent = 100;
+            reportViewer.RefreshReport();
+        }
+
+        private void cmbAccount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1 && cmbAccount.FindStringExact(cmbAccount.Text) == -1 && !string.IsNullOrEmpty(cmbAccount.Text))
+            {
+                LoadAccounts();
+                cmbAccount.DroppedDown = true;
+            }
         }
     }
 }
