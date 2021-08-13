@@ -5,13 +5,11 @@ namespace ACC.Domain.Interfaces
 {
     public interface IBeginningBalancesRepository : IRepository<BeginningBalancesModel>
     {
-        Dictionary<string, string> GetRecordByFundsAndGeneralLedgerID(byte fundsId, ushort generalLedgerId, short year);
-
         Dictionary<string, string> GetRecordByFundsAndGeneralLedgerID(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null);
 
         #region CHART OF ACCOUNTS
 
-        decimal GetSumBalances(byte fundsId, ushort generalLedgerId, short year, byte isDebit);
+        decimal GetSumBalances(byte fundsId, ushort generalLedgerId, short year, byte isDebit, ushort? subsidiaryLedgerId = null);
 
         #endregion
 

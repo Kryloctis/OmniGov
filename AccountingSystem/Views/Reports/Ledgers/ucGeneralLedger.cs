@@ -1,12 +1,7 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Ledgers
@@ -175,43 +170,23 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private void BeginningBalanceRow(byte fundId, short year, ushort generalLedgerId, out string balanceDate, out string balanceDebit, out string balanceCredit, out string balance)
         {
             beginningBalance = 0;
-            balanceDate = string.Empty;
-            balanceDebit = string.Empty;
-            balanceCredit = string.Empty;
-            balance = string.Empty;
-
-
             var DebitBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundId, generalLedgerId, year, 1);
             var CreditBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundId, generalLedgerId, year, 0);
 
-            balance = (DebitBeginningBalance - CreditBeginningBalance).ToString("N2");
-
+            beginningBalance = (DebitBeginningBalance - CreditBeginningBalance);
+            balance = beginningBalance.ToString();
+            balanceDebit = DebitBeginningBalance > CreditBeginningBalance ? Math.Abs(beginningBalance).ToString() : string.Empty;
+            balanceCredit = DebitBeginningBalance < CreditBeginningBalance ? Math.Abs(beginningBalance).ToString() : string.Empty;
 
             var dateDict = Factory.BeginningBalancesRepository().GetRecordByFundsAndGeneralLedgerID(fundId, generalLedgerId, year);
             balanceDate = string.IsNullOrEmpty(dateDict["date_entry"]) ? string.Empty : Convert.ToDateTime(dateDict["date_entry"]).ToString("MMM,dd,yyyy");
-
-            balanceDebit = DebitBeginningBalance.ToString("N2");
-            balanceCredit = CreditBeginningBalance.ToString("N2");
-
-            if (Convert.ToDecimal(balanceDebit) > Convert.ToDecimal(balanceCredit))
-            {
-                balanceDebit = Math.Abs(Convert.ToDecimal(balance)).ToString();
-                balanceCredit = "0";
-            }
-            else
-            {
-                balanceDebit = "0";
-                balanceCredit = Math.Abs(Convert.ToDecimal(balance)).ToString();
-            }
-
-            beginningBalance = Convert.ToDecimal(balance);
-
         }
 
         private void LoadReport(LocalReport report)
         {
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 byte fundId = (byte)cmbFunds.SelectedValue;
                 short year = Convert.ToInt16(cmbYear.Text);
                 ushort generalLedgerId = (ushort)cmbAccount.SelectedValue;
@@ -235,17 +210,15 @@ namespace AccountingSystem.Views.Reports.Ledgers
                     new ReportParameter("paramBalanceDebit", balanceDebit),
                     new ReportParameter("paramBalanceCredit", balanceCredit),
                     new ReportParameter("paramBalance", balance)
-            };
+                };
                 report.SetParameters(parameters);
-
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
         }
-
-
 
         //VALIDATIONS
         private bool AccountComboboxEmpty()
@@ -270,7 +243,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
             }
             return true;
         }
-
 
         private bool FundsComboboxEmpty()
         {
@@ -309,6 +281,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 LoadYear();
             }
         }
+
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
             if (AccountComboboxEmpty() || !AccountExist() || FundsComboboxEmpty() || !FundExist())

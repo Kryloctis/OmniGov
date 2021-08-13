@@ -1,12 +1,7 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Ledgers
@@ -54,17 +49,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
         {
             var dtSubsidiaryLedger = Factory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
             HelperLoadRecords.SubsidiaryLedgerComboBox(dtSubsidiaryLedger, cmbSubsidiaryLedger, "sub_name", "id");
-        }
-
-        private string ParseParticulars(DataRow item)
-        {
-            string particulars;
-            if (item["journal_name"].ToString() == "General Journal")
-                particulars = item["explanation"].ToString();
-            else
-                particulars = $"{item["journal_name"]}";
-
-            return particulars;
         }
 
         private static void ValidateDebitCreditRow(string particulars, DataRow item, DataRow row, ref decimal balance)
@@ -119,38 +103,24 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private void BeginningBalanceRow(byte fundId, short year, ushort generalLedgerId, out string balanceDate, out string balanceDebit, out string balanceCredit, out string balance)
         {
             beginningBalance = 0;
-            balanceDate = string.Empty;
-            balanceDebit = string.Empty;
-            balanceCredit = string.Empty;
-            balance = string.Empty;
+            ushort subsidiaryLedgerId = Convert.ToUInt16(cmbSubsidiaryLedger.SelectedValue);
+            var DebitBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundId, generalLedgerId, year, 1, subsidiaryLedgerId);
+            var CreditBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundId, generalLedgerId, year, 0, subsidiaryLedgerId);
 
-            var subsidiaryId = Convert.ToInt16(cmbSubsidiaryLedger.SelectedValue);
+            beginningBalance = (DebitBeginningBalance - CreditBeginningBalance);
+            balance = beginningBalance.ToString();
+            balanceDebit = DebitBeginningBalance > CreditBeginningBalance ? Math.Abs(beginningBalance).ToString() : string.Empty;
+            balanceCredit = DebitBeginningBalance < CreditBeginningBalance ? Math.Abs(beginningBalance).ToString() : string.Empty;
 
-            var subsidiaryDict = Factory.BeginningBalancesRepository().GetRecordByFundsAndGeneralLedgerID(fundId, generalLedgerId, year, (ushort)subsidiaryId);
-
-            balanceDate = string.IsNullOrEmpty(subsidiaryDict["date_entry"]) ? string.Empty : Convert.ToDateTime(subsidiaryDict["date_entry"]).ToString("MMM,dd,yyyy");
-
-            if (subsidiaryDict["is_debit"] == "1")
-            {
-                balanceDebit = string.IsNullOrEmpty(subsidiaryDict["amount"]) ? string.Empty : Convert.ToDecimal(subsidiaryDict["amount"]).ToString("N2");
-                balanceCredit = "0";
-            }
-
-            else
-            {
-                balanceCredit = string.IsNullOrEmpty(subsidiaryDict["amount"]) ? string.Empty : Convert.ToDecimal(subsidiaryDict["amount"]).ToString("N2");
-                balanceDebit = "0";
-            }
-
-
-            balance = string.IsNullOrEmpty(subsidiaryDict["amount"]) ? string.Empty : Convert.ToDecimal(subsidiaryDict["amount"]).ToString("N2");
-            beginningBalance = string.IsNullOrEmpty(subsidiaryDict["amount"]) ? 0 : Convert.ToDecimal(balance);
+            var dateDict = Factory.BeginningBalancesRepository().GetRecordByFundsAndGeneralLedgerID(fundId, generalLedgerId, year, subsidiaryLedgerId);
+            balanceDate = string.IsNullOrEmpty(dateDict["date_entry"]) ? string.Empty : Convert.ToDateTime(dateDict["date_entry"]).ToString("MMM,dd,yyyy");
         }
 
         private void LoadReport(LocalReport report)
         {
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 byte fundId = (byte)cmbFunds.SelectedValue;
                 short year = Convert.ToInt16(cmbYear.Text);
                 ushort generalLedgerId = (ushort)cmbAccount.SelectedValue;
@@ -183,7 +153,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
                     new ReportParameter("paramBalance", balance)
                 };
                 report.SetParameters(parameters);
-
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
