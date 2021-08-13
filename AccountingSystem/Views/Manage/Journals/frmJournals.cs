@@ -1,12 +1,7 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.Journals.DefaultAccounts;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Journals
@@ -16,25 +11,25 @@ namespace AccountingSystem.Views.Manage.Journals
         public frmJournals()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
         }
 
         internal void LoadRecords()
         {
             try
             {
-                var journalsRepository = Factory.JournalsRepository();
-                var dtJournals = journalsRepository.GetRecords();
-                HelperLoadRecords.JournalsDatagridView(dtJournals, dgJournals);
+                HelperLoadRecords.JournalsDatagridView(dgJournals);
 
-                lblRecordCount.Text = journalsRepository.CountRecords().ToString();
+                lblRecordCount.Text = dgJournals.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
         private void frmJournals_Load(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Normal;
-            Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgJournals);
+
+            Helper.DatagridFullRowSelectStyle(dgJournals, true);
             LoadRecords();
         }
 
@@ -84,11 +79,9 @@ namespace AccountingSystem.Views.Manage.Journals
             }
         }
 
-     
-
-        private void toolStrip1_ItemClicked_1(object sender, ToolStripItemClickedEventArgs e)
+        private void btnDefaultAccounts_Click(object sender, EventArgs e)
         {
-
+            _ = new frmDefaultAccounts().ShowDialog();
         }
     }
 }

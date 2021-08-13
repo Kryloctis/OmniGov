@@ -39,6 +39,7 @@ namespace AccountingSystem.Views.Manage.Journals
             // 
             // txtName
             // 
+            this.txtName.Enabled = false;
             this.txtName.Location = new System.Drawing.Point(49, 8);
             this.txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtName.Name = "txtName";

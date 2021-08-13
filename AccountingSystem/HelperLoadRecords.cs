@@ -254,16 +254,52 @@ namespace AccountingSystem
         #endregion
 
         #region Journals
-        internal static void JournalsDatagridView(DataTable dataTable, DataGridView datagrid)
+        internal static void JournalsDatagridView(DataGridView datagrid)
         {
-            datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Name";
-            datagrid.Columns[2].Visible = false;
-            datagrid.Columns[3].Visible = false;
-            datagrid.Columns[4].Visible = false;
+            datagrid.Columns.Clear();
+            datagrid.Rows.Clear();
 
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            var dtJournals = Factory.JournalsRepository().GetRecords();
+
+            //Image Column
+            Image continuingIcon = Properties.Resources.ok14px;
+
+            DataGridViewImageColumn imgColumn = new DataGridViewImageColumn();
+            imgColumn.HeaderText = "Special";
+            imgColumn.Name = "is_special";
+
+            datagrid.Columns.Add("id", "id");
+            datagrid.Columns.Add("journal_name", "Name");
+            datagrid.Columns.Add(imgColumn);
+            datagrid.Columns["is_special"].DefaultCellStyle.NullValue = null;
+            datagrid.Columns.Add("created_at", "created_at");
+            datagrid.Columns.Add("updated_at", "updated_at");
+
+
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["journal_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            datagrid.Columns["is_special"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            datagrid.Columns["is_special"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
+
+            foreach (DataRow row in dtJournals.Rows)
+            {
+                int Id = Convert.ToInt32(row["id"]);
+                string journalName = row["journal_name"].ToString();
+                bool is_special = Convert.ToBoolean(row["is_special"]);
+
+                var items = new object[]
+                {
+                    Id,
+                    journalName,
+                    is_special? continuingIcon : null,
+                    row["created_at"],
+                    row["updated_at"]
+                };
+                datagrid.Rows.Add(items);
+            }
+
         }
         #endregion
 

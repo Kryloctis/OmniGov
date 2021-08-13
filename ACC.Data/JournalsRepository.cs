@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
@@ -11,7 +11,7 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "journals";
-        
+
 
         public JournalsRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -58,6 +58,7 @@ namespace ACC.Data
 
                 var dtJournals = new DataTable();
                 return _dbGenericCommands.Fill(query, dtJournals);
+
             }
             catch (Exception)
             {
