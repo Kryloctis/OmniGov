@@ -50,6 +50,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // 
             // panel1
             // 
+            this.panel1.AutoSize = true;
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.Controls.Add(this.cbHideZeroBalance);
             this.panel1.Controls.Add(this.dtAsOf);
@@ -67,7 +68,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // 
             this.cbHideZeroBalance.AutoSize = true;
             this.cbHideZeroBalance.Enabled = false;
-            this.cbHideZeroBalance.Location = new System.Drawing.Point(544, 0);
+            this.cbHideZeroBalance.Location = new System.Drawing.Point(543, 4);
             this.cbHideZeroBalance.Name = "cbHideZeroBalance";
             this.cbHideZeroBalance.Size = new System.Drawing.Size(127, 19);
             this.cbHideZeroBalance.TabIndex = 9;
@@ -94,7 +95,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(688, 0);
+            this.btnRetrieve.Location = new System.Drawing.Point(693, 1);
             this.btnRetrieve.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
             this.btnRetrieve.Name = "btnRetrieve";
             this.btnRetrieve.Size = new System.Drawing.Size(96, 24);
@@ -106,7 +107,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(272, 0);
+            this.label2.Location = new System.Drawing.Point(272, 6);
             this.label2.Margin = new System.Windows.Forms.Padding(20, 0, 3, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 15);
@@ -116,7 +117,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Location = new System.Drawing.Point(0, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 15);
             this.label1.TabIndex = 0;
@@ -134,6 +135,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

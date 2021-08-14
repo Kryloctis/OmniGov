@@ -1,12 +1,6 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.TrialBalance
@@ -15,9 +9,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
     {
 
         private readonly ReportViewer reportViewer;
-        private byte fundId;
-        private short year;
-        private ushort generalLedgerId;
+        private decimal beginningBalance;
 
         public ucPreClosingTrialBalance()
         {
@@ -38,15 +30,78 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             reportViewer.RefreshReport();
         }
 
+        private void GetDebitCredit(byte fundId, DateTime dateEntry, ushort generalLedgerId, out decimal balanceDebit, out decimal balanceCredit)
+        {
+            beginningBalance = 0;
+            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundId, generalLedgerId, dateEntry);
+            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactions(fundId, generalLedgerId, dateEntry);
+
+            decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["transaction_debit"];
+            decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["transaction_credit"];
+
+            beginningBalance = (totalBeginningAndTransDebit - totalBeginningAndTransCredit);
+            balanceDebit = totalBeginningAndTransDebit > totalBeginningAndTransCredit ? Math.Abs(beginningBalance) : 0;
+            balanceCredit = totalBeginningAndTransDebit < totalBeginningAndTransCredit ? Math.Abs(beginningBalance) : 0;
+        }
+
+        private DataTable DataTablePreTrialBalance()
+        {
+            var fundId = Convert.ToByte(cmbFund.SelectedValue);
+            var dateAsOF = dtAsOf.Value;
+            var dtPreTrialBalance = new dsLFS().dtTrialBalance;
+
+            var dtGeneralLedgerAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
+
+            foreach (DataRow row in dtGeneralLedgerAccounts.Rows)
+            {
+                int accountGroupId = Convert.ToInt32(row["account_group_id"]);
+                string accountGroupCode = row["account_group_code"].ToString();
+                string accountGroupName = row["account_group_name"].ToString();
+                int majorAccountGroupId = Convert.ToInt32(row["major_account_group_id"]);
+                string majorAccountGroupCode = row["maj_acc_group_code"].ToString();
+                string majorAccountGroupName = row["maj_acc_group_name"].ToString();
+                int subMajorAccountGroupId = Convert.ToInt32(row["sub_major_account_group_id"]);
+                string subMajorAccountGroupCode = row["sub_maj_acc_group_code"].ToString();
+                string subMajorAccountGroupName = row["sub_maj_acc_group_name"].ToString();
+                int accountId = Convert.ToInt32(row["general_ledger_accounts_id"]);
+                string accountCode = row["account_code"].ToString();
+                string accountName = row["ledger_name"].ToString();
+
+                decimal balanceDebit, balanceCredit;
+                GetDebitCredit(fundId, dateAsOF, (ushort)accountId, out balanceDebit, out balanceCredit);
+
+                dtPreTrialBalance.Rows.Add(new object[]
+                {
+                    accountGroupId,
+                    accountGroupCode,
+                    accountGroupName,
+                    majorAccountGroupId,
+                    majorAccountGroupCode,
+                    majorAccountGroupName,
+                    subMajorAccountGroupId,
+                    subMajorAccountGroupCode,
+                    subMajorAccountGroupName,
+                    accountId,
+                    accountCode,
+                    accountName,
+                    balanceDebit,
+                    balanceCredit
+                });
+            }
+
+            return dtPreTrialBalance;
+        }
+
         private void LoadReport(LocalReport report)
         {
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 var lguDict = Helper.LGUDetails();
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\pre-trial-balance.rdlc";
                 report.DataSources.Clear();
 
-                report.DataSources.Add(new ReportDataSource("dtPreTrialBalance", DataTablePreTrialBalance()));
+                report.DataSources.Add(new ReportDataSource("dtTrialBalance", DataTablePreTrialBalance()));
 
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
                 var fundName = cmbFund.Text.ToUpper();
@@ -59,80 +114,18 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                     new ReportParameter("paramAsOf", asOfDate),
                   };
                 report.SetParameters(parameters);
-
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        private DataTable DataTablePreTrialBalance()
-        {
-            fundId = Convert.ToByte(cmbFund.SelectedValue);
-            year = Convert.ToInt16(dtAsOf.Value.Year);
-
-            var dtPreTrialBalance = new dsLFS.dtPreTrialBalanceDataTable();
-            var dtPreTrialBalanceFromDB = Factory.GeneralLedgerAccountsRepository().GetAllViewRecords();
-
-            foreach (DataRow item in dtPreTrialBalanceFromDB.Rows)
-            {
-                generalLedgerId = (ushort)item["general_ledger_accounts_id"];
-
-                DataRow row = dtPreTrialBalance.NewRow();
-                row["account_title"] = item["ledger_name"];
-                row["account_code"] = item["account_code"];
-
-                ProcessDebitCreditValues(item, row);
-
-                dtPreTrialBalance.Rows.Add(row);
-            }
-
-            return dtPreTrialBalance;
-        }
-
-        private void ProcessDebitCreditValues(DataRow item, DataRow row)
-        {
-            var debit_beginning_bal = Convert.ToDecimal(item["debit_beginning_bal"]);
-            var credit_beginning_bal = Convert.ToDecimal(item["credit_beginning_bal"]);
-
-            var beginning_balance = debit_beginning_bal - credit_beginning_bal;
-            var jevAccount = Factory.JEVAccountsRepository().GetJEVAmount(fundId, generalLedgerId, year);
-
-            if (jevAccount.Rows.Count != 0)
-            {
-                var adjustedDebitbalance = 0.0m;
-                var adjustedCreditbalance = 0.0m;
-
-                foreach (DataRow items in jevAccount.Rows)
-                {
-                    if (Convert.ToBoolean(items["is_debit"]))
-                        adjustedDebitbalance = debit_beginning_bal + Convert.ToDecimal(items["amount"]);
-                    else
-                        adjustedCreditbalance = credit_beginning_bal + Convert.ToDecimal(items["amount"]);
-                }
-                var endingBalance = Math.Max(adjustedDebitbalance, adjustedCreditbalance) - Math.Min(adjustedDebitbalance, adjustedCreditbalance);
-
-                //ENDING BALANCE.
-                if (adjustedDebitbalance > adjustedCreditbalance)
-                    row["debit"] = endingBalance;
-                else
-                    row["credit"] = endingBalance;
-            }
-
-            else //IF NO JEV RECORDS
-            {
-                if (beginning_balance > 0)
-                    row["debit"] = Math.Abs(beginning_balance);
-                else
-                    row["credit"] = Math.Abs(beginning_balance);
+                Helper.MessageBoxError(ex.StackTrace);
             }
         }
 
         private void RecordsFilter(LocalReport report, byte hideZeroBalance)
         {
             var parameters = new[] {
-                    new ReportParameter("paramHideZeroBalance", hideZeroBalance.ToString())
+                new ReportParameter("paramHideZeroBalance", hideZeroBalance.ToString())
             };
 
             reportViewer.LocalReport.SetParameters(parameters);
@@ -155,7 +148,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                 var dtFunds = Factory.FundsRepository().GetRecords();
                 HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
             }
-            
+
         }
     }
 }

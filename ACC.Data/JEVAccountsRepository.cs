@@ -325,6 +325,53 @@ namespace ACC.Data
             }
         }
 
+        //TRIAL BALANCE
+        public Dictionary<string, decimal> GetSumTransactions(int fundId, int generalLedgerId, DateTime dateEntry, ushort? subsidiaryId = null)
+        {
+            var record = new Dictionary<string, decimal>();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Int32, fundId},
+                    new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerId},
+                    new object[] { "@date_entry",DbType.Date, dateEntry.Date},
+                    new object[] { "@year", DbType.Int16, dateEntry.Date.Year},
+                    new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryId}
+                };
+
+                string subsidiaryQuery = subsidiaryId == null ? string.Empty : $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id ";
+
+                string query = $"SELECT COALESCE(SUM(IF(is_debit = 1, amount, 0)),0) AS transaction_debit, COALESCE(SUM(IF(is_debit = 0, amount, 0)),0) AS transaction_credit " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE funds_id = @funds_id " +
+                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
+                    $"AND date_entry <= @date_entry " +
+                    $"AND YEAR(date_entry) = @year " +
+                    $"{subsidiaryQuery}";
+
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("transaction_debit", Convert.ToDecimal(item[0]));
+                        record.Add("transaction_credit", Convert.ToDecimal(item[1]));
+                    }
+                }
+
+                return record;
+            }
+            catch (MysqlException)
+            {
+                throw;
+            }
+
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         public decimal GetJEVSumByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year)
         {
@@ -397,5 +444,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
+
     }
 }

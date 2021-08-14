@@ -30,7 +30,6 @@ namespace ACC.Data
         public Dictionary<string, string> GetRecordByFundsAndGeneralLedgerID(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null)
         {
             var record = new Dictionary<string, string>();
-
             try
             {
                 var parameters = new object[][]
@@ -105,7 +104,6 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        #region CHART OF ACCOUNTS
         public decimal GetSumBalances(byte fundsId, ushort generalLedgerId, short year, byte isDebit, ushort? subsidiaryLedgerId = null)
         {
             try
@@ -129,8 +127,8 @@ namespace ACC.Data
                     $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
                     $"{subsidiaryQuery}" +
                     $"AND is_debit = @is_debit";
-                decimal debit = Convert.ToDecimal(_dbGenericCommands.ExecuteScalar(query, parameters));
-                return debit;
+                decimal amount = Convert.ToDecimal(_dbGenericCommands.ExecuteScalar(query, parameters));
+                return amount;
             }
             catch (MySqlException)
             {
@@ -141,7 +139,55 @@ namespace ACC.Data
                 throw;
             }
         }
-        #endregion
+
+        public Dictionary<string, decimal> GetSumBalances(byte fundsId, ushort generalLedgerId, DateTime dateEntry, ushort? subsidiaryLedgerId = null)
+        {
+            var record = new Dictionary<string, decimal>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Byte, fundsId},
+                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                    new object[] { "@date_entry", DbType.Date, dateEntry.Date},
+                    new object[] { "@year", DbType.Int16, dateEntry.Date.Year},
+                    new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryLedgerId}
+                };
+
+                string subsidiaryQuery = subsidiaryLedgerId == null ? string.Empty : $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id ";
+
+                string query = $"SELECT " +
+                    $"COALESCE(SUM(IF(is_debit = 1, amount, 0)), 0) AS beginning_balance_debit, " +
+                    $"COALESCE(SUM(IF(is_debit = 0, amount, 0)), 0) AS beginning_balance_credit " +
+                    $"FROM {tableName} " +
+                    $"WHERE funds_id = @funds_id " +
+                    $"AND date_entry <= @date_entry " +
+                    $"AND YEAR(date_entry) = @year " +
+                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
+                    $"{subsidiaryQuery}";
+
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("beginning_balance_debit", Convert.ToDecimal(item[0]));
+                        record.Add("beginning_balance_credit", Convert.ToDecimal(item[1]));
+                    }
+                }
+
+                return record;
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         public decimal GetSumBalanceByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null)
         {
@@ -387,6 +433,5 @@ namespace ACC.Data
                 throw;
             }
         }
-
     }
 }

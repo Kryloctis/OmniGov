@@ -1,12 +1,6 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.TrialBalance
@@ -60,7 +54,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\post-trial-balance.rdlc";
                 report.DataSources.Clear();
 
-                report.DataSources.Add(new ReportDataSource("dtPreTrialBalance", DataTablePostTrialBalance()));
+                report.DataSources.Add(new ReportDataSource("dtTrialBalance", DataTablePostTrialBalance()));
 
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
                 var fundName = cmbFund.Text.ToUpper();
@@ -79,6 +73,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                 Helper.MessageBoxError(ex.Message);
             }
         }
+
         private void RecordsFilter(LocalReport report, byte hideZeroBalance)
         {
             var parameters = new[] {
@@ -94,8 +89,8 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             fundId = Convert.ToByte(cmbFund.SelectedValue);
             year = Convert.ToInt16(dtAsOf.Value.Year);
 
-            var dtPreTrialBalance = new dsLFS.dtPreTrialBalanceDataTable();
-            var dtPreTrialBalanceFromDB = Factory.GeneralLedgerAccountsRepository().GetAllViewRecords();
+            var dtPostTrialBalance = new dsLFS.dtTrialBalanceDataTable();
+            var dtPreTrialBalanceFromDB = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
 
 
             foreach (DataRow item in dtPreTrialBalanceFromDB.Rows)
@@ -107,18 +102,18 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                 if (account_group_type == "3" || account_group_type == "4" || account_group_type == "5")
                     break;
 
-                DataRow row = dtPreTrialBalance.NewRow();
+                DataRow row = dtPostTrialBalance.NewRow();
                 row["account_title"] = item["ledger_name"];
                 row["account_code"] = item["account_code"];
 
                 ProcessDebitCreditValues(item, row);
 
-                dtPreTrialBalance.Rows.Add(row);
+                dtPostTrialBalance.Rows.Add(row);
             }
 
-            GovernmentEquityRow(fundId, year, generalLedgerId, dtPreTrialBalanceFromDB, dtPreTrialBalance);
+            GovernmentEquityRow(fundId, year, generalLedgerId, dtPreTrialBalanceFromDB, dtPostTrialBalance);
 
-            return dtPreTrialBalance;
+            return dtPostTrialBalance;
         }
 
         private void ProcessDebitCreditValues(DataRow item, DataRow row)

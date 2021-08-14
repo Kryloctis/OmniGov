@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 
 namespace ACC.Domain.Interfaces
@@ -7,15 +8,11 @@ namespace ACC.Domain.Interfaces
     {
         Dictionary<string, string> GetRecordByFundsAndGeneralLedgerID(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null);
 
-        #region CHART OF ACCOUNTS
-
         decimal GetSumBalances(byte fundsId, ushort generalLedgerId, short year, byte isDebit, ushort? subsidiaryLedgerId = null);
 
-        #endregion
+        Dictionary<string, decimal> GetSumBalances(byte fundsId, ushort generalLedgerId, DateTime dateEntry, ushort? subsidiaryLedgerId = null);
 
-        #region SETBALANCE
         bool DeleteById(int Id);
-        #endregion    
 
         decimal GetSumBalanceByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null);
 

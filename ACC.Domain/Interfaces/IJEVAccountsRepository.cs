@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace ACC.Domain.Interfaces
@@ -19,6 +20,8 @@ namespace ACC.Domain.Interfaces
         //STATEMENT OF FINANCIAL PERFORMANCE
         Decimal GetSumTransactionsByFundAndAccountAndIsDebitAndDateEntry(int fundId, int generalLedgerId, bool isDebit, DateTime dateEntry);
 
+        //TRIAL BALANCE
+        Dictionary<string, decimal> GetSumTransactions(int fundId, int generalLedgerId, DateTime dateEntry, ushort? subsidiaryId = null);
 
         DataTable GetJEVAmount(byte fundId, ushort generalLedgerId, short year);
 

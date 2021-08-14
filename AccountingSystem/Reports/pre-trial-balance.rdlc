@@ -11,18 +11,54 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="dtPreTrialBalance">
+    <DataSet Name="dtTrialBalance">
       <Query>
         <DataSourceName>dsLFS</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="account_title">
-          <DataField>account_title</DataField>
+        <Field Name="account_group_id">
+          <DataField>account_group_id</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="account_group_code">
+          <DataField>account_group_code</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="account_group_name">
+          <DataField>account_group_name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="major_account_group_id">
+          <DataField>major_account_group_id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="major_account_group_name">
+          <DataField>major_account_group_name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="sub_major_account_group_id">
+          <DataField>sub_major_account_group_id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="sub_major_account_group_code">
+          <DataField>sub_major_account_group_code</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="sub_major_account_group_name">
+          <DataField>sub_major_account_group_name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="account_id">
+          <DataField>account_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="account_code">
           <DataField>account_code</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="account_name">
+          <DataField>account_name</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="debit">
@@ -36,8 +72,8 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>dsLFS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Home\Desktop\New LFS\AccountingSystem\dsLFS.xsd</rd:SchemaPath>
-        <rd:TableName>dtPreTrialBalance</rd:TableName>
+        <rd:SchemaPath>C:\Users\Hyubane_Ronin\source\Repos\LocalFinanceSystem\AccountingSystem\dsLFS.xsd</rd:SchemaPath>
+        <rd:TableName>dtTrialBalance</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />
@@ -63,8 +99,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox20</rd:DefaultName>
-            <Top>3.3436cm</Top>
-            <Left>8.78419cm</Left>
+            <Top>3.41663cm</Top>
+            <Left>8.9827cm</Left>
             <Height>0.6cm</Height>
             <Width>4.24779cm</Width>
             <Style>
@@ -96,8 +132,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox20</rd:DefaultName>
-            <Top>4.60782cm</Top>
-            <Left>11.69334cm</Left>
+            <Top>4.79302cm</Top>
+            <Left>11.89185cm</Left>
             <Height>0.6cm</Height>
             <Width>7.66092cm</Width>
             <ZIndex>1</ZIndex>
@@ -130,8 +166,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox20</rd:DefaultName>
-            <Top>4.00782cm</Top>
-            <Left>11.69334cm</Left>
+            <Top>4.19302cm</Top>
+            <Left>11.89185cm</Left>
             <Height>0.6cm</Height>
             <Width>7.66092cm</Width>
             <ZIndex>2</ZIndex>
@@ -165,8 +201,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox20</rd:DefaultName>
-            <Top>5.34894cm</Top>
-            <Left>8.78419cm</Left>
+            <Top>5.53414cm</Top>
+            <Left>8.9827cm</Left>
             <Height>0.59999cm</Height>
             <Width>1.07279cm</Width>
             <ZIndex>3</ZIndex>
@@ -195,8 +231,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox67</rd:DefaultName>
-            <Top>5.34893cm</Top>
-            <Left>11.69334cm</Left>
+            <Top>5.53413cm</Top>
+            <Left>11.89185cm</Left>
             <Height>0.6cm</Height>
             <Width>3.58479cm</Width>
             <ZIndex>4</ZIndex>
@@ -219,22 +255,22 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>10.08158cm</Width>
+                  <Width>10.17778cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.58728cm</Width>
+                  <Width>2.68348cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.52785cm</Width>
+                  <Width>0.62405cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.61014cm</Width>
+                  <Width>2.70634cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.50203cm</Width>
+                  <Width>0.59823cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.66666cm</Width>
+                  <Width>2.76286cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -458,14 +494,14 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="account_title">
+                        <Textbox Name="account_name">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!account_title.Value</Value>
+                                  <Value>=Fields!account_name.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                   </Style>
@@ -474,7 +510,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>account_title</rd:DefaultName>
+                          <rd:DefaultName>account_name</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -772,7 +808,7 @@
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>n2</Format>
+                                    <Format>#,0.00;(#,0.00);''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -841,7 +877,7 @@
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>n2</Format>
+                                    <Format>#,0.00;(#,0.00);''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -894,11 +930,11 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>dtPreTrialBalance</DataSetName>
+            <DataSetName>dtTrialBalance</DataSetName>
             <Top>0.3175cm</Top>
-            <Left>0.37875cm</Left>
+            <Left>0cm</Left>
             <Height>2.22335cm</Height>
-            <Width>18.97554cm</Width>
+            <Width>19.55274cm</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -928,10 +964,10 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>2.55066in</Height>
+        <Height>2.53654in</Height>
         <Style />
       </Body>
-      <Width>7.80313in</Width>
+      <Width>7.69794in</Width>
       <Page>
         <PageHeader>
           <Height>1in</Height>
@@ -958,7 +994,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Height>0.6cm</Height>
-              <Width>19.7829cm</Width>
+              <Width>19.55277cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1000,7 +1036,7 @@
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>0.63528cm</Top>
               <Height>0.89105cm</Height>
-              <Width>19.7829cm</Width>
+              <Width>19.55277cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -1090,10 +1126,72 @@
             </Border>
           </Style>
         </PageHeader>
+        <PageFooter>
+          <Height>0.25in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="Textbox15">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Page </Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>=Globals!PageNumber</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value> of </Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>=Globals!OverallTotalPages</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox8</rd:DefaultName>
+              <Left>0.07508in</Left>
+              <Height>0.25in</Height>
+              <Width>7.62286in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>
-        <LeftMargin>0.2in</LeftMargin>
-        <RightMargin>0.2in</RightMargin>
+        <LeftMargin>0.25in</LeftMargin>
+        <RightMargin>0.25in</RightMargin>
         <TopMargin>0.25in</TopMargin>
         <BottomMargin>0.25in</BottomMargin>
         <ColumnSpacing>0.05118in</ColumnSpacing>
