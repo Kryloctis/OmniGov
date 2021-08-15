@@ -38,6 +38,9 @@ namespace AccountingSystem.Views.Manage.Journals
             byte[] columnIndexTimestamp = { 3, 4 };
             Helper.ShowRecordTimestamp(dgJournals, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgJournals, btnEdit, btnDelete);
+            int journalId = Convert.ToInt32(dgJournals.CurrentRow.Cells["id"].Value);
+            if (journalId == 1) btnDefaultAccounts.Enabled = false;
+            else btnDefaultAccounts.Enabled = true;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -79,9 +82,17 @@ namespace AccountingSystem.Views.Manage.Journals
             }
         }
 
+        private void showDefaultAccounts()
+        {
+            var frmJournalDefaultAccounts = new frmDefaultAccounts();
+            int journalId = Convert.ToInt32(dgJournals.CurrentRow.Cells["id"].Value);
+            frmJournalDefaultAccounts.journalId = journalId;
+            frmJournalDefaultAccounts.ShowDialog();
+        }
+
         private void btnDefaultAccounts_Click(object sender, EventArgs e)
         {
-            _ = new frmDefaultAccounts().ShowDialog();
+            showDefaultAccounts();
         }
     }
 }

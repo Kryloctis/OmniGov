@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
-using System.Collections.Generic;
 
 namespace AccountingSystem.Views.Manage.Users.Roles
 {
@@ -79,7 +78,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             switch (userDict["office"])
             {
                 case "SysAdmin":
-                    cmbOffice.Items.AddRange(new string[] {"Budget", "Accounting", "Treasury"});
+                    cmbOffice.Items.AddRange(new string[] { "Budget", "Accounting", "Treasury" });
                     break;
                 default:
                     cmbOffice.Items.Add(userDict["office"]);

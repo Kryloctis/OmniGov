@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ACC.Data;
 using ACC.Domain.Interfaces;
-using ACC.Data;
+using System;
 
 namespace AccountingSystem
 {
@@ -93,6 +93,7 @@ namespace AccountingSystem
         public static IGeneralCollectionsDepositsRepository GeneralCollectionsDepositsRepository() => new GeneralCollectionsDepositsRepository(new MySqlGenericCommands());
         public static IReceiptsRepository ReceiptsRepository() => new ReceiptsRepository(new MySqlGenericCommands());
         public static IReceiptsIssuedRepository ReceiptsIssuedRepository() => new ReceiptsIssuedRepository(new MySqlGenericCommands());
-    
+
+        public static IJournalsDefaultAccountsRepository JournalsDefaultAccountsRepository() => new JournalsDefaultAccountsRepository(new MySqlGenericCommands());
     }
 }

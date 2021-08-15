@@ -1,0 +1,9 @@
+﻿namespace ACC.Domain.Models
+{
+    public class JournalsDefaultAccountsModel
+    {
+        public int Id { get; set; }
+        public int JournalId { get; set; }
+        public int AccountId { get; set; }
+    }
+}
