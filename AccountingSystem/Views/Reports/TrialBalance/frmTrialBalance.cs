@@ -20,15 +20,12 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             if (radioPreTB.Checked)
             {
                 tabTrialBalance.SelectedTab = tabPagePreTrial;
-                radioPreTB.Image = Properties.Resources.ok14px;
                 radioPostTB.Image = null;
             }
             else
             {
                 tabTrialBalance.SelectedTab = tabPagePostTrial;
-                radioPostTB.Image = Properties.Resources.ok14px;
                 radioPreTB.Image = null;
-
             }
         }
 

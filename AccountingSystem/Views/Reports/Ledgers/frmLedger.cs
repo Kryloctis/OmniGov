@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Ledgers
@@ -29,12 +22,10 @@ namespace AccountingSystem.Views.Reports.Ledgers
             {
                 case "1":
                     tabControlLedger.SelectedTab = tabPageGeneralLedger;
-                    radioGeneralLedger.Image = Properties.Resources.ok14px;
                     break;
 
                 case "2":
                     tabControlLedger.SelectedTab = tabPageSubsidiaryLedger;
-                    radioSubsidiaryLedger.Image = Properties.Resources.ok14px;
                     break;
 
                 case "3":

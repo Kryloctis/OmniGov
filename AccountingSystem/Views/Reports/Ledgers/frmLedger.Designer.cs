@@ -163,6 +163,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             this.Controls.Add(this.panel1);
             this.MinimizeBox = false;
             this.Name = "frmLedger";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ledgers";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

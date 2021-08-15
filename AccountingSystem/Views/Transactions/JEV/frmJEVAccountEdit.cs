@@ -43,13 +43,10 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void CheckedCollectionsDeposits(bool? isDeposit)
         {
             var uc = ucjevAccount1;
-            if (Convert.ToBoolean(isDeposit))
-            {
-                uc.radioCollections.Checked = true;
-                return;
-            }
-
-            uc.radioDeposits.Checked = true;
+            if (!Convert.ToBoolean(isDeposit))
+               uc.radioCollections.Checked = true;
+            else
+                uc.radioDeposits.Checked = true;
         }
 
         private void LoadSelectedGeneralLedgerAccount(ushort accountId, string accountCode, string accountName)

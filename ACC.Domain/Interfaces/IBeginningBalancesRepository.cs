@@ -1,23 +1,20 @@
 ﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 
 namespace ACC.Domain.Interfaces
 {
     public interface IBeginningBalancesRepository : IRepository<BeginningBalancesModel>
     {
-        Dictionary<string, string> GetRecordByFundsAndGeneralLedgerID(byte fundsId, ushort generalLedgerId, short year);
-
         Dictionary<string, string> GetRecordByFundsAndGeneralLedgerID(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null);
 
-        #region CHART OF ACCOUNTS
+        decimal GetSumBalances(byte fundsId, ushort generalLedgerId, short year, byte isDebit, ushort? subsidiaryLedgerId = null);
 
-        decimal GetSumBalances(byte fundsId, ushort generalLedgerId, short year, byte isDebit);
+        Dictionary<string, decimal> GetSumBalances(byte fundsId, ushort generalLedgerId, DateTime dateEntry, ushort? subsidiaryLedgerId = null);
 
-        #endregion
+        Dictionary<string, decimal> GetSumBalancesByAccountGroup(byte fundsId, ushort accountGroupId, DateTime dateEntry, ushort? subsidiaryLedgerId = null);
 
-        #region SETBALANCE
         bool DeleteById(int Id);
-        #endregion    
 
         decimal GetSumBalanceByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null);
 
@@ -25,11 +22,5 @@ namespace ACC.Domain.Interfaces
 
         bool SubsidiaryLedgerBalanceExist(byte fundsId, ushort generalLedgerId, short year, ushort subsidiaryLedgerId);
 
-
-        Dictionary<string, string> GetDebitAndCreditOfTemporaryAccounts(byte fundsId);
-
-        Dictionary<string, string> GetDebitAndCreditOfPermanentAccounts(byte fundsId);
-
-        decimal GetGovernmentEquityBalance(byte fundsId, ushort generalLedgerId, short year);
     }
 }

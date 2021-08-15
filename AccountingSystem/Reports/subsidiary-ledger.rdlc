@@ -379,7 +379,7 @@
                               <TextRuns>
                                 <TextRun>
                                   <Label>beginning_balance</Label>
-                                  <Value>=Parameters!paramBalance.Value</Value>
+                                  <Value>=CDec(Parameters!paramBalance.Value)</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <Format>#,0.00;(#,0.00);''</Format>
@@ -684,18 +684,19 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox52">
+                        <Textbox Name="txtGrandTotalDebit">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!debit_amount.Value)+Parameters!paramBalanceDebit.Value</Value>
+                                  <Label>grand_total_debit</Label>
+                                  <Value>=Sum(Fields!debit_amount.Value) + ReportItems!txtBeginningDebit.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>n2</Format>
+                                    <Format>#,0.00;(#,0.00);''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -704,7 +705,6 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox52</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -729,18 +729,19 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox53">
+                        <Textbox Name="txtGrandTotalCredit">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!credit_amount.Value)</Value>
+                                  <Label>grand_total_credit</Label>
+                                  <Value>=Sum(Fields!credit_amount.Value)+ReportItems!txtBeginningCredit.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>n2</Format>
+                                    <Format>#,0.00;(#,0.00);''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -749,7 +750,6 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox53</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -778,11 +778,12 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Last(Fields!balance.Value)</Value>
+                                  <Label>grand_total_balance</Label>
+                                  <Value>=ReportItems!txtGrandTotalDebit.Value - ReportItems!txtGrandTotalCredit.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>#,0.00;(#,0.00)</Format>
+                                    <Format>#,0.00;(#,0.00);''</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1473,7 +1474,7 @@
                               </TextRun>
                             </TextRuns>
                             <Style>
-                              <TextAlign>Right</TextAlign>
+                              <TextAlign>Left</TextAlign>
                             </Style>
                           </Paragraph>
                         </Paragraphs>
@@ -1567,7 +1568,6 @@
             </TablixRowHierarchy>
             <DataSetName>SubsidiaryLedger</DataSetName>
             <Top>0.36105cm</Top>
-            <Left>0in</Left>
             <Height>1.43782in</Height>
             <Width>7.69792in</Width>
             <Style>
@@ -1608,7 +1608,6 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Left>0in</Left>
               <Height>0.89105cm</Height>
               <Width>19.55272cm</Width>
               <Style>
@@ -1639,7 +1638,6 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>0.97cm</Top>
-              <Left>0in</Left>
               <Height>0.6cm</Height>
               <Width>1.10244cm</Width>
               <ZIndex>1</ZIndex>
@@ -1779,7 +1777,6 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>1.71965cm</Top>
-              <Left>0in</Left>
               <Height>0.6cm</Height>
               <Width>3.29847cm</Width>
               <ZIndex>5</ZIndex>
@@ -1849,7 +1846,6 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>2.31965cm</Top>
-              <Left>0in</Left>
               <Height>0.6cm</Height>
               <Width>3.29847cm</Width>
               <ZIndex>7</ZIndex>
@@ -1881,7 +1877,6 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>2.91965cm</Top>
-              <Left>0in</Left>
               <Height>0.6cm</Height>
               <Width>3.29847cm</Width>
               <ZIndex>8</ZIndex>
@@ -1913,7 +1908,6 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>3.51965cm</Top>
-              <Left>0in</Left>
               <Height>0.6cm</Height>
               <Width>3.29847cm</Width>
               <ZIndex>9</ZIndex>
@@ -2221,7 +2215,7 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>0.26389in</Height>
+          <Height>0.27777in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -2262,7 +2256,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox8</rd:DefaultName>
-              <Top>0.01389in</Top>
+              <Top>0.02777in</Top>
               <Height>0.25in</Height>
               <Width>7.69792in</Width>
               <Style>

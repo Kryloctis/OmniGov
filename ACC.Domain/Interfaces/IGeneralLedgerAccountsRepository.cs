@@ -14,8 +14,6 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetRecordsBySearch();
 
-        DataTable GetAllViewRecords();
-
         DataTable GetViewRecordsByAccountGroup(int accountGroupId);
 
         DataTable GetViewRecordsByMajorAccGroupName(string majAccGroupName);

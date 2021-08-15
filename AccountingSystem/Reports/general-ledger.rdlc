@@ -374,6 +374,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
+                                  <Label>beginning_balance</Label>
                                   <Value>=CDec(Parameters!paramBalance.Value)</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
@@ -748,7 +749,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Label>Grand Debit Total</Label>
+                                  <Label>grand_total_debit</Label>
                                   <Value>=Sum(Fields!debit_amount.Value) + ReportItems!txtDebitBeginningBalance.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
@@ -804,7 +805,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Label>Grand Credit Total</Label>
+                                  <Label>grand_total_credit</Label>
                                   <Value>=Sum(Fields!credit_amount.Value) + ReportItems!txtBeginningCredit.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
@@ -860,7 +861,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Label>Grand Balance Total</Label>
+                                  <Label>grand_total_balance</Label>
                                   <Value>=ReportItems!txtGrandTotalDebit.Value - ReportItems!txtGrandTotalCredit.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
@@ -1668,7 +1669,7 @@
                               </TextRun>
                             </TextRuns>
                             <Style>
-                              <TextAlign>Right</TextAlign>
+                              <TextAlign>Left</TextAlign>
                             </Style>
                           </Paragraph>
                         </Paragraphs>
@@ -1751,7 +1752,7 @@
             <DataSetName>GeneralLedger</DataSetName>
             <Top>0.16542in</Top>
             <Height>1.4516in</Height>
-            <Width>7.69792in</Width>
+            <Width>7.69794in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1762,7 +1763,7 @@
         <Height>1.61702in</Height>
         <Style />
       </Body>
-      <Width>7.69792in</Width>
+      <Width>7.69794in</Width>
       <Page>
         <PageHeader>
           <Height>1.06819in</Height>

@@ -35,6 +35,7 @@ namespace AccountingSystem.Views.Manage.Journals
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.btnDefaultAccounts = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -71,16 +72,18 @@ namespace AccountingSystem.Views.Manage.Journals
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAdd,
             this.btnEdit,
-            this.btnDelete});
+            this.btnDelete,
+            this.btnDefaultAccounts});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 0, 1, 0);
             this.toolStrip1.Size = new System.Drawing.Size(699, 50);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
-            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked_1);
             // 
             // btnAdd
             // 
+            this.btnAdd.Enabled = false;
             this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -88,6 +91,7 @@ namespace AccountingSystem.Views.Manage.Journals
             this.btnAdd.Size = new System.Drawing.Size(42, 47);
             this.btnAdd.Text = "Add...";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAdd.Visible = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnEdit
@@ -103,6 +107,7 @@ namespace AccountingSystem.Views.Manage.Journals
             // 
             // btnDelete
             // 
+            this.btnDelete.Enabled = false;
             this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -110,7 +115,20 @@ namespace AccountingSystem.Views.Manage.Journals
             this.btnDelete.Size = new System.Drawing.Size(44, 47);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Visible = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnDefaultAccounts
+            // 
+            this.btnDefaultAccounts.Image = global::AccountingSystem.Properties.Resources.account_book_28px;
+            this.btnDefaultAccounts.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnDefaultAccounts.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDefaultAccounts.Name = "btnDefaultAccounts";
+            this.btnDefaultAccounts.Size = new System.Drawing.Size(102, 47);
+            this.btnDefaultAccounts.Text = "Default Accounts";
+            this.btnDefaultAccounts.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+            this.btnDefaultAccounts.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDefaultAccounts.Click += new System.EventHandler(this.btnDefaultAccounts_Click);
             // 
             // statusStrip1
             // 
@@ -180,8 +198,10 @@ namespace AccountingSystem.Views.Manage.Journals
             this.Controls.Add(this.dgJournals);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(715, 438);
             this.Name = "frmJournals";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Journals";
             this.Load += new System.EventHandler(this.frmJournals_Load);
@@ -210,5 +230,6 @@ namespace AccountingSystem.Views.Manage.Journals
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
+        private System.Windows.Forms.ToolStripButton btnDefaultAccounts;
     }
 }

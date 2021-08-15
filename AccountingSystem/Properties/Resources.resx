@@ -268,4 +268,7 @@
   <data name="document_disapprove_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document-disapprove-28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="account_book_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\account-book-28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

@@ -122,6 +122,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.cmbxJevStatus.Name = "cmbxJevStatus";
             this.cmbxJevStatus.Size = new System.Drawing.Size(152, 23);
             this.cmbxJevStatus.TabIndex = 28;
+            this.cmbxJevStatus.SelectionChangeCommitted += new System.EventHandler(this.cmbxJevStatus_SelectionChangeCommitted);
             // 
             // nudYear
             // 
@@ -146,6 +147,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             0,
             0,
             0});
+            this.nudYear.ValueChanged += new System.EventHandler(this.nudYear_ValueChanged);
             // 
             // cbMonth
             // 
@@ -155,6 +157,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.cbMonth.Name = "cbMonth";
             this.cbMonth.Size = new System.Drawing.Size(154, 23);
             this.cbMonth.TabIndex = 26;
+            this.cbMonth.SelectionChangeCommitted += new System.EventHandler(this.cbMonth_SelectionChangeCommitted);
             // 
             // btnSearch
             // 
