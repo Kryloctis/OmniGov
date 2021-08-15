@@ -23,6 +23,9 @@ namespace ACC.Domain.Interfaces
         //TRIAL BALANCE
         Dictionary<string, decimal> GetSumTransactions(int fundId, int generalLedgerId, DateTime dateEntry, ushort? subsidiaryId = null);
 
+        Dictionary<string, decimal> GetSumTransactionsByAccountGroup(int fundId, int accountGroupId, DateTime dateEntry, ushort? subsidiaryId = null);
+
+
         DataTable GetJEVAmount(byte fundId, ushort generalLedgerId, short year);
 
         bool DeleteByJevId(int jevId);
@@ -30,7 +33,5 @@ namespace ACC.Domain.Interfaces
         int CountByJevId(int jevId);
 
         decimal GetJEVSumByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year);
-
-        bool IsTransactionDebit(byte fundsId, ushort generalLedgerId, short year);
     }
 }

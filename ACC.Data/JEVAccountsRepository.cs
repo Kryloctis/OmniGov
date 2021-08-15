@@ -110,13 +110,14 @@ namespace ACC.Data
                     $"fpp_id, " +
                     $"general_ledger_accounts_id, " +
                     $"subsidiary_ledger_accounts_id, " +
+                    $"account_code, " +
                     $"obligation_no, " +
                     $"is_debit, " +
                     $"is_deposit, " +
                     $"fpp_name, " +
-                    $"ledger_name, " +
-                    $"account_code, " +
-                    $"sub_name, " +
+                    $"general_ledger_accounts_name, " +
+                    $"subsidiary_ledger_accounts_code, " +
+                    $"subsidiary_ledger_accounts_name, " +
                     $"amount, " +
                     $"fpp_code " +
                     $"FROM {viewTableName} " +
@@ -148,7 +149,7 @@ namespace ACC.Data
                     $"jev_no, " +
                     $"full_jev_no, " +
                     $"explanation, " +
-                    $"ledger_name, " +
+                    $"general_ledger_accounts_name, " +
                     $"account_code, " +
                     $"is_deposit, " +
                     $"is_debit, " +
@@ -210,7 +211,7 @@ namespace ACC.Data
                     $"full_jev_no, " +
                     $"journal_name, " +
                     $"explanation, " +
-                    $"ledger_name, " +
+                    $"general_ledger_accounts_name, " +
                     $"account_code, " +
                     $"is_deposit, " +
                     $"is_debit, " +
@@ -260,7 +261,7 @@ namespace ACC.Data
                     $"full_jev_no, " +
                     $"journal_name, " +
                     $"explanation, " +
-                    $"ledger_name, " +
+                    $"general_ledger_accounts_name, " +
                     $"account_code, " +
                     $"is_deposit, " +
                     $"is_debit, " +
@@ -345,7 +346,59 @@ namespace ACC.Data
                 string query = $"SELECT COALESCE(SUM(IF(is_debit = 1, amount, 0)),0) AS transaction_debit, COALESCE(SUM(IF(is_debit = 0, amount, 0)),0) AS transaction_credit " +
                     $"FROM {viewTableName} " +
                     $"WHERE funds_id = @funds_id " +
+                    $"AND is_approved = 1 " +
+                    $"AND is_cancelled = 0 " +
+                    $"AND is_disapproved = 0 " +
                     $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
+                    $"AND date_entry <= @date_entry " +
+                    $"AND YEAR(date_entry) = @year " +
+                    $"{subsidiaryQuery}";
+
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("transaction_debit", Convert.ToDecimal(item[0]));
+                        record.Add("transaction_credit", Convert.ToDecimal(item[1]));
+                    }
+                }
+
+                return record;
+            }
+            catch (MysqlException)
+            {
+                throw;
+            }
+
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Dictionary<string, decimal> GetSumTransactionsByAccountGroup(int fundId, int accountGroupId, DateTime dateEntry, ushort? subsidiaryId = null)
+        {
+            var record = new Dictionary<string, decimal>();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@funds_id", DbType.Int32, fundId},
+                    new object[] { "@account_group_id", DbType.Int32, accountGroupId},
+                    new object[] { "@date_entry", DbType.Date, dateEntry.Date},
+                    new object[] { "@year", DbType.Int16, dateEntry.Date.Year},
+                    new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryId}
+                };
+
+                string subsidiaryQuery = subsidiaryId == null ? string.Empty : $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id ";
+
+                string query = $"SELECT COALESCE(SUM(IF(is_debit = 1, amount, 0)),0) AS transaction_debit, COALESCE(SUM(IF(is_debit = 0, amount, 0)),0) AS transaction_credit " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE funds_id = @funds_id " +
+                    $"AND is_approved = 1 " +
+                    $"AND is_cancelled = 0 " +
+                    $"AND is_disapproved = 0 " +
+                    $"AND account_group_id = @account_group_id " +
                     $"AND date_entry <= @date_entry " +
                     $"AND YEAR(date_entry) = @year " +
                     $"{subsidiaryQuery}";
@@ -398,31 +451,6 @@ namespace ACC.Data
             }
         }
 
-        public bool IsTransactionDebit(byte fundsId, ushort generalLedgerId, short year)
-        {
-            try
-            {
-                var parameters = new object[][]
-               {
-                    new object[] { "@funds_id", DbType.Byte, fundsId},
-                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
-                    new object[] { "@year", DbType.Int16, year},
-               };
-
-                string query = $"SELECT is_debit FROM {viewTableName} WHERE is_approved = 1 AND funds_id=@funds_id AND general_ledger_accounts_id=@general_ledger_accounts_id AND YEAR(date_entry)=@year";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (queryResult == "1") return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            };
-
-            return false;
-        }
-
         public DataTable GetJEVAmount(byte fundId, ushort generalLedgerId, short year)
         {
             try
@@ -444,7 +472,5 @@ namespace ACC.Data
                 throw;
             }
         }
-
-
     }
 }

@@ -12,6 +12,8 @@ namespace ACC.Domain.Interfaces
 
         Dictionary<string, decimal> GetSumBalances(byte fundsId, ushort generalLedgerId, DateTime dateEntry, ushort? subsidiaryLedgerId = null);
 
+        Dictionary<string, decimal> GetSumBalancesByAccountGroup(byte fundsId, ushort accountGroupId, DateTime dateEntry, ushort? subsidiaryLedgerId = null);
+
         bool DeleteById(int Id);
 
         decimal GetSumBalanceByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null);
@@ -20,11 +22,5 @@ namespace ACC.Domain.Interfaces
 
         bool SubsidiaryLedgerBalanceExist(byte fundsId, ushort generalLedgerId, short year, ushort subsidiaryLedgerId);
 
-
-        Dictionary<string, string> GetDebitAndCreditOfTemporaryAccounts(byte fundsId);
-
-        Dictionary<string, string> GetDebitAndCreditOfPermanentAccounts(byte fundsId);
-
-        decimal GetGovernmentEquityBalance(byte fundsId, ushort generalLedgerId, short year);
     }
 }

@@ -42,22 +42,22 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             DataTable dtJEV = Factory.JEVAccountsRepository().GetViewRecordsByJevId(uc.jevId);
 
-            foreach (DataRow item in dtJEV.Rows)
+            foreach (DataRow row in dtJEV.Rows)
             {
-                string fppId = item["fpp_id"].ToString();
-                string fppName = item["fpp_name"].ToString();
-                string generalLedgerId = item["general_ledger_accounts_id"].ToString();
-                string subsidiaryId = !string.IsNullOrWhiteSpace(item["subsidiary_ledger_accounts_id"].ToString()) ? item["subsidiary_ledger_accounts_id"].ToString() : null;
-                string subsidiaryName = item["sub_name"].ToString();
-                string obligationNo = item["obligation_no"].ToString();
-                string generalLedgerName = item["ledger_name"].ToString();
-                string accountCode = item["account_code"].ToString();
-                decimal amount = Convert.ToDecimal(item["amount"]);
-                bool isDebit = Convert.ToBoolean(item["is_debit"]);
+                string fppId = row["fpp_id"].ToString();
+                string fppName = row["fpp_name"].ToString();
+                string generalLedgerId = row["general_ledger_accounts_id"].ToString();
+                string subsidiaryId = !string.IsNullOrWhiteSpace(row["subsidiary_ledger_accounts_id"].ToString()) ? row["subsidiary_ledger_accounts_id"].ToString() : null;
+                string subsidiaryName = row["subsidiary_ledger_accounts_name"].ToString();
+                string obligationNo = row["obligation_no"].ToString();
+                string generalLedgerName = row["general_ledger_accounts_name"].ToString();
+                string accountCode = row["account_code"].ToString();
+                decimal amount = Convert.ToDecimal(row["amount"]);
+                bool isDebit = Convert.ToBoolean(row["is_debit"]);
                 bool? isDeposit;
 
-                if (!string.IsNullOrWhiteSpace(item["is_deposit"].ToString()))
-                    isDeposit = Convert.ToBoolean(item["is_deposit"]);
+                if (!string.IsNullOrWhiteSpace(row["is_deposit"].ToString()))
+                    isDeposit = Convert.ToBoolean(row["is_deposit"]);
                 else
                     isDeposit = null;
 

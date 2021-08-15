@@ -177,7 +177,7 @@ namespace AccountingSystem.Views.Reports.JEV
                 DataRow row = dtJEVAccounts.NewRow();
 
                 row["fpp"] = item["fpp_code"];
-                row["account_and_explanation"] = item["ledger_name"];
+                row["account_and_explanation"] = item["general_ledger_accounts_name"];
                 row["account_code"] = item["account_code"];
 
 

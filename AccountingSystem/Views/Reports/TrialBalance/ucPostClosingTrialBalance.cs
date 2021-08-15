@@ -9,11 +9,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
     {
 
         private readonly ReportViewer reportViewer;
-        private byte fundId;
-        private short year;
-        private ushort generalLedgerId;
-        private decimal permanentAccountLesserValue;
-        private bool isDebitColumnBigger;
         private decimal beginningBalance;
 
         public ucPostClosingTrialBalance()
@@ -26,30 +21,144 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            cbHideZeroBalance.Enabled = true;
             LoadReport(reportViewer.LocalReport);
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
+        }
+
+        private void RecordsFilter(LocalReport report, byte hideZeroBalance)
+        {
+            var parameters = new[] {
+                    new ReportParameter("paramHideZeroBalance", hideZeroBalance.ToString())
+            };
+
+            reportViewer.LocalReport.SetParameters(parameters);
             reportViewer.RefreshReport();
         }
 
-        private void LoadFunds()
+        private void GetDebitCredit(byte fundId, DateTime dateEntry, ushort generalLedgerId, out decimal balanceDebit, out decimal balanceCredit)
         {
-            var dtFunds = Factory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
+            beginningBalance = 0;
+            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundId, generalLedgerId, dateEntry);
+            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactions(fundId, generalLedgerId, dateEntry);
+
+            decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["transaction_debit"];
+            decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["transaction_credit"];
+
+            beginningBalance = totalBeginningAndTransDebit - totalBeginningAndTransCredit;
+            balanceDebit = totalBeginningAndTransDebit > totalBeginningAndTransCredit ? Math.Abs(beginningBalance) : 0;
+            balanceCredit = totalBeginningAndTransDebit < totalBeginningAndTransCredit ? Math.Abs(beginningBalance) : 0;
         }
 
-        private void frmPostClosingTrialBalance_Load(object sender, EventArgs e)
+        private void GetGovernmentEquityDebitCredit(byte fundId, DateTime dateEntry, out decimal governmentEquityDebit, out decimal governmentEquityCredit)
         {
-            LoadFunds();
+            beginningBalance = 0;
+            int[] accountGroups = { 3, 4, 5 };
+            decimal totalBeginningBalanceDebit = 0;
+            decimal totalTransactionDebit = 0;
+            decimal totalBeginningBalanceCredit = 0;
+            decimal totalTransactionCredit = 0;
+
+            foreach (int item in accountGroups)
+            {
+                var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalancesByAccountGroup(fundId, (ushort)item, dateEntry);
+                var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByAccountGroup(fundId, item, dateEntry);
+
+                totalBeginningBalanceDebit += dictBeginningBalance["beginning_balance_debit"];
+                totalBeginningBalanceCredit += +dictBeginningBalance["beginning_balance_credit"];
+
+                totalTransactionDebit += dictTransaction["transaction_debit"];
+                totalTransactionCredit += +dictTransaction["transaction_credit"];
+            }
+
+            decimal totalBeginningAndTransDebit = totalBeginningBalanceDebit + totalTransactionDebit;
+            decimal totalBeginningAndTransCredit = totalBeginningBalanceCredit + totalTransactionCredit;
+
+            beginningBalance = totalBeginningAndTransDebit - totalBeginningAndTransCredit;
+            governmentEquityDebit = totalBeginningAndTransDebit > totalBeginningAndTransCredit ? Math.Abs(beginningBalance) : 0;
+            governmentEquityCredit = totalBeginningAndTransDebit < totalBeginningAndTransCredit ? Math.Abs(beginningBalance) : 0;
+        }
+
+        private DataTable DataTablePostTrialBalance()
+        {
+            var fundId = Convert.ToByte(cmbFund.SelectedValue);
+            var dateAsOF = dtAsOf.Value;
+            var dtPreTrialBalance = new dsLFS().dtTrialBalance;
+
+            var dtGeneralLedgerAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
+
+            foreach (DataRow row in dtGeneralLedgerAccounts.Rows)
+            {
+                int accountGroupId = Convert.ToInt32(row["account_group_id"]);
+                string accountGroupCode = row["account_group_code"].ToString();
+                string accountGroupName = row["account_group_name"].ToString();
+                int majorAccountGroupId = Convert.ToInt32(row["major_account_group_id"]);
+                string majorAccountGroupCode = row["maj_acc_group_code"].ToString();
+                string majorAccountGroupName = row["maj_acc_group_name"].ToString();
+                int subMajorAccountGroupId = Convert.ToInt32(row["sub_major_account_group_id"]);
+                string subMajorAccountGroupCode = row["sub_maj_acc_group_code"].ToString();
+                string subMajorAccountGroupName = row["sub_maj_acc_group_name"].ToString();
+                int accountId = Convert.ToInt32(row["general_ledger_accounts_id"]);
+                string accountCode = row["account_code"].ToString();
+                string accountName = row["ledger_name"].ToString();
+
+                if (accountId == 331)
+                {
+                    decimal governmentEquityDebit, governmentEquityCredit;
+                    GetGovernmentEquityDebitCredit(fundId, dateAsOF, out governmentEquityDebit, out governmentEquityCredit);
+
+                    dtPreTrialBalance.Rows.Add(new object[]
+                    {
+                        accountGroupId,
+                        accountGroupCode,
+                        accountGroupName,
+                        majorAccountGroupId,
+                        majorAccountGroupCode,
+                        majorAccountGroupName,
+                        subMajorAccountGroupId,
+                        subMajorAccountGroupCode,
+                        subMajorAccountGroupName,
+                        accountId,
+                        accountCode,
+                        accountName,
+                        governmentEquityDebit,
+                        governmentEquityCredit
+                    });
+                }
+
+                //
+                decimal balanceDebit, balanceCredit;
+                GetDebitCredit(fundId, dateAsOF, (ushort)accountId, out balanceDebit, out balanceCredit);
+
+                if (accountGroupId == 3 || accountGroupId == 4 || accountGroupId == 5) break;
+
+                dtPreTrialBalance.Rows.Add(new object[]
+                {
+                    accountGroupId,
+                    accountGroupCode,
+                    accountGroupName,
+                    majorAccountGroupId,
+                    majorAccountGroupCode,
+                    majorAccountGroupName,
+                    subMajorAccountGroupId,
+                    subMajorAccountGroupCode,
+                    subMajorAccountGroupName,
+                    accountId,
+                    accountCode,
+                    accountName,
+                    balanceDebit,
+                    balanceCredit
+                });
+            }
+
+
+
+            return dtPreTrialBalance;
         }
 
         private void LoadReport(LocalReport report)
         {
             try
             {
-
+                Cursor.Current = Cursors.WaitCursor;
                 var lguDict = Helper.LGUDetails();
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\post-trial-balance.rdlc";
                 report.DataSources.Clear();
@@ -66,152 +175,20 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                     new ReportParameter("paramSignatory", signatory),
                     new ReportParameter("paramAsOf", asOfDate),
                   };
+
+                cbHideZeroBalance.Enabled = true;
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
+
                 report.SetParameters(parameters);
+                reportViewer.RefreshReport();
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
-        }
-
-        private void RecordsFilter(LocalReport report, byte hideZeroBalance)
-        {
-            var parameters = new[] {
-                    new ReportParameter("paramHideZeroBalance", hideZeroBalance.ToString())
-            };
-
-            reportViewer.LocalReport.SetParameters(parameters);
-            reportViewer.RefreshReport();
-        }
-
-        private DataTable DataTablePostTrialBalance()
-        {
-            fundId = Convert.ToByte(cmbFund.SelectedValue);
-            year = Convert.ToInt16(dtAsOf.Value.Year);
-
-            var dtPostTrialBalance = new dsLFS.dtTrialBalanceDataTable();
-            var dtPreTrialBalanceFromDB = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
-
-
-            foreach (DataRow item in dtPreTrialBalanceFromDB.Rows)
-            {
-                generalLedgerId = (ushort)item["general_ledger_accounts_id"];
-
-                var account_group_type = item["account_group_code"].ToString();
-
-                if (account_group_type == "3" || account_group_type == "4" || account_group_type == "5")
-                    break;
-
-                DataRow row = dtPostTrialBalance.NewRow();
-                row["account_title"] = item["ledger_name"];
-                row["account_code"] = item["account_code"];
-
-                ProcessDebitCreditValues(item, row);
-
-                dtPostTrialBalance.Rows.Add(row);
-            }
-
-            GovernmentEquityRow(fundId, year, generalLedgerId, dtPreTrialBalanceFromDB, dtPostTrialBalance);
-
-            return dtPostTrialBalance;
-        }
-
-        private void ProcessDebitCreditValues(DataRow item, DataRow row)
-        {
-            var debit_beginning_bal = Convert.ToDecimal(item["debit_beginning_bal"]);
-            var credit_beginning_bal = Convert.ToDecimal(item["credit_beginning_bal"]);
-
-            var beginning_balance = debit_beginning_bal - credit_beginning_bal;
-            var jevAccount = Factory.JEVAccountsRepository().GetJEVAmount(fundId, generalLedgerId, year);
-
-            if (jevAccount.Rows.Count != 0)
-            {
-                var adjustedDebitbalance = 0.0m;
-                var adjustedCreditbalance = 0.0m;
-
-                foreach (DataRow items in jevAccount.Rows)
-                {
-                    if (Convert.ToBoolean(items["is_debit"]))
-                        adjustedDebitbalance = debit_beginning_bal + Convert.ToDecimal(items["amount"]);
-                    else
-                        adjustedCreditbalance = credit_beginning_bal + Convert.ToDecimal(items["amount"]);
-                }
-                var endingBalance = Math.Max(adjustedDebitbalance, adjustedCreditbalance) - Math.Min(adjustedDebitbalance, adjustedCreditbalance);
-
-                //ENDING BALANCE.
-                if (adjustedDebitbalance > adjustedCreditbalance)
-                    row["debit"] = endingBalance;
-                else
-                    row["credit"] = endingBalance;
-            }
-
-            else //IF NO JEV RECORDS
-            {
-                if (beginning_balance > 0)
-                    row["debit"] = Math.Abs(beginning_balance);
-                else
-                    row["credit"] = Math.Abs(beginning_balance);
-            }
-        }
-
-        private void GovernmentEquityRow(byte fundId, short year, ushort generalLedgerId, DataTable dtGovernmentFromDB, DataTable dtGovernmentEquity)
-        {
-            GetSumOfPermanentAccounts();
-            var governmentEquityBeginningBalance = Factory.BeginningBalancesRepository().GetGovernmentEquityBalance(fundId, 331, year);
-
-            DataRow row = dtGovernmentEquity.NewRow();
-            row["account_title"] = "Government Equity";
-            row["account_code"] = "3-01-01-010";
-
-            var govEquityBeginningBalance = GetSumOfTemporaryAccounts() - governmentEquityBeginningBalance;
-
-            //For column assignment, If value is less than zero, then credit else debit.
-            if (govEquityBeginningBalance > 0)
-                row["debit"] = Math.Abs(govEquityBeginningBalance);
-            else
-                row["credit"] = Math.Abs(govEquityBeginningBalance);
-
-            dtGovernmentEquity.Rows.Add(row);
-        }
-
-        private decimal GetSumOfPermanentAccounts()
-        {
-            var beginningBalanceRepository = Factory.BeginningBalancesRepository();
-            var amount = beginningBalanceRepository.GetDebitAndCreditOfPermanentAccounts(1);
-
-            var total_debit = Convert.ToDecimal(amount["debit"]);
-            var total_credit = Convert.ToDecimal(amount["credit"]);
-
-            _ = total_debit + total_credit;
-
-            permanentAccountLesserValue = Math.Min(total_debit, total_credit);
-
-            if (total_debit > total_credit)
-            {
-                isDebitColumnBigger = true;
-                return total_debit;
-            }
-            else
-            {
-                isDebitColumnBigger = false;
-                return total_credit;
-            }
-        }
-
-        private decimal GetSumOfTemporaryAccounts()
-        {
-
-            var beginningBalanceRepository = Factory.BeginningBalancesRepository();
-            var amount = beginningBalanceRepository.GetDebitAndCreditOfTemporaryAccounts(fundId);
-
-            var total_debit = Convert.ToDecimal(amount["debit"]);
-            var total_credit = Convert.ToDecimal(amount["credit"]);
-
-            if (total_debit > total_credit)
-                return _ = total_debit - total_credit;
-            else
-                return _ = total_credit - total_debit;
-
         }
 
         private void cbHideZeroBalance_CheckedChanged(object sender, EventArgs e)

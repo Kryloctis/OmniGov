@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.Reporting.WinForms;
+using System;
 using System.Data;
 using System.Windows.Forms;
-using Microsoft.Reporting.WinForms;
 
 namespace AccountingSystem.Views.Reports.Journals
 {
@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Reports.Journals
             foreach (DataRow item in dtGeneralJournalFromDB.Rows)
             {
                 jevNo = item["full_jev_no"].ToString();
-                particulars = item["ledger_name"].ToString();
+                particulars = item["general_ledger_accounts_name"].ToString();
 
                 DataRow row = dtGeneralJournal.NewRow();
                 row["date_entry"] = item["date_entry"];
@@ -133,7 +133,7 @@ namespace AccountingSystem.Views.Reports.Journals
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            
+
             LoadReport(reportViewer.LocalReport);
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
             reportViewer.ZoomMode = ZoomMode.Percent;
