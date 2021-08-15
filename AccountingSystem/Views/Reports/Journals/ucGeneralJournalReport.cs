@@ -5,11 +5,11 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Journals
 {
-    public partial class frmGeneralJournal : Form
+    public partial class ucGeneralJournalReport : UserControl
     {
         private readonly ReportViewer reportViewer;
 
-        public frmGeneralJournal()
+        public ucGeneralJournalReport()
         {
             InitializeComponent();
             reportViewer = new ReportViewer();
@@ -99,6 +99,7 @@ namespace AccountingSystem.Views.Reports.Journals
         {
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 var lguDetails = Helper.LGUDetails();
                 var fundName = cmbFunds.Text;
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
@@ -109,15 +110,12 @@ namespace AccountingSystem.Views.Reports.Journals
                     new ReportParameter("paramFund", fundName),
                     new ReportParameter("paramSignatory", signatory)
                 };
-                //using var fs = new FileStream("Reports\\general-journal.rdlc", FileMode.Open);
-                //report.LoadReportDefinition(fs);
-
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\general-journal.rdlc";
                 report.DataSources.Clear();
 
                 report.DataSources.Add(new ReportDataSource("dtGeneralJournal", DataTableGeneralJournal()));
                 report.SetParameters(parameters);
-
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
@@ -125,11 +123,6 @@ namespace AccountingSystem.Views.Reports.Journals
             }
         }
 
-        private void frmGeneralJournal_Load(object sender, EventArgs e)
-        {
-            Helper.LoadFormIcon(this);
-            LoadFunds();
-        }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
@@ -139,6 +132,14 @@ namespace AccountingSystem.Views.Reports.Journals
             reportViewer.ZoomMode = ZoomMode.Percent;
             reportViewer.ZoomPercent = 100;
             reportViewer.RefreshReport();
+        }
+
+        private void ucGeneralJournal_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadFunds();
+            }
         }
     }
 }

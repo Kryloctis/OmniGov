@@ -5,11 +5,11 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Journals
 {
-    public partial class frmProcurementsReceivedJournalReport : Form
+    public partial class ucCashDisbursementsJournalReport : UserControl
     {
         private readonly ReportViewer reportViewer;
 
-        public frmProcurementsReceivedJournalReport()
+        public ucCashDisbursementsJournalReport()
         {
             InitializeComponent();
             reportViewer = new ReportViewer();
@@ -24,24 +24,24 @@ namespace AccountingSystem.Views.Reports.Journals
             cmbFunds.DisplayMember = "fund_name";
         }
 
-        private DataTable ProcurementsReceivedJournalDataTable()
+        private DataTable CashDisbursementsJournalDataTable()
         {
             byte fundId = (byte)cmbFunds.SelectedValue;
-            byte journalId = 3;
+            byte journalId = 4;
             var dateYearMonth = dtpMonth.Value;
 
-            var dtProcurementsReceivedJournal = new dsLFS.ProcurementsReceivedJournalDataTable();
-            var dtProcurementsReceivedFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundId, journalId, dateYearMonth);
+            var dtCashDisbursementsJournal = new dsLFS.CashDisbursementsJournalDataTable();
+            var dtCashDisbursementFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundId, journalId, dateYearMonth);
 
             string jevNo;
             string particulars;
 
-            foreach (DataRow item in dtProcurementsReceivedFromDB.Rows)
+            foreach (DataRow item in dtCashDisbursementFromDB.Rows)
             {
                 jevNo = item["jev_no"].ToString();
                 particulars = item["explanation"].ToString();
 
-                DataRow row = dtProcurementsReceivedJournal.NewRow();
+                DataRow row = dtCashDisbursementsJournal.NewRow();
                 row["date"] = item["date_entry"];
                 row["ref"] = jevNo;
                 row["particulars"] = particulars;
@@ -57,16 +57,17 @@ namespace AccountingSystem.Views.Reports.Journals
                     row["credit"] = item["amount"];
                 }
 
-                dtProcurementsReceivedJournal.Rows.Add(row);
+                dtCashDisbursementsJournal.Rows.Add(row);
             }
 
-            return dtProcurementsReceivedJournal;
+            return dtCashDisbursementsJournal;
         }
 
         private void LoadReport(LocalReport report)
         {
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 var lguDetails = Helper.LGUDetails();
                 var fundName = cmbFunds.Text;
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
@@ -78,23 +79,17 @@ namespace AccountingSystem.Views.Reports.Journals
                     new ReportParameter("paramSignatory", signatory)
                 };
 
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\procurements-received-journal.rdlc";
+                report.ReportPath = $"{Application.StartupPath}\\Reports\\cash-disbursement-journal.rdlc";
                 report.DataSources.Clear();
 
-                report.DataSources.Add(new ReportDataSource("ProcurementsReceivedJournal", ProcurementsReceivedJournalDataTable()));
+                report.DataSources.Add(new ReportDataSource("CashDisbursementsJournal", CashDisbursementsJournalDataTable()));
                 report.SetParameters(parameters);
-
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
-        }
-
-        private void frmProcurementsReceivedJournalReport_Load(object sender, EventArgs e)
-        {
-            Helper.LoadFormIcon(this);
-            LoadFunds();
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
@@ -104,6 +99,14 @@ namespace AccountingSystem.Views.Reports.Journals
             reportViewer.ZoomMode = ZoomMode.Percent;
             reportViewer.ZoomPercent = 100;
             reportViewer.RefreshReport();
+        }
+
+        private void ucCashDisbursementsJournalReport_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadFunds();
+            }
         }
     }
 }
