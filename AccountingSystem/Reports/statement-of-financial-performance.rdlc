@@ -310,7 +310,7 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>6.7648in</Top>
+            <Top>4.76779in</Top>
             <Left>4.72045in</Left>
             <Height>0.80909in</Height>
             <Width>2.97747in</Width>
@@ -717,10 +717,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Sum(Fields!previous_amount.Value, "major_account_group_id")</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
-                                    <TextDecoration>Underline</TextDecoration>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -906,10 +906,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Sum(Fields!previous_amount.Value, "account_group_id")</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
-                                    <TextDecoration>Underline</TextDecoration>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1162,7 +1162,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox89</rd:DefaultName>
@@ -1339,7 +1341,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox95</rd:DefaultName>
@@ -1537,13 +1541,16 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Sum(Fields!previous_amount.Value, "major_account_group_id1")</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox193</rd:DefaultName>
@@ -1721,14 +1728,17 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Sum(Fields!previous_amount.Value, "account_group_id1")</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox40</rd:DefaultName>
@@ -1968,7 +1978,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox71</rd:DefaultName>
@@ -2063,17 +2075,18 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox110">
+                        <Textbox Name="txtSurplusDeficitCurrent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=SUM(CDec(IIF(Fields!account_group_id.Value = 4, Fields!current_amount.Value,0)),"dtStatementOfFinancialPerformance") - SUM(CDec(IIF(Fields!account_group_id.Value = 5, Fields!current_amount.Value,0)),"dtStatementOfFinancialPerformance")</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2082,7 +2095,6 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox110</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -2131,24 +2143,26 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox112">
+                        <Textbox Name="txtSurplusDeficitPrevious">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=SUM(CDec(IIF(Fields!account_group_id.Value = 4, Fields!previous_amount.Value,0)),"dtStatementOfFinancialPerformance") - SUM(CDec(IIF(Fields!account_group_id.Value = 5, Fields!previous_amount.Value,0)),"dtStatementOfFinancialPerformance")</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox112</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -2348,7 +2362,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox118</rd:DefaultName>
@@ -2502,16 +2518,17 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox122">
+                        <Textbox Name="txtTransfersAndSubsidyFromCurrent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=SUM(CDec(IIF(Fields!major_account_group_id.Value = 24, Fields!current_amount.Value, 0)), "dtStatementOfFinancialPerformance")</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2520,7 +2537,6 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox122</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -2568,23 +2584,25 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox124">
+                        <Textbox Name="txtTransfersAndSubsidyFromPrevious">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=SUM(CDec(IIF(Fields!major_account_group_id.Value = 24, Fields!previous_amount.Value, 0)), "dtStatementOfFinancialPerformance")</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox124</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -2596,7 +2614,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -2736,16 +2753,17 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox164">
+                        <Textbox Name="txtTransfersAndSubsidyToCurrent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=-(Sum(CDec(IIF(Fields!sub_major_account_group_id.Value = 85 OR Fields!sub_major_account_group_id.Value = 86, Fields!current_amount.Value, 0)), "dtStatementOfFinancialPerformance"))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2754,7 +2772,6 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox164</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -2802,23 +2819,25 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox166">
+                        <Textbox Name="txtTransfersAndSubsidyToPrevious">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=-(Sum(CDec(IIF(Fields!sub_major_account_group_id.Value = 85 OR Fields!sub_major_account_group_id.Value = 86, Fields!previous_amount.Value, 0)), "dtStatementOfFinancialPerformance"))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox166</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -2917,10 +2936,11 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=CDec(ReportItems!txtSurplusDeficitCurrent.Value + ReportItems!txtTransfersAndSubsidyFromCurrent.Value + ReportItems!txtTransfersAndSubsidyToCurrent.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2993,14 +3013,17 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=CDec(ReportItems!txtSurplusDeficitPrevious.Value + ReportItems!txtTransfersAndSubsidyFromPrevious.Value + ReportItems!txtTransfersAndSubsidyToPrevious.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox173</rd:DefaultName>
@@ -3148,7 +3171,7 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>7.57389in</Height>
+        <Height>5.73014in</Height>
         <Style />
       </Body>
       <Width>7.69795in</Width>
