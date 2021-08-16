@@ -5,15 +5,13 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Financial_Statements
 {
-    public partial class frmStatementOfFinancialPerformance : Form
+    public partial class ucStatementOfFinancialPerformance : UserControl
     {
         private readonly ReportViewer reportViewer;
 
-        public frmStatementOfFinancialPerformance()
+        public ucStatementOfFinancialPerformance()
         {
             InitializeComponent();
-            Helper.LoadFormIcon(this);
-
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
@@ -29,7 +27,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             return transactionBalance;
         }
 
-
         private DataTable StatementOfFinancialPerformanceDatatable()
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -37,6 +34,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             var dtStatementOfFinancialPerformance = dataSet.dtStatementOfFinancialPerformance;
             int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
             var dateEnded = dtPickerDateEnds.Value;
+            var previousYearEnded = new DateTime(year: dateEnded.Year - 1, month: 12, DateTime.DaysInMonth(2021, 12));
 
             try
             {
@@ -61,8 +59,9 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                     row["account_code"],
                     row["ledger_name"],
                     null,
-                    GetBalances(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), dateEnded)
-                    };
+                    GetBalances(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), dateEnded),
+                    GetBalances(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), previousYearEnded)
+                };
                     dtStatementOfFinancialPerformance.Rows.Add(items);
                 }
             }
@@ -120,14 +119,17 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             }
         }
 
-        private void frmStatementOfFinancialPerformance_Load(object sender, EventArgs e)
-        {
-            LoadFunds();
-        }
-
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
             LoadReport(reportViewer.LocalReport);
+        }
+
+        private void ucStatementOfFinancialPerformance_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadFunds();
+            }
         }
     }
 }

@@ -55,9 +55,6 @@
     <Compile Update="Views\Manage\BudgetAppropriations\ucBudgetAppropriations.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\Reports\Financial Statements\frmStatementOfFinancialPosition.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
     <Compile Update="Views\Reports\TrialBalance\frmTrialBalance.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>

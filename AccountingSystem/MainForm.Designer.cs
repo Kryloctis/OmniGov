@@ -57,23 +57,12 @@ namespace AccountingSystem
             this.menuReceipts = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
             this.menuJournalsReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuReportGJ = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuReportCRJ = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuReportPRJ = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuReportCDJ = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuReportCkDJ = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuReportADADJ = new System.Windows.Forms.ToolStripMenuItem();
             this.menuLedgersReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOB = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOBB = new System.Windows.Forms.ToolStripMenuItem();
             this.menuJEVS = new System.Windows.Forms.ToolStripMenuItem();
             this.menuTrialBalance = new System.Windows.Forms.ToolStripMenuItem();
             this.financialStatementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statementOfFinancialPositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statementOfFinancialPerformanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statementOfChangesInNetAssetsEquityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statementOfCashFlowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuprintRCI = new System.Windows.Forms.ToolStripMenuItem();
             this.menuprintPC = new System.Windows.Forms.ToolStripMenuItem();
             this.menuprintGC = new System.Windows.Forms.ToolStripMenuItem();
@@ -97,17 +86,17 @@ namespace AccountingSystem
             this.radBtnBudget = new System.Windows.Forms.RadioButton();
             this.radBtnAccounting = new System.Windows.Forms.RadioButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabAccountingDashboard = new System.Windows.Forms.TabPage();
-            this.ucAccountingDashboard1 = new AccountingSystem.Views.Dashboard.UcAccountingDashboard();
             this.tabBudgetDashboard = new System.Windows.Forms.TabPage();
             this.ucBudgetDashboard1 = new AccountingSystem.Views.Dashboard.UcBudgetDashboard();
+            this.tabAccountingDashboard = new System.Windows.Forms.TabPage();
+            this.ucAccountingDashboard1 = new AccountingSystem.Views.Dashboard.UcAccountingDashboard();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabAccountingDashboard.SuspendLayout();
             this.tabBudgetDashboard.SuspendLayout();
+            this.tabAccountingDashboard.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -336,58 +325,10 @@ namespace AccountingSystem
             // 
             // menuJournalsReport
             // 
-            this.menuJournalsReport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuReportGJ,
-            this.menuReportCRJ,
-            this.menuReportPRJ,
-            this.menuReportCDJ,
-            this.menuReportCkDJ,
-            this.menuReportADADJ});
             this.menuJournalsReport.Name = "menuJournalsReport";
             this.menuJournalsReport.Size = new System.Drawing.Size(233, 22);
             this.menuJournalsReport.Text = "Journals";
-            // 
-            // menuReportGJ
-            // 
-            this.menuReportGJ.Name = "menuReportGJ";
-            this.menuReportGJ.Size = new System.Drawing.Size(339, 22);
-            this.menuReportGJ.Text = "General Journal";
-            this.menuReportGJ.Click += new System.EventHandler(this.MenuReportGeneralJournal_Click);
-            // 
-            // menuReportCRJ
-            // 
-            this.menuReportCRJ.Name = "menuReportCRJ";
-            this.menuReportCRJ.Size = new System.Drawing.Size(339, 22);
-            this.menuReportCRJ.Text = "Cash Receipts Journal";
-            this.menuReportCRJ.Click += new System.EventHandler(this.MenuReportCashReceiptsJournal_Click);
-            // 
-            // menuReportPRJ
-            // 
-            this.menuReportPRJ.Name = "menuReportPRJ";
-            this.menuReportPRJ.Size = new System.Drawing.Size(339, 22);
-            this.menuReportPRJ.Text = "Procurement Received Journal";
-            this.menuReportPRJ.Click += new System.EventHandler(this.MenuReportProcurementsReceivedJournal_Click);
-            // 
-            // menuReportCDJ
-            // 
-            this.menuReportCDJ.Name = "menuReportCDJ";
-            this.menuReportCDJ.Size = new System.Drawing.Size(339, 22);
-            this.menuReportCDJ.Text = "Cash Disbursements Journal";
-            this.menuReportCDJ.Click += new System.EventHandler(this.MenuReportCashDisbursementsJournal_Click);
-            // 
-            // menuReportCkDJ
-            // 
-            this.menuReportCkDJ.Name = "menuReportCkDJ";
-            this.menuReportCkDJ.Size = new System.Drawing.Size(339, 22);
-            this.menuReportCkDJ.Text = "Check Disbursements Journal";
-            this.menuReportCkDJ.Click += new System.EventHandler(this.MenuReportCheckDisbursementsJournal_Click);
-            // 
-            // menuReportADADJ
-            // 
-            this.menuReportADADJ.Name = "menuReportADADJ";
-            this.menuReportADADJ.Size = new System.Drawing.Size(339, 22);
-            this.menuReportADADJ.Text = "Authority to Debit Account Disbursements Journal";
-            this.menuReportADADJ.Click += new System.EventHandler(this.MenuReportADADisbursementsJournal_Click);
+            this.menuJournalsReport.Click += new System.EventHandler(this.menuJournalsReport_Click);
             // 
             // menuLedgersReport
             // 
@@ -426,56 +367,10 @@ namespace AccountingSystem
             // 
             // financialStatementsToolStripMenuItem
             // 
-            this.financialStatementsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statementOfFinancialPositionToolStripMenuItem,
-            this.statementOfFinancialPerformanceToolStripMenuItem,
-            this.statementOfChangesInNetAssetsEquityToolStripMenuItem,
-            this.statementOfCashFlowsToolStripMenuItem,
-            this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem});
             this.financialStatementsToolStripMenuItem.Name = "financialStatementsToolStripMenuItem";
             this.financialStatementsToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             this.financialStatementsToolStripMenuItem.Text = "Financial Statements";
-            // 
-            // statementOfFinancialPositionToolStripMenuItem
-            // 
-            this.statementOfFinancialPositionToolStripMenuItem.Name = "statementOfFinancialPositionToolStripMenuItem";
-            this.statementOfFinancialPositionToolStripMenuItem.Size = new System.Drawing.Size(377, 22);
-            this.statementOfFinancialPositionToolStripMenuItem.Text = "Statement of Financial Position";
-            this.statementOfFinancialPositionToolStripMenuItem.Click += new System.EventHandler(this.statementOfFinancialPositionToolStripMenuItem_Click);
-            // 
-            // statementOfFinancialPerformanceToolStripMenuItem
-            // 
-            this.statementOfFinancialPerformanceToolStripMenuItem.Name = "statementOfFinancialPerformanceToolStripMenuItem";
-            this.statementOfFinancialPerformanceToolStripMenuItem.Size = new System.Drawing.Size(377, 22);
-            this.statementOfFinancialPerformanceToolStripMenuItem.Text = "Statement of Financial Performance";
-            this.statementOfFinancialPerformanceToolStripMenuItem.Click += new System.EventHandler(this.statementOfFinancialPerformanceToolStripMenuItem_Click);
-            // 
-            // statementOfChangesInNetAssetsEquityToolStripMenuItem
-            // 
-            this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Enabled = false;
-            this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Name = "statementOfChangesInNetAssetsEquityToolStripMenuItem";
-            this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Size = new System.Drawing.Size(377, 22);
-            this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Text = "Statement of Changes in Net Assets/Equity";
-            this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Visible = false;
-            this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Click += new System.EventHandler(this.statementOfChangesInNetAssetsEquityToolStripMenuItem_Click);
-            // 
-            // statementOfCashFlowsToolStripMenuItem
-            // 
-            this.statementOfCashFlowsToolStripMenuItem.Enabled = false;
-            this.statementOfCashFlowsToolStripMenuItem.Name = "statementOfCashFlowsToolStripMenuItem";
-            this.statementOfCashFlowsToolStripMenuItem.Size = new System.Drawing.Size(377, 22);
-            this.statementOfCashFlowsToolStripMenuItem.Text = "Statement of Cash Flows";
-            this.statementOfCashFlowsToolStripMenuItem.Visible = false;
-            this.statementOfCashFlowsToolStripMenuItem.Click += new System.EventHandler(this.statementOfCashFlowsToolStripMenuItem_Click);
-            // 
-            // statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem
-            // 
-            this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Enabled = false;
-            this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Name = "statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem";
-            this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Size = new System.Drawing.Size(377, 22);
-            this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Text = "Statement of Comparison of Budget and Actual Amounts";
-            this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Visible = false;
-            this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Click += new System.EventHandler(this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem_Click);
+            this.financialStatementsToolStripMenuItem.Click += new System.EventHandler(this.financialStatementsToolStripMenuItem_Click);
             // 
             // menuprintRCI
             // 
@@ -723,6 +618,27 @@ namespace AccountingSystem
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 9;
             // 
+            // tabBudgetDashboard
+            // 
+            this.tabBudgetDashboard.Controls.Add(this.ucBudgetDashboard1);
+            this.tabBudgetDashboard.Location = new System.Drawing.Point(4, 5);
+            this.tabBudgetDashboard.Margin = new System.Windows.Forms.Padding(0);
+            this.tabBudgetDashboard.Name = "tabBudgetDashboard";
+            this.tabBudgetDashboard.Size = new System.Drawing.Size(1172, 379);
+            this.tabBudgetDashboard.TabIndex = 0;
+            this.tabBudgetDashboard.UseVisualStyleBackColor = true;
+            // 
+            // ucBudgetDashboard1
+            // 
+            this.ucBudgetDashboard1.AutoScroll = true;
+            this.ucBudgetDashboard1.AutoSize = true;
+            this.ucBudgetDashboard1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucBudgetDashboard1.Location = new System.Drawing.Point(0, 0);
+            this.ucBudgetDashboard1.Margin = new System.Windows.Forms.Padding(0);
+            this.ucBudgetDashboard1.Name = "ucBudgetDashboard1";
+            this.ucBudgetDashboard1.Size = new System.Drawing.Size(1172, 379);
+            this.ucBudgetDashboard1.TabIndex = 1;
+            // 
             // tabAccountingDashboard
             // 
             this.tabAccountingDashboard.Controls.Add(this.ucAccountingDashboard1);
@@ -744,27 +660,6 @@ namespace AccountingSystem
             this.ucAccountingDashboard1.Name = "ucAccountingDashboard1";
             this.ucAccountingDashboard1.Size = new System.Drawing.Size(1166, 375);
             this.ucAccountingDashboard1.TabIndex = 0;
-            // 
-            // tabBudgetDashboard
-            // 
-            this.tabBudgetDashboard.Controls.Add(this.ucBudgetDashboard1);
-            this.tabBudgetDashboard.Location = new System.Drawing.Point(4, 5);
-            this.tabBudgetDashboard.Margin = new System.Windows.Forms.Padding(0);
-            this.tabBudgetDashboard.Name = "tabBudgetDashboard";
-            this.tabBudgetDashboard.Size = new System.Drawing.Size(1172, 379);
-            this.tabBudgetDashboard.TabIndex = 0;
-            this.tabBudgetDashboard.UseVisualStyleBackColor = true;
-            // 
-            // ucBudgetDashboard1
-            // 
-            this.ucBudgetDashboard1.AutoScroll = true;
-            this.ucBudgetDashboard1.AutoSize = true;
-            this.ucBudgetDashboard1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucBudgetDashboard1.Location = new System.Drawing.Point(0, 0);
-            this.ucBudgetDashboard1.Margin = new System.Windows.Forms.Padding(0);
-            this.ucBudgetDashboard1.Name = "ucBudgetDashboard1";
-            this.ucBudgetDashboard1.Size = new System.Drawing.Size(1172, 379);
-            this.ucBudgetDashboard1.TabIndex = 1;
             // 
             // MainForm
             // 
@@ -798,10 +693,10 @@ namespace AccountingSystem
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
-            this.tabAccountingDashboard.ResumeLayout(false);
-            this.tabAccountingDashboard.PerformLayout();
             this.tabBudgetDashboard.ResumeLayout(false);
             this.tabBudgetDashboard.PerformLayout();
+            this.tabAccountingDashboard.ResumeLayout(false);
+            this.tabAccountingDashboard.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -826,12 +721,6 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuCollectingOfficer;
         private System.Windows.Forms.ToolStripMenuItem menuJEV;
         private System.Windows.Forms.ToolStripMenuItem menuReportJournals;
-        private System.Windows.Forms.ToolStripMenuItem menuReportGJ;
-        private System.Windows.Forms.ToolStripMenuItem menuReportCRJ;
-        private System.Windows.Forms.ToolStripMenuItem menuReportPRJ;
-        private System.Windows.Forms.ToolStripMenuItem menuReportCDJ;
-        private System.Windows.Forms.ToolStripMenuItem menuReportCkDJ;
-        private System.Windows.Forms.ToolStripMenuItem menuReportADADJ;
         private System.Windows.Forms.ToolStripMenuItem menuJournalsReport;
         private System.Windows.Forms.ToolStripMenuItem menuDisbursingOfficer;
         internal System.Windows.Forms.ToolStripMenuItem menuSAAOB;
@@ -878,11 +767,6 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuTrialBalance;
         private System.Windows.Forms.ToolStripMenuItem menuDailyCash;
         private System.Windows.Forms.ToolStripMenuItem financialStatementsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem statementOfFinancialPositionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem statementOfFinancialPerformanceToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem statementOfChangesInNetAssetsEquityToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem statementOfCashFlowsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem;
         internal System.Windows.Forms.TabPage tabBudgetDashboard;
         private Views.Dashboard.UcBudgetDashboard ucBudgetDashboard1;
     }

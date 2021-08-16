@@ -116,25 +116,25 @@ namespace AccountingSystem
                 btnObligationRequest.Visible = false;
 
             if (!Helper.HasPermission("Report General Journal"))
-                menuReportGJ.Visible = false;
+                //menuReportGJ.Visible = false;
 
-            if (!Helper.HasPermission("Report Cash Receipts Journal"))
-                menuReportCRJ.Visible = false;
+                if (!Helper.HasPermission("Report Cash Receipts Journal"))
+                    //menuReportCRJ.Visible = false;
 
-            if (!Helper.HasPermission("Report Procurement Received Journal"))
-                menuReportPRJ.Visible = false;
+                    if (!Helper.HasPermission("Report Procurement Received Journal"))
+                        //menuReportPRJ.Visible = false;
 
-            if (!Helper.HasPermission("Report Cash Disbursements Journal"))
-                menuReportCDJ.Visible = false;
+                        if (!Helper.HasPermission("Report Cash Disbursements Journal"))
+                            //menuReportCDJ.Visible = false;
 
-            if (!Helper.HasPermission("Report Check Disbursements Journal"))
-                menuReportCkDJ.Visible = false;
+                            if (!Helper.HasPermission("Report Check Disbursements Journal"))
+                                //menuReportCkDJ.Visible = false;
 
-            if (!Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
-                menuReportADADJ.Visible = false;
+                                if (!Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
+                                    //menuReportADADJ.Visible = false;
 
-            if (!Helper.HasPermission("Report General Journal") && !Helper.HasPermission("Report Cash Receipts Journal") && !Helper.HasPermission("Report Procurement Received Journal") && !Helper.HasPermission("Report Cash Disbursements Journal") && !Helper.HasPermission("Report Check Disbursements Journal") && !Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
-                menuJournalsReport.Visible = false;
+                                    if (!Helper.HasPermission("Report General Journal") && !Helper.HasPermission("Report Cash Receipts Journal") && !Helper.HasPermission("Report Procurement Received Journal") && !Helper.HasPermission("Report Cash Disbursements Journal") && !Helper.HasPermission("Report Check Disbursements Journal") && !Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
+                                        menuJournalsReport.Visible = false;
 
             if (!Helper.HasPermission("Report General Ledger"))
                 menuLedgersReport.Visible = false;
@@ -290,42 +290,6 @@ namespace AccountingSystem
             _ = new frmCollectingOfficer().ShowDialog();
         }
 
-
-        private void MenuReportGeneralJournal_Click(object sender, EventArgs e)
-        {
-            _ = new frmGeneralJournal().ShowDialog();
-        }
-
-        private void MenuReportCashDisbursementsJournal_Click(object sender, EventArgs e)
-        {
-            _ = new frmCashDisbursementJournalReport().ShowDialog();
-        }
-
-        private void MenuReportCheckDisbursementsJournal_Click(object sender, EventArgs e)
-        {
-            _ = new frmCheckDisbursementsJournalReport().ShowDialog();
-        }
-
-        private void MenuObligationRequest_Click(object sender, EventArgs e)
-        {
-            _ = new frmObligationRequestMain().ShowDialog();
-        }
-
-        private void MenuReportCashReceiptsJournal_Click(object sender, EventArgs e)
-        {
-            _ = new frmCashReceiptsJournalReport().ShowDialog();
-        }
-        private void MenuReportProcurementsReceivedJournal_Click(object sender, EventArgs e)
-        {
-            _ = new frmProcurementsReceivedJournalReport().ShowDialog();
-
-        }
-
-        private void MenuReportADADisbursementsJournal_Click(object sender, EventArgs e)
-        {
-            _ = new frmADADisbursementsJournalReport().ShowDialog();
-        }
-
         private void menuBanks_Click(object sender, EventArgs e)
         {
             _ = new frmBanks().ShowDialog();
@@ -381,6 +345,7 @@ namespace AccountingSystem
         {
             loginForm.Show();
         }
+
         private void menuprintPC_Click(object sender, EventArgs e)
         {
             _ = new frmGCList().ShowDialog();
@@ -471,6 +436,7 @@ namespace AccountingSystem
         {
             _ = new frmSAAOB().ShowDialog();
         }
+
         private void MenuSAAOBB_Click(object sender, EventArgs e)
         {
             _ = new frmSAAOBB().ShowDialog();
@@ -478,37 +444,19 @@ namespace AccountingSystem
 
         #endregion
 
-        #region FINANCIAL STATEMENTS
-        private void statementOfFinancialPositionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmStatementOfFinancialPosition().ShowDialog();
-        }
-
-        private void statementOfFinancialPerformanceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmStatementOfFinancialPerformance().ShowDialog();
-        }
-
-        private void statementOfChangesInNetAssetsEquityToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmStatementOfChangesInNetAssetsEquity().ShowDialog();
-        }
-
-        private void statementOfCashFlowsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmStatementOfCashFlows().ShowDialog();
-        }
-
-        private void statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmStatementOfComparisonOfBudgetAndActualAmounts().ShowDialog();
-        }
-
-        #endregion
-
         private void menuLedgersReport_Click(object sender, EventArgs e)
         {
             _ = new frmLedger().ShowDialog();
+        }
+
+        private void menuJournalsReport_Click(object sender, EventArgs e)
+        {
+            _ = new frmJournalsReport().ShowDialog();
+        }
+
+        private void financialStatementsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmFinancialStatements().ShowDialog();
         }
     }
 }

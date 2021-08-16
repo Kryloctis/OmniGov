@@ -1,15 +1,15 @@
-﻿using System;
-using System.Windows.Forms;
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
+using System;
 using System.Data;
+using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Journals
 {
-    public partial class frmCashReceiptsJournalReport : Form
+    public partial class ucCashReceiptsJournalReport : UserControl
     {
         private readonly ReportViewer reportViewer;
 
-        public frmCashReceiptsJournalReport()
+        public ucCashReceiptsJournalReport()
         {
             InitializeComponent();
             reportViewer = new ReportViewer();
@@ -69,7 +69,7 @@ namespace AccountingSystem.Views.Reports.Journals
                     if (Convert.ToBoolean(item["is_debit"]))
                     {
                         row["deposit_debit_amount"] = item["amount"];
-                        
+
                     }
                     else
                     {
@@ -77,7 +77,7 @@ namespace AccountingSystem.Views.Reports.Journals
                     }
                 }
 
-                
+
 
                 dtCashReceiptsJournal.Rows.Add(row);
             }
@@ -89,6 +89,7 @@ namespace AccountingSystem.Views.Reports.Journals
         {
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 var lguDetails = Helper.LGUDetails();
                 var fundName = cmbFunds.Text;
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
@@ -105,18 +106,12 @@ namespace AccountingSystem.Views.Reports.Journals
 
                 report.DataSources.Add(new ReportDataSource("CashReceiptsJournal", CashReceiptsJournalDataTable()));
                 report.SetParameters(parameters);
-
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
-        }
-
-        private void frmCashReceiptsJournalReport_Load(object sender, EventArgs e)
-        {
-            Helper.LoadFormIcon(this);
-            LoadFunds();
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
@@ -126,6 +121,14 @@ namespace AccountingSystem.Views.Reports.Journals
             reportViewer.ZoomMode = ZoomMode.Percent;
             reportViewer.ZoomPercent = 100;
             reportViewer.RefreshReport();
+        }
+
+        private void ucCashReceiptsJournalReport_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadFunds();
+            }
         }
     }
 }
