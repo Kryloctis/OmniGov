@@ -5,15 +5,13 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Financial_Statements
 {
-    public partial class frmStatementOfFinancialPerformance : Form
+    public partial class ucStatementOfFinancialPerformance : UserControl
     {
         private readonly ReportViewer reportViewer;
 
-        public frmStatementOfFinancialPerformance()
+        public ucStatementOfFinancialPerformance()
         {
             InitializeComponent();
-            Helper.LoadFormIcon(this);
-
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
@@ -28,7 +26,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
             return transactionBalance;
         }
-
 
         private DataTable StatementOfFinancialPerformanceDatatable()
         {
@@ -120,14 +117,17 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             }
         }
 
-        private void frmStatementOfFinancialPerformance_Load(object sender, EventArgs e)
-        {
-            LoadFunds();
-        }
-
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
             LoadReport(reportViewer.LocalReport);
+        }
+
+        private void ucStatementOfFinancialPerformance_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadFunds();
+            }
         }
     }
 }

@@ -436,37 +436,10 @@ namespace AccountingSystem
         {
             _ = new frmSAAOB().ShowDialog();
         }
+
         private void MenuSAAOBB_Click(object sender, EventArgs e)
         {
             _ = new frmSAAOBB().ShowDialog();
-        }
-
-        #endregion
-
-        #region FINANCIAL STATEMENTS
-        private void statementOfFinancialPositionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmStatementOfFinancialPosition().ShowDialog();
-        }
-
-        private void statementOfFinancialPerformanceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmStatementOfFinancialPerformance().ShowDialog();
-        }
-
-        private void statementOfChangesInNetAssetsEquityToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmStatementOfChangesInNetAssetsEquity().ShowDialog();
-        }
-
-        private void statementOfCashFlowsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmStatementOfCashFlows().ShowDialog();
-        }
-
-        private void statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmStatementOfComparisonOfBudgetAndActualAmounts().ShowDialog();
         }
 
         #endregion
@@ -479,6 +452,11 @@ namespace AccountingSystem
         private void menuJournalsReport_Click(object sender, EventArgs e)
         {
             _ = new frmJournalsReport().ShowDialog();
+        }
+
+        private void financialStatementsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmFinancialStatements().ShowDialog();
         }
     }
 }

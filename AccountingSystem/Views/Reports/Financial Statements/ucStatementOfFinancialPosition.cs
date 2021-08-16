@@ -5,17 +5,16 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Financial_Statements
 {
-    public partial class frmStatementOfFinancialPosition : Form
+    public partial class ucStatementOfFinancialPosition : UserControl
     {
         private readonly ReportViewer reportViewer;
 
         decimal currentEndingBalance = 0;
         decimal previousYearEndingBalance = 0;
 
-        public frmStatementOfFinancialPosition()
+        public ucStatementOfFinancialPosition()
         {
             InitializeComponent();
-            Helper.LoadFormIcon(this);
 
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
@@ -153,14 +152,17 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             }
         }
 
-        private void frmStatementOfFinancialPosition_Load(object sender, System.EventArgs e)
-        {
-            LoadFunds();
-        }
-
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
             LoadReport(reportViewer.LocalReport);
+        }
+
+        private void ucStatementOfFinancialPosition_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadFunds();
+            }
         }
     }
 }

@@ -63,11 +63,6 @@ namespace AccountingSystem
             this.menuJEVS = new System.Windows.Forms.ToolStripMenuItem();
             this.menuTrialBalance = new System.Windows.Forms.ToolStripMenuItem();
             this.financialStatementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statementOfFinancialPositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statementOfFinancialPerformanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statementOfChangesInNetAssetsEquityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statementOfCashFlowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuprintRCI = new System.Windows.Forms.ToolStripMenuItem();
             this.menuprintPC = new System.Windows.Forms.ToolStripMenuItem();
             this.menuprintGC = new System.Windows.Forms.ToolStripMenuItem();
@@ -372,56 +367,10 @@ namespace AccountingSystem
             // 
             // financialStatementsToolStripMenuItem
             // 
-            this.financialStatementsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statementOfFinancialPositionToolStripMenuItem,
-            this.statementOfFinancialPerformanceToolStripMenuItem,
-            this.statementOfChangesInNetAssetsEquityToolStripMenuItem,
-            this.statementOfCashFlowsToolStripMenuItem,
-            this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem});
             this.financialStatementsToolStripMenuItem.Name = "financialStatementsToolStripMenuItem";
             this.financialStatementsToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             this.financialStatementsToolStripMenuItem.Text = "Financial Statements";
-            // 
-            // statementOfFinancialPositionToolStripMenuItem
-            // 
-            this.statementOfFinancialPositionToolStripMenuItem.Name = "statementOfFinancialPositionToolStripMenuItem";
-            this.statementOfFinancialPositionToolStripMenuItem.Size = new System.Drawing.Size(377, 22);
-            this.statementOfFinancialPositionToolStripMenuItem.Text = "Statement of Financial Position";
-            this.statementOfFinancialPositionToolStripMenuItem.Click += new System.EventHandler(this.statementOfFinancialPositionToolStripMenuItem_Click);
-            // 
-            // statementOfFinancialPerformanceToolStripMenuItem
-            // 
-            this.statementOfFinancialPerformanceToolStripMenuItem.Name = "statementOfFinancialPerformanceToolStripMenuItem";
-            this.statementOfFinancialPerformanceToolStripMenuItem.Size = new System.Drawing.Size(377, 22);
-            this.statementOfFinancialPerformanceToolStripMenuItem.Text = "Statement of Financial Performance";
-            this.statementOfFinancialPerformanceToolStripMenuItem.Click += new System.EventHandler(this.statementOfFinancialPerformanceToolStripMenuItem_Click);
-            // 
-            // statementOfChangesInNetAssetsEquityToolStripMenuItem
-            // 
-            this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Enabled = false;
-            this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Name = "statementOfChangesInNetAssetsEquityToolStripMenuItem";
-            this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Size = new System.Drawing.Size(377, 22);
-            this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Text = "Statement of Changes in Net Assets/Equity";
-            this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Visible = false;
-            this.statementOfChangesInNetAssetsEquityToolStripMenuItem.Click += new System.EventHandler(this.statementOfChangesInNetAssetsEquityToolStripMenuItem_Click);
-            // 
-            // statementOfCashFlowsToolStripMenuItem
-            // 
-            this.statementOfCashFlowsToolStripMenuItem.Enabled = false;
-            this.statementOfCashFlowsToolStripMenuItem.Name = "statementOfCashFlowsToolStripMenuItem";
-            this.statementOfCashFlowsToolStripMenuItem.Size = new System.Drawing.Size(377, 22);
-            this.statementOfCashFlowsToolStripMenuItem.Text = "Statement of Cash Flows";
-            this.statementOfCashFlowsToolStripMenuItem.Visible = false;
-            this.statementOfCashFlowsToolStripMenuItem.Click += new System.EventHandler(this.statementOfCashFlowsToolStripMenuItem_Click);
-            // 
-            // statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem
-            // 
-            this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Enabled = false;
-            this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Name = "statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem";
-            this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Size = new System.Drawing.Size(377, 22);
-            this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Text = "Statement of Comparison of Budget and Actual Amounts";
-            this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Visible = false;
-            this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem.Click += new System.EventHandler(this.statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem_Click);
+            this.financialStatementsToolStripMenuItem.Click += new System.EventHandler(this.financialStatementsToolStripMenuItem_Click);
             // 
             // menuprintRCI
             // 
@@ -818,11 +767,6 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuTrialBalance;
         private System.Windows.Forms.ToolStripMenuItem menuDailyCash;
         private System.Windows.Forms.ToolStripMenuItem financialStatementsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem statementOfFinancialPositionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem statementOfFinancialPerformanceToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem statementOfChangesInNetAssetsEquityToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem statementOfCashFlowsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem statementOfComparisonOfBudgetAndActualAmountsToolStripMenuItem;
         internal System.Windows.Forms.TabPage tabBudgetDashboard;
         private Views.Dashboard.UcBudgetDashboard ucBudgetDashboard1;
     }
