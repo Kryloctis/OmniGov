@@ -7,7 +7,7 @@ namespace AccountingSystem
 {
     public class Helper
     {
-        internal static byte UserId = Factory.UserId = 2;
+        internal static byte UserId = Factory.UserId;
 
         public static void LoadFormIcon(Form form)
         {
