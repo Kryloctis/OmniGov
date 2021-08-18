@@ -46,7 +46,9 @@ namespace AccountingSystem
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-
+            radBtnAccounting.Visible = false;
+            radBtnBudget.Visible = false;
+            tabControl1.TabPages.Clear();
             userDict = Helper.LoggedInUserData();
             loginForm = _loginForm;
         }
@@ -205,16 +207,16 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Report Bank Cashbook"))
                 menuBankCashBook.Visible = false;
 
-            if (!Helper.HasPermission("Budget Dashboard"))
+            if (Helper.HasPermission("Budget Dashboard"))
             {
-                radBtnBudget.Visible = false;
-                tabControl1.TabPages.Remove(tabBudgetDashboard);
+                radBtnBudget.Visible = true;
+                tabControl1.TabPages.Add(tabBudgetDashboard);
             }
 
-            if (!Helper.HasPermission("Accounting Dashboard"))
+            if (Helper.HasPermission("Accounting Dashboard"))
             {
-                radBtnAccounting.Visible = false;
-                tabControl1.TabPages.Remove(tabAccountingDashboard);
+                radBtnAccounting.Visible = true;
+                tabControl1.TabPages.Add(tabAccountingDashboard);
             }
 
             if (!Helper.HasPermission("Report Trial Balance"))
