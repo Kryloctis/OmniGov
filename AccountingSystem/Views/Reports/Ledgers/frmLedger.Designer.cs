@@ -29,7 +29,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
             this.radioTransactionLog = new System.Windows.Forms.RadioButton();
             this.radioSubsidiaryLedger = new System.Windows.Forms.RadioButton();
             this.radioGeneralLedger = new System.Windows.Forms.RadioButton();
@@ -38,29 +37,18 @@ namespace AccountingSystem.Views.Reports.Ledgers
             this.ucGeneralLedger1 = new AccountingSystem.Views.Reports.Ledgers.ucGeneralLedger();
             this.tabPageSubsidiaryLedger = new System.Windows.Forms.TabPage();
             this.ucSubsidiaryLedger1 = new AccountingSystem.Views.Reports.Ledgers.ucSubsidiaryLedger();
-            this.panel1.SuspendLayout();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tabControlLedger.SuspendLayout();
             this.tabPageGeneralLedger.SuspendLayout();
             this.tabPageSubsidiaryLedger.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.radioTransactionLog);
-            this.panel1.Controls.Add(this.radioSubsidiaryLedger);
-            this.panel1.Controls.Add(this.radioGeneralLedger);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1043, 32);
-            this.panel1.TabIndex = 2;
             // 
             // radioTransactionLog
             // 
             this.radioTransactionLog.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioTransactionLog.Enabled = false;
-            this.radioTransactionLog.Location = new System.Drawing.Point(256, 4);
+            this.radioTransactionLog.Location = new System.Drawing.Point(259, 3);
             this.radioTransactionLog.Name = "radioTransactionLog";
             this.radioTransactionLog.Size = new System.Drawing.Size(122, 25);
             this.radioTransactionLog.TabIndex = 7;
@@ -74,7 +62,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             // radioSubsidiaryLedger
             // 
             this.radioSubsidiaryLedger.Appearance = System.Windows.Forms.Appearance.Button;
-            this.radioSubsidiaryLedger.Location = new System.Drawing.Point(131, 4);
+            this.radioSubsidiaryLedger.Location = new System.Drawing.Point(131, 3);
             this.radioSubsidiaryLedger.Name = "radioSubsidiaryLedger";
             this.radioSubsidiaryLedger.Size = new System.Drawing.Size(122, 25);
             this.radioSubsidiaryLedger.TabIndex = 6;
@@ -89,7 +77,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             // 
             this.radioGeneralLedger.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioGeneralLedger.Checked = true;
-            this.radioGeneralLedger.Location = new System.Drawing.Point(5, 4);
+            this.radioGeneralLedger.Location = new System.Drawing.Point(3, 3);
             this.radioGeneralLedger.Name = "radioGeneralLedger";
             this.radioGeneralLedger.Size = new System.Drawing.Size(122, 25);
             this.radioGeneralLedger.TabIndex = 5;
@@ -103,16 +91,19 @@ namespace AccountingSystem.Views.Reports.Ledgers
             // 
             // tabControlLedger
             // 
+            this.tabControlLedger.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControlLedger.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tabControlLedger.Controls.Add(this.tabPageGeneralLedger);
             this.tabControlLedger.Controls.Add(this.tabPageSubsidiaryLedger);
-            this.tabControlLedger.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlLedger.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabControlLedger.ItemSize = new System.Drawing.Size(0, 1);
-            this.tabControlLedger.Location = new System.Drawing.Point(0, 32);
+            this.tabControlLedger.Location = new System.Drawing.Point(0, 39);
+            this.tabControlLedger.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
             this.tabControlLedger.Name = "tabControlLedger";
             this.tabControlLedger.SelectedIndex = 0;
-            this.tabControlLedger.Size = new System.Drawing.Size(1043, 504);
+            this.tabControlLedger.Size = new System.Drawing.Size(1043, 497);
             this.tabControlLedger.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControlLedger.TabIndex = 3;
             // 
@@ -122,7 +113,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             this.tabPageGeneralLedger.Location = new System.Drawing.Point(4, 5);
             this.tabPageGeneralLedger.Name = "tabPageGeneralLedger";
             this.tabPageGeneralLedger.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGeneralLedger.Size = new System.Drawing.Size(1035, 495);
+            this.tabPageGeneralLedger.Size = new System.Drawing.Size(1035, 488);
             this.tabPageGeneralLedger.TabIndex = 0;
             this.tabPageGeneralLedger.Text = "tabPage1";
             this.tabPageGeneralLedger.UseVisualStyleBackColor = true;
@@ -131,8 +122,9 @@ namespace AccountingSystem.Views.Reports.Ledgers
             // 
             this.ucGeneralLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucGeneralLedger1.Location = new System.Drawing.Point(3, 3);
+            this.ucGeneralLedger1.Margin = new System.Windows.Forms.Padding(0);
             this.ucGeneralLedger1.Name = "ucGeneralLedger1";
-            this.ucGeneralLedger1.Size = new System.Drawing.Size(1029, 489);
+            this.ucGeneralLedger1.Size = new System.Drawing.Size(1029, 482);
             this.ucGeneralLedger1.TabIndex = 0;
             // 
             // tabPageSubsidiaryLedger
@@ -141,7 +133,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             this.tabPageSubsidiaryLedger.Location = new System.Drawing.Point(4, 5);
             this.tabPageSubsidiaryLedger.Name = "tabPageSubsidiaryLedger";
             this.tabPageSubsidiaryLedger.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSubsidiaryLedger.Size = new System.Drawing.Size(1035, 495);
+            this.tabPageSubsidiaryLedger.Size = new System.Drawing.Size(1035, 488);
             this.tabPageSubsidiaryLedger.TabIndex = 1;
             this.tabPageSubsidiaryLedger.Text = "tabPage1";
             this.tabPageSubsidiaryLedger.UseVisualStyleBackColor = true;
@@ -150,17 +142,31 @@ namespace AccountingSystem.Views.Reports.Ledgers
             // 
             this.ucSubsidiaryLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucSubsidiaryLedger1.Location = new System.Drawing.Point(3, 3);
+            this.ucSubsidiaryLedger1.Margin = new System.Windows.Forms.Padding(0);
             this.ucSubsidiaryLedger1.Name = "ucSubsidiaryLedger1";
-            this.ucSubsidiaryLedger1.Size = new System.Drawing.Size(1029, 489);
+            this.ucSubsidiaryLedger1.Size = new System.Drawing.Size(1029, 482);
             this.ucSubsidiaryLedger1.TabIndex = 0;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
+            this.flowLayoutPanel1.Controls.Add(this.radioGeneralLedger);
+            this.flowLayoutPanel1.Controls.Add(this.radioSubsidiaryLedger);
+            this.flowLayoutPanel1.Controls.Add(this.radioTransactionLog);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1043, 31);
+            this.flowLayoutPanel1.TabIndex = 4;
             // 
             // frmLedger
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1043, 536);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.tabControlLedger);
-            this.Controls.Add(this.panel1);
             this.MinimizeBox = false;
             this.Name = "frmLedger";
             this.ShowInTaskbar = false;
@@ -168,17 +174,16 @@ namespace AccountingSystem.Views.Reports.Ledgers
             this.Text = "Ledgers";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmLedger_Load);
-            this.panel1.ResumeLayout(false);
             this.tabControlLedger.ResumeLayout(false);
             this.tabPageGeneralLedger.ResumeLayout(false);
             this.tabPageSubsidiaryLedger.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton radioGeneralLedger;
         private System.Windows.Forms.RadioButton radioTransactionLog;
         private System.Windows.Forms.RadioButton radioSubsidiaryLedger;
@@ -187,5 +192,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private ucGeneralLedger ucGeneralLedger1;
         private System.Windows.Forms.TabPage tabPageSubsidiaryLedger;
         private ucSubsidiaryLedger ucSubsidiaryLedger1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

@@ -120,12 +120,6 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Report General Journal") && !Helper.HasPermission("Report Cash Receipts Journal") && !Helper.HasPermission("Report Procurement Received Journal") && !Helper.HasPermission("Report Cash Disbursements Journal") && !Helper.HasPermission("Report Check Disbursements Journal") && !Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
                 menuJournalsReport.Visible = false;
 
-            if (!Helper.HasPermission("Report General Ledger"))
-                menuLedgersReport.Visible = false;
-
-            if (!Helper.HasPermission("Report Subsidiary Ledger"))
-                menuLedgersReport.Visible = false;
-
             if (!Helper.HasPermission("Report General Ledger") && !Helper.HasPermission("Report Subsidiary Ledger"))
                 menuLedgersReport.Visible = false;
 
