@@ -72,8 +72,6 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>0cm</Top>
-            <Left>0cm</Left>
             <Height>0.6cm</Height>
             <Width>6.17362cm</Width>
             <Style>
@@ -115,7 +113,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>TYPE (FORM NO.)</Value>
+                                  <Value>Type (Form No.)</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -154,7 +152,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>OFFICIAL RECEIPT NO./SERIAL NO.</Value>
+                                  <Value>Official Receipt No./Serial No.</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -192,7 +190,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>AMOUNT</Value>
+                                  <Value>Amount</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>

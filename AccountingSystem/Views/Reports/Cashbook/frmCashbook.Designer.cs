@@ -43,17 +43,18 @@ namespace AccountingSystem.Views.Reports.Cashbook
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Location = new System.Drawing.Point(12, 47);
+            this.panel1.Location = new System.Drawing.Point(10, 35);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1236, 766);
+            this.panel1.Size = new System.Drawing.Size(1082, 574);
             this.panel1.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 15);
+            this.label1.Location = new System.Drawing.Point(11, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 20);
+            this.label1.Size = new System.Drawing.Size(39, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "Bank :";
             // 
@@ -61,17 +62,19 @@ namespace AccountingSystem.Views.Reports.Cashbook
             // 
             this.cmbbank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbbank.FormattingEnabled = true;
-            this.cmbbank.Location = new System.Drawing.Point(71, 12);
+            this.cmbbank.Location = new System.Drawing.Point(58, 9);
+            this.cmbbank.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbbank.Name = "cmbbank";
-            this.cmbbank.Size = new System.Drawing.Size(456, 28);
+            this.cmbbank.Size = new System.Drawing.Size(400, 23);
             this.cmbbank.TabIndex = 4;
             // 
             // btnretrieve
             // 
             this.btnretrieve.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnretrieve.Location = new System.Drawing.Point(533, 12);
+            this.btnretrieve.Location = new System.Drawing.Point(462, 9);
+            this.btnretrieve.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnretrieve.Name = "btnretrieve";
-            this.btnretrieve.Size = new System.Drawing.Size(94, 29);
+            this.btnretrieve.Size = new System.Drawing.Size(82, 22);
             this.btnretrieve.TabIndex = 7;
             this.btnretrieve.Text = "Retrieve";
             this.btnretrieve.UseVisualStyleBackColor = true;
@@ -83,13 +86,14 @@ namespace AccountingSystem.Views.Reports.Cashbook
             // 
             // frmCashbook
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1260, 825);
+            this.ClientSize = new System.Drawing.Size(1102, 562);
             this.Controls.Add(this.btnretrieve);
             this.Controls.Add(this.cmbbank);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmCashbook";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reports > Check Cashbook";

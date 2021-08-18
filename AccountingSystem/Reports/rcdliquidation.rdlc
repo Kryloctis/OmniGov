@@ -68,8 +68,6 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>0cm</Top>
-            <Left>0cm</Left>
             <Height>0.6cm</Height>
             <Width>10.76679cm</Width>
             <Style>
@@ -108,7 +106,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>NAME OF ACCOUNTABLE OFFICER</Value>
+                                  <Value>Name of Accountable Officer Name</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -144,7 +142,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>REPORT NO.</Value>
+                                  <Value>Report No.</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -180,7 +178,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>AMOUNT</Value>
+                                  <Value>Amount</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -242,6 +240,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -443,7 +442,7 @@
             <DataSetName>dtRCDCollections</DataSetName>
             <Top>0.264in</Top>
             <Height>0.86666in</Height>
-            <Width>7.49167in</Width>
+            <Width>7.49168in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -455,7 +454,7 @@
         <Height>1.14722in</Height>
         <Style />
       </Body>
-      <Width>7.49167in</Width>
+      <Width>7.49168in</Width>
       <Page>
         <LeftMargin>0.2in</LeftMargin>
         <RightMargin>0.2in</RightMargin>

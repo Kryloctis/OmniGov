@@ -72,9 +72,10 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(42, 47);
-            this.btnAdd.Text = "Add...";
+            this.btnAdd.Size = new System.Drawing.Size(33, 47);
+            this.btnAdd.Text = "Add";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAdd.ToolTipText = "Add";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnEdit
@@ -84,8 +85,8 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(40, 47);
-            this.btnEdit.Text = "Edit...";
+            this.btnEdit.Size = new System.Drawing.Size(32, 47);
+            this.btnEdit.Text = "Edit";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
@@ -172,7 +173,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // txtsearch
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(647, 11);
+            this.txtsearch.Location = new System.Drawing.Point(647, 12);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.PlaceholderText = "Search...";
@@ -186,7 +187,7 @@ namespace AccountingSystem.Views.Reports.RCD
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgrcd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgrcd.Location = new System.Drawing.Point(10, 60);
+            this.dgrcd.Location = new System.Drawing.Point(12, 61);
             this.dgrcd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgrcd.Name = "dgrcd";
             this.dgrcd.RowHeadersWidth = 51;
