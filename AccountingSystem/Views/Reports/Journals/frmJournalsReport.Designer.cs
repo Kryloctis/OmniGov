@@ -42,13 +42,13 @@ namespace AccountingSystem.Views.Reports.Journals
             this.ucCheckDisbursementsJournalReport1 = new AccountingSystem.Views.Reports.Journals.ucCheckDisbursementsJournalReport();
             this.tabADADJ = new System.Windows.Forms.TabPage();
             this.ucadaDisbursementsJournalReport1 = new AccountingSystem.Views.Reports.Journals.ucADADisbursementsJournalReport();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.radBtnGJ = new System.Windows.Forms.RadioButton();
             this.radBtnCRJ = new System.Windows.Forms.RadioButton();
             this.radBtnPRJ = new System.Windows.Forms.RadioButton();
             this.radBtnCashDJ = new System.Windows.Forms.RadioButton();
             this.radBtnCheckDJ = new System.Windows.Forms.RadioButton();
             this.radBtnADADJ = new System.Windows.Forms.RadioButton();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tabControl1.SuspendLayout();
             this.tabGJ.SuspendLayout();
             this.tabCRJ.SuspendLayout();
@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.tabCashDJ.SuspendLayout();
             this.tabCheckDJ.SuspendLayout();
             this.tabADADJ.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -72,10 +72,10 @@ namespace AccountingSystem.Views.Reports.Journals
             this.tabControl1.Controls.Add(this.tabCheckDJ);
             this.tabControl1.Controls.Add(this.tabADADJ);
             this.tabControl1.ItemSize = new System.Drawing.Size(0, 1);
-            this.tabControl1.Location = new System.Drawing.Point(0, 47);
+            this.tabControl1.Location = new System.Drawing.Point(0, 37);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1225, 531);
+            this.tabControl1.Size = new System.Drawing.Size(1225, 541);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 1;
             // 
@@ -85,7 +85,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.tabGJ.Location = new System.Drawing.Point(4, 5);
             this.tabGJ.Margin = new System.Windows.Forms.Padding(0);
             this.tabGJ.Name = "tabGJ";
-            this.tabGJ.Size = new System.Drawing.Size(1217, 522);
+            this.tabGJ.Size = new System.Drawing.Size(1217, 532);
             this.tabGJ.TabIndex = 0;
             this.tabGJ.Text = "tabGJ";
             this.tabGJ.UseVisualStyleBackColor = true;
@@ -98,7 +98,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.ucGeneralJournalReport1.Location = new System.Drawing.Point(0, 0);
             this.ucGeneralJournalReport1.Margin = new System.Windows.Forms.Padding(0);
             this.ucGeneralJournalReport1.Name = "ucGeneralJournalReport1";
-            this.ucGeneralJournalReport1.Size = new System.Drawing.Size(1217, 522);
+            this.ucGeneralJournalReport1.Size = new System.Drawing.Size(1217, 532);
             this.ucGeneralJournalReport1.TabIndex = 0;
             // 
             // tabCRJ
@@ -107,7 +107,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.tabCRJ.Location = new System.Drawing.Point(4, 5);
             this.tabCRJ.Margin = new System.Windows.Forms.Padding(0);
             this.tabCRJ.Name = "tabCRJ";
-            this.tabCRJ.Size = new System.Drawing.Size(1217, 522);
+            this.tabCRJ.Size = new System.Drawing.Size(1217, 328);
             this.tabCRJ.TabIndex = 1;
             this.tabCRJ.Text = "tabCRJ";
             this.tabCRJ.UseVisualStyleBackColor = true;
@@ -118,7 +118,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.ucCashReceiptsJournalReport1.Location = new System.Drawing.Point(0, 0);
             this.ucCashReceiptsJournalReport1.Margin = new System.Windows.Forms.Padding(0);
             this.ucCashReceiptsJournalReport1.Name = "ucCashReceiptsJournalReport1";
-            this.ucCashReceiptsJournalReport1.Size = new System.Drawing.Size(1217, 522);
+            this.ucCashReceiptsJournalReport1.Size = new System.Drawing.Size(1217, 328);
             this.ucCashReceiptsJournalReport1.TabIndex = 0;
             // 
             // tabPRJ
@@ -127,7 +127,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.tabPRJ.Location = new System.Drawing.Point(4, 5);
             this.tabPRJ.Margin = new System.Windows.Forms.Padding(0);
             this.tabPRJ.Name = "tabPRJ";
-            this.tabPRJ.Size = new System.Drawing.Size(1217, 522);
+            this.tabPRJ.Size = new System.Drawing.Size(1217, 328);
             this.tabPRJ.TabIndex = 2;
             this.tabPRJ.Text = "tabPRJ";
             this.tabPRJ.UseVisualStyleBackColor = true;
@@ -138,7 +138,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.ucProcurementsReceivedJournalReport1.Location = new System.Drawing.Point(0, 0);
             this.ucProcurementsReceivedJournalReport1.Margin = new System.Windows.Forms.Padding(0);
             this.ucProcurementsReceivedJournalReport1.Name = "ucProcurementsReceivedJournalReport1";
-            this.ucProcurementsReceivedJournalReport1.Size = new System.Drawing.Size(1217, 522);
+            this.ucProcurementsReceivedJournalReport1.Size = new System.Drawing.Size(1217, 328);
             this.ucProcurementsReceivedJournalReport1.TabIndex = 0;
             // 
             // tabCashDJ
@@ -147,7 +147,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.tabCashDJ.Location = new System.Drawing.Point(4, 5);
             this.tabCashDJ.Margin = new System.Windows.Forms.Padding(0);
             this.tabCashDJ.Name = "tabCashDJ";
-            this.tabCashDJ.Size = new System.Drawing.Size(1217, 522);
+            this.tabCashDJ.Size = new System.Drawing.Size(1217, 328);
             this.tabCashDJ.TabIndex = 3;
             this.tabCashDJ.Text = "tabCashDJ";
             this.tabCashDJ.UseVisualStyleBackColor = true;
@@ -157,7 +157,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.ucCashDisbursementsJournalReport1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucCashDisbursementsJournalReport1.Location = new System.Drawing.Point(0, 0);
             this.ucCashDisbursementsJournalReport1.Name = "ucCashDisbursementsJournalReport1";
-            this.ucCashDisbursementsJournalReport1.Size = new System.Drawing.Size(1217, 522);
+            this.ucCashDisbursementsJournalReport1.Size = new System.Drawing.Size(1217, 328);
             this.ucCashDisbursementsJournalReport1.TabIndex = 0;
             // 
             // tabCheckDJ
@@ -166,7 +166,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.tabCheckDJ.Location = new System.Drawing.Point(4, 5);
             this.tabCheckDJ.Margin = new System.Windows.Forms.Padding(0);
             this.tabCheckDJ.Name = "tabCheckDJ";
-            this.tabCheckDJ.Size = new System.Drawing.Size(1217, 522);
+            this.tabCheckDJ.Size = new System.Drawing.Size(1217, 328);
             this.tabCheckDJ.TabIndex = 4;
             this.tabCheckDJ.Text = "tabCheckDJ";
             this.tabCheckDJ.UseVisualStyleBackColor = true;
@@ -176,7 +176,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.ucCheckDisbursementsJournalReport1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucCheckDisbursementsJournalReport1.Location = new System.Drawing.Point(0, 0);
             this.ucCheckDisbursementsJournalReport1.Name = "ucCheckDisbursementsJournalReport1";
-            this.ucCheckDisbursementsJournalReport1.Size = new System.Drawing.Size(1217, 522);
+            this.ucCheckDisbursementsJournalReport1.Size = new System.Drawing.Size(1217, 328);
             this.ucCheckDisbursementsJournalReport1.TabIndex = 0;
             // 
             // tabADADJ
@@ -185,7 +185,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.tabADADJ.Location = new System.Drawing.Point(4, 5);
             this.tabADADJ.Margin = new System.Windows.Forms.Padding(0);
             this.tabADADJ.Name = "tabADADJ";
-            this.tabADADJ.Size = new System.Drawing.Size(1217, 522);
+            this.tabADADJ.Size = new System.Drawing.Size(1217, 328);
             this.tabADADJ.TabIndex = 5;
             this.tabADADJ.Text = "tabADADJ";
             this.tabADADJ.UseVisualStyleBackColor = true;
@@ -195,32 +195,15 @@ namespace AccountingSystem.Views.Reports.Journals
             this.ucadaDisbursementsJournalReport1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucadaDisbursementsJournalReport1.Location = new System.Drawing.Point(0, 0);
             this.ucadaDisbursementsJournalReport1.Name = "ucadaDisbursementsJournalReport1";
-            this.ucadaDisbursementsJournalReport1.Size = new System.Drawing.Size(1217, 522);
+            this.ucadaDisbursementsJournalReport1.Size = new System.Drawing.Size(1217, 328);
             this.ucadaDisbursementsJournalReport1.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            this.panel2.AutoSize = true;
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.radBtnGJ);
-            this.panel2.Controls.Add(this.radBtnCRJ);
-            this.panel2.Controls.Add(this.radBtnPRJ);
-            this.panel2.Controls.Add(this.radBtnCashDJ);
-            this.panel2.Controls.Add(this.radBtnCheckDJ);
-            this.panel2.Controls.Add(this.radBtnADADJ);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1225, 31);
-            this.panel2.TabIndex = 2;
             // 
             // radBtnGJ
             // 
             this.radBtnGJ.Appearance = System.Windows.Forms.Appearance.Button;
             this.radBtnGJ.AutoSize = true;
             this.radBtnGJ.Checked = true;
-            this.radBtnGJ.Location = new System.Drawing.Point(4, 3);
+            this.radBtnGJ.Location = new System.Drawing.Point(3, 3);
             this.radBtnGJ.Name = "radBtnGJ";
             this.radBtnGJ.Size = new System.Drawing.Size(98, 25);
             this.radBtnGJ.TabIndex = 1;
@@ -233,7 +216,7 @@ namespace AccountingSystem.Views.Reports.Journals
             // 
             this.radBtnCRJ.Appearance = System.Windows.Forms.Appearance.Button;
             this.radBtnCRJ.AutoSize = true;
-            this.radBtnCRJ.Location = new System.Drawing.Point(108, 3);
+            this.radBtnCRJ.Location = new System.Drawing.Point(107, 3);
             this.radBtnCRJ.Name = "radBtnCRJ";
             this.radBtnCRJ.Size = new System.Drawing.Size(131, 25);
             this.radBtnCRJ.TabIndex = 2;
@@ -246,7 +229,7 @@ namespace AccountingSystem.Views.Reports.Journals
             // 
             this.radBtnPRJ.Appearance = System.Windows.Forms.Appearance.Button;
             this.radBtnPRJ.AutoSize = true;
-            this.radBtnPRJ.Location = new System.Drawing.Point(245, 3);
+            this.radBtnPRJ.Location = new System.Drawing.Point(244, 3);
             this.radBtnPRJ.Name = "radBtnPRJ";
             this.radBtnPRJ.Size = new System.Drawing.Size(177, 25);
             this.radBtnPRJ.TabIndex = 3;
@@ -259,7 +242,7 @@ namespace AccountingSystem.Views.Reports.Journals
             // 
             this.radBtnCashDJ.Appearance = System.Windows.Forms.Appearance.Button;
             this.radBtnCashDJ.AutoSize = true;
-            this.radBtnCashDJ.Location = new System.Drawing.Point(428, 3);
+            this.radBtnCashDJ.Location = new System.Drawing.Point(427, 3);
             this.radBtnCashDJ.Name = "radBtnCashDJ";
             this.radBtnCashDJ.Size = new System.Drawing.Size(165, 25);
             this.radBtnCashDJ.TabIndex = 4;
@@ -272,7 +255,7 @@ namespace AccountingSystem.Views.Reports.Journals
             // 
             this.radBtnCheckDJ.Appearance = System.Windows.Forms.Appearance.Button;
             this.radBtnCheckDJ.AutoSize = true;
-            this.radBtnCheckDJ.Location = new System.Drawing.Point(599, 3);
+            this.radBtnCheckDJ.Location = new System.Drawing.Point(598, 3);
             this.radBtnCheckDJ.Name = "radBtnCheckDJ";
             this.radBtnCheckDJ.Size = new System.Drawing.Size(172, 25);
             this.radBtnCheckDJ.TabIndex = 5;
@@ -285,7 +268,7 @@ namespace AccountingSystem.Views.Reports.Journals
             // 
             this.radBtnADADJ.Appearance = System.Windows.Forms.Appearance.Button;
             this.radBtnADADJ.AutoSize = true;
-            this.radBtnADADJ.Location = new System.Drawing.Point(777, 3);
+            this.radBtnADADJ.Location = new System.Drawing.Point(776, 3);
             this.radBtnADADJ.Name = "radBtnADADJ";
             this.radBtnADADJ.Size = new System.Drawing.Size(282, 25);
             this.radBtnADADJ.TabIndex = 6;
@@ -294,12 +277,28 @@ namespace AccountingSystem.Views.Reports.Journals
             this.radBtnADADJ.UseVisualStyleBackColor = true;
             this.radBtnADADJ.CheckedChanged += new System.EventHandler(this.radBtnADADJ_CheckedChanged);
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
+            this.flowLayoutPanel1.Controls.Add(this.radBtnGJ);
+            this.flowLayoutPanel1.Controls.Add(this.radBtnCRJ);
+            this.flowLayoutPanel1.Controls.Add(this.radBtnPRJ);
+            this.flowLayoutPanel1.Controls.Add(this.radBtnCashDJ);
+            this.flowLayoutPanel1.Controls.Add(this.radBtnCheckDJ);
+            this.flowLayoutPanel1.Controls.Add(this.radBtnADADJ);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1225, 31);
+            this.flowLayoutPanel1.TabIndex = 3;
+            // 
             // frmJournalsReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1225, 578);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.tabControl1);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1241, 587);
@@ -316,8 +315,8 @@ namespace AccountingSystem.Views.Reports.Journals
             this.tabCashDJ.ResumeLayout(false);
             this.tabCheckDJ.ResumeLayout(false);
             this.tabADADJ.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -337,12 +336,12 @@ namespace AccountingSystem.Views.Reports.Journals
         private ucGeneralJournalReport ucGeneralJournalReport1;
         private ucCheckDisbursementsJournalReport ucCheckDisbursementsJournalReport1;
         private ucADADisbursementsJournalReport ucadaDisbursementsJournalReport1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.RadioButton radBtnGJ;
         private System.Windows.Forms.RadioButton radBtnCRJ;
         private System.Windows.Forms.RadioButton radBtnPRJ;
         private System.Windows.Forms.RadioButton radBtnCashDJ;
         private System.Windows.Forms.RadioButton radBtnCheckDJ;
         private System.Windows.Forms.RadioButton radBtnADADJ;
+        internal System.Windows.Forms.RadioButton radBtnGJ;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

@@ -10,6 +10,27 @@ namespace AccountingSystem.Views.Reports.Journals
             Helper.LoadFormIcon(this);
         }
 
+        private void ValidatePermissions()
+        {
+            if (!Helper.HasPermission("Report General Journal"))
+                radBtnGJ.Visible = false;
+
+            if (!Helper.HasPermission("Report Cash Receipts Journal"))
+                radBtnCRJ.Visible = false;
+
+            if (!Helper.HasPermission("Report Procurement Received Journal"))
+                radBtnPRJ.Visible = false;
+
+            if (!Helper.HasPermission("Report Cash Disbursements Journal"))
+                radBtnCashDJ.Visible = false;
+
+            if (!Helper.HasPermission("Report Check Disbursements Journal"))
+                radBtnCheckDJ.Visible = false;
+
+            if (!Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
+                radBtnADADJ.Visible = false;
+        }
+
         private void ChangeTabs()
         {
             if (radBtnGJ.Checked)
@@ -29,6 +50,7 @@ namespace AccountingSystem.Views.Reports.Journals
         private void frmJournals_Load(object sender, System.EventArgs e)
         {
             ChangeTabs();
+            ValidatePermissions();
         }
 
         private void radBtnGJ_CheckedChanged(object sender, System.EventArgs e)

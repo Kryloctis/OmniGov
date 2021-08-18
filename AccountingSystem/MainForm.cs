@@ -117,26 +117,8 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Transaction Obligation Request"))
                 btnObligationRequest.Visible = false;
 
-            if (!Helper.HasPermission("Report General Journal"))
-                //menuReportGJ.Visible = false;
-
-                if (!Helper.HasPermission("Report Cash Receipts Journal"))
-                    //menuReportCRJ.Visible = false;
-
-                    if (!Helper.HasPermission("Report Procurement Received Journal"))
-                        //menuReportPRJ.Visible = false;
-
-                        if (!Helper.HasPermission("Report Cash Disbursements Journal"))
-                            //menuReportCDJ.Visible = false;
-
-                            if (!Helper.HasPermission("Report Check Disbursements Journal"))
-                                //menuReportCkDJ.Visible = false;
-
-                                if (!Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
-                                    //menuReportADADJ.Visible = false;
-
-                                    if (!Helper.HasPermission("Report General Journal") && !Helper.HasPermission("Report Cash Receipts Journal") && !Helper.HasPermission("Report Procurement Received Journal") && !Helper.HasPermission("Report Cash Disbursements Journal") && !Helper.HasPermission("Report Check Disbursements Journal") && !Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
-                                        menuJournalsReport.Visible = false;
+            if (!Helper.HasPermission("Report General Journal") && !Helper.HasPermission("Report Cash Receipts Journal") && !Helper.HasPermission("Report Procurement Received Journal") && !Helper.HasPermission("Report Cash Disbursements Journal") && !Helper.HasPermission("Report Check Disbursements Journal") && !Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
+                menuJournalsReport.Visible = false;
 
             if (!Helper.HasPermission("Report General Ledger"))
                 menuLedgersReport.Visible = false;
