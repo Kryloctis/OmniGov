@@ -765,9 +765,8 @@
             </TablixRowHierarchy>
             <DataSetName>dtTrialBalance</DataSetName>
             <Top>0.3175cm</Top>
-            <Left>0cm</Left>
             <Height>1.98521cm</Height>
-            <Width>19.55277cm</Width>
+            <Width>19.55274cm</Width>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1072,7 +1071,6 @@
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
               <Top>1.76361cm</Top>
-              <Left>0cm</Left>
               <Height>0.6cm</Height>
               <Width>19.55277cm</Width>
               <ZIndex>2</ZIndex>
