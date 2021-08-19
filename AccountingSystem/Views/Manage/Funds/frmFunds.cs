@@ -119,5 +119,10 @@ namespace AccountingSystem.Views.Manage.Funds
         {
             LoadRecords();
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

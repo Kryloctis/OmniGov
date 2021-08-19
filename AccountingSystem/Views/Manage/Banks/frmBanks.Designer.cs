@@ -116,7 +116,7 @@ namespace AccountingSystem.Views.Manage.Banks
             this.btnDelete});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.toolStrip.Padding = new System.Windows.Forms.Padding(4);
             this.toolStrip.Size = new System.Drawing.Size(735, 58);
             this.toolStrip.TabIndex = 6;
             this.toolStrip.Text = "toolStrip1";
@@ -163,13 +163,13 @@ namespace AccountingSystem.Views.Manage.Banks
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgBanks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgBanks.Location = new System.Drawing.Point(10, 51);
+            this.dgBanks.Location = new System.Drawing.Point(10, 60);
             this.dgBanks.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgBanks.Name = "dgBanks";
             this.dgBanks.RowHeadersWidth = 51;
             this.dgBanks.RowTemplate.Height = 29;
             this.dgBanks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgBanks.Size = new System.Drawing.Size(714, 320);
+            this.dgBanks.Size = new System.Drawing.Size(714, 311);
             this.dgBanks.TabIndex = 8;
             this.dgBanks.SelectionChanged += new System.EventHandler(this.dgBanks_SelectionChanged);
             // 
@@ -177,10 +177,9 @@ namespace AccountingSystem.Views.Manage.Banks
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(471, 16);
+            this.txtsearch.Location = new System.Drawing.Point(470, 33);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.PlaceholderText = "Search...";
             this.txtsearch.Size = new System.Drawing.Size(254, 23);
             this.txtsearch.TabIndex = 9;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
