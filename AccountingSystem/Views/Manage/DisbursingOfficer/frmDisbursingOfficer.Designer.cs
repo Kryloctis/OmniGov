@@ -68,8 +68,8 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(42, 47);
-            this.btnAdd.Text = "Add...";
+            this.btnAdd.Size = new System.Drawing.Size(33, 47);
+            this.btnAdd.Text = "Add";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // btnEdit
@@ -78,8 +78,8 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(40, 47);
-            this.btnEdit.Text = "Edit...";
+            this.btnEdit.Size = new System.Drawing.Size(32, 47);
+            this.btnEdit.Text = "Edit";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // btnDelete

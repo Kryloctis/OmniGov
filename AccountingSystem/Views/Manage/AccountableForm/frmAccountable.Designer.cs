@@ -54,7 +54,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.btnDelete});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.toolStrip.Padding = new System.Windows.Forms.Padding(4);
             this.toolStrip.Size = new System.Drawing.Size(742, 58);
             this.toolStrip.TabIndex = 7;
             this.toolStrip.Text = "toolStrip1";
@@ -65,8 +65,8 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(42, 47);
-            this.btnAdd.Text = "Add...";
+            this.btnAdd.Size = new System.Drawing.Size(33, 47);
+            this.btnAdd.Text = "Add";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -77,8 +77,8 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(40, 47);
-            this.btnEdit.Text = "Edit...";
+            this.btnEdit.Size = new System.Drawing.Size(32, 47);
+            this.btnEdit.Text = "Edit";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
@@ -132,13 +132,13 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgAccform.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgAccform.Location = new System.Drawing.Point(14, 51);
+            this.dgAccform.Location = new System.Drawing.Point(14, 60);
             this.dgAccform.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgAccform.Name = "dgAccform";
             this.dgAccform.RowHeadersWidth = 51;
             this.dgAccform.RowTemplate.Height = 29;
             this.dgAccform.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgAccform.Size = new System.Drawing.Size(714, 256);
+            this.dgAccform.Size = new System.Drawing.Size(714, 247);
             this.dgAccform.TabIndex = 9;
             this.dgAccform.SelectionChanged += new System.EventHandler(this.dgAccform_SelectionChanged);
             // 
@@ -146,10 +146,9 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(474, 16);
+            this.txtsearch.Location = new System.Drawing.Point(474, 33);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.PlaceholderText = "Search...";
             this.txtsearch.Size = new System.Drawing.Size(254, 23);
             this.txtsearch.TabIndex = 10;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);

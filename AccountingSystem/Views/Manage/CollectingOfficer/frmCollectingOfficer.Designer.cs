@@ -34,6 +34,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.dgCollectingOfficer = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -44,7 +45,6 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtsearch = new System.Windows.Forms.TextBox();
-            this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgCollectingOfficer)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -61,7 +61,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnRefresh});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(799, 55);
+            this.toolStrip1.Size = new System.Drawing.Size(699, 50);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -71,8 +71,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(50, 52);
-            this.btnAdd.Text = "Add...";
+            this.btnAdd.Size = new System.Drawing.Size(33, 47);
+            this.btnAdd.Text = "Add";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -83,8 +83,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(48, 52);
-            this.btnEdit.Text = "Edit...";
+            this.btnEdit.Size = new System.Drawing.Size(32, 47);
+            this.btnEdit.Text = "Edit";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
@@ -95,10 +95,21 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(57, 52);
+            this.btnDelete.Size = new System.Drawing.Size(44, 47);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.refresh;
+            this.btnRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(50, 47);
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // dgCollectingOfficer
             // 
@@ -106,12 +117,13 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgCollectingOfficer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgCollectingOfficer.Location = new System.Drawing.Point(10, 58);
+            this.dgCollectingOfficer.Location = new System.Drawing.Point(9, 52);
+            this.dgCollectingOfficer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgCollectingOfficer.Name = "dgCollectingOfficer";
             this.dgCollectingOfficer.RowHeadersWidth = 51;
             this.dgCollectingOfficer.RowTemplate.Height = 29;
             this.dgCollectingOfficer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgCollectingOfficer.Size = new System.Drawing.Size(777, 444);
+            this.dgCollectingOfficer.Size = new System.Drawing.Size(680, 325);
             this.dgCollectingOfficer.TabIndex = 7;
             this.dgCollectingOfficer.SelectionChanged += new System.EventHandler(this.dgCollectingOfficer_SelectionChanged);
             // 
@@ -126,86 +138,75 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.lblCreatedAt,
             this.toolStripStatusLabel3,
             this.lblUpdatedAt});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 509);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 379);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(799, 26);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(699, 22);
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(65, 20);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
             this.toolStripStatusLabel1.Text = "Records:";
             // 
             // lblRecordCount
             // 
             this.lblRecordCount.Name = "lblRecordCount";
-            this.lblRecordCount.Size = new System.Drawing.Size(17, 20);
+            this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
             this.lblRecordCount.Text = "0";
             // 
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(534, 20);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(489, 17);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(81, 20);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(64, 17);
             this.toolStripStatusLabel2.Text = "Created at:";
             // 
             // lblCreatedAt
             // 
             this.lblCreatedAt.Name = "lblCreatedAt";
-            this.lblCreatedAt.Size = new System.Drawing.Size(0, 20);
+            this.lblCreatedAt.Size = new System.Drawing.Size(0, 17);
             // 
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(87, 20);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(68, 17);
             this.toolStripStatusLabel3.Text = "Updated at:";
             // 
             // lblUpdatedAt
             // 
             this.lblUpdatedAt.Name = "lblUpdatedAt";
-            this.lblUpdatedAt.Size = new System.Drawing.Size(0, 20);
+            this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
             // 
             // txtsearch
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(452, 16);
+            this.txtsearch.Location = new System.Drawing.Point(395, 25);
+            this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.PlaceholderText = "Search...";
-            this.txtsearch.Size = new System.Drawing.Size(335, 27);
+            this.txtsearch.Size = new System.Drawing.Size(294, 23);
             this.txtsearch.TabIndex = 11;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.refresh;
-            this.btnRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(62, 52);
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
             // frmCollectingOfficer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(799, 535);
+            this.ClientSize = new System.Drawing.Size(699, 401);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.dgCollectingOfficer);
             this.Controls.Add(this.toolStrip1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(815, 571);
+            this.MinimumSize = new System.Drawing.Size(715, 438);
             this.Name = "frmCollectingOfficer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Collecting Officers";
