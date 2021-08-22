@@ -40,7 +40,7 @@ namespace ACC.Domain.Interfaces
         decimal GetSumAllotments(int budgetAppropriationId, DateTime dateIssued);
 
         //DETAILED
-        decimal GetSumAllotments(string fppId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing);
+        decimal GetSumAllotments(string fppId, string subFPPId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing);
         #endregion
     }
 }

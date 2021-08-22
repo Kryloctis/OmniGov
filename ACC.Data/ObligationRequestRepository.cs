@@ -311,13 +311,14 @@ namespace ACC.Data
             }
         }
         //SUMMARY
-        public decimal GetSumObligations(string fppId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing)
+        public decimal GetSumObligations(string fppId, string subFPPId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing)
         {
             try
             {
                 var parameters = new object[][]
                 {
                     new object[] { "@function_program_project_id", DbType.String, fppId },
+                    new object[] { "@others_fpp_id", DbType.String, subFPPId},
                     new object[] { "@funds_id", DbType.Int32, fundId },
                     new object[] { "@date_requested", DbType.Date, dateIssued.Date },
                     new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId},
@@ -328,10 +329,21 @@ namespace ACC.Data
                 string fppWhereQuery = fppId == "all" ? string.Empty : "function_program_project_id = @function_program_project_id AND";
                 string isContinuingQuery = isContinuing == 0 ? "year = @year" : "year <= @year";
 
+                string subFPPQuery = string.Empty;
+                if (subFPPId == "all")
+                    subFPPQuery = "others_fpp_id IS NOT NULL AND";
+                else if (fppId == "all")
+                    subFPPQuery = string.Empty;
+                else if (string.IsNullOrEmpty(subFPPId))
+                    subFPPQuery = "others_fpp_id IS NULL AND";
+                else
+                    subFPPQuery = "others_fpp_id = @others_fpp_id AND";
+
                 string query = $"SELECT COALESCE(SUM(amount), 0) AS amount " +
                     $"FROM {viewTableName} " +
                     $"WHERE " +
                     $"{fppWhereQuery} " +
+                    $"{subFPPQuery} " +
                     $"funds_id = @funds_id " +
                     $"AND date_requested <= @date_requested " +
                     $"AND allotment_classes_id = @allotment_classes_id " +

@@ -350,14 +350,17 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@fpp_id", DbType.Int32, fppId},
+                    new object[] { "@fpp_id", DbType.String, fppId},
                     new object[] { "@others_fpp_id", DbType.String, subFPPId},
                     new object[] { "@funds_id", DbType.Int32, funds_id},
                     new object[] { "@allotment_class_id", DbType.Int32, allotment_class_id},
                     new object[] { "@date_entry", DbType.Date, date_entry.Date},
                     new object[] { "@year", DbType.Int16, date_entry.Year}
                 };
+
                 string fppWhereQuery = fppId == "all" ? string.Empty : "fpp_id = @fpp_id AND";
+
+
                 string query = $"SELECT " +
                        $"id, " +
                        $"funds_id, " +
@@ -408,6 +411,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
         public DataTable GetHeaderOthersFPP(string fppId, int allotment_classes_id, int funds_id, short year)
         {
             try
@@ -439,13 +443,14 @@ namespace ACC.Data
         }
 
         //SUMMARY
-        public decimal GetSumBudgetAppropriations(string fppId, int fundId, DateTime dateEntry, int allotment_classes_id, byte isContinuing)
+        public decimal GetSumBudgetAppropriations(string fppId, string subFPPId, int fundId, DateTime dateEntry, int allotment_classes_id, byte isContinuing)
         {
             try
             {
                 var parameters = new object[][]
                 {
                     new object[] { "@fpp_id", DbType.String, fppId},
+                    new object[] { "@others_fpp_id", DbType.String, subFPPId },
                     new object[] { "@funds_id", DbType.Int32, fundId},
                     new object[] { "@date_entry", DbType.Date, dateEntry.Date},
                     new object[] { "@allotment_class_id", DbType.Int32, allotment_classes_id },
@@ -456,10 +461,26 @@ namespace ACC.Data
                 string fppWhereQuery = fppId == "all" ? string.Empty : "fpp_id = @fpp_id AND";
                 string isContinuingQuery = isContinuing == 0 ? "year = @year" : "year <= @year";
 
+                string subFPPQuery = string.Empty;
+
+                if (fppId == "all")
+                    subFPPQuery = string.Empty;
+                else
+                {
+                    if (subFPPId == "all")
+                        subFPPQuery = "others_fpp_id IS NOT NULL AND";
+
+                    else if (string.IsNullOrEmpty(subFPPId))
+                        subFPPQuery = "others_fpp_id IS NULL AND";
+                    else
+                        subFPPQuery = "others_fpp_id = @others_fpp_id AND";
+                }
+
                 string query = $"SELECT COALESCE(SUM(amount), 0) AS amount " +
                      $"FROM {viewTableName} " +
                      $"WHERE " +
                      $"{fppWhereQuery} " +
+                     $"{subFPPQuery} " +
                      $"funds_id = @funds_id " +
                      $"AND date_entry <= @date_entry " +
                      $"AND allotment_class_id = @allotment_class_id " +

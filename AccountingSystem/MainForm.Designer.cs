@@ -87,9 +87,9 @@ namespace AccountingSystem
             this.radBtnAccounting = new System.Windows.Forms.RadioButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabBudgetDashboard = new System.Windows.Forms.TabPage();
-            this.ucBudgetDashboard1 = new AccountingSystem.Views.Dashboard.UcBudgetDashboard();
+            this.ucBudgetDashboard1 = new AccountingSystem.Views.Dashboard.ucBudgetDashboard();
             this.tabAccountingDashboard = new System.Windows.Forms.TabPage();
-            this.ucAccountingDashboard1 = new AccountingSystem.Views.Dashboard.UcAccountingDashboard();
+            this.ucAccountingDashboard1 = new AccountingSystem.Views.Dashboard.ucAccountingDashboard();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -606,7 +606,6 @@ namespace AccountingSystem
             this.tabControl1.Controls.Add(this.tabBudgetDashboard);
             this.tabControl1.Controls.Add(this.tabAccountingDashboard);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabControl1.ItemSize = new System.Drawing.Size(0, 1);
             this.tabControl1.Location = new System.Drawing.Point(0, 126);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -632,6 +631,7 @@ namespace AccountingSystem
             // 
             this.ucBudgetDashboard1.AutoScroll = true;
             this.ucBudgetDashboard1.AutoSize = true;
+            this.ucBudgetDashboard1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucBudgetDashboard1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucBudgetDashboard1.Location = new System.Drawing.Point(0, 0);
             this.ucBudgetDashboard1.Margin = new System.Windows.Forms.Padding(0);
@@ -761,14 +761,14 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripButton btnGenerateRCD;
         private System.Windows.Forms.TabControl tabControl1;
         internal System.Windows.Forms.TabPage tabAccountingDashboard;
-        private Views.Dashboard.UcAccountingDashboard ucAccountingDashboard1;
+        private Views.Dashboard.ucAccountingDashboard ucAccountingDashboard1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem menuReceiptsConsolidated;
         private System.Windows.Forms.ToolStripMenuItem menuTrialBalance;
         private System.Windows.Forms.ToolStripMenuItem menuDailyCash;
         private System.Windows.Forms.ToolStripMenuItem financialStatementsToolStripMenuItem;
         internal System.Windows.Forms.TabPage tabBudgetDashboard;
-        private Views.Dashboard.UcBudgetDashboard ucBudgetDashboard1;
+        private Views.Dashboard.ucBudgetDashboard ucBudgetDashboard1;
     }
 }
 

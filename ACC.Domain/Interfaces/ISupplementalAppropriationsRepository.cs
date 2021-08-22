@@ -15,7 +15,7 @@ namespace ACC.Domain.Interfaces
         //DETAILED
         decimal GetSumSupplementalAppropriations(int budgetAppropriationId, DateTime dateEntry);
         //SUMMARY
-        decimal GetSumSupplementalAppropriations(string fppId, int fundId, DateTime dateEntry, int allotmentClassId, Byte isContinuing);
+        decimal GetSumSupplementalAppropriations(string fppId, string subFPPId, int fundId, DateTime dateEntry, int allotmentClassId, Byte isContinuing);
         #endregion
     }
 }
