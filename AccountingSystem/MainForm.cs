@@ -46,7 +46,9 @@ namespace AccountingSystem
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-
+            radBtnAccounting.Visible = false;
+            radBtnBudget.Visible = false;
+            tabControl1.TabPages.Clear();
             userDict = Helper.LoggedInUserData();
             loginForm = _loginForm;
         }
@@ -115,32 +117,8 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Transaction Obligation Request"))
                 btnObligationRequest.Visible = false;
 
-            if (!Helper.HasPermission("Report General Journal"))
-                //menuReportGJ.Visible = false;
-
-                if (!Helper.HasPermission("Report Cash Receipts Journal"))
-                    //menuReportCRJ.Visible = false;
-
-                    if (!Helper.HasPermission("Report Procurement Received Journal"))
-                        //menuReportPRJ.Visible = false;
-
-                        if (!Helper.HasPermission("Report Cash Disbursements Journal"))
-                            //menuReportCDJ.Visible = false;
-
-                            if (!Helper.HasPermission("Report Check Disbursements Journal"))
-                                //menuReportCkDJ.Visible = false;
-
-                                if (!Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
-                                    //menuReportADADJ.Visible = false;
-
-                                    if (!Helper.HasPermission("Report General Journal") && !Helper.HasPermission("Report Cash Receipts Journal") && !Helper.HasPermission("Report Procurement Received Journal") && !Helper.HasPermission("Report Cash Disbursements Journal") && !Helper.HasPermission("Report Check Disbursements Journal") && !Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
-                                        menuJournalsReport.Visible = false;
-
-            if (!Helper.HasPermission("Report General Ledger"))
-                menuLedgersReport.Visible = false;
-
-            if (!Helper.HasPermission("Report Subsidiary Ledger"))
-                menuLedgersReport.Visible = false;
+            if (!Helper.HasPermission("Report General Journal") && !Helper.HasPermission("Report Cash Receipts Journal") && !Helper.HasPermission("Report Procurement Received Journal") && !Helper.HasPermission("Report Cash Disbursements Journal") && !Helper.HasPermission("Report Check Disbursements Journal") && !Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
+                menuJournalsReport.Visible = false;
 
             if (!Helper.HasPermission("Report General Ledger") && !Helper.HasPermission("Report Subsidiary Ledger"))
                 menuLedgersReport.Visible = false;
@@ -205,16 +183,16 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Report Bank Cashbook"))
                 menuBankCashBook.Visible = false;
 
-            if (!Helper.HasPermission("Budget Dashboard"))
+            if (Helper.HasPermission("Budget Dashboard"))
             {
-                radBtnBudget.Visible = false;
-                tabControl1.TabPages.Remove(tabBudgetDashboard);
+                radBtnBudget.Visible = true;
+                tabControl1.TabPages.Add(tabBudgetDashboard);
             }
 
-            if (!Helper.HasPermission("Accounting Dashboard"))
+            if (Helper.HasPermission("Accounting Dashboard"))
             {
-                radBtnAccounting.Visible = false;
-                tabControl1.TabPages.Remove(tabAccountingDashboard);
+                radBtnAccounting.Visible = true;
+                tabControl1.TabPages.Add(tabAccountingDashboard);
             }
 
             if (!Helper.HasPermission("Report Trial Balance"))

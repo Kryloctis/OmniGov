@@ -127,14 +127,12 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F1 && cmbFPP.FindStringExact(cmbFPP.Text) == -1 && !string.IsNullOrEmpty(cmbFPP.Text))
+            if (e.KeyCode == Keys.F1 && !string.IsNullOrEmpty(cmbFPP.Text) && cmbFPP.Focused)
             {
                 LoadFPP();
                 cmbFPP.DroppedDown = true;
             }
         }
-
-
 
         //ACCOUNT COMBOBOX
         private DataTable DatatableAccounts()
@@ -199,6 +197,14 @@ namespace AccountingSystem.Views.Transactions.JEV
             LoadSubsidiary();
         }
 
+        private void cmbAccount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1 && !string.IsNullOrEmpty(cmbAccount.Text) && cmbAccount.Focused)
+            {
+                LoadAccounts();
+                cmbAccount.DroppedDown = true;
+            }
+        }
 
         //VALIDATIONS
 

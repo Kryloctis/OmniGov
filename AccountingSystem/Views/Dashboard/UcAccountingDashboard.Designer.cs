@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Dashboard
 {
-    partial class UcAccountingDashboard
+    partial class ucAccountingDashboard
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Dashboard
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UcAccountingDashboard));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucAccountingDashboard));
             this.btnRefreshCounter = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();

@@ -5,11 +5,11 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Dashboard
 {
-    public partial class UcAccountingDashboard : UserControl
+    public partial class ucAccountingDashboard : UserControl
     {
         internal Dictionary<string, string> userDict;
 
-        public UcAccountingDashboard()
+        public ucAccountingDashboard()
         {
             InitializeComponent();
         }

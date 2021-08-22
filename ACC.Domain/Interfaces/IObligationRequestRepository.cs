@@ -24,7 +24,7 @@ namespace ACC.Domain.Interfaces
 
         decimal GetSumObligationsByAppropriationId(int appropriationId, DateTime dateRequested);
 
-        decimal GetSumObligations(string fppId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing);
+        decimal GetSumObligations(string fppId, string subFPPId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing);
 
         DataTable GetViewRecordsById(int Id);
 

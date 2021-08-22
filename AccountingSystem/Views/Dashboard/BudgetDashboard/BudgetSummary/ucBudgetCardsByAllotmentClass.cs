@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Dashboard.BudgetDashboard
 {
-    public partial class UcBudgetCardsByAllotmentClass : UserControl
+    public partial class ucBudgetCardsByAllotmentClass : UserControl
     {
-        public UcBudgetCardsByAllotmentClass()
+        public ucBudgetCardsByAllotmentClass()
         {
             InitializeComponent();
         }

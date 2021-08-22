@@ -401,7 +401,6 @@ namespace AccountingSystem
         {
             try
             {
-
                 return Factory.UsersRepository().HasPermission(UserId, permissionName);
             }
             catch (Exception ex)

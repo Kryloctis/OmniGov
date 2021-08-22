@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Dashboard.BudgetDashboard
 {
-    partial class UcBudgetCardsByAllotmentClass
+    partial class ucBudgetCardsByAllotmentClass
     {
         /// <summary> 
         /// Required designer variable.
@@ -771,14 +771,14 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard
             this.label4.Text = "MOOE";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // UcBudgetCardsByAllotmentClass
+            // ucBudgetCardsByAllotmentClass
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(974, 139);
-            this.Name = "UcBudgetCardsByAllotmentClass";
+            this.Name = "ucBudgetCardsByAllotmentClass";
             this.Size = new System.Drawing.Size(974, 177);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);

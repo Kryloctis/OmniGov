@@ -11,6 +11,15 @@ namespace AccountingSystem.Views.Reports.Ledgers
             Helper.LoadFormIcon(this);
         }
 
+        private void ValidatedPermissions()
+        {
+            if (!Helper.HasPermission("Report General Ledger"))
+                radioGeneralLedger.Visible = false;
+
+            if (!Helper.HasPermission("Report Subsidiary Ledger"))
+                radioSubsidiaryLedger.Visible = false;
+        }
+
         private void ChangePanelDisplayForm(string radioSelected)
         {
 
@@ -54,6 +63,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void frmLedger_Load(object sender, EventArgs e)
         {
+            ValidatedPermissions();
             ChangePanelDisplayForm(radioGeneralLedger.Tag.ToString());
         }
     }
