@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
+using AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -51,10 +52,28 @@ namespace AccountingSystem.Views.Transactions.JEV
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void ShowSubsidiaryLedger()
+        {
+            try
+            {
+                if (cmbAccount.SelectedIndex == -1)
+                {
+                    Helper.MessageBoxError("Select an account.");
+                    return;
+                }
+
+                ushort accountId = Convert.ToUInt16(cmbAccount.SelectedValue);
+                _ = new frmSubsidiary(null, fundId, accountId, 2021).ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
         private void btnSubsidiaryLedger_Click(object sender, EventArgs e)
         {
-            //ushort accountId = Convert.ToUInt16(cmbAccount.SelectedValue);
-            //_ = new frmSubsidiary(fundId, accountId, 2021).ShowDialog();
+            ShowSubsidiaryLedger();
         }
 
         private void ucJEVAccount_Load(object sender, EventArgs e)
