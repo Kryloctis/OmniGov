@@ -44,7 +44,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             Cursor.Current = Cursors.Default;
         }
 
-        private void LoadBudgetDashboardContents()
+        internal void LoadBudgetDashboardContents()
         {
             try
             {
@@ -74,7 +74,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             LoadContinuingAmounts();
         }
 
-        private void LoadBudgetDashboardComboboxes()
+        internal void LoadBudgetDashboardComboboxes()
         {
             LoadFPP(false);
             LoadSubFPP();
@@ -410,8 +410,6 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             if (!DesignMode)
             {
                 cmbxFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
-                LoadBudgetDashboardComboboxes();
-                LoadBudgetDashboardContents();
             }
         }
 
