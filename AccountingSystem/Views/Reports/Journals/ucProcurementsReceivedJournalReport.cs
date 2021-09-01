@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Reports.Journals
                 if (Convert.ToBoolean(item["is_debit"]))
                 {
                     row["account_code_debit"] = item["account_code"];
-                    row["debit"] = item["amount"];
+                    row["debit"] = item["amount"];  
                 }
                 else
                 {
