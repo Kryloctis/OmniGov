@@ -36,7 +36,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lnkCancelled = new System.Windows.Forms.LinkLabel();
             this.lblCancelledJEVCounter = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lnkDisapproved = new System.Windows.Forms.LinkLabel();
+            this.linkDisapproved = new System.Windows.Forms.LinkLabel();
             this.lblDisapprovedJEVCounter = new System.Windows.Forms.Label();
             this.pnlPendingJEV = new System.Windows.Forms.Panel();
             this.lnkPending = new System.Windows.Forms.LinkLabel();
@@ -116,6 +116,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lnkCancelled.TabIndex = 15;
             this.lnkCancelled.TabStop = true;
             this.lnkCancelled.Text = "Cancelled JEVs";
+            this.lnkCancelled.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCancelled_LinkClicked);
             // 
             // lblCancelledJEVCounter
             // 
@@ -133,7 +134,7 @@ namespace AccountingSystem.Views.Dashboard
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.lnkDisapproved);
+            this.panel1.Controls.Add(this.linkDisapproved);
             this.panel1.Controls.Add(this.lblDisapprovedJEVCounter);
             this.panel1.Location = new System.Drawing.Point(471, 3);
             this.panel1.MaximumSize = new System.Drawing.Size(150, 113);
@@ -142,20 +143,21 @@ namespace AccountingSystem.Views.Dashboard
             this.panel1.Size = new System.Drawing.Size(150, 113);
             this.panel1.TabIndex = 22;
             // 
-            // lnkDisapproved
+            // linkDisapproved
             // 
-            this.lnkDisapproved.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lnkDisapproved.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lnkDisapproved.AutoSize = true;
-            this.lnkDisapproved.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lnkDisapproved.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkDisapproved.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkDisapproved.Location = new System.Drawing.Point(23, 75);
-            this.lnkDisapproved.Name = "lnkDisapproved";
-            this.lnkDisapproved.Size = new System.Drawing.Size(98, 15);
-            this.lnkDisapproved.TabIndex = 15;
-            this.lnkDisapproved.TabStop = true;
-            this.lnkDisapproved.Text = "Disapproved JEVs";
+            this.linkDisapproved.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
+            this.linkDisapproved.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.linkDisapproved.AutoSize = true;
+            this.linkDisapproved.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.linkDisapproved.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.linkDisapproved.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.linkDisapproved.Location = new System.Drawing.Point(39, 75);
+            this.linkDisapproved.Name = "linkDisapproved";
+            this.linkDisapproved.Size = new System.Drawing.Size(73, 15);
+            this.linkDisapproved.TabIndex = 16;
+            this.linkDisapproved.TabStop = true;
+            this.linkDisapproved.Text = "Disapproved";
+            this.linkDisapproved.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkDisapproved_LinkClicked);
             // 
             // lblDisapprovedJEVCounter
             // 
@@ -196,6 +198,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lnkPending.TabIndex = 15;
             this.lnkPending.TabStop = true;
             this.lnkPending.Text = "Pending JEVs";
+            this.lnkPending.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkPending_LinkClicked);
             // 
             // lblPendingJEVCounter
             // 
@@ -236,6 +239,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lnkApproved.TabIndex = 14;
             this.lnkApproved.TabStop = true;
             this.lnkApproved.Text = "Approved JEVs";
+            this.lnkApproved.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkApproved_LinkClicked);
             // 
             // lblApprovedJEVCounter
             // 
@@ -291,7 +295,7 @@ namespace AccountingSystem.Views.Dashboard
             this.lblJEVCounter.Text = "0";
             this.lblJEVCounter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // UcAccountingDashboard
+            // ucAccountingDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -299,7 +303,7 @@ namespace AccountingSystem.Views.Dashboard
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.btnRefreshCounter);
             this.Margin = new System.Windows.Forms.Padding(0);
-            this.Name = "UcAccountingDashboard";
+            this.Name = "ucAccountingDashboard";
             this.Size = new System.Drawing.Size(787, 147);
             this.Load += new System.EventHandler(this.UcAccountingDashboard_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -336,6 +340,6 @@ namespace AccountingSystem.Views.Dashboard
         private System.Windows.Forms.Panel panel1;
         internal System.Windows.Forms.Label lblDisapprovedJEVCounter;
         internal System.Windows.Forms.LinkLabel lnkCancelled;
-        internal System.Windows.Forms.LinkLabel lnkDisapproved;
+        private System.Windows.Forms.LinkLabel linkDisapproved;
     }
 }
