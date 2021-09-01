@@ -43,17 +43,6 @@ namespace AccountingSystem.Views.Dashboard
             LoadJEVCounter();
         }
 
-        private void lnkJEV_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var frmJEV = new frmJEV();
-            frmJEV.Show();
-            var frmJEVSearch = new frmJEVSearch(frmJEV);
-
-            frmJEVSearch.cmbxJevStatus.SelectedIndex = 0;
-            frmJEVSearch.LoadJEVList();
-            frmJEVSearch.ShowDialog();
-        }
-
 
         private void lnkPending_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {

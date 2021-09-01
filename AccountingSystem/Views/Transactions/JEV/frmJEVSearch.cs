@@ -135,11 +135,12 @@ namespace AccountingSystem.Views.Transactions.JEV
                     LoadGeneralJournalDataIfExist(uc, jevId);
 
                     uc.jevId = jevId;
+                    uc.fundId = Convert.ToByte(jevDict["funds_id"]);
                     uc.txtExplanation.Text = jevDict["explanation"];
                     uc.dtpDateEntry.Value = Convert.ToDateTime(jevDict["date_entry"]);
                     uc.txtRefNo.Text = jevDict["ref_no"];
                     uc.txtPayee.Text = jevDict["payee"];
-                    uc.fundId = Convert.ToByte(jevDict["funds_id"]);
+
                     uc.journalId = Convert.ToByte(jevDict["journals_id"]);
                     uc.oldJournalId = Convert.ToByte(jevDict["journals_id"]);
                     uc.isApproved = Convert.ToByte(jevDict["is_approved"]);
@@ -153,11 +154,13 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.dgAccounts.Rows.Clear();
                     LoadJevAccounts();
                     uc.SumDebitCredit();
-                    uc.ClearErrors();
 
+                    uc.ClearErrors();
                     frmJEV.CheckJevStatus(jevId);
                     frmJEV.btnSave.Text = "Update";
+
                     Close();
+
                     return;
                 }
 

@@ -158,6 +158,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void GenerateJEVNumber()
         {
             var fund = Factory.FundsRepository().GetRecordByID(fundId);
+
             string fundCode = fund["fund_code"];
 
             string year = dtpDateEntry.Value.Year.ToString();
@@ -426,23 +427,32 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         internal void SumDebitCredit()
         {
-            decimal totalDebit = 0;
-            decimal totalCredit = 0;
-
-            if (dgAccounts.Rows.Count > 0)
+            try
             {
-                foreach (DataGridViewRow item in dgAccounts.Rows)
+                decimal totalDebit = 0;
+                decimal totalCredit = 0;
+
+                if (dgAccounts.Rows.Count > 0)
                 {
-                    decimal debitValue = string.IsNullOrWhiteSpace(item.Cells["Debit"].Value.ToString()) ? 0 : Convert.ToDecimal(item.Cells["Debit"].Value);
-                    decimal creditValue = string.IsNullOrWhiteSpace(item.Cells["Credit"].Value.ToString()) ? 0 : Convert.ToDecimal(item.Cells["Credit"].Value);
+                    foreach (DataGridViewRow item in dgAccounts.Rows)
+                    {
+                       decimal debitValue = string.IsNullOrWhiteSpace(item.Cells["Debit"].Value.ToString()) ? 0 : Convert.ToDecimal(item.Cells["Debit"].Value);
 
-                    totalDebit += Convert.ToDecimal(debitValue);
-                    totalCredit += Convert.ToDecimal(creditValue);
+                        decimal creditValue = string.IsNullOrWhiteSpace(item.Cells["Credit"].Value.ToString()) ? 0 : Convert.ToDecimal(item.Cells["Credit"].Value);
+
+                        totalDebit += Convert.ToDecimal(debitValue);
+                        totalCredit += Convert.ToDecimal(creditValue);
+                    }
+
+                    txtDebitTotal.Text = totalDebit.ToString("N2");
+                    txtCreditTotal.Text = totalCredit.ToString("N2");
                 }
-
-                txtDebitTotal.Text = totalDebit.ToString("N2");
-                txtCreditTotal.Text = totalCredit.ToString("N2");
             }
+            catch (Exception)
+            {
+                throw;
+            } 
+
         }
 
         private void txtPayee_Validating(object sender, CancelEventArgs e)

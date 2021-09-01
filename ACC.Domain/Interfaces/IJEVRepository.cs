@@ -48,8 +48,9 @@ namespace ACC.Domain.Interfaces
         int JevCounter(byte journalId);
 
         int TotalApproveJEV();
-
         int TotalPendingJEV();
+        int TotalDisapprovedJEV();
+        int TotalCancelledJEV();
 
         bool SetJEVStatus(int jevId, byte jevStatus);
 

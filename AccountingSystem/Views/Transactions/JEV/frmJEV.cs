@@ -33,6 +33,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                 btnPrint.Visible = false;
                 toolStripSeparator3.Visible = false;
             }
+
+            uc.SumDebitCredit();
         }
 
         private static ushort? ValidateNullSubsidiary(object subsidiaryCellValue)
@@ -524,7 +526,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             uc.ResetForm();
         }
 
-        private void BtnSearch_Click(object sender, EventArgs e)
+        internal void BtnSearch_Click(object sender, EventArgs e)
         {
             var frmJevSearch = new frmJEVSearch(this);
             frmJevSearch.cmbxJevStatus.SelectedIndex = 0;

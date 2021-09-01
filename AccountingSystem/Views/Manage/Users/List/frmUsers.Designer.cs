@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.txtSearch = new System.Windows.Forms.ToolStripTextBox();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgUsers)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -55,7 +55,8 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAdd,
             this.btnEdit,
-            this.btnDelete});
+            this.btnDelete,
+            this.txtSearch});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(911, 50);
@@ -101,13 +102,13 @@ namespace AccountingSystem.Views.Manage.Users.List
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgUsers.Location = new System.Drawing.Point(10, 79);
+            this.dgUsers.Location = new System.Drawing.Point(10, 52);
             this.dgUsers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgUsers.Name = "dgUsers";
             this.dgUsers.RowHeadersWidth = 51;
             this.dgUsers.RowTemplate.Height = 29;
             this.dgUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgUsers.Size = new System.Drawing.Size(887, 349);
+            this.dgUsers.Size = new System.Drawing.Size(887, 376);
             this.dgUsers.TabIndex = 6;
             this.dgUsers.SelectionChanged += new System.EventHandler(this.dgUsers_SelectionChanged);
             // 
@@ -171,13 +172,11 @@ namespace AccountingSystem.Views.Manage.Users.List
             // 
             // txtSearch
             // 
-            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSearch.Location = new System.Drawing.Point(12, 52);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(1, 0, 13, 0);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.PlaceholderText = "Search";
-            this.txtSearch.Size = new System.Drawing.Size(300, 23);
-            this.txtSearch.TabIndex = 99;
+            this.txtSearch.Size = new System.Drawing.Size(300, 50);
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // frmUsers
@@ -186,7 +185,6 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(911, 462);
-            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.dgUsers);
             this.Controls.Add(this.statusStrip1);
@@ -225,6 +223,6 @@ namespace AccountingSystem.Views.Manage.Users.List
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
-        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.ToolStripTextBox txtSearch;
     }
 }

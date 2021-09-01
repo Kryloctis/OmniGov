@@ -758,6 +758,33 @@ namespace ACC.Data
                 throw;
             }
         }
+        public int TotalDisapprovedJEV()
+        {
+            try
+            {
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_disapproved=1";
+
+                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int TotalCancelledJEV()
+        {
+            try
+            {
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_cancelled=1";
+
+                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public DataTable FilterRecords(byte jevStatus, string searchTxt, short month, short year)
         {
@@ -943,5 +970,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
+
     }
 }
