@@ -698,5 +698,6 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             }
         }
+
     }
 }

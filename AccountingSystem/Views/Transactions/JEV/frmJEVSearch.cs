@@ -123,7 +123,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                     frmJEV.btnDelete.Enabled = true;
                     frmJEV.btnPrint.Enabled = true;
                     frmJEV.btnApprove.Enabled = true;
-
                     frmJEV.ucjev1.txtJEVNo.Text = jevNo;
 
                     Dictionary<string, string> jevDict = Factory.JEVRepository().GetRecordByJEV(jevNo);
@@ -147,6 +146,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.isDisapproved = Convert.ToByte(jevDict["is_disapproved"]);
                     uc.isCancelled = Convert.ToByte(jevDict["is_cancelled"]);
                     uc.jevNo = jevDict["jev_no"];
+
                     CheckedFund(jevDict["fund_name"]);
                     CheckedJournal(jevDict["journal_name"]);
 
