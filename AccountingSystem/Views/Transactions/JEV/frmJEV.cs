@@ -34,7 +34,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 toolStripSeparator3.Visible = false;
             }
 
-            uc.SumDebitCredit();
         }
 
         private static ushort? ValidateNullSubsidiary(object subsidiaryCellValue)

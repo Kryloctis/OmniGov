@@ -151,16 +151,18 @@ namespace AccountingSystem.Views.Transactions.JEV
                     CheckedFund(jevDict["fund_name"]);
                     CheckedJournal(jevDict["journal_name"]);
 
+                    uc.ClearErrors();
+                    frmJEV.CheckJevStatus(jevId);
+                    frmJEV.btnSave.Text = "Update";
+                    frmJEV.Show();
+                    frmJEV.TopMost = true;
+
                     uc.dgAccounts.Rows.Clear();
                     LoadJevAccounts();
                     uc.SumDebitCredit();
 
-                    uc.ClearErrors();
-                    frmJEV.CheckJevStatus(jevId);
-                    frmJEV.btnSave.Text = "Update";
 
                     Close();
-
                     return;
                 }
 
