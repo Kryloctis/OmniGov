@@ -154,8 +154,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.ClearErrors();
                     frmJEV.CheckJevStatus(jevId);
                     frmJEV.btnSave.Text = "Update";
-                    frmJEV.Show();
-                    frmJEV.TopMost = true;
 
                     uc.dgAccounts.Rows.Clear();
                     LoadJevAccounts();

@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using Microsoft.Reporting.WinForms;
 using System.Data;
 using System.Collections.Generic;
+using AccountingSystem.Views.Transactions.JEV;
 
 namespace AccountingSystem.Views.Reports.JEV
 {
@@ -30,6 +31,7 @@ namespace AccountingSystem.Views.Reports.JEV
 
         public frmJEVReport(int jevId, string jevNo, byte journalId)
         {
+
             InitializeComponent();
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
@@ -168,6 +170,7 @@ namespace AccountingSystem.Views.Reports.JEV
         private DataTable DataTableJournalEntryVoucherAccount()
         {
             var dtJEVAccounts = new dsLFS.dtJournalVoucherDataTable();
+
             var dtJEVAccountsFromDB = Factory.JEVAccountsRepository().GetViewRecordsByJevId(_jevId);
 
             byte i = 0;
@@ -202,21 +205,20 @@ namespace AccountingSystem.Views.Reports.JEV
             {
                 leftPanel.Visible = false;
                 panel1.Dock = DockStyle.Fill;
-            }
-            
-            foreach (var item in Helper.MonthsDatasource().Values)
-                cbMonths.Items.Add(item);
 
-            LoadJEVReport(textBox1.Text.Trim(), (sbyte)DateTime.Now.Month);
-
-            if (_jevId != 0)
-            {
                 LoadReport(reportViewer.LocalReport);
                 reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer.ZoomMode = ZoomMode.Percent;
                 reportViewer.ZoomPercent = 100;
                 reportViewer.RefreshReport();
             }
+            foreach (var item in Helper.MonthsDatasource().Values)
+                cbMonths.Items.Add(item);
+            cbMonths.SelectedIndex = DateTime.Now.Month-1;
+
+
+            LoadJEVReport(textBox1.Text.Trim(), (sbyte)DateTime.Now.Month);
+
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
@@ -226,14 +228,14 @@ namespace AccountingSystem.Views.Reports.JEV
 
         private void dgJEV_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgJEV.SelectedCells.Count > 0)
+            if (dgJEV.SelectedCells.Count != 0 && leftPanel.Visible)
             {
                 int selectedIndex = dgJEV.SelectedCells[0].RowIndex;
 
                 DataGridViewRow selectedRow = dgJEV.Rows[selectedIndex];
 
                 _jevNo = Convert.ToString(selectedRow.Cells["jev_no"].Value);
-                _jevId = Convert.ToInt32(selectedRow.Cells["id"].Value  );
+                _jevId = Convert.ToInt32(selectedRow.Cells["id"].Value);
                 _journalId = Convert.ToByte(selectedRow.Cells["journals_id"].Value);
 
                 LoadReport(reportViewer.LocalReport);
@@ -254,9 +256,5 @@ namespace AccountingSystem.Views.Reports.JEV
             HelperLoadRecords.JEVREportDataGridView(dtJEV, dgJEV);
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }
