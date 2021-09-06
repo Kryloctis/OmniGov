@@ -8,7 +8,9 @@ namespace AccountingSystem.Views.Transactions.JEV
 {
     public partial class frmJEVSearch : Form
     {
+
         private readonly frmJEV frmJEV;
+
         public frmJEVSearch(frmJEV frmJEV)
         {
             InitializeComponent();
@@ -261,6 +263,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             LoadJEVList();
         }
+
 
         internal void LoadJEVList()
         {

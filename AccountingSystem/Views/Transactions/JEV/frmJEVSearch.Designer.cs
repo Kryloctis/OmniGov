@@ -206,13 +206,13 @@ namespace AccountingSystem.Views.Transactions.JEV
         #endregion
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.DataGridView dgJEV;
         private System.Windows.Forms.Panel panel1;
         internal System.Windows.Forms.NumericUpDown nudYear;
-        private System.Windows.Forms.ComboBox cbMonth;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
         internal System.Windows.Forms.ComboBox cmbxJevStatus;
+        internal System.Windows.Forms.ComboBox cbMonth;
+        internal System.Windows.Forms.Button btnOK;
     }
 }

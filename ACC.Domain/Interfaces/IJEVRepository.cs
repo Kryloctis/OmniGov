@@ -46,11 +46,11 @@ namespace ACC.Domain.Interfaces
         bool JevNumberExist(string jevNo, int jevId);
 
         int JevCounter(byte journalId);
-
-        int TotalApproveJEV();
-        int TotalPendingJEV();
-        int TotalDisapprovedJEV();
-        int TotalCancelledJEV();
+        int TotalJEV(short month, short year);
+        int TotalApproveJEV(short month, short year);
+        int TotalPendingJEV(short month, short year);
+        int TotalDisapprovedJEV(short month, short year);
+        int TotalCancelledJEV(short month, short year);
 
         bool SetJEVStatus(int jevId, byte jevStatus);
 

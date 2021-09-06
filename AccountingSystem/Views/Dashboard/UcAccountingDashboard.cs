@@ -12,6 +12,10 @@ namespace AccountingSystem.Views.Dashboard
         public ucAccountingDashboard()
         {
             InitializeComponent();
+
+            foreach (var item in Helper.MonthsDatasource().Values)
+                cbMonth.Items.Add(item);
+            cbMonth.SelectedIndex = DateTime.Now.Month - 1;
         }
 
         private void UcAccountingDashboard_Load(object sender, EventArgs e)
@@ -25,11 +29,14 @@ namespace AccountingSystem.Views.Dashboard
 
         private void LoadJEVCounter()
         {
-            var jevCount = Factory.JEVRepository().CountRecords();
-            var approvedJEVCount = Factory.JEVRepository().TotalApproveJEV();
-            var pendingJEVCount = Factory.JEVRepository().TotalPendingJEV();
-            var disapprovedJEVCOunt = Factory.JEVRepository().TotalDisapprovedJEV();
-            var cancelledJEVCount = Factory.JEVRepository().TotalCancelledJEV();
+            short month = Convert.ToInt16(cbMonth.SelectedIndex + 1);
+            short year = Convert.ToInt16(nudYear.Value);
+
+            var jevCount = Factory.JEVRepository().TotalJEV(month, year);
+            var approvedJEVCount = Factory.JEVRepository().TotalApproveJEV(month, year);
+            var pendingJEVCount = Factory.JEVRepository().TotalPendingJEV(month, year);
+            var disapprovedJEVCOunt = Factory.JEVRepository().TotalDisapprovedJEV(month, year);
+            var cancelledJEVCount = Factory.JEVRepository().TotalCancelledJEV(month, year);
 
             lblJEVCounter.Text = jevCount.ToString();
             lblApprovedJEVCounter.Text = approvedJEVCount.ToString();
@@ -43,45 +50,57 @@ namespace AccountingSystem.Views.Dashboard
             LoadJEVCounter();
         }
 
-
         private void lnkPending_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var frmJEVSearch = new frmJEVSearch(new frmJEV());
 
             frmJEVSearch.cmbxJevStatus.SelectedIndex = 0;
             frmJEVSearch.cmbxJevStatus.Enabled = false;
-            frmJEVSearch.LoadJEVList();
+
+            frmJEVSearch.cbMonth.SelectedIndex = cbMonth.SelectedIndex;
+            frmJEVSearch.nudYear.Value = nudYear.Value;
+            frmJEVSearch.ShowDialog();
+        }
+
+        private void OpenJEVTransactionForm(byte jevStatusIndex)
+        {
+
+            var frmJEVSearch = new frmJEVSearch(new frmJEV());
+
+            frmJEVSearch.cmbxJevStatus.SelectedIndex = jevStatusIndex;
+            frmJEVSearch.cmbxJevStatus.Enabled = false;
+            frmJEVSearch.cbMonth.Enabled = false;
+            frmJEVSearch.nudYear.Enabled = false;
+            frmJEVSearch.btnOK.Text = "Select";
+            frmJEVSearch.Text = "Select JEV";
+            frmJEVSearch.cbMonth.SelectedIndex = cbMonth.SelectedIndex;
+            frmJEVSearch.nudYear.Value = nudYear.Value;
             frmJEVSearch.ShowDialog();
         }
 
         private void lnkApproved_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var frmJEVSearch = new frmJEVSearch(new frmJEV());
-
-            frmJEVSearch.cmbxJevStatus.SelectedIndex = 1;
-            frmJEVSearch.cmbxJevStatus.Enabled = false;
-            frmJEVSearch.LoadJEVList();
-            frmJEVSearch.ShowDialog();
+            OpenJEVTransactionForm(1);
         }
 
         private void linkDisapproved_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var frmJEVSearch = new frmJEVSearch(new frmJEV());
-
-            frmJEVSearch.cmbxJevStatus.SelectedIndex = 2;
-            frmJEVSearch.cmbxJevStatus.Enabled = false;
-            frmJEVSearch.LoadJEVList();
-            frmJEVSearch.ShowDialog();
+            OpenJEVTransactionForm(2);
         }
 
         private void lnkCancelled_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var frmJEVSearch = new frmJEVSearch(new frmJEV());
-
-            frmJEVSearch.cmbxJevStatus.SelectedIndex = 3;
-            frmJEVSearch.cmbxJevStatus.Enabled = false;
-            frmJEVSearch.LoadJEVList();
-            frmJEVSearch.ShowDialog();
+            OpenJEVTransactionForm(3);
         }
+
+        private void cbMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadJEVCounter();
+        }
+        private void nudYear_ValueChanged(object sender, EventArgs e)
+        {
+            LoadJEVCounter();
+        }
+
     }
 }

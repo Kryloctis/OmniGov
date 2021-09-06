@@ -47,12 +47,17 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlJEV = new System.Windows.Forms.Panel();
             this.lnkJEV = new System.Windows.Forms.LinkLabel();
             this.lblJEVCounter = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.cbMonth = new System.Windows.Forms.ComboBox();
+            this.nudYear = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlPendingJEV.SuspendLayout();
             this.pnlApprovedJEV.SuspendLayout();
             this.pnlJEV.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
             this.SuspendLayout();
             // 
             // btnRefreshCounter
@@ -60,7 +65,7 @@ namespace AccountingSystem.Views.Dashboard
             this.btnRefreshCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnRefreshCounter.Image = ((System.Drawing.Image)(resources.GetObject("btnRefreshCounter.Image")));
             this.btnRefreshCounter.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRefreshCounter.Location = new System.Drawing.Point(0, 0);
+            this.btnRefreshCounter.Location = new System.Drawing.Point(278, 3);
             this.btnRefreshCounter.Name = "btnRefreshCounter";
             this.btnRefreshCounter.Size = new System.Drawing.Size(135, 23);
             this.btnRefreshCounter.TabIndex = 13;
@@ -82,7 +87,7 @@ namespace AccountingSystem.Views.Dashboard
             this.tableLayoutPanel1.Controls.Add(this.pnlPendingJEV, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.pnlApprovedJEV, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.pnlJEV, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 26);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 35);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -295,16 +300,61 @@ namespace AccountingSystem.Views.Dashboard
             this.lblJEVCounter.Text = "0";
             this.lblJEVCounter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.cbMonth);
+            this.flowLayoutPanel1.Controls.Add(this.nudYear);
+            this.flowLayoutPanel1.Controls.Add(this.btnRefreshCounter);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(778, 29);
+            this.flowLayoutPanel1.TabIndex = 15;
+            // 
+            // cbMonth
+            // 
+            this.cbMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMonth.FormattingEnabled = true;
+            this.cbMonth.Location = new System.Drawing.Point(3, 3);
+            this.cbMonth.Name = "cbMonth";
+            this.cbMonth.Size = new System.Drawing.Size(154, 23);
+            this.cbMonth.TabIndex = 28;
+            this.cbMonth.SelectedIndexChanged += new System.EventHandler(this.cbMonth_SelectedIndexChanged);
+            // 
+            // nudYear
+            // 
+            this.nudYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudYear.Location = new System.Drawing.Point(163, 3);
+            this.nudYear.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.nudYear.Minimum = new decimal(new int[] {
+            1987,
+            0,
+            0,
+            0});
+            this.nudYear.Name = "nudYear";
+            this.nudYear.ReadOnly = true;
+            this.nudYear.Size = new System.Drawing.Size(109, 23);
+            this.nudYear.TabIndex = 29;
+            this.nudYear.Value = new decimal(new int[] {
+            2021,
+            0,
+            0,
+            0});
+            this.nudYear.ValueChanged += new System.EventHandler(this.nudYear_ValueChanged);
+            // 
             // ucAccountingDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.btnRefreshCounter);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "ucAccountingDashboard";
-            this.Size = new System.Drawing.Size(787, 147);
+            this.Size = new System.Drawing.Size(784, 156);
             this.Load += new System.EventHandler(this.UcAccountingDashboard_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -317,6 +367,8 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlApprovedJEV.PerformLayout();
             this.pnlJEV.ResumeLayout(false);
             this.pnlJEV.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -341,5 +393,8 @@ namespace AccountingSystem.Views.Dashboard
         internal System.Windows.Forms.Label lblDisapprovedJEVCounter;
         internal System.Windows.Forms.LinkLabel lnkCancelled;
         private System.Windows.Forms.LinkLabel linkDisapproved;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        internal System.Windows.Forms.NumericUpDown nudYear;
+        private System.Windows.Forms.ComboBox cbMonth;
     }
 }
