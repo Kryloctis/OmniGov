@@ -4,12 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using AccountingSystem.Views.Transactions;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
     public partial class frmJEV : Form
     {
         ucJEV uc;
+        internal bool loadFromDashBoard = false;
 
         public frmJEV()
         {
@@ -34,6 +36,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                 toolStripSeparator3.Visible = false;
             }
 
+            if (loadFromDashBoard)
+                uc.SumDebitCredit();
         }
 
         private static ushort? ValidateNullSubsidiary(object subsidiaryCellValue)
@@ -699,6 +703,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             }
         }
+
 
     }
 }

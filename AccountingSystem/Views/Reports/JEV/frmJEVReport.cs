@@ -159,7 +159,6 @@ namespace AccountingSystem.Views.Reports.JEV
                 report.DataSources.Add(new ReportDataSource("dtJournalVoucher", DataTableJournalEntryVoucherAccount()));
                 report.SetParameters(parameters);
 
-
             }
             catch (Exception ex)
             {

@@ -436,7 +436,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 {
                     foreach (DataGridViewRow item in dgAccounts.Rows)
                     {
-                       decimal debitValue = string.IsNullOrWhiteSpace(item.Cells["Debit"].Value.ToString()) ? 0 : Convert.ToDecimal(item.Cells["Debit"].Value);
+                        decimal debitValue = string.IsNullOrWhiteSpace(item.Cells["Debit"].Value.ToString()) ? 0 : Convert.ToDecimal(item.Cells["Debit"].Value);
 
                         decimal creditValue = string.IsNullOrWhiteSpace(item.Cells["Credit"].Value.ToString()) ? 0 : Convert.ToDecimal(item.Cells["Credit"].Value);
 
@@ -447,10 +447,11 @@ namespace AccountingSystem.Views.Transactions.JEV
                     txtDebitTotal.Text = totalDebit.ToString("N2");
                     txtCreditTotal.Text = totalCredit.ToString("N2");
                 }
+
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);;
             } 
 
         }

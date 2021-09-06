@@ -80,6 +80,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                         amount.ToString("N2"),
                         "",
                     };
+
+                    uc.dgAccounts.Rows.Add(accountRow);
                 }
                 else
                 {
@@ -99,9 +101,10 @@ namespace AccountingSystem.Views.Transactions.JEV
                         "",
                         amount.ToString("N2")
                     };
+
+                    uc.dgAccounts.Rows.Add(accountRow);
                 }
 
-                uc.dgAccounts.Rows.Add(accountRow);
             }
         }
 
@@ -157,10 +160,19 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                     uc.dgAccounts.Rows.Clear();
                     LoadJevAccounts();
-                    uc.SumDebitCredit();
+
+                    if (!frmJEV.Visible)
+                    {
+                        frmJEV.loadFromDashBoard = true;
+                        frmJEV.ShowDialog();
+                    }
+                    else
+                    {
+                        uc.SumDebitCredit();
+                        Close();
+                    }
 
 
-                    Close();
                     return;
                 }
 
