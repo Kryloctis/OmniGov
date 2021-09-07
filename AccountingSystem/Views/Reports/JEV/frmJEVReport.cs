@@ -198,7 +198,7 @@ namespace AccountingSystem.Views.Reports.JEV
         private void frmJEVReport_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgJEV);
+            Helper.DatagridFullRowSelectStyle(dgJEV, true);
 
             if (_jevId != 0)
             {
@@ -211,18 +211,50 @@ namespace AccountingSystem.Views.Reports.JEV
                 reportViewer.ZoomPercent = 100;
                 reportViewer.RefreshReport();
             }
+
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+
+            LoadJournals();
+
             foreach (var item in Helper.MonthsDatasource().Values)
                 cbMonths.Items.Add(item);
-            cbMonths.SelectedIndex = DateTime.Now.Month-1;
+            cbMonths.SelectedIndex = DateTime.Now.Month - 1;
 
+            LoadJEVReport();
+        }
 
-            LoadJEVReport(textBox1.Text.Trim(), (sbyte)DateTime.Now.Month);
-
+        private void LoadJournals()
+        {
+            cmbJournal.DataSource = Factory.JournalsRepository().GetRecords();
+            cmbJournal.ValueMember = "id";
+            cmbJournal.DisplayMember = "journal_name";
+        }
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadJEVReport();
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            LoadJEVReport(textBox1.Text.Trim(), (sbyte)(cbMonths.SelectedIndex+1));
+            LoadJEVReport();
+        }
+
+        private void cbMonths_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadJEVReport();
+        }
+        private void cbJournal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadJEVReport();
+        }
+
+        private void nudYear_ValueChanged(object sender, EventArgs e)
+        {
+            LoadJEVReport();
         }
 
         private void dgJEV_SelectionChanged(object sender, EventArgs e)
@@ -245,13 +277,16 @@ namespace AccountingSystem.Views.Reports.JEV
             }
         }
 
-        private void cbMonths_SelectedIndexChanged(object sender, EventArgs e)
+        private void LoadJEVReport() 
         {
-            LoadJEVReport(textBox1.Text.Trim(), (sbyte)(cbMonths.SelectedIndex+1));
-        }
 
-        private void LoadJEVReport(string txtSearch, sbyte monthIndex) {
-            var dtJEV = Factory.JEVRepository().GetRecordsByJEVNoAndDate(txtSearch, monthIndex);
+            var searchText = txtSearch.Text.Trim();
+            var month = (sbyte)(cbMonths.SelectedIndex + 1);
+            var year = (ushort)nudYear.Value;
+            var journalId = (byte)(cmbJournal.SelectedIndex + 1);
+
+
+            var dtJEV = Factory.JEVRepository().GetRecordsByJEVNoAndDate(searchText, month, year, journalId);
             HelperLoadRecords.JEVREportDataGridView(dtJEV, dgJEV);
         }
 
