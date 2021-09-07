@@ -1769,7 +1769,11 @@ namespace AccountingSystem {
             
             private global::System.Data.DataColumn columnpayee;
             
+            private global::System.Data.DataColumn columnaccount_id_debit;
+            
             private global::System.Data.DataColumn columnaccount_code_debit;
+            
+            private global::System.Data.DataColumn columnaccount_id_credit;
             
             private global::System.Data.DataColumn columnaccount_code_credit;
             
@@ -1838,9 +1842,25 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn account_id_debitColumn {
+                get {
+                    return this.columnaccount_id_debit;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn account_code_debitColumn {
                 get {
                     return this.columnaccount_code_debit;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn account_id_creditColumn {
+                get {
+                    return this.columnaccount_id_credit;
                 }
             }
             
@@ -1913,13 +1933,15 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CheckDisbursementsJournalRow AddCheckDisbursementsJournalRow(System.DateTime date, string _ref, string payee, string account_code_debit, string account_code_credit, string p, decimal debit, decimal credit) {
+            public CheckDisbursementsJournalRow AddCheckDisbursementsJournalRow(System.DateTime date, string _ref, string payee, int account_id_debit, string account_code_debit, int account_id_credit, string account_code_credit, string p, decimal debit, decimal credit) {
                 CheckDisbursementsJournalRow rowCheckDisbursementsJournalRow = ((CheckDisbursementsJournalRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         date,
                         _ref,
                         payee,
+                        account_id_debit,
                         account_code_debit,
+                        account_id_credit,
                         account_code_credit,
                         p,
                         debit,
@@ -1949,7 +1971,9 @@ namespace AccountingSystem {
                 this.columndate = base.Columns["date"];
                 this.columnref = base.Columns["ref"];
                 this.columnpayee = base.Columns["payee"];
+                this.columnaccount_id_debit = base.Columns["account_id_debit"];
                 this.columnaccount_code_debit = base.Columns["account_code_debit"];
+                this.columnaccount_id_credit = base.Columns["account_id_credit"];
                 this.columnaccount_code_credit = base.Columns["account_code_credit"];
                 this.columnp = base.Columns["p"];
                 this.columndebit = base.Columns["debit"];
@@ -1968,8 +1992,12 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnref);
                 this.columnpayee = new global::System.Data.DataColumn("payee", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnpayee);
+                this.columnaccount_id_debit = new global::System.Data.DataColumn("account_id_debit", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaccount_id_debit);
                 this.columnaccount_code_debit = new global::System.Data.DataColumn("account_code_debit", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnaccount_code_debit);
+                this.columnaccount_id_credit = new global::System.Data.DataColumn("account_id_credit", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaccount_id_credit);
                 this.columnaccount_code_credit = new global::System.Data.DataColumn("account_code_credit", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnaccount_code_credit);
                 this.columnp = new global::System.Data.DataColumn("p", typeof(string), null, global::System.Data.MappingType.Element);
@@ -10578,6 +10606,23 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int account_id_debit {
+                get {
+                    try {
+                        return ((int)(this[this.tableCheckDisbursementsJournal.account_id_debitColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'account_id_debit\' in table \'CheckDisbursementsJournal\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCheckDisbursementsJournal.account_id_debitColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public string account_code_debit {
                 get {
                     try {
@@ -10590,6 +10635,23 @@ namespace AccountingSystem {
                 }
                 set {
                     this[this.tableCheckDisbursementsJournal.account_code_debitColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int account_id_credit {
+                get {
+                    try {
+                        return ((int)(this[this.tableCheckDisbursementsJournal.account_id_creditColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'account_id_credit\' in table \'CheckDisbursementsJournal\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCheckDisbursementsJournal.account_id_creditColumn] = value;
                 }
             }
             
@@ -10696,6 +10758,18 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isaccount_id_debitNull() {
+                return this.IsNull(this.tableCheckDisbursementsJournal.account_id_debitColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setaccount_id_debitNull() {
+                this[this.tableCheckDisbursementsJournal.account_id_debitColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool Isaccount_code_debitNull() {
                 return this.IsNull(this.tableCheckDisbursementsJournal.account_code_debitColumn);
             }
@@ -10704,6 +10778,18 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void Setaccount_code_debitNull() {
                 this[this.tableCheckDisbursementsJournal.account_code_debitColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isaccount_id_creditNull() {
+                return this.IsNull(this.tableCheckDisbursementsJournal.account_id_creditColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setaccount_id_creditNull() {
+                this[this.tableCheckDisbursementsJournal.account_id_creditColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
