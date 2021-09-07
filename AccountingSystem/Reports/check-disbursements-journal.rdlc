@@ -76,45 +76,45 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.94548in</Width>
+                  <Width>2.40152cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.94548in</Width>
+                  <Width>2.40152cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.94548in</Width>
+                  <Width>2.40152cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.67478in</Width>
+                  <Width>1.71394cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.17144in</Width>
+                  <Width>0.43546cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.94591in</Width>
+                  <Width>2.40261cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.94548in</Width>
+                  <Width>2.40152cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.94548in</Width>
+                  <Width>2.40152cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.94548in</Width>
+                  <Width>2.40152cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.67478in</Width>
+                  <Width>1.71394cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.17144in</Width>
+                  <Width>0.43546cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.94591in</Width>
+                  <Width>2.40261cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.47745cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -127,8 +127,8 @@
                                 <TextRun>
                                   <Value>CREDIT</Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>9pt</FontSize>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -155,7 +155,8 @@
                             <RightBorder>
                               <Color>Black</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -181,8 +182,8 @@
                                 <TextRun>
                                   <Value>DEBIT</Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>9pt</FontSize>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -209,7 +210,8 @@
                             <RightBorder>
                               <Color>Black</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -227,7 +229,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.47745cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -240,8 +242,8 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>9pt</FontSize>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -261,7 +263,8 @@
                             <RightBorder>
                               <Style>Solid</Style>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -281,8 +284,8 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>9pt</FontSize>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -302,7 +305,8 @@
                             <RightBorder>
                               <Style>Solid</Style>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -322,8 +326,8 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>9pt</FontSize>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -343,7 +347,8 @@
                             <RightBorder>
                               <Style>Solid</Style>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -363,8 +368,8 @@
                                 <TextRun>
                                   <Value>SUNDRY</Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>9pt</FontSize>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -382,7 +387,8 @@
                             <LeftBorder>
                               <Color>Black</Color>
                             </LeftBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -405,8 +411,8 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>9pt</FontSize>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -429,7 +435,8 @@
                               <Color>Black</Color>
                               <Style>Solid</Style>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -449,8 +456,8 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>9pt</FontSize>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -472,7 +479,8 @@
                               <Color>Black</Color>
                               <Style>Solid</Style>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -492,8 +500,8 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>9pt</FontSize>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -515,7 +523,8 @@
                               <Color>Black</Color>
                               <Style>Solid</Style>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -535,8 +544,8 @@
                                 <TextRun>
                                   <Value>SUNDRY</Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>9pt</FontSize>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -554,7 +563,8 @@
                             <RightBorder>
                               <Color>Black</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -569,7 +579,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.20833in</Height>
+                  <Height>0.47743cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -582,7 +592,7 @@
                                 <TextRun>
                                   <Value>=Parameters!paramDefaultAccountCodeFirst.Value</Value>
                                   <Style>
-                                    <FontFamily />
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -608,7 +618,7 @@
                             <RightBorder>
                               <Style>Solid</Style>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -629,7 +639,7 @@
                                 <TextRun>
                                   <Value>=Parameters!paramDefaultAccountCodeSecond.Value</Value>
                                   <Style>
-                                    <FontFamily />
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -655,7 +665,7 @@
                             <RightBorder>
                               <Style>Solid</Style>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -676,7 +686,7 @@
                                 <TextRun>
                                   <Value>=Parameters!paramDefaultAccountCodeThird.Value</Value>
                                   <Style>
-                                    <FontFamily />
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -702,7 +712,7 @@
                             <RightBorder>
                               <Style>Solid</Style>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -723,8 +733,8 @@
                                 <TextRun>
                                   <Value>Account </Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>9pt</FontSize>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -751,7 +761,7 @@
                             <RightBorder>
                               <Color>Black</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -772,8 +782,8 @@
                                 <TextRun>
                                   <Value>P</Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>9pt</FontSize>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -800,7 +810,7 @@
                             <RightBorder>
                               <Color>Black</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -821,8 +831,8 @@
                                 <TextRun>
                                   <Value>Amount</Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>9pt</FontSize>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -849,7 +859,7 @@
                             <RightBorder>
                               <Color>Black</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -870,7 +880,7 @@
                                 <TextRun>
                                   <Value>=Parameters!paramDefaultAccountCodeFirst.Value</Value>
                                   <Style>
-                                    <FontFamily />
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -896,7 +906,7 @@
                             <RightBorder>
                               <Style>Solid</Style>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -917,7 +927,7 @@
                                 <TextRun>
                                   <Value>=Parameters!paramDefaultAccountCodeSecond.Value</Value>
                                   <Style>
-                                    <FontFamily />
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -943,7 +953,7 @@
                             <RightBorder>
                               <Style>Solid</Style>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -964,7 +974,7 @@
                                 <TextRun>
                                   <Value>=Parameters!paramDefaultAccountCodeThird.Value</Value>
                                   <Style>
-                                    <FontFamily />
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -990,7 +1000,7 @@
                             <RightBorder>
                               <Style>Solid</Style>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1011,8 +1021,8 @@
                                 <TextRun>
                                   <Value>Account </Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>9pt</FontSize>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1039,7 +1049,7 @@
                             <RightBorder>
                               <Color>Black</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1060,8 +1070,8 @@
                                 <TextRun>
                                   <Value>P</Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>9pt</FontSize>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1088,7 +1098,7 @@
                             <RightBorder>
                               <Color>Black</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1109,8 +1119,8 @@
                                 <TextRun>
                                   <Value>Amount</Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>9pt</FontSize>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1137,7 +1147,7 @@
                             <RightBorder>
                               <Color>Black</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1150,7 +1160,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.20833in</Height>
+                  <Height>0.50389cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -1158,12 +1168,12 @@
                           <TablixBody>
                             <TablixColumns>
                               <TablixColumn>
-                                <Width>0.94548in</Width>
+                                <Width>2.40152cm</Width>
                               </TablixColumn>
                             </TablixColumns>
                             <TablixRows>
                               <TablixRow>
-                                <Height>0.20833in</Height>
+                                <Height>0.50389cm</Height>
                                 <TablixCells>
                                   <TablixCell>
                                     <CellContents>
@@ -1176,6 +1186,7 @@
                                               <TextRun>
                                                 <Value>=Fields!credit.Value</Value>
                                                 <Style>
+                                                  <FontFamily>Calibri</FontFamily>
                                                   <FontSize>8pt</FontSize>
                                                   <Format>#,0.00;(#,0.00);''</Format>
                                                 </Style>
@@ -1249,12 +1260,12 @@
                           <TablixBody>
                             <TablixColumns>
                               <TablixColumn>
-                                <Width>0.94548in</Width>
+                                <Width>2.40152cm</Width>
                               </TablixColumn>
                             </TablixColumns>
                             <TablixRows>
                               <TablixRow>
-                                <Height>0.20833in</Height>
+                                <Height>0.50389cm</Height>
                                 <TablixCells>
                                   <TablixCell>
                                     <CellContents>
@@ -1267,6 +1278,7 @@
                                               <TextRun>
                                                 <Value>=Fields!credit.Value</Value>
                                                 <Style>
+                                                  <FontFamily>Calibri</FontFamily>
                                                   <FontSize>8pt</FontSize>
                                                   <Format>#,0.00;(#,0.00);''</Format>
                                                 </Style>
@@ -1340,12 +1352,12 @@
                           <TablixBody>
                             <TablixColumns>
                               <TablixColumn>
-                                <Width>0.94548in</Width>
+                                <Width>2.40152cm</Width>
                               </TablixColumn>
                             </TablixColumns>
                             <TablixRows>
                               <TablixRow>
-                                <Height>0.20833in</Height>
+                                <Height>0.50389cm</Height>
                                 <TablixCells>
                                   <TablixCell>
                                     <CellContents>
@@ -1358,6 +1370,7 @@
                                               <TextRun>
                                                 <Value>=Fields!credit.Value</Value>
                                                 <Style>
+                                                  <FontFamily>Calibri</FontFamily>
                                                   <FontSize>8pt</FontSize>
                                                   <Format>#,0.00;(#,0.00);''</Format>
                                                 </Style>
@@ -1431,12 +1444,12 @@
                           <TablixBody>
                             <TablixColumns>
                               <TablixColumn>
-                                <Width>0.67478in</Width>
+                                <Width>1.71394cm</Width>
                               </TablixColumn>
                             </TablixColumns>
                             <TablixRows>
                               <TablixRow>
-                                <Height>0.20833in</Height>
+                                <Height>0.50389cm</Height>
                                 <TablixCells>
                                   <TablixCell>
                                     <CellContents>
@@ -1449,6 +1462,7 @@
                                               <TextRun>
                                                 <Value>=Fields!account_code_credit.Value</Value>
                                                 <Style>
+                                                  <FontFamily>Calibri</FontFamily>
                                                   <FontSize>8pt</FontSize>
                                                   <Format>#,0.00;(#,0.00);'-'</Format>
                                                 </Style>
@@ -1536,12 +1550,12 @@
                           <TablixBody>
                             <TablixColumns>
                               <TablixColumn>
-                                <Width>0.17144in</Width>
+                                <Width>0.43546cm</Width>
                               </TablixColumn>
                             </TablixColumns>
                             <TablixRows>
                               <TablixRow>
-                                <Height>0.20833in</Height>
+                                <Height>0.50389cm</Height>
                                 <TablixCells>
                                   <TablixCell>
                                     <CellContents>
@@ -1554,6 +1568,7 @@
                                               <TextRun>
                                                 <Value>=Fields!p.Value</Value>
                                                 <Style>
+                                                  <FontFamily>Calibri</FontFamily>
                                                   <FontSize>8pt</FontSize>
                                                   <Format>#,0.00;(#,0.00);'-'</Format>
                                                 </Style>
@@ -1641,12 +1656,12 @@
                           <TablixBody>
                             <TablixColumns>
                               <TablixColumn>
-                                <Width>0.94591in</Width>
+                                <Width>2.40261cm</Width>
                               </TablixColumn>
                             </TablixColumns>
                             <TablixRows>
                               <TablixRow>
-                                <Height>0.20833in</Height>
+                                <Height>0.50389cm</Height>
                                 <TablixCells>
                                   <TablixCell>
                                     <CellContents>
@@ -1659,6 +1674,7 @@
                                               <TextRun>
                                                 <Value>=Fields!credit.Value</Value>
                                                 <Style>
+                                                  <FontFamily>Calibri</FontFamily>
                                                   <FontSize>8pt</FontSize>
                                                   <Format>#,0.00;(#,0.00);''</Format>
                                                 </Style>
@@ -1746,12 +1762,12 @@
                           <TablixBody>
                             <TablixColumns>
                               <TablixColumn>
-                                <Width>0.94548in</Width>
+                                <Width>2.40152cm</Width>
                               </TablixColumn>
                             </TablixColumns>
                             <TablixRows>
                               <TablixRow>
-                                <Height>0.20833in</Height>
+                                <Height>0.50389cm</Height>
                                 <TablixCells>
                                   <TablixCell>
                                     <CellContents>
@@ -1764,6 +1780,7 @@
                                               <TextRun>
                                                 <Value>=Fields!debit.Value</Value>
                                                 <Style>
+                                                  <FontFamily>Calibri</FontFamily>
                                                   <FontSize>8pt</FontSize>
                                                   <Format>#,0.00;(#,0.00);''</Format>
                                                 </Style>
@@ -1837,12 +1854,12 @@
                           <TablixBody>
                             <TablixColumns>
                               <TablixColumn>
-                                <Width>0.94548in</Width>
+                                <Width>2.40152cm</Width>
                               </TablixColumn>
                             </TablixColumns>
                             <TablixRows>
                               <TablixRow>
-                                <Height>0.20833in</Height>
+                                <Height>0.50389cm</Height>
                                 <TablixCells>
                                   <TablixCell>
                                     <CellContents>
@@ -1855,6 +1872,7 @@
                                               <TextRun>
                                                 <Value>=Fields!debit.Value</Value>
                                                 <Style>
+                                                  <FontFamily>Calibri</FontFamily>
                                                   <FontSize>8pt</FontSize>
                                                   <Format>#,0.00;(#,0.00);''</Format>
                                                 </Style>
@@ -1928,12 +1946,12 @@
                           <TablixBody>
                             <TablixColumns>
                               <TablixColumn>
-                                <Width>0.94548in</Width>
+                                <Width>2.40152cm</Width>
                               </TablixColumn>
                             </TablixColumns>
                             <TablixRows>
                               <TablixRow>
-                                <Height>0.20833in</Height>
+                                <Height>0.50389cm</Height>
                                 <TablixCells>
                                   <TablixCell>
                                     <CellContents>
@@ -1946,6 +1964,7 @@
                                               <TextRun>
                                                 <Value>=Fields!debit.Value</Value>
                                                 <Style>
+                                                  <FontFamily>Calibri</FontFamily>
                                                   <FontSize>8pt</FontSize>
                                                   <Format>#,0.00;(#,0.00);''</Format>
                                                 </Style>
@@ -2019,12 +2038,12 @@
                           <TablixBody>
                             <TablixColumns>
                               <TablixColumn>
-                                <Width>0.67478in</Width>
+                                <Width>1.71394cm</Width>
                               </TablixColumn>
                             </TablixColumns>
                             <TablixRows>
                               <TablixRow>
-                                <Height>0.20833in</Height>
+                                <Height>0.50389cm</Height>
                                 <TablixCells>
                                   <TablixCell>
                                     <CellContents>
@@ -2037,6 +2056,7 @@
                                               <TextRun>
                                                 <Value>=Fields!account_code_debit.Value</Value>
                                                 <Style>
+                                                  <FontFamily>Calibri</FontFamily>
                                                   <FontSize>8pt</FontSize>
                                                   <Format>#,0.00;(#,0.00);'-'</Format>
                                                 </Style>
@@ -2124,12 +2144,12 @@
                           <TablixBody>
                             <TablixColumns>
                               <TablixColumn>
-                                <Width>0.17144in</Width>
+                                <Width>0.43546cm</Width>
                               </TablixColumn>
                             </TablixColumns>
                             <TablixRows>
                               <TablixRow>
-                                <Height>0.20833in</Height>
+                                <Height>0.50389cm</Height>
                                 <TablixCells>
                                   <TablixCell>
                                     <CellContents>
@@ -2142,6 +2162,7 @@
                                               <TextRun>
                                                 <Value>=Fields!p.Value</Value>
                                                 <Style>
+                                                  <FontFamily>Calibri</FontFamily>
                                                   <FontSize>8pt</FontSize>
                                                   <Format>#,0.00;(#,0.00);'-'</Format>
                                                 </Style>
@@ -2229,12 +2250,12 @@
                           <TablixBody>
                             <TablixColumns>
                               <TablixColumn>
-                                <Width>0.94591in</Width>
+                                <Width>2.40261cm</Width>
                               </TablixColumn>
                             </TablixColumns>
                             <TablixRows>
                               <TablixRow>
-                                <Height>0.20833in</Height>
+                                <Height>0.50389cm</Height>
                                 <TablixCells>
                                   <TablixCell>
                                     <CellContents>
@@ -2247,6 +2268,7 @@
                                               <TextRun>
                                                 <Value>=Fields!debit.Value</Value>
                                                 <Style>
+                                                  <FontFamily>Calibri</FontFamily>
                                                   <FontSize>8pt</FontSize>
                                                   <Format>#,0.00;(#,0.00);''</Format>
                                                 </Style>
@@ -2331,7 +2353,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.20917in</Height>
+                  <Height>0.47957cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2344,6 +2366,7 @@
                                 <TextRun>
                                   <Value>=SUM(CDec(IIF(Fields!account_id_credit.Value = Parameters!paramDefaultAccountIDFirst.Value, Fields!credit.Value, 0)))</Value>
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.00;(#,0.00);''</Format>
@@ -2380,6 +2403,7 @@
                                 <TextRun>
                                   <Value>=SUM(CDec(IIF(Fields!account_id_credit.Value = Parameters!paramDefaultAccountIDSecond.Value, Fields!credit.Value, 0)))</Value>
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.00;(#,0.00);''</Format>
@@ -2416,6 +2440,7 @@
                                 <TextRun>
                                   <Value>=SUM(CDec(IIF(Fields!account_id_credit.Value = Parameters!paramDefaultAccountIDThird.Value, Fields!credit.Value, 0)))</Value>
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.00;(#,0.00);''</Format>
@@ -2452,6 +2477,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -2496,6 +2522,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -2540,6 +2567,7 @@
                                 <TextRun>
                                   <Value>=SUM(CDec(IIF(Fields!account_id_credit.Value &lt;&gt; Parameters!paramDefaultAccountIDFirst.Value AND Fields!account_id_credit.Value &lt;&gt; Parameters!paramDefaultAccountIDSecond.Value AND Fields!account_id_credit.Value &lt;&gt; Parameters!paramDefaultAccountIDThird.Value, Fields!credit.Value, 0)))</Value>
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.00;(#,0.00);''</Format>
@@ -2576,6 +2604,7 @@
                                 <TextRun>
                                   <Value>=SUM(CDec(IIF(Fields!account_id_debit.Value = Parameters!paramDefaultAccountIDFirst.Value, Fields!debit.Value, 0)))</Value>
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.00;-#,0.00;''</Format>
@@ -2621,6 +2650,7 @@
                                 <TextRun>
                                   <Value>=SUM(CDec(IIF(Fields!account_id_debit.Value = Parameters!paramDefaultAccountIDSecond.Value, Fields!debit.Value, 0)))</Value>
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.00;(#,0.00);''</Format>
@@ -2657,6 +2687,7 @@
                                 <TextRun>
                                   <Value>=SUM(CDec(IIF(Fields!account_id_debit.Value = Parameters!paramDefaultAccountIDThird.Value, Fields!debit.Value, 0)))</Value>
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.00;(#,0.00);''</Format>
@@ -2693,6 +2724,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -2737,6 +2769,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -2779,8 +2812,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(CDec(IIF(Fields!account_id_debit.Value &lt;&gt; Parameters!paramDefaultAccountIDFirst.Value AND Fields!account_id_credit.Value &lt;&gt; Parameters!paramDefaultAccountIDSecond.Value AND Fields!account_id_credit.Value &lt;&gt; Parameters!paramDefaultAccountIDThird.Value, Fields!debit.Value, 0)))</Value>
+                                  <Value>=SUM(CDec(IIF(Fields!account_id_debit.Value &lt;&gt; Parameters!paramDefaultAccountIDFirst.Value AND Fields!account_id_debit.Value &lt;&gt; Parameters!paramDefaultAccountIDSecond.Value AND Fields!account_id_debit.Value &lt;&gt; Parameters!paramDefaultAccountIDThird.Value, Fields!debit.Value, 0)))</Value>
                                   <Style>
+                                    <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.00;(#,0.00);''</Format>
@@ -2839,7 +2873,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.72303in</Size>
+                    <Size>1.8365cm</Size>
                     <CellContents>
                       <Textbox Name="Textbox168">
                         <CanGrow>true</CanGrow>
@@ -2850,8 +2884,8 @@
                               <TextRun>
                                 <Value>Date</Value>
                                 <Style>
-                                  <FontFamily />
-                                  <FontSize>9pt</FontSize>
+                                  <FontFamily>Calibri</FontFamily>
+                                  <FontSize>8pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>
                               </TextRun>
@@ -2872,7 +2906,7 @@
                           <LeftBorder>
                             <Color>Black</Color>
                           </LeftBorder>
-                          <BackgroundColor>LightGrey</BackgroundColor>
+                          <BackgroundColor>Gainsboro</BackgroundColor>
                           <VerticalAlign>Middle</VerticalAlign>
                           <PaddingLeft>2pt</PaddingLeft>
                           <PaddingRight>2pt</PaddingRight>
@@ -2885,7 +2919,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>0.58774in</Size>
+                        <Size>1.49286cm</Size>
                         <CellContents>
                           <Textbox Name="Textbox172">
                             <CanGrow>true</CanGrow>
@@ -2896,8 +2930,8 @@
                                   <TextRun>
                                     <Value>Ref</Value>
                                     <Style>
-                                      <FontFamily />
-                                      <FontSize>9pt</FontSize>
+                                      <FontFamily>Calibri</FontFamily>
+                                      <FontSize>8pt</FontSize>
                                       <FontWeight>Bold</FontWeight>
                                     </Style>
                                   </TextRun>
@@ -2918,7 +2952,7 @@
                               <LeftBorder>
                                 <Color>Black</Color>
                               </LeftBorder>
-                              <BackgroundColor>LightGrey</BackgroundColor>
+                              <BackgroundColor>Gainsboro</BackgroundColor>
                               <VerticalAlign>Middle</VerticalAlign>
                               <PaddingLeft>2pt</PaddingLeft>
                               <PaddingRight>2pt</PaddingRight>
@@ -2931,7 +2965,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>1.78625in</Size>
+                            <Size>4.53708cm</Size>
                             <CellContents>
                               <Textbox Name="Textbox176">
                                 <CanGrow>true</CanGrow>
@@ -2942,8 +2976,8 @@
                                       <TextRun>
                                         <Value>Payee</Value>
                                         <Style>
-                                          <FontFamily />
-                                          <FontSize>9pt</FontSize>
+                                          <FontFamily>Calibri</FontFamily>
+                                          <FontSize>8pt</FontSize>
                                           <FontWeight>Bold</FontWeight>
                                         </Style>
                                       </TextRun>
@@ -2964,7 +2998,7 @@
                                   <LeftBorder>
                                     <Color>Black</Color>
                                   </LeftBorder>
-                                  <BackgroundColor>LightGrey</BackgroundColor>
+                                  <BackgroundColor>Gainsboro</BackgroundColor>
                                   <VerticalAlign>Middle</VerticalAlign>
                                   <PaddingLeft>2pt</PaddingLeft>
                                   <PaddingRight>2pt</PaddingRight>
@@ -2997,7 +3031,7 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>0.72303in</Size>
+                    <Size>1.8365cm</Size>
                     <CellContents>
                       <Textbox Name="date1">
                         <CanGrow>true</CanGrow>
@@ -3008,13 +3042,14 @@
                               <TextRun>
                                 <Value>=Fields!date.Value</Value>
                                 <Style>
+                                  <FontFamily>Calibri</FontFamily>
                                   <FontSize>8pt</FontSize>
                                   <Format>MMM d, yyyy</Format>
                                 </Style>
                               </TextRun>
                             </TextRuns>
                             <Style>
-                              <TextAlign>Left</TextAlign>
+                              <TextAlign>Center</TextAlign>
                             </Style>
                           </Paragraph>
                         </Paragraphs>
@@ -3032,6 +3067,7 @@
                           <LeftBorder>
                             <Color>Black</Color>
                           </LeftBorder>
+                          <VerticalAlign>Middle</VerticalAlign>
                           <PaddingLeft>2pt</PaddingLeft>
                           <PaddingRight>2pt</PaddingRight>
                           <PaddingTop>2pt</PaddingTop>
@@ -3053,7 +3089,7 @@
                         </SortExpression>
                       </SortExpressions>
                       <TablixHeader>
-                        <Size>0.58774in</Size>
+                        <Size>1.49286cm</Size>
                         <CellContents>
                           <Textbox Name="ref">
                             <CanGrow>true</CanGrow>
@@ -3064,6 +3100,7 @@
                                   <TextRun>
                                     <Value>=Fields!ref.Value</Value>
                                     <Style>
+                                      <FontFamily>Calibri</FontFamily>
                                       <FontSize>8pt</FontSize>
                                     </Style>
                                   </TextRun>
@@ -3087,6 +3124,7 @@
                               <LeftBorder>
                                 <Color>Black</Color>
                               </LeftBorder>
+                              <VerticalAlign>Middle</VerticalAlign>
                               <PaddingLeft>2pt</PaddingLeft>
                               <PaddingRight>2pt</PaddingRight>
                               <PaddingTop>2pt</PaddingTop>
@@ -3108,7 +3146,7 @@
                             </SortExpression>
                           </SortExpressions>
                           <TablixHeader>
-                            <Size>1.78625in</Size>
+                            <Size>4.53708cm</Size>
                             <CellContents>
                               <Textbox Name="payee1">
                                 <CanGrow>true</CanGrow>
@@ -3119,6 +3157,7 @@
                                       <TextRun>
                                         <Value>=Fields!payee.Value</Value>
                                         <Style>
+                                          <FontFamily>Calibri</FontFamily>
                                           <FontSize>8pt</FontSize>
                                         </Style>
                                       </TextRun>
@@ -3140,6 +3179,7 @@
                                   <LeftBorder>
                                     <Color>Black</Color>
                                   </LeftBorder>
+                                  <VerticalAlign>Middle</VerticalAlign>
                                   <PaddingLeft>2pt</PaddingLeft>
                                   <PaddingRight>2pt</PaddingRight>
                                   <PaddingTop>2pt</PaddingTop>
@@ -3158,7 +3198,7 @@
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>3.09702in</Size>
+                    <Size>7.86644cm</Size>
                     <CellContents>
                       <Textbox Name="Textbox59">
                         <CanGrow>true</CanGrow>
@@ -3169,6 +3209,7 @@
                               <TextRun>
                                 <Value>TOTAL</Value>
                                 <Style>
+                                  <FontFamily>Calibri</FontFamily>
                                   <FontSize>8pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>
@@ -3206,8 +3247,8 @@
             </TablixRowHierarchy>
             <DataSetName>CheckDisbursementsJournal</DataSetName>
             <Top>0.04167in</Top>
-            <Height>1.12583in</Height>
-            <Width>12.35416in</Width>
+            <Height>2.41579cm</Height>
+            <Width>31.37958cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3224,7 +3265,9 @@
                     <TextRuns>
                       <TextRun>
                         <Value>CERTIFIED CORRECT:</Value>
-                        <Style />
+                        <Style>
+                          <FontFamily>Calibri</FontFamily>
+                        </Style>
                       </TextRun>
                     </TextRuns>
                     <Style />
@@ -3254,7 +3297,7 @@
                       <TextRun>
                         <Value>Chief Accountant/Head of the Accounting</Value>
                         <Style>
-                          <FontSize>9pt</FontSize>
+                          <FontFamily>Calibri</FontFamily>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -3288,6 +3331,7 @@
                       <TextRun>
                         <Value>=Parameters!paramSignatory.Value</Value>
                         <Style>
+                          <FontFamily>Calibri</FontFamily>
                           <FontWeight>Bold</FontWeight>
                         </Style>
                       </TextRun>
@@ -3312,6 +3356,7 @@
                     <Style>Solid</Style>
                     <Width>1pt</Width>
                   </BottomBorder>
+                  <VerticalAlign>Bottom</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -3325,8 +3370,17 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>Date: ____________</Value>
-                        <Style />
+                        <Value>Date: </Value>
+                        <Style>
+                          <FontFamily>Calibri</FontFamily>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value xml:space="preserve">                                </Value>
+                        <Style>
+                          <FontFamily>Calibri</FontFamily>
+                          <TextDecoration>Underline</TextDecoration>
+                        </Style>
                       </TextRun>
                     </TextRuns>
                     <Style />
@@ -3336,7 +3390,7 @@
                 <Top>2.35811cm</Top>
                 <Left>23.667cm</Left>
                 <Height>0.6cm</Height>
-                <Width>3.47201cm</Width>
+                <Width>7.71257cm</Width>
                 <ZIndex>3</ZIndex>
                 <Style>
                   <Border>
@@ -3364,7 +3418,7 @@
         <Height>2.90478in</Height>
         <Style />
       </Body>
-      <Width>12.35416in</Width>
+      <Width>12.35417in</Width>
       <Page>
         <PageHeader>
           <Height>1.21225in</Height>
@@ -3380,6 +3434,7 @@
                     <TextRun>
                       <Value>CHECK DISBURSEMENTS JOURNAL</Value>
                       <Style>
+                        <FontFamily />
                         <FontSize>16pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
@@ -3412,11 +3467,14 @@
                   <TextRuns>
                     <TextRun>
                       <Value>LGU: </Value>
-                      <Style />
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                      </Style>
                     </TextRun>
                     <TextRun>
                       <Value>=Parameters!paramLGUName.Value</Value>
                       <Style>
+                        <FontFamily>Calibri</FontFamily>
                         <FontWeight>Bold</FontWeight>
                         <TextDecoration>Underline</TextDecoration>
                       </Style>
@@ -3449,11 +3507,14 @@
                   <TextRuns>
                     <TextRun>
                       <Value>Fund: </Value>
-                      <Style />
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                      </Style>
                     </TextRun>
                     <TextRun>
                       <Value>=Parameters!paramFund.Value</Value>
                       <Style>
+                        <FontFamily>Calibri</FontFamily>
                         <FontWeight>Bold</FontWeight>
                         <TextDecoration>Underline</TextDecoration>
                       </Style>
@@ -3486,11 +3547,14 @@
                   <TextRuns>
                     <TextRun>
                       <Value>Sheet No.: </Value>
-                      <Style />
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                      </Style>
                     </TextRun>
                     <TextRun>
                       <Value>=CStr(Globals!PageNumber) + " of " + CStr(Globals!TotalPages)</Value>
                       <Style>
+                        <FontFamily>Calibri</FontFamily>
                         <FontWeight>Bold</FontWeight>
                         <TextDecoration>Underline</TextDecoration>
                       </Style>
@@ -3511,6 +3575,7 @@
                 <Border>
                   <Style>None</Style>
                 </Border>
+                <VerticalAlign>Middle</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -3524,12 +3589,19 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Month: </Value>
+                      <Value>Month:</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value xml:space="preserve"> </Value>
                       <Style />
                     </TextRun>
                     <TextRun>
                       <Value>=MonthName(Month(Parameters!paramMonth.Value)) &amp;" "&amp; Year(Parameters!paramMonth.Value)</Value>
                       <Style>
+                        <FontFamily>Calibri</FontFamily>
                         <FontWeight>Bold</FontWeight>
                         <TextDecoration>Underline</TextDecoration>
                       </Style>

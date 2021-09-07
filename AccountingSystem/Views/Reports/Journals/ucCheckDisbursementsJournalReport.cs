@@ -104,7 +104,7 @@ namespace AccountingSystem.Views.Reports.Journals
 
                 int defaultAccountIDFirst = defaultAccountId(0);
                 int defaultAccountIDSecond = defaultAccountId(1);
-                int defaultAccountIDThird = defaultAccountId(3);
+                int defaultAccountIDThird = defaultAccountId(2);
 
                 var parameters = new[] {
                     new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
@@ -138,8 +138,7 @@ namespace AccountingSystem.Views.Reports.Journals
         {
             LoadReport(reportViewer.LocalReport);
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
+            reportViewer.ZoomMode = ZoomMode.PageWidth;
             reportViewer.RefreshReport();
         }
 
