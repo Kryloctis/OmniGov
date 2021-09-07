@@ -8,12 +8,16 @@ namespace AccountingSystem.Views.Transactions.JEV
 {
     public partial class frmJEVSearch : Form
     {
-        private readonly frmJEV frmJEV;
-        public frmJEVSearch(frmJEV frmJEV)
+
+        private frmJEV frmJEV;
+        private readonly bool _isFromDashboard;
+
+        public frmJEVSearch(bool isFromDashboard, frmJEV frmJEV = null)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
             this.frmJEV = frmJEV;
+            _isFromDashboard = isFromDashboard;
 
             foreach (var item in Helper.MonthsDatasource().Values)
                 cbMonth.Items.Add(item);
@@ -80,6 +84,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                         amount.ToString("N2"),
                         "",
                     };
+
+                    uc.dgAccounts.Rows.Add(accountRow);
                 }
                 else
                 {
@@ -99,14 +105,18 @@ namespace AccountingSystem.Views.Transactions.JEV
                         "",
                         amount.ToString("N2")
                     };
+
+                    uc.dgAccounts.Rows.Add(accountRow);
                 }
 
-                uc.dgAccounts.Rows.Add(accountRow);
             }
         }
 
         private void LoadSelectedJEV()
         {
+            if (_isFromDashboard) 
+                frmJEV = new frmJEV();
+
             var uc = frmJEV.ucjev1;
             try
             {
@@ -123,7 +133,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                     frmJEV.btnDelete.Enabled = true;
                     frmJEV.btnPrint.Enabled = true;
                     frmJEV.btnApprove.Enabled = true;
-
                     frmJEV.ucjev1.txtJEVNo.Text = jevNo;
 
                     Dictionary<string, string> jevDict = Factory.JEVRepository().GetRecordByJEV(jevNo);
@@ -136,28 +145,40 @@ namespace AccountingSystem.Views.Transactions.JEV
                     LoadGeneralJournalDataIfExist(uc, jevId);
 
                     uc.jevId = jevId;
+                    uc.fundId = Convert.ToByte(jevDict["funds_id"]);
                     uc.txtExplanation.Text = jevDict["explanation"];
                     uc.dtpDateEntry.Value = Convert.ToDateTime(jevDict["date_entry"]);
                     uc.txtRefNo.Text = jevDict["ref_no"];
                     uc.txtPayee.Text = jevDict["payee"];
-                    uc.fundId = Convert.ToByte(jevDict["funds_id"]);
+
                     uc.journalId = Convert.ToByte(jevDict["journals_id"]);
                     uc.oldJournalId = Convert.ToByte(jevDict["journals_id"]);
                     uc.isApproved = Convert.ToByte(jevDict["is_approved"]);
                     uc.isDisapproved = Convert.ToByte(jevDict["is_disapproved"]);
                     uc.isCancelled = Convert.ToByte(jevDict["is_cancelled"]);
                     uc.jevNo = jevDict["jev_no"];
+
                     CheckedFund(jevDict["fund_name"]);
                     CheckedJournal(jevDict["journal_name"]);
 
-                    uc.dgAccounts.Rows.Clear();
-                    LoadJevAccounts();
-                    uc.SumDebitCredit();
                     uc.ClearErrors();
-
                     frmJEV.CheckJevStatus(jevId);
                     frmJEV.btnSave.Text = "Update";
-                    Close();
+
+                    uc.dgAccounts.Rows.Clear();
+                    LoadJevAccounts();
+
+                    if (!frmJEV.Visible)
+                    {
+                        frmJEV.loadFromDashBoard = true;
+                        frmJEV.ShowDialog();
+                    }
+                    else
+                    {
+                        uc.SumDebitCredit();
+                        Close();
+                    }
+
                     return;
                 }
 
@@ -246,6 +267,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             LoadJEVList();
         }
+
 
         internal void LoadJEVList()
         {

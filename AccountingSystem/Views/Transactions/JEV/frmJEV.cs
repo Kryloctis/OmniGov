@@ -4,12 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using AccountingSystem.Views.Transactions;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
     public partial class frmJEV : Form
     {
         ucJEV uc;
+        internal bool loadFromDashBoard = false;
 
         public frmJEV()
         {
@@ -33,6 +35,9 @@ namespace AccountingSystem.Views.Transactions.JEV
                 btnPrint.Visible = false;
                 toolStripSeparator3.Visible = false;
             }
+
+            if (loadFromDashBoard)
+                uc.SumDebitCredit();
         }
 
         private static ushort? ValidateNullSubsidiary(object subsidiaryCellValue)
@@ -511,6 +516,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             btnCancelJEV.Enabled = false;
             btnPrint.Enabled = false;
             btnSave.Text = "Save";
+            
 
             uc.Enabled = true;
             lblJevStatus.ForeColor = Color.Black;
@@ -524,9 +530,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             uc.ResetForm();
         }
 
-        private void BtnSearch_Click(object sender, EventArgs e)
+        internal void BtnSearch_Click(object sender, EventArgs e)
         {
-            var frmJevSearch = new frmJEVSearch(this);
+            var frmJevSearch = new frmJEVSearch(false, this);
             frmJevSearch.cmbxJevStatus.SelectedIndex = 0;
             frmJevSearch.ShowDialog();
         }
@@ -698,5 +704,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             }
         }
+
+
     }
 }

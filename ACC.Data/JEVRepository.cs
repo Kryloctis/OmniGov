@@ -53,6 +53,27 @@ namespace ACC.Data
             }
         }
 
+        public int CountRecords(short month, short year)
+        {
+            try
+            {
+
+                var parameters = new object[][]
+                {
+                    new object[] { "@month", DbType.Int16, month},
+                    new object[] { "@year", DbType.Int16, year}
+                };
+
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE MONTH(date_entry)=@month AND YEAR(date_entry)=@year";
+
+                return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool Delete(List<JEVModel> entityList)
         {
             throw new NotImplementedException();
@@ -729,15 +750,19 @@ namespace ACC.Data
             }
         }
 
-
-
-        public int TotalApproveJEV()
+        public int TotalJEV(short month, short year)
         {
             try
             {
-                string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved=1";
+                var parameters = new object[][]
+                {
+                    new object[] { "@month", DbType.Int16, month},
+                    new object[] { "@year", DbType.Int16, year}
+                };
 
-                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE MONTH(date_entry)=@month AND YEAR(date_entry)=@year";
+
+                return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
             }
             catch (Exception)
             {
@@ -745,13 +770,79 @@ namespace ACC.Data
             }
         }
 
-        public int TotalPendingJEV()
+        public int TotalApproveJEV(short month, short year)
         {
             try
             {
-                string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved=0";
+                var parameters = new object[][]
+                {
+                    new object[] { "@month", DbType.Int16, month},
+                    new object[] { "@year", DbType.Int16, year}
+                };
 
-                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved=1 AND is_disapproved=0 AND is_cancelled=0 AND MONTH(date_entry)=@month AND YEAR(date_entry)=@year";
+
+                return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int TotalPendingJEV(short month, short year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@month", DbType.Int16, month},
+                    new object[] { "@year", DbType.Int16, year}
+                };
+
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE  is_approved=0 AND is_disapproved=0 AND is_cancelled=0 AND MONTH(date_entry)=@month AND YEAR(date_entry)=@year";
+
+                return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public int TotalDisapprovedJEV(short month, short year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@month", DbType.Int16, month},
+                    new object[] { "@year", DbType.Int16, year}
+                };
+
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE  is_approved=0 AND is_disapproved=1 AND is_cancelled=0 AND MONTH(date_entry)=@month AND YEAR(date_entry)=@year";
+
+                return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int TotalCancelledJEV(short month, short year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@month", DbType.Int16, month},
+                    new object[] { "@year", DbType.Int16, year}
+                };
+
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved=1 AND is_disapproved=0 AND is_cancelled=1 AND MONTH(date_entry)=@month AND YEAR(date_entry)=@year";
+
+                return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
+
             }
             catch (Exception)
             {
@@ -782,7 +873,7 @@ namespace ACC.Data
                         jevStatusQuery = $"is_approved = 0 AND is_disapproved = 1 AND is_cancelled = 0";
                         break;
                     case 3:
-                        jevStatusQuery = $"is_approved = 0 AND is_disapproved = 0 AND is_cancelled = 1";
+                        jevStatusQuery = $"is_cancelled = 1";
                         break;
 
                 }
@@ -943,5 +1034,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
+
     }
 }
