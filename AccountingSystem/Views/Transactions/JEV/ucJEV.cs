@@ -23,6 +23,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         public ucJEV()
         {
             InitializeComponent();
+
         }
 
         internal string GetFormErrors()

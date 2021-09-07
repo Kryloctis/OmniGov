@@ -52,7 +52,7 @@ namespace AccountingSystem.Views.Dashboard
 
         private void lnkPending_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var frmJEVSearch = new frmJEVSearch(new frmJEV());
+            var frmJEVSearch = new frmJEVSearch(true, new frmJEV());
 
             frmJEVSearch.cmbxJevStatus.SelectedIndex = 0;
             frmJEVSearch.cmbxJevStatus.Enabled = false;
@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Dashboard
         private void OpenJEVTransactionForm(byte jevStatusIndex)
         {
 
-            var frmJEVSearch = new frmJEVSearch(new frmJEV());
+            var frmJEVSearch = new frmJEVSearch(true);
 
             frmJEVSearch.cmbxJevStatus.SelectedIndex = jevStatusIndex;
             frmJEVSearch.cmbxJevStatus.Enabled = false;

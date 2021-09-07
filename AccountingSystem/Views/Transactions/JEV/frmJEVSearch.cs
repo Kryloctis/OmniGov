@@ -9,13 +9,15 @@ namespace AccountingSystem.Views.Transactions.JEV
     public partial class frmJEVSearch : Form
     {
 
-        private readonly frmJEV frmJEV;
+        private frmJEV frmJEV;
+        private readonly bool _isFromDashboard;
 
-        public frmJEVSearch(frmJEV frmJEV)
+        public frmJEVSearch(bool isFromDashboard, frmJEV frmJEV = null)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
             this.frmJEV = frmJEV;
+            _isFromDashboard = isFromDashboard;
 
             foreach (var item in Helper.MonthsDatasource().Values)
                 cbMonth.Items.Add(item);
@@ -112,6 +114,9 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void LoadSelectedJEV()
         {
+            if (_isFromDashboard) 
+                frmJEV = new frmJEV();
+
             var uc = frmJEV.ucjev1;
             try
             {
@@ -173,7 +178,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                         uc.SumDebitCredit();
                         Close();
                     }
-
 
                     return;
                 }

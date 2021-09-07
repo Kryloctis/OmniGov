@@ -516,6 +516,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             btnCancelJEV.Enabled = false;
             btnPrint.Enabled = false;
             btnSave.Text = "Save";
+            
 
             uc.Enabled = true;
             lblJevStatus.ForeColor = Color.Black;
@@ -531,7 +532,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         internal void BtnSearch_Click(object sender, EventArgs e)
         {
-            var frmJevSearch = new frmJEVSearch(this);
+            var frmJevSearch = new frmJEVSearch(false, this);
             frmJevSearch.cmbxJevStatus.SelectedIndex = 0;
             frmJevSearch.ShowDialog();
         }
