@@ -200,7 +200,7 @@ namespace AccountingSystem.Views.Reports.JEV
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgJEV, true);
 
-            if (_jevId != 0)
+            if (_jevId != 0 && dgJEV.SelectedRows.Count != 0)
             {
                 leftPanel.Visible = false;
                 panel1.Dock = DockStyle.Fill;
@@ -275,20 +275,23 @@ namespace AccountingSystem.Views.Reports.JEV
                 reportViewer.ZoomPercent = 100;
                 reportViewer.RefreshReport();
             }
+
         }
 
         private void LoadJEVReport() 
         {
-
             var searchText = txtSearch.Text.Trim();
             var month = (sbyte)(cbMonths.SelectedIndex + 1);
             var year = (ushort)nudYear.Value;
             var journalId = (byte)(cmbJournal.SelectedIndex + 1);
 
-
             var dtJEV = Factory.JEVRepository().GetRecordsByJEVNoAndDate(searchText, month, year, journalId);
             HelperLoadRecords.JEVREportDataGridView(dtJEV, dgJEV);
         }
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
