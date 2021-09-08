@@ -19,11 +19,10 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal byte isDisapproved = 0;
         internal byte isCancelled = 0;
 
-
         public ucJEV()
         {
             InitializeComponent();
-
+            Helper.DatagridFullRowSelectStyle(dgAccounts);
         }
 
         internal string GetFormErrors()

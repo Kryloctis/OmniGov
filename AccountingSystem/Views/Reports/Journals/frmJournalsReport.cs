@@ -82,5 +82,10 @@ namespace AccountingSystem.Views.Reports.Journals
         {
             ChangeTabs();
         }
+
+        private void ucGeneralJournalReport1_Load(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }

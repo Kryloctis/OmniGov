@@ -100,6 +100,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.ucGeneralJournalReport1.Name = "ucGeneralJournalReport1";
             this.ucGeneralJournalReport1.Size = new System.Drawing.Size(1217, 532);
             this.ucGeneralJournalReport1.TabIndex = 0;
+            this.ucGeneralJournalReport1.Load += new System.EventHandler(this.ucGeneralJournalReport1_Load);
             // 
             // tabCRJ
             // 
@@ -107,7 +108,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.tabCRJ.Location = new System.Drawing.Point(4, 5);
             this.tabCRJ.Margin = new System.Windows.Forms.Padding(0);
             this.tabCRJ.Name = "tabCRJ";
-            this.tabCRJ.Size = new System.Drawing.Size(1217, 328);
+            this.tabCRJ.Size = new System.Drawing.Size(1217, 532);
             this.tabCRJ.TabIndex = 1;
             this.tabCRJ.Text = "tabCRJ";
             this.tabCRJ.UseVisualStyleBackColor = true;
@@ -118,7 +119,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.ucCashReceiptsJournalReport1.Location = new System.Drawing.Point(0, 0);
             this.ucCashReceiptsJournalReport1.Margin = new System.Windows.Forms.Padding(0);
             this.ucCashReceiptsJournalReport1.Name = "ucCashReceiptsJournalReport1";
-            this.ucCashReceiptsJournalReport1.Size = new System.Drawing.Size(1217, 328);
+            this.ucCashReceiptsJournalReport1.Size = new System.Drawing.Size(1217, 532);
             this.ucCashReceiptsJournalReport1.TabIndex = 0;
             // 
             // tabPRJ
@@ -127,7 +128,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.tabPRJ.Location = new System.Drawing.Point(4, 5);
             this.tabPRJ.Margin = new System.Windows.Forms.Padding(0);
             this.tabPRJ.Name = "tabPRJ";
-            this.tabPRJ.Size = new System.Drawing.Size(1217, 328);
+            this.tabPRJ.Size = new System.Drawing.Size(1217, 532);
             this.tabPRJ.TabIndex = 2;
             this.tabPRJ.Text = "tabPRJ";
             this.tabPRJ.UseVisualStyleBackColor = true;
@@ -138,7 +139,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.ucProcurementsReceivedJournalReport1.Location = new System.Drawing.Point(0, 0);
             this.ucProcurementsReceivedJournalReport1.Margin = new System.Windows.Forms.Padding(0);
             this.ucProcurementsReceivedJournalReport1.Name = "ucProcurementsReceivedJournalReport1";
-            this.ucProcurementsReceivedJournalReport1.Size = new System.Drawing.Size(1217, 328);
+            this.ucProcurementsReceivedJournalReport1.Size = new System.Drawing.Size(1217, 532);
             this.ucProcurementsReceivedJournalReport1.TabIndex = 0;
             // 
             // tabCashDJ
@@ -147,7 +148,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.tabCashDJ.Location = new System.Drawing.Point(4, 5);
             this.tabCashDJ.Margin = new System.Windows.Forms.Padding(0);
             this.tabCashDJ.Name = "tabCashDJ";
-            this.tabCashDJ.Size = new System.Drawing.Size(1217, 328);
+            this.tabCashDJ.Size = new System.Drawing.Size(1217, 532);
             this.tabCashDJ.TabIndex = 3;
             this.tabCashDJ.Text = "tabCashDJ";
             this.tabCashDJ.UseVisualStyleBackColor = true;
@@ -157,7 +158,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.ucCashDisbursementsJournalReport1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucCashDisbursementsJournalReport1.Location = new System.Drawing.Point(0, 0);
             this.ucCashDisbursementsJournalReport1.Name = "ucCashDisbursementsJournalReport1";
-            this.ucCashDisbursementsJournalReport1.Size = new System.Drawing.Size(1217, 328);
+            this.ucCashDisbursementsJournalReport1.Size = new System.Drawing.Size(1217, 532);
             this.ucCashDisbursementsJournalReport1.TabIndex = 0;
             // 
             // tabCheckDJ
@@ -166,7 +167,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.tabCheckDJ.Location = new System.Drawing.Point(4, 5);
             this.tabCheckDJ.Margin = new System.Windows.Forms.Padding(0);
             this.tabCheckDJ.Name = "tabCheckDJ";
-            this.tabCheckDJ.Size = new System.Drawing.Size(1217, 328);
+            this.tabCheckDJ.Size = new System.Drawing.Size(1217, 532);
             this.tabCheckDJ.TabIndex = 4;
             this.tabCheckDJ.Text = "tabCheckDJ";
             this.tabCheckDJ.UseVisualStyleBackColor = true;
@@ -176,7 +177,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.ucCheckDisbursementsJournalReport1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucCheckDisbursementsJournalReport1.Location = new System.Drawing.Point(0, 0);
             this.ucCheckDisbursementsJournalReport1.Name = "ucCheckDisbursementsJournalReport1";
-            this.ucCheckDisbursementsJournalReport1.Size = new System.Drawing.Size(1217, 328);
+            this.ucCheckDisbursementsJournalReport1.Size = new System.Drawing.Size(1217, 532);
             this.ucCheckDisbursementsJournalReport1.TabIndex = 0;
             // 
             // tabADADJ
@@ -185,7 +186,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.tabADADJ.Location = new System.Drawing.Point(4, 5);
             this.tabADADJ.Margin = new System.Windows.Forms.Padding(0);
             this.tabADADJ.Name = "tabADADJ";
-            this.tabADADJ.Size = new System.Drawing.Size(1217, 328);
+            this.tabADADJ.Size = new System.Drawing.Size(1217, 532);
             this.tabADADJ.TabIndex = 5;
             this.tabADADJ.Text = "tabADADJ";
             this.tabADADJ.UseVisualStyleBackColor = true;
@@ -195,7 +196,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.ucadaDisbursementsJournalReport1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucadaDisbursementsJournalReport1.Location = new System.Drawing.Point(0, 0);
             this.ucadaDisbursementsJournalReport1.Name = "ucadaDisbursementsJournalReport1";
-            this.ucadaDisbursementsJournalReport1.Size = new System.Drawing.Size(1217, 328);
+            this.ucadaDisbursementsJournalReport1.Size = new System.Drawing.Size(1217, 532);
             this.ucadaDisbursementsJournalReport1.TabIndex = 0;
             // 
             // radBtnGJ
