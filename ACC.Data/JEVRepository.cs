@@ -123,40 +123,45 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetRecordsByJEVNoAndDate(string searchText, sbyte jevDate)
+        public DataTable GetRecordsByJEVNoAndDate(string searchText, sbyte month, ushort year, byte journalId)
         {
-
             try
             {
                 var parameters = new object[][]
                 {
                     new object[] { "@jev_no", DbType.String, $"%{searchText}%" },
-                    new object[] { "@date", DbType.String, $"%{jevDate}%" },
+                    new object[] { "@month", DbType.DateTime2, month },
+                    new object[] { "@year", DbType.DateTime2, year },
+                    new object[] { "@journalId", DbType.String, journalId }
                 };
 
                 string query = $"SELECT " +
-                    $"id, " +
-                    $"funds_id, " +
-                    $"journals_id, " +
-                    $"jev_no, " +
-                    $"ref_no, " +
-                    $"payee, " +
-                    $"explanation, " +
-                    $"fund_code, " +
-                    $"is_approved, " +
-                    $"is_disapproved, " +
-                    $"is_cancelled, " +
-                    $"created_at, " +
-                    $"created_by, " +
-                    $"updated_at, " +
-                    $"updated_by, " +
-                    $"CONCAT_WS('-', fund_code,YEAR(date_entry),MONTH(date_entry),jev_no) AS full_jev_no, " +
-                    $"date_entry " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE is_approved = 1 " +
-                    $"AND is_disapproved = 0 " + 
-                    $"AND is_cancelled =  0 " +
-                    $"AND (jev_no LIKE @jev_no AND MONTH(date_entry) LIKE @date)";
+                $"id, " +
+                $"funds_id, " +
+                $"journals_id, " +
+                $"jev_no, " +
+                $"ref_no, " +
+                $"payee, " +
+                $"explanation, " +
+                $"fund_code, " +
+                $"is_approved, " +
+                $"is_disapproved, " +
+                $"is_cancelled, " +
+                $"created_at, " +
+                $"created_by, " +
+                $"updated_at, " +
+                $"updated_by, " +
+                $"CONCAT_WS('-', fund_code,YEAR(date_entry),MONTH(date_entry),jev_no) AS full_jev_no, " +
+                $"date_entry " +
+                $"FROM {viewTableName} " +
+                $"WHERE " +
+                $"MONTH(date_entry) = @month " + 
+                $"AND YEAR(date_entry) = @year " +
+                $"AND journals_id = @journalId " +
+                $"AND is_approved = 1 " +
+                $"AND is_disapproved = 0 " +
+                $"AND is_cancelled =  0 " + 
+                $"AND jev_no LIKE @jev_no";
 
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);

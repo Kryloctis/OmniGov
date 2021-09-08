@@ -171,6 +171,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     if (!frmJEV.Visible)
                     {
                         frmJEV.loadFromDashBoard = true;
+                        frmJEV.btnSearch.Enabled = false;
                         frmJEV.ShowDialog();
                     }
                     else

@@ -64,7 +64,6 @@ namespace AccountingSystem.Views.Dashboard
 
         private void OpenJEVTransactionForm(byte jevStatusIndex)
         {
-
             var frmJEVSearch = new frmJEVSearch(true);
 
             frmJEVSearch.cmbxJevStatus.SelectedIndex = jevStatusIndex;

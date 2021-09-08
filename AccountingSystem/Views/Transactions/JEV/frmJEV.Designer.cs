@@ -262,7 +262,6 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         #endregion
         private System.Windows.Forms.ToolStripButton btnCancel;
-        private System.Windows.Forms.ToolStripButton btnSearch;
         internal System.Windows.Forms.ToolStrip toolStrip1;
         internal System.Windows.Forms.ToolStripButton btnSave;
         internal System.Windows.Forms.ToolStripButton btnDelete;
@@ -278,5 +277,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal System.Windows.Forms.ToolStripStatusLabel lblShowMessage;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         internal System.Windows.Forms.ToolStripButton btnCancelJEV;
+        internal System.Windows.Forms.ToolStripButton btnSearch;
     }
 }

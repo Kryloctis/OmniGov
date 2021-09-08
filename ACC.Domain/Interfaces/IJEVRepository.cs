@@ -39,7 +39,7 @@ namespace ACC.Domain.Interfaces
 
         Dictionary<string, string> GetRecordByJEV(string jevNo);
 
-        DataTable GetRecordsByJEVNoAndDate(string searchText, sbyte jevDate);
+        DataTable GetRecordsByJEVNoAndDate(string searchText, sbyte jevDate, ushort year, byte journalId);
 
         bool JevNumberAndYearExist(string jevNo, int jevEntryDate);
 
