@@ -149,6 +149,7 @@ namespace ACC.Data
                     $"jev_no, " +
                     $"full_jev_no, " +
                     $"explanation, " +
+                    $"general_ledger_accounts_id," +
                     $"general_ledger_accounts_name, " +
                     $"account_code, " +
                     $"is_deposit, " +
