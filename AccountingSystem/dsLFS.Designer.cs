@@ -2173,7 +2173,11 @@ namespace AccountingSystem {
             
             private global::System.Data.DataColumn columncollecting_officer;
             
+            private global::System.Data.DataColumn columncollections_debit_account_id;
+            
             private global::System.Data.DataColumn columncollections_debit_amount;
+            
+            private global::System.Data.DataColumn columncollections_credit_account_id;
             
             private global::System.Data.DataColumn columncollections_credit_account_code;
             
@@ -2181,11 +2185,15 @@ namespace AccountingSystem {
             
             private global::System.Data.DataColumn columncollections_credt_amount;
             
+            private global::System.Data.DataColumn columndeposit_debit_account_id;
+            
             private global::System.Data.DataColumn columndeposit_debit_account_code;
             
             private global::System.Data.DataColumn columndeposit_debit_p;
             
             private global::System.Data.DataColumn columndeposit_debit_amount;
+            
+            private global::System.Data.DataColumn columndeposit_credit_account_id;
             
             private global::System.Data.DataColumn columndeposit_credit_amount;
             
@@ -2248,9 +2256,25 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn collections_debit_account_idColumn {
+                get {
+                    return this.columncollections_debit_account_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn collections_debit_amountColumn {
                 get {
                     return this.columncollections_debit_amount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn collections_credit_account_idColumn {
+                get {
+                    return this.columncollections_credit_account_id;
                 }
             }
             
@@ -2280,6 +2304,14 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn deposit_debit_account_idColumn {
+                get {
+                    return this.columndeposit_debit_account_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn deposit_debit_account_codeColumn {
                 get {
                     return this.columndeposit_debit_account_code;
@@ -2299,6 +2331,14 @@ namespace AccountingSystem {
             public global::System.Data.DataColumn deposit_debit_amountColumn {
                 get {
                     return this.columndeposit_debit_amount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn deposit_credit_account_idColumn {
+                get {
+                    return this.columndeposit_credit_account_id;
                 }
             }
             
@@ -2347,19 +2387,23 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CashReceiptsJournalRow AddCashReceiptsJournalRow(System.DateTime date, string rcd_no, string collecting_officer, decimal collections_debit_amount, string collections_credit_account_code, string collections_credit_p, decimal collections_credt_amount, string deposit_debit_account_code, string deposit_debit_p, decimal deposit_debit_amount, decimal deposit_credit_amount) {
+            public CashReceiptsJournalRow AddCashReceiptsJournalRow(System.DateTime date, string rcd_no, string collecting_officer, string collections_debit_account_id, decimal collections_debit_amount, string collections_credit_account_id, string collections_credit_account_code, string collections_credit_p, decimal collections_credt_amount, string deposit_debit_account_id, string deposit_debit_account_code, string deposit_debit_p, decimal deposit_debit_amount, string deposit_credit_account_id, decimal deposit_credit_amount) {
                 CashReceiptsJournalRow rowCashReceiptsJournalRow = ((CashReceiptsJournalRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         date,
                         rcd_no,
                         collecting_officer,
+                        collections_debit_account_id,
                         collections_debit_amount,
+                        collections_credit_account_id,
                         collections_credit_account_code,
                         collections_credit_p,
                         collections_credt_amount,
+                        deposit_debit_account_id,
                         deposit_debit_account_code,
                         deposit_debit_p,
                         deposit_debit_amount,
+                        deposit_credit_account_id,
                         deposit_credit_amount};
                 rowCashReceiptsJournalRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowCashReceiptsJournalRow);
@@ -2386,13 +2430,17 @@ namespace AccountingSystem {
                 this.columndate = base.Columns["date"];
                 this.columnrcd_no = base.Columns["rcd_no"];
                 this.columncollecting_officer = base.Columns["collecting_officer"];
+                this.columncollections_debit_account_id = base.Columns["collections_debit_account_id"];
                 this.columncollections_debit_amount = base.Columns["collections_debit_amount"];
+                this.columncollections_credit_account_id = base.Columns["collections_credit_account_id"];
                 this.columncollections_credit_account_code = base.Columns["collections_credit_account_code"];
                 this.columncollections_credit_p = base.Columns["collections_credit_p"];
                 this.columncollections_credt_amount = base.Columns["collections_credt_amount"];
+                this.columndeposit_debit_account_id = base.Columns["deposit_debit_account_id"];
                 this.columndeposit_debit_account_code = base.Columns["deposit_debit_account_code"];
                 this.columndeposit_debit_p = base.Columns["deposit_debit_p"];
                 this.columndeposit_debit_amount = base.Columns["deposit_debit_amount"];
+                this.columndeposit_credit_account_id = base.Columns["deposit_credit_account_id"];
                 this.columndeposit_credit_amount = base.Columns["deposit_credit_amount"];
             }
             
@@ -2405,20 +2453,28 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnrcd_no);
                 this.columncollecting_officer = new global::System.Data.DataColumn("collecting_officer", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncollecting_officer);
+                this.columncollections_debit_account_id = new global::System.Data.DataColumn("collections_debit_account_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncollections_debit_account_id);
                 this.columncollections_debit_amount = new global::System.Data.DataColumn("collections_debit_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncollections_debit_amount);
+                this.columncollections_credit_account_id = new global::System.Data.DataColumn("collections_credit_account_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncollections_credit_account_id);
                 this.columncollections_credit_account_code = new global::System.Data.DataColumn("collections_credit_account_code", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncollections_credit_account_code);
                 this.columncollections_credit_p = new global::System.Data.DataColumn("collections_credit_p", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncollections_credit_p);
                 this.columncollections_credt_amount = new global::System.Data.DataColumn("collections_credt_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncollections_credt_amount);
+                this.columndeposit_debit_account_id = new global::System.Data.DataColumn("deposit_debit_account_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndeposit_debit_account_id);
                 this.columndeposit_debit_account_code = new global::System.Data.DataColumn("deposit_debit_account_code", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndeposit_debit_account_code);
                 this.columndeposit_debit_p = new global::System.Data.DataColumn("deposit_debit_p", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndeposit_debit_p);
                 this.columndeposit_debit_amount = new global::System.Data.DataColumn("deposit_debit_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndeposit_debit_amount);
+                this.columndeposit_credit_account_id = new global::System.Data.DataColumn("deposit_credit_account_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndeposit_credit_account_id);
                 this.columndeposit_credit_amount = new global::System.Data.DataColumn("deposit_credit_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndeposit_credit_amount);
             }
@@ -11048,6 +11104,23 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string collections_debit_account_id {
+                get {
+                    try {
+                        return ((string)(this[this.tableCashReceiptsJournal.collections_debit_account_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'collections_debit_account_id\' in table \'CashReceiptsJournal" +
+                                "\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCashReceiptsJournal.collections_debit_account_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public decimal collections_debit_amount {
                 get {
                     try {
@@ -11060,6 +11133,23 @@ namespace AccountingSystem {
                 }
                 set {
                     this[this.tableCashReceiptsJournal.collections_debit_amountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string collections_credit_account_id {
+                get {
+                    try {
+                        return ((string)(this[this.tableCashReceiptsJournal.collections_credit_account_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'collections_credit_account_id\' in table \'CashReceiptsJourna" +
+                                "l\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCashReceiptsJournal.collections_credit_account_idColumn] = value;
                 }
             }
             
@@ -11116,6 +11206,23 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string deposit_debit_account_id {
+                get {
+                    try {
+                        return ((string)(this[this.tableCashReceiptsJournal.deposit_debit_account_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'deposit_debit_account_id\' in table \'CashReceiptsJournal\' is" +
+                                " DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCashReceiptsJournal.deposit_debit_account_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public string deposit_debit_account_code {
                 get {
                     try {
@@ -11161,6 +11268,23 @@ namespace AccountingSystem {
                 }
                 set {
                     this[this.tableCashReceiptsJournal.deposit_debit_amountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string deposit_credit_account_id {
+                get {
+                    try {
+                        return ((string)(this[this.tableCashReceiptsJournal.deposit_credit_account_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'deposit_credit_account_id\' in table \'CashReceiptsJournal\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCashReceiptsJournal.deposit_credit_account_idColumn] = value;
                 }
             }
             
@@ -11219,6 +11343,18 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Iscollections_debit_account_idNull() {
+                return this.IsNull(this.tableCashReceiptsJournal.collections_debit_account_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setcollections_debit_account_idNull() {
+                this[this.tableCashReceiptsJournal.collections_debit_account_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool Iscollections_debit_amountNull() {
                 return this.IsNull(this.tableCashReceiptsJournal.collections_debit_amountColumn);
             }
@@ -11227,6 +11363,18 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void Setcollections_debit_amountNull() {
                 this[this.tableCashReceiptsJournal.collections_debit_amountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Iscollections_credit_account_idNull() {
+                return this.IsNull(this.tableCashReceiptsJournal.collections_credit_account_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setcollections_credit_account_idNull() {
+                this[this.tableCashReceiptsJournal.collections_credit_account_idColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11267,6 +11415,18 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isdeposit_debit_account_idNull() {
+                return this.IsNull(this.tableCashReceiptsJournal.deposit_debit_account_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setdeposit_debit_account_idNull() {
+                this[this.tableCashReceiptsJournal.deposit_debit_account_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool Isdeposit_debit_account_codeNull() {
                 return this.IsNull(this.tableCashReceiptsJournal.deposit_debit_account_codeColumn);
             }
@@ -11299,6 +11459,18 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void Setdeposit_debit_amountNull() {
                 this[this.tableCashReceiptsJournal.deposit_debit_amountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isdeposit_credit_account_idNull() {
+                return this.IsNull(this.tableCashReceiptsJournal.deposit_credit_account_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setdeposit_credit_account_idNull() {
+                this[this.tableCashReceiptsJournal.deposit_credit_account_idColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
