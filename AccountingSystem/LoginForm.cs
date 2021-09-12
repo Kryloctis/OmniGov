@@ -48,5 +48,23 @@ namespace AccountingSystem
 
             Helper.MessageBoxError("Incorrect username or password.");
         }
+
+
+        private void btnVisibility_Click(object sender, EventArgs e)
+        {
+            Image invisibleImage = Properties.Resources.invisible_16px;
+            Image visibleImage = Properties.Resources.visible_16px;
+
+            if (txtPassword.PasswordChar == '•')
+            {
+                btnVisibility.Image = invisibleImage;
+                txtPassword.PasswordChar = default(char);
+            }
+            else
+            {
+                btnVisibility.Image = visibleImage;
+                txtPassword.PasswordChar = '•';
+            }
+        }
     }
 }
