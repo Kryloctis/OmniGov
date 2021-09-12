@@ -94,7 +94,7 @@ namespace AccountingSystem
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(435, 111);
+            this.panel1.Size = new System.Drawing.Size(440, 111);
             this.panel1.TabIndex = 4;
             // 
             // label6
@@ -152,14 +152,14 @@ namespace AccountingSystem
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(12, 133);
+            this.label4.Location = new System.Drawing.Point(0, 124);
             this.label4.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(322, 15);
+            this.label4.Size = new System.Drawing.Size(435, 16);
             this.label4.TabIndex = 6;
             this.label4.Text = "Welcome! Please enter your username and password below.";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnVisibility
             // 
@@ -180,7 +180,7 @@ namespace AccountingSystem
             this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(435, 258);
+            this.ClientSize = new System.Drawing.Size(440, 260);
             this.Controls.Add(this.btnVisibility);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnLogin);
