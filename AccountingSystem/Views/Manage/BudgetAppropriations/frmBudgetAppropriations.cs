@@ -124,7 +124,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
                 btnSupplementalAppropriations.Enabled = true;
-                //btnAugmentation.Enabled = true;
+                btnAugmentation.Enabled = true;
+                btnRealignment.Enabled = true;
 
             }
             else if (SelectedRows > 1 && dgv.SelectedCells[0].Value != null)
@@ -133,7 +134,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
                 btnSupplementalAppropriations.Enabled = false;
-                //btnAugmentation.Enabled = false;
+                btnAugmentation.Enabled = false;
+                btnRealignment.Enabled = false;
             }
             else
             {
@@ -141,7 +143,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Enabled = false;
                 btnDelete.Text = "Delete";
                 btnSupplementalAppropriations.Enabled = false;
-                //btnAugmentation.Enabled = false;
+                btnAugmentation.Enabled = false;
+                btnRealignment.Enabled = false;
             }
 
             if (cmbxFPP.SelectedIndex == -1 || cmbxAllotmentClass.SelectedIndex == -1 || cmbxFunds.SelectedIndex == -1)
