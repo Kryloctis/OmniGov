@@ -204,7 +204,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             // 
             this.txtAccountSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAccountSelected.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtAccountSelected.Enabled = false;
             this.txtAccountSelected.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtAccountSelected.Location = new System.Drawing.Point(10, 51);
             this.txtAccountSelected.Name = "txtAccountSelected";

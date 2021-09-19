@@ -1397,11 +1397,13 @@ namespace AccountingSystem
                 //Load by loop All Budget Appropriations Records with Others FPP 
                 foreach (DataRow drRealignment in dataTable.Rows)
                 {
-                    dgv.Rows.Add(new object[] {
-                            drRealignment["to_id"],
-                            drRealignment["to_budget"],
-                            drRealignment["date_entry"],
-                            drRealignment["amount"] });
+                    dgv.Rows.Add(new object[]
+                    {
+                        drRealignment["to_id"],
+                        drRealignment["to_budget"],
+                        drRealignment["date_entry"],
+                        drRealignment["amount"] 
+                    });
                 }
 
                 dgv.ClearSelection();

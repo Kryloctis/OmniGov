@@ -30,23 +30,24 @@ namespace AccountingSystem.Views.Manage.Realignment
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.txtYear = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.nudAmount = new System.Windows.Forms.NumericUpDown();
             this.cmbAccount = new System.Windows.Forms.ComboBox();
             this.dgBudgetRealignment = new System.Windows.Forms.DataGridView();
+            this.realignmentAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.realignmentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAdd = new System.Windows.Forms.Button();
             this.dtDateIssued = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtRemarks = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.realignmentAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.realignmentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nudBudgetAppropriation = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetRealignment)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBudgetAppropriation)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -57,14 +58,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.label1.Size = new System.Drawing.Size(124, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "Current Appropriation";
-            // 
-            // txtYear
-            // 
-            this.txtYear.Location = new System.Drawing.Point(140, 8);
-            this.txtYear.Name = "txtYear";
-            this.txtYear.ReadOnly = true;
-            this.txtYear.Size = new System.Drawing.Size(375, 23);
-            this.txtYear.TabIndex = 13;
             // 
             // label3
             // 
@@ -119,7 +112,21 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.dgBudgetRealignment.Size = new System.Drawing.Size(505, 144);
             this.dgBudgetRealignment.TabIndex = 22;
             this.dgBudgetRealignment.Tag = "";
-            this.dgBudgetRealignment.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgBudgetRealignment_CellContentClick);
+            // 
+            // realignmentAccount
+            // 
+            this.realignmentAccount.HeaderText = "Account";
+            this.realignmentAccount.Name = "realignmentAccount";
+            this.realignmentAccount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.realignmentAccount.Width = 300;
+            // 
+            // realignmentAmount
+            // 
+            this.realignmentAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.realignmentAmount.HeaderText = "Amount";
+            this.realignmentAmount.Name = "realignmentAmount";
+            this.realignmentAmount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.realignmentAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // btnAdd
             // 
@@ -165,14 +172,13 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.button1.Text = "Edit...";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // textBox2
+            // txtRemarks
             // 
-            this.textBox2.Location = new System.Drawing.Point(140, 332);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(375, 46);
-            this.textBox2.TabIndex = 42;
+            this.txtRemarks.Location = new System.Drawing.Point(140, 332);
+            this.txtRemarks.Multiline = true;
+            this.txtRemarks.Name = "txtRemarks";
+            this.txtRemarks.Size = new System.Drawing.Size(375, 46);
+            this.txtRemarks.TabIndex = 42;
             // 
             // label5
             // 
@@ -183,27 +189,27 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.label5.TabIndex = 41;
             this.label5.Text = "Remarks ";
             // 
-            // realignmentAccount
+            // nudBudgetAppropriation
             // 
-            this.realignmentAccount.HeaderText = "Account";
-            this.realignmentAccount.Name = "realignmentAccount";
-            this.realignmentAccount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.realignmentAccount.Width = 300;
-            // 
-            // realignmentAmount
-            // 
-            this.realignmentAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.realignmentAmount.HeaderText = "Amount";
-            this.realignmentAmount.Name = "realignmentAmount";
-            this.realignmentAmount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.realignmentAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.nudBudgetAppropriation.DecimalPlaces = 2;
+            this.nudBudgetAppropriation.Location = new System.Drawing.Point(140, 9);
+            this.nudBudgetAppropriation.Maximum = new decimal(new int[] {
+            -1530494976,
+            232830,
+            0,
+            0});
+            this.nudBudgetAppropriation.Name = "nudBudgetAppropriation";
+            this.nudBudgetAppropriation.Size = new System.Drawing.Size(375, 23);
+            this.nudBudgetAppropriation.TabIndex = 43;
+            this.nudBudgetAppropriation.ThousandsSeparator = true;
             // 
             // ucRealignment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.nudBudgetAppropriation);
+            this.Controls.Add(this.txtRemarks);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -215,13 +221,13 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.Controls.Add(this.nudAmount);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtYear);
             this.Controls.Add(this.label1);
             this.Name = "ucRealignment";
             this.Size = new System.Drawing.Size(534, 381);
             this.Load += new System.EventHandler(this.ucRealignment_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetRealignment)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBudgetAppropriation)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -230,7 +236,6 @@ namespace AccountingSystem.Views.Manage.Realignment
         #endregion
 
         private System.Windows.Forms.Label label1;
-        internal System.Windows.Forms.TextBox txtYear;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         internal System.Windows.Forms.NumericUpDown nudAmount;
@@ -241,9 +246,10 @@ namespace AccountingSystem.Views.Manage.Realignment
         private System.Windows.Forms.Label label6;
         internal System.Windows.Forms.Button button2;
         internal System.Windows.Forms.Button button1;
-        internal System.Windows.Forms.TextBox textBox2;
+        internal System.Windows.Forms.TextBox txtRemarks;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridViewTextBoxColumn realignmentAccount;
         private System.Windows.Forms.DataGridViewTextBoxColumn realignmentAmount;
+        internal System.Windows.Forms.NumericUpDown nudBudgetAppropriation;
     }
 }

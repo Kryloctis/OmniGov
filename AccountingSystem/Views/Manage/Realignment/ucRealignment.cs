@@ -10,8 +10,6 @@ namespace AccountingSystem.Views.Manage.Realignment
 {
     public partial class ucRealignment : UserControl
     {
-
-
         public ucRealignment()
         {
             InitializeComponent();
@@ -21,6 +19,7 @@ namespace AccountingSystem.Views.Manage.Realignment
         private void ucRealignment_Load(object sender, EventArgs e)
         {
             LoadBudgetAppropriationAccounts();
+
         }
 
         private void LoadBudgetAppropriationAccounts()
@@ -62,12 +61,8 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private void AddRealignment()
         {
-            //string realignmentAccount = cmbAccount.SelectedValue.ToString();
-            //string realignmentAmount = nudAmount.Value.ToString("N2");
-            //string realignmentDateEntry = dtDateIssued.Value.ToString("MM/dd/yyyy");
-
-            string realignmentAccount = "a";
-            string realignmentAmount = "b";
+            string realignmentAccount = cmbAccount.GetItemText(cmbAccount.SelectedItem);
+            string realignmentAmount = nudAmount.Value.ToString("N2");
             string realignmentDateEntry = dtDateIssued.Value.ToString("MM/dd/yyyy");
 
             object[] accountRow = new object[]
@@ -79,14 +74,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             dgBudgetRealignment.Rows.Add(accountRow);
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void dgBudgetRealignment_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 }

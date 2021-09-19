@@ -44,7 +44,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.ucRealignment1.Name = "ucRealignment1";
             this.ucRealignment1.Size = new System.Drawing.Size(531, 428);
             this.ucRealignment1.TabIndex = 0;
-            this.ucRealignment1.Load += new System.EventHandler(this.ucRealignment1_Load);
             // 
             // flowLayoutPanel1
             // 
@@ -78,6 +77,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // frmRealignmentAdd
             // 

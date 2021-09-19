@@ -12,7 +12,8 @@ namespace ACC.Data
     {
 
         private MySqlGenericCommands _mySqlGenericCommands;
-        private readonly string tableName = "";
+        private readonly string tableName = "realignment_from";
+        private readonly string tableName2 = "realignment_to";
         private readonly string viewTableName = "view_realignment";
 
 
@@ -45,10 +46,43 @@ namespace ACC.Data
         {
             throw new System.NotImplementedException();
         }
+        public bool InsertRealignment(BudgetRealignmentModel entity)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@realignment_from_id", DbType.Int32, entity.FromBudgetAppropriationId},
+                    new object[] { "@realignment_to_id", DbType.Int32, entity.BudgetAppropriationId},
+                    new object[] { "@amount", DbType.Decimal, entity.Amount},
+                };
 
+                string query = $"INSERT INTO {tableName2} (realignment_from_id, to_budget_appropriations_id, amount) VALUES (@realignment_from_id, @realignment_to_id, @amount)";
+                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public bool Insert(BudgetRealignmentModel entity)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, entity.BudgetAppropriationId},
+                    new object[] { "@date_entry", DbType.Date, entity.DateEntry.Date},
+                    new object[] { "@remarks", DbType.String, entity.Remarks},
+                };
+
+                string query = $"INSERT INTO {tableName} (from_budget_appropriations_id, date_entry, remarks) VALUES (@budget_appropriations_id, @date_entry, @remarks)";
+                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Update(BudgetRealignmentModel entity)
@@ -88,5 +122,20 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public ushort GetLastInsertedID()
+        {
+            try
+            {
+                string query = $"SELECT MAX(id) FROM {tableName}";
+                return (ushort)int.Parse(_mySqlGenericCommands.ExecuteScalar(query));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+   
     }
 }
