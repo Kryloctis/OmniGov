@@ -8,6 +8,7 @@ namespace ACC.Domain.Interfaces
 {
     public interface IBudgetRealignmentRepository : IRepository<BudgetRealignmentModel>
     {
-        DataTable FilterRecords(string searchTxt, short month, short year);
+
+        DataTable GetRecordsByBudgetAppropriationId(int budgetAppropriationsId);
     }
 }

@@ -1366,6 +1366,54 @@ namespace AccountingSystem
 
         #endregion Supplemental Appropriations
 
+
+        #region BudgetRealignment
+
+        internal static void BudgetRealignmentDatagridView(DataTable dataTable, DataGridView dgv)
+        {
+            try
+            {
+                Helper.DatagridDefaultStyle(dgv, true);
+
+                //Clearing Datagrid View  Rows & Columns before Loading new one
+                dgv.Rows.Clear();
+                dgv.Columns.Clear();
+
+                //Set up new Columns to Datagrid View
+                dgv.Columns.Add("to_id", "id");
+                dgv.Columns.Add("to_budget", "Budget Realigned");
+                dgv.Columns.Add("date_entry", "Date Entry");
+                dgv.Columns.Add("amount", "Amount");
+
+                //Set up Column Format
+                dgv.Columns["to_id"].Visible = false;
+                dgv.Columns["amount"].DefaultCellStyle.Format = "N2";
+
+                dgv.Columns["to_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["to_budget"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["date_entry"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
+
+                //Load by loop All Budget Appropriations Records with Others FPP 
+                foreach (DataRow drRealignment in dataTable.Rows)
+                {
+                    dgv.Rows.Add(new object[] {
+                            drRealignment["to_id"],
+                            drRealignment["to_budget"],
+                            drRealignment["date_entry"],
+                            drRealignment["amount"] });
+                }
+
+                dgv.ClearSelection();
+                Helper.DatagridDefaultStyle(dgv, true);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+        #endregion
+
         #region Obligation Request
 
         internal static void ObligationRequestDatagridView(DataGridView dataGridView, string searchTxt)

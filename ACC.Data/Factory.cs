@@ -95,5 +95,7 @@ namespace AccountingSystem
         public static IReceiptsIssuedRepository ReceiptsIssuedRepository() => new ReceiptsIssuedRepository(new MySqlGenericCommands());
 
         public static IJournalsDefaultAccountsRepository JournalsDefaultAccountsRepository() => new JournalsDefaultAccountsRepository(new MySqlGenericCommands());
+
+        public static IBudgetRealignmentRepository BudgetRealignmentRepository() => new BudgetRealignmentRepository(new MySqlGenericCommands());
     }
 }

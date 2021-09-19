@@ -10,14 +10,15 @@ namespace ACC.Data
 {
     public class BudgetRealignmentRepository : IBudgetRealignmentRepository
     {
-        private MySqlGenericCommands mySqlGenericCommands;
-        private readonly string tableName = "budget_appropriations";
-        private readonly string viewTableName = "view_budget_realignment";
+
+        private MySqlGenericCommands _mySqlGenericCommands;
+        private readonly string tableName = "";
+        private readonly string viewTableName = "view_realignment";
 
 
         public BudgetRealignmentRepository(MySqlGenericCommands mySqlGenericCommands)
         {
-            this.mySqlGenericCommands = mySqlGenericCommands;
+            _mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public bool IdExist(int id)
@@ -60,29 +61,27 @@ namespace ACC.Data
             throw new System.NotImplementedException();
         }
 
-        public DataTable FilterRecords(string searchTxt, short month, short year)
+
+        public DataTable GetRecordsByBudgetAppropriationId(int budgetAppropriationsId)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%"},
-                    new object[] { "@month", DbType.Int16, month},
-                    new object[] { "@year", DbType.Int16, year}
+                    new object[] { "@budget_appropriations_id",DbType.Int32, budgetAppropriationsId }
                 };
 
-                //string query = $"SELECT " +
-                //    $"id, " +
-                //    $"account, " +
-                //    $"amount, " +
-                //    $"date realigned, " +
-                //    $"remarks " +
-                //    $"FROM {viewTableName} ";
+                string query = $"SELECT " +
+                    $"to_id," +
+                    $"to_budget," +
+                    $"date_entry, " +
+                    $"amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE budget_appropriations_id = @budget_appropriations_id";
 
-                string query = $"SELECT g.ledger_name, t.amount, f.date_entry, f.remarks FROM realignment_from AS f  INNER JOIN realignment_to AS t ON f.id = t.realignment_from_id INNER JOIN general_ledger_accounts AS g ON f.from_budget_appropriations_id = g.id";
+                var dtSupplementalApprorpriation = new DataTable();
 
-                var dtGeneralLedgers = new DataTable();
-                return mySqlGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
+                return _mySqlGenericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
             }
             catch (Exception)
             {

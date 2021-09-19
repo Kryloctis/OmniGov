@@ -377,7 +377,19 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         private void btnRealignment_Click(object sender, EventArgs e)
         {
-            _ = new frmRealignment().ShowDialog();
+            int rowIndex = dgBudgetAppropriations.CurrentCell.RowIndex;
+
+            var budgetAppropriationId = dgBudgetAppropriations.Rows[rowIndex].Cells["id"].Value.ToString();
+
+            var bugetAppropriationAccount = dgBudgetAppropriations.Rows[rowIndex].Cells["general_ledger_accounts_name"].Value.ToString();
+            var bugetAppropriationAmount = dgBudgetAppropriations.Rows[rowIndex].Cells["amount"].Value.ToString();
+
+
+            var frmRealignment = new frmRealignment();
+            frmRealignment.BudgetAppropriationAccount = bugetAppropriationAccount;
+            frmRealignment.BudgetAppropriationAmount = Convert.ToDecimal(bugetAppropriationAmount);
+            frmRealignment.BudgetAppropriationId = Convert.ToInt32(budgetAppropriationId);
+            frmRealignment.ShowDialog();
         }
     }
 }

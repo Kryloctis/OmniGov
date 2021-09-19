@@ -17,7 +17,6 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
     {
         internal frmBudgetAppropriations _frmBudgetAppropriations;
         internal int budgetAppropriationsId;
-        internal DateTime dateEntry;
 
         public frmSupplementalAppropriations(frmBudgetAppropriations frmBudgetAppropriations)
         {
@@ -42,7 +41,6 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
                 ucfrmSupplementalAppropriationEdit.supplementalAppropriationId = supplementalAppropriationId;
                 ucfrmSupplementalAppropriationEdit.budgetAppropriationId = budgetAppropriationsId;
-                ucfrmSupplementalAppropriationEdit.dateEntry = dateEntry;
 
                 frmSupplementalAppropriationEdit.ShowDialog();
 
@@ -113,10 +111,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         private void ShowSupplementalAppropriationAdd() 
         {
             var frmSupplementalAppropriationAdd = new frmSupplementalAppropriationAdd(this);
-
             frmSupplementalAppropriationAdd.uc.budgetAppropriationId = budgetAppropriationsId;
-            frmSupplementalAppropriationAdd.uc.dateEntry = dateEntry;
-
             frmSupplementalAppropriationAdd.ShowDialog();
         }
 
@@ -166,5 +161,6 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             ShowSupplementaryStatus();
             Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
         }
+
     }
 }

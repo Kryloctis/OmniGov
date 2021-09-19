@@ -12,6 +12,10 @@ namespace AccountingSystem.Views.Manage.Realignment
 {
     public partial class frmRealignment : Form
     {
+        internal int BudgetAppropriationId;
+        internal string BudgetAppropriationAccount;
+        internal decimal BudgetAppropriationAmount;
+
         public frmRealignment()
         {
             InitializeComponent();
@@ -20,6 +24,31 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private void frmRealignment_Load(object sender, EventArgs e)
         {
+            LoadSelectedAppropriation();
+            LoadBudgetRealignments();
+        }
+
+        private void LoadBudgetRealignments()
+        {
+            var dtBudgetRealignment = Factory.BudgetRealignmentRepository().GetRecordsByBudgetAppropriationId(30);
+
+            HelperLoadRecords.BudgetRealignmentDatagridView(dtBudgetRealignment, dgRealignment);
+        }
+
+        private void LoadSelectedAppropriation()
+        {
+            txtAccountSelected.Text = BudgetAppropriationAccount;
+            txtBudgetTotalAppropriation.Text = Convert.ToDecimal(BudgetAppropriationAmount).ToString("N2");
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _ = new frmRealignmentAdd().ShowDialog();
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            Helper.EnableDisableToolStripButtons(dgRealignment, btnEdit, btnDelete);
         }
     }
 }

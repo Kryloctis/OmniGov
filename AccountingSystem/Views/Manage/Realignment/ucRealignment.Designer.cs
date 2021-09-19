@@ -31,22 +31,20 @@ namespace AccountingSystem.Views.Manage.Realignment
         {
             this.label1 = new System.Windows.Forms.Label();
             this.txtYear = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.nudAmount = new System.Windows.Forms.NumericUpDown();
             this.cmbxAccount = new System.Windows.Forms.ComboBox();
-            this.dgAllotmentRelease = new System.Windows.Forms.DataGridView();
+            this.dgBudgetRealignment = new System.Windows.Forms.DataGridView();
             this.btnAdd = new System.Windows.Forms.Button();
             this.dtDateIssued = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgAllotmentRelease)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgBudgetRealignment)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -66,19 +64,10 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.txtYear.Size = new System.Drawing.Size(375, 23);
             this.txtYear.TabIndex = 13;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 40);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 15);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Realign From ";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 69);
+            this.label3.Location = new System.Drawing.Point(4, 40);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 15);
             this.label3.TabIndex = 15;
@@ -87,7 +76,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(4, 97);
+            this.label4.Location = new System.Drawing.Point(5, 68);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(54, 15);
             this.label4.TabIndex = 16;
@@ -96,23 +85,15 @@ namespace AccountingSystem.Views.Manage.Realignment
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 159);
+            this.label5.Location = new System.Drawing.Point(5, 130);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 15);
             this.label5.TabIndex = 17;
             this.label5.Text = "Remarks ";
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(133, 37);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(375, 23);
-            this.textBox1.TabIndex = 18;
-            // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(133, 156);
+            this.textBox2.Location = new System.Drawing.Point(133, 127);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
@@ -122,7 +103,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             // nudAmount
             // 
             this.nudAmount.DecimalPlaces = 2;
-            this.nudAmount.Location = new System.Drawing.Point(133, 95);
+            this.nudAmount.Location = new System.Drawing.Point(134, 66);
             this.nudAmount.Maximum = new decimal(new int[] {
             -1530494976,
             232830,
@@ -137,24 +118,24 @@ namespace AccountingSystem.Views.Manage.Realignment
             // 
             this.cmbxAccount.FormattingEnabled = true;
             this.cmbxAccount.IntegralHeight = false;
-            this.cmbxAccount.Location = new System.Drawing.Point(133, 66);
+            this.cmbxAccount.Location = new System.Drawing.Point(134, 37);
             this.cmbxAccount.Name = "cmbxAccount";
             this.cmbxAccount.Size = new System.Drawing.Size(375, 23);
             this.cmbxAccount.TabIndex = 21;
             // 
-            // dgAllotmentRelease
+            // dgBudgetRealignment
             // 
-            this.dgAllotmentRelease.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgAllotmentRelease.Location = new System.Drawing.Point(3, 237);
-            this.dgAllotmentRelease.Name = "dgAllotmentRelease";
-            this.dgAllotmentRelease.RowTemplate.Height = 25;
-            this.dgAllotmentRelease.Size = new System.Drawing.Size(505, 181);
-            this.dgAllotmentRelease.TabIndex = 22;
-            this.dgAllotmentRelease.Tag = "";
+            this.dgBudgetRealignment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgBudgetRealignment.Location = new System.Drawing.Point(5, 208);
+            this.dgBudgetRealignment.Name = "dgBudgetRealignment";
+            this.dgBudgetRealignment.RowTemplate.Height = 25;
+            this.dgBudgetRealignment.Size = new System.Drawing.Size(505, 181);
+            this.dgBudgetRealignment.TabIndex = 22;
+            this.dgBudgetRealignment.Tag = "";
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(433, 208);
+            this.btnAdd.Location = new System.Drawing.Point(434, 179);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 23;
@@ -163,7 +144,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             // 
             // dtDateIssued
             // 
-            this.dtDateIssued.Location = new System.Drawing.Point(133, 124);
+            this.dtDateIssued.Location = new System.Drawing.Point(134, 95);
             this.dtDateIssued.Name = "dtDateIssued";
             this.dtDateIssued.Size = new System.Drawing.Size(375, 23);
             this.dtDateIssued.TabIndex = 35;
@@ -171,55 +152,54 @@ namespace AccountingSystem.Views.Manage.Realignment
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(4, 130);
+            this.label6.Location = new System.Drawing.Point(5, 101);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(67, 15);
             this.label6.TabIndex = 36;
             this.label6.Text = "Date Issued";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(352, 420);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 37;
-            this.button1.Text = "Edit...";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(433, 420);
+            this.button2.Location = new System.Drawing.Point(435, 395);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 38;
+            this.button2.TabIndex = 40;
             this.button2.Text = "Remove...";
             this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(354, 395);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 39;
+            this.button1.Text = "Edit...";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // ucRealignment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dtDateIssued);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.dgAllotmentRelease);
+            this.Controls.Add(this.dgBudgetRealignment);
             this.Controls.Add(this.cmbxAccount);
             this.Controls.Add(this.nudAmount);
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.txtYear);
             this.Controls.Add(this.label1);
             this.Name = "ucRealignment";
-            this.Size = new System.Drawing.Size(531, 446);
+            this.Size = new System.Drawing.Size(534, 421);
             this.Load += new System.EventHandler(this.ucRealignment_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgAllotmentRelease)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgBudgetRealignment)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -229,19 +209,17 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.TextBox txtYear;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        internal System.Windows.Forms.TextBox textBox1;
         internal System.Windows.Forms.TextBox textBox2;
         internal System.Windows.Forms.NumericUpDown nudAmount;
         internal System.Windows.Forms.ComboBox cmbxAccount;
-        internal System.Windows.Forms.DataGridView dgAllotmentRelease;
+        internal System.Windows.Forms.DataGridView dgBudgetRealignment;
         internal System.Windows.Forms.Button btnAdd;
         internal System.Windows.Forms.DateTimePicker dtDateIssued;
         private System.Windows.Forms.Label label6;
-        internal System.Windows.Forms.Button button1;
         internal System.Windows.Forms.Button button2;
+        internal System.Windows.Forms.Button button1;
     }
 }
