@@ -197,7 +197,17 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            throw new NotImplementedException();
+            try
+            {
+                string query = $"SELECT * FROM {viewTableName}";
+
+                var dtBudgetAppropriation = new DataTable();
+                return mySqlGenericCommands.Fill(query, dtBudgetAppropriation);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public DataTable GetRecordsBySearch(string searchText)

@@ -46,10 +46,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.lblUpdatedAtPlaceHolder = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgRealignment = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtTotalSupplementalAppropriations = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtBudgetTotalAppropriation = new System.Windows.Forms.TextBox();
             this.txtAccountSelected = new System.Windows.Forms.TextBox();
             this.toolStrip2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -197,52 +193,12 @@ namespace AccountingSystem.Views.Manage.Realignment
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgRealignment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgRealignment.Location = new System.Drawing.Point(12, 53);
+            this.dgRealignment.Location = new System.Drawing.Point(10, 75);
             this.dgRealignment.Name = "dgRealignment";
             this.dgRealignment.RowTemplate.Height = 25;
             this.dgRealignment.Size = new System.Drawing.Size(794, 326);
             this.dgRealignment.TabIndex = 10;
             this.dgRealignment.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(478, 388);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(164, 15);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Total Realigned Appropriation";
-            // 
-            // txtTotalSupplementalAppropriations
-            // 
-            this.txtTotalSupplementalAppropriations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTotalSupplementalAppropriations.Location = new System.Drawing.Point(648, 385);
-            this.txtTotalSupplementalAppropriations.Name = "txtTotalSupplementalAppropriations";
-            this.txtTotalSupplementalAppropriations.ReadOnly = true;
-            this.txtTotalSupplementalAppropriations.Size = new System.Drawing.Size(158, 23);
-            this.txtTotalSupplementalAppropriations.TabIndex = 11;
-            this.txtTotalSupplementalAppropriations.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 388);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(159, 15);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "Budget Total Appropriation : ";
-            // 
-            // txtBudgetTotalAppropriation
-            // 
-            this.txtBudgetTotalAppropriation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBudgetTotalAppropriation.Location = new System.Drawing.Point(181, 385);
-            this.txtBudgetTotalAppropriation.Name = "txtBudgetTotalAppropriation";
-            this.txtBudgetTotalAppropriation.ReadOnly = true;
-            this.txtBudgetTotalAppropriation.Size = new System.Drawing.Size(158, 23);
-            this.txtBudgetTotalAppropriation.TabIndex = 15;
-            this.txtBudgetTotalAppropriation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtAccountSelected
             // 
@@ -250,13 +206,12 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.txtAccountSelected.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtAccountSelected.Enabled = false;
             this.txtAccountSelected.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtAccountSelected.Location = new System.Drawing.Point(127, 22);
+            this.txtAccountSelected.Location = new System.Drawing.Point(10, 51);
             this.txtAccountSelected.Name = "txtAccountSelected";
             this.txtAccountSelected.ReadOnly = true;
-            this.txtAccountSelected.Size = new System.Drawing.Size(677, 18);
+            this.txtAccountSelected.Size = new System.Drawing.Size(794, 18);
             this.txtAccountSelected.TabIndex = 17;
             this.txtAccountSelected.Text = "Selected Account";
-            this.txtAccountSelected.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // frmRealignment
             // 
@@ -265,10 +220,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(818, 437);
             this.Controls.Add(this.txtAccountSelected);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtBudgetTotalAppropriation);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtTotalSupplementalAppropriations);
             this.Controls.Add(this.dgRealignment);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip2);
@@ -308,10 +259,6 @@ namespace AccountingSystem.Views.Manage.Realignment
         internal System.Windows.Forms.ToolStripStatusLabel lblUpdatedAtPlaceHolder;
         internal System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.DataGridView dgRealignment;
-        private System.Windows.Forms.Label label1;
-        internal System.Windows.Forms.TextBox txtTotalSupplementalAppropriations;
-        private System.Windows.Forms.Label label2;
-        internal System.Windows.Forms.TextBox txtBudgetTotalAppropriation;
         internal System.Windows.Forms.TextBox txtAccountSelected;
     }
 }

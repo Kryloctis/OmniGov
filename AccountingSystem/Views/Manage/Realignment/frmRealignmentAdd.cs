@@ -16,5 +16,15 @@ namespace AccountingSystem.Views.Manage.Realignment
         {
             InitializeComponent();
         }
+
+        private void ucRealignment1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmRealignmentAdd_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -37,8 +37,7 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private void LoadSelectedAppropriation()
         {
-            txtAccountSelected.Text = BudgetAppropriationAccount;
-            txtBudgetTotalAppropriation.Text = Convert.ToDecimal(BudgetAppropriationAmount).ToString("N2");
+            txtAccountSelected.Text = BudgetAppropriationAccount.Trim();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
