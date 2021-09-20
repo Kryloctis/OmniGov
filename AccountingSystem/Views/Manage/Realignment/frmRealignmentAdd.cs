@@ -16,11 +16,13 @@ namespace AccountingSystem.Views.Manage.Realignment
         ucRealignment uc;
         internal string _budgetAppropriationId;
         internal string _budgetAppropriationAmount;
+        internal frmRealignment _frmRealignment;
 
-        public frmRealignmentAdd()
+        public frmRealignmentAdd(frmRealignment frmRealignment)
         {
             InitializeComponent();
             uc = ucRealignment1;
+            _frmRealignment = frmRealignment;
         }
 
         private void frmRealignmentAdd_Load(object sender, EventArgs e)
@@ -34,6 +36,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             {
                 if (SaveRealignmentAccounts())
                 {
+                    _frmRealignment.LoadBudgetRealignments();
                     Helper.MessageBoxSuccess("Budget Realignment has been saved.");
                     //uc.ResetForm();
                 }

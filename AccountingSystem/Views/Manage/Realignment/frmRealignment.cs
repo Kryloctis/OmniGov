@@ -25,11 +25,12 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private void frmRealignment_Load(object sender, EventArgs e)
         {
+            this.Text = $"{this.Text} > {budgetAppropriationAccount}";
             LoadSelectedAppropriation();
             LoadBudgetRealignments();
         }
 
-        private void LoadBudgetRealignments()
+        internal void LoadBudgetRealignments()
         {
             var dtBudgetRealignment = Factory.BudgetRealignmentRepository().GetRecordsByBudgetAppropriationId(int.Parse(budgetAppropriationId));
             HelperLoadRecords.BudgetRealignmentDatagridView(dtBudgetRealignment, dgRealignment);
@@ -37,12 +38,12 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private void LoadSelectedAppropriation()
         {
-            txtAccountSelected.Text = budgetAppropriationAccount;
+
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            var frmRealignmentAdd  = new frmRealignmentAdd();
+            var frmRealignmentAdd  = new frmRealignmentAdd(this);
             frmRealignmentAdd._budgetAppropriationAmount = budgetAppropriationAmount;
             frmRealignmentAdd._budgetAppropriationId = budgetAppropriationId;
             frmRealignmentAdd.ShowDialog();

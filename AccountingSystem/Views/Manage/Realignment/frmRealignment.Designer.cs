@@ -46,7 +46,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.lblUpdatedAtPlaceHolder = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgRealignment = new System.Windows.Forms.DataGridView();
-            this.txtAccountSelected = new System.Windows.Forms.TextBox();
             this.toolStrip2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgRealignment)).BeginInit();
@@ -193,24 +192,12 @@ namespace AccountingSystem.Views.Manage.Realignment
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgRealignment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgRealignment.Location = new System.Drawing.Point(10, 75);
+            this.dgRealignment.Location = new System.Drawing.Point(12, 53);
             this.dgRealignment.Name = "dgRealignment";
             this.dgRealignment.RowTemplate.Height = 25;
-            this.dgRealignment.Size = new System.Drawing.Size(794, 326);
+            this.dgRealignment.Size = new System.Drawing.Size(794, 348);
             this.dgRealignment.TabIndex = 10;
             this.dgRealignment.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
-            // 
-            // txtAccountSelected
-            // 
-            this.txtAccountSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAccountSelected.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtAccountSelected.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtAccountSelected.Location = new System.Drawing.Point(10, 51);
-            this.txtAccountSelected.Name = "txtAccountSelected";
-            this.txtAccountSelected.ReadOnly = true;
-            this.txtAccountSelected.Size = new System.Drawing.Size(794, 18);
-            this.txtAccountSelected.TabIndex = 17;
-            this.txtAccountSelected.Text = "Selected Account";
             // 
             // frmRealignment
             // 
@@ -218,7 +205,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(818, 437);
-            this.Controls.Add(this.txtAccountSelected);
             this.Controls.Add(this.dgRealignment);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip2);
@@ -258,6 +244,5 @@ namespace AccountingSystem.Views.Manage.Realignment
         internal System.Windows.Forms.ToolStripStatusLabel lblUpdatedAtPlaceHolder;
         internal System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.DataGridView dgRealignment;
-        internal System.Windows.Forms.TextBox txtAccountSelected;
     }
 }
