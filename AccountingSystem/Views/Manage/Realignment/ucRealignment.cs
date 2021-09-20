@@ -61,12 +61,14 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private void AddRealignment()
         {
+            string budgetAppropriationId = GetBudgetIdByGeneralLedgerAccountId(cmbAccount.SelectedValue.ToString());
             string realignmentAccount = cmbAccount.GetItemText(cmbAccount.SelectedItem);
             string realignmentAmount = nudAmount.Value.ToString("N2");
             string realignmentDateEntry = dtDateIssued.Value.ToString("MM/dd/yyyy");
 
             object[] accountRow = new object[]
             {
+                budgetAppropriationId,
                 realignmentAccount,
                 realignmentAmount
             };
@@ -74,6 +76,9 @@ namespace AccountingSystem.Views.Manage.Realignment
             dgBudgetRealignment.Rows.Add(accountRow);
         }
 
-
+        private string GetBudgetIdByGeneralLedgerAccountId(string generalLedgerId)
+        {
+            return Factory.BudgetAppropriationsRepository().GetBudgetIdByGeneralLedgerId(generalLedgerId);
+        }
     }
 }

@@ -48,5 +48,6 @@ namespace ACC.Domain.Interfaces
 
         bool BudgetAppropriationContinuing(int id, int fundId, int fppId, int? othersFPPId, int allotmentClassId, int generalLedgerAccountId);
 
+        string GetBudgetIdByGeneralLedgerId(string generalLedgerId);
     }
 }

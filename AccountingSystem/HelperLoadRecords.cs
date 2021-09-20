@@ -1381,8 +1381,7 @@ namespace AccountingSystem
 
                 //Set up new Columns to Datagrid View
                 dgv.Columns.Add("to_id", "id");
-                dgv.Columns.Add("to_budget", "Budget Realigned");
-                dgv.Columns.Add("date_entry", "Date Entry");
+                dgv.Columns.Add("to_budget", "Budget Realignment");
                 dgv.Columns.Add("amount", "Amount");
 
                 //Set up Column Format
@@ -1391,7 +1390,6 @@ namespace AccountingSystem
 
                 dgv.Columns["to_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgv.Columns["to_budget"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgv.Columns["date_entry"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgv.Columns["amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
 
                 //Load by loop All Budget Appropriations Records with Others FPP 
@@ -1401,7 +1399,6 @@ namespace AccountingSystem
                     {
                         drRealignment["to_id"],
                         drRealignment["to_budget"],
-                        drRealignment["date_entry"],
                         drRealignment["amount"] 
                     });
                 }

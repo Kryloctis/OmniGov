@@ -14,6 +14,7 @@ namespace AccountingSystem.Views.Manage.Realignment
     public partial class frmRealignmentAdd : Form
     {
         ucRealignment uc;
+        internal string _budgetAppropriationId;
         internal string _budgetAppropriationAmount;
 
         public frmRealignmentAdd()
@@ -51,7 +52,7 @@ namespace AccountingSystem.Views.Manage.Realignment
 
                 var budgetRealignmentModel = new BudgetRealignmentModel()
                 { 
-                    BudgetAppropriationId = 30,
+                    BudgetAppropriationId = int.Parse(_budgetAppropriationId),
                     DateEntry = uc.dtDateIssued.Value,
                     Remarks = uc.txtRemarks.Text.Trim(),
                     Amount = uc.nudAmount.Value
@@ -76,15 +77,15 @@ namespace AccountingSystem.Views.Manage.Realignment
                 //    return false;
                 //}
 
-
-
                 foreach (DataGridViewRow item in uc.dgBudgetRealignment.Rows)
                 {
+                    string budgetAppropriationId = item.Cells["budgetAppropriationId"].Value.ToString();
                     string account = item.Cells["realignmentAccount"].Value.ToString();
                     decimal amount = Convert.ToDecimal(item.Cells["realignmentAmount"].Value.ToString());
+
                     var budgetRealignmentModel = new BudgetRealignmentModel()
                     {
-                        BudgetAppropriationId = 30,
+                        BudgetAppropriationId = int.Parse(budgetAppropriationId),
                         FromBudgetAppropriationId = GetLastInsertedId(),
                         Amount = amount
                     };

@@ -13,7 +13,7 @@ namespace AccountingSystem.Views.Manage.Realignment
     public partial class frmRealignment : Form
     {
 
-        internal ushort budgetAppropriationId;
+        internal string budgetAppropriationId;
         internal string budgetAppropriationAccount;
         internal string budgetAppropriationAmount;
 
@@ -31,7 +31,7 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private void LoadBudgetRealignments()
         {
-            var dtBudgetRealignment = Factory.BudgetRealignmentRepository().GetRecordsByBudgetAppropriationId(budgetAppropriationId);
+            var dtBudgetRealignment = Factory.BudgetRealignmentRepository().GetRecordsByBudgetAppropriationId(int.Parse(budgetAppropriationId));
             HelperLoadRecords.BudgetRealignmentDatagridView(dtBudgetRealignment, dgRealignment);
         }
 
@@ -44,6 +44,7 @@ namespace AccountingSystem.Views.Manage.Realignment
         {
             var frmRealignmentAdd  = new frmRealignmentAdd();
             frmRealignmentAdd._budgetAppropriationAmount = budgetAppropriationAmount;
+            frmRealignmentAdd._budgetAppropriationId = budgetAppropriationId;
             frmRealignmentAdd.ShowDialog();
         }
 

@@ -1049,6 +1049,24 @@ namespace ACC.Data
             return false;
         }
 
+        public string GetBudgetIdByGeneralLedgerId(string generalLedgerId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@general_ledger_id", DbType.Int32, generalLedgerId},
+                };
+
+                string query = $"SELECT id FROM {tableName} WHERE general_ledger_accounts_id = @general_ledger_id LIMIT 1";
+                return mySqlGenericCommands.ExecuteScalar(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         #endregion Validations
 
     }

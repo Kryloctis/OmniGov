@@ -386,7 +386,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
 
             var frmRealignment = new frmRealignment();
-            frmRealignment.budgetAppropriationId = (ushort)Convert.ToInt32(budgetAppropriationId);
+            frmRealignment.budgetAppropriationId = budgetAppropriationId;
             frmRealignment.budgetAppropriationAccount = bugetAppropriationAccount;
             frmRealignment.budgetAppropriationAmount = bugetAppropriationAmount;
             frmRealignment.ShowDialog();

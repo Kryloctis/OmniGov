@@ -35,8 +35,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.nudAmount = new System.Windows.Forms.NumericUpDown();
             this.cmbAccount = new System.Windows.Forms.ComboBox();
             this.dgBudgetRealignment = new System.Windows.Forms.DataGridView();
-            this.realignmentAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.realignmentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAdd = new System.Windows.Forms.Button();
             this.dtDateIssued = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
@@ -45,6 +43,9 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.txtRemarks = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.nudBudgetAppropriation = new System.Windows.Forms.NumericUpDown();
+            this.budgetAppropriationId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.realignmentAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.realignmentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetRealignment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBudgetAppropriation)).BeginInit();
@@ -104,6 +105,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             // 
             this.dgBudgetRealignment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgBudgetRealignment.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.budgetAppropriationId,
             this.realignmentAccount,
             this.realignmentAmount});
             this.dgBudgetRealignment.Location = new System.Drawing.Point(12, 153);
@@ -112,21 +114,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.dgBudgetRealignment.Size = new System.Drawing.Size(505, 144);
             this.dgBudgetRealignment.TabIndex = 22;
             this.dgBudgetRealignment.Tag = "";
-            // 
-            // realignmentAccount
-            // 
-            this.realignmentAccount.HeaderText = "Account";
-            this.realignmentAccount.Name = "realignmentAccount";
-            this.realignmentAccount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.realignmentAccount.Width = 300;
-            // 
-            // realignmentAmount
-            // 
-            this.realignmentAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.realignmentAmount.HeaderText = "Amount";
-            this.realignmentAmount.Name = "realignmentAmount";
-            this.realignmentAmount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.realignmentAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // btnAdd
             // 
@@ -203,6 +190,27 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.nudBudgetAppropriation.TabIndex = 43;
             this.nudBudgetAppropriation.ThousandsSeparator = true;
             // 
+            // budgetAppropriationId
+            // 
+            this.budgetAppropriationId.HeaderText = "BudgetId";
+            this.budgetAppropriationId.Name = "budgetAppropriationId";
+            this.budgetAppropriationId.Visible = false;
+            // 
+            // realignmentAccount
+            // 
+            this.realignmentAccount.HeaderText = "Account";
+            this.realignmentAccount.Name = "realignmentAccount";
+            this.realignmentAccount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.realignmentAccount.Width = 300;
+            // 
+            // realignmentAmount
+            // 
+            this.realignmentAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.realignmentAmount.HeaderText = "Amount";
+            this.realignmentAmount.Name = "realignmentAmount";
+            this.realignmentAmount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.realignmentAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // ucRealignment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -248,8 +256,9 @@ namespace AccountingSystem.Views.Manage.Realignment
         internal System.Windows.Forms.Button button1;
         internal System.Windows.Forms.TextBox txtRemarks;
         private System.Windows.Forms.Label label5;
+        internal System.Windows.Forms.NumericUpDown nudBudgetAppropriation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn budgetAppropriationId;
         private System.Windows.Forms.DataGridViewTextBoxColumn realignmentAccount;
         private System.Windows.Forms.DataGridViewTextBoxColumn realignmentAmount;
-        internal System.Windows.Forms.NumericUpDown nudBudgetAppropriation;
     }
 }
