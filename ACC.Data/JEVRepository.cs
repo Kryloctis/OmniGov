@@ -105,7 +105,77 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new NotImplementedException();
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, Id},
+                };
+
+                string query = $"SELECT id, " +
+                    $"funds_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"journals_id, " +
+                    $"journal_name, " +
+                    $"is_special, " +
+                    $"jev_no, " +
+                    $"date_entry, " +
+                    $"ref_no, " +
+                    $"payee, " +
+                    $"explanation, " +
+                    $"is_approved, " +
+                    $"is_disapproved, " +
+                    $"is_cancelled, " +
+                    $"created_at, " +
+                    $"created_by, " +
+                    $"created_by_name, " +
+                    $"updated_at, " +
+                    $"updated_by, " +
+                    $"updated_by_name " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE id = @id";
+
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("id", item[0].ToString());
+                        record.Add("funds_id", item[1].ToString());
+                        record.Add("fund_code", item[2].ToString());
+                        record.Add("fund_name", item[3].ToString());
+                        record.Add("journals_id", item[4].ToString());
+                        record.Add("journal_name", item[5].ToString());
+                        record.Add("is_special", item[6].ToString());
+                        record.Add("jev_no", item[7].ToString());
+                        record.Add("date_entry", item[8].ToString());
+                        record.Add("ref_no", item[9].ToString());
+                        record.Add("payee", item[10].ToString());
+                        record.Add("explanation", item[11].ToString());
+                        record.Add("is_approved", item[12].ToString());
+                        record.Add("is_disapproved", item[13].ToString());
+                        record.Add("is_cancelled", item[14].ToString());
+                        record.Add("created_at", item[15].ToString());
+                        record.Add("created_by", item[16].ToString());
+                        record.Add("created_by_name", item[17].ToString());
+                        record.Add("updated_at", item[18].ToString());
+                        record.Add("updated_by", item[19].ToString());
+                        record.Add("updated_by_name", item[20].ToString());
+                    }
+                }
+            }
+
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
         }
 
         public DataTable GetRecords()
@@ -1039,7 +1109,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
 
     }
 }

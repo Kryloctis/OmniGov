@@ -560,7 +560,8 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            _ = new frmJEVReport(uc.jevId, uc.jevNo, uc.journalId).ShowDialog();
+            frmJEVReport _frmJEVReport = new frmJEVReport(uc.jevId, uc.jevNo, uc.journalId);
+            _frmJEVReport.ShowDialog();
         }
 
         //CHECK JEV STATUS
