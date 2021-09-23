@@ -58,7 +58,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)");
             }
 
             return false;

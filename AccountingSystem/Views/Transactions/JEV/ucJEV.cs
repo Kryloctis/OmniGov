@@ -279,6 +279,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             lblCollectingDisbursingOfficer.Text = "Collecting Officer";
             lblCollectingDisbursingOfficer.Visible = true;
             cmbCollectingDisbursingOfficer.Enabled = true;
+
+            dgAccounts.Rows.Clear();
         }
 
         private void SetADAJournalFields()
