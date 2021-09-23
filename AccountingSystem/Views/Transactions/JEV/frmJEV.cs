@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using AccountingSystem.Views.Transactions;
+using System.Transactions;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
@@ -297,6 +298,21 @@ namespace AccountingSystem.Views.Transactions.JEV
             return Factory.JEVRepository().UpdateWithGeneralJournal(jevModel, JevAcountsModelList(), generalJournalModel);
         }
 
+        private bool SetRemarks()
+        {
+            try
+            {
+                int jevId = ucjev1.jevId;
+                var remarks = Factory.JEVRepository().SetRemarks(jevId,string.Empty);
+
+                return remarks;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         private bool InsertData()
         {
@@ -338,57 +354,79 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private bool UpdateData()
         {
-            try
+            var userId = Helper.UserId;
+
+            if (!FormValidations())
+                return false;
+
+            using (TransactionScope scope = new TransactionScope()) 
             {
-                var userId = Helper.UserId;
+                bool updated = true;
 
-                // validate form
-                if (uc.fundId == 0 || uc.journalId == 0 || !uc.ValidateChildren() || uc.dgAccounts.Rows.Count == 0)
+                try
                 {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
+                    if (uc.isDisapproved == 1)
+                    {
+                        _ = SetJEVStatus(0);
+                        _ = SetRemarks();
+                    }
+                        
 
-                if (uc.txtDebitTotal.Text != uc.txtCreditTotal.Text)
+
+                    switch (uc.journalName)
+                    {
+                        case "General Journal":
+                            _ = UpdateGeneralJournal(userId);
+                            break;
+
+                        case "Procurement Received Journal":
+                            _ = UpdateJournal(userId);
+                            break;
+
+                        case "Cash Disbursements Journal":
+                            _ = UpdateCashDisbursementsJournal(userId);
+                            break;
+
+                        case "Cash Receipts Journal":
+                            _ = UpdateCashReceiptsJournal(userId);
+                            break;
+
+                        case "Check Disbursements Journal":
+                            _ = UpdateCheckDisbursementJournal(userId);
+                            break;
+
+                        case "Authority to Debit Account Disbursement Journal":
+                            _ = UpdateADADisbursementsJournal(userId);
+                            break; 
+                    }
+
+                    if (updated == true)
+                    {
+                        scope.Complete();
+                        return true;
+                    }
+                    else
+                        throw new TransactionAbortedException();
+
+                }
+                catch (TransactionAbortedException ex)
                 {
-                    Helper.MessageBoxError("Debit & Credit amounts must be equal.");
-                    return false;
+                    Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)");
+                    updated = false;
                 }
-
-                if (uc.isDisapproved == 1)
+                catch (ApplicationException ex)
                 {
-                    return SetJEVStatus(0);
+                    Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)");
+                    updated = false;
                 }
-
-
-                switch (uc.journalName)
+                catch (Exception ex)
                 {
-                    case "General Journal":
-                        return UpdateGeneralJournal(userId);
-
-                    case "Procurement Received Journal":
-                        return UpdateJournal(userId);
-
-                    case "Cash Disbursements Journal":
-                        return UpdateCashDisbursementsJournal(userId);
-
-                    case "Cash Receipts Journal":
-                        return UpdateCashReceiptsJournal(userId);
-
-                    case "Check Disbursements Journal":
-                        return UpdateCheckDisbursementJournal(userId);
-
-                    case "Authority to Debit Account Disbursement Journal":
-                        return UpdateADADisbursementsJournal(userId);
+                    Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)");
+                    updated = false;
                 }
-
+                return false;
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.StackTrace);
-            }
 
-            return false;
         }
 
 
@@ -406,10 +444,13 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             if (UpdateData())
             {
-                string message = uc.isDisapproved == 1 ? "This JEV will be send back to pending." : "JEV has been saved.";
+
+                int jevId = uc.jevId;
+                string message = uc.isDisapproved == 1 ? "This JEV will be send back to pending." : jevId == 0? "JEV has been saved.": "JEV has been updated.";
 
                 Helper.MessageBoxSuccess(message);
-                CheckJevStatus(uc.jevId);
+                CheckJevStatus(jevId);
+                uc.isDisapproved = 0;
 
                 if (uc.journalId != uc.oldJournalId) //CHECK IF THE PREVIOUS JOURNAL ID IS NOT EQUAL TO NEW SELECTED JOURNAL ID
                 {
@@ -638,29 +679,34 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                 return status;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Helper.MessageBoxError(ex.Message);
+                throw;
             }
-
-            return false;
         }
 
         //APPROVE
         private void btnApprove_Click(object sender, EventArgs e)
         {
-            if (uc.jevId != 0)
+            try
             {
-                if (MessageBox.Show("Are you sure you want to approved this JEV?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (uc.jevId != 0)
                 {
-                    if (SetJEVStatus(1))
+                    if (MessageBox.Show("Are you sure you want to approved this JEV?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        Helper.MessageBoxSuccess("JEV has been approved.");
-                        CheckJevStatus(uc.jevId);
+                        if (SetJEVStatus(1))
+                        {
+                            Helper.MessageBoxSuccess("JEV has been approved.");
+                            CheckJevStatus(uc.jevId);
+                        }
+                        return;
                     }
-                    return;
-                }
 
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)");
             }
         }
 
@@ -691,21 +737,26 @@ namespace AccountingSystem.Views.Transactions.JEV
         //CANCEL
         private void btnCancelJEV_Click(object sender, EventArgs e)
         {
-            if (uc.jevId != 0)
+            try
             {
-                if (MessageBox.Show("Are you sure you want to cancel this JEV?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (uc.jevId != 0)
                 {
-                    if (SetJEVStatus(3))
+                    if (MessageBox.Show("Are you sure you want to cancel this JEV?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        Helper.MessageBoxSuccess("JEV has been cancelled.");
-                        CheckJevStatus(uc.jevId);
+                        if (SetJEVStatus(3))
+                        {
+                            Helper.MessageBoxSuccess("JEV has been cancelled.");
+                            CheckJevStatus(uc.jevId);
+                        }
+                        return;
                     }
-                    return;
-                }
 
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)");
             }
         }
-
-
     }
 }
