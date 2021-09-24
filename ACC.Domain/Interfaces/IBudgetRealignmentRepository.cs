@@ -10,6 +10,7 @@ namespace ACC.Domain.Interfaces
     {
 
         DataTable GetRecordsByBudgetAppropriationId(int budgetAppropriationsId);
+
         bool InsertRealignment(BudgetRealignmentModel entity);
         ushort GetLastInsertedID();
     }

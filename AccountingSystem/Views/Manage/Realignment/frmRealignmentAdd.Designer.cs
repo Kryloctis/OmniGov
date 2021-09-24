@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.ucRealignment1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucRealignment1.Location = new System.Drawing.Point(0, 0);
             this.ucRealignment1.Name = "ucRealignment1";
-            this.ucRealignment1.Size = new System.Drawing.Size(531, 428);
+            this.ucRealignment1.Size = new System.Drawing.Size(544, 544);
             this.ucRealignment1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -52,14 +52,14 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 399);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 515);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(531, 29);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(544, 29);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(453, 3);
+            this.btnCancel.Location = new System.Drawing.Point(466, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 0;
@@ -69,7 +69,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             // btnSave
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
-            this.btnSave.Location = new System.Drawing.Point(372, 3);
+            this.btnSave.Location = new System.Drawing.Point(385, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 1;
@@ -84,7 +84,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(531, 428);
+            this.ClientSize = new System.Drawing.Size(544, 544);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ucRealignment1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

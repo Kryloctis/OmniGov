@@ -27,7 +27,7 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private void frmRealignmentAdd_Load(object sender, EventArgs e)
         {
-            uc.nudBudgetAppropriation.Value = Convert.ToDecimal(_budgetAppropriationAmount);
+            //uc.nudBudgetAppropriation.Value = Convert.ToDecimal(_budgetAppropriationAmount);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

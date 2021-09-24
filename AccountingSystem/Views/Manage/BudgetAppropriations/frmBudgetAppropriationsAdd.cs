@@ -79,5 +79,10 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
             }
         }
+
+        private void frmBudgetAppropriationsAdd_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

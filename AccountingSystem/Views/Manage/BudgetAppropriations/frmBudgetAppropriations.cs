@@ -380,15 +380,12 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             int rowIndex = dgBudgetAppropriations.CurrentCell.RowIndex;
 
             var budgetAppropriationId = dgBudgetAppropriations.Rows[rowIndex].Cells["id"].Value.ToString();
-            var bugetAppropriationAccount = dgBudgetAppropriations.Rows[rowIndex].Cells["general_ledger_accounts_name"].Value.ToString().Trim();
-            var bugetAppropriationAmount = dgBudgetAppropriations.Rows[rowIndex].Cells["amount"].Value.ToString();
 
+            var frmRealignment = new frmRealignment
+            {
+                budgetAppropriationId = budgetAppropriationId
+            };
 
-
-            var frmRealignment = new frmRealignment();
-            frmRealignment.budgetAppropriationId = budgetAppropriationId;
-            frmRealignment.budgetAppropriationAccount = bugetAppropriationAccount;
-            frmRealignment.budgetAppropriationAmount = bugetAppropriationAmount;
             frmRealignment.ShowDialog();
         }
     }

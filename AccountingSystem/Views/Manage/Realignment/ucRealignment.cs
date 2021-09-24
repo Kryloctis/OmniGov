@@ -10,6 +10,13 @@ namespace AccountingSystem.Views.Manage.Realignment
 {
     public partial class ucRealignment : UserControl
     {
+
+        internal int fundId;
+        internal int fppId;
+        internal int? othersFPPId;
+        internal int allotmentClassId;
+        internal short year;
+
         public ucRealignment()
         {
             InitializeComponent();
@@ -18,15 +25,105 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private void ucRealignment_Load(object sender, EventArgs e)
         {
-            LoadBudgetAppropriationAccounts();
-
+            if (!DesignMode)
+            {
+                LoadBudgetAppropriationAccounts();
+                LoadFunds();
+                LoadAllotmentClasses();
+                LoadFPP(false);
+                LoadOthersFPPByFPPIdCombobox();
+                FilterSearchDetails();
+            }
         }
+
+
+
+        internal void LoadFunds()
+        {
+            cmbFunds.DataSource = Factory.FundsRepository().GetRecords();
+            cmbFunds.DisplayMember = "fund_name";
+            cmbFunds.ValueMember = "id";
+        }
+
+
+        private void LoadAllotmentClasses()
+        {
+            var dtAllotmentClasses = Factory.AllotmentClassesRepository().GetRecords();
+            HelperLoadRecords.BudgetAppropriationsAllotmentCombobox(dtAllotmentClasses, cmbAllotmentClass, "allotment_code", "id");
+        }
+
+        internal void LoadFPP(bool isSearch)
+        {
+            try
+            {
+                cmbFPP.DroppedDown = false;
+                Cursor.Current = Cursors.Default;
+
+                if (DataTableFPP().Rows.Count == 0)
+                {
+                    cmbFPP.DataSource = null;
+                    cmbFPP.DropDownHeight = 100;
+                    return;
+                };
+
+                var fppDict = new Dictionary<string, string>();
+
+                foreach (DataRow item in DataTableFPP().Rows)
+                {
+                    string fppId = item["id"].ToString();
+                    string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
+
+                    fppDict.Add(fppId, fppName);
+                }
+
+                cmbFPP.DataSource = new BindingSource(fppDict, null);
+                cmbFPP.DisplayMember = "value";
+                cmbFPP.ValueMember = "key";
+                cmbFPP.DropDownHeight = 400;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        internal void LoadOthersFPPByFPPIdCombobox()
+        {
+            byte fppId = Convert.ToByte(cmbFPP.SelectedValue);
+            HelperLoadRecords.OthersFPPCombobox(Factory.SubFPPRepository().GetRecordsByFPPId(fppId), cmbOthersFPP, "name", "id");
+            cmbOthersFPP.SelectedIndex = -1;
+            cmbOthersFPP.Text = string.Empty;
+            cmbOthersFPP.Enabled = true;
+          
+        }
+
+        private DataTable DataTableFPP()
+        {
+            DataTable dtFPP;
+
+            if (string.IsNullOrEmpty(cmbFPP.Text))
+                dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
+            else
+                dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbFPP.Text);
+
+            return dtFPP;
+        }
+
+
+
+
 
         private void LoadBudgetAppropriationAccounts()
         {
             try
             {
-                if (DatatableAccounts().Rows.Count == 0) return;
+                if (DatatableAccounts().Rows.Count == 0) {
+                    cmbAccount.DataSource = null;
+                    cmbAccount.Items.Clear();
+                    return;
+                }
+                
+               
 
                 var accountDict = new Dictionary<ushort, string>();
                 foreach (DataRow item in DatatableAccounts().Rows)
@@ -50,7 +147,8 @@ namespace AccountingSystem.Views.Manage.Realignment
         private DataTable DatatableAccounts()
         {
             DataTable dtRealignmentAccounts;
-            dtRealignmentAccounts = Factory.BudgetAppropriationsRepository().GetRecords();
+            dtRealignmentAccounts = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppId.ToString(), othersFPPId ,fundId, allotmentClassId, dtDateIssued.Value);
+
             return dtRealignmentAccounts;
         }
 
@@ -79,6 +177,47 @@ namespace AccountingSystem.Views.Manage.Realignment
         private string GetBudgetIdByGeneralLedgerAccountId(string generalLedgerId)
         {
             return Factory.BudgetAppropriationsRepository().GetBudgetIdByGeneralLedgerId(generalLedgerId);
+        }
+
+     
+        private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbAccount.Text))
+            {
+                cmbAccount.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
+                LoadBudgetAppropriationAccounts();
+                cmbAccount.SelectedIndex = -1;
+                cmbAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
+            }
+        }
+
+        private void FilterSearchDetails()
+        {
+            fundId = Convert.ToInt32(cmbFunds.SelectedValue);
+            fppId = Convert.ToInt32(cmbFPP.SelectedValue);
+            othersFPPId = Convert.ToInt32(cmbOthersFPP.SelectedValue);
+            allotmentClassId = Convert.ToInt32(cmbAllotmentClass.SelectedValue);
+            year = (short)dtDateIssued.Value.Year;
+
+            LoadBudgetAppropriationAccounts();
+        }
+
+        private void cmbFPP_DropDownClosed(object sender, EventArgs e)
+        {
+            LoadOthersFPPByFPPIdCombobox();
+            FilterSearchDetails();
+        }
+        private void cmbFunds_DropDownClosed(object sender, EventArgs e)
+        {
+            FilterSearchDetails();
+        }
+        private void cmbOthersFPP_DropDownClosed(object sender, EventArgs e)
+        {
+            FilterSearchDetails();
+        }
+        private void cmbAllotmentClass_DropDownClosed(object sender, EventArgs e)
+        {
+            FilterSearchDetails();
         }
     }
 }

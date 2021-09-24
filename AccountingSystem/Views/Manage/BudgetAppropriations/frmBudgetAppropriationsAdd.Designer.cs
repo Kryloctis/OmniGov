@@ -95,6 +95,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Budget Appropriation";
+            this.Load += new System.EventHandler(this.frmBudgetAppropriationsAdd_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

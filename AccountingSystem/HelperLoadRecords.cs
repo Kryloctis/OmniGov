@@ -1021,12 +1021,12 @@ namespace AccountingSystem
 
                     //GET TOTAL OF BUDGET REALIGNMENT
                     var dtBudgetRealignment = Factory.BudgetRealignmentRepository().GetRecordsByBudgetAppropriationId(rowId);
-                    decimal totalBudgetRealignment = Convert.ToDecimal(dtBudgetRealignment.Rows.Count == 0 ? 0 : dtSupplementalAppropriation.Compute("Sum(amount)", string.Empty));
+                    decimal totalRealignment = Convert.ToDecimal(dtBudgetRealignment.Rows.Count == 0 ? 0 : dtBudgetRealignment.Compute("Sum(amount)", string.Empty));
 
                     //GET TOTAL APPROPRIATION
-                    decimal totalAppropriationAmount = totalSupplementalAppropriation + rowAppropriationAmount;
+                    decimal totalAppropriationAmount = (totalSupplementalAppropriation + rowAppropriationAmount);
 
-                    decimal appropriationBalance = (totalSupplementalAppropriation + rowAppropriationAmount) - totalAllotmentRelease;
+                    decimal appropriationBalance = (totalSupplementalAppropriation + rowAppropriationAmount - totalAllotmentRelease) - totalRealignment;
 
 
                     dgvBudgetAppropriations.Rows.Add(new object[] {
@@ -1040,7 +1040,7 @@ namespace AccountingSystem
                         rowAccountCode,
                         rowDateEntry,
                         totalAppropriationAmount,
-                        totalBudgetRealignment,
+                        totalRealignment,
                         totalAllotmentRelease,
                         appropriationBalance,
                         rowYear,
