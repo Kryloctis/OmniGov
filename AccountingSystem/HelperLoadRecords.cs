@@ -1023,6 +1023,7 @@ namespace AccountingSystem
                     var dtBudgetRealignment = Factory.BudgetRealignmentRepository().GetRecordsByBudgetAppropriationId(rowId);
                     decimal totalRealignment = Convert.ToDecimal(dtBudgetRealignment.Rows.Count == 0 ? 0 : dtBudgetRealignment.Compute("Sum(amount)", string.Empty));
 
+
                     //GET TOTAL APPROPRIATION
                     decimal totalAppropriationAmount = (totalSupplementalAppropriation + rowAppropriationAmount);
 
@@ -1396,8 +1397,12 @@ namespace AccountingSystem
 
                 //Set up new Columns to Datagrid View
                 dgv.Columns.Add("to_id", "id");
-                dgv.Columns.Add("to_budget", "Budget Realignment");
+                dgv.Columns.Add("to_fpp_name", "FPP");
+                dgv.Columns.Add("to_allotment_name", "Allotment Class");
+                dgv.Columns.Add("to_budget", "Realigned To");
                 dgv.Columns.Add("amount", "Amount");
+
+                dgv.Columns["to_fpp_name"].Width = 120;
 
                 //Set up Column Format
                 dgv.Columns["to_id"].Visible = false;
@@ -1414,6 +1419,8 @@ namespace AccountingSystem
                     dgv.Rows.Add(new object[]
                     {
                         drRealignment["to_id"],
+                        drRealignment["to_fpp_name"],
+                        drRealignment["to_allotment_name"],
                         drRealignment["to_budget"],
                         drRealignment["amount"] 
                     });

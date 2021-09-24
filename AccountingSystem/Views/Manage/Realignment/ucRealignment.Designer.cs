@@ -44,7 +44,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.cmbAllotmentClass = new System.Windows.Forms.ComboBox();
             this.cmbFPP = new System.Windows.Forms.ComboBox();
             this.cmbFunds = new System.Windows.Forms.ComboBox();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.nudAppropriationBalance = new System.Windows.Forms.NumericUpDown();
             this.label13 = new System.Windows.Forms.Label();
             this.nudAmount = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
@@ -55,10 +55,12 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.cmbOthersFPP = new System.Windows.Forms.ComboBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetRealignment)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAppropriationBalance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgBudgetRealignment
@@ -68,7 +70,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.budgetAppropriationId,
             this.realignmentAccount,
             this.realignmentAmount});
-            this.dgBudgetRealignment.Location = new System.Drawing.Point(13, 325);
+            this.dgBudgetRealignment.Location = new System.Drawing.Point(9, 22);
             this.dgBudgetRealignment.Name = "dgBudgetRealignment";
             this.dgBudgetRealignment.RowTemplate.Height = 25;
             this.dgBudgetRealignment.Size = new System.Drawing.Size(505, 103);
@@ -98,7 +100,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(442, 285);
+            this.btnAdd.Location = new System.Drawing.Point(440, 272);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 23;
@@ -124,7 +126,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(443, 434);
+            this.button2.Location = new System.Drawing.Point(439, 131);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 40;
@@ -133,7 +135,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(362, 434);
+            this.button1.Location = new System.Drawing.Point(358, 131);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 39;
@@ -142,7 +144,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             // 
             // txtRemarks
             // 
-            this.txtRemarks.Location = new System.Drawing.Point(76, 463);
+            this.txtRemarks.Location = new System.Drawing.Point(75, 492);
             this.txtRemarks.Multiline = true;
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.Size = new System.Drawing.Size(442, 46);
@@ -151,7 +153,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 466);
+            this.label5.Location = new System.Drawing.Point(11, 495);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 15);
             this.label5.TabIndex = 41;
@@ -162,8 +164,9 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.groupBox1.Controls.Add(this.cmbAllotmentClass);
             this.groupBox1.Controls.Add(this.cmbFPP);
             this.groupBox1.Controls.Add(this.cmbFunds);
-            this.groupBox1.Controls.Add(this.numericUpDown2);
+            this.groupBox1.Controls.Add(this.nudAppropriationBalance);
             this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.btnAdd);
             this.groupBox1.Controls.Add(this.nudAmount);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label12);
@@ -177,7 +180,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.groupBox1.Controls.Add(this.cmbOthersFPP);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(538, 276);
+            this.groupBox1.Size = new System.Drawing.Size(538, 302);
             this.groupBox1.TabIndex = 44;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Realign to ";
@@ -212,19 +215,20 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.cmbFunds.TabIndex = 46;
             this.cmbFunds.DropDownClosed += new System.EventHandler(this.cmbFunds_DropDownClosed);
             // 
-            // numericUpDown2
+            // nudAppropriationBalance
             // 
-            this.numericUpDown2.DecimalPlaces = 2;
-            this.numericUpDown2.Location = new System.Drawing.Point(137, 22);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
+            this.nudAppropriationBalance.DecimalPlaces = 2;
+            this.nudAppropriationBalance.Location = new System.Drawing.Point(137, 22);
+            this.nudAppropriationBalance.Maximum = new decimal(new int[] {
             -1530494976,
             232830,
             0,
             0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(375, 23);
-            this.numericUpDown2.TabIndex = 45;
-            this.numericUpDown2.ThousandsSeparator = true;
+            this.nudAppropriationBalance.Name = "nudAppropriationBalance";
+            this.nudAppropriationBalance.ReadOnly = true;
+            this.nudAppropriationBalance.Size = new System.Drawing.Size(375, 23);
+            this.nudAppropriationBalance.TabIndex = 45;
+            this.nudAppropriationBalance.ThousandsSeparator = true;
             // 
             // label13
             // 
@@ -321,26 +325,36 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.cmbOthersFPP.TabIndex = 16;
             this.cmbOthersFPP.DropDownClosed += new System.EventHandler(this.cmbOthersFPP_DropDownClosed);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.dgBudgetRealignment);
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.button2);
+            this.groupBox2.Location = new System.Drawing.Point(4, 312);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(537, 162);
+            this.groupBox2.TabIndex = 45;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Realigned Accounts";
+            // 
             // ucRealignment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtRemarks);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.dgBudgetRealignment);
             this.Name = "ucRealignment";
-            this.Size = new System.Drawing.Size(544, 523);
+            this.Size = new System.Drawing.Size(544, 542);
             this.Load += new System.EventHandler(this.ucRealignment_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetRealignment)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAppropriationBalance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -368,10 +382,11 @@ namespace AccountingSystem.Views.Manage.Realignment
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         internal System.Windows.Forms.ComboBox cmbAccount;
-        internal System.Windows.Forms.NumericUpDown numericUpDown2;
+        internal System.Windows.Forms.NumericUpDown nudAppropriationBalance;
         private System.Windows.Forms.Label label13;
         internal System.Windows.Forms.ComboBox cmbFunds;
         internal System.Windows.Forms.ComboBox cmbFPP;
         internal System.Windows.Forms.ComboBox cmbAllotmentClass;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }

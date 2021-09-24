@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.ucRealignment1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucRealignment1.Location = new System.Drawing.Point(0, 0);
             this.ucRealignment1.Name = "ucRealignment1";
-            this.ucRealignment1.Size = new System.Drawing.Size(544, 544);
+            this.ucRealignment1.Size = new System.Drawing.Size(544, 589);
             this.ucRealignment1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -52,7 +52,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 515);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 560);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(544, 29);
             this.flowLayoutPanel1.TabIndex = 1;
@@ -84,7 +84,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(544, 544);
+            this.ClientSize = new System.Drawing.Size(544, 589);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ucRealignment1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

@@ -27,7 +27,7 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private void frmRealignmentAdd_Load(object sender, EventArgs e)
         {
-            //uc.nudBudgetAppropriation.Value = Convert.ToDecimal(_budgetAppropriationAmount);
+            uc.nudAppropriationBalance.Value = Convert.ToDecimal(_budgetAppropriationAmount);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -38,6 +38,7 @@ namespace AccountingSystem.Views.Manage.Realignment
                 {
                     _frmRealignment.LoadBudgetRealignments();
                     Helper.MessageBoxSuccess("Budget Realignment has been saved.");
+                    this.Close();
                     //uc.ResetForm();
                 }
             }

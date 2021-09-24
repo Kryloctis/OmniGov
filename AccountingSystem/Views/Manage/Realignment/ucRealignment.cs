@@ -193,9 +193,11 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private void FilterSearchDetails()
         {
+
+
             fundId = Convert.ToInt32(cmbFunds.SelectedValue);
             fppId = Convert.ToInt32(cmbFPP.SelectedValue);
-            othersFPPId = Convert.ToInt32(cmbOthersFPP.SelectedValue);
+            othersFPPId = Convert.ToInt32(cmbOthersFPP.SelectedValue) == 0 ? null : Convert.ToInt32(cmbOthersFPP.SelectedValue);
             allotmentClassId = Convert.ToInt32(cmbAllotmentClass.SelectedValue);
             year = (short)dtDateIssued.Value.Year;
 

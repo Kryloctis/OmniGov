@@ -25,9 +25,14 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private void frmRealignment_Load(object sender, EventArgs e)
         {
-            this.Text = $"{this.Text} > {budgetAppropriationAccount}";
+            this.Text = $"{this.Text} > {budgetAppropriationAccount.Trim()}";
             LoadSelectedAppropriation();
             LoadBudgetRealignments();
+
+            txtTotalRealignmentAppropriation.Text = (from DataGridViewRow row in dgRealignment.Rows
+                                                       where !String.IsNullOrEmpty(row.Cells["amount"].FormattedValue.ToString())
+                                                       select Convert.ToDecimal(row.Cells["amount"].FormattedValue)).Sum().ToString("N2");
+
         }
 
         internal void LoadBudgetRealignments()

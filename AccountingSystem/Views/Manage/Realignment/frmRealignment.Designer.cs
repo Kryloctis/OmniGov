@@ -46,6 +46,8 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.lblUpdatedAtPlaceHolder = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgRealignment = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtTotalRealignmentAppropriation = new System.Windows.Forms.TextBox();
             this.toolStrip2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgRealignment)).BeginInit();
@@ -195,9 +197,29 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.dgRealignment.Location = new System.Drawing.Point(12, 53);
             this.dgRealignment.Name = "dgRealignment";
             this.dgRealignment.RowTemplate.Height = 25;
-            this.dgRealignment.Size = new System.Drawing.Size(794, 348);
+            this.dgRealignment.Size = new System.Drawing.Size(794, 330);
             this.dgRealignment.TabIndex = 10;
             this.dgRealignment.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(463, 392);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(179, 15);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Total Realignment Appropriation";
+            // 
+            // txtTotalRealignmentAppropriation
+            // 
+            this.txtTotalRealignmentAppropriation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTotalRealignmentAppropriation.Location = new System.Drawing.Point(648, 389);
+            this.txtTotalRealignmentAppropriation.Name = "txtTotalRealignmentAppropriation";
+            this.txtTotalRealignmentAppropriation.ReadOnly = true;
+            this.txtTotalRealignmentAppropriation.Size = new System.Drawing.Size(158, 23);
+            this.txtTotalRealignmentAppropriation.TabIndex = 11;
+            this.txtTotalRealignmentAppropriation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // frmRealignment
             // 
@@ -205,6 +227,8 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(818, 437);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtTotalRealignmentAppropriation);
             this.Controls.Add(this.dgRealignment);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip2);
@@ -244,5 +268,7 @@ namespace AccountingSystem.Views.Manage.Realignment
         internal System.Windows.Forms.ToolStripStatusLabel lblUpdatedAtPlaceHolder;
         internal System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.DataGridView dgRealignment;
+        private System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.TextBox txtTotalRealignmentAppropriation;
     }
 }

@@ -107,6 +107,8 @@ namespace ACC.Data
 
                 string query = $"SELECT " +
                     $"to_id," +
+                    $"to_fpp_name," +
+                    $"to_allotment_name," +
                     $"to_budget," +
                     $"date_entry, " +
                     $"amount " +
