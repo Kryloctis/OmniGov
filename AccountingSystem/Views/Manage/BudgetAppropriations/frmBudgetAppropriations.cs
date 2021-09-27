@@ -84,7 +84,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
           
         }
 
-        internal void LoadComboboxes()
+        public void LoadComboboxes()
         {
             try
             {
@@ -97,6 +97,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 LoadFPP();
                 cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TextChanged);
                 cmbxFPP.SelectedValueChanged += new EventHandler(CmbxFPP_SelectedValueChanged);
+
             }
             catch (Exception ex)
             {

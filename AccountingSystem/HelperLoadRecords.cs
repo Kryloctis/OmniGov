@@ -1014,9 +1014,15 @@ namespace AccountingSystem
                     decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("SUM(amount)", string.Empty));
 
 
+                    //GET TOTAL REALIGNMENT
+                    var dtRealignmentTo = Factory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedToByBudgetId(rowId);
+
+                    var dtRealignmentFrom = Factory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedFromByBudgetId(rowId);
+
+
 
                     //GET TOTAL APPROPRIATION
-                    decimal totalAppropriationAmount = (totalSupplementalAppropriation + rowAppropriationAmount);
+                    decimal totalAppropriationAmount = (totalSupplementalAppropriation + rowAppropriationAmount + dtRealignmentTo) - dtRealignmentFrom;
 
                     decimal appropriationBalance = (totalSupplementalAppropriation + rowAppropriationAmount - totalAllotmentRelease);
 
@@ -1200,7 +1206,7 @@ namespace AccountingSystem
 
                 sub_fpp = null;
 
-                var dtGetViewRecordsByFFPIDByAllotmentClass = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf);
+                var dtGetViewRecordsByFFPIDByAllotmentClass = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf, null);
 
 
                 //Load by loop All Budget Appropriations Records without Others FPP 
@@ -1224,7 +1230,7 @@ namespace AccountingSystem
 
 
                     sub_fpp = othersFPPID;
-                    DataTable dtGetViewRecordsByIds = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf);
+                    DataTable dtGetViewRecordsByIds = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf, null);
 
                     foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByIds.Rows)
                     {

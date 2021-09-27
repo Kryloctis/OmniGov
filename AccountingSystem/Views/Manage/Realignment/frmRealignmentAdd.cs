@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.BudgetAppropriations;
 using System;
 using System.Windows.Forms;
 
@@ -16,6 +17,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             InitializeComponent();
             uc = ucRealignment1;
             _frmRealignment = frmRealignment;
+            uc.txtBudgetId.Text  = frmRealignment.budgetAppropriationId;
         }
 
         private void frmRealignmentAdd_Load(object sender, EventArgs e)
@@ -31,21 +33,31 @@ namespace AccountingSystem.Views.Manage.Realignment
                 {
                     _frmRealignment.LoadBudgetRealignments();
                     Helper.MessageBoxSuccess("Budget Realignment has been saved.");
-                    this.Close();
-                    //uc.ResetForm();
+                    uc.ResetForm();
                 }
             }
+        }
+
+       
+
+        internal bool FormValidations()
+        {
+            // validate form
+            if (uc.dgBudgetRealignment.Rows.Count == 0)
+            {
+                Helper.MessageBoxError("Please add account/s for realignment");
+                return false;
+            }
+
+            return true;
         }
 
         private bool SaveData()
         {
             try
             {
-                //if (!uc.ValidateChildren())
-                //{
-                //    Helper.MessageBoxError(uc.GetFormErrors());
-                //    return false;
-                //}
+                if (!FormValidations())
+                    return false;
 
                 var budgetRealignmentModel = new BudgetRealignmentModel()
                 { 
@@ -68,12 +80,6 @@ namespace AccountingSystem.Views.Manage.Realignment
         {
             try
             {
-                //if (!uc.ValidateChildren())
-                //{
-                //    Helper.MessageBoxError(uc.GetFormErrors());
-                //    return false;
-                //}
-
                 foreach (DataGridViewRow item in uc.dgBudgetRealignment.Rows)
                 {
                     string budgetAppropriationId = item.Cells["budgetAppropriationId"].Value.ToString();

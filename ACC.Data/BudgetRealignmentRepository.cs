@@ -113,7 +113,7 @@ namespace ACC.Data
                     $"date_entry, " +
                     $"amount " +
                     $"FROM {viewTableName} " +
-                    $"WHERE budget_appropriations_id = @budget_appropriations_id";
+                    $"WHERE from_budget_appropriations_id = @budget_appropriations_id";
 
                 var dtSupplementalApprorpriation = new DataTable();
 
@@ -138,6 +138,43 @@ namespace ACC.Data
             }
         }
 
-   
+
+        public decimal GetAmountOfBudgetRealignedToByBudgetId(int budgetId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetId},
+                };
+
+                string query = $"SELECT COALESCE(SUM(amount), 0) AS amount FROM view_realignment WHERE to_budget_appropriations_id=@budget_appropriations_id";
+                decimal amount = Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+                return amount;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public decimal GetAmountOfBudgetRealignedFromByBudgetId(int budgetId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetId},
+                };
+
+                string query = $"SELECT COALESCE(SUM(amount), 0) AS amount FROM view_realignment WHERE from_budget_appropriations_id=@budget_appropriations_id";
+                decimal amount = Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+                return amount;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
