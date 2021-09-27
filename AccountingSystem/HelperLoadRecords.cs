@@ -889,7 +889,6 @@ namespace AccountingSystem
                 dgvBudgetAppropriations.Columns.Add("account_code", "Account Code");
                 dgvBudgetAppropriations.Columns.Add("date_entry", "Date Entry");
                 dgvBudgetAppropriations.Columns.Add("amount", "Appropriation");
-                dgvBudgetAppropriations.Columns.Add("realignment_amount", "Realignment");
                 dgvBudgetAppropriations.Columns.Add("totalAllotmentRelease", "Total Allotment Release");
                 dgvBudgetAppropriations.Columns.Add("appropriationBalance", "Appropriation Balance");
                 dgvBudgetAppropriations.Columns.Add("year", "Year");
@@ -925,11 +924,7 @@ namespace AccountingSystem
                 dgvBudgetAppropriations.Columns["amount"].DefaultCellStyle.Format = "N2";
                 dgvBudgetAppropriations.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-                dgvBudgetAppropriations.Columns["realignment_amount"].Resizable = DataGridViewTriState.False;
-                dgvBudgetAppropriations.Columns["realignment_amount"].Width = amountColumWidth;
-                dgvBudgetAppropriations.Columns["realignment_amount"].MinimumWidth = amountColumWidth;
-                dgvBudgetAppropriations.Columns["realignment_amount"].DefaultCellStyle.Format = "N2";
-                dgvBudgetAppropriations.Columns["realignment_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+       
 
                 dgvBudgetAppropriations.Columns["totalAllotmentRelease"].Resizable = DataGridViewTriState.False;
                 dgvBudgetAppropriations.Columns["totalAllotmentRelease"].Width = amountColumWidth;
@@ -1019,15 +1014,11 @@ namespace AccountingSystem
                     decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("SUM(amount)", string.Empty));
 
 
-                    //GET TOTAL OF BUDGET REALIGNMENT
-                    var dtBudgetRealignment = Factory.BudgetRealignmentRepository().GetRecordsByBudgetAppropriationId(rowId);
-                    decimal totalRealignment = Convert.ToDecimal(dtBudgetRealignment.Rows.Count == 0 ? 0 : dtBudgetRealignment.Compute("Sum(amount)", string.Empty));
-
 
                     //GET TOTAL APPROPRIATION
                     decimal totalAppropriationAmount = (totalSupplementalAppropriation + rowAppropriationAmount);
 
-                    decimal appropriationBalance = (totalSupplementalAppropriation + rowAppropriationAmount - totalAllotmentRelease) - totalRealignment;
+                    decimal appropriationBalance = (totalSupplementalAppropriation + rowAppropriationAmount - totalAllotmentRelease);
 
 
                     dgvBudgetAppropriations.Rows.Add(new object[] {
@@ -1041,7 +1032,6 @@ namespace AccountingSystem
                         rowAccountCode,
                         rowDateEntry,
                         totalAppropriationAmount,
-                        totalRealignment,
                         totalAllotmentRelease,
                         appropriationBalance,
                         rowYear,

@@ -29,6 +29,7 @@ namespace AccountingSystem.Views.Manage.Realignment
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dgBudgetRealignment = new System.Windows.Forms.DataGridView();
             this.budgetAppropriationId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.realignmentAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,11 +57,23 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.label9 = new System.Windows.Forms.Label();
             this.cmbOthersFPP = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.epFPP = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epAllotmentClass = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epAccount = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epTypeOfFund = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epRemarks = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetRealignment)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAppropriationBalance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAllotmentClass)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAccount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epTypeOfFund)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epRemarks)).BeginInit();
             this.SuspendLayout();
             // 
             // dgBudgetRealignment
@@ -337,6 +350,30 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Realigned Accounts";
             // 
+            // epFPP
+            // 
+            this.epFPP.ContainerControl = this;
+            // 
+            // epAllotmentClass
+            // 
+            this.epAllotmentClass.ContainerControl = this;
+            // 
+            // epAccount
+            // 
+            this.epAccount.ContainerControl = this;
+            // 
+            // epTypeOfFund
+            // 
+            this.epTypeOfFund.ContainerControl = this;
+            // 
+            // epAmount
+            // 
+            this.epAmount.ContainerControl = this;
+            // 
+            // epRemarks
+            // 
+            this.epRemarks.ContainerControl = this;
+            // 
             // ucRealignment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -355,6 +392,12 @@ namespace AccountingSystem.Views.Manage.Realignment
             ((System.ComponentModel.ISupportInitialize)(this.nudAppropriationBalance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.epFPP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAllotmentClass)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAccount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epTypeOfFund)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epRemarks)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -388,5 +431,11 @@ namespace AccountingSystem.Views.Manage.Realignment
         internal System.Windows.Forms.ComboBox cmbFPP;
         internal System.Windows.Forms.ComboBox cmbAllotmentClass;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ErrorProvider epFPP;
+        private System.Windows.Forms.ErrorProvider epAllotmentClass;
+        internal System.Windows.Forms.ErrorProvider epAccount;
+        internal System.Windows.Forms.ErrorProvider epTypeOfFund;
+        internal System.Windows.Forms.ErrorProvider epAmount;
+        internal System.Windows.Forms.ErrorProvider epRemarks;
     }
 }

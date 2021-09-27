@@ -10,7 +10,6 @@ namespace AccountingSystem.Views.Manage.Realignment
 {
     public partial class ucRealignment : UserControl
     {
-
         internal int fundId;
         internal int fppId;
         internal int? othersFPPId;
@@ -34,6 +33,7 @@ namespace AccountingSystem.Views.Manage.Realignment
                 LoadOthersFPPByFPPIdCombobox();
                 FilterSearchDetails();
             }
+
         }
 
 
