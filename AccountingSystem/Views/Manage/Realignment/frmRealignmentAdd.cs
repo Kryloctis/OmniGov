@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private void frmRealignmentAdd_Load(object sender, EventArgs e)
         {
-            uc.nudAppropriationBalance.Value = Convert.ToDecimal(_budgetAppropriationAmount);
+            uc.txtAppropriationBalance.Text = Convert.ToDecimal(_budgetAppropriationAmount).ToString("N2");
         }
 
         private void btnSave_Click(object sender, EventArgs e)

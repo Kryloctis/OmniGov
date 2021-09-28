@@ -42,10 +42,11 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.txtRemarks = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtAppropriationBalance = new System.Windows.Forms.TextBox();
+            this.txtBudgetId = new System.Windows.Forms.Label();
             this.cmbAllotmentClass = new System.Windows.Forms.ComboBox();
             this.cmbFPP = new System.Windows.Forms.ComboBox();
             this.cmbFunds = new System.Windows.Forms.ComboBox();
-            this.nudAppropriationBalance = new System.Windows.Forms.NumericUpDown();
             this.label13 = new System.Windows.Forms.Label();
             this.nudAmount = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
@@ -65,10 +66,8 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.epTypeOfFund = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
             this.epRemarks = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtBudgetId = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetRealignment)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAppropriationBalance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
@@ -120,7 +119,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 23;
-            this.btnAdd.Text = "Add...";
+            this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -181,6 +180,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtAppropriationBalance);
             this.groupBox1.Controls.Add(this.txtBudgetId);
             this.groupBox1.Controls.Add(this.cmbAllotmentClass);
             this.groupBox1.Controls.Add(this.btnAdd);
@@ -188,7 +188,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.groupBox1.Controls.Add(this.txtRemarks);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.cmbFunds);
-            this.groupBox1.Controls.Add(this.nudAppropriationBalance);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.nudAmount);
             this.groupBox1.Controls.Add(this.label11);
@@ -207,6 +206,26 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.groupBox1.TabIndex = 44;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Realign to ";
+            // 
+            // txtAppropriationBalance
+            // 
+            this.txtAppropriationBalance.Location = new System.Drawing.Point(141, 21);
+            this.txtAppropriationBalance.Name = "txtAppropriationBalance";
+            this.txtAppropriationBalance.ReadOnly = true;
+            this.txtAppropriationBalance.Size = new System.Drawing.Size(374, 23);
+            this.txtAppropriationBalance.TabIndex = 50;
+            this.txtAppropriationBalance.TabStop = false;
+            this.txtAppropriationBalance.Text = "0.0";
+            // 
+            // txtBudgetId
+            // 
+            this.txtBudgetId.AutoSize = true;
+            this.txtBudgetId.Location = new System.Drawing.Point(9, 47);
+            this.txtBudgetId.Name = "txtBudgetId";
+            this.txtBudgetId.Size = new System.Drawing.Size(21, 15);
+            this.txtBudgetId.TabIndex = 49;
+            this.txtBudgetId.Text = "ID ";
+            this.txtBudgetId.Visible = false;
             // 
             // cmbAllotmentClass
             // 
@@ -238,24 +257,9 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.cmbFunds.FormattingEnabled = true;
             this.cmbFunds.Location = new System.Drawing.Point(105, 69);
             this.cmbFunds.Name = "cmbFunds";
-            this.cmbFunds.Size = new System.Drawing.Size(409, 23);
+            this.cmbFunds.Size = new System.Drawing.Size(410, 23);
             this.cmbFunds.TabIndex = 46;
             this.cmbFunds.DropDownClosed += new System.EventHandler(this.cmbFunds_DropDownClosed);
-            // 
-            // nudAppropriationBalance
-            // 
-            this.nudAppropriationBalance.DecimalPlaces = 2;
-            this.nudAppropriationBalance.Location = new System.Drawing.Point(137, 22);
-            this.nudAppropriationBalance.Maximum = new decimal(new int[] {
-            -1530494976,
-            232830,
-            0,
-            0});
-            this.nudAppropriationBalance.Name = "nudAppropriationBalance";
-            this.nudAppropriationBalance.ReadOnly = true;
-            this.nudAppropriationBalance.Size = new System.Drawing.Size(375, 23);
-            this.nudAppropriationBalance.TabIndex = 45;
-            this.nudAppropriationBalance.ThousandsSeparator = true;
             // 
             // label13
             // 
@@ -413,15 +417,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             // 
             this.epRemarks.ContainerControl = this;
             // 
-            // txtBudgetId
-            // 
-            this.txtBudgetId.AutoSize = true;
-            this.txtBudgetId.Location = new System.Drawing.Point(9, 47);
-            this.txtBudgetId.Name = "txtBudgetId";
-            this.txtBudgetId.Size = new System.Drawing.Size(21, 15);
-            this.txtBudgetId.TabIndex = 49;
-            this.txtBudgetId.Text = "ID ";
-            // 
             // ucRealignment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -435,7 +430,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetRealignment)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAppropriationBalance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -471,7 +465,6 @@ namespace AccountingSystem.Views.Manage.Realignment
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         internal System.Windows.Forms.ComboBox cmbAccount;
-        internal System.Windows.Forms.NumericUpDown nudAppropriationBalance;
         private System.Windows.Forms.Label label13;
         internal System.Windows.Forms.ComboBox cmbFunds;
         internal System.Windows.Forms.ComboBox cmbFPP;
@@ -486,5 +479,6 @@ namespace AccountingSystem.Views.Manage.Realignment
         private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.TextBox txtTotalAmountRealigned;
         public System.Windows.Forms.Label txtBudgetId;
+        internal System.Windows.Forms.TextBox txtAppropriationBalance;
     }
 }

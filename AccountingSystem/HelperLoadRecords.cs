@@ -867,11 +867,16 @@ namespace AccountingSystem
             {
                 //Image Column
                 Image continuingIcon = Properties.Resources.ok14px;
+                Image realignmentIcon = Properties.Resources.ok14px;
 
                 DataGridViewImageColumn imgColumn = new DataGridViewImageColumn();
+                DataGridViewImageColumn imgRealignedColumn = new DataGridViewImageColumn();
 
                 imgColumn.HeaderText = "Continuing";
                 imgColumn.Name = "continuing";
+
+                imgRealignedColumn.HeaderText = "Realigned";
+                imgRealignedColumn.Name = "realigned";
 
 
                 //Clearing Datagrid View  Rows & Columns before Loading new one
@@ -893,6 +898,7 @@ namespace AccountingSystem
                 dgvBudgetAppropriations.Columns.Add("appropriationBalance", "Appropriation Balance");
                 dgvBudgetAppropriations.Columns.Add("year", "Year");
                 dgvBudgetAppropriations.Columns.Add(imgColumn);
+                dgvBudgetAppropriations.Columns.Add(imgRealignedColumn);
                 dgvBudgetAppropriations.Columns.Add("remarks", "Remarks");
                 dgvBudgetAppropriations.Columns.Add("created_at", "Created at");
                 dgvBudgetAppropriations.Columns.Add("updated_at", "Updated at");
@@ -945,6 +951,12 @@ namespace AccountingSystem
                 dgvBudgetAppropriations.Columns["continuing"].Width = 80;
                 dgvBudgetAppropriations.Columns["continuing"].MinimumWidth = 80;
 
+                dgvBudgetAppropriations.Columns["realigned"].Resizable = DataGridViewTriState.False;
+                dgvBudgetAppropriations.Columns["realigned"].DefaultCellStyle.NullValue = null;
+                dgvBudgetAppropriations.Columns["realigned"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgvBudgetAppropriations.Columns["realigned"].Width = 80;
+                dgvBudgetAppropriations.Columns["realigned"].MinimumWidth = 80;
+
                 //Initialize Repository Method
                 var budgetAppropriationsModel = new BudgetAppropriationsModel()
                 {
@@ -962,7 +974,7 @@ namespace AccountingSystem
                 //Load by loop All Budget Appropriations Records without Others FPP 
                 foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByFFPIDByAllotmentClass.Rows)
                 {
-                    FieldData(dgvBudgetAppropriations, continuingIcon, drGetViewRecordsByIds);
+                    FieldData(dgvBudgetAppropriations, continuingIcon, realignmentIcon, drGetViewRecordsByIds);
                 }
 
 
@@ -984,11 +996,11 @@ namespace AccountingSystem
 
                     foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByIds.Rows)
                     {
-                        FieldData(dgvBudgetAppropriations, continuingIcon, drGetViewRecordsByIds);
+                        FieldData(dgvBudgetAppropriations, continuingIcon, realignmentIcon, drGetViewRecordsByIds);
                     }
                 }
 
-                static void FieldData(DataGridView dgvBudgetAppropriations, Image continuingIcon, DataRow drGetViewRecordsByIds)
+                static void FieldData(DataGridView dgvBudgetAppropriations, Image continuingIcon, Image realignmentIcon, DataRow drGetViewRecordsByIds)
                 {
                     int rowId = Convert.ToInt32(drGetViewRecordsByIds["id"]);
                     int rowFundId = Convert.ToInt32(drGetViewRecordsByIds["funds_id"]);
@@ -1002,6 +1014,7 @@ namespace AccountingSystem
                     decimal rowAppropriationAmount = Convert.ToDecimal(drGetViewRecordsByIds["amount"]);
                     short rowYear = Convert.ToInt16(drGetViewRecordsByIds["year"]);
                     byte rowContinuing = Convert.ToByte(drGetViewRecordsByIds["continuing"]);
+                    byte rowRealignment = Convert.ToByte(Factory.BudgetRealignmentRepository().BudgetHasRealignment(rowId));
                     string remarks = drGetViewRecordsByIds["remarks"].ToString();
 
                     //GET TOTAL SUPPLEMENTAL APPROPRIATIONS
@@ -1042,6 +1055,7 @@ namespace AccountingSystem
                         appropriationBalance,
                         rowYear,
                         rowContinuing == 1? continuingIcon : null,
+                        rowRealignment == 1? continuingIcon : null,
                         remarks,
                         drGetViewRecordsByIds["created_at"],
                         drGetViewRecordsByIds["updated_at"] });

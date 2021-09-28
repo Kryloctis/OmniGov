@@ -234,5 +234,27 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public bool BudgetHasRealignment(int budgetId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@budget_appropriations_id",DbType.Int64, budgetId },
+                };
+
+                string query = $"SELECT id FROM {tableName} WHERE from_budget_appropriations_id = @budget_appropriations_id";
+                string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
     }
 }

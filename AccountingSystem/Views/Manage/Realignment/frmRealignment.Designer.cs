@@ -237,7 +237,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.dgRealignmentFrom.RowTemplate.Height = 25;
             this.dgRealignmentFrom.Size = new System.Drawing.Size(804, 301);
             this.dgRealignmentFrom.TabIndex = 12;
-            this.dgRealignmentFrom.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgRealignmentFrom_CellContentClick);
+            this.dgRealignmentFrom.SelectionChanged += new System.EventHandler(this.dgRealignmentFrom_SelectionChanged);
             // 
             // tabRealignedTo
             // 
@@ -261,6 +261,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.dgRealignmentTo.RowTemplate.Height = 25;
             this.dgRealignmentTo.Size = new System.Drawing.Size(804, 301);
             this.dgRealignmentTo.TabIndex = 11;
+            this.dgRealignmentTo.SelectionChanged += new System.EventHandler(this.dgRealignmentTo_SelectionChanged);
             // 
             // imageList1
             // 

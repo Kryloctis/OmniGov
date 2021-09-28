@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             string totalRealignment;
 
 
-            if (tabControl1.TabPages.Contains(tabRealignedFrom))
+            if (tabControl1.SelectedTab == tabControl1.Controls[0])
             {
                 totalRealignment = (from DataGridViewRow row in dgRealignmentFrom.Rows
                         where !String.IsNullOrEmpty(row.Cells["amount"].FormattedValue.ToString())
@@ -58,7 +58,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             HelperLoadRecords.BudgetRealignmentToDatagridView(dtBudgetRealignmentTo, dgRealignmentTo);
 
             //REALIGNMENT TO THIS ACCOUNT
-
             var dtBudgetRealignmentFrom = Factory.BudgetRealignmentRepository().GetRealignmentFromByAppropriationId(int.Parse(budgetAppropriationId));
             HelperLoadRecords.BudgetRealignmentFromDatagridView(dtBudgetRealignmentFrom, dgRealignmentFrom);
         }
@@ -71,19 +70,20 @@ namespace AccountingSystem.Views.Manage.Realignment
             frmRealignmentAdd.ShowDialog();
         }
 
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
-        {
-            Helper.EnableDisableToolStripButtons(dgRealignmentTo, btnEdit, btnDelete);
-        }
-
-        private void dgRealignmentFrom_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             TotalRealignmentDisplay();
+        }
+
+        private void dgRealignmentFrom_SelectionChanged(object sender, EventArgs e)
+        {
+            Helper.EnableDisableToolStripButtons(dgRealignmentFrom, btnEdit, btnDelete);
+        }
+
+        private void dgRealignmentTo_SelectionChanged(object sender, EventArgs e)
+        {
+
+            Helper.EnableDisableToolStripButtons(dgRealignmentTo, btnEdit, btnDelete);
         }
     }
 }

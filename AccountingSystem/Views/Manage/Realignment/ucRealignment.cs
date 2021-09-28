@@ -333,7 +333,7 @@ namespace AccountingSystem.Views.Manage.Realignment
         {
             e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "amount");
 
-            decimal remainingAppropriation = Convert.ToDecimal(nudAppropriationBalance.Text) - Convert.ToDecimal(txtTotalAmountRealigned.Text);
+            decimal remainingAppropriation = Convert.ToDecimal(txtAppropriationBalance.Text) - Convert.ToDecimal(txtTotalAmountRealigned.Text);
 
             bool isEnoughBudget = remainingAppropriation >= Convert.ToDecimal(nudAmount.Value);
 

@@ -15,6 +15,7 @@ namespace ACC.Domain.Interfaces
         Decimal GetAmountOfBudgetRealignedToByBudgetId(int budgetId);
         Decimal GetAmountOfBudgetRealignedFromByBudgetId(int budgetId);
         bool InsertRealignment(BudgetRealignmentModel entity);
+        bool BudgetHasRealignment(int budgetId);
         ushort GetLastInsertedID();
     }
 }
