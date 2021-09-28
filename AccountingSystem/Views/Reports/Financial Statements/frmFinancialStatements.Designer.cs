@@ -155,13 +155,13 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             // 
             this.radSFPosition.Appearance = System.Windows.Forms.Appearance.Button;
             this.radSFPosition.AutoSize = true;
+            this.radSFPosition.Enabled = false;
             this.radSFPosition.Location = new System.Drawing.Point(3, 3);
             this.radSFPosition.Name = "radSFPosition";
             this.radSFPosition.Size = new System.Drawing.Size(181, 25);
             this.radSFPosition.TabIndex = 5;
             this.radSFPosition.Text = "Statement of Financial Position";
             this.radSFPosition.UseVisualStyleBackColor = true;
-            this.radSFPosition.Visible = false;
             this.radSFPosition.CheckedChanged += new System.EventHandler(this.radSFPosition_CheckedChanged);
             // 
             // radSFPerformance
@@ -182,39 +182,39 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             // 
             this.radSCF.Appearance = System.Windows.Forms.Appearance.Button;
             this.radSCF.AutoSize = true;
+            this.radSCF.Enabled = false;
             this.radSCF.Location = new System.Drawing.Point(402, 3);
             this.radSCF.Name = "radSCF";
             this.radSCF.Size = new System.Drawing.Size(147, 25);
             this.radSCF.TabIndex = 2;
             this.radSCF.Text = "Statement of Cash Flows";
             this.radSCF.UseVisualStyleBackColor = true;
-            this.radSCF.Visible = false;
             this.radSCF.CheckedChanged += new System.EventHandler(this.radSCF_CheckedChanged);
             // 
             // radSCNAE
             // 
             this.radSCNAE.Appearance = System.Windows.Forms.Appearance.Button;
             this.radSCNAE.AutoSize = true;
+            this.radSCNAE.Enabled = false;
             this.radSCNAE.Location = new System.Drawing.Point(555, 3);
             this.radSCNAE.Name = "radSCNAE";
             this.radSCNAE.Size = new System.Drawing.Size(243, 25);
             this.radSCNAE.TabIndex = 3;
             this.radSCNAE.Text = "Statement of Changes in Net Assets/Equity";
             this.radSCNAE.UseVisualStyleBackColor = true;
-            this.radSCNAE.Visible = false;
             this.radSCNAE.CheckedChanged += new System.EventHandler(this.radSCNAE_CheckedChanged);
             // 
             // radSCBAA
             // 
             this.radSCBAA.Appearance = System.Windows.Forms.Appearance.Button;
             this.radSCBAA.AutoSize = true;
+            this.radSCBAA.Enabled = false;
             this.radSCBAA.Location = new System.Drawing.Point(804, 3);
             this.radSCBAA.Name = "radSCBAA";
             this.radSCBAA.Size = new System.Drawing.Size(320, 25);
             this.radSCBAA.TabIndex = 1;
             this.radSCBAA.Text = "Statement of Comparison of Budget and Actual Amounts";
             this.radSCBAA.UseVisualStyleBackColor = true;
-            this.radSCBAA.Visible = false;
             this.radSCBAA.CheckedChanged += new System.EventHandler(this.radSCBAA_CheckedChanged);
             // 
             // frmFinancialStatements

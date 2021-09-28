@@ -7,6 +7,10 @@ namespace ACC.Domain.Interfaces
 {
     public interface IJEVAccountsRepository : IRepository<JEVAccountsModel>
     {
+        DataTable GetViewRecordsByLedgerAccounts();
+
+        DataTable GetViewRecords();
+
         DataTable GetViewRecordsByJevId(int jevId);
 
         DataTable GetViewRecordsByFundJournalDate(byte fundId, byte journalId, DateTime dateEntry);
@@ -18,7 +22,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecordsByFundAndSubsidiaryLedgerAndSubsidiaryLedgerAndYear(int fundId, int generalLedgerId, int subsidiaryLedgerId, short year);
 
         //STATEMENT OF FINANCIAL PERFORMANCE
-        Decimal GetSumTransactionsByFundAndAccountAndIsDebitAndDateEntry(int fundId, int generalLedgerId, bool isDebit, DateTime dateEntry);
+        Decimal GetBalanceByFundAndAccountAndDateEntry(int fundId, int generalLedgerId, DateTime dateEntry);
 
         //TRIAL BALANCE
         Dictionary<string, decimal> GetSumTransactions(int fundId, int generalLedgerId, DateTime dateEntry, ushort? subsidiaryId = null);

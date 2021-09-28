@@ -17,30 +17,23 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             panel1.Controls.Add(reportViewer);
         }
 
-        private decimal GetBalances(int fundId, int generalLedgerAccountId, DateTime dateEntry)
-        {
-            decimal transactionDebit = Factory.JEVAccountsRepository().GetSumTransactionsByFundAndAccountAndIsDebitAndDateEntry(fundId, generalLedgerAccountId, true, dateEntry);
-            decimal transactionCredit = Factory.JEVAccountsRepository().GetSumTransactionsByFundAndAccountAndIsDebitAndDateEntry(fundId, generalLedgerAccountId, false, dateEntry);
-
-            decimal transactionBalance = Math.Max(transactionDebit, transactionCredit) - Math.Min(transactionDebit, transactionCredit);
-
-            return transactionBalance;
-        }
-
         private DataTable StatementOfFinancialPerformanceDatatable()
         {
-            Cursor.Current = Cursors.WaitCursor;
+           
             var dataSet = new dsLFS();
             var dtStatementOfFinancialPerformance = dataSet.dtStatementOfFinancialPerformance;
             int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
             var dateEnded = dtPickerDateEnds.Value;
-            var previousYearEnded = new DateTime(year: dateEnded.Year - 1, month: 12, DateTime.DaysInMonth(2021, 12));
+            var previousYearEnded = new DateTime(year: dateEnded.Year - 1, month: 12, DateTime.DaysInMonth(dateEnded.Year, 12));
 
             try
             {
-                var dtGeneralLedgerAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
-                foreach (DataRow row in dtGeneralLedgerAccounts.Rows)
+                var dtJEVAccounts = Factory.JEVAccountsRepository().GetViewRecordsByLedgerAccounts();
+                foreach (DataRow row in dtJEVAccounts.Rows)
                 {
+
+                    decimal currentAmount = Factory.JEVAccountsRepository().GetBalanceByFundAndAccountAndDateEntry(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), dateEnded);
+
                     var items = new object[]
                     {
                     null,
@@ -49,18 +42,18 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                     row["account_group_id"],
                     row["account_group_code"],
                     row["account_group_name"],
-                    row["major_account_group_id"],
+                    row["maj_acc_group_id"],
                     row["maj_acc_group_code"],
                     row["maj_acc_group_name"],
-                    row["sub_major_account_group_id"],
+                    row["sub_maj_acc_group_id"],
                     row["sub_maj_acc_group_code"],
                     row["sub_maj_acc_group_name"],
                     row["general_ledger_accounts_id"],
                     row["account_code"],
-                    row["ledger_name"],
+                    row["general_ledger_accounts_name"],
                     null,
-                    GetBalances(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), dateEnded),
-                    GetBalances(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), previousYearEnded)
+                    currentAmount,
+                    Factory.JEVAccountsRepository().GetBalanceByFundAndAccountAndDateEntry(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), previousYearEnded)
                 };
                     dtStatementOfFinancialPerformance.Rows.Add(items);
                 }
@@ -70,14 +63,14 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 Helper.MessageBoxError(ex.Message);
             }
 
-            return dtStatementOfFinancialPerformance;
-            Cursor.Current = Cursors.Default;
+            return dtStatementOfFinancialPerformance;     
         }
 
         private void LoadReport(LocalReport report)
         {
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
                 DateTime dateEnded = dtPickerDateEnds.Value;
 
@@ -97,6 +90,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 reportViewer.ZoomMode = ZoomMode.Percent;
                 reportViewer.ZoomPercent = 100;
                 reportViewer.RefreshReport();
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
