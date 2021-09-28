@@ -1381,7 +1381,58 @@ namespace AccountingSystem
 
         #region BudgetRealignment
 
-        internal static void BudgetRealignmentDatagridView(DataTable dataTable, DataGridView dgv)
+        internal static void BudgetRealignmentFromDatagridView(DataTable dataTable, DataGridView dgv)
+        {
+            try
+            {
+                Helper.DatagridDefaultStyle(dgv, true);
+
+                //Clearing Datagrid View  Rows & Columns before Loading new one
+                dgv.Rows.Clear();
+                dgv.Columns.Clear();
+
+                //Set up new Columns to Datagrid View
+                dgv.Columns.Add("from_id", "id");
+                dgv.Columns.Add("from_fpp_name", "FPP");
+                dgv.Columns.Add("from_allotment_name", "Allotment Class");
+                dgv.Columns.Add("from_budget", "Realigned From");
+                dgv.Columns.Add("amount", "Amount");
+
+                dgv.Columns["from_fpp_name"].Width = 120;
+
+                //Set up Column Format
+                dgv.Columns["from_id"].Visible = false;
+                dgv.Columns["amount"].DefaultCellStyle.Format = "N2";
+
+
+                dgv.Columns["from_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["from_budget"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
+
+                //Load by loop All Budget Appropriations Records with Others FPP 
+                foreach (DataRow drRealignment in dataTable.Rows)
+                {
+                    dgv.Rows.Add(new object[]
+                    {
+                        drRealignment["from_id"],
+                        drRealignment["from_fpp_name"],
+                        drRealignment["from_allotment_name"],
+                        drRealignment["from_budget"],
+                        drRealignment["amount"] 
+                    });
+                }
+
+
+                dgv.ClearSelection();
+                Helper.DatagridDefaultStyle(dgv, true);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        internal static void BudgetRealignmentToDatagridView(DataTable dataTable, DataGridView dgv)
         {
             try
             {
@@ -1418,7 +1469,7 @@ namespace AccountingSystem
                         drRealignment["to_fpp_name"],
                         drRealignment["to_allotment_name"],
                         drRealignment["to_budget"],
-                        drRealignment["amount"] 
+                        drRealignment["amount"]
                     });
                 }
 
@@ -1432,7 +1483,8 @@ namespace AccountingSystem
             }
         }
 
-     
+
+
         #endregion
 
         #region Obligation Request

@@ -27,16 +27,40 @@ namespace AccountingSystem.Views.Manage.Realignment
         {
             this.Text = $"{this.Text} > {budgetAppropriationAccount.Trim()}";
             LoadBudgetRealignments();
+            TotalRealignmentDisplay();
+        }
 
-            txtTotalRealignmentAppropriation.Text = (from DataGridViewRow row in dgRealignment.Rows
-                                                       where !String.IsNullOrEmpty(row.Cells["amount"].FormattedValue.ToString())
-                                                       select Convert.ToDecimal(row.Cells["amount"].FormattedValue)).Sum().ToString("N2");
+        private void TotalRealignmentDisplay()
+        {
+            string totalRealignment;
+
+
+            if (tabControl1.TabPages.Contains(tabRealignedFrom))
+            {
+                totalRealignment = (from DataGridViewRow row in dgRealignmentFrom.Rows
+                        where !String.IsNullOrEmpty(row.Cells["amount"].FormattedValue.ToString())
+                        select Convert.ToDecimal(row.Cells["amount"].FormattedValue)).Sum().ToString("N2");
+            }
+            else
+            {
+                totalRealignment = (from DataGridViewRow row in dgRealignmentTo.Rows
+                        where !String.IsNullOrEmpty(row.Cells["amount"].FormattedValue.ToString())
+                        select Convert.ToDecimal(row.Cells["amount"].FormattedValue)).Sum().ToString("N2");
+            }
+
+            txtTotalRealignmentAppropriation.Text = totalRealignment;
         }
 
         internal void LoadBudgetRealignments()
         {
-            var dtBudgetRealignment = Factory.BudgetRealignmentRepository().GetRecordsByBudgetAppropriationId(int.Parse(budgetAppropriationId));
-            HelperLoadRecords.BudgetRealignmentDatagridView(dtBudgetRealignment, dgRealignment);
+            //REALIGNMENT TO DIFFERENT ACCOUNT
+            var dtBudgetRealignmentTo = Factory.BudgetRealignmentRepository().GetRealignmentToByAppropriationId(int.Parse(budgetAppropriationId));
+            HelperLoadRecords.BudgetRealignmentToDatagridView(dtBudgetRealignmentTo, dgRealignmentTo);
+
+            //REALIGNMENT TO THIS ACCOUNT
+
+            var dtBudgetRealignmentFrom = Factory.BudgetRealignmentRepository().GetRealignmentFromByAppropriationId(int.Parse(budgetAppropriationId));
+            HelperLoadRecords.BudgetRealignmentFromDatagridView(dtBudgetRealignmentFrom, dgRealignmentFrom);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -49,7 +73,17 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            Helper.EnableDisableToolStripButtons(dgRealignment, btnEdit, btnDelete);
+            Helper.EnableDisableToolStripButtons(dgRealignmentTo, btnEdit, btnDelete);
+        }
+
+        private void dgRealignmentFrom_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TotalRealignmentDisplay();
         }
     }
 }

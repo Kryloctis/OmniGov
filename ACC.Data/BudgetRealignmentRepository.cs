@@ -176,5 +176,63 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public DataTable GetRealignmentFromByAppropriationId(int budgetAppropriationsId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@budget_appropriations_id",DbType.Int32, budgetAppropriationsId }
+                };
+
+                string query = $"SELECT " +
+                    $"from_id," +
+                    $"from_fpp_name," +
+                    $"from_allotment_name," +
+                    $"from_budget," +
+                    $"date_entry, " +
+                    $"amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE to_budget_appropriations_id = @budget_appropriations_id";
+
+                var dtSupplementalApprorpriation = new DataTable();
+
+                return _mySqlGenericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetRealignmentToByAppropriationId(int budgetAppropriationsId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@budget_appropriations_id",DbType.Int32, budgetAppropriationsId }
+                };
+
+                string query = $"SELECT " +
+                    $"to_id," +
+                    $"to_fpp_name," +
+                    $"to_allotment_name," +
+                    $"to_budget," +
+                    $"date_entry, " +
+                    $"amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE from_budget_appropriations_id = @budget_appropriations_id";
+
+                var dtSupplementalApprorpriation = new DataTable();
+
+                return _mySqlGenericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
