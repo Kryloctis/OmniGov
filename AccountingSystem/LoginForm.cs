@@ -24,6 +24,7 @@ namespace AccountingSystem
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            Image visibleImage = Properties.Resources.visible_16px;
             string username = txtUsername.Text;
             string password = txtPassword.Text;
 
@@ -42,11 +43,31 @@ namespace AccountingSystem
                 mainForm.Show();
                 Hide();
                 txtPassword.Clear();
+                btnVisibility.Image = visibleImage;
+                txtPassword.PasswordChar = '•';
 
                 return;
             }
 
             Helper.MessageBoxError("Incorrect username or password.");
+        }
+
+
+        private void btnVisibility_Click(object sender, EventArgs e)
+        {
+            Image invisibleImage = Properties.Resources.invisible_16px;
+            Image visibleImage = Properties.Resources.visible_16px;
+
+            if (txtPassword.PasswordChar == '•')
+            {
+                btnVisibility.Image = invisibleImage;
+                txtPassword.PasswordChar = default(char);
+            }
+            else
+            {
+                btnVisibility.Image = visibleImage;
+                txtPassword.PasswordChar = '•';
+            }
         }
     }
 }

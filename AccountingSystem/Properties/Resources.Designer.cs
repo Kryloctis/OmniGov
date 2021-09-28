@@ -400,15 +400,6 @@ namespace AccountingSystem.Properties {
             }
         }
         
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap money_banknotes_2_filled_arrow_left_right_28px {
-            get {
-                object obj = ResourceManager.GetObject("money-banknotes-2-filled-arrow-left-right@28px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
@@ -606,6 +597,16 @@ namespace AccountingSystem.Properties {
         internal static System.Drawing.Bitmap symbol_refresh_14px {
             get {
                 object obj = ResourceManager.GetObject("symbol_refresh_14px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap visible_16px {
+            get {
+                object obj = ResourceManager.GetObject("visible_16px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

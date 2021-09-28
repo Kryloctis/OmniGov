@@ -9,7 +9,7 @@ namespace AccountingSystem.Views.Reports.JEV
 {
     public partial class frmJEVReport : Form
     {
-        private readonly ReportViewer reportViewer;
+        private ReportViewer reportViewer;
         Dictionary<string, string> journalDict;
 
         private int _jevId;
@@ -28,13 +28,16 @@ namespace AccountingSystem.Views.Reports.JEV
         internal string paramDVNo;
         internal string paramOfficer;
 
-
         public frmJEVReport(int jevId, string jevNo, byte journalId)
         {
 
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.Percent;
+            reportViewer.ZoomPercent = 100;
             panel1.Controls.Add(reportViewer);
 
             _jevId = jevId;
@@ -113,17 +116,20 @@ namespace AccountingSystem.Views.Reports.JEV
         {
             try
             {
-                var data = Factory.JEVRepository().GetRecordByJEV(_jevNo);
+                if (_jevId != 0)
+                {
+                    Cursor.Current = Cursors.WaitCursor;
+                    var data = Factory.JEVRepository().GetRecordByID(_jevId);
 
-                var lguDetails = Helper.LGUDetails();
-                var signatory = "MARY MAGDALYN T. REGANION, CPA";
-                var preparedByData = Helper.LoggedInUserData();
-                var preparedByFullName = $"{preparedByData["first_name"]} {preparedByData["mid_initial"]} {preparedByData["last_name"]}";
-                var full_jev = $"{data["fund_code"]}-{Convert.ToDateTime(data["date_entry"]).Year}-{Convert.ToDateTime(data["date_entry"]).Month}-{data["jev_no"]}";
+                    var lguDetails = Helper.LGUDetails();
+                    var signatory = "MARY MAGDALYN T. REGANION, CPA";
+                    var preparedByData = Helper.LoggedInUserData();
+                    var preparedByFullName = $"{preparedByData["first_name"]} {preparedByData["mid_initial"]} {preparedByData["last_name"]}";
+                    var full_jev = $"{data["fund_code"]}-{Convert.ToDateTime(data["date_entry"]).Year}-{Convert.ToDateTime(data["date_entry"]).Month}-{data["jev_no"]}";
 
-                SetJournalCustomFields();
+                    SetJournalCustomFields();
 
-                var parameters = new[] {
+                    var parameters = new[] {
                     new ReportParameter("paramLGU",  lguDetails["lgu_name"]),
                     new ReportParameter("paramFund", data["fund_name"]),
                     new ReportParameter("paramJournalType", data["journal_name"]),
@@ -150,15 +156,19 @@ namespace AccountingSystem.Views.Reports.JEV
                     new ReportParameter("paramDisbursementOfficer", paramOfficer)
                 };
 
-                
-
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\journal-entry-voucher.rdlc";
-                report.DataSources.Clear();
 
 
-                report.DataSources.Add(new ReportDataSource("dtJournalVoucher", DataTableJournalEntryVoucherAccount()));
-                report.SetParameters(parameters);
+                    report.ReportPath = $"{Application.StartupPath}\\Reports\\journal-entry-voucher.rdlc";
+                    report.DataSources.Clear();
 
+
+                    report.DataSources.Add(new ReportDataSource("dtJournalVoucher", DataTableJournalEntryVoucherAccount()));
+                    report.SetParameters(parameters);
+
+                    reportViewer.RefreshReport();
+
+                    Cursor.Current = Cursors.Default;
+                }
             }
             catch (Exception ex)
             {
@@ -197,69 +207,60 @@ namespace AccountingSystem.Views.Reports.JEV
 
         private void frmJEVReport_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgJEV, true);
-
-            if (_jevId != 0 && dgJEV.SelectedRows.Count != 0)
+            if (!DesignMode)
             {
-                leftPanel.Visible = false;
-                panel1.Dock = DockStyle.Fill;
+                Helper.DatagridFullRowSelectStyle(dgJEV, true);
 
-                LoadReport(reportViewer.LocalReport);
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-                reportViewer.RefreshReport();
+                if (_jevId != 0)
+                {
+                    leftPanel.Visible = false;
+                    LoadReport(reportViewer.LocalReport);
+                }
+                else
+                {
+                    LoadData();
+                }
             }
-
-            LoadData();
         }
 
         private void LoadData()
         {
-
             LoadJournals();
 
             foreach (var item in Helper.MonthsDatasource().Values)
                 cbMonths.Items.Add(item);
             cbMonths.SelectedIndex = DateTime.Now.Month - 1;
 
-            LoadJEVReport();
+            LoadJEVList();
+            LoadSelectedJEV();
         }
 
-        private void LoadJournals()
+        private void LoadJEVList()
         {
-            cmbJournal.DataSource = Factory.JournalsRepository().GetRecords();
-            cmbJournal.ValueMember = "id";
-            cmbJournal.DisplayMember = "journal_name";
-        }
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            LoadJEVReport();
+            cbMonths.SelectedIndexChanged -= new EventHandler(cbMonths_SelectedIndexChanged);
+            cmbJournal.SelectedIndexChanged -= new EventHandler(cbJournal_SelectedIndexChanged);
+            nudYear.ValueChanged -= new EventHandler(nudYear_ValueChanged);
+            dgJEV.SelectionChanged -= new EventHandler(dgJEV_SelectionChanged);
+
+            var searchText = txtSearch.Text.Trim();
+            var month = (sbyte)(cbMonths.SelectedIndex + 1);
+            var year = (ushort)nudYear.Value;
+            var journalId = (byte)(cmbJournal.SelectedIndex + 1);
+
+            var dtJEV = Factory.JEVRepository().GetRecordsByJEVNoAndDate(searchText, month, year, journalId);
+            HelperLoadRecords.JEVREportDataGridView(dtJEV, dgJEV);
+
+            cbMonths.SelectedIndexChanged += new EventHandler(cbMonths_SelectedIndexChanged);
+            cmbJournal.SelectedIndexChanged += new EventHandler(cbJournal_SelectedIndexChanged);
+            nudYear.ValueChanged += new EventHandler(nudYear_ValueChanged);
+            dgJEV.SelectionChanged += new EventHandler(dgJEV_SelectionChanged);
         }
 
-        private void btnRetrieve_Click(object sender, EventArgs e)
-        {
-            LoadJEVReport();
-        }
 
-        private void cbMonths_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadJEVReport();
-        }
-        private void cbJournal_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadJEVReport();
-        }
 
-        private void nudYear_ValueChanged(object sender, EventArgs e)
+        private void LoadSelectedJEV() 
         {
-            LoadJEVReport();
-        }
-
-        private void dgJEV_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgJEV.SelectedCells.Count != 0 && leftPanel.Visible)
+            if (dgJEV.SelectedRows.Count != 0 && leftPanel.Visible)
             {
                 int selectedIndex = dgJEV.SelectedCells[0].RowIndex;
 
@@ -270,28 +271,43 @@ namespace AccountingSystem.Views.Reports.JEV
                 _journalId = Convert.ToByte(selectedRow.Cells["journals_id"].Value);
 
                 LoadReport(reportViewer.LocalReport);
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
                 reportViewer.RefreshReport();
             }
-
         }
 
-        private void LoadJEVReport() 
+        private void LoadJournals()
         {
-            var searchText = txtSearch.Text.Trim();
-            var month = (sbyte)(cbMonths.SelectedIndex + 1);
-            var year = (ushort)nudYear.Value;
-            var journalId = (byte)(cmbJournal.SelectedIndex + 1);
-
-            var dtJEV = Factory.JEVRepository().GetRecordsByJEVNoAndDate(searchText, month, year, journalId);
-            HelperLoadRecords.JEVREportDataGridView(dtJEV, dgJEV);
+            cmbJournal.DataSource = Factory.JournalsRepository().GetRecords();
+            cmbJournal.ValueMember = "id";
+            cmbJournal.DisplayMember = "journal_name";
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
-
+            LoadJEVList();
         }
+
+        private void cbMonths_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadJEVList();
+            LoadSelectedJEV();
+        }
+
+        private void cbJournal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadJEVList();
+        }
+
+        private void nudYear_ValueChanged(object sender, EventArgs e)
+        {
+            LoadJEVList();
+        }
+
+        private void dgJEV_SelectionChanged(object sender, EventArgs e)
+        {
+            LoadSelectedJEV();
+        }
+
+    
     }
 }

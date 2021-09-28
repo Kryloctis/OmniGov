@@ -13,6 +13,5 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecordsByJournalId(int journalId);
 
         bool GeneralLedgerAccountExist(int journalId, int generalLedgerAccountId);
-
     }
 }
