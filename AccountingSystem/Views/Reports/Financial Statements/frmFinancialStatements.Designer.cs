@@ -40,12 +40,14 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.radSFPosition = new System.Windows.Forms.RadioButton();
             this.radSFPerformance = new System.Windows.Forms.RadioButton();
-            this.radSCF = new System.Windows.Forms.RadioButton();
             this.radSCNAE = new System.Windows.Forms.RadioButton();
+            this.radSCF = new System.Windows.Forms.RadioButton();
             this.radSCBAA = new System.Windows.Forms.RadioButton();
+            this.ucStatementOfChangesInNetAssetsquity1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfChangesInNetAssetsquity();
             this.tabControl1.SuspendLayout();
             this.tabSFPosition.SuspendLayout();
             this.tabSFPerformance.SuspendLayout();
+            this.tabSCNAE.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -108,6 +110,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             // 
             // tabSCNAE
             // 
+            this.tabSCNAE.Controls.Add(this.ucStatementOfChangesInNetAssetsquity1);
             this.tabSCNAE.Location = new System.Drawing.Point(4, 5);
             this.tabSCNAE.Margin = new System.Windows.Forms.Padding(0);
             this.tabSCNAE.Name = "tabSCNAE";
@@ -142,8 +145,8 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel1.Controls.Add(this.radSFPosition);
             this.flowLayoutPanel1.Controls.Add(this.radSFPerformance);
-            this.flowLayoutPanel1.Controls.Add(this.radSCF);
             this.flowLayoutPanel1.Controls.Add(this.radSCNAE);
+            this.flowLayoutPanel1.Controls.Add(this.radSCF);
             this.flowLayoutPanel1.Controls.Add(this.radSCBAA);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -178,31 +181,30 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             this.radSFPerformance.UseVisualStyleBackColor = true;
             this.radSFPerformance.CheckedChanged += new System.EventHandler(this.radSFPerformance_CheckedChanged);
             // 
-            // radSCF
-            // 
-            this.radSCF.Appearance = System.Windows.Forms.Appearance.Button;
-            this.radSCF.AutoSize = true;
-            this.radSCF.Enabled = false;
-            this.radSCF.Location = new System.Drawing.Point(402, 3);
-            this.radSCF.Name = "radSCF";
-            this.radSCF.Size = new System.Drawing.Size(147, 25);
-            this.radSCF.TabIndex = 2;
-            this.radSCF.Text = "Statement of Cash Flows";
-            this.radSCF.UseVisualStyleBackColor = true;
-            this.radSCF.CheckedChanged += new System.EventHandler(this.radSCF_CheckedChanged);
-            // 
             // radSCNAE
             // 
             this.radSCNAE.Appearance = System.Windows.Forms.Appearance.Button;
             this.radSCNAE.AutoSize = true;
-            this.radSCNAE.Enabled = false;
-            this.radSCNAE.Location = new System.Drawing.Point(555, 3);
+            this.radSCNAE.Location = new System.Drawing.Point(402, 3);
             this.radSCNAE.Name = "radSCNAE";
             this.radSCNAE.Size = new System.Drawing.Size(243, 25);
             this.radSCNAE.TabIndex = 3;
             this.radSCNAE.Text = "Statement of Changes in Net Assets/Equity";
             this.radSCNAE.UseVisualStyleBackColor = true;
             this.radSCNAE.CheckedChanged += new System.EventHandler(this.radSCNAE_CheckedChanged);
+            // 
+            // radSCF
+            // 
+            this.radSCF.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radSCF.AutoSize = true;
+            this.radSCF.Enabled = false;
+            this.radSCF.Location = new System.Drawing.Point(651, 3);
+            this.radSCF.Name = "radSCF";
+            this.radSCF.Size = new System.Drawing.Size(147, 25);
+            this.radSCF.TabIndex = 2;
+            this.radSCF.Text = "Statement of Cash Flows";
+            this.radSCF.UseVisualStyleBackColor = true;
+            this.radSCF.CheckedChanged += new System.EventHandler(this.radSCF_CheckedChanged);
             // 
             // radSCBAA
             // 
@@ -216,6 +218,14 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             this.radSCBAA.Text = "Statement of Comparison of Budget and Actual Amounts";
             this.radSCBAA.UseVisualStyleBackColor = true;
             this.radSCBAA.CheckedChanged += new System.EventHandler(this.radSCBAA_CheckedChanged);
+            // 
+            // ucStatementOfChangesInNetAssetsquity1
+            // 
+            this.ucStatementOfChangesInNetAssetsquity1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucStatementOfChangesInNetAssetsquity1.Location = new System.Drawing.Point(0, 0);
+            this.ucStatementOfChangesInNetAssetsquity1.Name = "ucStatementOfChangesInNetAssetsquity1";
+            this.ucStatementOfChangesInNetAssetsquity1.Size = new System.Drawing.Size(1155, 515);
+            this.ucStatementOfChangesInNetAssetsquity1.TabIndex = 0;
             // 
             // frmFinancialStatements
             // 
@@ -235,6 +245,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             this.tabControl1.ResumeLayout(false);
             this.tabSFPosition.ResumeLayout(false);
             this.tabSFPerformance.ResumeLayout(false);
+            this.tabSCNAE.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -257,5 +268,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
         private System.Windows.Forms.RadioButton radSCF;
         private System.Windows.Forms.RadioButton radSCNAE;
         private System.Windows.Forms.RadioButton radSCBAA;
+        private ucStatementOfChangesInNetAssetsquity ucStatementOfChangesInNetAssetsquity1;
     }
 }

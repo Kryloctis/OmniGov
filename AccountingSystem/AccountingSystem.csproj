@@ -142,6 +142,9 @@
     <None Update="Reports\statement-of-appropriations-allotments-obligations-and-balances.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Reports\statement-of-changes-in-net-assets-equity.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Reports\statement-of-financial-performance.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

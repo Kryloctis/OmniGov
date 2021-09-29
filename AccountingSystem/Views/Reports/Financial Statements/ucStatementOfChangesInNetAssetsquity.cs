@@ -1,15 +1,21 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Financial_Statements
 {
-    public partial class ucStatementOfFinancialPerformance : UserControl
+    public partial class ucStatementOfChangesInNetAssetsquity : UserControl
     {
         private readonly ReportViewer reportViewer;
 
-        public ucStatementOfFinancialPerformance()
+        public ucStatementOfChangesInNetAssetsquity()
         {
             InitializeComponent();
             reportViewer = new ReportViewer();
@@ -17,11 +23,12 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             panel1.Controls.Add(reportViewer);
         }
 
-        private DataTable StatementOfFinancialPerformanceDatatable()
+
+        private DataTable StatementOfChangesInNetAssetsEquityDatatable()
         {
-           
+
             var dataSet = new dsLFS();
-            var dtStatementOfFinancialPerformance = dataSet.dtStatementOfFinancialPerformance;
+            var dtStatementOfChangesInNetAssetsEquity = dataSet.dtStatementOfChangesInNetAssetsEquity;
             int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
             var dateEnded = dtPickerDateEnds.Value;
             var previousYearEnded = new DateTime(year: dateEnded.Year - 1, month: 12, DateTime.DaysInMonth(dateEnded.Year, 12));
@@ -51,7 +58,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                     currentAmount,
                     Factory.JEVAccountsRepository().GetBalanceByFundAndAccountAndDateEntry(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), previousYearEnded)
                 };
-                    dtStatementOfFinancialPerformance.Rows.Add(items);
+                    dtStatementOfChangesInNetAssetsEquity.Rows.Add(items);
                 }
             }
             catch (Exception ex)
@@ -59,7 +66,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 Helper.MessageBoxError(ex.Message);
             }
 
-            return dtStatementOfFinancialPerformance;     
+            return dtStatementOfChangesInNetAssetsEquity;
         }
 
         private void LoadReport(LocalReport report)
@@ -71,9 +78,9 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 DateTime dateEnded = dtPickerDateEnds.Value;
 
 
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\statement-of-financial-performance.rdlc";
+                report.ReportPath = $"{Application.StartupPath}\\Reports\\statement-of-changes-in-net-assets-equity.rdlc";
                 report.DataSources.Clear();
-                report.DataSources.Add(new ReportDataSource("dtStatementOfFinancialPerformance", StatementOfFinancialPerformanceDatatable()));
+                report.DataSources.Add(new ReportDataSource("dtStatementOfChangesInNetAssetsEquity", StatementOfChangesInNetAssetsEquityDatatable()));
 
                 var fundRepo = Factory.FundsRepository().GetRecordByID(fundId);
                 var parameters = new[] {
@@ -109,17 +116,17 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             }
         }
 
-        private void btnRetrieve_Click(object sender, EventArgs e)
-        {
-            LoadReport(reportViewer.LocalReport);
-        }
-
-        private void ucStatementOfFinancialPerformance_Load(object sender, EventArgs e)
+        private void ucStatementOfChangesInNetAssetsquity_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
                 LoadFunds();
             }
+        }
+
+        private void btnRetrieve_Click(object sender, EventArgs e)
+        {
+            LoadReport(reportViewer.LocalReport);
         }
     }
 }

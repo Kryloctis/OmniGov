@@ -17,18 +17,6 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="fund_id">
-          <DataField>fund_id</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="fund_code">
-          <DataField>fund_code</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="fund_name">
-          <DataField>fund_name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="account_group_id">
           <DataField>account_group_id</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
@@ -64,14 +52,6 @@
         <Field Name="sub_major_account_group_name">
           <DataField>sub_major_account_group_name</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="jev_id">
-          <DataField>jev_id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="date_entry">
-          <DataField>date_entry</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
         <Field Name="account_id">
           <DataField>account_id</DataField>
@@ -670,7 +650,6 @@ CDbl(Fields!current_amount.Value), 0))</Value>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -3168,11 +3147,9 @@ CDbl(Fields!previous_amount.Value), 0)
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(
-IIF(Fields!sub_major_account_group_name.Value = CStr("Depreciation").Trim()
-AND Fields!sub_major_account_group_name.Value = CStr("Amortization").Trim(),
-CDbl(Fields!current_amount.Value), 0)
-)</Value>
+                                  <Value>=Sum(IIF(Fields!sub_major_account_group_name.Value = CStr("Depreciation").Trim()
+OR Fields!sub_major_account_group_name.Value = CStr("Amortization").Trim(),
+CDbl(Fields!current_amount.Value), 0))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <Format>#,0.00;(#,0.00);'-'</Format>
@@ -3240,7 +3217,7 @@ CDbl(Fields!current_amount.Value), 0)
                                 <TextRun>
                                   <Value>=Sum(
 IIF(Fields!sub_major_account_group_name.Value = CStr("Depreciation").Trim()
-AND Fields!sub_major_account_group_name.Value = CStr("Amortization").Trim(),
+OR Fields!sub_major_account_group_name.Value = CStr("Amortization").Trim(),
 CDbl(Fields!previous_amount.Value), 0)
 )</Value>
                                   <Style>
@@ -3381,10 +3358,8 @@ CDbl(Fields!previous_amount.Value), 0)
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(
-IIF(Fields!sub_major_account_group_name.Value = CStr("Financial Expenses").Trim(),
-CDbl(Fields!current_amount.Value), 0)
-)</Value>
+                                  <Value>=Sum(IIF(Fields!sub_major_account_group_name.Value = CStr("Financial Expenses").Trim(),
+CDbl(Fields!current_amount.Value), 0))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <Format>#,0.00;(#,0.00);'-'</Format>
@@ -3407,6 +3382,7 @@ CDbl(Fields!current_amount.Value), 0)
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>

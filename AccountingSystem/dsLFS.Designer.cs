@@ -72,6 +72,8 @@ namespace AccountingSystem {
         
         private dtStatementOfFinancialPerformanceDataTable tabledtStatementOfFinancialPerformance;
         
+        private dtStatementOfChangesInNetAssetsEquityDataTable tabledtStatementOfChangesInNetAssetsEquity;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -171,6 +173,9 @@ namespace AccountingSystem {
                 }
                 if ((ds.Tables["dtStatementOfFinancialPerformance"] != null)) {
                     base.Tables.Add(new dtStatementOfFinancialPerformanceDataTable(ds.Tables["dtStatementOfFinancialPerformance"]));
+                }
+                if ((ds.Tables["dtStatementOfChangesInNetAssetsEquity"] != null)) {
+                    base.Tables.Add(new dtStatementOfChangesInNetAssetsEquityDataTable(ds.Tables["dtStatementOfChangesInNetAssetsEquity"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -432,6 +437,16 @@ namespace AccountingSystem {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public dtStatementOfChangesInNetAssetsEquityDataTable dtStatementOfChangesInNetAssetsEquity {
+            get {
+                return this.tabledtStatementOfChangesInNetAssetsEquity;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -568,6 +583,9 @@ namespace AccountingSystem {
                 }
                 if ((ds.Tables["dtStatementOfFinancialPerformance"] != null)) {
                     base.Tables.Add(new dtStatementOfFinancialPerformanceDataTable(ds.Tables["dtStatementOfFinancialPerformance"]));
+                }
+                if ((ds.Tables["dtStatementOfChangesInNetAssetsEquity"] != null)) {
+                    base.Tables.Add(new dtStatementOfChangesInNetAssetsEquityDataTable(ds.Tables["dtStatementOfChangesInNetAssetsEquity"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -746,6 +764,12 @@ namespace AccountingSystem {
                     this.tabledtStatementOfFinancialPerformance.InitVars();
                 }
             }
+            this.tabledtStatementOfChangesInNetAssetsEquity = ((dtStatementOfChangesInNetAssetsEquityDataTable)(base.Tables["dtStatementOfChangesInNetAssetsEquity"]));
+            if ((initTable == true)) {
+                if ((this.tabledtStatementOfChangesInNetAssetsEquity != null)) {
+                    this.tabledtStatementOfChangesInNetAssetsEquity.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -804,6 +828,8 @@ namespace AccountingSystem {
             base.Tables.Add(this.tabledtStatementOfFinancialPosition);
             this.tabledtStatementOfFinancialPerformance = new dtStatementOfFinancialPerformanceDataTable();
             base.Tables.Add(this.tabledtStatementOfFinancialPerformance);
+            this.tabledtStatementOfChangesInNetAssetsEquity = new dtStatementOfChangesInNetAssetsEquityDataTable();
+            base.Tables.Add(this.tabledtStatementOfChangesInNetAssetsEquity);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -952,6 +978,12 @@ namespace AccountingSystem {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private bool ShouldSerializedtStatementOfChangesInNetAssetsEquity() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -1076,6 +1108,9 @@ namespace AccountingSystem {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void dtStatementOfFinancialPerformanceRowChangeEventHandler(object sender, dtStatementOfFinancialPerformanceRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public delegate void dtStatementOfChangesInNetAssetsEquityRowChangeEventHandler(object sender, dtStatementOfChangesInNetAssetsEquityRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -9733,12 +9768,6 @@ namespace AccountingSystem {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class dtStatementOfFinancialPerformanceDataTable : global::System.Data.TypedTableBase<dtStatementOfFinancialPerformanceRow> {
             
-            private global::System.Data.DataColumn columnfund_id;
-            
-            private global::System.Data.DataColumn columnfund_code;
-            
-            private global::System.Data.DataColumn columnfund_name;
-            
             private global::System.Data.DataColumn columnaccount_group_id;
             
             private global::System.Data.DataColumn columnaccount_group_code;
@@ -9762,8 +9791,6 @@ namespace AccountingSystem {
             private global::System.Data.DataColumn columnaccount_code;
             
             private global::System.Data.DataColumn columnaccount_name;
-            
-            private global::System.Data.DataColumn columnnote;
             
             private global::System.Data.DataColumn columncurrent_amount;
             
@@ -9800,30 +9827,6 @@ namespace AccountingSystem {
             protected dtStatementOfFinancialPerformanceDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn fund_idColumn {
-                get {
-                    return this.columnfund_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn fund_codeColumn {
-                get {
-                    return this.columnfund_code;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn fund_nameColumn {
-                get {
-                    return this.columnfund_name;
-                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9924,14 +9927,6 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn noteColumn {
-                get {
-                    return this.columnnote;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn current_amountColumn {
                 get {
                     return this.columncurrent_amount;
@@ -9983,30 +9978,9 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtStatementOfFinancialPerformanceRow AdddtStatementOfFinancialPerformanceRow(
-                        string fund_id, 
-                        string fund_code, 
-                        string fund_name, 
-                        int account_group_id, 
-                        string account_group_code, 
-                        string account_group_name, 
-                        int major_account_group_id, 
-                        string major_account_group_code, 
-                        string major_account_group_name, 
-                        int sub_major_account_group_id, 
-                        string sub_major_account_group_code, 
-                        string sub_major_account_group_name, 
-                        int account_id, 
-                        string account_code, 
-                        string account_name, 
-                        string note, 
-                        decimal current_amount, 
-                        decimal previous_amount) {
+            public dtStatementOfFinancialPerformanceRow AdddtStatementOfFinancialPerformanceRow(int account_group_id, string account_group_code, string account_group_name, int major_account_group_id, string major_account_group_code, string major_account_group_name, int sub_major_account_group_id, string sub_major_account_group_code, string sub_major_account_group_name, int account_id, string account_code, string account_name, decimal current_amount, decimal previous_amount) {
                 dtStatementOfFinancialPerformanceRow rowdtStatementOfFinancialPerformanceRow = ((dtStatementOfFinancialPerformanceRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        fund_id,
-                        fund_code,
-                        fund_name,
                         account_group_id,
                         account_group_code,
                         account_group_name,
@@ -10019,7 +9993,6 @@ namespace AccountingSystem {
                         account_id,
                         account_code,
                         account_name,
-                        note,
                         current_amount,
                         previous_amount};
                 rowdtStatementOfFinancialPerformanceRow.ItemArray = columnValuesArray;
@@ -10044,9 +10017,6 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
-                this.columnfund_id = base.Columns["fund_id"];
-                this.columnfund_code = base.Columns["fund_code"];
-                this.columnfund_name = base.Columns["fund_name"];
                 this.columnaccount_group_id = base.Columns["account_group_id"];
                 this.columnaccount_group_code = base.Columns["account_group_code"];
                 this.columnaccount_group_name = base.Columns["account_group_name"];
@@ -10059,7 +10029,6 @@ namespace AccountingSystem {
                 this.columnaccount_id = base.Columns["account_id"];
                 this.columnaccount_code = base.Columns["account_code"];
                 this.columnaccount_name = base.Columns["account_name"];
-                this.columnnote = base.Columns["note"];
                 this.columncurrent_amount = base.Columns["current_amount"];
                 this.columnprevious_amount = base.Columns["previous_amount"];
             }
@@ -10067,12 +10036,6 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             private void InitClass() {
-                this.columnfund_id = new global::System.Data.DataColumn("fund_id", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnfund_id);
-                this.columnfund_code = new global::System.Data.DataColumn("fund_code", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnfund_code);
-                this.columnfund_name = new global::System.Data.DataColumn("fund_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnfund_name);
                 this.columnaccount_group_id = new global::System.Data.DataColumn("account_group_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnaccount_group_id);
                 this.columnaccount_group_code = new global::System.Data.DataColumn("account_group_code", typeof(string), null, global::System.Data.MappingType.Element);
@@ -10097,8 +10060,6 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnaccount_code);
                 this.columnaccount_name = new global::System.Data.DataColumn("account_name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnaccount_name);
-                this.columnnote = new global::System.Data.DataColumn("note", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnnote);
                 this.columncurrent_amount = new global::System.Data.DataColumn("current_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncurrent_amount);
                 this.columnprevious_amount = new global::System.Data.DataColumn("previous_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
@@ -10189,6 +10150,435 @@ namespace AccountingSystem {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "dtStatementOfFinancialPerformanceDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class dtStatementOfChangesInNetAssetsEquityDataTable : global::System.Data.TypedTableBase<dtStatementOfChangesInNetAssetsEquityRow> {
+            
+            private global::System.Data.DataColumn columnaccount_group_id;
+            
+            private global::System.Data.DataColumn columnaccount_group_code;
+            
+            private global::System.Data.DataColumn columnaccount_group_name;
+            
+            private global::System.Data.DataColumn columnmajor_account_group_id;
+            
+            private global::System.Data.DataColumn columnmajor_account_group_code;
+            
+            private global::System.Data.DataColumn columnmajor_account_group_name;
+            
+            private global::System.Data.DataColumn columnsub_major_account_group_id;
+            
+            private global::System.Data.DataColumn columnsub_major_account_group_code;
+            
+            private global::System.Data.DataColumn columnsub_major_account_group_name;
+            
+            private global::System.Data.DataColumn columnaccount_id;
+            
+            private global::System.Data.DataColumn columnaccount_code;
+            
+            private global::System.Data.DataColumn columnaccount_name;
+            
+            private global::System.Data.DataColumn columncurrent_amount;
+            
+            private global::System.Data.DataColumn columnprevious_amount;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtStatementOfChangesInNetAssetsEquityDataTable() {
+                this.TableName = "dtStatementOfChangesInNetAssetsEquity";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal dtStatementOfChangesInNetAssetsEquityDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected dtStatementOfChangesInNetAssetsEquityDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn account_group_idColumn {
+                get {
+                    return this.columnaccount_group_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn account_group_codeColumn {
+                get {
+                    return this.columnaccount_group_code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn account_group_nameColumn {
+                get {
+                    return this.columnaccount_group_name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn major_account_group_idColumn {
+                get {
+                    return this.columnmajor_account_group_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn major_account_group_codeColumn {
+                get {
+                    return this.columnmajor_account_group_code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn major_account_group_nameColumn {
+                get {
+                    return this.columnmajor_account_group_name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn sub_major_account_group_idColumn {
+                get {
+                    return this.columnsub_major_account_group_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn sub_major_account_group_codeColumn {
+                get {
+                    return this.columnsub_major_account_group_code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn sub_major_account_group_nameColumn {
+                get {
+                    return this.columnsub_major_account_group_name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn account_idColumn {
+                get {
+                    return this.columnaccount_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn account_codeColumn {
+                get {
+                    return this.columnaccount_code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn account_nameColumn {
+                get {
+                    return this.columnaccount_name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn current_amountColumn {
+                get {
+                    return this.columncurrent_amount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn previous_amountColumn {
+                get {
+                    return this.columnprevious_amount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtStatementOfChangesInNetAssetsEquityRow this[int index] {
+                get {
+                    return ((dtStatementOfChangesInNetAssetsEquityRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtStatementOfChangesInNetAssetsEquityRowChangeEventHandler dtStatementOfChangesInNetAssetsEquityRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtStatementOfChangesInNetAssetsEquityRowChangeEventHandler dtStatementOfChangesInNetAssetsEquityRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtStatementOfChangesInNetAssetsEquityRowChangeEventHandler dtStatementOfChangesInNetAssetsEquityRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtStatementOfChangesInNetAssetsEquityRowChangeEventHandler dtStatementOfChangesInNetAssetsEquityRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void AdddtStatementOfChangesInNetAssetsEquityRow(dtStatementOfChangesInNetAssetsEquityRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtStatementOfChangesInNetAssetsEquityRow AdddtStatementOfChangesInNetAssetsEquityRow(int account_group_id, string account_group_code, string account_group_name, int major_account_group_id, string major_account_group_code, string major_account_group_name, int sub_major_account_group_id, string sub_major_account_group_code, string sub_major_account_group_name, int account_id, string account_code, string account_name, decimal current_amount, decimal previous_amount) {
+                dtStatementOfChangesInNetAssetsEquityRow rowdtStatementOfChangesInNetAssetsEquityRow = ((dtStatementOfChangesInNetAssetsEquityRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        account_group_id,
+                        account_group_code,
+                        account_group_name,
+                        major_account_group_id,
+                        major_account_group_code,
+                        major_account_group_name,
+                        sub_major_account_group_id,
+                        sub_major_account_group_code,
+                        sub_major_account_group_name,
+                        account_id,
+                        account_code,
+                        account_name,
+                        current_amount,
+                        previous_amount};
+                rowdtStatementOfChangesInNetAssetsEquityRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtStatementOfChangesInNetAssetsEquityRow);
+                return rowdtStatementOfChangesInNetAssetsEquityRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                dtStatementOfChangesInNetAssetsEquityDataTable cln = ((dtStatementOfChangesInNetAssetsEquityDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new dtStatementOfChangesInNetAssetsEquityDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal void InitVars() {
+                this.columnaccount_group_id = base.Columns["account_group_id"];
+                this.columnaccount_group_code = base.Columns["account_group_code"];
+                this.columnaccount_group_name = base.Columns["account_group_name"];
+                this.columnmajor_account_group_id = base.Columns["major_account_group_id"];
+                this.columnmajor_account_group_code = base.Columns["major_account_group_code"];
+                this.columnmajor_account_group_name = base.Columns["major_account_group_name"];
+                this.columnsub_major_account_group_id = base.Columns["sub_major_account_group_id"];
+                this.columnsub_major_account_group_code = base.Columns["sub_major_account_group_code"];
+                this.columnsub_major_account_group_name = base.Columns["sub_major_account_group_name"];
+                this.columnaccount_id = base.Columns["account_id"];
+                this.columnaccount_code = base.Columns["account_code"];
+                this.columnaccount_name = base.Columns["account_name"];
+                this.columncurrent_amount = base.Columns["current_amount"];
+                this.columnprevious_amount = base.Columns["previous_amount"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            private void InitClass() {
+                this.columnaccount_group_id = new global::System.Data.DataColumn("account_group_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaccount_group_id);
+                this.columnaccount_group_code = new global::System.Data.DataColumn("account_group_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaccount_group_code);
+                this.columnaccount_group_name = new global::System.Data.DataColumn("account_group_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaccount_group_name);
+                this.columnmajor_account_group_id = new global::System.Data.DataColumn("major_account_group_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmajor_account_group_id);
+                this.columnmajor_account_group_code = new global::System.Data.DataColumn("major_account_group_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmajor_account_group_code);
+                this.columnmajor_account_group_name = new global::System.Data.DataColumn("major_account_group_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmajor_account_group_name);
+                this.columnsub_major_account_group_id = new global::System.Data.DataColumn("sub_major_account_group_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsub_major_account_group_id);
+                this.columnsub_major_account_group_code = new global::System.Data.DataColumn("sub_major_account_group_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsub_major_account_group_code);
+                this.columnsub_major_account_group_name = new global::System.Data.DataColumn("sub_major_account_group_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsub_major_account_group_name);
+                this.columnaccount_id = new global::System.Data.DataColumn("account_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaccount_id);
+                this.columnaccount_code = new global::System.Data.DataColumn("account_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaccount_code);
+                this.columnaccount_name = new global::System.Data.DataColumn("account_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaccount_name);
+                this.columncurrent_amount = new global::System.Data.DataColumn("current_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncurrent_amount);
+                this.columnprevious_amount = new global::System.Data.DataColumn("previous_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_amount);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtStatementOfChangesInNetAssetsEquityRow NewdtStatementOfChangesInNetAssetsEquityRow() {
+                return ((dtStatementOfChangesInNetAssetsEquityRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new dtStatementOfChangesInNetAssetsEquityRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(dtStatementOfChangesInNetAssetsEquityRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.dtStatementOfChangesInNetAssetsEquityRowChanged != null)) {
+                    this.dtStatementOfChangesInNetAssetsEquityRowChanged(this, new dtStatementOfChangesInNetAssetsEquityRowChangeEvent(((dtStatementOfChangesInNetAssetsEquityRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.dtStatementOfChangesInNetAssetsEquityRowChanging != null)) {
+                    this.dtStatementOfChangesInNetAssetsEquityRowChanging(this, new dtStatementOfChangesInNetAssetsEquityRowChangeEvent(((dtStatementOfChangesInNetAssetsEquityRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.dtStatementOfChangesInNetAssetsEquityRowDeleted != null)) {
+                    this.dtStatementOfChangesInNetAssetsEquityRowDeleted(this, new dtStatementOfChangesInNetAssetsEquityRowChangeEvent(((dtStatementOfChangesInNetAssetsEquityRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.dtStatementOfChangesInNetAssetsEquityRowDeleting != null)) {
+                    this.dtStatementOfChangesInNetAssetsEquityRowDeleting(this, new dtStatementOfChangesInNetAssetsEquityRowChangeEvent(((dtStatementOfChangesInNetAssetsEquityRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void RemovedtStatementOfChangesInNetAssetsEquityRow(dtStatementOfChangesInNetAssetsEquityRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsLFS ds = new dsLFS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "dtStatementOfChangesInNetAssetsEquityDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -17092,57 +17482,6 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string fund_id {
-                get {
-                    try {
-                        return ((string)(this[this.tabledtStatementOfFinancialPerformance.fund_idColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'fund_id\' in table \'dtStatementOfFinancialPerformance\' is DB" +
-                                "Null.", e);
-                    }
-                }
-                set {
-                    this[this.tabledtStatementOfFinancialPerformance.fund_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string fund_code {
-                get {
-                    try {
-                        return ((string)(this[this.tabledtStatementOfFinancialPerformance.fund_codeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'fund_code\' in table \'dtStatementOfFinancialPerformance\' is " +
-                                "DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabledtStatementOfFinancialPerformance.fund_codeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string fund_name {
-                get {
-                    try {
-                        return ((string)(this[this.tabledtStatementOfFinancialPerformance.fund_nameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'fund_name\' in table \'dtStatementOfFinancialPerformance\' is " +
-                                "DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabledtStatementOfFinancialPerformance.fund_nameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public int account_group_id {
                 get {
                     try {
@@ -17347,23 +17686,6 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string note {
-                get {
-                    try {
-                        return ((string)(this[this.tabledtStatementOfFinancialPerformance.noteColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'note\' in table \'dtStatementOfFinancialPerformance\' is DBNul" +
-                                "l.", e);
-                    }
-                }
-                set {
-                    this[this.tabledtStatementOfFinancialPerformance.noteColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public decimal current_amount {
                 get {
                     try {
@@ -17394,42 +17716,6 @@ namespace AccountingSystem {
                 set {
                     this[this.tabledtStatementOfFinancialPerformance.previous_amountColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isfund_idNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPerformance.fund_idColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setfund_idNull() {
-                this[this.tabledtStatementOfFinancialPerformance.fund_idColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isfund_codeNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPerformance.fund_codeColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setfund_codeNull() {
-                this[this.tabledtStatementOfFinancialPerformance.fund_codeColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isfund_nameNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPerformance.fund_nameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setfund_nameNull() {
-                this[this.tabledtStatementOfFinancialPerformance.fund_nameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -17578,18 +17864,6 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsnoteNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPerformance.noteColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetnoteNull() {
-                this[this.tabledtStatementOfFinancialPerformance.noteColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool Iscurrent_amountNull() {
                 return this.IsNull(this.tabledtStatementOfFinancialPerformance.current_amountColumn);
             }
@@ -17610,6 +17884,427 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void Setprevious_amountNull() {
                 this[this.tabledtStatementOfFinancialPerformance.previous_amountColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class dtStatementOfChangesInNetAssetsEquityRow : global::System.Data.DataRow {
+            
+            private dtStatementOfChangesInNetAssetsEquityDataTable tabledtStatementOfChangesInNetAssetsEquity;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal dtStatementOfChangesInNetAssetsEquityRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tabledtStatementOfChangesInNetAssetsEquity = ((dtStatementOfChangesInNetAssetsEquityDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int account_group_id {
+                get {
+                    try {
+                        return ((int)(this[this.tabledtStatementOfChangesInNetAssetsEquity.account_group_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'account_group_id\' in table \'dtStatementOfChangesInNetAssets" +
+                                "Equity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.account_group_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string account_group_code {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtStatementOfChangesInNetAssetsEquity.account_group_codeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'account_group_code\' in table \'dtStatementOfChangesInNetAsse" +
+                                "tsEquity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.account_group_codeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string account_group_name {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtStatementOfChangesInNetAssetsEquity.account_group_nameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'account_group_name\' in table \'dtStatementOfChangesInNetAsse" +
+                                "tsEquity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.account_group_nameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int major_account_group_id {
+                get {
+                    try {
+                        return ((int)(this[this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'major_account_group_id\' in table \'dtStatementOfChangesInNet" +
+                                "AssetsEquity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string major_account_group_code {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_codeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'major_account_group_code\' in table \'dtStatementOfChangesInN" +
+                                "etAssetsEquity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_codeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string major_account_group_name {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_nameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'major_account_group_name\' in table \'dtStatementOfChangesInN" +
+                                "etAssetsEquity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_nameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int sub_major_account_group_id {
+                get {
+                    try {
+                        return ((int)(this[this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'sub_major_account_group_id\' in table \'dtStatementOfChangesI" +
+                                "nNetAssetsEquity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string sub_major_account_group_code {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_codeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'sub_major_account_group_code\' in table \'dtStatementOfChange" +
+                                "sInNetAssetsEquity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_codeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string sub_major_account_group_name {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_nameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'sub_major_account_group_name\' in table \'dtStatementOfChange" +
+                                "sInNetAssetsEquity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_nameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int account_id {
+                get {
+                    try {
+                        return ((int)(this[this.tabledtStatementOfChangesInNetAssetsEquity.account_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'account_id\' in table \'dtStatementOfChangesInNetAssetsEquity" +
+                                "\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.account_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string account_code {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtStatementOfChangesInNetAssetsEquity.account_codeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'account_code\' in table \'dtStatementOfChangesInNetAssetsEqui" +
+                                "ty\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.account_codeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string account_name {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtStatementOfChangesInNetAssetsEquity.account_nameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'account_name\' in table \'dtStatementOfChangesInNetAssetsEqui" +
+                                "ty\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.account_nameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal current_amount {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfChangesInNetAssetsEquity.current_amountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'current_amount\' in table \'dtStatementOfChangesInNetAssetsEq" +
+                                "uity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.current_amountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal previous_amount {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_amountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_amount\' in table \'dtStatementOfChangesInNetAssetsE" +
+                                "quity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_amountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isaccount_group_idNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.account_group_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setaccount_group_idNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.account_group_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isaccount_group_codeNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.account_group_codeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setaccount_group_codeNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.account_group_codeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isaccount_group_nameNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.account_group_nameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setaccount_group_nameNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.account_group_nameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ismajor_account_group_idNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setmajor_account_group_idNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ismajor_account_group_codeNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_codeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setmajor_account_group_codeNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_codeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ismajor_account_group_nameNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_nameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setmajor_account_group_nameNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_nameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Issub_major_account_group_idNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setsub_major_account_group_idNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Issub_major_account_group_codeNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_codeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setsub_major_account_group_codeNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_codeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Issub_major_account_group_nameNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_nameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setsub_major_account_group_nameNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_nameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isaccount_idNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.account_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setaccount_idNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.account_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isaccount_codeNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.account_codeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setaccount_codeNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.account_codeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isaccount_nameNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.account_nameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setaccount_nameNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.account_nameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Iscurrent_amountNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.current_amountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setcurrent_amountNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.current_amountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isprevious_amountNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.previous_amountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setprevious_amountNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_amountColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -18415,6 +19110,40 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public dtStatementOfFinancialPerformanceRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public class dtStatementOfChangesInNetAssetsEquityRowChangeEvent : global::System.EventArgs {
+            
+            private dtStatementOfChangesInNetAssetsEquityRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtStatementOfChangesInNetAssetsEquityRowChangeEvent(dtStatementOfChangesInNetAssetsEquityRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtStatementOfChangesInNetAssetsEquityRow Row {
                 get {
                     return this.eventRow;
                 }
