@@ -197,7 +197,17 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            throw new NotImplementedException();
+            try
+            {
+                string query = $"SELECT * FROM {viewTableName}";
+
+                var dtBudgetAppropriation = new DataTable();
+                return mySqlGenericCommands.Fill(query, dtBudgetAppropriation);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -344,7 +354,7 @@ namespace ACC.Data
         //DASHBOARD
         #region BUDGET DASHBOARD
         //DETAILED
-        public DataTable GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(string fppId, int? subFPPId, int funds_id, int allotment_class_id, DateTime date_entry)
+        public DataTable GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(string fppId, int? subFPPId, int funds_id, int allotment_class_id, DateTime date_entry, int? budgetId)
         {
             try
             {
@@ -355,7 +365,8 @@ namespace ACC.Data
                     new object[] { "@funds_id", DbType.Int32, funds_id},
                     new object[] { "@allotment_class_id", DbType.Int32, allotment_class_id},
                     new object[] { "@date_entry", DbType.Date, date_entry.Date},
-                    new object[] { "@year", DbType.Int16, date_entry.Year}
+                    new object[] { "@year", DbType.Int16, date_entry.Year},
+                    new object[] { "@budget_id", DbType.Int32, budgetId }
                 };
 
                 string fppWhereQuery = fppId == "all" ? string.Empty : "fpp_id = @fpp_id AND";
@@ -397,7 +408,9 @@ namespace ACC.Data
                        $"others_fpp_id <=> @others_fpp_id AND " +
                        $"allotment_class_id = @allotment_class_id " +
                        $"AND date_entry <= @date_entry " +
-                       $"AND year = @year GROUP BY general_ledger_accounts_id";
+                       $"AND year = @year " +
+                       $"AND id <> @budget_id " +
+                       $"GROUP BY general_ledger_accounts_id";
 
                 var dataTable = new DataTable();
                 return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
@@ -1037,6 +1050,24 @@ namespace ACC.Data
                 throw;
             }
             return false;
+        }
+
+        public string GetBudgetIdByGeneralLedgerId(string generalLedgerId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@general_ledger_id", DbType.Int32, generalLedgerId},
+                };
+
+                string query = $"SELECT id FROM {tableName} WHERE general_ledger_accounts_id = @general_ledger_id LIMIT 1";
+                return mySqlGenericCommands.ExecuteScalar(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         #endregion Validations

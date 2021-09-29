@@ -286,7 +286,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
         }
 
 
-
         private void ucBudgetAppropriations_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
@@ -294,6 +293,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 var fppRepo = Factory.FunctionProgramProjectRepository().GetRecordByID(fppId);
                 var fundRepo = Factory.FundsRepository().GetRecordByID(fundId);
                 var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
+
                 txtFPP.Text = $"{fppRepo["fpp_code"]} - {fppRepo["fpp_name"]}";
                 txtFund.Text = $"{fundRepo["fund_code"]} - {fundRepo["fund_name"]}";
                 txtAllotmentClass.Text = $"{allotmentClassRepo["allotment_code"]} - {allotmentClassRepo["allotment_name"]}";

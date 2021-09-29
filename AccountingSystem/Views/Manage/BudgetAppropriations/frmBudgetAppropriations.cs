@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.AllotmentRelease;
 using AccountingSystem.Views.Manage.Augmentation;
+using AccountingSystem.Views.Manage.Realignment;
 using AccountingSystem.Views.Manage.SupplementalAppropriations;
 using BudgetSystem.Views.BudgetAppropriations;
 using BudgetSystem.Views.Manage.BudgetAppropriations;
@@ -10,7 +11,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
+using System.Linq; 
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -83,7 +84,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
           
         }
 
-        internal void LoadComboboxes()
+        public void LoadComboboxes()
         {
             try
             {
@@ -96,6 +97,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 LoadFPP();
                 cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TextChanged);
                 cmbxFPP.SelectedValueChanged += new EventHandler(CmbxFPP_SelectedValueChanged);
+
             }
             catch (Exception ex)
             {
@@ -123,7 +125,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
                 btnSupplementalAppropriations.Enabled = true;
-                //btnAugmentation.Enabled = true;
+                btnAugmentation.Enabled = true;
+                btnRealignment.Enabled = true;
 
             }
             else if (SelectedRows > 1 && dgv.SelectedCells[0].Value != null)
@@ -132,7 +135,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
                 btnSupplementalAppropriations.Enabled = false;
-                //btnAugmentation.Enabled = false;
+                btnAugmentation.Enabled = false;
+                btnRealignment.Enabled = false;
             }
             else
             {
@@ -140,7 +144,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Enabled = false;
                 btnDelete.Text = "Delete";
                 btnSupplementalAppropriations.Enabled = false;
-                //btnAugmentation.Enabled = false;
+                btnAugmentation.Enabled = false;
+                btnRealignment.Enabled = false;
             }
 
             if (cmbxFPP.SelectedIndex == -1 || cmbxAllotmentClass.SelectedIndex == -1 || cmbxFunds.SelectedIndex == -1)
@@ -370,5 +375,26 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         {
             _ = new frmAugmentation().ShowDialog();
         }
+
+        private void btnRealignment_Click(object sender, EventArgs e)
+        {
+            int rowIndex = dgBudgetAppropriations.CurrentCell.RowIndex;
+
+            var budgetAppropriationId = dgBudgetAppropriations.Rows[rowIndex].Cells["id"].Value.ToString();
+            var budgetAppropriationAmount = dgBudgetAppropriations.Rows[rowIndex].Cells["amount"].Value.ToString();
+            var budgetAppropriationAccount = dgBudgetAppropriations.Rows[rowIndex].Cells["general_ledger_accounts_name"].Value.ToString();
+          
+            var frmRealignment = new frmRealignment
+            {
+                budgetAppropriationId = budgetAppropriationId,
+                budgetAppropriationAccount = budgetAppropriationAccount,
+                budgetAppropriationAmount = budgetAppropriationAmount
+
+            };
+
+            frmRealignment.ShowDialog();
+        }
+
+    
     }
 }

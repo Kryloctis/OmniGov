@@ -55,6 +55,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSupplementalAppropriations = new System.Windows.Forms.ToolStripButton();
             this.btnAugmentation = new System.Windows.Forms.ToolStripButton();
+            this.btnRealignment = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetAppropriations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -249,7 +250,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnDelete,
             this.toolStripSeparator1,
             this.btnSupplementalAppropriations,
-            this.btnAugmentation});
+            this.btnAugmentation,
+            this.btnRealignment});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1201, 50);
@@ -308,7 +310,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             // btnAugmentation
             // 
-            this.btnAugmentation.Enabled = false;
             this.btnAugmentation.Image = global::AccountingSystem.Properties.Resources.augmentation_28px;
             this.btnAugmentation.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAugmentation.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -317,6 +318,17 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnAugmentation.Text = "Augmentation";
             this.btnAugmentation.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAugmentation.Click += new System.EventHandler(this.btnAugmentation_Click);
+            // 
+            // btnRealignment
+            // 
+            this.btnRealignment.Image = global::AccountingSystem.Properties.Resources.money_banknotes_2_filled_arrow_left_right_28px;
+            this.btnRealignment.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnRealignment.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRealignment.Name = "btnRealignment";
+            this.btnRealignment.Size = new System.Drawing.Size(78, 47);
+            this.btnRealignment.Text = "Realignment";
+            this.btnRealignment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRealignment.Click += new System.EventHandler(this.btnRealignment_Click);
             // 
             // frmBudgetAppropriations
             // 
@@ -380,5 +392,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnSupplementalAppropriations;
         private System.Windows.Forms.ToolStripButton btnAugmentation;
+        private System.Windows.Forms.ToolStripButton btnRealignment;
     }
 }

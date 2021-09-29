@@ -393,12 +393,13 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap invisible_16px {
+        internal static System.Drawing.Bitmap money_banknotes_2_filled_arrow_left_right_24px {
             get {
-                object obj = ResourceManager.GetObject("invisible_16px", resourceCulture);
+                object obj = ResourceManager.GetObject("money-banknotes-2-filled-arrow-left-right@24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
