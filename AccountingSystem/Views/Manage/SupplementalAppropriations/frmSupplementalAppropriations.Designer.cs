@@ -256,8 +256,6 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        internal System.Windows.Forms.TextBox txtTotalSupplementalAppropriations;
-        private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.ToolStripStatusLabel lblRecords;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         internal System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
@@ -271,5 +269,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         internal System.Windows.Forms.ToolStripStatusLabel lblDateEntryPlaceHolder;
         internal System.Windows.Forms.ToolStripStatusLabel lblCreatedAtPlaceHolder;
         internal System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
+        internal System.Windows.Forms.TextBox txtTotalSupplementalAppropriations;
+        private System.Windows.Forms.Label label1;
     }
 }

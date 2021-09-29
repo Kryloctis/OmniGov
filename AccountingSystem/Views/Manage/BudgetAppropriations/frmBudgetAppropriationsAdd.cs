@@ -79,5 +79,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
             }
         }
+
     }
 }
