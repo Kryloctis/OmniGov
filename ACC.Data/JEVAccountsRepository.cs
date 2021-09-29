@@ -96,6 +96,118 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
+        public DataTable GetViewRecords()
+        {
+            try
+            {
+                string query = $"SELECT " +
+                    $"id, " +
+                    $"jev_id, " +
+                    $"funds_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"journals_id, " +
+                    $"journal_name, " +
+                    $"is_special, " +
+                    $"jev_no, " +
+                    $"full_jev_no, " +
+                    $"date_entry, " +
+                    $"explanation, " +
+                    $"is_approved, " +
+                    $"is_disapproved, " +
+                    $"is_cancelled, " +
+                    $"fpp_id, " +
+                    $"fpp_code, " +
+                    $"fpp_name, " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_code, " +
+                    $"general_ledger_accounts_code, " +
+                    $"general_ledger_accounts_name, " +
+                    $"general_ledger_accounts_is_contra_account, " +
+                    $"sub_maj_acc_group_id, " +
+                    $"sub_maj_acc_group_code, " +
+                    $"sub_maj_acc_group_name, " +
+                    $"maj_acc_group_id, " +
+                    $"maj_acc_group_code, " +
+                    $"maj_acc_group_name, " +
+                    $"account_group_id, " +
+                    $"account_group_code, " +
+                    $"account_group_name, " +
+                    $"subsidiary_ledger_accounts_id, " +
+                    $"subsidiary_ledger_accounts_code, " +
+                    $"subsidiary_ledger_accounts_name, " +
+                    $"obligation_no, " +
+                    $"is_deposit, " +
+                    $"is_debit, " +
+                    $"amount " +
+                    $"FROM {viewTableName}";
+
+                var datatable = new DataTable();
+                return _dbGenericCommands.Fill(query, datatable);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public DataTable GetViewRecordsByLedgerAccounts()
+        {
+            try
+            {
+                string query = $"SELECT " +
+                    $"id, " +
+                    $"jev_id, " +
+                    $"funds_id, " +
+                    $"fund_code, " +
+                    $"fund_name, " +
+                    $"journals_id, " +
+                    $"journal_name, " +
+                    $"is_special, " +
+                    $"jev_no, " +
+                    $"full_jev_no, " +
+                    $"date_entry, " +
+                    $"explanation, " +
+                    $"is_approved, " +
+                    $"is_disapproved, " +
+                    $"is_cancelled, " +
+                    $"fpp_id, " +
+                    $"fpp_code, " +
+                    $"fpp_name, " +
+                    $"general_ledger_accounts_id, " +
+                    $"account_code, " +
+                    $"general_ledger_accounts_code, " +
+                    $"general_ledger_accounts_name, " +
+                    $"general_ledger_accounts_is_contra_account, " +
+                    $"sub_maj_acc_group_id, " +
+                    $"sub_maj_acc_group_code, " +
+                    $"sub_maj_acc_group_name, " +
+                    $"maj_acc_group_id, " +
+                    $"maj_acc_group_code, " +
+                    $"maj_acc_group_name, " +
+                    $"account_group_id, " +
+                    $"account_group_code, " +
+                    $"account_group_name, " +
+                    $"subsidiary_ledger_accounts_id, " +
+                    $"subsidiary_ledger_accounts_code, " +
+                    $"subsidiary_ledger_accounts_name, " +
+                    $"obligation_no, " +
+                    $"is_deposit, " +
+                    $"is_debit, " +
+                    $"amount " +
+                    $"FROM {viewTableName} GROUP BY general_ledger_accounts_id";
+
+                var datatable = new DataTable();
+                return _dbGenericCommands.Fill(query, datatable);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public DataTable GetViewRecordsByJevId(int jevId)
         {
             try
@@ -294,7 +406,7 @@ namespace ACC.Data
         }
 
         //STATEMENT OF FINANCIAL PERFORMANCE
-        public decimal GetSumTransactionsByFundAndAccountAndIsDebitAndDateEntry(int fundId, int generalLedgerId, bool isDebit, DateTime dateEntry)
+        public decimal GetBalanceByFundAndAccountAndDateEntry(int fundId, int generalLedgerId, DateTime dateEntry)
         {
             try
             {
@@ -302,24 +414,38 @@ namespace ACC.Data
                 {
                     new object[] { "@funds_id", DbType.Int32, fundId},
                     new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerId},
-                    new object[] { "@is_debit", DbType.Boolean, isDebit},
                     new object[] { "@date_entry",DbType.Date, dateEntry.Date},
                     new object[] { "@year",DbType.Int16, dateEntry.Year}
                 };
 
-                string query = $"SELECT COALESCE(SUM(amount),0) AS amount " +
+                string queryDebit = $"SELECT COALESCE(SUM(amount),0) AS amount " +
                     $"FROM {viewTableName} " +
                     $"WHERE funds_id = @funds_id " +
                     $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
-                    $"AND is_debit = @is_debit " +
+                    $"AND is_debit = 1 " +
                     $"AND is_approved = 1 " +
                     $"AND is_disapproved = 0 " +
                     $"AND is_cancelled = 0 " +
                     $"AND date_entry <= @date_entry " +
                     $"AND YEAR(date_entry) = @year";
 
-                decimal amount = Convert.ToDecimal(_dbGenericCommands.ExecuteScalar(query, parameters));
-                return amount;
+                string queryCredit = $"SELECT COALESCE(SUM(amount),0) AS amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE funds_id = @funds_id " +
+                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
+                    $"AND is_debit = 0 " +
+                    $"AND is_approved = 1 " +
+                    $"AND is_disapproved = 0 " +
+                    $"AND is_cancelled = 0 " +
+                    $"AND date_entry <= @date_entry " +
+                    $"AND YEAR(date_entry) = @year";
+
+                decimal debitAmount = Convert.ToDecimal(_dbGenericCommands.ExecuteScalar(queryDebit, parameters));
+                decimal creditAmount = Convert.ToDecimal(_dbGenericCommands.ExecuteScalar(queryCredit, parameters));
+
+                decimal balance = debitAmount - creditAmount;
+
+                return balance;
             }
             catch (Exception)
             {
@@ -473,5 +599,6 @@ namespace ACC.Data
                 throw;
             }
         }
+
     }
 }
