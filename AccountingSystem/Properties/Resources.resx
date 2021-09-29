@@ -286,10 +286,10 @@
   <data name="money-banknotes-2-filled-arrow-left-right@28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\money-banknotes-2-filled-arrow-left-right@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="invisible_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\invisible-16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="visible_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\visible-16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="invisible_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\invisible-16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
