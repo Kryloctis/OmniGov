@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void frmJEVSearch_Load(object sender, EventArgs e)
         {
-            Helper.DatagridDefaultStyle(dgJEV);
+            Helper.DatagridFullRowSelectStyle(dgJEV);
             LoadJEVList();
         }
 

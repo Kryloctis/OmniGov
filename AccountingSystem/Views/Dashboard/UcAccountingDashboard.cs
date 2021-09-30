@@ -12,16 +12,16 @@ namespace AccountingSystem.Views.Dashboard
         public ucAccountingDashboard()
         {
             InitializeComponent();
-
-            foreach (var item in Helper.MonthsDatasource().Values)
-                cbMonth.Items.Add(item);
-            cbMonth.SelectedIndex = DateTime.Now.Month - 1;
+      
         }
 
         private void UcAccountingDashboard_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
+                foreach (var item in Helper.MonthsDatasource().Values)
+                    cbMonth.Items.Add(item);
+                cbMonth.SelectedIndex = DateTime.Now.Month - 1;
                 Dock = DockStyle.Fill;
                 LoadJEVCounter();
             }

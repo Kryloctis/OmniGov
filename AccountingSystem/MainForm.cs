@@ -53,20 +53,6 @@ namespace AccountingSystem
             loginForm = _loginForm;
         }
 
-        #region DASHBOARD
-
-
-        #region ACCOUNTING DASHBOARD
-
-        private void LoadAccountingDashboard()
-        {
-            ucAccountingDashboard1.userDict = userDict;
-        }
-
-        #endregion
-
-        #endregion
-
         private void LoadLoggedInUser()
         {
             lblUserFullName.Text = $"Welcome {userDict["first_name"]} {userDict["mid_initial"]} {userDict["last_name"]}";
@@ -220,7 +206,6 @@ namespace AccountingSystem
         private void MainForm_Load(object sender, EventArgs e)
         {
             LoadLoggedInUser();
-            LoadAccountingDashboard();
             ValidatePermissions();
         }
 
@@ -238,6 +223,7 @@ namespace AccountingSystem
         {
             _ = new frmChartOfAccounts().ShowDialog();
         }
+
         private void menuAllotmentClasses_Click(object sender, EventArgs e)
         {
             _ = new frmAllotmentClasses().ShowDialog();
@@ -373,6 +359,7 @@ namespace AccountingSystem
         {
             _ = new frmJEVReport(0, null, 0).ShowDialog();
         }
+
         private void btnPaymentCollection_Click(object sender, EventArgs e)
         {
             _ = new frmPaymentCollection().ShowDialog();
