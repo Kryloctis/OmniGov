@@ -101,7 +101,22 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableName}.id,CONCAT({tableName3}.last_name,', ',{tableName3}.first_name,' ',{tableName3}.mid_initial) AS collector,CONCAT({tableName4}.acc_form_no,' - ',{tableName4}.acc_form_desc) AS receipt,{tableName}.issuefrom,{tableName}.issueto,{tableName}.date_issued,{tableName}.quantity,{tableName}.last_issued,IF(IFNULL({tableName}.is_returned,0)>0,'YES','NO') AS returned,{tableName}.returned_date,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS officer FROM {tableName} LEFT JOIN {tableName5} ON {tableName}.receipts_id={tableName5}.id LEFT JOIN {tableName2} ON {tableName5}.users_id={tableName2}.id LEFT JOIN {tableName3} ON {tableName}.collecting_officers_id={tableName3}.id LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id ORDER BY {tableName}.date_issued DESC";
+                string query = $"SELECT {tableName}.id," +
+                    $"CONCAT({tableName3}.last_name,', ',{tableName3}.first_name,' ',{tableName3}.mid_initial) AS collector," +
+                    $"CONCAT({tableName4}.acc_form_no,' - ',{tableName4}.acc_form_desc) AS receipt," +
+                    $"{tableName}.issuefrom," +
+                    $"{tableName}.issueto," +
+                    $"{tableName}.date_issued," +
+                    $"{tableName}.quantity," +
+                    $"{tableName}.last_issued," +
+                    $"IF(IFNULL({tableName}.is_returned,0)>0,'YES','NO') AS returned," +
+                    $"{tableName}.returned_date," +
+                    $"CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS officer " +
+                    $"FROM {tableName} LEFT JOIN {tableName5} ON {tableName}.receipts_id={tableName5}.id " +
+                    $"LEFT JOIN {tableName2} ON {tableName5}.users_id={tableName2}.id " +
+                    $"LEFT JOIN {tableName3} ON {tableName}.collecting_officers_id={tableName3}.id " +
+                    $"LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id " +
+                    $"ORDER BY {tableName}.date_issued DESC";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
@@ -116,7 +131,10 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName5} LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id WHERE {tableName5}.receiptsto<>IFNULL((SELECT SUM(IF(IFNULL(ri.last_issued,0)>0,ri.issueto-ri.last_issued,0)) FROM {tableName} ri WHERE ri.receipts_id={tableName5}.id),0) AND {tableName5}.id NOT IN (SELECT {tableName}.receipts_id FROM {tableName} WHERE {tableName}.collecting_officers_id='{id}' AND IF(IFNULL({tableName}.is_returned,0)>0,1,0)=0)";
+                string query = $"SELECT * FROM {tableName5} " +
+                    $"LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id " +
+                    $"WHERE {tableName5}.receiptsto<>IFNULL((SELECT SUM(IF(IFNULL(ri.last_issued,0)>0,ri.issueto-ri.last_issued,0)) FROM {tableName} ri WHERE ri.receipts_id={tableName5}.id),0) " +
+                    $"AND {tableName5}.id NOT IN (SELECT {tableName}.receipts_id FROM {tableName} WHERE {tableName}.collecting_officers_id='{id}' AND IF(IFNULL({tableName}.is_returned,0)>0,1,0)=0)";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
@@ -131,7 +149,18 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableName}.id,CONCAT({tableName4}.acc_form_no,' - ',{tableName4}.acc_form_desc) AS receipt,{tableName}.issuefrom,{tableName}.issueto,{tableName}.date_issued,{tableName}.quantity,{tableName}.last_issued,IF(IFNULL({tableName}.is_returned,0)>0,'YES','NO') AS returned,{tableName}.returned_date FROM {tableName5} LEFT JOIN {tableName} ON {tableName}.receipts_id={tableName5}.id LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id WHERE {tableName}.collecting_officers_id='{coid}' AND {tableName5}.accountable_forms_id='{formid}' AND IF(IFNULL({tableName}.is_returned,0)>0,1,0)=0 AND IF({tableName}.issueto={tableName}.last_issued,true,false)=false";
+                string query = $"SELECT {tableName}.id," +
+                    $"CONCAT({tableName4}.acc_form_no,' - ',{tableName4}.acc_form_desc) AS receipt," +
+                    $"{tableName}.issuefrom," +
+                    $"{tableName}.issueto," +
+                    $"{tableName}.date_issued," +
+                    $"{tableName}.quantity," +
+                    $"{tableName}.last_issued," +
+                    $"IF(IFNULL({tableName}.is_returned,0)>0,'YES','NO') AS returned," +
+                    $"{tableName}.returned_date " +
+                    $"FROM {tableName5} LEFT JOIN {tableName} ON {tableName}.receipts_id={tableName5}.id " +
+                    $"LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id " +
+                    $"WHERE {tableName}.collecting_officers_id='{coid}' AND {tableName5}.accountable_forms_id='{formid}' AND IF(IFNULL({tableName}.is_returned,0)>0,1,0)=0 AND IF({tableName}.issueto={tableName}.last_issued,true,false)=false";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
@@ -161,7 +190,26 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableName}.id,CONCAT({tableName3}.last_name,', ',{tableName3}.first_name,' ',{tableName3}.mid_initial) AS collector,CONCAT({tableName4}.acc_form_no,' - ',{tableName4}.acc_form_desc) AS receipt,{tableName}.issuefrom,{tableName}.issueto,{tableName}.date_issued,{tableName}.quantity,{tableName}.last_issued,IF(IFNULL({tableName}.is_returned,0)>0,'YES','NO') AS returned,{tableName}.returned_date,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS officer FROM {tableName} LEFT JOIN {tableName5} ON {tableName}.receipts_id={tableName5}.id LEFT JOIN {tableName2} ON {tableName5}.users_id={tableName2}.id LEFT JOIN {tableName3} ON {tableName}.collecting_officers_id={tableName3}.id LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id WHERE {tableName5}.receiptsfrom LIKE '%{searchText}%' OR {tableName5}.receiptsto LIKE '%{searchText}%' OR CONCAT({tableName3}.last_name,', ',{tableName3}.first_name,' ',{tableName3}.mid_initial) LIKE '%{searchText}%' OR CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) LIKE '%{searchText}%' OR CONCAT({tableName4}.acc_form_no,' - ',{tableName4}.acc_form_desc) LIKE '%{searchText}%' ORDER BY {tableName}.date_issued DESC";
+                string query = $"SELECT {tableName}.id," +
+                    $"CONCAT({tableName3}.last_name,', ',{tableName3}.first_name,' ',{tableName3}.mid_initial) AS collector," +
+                    $"CONCAT({tableName4}.acc_form_no,' - ',{tableName4}.acc_form_desc) AS receipt," +
+                    $"{tableName}.issuefrom," +
+                    $"{tableName}.issueto," +
+                    $"{tableName}.date_issued," +
+                    $"{tableName}.quantity," +
+                    $"{tableName}.last_issued," +
+                    $"IF(IFNULL({tableName}.is_returned,0)>0,'YES','NO') AS returned," +
+                    $"{tableName}.returned_date," +
+                    $"CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS officer " +
+                    $"FROM {tableName} LEFT JOIN {tableName5} ON {tableName}.receipts_id={tableName5}.id " +
+                    $"LEFT JOIN {tableName2} ON {tableName5}.users_id={tableName2}.id " +
+                    $"LEFT JOIN {tableName3} ON {tableName}.collecting_officers_id={tableName3}.id " +
+                    $"LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id " +
+                    $"WHERE {tableName5}.receiptsfrom LIKE '%{searchText}%' " +
+                    $"OR {tableName5}.receiptsto LIKE '%{searchText}%' " +
+                    $"OR CONCAT({tableName3}.last_name,', ',{tableName3}.first_name,' ',{tableName3}.mid_initial) LIKE '%{searchText}%' " +
+                    $"OR CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) LIKE '%{searchText}%' " +
+                    $"OR CONCAT({tableName4}.acc_form_no,' - ',{tableName4}.acc_form_desc) LIKE '%{searchText}%' ORDER BY {tableName}.date_issued DESC";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);

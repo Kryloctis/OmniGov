@@ -24,10 +24,16 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void frmReceiptsAdd_Load(object sender, EventArgs e)
         {
-            ucReceipts1.LoadCollectors();
+           
             if(Rid > 0)
             {
+                ucReceipts1.LoadCollectors(Rid);
                 ucReceipts1.cmbreceipt.SelectedValue = Rid;
+                ucReceipts1.cmbreceipt.Enabled = false;
+            }
+            else
+            {
+                ucReceipts1.LoadCollectors();
             }
         }
 
@@ -63,6 +69,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 else if (Convert.ToInt32(uc.txtfrom.Text.Trim()) > Convert.ToInt32(uc.txtto.Text.Trim()))
                 {
                     Helper.MessageBoxError("Invalid Receipt!");
+                    return false;
+                }
+                else if (int.Parse(uc.txtquantity.Text.Trim()) <= 0)
+                {
+                    Helper.MessageBoxError("Quantity Empty!");
                     return false;
                 }
                 else

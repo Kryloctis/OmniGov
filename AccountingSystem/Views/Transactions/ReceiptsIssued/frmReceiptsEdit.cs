@@ -75,6 +75,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                     Helper.MessageBoxError("Invalid Receipt!");
                     return false;
                 }
+                else if(int.Parse(uc.txtquantity.Text.Trim()) <= 0)
+                {
+                    Helper.MessageBoxError("Quantity Empty!");
+                    return false;
+                }
                 else return riRepository.Update(riModel);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

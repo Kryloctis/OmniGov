@@ -62,14 +62,16 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 {
                     if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
                     {
+                        var repository = Factory.CollectingOfficerRepository();
                         var modelList = new List<CollectingOfficerModel>();
                         foreach (DataGridViewRow row in dgCollectingOfficer.SelectedRows)
                         {
                             int OfficerID = Convert.ToInt16(row.Cells[0].Value.ToString());
-                            modelList.Add(new CollectingOfficerModel() { Id = OfficerID });
+                            if (!repository.ReceiptsAssigned(OfficerID))
+                            {
+                                modelList.Add(new CollectingOfficerModel() { Id = OfficerID });
+                            }                            
                         }
-
-                        var repository = Factory.CollectingOfficerRepository();
                         _ = repository.Delete(modelList);
                         LoadRecords();
                     }
@@ -83,9 +85,13 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void dgCollectingOfficer_SelectionChanged(object sender, EventArgs e)
         {
+            var corepository = Factory.CollectingOfficerRepository();
+            int id = int.Parse(dgCollectingOfficer.CurrentRow.Cells[0].Value.ToString());
             byte[] columnIndexTimestamp = { 3, 4 };
             Helper.ShowRecordTimestamp(dgCollectingOfficer, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgCollectingOfficer, btnEdit, btnDelete);
+            btnDelete.Enabled = corepository.ReceiptsAssigned(id) ? false : true;
+
         }
 
         private void txtsearch_TextChanged(object sender, EventArgs e)

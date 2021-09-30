@@ -150,6 +150,29 @@ namespace ACC.Data
             return false;
         }
 
+        public bool ReceiptsIssued(int id)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, id },
+                };
+
+                string query = $"SELECT id FROM {tableName4} WHERE receipts_id = @id";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
+
         public bool ReceiptExist(int accid,int from,int to)
         {
             try
@@ -202,7 +225,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT MAX(issueto) AS issuelast FROM {tableName4} WHERE receipts_id='{id}'";
+                string query = $"SELECT IFNULL(last_issued,issueto) AS issuelast,issueto,is_returned FROM {tableName4} WHERE receipts_id='{id}' AND issueto<>IFNULL(last_issued,0) ORDER BY issuelast DESC";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
