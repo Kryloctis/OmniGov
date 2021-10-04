@@ -241,7 +241,7 @@ namespace AccountingSystem
 
         private void menuJEV_Click(object sender, EventArgs e)
         {
-            _ = new frmJEV().ShowDialog();
+            _ = new frmJEV(null).ShowDialog();
         }
 
         private void menuFunctionProgramProject_Click(object sender, EventArgs e)
@@ -271,7 +271,7 @@ namespace AccountingSystem
 
         private void BtnJournalEntry_Click(object sender, EventArgs e)
         {
-            _ = new frmJEV().ShowDialog();
+            _ = new frmJEV(null).ShowDialog();
         }
 
         private void BtnObligationRequest_Click(object sender, EventArgs e)
