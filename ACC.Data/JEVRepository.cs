@@ -653,8 +653,6 @@ namespace ACC.Data
             }
         }
 
-
-
         public bool JevNumberExist(string jevNo, int id)
         {
             try
@@ -835,7 +833,7 @@ namespace ACC.Data
                     new object[] { "@year", DbType.Int16, year}
                 };
 
-                string query = $"SELECT COUNT(*) FROM {tableName} WHERE MONTH(date_entry)=@month AND YEAR(date_entry)=@year";
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
 
                 return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
             }
@@ -855,7 +853,7 @@ namespace ACC.Data
                     new object[] { "@year", DbType.Int16, year}
                 };
 
-                string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved=1 AND is_disapproved=0 AND is_cancelled=0 AND MONTH(date_entry)=@month AND YEAR(date_entry)=@year";
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved=1 AND is_disapproved=0 AND is_cancelled=0 AND MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
 
                 return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
             }
@@ -875,7 +873,7 @@ namespace ACC.Data
                     new object[] { "@year", DbType.Int16, year}
                 };
 
-                string query = $"SELECT COUNT(*) FROM {tableName} WHERE  is_approved=0 AND is_disapproved=0 AND is_cancelled=0 AND MONTH(date_entry)=@month AND YEAR(date_entry)=@year";
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE  is_approved=0 AND is_disapproved=0 AND is_cancelled=0 AND MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
 
                 return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
             }
@@ -884,6 +882,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
         public int TotalDisapprovedJEV(short month, short year)
         {
             try
@@ -894,7 +893,7 @@ namespace ACC.Data
                     new object[] { "@year", DbType.Int16, year}
                 };
 
-                string query = $"SELECT COUNT(*) FROM {tableName} WHERE  is_approved=0 AND is_disapproved=1 AND is_cancelled=0 AND MONTH(date_entry)=@month AND YEAR(date_entry)=@year";
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE  is_approved=0 AND is_disapproved=1 AND is_cancelled=0 AND MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
 
                 return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
             }
@@ -914,7 +913,7 @@ namespace ACC.Data
                     new object[] { "@year", DbType.Int16, year}
                 };
 
-                string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved=1 AND is_disapproved=0 AND is_cancelled=1 AND MONTH(date_entry)=@month AND YEAR(date_entry)=@year";
+                string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved=1 AND is_disapproved=0 AND is_cancelled=1 AND MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
 
                 return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
 
@@ -972,7 +971,7 @@ namespace ACC.Data
                     $"updated_by " +
                     $"FROM {viewTableName} " +
                     $"WHERE {jevStatusQuery} " +
-                    $"AND MONTH(date_entry) = @month " +
+                    $"AND MONTH(date_entry) <= @month " +
                     $"AND YEAR(date_entry) = @year " +
                     $"AND (jev_no LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt)";
 

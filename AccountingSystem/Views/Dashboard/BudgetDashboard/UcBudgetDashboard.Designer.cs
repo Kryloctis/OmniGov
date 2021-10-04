@@ -44,12 +44,12 @@ namespace AccountingSystem.Views.Dashboard
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.tabBudgetDetailed = new System.Windows.Forms.TabPage();
+            this.ucBudgetDetailed1 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed();
             this.tabBudgetSummary = new System.Windows.Forms.TabPage();
             this.ucBudgetSummary1 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.chkbxDetailed = new System.Windows.Forms.CheckBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.ucBudgetDetailed1 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed();
             this.tableLayoutPanel3.SuspendLayout();
             this.panel13.SuspendLayout();
             this.panel12.SuspendLayout();
@@ -249,6 +249,14 @@ namespace AccountingSystem.Views.Dashboard
             this.tabBudgetDetailed.Text = "tabBudgetDetailed";
             this.tabBudgetDetailed.UseVisualStyleBackColor = true;
             // 
+            // ucBudgetDetailed1
+            // 
+            this.ucBudgetDetailed1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucBudgetDetailed1.Location = new System.Drawing.Point(0, 0);
+            this.ucBudgetDetailed1.Name = "ucBudgetDetailed1";
+            this.ucBudgetDetailed1.Size = new System.Drawing.Size(1157, 527);
+            this.ucBudgetDetailed1.TabIndex = 0;
+            // 
             // tabBudgetSummary
             // 
             this.tabBudgetSummary.AutoScroll = true;
@@ -307,14 +315,6 @@ namespace AccountingSystem.Views.Dashboard
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1165, 25);
             this.panel5.TabIndex = 2;
-            // 
-            // ucBudgetDetailed1
-            // 
-            this.ucBudgetDetailed1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucBudgetDetailed1.Location = new System.Drawing.Point(0, 0);
-            this.ucBudgetDetailed1.Name = "ucBudgetDetailed1";
-            this.ucBudgetDetailed1.Size = new System.Drawing.Size(1157, 527);
-            this.ucBudgetDetailed1.TabIndex = 0;
             // 
             // ucBudgetDashboard
             // 
