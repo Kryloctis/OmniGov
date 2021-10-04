@@ -20,7 +20,9 @@ namespace ACC.Domain.Interfaces
         //DASHBOARD
         #region BUDGET DASHBOARD
         //DETAILED
-        DataTable GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(string fppId, int? subFPPId, int funds_id, int allotment_class_id, DateTime date_entry, int? budgetId);
+        DataTable GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(string fppId, int? subFPPId, int funds_id, int allotment_class_id, DateTime date_entry);
+
+        DataTable GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntryAndBudgetAppropriationId(string fppId, int? subFPPId, int funds_id, int allotment_class_id, DateTime date_entry, int budget_id);
 
         DataTable GetHeaderOthersFPP(string fppID, int allotment_classes_id, int funds_id, short year);
 

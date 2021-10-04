@@ -160,7 +160,8 @@ namespace AccountingSystem.Views.Manage.Realignment
         private DataTable DatatableAccounts()
         {
             DataTable dtRealignmentAccounts;
-            dtRealignmentAccounts = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppId.ToString(), othersFPPId ,fundId, allotmentClassId, dtDateIssued.Value, int.Parse(txtBudgetId.Text));
+
+            dtRealignmentAccounts = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntryAndBudgetAppropriationId(fppId.ToString(), othersFPPId ,fundId, allotmentClassId, dtDateIssued.Value, Convert.ToInt32(txtBudgetId.Text));
 
             return dtRealignmentAccounts;
         }
@@ -346,7 +347,7 @@ namespace AccountingSystem.Views.Manage.Realignment
 
             if (!isEnoughBudget)
             {
-                epAmount.SetError(nudAmount, "insufficient budget appropriation to be align.");
+                epAmount.SetError(nudAmount, "insufficient budget appropriation to realign.");
                 e.Cancel = true;
             }
         }

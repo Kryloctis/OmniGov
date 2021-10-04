@@ -354,7 +354,7 @@ namespace ACC.Data
         //DASHBOARD
         #region BUDGET DASHBOARD
         //DETAILED
-        public DataTable GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(string fppId, int? subFPPId, int funds_id, int allotment_class_id, DateTime date_entry, int? budgetId)
+        public DataTable GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(string fppId, int? subFPPId, int funds_id, int allotment_class_id, DateTime date_entry)
         {
             try
             {
@@ -365,8 +365,7 @@ namespace ACC.Data
                     new object[] { "@funds_id", DbType.Int32, funds_id},
                     new object[] { "@allotment_class_id", DbType.Int32, allotment_class_id},
                     new object[] { "@date_entry", DbType.Date, date_entry.Date},
-                    new object[] { "@year", DbType.Int16, date_entry.Year},
-                    new object[] { "@budget_id", DbType.Int32, budgetId }
+                    new object[] { "@year", DbType.Int16, date_entry.Year}
                 };
 
                 string fppWhereQuery = fppId == "all" ? string.Empty : "fpp_id = @fpp_id AND";
@@ -409,7 +408,6 @@ namespace ACC.Data
                        $"allotment_class_id = @allotment_class_id " +
                        $"AND date_entry <= @date_entry " +
                        $"AND year = @year " +
-                       $"AND id <> @budget_id " +
                        $"GROUP BY general_ledger_accounts_id";
 
                 var dataTable = new DataTable();
@@ -1070,7 +1068,80 @@ namespace ACC.Data
             }
         }
 
+
+
         #endregion Validations
 
+
+        public DataTable GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntryAndBudgetAppropriationId(string fppId, int? subFPPId, int funds_id, int allotment_class_id, DateTime date_entry, int budget_id)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@fpp_id", DbType.String, fppId},
+                    new object[] { "@others_fpp_id", DbType.String, subFPPId},
+                    new object[] { "@funds_id", DbType.Int32, funds_id},
+                    new object[] { "@allotment_class_id", DbType.Int32, allotment_class_id},
+                    new object[] { "@date_entry", DbType.Date, date_entry.Date},
+                    new object[] { "@budget_id", DbType.Int32, budget_id},
+                    new object[] { "@year", DbType.Int16, date_entry.Year}
+                };
+
+                string fppWhereQuery = fppId == "all" ? string.Empty : "fpp_id = @fpp_id AND";
+
+
+                string query = $"SELECT " +
+                       $"id, " +
+                       $"funds_id, " +
+                       $"fund_code, " +
+                       $"fund_name, " +
+                       $"fpp_id, " +
+                       $"fpp_code, " +
+                       $"fpp_name, " +
+                       $"fpp_is_special, " +
+                       $"functional_classification_service_id, " +
+                       $"functional_classification_service_name, " +
+                       $"functional_classification_id, " +
+                       $"functional_classification_sector_code, " +
+                       $"functional_classification_sector_name, " +
+                       $"others_fpp_id, " +
+                       $"others_fpp_code, " +
+                       $"others_fpp_name, " +
+                       $"allotment_class_id, " +
+                       $"allotment_class_code, " +
+                       $"allotment_class_name, " +
+                       $"general_ledger_accounts_id, " +
+                       $"general_ledger_accounts_code, " +
+                       $"general_ledger_accounts_name, " +
+                       $"account_code, " +
+                       $"date_entry, " +
+                       $"year, " +
+                       $"SUM(amount) AS amount, " +
+                       $"continuing, " +
+                       $"remarks, " +
+                       $"created_at, " +
+                       $"updated_at " +
+                       $"FROM {viewTableName} " +
+                       $"WHERE {fppWhereQuery} " +
+                       $"others_fpp_id <=> @others_fpp_id AND " +
+                       $"allotment_class_id = @allotment_class_id " +
+                       $"AND date_entry <= @date_entry " +
+                       $"AND year = @year " +
+                       $"AND id <> @budget_id " +
+                       $"GROUP BY general_ledger_accounts_id";
+
+                var dataTable = new DataTable();
+                return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
