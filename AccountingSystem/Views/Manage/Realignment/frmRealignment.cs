@@ -101,39 +101,54 @@ namespace AccountingSystem.Views.Manage.Realignment
             DeleteRealignment();
         }
 
-        private bool BudgetHasObligations()
+        private  bool BudgetHasObligations()
         {
+            var hasObligation = Factory.ObligationAccountRepository().CheckObligationRequestExistByBudgetAppropriationId(Convert.ToInt32(budgetAppropriationId));
 
+            return hasObligation;
         }
 
         private void DeleteRealignment()
         {
             try
             {
-                if (BudgetHasObligations())
+                if (BudgetHasObligations()) {
+                    Helper.MessageBoxError($"Cannot Delete Budget Realignment.");
                     return;
+                }
 
-                if (dgRealignmentTo.SelectedRows.Count > 0)
+                int selectedRowCount = 0;
+
+                foreach (DataGridViewRow row in dgRealignmentTo.SelectedRows)
                 {
-                    var budgetRealignmentModelList = new List<BudgetRealignmentModel>();
+                    if (row.Cells[0].Value != null)
+                        selectedRowCount += 1;
+                }
 
-                    foreach (DataGridViewRow row in dgRealignmentTo.SelectedRows)
+                if (selectedRowCount > 0)
+                {
+                    if (Helper.MessageBoxConfirmDelete(selectedRowCount))
                     {
-                        if (row.Cells[0].Value != null)
+                        var budgetRealignmentModelList = new List<BudgetRealignmentModel>();
+
+                        foreach (DataGridViewRow row in dgRealignmentTo.SelectedRows)
                         {
-                            ushort budgetRealignmentId = (ushort)Convert.ToInt16(row.Cells[0].Value);
-                    
-                            var budgetRealignmentModel = new BudgetRealignmentModel()
+                            if (row.Cells[0].Value != null)
                             {
-                                ToBudgetAppropriationId = budgetRealignmentId
-                            };
+                                ushort budgetRealignmentId = (ushort)Convert.ToInt16(row.Cells[0].Value);
 
-                            budgetRealignmentModelList.Add(budgetRealignmentModel);
+                                var budgetRealignmentModel = new BudgetRealignmentModel()
+                                {
+                                    ToBudgetAppropriationId = budgetRealignmentId
+                                };
+
+                                budgetRealignmentModelList.Add(budgetRealignmentModel);
+                            }
                         }
-                    }
 
-                    _ = Factory.BudgetRealignmentRepository().Delete(budgetRealignmentModelList);
-                    LoadBudgetRealignments();
+                        _ = Factory.BudgetRealignmentRepository().Delete(budgetRealignmentModelList);
+                        LoadBudgetRealignments();
+                    }
                 }
             }
             catch (Exception)
