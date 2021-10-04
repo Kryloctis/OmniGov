@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ACC.Domain.Models;
 
 namespace AccountingSystem.Views.Manage.Realignment
 {
@@ -30,22 +31,31 @@ namespace AccountingSystem.Views.Manage.Realignment
             TotalRealignmentDisplay();
         }
 
+        private void ToggleEditDeleteVisibility(bool visibility)
+        {
+            btnDelete.Visible = visibility;
+            btnEdit.Visible = visibility;
+        }
+
         private void TotalRealignmentDisplay()
         {
             string totalRealignment;
-
 
             if (tabControl1.SelectedTab == tabControl1.Controls[0])
             {
                 totalRealignment = (from DataGridViewRow row in dgRealignmentFrom.Rows
                         where !String.IsNullOrEmpty(row.Cells["amount"].FormattedValue.ToString())
                         select Convert.ToDecimal(row.Cells["amount"].FormattedValue)).Sum().ToString("N2");
+
+                ToggleEditDeleteVisibility(false);
             }
             else
             {
                 totalRealignment = (from DataGridViewRow row in dgRealignmentTo.Rows
                         where !String.IsNullOrEmpty(row.Cells["amount"].FormattedValue.ToString())
                         select Convert.ToDecimal(row.Cells["amount"].FormattedValue)).Sum().ToString("N2");
+
+                ToggleEditDeleteVisibility(true);
             }
 
             txtTotalRealignmentAppropriation.Text = totalRealignment;
@@ -84,6 +94,52 @@ namespace AccountingSystem.Views.Manage.Realignment
         {
 
             Helper.EnableDisableToolStripButtons(dgRealignmentTo, btnEdit, btnDelete);
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            DeleteRealignment();
+        }
+
+        private bool BudgetHasObligations()
+        {
+
+        }
+
+        private void DeleteRealignment()
+        {
+            try
+            {
+                if (BudgetHasObligations())
+                    return;
+
+                if (dgRealignmentTo.SelectedRows.Count > 0)
+                {
+                    var budgetRealignmentModelList = new List<BudgetRealignmentModel>();
+
+                    foreach (DataGridViewRow row in dgRealignmentTo.SelectedRows)
+                    {
+                        if (row.Cells[0].Value != null)
+                        {
+                            ushort budgetRealignmentId = (ushort)Convert.ToInt16(row.Cells[0].Value);
+                    
+                            var budgetRealignmentModel = new BudgetRealignmentModel()
+                            {
+                                ToBudgetAppropriationId = budgetRealignmentId
+                            };
+
+                            budgetRealignmentModelList.Add(budgetRealignmentModel);
+                        }
+                    }
+
+                    _ = Factory.BudgetRealignmentRepository().Delete(budgetRealignmentModelList);
+                    LoadBudgetRealignments();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
