@@ -81,7 +81,6 @@ namespace AccountingSystem
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblUserFullName = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUserRole = new System.Windows.Forms.ToolStripStatusLabel();
-            this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.radBtnBudget = new System.Windows.Forms.RadioButton();
             this.radBtnAccounting = new System.Windows.Forms.RadioButton();
@@ -416,6 +415,11 @@ namespace AccountingSystem
             // 
             // toolStrip1
             // 
+            this.toolStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.toolStrip1.AutoSize = false;
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -428,9 +432,9 @@ namespace AccountingSystem
             this.btnBankDeposit,
             this.btnGenerateRCD});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolStrip1.Location = new System.Drawing.Point(0, 25);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 59);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 0, 1, 0);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.toolStrip1.Size = new System.Drawing.Size(1180, 31);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
@@ -527,7 +531,7 @@ namespace AccountingSystem
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblUserFullName,
             this.lblUserRole});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 514);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 662);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
             this.statusStrip1.Size = new System.Drawing.Size(1180, 24);
@@ -547,26 +551,13 @@ namespace AccountingSystem
             this.lblUserRole.Size = new System.Drawing.Size(118, 19);
             this.lblUserRole.Text = "toolStripStatusLabel2";
             // 
-            // label1
-            // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label1.Location = new System.Drawing.Point(0, 56);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(1, 0, 0, 0);
-            this.label1.Size = new System.Drawing.Size(1180, 39);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Dashboard";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.Controls.Add(this.radBtnBudget);
             this.flowLayoutPanel1.Controls.Add(this.radBtnAccounting);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 95);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 25);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1180, 31);
@@ -602,18 +593,20 @@ namespace AccountingSystem
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tabControl1.Controls.Add(this.tabBudgetDashboard);
             this.tabControl1.Controls.Add(this.tabAccountingDashboard);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.ItemSize = new System.Drawing.Size(0, 1);
-            this.tabControl1.Location = new System.Drawing.Point(0, 126);
+            this.tabControl1.Location = new System.Drawing.Point(0, 92);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(0, 0);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1180, 388);
+            this.tabControl1.Size = new System.Drawing.Size(1180, 568);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 9;
             // 
@@ -623,20 +616,19 @@ namespace AccountingSystem
             this.tabBudgetDashboard.Location = new System.Drawing.Point(4, 5);
             this.tabBudgetDashboard.Margin = new System.Windows.Forms.Padding(0);
             this.tabBudgetDashboard.Name = "tabBudgetDashboard";
-            this.tabBudgetDashboard.Size = new System.Drawing.Size(1172, 379);
+            this.tabBudgetDashboard.Size = new System.Drawing.Size(1172, 559);
             this.tabBudgetDashboard.TabIndex = 0;
             this.tabBudgetDashboard.UseVisualStyleBackColor = true;
             // 
             // ucBudgetDashboard1
             // 
-            this.ucBudgetDashboard1.AutoScroll = true;
             this.ucBudgetDashboard1.AutoSize = true;
             this.ucBudgetDashboard1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucBudgetDashboard1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucBudgetDashboard1.Location = new System.Drawing.Point(0, 0);
             this.ucBudgetDashboard1.Margin = new System.Windows.Forms.Padding(0);
             this.ucBudgetDashboard1.Name = "ucBudgetDashboard1";
-            this.ucBudgetDashboard1.Size = new System.Drawing.Size(1172, 379);
+            this.ucBudgetDashboard1.Size = new System.Drawing.Size(1172, 559);
             this.ucBudgetDashboard1.TabIndex = 1;
             // 
             // tabAccountingDashboard
@@ -646,7 +638,7 @@ namespace AccountingSystem
             this.tabAccountingDashboard.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabAccountingDashboard.Name = "tabAccountingDashboard";
             this.tabAccountingDashboard.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabAccountingDashboard.Size = new System.Drawing.Size(1172, 379);
+            this.tabAccountingDashboard.Size = new System.Drawing.Size(1172, 559);
             this.tabAccountingDashboard.TabIndex = 1;
             this.tabAccountingDashboard.Text = "tabPage2";
             this.tabAccountingDashboard.UseVisualStyleBackColor = true;
@@ -658,7 +650,7 @@ namespace AccountingSystem
             this.ucAccountingDashboard1.Location = new System.Drawing.Point(3, 2);
             this.ucAccountingDashboard1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucAccountingDashboard1.Name = "ucAccountingDashboard1";
-            this.ucAccountingDashboard1.Size = new System.Drawing.Size(1166, 375);
+            this.ucAccountingDashboard1.Size = new System.Drawing.Size(1166, 555);
             this.ucAccountingDashboard1.TabIndex = 0;
             // 
             // MainForm
@@ -667,17 +659,16 @@ namespace AccountingSystem
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(1180, 538);
-            this.Controls.Add(this.tabControl1);
+            this.ClientSize = new System.Drawing.Size(1180, 686);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MinimumSize = new System.Drawing.Size(1196, 560);
+            this.MinimumSize = new System.Drawing.Size(1196, 725);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Local Finance System";
@@ -746,7 +737,6 @@ namespace AccountingSystem
         internal System.Windows.Forms.ToolStripMenuItem menuSAAOBB;
         internal System.Windows.Forms.ToolStripButton btnBudgetAppropriations;
         internal System.Windows.Forms.ToolStripButton btnAllotmentRelease;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         internal System.Windows.Forms.RadioButton radBtnBudget;
         private System.Windows.Forms.RadioButton radBtnAccounting;

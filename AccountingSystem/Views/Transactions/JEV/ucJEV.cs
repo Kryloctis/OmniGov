@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -64,9 +65,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             txtCreditTotal.Text = 0.ToString("N2");
             flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => ((byte)r.Tag == 1) ? r.Checked = true : r.Checked = false);
             flowLayoutPanelJournals.Controls.OfType<RadioButton>().FirstOrDefault(r => ((byte)r.Tag == 1) ? r.Checked = true : r.Checked = false);
+            
 
             dtpDateEntry.Value = DateTime.Now;
-
             txtJEVNo.Text = GetJEVSeriesNo();
         }
 
@@ -372,7 +373,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 Helper.DatagridFullRowSelectStyle(dgAccounts, true);
                 LoadFunds();
                 LoadJournals();
-
                 txtJEVNo.Text = GetJEVSeriesNo();
                 btnEditAccount.Enabled = false;
                 btnRemoveAccount.Enabled = false;
@@ -525,5 +525,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             Helper.ClearErrorComboBox(epCollectingDisbursing, cmbCollectingDisbursingOfficer);
         }
+        
     }
 }

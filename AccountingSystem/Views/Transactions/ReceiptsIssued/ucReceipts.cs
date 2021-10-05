@@ -66,6 +66,19 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        internal void LoadCollectors(int rid)
+        {
+            try
+            {
+                var collectorRepository = Factory.CollectingOfficerRepository();
+                var dtCollector = collectorRepository.GetRecords(rid);
+                cmbcollector.DataSource = dtCollector;
+                cmbcollector.ValueMember = "id";
+                cmbcollector.DisplayMember = "fullname";
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
         internal void LoadReceipts(int id)
         {
             try
@@ -110,7 +123,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtfrom, "Receipt No. From!");
             if(Convert.ToInt32(txtfrom.Text.Trim()) < startingreceipt)
             {
-                errorProvider.SetError(txtfrom, "Invalid Receipt Number!");
+                errorProvider.SetError(txtfrom, "Invalid Receipt Number!"+ startingreceipt.ToString());
                 e.Cancel = true;
             }
         }
@@ -125,6 +138,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtto, "Receipt No. To!");
             if (Convert.ToInt32(txtto.Text.Trim()) > maxreceipt)
             {
+
                 errorProvider.SetError(txtto, "Invalid Receipt Number!");
                 e.Cancel = true;
             }
@@ -162,14 +176,14 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             int from = txtfrom.Text.Length > 0 ? Convert.ToInt32(txtfrom.Text.Trim()) : 0;
             int to = txtto.Text.Length > 0 ? Convert.ToInt32(txtto.Text.Trim()) : 0;
-            txtquantity.Text = from.Equals(1) ? ((from + to) - from).ToString() : (to - from).ToString();
+            txtquantity.Text = from.Equals(1) ? ((from + to) - from).ToString() : from==to ? "1":(to - from).ToString();
         }
 
         private void txtto_KeyUp(object sender, KeyEventArgs e)
         {
             int from = txtfrom.Text.Length > 0 ? Convert.ToInt32(txtfrom.Text.Trim()) : 0;
             int to = txtto.Text.Length > 0 ? Convert.ToInt32(txtto.Text.Trim()) : 0;
-            txtquantity.Text = from.Equals(1) ? ((from + to) - from).ToString() : (to - from).ToString();
+            txtquantity.Text = from.Equals(1) ? ((from + to) - from).ToString() : from == to ? "1" : (to - from).ToString();
         }
 
 
@@ -182,15 +196,24 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 var dtri2 = riRepository.FirstReceipt(id);
                 var dtri = riRepository.NextReceipt(id);
                 int last = 0;
-                int first = 0;
+                int first = 0;               
                 if (dtri.Rows.Count > 0)
                 {                    
                     for (int i = 0; i < dtri.Rows.Count; i++)
                     {
-                        last = dtri.Rows[i]["issuelast"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtri.Rows[i]["issuelast"]);
+                        bool returned = dtri.Rows[i]["is_returned"].Equals(DBNull.Value) ? false : true;
+                        if (returned)
+                        {
+                            last = dtri.Rows[i]["issuelast"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtri.Rows[i]["issuelast"]);
+                        }
+                        else
+                        {
+                            last = dtri.Rows[i]["issuelast"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtri.Rows[i]["issuelast"]);
+                        }                       
                     }
-                    startingreceipt = last;
+                    startingreceipt = last+1;
                     data = (last + 1).ToString();
+                    
                 }
                 if (dtri2.Rows.Count > 0)
                 {
@@ -200,14 +223,18 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                         first = dtri2.Rows[i]["receiptsfrom"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtri2.Rows[i]["receiptsfrom"]);
                         maxreceipt = dtri2.Rows[i]["receiptsto"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtri2.Rows[i]["receiptsto"]);
                     }
-                    if(startingreceipt <= 0)
+                    if (startingreceipt <= 0)
                     {
                         startingreceipt = first;
                         data = first.ToString();
                     }
-              
+
                 }
-             
+
+                data = startingreceipt > maxreceipt ? "0" : data;
+                maxreceipt = startingreceipt > maxreceipt ? 0 : maxreceipt;
+                startingreceipt = startingreceipt > maxreceipt ? 0 : startingreceipt;
+
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             return data;

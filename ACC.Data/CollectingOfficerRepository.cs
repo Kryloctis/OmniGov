@@ -12,6 +12,8 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "collecting_officers";
+        private readonly string tableName2 = "receipts";
+        private readonly string tableName3 = "receipts_issued";
 
         public CollectingOfficerRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -144,6 +146,21 @@ namespace ACC.Data
             }
         }
 
+        public DataTable GetRecords(int rid)
+        {
+            try
+            {
+                string query = $"SELECT id, CONCAT(`first_name`, ' ', `mid_initial`, ' ', `last_name`) as fullname FROM {tableName} WHERE id NOT IN(SELECT collecting_officers_id FROM {tableName3} WHERE receipts_id='{rid}' AND is_returned='NO')";
+
+                var dtFunds = new DataTable();
+                return _dbGenericCommands.Fill(query, dtFunds);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public DataTable GetRecordsBySearch(string searchText)
         {
             try
@@ -169,6 +186,29 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT id FROM {tableName} WHERE id = @id";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
+
+        public bool ReceiptsAssigned(int id)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, id },
+                };
+
+                string query = $"SELECT id FROM {tableName3} WHERE collecting_officers_id = @id";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true

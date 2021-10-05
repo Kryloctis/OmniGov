@@ -352,7 +352,9 @@ namespace ACC.Data
         }
 
         //DASHBOARD
+
         #region BUDGET DASHBOARD
+
         //DETAILED
         public DataTable GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(string fppId, int? subFPPId, int funds_id, int allotment_class_id, DateTime date_entry)
         {
@@ -405,7 +407,7 @@ namespace ACC.Data
                        $"FROM {viewTableName} " +
                        $"WHERE {fppWhereQuery} " +
                        $"others_fpp_id <=> @others_fpp_id AND " +
-                       $"allotment_class_id = @allotment_class_id " +
+                       $"allotment_class_id = @allotment_class_id "+
                        $"AND date_entry <= @date_entry " +
                        $"AND year = @year " +
                        $"GROUP BY general_ledger_accounts_id";
@@ -512,6 +514,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
         #endregion
 
         public DataTable GetViewRecordsByIds(BudgetAppropriationsModel entity)

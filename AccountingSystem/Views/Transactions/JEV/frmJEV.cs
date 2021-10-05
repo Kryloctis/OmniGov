@@ -6,22 +6,38 @@ using System.Drawing;
 using System.Windows.Forms;
 using AccountingSystem.Views.Transactions;
 using System.Transactions;
+using System.Linq;
+using System.Data;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
     public partial class frmJEV : Form
     {
-        ucJEV uc;
-        internal bool loadFromDashBoard = false;
+        private ucJEV uc;
+        private frmJEVSearch _frmJEVSearch;
 
-        public frmJEV()
+        public frmJEV(frmJEVSearch frmJEVSearch)
         {
             InitializeComponent();
             uc = ucjev1;
+            _frmJEVSearch = frmJEVSearch;
             Helper.LoadFormIcon(this);
         }
 
         private void frmJEV_Load(object sender, EventArgs e)
+        {
+            PermissionVerification();
+            if (_frmJEVSearch != null)
+            {
+                LoadSelectedJEV(uc.jevNo);
+                CheckJevStatus(uc.jevId);
+                btnSearch.Visible = false;
+                Text = "Select JEV";
+            }
+            uc.SumDebitCredit();
+        }
+
+        private void PermissionVerification() 
         {
             if (!Helper.HasPermission("JEV Approval"))
             {
@@ -36,9 +52,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 btnPrint.Visible = false;
                 toolStripSeparator3.Visible = false;
             }
-
-            if (loadFromDashBoard)
-                uc.SumDebitCredit();
         }
 
         private static ushort? ValidateNullSubsidiary(object subsidiaryCellValue)
@@ -313,7 +326,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-
         private bool InsertData()
         {
             try
@@ -567,13 +579,20 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-            ResetForm();
-            uc.ResetForm();
+            if (_frmJEVSearch != null)
+            {
+                Close();
+            }
+            else
+            {
+                ResetForm();
+                uc.ResetForm();
+            }
         }
 
         internal void BtnSearch_Click(object sender, EventArgs e)
         {
-            var frmJevSearch = new frmJEVSearch(false, this);
+            var frmJevSearch = new frmJEVSearch(this,0,0);
             frmJevSearch.cmbxJevStatus.SelectedIndex = 0;
             frmJevSearch.ShowDialog();
         }
@@ -608,60 +627,67 @@ namespace AccountingSystem.Views.Transactions.JEV
         //CHECK JEV STATUS
         internal void CheckJevStatus(int jevId)
         {
-            switch (Factory.JEVRepository().GetJevStatus(jevId))
+            try
             {
-                case 0:
-                    //PENDING
-                    lblJevStatus.Text = "PENDING";
-                    lblJevStatus.ForeColor = Color.DarkGoldenrod;
-                    lblShowMessage.Visible = false;
-                    btnPrint.Enabled = false;
-                    btnApprove.Enabled = true;
-                    btnDisapprove.Enabled = true;
-                    btnCancelJEV.Enabled = true;
-                    btnDelete.Enabled = true;
-                    ucjev1.Enabled = true;
-                    btnSave.Enabled = true;
-                    break;
-                case 1:
-                    //APPROVED
-                    lblJevStatus.Text = "APPROVED";
-                    lblJevStatus.ForeColor = System.Drawing.Color.Green;
-                    lblShowMessage.Visible = false;
-                    btnApprove.Enabled = false;
-                    btnDisapprove.Enabled = false;
-                    btnCancelJEV.Enabled = true;
-                    btnPrint.Enabled = true;
-                    btnSave.Enabled = true;
-                    ucjev1.Enabled = false;
-                    btnDelete.Enabled = false;
-                    btnSave.Enabled = false;
-                    break;
-                case 2:
-                    //DISSAPROVED
-                    lblJevStatus.Text = "DISAPPROVED";
-                    lblJevStatus.ForeColor = Color.Firebrick;
-                    lblShowMessage.Visible = true;
-                    btnDisapprove.Enabled = false;
-                    btnCancelJEV.Enabled = true;
-                    btnPrint.Enabled = false;
-                    btnSave.Enabled = false;
-                    btnDelete.Enabled = false;
-                    ucjev1.Enabled = false;
-                    break;
-                case 3:
-                    //CANCELLED
-                    lblJevStatus.Text = "CANCELLED";
-                    lblJevStatus.ForeColor = Color.Firebrick;
-                    lblShowMessage.Visible = false;
-                    btnApprove.Enabled = false;
-                    btnDisapprove.Enabled = false;
-                    btnCancelJEV.Enabled = false;
-                    btnPrint.Enabled = false;
-                    btnSave.Enabled = false;
-                    btnDelete.Enabled = false;
-                    ucjev1.Enabled = false;
-                    break;
+                switch (Factory.JEVRepository().GetJevStatus(jevId))
+                {
+                    case 0:
+                        //PENDING
+                        lblJevStatus.Text = "PENDING";
+                        lblJevStatus.ForeColor = Color.DarkGoldenrod;
+                        lblShowMessage.Visible = false;
+                        btnPrint.Enabled = false;
+                        btnApprove.Enabled = true;
+                        btnDisapprove.Enabled = true;
+                        btnCancelJEV.Enabled = true;
+                        btnDelete.Enabled = true;
+                        ucjev1.Enabled = true;
+                        btnSave.Enabled = true;
+                        break;
+                    case 1:
+                        //APPROVED
+                        lblJevStatus.Text = "APPROVED";
+                        lblJevStatus.ForeColor = System.Drawing.Color.Green;
+                        lblShowMessage.Visible = false;
+                        btnApprove.Enabled = false;
+                        btnDisapprove.Enabled = false;
+                        btnCancelJEV.Enabled = true;
+                        btnPrint.Enabled = true;
+                        btnSave.Enabled = true;
+                        ucjev1.Enabled = false;
+                        btnDelete.Enabled = false;
+                        btnSave.Enabled = false;
+                        break;
+                    case 2:
+                        //DISSAPROVED
+                        lblJevStatus.Text = "DISAPPROVED";
+                        lblJevStatus.ForeColor = Color.Firebrick;
+                        lblShowMessage.Visible = true;
+                        btnDisapprove.Enabled = false;
+                        btnCancelJEV.Enabled = true;
+                        btnPrint.Enabled = false;
+                        btnSave.Enabled = false;
+                        btnDelete.Enabled = false;
+                        ucjev1.Enabled = false;
+                        break;
+                    case 3:
+                        //CANCELLED
+                        lblJevStatus.Text = "CANCELLED";
+                        lblJevStatus.ForeColor = Color.Firebrick;
+                        lblShowMessage.Visible = false;
+                        btnApprove.Enabled = false;
+                        btnDisapprove.Enabled = false;
+                        btnCancelJEV.Enabled = false;
+                        btnPrint.Enabled = false;
+                        btnSave.Enabled = false;
+                        btnDelete.Enabled = false;
+                        ucjev1.Enabled = false;
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
@@ -756,6 +782,205 @@ namespace AccountingSystem.Views.Transactions.JEV
             catch (Exception ex)
             {
                 Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)");
+            }
+        }
+
+
+        //Load Selected JEV 
+
+        private void CheckedFund(string fundName)
+        {
+            uc.flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => (r.Text == fundName) ? r.Checked = true : r.Checked = false);
+        }
+
+        private void CheckedJournal(string journalName)
+        {
+            uc.flowLayoutPanelJournals.Controls.OfType<RadioButton>().FirstOrDefault(r => (r.Text == journalName) ? r.Checked = true : r.Checked = false);
+        }
+
+        private void LoadJevAccounts()
+        {
+            DataTable dtJEV = Factory.JEVAccountsRepository().GetViewRecordsByJevId(uc.jevId);
+
+            foreach (DataRow row in dtJEV.Rows)
+            {
+                string fppId = row["fpp_id"].ToString();
+                string fppName = row["fpp_name"].ToString();
+                string generalLedgerId = row["general_ledger_accounts_id"].ToString();
+                string subsidiaryId = !string.IsNullOrWhiteSpace(row["subsidiary_ledger_accounts_id"].ToString()) ? row["subsidiary_ledger_accounts_id"].ToString() : null;
+                string subsidiaryName = row["subsidiary_ledger_accounts_name"].ToString();
+                string obligationNo = row["obligation_no"].ToString();
+                string generalLedgerName = row["general_ledger_accounts_name"].ToString();
+                string accountCode = row["account_code"].ToString();
+                decimal amount = Convert.ToDecimal(row["amount"]);
+                bool isDebit = Convert.ToBoolean(row["is_debit"]);
+                bool? isDeposit;
+
+                if (!string.IsNullOrWhiteSpace(row["is_deposit"].ToString()))
+                    isDeposit = Convert.ToBoolean(row["is_deposit"]);
+                else
+                    isDeposit = null;
+
+                object[] accountRow;
+                if (isDebit)
+                {
+                    // for debit row
+                    accountRow = new object[]
+                    {
+                        fppId,
+                        generalLedgerId,
+                        subsidiaryId,
+                        isDebit,
+                        isDeposit,
+                        fppName,
+                        generalLedgerName,
+                        accountCode,
+                        subsidiaryName,
+                        obligationNo,
+                        amount.ToString("N2"),
+                        "",
+                    };
+
+                    uc.dgAccounts.Rows.Add(accountRow);
+                }
+                else
+                {
+                    // for credit row
+                    accountRow = new object[]
+                    {
+                        fppId,
+                        generalLedgerId,
+                        subsidiaryId,
+                        isDebit,
+                        isDeposit,
+                        fppName,
+                        $"     {generalLedgerName}",
+                        accountCode,
+                        subsidiaryName,
+                        obligationNo,
+                        "",
+                        amount.ToString("N2")
+                    };
+
+                    uc.dgAccounts.Rows.Add(accountRow);
+                }
+
+            }
+        }
+
+        private void LoadCheckDisbursementsDataIfExist(int jevId)
+        {
+            var checkDisbursementsRepository = Factory.CheckDisbursementsJournalRepository();
+
+            if (checkDisbursementsRepository.JevIdExist(jevId))
+            {
+                Dictionary<string, string> checkDisbursementsDict = checkDisbursementsRepository.GetRecordByJevID(jevId);
+
+                uc.dtpCheckORPaid.Value = Convert.ToDateTime(checkDisbursementsDict["check_date"]);
+                uc.txtCheckNo.Text = checkDisbursementsDict["check_no"];
+                uc.txtDVRCDNo.Text = checkDisbursementsDict["dv_no"];
+                uc.txtRCIORADA.Text = checkDisbursementsDict["rci_no"];
+            }
+        }
+
+        private void LoadCashReceiptsDataIfExist(int jevId)
+        {
+            var cashReceiptsJournalRepository = Factory.CashReceiptsJournalRepository();
+
+            if (cashReceiptsJournalRepository.JevIdExist(jevId))
+            {
+                Dictionary<string, string> checkDisbursementsDict = cashReceiptsJournalRepository.GetViewRecordByJevID(jevId);
+
+                uc.txtDVRCDNo.Text = checkDisbursementsDict["rcd_no"];
+                uc.cmbCollectingDisbursingOfficer.SelectedValue = checkDisbursementsDict["collecting_officers_id"];
+                uc.txtRCIORADA.Text = checkDisbursementsDict["or_no"];
+                uc.dtpCheckORPaid.Value = Convert.ToDateTime(checkDisbursementsDict["or_date"]);
+            }
+        }
+
+        private void LoadADADisbursementDataIfExist(int jevId)
+        {
+            var aDADisbursementsJournalRepository = Factory.ADADisbursementsJournalRepository();
+
+            if (aDADisbursementsJournalRepository.JevIdExist(jevId))
+            {
+                Dictionary<string, string> adaDisbursementsDict = aDADisbursementsJournalRepository.GetViewRecordByJevID(jevId);
+
+                uc.txtDVRCDNo.Text = adaDisbursementsDict["dv_no"];
+                uc.txtRCIORADA.Text = adaDisbursementsDict["ada_no"];
+            }
+        }
+
+        private void LoadCashDisbursementDataIfExist(int jevId)
+        {
+            var cashDisbursementsJournalRepository = Factory.CashDisbursementsJournalRepository();
+
+            if (cashDisbursementsJournalRepository.JevIdExist(jevId))
+            {
+                Dictionary<string, string> cashDisbursementsDict = cashDisbursementsJournalRepository.GetViewRecordByJevID(jevId);
+
+                uc.dtpCheckORPaid.Value = Convert.ToDateTime(cashDisbursementsDict["date_paid"]);
+                uc.txtDVRCDNo.Text = cashDisbursementsDict["dv_no"];
+                uc.cmbCollectingDisbursingOfficer.SelectedValue = Convert.ToInt32(cashDisbursementsDict["disbursing_officers_id"]);
+            }
+        }
+
+        private void LoadGeneralJournalDataIfExist(int jevId)
+        {
+            var generalJournalRepository = Factory.GeneralJournalRepository();
+
+            if (generalJournalRepository.JevIdExist(jevId))
+            {
+                Dictionary<string, string> generalJournalDict = generalJournalRepository.GetViewRecordByJevID(jevId);
+
+                uc.txtCheckNo.Text = generalJournalDict["check_no"];
+                uc.txtDVRCDNo.Text = generalJournalDict["dv_no"];
+                uc.txtRCIORADA.Text = generalJournalDict["or_no"];
+            }
+        }
+
+        internal void LoadSelectedJEV(string jevNo)
+        {
+            try
+            {
+                Enabled = true;
+                uc.txtJEVNo.Text = jevNo;
+
+                Dictionary<string, string> jevDict = Factory.JEVRepository().GetRecordByJEV(jevNo);
+
+                LoadCheckDisbursementsDataIfExist(uc.jevId);
+                LoadCashReceiptsDataIfExist(uc.jevId);
+                LoadADADisbursementDataIfExist(uc.jevId);
+                LoadCashDisbursementDataIfExist(uc.jevId);
+                LoadGeneralJournalDataIfExist(uc.jevId);
+
+                uc.jevId = Convert.ToInt32(jevDict["id"]);
+                uc.fundId = Convert.ToByte(jevDict["funds_id"]);
+                uc.txtExplanation.Text = jevDict["explanation"];
+                uc.dtpDateEntry.Value = Convert.ToDateTime(jevDict["date_entry"]);
+                uc.txtRefNo.Text = jevDict["ref_no"];
+                uc.txtPayee.Text = jevDict["payee"];
+
+                uc.journalId = Convert.ToByte(jevDict["journals_id"]);
+                uc.oldJournalId = Convert.ToByte(jevDict["journals_id"]);
+                uc.isApproved = Convert.ToByte(jevDict["is_approved"]);
+                uc.isDisapproved = Convert.ToByte(jevDict["is_disapproved"]);
+                uc.isCancelled = Convert.ToByte(jevDict["is_cancelled"]);
+
+                CheckedFund(jevDict["fund_name"]);
+                CheckedJournal(jevDict["journal_name"]);
+
+                uc.ClearErrors();
+
+                uc.dgAccounts.Rows.Clear();
+                LoadJevAccounts();
+                uc.SumDebitCredit();
+                CheckJevStatus(uc.jevId);
+                btnSave.Text = "&Update";
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
     }
