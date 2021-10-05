@@ -18,17 +18,18 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecords(int fundId, DateTime dateEntry, short year, byte isContinuing, byte isSpecial);
 
         //DASHBOARD
+
         #region BUDGET DASHBOARD
         //DETAILED
         DataTable GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(string fppId, int? subFPPId, int funds_id, int allotment_class_id, DateTime date_entry);
-        
-        DataTable GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntryAndBudgetAppropriationId(string fppId, int? subFPPId, int funds_id, int allotment_class_id, DateTime date_entry, int budget_id);
 
         DataTable GetHeaderOthersFPP(string fppID, int allotment_classes_id, int funds_id, short year);
 
         //SUMMARY
         decimal GetSumBudgetAppropriations(string fppId, string subFPPId, int fundId, DateTime dateEntry, int allotment_classes_id, byte isContinuing);
         #endregion
+
+        DataTable GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntryAndBudgetAppropriationId(string fppId, int? subFPPId, int funds_id, int allotment_class_id, DateTime date_entry, int budget_id);
 
         DataTable GetViewRecordsByIds(BudgetAppropriationsModel entity);
 
