@@ -1438,7 +1438,7 @@ namespace AccountingSystem
 
 
                 dgv.ClearSelection();
-                Helper.DatagridDefaultStyle(dgv, true);
+                Helper.DatagridFullRowSelectStyle(dgv, true);
             }
             catch (Exception ex)
             {
@@ -1489,7 +1489,7 @@ namespace AccountingSystem
 
 
                 dgv.ClearSelection();
-                Helper.DatagridDefaultStyle(dgv, true);
+                Helper.DatagridFullRowSelectStyle(dgv, true);
             }
             catch (Exception ex)
             {

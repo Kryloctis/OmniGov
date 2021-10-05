@@ -118,5 +118,26 @@ namespace ACC.Data
             }
         }
 
+        public bool CheckObligationRequestExistByBudgetAppropriationId(int budgetAppropriationId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@budgetAppropriationId", DbType.Int32, budgetAppropriationId }
+                };
+
+                string query = $"SELECT id FROM {tableName} WHERE budget_appropriations_id = @budgetAppropriationId";
+                string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
     }
 }

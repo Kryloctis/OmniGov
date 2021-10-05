@@ -9,6 +9,8 @@ namespace ACC.Domain.Interfaces
     {
         bool DeleteByObligationRequestId(int ObligationRequestId);
 
+        bool CheckObligationRequestExistByBudgetAppropriationId(int budgetAppropriationId);
+
         int ObligationsRecordCount();
     }
 }
