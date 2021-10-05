@@ -7,21 +7,19 @@ namespace AccountingSystem.Views.Dashboard
 {
     public partial class ucAccountingDashboard : UserControl
     {
-        internal Dictionary<string, string> userDict;
-
         public ucAccountingDashboard()
         {
             InitializeComponent();
-
-            foreach (var item in Helper.MonthsDatasource().Values)
-                cbMonth.Items.Add(item);
-            cbMonth.SelectedIndex = DateTime.Now.Month - 1;
+      
         }
 
         private void UcAccountingDashboard_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
+                foreach (var item in Helper.MonthsDatasource().Values)
+                    cbMonth.Items.Add(item);
+                cbMonth.SelectedIndex = DateTime.Now.Month - 1;
                 Dock = DockStyle.Fill;
                 LoadJEVCounter();
             }
@@ -50,52 +48,60 @@ namespace AccountingSystem.Views.Dashboard
             LoadJEVCounter();
         }
 
-        private void lnkPending_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LoadJEVList(byte jevStatus)
         {
-            var frmJEVSearch = new frmJEVSearch(true, new frmJEV());
 
-            frmJEVSearch.cmbxJevStatus.SelectedIndex = 0;
-            frmJEVSearch.cmbxJevStatus.Enabled = false;
+            byte month = Convert.ToByte(cbMonth.SelectedIndex);
+            int year = (int)nudYear.Value;
+            var _frmJEVSearch = new frmJEVSearch(null,month, year);
 
-            frmJEVSearch.cbMonth.SelectedIndex = cbMonth.SelectedIndex;
-            frmJEVSearch.nudYear.Value = nudYear.Value;
-            frmJEVSearch.ShowDialog();
+            switch (jevStatus)
+            {
+                case 0:
+                    _frmJEVSearch.cmbxJevStatus.SelectedIndex = 0;
+                    break;
+                case 1:
+                    _frmJEVSearch.cmbxJevStatus.SelectedIndex = 1;
+                    break;
+                case 2:
+                    _frmJEVSearch.cmbxJevStatus.SelectedIndex = 2;
+                    break;
+                case 3:
+                    _frmJEVSearch.cmbxJevStatus.SelectedIndex = 3;
+                    break;
+            }
+
+            _frmJEVSearch.cmbxJevStatus.Enabled = false;
+            _frmJEVSearch.cbMonth.Enabled = false;
+            _frmJEVSearch.nudYear.Enabled = false;
+            _frmJEVSearch.ShowDialog();
         }
 
-        private void OpenJEVTransactionForm(byte jevStatusIndex)
+        private void lnkPending_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var frmJEVSearch = new frmJEVSearch(true);
-
-            frmJEVSearch.cmbxJevStatus.SelectedIndex = jevStatusIndex;
-            frmJEVSearch.cmbxJevStatus.Enabled = false;
-            frmJEVSearch.cbMonth.Enabled = false;
-            frmJEVSearch.nudYear.Enabled = false;
-            frmJEVSearch.btnOK.Text = "Select";
-            frmJEVSearch.Text = "Select JEV";
-            frmJEVSearch.cbMonth.SelectedIndex = cbMonth.SelectedIndex;
-            frmJEVSearch.nudYear.Value = nudYear.Value;
-            frmJEVSearch.ShowDialog();
+            LoadJEVList(0);
         }
 
         private void lnkApproved_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            OpenJEVTransactionForm(1);
+            LoadJEVList(1);
         }
 
         private void linkDisapproved_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            OpenJEVTransactionForm(2);
+            LoadJEVList(2);
         }
 
         private void lnkCancelled_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            OpenJEVTransactionForm(3);
+            LoadJEVList(3);
         }
 
         private void cbMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadJEVCounter();
         }
+
         private void nudYear_ValueChanged(object sender, EventArgs e)
         {
             LoadJEVCounter();
