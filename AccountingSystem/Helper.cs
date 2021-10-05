@@ -290,6 +290,10 @@ namespace AccountingSystem
         }
         #endregion
 
+        #region HideEditDeleteButtons
+
+        #endregion
+
         #region EnableDisableButtons
         public static void EnableDisableButtons(DataGridView dgv, Button btnEdit, Button btnDelete)
         {

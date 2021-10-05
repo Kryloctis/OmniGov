@@ -1220,7 +1220,7 @@ namespace AccountingSystem
 
                 sub_fpp = null;
 
-                var dtGetViewRecordsByFFPIDByAllotmentClass = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf, null);
+                var dtGetViewRecordsByFFPIDByAllotmentClass = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf);
 
 
                 //Load by loop All Budget Appropriations Records without Others FPP 
@@ -1244,7 +1244,7 @@ namespace AccountingSystem
 
 
                     sub_fpp = othersFPPID;
-                    DataTable dtGetViewRecordsByIds = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf, null);
+                    DataTable dtGetViewRecordsByIds = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf);
 
                     foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByIds.Rows)
                     {
@@ -1438,7 +1438,7 @@ namespace AccountingSystem
 
 
                 dgv.ClearSelection();
-                Helper.DatagridDefaultStyle(dgv, true);
+                Helper.DatagridFullRowSelectStyle(dgv, true);
             }
             catch (Exception ex)
             {
@@ -1489,7 +1489,7 @@ namespace AccountingSystem
 
 
                 dgv.ClearSelection();
-                Helper.DatagridDefaultStyle(dgv, true);
+                Helper.DatagridFullRowSelectStyle(dgv, true);
             }
             catch (Exception ex)
             {

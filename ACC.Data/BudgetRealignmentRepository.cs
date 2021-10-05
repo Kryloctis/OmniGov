@@ -92,7 +92,29 @@ namespace ACC.Data
 
         public bool Delete(List<BudgetRealignmentModel> entityList)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    foreach (var entity in entityList)
+                    {
+                        var parameters = new object[][]
+                        {
+                            new object[] { "@id", DbType.Int32, entity.ToBudgetAppropriationId},
+                        };
+
+                        string query = $"DELETE FROM {tableName2} WHERE id = @id";
+                        _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    }
+
+                    scope.Complete();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
 
