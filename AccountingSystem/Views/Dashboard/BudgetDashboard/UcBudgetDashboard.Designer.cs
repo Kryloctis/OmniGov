@@ -50,6 +50,10 @@ namespace AccountingSystem.Views.Dashboard
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.chkbxDetailed = new System.Windows.Forms.CheckBox();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnBudgetAppropriations = new System.Windows.Forms.ToolStripButton();
+            this.btnAllotmentRelease = new System.Windows.Forms.ToolStripButton();
+            this.btnObligationRequest = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel3.SuspendLayout();
             this.panel13.SuspendLayout();
             this.panel12.SuspendLayout();
@@ -60,6 +64,7 @@ namespace AccountingSystem.Views.Dashboard
             this.tabBudgetSummary.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ucBudgetCardsCON
@@ -244,7 +249,7 @@ namespace AccountingSystem.Views.Dashboard
             this.tabBudgetDetailed.Location = new System.Drawing.Point(4, 5);
             this.tabBudgetDetailed.Margin = new System.Windows.Forms.Padding(0);
             this.tabBudgetDetailed.Name = "tabBudgetDetailed";
-            this.tabBudgetDetailed.Size = new System.Drawing.Size(1157, 527);
+            this.tabBudgetDetailed.Size = new System.Drawing.Size(1157, 524);
             this.tabBudgetDetailed.TabIndex = 1;
             this.tabBudgetDetailed.Text = "tabBudgetDetailed";
             this.tabBudgetDetailed.UseVisualStyleBackColor = true;
@@ -254,7 +259,7 @@ namespace AccountingSystem.Views.Dashboard
             this.ucBudgetDetailed1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucBudgetDetailed1.Location = new System.Drawing.Point(0, 0);
             this.ucBudgetDetailed1.Name = "ucBudgetDetailed1";
-            this.ucBudgetDetailed1.Size = new System.Drawing.Size(1157, 527);
+            this.ucBudgetDetailed1.Size = new System.Drawing.Size(1157, 524);
             this.ucBudgetDetailed1.TabIndex = 0;
             // 
             // tabBudgetSummary
@@ -264,7 +269,7 @@ namespace AccountingSystem.Views.Dashboard
             this.tabBudgetSummary.Location = new System.Drawing.Point(4, 5);
             this.tabBudgetSummary.Margin = new System.Windows.Forms.Padding(0);
             this.tabBudgetSummary.Name = "tabBudgetSummary";
-            this.tabBudgetSummary.Size = new System.Drawing.Size(1157, 527);
+            this.tabBudgetSummary.Size = new System.Drawing.Size(1157, 524);
             this.tabBudgetSummary.TabIndex = 0;
             this.tabBudgetSummary.Text = "tabBudgetSummary";
             this.tabBudgetSummary.UseVisualStyleBackColor = true;
@@ -274,7 +279,7 @@ namespace AccountingSystem.Views.Dashboard
             this.ucBudgetSummary1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucBudgetSummary1.Location = new System.Drawing.Point(0, 0);
             this.ucBudgetSummary1.Name = "ucBudgetSummary1";
-            this.ucBudgetSummary1.Size = new System.Drawing.Size(1157, 527);
+            this.ucBudgetSummary1.Size = new System.Drawing.Size(1157, 524);
             this.ucBudgetSummary1.TabIndex = 0;
             // 
             // tabControl1
@@ -284,13 +289,13 @@ namespace AccountingSystem.Views.Dashboard
             this.tabControl1.Controls.Add(this.tabBudgetDetailed);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.ItemSize = new System.Drawing.Size(0, 1);
-            this.tabControl1.Location = new System.Drawing.Point(0, 25);
+            this.tabControl1.Location = new System.Drawing.Point(0, 63);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(0, 0);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1165, 536);
+            this.tabControl1.Size = new System.Drawing.Size(1165, 533);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 0;
             // 
@@ -298,7 +303,8 @@ namespace AccountingSystem.Views.Dashboard
             // 
             this.chkbxDetailed.AutoSize = true;
             this.chkbxDetailed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.chkbxDetailed.Location = new System.Drawing.Point(7, 3);
+            this.chkbxDetailed.Location = new System.Drawing.Point(7, 13);
+            this.chkbxDetailed.Margin = new System.Windows.Forms.Padding(0);
             this.chkbxDetailed.Name = "chkbxDetailed";
             this.chkbxDetailed.Size = new System.Drawing.Size(69, 19);
             this.chkbxDetailed.TabIndex = 6;
@@ -311,10 +317,62 @@ namespace AccountingSystem.Views.Dashboard
             this.panel5.AutoSize = true;
             this.panel5.Controls.Add(this.chkbxDetailed);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 0);
+            this.panel5.Location = new System.Drawing.Point(0, 31);
+            this.panel5.Margin = new System.Windows.Forms.Padding(0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1165, 25);
+            this.panel5.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.panel5.Size = new System.Drawing.Size(1165, 32);
             this.panel5.TabIndex = 2;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.AutoSize = false;
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStrip1.GripMargin = new System.Windows.Forms.Padding(0);
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnBudgetAppropriations,
+            this.btnAllotmentRelease,
+            this.btnObligationRequest});
+            this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
+            this.toolStrip1.Size = new System.Drawing.Size(1165, 31);
+            this.toolStrip1.TabIndex = 5;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnBudgetAppropriations
+            // 
+            this.btnBudgetAppropriations.Image = global::AccountingSystem.Properties.Resources.budget_approprations_24px;
+            this.btnBudgetAppropriations.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnBudgetAppropriations.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnBudgetAppropriations.Name = "btnBudgetAppropriations";
+            this.btnBudgetAppropriations.Size = new System.Drawing.Size(155, 28);
+            this.btnBudgetAppropriations.Text = "Budget Appropriations";
+            this.btnBudgetAppropriations.Click += new System.EventHandler(this.btnBudgetAppropriations_Click);
+            // 
+            // btnAllotmentRelease
+            // 
+            this.btnAllotmentRelease.Image = global::AccountingSystem.Properties.Resources.allotment_release_24px;
+            this.btnAllotmentRelease.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnAllotmentRelease.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAllotmentRelease.Name = "btnAllotmentRelease";
+            this.btnAllotmentRelease.Size = new System.Drawing.Size(130, 28);
+            this.btnAllotmentRelease.Text = "Allotment Release";
+            this.btnAllotmentRelease.Click += new System.EventHandler(this.btnAllotmentRelease_Click);
+            // 
+            // btnObligationRequest
+            // 
+            this.btnObligationRequest.Image = global::AccountingSystem.Properties.Resources.obligation_request_24px;
+            this.btnObligationRequest.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnObligationRequest.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnObligationRequest.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
+            this.btnObligationRequest.Name = "btnObligationRequest";
+            this.btnObligationRequest.Size = new System.Drawing.Size(80, 28);
+            this.btnObligationRequest.Text = "Obligate";
+            this.btnObligationRequest.Click += new System.EventHandler(this.btnObligationRequest_Click);
             // 
             // ucBudgetDashboard
             // 
@@ -324,10 +382,11 @@ namespace AccountingSystem.Views.Dashboard
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel5);
+            this.Controls.Add(this.toolStrip1);
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "ucBudgetDashboard";
-            this.Size = new System.Drawing.Size(1165, 561);
+            this.Size = new System.Drawing.Size(1165, 596);
             this.Load += new System.EventHandler(this.UcBudgetDashboard_Load);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
@@ -340,6 +399,8 @@ namespace AccountingSystem.Views.Dashboard
             this.tabControl1.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -367,5 +428,9 @@ namespace AccountingSystem.Views.Dashboard
         private System.Windows.Forms.Panel panel5;
         private BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary1;
         private BudgetDashboard.BudgetSummary.ucBudgetDetailed ucBudgetDetailed1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        internal System.Windows.Forms.ToolStripButton btnBudgetAppropriations;
+        internal System.Windows.Forms.ToolStripButton btnAllotmentRelease;
+        internal System.Windows.Forms.ToolStripButton btnObligationRequest;
     }
 }

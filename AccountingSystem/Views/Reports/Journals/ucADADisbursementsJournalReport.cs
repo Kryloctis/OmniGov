@@ -8,6 +8,9 @@ namespace AccountingSystem.Views.Reports.Journals
     public partial class ucADADisbursementsJournalReport : UserControl
     {
         private readonly ReportViewer reportViewer;
+        internal string fundName;
+        internal string journalName;
+        internal DateTime date;
 
         public ucADADisbursementsJournalReport()
         {
@@ -17,21 +20,11 @@ namespace AccountingSystem.Views.Reports.Journals
             panel1.Controls.Add(reportViewer);
         }
 
-        private void LoadFunds()
-        {
-            cmbFunds.DataSource = Factory.FundsRepository().GetRecords();
-            cmbFunds.ValueMember = "id";
-            cmbFunds.DisplayMember = "fund_name";
-        }
-
         private DataTable AuthorityToDebitAccountDisbursementsJournalDataTable()
         {
-            byte fundId = (byte)cmbFunds.SelectedValue;
-            byte journalId = 6;
-            var dateYearMonth = dtpMonth.Value;
 
             var dtADADisbursementsJournal = new dsLFS.AuthorityToDebitAccountDisbursementsJournalDataTable();
-            var dtADADisbursementsFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundId, journalId, dateYearMonth);
+            var dtADADisbursementsFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundName, journalName, date);
 
             int jevId;
             string jevNo;
@@ -74,7 +67,6 @@ namespace AccountingSystem.Views.Reports.Journals
             {
                 Cursor.Current = Cursors.WaitCursor;
                 var lguDetails = Helper.LGUDetails();
-                var fundName = cmbFunds.Text;
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
                 byte journalId = 6;
 
@@ -105,7 +97,7 @@ namespace AccountingSystem.Views.Reports.Journals
                 int defaultAccountIDThird = defaultAccountId(2);
 
                 var parameters = new[] {
-                    new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
+                    new ReportParameter("paramMonth", date.ToString()),
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                     new ReportParameter("paramFund", fundName),
                     new ReportParameter("paramSignatory", signatory),

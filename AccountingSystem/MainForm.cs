@@ -46,9 +46,7 @@ namespace AccountingSystem
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            radBtnAccounting.Visible = false;
-            radBtnBudget.Visible = false;
-            tabControl1.TabPages.Clear();
+            tabControlDashboard.TabPages.Clear();
             userDict = Helper.LoggedInUserData();
             loginForm = _loginForm;
         }
@@ -65,10 +63,10 @@ namespace AccountingSystem
                 menuAllotmentClasses.Visible = false;
 
             if (!Helper.HasPermission("Manage Budget Appropriations"))
-                btnBudgetAppropriations.Visible = false;
+                ucBudgetDashboard1.btnBudgetAppropriations.Enabled = false;
 
             if (!Helper.HasPermission("Manage Allotment Releases"))
-                btnAllotmentRelease.Visible = false;
+                ucBudgetDashboard1.btnAllotmentRelease.Enabled = false;
 
             if (!Helper.HasPermission("Manage Chart of Accounts"))
                 menuChartOfAccounts.Visible = false;
@@ -96,12 +94,12 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Transaction JEV"))
             {
-                btnJournalEntry.Visible = false;
+                ucjevDashboard1.btnAddJEV.Enabled = false;
                 menuJEV.Visible = false;
             }
 
             if (!Helper.HasPermission("Transaction Obligation Request"))
-                btnObligationRequest.Visible = false;
+                ucBudgetDashboard1.btnObligationRequest.Visible = false;
 
             if (!Helper.HasPermission("Report General Journal") && !Helper.HasPermission("Report Cash Receipts Journal") && !Helper.HasPermission("Report Procurement Received Journal") && !Helper.HasPermission("Report Cash Disbursements Journal") && !Helper.HasPermission("Report Check Disbursements Journal") && !Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
                 menuJournalsReport.Visible = false;
@@ -117,7 +115,7 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Transaction Issue Check"))
             {
-                btnIssueCheck.Visible = false;
+                ucTreasuryDashboard1.btnIssueCheck.Enabled = false;
                 menuIssueCheck.Visible = false;
             }
 
@@ -127,7 +125,7 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Transaction Bank Deposits"))
             {
                 menuDeposits.Visible = false;
-                btnBankDeposit.Visible = false;
+                ucTreasuryDashboard1.btnBankDeposit.Enabled = false;
             }
 
             if (!Helper.HasPermission("Report SAAOB"))
@@ -138,7 +136,7 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Transaction Payments"))
             {
-                btnPaymentCollection.Visible = false;
+                ucTreasuryDashboard1.btnPaymentCollection.Enabled = false;
                 menuPayments.Visible = false;
             }
 
@@ -151,7 +149,7 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Transaction Generate RCD"))
             {
                 menuGenerateRCD.Visible = false;
-                btnGenerateRCD.Visible = false;
+                ucTreasuryDashboard1.btnGenerateRCD.Enabled = false;
             }
 
             if (!Helper.HasPermission("Report of Checks Issued"))
@@ -172,13 +170,19 @@ namespace AccountingSystem
             if (Helper.HasPermission("Budget Dashboard"))
             {
                 radBtnBudget.Visible = true;
-                tabControl1.TabPages.Add(tabBudgetDashboard);
+                tabControlDashboard.TabPages.Add(tabBudget);
             }
 
             if (Helper.HasPermission("Accounting Dashboard"))
             {
                 radBtnAccounting.Visible = true;
-                tabControl1.TabPages.Add(tabAccountingDashboard);
+                tabControlDashboard.TabPages.Add(tabAccounting);
+            }
+
+            if (Helper.HasPermission("Treasury Dashboard"))
+            {
+                radBtnTreasury.Visible = true;
+                tabControlDashboard.TabPages.Add(tabTreasury);
             }
 
             if (!Helper.HasPermission("Report Trial Balance"))
@@ -194,14 +198,18 @@ namespace AccountingSystem
 
         private void radBtnBudget_CheckedChanged(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabBudgetDashboard;
+            tabControlDashboard.SelectedTab = tabBudget;
         }
 
         private void radBtnAccounting_CheckedChanged(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabAccountingDashboard;
+            tabControlDashboard.SelectedTab = tabAccounting;
         }
 
+        private void radBtnTreasury_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControlDashboard.SelectedTab = tabTreasury;
+        }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -269,25 +277,12 @@ namespace AccountingSystem
             _ = new frmRCIReport().ShowDialog();
         }
 
-        private void BtnJournalEntry_Click(object sender, EventArgs e)
-        {
-            _ = new frmJEV(null).ShowDialog();
-        }
-
-        private void BtnObligationRequest_Click(object sender, EventArgs e)
-        {
-            _ = new frmObligationRequestMain().ShowDialog();
-        }
-
         private void MenuDisbursingOffice_Click(object sender, EventArgs e)
         {
             _ = new frmDisbursingOfficer().ShowDialog();
         }
 
-        private void BtnRCI_Click(object sender, EventArgs e)
-        {
-            _ = new frmRCI().ShowDialog();
-        }
+
 
         private void menuAccForm_Click(object sender, EventArgs e)
         {
@@ -325,16 +320,6 @@ namespace AccountingSystem
             _ = new frmBankDeposits().ShowDialog();
         }
 
-        private void btnBudgetAppropriations_Click(object sender, EventArgs e)
-        {
-            _ = new frmBudgetAppropriations().ShowDialog();
-        }
-
-        private void btnAllotmentRelease_Click(object sender, EventArgs e)
-        {
-            _ = new frmAllotmentReleaseMain().ShowDialog();
-        }
-
         private void menuprintGC_Click(object sender, EventArgs e)
         {
             _ = new frmPCReport().ShowDialog();
@@ -360,25 +345,11 @@ namespace AccountingSystem
             _ = new frmJEVReport(0, null, 0).ShowDialog();
         }
 
-        private void btnPaymentCollection_Click(object sender, EventArgs e)
-        {
-            _ = new frmPaymentCollection().ShowDialog();
-        }
-
         private void menuGenerateRCD_Click(object sender, EventArgs e)
         {
             _ = new frmRCD().ShowDialog();
         }
 
-        private void btnGenerateRCD_Click(object sender, EventArgs e)
-        {
-            _ = new frmRCD().ShowDialog();
-        }
-
-        private void btnBankDeposit_Click(object sender, EventArgs e)
-        {
-            _ = new frmBankDeposits().ShowDialog();
-        }
 
         private void menuReceiptsConsolidated_Click(object sender, EventArgs e)
         {

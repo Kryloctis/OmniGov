@@ -1,13 +1,14 @@
-﻿using AccountingSystem.Views.Transactions.JEV;
+﻿using AccountingSystem.Views.Manage.BudgetAppropriations;
+using AccountingSystem.Views.Transactions.JEV;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Dashboard
 {
-    public partial class ucAccountingDashboard : UserControl
+    public partial class ucJEVDashboard : UserControl
     {
-        public ucAccountingDashboard()
+        public ucJEVDashboard()
         {
             InitializeComponent();
       
@@ -17,12 +18,24 @@ namespace AccountingSystem.Views.Dashboard
         {
             if (!DesignMode)
             {
-                foreach (var item in Helper.MonthsDatasource().Values)
-                    cbMonth.Items.Add(item);
-                cbMonth.SelectedIndex = DateTime.Now.Month - 1;
-                Dock = DockStyle.Fill;
+                LoadMonths();
+                LoadJournals();
                 LoadJEVCounter();
             }
+        }
+
+        private void LoadJournals()
+        {
+            var dtJournals = Factory.JournalsRepository().GetRecords();
+            HelperLoadRecords.ComboboxJournals(dtJournals, cmbxJournals, "id", "journal_name");
+        }
+
+        private void LoadMonths() 
+        {
+            foreach (var item in Helper.MonthsDatasource().Values)
+                cbMonth.Items.Add(item);
+            cbMonth.SelectedIndex = DateTime.Now.Month - 1;
+            Dock = DockStyle.Fill;
         }
 
         private void LoadJEVCounter()
@@ -107,5 +120,9 @@ namespace AccountingSystem.Views.Dashboard
             LoadJEVCounter();
         }
 
+        private void btnAddJEV_Click(object sender, EventArgs e)
+        {
+            _ = new frmJEV(null).ShowDialog();
+        }
     }
 }
