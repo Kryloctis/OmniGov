@@ -7,7 +7,7 @@ namespace AccountingSystem
     public static class Factory
     {
         private static MySqlGenericCommands mySqlGenericCommands = new MySqlGenericCommands();
-        public static byte UserId = 0;
+        public static byte UserId = 2;
         public static IJEVRepository JEVRepository() => new JEVRepository(mySqlGenericCommands,
                                                                           JEVAccountsRepository(),
                                                                           CheckDisbursementsJournalRepository(),
