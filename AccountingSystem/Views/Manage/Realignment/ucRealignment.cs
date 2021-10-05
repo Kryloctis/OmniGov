@@ -122,10 +122,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             return dtFPP;
         }
 
-
-
-
-
         private void LoadBudgetAppropriationAccounts()
         {
             try
