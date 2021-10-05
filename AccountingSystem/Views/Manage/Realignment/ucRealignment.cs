@@ -33,6 +33,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             dtDateIssued.Value = DateTime.Now;
 
             dgBudgetRealignment.Rows.Clear();
+
         }
 
         private void ucRealignment_Load(object sender, EventArgs e)
@@ -107,7 +108,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             cmbOthersFPP.SelectedIndex = -1;
             cmbOthersFPP.Text = string.Empty;
             cmbOthersFPP.Enabled = true;
-          
         }
 
         private DataTable DataTableFPP()
@@ -121,9 +121,6 @@ namespace AccountingSystem.Views.Manage.Realignment
 
             return dtFPP;
         }
-
-
-
 
 
         private void LoadBudgetAppropriationAccounts()
@@ -160,7 +157,6 @@ namespace AccountingSystem.Views.Manage.Realignment
         private DataTable DatatableAccounts()
         {
             DataTable dtRealignmentAccounts;
-            int budgetId = Convert.ToInt32(txtBudgetId.Text);
             dtRealignmentAccounts = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntryAndBudgetAppropriationId(fppId.ToString(), othersFPPId ,fundId, allotmentClassId, dtDateIssued.Value, budgetId);
             return dtRealignmentAccounts;
         }
