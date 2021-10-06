@@ -42,6 +42,12 @@ namespace AccountingSystem.Views.Manage.Receipts
                 uc.dtpreceived.Value = Convert.ToDateTime(rcdata["received_date"]);
                 uc.txtquantity.Text = rcdata["quantity"];
                 uc.txtremarks.Text = rcdata["remarks"];
+                if (rcRepository.ReceiptsIssued(uc.Id))
+                {
+                    uc.cmbforms.Enabled = false;
+                    uc.txtfrom.Enabled = false;
+                    uc.txtto.Enabled = false;
+                }
             }
             catch (Exception ex)
             {

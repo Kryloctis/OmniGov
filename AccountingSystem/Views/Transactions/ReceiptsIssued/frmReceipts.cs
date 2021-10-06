@@ -72,9 +72,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 Helper.EnableDisableToolStripButtons(dgissue, btnEdit, btnDelete);
                 int id = int.Parse(dgissue.CurrentRow.Cells[0].Value.ToString());
                 var riRepository = Factory.ReceiptsIssuedRepository();
-                btnEdit.Enabled = dgissue.CurrentRow.Cells[8].Value.ToString().Equals("YES") ? false : true;
-                btnDelete.Enabled = dgissue.CurrentRow.Cells[8].Value.ToString().Equals("YES") ? false : true;
-                btnReturn.Enabled = dgissue.CurrentRow.Cells[8].Value.ToString().Equals("YES") ? false : true;
+                btnEdit.Enabled = dgissue.CurrentRow.Cells[7].Value.ToString().Equals("YES") ? false : true;
+                btnDelete.Enabled = dgissue.CurrentRow.Cells[7].Value.ToString().Equals("YES") ? false : true;
+                btnReturn.Enabled = dgissue.CurrentRow.Cells[7].Value.ToString().Equals("YES") ? false : true;
             }
             else
             {
@@ -92,19 +92,23 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if(dgissue.SelectedRows.Count > 0)
-            {
-                int id = int.Parse(dgissue.CurrentRow.Cells[0].Value.ToString());
+            {                
                 if (Helper.MessageBoxConfirmDelete(dgissue.SelectedRows.Count))
                 {
                     try
                     {
                         var riRepository = Factory.ReceiptsIssuedRepository();
                         var riModel = new List<ReceiptsIssuedModel>();
-                        riModel.Add(new ReceiptsIssuedModel() { Id = id });
-                        if (riRepository.Delete(riModel))
+                        foreach (DataGridViewRow row in dgissue.SelectedRows)
                         {
-                            LoadRecords();
+                            int id = int.Parse(row.Cells[0].Value.ToString());
+                            if (row.Cells[7].Value.ToString().Equals(string.Empty))
+                            {
+                                riModel.Add(new ReceiptsIssuedModel() { Id = id });
+                            }                                                 
                         }
+                        _ = riRepository.Delete(riModel);
+                        LoadRecords();
                     }
                     catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
                 }

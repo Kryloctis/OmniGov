@@ -247,15 +247,15 @@ namespace ACC.Data
         {
             try
             {
+              
                 var parameters = new object[][]
                 {
-                    new object[] { "@collecting_officers_id", DbType.Int32, entity.CoId },
                     new object[] { "@receipts_id", DbType.Int32, entity.RId },
                     new object[] { "@issuefrom", DbType.Int32, entity.IssuedFrom },
                     new object[] { "@issueto", DbType.Int32, entity.IssuedTo }
                 };
 
-                string query = $"SELECT id FROM {tableName} WHERE collecting_officers_id = @collecting_officers_id AND receipts_id=@receipts_id AND issuefrom=@issuefrom AND issueto=@issueto";
+                string query = $"SELECT id FROM {tableName} WHERE receipts_id=@receipts_id AND issuefrom=@issuefrom AND issueto=@issueto AND IF(IFNULL(is_returned,0)<1,false,true)=false";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -279,7 +279,7 @@ namespace ACC.Data
                     new object[] { "@receipts_id", DbType.Int32, id },
                 };
 
-                string query = $"SELECT * FROM {tableName} WHERE {tableName}.collecting_officers_id = @collecting_officers_id AND {tableName}.receipts_id=@receipts_id AND IF(IFNULL({tableName}.is_returned,0)<1,true,false)=true";
+                string query = $"SELECT * FROM {tableName} WHERE {tableName}.collecting_officers_id = @collecting_officers_id AND {tableName}.receipts_id=@receipts_id AND IF(IFNULL({tableName}.is_returned,0)<1,false,true)=true";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true

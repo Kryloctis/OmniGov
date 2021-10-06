@@ -62,6 +62,21 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public DataTable GetRecords(int id)
+        {
+            try
+            {
+                string query = $"SELECT * FROM {tableName} WHERE id IN (SELECT receipts.accountable_forms_id FROM receipts LEFT JOIN receipts_issued ON receipts_issued.receipts_id = receipts.id WHERE receipts_issued.collecting_officers_id={id} AND IF(IFNULL(receipts_issued.is_returned,0)<1,false,true)=false AND IFNULL(receipts_issued.last_issued,0) < receipts_issued.issueto)";
+
+                var dtBanks = new DataTable();
+                return _dbGenericCommands.Fill(query, dtBanks);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public bool Insert(AccountableModel entity)
         {
             try

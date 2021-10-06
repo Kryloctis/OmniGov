@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using ACC.Domain.Models;
 
@@ -9,5 +10,6 @@ namespace ACC.Domain.Interfaces
     {
         bool CodeExist(string code);
         bool CodeExist(string code, int id);
+        DataTable GetRecords(int id);
     }
 }

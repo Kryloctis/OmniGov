@@ -16,6 +16,8 @@ namespace AccountingSystem.Views.Manage.Receipts
         internal int Id = 0;
         internal int UserId = 0;
         internal int AccId = 0;
+        internal int startreceipt = 0;
+        internal int maxreceipt = 0;
         public ucForms()
         {
             InitializeComponent();
@@ -75,6 +77,11 @@ namespace AccountingSystem.Views.Manage.Receipts
         private void txtfrom_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtfrom, "Receipt Number From!");
+            if (Convert.ToInt32(txtfrom.Text.Trim()) <= maxreceipt || Convert.ToInt32(txtfrom.Text.Trim()) <= 0)
+            {
+                errorProvider.SetError(txtfrom, "Invalid Receipt Number!");
+                e.Cancel = true;
+            }
         }
 
         private void txtfrom_Validated(object sender, EventArgs e)
@@ -132,14 +139,33 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             int from = txtfrom.Text.Length > 0 ? Convert.ToInt32(txtfrom.Text.Trim()) : 0;
             int to = txtto.Text.Length > 0 ? Convert.ToInt32(txtto.Text.Trim()) : 0;
-            txtquantity.Text = from.Equals(1) ? ((from + to) - from).ToString() : (to - from).ToString();
+            //txtquantity.Text = from.Equals(1) ? ((from + to) - from).ToString() : from == to ? "1" : (to - from).ToString();
+            txtquantity.Text = ((to - from) + 1).ToString();
         }
 
         private void txtto_KeyUp(object sender, KeyEventArgs e)
         {
             int from = txtfrom.Text.Length > 0 ? Convert.ToInt32(txtfrom.Text.Trim()) : 0;
             int to = txtto.Text.Length > 0 ? Convert.ToInt32(txtto.Text.Trim()) : 0;
-            txtquantity.Text = from.Equals(1) ? ((from + to) - from).ToString() : (to - from).ToString();
+            txtquantity.Text = ((to - from) + 1).ToString();
+        }
+
+        private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cmbforms.SelectedIndex != -1)
+            {
+                if(Id <= 0)
+                {
+                    DataRowView item = cmbforms.SelectedItem as DataRowView;
+                    if (item != null)
+                    {
+                        var reporeceipt = Factory.ReceiptsRepository();
+                        startreceipt = reporeceipt.RMIN(int.Parse(item[0].ToString()));
+                        maxreceipt = reporeceipt.RMAX(int.Parse(item[0].ToString()));
+                        txtfrom.Text = (maxreceipt + 1).ToString();
+                    }
+                }              
+            }
         }
     }
 }
