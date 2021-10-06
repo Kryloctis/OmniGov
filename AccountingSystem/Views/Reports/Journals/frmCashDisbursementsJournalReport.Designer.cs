@@ -1,14 +1,14 @@
 ﻿
 namespace AccountingSystem.Views.Reports.Journals
 {
-    partial class ucCashDisbursementsJournalReport
+    partial class frmCashDisbursementsJournalReport
     {
-        /// <summary> 
+        /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
+        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -21,10 +21,10 @@ namespace AccountingSystem.Views.Reports.Journals
             base.Dispose(disposing);
         }
 
-        #region Component Designer generated code
+        #region Windows Form Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
@@ -37,22 +37,27 @@ namespace AccountingSystem.Views.Reports.Journals
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1000, 600);
-            this.panel1.TabIndex = 17;
+            this.panel1.Size = new System.Drawing.Size(1021, 533);
+            this.panel1.TabIndex = 18;
             // 
-            // ucCashDisbursementsJournalReport
+            // frmCashDisbursementsJournalReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1021, 533);
             this.Controls.Add(this.panel1);
-            this.Name = "ucCashDisbursementsJournalReport";
-            this.Size = new System.Drawing.Size(1000, 600);
-            this.Load += new System.EventHandler(this.ucCashDisbursementsJournalReport_Load);
+            this.Name = "frmCashDisbursementsJournalReport";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Cash Disbursements Journal Report";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmCashDisbursementsJournalReport_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
         private System.Windows.Forms.Panel panel1;
     }
 }

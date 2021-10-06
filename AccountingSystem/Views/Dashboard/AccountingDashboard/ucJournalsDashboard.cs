@@ -71,5 +71,14 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             frmADAdisburementJournalReport.date = dateTimePicker1.Value;
             frmADAdisburementJournalReport.ShowDialog();
         }
+
+        private void lnkCashDisbursementJournal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var frmCashDisbursementJournalReport = new frmCashDisbursementsJournalReport();
+            frmCashDisbursementJournalReport.fundName = cmbxFunds.Text.Trim();
+            frmCashDisbursementJournalReport.journalName = "Cash Disbursements Journal";
+            frmCashDisbursementJournalReport.date = dateTimePicker1.Value;
+            frmCashDisbursementJournalReport.ShowDialog();
+        }
     }
 }

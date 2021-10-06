@@ -185,6 +185,7 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             this.lnkCashDisbursementJournal.TabStop = true;
             this.lnkCashDisbursementJournal.Text = "Cash Disbursements Journal";
             this.lnkCashDisbursementJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lnkCashDisbursementJournal.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCashDisbursementJournal_LinkClicked);
             // 
             // lblCashDisbursementsJournalCount
             // 
