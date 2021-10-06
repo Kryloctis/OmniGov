@@ -1,23 +1,30 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Journals
 {
-    public partial class ucCashReceiptsJournalReport : UserControl
+    public partial class frmCashReceiptsJournalReport : Form
     {
         private readonly ReportViewer reportViewer;
         internal string fundName;
         internal string journalName;
         internal DateTime date;
 
-        public ucCashReceiptsJournalReport()
+        public frmCashReceiptsJournalReport()
         {
             InitializeComponent();
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
+            Helper.LoadFormIcon(this);
         }
 
         private DataTable CashReceiptsJournalDataTable()
@@ -146,11 +153,9 @@ namespace AccountingSystem.Views.Reports.Journals
             }
         }
 
-        private void ucCashReceiptsJournalReport_Load(object sender, EventArgs e)
+        private void frmCashReceiptsJournalReport_Load(object sender, EventArgs e)
         {
-            if (!DesignMode)
-            {
-            }
+            LoadReport(reportViewer.LocalReport);
         }
     }
 }

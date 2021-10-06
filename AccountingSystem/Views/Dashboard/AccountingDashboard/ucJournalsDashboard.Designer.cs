@@ -266,6 +266,7 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             this.lnkCashReceiptJournal.TabStop = true;
             this.lnkCashReceiptJournal.Text = "Cash Receipts Journal";
             this.lnkCashReceiptJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lnkCashReceiptJournal.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCashReceiptJournal_LinkClicked);
             // 
             // lblCashReceiptsJournalCount
             // 
