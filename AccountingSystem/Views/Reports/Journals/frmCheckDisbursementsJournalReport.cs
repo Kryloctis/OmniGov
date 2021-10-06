@@ -1,20 +1,27 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Journals
 {
-    public partial class ucCheckDisbursementsJournalReport : UserControl
+    public partial class frmCheckDisbursementsJournalReport : Form
     {
         private readonly ReportViewer reportViewer;
         internal string fundName;
         internal string journalName;
         internal DateTime date;
 
-        public ucCheckDisbursementsJournalReport()
+        public frmCheckDisbursementsJournalReport()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
@@ -118,7 +125,8 @@ namespace AccountingSystem.Views.Reports.Journals
                 report.DataSources.Add(new ReportDataSource("CheckDisbursementsJournal", CheckDisbursementsJournalDataTable()));
                 report.SetParameters(parameters);
                 reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.PageWidth;
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
                 reportViewer.RefreshReport();
                 Cursor.Current = Cursors.Default;
             }
@@ -128,11 +136,9 @@ namespace AccountingSystem.Views.Reports.Journals
             }
         }
 
-        private void ucCheckDisbursementsJournalReport_Load(object sender, EventArgs e)
+        private void frmCheckDisbursementsJournalReport_Load(object sender, EventArgs e)
         {
-            if (!DesignMode)
-            {
-            }
+            LoadReport(reportViewer.LocalReport);
         }
     }
 }

@@ -46,6 +46,7 @@ namespace AccountingSystem.Views.Reports.Journals
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1021, 533);
             this.Controls.Add(this.panel1);
+            this.MinimumSize = new System.Drawing.Size(1037, 572);
             this.Name = "frmCashReceiptsJournalReport";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

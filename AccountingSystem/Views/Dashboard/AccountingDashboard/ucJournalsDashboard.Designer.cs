@@ -307,6 +307,7 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             this.lnkCheckDisbursementsJournal.TabStop = true;
             this.lnkCheckDisbursementsJournal.Text = "Check Disbursements Journal";
             this.lnkCheckDisbursementsJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lnkCheckDisbursementsJournal.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCheckDisbursementsJournal_LinkClicked);
             // 
             // lblCheckDisbursementsJournalCount
             // 
