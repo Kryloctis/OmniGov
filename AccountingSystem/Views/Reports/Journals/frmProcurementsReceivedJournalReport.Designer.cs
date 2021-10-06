@@ -1,14 +1,14 @@
 ﻿
 namespace AccountingSystem.Views.Reports.Journals
 {
-    partial class ucProcurementsReceivedJournalReport
+    partial class frmProcurementsReceivedJournalReport
     {
-        /// <summary> 
+        /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
+        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -21,10 +21,10 @@ namespace AccountingSystem.Views.Reports.Journals
             base.Dispose(disposing);
         }
 
-        #region Component Designer generated code
+        #region Windows Form Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
@@ -37,23 +37,29 @@ namespace AccountingSystem.Views.Reports.Journals
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1000, 600);
-            this.panel1.TabIndex = 20;
+            this.panel1.Size = new System.Drawing.Size(1021, 533);
+            this.panel1.TabIndex = 21;
             // 
-            // ucProcurementsReceivedJournalReport
+            // frmProcurementsReceivedJournalReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ClientSize = new System.Drawing.Size(1021, 533);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(0);
-            this.Name = "ucProcurementsReceivedJournalReport";
-            this.Size = new System.Drawing.Size(1000, 600);
-            this.Load += new System.EventHandler(this.ucProcurementsReceivedJournalReport_Load);
+            this.MinimumSize = new System.Drawing.Size(1037, 572);
+            this.Name = "frmProcurementsReceivedJournalReport";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Procurements Received Journal Report";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmProcurementsReceivedJournalReport_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
         private System.Windows.Forms.Panel panel1;
     }
 }

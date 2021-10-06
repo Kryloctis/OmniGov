@@ -95,14 +95,13 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Transaction JEV"))
             {
                 ucjevDashboard1.btnAddJEV.Enabled = false;
-                menuJEV.Visible = false;
             }
 
             if (!Helper.HasPermission("Transaction Obligation Request"))
                 ucBudgetDashboard1.btnObligationRequest.Visible = false;
 
             if (!Helper.HasPermission("Report General Journal") && !Helper.HasPermission("Report Cash Receipts Journal") && !Helper.HasPermission("Report Procurement Received Journal") && !Helper.HasPermission("Report Cash Disbursements Journal") && !Helper.HasPermission("Report Check Disbursements Journal") && !Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
-                menuJournalsReport.Visible = false;
+                tabJournals.Visible = false;
 
             if (!Helper.HasPermission("Report General Ledger") && !Helper.HasPermission("Report Subsidiary Ledger"))
                 menuLedgersReport.Visible = false;
@@ -116,7 +115,6 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Transaction Issue Check"))
             {
                 ucTreasuryDashboard1.btnIssueCheck.Enabled = false;
-                menuIssueCheck.Visible = false;
             }
 
             if (!Helper.HasPermission("Manage Accountable Forms"))
@@ -124,7 +122,6 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Transaction Bank Deposits"))
             {
-                menuDeposits.Visible = false;
                 ucTreasuryDashboard1.btnBankDeposit.Enabled = false;
             }
 
@@ -137,18 +134,15 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Transaction Payments"))
             {
                 ucTreasuryDashboard1.btnPaymentCollection.Enabled = false;
-                menuPayments.Visible = false;
             }
 
             if (!Helper.HasPermission("Manage Receipts"))
                 menuReceipts.Visible = false;
 
             if (!Helper.HasPermission("Transaction Issue Receipt"))
-                menuIssueReceipts.Visible = false;
 
             if (!Helper.HasPermission("Transaction Generate RCD"))
             {
-                menuGenerateRCD.Visible = false;
                 ucTreasuryDashboard1.btnGenerateRCD.Enabled = false;
             }
 

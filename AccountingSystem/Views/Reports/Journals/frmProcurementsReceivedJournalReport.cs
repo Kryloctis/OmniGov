@@ -1,20 +1,27 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Journals
 {
-    public partial class ucProcurementsReceivedJournalReport : UserControl
+    public partial class frmProcurementsReceivedJournalReport : Form
     {
         private readonly ReportViewer reportViewer;
         internal string fundName;
         internal string journalName;
         internal DateTime date;
 
-        public ucProcurementsReceivedJournalReport()
+        public frmProcurementsReceivedJournalReport()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
@@ -42,7 +49,7 @@ namespace AccountingSystem.Views.Reports.Journals
                 {
                     row["account_id_debit"] = item["general_ledger_accounts_id"];
                     row["account_code_debit"] = item["account_code"];
-                    row["debit"] = item["amount"];  
+                    row["debit"] = item["amount"];
                 }
                 else
                 {
@@ -107,7 +114,8 @@ namespace AccountingSystem.Views.Reports.Journals
                 report.DataSources.Add(new ReportDataSource("ProcurementsReceivedJournal", ProcurementsReceivedJournalDataTable()));
                 report.SetParameters(parameters);
                 reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.PageWidth;
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
                 reportViewer.RefreshReport();
                 Cursor.Current = Cursors.Default;
             }
@@ -117,11 +125,9 @@ namespace AccountingSystem.Views.Reports.Journals
             }
         }
 
-        private void ucProcurementsReceivedJournalReport_Load(object sender, EventArgs e)
+        private void frmProcurementsReceivedJournalReport_Load(object sender, EventArgs e)
         {
-            if (!DesignMode)
-            {
-            }
+            LoadReport(reportViewer.LocalReport);
         }
     }
 }

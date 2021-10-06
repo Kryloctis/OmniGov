@@ -145,6 +145,7 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             this.lnkProcurementReceivedJournal.TabStop = true;
             this.lnkProcurementReceivedJournal.Text = "Procurement Received Journal";
             this.lnkProcurementReceivedJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lnkProcurementReceivedJournal.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkProcurementReceivedJournal_LinkClicked);
             // 
             // lblProcurementReceivedJournalCount
             // 

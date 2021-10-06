@@ -33,13 +33,6 @@ namespace AccountingSystem
             this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.menuLogout = new System.Windows.Forms.ToolStripMenuItem();
             this.menuExitApp = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuTransactions = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuJEV = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuIssueCheck = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuPayments = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuDeposits = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuGenerateRCD = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuIssueReceipts = new System.Windows.Forms.ToolStripMenuItem();
             this.menuManage = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUserList = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,7 +48,6 @@ namespace AccountingSystem
             this.menuAccForm = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReceipts = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuJournalsReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuLedgersReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOB = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOBB = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,12 +75,12 @@ namespace AccountingSystem
             this.tabJournalEntryVoucher = new System.Windows.Forms.TabPage();
             this.ucjevDashboard1 = new AccountingSystem.Views.Dashboard.ucJEVDashboard();
             this.tabJournals = new System.Windows.Forms.TabPage();
+            this.ucJournalsDashboard1 = new AccountingSystem.Views.Dashboard.AccountingDashboard.ucJournalsDashboard();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabTrialBalance = new System.Windows.Forms.TabPage();
             this.tabFinancialStatements = new System.Windows.Forms.TabPage();
             this.tabTreasury = new System.Windows.Forms.TabPage();
             this.ucTreasuryDashboard1 = new AccountingSystem.Views.Dashboard.TreasuryDashboard.ucTreasuryDashboard();
-            this.ucJournalsDashboard1 = new AccountingSystem.Views.Dashboard.AccountingDashboard.ucJournalsDashboard();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -106,7 +98,6 @@ namespace AccountingSystem
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuFile,
-            this.menuTransactions,
             this.menuManage,
             this.menuReports});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -138,61 +129,6 @@ namespace AccountingSystem
             this.menuExitApp.Size = new System.Drawing.Size(157, 22);
             this.menuExitApp.Text = "Exit Application";
             this.menuExitApp.Click += new System.EventHandler(this.menuExitApp_Click);
-            // 
-            // menuTransactions
-            // 
-            this.menuTransactions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuJEV,
-            this.menuIssueCheck,
-            this.menuPayments,
-            this.menuDeposits,
-            this.menuGenerateRCD,
-            this.menuIssueReceipts});
-            this.menuTransactions.Name = "menuTransactions";
-            this.menuTransactions.Size = new System.Drawing.Size(84, 19);
-            this.menuTransactions.Text = "Transactions";
-            // 
-            // menuJEV
-            // 
-            this.menuJEV.Name = "menuJEV";
-            this.menuJEV.Size = new System.Drawing.Size(178, 22);
-            this.menuJEV.Text = "JEV";
-            this.menuJEV.Click += new System.EventHandler(this.menuJEV_Click);
-            // 
-            // menuIssueCheck
-            // 
-            this.menuIssueCheck.Name = "menuIssueCheck";
-            this.menuIssueCheck.Size = new System.Drawing.Size(178, 22);
-            this.menuIssueCheck.Text = "Issue Check";
-            this.menuIssueCheck.Click += new System.EventHandler(this.menuRCI_Click);
-            // 
-            // menuPayments
-            // 
-            this.menuPayments.Name = "menuPayments";
-            this.menuPayments.Size = new System.Drawing.Size(178, 22);
-            this.menuPayments.Text = "Payment Collection";
-            this.menuPayments.Click += new System.EventHandler(this.menuPayments_Click);
-            // 
-            // menuDeposits
-            // 
-            this.menuDeposits.Name = "menuDeposits";
-            this.menuDeposits.Size = new System.Drawing.Size(178, 22);
-            this.menuDeposits.Text = "Bank Deposits";
-            this.menuDeposits.Click += new System.EventHandler(this.menuDeposits_Click);
-            // 
-            // menuGenerateRCD
-            // 
-            this.menuGenerateRCD.Name = "menuGenerateRCD";
-            this.menuGenerateRCD.Size = new System.Drawing.Size(178, 22);
-            this.menuGenerateRCD.Text = "Generate RCD";
-            this.menuGenerateRCD.Click += new System.EventHandler(this.menuGenerateRCD_Click);
-            // 
-            // menuIssueReceipts
-            // 
-            this.menuIssueReceipts.Name = "menuIssueReceipts";
-            this.menuIssueReceipts.Size = new System.Drawing.Size(178, 22);
-            this.menuIssueReceipts.Text = "Issue Receipts";
-            this.menuIssueReceipts.Click += new System.EventHandler(this.menureceiptsissued_Click);
             // 
             // menuManage
             // 
@@ -308,7 +244,6 @@ namespace AccountingSystem
             // menuReports
             // 
             this.menuReports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuJournalsReport,
             this.menuLedgersReport,
             this.menuSAAOB,
             this.menuSAAOBB,
@@ -324,13 +259,6 @@ namespace AccountingSystem
             this.menuReports.Name = "menuReports";
             this.menuReports.Size = new System.Drawing.Size(59, 19);
             this.menuReports.Text = "Reports";
-            // 
-            // menuJournalsReport
-            // 
-            this.menuJournalsReport.Name = "menuJournalsReport";
-            this.menuJournalsReport.Size = new System.Drawing.Size(233, 22);
-            this.menuJournalsReport.Text = "Journals";
-            this.menuJournalsReport.Click += new System.EventHandler(this.menuJournalsReport_Click);
             // 
             // menuLedgersReport
             // 
@@ -598,6 +526,17 @@ namespace AccountingSystem
             this.tabJournals.Text = "Journals";
             this.tabJournals.UseVisualStyleBackColor = true;
             // 
+            // ucJournalsDashboard1
+            // 
+            this.ucJournalsDashboard1.AutoSize = true;
+            this.ucJournalsDashboard1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ucJournalsDashboard1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ucJournalsDashboard1.Location = new System.Drawing.Point(3, 3);
+            this.ucJournalsDashboard1.MinimumSize = new System.Drawing.Size(941, 160);
+            this.ucJournalsDashboard1.Name = "ucJournalsDashboard1";
+            this.ucJournalsDashboard1.Size = new System.Drawing.Size(1152, 160);
+            this.ucJournalsDashboard1.TabIndex = 0;
+            // 
             // tabPage3
             // 
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
@@ -645,17 +584,6 @@ namespace AccountingSystem
             this.ucTreasuryDashboard1.Name = "ucTreasuryDashboard1";
             this.ucTreasuryDashboard1.Size = new System.Drawing.Size(1172, 597);
             this.ucTreasuryDashboard1.TabIndex = 0;
-            // 
-            // ucJournalsDashboard1
-            // 
-            this.ucJournalsDashboard1.AutoSize = true;
-            this.ucJournalsDashboard1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucJournalsDashboard1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ucJournalsDashboard1.Location = new System.Drawing.Point(3, 3);
-            this.ucJournalsDashboard1.MinimumSize = new System.Drawing.Size(941, 160);
-            this.ucJournalsDashboard1.Name = "ucJournalsDashboard1";
-            this.ucJournalsDashboard1.Size = new System.Drawing.Size(1152, 160);
-            this.ucJournalsDashboard1.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -706,7 +634,6 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuFile;
         private System.Windows.Forms.ToolStripMenuItem menuManage;
         private System.Windows.Forms.ToolStripMenuItem menuJournals;
-        private System.Windows.Forms.ToolStripMenuItem menuTransactions;
         private System.Windows.Forms.ToolStripMenuItem menuReports;
         private System.Windows.Forms.ToolStripMenuItem menuAllotmentClasses;
         private System.Windows.Forms.ToolStripMenuItem menuFunds;
@@ -716,9 +643,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuRoles;
         private System.Windows.Forms.ToolStripMenuItem menuFunctionProgramProject;
         private System.Windows.Forms.ToolStripMenuItem menuCollectingOfficer;
-        private System.Windows.Forms.ToolStripMenuItem menuJEV;
         private System.Windows.Forms.ToolStripMenuItem menuReportJournals;
-        private System.Windows.Forms.ToolStripMenuItem menuJournalsReport;
         private System.Windows.Forms.ToolStripMenuItem menuDisbursingOfficer;
         internal System.Windows.Forms.ToolStripMenuItem menuSAAOB;
         private System.Windows.Forms.ToolStripMenuItem menuLedgersReport;
@@ -728,21 +653,16 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem menuBanks;
-        private System.Windows.Forms.ToolStripMenuItem menuIssueCheck;
         private System.Windows.Forms.ToolStripMenuItem menuprintRCI;
         private System.Windows.Forms.ToolStripMenuItem menuAccForm;
         private System.Windows.Forms.ToolStripMenuItem menuLogout;
         private System.Windows.Forms.ToolStripMenuItem menuExitApp;
         private System.Windows.Forms.ToolStripMenuItem menuprintPC;
-        private System.Windows.Forms.ToolStripMenuItem menuPayments;
-        private System.Windows.Forms.ToolStripMenuItem menuDeposits;
         internal System.Windows.Forms.ToolStripMenuItem menuSAAOBB;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         internal System.Windows.Forms.RadioButton radBtnBudget;
         private System.Windows.Forms.RadioButton radBtnAccounting;
-        private System.Windows.Forms.ToolStripMenuItem menuGenerateRCD;
         private System.Windows.Forms.ToolStripMenuItem menuprintGC;
-        private System.Windows.Forms.ToolStripMenuItem menuIssueReceipts;
         private System.Windows.Forms.ToolStripMenuItem menuReceipts;
         private System.Windows.Forms.ToolStripMenuItem menuBankCashBook;
         private System.Windows.Forms.ToolStripMenuItem menuJEVS;

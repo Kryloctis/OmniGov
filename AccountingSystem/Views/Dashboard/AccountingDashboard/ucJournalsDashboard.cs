@@ -107,5 +107,14 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             frmGeneralJournalReport.date = dateTimePicker1.Value;
             frmGeneralJournalReport.ShowDialog();
         }
+
+        private void lnkProcurementReceivedJournal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var frmProcurementsReceivedJournalReport = new frmProcurementsReceivedJournalReport();
+            frmProcurementsReceivedJournalReport.fundName = cmbxFunds.Text.Trim();
+            frmProcurementsReceivedJournalReport.journalName = "Procurement Received Journal";
+            frmProcurementsReceivedJournalReport.date = dateTimePicker1.Value;
+            frmProcurementsReceivedJournalReport.ShowDialog();
+        }
     }
 }
