@@ -226,6 +226,7 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             this.lnkGeneralJournal.TabStop = true;
             this.lnkGeneralJournal.Text = "General Journal";
             this.lnkGeneralJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lnkGeneralJournal.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkGeneralJournal_LinkClicked);
             // 
             // lblGeneralJournalCount
             // 

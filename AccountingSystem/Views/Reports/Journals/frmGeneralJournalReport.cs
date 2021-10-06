@@ -1,20 +1,27 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Journals
 {
-    public partial class ucGeneralJournalReport : UserControl
+    public partial class frmGeneralJournalReport : Form
     {
         private readonly ReportViewer reportViewer;
         internal string fundName;
         internal string journalName;
         internal DateTime date;
 
-        public ucGeneralJournalReport()
+        public frmGeneralJournalReport()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
@@ -118,11 +125,9 @@ namespace AccountingSystem.Views.Reports.Journals
             }
         }
 
-        private void ucGeneralJournal_Load(object sender, EventArgs e)
+        private void frmGeneralJournalReport_Load(object sender, EventArgs e)
         {
-            if (!DesignMode)
-            {
-            }
+            LoadReport(reportViewer.LocalReport);
         }
     }
 }

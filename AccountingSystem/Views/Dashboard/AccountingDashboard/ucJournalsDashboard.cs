@@ -98,5 +98,14 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             frmCheckDisbursementJournalReport.date = dateTimePicker1.Value;
             frmCheckDisbursementJournalReport.ShowDialog();
         }
+
+        private void lnkGeneralJournal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var frmGeneralJournalReport = new frmGeneralJournalReport();
+            frmGeneralJournalReport.fundName = cmbxFunds.Text.Trim();
+            frmGeneralJournalReport.journalName = "General Journal";
+            frmGeneralJournalReport.date = dateTimePicker1.Value;
+            frmGeneralJournalReport.ShowDialog();
+        }
     }
 }
