@@ -17,7 +17,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             InitializeComponent();
             uc = ucRealignment1;
             _frmRealignment = frmRealignment;
-            uc.txtBudgetId.Text  = frmRealignment.budgetAppropriationId;
+            uc.budgetId  = Convert.ToInt32(frmRealignment.budgetAppropriationId);
         }
 
         private void frmRealignmentAdd_Load(object sender, EventArgs e)
