@@ -43,18 +43,20 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 197);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 148);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(510, 36);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(448, 27);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(413, 3);
+            this.btnCancel.Location = new System.Drawing.Point(363, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnCancel.Size = new System.Drawing.Size(94, 29);
+            this.btnCancel.Size = new System.Drawing.Size(82, 22);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -63,10 +65,11 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // 
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(313, 3);
+            this.btnSave.Location = new System.Drawing.Point(275, 2);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSave.Size = new System.Drawing.Size(94, 29);
+            this.btnSave.Size = new System.Drawing.Size(82, 22);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -76,25 +79,27 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // 
             this.ucCollectingOfficer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucCollectingOfficer1.Location = new System.Drawing.Point(0, 0);
-            this.ucCollectingOfficer1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.ucCollectingOfficer1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ucCollectingOfficer1.Name = "ucCollectingOfficer1";
-            this.ucCollectingOfficer1.Size = new System.Drawing.Size(510, 197);
+            this.ucCollectingOfficer1.Size = new System.Drawing.Size(448, 148);
             this.ucCollectingOfficer1.TabIndex = 4;
             // 
             // frmCollectingOfficerEdit
             // 
             this.AcceptButton = this.btnSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(510, 233);
+            this.ClientSize = new System.Drawing.Size(448, 175);
             this.Controls.Add(this.ucCollectingOfficer1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.MinimumSize = new System.Drawing.Size(528, 234);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(464, 185);
             this.Name = "frmCollectingOfficerEdit";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Collecting Officer";
             this.Load += new System.EventHandler(this.frmCollectingOfficerEdit_Load);

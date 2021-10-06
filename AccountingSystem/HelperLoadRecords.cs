@@ -310,17 +310,31 @@ namespace AccountingSystem
             datagrid.Columns[0].Visible = false;
             datagrid.Columns[1].HeaderText = "Collector";
             datagrid.Columns[2].HeaderText = "Receipt (Form)";
-            datagrid.Columns[3].HeaderText = "# From";
-            datagrid.Columns[4].HeaderText = "# To";
+            datagrid.Columns[3].HeaderText = "No. From";
+            datagrid.Columns[4].HeaderText = "No. To";
             datagrid.Columns[5].HeaderText = "Date Issued";
             datagrid.Columns[5].DefaultCellStyle.Format = "yyyy-MM-dd";
             datagrid.Columns[6].HeaderText = "Quantity";
-            datagrid.Columns[7].HeaderText = "Last Issued #";
+            datagrid.Columns[7].HeaderText = "Last Issued No.";
             datagrid.Columns[8].HeaderText = "Is Returned";
             datagrid.Columns[9].HeaderText = "Returned Date";
             datagrid.Columns[9].DefaultCellStyle.Format = "yyyy-MM-dd";
             datagrid.Columns[10].HeaderText = "User/Officer";
 
+
+
+            datagrid.Columns[2].Width = 300;
+            datagrid.Columns[3].Width = 100;
+            datagrid.Columns[4].Width = 100;
+            datagrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[8].Width = 80;
+            datagrid.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            float fontSize = 9f;
+            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
@@ -331,12 +345,14 @@ namespace AccountingSystem
             datagrid.DataSource = dataTable;
             datagrid.Columns[0].Visible = false;
             datagrid.Columns[1].HeaderText = "Receipt (Form)";
+            datagrid.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells; 
             datagrid.Columns[2].HeaderText = "# From";
             datagrid.Columns[3].HeaderText = "# To";
             datagrid.Columns[4].HeaderText = "Received Date";
             datagrid.Columns[4].DefaultCellStyle.Format = "yyyy-MM-dd";
             datagrid.Columns[5].HeaderText = "Quantity";
             datagrid.Columns[6].HeaderText = "User/Officer";
+
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }

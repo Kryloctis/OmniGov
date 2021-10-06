@@ -51,17 +51,18 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(143, 20);
+            this.label1.Size = new System.Drawing.Size(110, 15);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Accountable Forms :";
+            this.label1.Text = "Accountable Forms";
             // 
             // cmbforms
             // 
             this.cmbforms.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbforms.FormattingEnabled = true;
-            this.cmbforms.Location = new System.Drawing.Point(152, 3);
+            this.cmbforms.Location = new System.Drawing.Point(133, 2);
+            this.cmbforms.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbforms.Name = "cmbforms";
-            this.cmbforms.Size = new System.Drawing.Size(430, 28);
+            this.cmbforms.Size = new System.Drawing.Size(377, 23);
             this.cmbforms.TabIndex = 1;
             this.cmbforms.SelectedIndexChanged += new System.EventHandler(this.cmbforms_SelectedIndexChanged);
             this.cmbforms.Validating += new System.ComponentModel.CancelEventHandler(this.cmbforms_Validating);
@@ -70,62 +71,64 @@ namespace AccountingSystem.Views.Manage.Receipts
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 37);
+            this.label2.Location = new System.Drawing.Point(3, 31);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(131, 20);
+            this.label2.Size = new System.Drawing.Size(102, 15);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Receipt No. From :";
+            this.label2.Text = "Receipt No. From ";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(355, 37);
+            this.label3.Location = new System.Drawing.Point(311, 31);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 20);
+            this.label3.Size = new System.Drawing.Size(22, 15);
             this.label3.TabIndex = 3;
-            this.label3.Text = "To :";
+            this.label3.Text = "To ";
             // 
             // dtpreceived
             // 
-            this.dtpreceived.Location = new System.Drawing.Point(152, 69);
+            this.dtpreceived.Location = new System.Drawing.Point(132, 56);
+            this.dtpreceived.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpreceived.Name = "dtpreceived";
-            this.dtpreceived.Size = new System.Drawing.Size(430, 27);
+            this.dtpreceived.Size = new System.Drawing.Size(377, 23);
             this.dtpreceived.TabIndex = 6;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 75);
+            this.label4.Location = new System.Drawing.Point(3, 58);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(112, 20);
+            this.label4.Size = new System.Drawing.Size(84, 15);
             this.label4.TabIndex = 7;
-            this.label4.Text = "Received Date :";
+            this.label4.Text = "Received Date ";
             // 
             // txtremarks
             // 
-            this.txtremarks.Location = new System.Drawing.Point(152, 133);
+            this.txtremarks.Location = new System.Drawing.Point(132, 110);
+            this.txtremarks.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtremarks.Multiline = true;
             this.txtremarks.Name = "txtremarks";
-            this.txtremarks.Size = new System.Drawing.Size(430, 123);
+            this.txtremarks.Size = new System.Drawing.Size(377, 69);
             this.txtremarks.TabIndex = 9;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 103);
+            this.label5.Location = new System.Drawing.Point(3, 86);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(114, 20);
+            this.label5.Size = new System.Drawing.Size(89, 15);
             this.label5.TabIndex = 10;
-            this.label5.Text = "Quantity/Stabs :";
+            this.label5.Text = "Quantity/Stabs ";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 137);
+            this.label6.Location = new System.Drawing.Point(3, 113);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(72, 20);
+            this.label6.Size = new System.Drawing.Size(55, 15);
             this.label6.TabIndex = 11;
-            this.label6.Text = "Remarks :";
+            this.label6.Text = "Remarks ";
             // 
             // errorProvider
             // 
@@ -133,9 +136,10 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             // txtfrom
             // 
-            this.txtfrom.Location = new System.Drawing.Point(152, 35);
+            this.txtfrom.Location = new System.Drawing.Point(133, 29);
+            this.txtfrom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtfrom.Name = "txtfrom";
-            this.txtfrom.Size = new System.Drawing.Size(185, 27);
+            this.txtfrom.Size = new System.Drawing.Size(162, 23);
             this.txtfrom.TabIndex = 12;
             this.txtfrom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtfrom_KeyPress);
             this.txtfrom.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtfrom_KeyUp);
@@ -144,9 +148,10 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             // txtto
             // 
-            this.txtto.Location = new System.Drawing.Point(393, 35);
+            this.txtto.Location = new System.Drawing.Point(344, 29);
+            this.txtto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtto.Name = "txtto";
-            this.txtto.Size = new System.Drawing.Size(189, 27);
+            this.txtto.Size = new System.Drawing.Size(166, 23);
             this.txtto.TabIndex = 13;
             this.txtto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtto_KeyPress);
             this.txtto.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtto_KeyUp);
@@ -155,10 +160,11 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             // txtquantity
             // 
-            this.txtquantity.Location = new System.Drawing.Point(152, 101);
+            this.txtquantity.Location = new System.Drawing.Point(132, 83);
+            this.txtquantity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtquantity.Name = "txtquantity";
             this.txtquantity.ReadOnly = true;
-            this.txtquantity.Size = new System.Drawing.Size(430, 27);
+            this.txtquantity.Size = new System.Drawing.Size(377, 23);
             this.txtquantity.TabIndex = 14;
             this.txtquantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtquantity_KeyPress);
             this.txtquantity.Validating += new System.ComponentModel.CancelEventHandler(this.txtquantity_Validating);
@@ -166,7 +172,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             // ucForms
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.Controls.Add(this.txtquantity);
@@ -181,8 +187,9 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbforms);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucForms";
-            this.Size = new System.Drawing.Size(585, 260);
+            this.Size = new System.Drawing.Size(512, 182);
             this.Load += new System.EventHandler(this.ucForms_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);

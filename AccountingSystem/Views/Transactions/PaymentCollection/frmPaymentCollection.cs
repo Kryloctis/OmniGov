@@ -18,7 +18,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             InitializeComponent();
             WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgpayments);
+            Helper.DatagridFullRowSelectStyle(dgpayments, true);
         }
 
         private void frmPaymentCollection_Load(object sender, EventArgs e)
@@ -73,7 +73,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                             dgpayments.Rows.RemoveAt(dgpayments.CurrentRow.Index);
                             lblRecordCount.Text = dgpayments.Rows.Count.ToString();
                         }
-                     
                     }
                 }
             }

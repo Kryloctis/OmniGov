@@ -38,44 +38,50 @@ namespace AccountingSystem.Views.Transactions.RCI.Find
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 17);
+            this.label1.Location = new System.Drawing.Point(10, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 20);
+            this.label1.Size = new System.Drawing.Size(33, 15);
             this.label1.TabIndex = 8;
-            this.label1.Text = "Find :";
+            this.label1.Text = "Find ";
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(62, 14);
+            this.txtSearch.Location = new System.Drawing.Point(54, 10);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(652, 27);
+            this.txtSearch.Size = new System.Drawing.Size(573, 23);
             this.txtSearch.TabIndex = 7;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // dgSelect
             // 
             this.dgSelect.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgSelect.Location = new System.Drawing.Point(16, 49);
+            this.dgSelect.Location = new System.Drawing.Point(10, 37);
+            this.dgSelect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgSelect.MultiSelect = false;
             this.dgSelect.Name = "dgSelect";
             this.dgSelect.RowHeadersWidth = 51;
             this.dgSelect.RowTemplate.Height = 29;
             this.dgSelect.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgSelect.Size = new System.Drawing.Size(698, 373);
+            this.dgSelect.Size = new System.Drawing.Size(617, 277);
             this.dgSelect.TabIndex = 6;
             this.dgSelect.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSelect_CellDoubleClick);
             this.dgSelect.SelectionChanged += new System.EventHandler(this.dgSelect_SelectionChanged);
             // 
             // frmFind
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(730, 433);
+            this.ClientSize = new System.Drawing.Size(639, 325);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.dgSelect);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmFind";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Select";
             this.Load += new System.EventHandler(this.frmFind_Load);
