@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccountingSystem.Views.Reports.Journals;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -60,6 +61,15 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             lblCashDisbursementsJournalCount.Text = cashDisbursementJournalCount.ToString();
             lblCheckDisbursementsJournalCount.Text = checkDisbursementJournalCount.ToString();
             lblADADisbursementsJournal.Text = adaDisbursementJournalCount.ToString();
+        }
+
+        private void lnkADAdisbursementsJournal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var frmADAdisburementJournalReport = new frmADADisbursementsJournalReport();
+            frmADAdisburementJournalReport.fundName = cmbxFunds.Text.Trim();
+            frmADAdisburementJournalReport.journalName = "Authority to Debit Account Disbursement Journal";
+            frmADAdisburementJournalReport.date = dateTimePicker1.Value;
+            frmADAdisburementJournalReport.ShowDialog();
         }
     }
 }

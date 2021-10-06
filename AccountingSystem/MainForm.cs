@@ -387,7 +387,6 @@ namespace AccountingSystem
 
         private void menuJournalsReport_Click(object sender, EventArgs e)
         {
-            _ = new frmJournalsReport().ShowDialog();
         }
 
         private void financialStatementsToolStripMenuItem_Click(object sender, EventArgs e)

@@ -34,22 +34,22 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.lnkProcurementReceivedJournal = new System.Windows.Forms.LinkLabel();
             this.lblProcurementReceivedJournalCount = new System.Windows.Forms.Label();
             this.pnlPendingJEV = new System.Windows.Forms.Panel();
-            this.lnkPending = new System.Windows.Forms.LinkLabel();
+            this.lnkCashDisbursementJournal = new System.Windows.Forms.LinkLabel();
             this.lblCashDisbursementsJournalCount = new System.Windows.Forms.Label();
             this.pnlApprovedJEV = new System.Windows.Forms.Panel();
-            this.lnkApproved = new System.Windows.Forms.LinkLabel();
+            this.lnkGeneralJournal = new System.Windows.Forms.LinkLabel();
             this.lblGeneralJournalCount = new System.Windows.Forms.Label();
             this.pnlJEV = new System.Windows.Forms.Panel();
-            this.lnkJEV = new System.Windows.Forms.LinkLabel();
+            this.lnkCashReceiptJournal = new System.Windows.Forms.LinkLabel();
             this.lblCashReceiptsJournalCount = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.linkDisapproved = new System.Windows.Forms.LinkLabel();
+            this.lnkCheckDisbursementsJournal = new System.Windows.Forms.LinkLabel();
             this.lblCheckDisbursementsJournalCount = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lnkCancelled = new System.Windows.Forms.LinkLabel();
+            this.lnkADAdisbursementsJournal = new System.Windows.Forms.LinkLabel();
             this.lblADADisbursementsJournal = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -121,7 +121,7 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
-            this.panel3.Controls.Add(this.linkLabel1);
+            this.panel3.Controls.Add(this.lnkProcurementReceivedJournal);
             this.panel3.Controls.Add(this.lblProcurementReceivedJournalCount);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(315, 13);
@@ -130,21 +130,21 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             this.panel3.Size = new System.Drawing.Size(150, 115);
             this.panel3.TabIndex = 30;
             // 
-            // linkLabel1
+            // lnkProcurementReceivedJournal
             // 
-            this.linkLabel1.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
-            this.linkLabel1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.linkLabel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.linkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.linkLabel1.Location = new System.Drawing.Point(0, 61);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Padding = new System.Windows.Forms.Padding(2);
-            this.linkLabel1.Size = new System.Drawing.Size(150, 42);
-            this.linkLabel1.TabIndex = 15;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Procurement Received Journal";
-            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lnkProcurementReceivedJournal.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lnkProcurementReceivedJournal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lnkProcurementReceivedJournal.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lnkProcurementReceivedJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkProcurementReceivedJournal.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lnkProcurementReceivedJournal.Location = new System.Drawing.Point(0, 61);
+            this.lnkProcurementReceivedJournal.Name = "lnkProcurementReceivedJournal";
+            this.lnkProcurementReceivedJournal.Padding = new System.Windows.Forms.Padding(2);
+            this.lnkProcurementReceivedJournal.Size = new System.Drawing.Size(150, 42);
+            this.lnkProcurementReceivedJournal.TabIndex = 15;
+            this.lnkProcurementReceivedJournal.TabStop = true;
+            this.lnkProcurementReceivedJournal.Text = "Procurement Received Journal";
+            this.lnkProcurementReceivedJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblProcurementReceivedJournalCount
             // 
@@ -161,7 +161,7 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             // pnlPendingJEV
             // 
             this.pnlPendingJEV.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlPendingJEV.Controls.Add(this.lnkPending);
+            this.pnlPendingJEV.Controls.Add(this.lnkCashDisbursementJournal);
             this.pnlPendingJEV.Controls.Add(this.lblCashDisbursementsJournalCount);
             this.pnlPendingJEV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPendingJEV.Location = new System.Drawing.Point(471, 13);
@@ -170,21 +170,21 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             this.pnlPendingJEV.Size = new System.Drawing.Size(150, 115);
             this.pnlPendingJEV.TabIndex = 29;
             // 
-            // lnkPending
+            // lnkCashDisbursementJournal
             // 
-            this.lnkPending.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lnkPending.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lnkPending.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkPending.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkPending.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkPending.Location = new System.Drawing.Point(0, 61);
-            this.lnkPending.Name = "lnkPending";
-            this.lnkPending.Padding = new System.Windows.Forms.Padding(2);
-            this.lnkPending.Size = new System.Drawing.Size(150, 42);
-            this.lnkPending.TabIndex = 15;
-            this.lnkPending.TabStop = true;
-            this.lnkPending.Text = "Cash Disbursements Journal";
-            this.lnkPending.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lnkCashDisbursementJournal.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lnkCashDisbursementJournal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lnkCashDisbursementJournal.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lnkCashDisbursementJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkCashDisbursementJournal.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lnkCashDisbursementJournal.Location = new System.Drawing.Point(0, 61);
+            this.lnkCashDisbursementJournal.Name = "lnkCashDisbursementJournal";
+            this.lnkCashDisbursementJournal.Padding = new System.Windows.Forms.Padding(2);
+            this.lnkCashDisbursementJournal.Size = new System.Drawing.Size(150, 42);
+            this.lnkCashDisbursementJournal.TabIndex = 15;
+            this.lnkCashDisbursementJournal.TabStop = true;
+            this.lnkCashDisbursementJournal.Text = "Cash Disbursements Journal";
+            this.lnkCashDisbursementJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblCashDisbursementsJournalCount
             // 
@@ -201,7 +201,7 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             // pnlApprovedJEV
             // 
             this.pnlApprovedJEV.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlApprovedJEV.Controls.Add(this.lnkApproved);
+            this.pnlApprovedJEV.Controls.Add(this.lnkGeneralJournal);
             this.pnlApprovedJEV.Controls.Add(this.lblGeneralJournalCount);
             this.pnlApprovedJEV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlApprovedJEV.Location = new System.Drawing.Point(3, 13);
@@ -210,21 +210,21 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             this.pnlApprovedJEV.Size = new System.Drawing.Size(150, 115);
             this.pnlApprovedJEV.TabIndex = 28;
             // 
-            // lnkApproved
+            // lnkGeneralJournal
             // 
-            this.lnkApproved.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lnkApproved.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lnkApproved.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkApproved.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkApproved.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkApproved.Location = new System.Drawing.Point(0, 61);
-            this.lnkApproved.Name = "lnkApproved";
-            this.lnkApproved.Padding = new System.Windows.Forms.Padding(2);
-            this.lnkApproved.Size = new System.Drawing.Size(150, 42);
-            this.lnkApproved.TabIndex = 14;
-            this.lnkApproved.TabStop = true;
-            this.lnkApproved.Text = "General Journal";
-            this.lnkApproved.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lnkGeneralJournal.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lnkGeneralJournal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lnkGeneralJournal.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lnkGeneralJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkGeneralJournal.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lnkGeneralJournal.Location = new System.Drawing.Point(0, 61);
+            this.lnkGeneralJournal.Name = "lnkGeneralJournal";
+            this.lnkGeneralJournal.Padding = new System.Windows.Forms.Padding(2);
+            this.lnkGeneralJournal.Size = new System.Drawing.Size(150, 42);
+            this.lnkGeneralJournal.TabIndex = 14;
+            this.lnkGeneralJournal.TabStop = true;
+            this.lnkGeneralJournal.Text = "General Journal";
+            this.lnkGeneralJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblGeneralJournalCount
             // 
@@ -241,7 +241,7 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             // pnlJEV
             // 
             this.pnlJEV.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlJEV.Controls.Add(this.lnkJEV);
+            this.pnlJEV.Controls.Add(this.lnkCashReceiptJournal);
             this.pnlJEV.Controls.Add(this.lblCashReceiptsJournalCount);
             this.pnlJEV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlJEV.Location = new System.Drawing.Point(159, 13);
@@ -250,21 +250,21 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             this.pnlJEV.Size = new System.Drawing.Size(150, 115);
             this.pnlJEV.TabIndex = 26;
             // 
-            // lnkJEV
+            // lnkCashReceiptJournal
             // 
-            this.lnkJEV.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lnkJEV.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lnkJEV.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkJEV.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkJEV.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkJEV.Location = new System.Drawing.Point(0, 61);
-            this.lnkJEV.Name = "lnkJEV";
-            this.lnkJEV.Padding = new System.Windows.Forms.Padding(2);
-            this.lnkJEV.Size = new System.Drawing.Size(150, 42);
-            this.lnkJEV.TabIndex = 15;
-            this.lnkJEV.TabStop = true;
-            this.lnkJEV.Text = "Cash Receipts Journal";
-            this.lnkJEV.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lnkCashReceiptJournal.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lnkCashReceiptJournal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lnkCashReceiptJournal.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lnkCashReceiptJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkCashReceiptJournal.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lnkCashReceiptJournal.Location = new System.Drawing.Point(0, 61);
+            this.lnkCashReceiptJournal.Name = "lnkCashReceiptJournal";
+            this.lnkCashReceiptJournal.Padding = new System.Windows.Forms.Padding(2);
+            this.lnkCashReceiptJournal.Size = new System.Drawing.Size(150, 42);
+            this.lnkCashReceiptJournal.TabIndex = 15;
+            this.lnkCashReceiptJournal.TabStop = true;
+            this.lnkCashReceiptJournal.Text = "Cash Receipts Journal";
+            this.lnkCashReceiptJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblCashReceiptsJournalCount
             // 
@@ -281,7 +281,7 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.linkDisapproved);
+            this.panel1.Controls.Add(this.lnkCheckDisbursementsJournal);
             this.panel1.Controls.Add(this.lblCheckDisbursementsJournalCount);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(627, 13);
@@ -290,21 +290,21 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             this.panel1.Size = new System.Drawing.Size(150, 115);
             this.panel1.TabIndex = 22;
             // 
-            // linkDisapproved
+            // lnkCheckDisbursementsJournal
             // 
-            this.linkDisapproved.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
-            this.linkDisapproved.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.linkDisapproved.Dock = System.Windows.Forms.DockStyle.Top;
-            this.linkDisapproved.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.linkDisapproved.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.linkDisapproved.Location = new System.Drawing.Point(0, 61);
-            this.linkDisapproved.Name = "linkDisapproved";
-            this.linkDisapproved.Padding = new System.Windows.Forms.Padding(2);
-            this.linkDisapproved.Size = new System.Drawing.Size(150, 42);
-            this.linkDisapproved.TabIndex = 16;
-            this.linkDisapproved.TabStop = true;
-            this.linkDisapproved.Text = "Check Disbursements Journal";
-            this.linkDisapproved.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lnkCheckDisbursementsJournal.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lnkCheckDisbursementsJournal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lnkCheckDisbursementsJournal.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lnkCheckDisbursementsJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkCheckDisbursementsJournal.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lnkCheckDisbursementsJournal.Location = new System.Drawing.Point(0, 61);
+            this.lnkCheckDisbursementsJournal.Name = "lnkCheckDisbursementsJournal";
+            this.lnkCheckDisbursementsJournal.Padding = new System.Windows.Forms.Padding(2);
+            this.lnkCheckDisbursementsJournal.Size = new System.Drawing.Size(150, 42);
+            this.lnkCheckDisbursementsJournal.TabIndex = 16;
+            this.lnkCheckDisbursementsJournal.TabStop = true;
+            this.lnkCheckDisbursementsJournal.Text = "Check Disbursements Journal";
+            this.lnkCheckDisbursementsJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblCheckDisbursementsJournalCount
             // 
@@ -321,7 +321,7 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.panel2.Controls.Add(this.lnkCancelled);
+            this.panel2.Controls.Add(this.lnkADAdisbursementsJournal);
             this.panel2.Controls.Add(this.lblADADisbursementsJournal);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(783, 13);
@@ -330,21 +330,22 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             this.panel2.Size = new System.Drawing.Size(155, 115);
             this.panel2.TabIndex = 23;
             // 
-            // lnkCancelled
+            // lnkADAdisbursementsJournal
             // 
-            this.lnkCancelled.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lnkCancelled.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lnkCancelled.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkCancelled.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkCancelled.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkCancelled.Location = new System.Drawing.Point(0, 61);
-            this.lnkCancelled.Name = "lnkCancelled";
-            this.lnkCancelled.Padding = new System.Windows.Forms.Padding(2);
-            this.lnkCancelled.Size = new System.Drawing.Size(155, 42);
-            this.lnkCancelled.TabIndex = 15;
-            this.lnkCancelled.TabStop = true;
-            this.lnkCancelled.Text = "ADA Disbursements Journal";
-            this.lnkCancelled.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lnkADAdisbursementsJournal.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lnkADAdisbursementsJournal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lnkADAdisbursementsJournal.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lnkADAdisbursementsJournal.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkADAdisbursementsJournal.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lnkADAdisbursementsJournal.Location = new System.Drawing.Point(0, 61);
+            this.lnkADAdisbursementsJournal.Name = "lnkADAdisbursementsJournal";
+            this.lnkADAdisbursementsJournal.Padding = new System.Windows.Forms.Padding(2);
+            this.lnkADAdisbursementsJournal.Size = new System.Drawing.Size(155, 42);
+            this.lnkADAdisbursementsJournal.TabIndex = 15;
+            this.lnkADAdisbursementsJournal.TabStop = true;
+            this.lnkADAdisbursementsJournal.Text = "ADA Disbursements Journal";
+            this.lnkADAdisbursementsJournal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lnkADAdisbursementsJournal.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkADAdisbursementsJournal_LinkClicked);
             // 
             // lblADADisbursementsJournal
             // 
@@ -390,22 +391,22 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel pnlPendingJEV;
-        private System.Windows.Forms.LinkLabel lnkPending;
+        private System.Windows.Forms.LinkLabel lnkCashDisbursementJournal;
         internal System.Windows.Forms.Label lblCashDisbursementsJournalCount;
         private System.Windows.Forms.Panel pnlApprovedJEV;
-        private System.Windows.Forms.LinkLabel lnkApproved;
+        private System.Windows.Forms.LinkLabel lnkGeneralJournal;
         internal System.Windows.Forms.Label lblGeneralJournalCount;
         private System.Windows.Forms.Panel pnlJEV;
-        private System.Windows.Forms.LinkLabel lnkJEV;
+        private System.Windows.Forms.LinkLabel lnkCashReceiptJournal;
         internal System.Windows.Forms.Label lblCashReceiptsJournalCount;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.LinkLabel linkDisapproved;
+        private System.Windows.Forms.LinkLabel lnkCheckDisbursementsJournal;
         internal System.Windows.Forms.Label lblCheckDisbursementsJournalCount;
         private System.Windows.Forms.Panel panel2;
-        internal System.Windows.Forms.LinkLabel lnkCancelled;
+        internal System.Windows.Forms.LinkLabel lnkADAdisbursementsJournal;
         internal System.Windows.Forms.Label lblADADisbursementsJournal;
         private System.Windows.Forms.Panel panel3;
-        internal System.Windows.Forms.LinkLabel linkLabel1;
+        internal System.Windows.Forms.LinkLabel lnkProcurementReceivedJournal;
         internal System.Windows.Forms.Label lblProcurementReceivedJournalCount;
     }
 }

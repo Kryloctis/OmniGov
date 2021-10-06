@@ -766,7 +766,7 @@ namespace ACC.Data
                     $"WHERE is_approved = 1 " +
                     $"AND fund_name = @fund_name " +
                     $"AND journal_name = @journal_name " +
-                    $"AND MONTH(date_entry) <= @month " +
+                    $"AND MONTH(date_entry) = @month " +
                     $"AND YEAR(date_entry) = @year";
 
                 if (string.IsNullOrWhiteSpace(_dbGenericCommands.ExecuteScalar(query, parameters)))

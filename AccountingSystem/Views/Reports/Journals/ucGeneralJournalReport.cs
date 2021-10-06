@@ -8,6 +8,9 @@ namespace AccountingSystem.Views.Reports.Journals
     public partial class ucGeneralJournalReport : UserControl
     {
         private readonly ReportViewer reportViewer;
+        internal string fundName;
+        internal string journalName;
+        internal DateTime date;
 
         public ucGeneralJournalReport()
         {
@@ -17,21 +20,10 @@ namespace AccountingSystem.Views.Reports.Journals
             panel1.Controls.Add(reportViewer);
         }
 
-        private void LoadFunds()
-        {
-            cmbFunds.DataSource = Factory.FundsRepository().GetRecords();
-            cmbFunds.ValueMember = "id";
-            cmbFunds.DisplayMember = "fund_name";
-        }
-
         private DataTable DataTableGeneralJournal()
         {
-            byte fundId = (byte)cmbFunds.SelectedValue;
-            byte journalId = 1;
-            var dateYearMonth = dtpMonth.Value;
-
             var dtGeneralJournal = new dsLFS.dtGeneralJournalDataTable();
-            var dtGeneralJournalFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundId, journalId, dateYearMonth);
+            var dtGeneralJournalFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundName, journalName, date);
 
             string jevNo;
             string particulars;
@@ -101,11 +93,10 @@ namespace AccountingSystem.Views.Reports.Journals
             {
                 Cursor.Current = Cursors.WaitCursor;
                 var lguDetails = Helper.LGUDetails();
-                var fundName = cmbFunds.Text;
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
 
                 var parameters = new[] {
-                    new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
+                    new ReportParameter("paramMonth", date.ToString()),
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                     new ReportParameter("paramFund", fundName),
                     new ReportParameter("paramSignatory", signatory)
@@ -115,6 +106,10 @@ namespace AccountingSystem.Views.Reports.Journals
 
                 report.DataSources.Add(new ReportDataSource("dtGeneralJournal", DataTableGeneralJournal()));
                 report.SetParameters(parameters);
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
+                reportViewer.RefreshReport();
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
@@ -123,22 +118,10 @@ namespace AccountingSystem.Views.Reports.Journals
             }
         }
 
-
-        private void btnRetrieve_Click(object sender, EventArgs e)
-        {
-
-            LoadReport(reportViewer.LocalReport);
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
-            reportViewer.RefreshReport();
-        }
-
         private void ucGeneralJournal_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
-                LoadFunds();
             }
         }
     }

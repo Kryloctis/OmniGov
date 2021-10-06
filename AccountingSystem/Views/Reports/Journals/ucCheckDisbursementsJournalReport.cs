@@ -8,6 +8,9 @@ namespace AccountingSystem.Views.Reports.Journals
     public partial class ucCheckDisbursementsJournalReport : UserControl
     {
         private readonly ReportViewer reportViewer;
+        internal string fundName;
+        internal string journalName;
+        internal DateTime date;
 
         public ucCheckDisbursementsJournalReport()
         {
@@ -17,21 +20,10 @@ namespace AccountingSystem.Views.Reports.Journals
             panel1.Controls.Add(reportViewer);
         }
 
-        private void LoadFunds()
-        {
-            cmbFunds.DataSource = Factory.FundsRepository().GetRecords();
-            cmbFunds.ValueMember = "id";
-            cmbFunds.DisplayMember = "fund_name";
-        }
-
         private DataTable CheckDisbursementsJournalDataTable()
         {
-            byte fundId = (byte)cmbFunds.SelectedValue;
-            byte journalId = 5;
-            var dateYearMonth = dtpMonth.Value;
-
             var dtCheckDisbursementsJournal = new dsLFS.CheckDisbursementsJournalDataTable();
-            var dtCheckDisbursementFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundId, journalId, dateYearMonth);
+            var dtCheckDisbursementFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundName, journalName, date);
 
             int jevId;
             string jevNo;
@@ -75,7 +67,6 @@ namespace AccountingSystem.Views.Reports.Journals
             {
                 Cursor.Current = Cursors.WaitCursor;
                 var lguDetails = Helper.LGUDetails();
-                var fundName = cmbFunds.Text;
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
                 byte journalId = 5;
 
@@ -107,7 +98,7 @@ namespace AccountingSystem.Views.Reports.Journals
                 int defaultAccountIDThird = defaultAccountId(2);
 
                 var parameters = new[] {
-                    new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
+                    new ReportParameter("paramMonth", date.ToString()),
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                     new ReportParameter("paramFund", fundName),
                     new ReportParameter("paramSignatory", signatory),
@@ -126,6 +117,9 @@ namespace AccountingSystem.Views.Reports.Journals
 
                 report.DataSources.Add(new ReportDataSource("CheckDisbursementsJournal", CheckDisbursementsJournalDataTable()));
                 report.SetParameters(parameters);
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.PageWidth;
+                reportViewer.RefreshReport();
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
@@ -134,19 +128,10 @@ namespace AccountingSystem.Views.Reports.Journals
             }
         }
 
-        private void btnRetrieve_Click(object sender, EventArgs e)
-        {
-            LoadReport(reportViewer.LocalReport);
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.PageWidth;
-            reportViewer.RefreshReport();
-        }
-
         private void ucCheckDisbursementsJournalReport_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
-                LoadFunds();
             }
         }
     }

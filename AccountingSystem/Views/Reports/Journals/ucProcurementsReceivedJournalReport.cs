@@ -8,6 +8,9 @@ namespace AccountingSystem.Views.Reports.Journals
     public partial class ucProcurementsReceivedJournalReport : UserControl
     {
         private readonly ReportViewer reportViewer;
+        internal string fundName;
+        internal string journalName;
+        internal DateTime date;
 
         public ucProcurementsReceivedJournalReport()
         {
@@ -17,21 +20,10 @@ namespace AccountingSystem.Views.Reports.Journals
             panel1.Controls.Add(reportViewer);
         }
 
-        private void LoadFunds()
-        {
-            cmbFunds.DataSource = Factory.FundsRepository().GetRecords();
-            cmbFunds.ValueMember = "id";
-            cmbFunds.DisplayMember = "fund_name";
-        }
-
         private DataTable ProcurementsReceivedJournalDataTable()
         {
-            byte fundId = (byte)cmbFunds.SelectedValue;
-            byte journalId = 3;
-            var dateYearMonth = dtpMonth.Value;
-
             var dtProcurementsReceivedJournal = new dsLFS.ProcurementsReceivedJournalDataTable();
-            var dtProcurementsReceivedFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundId, journalId, dateYearMonth);
+            var dtProcurementsReceivedFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundName, journalName, date);
 
             string jevNo;
             string particulars;
@@ -71,7 +63,6 @@ namespace AccountingSystem.Views.Reports.Journals
             {
                 Cursor.Current = Cursors.WaitCursor;
                 var lguDetails = Helper.LGUDetails();
-                var fundName = cmbFunds.Text;
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
                 byte journalId = 3;
 
@@ -100,7 +91,7 @@ namespace AccountingSystem.Views.Reports.Journals
                 int defaultAccountIDSecond = defaultAccountId(1);
 
                 var parameters = new[] {
-                    new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
+                    new ReportParameter("paramMonth", date.ToString()),
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                     new ReportParameter("paramFund", fundName),
                     new ReportParameter("paramSignatory", signatory),
@@ -115,6 +106,9 @@ namespace AccountingSystem.Views.Reports.Journals
 
                 report.DataSources.Add(new ReportDataSource("ProcurementsReceivedJournal", ProcurementsReceivedJournalDataTable()));
                 report.SetParameters(parameters);
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.PageWidth;
+                reportViewer.RefreshReport();
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
@@ -123,19 +117,10 @@ namespace AccountingSystem.Views.Reports.Journals
             }
         }
 
-        private void btnRetrieve_Click(object sender, EventArgs e)
-        {
-            LoadReport(reportViewer.LocalReport);
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.PageWidth;
-            reportViewer.RefreshReport();
-        }
-
         private void ucProcurementsReceivedJournalReport_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
-                LoadFunds();
             }
         }
     }

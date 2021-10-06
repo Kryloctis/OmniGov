@@ -1,23 +1,30 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Journals
 {
-    public partial class ucADADisbursementsJournalReport : UserControl
+    public partial class frmADADisbursementsJournalReport : Form
     {
         private readonly ReportViewer reportViewer;
         internal string fundName;
         internal string journalName;
         internal DateTime date;
 
-        public ucADADisbursementsJournalReport()
+        public frmADADisbursementsJournalReport()
         {
             InitializeComponent();
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
+            Helper.LoadFormIcon(this);
         }
 
         private DataTable AuthorityToDebitAccountDisbursementsJournalDataTable()
@@ -114,6 +121,13 @@ namespace AccountingSystem.Views.Reports.Journals
 
                 report.DataSources.Add(new ReportDataSource("AuthorityToDebitAccountDisbursementsJournal", AuthorityToDebitAccountDisbursementsJournalDataTable()));
                 report.SetParameters(parameters);
+
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
+
+                reportViewer.RefreshReport();
+
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
@@ -122,20 +136,9 @@ namespace AccountingSystem.Views.Reports.Journals
             }
         }
 
-        private void btnRetrieve_Click(object sender, EventArgs e)
+        private void frmADADisbursementsJournalReport_Load(object sender, EventArgs e)
         {
             LoadReport(reportViewer.LocalReport);
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.PageWidth;
-            reportViewer.RefreshReport();
-        }
-
-        private void ucADADisbursementsJournalReport_Load(object sender, EventArgs e)
-        {
-            if (!DesignMode)
-            {
-                LoadFunds();
-            }
         }
     }
 }
