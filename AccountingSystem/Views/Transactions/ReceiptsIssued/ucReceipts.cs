@@ -123,7 +123,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtfrom, "Receipt No. From!");
             if(Convert.ToInt32(txtfrom.Text.Trim()) < startingreceipt)
             {
-                errorProvider.SetError(txtfrom, "Invalid Receipt Number!"+ startingreceipt.ToString());
+                errorProvider.SetError(txtfrom, "Invalid Receipt Number!");
                 e.Cancel = true;
             }
         }
@@ -176,14 +176,15 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             int from = txtfrom.Text.Length > 0 ? Convert.ToInt32(txtfrom.Text.Trim()) : 0;
             int to = txtto.Text.Length > 0 ? Convert.ToInt32(txtto.Text.Trim()) : 0;
-            txtquantity.Text = from.Equals(1) ? ((from + to) - from).ToString() : from==to ? "1":(to - from).ToString();
+            //txtquantity.Text = from.Equals(1) ? ((from + to) - from).ToString() : from==to ? "1":(to - from).ToString();
+            txtquantity.Text = ((to - from) + 1).ToString();
         }
 
         private void txtto_KeyUp(object sender, KeyEventArgs e)
         {
             int from = txtfrom.Text.Length > 0 ? Convert.ToInt32(txtfrom.Text.Trim()) : 0;
             int to = txtto.Text.Length > 0 ? Convert.ToInt32(txtto.Text.Trim()) : 0;
-            txtquantity.Text = from.Equals(1) ? ((from + to) - from).ToString() : from == to ? "1" : (to - from).ToString();
+            txtquantity.Text = ((to - from) + 1).ToString();
         }
 
 
@@ -232,8 +233,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 }
 
                 data = startingreceipt > maxreceipt ? "0" : data;
-                maxreceipt = startingreceipt > maxreceipt ? 0 : maxreceipt;
-                startingreceipt = startingreceipt > maxreceipt ? 0 : startingreceipt;
+                maxreceipt = startingreceipt > maxreceipt ? 1 : maxreceipt;
+                startingreceipt = startingreceipt > maxreceipt ? 1 : startingreceipt;
 
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

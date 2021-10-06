@@ -37,6 +37,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     ucpc1.cmbcollector.SelectedValue = data["id"];
                     ucpc1.cmbcollector.Enabled = false;
                 }
+               // ucpc1.LoadForms(Helper.UserId);
             }
            
         }
@@ -71,6 +72,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 {
                     Helper.MessageBoxSuccess("Receipt already exists!.");
                     uc.txtreceipt.Focus();
+                    return false;
+                }
+                else if(uc.txtamount.Value <= 0)
+                {
+                    Helper.MessageBoxSuccess("Empty Amount!.");
+                    uc.txtamount.Focus();
                     return false;
                 }
                 else

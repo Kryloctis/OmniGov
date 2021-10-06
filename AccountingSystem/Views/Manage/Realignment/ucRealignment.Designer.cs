@@ -43,7 +43,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtAppropriationBalance = new System.Windows.Forms.TextBox();
-            this.txtBudgetId = new System.Windows.Forms.Label();
             this.cmbAllotmentClass = new System.Windows.Forms.ComboBox();
             this.cmbFPP = new System.Windows.Forms.ComboBox();
             this.cmbFunds = new System.Windows.Forms.ComboBox();
@@ -181,7 +180,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txtAppropriationBalance);
-            this.groupBox1.Controls.Add(this.txtBudgetId);
             this.groupBox1.Controls.Add(this.cmbAllotmentClass);
             this.groupBox1.Controls.Add(this.btnAdd);
             this.groupBox1.Controls.Add(this.cmbFPP);
@@ -216,16 +214,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.txtAppropriationBalance.TabIndex = 50;
             this.txtAppropriationBalance.TabStop = false;
             this.txtAppropriationBalance.Text = "0.0";
-            // 
-            // txtBudgetId
-            // 
-            this.txtBudgetId.AutoSize = true;
-            this.txtBudgetId.Location = new System.Drawing.Point(9, 47);
-            this.txtBudgetId.Name = "txtBudgetId";
-            this.txtBudgetId.Size = new System.Drawing.Size(21, 15);
-            this.txtBudgetId.TabIndex = 49;
-            this.txtBudgetId.Text = "ID ";
-            this.txtBudgetId.Visible = false;
             // 
             // cmbAllotmentClass
             // 
@@ -478,7 +466,6 @@ namespace AccountingSystem.Views.Manage.Realignment
         internal System.Windows.Forms.ErrorProvider epRemarks;
         private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.TextBox txtTotalAmountRealigned;
-        public System.Windows.Forms.Label txtBudgetId;
         internal System.Windows.Forms.TextBox txtAppropriationBalance;
     }
 }

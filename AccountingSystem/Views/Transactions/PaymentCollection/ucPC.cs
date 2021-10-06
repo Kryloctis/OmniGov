@@ -141,6 +141,20 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        internal void LoadForms(int id)
+        {
+            try
+            {
+                var formRepository = Factory.AccountableRepository();
+                var dtforms = formRepository.GetRecords(id);
+                dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
+                cmbforms.DataSource = dtforms;
+                cmbforms.ValueMember = "id";
+                cmbforms.DisplayMember = "formdisplay";
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
         public void loadSelectedLedger(int Id, string value)
         {
             glaId = Id;
@@ -359,6 +373,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             if(cmbcollector.SelectedIndex != -1)
             {
+                DataRowView collector = cmbcollector.SelectedItem as DataRowView;
                 cmbfund.Enabled = true;
                 cmbforms.Enabled = true;
                 btnledger.Enabled = true;
@@ -369,6 +384,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 txtledger.Enabled = true;
                 btnledger.Enabled = true;
                 cmbsubsidiary.Enabled = true;
+                LoadForms(int.Parse(collector[0].ToString()));
             }
             else
             {
