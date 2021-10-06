@@ -1,4 +1,7 @@
 ﻿using AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary;
+using AccountingSystem.Views.Manage.AllotmentRelease;
+using AccountingSystem.Views.Manage.BudgetAppropriations;
+using AccountingSystem.Views.Transactions.ObligationRequest;
 using System;
 using System.Windows.Forms;
 
@@ -30,6 +33,21 @@ namespace AccountingSystem.Views.Dashboard
                 tabControl1.SelectedTab = tabBudgetDetailed;
             else
                 tabControl1.SelectedTab = tabBudgetSummary;
+        }
+
+        private void btnBudgetAppropriations_Click(object sender, EventArgs e)
+        {
+            _ = new frmBudgetAppropriations().ShowDialog();
+        }
+
+        private void btnAllotmentRelease_Click(object sender, EventArgs e)
+        {
+            _ = new frmAllotmentReleaseMain().ShowDialog();
+        }
+
+        private void btnObligationRequest_Click(object sender, EventArgs e)
+        {
+            _ = new frmObligationRequestMain().ShowDialog();
         }
     }
 }

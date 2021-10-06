@@ -749,16 +749,25 @@ namespace ACC.Data
             return record;
         }
 
-        public int JevCounter(byte journalId)
+        public int JevCounterByJournal(string fundName, int month, int year, string journalName)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@journals_id", DbType.Int32, journalId },
+                    new object[] { "@fund_name", DbType.String, fundName },
+                    new object[] { "@month", DbType.Int32, month},
+                    new object[] { "@year", DbType.Int32, year},
+                    new object[] { "@journal_name", DbType.String, journalName }
                 };
 
-                string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved = 1 AND journals_id = @journals_id GROUP BY journals_id";
+                string query = $"SELECT COUNT(*) " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE is_approved = 1 " +
+                    $"AND fund_name = @fund_name " +
+                    $"AND journal_name = @journal_name " +
+                    $"AND MONTH(date_entry) = @month " +
+                    $"AND YEAR(date_entry) = @year";
 
                 if (string.IsNullOrWhiteSpace(_dbGenericCommands.ExecuteScalar(query, parameters)))
                     return 0;

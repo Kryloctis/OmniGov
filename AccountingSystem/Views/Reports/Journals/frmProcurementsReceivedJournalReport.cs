@@ -1,71 +1,67 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Journals
 {
-    public partial class ucADADisbursementsJournalReport : UserControl
+    public partial class frmProcurementsReceivedJournalReport : Form
     {
         private readonly ReportViewer reportViewer;
+        internal string fundName;
+        internal string journalName;
+        internal DateTime date;
 
-        public ucADADisbursementsJournalReport()
+        public frmProcurementsReceivedJournalReport()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
         }
 
-        private void LoadFunds()
+        private DataTable ProcurementsReceivedJournalDataTable()
         {
-            cmbFunds.DataSource = Factory.FundsRepository().GetRecords();
-            cmbFunds.ValueMember = "id";
-            cmbFunds.DisplayMember = "fund_name";
-        }
+            var dtProcurementsReceivedJournal = new dsLFS.ProcurementsReceivedJournalDataTable();
+            var dtProcurementsReceivedFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundName, journalName, date);
 
-        private DataTable AuthorityToDebitAccountDisbursementsJournalDataTable()
-        {
-            byte fundId = (byte)cmbFunds.SelectedValue;
-            byte journalId = 6;
-            var dateYearMonth = dtpMonth.Value;
-
-            var dtADADisbursementsJournal = new dsLFS.AuthorityToDebitAccountDisbursementsJournalDataTable();
-            var dtADADisbursementsFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundId, journalId, dateYearMonth);
-
-            int jevId;
             string jevNo;
+            string particulars;
 
-            var aDADisbursementsJournalRepository = Factory.ADADisbursementsJournalRepository();
-            foreach (DataRow item in dtADADisbursementsFromDB.Rows)
+            foreach (DataRow item in dtProcurementsReceivedFromDB.Rows)
             {
-                jevId = Convert.ToInt32(item["jev_id"]);
                 jevNo = item["jev_no"].ToString();
+                particulars = item["explanation"].ToString();
 
-                var aDADDisbursementsDict = aDADisbursementsJournalRepository.GetRecordByJevID(jevId);
-                DataRow row = dtADADisbursementsJournal.NewRow();
+                DataRow row = dtProcurementsReceivedJournal.NewRow();
                 row["date"] = item["date_entry"];
-                row["ada_no"] = aDADDisbursementsDict["ada_no"];
-                row["ref_no"] = jevNo;
-                row["particulars"] = item["explanation"];
+                row["ref"] = jevNo;
+                row["particulars"] = particulars;
 
                 if (Convert.ToBoolean(item["is_debit"]))
                 {
                     row["account_id_debit"] = item["general_ledger_accounts_id"];
                     row["account_code_debit"] = item["account_code"];
-                    row["amount_debit"] = item["amount"];
+                    row["debit"] = item["amount"];
                 }
                 else
                 {
                     row["account_id_credit"] = item["general_ledger_accounts_id"];
                     row["account_code_credit"] = item["account_code"];
-                    row["amount_credit"] = item["amount"];
+                    row["credit"] = item["amount"];
                 }
 
-                dtADADisbursementsJournal.Rows.Add(row);
+                dtProcurementsReceivedJournal.Rows.Add(row);
             }
 
-            return dtADADisbursementsJournal;
+            return dtProcurementsReceivedJournal;
         }
 
         private void LoadReport(LocalReport report)
@@ -74,9 +70,8 @@ namespace AccountingSystem.Views.Reports.Journals
             {
                 Cursor.Current = Cursors.WaitCursor;
                 var lguDetails = Helper.LGUDetails();
-                var fundName = cmbFunds.Text;
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
-                byte journalId = 6;
+                byte journalId = 3;
 
                 DataTable defaultAccountsDataTable = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId);
 
@@ -98,30 +93,30 @@ namespace AccountingSystem.Views.Reports.Journals
 
                 string defaultAccountCodeFirst = defaultAccountCode(0);
                 string defaultAccountCodeSecond = defaultAccountCode(1);
-                string defaultAccountCodeThird = defaultAccountCode(2);
 
                 int defaultAccountIDFirst = defaultAccountId(0);
                 int defaultAccountIDSecond = defaultAccountId(1);
-                int defaultAccountIDThird = defaultAccountId(2);
 
                 var parameters = new[] {
-                    new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
+                    new ReportParameter("paramMonth", date.ToString()),
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                     new ReportParameter("paramFund", fundName),
                     new ReportParameter("paramSignatory", signatory),
                     new ReportParameter("paramDefaultAccountCodeFirst", defaultAccountCodeFirst),
                     new ReportParameter("paramDefaultAccountCodeSecond", defaultAccountCodeSecond),
-                    new ReportParameter("paramDefaultAccountCodeThird", defaultAccountCodeThird),
                     new ReportParameter("paramDefaultAccountIDFirst", defaultAccountIDFirst.ToString()),
                     new ReportParameter("paramDefaultAccountIDSecond", defaultAccountIDSecond.ToString()),
-                    new ReportParameter("paramDefaultAccountIDThird", defaultAccountIDThird.ToString()),
                 };
 
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\authority-to-debit-account-disbursements.rdlc";
+                report.ReportPath = $"{Application.StartupPath}\\Reports\\procurements-received-journal.rdlc";
                 report.DataSources.Clear();
 
-                report.DataSources.Add(new ReportDataSource("AuthorityToDebitAccountDisbursementsJournal", AuthorityToDebitAccountDisbursementsJournalDataTable()));
+                report.DataSources.Add(new ReportDataSource("ProcurementsReceivedJournal", ProcurementsReceivedJournalDataTable()));
                 report.SetParameters(parameters);
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
+                reportViewer.RefreshReport();
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
@@ -130,20 +125,9 @@ namespace AccountingSystem.Views.Reports.Journals
             }
         }
 
-        private void btnRetrieve_Click(object sender, EventArgs e)
+        private void frmProcurementsReceivedJournalReport_Load(object sender, EventArgs e)
         {
             LoadReport(reportViewer.LocalReport);
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.PageWidth;
-            reportViewer.RefreshReport();
-        }
-
-        private void ucADADisbursementsJournalReport_Load(object sender, EventArgs e)
-        {
-            if (!DesignMode)
-            {
-                LoadFunds();
-            }
         }
     }
 }
