@@ -156,9 +156,7 @@ namespace AccountingSystem.Views.Manage.Realignment
         private DataTable DatatableAccounts()
         {
             DataTable dtRealignmentAccounts;
-
-            dtRealignmentAccounts = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntryAndBudgetAppropriationId(fppId.ToString(), othersFPPId ,fundId, allotmentClassId, dtDateIssued.Value, Convert.ToInt32(txtBudgetId.Text));
-
+            dtRealignmentAccounts = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppId.ToString(), othersFPPId ,fundId, allotmentClassId, dtDateIssued.Value);
             return dtRealignmentAccounts;
         }
 

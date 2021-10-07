@@ -31,7 +31,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnOK = new System.Windows.Forms.Button();
+            this.btnSelect = new System.Windows.Forms.Button();
             this.dgJEV = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cmbxJevStatus = new System.Windows.Forms.ComboBox();
@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
-            this.flowLayoutPanel1.Controls.Add(this.btnOK);
+            this.flowLayoutPanel1.Controls.Add(this.btnSelect);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 383);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -66,23 +66,20 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnCancel.Size = new System.Drawing.Size(82, 22);
             this.btnCancel.TabIndex = 1;
-            this.btnCancel.Text = "Cancel";
+            this.btnCancel.Text = "Close";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // btnOK
+            // btnSelect
             // 
-            this.btnOK.Image = global::AccountingSystem.Properties.Resources.ok14px;
-            this.btnOK.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnOK.Location = new System.Drawing.Point(757, 2);
-            this.btnOK.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnOK.Size = new System.Drawing.Size(82, 22);
-            this.btnOK.TabIndex = 0;
-            this.btnOK.Text = "OK";
-            this.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            this.btnSelect.Location = new System.Drawing.Point(757, 2);
+            this.btnSelect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnSelect.Size = new System.Drawing.Size(82, 22);
+            this.btnSelect.TabIndex = 2;
+            this.btnSelect.Text = "Select";
+            this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // dgJEV
             // 
@@ -185,9 +182,10 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dgJEV);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(946, 449);
             this.Name = "frmJEVSearch";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -213,6 +211,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.TextBox txtSearch;
         internal System.Windows.Forms.ComboBox cmbxJevStatus;
         internal System.Windows.Forms.ComboBox cbMonth;
-        internal System.Windows.Forms.Button btnOK;
+        internal System.Windows.Forms.Button btnSelect;
     }
 }
