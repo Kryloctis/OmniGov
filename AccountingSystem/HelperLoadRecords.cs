@@ -1329,6 +1329,16 @@ namespace AccountingSystem
 
         }
 
+
+        internal static void ComboboxJournals(DataTable dataTable, ComboBox comboBox, string valueMember, string displayMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+            comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+        }
+
         #endregion DASHBOARD
 
         #region Supplemental Appropriations

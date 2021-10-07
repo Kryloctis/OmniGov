@@ -50,13 +50,13 @@ namespace AccountingSystem.Views.Manage.Receipts
                 };
 
                 var rcRepository = Factory.ReceiptsRepository();
-                if (rcRepository.ReceiptExist(Convert.ToInt32(uc.cmbforms.SelectedValue), Convert.ToInt32(uc.txtfrom.Text.Trim()), Convert.ToInt32(uc.txtto.Text.Trim())))
+               /* if (rcRepository.ReceiptExist(Convert.ToInt32(uc.cmbforms.SelectedValue), Convert.ToInt32(uc.txtfrom.Text.Trim()), Convert.ToInt32(uc.txtto.Text.Trim())))
                 {
                     Helper.MessageBoxError("Receipt already exists!");
                     uc.cmbforms.Focus();
                     return false;
                 }
-                else if (Convert.ToInt32(uc.txtfrom.Text.Trim()) > Convert.ToInt32(uc.txtto.Text.Trim()))
+                else */if (Convert.ToInt32(uc.txtfrom.Text.Trim()) > Convert.ToInt32(uc.txtto.Text.Trim()))
                 {
                     Helper.MessageBoxError("Invalid Receipt!");
                     return false;

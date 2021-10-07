@@ -184,7 +184,7 @@ namespace ACC.Data
                     new object[] { "@receiptsto", DbType.Int32, to }
                 };
 
-                string query = $"SELECT * FROM {tableName} WHERE accountable_forms_id = @accountable_forms_id AND receiptsfrom=@receiptsfrom AND receiptsto=@receiptsto";
+                string query = $"SELECT * FROM {tableName} WHERE accountable_forms_id = @accountable_forms_id AND ((receiptsfrom BETWEEN @receiptsfrom AND @receiptsto) OR (receiptsto BETWEEN @receiptsfrom AND @receiptsto))";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -196,6 +196,52 @@ namespace ACC.Data
             };
 
             return false;
+        }
+
+        public int RMAX(int accid)
+        {
+            int value = 0;
+            try
+            {               
+                string query = $"SELECT IFNULL(MAX(receiptsto),0) AS receiptno FROM {tableName} WHERE accountable_forms_id = {accid}";
+                DataTable dt = _dbGenericCommands.Fill(query,new DataTable());
+                if(dt.Rows.Count > 0)
+                {
+                    for(int i=0;i < dt.Rows.Count; i++)
+                    {
+                        value = int.Parse(dt.Rows[i]["receiptno"].ToString());
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return value;
+        }
+
+        public int RMIN(int accid)
+        {
+            int value = 0;
+            try
+            {
+                string query = $"SELECT IFNULL(MAX(receiptsfrom),0) AS receiptno FROM {tableName} WHERE accountable_forms_id = {accid}";
+                DataTable dt = _dbGenericCommands.Fill(query, new DataTable());
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        value = int.Parse(dt.Rows[i]["receiptno"].ToString());
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return value;
         }
 
         public bool ReceiptConsumed(int id)

@@ -163,7 +163,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txtAppropriationBalance);
-            this.groupBox1.Controls.Add(this.txtBudgetId);
             this.groupBox1.Controls.Add(this.cmbAllotmentClass);
             this.groupBox1.Controls.Add(this.btnAdd);
             this.groupBox1.Controls.Add(this.cmbFPP);

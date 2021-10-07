@@ -180,7 +180,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT a.id, a.first_name, a.mid_initial, a.last_name, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id = b.id WHERE a.id NOT IN(SELECT users_id FROM {tableName2}) AND b.role_name <> 'System Administrator'";
+                string query = $"SELECT a.id, a.first_name, a.mid_initial, a.last_name, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a LEFT JOIN roles b on a.roles_id = b.id WHERE a.id NOT IN(SELECT IFNULL(users_id,0) FROM {tableName2}) AND b.role_name LIKE '%collect%'";
                 var dtUsers = new DataTable();
                 return _dbGenericCommands.Fill(query, dtUsers);
             }
@@ -194,7 +194,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT a.id, a.first_name, a.mid_initial, a.last_name, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id = b.id WHERE a.id NOT IN(SELECT users_id FROM {tableName3}) AND b.role_name <> 'System Administrator'";
+                string query = $"SELECT a.id, a.first_name, a.mid_initial, a.last_name, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a LEFT JOIN roles b on a.roles_id = b.id WHERE a.id NOT IN(SELECT IFNULL(users_id,0) FROM {tableName3}) AND b.role_name LIKE '%disburs%'";
                 var dtUsers = new DataTable();
                 return _dbGenericCommands.Fill(query, dtUsers);
             }

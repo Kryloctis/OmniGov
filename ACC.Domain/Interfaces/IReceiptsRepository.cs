@@ -13,5 +13,7 @@ namespace ACC.Domain.Interfaces
         DataTable NextReceipt(int id);
         DataTable FirstReceipt(int id);
         bool ReceiptsIssued(int id);
+        int RMAX(int accid);
+        int RMIN(int accid);
     }
 }
