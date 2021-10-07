@@ -101,10 +101,10 @@ namespace AccountingSystem
                 ucBudgetDashboard1.btnObligationRequest.Visible = false;
 
             if (!Helper.HasPermission("Report General Journal") && !Helper.HasPermission("Report Cash Receipts Journal") && !Helper.HasPermission("Report Procurement Received Journal") && !Helper.HasPermission("Report Cash Disbursements Journal") && !Helper.HasPermission("Report Check Disbursements Journal") && !Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
-                tabJournals.Visible = false;
+                tabPageJournals.Visible = false;
 
             if (!Helper.HasPermission("Report General Ledger") && !Helper.HasPermission("Report Subsidiary Ledger"))
-                menuLedgersReport.Visible = false;
+                tabPageLedgers.Visible = false;
 
             if (!Helper.HasPermission("Manage Banks"))
                 menuBanks.Visible = false;
@@ -241,11 +241,6 @@ namespace AccountingSystem
             _ = new frmUsers().ShowDialog();
         }
 
-        private void menuJEV_Click(object sender, EventArgs e)
-        {
-            _ = new frmJEV(null).ShowDialog();
-        }
-
         private void menuFunctionProgramProject_Click(object sender, EventArgs e)
         {
             _ = new frmFunctionProgramProject().ShowDialog();
@@ -261,11 +256,6 @@ namespace AccountingSystem
             _ = new frmBanks().ShowDialog();
         }
 
-        private void menuRCI_Click(object sender, EventArgs e)
-        {
-            _ = new frmRCI().ShowDialog();
-        }
-
         private void menuprintRCI_Click(object sender, EventArgs e)
         {
             _ = new frmRCIReport().ShowDialog();
@@ -275,8 +265,6 @@ namespace AccountingSystem
         {
             _ = new frmDisbursingOfficer().ShowDialog();
         }
-
-
 
         private void menuAccForm_Click(object sender, EventArgs e)
         {
@@ -304,16 +292,6 @@ namespace AccountingSystem
             _ = new frmGCList().ShowDialog();
         }
 
-        private void menuPayments_Click(object sender, EventArgs e)
-        {
-            _ = new frmPaymentCollection().ShowDialog();
-        }
-
-        private void menuDeposits_Click(object sender, EventArgs e)
-        {
-            _ = new frmBankDeposits().ShowDialog();
-        }
-
         private void menuprintGC_Click(object sender, EventArgs e)
         {
             _ = new frmPCReport().ShowDialog();
@@ -324,11 +302,6 @@ namespace AccountingSystem
             _ = new frmAccForms().ShowDialog();
         }
 
-        private void menureceiptsissued_Click(object sender, EventArgs e)
-        {
-            _ = new frmReceipts().ShowDialog();
-        }
-
         private void menucashbook_Click(object sender, EventArgs e)
         {
             _ = new frmCashbook().ShowDialog();
@@ -337,11 +310,6 @@ namespace AccountingSystem
         private void menuJEVS_Click_1(object sender, EventArgs e)
         {
             _ = new frmJEVReport(0, null, 0).ShowDialog();
-        }
-
-        private void menuGenerateRCD_Click(object sender, EventArgs e)
-        {
-            _ = new frmRCD().ShowDialog();
         }
 
 
@@ -374,15 +342,6 @@ namespace AccountingSystem
 
         #endregion
 
-        private void menuLedgersReport_Click(object sender, EventArgs e)
-        {
-            _ = new frmLedger().ShowDialog();
-        }
-
-        private void menuJournalsReport_Click(object sender, EventArgs e)
-        {
-        }
-
         private void financialStatementsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmFinancialStatements().ShowDialog();
@@ -396,6 +355,16 @@ namespace AccountingSystem
         private void radioSubsidiaryLedger_CheckedChanged(object sender, EventArgs e)
         {
             tabControlLedgers.SelectedTab = tabPageSubsidiaryLedger;
+        }
+
+        private void radioPreTB_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControlTrialBalance.SelectedTab = tabPagePreTrial;
+        }
+
+        private void radioPostTB_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControlTrialBalance.SelectedTab = tabPagePostTrial;
         }
     }
 }

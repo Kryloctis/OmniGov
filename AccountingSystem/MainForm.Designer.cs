@@ -71,11 +71,11 @@ namespace AccountingSystem
             this.ucBudgetDashboard1 = new AccountingSystem.Views.Dashboard.ucBudgetDashboard();
             this.tabPageAccounting = new System.Windows.Forms.TabPage();
             this.tabControlAccounting = new System.Windows.Forms.TabControl();
-            this.tabJournalEntryVoucher = new System.Windows.Forms.TabPage();
+            this.tabPageJournalEntryVoucher = new System.Windows.Forms.TabPage();
             this.ucjevDashboard1 = new AccountingSystem.Views.Dashboard.ucJEVDashboard();
-            this.tabJournals = new System.Windows.Forms.TabPage();
+            this.tabPageJournals = new System.Windows.Forms.TabPage();
             this.ucJournalsDashboard1 = new AccountingSystem.Views.Dashboard.AccountingDashboard.ucJournalsDashboard();
-            this.tabLedgers = new System.Windows.Forms.TabPage();
+            this.tabPageLedgers = new System.Windows.Forms.TabPage();
             this.tabControlLedgers = new System.Windows.Forms.TabControl();
             this.tabPageGeneralLedger = new System.Windows.Forms.TabPage();
             this.ucGeneralLedger1 = new AccountingSystem.Views.Reports.Ledgers.ucGeneralLedger();
@@ -85,8 +85,16 @@ namespace AccountingSystem
             this.radioGeneralLedger = new System.Windows.Forms.RadioButton();
             this.radioSubsidiaryLedger = new System.Windows.Forms.RadioButton();
             this.radioTransactionLog = new System.Windows.Forms.RadioButton();
-            this.tabTrialBalance = new System.Windows.Forms.TabPage();
-            this.tabFinancialStatements = new System.Windows.Forms.TabPage();
+            this.tabPageTrialBalance = new System.Windows.Forms.TabPage();
+            this.tabControlTrialBalance = new System.Windows.Forms.TabControl();
+            this.tabPagePreTrial = new System.Windows.Forms.TabPage();
+            this.ucPreClosingTrialBalance1 = new AccountingSystem.Views.Reports.TrialBalance.ucPreClosingTrialBalance();
+            this.tabPagePostTrial = new System.Windows.Forms.TabPage();
+            this.ucPostClosingTrialBalance1 = new AccountingSystem.Views.Reports.TrialBalance.ucPostClosingTrialBalance();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.radioPostTB = new System.Windows.Forms.RadioButton();
+            this.radioPreTB = new System.Windows.Forms.RadioButton();
+            this.tabPageFinancialStatements = new System.Windows.Forms.TabPage();
             this.tabPageTreasury = new System.Windows.Forms.TabPage();
             this.ucTreasuryDashboard1 = new AccountingSystem.Views.Dashboard.TreasuryDashboard.ucTreasuryDashboard();
             this.menuStrip1.SuspendLayout();
@@ -96,13 +104,18 @@ namespace AccountingSystem
             this.tabPageBudget.SuspendLayout();
             this.tabPageAccounting.SuspendLayout();
             this.tabControlAccounting.SuspendLayout();
-            this.tabJournalEntryVoucher.SuspendLayout();
-            this.tabJournals.SuspendLayout();
-            this.tabLedgers.SuspendLayout();
+            this.tabPageJournalEntryVoucher.SuspendLayout();
+            this.tabPageJournals.SuspendLayout();
+            this.tabPageLedgers.SuspendLayout();
             this.tabControlLedgers.SuspendLayout();
             this.tabPageGeneralLedger.SuspendLayout();
             this.tabPageSubsidiaryLedger.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            this.tabPageTrialBalance.SuspendLayout();
+            this.tabControlTrialBalance.SuspendLayout();
+            this.tabPagePreTrial.SuspendLayout();
+            this.tabPagePostTrial.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.tabPageTreasury.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -484,11 +497,11 @@ namespace AccountingSystem
             // 
             // tabControlAccounting
             // 
-            this.tabControlAccounting.Controls.Add(this.tabJournalEntryVoucher);
-            this.tabControlAccounting.Controls.Add(this.tabJournals);
-            this.tabControlAccounting.Controls.Add(this.tabLedgers);
-            this.tabControlAccounting.Controls.Add(this.tabTrialBalance);
-            this.tabControlAccounting.Controls.Add(this.tabFinancialStatements);
+            this.tabControlAccounting.Controls.Add(this.tabPageJournalEntryVoucher);
+            this.tabControlAccounting.Controls.Add(this.tabPageJournals);
+            this.tabControlAccounting.Controls.Add(this.tabPageLedgers);
+            this.tabControlAccounting.Controls.Add(this.tabPageTrialBalance);
+            this.tabControlAccounting.Controls.Add(this.tabPageFinancialStatements);
             this.tabControlAccounting.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlAccounting.Location = new System.Drawing.Point(0, 0);
             this.tabControlAccounting.Margin = new System.Windows.Forms.Padding(0);
@@ -497,17 +510,17 @@ namespace AccountingSystem
             this.tabControlAccounting.Size = new System.Drawing.Size(1172, 597);
             this.tabControlAccounting.TabIndex = 0;
             // 
-            // tabJournalEntryVoucher
+            // tabPageJournalEntryVoucher
             // 
-            this.tabJournalEntryVoucher.Controls.Add(this.ucjevDashboard1);
-            this.tabJournalEntryVoucher.Location = new System.Drawing.Point(4, 24);
-            this.tabJournalEntryVoucher.Margin = new System.Windows.Forms.Padding(0);
-            this.tabJournalEntryVoucher.Name = "tabJournalEntryVoucher";
-            this.tabJournalEntryVoucher.Padding = new System.Windows.Forms.Padding(3);
-            this.tabJournalEntryVoucher.Size = new System.Drawing.Size(1164, 569);
-            this.tabJournalEntryVoucher.TabIndex = 0;
-            this.tabJournalEntryVoucher.Text = "Journal Entry Voucher";
-            this.tabJournalEntryVoucher.UseVisualStyleBackColor = true;
+            this.tabPageJournalEntryVoucher.Controls.Add(this.ucjevDashboard1);
+            this.tabPageJournalEntryVoucher.Location = new System.Drawing.Point(4, 24);
+            this.tabPageJournalEntryVoucher.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageJournalEntryVoucher.Name = "tabPageJournalEntryVoucher";
+            this.tabPageJournalEntryVoucher.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageJournalEntryVoucher.Size = new System.Drawing.Size(1164, 569);
+            this.tabPageJournalEntryVoucher.TabIndex = 0;
+            this.tabPageJournalEntryVoucher.Text = "Journal Entry Voucher";
+            this.tabPageJournalEntryVoucher.UseVisualStyleBackColor = true;
             // 
             // ucjevDashboard1
             // 
@@ -520,16 +533,16 @@ namespace AccountingSystem
             this.ucjevDashboard1.Size = new System.Drawing.Size(1158, 160);
             this.ucjevDashboard1.TabIndex = 0;
             // 
-            // tabJournals
+            // tabPageJournals
             // 
-            this.tabJournals.Controls.Add(this.ucJournalsDashboard1);
-            this.tabJournals.Location = new System.Drawing.Point(4, 24);
-            this.tabJournals.Name = "tabJournals";
-            this.tabJournals.Padding = new System.Windows.Forms.Padding(3);
-            this.tabJournals.Size = new System.Drawing.Size(1164, 569);
-            this.tabJournals.TabIndex = 1;
-            this.tabJournals.Text = "Journals";
-            this.tabJournals.UseVisualStyleBackColor = true;
+            this.tabPageJournals.Controls.Add(this.ucJournalsDashboard1);
+            this.tabPageJournals.Location = new System.Drawing.Point(4, 24);
+            this.tabPageJournals.Name = "tabPageJournals";
+            this.tabPageJournals.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageJournals.Size = new System.Drawing.Size(1164, 569);
+            this.tabPageJournals.TabIndex = 1;
+            this.tabPageJournals.Text = "Journals";
+            this.tabPageJournals.UseVisualStyleBackColor = true;
             // 
             // ucJournalsDashboard1
             // 
@@ -543,17 +556,17 @@ namespace AccountingSystem
             this.ucJournalsDashboard1.Size = new System.Drawing.Size(1158, 160);
             this.ucJournalsDashboard1.TabIndex = 0;
             // 
-            // tabLedgers
+            // tabPageLedgers
             // 
-            this.tabLedgers.Controls.Add(this.tabControlLedgers);
-            this.tabLedgers.Controls.Add(this.flowLayoutPanel2);
-            this.tabLedgers.Location = new System.Drawing.Point(4, 24);
-            this.tabLedgers.Margin = new System.Windows.Forms.Padding(0);
-            this.tabLedgers.Name = "tabLedgers";
-            this.tabLedgers.Size = new System.Drawing.Size(1164, 569);
-            this.tabLedgers.TabIndex = 2;
-            this.tabLedgers.Text = "Ledgers";
-            this.tabLedgers.UseVisualStyleBackColor = true;
+            this.tabPageLedgers.Controls.Add(this.tabControlLedgers);
+            this.tabPageLedgers.Controls.Add(this.flowLayoutPanel2);
+            this.tabPageLedgers.Location = new System.Drawing.Point(4, 24);
+            this.tabPageLedgers.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageLedgers.Name = "tabPageLedgers";
+            this.tabPageLedgers.Size = new System.Drawing.Size(1164, 569);
+            this.tabPageLedgers.TabIndex = 2;
+            this.tabPageLedgers.Text = "Ledgers";
+            this.tabPageLedgers.UseVisualStyleBackColor = true;
             // 
             // tabControlLedgers
             // 
@@ -668,25 +681,125 @@ namespace AccountingSystem
             this.radioTransactionLog.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.radioTransactionLog.UseVisualStyleBackColor = true;
             // 
-            // tabTrialBalance
+            // tabPageTrialBalance
             // 
-            this.tabTrialBalance.Location = new System.Drawing.Point(4, 24);
-            this.tabTrialBalance.Name = "tabTrialBalance";
-            this.tabTrialBalance.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTrialBalance.Size = new System.Drawing.Size(1164, 569);
-            this.tabTrialBalance.TabIndex = 3;
-            this.tabTrialBalance.Text = "Trial Balance";
-            this.tabTrialBalance.UseVisualStyleBackColor = true;
+            this.tabPageTrialBalance.Controls.Add(this.tabControlTrialBalance);
+            this.tabPageTrialBalance.Controls.Add(this.panel2);
+            this.tabPageTrialBalance.Location = new System.Drawing.Point(4, 24);
+            this.tabPageTrialBalance.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageTrialBalance.Name = "tabPageTrialBalance";
+            this.tabPageTrialBalance.Size = new System.Drawing.Size(1164, 569);
+            this.tabPageTrialBalance.TabIndex = 3;
+            this.tabPageTrialBalance.Text = "Trial Balance";
+            this.tabPageTrialBalance.UseVisualStyleBackColor = true;
             // 
-            // tabFinancialStatements
+            // tabControlTrialBalance
             // 
-            this.tabFinancialStatements.Location = new System.Drawing.Point(4, 24);
-            this.tabFinancialStatements.Name = "tabFinancialStatements";
-            this.tabFinancialStatements.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFinancialStatements.Size = new System.Drawing.Size(1164, 569);
-            this.tabFinancialStatements.TabIndex = 4;
-            this.tabFinancialStatements.Text = "Financial Statements";
-            this.tabFinancialStatements.UseVisualStyleBackColor = true;
+            this.tabControlTrialBalance.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.tabControlTrialBalance.Controls.Add(this.tabPagePreTrial);
+            this.tabControlTrialBalance.Controls.Add(this.tabPagePostTrial);
+            this.tabControlTrialBalance.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlTrialBalance.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tabControlTrialBalance.ItemSize = new System.Drawing.Size(0, 1);
+            this.tabControlTrialBalance.Location = new System.Drawing.Point(0, 32);
+            this.tabControlTrialBalance.Margin = new System.Windows.Forms.Padding(0);
+            this.tabControlTrialBalance.Name = "tabControlTrialBalance";
+            this.tabControlTrialBalance.SelectedIndex = 0;
+            this.tabControlTrialBalance.Size = new System.Drawing.Size(1164, 537);
+            this.tabControlTrialBalance.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tabControlTrialBalance.TabIndex = 5;
+            // 
+            // tabPagePreTrial
+            // 
+            this.tabPagePreTrial.Controls.Add(this.ucPreClosingTrialBalance1);
+            this.tabPagePreTrial.Location = new System.Drawing.Point(4, 5);
+            this.tabPagePreTrial.Name = "tabPagePreTrial";
+            this.tabPagePreTrial.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPagePreTrial.Size = new System.Drawing.Size(1156, 528);
+            this.tabPagePreTrial.TabIndex = 0;
+            this.tabPagePreTrial.Text = "tabPage1";
+            this.tabPagePreTrial.UseVisualStyleBackColor = true;
+            // 
+            // ucPreClosingTrialBalance1
+            // 
+            this.ucPreClosingTrialBalance1.BackColor = System.Drawing.Color.Transparent;
+            this.ucPreClosingTrialBalance1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucPreClosingTrialBalance1.Location = new System.Drawing.Point(3, 3);
+            this.ucPreClosingTrialBalance1.Name = "ucPreClosingTrialBalance1";
+            this.ucPreClosingTrialBalance1.Size = new System.Drawing.Size(1150, 522);
+            this.ucPreClosingTrialBalance1.TabIndex = 0;
+            // 
+            // tabPagePostTrial
+            // 
+            this.tabPagePostTrial.Controls.Add(this.ucPostClosingTrialBalance1);
+            this.tabPagePostTrial.Location = new System.Drawing.Point(4, 5);
+            this.tabPagePostTrial.Name = "tabPagePostTrial";
+            this.tabPagePostTrial.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPagePostTrial.Size = new System.Drawing.Size(1156, 528);
+            this.tabPagePostTrial.TabIndex = 1;
+            this.tabPagePostTrial.Text = "tabPage2";
+            this.tabPagePostTrial.UseVisualStyleBackColor = true;
+            // 
+            // ucPostClosingTrialBalance1
+            // 
+            this.ucPostClosingTrialBalance1.BackColor = System.Drawing.Color.Transparent;
+            this.ucPostClosingTrialBalance1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucPostClosingTrialBalance1.Location = new System.Drawing.Point(3, 3);
+            this.ucPostClosingTrialBalance1.Name = "ucPostClosingTrialBalance1";
+            this.ucPostClosingTrialBalance1.Size = new System.Drawing.Size(1150, 522);
+            this.ucPostClosingTrialBalance1.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.radioPostTB);
+            this.panel2.Controls.Add(this.radioPreTB);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1164, 32);
+            this.panel2.TabIndex = 4;
+            // 
+            // radioPostTB
+            // 
+            this.radioPostTB.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioPostTB.Location = new System.Drawing.Point(131, 4);
+            this.radioPostTB.Margin = new System.Windows.Forms.Padding(0);
+            this.radioPostTB.Name = "radioPostTB";
+            this.radioPostTB.Size = new System.Drawing.Size(124, 25);
+            this.radioPostTB.TabIndex = 5;
+            this.radioPostTB.Text = "Post Trial Balance";
+            this.radioPostTB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioPostTB.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.radioPostTB.UseVisualStyleBackColor = true;
+            this.radioPostTB.CheckedChanged += new System.EventHandler(this.radioPostTB_CheckedChanged);
+            // 
+            // radioPreTB
+            // 
+            this.radioPreTB.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioPreTB.Checked = true;
+            this.radioPreTB.Location = new System.Drawing.Point(4, 4);
+            this.radioPreTB.Margin = new System.Windows.Forms.Padding(0);
+            this.radioPreTB.Name = "radioPreTB";
+            this.radioPreTB.Size = new System.Drawing.Size(124, 25);
+            this.radioPreTB.TabIndex = 4;
+            this.radioPreTB.TabStop = true;
+            this.radioPreTB.Text = "Pre Trial Balance";
+            this.radioPreTB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioPreTB.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.radioPreTB.UseVisualStyleBackColor = true;
+            this.radioPreTB.CheckedChanged += new System.EventHandler(this.radioPreTB_CheckedChanged);
+            // 
+            // tabPageFinancialStatements
+            // 
+            this.tabPageFinancialStatements.Location = new System.Drawing.Point(4, 24);
+            this.tabPageFinancialStatements.Name = "tabPageFinancialStatements";
+            this.tabPageFinancialStatements.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageFinancialStatements.Size = new System.Drawing.Size(1164, 569);
+            this.tabPageFinancialStatements.TabIndex = 4;
+            this.tabPageFinancialStatements.Text = "Financial Statements";
+            this.tabPageFinancialStatements.UseVisualStyleBackColor = true;
             // 
             // tabPageTreasury
             // 
@@ -738,16 +851,21 @@ namespace AccountingSystem
             this.tabPageBudget.PerformLayout();
             this.tabPageAccounting.ResumeLayout(false);
             this.tabControlAccounting.ResumeLayout(false);
-            this.tabJournalEntryVoucher.ResumeLayout(false);
-            this.tabJournalEntryVoucher.PerformLayout();
-            this.tabJournals.ResumeLayout(false);
-            this.tabJournals.PerformLayout();
-            this.tabLedgers.ResumeLayout(false);
-            this.tabLedgers.PerformLayout();
+            this.tabPageJournalEntryVoucher.ResumeLayout(false);
+            this.tabPageJournalEntryVoucher.PerformLayout();
+            this.tabPageJournals.ResumeLayout(false);
+            this.tabPageJournals.PerformLayout();
+            this.tabPageLedgers.ResumeLayout(false);
+            this.tabPageLedgers.PerformLayout();
             this.tabControlLedgers.ResumeLayout(false);
             this.tabPageGeneralLedger.ResumeLayout(false);
             this.tabPageSubsidiaryLedger.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
+            this.tabPageTrialBalance.ResumeLayout(false);
+            this.tabControlTrialBalance.ResumeLayout(false);
+            this.tabPagePreTrial.ResumeLayout(false);
+            this.tabPagePostTrial.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.tabPageTreasury.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -802,11 +920,11 @@ namespace AccountingSystem
         internal System.Windows.Forms.TabPage tabPageBudget;
         private Views.Dashboard.ucBudgetDashboard ucBudgetDashboard1;
         private System.Windows.Forms.TabControl tabControlAccounting;
-        private System.Windows.Forms.TabPage tabJournalEntryVoucher;
-        private System.Windows.Forms.TabPage tabJournals;
-        private System.Windows.Forms.TabPage tabLedgers;
-        private System.Windows.Forms.TabPage tabTrialBalance;
-        private System.Windows.Forms.TabPage tabFinancialStatements;
+        private System.Windows.Forms.TabPage tabPageJournalEntryVoucher;
+        private System.Windows.Forms.TabPage tabPageJournals;
+        private System.Windows.Forms.TabPage tabPageLedgers;
+        private System.Windows.Forms.TabPage tabPageTrialBalance;
+        private System.Windows.Forms.TabPage tabPageFinancialStatements;
         private Views.Dashboard.ucJEVDashboard ucjevDashboard1;
         private System.Windows.Forms.RadioButton radBtnTreasury;
         private System.Windows.Forms.TabPage tabPageTreasury;
@@ -821,6 +939,14 @@ namespace AccountingSystem
         private System.Windows.Forms.RadioButton radioTransactionLog;
         private Views.Reports.Ledgers.ucGeneralLedger ucGeneralLedger1;
         private Views.Reports.Ledgers.ucSubsidiaryLedger ucSubsidiaryLedger1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.RadioButton radioPostTB;
+        private System.Windows.Forms.RadioButton radioPreTB;
+        private System.Windows.Forms.TabControl tabControlTrialBalance;
+        private System.Windows.Forms.TabPage tabPagePreTrial;
+        private Views.Reports.TrialBalance.ucPreClosingTrialBalance ucPreClosingTrialBalance1;
+        private System.Windows.Forms.TabPage tabPagePostTrial;
+        private Views.Reports.TrialBalance.ucPostClosingTrialBalance ucPostClosingTrialBalance1;
     }
 }
 
