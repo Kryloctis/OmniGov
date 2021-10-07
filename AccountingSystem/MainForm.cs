@@ -155,9 +155,6 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Reports of General Collections"))
                 menuprintGC.Visible = false;
 
-            if (!Helper.HasPermission("Report JEVs"))
-                menuJEVS.Visible = false;
-
             if (!Helper.HasPermission("Report Bank Cashbook"))
                 menuBankCashBook.Visible = false;
 
@@ -181,7 +178,7 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Report Trial Balance"))
             {
-                menuTrialBalance.Visible = false;
+                tabControlTrialBalance.Visible = false;
             }
 
             if (!Helper.HasPermission("Report Financial Statements"))
@@ -307,20 +304,9 @@ namespace AccountingSystem
             _ = new frmCashbook().ShowDialog();
         }
 
-        private void menuJEVS_Click_1(object sender, EventArgs e)
-        {
-            _ = new frmJEVReport(0, null, 0).ShowDialog();
-        }
-
-
         private void menuReceiptsConsolidated_Click(object sender, EventArgs e)
         {
             _ = new frmConsolidatedReceipts().ShowDialog();
-        }
-
-        private void menuTrialBalance_Click(object sender, EventArgs e)
-        {
-            _ = new frmTrialBalance().ShowDialog();
         }
 
         private void menuDailyCash_Click(object sender, EventArgs e)

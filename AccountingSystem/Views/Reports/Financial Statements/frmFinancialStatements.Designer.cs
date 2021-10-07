@@ -29,57 +29,57 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabSFPosition = new System.Windows.Forms.TabPage();
+            this.tabControlFinancialStatements = new System.Windows.Forms.TabControl();
+            this.tabPageSFPosition = new System.Windows.Forms.TabPage();
             this.ucStatementOfFinancialPosition1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfFinancialPosition();
-            this.tabSFPerformance = new System.Windows.Forms.TabPage();
+            this.tabPageSFPerformance = new System.Windows.Forms.TabPage();
             this.ucStatementOfFinancialPerformance1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfFinancialPerformance();
-            this.tabSCNAE = new System.Windows.Forms.TabPage();
-            this.tabSCF = new System.Windows.Forms.TabPage();
-            this.tabSCBAA = new System.Windows.Forms.TabPage();
+            this.tabPageSCNAE = new System.Windows.Forms.TabPage();
+            this.ucStatementOfChangesInNetAssetsquity1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfChangesInNetAssetsquity();
+            this.tabPageSCF = new System.Windows.Forms.TabPage();
+            this.tabPageSCBAA = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.radSFPosition = new System.Windows.Forms.RadioButton();
             this.radSFPerformance = new System.Windows.Forms.RadioButton();
             this.radSCNAE = new System.Windows.Forms.RadioButton();
             this.radSCF = new System.Windows.Forms.RadioButton();
             this.radSCBAA = new System.Windows.Forms.RadioButton();
-            this.ucStatementOfChangesInNetAssetsquity1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfChangesInNetAssetsquity();
-            this.tabControl1.SuspendLayout();
-            this.tabSFPosition.SuspendLayout();
-            this.tabSFPerformance.SuspendLayout();
-            this.tabSCNAE.SuspendLayout();
+            this.tabControlFinancialStatements.SuspendLayout();
+            this.tabPageSFPosition.SuspendLayout();
+            this.tabPageSFPerformance.SuspendLayout();
+            this.tabPageSCNAE.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tabControlFinancialStatements
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tabControlFinancialStatements.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            this.tabControl1.Controls.Add(this.tabSFPosition);
-            this.tabControl1.Controls.Add(this.tabSFPerformance);
-            this.tabControl1.Controls.Add(this.tabSCNAE);
-            this.tabControl1.Controls.Add(this.tabSCF);
-            this.tabControl1.Controls.Add(this.tabSCBAA);
-            this.tabControl1.ItemSize = new System.Drawing.Size(0, 1);
-            this.tabControl1.Location = new System.Drawing.Point(0, 46);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1163, 524);
-            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tabControl1.TabIndex = 1;
+            this.tabControlFinancialStatements.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.tabControlFinancialStatements.Controls.Add(this.tabPageSFPosition);
+            this.tabControlFinancialStatements.Controls.Add(this.tabPageSFPerformance);
+            this.tabControlFinancialStatements.Controls.Add(this.tabPageSCNAE);
+            this.tabControlFinancialStatements.Controls.Add(this.tabPageSCF);
+            this.tabControlFinancialStatements.Controls.Add(this.tabPageSCBAA);
+            this.tabControlFinancialStatements.ItemSize = new System.Drawing.Size(0, 1);
+            this.tabControlFinancialStatements.Location = new System.Drawing.Point(0, 46);
+            this.tabControlFinancialStatements.Name = "tabControlFinancialStatements";
+            this.tabControlFinancialStatements.SelectedIndex = 0;
+            this.tabControlFinancialStatements.Size = new System.Drawing.Size(1163, 524);
+            this.tabControlFinancialStatements.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tabControlFinancialStatements.TabIndex = 1;
             // 
-            // tabSFPosition
+            // tabPageSFPosition
             // 
-            this.tabSFPosition.Controls.Add(this.ucStatementOfFinancialPosition1);
-            this.tabSFPosition.Location = new System.Drawing.Point(4, 5);
-            this.tabSFPosition.Margin = new System.Windows.Forms.Padding(0);
-            this.tabSFPosition.Name = "tabSFPosition";
-            this.tabSFPosition.Size = new System.Drawing.Size(1155, 515);
-            this.tabSFPosition.TabIndex = 0;
-            this.tabSFPosition.Text = "tabSFPosition";
-            this.tabSFPosition.UseVisualStyleBackColor = true;
+            this.tabPageSFPosition.Controls.Add(this.ucStatementOfFinancialPosition1);
+            this.tabPageSFPosition.Location = new System.Drawing.Point(4, 5);
+            this.tabPageSFPosition.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageSFPosition.Name = "tabPageSFPosition";
+            this.tabPageSFPosition.Size = new System.Drawing.Size(1155, 515);
+            this.tabPageSFPosition.TabIndex = 0;
+            this.tabPageSFPosition.Text = "tabSFPosition";
+            this.tabPageSFPosition.UseVisualStyleBackColor = true;
             // 
             // ucStatementOfFinancialPosition1
             // 
@@ -89,16 +89,16 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             this.ucStatementOfFinancialPosition1.Size = new System.Drawing.Size(1155, 515);
             this.ucStatementOfFinancialPosition1.TabIndex = 0;
             // 
-            // tabSFPerformance
+            // tabPageSFPerformance
             // 
-            this.tabSFPerformance.Controls.Add(this.ucStatementOfFinancialPerformance1);
-            this.tabSFPerformance.Location = new System.Drawing.Point(4, 5);
-            this.tabSFPerformance.Margin = new System.Windows.Forms.Padding(0);
-            this.tabSFPerformance.Name = "tabSFPerformance";
-            this.tabSFPerformance.Size = new System.Drawing.Size(1155, 515);
-            this.tabSFPerformance.TabIndex = 1;
-            this.tabSFPerformance.Text = "tabSFPerformance";
-            this.tabSFPerformance.UseVisualStyleBackColor = true;
+            this.tabPageSFPerformance.Controls.Add(this.ucStatementOfFinancialPerformance1);
+            this.tabPageSFPerformance.Location = new System.Drawing.Point(4, 5);
+            this.tabPageSFPerformance.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageSFPerformance.Name = "tabPageSFPerformance";
+            this.tabPageSFPerformance.Size = new System.Drawing.Size(1155, 515);
+            this.tabPageSFPerformance.TabIndex = 1;
+            this.tabPageSFPerformance.Text = "tabSFPerformance";
+            this.tabPageSFPerformance.UseVisualStyleBackColor = true;
             // 
             // ucStatementOfFinancialPerformance1
             // 
@@ -108,36 +108,44 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             this.ucStatementOfFinancialPerformance1.Size = new System.Drawing.Size(1155, 515);
             this.ucStatementOfFinancialPerformance1.TabIndex = 0;
             // 
-            // tabSCNAE
+            // tabPageSCNAE
             // 
-            this.tabSCNAE.Controls.Add(this.ucStatementOfChangesInNetAssetsquity1);
-            this.tabSCNAE.Location = new System.Drawing.Point(4, 5);
-            this.tabSCNAE.Margin = new System.Windows.Forms.Padding(0);
-            this.tabSCNAE.Name = "tabSCNAE";
-            this.tabSCNAE.Size = new System.Drawing.Size(1155, 515);
-            this.tabSCNAE.TabIndex = 2;
-            this.tabSCNAE.Text = "tabSCNAE";
-            this.tabSCNAE.UseVisualStyleBackColor = true;
+            this.tabPageSCNAE.Controls.Add(this.ucStatementOfChangesInNetAssetsquity1);
+            this.tabPageSCNAE.Location = new System.Drawing.Point(4, 5);
+            this.tabPageSCNAE.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageSCNAE.Name = "tabPageSCNAE";
+            this.tabPageSCNAE.Size = new System.Drawing.Size(1155, 515);
+            this.tabPageSCNAE.TabIndex = 2;
+            this.tabPageSCNAE.Text = "tabSCNAE";
+            this.tabPageSCNAE.UseVisualStyleBackColor = true;
             // 
-            // tabSCF
+            // ucStatementOfChangesInNetAssetsquity1
             // 
-            this.tabSCF.Location = new System.Drawing.Point(4, 5);
-            this.tabSCF.Margin = new System.Windows.Forms.Padding(0);
-            this.tabSCF.Name = "tabSCF";
-            this.tabSCF.Size = new System.Drawing.Size(1155, 515);
-            this.tabSCF.TabIndex = 3;
-            this.tabSCF.Text = "tabSCF";
-            this.tabSCF.UseVisualStyleBackColor = true;
+            this.ucStatementOfChangesInNetAssetsquity1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucStatementOfChangesInNetAssetsquity1.Location = new System.Drawing.Point(0, 0);
+            this.ucStatementOfChangesInNetAssetsquity1.Name = "ucStatementOfChangesInNetAssetsquity1";
+            this.ucStatementOfChangesInNetAssetsquity1.Size = new System.Drawing.Size(1155, 515);
+            this.ucStatementOfChangesInNetAssetsquity1.TabIndex = 0;
             // 
-            // tabSCBAA
+            // tabPageSCF
             // 
-            this.tabSCBAA.Location = new System.Drawing.Point(4, 5);
-            this.tabSCBAA.Margin = new System.Windows.Forms.Padding(0);
-            this.tabSCBAA.Name = "tabSCBAA";
-            this.tabSCBAA.Size = new System.Drawing.Size(1155, 515);
-            this.tabSCBAA.TabIndex = 4;
-            this.tabSCBAA.Text = "tabSCBAA";
-            this.tabSCBAA.UseVisualStyleBackColor = true;
+            this.tabPageSCF.Location = new System.Drawing.Point(4, 5);
+            this.tabPageSCF.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageSCF.Name = "tabPageSCF";
+            this.tabPageSCF.Size = new System.Drawing.Size(1155, 515);
+            this.tabPageSCF.TabIndex = 3;
+            this.tabPageSCF.Text = "tabSCF";
+            this.tabPageSCF.UseVisualStyleBackColor = true;
+            // 
+            // tabPageSCBAA
+            // 
+            this.tabPageSCBAA.Location = new System.Drawing.Point(4, 5);
+            this.tabPageSCBAA.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageSCBAA.Name = "tabPageSCBAA";
+            this.tabPageSCBAA.Size = new System.Drawing.Size(1155, 515);
+            this.tabPageSCBAA.TabIndex = 4;
+            this.tabPageSCBAA.Text = "tabSCBAA";
+            this.tabPageSCBAA.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel1
             // 
@@ -219,21 +227,13 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             this.radSCBAA.UseVisualStyleBackColor = true;
             this.radSCBAA.CheckedChanged += new System.EventHandler(this.radSCBAA_CheckedChanged);
             // 
-            // ucStatementOfChangesInNetAssetsquity1
-            // 
-            this.ucStatementOfChangesInNetAssetsquity1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucStatementOfChangesInNetAssetsquity1.Location = new System.Drawing.Point(0, 0);
-            this.ucStatementOfChangesInNetAssetsquity1.Name = "ucStatementOfChangesInNetAssetsquity1";
-            this.ucStatementOfChangesInNetAssetsquity1.Size = new System.Drawing.Size(1155, 515);
-            this.ucStatementOfChangesInNetAssetsquity1.TabIndex = 0;
-            // 
             // frmFinancialStatements
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1163, 570);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabControlFinancialStatements);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1138, 583);
             this.Name = "frmFinancialStatements";
@@ -242,10 +242,10 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             this.Text = "Financial Statements";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmFinancialStatements_Load);
-            this.tabControl1.ResumeLayout(false);
-            this.tabSFPosition.ResumeLayout(false);
-            this.tabSFPerformance.ResumeLayout(false);
-            this.tabSCNAE.ResumeLayout(false);
+            this.tabControlFinancialStatements.ResumeLayout(false);
+            this.tabPageSFPosition.ResumeLayout(false);
+            this.tabPageSFPerformance.ResumeLayout(false);
+            this.tabPageSCNAE.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -254,12 +254,12 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
         }
 
         #endregion
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabSFPosition;
-        private System.Windows.Forms.TabPage tabSFPerformance;
-        private System.Windows.Forms.TabPage tabSCNAE;
-        private System.Windows.Forms.TabPage tabSCF;
-        private System.Windows.Forms.TabPage tabSCBAA;
+        private System.Windows.Forms.TabControl tabControlFinancialStatements;
+        private System.Windows.Forms.TabPage tabPageSFPosition;
+        private System.Windows.Forms.TabPage tabPageSFPerformance;
+        private System.Windows.Forms.TabPage tabPageSCNAE;
+        private System.Windows.Forms.TabPage tabPageSCF;
+        private System.Windows.Forms.TabPage tabPageSCBAA;
         private ucStatementOfFinancialPosition ucStatementOfFinancialPosition1;
         private ucStatementOfFinancialPerformance ucStatementOfFinancialPerformance1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
