@@ -48,7 +48,6 @@ namespace AccountingSystem
             this.menuAccForm = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReceipts = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuLedgersReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOB = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOBB = new System.Windows.Forms.ToolStripMenuItem();
             this.menuJEVS = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,29 +67,43 @@ namespace AccountingSystem
             this.radBtnAccounting = new System.Windows.Forms.RadioButton();
             this.radBtnTreasury = new System.Windows.Forms.RadioButton();
             this.tabControlDashboard = new System.Windows.Forms.TabControl();
-            this.tabBudget = new System.Windows.Forms.TabPage();
+            this.tabPageBudget = new System.Windows.Forms.TabPage();
             this.ucBudgetDashboard1 = new AccountingSystem.Views.Dashboard.ucBudgetDashboard();
-            this.tabAccounting = new System.Windows.Forms.TabPage();
+            this.tabPageAccounting = new System.Windows.Forms.TabPage();
             this.tabControlAccounting = new System.Windows.Forms.TabControl();
             this.tabJournalEntryVoucher = new System.Windows.Forms.TabPage();
             this.ucjevDashboard1 = new AccountingSystem.Views.Dashboard.ucJEVDashboard();
             this.tabJournals = new System.Windows.Forms.TabPage();
             this.ucJournalsDashboard1 = new AccountingSystem.Views.Dashboard.AccountingDashboard.ucJournalsDashboard();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabLedgers = new System.Windows.Forms.TabPage();
+            this.tabControlLedgers = new System.Windows.Forms.TabControl();
+            this.tabPageGeneralLedger = new System.Windows.Forms.TabPage();
+            this.ucGeneralLedger1 = new AccountingSystem.Views.Reports.Ledgers.ucGeneralLedger();
+            this.tabPageSubsidiaryLedger = new System.Windows.Forms.TabPage();
+            this.ucSubsidiaryLedger1 = new AccountingSystem.Views.Reports.Ledgers.ucSubsidiaryLedger();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.radioGeneralLedger = new System.Windows.Forms.RadioButton();
+            this.radioSubsidiaryLedger = new System.Windows.Forms.RadioButton();
+            this.radioTransactionLog = new System.Windows.Forms.RadioButton();
             this.tabTrialBalance = new System.Windows.Forms.TabPage();
             this.tabFinancialStatements = new System.Windows.Forms.TabPage();
-            this.tabTreasury = new System.Windows.Forms.TabPage();
+            this.tabPageTreasury = new System.Windows.Forms.TabPage();
             this.ucTreasuryDashboard1 = new AccountingSystem.Views.Dashboard.TreasuryDashboard.ucTreasuryDashboard();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tabControlDashboard.SuspendLayout();
-            this.tabBudget.SuspendLayout();
-            this.tabAccounting.SuspendLayout();
+            this.tabPageBudget.SuspendLayout();
+            this.tabPageAccounting.SuspendLayout();
             this.tabControlAccounting.SuspendLayout();
             this.tabJournalEntryVoucher.SuspendLayout();
             this.tabJournals.SuspendLayout();
-            this.tabTreasury.SuspendLayout();
+            this.tabLedgers.SuspendLayout();
+            this.tabControlLedgers.SuspendLayout();
+            this.tabPageGeneralLedger.SuspendLayout();
+            this.tabPageSubsidiaryLedger.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            this.tabPageTreasury.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -244,7 +257,6 @@ namespace AccountingSystem
             // menuReports
             // 
             this.menuReports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuLedgersReport,
             this.menuSAAOB,
             this.menuSAAOBB,
             this.menuJEVS,
@@ -259,13 +271,6 @@ namespace AccountingSystem
             this.menuReports.Name = "menuReports";
             this.menuReports.Size = new System.Drawing.Size(59, 19);
             this.menuReports.Text = "Reports";
-            // 
-            // menuLedgersReport
-            // 
-            this.menuLedgersReport.Name = "menuLedgersReport";
-            this.menuLedgersReport.Size = new System.Drawing.Size(233, 22);
-            this.menuLedgersReport.Text = "Ledgers";
-            this.menuLedgersReport.Click += new System.EventHandler(this.menuLedgersReport_Click);
             // 
             // menuSAAOB
             // 
@@ -378,8 +383,8 @@ namespace AccountingSystem
             this.flowLayoutPanel1.Controls.Add(this.radBtnTreasury);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 25);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1180, 31);
             this.flowLayoutPanel1.TabIndex = 8;
             // 
@@ -389,7 +394,7 @@ namespace AccountingSystem
             this.radBtnBudget.AutoSize = true;
             this.radBtnBudget.Checked = true;
             this.radBtnBudget.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.radBtnBudget.Location = new System.Drawing.Point(8, 3);
+            this.radBtnBudget.Location = new System.Drawing.Point(3, 3);
             this.radBtnBudget.Name = "radBtnBudget";
             this.radBtnBudget.Size = new System.Drawing.Size(55, 25);
             this.radBtnBudget.TabIndex = 0;
@@ -404,7 +409,7 @@ namespace AccountingSystem
             this.radBtnAccounting.Appearance = System.Windows.Forms.Appearance.Button;
             this.radBtnAccounting.AutoSize = true;
             this.radBtnAccounting.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.radBtnAccounting.Location = new System.Drawing.Point(69, 3);
+            this.radBtnAccounting.Location = new System.Drawing.Point(64, 3);
             this.radBtnAccounting.Name = "radBtnAccounting";
             this.radBtnAccounting.Size = new System.Drawing.Size(79, 25);
             this.radBtnAccounting.TabIndex = 1;
@@ -418,7 +423,7 @@ namespace AccountingSystem
             this.radBtnTreasury.Appearance = System.Windows.Forms.Appearance.Button;
             this.radBtnTreasury.AutoSize = true;
             this.radBtnTreasury.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.radBtnTreasury.Location = new System.Drawing.Point(154, 3);
+            this.radBtnTreasury.Location = new System.Drawing.Point(149, 3);
             this.radBtnTreasury.Name = "radBtnTreasury";
             this.radBtnTreasury.Size = new System.Drawing.Size(60, 25);
             this.radBtnTreasury.TabIndex = 2;
@@ -430,14 +435,13 @@ namespace AccountingSystem
             // tabControlDashboard
             // 
             this.tabControlDashboard.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            this.tabControlDashboard.Controls.Add(this.tabBudget);
-            this.tabControlDashboard.Controls.Add(this.tabAccounting);
-            this.tabControlDashboard.Controls.Add(this.tabTreasury);
+            this.tabControlDashboard.Controls.Add(this.tabPageBudget);
+            this.tabControlDashboard.Controls.Add(this.tabPageAccounting);
+            this.tabControlDashboard.Controls.Add(this.tabPageTreasury);
             this.tabControlDashboard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlDashboard.ItemSize = new System.Drawing.Size(0, 1);
             this.tabControlDashboard.Location = new System.Drawing.Point(0, 56);
-            this.tabControlDashboard.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabControlDashboard.Multiline = true;
+            this.tabControlDashboard.Margin = new System.Windows.Forms.Padding(0);
             this.tabControlDashboard.Name = "tabControlDashboard";
             this.tabControlDashboard.Padding = new System.Drawing.Point(0, 0);
             this.tabControlDashboard.SelectedIndex = 0;
@@ -445,16 +449,16 @@ namespace AccountingSystem
             this.tabControlDashboard.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControlDashboard.TabIndex = 9;
             // 
-            // tabBudget
+            // tabPageBudget
             // 
-            this.tabBudget.Controls.Add(this.ucBudgetDashboard1);
-            this.tabBudget.Location = new System.Drawing.Point(4, 5);
-            this.tabBudget.Margin = new System.Windows.Forms.Padding(0);
-            this.tabBudget.Name = "tabBudget";
-            this.tabBudget.Size = new System.Drawing.Size(1172, 597);
-            this.tabBudget.TabIndex = 0;
-            this.tabBudget.Text = "Budget";
-            this.tabBudget.UseVisualStyleBackColor = true;
+            this.tabPageBudget.Controls.Add(this.ucBudgetDashboard1);
+            this.tabPageBudget.Location = new System.Drawing.Point(4, 5);
+            this.tabPageBudget.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageBudget.Name = "tabPageBudget";
+            this.tabPageBudget.Size = new System.Drawing.Size(1172, 597);
+            this.tabPageBudget.TabIndex = 0;
+            this.tabPageBudget.Text = "Budget";
+            this.tabPageBudget.UseVisualStyleBackColor = true;
             // 
             // ucBudgetDashboard1
             // 
@@ -467,39 +471,40 @@ namespace AccountingSystem
             this.ucBudgetDashboard1.Size = new System.Drawing.Size(1172, 597);
             this.ucBudgetDashboard1.TabIndex = 1;
             // 
-            // tabAccounting
+            // tabPageAccounting
             // 
-            this.tabAccounting.Controls.Add(this.tabControlAccounting);
-            this.tabAccounting.Location = new System.Drawing.Point(4, 5);
-            this.tabAccounting.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabAccounting.Name = "tabAccounting";
-            this.tabAccounting.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabAccounting.Size = new System.Drawing.Size(1172, 597);
-            this.tabAccounting.TabIndex = 1;
-            this.tabAccounting.Text = "Accounting";
-            this.tabAccounting.UseVisualStyleBackColor = true;
+            this.tabPageAccounting.Controls.Add(this.tabControlAccounting);
+            this.tabPageAccounting.Location = new System.Drawing.Point(4, 5);
+            this.tabPageAccounting.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPageAccounting.Name = "tabPageAccounting";
+            this.tabPageAccounting.Size = new System.Drawing.Size(1172, 597);
+            this.tabPageAccounting.TabIndex = 1;
+            this.tabPageAccounting.Text = "Accounting";
+            this.tabPageAccounting.UseVisualStyleBackColor = true;
             // 
             // tabControlAccounting
             // 
             this.tabControlAccounting.Controls.Add(this.tabJournalEntryVoucher);
             this.tabControlAccounting.Controls.Add(this.tabJournals);
-            this.tabControlAccounting.Controls.Add(this.tabPage3);
+            this.tabControlAccounting.Controls.Add(this.tabLedgers);
             this.tabControlAccounting.Controls.Add(this.tabTrialBalance);
             this.tabControlAccounting.Controls.Add(this.tabFinancialStatements);
             this.tabControlAccounting.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlAccounting.Location = new System.Drawing.Point(3, 2);
+            this.tabControlAccounting.Location = new System.Drawing.Point(0, 0);
+            this.tabControlAccounting.Margin = new System.Windows.Forms.Padding(0);
             this.tabControlAccounting.Name = "tabControlAccounting";
             this.tabControlAccounting.SelectedIndex = 0;
-            this.tabControlAccounting.Size = new System.Drawing.Size(1166, 593);
+            this.tabControlAccounting.Size = new System.Drawing.Size(1172, 597);
             this.tabControlAccounting.TabIndex = 0;
             // 
             // tabJournalEntryVoucher
             // 
             this.tabJournalEntryVoucher.Controls.Add(this.ucjevDashboard1);
             this.tabJournalEntryVoucher.Location = new System.Drawing.Point(4, 24);
+            this.tabJournalEntryVoucher.Margin = new System.Windows.Forms.Padding(0);
             this.tabJournalEntryVoucher.Name = "tabJournalEntryVoucher";
             this.tabJournalEntryVoucher.Padding = new System.Windows.Forms.Padding(3);
-            this.tabJournalEntryVoucher.Size = new System.Drawing.Size(1158, 565);
+            this.tabJournalEntryVoucher.Size = new System.Drawing.Size(1164, 569);
             this.tabJournalEntryVoucher.TabIndex = 0;
             this.tabJournalEntryVoucher.Text = "Journal Entry Voucher";
             this.tabJournalEntryVoucher.UseVisualStyleBackColor = true;
@@ -512,7 +517,7 @@ namespace AccountingSystem
             this.ucjevDashboard1.Margin = new System.Windows.Forms.Padding(0);
             this.ucjevDashboard1.MinimumSize = new System.Drawing.Size(782, 160);
             this.ucjevDashboard1.Name = "ucjevDashboard1";
-            this.ucjevDashboard1.Size = new System.Drawing.Size(1152, 160);
+            this.ucjevDashboard1.Size = new System.Drawing.Size(1158, 160);
             this.ucjevDashboard1.TabIndex = 0;
             // 
             // tabJournals
@@ -521,7 +526,7 @@ namespace AccountingSystem
             this.tabJournals.Location = new System.Drawing.Point(4, 24);
             this.tabJournals.Name = "tabJournals";
             this.tabJournals.Padding = new System.Windows.Forms.Padding(3);
-            this.tabJournals.Size = new System.Drawing.Size(1158, 565);
+            this.tabJournals.Size = new System.Drawing.Size(1164, 569);
             this.tabJournals.TabIndex = 1;
             this.tabJournals.Text = "Journals";
             this.tabJournals.UseVisualStyleBackColor = true;
@@ -532,27 +537,143 @@ namespace AccountingSystem
             this.ucJournalsDashboard1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucJournalsDashboard1.Dock = System.Windows.Forms.DockStyle.Top;
             this.ucJournalsDashboard1.Location = new System.Drawing.Point(3, 3);
+            this.ucJournalsDashboard1.Margin = new System.Windows.Forms.Padding(0);
             this.ucJournalsDashboard1.MinimumSize = new System.Drawing.Size(941, 160);
             this.ucJournalsDashboard1.Name = "ucJournalsDashboard1";
-            this.ucJournalsDashboard1.Size = new System.Drawing.Size(1152, 160);
+            this.ucJournalsDashboard1.Size = new System.Drawing.Size(1158, 160);
             this.ucJournalsDashboard1.TabIndex = 0;
             // 
-            // tabPage3
+            // tabLedgers
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 24);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1158, 565);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Ledgers";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabLedgers.Controls.Add(this.tabControlLedgers);
+            this.tabLedgers.Controls.Add(this.flowLayoutPanel2);
+            this.tabLedgers.Location = new System.Drawing.Point(4, 24);
+            this.tabLedgers.Margin = new System.Windows.Forms.Padding(0);
+            this.tabLedgers.Name = "tabLedgers";
+            this.tabLedgers.Size = new System.Drawing.Size(1164, 569);
+            this.tabLedgers.TabIndex = 2;
+            this.tabLedgers.Text = "Ledgers";
+            this.tabLedgers.UseVisualStyleBackColor = true;
+            // 
+            // tabControlLedgers
+            // 
+            this.tabControlLedgers.Alignment = System.Windows.Forms.TabAlignment.Bottom;
+            this.tabControlLedgers.Controls.Add(this.tabPageGeneralLedger);
+            this.tabControlLedgers.Controls.Add(this.tabPageSubsidiaryLedger);
+            this.tabControlLedgers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlLedgers.ItemSize = new System.Drawing.Size(0, 1);
+            this.tabControlLedgers.Location = new System.Drawing.Point(0, 31);
+            this.tabControlLedgers.Margin = new System.Windows.Forms.Padding(0);
+            this.tabControlLedgers.Multiline = true;
+            this.tabControlLedgers.Name = "tabControlLedgers";
+            this.tabControlLedgers.SelectedIndex = 0;
+            this.tabControlLedgers.Size = new System.Drawing.Size(1164, 538);
+            this.tabControlLedgers.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tabControlLedgers.TabIndex = 0;
+            // 
+            // tabPageGeneralLedger
+            // 
+            this.tabPageGeneralLedger.Controls.Add(this.ucGeneralLedger1);
+            this.tabPageGeneralLedger.Location = new System.Drawing.Point(4, 4);
+            this.tabPageGeneralLedger.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageGeneralLedger.Name = "tabPageGeneralLedger";
+            this.tabPageGeneralLedger.Size = new System.Drawing.Size(1156, 529);
+            this.tabPageGeneralLedger.TabIndex = 0;
+            this.tabPageGeneralLedger.Text = "Generl Ledger";
+            this.tabPageGeneralLedger.UseVisualStyleBackColor = true;
+            // 
+            // ucGeneralLedger1
+            // 
+            this.ucGeneralLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucGeneralLedger1.Location = new System.Drawing.Point(0, 0);
+            this.ucGeneralLedger1.Margin = new System.Windows.Forms.Padding(0);
+            this.ucGeneralLedger1.Name = "ucGeneralLedger1";
+            this.ucGeneralLedger1.Size = new System.Drawing.Size(1156, 529);
+            this.ucGeneralLedger1.TabIndex = 0;
+            // 
+            // tabPageSubsidiaryLedger
+            // 
+            this.tabPageSubsidiaryLedger.Controls.Add(this.ucSubsidiaryLedger1);
+            this.tabPageSubsidiaryLedger.Location = new System.Drawing.Point(4, 4);
+            this.tabPageSubsidiaryLedger.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageSubsidiaryLedger.Name = "tabPageSubsidiaryLedger";
+            this.tabPageSubsidiaryLedger.Size = new System.Drawing.Size(1156, 529);
+            this.tabPageSubsidiaryLedger.TabIndex = 1;
+            this.tabPageSubsidiaryLedger.Text = "Subsidiary Ledger";
+            this.tabPageSubsidiaryLedger.UseVisualStyleBackColor = true;
+            // 
+            // ucSubsidiaryLedger1
+            // 
+            this.ucSubsidiaryLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucSubsidiaryLedger1.Location = new System.Drawing.Point(0, 0);
+            this.ucSubsidiaryLedger1.Margin = new System.Windows.Forms.Padding(0);
+            this.ucSubsidiaryLedger1.Name = "ucSubsidiaryLedger1";
+            this.ucSubsidiaryLedger1.Size = new System.Drawing.Size(1156, 529);
+            this.ucSubsidiaryLedger1.TabIndex = 0;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.AutoSize = true;
+            this.flowLayoutPanel2.BackColor = System.Drawing.Color.White;
+            this.flowLayoutPanel2.Controls.Add(this.radioGeneralLedger);
+            this.flowLayoutPanel2.Controls.Add(this.radioSubsidiaryLedger);
+            this.flowLayoutPanel2.Controls.Add(this.radioTransactionLog);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(1164, 31);
+            this.flowLayoutPanel2.TabIndex = 6;
+            // 
+            // radioGeneralLedger
+            // 
+            this.radioGeneralLedger.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioGeneralLedger.Checked = true;
+            this.radioGeneralLedger.Location = new System.Drawing.Point(3, 3);
+            this.radioGeneralLedger.Name = "radioGeneralLedger";
+            this.radioGeneralLedger.Size = new System.Drawing.Size(122, 25);
+            this.radioGeneralLedger.TabIndex = 5;
+            this.radioGeneralLedger.TabStop = true;
+            this.radioGeneralLedger.Tag = "1";
+            this.radioGeneralLedger.Text = "General Ledger";
+            this.radioGeneralLedger.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioGeneralLedger.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.radioGeneralLedger.UseVisualStyleBackColor = true;
+            this.radioGeneralLedger.CheckedChanged += new System.EventHandler(this.radioGeneralLedger_CheckedChanged);
+            // 
+            // radioSubsidiaryLedger
+            // 
+            this.radioSubsidiaryLedger.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioSubsidiaryLedger.Location = new System.Drawing.Point(131, 3);
+            this.radioSubsidiaryLedger.Name = "radioSubsidiaryLedger";
+            this.radioSubsidiaryLedger.Size = new System.Drawing.Size(122, 25);
+            this.radioSubsidiaryLedger.TabIndex = 6;
+            this.radioSubsidiaryLedger.Tag = "2";
+            this.radioSubsidiaryLedger.Text = "Subsidiary Ledger";
+            this.radioSubsidiaryLedger.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioSubsidiaryLedger.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.radioSubsidiaryLedger.UseVisualStyleBackColor = true;
+            this.radioSubsidiaryLedger.CheckedChanged += new System.EventHandler(this.radioSubsidiaryLedger_CheckedChanged);
+            // 
+            // radioTransactionLog
+            // 
+            this.radioTransactionLog.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioTransactionLog.Enabled = false;
+            this.radioTransactionLog.Location = new System.Drawing.Point(259, 3);
+            this.radioTransactionLog.Name = "radioTransactionLog";
+            this.radioTransactionLog.Size = new System.Drawing.Size(122, 25);
+            this.radioTransactionLog.TabIndex = 7;
+            this.radioTransactionLog.Tag = "3";
+            this.radioTransactionLog.Text = "Transaction Log";
+            this.radioTransactionLog.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioTransactionLog.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.radioTransactionLog.UseVisualStyleBackColor = true;
             // 
             // tabTrialBalance
             // 
             this.tabTrialBalance.Location = new System.Drawing.Point(4, 24);
             this.tabTrialBalance.Name = "tabTrialBalance";
             this.tabTrialBalance.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTrialBalance.Size = new System.Drawing.Size(1158, 565);
+            this.tabTrialBalance.Size = new System.Drawing.Size(1164, 569);
             this.tabTrialBalance.TabIndex = 3;
             this.tabTrialBalance.Text = "Trial Balance";
             this.tabTrialBalance.UseVisualStyleBackColor = true;
@@ -562,20 +683,20 @@ namespace AccountingSystem
             this.tabFinancialStatements.Location = new System.Drawing.Point(4, 24);
             this.tabFinancialStatements.Name = "tabFinancialStatements";
             this.tabFinancialStatements.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFinancialStatements.Size = new System.Drawing.Size(1158, 565);
+            this.tabFinancialStatements.Size = new System.Drawing.Size(1164, 569);
             this.tabFinancialStatements.TabIndex = 4;
             this.tabFinancialStatements.Text = "Financial Statements";
             this.tabFinancialStatements.UseVisualStyleBackColor = true;
             // 
-            // tabTreasury
+            // tabPageTreasury
             // 
-            this.tabTreasury.Controls.Add(this.ucTreasuryDashboard1);
-            this.tabTreasury.Location = new System.Drawing.Point(4, 5);
-            this.tabTreasury.Name = "tabTreasury";
-            this.tabTreasury.Size = new System.Drawing.Size(1172, 597);
-            this.tabTreasury.TabIndex = 2;
-            this.tabTreasury.Text = "Treasury";
-            this.tabTreasury.UseVisualStyleBackColor = true;
+            this.tabPageTreasury.Controls.Add(this.ucTreasuryDashboard1);
+            this.tabPageTreasury.Location = new System.Drawing.Point(4, 5);
+            this.tabPageTreasury.Name = "tabPageTreasury";
+            this.tabPageTreasury.Size = new System.Drawing.Size(1172, 597);
+            this.tabPageTreasury.TabIndex = 2;
+            this.tabPageTreasury.Text = "Treasury";
+            this.tabPageTreasury.UseVisualStyleBackColor = true;
             // 
             // ucTreasuryDashboard1
             // 
@@ -613,15 +734,21 @@ namespace AccountingSystem
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.tabControlDashboard.ResumeLayout(false);
-            this.tabBudget.ResumeLayout(false);
-            this.tabBudget.PerformLayout();
-            this.tabAccounting.ResumeLayout(false);
+            this.tabPageBudget.ResumeLayout(false);
+            this.tabPageBudget.PerformLayout();
+            this.tabPageAccounting.ResumeLayout(false);
             this.tabControlAccounting.ResumeLayout(false);
             this.tabJournalEntryVoucher.ResumeLayout(false);
             this.tabJournalEntryVoucher.PerformLayout();
             this.tabJournals.ResumeLayout(false);
             this.tabJournals.PerformLayout();
-            this.tabTreasury.ResumeLayout(false);
+            this.tabLedgers.ResumeLayout(false);
+            this.tabLedgers.PerformLayout();
+            this.tabControlLedgers.ResumeLayout(false);
+            this.tabPageGeneralLedger.ResumeLayout(false);
+            this.tabPageSubsidiaryLedger.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.tabPageTreasury.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -646,7 +773,6 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuReportJournals;
         private System.Windows.Forms.ToolStripMenuItem menuDisbursingOfficer;
         internal System.Windows.Forms.ToolStripMenuItem menuSAAOB;
-        private System.Windows.Forms.ToolStripMenuItem menuLedgersReport;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblUserFullName;
         private System.Windows.Forms.ToolStripStatusLabel lblUserRole;
@@ -667,25 +793,34 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuBankCashBook;
         private System.Windows.Forms.ToolStripMenuItem menuJEVS;
         private System.Windows.Forms.TabControl tabControlDashboard;
-        internal System.Windows.Forms.TabPage tabAccounting;
+        internal System.Windows.Forms.TabPage tabPageAccounting;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem menuReceiptsConsolidated;
         private System.Windows.Forms.ToolStripMenuItem menuTrialBalance;
         private System.Windows.Forms.ToolStripMenuItem menuDailyCash;
         private System.Windows.Forms.ToolStripMenuItem financialStatementsToolStripMenuItem;
-        internal System.Windows.Forms.TabPage tabBudget;
+        internal System.Windows.Forms.TabPage tabPageBudget;
         private Views.Dashboard.ucBudgetDashboard ucBudgetDashboard1;
         private System.Windows.Forms.TabControl tabControlAccounting;
         private System.Windows.Forms.TabPage tabJournalEntryVoucher;
         private System.Windows.Forms.TabPage tabJournals;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabLedgers;
         private System.Windows.Forms.TabPage tabTrialBalance;
         private System.Windows.Forms.TabPage tabFinancialStatements;
         private Views.Dashboard.ucJEVDashboard ucjevDashboard1;
         private System.Windows.Forms.RadioButton radBtnTreasury;
-        private System.Windows.Forms.TabPage tabTreasury;
+        private System.Windows.Forms.TabPage tabPageTreasury;
         private Views.Dashboard.TreasuryDashboard.ucTreasuryDashboard ucTreasuryDashboard1;
         private Views.Dashboard.AccountingDashboard.ucJournalsDashboard ucJournalsDashboard1;
+        private System.Windows.Forms.TabControl tabControlLedgers;
+        private System.Windows.Forms.TabPage tabPageGeneralLedger;
+        private System.Windows.Forms.TabPage tabPageSubsidiaryLedger;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.RadioButton radioGeneralLedger;
+        private System.Windows.Forms.RadioButton radioSubsidiaryLedger;
+        private System.Windows.Forms.RadioButton radioTransactionLog;
+        private Views.Reports.Ledgers.ucGeneralLedger ucGeneralLedger1;
+        private Views.Reports.Ledgers.ucSubsidiaryLedger ucSubsidiaryLedger1;
     }
 }
 

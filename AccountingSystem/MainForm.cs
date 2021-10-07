@@ -164,19 +164,19 @@ namespace AccountingSystem
             if (Helper.HasPermission("Budget Dashboard"))
             {
                 radBtnBudget.Visible = true;
-                tabControlDashboard.TabPages.Add(tabBudget);
+                tabControlDashboard.TabPages.Add(tabPageBudget);
             }
 
             if (Helper.HasPermission("Accounting Dashboard"))
             {
                 radBtnAccounting.Visible = true;
-                tabControlDashboard.TabPages.Add(tabAccounting);
+                tabControlDashboard.TabPages.Add(tabPageAccounting);
             }
 
             if (Helper.HasPermission("Treasury Dashboard"))
             {
                 radBtnTreasury.Visible = true;
-                tabControlDashboard.TabPages.Add(tabTreasury);
+                tabControlDashboard.TabPages.Add(tabPageTreasury);
             }
 
             if (!Helper.HasPermission("Report Trial Balance"))
@@ -192,17 +192,17 @@ namespace AccountingSystem
 
         private void radBtnBudget_CheckedChanged(object sender, EventArgs e)
         {
-            tabControlDashboard.SelectedTab = tabBudget;
+            tabControlDashboard.SelectedTab = tabPageBudget;
         }
 
         private void radBtnAccounting_CheckedChanged(object sender, EventArgs e)
         {
-            tabControlDashboard.SelectedTab = tabAccounting;
+            tabControlDashboard.SelectedTab = tabPageAccounting;
         }
 
         private void radBtnTreasury_CheckedChanged(object sender, EventArgs e)
         {
-            tabControlDashboard.SelectedTab = tabTreasury;
+            tabControlDashboard.SelectedTab = tabPageTreasury;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -386,6 +386,16 @@ namespace AccountingSystem
         private void financialStatementsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmFinancialStatements().ShowDialog();
+        }
+
+        private void radioGeneralLedger_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControlLedgers.SelectedTab = tabPageGeneralLedger;
+        }
+
+        private void radioSubsidiaryLedger_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControlLedgers.SelectedTab = tabPageSubsidiaryLedger;
         }
     }
 }
