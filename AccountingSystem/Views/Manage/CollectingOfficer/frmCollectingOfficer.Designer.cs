@@ -208,6 +208,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(715, 438);
             this.Name = "frmCollectingOfficer";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Collecting Officers";
             this.Load += new System.EventHandler(this.frmCollectingOfficer_Load);

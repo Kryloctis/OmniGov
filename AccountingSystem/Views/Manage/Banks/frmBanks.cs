@@ -16,9 +16,8 @@ namespace AccountingSystem.Views.Manage.Banks
         public frmBanks()
         {
             InitializeComponent();
-            WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgBanks);
+            Helper.DatagridFullRowSelectStyle(dgBanks, true);
         }
         internal void LoadRecords()
         {

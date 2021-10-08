@@ -12,9 +12,19 @@ namespace AccountingSystem.Views.Manage.Realignment
 {
     public partial class frmRealignmentEdit : Form
     {
-        public frmRealignmentEdit()
+        ucRealignment uc;
+        internal string _budgetAppropriationId;
+        internal string _budgetAppropriationAmount;
+        internal frmRealignment _frmRealignment;
+
+        public frmRealignmentEdit(frmRealignment frmRealignment)
         {
             InitializeComponent();
+        }
+
+        private void frmRealignmentEdit_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

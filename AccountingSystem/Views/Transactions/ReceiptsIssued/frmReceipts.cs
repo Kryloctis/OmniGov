@@ -16,9 +16,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         public frmReceipts()
         {
             InitializeComponent();
-            WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgissue);
+            Helper.DatagridFullRowSelectStyle(dgissue, true );
         }
 
         private void frmReceipts_Load(object sender, EventArgs e)

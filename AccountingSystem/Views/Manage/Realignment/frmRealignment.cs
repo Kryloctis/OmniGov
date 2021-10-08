@@ -156,5 +156,20 @@ namespace AccountingSystem.Views.Manage.Realignment
                 throw;
             }
         }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            int rowIndex = dgRealignmentTo.CurrentCell.RowIndex;
+
+            budgetAppropriationAmount = dgRealignmentTo.Rows[rowIndex].Cells["amount"].Value.ToString();
+
+            var frmRealignmentEdit = new frmRealignmentEdit(this)
+            {
+                _budgetAppropriationAmount = budgetAppropriationAmount,
+                _budgetAppropriationId = budgetAppropriationId
+            };
+
+            frmRealignmentEdit.ShowDialog();
+        }
     }
 }

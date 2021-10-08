@@ -36,11 +36,9 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.realignmentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAdd = new System.Windows.Forms.Button();
             this.dtDateIssued = new System.Windows.Forms.DateTimePicker();
-            this.label6 = new System.Windows.Forms.Label();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.txtRemarks = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtAppropriationBalance = new System.Windows.Forms.TextBox();
             this.cmbAllotmentClass = new System.Windows.Forms.ComboBox();
@@ -48,13 +46,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.cmbFunds = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.nudAmount = new System.Windows.Forms.NumericUpDown();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.cmbAccount = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.cmbOthersFPP = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -65,6 +57,15 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.epTypeOfFund = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
             this.epRemarks = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtBudgetId = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetRealignment)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
@@ -129,15 +130,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.dtDateIssued.Size = new System.Drawing.Size(409, 23);
             this.dtDateIssued.TabIndex = 35;
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(10, 249);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 15);
-            this.label6.TabIndex = 36;
-            this.label6.Text = "Date Issued";
-            // 
             // btnRemove
             // 
             this.btnRemove.Location = new System.Drawing.Point(439, 131);
@@ -167,15 +159,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.txtRemarks.TabIndex = 42;
             this.txtRemarks.Validating += new System.ComponentModel.CancelEventHandler(this.txtRemarks_Validating);
             this.txtRemarks.Validated += new System.EventHandler(this.txtRemarks_Validated);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 275);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 15);
-            this.label5.TabIndex = 41;
-            this.label5.Text = "Remarks ";
             // 
             // groupBox1
             // 
@@ -274,24 +257,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
             this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(10, 216);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(51, 15);
-            this.label11.TabIndex = 20;
-            this.label11.Text = "Amount";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(9, 188);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(52, 15);
-            this.label12.TabIndex = 21;
-            this.label12.Text = "Account";
-            // 
             // cmbAccount
             // 
             this.cmbAccount.FormattingEnabled = true;
@@ -302,42 +267,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.cmbAccount.TabIndex = 22;
             this.cmbAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbAccount_Validating);
             this.cmbAccount.Validated += new System.EventHandler(this.cmbAccount_Validated);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 159);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 15);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Allotment Class";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 130);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(50, 15);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "Sub FPP";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(9, 72);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(75, 15);
-            this.label8.TabIndex = 14;
-            this.label8.Text = "Type of Fund";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(9, 101);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(27, 15);
-            this.label9.TabIndex = 15;
-            this.label9.Text = "FPP";
             // 
             // cmbOthersFPP
             // 
@@ -360,7 +289,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.groupBox2.Size = new System.Drawing.Size(537, 162);
             this.groupBox2.TabIndex = 45;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Realigned Accounts";
+            this.groupBox2.Text = "Realigned To Accounts";
             // 
             // label1
             // 
@@ -405,6 +334,88 @@ namespace AccountingSystem.Views.Manage.Realignment
             // 
             this.epRemarks.ContainerControl = this;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(9, 101);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(27, 15);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "FPP";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(9, 72);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(75, 15);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "Type of Fund";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(9, 130);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(50, 15);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Sub FPP";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 159);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(90, 15);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Allotment Class";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(10, 249);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(67, 15);
+            this.label6.TabIndex = 36;
+            this.label6.Text = "Date Issued";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(9, 188);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(52, 15);
+            this.label12.TabIndex = 21;
+            this.label12.Text = "Account";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(10, 216);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(51, 15);
+            this.label11.TabIndex = 20;
+            this.label11.Text = "Amount";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 275);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(55, 15);
+            this.label5.TabIndex = 41;
+            this.label5.Text = "Remarks ";
+            // 
+            // txtBudgetId
+            // 
+            this.txtBudgetId.AutoSize = true;
+            this.txtBudgetId.Location = new System.Drawing.Point(9, 47);
+            this.txtBudgetId.Name = "txtBudgetId";
+            this.txtBudgetId.Size = new System.Drawing.Size(21, 15);
+            this.txtBudgetId.TabIndex = 49;
+            this.txtBudgetId.Text = "ID ";
+            this.txtBudgetId.Visible = false;
+            // 
             // ucRealignment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -435,23 +446,15 @@ namespace AccountingSystem.Views.Manage.Realignment
         internal System.Windows.Forms.DataGridView dgBudgetRealignment;
         internal System.Windows.Forms.Button btnAdd;
         internal System.Windows.Forms.DateTimePicker dtDateIssued;
-        private System.Windows.Forms.Label label6;
         internal System.Windows.Forms.Button btnRemove;
         internal System.Windows.Forms.Button btnEdit;
         internal System.Windows.Forms.TextBox txtRemarks;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridViewTextBoxColumn budgetAppropriationId;
         private System.Windows.Forms.DataGridViewTextBoxColumn realignmentAccount;
         private System.Windows.Forms.DataGridViewTextBoxColumn realignmentAmount;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
         internal System.Windows.Forms.ComboBox cmbOthersFPP;
         internal System.Windows.Forms.NumericUpDown nudAmount;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
         internal System.Windows.Forms.ComboBox cmbAccount;
         private System.Windows.Forms.Label label13;
         internal System.Windows.Forms.ComboBox cmbFunds;
@@ -467,5 +470,14 @@ namespace AccountingSystem.Views.Manage.Realignment
         private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.TextBox txtTotalAmountRealigned;
         internal System.Windows.Forms.TextBox txtAppropriationBalance;
+        public System.Windows.Forms.Label txtBudgetId;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
     }
 }
