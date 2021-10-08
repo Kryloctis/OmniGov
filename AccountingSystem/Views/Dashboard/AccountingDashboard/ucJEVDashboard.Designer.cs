@@ -333,6 +333,7 @@ namespace AccountingSystem.Views.Dashboard
             this.cmbxJournals.Name = "cmbxJournals";
             this.cmbxJournals.Size = new System.Drawing.Size(275, 23);
             this.cmbxJournals.TabIndex = 30;
+            this.cmbxJournals.SelectionChangeCommitted += new System.EventHandler(this.cmbxJournals_SelectionChangeCommitted);
             // 
             // cbMonth
             // 

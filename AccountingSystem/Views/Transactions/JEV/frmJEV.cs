@@ -592,7 +592,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         internal void BtnSearch_Click(object sender, EventArgs e)
         {
-            var frmJevSearch = new frmJEVSearch(this,0,0);
+            var frmJevSearch = new frmJEVSearch(this,string.Empty,0,0);
             frmJevSearch.cmbxJevStatus.SelectedIndex = 0;
             frmJevSearch.ShowDialog();
         }

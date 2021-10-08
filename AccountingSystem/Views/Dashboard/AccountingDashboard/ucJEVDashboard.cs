@@ -40,14 +40,15 @@ namespace AccountingSystem.Views.Dashboard
 
         private void LoadJEVCounter()
         {
+            string journalName = cmbxJournals.Text.Trim();
             short month = Convert.ToInt16(cbMonth.SelectedIndex + 1);
             short year = Convert.ToInt16(nudYear.Value);
 
-            var jevCount = Factory.JEVRepository().TotalJEV(month, year);
-            var approvedJEVCount = Factory.JEVRepository().TotalApproveJEV(month, year);
-            var pendingJEVCount = Factory.JEVRepository().TotalPendingJEV(month, year);
-            var disapprovedJEVCOunt = Factory.JEVRepository().TotalDisapprovedJEV(month, year);
-            var cancelledJEVCount = Factory.JEVRepository().TotalCancelledJEV(month, year);
+            var jevCount = Factory.JEVRepository().JevCounterByStatus(string.Empty,journalName, month, year);
+            var approvedJEVCount = Factory.JEVRepository().JevCounterByStatus("approved", journalName,month, year);
+            var pendingJEVCount = Factory.JEVRepository().JevCounterByStatus("pending",journalName, month, year);
+            var disapprovedJEVCOunt = Factory.JEVRepository().JevCounterByStatus("disapproved" ,journalName ,month, year);
+            var cancelledJEVCount = Factory.JEVRepository().JevCounterByStatus("cancelled" ,journalName , month, year);
 
             lblJEVCounter.Text = jevCount.ToString();
             lblApprovedJEVCounter.Text = approvedJEVCount.ToString();
@@ -63,10 +64,10 @@ namespace AccountingSystem.Views.Dashboard
 
         private void LoadJEVList(byte jevStatus)
         {
-
+            string journalName = cmbxJournals.Text.Trim();
             byte month = Convert.ToByte(cbMonth.SelectedIndex);
             int year = (int)nudYear.Value;
-            var _frmJEVSearch = new frmJEVSearch(null,month, year);
+            var _frmJEVSearch = new frmJEVSearch(null, journalName, month, year);
 
             switch (jevStatus)
             {
@@ -84,6 +85,7 @@ namespace AccountingSystem.Views.Dashboard
                     break;
             }
 
+            _frmJEVSearch.cmbxJournals.Enabled = false;
             _frmJEVSearch.cmbxJevStatus.Enabled = false;
             _frmJEVSearch.cbMonth.Enabled = false;
             _frmJEVSearch.nudYear.Enabled = false;
@@ -123,6 +125,11 @@ namespace AccountingSystem.Views.Dashboard
         private void btnAddJEV_Click(object sender, EventArgs e)
         {
             _ = new frmJEV(null).ShowDialog();
+        }
+
+        private void cmbxJournals_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadJEVCounter();
         }
     }
 }
