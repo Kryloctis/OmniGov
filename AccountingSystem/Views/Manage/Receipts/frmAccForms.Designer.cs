@@ -190,10 +190,12 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.Controls.Add(this.dgreceipts);
             this.Controls.Add(this.toolStrip1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmAccForms";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Receipts";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmAccForms_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

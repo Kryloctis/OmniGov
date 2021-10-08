@@ -83,5 +83,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                 ucForms1.ResetForm();
             }
         }
+
+     
     }
 }

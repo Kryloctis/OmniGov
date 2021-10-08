@@ -31,6 +31,8 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucTreasuryDashboard));
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.btnReceipts = new System.Windows.Forms.ToolStripButton();
+            this.btnIssueReceipt = new System.Windows.Forms.ToolStripButton();
             this.btnIssueCheck = new System.Windows.Forms.ToolStripButton();
             this.btnPaymentCollection = new System.Windows.Forms.ToolStripButton();
             this.btnBankDeposit = new System.Windows.Forms.ToolStripButton();
@@ -43,6 +45,8 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.toolStrip2.BackColor = System.Drawing.Color.Transparent;
             this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnReceipts,
+            this.btnIssueReceipt,
             this.btnIssueCheck,
             this.btnPaymentCollection,
             this.btnBankDeposit,
@@ -52,6 +56,26 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.toolStrip2.Size = new System.Drawing.Size(771, 31);
             this.toolStrip2.TabIndex = 1;
             this.toolStrip2.Text = "toolStrip2";
+            // 
+            // btnReceipts
+            // 
+            this.btnReceipts.Image = global::AccountingSystem.Properties.Resources.document_delivery_receipt_add_24px1;
+            this.btnReceipts.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnReceipts.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnReceipts.Name = "btnReceipts";
+            this.btnReceipts.Size = new System.Drawing.Size(79, 28);
+            this.btnReceipts.Text = "Receipts";
+            this.btnReceipts.Click += new System.EventHandler(this.btnReceipts_Click);
+            // 
+            // btnIssueReceipt
+            // 
+            this.btnIssueReceipt.Image = global::AccountingSystem.Properties.Resources.bill_24px1;
+            this.btnIssueReceipt.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnIssueReceipt.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnIssueReceipt.Name = "btnIssueReceipt";
+            this.btnIssueReceipt.Size = new System.Drawing.Size(108, 28);
+            this.btnIssueReceipt.Text = "Issue Receipts";
+            this.btnIssueReceipt.Click += new System.EventHandler(this.btnIssueReceipt_Click);
             // 
             // btnIssueCheck
             // 
@@ -118,5 +142,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         internal System.Windows.Forms.ToolStripButton btnPaymentCollection;
         internal System.Windows.Forms.ToolStripButton btnBankDeposit;
         internal System.Windows.Forms.ToolStripButton btnGenerateRCD;
+        private System.Windows.Forms.ToolStripButton btnIssueReceipt;
+        private System.Windows.Forms.ToolStripButton btnReceipts;
     }
 }

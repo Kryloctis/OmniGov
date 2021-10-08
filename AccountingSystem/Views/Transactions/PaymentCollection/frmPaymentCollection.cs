@@ -16,7 +16,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         public frmPaymentCollection()
         {
             InitializeComponent();
-            WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgpayments, true);
         }

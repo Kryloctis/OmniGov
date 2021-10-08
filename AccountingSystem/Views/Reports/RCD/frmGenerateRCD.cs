@@ -28,12 +28,7 @@ namespace AccountingSystem.Views.Reports.RCD
             FId = Fid;
             data = _data;
             this.Text = "Generate Collections";
-        }
-        private void frmGenerateRCD_Load(object sender, EventArgs e)
-        {
-            
-        }        
-      
+        } 
 
         private void btnPreview_Click(object sender, EventArgs e)
         {
