@@ -42,27 +42,25 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             // dtpMonth
             // 
             this.dtpMonth.CustomFormat = "";
-            this.dtpMonth.Location = new System.Drawing.Point(73, 13);
-            this.dtpMonth.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dtpMonth.Location = new System.Drawing.Point(64, 10);
             this.dtpMonth.Name = "dtpMonth";
-            this.dtpMonth.Size = new System.Drawing.Size(294, 27);
+            this.dtpMonth.Size = new System.Drawing.Size(258, 23);
             this.dtpMonth.TabIndex = 18;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 18);
+            this.label1.Location = new System.Drawing.Point(15, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 20);
+            this.label1.Size = new System.Drawing.Size(38, 15);
             this.label1.TabIndex = 17;
             this.label1.Text = "From:";
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(384, 43);
-            this.btnRetrieve.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnRetrieve.Location = new System.Drawing.Point(336, 32);
             this.btnRetrieve.Name = "btnRetrieve";
-            this.btnRetrieve.Size = new System.Drawing.Size(86, 31);
+            this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
             this.btnRetrieve.TabIndex = 16;
             this.btnRetrieve.Text = "Retrieve";
             this.btnRetrieve.UseVisualStyleBackColor = true;
@@ -73,18 +71,16 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Location = new System.Drawing.Point(15, 82);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel1.Location = new System.Drawing.Point(13, 62);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1186, 790);
+            this.panel1.Size = new System.Drawing.Size(1038, 592);
             this.panel1.TabIndex = 19;
             // 
             // btnexcel
             // 
-            this.btnexcel.Location = new System.Drawing.Point(944, 7);
-            this.btnexcel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnexcel.Location = new System.Drawing.Point(826, 5);
             this.btnexcel.Name = "btnexcel";
-            this.btnexcel.Size = new System.Drawing.Size(134, 31);
+            this.btnexcel.Size = new System.Drawing.Size(117, 23);
             this.btnexcel.TabIndex = 20;
             this.btnexcel.Text = "Generate Excel";
             this.btnexcel.UseVisualStyleBackColor = true;
@@ -93,25 +89,26 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             // 
             // dtto
             // 
-            this.dtto.Location = new System.Drawing.Point(73, 47);
+            this.dtto.Location = new System.Drawing.Point(64, 35);
+            this.dtto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtto.Name = "dtto";
-            this.dtto.Size = new System.Drawing.Size(294, 27);
+            this.dtto.Size = new System.Drawing.Size(258, 23);
             this.dtto.TabIndex = 21;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(35, 52);
+            this.label2.Location = new System.Drawing.Point(31, 39);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(28, 20);
+            this.label2.Size = new System.Drawing.Size(22, 15);
             this.label2.TabIndex = 22;
             this.label2.Text = "To:";
             // 
             // frmPCReport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1215, 885);
+            this.ClientSize = new System.Drawing.Size(1063, 562);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dtto);
             this.Controls.Add(this.btnexcel);
@@ -119,7 +116,12 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             this.Controls.Add(this.dtpMonth);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnRetrieve);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmPCReport";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reports > Reports of General Collection";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmPCReport_Load);

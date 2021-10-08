@@ -17,9 +17,8 @@ namespace AccountingSystem.Views.Manage.Receipts
         public frmAccForms()
         {
             InitializeComponent();
-            WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgreceipts);
+            Helper.DatagridFullRowSelectStyle(dgreceipts, true);
         }
 
         private void frmAccForms_Load(object sender, EventArgs e)

@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.btnRefresh});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.toolStrip.Padding = new System.Windows.Forms.Padding(4);
             this.toolStrip.Size = new System.Drawing.Size(746, 58);
             this.toolStrip.TabIndex = 9;
             this.toolStrip.Text = "toolStrip1";
@@ -114,10 +114,9 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // txtsearch
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(459, 9);
+            this.txtsearch.Location = new System.Drawing.Point(458, 33);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.PlaceholderText = "Search...";
             this.txtsearch.Size = new System.Drawing.Size(277, 23);
             this.txtsearch.TabIndex = 12;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);

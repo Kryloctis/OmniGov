@@ -70,7 +70,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             this.btnRefresh});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.toolStrip.Padding = new System.Windows.Forms.Padding(4);
             this.toolStrip.Size = new System.Drawing.Size(906, 58);
             this.toolStrip.TabIndex = 11;
             this.toolStrip.Text = "toolStrip1";
@@ -165,7 +165,9 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             this.Controls.Add(this.dgvgc);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmGCList";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Report of Collections and Deposits";
             this.Load += new System.EventHandler(this.frmGCList_Load);

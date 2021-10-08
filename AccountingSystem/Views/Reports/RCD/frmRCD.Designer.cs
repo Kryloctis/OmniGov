@@ -212,6 +212,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmRCD";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Generate RCD";
             this.Load += new System.EventHandler(this.frmRCD_Load);

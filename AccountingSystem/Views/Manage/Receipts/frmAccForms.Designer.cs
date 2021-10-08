@@ -33,6 +33,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnissue = new System.Windows.Forms.ToolStripButton();
             this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.dgreceipts = new System.Windows.Forms.DataGridView();
@@ -53,12 +54,13 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.btnAdd,
             this.btnEdit,
             this.btnDelete,
+            this.toolStripSeparator1,
             this.btnissue,
             this.btnRefresh});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.toolStrip1.Size = new System.Drawing.Size(843, 58);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(4);
+            this.toolStrip1.Size = new System.Drawing.Size(1060, 58);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -97,6 +99,11 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
             // btnissue
             // 
             this.btnissue.Enabled = false;
@@ -132,7 +139,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.dgreceipts.RowHeadersWidth = 51;
             this.dgreceipts.RowTemplate.Height = 29;
             this.dgreceipts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgreceipts.Size = new System.Drawing.Size(822, 316);
+            this.dgreceipts.Size = new System.Drawing.Size(1039, 474);
             this.dgreceipts.TabIndex = 7;
             this.dgreceipts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgreceipts_CellDoubleClick);
             this.dgreceipts.SelectionChanged += new System.EventHandler(this.dgreceipts_SelectionChanged);
@@ -143,10 +150,10 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.lblRecordCount});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 382);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 540);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(843, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1060, 22);
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -166,7 +173,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(538, 33);
+            this.txtsearch.Location = new System.Drawing.Point(754, 22);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.Size = new System.Drawing.Size(294, 23);
@@ -177,7 +184,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(843, 404);
+            this.ClientSize = new System.Drawing.Size(1060, 562);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.dgreceipts);
@@ -211,5 +218,6 @@ namespace AccountingSystem.Views.Manage.Receipts
         private System.Windows.Forms.TextBox txtsearch;
         private System.Windows.Forms.ToolStripButton btnRefresh;
         private System.Windows.Forms.ToolStripButton btnissue;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

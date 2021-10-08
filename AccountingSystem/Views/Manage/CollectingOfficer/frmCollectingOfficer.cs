@@ -17,9 +17,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         public frmCollectingOfficer()
         {
             InitializeComponent();
-            WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgCollectingOfficer);
+            Helper.DatagridFullRowSelectStyle(dgCollectingOfficer, true);
         }
         internal void LoadRecords()
         {

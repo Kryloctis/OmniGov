@@ -17,9 +17,8 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         public frmGCList()
         {
             InitializeComponent();
-            WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgvgc);
+            Helper.DatagridFullRowSelectStyle(dgvgc);
         }
 
         private void dgvgc_SelectionChanged(object sender, EventArgs e)
