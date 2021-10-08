@@ -13,15 +13,15 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
         private void ChangeTabs()
         {
             if (radSFPosition.Checked)
-                tabControl1.SelectedTab = tabSFPosition;
+                tabControlFinancialStatements.SelectedTab = tabPageSFPosition;
             if (radSFPerformance.Checked)
-                tabControl1.SelectedTab = tabSFPerformance;
+                tabControlFinancialStatements.SelectedTab = tabPageSFPerformance;
             if (radSCF.Checked)
-                tabControl1.SelectedTab = tabSCF;
+                tabControlFinancialStatements.SelectedTab = tabPageSCF;
             if (radSCNAE.Checked)
-                tabControl1.SelectedTab = tabSCNAE;
+                tabControlFinancialStatements.SelectedTab = tabPageSCNAE;
             if (radSCBAA.Checked)
-                tabControl1.SelectedTab = tabSCBAA;
+                tabControlFinancialStatements.SelectedTab = tabPageSCBAA;
         }
 
         private void radSFPosition_CheckedChanged(object sender, System.EventArgs e)
