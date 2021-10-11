@@ -493,7 +493,7 @@ namespace AccountingSystem
             this.tabPageAccounting.Location = new System.Drawing.Point(4, 5);
             this.tabPageAccounting.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPageAccounting.Name = "tabPageAccounting";
-            this.tabPageAccounting.Size = new System.Drawing.Size(1172, 597);
+            this.tabPageAccounting.Size = new System.Drawing.Size(1362, 597);
             this.tabPageAccounting.TabIndex = 1;
             this.tabPageAccounting.Text = "Accounting";
             this.tabPageAccounting.UseVisualStyleBackColor = true;
@@ -510,7 +510,7 @@ namespace AccountingSystem
             this.tabControlAccounting.Margin = new System.Windows.Forms.Padding(0);
             this.tabControlAccounting.Name = "tabControlAccounting";
             this.tabControlAccounting.SelectedIndex = 0;
-            this.tabControlAccounting.Size = new System.Drawing.Size(1172, 597);
+            this.tabControlAccounting.Size = new System.Drawing.Size(1362, 597);
             this.tabControlAccounting.TabIndex = 0;
             // 
             // tabPageJournalEntryVoucher
@@ -520,7 +520,7 @@ namespace AccountingSystem
             this.tabPageJournalEntryVoucher.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageJournalEntryVoucher.Name = "tabPageJournalEntryVoucher";
             this.tabPageJournalEntryVoucher.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageJournalEntryVoucher.Size = new System.Drawing.Size(1164, 569);
+            this.tabPageJournalEntryVoucher.Size = new System.Drawing.Size(1354, 569);
             this.tabPageJournalEntryVoucher.TabIndex = 0;
             this.tabPageJournalEntryVoucher.Text = "Journal Entry Voucher";
             this.tabPageJournalEntryVoucher.UseVisualStyleBackColor = true;
@@ -533,7 +533,7 @@ namespace AccountingSystem
             this.ucjevDashboard1.Margin = new System.Windows.Forms.Padding(0);
             this.ucjevDashboard1.MinimumSize = new System.Drawing.Size(782, 160);
             this.ucjevDashboard1.Name = "ucjevDashboard1";
-            this.ucjevDashboard1.Size = new System.Drawing.Size(1158, 160);
+            this.ucjevDashboard1.Size = new System.Drawing.Size(1348, 160);
             this.ucjevDashboard1.TabIndex = 0;
             // 
             // tabPageJournals
@@ -982,7 +982,7 @@ namespace AccountingSystem
             this.tabPageTreasury.Controls.Add(this.ucTreasuryDashboard1);
             this.tabPageTreasury.Location = new System.Drawing.Point(4, 5);
             this.tabPageTreasury.Name = "tabPageTreasury";
-            this.tabPageTreasury.Size = new System.Drawing.Size(1172, 597);
+            this.tabPageTreasury.Size = new System.Drawing.Size(1362, 597);
             this.tabPageTreasury.TabIndex = 2;
             this.tabPageTreasury.Text = "Treasury";
             this.tabPageTreasury.UseVisualStyleBackColor = true;
@@ -992,7 +992,7 @@ namespace AccountingSystem
             this.ucTreasuryDashboard1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucTreasuryDashboard1.Location = new System.Drawing.Point(0, 0);
             this.ucTreasuryDashboard1.Name = "ucTreasuryDashboard1";
-            this.ucTreasuryDashboard1.Size = new System.Drawing.Size(1172, 597);
+            this.ucTreasuryDashboard1.Size = new System.Drawing.Size(1362, 597);
             this.ucTreasuryDashboard1.TabIndex = 0;
             // 
             // MainForm

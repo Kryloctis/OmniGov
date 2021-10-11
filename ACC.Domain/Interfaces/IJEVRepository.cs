@@ -47,6 +47,8 @@ namespace ACC.Domain.Interfaces
 
         int JevCounterByJournal(string fundName, int month, int year ,string journalName);
 
+        int JevCounterByStatus(string status,string journalName, short month, short year);
+
         int TotalJEV(short month, short year);
 
         int TotalApproveJEV(short month, short year);
@@ -64,7 +66,7 @@ namespace ACC.Domain.Interfaces
         string GetRemarks(int jevId);
 
 
-        DataTable FilterRecords(byte jevStatus, string searchTxt, short month, short year);
+        DataTable FilterRecords(byte jevStatus, string searchTxt, string journal, short month, short year);
 
         byte GetJevStatus(int jevId);
 
