@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void frmJEV_Load(object sender, EventArgs e)
         {
-            PermissionVerification();
+           
             if (_frmJEVSearch != null)
             {
                 LoadSelectedJEV(uc.jevNo);
@@ -35,6 +35,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 Text = "Select JEV";
             }
             uc.SumDebitCredit();
+            PermissionVerification();
         }
 
         private void PermissionVerification() 
@@ -48,10 +49,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
 
             if (!Helper.HasPermission("Report JEVs"))
-            {
-                btnPrint.Visible = false;
-                toolStripSeparator3.Visible = false;
-            }
+                btnPrint.Enabled = false;
         }
 
         private static ushort? ValidateNullSubsidiary(object subsidiaryCellValue)

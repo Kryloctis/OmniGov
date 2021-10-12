@@ -401,7 +401,6 @@ namespace AccountingSystem.Views.Dashboard
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         internal System.Windows.Forms.Label lblDisapprovedJEVCounter;
-        private System.Windows.Forms.LinkLabel linkDisapproved;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         internal System.Windows.Forms.NumericUpDown nudYear;
         private System.Windows.Forms.ComboBox cbMonth;
@@ -410,14 +409,15 @@ namespace AccountingSystem.Views.Dashboard
         internal System.Windows.Forms.LinkLabel lnkCancelled;
         internal System.Windows.Forms.Label lblCancelledJEVCounter;
         private System.Windows.Forms.Panel pnlPendingJEV;
-        private System.Windows.Forms.LinkLabel lnkPending;
         internal System.Windows.Forms.Label lblPendingJEVCounter;
         private System.Windows.Forms.Panel pnlApprovedJEV;
-        private System.Windows.Forms.LinkLabel lnkApproved;
         internal System.Windows.Forms.Label lblApprovedJEVCounter;
         private System.Windows.Forms.Panel pnlJEV;
-        private System.Windows.Forms.LinkLabel lnkJEV;
         internal System.Windows.Forms.Label lblJEVCounter;
         internal System.Windows.Forms.Button btnAddJEV;
+        internal System.Windows.Forms.LinkLabel linkDisapproved;
+        internal System.Windows.Forms.LinkLabel lnkPending;
+        internal System.Windows.Forms.LinkLabel lnkApproved;
+        internal System.Windows.Forms.LinkLabel lnkJEV;
     }
 }
