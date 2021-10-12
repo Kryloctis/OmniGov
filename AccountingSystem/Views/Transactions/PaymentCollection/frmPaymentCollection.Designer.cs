@@ -203,10 +203,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             // txtsearch
             // 
-            this.txtsearch.Location = new System.Drawing.Point(10, 60);
+            this.txtsearch.Location = new System.Drawing.Point(448, 20);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.Size = new System.Drawing.Size(371, 23);
+            this.txtsearch.Size = new System.Drawing.Size(312, 23);
             this.txtsearch.TabIndex = 11;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
@@ -216,22 +216,22 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgpayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgpayments.Location = new System.Drawing.Point(10, 91);
+            this.dgpayments.Location = new System.Drawing.Point(10, 60);
             this.dgpayments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgpayments.Name = "dgpayments";
             this.dgpayments.RowHeadersWidth = 51;
             this.dgpayments.RowTemplate.Height = 29;
-            this.dgpayments.Size = new System.Drawing.Size(1038, 443);
+            this.dgpayments.Size = new System.Drawing.Size(1038, 474);
             this.dgpayments.TabIndex = 12;
             this.dgpayments.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgpayments_CellDoubleClick);
             this.dgpayments.SelectionChanged += new System.EventHandler(this.dgpayments_SelectionChanged);
             // 
             // dtpdate
             // 
-            this.dtpdate.Location = new System.Drawing.Point(387, 60);
+            this.dtpdate.Location = new System.Drawing.Point(766, 20);
             this.dtpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpdate.Name = "dtpdate";
-            this.dtpdate.Size = new System.Drawing.Size(358, 23);
+            this.dtpdate.Size = new System.Drawing.Size(282, 23);
             this.dtpdate.TabIndex = 12;
             this.dtpdate.ValueChanged += new System.EventHandler(this.dtpdate_ValueChanged);
             // 
@@ -248,12 +248,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.Controls.Add(this.toolStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmPaymentCollection";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Transactions > Payment Collections";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmPaymentCollection_Load);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();

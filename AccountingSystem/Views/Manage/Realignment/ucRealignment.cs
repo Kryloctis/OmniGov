@@ -363,6 +363,12 @@ namespace AccountingSystem.Views.Manage.Realignment
         private void btnEdit_Click(object sender, EventArgs e)
         {
 
+            sbyte selectedRowCount = (sbyte)dgBudgetRealignment.SelectedRows.Count;
+
+            if (selectedRowCount > 1)
+                return;
+                
+            SumRealignment();
         }
     }
 }
