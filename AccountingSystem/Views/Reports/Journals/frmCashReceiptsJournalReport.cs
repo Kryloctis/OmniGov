@@ -143,7 +143,8 @@ namespace AccountingSystem.Views.Reports.Journals
                 report.DataSources.Add(new ReportDataSource("CashReceiptsJournal", CashReceiptsJournalDataTable()));
                 report.SetParameters(parameters);
                 reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.PageWidth;
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
                 reportViewer.RefreshReport();
                 Cursor.Current = Cursors.Default;
             }

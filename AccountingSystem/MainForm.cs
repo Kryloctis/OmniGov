@@ -19,6 +19,7 @@ using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.SAAOBB;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem
@@ -34,6 +35,9 @@ namespace AccountingSystem
             Helper.LoadFormIcon(this);
             tabControlDashboard.TabPages.Clear();
             tabControlAccounting.TabPages.Clear();
+            tabControlLedgers.TabPages.Clear();
+            tabControlTrialBalance.TabPages.Clear();
+            tabControlFinancialStatements.TabPages.Clear();
             userDict = Helper.LoggedInUserData();
             loginForm = _loginForm;
         }
@@ -46,6 +50,39 @@ namespace AccountingSystem
 
         private void ValidatePermissions()
         {
+
+            #region Dashboard
+
+            if (Helper.HasPermission("Budget Dashboard"))
+            {
+                radBtnBudget.Visible = true; 
+                tabControlDashboard.TabPages.Add(tabPageBudget);
+            }
+
+            if (Helper.HasPermission("Accounting Dashboard"))
+            {
+                radBtnAccounting.Visible = true;    
+                tabControlDashboard.TabPages.Add(tabPageAccounting);
+            }
+
+            if (Helper.HasPermission("Treasury Dashboard"))
+            {
+                radBtnTreasury.Visible = true;          
+                tabControlDashboard.TabPages.Add(tabPageTreasury);
+            }
+
+
+            if (Helper.HasPermission("Budget Dashboard"))
+                radBtnBudget.Checked = true;
+            else if (Helper.HasPermission("Accounting Dashboard"))
+                radBtnAccounting.Checked = true;
+            else if (Helper.HasPermission("Treasury Dashboard"))
+                radBtnTreasury.Checked = true;
+
+
+            #endregion
+
+
             if (!Helper.HasPermission("Manage Allotment Classes"))
                 menuAllotmentClasses.Visible = false;
 
@@ -101,9 +138,13 @@ namespace AccountingSystem
                 ucTreasuryDashboard1.btnPaymentCollection.Enabled = false;
 
             if (!Helper.HasPermission("Manage Receipts"))
+            {
+                ucTreasuryDashboard1.btnReceipts.Enabled = false;
                 menuReceipts.Visible = false;
+            }
 
-            //if (!Helper.HasPermission("Transaction Issue Receipt"))
+            if (!Helper.HasPermission("Transaction Issue Receipt"))
+                ucTreasuryDashboard1.btnIssueReceipt.Enabled = false;
 
             if (!Helper.HasPermission("Transaction Generate RCD"))
                 ucTreasuryDashboard1.btnGenerateRCD.Enabled = false;
@@ -125,25 +166,6 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Report Daily Cash Position"))
                 menuDailyCash.Visible = false;
-
-
-            if (Helper.HasPermission("Budget Dashboard"))
-            {
-                radBtnBudget.Visible = true;
-                tabControlDashboard.TabPages.Add(tabPageBudget);
-            }
-
-            if (Helper.HasPermission("Accounting Dashboard"))
-            {
-                radBtnAccounting.Visible = true;
-                tabControlDashboard.TabPages.Add(tabPageAccounting);
-            }
-
-            if (Helper.HasPermission("Treasury Dashboard"))
-            {
-                radBtnTreasury.Visible = true;
-                tabControlDashboard.TabPages.Add(tabPageTreasury);
-            }
 
             if (!Helper.HasPermission("Report SAAOB"))
                 menuSAAOB.Visible = false;
@@ -197,87 +219,76 @@ namespace AccountingSystem
             if (Helper.HasPermission("Report General Ledger") || Helper.HasPermission("Report Subsidiary Ledger"))
                 tabControlAccounting.TabPages.Add(tabPageLedgers);
 
-            if (!Helper.HasPermission("Report General Ledger"))
-                radioGeneralLedger.Enabled = false;
 
-            if (!Helper.HasPermission("Report Subsidiary Ledger"))
-                radioSubsidiaryLedger.Enabled = false;
-
-            if (radioGeneralLedger.Enabled)
+            if (Helper.HasPermission("Report General Ledger"))
             {
-                ucGeneralLedger1.Enabled = true;
+                radioGeneralLedger.Enabled = true;            
+                tabControlLedgers.TabPages.Add(tabPageGeneralLedger);
+            }
+
+            if (Helper.HasPermission("Report Subsidiary Ledger"))
+            {
+                radioSubsidiaryLedger.Enabled = true;
+                tabControlLedgers.TabPages.Add(tabPageSubsidiaryLedger);
+            }
+
+
+            if (Helper.HasPermission("Report General Ledger"))
                 radioGeneralLedger.Checked = true;
-            }
-            else
-                ucGeneralLedger1.Enabled = false;
-
-            if (radioSubsidiaryLedger.Enabled)
-            {
-                ucSubsidiaryLedger1.Enabled = true;
+            else if (Helper.HasPermission("Report Subsidiary Ledger"))
                 radioSubsidiaryLedger.Checked = true;
-            }
-            else
-                ucSubsidiaryLedger1.Enabled = false;
 
             #endregion
 
             #region Trial Balance
 
-            if (!Helper.HasPermission("Report Pre Trial Balance"))
-                radioPreTB.Enabled = false;
-
-            if (!Helper.HasPermission("Report Pre Trial Balance"))
-                radioPostTB.Enabled = false;
-
-            if (radioPreTB.Enabled)
-            {
-                ucPreClosingTrialBalance1.Enabled = true;
-                radioPreTB.Checked = true;
-            }
-            else
-                ucPreClosingTrialBalance1.Enabled = false;
-
-            if (radioPostTB.Enabled)
-            {
-                ucPostClosingTrialBalance1.Enabled = true;
-                radioPostTB.Checked = true;
-            }
-            else
-                ucPostClosingTrialBalance1.Enabled = false;
-
-
             if (Helper.HasPermission("Report Pre Trial Balance") || Helper.HasPermission("Report Post Trial Balance"))
                 tabControlAccounting.TabPages.Add(tabPageTrialBalance);
+
+
+            if (Helper.HasPermission("Report Pre Trial Balance"))
+            {
+                radioPreTB.Enabled = true;
+                tabControlTrialBalance.TabPages.Add(tabPagePreTrial);
+            }
+
+            if (Helper.HasPermission("Report Post Trial Balance"))
+            {
+                radioPostTB.Enabled = true; 
+                tabControlTrialBalance.TabPages.Add(tabPagePostTrial);
+            }
+
+            if (Helper.HasPermission("Report Pre Trial Balance"))
+                radioPreTB.Checked = true;
+            else if (Helper.HasPermission("Report Post Trial Balance")) 
+                radioPostTB.Checked = true;
 
             #endregion
 
             #region Financial Statements
 
             if (Helper.HasPermission("Report Statement of Changes in Net Assets Equity") || Helper.HasPermission("Report Statement of Financial Performance"))
-                tabControlAccounting.TabPages.Add(tabPageFinancialStatements);
-
-            if (!Helper.HasPermission("Report Statement of Financial Performance"))
-                radSFPerformance.Enabled = false;
-
-            if (!Helper.HasPermission("Report Statement of Changes in Net Assets Equity"))
-                radSCNAE.Enabled = false;
+            tabControlAccounting.TabPages.Add(tabPageFinancialStatements);
 
 
-            if (radSFPerformance.Enabled)
+            if (Helper.HasPermission("Report Statement of Financial Performance"))
             {
+                radSFPerformance.Enabled = true;  
+                tabControlFinancialStatements.TabPages.Add(tabPageSFPerformance);
+            }
+
+            if (Helper.HasPermission("Report Statement of Changes in Net Assets Equity"))
+            {
+                radSCNAE.Enabled = true;   
+                tabControlFinancialStatements.TabPages.Add(tabPageSCNAE);
+            }
+
+
+            if (Helper.HasPermission("Report Statement of Financial Performance")) 
                 radSFPerformance.Checked = true;
-                ucStatementOfFinancialPerformance1.Enabled = true;
-            }
-            else
-                ucStatementOfFinancialPerformance1.Enabled = false;
-
-            if (radSCNAE.Enabled)
-            {
+            else if (Helper.HasPermission("Report Statement of Changes in Net Assets Equity")) 
                 radSCNAE.Checked = true;
-                ucStatementOfChangesInNetAssetsquity1.Enabled = true;
-            }
-            else
-                ucStatementOfChangesInNetAssetsquity1.Enabled = false;
+
 
             #endregion
 

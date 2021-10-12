@@ -141,7 +141,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         internal System.Windows.Forms.ToolStripButton btnPaymentCollection;
         internal System.Windows.Forms.ToolStripButton btnBankDeposit;
         internal System.Windows.Forms.ToolStripButton btnGenerateRCD;
-        private System.Windows.Forms.ToolStripButton btnIssueReceipt;
-        private System.Windows.Forms.ToolStripButton btnReceipts;
+        internal System.Windows.Forms.ToolStripButton btnIssueReceipt;
+        internal System.Windows.Forms.ToolStripButton btnReceipts;
     }
 }
