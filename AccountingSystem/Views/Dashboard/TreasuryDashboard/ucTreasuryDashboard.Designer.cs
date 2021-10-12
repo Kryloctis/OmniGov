@@ -29,7 +29,6 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucTreasuryDashboard));
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.btnReceipts = new System.Windows.Forms.ToolStripButton();
             this.btnIssueReceipt = new System.Windows.Forms.ToolStripButton();
@@ -59,7 +58,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             // 
             // btnReceipts
             // 
-            this.btnReceipts.Image = global::AccountingSystem.Properties.Resources.document_delivery_receipt_add_24px1;
+            this.btnReceipts.Image = global::AccountingSystem.Properties.Resources.document_delivery_receipt_signed_24px;
             this.btnReceipts.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnReceipts.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnReceipts.Name = "btnReceipts";
@@ -69,7 +68,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             // 
             // btnIssueReceipt
             // 
-            this.btnIssueReceipt.Image = global::AccountingSystem.Properties.Resources.bill_24px1;
+            this.btnIssueReceipt.Image = global::AccountingSystem.Properties.Resources.document_delivery_receipt_user_24px;
             this.btnIssueReceipt.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnIssueReceipt.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnIssueReceipt.Name = "btnIssueReceipt";
@@ -79,7 +78,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             // 
             // btnIssueCheck
             // 
-            this.btnIssueCheck.Image = ((System.Drawing.Image)(resources.GetObject("btnIssueCheck.Image")));
+            this.btnIssueCheck.Image = global::AccountingSystem.Properties.Resources.check_24px;
             this.btnIssueCheck.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnIssueCheck.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnIssueCheck.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
@@ -90,7 +89,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             // 
             // btnPaymentCollection
             // 
-            this.btnPaymentCollection.Image = ((System.Drawing.Image)(resources.GetObject("btnPaymentCollection.Image")));
+            this.btnPaymentCollection.Image = global::AccountingSystem.Properties.Resources.money_banknote_archive_24px;
             this.btnPaymentCollection.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnPaymentCollection.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnPaymentCollection.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
@@ -101,7 +100,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             // 
             // btnBankDeposit
             // 
-            this.btnBankDeposit.Image = ((System.Drawing.Image)(resources.GetObject("btnBankDeposit.Image")));
+            this.btnBankDeposit.Image = global::AccountingSystem.Properties.Resources.bank_deposit_24px;
             this.btnBankDeposit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnBankDeposit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnBankDeposit.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
@@ -112,7 +111,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             // 
             // btnGenerateRCD
             // 
-            this.btnGenerateRCD.Image = ((System.Drawing.Image)(resources.GetObject("btnGenerateRCD.Image")));
+            this.btnGenerateRCD.Image = global::AccountingSystem.Properties.Resources.report_24px;
             this.btnGenerateRCD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnGenerateRCD.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnGenerateRCD.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);

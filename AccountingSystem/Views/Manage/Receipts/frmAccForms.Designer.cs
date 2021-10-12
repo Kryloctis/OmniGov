@@ -107,7 +107,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // btnissue
             // 
             this.btnissue.Enabled = false;
-            this.btnissue.Image = global::AccountingSystem.Properties.Resources.clipboard;
+            this.btnissue.Image = global::AccountingSystem.Properties.Resources.document_delivery_receipt_user_28px;
             this.btnissue.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnissue.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnissue.Name = "btnissue";
@@ -118,7 +118,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.refresh;
+            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.symbol_refresh_28px;
             this.btnRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRefresh.Name = "btnRefresh";

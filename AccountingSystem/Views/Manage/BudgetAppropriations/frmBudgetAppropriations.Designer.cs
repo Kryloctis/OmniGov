@@ -308,7 +308,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             // btnRealignment
             // 
-            this.btnRealignment.Image = global::AccountingSystem.Properties.Resources.money_banknotes_2_filled_arrow_left_right_28px;
+            this.btnRealignment.Image = global::AccountingSystem.Properties.Resources.modify_object_align_vertical_center_28px;
             this.btnRealignment.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnRealignment.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRealignment.Name = "btnRealignment";
