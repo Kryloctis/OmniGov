@@ -83,11 +83,11 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
 
         private void lnkCashReceiptJournal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var frmCashDisbursementJournalReport = new frmCashDisbursementsJournalReport();
-            frmCashDisbursementJournalReport.fundName = cmbxFunds.Text.Trim();
-            frmCashDisbursementJournalReport.journalName = "Cash Receipts Journal";
-            frmCashDisbursementJournalReport.date = dateTimePicker1.Value;
-            frmCashDisbursementJournalReport.ShowDialog();
+            var frmCashReceiptsJournalReport = new frmCashReceiptsJournalReport();
+            frmCashReceiptsJournalReport.fundName = cmbxFunds.Text.Trim();
+            frmCashReceiptsJournalReport.journalName = "Cash Receipts Journal";
+            frmCashReceiptsJournalReport.date = dateTimePicker1.Value;
+            frmCashReceiptsJournalReport.ShowDialog();
         }
 
         private void lnkCheckDisbursementsJournal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

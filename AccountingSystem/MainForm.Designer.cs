@@ -89,8 +89,8 @@ namespace AccountingSystem
             this.tabPagePostTrial = new System.Windows.Forms.TabPage();
             this.ucPostClosingTrialBalance1 = new AccountingSystem.Views.Reports.TrialBalance.ucPostClosingTrialBalance();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.radioPostTB = new System.Windows.Forms.RadioButton();
             this.radioPreTB = new System.Windows.Forms.RadioButton();
+            this.radioPostTB = new System.Windows.Forms.RadioButton();
             this.tabPageFinancialStatements = new System.Windows.Forms.TabPage();
             this.tabControlFinancialStatements = new System.Windows.Forms.TabControl();
             this.tabPageSFPosition = new System.Windows.Forms.TabPage();
@@ -399,13 +399,11 @@ namespace AccountingSystem
             // 
             this.radBtnBudget.Appearance = System.Windows.Forms.Appearance.Button;
             this.radBtnBudget.AutoSize = true;
-            this.radBtnBudget.Checked = true;
             this.radBtnBudget.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.radBtnBudget.Location = new System.Drawing.Point(3, 3);
             this.radBtnBudget.Name = "radBtnBudget";
             this.radBtnBudget.Size = new System.Drawing.Size(55, 25);
             this.radBtnBudget.TabIndex = 0;
-            this.radBtnBudget.TabStop = true;
             this.radBtnBudget.Text = "Budget";
             this.radBtnBudget.UseVisualStyleBackColor = true;
             this.radBtnBudget.Visible = false;
@@ -636,6 +634,7 @@ namespace AccountingSystem
             // 
             this.radioGeneralLedger.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioGeneralLedger.Checked = true;
+            this.radioGeneralLedger.Enabled = false;
             this.radioGeneralLedger.Location = new System.Drawing.Point(3, 3);
             this.radioGeneralLedger.Name = "radioGeneralLedger";
             this.radioGeneralLedger.Size = new System.Drawing.Size(122, 25);
@@ -651,6 +650,7 @@ namespace AccountingSystem
             // radioSubsidiaryLedger
             // 
             this.radioSubsidiaryLedger.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioSubsidiaryLedger.Enabled = false;
             this.radioSubsidiaryLedger.Location = new System.Drawing.Point(131, 3);
             this.radioSubsidiaryLedger.Name = "radioSubsidiaryLedger";
             this.radioSubsidiaryLedger.Size = new System.Drawing.Size(122, 25);
@@ -746,8 +746,8 @@ namespace AccountingSystem
             // flowLayoutPanel4
             // 
             this.flowLayoutPanel4.AutoSize = true;
-            this.flowLayoutPanel4.Controls.Add(this.radioPostTB);
             this.flowLayoutPanel4.Controls.Add(this.radioPreTB);
+            this.flowLayoutPanel4.Controls.Add(this.radioPostTB);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
@@ -755,24 +755,12 @@ namespace AccountingSystem
             this.flowLayoutPanel4.Size = new System.Drawing.Size(1354, 31);
             this.flowLayoutPanel4.TabIndex = 6;
             // 
-            // radioPostTB
-            // 
-            this.radioPostTB.Appearance = System.Windows.Forms.Appearance.Button;
-            this.radioPostTB.Location = new System.Drawing.Point(3, 3);
-            this.radioPostTB.Name = "radioPostTB";
-            this.radioPostTB.Size = new System.Drawing.Size(124, 25);
-            this.radioPostTB.TabIndex = 7;
-            this.radioPostTB.Text = "Post Trial Balance";
-            this.radioPostTB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.radioPostTB.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.radioPostTB.UseVisualStyleBackColor = true;
-            this.radioPostTB.Click += new System.EventHandler(this.radioPostTB_CheckedChanged);
-            // 
             // radioPreTB
             // 
             this.radioPreTB.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioPreTB.Checked = true;
-            this.radioPreTB.Location = new System.Drawing.Point(133, 3);
+            this.radioPreTB.Enabled = false;
+            this.radioPreTB.Location = new System.Drawing.Point(3, 3);
             this.radioPreTB.Name = "radioPreTB";
             this.radioPreTB.Size = new System.Drawing.Size(124, 25);
             this.radioPreTB.TabIndex = 6;
@@ -782,6 +770,20 @@ namespace AccountingSystem
             this.radioPreTB.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.radioPreTB.UseVisualStyleBackColor = true;
             this.radioPreTB.Click += new System.EventHandler(this.radioPreTB_CheckedChanged);
+            // 
+            // radioPostTB
+            // 
+            this.radioPostTB.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioPostTB.Enabled = false;
+            this.radioPostTB.Location = new System.Drawing.Point(133, 3);
+            this.radioPostTB.Name = "radioPostTB";
+            this.radioPostTB.Size = new System.Drawing.Size(124, 25);
+            this.radioPostTB.TabIndex = 7;
+            this.radioPostTB.Text = "Post Trial Balance";
+            this.radioPostTB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioPostTB.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.radioPostTB.UseVisualStyleBackColor = true;
+            this.radioPostTB.Click += new System.EventHandler(this.radioPostTB_CheckedChanged);
             // 
             // tabPageFinancialStatements
             // 
@@ -925,6 +927,7 @@ namespace AccountingSystem
             this.radSFPerformance.Appearance = System.Windows.Forms.Appearance.Button;
             this.radSFPerformance.AutoSize = true;
             this.radSFPerformance.Checked = true;
+            this.radSFPerformance.Enabled = false;
             this.radSFPerformance.Location = new System.Drawing.Point(190, 3);
             this.radSFPerformance.Name = "radSFPerformance";
             this.radSFPerformance.Size = new System.Drawing.Size(206, 25);
@@ -938,6 +941,7 @@ namespace AccountingSystem
             // 
             this.radSCNAE.Appearance = System.Windows.Forms.Appearance.Button;
             this.radSCNAE.AutoSize = true;
+            this.radSCNAE.Enabled = false;
             this.radSCNAE.Location = new System.Drawing.Point(402, 3);
             this.radSCNAE.Name = "radSCNAE";
             this.radSCNAE.Size = new System.Drawing.Size(243, 25);
