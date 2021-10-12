@@ -125,7 +125,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
                 btnSupplementalAppropriations.Enabled = true;
-                btnAugmentation.Enabled = true;
                 btnRealignment.Enabled = true;
 
             }
@@ -135,7 +134,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
                 btnSupplementalAppropriations.Enabled = false;
-                btnAugmentation.Enabled = false;
                 btnRealignment.Enabled = false;
             }
             else
@@ -144,7 +142,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Enabled = false;
                 btnDelete.Text = "Delete";
                 btnSupplementalAppropriations.Enabled = false;
-                btnAugmentation.Enabled = false;
                 btnRealignment.Enabled = false;
             }
 
@@ -359,7 +356,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             } 
         }
 
-
         private void btnSupplementalAppropriations_Click(object sender, EventArgs e)
         {
             int rowIndex = dgBudgetAppropriations.CurrentCell.RowIndex;
@@ -369,11 +365,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
             frmSupplementalAppropriations.budgetAppropriationsId = budgetAppropriationsId;
             frmSupplementalAppropriations.ShowDialog();
-        }
-
-        private void btnAugmentation_Click(object sender, EventArgs e)
-        {
-            _ = new frmAugmentation().ShowDialog();
         }
 
         private void btnRealignment_Click(object sender, EventArgs e)
@@ -394,7 +385,5 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
             frmRealignment.ShowDialog();
         }
-
-    
     }
 }
