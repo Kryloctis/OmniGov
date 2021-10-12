@@ -1,8 +1,6 @@
 ﻿using AccountingSystem.Views.Manage.AccountableForm;
 using AccountingSystem.Views.Manage.AllotmentClasses;
-using AccountingSystem.Views.Manage.AllotmentRelease;
 using AccountingSystem.Views.Manage.Banks;
-using AccountingSystem.Views.Manage.BudgetAppropriations;
 using AccountingSystem.Views.Manage.ChartOfAccounts;
 using AccountingSystem.Views.Manage.CollectingOfficer;
 using AccountingSystem.Views.Manage.DisbursingOfficer;
@@ -15,22 +13,10 @@ using AccountingSystem.Views.Manage.Users.Roles;
 using AccountingSystem.Views.Reports.Cashbook;
 using AccountingSystem.Views.Reports.ConsolidatedReceipts;
 using AccountingSystem.Views.Reports.DailyCashReport;
-using AccountingSystem.Views.Reports.Financial_Statements;
-using AccountingSystem.Views.Reports.JEV;
-using AccountingSystem.Views.Reports.Journals;
-using AccountingSystem.Views.Reports.Ledgers;
 using AccountingSystem.Views.Reports.PaymentCollection;
-using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.SAAOBB;
-using AccountingSystem.Views.Reports.TrialBalance;
-using AccountingSystem.Views.Transactions.BankDeposits;
-using AccountingSystem.Views.Transactions.JEV;
-using AccountingSystem.Views.Transactions.ObligationRequest;
-using AccountingSystem.Views.Transactions.PaymentCollection;
-using AccountingSystem.Views.Transactions.RCI;
-using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -47,13 +33,14 @@ namespace AccountingSystem
             InitializeComponent();
             Helper.LoadFormIcon(this);
             tabControlDashboard.TabPages.Clear();
+            tabControlAccounting.TabPages.Clear();
             userDict = Helper.LoggedInUserData();
             loginForm = _loginForm;
         }
 
         private void LoadLoggedInUser()
         {
-            lblUserFullName.Text = $"Welcome {userDict["first_name"]} {userDict["mid_initial"]} {userDict["last_name"]}";
+            lblUserFullName.Text = $"Welcome: {userDict["first_name"]} {userDict["mid_initial"]} {userDict["last_name"]}";
             lblUserRole.Text = userDict["role_name"];
         }
 
@@ -92,19 +79,8 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Manage Roles"))
                 menuRoles.Visible = false;
 
-            if (!Helper.HasPermission("Transaction JEV"))
-            {
-                ucjevDashboard1.btnAddJEV.Enabled = false;
-            }
-
             if (!Helper.HasPermission("Transaction Obligation Request"))
                 ucBudgetDashboard1.btnObligationRequest.Visible = false;
-
-            if (!Helper.HasPermission("Report General Journal") && !Helper.HasPermission("Report Cash Receipts Journal") && !Helper.HasPermission("Report Procurement Received Journal") && !Helper.HasPermission("Report Cash Disbursements Journal") && !Helper.HasPermission("Report Check Disbursements Journal") && !Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
-                tabPageJournals.Visible = false;
-
-            if (!Helper.HasPermission("Report General Ledger") && !Helper.HasPermission("Report Subsidiary Ledger"))
-                tabPageLedgers.Visible = false;
 
             if (!Helper.HasPermission("Manage Banks"))
                 menuBanks.Visible = false;
@@ -113,38 +89,24 @@ namespace AccountingSystem
                 menuDisbursingOfficer.Visible = false;
 
             if (!Helper.HasPermission("Transaction Issue Check"))
-            {
                 ucTreasuryDashboard1.btnIssueCheck.Enabled = false;
-            }
 
             if (!Helper.HasPermission("Manage Accountable Forms"))
                 menuAccForm.Visible = false;
 
             if (!Helper.HasPermission("Transaction Bank Deposits"))
-            {
                 ucTreasuryDashboard1.btnBankDeposit.Enabled = false;
-            }
-
-            if (!Helper.HasPermission("Report SAAOB"))
-                menuSAAOB.Visible = false;
-
-            if (!Helper.HasPermission("Report SAAOBB"))
-                menuSAAOBB.Visible = false;
 
             if (!Helper.HasPermission("Transaction Payments"))
-            {
                 ucTreasuryDashboard1.btnPaymentCollection.Enabled = false;
-            }
 
             if (!Helper.HasPermission("Manage Receipts"))
                 menuReceipts.Visible = false;
 
-            if (!Helper.HasPermission("Transaction Issue Receipt"))
+            //if (!Helper.HasPermission("Transaction Issue Receipt"))
 
             if (!Helper.HasPermission("Transaction Generate RCD"))
-            {
                 ucTreasuryDashboard1.btnGenerateRCD.Enabled = false;
-            }
 
             if (!Helper.HasPermission("Report of Checks Issued"))
                 menuprintRCI.Visible = false;
@@ -157,6 +119,13 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Report Bank Cashbook"))
                 menuBankCashBook.Visible = false;
+
+            if (!Helper.HasPermission("Report Consolidated Receipts"))
+                menuReceiptsConsolidated.Visible = false;
+
+            if (!Helper.HasPermission("Report Daily Cash Position"))
+                menuDailyCash.Visible = false;
+
 
             if (Helper.HasPermission("Budget Dashboard"))
             {
@@ -176,15 +145,142 @@ namespace AccountingSystem
                 tabControlDashboard.TabPages.Add(tabPageTreasury);
             }
 
-            if (!Helper.HasPermission("Report Trial Balance"))
+            if (!Helper.HasPermission("Report SAAOB"))
+                menuSAAOB.Visible = false;
+
+            if (!Helper.HasPermission("Report SAAOBB"))
+                menuSAAOBB.Visible = false;
+
+            #region Journal Entry Voucher
+
+            if (Helper.HasPermission("Transaction JEV") || Helper.HasPermission("Report JEVs"))
+                tabControlAccounting.TabPages.Add(tabPageJournalEntryVoucher);
+
+            if (!Helper.HasPermission("Transaction JEV"))
             {
-                tabControlTrialBalance.Visible = false;
+                ucjevDashboard1.btnAddJEV.Enabled = false;
+                ucjevDashboard1.lnkPending.Enabled = false;
+                ucjevDashboard1.lnkCancelled.Enabled = false;
+                ucjevDashboard1.linkDisapproved.Enabled = false;
             }
 
-            if (!Helper.HasPermission("Report Financial Statements"))
+            #endregion
+
+            #region Journals
+
+            if (Helper.HasPermission("Report General Journal") || Helper.HasPermission("Report Cash Receipts Journal") || Helper.HasPermission("Report Procurement Received Journal") || Helper.HasPermission("Report Cash Disbursements Journal") || Helper.HasPermission("Report Check Disbursements Journal") || Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
+                tabControlAccounting.TabPages.Add(tabPageJournals);
+
+
+            if (!Helper.HasPermission("Report General Journal"))
+                ucJournalsDashboard1.lnkGeneralJournal.Enabled = false;
+
+            if (!Helper.HasPermission("Report Cash Receipts Journal"))
+                ucJournalsDashboard1.lnkCashReceiptJournal.Enabled = false;
+
+            if (!Helper.HasPermission("Report Procurement Received Journal"))
+                ucJournalsDashboard1.lnkProcurementReceivedJournal.Enabled = false;
+
+            if (!Helper.HasPermission("Report Cash Disbursements Journal"))
+                ucJournalsDashboard1.lnkCashDisbursementJournal.Enabled = false;
+
+            if (!Helper.HasPermission("Report Check Disbursements Journal"))
+                ucJournalsDashboard1.lnkCheckDisbursementsJournal.Enabled = false;
+
+            if (!Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
+                ucJournalsDashboard1.lnkADAdisbursementsJournal.Enabled = false;
+
+            #endregion
+
+            #region Ledgers
+
+            if (Helper.HasPermission("Report General Ledger") || Helper.HasPermission("Report Subsidiary Ledger"))
+                tabControlAccounting.TabPages.Add(tabPageLedgers);
+
+            if (!Helper.HasPermission("Report General Ledger"))
+                radioGeneralLedger.Enabled = false;
+
+            if (!Helper.HasPermission("Report Subsidiary Ledger"))
+                radioSubsidiaryLedger.Enabled = false;
+
+            if (radioGeneralLedger.Enabled)
             {
-                financialStatementsToolStripMenuItem.Visible = false;
+                ucGeneralLedger1.Enabled = true;
+                radioGeneralLedger.Checked = true;
             }
+            else
+                ucGeneralLedger1.Enabled = false;
+
+            if (radioSubsidiaryLedger.Enabled)
+            {
+                ucSubsidiaryLedger1.Enabled = true;
+                radioSubsidiaryLedger.Checked = true;
+            }
+            else
+                ucSubsidiaryLedger1.Enabled = false;
+
+            #endregion
+
+            #region Trial Balance
+
+            if (!Helper.HasPermission("Report Pre Trial Balance"))
+                radioPreTB.Enabled = false;
+
+            if (!Helper.HasPermission("Report Pre Trial Balance"))
+                radioPostTB.Enabled = false;
+
+            if (radioPreTB.Enabled)
+            {
+                ucPreClosingTrialBalance1.Enabled = true;
+                radioPreTB.Checked = true;
+            }
+            else
+                ucPreClosingTrialBalance1.Enabled = false;
+
+            if (radioPostTB.Enabled)
+            {
+                ucPostClosingTrialBalance1.Enabled = true;
+                radioPostTB.Checked = true;
+            }
+            else
+                ucPostClosingTrialBalance1.Enabled = false;
+
+
+            if (Helper.HasPermission("Report Pre Trial Balance") || Helper.HasPermission("Report Post Trial Balance"))
+                tabControlAccounting.TabPages.Add(tabPageTrialBalance);
+
+            #endregion
+
+            #region Financial Statements
+
+            if (Helper.HasPermission("Report Statement of Changes in Net Assets Equity") || Helper.HasPermission("Report Statement of Financial Performance"))
+                tabControlAccounting.TabPages.Add(tabPageFinancialStatements);
+
+            if (!Helper.HasPermission("Report Statement of Financial Performance"))
+                radSFPerformance.Enabled = false;
+
+            if (!Helper.HasPermission("Report Statement of Changes in Net Assets Equity"))
+                radSCNAE.Enabled = false;
+
+
+            if (radSFPerformance.Enabled)
+            {
+                radSFPerformance.Checked = true;
+                ucStatementOfFinancialPerformance1.Enabled = true;
+            }
+            else
+                ucStatementOfFinancialPerformance1.Enabled = false;
+
+            if (radSCNAE.Enabled)
+            {
+                radSCNAE.Checked = true;
+                ucStatementOfChangesInNetAssetsquity1.Enabled = true;
+            }
+            else
+                ucStatementOfChangesInNetAssetsquity1.Enabled = false;
+
+            #endregion
+
         }
 
         private void radBtnBudget_CheckedChanged(object sender, EventArgs e)
@@ -204,8 +300,11 @@ namespace AccountingSystem
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            LoadLoggedInUser();
-            ValidatePermissions();
+            if (!DesignMode)
+            {
+                LoadLoggedInUser();
+                ValidatePermissions();
+            }
         }
 
         private void menuJournals_Click(object sender, EventArgs e)
@@ -328,11 +427,6 @@ namespace AccountingSystem
 
         #endregion
 
-        private void financialStatementsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmFinancialStatements().ShowDialog();
-        }
-
         private void radioGeneralLedger_CheckedChanged(object sender, EventArgs e)
         {
             tabControlLedgers.SelectedTab = tabPageGeneralLedger;
@@ -351,6 +445,31 @@ namespace AccountingSystem
         private void radioPostTB_CheckedChanged(object sender, EventArgs e)
         {
             tabControlTrialBalance.SelectedTab = tabPagePostTrial;
+        }
+
+        private void radSFPosition_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControlFinancialStatements.SelectedTab = tabPageSFPosition;
+        }
+
+        private void radSFPerformance_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControlFinancialStatements.SelectedTab = tabPageSFPerformance;
+        }
+
+        private void radSCNAE_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControlFinancialStatements.SelectedTab = tabPageSCNAE;
+        }
+
+        private void radSCF_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControlFinancialStatements.SelectedTab = tabPageSCF;
+        }
+
+        private void radSCBAA_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControlFinancialStatements.SelectedTab = tabPageSCBAA;
         }
     }
 }

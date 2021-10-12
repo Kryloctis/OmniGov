@@ -396,16 +396,12 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel pnlPendingJEV;
-        private System.Windows.Forms.LinkLabel lnkCashDisbursementJournal;
         internal System.Windows.Forms.Label lblCashDisbursementsJournalCount;
         private System.Windows.Forms.Panel pnlApprovedJEV;
-        private System.Windows.Forms.LinkLabel lnkGeneralJournal;
         internal System.Windows.Forms.Label lblGeneralJournalCount;
         private System.Windows.Forms.Panel pnlJEV;
-        private System.Windows.Forms.LinkLabel lnkCashReceiptJournal;
         internal System.Windows.Forms.Label lblCashReceiptsJournalCount;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.LinkLabel lnkCheckDisbursementsJournal;
         internal System.Windows.Forms.Label lblCheckDisbursementsJournalCount;
         private System.Windows.Forms.Panel panel2;
         internal System.Windows.Forms.LinkLabel lnkADAdisbursementsJournal;
@@ -413,5 +409,9 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
         private System.Windows.Forms.Panel panel3;
         internal System.Windows.Forms.LinkLabel lnkProcurementReceivedJournal;
         internal System.Windows.Forms.Label lblProcurementReceivedJournalCount;
+        internal System.Windows.Forms.LinkLabel lnkCashDisbursementJournal;
+        internal System.Windows.Forms.LinkLabel lnkGeneralJournal;
+        internal System.Windows.Forms.LinkLabel lnkCashReceiptJournal;
+        internal System.Windows.Forms.LinkLabel lnkCheckDisbursementsJournal;
     }
 }

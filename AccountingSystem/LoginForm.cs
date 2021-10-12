@@ -45,7 +45,6 @@ namespace AccountingSystem
                 txtPassword.Clear();
                 btnVisibility.Image = visibleImage;
                 txtPassword.PasswordChar = '•';
-
                 return;
             }
 
