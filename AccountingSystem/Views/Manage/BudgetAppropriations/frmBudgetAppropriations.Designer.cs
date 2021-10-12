@@ -252,6 +252,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnRealignment});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.toolStrip1.Size = new System.Drawing.Size(1201, 50);
             this.toolStrip1.TabIndex = 9;
             this.toolStrip1.Text = "toolStrip1";
@@ -262,8 +263,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnAdd.Size = new System.Drawing.Size(43, 47);
+            this.btnAdd.Size = new System.Drawing.Size(33, 47);
             this.btnAdd.Text = "Add";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
