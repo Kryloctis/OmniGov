@@ -51,6 +51,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // 
             // toolStrip
             // 
+            this.toolStrip.AutoSize = false;
             this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -102,7 +103,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.refresh;
+            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.symbol_refresh_28px;
             this.btnRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRefresh.Name = "btnRefresh";
@@ -114,7 +115,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // txtsearch
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(458, 33);
+            this.txtsearch.Location = new System.Drawing.Point(458, 18);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.Size = new System.Drawing.Size(277, 23);

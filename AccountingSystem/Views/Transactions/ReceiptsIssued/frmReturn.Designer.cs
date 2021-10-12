@@ -43,62 +43,68 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 68);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 51);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(508, 36);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(444, 27);
             this.flowLayoutPanel1.TabIndex = 6;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(411, 3);
+            this.btnCancel.Location = new System.Drawing.Point(359, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnCancel.Size = new System.Drawing.Size(94, 29);
+            this.btnCancel.Size = new System.Drawing.Size(82, 22);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save;
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(311, 3);
+            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
+            this.btnSave.Location = new System.Drawing.Point(271, 2);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSave.Size = new System.Drawing.Size(94, 29);
+            this.btnSave.Size = new System.Drawing.Size(82, 22);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
+            this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 24);
+            this.label1.Location = new System.Drawing.Point(10, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 20);
+            this.label1.Size = new System.Drawing.Size(88, 15);
             this.label1.TabIndex = 7;
             this.label1.Text = "Date Returned :";
             // 
             // dtpreturn
             // 
-            this.dtpreturn.Location = new System.Drawing.Point(130, 19);
+            this.dtpreturn.Location = new System.Drawing.Point(114, 14);
+            this.dtpreturn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpreturn.Name = "dtpreturn";
-            this.dtpreturn.Size = new System.Drawing.Size(364, 27);
+            this.dtpreturn.Size = new System.Drawing.Size(319, 23);
             this.dtpreturn.TabIndex = 9;
             // 
             // frmReturn
             // 
             this.AcceptButton = this.btnSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(508, 104);
+            this.ClientSize = new System.Drawing.Size(444, 78);
             this.Controls.Add(this.dtpreturn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmReturn";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

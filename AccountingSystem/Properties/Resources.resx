@@ -112,12 +112,12 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -127,14 +127,8 @@
   <data name="refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\refresh1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="button_add_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\button-add-14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="visible_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\visible-16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="clear" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\clear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="budget_approprations_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\budget-approprations-24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -154,12 +148,6 @@
   <data name="accounting" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\accounting.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="deposit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\deposit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="document-delivery-receipt-add@24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\document-delivery-receipt-add@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="document_delivery_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document-delivery-24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -169,17 +157,11 @@
   <data name="action_arrow_right_filled_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\action-arrow-right-filled-28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="refresh-page@28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\refresh-page@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="symbol_refresh_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\symbol_refresh-14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="document_disapprove_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document-disapprove-28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="clipboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\clipboard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="return" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\return.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -187,17 +169,11 @@
   <data name="give_money_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\give-money-28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="button_delete_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\button-delete-14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="save28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\save28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="supplemental_appropriations_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\supplemental-appropriations-24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="money-banknotes-2-filled-arrow-left-right@24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\money-banknotes-2-filled-arrow-left-right@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="symbol_cancel_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\symbol-cancel-28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -232,17 +208,11 @@
   <data name="augmentation_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\augmentation-28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="bill_large@1x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bill_large@1x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="find-doc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\find-document.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ok14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ok14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="button_edit_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\button-edit-14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="rcd" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\rcd1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -265,44 +235,17 @@
   <data name="hourglass_18px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hourglass-18px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="bill@24px1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bill@24px1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="invisible_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\invisible-16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="button-update@28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\button-update@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="document" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\document2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="bill@24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bill@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="printer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\printer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="bill_small@2x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bill_small@2x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="find" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\find.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="money-banknotes-2-filled-arrow-left-right@28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\money-banknotes-2-filled-arrow-left-right@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="document_approve_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document-approve-28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="approval" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\approval.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="button-update@28px1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\button-update@28px1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="bill@28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bill@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="obligation_request_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\obligation-request-24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -313,7 +256,31 @@
   <data name="edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="document-delivery-receipt-add@24px1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\document-delivery-receipt-add@24px1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="bank_deposit_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bank-deposit@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="check_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\check@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_delivery_receipt_signed_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-delivery-receipt-signed@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_delivery_receipt_user_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-delivery-receipt-user@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="modify_object_align_vertical_center_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\modify-object-align-vertical-center@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="money_banknote_archive_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\money-banknote-archive@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_delivery_receipt_user_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-delivery-receipt-user@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="report_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\report@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="symbol_refresh_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\symbol-refresh@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

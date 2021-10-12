@@ -78,7 +78,6 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             // btnDeposit
             // 
             this.btnDeposit.Enabled = false;
-            this.btnDeposit.Image = global::AccountingSystem.Properties.Resources.deposit;
             this.btnDeposit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDeposit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDeposit.Name = "btnDeposit";

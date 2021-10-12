@@ -119,7 +119,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.refresh;
+            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.symbol_refresh_28px;
             this.btnRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRefresh.Name = "btnRefresh";
