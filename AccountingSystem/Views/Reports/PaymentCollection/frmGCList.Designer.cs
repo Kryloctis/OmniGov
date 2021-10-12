@@ -78,6 +78,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             // btnDeposit
             // 
             this.btnDeposit.Enabled = false;
+            this.btnDeposit.Image = global::AccountingSystem.Properties.Resources.mailbox_in_filled_28px;
             this.btnDeposit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDeposit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDeposit.Name = "btnDeposit";
@@ -101,7 +102,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.refresh;
+            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.symbol_refresh_28px;
             this.btnRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRefresh.Name = "btnRefresh";

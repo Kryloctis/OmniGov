@@ -253,6 +253,16 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap document_delivery_receipt_signed_undo_2_28px {
+            get {
+                object obj = ResourceManager.GetObject("document_delivery_receipt_signed_undo_2_28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap document_delivery_receipt_user_24px {
             get {
                 object obj = ResourceManager.GetObject("document_delivery_receipt_user_24px", resourceCulture);
@@ -346,6 +356,16 @@ namespace AccountingSystem.Properties {
         internal static System.Drawing.Bitmap invisible_16px {
             get {
                 object obj = ResourceManager.GetObject("invisible_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mailbox_in_filled_28px {
+            get {
+                object obj = ResourceManager.GetObject("mailbox_in_filled_28px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

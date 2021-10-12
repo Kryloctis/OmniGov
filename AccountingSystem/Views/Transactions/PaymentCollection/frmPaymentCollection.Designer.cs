@@ -108,7 +108,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             // btnrefresh
             // 
-            this.btnrefresh.Image = global::AccountingSystem.Properties.Resources.refresh;
+            this.btnrefresh.Image = global::AccountingSystem.Properties.Resources.symbol_refresh_28px;
             this.btnrefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnrefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnrefresh.Name = "btnrefresh";
@@ -203,6 +203,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             // txtsearch
             // 
+            this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtsearch.Location = new System.Drawing.Point(448, 20);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
@@ -228,6 +229,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             // dtpdate
             // 
+            this.dtpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpdate.Location = new System.Drawing.Point(766, 20);
             this.dtpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpdate.Name = "dtpdate";
