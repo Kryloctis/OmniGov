@@ -10,12 +10,20 @@ namespace ACC.Domain.Interfaces
     {
 
         DataTable GetRecordsByBudgetAppropriationId(int budgetAppropriationsId);
-        DataTable GetRealignmentFromByAppropriationId(int budgetAppropriationsId);
-        DataTable GetRealignmentToByAppropriationId(int budgetAppropriationsId);
+        DataTable GetBudgetRealignmentByAppropriationId(int budgetAppropriationsId);
+        DataTable GetRecordsByRealignmentId(int realignmentId);
+        DataTable GetRealignedAccountsByBudgetAppropriationId(int budgetAppropriationsId);
+        DataTable GetRealignedAccountsByRealignmentId(int realignmentId);
+
+
+
+        Dictionary<string, string> GetRecordByRealignmentId(int realignmentId);
+
         Decimal GetAmountOfBudgetRealignedToByBudgetId(int budgetId);
         Decimal GetAmountOfBudgetRealignedFromByBudgetId(int budgetId);
         bool InsertRealignment(BudgetRealignmentModel entity);
         bool BudgetHasRealignment(int budgetId);
-        ushort GetLastInsertedID();
+        ushort GetLastInsertedID();        
+        bool RemoveRealignmentAccounts(int realignmentId);
     }
 }

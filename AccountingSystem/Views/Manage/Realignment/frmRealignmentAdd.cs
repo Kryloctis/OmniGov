@@ -1,7 +1,7 @@
 ﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.BudgetAppropriations;
 using System;
 using System.Windows.Forms;
+using AccountingSystem.Views.Manage.BudgetAppropriations;
 
 namespace AccountingSystem.Views.Manage.Realignment
 {
@@ -11,34 +11,40 @@ namespace AccountingSystem.Views.Manage.Realignment
         internal string _budgetAppropriationId;
         internal string _budgetAppropriationAmount;
         internal frmRealignment _frmRealignment;
+        internal frmBudgetAppropriations _frmBudgetAppropriations;
 
-        public frmRealignmentAdd(frmRealignment frmRealignment)
+        public frmRealignmentAdd(frmRealignment frmRealignment, frmBudgetAppropriations frmBudgetAppropriation)
         {
             InitializeComponent();
             uc = ucRealignment1;
             _frmRealignment = frmRealignment;
+            _frmBudgetAppropriations = frmBudgetAppropriation;
             uc.budgetId  = Convert.ToInt32(frmRealignment.budgetAppropriationId);
         }
 
         private void frmRealignmentAdd_Load(object sender, EventArgs e)
         {
+
             uc.txtAppropriationBalance.Text = Convert.ToDecimal(_budgetAppropriationAmount).ToString("N2");
+            decimal appropriationBalance = Convert.ToDecimal(uc.txtAppropriationBalance.Text);
+
+            uc.nudAmount.Value = appropriationBalance;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnSave_Click_1(object sender, EventArgs e)
         {
             if (SaveData())
             {
                 if (SaveRealignmentAccounts())
                 {
                     _frmRealignment.LoadBudgetRealignments();
+                    _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
+
                     Helper.MessageBoxSuccess("Budget Realignment has been saved.");
                     uc.ResetForm();
                 }
             }
         }
-
-       
 
         internal bool FormValidations()
         {
@@ -83,13 +89,14 @@ namespace AccountingSystem.Views.Manage.Realignment
                 foreach (DataGridViewRow item in uc.dgBudgetRealignment.Rows)
                 {
                     string budgetAppropriationId = item.Cells["budgetAppropriationId"].Value.ToString();
-                    string account = item.Cells["realignmentAccount"].Value.ToString();
-                    decimal amount = Convert.ToDecimal(item.Cells["realignmentAmount"].Value.ToString());
+                    string account = item.Cells["account"].Value.ToString();
+                    decimal amount = Convert.ToDecimal(item.Cells["amount"].Value.ToString());
+
 
                     var budgetRealignmentModel = new BudgetRealignmentModel()
                     {
-                        BudgetAppropriationId = int.Parse(budgetAppropriationId),
-                        FromBudgetAppropriationId = GetLastInsertedId(),
+                        ToBudgetAppropriationId = int.Parse(budgetAppropriationId),
+                        RealignmentId = GetLastInsertedId(),
                         Amount = amount
                     };
 
@@ -109,5 +116,8 @@ namespace AccountingSystem.Views.Manage.Realignment
         {
             return Factory.BudgetRealignmentRepository().GetLastInsertedID();
         }
+
+
+   
     }
 }

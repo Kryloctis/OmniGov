@@ -20,9 +20,24 @@ namespace AccountingSystem.Views.Manage.Realignment
         public ucRealignment()
         {
             InitializeComponent();
-            Helper.DatagridFullRowSelectStyle(dgBudgetRealignment);
+            Helper.DatagridEditableRowStyle(dgBudgetRealignment, true);
+
         }
 
+
+        #region Local Methods
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[5];
+
+            errorArray[0] = epFPP.GetError(cmbFPP);
+            errorArray[1] = epAllotmentClass.GetError(cmbAllotmentClass);
+            errorArray[2] = epAccount.GetError(cmbAccount);
+            errorArray[3] = epAmount.GetError(nudAmount);
+            errorArray[4] = epRemarks.GetError(txtRemarks);
+
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
         internal void ResetForm()
         {
             nudAmount.Value = 0;
@@ -31,26 +46,21 @@ namespace AccountingSystem.Views.Manage.Realignment
             cmbAllotmentClass.SelectedIndex = -1;
             cmbAccount.SelectedIndex = -1;
             dtDateIssued.Value = DateTime.Now;
-
             dgBudgetRealignment.Rows.Clear();
-
+            txtRemarks.Text = string.Empty;
         }
-
-        private void ucRealignment_Load(object sender, EventArgs e)
+        internal void SumRealignment()
         {
-            if (!DesignMode)
+            decimal realignmentAmount = 0;
+            for (int i = 0; i < dgBudgetRealignment.Rows.Count; ++i)
             {
-                LoadBudgetAppropriationAccounts();
-                LoadFunds();
-                LoadAllotmentClasses();
-                LoadFPP(false);
-                LoadOthersFPPByFPPIdCombobox();
-                FilterSearchDetails();
+                realignmentAmount += Convert.ToDecimal(dgBudgetRealignment.Rows[i].Cells["amount"].Value);
             }
-
+            txtTotalAmountRealigned.Text = realignmentAmount.ToString("N2");
         }
+        #endregion
 
-
+        #region Accessing Database Methods
 
         internal void LoadFunds()
         {
@@ -58,7 +68,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             cmbFunds.DisplayMember = "fund_name";
             cmbFunds.ValueMember = "id";
         }
-
 
         private void LoadAllotmentClasses()
         {
@@ -105,9 +114,6 @@ namespace AccountingSystem.Views.Manage.Realignment
         {
             byte fppId = Convert.ToByte(cmbFPP.SelectedValue);
             HelperLoadRecords.OthersFPPCombobox(Factory.SubFPPRepository().GetRecordsByFPPId(fppId), cmbOthersFPP, "name", "id");
-            cmbOthersFPP.SelectedIndex = -1;
-            cmbOthersFPP.Text = string.Empty;
-            cmbOthersFPP.Enabled = true;
         }
 
         private DataTable DataTableFPP()
@@ -121,18 +127,17 @@ namespace AccountingSystem.Views.Manage.Realignment
 
             return dtFPP;
         }
-        
+
         private void LoadBudgetAppropriationAccounts()
         {
             try
             {
-                if (DatatableAccounts().Rows.Count == 0) {
+                if (DatatableAccounts().Rows.Count == 0)
+                {
                     cmbAccount.DataSource = null;
                     cmbAccount.Items.Clear();
                     return;
                 }
-                
-               
 
                 var accountDict = new Dictionary<ushort, string>();
                 foreach (DataRow item in DatatableAccounts().Rows)
@@ -156,24 +161,109 @@ namespace AccountingSystem.Views.Manage.Realignment
         private DataTable DatatableAccounts()
         {
             DataTable dtRealignmentAccounts;
-            dtRealignmentAccounts = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntryAndBudgetAppropriationId(fppId.ToString(), othersFPPId ,fundId, allotmentClassId, dtDateIssued.Value, budgetId);
+            dtRealignmentAccounts = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntryAndBudgetAppropriationId(fppId.ToString(), othersFPPId, fundId, allotmentClassId, dtDateIssued.Value, budgetId);
             return dtRealignmentAccounts;
+        }
+
+        #endregion
+
+        #region Form Events
+        private void ucRealignment_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadBudgetAppropriationAccounts();
+                LoadFunds();
+                LoadAllotmentClasses();
+                LoadFPP(false);
+                LoadOthersFPPByFPPIdCombobox();
+                FilterSearchDetails();
+                SumRealignment();
+            }
+
+        }
+        private void btnEdit_Click_1(object sender, EventArgs e)
+        {
+
+            int rowIndex = dgBudgetRealignment.CurrentCell.RowIndex;
+
+            object accountId = dgBudgetRealignment.Rows[rowIndex].Cells["to_ledger_id"].Value;
+            decimal amount = Convert.ToDecimal(dgBudgetRealignment.Rows[rowIndex].Cells["amount"].Value);
+
+            cmbAccount.SelectedValue = accountId;
+            nudAmount.Value = amount;
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dgBudgetRealignment.SelectedRows)
+            {
+                dgBudgetRealignment.Rows.Remove(row);
+            }
+            SumRealignment();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+
+            sbyte selectedRowCount = (sbyte)dgBudgetRealignment.SelectedRows.Count;
+
+            if (selectedRowCount > 1)
+                return;
+
+            SumRealignment();
+        }
+
+        private void dgBudgetRealignment_SelectionChanged(object sender, EventArgs e)
+        {
+            var rowsCount = dgBudgetRealignment.SelectedRows.Count;
+            if (rowsCount == 0 || rowsCount > 1) return;
+            btnRemove.Enabled = true;
+        }
+
+        private void dgBudgetRealignment_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (e.ColumnIndex == 3)
+            {
+                decimal i;
+                if (!decimal.TryParse(Convert.ToString(e.FormattedValue), out i))
+                {
+                    Helper.MessageBoxError("Invalid input. ");
+                    e.Cancel = true;
+                }
+                else
+                {
+                    e.Cancel = false;
+                }
+            }
+            dgBudgetRealignment.Columns[2].ValueType = typeof(Double);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            bool zeroAmount = nudAmount.Value < 1;
+
             if (!ValidateChildren())
             {
                 Helper.MessageBoxError(GetFormErrors());
                 return;
             }
 
+            if (zeroAmount)
+            {
+                Helper.MessageBoxError("Invalid amount");
+                return;
+            }
+
+
             AddRealignment();
+
         }
 
         private void AddRealignment()
         {
             string budgetAppropriationId = GetBudgetIdByGeneralLedgerAccountId(cmbAccount.SelectedValue.ToString());
+            string realignmentAccountId = cmbAccount.SelectedValue.ToString();
             string realignmentAccount = cmbAccount.GetItemText(cmbAccount.SelectedItem);
             string realignmentAmount = nudAmount.Value.ToString("N2");
             string realignmentDateEntry = dtDateIssued.Value.ToString("MM/dd/yyyy");
@@ -193,6 +283,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             object[] accountRow = new object[]
             {
                 budgetAppropriationId,
+                realignmentAccountId,
                 realignmentAccount,
                 realignmentAmount
             };
@@ -206,7 +297,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             return Factory.BudgetAppropriationsRepository().GetBudgetIdByGeneralLedgerId(generalLedgerId);
         }
 
-     
+
         private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cmbAccount.Text))
@@ -220,8 +311,6 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private void FilterSearchDetails()
         {
-
-
             fundId = Convert.ToInt32(cmbFunds.SelectedValue);
             fppId = Convert.ToInt32(cmbFPP.SelectedValue);
             othersFPPId = Convert.ToInt32(cmbOthersFPP.SelectedValue) == 0 ? null : Convert.ToInt32(cmbOthersFPP.SelectedValue);
@@ -248,127 +337,85 @@ namespace AccountingSystem.Views.Manage.Realignment
         {
             FilterSearchDetails();
         }
+        #endregion
 
-
-        internal string GetFormErrors()
-        {
-            var errorArray = new string[5];
-
-            errorArray[0] = epFPP.GetError(cmbFPP);
-            errorArray[1] = epAllotmentClass.GetError(cmbAllotmentClass);
-            errorArray[2] = epAccount.GetError(cmbAccount);
-            errorArray[3] = epAmount.GetError(nudAmount);
-            errorArray[4] = epRemarks.GetError(txtRemarks);
-
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
-        }
-
-        private void cmbFPP_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epFPP, cmbFPP, "FPP");
-
-            if (!string.IsNullOrWhiteSpace(cmbFPP.Text))
-                e.Cancel = false;
-        }
-
-        private void cmbFPP_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(epFPP, cmbFPP);
-        }
-
-        private void cmbAllotmentClass_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epAllotmentClass, cmbAllotmentClass, "allotment class");
-
-            if (!string.IsNullOrWhiteSpace(cmbAllotmentClass.Text))
-                e.Cancel = false;
-        }
-
-        private void cmbAllotmentClass_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(epAllotmentClass, cmbAllotmentClass);
-        }
-
-        private void cmbAccount_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbAccount, "account");
-
-            if (!string.IsNullOrWhiteSpace(cmbAccount.Text))
-                e.Cancel = false;
-        }
-
-        private void SumRealignment()
-        {
-            decimal realignmentAmount = 0;
-            for (int i = 0; i < dgBudgetRealignment.Rows.Count; ++i)
+        #region Validations
+            private void cmbAllotmentClass_Validating(object sender, CancelEventArgs e)
             {
-                realignmentAmount += Convert.ToDecimal(dgBudgetRealignment.Rows[i].Cells[2].Value);
-            }
-            txtTotalAmountRealigned.Text = realignmentAmount.ToString("N2");
-        }
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epAllotmentClass, cmbAllotmentClass, "allotment class");
 
+                if (!string.IsNullOrWhiteSpace(cmbAllotmentClass.Text))
+                    e.Cancel = false;
+            }
+
+            private void cmbAllotmentClass_Validated(object sender, EventArgs e)
+            {
+                Helper.ClearErrorComboBox(epAllotmentClass, cmbAllotmentClass);
+            }
 
         private void txtRemarks_Validating(object sender, CancelEventArgs e)
-        {
-
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epRemarks, txtRemarks, "Remark");
-        }
-
-        private void txtRemarks_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epRemarks, txtRemarks);
-        }
-
-        private void cmbAccount_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(epAccount, cmbAccount);
-        }
-
-        private void nudAmount_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "amount");
-
-            decimal remainingAppropriation = Convert.ToDecimal(txtAppropriationBalance.Text) - Convert.ToDecimal(txtTotalAmountRealigned.Text);
-
-            bool isEnoughBudget = remainingAppropriation >= Convert.ToDecimal(nudAmount.Value);
-
-
-            if (nudAmount.Value < 1)
             {
-                epAmount.SetError(nudAmount, "Plase enter a non-zero amount");
-                e.Cancel = true;
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epRemarks, txtRemarks, "Remark");
             }
 
-            if (!isEnoughBudget)
+            private void txtRemarks_Validated(object sender, EventArgs e)
             {
-                epAmount.SetError(nudAmount, "insufficient budget appropriation to realign.");
-                e.Cancel = true;
+                Helper.ClearErrorTextBox(epRemarks, txtRemarks);
             }
-        }
 
-        private void nudAmount_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
-        }
-
-        private void btnRemove_Click(object sender, EventArgs e)
-        {
-            foreach (DataGridViewRow row in dgBudgetRealignment.SelectedRows)
+            private void cmbFPP_Validating(object sender, CancelEventArgs e)
             {
-                dgBudgetRealignment.Rows.Remove(row);
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epFPP, cmbFPP, "FPP");
+
+                if (!string.IsNullOrWhiteSpace(cmbFPP.Text))
+                    e.Cancel = false;
             }
-            SumRealignment();
-        }
 
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
+            private void cmbFPP_Validated(object sender, EventArgs e)
+            {
+                Helper.ClearErrorComboBox(epFPP, cmbFPP);
+            }
+   
+             private void cmbAccount_Validating(object sender, CancelEventArgs e)
+            {
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbAccount, "accounts");
 
-            sbyte selectedRowCount = (sbyte)dgBudgetRealignment.SelectedRows.Count;
+                if (!string.IsNullOrWhiteSpace(cmbAccount.Text))
+                    e.Cancel = false;
+            }
 
-            if (selectedRowCount > 1)
-                return;
-                
-            SumRealignment();
-        }
+            private void cmbAccount_Validated(object sender, EventArgs e)
+            {
+                Helper.ClearErrorComboBox(epAccount, cmbAccount);
+            }
+
+            private void nudAmount_Validating(object sender, CancelEventArgs e)
+            {
+                e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "amount");
+
+                decimal remainingAppropriation = Convert.ToDecimal(txtAppropriationBalance.Text) - Convert.ToDecimal(txtTotalAmountRealigned.Text);
+
+                bool isBudgetEnough = remainingAppropriation >= Convert.ToDecimal(nudAmount.Value);
+
+
+                //if (nudAmount.Value < 1)
+                //{
+                //    epAmount.SetError(nudAmount, "Plase enter a non-zero amount");
+                //    e.Cancel = true;
+                //}
+
+                if (!isBudgetEnough)
+                {
+                    epAmount.SetError(nudAmount, "insufficient budget appropriation to realign.");
+                    e.Cancel = true;
+                }
+            }
+
+            private void nudAmount_Validated(object sender, EventArgs e)
+            {
+                Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
+            }
+        #endregion
+
     }
 }

@@ -1051,16 +1051,14 @@ namespace AccountingSystem
 
 
                     //GET TOTAL REALIGNMENT
-                    var dtRealignmentTo = Factory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedToByBudgetId(rowId);
+                    var totalRealignmentTo = Factory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedToByBudgetId(rowId);
 
-                    var dtRealignmentFrom = Factory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedFromByBudgetId(rowId);
-
-
+                    var totalRealignmentFrom = Factory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedFromByBudgetId(rowId);
 
                     //GET TOTAL APPROPRIATION
-                    decimal totalAppropriationAmount = (totalSupplementalAppropriation + rowAppropriationAmount + dtRealignmentTo) - dtRealignmentFrom;
+                    decimal totalAppropriationAmount = (totalSupplementalAppropriation + rowAppropriationAmount + totalRealignmentTo) - totalRealignmentFrom;
 
-                    decimal appropriationBalance = (totalSupplementalAppropriation + rowAppropriationAmount - totalAllotmentRelease);
+                    decimal appropriationBalance = (totalSupplementalAppropriation + rowAppropriationAmount - totalAllotmentRelease + totalRealignmentTo) - totalRealignmentFrom;
 
 
                     dgvBudgetAppropriations.Rows.Add(new object[] {
@@ -1428,7 +1426,7 @@ namespace AccountingSystem
 
         #region BudgetRealignment
 
-        internal static void BudgetRealignmentFromDatagridView(DataTable dataTable, DataGridView dgv)
+        internal static void BudgetRealignmentDatagridView(DataTable dataTable, DataGridView dgv)
         {
             try
             {
@@ -1439,36 +1437,46 @@ namespace AccountingSystem
                 dgv.Columns.Clear();
 
                 //Set up new Columns to Datagrid View
-                dgv.Columns.Add("from_id", "id");
-                dgv.Columns.Add("from_fpp_name", "FPP");
-                dgv.Columns.Add("from_allotment_name", "Allotment Class");
-                dgv.Columns.Add("from_budget", "Realigned From");
-                dgv.Columns.Add("amount", "Amount");
+                dgv.Columns.Add("id", "ID");
+                dgv.Columns.Add("fpp_name", "FPP");
+                dgv.Columns.Add("allotment_name", "Allotment Class");
+                dgv.Columns.Add("ledger_name", "Budget Appropriation");
+                dgv.Columns.Add("date_entry", "Date Entry");
+                dgv.Columns.Add("total_amount", "Total Amount");
+                dgv.Columns.Add("remarks", "Remarks");
 
-                dgv.Columns["from_fpp_name"].Width = 120;
+                dgv.Columns["fpp_name"].Width = 120;
 
                 //Set up Column Format
-                dgv.Columns["from_id"].Visible = false;
-                dgv.Columns["amount"].DefaultCellStyle.Format = "N2";
+                dgv.Columns["id"].Visible = false;
+                dgv.Columns["fpp_name"].Width = 100;
+                dgv.Columns["ledger_name"].Width = 230;
+                dgv.Columns["date_entry"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
+                dgv.Columns["total_amount"].DefaultCellStyle.Format = "N2";
+                dgv.Columns["total_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
 
-                dgv.Columns["from_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgv.Columns["from_budget"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgv.Columns["amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["fpp_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["allotment_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["ledger_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["date_entry"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["total_amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["remarks"].SortMode = DataGridViewColumnSortMode.NotSortable;
 
                 //Load by loop All Budget Appropriations Records with Others FPP 
                 foreach (DataRow drRealignment in dataTable.Rows)
                 {
                     dgv.Rows.Add(new object[]
                     {
-                        drRealignment["from_id"],
-                        drRealignment["from_fpp_name"],
-                        drRealignment["from_allotment_name"],
-                        drRealignment["from_budget"],
-                        drRealignment["amount"] 
+                        drRealignment["id"],
+                        drRealignment["fpp_name"],
+                        drRealignment["allotment_name"],
+                        drRealignment["ledger_name"],
+                        drRealignment["date_entry"],
+                        drRealignment["total_amount"],
+                        drRealignment["remarks"] 
                     });
                 }
-
 
                 dgv.ClearSelection();
                 Helper.DatagridFullRowSelectStyle(dgv, true);
@@ -1479,31 +1487,33 @@ namespace AccountingSystem
             }
         }
 
-        internal static void BudgetRealignmentToDatagridView(DataTable dataTable, DataGridView dgv)
+        internal static void BudgetRealignmentAccountsDatagridView(DataTable dataTable, DataGridView dgv)
         {
             try
             {
-                Helper.DatagridDefaultStyle(dgv, true);
+                //Helper.DatagridDefaultStyle(dgv, true);
 
                 //Clearing Datagrid View  Rows & Columns before Loading new one
                 dgv.Rows.Clear();
                 dgv.Columns.Clear();
 
                 //Set up new Columns to Datagrid View
-                dgv.Columns.Add("to_id", "id");
-                dgv.Columns.Add("to_fpp_name", "FPP");
-                dgv.Columns.Add("to_allotment_name", "Allotment Class");
-                dgv.Columns.Add("to_budget", "Realigned To");
+                dgv.Columns.Add("to_budget_appropriations_id", "To Budget ID");
+                dgv.Columns.Add("to_ledger_id", "Ledger Id");
+                dgv.Columns.Add("to_budget", "Budget Appropriation");
                 dgv.Columns.Add("amount", "Amount");
 
-                dgv.Columns["to_fpp_name"].Width = 120;
+                dgv.Columns["to_budget"].Width = 300;
+                dgv.Columns["amount"].Width = 100;
 
                 //Set up Column Format
-                dgv.Columns["to_id"].Visible = false;
+                dgv.Columns["to_budget_appropriations_id"].Visible = false;
+                dgv.Columns["to_ledger_id"].Visible = false;
+                dgv.Columns["to_budget"].ReadOnly = true;
                 dgv.Columns["amount"].DefaultCellStyle.Format = "N2";
+                dgv.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
 
-                dgv.Columns["to_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgv.Columns["to_budget"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgv.Columns["amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
 
@@ -1512,24 +1522,20 @@ namespace AccountingSystem
                 {
                     dgv.Rows.Add(new object[]
                     {
-                        drRealignment["to_id"],
-                        drRealignment["to_fpp_name"],
-                        drRealignment["to_allotment_name"],
+                        drRealignment["to_budget_appropriations_id"],
+                        drRealignment["to_ledger_id"],
                         drRealignment["to_budget"],
-                        drRealignment["amount"]
+                        drRealignment["amount"],
                     });
                 }
 
-
                 dgv.ClearSelection();
-                Helper.DatagridFullRowSelectStyle(dgv, true);
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
         }
-
 
 
         #endregion
