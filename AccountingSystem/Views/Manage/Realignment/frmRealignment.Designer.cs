@@ -47,19 +47,11 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtTotalRealignmentAppropriation = new System.Windows.Forms.TextBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabRealignedFrom = new System.Windows.Forms.TabPage();
-            this.dgRealignmentFrom = new System.Windows.Forms.DataGridView();
-            this.tabRealignedTo = new System.Windows.Forms.TabPage();
-            this.dgRealignmentTo = new System.Windows.Forms.DataGridView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.dgRealignment = new System.Windows.Forms.DataGridView();
             this.toolStrip2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabRealignedFrom.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgRealignmentFrom)).BeginInit();
-            this.tabRealignedTo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgRealignmentTo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgRealignment)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip2
@@ -84,7 +76,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.btnAdd.Margin = new System.Windows.Forms.Padding(5, 1, 0, 2);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(33, 47);
-            this.btnAdd.Text = "Add";
+            this.btnAdd.Text = "&Add";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -96,7 +88,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(32, 47);
-            this.btnEdit.Text = "Edit";
+            this.btnEdit.Text = "&Edit";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
@@ -108,7 +100,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(44, 47);
-            this.btnDelete.Text = "Delete";
+            this.btnDelete.Text = "&Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
@@ -189,7 +181,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(463, 392);
+            this.label1.Location = new System.Drawing.Point(442, 388);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(179, 15);
             this.label1.TabIndex = 12;
@@ -198,72 +190,12 @@ namespace AccountingSystem.Views.Manage.Realignment
             // txtTotalRealignmentAppropriation
             // 
             this.txtTotalRealignmentAppropriation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTotalRealignmentAppropriation.Location = new System.Drawing.Point(648, 389);
+            this.txtTotalRealignmentAppropriation.Location = new System.Drawing.Point(627, 385);
             this.txtTotalRealignmentAppropriation.Name = "txtTotalRealignmentAppropriation";
             this.txtTotalRealignmentAppropriation.ReadOnly = true;
-            this.txtTotalRealignmentAppropriation.Size = new System.Drawing.Size(158, 23);
+            this.txtTotalRealignmentAppropriation.Size = new System.Drawing.Size(179, 23);
             this.txtTotalRealignmentAppropriation.TabIndex = 11;
             this.txtTotalRealignmentAppropriation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabRealignedFrom);
-            this.tabControl1.Controls.Add(this.tabRealignedTo);
-            this.tabControl1.ImageList = this.imageList1;
-            this.tabControl1.Location = new System.Drawing.Point(0, 54);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(818, 335);
-            this.tabControl1.TabIndex = 13;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
-            // 
-            // tabRealignedFrom
-            // 
-            this.tabRealignedFrom.Controls.Add(this.dgRealignmentFrom);
-            this.tabRealignedFrom.ImageIndex = 1;
-            this.tabRealignedFrom.Location = new System.Drawing.Point(4, 24);
-            this.tabRealignedFrom.Name = "tabRealignedFrom";
-            this.tabRealignedFrom.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRealignedFrom.Size = new System.Drawing.Size(810, 307);
-            this.tabRealignedFrom.TabIndex = 0;
-            this.tabRealignedFrom.Text = "Realigned From";
-            this.tabRealignedFrom.ToolTipText = "Accounts Realigned to this account.";
-            this.tabRealignedFrom.UseVisualStyleBackColor = true;
-            // 
-            // dgRealignmentFrom
-            // 
-            this.dgRealignmentFrom.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgRealignmentFrom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgRealignmentFrom.Location = new System.Drawing.Point(3, 3);
-            this.dgRealignmentFrom.Name = "dgRealignmentFrom";
-            this.dgRealignmentFrom.RowTemplate.Height = 25;
-            this.dgRealignmentFrom.Size = new System.Drawing.Size(804, 301);
-            this.dgRealignmentFrom.TabIndex = 12;
-            this.dgRealignmentFrom.SelectionChanged += new System.EventHandler(this.dgRealignmentFrom_SelectionChanged);
-            // 
-            // tabRealignedTo
-            // 
-            this.tabRealignedTo.Controls.Add(this.dgRealignmentTo);
-            this.tabRealignedTo.ImageIndex = 0;
-            this.tabRealignedTo.Location = new System.Drawing.Point(4, 24);
-            this.tabRealignedTo.Name = "tabRealignedTo";
-            this.tabRealignedTo.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRealignedTo.Size = new System.Drawing.Size(810, 307);
-            this.tabRealignedTo.TabIndex = 1;
-            this.tabRealignedTo.Text = "Realigned To";
-            this.tabRealignedTo.ToolTipText = "Realigned to other accounts";
-            this.tabRealignedTo.UseVisualStyleBackColor = true;
-            // 
-            // dgRealignmentTo
-            // 
-            this.dgRealignmentTo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgRealignmentTo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgRealignmentTo.Location = new System.Drawing.Point(3, 3);
-            this.dgRealignmentTo.Name = "dgRealignmentTo";
-            this.dgRealignmentTo.RowTemplate.Height = 25;
-            this.dgRealignmentTo.Size = new System.Drawing.Size(804, 301);
-            this.dgRealignmentTo.TabIndex = 11;
-            this.dgRealignmentTo.SelectionChanged += new System.EventHandler(this.dgRealignmentTo_SelectionChanged);
             // 
             // imageList1
             // 
@@ -273,13 +205,23 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.imageList1.Images.SetKeyName(0, "arrow-up@18px.png");
             this.imageList1.Images.SetKeyName(1, "arrow-down@18px.png");
             // 
+            // dgRealignment
+            // 
+            this.dgRealignment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgRealignment.Location = new System.Drawing.Point(12, 53);
+            this.dgRealignment.Name = "dgRealignment";
+            this.dgRealignment.RowTemplate.Height = 25;
+            this.dgRealignment.Size = new System.Drawing.Size(794, 330);
+            this.dgRealignment.TabIndex = 13;
+            this.dgRealignment.SelectionChanged += new System.EventHandler(this.dgRealignment_SelectionChanged);
+            // 
             // frmRealignment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(818, 437);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.dgRealignment);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtTotalRealignmentAppropriation);
             this.Controls.Add(this.statusStrip1);
@@ -296,11 +238,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.toolStrip2.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.tabRealignedFrom.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgRealignmentFrom)).EndInit();
-            this.tabRealignedTo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgRealignmentTo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgRealignment)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,8 +247,6 @@ namespace AccountingSystem.Views.Manage.Realignment
         #endregion
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton btnAdd;
-        private System.Windows.Forms.ToolStripButton btnEdit;
-        private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         internal System.Windows.Forms.ToolStripStatusLabel lblDateEntryPlaceHolder;
@@ -321,13 +257,12 @@ namespace AccountingSystem.Views.Manage.Realignment
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         internal System.Windows.Forms.ToolStripStatusLabel lblUpdatedAtPlaceHolder;
         internal System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
-        private System.Windows.Forms.DataGridView dgRealignmentTo;
         private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.TextBox txtTotalRealignmentAppropriation;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabRealignedFrom;
-        private System.Windows.Forms.TabPage tabRealignedTo;
-        private System.Windows.Forms.DataGridView dgRealignmentFrom;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.DataGridView dgRealignment;
+        internal System.Windows.Forms.Button btnSelect;
+        internal System.Windows.Forms.ToolStripButton btnEdit;
+        internal System.Windows.Forms.ToolStripButton btnDelete;
     }
 }

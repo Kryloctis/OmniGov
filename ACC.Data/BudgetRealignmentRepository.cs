@@ -1,6 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,6 +13,8 @@ namespace ACC.Data
         private MySqlGenericCommands _mySqlGenericCommands;
         private readonly string tableName = "realignment_from";
         private readonly string tableName2 = "realignment_to";
+        private readonly string viewTableName1 = "view_realignment_from";
+        private readonly string viewTableName2 = "view_realignment_to";
         private readonly string viewTableName = "view_realignment";
 
 
@@ -52,8 +53,8 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@realignment_from_id", DbType.Int32, entity.FromBudgetAppropriationId},
-                    new object[] { "@realignment_to_id", DbType.Int32, entity.BudgetAppropriationId},
+                    new object[] { "@realignment_from_id", DbType.Int32, entity.RealignmentId},
+                    new object[] { "@realignment_to_id", DbType.Int32, entity.ToBudgetAppropriationId},
                     new object[] { "@amount", DbType.Decimal, entity.Amount},
                 };
 
@@ -87,7 +88,22 @@ namespace ACC.Data
 
         public bool Update(BudgetRealignmentModel entity)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int16, entity.RealignmentId},
+                    new object[] { "@date_entry", DbType.DateTime, entity.DateEntry},
+                    new object[] { "@remarks", DbType.String, entity.Remarks},
+                };
+
+                string query = $"UPDATE {tableName} SET date_entry=@date_entry, remarks=@remarks WHERE id = @id";
+                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Delete(List<BudgetRealignmentModel> entityList)
@@ -198,65 +214,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
-        public DataTable GetRealignmentFromByAppropriationId(int budgetAppropriationsId)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@budget_appropriations_id",DbType.Int32, budgetAppropriationsId }
-                };
-
-                string query = $"SELECT " +
-                    $"from_id," +
-                    $"from_fpp_name," +
-                    $"from_allotment_name," +
-                    $"from_budget," +
-                    $"date_entry, " +
-                    $"amount " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE to_budget_appropriations_id = @budget_appropriations_id";
-
-                var dtSupplementalApprorpriation = new DataTable();
-
-                return _mySqlGenericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public DataTable GetRealignmentToByAppropriationId(int budgetAppropriationsId)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@budget_appropriations_id",DbType.Int32, budgetAppropriationsId }
-                };
-
-                string query = $"SELECT " +
-                    $"to_id," +
-                    $"to_fpp_name," +
-                    $"to_allotment_name," +
-                    $"to_budget," +
-                    $"date_entry, " +
-                    $"amount " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE from_budget_appropriations_id = @budget_appropriations_id";
-
-                var dtSupplementalApprorpriation = new DataTable();
-
-                return _mySqlGenericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         public bool BudgetHasRealignment(int budgetId)
         {
             try
@@ -277,6 +234,174 @@ namespace ACC.Data
             };
 
             return false;
+        }
+
+        public DataTable GetBudgetRealignmentByAppropriationId(int budgetAppropriationsId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@budget_appropriations_id",DbType.Int32, budgetAppropriationsId }
+                };
+
+                string query = $"SELECT " +
+                    $"id, " +
+                    $"fpp_name, " +
+                    $"allotment_name, " +
+                    $"ledger_name, " +
+                    $"date_entry, " +
+                    $"total_amount, " +
+                    $"remarks " +
+                    $"FROM {viewTableName1}  " +
+                    $"WHERE budget_appropriations_id=@budget_appropriations_id ";
+
+
+                var dtSupplementalApprorpriation = new DataTable();
+
+                return _mySqlGenericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetRecordsByRealignmentId(int realignmentId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@realignment_id",DbType.Int32, realignmentId }  
+                };
+
+                string query = $"SELECT " +
+                    $"from_id, " +
+                    $"from_fpp_code, " +
+                    $"from_fpp_name, " +
+                    $"from_allotment_name, " +
+                    $"from_budget, " +
+                    $"amount " +
+                    $"FROM {viewTableName}  " +
+                    $"WHERE from_id=@realignment_id ";
+
+
+                var dtSupplementalApprorpriation = new DataTable();
+
+                return _mySqlGenericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+       
+        public DataTable GetRealignedAccountsByBudgetAppropriationId(int budgetAppropriationsId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationsId }
+                };
+
+                string query = $"SELECT " +
+                    $"to_ledger_id, " +
+                    $"to_budget, " +
+                    $"amount " +
+                    $"FROM {viewTableName}  " +
+                    $"WHERE from_budget_appropriations_id=@budget_appropriations_id";
+
+
+                var dtSupplementalApprorpriation = new DataTable();
+
+                return _mySqlGenericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Dictionary<string, string> GetRecordByRealignmentId(int realignmentId)
+        {
+            var record = new Dictionary<string, string>();
+
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@realignmentId", DbType.Int32, realignmentId},
+                };
+
+                string query = $"SELECT * FROM {tableName} WHERE id=@realignmentId";
+
+                using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    record.Add("id", reader.Rows[0]["id"].ToString());
+                    record.Add("from_budget_appropriations_id", reader.Rows[0]["from_budget_appropriations_id"].ToString());
+                    record.Add("date_entry", reader.Rows[0]["date_entry"].ToString());
+                    record.Add("remarks", reader.Rows[0]["remarks"].ToString());
+                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return record;
+        }
+
+        public DataTable GetRealignedAccountsByRealignmentId(int realignmentId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@realignmentId", DbType.Int32, realignmentId }
+                };
+
+                string query = $"SELECT " +
+                    $"to_ledger_id, " +
+                    $"to_budget_appropriations_id, " +
+                    $"to_budget, " +
+                    $"amount " +
+                    $"FROM {viewTableName}  " +
+                    $"WHERE from_id=@realignmentId";
+
+
+                var dtSupplementalApprorpriation = new DataTable();
+
+                return _mySqlGenericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool RemoveRealignmentAccounts(int realignmentId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@realignmentId", DbType.Int32, realignmentId},
+                };
+
+                string query = $"DELETE FROM {tableName2} WHERE realignment_from_id = @realignmentId";
+                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

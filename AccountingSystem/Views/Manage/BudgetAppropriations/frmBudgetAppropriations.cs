@@ -379,8 +379,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             {
                 budgetAppropriationId = budgetAppropriationId,
                 budgetAppropriationAccount = budgetAppropriationAccount,
-                budgetAppropriationAmount = budgetAppropriationAmount
-
+                budgetAppropriationAmount = budgetAppropriationAmount,
+                _frmBudgetAppropriation = this
             };
 
             frmRealignment.ShowDialog();
