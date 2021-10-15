@@ -165,6 +165,17 @@ namespace AccountingSystem
             return false;
         }
 
+        public static bool ShowErrorNumericUpDownZero(ErrorProvider ep, NumericUpDown numericUpDown, string fieldName = "Field")
+        {
+            if (numericUpDown.Value == 0)
+            {
+                ep.SetError(numericUpDown, $"{ErrorMessageForEmpty(fieldName)}");
+                return true;
+            }
+
+            return false;
+        }
+        
         public static bool ShowErrorCheckedListBox(ErrorProvider ep, CheckedListBox chklstBox, string fieldName = "Field")
         {
             if (chklstBox.CheckedIndices.Count == 0)

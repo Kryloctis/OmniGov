@@ -44,7 +44,7 @@ namespace AccountingSystem.Views.Manage.Amortization
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 107);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 140);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(512, 29);
             this.flowLayoutPanel1.TabIndex = 1;
@@ -54,7 +54,7 @@ namespace AccountingSystem.Views.Manage.Amortization
             this.btnCancel.Location = new System.Drawing.Point(434, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 0;
+            this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -69,21 +69,24 @@ namespace AccountingSystem.Views.Manage.Amortization
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // ucAmortization1
             // 
             this.ucAmortization1.AutoSize = true;
             this.ucAmortization1.Location = new System.Drawing.Point(12, 12);
             this.ucAmortization1.Name = "ucAmortization1";
-            this.ucAmortization1.Size = new System.Drawing.Size(500, 87);
-            this.ucAmortization1.TabIndex = 2;
+            this.ucAmortization1.Size = new System.Drawing.Size(500, 116);
+            this.ucAmortization1.TabIndex = 0;
             // 
             // frmEditAmortization
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(512, 136);
+            this.CancelButton = this.btnCancel;
+            this.ClientSize = new System.Drawing.Size(512, 169);
             this.Controls.Add(this.ucAmortization1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -93,6 +96,7 @@ namespace AccountingSystem.Views.Manage.Amortization
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Amortization";
+            this.Load += new System.EventHandler(this.frmEditAmortization_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

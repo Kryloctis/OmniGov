@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,29 +17,34 @@ namespace AccountingSystem.Views.Manage.Amortization
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+            Helper.DatagridFullRowSelectStyle(dgAmortization, true);
         }
 
-        private void LoadDatagridFormat() 
+        internal void LoadAmortizationRecords() 
         {
-            dgAmmortization.Columns.Add("bank_name", "Bank Name");
-            dgAmmortization.Columns.Add("amortization_term", "Term");
-            dgAmmortization.Columns.Add("interest", "Interest");
-            dgAmmortization.Columns.Add("amount_released", "Amount Release");
-
-            dgAmmortization.Columns["amount_released"].DefaultCellStyle.Format = "0.00##";
-            dgAmmortization.Columns["interest"].DefaultCellStyle.Format = "0\\%";
-
-            Helper.DatagridFullRowSelectStyle(dgAmmortization, true);
+            try
+            {
+                var dtAmortizationRecords = Factory.AmortizationRepository().GetRecords();
+                HelperLoadRecords.AmortizationDataGridView(dtAmortizationRecords, dgAmortization);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAddAmortization().ShowDialog();
+            _ = new frmAddAmortization(this).ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            _ = new frmEditAmortization().ShowDialog();
+            int amortizationId = Convert.ToInt32(dgAmortization.CurrentRow.Cells["id"].Value);
+
+            var frmEditAmortization = new frmEditAmortization(this);
+            frmEditAmortization.amortizationId = amortizationId;
+            frmEditAmortization.ShowDialog();
         }
 
         private void btnAmortizationSched_Click(object sender, EventArgs e)
@@ -50,15 +56,77 @@ namespace AccountingSystem.Views.Manage.Amortization
         {
             if (!DesignMode)
             {
-                LoadDatagridFormat();
+                LoadAmortizationRecords();
+             
             }
         }
 
-        private void dgAmmortization_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        private void dgAmortization_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
-            foreach (DataGridViewColumn column in dgAmmortization.Columns)
+            foreach (DataGridViewColumn column in dgAmortization.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+        }
+
+        private void dgAmortization_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgAmortization.SelectedRows.Count == 1)
+                btnAmortizationSched.Enabled = true;
+            else
+                btnAmortizationSched.Enabled = false;
+
+            Helper.EnableDisableToolStripButtons(dgAmortization, btnEdit, btnDelete);
+        }
+
+        private bool DeleteAmortizationRecords()
+        {
+            try
+            {
+                var amortizationModelList = new List<AmortizationModel>();
+
+                foreach (DataGridViewRow row in dgAmortization.SelectedRows)
+                {
+                    int amortizationId = int.Parse(row.Cells[0].Value.ToString());
+                    var amortizationModel = new AmortizationModel()
+                    {
+                        Id = amortizationId
+                    };
+
+                    amortizationModelList.Add(amortizationModel);
+                }
+
+                return Factory.AmortizationRepository().Delete(amortizationModelList);
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int selectedRowsCount = dgAmortization.SelectedRows.Count;
+
+                if (selectedRowsCount > 0)
+                {
+                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                    {
+                        if (DeleteAmortizationRecords())
+                        {
+                            LoadAmortizationRecords();
+                            Helper.MessageBoxSuccess("Amortization/s has been deleted.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
     }

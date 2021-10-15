@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AmortizationSchedule
 {
-    public partial class frmAmortizationScheduleAdd : Form
+    public partial class frmAddAmortizationSchedule : Form
     {
-        public frmAmortizationScheduleAdd()
+        public frmAddAmortizationSchedule()
         {
             InitializeComponent();
         }

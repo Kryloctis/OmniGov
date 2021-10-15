@@ -47,7 +47,7 @@ namespace AccountingSystem.Views.Manage.Amortization
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAmortizationScheduleAdd().ShowDialog();
+            _ = new frmAddAmortizationSchedule().ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)

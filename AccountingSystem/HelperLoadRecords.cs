@@ -1425,7 +1425,6 @@ namespace AccountingSystem
 
         #endregion Supplemental Appropriations
 
-
         #region BudgetRealignment
 
         internal static void BudgetRealignmentFromDatagridView(DataTable dataTable, DataGridView dgv)
@@ -1622,6 +1621,29 @@ namespace AccountingSystem
             datagrid.Columns["created_by"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
             datagrid.Columns["updated_by"].Visible = false;
+        }
+
+        #endregion
+
+        #region Amortization
+
+        internal static void AmortizationDataGridView(DataTable dataTable, DataGridView dataGridView) 
+        {
+            dataGridView.DataSource = dataTable;
+
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["bank_name"].HeaderText = "Bank";
+            dataGridView.Columns["amortization_term"].HeaderText = "Term";
+            dataGridView.Columns["amortization_term"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dataGridView.Columns["amortization_term"].Width = 100;
+            dataGridView.Columns["interest"].HeaderText = "Interest";
+            dataGridView.Columns["interest"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dataGridView.Columns["interest"].Width = 100;
+            dataGridView.Columns["amount_released"].HeaderText = "Amount Released";
+            dataGridView.Columns["amount_released"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dataGridView.Columns["amount_released"].Width = 200;
+            dataGridView.Columns["interest"].DefaultCellStyle.Format = "0.00\\%";
+            dataGridView.Columns["amount_released"].DefaultCellStyle.Format = "#,0.00###";         
         }
 
         #endregion

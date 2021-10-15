@@ -161,6 +161,5 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             ShowSupplementaryStatus();
             Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
         }
-
     }
 }

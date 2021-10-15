@@ -77,6 +77,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.btnAdd.Size = new System.Drawing.Size(42, 47);
             this.btnAdd.Text = "Add...";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
             // btnEdit
             // 
@@ -88,6 +89,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.btnEdit.Size = new System.Drawing.Size(40, 47);
             this.btnEdit.Text = "Edit...";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
             // btnDelete
             // 
@@ -99,6 +101,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.btnDelete.Size = new System.Drawing.Size(44, 47);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // dataGridView1
             // 

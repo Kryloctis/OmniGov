@@ -38,17 +38,25 @@ namespace AccountingSystem.Views.Manage.Amortization
             this.txtBankName = new System.Windows.Forms.TextBox();
             this.cmbxTerm = new System.Windows.Forms.ComboBox();
             this.nudAmountRelease = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.nudInterest = new System.Windows.Forms.NumericUpDown();
+            this.epInterest = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.epAmountRelease)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epBankName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmountRelease)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInterest)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epInterest)).BeginInit();
             this.SuspendLayout();
             // 
             // epAmountRelease
             // 
+            this.epAmountRelease.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.epAmountRelease.ContainerControl = this;
             // 
             // epBankName
             // 
+            this.epBankName.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.epBankName.ContainerControl = this;
             // 
             // label1
@@ -72,7 +80,7 @@ namespace AccountingSystem.Views.Manage.Amortization
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(4, 63);
+            this.label3.Location = new System.Drawing.Point(4, 92);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(93, 15);
             this.label3.TabIndex = 0;
@@ -83,7 +91,9 @@ namespace AccountingSystem.Views.Manage.Amortization
             this.txtBankName.Location = new System.Drawing.Point(106, 3);
             this.txtBankName.Name = "txtBankName";
             this.txtBankName.Size = new System.Drawing.Size(371, 23);
-            this.txtBankName.TabIndex = 1;
+            this.txtBankName.TabIndex = 0;
+            this.txtBankName.Validating += new System.ComponentModel.CancelEventHandler(this.txtBankName_Validating);
+            this.txtBankName.Validated += new System.EventHandler(this.txtBankName_Validated);
             // 
             // cmbxTerm
             // 
@@ -96,12 +106,12 @@ namespace AccountingSystem.Views.Manage.Amortization
             this.cmbxTerm.Location = new System.Drawing.Point(106, 32);
             this.cmbxTerm.Name = "cmbxTerm";
             this.cmbxTerm.Size = new System.Drawing.Size(371, 23);
-            this.cmbxTerm.TabIndex = 2;
+            this.cmbxTerm.TabIndex = 1;
             // 
             // nudAmountRelease
             // 
             this.nudAmountRelease.DecimalPlaces = 2;
-            this.nudAmountRelease.Location = new System.Drawing.Point(106, 61);
+            this.nudAmountRelease.Location = new System.Drawing.Point(106, 90);
             this.nudAmountRelease.Maximum = new decimal(new int[] {
             1569325055,
             23283064,
@@ -111,28 +121,70 @@ namespace AccountingSystem.Views.Manage.Amortization
             this.nudAmountRelease.Size = new System.Drawing.Size(371, 23);
             this.nudAmountRelease.TabIndex = 3;
             this.nudAmountRelease.ThousandsSeparator = true;
-            this.nudAmountRelease.Value = new decimal(new int[] {
-            1,
+            this.nudAmountRelease.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmountRelease_Validating);
+            this.nudAmountRelease.Validated += new System.EventHandler(this.nudAmountRelease_Validated);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(4, 64);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(46, 15);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Interest";
+            // 
+            // nudInterest
+            // 
+            this.nudInterest.DecimalPlaces = 2;
+            this.epInterest.SetIconPadding(this.nudInterest, 25);
+            this.nudInterest.Location = new System.Drawing.Point(106, 61);
+            this.nudInterest.Maximum = new decimal(new int[] {
+            99999,
             0,
             0,
             0});
+            this.nudInterest.Name = "nudInterest";
+            this.nudInterest.Size = new System.Drawing.Size(90, 23);
+            this.nudInterest.TabIndex = 2;
+            this.nudInterest.Validating += new System.ComponentModel.CancelEventHandler(this.nudInterest_Validating);
+            this.nudInterest.Validated += new System.EventHandler(this.nudInterest_Validated);
+            // 
+            // epInterest
+            // 
+            this.epInterest.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.epInterest.ContainerControl = this;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(202, 66);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(17, 15);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "%";
             // 
             // ucAmortization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.Controls.Add(this.nudInterest);
             this.Controls.Add(this.nudAmountRelease);
             this.Controls.Add(this.cmbxTerm);
             this.Controls.Add(this.txtBankName);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "ucAmortization";
-            this.Size = new System.Drawing.Size(499, 87);
+            this.Size = new System.Drawing.Size(499, 116);
+            this.Load += new System.EventHandler(this.ucAmortization_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epAmountRelease)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epBankName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmountRelease)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInterest)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epInterest)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -147,5 +199,9 @@ namespace AccountingSystem.Views.Manage.Amortization
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label4;
+        internal System.Windows.Forms.NumericUpDown nudInterest;
+        private System.Windows.Forms.ErrorProvider epInterest;
+        private System.Windows.Forms.Label label5;
     }
 }

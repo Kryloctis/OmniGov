@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Manage.Amortization
             this.dateTimePicker1.Location = new System.Drawing.Point(59, 0);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(332, 23);
-            this.dateTimePicker1.TabIndex = 1;
+            this.dateTimePicker1.TabIndex = 0;
             // 
             // label2
             // 
@@ -78,7 +78,7 @@ namespace AccountingSystem.Views.Manage.Amortization
             0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(332, 23);
-            this.numericUpDown1.TabIndex = 3;
+            this.numericUpDown1.TabIndex = 1;
             this.numericUpDown1.ThousandsSeparator = true;
             // 
             // label3
@@ -101,7 +101,7 @@ namespace AccountingSystem.Views.Manage.Amortization
             0});
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(332, 23);
-            this.numericUpDown2.TabIndex = 3;
+            this.numericUpDown2.TabIndex = 2;
             this.numericUpDown2.ThousandsSeparator = true;
             // 
             // label4

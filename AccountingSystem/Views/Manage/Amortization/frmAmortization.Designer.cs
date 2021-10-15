@@ -32,22 +32,23 @@ namespace AccountingSystem.Views.Manage.Amortization
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnAmortizationSched = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.dgAmmortization = new System.Windows.Forms.DataGridView();
+            this.dgAmortization = new System.Windows.Forms.DataGridView();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgAmmortization)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgAmortization)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
             // 
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAdd,
             this.btnEdit,
-            this.toolStripButton3,
+            this.btnDelete,
             this.toolStripSeparator1,
             this.btnAmortizationSched});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -79,15 +80,16 @@ namespace AccountingSystem.Views.Manage.Amortization
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
-            // toolStripButton3
+            // btnDelete
             // 
-            this.toolStripButton3.Image = global::AccountingSystem.Properties.Resources.delete;
-            this.toolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(44, 47);
-            this.toolStripButton3.Text = "Delete";
-            this.toolStripButton3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
+            this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(44, 47);
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // toolStripSeparator1
             // 
@@ -113,26 +115,26 @@ namespace AccountingSystem.Views.Manage.Amortization
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // dgAmmortization
+            // dgAmortization
             // 
-            this.dgAmmortization.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgAmortization.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgAmmortization.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgAmmortization.Location = new System.Drawing.Point(11, 50);
-            this.dgAmmortization.Margin = new System.Windows.Forms.Padding(2);
-            this.dgAmmortization.Name = "dgAmmortization";
-            this.dgAmmortization.RowTemplate.Height = 25;
-            this.dgAmmortization.Size = new System.Drawing.Size(1042, 493);
-            this.dgAmmortization.TabIndex = 2;
-            this.dgAmmortization.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgAmmortization_ColumnAdded);
+            this.dgAmortization.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgAmortization.Location = new System.Drawing.Point(12, 53);
+            this.dgAmortization.Name = "dgAmortization";
+            this.dgAmortization.RowTemplate.Height = 25;
+            this.dgAmortization.Size = new System.Drawing.Size(1040, 487);
+            this.dgAmortization.TabIndex = 2;
+            this.dgAmortization.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgAmortization_ColumnAdded);
+            this.dgAmortization.SelectionChanged += new System.EventHandler(this.dgAmortization_SelectionChanged);
             // 
             // frmAmortization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1064, 565);
-            this.Controls.Add(this.dgAmmortization);
+            this.Controls.Add(this.dgAmortization);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.MinimumSize = new System.Drawing.Size(1080, 604);
@@ -144,7 +146,7 @@ namespace AccountingSystem.Views.Manage.Amortization
             this.Load += new System.EventHandler(this.frmAmortization_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgAmmortization)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgAmortization)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,10 +157,10 @@ namespace AccountingSystem.Views.Manage.Amortization
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnAdd;
         private System.Windows.Forms.ToolStripButton btnEdit;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.DataGridView dgAmmortization;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnAmortizationSched;
+        private System.Windows.Forms.DataGridView dgAmortization;
     }
 }

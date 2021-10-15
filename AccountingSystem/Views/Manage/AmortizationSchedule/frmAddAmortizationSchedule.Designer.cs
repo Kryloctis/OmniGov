@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Manage.AmortizationSchedule
 {
-    partial class frmAmortizationScheduleAdd
+    partial class frmAddAmortizationSchedule
     {
         /// <summary>
         /// Required designer variable.
@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Manage.AmortizationSchedule
             this.btnCancel.Location = new System.Drawing.Point(347, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 0;
+            this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -78,7 +78,7 @@ namespace AccountingSystem.Views.Manage.AmortizationSchedule
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
             // 
-            // frmAmortizationScheduleAdd
+            // frmAddAmortizationSchedule
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -91,7 +91,7 @@ namespace AccountingSystem.Views.Manage.AmortizationSchedule
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmAmortizationScheduleAdd";
+            this.Name = "frmAddAmortizationSchedule";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Amortization Schedule";

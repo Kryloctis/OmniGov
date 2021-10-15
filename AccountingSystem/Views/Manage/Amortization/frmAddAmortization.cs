@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,25 @@ namespace AccountingSystem.Views.Manage.Amortization
 {
     public partial class frmAddAmortization : Form
     {
-        public frmAddAmortization()
+        private ucAmortization uc;
+        private frmAmortization _frmAmortization;
+
+        public frmAddAmortization(frmAmortization frmAmortization)
         {
             InitializeComponent();
+            uc = ucAmortization1;
+            uc.isEdit = false;
+            _frmAmortization = frmAmortization;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (uc.SaveData())
+            {
+                Helper.MessageBoxSuccess("Amortization has been saved.");
+                uc.ResetForm();
+                _frmAmortization.LoadAmortizationRecords();
+            }
         }
     }
 }
