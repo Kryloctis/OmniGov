@@ -117,6 +117,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnSearch.Size = new System.Drawing.Size(46, 47);
             this.btnSearch.Text = "S&earch";
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSearch.Visible = false;
             this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
             // toolStripSeparator2

@@ -21,20 +21,14 @@ namespace AccountingSystem.Views.Reports.RCD
         public frmGenerateRCD(ucRCD ucrcd,int Coid,int Fid, Dictionary<int,string> _data)
         {
             InitializeComponent();            
-            WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgPreview);
+            Helper.DatagridFullRowSelectStyle(dgPreview, true);
             _ucrcd = ucrcd;
             CoId = Coid;
             FId = Fid;
             data = _data;
             this.Text = "Generate Collections";
-        }
-        private void frmGenerateRCD_Load(object sender, EventArgs e)
-        {
-            
-        }        
-      
+        } 
 
         private void btnPreview_Click(object sender, EventArgs e)
         {

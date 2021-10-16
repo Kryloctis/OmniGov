@@ -42,6 +42,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // 
             // panelReport
             // 
+            this.panelReport.BackColor = System.Drawing.Color.Transparent;
             this.panelReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelReport.Location = new System.Drawing.Point(0, 28);
             this.panelReport.Name = "panelReport";
@@ -51,7 +52,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // panel1
             // 
             this.panel1.AutoSize = true;
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.cbHideZeroBalance);
             this.panel1.Controls.Add(this.dtAsOf);
             this.panel1.Controls.Add(this.cmbFund);
@@ -127,6 +128,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.panelReport);
             this.Controls.Add(this.panel1);
             this.Name = "ucPostClosingTrialBalance";

@@ -1,50 +1,53 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Journals
 {
-    public partial class ucCashDisbursementsJournalReport : UserControl
+    public partial class frmCheckDisbursementsJournalReport : Form
     {
         private readonly ReportViewer reportViewer;
+        internal string fundName;
+        internal string journalName;
+        internal DateTime date;
 
-        public ucCashDisbursementsJournalReport()
+        public frmCheckDisbursementsJournalReport()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
         }
 
-        private void LoadFunds()
+        private DataTable CheckDisbursementsJournalDataTable()
         {
-            cmbFunds.DataSource = Factory.FundsRepository().GetRecords();
-            cmbFunds.ValueMember = "id";
-            cmbFunds.DisplayMember = "fund_name";
-        }
+            var dtCheckDisbursementsJournal = new dsLFS.CheckDisbursementsJournalDataTable();
+            var dtCheckDisbursementFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundName, journalName, date);
 
-        private DataTable CashDisbursementsJournalDataTable()
-        {
-            byte fundId = (byte)cmbFunds.SelectedValue;
-            byte journalId = 4;
-            var dateYearMonth = dtpMonth.Value;
-
-            var dtCashDisbursementsJournal = new dsLFS.CashDisbursementsJournalDataTable();
-            var dtCashDisbursementFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundId, journalId, dateYearMonth);
-
+            int jevId;
             string jevNo;
             string particulars;
 
-            foreach (DataRow item in dtCashDisbursementFromDB.Rows)
+            var checkDisbursementsRepository = Factory.CheckDisbursementsJournalRepository();
+            foreach (DataRow item in dtCheckDisbursementFromDB.Rows)
             {
+                jevId = Convert.ToInt32(item["jev_id"]);
                 jevNo = item["jev_no"].ToString();
                 particulars = item["explanation"].ToString();
 
-                DataRow row = dtCashDisbursementsJournal.NewRow();
+                var checkDisbursementDict = checkDisbursementsRepository.GetRecordByJevID(jevId);
+                DataRow row = dtCheckDisbursementsJournal.NewRow();
                 row["date"] = item["date_entry"];
-                row["ref"] = jevNo;
-                row["particulars"] = particulars;
+                row["ref"] = checkDisbursementDict["check_no"];
+                row["payee"] = checkDisbursementDict["payee"];
 
                 if (Convert.ToBoolean(item["is_debit"]))
                 {
@@ -59,10 +62,10 @@ namespace AccountingSystem.Views.Reports.Journals
                     row["credit"] = item["amount"];
                 }
 
-                dtCashDisbursementsJournal.Rows.Add(row);
+                dtCheckDisbursementsJournal.Rows.Add(row);
             }
 
-            return dtCashDisbursementsJournal;
+            return dtCheckDisbursementsJournal;
         }
 
         private void LoadReport(LocalReport report)
@@ -71,11 +74,11 @@ namespace AccountingSystem.Views.Reports.Journals
             {
                 Cursor.Current = Cursors.WaitCursor;
                 var lguDetails = Helper.LGUDetails();
-                var fundName = cmbFunds.Text;
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
-                byte journalId = 4;
+                byte journalId = 5;
 
                 DataTable defaultAccountsDataTable = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId);
+
 
                 string defaultAccountCode(int rowNo)
                 {
@@ -101,9 +104,8 @@ namespace AccountingSystem.Views.Reports.Journals
                 int defaultAccountIDSecond = defaultAccountId(1);
                 int defaultAccountIDThird = defaultAccountId(2);
 
-
                 var parameters = new[] {
-                    new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
+                    new ReportParameter("paramMonth", date.ToString()),
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                     new ReportParameter("paramFund", fundName),
                     new ReportParameter("paramSignatory", signatory),
@@ -115,11 +117,17 @@ namespace AccountingSystem.Views.Reports.Journals
                     new ReportParameter("paramDefaultAccountIDThird", defaultAccountIDThird.ToString()),
                 };
 
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\cash-disbursement-journal.rdlc";
+                report.ReportPath = $"{Application.StartupPath}\\Reports\\check-disbursements-journal.rdlc";
                 report.DataSources.Clear();
 
-                report.DataSources.Add(new ReportDataSource("CashDisbursementsJournal", CashDisbursementsJournalDataTable()));
+
+
+                report.DataSources.Add(new ReportDataSource("CheckDisbursementsJournal", CheckDisbursementsJournalDataTable()));
                 report.SetParameters(parameters);
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
+                reportViewer.RefreshReport();
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
@@ -128,20 +136,9 @@ namespace AccountingSystem.Views.Reports.Journals
             }
         }
 
-        private void btnRetrieve_Click(object sender, EventArgs e)
+        private void frmCheckDisbursementsJournalReport_Load(object sender, EventArgs e)
         {
             LoadReport(reportViewer.LocalReport);
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.PageWidth;
-            reportViewer.RefreshReport();
-        }
-
-        private void ucCashDisbursementsJournalReport_Load(object sender, EventArgs e)
-        {
-            if (!DesignMode)
-            {
-                LoadFunds();
-            }
         }
     }
 }

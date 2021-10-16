@@ -749,16 +749,25 @@ namespace ACC.Data
             return record;
         }
 
-        public int JevCounter(byte journalId)
+        public int JevCounterByJournal(string fundName, int month, int year, string journalName)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@journals_id", DbType.Int32, journalId },
+                    new object[] { "@fund_name", DbType.String, fundName },
+                    new object[] { "@month", DbType.Int32, month},
+                    new object[] { "@year", DbType.Int32, year},
+                    new object[] { "@journal_name", DbType.String, journalName }
                 };
 
-                string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved = 1 AND journals_id = @journals_id GROUP BY journals_id";
+                string query = $"SELECT COUNT(*) " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE is_approved = 1 " +
+                    $"AND fund_name = @fund_name " +
+                    $"AND journal_name = @journal_name " +
+                    $"AND MONTH(date_entry) = @month " +
+                    $"AND YEAR(date_entry) = @year";
 
                 if (string.IsNullOrWhiteSpace(_dbGenericCommands.ExecuteScalar(query, parameters)))
                     return 0;
@@ -769,6 +778,34 @@ namespace ACC.Data
             {
                 throw;
             };
+        }
+
+        public bool SetJEVStatus(int jevId, byte jevStatus)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@jev_id", DbType.Int64, jevId},
+                };
+
+                string queryStatus = string.Empty;
+                if (jevStatus == 0)
+                    queryStatus = $"is_approved = 0, is_disapproved = 0, is_cancelled = 0";
+                else if (jevStatus == 1)
+                    queryStatus = $"is_approved = 1, is_disapproved = 0, is_cancelled = 0";
+                else if (jevStatus == 2)
+                    queryStatus = $"is_approved = 0, is_disapproved = 1, is_cancelled = 0";
+                else if (jevStatus == 3)
+                    queryStatus = $"is_cancelled = 1";
+
+                string query = $"UPDATE {tableName} SET {queryStatus} WHERE id = @jev_id";
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool JevNumberAndYearExist(string jevNo, int jevEntryDate)
@@ -795,27 +832,45 @@ namespace ACC.Data
             return false;
         }
 
-        public bool SetJEVStatus(int jevId, byte jevStatus)
+        public int JevCounterByStatus(string status, string journalName, short month, short year)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@jev_id", DbType.Int64, jevId},
+                    new object[] { "@journal_name", DbType.String, journalName },
+                    new object[] { "@month", DbType.Int16, month},
+                    new object[] { "@year", DbType.Int16, year}
                 };
 
-                string queryStatus = string.Empty;
-                if (jevStatus == 0)
-                    queryStatus = $"is_approved = 0, is_disapproved = 0, is_cancelled = 0";
-                else if (jevStatus == 1)
-                    queryStatus = $"is_approved = 1, is_disapproved = 0, is_cancelled = 0";
-                else if (jevStatus == 2)
-                    queryStatus = $"is_approved = 0, is_disapproved = 1, is_cancelled = 0";
-                else if (jevStatus == 3)
-                    queryStatus = $"is_cancelled = 1";
+                string statusQuery;
 
-                string query = $"UPDATE {tableName} SET {queryStatus} WHERE id = @jev_id";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                switch (status)
+                {
+                    case "pending":
+                        statusQuery = "is_approved = 0 AND is_disapproved = 0 AND is_cancelled = 0 AND";
+                        break;
+
+                    case "approved":
+                        statusQuery = "is_approved = 1 AND is_disapproved = 0 AND is_cancelled = 0 AND";
+                        break;
+
+                    case "disapproved":
+                        statusQuery = "is_approved = 0 AND is_disapproved = 1 AND is_cancelled = 0 AND";
+                        break;
+
+                    case "cancelled":
+                        statusQuery = "is_cancelled = 1 AND";
+                        break;
+
+                    default:
+                        statusQuery = string.Empty;
+                        break;
+                }
+
+                string query = $"SELECT COUNT(*) FROM {viewTableName} WHERE {statusQuery} journal_name = @journal_name AND MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
+
+                return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
             }
             catch (Exception)
             {
@@ -924,12 +979,13 @@ namespace ACC.Data
             }
         }
 
-        public DataTable FilterRecords(byte jevStatus, string searchTxt, short month, short year)
+        public DataTable FilterRecords(byte jevStatus, string searchTxt, string journal, short month, short year)
         {
             try
             {
                 var parameters = new object[][]
                 {
+                    new object[] { "@journal_name", DbType.String, journal},
                     new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%"},
                     new object[] { "@month", DbType.Int16, month},
                     new object[] { "@year", DbType.Int16, year}
@@ -971,6 +1027,7 @@ namespace ACC.Data
                     $"updated_by " +
                     $"FROM {viewTableName} " +
                     $"WHERE {jevStatusQuery} " +
+                    $"AND journal_name = @journal_name " +
                     $"AND MONTH(date_entry) <= @month " +
                     $"AND YEAR(date_entry) = @year " +
                     $"AND (jev_no LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt)";
@@ -1108,6 +1165,5 @@ namespace ACC.Data
                 throw;
             }
         }
-
     }
 }

@@ -45,11 +45,18 @@ namespace ACC.Domain.Interfaces
 
         bool JevNumberExist(string jevNo, int jevId);
 
-        int JevCounter(byte journalId);
+        int JevCounterByJournal(string fundName, int month, int year ,string journalName);
+
+        int JevCounterByStatus(string status,string journalName, short month, short year);
+
         int TotalJEV(short month, short year);
+
         int TotalApproveJEV(short month, short year);
+
         int TotalPendingJEV(short month, short year);
+
         int TotalDisapprovedJEV(short month, short year);
+
         int TotalCancelledJEV(short month, short year);
 
         bool SetJEVStatus(int jevId, byte jevStatus);
@@ -59,7 +66,7 @@ namespace ACC.Domain.Interfaces
         string GetRemarks(int jevId);
 
 
-        DataTable FilterRecords(byte jevStatus, string searchTxt, short month, short year);
+        DataTable FilterRecords(byte jevStatus, string searchTxt, string journal, short month, short year);
 
         byte GetJevStatus(int jevId);
 
@@ -67,5 +74,6 @@ namespace ACC.Domain.Interfaces
         decimal GetSumByMajorAccountGroup(int fundId, int majorAccountGroupId, byte isDebit, DateTime dateEntry);
 
         decimal GetSumPreviousYearTransactionsByFundIdAndMajAccountGroupId(int fundId, int majorAccountGroupId, byte isDebit, DateTime dateEntry);
+
     }
 }

@@ -1,37 +1,37 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Journals
 {
-    public partial class ucADADisbursementsJournalReport : UserControl
+    public partial class frmADADisbursementsJournalReport : Form
     {
         private readonly ReportViewer reportViewer;
+        internal string fundName;
+        internal string journalName;
+        internal DateTime date;
 
-        public ucADADisbursementsJournalReport()
+        public frmADADisbursementsJournalReport()
         {
             InitializeComponent();
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
-        }
-
-        private void LoadFunds()
-        {
-            cmbFunds.DataSource = Factory.FundsRepository().GetRecords();
-            cmbFunds.ValueMember = "id";
-            cmbFunds.DisplayMember = "fund_name";
+            Helper.LoadFormIcon(this);
         }
 
         private DataTable AuthorityToDebitAccountDisbursementsJournalDataTable()
         {
-            byte fundId = (byte)cmbFunds.SelectedValue;
-            byte journalId = 6;
-            var dateYearMonth = dtpMonth.Value;
 
             var dtADADisbursementsJournal = new dsLFS.AuthorityToDebitAccountDisbursementsJournalDataTable();
-            var dtADADisbursementsFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundId, journalId, dateYearMonth);
+            var dtADADisbursementsFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundName, journalName, date);
 
             int jevId;
             string jevNo;
@@ -74,7 +74,6 @@ namespace AccountingSystem.Views.Reports.Journals
             {
                 Cursor.Current = Cursors.WaitCursor;
                 var lguDetails = Helper.LGUDetails();
-                var fundName = cmbFunds.Text;
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
                 byte journalId = 6;
 
@@ -105,7 +104,7 @@ namespace AccountingSystem.Views.Reports.Journals
                 int defaultAccountIDThird = defaultAccountId(2);
 
                 var parameters = new[] {
-                    new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
+                    new ReportParameter("paramMonth", date.ToString()),
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                     new ReportParameter("paramFund", fundName),
                     new ReportParameter("paramSignatory", signatory),
@@ -122,6 +121,13 @@ namespace AccountingSystem.Views.Reports.Journals
 
                 report.DataSources.Add(new ReportDataSource("AuthorityToDebitAccountDisbursementsJournal", AuthorityToDebitAccountDisbursementsJournalDataTable()));
                 report.SetParameters(parameters);
+
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
+
+                reportViewer.RefreshReport();
+
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
@@ -130,20 +136,9 @@ namespace AccountingSystem.Views.Reports.Journals
             }
         }
 
-        private void btnRetrieve_Click(object sender, EventArgs e)
+        private void frmADADisbursementsJournalReport_Load(object sender, EventArgs e)
         {
             LoadReport(reportViewer.LocalReport);
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.PageWidth;
-            reportViewer.RefreshReport();
-        }
-
-        private void ucADADisbursementsJournalReport_Load(object sender, EventArgs e)
-        {
-            if (!DesignMode)
-            {
-                LoadFunds();
-            }
         }
     }
 }

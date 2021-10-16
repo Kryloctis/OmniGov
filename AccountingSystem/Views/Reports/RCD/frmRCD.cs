@@ -19,7 +19,7 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgrcd);
+            Helper.DatagridFullRowSelectStyle(dgrcd, true);
         }
 
         private void frmRCD_Load(object sender, EventArgs e)

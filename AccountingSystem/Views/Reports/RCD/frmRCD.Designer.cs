@@ -61,8 +61,8 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnRefresh});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Padding = new System.Windows.Forms.Padding(4);
-            this.toolStrip.Size = new System.Drawing.Size(936, 58);
+            this.toolStrip.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.toolStrip.Size = new System.Drawing.Size(936, 50);
             this.toolStrip.TabIndex = 10;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -116,7 +116,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // btnApproved
             // 
-            this.btnApproved.Image = ((System.Drawing.Image)(resources.GetObject("btnApproved.Image")));
+            this.btnApproved.Image = global::AccountingSystem.Properties.Resources.document_approve_28px;
             this.btnApproved.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnApproved.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnApproved.Name = "btnApproved";
@@ -128,7 +128,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.refresh;
+            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.symbol_refresh_28px;
             this.btnRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRefresh.Name = "btnRefresh";
@@ -176,7 +176,6 @@ namespace AccountingSystem.Views.Reports.RCD
             this.txtsearch.Location = new System.Drawing.Point(647, 12);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.PlaceholderText = "Search...";
             this.txtsearch.Size = new System.Drawing.Size(277, 23);
             this.txtsearch.TabIndex = 15;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
@@ -187,7 +186,7 @@ namespace AccountingSystem.Views.Reports.RCD
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgrcd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgrcd.Location = new System.Drawing.Point(12, 61);
+            this.dgrcd.Location = new System.Drawing.Point(12, 52);
             this.dgrcd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgrcd.Name = "dgrcd";
             this.dgrcd.RowHeadersWidth = 51;
@@ -212,6 +211,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmRCD";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Generate RCD";
             this.Load += new System.EventHandler(this.frmRCD_Load);

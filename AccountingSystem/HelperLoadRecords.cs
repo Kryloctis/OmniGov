@@ -310,17 +310,33 @@ namespace AccountingSystem
             datagrid.Columns[0].Visible = false;
             datagrid.Columns[1].HeaderText = "Collector";
             datagrid.Columns[2].HeaderText = "Receipt (Form)";
-            datagrid.Columns[3].HeaderText = "# From";
-            datagrid.Columns[4].HeaderText = "# To";
+            datagrid.Columns[3].HeaderText = "Series No. From";
+            datagrid.Columns[4].HeaderText = "Series No. To";
             datagrid.Columns[5].HeaderText = "Date Issued";
             datagrid.Columns[5].DefaultCellStyle.Format = "yyyy-MM-dd";
             datagrid.Columns[6].HeaderText = "Quantity";
-            datagrid.Columns[7].HeaderText = "Last Issued #";
+            datagrid.Columns[7].HeaderText = "Last Issued No.";
             datagrid.Columns[8].HeaderText = "Is Returned";
             datagrid.Columns[9].HeaderText = "Returned Date";
             datagrid.Columns[9].DefaultCellStyle.Format = "yyyy-MM-dd";
             datagrid.Columns[10].HeaderText = "User/Officer";
 
+            datagrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            datagrid.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            datagrid.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            datagrid.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            datagrid.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            datagrid.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            datagrid.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+            float fontSize = 9f;
+            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
@@ -331,14 +347,21 @@ namespace AccountingSystem
             datagrid.DataSource = dataTable;
             datagrid.Columns[0].Visible = false;
             datagrid.Columns[1].HeaderText = "Receipt (Form)";
-            datagrid.Columns[2].HeaderText = "# From";
-            datagrid.Columns[3].HeaderText = "# To";
+            datagrid.Columns[2].HeaderText = "Series No. From";
+            datagrid.Columns[3].HeaderText = "Series No. To";
             datagrid.Columns[4].HeaderText = "Received Date";
             datagrid.Columns[4].DefaultCellStyle.Format = "yyyy-MM-dd";
             datagrid.Columns[5].HeaderText = "Quantity";
             datagrid.Columns[6].HeaderText = "User/Officer";
 
+            datagrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            datagrid.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            datagrid.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+            float fontSize = 9f;
+            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
         }
         #endregion
 
@@ -1220,7 +1243,7 @@ namespace AccountingSystem
 
                 sub_fpp = null;
 
-                var dtGetViewRecordsByFFPIDByAllotmentClass = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf, null);
+                var dtGetViewRecordsByFFPIDByAllotmentClass = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf);
 
 
                 //Load by loop All Budget Appropriations Records without Others FPP 
@@ -1244,7 +1267,7 @@ namespace AccountingSystem
 
 
                     sub_fpp = othersFPPID;
-                    DataTable dtGetViewRecordsByIds = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf, null);
+                    DataTable dtGetViewRecordsByIds = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf);
 
                     foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByIds.Rows)
                     {
@@ -1327,6 +1350,16 @@ namespace AccountingSystem
                 Helper.MessageBoxError(ex.Message);
             }
 
+        }
+
+
+        internal static void ComboboxJournals(DataTable dataTable, ComboBox comboBox, string valueMember, string displayMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+            comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
         }
 
         #endregion DASHBOARD
@@ -1438,7 +1471,7 @@ namespace AccountingSystem
 
 
                 dgv.ClearSelection();
-                Helper.DatagridDefaultStyle(dgv, true);
+                Helper.DatagridFullRowSelectStyle(dgv, true);
             }
             catch (Exception ex)
             {
@@ -1489,7 +1522,7 @@ namespace AccountingSystem
 
 
                 dgv.ClearSelection();
-                Helper.DatagridDefaultStyle(dgv, true);
+                Helper.DatagridFullRowSelectStyle(dgv, true);
             }
             catch (Exception ex)
             {

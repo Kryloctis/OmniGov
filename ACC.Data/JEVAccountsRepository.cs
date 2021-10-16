@@ -244,14 +244,14 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetViewRecordsByFundJournalDate(byte fundId, byte journalId, DateTime dateEntry)
+        public DataTable GetViewRecordsByFundJournalDate(string fundName, string journalName, DateTime dateEntry)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@funds_id", DbType.Byte, fundId},
-                    new object[] { "@journals_id", DbType.Byte, journalId},
+                    new object[] { "@fund_name", DbType.String, fundName},
+                    new object[] { "@journal_name", DbType.String, journalName},
                     new object[] { "@date_entry", DbType.Date, dateEntry }
                 };
 
@@ -271,8 +271,8 @@ namespace ACC.Data
                     $"WHERE is_approved = 1 " +
                     $"AND is_cancelled = 0 " +
                     $"AND is_disapproved = 0 " +
-                    $"AND funds_id = @funds_id " +
-                    $"AND journals_id = @journals_id " +
+                    $"AND fund_name = @fund_name " +
+                    $"AND journal_name = @journal_name " +
                     $"AND MONTH(date_entry) = MONTH(@date_entry) " +
                     $"AND YEAR(date_entry) = YEAR(@date_entry)";
 

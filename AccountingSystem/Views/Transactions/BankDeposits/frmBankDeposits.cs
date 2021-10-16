@@ -16,9 +16,8 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         public frmBankDeposits()
         {
             InitializeComponent();
-            WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgbankdeposits);
+            Helper.DatagridFullRowSelectStyle(dgbankdeposits, true);
         }
 
         private void frmBankDeposits_Load(object sender, EventArgs e)

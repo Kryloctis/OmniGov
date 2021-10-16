@@ -98,6 +98,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.btnEdit.Size = new System.Drawing.Size(32, 47);
             this.btnEdit.Text = "Edit";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnDelete
             // 
@@ -109,6 +110,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.btnDelete.Size = new System.Drawing.Size(44, 47);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // statusStrip1
             // 

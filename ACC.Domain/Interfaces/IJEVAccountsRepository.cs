@@ -13,7 +13,7 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecordsByJevId(int jevId);
 
-        DataTable GetViewRecordsByFundJournalDate(byte fundId, byte journalId, DateTime dateEntry);
+        DataTable GetViewRecordsByFundJournalDate(string fundName, string journalName, DateTime dateEntry);
 
         //GENERAL LEDGER
         DataTable GetViewRecordsByFundAndGeneralLedgerAndYear(int fundId, int generalLedgerId, short year);

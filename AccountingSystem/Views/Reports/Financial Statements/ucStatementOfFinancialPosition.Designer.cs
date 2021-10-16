@@ -87,6 +87,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Name = "ucStatementOfFinancialPosition";

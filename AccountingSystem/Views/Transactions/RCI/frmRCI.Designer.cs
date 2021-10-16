@@ -102,7 +102,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.refresh;
+            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.symbol_refresh_28px;
             this.btnRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRefresh.Name = "btnRefresh";
@@ -171,6 +171,9 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // dgRCI
             // 
+            this.dgRCI.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgRCI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgRCI.Location = new System.Drawing.Point(10, 60);
             this.dgRCI.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -183,12 +186,10 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // txtsearch
             // 
-            this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtsearch.Location = new System.Drawing.Point(774, 16);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.PlaceholderText = "Search...";
             this.txtsearch.Size = new System.Drawing.Size(277, 23);
             this.txtsearch.TabIndex = 10;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
@@ -204,11 +205,11 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.Controls.Add(this.toolStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmRCI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Transactions > Issue Check";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmRCI_Load);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();

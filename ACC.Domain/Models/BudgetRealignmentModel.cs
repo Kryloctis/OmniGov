@@ -9,6 +9,7 @@ namespace ACC.Domain.Models
         public int BudgetAppropriationId { get; set; }
 
         public ushort FromBudgetAppropriationId { get; set; }
+        public ushort ToBudgetAppropriationId { get; set; }
         public DateTime DateEntry { get; set; }
         public string Remarks { get; set; }
         public Decimal Amount { get; set; }

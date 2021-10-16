@@ -33,6 +33,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             dtDateIssued.Value = DateTime.Now;
 
             dgBudgetRealignment.Rows.Clear();
+
         }
 
         private void ucRealignment_Load(object sender, EventArgs e)
@@ -107,7 +108,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             cmbOthersFPP.SelectedIndex = -1;
             cmbOthersFPP.Text = string.Empty;
             cmbOthersFPP.Enabled = true;
-          
         }
 
         private DataTable DataTableFPP()
@@ -121,11 +121,7 @@ namespace AccountingSystem.Views.Manage.Realignment
 
             return dtFPP;
         }
-
-
-
-
-
+        
         private void LoadBudgetAppropriationAccounts()
         {
             try
@@ -160,8 +156,7 @@ namespace AccountingSystem.Views.Manage.Realignment
         private DataTable DatatableAccounts()
         {
             DataTable dtRealignmentAccounts;
-            dtRealignmentAccounts = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppId.ToString(), othersFPPId ,fundId, allotmentClassId, dtDateIssued.Value, int.Parse(txtBudgetId.Text));
-
+            dtRealignmentAccounts = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntryAndBudgetAppropriationId(fppId.ToString(), othersFPPId ,fundId, allotmentClassId, dtDateIssued.Value, budgetId);
             return dtRealignmentAccounts;
         }
 
@@ -346,7 +341,7 @@ namespace AccountingSystem.Views.Manage.Realignment
 
             if (!isEnoughBudget)
             {
-                epAmount.SetError(nudAmount, "insufficient budget appropriation to be align.");
+                epAmount.SetError(nudAmount, "insufficient budget appropriation to realign.");
                 e.Cancel = true;
             }
         }
@@ -368,6 +363,12 @@ namespace AccountingSystem.Views.Manage.Realignment
         private void btnEdit_Click(object sender, EventArgs e)
         {
 
+            sbyte selectedRowCount = (sbyte)dgBudgetRealignment.SelectedRows.Count;
+
+            if (selectedRowCount > 1)
+                return;
+                
+            SumRealignment();
         }
     }
 }
