@@ -137,6 +137,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.txtfrom.Name = "txtfrom";
             this.txtfrom.Size = new System.Drawing.Size(185, 27);
             this.txtfrom.TabIndex = 12;
+            this.txtfrom.TextChanged += new System.EventHandler(this.txtfrom_TextChanged);
             this.txtfrom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtfrom_KeyPress);
             this.txtfrom.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtfrom_KeyUp);
             this.txtfrom.Validating += new System.ComponentModel.CancelEventHandler(this.txtfrom_Validating);

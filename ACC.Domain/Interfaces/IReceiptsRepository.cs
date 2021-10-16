@@ -15,5 +15,6 @@ namespace ACC.Domain.Interfaces
         bool ReceiptsIssued(int id);
         int RMAX(int accid);
         int RMIN(int accid);
+        bool AllowEdit(int id);
     }
 }
