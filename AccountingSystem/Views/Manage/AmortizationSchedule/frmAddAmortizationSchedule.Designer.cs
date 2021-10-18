@@ -77,6 +77,7 @@ namespace AccountingSystem.Views.Manage.AmortizationSchedule
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // frmAddAmortizationSchedule
             // 
@@ -95,6 +96,7 @@ namespace AccountingSystem.Views.Manage.AmortizationSchedule
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Amortization Schedule";
+            this.Load += new System.EventHandler(this.frmAddAmortizationSchedule_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

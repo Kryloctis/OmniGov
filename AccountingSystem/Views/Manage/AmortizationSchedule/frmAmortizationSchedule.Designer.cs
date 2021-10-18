@@ -51,6 +51,7 @@ namespace AccountingSystem.Views.Manage.Amortization
             this.dgAmortizationSched.Size = new System.Drawing.Size(977, 464);
             this.dgAmortizationSched.TabIndex = 0;
             this.dgAmortizationSched.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgAmortizationSched_ColumnAdded);
+            this.dgAmortizationSched.SelectionChanged += new System.EventHandler(this.dgAmortizationSched_SelectionChanged);
             // 
             // toolStrip1
             // 
@@ -97,6 +98,7 @@ namespace AccountingSystem.Views.Manage.Amortization
             this.btnDelete.Size = new System.Drawing.Size(44, 47);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // frmAmortizationSchedule
             // 

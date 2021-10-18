@@ -300,7 +300,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
         internal System.Windows.Forms.CheckBox chckbxContinuing;
         internal System.Windows.Forms.TextBox txtFPP;
         internal System.Windows.Forms.TextBox txtFund;
-        internal System.Windows.Forms.TextBox t;
         internal System.Windows.Forms.TextBox txtAllotmentClass;
         internal System.Windows.Forms.TextBox txtYear;
         private System.Windows.Forms.Label label9;

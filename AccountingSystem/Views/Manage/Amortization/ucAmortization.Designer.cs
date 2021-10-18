@@ -102,7 +102,7 @@ namespace AccountingSystem.Views.Manage.Amortization
             this.cmbxTerm.Items.AddRange(new object[] {
             "Daily",
             "Monthly",
-            "Annualy"});
+            "Annually"});
             this.cmbxTerm.Location = new System.Drawing.Point(106, 32);
             this.cmbxTerm.Name = "cmbxTerm";
             this.cmbxTerm.Size = new System.Drawing.Size(371, 23);

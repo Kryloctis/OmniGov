@@ -1647,5 +1647,25 @@ namespace AccountingSystem
         }
 
         #endregion
+
+        #region Amortization Schedule
+
+        public static void DatagridViewAmortizationSchedule(DataTable dataTable, DataGridView dataGridView) 
+        {
+
+            dataGridView.DataSource = dataTable;
+
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["amortization_id"].Visible = false;
+            dataGridView.Columns["date"].HeaderText = "Date";
+            dataGridView.Columns["principal_amount"].DefaultCellStyle.Format = "0.00##";
+            dataGridView.Columns["principal_amount"].HeaderText = "Principal";
+            dataGridView.Columns["interest_amount"].DefaultCellStyle.Format = "0.00##";
+            dataGridView.Columns["interest_amount"].HeaderText = "Interest";
+            dataGridView.Columns["grt_amount"].DefaultCellStyle.Format = "0.00##";
+            dataGridView.Columns["grt_amount"].HeaderText = "GRT";
+        }
+
+        #endregion
     }
 }

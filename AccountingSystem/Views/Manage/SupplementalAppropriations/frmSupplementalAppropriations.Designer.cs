@@ -259,14 +259,12 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        internal System.Windows.Forms.ToolStripStatusLabel lblRecords;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         internal System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         internal System.Windows.Forms.ToolStripStatusLabel lblUpdatedAtPlaceHolder;
         internal System.Windows.Forms.ToolStripStatusLabel lblDateEntry;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
-        internal System.Windows.Forms.ToolStripStatusLabel labelRecords;
         internal System.Windows.Forms.ToolStripStatusLabel lblRecordCounts;
         internal System.Windows.Forms.ToolStripStatusLabel labelRecordsCountsPlaceHolder;
         internal System.Windows.Forms.ToolStripStatusLabel lblDateEntryPlaceHolder;

@@ -49,7 +49,11 @@ namespace AccountingSystem.Views.Manage.Amortization
 
         private void btnAmortizationSched_Click(object sender, EventArgs e)
         {
-            _ = new frmAmortizationSchedule().ShowDialog();
+            int rowIndex = dgAmortization.CurrentRow.Index;
+            var frmAmortizationSchedule = new frmAmortizationSchedule();
+            frmAmortizationSchedule.amortizationId = Convert.ToInt32(dgAmortization.Rows[rowIndex].Cells["id"].Value);
+            frmAmortizationSchedule.amortizationTerm = dgAmortization.Rows[rowIndex].Cells["amortization_term"].Value.ToString();
+            frmAmortizationSchedule.ShowDialog();
         }
 
         private void frmAmortization_Load(object sender, EventArgs e)
