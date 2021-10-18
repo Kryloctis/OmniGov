@@ -163,6 +163,10 @@ namespace AccountingSystem.Views.Manage.Receipts
                         startreceipt = reporeceipt.RMIN(int.Parse(item[0].ToString()));
                         maxreceipt = reporeceipt.RMAX(int.Parse(item[0].ToString()));
                         txtfrom.Text = (maxreceipt + 1).ToString();
+
+                        int from = txtfrom.Text.Length > 0 ? Convert.ToInt32(txtfrom.Text.Trim()) : 0;
+                        int to = txtto.Text.Length > 0 ? Convert.ToInt32(txtto.Text.Trim()) : 0;
+                        txtquantity.Text = ((to - from) + 1).ToString();
                     }
                 }              
             }

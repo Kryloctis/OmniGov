@@ -106,6 +106,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     }                       
                     else return false;
                 }
+                else if (uc.txtamount.Value <= 0)
+                {
+                    Helper.MessageBoxSuccess("Empty Amount!");
+                    uc.txtamount.Focus();
+                    return false;
+                }
                 else
                 {
                     return pcrepository.Update(pcModel);
