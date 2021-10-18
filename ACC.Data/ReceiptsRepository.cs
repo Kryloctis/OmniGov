@@ -173,6 +173,29 @@ namespace ACC.Data
             return false;
         }
 
+        public bool AllowEdit(int id)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, id },
+                };
+
+                string query = $"SELECT {tableName}.id FROM {tableName} LEFT JOIN {tableName4} ON {tableName}.id={tableName4}.receipts_id WHERE ({tableName4}.issuefrom AND {tableName4}.issueto BETWEEN {tableName}.receiptsfrom AND {tableName}.receiptsto) AND {tableName}.id=@id";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
+
         public bool ReceiptExist(int accid,int from,int to)
         {
             try

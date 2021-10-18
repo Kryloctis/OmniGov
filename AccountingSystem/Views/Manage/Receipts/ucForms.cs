@@ -167,5 +167,21 @@ namespace AccountingSystem.Views.Manage.Receipts
                 }              
             }
         }
+
+        private void txtfrom_TextChanged(object sender, EventArgs e)
+        {
+            if(txtfrom.Text.Length > 0)
+            {
+                int num = int.Parse(txtfrom.Text.Trim());
+                if(num > 1)
+                {
+                    txtfrom.Enabled = false;
+                }
+                else
+                {
+                    txtfrom.Enabled = true;
+                }
+            }
+        }
     }
 }

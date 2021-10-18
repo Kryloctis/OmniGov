@@ -74,7 +74,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                 var rRepository = Factory.ReceiptsRepository();
                 var rcRepository = Factory.ReceiptsIssuedRepository();
                 bool isconsumed = rRepository.ReceiptConsumed(id);                
-                bool issued = rcRepository.HasIssued(id);
+                bool issued = rRepository.AllowEdit(id);
                 btnEdit.Enabled = issued ? false:true;
                 btnDelete.Enabled = issued ? false : true;
                 btnissue.Enabled = issued && isconsumed ? false:true;
