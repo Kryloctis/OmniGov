@@ -1,5 +1,6 @@
 ﻿using AccountingSystem.Views.Manage.AccountableForm;
 using AccountingSystem.Views.Manage.AllotmentClasses;
+using AccountingSystem.Views.Manage.Amortization;
 using AccountingSystem.Views.Manage.Banks;
 using AccountingSystem.Views.Manage.ChartOfAccounts;
 using AccountingSystem.Views.Manage.CollectingOfficer;
@@ -481,6 +482,11 @@ namespace AccountingSystem
         private void radSCBAA_CheckedChanged(object sender, EventArgs e)
         {
             tabControlFinancialStatements.SelectedTab = tabPageSCBAA;
+        }
+
+        private void amortiaztionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmAmortization().ShowDialog();
         }
     }
 }

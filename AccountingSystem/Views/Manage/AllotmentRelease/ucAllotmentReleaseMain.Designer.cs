@@ -357,8 +357,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         internal System.Windows.Forms.ComboBox cmbxFPP;
-        private System.Windows.Forms.ComboBox CMB;
-        private System.Windows.Forms.ComboBox cc;
         internal System.Windows.Forms.ComboBox cmbxSubFPP;
         internal System.Windows.Forms.ErrorProvider epFPP;
         internal System.Windows.Forms.ErrorProvider epSubFPP;

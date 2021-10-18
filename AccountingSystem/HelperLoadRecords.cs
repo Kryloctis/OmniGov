@@ -1425,7 +1425,6 @@ namespace AccountingSystem
 
         #endregion Supplemental Appropriations
 
-
         #region BudgetRealignment
 
         internal static void BudgetRealignmentFromDatagridView(DataTable dataTable, DataGridView dgv)
@@ -1622,6 +1621,73 @@ namespace AccountingSystem
             datagrid.Columns["created_by"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
             datagrid.Columns["updated_by"].Visible = false;
+        }
+
+        #endregion
+
+        #region Amortization
+
+        internal static void AmortizationDataGridView(DataTable dataTable, DataGridView dataGridView) 
+        {
+            dataGridView.DataSource = dataTable;
+
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["bank_name"].HeaderText = "Bank";
+            dataGridView.Columns["amortization_term"].HeaderText = "Term";
+            dataGridView.Columns["amortization_term"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dataGridView.Columns["amortization_term"].Width = 100;
+            dataGridView.Columns["interest"].HeaderText = "Interest";
+            dataGridView.Columns["interest"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dataGridView.Columns["interest"].Width = 100;
+            dataGridView.Columns["amount_released"].HeaderText = "Amount Released";
+            dataGridView.Columns["amount_released"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dataGridView.Columns["amount_released"].Width = 200;
+            dataGridView.Columns["interest"].DefaultCellStyle.Format = "0.00\\%";
+            dataGridView.Columns["amount_released"].DefaultCellStyle.Format = "#,0.00###";         
+        }
+
+        #endregion
+
+        #region Amortization Schedule
+
+        public static void DatagridViewAmortizationSchedule(DataTable dataTable, string amortizationTerm, DataGridView dataGridView) 
+        {
+
+            dataGridView.DataSource = dataTable;
+
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["amortization_id"].Visible = false;
+
+            switch (amortizationTerm)
+            {
+                case "Annually":
+                    dataGridView.Columns["date"].HeaderText = "Year";
+                    dataGridView.Columns["date"].DefaultCellStyle.Format = "yyyy";
+                    break;
+
+                case "Monthly":
+                    dataGridView.Columns["date"].HeaderText = "Month";
+                    dataGridView.Columns["date"].DefaultCellStyle.Format = "MMMMM, yyyy";
+                    break;
+
+                case "Daily":
+                    dataGridView.Columns["date"].HeaderText = "Date";
+                    dataGridView.Columns["date"].DefaultCellStyle.Format = "ddd. dd, MMMMM yyyy";
+                    break;
+
+                default:
+                    dataGridView.Columns["date"].HeaderText = "Date";
+                    dataGridView.Columns["date"].DefaultCellStyle.Format = "ddd. dd, MMMMM yyyy";
+                    break;
+            }
+
+          
+            dataGridView.Columns["principal_amount"].DefaultCellStyle.Format = "#,0.00###";
+            dataGridView.Columns["principal_amount"].HeaderText = "Principal";
+            dataGridView.Columns["interest_amount"].DefaultCellStyle.Format = "#,0.00###";
+            dataGridView.Columns["interest_amount"].HeaderText = "Interest";
+            dataGridView.Columns["grt_amount"].DefaultCellStyle.Format = "#,0.00###";
+            dataGridView.Columns["grt_amount"].HeaderText = "GRT";
         }
 
         #endregion
