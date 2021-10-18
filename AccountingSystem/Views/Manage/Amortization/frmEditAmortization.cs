@@ -8,7 +8,6 @@ namespace AccountingSystem.Views.Manage.Amortization
         private ucAmortization uc;
         private frmAmortization _frmAmortization;
         internal int amortizationId;
-        internal static int amortizationScheduleId;
 
         public frmEditAmortization(frmAmortization frmAmortization)
         {

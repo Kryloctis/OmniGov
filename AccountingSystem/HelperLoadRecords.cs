@@ -1650,19 +1650,43 @@ namespace AccountingSystem
 
         #region Amortization Schedule
 
-        public static void DatagridViewAmortizationSchedule(DataTable dataTable, DataGridView dataGridView) 
+        public static void DatagridViewAmortizationSchedule(DataTable dataTable, string amortizationTerm, DataGridView dataGridView) 
         {
 
             dataGridView.DataSource = dataTable;
 
             dataGridView.Columns["id"].Visible = false;
             dataGridView.Columns["amortization_id"].Visible = false;
-            dataGridView.Columns["date"].HeaderText = "Date";
-            dataGridView.Columns["principal_amount"].DefaultCellStyle.Format = "0.00##";
+
+            switch (amortizationTerm)
+            {
+                case "Annually":
+                    dataGridView.Columns["date"].HeaderText = "Year";
+                    dataGridView.Columns["date"].DefaultCellStyle.Format = "yyyy";
+                    break;
+
+                case "Monthly":
+                    dataGridView.Columns["date"].HeaderText = "Month";
+                    dataGridView.Columns["date"].DefaultCellStyle.Format = "MMMMM, yyyy";
+                    break;
+
+                case "Daily":
+                    dataGridView.Columns["date"].HeaderText = "Date";
+                    dataGridView.Columns["date"].DefaultCellStyle.Format = "ddd. dd, MMMMM yyyy";
+                    break;
+
+                default:
+                    dataGridView.Columns["date"].HeaderText = "Date";
+                    dataGridView.Columns["date"].DefaultCellStyle.Format = "ddd. dd, MMMMM yyyy";
+                    break;
+            }
+
+          
+            dataGridView.Columns["principal_amount"].DefaultCellStyle.Format = "#,0.00###";
             dataGridView.Columns["principal_amount"].HeaderText = "Principal";
-            dataGridView.Columns["interest_amount"].DefaultCellStyle.Format = "0.00##";
+            dataGridView.Columns["interest_amount"].DefaultCellStyle.Format = "#,0.00###";
             dataGridView.Columns["interest_amount"].HeaderText = "Interest";
-            dataGridView.Columns["grt_amount"].DefaultCellStyle.Format = "0.00##";
+            dataGridView.Columns["grt_amount"].DefaultCellStyle.Format = "#,0.00###";
             dataGridView.Columns["grt_amount"].HeaderText = "GRT";
         }
 

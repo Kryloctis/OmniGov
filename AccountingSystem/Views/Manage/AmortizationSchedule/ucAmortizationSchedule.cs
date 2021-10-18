@@ -48,6 +48,7 @@ namespace AccountingSystem.Views.Manage.Amortization
 
             dtDate.Format = DateTimePickerFormat.Custom;
             dtDate.CustomFormat = dateFormat;
+            dtDate.ShowUpDown = true;
         }
 
         internal void ResetForm()

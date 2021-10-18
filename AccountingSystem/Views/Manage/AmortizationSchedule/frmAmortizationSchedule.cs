@@ -28,15 +28,12 @@ namespace AccountingSystem.Views.Manage.Amortization
         {
             var dtAmortizationSheduleRecords = Factory.AmortizationScheduleRepository().GetRecordsByAmortizationId(amortizationId);
 
-            HelperLoadRecords.DatagridViewAmortizationSchedule(dtAmortizationSheduleRecords, dgAmortizationSched);
+            HelperLoadRecords.DatagridViewAmortizationSchedule(dtAmortizationSheduleRecords, amortizationTerm, dgAmortizationSched);
         }
 
         private void frmAmortizationSchedule_Load(object sender, EventArgs e)
         {
-            if (!DesignMode)
-            {
-                LoadRecords();
-            }
+            LoadRecords();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -55,7 +52,7 @@ namespace AccountingSystem.Views.Manage.Amortization
             var frmEditAmortizationSchedule = new frmEditAmortizationSchedule(this);
             frmEditAmortizationSchedule.amortizationId = amortizationId;
             frmEditAmortizationSchedule.amortizationTerm = amortizationTerm;
-            frmEditAmortization.amortizationScheduleId = Convert.ToInt32(dgAmortizationSched.Rows[rowIndex].Cells["id"].Value);
+            frmEditAmortizationSchedule.amortizationScheduleId = Convert.ToInt32(dgAmortizationSched.Rows[rowIndex].Cells["id"].Value);
             frmEditAmortizationSchedule.ShowDialog();
         }
 
