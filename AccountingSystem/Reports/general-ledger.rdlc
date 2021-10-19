@@ -1760,7 +1760,7 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>1.61702in</Height>
+        <Height>1.67952in</Height>
         <Style />
       </Body>
       <Width>7.69794in</Width>
@@ -1820,7 +1820,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>1.03243cm</Top>
+              <Top>1.06744cm</Top>
               <Height>0.6cm</Height>
               <Width>2.63702cm</Width>
               <ZIndex>1</ZIndex>
@@ -1852,7 +1852,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>1.03243cm</Top>
+              <Top>1.06744cm</Top>
               <Left>2.63702cm</Left>
               <Height>0.6cm</Height>
               <Width>7.07729cm</Width>
@@ -1889,7 +1889,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>1.63243cm</Top>
+              <Top>1.66744cm</Top>
               <Height>0.6cm</Height>
               <Width>2.63702cm</Width>
               <ZIndex>3</ZIndex>
@@ -1921,7 +1921,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>1.63243cm</Top>
+              <Top>1.66744cm</Top>
               <Left>2.63702cm</Left>
               <Height>0.6cm</Height>
               <Width>7.07729cm</Width>
@@ -1958,7 +1958,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>1.63243cm</Top>
+              <Top>1.66744cm</Top>
               <Left>12.008cm</Left>
               <Height>0.6cm</Height>
               <Width>2.53119cm</Width>
@@ -1991,7 +1991,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>1.63243cm</Top>
+              <Top>1.66744cm</Top>
               <Left>14.53918cm</Left>
               <Height>0.6cm</Height>
               <Width>5.01354cm</Width>
@@ -2028,7 +2028,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>1.03243cm</Top>
+              <Top>1.06744cm</Top>
               <Left>12.008cm</Left>
               <Height>0.6cm</Height>
               <Width>2.20487cm</Width>
@@ -2061,7 +2061,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>1.03216cm</Top>
+              <Top>1.06717cm</Top>
               <Left>14.53918cm</Left>
               <Height>0.6cm</Height>
               <Width>5.01354cm</Width>
@@ -2089,7 +2089,7 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>0.26389in</Height>
+          <Height>0.27778in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -2125,14 +2125,64 @@
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Center</TextAlign>
+                    <TextAlign>Right</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox8</rd:DefaultName>
-              <Top>0.01389in</Top>
+              <Top>0.02778in</Top>
+              <Left>4.72756in</Left>
               <Height>0.25in</Height>
-              <Width>7.69792in</Width>
+              <Width>2.97036in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox2">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>General Ledger </Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>=Parameters!paramYear.Value</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value> - </Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>=Parameters!paramFund.Value</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox2</rd:DefaultName>
+              <Top>0.02778in</Top>
+              <Height>0.25in</Height>
+              <Width>3.03125in</Width>
+              <ZIndex>1</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -2154,7 +2204,7 @@
         <PageWidth>8.27in</PageWidth>
         <LeftMargin>0.25in</LeftMargin>
         <RightMargin>0.25in</RightMargin>
-        <TopMargin>0.25in</TopMargin>
+        <TopMargin>0.5in</TopMargin>
         <BottomMargin>0.25in</BottomMargin>
         <ColumnSpacing>0.05118in</ColumnSpacing>
         <Style />
@@ -2197,6 +2247,12 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramBalance">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramYear">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -2247,6 +2303,11 @@
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>2</RowIndex>
           <ParameterName>paramBalance</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>paramYear</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
