@@ -83,6 +83,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             // 
             // ucStatementOfFinancialPosition1
             // 
+            this.ucStatementOfFinancialPosition1.BackColor = System.Drawing.Color.Transparent;
             this.ucStatementOfFinancialPosition1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucStatementOfFinancialPosition1.Location = new System.Drawing.Point(0, 0);
             this.ucStatementOfFinancialPosition1.Name = "ucStatementOfFinancialPosition1";
@@ -102,6 +103,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             // 
             // ucStatementOfFinancialPerformance1
             // 
+            this.ucStatementOfFinancialPerformance1.BackColor = System.Drawing.Color.Transparent;
             this.ucStatementOfFinancialPerformance1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucStatementOfFinancialPerformance1.Location = new System.Drawing.Point(0, 0);
             this.ucStatementOfFinancialPerformance1.Name = "ucStatementOfFinancialPerformance1";
@@ -121,6 +123,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             // 
             // ucStatementOfChangesInNetAssetsquity1
             // 
+            this.ucStatementOfChangesInNetAssetsquity1.BackColor = System.Drawing.Color.Transparent;
             this.ucStatementOfChangesInNetAssetsquity1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucStatementOfChangesInNetAssetsquity1.Location = new System.Drawing.Point(0, 0);
             this.ucStatementOfChangesInNetAssetsquity1.Name = "ucStatementOfChangesInNetAssetsquity1";
@@ -166,7 +169,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             // 
             this.radSFPosition.Appearance = System.Windows.Forms.Appearance.Button;
             this.radSFPosition.AutoSize = true;
-            this.radSFPosition.Enabled = false;
             this.radSFPosition.Location = new System.Drawing.Point(3, 3);
             this.radSFPosition.Name = "radSFPosition";
             this.radSFPosition.Size = new System.Drawing.Size(181, 25);

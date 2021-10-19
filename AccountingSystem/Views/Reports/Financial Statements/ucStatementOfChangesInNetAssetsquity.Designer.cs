@@ -70,13 +70,13 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             // 
             this.dtPickerDateEnds.Location = new System.Drawing.Point(191, 0);
             this.dtPickerDateEnds.Name = "dtPickerDateEnds";
-            this.dtPickerDateEnds.Size = new System.Drawing.Size(200, 23);
+            this.dtPickerDateEnds.Size = new System.Drawing.Size(211, 23);
             this.dtPickerDateEnds.TabIndex = 4;
             // 
             // btnRetrieve
             // 
             this.btnRetrieve.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRetrieve.Location = new System.Drawing.Point(397, 0);
+            this.btnRetrieve.Location = new System.Drawing.Point(408, 0);
             this.btnRetrieve.Name = "btnRetrieve";
             this.btnRetrieve.Size = new System.Drawing.Size(84, 23);
             this.btnRetrieve.TabIndex = 5;

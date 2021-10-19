@@ -150,7 +150,8 @@ namespace AccountingSystem.Views.Reports.Ledgers
                     new ReportParameter("paramBalanceDate", balanceDate),
                     new ReportParameter("paramBalanceDebit", balanceDebit),
                     new ReportParameter("paramBalanceCredit", balanceCredit),
-                    new ReportParameter("paramBalance", balance)
+                    new ReportParameter("paramBalance", balance),
+                    new ReportParameter("paramYear",year.ToString())
                 };
                 report.SetParameters(parameters);
                 Cursor.Current = Cursors.Default;

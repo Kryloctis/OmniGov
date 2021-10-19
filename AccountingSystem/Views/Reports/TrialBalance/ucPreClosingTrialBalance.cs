@@ -21,13 +21,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            cbHideZeroBalance.Enabled = true;
-
             LoadReport(reportViewer.LocalReport);
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
-            reportViewer.RefreshReport();
         }
 
         private void GetDebitCredit(byte fundId, DateTime dateEntry, ushort generalLedgerId, out decimal balanceDebit, out decimal balanceCredit)
@@ -104,7 +98,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                 report.DataSources.Add(new ReportDataSource("dtTrialBalance", DataTablePreTrialBalance()));
 
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
-                var fundName = cmbFund.Text.ToUpper();
+                var fundName = cmbFund.Text;
                 var asOfDate = dtAsOf.Value.ToString("MMMM dd, yyyy");
 
                 var parameters = new[] {
@@ -115,6 +109,12 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                   };
                 report.SetParameters(parameters);
                 Cursor.Current = Cursors.Default;
+
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
+                reportViewer.RefreshReport();
+                cbHideZeroBalance.Enabled = true;
             }
             catch (Exception ex)
             {
