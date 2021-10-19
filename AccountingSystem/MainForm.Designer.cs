@@ -922,7 +922,6 @@ namespace AccountingSystem
             // 
             this.radSFPosition.Appearance = System.Windows.Forms.Appearance.Button;
             this.radSFPosition.AutoSize = true;
-            this.radSFPosition.Enabled = false;
             this.radSFPosition.Location = new System.Drawing.Point(3, 3);
             this.radSFPosition.Name = "radSFPosition";
             this.radSFPosition.Size = new System.Drawing.Size(181, 25);
@@ -935,13 +934,11 @@ namespace AccountingSystem
             // 
             this.radSFPerformance.Appearance = System.Windows.Forms.Appearance.Button;
             this.radSFPerformance.AutoSize = true;
-            this.radSFPerformance.Checked = true;
             this.radSFPerformance.Enabled = false;
             this.radSFPerformance.Location = new System.Drawing.Point(190, 3);
             this.radSFPerformance.Name = "radSFPerformance";
             this.radSFPerformance.Size = new System.Drawing.Size(206, 25);
             this.radSFPerformance.TabIndex = 4;
-            this.radSFPerformance.TabStop = true;
             this.radSFPerformance.Text = "Statement of Financial Performance";
             this.radSFPerformance.UseVisualStyleBackColor = true;
             this.radSFPerformance.CheckedChanged += new System.EventHandler(this.radSFPerformance_CheckedChanged);
