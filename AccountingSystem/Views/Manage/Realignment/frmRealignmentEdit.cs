@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Transactions;
 using System.Windows.Forms;
 using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.BudgetAppropriations;
 
 namespace AccountingSystem.Views.Manage.Realignment
 {
@@ -19,13 +20,15 @@ namespace AccountingSystem.Views.Manage.Realignment
         internal string _budgetAppropriationAmount;
         internal string _budgetRealignmentId;
         internal frmRealignment _frmRealignment;
+        internal frmBudgetAppropriations _frmBudgetAppropriations;
 
-        public frmRealignmentEdit(frmRealignment frmRealignment)
+        public frmRealignmentEdit(frmRealignment frmRealignment, frmBudgetAppropriations frmBudgetAppropriation)
         {
             InitializeComponent();
             uc = ucRealignment1;
 
             _frmRealignment = frmRealignment;
+            _frmBudgetAppropriations = frmBudgetAppropriation;
             _budgetRealignmentId = _frmRealignment.budgetRealignmentId;
         }
 
@@ -35,7 +38,12 @@ namespace AccountingSystem.Views.Manage.Realignment
             LoadRealignmentDetails();
 
             uc.txtAppropriationBalance.Text = Convert.ToDecimal(_budgetAppropriationAmount).ToString("N2");
-            uc.SumRealignment();
+
+            decimal appropriation = Convert.ToDecimal(uc.txtAppropriationBalance.Text);
+
+            uc.nudAmount.Maximum = appropriation;
+            uc.nudAmount.Value = appropriation;
+            uc.ComputeTotalRealignment();
         }
 
         private void LoadRealignmentDetails()
@@ -63,6 +71,7 @@ namespace AccountingSystem.Views.Manage.Realignment
                 if (SaveRealignmentAccounts())
                 {
                     _frmRealignment.LoadBudgetRealignments();
+                    _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
                     Helper.MessageBoxSuccess("Budget Realignment has been updated.");
                     uc.ResetForm();
                 }
@@ -121,12 +130,13 @@ namespace AccountingSystem.Views.Manage.Realignment
         }
 
 
-
         private bool UpdateData()
         {
-
-            if (!ValidateChildren())
+            if (!uc.ValidateChildren())
+            {
+                Helper.MessageBoxError(uc.GetFormErrors());
                 return false;
+            }
 
             using (TransactionScope scope = new TransactionScope())
             {
@@ -167,5 +177,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             }
 
         }
+
     }
 }

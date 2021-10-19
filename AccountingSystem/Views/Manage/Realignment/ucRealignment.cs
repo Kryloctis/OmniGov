@@ -28,13 +28,14 @@ namespace AccountingSystem.Views.Manage.Realignment
         #region Local Methods
         internal string GetFormErrors()
         {
-            var errorArray = new string[5];
+            var errorArray = new string[6];
 
             errorArray[0] = epFPP.GetError(cmbFPP);
             errorArray[1] = epAllotmentClass.GetError(cmbAllotmentClass);
             errorArray[2] = epAccount.GetError(cmbAccount);
             errorArray[3] = epAmount.GetError(nudAmount);
             errorArray[4] = epRemarks.GetError(txtRemarks);
+            errorArray[5] = epDgAccount.GetError(dgBudgetRealignment);
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
@@ -49,14 +50,13 @@ namespace AccountingSystem.Views.Manage.Realignment
             dgBudgetRealignment.Rows.Clear();
             txtRemarks.Text = string.Empty;
         }
-        internal void SumRealignment()
+        internal void ComputeTotalRealignment()
         {
-            decimal realignmentAmount = 0;
+            decimal totalRealignedAmount = 0;
             for (int i = 0; i < dgBudgetRealignment.Rows.Count; ++i)
-            {
-                realignmentAmount += Convert.ToDecimal(dgBudgetRealignment.Rows[i].Cells["amount"].Value);
-            }
-            txtTotalAmountRealigned.Text = realignmentAmount.ToString("N2");
+                totalRealignedAmount += Convert.ToDecimal(dgBudgetRealignment.Rows[i].Cells["amount"].Value);
+
+            txtTotalAmountRealigned.Text = totalRealignedAmount.ToString("N2");
         }
         #endregion
 
@@ -177,15 +177,19 @@ namespace AccountingSystem.Views.Manage.Realignment
                 LoadAllotmentClasses();
                 LoadFPP(false);
                 LoadOthersFPPByFPPIdCombobox();
+                ComputeTotalRealignment();
                 FilterSearchDetails();
-                SumRealignment();
+                ResetForm();
             }
-
         }
+
+
+
         private void btnEdit_Click_1(object sender, EventArgs e)
         {
 
             int rowIndex = dgBudgetRealignment.CurrentCell.RowIndex;
+
 
             object accountId = dgBudgetRealignment.Rows[rowIndex].Cells["to_ledger_id"].Value;
             decimal amount = Convert.ToDecimal(dgBudgetRealignment.Rows[rowIndex].Cells["amount"].Value);
@@ -196,29 +200,38 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dgBudgetRealignment.SelectedRows)
-            {
-                dgBudgetRealignment.Rows.Remove(row);
-            }
-            SumRealignment();
+            RemoveRealignmentFromList();
+            ComputeTotalRealignment();
+            SetAmountFields();
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void RemoveRealignmentFromList()
         {
+            decimal amount;
+            decimal originalAmount;
+            int rowIndex = dgBudgetRealignment.CurrentCell.RowIndex;
 
-            sbyte selectedRowCount = (sbyte)dgBudgetRealignment.SelectedRows.Count;
+            amount = Convert.ToDecimal(dgBudgetRealignment.Rows[rowIndex].Cells["amount"].Value);
+            originalAmount = Convert.ToDecimal(txtAppropriationBalance.Text);
 
-            if (selectedRowCount > 1)
-                return;
+            txtAppropriationBalance.Text = (originalAmount + amount).ToString("N2");
 
-            SumRealignment();
+            foreach (DataGridViewRow row in dgBudgetRealignment.SelectedRows)
+                dgBudgetRealignment.Rows.Remove(row);
         }
+        private void SetAmountFields()
+        {
+            decimal appropriationBalance = Convert.ToDecimal(txtAppropriationBalance.Text);
+           
+            nudAmount.Maximum = appropriationBalance;
+            nudAmount.Value = appropriationBalance;
+        }
+
 
         private void dgBudgetRealignment_SelectionChanged(object sender, EventArgs e)
         {
             var rowsCount = dgBudgetRealignment.SelectedRows.Count;
-            if (rowsCount == 0 || rowsCount > 1) return;
-            btnRemove.Enabled = true;
+            btnRemove.Enabled = rowsCount != 0;
         }
 
         private void dgBudgetRealignment_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -243,6 +256,8 @@ namespace AccountingSystem.Views.Manage.Realignment
         {
             bool zeroAmount = nudAmount.Value < 1;
 
+            dgBudgetRealignment.Validating -= new CancelEventHandler(dgBudgetRealignment_Validating);
+
             if (!ValidateChildren())
             {
                 Helper.MessageBoxError(GetFormErrors());
@@ -251,16 +266,18 @@ namespace AccountingSystem.Views.Manage.Realignment
 
             if (zeroAmount)
             {
-                Helper.MessageBoxError("Invalid amount");
+                Helper.MessageBoxError("Please enter amount.");
                 return;
             }
 
+            dgBudgetRealignment.Validating += new CancelEventHandler(dgBudgetRealignment_Validating);
 
-            AddRealignment();
-
+            InsertRealignmentToList();
+            ComputeTotalRealignment();
+            SetAmountFields();
         }
 
-        private void AddRealignment()
+        private void InsertRealignmentToList()
         {
             string budgetAppropriationId = GetBudgetIdByGeneralLedgerAccountId(cmbAccount.SelectedValue.ToString());
             string realignmentAccountId = cmbAccount.SelectedValue.ToString();
@@ -289,7 +306,16 @@ namespace AccountingSystem.Views.Manage.Realignment
             };
 
             dgBudgetRealignment.Rows.Add(accountRow);
-            SumRealignment();
+
+
+            decimal amount;
+            decimal appropriation;
+
+            amount = nudAmount.Value;
+            appropriation = Convert.ToDecimal(txtAppropriationBalance.Text);
+            txtAppropriationBalance.Text = (appropriation - amount).ToString("N2");
+
+
         }
 
         private string GetBudgetIdByGeneralLedgerAccountId(string generalLedgerId)
@@ -318,6 +344,14 @@ namespace AccountingSystem.Views.Manage.Realignment
             year = (short)dtDateIssued.Value.Year;
 
             LoadBudgetAppropriationAccounts();
+        }
+
+        private void cmbOthersFPP_TextChanged(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(cmbOthersFPP.Text))
+            {
+                FilterSearchDetails();
+            }
         }
 
         private void cmbFPP_DropDownClosed(object sender, EventArgs e)
@@ -353,7 +387,7 @@ namespace AccountingSystem.Views.Manage.Realignment
                 Helper.ClearErrorComboBox(epAllotmentClass, cmbAllotmentClass);
             }
 
-        private void txtRemarks_Validating(object sender, CancelEventArgs e)
+            private void txtRemarks_Validating(object sender, CancelEventArgs e)
             {
                 e.Cancel = Helper.ShowErrorTextBoxEmpty(epRemarks, txtRemarks, "Remark");
             }
@@ -393,18 +427,15 @@ namespace AccountingSystem.Views.Manage.Realignment
             {
                 e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "amount");
 
-                decimal remainingAppropriation = Convert.ToDecimal(txtAppropriationBalance.Text) - Convert.ToDecimal(txtTotalAmountRealigned.Text);
+      
+                decimal appropriationBalance = Convert.ToDecimal(txtAppropriationBalance.Text);
+                decimal realignmentAmount = nudAmount.Value;
+                decimal remainingBalance = appropriationBalance - realignmentAmount;
 
-                bool isBudgetEnough = remainingAppropriation >= Convert.ToDecimal(nudAmount.Value);
+                bool isBudgetNotEnough = remainingBalance < 0;
 
 
-                //if (nudAmount.Value < 1)
-                //{
-                //    epAmount.SetError(nudAmount, "Plase enter a non-zero amount");
-                //    e.Cancel = true;
-                //}
-
-                if (!isBudgetEnough)
+                if (isBudgetNotEnough)
                 {
                     epAmount.SetError(nudAmount, "insufficient budget appropriation to realign.");
                     e.Cancel = true;
@@ -415,7 +446,19 @@ namespace AccountingSystem.Views.Manage.Realignment
             {
                 Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
             }
+
+            private void dgBudgetRealignment_Validating(object sender, CancelEventArgs e)
+            {
+                e.Cancel = Helper.ShowErrorDatagridView(epDgAccount, dgBudgetRealignment, "Account Realignment");
+            }
+
+            private void dgBudgetRealignment_Validated(object sender, EventArgs e)
+            {
+                Helper.ClearErrorDatagridView(epDgAccount, dgBudgetRealignment);
+            }
+
         #endregion
+
 
     }
 }
