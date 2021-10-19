@@ -5096,8 +5096,8 @@ ReportItems!txtTransfersAndSubsidyToPrevious.Value)</Value>
             <FixedRowHeaders>true</FixedRowHeaders>
             <DataSetName>dtStatementOfFinancialPerformance</DataSetName>
             <Top>0.88143in</Top>
-            <Height>4.12592in</Height>
-            <Width>7.27in</Width>
+            <Height>4.12593in</Height>
+            <Width>7.27002in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -5109,7 +5109,7 @@ ReportItems!txtTransfersAndSubsidyToPrevious.Value)</Value>
         <Height>6.23014in</Height>
         <Style />
       </Body>
-      <Width>7.27in</Width>
+      <Width>7.27002in</Width>
       <Page>
         <PageFooter>
           <Height>0.27778in</Height>
@@ -5154,7 +5154,7 @@ ReportItems!txtTransfersAndSubsidyToPrevious.Value)</Value>
               </Paragraphs>
               <rd:DefaultName>Textbox8</rd:DefaultName>
               <Top>0.01389in</Top>
-              <Left>4.07206in</Left>
+              <Left>4.07208in</Left>
               <Height>0.25in</Height>
               <Width>3.19794in</Width>
               <Style>
@@ -5168,13 +5168,24 @@ ReportItems!txtTransfersAndSubsidyToPrevious.Value)</Value>
               </Style>
             </Textbox>
             <Textbox Name="Textbox301">
-              <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>SF Position - </Value>
+                      <Value>SF Performance </Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>=Year(Parameters!paramDateEnded.Value)</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value> - </Value>
                       <Style>
                         <FontSize>9pt</FontSize>
                       </Style>
@@ -5190,9 +5201,10 @@ ReportItems!txtTransfersAndSubsidyToPrevious.Value)</Value>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox301</rd:DefaultName>
-              <Top>0.02778in</Top>
+              <Top>0.01389in</Top>
+              <Left>0.01391in</Left>
               <Height>0.25in</Height>
-              <Width>2.1566in</Width>
+              <Width>4.00262in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>

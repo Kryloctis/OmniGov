@@ -118,7 +118,6 @@
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>0.21528in</Top>
-            <Left>0in</Left>
             <Height>0.26389in</Height>
             <Width>7.27in</Width>
             <Style>
@@ -151,7 +150,6 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Left>0in</Left>
             <Height>0.1875in</Height>
             <Width>7.27in</Width>
             <ZIndex>1</ZIndex>
@@ -188,7 +186,6 @@
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>0.49306in</Top>
-            <Left>0in</Left>
             <Height>0.1875in</Height>
             <Width>7.27in</Width>
             <ZIndex>2</ZIndex>
@@ -2535,8 +2532,7 @@ ReportItems!txtTotalRecognizedRevenueAndExpensesForThePeriodCurrent.Value)</Valu
             </TablixRowHierarchy>
             <DataSetName>dtStatementOfChangesInNetAssetsEquity</DataSetName>
             <Top>0.91542in</Top>
-            <Left>0in</Left>
-            <Height>2.86458in</Height>
+            <Height>2.86455in</Height>
             <Width>7.27in</Width>
             <ZIndex>4</ZIndex>
             <Style>
@@ -2557,13 +2553,24 @@ ReportItems!txtTotalRecognizedRevenueAndExpensesForThePeriodCurrent.Value)</Valu
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
             <Textbox Name="Textbox301">
-              <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>SF Position - </Value>
+                      <Value>SCNAE </Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>=Year(Parameters!paramDateEnded.Value)</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>   - </Value>
                       <Style>
                         <FontSize>9pt</FontSize>
                       </Style>
@@ -2581,7 +2588,7 @@ ReportItems!txtTotalRecognizedRevenueAndExpensesForThePeriodCurrent.Value)</Valu
               <rd:DefaultName>Textbox301</rd:DefaultName>
               <Top>0.02083in</Top>
               <Height>0.25in</Height>
-              <Width>2.1566in</Width>
+              <Width>4.00262in</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -2629,8 +2636,8 @@ ReportItems!txtTotalRecognizedRevenueAndExpensesForThePeriodCurrent.Value)</Valu
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox8</rd:DefaultName>
-              <Top>0.00695in</Top>
-              <Left>4.07206in</Left>
+              <Top>0.01389in</Top>
+              <Left>4.05817in</Left>
               <Height>0.25in</Height>
               <Width>3.19794in</Width>
               <ZIndex>1</ZIndex>
