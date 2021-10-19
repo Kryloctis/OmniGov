@@ -174,6 +174,9 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Report SAAOBB"))
                 menuSAAOBB.Visible = false;
 
+            if (!Helper.HasPermission("Amortization"))
+                amortiaztionToolStripMenuItem.Visible = false;
+
             #region Journal Entry Voucher
 
             if (Helper.HasPermission("Transaction JEV") || Helper.HasPermission("Report JEVs"))
