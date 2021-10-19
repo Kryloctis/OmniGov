@@ -922,6 +922,7 @@ namespace AccountingSystem
             // 
             this.radSFPosition.Appearance = System.Windows.Forms.Appearance.Button;
             this.radSFPosition.AutoSize = true;
+            this.radSFPosition.Enabled = false;
             this.radSFPosition.Location = new System.Drawing.Point(3, 3);
             this.radSFPosition.Name = "radSFPosition";
             this.radSFPosition.Size = new System.Drawing.Size(181, 25);
