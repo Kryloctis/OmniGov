@@ -49,6 +49,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -235,7 +243,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Local Finance System"
         "ProductCode" = "8:{931D3045-D111-4969-9E93-BEB0163CF802}"
-        "PackageCode" = "8:{94338826-F32B-4942-99E0-9B796B65F039}"
+        "PackageCode" = "8:{F2F4B1D0-30D7-4A7E-833F-2CA9DA44A9F1}"
         "UpgradeCode" = "8:{E099AC00-68ED-4147-8469-37B40CD14F2B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -440,7 +448,7 @@
                 {
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_589F4AAE062D45209374136B52BE6C0E"
                     {
-                    "Sequence" = "3:200"
+                    "Sequence" = "3:400"
                     "DisplayName" = "8:Installation Folder"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
@@ -476,7 +484,7 @@
                     }
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_6847512B6B7349ADB6230BC7A1C910E6"
                     {
-                    "Sequence" = "3:100"
+                    "Sequence" = "3:200"
                     "DisplayName" = "8:Welcome"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
@@ -525,7 +533,7 @@
                     }
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_9D69968FB29243808714352DCB7B070F"
                     {
-                    "Sequence" = "3:300"
+                    "Sequence" = "3:500"
                     "DisplayName" = "8:Confirm Installation"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
@@ -542,6 +550,68 @@
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
                             "Value" = "8:_61CD559473A94725999B535FCAC2DFDF"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_C2FB0A2E67764CE580CAE46E6177CFC3"
+                    {
+                    "Sequence" = "3:300"
+                    "DisplayName" = "8:Customer Information"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdCustomerInfoDlg.wid"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:2"
+                            "Value" = "8:_61CD559473A94725999B535FCAC2DFDF"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Serial"
+                            {
+                            "Name" = "8:Serial"
+                            "DisplayName" = "8:#1004"
+                            "Description" = "8:#1104"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:2"
+                            "Setting" = "3:2"
+                            "Value" = "8:<###-%%%-%%%%-%%%>"
+                            "DefaultValue" = "8:<###-%%%%%%%>"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "ShowOrg"
+                            {
+                            "Name" = "8:ShowOrg"
+                            "DisplayName" = "8:#1006"
+                            "Description" = "8:#1106"
+                            "Type" = "3:5"
+                            "ContextData" = "8:1;True=1;False=0"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:0"
+                            "Value" = "3:0"
+                            "DefaultValue" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "ShowSerial"
+                            {
+                            "Name" = "8:ShowSerial"
+                            "DisplayName" = "8:#1005"
+                            "Description" = "8:#1105"
+                            "Type" = "3:5"
+                            "ContextData" = "8:1;True=1;False=0"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:0"
+                            "Value" = "3:1"
+                            "DefaultValue" = "3:0"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -794,7 +864,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_5DA11BF595C84A04893A7FC163F1E0E9"
             {
-            "SourcePath" = "8:..\\AccountingSystem\\obj\\Release\\net5.0-windows\\apphost.exe"
+            "SourcePath" = "8:..\\AccountingSystem\\obj\\Debug\\net5.0-windows\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B155F7AAC42643DCA3B16F113591448C"
