@@ -26,9 +26,13 @@ namespace AccountingSystem.Views.Manage.Realignment
         {
 
             uc.txtAppropriationBalance.Text = Convert.ToDecimal(_budgetAppropriationAmount).ToString("N2");
-            decimal appropriationBalance = Convert.ToDecimal(uc.txtAppropriationBalance.Text);
 
-            uc.nudAmount.Value = appropriationBalance;
+            decimal appropriation = Convert.ToDecimal(uc.txtAppropriationBalance.Text);
+
+            uc.nudAmount.Maximum = appropriation;
+            uc.nudAmount.Value = appropriation;
+            uc.ComputeTotalRealignment();
+
         }
 
         private void btnSave_Click_1(object sender, EventArgs e)
@@ -46,24 +50,18 @@ namespace AccountingSystem.Views.Manage.Realignment
             }
         }
 
-        internal bool FormValidations()
-        {
-            // validate form
-            if (uc.dgBudgetRealignment.Rows.Count == 0)
-            {
-                Helper.MessageBoxError("Please add account/s for realignment");
-                return false;
-            }
-
-            return true;
-        }
 
         private bool SaveData()
         {
             try
             {
-                if (!FormValidations())
+
+                if (!uc.ValidateChildren())
+                {
+                    Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
+                }
+
 
                 var budgetRealignmentModel = new BudgetRealignmentModel()
                 { 
@@ -117,7 +115,5 @@ namespace AccountingSystem.Views.Manage.Realignment
             return Factory.BudgetRealignmentRepository().GetLastInsertedID();
         }
 
-
-   
     }
 }

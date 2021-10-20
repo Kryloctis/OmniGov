@@ -119,7 +119,7 @@ namespace ACC.Data
                             new object[] { "@id", DbType.Int32, entity.ToBudgetAppropriationId},
                         };
 
-                        string query = $"DELETE FROM {tableName2} WHERE id = @id";
+                        string query = $"DELETE FROM {tableName} WHERE id = @id";
                         _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                     }
 

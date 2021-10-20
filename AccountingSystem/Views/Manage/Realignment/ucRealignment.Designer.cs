@@ -98,6 +98,8 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.dgBudgetRealignment.Tag = "";
             this.dgBudgetRealignment.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgBudgetRealignment_CellValidating);
             this.dgBudgetRealignment.SelectionChanged += new System.EventHandler(this.dgBudgetRealignment_SelectionChanged);
+            this.dgBudgetRealignment.Validating += new System.ComponentModel.CancelEventHandler(this.dgBudgetRealignment_Validating);
+            this.dgBudgetRealignment.Validated += new System.EventHandler(this.dgBudgetRealignment_Validated);
             // 
             // budgetAppropriationId
             // 
@@ -304,6 +306,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.cmbOthersFPP.Size = new System.Drawing.Size(410, 23);
             this.cmbOthersFPP.TabIndex = 16;
             this.cmbOthersFPP.DropDownClosed += new System.EventHandler(this.cmbOthersFPP_DropDownClosed);
+            this.cmbOthersFPP.TextChanged += new System.EventHandler(this.cmbOthersFPP_TextChanged);
             // 
             // groupboxRealignToAccounts
             // 
@@ -336,11 +339,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.nudAmount.Size = new System.Drawing.Size(92, 23);
             this.nudAmount.TabIndex = 54;
             this.nudAmount.ThousandsSeparator = true;
-            this.nudAmount.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
             this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
             // 

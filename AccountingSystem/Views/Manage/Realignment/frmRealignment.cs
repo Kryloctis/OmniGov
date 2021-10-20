@@ -132,7 +132,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             budgetRealignmentId = dgRealignment.Rows[rowIndex].Cells["id"].Value.ToString();
 
 
-            var frmRealignmentEdit = new frmRealignmentEdit(this)
+            var frmRealignmentEdit = new frmRealignmentEdit(this, _frmBudgetAppropriation)
             {
                 _budgetAppropriationAmount = budgetAppropriationAmount,
                 _budgetAppropriationId = budgetAppropriationId
@@ -147,7 +147,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             budgetRealignmentId = dgRealignment.Rows[rowIndex].Cells["id"].Value.ToString();
 
 
-            var frmRealignmentEdit = new frmRealignmentEdit(this)
+            var frmRealignmentEdit = new frmRealignmentEdit(this, _frmBudgetAppropriation)
             {
                 _budgetAppropriationAmount = budgetAppropriationAmount,
                 _budgetAppropriationId = budgetAppropriationId
