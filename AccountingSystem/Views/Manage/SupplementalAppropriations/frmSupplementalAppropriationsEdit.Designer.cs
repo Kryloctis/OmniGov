@@ -87,7 +87,10 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.Controls.Add(this.ucSupplementalAppropriations1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmSupplementalAppropriationsEdit";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Supplementary Appropriation";
             this.Load += new System.EventHandler(this.frmSupplementalAppropriationsEdit_Load);
