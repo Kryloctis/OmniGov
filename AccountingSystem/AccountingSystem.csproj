@@ -5,6 +5,10 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <SignAssembly>true</SignAssembly>
+    <Company>Perzeus Corporation</Company>
+    <Product>Local Finance System</Product>
+    <PackageId>Local Finance System</PackageId>
+    <Authors>Perzeus Corporation</Authors>
   </PropertyGroup>
 
   <ItemGroup>

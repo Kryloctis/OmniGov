@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACC.Data", "ACC.Data\ACC.Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACC.Domain", "ACC.Domain\ACC.Domain.csproj", "{1D7D25C5-7324-449A-9BD1-2BAEA19A8917}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{57B32360-6099-4D4A-8143-B95F95030512}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,8 +27,6 @@ Global
 		{1D7D25C5-7324-449A-9BD1-2BAEA19A8917}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D7D25C5-7324-449A-9BD1-2BAEA19A8917}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D7D25C5-7324-449A-9BD1-2BAEA19A8917}.Release|Any CPU.Build.0 = Release|Any CPU
-		{57B32360-6099-4D4A-8143-B95F95030512}.Debug|Any CPU.ActiveCfg = Release
-		{57B32360-6099-4D4A-8143-B95F95030512}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
