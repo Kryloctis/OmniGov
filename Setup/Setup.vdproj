@@ -56,6 +56,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -550,68 +558,6 @@
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
                             "Value" = "8:_61CD559473A94725999B535FCAC2DFDF"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                        }
-                    }
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_C2FB0A2E67764CE580CAE46E6177CFC3"
-                    {
-                    "Sequence" = "3:300"
-                    "DisplayName" = "8:Customer Information"
-                    "UseDynamicProperties" = "11:TRUE"
-                    "IsDependency" = "11:FALSE"
-                    "SourcePath" = "8:<VsdDialogDir>\\VsdCustomerInfoDlg.wid"
-                        "Properties"
-                        {
-                            "BannerBitmap"
-                            {
-                            "Name" = "8:BannerBitmap"
-                            "DisplayName" = "8:#1001"
-                            "Description" = "8:#1101"
-                            "Type" = "3:8"
-                            "ContextData" = "8:Bitmap"
-                            "Attributes" = "3:4"
-                            "Setting" = "3:2"
-                            "Value" = "8:_61CD559473A94725999B535FCAC2DFDF"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Serial"
-                            {
-                            "Name" = "8:Serial"
-                            "DisplayName" = "8:#1004"
-                            "Description" = "8:#1104"
-                            "Type" = "3:3"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:2"
-                            "Setting" = "3:2"
-                            "Value" = "8:<###-%%%-%%%%-%%%>"
-                            "DefaultValue" = "8:<###-%%%%%%%>"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "ShowOrg"
-                            {
-                            "Name" = "8:ShowOrg"
-                            "DisplayName" = "8:#1006"
-                            "Description" = "8:#1106"
-                            "Type" = "3:5"
-                            "ContextData" = "8:1;True=1;False=0"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:0"
-                            "Value" = "3:0"
-                            "DefaultValue" = "3:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "ShowSerial"
-                            {
-                            "Name" = "8:ShowSerial"
-                            "DisplayName" = "8:#1005"
-                            "Description" = "8:#1105"
-                            "Type" = "3:5"
-                            "ContextData" = "8:1;True=1;False=0"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:0"
-                            "Value" = "3:1"
-                            "DefaultValue" = "3:0"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
