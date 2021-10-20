@@ -232,8 +232,8 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtTotalSupplementalAppropriations);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.toolStrip1);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(834, 476);
             this.Name = "frmSupplementalAppropriations";

@@ -23,9 +23,6 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             InitializeComponent();
             Helper.LoadFormIcon(this);
             _frmBudgetAppropriations = frmBudgetAppropriations;
-            btnAdd.Click += new EventHandler(BtnAdd_Click);
-            btnEdit.Click += new EventHandler(BtnEdit_Click);
-            btnDelete.Click += new EventHandler(BtnDelete_Click);
         }
 
         private void ShowSupplementalAppropriationsEdit()
