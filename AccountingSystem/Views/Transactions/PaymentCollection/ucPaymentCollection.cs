@@ -12,7 +12,7 @@ using AccountingSystem.Views.Transactions.PaymentCollection.Find;
 
 namespace AccountingSystem.Views.Transactions.PaymentCollection
 {
-    public partial class ucPC : UserControl
+    public partial class ucPaymentCollection : UserControl
     {
         internal int Id = 0;
         internal int fundId = 0;
@@ -24,7 +24,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal int minreceipt = 0;
         internal int maxreceipt = 0;
         internal int receipt = 0;
-        public ucPC()
+        public ucPaymentCollection()
         {
             InitializeComponent();
         }

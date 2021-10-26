@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucpc1 = new AccountingSystem.Views.Transactions.PaymentCollection.ucPC();
+            this.ucpc1 = new AccountingSystem.Views.Transactions.PaymentCollection.ucPaymentCollection();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -109,6 +109,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private ucPC ucpc1;
+        private ucPaymentCollection ucpc1;
     }
 }

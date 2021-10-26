@@ -15,8 +15,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
         internal int Id = 0;
         internal string selectedValue = string.Empty;
         internal string table = string.Empty;
-        private ucPC frmpc;
-        public frmFind(ucPC pc,string find)
+        private ucPaymentCollection frmpc;
+        public frmFind(ucPaymentCollection pc,string find)
         {
             InitializeComponent();
             Helper.DatagridDefaultStyle(dgSelect);

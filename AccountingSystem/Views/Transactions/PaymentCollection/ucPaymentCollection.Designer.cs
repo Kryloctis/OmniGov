@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Transactions.PaymentCollection
 {
-    partial class ucPC
+    partial class ucPaymentCollection
     {
         /// <summary> 
         /// Required designer variable.
