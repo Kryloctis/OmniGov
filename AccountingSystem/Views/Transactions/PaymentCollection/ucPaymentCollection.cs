@@ -39,7 +39,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             errorArray[5] = errorProvider.GetError(txtreceipt);
             errorArray[6] = errorProvider.GetError(dtdate);
             errorArray[7] = errorProvider.GetError(txtamount);
-            errorArray[8] = errorProvider.GetError(cmbsubsidiary);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -54,7 +53,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             cmbforms.SelectedIndex = -1;
             cmbfund.SelectedIndex = -1;
             txtledger.Clear();
-            cmbsubsidiary.SelectedIndex = -1;
             txtpayee.Clear();
             txtreceipt.Clear();
             dtdate.Value = DateTime.Now;
@@ -231,25 +229,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         }      
         private void txtledger_TextChanged(object sender, EventArgs e)
         {
-            if(txtledger.Text.Length > 0 && glaId > 0)
-            {
-                var subRepository = Factory.SubsidiaryLedgerAccountsRepository();
-                withsubsidiary = subRepository.HasSubsidiary(Convert.ToUInt16(glaId));
-                cmbsubsidiary.Enabled = withsubsidiary;
-                if (!withsubsidiary)
-                {
-                    cmbsubsidiary.Items.Clear();
-                    cmbsubsidiary.SelectedIndex = -1;
-                }
-                else
-                {
-                    var dtsub = subRepository.GetRecordsByReference(glaId);
-                    dtsub.Columns.Add("details", typeof(string), "sub_code +'-'+sub_name");
-                    cmbsubsidiary.DataSource = dtsub;
-                    cmbsubsidiary.ValueMember = "id";
-                    cmbsubsidiary.DisplayMember = "details";
-                }
-            }
         }
 
         private void cmbfund_Validating(object sender, CancelEventArgs e)
@@ -383,7 +362,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 txtamount.Enabled = true;
                 txtledger.Enabled = true;
                 btnledger.Enabled = true;
-                cmbsubsidiary.Enabled = true;
                 LoadForms(int.Parse(collector[0].ToString()));
             }
             else
@@ -397,7 +375,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 txtamount.Enabled = false;
                 txtledger.Enabled = false;
                 btnledger.Enabled = false;
-                cmbsubsidiary.Enabled = false;
             }
         }
 
@@ -409,19 +386,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
             }
         }
-
-        private void cmbsubsidiary_Validating(object sender, CancelEventArgs e)
+        private void label3_Click(object sender, EventArgs e)
         {
-            if (withsubsidiary)
-            {
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbsubsidiary, "Subsidiary!");
-            }
 
-        }
-
-        private void cmbsubsidiary_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(errorProvider, cmbsubsidiary);
         }
     }
 }
