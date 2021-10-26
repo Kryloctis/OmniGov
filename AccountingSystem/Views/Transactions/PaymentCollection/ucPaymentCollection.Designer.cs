@@ -48,14 +48,18 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.cmbforms = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.cmbfund = new System.Windows.Forms.ComboBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.txtamount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 56);
+            this.label1.Location = new System.Drawing.Point(4, 80);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(105, 15);
             this.label1.TabIndex = 0;
@@ -64,7 +68,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 86);
+            this.label2.Location = new System.Drawing.Point(4, 116);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(165, 15);
             this.label2.TabIndex = 1;
@@ -73,7 +77,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 113);
+            this.label3.Location = new System.Drawing.Point(6, 86);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 15);
             this.label3.TabIndex = 2;
@@ -83,16 +87,16 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 154);
+            this.label4.Location = new System.Drawing.Point(6, 55);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(68, 15);
+            this.label4.Size = new System.Drawing.Size(106, 15);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Receipt No.";
+            this.label4.Text = "OR/Serial Number ";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(367, 163);
+            this.label5.Location = new System.Drawing.Point(6, 19);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(105, 15);
             this.label5.TabIndex = 4;
@@ -101,7 +105,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(0, 192);
+            this.label6.Location = new System.Drawing.Point(6, 137);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(51, 15);
             this.label6.TabIndex = 5;
@@ -111,11 +115,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             this.txtledger.Enabled = false;
             this.errorProvider.SetIconAlignment(this.txtledger, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
-            this.txtledger.Location = new System.Drawing.Point(175, 83);
+            this.txtledger.Location = new System.Drawing.Point(181, 113);
             this.txtledger.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtledger.Name = "txtledger";
             this.txtledger.ReadOnly = true;
-            this.txtledger.Size = new System.Drawing.Size(443, 23);
+            this.txtledger.Size = new System.Drawing.Size(261, 23);
             this.txtledger.TabIndex = 2;
             this.txtledger.TextChanged += new System.EventHandler(this.txtledger_TextChanged);
             this.txtledger.DoubleClick += new System.EventHandler(this.txtledger_DoubleClick);
@@ -125,12 +129,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // txtpayee
             // 
             this.txtpayee.Enabled = false;
-            this.txtpayee.Location = new System.Drawing.Point(175, 110);
+            this.txtpayee.Location = new System.Drawing.Point(184, 83);
             this.txtpayee.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtpayee.MaxLength = 200;
             this.txtpayee.Multiline = true;
             this.txtpayee.Name = "txtpayee";
-            this.txtpayee.Size = new System.Drawing.Size(478, 46);
+            this.txtpayee.Size = new System.Drawing.Size(300, 46);
             this.txtpayee.TabIndex = 4;
             this.txtpayee.Validating += new System.ComponentModel.CancelEventHandler(this.txtpayee_Validating);
             this.txtpayee.Validated += new System.EventHandler(this.txtpayee_Validated);
@@ -138,12 +142,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // txtreceipt
             // 
             this.txtreceipt.Enabled = false;
-            this.txtreceipt.Location = new System.Drawing.Point(175, 160);
+            this.txtreceipt.Location = new System.Drawing.Point(184, 52);
             this.txtreceipt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtreceipt.MaxLength = 20;
             this.txtreceipt.Name = "txtreceipt";
             this.txtreceipt.ReadOnly = true;
-            this.txtreceipt.Size = new System.Drawing.Size(186, 23);
+            this.txtreceipt.Size = new System.Drawing.Size(300, 23);
             this.txtreceipt.TabIndex = 5;
             this.txtreceipt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtreceipt_KeyPress);
             this.txtreceipt.Validating += new System.ComponentModel.CancelEventHandler(this.txtreceipt_Validating);
@@ -152,17 +156,17 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // dtdate
             // 
             this.dtdate.Enabled = false;
-            this.dtdate.Location = new System.Drawing.Point(478, 163);
+            this.dtdate.Location = new System.Drawing.Point(184, 19);
             this.dtdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtdate.Name = "dtdate";
-            this.dtdate.Size = new System.Drawing.Size(175, 23);
+            this.dtdate.Size = new System.Drawing.Size(300, 23);
             this.dtdate.TabIndex = 6;
             // 
             // txtamount
             // 
             this.txtamount.DecimalPlaces = 2;
             this.txtamount.Enabled = false;
-            this.txtamount.Location = new System.Drawing.Point(175, 190);
+            this.txtamount.Location = new System.Drawing.Point(183, 135);
             this.txtamount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtamount.Maximum = new decimal(new int[] {
             999999999,
@@ -170,7 +174,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             0,
             0});
             this.txtamount.Name = "txtamount";
-            this.txtamount.Size = new System.Drawing.Size(478, 23);
+            this.txtamount.Size = new System.Drawing.Size(301, 23);
             this.txtamount.TabIndex = 7;
             this.txtamount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtamount.ThousandsSeparator = true;
@@ -178,7 +182,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 5);
+            this.label7.Location = new System.Drawing.Point(4, 19);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(100, 15);
             this.label7.TabIndex = 12;
@@ -188,10 +192,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             this.cmbcollector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbcollector.FormattingEnabled = true;
-            this.cmbcollector.Location = new System.Drawing.Point(175, 2);
+            this.cmbcollector.Location = new System.Drawing.Point(181, 16);
             this.cmbcollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbcollector.Name = "cmbcollector";
-            this.cmbcollector.Size = new System.Drawing.Size(478, 23);
+            this.cmbcollector.Size = new System.Drawing.Size(297, 23);
             this.cmbcollector.TabIndex = 0;
             this.cmbcollector.SelectedIndexChanged += new System.EventHandler(this.cmbcollector_SelectedIndexChanged);
             this.cmbcollector.Validating += new System.ComponentModel.CancelEventHandler(this.cmbcollector_Validating);
@@ -202,7 +206,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.btnledger.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnledger.Enabled = false;
             this.btnledger.Image = global::AccountingSystem.Properties.Resources.find1;
-            this.btnledger.Location = new System.Drawing.Point(623, 82);
+            this.btnledger.Location = new System.Drawing.Point(448, 113);
             this.btnledger.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnledger.Name = "btnledger";
             this.btnledger.Size = new System.Drawing.Size(30, 23);
@@ -218,10 +222,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             this.cmbforms.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbforms.FormattingEnabled = true;
-            this.cmbforms.Location = new System.Drawing.Point(175, 56);
+            this.cmbforms.Location = new System.Drawing.Point(181, 77);
             this.cmbforms.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbforms.Name = "cmbforms";
-            this.cmbforms.Size = new System.Drawing.Size(478, 23);
+            this.cmbforms.Size = new System.Drawing.Size(297, 23);
             this.cmbforms.TabIndex = 19;
             this.cmbforms.SelectedIndexChanged += new System.EventHandler(this.cmbforms_SelectedIndexChanged);
             this.cmbforms.Validating += new System.ComponentModel.CancelEventHandler(this.cmbforms_Validating);
@@ -230,7 +234,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 32);
+            this.label9.Location = new System.Drawing.Point(4, 49);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(34, 15);
             this.label9.TabIndex = 20;
@@ -240,44 +244,65 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             this.cmbfund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfund.FormattingEnabled = true;
-            this.cmbfund.Location = new System.Drawing.Point(175, 29);
+            this.cmbfund.Location = new System.Drawing.Point(181, 46);
             this.cmbfund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbfund.Name = "cmbfund";
-            this.cmbfund.Size = new System.Drawing.Size(478, 23);
+            this.cmbfund.Size = new System.Drawing.Size(297, 23);
             this.cmbfund.TabIndex = 21;
             this.cmbfund.SelectedIndexChanged += new System.EventHandler(this.cmbforms_SelectedIndexChanged);
             this.cmbfund.Validating += new System.ComponentModel.CancelEventHandler(this.cmbfund_Validating);
             this.cmbfund.Validated += new System.EventHandler(this.cmbfund_Validated);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.cmbfund);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.cmbforms);
+            this.groupBox1.Controls.Add(this.txtledger);
+            this.groupBox1.Controls.Add(this.btnledger);
+            this.groupBox1.Controls.Add(this.cmbcollector);
+            this.groupBox1.Location = new System.Drawing.Point(3, -5);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(503, 144);
+            this.groupBox1.TabIndex = 22;
+            this.groupBox1.TabStop = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.txtamount);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.txtpayee);
+            this.groupBox2.Controls.Add(this.dtdate);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.txtreceipt);
+            this.groupBox2.Location = new System.Drawing.Point(3, 140);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(503, 168);
+            this.groupBox2.TabIndex = 23;
+            this.groupBox2.TabStop = false;
+            // 
             // ucPaymentCollection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.cmbfund);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.cmbforms);
-            this.Controls.Add(this.btnledger);
-            this.Controls.Add(this.cmbcollector);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.txtamount);
-            this.Controls.Add(this.dtdate);
-            this.Controls.Add(this.txtreceipt);
-            this.Controls.Add(this.txtpayee);
-            this.Controls.Add(this.txtledger);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucPaymentCollection";
-            this.Size = new System.Drawing.Size(679, 218);
+            this.Size = new System.Drawing.Size(511, 310);
             this.Load += new System.EventHandler(this.ucPC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtamount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -301,5 +326,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.Label label9;
         internal System.Windows.Forms.ComboBox cmbfund;
         internal System.Windows.Forms.ComboBox cmbforms;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

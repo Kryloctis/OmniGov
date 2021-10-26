@@ -17,6 +17,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         public frmPaymentCollectionAdd(frmPaymentCollection frmpc)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             _frmpc = frmpc;
             ucpc1.userid = Helper.UserId;
         }
