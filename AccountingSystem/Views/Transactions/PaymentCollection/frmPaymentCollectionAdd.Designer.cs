@@ -71,7 +71,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(509, 357);
+            this.ClientSize = new System.Drawing.Size(509, 358);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.ucpc1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

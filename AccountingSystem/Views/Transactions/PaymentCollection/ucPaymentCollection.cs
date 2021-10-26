@@ -32,7 +32,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             var errorArray = new string[9];
             errorArray[0] = errorProvider.GetError(cmbcollector);
-            errorArray[1] = errorProvider.GetError(cmbfund);
             errorArray[2] = errorProvider.GetError(cmbforms);
             errorArray[3]= errorProvider.GetError(txtledger);
             errorArray[4] = errorProvider.GetError(txtpayee);
@@ -51,7 +50,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             glaId = 0;
             slaId = 0;
             cmbforms.SelectedIndex = -1;
-            cmbfund.SelectedIndex = -1;
             txtledger.Clear();
             txtpayee.Clear();
             txtreceipt.Clear();
@@ -113,19 +111,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             return num >= minreceipt && num <= maxreceipt;
         }
 
-        internal void LoadFunds()
-        {
-            try
-            {
-                var fundRepository = Factory.FundsRepository();
-                var dtFund = fundRepository.GetRecords();
-                dtFund.Columns.Add("funddisplay", typeof(string), "fund_code + ' - ' + fund_name");
-                cmbfund.DataSource = dtFund;
-                cmbfund.ValueMember = "id";
-                cmbfund.DisplayMember = "funddisplay";
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
+   
         internal void LoadForms()
         {
             try
@@ -229,16 +215,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         }      
         private void txtledger_TextChanged(object sender, EventArgs e)
         {
-        }
-
-        private void cmbfund_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbfund, "Funds!");
-        }
-
-        private void cmbfund_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(errorProvider, cmbfund);
         }
 
         private void cmbforms_Validated(object sender, EventArgs e)
@@ -353,7 +329,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             if(cmbcollector.SelectedIndex != -1)
             {
                 DataRowView collector = cmbcollector.SelectedItem as DataRowView;
-                cmbfund.Enabled = true;
                 cmbforms.Enabled = true;
                 btnledger.Enabled = true;
                 txtpayee.Enabled = true;
@@ -366,7 +341,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
             else
             {
-                cmbfund.Enabled = false;
                 cmbforms.Enabled = false;
                 btnledger.Enabled = false;
                 txtpayee.Enabled = false;

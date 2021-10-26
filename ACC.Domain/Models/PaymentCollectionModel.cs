@@ -7,10 +7,10 @@ namespace ACC.Domain.Models
     public class PaymentCollectionModel
     {
         public int Id { get; set; }
-        public int CoId { get; set; }
+        public int CollectingOfficerId { get; set; }
         public int FId { get; set; }
-        public int AccId { get; set; }
-        public int GlaId { get; set; }
+        public int AccountableFormId { get; set; }
+        public int GeneralLedgerAccountId { get; set; }
         public int SlaId { get; set; }
         public string Payee { get; set; }
         public string ReceiptNo { get; set; }
