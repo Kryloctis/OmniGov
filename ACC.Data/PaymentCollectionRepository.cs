@@ -133,7 +133,7 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@funds_id", DbType.Int16, "1"},
+                    new object[] { "@funds_id", DbType.Int16, entity.FundId},
                     new object[] { "@collecting_officers_id", DbType.Int16, entity.CollectingOfficerId},
                     new object[] { "@accountable_forms_id", DbType.Int16, entity.AccountableFormId},
                     new object[] { "@general_ledger_accounts_id", DbType.Int16, entity.GeneralLedgerAccountId},
@@ -168,7 +168,7 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@id", DbType.Int16, entity.Id},
-                    new object[] { "@funds_id", DbType.Int16, entity.FId},
+                    new object[] { "@funds_id", DbType.Int16, entity.FundId},
                     new object[] { "@collecting_officers_id", DbType.Int16, entity.CollectingOfficerId},
                     new object[] { "@accountable_forms_id", DbType.Int16, entity.AccountableFormId},
                     new object[] { "@general_ledger_accounts_id", DbType.Int16, entity.GeneralLedgerAccountId},

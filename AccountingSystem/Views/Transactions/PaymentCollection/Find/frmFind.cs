@@ -19,11 +19,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection.Find
         public frmFind(ucPaymentCollection pc,string find)
         {
             InitializeComponent();
-            Helper.DatagridDefaultStyle(dgSelect);
-            dgSelect.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            Helper.DatagridFullRowSelectStyle(dgSelect);
+            Helper.LoadFormIcon(this);
             table = find;
             frmpc = pc;
-            this.Text = String.Format("Find > {0}", table.ToUpper());
         }
 
         private void frmFind_Load(object sender, EventArgs e)

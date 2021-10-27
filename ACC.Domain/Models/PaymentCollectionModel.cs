@@ -8,7 +8,7 @@ namespace ACC.Domain.Models
     {
         public int Id { get; set; }
         public int CollectingOfficerId { get; set; }
-        public int FId { get; set; }
+        public int FundId { get; set; }
         public int AccountableFormId { get; set; }
         public int GeneralLedgerAccountId { get; set; }
         public int SlaId { get; set; }

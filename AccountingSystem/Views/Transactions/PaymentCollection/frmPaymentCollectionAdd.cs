@@ -27,6 +27,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             ucpc1.LoadForms();
             ucpc1.LoadCollectors();
+            ucpc1.LoadFunds();
 
             if(ucpc1.cmbcollector.Items.Count > 0)
             {
@@ -57,6 +58,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 var pcModel = new PaymentCollectionModel()
                 {
                     CollectingOfficerId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
+                    FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
                     AccountableFormId = Convert.ToInt32(uc.cmbforms.SelectedValue),
                     GeneralLedgerAccountId = uc.glaId,
                     Payee = uc.txtpayee.Text.Trim(),

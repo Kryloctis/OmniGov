@@ -30,8 +30,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         }
         internal string GetFormErrors()
         {
-            var errorArray = new string[9];
+            var errorArray = new string[8];
             errorArray[0] = errorProvider.GetError(cmbcollector);
+            errorArray[1] = errorProvider.GetError(cmbfund);
             errorArray[2] = errorProvider.GetError(cmbforms);
             errorArray[3]= errorProvider.GetError(txtledger);
             errorArray[4] = errorProvider.GetError(txtpayee);
@@ -126,6 +127,20 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        internal void LoadFunds()
+        {
+            try
+            {
+                var fundRepository = Factory.FundsRepository();
+                var dtFund = fundRepository.GetRecords();
+                dtFund.Columns.Add("funddisplay", typeof(string), "fund_code + ' - ' + fund_name");
+                cmbfund.DataSource = dtFund;
+                cmbfund.ValueMember = "id";
+                cmbfund.DisplayMember = "funddisplay";
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
         internal void LoadForms(int id)
         {
             try
@@ -154,14 +169,20 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             _ = new frmFind(this, "ledger").ShowDialog();
         }
-        private void txtledger_DoubleClick(object sender, EventArgs e)
-        {
-            btnledger.PerformClick();
-        }
 
         private void ucPC_Load(object sender, EventArgs e)
         {
             
+        }
+
+        private void cmbfund_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbfund, "Funds.");
+        }
+
+        private void cmbfund_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider, cmbfund);
         }
 
         private void cmbcollector_Validated(object sender, EventArgs e)
@@ -171,12 +192,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void cmbcollector_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbcollector, "Collecting Officer!");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbcollector, "Collecting Officer.");
         }
 
         private void txtledger_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtledger, "General Ledger Account!");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtledger, "Abstract of General Collection.");
         }
 
         private void txtledger_Validated(object sender, EventArgs e)
@@ -186,7 +207,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void txtpayee_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtpayee, "Payee!");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtpayee, "Payee.");
         }
 
         private void txtpayee_Validated(object sender, EventArgs e)
@@ -196,15 +217,15 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void txtreceipt_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtreceipt, "Receipt No!");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtreceipt, "Receipt No.");
             if (!isbetween(Convert.ToInt32(txtreceipt.Text.Trim())))
             {
-                errorProvider.SetError(txtreceipt, "Receipt No. invalid!");
+                errorProvider.SetError(txtreceipt, "Receipt No. invalid.");
                 e.Cancel = true;
             }
             else if(Convert.ToInt32(txtreceipt.Text.Trim()) <= 0)
             {
-                errorProvider.SetError(txtreceipt, "Receipt No. invalid!");
+                errorProvider.SetError(txtreceipt, "Receipt No. invalid.");
                 e.Cancel = true;
             }
         }
@@ -212,10 +233,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void txtreceipt_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider, txtreceipt);
-        }      
-        private void txtledger_TextChanged(object sender, EventArgs e)
-        {
-        }
+        }  
 
         private void cmbforms_Validated(object sender, EventArgs e)
         {
@@ -361,6 +379,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
         }
         private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtledger_DoubleClick(object sender, EventArgs e)
         {
 
         }

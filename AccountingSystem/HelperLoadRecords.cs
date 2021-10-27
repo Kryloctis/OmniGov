@@ -577,7 +577,10 @@ namespace AccountingSystem
             datagrid.Columns[1].HeaderText = "Account Code";
             datagrid.Columns[2].HeaderText = "Ledger Name";
 
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            datagrid.Columns[1].Width = 100;
+            datagrid.Columns[2].Width = 325;
+
         }
         #endregion
 

@@ -47,9 +47,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.cmbforms = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cmbfund = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.txtamount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -119,8 +119,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.txtledger.Name = "txtledger";
             this.txtledger.Size = new System.Drawing.Size(261, 23);
             this.txtledger.TabIndex = 2;
-            this.txtledger.TextChanged += new System.EventHandler(this.txtledger_TextChanged);
-            this.txtledger.DoubleClick += new System.EventHandler(this.txtledger_DoubleClick);
             this.txtledger.Validating += new System.ComponentModel.CancelEventHandler(this.txtledger_Validating);
             this.txtledger.Validated += new System.EventHandler(this.txtledger_Validated);
             // 
@@ -242,6 +240,27 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             // 
+            // cmbfund
+            // 
+            this.cmbfund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbfund.FormattingEnabled = true;
+            this.cmbfund.Location = new System.Drawing.Point(181, 48);
+            this.cmbfund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbfund.Name = "cmbfund";
+            this.cmbfund.Size = new System.Drawing.Size(297, 23);
+            this.cmbfund.TabIndex = 23;
+            this.cmbfund.Validating += new System.ComponentModel.CancelEventHandler(this.cmbfund_Validating);
+            this.cmbfund.Validated += new System.EventHandler(this.cmbfund_Validated);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 48);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(34, 15);
+            this.label9.TabIndex = 22;
+            this.label9.Text = "Fund";
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label3);
@@ -257,25 +276,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.groupBox2.Size = new System.Drawing.Size(503, 168);
             this.groupBox2.TabIndex = 23;
             this.groupBox2.TabStop = false;
-            // 
-            // cmbfund
-            // 
-            this.cmbfund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbfund.FormattingEnabled = true;
-            this.cmbfund.Location = new System.Drawing.Point(181, 48);
-            this.cmbfund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbfund.Name = "cmbfund";
-            this.cmbfund.Size = new System.Drawing.Size(297, 23);
-            this.cmbfund.TabIndex = 23;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 48);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(34, 15);
-            this.label9.TabIndex = 22;
-            this.label9.Text = "Fund";
             // 
             // ucPaymentCollection
             // 

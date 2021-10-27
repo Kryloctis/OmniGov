@@ -29,6 +29,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             ucpc1.LoadForms();
             ucpc1.LoadCollectors();
+            ucpc1.LoadFunds();
+
             LoadSelectedValue();
         }
 
@@ -69,6 +71,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 {
                     Id = uc.Id,
                     CollectingOfficerId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
+                    FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
                     AccountableFormId = Convert.ToInt32(uc.cmbforms.SelectedValue),
                     GeneralLedgerAccountId = uc.glaId,
                     Payee = uc.txtpayee.Text.Trim(),
@@ -121,13 +124,14 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             return false;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+
+        private void btnSave_Click_1(object sender, EventArgs e)
         {
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Payment Collection has been updated.");
                 _frmpc.LoadRecords();
-                
+
             }
         }
     }
