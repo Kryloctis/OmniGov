@@ -147,7 +147,6 @@ namespace AccountingSystem.Views.Reports.SAAOBB
             return dtSAAOBB;
         }
 
-
         private bool LoadReport(LocalReport report)
         {
             try
@@ -155,11 +154,7 @@ namespace AccountingSystem.Views.Reports.SAAOBB
                 int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
                 DateTime AsOf = dtAsOf.Value;
 
-
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-
+                Cursor = Cursors.WaitCursor;
                 string userName = $"{Helper.LoggedInUserData()["first_name"]} {Helper.LoggedInUserData()["mid_initial"]} {Helper.LoggedInUserData()["last_name"]}";
                 string userRoleName = $"{Helper.LoggedInUserData()["role_name"]}";
 
@@ -179,8 +174,12 @@ namespace AccountingSystem.Views.Reports.SAAOBB
                 report.DataSources.Add(new ReportDataSource("dtSAAOBB", DatatableSAAOBB()));
                 report.SetParameters(parameters);
 
-                reportViewer.RefreshReport();
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
 
+                reportViewer.RefreshReport();
+                Cursor = Cursors.Default;
                 return true;
             }
             catch (Exception ex)
@@ -189,7 +188,6 @@ namespace AccountingSystem.Views.Reports.SAAOBB
             }
             return false;
         }
-
 
         private void LoadFunds()
         {

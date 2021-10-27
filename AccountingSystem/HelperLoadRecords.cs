@@ -1121,8 +1121,6 @@ namespace AccountingSystem
 
         internal static void DashboardDetailedDatagridView(DataGridView dgvBudgetAppropriations, string fppID, int allotmentClassID, int fundId, DateTime dateAsOf)
         {
-            try
-            {
                 #region DATAGRID FORMAT
 
                 //Image Column
@@ -1237,8 +1235,8 @@ namespace AccountingSystem
                 dgvBudgetAppropriations.Columns["continuing"].MinimumWidth = 80;
 
                 #endregion
-                int? sub_fpp;
 
+                int? sub_fpp;
                 sub_fpp = null;
 
                 var dtGetViewRecordsByFFPIDByAllotmentClass = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf);
@@ -1341,12 +1339,6 @@ namespace AccountingSystem
                 }
 
                 dgvBudgetAppropriations.ClearSelection();
-
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
 
         }
 
