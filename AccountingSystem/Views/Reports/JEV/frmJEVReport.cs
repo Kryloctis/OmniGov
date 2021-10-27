@@ -34,12 +34,8 @@ namespace AccountingSystem.Views.Reports.JEV
             InitializeComponent();
             Helper.LoadFormIcon(this);
             reportViewer = new ReportViewer();
-            reportViewer.Dock = DockStyle.Fill;
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
             panel1.Controls.Add(reportViewer);
-
+            reportViewer.Dock = DockStyle.Fill;
             _jevId = jevId;
             _jevNo = jevNo;
             _journalId = journalId;
@@ -164,6 +160,10 @@ namespace AccountingSystem.Views.Reports.JEV
 
                     report.DataSources.Add(new ReportDataSource("dtJournalVoucher", DataTableJournalEntryVoucherAccount()));
                     report.SetParameters(parameters);
+
+                    reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                    reportViewer.ZoomMode = ZoomMode.Percent;
+                    reportViewer.ZoomPercent = 100;
 
                     reportViewer.RefreshReport();
 
