@@ -50,11 +50,9 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
                 var dtPermissions = new DataTable();
                 var userDict = Helper.LoggedInUserData();
+                string office = cmbOffice.Text;
 
-                if (userDict["office"] == "SysAdmin")
-                    dtPermissions = Factory.PermissionsRepository().GetRecords();
-                else
-                    dtPermissions = Factory.PermissionsRepository().GetRecordsByOffice(userDict["office"]);
+               dtPermissions = Factory.PermissionsRepository().GetRecordsByOffice(office);
 
                 foreach (DataRow row in dtPermissions.Rows)
                 {
@@ -74,6 +72,8 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
         internal void LoadOffice()
         {
+            cmbOffice.SelectedValueChanged -= new EventHandler(CmbxOffice_SelectedValueChanged);
+
             var userDict = Helper.LoggedInUserData();
             switch (userDict["office"])
             {
@@ -86,6 +86,14 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             }
 
             cmbOffice.SelectedIndex = 0;
+
+            cmbOffice.SelectedValueChanged += new EventHandler(CmbxOffice_SelectedValueChanged);
+        }
+
+        private void CmbxOffice_SelectedValueChanged(object sender, EventArgs e)
+        {
+            dgPermissionGranted.Rows.Clear();
+            LoadPermissions();
         }
 
         internal void CreateDatagridViewColumns(DataGridView datagrid)
@@ -107,16 +115,17 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
             var rolesRepository = Factory.RolesRepository();
             string roleName = txtName.Text.Trim();
+            string office = cmbOffice.Text;
             bool roleNameExist;
 
             if (roleId == 0)
-                roleNameExist = rolesRepository.NameExist(roleName); // add form
+                roleNameExist = rolesRepository.NameExist(roleName, office); // add form
             else
-                roleNameExist = rolesRepository.NameExist(roleName, roleId); // edit form
+                roleNameExist = rolesRepository.NameExist(roleName, office, roleId); // edit form
 
             if (roleNameExist)
             {
-                epName.SetError(txtName, "Role name already exist in your records.");
+                epName.SetError(txtName, "Role name already exist in this office.");
                 e.Cancel = true;
             }
         }
@@ -201,7 +210,6 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
         private void btnGrantPermission_Click(object sender, EventArgs e)
         {
-            // add permission to dgPermissionGranted
             foreach (DataGridViewRow row in dgPermissions.SelectedRows)
             {
                 string permissionId = row.Cells["id"].Value.ToString();
@@ -209,7 +217,6 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                 AddPermission(permissionId, permissionName, dgPermissionGranted);
             }
 
-            // remove the permission from dgPermissions
             foreach (DataGridViewRow row in dgPermissions.SelectedRows)
             {
                 RemovePermission(row, dgPermissions);
@@ -218,7 +225,6 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
         private void btnDenyPermission_Click(object sender, EventArgs e)
         {
-            // add permission to dgPermissionGranted
             foreach (DataGridViewRow row in dgPermissionGranted.SelectedRows)
             {
                 string permissionId = row.Cells["id"].Value.ToString();
@@ -226,7 +232,6 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                 AddPermission(permissionId, permissionName, dgPermissions);
             }
 
-            // remove the permission from dgPermissions
             foreach (DataGridViewRow row in dgPermissionGranted.SelectedRows)
             {
                 RemovePermission(row, dgPermissionGranted);

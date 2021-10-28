@@ -14,6 +14,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         public frmRolesAdd(frmRoles frmRoles)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             _frmRoles = frmRoles;
             uc = ucRoles1;
         }
