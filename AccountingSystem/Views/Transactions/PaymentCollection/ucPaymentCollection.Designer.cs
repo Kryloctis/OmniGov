@@ -36,17 +36,16 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtledger = new System.Windows.Forms.TextBox();
             this.txtpayee = new System.Windows.Forms.TextBox();
             this.txtreceipt = new System.Windows.Forms.TextBox();
             this.dtdate = new System.Windows.Forms.DateTimePicker();
             this.txtamount = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.cmbcollector = new System.Windows.Forms.ComboBox();
-            this.btnledger = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.cmbforms = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbAccount = new System.Windows.Forms.ComboBox();
             this.cmbfund = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -82,7 +81,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label3.Size = new System.Drawing.Size(38, 15);
             this.label3.TabIndex = 2;
             this.label3.Text = "Payee";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -110,17 +108,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label6.Size = new System.Drawing.Size(51, 15);
             this.label6.TabIndex = 5;
             this.label6.Text = "Amount";
-            // 
-            // txtledger
-            // 
-            this.errorProvider.SetIconAlignment(this.txtledger, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
-            this.txtledger.Location = new System.Drawing.Point(182, 114);
-            this.txtledger.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtledger.Name = "txtledger";
-            this.txtledger.Size = new System.Drawing.Size(261, 23);
-            this.txtledger.TabIndex = 2;
-            this.txtledger.Validating += new System.ComponentModel.CancelEventHandler(this.txtledger_Validating);
-            this.txtledger.Validated += new System.EventHandler(this.txtledger_Validated);
             // 
             // txtpayee
             // 
@@ -193,19 +180,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.cmbcollector.Validating += new System.ComponentModel.CancelEventHandler(this.cmbcollector_Validating);
             this.cmbcollector.Validated += new System.EventHandler(this.cmbcollector_Validated);
             // 
-            // btnledger
-            // 
-            this.btnledger.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnledger.Enabled = false;
-            this.btnledger.Image = global::AccountingSystem.Properties.Resources.find1;
-            this.btnledger.Location = new System.Drawing.Point(448, 114);
-            this.btnledger.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnledger.Name = "btnledger";
-            this.btnledger.Size = new System.Drawing.Size(30, 23);
-            this.btnledger.TabIndex = 15;
-            this.btnledger.UseVisualStyleBackColor = true;
-            this.btnledger.Click += new System.EventHandler(this.btnledger_Click);
-            // 
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
@@ -225,20 +199,30 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cmbAccount);
             this.groupBox1.Controls.Add(this.cmbfund);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.cmbforms);
-            this.groupBox1.Controls.Add(this.txtledger);
-            this.groupBox1.Controls.Add(this.btnledger);
             this.groupBox1.Controls.Add(this.cmbcollector);
             this.groupBox1.Location = new System.Drawing.Point(3, -3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(503, 145);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
+            // 
+            // cmbAccount
+            // 
+            this.cmbAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbAccount.FormattingEnabled = true;
+            this.cmbAccount.Location = new System.Drawing.Point(181, 114);
+            this.cmbAccount.Name = "cmbAccount";
+            this.cmbAccount.Size = new System.Drawing.Size(297, 23);
+            this.cmbAccount.TabIndex = 24;
+            this.cmbAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbAccount_KeyDown);
             // 
             // cmbfund
             // 
@@ -306,8 +290,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button btnledger;
-        internal System.Windows.Forms.TextBox txtledger;
         internal System.Windows.Forms.TextBox txtpayee;
         internal System.Windows.Forms.TextBox txtreceipt;
         internal System.Windows.Forms.DateTimePicker dtdate;
@@ -319,5 +301,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.GroupBox groupBox1;
         internal System.Windows.Forms.ComboBox cmbfund;
         private System.Windows.Forms.Label label9;
+        internal System.Windows.Forms.ComboBox cmbAccount;
     }
 }

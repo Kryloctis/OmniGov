@@ -13,7 +13,8 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecordsBySearch(string searchText);
 
         DataTable GetRecordsBySearch();
-
+        DataTable GetGeneralLedgerAccountsIncomeRecords(string searchText);
+        DataTable GetGeneralLedgerAccountsIncomeRecords();
         DataTable GetViewRecordsByAccountGroup(int accountGroupId);
 
         DataTable GetViewRecordsByMajorAccGroupName(string majAccGroupName);
