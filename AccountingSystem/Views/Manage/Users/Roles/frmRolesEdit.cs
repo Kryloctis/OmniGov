@@ -14,6 +14,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         public frmRolesEdit(frmRoles frmRoles, byte roleId)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             uc = ucRoles1;
             _frmRoles = frmRoles;
             uc.roleId = roleId;
