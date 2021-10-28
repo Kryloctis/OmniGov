@@ -12,6 +12,7 @@ namespace AccountingSystem.Views.Manage.Users.List
         {
             InitializeComponent();
         }
+
         internal void LoadRecords()
         {
             try
@@ -39,6 +40,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 
         }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             _ = new frmUsersAdd(this).ShowDialog();
@@ -48,7 +50,7 @@ namespace AccountingSystem.Views.Manage.Users.List
         {
             WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgUsers);
+            Helper.DatagridFullRowSelectStyle(dgUsers, true);
             LoadRecords();
         }
 
