@@ -115,16 +115,17 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
             var rolesRepository = Factory.RolesRepository();
             string roleName = txtName.Text.Trim();
+            string office = cmbOffice.Text;
             bool roleNameExist;
 
             if (roleId == 0)
-                roleNameExist = rolesRepository.NameExist(roleName); // add form
+                roleNameExist = rolesRepository.NameExist(roleName, office); // add form
             else
-                roleNameExist = rolesRepository.NameExist(roleName, roleId); // edit form
+                roleNameExist = rolesRepository.NameExist(roleName, office, roleId); // edit form
 
             if (roleNameExist)
             {
-                epName.SetError(txtName, "Role name already exist in your records.");
+                epName.SetError(txtName, "Role name already exist in this office.");
                 e.Cancel = true;
             }
         }

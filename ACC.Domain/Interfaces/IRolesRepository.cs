@@ -8,7 +8,7 @@ namespace ACC.Domain.Interfaces
 {
     public interface IRolesRepository : IRepository<RolesModel>
     {
-        bool NameExist(string name);
-        bool NameExist(string name, int id);
+        bool NameExist(string name, string office);
+        bool NameExist(string name, string office, int id);
     }
 }
