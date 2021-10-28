@@ -105,10 +105,11 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         private void frmRolesEdit_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            LoadPermissionsByRoleId();
             uc.LoadOffice();
-            uc.LoadPermissions();
             LoadSelectedRole();
+            LoadPermissionsByRoleId();
+            uc.LoadPermissions();
+         
         }
     }
 }
