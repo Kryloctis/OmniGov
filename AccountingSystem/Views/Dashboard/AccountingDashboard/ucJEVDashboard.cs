@@ -38,7 +38,7 @@ namespace AccountingSystem.Views.Dashboard
             Dock = DockStyle.Fill;
         }
 
-        private void LoadJEVCounter()
+        internal void LoadJEVCounter()
         {
             string journalName = cmbxJournals.Text.Trim();
             short month = Convert.ToInt16(cbMonth.SelectedIndex + 1);
@@ -67,7 +67,7 @@ namespace AccountingSystem.Views.Dashboard
             string journalName = cmbxJournals.Text.Trim();
             byte month = Convert.ToByte(cbMonth.SelectedIndex);
             int year = (int)nudYear.Value;
-            var _frmJEVSearch = new frmJEVSearch(null, journalName, month, year);
+            var _frmJEVSearch = new frmJEVSearch(journalName, month, year, this);
 
             switch (jevStatus)
             {
@@ -124,7 +124,7 @@ namespace AccountingSystem.Views.Dashboard
 
         private void btnAddJEV_Click(object sender, EventArgs e)
         {
-            _ = new frmJEV(null).ShowDialog();
+            _ = new frmJEV(null,this).ShowDialog();
         }
 
         private void cmbxJournals_SelectionChangeCommitted(object sender, EventArgs e)

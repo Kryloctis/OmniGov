@@ -203,7 +203,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.Name = "frmJEVSearch";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Search JEV";
+            this.Text = "List of JEVs";
             this.Load += new System.EventHandler(this.frmJEVSearch_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgJEV)).EndInit();

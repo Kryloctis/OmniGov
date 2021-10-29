@@ -77,6 +77,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                         Helper.MessageBoxSuccess("JEV has been disapproved.");
                         _frmJEV.ucjev1.isDisapproved = 1;
                         _frmJEV.CheckJevStatus(_frmJEV.ucjev1.jevId);
+                        _frmJEV._frmJEVSearch.LoadJEVList();
+                        _frmJEV._ucJEVDashboard.LoadJEVCounter();
                         Close();
                     }
                 }

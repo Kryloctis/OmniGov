@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccountingSystem.Views.Dashboard;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -8,19 +9,19 @@ namespace AccountingSystem.Views.Transactions.JEV
 {
     public partial class frmJEVSearch : Form
     {
-        private frmJEV _frmJEV;
         private string _journalName;
         private byte _month;
         private int _year;
+        internal ucJEVDashboard _ucJEVDashboard;
 
-        public frmJEVSearch(frmJEV frmJEV, string journalName, byte month, int year)
+        public frmJEVSearch(string journalName, byte month, int year, ucJEVDashboard ucJEVDashboard)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            _frmJEV = frmJEV;
             _journalName = journalName;
             _month = month;
             _year = year;
+            _ucJEVDashboard = ucJEVDashboard;
         }
 
         private void frmJEVSearch_Load(object sender, EventArgs e)
@@ -53,19 +54,12 @@ namespace AccountingSystem.Views.Transactions.JEV
             string jevNo = dgJEV.Rows[rowIndex].Cells["jev_no"].Value.ToString();
             int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
 
-            if (_frmJEV == null)
-            {
-                var newFrmJev = new frmJEV(this);
-                var ucFrmJev = newFrmJev.ucjev1;
-                ucFrmJev.jevNo = jevNo;
-                ucFrmJev.jevId = jevId;
-                newFrmJev.ShowDialog();
-            }
-            else
-            {
-                _frmJEV.LoadSelectedJEV(jevNo);
-                Close();
-            }
+            var newFrmJev = new frmJEV(this, _ucJEVDashboard);
+            var ucFrmJev = newFrmJev.ucjev1;
+            ucFrmJev.jevNo = jevNo;
+            ucFrmJev.jevId = jevId;
+            newFrmJev.ShowDialog();
+
         }
 
         private void btnSelect_Click(object sender, EventArgs e)

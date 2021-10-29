@@ -8,19 +8,22 @@ using AccountingSystem.Views.Transactions;
 using System.Transactions;
 using System.Linq;
 using System.Data;
+using AccountingSystem.Views.Dashboard;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
     public partial class frmJEV : Form
     {
         private ucJEV uc;
-        private frmJEVSearch _frmJEVSearch;
+        internal frmJEVSearch _frmJEVSearch;
+        internal ucJEVDashboard _ucJEVDashboard;
 
-        public frmJEV(frmJEVSearch frmJEVSearch)
+        public frmJEV(frmJEVSearch frmJEVSearch, ucJEVDashboard ucJEVDashboard)
         {
             InitializeComponent();
             uc = ucjev1;
             _frmJEVSearch = frmJEVSearch;
+            _ucJEVDashboard = ucJEVDashboard;   
             Helper.LoadFormIcon(this);
         }
 
@@ -31,7 +34,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 LoadSelectedJEV(uc.jevNo);
                 CheckJevStatus(uc.jevId);
-                btnSearch.Visible = false;
                 Text = "Select JEV";
             }
             uc.SumDebitCredit();
@@ -448,6 +450,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 {
                     Helper.MessageBoxSuccess("JEV has been saved.");
                     ucjev1.ResetForm();
+                    _ucJEVDashboard.LoadJEVCounter();
                 }
                 return;
             }
@@ -460,6 +463,8 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                 Helper.MessageBoxSuccess(message);
                 CheckJevStatus(jevId);
+                _frmJEVSearch.LoadJEVList();
+                _ucJEVDashboard.LoadJEVCounter();
                 uc.isDisapproved = 0;
 
                 if (uc.journalId != uc.oldJournalId) //CHECK IF THE PREVIOUS JOURNAL ID IS NOT EQUAL TO NEW SELECTED JOURNAL ID
@@ -491,6 +496,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                     }
 
                 }
+
+
                 return;
             }
         }
@@ -588,13 +595,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        internal void BtnSearch_Click(object sender, EventArgs e)
-        {
-            var frmJevSearch = new frmJEVSearch(this,string.Empty,0,0);
-            frmJevSearch.cmbxJevStatus.SelectedIndex = 0;
-            frmJevSearch.ShowDialog();
-        }
-
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             try
@@ -607,6 +607,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     var jevRepository = Factory.JEVRepository();
                     _ = jevRepository.Delete(jevModel);
                     ResetForm();
+                    _frmJEVSearch.LoadJEVList();
                     uc.ResetForm();
                 }
             }
@@ -722,6 +723,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                         {
                             Helper.MessageBoxSuccess("JEV has been approved.");
                             CheckJevStatus(uc.jevId);
+                            _frmJEVSearch.LoadJEVList();
+                            _ucJEVDashboard.LoadJEVCounter();
                         }
                         return;
                     }
@@ -771,6 +774,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                         {
                             Helper.MessageBoxSuccess("JEV has been cancelled.");
                             CheckJevStatus(uc.jevId);
+                            _frmJEVSearch.LoadJEVList();
+                            _ucJEVDashboard.LoadJEVCounter();
                         }
                         return;
                     }
