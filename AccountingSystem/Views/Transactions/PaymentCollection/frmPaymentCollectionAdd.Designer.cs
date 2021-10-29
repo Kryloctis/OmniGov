@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.ucpc1.Location = new System.Drawing.Point(0, 47);
             this.ucpc1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucpc1.Name = "ucpc1";
-            this.ucpc1.Size = new System.Drawing.Size(509, 312);
+            this.ucpc1.Size = new System.Drawing.Size(509, 351);
             this.ucpc1.TabIndex = 6;
             // 
             // toolStrip1
@@ -71,7 +71,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(509, 358);
+            this.ClientSize = new System.Drawing.Size(509, 398);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.ucpc1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

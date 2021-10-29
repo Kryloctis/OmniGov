@@ -24,6 +24,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal int minreceipt = 0;
         internal int maxreceipt = 0;
         internal int receipt = 0;
+        internal bool isCashTicket = false;
+
         public ucPaymentCollection()
         {
             InitializeComponent();
@@ -248,6 +250,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ShowCashTicketsFields();
             if (cmbforms.SelectedIndex != -1)
             {
                 DataRowView forms = cmbforms.SelectedItem as DataRowView;
@@ -432,7 +435,18 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         }
 
 
-   
-
+        private void ShowCashTicketsFields()
+        {
+            if (isCashTicket)
+            {
+                tabPaymentType.SelectedTab = tabCashTickets;
+                isCashTicket = false;
+            }
+            else
+            {
+                tabPaymentType.SelectedTab = tabNonCashTickets;
+                isCashTicket = true;
+            }
+        }
     }
 }
