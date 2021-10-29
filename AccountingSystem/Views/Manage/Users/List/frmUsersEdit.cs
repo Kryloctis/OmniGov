@@ -24,18 +24,21 @@ namespace AccountingSystem.Views.Manage.Users.List
             uc.userId = userId;
 
         }
+
         private void LoadSelectedRecord()
         {
             try
             {
                 var usersRepository = Factory.UsersRepository();
                 var userData = usersRepository.GetRecordByID(uc.userId);
-                
+                var dictRoles = Factory.RolesRepository().GetRecordByID(Convert.ToInt32(userData["roles_id"]));
+
+
+                uc.cmbOffice.Text = dictRoles["office"];
                 uc.cmbRoles.SelectedValue = userData["roles_id"];
                 uc.txtFirstname.Text = userData["first_name"];
                 uc.txtMiddleInitial.Text = userData["mid_initial"];
                 uc.txtLastname.Text = userData["last_name"];
-
                 uc.txtUsername.Text = userData["username"];
 
             }
@@ -88,7 +91,6 @@ namespace AccountingSystem.Views.Manage.Users.List
         private void frmUsersEdit_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            uc.LoadRoleName();
             LoadSelectedRecord();
 
             uc.txtUsername.ReadOnly = true;
@@ -96,7 +98,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             uc.lblConfirmPassword.Text = $"Confirm New{Environment.NewLine}Password";
         }
 
-        private void btnSave_Click_1(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
             if (SaveData())
             {

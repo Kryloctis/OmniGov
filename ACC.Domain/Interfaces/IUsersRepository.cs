@@ -15,13 +15,23 @@ namespace ACC.Domain.Interfaces
         byte ValidateLogin(string username, string password);
 
         bool UpdateWithPassword(UsersModel entity);
+
         Dictionary<string, string> GetUserByID(int Id);
+
         DataTable GetLinksCollectingOfficers();
+
         DataTable GetLinksDisbursingOfficers();
+
+        DataTable GetViewRecordsByUserId();
+
         bool LinkedCollector(int id);
+
         bool LinkedDisburser(int id);
+
         string GetUserRole(int id);
+
         string GetCollectorByUserId(int id);
+
         string GetDisbursingByUserId(int id);
     }
 }

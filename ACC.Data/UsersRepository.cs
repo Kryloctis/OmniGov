@@ -154,6 +154,7 @@ namespace ACC.Data
             }
             return data;
         }
+
         public string GetDisbursingByUserId(int id)
         {
             string data = string.Empty;
@@ -502,6 +503,38 @@ namespace ACC.Data
             };
 
             return false;
+        }
+
+        public DataTable GetViewRecordsByUserId()
+        {
+            try
+            {
+                string query = $"SELECT " +
+                    $"id, " +
+                    $"roles_id, " +
+                    $"first_name, " +
+                    $"mid_initial, " +
+                    $"last_name, " +
+                    $"username, " +
+                    $"password, " +
+                    $"is_deleted, " +
+                    $"created_at, " +
+                    $"updated_at, " +
+                    $"office, " +
+                    $"role_name, " +
+                    $"permission_name, " +
+                    $"permission_office " +
+                    $"FROM {viewTableName} WHERE office <> 'SysAdmin' GROUP BY id";
+
+
+                var dataTable = new DataTable();
+
+                return _dbGenericCommands.Fill(query, dataTable);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

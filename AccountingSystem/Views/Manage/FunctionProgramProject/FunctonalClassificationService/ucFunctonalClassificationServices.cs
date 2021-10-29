@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using System;
 using System.Data;
-using ACC.Domain.Interfaces;
 using System.Windows.Forms;
 
 
@@ -9,7 +9,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
     public partial class ucFunctonalClassificationServices : UserControl
     {
         internal byte serviceID = 0;
-        IFunctionalClassificationServiceRepository _functionalClassificationServiceRepository;
         public ucFunctonalClassificationServices()
         {
             InitializeComponent();
@@ -27,8 +26,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
 
         internal void ResetForm()
         {
-          //  cmbSectorName.SelectedIndex = -1;
-           // txtCode.Clear();
+            //  cmbSectorName.SelectedIndex = -1;
+            // txtCode.Clear();
             txtName.Clear();
         }
 
@@ -43,7 +42,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             try
             {
                 DataTable dtSectorName = Factory.FunctionalClassificationRepository().GetRecords();
-                HelperLoadRecords.SectorNameComboBox(dtSectorName, cmbSectorName, "sector_name", "id");               
+                HelperLoadRecords.SectorNameComboBox(dtSectorName, cmbSectorName, "sector_name", "id");
                 byte id = Convert.ToByte(cmbSectorName.SelectedValue);
                 txtCode.Text = Convert.ToString(id);
             }
@@ -53,7 +52,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             }
 
 
-        }      
+        }
 
 
         private void cmbSectorName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -92,12 +91,12 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "name");
         }
-     
+
 
         private void cmbSectorName_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
-            
+
+
         }
 
         private void cmbSectorName_SelectionChangeCommitted(object sender, EventArgs e)
