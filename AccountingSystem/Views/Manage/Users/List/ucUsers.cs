@@ -16,17 +16,48 @@ namespace AccountingSystem.Views.Manage.Users.List
             InitializeComponent();
         }
 
-        internal void LoadRoleName()
+      
+
+        internal void LoadOffice()
+        {
+            cmbOffice.SelectedValueChanged -= new EventHandler(CmbxOffice_SelectedValueChanged);
+
+            var userDict = Helper.LoggedInUserData();
+            switch (userDict["office"])
+            {
+                case "SysAdmin":
+                    cmbOffice.Items.AddRange(new string[] { "Budget", "Accounting", "Treasury" });
+                    break;
+                default:
+                    cmbOffice.Items.Add(userDict["office"]);
+                    break;
+            }
+
+            cmbOffice.SelectedIndex = 0;
+
+            cmbOffice.SelectedValueChanged += new EventHandler(CmbxOffice_SelectedValueChanged);
+        }
+
+        internal void LoadRoles()
         {
             try
             {
-                DataTable dtRoleName = Factory.RolesRepository().GetRecords();
+                string office = cmbOffice.Text;
+
+                DataTable dtRoleName = Factory.RolesRepository().GetRecordsByOffice(office);
                 HelperLoadRecords.RoleNameComboBox(dtRoleName, cmbRoles, "role_name", "id");
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+
+        private void CmbxOffice_SelectedValueChanged(object sender, EventArgs e)
+        {
+            cmbRoles.Text = string.Empty;
+            LoadRoles();
         }
 
         internal string GetFormErrors()
@@ -215,6 +246,14 @@ namespace AccountingSystem.Views.Manage.Users.List
             {
                 btnConfirmPasswordVisibility.Image = visibleImage;
                 txtConfirmPassword.PasswordChar = '•';
+            }
+        }
+
+        private void ucUsers_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadOffice();
             }
         }
     }

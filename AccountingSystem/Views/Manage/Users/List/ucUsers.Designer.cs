@@ -55,6 +55,8 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtUsername = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cmbOffice = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.epRole)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFirstName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epMiddleInitial)).BeginInit();
@@ -69,7 +71,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 34);
+            this.label1.Location = new System.Drawing.Point(9, 61);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 15);
             this.label1.TabIndex = 5;
@@ -77,7 +79,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             // 
             // txtFirstname
             // 
-            this.txtFirstname.Location = new System.Drawing.Point(119, 31);
+            this.txtFirstname.Location = new System.Drawing.Point(119, 58);
             this.txtFirstname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtFirstname.MaxLength = 45;
             this.txtFirstname.Name = "txtFirstname";
@@ -89,7 +91,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 60);
+            this.label2.Location = new System.Drawing.Point(9, 87);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 15);
             this.label2.TabIndex = 7;
@@ -97,7 +99,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             // 
             // txtMiddleInitial
             // 
-            this.txtMiddleInitial.Location = new System.Drawing.Point(119, 58);
+            this.txtMiddleInitial.Location = new System.Drawing.Point(119, 85);
             this.txtMiddleInitial.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtMiddleInitial.MaxLength = 3;
             this.txtMiddleInitial.Name = "txtMiddleInitial";
@@ -109,7 +111,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 87);
+            this.label3.Location = new System.Drawing.Point(9, 114);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 15);
             this.label3.TabIndex = 9;
@@ -117,7 +119,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             // 
             // txtLastname
             // 
-            this.txtLastname.Location = new System.Drawing.Point(119, 85);
+            this.txtLastname.Location = new System.Drawing.Point(119, 112);
             this.txtLastname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtLastname.MaxLength = 45;
             this.txtLastname.Name = "txtLastname";
@@ -129,7 +131,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 6);
+            this.label6.Location = new System.Drawing.Point(9, 33);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(30, 15);
             this.label6.TabIndex = 15;
@@ -162,7 +164,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             // cmbRoles
             // 
             this.cmbRoles.FormattingEnabled = true;
-            this.cmbRoles.Location = new System.Drawing.Point(119, 4);
+            this.cmbRoles.Location = new System.Drawing.Point(119, 31);
             this.cmbRoles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbRoles.Name = "cmbRoles";
             this.cmbRoles.Size = new System.Drawing.Size(350, 23);
@@ -178,7 +180,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             // 
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(3, 120);
+            this.groupBox1.Location = new System.Drawing.Point(3, 147);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(498, 121);
@@ -297,13 +299,33 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.txtUsername.Validating += new System.ComponentModel.CancelEventHandler(this.txtUsername_Validating);
             this.txtUsername.Validated += new System.EventHandler(this.txtUsername_Validated);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 6);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(39, 15);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Office";
+            // 
+            // cmbOffice
+            // 
+            this.cmbOffice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbOffice.FormattingEnabled = true;
+            this.cmbOffice.Location = new System.Drawing.Point(119, 3);
+            this.cmbOffice.Name = "cmbOffice";
+            this.cmbOffice.Size = new System.Drawing.Size(350, 23);
+            this.cmbOffice.TabIndex = 18;
+            // 
             // ucUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.Controls.Add(this.cmbOffice);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cmbRoles);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtLastname);
@@ -313,7 +335,8 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.Controls.Add(this.txtFirstname);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucUsers";
-            this.Size = new System.Drawing.Size(504, 244);
+            this.Size = new System.Drawing.Size(504, 271);
+            this.Load += new System.EventHandler(this.ucUsers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epRole)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFirstName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epMiddleInitial)).EndInit();
@@ -356,5 +379,7 @@ namespace AccountingSystem.Views.Manage.Users.List
         internal System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Button btnConfirmPasswordVisibility;
         private System.Windows.Forms.Button btnPasswordVisibility;
+        private System.Windows.Forms.Label label5;
+        internal System.Windows.Forms.ComboBox cmbOffice;
     }
 }

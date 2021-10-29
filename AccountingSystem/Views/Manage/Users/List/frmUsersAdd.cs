@@ -63,18 +63,10 @@ namespace AccountingSystem.Views.Manage.Users.List
         private void frmUsersAdd_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            //LoadRecords();
-            
+           
         }
 
-     
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnSave_Click_1(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
             if (SaveData())
             {
@@ -82,14 +74,6 @@ namespace AccountingSystem.Views.Manage.Users.List
                 _frmUsers.LoadRecords();
                 ucUsers1.ResetForm();
             }
-        }
-
-       
-
-        private void frmUsersAdd_Load_1(object sender, EventArgs e)
-        {
-            Helper.LoadFormIcon(this);
-            ucUsers1.LoadRoleName();
         }
     }
 }

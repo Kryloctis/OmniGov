@@ -70,7 +70,25 @@ namespace ACC.Data
             }
         }
 
-    
+        public DataTable GetRecordsByOffice(string office)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@office", DbType.String, office}
+                };
+
+                string query = $"SELECT * FROM {tableName} WHERE role_name <> 'System Administrator' AND office = @office";
+
+                var dtRoles = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtRoles, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
