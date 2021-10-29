@@ -801,13 +801,19 @@ namespace AccountingSystem
         {
             datagrid.DataSource = dataTable;
             datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Firstname";
-            datagrid.Columns[2].HeaderText = "MI";
-            datagrid.Columns[3].HeaderText = "Lastname";
-            datagrid.Columns[4].HeaderText = "Username";
-            datagrid.Columns[5].HeaderText = "Role";
+            datagrid.Columns[1].Visible = false;
+            datagrid.Columns[2].HeaderText = "Firstname";
+            datagrid.Columns[3].HeaderText = "MI";
+            datagrid.Columns[4].HeaderText = "Lastname";
+            datagrid.Columns[5].HeaderText = "Username";
             datagrid.Columns[6].Visible = false;
             datagrid.Columns[7].Visible = false;
+            datagrid.Columns[8].Visible = false;
+            datagrid.Columns[9].Visible = false;
+            datagrid.Columns[10].HeaderText = "Office";
+            datagrid.Columns[11].HeaderText = "Role";
+            datagrid.Columns[12].Visible = false;
+            datagrid.Columns[13].Visible = false;
 
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;

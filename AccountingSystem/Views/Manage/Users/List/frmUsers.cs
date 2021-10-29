@@ -18,7 +18,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             try
             {
                 var usersRepository = Factory.UsersRepository();
-                var dtUsers = usersRepository.GetRecords();
+                var dtUsers = usersRepository.GetViewRecordsByUserId();
                 HelperLoadRecords.UsersDatagridView(dtUsers, dgUsers);
 
                 lblRecordCount.Text = usersRepository.CountRecords().ToString();
