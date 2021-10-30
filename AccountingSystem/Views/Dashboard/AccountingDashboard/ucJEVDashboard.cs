@@ -67,7 +67,7 @@ namespace AccountingSystem.Views.Dashboard
             string journalName = cmbxJournals.Text.Trim();
             byte month = Convert.ToByte(cbMonth.SelectedIndex);
             int year = (int)nudYear.Value;
-            var _frmJEVSearch = new frmJEVSearch(journalName, month, year, this);
+            var _frmJEVSearch = new frmJEVList(journalName, month, year, this);
 
             switch (jevStatus)
             {

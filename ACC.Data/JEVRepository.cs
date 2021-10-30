@@ -994,16 +994,19 @@ namespace ACC.Data
                 switch (jevStatus)
                 {
                     case 0:
-                        jevStatusQuery = $"is_approved = 0 AND is_disapproved = 0 AND is_cancelled = 0";
+                        jevStatusQuery = $"is_approved = 0 AND is_disapproved = 0 AND is_cancelled = 0 AND ";
                         break;
                     case 1:
-                        jevStatusQuery = $"is_approved = 1 AND is_disapproved = 0 AND is_cancelled = 0";
+                        jevStatusQuery = $"is_approved = 1 AND is_disapproved = 0 AND is_cancelled = 0 AND ";
                         break;
-                    case 2:
-                        jevStatusQuery = $"is_approved = 0 AND is_disapproved = 1 AND is_cancelled = 0";
+                    case 2: 
+                        jevStatusQuery = $"is_approved = 0 AND is_disapproved = 1 AND is_cancelled = 0 AND ";
                         break;
                     case 3:
-                        jevStatusQuery = $"is_cancelled = 1";
+                        jevStatusQuery = $"is_cancelled = 1 AND ";
+                        break;
+                    default:
+                        jevStatusQuery = string.Empty;
                         break;
 
                 }
@@ -1027,7 +1030,7 @@ namespace ACC.Data
                     $"updated_by " +
                     $"FROM {viewTableName} " +
                     $"WHERE {jevStatusQuery} " +
-                    $"AND journal_name = @journal_name " +
+                    $"journal_name = @journal_name " +
                     $"AND MONTH(date_entry) <= @month " +
                     $"AND YEAR(date_entry) = @year " +
                     $"AND (jev_no LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt)";

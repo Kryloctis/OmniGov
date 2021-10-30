@@ -15,14 +15,14 @@ namespace AccountingSystem.Views.Transactions.JEV
     public partial class frmJEV : Form
     {
         private ucJEV uc;
-        internal frmJEVSearch _frmJEVSearch;
+        internal frmJEVList _frmJEVList;
         internal ucJEVDashboard _ucJEVDashboard;
 
-        public frmJEV(frmJEVSearch frmJEVSearch, ucJEVDashboard ucJEVDashboard)
+        public frmJEV(frmJEVList frmJEVList, ucJEVDashboard ucJEVDashboard)
         {
             InitializeComponent();
             uc = ucjev1;
-            _frmJEVSearch = frmJEVSearch;
+            _frmJEVList = frmJEVList;
             _ucJEVDashboard = ucJEVDashboard;   
             Helper.LoadFormIcon(this);
         }
@@ -30,7 +30,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void frmJEV_Load(object sender, EventArgs e)
         {
            
-            if (_frmJEVSearch != null)
+            if (_frmJEVList != null)
             {
                 LoadSelectedJEV(uc.jevNo);
                 CheckJevStatus(uc.jevId);
@@ -463,7 +463,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                 Helper.MessageBoxSuccess(message);
                 CheckJevStatus(jevId);
-                _frmJEVSearch.LoadJEVList();
+                _frmJEVList.LoadJEVList();
                 _ucJEVDashboard.LoadJEVCounter();
                 uc.isDisapproved = 0;
 
@@ -584,7 +584,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-            if (_frmJEVSearch != null)
+            if (_frmJEVList != null)
             {
                 Close();
             }
@@ -607,7 +607,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     var jevRepository = Factory.JEVRepository();
                     _ = jevRepository.Delete(jevModel);
                     ResetForm();
-                    _frmJEVSearch.LoadJEVList();
+                    _frmJEVList.LoadJEVList();
                     uc.ResetForm();
                 }
             }
@@ -723,7 +723,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         {
                             Helper.MessageBoxSuccess("JEV has been approved.");
                             CheckJevStatus(uc.jevId);
-                            _frmJEVSearch.LoadJEVList();
+                            _frmJEVList.LoadJEVList();
                             _ucJEVDashboard.LoadJEVCounter();
                         }
                         return;
@@ -774,7 +774,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         {
                             Helper.MessageBoxSuccess("JEV has been cancelled.");
                             CheckJevStatus(uc.jevId);
-                            _frmJEVSearch.LoadJEVList();
+                            _frmJEVList.LoadJEVList();
                             _ucJEVDashboard.LoadJEVCounter();
                         }
                         return;

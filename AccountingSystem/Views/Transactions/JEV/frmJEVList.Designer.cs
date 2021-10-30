@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Transactions.JEV
 {
-    partial class frmJEVSearch
+    partial class frmJEVList
     {
         /// <summary>
         /// Required designer variable.
@@ -85,13 +85,16 @@ namespace AccountingSystem.Views.Transactions.JEV
             // dgJEV
             // 
             this.dgJEV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgJEV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgJEV.Location = new System.Drawing.Point(0, 29);
+            this.dgJEV.Location = new System.Drawing.Point(12, 33);
+            this.dgJEV.Margin = new System.Windows.Forms.Padding(1);
             this.dgJEV.Name = "dgJEV";
             this.dgJEV.RowTemplate.Height = 25;
-            this.dgJEV.Size = new System.Drawing.Size(1103, 419);
+            this.dgJEV.Size = new System.Drawing.Size(1081, 410);
             this.dgJEV.TabIndex = 6;
+            this.dgJEV.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgJEV_CellFormatting);
+            this.dgJEV.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgJEV_ColumnAdded);
             this.dgJEV.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgJEV_RowHeaderMouseDoubleClick);
+            this.dgJEV.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgJEV_RowsAdded);
             this.dgJEV.SelectionChanged += new System.EventHandler(this.dgJEV_SelectionChanged);
             // 
             // panel1
@@ -113,9 +116,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.cmbxJournals.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxJournals.FormattingEnabled = true;
-            this.cmbxJournals.Location = new System.Drawing.Point(3, 3);
+            this.cmbxJournals.Location = new System.Drawing.Point(12, 3);
             this.cmbxJournals.Name = "cmbxJournals";
-            this.cmbxJournals.Size = new System.Drawing.Size(275, 23);
+            this.cmbxJournals.Size = new System.Drawing.Size(266, 23);
             this.cmbxJournals.TabIndex = 29;
             this.cmbxJournals.SelectionChangeCommitted += new System.EventHandler(this.cmbxJournals_SelectionChangeCommitted);
             // 
@@ -171,7 +174,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // btnSearch
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Location = new System.Drawing.Point(1025, 3);
+            this.btnSearch.Location = new System.Drawing.Point(1018, 3);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 23;
@@ -182,12 +185,12 @@ namespace AccountingSystem.Views.Transactions.JEV
             // txtSearch
             // 
             this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSearch.Location = new System.Drawing.Point(731, 3);
+            this.txtSearch.Location = new System.Drawing.Point(724, 3);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(288, 23);
             this.txtSearch.TabIndex = 22;
             // 
-            // frmJEVSearch
+            // frmJEVList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -200,11 +203,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(946, 449);
-            this.Name = "frmJEVSearch";
+            this.Name = "frmJEVList";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "List of JEVs";
-            this.Load += new System.EventHandler(this.frmJEVSearch_Load);
+            this.Load += new System.EventHandler(this.frmJEVList_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgJEV)).EndInit();
             this.panel1.ResumeLayout(false);

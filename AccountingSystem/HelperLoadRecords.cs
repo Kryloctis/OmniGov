@@ -1604,27 +1604,46 @@ namespace AccountingSystem
             datagrid.Columns["journals_id"].Visible = false;
         }
 
-        internal static void JEVDatagridView(DataTable dataTable, DataGridView datagrid)
+        internal static void JEVDatagridView(DataGridView datagrid)
         {
-            datagrid.DataSource = dataTable;
+            datagrid.Columns.Clear();
+            datagrid.Columns.Add("id", "ID");
+            datagrid.Columns.Add("funds_id", "Funds ID");
+            datagrid.Columns.Add("journals_id", "Journals ID");
+            datagrid.Columns.Add("jev_no", "JEV No.");
+            datagrid.Columns.Add("full_jev_no", "JEV No.");
+            datagrid.Columns.Add("date_entry", "Date Entry");
+            datagrid.Columns.Add("ref_no", "Ref No.");
+            datagrid.Columns.Add("payee", "Payee");
+            datagrid.Columns.Add("explanation", "Explanation");
+            datagrid.Columns.Add("fund_code", "Fund Code");
+            datagrid.Columns.Add("created_at", "Created At");
+            datagrid.Columns.Add("created_by_id", "Created By ID");
+            datagrid.Columns.Add("created_by_name", "Created By");
+            datagrid.Columns.Add("updated_at", "Updated At");
+            datagrid.Columns.Add("updated_by_id", "Updated By ID");
+            datagrid.Columns.Add("updated_by_name", "Updated By");
+            datagrid.Columns.Add("status", "Status");
+
+
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["funds_id"].Visible = false;
             datagrid.Columns["journals_id"].Visible = false;
+            datagrid.Columns["full_jev_no"].Width = 120;
+            datagrid.Columns["ref_no"].Width = 60;
+            datagrid.Columns["date_entry"].Width = 120;
+            datagrid.Columns["created_by_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["payee"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill; 
+            datagrid.Columns["date_entry"].DefaultCellStyle.Format = "MMMM, dd, yyyy";
             datagrid.Columns["jev_no"].Visible = false;
-            datagrid.Columns["full_jev_no"].HeaderText = "JEV No.";
-            datagrid.Columns["date_entry"].HeaderText = "Date";
-            datagrid.Columns["ref_no"].HeaderText = "Ref No.";
-            datagrid.Columns["payee"].HeaderText = "Payee";
-            datagrid.Columns["explanation"].HeaderText = "Explanation";
-            datagrid.Columns["explanation"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             datagrid.Columns["fund_code"].Visible = false;
-            datagrid.Columns["is_approved"].Visible = false;
-            datagrid.Columns["is_disapproved"].Visible = false;
-            datagrid.Columns["is_cancelled"].Visible = false;
             datagrid.Columns["created_at"].Visible = false;
-            datagrid.Columns["created_by"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
-            datagrid.Columns["updated_by"].Visible = false;
+            datagrid.Columns["created_by_id"].Visible = false;
+            datagrid.Columns["updated_by_id"].Visible = false;
+            datagrid.Columns["updated_by_name"].Visible = false;    
+            datagrid.Columns["explanation"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
         }
 
         #endregion
