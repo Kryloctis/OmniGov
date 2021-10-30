@@ -18,6 +18,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         public frmPaymentCollectionEdit(frmPaymentCollection frmpc,int Id)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             _frmpc = frmpc;
             ucpc1.Id = Id;
             ucpc1.userid = Helper.UserId;
@@ -29,6 +30,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             ucpc1.LoadForms();
             ucpc1.LoadCollectors();
             ucpc1.LoadFunds();
+
             LoadSelectedValue();
         }
 
@@ -41,10 +43,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 var pcRepository = Factory.PaymentCollectionRepository();
                 var pcData = pcRepository.GetRecordByID(uc.Id);
                 uc.cmbcollector.SelectedValue = pcData["collecting_officers_id"];
-                uc.cmbfund.SelectedValue = pcData["funds_id"];
                 uc.cmbforms.SelectedValue = pcData["accountable_forms_id"];
                 uc.setSelectedValue(Convert.ToInt32(pcData["general_ledger_accounts_id"]), "ledger");
-                uc.cmbsubsidiary.SelectedValue=pcData["subsidiary_ledger_accounts_id"];
                 uc.txtpayee.Text = pcData["payee"];
                 uc.txtreceipt.Text = pcData["receipt_no"];
                 uc.dtdate.Value = Convert.ToDateTime(pcData["payment_date"]);
@@ -70,11 +70,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 var pcModel = new PaymentCollectionModel()
                 {
                     Id = uc.Id,
-                    CoId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
-                    FId = Convert.ToInt32(uc.cmbfund.SelectedValue),
-                    AccId = Convert.ToInt32(uc.cmbforms.SelectedValue),
-                    GlaId = uc.glaId,
-                    SlaId = Convert.ToInt32(uc.cmbsubsidiary.SelectedValue),
+                    CollectingOfficerId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
+                    FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
+                    AccountableFormId = Convert.ToInt32(uc.cmbforms.SelectedValue),
+                    GeneralLedgerAccountId = uc.glaId,
                     Payee = uc.txtpayee.Text.Trim(),
                     ReceiptNo = uc.txtreceipt.Text.Trim(),
                     PaymentDate = Convert.ToDateTime(uc.dtdate.Text.Trim()),
@@ -125,13 +124,14 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             return false;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+
+        private void btnSave_Click_1(object sender, EventArgs e)
         {
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Payment Collection has been updated.");
                 _frmpc.LoadRecords();
-                
+
             }
         }
     }

@@ -13,11 +13,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 {
     public partial class frmPaymentCollectionAdd : Form
     {
-        private frmPaymentCollection _frmpc;
+        private readonly frmPaymentCollection _frmPaymentCollection;
+
         public frmPaymentCollectionAdd(frmPaymentCollection frmpc)
         {
             InitializeComponent();
-            _frmpc = frmpc;
+            Helper.LoadFormIcon(this);
+            _frmPaymentCollection = frmpc;
             ucpc1.userid = Helper.UserId;
         }
 
@@ -55,11 +57,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
                 var pcModel = new PaymentCollectionModel()
                 {
-                    CoId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
-                    FId = Convert.ToInt32(uc.cmbfund.SelectedValue),
-                    AccId = Convert.ToInt32(uc.cmbforms.SelectedValue),
-                    GlaId = uc.glaId,
-                    SlaId = Convert.ToInt32(uc.cmbsubsidiary.SelectedValue),
+                    CollectingOfficerId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
+                    FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
+                    AccountableFormId = Convert.ToInt32(uc.cmbforms.SelectedValue),
+                    GeneralLedgerAccountId = uc.glaId,
                     Payee = uc.txtpayee.Text.Trim(),
                     ReceiptNo = uc.txtreceipt.Text.Trim(),
                     PaymentDate = Convert.ToDateTime(uc.dtdate.Text.Trim()),
@@ -67,38 +68,45 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     CreatedBy = uc.userid,
                 };
 
-                var pcrepository = Factory.PaymentCollectionRepository();
-                if (pcrepository.ReceiptExist(uc.txtreceipt.Text.Trim(), Convert.ToInt32(uc.cmbforms.SelectedValue)))
+                var paymentCollectionRepo = Factory.PaymentCollectionRepository();
+
+                bool receiptExist = paymentCollectionRepo.ReceiptExist(uc.txtreceipt.Text.Trim(), Convert.ToInt32(uc.cmbforms.SelectedValue));
+
+                if (receiptExist)
                 {
-                    Helper.MessageBoxSuccess("Receipt already exists!.");
+                    Helper.MessageBoxSuccess("Receipt already exists!");
                     uc.txtreceipt.Focus();
                     return false;
                 }
                 else if(uc.txtamount.Value <= 0)
                 {
-                    Helper.MessageBoxSuccess("Empty Amount!.");
+                    Helper.MessageBoxSuccess("Please enter amount.");
                     uc.txtamount.Focus();
                     return false;
                 }
                 else
                 {
-                    if (pcrepository.Insert(pcModel))
+                    bool insertSuccess = paymentCollectionRepo.Insert(pcModel);
+
+                    if (insertSuccess)
                     {
-                        var riRepository = Factory.ReceiptsIssuedRepository();
-                        var dtri = riRepository.GetRecords(uc.cmbcollector.SelectedValue.ToString(), uc.cmbforms.SelectedValue.ToString());
-                        if (dtri.Rows.Count > 0)
+                        var receiptsIssuedRepo = Factory.ReceiptsIssuedRepository();
+                        var dtReceiptIssued = receiptsIssuedRepo.GetRecords(uc.cmbcollector.SelectedValue.ToString(), uc.cmbforms.SelectedValue.ToString());
+                        var receiptIssuedCount = dtReceiptIssued.Rows.Count;
+
+                        if (receiptIssuedCount > 0)
                         {
                             int rid = 0;
-                            for (int i = 0; i < dtri.Rows.Count; i++)
+                            for (int i = 0; i < receiptIssuedCount; i++)
                             {
-                                rid = Convert.ToInt32(dtri.Rows[i]["id"]);
+                                rid = Convert.ToInt32(dtReceiptIssued.Rows[i]["id"]);
                             }
                             var rcModel = new ReceiptsIssuedModel()
                             {
                                 Id = rid,
                                 Last_issued = Convert.ToInt32(uc.txtreceipt.Text.Trim())
                             };
-                            return riRepository.UpdateCurrentIssued(rcModel);
+                            return receiptsIssuedRepo.UpdateCurrentIssued(rcModel);
                         }
                     }
                     else
@@ -106,11 +114,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                         return false;
                     }
                 }
-                
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxWarning(ex.Message);
             }
             return false;
         }
@@ -120,9 +127,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Payment Collection has been saved.");
-                _frmpc.LoadRecords();
+                _frmPaymentCollection.LoadRecords();
                 ucpc1.ResetForm();
             }
         }
+
     }
 }
