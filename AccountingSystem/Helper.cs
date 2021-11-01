@@ -114,6 +114,29 @@ namespace AccountingSystem
             return lguDict;
         }
 
+
+        public static Color StatusColor(string status) 
+        {
+            switch (status)
+            {
+                case "Approved":
+                    return Color.FromArgb(97, 177, 90);
+
+                case "Disapproved":
+                    return Color.FromArgb(255, 81, 81);
+                  
+
+                case "Cancelled":
+                    return Color.FromArgb(156, 25, 224);
+
+                case "Pending":
+                    return Color.Gold;
+
+                default:
+                    return Color.Black;
+            }
+        }
+
         internal static Dictionary<string, string> LoggedInUserData()
         {
             try
