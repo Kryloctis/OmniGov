@@ -630,10 +630,10 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 switch (Factory.JEVRepository().GetJevStatus(jevId))
                 {
-                    case 0:
+                    case "pending":
                         //PENDING
                         lblJevStatus.Text = "PENDING";
-                        lblJevStatus.ForeColor = Color.DarkGoldenrod;
+                        lblJevStatus.ForeColor = Helper.StatusColor("Pending");
                         lblShowMessage.Visible = false;
                         btnPrint.Enabled = false;
                         btnApprove.Enabled = true;
@@ -643,10 +643,10 @@ namespace AccountingSystem.Views.Transactions.JEV
                         ucjev1.Enabled = true;
                         btnSave.Enabled = true;
                         break;
-                    case 1:
+                    case "approved":
                         //APPROVED
                         lblJevStatus.Text = "APPROVED";
-                        lblJevStatus.ForeColor = System.Drawing.Color.Green;
+                        lblJevStatus.ForeColor = Helper.StatusColor("Approved");
                         lblShowMessage.Visible = false;
                         btnApprove.Enabled = false;
                         btnDisapprove.Enabled = false;
@@ -657,11 +657,12 @@ namespace AccountingSystem.Views.Transactions.JEV
                         btnDelete.Enabled = false;
                         btnSave.Enabled = false;
                         break;
-                    case 2:
+                    case "disapproved":
                         //DISSAPROVED
                         lblJevStatus.Text = "DISAPPROVED";
-                        lblJevStatus.ForeColor = Color.Firebrick;
+                        lblJevStatus.ForeColor = Helper.StatusColor("Disapproved");
                         lblShowMessage.Visible = true;
+                        btnApprove.Enabled = false;
                         btnDisapprove.Enabled = false;
                         btnCancelJEV.Enabled = true;
                         btnPrint.Enabled = false;
@@ -669,10 +670,10 @@ namespace AccountingSystem.Views.Transactions.JEV
                         btnDelete.Enabled = false;
                         ucjev1.Enabled = false;
                         break;
-                    case 3:
+                    case "cancelled":
                         //CANCELLED
                         lblJevStatus.Text = "CANCELLED";
-                        lblJevStatus.ForeColor = Color.Firebrick;
+                        lblJevStatus.ForeColor = Helper.StatusColor("Cancelled");
                         lblShowMessage.Visible = false;
                         btnApprove.Enabled = false;
                         btnDisapprove.Enabled = false;

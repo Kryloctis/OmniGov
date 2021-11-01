@@ -1632,7 +1632,9 @@ namespace AccountingSystem
             datagrid.Columns["full_jev_no"].Width = 120;
             datagrid.Columns["ref_no"].Width = 60;
             datagrid.Columns["date_entry"].Width = 120;
+            datagrid.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns["created_by_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.ShowCellToolTips = false;
             datagrid.Columns["payee"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill; 
             datagrid.Columns["date_entry"].DefaultCellStyle.Format = "MMMM, dd, yyyy";
             datagrid.Columns["jev_no"].Visible = false;
@@ -1643,6 +1645,7 @@ namespace AccountingSystem
             datagrid.Columns["updated_by_id"].Visible = false;
             datagrid.Columns["updated_by_name"].Visible = false;    
             datagrid.Columns["explanation"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["status"].SortMode = DataGridViewColumnSortMode.Automatic;
 
         }
 

@@ -66,9 +66,9 @@ namespace ACC.Domain.Interfaces
         string GetRemarks(int jevId);
 
 
-        DataTable FilterRecords(byte jevStatus, string searchTxt, string journal, short month, short year);
+        DataTable FilterRecords(string jevStatus, string searchTxt, string journal, short month, short year);
 
-        byte GetJevStatus(int jevId);
+        string GetJevStatus(int jevId);
 
         //SFPs
         decimal GetSumByMajorAccountGroup(int fundId, int majorAccountGroupId, byte isDebit, DateTime dateEntry);

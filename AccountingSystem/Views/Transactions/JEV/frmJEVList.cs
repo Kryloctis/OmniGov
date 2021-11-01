@@ -107,36 +107,16 @@ namespace AccountingSystem.Views.Transactions.JEV
             return string.Empty;
         }
 
-
         private void LoadStatusColors() 
         {
             foreach (DataGridViewRow row in dgJEV.Rows)
             {
-                switch (row.Cells["status"].Value)
-                {
-                    case "Approved":
-                        row.Cells["status"].Style.ForeColor = Color.Green;
-                        break;
-
-                    case "Disapproved":
-                        row.Cells["status"].Style.ForeColor = Color.Red;
-                        break;
-
-                    case "Cancelled":
-                        row.Cells["status"].Style.ForeColor = Color.Violet;
-                        break;
-
-                    case "Pending":
-                        row.Cells["status"].Style.ForeColor = Color.Gold;
-                        break;
-
-                    default:
-                        break;
-                }
+                string status = row.Cells["status"].Value.ToString();
+                row.Cells["status"].Style.BackColor = Helper.StatusColor(status);
+                row.Cells["status"].Style.SelectionBackColor = Helper.StatusColor(status);
+                row.Cells["status"].Style.Format.ToUpper();
             }
         }
-
-
 
         internal void LoadJEVList()
         {
@@ -145,7 +125,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 HelperLoadRecords.JEVDatagridView(dgJEV);
                 dgJEV.Rows.Clear();
 
-                byte jevStatus = (byte)cmbxJevStatus.SelectedIndex;
+                string jevStatus = cmbxJevStatus.Text.ToLower();
                 string journalName = cmbxJournals.Text.Trim();
                 string searchTxt = txtSearch.Text;
                 short month = Convert.ToInt16(cbMonth.SelectedIndex + 1);
@@ -234,16 +214,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-        }
-
-        private void dgJEV_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-           
-        }
-
-        private void dgJEV_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-
         }
     }
 }
