@@ -16,10 +16,21 @@ namespace AccountingSystem.Views.Transactions.JEV
             _frmJEV = frmjev;
         }
 
+        private void PermissionVerification() 
+        {
+            if(_frmJEV.createdById != Helper.UserId)
+                btnAccept.Enabled = false;
+
+            if (!Helper.HasPermission("JEV Approval"))
+                txtRemarks.ReadOnly = true;
+        }
+
         private void frmRemarks_Load(object sender, EventArgs e)
         {
             int jevId = _frmJEV.ucjev1.jevId;
             txtRemarks.Text = Factory.JEVRepository().GetRemarks(jevId);
+            txtRemarks.SelectionStart = 0;
+            PermissionVerification();
         }
 
         private bool SetRemarks()
@@ -63,7 +74,6 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             return false;
         }
-
 
         private void btnAccept_Click(object sender, EventArgs e)
         {

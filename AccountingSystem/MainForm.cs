@@ -185,9 +185,6 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Transaction JEV"))
             {
                 ucjevDashboard1.btnAddJEV.Enabled = false;
-                ucjevDashboard1.lnkPending.Enabled = false;
-                ucjevDashboard1.lnkCancelled.Enabled = false;
-                ucjevDashboard1.linkDisapproved.Enabled = false;
             }
 
             #endregion

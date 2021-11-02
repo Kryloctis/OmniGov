@@ -46,7 +46,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 int index = cmbxJournals.FindString(_journalName);
                 cmbxJournals.SelectedIndex = index;
             }
-
         }
 
         private void LoadSelected()
@@ -54,11 +53,13 @@ namespace AccountingSystem.Views.Transactions.JEV
             int rowIndex = dgJEV.CurrentCell.RowIndex;
             string jevNo = dgJEV.Rows[rowIndex].Cells["jev_no"].Value.ToString();
             int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
+            int createdById = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["created_by_id"].Value);
 
             var newFrmJev = new frmJEV(this, _ucJEVDashboard);
             var ucFrmJev = newFrmJev.ucjev1;
             ucFrmJev.jevNo = jevNo;
             ucFrmJev.jevId = jevId;
+            newFrmJev.createdById = createdById;
             newFrmJev.ShowDialog();
 
         }
