@@ -109,6 +109,7 @@ namespace AccountingSystem.Views.Reports.RCI
             this.Controls.Add(this.btnRetrieve);
             this.Controls.Add(this.panel1);
             this.Name = "frmRCIReport";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Report > Report of Checks Issued";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

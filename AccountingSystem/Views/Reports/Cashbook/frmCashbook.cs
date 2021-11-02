@@ -118,7 +118,7 @@ namespace AccountingSystem.Views.Reports.Cashbook
         {
             if(cmbbank.SelectedIndex == -1)
             {
-                errorProvider.SetError(cmbbank, "Please select Bank!");
+                Helper.MessageBoxError("Please select Bank!");
                 cmbbank.Focus();
             }
             else

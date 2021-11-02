@@ -82,6 +82,7 @@ namespace AccountingSystem.Views.Reports.DailyCashReport
             this.Controls.Add(this.dtdate);
             this.Controls.Add(this.panel1);
             this.Name = "frmDailyCash";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmDailyCash";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

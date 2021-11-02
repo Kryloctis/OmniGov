@@ -414,5 +414,33 @@ namespace AccountingSystem
 
             return false;
         }
+
+        public static void createTabPage(TabControl tcontrol, TabPage tpage, string name, string headertext, Control ctrl)
+        {
+            bool found = false; 
+            tpage.Name = name;
+            foreach (TabPage page in tcontrol.TabPages)
+                if (tpage.Name.Equals(page.Name))
+                {
+                    page.Controls.Clear();
+                    page.Controls.Add(ctrl);
+                    page.AutoScroll = true;
+                    ctrl.Dock = DockStyle.Fill;
+                    tcontrol.SelectedTab = page;
+                    page.Focus();
+                    found = true;
+                }
+            if (!found)
+            {
+                tcontrol.TabPages.Add(tpage);
+                tpage.Parent = tcontrol;
+                tpage.Text = headertext;
+                tpage.Controls.Add(ctrl);
+                ctrl.Dock = DockStyle.Fill;
+                tcontrol.SelectedTab = tpage;
+                tpage.Focus();
+            }
+        }
+
     }
 }

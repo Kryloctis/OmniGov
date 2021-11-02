@@ -83,6 +83,7 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnRetrieve);
             this.Name = "frmConsolidatedReceipts";
+            this.ShowInTaskbar = false;
             this.Text = "Reports > Consolidated Report of Accountability for Accountable Forms";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmConsolidatedReceipts_Load);
