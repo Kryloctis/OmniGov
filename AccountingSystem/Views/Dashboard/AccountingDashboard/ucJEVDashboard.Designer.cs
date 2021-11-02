@@ -41,10 +41,10 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlJEV = new System.Windows.Forms.Panel();
             this.lnkJEV = new System.Windows.Forms.LinkLabel();
             this.lblJEVCounter = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlDisapproved = new System.Windows.Forms.Panel();
             this.linkDisapproved = new System.Windows.Forms.LinkLabel();
             this.lblDisapprovedJEVCounter = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.pnlCancelled = new System.Windows.Forms.Panel();
             this.lnkCancelled = new System.Windows.Forms.LinkLabel();
             this.lblCancelledJEVCounter = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -56,8 +56,8 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlPendingJEV.SuspendLayout();
             this.pnlApprovedJEV.SuspendLayout();
             this.pnlJEV.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.pnlDisapproved.SuspendLayout();
+            this.pnlCancelled.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
             this.SuspendLayout();
@@ -88,8 +88,8 @@ namespace AccountingSystem.Views.Dashboard
             this.tableLayoutPanel1.Controls.Add(this.pnlPendingJEV, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.pnlApprovedJEV, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.pnlJEV, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel2, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pnlDisapproved, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pnlCancelled, 4, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 39);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -223,18 +223,18 @@ namespace AccountingSystem.Views.Dashboard
             this.lblJEVCounter.Text = "0";
             this.lblJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // panel1
+            // pnlDisapproved
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.linkDisapproved);
-            this.panel1.Controls.Add(this.lblDisapprovedJEVCounter);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(537, 17);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel1.MinimumSize = new System.Drawing.Size(171, 151);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(172, 154);
-            this.panel1.TabIndex = 22;
+            this.pnlDisapproved.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlDisapproved.Controls.Add(this.linkDisapproved);
+            this.pnlDisapproved.Controls.Add(this.lblDisapprovedJEVCounter);
+            this.pnlDisapproved.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDisapproved.Location = new System.Drawing.Point(537, 17);
+            this.pnlDisapproved.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pnlDisapproved.MinimumSize = new System.Drawing.Size(171, 151);
+            this.pnlDisapproved.Name = "pnlDisapproved";
+            this.pnlDisapproved.Size = new System.Drawing.Size(172, 154);
+            this.pnlDisapproved.TabIndex = 22;
             // 
             // linkDisapproved
             // 
@@ -264,18 +264,18 @@ namespace AccountingSystem.Views.Dashboard
             this.lblDisapprovedJEVCounter.Text = "0";
             this.lblDisapprovedJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // panel2
+            // pnlCancelled
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.panel2.Controls.Add(this.lnkCancelled);
-            this.panel2.Controls.Add(this.lblCancelledJEVCounter);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(715, 17);
-            this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel2.MinimumSize = new System.Drawing.Size(171, 151);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(176, 154);
-            this.panel2.TabIndex = 23;
+            this.pnlCancelled.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlCancelled.Controls.Add(this.lnkCancelled);
+            this.pnlCancelled.Controls.Add(this.lblCancelledJEVCounter);
+            this.pnlCancelled.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlCancelled.Location = new System.Drawing.Point(715, 17);
+            this.pnlCancelled.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pnlCancelled.MinimumSize = new System.Drawing.Size(171, 151);
+            this.pnlCancelled.Name = "pnlCancelled";
+            this.pnlCancelled.Size = new System.Drawing.Size(176, 154);
+            this.pnlCancelled.TabIndex = 23;
             // 
             // lnkCancelled
             // 
@@ -397,8 +397,8 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlPendingJEV.ResumeLayout(false);
             this.pnlApprovedJEV.ResumeLayout(false);
             this.pnlJEV.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
+            this.pnlDisapproved.ResumeLayout(false);
+            this.pnlCancelled.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();
             this.ResumeLayout(false);
@@ -410,13 +410,13 @@ namespace AccountingSystem.Views.Dashboard
         internal System.Windows.Forms.Label lblPSunobligatedBalance;
         private System.Windows.Forms.Button btnRefreshCounter;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlDisapproved;
         internal System.Windows.Forms.Label lblDisapprovedJEVCounter;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         internal System.Windows.Forms.NumericUpDown nudYear;
         private System.Windows.Forms.ComboBox cbMonth;
         private System.Windows.Forms.ComboBox cmbxJournals;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel pnlCancelled;
         internal System.Windows.Forms.LinkLabel lnkCancelled;
         internal System.Windows.Forms.Label lblCancelledJEVCounter;
         private System.Windows.Forms.Panel pnlPendingJEV;
