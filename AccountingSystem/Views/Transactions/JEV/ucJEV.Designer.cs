@@ -96,10 +96,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.groupFunds.Controls.Add(this.flowLayoutPanelFunds);
             this.groupFunds.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupFunds.Location = new System.Drawing.Point(3, 0);
-            this.groupFunds.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupFunds.Name = "groupFunds";
-            this.groupFunds.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupFunds.Size = new System.Drawing.Size(1109, 81);
+            this.groupFunds.Size = new System.Drawing.Size(970, 61);
             this.groupFunds.TabIndex = 9;
             this.groupFunds.TabStop = false;
             this.groupFunds.Text = "Funds";
@@ -109,10 +107,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.flowLayoutPanelFunds.AutoSize = true;
             this.flowLayoutPanelFunds.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelFunds.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.flowLayoutPanelFunds.Location = new System.Drawing.Point(3, 24);
-            this.flowLayoutPanelFunds.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.flowLayoutPanelFunds.Location = new System.Drawing.Point(3, 19);
             this.flowLayoutPanelFunds.Name = "flowLayoutPanelFunds";
-            this.flowLayoutPanelFunds.Size = new System.Drawing.Size(1103, 53);
+            this.flowLayoutPanelFunds.Size = new System.Drawing.Size(964, 39);
             this.flowLayoutPanelFunds.TabIndex = 0;
             // 
             // groupJournals
@@ -120,11 +117,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.groupJournals.AutoSize = true;
             this.groupJournals.Controls.Add(this.flowLayoutPanelJournals);
             this.groupJournals.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupJournals.Location = new System.Drawing.Point(3, 89);
-            this.groupJournals.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupJournals.Location = new System.Drawing.Point(3, 67);
             this.groupJournals.Name = "groupJournals";
-            this.groupJournals.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupJournals.Size = new System.Drawing.Size(1109, 125);
+            this.groupJournals.Size = new System.Drawing.Size(970, 94);
             this.groupJournals.TabIndex = 10;
             this.groupJournals.TabStop = false;
             this.groupJournals.Text = "Journals";
@@ -133,18 +128,16 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.flowLayoutPanelJournals.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelJournals.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.flowLayoutPanelJournals.Location = new System.Drawing.Point(3, 24);
-            this.flowLayoutPanelJournals.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.flowLayoutPanelJournals.Location = new System.Drawing.Point(3, 19);
             this.flowLayoutPanelJournals.Name = "flowLayoutPanelJournals";
-            this.flowLayoutPanelJournals.Size = new System.Drawing.Size(1103, 97);
+            this.flowLayoutPanelJournals.Size = new System.Drawing.Size(964, 72);
             this.flowLayoutPanelJournals.TabIndex = 0;
             // 
             // btnRemoveAccount
             // 
-            this.btnRemoveAccount.Location = new System.Drawing.Point(1031, 697);
-            this.btnRemoveAccount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnRemoveAccount.Location = new System.Drawing.Point(902, 523);
             this.btnRemoveAccount.Name = "btnRemoveAccount";
-            this.btnRemoveAccount.Size = new System.Drawing.Size(86, 31);
+            this.btnRemoveAccount.Size = new System.Drawing.Size(75, 23);
             this.btnRemoveAccount.TabIndex = 12;
             this.btnRemoveAccount.Text = "Remove";
             this.btnRemoveAccount.UseVisualStyleBackColor = true;
@@ -152,10 +145,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // btnEditAccount
             // 
-            this.btnEditAccount.Location = new System.Drawing.Point(938, 697);
-            this.btnEditAccount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnEditAccount.Location = new System.Drawing.Point(821, 523);
             this.btnEditAccount.Name = "btnEditAccount";
-            this.btnEditAccount.Size = new System.Drawing.Size(86, 31);
+            this.btnEditAccount.Size = new System.Drawing.Size(75, 23);
             this.btnEditAccount.TabIndex = 11;
             this.btnEditAccount.Text = "Edit...";
             this.btnEditAccount.UseVisualStyleBackColor = true;
@@ -163,10 +155,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // btnAddAccount
             // 
-            this.btnAddAccount.Location = new System.Drawing.Point(846, 697);
-            this.btnAddAccount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnAddAccount.Location = new System.Drawing.Point(740, 523);
             this.btnAddAccount.Name = "btnAddAccount";
-            this.btnAddAccount.Size = new System.Drawing.Size(86, 31);
+            this.btnAddAccount.Size = new System.Drawing.Size(75, 23);
             this.btnAddAccount.TabIndex = 10;
             this.btnAddAccount.Text = "Add...";
             this.btnAddAccount.UseVisualStyleBackColor = true;
@@ -175,37 +166,35 @@ namespace AccountingSystem.Views.Transactions.JEV
             // lblCollectingDisbursingOfficer
             // 
             this.lblCollectingDisbursingOfficer.AutoSize = true;
-            this.lblCollectingDisbursingOfficer.Location = new System.Drawing.Point(617, 416);
+            this.lblCollectingDisbursingOfficer.Location = new System.Drawing.Point(540, 312);
             this.lblCollectingDisbursingOfficer.Name = "lblCollectingDisbursingOfficer";
-            this.lblCollectingDisbursingOfficer.Size = new System.Drawing.Size(201, 20);
+            this.lblCollectingDisbursingOfficer.Size = new System.Drawing.Size(161, 15);
             this.lblCollectingDisbursingOfficer.TabIndex = 41;
             this.lblCollectingDisbursingOfficer.Text = "Collecting/Disbursing Officer";
             // 
             // txtRCIORADA
             // 
-            this.txtRCIORADA.Location = new System.Drawing.Point(753, 335);
-            this.txtRCIORADA.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtRCIORADA.Location = new System.Drawing.Point(659, 251);
             this.txtRCIORADA.MaxLength = 30;
             this.txtRCIORADA.Name = "txtRCIORADA";
-            this.txtRCIORADA.Size = new System.Drawing.Size(359, 27);
+            this.txtRCIORADA.Size = new System.Drawing.Size(315, 23);
             this.txtRCIORADA.TabIndex = 7;
             // 
             // lblRciOrADANo
             // 
             this.lblRciOrADANo.AutoSize = true;
-            this.lblRciOrADANo.Location = new System.Drawing.Point(617, 339);
+            this.lblRciOrADANo.Location = new System.Drawing.Point(540, 254);
             this.lblRciOrADANo.Name = "lblRciOrADANo";
-            this.lblRciOrADANo.Size = new System.Drawing.Size(121, 20);
+            this.lblRciOrADANo.Size = new System.Drawing.Size(97, 15);
             this.lblRciOrADANo.TabIndex = 39;
             this.lblRciOrADANo.Text = "RCI/OR/ADA No.";
             // 
             // txtPayee
             // 
-            this.txtPayee.Location = new System.Drawing.Point(93, 301);
-            this.txtPayee.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtPayee.Location = new System.Drawing.Point(81, 226);
             this.txtPayee.MaxLength = 99;
             this.txtPayee.Name = "txtPayee";
-            this.txtPayee.Size = new System.Drawing.Size(359, 27);
+            this.txtPayee.Size = new System.Drawing.Size(315, 23);
             this.txtPayee.TabIndex = 2;
             this.txtPayee.Validating += new System.ComponentModel.CancelEventHandler(this.txtPayee_Validating);
             this.txtPayee.Validated += new System.EventHandler(this.txtPayee_Validated);
@@ -226,12 +215,10 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.obligationNo,
             this.Debit,
             this.Credit});
-            this.dgAccounts.Location = new System.Drawing.Point(5, 461);
-            this.dgAccounts.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgAccounts.Location = new System.Drawing.Point(4, 346);
             this.dgAccounts.Name = "dgAccounts";
-            this.dgAccounts.RowHeadersWidth = 51;
             this.dgAccounts.RowTemplate.Height = 25;
-            this.dgAccounts.Size = new System.Drawing.Size(1109, 231);
+            this.dgAccounts.Size = new System.Drawing.Size(970, 173);
             this.dgAccounts.TabIndex = 37;
             this.dgAccounts.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgAccounts_RowHeaderMouseDoubleClick);
             this.dgAccounts.SelectionChanged += new System.EventHandler(this.dgAccounts_SelectionChanged);
@@ -239,56 +226,44 @@ namespace AccountingSystem.Views.Transactions.JEV
             // FPPId
             // 
             this.FPPId.HeaderText = "FPPId";
-            this.FPPId.MinimumWidth = 6;
             this.FPPId.Name = "FPPId";
             this.FPPId.ReadOnly = true;
             this.FPPId.Visible = false;
-            this.FPPId.Width = 125;
             // 
             // GeneralLedgerId
             // 
             this.GeneralLedgerId.HeaderText = "GeneralLedgerId";
-            this.GeneralLedgerId.MinimumWidth = 6;
             this.GeneralLedgerId.Name = "GeneralLedgerId";
             this.GeneralLedgerId.ReadOnly = true;
             this.GeneralLedgerId.Visible = false;
-            this.GeneralLedgerId.Width = 125;
             // 
             // SubsidiaryLedgerId
             // 
             this.SubsidiaryLedgerId.HeaderText = "SubsidiaryLedgerId";
-            this.SubsidiaryLedgerId.MinimumWidth = 6;
             this.SubsidiaryLedgerId.Name = "SubsidiaryLedgerId";
             this.SubsidiaryLedgerId.ReadOnly = true;
             this.SubsidiaryLedgerId.Visible = false;
-            this.SubsidiaryLedgerId.Width = 125;
             // 
             // IsDebit
             // 
             this.IsDebit.HeaderText = "IsDebit";
-            this.IsDebit.MinimumWidth = 6;
             this.IsDebit.Name = "IsDebit";
             this.IsDebit.ReadOnly = true;
             this.IsDebit.Visible = false;
-            this.IsDebit.Width = 125;
             // 
             // IsDeposit
             // 
             this.IsDeposit.HeaderText = "IsDeposit";
-            this.IsDeposit.MinimumWidth = 6;
             this.IsDeposit.Name = "IsDeposit";
             this.IsDeposit.ReadOnly = true;
             this.IsDeposit.Visible = false;
-            this.IsDeposit.Width = 125;
             // 
             // FPP
             // 
             this.FPP.HeaderText = "FPP";
-            this.FPP.MinimumWidth = 6;
             this.FPP.Name = "FPP";
             this.FPP.ReadOnly = true;
             this.FPP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.FPP.Width = 125;
             // 
             // AccountName
             // 
@@ -303,16 +278,14 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.AccountCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.AccountCode.HeaderText = "Account Code";
-            this.AccountCode.MinimumWidth = 6;
             this.AccountCode.Name = "AccountCode";
             this.AccountCode.ReadOnly = true;
             this.AccountCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.AccountCode.Width = 108;
+            this.AccountCode.Width = 89;
             // 
             // Subsidiary
             // 
             this.Subsidiary.HeaderText = "Subsidiary";
-            this.Subsidiary.MinimumWidth = 6;
             this.Subsidiary.Name = "Subsidiary";
             this.Subsidiary.ReadOnly = true;
             this.Subsidiary.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -321,42 +294,35 @@ namespace AccountingSystem.Views.Transactions.JEV
             // obligationNo
             // 
             this.obligationNo.HeaderText = "Obligation No.";
-            this.obligationNo.MinimumWidth = 6;
             this.obligationNo.Name = "obligationNo";
             this.obligationNo.ReadOnly = true;
-            this.obligationNo.Width = 125;
             // 
             // Debit
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             this.Debit.DefaultCellStyle = dataGridViewCellStyle1;
             this.Debit.HeaderText = "Debit";
-            this.Debit.MinimumWidth = 6;
             this.Debit.Name = "Debit";
             this.Debit.ReadOnly = true;
             this.Debit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Debit.Width = 125;
             // 
             // Credit
             // 
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             this.Credit.DefaultCellStyle = dataGridViewCellStyle2;
             this.Credit.HeaderText = "Credit";
-            this.Credit.MinimumWidth = 6;
             this.Credit.Name = "Credit";
             this.Credit.ReadOnly = true;
             this.Credit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Credit.Width = 125;
             // 
             // txtExplanation
             // 
             this.epExplanation.SetIconAlignment(this.txtExplanation, System.Windows.Forms.ErrorIconAlignment.TopRight);
-            this.txtExplanation.Location = new System.Drawing.Point(93, 340);
-            this.txtExplanation.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtExplanation.Location = new System.Drawing.Point(81, 255);
             this.txtExplanation.MaxLength = 250;
             this.txtExplanation.Multiline = true;
             this.txtExplanation.Name = "txtExplanation";
-            this.txtExplanation.Size = new System.Drawing.Size(359, 107);
+            this.txtExplanation.Size = new System.Drawing.Size(315, 81);
             this.txtExplanation.TabIndex = 3;
             this.txtExplanation.Validating += new System.ComponentModel.CancelEventHandler(this.txtExplanation_Validating);
             this.txtExplanation.Validated += new System.EventHandler(this.txtExplanation_Validated);
@@ -364,57 +330,54 @@ namespace AccountingSystem.Views.Transactions.JEV
             // lblExplanation
             // 
             this.lblExplanation.AutoSize = true;
-            this.lblExplanation.Location = new System.Drawing.Point(0, 344);
+            this.lblExplanation.Location = new System.Drawing.Point(0, 258);
             this.lblExplanation.Name = "lblExplanation";
-            this.lblExplanation.Size = new System.Drawing.Size(87, 20);
+            this.lblExplanation.Size = new System.Drawing.Size(69, 15);
             this.lblExplanation.TabIndex = 35;
             this.lblExplanation.Text = "Explanation";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(617, 227);
+            this.label2.Location = new System.Drawing.Point(540, 170);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 20);
+            this.label2.Size = new System.Drawing.Size(75, 15);
             this.label2.TabIndex = 34;
             this.label2.Text = "Date of Entry";
             // 
             // dtpDateEntry
             // 
-            this.dtpDateEntry.Location = new System.Drawing.Point(753, 219);
-            this.dtpDateEntry.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dtpDateEntry.Location = new System.Drawing.Point(659, 164);
             this.dtpDateEntry.Name = "dtpDateEntry";
-            this.dtpDateEntry.Size = new System.Drawing.Size(359, 27);
+            this.dtpDateEntry.Size = new System.Drawing.Size(315, 23);
             this.dtpDateEntry.TabIndex = 4;
             this.dtpDateEntry.ValueChanged += new System.EventHandler(this.dtpDateEntry_ValueChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 232);
+            this.label1.Location = new System.Drawing.Point(0, 174);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 20);
+            this.label1.Size = new System.Drawing.Size(46, 15);
             this.label1.TabIndex = 32;
             this.label1.Text = "JEV No.";
             // 
             // txtJEVNo
             // 
-            this.txtJEVNo.Location = new System.Drawing.Point(187, 224);
-            this.txtJEVNo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtJEVNo.Location = new System.Drawing.Point(164, 168);
             this.txtJEVNo.Mask = "0000";
             this.txtJEVNo.Name = "txtJEVNo";
-            this.txtJEVNo.Size = new System.Drawing.Size(44, 27);
+            this.txtJEVNo.Size = new System.Drawing.Size(39, 23);
             this.txtJEVNo.TabIndex = 0;
             this.txtJEVNo.Validating += new System.ComponentModel.CancelEventHandler(this.txtJEVNo_Validating);
             this.txtJEVNo.Validated += new System.EventHandler(this.txtJEVNo_Validated);
             // 
             // txtFundsJevNo
             // 
-            this.txtFundsJevNo.Location = new System.Drawing.Point(93, 224);
-            this.txtFundsJevNo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtFundsJevNo.Location = new System.Drawing.Point(81, 168);
             this.txtFundsJevNo.Name = "txtFundsJevNo";
             this.txtFundsJevNo.ReadOnly = true;
-            this.txtFundsJevNo.Size = new System.Drawing.Size(90, 27);
+            this.txtFundsJevNo.Size = new System.Drawing.Size(79, 23);
             this.txtFundsJevNo.TabIndex = 45;
             this.txtFundsJevNo.Text = "000-0000-00";
             // 
@@ -425,19 +388,18 @@ namespace AccountingSystem.Views.Transactions.JEV
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 705);
+            this.label5.Location = new System.Drawing.Point(7, 529);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(46, 20);
+            this.label5.Size = new System.Drawing.Size(35, 15);
             this.label5.TabIndex = 46;
             this.label5.Text = "Debit";
             // 
             // txtDebitTotal
             // 
-            this.txtDebitTotal.Location = new System.Drawing.Point(55, 700);
-            this.txtDebitTotal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtDebitTotal.Location = new System.Drawing.Point(48, 525);
             this.txtDebitTotal.Name = "txtDebitTotal";
             this.txtDebitTotal.ReadOnly = true;
-            this.txtDebitTotal.Size = new System.Drawing.Size(114, 27);
+            this.txtDebitTotal.Size = new System.Drawing.Size(100, 23);
             this.txtDebitTotal.TabIndex = 47;
             this.txtDebitTotal.TabStop = false;
             this.txtDebitTotal.Text = "0.00";
@@ -445,11 +407,10 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // txtCreditTotal
             // 
-            this.txtCreditTotal.Location = new System.Drawing.Point(230, 699);
-            this.txtCreditTotal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCreditTotal.Location = new System.Drawing.Point(201, 524);
             this.txtCreditTotal.Name = "txtCreditTotal";
             this.txtCreditTotal.ReadOnly = true;
-            this.txtCreditTotal.Size = new System.Drawing.Size(114, 27);
+            this.txtCreditTotal.Size = new System.Drawing.Size(100, 23);
             this.txtCreditTotal.TabIndex = 49;
             this.txtCreditTotal.TabStop = false;
             this.txtCreditTotal.Text = "0.00";
@@ -458,9 +419,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(183, 704);
+            this.label6.Location = new System.Drawing.Point(160, 528);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(49, 20);
+            this.label6.Size = new System.Drawing.Size(39, 15);
             this.label6.TabIndex = 48;
             this.label6.Text = "Credit";
             // 
@@ -472,10 +433,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.cmbCollectingDisbursingOfficer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCollectingDisbursingOfficer.FormattingEnabled = true;
-            this.cmbCollectingDisbursingOfficer.Location = new System.Drawing.Point(753, 412);
-            this.cmbCollectingDisbursingOfficer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cmbCollectingDisbursingOfficer.Location = new System.Drawing.Point(659, 309);
             this.cmbCollectingDisbursingOfficer.Name = "cmbCollectingDisbursingOfficer";
-            this.cmbCollectingDisbursingOfficer.Size = new System.Drawing.Size(359, 28);
+            this.cmbCollectingDisbursingOfficer.Size = new System.Drawing.Size(315, 23);
             this.cmbCollectingDisbursingOfficer.TabIndex = 9;
             this.cmbCollectingDisbursingOfficer.Validating += new System.ComponentModel.CancelEventHandler(this.cmbCollectingDisbursingOfficer_Validating);
             this.cmbCollectingDisbursingOfficer.Validated += new System.EventHandler(this.cmbCollectingDisbursingOfficer_Validated);
@@ -483,70 +443,67 @@ namespace AccountingSystem.Views.Transactions.JEV
             // lblPayee
             // 
             this.lblPayee.AutoSize = true;
-            this.lblPayee.Location = new System.Drawing.Point(0, 305);
+            this.lblPayee.Location = new System.Drawing.Point(0, 229);
             this.lblPayee.Name = "lblPayee";
-            this.lblPayee.Size = new System.Drawing.Size(47, 20);
+            this.lblPayee.Size = new System.Drawing.Size(38, 15);
             this.lblPayee.TabIndex = 51;
             this.lblPayee.Text = "Payee";
             // 
             // txtRefNo
             // 
-            this.txtRefNo.Location = new System.Drawing.Point(93, 263);
-            this.txtRefNo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtRefNo.Location = new System.Drawing.Point(81, 197);
             this.txtRefNo.Name = "txtRefNo";
-            this.txtRefNo.Size = new System.Drawing.Size(359, 27);
+            this.txtRefNo.Size = new System.Drawing.Size(315, 23);
             this.txtRefNo.TabIndex = 1;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(0, 267);
+            this.label7.Location = new System.Drawing.Point(0, 200);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(58, 20);
+            this.label7.Size = new System.Drawing.Size(46, 15);
             this.label7.TabIndex = 53;
             this.label7.Text = "Ref No.";
             // 
             // lblCheckORPaidDate
             // 
             this.lblCheckORPaidDate.AutoSize = true;
-            this.lblCheckORPaidDate.Location = new System.Drawing.Point(617, 265);
+            this.lblCheckORPaidDate.Location = new System.Drawing.Point(540, 199);
             this.lblCheckORPaidDate.Name = "lblCheckORPaidDate";
-            this.lblCheckORPaidDate.Size = new System.Drawing.Size(144, 20);
+            this.lblCheckORPaidDate.Size = new System.Drawing.Size(116, 15);
             this.lblCheckORPaidDate.TabIndex = 55;
             this.lblCheckORPaidDate.Text = "Check/OR/Paid Date";
             // 
             // dtpCheckORPaid
             // 
-            this.dtpCheckORPaid.Location = new System.Drawing.Point(753, 257);
-            this.dtpCheckORPaid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dtpCheckORPaid.Location = new System.Drawing.Point(659, 193);
             this.dtpCheckORPaid.Name = "dtpCheckORPaid";
-            this.dtpCheckORPaid.Size = new System.Drawing.Size(359, 27);
+            this.dtpCheckORPaid.Size = new System.Drawing.Size(315, 23);
             this.dtpCheckORPaid.TabIndex = 5;
             // 
             // txtDVRCDNo
             // 
-            this.txtDVRCDNo.Location = new System.Drawing.Point(753, 373);
-            this.txtDVRCDNo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtDVRCDNo.Location = new System.Drawing.Point(659, 280);
             this.txtDVRCDNo.MaxLength = 30;
             this.txtDVRCDNo.Name = "txtDVRCDNo";
-            this.txtDVRCDNo.Size = new System.Drawing.Size(359, 27);
+            this.txtDVRCDNo.Size = new System.Drawing.Size(315, 23);
             this.txtDVRCDNo.TabIndex = 8;
             // 
             // lblDVRCDNo
             // 
             this.lblDVRCDNo.AutoSize = true;
-            this.lblDVRCDNo.Location = new System.Drawing.Point(617, 377);
+            this.lblDVRCDNo.Location = new System.Drawing.Point(540, 283);
             this.lblDVRCDNo.Name = "lblDVRCDNo";
-            this.lblDVRCDNo.Size = new System.Drawing.Size(91, 20);
+            this.lblDVRCDNo.Size = new System.Drawing.Size(72, 15);
             this.lblDVRCDNo.TabIndex = 57;
             this.lblDVRCDNo.Text = "DV/RCD No.";
             // 
             // lblCheckNo
             // 
             this.lblCheckNo.AutoSize = true;
-            this.lblCheckNo.Location = new System.Drawing.Point(617, 300);
+            this.lblCheckNo.Location = new System.Drawing.Point(540, 225);
             this.lblCheckNo.Name = "lblCheckNo";
-            this.lblCheckNo.Size = new System.Drawing.Size(75, 20);
+            this.lblCheckNo.Size = new System.Drawing.Size(62, 15);
             this.lblCheckNo.TabIndex = 61;
             this.lblCheckNo.Text = "Check No.";
             // 
@@ -556,10 +513,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // txtCheckNo
             // 
-            this.txtCheckNo.Location = new System.Drawing.Point(753, 296);
-            this.txtCheckNo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCheckNo.Location = new System.Drawing.Point(659, 222);
             this.txtCheckNo.Name = "txtCheckNo";
-            this.txtCheckNo.Size = new System.Drawing.Size(359, 27);
+            this.txtCheckNo.Size = new System.Drawing.Size(315, 23);
             this.txtCheckNo.TabIndex = 62;
             // 
             // epCollectingDisbursing
@@ -568,7 +524,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // ucJEV
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.Controls.Add(this.txtCheckNo);
@@ -602,9 +558,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.Controls.Add(this.txtJEVNo);
             this.Controls.Add(this.groupJournals);
             this.Controls.Add(this.groupFunds);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ucJEV";
-            this.Size = new System.Drawing.Size(1137, 735);
+            this.Size = new System.Drawing.Size(995, 551);
             this.Load += new System.EventHandler(this.ucJEV_Load);
             this.groupFunds.ResumeLayout(false);
             this.groupFunds.PerformLayout();

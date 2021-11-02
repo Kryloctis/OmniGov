@@ -77,11 +77,13 @@ namespace AccountingSystem.Views.Manage.Receipts
                 bool issued = rRepository.AllowEdit(id);
                 btnEdit.Enabled = issued ? false:true;
                 btnDelete.Enabled = issued ? false : true;
+                btnissue.Enabled = issued && isconsumed ? false:true;
             }
             else
             {
                 btnEdit.Enabled = false;
                 btnDelete.Enabled = false;
+                btnissue.Enabled = false;
             }
         }
 
@@ -125,6 +127,16 @@ namespace AccountingSystem.Views.Manage.Receipts
             }
         }
 
+        private void btnissue_Click(object sender, EventArgs e)
+        {
+            if (dgreceipts.SelectedRows.Count > 0)
+            {
+                int id = int.Parse(dgreceipts.CurrentRow.Cells[0].Value.ToString());
+                frmReceipts frmr = new frmReceipts();
+                frmReceiptsAdd frmra = new frmReceiptsAdd(frmr, id);
+                frmra.ShowDialog();
+            }
+        }
 
         private void dgreceipts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

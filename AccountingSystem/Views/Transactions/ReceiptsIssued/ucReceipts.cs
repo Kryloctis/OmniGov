@@ -18,8 +18,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         internal int RId = 0;
         internal int startingreceipt = 0;
         internal int maxreceipt = 0;
-        internal int maxtickets = 0;
-        internal bool istickets = false;
         public ucReceipts()
         {
             InitializeComponent();
@@ -87,7 +85,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             {
                 var riRepository = Factory.ReceiptsIssuedRepository();
                 var dtri = riRepository.GetRecords(id);
-                dtri.Columns.Add("details", typeof(string), "IIF(acc_form_desc LIKE '*Tickets*',acc_form_no +'-'+acc_form_desc+' ('+quantity+')',acc_form_no +'-'+acc_form_desc+' ('+receiptsfrom+'-'+receiptsto+')')");
+                dtri.Columns.Add("details", typeof(string), "acc_form_no +'-'+acc_form_desc+' ('+receiptsfrom+'-'+receiptsto+')'");
                 cmbreceipt.DataSource = dtri;
                 cmbreceipt.ValueMember = "id";
                 cmbreceipt.DisplayMember = "details";
@@ -122,17 +120,12 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void txtfrom_Validating(object sender, CancelEventArgs e)
         {
-           
-            if (!istickets)
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtfrom, "Receipt No. From!");
+            if(Convert.ToInt32(txtfrom.Text.Trim()) < startingreceipt)
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtfrom, "Receipt No. From!");
-                if (int.Parse(txtfrom.Text.Trim()) < startingreceipt)
-                {
-                    errorProvider.SetError(txtfrom, "Invalid Receipt Number!");
-                    e.Cancel = true;
-                }
+                errorProvider.SetError(txtfrom, "Invalid Receipt Number!");
+                e.Cancel = true;
             }
-          
         }
 
         private void txtto_Validated(object sender, EventArgs e)
@@ -142,18 +135,13 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void txtto_Validating(object sender, CancelEventArgs e)
         {
-            
-            if (!istickets)
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtto, "Receipt No. To!");
+            if (Convert.ToInt32(txtto.Text.Trim()) > maxreceipt)
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtto, "Receipt No. To!");
-                if (int.Parse(txtto.Text.Trim()) > maxreceipt)
-                {
 
-                    errorProvider.SetError(txtto, "Invalid Receipt Number!");
-                    e.Cancel = true;
-                }
+                errorProvider.SetError(txtto, "Invalid Receipt Number!");
+                e.Cancel = true;
             }
-         
         }
 
         private void txtquantity_Validated(object sender, EventArgs e)
@@ -163,19 +151,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void txtquantity_Validating(object sender, CancelEventArgs e)
         {
-            if (!istickets)
-            {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtquantity, "Quantity!");
-               
-            }
-            else
-            {
-                if (int.Parse(txtquantity.Text.Trim()) > maxtickets)
-                {
-                    errorProvider.SetError(txtquantity, "Invalid Quantity Number!");
-                    e.Cancel = true;
-                }
-            }
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtquantity, "Quantity!");
         }
 
         private void txtfrom_KeyPress(object sender, KeyPressEventArgs e)
@@ -198,45 +174,20 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void txtfrom_KeyUp(object sender, KeyEventArgs e)
         {
-            int from = txtfrom.Text.Length > 0 ? int.Parse(txtfrom.Text.Trim()) : 0;
-            int to = txtto.Text.Length > 0 ? int.Parse(txtto.Text.Trim()) : 0;
+            int from = txtfrom.Text.Length > 0 ? Convert.ToInt32(txtfrom.Text.Trim()) : 0;
+            int to = txtto.Text.Length > 0 ? Convert.ToInt32(txtto.Text.Trim()) : 0;
             //txtquantity.Text = from.Equals(1) ? ((from + to) - from).ToString() : from==to ? "1":(to - from).ToString();
             txtquantity.Text = ((to - from) + 1).ToString();
         }
 
         private void txtto_KeyUp(object sender, KeyEventArgs e)
         {
-            int from = txtfrom.Text.Length > 0 ? int.Parse(txtfrom.Text.Trim()) : 0;
-            int to = txtto.Text.Length > 0 ? int.Parse(txtto.Text.Trim()) : 0;
+            int from = txtfrom.Text.Length > 0 ? Convert.ToInt32(txtfrom.Text.Trim()) : 0;
+            int to = txtto.Text.Length > 0 ? Convert.ToInt32(txtto.Text.Trim()) : 0;
             txtquantity.Text = ((to - from) + 1).ToString();
         }
 
-        internal string NextTicket(int id)
-        {
-            string data = string.Empty;
-            try
-            {
-                var riRepository = Factory.ReceiptsRepository();
-                var dtri = riRepository.NextTicket(id);
-                int last = 0;
-                if(dtri.Rows.Count > 0)
-                {
-                    for (int i = 0; i < dtri.Rows.Count; i++)
-                    {
-                        last = dtri.Rows[i]["issuelast"].Equals(DBNull.Value) ? 0 : int.Parse(dtri.Rows[i]["issuelast"].ToString());
-                        maxtickets = dtri.Rows[i]["quantity"].Equals(DBNull.Value) ? 0 : int.Parse(dtri.Rows[i]["quantity"].ToString());
-                    }
-           
-                    data = (maxtickets - last).ToString();
-                }
-                else
-                {
-                    data = 1.ToString();
-                }
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            return data;
-        }
+
         internal string NextReceipt(int id)
         {
             string data = string.Empty;
@@ -254,11 +205,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                         bool returned = dtri.Rows[i]["is_returned"].Equals(DBNull.Value) ? false : true;
                         if (returned)
                         {
-                            last = dtri.Rows[i]["issuelast"].Equals(DBNull.Value) ? 0 : int.Parse(dtri.Rows[i]["issuelast"].ToString());
+                            last = dtri.Rows[i]["issuelast"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtri.Rows[i]["issuelast"]);
                         }
                         else
                         {
-                            last = dtri.Rows[i]["issuelast"].Equals(DBNull.Value) ? 0 : int.Parse(dtri.Rows[i]["issuelast"].ToString());
+                            last = dtri.Rows[i]["issuelast"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtri.Rows[i]["issuelast"]);
                         }                       
                     }
                     startingreceipt = last+1;
@@ -270,8 +221,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
                     for (int i = 0; i < dtri2.Rows.Count; i++)
                     {
-                        first = dtri2.Rows[i]["receiptsfrom"].Equals(DBNull.Value) ? 0 : int.Parse(dtri2.Rows[i]["receiptsfrom"].ToString());
-                        maxreceipt = dtri2.Rows[i]["receiptsto"].Equals(DBNull.Value) ? 0 : int.Parse(dtri2.Rows[i]["receiptsto"].ToString());
+                        first = dtri2.Rows[i]["receiptsfrom"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtri2.Rows[i]["receiptsfrom"]);
+                        maxreceipt = dtri2.Rows[i]["receiptsto"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtri2.Rows[i]["receiptsto"]);
                     }
                     if (startingreceipt <= 0)
                     {
@@ -297,26 +248,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 DataRowView item = cmbreceipt.SelectedItem as DataRowView;
                 if(item != null)
                 {
-                    if (item[10].ToString().Contains("Tickets"))
-                    {
-                        istickets = true;
-                        txtfrom.Enabled = false;
-                        txtto.Enabled = false;
-                        txtquantity.ReadOnly = false;
-
-                        txtfrom.Text = "0";
-                        txtto.Text = "0";
-                        txtquantity.Text = NextTicket(int.Parse(item[0].ToString()));
-                    }
-                    else
-                    {
-                        istickets = false;
-                        txtfrom.Enabled = true;
-                        txtto.Enabled = true;
-                        txtquantity.ReadOnly = true;
-                        txtfrom.Text = NextReceipt(int.Parse(item[0].ToString()));
-                    }
-                    
+                    txtfrom.Text = NextReceipt(Convert.ToInt32(item[0]));
                 }
                 
             }
@@ -328,19 +260,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             {
                 DataRowView item = cmbcollector.SelectedItem as DataRowView;
                 if(item != null)
-                {                    
-                    LoadReceipts(int.Parse(item[0].ToString()));
+                {
+                    LoadReceipts(Convert.ToInt32(item[0]));
                 }
              
-            }
-        }
-
-        private void txtquantity_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-
             }
         }
     }

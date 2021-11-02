@@ -99,20 +99,11 @@ namespace AccountingSystem.Views.Reports.RCI
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            if (cmbBanks.SelectedIndex == -1)
-            {
-                Helper.MessageBoxError("Please select Bank!");
-                cmbBanks.Focus();
-            }
-            else
-            {
-                LoadReport(reportViewer.LocalReport);
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-                reportViewer.RefreshReport();
-            }
-         
+            LoadReport(reportViewer.LocalReport);
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.Percent;
+            reportViewer.ZoomPercent = 100;
+            reportViewer.RefreshReport();
         }
     }
 }
