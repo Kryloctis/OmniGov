@@ -39,7 +39,6 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgAccform = new System.Windows.Forms.DataGridView();
             this.txtsearch = new System.Windows.Forms.TextBox();
-            this.btnFace = new System.Windows.Forms.ToolStripButton();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAccform)).BeginInit();
@@ -52,12 +51,11 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAdd,
             this.btnEdit,
-            this.btnDelete,
-            this.btnFace});
+            this.btnDelete});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.toolStrip.Size = new System.Drawing.Size(848, 65);
+            this.toolStrip.Padding = new System.Windows.Forms.Padding(4);
+            this.toolStrip.Size = new System.Drawing.Size(742, 58);
             this.toolStrip.TabIndex = 7;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -67,7 +65,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(41, 52);
+            this.btnAdd.Size = new System.Drawing.Size(33, 47);
             this.btnAdd.Text = "Add";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -79,7 +77,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(39, 52);
+            this.btnEdit.Size = new System.Drawing.Size(32, 47);
             this.btnEdit.Text = "Edit";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -91,7 +89,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(57, 52);
+            this.btnDelete.Size = new System.Drawing.Size(44, 47);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -103,28 +101,29 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.toolStripStatusLabel1,
             this.lblRecordCount,
             this.toolStripStatusLabel4});
-            this.statusStrip.Location = new System.Drawing.Point(0, 430);
+            this.statusStrip.Location = new System.Drawing.Point(0, 320);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(848, 26);
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
+            this.statusStrip.Size = new System.Drawing.Size(742, 22);
             this.statusStrip.TabIndex = 8;
             this.statusStrip.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(65, 20);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
             this.toolStripStatusLabel1.Text = "Records:";
             // 
             // lblRecordCount
             // 
             this.lblRecordCount.Name = "lblRecordCount";
-            this.lblRecordCount.Size = new System.Drawing.Size(17, 20);
+            this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
             this.lblRecordCount.Text = "0";
             // 
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(751, 20);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(664, 17);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // dgAccform
@@ -133,12 +132,13 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgAccform.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgAccform.Location = new System.Drawing.Point(16, 80);
+            this.dgAccform.Location = new System.Drawing.Point(14, 60);
+            this.dgAccform.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgAccform.Name = "dgAccform";
             this.dgAccform.RowHeadersWidth = 51;
             this.dgAccform.RowTemplate.Height = 29;
             this.dgAccform.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgAccform.Size = new System.Drawing.Size(816, 329);
+            this.dgAccform.Size = new System.Drawing.Size(714, 247);
             this.dgAccform.TabIndex = 9;
             this.dgAccform.SelectionChanged += new System.EventHandler(this.dgAccform_SelectionChanged);
             // 
@@ -146,33 +146,23 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(542, 44);
+            this.txtsearch.Location = new System.Drawing.Point(474, 33);
+            this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.Size = new System.Drawing.Size(290, 27);
+            this.txtsearch.Size = new System.Drawing.Size(254, 23);
             this.txtsearch.TabIndex = 10;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
-            // btnFace
-            // 
-            this.btnFace.Enabled = false;
-            this.btnFace.Image = global::AccountingSystem.Properties.Resources.account_book_28px;
-            this.btnFace.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnFace.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnFace.Name = "btnFace";
-            this.btnFace.Size = new System.Drawing.Size(82, 52);
-            this.btnFace.Text = "Face Value";
-            this.btnFace.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnFace.Click += new System.EventHandler(this.btnFace_Click);
-            // 
             // frmAccountable
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(848, 456);
+            this.ClientSize = new System.Drawing.Size(742, 342);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.dgAccform);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "frmAccountable";
             this.ShowInTaskbar = false;
@@ -201,6 +191,5 @@ namespace AccountingSystem.Views.Manage.AccountableForm
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.DataGridView dgAccform;
         private System.Windows.Forms.TextBox txtsearch;
-        private System.Windows.Forms.ToolStripButton btnFace;
     }
 }

@@ -81,17 +81,29 @@ namespace AccountingSystem
         public static IObligationAccountRepository ObligationAccountRepository() => new ObligationAccountRepository(new MySqlGenericCommands());
 
         public static IError CreateErrors(Array errors) => new Error(errors);
+
         public static IBanksRepository BanksRepository() => new BanksRepository(new MySqlGenericCommands());
+
         public static IRCIRepository RCIRepository() => new RCIRepository(new MySqlGenericCommands());
+
         public static IAccountableRepository AccountableRepository() => new AccountableRepository(new MySqlGenericCommands());
+
         public static IPaymentCollectionRepository PaymentCollectionRepository() => new PaymentCollectionRepository(new MySqlGenericCommands());
+
         public static IBankDepositsRepository BankDepositsRepository() => new BankDepositsRepository(new MySqlGenericCommands());
+
         public static ICollectorReportRepository CollectorReportRepository() => new CollectorReportRepository(new MySqlGenericCommands());
+
         public static ICollectorReportPaymentRepository CollectorReportPaymentRepository() => new CollectorReportPaymentsRepository(new MySqlGenericCommands());
+
         public static IGeneralCollectionsRepository GeneralCollectionsRepository() => new GeneralCollectionsRepository(new MySqlGenericCommands());
+
         public static IGeneralCollectionsPaymentsRepository GeneralCollectionsPaymentsRepository() => new GeneralCollectionsPaymentsRepository(new MySqlGenericCommands());
+
         public static IGeneralCollectionsDepositsRepository GeneralCollectionsDepositsRepository() => new GeneralCollectionsDepositsRepository(new MySqlGenericCommands());
+
         public static IReceiptsRepository ReceiptsRepository() => new ReceiptsRepository(new MySqlGenericCommands());
+
         public static IReceiptsIssuedRepository ReceiptsIssuedRepository() => new ReceiptsIssuedRepository(new MySqlGenericCommands());
 
         public static IJournalsDefaultAccountsRepository JournalsDefaultAccountsRepository() => new JournalsDefaultAccountsRepository(new MySqlGenericCommands());

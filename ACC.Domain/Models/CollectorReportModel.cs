@@ -12,7 +12,5 @@ namespace ACC.Domain.Models
         public DateTime Date { get; set; }
         public int Approved { get; set; }
         public int Fid { get; set; }
-        public string status { get; set; }
-        public string remarks { get; set; }
     }
 }

@@ -292,6 +292,7 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@id", DbType.Int16, roleId },
+                    new object[] { "@office", DbType.String, office},
                     new object[] { "@role_name", DbType.String, roleName },
                 };
 

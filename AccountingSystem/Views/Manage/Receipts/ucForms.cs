@@ -18,7 +18,6 @@ namespace AccountingSystem.Views.Manage.Receipts
         internal int AccId = 0;
         internal int startreceipt = 0;
         internal int maxreceipt = 0;
-        internal bool istickets = false;
         public ucForms()
         {
             InitializeComponent();
@@ -49,7 +48,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             txtto.Text = string.Empty;
             dtpreceived.Value = DateTime.Now;
             txtquantity.Text = string.Empty;
-            
         }
 
         internal void LoadForms()
@@ -78,16 +76,12 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void txtfrom_Validating(object sender, CancelEventArgs e)
         {
-            if (!istickets)
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtfrom, "Receipt Number From!");
+            if (Convert.ToInt32(txtfrom.Text.Trim()) <= maxreceipt || Convert.ToInt32(txtfrom.Text.Trim()) <= 0)
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtfrom, "Receipt Number From!");
-                if (Convert.ToInt32(txtfrom.Text.Trim()) <= maxreceipt || Convert.ToInt32(txtfrom.Text.Trim()) <= 0)
-                {
-                    errorProvider.SetError(txtfrom, "Invalid Receipt Number!");
-                    e.Cancel = true;
-                }
+                errorProvider.SetError(txtfrom, "Invalid Receipt Number!");
+                e.Cancel = true;
             }
-         
         }
 
         private void txtfrom_Validated(object sender, EventArgs e)
@@ -102,11 +96,7 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void txtto_Validating(object sender, CancelEventArgs e)
         {
-            if (!istickets)
-            {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtto, "Receipt Number To!");
-            }
-            
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtto, "Receipt Number To!");
         }
 
         private void txtquantity_Validating(object sender, CancelEventArgs e)
@@ -150,40 +140,25 @@ namespace AccountingSystem.Views.Manage.Receipts
             int from = txtfrom.Text.Length > 0 ? Convert.ToInt32(txtfrom.Text.Trim()) : 0;
             int to = txtto.Text.Length > 0 ? Convert.ToInt32(txtto.Text.Trim()) : 0;
             //txtquantity.Text = from.Equals(1) ? ((from + to) - from).ToString() : from == to ? "1" : (to - from).ToString();
-            txtquantity.Text = (((to - from) + 1) < 0 ? 0: ((to - from) + 1)).ToString();
+            txtquantity.Text = ((to - from) + 1).ToString();
         }
 
         private void txtto_KeyUp(object sender, KeyEventArgs e)
         {
             int from = txtfrom.Text.Length > 0 ? Convert.ToInt32(txtfrom.Text.Trim()) : 0;
             int to = txtto.Text.Length > 0 ? Convert.ToInt32(txtto.Text.Trim()) : 0;
-            txtquantity.Text = (((to - from) + 1) < 0 ? 0 : ((to - from) + 1)).ToString();
+            txtquantity.Text = ((to - from) + 1).ToString();
         }
 
         private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(cmbforms.SelectedIndex != -1)
             {
-                DataRowView item = cmbforms.SelectedItem as DataRowView;
-                if (item != null)
+                if(Id <= 0)
                 {
-                    if (item[2].ToString().Contains("Tickets"))
+                    DataRowView item = cmbforms.SelectedItem as DataRowView;
+                    if (item != null)
                     {
-                        istickets = true;
-                        txtfrom.Enabled = false;
-                        txtto.Enabled = false;
-                        txtquantity.ReadOnly = false;
-
-                        txtfrom.Text = "0";
-                        txtto.Text = "0";
-                        txtquantity.Text = "0";
-                    }
-                    else
-                    {
-                        istickets = false;
-                        txtfrom.Enabled = true;
-                        txtto.Enabled = true;
-                        txtquantity.ReadOnly = true;
                         var reporeceipt = Factory.ReceiptsRepository();
                         startreceipt = reporeceipt.RMIN(int.Parse(item[0].ToString()));
                         maxreceipt = reporeceipt.RMAX(int.Parse(item[0].ToString()));
@@ -191,31 +166,26 @@ namespace AccountingSystem.Views.Manage.Receipts
 
                         int from = txtfrom.Text.Length > 0 ? Convert.ToInt32(txtfrom.Text.Trim()) : 0;
                         int to = txtto.Text.Length > 0 ? Convert.ToInt32(txtto.Text.Trim()) : 0;
-                        txtquantity.Text = (((to - from) + 1) < 0 ? 0 : ((to - from) + 1)).ToString();
+                        txtquantity.Text = ((to - from) + 1).ToString();
                     }
-
-                }
+                }              
             }
         }
 
         private void txtfrom_TextChanged(object sender, EventArgs e)
         {
-            if (!istickets)
+            if(txtfrom.Text.Length > 0)
             {
-                if (txtfrom.Text.Length > 0)
+                int num = int.Parse(txtfrom.Text.Trim());
+                if(num > 1)
                 {
-                    int num = int.Parse(txtfrom.Text.Trim());
-                    if (num > 1)
-                    {
-                        txtfrom.Enabled = false;
-                    }
-                    else
-                    {
-                        txtfrom.Enabled = true;
-                    }
+                    txtfrom.Enabled = false;
+                }
+                else
+                {
+                    txtfrom.Enabled = true;
                 }
             }
-            
         }
     }
 }
