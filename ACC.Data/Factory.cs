@@ -109,6 +109,8 @@ namespace AccountingSystem
         public static IJournalsDefaultAccountsRepository JournalsDefaultAccountsRepository() => new JournalsDefaultAccountsRepository(new MySqlGenericCommands());
 
         public static IBudgetRealignmentRepository BudgetRealignmentRepository() => new BudgetRealignmentRepository(new MySqlGenericCommands());
+        public static IAmortizationRepository AmortizationRepository() => new AmortizationRepository(new MySqlGenericCommands());
+        public static IAmortizationScheduleRepository AmortizationScheduleRepository() => new AmortizationScheduleRepository(new MySqlGenericCommands());
         public static IFaceValueRepository FaceValueRepository() => new FaceValueRepository(new MySqlGenericCommands());
     }
 }

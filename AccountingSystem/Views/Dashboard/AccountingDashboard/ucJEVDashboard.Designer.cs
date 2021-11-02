@@ -67,12 +67,8 @@ namespace AccountingSystem.Views.Dashboard
             this.btnRefreshCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnRefreshCounter.Image = ((System.Drawing.Image)(resources.GetObject("btnRefreshCounter.Image")));
             this.btnRefreshCounter.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-
-            this.btnRefreshCounter.Location = new System.Drawing.Point(698, 3);
-
             this.btnRefreshCounter.Location = new System.Drawing.Point(746, 4);
             this.btnRefreshCounter.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-
             this.btnRefreshCounter.Name = "btnRefreshCounter";
             this.btnRefreshCounter.Size = new System.Drawing.Size(105, 31);
             this.btnRefreshCounter.TabIndex = 13;
@@ -102,11 +98,7 @@ namespace AccountingSystem.Views.Dashboard
             this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 13, 0, 0);
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-<<<<<<< HEAD
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(835, 131);
-=======
             this.tableLayoutPanel1.Size = new System.Drawing.Size(894, 175);
->>>>>>> f74ba83 (Major Changes on RCD, Forms and Added Face Values for Payments)
             this.tableLayoutPanel1.TabIndex = 14;
             // 
             // pnlPendingJEV
@@ -115,18 +107,11 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlPendingJEV.Controls.Add(this.lnkPending);
             this.pnlPendingJEV.Controls.Add(this.lblPendingJEVCounter);
             this.pnlPendingJEV.Dock = System.Windows.Forms.DockStyle.Fill;
-<<<<<<< HEAD
-            this.pnlPendingJEV.Location = new System.Drawing.Point(337, 13);
-            this.pnlPendingJEV.MinimumSize = new System.Drawing.Size(150, 113);
-            this.pnlPendingJEV.Name = "pnlPendingJEV";
-            this.pnlPendingJEV.Size = new System.Drawing.Size(161, 115);
-=======
             this.pnlPendingJEV.Location = new System.Drawing.Point(359, 17);
             this.pnlPendingJEV.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnlPendingJEV.MinimumSize = new System.Drawing.Size(171, 151);
             this.pnlPendingJEV.Name = "pnlPendingJEV";
             this.pnlPendingJEV.Size = new System.Drawing.Size(172, 154);
->>>>>>> f74ba83 (Major Changes on RCD, Forms and Added Face Values for Payments)
             this.pnlPendingJEV.TabIndex = 29;
             // 
             // lnkPending
@@ -134,18 +119,11 @@ namespace AccountingSystem.Views.Dashboard
             this.lnkPending.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
             this.lnkPending.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lnkPending.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkPending.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lnkPending.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-<<<<<<< HEAD
-            this.lnkPending.Location = new System.Drawing.Point(0, 61);
-            this.lnkPending.Name = "lnkPending";
-            this.lnkPending.Size = new System.Drawing.Size(161, 23);
-=======
             this.lnkPending.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lnkPending.Location = new System.Drawing.Point(0, 81);
             this.lnkPending.Name = "lnkPending";
             this.lnkPending.Size = new System.Drawing.Size(172, 31);
->>>>>>> f74ba83 (Major Changes on RCD, Forms and Added Face Values for Payments)
             this.lnkPending.TabIndex = 15;
             this.lnkPending.TabStop = true;
             this.lnkPending.Text = "Pending JEVs";
@@ -155,15 +133,11 @@ namespace AccountingSystem.Views.Dashboard
             // lblPendingJEVCounter
             // 
             this.lblPendingJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblPendingJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblPendingJEVCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblPendingJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblPendingJEVCounter.Location = new System.Drawing.Point(0, 0);
             this.lblPendingJEVCounter.Name = "lblPendingJEVCounter";
-<<<<<<< HEAD
-            this.lblPendingJEVCounter.Size = new System.Drawing.Size(161, 61);
-=======
             this.lblPendingJEVCounter.Size = new System.Drawing.Size(172, 81);
->>>>>>> f74ba83 (Major Changes on RCD, Forms and Added Face Values for Payments)
             this.lblPendingJEVCounter.TabIndex = 6;
             this.lblPendingJEVCounter.Text = "0";
             this.lblPendingJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -174,18 +148,11 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlApprovedJEV.Controls.Add(this.lnkApproved);
             this.pnlApprovedJEV.Controls.Add(this.lblApprovedJEVCounter);
             this.pnlApprovedJEV.Dock = System.Windows.Forms.DockStyle.Fill;
-<<<<<<< HEAD
-            this.pnlApprovedJEV.Location = new System.Drawing.Point(170, 13);
-            this.pnlApprovedJEV.MinimumSize = new System.Drawing.Size(150, 113);
-            this.pnlApprovedJEV.Name = "pnlApprovedJEV";
-            this.pnlApprovedJEV.Size = new System.Drawing.Size(161, 115);
-=======
             this.pnlApprovedJEV.Location = new System.Drawing.Point(181, 17);
             this.pnlApprovedJEV.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnlApprovedJEV.MinimumSize = new System.Drawing.Size(171, 151);
             this.pnlApprovedJEV.Name = "pnlApprovedJEV";
             this.pnlApprovedJEV.Size = new System.Drawing.Size(172, 154);
->>>>>>> f74ba83 (Major Changes on RCD, Forms and Added Face Values for Payments)
             this.pnlApprovedJEV.TabIndex = 28;
             // 
             // lnkApproved
@@ -193,18 +160,11 @@ namespace AccountingSystem.Views.Dashboard
             this.lnkApproved.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
             this.lnkApproved.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lnkApproved.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkApproved.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lnkApproved.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-<<<<<<< HEAD
-            this.lnkApproved.Location = new System.Drawing.Point(0, 61);
-            this.lnkApproved.Name = "lnkApproved";
-            this.lnkApproved.Size = new System.Drawing.Size(161, 23);
-=======
             this.lnkApproved.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lnkApproved.Location = new System.Drawing.Point(0, 81);
             this.lnkApproved.Name = "lnkApproved";
             this.lnkApproved.Size = new System.Drawing.Size(172, 31);
->>>>>>> f74ba83 (Major Changes on RCD, Forms and Added Face Values for Payments)
             this.lnkApproved.TabIndex = 14;
             this.lnkApproved.TabStop = true;
             this.lnkApproved.Text = "Approved JEVs";
@@ -214,15 +174,11 @@ namespace AccountingSystem.Views.Dashboard
             // lblApprovedJEVCounter
             // 
             this.lblApprovedJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblApprovedJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblApprovedJEVCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblApprovedJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblApprovedJEVCounter.Location = new System.Drawing.Point(0, 0);
             this.lblApprovedJEVCounter.Name = "lblApprovedJEVCounter";
-<<<<<<< HEAD
-            this.lblApprovedJEVCounter.Size = new System.Drawing.Size(161, 61);
-=======
             this.lblApprovedJEVCounter.Size = new System.Drawing.Size(172, 81);
->>>>>>> f74ba83 (Major Changes on RCD, Forms and Added Face Values for Payments)
             this.lblApprovedJEVCounter.TabIndex = 6;
             this.lblApprovedJEVCounter.Text = "0";
             this.lblApprovedJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -237,11 +193,7 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlJEV.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnlJEV.MinimumSize = new System.Drawing.Size(171, 151);
             this.pnlJEV.Name = "pnlJEV";
-<<<<<<< HEAD
-            this.pnlJEV.Size = new System.Drawing.Size(161, 115);
-=======
             this.pnlJEV.Size = new System.Drawing.Size(172, 154);
->>>>>>> f74ba83 (Major Changes on RCD, Forms and Added Face Values for Payments)
             this.pnlJEV.TabIndex = 26;
             // 
             // lnkJEV
@@ -249,43 +201,30 @@ namespace AccountingSystem.Views.Dashboard
             this.lnkJEV.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
             this.lnkJEV.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lnkJEV.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkJEV.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lnkJEV.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-<<<<<<< HEAD
-            this.lnkJEV.Location = new System.Drawing.Point(0, 61);
-            this.lnkJEV.Name = "lnkJEV";
-            this.lnkJEV.Size = new System.Drawing.Size(161, 23);
-=======
             this.lnkJEV.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lnkJEV.Location = new System.Drawing.Point(0, 81);
             this.lnkJEV.Name = "lnkJEV";
             this.lnkJEV.Size = new System.Drawing.Size(172, 31);
->>>>>>> f74ba83 (Major Changes on RCD, Forms and Added Face Values for Payments)
             this.lnkJEV.TabIndex = 15;
             this.lnkJEV.TabStop = true;
             this.lnkJEV.Text = "JEV";
             this.lnkJEV.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lnkJEV.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkJEV_LinkClicked);
             // 
             // lblJEVCounter
             // 
             this.lblJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblJEVCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblJEVCounter.Location = new System.Drawing.Point(0, 0);
             this.lblJEVCounter.Name = "lblJEVCounter";
-<<<<<<< HEAD
-            this.lblJEVCounter.Size = new System.Drawing.Size(161, 61);
-=======
             this.lblJEVCounter.Size = new System.Drawing.Size(172, 81);
->>>>>>> f74ba83 (Major Changes on RCD, Forms and Added Face Values for Payments)
             this.lblJEVCounter.TabIndex = 6;
             this.lblJEVCounter.Text = "0";
             this.lblJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // pnlDisapproved
             // 
-<<<<<<< HEAD
             this.pnlDisapproved.BackColor = System.Drawing.SystemColors.Control;
             this.pnlDisapproved.Controls.Add(this.linkDisapproved);
             this.pnlDisapproved.Controls.Add(this.lblDisapprovedJEVCounter);
@@ -296,36 +235,17 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlDisapproved.Name = "pnlDisapproved";
             this.pnlDisapproved.Size = new System.Drawing.Size(172, 154);
             this.pnlDisapproved.TabIndex = 22;
-=======
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.linkDisapproved);
-            this.panel1.Controls.Add(this.lblDisapprovedJEVCounter);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(537, 17);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel1.MinimumSize = new System.Drawing.Size(171, 151);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(172, 154);
-            this.panel1.TabIndex = 22;
->>>>>>> f74ba83 (Major Changes on RCD, Forms and Added Face Values for Payments)
             // 
             // linkDisapproved
             // 
             this.linkDisapproved.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
             this.linkDisapproved.Cursor = System.Windows.Forms.Cursors.Hand;
             this.linkDisapproved.Dock = System.Windows.Forms.DockStyle.Top;
-            this.linkDisapproved.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.linkDisapproved.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-<<<<<<< HEAD
-            this.linkDisapproved.Location = new System.Drawing.Point(0, 61);
-            this.linkDisapproved.Name = "linkDisapproved";
-            this.linkDisapproved.Size = new System.Drawing.Size(161, 23);
-=======
             this.linkDisapproved.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.linkDisapproved.Location = new System.Drawing.Point(0, 81);
             this.linkDisapproved.Name = "linkDisapproved";
             this.linkDisapproved.Size = new System.Drawing.Size(172, 31);
->>>>>>> f74ba83 (Major Changes on RCD, Forms and Added Face Values for Payments)
             this.linkDisapproved.TabIndex = 16;
             this.linkDisapproved.TabStop = true;
             this.linkDisapproved.Text = "Disapproved";
@@ -335,22 +255,17 @@ namespace AccountingSystem.Views.Dashboard
             // lblDisapprovedJEVCounter
             // 
             this.lblDisapprovedJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblDisapprovedJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblDisapprovedJEVCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblDisapprovedJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblDisapprovedJEVCounter.Location = new System.Drawing.Point(0, 0);
             this.lblDisapprovedJEVCounter.Name = "lblDisapprovedJEVCounter";
-<<<<<<< HEAD
-            this.lblDisapprovedJEVCounter.Size = new System.Drawing.Size(161, 61);
-=======
             this.lblDisapprovedJEVCounter.Size = new System.Drawing.Size(172, 81);
->>>>>>> f74ba83 (Major Changes on RCD, Forms and Added Face Values for Payments)
             this.lblDisapprovedJEVCounter.TabIndex = 6;
             this.lblDisapprovedJEVCounter.Text = "0";
             this.lblDisapprovedJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // pnlCancelled
             // 
-
             this.pnlCancelled.BackColor = System.Drawing.SystemColors.Control;
             this.pnlCancelled.Controls.Add(this.lnkCancelled);
             this.pnlCancelled.Controls.Add(this.lblCancelledJEVCounter);
@@ -361,35 +276,17 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlCancelled.Name = "pnlCancelled";
             this.pnlCancelled.Size = new System.Drawing.Size(176, 154);
             this.pnlCancelled.TabIndex = 23;
-
-            this.panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.panel2.Controls.Add(this.lnkCancelled);
-            this.panel2.Controls.Add(this.lblCancelledJEVCounter);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(715, 17);
-            this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel2.MinimumSize = new System.Drawing.Size(171, 151);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(176, 154);
-            this.panel2.TabIndex = 23;
             // 
             // lnkCancelled
             // 
             this.lnkCancelled.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
             this.lnkCancelled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lnkCancelled.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkCancelled.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lnkCancelled.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-
-            this.lnkCancelled.Location = new System.Drawing.Point(0, 61);
-            this.lnkCancelled.Name = "lnkCancelled";
-            this.lnkCancelled.Size = new System.Drawing.Size(161, 23);
-
             this.lnkCancelled.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lnkCancelled.Location = new System.Drawing.Point(0, 81);
             this.lnkCancelled.Name = "lnkCancelled";
             this.lnkCancelled.Size = new System.Drawing.Size(176, 31);
-
             this.lnkCancelled.TabIndex = 15;
             this.lnkCancelled.TabStop = true;
             this.lnkCancelled.Text = "Cancelled JEVs";
@@ -399,14 +296,11 @@ namespace AccountingSystem.Views.Dashboard
             // lblCancelledJEVCounter
             // 
             this.lblCancelledJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblCancelledJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblCancelledJEVCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblCancelledJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblCancelledJEVCounter.Location = new System.Drawing.Point(0, 0);
             this.lblCancelledJEVCounter.Name = "lblCancelledJEVCounter";
-
-            this.lblCancelledJEVCounter.Size = new System.Drawing.Size(161, 61);
-
-
+            this.lblCancelledJEVCounter.Size = new System.Drawing.Size(176, 81);
             this.lblCancelledJEVCounter.TabIndex = 6;
             this.lblCancelledJEVCounter.Text = "0";
             this.lblCancelledJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -422,10 +316,7 @@ namespace AccountingSystem.Views.Dashboard
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(835, 29);
-
-
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(894, 39);
             this.flowLayoutPanel1.TabIndex = 15;
             // 
             // btnAddJEV
@@ -449,11 +340,7 @@ namespace AccountingSystem.Views.Dashboard
             this.cmbxJournals.Location = new System.Drawing.Point(114, 4);
             this.cmbxJournals.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbxJournals.Name = "cmbxJournals";
-
-            this.cmbxJournals.Size = new System.Drawing.Size(316, 23);
-
-
-
+            this.cmbxJournals.Size = new System.Drawing.Size(314, 28);
             this.cmbxJournals.TabIndex = 30;
             this.cmbxJournals.SelectionChangeCommitted += new System.EventHandler(this.cmbxJournals_SelectionChangeCommitted);
             // 
@@ -461,12 +348,8 @@ namespace AccountingSystem.Views.Dashboard
             // 
             this.cbMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMonth.FormattingEnabled = true;
-
-            this.cbMonth.Location = new System.Drawing.Point(423, 3);
-
             this.cbMonth.Location = new System.Drawing.Point(434, 4);
             this.cbMonth.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-
             this.cbMonth.Name = "cbMonth";
             this.cbMonth.Size = new System.Drawing.Size(175, 28);
             this.cbMonth.TabIndex = 28;
@@ -475,12 +358,8 @@ namespace AccountingSystem.Views.Dashboard
             // nudYear
             // 
             this.nudYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-
-            this.nudYear.Location = new System.Drawing.Point(583, 3);
-
             this.nudYear.Location = new System.Drawing.Point(615, 4);
             this.nudYear.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-
             this.nudYear.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -512,11 +391,7 @@ namespace AccountingSystem.Views.Dashboard
             this.Margin = new System.Windows.Forms.Padding(0);
             this.MinimumSize = new System.Drawing.Size(894, 213);
             this.Name = "ucJEVDashboard";
-
-            this.Size = new System.Drawing.Size(835, 160);
-
             this.Size = new System.Drawing.Size(894, 214);
-
             this.Load += new System.EventHandler(this.UcAccountingDashboard_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.pnlPendingJEV.ResumeLayout(false);
@@ -531,6 +406,8 @@ namespace AccountingSystem.Views.Dashboard
         }
 
         #endregion
+        internal System.Windows.Forms.Label lblPSAllotmentRelease;
+        internal System.Windows.Forms.Label lblPSunobligatedBalance;
         private System.Windows.Forms.Button btnRefreshCounter;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel pnlDisapproved;
@@ -553,7 +430,5 @@ namespace AccountingSystem.Views.Dashboard
         internal System.Windows.Forms.LinkLabel lnkPending;
         internal System.Windows.Forms.LinkLabel lnkApproved;
         internal System.Windows.Forms.LinkLabel lnkJEV;
-        private System.Windows.Forms.Panel pnlDisapproved;
-        private System.Windows.Forms.Panel pnlCancelled;
     }
 }
