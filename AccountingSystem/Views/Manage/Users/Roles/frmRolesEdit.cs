@@ -87,7 +87,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError(ex.StackTrace);
             }
 
             return false;
