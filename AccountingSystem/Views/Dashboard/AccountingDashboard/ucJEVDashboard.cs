@@ -46,8 +46,9 @@ namespace AccountingSystem.Views.Dashboard
             lnkPending.ActiveLinkColor = Color.White;
             lnkApproved.ActiveLinkColor = Color.White;
             lnkCancelled.ActiveLinkColor = Color.White;
+            linkDisapproved.ActiveLinkColor = Color.White;
             lnkJEV.ActiveLinkColor = Color.White;
-            lnkJEV.VisitedLinkColor = Color.White;
+            lnkJEV.VisitedLinkColor = Color.White; 
             lnkApproved.VisitedLinkColor = Color.White;
             lnkPending.VisitedLinkColor = Color.White;
             linkDisapproved.VisitedLinkColor = Color.White;

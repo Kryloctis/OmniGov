@@ -17,6 +17,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private ucJEV uc;
         internal frmJEVList _frmJEVList;
         internal ucJEVDashboard _ucJEVDashboard;
+        internal int createdById;
 
         public frmJEV(frmJEVList frmJEVList, ucJEVDashboard ucJEVDashboard)
         {
@@ -34,7 +35,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 LoadSelectedJEV(uc.jevNo);
                 CheckJevStatus(uc.jevId);
-                Text = "Select JEV";
             }
             uc.SumDebitCredit();
             PermissionVerification();
@@ -52,6 +52,21 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             if (!Helper.HasPermission("Report JEVs"))
                 btnPrint.Enabled = false;
+
+
+            if (Helper.UserId != createdById && createdById != 0)
+            {
+                btnSave.Enabled = false;
+                btnDelete.Enabled = false;
+                ucjev1.Enabled = false;
+            }
+
+            if(createdById != Helper.UserId)
+                lblShowMessage.Enabled = false;
+
+            if (Helper.HasPermission("JEV Approval"))
+                lblShowMessage.Enabled = true;
+
         }
 
         private static ushort? ValidateNullSubsidiary(object subsidiaryCellValue)
