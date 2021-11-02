@@ -13,7 +13,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AccountingSystem.Views.Dashboard.TreasuryDashboard.RCDSummary;
 
 namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 {
@@ -26,8 +25,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 
         private void btnGenerateRCD_Click(object sender, EventArgs e)
         {
-            //_ = new frmRCD().ShowDialog();
-            Helper.createTabPage(tabControl1, new TabPage(), "tabrcd", "RCD Summary", new ucRCDDashboard());
+            _ = new frmRCD().ShowDialog();
         }
 
         private void btnBankDeposit_Click(object sender, EventArgs e)
@@ -58,11 +56,6 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         private void toolStripDropDownButton1_Click(object sender, EventArgs e)
         {
             _ = new frmReceipts().ShowDialog();
-        }
-
-        private void ucTreasuryDashboard_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

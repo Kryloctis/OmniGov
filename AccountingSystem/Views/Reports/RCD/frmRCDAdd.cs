@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Reports.RCD
                     ucrcd1.cmbcollector.SelectedValue = data["id"];
                     ucrcd1.cmbcollector.Enabled = false;
                 }
-               // ucrcd1.chckapproved.Visible = uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer" ? true : false; 
+                ucrcd1.chckapproved.Visible = uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer" ? true : false; 
                 if(uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer")
                 {
                     ucrcd1.btnadd.Visible = false;
@@ -72,9 +72,8 @@ namespace AccountingSystem.Views.Reports.RCD
                         CoId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
                         ReportNo = uc.txtreport.Text.Trim(),
                         Date = Convert.ToDateTime(uc.dtdate.Value),
-                        Approved = uc.approved,
-                        Fid = uc.Fid,
-                        status = uc.status
+                        Approved = Convert.ToInt16(uc.chckapproved.Checked),
+                        Fid = Convert.ToInt16(uc.cmbfund.SelectedValue)
                     };
                     var rcdRepository = Factory.CollectorReportRepository();
                     if (!rcdRepository.CodeExist(uc.txtreport.Text.Trim()))
@@ -120,7 +119,12 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void frmRCDAdd_Click(object sender, EventArgs e)
         {
-           /* if (SaveData())
+           
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (SaveData())
             {
                 Helper.MessageBoxSuccess("RCD has been saved.");
                 _frmrcd.LoadRecords();
@@ -128,12 +132,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 uc.ResetForm();
                 uc.cmbcollector.Enabled = true;
                 uc.txtreport.Enabled = true;
-            }*/
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-           
+            }
         }
     }
 }
