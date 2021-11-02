@@ -69,7 +69,7 @@ namespace AccountingSystem.Views.Dashboard
             this.btnRefreshCounter.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnRefreshCounter.Location = new System.Drawing.Point(698, 3);
             this.btnRefreshCounter.Name = "btnRefreshCounter";
-            this.btnRefreshCounter.Size = new System.Drawing.Size(92, 23);
+            this.btnRefreshCounter.Size = new System.Drawing.Size(105, 31);
             this.btnRefreshCounter.TabIndex = 13;
             this.btnRefreshCounter.Text = "Refresh";
             this.btnRefreshCounter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -90,11 +90,11 @@ namespace AccountingSystem.Views.Dashboard
             this.tableLayoutPanel1.Controls.Add(this.pnlDisapproved, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.pnlCancelled, 4, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 29);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 39);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel1.MinimumSize = new System.Drawing.Size(781, 121);
+            this.tableLayoutPanel1.MinimumSize = new System.Drawing.Size(893, 161);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 13, 0, 0);
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(835, 131);
@@ -186,8 +186,9 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlJEV.Controls.Add(this.lnkJEV);
             this.pnlJEV.Controls.Add(this.lblJEVCounter);
             this.pnlJEV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlJEV.Location = new System.Drawing.Point(3, 13);
-            this.pnlJEV.MinimumSize = new System.Drawing.Size(150, 113);
+            this.pnlJEV.Location = new System.Drawing.Point(3, 17);
+            this.pnlJEV.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pnlJEV.MinimumSize = new System.Drawing.Size(171, 151);
             this.pnlJEV.Name = "pnlJEV";
             this.pnlJEV.Size = new System.Drawing.Size(161, 115);
             this.pnlJEV.TabIndex = 26;
@@ -311,6 +312,7 @@ namespace AccountingSystem.Views.Dashboard
             this.flowLayoutPanel1.Controls.Add(this.btnRefreshCounter);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(835, 29);
             this.flowLayoutPanel1.TabIndex = 15;
@@ -318,9 +320,10 @@ namespace AccountingSystem.Views.Dashboard
             // btnAddJEV
             // 
             this.btnAddJEV.Image = global::AccountingSystem.Properties.Resources.symbol_add_14px;
-            this.btnAddJEV.Location = new System.Drawing.Point(3, 3);
+            this.btnAddJEV.Location = new System.Drawing.Point(3, 4);
+            this.btnAddJEV.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAddJEV.Name = "btnAddJEV";
-            this.btnAddJEV.Size = new System.Drawing.Size(92, 23);
+            this.btnAddJEV.Size = new System.Drawing.Size(105, 31);
             this.btnAddJEV.TabIndex = 31;
             this.btnAddJEV.Text = "Add";
             this.btnAddJEV.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -332,7 +335,8 @@ namespace AccountingSystem.Views.Dashboard
             // 
             this.cmbxJournals.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxJournals.FormattingEnabled = true;
-            this.cmbxJournals.Location = new System.Drawing.Point(101, 3);
+            this.cmbxJournals.Location = new System.Drawing.Point(114, 4);
+            this.cmbxJournals.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbxJournals.Name = "cmbxJournals";
             this.cmbxJournals.Size = new System.Drawing.Size(316, 23);
             this.cmbxJournals.TabIndex = 30;
@@ -344,7 +348,7 @@ namespace AccountingSystem.Views.Dashboard
             this.cbMonth.FormattingEnabled = true;
             this.cbMonth.Location = new System.Drawing.Point(423, 3);
             this.cbMonth.Name = "cbMonth";
-            this.cbMonth.Size = new System.Drawing.Size(154, 23);
+            this.cbMonth.Size = new System.Drawing.Size(175, 28);
             this.cbMonth.TabIndex = 28;
             this.cbMonth.SelectedIndexChanged += new System.EventHandler(this.cbMonth_SelectedIndexChanged);
             // 
@@ -364,7 +368,7 @@ namespace AccountingSystem.Views.Dashboard
             0});
             this.nudYear.Name = "nudYear";
             this.nudYear.ReadOnly = true;
-            this.nudYear.Size = new System.Drawing.Size(109, 23);
+            this.nudYear.Size = new System.Drawing.Size(125, 27);
             this.nudYear.TabIndex = 29;
             this.nudYear.Value = new decimal(new int[] {
             2021,
@@ -375,13 +379,13 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // ucJEVDashboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(0);
-            this.MinimumSize = new System.Drawing.Size(782, 160);
+            this.MinimumSize = new System.Drawing.Size(894, 213);
             this.Name = "ucJEVDashboard";
             this.Size = new System.Drawing.Size(835, 160);
             this.Load += new System.EventHandler(this.UcAccountingDashboard_Load);

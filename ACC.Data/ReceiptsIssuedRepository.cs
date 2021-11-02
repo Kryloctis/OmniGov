@@ -133,7 +133,7 @@ namespace ACC.Data
             {
                 string query = $"SELECT * FROM {tableName5} " +
                     $"LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id " +
-                    $"WHERE {tableName5}.receiptsto<>IFNULL((SELECT SUM(IF(IFNULL(ri.last_issued,0)>0,ri.issueto-ri.last_issued,0)) FROM {tableName} ri WHERE ri.receipts_id={tableName5}.id),0) " +
+                    $"WHERE ({tableName5}.receiptsto<>IFNULL((SELECT SUM(IF(IFNULL(ri.last_issued,0)>0,ri.issueto-ri.last_issued,0)) FROM {tableName} ri WHERE ri.receipts_id={tableName5}.id),0) OR {tableName5}.quantity<>IFNULL((SELECT SUM(ri.quantity) FROM {tableName} ri LEFT JOIN {tableName5} r ON ri.receipts_id=r.id LEFT JOIN {tableName4} af ON r.accountable_forms_id=af.id WHERE r.id=receipts.id),0))" +
                     $"AND {tableName5}.id NOT IN (SELECT {tableName}.receipts_id FROM {tableName} WHERE {tableName}.collecting_officers_id='{id}' AND IF(IFNULL({tableName}.is_returned,0)>0,1,0)=0)";
 
                 var dtri = new DataTable();

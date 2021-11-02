@@ -27,7 +27,6 @@ namespace AccountingSystem.Views.Reports.RCD
             CoId = Coid;
             FId = Fid;
             data = _data;
-            this.Text = "Generate Collections";
         } 
 
         private void btnPreview_Click(object sender, EventArgs e)
@@ -44,7 +43,6 @@ namespace AccountingSystem.Views.Reports.RCD
                     HelperLoadRecords.PaymentDatagridView(list, dgPreview);
 
                     txttotalamount.Text = String.Format("{0:N2}",pcRepository.SumRecords(CoId, FId,dateFrom, dateTo,id));
-                    lblRecordCount.Text = dgPreview.Rows.Count.ToString();
                 }
                 else
                 {                    
@@ -55,7 +53,6 @@ namespace AccountingSystem.Views.Reports.RCD
                     HelperLoadRecords.PaymentDatagridView(list, dgPreview);
 
                     txttotalamount.Text = String.Format("{0:N2}", pcRepository.SumRecords(CoId, FId, dateFrom, dateTo));
-                    lblRecordCount.Text = dgPreview.Rows.Count.ToString();
                 }               
                 
             }
@@ -168,6 +165,16 @@ namespace AccountingSystem.Views.Reports.RCD
                 }
             }
             return dt;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void frmGenerateRCD_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

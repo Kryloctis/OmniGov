@@ -305,6 +305,23 @@ namespace ACC.Data
             }
             
         }
+        public DataTable NextTicket(int id)
+        {
+            try
+            {
+                string query = $"SELECT IFNULL(SUM({tableName4}.quantity),0) AS issuelast,{tableName}.quantity FROM " +
+                    $"{tableName4} LEFT JOIN {tableName} ON {tableName4}.receipts_id={tableName}.id " +
+                    $"WHERE {tableName4}.receipts_id='{id}'";
+
+                var dtri = new DataTable();
+                return _dbGenericCommands.Fill(query, dtri);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
 
         public DataTable FirstReceipt(int id)
         {

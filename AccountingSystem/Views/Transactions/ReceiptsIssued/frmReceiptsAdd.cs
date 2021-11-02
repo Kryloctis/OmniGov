@@ -61,25 +61,36 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 };
 
                 var riRepository = Factory.ReceiptsIssuedRepository();
-                if (riRepository.IssuedExist(riModel)){
-                    Helper.MessageBoxError("Receipt already issued!");
-                    uc.cmbreceipt.Focus();
-                    return false;
-                }
-                else if (Convert.ToInt32(uc.txtfrom.Text.Trim()) > Convert.ToInt32(uc.txtto.Text.Trim()))
+                if (!uc.istickets)
                 {
-                    Helper.MessageBoxError("Invalid Receipt!");
-                    return false;
-                }
-                else if (int.Parse(uc.txtquantity.Text.Trim()) <= 0)
-                {
-                    Helper.MessageBoxError("Quantity Empty!");
-                    return false;
+                    if (riRepository.IssuedExist(riModel))
+                    {
+                        Helper.MessageBoxError("Receipt already issued!");
+                        uc.cmbreceipt.Focus();
+                        return false;
+                    }
+                    else if (Convert.ToInt32(uc.txtfrom.Text.Trim()) > Convert.ToInt32(uc.txtto.Text.Trim()))
+                    {
+                        Helper.MessageBoxError("Invalid Receipt!");
+                        return false;
+                    }
+                    else if (int.Parse(uc.txtquantity.Text.Trim()) <= 0)
+                    {
+                        Helper.MessageBoxError("Quantity Empty!");
+                        return false;
+                    }
+                    else riRepository.Insert(riModel);
                 }
                 else
                 {
-                    return riRepository.Insert(riModel);
+                    if (int.Parse(uc.txtquantity.Text.Trim()) <= 0)
+                    {
+                        Helper.MessageBoxError("Quantity Empty!");
+                        return false;
+                    }
+                    else return riRepository.Insert(riModel);
                 }
+               
 
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
