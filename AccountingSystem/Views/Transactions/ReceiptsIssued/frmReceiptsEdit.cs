@@ -70,17 +70,30 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 };
 
                 var riRepository = Factory.ReceiptsIssuedRepository();
-                if (Convert.ToInt32(uc.txtfrom.Text.Trim()) > Convert.ToInt32(uc.txtto.Text.Trim()))
+                if (!uc.istickets)
                 {
-                    Helper.MessageBoxError("Invalid Receipt!");
-                    return false;
+                    if (Convert.ToInt32(uc.txtfrom.Text.Trim()) > Convert.ToInt32(uc.txtto.Text.Trim()))
+                    {
+                        Helper.MessageBoxError("Invalid Receipt!");
+                        return false;
+                    }
+                    else if (int.Parse(uc.txtquantity.Text.Trim()) <= 0)
+                    {
+                        Helper.MessageBoxError("Quantity Empty!");
+                        return false;
+                    }
+                    else return riRepository.Update(riModel);
                 }
-                else if(int.Parse(uc.txtquantity.Text.Trim()) <= 0)
+                else
                 {
-                    Helper.MessageBoxError("Quantity Empty!");
-                    return false;
+                    if (int.Parse(uc.txtquantity.Text.Trim()) <= 0)
+                    {
+                        Helper.MessageBoxError("Quantity Empty!");
+                        return false;
+                    }
+                    else return riRepository.Update(riModel);
                 }
-                else return riRepository.Update(riModel);
+                
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             return false; 

@@ -39,27 +39,35 @@ namespace AccountingSystem.Views.Manage.Receipts
                 }
                 var rModel = new ReceiptsModel()
                 {
-                    AccId = Convert.ToInt32(uc.cmbforms.SelectedValue),
-                    Rfrom = Convert.ToInt32(uc.txtfrom.Text.Trim()),
-                    Rto = Convert.ToInt32(uc.txtto.Text.Trim()),
+                    AccId = int.Parse(uc.cmbforms.SelectedValue.ToString()),
+                    Rfrom = int.Parse(uc.txtfrom.Text.Trim()),
+                    Rto = int.Parse(uc.txtto.Text.Trim()),
                     Rdate = uc.dtpreceived.Value,
-                    Quantity = Convert.ToInt32(uc.txtquantity.Text.Trim()),
+                    Quantity = int.Parse(uc.txtquantity.Text.Trim()),
                     Remarks = uc.txtremarks.Text.Trim(),
                     UserId = UserId
 
                 };
 
                 var rcRepository = Factory.ReceiptsRepository();
-               /* if (rcRepository.ReceiptExist(Convert.ToInt32(uc.cmbforms.SelectedValue), Convert.ToInt32(uc.txtfrom.Text.Trim()), Convert.ToInt32(uc.txtto.Text.Trim())))
+                /* if (rcRepository.ReceiptExist(int.Parse(uc.cmbforms.SelectedValue), int.Parse(uc.txtfrom.Text.Trim()), int.Parse(uc.txtto.Text.Trim())))
+                 {
+                     Helper.MessageBoxError("Receipt already exists!");
+                     uc.cmbforms.Focus();
+                     return false;
+                 }
+                 else */
+                if (!uc.istickets)
                 {
-                    Helper.MessageBoxError("Receipt already exists!");
-                    uc.cmbforms.Focus();
-                    return false;
-                }
-                else */if (Convert.ToInt32(uc.txtfrom.Text.Trim()) > Convert.ToInt32(uc.txtto.Text.Trim()))
-                {
-                    Helper.MessageBoxError("Invalid Receipt!");
-                    return false;
+                    if (int.Parse(uc.txtfrom.Text.Trim()) > int.Parse(uc.txtto.Text.Trim()))
+                    {
+                        Helper.MessageBoxError("Invalid Receipt!");
+                        return false;
+                    }
+                    else
+                    {
+                        return rcRepository.Insert(rModel);
+                    }
                 }
                 else
                 {

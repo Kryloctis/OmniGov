@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Reports.RCD
                         var rcdModelList = new List<CollectorReportModel>();
                         foreach (DataGridViewRow row in dgrcd.SelectedRows)
                         {
-                            int rcdId = Convert.ToInt16(row.Cells[0].Value.ToString());
+                            int rcdId = int.Parse(row.Cells[0].Value.ToString());
                             rcdModelList.Add(new CollectorReportModel() { Id = rcdId });
                         }
 
@@ -124,15 +124,15 @@ namespace AccountingSystem.Views.Reports.RCD
                     if (!Convert.ToBoolean(dgrcd.CurrentRow.Cells[e.ColumnIndex].Value))
                     {
                         dgrcd.CurrentRow.Cells[e.ColumnIndex].Value = true;
-                        if (!rcdgenerate.ContainsKey(Convert.ToInt16(dgrcd.CurrentRow.Cells[0].Value)))
+                        if (!rcdgenerate.ContainsKey(int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString())))
                         {
-                            rcdgenerate.Add(Convert.ToInt16(dgrcd.CurrentRow.Cells[0].Value), dgrcd.CurrentRow.Cells[1].Value.ToString());
+                            rcdgenerate.Add(int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString()), dgrcd.CurrentRow.Cells[1].Value.ToString());
                         }
                     }
                     else
                     {
                         dgrcd.CurrentRow.Cells[e.ColumnIndex].Value = false;
-                        rcdgenerate.Remove(Convert.ToInt16(dgrcd.CurrentRow.Cells[0].Value));
+                        rcdgenerate.Remove(int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString()));
                     }
                     btnRCD.Enabled = rcdgenerate.Count > 0 ? true : false;
                 }

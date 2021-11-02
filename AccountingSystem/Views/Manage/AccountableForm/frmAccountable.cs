@@ -104,6 +104,23 @@ namespace AccountingSystem.Views.Manage.AccountableForm
            // byte[] columnIndexTimestamp = { 3, 4 };
            // Helper.ShowRecordTimestamp(dgBanks, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgAccform, btnEdit, btnDelete);
+            if(dgAccform.SelectedRows.Count > 0)
+            {
+                btnFace.Enabled = true;
+            }
+            else
+            {
+                btnFace.Enabled = false;
+            }
+        }
+
+        private void btnFace_Click(object sender, EventArgs e)
+        {
+            if (dgAccform.Rows.Count > 0 && dgAccform.SelectedRows.Count > 0)
+            {
+                int Id = int.Parse(dgAccform.SelectedCells[0].Value.ToString());
+                _ = new frmFaceValue(Id).ShowDialog();
+            }
         }
     }
 }

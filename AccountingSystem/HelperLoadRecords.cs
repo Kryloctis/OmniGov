@@ -410,6 +410,21 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
+        #region FaceValue
+        internal static void FaceValueDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].Visible = false;
+            datagrid.Columns[2].HeaderText = "Year";
+            datagrid.Columns[3].HeaderText = "Amount";
+            datagrid.Columns[3].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[4].Visible = false;
+
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        #endregion
 
         #region Banks Deposits
         internal static void DepositsDatagridView(DataTable dataTable, DataGridView datagrid)

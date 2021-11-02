@@ -27,6 +27,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             ucForms1.LoadForms();
             LoadSelectedValue();
+            
         }
 
         private void LoadSelectedValue()
@@ -48,6 +49,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                     uc.txtfrom.Enabled = false;
                     uc.txtto.Enabled = false;
                 }
+                uc.cmbforms.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -69,23 +71,28 @@ namespace AccountingSystem.Views.Manage.Receipts
                 var rModel = new ReceiptsModel()
                 {
                     Id = uc.Id,
-                    AccId = Convert.ToInt32(uc.cmbforms.SelectedValue),
-                    Rfrom = Convert.ToInt32(uc.txtfrom.Text.Trim()),
-                    Rto = Convert.ToInt32(uc.txtto.Text.Trim()),
+                    AccId = int.Parse(uc.cmbforms.SelectedValue.ToString()),
+                    Rfrom = int.Parse(uc.txtfrom.Text.Trim()),
+                    Rto = int.Parse(uc.txtto.Text.Trim()),
                     Rdate = uc.dtpreceived.Value,
-                    Quantity = Convert.ToInt32(uc.txtquantity.Text.Trim()),
+                    Quantity = int.Parse(uc.txtquantity.Text.Trim()),
                     Remarks = uc.txtremarks.Text.Trim(),
                     UserId = UserId
 
                 };
 
                 var rcRepository = Factory.ReceiptsRepository();
-                if (Convert.ToInt32(uc.txtfrom.Text.Trim()) > Convert.ToInt32(uc.txtto.Text.Trim()))
+                if (!uc.istickets)
                 {
-                    Helper.MessageBoxError("Invalid Receipt!");
-                    return false;
+                    if (int.Parse(uc.txtfrom.Text.Trim()) > int.Parse(uc.txtto.Text.Trim()))
+                    {
+                        Helper.MessageBoxError("Invalid Receipt!");
+                        return false;
+                    }
+                    else return rcRepository.Update(rModel);
                 }
                 else return rcRepository.Update(rModel);
+
             }
             catch (Exception ex)
             {
