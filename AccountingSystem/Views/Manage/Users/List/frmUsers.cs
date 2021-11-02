@@ -12,12 +12,13 @@ namespace AccountingSystem.Views.Manage.Users.List
         {
             InitializeComponent();
         }
+
         internal void LoadRecords()
         {
             try
             {
                 var usersRepository = Factory.UsersRepository();
-                var dtUsers = usersRepository.GetRecords();
+                var dtUsers = usersRepository.GetViewRecordsByUserId();
                 HelperLoadRecords.UsersDatagridView(dtUsers, dgUsers);
 
                 lblRecordCount.Text = usersRepository.CountRecords().ToString();
@@ -39,6 +40,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 
         }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             _ = new frmUsersAdd(this).ShowDialog();
@@ -48,7 +50,7 @@ namespace AccountingSystem.Views.Manage.Users.List
         {
             WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgUsers);
+            Helper.DatagridFullRowSelectStyle(dgUsers, true);
             LoadRecords();
         }
 

@@ -33,7 +33,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnCancel = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.btnSearch = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnApprove = new System.Windows.Forms.ToolStripButton();
             this.btnDisapprove = new System.Windows.Forms.ToolStripButton();
@@ -58,7 +57,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnSave,
             this.btnCancel,
             this.btnDelete,
-            this.btnSearch,
             this.toolStripSeparator2,
             this.btnApprove,
             this.btnDisapprove,
@@ -106,20 +104,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
-            // btnSearch
-            // 
-            this.btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnSearch.Image = global::AccountingSystem.Properties.Resources.find_doc;
-            this.btnSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(0, 1, 15, 2);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(46, 47);
-            this.btnSearch.Text = "S&earch";
-            this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSearch.Visible = false;
-            this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
-            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -153,7 +137,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // btnCancelJEV
             // 
             this.btnCancelJEV.Enabled = false;
-            this.btnCancelJEV.Image = global::AccountingSystem.Properties.Resources.document_cancel_28px;
+            this.btnCancelJEV.Image = global::AccountingSystem.Properties.Resources.document_color_magenta_filled_forbidden_28px;
             this.btnCancelJEV.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnCancelJEV.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCancelJEV.Name = "btnCancelJEV";
@@ -206,22 +190,24 @@ namespace AccountingSystem.Views.Transactions.JEV
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(917, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(931, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.toolStripStatusLabel2.Margin = new System.Windows.Forms.Padding(15, 3, 0, 2);
+            this.toolStripStatusLabel2.Margin = new System.Windows.Forms.Padding(0);
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(42, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(42, 22);
             this.toolStripStatusLabel2.Text = "Status:";
             // 
             // lblJevStatus
             // 
-            this.lblJevStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblJevStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.lblJevStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblJevStatus.Margin = new System.Windows.Forms.Padding(0);
             this.lblJevStatus.Name = "lblJevStatus";
-            this.lblJevStatus.Size = new System.Drawing.Size(17, 17);
+            this.lblJevStatus.Size = new System.Drawing.Size(18, 22);
             this.lblJevStatus.Text = "--";
             // 
             // lblShowMessage
@@ -278,6 +264,5 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal System.Windows.Forms.ToolStripStatusLabel lblShowMessage;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         internal System.Windows.Forms.ToolStripButton btnCancelJEV;
-        internal System.Windows.Forms.ToolStripButton btnSearch;
     }
 }

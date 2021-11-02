@@ -22,5 +22,10 @@ namespace AccountingSystem.Views.Manage.Augmentation
         {
             Helper.DatagridDefaultStyle(dataGridView1, true);
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

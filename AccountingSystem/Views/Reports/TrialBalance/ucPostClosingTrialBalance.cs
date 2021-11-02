@@ -166,7 +166,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                 report.DataSources.Add(new ReportDataSource("dtTrialBalance", DataTablePostTrialBalance()));
 
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
-                var fundName = cmbFund.Text.ToUpper();
+                var fundName = cmbFund.Text;
                 var asOfDate = dtAsOf.Value.ToString("MMMM dd, yyyy");
 
                 var parameters = new[] {

@@ -69,7 +69,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // 
             this.cbHideZeroBalance.AutoSize = true;
             this.cbHideZeroBalance.Enabled = false;
-            this.cbHideZeroBalance.Location = new System.Drawing.Point(543, 4);
+            this.cbHideZeroBalance.Location = new System.Drawing.Point(543, 5);
             this.cbHideZeroBalance.Name = "cbHideZeroBalance";
             this.cbHideZeroBalance.Size = new System.Drawing.Size(127, 19);
             this.cbHideZeroBalance.TabIndex = 9;
@@ -118,7 +118,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 5);
+            this.label1.Location = new System.Drawing.Point(0, 3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 15);
             this.label1.TabIndex = 0;

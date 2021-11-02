@@ -47,6 +47,7 @@ namespace AccountingSystem
             this.menuBanks = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAccForm = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReceipts = new System.Windows.Forms.ToolStripMenuItem();
+            this.amortiaztionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOB = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOBB = new System.Windows.Forms.ToolStripMenuItem();
@@ -187,7 +188,8 @@ namespace AccountingSystem
             this.menuDisbursingOfficer,
             this.menuBanks,
             this.menuAccForm,
-            this.menuReceipts});
+            this.menuReceipts,
+            this.amortiaztionToolStripMenuItem});
             this.menuManage.Name = "menuManage";
             this.menuManage.Size = new System.Drawing.Size(77, 24);
             this.menuManage.Text = "Manage";
@@ -284,6 +286,13 @@ namespace AccountingSystem
             this.menuReceipts.Size = new System.Drawing.Size(263, 26);
             this.menuReceipts.Text = "Receipts";
             this.menuReceipts.Click += new System.EventHandler(this.menureceipts_Click);
+            // 
+            // amortiaztionToolStripMenuItem
+            // 
+            this.amortiaztionToolStripMenuItem.Name = "amortiaztionToolStripMenuItem";
+            this.amortiaztionToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.amortiaztionToolStripMenuItem.Text = "Amortization";
+            this.amortiaztionToolStripMenuItem.Click += new System.EventHandler(this.amortiaztionToolStripMenuItem_Click);
             // 
             // menuReports
             // 
@@ -940,14 +949,12 @@ namespace AccountingSystem
             // 
             this.radSFPerformance.Appearance = System.Windows.Forms.Appearance.Button;
             this.radSFPerformance.AutoSize = true;
-            this.radSFPerformance.Checked = true;
             this.radSFPerformance.Enabled = false;
             this.radSFPerformance.Location = new System.Drawing.Point(232, 4);
             this.radSFPerformance.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.radSFPerformance.Name = "radSFPerformance";
             this.radSFPerformance.Size = new System.Drawing.Size(254, 30);
             this.radSFPerformance.TabIndex = 4;
-            this.radSFPerformance.TabStop = true;
             this.radSFPerformance.Text = "Statement of Financial Performance";
             this.radSFPerformance.UseVisualStyleBackColor = true;
             this.radSFPerformance.CheckedChanged += new System.EventHandler(this.radSFPerformance_CheckedChanged);
@@ -1078,7 +1085,6 @@ namespace AccountingSystem
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem menuObligationRequest;
         private System.Windows.Forms.ToolStripMenuItem menuFile;
         private System.Windows.Forms.ToolStripMenuItem menuManage;
         private System.Windows.Forms.ToolStripMenuItem menuJournals;
@@ -1091,14 +1097,11 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuRoles;
         private System.Windows.Forms.ToolStripMenuItem menuFunctionProgramProject;
         private System.Windows.Forms.ToolStripMenuItem menuCollectingOfficer;
-        private System.Windows.Forms.ToolStripMenuItem menuReportJournals;
         private System.Windows.Forms.ToolStripMenuItem menuDisbursingOfficer;
         internal System.Windows.Forms.ToolStripMenuItem menuSAAOB;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblUserFullName;
         private System.Windows.Forms.ToolStripStatusLabel lblUserRole;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem menuBanks;
         private System.Windows.Forms.ToolStripMenuItem menuprintRCI;
         private System.Windows.Forms.ToolStripMenuItem menuAccForm;
@@ -1114,7 +1117,6 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuBankCashBook;
         private System.Windows.Forms.TabControl tabControlDashboard;
         internal System.Windows.Forms.TabPage tabPageAccounting;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem menuReceiptsConsolidated;
         private System.Windows.Forms.ToolStripMenuItem menuDailyCash;
         internal System.Windows.Forms.TabPage tabPageBudget;
@@ -1162,6 +1164,7 @@ namespace AccountingSystem
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.RadioButton radioPostTB;
         private System.Windows.Forms.RadioButton radioPreTB;
+        private System.Windows.Forms.ToolStripMenuItem amortiaztionToolStripMenuItem;
     }
 }
 

@@ -70,7 +70,25 @@ namespace ACC.Data
             }
         }
 
-    
+        public DataTable GetRecordsByOffice(string office)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@office", DbType.String, office}
+                };
+
+                string query = $"SELECT * FROM {tableName} WHERE role_name <> 'System Administrator' AND office = @office";
+
+                var dtRoles = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtRoles, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
@@ -243,16 +261,17 @@ namespace ACC.Data
             return false;
         }
 
-        public bool NameExist(string roleName)
+        public bool NameExist(string roleName, string office)
         {
             try
             {
                 var parameters = new object[][]
                 {
                     new object[] { "@role_name", DbType.String, roleName },
+                    new object[] { "@office", DbType.String, office}
                 };
 
-                string query = $"SELECT role_name FROM {tableName} WHERE role_name = @role_name";
+                string query = $"SELECT role_name FROM {tableName} WHERE role_name = @role_name AND office = @office";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -266,7 +285,7 @@ namespace ACC.Data
             return false;
         }
 
-        public bool NameExist(string roleName, int roleId)
+        public bool NameExist(string roleName, string office, int roleId)
         {
             try
             {
@@ -276,7 +295,7 @@ namespace ACC.Data
                     new object[] { "@role_name", DbType.String, roleName },
                 };
 
-                string query = $"SELECT role_name FROM {tableName} WHERE id <> @id AND role_name = @role_name";
+                string query = $"SELECT role_name FROM {tableName} WHERE id <> @id AND role_name = @role_name AND office = @office";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true

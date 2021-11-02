@@ -127,7 +127,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
                 DateTime AsOf = dtAsOf.Value;
 
-
+                Cursor = Cursors.WaitCursor;
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\statement-of-financial-position-report.rdlc";
                 report.DataSources.Clear();
                 report.DataSources.Add(new ReportDataSource("dtStatementOfFinancialPosition", StatementOfFinancialPositionReport()));
@@ -145,6 +145,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 reportViewer.ZoomMode = ZoomMode.Percent;
                 reportViewer.ZoomPercent = 100;
                 reportViewer.RefreshReport();
+                Cursor = Cursors.Default;
             }
             catch (Exception ex)
             {

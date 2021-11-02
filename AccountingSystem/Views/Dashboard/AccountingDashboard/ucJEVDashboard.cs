@@ -2,6 +2,7 @@
 using AccountingSystem.Views.Transactions.JEV;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Dashboard
@@ -21,7 +22,36 @@ namespace AccountingSystem.Views.Dashboard
                 LoadMonths();
                 LoadJournals();
                 LoadJEVCounter();
+                LoadCardColors();
             }
+        }
+
+        private void LoadCardColors() 
+        {
+            pnlApprovedJEV.BackColor = Helper.StatusColor("Approved");
+            pnlPendingJEV.BackColor = Helper.StatusColor("Pending");
+            pnlDisapproved.BackColor = Helper.StatusColor("Disapproved");
+            pnlCancelled.BackColor = Helper.StatusColor("Cancelled");
+            pnlJEV.BackColor = Color.FromArgb(40, 56, 94);
+            lblApprovedJEVCounter.ForeColor = Color.White;
+            lblPendingJEVCounter.ForeColor = Color.White;
+            lblDisapprovedJEVCounter.ForeColor = Color.White;
+            lblCancelledJEVCounter.ForeColor = Color.White;
+            lblJEVCounter.ForeColor = Color.White;
+            lnkApproved.LinkColor = Color.White;
+            lnkPending.LinkColor = Color.White;
+            linkDisapproved.LinkColor = Color.White;
+            lnkCancelled.LinkColor = Color.White;
+            lnkJEV.LinkColor = Color.White;
+            lnkPending.ActiveLinkColor = Color.White;
+            lnkApproved.ActiveLinkColor = Color.White;
+            lnkCancelled.ActiveLinkColor = Color.White;
+            lnkJEV.ActiveLinkColor = Color.White;
+            lnkJEV.VisitedLinkColor = Color.White;
+            lnkApproved.VisitedLinkColor = Color.White;
+            lnkPending.VisitedLinkColor = Color.White;
+            linkDisapproved.VisitedLinkColor = Color.White;
+            lnkCancelled.VisitedLinkColor = Color.White;
         }
 
         private void LoadJournals()
@@ -38,7 +68,7 @@ namespace AccountingSystem.Views.Dashboard
             Dock = DockStyle.Fill;
         }
 
-        private void LoadJEVCounter()
+        internal void LoadJEVCounter()
         {
             string journalName = cmbxJournals.Text.Trim();
             short month = Convert.ToInt16(cbMonth.SelectedIndex + 1);
@@ -62,54 +92,62 @@ namespace AccountingSystem.Views.Dashboard
             LoadJEVCounter();
         }
 
-        private void LoadJEVList(byte jevStatus)
+        private void LoadJEVList(string jevStatus)
         {
             string journalName = cmbxJournals.Text.Trim();
             byte month = Convert.ToByte(cbMonth.SelectedIndex);
             int year = (int)nudYear.Value;
-            var _frmJEVSearch = new frmJEVSearch(null, journalName, month, year);
+            var _frmJEVList = new frmJEVList(journalName, month, year, this);
 
             switch (jevStatus)
             {
-                case 0:
-                    _frmJEVSearch.cmbxJevStatus.SelectedIndex = 0;
+                case "all":
+                    _frmJEVList.cmbxJevStatus.SelectedIndex = 0;
                     break;
-                case 1:
-                    _frmJEVSearch.cmbxJevStatus.SelectedIndex = 1;
+                case "pending":
+                    _frmJEVList.cmbxJevStatus.SelectedIndex = 1;
                     break;
-                case 2:
-                    _frmJEVSearch.cmbxJevStatus.SelectedIndex = 2;
+                case "approved":
+                    _frmJEVList.cmbxJevStatus.SelectedIndex = 2;
                     break;
-                case 3:
-                    _frmJEVSearch.cmbxJevStatus.SelectedIndex = 3;
+                case "disapproved":
+                    _frmJEVList.cmbxJevStatus.SelectedIndex = 3;
+                    break;
+                case "cancelled":
+                    _frmJEVList.cmbxJevStatus.SelectedIndex = 4;
                     break;
             }
 
-            _frmJEVSearch.cmbxJournals.Enabled = false;
-            _frmJEVSearch.cmbxJevStatus.Enabled = false;
-            _frmJEVSearch.cbMonth.Enabled = false;
-            _frmJEVSearch.nudYear.Enabled = false;
-            _frmJEVSearch.ShowDialog();
+            _frmJEVList.cmbxJournals.Enabled = false;
+            _frmJEVList.cmbxJevStatus.Enabled = false;
+            _frmJEVList.cbMonth.Enabled = false;
+            _frmJEVList.nudYear.Enabled = false;
+            _frmJEVList.ShowDialog();
         }
 
         private void lnkPending_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            LoadJEVList(0);
+            LoadJEVList("pending");
         }
 
         private void lnkApproved_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            LoadJEVList(1);
+            LoadJEVList("approved");
         }
 
         private void linkDisapproved_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            LoadJEVList(2);
+            LoadJEVList("disapproved");
         }
 
         private void lnkCancelled_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            LoadJEVList(3);
+            LoadJEVList("cancelled");
+        }
+
+        private void lnkJEV_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            LoadJEVList("all");
         }
 
         private void cbMonth_SelectedIndexChanged(object sender, EventArgs e)
@@ -124,12 +162,14 @@ namespace AccountingSystem.Views.Dashboard
 
         private void btnAddJEV_Click(object sender, EventArgs e)
         {
-            _ = new frmJEV(null).ShowDialog();
+            _ = new frmJEV(null,this).ShowDialog();
         }
 
         private void cmbxJournals_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadJEVCounter();
         }
+
+    
     }
 }

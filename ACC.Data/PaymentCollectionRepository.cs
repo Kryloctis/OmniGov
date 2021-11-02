@@ -133,10 +133,10 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@funds_id", DbType.Int16, entity.FId},
-                    new object[] { "@collecting_officers_id", DbType.Int16, entity.CoId},
-                    new object[] { "@accountable_forms_id", DbType.Int16, entity.AccId},
-                    new object[] { "@general_ledger_accounts_id", DbType.Int16, entity.GlaId},
+                    new object[] { "@funds_id", DbType.Int16, entity.FundId},
+                    new object[] { "@collecting_officers_id", DbType.Int16, entity.CollectingOfficerId},
+                    new object[] { "@accountable_forms_id", DbType.Int16, entity.AccountableFormId},
+                    new object[] { "@general_ledger_accounts_id", DbType.Int16, entity.GeneralLedgerAccountId},
                     new object[] { "@subsidiary_ledger_accounts_id", DbType.Int16, entity.SlaId},
                     new object[] { "@payee", DbType.String, entity.Payee},
                     new object[] { "@receipt_no", DbType.String, entity.ReceiptNo},
@@ -168,10 +168,10 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@id", DbType.Int16, entity.Id},
-                    new object[] { "@funds_id", DbType.Int16, entity.FId},
-                    new object[] { "@collecting_officers_id", DbType.Int16, entity.CoId},
-                    new object[] { "@accountable_forms_id", DbType.Int16, entity.AccId},
-                    new object[] { "@general_ledger_accounts_id", DbType.Int16, entity.GlaId},
+                    new object[] { "@funds_id", DbType.Int16, entity.FundId},
+                    new object[] { "@collecting_officers_id", DbType.Int16, entity.CollectingOfficerId},
+                    new object[] { "@accountable_forms_id", DbType.Int16, entity.AccountableFormId},
+                    new object[] { "@general_ledger_accounts_id", DbType.Int16, entity.GeneralLedgerAccountId},
                     new object[] { "@subsidiary_ledger_accounts_id", DbType.Int16, entity.SlaId},
                     new object[] { "@payee", DbType.String, entity.Payee},
                     new object[] { "@receipt_no", DbType.String, entity.ReceiptNo},

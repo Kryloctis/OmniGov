@@ -5,6 +5,10 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <SignAssembly>true</SignAssembly>
+    <Company>Perzeus Corporation</Company>
+    <Product>Local Finance System</Product>
+    <PackageId>Local Finance System</PackageId>
+    <Authors>Perzeus Corporation</Authors>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,7 +26,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.11" />
+    <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.14" />
     <PackageReference Include="SpreadsheetLight" Version="3.5.0" />
   </ItemGroup>
 

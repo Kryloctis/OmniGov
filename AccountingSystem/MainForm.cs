@@ -1,5 +1,6 @@
 ﻿using AccountingSystem.Views.Manage.AccountableForm;
 using AccountingSystem.Views.Manage.AllotmentClasses;
+using AccountingSystem.Views.Manage.Amortization;
 using AccountingSystem.Views.Manage.Banks;
 using AccountingSystem.Views.Manage.ChartOfAccounts;
 using AccountingSystem.Views.Manage.CollectingOfficer;
@@ -173,6 +174,9 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Report SAAOBB"))
                 menuSAAOBB.Visible = false;
 
+            if (!Helper.HasPermission("Amortization"))
+                amortiaztionToolStripMenuItem.Visible = false;
+
             #region Journal Entry Voucher
 
             if (Helper.HasPermission("Transaction JEV") || Helper.HasPermission("Report JEVs"))
@@ -283,10 +287,19 @@ namespace AccountingSystem
                 tabControlFinancialStatements.TabPages.Add(tabPageSCNAE);
             }
 
+            //if (Helper.HasPermission("Report Statement of Financial Position"))
+            //{
+            //    radSFPosition.Enabled = true;
+            //    tabControlFinancialStatements.TabPages.Add(tabPageSFPosition);
+            //}
 
-            if (Helper.HasPermission("Report Statement of Financial Performance")) 
+
+            //if (Helper.HasPermission("Report Statement of Financial Position"))
+            //    radSFPosition.Checked = true;
+            //else 
+            if (Helper.HasPermission("Report Statement of Financial Performance"))
                 radSFPerformance.Checked = true;
-            else if (Helper.HasPermission("Report Statement of Changes in Net Assets Equity")) 
+            else if (Helper.HasPermission("Report Statement of Changes in Net Assets Equity"))
                 radSCNAE.Checked = true;
 
 
@@ -482,5 +495,11 @@ namespace AccountingSystem
         {
             tabControlFinancialStatements.SelectedTab = tabPageSCBAA;
         }
+
+        private void amortiaztionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmAmortization().ShowDialog();
+        }
+
     }
 }

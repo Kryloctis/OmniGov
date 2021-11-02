@@ -14,6 +14,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         public frmRolesEdit(frmRoles frmRoles, byte roleId)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             uc = ucRoles1;
             _frmRoles = frmRoles;
             uc.roleId = roleId;
@@ -104,10 +105,11 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         private void frmRolesEdit_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            LoadPermissionsByRoleId();
             uc.LoadOffice();
-            uc.LoadPermissions();
             LoadSelectedRole();
+            LoadPermissionsByRoleId();
+            uc.LoadPermissions();
+         
         }
     }
 }

@@ -979,7 +979,7 @@ namespace ACC.Data
             }
         }
 
-        public DataTable FilterRecords(byte jevStatus, string searchTxt, string journal, short month, short year)
+        public DataTable FilterRecords(string jevStatus, string searchTxt, string journal, short month, short year)
         {
             try
             {
@@ -990,20 +990,24 @@ namespace ACC.Data
                     new object[] { "@month", DbType.Int16, month},
                     new object[] { "@year", DbType.Int16, year}
                 };
+
                 string jevStatusQuery = string.Empty;
                 switch (jevStatus)
                 {
-                    case 0:
-                        jevStatusQuery = $"is_approved = 0 AND is_disapproved = 0 AND is_cancelled = 0";
+                    case "pending":
+                        jevStatusQuery = $"is_approved = 0 AND is_disapproved = 0 AND is_cancelled = 0 AND ";
                         break;
-                    case 1:
-                        jevStatusQuery = $"is_approved = 1 AND is_disapproved = 0 AND is_cancelled = 0";
+                    case "approved":
+                        jevStatusQuery = $"is_approved = 1 AND is_disapproved = 0 AND is_cancelled = 0 AND ";
                         break;
-                    case 2:
-                        jevStatusQuery = $"is_approved = 0 AND is_disapproved = 1 AND is_cancelled = 0";
+                    case "disapproved": 
+                        jevStatusQuery = $"is_approved = 0 AND is_disapproved = 1 AND is_cancelled = 0 AND ";
                         break;
-                    case 3:
-                        jevStatusQuery = $"is_cancelled = 1";
+                    case "cancelled":
+                        jevStatusQuery = $"is_cancelled = 1 AND ";
+                        break;
+                    default:
+                        jevStatusQuery = string.Empty;
                         break;
 
                 }
@@ -1027,10 +1031,10 @@ namespace ACC.Data
                     $"updated_by " +
                     $"FROM {viewTableName} " +
                     $"WHERE {jevStatusQuery} " +
-                    $"AND journal_name = @journal_name " +
+                    $"journal_name = @journal_name " +
                     $"AND MONTH(date_entry) <= @month " +
                     $"AND YEAR(date_entry) = @year " +
-                    $"AND (jev_no LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt)";
+                    $"AND (jev_no LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt) ORDER BY full_jev_no";
 
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
@@ -1085,7 +1089,7 @@ namespace ACC.Data
             }
         }
 
-        public byte GetJevStatus(int jevId)
+        public string GetJevStatus(int jevId)
         {
             var record = new Dictionary<string, byte>();
             try
@@ -1104,18 +1108,15 @@ namespace ACC.Data
                         record.Add("is_cancelled", Convert.ToByte(item[2]));
                     }
                 }
+
                 if (record["is_cancelled"] == 1)
-                    return 3;
+                    return "cancelled";
                 else if (record["is_disapproved"] == 1)
-                    return 2;
-                else if (record["is_approved"] == 0)
-                    return 0;
+                    return "disapproved";
+                else if (record["is_approved"] == 1)
+                    return "approved";
                 else
-                    return 1;
-            }
-            catch (MySqlException)
-            {
-                throw;
+                    return "pending";
             }
             catch (Exception)
             {

@@ -431,5 +431,40 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public DataTable GetGeneralLedgerAccountsIncomeRecords(string searchText)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@searchText", DbType.String, $"%{searchText}%"}
+                };
+
+                string query = $"SELECT * FROM {viewTableName} WHERE account_group_code LIKE @searchText OR ledger_name LIKE @searchText AND account_group_code=4";
+
+                var dtJournals = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtJournals, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetGeneralLedgerAccountsIncomeRecords()
+        {
+            try
+            {
+                string query = $"SELECT * FROM {viewTableName} WHERE account_group_code=4";
+
+                var dtJournals = new DataTable();
+                return _dbGenericCommands.Fill(query, dtJournals);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

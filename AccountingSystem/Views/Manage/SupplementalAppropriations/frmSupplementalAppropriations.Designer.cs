@@ -77,6 +77,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.btnAdd.Size = new System.Drawing.Size(42, 47);
             this.btnAdd.Text = "Add...";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
             // btnEdit
             // 
@@ -88,6 +89,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.btnEdit.Size = new System.Drawing.Size(40, 47);
             this.btnEdit.Text = "Edit...";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
             // btnDelete
             // 
@@ -99,6 +101,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.btnDelete.Size = new System.Drawing.Size(44, 47);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // dataGridView1
             // 
@@ -229,8 +232,8 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtTotalSupplementalAppropriations);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.toolStrip1);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(834, 476);
             this.Name = "frmSupplementalAppropriations";
@@ -256,14 +259,12 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        internal System.Windows.Forms.ToolStripStatusLabel lblRecords;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         internal System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         internal System.Windows.Forms.ToolStripStatusLabel lblUpdatedAtPlaceHolder;
         internal System.Windows.Forms.ToolStripStatusLabel lblDateEntry;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
-        internal System.Windows.Forms.ToolStripStatusLabel labelRecords;
         internal System.Windows.Forms.ToolStripStatusLabel lblRecordCounts;
         internal System.Windows.Forms.ToolStripStatusLabel labelRecordsCountsPlaceHolder;
         internal System.Windows.Forms.ToolStripStatusLabel lblDateEntryPlaceHolder;

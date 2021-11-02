@@ -354,7 +354,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         #endregion
         private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.DataGridView dgBudgetAppropriations;
-        private System.Windows.Forms.ToolStripButton btnAllotment;
         internal System.Windows.Forms.TextBox txtTotal;
         internal System.Windows.Forms.ComboBox cmbxAllotmentClass;
         internal System.Windows.Forms.ComboBox cmbxFunds;

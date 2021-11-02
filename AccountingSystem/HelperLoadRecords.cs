@@ -592,7 +592,10 @@ namespace AccountingSystem
             datagrid.Columns[1].HeaderText = "Account Code";
             datagrid.Columns[2].HeaderText = "Ledger Name";
 
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            datagrid.Columns[1].Width = 100;
+            datagrid.Columns[2].Width = 325;
+
         }
         #endregion
 
@@ -816,13 +819,19 @@ namespace AccountingSystem
         {
             datagrid.DataSource = dataTable;
             datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Firstname";
-            datagrid.Columns[2].HeaderText = "MI";
-            datagrid.Columns[3].HeaderText = "Lastname";
-            datagrid.Columns[4].HeaderText = "Username";
-            datagrid.Columns[5].HeaderText = "Role";
+            datagrid.Columns[1].Visible = false;
+            datagrid.Columns[2].HeaderText = "Firstname";
+            datagrid.Columns[3].HeaderText = "MI";
+            datagrid.Columns[4].HeaderText = "Lastname";
+            datagrid.Columns[5].HeaderText = "Username";
             datagrid.Columns[6].Visible = false;
             datagrid.Columns[7].Visible = false;
+            datagrid.Columns[8].Visible = false;
+            datagrid.Columns[9].Visible = false;
+            datagrid.Columns[10].HeaderText = "Office";
+            datagrid.Columns[11].HeaderText = "Role";
+            datagrid.Columns[12].Visible = false;
+            datagrid.Columns[13].Visible = false;
 
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -1066,16 +1075,14 @@ namespace AccountingSystem
 
 
                     //GET TOTAL REALIGNMENT
-                    var dtRealignmentTo = Factory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedToByBudgetId(rowId);
+                    var totalRealignmentTo = Factory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedToByBudgetId(rowId);
 
-                    var dtRealignmentFrom = Factory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedFromByBudgetId(rowId);
-
-
+                    var totalRealignmentFrom = Factory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedFromByBudgetId(rowId);
 
                     //GET TOTAL APPROPRIATION
-                    decimal totalAppropriationAmount = (totalSupplementalAppropriation + rowAppropriationAmount + dtRealignmentTo) - dtRealignmentFrom;
+                    decimal totalAppropriationAmount = (totalSupplementalAppropriation + rowAppropriationAmount + totalRealignmentTo) - totalRealignmentFrom;
 
-                    decimal appropriationBalance = (totalSupplementalAppropriation + rowAppropriationAmount - totalAllotmentRelease);
+                    decimal appropriationBalance = (totalSupplementalAppropriation + rowAppropriationAmount - totalAllotmentRelease + totalRealignmentTo) - totalRealignmentFrom;
 
 
                     dgvBudgetAppropriations.Rows.Add(new object[] {
@@ -1138,8 +1145,6 @@ namespace AccountingSystem
 
         internal static void DashboardDetailedDatagridView(DataGridView dgvBudgetAppropriations, string fppID, int allotmentClassID, int fundId, DateTime dateAsOf)
         {
-            try
-            {
                 #region DATAGRID FORMAT
 
                 //Image Column
@@ -1254,8 +1259,8 @@ namespace AccountingSystem
                 dgvBudgetAppropriations.Columns["continuing"].MinimumWidth = 80;
 
                 #endregion
-                int? sub_fpp;
 
+                int? sub_fpp;
                 sub_fpp = null;
 
                 var dtGetViewRecordsByFFPIDByAllotmentClass = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf);
@@ -1359,12 +1364,6 @@ namespace AccountingSystem
 
                 dgvBudgetAppropriations.ClearSelection();
 
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-
         }
 
 
@@ -1440,10 +1439,9 @@ namespace AccountingSystem
 
         #endregion Supplemental Appropriations
 
-
         #region BudgetRealignment
 
-        internal static void BudgetRealignmentFromDatagridView(DataTable dataTable, DataGridView dgv)
+        internal static void BudgetRealignmentDatagridView(DataTable dataTable, DataGridView dgv)
         {
             try
             {
@@ -1454,36 +1452,46 @@ namespace AccountingSystem
                 dgv.Columns.Clear();
 
                 //Set up new Columns to Datagrid View
-                dgv.Columns.Add("from_id", "id");
-                dgv.Columns.Add("from_fpp_name", "FPP");
-                dgv.Columns.Add("from_allotment_name", "Allotment Class");
-                dgv.Columns.Add("from_budget", "Realigned From");
-                dgv.Columns.Add("amount", "Amount");
+                dgv.Columns.Add("id", "ID");
+                dgv.Columns.Add("fpp_name", "FPP");
+                dgv.Columns.Add("allotment_name", "Allotment Class");
+                dgv.Columns.Add("ledger_name", "Budget Appropriation");
+                dgv.Columns.Add("date_entry", "Date Entry");
+                dgv.Columns.Add("total_amount", "Total Amount");
+                dgv.Columns.Add("remarks", "Remarks");
 
-                dgv.Columns["from_fpp_name"].Width = 120;
+                dgv.Columns["fpp_name"].Width = 120;
 
                 //Set up Column Format
-                dgv.Columns["from_id"].Visible = false;
-                dgv.Columns["amount"].DefaultCellStyle.Format = "N2";
+                dgv.Columns["id"].Visible = false;
+                dgv.Columns["fpp_name"].Width = 100;
+                dgv.Columns["ledger_name"].Width = 230;
+                dgv.Columns["date_entry"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
+                dgv.Columns["total_amount"].DefaultCellStyle.Format = "N2";
+                dgv.Columns["total_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
 
-                dgv.Columns["from_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgv.Columns["from_budget"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgv.Columns["amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["fpp_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["allotment_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["ledger_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["date_entry"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["total_amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgv.Columns["remarks"].SortMode = DataGridViewColumnSortMode.NotSortable;
 
                 //Load by loop All Budget Appropriations Records with Others FPP 
                 foreach (DataRow drRealignment in dataTable.Rows)
                 {
                     dgv.Rows.Add(new object[]
                     {
-                        drRealignment["from_id"],
-                        drRealignment["from_fpp_name"],
-                        drRealignment["from_allotment_name"],
-                        drRealignment["from_budget"],
-                        drRealignment["amount"] 
+                        drRealignment["id"],
+                        drRealignment["fpp_name"],
+                        drRealignment["allotment_name"],
+                        drRealignment["ledger_name"],
+                        drRealignment["date_entry"],
+                        drRealignment["total_amount"],
+                        drRealignment["remarks"] 
                     });
                 }
-
 
                 dgv.ClearSelection();
                 Helper.DatagridFullRowSelectStyle(dgv, true);
@@ -1494,31 +1502,33 @@ namespace AccountingSystem
             }
         }
 
-        internal static void BudgetRealignmentToDatagridView(DataTable dataTable, DataGridView dgv)
+        internal static void BudgetRealignmentAccountsDatagridView(DataTable dataTable, DataGridView dgv)
         {
             try
             {
-                Helper.DatagridDefaultStyle(dgv, true);
+                //Helper.DatagridDefaultStyle(dgv, true);
 
                 //Clearing Datagrid View  Rows & Columns before Loading new one
                 dgv.Rows.Clear();
                 dgv.Columns.Clear();
 
                 //Set up new Columns to Datagrid View
-                dgv.Columns.Add("to_id", "id");
-                dgv.Columns.Add("to_fpp_name", "FPP");
-                dgv.Columns.Add("to_allotment_name", "Allotment Class");
-                dgv.Columns.Add("to_budget", "Realigned To");
+                dgv.Columns.Add("to_budget_appropriations_id", "To Budget ID");
+                dgv.Columns.Add("to_ledger_id", "Ledger Id");
+                dgv.Columns.Add("to_budget", "Budget Appropriation");
                 dgv.Columns.Add("amount", "Amount");
 
-                dgv.Columns["to_fpp_name"].Width = 120;
+                dgv.Columns["to_budget"].Width = 300;
+                dgv.Columns["amount"].Width = 100;
 
                 //Set up Column Format
-                dgv.Columns["to_id"].Visible = false;
+                dgv.Columns["to_budget_appropriations_id"].Visible = false;
+                dgv.Columns["to_ledger_id"].Visible = false;
+                dgv.Columns["to_budget"].ReadOnly = true;
                 dgv.Columns["amount"].DefaultCellStyle.Format = "N2";
+                dgv.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
 
-                dgv.Columns["to_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgv.Columns["to_budget"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgv.Columns["amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
 
@@ -1527,24 +1537,20 @@ namespace AccountingSystem
                 {
                     dgv.Rows.Add(new object[]
                     {
-                        drRealignment["to_id"],
-                        drRealignment["to_fpp_name"],
-                        drRealignment["to_allotment_name"],
+                        drRealignment["to_budget_appropriations_id"],
+                        drRealignment["to_ledger_id"],
                         drRealignment["to_budget"],
-                        drRealignment["amount"]
+                        drRealignment["amount"],
                     });
                 }
 
-
                 dgv.ClearSelection();
-                Helper.DatagridFullRowSelectStyle(dgv, true);
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
         }
-
 
 
         #endregion
@@ -1616,27 +1622,116 @@ namespace AccountingSystem
             datagrid.Columns["journals_id"].Visible = false;
         }
 
-        internal static void JEVDatagridView(DataTable dataTable, DataGridView datagrid)
+        internal static void JEVDatagridView(DataGridView datagrid)
         {
-            datagrid.DataSource = dataTable;
+            datagrid.Columns.Clear();
+            datagrid.Columns.Add("id", "ID");
+            datagrid.Columns.Add("funds_id", "Funds ID");
+            datagrid.Columns.Add("journals_id", "Journals ID");
+            datagrid.Columns.Add("jev_no", "JEV No.");
+            datagrid.Columns.Add("full_jev_no", "JEV No.");
+            datagrid.Columns.Add("date_entry", "Date Entry");
+            datagrid.Columns.Add("ref_no", "Ref No.");
+            datagrid.Columns.Add("payee", "Payee");
+            datagrid.Columns.Add("explanation", "Explanation");
+            datagrid.Columns.Add("fund_code", "Fund Code");
+            datagrid.Columns.Add("created_at", "Created At");
+            datagrid.Columns.Add("created_by_id", "Created By ID");
+            datagrid.Columns.Add("created_by_name", "Created By");
+            datagrid.Columns.Add("updated_at", "Updated At");
+            datagrid.Columns.Add("updated_by_id", "Updated By ID");
+            datagrid.Columns.Add("updated_by_name", "Updated By");
+            datagrid.Columns.Add("status", "Status");
+
+
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["funds_id"].Visible = false;
             datagrid.Columns["journals_id"].Visible = false;
+            datagrid.Columns["full_jev_no"].Width = 120;
+            datagrid.Columns["ref_no"].Width = 60;
+            datagrid.Columns["date_entry"].Width = 120;
+            datagrid.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["created_by_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.ShowCellToolTips = false;
+            datagrid.Columns["payee"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill; 
+            datagrid.Columns["date_entry"].DefaultCellStyle.Format = "MMMM, dd, yyyy";
             datagrid.Columns["jev_no"].Visible = false;
-            datagrid.Columns["full_jev_no"].HeaderText = "JEV No.";
-            datagrid.Columns["date_entry"].HeaderText = "Date";
-            datagrid.Columns["ref_no"].HeaderText = "Ref No.";
-            datagrid.Columns["payee"].HeaderText = "Payee";
-            datagrid.Columns["explanation"].HeaderText = "Explanation";
-            datagrid.Columns["explanation"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             datagrid.Columns["fund_code"].Visible = false;
-            datagrid.Columns["is_approved"].Visible = false;
-            datagrid.Columns["is_disapproved"].Visible = false;
-            datagrid.Columns["is_cancelled"].Visible = false;
             datagrid.Columns["created_at"].Visible = false;
-            datagrid.Columns["created_by"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
-            datagrid.Columns["updated_by"].Visible = false;
+            datagrid.Columns["created_by_id"].Visible = false;
+            datagrid.Columns["updated_by_id"].Visible = false;
+            datagrid.Columns["updated_by_name"].Visible = false;    
+            datagrid.Columns["explanation"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["status"].SortMode = DataGridViewColumnSortMode.Automatic;
+
+        }
+
+        #endregion
+
+        #region Amortization
+
+        internal static void AmortizationDataGridView(DataTable dataTable, DataGridView dataGridView) 
+        {
+            dataGridView.DataSource = dataTable;
+
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["bank_name"].HeaderText = "Bank";
+            dataGridView.Columns["amortization_term"].HeaderText = "Term";
+            dataGridView.Columns["amortization_term"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dataGridView.Columns["amortization_term"].Width = 100;
+            dataGridView.Columns["interest"].HeaderText = "Interest";
+            dataGridView.Columns["interest"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dataGridView.Columns["interest"].Width = 100;
+            dataGridView.Columns["amount_released"].HeaderText = "Amount Released";
+            dataGridView.Columns["amount_released"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dataGridView.Columns["amount_released"].Width = 200;
+            dataGridView.Columns["interest"].DefaultCellStyle.Format = "0.00\\%";
+            dataGridView.Columns["amount_released"].DefaultCellStyle.Format = "#,0.00###";         
+        }
+
+        #endregion
+
+        #region Amortization Schedule
+
+        public static void DatagridViewAmortizationSchedule(DataTable dataTable, string amortizationTerm, DataGridView dataGridView) 
+        {
+
+            dataGridView.DataSource = dataTable;
+
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["amortization_id"].Visible = false;
+
+            switch (amortizationTerm)
+            {
+                case "Annually":
+                    dataGridView.Columns["date"].HeaderText = "Year";
+                    dataGridView.Columns["date"].DefaultCellStyle.Format = "yyyy";
+                    break;
+
+                case "Monthly":
+                    dataGridView.Columns["date"].HeaderText = "Month";
+                    dataGridView.Columns["date"].DefaultCellStyle.Format = "MMMMM, yyyy";
+                    break;
+
+                case "Daily":
+                    dataGridView.Columns["date"].HeaderText = "Date";
+                    dataGridView.Columns["date"].DefaultCellStyle.Format = "ddd. dd, MMMMM yyyy";
+                    break;
+
+                default:
+                    dataGridView.Columns["date"].HeaderText = "Date";
+                    dataGridView.Columns["date"].DefaultCellStyle.Format = "ddd. dd, MMMMM yyyy";
+                    break;
+            }
+
+          
+            dataGridView.Columns["principal_amount"].DefaultCellStyle.Format = "#,0.00###";
+            dataGridView.Columns["principal_amount"].HeaderText = "Principal";
+            dataGridView.Columns["interest_amount"].DefaultCellStyle.Format = "#,0.00###";
+            dataGridView.Columns["interest_amount"].HeaderText = "Interest";
+            dataGridView.Columns["grt_amount"].DefaultCellStyle.Format = "#,0.00###";
+            dataGridView.Columns["grt_amount"].HeaderText = "GRT";
         }
 
         #endregion

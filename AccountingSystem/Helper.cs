@@ -71,6 +71,39 @@ namespace AccountingSystem
             if (Fill == true) dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
+        public static void DatagridEditableRowStyle(DataGridView dgv, Boolean Fill = false)
+        {
+            dgv.EnableHeadersVisualStyles = false;
+            dgv.AllowUserToAddRows = false;
+            dgv.AllowUserToDeleteRows = false;
+            dgv.AllowUserToOrderColumns = false;
+            dgv.AllowUserToResizeColumns = true;
+            dgv.BackgroundColor = Color.White;
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgv.GridColor = Color.FromKnownColor(KnownColor.Control);
+            dgv.BorderStyle = BorderStyle.FixedSingle;
+            dgv.ReadOnly = false;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.AllowUserToResizeRows = false;
+            dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromKnownColor(KnownColor.White);
+            dgv.RowTemplate.Height = 20;
+            dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromKnownColor(KnownColor.White);
+            dgv.RowTemplate.Height = 20;
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.White);
+            dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dgv.RowHeadersDefaultCellStyle.SelectionBackColor = Color.FromKnownColor(KnownColor.GradientInactiveCaption);
+            dgv.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dgv.RowHeadersDefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.White);
+            dgv.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dgv.RowHeadersWidth = 25;
+            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
+            dgv.AdvancedColumnHeadersBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.Outset;
+            dgv.DefaultCellStyle.SelectionBackColor = Color.LightSkyBlue;
+            dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
+            if (Fill == true) dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
         public static Dictionary<string, string> LGUDetails()
         {
             var lguDict = new Dictionary<string, string>
@@ -79,6 +112,29 @@ namespace AccountingSystem
             };
 
             return lguDict;
+        }
+
+
+        public static Color StatusColor(string status) 
+        {
+            switch (status)
+            {
+                case "Approved":
+                    return Color.FromArgb(97, 177, 90);
+
+                case "Disapproved":
+                    return Color.FromArgb(255, 81, 81);
+                  
+
+                case "Cancelled":
+                    return Color.FromArgb(156, 25, 224);
+
+                case "Pending":
+                    return Color.Gold;
+
+                default:
+                    return Color.Black;
+            }
         }
 
         internal static Dictionary<string, string> LoggedInUserData()
@@ -165,6 +221,17 @@ namespace AccountingSystem
             return false;
         }
 
+        public static bool ShowErrorNumericUpDownZero(ErrorProvider ep, NumericUpDown numericUpDown, string fieldName = "Field")
+        {
+            if (numericUpDown.Value == 0)
+            {
+                ep.SetError(numericUpDown, $"{ErrorMessageForEmpty(fieldName)}");
+                return true;
+            }
+
+            return false;
+        }
+        
         public static bool ShowErrorCheckedListBox(ErrorProvider ep, CheckedListBox chklstBox, string fieldName = "Field")
         {
             if (chklstBox.CheckedIndices.Count == 0)
@@ -237,6 +304,12 @@ namespace AccountingSystem
 
         #region MessageBoxes
         // prompt a success messagebox
+
+        public static void MessageBoxWarning(string message)
+        {
+            _ = MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
         public static void MessageBoxSuccess(string message)
         {
             _ = MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);

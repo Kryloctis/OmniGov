@@ -32,12 +32,12 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-
         private void frmRoles_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgRoles);
+            Helper.DatagridFullRowSelectStyle(dgRoles, true);
             LoadRoles();
+            Helper.EnableDisableToolStripButtons(dgRoles, btnEdit, btnDelete);
         }
 
         private void LoadPermissionsByRoleId(byte roleId)
