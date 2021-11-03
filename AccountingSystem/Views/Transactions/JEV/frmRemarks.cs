@@ -22,7 +22,12 @@ namespace AccountingSystem.Views.Transactions.JEV
                 btnAccept.Enabled = false;
 
             if (!Helper.HasPermission("JEV Approval"))
+            {
                 txtRemarks.ReadOnly = true;
+                btnSaveMessage.Enabled = false;
+            }
+            else
+                btnSaveMessage.Enabled = true;
         }
 
         private void frmRemarks_Load(object sender, EventArgs e)
@@ -99,6 +104,14 @@ namespace AccountingSystem.Views.Transactions.JEV
                 _frmJEV.btnSave.Text = "Update";
                 _frmJEV.ucjev1.Enabled = true;
                 Close();
+            }
+        }
+
+        private void btnSaveMessage_Click(object sender, EventArgs e)
+        {
+            if (SetRemarks()) 
+            {
+                Helper.MessageBoxSuccess("Dissaproval message has been saved.");
             }
         }
     }

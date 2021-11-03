@@ -37,7 +37,7 @@ namespace ACC.Domain.Interfaces
 
         string GetLastJevNoSeries();
 
-        Dictionary<string, string> GetRecordByJEV(string jevNo);
+        Dictionary<string, string> GetViewRecordByJEV(string jevNo);
 
         DataTable GetRecordsByJEVNoAndDate(string searchText, sbyte jevDate, ushort year, byte journalId);
 

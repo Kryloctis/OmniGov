@@ -677,7 +677,7 @@ namespace ACC.Data
             return false;
         }
 
-        public Dictionary<string, string> GetRecordByJEV(string jevNo)
+        public Dictionary<string, string> GetViewRecordByJEV(string jevNo)
         {
             var record = new Dictionary<string, string>();
 
