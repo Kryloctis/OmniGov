@@ -18,13 +18,15 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal frmJEVList _frmJEVList;
         internal ucJEVDashboard _ucJEVDashboard;
         internal int createdById;
+        private Dictionary<string, string> userDict;
 
         public frmJEV(frmJEVList frmJEVList, ucJEVDashboard ucJEVDashboard)
         {
             InitializeComponent();
             uc = ucjev1;
             _frmJEVList = frmJEVList;
-            _ucJEVDashboard = ucJEVDashboard;   
+            _ucJEVDashboard = ucJEVDashboard;
+            userDict = Helper.LoggedInUserData();
             Helper.LoadFormIcon(this);
         }
 
@@ -36,6 +38,10 @@ namespace AccountingSystem.Views.Transactions.JEV
                 LoadSelectedJEV(uc.jevNo);
                 CheckJevStatus(uc.jevId);
             }
+            else
+                lblCreatedBy.Text = $"{userDict["first_name"]} {userDict["mid_initial"]} {userDict["last_name"]}";
+
+
             uc.SumDebitCredit();
             PermissionVerification();
         }
