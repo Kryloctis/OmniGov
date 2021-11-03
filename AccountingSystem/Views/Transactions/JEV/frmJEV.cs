@@ -761,6 +761,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 var frmRemarks = new frmRemarks(this);
                 frmRemarks.isDissaprove = true;
                 frmRemarks.btnAccept.Text = "Disapprove";
+                frmRemarks.btnSaveMessage.Visible = false;
                 frmRemarks.ShowDialog();
             }
         }
