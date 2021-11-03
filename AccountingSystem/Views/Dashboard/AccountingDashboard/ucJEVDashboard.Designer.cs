@@ -401,8 +401,6 @@ namespace AccountingSystem.Views.Dashboard
         }
 
         #endregion
-        internal System.Windows.Forms.Label lblPSAllotmentRelease;
-        internal System.Windows.Forms.Label lblPSunobligatedBalance;
         private System.Windows.Forms.Button btnRefreshCounter;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel pnlDisapproved;

@@ -466,7 +466,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             try
             {
-                if (MessageBox.Show("Are you sure you want to delete this record?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (MessageBox.Show("Are you sure you want to delete this JEV?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     var jevModel = new JEVModel();
                     jevModel.Id = uc.jevId;
