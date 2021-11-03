@@ -45,8 +45,13 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblJevStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblShowMessage = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblCreatedBy = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.statusStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -222,12 +227,46 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.lblShowMessage.Visible = false;
             this.lblShowMessage.Click += new System.EventHandler(this.lblShowMessage_Click);
             // 
+            // statusStrip2
+            // 
+            this.statusStrip2.BackColor = System.Drawing.Color.White;
+            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel3,
+            this.toolStripStatusLabel4,
+            this.lblCreatedBy});
+            this.statusStrip2.Location = new System.Drawing.Point(0, 632);
+            this.statusStrip2.Name = "statusStrip2";
+            this.statusStrip2.Size = new System.Drawing.Size(1006, 22);
+            this.statusStrip2.SizingGrip = false;
+            this.statusStrip2.TabIndex = 15;
+            this.statusStrip2.Text = "statusStrip2";
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(866, 17);
+            this.toolStripStatusLabel3.Spring = true;
+            // 
+            // toolStripStatusLabel4
+            // 
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(67, 17);
+            this.toolStripStatusLabel4.Text = "Created By:";
+            // 
+            // lblCreatedBy
+            // 
+            this.lblCreatedBy.Margin = new System.Windows.Forms.Padding(0, 3, 5, 2);
+            this.lblCreatedBy.Name = "lblCreatedBy";
+            this.lblCreatedBy.Size = new System.Drawing.Size(22, 17);
+            this.lblCreatedBy.Text = "---";
+            // 
             // frmJEV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(1006, 634);
+            this.ClientSize = new System.Drawing.Size(1006, 654);
+            this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.ucjev1);
             this.Controls.Add(this.toolStrip1);
@@ -242,6 +281,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.statusStrip2.ResumeLayout(false);
+            this.statusStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -264,5 +305,9 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal System.Windows.Forms.ToolStripStatusLabel lblShowMessage;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         internal System.Windows.Forms.ToolStripButton btnCancelJEV;
+        private System.Windows.Forms.StatusStrip statusStrip2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.ToolStripStatusLabel lblCreatedBy;
     }
 }

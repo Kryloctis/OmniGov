@@ -966,7 +966,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 Enabled = true;
                 uc.txtJEVNo.Text = jevNo;
 
-                Dictionary<string, string> jevDict = Factory.JEVRepository().GetRecordByJEV(jevNo);
+                Dictionary<string, string> jevDict = Factory.JEVRepository().GetViewRecordByJEV(jevNo);
 
                 LoadCheckDisbursementsDataIfExist(uc.jevId);
                 LoadCashReceiptsDataIfExist(uc.jevId);
@@ -986,6 +986,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 uc.isApproved = Convert.ToByte(jevDict["is_approved"]);
                 uc.isDisapproved = Convert.ToByte(jevDict["is_disapproved"]);
                 uc.isCancelled = Convert.ToByte(jevDict["is_cancelled"]);
+                lblCreatedBy.Text = jevDict["created_by_name"];
 
                 CheckedFund(jevDict["fund_name"]);
                 CheckedJournal(jevDict["journal_name"]);
