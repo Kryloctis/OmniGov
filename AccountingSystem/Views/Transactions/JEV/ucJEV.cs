@@ -484,13 +484,21 @@ namespace AccountingSystem.Views.Transactions.JEV
             Helper.ClearErrorTextBox(epExplanation, txtExplanation);
         }
 
+        private void RemoveRow()
+        {
+            if (MessageBox.Show("Are you sure you want to remove this record?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                foreach (DataGridViewRow row in dgAccounts.SelectedRows)
+                {
+                    dgAccounts.Rows.Remove(row);
+                }
+                SumDebitCredit();
+            }
+        }
+
         private void btnRemoveAccount_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dgAccounts.SelectedRows)
-            {
-                dgAccounts.Rows.Remove(row);
-            }
-            SumDebitCredit();
+            RemoveRow();
         }
 
         private void btnEditAccount_Click(object sender, EventArgs e)

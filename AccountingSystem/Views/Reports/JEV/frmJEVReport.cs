@@ -123,6 +123,10 @@ namespace AccountingSystem.Views.Reports.JEV
                     var preparedByFullName = $"{preparedByData["first_name"]} {preparedByData["mid_initial"]} {preparedByData["last_name"]}";
                     var full_jev = $"{data["fund_code"]}-{Convert.ToDateTime(data["date_entry"]).Year}-{Convert.ToDateTime(data["date_entry"]).Month}-{data["jev_no"]}";
 
+
+                    var dictJev = Factory.JEVRepository().GetRecordByID(_jevId);
+                    var dictUser = Factory.UsersRepository().GetRecordByID(Convert.ToInt32(dictJev["created_by"]));
+
                     SetJournalCustomFields();
 
                     var parameters = new[] {
@@ -133,7 +137,8 @@ namespace AccountingSystem.Views.Reports.JEV
                     new ReportParameter("paramJEVDate", Convert.ToDateTime(data["date_entry"]).ToString("MM/dd/yy")),
                     new ReportParameter("paramPayee", data["payee"]),
                     new ReportParameter("paramExplanation", data["explanation"]),
-                    new ReportParameter("paramPreparedBy",preparedByFullName),
+                    new ReportParameter("paramPreparedBy",dictJev["created_by_name"].ToUpper()),
+                    new ReportParameter("paramPreparedByRole",dictUser["role_name"]),
                     new ReportParameter("paramCertifiedBy", signatory),
                     new ReportParameter("paramDateEntry", Convert.ToDateTime(data["date_entry"]).ToString("MM/dd/yy")),
 
@@ -255,8 +260,6 @@ namespace AccountingSystem.Views.Reports.JEV
             nudYear.ValueChanged += new EventHandler(nudYear_ValueChanged);
             dgJEV.SelectionChanged += new EventHandler(dgJEV_SelectionChanged);
         }
-
-
 
         private void LoadSelectedJEV() 
         {

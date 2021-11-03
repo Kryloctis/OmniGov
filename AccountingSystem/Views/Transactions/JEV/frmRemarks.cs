@@ -16,10 +16,26 @@ namespace AccountingSystem.Views.Transactions.JEV
             _frmJEV = frmjev;
         }
 
+        private void PermissionVerification() 
+        {
+            if(_frmJEV.createdById != Helper.UserId)
+                btnAccept.Enabled = false;
+
+            if (!Helper.HasPermission("JEV Approval"))
+            {
+                txtRemarks.ReadOnly = true;
+                btnSaveMessage.Enabled = false;
+            }
+            else
+                btnSaveMessage.Enabled = true;
+        }
+
         private void frmRemarks_Load(object sender, EventArgs e)
         {
             int jevId = _frmJEV.ucjev1.jevId;
             txtRemarks.Text = Factory.JEVRepository().GetRemarks(jevId);
+            txtRemarks.SelectionStart = 0;
+            PermissionVerification();
         }
 
         private bool SetRemarks()
@@ -64,7 +80,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             return false;
         }
 
-
         private void btnAccept_Click(object sender, EventArgs e)
         {
             if (isDissaprove)
@@ -89,6 +104,14 @@ namespace AccountingSystem.Views.Transactions.JEV
                 _frmJEV.btnSave.Text = "Update";
                 _frmJEV.ucjev1.Enabled = true;
                 Close();
+            }
+        }
+
+        private void btnSaveMessage_Click(object sender, EventArgs e)
+        {
+            if (SetRemarks()) 
+            {
+                Helper.MessageBoxSuccess("Dissaproval message has been saved.");
             }
         }
     }

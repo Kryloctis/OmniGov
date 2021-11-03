@@ -184,7 +184,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(25)))), ((int)(((byte)(224)))));
-            this.panel6.Location = new System.Drawing.Point(414, 13);
+            this.panel6.Location = new System.Drawing.Point(398, 12);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(22, 4);
             this.panel6.TabIndex = 6;
@@ -192,7 +192,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(442, 6);
+            this.label5.Location = new System.Drawing.Point(426, 5);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 15);
             this.label5.TabIndex = 5;
@@ -201,7 +201,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(81)))), ((int)(((byte)(81)))));
-            this.panel5.Location = new System.Drawing.Point(298, 13);
+            this.panel5.Location = new System.Drawing.Point(282, 12);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(22, 4);
             this.panel5.TabIndex = 6;
@@ -209,7 +209,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(326, 6);
+            this.label4.Location = new System.Drawing.Point(310, 5);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(73, 15);
             this.label4.TabIndex = 5;
@@ -218,7 +218,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Gold;
-            this.panel4.Location = new System.Drawing.Point(200, 13);
+            this.panel4.Location = new System.Drawing.Point(184, 12);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(22, 4);
             this.panel4.TabIndex = 6;
@@ -226,7 +226,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(228, 6);
+            this.label3.Location = new System.Drawing.Point(212, 5);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(51, 15);
             this.label3.TabIndex = 5;
@@ -235,7 +235,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(177)))), ((int)(((byte)(90)))));
-            this.panel3.Location = new System.Drawing.Point(86, 13);
+            this.panel3.Location = new System.Drawing.Point(70, 12);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(22, 4);
             this.panel3.TabIndex = 6;
@@ -243,7 +243,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(114, 6);
+            this.label2.Location = new System.Drawing.Point(98, 5);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 15);
             this.label2.TabIndex = 5;
@@ -254,9 +254,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 6);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 15);
+            this.label1.Size = new System.Drawing.Size(52, 15);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Legendary: ";
+            this.label1.Text = "Legend: ";
             // 
             // btnClose
             // 
