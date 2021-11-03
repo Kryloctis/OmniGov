@@ -98,35 +98,85 @@ namespace ACC.Data
         {
             try
             {
-                string query = string.Empty;
+                List<string> conditions = new List<string>();
+                string query = $"SELECT {tableName}.id," +
+                        $"{tableName}.report_no," +
+                        $"CONCAT({tableName5}.fund_code,'-',{tableName5}.fund_name) AS fund," +
+                        $"{tableName}.date," +
+                        $"CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector," +
+                        $"(SELECT SUM({tableName4}.amount) FROM {tableName3} LEFT JOIN {tableName4} ON {tableName3}.payment_collections_id={tableName4}.id AND {tableName3}.collector_report_id={tableName}.id) AS colamount," +
+                        $"{tableName}.is_approved " +
+                        $"FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id LEFT JOIN {tableName5} ON {tableName}.funds_id={tableName5}.id";
                 var uRepository = Factory.UsersRepository();
-                if (uRepository.LinkedCollector(Factory.UserId))
+                int cid = uRepository.LinkedCollector(Factory.UserId) ? int.Parse(uRepository.GetCollectorByUserId(Factory.UserId)) : 0;
+                if (cid > 0) conditions.Add($"{tableName}.collecting_officers_id={cid}");
+                if (conditions.Count > 0)
                 {
-                    query = $"SELECT {tableName}.id," +
-                        $"{tableName}.report_no," +
-                        $"CONCAT({tableName5}.fund_code,'-',{tableName5}.fund_name) AS fund," +
-                        $"{tableName}.date," +
-                        $"CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector," +
-                        $"(SELECT SUM({tableName4}.amount) FROM {tableName3} LEFT JOIN {tableName4} ON {tableName3}.payment_collections_id={tableName4}.id AND {tableName3}.collector_report_id={tableName}.id) AS colamount," +
-                        $"{tableName}.is_approved, " +
-                        $"{tableName}.status, " +
-                        $"{tableName}.remarks " +
-                        $"FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id LEFT JOIN {tableName5} ON {tableName}.funds_id={tableName5}.id WHERE {tableName}.collecting_officers_id='{uRepository.GetCollectorByUserId(Factory.UserId)}' ORDER BY {tableName}.date DESC";
+                    query += $" WHERE {string.Join(" AND ", conditions)}";
                 }
-                else
-                {
-                    query = $"SELECT {tableName}.id," +
-                        $"{tableName}.report_no," +
-                        $"CONCAT({tableName5}.fund_code,'-',{tableName5}.fund_name) AS fund," +
-                        $"{tableName}.date," +
-                        $"CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector," +
-                        $"(SELECT SUM({tableName4}.amount) FROM {tableName3} LEFT JOIN {tableName4} ON {tableName3}.payment_collections_id={tableName4}.id AND {tableName3}.collector_report_id={tableName}.id) AS colamount," +
-                        $"{tableName}.is_approved, " +
-                        $"{tableName}.status, " +
-                        $"{tableName}.remarks " +
-                        $"FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id LEFT JOIN {tableName5} ON {tableName}.funds_id={tableName5}.id ORDER BY {tableName}.date DESC";
-                }
+                var dtcr = new DataTable();
+                return _dbGenericCommands.Fill(query, dtcr);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
+        public DataTable GetRecords(string id)
+        {
+            try
+            {
+                List<string> conditions = new List<string>();
+                string query = $"SELECT {tableName}.id," +
+                        $"{tableName}.report_no," +
+                        $"CONCAT({tableName5}.fund_code,'-',{tableName5}.fund_name) AS fund," +
+                        $"{tableName}.date," +
+                        $"CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector," +
+                        $"(SELECT SUM({tableName4}.amount) FROM {tableName3} LEFT JOIN {tableName4} ON {tableName3}.payment_collections_id={tableName4}.id AND {tableName3}.collector_report_id={tableName}.id) AS colamount," +
+                        $"{tableName}.is_approved " +
+                        $"FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id LEFT JOIN {tableName5} ON {tableName}.funds_id={tableName5}.id";
+                var uRepository = Factory.UsersRepository();
+                int cid = uRepository.LinkedCollector(Factory.UserId) ? int.Parse(uRepository.GetCollectorByUserId(Factory.UserId)) : 0;
+                if (cid > 0) conditions.Add($"{tableName}.collecting_officers_id={cid}");
+                if(id.Length > 0) conditions.Add($"{tableName}.id IN ({id})");
+                if (conditions.Count > 0)
+                {
+                    query += $" WHERE {string.Join(" AND ", conditions)}";
+                }
+                var dtcr = new DataTable();
+                return _dbGenericCommands.Fill(query, dtcr);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetRecords(int approved,string status, int fid, string date)
+        {
+            try
+            {
+                List<string> conditions = new List<string>();
+                var uRepository = Factory.UsersRepository();
+                int colid = uRepository.LinkedCollector(Factory.UserId) ? int.Parse(uRepository.GetCollectorByUserId(Factory.UserId)) : 0;
+                string query = $"SELECT {tableName}.id," +
+                       $"{tableName}.report_no," +
+                       $"CONCAT({tableName5}.fund_code,'-',{tableName5}.fund_name) AS fund," +
+                       $"{tableName}.date," +
+                       $"CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector," +
+                       $"(SELECT SUM({tableName4}.amount) FROM {tableName3} LEFT JOIN {tableName4} ON {tableName3}.payment_collections_id={tableName4}.id AND {tableName3}.collector_report_id={tableName}.id) AS colamount," +
+                       $"{tableName}.is_approved " +
+                       $"FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id LEFT JOIN {tableName5} ON {tableName}.funds_id={tableName5}.id";
+                if (colid > 0) conditions.Add($"{tableName}.collecting_officers_id={colid}");
+                if (date.Length > 0) conditions.Add($"{tableName}.date='{date}'");
+                if (approved > 0) conditions.Add($"{tableName}.is_approved={approved}");
+                if(status.Length > 0) conditions.Add($"{tableName}.status='{status}'");
+                if (fid > 0) conditions.Add($"{tableName}.funds_id={fid}");                
+                if (conditions.Count > 0)
+                {
+                    query += $" WHERE {string.Join(" AND ", conditions)}";
+                }
                 var dtcr = new DataTable();
                 return _dbGenericCommands.Fill(query, dtcr);
             }
@@ -140,37 +190,16 @@ namespace ACC.Data
         {
             try
             {
+                List<string> conditions = new List<string>();
                 string query = $"SELECT * FROM {tableName}";
-                if(cid > 0)
+                if(cid > 0) conditions.Add($"collecting_officers_id={cid}");
+                if (year > 0) conditions.Add($"DATE_FORMAT(date,'%Y')={year}");
+                if (fid > 0) conditions.Add($"funds_id={fid}");
+                
+                if (conditions.Count > 0)
                 {
-                    query = $"SELECT * FROM {tableName} WHERE collecting_officers_id={cid}";
+                    query += $" WHERE {string.Join(" AND ", conditions)}";
                 }
-                if (year > 0)
-                {
-                    query = $"SELECT * FROM {tableName} WHERE DATE_FORMAT(date,'%Y')={year}";
-                }
-                if (fid > 0)
-                {
-                    query = $"SELECT * FROM {tableName} WHERE funds_id={fid}";
-                }
-                if (cid > 0 && fid > 0)
-                {
-                    query = $"SELECT * FROM {tableName} WHERE collecting_officers_id={cid} AND funds_id={fid}";
-                }
-                if (year > 0 && fid > 0)
-                {
-                    query = $"SELECT * FROM {tableName} WHERE funds_id={fid} AND DATE_FORMAT(date,'%Y')={year}";
-                }
-                if (cid > 0 && year > 0)
-                {
-                    query = $"SELECT * FROM {tableName} WHERE collecting_officers_id={cid} AND DATE_FORMAT(date,'%Y')={year}";
-                }
-                if (cid > 0 && fid > 0 && year > 0)
-                {
-                    query = $"SELECT * FROM {tableName} WHERE collecting_officers_id={cid} AND funds_id={fid} AND DATE_FORMAT(date,'%Y')={year}";
-
-                }
-
                 var dtcr = new DataTable();
                 return _dbGenericCommands.Fill(query, dtcr);
             }
@@ -450,13 +479,14 @@ namespace ACC.Data
             {
                 string query = string.Empty;
                 var uRepository = Factory.UsersRepository();
-                if (uRepository.LinkedCollector(Factory.UserId))
+                int colid = uRepository.LinkedCollector(Factory.UserId) ? int.Parse(uRepository.GetCollectorByUserId(Factory.UserId)) : 0;
+                if (colid > 0)
                 {
-                    query = $"SELECT {tableName}.id,{tableName}.report_no,CONCAT({tableName5}.fund_code,'-',{tableName5}.fund_name) AS fund,{tableName}.date,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector,(SELECT SUM({tableName4}.amount) FROM {tableName3} LEFT JOIN {tableName4} ON {tableName3}.payment_collections_id={tableName4}.id AND {tableName3}.collector_report_id={tableName}.id) AS colamount,{tableName}.is_approved,{tableName}.status,{tableName}.remarks FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id LEFT JOIN {tableName5} ON {tableName}.funds_id={tableName5}.id WHERE {tableName}.collecting_officers_id='{uRepository.GetCollectorByUserId(Factory.UserId)}' AND {tableName}.report_no LIKE '%{searchText}%' OR CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) LIKE '%{searchText}%' OR ({tableName5}.fund_code,'-',{tableName5}.fund_name) LIKE '%{searchText}%' ORDER BY {tableName}.date DESC";
+                    query = $"SELECT {tableName}.id,{tableName}.report_no,CONCAT({tableName5}.fund_code,'-',{tableName5}.fund_name) AS fund,{tableName}.date,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector,(SELECT SUM({tableName4}.amount) FROM {tableName3} LEFT JOIN {tableName4} ON {tableName3}.payment_collections_id={tableName4}.id AND {tableName3}.collector_report_id={tableName}.id) AS colamount,{tableName}.is_approved FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id LEFT JOIN {tableName5} ON {tableName}.funds_id={tableName5}.id WHERE {tableName}.collecting_officers_id={colid} AND {tableName}.report_no LIKE '%{searchText}%' OR CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) LIKE '%{searchText}%' OR ({tableName5}.fund_code,'-',{tableName5}.fund_name) LIKE '%{searchText}%' ORDER BY {tableName}.date DESC";
                 }
                 else
                 {
-                    query = $"SELECT {tableName}.id,{tableName}.report_no,CONCAT({tableName5}.fund_code,'-',{tableName5}.fund_name) AS fund,{tableName}.date,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector,(SELECT SUM({tableName4}.amount) FROM {tableName3} LEFT JOIN {tableName4} ON {tableName3}.payment_collections_id={tableName4}.id AND {tableName3}.collector_report_id={tableName}.id) AS colamount,{tableName}.is_approved,{tableName}.status,{tableName}.remarks FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id LEFT JOIN {tableName5} ON {tableName}.funds_id={tableName5}.id WHERE {tableName}.report_no LIKE '%{searchText}%' OR CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) LIKE '%{searchText}%' OR ({tableName5}.fund_code,'-',{tableName5}.fund_name) LIKE '%{searchText}%' ORDER BY {tableName}.date DESC";
+                    query = $"SELECT {tableName}.id,{tableName}.report_no,CONCAT({tableName5}.fund_code,'-',{tableName5}.fund_name) AS fund,{tableName}.date,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector,(SELECT SUM({tableName4}.amount) FROM {tableName3} LEFT JOIN {tableName4} ON {tableName3}.payment_collections_id={tableName4}.id AND {tableName3}.collector_report_id={tableName}.id) AS colamount,{tableName}.is_approved FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id LEFT JOIN {tableName5} ON {tableName}.funds_id={tableName5}.id WHERE {tableName}.report_no LIKE '%{searchText}%' OR CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) LIKE '%{searchText}%' OR ({tableName5}.fund_code,'-',{tableName5}.fund_name) LIKE '%{searchText}%' ORDER BY {tableName}.date DESC";
                 }
 
                 var dtpc = new DataTable();

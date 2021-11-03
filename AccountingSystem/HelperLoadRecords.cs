@@ -465,6 +465,7 @@ namespace AccountingSystem
             DataGridViewCheckBoxColumn chk = new DataGridViewCheckBoxColumn();
             datagrid.Columns.Add(chk);
             chk.HeaderText = "Generate RCD";
+            datagrid.Sort(datagrid.Columns[0], System.ComponentModel.ListSortDirection.Descending);
 
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;

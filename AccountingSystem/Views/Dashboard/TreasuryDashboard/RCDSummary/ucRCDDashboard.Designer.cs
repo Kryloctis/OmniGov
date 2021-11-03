@@ -199,6 +199,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard.RCDSummary
             this.linkRCD.TabStop = true;
             this.linkRCD.Text = "Total RCDs";
             this.linkRCD.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.linkRCD.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkRCD_LinkClicked);
             // 
             // lblRCD
             // 
@@ -237,6 +238,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard.RCDSummary
             this.linkApproved.TabStop = true;
             this.linkApproved.Text = "Approved RCDs";
             this.linkApproved.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.linkApproved.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkApproved_LinkClicked);
             // 
             // lblApproved
             // 
@@ -275,6 +277,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard.RCDSummary
             this.linkPending.TabStop = true;
             this.linkPending.Text = "Pending RCDs";
             this.linkPending.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.linkPending.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPending_LinkClicked);
             // 
             // lblPending
             // 
@@ -313,6 +316,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard.RCDSummary
             this.linkDisapproved.TabStop = true;
             this.linkDisapproved.Text = "Disapproved RCDs";
             this.linkDisapproved.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.linkDisapproved.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkDisapproved_LinkClicked);
             // 
             // lblDisapproved
             // 
@@ -351,6 +355,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard.RCDSummary
             this.linkCancelled.TabStop = true;
             this.linkCancelled.Text = "Cancelled RCDs";
             this.linkCancelled.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.linkCancelled.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCancelled_LinkClicked);
             // 
             // lblCancelled
             // 

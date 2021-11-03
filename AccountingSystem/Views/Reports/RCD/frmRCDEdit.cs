@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Reports.PaymentCollection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -301,7 +302,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 uc.cmbcollector.SelectedValue = rcdData["collecting_officers_id"];
                 uc.txtreport.Text = rcdData["report_no"];
                 uc.dtdate.Value = Convert.ToDateTime(rcdData["date"]);
-                uc.approved = int.Parse(rcdData["is_approved"]);
+                uc.approved = Convert.ToBoolean(rcdData["is_approved"]) ? 1:0;
                 uc.status = rcdData["status"];
                 lblStatus.Text = rcdData["status"];
                 uc.remarks = rcdData["remarks"];
@@ -312,6 +313,15 @@ namespace AccountingSystem.Views.Reports.RCD
                 ButtonToolsInitialize();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        public void LoadSearchValue(int id)
+        {
+            ucrcd1.Id = id;
+            if (ucrcd1.Id > 0)
+            {
+                LoadSelectedValue();
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -369,6 +379,19 @@ namespace AccountingSystem.Views.Reports.RCD
             if(ucrcd1.Id > 0)
             {
                 _ = new frmRemarks(ucrcd1.Id).ShowDialog();
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            _ = new frmSearch(this).ShowDialog();
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            if(ucrcd1.Id > 0)
+            {
+                _ = new frmPCReport(ucrcd1.Id).ShowDialog();
             }
         }
     }
