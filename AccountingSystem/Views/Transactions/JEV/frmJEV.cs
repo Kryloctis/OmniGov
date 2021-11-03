@@ -462,6 +462,26 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         }
 
+        private bool DeleteData() 
+        {
+            try
+            {
+                if (MessageBox.Show("Are you sure you want to delete this record?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    var jevModel = new JEVModel();
+                    jevModel.Id = uc.jevId;
+
+                    var jevRepository = Factory.JEVRepository();
+                    return jevRepository.Delete(jevModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
@@ -618,23 +638,11 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            try
+           if(DeleteData())
             {
-                if (MessageBox.Show("Are you sure you want to delete this record?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    var jevModel = new JEVModel();
-                    jevModel.Id = uc.jevId;
-
-                    var jevRepository = Factory.JEVRepository();
-                    _ = jevRepository.Delete(jevModel);
-                    ResetForm();
-                    _frmJEVList.LoadJEVList();
-                    uc.ResetForm();
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxSuccess("JEV has been deleted.");
+                _frmJEVList.LoadJEVList();
+                Close();
             }
         }
 
