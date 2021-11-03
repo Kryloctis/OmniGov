@@ -59,6 +59,13 @@ namespace AccountingSystem.Views.Transactions.JEV
             if (!Helper.HasPermission("Report JEVs"))
                 btnPrint.Enabled = false;
 
+            if(!Helper.HasPermission("Transaction JEV"))
+            {
+                btnSave.Enabled = false;
+                btnDelete.Enabled = false;
+                ucjev1.Enabled = false;
+            }
+
 
             if (Helper.UserId != createdById && createdById != 0)
             {
