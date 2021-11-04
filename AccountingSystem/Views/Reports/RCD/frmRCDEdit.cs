@@ -391,7 +391,7 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             if(ucrcd1.Id > 0)
             {
-                _ = new frmPCReport(ucrcd1.Id).ShowDialog();
+                _ = new frmPCReport().ShowDialog();
             }
         }
     }
