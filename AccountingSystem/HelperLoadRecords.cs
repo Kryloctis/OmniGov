@@ -914,6 +914,7 @@ namespace AccountingSystem
             try
             {
                 //Image Column
+                dgvBudgetAppropriations.ShowCellToolTips = false;
                 Image continuingIcon = Properties.Resources.ok14px;
                 Image realignmentIcon = Properties.Resources.ok14px;
 
