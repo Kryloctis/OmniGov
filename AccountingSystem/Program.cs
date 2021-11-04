@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 
+
 namespace AccountingSystem
 {
     static class Program

@@ -15,28 +15,49 @@ namespace AccountingSystem.Views.Reports.RCD
     public partial class frmRCD : Form
     {
         public Dictionary<int, string> rcdgenerate = new Dictionary<int, string>();
-        public frmRCD()
+        private string rcds = string.Empty;
+        public frmRCD(string id)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgrcd, true);
+            rcds = id;
         }
 
         private void frmRCD_Load(object sender, EventArgs e)
         {
+            LoadFunds();
             LoadRecords();
             var uRepository = Factory.UsersRepository();
             dgrcd.Columns[7].Visible = uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer" ? true : false;
+        }
+        private void LoadFunds()
+        {
+            try
+            {
+                var fundrepo = Factory.FundsRepository();
+                var dtfunds = fundrepo.GetRecords();
+                cmbfunds.DataSource = dtfunds;
+                cmbfunds.ValueMember = "id";
+                cmbfunds.DisplayMember = "fund_name";
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         public void LoadRecords()
         {
             try
             {
-                var rcdRepository = Factory.CollectorReportRepository();
-                var dtrcd = rcdRepository.GetRecords();
+                int approved = cmbstatus.SelectedIndex != -1 && cmbstatus.SelectedItem.Equals("Approved") ? 1 : 0;
+                string status = cmbstatus.SelectedIndex != -1 && (cmbstatus.SelectedItem.Equals("Pending") || cmbstatus.SelectedItem.Equals("Cancelled")) ? cmbstatus.SelectedItem.ToString().ToUpper() : string.Empty;
+                int fundid = cmbfunds.SelectedValue != null ? int.Parse(cmbfunds.SelectedValue.ToString()):0;
+
+                var colrepo = Factory.CollectorReportRepository();
+                var dtrcd = rcds.Length > 0 ? colrepo.GetRecords(rcds) : colrepo.GetRecords(approved, status, fundid, string.Empty);
                 HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgrcd);
-                
 
                 lblRecordCount.Text = dgrcd.Rows.Count.ToString();
             }
@@ -88,17 +109,15 @@ namespace AccountingSystem.Views.Reports.RCD
         {   
             if(dgrcd.SelectedRows.Count > 0)
             {
-                Helper.EnableDisableToolStripButtons(dgrcd, btnEdit, btnDelete);
                 try
                 {
                     int id = int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString());
                     bool isapproved = Convert.ToBoolean(dgrcd.CurrentRow.Cells[6].Value);
                     var gcpRepository = Factory.GeneralCollectionsPaymentsRepository();
                     var uRepository = Factory.UsersRepository();
-                    btnDelete.Visible = uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer" ? true : false;
-                    btnDelete.Enabled = gcpRepository.IdExist(id) ? false : true;
-                    btnApproved.Visible = uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer" ? true : false;
-                    btnApproved.Text = isapproved ? "Disapproved" : "Approved";
+                    btnGenerate.Visible = uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer" ? true : false;
+                    btnGenerate.Enabled = gcpRepository.IdExist(id) ? false : true;
+
                 }
                 catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             }
@@ -108,7 +127,13 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void dgrcd_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            btnEdit.PerformClick();
+            if (dgrcd.SelectedRows.Count > 0)
+            {
+                int id = int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString());
+                _ = new frmRCDEdit(this, id).ShowDialog();
+            }
+                
+            
         }
 
         private void dgrcd_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -134,7 +159,7 @@ namespace AccountingSystem.Views.Reports.RCD
                         dgrcd.CurrentRow.Cells[e.ColumnIndex].Value = false;
                         rcdgenerate.Remove(int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString()));
                     }
-                    btnRCD.Enabled = rcdgenerate.Count > 0 ? true : false;
+                    btnGenerate.Enabled = rcdgenerate.Count > 0 ? true : false;
                 }
                 else
                 {                    
@@ -165,20 +190,6 @@ namespace AccountingSystem.Views.Reports.RCD
             }
         }
 
-        private void btnPrint_Click(object sender, EventArgs e)
-        {
-            if(rcdgenerate.Count > 0)
-            {
-                //string id = string.Join(",", rcdgenerate.Select(x => String.Format("'{0}'",x.Key)).ToArray());
-                //_ = new frmPCReport(id).ShowDialog();
-                _ = new frmGC(rcdgenerate, this).ShowDialog();               
-                
-            }
-            else{
-                Helper.MessageBoxError("Please select reports to Generate RCD!");
-            }
-        }
-
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadRecords();
@@ -206,6 +217,32 @@ namespace AccountingSystem.Views.Reports.RCD
                     }
                 }
                 catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            }
+        }
+
+        private void cmbstatus_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            rcds = string.Empty;
+            LoadRecords();
+        }
+
+        private void cmbfunds_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            rcds = string.Empty;
+            LoadRecords();
+        }
+
+        private void btnGenerate_Click(object sender, EventArgs e)
+        {
+            if (rcdgenerate.Count > 0)
+            {
+                //string id = string.Join(",", rcdgenerate.Select(x => String.Format("'{0}'",x.Key)).ToArray());
+                //_ = new frmPCReport(id).ShowDialog();
+                _ = new frmGC(rcdgenerate, this).ShowDialog();
+            }
+            else
+            {
+                Helper.MessageBoxError("Please select reports to Generate RCD!");
             }
         }
     }
