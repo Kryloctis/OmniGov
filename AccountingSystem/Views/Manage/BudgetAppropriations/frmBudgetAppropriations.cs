@@ -105,8 +105,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             }
         }
 
-
-
         internal void EnableDisableButtonsLocal(DataGridView dgv)
         {
             int SelectedRows = 0;
