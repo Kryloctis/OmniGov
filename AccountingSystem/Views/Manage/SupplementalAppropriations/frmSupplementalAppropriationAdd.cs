@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         {
             if (SaveData()) 
             {
-                _frmSupplementalAppropriations.LoadSupplementalApproprations();
+                _frmSupplementalAppropriations.LoadSupplementalApproprationsRecords();
                 _frmSupplementalAppropriations._frmBudgetAppropriations.LoadBudgetAppropriationRecords();
                 Helper.MessageBoxSuccess("Supplemental Appropriation has been saved.");
                 uc.ResetForm();

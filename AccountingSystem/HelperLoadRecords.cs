@@ -1431,7 +1431,8 @@ namespace AccountingSystem
                 }
 
                 dgv.ClearSelection();
-                Helper.DatagridDefaultStyle(dgv, true);
+                Helper.DatagridFullRowSelectStyle(dgv, true);
+                dgv.ShowCellToolTips = false;
             }
             catch (Exception ex)
             {

@@ -17,6 +17,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
     {
         internal frmBudgetAppropriations _frmBudgetAppropriations;
         internal int budgetAppropriationsId;
+        internal DateTime dateEntry;
 
         public frmSupplementalAppropriations(frmBudgetAppropriations frmBudgetAppropriations)
         {
@@ -36,6 +37,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
                 int supplementalAppropriationId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["id"].Value);
 
+                ucfrmSupplementalAppropriationEdit.dateEntry = dateEntry;
                 ucfrmSupplementalAppropriationEdit.supplementalAppropriationId = supplementalAppropriationId;
                 ucfrmSupplementalAppropriationEdit.budgetAppropriationId = budgetAppropriationsId;
 
@@ -92,7 +94,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
                     {
                         if (DeleteSupplementalRecords())
                         {
-                            LoadSupplementalApproprations();
+                            LoadSupplementalApproprationsRecords();
                             _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
                             Helper.MessageBoxSuccess("Supplemental Appropriation has been deleted.");
                         }
@@ -108,6 +110,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         private void ShowSupplementalAppropriationAdd() 
         {
             var frmSupplementalAppropriationAdd = new frmSupplementalAppropriationAdd(this);
+            frmSupplementalAppropriationAdd.uc.dateEntry = dateEntry;
             frmSupplementalAppropriationAdd.uc.budgetAppropriationId = budgetAppropriationsId;
             frmSupplementalAppropriationAdd.ShowDialog();
         }
@@ -129,7 +132,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             }
         }
 
-        internal void LoadSupplementalApproprations() 
+        internal void LoadSupplementalApproprationsRecords() 
         {
             var supplementalRepo = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(budgetAppropriationsId);
 
@@ -150,7 +153,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
         private void frmSupplementalAppropriationsMain_Load(object sender, EventArgs e)
         {
-            LoadSupplementalApproprations();
+            LoadSupplementalApproprationsRecords();
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)

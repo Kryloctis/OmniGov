@@ -358,10 +358,12 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         {
             int rowIndex = dgBudgetAppropriations.CurrentCell.RowIndex;
             int budgetAppropriationsId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["id"].Value);
+            DateTime dateEntry = Convert.ToDateTime(dgBudgetAppropriations.Rows[rowIndex].Cells["date_entry"].Value);
 
             var frmSupplementalAppropriations = new frmSupplementalAppropriations(this);
 
             frmSupplementalAppropriations.budgetAppropriationsId = budgetAppropriationsId;
+            frmSupplementalAppropriations.dateEntry = dateEntry;
             frmSupplementalAppropriations.ShowDialog();
         }
 
