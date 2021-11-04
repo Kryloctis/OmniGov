@@ -74,7 +74,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             if (SaveData()) 
             {
                 Helper.MessageBoxSuccess("Supplemental Appropriation has been updated.");
-                _frmSupplementalAppropriations.LoadSupplementalApproprations();
+                _frmSupplementalAppropriations.LoadSupplementalApproprationsRecords();
                 _frmSupplementalAppropriations._frmBudgetAppropriations.LoadBudgetAppropriationRecords();
                 Close();
             }

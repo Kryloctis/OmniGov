@@ -94,7 +94,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
                     {
                         if (DeleteSupplementalRecords())
                         {
-                            LoadSupplementalApproprations();
+                            LoadSupplementalApproprationsRecords();
                             _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
                             Helper.MessageBoxSuccess("Supplemental Appropriation has been deleted.");
                         }
@@ -132,7 +132,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             }
         }
 
-        internal void LoadSupplementalApproprations() 
+        internal void LoadSupplementalApproprationsRecords() 
         {
             var supplementalRepo = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(budgetAppropriationsId);
 
@@ -153,7 +153,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
         private void frmSupplementalAppropriationsMain_Load(object sender, EventArgs e)
         {
-            LoadSupplementalApproprations();
+            LoadSupplementalApproprationsRecords();
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
