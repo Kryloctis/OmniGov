@@ -1,7 +1,9 @@
 ﻿using AccountingSystem.Views.Manage.AccountableForm;
 using AccountingSystem.Views.Manage.AllotmentClasses;
+using AccountingSystem.Views.Manage.AllotmentRelease;
 using AccountingSystem.Views.Manage.Amortization;
 using AccountingSystem.Views.Manage.Banks;
+using AccountingSystem.Views.Manage.BudgetAppropriations;
 using AccountingSystem.Views.Manage.ChartOfAccounts;
 using AccountingSystem.Views.Manage.CollectingOfficer;
 using AccountingSystem.Views.Manage.DisbursingOfficer;
@@ -18,6 +20,7 @@ using AccountingSystem.Views.Reports.PaymentCollection;
 using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.SAAOBB;
+using AccountingSystem.Views.Transactions.ObligationRequest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,10 +91,10 @@ namespace AccountingSystem
                 menuAllotmentClasses.Visible = false;
 
             if (!Helper.HasPermission("Manage Budget Appropriations"))
-                ucBudgetDashboard1.btnBudgetAppropriations.Enabled = false;
+                btnBudgetAppropriations.Enabled = false;
 
             if (!Helper.HasPermission("Manage Allotment Releases"))
-                ucBudgetDashboard1.btnAllotmentRelease.Enabled = false;
+                btnAllotmentRelease.Enabled = false;
 
             if (!Helper.HasPermission("Manage Chart of Accounts"))
                 menuChartOfAccounts.Visible = false;
@@ -118,7 +121,7 @@ namespace AccountingSystem
                 menuRoles.Visible = false;
 
             if (!Helper.HasPermission("Transaction Obligation Request"))
-                ucBudgetDashboard1.btnObligationRequest.Visible = false;
+                btnObligationRequest.Visible = false;
 
             if (!Helper.HasPermission("Manage Banks"))
                 menuBanks.Visible = false;
@@ -498,5 +501,32 @@ namespace AccountingSystem
             _ = new frmAmortization().ShowDialog();
         }
 
+
+        #region BUDGET
+
+        private void btnBudgetAppropriations_Click(object sender, EventArgs e)
+        {
+            _ = new frmBudgetAppropriations().ShowDialog();
+        }
+      
+        private void btnAllotmentRelease_Click(object sender, EventArgs e)
+        {
+            _ = new frmAllotmentReleaseMain().ShowDialog();
+        }
+
+        private void btnObligationRequest_Click(object sender, EventArgs e)
+        {
+            _ = new frmObligationRequestMain().ShowDialog();
+        }
+
+        #endregion
+
+        private void chkbxDetailed_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkbxDetailed.Checked)
+                tabControlBudget.SelectedTab = tabPageBudgetDetailed;
+            else
+                tabControlBudget.SelectedTab = tabPageBudgetSummary;
+        }
     }
 }
