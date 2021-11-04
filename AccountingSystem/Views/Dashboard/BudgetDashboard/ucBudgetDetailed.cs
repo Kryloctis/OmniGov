@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             if (!DesignMode)
             {
                 cmbxFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
-                Helper.DatagridFullRowSelectStyle(dataGridView1, true);
+               
                 LoadBudgetDashboardComboboxes();
                 LoadBudgetDashboardContents();
             }

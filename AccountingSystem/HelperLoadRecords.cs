@@ -1364,7 +1364,10 @@ namespace AccountingSystem
                     }
                 }
 
-                dgvBudgetAppropriations.ClearSelection();
+            Helper.DatagridFullRowSelectStyle(dgvBudgetAppropriations, true);
+            dgvBudgetAppropriations.ShowCellToolTips = false;
+
+            dgvBudgetAppropriations.ClearSelection();
 
         }
 
