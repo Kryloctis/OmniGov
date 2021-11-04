@@ -17,6 +17,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
     {
         internal frmBudgetAppropriations _frmBudgetAppropriations;
         internal int budgetAppropriationsId;
+        internal DateTime dateEntry;
 
         public frmSupplementalAppropriations(frmBudgetAppropriations frmBudgetAppropriations)
         {
@@ -36,6 +37,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
                 int supplementalAppropriationId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["id"].Value);
 
+                ucfrmSupplementalAppropriationEdit.dateEntry = dateEntry;
                 ucfrmSupplementalAppropriationEdit.supplementalAppropriationId = supplementalAppropriationId;
                 ucfrmSupplementalAppropriationEdit.budgetAppropriationId = budgetAppropriationsId;
 
@@ -108,6 +110,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         private void ShowSupplementalAppropriationAdd() 
         {
             var frmSupplementalAppropriationAdd = new frmSupplementalAppropriationAdd(this);
+            frmSupplementalAppropriationAdd.uc.dateEntry = dateEntry;
             frmSupplementalAppropriationAdd.uc.budgetAppropriationId = budgetAppropriationsId;
             frmSupplementalAppropriationAdd.ShowDialog();
         }
