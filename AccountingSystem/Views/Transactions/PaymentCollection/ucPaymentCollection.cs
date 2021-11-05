@@ -216,13 +216,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             Helper.ClearErrorComboBox(errorProvider, cmbAccount);
         }
-
+       
         private void txtpayee_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtpayee, "Payee.");
         }
-
         private void txtpayee_Validated(object sender, EventArgs e)
+
         {
             Helper.ClearErrorTextBox(errorProvider, txtpayee);
         }
@@ -455,7 +455,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void SwitchFields(bool isCashTicket)
         {
             this.isCashTicket = isCashTicket;
-
+            
             if (this.isCashTicket)
             {
                 tabPaymentType.SelectedTab = tabCashTickets;
@@ -465,17 +465,19 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 tabPaymentType.SelectedTab = tabNonCashTickets;
                 this.isCashTicket = true;
+
             }
         }
 
-        private void txtCashTicketQuantity_ValueChanged(object sender, EventArgs e)
+        private void txtCashTicketQuantity_TextChanged(object sender, EventArgs e)
         {
             var cashTicketAmount = accountableFormFaceValue;
             var cashTicketQuantity = Convert.ToInt32(txtCashTicketQuantity.Value);
             var amount = (cashTicketAmount) * (cashTicketQuantity);
 
-            txtCashTicketsAmount.Text = amount.ToString();
+            txtCashTicketsAmount.Text = amount.ToString("N2");
         }
+
 
 
     }

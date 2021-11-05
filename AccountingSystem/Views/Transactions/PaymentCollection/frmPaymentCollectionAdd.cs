@@ -61,6 +61,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
                     AccountableFormId = Convert.ToInt32(uc.cmbforms.SelectedValue),
                     GeneralLedgerAccountId = uc.glaId,
+                    SlaId = 1,
                     Payee = uc.txtpayee.Text.Trim(),
                     ReceiptNo = uc.txtreceipt.Text.Trim(),
                     PaymentDate = Convert.ToDateTime(uc.dtdate.Text.Trim()),
