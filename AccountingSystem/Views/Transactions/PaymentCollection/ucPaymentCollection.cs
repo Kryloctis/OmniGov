@@ -25,10 +25,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal int maxreceipt = 0;
         internal int receipt = 0;
         internal bool isCashTicket = false;
+        internal int cashTicketFaceValue = 0;
+        internal decimal accountableFormFaceValue = 0;
 
         public ucPaymentCollection()
         {
             InitializeComponent();
+
         }
         internal string GetFormErrors()
         {
@@ -119,12 +122,14 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
+                cmbforms.SelectedValueChanged -= cmbforms_SelectedValueChanged;
                 var formRepository = Factory.AccountableRepository();
                 var dtforms = formRepository.GetRecords();
                 dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
                 cmbforms.DataSource = dtforms;
                 cmbforms.ValueMember = "id";
                 cmbforms.DisplayMember = "formdisplay";
+                cmbforms.SelectedValueChanged += cmbforms_SelectedValueChanged;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -175,6 +180,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void ucPC_Load(object sender, EventArgs e)
         {
             LoadAccounts();
+            txtCashTicketQuantity.Controls[0].Enabled = false;
+
             cmbAccount.SelectedIndex = -1;
         }
 
@@ -345,7 +352,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 
             }
         }
+        private void cmbforms_SelectedValueChanged(object sender, EventArgs e)
+        {
+            int idOfSelectedAccountableForm = Convert.ToInt32(cmbforms.SelectedValue);
 
+            accountableFormFaceValue = Factory.FaceValueRepository().GetFaceValueByAccountableFormId(idOfSelectedAccountableForm);
+        }
+      
         private void cmbcollector_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(cmbcollector.SelectedIndex != -1)
@@ -448,5 +461,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 isCashTicket = true;
             }
         }
+
+        private void txtCashTicketQuantity_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }
