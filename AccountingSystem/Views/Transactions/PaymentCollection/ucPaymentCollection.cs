@@ -24,6 +24,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal int minreceipt = 0;
         internal int maxreceipt = 0;
         internal int receipt = 0;
+
+
         internal bool isCashTicket = false;
         internal int cashTicketFaceValue = 0;
         internal decimal accountableFormFaceValue = 0;
@@ -257,7 +259,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ShowCashTicketsFields();
             if (cmbforms.SelectedIndex != -1)
             {
                 DataRowView forms = cmbforms.SelectedItem as DataRowView;
@@ -357,6 +358,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             int idOfSelectedAccountableForm = Convert.ToInt32(cmbforms.SelectedValue);
 
             accountableFormFaceValue = Factory.FaceValueRepository().GetFaceValueByAccountableFormId(idOfSelectedAccountableForm);
+
+            
+            SwitchFields(Convert.ToBoolean(accountableFormFaceValue));
         }
       
         private void cmbcollector_SelectedIndexChanged(object sender, EventArgs e)
@@ -448,17 +452,19 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         }
 
 
-        private void ShowCashTicketsFields()
+        private void SwitchFields(bool isCashTicket)
         {
-            if (isCashTicket)
+            this.isCashTicket = isCashTicket;
+
+            if (this.isCashTicket)
             {
                 tabPaymentType.SelectedTab = tabCashTickets;
-                isCashTicket = false;
+                this.isCashTicket = false;
             }
             else
             {
                 tabPaymentType.SelectedTab = tabNonCashTickets;
-                isCashTicket = true;
+                this.isCashTicket = true;
             }
         }
 

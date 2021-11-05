@@ -235,9 +235,15 @@ namespace ACC.Data
                     new object[] {"@accountableFormId", DbType.Int32, id},
                 };
 
-                string query = $"SELECT amount FROM {tableName} WHERE accountable_forms_id=@accountableFormId";
+                string query = $"SELECT COALESCE(amount, 0) AS amount FROM {tableName} WHERE accountable_forms_id=@accountableFormId";
 
-                return Convert.ToDecimal(_dbGenericCommands.ExecuteScalar(query, parameters));
+                var queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                if (string.IsNullOrEmpty(queryResult))
+                    return 0;
+                else
+                    return Convert.ToDecimal(queryResult); 
+
             }
             catch (Exception)
             {
