@@ -89,11 +89,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
+            this.lblCYAllotmentBalanceCO = new System.Windows.Forms.Label();
+            this.lblCYAppropriationBalanceCO = new System.Windows.Forms.Label();
+            this.lblCYObligationsCO = new System.Windows.Forms.Label();
+            this.lblCYAllotmentsCO = new System.Windows.Forms.Label();
+            this.lblCYAppropriationsCO = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -102,11 +102,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
+            this.lblCYAllotmentBalanceFE = new System.Windows.Forms.Label();
+            this.lblCYAppropriationBalanceFE = new System.Windows.Forms.Label();
+            this.lblCYObligationsFE = new System.Windows.Forms.Label();
+            this.lblCYAllotmentsFE = new System.Windows.Forms.Label();
+            this.lblCYAppropriationsFE = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -115,11 +115,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label44 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
-            this.lblAllotmentBalancePS = new System.Windows.Forms.Label();
-            this.lblAppropriationBalancePS = new System.Windows.Forms.Label();
-            this.lblObligationsPS = new System.Windows.Forms.Label();
-            this.lblAllotmentsPS = new System.Windows.Forms.Label();
-            this.lblAppropriationsPS = new System.Windows.Forms.Label();
+            this.lblCYAllotmentBalancePS = new System.Windows.Forms.Label();
+            this.lblCYAppropriationBalancePS = new System.Windows.Forms.Label();
+            this.lblCYObligationsPS = new System.Windows.Forms.Label();
+            this.lblCYAllotmentsPS = new System.Windows.Forms.Label();
+            this.lblCYAppropriationsPS = new System.Windows.Forms.Label();
             this.label49 = new System.Windows.Forms.Label();
             this.label50 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -128,11 +128,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label53 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.label55 = new System.Windows.Forms.Label();
-            this.lblAllotmentBalanceMOOE = new System.Windows.Forms.Label();
-            this.lblAppropriationBalanceMOOE = new System.Windows.Forms.Label();
-            this.lblObligationsMOOE = new System.Windows.Forms.Label();
-            this.lblAllotmentsMOOE = new System.Windows.Forms.Label();
-            this.lblAppropriationsMOOE = new System.Windows.Forms.Label();
+            this.lblCYAllotmentBalanceMOOE = new System.Windows.Forms.Label();
+            this.lblCYAppropriationBalanceMOOE = new System.Windows.Forms.Label();
+            this.lblCYObligationsMOOE = new System.Windows.Forms.Label();
+            this.lblCYAllotmentsMOOE = new System.Windows.Forms.Label();
+            this.lblCYAppropriationsMOOE = new System.Windows.Forms.Label();
             this.label56 = new System.Windows.Forms.Label();
             this.label57 = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -142,11 +142,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label60 = new System.Windows.Forms.Label();
             this.label61 = new System.Windows.Forms.Label();
             this.label62 = new System.Windows.Forms.Label();
-            this.label63 = new System.Windows.Forms.Label();
-            this.label64 = new System.Windows.Forms.Label();
-            this.label65 = new System.Windows.Forms.Label();
-            this.label66 = new System.Windows.Forms.Label();
-            this.label67 = new System.Windows.Forms.Label();
+            this.lblCONAllotmentBalanceCO = new System.Windows.Forms.Label();
+            this.lbCONAppropriationBalanceCO = new System.Windows.Forms.Label();
+            this.lblCONObligationsCO = new System.Windows.Forms.Label();
+            this.lblCONAllotmentsCO = new System.Windows.Forms.Label();
+            this.lblCONAppropriationsCO = new System.Windows.Forms.Label();
             this.label68 = new System.Windows.Forms.Label();
             this.label69 = new System.Windows.Forms.Label();
             this.panel13 = new System.Windows.Forms.Panel();
@@ -155,11 +155,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label72 = new System.Windows.Forms.Label();
             this.label73 = new System.Windows.Forms.Label();
             this.label74 = new System.Windows.Forms.Label();
-            this.label75 = new System.Windows.Forms.Label();
-            this.label76 = new System.Windows.Forms.Label();
-            this.label77 = new System.Windows.Forms.Label();
-            this.label78 = new System.Windows.Forms.Label();
-            this.label79 = new System.Windows.Forms.Label();
+            this.lblCONAllotmentBalanceFE = new System.Windows.Forms.Label();
+            this.lblCONAppropriationBalanceFE = new System.Windows.Forms.Label();
+            this.lblCONObligationsFE = new System.Windows.Forms.Label();
+            this.lblCONAllotmentsFE = new System.Windows.Forms.Label();
+            this.lblCONAppropriationsFE = new System.Windows.Forms.Label();
             this.label80 = new System.Windows.Forms.Label();
             this.label81 = new System.Windows.Forms.Label();
             this.panel14 = new System.Windows.Forms.Panel();
@@ -168,11 +168,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label84 = new System.Windows.Forms.Label();
             this.label85 = new System.Windows.Forms.Label();
             this.label86 = new System.Windows.Forms.Label();
-            this.label87 = new System.Windows.Forms.Label();
-            this.label88 = new System.Windows.Forms.Label();
-            this.label89 = new System.Windows.Forms.Label();
-            this.label90 = new System.Windows.Forms.Label();
-            this.label91 = new System.Windows.Forms.Label();
+            this.lblCONAllotmentBalancePS = new System.Windows.Forms.Label();
+            this.lblCONAppropriationBalancePS = new System.Windows.Forms.Label();
+            this.lblCONObligationsPS = new System.Windows.Forms.Label();
+            this.lblCONAllotmentsPS = new System.Windows.Forms.Label();
+            this.lblCONAppropriationsPS = new System.Windows.Forms.Label();
             this.label92 = new System.Windows.Forms.Label();
             this.label93 = new System.Windows.Forms.Label();
             this.panel15 = new System.Windows.Forms.Panel();
@@ -181,11 +181,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label96 = new System.Windows.Forms.Label();
             this.label97 = new System.Windows.Forms.Label();
             this.label98 = new System.Windows.Forms.Label();
-            this.label99 = new System.Windows.Forms.Label();
-            this.label103 = new System.Windows.Forms.Label();
-            this.label104 = new System.Windows.Forms.Label();
-            this.label105 = new System.Windows.Forms.Label();
-            this.label106 = new System.Windows.Forms.Label();
+            this.lblCONAllotmentBalanceMOOE = new System.Windows.Forms.Label();
+            this.lblCONAppropriationBalanceMOOE = new System.Windows.Forms.Label();
+            this.lblCONObligationsMOOE = new System.Windows.Forms.Label();
+            this.lblCONAllotmentsMOOE = new System.Windows.Forms.Label();
+            this.lblCONAppropriationsMOOE = new System.Windows.Forms.Label();
             this.label107 = new System.Windows.Forms.Label();
             this.label108 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
@@ -904,11 +904,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.panel5.Controls.Add(this.label5);
             this.panel5.Controls.Add(this.label6);
             this.panel5.Controls.Add(this.label7);
-            this.panel5.Controls.Add(this.label8);
-            this.panel5.Controls.Add(this.label12);
-            this.panel5.Controls.Add(this.label13);
-            this.panel5.Controls.Add(this.label14);
-            this.panel5.Controls.Add(this.label15);
+            this.panel5.Controls.Add(this.lblCYAllotmentBalanceCO);
+            this.panel5.Controls.Add(this.lblCYAppropriationBalanceCO);
+            this.panel5.Controls.Add(this.lblCYObligationsCO);
+            this.panel5.Controls.Add(this.lblCYAllotmentsCO);
+            this.panel5.Controls.Add(this.lblCYAppropriationsCO);
             this.panel5.Controls.Add(this.label16);
             this.panel5.Controls.Add(this.label17);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -976,65 +976,65 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label7.TabIndex = 1;
             this.label7.Text = "Allotments";
             // 
-            // label8
+            // lblCYAllotmentBalanceCO
             // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label8.Location = new System.Drawing.Point(204, 141);
-            this.label8.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(82, 15);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "0.00";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCYAllotmentBalanceCO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCYAllotmentBalanceCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCYAllotmentBalanceCO.Location = new System.Drawing.Point(204, 141);
+            this.lblCYAllotmentBalanceCO.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCYAllotmentBalanceCO.Name = "lblCYAllotmentBalanceCO";
+            this.lblCYAllotmentBalanceCO.Size = new System.Drawing.Size(82, 15);
+            this.lblCYAllotmentBalanceCO.TabIndex = 1;
+            this.lblCYAllotmentBalanceCO.Text = "0.00";
+            this.lblCYAllotmentBalanceCO.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label12
+            // lblCYAppropriationBalanceCO
             // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label12.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label12.Location = new System.Drawing.Point(204, 116);
-            this.label12.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(82, 15);
-            this.label12.TabIndex = 1;
-            this.label12.Text = "0.00";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCYAppropriationBalanceCO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCYAppropriationBalanceCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCYAppropriationBalanceCO.Location = new System.Drawing.Point(204, 116);
+            this.lblCYAppropriationBalanceCO.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCYAppropriationBalanceCO.Name = "lblCYAppropriationBalanceCO";
+            this.lblCYAppropriationBalanceCO.Size = new System.Drawing.Size(82, 15);
+            this.lblCYAppropriationBalanceCO.TabIndex = 1;
+            this.lblCYAppropriationBalanceCO.Text = "0.00";
+            this.lblCYAppropriationBalanceCO.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label13
+            // lblCYObligationsCO
             // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label13.Location = new System.Drawing.Point(204, 91);
-            this.label13.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(82, 15);
-            this.label13.TabIndex = 1;
-            this.label13.Text = "0.00";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCYObligationsCO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCYObligationsCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCYObligationsCO.Location = new System.Drawing.Point(204, 91);
+            this.lblCYObligationsCO.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCYObligationsCO.Name = "lblCYObligationsCO";
+            this.lblCYObligationsCO.Size = new System.Drawing.Size(82, 15);
+            this.lblCYObligationsCO.TabIndex = 1;
+            this.lblCYObligationsCO.Text = "0.00";
+            this.lblCYObligationsCO.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label14
+            // lblCYAllotmentsCO
             // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label14.Location = new System.Drawing.Point(204, 66);
-            this.label14.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(82, 15);
-            this.label14.TabIndex = 1;
-            this.label14.Text = "0.00";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCYAllotmentsCO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCYAllotmentsCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCYAllotmentsCO.Location = new System.Drawing.Point(204, 66);
+            this.lblCYAllotmentsCO.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCYAllotmentsCO.Name = "lblCYAllotmentsCO";
+            this.lblCYAllotmentsCO.Size = new System.Drawing.Size(82, 15);
+            this.lblCYAllotmentsCO.TabIndex = 1;
+            this.lblCYAllotmentsCO.Text = "0.00";
+            this.lblCYAllotmentsCO.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label15
+            // lblCYAppropriationsCO
             // 
-            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label15.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label15.Location = new System.Drawing.Point(204, 41);
-            this.label15.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(82, 15);
-            this.label15.TabIndex = 1;
-            this.label15.Text = "0.00";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCYAppropriationsCO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCYAppropriationsCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCYAppropriationsCO.Location = new System.Drawing.Point(204, 41);
+            this.lblCYAppropriationsCO.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCYAppropriationsCO.Name = "lblCYAppropriationsCO";
+            this.lblCYAppropriationsCO.Size = new System.Drawing.Size(82, 15);
+            this.lblCYAppropriationsCO.TabIndex = 1;
+            this.lblCYAppropriationsCO.Text = "0.00";
+            this.lblCYAppropriationsCO.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label16
             // 
@@ -1069,11 +1069,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.panel6.Controls.Add(this.label20);
             this.panel6.Controls.Add(this.label21);
             this.panel6.Controls.Add(this.label22);
-            this.panel6.Controls.Add(this.label28);
-            this.panel6.Controls.Add(this.label29);
-            this.panel6.Controls.Add(this.label30);
-            this.panel6.Controls.Add(this.label31);
-            this.panel6.Controls.Add(this.label32);
+            this.panel6.Controls.Add(this.lblCYAllotmentBalanceFE);
+            this.panel6.Controls.Add(this.lblCYAppropriationBalanceFE);
+            this.panel6.Controls.Add(this.lblCYObligationsFE);
+            this.panel6.Controls.Add(this.lblCYAllotmentsFE);
+            this.panel6.Controls.Add(this.lblCYAppropriationsFE);
             this.panel6.Controls.Add(this.label40);
             this.panel6.Controls.Add(this.label41);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1141,65 +1141,65 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label22.TabIndex = 1;
             this.label22.Text = "Allotments";
             // 
-            // label28
+            // lblCYAllotmentBalanceFE
             // 
-            this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label28.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label28.Location = new System.Drawing.Point(201, 141);
-            this.label28.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(82, 15);
-            this.label28.TabIndex = 1;
-            this.label28.Text = "0.00";
-            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCYAllotmentBalanceFE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCYAllotmentBalanceFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCYAllotmentBalanceFE.Location = new System.Drawing.Point(201, 141);
+            this.lblCYAllotmentBalanceFE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCYAllotmentBalanceFE.Name = "lblCYAllotmentBalanceFE";
+            this.lblCYAllotmentBalanceFE.Size = new System.Drawing.Size(82, 15);
+            this.lblCYAllotmentBalanceFE.TabIndex = 1;
+            this.lblCYAllotmentBalanceFE.Text = "0.00";
+            this.lblCYAllotmentBalanceFE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label29
+            // lblCYAppropriationBalanceFE
             // 
-            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label29.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label29.Location = new System.Drawing.Point(201, 116);
-            this.label29.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(82, 15);
-            this.label29.TabIndex = 1;
-            this.label29.Text = "0.00";
-            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCYAppropriationBalanceFE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCYAppropriationBalanceFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCYAppropriationBalanceFE.Location = new System.Drawing.Point(201, 116);
+            this.lblCYAppropriationBalanceFE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCYAppropriationBalanceFE.Name = "lblCYAppropriationBalanceFE";
+            this.lblCYAppropriationBalanceFE.Size = new System.Drawing.Size(82, 15);
+            this.lblCYAppropriationBalanceFE.TabIndex = 1;
+            this.lblCYAppropriationBalanceFE.Text = "0.00";
+            this.lblCYAppropriationBalanceFE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label30
+            // lblCYObligationsFE
             // 
-            this.label30.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label30.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label30.Location = new System.Drawing.Point(201, 91);
-            this.label30.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(82, 15);
-            this.label30.TabIndex = 1;
-            this.label30.Text = "0.00";
-            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCYObligationsFE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCYObligationsFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCYObligationsFE.Location = new System.Drawing.Point(201, 91);
+            this.lblCYObligationsFE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCYObligationsFE.Name = "lblCYObligationsFE";
+            this.lblCYObligationsFE.Size = new System.Drawing.Size(82, 15);
+            this.lblCYObligationsFE.TabIndex = 1;
+            this.lblCYObligationsFE.Text = "0.00";
+            this.lblCYObligationsFE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label31
+            // lblCYAllotmentsFE
             // 
-            this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label31.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label31.Location = new System.Drawing.Point(201, 66);
-            this.label31.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(82, 15);
-            this.label31.TabIndex = 1;
-            this.label31.Text = "0.00";
-            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCYAllotmentsFE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCYAllotmentsFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCYAllotmentsFE.Location = new System.Drawing.Point(201, 66);
+            this.lblCYAllotmentsFE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCYAllotmentsFE.Name = "lblCYAllotmentsFE";
+            this.lblCYAllotmentsFE.Size = new System.Drawing.Size(82, 15);
+            this.lblCYAllotmentsFE.TabIndex = 1;
+            this.lblCYAllotmentsFE.Text = "0.00";
+            this.lblCYAllotmentsFE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label32
+            // lblCYAppropriationsFE
             // 
-            this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label32.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label32.Location = new System.Drawing.Point(201, 41);
-            this.label32.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(82, 15);
-            this.label32.TabIndex = 1;
-            this.label32.Text = "0.00";
-            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCYAppropriationsFE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCYAppropriationsFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCYAppropriationsFE.Location = new System.Drawing.Point(201, 41);
+            this.lblCYAppropriationsFE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCYAppropriationsFE.Name = "lblCYAppropriationsFE";
+            this.lblCYAppropriationsFE.Size = new System.Drawing.Size(82, 15);
+            this.lblCYAppropriationsFE.TabIndex = 1;
+            this.lblCYAppropriationsFE.Text = "0.00";
+            this.lblCYAppropriationsFE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label40
             // 
@@ -1234,11 +1234,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.panel7.Controls.Add(this.label44);
             this.panel7.Controls.Add(this.label47);
             this.panel7.Controls.Add(this.label48);
-            this.panel7.Controls.Add(this.lblAllotmentBalancePS);
-            this.panel7.Controls.Add(this.lblAppropriationBalancePS);
-            this.panel7.Controls.Add(this.lblObligationsPS);
-            this.panel7.Controls.Add(this.lblAllotmentsPS);
-            this.panel7.Controls.Add(this.lblAppropriationsPS);
+            this.panel7.Controls.Add(this.lblCYAllotmentBalancePS);
+            this.panel7.Controls.Add(this.lblCYAppropriationBalancePS);
+            this.panel7.Controls.Add(this.lblCYObligationsPS);
+            this.panel7.Controls.Add(this.lblCYAllotmentsPS);
+            this.panel7.Controls.Add(this.lblCYAppropriationsPS);
             this.panel7.Controls.Add(this.label49);
             this.panel7.Controls.Add(this.label50);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1306,65 +1306,65 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label48.TabIndex = 1;
             this.label48.Text = "Allotments";
             // 
-            // lblAllotmentBalancePS
+            // lblCYAllotmentBalancePS
             // 
-            this.lblAllotmentBalancePS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAllotmentBalancePS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblAllotmentBalancePS.Location = new System.Drawing.Point(204, 141);
-            this.lblAllotmentBalancePS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.lblAllotmentBalancePS.Name = "lblAllotmentBalancePS";
-            this.lblAllotmentBalancePS.Size = new System.Drawing.Size(82, 15);
-            this.lblAllotmentBalancePS.TabIndex = 1;
-            this.lblAllotmentBalancePS.Text = "0.00";
-            this.lblAllotmentBalancePS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCYAllotmentBalancePS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCYAllotmentBalancePS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCYAllotmentBalancePS.Location = new System.Drawing.Point(204, 141);
+            this.lblCYAllotmentBalancePS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCYAllotmentBalancePS.Name = "lblCYAllotmentBalancePS";
+            this.lblCYAllotmentBalancePS.Size = new System.Drawing.Size(82, 15);
+            this.lblCYAllotmentBalancePS.TabIndex = 1;
+            this.lblCYAllotmentBalancePS.Text = "0.00";
+            this.lblCYAllotmentBalancePS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblAppropriationBalancePS
+            // lblCYAppropriationBalancePS
             // 
-            this.lblAppropriationBalancePS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAppropriationBalancePS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblAppropriationBalancePS.Location = new System.Drawing.Point(204, 116);
-            this.lblAppropriationBalancePS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.lblAppropriationBalancePS.Name = "lblAppropriationBalancePS";
-            this.lblAppropriationBalancePS.Size = new System.Drawing.Size(82, 15);
-            this.lblAppropriationBalancePS.TabIndex = 1;
-            this.lblAppropriationBalancePS.Text = "0.00";
-            this.lblAppropriationBalancePS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCYAppropriationBalancePS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCYAppropriationBalancePS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCYAppropriationBalancePS.Location = new System.Drawing.Point(204, 116);
+            this.lblCYAppropriationBalancePS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCYAppropriationBalancePS.Name = "lblCYAppropriationBalancePS";
+            this.lblCYAppropriationBalancePS.Size = new System.Drawing.Size(82, 15);
+            this.lblCYAppropriationBalancePS.TabIndex = 1;
+            this.lblCYAppropriationBalancePS.Text = "0.00";
+            this.lblCYAppropriationBalancePS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblObligationsPS
+            // lblCYObligationsPS
             // 
-            this.lblObligationsPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblObligationsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblObligationsPS.Location = new System.Drawing.Point(204, 91);
-            this.lblObligationsPS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.lblObligationsPS.Name = "lblObligationsPS";
-            this.lblObligationsPS.Size = new System.Drawing.Size(82, 15);
-            this.lblObligationsPS.TabIndex = 1;
-            this.lblObligationsPS.Text = "0.00";
-            this.lblObligationsPS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCYObligationsPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCYObligationsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCYObligationsPS.Location = new System.Drawing.Point(204, 91);
+            this.lblCYObligationsPS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCYObligationsPS.Name = "lblCYObligationsPS";
+            this.lblCYObligationsPS.Size = new System.Drawing.Size(82, 15);
+            this.lblCYObligationsPS.TabIndex = 1;
+            this.lblCYObligationsPS.Text = "0.00";
+            this.lblCYObligationsPS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblAllotmentsPS
+            // lblCYAllotmentsPS
             // 
-            this.lblAllotmentsPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAllotmentsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblAllotmentsPS.Location = new System.Drawing.Point(204, 66);
-            this.lblAllotmentsPS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.lblAllotmentsPS.Name = "lblAllotmentsPS";
-            this.lblAllotmentsPS.Size = new System.Drawing.Size(82, 15);
-            this.lblAllotmentsPS.TabIndex = 1;
-            this.lblAllotmentsPS.Text = "0.00";
-            this.lblAllotmentsPS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCYAllotmentsPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCYAllotmentsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCYAllotmentsPS.Location = new System.Drawing.Point(204, 66);
+            this.lblCYAllotmentsPS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCYAllotmentsPS.Name = "lblCYAllotmentsPS";
+            this.lblCYAllotmentsPS.Size = new System.Drawing.Size(82, 15);
+            this.lblCYAllotmentsPS.TabIndex = 1;
+            this.lblCYAllotmentsPS.Text = "0.00";
+            this.lblCYAllotmentsPS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblAppropriationsPS
+            // lblCYAppropriationsPS
             // 
-            this.lblAppropriationsPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAppropriationsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblAppropriationsPS.Location = new System.Drawing.Point(204, 41);
-            this.lblAppropriationsPS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.lblAppropriationsPS.Name = "lblAppropriationsPS";
-            this.lblAppropriationsPS.Size = new System.Drawing.Size(82, 15);
-            this.lblAppropriationsPS.TabIndex = 1;
-            this.lblAppropriationsPS.Text = "0.00";
-            this.lblAppropriationsPS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCYAppropriationsPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCYAppropriationsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCYAppropriationsPS.Location = new System.Drawing.Point(204, 41);
+            this.lblCYAppropriationsPS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCYAppropriationsPS.Name = "lblCYAppropriationsPS";
+            this.lblCYAppropriationsPS.Size = new System.Drawing.Size(82, 15);
+            this.lblCYAppropriationsPS.TabIndex = 1;
+            this.lblCYAppropriationsPS.Text = "0.00";
+            this.lblCYAppropriationsPS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label49
             // 
@@ -1399,11 +1399,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.panel8.Controls.Add(this.label53);
             this.panel8.Controls.Add(this.label54);
             this.panel8.Controls.Add(this.label55);
-            this.panel8.Controls.Add(this.lblAllotmentBalanceMOOE);
-            this.panel8.Controls.Add(this.lblAppropriationBalanceMOOE);
-            this.panel8.Controls.Add(this.lblObligationsMOOE);
-            this.panel8.Controls.Add(this.lblAllotmentsMOOE);
-            this.panel8.Controls.Add(this.lblAppropriationsMOOE);
+            this.panel8.Controls.Add(this.lblCYAllotmentBalanceMOOE);
+            this.panel8.Controls.Add(this.lblCYAppropriationBalanceMOOE);
+            this.panel8.Controls.Add(this.lblCYObligationsMOOE);
+            this.panel8.Controls.Add(this.lblCYAllotmentsMOOE);
+            this.panel8.Controls.Add(this.lblCYAppropriationsMOOE);
             this.panel8.Controls.Add(this.label56);
             this.panel8.Controls.Add(this.label57);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1471,65 +1471,65 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label55.TabIndex = 1;
             this.label55.Text = "Allotments";
             // 
-            // lblAllotmentBalanceMOOE
+            // lblCYAllotmentBalanceMOOE
             // 
-            this.lblAllotmentBalanceMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAllotmentBalanceMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblAllotmentBalanceMOOE.Location = new System.Drawing.Point(204, 141);
-            this.lblAllotmentBalanceMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.lblAllotmentBalanceMOOE.Name = "lblAllotmentBalanceMOOE";
-            this.lblAllotmentBalanceMOOE.Size = new System.Drawing.Size(82, 15);
-            this.lblAllotmentBalanceMOOE.TabIndex = 1;
-            this.lblAllotmentBalanceMOOE.Text = "0.00";
-            this.lblAllotmentBalanceMOOE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCYAllotmentBalanceMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCYAllotmentBalanceMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCYAllotmentBalanceMOOE.Location = new System.Drawing.Point(204, 141);
+            this.lblCYAllotmentBalanceMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCYAllotmentBalanceMOOE.Name = "lblCYAllotmentBalanceMOOE";
+            this.lblCYAllotmentBalanceMOOE.Size = new System.Drawing.Size(82, 15);
+            this.lblCYAllotmentBalanceMOOE.TabIndex = 1;
+            this.lblCYAllotmentBalanceMOOE.Text = "0.00";
+            this.lblCYAllotmentBalanceMOOE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblAppropriationBalanceMOOE
+            // lblCYAppropriationBalanceMOOE
             // 
-            this.lblAppropriationBalanceMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAppropriationBalanceMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblAppropriationBalanceMOOE.Location = new System.Drawing.Point(204, 116);
-            this.lblAppropriationBalanceMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.lblAppropriationBalanceMOOE.Name = "lblAppropriationBalanceMOOE";
-            this.lblAppropriationBalanceMOOE.Size = new System.Drawing.Size(82, 15);
-            this.lblAppropriationBalanceMOOE.TabIndex = 1;
-            this.lblAppropriationBalanceMOOE.Text = "0.00";
-            this.lblAppropriationBalanceMOOE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCYAppropriationBalanceMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCYAppropriationBalanceMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCYAppropriationBalanceMOOE.Location = new System.Drawing.Point(204, 116);
+            this.lblCYAppropriationBalanceMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCYAppropriationBalanceMOOE.Name = "lblCYAppropriationBalanceMOOE";
+            this.lblCYAppropriationBalanceMOOE.Size = new System.Drawing.Size(82, 15);
+            this.lblCYAppropriationBalanceMOOE.TabIndex = 1;
+            this.lblCYAppropriationBalanceMOOE.Text = "0.00";
+            this.lblCYAppropriationBalanceMOOE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblObligationsMOOE
+            // lblCYObligationsMOOE
             // 
-            this.lblObligationsMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblObligationsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblObligationsMOOE.Location = new System.Drawing.Point(204, 91);
-            this.lblObligationsMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.lblObligationsMOOE.Name = "lblObligationsMOOE";
-            this.lblObligationsMOOE.Size = new System.Drawing.Size(82, 15);
-            this.lblObligationsMOOE.TabIndex = 1;
-            this.lblObligationsMOOE.Text = "0.00";
-            this.lblObligationsMOOE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCYObligationsMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCYObligationsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCYObligationsMOOE.Location = new System.Drawing.Point(204, 91);
+            this.lblCYObligationsMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCYObligationsMOOE.Name = "lblCYObligationsMOOE";
+            this.lblCYObligationsMOOE.Size = new System.Drawing.Size(82, 15);
+            this.lblCYObligationsMOOE.TabIndex = 1;
+            this.lblCYObligationsMOOE.Text = "0.00";
+            this.lblCYObligationsMOOE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblAllotmentsMOOE
+            // lblCYAllotmentsMOOE
             // 
-            this.lblAllotmentsMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAllotmentsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblAllotmentsMOOE.Location = new System.Drawing.Point(204, 66);
-            this.lblAllotmentsMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.lblAllotmentsMOOE.Name = "lblAllotmentsMOOE";
-            this.lblAllotmentsMOOE.Size = new System.Drawing.Size(82, 15);
-            this.lblAllotmentsMOOE.TabIndex = 1;
-            this.lblAllotmentsMOOE.Text = "0.00";
-            this.lblAllotmentsMOOE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCYAllotmentsMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCYAllotmentsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCYAllotmentsMOOE.Location = new System.Drawing.Point(204, 66);
+            this.lblCYAllotmentsMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCYAllotmentsMOOE.Name = "lblCYAllotmentsMOOE";
+            this.lblCYAllotmentsMOOE.Size = new System.Drawing.Size(82, 15);
+            this.lblCYAllotmentsMOOE.TabIndex = 1;
+            this.lblCYAllotmentsMOOE.Text = "0.00";
+            this.lblCYAllotmentsMOOE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblAppropriationsMOOE
+            // lblCYAppropriationsMOOE
             // 
-            this.lblAppropriationsMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAppropriationsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblAppropriationsMOOE.Location = new System.Drawing.Point(204, 41);
-            this.lblAppropriationsMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.lblAppropriationsMOOE.Name = "lblAppropriationsMOOE";
-            this.lblAppropriationsMOOE.Size = new System.Drawing.Size(82, 15);
-            this.lblAppropriationsMOOE.TabIndex = 1;
-            this.lblAppropriationsMOOE.Text = "0.00";
-            this.lblAppropriationsMOOE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCYAppropriationsMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCYAppropriationsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCYAppropriationsMOOE.Location = new System.Drawing.Point(204, 41);
+            this.lblCYAppropriationsMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCYAppropriationsMOOE.Name = "lblCYAppropriationsMOOE";
+            this.lblCYAppropriationsMOOE.Size = new System.Drawing.Size(82, 15);
+            this.lblCYAppropriationsMOOE.TabIndex = 1;
+            this.lblCYAppropriationsMOOE.Text = "0.00";
+            this.lblCYAppropriationsMOOE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label56
             // 
@@ -1587,11 +1587,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.panel12.Controls.Add(this.label60);
             this.panel12.Controls.Add(this.label61);
             this.panel12.Controls.Add(this.label62);
-            this.panel12.Controls.Add(this.label63);
-            this.panel12.Controls.Add(this.label64);
-            this.panel12.Controls.Add(this.label65);
-            this.panel12.Controls.Add(this.label66);
-            this.panel12.Controls.Add(this.label67);
+            this.panel12.Controls.Add(this.lblCONAllotmentBalanceCO);
+            this.panel12.Controls.Add(this.lbCONAppropriationBalanceCO);
+            this.panel12.Controls.Add(this.lblCONObligationsCO);
+            this.panel12.Controls.Add(this.lblCONAllotmentsCO);
+            this.panel12.Controls.Add(this.lblCONAppropriationsCO);
             this.panel12.Controls.Add(this.label68);
             this.panel12.Controls.Add(this.label69);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1659,65 +1659,65 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label62.TabIndex = 1;
             this.label62.Text = "Allotments";
             // 
-            // label63
+            // lblCONAllotmentBalanceCO
             // 
-            this.label63.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label63.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label63.Location = new System.Drawing.Point(204, 141);
-            this.label63.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(82, 15);
-            this.label63.TabIndex = 1;
-            this.label63.Text = "0.00";
-            this.label63.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCONAllotmentBalanceCO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCONAllotmentBalanceCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCONAllotmentBalanceCO.Location = new System.Drawing.Point(204, 141);
+            this.lblCONAllotmentBalanceCO.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCONAllotmentBalanceCO.Name = "lblCONAllotmentBalanceCO";
+            this.lblCONAllotmentBalanceCO.Size = new System.Drawing.Size(82, 15);
+            this.lblCONAllotmentBalanceCO.TabIndex = 1;
+            this.lblCONAllotmentBalanceCO.Text = "0.00";
+            this.lblCONAllotmentBalanceCO.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label64
+            // lbCONAppropriationBalanceCO
             // 
-            this.label64.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label64.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label64.Location = new System.Drawing.Point(204, 116);
-            this.label64.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(82, 15);
-            this.label64.TabIndex = 1;
-            this.label64.Text = "0.00";
-            this.label64.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lbCONAppropriationBalanceCO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbCONAppropriationBalanceCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lbCONAppropriationBalanceCO.Location = new System.Drawing.Point(204, 116);
+            this.lbCONAppropriationBalanceCO.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lbCONAppropriationBalanceCO.Name = "lbCONAppropriationBalanceCO";
+            this.lbCONAppropriationBalanceCO.Size = new System.Drawing.Size(82, 15);
+            this.lbCONAppropriationBalanceCO.TabIndex = 1;
+            this.lbCONAppropriationBalanceCO.Text = "0.00";
+            this.lbCONAppropriationBalanceCO.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label65
+            // lblCONObligationsCO
             // 
-            this.label65.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label65.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label65.Location = new System.Drawing.Point(204, 91);
-            this.label65.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(82, 15);
-            this.label65.TabIndex = 1;
-            this.label65.Text = "0.00";
-            this.label65.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCONObligationsCO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCONObligationsCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCONObligationsCO.Location = new System.Drawing.Point(204, 91);
+            this.lblCONObligationsCO.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCONObligationsCO.Name = "lblCONObligationsCO";
+            this.lblCONObligationsCO.Size = new System.Drawing.Size(82, 15);
+            this.lblCONObligationsCO.TabIndex = 1;
+            this.lblCONObligationsCO.Text = "0.00";
+            this.lblCONObligationsCO.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label66
+            // lblCONAllotmentsCO
             // 
-            this.label66.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label66.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label66.Location = new System.Drawing.Point(204, 66);
-            this.label66.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(82, 15);
-            this.label66.TabIndex = 1;
-            this.label66.Text = "0.00";
-            this.label66.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCONAllotmentsCO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCONAllotmentsCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCONAllotmentsCO.Location = new System.Drawing.Point(204, 66);
+            this.lblCONAllotmentsCO.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCONAllotmentsCO.Name = "lblCONAllotmentsCO";
+            this.lblCONAllotmentsCO.Size = new System.Drawing.Size(82, 15);
+            this.lblCONAllotmentsCO.TabIndex = 1;
+            this.lblCONAllotmentsCO.Text = "0.00";
+            this.lblCONAllotmentsCO.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label67
+            // lblCONAppropriationsCO
             // 
-            this.label67.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label67.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label67.Location = new System.Drawing.Point(204, 41);
-            this.label67.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label67.Name = "label67";
-            this.label67.Size = new System.Drawing.Size(82, 15);
-            this.label67.TabIndex = 1;
-            this.label67.Text = "0.00";
-            this.label67.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCONAppropriationsCO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCONAppropriationsCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCONAppropriationsCO.Location = new System.Drawing.Point(204, 41);
+            this.lblCONAppropriationsCO.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCONAppropriationsCO.Name = "lblCONAppropriationsCO";
+            this.lblCONAppropriationsCO.Size = new System.Drawing.Size(82, 15);
+            this.lblCONAppropriationsCO.TabIndex = 1;
+            this.lblCONAppropriationsCO.Text = "0.00";
+            this.lblCONAppropriationsCO.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label68
             // 
@@ -1752,11 +1752,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.panel13.Controls.Add(this.label72);
             this.panel13.Controls.Add(this.label73);
             this.panel13.Controls.Add(this.label74);
-            this.panel13.Controls.Add(this.label75);
-            this.panel13.Controls.Add(this.label76);
-            this.panel13.Controls.Add(this.label77);
-            this.panel13.Controls.Add(this.label78);
-            this.panel13.Controls.Add(this.label79);
+            this.panel13.Controls.Add(this.lblCONAllotmentBalanceFE);
+            this.panel13.Controls.Add(this.lblCONAppropriationBalanceFE);
+            this.panel13.Controls.Add(this.lblCONObligationsFE);
+            this.panel13.Controls.Add(this.lblCONAllotmentsFE);
+            this.panel13.Controls.Add(this.lblCONAppropriationsFE);
             this.panel13.Controls.Add(this.label80);
             this.panel13.Controls.Add(this.label81);
             this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1824,65 +1824,65 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label74.TabIndex = 1;
             this.label74.Text = "Allotments";
             // 
-            // label75
+            // lblCONAllotmentBalanceFE
             // 
-            this.label75.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label75.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label75.Location = new System.Drawing.Point(201, 141);
-            this.label75.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label75.Name = "label75";
-            this.label75.Size = new System.Drawing.Size(82, 15);
-            this.label75.TabIndex = 1;
-            this.label75.Text = "0.00";
-            this.label75.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCONAllotmentBalanceFE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCONAllotmentBalanceFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCONAllotmentBalanceFE.Location = new System.Drawing.Point(201, 141);
+            this.lblCONAllotmentBalanceFE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCONAllotmentBalanceFE.Name = "lblCONAllotmentBalanceFE";
+            this.lblCONAllotmentBalanceFE.Size = new System.Drawing.Size(82, 15);
+            this.lblCONAllotmentBalanceFE.TabIndex = 1;
+            this.lblCONAllotmentBalanceFE.Text = "0.00";
+            this.lblCONAllotmentBalanceFE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label76
+            // lblCONAppropriationBalanceFE
             // 
-            this.label76.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label76.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label76.Location = new System.Drawing.Point(201, 116);
-            this.label76.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label76.Name = "label76";
-            this.label76.Size = new System.Drawing.Size(82, 15);
-            this.label76.TabIndex = 1;
-            this.label76.Text = "0.00";
-            this.label76.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCONAppropriationBalanceFE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCONAppropriationBalanceFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCONAppropriationBalanceFE.Location = new System.Drawing.Point(201, 116);
+            this.lblCONAppropriationBalanceFE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCONAppropriationBalanceFE.Name = "lblCONAppropriationBalanceFE";
+            this.lblCONAppropriationBalanceFE.Size = new System.Drawing.Size(82, 15);
+            this.lblCONAppropriationBalanceFE.TabIndex = 1;
+            this.lblCONAppropriationBalanceFE.Text = "0.00";
+            this.lblCONAppropriationBalanceFE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label77
+            // lblCONObligationsFE
             // 
-            this.label77.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label77.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label77.Location = new System.Drawing.Point(201, 91);
-            this.label77.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label77.Name = "label77";
-            this.label77.Size = new System.Drawing.Size(82, 15);
-            this.label77.TabIndex = 1;
-            this.label77.Text = "0.00";
-            this.label77.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCONObligationsFE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCONObligationsFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCONObligationsFE.Location = new System.Drawing.Point(201, 91);
+            this.lblCONObligationsFE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCONObligationsFE.Name = "lblCONObligationsFE";
+            this.lblCONObligationsFE.Size = new System.Drawing.Size(82, 15);
+            this.lblCONObligationsFE.TabIndex = 1;
+            this.lblCONObligationsFE.Text = "0.00";
+            this.lblCONObligationsFE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label78
+            // lblCONAllotmentsFE
             // 
-            this.label78.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label78.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label78.Location = new System.Drawing.Point(201, 66);
-            this.label78.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label78.Name = "label78";
-            this.label78.Size = new System.Drawing.Size(82, 15);
-            this.label78.TabIndex = 1;
-            this.label78.Text = "0.00";
-            this.label78.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCONAllotmentsFE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCONAllotmentsFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCONAllotmentsFE.Location = new System.Drawing.Point(201, 66);
+            this.lblCONAllotmentsFE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCONAllotmentsFE.Name = "lblCONAllotmentsFE";
+            this.lblCONAllotmentsFE.Size = new System.Drawing.Size(82, 15);
+            this.lblCONAllotmentsFE.TabIndex = 1;
+            this.lblCONAllotmentsFE.Text = "0.00";
+            this.lblCONAllotmentsFE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label79
+            // lblCONAppropriationsFE
             // 
-            this.label79.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label79.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label79.Location = new System.Drawing.Point(201, 41);
-            this.label79.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label79.Name = "label79";
-            this.label79.Size = new System.Drawing.Size(82, 15);
-            this.label79.TabIndex = 1;
-            this.label79.Text = "0.00";
-            this.label79.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCONAppropriationsFE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCONAppropriationsFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCONAppropriationsFE.Location = new System.Drawing.Point(201, 41);
+            this.lblCONAppropriationsFE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCONAppropriationsFE.Name = "lblCONAppropriationsFE";
+            this.lblCONAppropriationsFE.Size = new System.Drawing.Size(82, 15);
+            this.lblCONAppropriationsFE.TabIndex = 1;
+            this.lblCONAppropriationsFE.Text = "0.00";
+            this.lblCONAppropriationsFE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label80
             // 
@@ -1917,11 +1917,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.panel14.Controls.Add(this.label84);
             this.panel14.Controls.Add(this.label85);
             this.panel14.Controls.Add(this.label86);
-            this.panel14.Controls.Add(this.label87);
-            this.panel14.Controls.Add(this.label88);
-            this.panel14.Controls.Add(this.label89);
-            this.panel14.Controls.Add(this.label90);
-            this.panel14.Controls.Add(this.label91);
+            this.panel14.Controls.Add(this.lblCONAllotmentBalancePS);
+            this.panel14.Controls.Add(this.lblCONAppropriationBalancePS);
+            this.panel14.Controls.Add(this.lblCONObligationsPS);
+            this.panel14.Controls.Add(this.lblCONAllotmentsPS);
+            this.panel14.Controls.Add(this.lblCONAppropriationsPS);
             this.panel14.Controls.Add(this.label92);
             this.panel14.Controls.Add(this.label93);
             this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1989,65 +1989,65 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label86.TabIndex = 1;
             this.label86.Text = "Allotments";
             // 
-            // label87
+            // lblCONAllotmentBalancePS
             // 
-            this.label87.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label87.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label87.Location = new System.Drawing.Point(201, 141);
-            this.label87.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label87.Name = "label87";
-            this.label87.Size = new System.Drawing.Size(82, 15);
-            this.label87.TabIndex = 1;
-            this.label87.Text = "0.00";
-            this.label87.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCONAllotmentBalancePS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCONAllotmentBalancePS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCONAllotmentBalancePS.Location = new System.Drawing.Point(201, 141);
+            this.lblCONAllotmentBalancePS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCONAllotmentBalancePS.Name = "lblCONAllotmentBalancePS";
+            this.lblCONAllotmentBalancePS.Size = new System.Drawing.Size(82, 15);
+            this.lblCONAllotmentBalancePS.TabIndex = 1;
+            this.lblCONAllotmentBalancePS.Text = "0.00";
+            this.lblCONAllotmentBalancePS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label88
+            // lblCONAppropriationBalancePS
             // 
-            this.label88.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label88.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label88.Location = new System.Drawing.Point(201, 116);
-            this.label88.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label88.Name = "label88";
-            this.label88.Size = new System.Drawing.Size(82, 15);
-            this.label88.TabIndex = 1;
-            this.label88.Text = "0.00";
-            this.label88.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCONAppropriationBalancePS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCONAppropriationBalancePS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCONAppropriationBalancePS.Location = new System.Drawing.Point(201, 116);
+            this.lblCONAppropriationBalancePS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCONAppropriationBalancePS.Name = "lblCONAppropriationBalancePS";
+            this.lblCONAppropriationBalancePS.Size = new System.Drawing.Size(82, 15);
+            this.lblCONAppropriationBalancePS.TabIndex = 1;
+            this.lblCONAppropriationBalancePS.Text = "0.00";
+            this.lblCONAppropriationBalancePS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label89
+            // lblCONObligationsPS
             // 
-            this.label89.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label89.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label89.Location = new System.Drawing.Point(201, 91);
-            this.label89.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label89.Name = "label89";
-            this.label89.Size = new System.Drawing.Size(82, 15);
-            this.label89.TabIndex = 1;
-            this.label89.Text = "0.00";
-            this.label89.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCONObligationsPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCONObligationsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCONObligationsPS.Location = new System.Drawing.Point(201, 91);
+            this.lblCONObligationsPS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCONObligationsPS.Name = "lblCONObligationsPS";
+            this.lblCONObligationsPS.Size = new System.Drawing.Size(82, 15);
+            this.lblCONObligationsPS.TabIndex = 1;
+            this.lblCONObligationsPS.Text = "0.00";
+            this.lblCONObligationsPS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label90
+            // lblCONAllotmentsPS
             // 
-            this.label90.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label90.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label90.Location = new System.Drawing.Point(201, 66);
-            this.label90.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(82, 15);
-            this.label90.TabIndex = 1;
-            this.label90.Text = "0.00";
-            this.label90.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCONAllotmentsPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCONAllotmentsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCONAllotmentsPS.Location = new System.Drawing.Point(201, 66);
+            this.lblCONAllotmentsPS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCONAllotmentsPS.Name = "lblCONAllotmentsPS";
+            this.lblCONAllotmentsPS.Size = new System.Drawing.Size(82, 15);
+            this.lblCONAllotmentsPS.TabIndex = 1;
+            this.lblCONAllotmentsPS.Text = "0.00";
+            this.lblCONAllotmentsPS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label91
+            // lblCONAppropriationsPS
             // 
-            this.label91.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label91.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label91.Location = new System.Drawing.Point(201, 41);
-            this.label91.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label91.Name = "label91";
-            this.label91.Size = new System.Drawing.Size(82, 15);
-            this.label91.TabIndex = 1;
-            this.label91.Text = "0.00";
-            this.label91.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCONAppropriationsPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCONAppropriationsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCONAppropriationsPS.Location = new System.Drawing.Point(201, 41);
+            this.lblCONAppropriationsPS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCONAppropriationsPS.Name = "lblCONAppropriationsPS";
+            this.lblCONAppropriationsPS.Size = new System.Drawing.Size(82, 15);
+            this.lblCONAppropriationsPS.TabIndex = 1;
+            this.lblCONAppropriationsPS.Text = "0.00";
+            this.lblCONAppropriationsPS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label92
             // 
@@ -2082,11 +2082,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.panel15.Controls.Add(this.label96);
             this.panel15.Controls.Add(this.label97);
             this.panel15.Controls.Add(this.label98);
-            this.panel15.Controls.Add(this.label99);
-            this.panel15.Controls.Add(this.label103);
-            this.panel15.Controls.Add(this.label104);
-            this.panel15.Controls.Add(this.label105);
-            this.panel15.Controls.Add(this.label106);
+            this.panel15.Controls.Add(this.lblCONAllotmentBalanceMOOE);
+            this.panel15.Controls.Add(this.lblCONAppropriationBalanceMOOE);
+            this.panel15.Controls.Add(this.lblCONObligationsMOOE);
+            this.panel15.Controls.Add(this.lblCONAllotmentsMOOE);
+            this.panel15.Controls.Add(this.lblCONAppropriationsMOOE);
             this.panel15.Controls.Add(this.label107);
             this.panel15.Controls.Add(this.label108);
             this.panel15.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -2154,65 +2154,65 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label98.TabIndex = 1;
             this.label98.Text = "Allotments";
             // 
-            // label99
+            // lblCONAllotmentBalanceMOOE
             // 
-            this.label99.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label99.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label99.Location = new System.Drawing.Point(204, 141);
-            this.label99.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label99.Name = "label99";
-            this.label99.Size = new System.Drawing.Size(82, 15);
-            this.label99.TabIndex = 1;
-            this.label99.Text = "0.00";
-            this.label99.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCONAllotmentBalanceMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCONAllotmentBalanceMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCONAllotmentBalanceMOOE.Location = new System.Drawing.Point(204, 141);
+            this.lblCONAllotmentBalanceMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCONAllotmentBalanceMOOE.Name = "lblCONAllotmentBalanceMOOE";
+            this.lblCONAllotmentBalanceMOOE.Size = new System.Drawing.Size(82, 15);
+            this.lblCONAllotmentBalanceMOOE.TabIndex = 1;
+            this.lblCONAllotmentBalanceMOOE.Text = "0.00";
+            this.lblCONAllotmentBalanceMOOE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label103
+            // lblCONAppropriationBalanceMOOE
             // 
-            this.label103.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label103.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label103.Location = new System.Drawing.Point(204, 116);
-            this.label103.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label103.Name = "label103";
-            this.label103.Size = new System.Drawing.Size(82, 15);
-            this.label103.TabIndex = 1;
-            this.label103.Text = "0.00";
-            this.label103.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCONAppropriationBalanceMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCONAppropriationBalanceMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCONAppropriationBalanceMOOE.Location = new System.Drawing.Point(204, 116);
+            this.lblCONAppropriationBalanceMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCONAppropriationBalanceMOOE.Name = "lblCONAppropriationBalanceMOOE";
+            this.lblCONAppropriationBalanceMOOE.Size = new System.Drawing.Size(82, 15);
+            this.lblCONAppropriationBalanceMOOE.TabIndex = 1;
+            this.lblCONAppropriationBalanceMOOE.Text = "0.00";
+            this.lblCONAppropriationBalanceMOOE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label104
+            // lblCONObligationsMOOE
             // 
-            this.label104.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label104.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label104.Location = new System.Drawing.Point(204, 91);
-            this.label104.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label104.Name = "label104";
-            this.label104.Size = new System.Drawing.Size(82, 15);
-            this.label104.TabIndex = 1;
-            this.label104.Text = "0.00";
-            this.label104.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCONObligationsMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCONObligationsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCONObligationsMOOE.Location = new System.Drawing.Point(204, 91);
+            this.lblCONObligationsMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCONObligationsMOOE.Name = "lblCONObligationsMOOE";
+            this.lblCONObligationsMOOE.Size = new System.Drawing.Size(82, 15);
+            this.lblCONObligationsMOOE.TabIndex = 1;
+            this.lblCONObligationsMOOE.Text = "0.00";
+            this.lblCONObligationsMOOE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label105
+            // lblCONAllotmentsMOOE
             // 
-            this.label105.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label105.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label105.Location = new System.Drawing.Point(204, 66);
-            this.label105.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label105.Name = "label105";
-            this.label105.Size = new System.Drawing.Size(82, 15);
-            this.label105.TabIndex = 1;
-            this.label105.Text = "0.00";
-            this.label105.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCONAllotmentsMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCONAllotmentsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCONAllotmentsMOOE.Location = new System.Drawing.Point(204, 66);
+            this.lblCONAllotmentsMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCONAllotmentsMOOE.Name = "lblCONAllotmentsMOOE";
+            this.lblCONAllotmentsMOOE.Size = new System.Drawing.Size(82, 15);
+            this.lblCONAllotmentsMOOE.TabIndex = 1;
+            this.lblCONAllotmentsMOOE.Text = "0.00";
+            this.lblCONAllotmentsMOOE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label106
+            // lblCONAppropriationsMOOE
             // 
-            this.label106.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label106.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label106.Location = new System.Drawing.Point(204, 41);
-            this.label106.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.label106.Name = "label106";
-            this.label106.Size = new System.Drawing.Size(82, 15);
-            this.label106.TabIndex = 1;
-            this.label106.Text = "0.00";
-            this.label106.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCONAppropriationsMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCONAppropriationsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblCONAppropriationsMOOE.Location = new System.Drawing.Point(204, 41);
+            this.lblCONAppropriationsMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
+            this.lblCONAppropriationsMOOE.Name = "lblCONAppropriationsMOOE";
+            this.lblCONAppropriationsMOOE.Size = new System.Drawing.Size(82, 15);
+            this.lblCONAppropriationsMOOE.TabIndex = 1;
+            this.lblCONAppropriationsMOOE.Text = "0.00";
+            this.lblCONAppropriationsMOOE.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label107
             // 
@@ -2351,11 +2351,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
         internal System.Windows.Forms.Label label5;
         internal System.Windows.Forms.Label label6;
         internal System.Windows.Forms.Label label7;
-        internal System.Windows.Forms.Label label8;
-        internal System.Windows.Forms.Label label12;
-        internal System.Windows.Forms.Label label13;
-        internal System.Windows.Forms.Label label14;
-        internal System.Windows.Forms.Label label15;
+        internal System.Windows.Forms.Label lblCYAllotmentBalanceCO;
+        internal System.Windows.Forms.Label lblCYAppropriationBalanceCO;
+        internal System.Windows.Forms.Label lblCYObligationsCO;
+        internal System.Windows.Forms.Label lblCYAllotmentsCO;
+        internal System.Windows.Forms.Label lblCYAppropriationsCO;
         internal System.Windows.Forms.Label label16;
         internal System.Windows.Forms.Label label17;
         internal System.Windows.Forms.Panel panel6;
@@ -2364,11 +2364,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
         internal System.Windows.Forms.Label label20;
         internal System.Windows.Forms.Label label21;
         internal System.Windows.Forms.Label label22;
-        internal System.Windows.Forms.Label label28;
-        internal System.Windows.Forms.Label label29;
-        internal System.Windows.Forms.Label label30;
-        internal System.Windows.Forms.Label label31;
-        internal System.Windows.Forms.Label label32;
+        internal System.Windows.Forms.Label lblCYAllotmentBalanceFE;
+        internal System.Windows.Forms.Label lblCYAppropriationBalanceFE;
+        internal System.Windows.Forms.Label lblCYObligationsFE;
+        internal System.Windows.Forms.Label lblCYAllotmentsFE;
+        internal System.Windows.Forms.Label lblCYAppropriationsFE;
         internal System.Windows.Forms.Label label40;
         internal System.Windows.Forms.Label label41;
         internal System.Windows.Forms.Panel panel7;
@@ -2377,11 +2377,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
         internal System.Windows.Forms.Label label44;
         internal System.Windows.Forms.Label label47;
         internal System.Windows.Forms.Label label48;
-        internal System.Windows.Forms.Label lblAllotmentBalancePS;
-        internal System.Windows.Forms.Label lblAppropriationBalancePS;
-        internal System.Windows.Forms.Label lblObligationsPS;
-        internal System.Windows.Forms.Label lblAllotmentsPS;
-        internal System.Windows.Forms.Label lblAppropriationsPS;
+        internal System.Windows.Forms.Label lblCYAllotmentBalancePS;
+        internal System.Windows.Forms.Label lblCYAppropriationBalancePS;
+        internal System.Windows.Forms.Label lblCYObligationsPS;
+        internal System.Windows.Forms.Label lblCYAllotmentsPS;
+        internal System.Windows.Forms.Label lblCYAppropriationsPS;
         internal System.Windows.Forms.Label label49;
         internal System.Windows.Forms.Label label50;
         internal System.Windows.Forms.Panel panel8;
@@ -2390,11 +2390,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
         internal System.Windows.Forms.Label label53;
         internal System.Windows.Forms.Label label54;
         internal System.Windows.Forms.Label label55;
-        internal System.Windows.Forms.Label lblAllotmentBalanceMOOE;
-        internal System.Windows.Forms.Label lblAppropriationBalanceMOOE;
-        internal System.Windows.Forms.Label lblObligationsMOOE;
-        internal System.Windows.Forms.Label lblAllotmentsMOOE;
-        internal System.Windows.Forms.Label lblAppropriationsMOOE;
+        internal System.Windows.Forms.Label lblCYAllotmentBalanceMOOE;
+        internal System.Windows.Forms.Label lblCYAppropriationBalanceMOOE;
+        internal System.Windows.Forms.Label lblCYObligationsMOOE;
+        internal System.Windows.Forms.Label lblCYAllotmentsMOOE;
+        internal System.Windows.Forms.Label lblCYAppropriationsMOOE;
         internal System.Windows.Forms.Label label56;
         internal System.Windows.Forms.Label label57;
         internal System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
@@ -2404,11 +2404,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
         internal System.Windows.Forms.Label label60;
         internal System.Windows.Forms.Label label61;
         internal System.Windows.Forms.Label label62;
-        internal System.Windows.Forms.Label label63;
-        internal System.Windows.Forms.Label label64;
-        internal System.Windows.Forms.Label label65;
-        internal System.Windows.Forms.Label label66;
-        internal System.Windows.Forms.Label label67;
+        internal System.Windows.Forms.Label lblCONAllotmentBalanceCO;
+        internal System.Windows.Forms.Label lbCONAppropriationBalanceCO;
+        internal System.Windows.Forms.Label lblCONObligationsCO;
+        internal System.Windows.Forms.Label lblCONAllotmentsCO;
+        internal System.Windows.Forms.Label lblCONAppropriationsCO;
         internal System.Windows.Forms.Label label68;
         internal System.Windows.Forms.Label label69;
         internal System.Windows.Forms.Panel panel13;
@@ -2417,11 +2417,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
         internal System.Windows.Forms.Label label72;
         internal System.Windows.Forms.Label label73;
         internal System.Windows.Forms.Label label74;
-        internal System.Windows.Forms.Label label75;
-        internal System.Windows.Forms.Label label76;
-        internal System.Windows.Forms.Label label77;
-        internal System.Windows.Forms.Label label78;
-        internal System.Windows.Forms.Label label79;
+        internal System.Windows.Forms.Label lblCONAllotmentBalanceFE;
+        internal System.Windows.Forms.Label lblCONAppropriationBalanceFE;
+        internal System.Windows.Forms.Label lblCONObligationsFE;
+        internal System.Windows.Forms.Label lblCONAllotmentsFE;
+        internal System.Windows.Forms.Label lblCONAppropriationsFE;
         internal System.Windows.Forms.Label label80;
         internal System.Windows.Forms.Label label81;
         internal System.Windows.Forms.Panel panel14;
@@ -2430,11 +2430,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
         internal System.Windows.Forms.Label label84;
         internal System.Windows.Forms.Label label85;
         internal System.Windows.Forms.Label label86;
-        internal System.Windows.Forms.Label label87;
-        internal System.Windows.Forms.Label label88;
-        internal System.Windows.Forms.Label label89;
-        internal System.Windows.Forms.Label label90;
-        internal System.Windows.Forms.Label label91;
+        internal System.Windows.Forms.Label lblCONAllotmentBalancePS;
+        internal System.Windows.Forms.Label lblCONAppropriationBalancePS;
+        internal System.Windows.Forms.Label lblCONObligationsPS;
+        internal System.Windows.Forms.Label lblCONAllotmentsPS;
+        internal System.Windows.Forms.Label lblCONAppropriationsPS;
         internal System.Windows.Forms.Label label92;
         internal System.Windows.Forms.Label label93;
         internal System.Windows.Forms.Panel panel15;
@@ -2443,11 +2443,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
         internal System.Windows.Forms.Label label96;
         internal System.Windows.Forms.Label label97;
         internal System.Windows.Forms.Label label98;
-        internal System.Windows.Forms.Label label99;
-        internal System.Windows.Forms.Label label103;
-        internal System.Windows.Forms.Label label104;
-        internal System.Windows.Forms.Label label105;
-        internal System.Windows.Forms.Label label106;
+        internal System.Windows.Forms.Label lblCONAllotmentBalanceMOOE;
+        internal System.Windows.Forms.Label lblCONAppropriationBalanceMOOE;
+        internal System.Windows.Forms.Label lblCONObligationsMOOE;
+        internal System.Windows.Forms.Label lblCONAllotmentsMOOE;
+        internal System.Windows.Forms.Label lblCONAppropriationsMOOE;
         internal System.Windows.Forms.Label label107;
         internal System.Windows.Forms.Label label108;
     }
