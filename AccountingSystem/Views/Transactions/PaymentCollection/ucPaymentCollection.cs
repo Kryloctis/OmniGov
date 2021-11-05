@@ -464,7 +464,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void txtCashTicketQuantity_ValueChanged(object sender, EventArgs e)
         {
+            var cashTicketAmount = accountableFormFaceValue;
+            var cashTicketQuantity = Convert.ToInt32(txtCashTicketQuantity.Value);
+            var amount = (cashTicketAmount) * (cashTicketQuantity);
 
+            txtCashTicketsAmount.Text = amount.ToString();
         }
 
 
