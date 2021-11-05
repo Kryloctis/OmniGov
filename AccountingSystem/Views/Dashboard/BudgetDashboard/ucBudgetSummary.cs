@@ -290,44 +290,32 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
         {
             try
             {
-                var dtAllotmentClassses = Factory.AllotmentClassesRepository().GetRecords();
+                lblCYAppropriationsPS.Text = GetAppropriations(1, 0).ToString("N2");
+                lblCYAllotmentsPS.Text = GetAllotments(1, 0).ToString("N2");
+                lblCYObligationsPS.Text = GetSumObligations(1, 0).ToString("N2");
+                lblCYAppropriationBalancePS.Text = (GetAppropriations(1, 0) - GetSumObligations(1, 0)).ToString("N2");
+                lblCYAllotmentBalancePS.Text = (GetAllotments(1, 0) - GetSumObligations(1, 0)).ToString("N2");
 
-                foreach (DataRow row in dtAllotmentClassses.Rows)
-                {
-                    int allotmentClassId = Convert.ToInt32(row["id"]);
 
-                    switch (allotmentClassId)
-                    {
-                        case 1:
-                            lblAppropriationsPS.Text = GetAppropriations(1, 0).ToString("N2");
-                            lblAllotmentsPS.Text = GetAllotments(1, 0).ToString("N2");
-                            lblObligationsPS.Text = GetSumObligations(1, 0).ToString("N2");
-                            lblAppropriationBalancePS.Text = (GetAppropriations(1, 0) - GetSumObligations(1, 0)).ToString("N2");
-                            lblAllotmentBalancePS.Text = (GetAllotments(1, 0) - GetSumObligations(1, 0)).ToString("N2");
-                            break;
-                        case 2:
-                            lblAppropriationsMOOE.Text = GetAppropriations(2, 0).ToString("N2");
-                            lblAllotmentsMOOE.Text = GetAllotments(2, 0).ToString("N2");
-                            lblObligationsMOOE.Text = GetSumObligations(2, 0).ToString("N2");
-                            lblAppropriationBalanceMOOE.Text = (GetAppropriations(2, 0) - GetSumObligations(2, 0)).ToString("N2");
-                            lblAllotmentBalanceMOOE.Text = (GetAllotments(2, 0) - GetSumObligations(2, 0)).ToString("N2");
-                            break;
-                        case 3:
-                            lblAppropriationsFE.Text = GetAppropriations(3, 0).ToString("N2");
-                            lblAllotmentsFE.Text = GetAllotments(3, 0).ToString("N2");
-                            lblObligationsFE.Text = GetSumObligations(3, 0).ToString("N2");
-                            lblAppropriationBalanceFE.Text = (GetAppropriations(3, 0) - GetSumObligations(3, 0)).ToString("N2");
-                            lblAllotmentBalanceFE.Text = (GetAllotments(3, 0) - GetSumObligations(3, 0)).ToString("N2");
-                            break;
-                        case 4:
-                            lblAppropriationsCO.Text = GetAppropriations(4, 0).ToString("N2");
-                            lblAllotmentsCO.Text = GetAllotments(4, 0).ToString("N2");
-                            lblObligationsCO.Text = GetSumObligations(4, 0).ToString("N2");
-                            lblAppropriationBalanceCO.Text = (GetAppropriations(4, 0) - GetSumObligations(4, 0)).ToString("N2");
-                            lblAllotmentBalanceCO.Text = (GetAllotments(4, 0) - GetSumObligations(4, 0)).ToString("N2");
-                            break;
-                    }
-                }
+                lblCYAppropriationsMOOE.Text = GetAppropriations(2, 0).ToString("N2");
+                lblCYAllotmentsMOOE.Text = GetAllotments(2, 0).ToString("N2");
+                lblCYObligationsMOOE.Text = GetSumObligations(2, 0).ToString("N2");
+                lblCYAppropriationBalanceMOOE.Text = (GetAppropriations(2, 0) - GetSumObligations(2, 0)).ToString("N2");
+                lblCYAllotmentBalanceMOOE.Text = (GetAllotments(2, 0) - GetSumObligations(2, 0)).ToString("N2");
+
+
+                lblCYAppropriationsFE.Text = GetAppropriations(3, 0).ToString("N2");
+                lblCYAllotmentsFE.Text = GetAllotments(3, 0).ToString("N2");
+                lblCYObligationsFE.Text = GetSumObligations(3, 0).ToString("N2");
+                lblCYAppropriationBalanceFE.Text = (GetAppropriations(3, 0) - GetSumObligations(3, 0)).ToString("N2");
+                lblCYAllotmentBalanceFE.Text = (GetAllotments(3, 0) - GetSumObligations(3, 0)).ToString("N2");
+
+                lblCYAppropriationsCO.Text = GetAppropriations(4, 0).ToString("N2");
+                lblCYAllotmentsCO.Text = GetAllotments(4, 0).ToString("N2");
+                lblCYObligationsCO.Text = GetSumObligations(4, 0).ToString("N2");
+                lblCYAppropriationBalanceCO.Text = (GetAppropriations(4, 0) - GetSumObligations(4, 0)).ToString("N2");
+                lblCYAllotmentBalanceCO.Text = (GetAllotments(4, 0) - GetSumObligations(4, 0)).ToString("N2");
+
             }
             catch (Exception ex)
             {
@@ -339,44 +327,31 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
         {
             try
             {
-                var dtAllotmentClassses = Factory.AllotmentClassesRepository().GetRecords();
 
-                foreach (DataRow row in dtAllotmentClassses.Rows)
-                {
-                    int allotmentClassId = Convert.ToInt32(row["id"]);
+                lblCONAppropriationsPS.Text = GetAppropriations(1, 1).ToString("N2");
+                lblCONAllotmentsPS.Text = GetAllotments(1, 1).ToString("N2");
+                lblCONObligationsPS.Text = GetSumObligations(1, 1).ToString("N2");
+                lblCONAppropriationBalancePS.Text = (GetAppropriations(1, 1) - GetSumObligations(1, 1)).ToString("N2");
+                lblCONAllotmentBalancePS.Text = (GetAllotments(1, 1) - GetSumObligations(1, 1)).ToString("N2");
 
-                    switch (allotmentClassId)
-                    {
-                        case 1:
-                            lblAppropriationsPS.Text = GetAppropriations(1, 1).ToString("N2");
-                            lblAllotmentsPS.Text = GetAllotments(1, 1).ToString("N2");
-                            lblObligationsPS.Text = GetSumObligations(1, 1).ToString("N2");
-                            lblAppropriationBalancePS.Text = (GetAppropriations(1, 1) - GetSumObligations(1, 1)).ToString("N2");
-                            lblAllotmentBalancePS.Text = (GetAllotments(1, 1) - GetSumObligations(1, 1)).ToString("N2");
-                            break;
-                        case 2:
-                            lblAppropriationsMOOE.Text = GetAppropriations(2, 1).ToString("N2");
-                            lblAllotmentsMOOE.Text = GetAllotments(2, 1).ToString("N2");
-                            lblObligationsMOOE.Text = GetSumObligations(2, 1).ToString("N2");
-                            lblAppropriationBalanceMOOE.Text = (GetAppropriations(2, 1) - GetSumObligations(2, 1)).ToString("N2");
-                            lblAllotmentBalanceMOOE.Text = (GetAllotments(2, 1) - GetSumObligations(2, 1)).ToString("N2");
-                            break;
-                        case 3:
-                            lblAppropriationsFE.Text = GetAppropriations(3, 1).ToString("N2");
-                            lblAllotmentsFE.Text = GetAllotments(3, 1).ToString("N2");
-                            lblObligationsFE.Text = GetSumObligations(3, 1).ToString("N2");
-                            lblAppropriationBalanceFE.Text = (GetAppropriations(3, 1) - GetSumObligations(3, 1)).ToString("N2");
-                            lblAllotmentBalanceFE.Text = (GetAllotments(3, 1) - GetSumObligations(3, 1)).ToString("N2");
-                            break;
-                        case 4:
-                            lblAppropriationsCO.Text = GetAppropriations(4, 1).ToString("N2");
-                            lblAllotmentsCO.Text = GetAllotments(4, 1).ToString("N2");
-                            lblObligationsCO.Text = GetSumObligations(4, 1).ToString("N2");
-                            lblAppropriationBalanceCO.Text = (GetAppropriations(4, 1) - GetSumObligations(4, 1)).ToString("N2");
-                            lblAllotmentBalanceCO.Text = (GetAllotments(4, 1) - GetSumObligations(4, 1)).ToString("N2");
-                            break;
-                    }
-                }
+                lblCONAppropriationsMOOE.Text = GetAppropriations(2, 1).ToString("N2");
+                lblCONAllotmentsMOOE.Text = GetAllotments(2, 1).ToString("N2");
+                lblCONObligationsMOOE.Text = GetSumObligations(2, 1).ToString("N2");
+                lblCONAppropriationBalanceMOOE.Text = (GetAppropriations(2, 1) - GetSumObligations(2, 1)).ToString("N2");
+                lblCONAllotmentBalanceMOOE.Text = (GetAllotments(2, 1) - GetSumObligations(2, 1)).ToString("N2");
+
+
+                lblCONAppropriationsFE.Text = GetAppropriations(3, 1).ToString("N2");
+                lblCONAllotmentsFE.Text = GetAllotments(3, 1).ToString("N2");
+                lblCONObligationsFE.Text = GetSumObligations(3, 1).ToString("N2");
+                lblCONAppropriationBalanceFE.Text = (GetAppropriations(3, 1) - GetSumObligations(3, 1)).ToString("N2");
+                lblCONAllotmentBalanceFE.Text = (GetAllotments(3, 1) - GetSumObligations(3, 1)).ToString("N2");
+
+                lblCONAppropriationsCO.Text = GetAppropriations(4, 1).ToString("N2");
+                lblCONAllotmentsCO.Text = GetAllotments(4, 1).ToString("N2");
+                lblCONObligationsCO.Text = GetSumObligations(4, 1).ToString("N2");
+                lbCONAppropriationBalanceCO.Text = (GetAppropriations(4, 1) - GetSumObligations(4, 1)).ToString("N2");
+                lblCONAllotmentBalanceCO.Text = (GetAllotments(4, 1) - GetSumObligations(4, 1)).ToString("N2");
             }
             catch (Exception ex)
             {
