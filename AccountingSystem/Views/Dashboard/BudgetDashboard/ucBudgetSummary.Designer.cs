@@ -237,6 +237,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.lblGrandTotalAllotmentBalance);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -264,7 +265,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label2.Size = new System.Drawing.Size(235, 19);
+            this.label2.Size = new System.Drawing.Size(233, 19);
             this.label2.TabIndex = 1;
             this.label2.Text = "Allotment Balance";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -272,6 +273,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.White;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.lblGrandTotalAppropriationBalance);
             this.panel4.Controls.Add(this.label4);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -299,7 +301,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label4.Location = new System.Drawing.Point(0, 0);
             this.label4.Name = "label4";
             this.label4.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label4.Size = new System.Drawing.Size(233, 19);
+            this.label4.Size = new System.Drawing.Size(231, 19);
             this.label4.TabIndex = 1;
             this.label4.Text = "Appropriation Balance";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -307,6 +309,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // panel11
             // 
             this.panel11.BackColor = System.Drawing.Color.White;
+            this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel11.Controls.Add(this.lblGrandTotalObligations);
             this.panel11.Controls.Add(this.label102);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -334,7 +337,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label102.Location = new System.Drawing.Point(0, 0);
             this.label102.Name = "label102";
             this.label102.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label102.Size = new System.Drawing.Size(233, 19);
+            this.label102.Size = new System.Drawing.Size(231, 19);
             this.label102.TabIndex = 1;
             this.label102.Text = "Obligations";
             this.label102.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -342,6 +345,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // panel10
             // 
             this.panel10.BackColor = System.Drawing.Color.White;
+            this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel10.Controls.Add(this.lblGrandTotalAllotments);
             this.panel10.Controls.Add(this.label101);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -369,7 +373,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label101.Location = new System.Drawing.Point(0, 0);
             this.label101.Name = "label101";
             this.label101.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label101.Size = new System.Drawing.Size(240, 19);
+            this.label101.Size = new System.Drawing.Size(238, 19);
             this.label101.TabIndex = 1;
             this.label101.Text = "Allotments";
             this.label101.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -377,6 +381,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // panel9
             // 
             this.panel9.BackColor = System.Drawing.Color.White;
+            this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel9.Controls.Add(this.lblGrandTotalAppropriations);
             this.panel9.Controls.Add(this.label100);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -404,7 +409,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label100.Location = new System.Drawing.Point(0, 0);
             this.label100.Name = "label100";
             this.label100.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label100.Size = new System.Drawing.Size(225, 19);
+            this.label100.Size = new System.Drawing.Size(223, 19);
             this.label100.TabIndex = 1;
             this.label100.Text = "Appropriations";
             this.label100.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -899,6 +904,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.White;
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel5.Controls.Add(this.label1);
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.label5);
@@ -927,7 +933,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label1.Location = new System.Drawing.Point(0, 17);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label1.Size = new System.Drawing.Size(293, 19);
+            this.label1.Size = new System.Drawing.Size(291, 19);
             this.label1.TabIndex = 2;
             this.label1.Text = "Capital Outlay";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -980,7 +986,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCYAllotmentBalanceCO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCYAllotmentBalanceCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCYAllotmentBalanceCO.Location = new System.Drawing.Point(204, 141);
+            this.lblCYAllotmentBalanceCO.Location = new System.Drawing.Point(202, 141);
             this.lblCYAllotmentBalanceCO.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCYAllotmentBalanceCO.Name = "lblCYAllotmentBalanceCO";
             this.lblCYAllotmentBalanceCO.Size = new System.Drawing.Size(82, 15);
@@ -992,7 +998,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCYAppropriationBalanceCO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCYAppropriationBalanceCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCYAppropriationBalanceCO.Location = new System.Drawing.Point(204, 116);
+            this.lblCYAppropriationBalanceCO.Location = new System.Drawing.Point(202, 116);
             this.lblCYAppropriationBalanceCO.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCYAppropriationBalanceCO.Name = "lblCYAppropriationBalanceCO";
             this.lblCYAppropriationBalanceCO.Size = new System.Drawing.Size(82, 15);
@@ -1004,7 +1010,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCYObligationsCO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCYObligationsCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCYObligationsCO.Location = new System.Drawing.Point(204, 91);
+            this.lblCYObligationsCO.Location = new System.Drawing.Point(202, 91);
             this.lblCYObligationsCO.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCYObligationsCO.Name = "lblCYObligationsCO";
             this.lblCYObligationsCO.Size = new System.Drawing.Size(82, 15);
@@ -1016,7 +1022,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCYAllotmentsCO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCYAllotmentsCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCYAllotmentsCO.Location = new System.Drawing.Point(204, 66);
+            this.lblCYAllotmentsCO.Location = new System.Drawing.Point(202, 66);
             this.lblCYAllotmentsCO.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCYAllotmentsCO.Name = "lblCYAllotmentsCO";
             this.lblCYAllotmentsCO.Size = new System.Drawing.Size(82, 15);
@@ -1028,7 +1034,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCYAppropriationsCO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCYAppropriationsCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCYAppropriationsCO.Location = new System.Drawing.Point(204, 41);
+            this.lblCYAppropriationsCO.Location = new System.Drawing.Point(202, 41);
             this.lblCYAppropriationsCO.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCYAppropriationsCO.Name = "lblCYAppropriationsCO";
             this.lblCYAppropriationsCO.Size = new System.Drawing.Size(82, 15);
@@ -1056,7 +1062,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label17.Location = new System.Drawing.Point(0, 0);
             this.label17.Name = "label17";
             this.label17.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label17.Size = new System.Drawing.Size(293, 17);
+            this.label17.Size = new System.Drawing.Size(291, 17);
             this.label17.TabIndex = 0;
             this.label17.Text = "CO";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1064,6 +1070,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.White;
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Controls.Add(this.label18);
             this.panel6.Controls.Add(this.label19);
             this.panel6.Controls.Add(this.label20);
@@ -1092,7 +1099,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label18.Location = new System.Drawing.Point(0, 17);
             this.label18.Name = "label18";
             this.label18.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label18.Size = new System.Drawing.Size(293, 19);
+            this.label18.Size = new System.Drawing.Size(291, 19);
             this.label18.TabIndex = 2;
             this.label18.Text = "Financial Expenses";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1145,7 +1152,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCYAllotmentBalanceFE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCYAllotmentBalanceFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCYAllotmentBalanceFE.Location = new System.Drawing.Point(201, 141);
+            this.lblCYAllotmentBalanceFE.Location = new System.Drawing.Point(199, 141);
             this.lblCYAllotmentBalanceFE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCYAllotmentBalanceFE.Name = "lblCYAllotmentBalanceFE";
             this.lblCYAllotmentBalanceFE.Size = new System.Drawing.Size(82, 15);
@@ -1157,7 +1164,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCYAppropriationBalanceFE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCYAppropriationBalanceFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCYAppropriationBalanceFE.Location = new System.Drawing.Point(201, 116);
+            this.lblCYAppropriationBalanceFE.Location = new System.Drawing.Point(199, 116);
             this.lblCYAppropriationBalanceFE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCYAppropriationBalanceFE.Name = "lblCYAppropriationBalanceFE";
             this.lblCYAppropriationBalanceFE.Size = new System.Drawing.Size(82, 15);
@@ -1169,7 +1176,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCYObligationsFE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCYObligationsFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCYObligationsFE.Location = new System.Drawing.Point(201, 91);
+            this.lblCYObligationsFE.Location = new System.Drawing.Point(199, 91);
             this.lblCYObligationsFE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCYObligationsFE.Name = "lblCYObligationsFE";
             this.lblCYObligationsFE.Size = new System.Drawing.Size(82, 15);
@@ -1181,7 +1188,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCYAllotmentsFE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCYAllotmentsFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCYAllotmentsFE.Location = new System.Drawing.Point(201, 66);
+            this.lblCYAllotmentsFE.Location = new System.Drawing.Point(199, 66);
             this.lblCYAllotmentsFE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCYAllotmentsFE.Name = "lblCYAllotmentsFE";
             this.lblCYAllotmentsFE.Size = new System.Drawing.Size(82, 15);
@@ -1193,7 +1200,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCYAppropriationsFE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCYAppropriationsFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCYAppropriationsFE.Location = new System.Drawing.Point(201, 41);
+            this.lblCYAppropriationsFE.Location = new System.Drawing.Point(199, 41);
             this.lblCYAppropriationsFE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCYAppropriationsFE.Name = "lblCYAppropriationsFE";
             this.lblCYAppropriationsFE.Size = new System.Drawing.Size(82, 15);
@@ -1221,7 +1228,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label41.Location = new System.Drawing.Point(0, 0);
             this.label41.Name = "label41";
             this.label41.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label41.Size = new System.Drawing.Size(293, 17);
+            this.label41.Size = new System.Drawing.Size(291, 17);
             this.label41.TabIndex = 0;
             this.label41.Text = "FE";
             this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1229,6 +1236,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.Color.White;
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel7.Controls.Add(this.label42);
             this.panel7.Controls.Add(this.label43);
             this.panel7.Controls.Add(this.label44);
@@ -1257,7 +1265,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label42.Location = new System.Drawing.Point(0, 17);
             this.label42.Name = "label42";
             this.label42.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label42.Size = new System.Drawing.Size(293, 19);
+            this.label42.Size = new System.Drawing.Size(291, 19);
             this.label42.TabIndex = 2;
             this.label42.Text = "Personnel Services";
             this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1310,7 +1318,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCYAllotmentBalancePS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCYAllotmentBalancePS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCYAllotmentBalancePS.Location = new System.Drawing.Point(204, 141);
+            this.lblCYAllotmentBalancePS.Location = new System.Drawing.Point(202, 141);
             this.lblCYAllotmentBalancePS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCYAllotmentBalancePS.Name = "lblCYAllotmentBalancePS";
             this.lblCYAllotmentBalancePS.Size = new System.Drawing.Size(82, 15);
@@ -1322,7 +1330,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCYAppropriationBalancePS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCYAppropriationBalancePS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCYAppropriationBalancePS.Location = new System.Drawing.Point(204, 116);
+            this.lblCYAppropriationBalancePS.Location = new System.Drawing.Point(202, 116);
             this.lblCYAppropriationBalancePS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCYAppropriationBalancePS.Name = "lblCYAppropriationBalancePS";
             this.lblCYAppropriationBalancePS.Size = new System.Drawing.Size(82, 15);
@@ -1334,7 +1342,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCYObligationsPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCYObligationsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCYObligationsPS.Location = new System.Drawing.Point(204, 91);
+            this.lblCYObligationsPS.Location = new System.Drawing.Point(202, 91);
             this.lblCYObligationsPS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCYObligationsPS.Name = "lblCYObligationsPS";
             this.lblCYObligationsPS.Size = new System.Drawing.Size(82, 15);
@@ -1346,7 +1354,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCYAllotmentsPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCYAllotmentsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCYAllotmentsPS.Location = new System.Drawing.Point(204, 66);
+            this.lblCYAllotmentsPS.Location = new System.Drawing.Point(202, 66);
             this.lblCYAllotmentsPS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCYAllotmentsPS.Name = "lblCYAllotmentsPS";
             this.lblCYAllotmentsPS.Size = new System.Drawing.Size(82, 15);
@@ -1358,7 +1366,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCYAppropriationsPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCYAppropriationsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCYAppropriationsPS.Location = new System.Drawing.Point(204, 41);
+            this.lblCYAppropriationsPS.Location = new System.Drawing.Point(202, 41);
             this.lblCYAppropriationsPS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCYAppropriationsPS.Name = "lblCYAppropriationsPS";
             this.lblCYAppropriationsPS.Size = new System.Drawing.Size(82, 15);
@@ -1386,7 +1394,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label50.Location = new System.Drawing.Point(0, 0);
             this.label50.Name = "label50";
             this.label50.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label50.Size = new System.Drawing.Size(293, 17);
+            this.label50.Size = new System.Drawing.Size(291, 17);
             this.label50.TabIndex = 0;
             this.label50.Text = "PS";
             this.label50.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1394,6 +1402,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // panel8
             // 
             this.panel8.BackColor = System.Drawing.Color.White;
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel8.Controls.Add(this.label51);
             this.panel8.Controls.Add(this.label52);
             this.panel8.Controls.Add(this.label53);
@@ -1422,7 +1431,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label51.Location = new System.Drawing.Point(0, 17);
             this.label51.Name = "label51";
             this.label51.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label51.Size = new System.Drawing.Size(293, 19);
+            this.label51.Size = new System.Drawing.Size(291, 19);
             this.label51.TabIndex = 2;
             this.label51.Text = "Maintenance and Other Operating Expenses";
             this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1475,7 +1484,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCYAllotmentBalanceMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCYAllotmentBalanceMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCYAllotmentBalanceMOOE.Location = new System.Drawing.Point(204, 141);
+            this.lblCYAllotmentBalanceMOOE.Location = new System.Drawing.Point(202, 141);
             this.lblCYAllotmentBalanceMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCYAllotmentBalanceMOOE.Name = "lblCYAllotmentBalanceMOOE";
             this.lblCYAllotmentBalanceMOOE.Size = new System.Drawing.Size(82, 15);
@@ -1487,7 +1496,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCYAppropriationBalanceMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCYAppropriationBalanceMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCYAppropriationBalanceMOOE.Location = new System.Drawing.Point(204, 116);
+            this.lblCYAppropriationBalanceMOOE.Location = new System.Drawing.Point(202, 116);
             this.lblCYAppropriationBalanceMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCYAppropriationBalanceMOOE.Name = "lblCYAppropriationBalanceMOOE";
             this.lblCYAppropriationBalanceMOOE.Size = new System.Drawing.Size(82, 15);
@@ -1499,7 +1508,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCYObligationsMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCYObligationsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCYObligationsMOOE.Location = new System.Drawing.Point(204, 91);
+            this.lblCYObligationsMOOE.Location = new System.Drawing.Point(202, 91);
             this.lblCYObligationsMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCYObligationsMOOE.Name = "lblCYObligationsMOOE";
             this.lblCYObligationsMOOE.Size = new System.Drawing.Size(82, 15);
@@ -1511,7 +1520,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCYAllotmentsMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCYAllotmentsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCYAllotmentsMOOE.Location = new System.Drawing.Point(204, 66);
+            this.lblCYAllotmentsMOOE.Location = new System.Drawing.Point(202, 66);
             this.lblCYAllotmentsMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCYAllotmentsMOOE.Name = "lblCYAllotmentsMOOE";
             this.lblCYAllotmentsMOOE.Size = new System.Drawing.Size(82, 15);
@@ -1523,7 +1532,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCYAppropriationsMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCYAppropriationsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCYAppropriationsMOOE.Location = new System.Drawing.Point(204, 41);
+            this.lblCYAppropriationsMOOE.Location = new System.Drawing.Point(202, 41);
             this.lblCYAppropriationsMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCYAppropriationsMOOE.Name = "lblCYAppropriationsMOOE";
             this.lblCYAppropriationsMOOE.Size = new System.Drawing.Size(82, 15);
@@ -1551,7 +1560,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label57.Location = new System.Drawing.Point(0, 0);
             this.label57.Name = "label57";
             this.label57.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label57.Size = new System.Drawing.Size(293, 17);
+            this.label57.Size = new System.Drawing.Size(291, 17);
             this.label57.TabIndex = 0;
             this.label57.Text = "MOOE";
             this.label57.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1582,6 +1591,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // panel12
             // 
             this.panel12.BackColor = System.Drawing.Color.White;
+            this.panel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel12.Controls.Add(this.label58);
             this.panel12.Controls.Add(this.label59);
             this.panel12.Controls.Add(this.label60);
@@ -1610,7 +1620,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label58.Location = new System.Drawing.Point(0, 17);
             this.label58.Name = "label58";
             this.label58.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label58.Size = new System.Drawing.Size(293, 19);
+            this.label58.Size = new System.Drawing.Size(291, 19);
             this.label58.TabIndex = 2;
             this.label58.Text = "Capital Outlay";
             this.label58.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1663,7 +1673,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCONAllotmentBalanceCO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCONAllotmentBalanceCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCONAllotmentBalanceCO.Location = new System.Drawing.Point(204, 141);
+            this.lblCONAllotmentBalanceCO.Location = new System.Drawing.Point(202, 141);
             this.lblCONAllotmentBalanceCO.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCONAllotmentBalanceCO.Name = "lblCONAllotmentBalanceCO";
             this.lblCONAllotmentBalanceCO.Size = new System.Drawing.Size(82, 15);
@@ -1675,7 +1685,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lbCONAppropriationBalanceCO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbCONAppropriationBalanceCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lbCONAppropriationBalanceCO.Location = new System.Drawing.Point(204, 116);
+            this.lbCONAppropriationBalanceCO.Location = new System.Drawing.Point(202, 116);
             this.lbCONAppropriationBalanceCO.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lbCONAppropriationBalanceCO.Name = "lbCONAppropriationBalanceCO";
             this.lbCONAppropriationBalanceCO.Size = new System.Drawing.Size(82, 15);
@@ -1687,7 +1697,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCONObligationsCO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCONObligationsCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCONObligationsCO.Location = new System.Drawing.Point(204, 91);
+            this.lblCONObligationsCO.Location = new System.Drawing.Point(202, 91);
             this.lblCONObligationsCO.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCONObligationsCO.Name = "lblCONObligationsCO";
             this.lblCONObligationsCO.Size = new System.Drawing.Size(82, 15);
@@ -1699,7 +1709,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCONAllotmentsCO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCONAllotmentsCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCONAllotmentsCO.Location = new System.Drawing.Point(204, 66);
+            this.lblCONAllotmentsCO.Location = new System.Drawing.Point(202, 66);
             this.lblCONAllotmentsCO.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCONAllotmentsCO.Name = "lblCONAllotmentsCO";
             this.lblCONAllotmentsCO.Size = new System.Drawing.Size(82, 15);
@@ -1711,7 +1721,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCONAppropriationsCO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCONAppropriationsCO.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCONAppropriationsCO.Location = new System.Drawing.Point(204, 41);
+            this.lblCONAppropriationsCO.Location = new System.Drawing.Point(202, 41);
             this.lblCONAppropriationsCO.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCONAppropriationsCO.Name = "lblCONAppropriationsCO";
             this.lblCONAppropriationsCO.Size = new System.Drawing.Size(82, 15);
@@ -1739,7 +1749,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label69.Location = new System.Drawing.Point(0, 0);
             this.label69.Name = "label69";
             this.label69.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label69.Size = new System.Drawing.Size(293, 17);
+            this.label69.Size = new System.Drawing.Size(291, 17);
             this.label69.TabIndex = 0;
             this.label69.Text = "CO";
             this.label69.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1747,6 +1757,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // panel13
             // 
             this.panel13.BackColor = System.Drawing.Color.White;
+            this.panel13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel13.Controls.Add(this.label70);
             this.panel13.Controls.Add(this.label71);
             this.panel13.Controls.Add(this.label72);
@@ -1775,7 +1786,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label70.Location = new System.Drawing.Point(0, 17);
             this.label70.Name = "label70";
             this.label70.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label70.Size = new System.Drawing.Size(293, 19);
+            this.label70.Size = new System.Drawing.Size(291, 19);
             this.label70.TabIndex = 2;
             this.label70.Text = "Financial Expenses";
             this.label70.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1828,7 +1839,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCONAllotmentBalanceFE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCONAllotmentBalanceFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCONAllotmentBalanceFE.Location = new System.Drawing.Point(201, 141);
+            this.lblCONAllotmentBalanceFE.Location = new System.Drawing.Point(199, 141);
             this.lblCONAllotmentBalanceFE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCONAllotmentBalanceFE.Name = "lblCONAllotmentBalanceFE";
             this.lblCONAllotmentBalanceFE.Size = new System.Drawing.Size(82, 15);
@@ -1840,7 +1851,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCONAppropriationBalanceFE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCONAppropriationBalanceFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCONAppropriationBalanceFE.Location = new System.Drawing.Point(201, 116);
+            this.lblCONAppropriationBalanceFE.Location = new System.Drawing.Point(199, 116);
             this.lblCONAppropriationBalanceFE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCONAppropriationBalanceFE.Name = "lblCONAppropriationBalanceFE";
             this.lblCONAppropriationBalanceFE.Size = new System.Drawing.Size(82, 15);
@@ -1852,7 +1863,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCONObligationsFE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCONObligationsFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCONObligationsFE.Location = new System.Drawing.Point(201, 91);
+            this.lblCONObligationsFE.Location = new System.Drawing.Point(199, 91);
             this.lblCONObligationsFE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCONObligationsFE.Name = "lblCONObligationsFE";
             this.lblCONObligationsFE.Size = new System.Drawing.Size(82, 15);
@@ -1864,7 +1875,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCONAllotmentsFE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCONAllotmentsFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCONAllotmentsFE.Location = new System.Drawing.Point(201, 66);
+            this.lblCONAllotmentsFE.Location = new System.Drawing.Point(199, 66);
             this.lblCONAllotmentsFE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCONAllotmentsFE.Name = "lblCONAllotmentsFE";
             this.lblCONAllotmentsFE.Size = new System.Drawing.Size(82, 15);
@@ -1876,7 +1887,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCONAppropriationsFE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCONAppropriationsFE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCONAppropriationsFE.Location = new System.Drawing.Point(201, 41);
+            this.lblCONAppropriationsFE.Location = new System.Drawing.Point(199, 41);
             this.lblCONAppropriationsFE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCONAppropriationsFE.Name = "lblCONAppropriationsFE";
             this.lblCONAppropriationsFE.Size = new System.Drawing.Size(82, 15);
@@ -1904,7 +1915,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label81.Location = new System.Drawing.Point(0, 0);
             this.label81.Name = "label81";
             this.label81.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label81.Size = new System.Drawing.Size(293, 17);
+            this.label81.Size = new System.Drawing.Size(291, 17);
             this.label81.TabIndex = 0;
             this.label81.Text = "FE";
             this.label81.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1912,6 +1923,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // panel14
             // 
             this.panel14.BackColor = System.Drawing.Color.White;
+            this.panel14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel14.Controls.Add(this.label82);
             this.panel14.Controls.Add(this.label83);
             this.panel14.Controls.Add(this.label84);
@@ -1940,7 +1952,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label82.Location = new System.Drawing.Point(0, 17);
             this.label82.Name = "label82";
             this.label82.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label82.Size = new System.Drawing.Size(293, 19);
+            this.label82.Size = new System.Drawing.Size(291, 19);
             this.label82.TabIndex = 2;
             this.label82.Text = "Personnel Services";
             this.label82.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1993,7 +2005,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCONAllotmentBalancePS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCONAllotmentBalancePS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCONAllotmentBalancePS.Location = new System.Drawing.Point(201, 141);
+            this.lblCONAllotmentBalancePS.Location = new System.Drawing.Point(199, 141);
             this.lblCONAllotmentBalancePS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCONAllotmentBalancePS.Name = "lblCONAllotmentBalancePS";
             this.lblCONAllotmentBalancePS.Size = new System.Drawing.Size(82, 15);
@@ -2005,7 +2017,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCONAppropriationBalancePS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCONAppropriationBalancePS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCONAppropriationBalancePS.Location = new System.Drawing.Point(201, 116);
+            this.lblCONAppropriationBalancePS.Location = new System.Drawing.Point(199, 116);
             this.lblCONAppropriationBalancePS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCONAppropriationBalancePS.Name = "lblCONAppropriationBalancePS";
             this.lblCONAppropriationBalancePS.Size = new System.Drawing.Size(82, 15);
@@ -2017,7 +2029,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCONObligationsPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCONObligationsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCONObligationsPS.Location = new System.Drawing.Point(201, 91);
+            this.lblCONObligationsPS.Location = new System.Drawing.Point(199, 91);
             this.lblCONObligationsPS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCONObligationsPS.Name = "lblCONObligationsPS";
             this.lblCONObligationsPS.Size = new System.Drawing.Size(82, 15);
@@ -2029,7 +2041,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCONAllotmentsPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCONAllotmentsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCONAllotmentsPS.Location = new System.Drawing.Point(201, 66);
+            this.lblCONAllotmentsPS.Location = new System.Drawing.Point(199, 66);
             this.lblCONAllotmentsPS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCONAllotmentsPS.Name = "lblCONAllotmentsPS";
             this.lblCONAllotmentsPS.Size = new System.Drawing.Size(82, 15);
@@ -2041,7 +2053,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCONAppropriationsPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCONAppropriationsPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCONAppropriationsPS.Location = new System.Drawing.Point(201, 41);
+            this.lblCONAppropriationsPS.Location = new System.Drawing.Point(199, 41);
             this.lblCONAppropriationsPS.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCONAppropriationsPS.Name = "lblCONAppropriationsPS";
             this.lblCONAppropriationsPS.Size = new System.Drawing.Size(82, 15);
@@ -2069,7 +2081,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label93.Location = new System.Drawing.Point(0, 0);
             this.label93.Name = "label93";
             this.label93.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label93.Size = new System.Drawing.Size(293, 17);
+            this.label93.Size = new System.Drawing.Size(291, 17);
             this.label93.TabIndex = 0;
             this.label93.Text = "PS";
             this.label93.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2077,6 +2089,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // panel15
             // 
             this.panel15.BackColor = System.Drawing.Color.White;
+            this.panel15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel15.Controls.Add(this.label94);
             this.panel15.Controls.Add(this.label95);
             this.panel15.Controls.Add(this.label96);
@@ -2105,7 +2118,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label94.Location = new System.Drawing.Point(0, 17);
             this.label94.Name = "label94";
             this.label94.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label94.Size = new System.Drawing.Size(293, 19);
+            this.label94.Size = new System.Drawing.Size(291, 19);
             this.label94.TabIndex = 2;
             this.label94.Text = "Maintenance and Other Operating Expenses";
             this.label94.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2158,7 +2171,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCONAllotmentBalanceMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCONAllotmentBalanceMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCONAllotmentBalanceMOOE.Location = new System.Drawing.Point(204, 141);
+            this.lblCONAllotmentBalanceMOOE.Location = new System.Drawing.Point(202, 141);
             this.lblCONAllotmentBalanceMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCONAllotmentBalanceMOOE.Name = "lblCONAllotmentBalanceMOOE";
             this.lblCONAllotmentBalanceMOOE.Size = new System.Drawing.Size(82, 15);
@@ -2170,7 +2183,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCONAppropriationBalanceMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCONAppropriationBalanceMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCONAppropriationBalanceMOOE.Location = new System.Drawing.Point(204, 116);
+            this.lblCONAppropriationBalanceMOOE.Location = new System.Drawing.Point(202, 116);
             this.lblCONAppropriationBalanceMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCONAppropriationBalanceMOOE.Name = "lblCONAppropriationBalanceMOOE";
             this.lblCONAppropriationBalanceMOOE.Size = new System.Drawing.Size(82, 15);
@@ -2182,7 +2195,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCONObligationsMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCONObligationsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCONObligationsMOOE.Location = new System.Drawing.Point(204, 91);
+            this.lblCONObligationsMOOE.Location = new System.Drawing.Point(202, 91);
             this.lblCONObligationsMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCONObligationsMOOE.Name = "lblCONObligationsMOOE";
             this.lblCONObligationsMOOE.Size = new System.Drawing.Size(82, 15);
@@ -2194,7 +2207,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCONAllotmentsMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCONAllotmentsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCONAllotmentsMOOE.Location = new System.Drawing.Point(204, 66);
+            this.lblCONAllotmentsMOOE.Location = new System.Drawing.Point(202, 66);
             this.lblCONAllotmentsMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCONAllotmentsMOOE.Name = "lblCONAllotmentsMOOE";
             this.lblCONAllotmentsMOOE.Size = new System.Drawing.Size(82, 15);
@@ -2206,7 +2219,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             this.lblCONAppropriationsMOOE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCONAppropriationsMOOE.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCONAppropriationsMOOE.Location = new System.Drawing.Point(204, 41);
+            this.lblCONAppropriationsMOOE.Location = new System.Drawing.Point(202, 41);
             this.lblCONAppropriationsMOOE.Margin = new System.Windows.Forms.Padding(5, 5, 10, 5);
             this.lblCONAppropriationsMOOE.Name = "lblCONAppropriationsMOOE";
             this.lblCONAppropriationsMOOE.Size = new System.Drawing.Size(82, 15);
@@ -2234,7 +2247,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.label108.Location = new System.Drawing.Point(0, 0);
             this.label108.Name = "label108";
             this.label108.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.label108.Size = new System.Drawing.Size(293, 17);
+            this.label108.Size = new System.Drawing.Size(291, 17);
             this.label108.TabIndex = 0;
             this.label108.Text = "MOOE";
             this.label108.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
