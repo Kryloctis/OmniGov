@@ -20,24 +20,24 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             InitializeComponent();
             Helper.LoadFormIcon(this);
             _frmPaymentCollection = frmpc;
-            ucpc1.userid = Helper.UserId;
+            ucPaymentCollection1.userid = Helper.UserId;
         }
 
         private void frmPaymentCollectionAdd_Load(object sender, EventArgs e)
         {
-            ucpc1.LoadForms();
-            ucpc1.LoadCollectors();
-            ucpc1.LoadFunds();
+            ucPaymentCollection1.LoadForms();
+            ucPaymentCollection1.LoadCollectors();
+            ucPaymentCollection1.LoadFunds();
 
-            if(ucpc1.cmbcollector.Items.Count > 0)
+            if(ucPaymentCollection1.cmbcollector.Items.Count > 0)
             {
                 var uRepository = Factory.UsersRepository();
                 if (uRepository.LinkedCollector(Helper.UserId))
                 {
                     var colRepository = Factory.CollectingOfficerRepository();
                     var data = colRepository.GetRecordByUserID(Helper.UserId);
-                    ucpc1.cmbcollector.SelectedValue = data["id"];
-                    ucpc1.cmbcollector.Enabled = false;
+                    ucPaymentCollection1.cmbcollector.SelectedValue = data["id"];
+                    ucPaymentCollection1.cmbcollector.Enabled = false;
                 }
                // ucpc1.LoadForms(Helper.UserId);
             }
@@ -48,7 +48,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-                var uc = ucpc1;
+                var uc = ucPaymentCollection1;
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
@@ -129,9 +129,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 Helper.MessageBoxSuccess("Payment Collection has been saved.");
                 _frmPaymentCollection.LoadRecords();
-                ucpc1.ResetForm();
+                ucPaymentCollection1.ResetForm();
             }
         }
+
+        
 
     }
 }

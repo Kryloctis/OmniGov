@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucpc1 = new AccountingSystem.Views.Transactions.PaymentCollection.ucPaymentCollection();
+            this.ucPaymentCollection1 = new AccountingSystem.Views.Transactions.PaymentCollection.ucPaymentCollection();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
@@ -37,11 +37,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             // ucpc1
             // 
-            this.ucpc1.Location = new System.Drawing.Point(0, 47);
-            this.ucpc1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ucpc1.Name = "ucpc1";
-            this.ucpc1.Size = new System.Drawing.Size(509, 305);
-            this.ucpc1.TabIndex = 6;
+            this.ucPaymentCollection1.Location = new System.Drawing.Point(0, 47);
+            this.ucPaymentCollection1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ucPaymentCollection1.Name = "ucpc1";
+            this.ucPaymentCollection1.Size = new System.Drawing.Size(509, 305);
+            this.ucPaymentCollection1.TabIndex = 6;
             // 
             // toolStrip1
             // 
@@ -73,7 +73,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(509, 363);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.ucpc1);
+            this.Controls.Add(this.ucPaymentCollection1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
@@ -91,7 +91,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         }
 
         #endregion
-        private ucPaymentCollection ucpc1;
+        private ucPaymentCollection ucPaymentCollection1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         internal System.Windows.Forms.ToolStripButton btnSave;
     }
