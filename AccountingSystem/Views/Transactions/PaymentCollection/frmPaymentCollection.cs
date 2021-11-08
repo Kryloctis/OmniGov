@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgpayments.Rows.Count > 0 && dgpayments.SelectedRows.Count > 0)
+            if (dgpayments.SelectedRows.Count > 0)
             {
                 int Id = int.Parse(dgpayments.SelectedCells[0].Value.ToString());
                 _ = new frmPaymentCollectionEdit(this, Id).ShowDialog();
@@ -135,15 +135,15 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void dtpdate_ValueChanged(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    string date = String.Format("{0:yyyy-MM-dd}",dtpdate.Value);
-            //    var dtpayments = Factory.PaymentCollectionRepository().GetRecords(date);
-            //    HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
+            try
+            {
+                string date = String.Format("{0:yyyy-MM-dd}", dtpdate.Value);
+                var dtpayments = Factory.PaymentCollectionRepository().GetRecords(date);
+                HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
 
-            //    lblRecordCount.Text = dgpayments.Rows.Count.ToString();
-            //}
-            //catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+                lblRecordCount.Text = dgpayments.Rows.Count.ToString();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

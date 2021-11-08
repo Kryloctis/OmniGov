@@ -62,6 +62,7 @@ namespace ACC.Data
             }
 
             return record;
+
         }
 
         public DataTable GetRecords()
@@ -71,7 +72,7 @@ namespace ACC.Data
                 string query = string.Empty;
                 var uRepository = Factory.UsersRepository();
 
-                query = $"SELECT * FROM view_payment_collections ";
+                query = $"SELECT * FROM view_payment_collections ORDER BY accountable_form_id ";
                 
                 var dtRCI = new DataTable();
                 return _dbGenericCommands.Fill(query, dtRCI);

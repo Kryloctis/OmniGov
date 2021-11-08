@@ -480,7 +480,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
         }
 
-        private void txtCashTicketQuantity_Validating(object sender, CancelEventArgs e)
+        internal void txtCashTicketQuantity_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider, txtCashTicketQuantity, "Cash Ticket Quantity.");
         }

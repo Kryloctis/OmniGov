@@ -49,11 +49,18 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             try
             {
                 var uc = ucPaymentCollection1;
+
+                uc.txtCashTicketQuantity.Validating -= new CancelEventHandler(uc.txtCashTicketQuantity_Validating);
+
+                uc.txtpayee.Validating -= new CancelEventHandler(uc.txtpayee_Validating);
+
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
+
+                uc.txtCashTicketQuantity.Validating += new CancelEventHandler(uc.txtCashTicketQuantity_Validating);
 
                 var pcModel = new PaymentCollectionModel()
                 {
@@ -61,7 +68,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
                     AccountableFormId = Convert.ToInt32(uc.cmbforms.SelectedValue),
                     GeneralLedgerAccountId = uc.generalLedgerId,
-                    SlaId = 1,
+                    Quantity = 1,
                     Payee = uc.txtpayee.Text.Trim(),
                     ReceiptNo = uc.txtreceipt.Text.Trim(),
                     PaymentDate = Convert.ToDateTime(uc.dtdate.Text.Trim()),
