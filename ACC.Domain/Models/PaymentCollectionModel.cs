@@ -14,6 +14,7 @@ namespace ACC.Domain.Models
         public int SlaId { get; set; }
         public string Payee { get; set; }
         public string ReceiptNo { get; set; }
+        public int Quantity { get; set; }
         public DateTime PaymentDate { get; set; }
         public decimal Amount { get; set; }
         public DateTime CreatedAt { get; set; }

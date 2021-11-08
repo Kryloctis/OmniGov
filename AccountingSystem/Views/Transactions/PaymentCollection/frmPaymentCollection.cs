@@ -19,7 +19,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgpayments, true);
         }
-
+        
         private void frmPaymentCollection_Load(object sender, EventArgs e)
         {
             LoadRecords();
