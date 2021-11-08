@@ -146,6 +146,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
+                    return;
                 }
 
 
@@ -167,7 +168,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 bool insertSuccess = paymentCollectionRepo.Insert(paymentCollectionModel);
 
                 if (insertSuccess)
+                {
                     Helper.MessageBoxSuccess("Payment Collection has been saved.");
+                    _frmPaymentCollection.LoadRecords();
+                    ucPaymentCollection1.ResetForm();
+                }
+                
             }
             catch (Exception ex)
             {

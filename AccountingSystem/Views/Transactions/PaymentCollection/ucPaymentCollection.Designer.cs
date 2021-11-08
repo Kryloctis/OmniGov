@@ -236,6 +236,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.cmbAccount.Size = new System.Drawing.Size(297, 23);
             this.cmbAccount.TabIndex = 24;
             this.cmbAccount.SelectedValueChanged += new System.EventHandler(this.cmbAccount_SelectedValueChanged);
+            this.cmbAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbAccount_Validating);
+            this.cmbAccount.Validated += new System.EventHandler(this.cmbAccount_Validated);
             // 
             // cmbfund
             // 
