@@ -338,6 +338,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.txtCashTicketQuantity.TabIndex = 16;
             this.txtCashTicketQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtCashTicketQuantity.TextChanged += new System.EventHandler(this.txtCashTicketQuantity_TextChanged);
+            this.txtCashTicketQuantity.Validating += new System.ComponentModel.CancelEventHandler(this.txtCashTicketQuantity_Validating);
+            this.txtCashTicketQuantity.Validated += new System.EventHandler(this.txtCashTicketQuantity_Validated);
             // 
             // label14
             // 
