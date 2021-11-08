@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Reports.RCD
                     var dateFrom = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtfrom.Value));
                     var dateTo = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtto.Value));
                     list = pcRepository.GetRecordByLedger(CoId, FId,dateFrom, dateTo,id);
-                    HelperLoadRecords.PaymentDatagridView(list, dgPreview);
+                    //HelperLoadRecords.PaymentDatagridView(list, dgPreview);
 
                     txttotalamount.Text = String.Format("{0:N2}",pcRepository.SumRecords(CoId, FId,dateFrom, dateTo,id));
                 }
@@ -50,7 +50,7 @@ namespace AccountingSystem.Views.Reports.RCD
                     var dateFrom = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtfrom.Value));
                     var dateTo = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtto.Value));
                     list = pcRepository.GetRecordByLedger(CoId, FId, dateFrom, dateTo);
-                    HelperLoadRecords.PaymentDatagridView(list, dgPreview);
+                    //HelperLoadRecords.PaymentDatagridView(list, dgPreview);
 
                     txttotalamount.Text = String.Format("{0:N2}", pcRepository.SumRecords(CoId, FId, dateFrom, dateTo));
                 }               

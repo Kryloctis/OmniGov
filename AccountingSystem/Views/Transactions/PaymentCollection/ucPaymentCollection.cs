@@ -24,8 +24,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal int minreceipt = 0;
         internal int maxreceipt = 0;
         internal int receipt = 0;
-
-
+       
         internal bool isCashTicket;
         internal int cashTicketFaceValue = 0;
         internal decimal accountableFormFaceValue = 0;
@@ -33,7 +32,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         public ucPaymentCollection()
         {
             InitializeComponent();
-
         }
         internal string GetFormErrors()
         {
@@ -366,6 +364,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
             
             SwitchFields(Convert.ToBoolean(accountableFormFaceValue));
+
+            txtCashTicketQuantity_TextChanged(sender, e);
         }
       
         private void cmbcollector_SelectedIndexChanged(object sender, EventArgs e)

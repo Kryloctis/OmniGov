@@ -70,14 +70,8 @@ namespace ACC.Data
             {
                 string query = string.Empty;
                 var uRepository = Factory.UsersRepository();
-                if (uRepository.LinkedCollector(Factory.UserId))
-                {
-                    query = $"SELECT {tableName}.id,CONCAT({tableName11}.fund_code,' - ',{tableName11}.fund_name) AS fund,CONCAT({tableName6}.account_group_code,'-',{tableName7}.maj_acc_group_code,'-',{tableName8}.sub_maj_acc_group_code,'-',{tableName4}.ledger_code) AS account_code,CONCAT({tableName3}.acc_form_no,'-',{tableName3}.acc_form_desc) AS accform,{tableName4}.ledger_name,CONCAT({tableName9}.sub_code,'-',{tableName9}.sub_name) AS subsidiary,{tableName}.payee,{tableName}.receipt_no,{tableName}.payment_date,{tableName}.amount,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector,{tableName}.created_at,{tableName}.updated_at,CONCAT(u1.last_name,', ',u1.first_name,' ',u1.mid_initial) AS createdby,CONCAT(u2.last_name,', ',u2.first_name,' ',u2.mid_initial) AS updatedby FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id LEFT JOIN {tableName3} ON {tableName3}.id={tableName}.accountable_forms_id LEFT JOIN {tableName4} ON {tableName4}.id={tableName}.general_ledger_accounts_id LEFT JOIN {tableName5} u1 ON u1.id={tableName}.created_by LEFT JOIN {tableName5} u2 ON u2.id={tableName}.updated_by LEFT JOIN {tableName8} ON {tableName4}.sub_major_account_group_id={tableName8}.id LEFT JOIN {tableName7} ON {tableName8}.major_account_group_id={tableName7}.id LEFT JOIN {tableName6} ON {tableName7}.account_group_id={tableName6}.id LEFT JOIN {tableName9} ON {tableName}.subsidiary_ledger_accounts_id={tableName9}.id LEFT JOIN {tableName11} ON {tableName}.funds_id={tableName11}.id WHERE {tableName}.payment_date=CURDATE() AND {tableName}.collecting_officers_id='{Factory.UserId}' ORDER BY {tableName}.id DESC";
-                }
-                else
-                {
-                    query = $"SELECT {tableName}.id,CONCAT({tableName11}.fund_code,' - ',{tableName11}.fund_name) AS fund,CONCAT({tableName6}.account_group_code,'-',{tableName7}.maj_acc_group_code,'-',{tableName8}.sub_maj_acc_group_code,'-',{tableName4}.ledger_code) AS account_code,CONCAT({tableName3}.acc_form_no,'-',{tableName3}.acc_form_desc) AS accform,{tableName4}.ledger_name,CONCAT({tableName9}.sub_code,'-',{tableName9}.sub_name) AS subsidiary,{tableName}.payee,{tableName}.receipt_no,{tableName}.payment_date,{tableName}.amount,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector,{tableName}.created_at,{tableName}.updated_at,CONCAT(u1.last_name,', ',u1.first_name,' ',u1.mid_initial) AS createdby,CONCAT(u2.last_name,', ',u2.first_name,' ',u2.mid_initial) AS updatedby FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id LEFT JOIN {tableName3} ON {tableName3}.id={tableName}.accountable_forms_id LEFT JOIN {tableName4} ON {tableName4}.id={tableName}.general_ledger_accounts_id LEFT JOIN {tableName5} u1 ON u1.id={tableName}.created_by LEFT JOIN {tableName5} u2 ON u2.id={tableName}.updated_by LEFT JOIN {tableName8} ON {tableName4}.sub_major_account_group_id={tableName8}.id LEFT JOIN {tableName7} ON {tableName8}.major_account_group_id={tableName7}.id LEFT JOIN {tableName6} ON {tableName7}.account_group_id={tableName6}.id LEFT JOIN {tableName9} ON {tableName}.subsidiary_ledger_accounts_id={tableName9}.id LEFT JOIN {tableName11} ON {tableName}.funds_id={tableName11}.id WHERE {tableName}.payment_date=CURDATE() ORDER BY {tableName}.id DESC";
-                }
+
+                query = $"SELECT * FROM view_payment_collections ";
                 
                 var dtRCI = new DataTable();
                 return _dbGenericCommands.Fill(query, dtRCI);
@@ -92,19 +86,10 @@ namespace ACC.Data
         {
             try
             {
-                string query = string.Empty;
-                var uRepository = Factory.UsersRepository();
-                if (uRepository.LinkedCollector(Factory.UserId))
-                {
-                    query = $"SELECT {tableName}.id,CONCAT({tableName11}.fund_code,' - ',{tableName11}.fund_name) AS fund,CONCAT({tableName6}.account_group_code,'-',{tableName7}.maj_acc_group_code,'-',{tableName8}.sub_maj_acc_group_code,'-',{tableName4}.ledger_code) AS account_code,CONCAT({tableName3}.acc_form_no,'-',{tableName3}.acc_form_desc) AS accform,{tableName4}.ledger_name,CONCAT({tableName9}.sub_code,'-',{tableName9}.sub_name) AS subsidiary,{tableName}.payee,{tableName}.receipt_no,{tableName}.payment_date,{tableName}.amount,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector,{tableName}.created_at,{tableName}.updated_at,CONCAT(u1.last_name,', ',u1.first_name,' ',u1.mid_initial) AS createdby,CONCAT(u2.last_name,', ',u2.first_name,' ',u2.mid_initial) AS updatedby FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id LEFT JOIN {tableName3} ON {tableName3}.id={tableName}.accountable_forms_id LEFT JOIN {tableName4} ON {tableName4}.id={tableName}.general_ledger_accounts_id LEFT JOIN {tableName5} u1 ON u1.id={tableName}.created_by LEFT JOIN {tableName5} u2 ON u2.id={tableName}.updated_by LEFT JOIN {tableName8} ON {tableName4}.sub_major_account_group_id={tableName8}.id LEFT JOIN {tableName7} ON {tableName8}.major_account_group_id={tableName7}.id LEFT JOIN {tableName6} ON {tableName7}.account_group_id={tableName6}.id LEFT JOIN {tableName9} ON {tableName}.subsidiary_ledger_accounts_id={tableName9}.id LEFT JOIN {tableName11} ON {tableName}.funds_id={tableName11}.id WHERE DATE_FORMAT({tableName}.payment_date,'%Y-%m-%d')='{date}' AND {tableName}.collecting_officers_id='{uRepository.GetCollectorByUserId(Factory.UserId)}' ORDER BY {tableName}.id DESC";
-                }
-                else
-                {
-                    query = $"SELECT {tableName}.id,CONCAT({tableName11}.fund_code,' - ',{tableName11}.fund_name) AS fund,CONCAT({tableName6}.account_group_code,'-',{tableName7}.maj_acc_group_code,'-',{tableName8}.sub_maj_acc_group_code,'-',{tableName4}.ledger_code) AS account_code,CONCAT({tableName3}.acc_form_no,'-',{tableName3}.acc_form_desc) AS accform,{tableName4}.ledger_name,CONCAT({tableName9}.sub_code,'-',{tableName9}.sub_name) AS subsidiary,{tableName}.payee,{tableName}.receipt_no,{tableName}.payment_date,{tableName}.amount,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS collector,{tableName}.created_at,{tableName}.updated_at,CONCAT(u1.last_name,', ',u1.first_name,' ',u1.mid_initial) AS createdby,CONCAT(u2.last_name,', ',u2.first_name,' ',u2.mid_initial) AS updatedby FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collecting_officers_id LEFT JOIN {tableName3} ON {tableName3}.id={tableName}.accountable_forms_id LEFT JOIN {tableName4} ON {tableName4}.id={tableName}.general_ledger_accounts_id LEFT JOIN {tableName5} u1 ON u1.id={tableName}.created_by LEFT JOIN {tableName5} u2 ON u2.id={tableName}.updated_by LEFT JOIN {tableName8} ON {tableName4}.sub_major_account_group_id={tableName8}.id LEFT JOIN {tableName7} ON {tableName8}.major_account_group_id={tableName7}.id LEFT JOIN {tableName6} ON {tableName7}.account_group_id={tableName6}.id LEFT JOIN {tableName9} ON {tableName}.subsidiary_ledger_accounts_id={tableName9}.id LEFT JOIN {tableName11} ON {tableName}.funds_id={tableName11}.id WHERE DATE_FORMAT({tableName}.payment_date,'%Y-%m-%d')='{date}' ORDER BY {tableName}.id DESC";
-                }                    
+                string query  = $"SELECT * FROM view_payment_collections ";
 
-                var dtRCI = new DataTable();
-                return _dbGenericCommands.Fill(query, dtRCI);
+                var dtPaymentCollection = new DataTable();
+                return _dbGenericCommands.Fill(query, dtPaymentCollection);
             }
             catch (Exception)
             {
@@ -140,12 +125,13 @@ namespace ACC.Data
                     new object[] { "@subsidiary_ledger_accounts_id", DbType.Int16, entity.SlaId},
                     new object[] { "@payee", DbType.String, entity.Payee},
                     new object[] { "@receipt_no", DbType.String, entity.ReceiptNo},
+                    new object[] { "@quantity", DbType.String, entity.Quantity},
                     new object[] { "@payment_date", DbType.DateTime, entity.PaymentDate},
                     new object[] { "@amount", DbType.Decimal, entity.Amount},
                     new object[] { "@created_by", DbType.Int16, entity.CreatedBy}                    
                 };
                 
-                string query = $"INSERT INTO {tableName} (funds_id,collecting_officers_id,accountable_forms_id,general_ledger_accounts_id,payee,receipt_no,payment_date,amount,created_by) VALUES (@funds_id,@collecting_officers_id,@accountable_forms_id,@general_ledger_accounts_id,@payee,@receipt_no,@payment_date,@amount,@created_by)";
+                string query = $"INSERT INTO {tableName} (funds_id, collecting_officers_id,accountable_forms_id,general_ledger_accounts_id,payee,receipt_no, quantity, payment_date, amount, created_by) VALUES (@funds_id,@collecting_officers_id,@accountable_forms_id,@general_ledger_accounts_id,@payee,@receipt_no, @quantity, @payment_date,@amount,@created_by)";
 
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }

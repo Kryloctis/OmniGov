@@ -36,7 +36,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 var pcRepository = Factory.PaymentCollectionRepository();
                 var dtpayments = pcRepository.GetRecords();
                 HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
-
                 lblRecordCount.Text = dgpayments.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -83,22 +82,22 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            if (txtsearch.Text.Length > 0)
-            {
-                try
-                {
-                    string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                    var dtpayments = Factory.PaymentCollectionRepository().GetRecordsBySearch(searchkey);
-                    HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
+            //if (txtsearch.Text.Length > 0)
+            //{
+            //    try
+            //    {
+            //        string searchkey = Convert.ToString(txtsearch.Text.Trim());
+            //        var dtpayments = Factory.PaymentCollectionRepository().GetRecordsBySearch(searchkey);
+            //        HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
 
-                    lblRecordCount.Text = dgpayments.Rows.Count.ToString();
-                }
-                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            }
-            else
-            {
-                LoadRecords();
-            }
+            //        lblRecordCount.Text = dgpayments.Rows.Count.ToString();
+            //    }
+            //    catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            //}
+            //else
+            //{
+            //    LoadRecords();
+            //}
         }
 
         private void dgpayments_SelectionChanged(object sender, EventArgs e)
@@ -136,15 +135,15 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void dtpdate_ValueChanged(object sender, EventArgs e)
         {
-            try
-            {
-                string date = String.Format("{0:yyyy-MM-dd}",dtpdate.Value);
-                var dtpayments = Factory.PaymentCollectionRepository().GetRecords(date);
-                HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
+            //try
+            //{
+            //    string date = String.Format("{0:yyyy-MM-dd}",dtpdate.Value);
+            //    var dtpayments = Factory.PaymentCollectionRepository().GetRecords(date);
+            //    HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
 
-                lblRecordCount.Text = dgpayments.Rows.Count.ToString();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            //    lblRecordCount.Text = dgpayments.Rows.Count.ToString();
+            //}
+            //catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
