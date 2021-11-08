@@ -235,7 +235,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.cmbAccount.Name = "cmbAccount";
             this.cmbAccount.Size = new System.Drawing.Size(297, 23);
             this.cmbAccount.TabIndex = 24;
-            this.cmbAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbAccount_KeyDown);
+            this.cmbAccount.SelectedValueChanged += new System.EventHandler(this.cmbAccount_SelectedValueChanged);
             // 
             // cmbfund
             // 
@@ -426,6 +426,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         internal System.Windows.Forms.NumericUpDown txtCashTicketQuantity;
-        private System.Windows.Forms.TextBox txtCashTicketsAmount;
+        internal System.Windows.Forms.TextBox txtCashTicketsAmount;
     }
 }

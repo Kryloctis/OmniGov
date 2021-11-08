@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     CollectingOfficerId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
                     FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
                     AccountableFormId = Convert.ToInt32(uc.cmbforms.SelectedValue),
-                    GeneralLedgerAccountId = uc.glaId,
+                    GeneralLedgerAccountId = uc.generalLedgerId,
                     SlaId = 1,
                     Payee = uc.txtpayee.Text.Trim(),
                     ReceiptNo = uc.txtreceipt.Text.Trim(),
@@ -125,6 +125,60 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            var uc = ucPaymentCollection1;
+
+            if (!uc.isCashTicket)
+                SaveCashTickets();
+            else
+                SaveReceipts();
+
+        }
+
+        private void SaveCashTickets()
+        {
+            try
+            {
+
+                var uc = ucPaymentCollection1;
+
+                uc.txtpayee.Validating -= new CancelEventHandler(uc.txtpayee_Validating);
+
+                if (!uc.ValidateChildren())
+                {
+                    Helper.MessageBoxError(uc.GetFormErrors());
+                }
+
+
+                var paymentCollectionModel = new PaymentCollectionModel()
+                {
+                    CollectingOfficerId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
+                    FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
+                    AccountableFormId = Convert.ToInt32(uc.cmbforms.SelectedValue),
+                    GeneralLedgerAccountId = uc.generalLedgerId,
+                    SlaId = 0,
+                    ReceiptNo = uc.txtCashTicketQuantity.Value.ToString(),
+                    PaymentDate = Convert.ToDateTime(uc.dtCashTicketDateOfCollection.Text.Trim()),
+                    Amount = Convert.ToDecimal(uc.txtCashTicketsAmount.Text),
+                    CreatedBy = uc.userid,
+                };
+
+
+                var paymentCollectionRepo = Factory.PaymentCollectionRepository();
+
+                bool insertSuccess = paymentCollectionRepo.Insert(paymentCollectionModel);
+
+                if (insertSuccess)
+                    Helper.MessageBoxSuccess("Payment Collection has been saved.");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxWarning(ex.Message);
+            }
+        }
+
+
+        private void SaveReceipts()
+        {
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Payment Collection has been saved.");
@@ -133,7 +187,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
         }
 
-        
-
+      
     }
 }

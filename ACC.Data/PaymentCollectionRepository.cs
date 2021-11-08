@@ -144,15 +144,9 @@ namespace ACC.Data
                     new object[] { "@amount", DbType.Decimal, entity.Amount},
                     new object[] { "@created_by", DbType.Int16, entity.CreatedBy}                    
                 };
-                string query = string.Empty;
-                if(entity.SlaId > 0)
-                {
-                    query = $"INSERT INTO {tableName} (funds_id,collecting_officers_id,accountable_forms_id,general_ledger_accounts_id,subsidiary_ledger_accounts_id,payee,receipt_no,payment_date,amount,created_by) VALUES (@funds_id,@collecting_officers_id,@accountable_forms_id,@general_ledger_accounts_id,@subsidiary_ledger_accounts_id,@payee,@receipt_no,@payment_date,@amount,@created_by)";
-                }
-                else
-                {
-                    query = $"INSERT INTO {tableName} (funds_id,collecting_officers_id,accountable_forms_id,general_ledger_accounts_id,payee,receipt_no,payment_date,amount,created_by) VALUES (@funds_id,@collecting_officers_id,@accountable_forms_id,@general_ledger_accounts_id,@payee,@receipt_no,@payment_date,@amount,@created_by)";
-                }  
+                
+                string query = $"INSERT INTO {tableName} (funds_id,collecting_officers_id,accountable_forms_id,general_ledger_accounts_id,payee,receipt_no,payment_date,amount,created_by) VALUES (@funds_id,@collecting_officers_id,@accountable_forms_id,@general_ledger_accounts_id,@payee,@receipt_no,@payment_date,@amount,@created_by)";
+
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)

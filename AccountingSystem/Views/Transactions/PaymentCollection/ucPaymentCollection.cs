@@ -17,7 +17,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal int Id = 0;
         internal int fundId = 0;
         internal int accId = 0;
-        internal int glaId = 0;
+        internal int generalLedgerId = 0;
         internal int slaId = 0;
         internal int userid = 0;
         internal bool withsubsidiary = false;
@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal int receipt = 0;
 
 
-        internal bool isCashTicket = false;
+        internal bool isCashTicket;
         internal int cashTicketFaceValue = 0;
         internal decimal accountableFormFaceValue = 0;
 
@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             fundId = 0;
             accId = 0;
-            glaId = 0;
+            generalLedgerId = 0;
             slaId = 0;
             cmbforms.SelectedIndex = -1;
             cmbAccount.SelectedIndex = -1;
@@ -91,7 +91,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     {
                         var ledgerRepository = Factory.GeneralLedgerAccountsRepository();
                         var ledgerData = ledgerRepository.GetRecordByID(Id);
-                        glaId = Id;
+                        generalLedgerId = Id;
                         cmbAccount.Text = String.Format("{0} - {1}", ledgerData["ledger_code"], ledgerData["ledger_name"]);
                     }
                     
@@ -165,7 +165,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         }
         public void loadSelectedLedger(int Id, string value)
         {
-            glaId = Id;
+            generalLedgerId = Id;
             cmbAccount.Text = value;
         }
 
@@ -181,10 +181,15 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void ucPC_Load(object sender, EventArgs e)
         {
+
+            cmbAccount.SelectedValueChanged -= cmbAccount_SelectedValueChanged;
+            
             LoadAccounts();
             txtCashTicketQuantity.Controls[0].Enabled = false;
 
             cmbAccount.SelectedIndex = -1;
+
+            cmbAccount.SelectedValueChanged += cmbAccount_SelectedValueChanged;
         }
 
         private void cmbfund_Validating(object sender, CancelEventArgs e)
@@ -217,7 +222,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             Helper.ClearErrorComboBox(errorProvider, cmbAccount);
         }
        
-        private void txtpayee_Validating(object sender, CancelEventArgs e)
+        internal void txtpayee_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtpayee, "Payee.");
         }
@@ -396,14 +401,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
         }
 
-        private void cmbAccount_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter && cmbAccount.Focused)
-            {
-                LoadAccounts();
-                cmbAccount.DroppedDown = true;
-            }
-        }
 
         private DataTable DatatableAccounts()
         {
@@ -478,6 +475,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             txtCashTicketsAmount.Text = amount.ToString("N2");
         }
 
+        private void cmbAccount_SelectedValueChanged(object sender, EventArgs e)
+        {
+            generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
+        }
 
 
     }
