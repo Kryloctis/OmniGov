@@ -114,8 +114,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 string status = row.Cells["status"].Value.ToString();
                 row.Cells["status"].Style.BackColor = Helper.StatusColor(status);
-                row.Cells["status"].Style.ForeColor = Helper.StatusColor(status);
-                row.Cells["status"].Style.SelectionForeColor = Helper.StatusColor(status);
                 row.Cells["status"].Style.SelectionBackColor = Helper.StatusColor(status);
                 row.Cells["status"].Style.Format.ToUpper();
             }

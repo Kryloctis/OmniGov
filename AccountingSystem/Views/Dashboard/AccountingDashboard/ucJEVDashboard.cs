@@ -22,37 +22,7 @@ namespace AccountingSystem.Views.Dashboard
                 LoadMonths();
                 LoadJournals();
                 LoadJEVCounter();
-                LoadCardColors();
             }
-        }
-
-        private void LoadCardColors() 
-        {
-            pnlApprovedJEV.BackColor = Helper.StatusColor("Approved");
-            pnlPendingJEV.BackColor = Helper.StatusColor("Pending");
-            pnlDisapproved.BackColor = Helper.StatusColor("Disapproved");
-            pnlCancelled.BackColor = Helper.StatusColor("Cancelled");
-            pnlJEV.BackColor = Color.FromArgb(40, 56, 94);
-            lblApprovedJEVCounter.ForeColor = Color.White;
-            lblPendingJEVCounter.ForeColor = Color.White;
-            lblDisapprovedJEVCounter.ForeColor = Color.White;
-            lblCancelledJEVCounter.ForeColor = Color.White;
-            lblJEVCounter.ForeColor = Color.White;
-            lnkApproved.LinkColor = Color.White;
-            lnkPending.LinkColor = Color.White;
-            linkDisapproved.LinkColor = Color.White;
-            lnkCancelled.LinkColor = Color.White;
-            lnkJEV.LinkColor = Color.White;
-            lnkPending.ActiveLinkColor = Color.White;
-            lnkApproved.ActiveLinkColor = Color.White;
-            lnkCancelled.ActiveLinkColor = Color.White;
-            linkDisapproved.ActiveLinkColor = Color.White;
-            lnkJEV.ActiveLinkColor = Color.White;
-            lnkJEV.VisitedLinkColor = Color.White; 
-            lnkApproved.VisitedLinkColor = Color.White;
-            lnkPending.VisitedLinkColor = Color.White;
-            linkDisapproved.VisitedLinkColor = Color.White;
-            lnkCancelled.VisitedLinkColor = Color.White;
         }
 
         private void LoadJournals()

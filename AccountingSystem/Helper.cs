@@ -120,17 +120,17 @@ namespace AccountingSystem
             switch (status)
             {
                 case "Approved":
-                    return Color.FromArgb(97, 177, 90);
+                    return Color.FromArgb(201, 228, 197);
 
                 case "Disapproved":
-                    return Color.FromArgb(255, 81, 81);
+                    return Color.FromArgb(246, 169, 169);
                   
 
                 case "Cancelled":
-                    return Color.FromArgb(156, 25, 224);
+                    return Color.FromArgb(200, 198, 198);
 
                 case "Pending":
-                    return Color.Gold;
+                    return Color.FromArgb(255, 230, 153);
 
                 default:
                     return Color.Black;
