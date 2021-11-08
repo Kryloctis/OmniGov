@@ -102,7 +102,7 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // pnlPendingJEV
             // 
-            this.pnlPendingJEV.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlPendingJEV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(153)))));
             this.pnlPendingJEV.Controls.Add(this.lnkPending);
             this.pnlPendingJEV.Controls.Add(this.lblPendingJEVCounter);
             this.pnlPendingJEV.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -114,10 +114,12 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // lnkPending
             // 
-            this.lnkPending.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lnkPending.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lnkPending.BackColor = System.Drawing.Color.Transparent;
             this.lnkPending.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lnkPending.DisabledLinkColor = System.Drawing.Color.Silver;
             this.lnkPending.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkPending.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lnkPending.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lnkPending.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkPending.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lnkPending.Location = new System.Drawing.Point(0, 61);
@@ -132,7 +134,7 @@ namespace AccountingSystem.Views.Dashboard
             // lblPendingJEVCounter
             // 
             this.lblPendingJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblPendingJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblPendingJEVCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblPendingJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblPendingJEVCounter.Location = new System.Drawing.Point(0, 0);
             this.lblPendingJEVCounter.Name = "lblPendingJEVCounter";
@@ -143,7 +145,7 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // pnlApprovedJEV
             // 
-            this.pnlApprovedJEV.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlApprovedJEV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(228)))), ((int)(((byte)(197)))));
             this.pnlApprovedJEV.Controls.Add(this.lnkApproved);
             this.pnlApprovedJEV.Controls.Add(this.lblApprovedJEVCounter);
             this.pnlApprovedJEV.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -155,10 +157,12 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // lnkApproved
             // 
-            this.lnkApproved.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lnkApproved.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lnkApproved.BackColor = System.Drawing.Color.Transparent;
             this.lnkApproved.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lnkApproved.DisabledLinkColor = System.Drawing.Color.Silver;
             this.lnkApproved.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkApproved.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lnkApproved.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lnkApproved.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkApproved.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lnkApproved.Location = new System.Drawing.Point(0, 61);
@@ -173,7 +177,7 @@ namespace AccountingSystem.Views.Dashboard
             // lblApprovedJEVCounter
             // 
             this.lblApprovedJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblApprovedJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblApprovedJEVCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblApprovedJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblApprovedJEVCounter.Location = new System.Drawing.Point(0, 0);
             this.lblApprovedJEVCounter.Name = "lblApprovedJEVCounter";
@@ -184,7 +188,7 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // pnlJEV
             // 
-            this.pnlJEV.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlJEV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(222)))), ((int)(((byte)(214)))));
             this.pnlJEV.Controls.Add(this.lnkJEV);
             this.pnlJEV.Controls.Add(this.lblJEVCounter);
             this.pnlJEV.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -196,10 +200,12 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // lnkJEV
             // 
-            this.lnkJEV.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lnkJEV.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lnkJEV.BackColor = System.Drawing.Color.Transparent;
             this.lnkJEV.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lnkJEV.DisabledLinkColor = System.Drawing.Color.Silver;
             this.lnkJEV.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkJEV.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lnkJEV.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lnkJEV.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkJEV.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lnkJEV.Location = new System.Drawing.Point(0, 61);
@@ -214,7 +220,7 @@ namespace AccountingSystem.Views.Dashboard
             // lblJEVCounter
             // 
             this.lblJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblJEVCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblJEVCounter.Location = new System.Drawing.Point(0, 0);
             this.lblJEVCounter.Name = "lblJEVCounter";
@@ -225,7 +231,7 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // pnlDisapproved
             // 
-            this.pnlDisapproved.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlDisapproved.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.pnlDisapproved.Controls.Add(this.linkDisapproved);
             this.pnlDisapproved.Controls.Add(this.lblDisapprovedJEVCounter);
             this.pnlDisapproved.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -237,10 +243,12 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // linkDisapproved
             // 
-            this.linkDisapproved.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
+            this.linkDisapproved.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.linkDisapproved.BackColor = System.Drawing.Color.Transparent;
             this.linkDisapproved.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.linkDisapproved.DisabledLinkColor = System.Drawing.Color.Silver;
             this.linkDisapproved.Dock = System.Windows.Forms.DockStyle.Top;
-            this.linkDisapproved.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.linkDisapproved.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.linkDisapproved.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkDisapproved.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.linkDisapproved.Location = new System.Drawing.Point(0, 61);
@@ -255,7 +263,7 @@ namespace AccountingSystem.Views.Dashboard
             // lblDisapprovedJEVCounter
             // 
             this.lblDisapprovedJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblDisapprovedJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblDisapprovedJEVCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblDisapprovedJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblDisapprovedJEVCounter.Location = new System.Drawing.Point(0, 0);
             this.lblDisapprovedJEVCounter.Name = "lblDisapprovedJEVCounter";
@@ -266,7 +274,7 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // pnlCancelled
             // 
-            this.pnlCancelled.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlCancelled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
             this.pnlCancelled.Controls.Add(this.lnkCancelled);
             this.pnlCancelled.Controls.Add(this.lblCancelledJEVCounter);
             this.pnlCancelled.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -278,10 +286,12 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // lnkCancelled
             // 
-            this.lnkCancelled.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lnkCancelled.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lnkCancelled.BackColor = System.Drawing.Color.Transparent;
             this.lnkCancelled.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lnkCancelled.DisabledLinkColor = System.Drawing.Color.Silver;
             this.lnkCancelled.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkCancelled.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lnkCancelled.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lnkCancelled.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkCancelled.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lnkCancelled.Location = new System.Drawing.Point(0, 61);
@@ -296,7 +306,7 @@ namespace AccountingSystem.Views.Dashboard
             // lblCancelledJEVCounter
             // 
             this.lblCancelledJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblCancelledJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblCancelledJEVCounter.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblCancelledJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblCancelledJEVCounter.Location = new System.Drawing.Point(0, 0);
             this.lblCancelledJEVCounter.Name = "lblCancelledJEVCounter";
