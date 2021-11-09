@@ -55,18 +55,18 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             int selectedrowscount = dgpayments.SelectedRows.Count;
             try
             {
-                if (selectedrowscount > 0)
+                var confirmDelete = Helper.MessageBoxConfirmDelete(selectedrowscount);
+                if (confirmDelete)
                 {
-                    if (Helper.MessageBoxConfirmDelete(selectedrowscount))
+                    var paymentCollectionModelList = new List<PaymentCollectionModel>();
+
+                    foreach (DataGridViewRow row in dgpayments.SelectedRows)
                     {
-                        var pcModelList = new List<PaymentCollectionModel>();
-                        foreach (DataGridViewRow row in dgpayments.SelectedRows)
-                        {
-                            int pcId = Convert.ToInt16(row.Cells[0].Value.ToString());
-                            pcModelList.Add(new PaymentCollectionModel() { Id = pcId });
-                        }
+                        int pcId = Convert.ToInt32(row.Cells[0].Value.ToString());
+                        paymentCollectionModelList.Add(new PaymentCollectionModel() { Id = pcId });
+
                         var pcRepository = Factory.PaymentCollectionRepository();
-                        if (pcRepository.Delete(pcModelList))
+                        if (pcRepository.Delete(paymentCollectionModelList))
                         {
                             dgpayments.Rows.RemoveAt(dgpayments.CurrentRow.Index);
                             lblRecordCount.Text = dgpayments.Rows.Count.ToString();
