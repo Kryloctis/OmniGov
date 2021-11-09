@@ -18,7 +18,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         public frmPaymentCollectionEdit(frmPaymentCollection frmpc,int Id)
         {
             InitializeComponent();
-            Helper.LoadFormIcon(this);
             _frmpc = frmpc;
             ucpc1.Id = Id;
             ucpc1.userid = Helper.UserId;
@@ -124,8 +123,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             return false;
         }
 
-
-        private void btnSave_Click_1(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
             if (SaveData())
             {
