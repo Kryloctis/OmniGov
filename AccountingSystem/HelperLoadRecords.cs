@@ -416,11 +416,10 @@ namespace AccountingSystem
             datagrid.DataSource = dataTable;
             datagrid.Columns[0].Visible = false;
             datagrid.Columns[1].Visible = false;
-            datagrid.Columns[2].HeaderText = "Year";
+            datagrid.Columns[2].HeaderText = "Date";
             datagrid.Columns[3].HeaderText = "Amount";
             datagrid.Columns[3].DefaultCellStyle.Format = "N2";
             datagrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[4].Visible = false;
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
