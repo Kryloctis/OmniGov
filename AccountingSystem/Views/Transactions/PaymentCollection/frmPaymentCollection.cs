@@ -45,7 +45,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             if (dgpayments.SelectedRows.Count > 0)
             {
-                int Id = int.Parse(dgpayments.SelectedCells[0].Value.ToString());
+                var dgRowIndex = dgpayments.SelectedCells[0].Value.ToString();
+                int Id = int.Parse(dgRowIndex);
                 _ = new frmPaymentCollectionEdit(this, Id).ShowDialog();
             }
         }

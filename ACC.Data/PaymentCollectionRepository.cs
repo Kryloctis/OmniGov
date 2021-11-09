@@ -39,7 +39,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT * FROM {tableName} WHERE {tableName}.id = @id";
+                string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -52,6 +52,7 @@ namespace ACC.Data
                     record.Add("subsidiary_ledger_accounts_id", reader.Rows[0]["subsidiary_ledger_accounts_id"].ToString());
                     record.Add("payee", reader.Rows[0]["payee"].ToString());
                     record.Add("receipt_no", reader.Rows[0]["receipt_no"].ToString());
+                    record.Add("quantity", reader.Rows[0]["quantity"].ToString());
                     record.Add("payment_date", reader.Rows[0]["payment_date"].ToString());
                     record.Add("amount", reader.Rows[0]["amount"].ToString());                    
                 }
