@@ -82,22 +82,22 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            //if (txtsearch.Text.Length > 0)
-            //{
-            //    try
-            //    {
-            //        string searchkey = Convert.ToString(txtsearch.Text.Trim());
-            //        var dtpayments = Factory.PaymentCollectionRepository().GetRecordsBySearch(searchkey);
-            //        HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
+            if (txtsearch.Text.Length > 0)
+            {
+                try
+                {
+                    string searchkey = Convert.ToString(txtsearch.Text.Trim());
+                    var dtpayments = Factory.PaymentCollectionRepository().GetRecordsBySearch(searchkey);
+                    HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
 
-            //        lblRecordCount.Text = dgpayments.Rows.Count.ToString();
-            //    }
-            //    catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            //}
-            //else
-            //{
-            //    LoadRecords();
-            //}
+                    lblRecordCount.Text = dgpayments.Rows.Count.ToString();
+                }
+                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            }
+            else
+            {
+                LoadRecords();
+            }
         }
 
         private void dgpayments_SelectionChanged(object sender, EventArgs e)
@@ -128,11 +128,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             LoadRecords();
         }
 
-        private void dgpayments_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            btnEdit.PerformClick();
-        }
-
         private void dtpdate_ValueChanged(object sender, EventArgs e)
         {
             try
@@ -145,5 +140,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
     }
 }
