@@ -17,14 +17,17 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal int Id = 0;
         internal int fundId = 0;
         internal int accId = 0;
-        internal int glaId = 0;
+        internal int generalLedgerId = 0;
         internal int slaId = 0;
         internal int userid = 0;
         internal bool withsubsidiary = false;
         internal int minreceipt = 0;
         internal int maxreceipt = 0;
         internal int receipt = 0;
-        internal bool isCashTicket = false;
+       
+        internal bool isCashTicket;
+        internal int cashTicketFaceValue = 0;
+        internal decimal accountableFormFaceValue = 0;
 
         public ucPaymentCollection()
         {
@@ -50,7 +53,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             fundId = 0;
             accId = 0;
-            glaId = 0;
+            generalLedgerId = 0;
             slaId = 0;
             cmbforms.SelectedIndex = -1;
             cmbAccount.SelectedIndex = -1;
@@ -86,7 +89,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     {
                         var ledgerRepository = Factory.GeneralLedgerAccountsRepository();
                         var ledgerData = ledgerRepository.GetRecordByID(Id);
-                        glaId = Id;
+                        generalLedgerId = Id;
                         cmbAccount.Text = String.Format("{0} - {1}", ledgerData["ledger_code"], ledgerData["ledger_name"]);
                     }
                     
@@ -119,12 +122,14 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
+                cmbforms.SelectedValueChanged -= cmbforms_SelectedValueChanged;
                 var formRepository = Factory.AccountableRepository();
                 var dtforms = formRepository.GetRecords();
                 dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
                 cmbforms.DataSource = dtforms;
                 cmbforms.ValueMember = "id";
                 cmbforms.DisplayMember = "formdisplay";
+                cmbforms.SelectedValueChanged += cmbforms_SelectedValueChanged;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -158,7 +163,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         }
         public void loadSelectedLedger(int Id, string value)
         {
-            glaId = Id;
+            generalLedgerId = Id;
             cmbAccount.Text = value;
         }
 
@@ -174,8 +179,15 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void ucPC_Load(object sender, EventArgs e)
         {
+
+            cmbAccount.SelectedValueChanged -= cmbAccount_SelectedValueChanged;
+            
             LoadAccounts();
+            txtCashTicketQuantity.Controls[0].Enabled = false;
+
             cmbAccount.SelectedIndex = -1;
+
+            cmbAccount.SelectedValueChanged += cmbAccount_SelectedValueChanged;
         }
 
         private void cmbfund_Validating(object sender, CancelEventArgs e)
@@ -207,13 +219,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             Helper.ClearErrorComboBox(errorProvider, cmbAccount);
         }
-
-        private void txtpayee_Validating(object sender, CancelEventArgs e)
+       
+        internal void txtpayee_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtpayee, "Payee.");
         }
-
         private void txtpayee_Validated(object sender, EventArgs e)
+
         {
             Helper.ClearErrorTextBox(errorProvider, txtpayee);
         }
@@ -250,7 +262,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ShowCashTicketsFields();
             if (cmbforms.SelectedIndex != -1)
             {
                 DataRowView forms = cmbforms.SelectedItem as DataRowView;
@@ -345,7 +356,18 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 
             }
         }
+        private void cmbforms_SelectedValueChanged(object sender, EventArgs e)
+        {
+            int idOfSelectedAccountableForm = Convert.ToInt32(cmbforms.SelectedValue);
 
+            accountableFormFaceValue = Factory.FaceValueRepository().GetFaceValueByAccountableFormId(idOfSelectedAccountableForm);
+
+            
+            SwitchFields(Convert.ToBoolean(accountableFormFaceValue));
+
+            txtCashTicketQuantity_TextChanged(sender, e);
+        }
+      
         private void cmbcollector_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(cmbcollector.SelectedIndex != -1)
@@ -379,14 +401,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
         }
 
-        private void cmbAccount_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter && cmbAccount.Focused)
-            {
-                LoadAccounts();
-                cmbAccount.DroppedDown = true;
-            }
-        }
 
         private DataTable DatatableAccounts()
         {
@@ -435,18 +449,47 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         }
 
 
-        private void ShowCashTicketsFields()
+        private void SwitchFields(bool isCashTicket)
         {
-            if (isCashTicket)
+            this.isCashTicket = isCashTicket;
+            
+            if (this.isCashTicket)
             {
                 tabPaymentType.SelectedTab = tabCashTickets;
-                isCashTicket = false;
+                this.isCashTicket = false;
             }
             else
             {
                 tabPaymentType.SelectedTab = tabNonCashTickets;
-                isCashTicket = true;
+                this.isCashTicket = true;
+
             }
         }
+
+        private void txtCashTicketQuantity_TextChanged(object sender, EventArgs e)
+        {
+            var cashTicketAmount = accountableFormFaceValue;
+            var cashTicketQuantity = Convert.ToInt32(txtCashTicketQuantity.Value);
+            var amount = (cashTicketAmount) * (cashTicketQuantity);
+
+            txtCashTicketsAmount.Text = amount.ToString("N2");
+        }
+
+        private void cmbAccount_SelectedValueChanged(object sender, EventArgs e)
+        {
+            generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
+        }
+
+        internal void txtCashTicketQuantity_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider, txtCashTicketQuantity, "Cash Ticket Quantity.");
+        }
+
+        private void txtCashTicketQuantity_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorNumericUpDown(errorProvider, txtCashTicketQuantity);
+        }
+
+
     }
 }

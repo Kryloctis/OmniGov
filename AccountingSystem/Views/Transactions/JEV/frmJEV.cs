@@ -669,7 +669,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     case "pending":
                         //PENDING
                         lblJevStatus.Text = "PENDING";
-                        lblJevStatus.ForeColor = Helper.StatusColor("Pending");
+                        lblJevStatus.ForeColor = Color.FromArgb(216, 146, 22);
                         lblShowMessage.Visible = false;
                         btnPrint.Enabled = false;
                         btnApprove.Enabled = true;
@@ -682,7 +682,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     case "approved":
                         //APPROVED
                         lblJevStatus.Text = "APPROVED";
-                        lblJevStatus.ForeColor = Helper.StatusColor("Approved");
+                        lblJevStatus.ForeColor = Color.FromArgb(78, 159, 61);
                         lblShowMessage.Visible = false;
                         btnApprove.Enabled = false;
                         btnDisapprove.Enabled = false;
@@ -696,7 +696,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     case "disapproved":
                         //DISSAPROVED
                         lblJevStatus.Text = "DISAPPROVED";
-                        lblJevStatus.ForeColor = Helper.StatusColor("Disapproved");
+                        lblJevStatus.ForeColor = Color.FromArgb(149, 1, 1);
                         lblShowMessage.Visible = true;
                         btnApprove.Enabled = false;
                         btnDisapprove.Enabled = false;
@@ -709,7 +709,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     case "cancelled":
                         //CANCELLED
                         lblJevStatus.Text = "CANCELLED";
-                        lblJevStatus.ForeColor = Helper.StatusColor("Cancelled");
+                        lblJevStatus.ForeColor = Color.FromArgb(66, 63, 62);
                         lblShowMessage.Visible = false;
                         btnApprove.Enabled = false;
                         btnDisapprove.Enabled = false;

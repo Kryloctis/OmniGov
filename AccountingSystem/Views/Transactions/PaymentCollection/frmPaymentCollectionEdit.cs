@@ -18,7 +18,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         public frmPaymentCollectionEdit(frmPaymentCollection frmpc,int Id)
         {
             InitializeComponent();
-            Helper.LoadFormIcon(this);
             _frmpc = frmpc;
             ucpc1.Id = Id;
             ucpc1.userid = Helper.UserId;
@@ -73,7 +72,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     CollectingOfficerId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
                     FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
                     AccountableFormId = Convert.ToInt32(uc.cmbforms.SelectedValue),
-                    GeneralLedgerAccountId = uc.glaId,
+                    GeneralLedgerAccountId = uc.generalLedgerId,
                     Payee = uc.txtpayee.Text.Trim(),
                     ReceiptNo = uc.txtreceipt.Text.Trim(),
                     PaymentDate = Convert.ToDateTime(uc.dtdate.Text.Trim()),
@@ -124,8 +123,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             return false;
         }
 
-
-        private void btnSave_Click_1(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
             if (SaveData())
             {

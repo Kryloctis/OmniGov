@@ -19,7 +19,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgpayments, true);
         }
-
+        
         private void frmPaymentCollection_Load(object sender, EventArgs e)
         {
             LoadRecords();
@@ -36,7 +36,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 var pcRepository = Factory.PaymentCollectionRepository();
                 var dtpayments = pcRepository.GetRecords();
                 HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
-
                 lblRecordCount.Text = dgpayments.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -44,7 +43,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgpayments.Rows.Count > 0 && dgpayments.SelectedRows.Count > 0)
+            if (dgpayments.SelectedRows.Count > 0)
             {
                 int Id = int.Parse(dgpayments.SelectedCells[0].Value.ToString());
                 _ = new frmPaymentCollectionEdit(this, Id).ShowDialog();
@@ -129,16 +128,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             LoadRecords();
         }
 
-        private void dgpayments_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            btnEdit.PerformClick();
-        }
-
         private void dtpdate_ValueChanged(object sender, EventArgs e)
         {
             try
             {
-                string date = String.Format("{0:yyyy-MM-dd}",dtpdate.Value);
+                string date = String.Format("{0:yyyy-MM-dd}", dtpdate.Value);
                 var dtpayments = Factory.PaymentCollectionRepository().GetRecords(date);
                 HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
 
@@ -146,5 +140,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
     }
 }

@@ -527,26 +527,79 @@ namespace AccountingSystem
         #region PaymentCollection
         internal static void PaymentDatagridView(DataTable dataTable, DataGridView datagrid)
         {
-            datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Fund";
-            datagrid.Columns[2].HeaderText = "Account Code";
-            datagrid.Columns[3].HeaderText = "Accountable Form";
-            datagrid.Columns[4].HeaderText = "Ledger";
-            datagrid.Columns[5].HeaderText = "Subsidiary";
-            datagrid.Columns[6].HeaderText = "Payee";
-            datagrid.Columns[7].HeaderText = "Receipt No.";
-            datagrid.Columns[8].HeaderText = "Payment Date";
-            datagrid.Columns[8].DefaultCellStyle.Format = "yyyy-MM-dd";
-            datagrid.Columns[9].HeaderText = "Amount";
-            datagrid.Columns[9].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[10].HeaderText = "Collector";
-            datagrid.Columns[11].Visible = false;
-            datagrid.Columns[12].Visible = false;
-            datagrid.Columns[13].Visible = false;
-            datagrid.Columns[14].Visible = false;
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            datagrid.Rows.Clear();
+            datagrid.Columns.Clear();
+
+            datagrid.Columns.Add("payment_collection_id", "Payment Collection ID");
+            datagrid.Columns.Add("fund_id", "Fund Id");
+            datagrid.Columns.Add("fund", "Fund");
+            datagrid.Columns.Add("accountable_form_id", "Accountable Form ID");
+            datagrid.Columns.Add("accountable_form", "Accountable Form");
+            datagrid.Columns.Add("abstract_of_general_collection_id", "Abstract Of General Collection ID");
+            datagrid.Columns.Add("abstract_of_general_collection", "Abstract Of General Collection");
+            datagrid.Columns.Add("payee", "Payee");
+            datagrid.Columns.Add("receipt_no", "Receipt No.");
+            datagrid.Columns.Add("quantity", "Quantity");
+            datagrid.Columns.Add("payment_date", "Payment Date");
+            datagrid.Columns.Add("amount", "Amount");
+            datagrid.Columns.Add("created_at", "Created at");
+            datagrid.Columns.Add("created_by", "Created by");
+            datagrid.Columns.Add("updated_at", "Updated at");
+            datagrid.Columns.Add("updated_by", "Updated by");
+
+
+            datagrid.Columns["payment_collection_id"].Visible = false;
+            datagrid.Columns["fund"].Visible = false;
+            datagrid.Columns["fund_id"].Visible = false;
+            datagrid.Columns["accountable_form_id"].Visible = false;
+            datagrid.Columns["abstract_of_general_collection_id"].Visible = false;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["created_by"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
+            datagrid.Columns["updated_by"].Visible = false;
+
+
+            datagrid.Columns["accountable_form"].Width = 250;
+            datagrid.Columns["abstract_of_general_collection"].Width = 350;
+            datagrid.Columns["payee"].Width = 200;
+            datagrid.Columns["receipt_no"].Width = 80;
+            datagrid.Columns["quantity"].Width = 60;
+
+            datagrid.Columns["amount"].Resizable = DataGridViewTriState.False;
+            datagrid.Columns["amount"].Width = 145;
+            datagrid.Columns["amount"].MinimumWidth = 145;
+            datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            datagrid.Columns["payment_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
+
+            foreach (DataRow drPaymentCollection in dataTable.Rows)
+            {
+                datagrid.Rows.Add(new object[]
+                {
+                    drPaymentCollection["id"],
+                    drPaymentCollection["funds_id"],
+                    drPaymentCollection["fund_name"],
+                    drPaymentCollection["accountable_form_id"],
+                    drPaymentCollection["accountable_forms"],
+                    drPaymentCollection["general_ledger_accounts_id"],
+                    drPaymentCollection["ledger_name"],
+                    drPaymentCollection["payee"],
+                    drPaymentCollection["receipt_no"],
+                    drPaymentCollection["quantity"],
+                    drPaymentCollection["payment_date"],
+                    drPaymentCollection["amount"],
+                    drPaymentCollection["created_at"],
+                    drPaymentCollection["created_by"],
+                    drPaymentCollection["updated_at"],
+                    drPaymentCollection["updated_by"]
+                });
+            }
+
+            datagrid.ClearSelection();
+            Helper.DatagridFullRowSelectStyle(datagrid, true);
+
         }
         #endregion
 
@@ -913,6 +966,7 @@ namespace AccountingSystem
             try
             {
                 //Image Column
+                dgvBudgetAppropriations.ShowCellToolTips = false;
                 Image continuingIcon = Properties.Resources.ok14px;
                 Image realignmentIcon = Properties.Resources.ok14px;
 
@@ -1362,7 +1416,10 @@ namespace AccountingSystem
                     }
                 }
 
-                dgvBudgetAppropriations.ClearSelection();
+            Helper.DatagridFullRowSelectStyle(dgvBudgetAppropriations, true);
+            dgvBudgetAppropriations.ShowCellToolTips = false;
+
+            dgvBudgetAppropriations.ClearSelection();
 
         }
 
@@ -1429,7 +1486,8 @@ namespace AccountingSystem
                 }
 
                 dgv.ClearSelection();
-                Helper.DatagridDefaultStyle(dgv, true);
+                Helper.DatagridFullRowSelectStyle(dgv, true);
+                dgv.ShowCellToolTips = false;
             }
             catch (Exception ex)
             {
