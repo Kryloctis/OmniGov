@@ -20,24 +20,24 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             InitializeComponent();
             Helper.LoadFormIcon(this);
             _frmPaymentCollection = frmpc;
-            ucpc1.userid = Helper.UserId;
+            ucPaymentCollection1.userid = Helper.UserId;
         }
 
         private void frmPaymentCollectionAdd_Load(object sender, EventArgs e)
         {
-            ucpc1.LoadForms();
-            ucpc1.LoadCollectors();
-            ucpc1.LoadFunds();
+            ucPaymentCollection1.LoadForms();
+            ucPaymentCollection1.LoadCollectors();
+            ucPaymentCollection1.LoadFunds();
 
-            if(ucpc1.cmbcollector.Items.Count > 0)
+            if(ucPaymentCollection1.cmbcollector.Items.Count > 0)
             {
                 var uRepository = Factory.UsersRepository();
                 if (uRepository.LinkedCollector(Helper.UserId))
                 {
                     var colRepository = Factory.CollectingOfficerRepository();
                     var data = colRepository.GetRecordByUserID(Helper.UserId);
-                    ucpc1.cmbcollector.SelectedValue = data["id"];
-                    ucpc1.cmbcollector.Enabled = false;
+                    ucPaymentCollection1.cmbcollector.SelectedValue = data["id"];
+                    ucPaymentCollection1.cmbcollector.Enabled = false;
                 }
                // ucpc1.LoadForms(Helper.UserId);
             }
@@ -48,19 +48,27 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-                var uc = ucpc1;
+                var uc = ucPaymentCollection1;
+
+                uc.txtCashTicketQuantity.Validating -= new CancelEventHandler(uc.txtCashTicketQuantity_Validating);
+
+                uc.txtpayee.Validating -= new CancelEventHandler(uc.txtpayee_Validating);
+
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
 
+                uc.txtCashTicketQuantity.Validating += new CancelEventHandler(uc.txtCashTicketQuantity_Validating);
+
                 var pcModel = new PaymentCollectionModel()
                 {
                     CollectingOfficerId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
                     FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
                     AccountableFormId = Convert.ToInt32(uc.cmbforms.SelectedValue),
-                    GeneralLedgerAccountId = uc.glaId,
+                    GeneralLedgerAccountId = uc.generalLedgerId,
+                    Quantity = 1,
                     Payee = uc.txtpayee.Text.Trim(),
                     ReceiptNo = uc.txtreceipt.Text.Trim(),
                     PaymentDate = Convert.ToDateTime(uc.dtdate.Text.Trim()),
@@ -124,13 +132,73 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            var uc = ucPaymentCollection1;
+
+            if (!uc.isCashTicket)
+                SaveCashTickets();
+            else
+                SaveReceipts();
+
+        }
+
+        private void SaveCashTickets()
+        {
+            try
+            {
+
+                var uc = ucPaymentCollection1;
+
+                uc.txtpayee.Validating -= new CancelEventHandler(uc.txtpayee_Validating);
+
+                if (!uc.ValidateChildren())
+                {
+                    Helper.MessageBoxError(uc.GetFormErrors());
+                    return;
+                }
+
+
+                var paymentCollectionModel = new PaymentCollectionModel()
+                {
+                    CollectingOfficerId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
+                    FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
+                    AccountableFormId = Convert.ToInt32(uc.cmbforms.SelectedValue),
+                    GeneralLedgerAccountId = uc.generalLedgerId,
+                    Quantity = Convert.ToInt32(uc.txtCashTicketQuantity.Value),
+                    PaymentDate = Convert.ToDateTime(uc.dtCashTicketDateOfCollection.Text.Trim()),
+                    Amount = Convert.ToDecimal(uc.txtCashTicketsAmount.Text),
+                    CreatedBy = uc.userid,
+                };
+
+
+                var paymentCollectionRepo = Factory.PaymentCollectionRepository();
+
+                bool insertSuccess = paymentCollectionRepo.Insert(paymentCollectionModel);
+
+                if (insertSuccess)
+                {
+                    Helper.MessageBoxSuccess("Payment Collection has been saved.");
+                    _frmPaymentCollection.LoadRecords();
+                    ucPaymentCollection1.ResetForm();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxWarning(ex.Message);
+            }
+        }
+
+
+        private void SaveReceipts()
+        {
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Payment Collection has been saved.");
                 _frmPaymentCollection.LoadRecords();
-                ucpc1.ResetForm();
+                ucPaymentCollection1.ResetForm();
             }
         }
 
+      
     }
 }

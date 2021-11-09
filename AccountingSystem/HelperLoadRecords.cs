@@ -528,25 +528,39 @@ namespace AccountingSystem
         #region PaymentCollection
         internal static void PaymentDatagridView(DataTable dataTable, DataGridView datagrid)
         {
+
             datagrid.DataSource = dataTable;
+            datagrid.Columns[0].HeaderText = "Payment Collection Id";
+            datagrid.Columns[1].HeaderText = "Fund ID";
+            datagrid.Columns[2].HeaderText = "Fund";
+            datagrid.Columns[3].HeaderText = "Accountable Form Id";
+            datagrid.Columns[4].HeaderText = "Accountable Form";
+            datagrid.Columns[5].HeaderText = "Abstract of General Collection ID";
+            datagrid.Columns[6].HeaderText = "Abstract of General Collection";
+            datagrid.Columns[7].HeaderText = "Payee";
+            datagrid.Columns[8].HeaderText = "Receipt No. ";
+            datagrid.Columns[9].HeaderText = "Quantity";
+            datagrid.Columns[10].HeaderText = "Payment Date";
+            datagrid.Columns[11].HeaderText = "Amount";
+            datagrid.Columns[12].HeaderText = "Created At";
+            datagrid.Columns[13].HeaderText = "Created By";
+            datagrid.Columns[14].HeaderText = "Updated At";
+            datagrid.Columns[15].HeaderText = "Updated By";
+
+
+            datagrid.Columns[11].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[11].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
             datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Fund";
-            datagrid.Columns[2].HeaderText = "Account Code";
-            datagrid.Columns[3].HeaderText = "Accountable Form";
-            datagrid.Columns[4].HeaderText = "Ledger";
-            datagrid.Columns[5].HeaderText = "Subsidiary";
-            datagrid.Columns[6].HeaderText = "Payee";
-            datagrid.Columns[7].HeaderText = "Receipt No.";
-            datagrid.Columns[8].HeaderText = "Payment Date";
-            datagrid.Columns[8].DefaultCellStyle.Format = "yyyy-MM-dd";
-            datagrid.Columns[9].HeaderText = "Amount";
-            datagrid.Columns[9].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[10].HeaderText = "Collector";
-            datagrid.Columns[11].Visible = false;
+            datagrid.Columns[1].Visible = false;
+            datagrid.Columns[2].Visible = false;
+            datagrid.Columns[3].Visible = false;
+            datagrid.Columns[5].Visible = false;
+
             datagrid.Columns[12].Visible = false;
             datagrid.Columns[13].Visible = false;
             datagrid.Columns[14].Visible = false;
+            datagrid.Columns[15].Visible = false;
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion

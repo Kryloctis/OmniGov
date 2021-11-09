@@ -9,5 +9,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecords(int id);
         bool SetDefault(int id);
         bool YearExist(int id, int year);
+
+        decimal GetFaceValueByAccountableFormId(int id);
     }
 }
