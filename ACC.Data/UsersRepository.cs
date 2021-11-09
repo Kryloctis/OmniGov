@@ -505,7 +505,7 @@ namespace ACC.Data
             return false;
         }
 
-        public DataTable GetViewRecordsByUserId()
+        public DataTable GetViewRecords()
         {
             try
             {
@@ -530,6 +530,44 @@ namespace ACC.Data
                 var dataTable = new DataTable();
 
                 return _dbGenericCommands.Fill(query, dataTable);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetViewRecordsBySearch(string searchTxt)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                        new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%"}
+                };
+
+
+                string query = $"SELECT " +
+                    $"id, " +
+                    $"roles_id, " +
+                    $"first_name, " +
+                    $"mid_initial, " +
+                    $"last_name, " +
+                    $"username, " +
+                    $"password, " +
+                    $"is_deleted, " +
+                    $"created_at, " +
+                    $"updated_at, " +
+                    $"office, " +
+                    $"role_name, " +
+                    $"permission_name, " +
+                    $"permission_office " +
+                    $"FROM {viewTableName} WHERE last_name LIKE @searchTxt OR first_name LIKE @searchTxt OR mid_initial LIKE @searchTxt OR username LIKE @searchTxt OR office LIKE @searchTxt OR role_name LIKE @searchTxt AND office <> 'SysAdmin' GROUP BY id";
+
+
+                var dataTable = new DataTable();
+
+                return _dbGenericCommands.FillBySearch(query, dataTable,parameters);
             }
             catch (Exception)
             {

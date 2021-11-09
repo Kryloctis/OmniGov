@@ -22,7 +22,9 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetLinksDisbursingOfficers();
 
-        DataTable GetViewRecordsByUserId();
+        DataTable GetViewRecordsBySearch(string searchTxt);
+
+        DataTable GetViewRecords();
 
         bool LinkedCollector(int id);
 
