@@ -263,9 +263,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.tabPaymentType);
-            this.groupBox2.Location = new System.Drawing.Point(3, 141);
+            this.groupBox2.Location = new System.Drawing.Point(3, 143);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(503, 170);
+            this.groupBox2.Size = new System.Drawing.Size(503, 163);
             this.groupBox2.TabIndex = 23;
             this.groupBox2.TabStop = false;
             // 
@@ -279,7 +279,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.tabPaymentType.Location = new System.Drawing.Point(3, 19);
             this.tabPaymentType.Name = "tabPaymentType";
             this.tabPaymentType.SelectedIndex = 0;
-            this.tabPaymentType.Size = new System.Drawing.Size(497, 148);
+            this.tabPaymentType.Size = new System.Drawing.Size(497, 141);
             this.tabPaymentType.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabPaymentType.TabIndex = 24;
             // 
@@ -297,7 +297,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.tabNonCashTickets.Location = new System.Drawing.Point(4, 5);
             this.tabNonCashTickets.Name = "tabNonCashTickets";
             this.tabNonCashTickets.Padding = new System.Windows.Forms.Padding(3);
-            this.tabNonCashTickets.Size = new System.Drawing.Size(489, 139);
+            this.tabNonCashTickets.Size = new System.Drawing.Size(489, 132);
             this.tabNonCashTickets.TabIndex = 0;
             // 
             // tabCashTickets
@@ -384,7 +384,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucPaymentCollection";
-            this.Size = new System.Drawing.Size(510, 314);
+            this.Size = new System.Drawing.Size(510, 309);
             this.Load += new System.EventHandler(this.ucPC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtamount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
