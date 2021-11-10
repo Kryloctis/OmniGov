@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucpc1 = new AccountingSystem.Views.Transactions.PaymentCollection.ucPaymentCollection();
+            this.ucPaymentCollection1 = new AccountingSystem.Views.Transactions.PaymentCollection.ucPaymentCollection();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -38,11 +38,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             // ucpc1
             // 
-            this.ucpc1.Location = new System.Drawing.Point(0, -2);
-            this.ucpc1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ucpc1.Name = "ucpc1";
-            this.ucpc1.Size = new System.Drawing.Size(509, 315);
-            this.ucpc1.TabIndex = 6;
+            this.ucPaymentCollection1.Location = new System.Drawing.Point(0, -2);
+            this.ucPaymentCollection1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ucPaymentCollection1.Name = "ucpc1";
+            this.ucPaymentCollection1.Size = new System.Drawing.Size(509, 315);
+            this.ucPaymentCollection1.TabIndex = 6;
             // 
             // flowLayoutPanel1
             // 
@@ -91,7 +91,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(509, 339);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.ucpc1);
+            this.Controls.Add(this.ucPaymentCollection1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
@@ -107,7 +107,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         }
 
         #endregion
-        private ucPaymentCollection ucpc1;
+        private ucPaymentCollection ucPaymentCollection1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
