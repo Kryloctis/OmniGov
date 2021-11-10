@@ -61,17 +61,16 @@ namespace AccountingSystem.Views.Reports.RCD
                 ucrcd1.btndelete.Visible = false;
                 ucrcd1.btnclear.Visible = false;
                 btnApprove.Visible = true;
-                btnDisapprove.Visible = true;
+                btnDisapprove.Visible = true;                
             }
             else
             {
-                ucrcd1.btnadd.Visible = true;
-                ucrcd1.btndelete.Visible = true;
-                ucrcd1.btnclear.Visible = true;
+                ucrcd1.btnadd.Visible = ucrcd1.approved > 0 && ucrcd1.status=="CANCELLED" ? false: true;
+                ucrcd1.btndelete.Visible = ucrcd1.approved > 0 && ucrcd1.status == "CANCELLED" ? false : true;
+                ucrcd1.btnclear.Visible = ucrcd1.approved > 0 && ucrcd1.status == "CANCELLED" ? false : true;
                 btnApprove.Visible = false;
                 btnDisapprove.Visible = false;
             }
-
             btnDelete.Enabled = ucrcd1.Id > 0 ? true : false;
             btnCancel.Enabled = ucrcd1.Id > 0 ? true : false;
             btnPrint.Enabled = ucrcd1.Id > 0 ? true : false;
@@ -310,6 +309,8 @@ namespace AccountingSystem.Views.Reports.RCD
                 uc.cmbcollector.Enabled = false;
                 uc.txtreport.Enabled = false;
 
+
+
                 ButtonToolsInitialize();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -391,7 +392,7 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             if(ucrcd1.Id > 0)
             {
-                _ = new frmPCReport().ShowDialog();
+                //_ = new frmPCReport(ucrcd1.Id).ShowDialog(); 
             }
         }
     }

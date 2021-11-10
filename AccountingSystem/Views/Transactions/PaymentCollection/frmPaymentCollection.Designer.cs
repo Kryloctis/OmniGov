@@ -224,7 +224,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.dgpayments.RowTemplate.Height = 29;
             this.dgpayments.Size = new System.Drawing.Size(1038, 474);
             this.dgpayments.TabIndex = 12;
-            this.dgpayments.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgpayments_CellDoubleClick);
             this.dgpayments.SelectionChanged += new System.EventHandler(this.dgpayments_SelectionChanged);
             // 
             // dtpdate

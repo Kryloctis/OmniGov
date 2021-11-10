@@ -8,8 +8,7 @@ namespace ACC.Domain.Models
     {
         public int id { get; set; }
         public int accountable_forms_id { get; set; }
-        public int faceyear { get; set; }
+        public DateTime facedate { get; set; }
         public decimal facevalue { get; set; }
-        public byte facedefault { get; set; }
     }
 }

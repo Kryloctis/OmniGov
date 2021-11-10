@@ -18,7 +18,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         public frmPaymentCollectionAdd(frmPaymentCollection frmpc)
         {
             InitializeComponent();
-            Helper.LoadFormIcon(this);
             _frmPaymentCollection = frmpc;
             ucPaymentCollection1.userid = Helper.UserId;
         }
@@ -61,6 +60,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 }
 
                 uc.txtCashTicketQuantity.Validating += new CancelEventHandler(uc.txtCashTicketQuantity_Validating);
+                uc.txtpayee.Validating += new CancelEventHandler(uc.txtpayee_Validating);
 
                 var pcModel = new PaymentCollectionModel()
                 {

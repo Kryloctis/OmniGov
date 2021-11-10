@@ -45,7 +45,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             if (dgpayments.SelectedRows.Count > 0)
             {
-                int Id = int.Parse(dgpayments.SelectedCells[0].Value.ToString());
+                var dgRowIndex = dgpayments.SelectedCells[0].Value.ToString();
+                int Id = int.Parse(dgRowIndex);
                 _ = new frmPaymentCollectionEdit(this, Id).ShowDialog();
             }
         }
@@ -55,18 +56,18 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             int selectedrowscount = dgpayments.SelectedRows.Count;
             try
             {
-                if (selectedrowscount > 0)
+                var confirmDelete = Helper.MessageBoxConfirmDelete(selectedrowscount);
+                if (confirmDelete)
                 {
-                    if (Helper.MessageBoxConfirmDelete(selectedrowscount))
+                    var paymentCollectionModelList = new List<PaymentCollectionModel>();
+
+                    foreach (DataGridViewRow row in dgpayments.SelectedRows)
                     {
-                        var pcModelList = new List<PaymentCollectionModel>();
-                        foreach (DataGridViewRow row in dgpayments.SelectedRows)
-                        {
-                            int pcId = Convert.ToInt16(row.Cells[0].Value.ToString());
-                            pcModelList.Add(new PaymentCollectionModel() { Id = pcId });
-                        }
+                        int pcId = Convert.ToInt32(row.Cells[0].Value.ToString());
+                        paymentCollectionModelList.Add(new PaymentCollectionModel() { Id = pcId });
+
                         var pcRepository = Factory.PaymentCollectionRepository();
-                        if (pcRepository.Delete(pcModelList))
+                        if (pcRepository.Delete(paymentCollectionModelList))
                         {
                             dgpayments.Rows.RemoveAt(dgpayments.CurrentRow.Index);
                             lblRecordCount.Text = dgpayments.Rows.Count.ToString();
@@ -82,22 +83,22 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            //if (txtsearch.Text.Length > 0)
-            //{
-            //    try
-            //    {
-            //        string searchkey = Convert.ToString(txtsearch.Text.Trim());
-            //        var dtpayments = Factory.PaymentCollectionRepository().GetRecordsBySearch(searchkey);
-            //        HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
+            if (txtsearch.Text.Length > 0)
+            {
+                try
+                {
+                    string searchkey = Convert.ToString(txtsearch.Text.Trim());
+                    var dtpayments = Factory.PaymentCollectionRepository().GetRecordsBySearch(searchkey);
+                    HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
 
-            //        lblRecordCount.Text = dgpayments.Rows.Count.ToString();
-            //    }
-            //    catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            //}
-            //else
-            //{
-            //    LoadRecords();
-            //}
+                    lblRecordCount.Text = dgpayments.Rows.Count.ToString();
+                }
+                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            }
+            else
+            {
+                LoadRecords();
+            }
         }
 
         private void dgpayments_SelectionChanged(object sender, EventArgs e)
@@ -128,11 +129,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             LoadRecords();
         }
 
-        private void dgpayments_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            btnEdit.PerformClick();
-        }
-
         private void dtpdate_ValueChanged(object sender, EventArgs e)
         {
             try
@@ -145,5 +141,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
     }
 }

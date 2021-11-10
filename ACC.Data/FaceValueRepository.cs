@@ -57,6 +57,32 @@ namespace ACC.Data
             }
         }
 
+        public decimal GetFaceValueByAccountableFormId(int id)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] {"@accountableFormId", DbType.Int32, id},
+                };
+
+                string query = $"SELECT COALESCE(amount, 0) AS amount FROM {tableName} WHERE accountable_forms_id=@accountableFormId";
+
+                var queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                if (string.IsNullOrEmpty(queryResult))
+                    return 0;
+                else
+                    return Convert.ToDecimal(queryResult);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var record = new Dictionary<string, string>();
@@ -77,9 +103,8 @@ namespace ACC.Data
 
                     record.Add("id", reader.Rows[0]["id"].ToString());
                     record.Add("accountable_forms_id", reader.Rows[0]["accountable_forms_id"].ToString());
-                    record.Add("faceyear", reader.Rows[0]["faceyear"].ToString());
+                    record.Add("facedate", reader.Rows[0]["facedate"].ToString());
                     record.Add("facevalue", reader.Rows[0]["facevalue"].ToString());
-                    record.Add("facedefault", reader.Rows[0]["facedefault"].ToString());
                 }
             }
             catch (Exception)
@@ -94,7 +119,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName} ORDER BY faceyear DESC";
+                string query = $"SELECT * FROM {tableName} ORDER BY id DESC";
 
                 var dtBanks = new DataTable();
                 return _dbGenericCommands.Fill(query, dtBanks);
@@ -109,7 +134,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName} WHERE accountable_forms_id={id} ORDER BY faceyear DESC";
+                string query = $"SELECT * FROM {tableName} WHERE accountable_forms_id={id} ORDER BY id DESC";
 
                 var dtBanks = new DataTable();
                 return _dbGenericCommands.Fill(query, dtBanks);
@@ -124,7 +149,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName} WHERE faceyear LIKE '%{searchText}%' OR facevalue LIKE '%{searchText}%' ORDER BY faceyear DESC";
+                string query = $"SELECT * FROM {tableName} WHERE facedate LIKE '%{searchText}%' OR facevalue LIKE '%{searchText}%' ORDER BY id DESC";
 
                 var dtBanks = new DataTable();
                 return _dbGenericCommands.Fill(query, dtBanks);
@@ -147,34 +172,11 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@accountable_forms_id", DbType.String, entity.accountable_forms_id},
-                    new object[] { "@faceyear", DbType.Int32, entity.faceyear},
+                    new object[] { "@facedate", DbType.DateTime, entity.facedate},
                     new object[] { "@facevalue", DbType.Decimal, entity.facevalue},
-                    new object[] { "@facedefault", DbType.Int16, entity.facedefault},
                 };
 
-                string query = $"INSERT INTO {tableName} (accountable_forms_id,faceyear,facevalue,facedefault) VALUES (@accountable_forms_id,@faceyear,@facevalue,@facedefault)";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public bool Update(FaceValueModel entity)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, entity.id},
-                    new object[] { "@accountable_forms_id", DbType.String, entity.accountable_forms_id},
-                    new object[] { "@faceyear", DbType.Int32, entity.faceyear},
-                    new object[] { "@facevalue", DbType.Decimal, entity.facevalue},
-                    new object[] { "@facedefault", DbType.Int16, entity.facedefault},
-                };
-
-                string query = $"UPDATE {tableName} SET accountable_forms_id=@accountable_forms_id,faceyear=@faceyear,facevalue=@facevalue,facedefault=@facedefault WHERE id = @id";
+                string query = $"INSERT INTO {tableName} (accountable_forms_id,facedate,facevalue) VALUES (@accountable_forms_id,@facedate,@facevalue)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -185,15 +187,22 @@ namespace ACC.Data
 
         public bool SetDefault(int id)
         {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(FaceValueModel entity)
+        {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Int32, id},
-                    
+                    new object[] { "@id", DbType.Int32, entity.id},
+                    new object[] { "@accountable_forms_id", DbType.String, entity.accountable_forms_id},
+                    new object[] { "@faceyear", DbType.DateTime, entity.facedate},
+                    new object[] { "@facevalue", DbType.Decimal, entity.facevalue},
                 };
 
-                string query = $"UPDATE {tableName} SET facedefault=1 WHERE id = @id;UPDATE {tableName} SET facedefault=0 WHERE id <> @id;";
+                string query = $"UPDATE {tableName} SET accountable_forms_id=@accountable_forms_id,facedate=@facedate,facevalue=@facevalue WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -202,54 +211,9 @@ namespace ACC.Data
             }
         }
 
-        public bool YearExist(int id,int year)
+        public bool YearExist(int id, int year)
         {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@accountable_forms_id", DbType.Int32, id },
-                    new object[] { "@faceyear", DbType.Int32, year },
-                };
-
-                string query = $"SELECT * FROM {tableName} WHERE accountable_forms_id = @accountable_forms_id AND faceyear=@faceyear";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            };
-
-            return false;
-        }
-
-        public decimal GetFaceValueByAccountableFormId(int id)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] {"@accountableFormId", DbType.Int32, id},
-                };
-
-                string query = $"SELECT COALESCE(amount, 0) AS amount FROM {tableName} WHERE accountable_forms_id=@accountableFormId";
-
-                var queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                if (string.IsNullOrEmpty(queryResult))
-                    return 0;
-                else
-                    return Convert.ToDecimal(queryResult); 
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            throw new NotImplementedException();
         }
     }
 }
