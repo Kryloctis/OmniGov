@@ -60,6 +60,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 }
 
                 uc.txtCashTicketQuantity.Validating += new CancelEventHandler(uc.txtCashTicketQuantity_Validating);
+                uc.txtpayee.Validating += new CancelEventHandler(uc.txtpayee_Validating);
 
                 var pcModel = new PaymentCollectionModel()
                 {

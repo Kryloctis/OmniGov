@@ -13,45 +13,68 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 {
     public partial class frmPaymentCollectionEdit : Form
     {
-        private frmPaymentCollection _frmpc;
+        private readonly frmPaymentCollection _frmPaymentCollection;
         private string receipt = string.Empty;
-        public frmPaymentCollectionEdit(frmPaymentCollection frmpc,int Id)
+
+        public frmPaymentCollectionEdit(frmPaymentCollection frmPaymentCollection, int Id)
         {
             InitializeComponent();
-            _frmpc = frmpc;
-            ucpc1.Id = Id;
-            ucpc1.userid = Helper.UserId;
-           
+            _frmPaymentCollection = frmPaymentCollection;
+            
+            ucPaymentCollection1.Id = Id;
+            ucPaymentCollection1.userid = Helper.UserId;
         }
 
         private void frmPaymentCollectionEdit_Load(object sender, EventArgs e)
         {
-            ucpc1.LoadForms();
-            ucpc1.LoadCollectors();
-            ucpc1.LoadFunds();
+            ucPaymentCollection1.LoadForms();
+            ucPaymentCollection1.LoadCollectors();
+            ucPaymentCollection1.LoadFunds();
 
             LoadSelectedValue();
         }
 
         private void LoadSelectedValue()
         {
-           
             try
             {
-                var uc = ucpc1;
-                var pcRepository = Factory.PaymentCollectionRepository();
-                var pcData = pcRepository.GetRecordByID(uc.Id);
-                uc.cmbcollector.SelectedValue = pcData["collecting_officers_id"];
-                uc.cmbforms.SelectedValue = pcData["accountable_forms_id"];
-                uc.setSelectedValue(Convert.ToInt32(pcData["general_ledger_accounts_id"]), "ledger");
-                uc.txtpayee.Text = pcData["payee"];
-                uc.txtreceipt.Text = pcData["receipt_no"];
-                uc.dtdate.Value = Convert.ToDateTime(pcData["payment_date"]);
-                uc.txtamount.Value = Convert.ToDecimal(pcData["amount"]);
-                receipt = pcData["receipt_no"];
-                uc.accId = Convert.ToInt32(pcData["accountable_forms_id"]);
-                uc.receipt = Convert.ToInt32(pcData["receipt_no"]);
-                uc.cmbcollector.Enabled = false;                
+                var uc = ucPaymentCollection1;
+                var paymentCollectionRepository = Factory.PaymentCollectionRepository();
+                var paymentCollectionDict = paymentCollectionRepository.GetRecordByID(uc.Id);
+
+
+
+                uc.cmbcollector.SelectedValue = paymentCollectionDict["collecting_officers_id"];
+                uc.cmbfund.SelectedValue = paymentCollectionDict["funds_id"];
+                uc.cmbforms.SelectedValue = paymentCollectionDict["accountable_forms_id"];
+                uc.setSelectedValue(Convert.ToInt32(paymentCollectionDict["general_ledger_accounts_id"]), "ledger");
+                uc.accId = Convert.ToInt32(paymentCollectionDict["accountable_forms_id"]);
+
+                bool isCashTickets = String.IsNullOrEmpty(paymentCollectionDict["receipt_no"]);
+
+                if (!isCashTickets)
+                {
+                    uc.SwitchFields(false);
+                    uc.txtpayee.Text = paymentCollectionDict["payee"];
+                    uc.txtreceipt.Text = paymentCollectionDict["receipt_no"];
+                    uc.dtdate.Value = Convert.ToDateTime(paymentCollectionDict["payment_date"]);
+                    uc.txtamount.Value = Convert.ToDecimal(paymentCollectionDict["amount"]);
+                    receipt = paymentCollectionDict["receipt_no"];
+                    uc.receipt = Convert.ToInt32(paymentCollectionDict["receipt_no"]);
+                    uc.cmbcollector.Enabled = false;
+                }
+                else //Cash Tickets Fields
+                {
+                    uc.SwitchFields(true);
+                    uc.dtCashTicketDateOfCollection.Value = Convert.ToDateTime(paymentCollectionDict["payment_date"]);
+                    uc.txtCashTicketQuantity.Text = paymentCollectionDict["quantity"];
+                    uc.txtCashTicketsAmount.Text = Convert.ToDecimal(paymentCollectionDict["amount"]).ToString("N2");
+                }
+
+
+
+
+
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -59,12 +82,20 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-                var uc = ucpc1;
+                var uc = ucPaymentCollection1;
+
+                uc.txtCashTicketQuantity.Validating -= new CancelEventHandler(uc.txtCashTicketQuantity_Validating);
+                uc.txtpayee.Validating -= new CancelEventHandler(uc.txtpayee_Validating);
+
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
+
+                uc.txtCashTicketQuantity.Validating += new CancelEventHandler(uc.txtCashTicketQuantity_Validating);
+
+                uc.txtpayee.Validating += new CancelEventHandler(uc.txtpayee_Validating);
 
                 var pcModel = new PaymentCollectionModel()
                 {
@@ -125,11 +156,74 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            var uc = ucPaymentCollection1;
+
+            if (!uc.isCashTicket)
+                UpdateCashTickets();
+            else
+                UpdateReceipts();
+
+        }
+
+        private void UpdateCashTickets()
+        {
+            try
+            {
+
+                var uc = ucPaymentCollection1;
+
+                uc.txtpayee.Validating -= new CancelEventHandler(uc.txtpayee_Validating);
+
+                if (!uc.ValidateChildren())
+                {
+                    Helper.MessageBoxError(uc.GetFormErrors());
+                    return;
+                }
+
+
+                var paymentCollectionModel = new PaymentCollectionModel()
+                {
+                    CollectingOfficerId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
+                    FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
+                    AccountableFormId = Convert.ToInt32(uc.cmbforms.SelectedValue),
+                    GeneralLedgerAccountId = uc.generalLedgerId,
+                    Quantity = Convert.ToInt32(uc.txtCashTicketQuantity.Value),
+                    PaymentDate = Convert.ToDateTime(uc.dtCashTicketDateOfCollection.Text.Trim()),
+                    Amount = Convert.ToDecimal(uc.txtCashTicketsAmount.Text),
+                    CreatedBy = uc.userid,
+                };
+
+
+                var paymentCollectionRepo = Factory.PaymentCollectionRepository();
+
+                bool insertSuccess = paymentCollectionRepo.Update(paymentCollectionModel);
+
+                if (insertSuccess)
+                {
+                    Helper.MessageBoxSuccess("Payment Collection has been updated.");
+                    _frmPaymentCollection.LoadRecords();
+                    ucPaymentCollection1.ResetForm();
+                }
+                else
+                {
+                    return;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxWarning(ex.Message);
+            }
+        }
+
+
+        private void UpdateReceipts()
+        {
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Payment Collection has been updated.");
-                _frmpc.LoadRecords();
-
+                _frmPaymentCollection.LoadRecords();
+                ucPaymentCollection1.ResetForm();
             }
         }
     }

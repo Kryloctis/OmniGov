@@ -449,7 +449,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         }
 
 
-        private void SwitchFields(bool isCashTicket)
+        internal void SwitchFields(bool isCashTicket)
         {
             this.isCashTicket = isCashTicket;
             
