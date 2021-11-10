@@ -7,5 +7,6 @@ namespace ACC.Domain.Interfaces
     public interface IFaceValueRepository:IRepository<FaceValueModel>
     {
         DataTable GetRecords(int id);
+        decimal GetFaceValueByAccountableFormId(int id);
     }
 }

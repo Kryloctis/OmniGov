@@ -11,7 +11,7 @@ namespace ACC.Data
     public class FaceValueRepository : IFaceValueRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
-        private readonly string face_values = "face_values";
+        private readonly string tableName = "face_values";
         public FaceValueRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -20,7 +20,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT COUNT(*) FROM {face_values}";
+                string query = $"SELECT COUNT(*) FROM {tableName}";
 
                 return int.Parse(_dbGenericCommands.ExecuteScalar(query));
             }
@@ -43,7 +43,7 @@ namespace ACC.Data
                             new object[] { "@id", DbType.Int16, entity.id},
                         };
 
-                        string query = $"DELETE FROM {face_values} WHERE id = @id";
+                        string query = $"DELETE FROM {tableName} WHERE id = @id";
                         _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
                     }
 
@@ -68,7 +68,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT * FROM {face_values} WHERE id = @id";
+                string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -93,7 +93,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {face_values} ORDER BY id DESC";
+                string query = $"SELECT * FROM {tableName} ORDER BY id DESC";
 
                 var dtBanks = new DataTable();
                 return _dbGenericCommands.Fill(query, dtBanks);
@@ -108,7 +108,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {face_values} WHERE accountable_forms_id={id} ORDER BY id DESC";
+                string query = $"SELECT * FROM {tableName} WHERE accountable_forms_id={id} ORDER BY id DESC";
 
                 var dtBanks = new DataTable();
                 return _dbGenericCommands.Fill(query, dtBanks);
@@ -123,7 +123,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {face_values} WHERE facedate LIKE '%{searchText}%' OR facevalue LIKE '%{searchText}%' ORDER BY id DESC";
+                string query = $"SELECT * FROM {tableName} WHERE facedate LIKE '%{searchText}%' OR facevalue LIKE '%{searchText}%' ORDER BY id DESC";
 
                 var dtBanks = new DataTable();
                 return _dbGenericCommands.Fill(query, dtBanks);
@@ -150,7 +150,7 @@ namespace ACC.Data
                     new object[] { "@facevalue", DbType.Decimal, entity.facevalue},
                 };
 
-                string query = $"INSERT INTO {face_values} (accountable_forms_id,facedate,facevalue) VALUES (@accountable_forms_id,@facedate,@facevalue)";
+                string query = $"INSERT INTO {tableName} (accountable_forms_id,facedate,facevalue) VALUES (@accountable_forms_id,@facedate,@facevalue)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -171,7 +171,7 @@ namespace ACC.Data
                     new object[] { "@facevalue", DbType.Decimal, entity.facevalue},
                 };
 
-                string query = $"UPDATE {face_values} SET accountable_forms_id=@accountable_forms_id,facedate=@facedate,facevalue=@facevalue WHERE id = @id";
+                string query = $"UPDATE {tableName} SET accountable_forms_id=@accountable_forms_id,facedate=@facedate,facevalue=@facevalue WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -180,6 +180,32 @@ namespace ACC.Data
             }
         }
 
-        
+        public decimal GetFaceValueByAccountableFormId(int id)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] {"@accountableFormId", DbType.Int32, id},
+                };
+
+                string query = $"SELECT COALESCE(amount, 0) AS amount FROM {tableName} WHERE accountable_forms_id=@accountableFormId";
+
+                var queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                if (string.IsNullOrEmpty(queryResult))
+                    return 0;
+                else
+                    return Convert.ToDecimal(queryResult);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
     }
 }
