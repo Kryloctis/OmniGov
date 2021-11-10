@@ -18,7 +18,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             try
             {
                 var usersRepository = Factory.UsersRepository();
-                var dtUsers = usersRepository.GetViewRecordsByUserId();
+                var dtUsers = usersRepository.GetViewRecords();
                 HelperLoadRecords.UsersDatagridView(dtUsers, dgUsers);
 
                 lblRecordCount.Text = usersRepository.CountRecords().ToString();
@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             try
             {
                 string searchkey = Convert.ToString(txtSearch.Text);
-                var dtUsers = Factory.UsersRepository().GetRecordsBySearch(searchkey);
+                var dtUsers = Factory.UsersRepository().GetViewRecordsBySearch(searchkey);
                 HelperLoadRecords.UsersDatagridView(dtUsers, dgUsers);
 
                 lblRecordCount.Text = dgUsers.Rows.Count.ToString();
@@ -56,10 +56,11 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void dgUsers_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 6, 7 };
+            byte[] columnIndexTimestamp = { 8, 9 };
             Helper.ShowRecordTimestamp(dgUsers, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgUsers, btnEdit, btnDelete);
         }
+
         private void btnEdit_Click(object sender, EventArgs e)
         {
             int userId = int.Parse(dgUsers.SelectedCells[0].Value.ToString());
