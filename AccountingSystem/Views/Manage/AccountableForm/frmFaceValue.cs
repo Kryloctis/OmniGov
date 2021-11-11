@@ -80,8 +80,8 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                     var facevaluerepo = Factory.FaceValueRepository();
                     var faceval = facevaluerepo.GetRecordByID(Id);
                     faceid = int.Parse(faceval["id"]);
-                    dtdate.Value = Convert.ToDateTime(faceval["facedate"]);
-                    txtamount.Value = decimal.Parse(faceval["facevalue"]);
+                    dtdate.Value = Convert.ToDateTime(faceval["date"]);
+                    txtamount.Value = decimal.Parse(faceval["amount"]);
                 }
                 catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             }

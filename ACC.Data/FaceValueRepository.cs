@@ -103,8 +103,8 @@ namespace ACC.Data
 
                     record.Add("id", reader.Rows[0]["id"].ToString());
                     record.Add("accountable_forms_id", reader.Rows[0]["accountable_forms_id"].ToString());
-                    record.Add("facedate", reader.Rows[0]["facedate"].ToString());
-                    record.Add("facevalue", reader.Rows[0]["facevalue"].ToString());
+                    record.Add("date", reader.Rows[0]["date"].ToString());
+                    record.Add("amount", reader.Rows[0]["amount"].ToString());
                 }
             }
             catch (Exception)
