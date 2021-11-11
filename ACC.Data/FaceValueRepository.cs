@@ -198,11 +198,11 @@ namespace ACC.Data
                 {
                     new object[] { "@id", DbType.Int32, entity.id},
                     new object[] { "@accountable_forms_id", DbType.String, entity.accountable_forms_id},
-                    new object[] { "@faceyear", DbType.DateTime, entity.facedate},
-                    new object[] { "@facevalue", DbType.Decimal, entity.facevalue},
+                    new object[] { "@date", DbType.DateTime, entity.facedate},
+                    new object[] { "@amount", DbType.Decimal, entity.facevalue},
                 };
 
-                string query = $"UPDATE {tableName} SET accountable_forms_id=@accountable_forms_id,facedate=@facedate,facevalue=@facevalue WHERE id = @id";
+                string query = $"UPDATE {tableName} SET accountable_forms_id=@accountable_forms_id, date=@date, amount=@amount WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
