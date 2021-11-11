@@ -413,7 +413,6 @@ namespace AccountingSystem
         #region FaceValue
         internal static void FaceValueDatagridView(DataTable dataTable, DataGridView datagrid)
         {
-            Helper.DatagridFullRowSelectStyle(datagrid, true);
             datagrid.Rows.Clear();
             datagrid.Columns.Clear();
 
@@ -441,7 +440,8 @@ namespace AccountingSystem
 
             foreach (DataRow drFaceValue in dataTable.Rows)
             {
-                datagrid.Rows.Add(new object[] {
+                datagrid.Rows.Add(new object[]
+                {
                     drFaceValue["id"],
                     drFaceValue["accountable_forms_id"],
                     drFaceValue["date"],
@@ -452,6 +452,7 @@ namespace AccountingSystem
             }
 
             datagrid.ClearSelection();
+            Helper.DatagridFullRowSelectStyle(datagrid, true);
         }
         #endregion
 

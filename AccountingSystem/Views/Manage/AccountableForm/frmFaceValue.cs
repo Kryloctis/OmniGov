@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
         {
             try
             {
-                if(id > 0)
+                if (id > 0)
                 {
                     var facevaluerepo = Factory.FaceValueRepository();
                     var dtfacevalue = facevaluerepo.GetRecords(id);
@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                     foreach (DataGridViewRow r in dgfacevalue.Rows)
                     {
                         int df = int.Parse(r.Cells[4].Value.ToString());
-                        if(df > 0)
+                        if (df > 0)
                         {
                             r.DefaultCellStyle.BackColor = Color.Green;
                         }
