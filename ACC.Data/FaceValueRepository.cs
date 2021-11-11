@@ -172,11 +172,11 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@accountable_forms_id", DbType.String, entity.accountable_forms_id},
-                    new object[] { "@facedate", DbType.DateTime, entity.facedate},
-                    new object[] { "@facevalue", DbType.Decimal, entity.facevalue},
+                    new object[] { "@date", DbType.DateTime, entity.facedate},
+                    new object[] { "@amount", DbType.Decimal, entity.facevalue},
                 };
 
-                string query = $"INSERT INTO {tableName} (accountable_forms_id,facedate,facevalue) VALUES (@accountable_forms_id,@facedate,@facevalue)";
+                string query = $"INSERT INTO {tableName} (accountable_forms_id,date,amount) VALUES (@accountable_forms_id, @date, @amount)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
