@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // txtamount
             // 
             this.txtamount.DecimalPlaces = 2;
-            this.txtamount.Location = new System.Drawing.Point(347, 67);
+            this.txtamount.Location = new System.Drawing.Point(345, 73);
             this.txtamount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtamount.Maximum = new decimal(new int[] {
             999999999,
@@ -80,7 +80,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 67);
+            this.label1.Location = new System.Drawing.Point(10, 73);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(4);
             this.label1.Size = new System.Drawing.Size(42, 23);
@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(279, 67);
+            this.label2.Location = new System.Drawing.Point(277, 73);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(4);
             this.label2.Size = new System.Drawing.Size(62, 23);
@@ -99,7 +99,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // 
             // btnsave
             // 
-            this.btnsave.Location = new System.Drawing.Point(498, 68);
+            this.btnsave.Location = new System.Drawing.Point(502, 73);
             this.btnsave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnsave.Name = "btnsave";
             this.btnsave.Size = new System.Drawing.Size(69, 22);
@@ -164,7 +164,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // 
             // dtdate
             // 
-            this.dtdate.Location = new System.Drawing.Point(58, 67);
+            this.dtdate.Location = new System.Drawing.Point(56, 73);
             this.dtdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtdate.Name = "dtdate";
             this.dtdate.Size = new System.Drawing.Size(215, 23);

@@ -149,7 +149,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName} WHERE facedate LIKE '%{searchText}%' OR facevalue LIKE '%{searchText}%' ORDER BY id DESC";
+                string query = $"SELECT * FROM {tableName} WHERE date LIKE '%{searchText}%' OR amount LIKE '%{searchText}%' ORDER BY id DESC";
 
                 var dtBanks = new DataTable();
                 return _dbGenericCommands.Fill(query, dtBanks);
