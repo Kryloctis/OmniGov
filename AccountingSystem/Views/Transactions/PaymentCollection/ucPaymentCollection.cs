@@ -180,13 +180,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void ucPC_Load(object sender, EventArgs e)
         {
 
-            cmbAccount.SelectedValueChanged -= cmbAccount_SelectedValueChanged;
-            
-            LoadAccounts();
-            txtCashTicketQuantity.Controls[0].Enabled = false;
-
             cmbAccount.SelectedIndex = -1;
-
+            cmbAccount.SelectedValueChanged -= cmbAccount_SelectedValueChanged;
+            LoadAccounts();
             cmbAccount.SelectedValueChanged += cmbAccount_SelectedValueChanged;
         }
 
@@ -362,7 +358,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
             accountableFormFaceValue = Factory.FaceValueRepository().GetFaceValueByAccountableFormId(idOfSelectedAccountableForm);
 
-            
             SwitchFields(Convert.ToBoolean(accountableFormFaceValue));
 
             txtCashTicketQuantity_TextChanged(sender, e);
@@ -452,7 +447,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal void SwitchFields(bool isCashTicket)
         {
             this.isCashTicket = isCashTicket;
-            
+
             if (this.isCashTicket)
             {
                 tabPaymentType.SelectedTab = tabCashTickets;

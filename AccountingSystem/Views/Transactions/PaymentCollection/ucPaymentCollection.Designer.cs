@@ -312,7 +312,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.tabCashTickets.Location = new System.Drawing.Point(4, 5);
             this.tabCashTickets.Name = "tabCashTickets";
             this.tabCashTickets.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCashTickets.Size = new System.Drawing.Size(489, 139);
+            this.tabCashTickets.Size = new System.Drawing.Size(489, 132);
             this.tabCashTickets.TabIndex = 1;
             // 
             // txtCashTicketsAmount
