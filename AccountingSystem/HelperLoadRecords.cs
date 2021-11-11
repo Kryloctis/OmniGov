@@ -413,6 +413,7 @@ namespace AccountingSystem
         #region FaceValue
         internal static void FaceValueDatagridView(DataTable dataTable, DataGridView datagrid)
         {
+            Helper.DatagridFullRowSelectStyle(datagrid, true);
             datagrid.Rows.Clear();
             datagrid.Columns.Clear();
 
@@ -452,7 +453,7 @@ namespace AccountingSystem
             }
 
             datagrid.ClearSelection();
-            Helper.DatagridFullRowSelectStyle(datagrid, true);
+
         }
         #endregion
 
