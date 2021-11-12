@@ -662,8 +662,18 @@ namespace AccountingSystem
         {
             datagrid.DataSource = dataTable;
             datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Form No.";
+            datagrid.Columns[1].HeaderText = "Form Number";
             datagrid.Columns[2].HeaderText = "Form Description";
+            datagrid.Columns[3].HeaderText = "Face Value";
+
+
+            datagrid.Columns[1].MinimumWidth = 100;
+            datagrid.Columns[1].Width = 100;
+
+            datagrid.Columns[2].MinimumWidth = 500;
+            datagrid.Columns[2].Width = 500;
+
+            datagrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }

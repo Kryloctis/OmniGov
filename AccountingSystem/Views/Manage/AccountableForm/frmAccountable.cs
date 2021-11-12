@@ -18,7 +18,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             InitializeComponent();
             WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgAccform);
+            Helper.DatagridFullRowSelectStyle(dgAccform);
         }
         internal void LoadRecords()
         {

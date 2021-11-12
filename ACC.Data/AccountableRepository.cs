@@ -12,6 +12,7 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "accountable_forms";
+        private readonly string viewTableName = "view_accountable_forms";
 
         public AccountableRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -52,7 +53,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName}";
+                string query = $"SELECT * FROM {viewTableName}";
 
                 var dtBanks = new DataTable();
                 return _dbGenericCommands.Fill(query, dtBanks);
