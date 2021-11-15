@@ -37,7 +37,6 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.btnBankDeposit = new System.Windows.Forms.ToolStripButton();
             this.btnGenerateRCD = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.btnCollectorsReport = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -129,7 +128,6 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.btnIssueReceipt,
             this.btnIssueCheck,
             this.btnPaymentCollection,
-            this.btnCollectorsReport,
             this.btnBankDeposit,
             this.btnGenerateRCD});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
@@ -137,15 +135,6 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.toolStrip2.Size = new System.Drawing.Size(797, 31);
             this.toolStrip2.TabIndex = 1;
             this.toolStrip2.Text = "toolStrip2";
-            // 
-            // btnCollectorsReport
-            // 
-            this.btnCollectorsReport.Image = global::AccountingSystem.Properties.Resources.budget_approprations_24px;
-            this.btnCollectorsReport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCollectorsReport.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCollectorsReport.Name = "btnCollectorsReport";
-            this.btnCollectorsReport.Size = new System.Drawing.Size(129, 28);
-            this.btnCollectorsReport.Text = "Collector\'s Report";
             // 
             // ucTreasuryDashboard
             // 
@@ -173,6 +162,5 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         internal System.Windows.Forms.ToolStripButton btnIssueReceipt;
         internal System.Windows.Forms.ToolStripButton btnReceipts;
         internal System.Windows.Forms.TabControl tabControl1;
-        internal System.Windows.Forms.ToolStripButton btnCollectorsReport;
     }
 }

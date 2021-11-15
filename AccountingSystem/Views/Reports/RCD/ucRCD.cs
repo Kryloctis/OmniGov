@@ -15,8 +15,8 @@ namespace AccountingSystem.Views.Reports.RCD
     public partial class ucRCD : UserControl
     {
         internal int Id = 0;
-        internal int CoId = 0;
-        internal int Fid = 0;
+        internal int collectorId = 0;
+        internal int fundId = 0;
         internal int approved = 0;
         internal string status = string.Empty;
         internal string remarks = string.Empty;
@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void ucRCD_Load(object sender, EventArgs e)
         {
-
+            cmbcollector.SelectedIndex = -1;
         }
 
         internal void LoadFunds()
@@ -51,12 +51,11 @@ namespace AccountingSystem.Views.Reports.RCD
                 if (fund["fund_name"].ToString() == "General Fund")
                 {
                     radFund.Checked = true;
-                    Fid = Convert.ToByte(fund["id"]);
+                    fundId = Convert.ToByte(fund["id"]);
                     if (radFund.Checked)
                         radFund.Image = Properties.Resources.ok14px;
                     else
                         radFund.Image = null;
-
                 }
 
 
@@ -64,7 +63,7 @@ namespace AccountingSystem.Views.Reports.RCD
 
                 radFund.Click += (s,e) => {
                     var radFund = s as RadioButton;
-                    Fid = Convert.ToByte(radFund.Tag);
+                    fundId = Convert.ToByte(radFund.Tag);
                 };
                 radFund.CheckedChanged += (s, e) => {
                     var radFund = s as RadioButton;
@@ -80,7 +79,7 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             var errorArray = new string[3];
             errorArray[0] = errorProvider.GetError(cmbcollector);
-            errorArray[1] = Fid == 0 ? "Please select a fund source" : string.Empty;
+            errorArray[1] = fundId == 0 ? "Please select a fund source" : string.Empty;
             errorArray[2] = errorProvider.GetError(txtreport);
 
             IError _errors = Factory.CreateErrors(errorArray);
@@ -91,11 +90,14 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
+                cmbcollector.SelectedValueChanged -= new EventHandler(cmbcollector_SelectedValueChanged);
                 var colRepository = Factory.CollectingOfficerRepository();
                 var dtCol = colRepository.GetRecords();
+
                 cmbcollector.DataSource = dtCol;
-                cmbcollector.ValueMember = "id";
                 cmbcollector.DisplayMember = "fullname";
+                cmbcollector.ValueMember = "id";
+                cmbcollector.SelectedValueChanged += new EventHandler(cmbcollector_SelectedValueChanged);
             }
             catch (Exception ex)
             {
@@ -103,25 +105,12 @@ namespace AccountingSystem.Views.Reports.RCD
             }
         }
 
-        /*internal void LoadFunds()
-        {
-            try
-            {
-                var fundRepository = Factory.FundsRepository();
-                var dtFund = fundRepository.GetRecords();
-                dtFund.Columns.Add("funddisplay", typeof(string), "fund_code + ' - ' + fund_name");
-                cmbfund.DataSource = dtFund;
-                cmbfund.ValueMember = "id";
-                cmbfund.DisplayMember = "funddisplay";
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }*/
-
         internal void ResetForm()
         {
+            //
             Id = 0;
-            CoId = 0;
-            Fid = 0;
+            collectorId = 0;
+            fundId = 0;
             approved = 0;
             status = string.Empty;
             flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => ((byte)r.Tag == 1) ? r.Checked = true : r.Checked = false);
@@ -137,10 +126,13 @@ namespace AccountingSystem.Views.Reports.RCD
             try
             {
                 var rcdRepository = Factory.CollectorReportPaymentRepository();
+
                 var dtrcd = rcdRepository.GetRecords(Id);
+
                 HelperLoadRecords.RCDDatagridView(dtrcd, dgvpayments);
 
-                txttotal.Text = String.Format("{0:N2}",rcdRepository.SumRecords(Id));
+                txttotal.Text = rcdRepository.SumRecords(Id).ToString("N2");
+
                 if(dtrcd.Rows.Count > 0)
                 {
                     data.Clear();
@@ -179,22 +171,16 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnadd_Click(object sender, EventArgs e)
         {
-            if(cmbcollector.SelectedIndex == -1)
+            collectorId = Convert.ToInt32(cmbcollector.SelectedValue);
+
+            if (collectorId == 0 || fundId == 0)
             {
-                Helper.MessageBoxError("Please select Collector!");
-                cmbcollector.Focus();
-               
-            }
-            else if(Fid == 0)
-            {
-                Helper.MessageBoxError("Please select Fund!");
-                flowLayoutPanelFunds.Focus();
-            }
-            else
-            {
-                _ = new frmGenerateRCD(this, Convert.ToInt16(cmbcollector.SelectedValue), Fid, data).ShowDialog();
+                Helper.MessageBoxError("Please select collector and fund.");
+                return;
             }
             
+            _ = new frmGenerateRCD(this, collectorId, fundId, data).ShowDialog();
+           
         }
        
 
@@ -280,5 +266,10 @@ namespace AccountingSystem.Views.Reports.RCD
             
         }
 
+        private void cmbcollector_SelectedValueChanged(object sender, EventArgs e)
+        {
+            collectorId = Convert.ToInt32(cmbcollector.SelectedValue);
+            MessageBox.Show("Test "+ collectorId);
+        }
     }
 }

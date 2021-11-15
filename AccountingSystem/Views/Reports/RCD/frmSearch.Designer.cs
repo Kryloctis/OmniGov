@@ -39,6 +39,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSelect = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgrcd)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -50,11 +51,12 @@ namespace AccountingSystem.Views.Reports.RCD
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgrcd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgrcd.Location = new System.Drawing.Point(12, 55);
+            this.dgrcd.Location = new System.Drawing.Point(10, 41);
+            this.dgrcd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgrcd.Name = "dgrcd";
             this.dgrcd.RowHeadersWidth = 51;
             this.dgrcd.RowTemplate.Height = 29;
-            this.dgrcd.Size = new System.Drawing.Size(1140, 513);
+            this.dgrcd.Size = new System.Drawing.Size(730, 375);
             this.dgrcd.TabIndex = 17;
             this.dgrcd.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrcd_CellDoubleClick);
             this.dgrcd.SelectionChanged += new System.EventHandler(this.dgrcd_SelectionChanged);
@@ -65,23 +67,25 @@ namespace AccountingSystem.Views.Reports.RCD
             this.flowLayoutPanel1.Controls.Add(this.cmbstatus);
             this.flowLayoutPanel1.Controls.Add(this.label2);
             this.flowLayoutPanel1.Controls.Add(this.cmbfunds);
+            this.flowLayoutPanel1.Controls.Add(this.label3);
             this.flowLayoutPanel1.Controls.Add(this.txtsearch);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(8);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1164, 49);
+            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(751, 37);
             this.flowLayoutPanel1.TabIndex = 18;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 8);
+            this.label1.Location = new System.Drawing.Point(10, 6);
             this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(5);
-            this.label1.Size = new System.Drawing.Size(66, 30);
+            this.label1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.label1.Size = new System.Drawing.Size(47, 23);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Status :";
+            this.label1.Text = "Status";
             // 
             // cmbstatus
             // 
@@ -92,38 +96,40 @@ namespace AccountingSystem.Views.Reports.RCD
             "Disapproved",
             "Pending",
             "Cancelled"});
-            this.cmbstatus.Location = new System.Drawing.Point(83, 11);
+            this.cmbstatus.Location = new System.Drawing.Point(63, 8);
+            this.cmbstatus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbstatus.Name = "cmbstatus";
-            this.cmbstatus.Size = new System.Drawing.Size(139, 28);
+            this.cmbstatus.Size = new System.Drawing.Size(185, 23);
             this.cmbstatus.TabIndex = 1;
             this.cmbstatus.SelectionChangeCommitted += new System.EventHandler(this.cmbstatus_SelectionChangeCommitted);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(228, 8);
+            this.label2.Location = new System.Drawing.Point(254, 6);
             this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(5);
-            this.label2.Size = new System.Drawing.Size(64, 30);
+            this.label2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.label2.Size = new System.Drawing.Size(47, 23);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Funds :";
+            this.label2.Text = "Funds";
             // 
             // cmbfunds
             // 
             this.cmbfunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfunds.FormattingEnabled = true;
-            this.cmbfunds.Location = new System.Drawing.Point(298, 11);
+            this.cmbfunds.Location = new System.Drawing.Point(307, 8);
+            this.cmbfunds.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbfunds.Name = "cmbfunds";
-            this.cmbfunds.Size = new System.Drawing.Size(174, 28);
+            this.cmbfunds.Size = new System.Drawing.Size(185, 23);
             this.cmbfunds.TabIndex = 2;
             this.cmbfunds.SelectionChangeCommitted += new System.EventHandler(this.cmbfunds_SelectionChangeCommitted);
             // 
             // txtsearch
             // 
-            this.txtsearch.Location = new System.Drawing.Point(478, 11);
+            this.txtsearch.Location = new System.Drawing.Point(554, 8);
+            this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.PlaceholderText = "Search";
-            this.txtsearch.Size = new System.Drawing.Size(351, 27);
+            this.txtsearch.Size = new System.Drawing.Size(185, 23);
             this.txtsearch.TabIndex = 6;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
@@ -133,19 +139,21 @@ namespace AccountingSystem.Views.Reports.RCD
             this.flowLayoutPanel2.Controls.Add(this.btnSelect);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 589);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 420);
+            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(5);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(1164, 46);
+            this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(751, 34);
             this.flowLayoutPanel2.TabIndex = 19;
             // 
             // btnCancel
             // 
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(1057, 8);
+            this.btnCancel.Location = new System.Drawing.Point(658, 6);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(94, 29);
+            this.btnCancel.Size = new System.Drawing.Size(82, 22);
             this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -154,24 +162,36 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             this.btnSelect.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSelect.Enabled = false;
-            this.btnSelect.Location = new System.Drawing.Point(957, 8);
+            this.btnSelect.Location = new System.Drawing.Point(570, 6);
+            this.btnSelect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(94, 29);
+            this.btnSelect.Size = new System.Drawing.Size(82, 22);
             this.btnSelect.TabIndex = 1;
             this.btnSelect.Text = "Select";
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(498, 6);
+            this.label3.Name = "label3";
+            this.label3.Padding = new System.Windows.Forms.Padding(4);
+            this.label3.Size = new System.Drawing.Size(50, 23);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Search";
+            // 
             // frmSearch
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1164, 635);
+            this.ClientSize = new System.Drawing.Size(751, 454);
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.dgrcd);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmSearch";
@@ -199,5 +219,6 @@ namespace AccountingSystem.Views.Reports.RCD
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbfunds;
         private System.Windows.Forms.TextBox txtsearch;
+        private System.Windows.Forms.Label label3;
     }
 }

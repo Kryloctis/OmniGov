@@ -176,5 +176,10 @@ namespace AccountingSystem.Views.Reports.RCD
         {
 
         }
+
+        private void dgPreview_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
