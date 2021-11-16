@@ -82,6 +82,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(14, 388);
             this.label4.Name = "label4";
@@ -118,7 +119,6 @@ namespace AccountingSystem.Views.Reports.RCD
             // btnGenerate
             // 
             this.btnGenerate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGenerate.Enabled = false;
             this.btnGenerate.Location = new System.Drawing.Point(602, 2);
             this.btnGenerate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnGenerate.Name = "btnGenerate";
@@ -165,6 +165,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // txttotalamount
             // 
+            this.txttotalamount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txttotalamount.Location = new System.Drawing.Point(63, 386);
             this.txttotalamount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txttotalamount.Name = "txttotalamount";
@@ -190,8 +191,6 @@ namespace AccountingSystem.Views.Reports.RCD
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "frmGenerateRCD";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
