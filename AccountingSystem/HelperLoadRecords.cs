@@ -586,6 +586,7 @@ namespace AccountingSystem
             datagrid.Columns["fund_id"].Visible = false;
             datagrid.Columns["accountable_form_id"].Visible = false;
             datagrid.Columns["abstract_of_general_collection_id"].Visible = false;
+            datagrid.Columns["payment_date"].Visible = false;
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["created_by"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
@@ -599,8 +600,8 @@ namespace AccountingSystem
             datagrid.Columns["quantity"].Width = 60;
 
             datagrid.Columns["amount"].Resizable = DataGridViewTriState.False;
-            datagrid.Columns["amount"].Width = 145;
-            datagrid.Columns["amount"].MinimumWidth = 145;
+            datagrid.Columns["amount"].Width = 80;
+            datagrid.Columns["amount"].MinimumWidth = 80;
             datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
@@ -608,6 +609,7 @@ namespace AccountingSystem
 
             foreach (DataRow drPaymentCollection in dataTable.Rows)
             {
+                var abstractOfGeneralCollection = $"{drPaymentCollection["account_code"]} - {drPaymentCollection["ledger_name"]}";
                 datagrid.Rows.Add(new object[]
                 {
                     drPaymentCollection["id"],
@@ -616,7 +618,7 @@ namespace AccountingSystem
                     drPaymentCollection["accountable_form_id"],
                     drPaymentCollection["accountable_forms"],
                     drPaymentCollection["general_ledger_accounts_id"],
-                    drPaymentCollection["ledger_name"],
+                    abstractOfGeneralCollection,
                     drPaymentCollection["payee"],
                     drPaymentCollection["receipt_no"],
                     drPaymentCollection["quantity"],

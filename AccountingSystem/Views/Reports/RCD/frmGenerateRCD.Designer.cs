@@ -50,7 +50,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // dtfrom
             // 
             this.dtfrom.CustomFormat = "";
-            this.dtfrom.Location = new System.Drawing.Point(63, 8);
+            this.dtfrom.Location = new System.Drawing.Point(48, 8);
             this.dtfrom.Name = "dtfrom";
             this.dtfrom.Size = new System.Drawing.Size(226, 23);
             this.dtfrom.TabIndex = 20;
@@ -75,7 +75,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.dgPreview.Name = "dgPreview";
             this.dgPreview.RowHeadersWidth = 51;
             this.dgPreview.RowTemplate.Height = 29;
-            this.dgPreview.Size = new System.Drawing.Size(758, 346);
+            this.dgPreview.Size = new System.Drawing.Size(904, 411);
             this.dgPreview.TabIndex = 25;
             this.dgPreview.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgPreview_CellContentClick);
             this.dgPreview.SelectionChanged += new System.EventHandler(this.dgPreview_SelectionChanged);
@@ -84,7 +84,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 388);
+            this.label4.Location = new System.Drawing.Point(10, 454);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(32, 15);
             this.label4.TabIndex = 26;
@@ -96,17 +96,17 @@ namespace AccountingSystem.Views.Reports.RCD
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnGenerate);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 416);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 481);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(779, 27);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(925, 27);
             this.flowLayoutPanel1.TabIndex = 27;
             // 
             // btnCancel
             // 
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancel.Location = new System.Drawing.Point(692, 2);
+            this.btnCancel.Location = new System.Drawing.Point(838, 2);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -119,7 +119,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // btnGenerate
             // 
             this.btnGenerate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGenerate.Location = new System.Drawing.Point(602, 2);
+            this.btnGenerate.Location = new System.Drawing.Point(748, 2);
             this.btnGenerate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -132,11 +132,11 @@ namespace AccountingSystem.Views.Reports.RCD
             // btnPreview
             // 
             this.btnPreview.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPreview.Location = new System.Drawing.Point(670, 8);
+            this.btnPreview.Location = new System.Drawing.Point(544, 9);
             this.btnPreview.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnPreview.Size = new System.Drawing.Size(97, 22);
+            this.btnPreview.Size = new System.Drawing.Size(74, 22);
             this.btnPreview.TabIndex = 30;
             this.btnPreview.Text = "Load";
             this.btnPreview.UseVisualStyleBackColor = true;
@@ -149,7 +149,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(337, 12);
+            this.label3.Location = new System.Drawing.Point(288, 12);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(22, 15);
             this.label3.TabIndex = 31;
@@ -157,7 +157,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // dtto
             // 
-            this.dtto.Location = new System.Drawing.Point(370, 8);
+            this.dtto.Location = new System.Drawing.Point(312, 8);
             this.dtto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtto.Name = "dtto";
             this.dtto.Size = new System.Drawing.Size(226, 23);
@@ -166,7 +166,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // txttotalamount
             // 
             this.txttotalamount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txttotalamount.Location = new System.Drawing.Point(63, 386);
+            this.txttotalamount.Location = new System.Drawing.Point(48, 451);
             this.txttotalamount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txttotalamount.Name = "txttotalamount";
             this.txttotalamount.ReadOnly = true;
@@ -179,7 +179,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(779, 443);
+            this.ClientSize = new System.Drawing.Size(925, 508);
             this.Controls.Add(this.txttotalamount);
             this.Controls.Add(this.dtto);
             this.Controls.Add(this.label3);
@@ -189,12 +189,13 @@ namespace AccountingSystem.Views.Reports.RCD
             this.Controls.Add(this.dgPreview);
             this.Controls.Add(this.dtfrom);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmGenerateRCD";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Collection";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmGenerateRCD_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgPreview)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
