@@ -133,7 +133,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             }
             else
             {
-                frmlinkuser fuser = new frmlinkuser();
+                frmlinkuser fuser = new();
                 fuser.table = "collector";
                 if (fuser.ShowDialog() == DialogResult.OK)
                 {

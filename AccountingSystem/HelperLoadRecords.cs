@@ -996,6 +996,8 @@ namespace AccountingSystem
 
         internal static void UsersDatagridView(DataTable dataTable, DataGridView datagrid)
         {
+
+            //a.id, a.first_name, a.mid_initial, a.last_name, a.username, b.role_name, a.created_at, a.updated_at
             datagrid.DataSource = dataTable;
             datagrid.Columns[0].Visible = false;
             datagrid.Columns[1].Visible = false;
