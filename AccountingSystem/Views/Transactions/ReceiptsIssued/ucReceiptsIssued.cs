@@ -166,13 +166,14 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             if (!istickets)
             {
                 e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtquantity, "Quantity!");
-               
             }
             else
             {
-                if (int.Parse(txtquantity.Text.Trim()) > maxtickets)
+                var quantityToIssue = int.Parse(txtquantity.Text.Trim());
+
+                if (quantityToIssue > maxtickets)
                 {
-                    errorProvider.SetError(txtquantity, "Invalid Quantity Number!");
+                    errorProvider.SetError(txtquantity, "Invalid Quantity Number.");
                     e.Cancel = true;
                 }
             }
@@ -211,30 +212,38 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             txtquantity.Text = ((to - from) + 1).ToString();
         }
 
-        internal string NextTicket(int id)
+        internal string NextTicket(int receiptId)
         {
             string data = string.Empty;
             try
             {
-                var riRepository = Factory.ReceiptsRepository();
-                var dtri = riRepository.NextTicket(id);
+                var receiptsRepository = Factory.ReceiptsRepository();
+                var receiptIssued = receiptsRepository.NextTicket(receiptId);
+
                 int last = 0;
-                if(dtri.Rows.Count > 0)
+                int rowCount = receiptIssued.Rows.Count;
+
+                if (rowCount > 0)
                 {
-                    for (int i = 0; i < dtri.Rows.Count; i++)
+                    for (int i = 0; i < rowCount; i++)
                     {
-                        last = dtri.Rows[i]["issuelast"].Equals(DBNull.Value) ? 0 : int.Parse(dtri.Rows[i]["issuelast"].ToString());
-                        maxtickets = dtri.Rows[i]["quantity"].Equals(DBNull.Value) ? 0 : int.Parse(dtri.Rows[i]["quantity"].ToString());
+                        last = receiptIssued.Rows[i]["issuelast"].Equals(DBNull.Value) ? 0 : int.Parse(receiptIssued.Rows[i]["issuelast"].ToString());
+
+                        maxtickets = receiptIssued.Rows[i]["quantity"].Equals(DBNull.Value) ? 0 : int.Parse(receiptIssued.Rows[i]["quantity"].ToString());
                     }
-           
+
                     data = (maxtickets - last).ToString();
                 }
                 else
                 {
                     data = 1.ToString();
                 }
+
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) { 
+                Helper.MessageBoxError(ex.Message); 
+            }
+
             return data;
         }
         internal string NextReceipt(int id)
@@ -297,6 +306,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 DataRowView item = cmbreceipt.SelectedItem as DataRowView;
                 if(item != null)
                 {
+                    var receiptId = int.Parse(item[0].ToString());
+
                     if (item[10].ToString().Contains("Tickets"))
                     {
                         istickets = true;
@@ -306,7 +317,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
                         txtfrom.Text = "0";
                         txtto.Text = "0";
-                        txtquantity.Text = NextTicket(int.Parse(item[0].ToString()));
+                        txtquantity.Text = NextTicket(receiptId);
                     }
                     else
                     {

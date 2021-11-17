@@ -29,12 +29,13 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
-                var riRepository = Factory.ReceiptsIssuedRepository();
-                var dtri = riRepository.GetRecords();
-                HelperLoadRecords.ReceiptsIssuedDatagridView(dtri,dgissue);
+                var receiptIssuedRepository = Factory.ReceiptsIssuedRepository();
+                var receiptIssuedDt = receiptIssuedRepository.GetRecords();
+
+                HelperLoadRecords.ReceiptsIssuedDatagridView(receiptIssuedDt, dgissue);
 
                 lblRecordCount.Text = dgissue.Rows.Count.ToString();
-            }
+            }   
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
@@ -44,9 +45,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             {
                 try
                 {
-                    var riRepository = Factory.ReceiptsIssuedRepository();
-                    var dtri = riRepository.GetRecordsBySearch(txtsearch.Text.Trim());
-                    HelperLoadRecords.ReceiptsIssuedDatagridView(dtri, dgissue);
+                    var receiptIssuedRepository = Factory.ReceiptsIssuedRepository();
+                    var receiptIssuedDt = receiptIssuedRepository.GetRecordsBySearch(txtsearch.Text.Trim());
+
+                    HelperLoadRecords.ReceiptsIssuedDatagridView(receiptIssuedDt, dgissue);
 
                     lblRecordCount.Text = dgissue.Rows.Count.ToString();
                 }
@@ -85,7 +87,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmReceiptsIssuedAdd(this,0).ShowDialog();
+            _ = new frmReceiptsIssuedAdd(this, 0).ShowDialog();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

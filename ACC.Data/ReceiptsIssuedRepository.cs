@@ -250,15 +250,17 @@ namespace ACC.Data
               
                 var parameters = new object[][]
                 {
-                    new object[] { "@receipts_id", DbType.Int32, entity.RId },
+                    new object[] { "@receipts_id", DbType.Int32, entity.ReceiptId },
                     new object[] { "@issuefrom", DbType.Int32, entity.IssuedFrom },
                     new object[] { "@issueto", DbType.Int32, entity.IssuedTo }
                 };
 
-                string query = $"SELECT id FROM {tableName} WHERE receipts_id=@receipts_id AND issuefrom=@issuefrom AND issueto=@issueto AND IF(IFNULL(is_returned,0)<1,false,true)=false";
+               string query = $"SELECT id FROM {tableName} WHERE receipts_id=@receipts_id AND issuefrom=@issuefrom AND issueto=@issueto AND IF(IFNULL(is_returned,0)<1,false,true)=false";
+
+
+
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
-                // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
             }
             catch (Exception)
@@ -322,8 +324,8 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@receipts_id", DbType.Int32, entity.RId},
-                    new object[] { "@collecting_officers_id", DbType.Int32, entity.CoId},
+                    new object[] { "@receipts_id", DbType.Int32, entity.ReceiptId},
+                    new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectorId},
                     new object[] { "@date_issued", DbType.Date, entity.Issued},
                     new object[] { "@issuefrom", DbType.Int32, entity.IssuedFrom},
                     new object[] { "@issueto", DbType.Int32, entity.IssuedTo},
@@ -346,8 +348,8 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@id", DbType.Int32, entity.Id},
-                    new object[] { "@receipts_id", DbType.Int32, entity.RId},
-                    new object[] { "@collecting_officers_id", DbType.Int32, entity.CoId},
+                    new object[] { "@receipts_id", DbType.Int32, entity.ReceiptId},
+                    new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectorId},
                     new object[] { "@date_issued", DbType.Date, entity.Issued},
                     new object[] { "@issuefrom", DbType.Int32, entity.IssuedFrom},
                     new object[] { "@issueto", DbType.Int32, entity.IssuedTo},

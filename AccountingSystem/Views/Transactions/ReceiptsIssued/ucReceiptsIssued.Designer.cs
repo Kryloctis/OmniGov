@@ -193,7 +193,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucReceiptsIssued";
             this.Size = new System.Drawing.Size(522, 194);
-            this.Load += new System.EventHandler(this.ucReceipts_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
