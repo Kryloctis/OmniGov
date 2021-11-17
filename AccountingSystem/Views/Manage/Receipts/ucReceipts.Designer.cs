@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Manage.Receipts
 {
-    partial class ucForms
+    partial class ucReceipts
     {
         /// <summary> 
         /// Required designer variable.

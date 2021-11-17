@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Manage.Receipts
 {
-    partial class frmAccForms
+    partial class frmReceipts
     {
         /// <summary>
         /// Required designer variable.

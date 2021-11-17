@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Manage.Receipts
 {
-    partial class frmAccFromEdit
+    partial class frmReceiptsEdit
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucForms1 = new AccountingSystem.Views.Manage.Receipts.ucForms();
+            this.ucForms1 = new AccountingSystem.Views.Manage.Receipts.ucReceipts();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -113,6 +113,6 @@ namespace AccountingSystem.Views.Manage.Receipts
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        internal ucForms ucForms1;
+        internal ucReceipts ucForms1;
     }
 }

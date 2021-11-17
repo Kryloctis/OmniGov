@@ -47,17 +47,17 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 
         private void btnIssueReceipt_Click(object sender, EventArgs e)
         {
-            _ = new frmReceipts().ShowDialog();
+            _ = new Transactions.ReceiptsIssued.frmReceipts().ShowDialog();
         }
 
         private void btnReceipts_Click(object sender, EventArgs e)
         {
-            _ = new frmAccForms().ShowDialog();
+            _ = new Manage.Receipts.frmReceipts().ShowDialog();
         }
 
         private void toolStripDropDownButton1_Click(object sender, EventArgs e)
         {
-            _ = new frmReceipts().ShowDialog();
+            _ = new Transactions.ReceiptsIssued.frmReceipts().ShowDialog();
         }
 
         private void ucTreasuryDashboard_Load(object sender, EventArgs e)

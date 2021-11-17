@@ -11,20 +11,50 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Receipts
 {
-    public partial class frmAccFormsAdd : Form
+    public partial class frmReceiptsEdit : Form
     {
-        private frmAccForms frmaf;
+        private frmReceipts frmaf;
         private int UserId = 0;
-        public frmAccFormsAdd(frmAccForms _frmaf)
+        public frmReceiptsEdit(frmReceipts _frmaf,int id)
         {
             InitializeComponent();
             frmaf = _frmaf;
+            ucForms1.Id = id;
             UserId = Helper.UserId;
         }
 
-        private void frmAccFormsAdd_Load(object sender, EventArgs e)
+        private void frmAccFromEdit_Load(object sender, EventArgs e)
         {
             ucForms1.LoadForms();
+            LoadSelectedValue();
+            
+        }
+
+        private void LoadSelectedValue()
+        {
+            try
+            {
+                var uc = ucForms1;
+                var rcRepository = Factory.ReceiptsRepository();
+                var rcdata = rcRepository.GetRecordByID(uc.Id);
+                uc.cmbforms.SelectedValue = rcdata["accountable_forms_id"];
+                uc.txtfrom.Text = rcdata["receiptsfrom"];
+                uc.txtto.Text = rcdata["receiptsto"];
+                uc.dtpreceived.Value = Convert.ToDateTime(rcdata["received_date"]);
+                uc.txtquantity.Text = rcdata["quantity"];
+                uc.txtremarks.Text = rcdata["remarks"];
+                if (rcRepository.ReceiptsIssued(uc.Id))
+                {
+                    uc.cmbforms.Enabled = false;
+                    uc.txtfrom.Enabled = false;
+                    uc.txtto.Enabled = false;
+                }
+                uc.cmbforms.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private bool SaveData()
@@ -37,8 +67,10 @@ namespace AccountingSystem.Views.Manage.Receipts
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
+
                 var rModel = new ReceiptsModel()
                 {
+                    Id = uc.Id,
                     AccId = int.Parse(uc.cmbforms.SelectedValue.ToString()),
                     Rfrom = int.Parse(uc.txtfrom.Text.Trim()),
                     Rto = int.Parse(uc.txtto.Text.Trim()),
@@ -50,13 +82,6 @@ namespace AccountingSystem.Views.Manage.Receipts
                 };
 
                 var rcRepository = Factory.ReceiptsRepository();
-                /* if (rcRepository.ReceiptExist(int.Parse(uc.cmbforms.SelectedValue), int.Parse(uc.txtfrom.Text.Trim()), int.Parse(uc.txtto.Text.Trim())))
-                 {
-                     Helper.MessageBoxError("Receipt already exists!");
-                     uc.cmbforms.Focus();
-                     return false;
-                 }
-                 else */
                 if (!uc.istickets)
                 {
                     if (int.Parse(uc.txtfrom.Text.Trim()) > int.Parse(uc.txtto.Text.Trim()))
@@ -64,21 +89,15 @@ namespace AccountingSystem.Views.Manage.Receipts
                         Helper.MessageBoxError("Invalid Receipt!");
                         return false;
                     }
-                    else
-                    {
-                        return rcRepository.Insert(rModel);
-                    }
+                    else return rcRepository.Update(rModel);
                 }
-                else
-                {
-                    return rcRepository.Insert(rModel);
-                }
+                else return rcRepository.Update(rModel);
+
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
-
             return false;
         }
 
@@ -86,12 +105,9 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             if (SaveData())
             {
-                Helper.MessageBoxSuccess("Receipt has been saved.");
+                Helper.MessageBoxSuccess("Receipt has been updated.");
                 frmaf.LoadRecords();
-                ucForms1.ResetForm();
             }
         }
-
-     
     }
 }
