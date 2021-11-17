@@ -485,6 +485,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             Helper.ClearErrorNumericUpDown(errorProvider, txtCashTicketQuantity);
         }
 
-
+        private void cmbAccount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && !string.IsNullOrEmpty(cmbAccount.Text) && cmbAccount.Focused)
+            {
+                LoadAccounts();
+                cmbAccount.DroppedDown = true;
+            }
+        }
     }
 }
