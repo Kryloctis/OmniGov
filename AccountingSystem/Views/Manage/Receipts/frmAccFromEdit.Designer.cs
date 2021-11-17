@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 185);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 225);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -82,7 +82,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.ucForms1.Location = new System.Drawing.Point(0, 0);
             this.ucForms1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucForms1.Name = "ucForms1";
-            this.ucForms1.Size = new System.Drawing.Size(528, 185);
+            this.ucForms1.Size = new System.Drawing.Size(528, 225);
             this.ucForms1.TabIndex = 5;
             // 
             // frmAccFromEdit
@@ -92,7 +92,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(528, 212);
+            this.ClientSize = new System.Drawing.Size(528, 252);
             this.Controls.Add(this.ucForms1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
