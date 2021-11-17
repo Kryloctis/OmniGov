@@ -47,7 +47,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 
         private void btnIssueReceipt_Click(object sender, EventArgs e)
         {
-            _ = new Transactions.ReceiptsIssued.frmReceipts().ShowDialog();
+            _ = new Transactions.ReceiptsIssued.frmReceiptsIssued().ShowDialog();
         }
 
         private void btnReceipts_Click(object sender, EventArgs e)
@@ -57,7 +57,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 
         private void toolStripDropDownButton1_Click(object sender, EventArgs e)
         {
-            _ = new Transactions.ReceiptsIssued.frmReceipts().ShowDialog();
+            _ = new Transactions.ReceiptsIssued.frmReceiptsIssued().ShowDialog();
         }
 
         private void ucTreasuryDashboard_Load(object sender, EventArgs e)

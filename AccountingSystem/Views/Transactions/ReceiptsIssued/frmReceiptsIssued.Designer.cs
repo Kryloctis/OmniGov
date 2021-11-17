@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 {
-    partial class frmReceipts
+    partial class frmReceiptsIssued
     {
         /// <summary>
         /// Required designer variable.

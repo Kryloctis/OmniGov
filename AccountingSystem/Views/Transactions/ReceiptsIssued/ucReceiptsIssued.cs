@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 {
-    public partial class ucReceipts : UserControl
+    public partial class ucReceiptsIssued : UserControl
     {
         internal int Id = 0;
         internal int CoId = 0;
@@ -20,7 +20,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         internal int maxreceipt = 0;
         internal int maxtickets = 0;
         internal bool istickets = false;
-        public ucReceipts()
+        public ucReceiptsIssued()
         {
             InitializeComponent();
         }
