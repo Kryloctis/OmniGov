@@ -41,6 +41,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtsearch = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgissue)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -181,11 +182,21 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.txtsearch.TabIndex = 11;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
-            // frmReceipts
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(706, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 15);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Search";
+            // 
+            // frmReceiptsIssued
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1060, 562);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.dgissue);
@@ -193,7 +204,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinimizeBox = false;
-            this.Name = "frmReceipts";
+            this.Name = "frmReceiptsIssued";
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -224,5 +235,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
         private System.Windows.Forms.TextBox txtsearch;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.Label label1;
     }
 }

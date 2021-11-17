@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 142);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 201);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -81,24 +81,24 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.ucReceipts1.Location = new System.Drawing.Point(0, 0);
             this.ucReceipts1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucReceipts1.Name = "ucReceipts1";
-            this.ucReceipts1.Size = new System.Drawing.Size(518, 142);
+            this.ucReceipts1.Size = new System.Drawing.Size(518, 201);
             this.ucReceipts1.TabIndex = 6;
             // 
-            // frmReceiptsAdd
+            // frmReceiptsIssuedAdd
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(518, 169);
+            this.ClientSize = new System.Drawing.Size(518, 228);
             this.Controls.Add(this.ucReceipts1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmReceiptsAdd";
+            this.Name = "frmReceiptsIssuedAdd";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Issue Receipt Add";
