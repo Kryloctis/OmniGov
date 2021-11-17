@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             txtto.Text = string.Empty;
             dtpreceived.Value = DateTime.Now;
             txtquantity.Text = string.Empty;
-            
+            txtremarks.Text = string.Empty;
         }
 
         internal void LoadForms()
