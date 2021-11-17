@@ -13,7 +13,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AccountingSystem.Views.Dashboard.TreasuryDashboard.RCDSummary;
 using AccountingSystem.Views.Reports.PaymentCollection;
 
 namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
@@ -23,12 +22,6 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         public ucTreasuryDashboard()
         {
             InitializeComponent();
-        }
-
-        private void btnGenerateRCD_Click(object sender, EventArgs e)
-        {
-            //_ = new frmRCD().ShowDialog();
-            Helper.createTabPage(tabControl1, new TabPage(), "tabrcd", "RCD Summary", new ucRCDDashboard());
         }
 
         private void btnBankDeposit_Click(object sender, EventArgs e)
@@ -56,26 +49,18 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             _ = new frmAccForms().ShowDialog();
         }
 
-        private void toolStripDropDownButton1_Click(object sender, EventArgs e)
-        {
-            _ = new frmReceipts().ShowDialog();
-        }
-
         private void ucTreasuryDashboard_Load(object sender, EventArgs e)
         {
-            ButtonAccess();
-        }
-
-        private void ButtonAccess()
-        {
-            var uRepository = Factory.UsersRepository();
-            bool is_collector = uRepository.GetUserRole(Helper.UserId) == "Collecting Officer" ? true : false;
-            btnReportCollections.Visible = is_collector;
         }
 
         private void btnReportCollections_Click(object sender, EventArgs e)
         {
             _ = new frmPCReport().ShowDialog();
+        }
+
+        private void btnGenerateRCD_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
