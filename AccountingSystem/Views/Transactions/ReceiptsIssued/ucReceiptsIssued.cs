@@ -171,6 +171,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             {
                 var quantityToIssue = int.Parse(txtquantity.Text.Trim());
 
+                if (maxtickets == 0) { 
+                    e.Cancel = false;
+                    return;
+                }
+
                 if (quantityToIssue > maxtickets)
                 {
                     errorProvider.SetError(txtquantity, "Invalid Quantity Number.");

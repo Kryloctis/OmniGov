@@ -358,7 +358,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
             accountableFormFaceValue = Factory.FaceValueRepository().GetFaceValueByAccountableFormId(idOfSelectedAccountableForm);
 
-            SwitchFields(Convert.ToBoolean(accountableFormFaceValue));
+            SwitchFields();
 
             txtCashTicketQuantity_TextChanged(sender, e);
         }
@@ -444,20 +444,19 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         }
 
 
-        internal void SwitchFields(bool isCashTicket)
+        internal void SwitchFields()
         {
-            this.isCashTicket = isCashTicket;
+            isCashTicket = cmbforms.Text.Contains("Tickets");
 
-            if (this.isCashTicket)
+            if (isCashTicket)
             {
                 tabPaymentType.SelectedTab = tabCashTickets;
-                this.isCashTicket = false;
+                isCashTicket = false;
             }
             else
             {
                 tabPaymentType.SelectedTab = tabNonCashTickets;
-                this.isCashTicket = true;
-
+                isCashTicket = true;
             }
         }
 
