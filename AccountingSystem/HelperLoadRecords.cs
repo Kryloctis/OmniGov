@@ -751,8 +751,8 @@ namespace AccountingSystem
             datagrid.Columns[3].HeaderText = "Face Value";
 
 
-            datagrid.Columns[1].MinimumWidth = 80;
-            datagrid.Columns[1].Width = 80;
+            datagrid.Columns[1].MinimumWidth = 90;
+            datagrid.Columns[1].Width = 90;
 
             datagrid.Columns[2].MinimumWidth = 500;
             datagrid.Columns[2].Width = 500;

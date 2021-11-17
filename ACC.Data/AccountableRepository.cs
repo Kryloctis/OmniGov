@@ -236,7 +236,7 @@ namespace ACC.Data
             {
                 var srchtxt = searchText;
 
-                string query = $"SELECT * FROM {tableName} WHERE acc_form_no  LIKE'%" + srchtxt + "%' OR acc_form_desc  LIKE'%" + srchtxt + "%'";
+                string query = $"SELECT * FROM {viewTableName} WHERE acc_form_no  LIKE'%" + srchtxt + "%' OR acc_form_desc  LIKE'%" + srchtxt + "%'";
 
                 var dtBanks = new DataTable();
                 return _dbGenericCommands.Fill(query, dtBanks);
