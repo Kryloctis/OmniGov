@@ -409,7 +409,7 @@ namespace ACC.Data
                        $"others_fpp_id <=> @others_fpp_id AND " +
                        $"allotment_class_id = @allotment_class_id "+
                        $"AND date_entry <= @date_entry " +
-                       $"AND year = @year " +
+                       $"AND year = @year AND funds_id = @funds_id " +
                        $"GROUP BY general_ledger_accounts_id";
 
                 var dataTable = new DataTable();
@@ -431,7 +431,7 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@fpp_id", DbType.Int32, fppId },
+                    new object[] { "@fpp_id", DbType.String, fppId },
                     new object[] { "@allotment_class_id", DbType.Int32, allotment_classes_id },
                     new object[] { "@funds_id", DbType.Int32, funds_id },
                     new object[] { "@year",DbType.Int16, year },
