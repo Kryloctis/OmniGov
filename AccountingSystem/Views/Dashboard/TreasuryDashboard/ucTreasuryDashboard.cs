@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AccountingSystem.Views.Reports.PaymentCollection;
+using AccountingSystem.Views.Reports.CollectorsRCD;
 
 namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 {
@@ -60,7 +61,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 
         private void btnReportOfCollections_Click(object sender, EventArgs e)
         {
-
+            _ = new CollectorsRCD().ShowDialog();
         }
     }
 }

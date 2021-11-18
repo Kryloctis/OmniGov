@@ -15,6 +15,12 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         public CollectorsRCD()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
+        }
+
+        private void CollectorsRCD_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

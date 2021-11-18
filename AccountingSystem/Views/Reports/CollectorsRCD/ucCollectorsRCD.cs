@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         private void ucRCDCollector_Load(object sender, EventArgs e)
         {
-
+            LoadFunds();
         }
 
         internal void LoadFunds()
