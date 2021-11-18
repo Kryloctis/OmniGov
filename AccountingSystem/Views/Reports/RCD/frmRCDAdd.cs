@@ -20,6 +20,10 @@ namespace AccountingSystem.Views.Reports.RCD
             InitializeComponent();
             _frmrcd = frmrcd;
         }
+        public frmRCDAdd()
+        {
+            InitializeComponent();
+        }
 
         private void frmRCDAdd_Load(object sender, EventArgs e)
         {            

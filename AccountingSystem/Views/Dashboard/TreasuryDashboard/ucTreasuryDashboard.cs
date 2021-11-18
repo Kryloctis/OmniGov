@@ -53,12 +53,12 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         {
         }
 
-        private void btnReportCollections_Click(object sender, EventArgs e)
+        private void btnGenerateRCD_Click(object sender, EventArgs e)
         {
-            _ = new frmPCReport().ShowDialog();
+            _ = new frmRCDAdd().ShowDialog();
         }
 
-        private void btnGenerateRCD_Click(object sender, EventArgs e)
+        private void btnReportOfCollections_Click(object sender, EventArgs e)
         {
 
         }
