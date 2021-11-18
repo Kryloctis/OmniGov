@@ -73,7 +73,7 @@ namespace AccountingSystem.Views.Reports.RCD
                         ReportNo = uc.txtreport.Text.Trim(),
                         Date = Convert.ToDateTime(uc.dtdate.Value),
                         Approved = uc.approved,
-                        Fid = uc.Fid,
+                        Fid = uc.fundId,
                         status = uc.status
                     };
                     var rcdRepository = Factory.CollectorReportRepository();

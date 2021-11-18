@@ -419,7 +419,7 @@ namespace AccountingSystem
 
         private void menureceipts_Click(object sender, EventArgs e)
         {
-            _ = new frmAccForms().ShowDialog();
+            _ = new frmReceipts().ShowDialog();
         }
 
         private void menucashbook_Click(object sender, EventArgs e)

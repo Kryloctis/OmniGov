@@ -77,8 +77,8 @@ namespace ACC.Data
 
                     record.Add("id", reader.Rows[0]["id"].ToString());
                     record.Add("accountable_forms_id", reader.Rows[0]["accountable_forms_id"].ToString());
-                    record.Add("facedate", reader.Rows[0]["facedate"].ToString());
-                    record.Add("facevalue", reader.Rows[0]["facevalue"].ToString());
+                    record.Add("date", reader.Rows[0]["date"].ToString());
+                    record.Add("amount", reader.Rows[0]["amount"].ToString());
                 }
             }
             catch (Exception)
@@ -123,7 +123,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName} WHERE facedate LIKE '%{searchText}%' OR facevalue LIKE '%{searchText}%' ORDER BY id DESC";
+                string query = $"SELECT * FROM {tableName} WHERE date LIKE '%{searchText}%' OR amount LIKE '%{searchText}%' ORDER BY id DESC";
 
                 var dtBanks = new DataTable();
                 return _dbGenericCommands.Fill(query, dtBanks);
@@ -146,11 +146,11 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@accountable_forms_id", DbType.String, entity.accountable_forms_id},
-                    new object[] { "@facedate", DbType.DateTime, entity.facedate},
-                    new object[] { "@facevalue", DbType.Decimal, entity.facevalue},
+                    new object[] { "@date", DbType.DateTime, entity.facedate},
+                    new object[] { "@amount", DbType.Decimal, entity.facevalue},
                 };
 
-                string query = $"INSERT INTO {tableName} (accountable_forms_id,facedate,facevalue) VALUES (@accountable_forms_id,@facedate,@facevalue)";
+                string query = $"INSERT INTO {tableName} (accountable_forms_id,date,amount) VALUES (@accountable_forms_id, @date, @amount)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -167,11 +167,11 @@ namespace ACC.Data
                 {
                     new object[] { "@id", DbType.Int32, entity.id},
                     new object[] { "@accountable_forms_id", DbType.String, entity.accountable_forms_id},
-                    new object[] { "@faceyear", DbType.DateTime, entity.facedate},
-                    new object[] { "@facevalue", DbType.Decimal, entity.facevalue},
+                    new object[] { "@date", DbType.DateTime, entity.facedate},
+                    new object[] { "@amount", DbType.Decimal, entity.facevalue},
                 };
 
-                string query = $"UPDATE {tableName} SET accountable_forms_id=@accountable_forms_id,facedate=@facedate,facevalue=@facevalue WHERE id = @id";
+                string query = $"UPDATE {tableName} SET accountable_forms_id=@accountable_forms_id, date=@date, amount=@amount WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)

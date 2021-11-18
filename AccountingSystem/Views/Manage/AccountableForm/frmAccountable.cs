@@ -18,7 +18,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             InitializeComponent();
             WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgAccform);
+            Helper.DatagridFullRowSelectStyle(dgAccform, true);
         }
         internal void LoadRecords()
         {
@@ -120,7 +120,9 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             {
                 int Id = int.Parse(dgAccform.SelectedCells[0].Value.ToString());
                 _ = new frmFaceValue(Id).ShowDialog();
+                LoadRecords();
             }
         }
+
     }
 }

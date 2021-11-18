@@ -15,8 +15,8 @@ namespace AccountingSystem.Views.Reports.RCD
     {
         private ucRCD _ucrcd;
         private Dictionary<int, string> data;
-        private int CoId = 0;
-        private int FId = 0;
+        private int collectorId = 0;
+        private int fundId = 0;
         private DataTable list;
         public frmGenerateRCD(ucRCD ucrcd,int Coid,int Fid, Dictionary<int,string> _data)
         {
@@ -24,8 +24,8 @@ namespace AccountingSystem.Views.Reports.RCD
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgPreview, true);
             _ucrcd = ucrcd;
-            CoId = Coid;
-            FId = Fid;
+            collectorId = Coid;
+            fundId = Fid;
             data = _data;
         } 
 
@@ -33,26 +33,30 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
-                if(data.Count > 0)
-                {
-                    string id = string.Join(",", data.Select(x => String.Format("'{0}'", x.Key)).ToArray());
-                    var pcRepository = Factory.PaymentCollectionRepository();
-                    var dateFrom = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtfrom.Value));
-                    var dateTo = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtto.Value));
-                    list = pcRepository.GetRecordByLedger(CoId, FId,dateFrom, dateTo,id);
-                    HelperLoadRecords.PaymentDatagridView(list, dgPreview);
+                string id = string.Join(",", data.Select(x => String.Format("'{0}'", x.Key)).ToArray());
 
-                    txttotalamount.Text = String.Format("{0:N2}",pcRepository.SumRecords(CoId, FId,dateFrom, dateTo,id));
+                if (data.Count > 0)
+                {
+                    //var pcRepository = Factory.PaymentCollectionRepository();
+
+                    //var dateFrom = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtfrom.Value));
+                    //var dateTo = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtto.Value));
+
+                    //list = pcRepository.GetRecordByLedger(collectorId, fundId, dateFrom, dateTo, id);
+                    //HelperLoadRecords.PaymentDatagridView(list, dgPreview);
+
+                    //txttotalamount.Text = String.Format("{0:N2}",pcRepository.SumRecords(collectorId, fundId, dateFrom, dateTo,id));
                 }
                 else
-                {                    
+                {
                     var pcRepository = Factory.PaymentCollectionRepository();
                     var dateFrom = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtfrom.Value));
                     var dateTo = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtto.Value));
-                    list = pcRepository.GetRecordByLedger(CoId, FId, dateFrom, dateTo);
-                    HelperLoadRecords.PaymentDatagridView(list, dgPreview);
 
-                    txttotalamount.Text = String.Format("{0:N2}", pcRepository.SumRecords(CoId, FId, dateFrom, dateTo));
+                    list = pcRepository.GetRecordByLedger(collectorId, fundId, dateFrom, dateTo, id);
+                    HelperLoadRecords.CollectionDataGridView(list, dgPreview);
+
+                    txttotalamount.Text = String.Format("{0:N2}", pcRepository.SumRecords(collectorId, fundId, dateFrom, dateTo));
                 }               
                 
             }
@@ -173,6 +177,11 @@ namespace AccountingSystem.Views.Reports.RCD
         }
 
         private void frmGenerateRCD_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgPreview_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

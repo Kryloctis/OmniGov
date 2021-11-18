@@ -36,12 +36,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // ucpc1
+            // ucPaymentCollection1
             // 
             this.ucPaymentCollection1.Location = new System.Drawing.Point(0, -2);
             this.ucPaymentCollection1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ucPaymentCollection1.Name = "ucpc1";
-            this.ucPaymentCollection1.Size = new System.Drawing.Size(509, 315);
+            this.ucPaymentCollection1.Name = "ucPaymentCollection1";
+            this.ucPaymentCollection1.Size = new System.Drawing.Size(593, 315);
             this.ucPaymentCollection1.TabIndex = 6;
             // 
             // flowLayoutPanel1
@@ -54,12 +54,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(509, 27);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(593, 27);
             this.flowLayoutPanel1.TabIndex = 50;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(424, 2);
+            this.btnCancel.Location = new System.Drawing.Point(508, 2);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -71,7 +71,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // btnSave
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
-            this.btnSave.Location = new System.Drawing.Point(336, 2);
+            this.btnSave.Location = new System.Drawing.Point(420, 2);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(509, 339);
+            this.ClientSize = new System.Drawing.Size(593, 339);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ucPaymentCollection1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

@@ -1,7 +1,7 @@
 ﻿
-namespace AccountingSystem.Views.Manage.Receipts
+namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 {
-    partial class frmAccFromEdit
+    partial class frmReceiptsIssuedAdd
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucForms1 = new AccountingSystem.Views.Manage.Receipts.ucForms();
+            this.ucReceipts1 = new AccountingSystem.Views.Transactions.ReceiptsIssued.ucReceiptsIssued();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,16 +42,16 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 185);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 201);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(528, 27);
-            this.flowLayoutPanel1.TabIndex = 4;
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(518, 27);
+            this.flowLayoutPanel1.TabIndex = 5;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(443, 2);
+            this.btnCancel.Location = new System.Drawing.Point(433, 2);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // btnSave
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
-            this.btnSave.Location = new System.Drawing.Point(355, 2);
+            this.btnSave.Location = new System.Drawing.Point(345, 2);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -75,34 +75,34 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // ucForms1
+            // ucReceipts1
             // 
-            this.ucForms1.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.ucForms1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucForms1.Location = new System.Drawing.Point(0, 0);
-            this.ucForms1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ucForms1.Name = "ucForms1";
-            this.ucForms1.Size = new System.Drawing.Size(528, 185);
-            this.ucForms1.TabIndex = 5;
+            this.ucReceipts1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucReceipts1.Location = new System.Drawing.Point(0, 0);
+            this.ucReceipts1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ucReceipts1.Name = "ucReceipts1";
+            this.ucReceipts1.Size = new System.Drawing.Size(518, 201);
+            this.ucReceipts1.TabIndex = 6;
             // 
-            // frmAccFromEdit
+            // frmReceiptsIssuedAdd
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(528, 212);
-            this.Controls.Add(this.ucForms1);
+            this.ClientSize = new System.Drawing.Size(518, 228);
+            this.Controls.Add(this.ucReceipts1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmAccFromEdit";
+            this.Name = "frmReceiptsIssuedAdd";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Receipts Edit";
-            this.Load += new System.EventHandler(this.frmAccFromEdit_Load);
+            this.Text = "Issue Receipt Add";
+            this.Load += new System.EventHandler(this.frmReceiptsAdd_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -112,7 +112,7 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnSave;
-        internal ucForms ucForms1;
+        private ucReceiptsIssued ucReceipts1;
+        internal System.Windows.Forms.Button btnSave;
     }
 }

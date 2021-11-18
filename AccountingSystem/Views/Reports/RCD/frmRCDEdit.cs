@@ -19,6 +19,7 @@ namespace AccountingSystem.Views.Reports.RCD
         public frmRCDEdit(frmRCD frmrcd, int Id)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             _frmrcd = frmrcd;
             ucrcd1.Id = Id;
         }
@@ -163,7 +164,7 @@ namespace AccountingSystem.Views.Reports.RCD
                         ReportNo = uc.txtreport.Text.Trim(),
                         Date = Convert.ToDateTime(uc.dtdate.Value),
                         Approved = uc.approved,
-                        Fid = uc.Fid,
+                        Fid = uc.fundId,
                         status = uc.status
                     };
                     var rcdRepository = Factory.CollectorReportRepository();
@@ -226,7 +227,7 @@ namespace AccountingSystem.Views.Reports.RCD
                     ReportNo = uc.txtreport.Text.Trim(),
                     Date = Convert.ToDateTime(uc.dtdate.Value),
                     Approved = uc.approved,
-                    Fid = uc.Fid,
+                    Fid = uc.fundId,
                     status = uc.status
                 };
                 var rcdRepository = Factory.CollectorReportRepository();
@@ -295,8 +296,8 @@ namespace AccountingSystem.Views.Reports.RCD
                 var uc = ucrcd1;
                 var rcdRepository = Factory.CollectorReportRepository();
                 var rcdData = rcdRepository.GetRecordByID(uc.Id);
-                uc.CoId = Convert.ToInt16(rcdData["collecting_officers_id"]);
-                uc.Fid = Convert.ToInt32(rcdData["funds_id"]);
+                uc.collectorId = Convert.ToInt16(rcdData["collecting_officers_id"]);
+                uc.fundId = Convert.ToInt32(rcdData["funds_id"]);
                 uc.flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => ((byte)r.Tag == Convert.ToInt16(rcdData["funds_id"])) ? r.Checked = true : r.Checked = false);
                 uc.cmbcollector.SelectedValue = rcdData["collecting_officers_id"];
                 uc.txtreport.Text = rcdData["report_no"];

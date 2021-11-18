@@ -45,6 +45,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtsearch = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgCollectingOfficer)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -191,17 +192,27 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(395, 14);
+            this.txtsearch.Location = new System.Drawing.Point(435, 24);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.Size = new System.Drawing.Size(294, 23);
+            this.txtsearch.Size = new System.Drawing.Size(254, 23);
             this.txtsearch.TabIndex = 11;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(387, 27);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(42, 15);
+            this.label6.TabIndex = 38;
+            this.label6.Text = "Search";
             // 
             // frmCollectingOfficer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(699, 401);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.dgCollectingOfficer);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.statusStrip1);
@@ -240,5 +251,6 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.ToolStripButton btnRefresh;
         private System.Windows.Forms.TextBox txtsearch;
+        private System.Windows.Forms.Label label6;
     }
 }

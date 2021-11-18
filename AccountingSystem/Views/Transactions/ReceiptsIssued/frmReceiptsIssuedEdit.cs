@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 {
-    public partial class frmReceiptsEdit : Form
+    public partial class frmReceiptsIssuedEdit : Form
     {
-        private frmReceipts frmr;
+        private frmReceiptsIssued frmr;
 
-        public frmReceiptsEdit(frmReceipts _frmr,int id)
+        public frmReceiptsIssuedEdit(frmReceiptsIssued _frmr,int id)
         {
             InitializeComponent();
             frmr = _frmr;
@@ -61,8 +61,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 var riModel = new ReceiptsIssuedModel()
                 {
                     Id = uc.Id,
-                    CoId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
-                    RId = Convert.ToInt32(uc.cmbreceipt.SelectedValue),
+                    CollectorId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
+                    ReceiptId = Convert.ToInt32(uc.cmbreceipt.SelectedValue),
                     Issued = uc.dtpissued.Value,
                     IssuedFrom = Convert.ToInt32(uc.txtfrom.Text.Trim()),
                     IssuedTo = Convert.ToInt32(uc.txtto.Text.Trim()),

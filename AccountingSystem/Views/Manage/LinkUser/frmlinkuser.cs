@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Manage.LinkUser
         public frmlinkuser()
         {
             InitializeComponent();
-            Helper.DatagridDefaultStyle(dgvusers);
+            Helper.DatagridFullRowSelectStyle(dgvusers, true);
         }
 
         private void frmlinkuser_Load(object sender, EventArgs e)
@@ -59,10 +59,10 @@ namespace AccountingSystem.Views.Manage.LinkUser
             if(dgvusers.SelectedRows.Count > 0)
             {
                 UserId = int.Parse(dgvusers.CurrentRow.Cells[0].Value.ToString());
-                Username = dgvusers.CurrentRow.Cells[4].Value.ToString();
-                lname = dgvusers.CurrentRow.Cells[3].Value.ToString();
-                fname = dgvusers.CurrentRow.Cells[1].Value.ToString();
-                mname = dgvusers.CurrentRow.Cells[2].Value.ToString();
+                Username = dgvusers.CurrentRow.Cells[5].Value.ToString();
+                lname = dgvusers.CurrentRow.Cells[4].Value.ToString();
+                fname = dgvusers.CurrentRow.Cells[2].Value.ToString();
+                mname = dgvusers.CurrentRow.Cells[3].Value.ToString();
             }
         }
 

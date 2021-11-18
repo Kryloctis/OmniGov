@@ -181,7 +181,24 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT a.id, a.first_name, a.mid_initial, a.last_name, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a LEFT JOIN roles b on a.roles_id = b.id WHERE a.id NOT IN(SELECT IFNULL(users_id,0) FROM {tableName2}) AND b.role_name LIKE '%collect%'";
+
+            string query = $"SELECT " +
+                        $"id, " +
+                        $"roles_id, " +
+                        $"first_name, " +
+                        $"mid_initial, " +
+                        $"last_name, " +
+                        $"username, " +
+                        $"password, " +
+                        $"is_deleted, " +
+                        $"created_at, " +
+                        $"updated_at, " +
+                        $"office, " +
+                        $"role_name, " +
+                        $"permission_name, " +
+                        $"permission_office " +
+                        $"FROM {viewTableName} WHERE role_name LIKE '%collect%' GROUP BY id";
+
                 var dtUsers = new DataTable();
                 return _dbGenericCommands.Fill(query, dtUsers);
             }

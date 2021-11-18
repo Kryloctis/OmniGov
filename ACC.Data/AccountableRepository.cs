@@ -12,6 +12,7 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "accountable_forms";
+        private readonly string viewTableName = "view_accountable_forms";
 
         public AccountableRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -52,7 +53,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName}";
+                string query = $"SELECT * FROM {viewTableName}";
 
                 var dtBanks = new DataTable();
                 return _dbGenericCommands.Fill(query, dtBanks);
@@ -235,7 +236,7 @@ namespace ACC.Data
             {
                 var srchtxt = searchText;
 
-                string query = $"SELECT * FROM {tableName} WHERE acc_form_no  LIKE'%" + srchtxt + "%' OR acc_form_desc  LIKE'%" + srchtxt + "%'";
+                string query = $"SELECT * FROM {viewTableName} WHERE acc_form_no  LIKE'%" + srchtxt + "%' OR acc_form_desc  LIKE'%" + srchtxt + "%'";
 
                 var dtBanks = new DataTable();
                 return _dbGenericCommands.Fill(query, dtBanks);

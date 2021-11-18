@@ -11,10 +11,10 @@ namespace ACC.Data
     public class ReceiptsRepository : IReceiptsRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
-        private readonly string tableName = "receipts";
-        private readonly string tableName2 = "users";
-        private readonly string tableName3 = "accountable_forms";
-        private readonly string tableName4 = "receipts_issued";
+        private readonly string tableReceipts = "receipts";
+        private readonly string tableUser = "users";
+        private readonly string tableAccountableForms = "accountable_forms";
+        private readonly string tableReceiptsIssued = "receipts_issued";
         public ReceiptsRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -24,7 +24,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT COUNT(*) FROM {tableName}";
+                string query = $"SELECT COUNT(*) FROM {tableReceipts}";
 
                 return int.Parse(_dbGenericCommands.ExecuteScalar(query));
             }
@@ -47,7 +47,7 @@ namespace ACC.Data
                             new object[] { "@id", DbType.Int32, entity.Id},
                         };
 
-                        string query = $"DELETE FROM {tableName} WHERE id = @id";
+                        string query = $"DELETE FROM {tableReceipts} WHERE id = @id";
                         _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
                     }
 
@@ -72,7 +72,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT * FROM {tableName} WHERE {tableName}.id = @id";
+                string query = $"SELECT * FROM {tableReceipts} WHERE {tableReceipts}.id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -101,7 +101,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableName}.id,CONCAT({tableName3}.acc_form_no,' - ',{tableName3}.acc_form_desc) AS receipt,{tableName}.receiptsfrom,{tableName}.receiptsto,{tableName}.received_date,{tableName}.quantity,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS officer FROM {tableName} LEFT JOIN {tableName2} ON {tableName}.users_id={tableName2}.id LEFT JOIN {tableName3} ON {tableName}.accountable_forms_id={tableName3}.id ORDER BY {tableName}.received_date DESC";
+                string query = $"SELECT {tableReceipts}.id,CONCAT({tableAccountableForms}.acc_form_no,' - ',{tableAccountableForms}.acc_form_desc) AS receipt,{tableReceipts}.receiptsfrom,{tableReceipts}.receiptsto,{tableReceipts}.received_date,{tableReceipts}.quantity,CONCAT({tableUser}.last_name,', ',{tableUser}.first_name,' ',{tableUser}.mid_initial) AS officer FROM {tableReceipts} LEFT JOIN {tableUser} ON {tableReceipts}.users_id={tableUser}.id LEFT JOIN {tableAccountableForms} ON {tableReceipts}.accountable_forms_id={tableAccountableForms}.id ORDER BY {tableReceipts}.received_date DESC";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
@@ -116,7 +116,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableName}.id,CONCAT({tableName3}.acc_form_no,' - ',{tableName3}.acc_form_desc) AS receipt,{tableName}.receiptsfrom,{tableName}.receiptsto,{tableName}.received_date,{tableName}.quantity,CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS officer FROM {tableName} LEFT JOIN {tableName2} ON {tableName}.users_id={tableName2}.id LEFT JOIN {tableName3} ON {tableName}.accountable_forms_id={tableName3}.id WHERE {tableName}.receiptsfrom LIKE '%{searchText}%' OR {tableName}.receiptsto LIKE '%{searchText}%' OR {tableName}.remarks LIKE '%{searchText}%' OR CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) LIKE '%{searchText}%' OR CONCAT({tableName3}.acc_form_no,' - ',{tableName3}.acc_form_desc) LIKE '%{searchText}%' ORDER BY {tableName}.received_date DESC";
+                string query = $"SELECT {tableReceipts}.id,CONCAT({tableAccountableForms}.acc_form_no,' - ',{tableAccountableForms}.acc_form_desc) AS receipt,{tableReceipts}.receiptsfrom,{tableReceipts}.receiptsto,{tableReceipts}.received_date,{tableReceipts}.quantity,CONCAT({tableUser}.last_name,', ',{tableUser}.first_name,' ',{tableUser}.mid_initial) AS officer FROM {tableReceipts} LEFT JOIN {tableUser} ON {tableReceipts}.users_id={tableUser}.id LEFT JOIN {tableAccountableForms} ON {tableReceipts}.accountable_forms_id={tableAccountableForms}.id WHERE {tableReceipts}.receiptsfrom LIKE '%{searchText}%' OR {tableReceipts}.receiptsto LIKE '%{searchText}%' OR {tableReceipts}.remarks LIKE '%{searchText}%' OR CONCAT({tableUser}.last_name,', ',{tableUser}.first_name,' ',{tableUser}.mid_initial) LIKE '%{searchText}%' OR CONCAT({tableAccountableForms}.acc_form_no,' - ',{tableAccountableForms}.acc_form_desc) LIKE '%{searchText}%' ORDER BY {tableReceipts}.received_date DESC";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
@@ -136,7 +136,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, id },
                 };
 
-                string query = $"SELECT id FROM {tableName} WHERE id = @id";
+                string query = $"SELECT id FROM {tableReceipts} WHERE id = @id";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -159,7 +159,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, id },
                 };
 
-                string query = $"SELECT id FROM {tableName4} WHERE receipts_id = @id";
+                string query = $"SELECT id FROM {tableReceiptsIssued} WHERE receipts_id = @id";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -182,7 +182,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, id },
                 };
 
-                string query = $"SELECT {tableName}.id FROM {tableName} LEFT JOIN {tableName4} ON {tableName}.id={tableName4}.receipts_id WHERE ({tableName4}.issuefrom AND {tableName4}.issueto BETWEEN {tableName}.receiptsfrom AND {tableName}.receiptsto) AND {tableName}.id=@id";
+                string query = $"SELECT {tableReceipts}.id FROM {tableReceipts} LEFT JOIN {tableReceiptsIssued} ON {tableReceipts}.id={tableReceiptsIssued}.receipts_id WHERE ({tableReceiptsIssued}.issuefrom AND {tableReceiptsIssued}.issueto BETWEEN {tableReceipts}.receiptsfrom AND {tableReceipts}.receiptsto) AND {tableReceipts}.id=@id";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -207,7 +207,7 @@ namespace ACC.Data
                     new object[] { "@receiptsto", DbType.Int32, to }
                 };
 
-                string query = $"SELECT * FROM {tableName} WHERE accountable_forms_id = @accountable_forms_id AND ((receiptsfrom BETWEEN @receiptsfrom AND @receiptsto) OR (receiptsto BETWEEN @receiptsfrom AND @receiptsto))";
+                string query = $"SELECT * FROM {tableReceipts} WHERE accountable_forms_id = @accountable_forms_id AND ((receiptsfrom BETWEEN @receiptsfrom AND @receiptsto) OR (receiptsto BETWEEN @receiptsfrom AND @receiptsto))";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -226,7 +226,7 @@ namespace ACC.Data
             int value = 0;
             try
             {               
-                string query = $"SELECT IFNULL(MAX(receiptsto),0) AS receiptno FROM {tableName} WHERE accountable_forms_id = {accid}";
+                string query = $"SELECT IFNULL(MAX(receiptsto),0) AS receiptno FROM {tableReceipts} WHERE accountable_forms_id = {accid}";
                 DataTable dt = _dbGenericCommands.Fill(query,new DataTable());
                 if(dt.Rows.Count > 0)
                 {
@@ -249,7 +249,7 @@ namespace ACC.Data
             int value = 0;
             try
             {
-                string query = $"SELECT IFNULL(MAX(receiptsfrom),0) AS receiptno FROM {tableName} WHERE accountable_forms_id = {accid}";
+                string query = $"SELECT IFNULL(MAX(receiptsfrom),0) AS receiptno FROM {tableReceipts} WHERE accountable_forms_id = {accid}";
                 DataTable dt = _dbGenericCommands.Fill(query, new DataTable());
                 if (dt.Rows.Count > 0)
                 {
@@ -276,7 +276,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, id },
                 };
 
-                string query = $"SELECT * FROM {tableName} WHERE id = @id AND receiptsto=(SELECT SUM(IF(IFNULL(last_issued,0)>0,issueto-last_issued,0)) FROM {tableName4} WHERE receipts_id=id AND IF(IFNULL(is_returned,true),false,true)=false)";
+                string query = $"SELECT * FROM {tableReceipts} WHERE id = @id AND receiptsto=(SELECT SUM(IF(IFNULL(last_issued,0)>0,issueto-last_issued,0)) FROM {tableReceiptsIssued} WHERE receipts_id=id AND IF(IFNULL(is_returned,true),false,true)=false)";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -294,7 +294,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT IFNULL(last_issued,issueto) AS issuelast,issueto,is_returned FROM {tableName4} WHERE receipts_id='{id}' AND issueto<>IFNULL(last_issued,0) ORDER BY issuelast DESC";
+                string query = $"SELECT IFNULL(last_issued,issueto) AS issuelast,issueto,is_returned FROM {tableReceiptsIssued} WHERE receipts_id='{id}' AND issueto<>IFNULL(last_issued,0) ORDER BY issuelast DESC";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
@@ -309,9 +309,9 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT IFNULL(SUM({tableName4}.quantity),0) AS issuelast,{tableName}.quantity FROM " +
-                    $"{tableName4} LEFT JOIN {tableName} ON {tableName4}.receipts_id={tableName}.id " +
-                    $"WHERE {tableName4}.receipts_id='{id}'";
+                string query = $"SELECT IFNULL(SUM({tableReceiptsIssued}.quantity), 0) AS issuelast, {tableReceipts}.quantity FROM " +
+                    $"{tableReceiptsIssued} LEFT JOIN {tableReceipts} ON {tableReceiptsIssued}.receipts_id={tableReceipts}.id " +
+                    $"WHERE {tableReceiptsIssued}.receipts_id='{id}'";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
@@ -327,7 +327,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName} WHERE id='{id}'";
+                string query = $"SELECT * FROM {tableReceipts} WHERE id='{id}'";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
@@ -356,7 +356,7 @@ namespace ACC.Data
                     new object[] { "@remarks", DbType.String, entity.Remarks}
                 };
 
-                string query = $"INSERT INTO {tableName} (users_id,accountable_forms_id,receiptsfrom,receiptsto,received_date,quantity,remarks) VALUES (@users_id,@accountable_forms_id,@receiptsfrom,@receiptsto,@received_date,@quantity,@remarks)";
+                string query = $"INSERT INTO {tableReceipts} (users_id,accountable_forms_id,receiptsfrom,receiptsto,received_date,quantity,remarks) VALUES (@users_id,@accountable_forms_id,@receiptsfrom,@receiptsto,@received_date,@quantity,@remarks)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -381,7 +381,7 @@ namespace ACC.Data
                     new object[] { "@remarks", DbType.String, entity.Remarks}
                 };
 
-                string query = $"UPDATE {tableName} SET users_id=@users_id,accountable_forms_id=@accountable_forms_id,receiptsfrom=@receiptsfrom,receiptsto=@receiptsto,received_date=@received_date,quantity=@quantity,remarks=@remarks WHERE id = @id";
+                string query = $"UPDATE {tableReceipts} SET users_id=@users_id,accountable_forms_id=@accountable_forms_id,receiptsfrom=@receiptsfrom,receiptsto=@receiptsto,received_date=@received_date,quantity=@quantity,remarks=@remarks WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)

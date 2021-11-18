@@ -180,13 +180,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void ucPC_Load(object sender, EventArgs e)
         {
 
-            cmbAccount.SelectedValueChanged -= cmbAccount_SelectedValueChanged;
-            
-            LoadAccounts();
-            txtCashTicketQuantity.Controls[0].Enabled = false;
-
             cmbAccount.SelectedIndex = -1;
-
+            cmbAccount.SelectedValueChanged -= cmbAccount_SelectedValueChanged;
+            LoadAccounts();
             cmbAccount.SelectedValueChanged += cmbAccount_SelectedValueChanged;
         }
 
@@ -362,8 +358,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
             accountableFormFaceValue = Factory.FaceValueRepository().GetFaceValueByAccountableFormId(idOfSelectedAccountableForm);
 
-            
-            SwitchFields(Convert.ToBoolean(accountableFormFaceValue));
+            SwitchFields();
 
             txtCashTicketQuantity_TextChanged(sender, e);
         }
@@ -449,20 +444,19 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         }
 
 
-        internal void SwitchFields(bool isCashTicket)
+        internal void SwitchFields()
         {
-            this.isCashTicket = isCashTicket;
-            
-            if (this.isCashTicket)
+            isCashTicket = cmbforms.Text.Contains("Tickets");
+
+            if (isCashTicket)
             {
                 tabPaymentType.SelectedTab = tabCashTickets;
-                this.isCashTicket = false;
+                isCashTicket = false;
             }
             else
             {
                 tabPaymentType.SelectedTab = tabNonCashTickets;
-                this.isCashTicket = true;
-
+                isCashTicket = true;
             }
         }
 
@@ -490,6 +484,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             Helper.ClearErrorNumericUpDown(errorProvider, txtCashTicketQuantity);
         }
 
-
+        private void cmbAccount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && !string.IsNullOrEmpty(cmbAccount.Text) && cmbAccount.Focused)
+            {
+                LoadAccounts();
+                cmbAccount.DroppedDown = true;
+            }
+        }
     }
 }

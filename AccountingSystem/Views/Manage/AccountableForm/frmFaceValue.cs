@@ -32,20 +32,11 @@ namespace AccountingSystem.Views.Manage.AccountableForm
         {
             try
             {
-                if(id > 0)
+                if (id > 0)
                 {
                     var facevaluerepo = Factory.FaceValueRepository();
                     var dtfacevalue = facevaluerepo.GetRecords(id);
                     HelperLoadRecords.FaceValueDatagridView(dtfacevalue, dgfacevalue);
-
-                    foreach (DataGridViewRow r in dgfacevalue.Rows)
-                    {
-                        int df = int.Parse(r.Cells[4].Value.ToString());
-                        if(df > 0)
-                        {
-                            r.DefaultCellStyle.BackColor = Color.Green;
-                        }
-                    }
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -72,6 +63,9 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 btnEdit.Enabled = false;
                 btnDelete.Enabled = false;
             }
+
+            byte[] columnIndexTimestamp = { 4, 5 };
+            Helper.ShowRecordTimestamp(dgfacevalue, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
         }
 
 
@@ -86,8 +80,8 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                     var facevaluerepo = Factory.FaceValueRepository();
                     var faceval = facevaluerepo.GetRecordByID(Id);
                     faceid = int.Parse(faceval["id"]);
-                    dtdate.Value = Convert.ToDateTime(faceval["facedate"]);
-                    txtamount.Value = decimal.Parse(faceval["facevalue"]);
+                    dtdate.Value = Convert.ToDateTime(faceval["date"]);
+                    txtamount.Value = decimal.Parse(faceval["amount"]);
                 }
                 catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             }

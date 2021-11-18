@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Receipts
 {
-    public partial class ucForms : UserControl
+    public partial class ucReceipts : UserControl
     {
         internal int Id = 0;
         internal int UserId = 0;
@@ -19,7 +19,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         internal int startreceipt = 0;
         internal int maxreceipt = 0;
         internal bool istickets = false;
-        public ucForms()
+        public ucReceipts()
         {
             InitializeComponent();
         }
@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             txtto.Text = string.Empty;
             dtpreceived.Value = DateTime.Now;
             txtquantity.Text = string.Empty;
-            
+            txtremarks.Text = string.Empty;
         }
 
         internal void LoadForms()

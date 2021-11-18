@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Receipts
 {
-    public partial class frmAccForms : Form
+    public partial class frmReceipts : Form
     {
-        public frmAccForms()
+        public frmReceipts()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
@@ -87,7 +87,7 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAccFormsAdd(this).ShowDialog();
+            _ = new frmReceiptsAdd(this).ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -95,7 +95,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             if(dgreceipts.SelectedRows.Count > 0)
             {
                 int id = int.Parse(dgreceipts.CurrentRow.Cells[0].Value.ToString());
-                _ = new frmAccFromEdit(this, id).ShowDialog();                
+                _ = new frmReceiptsEdit(this, id).ShowDialog();                
             }
         }
 

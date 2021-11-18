@@ -54,7 +54,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
                 if (!isCashTickets)
                 {
-                    uc.SwitchFields(false);
+                    uc.SwitchFields(); //false
                     uc.txtpayee.Text = paymentCollectionDict["payee"];
                     uc.txtreceipt.Text = paymentCollectionDict["receipt_no"];
                     uc.dtdate.Value = Convert.ToDateTime(paymentCollectionDict["payment_date"]);
@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 }
                 else //Cash Tickets Fields
                 {
-                    uc.SwitchFields(true);
+                    uc.SwitchFields(); //true
                     uc.dtCashTicketDateOfCollection.Value = Convert.ToDateTime(paymentCollectionDict["payment_date"]);
                     uc.txtCashTicketQuantity.Text = paymentCollectionDict["quantity"];
                     uc.txtCashTicketsAmount.Text = Convert.ToDecimal(paymentCollectionDict["amount"]).ToString("N2");

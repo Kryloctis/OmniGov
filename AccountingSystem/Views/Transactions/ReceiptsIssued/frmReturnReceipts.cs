@@ -12,11 +12,11 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 {
-    public partial class frmReturn : Form
+    public partial class frmReturnReceipts : Form
     {
-        private frmReceipts frmr;
+        private frmReceiptsIssued frmr;
         private int Rid = 0;
-        public frmReturn(frmReceipts _frmr,int id)
+        public frmReturnReceipts(frmReceiptsIssued _frmr,int id)
         {
             InitializeComponent();
             frmr = _frmr;
