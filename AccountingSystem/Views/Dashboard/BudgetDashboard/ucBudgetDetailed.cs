@@ -127,13 +127,6 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             HelperLoadRecords.DashboardDetailedDatagridView(dataGridView1, fppId, allotmentClassId, fundId, DateAsOf);
         }
 
-        internal void LoadInformation()
-        {
-            Cursor.Current = Cursors.WaitCursor;
-            LoadDetailed();
-            Cursor.Current = Cursors.Default;
-        }
-
         private void LoadBudgetDashboardContents()
         {
             try
@@ -148,11 +141,13 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
                 fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
                 DateAsOf = dtAsOf.Value;
 
-                LoadInformation();
+                Cursor.Current = Cursors.WaitCursor;
+                LoadDetailed();
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError(ex.StackTrace);
             }
         }
 
