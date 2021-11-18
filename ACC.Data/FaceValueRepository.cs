@@ -57,32 +57,6 @@ namespace ACC.Data
             }
         }
 
-        public decimal GetFaceValueByAccountableFormId(int id)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] {"@accountableFormId", DbType.Int32, id},
-                };
-
-                string query = $"SELECT COALESCE(amount, 0) AS amount FROM {tableName} WHERE accountable_forms_id=@accountableFormId";
-
-                var queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                if (string.IsNullOrEmpty(queryResult))
-                    return 0;
-                else
-                    return Convert.ToDecimal(queryResult);
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var record = new Dictionary<string, string>();
@@ -185,11 +159,6 @@ namespace ACC.Data
             }
         }
 
-        public bool SetDefault(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Update(FaceValueModel entity)
         {
             try
@@ -211,9 +180,32 @@ namespace ACC.Data
             }
         }
 
-        public bool YearExist(int id, int year)
+        public decimal GetFaceValueByAccountableFormId(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] {"@accountableFormId", DbType.Int32, id},
+                };
+
+                string query = $"SELECT COALESCE(amount, 0) AS amount FROM {tableName} WHERE accountable_forms_id=@accountableFormId";
+
+                var queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                if (string.IsNullOrEmpty(queryResult))
+                    return 0;
+                else
+                    return Convert.ToDecimal(queryResult);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
+
+
     }
 }

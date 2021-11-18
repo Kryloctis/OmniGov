@@ -68,6 +68,7 @@ namespace AccountingSystem
             this.tabPageBudget = new System.Windows.Forms.TabPage();
             this.tabControlBudget = new System.Windows.Forms.TabControl();
             this.tabPageBudgetSummary = new System.Windows.Forms.TabPage();
+            this.ucBudgetSummary1 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary();
             this.tabPageBudgetDetailed = new System.Windows.Forms.TabPage();
             this.ucBudgetDetailed1 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed();
             this.chkbxDetailed = new System.Windows.Forms.CheckBox();
@@ -118,7 +119,6 @@ namespace AccountingSystem
             this.radSCBAA = new System.Windows.Forms.RadioButton();
             this.tabPageTreasury = new System.Windows.Forms.TabPage();
             this.ucTreasuryDashboard1 = new AccountingSystem.Views.Dashboard.TreasuryDashboard.ucTreasuryDashboard();
-            this.ucBudgetSummary1 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -502,7 +502,7 @@ namespace AccountingSystem
             this.tabControlBudget.Margin = new System.Windows.Forms.Padding(0);
             this.tabControlBudget.Name = "tabControlBudget";
             this.tabControlBudget.SelectedIndex = 0;
-            this.tabControlBudget.Size = new System.Drawing.Size(1191, 409);
+            this.tabControlBudget.Size = new System.Drawing.Size(1191, 408);
             this.tabControlBudget.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControlBudget.TabIndex = 8;
             // 
@@ -513,9 +513,19 @@ namespace AccountingSystem
             this.tabPageBudgetSummary.Location = new System.Drawing.Point(4, 5);
             this.tabPageBudgetSummary.Name = "tabPageBudgetSummary";
             this.tabPageBudgetSummary.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageBudgetSummary.Size = new System.Drawing.Size(1183, 400);
+            this.tabPageBudgetSummary.Size = new System.Drawing.Size(1183, 399);
             this.tabPageBudgetSummary.TabIndex = 0;
             this.tabPageBudgetSummary.Text = "Budget Summary";
+            // 
+            // ucBudgetSummary1
+            // 
+            this.ucBudgetSummary1.AutoScroll = true;
+            this.ucBudgetSummary1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucBudgetSummary1.Location = new System.Drawing.Point(3, 3);
+            this.ucBudgetSummary1.Margin = new System.Windows.Forms.Padding(0);
+            this.ucBudgetSummary1.Name = "ucBudgetSummary1";
+            this.ucBudgetSummary1.Size = new System.Drawing.Size(1177, 393);
+            this.ucBudgetSummary1.TabIndex = 0;
             // 
             // tabPageBudgetDetailed
             // 
@@ -524,7 +534,7 @@ namespace AccountingSystem
             this.tabPageBudgetDetailed.Location = new System.Drawing.Point(4, 5);
             this.tabPageBudgetDetailed.Name = "tabPageBudgetDetailed";
             this.tabPageBudgetDetailed.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageBudgetDetailed.Size = new System.Drawing.Size(1183, 400);
+            this.tabPageBudgetDetailed.Size = new System.Drawing.Size(1183, 399);
             this.tabPageBudgetDetailed.TabIndex = 1;
             this.tabPageBudgetDetailed.Text = "Budget Detailed";
             // 
@@ -532,8 +542,9 @@ namespace AccountingSystem
             // 
             this.ucBudgetDetailed1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucBudgetDetailed1.Location = new System.Drawing.Point(3, 3);
+            this.ucBudgetDetailed1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ucBudgetDetailed1.Name = "ucBudgetDetailed1";
-            this.ucBudgetDetailed1.Size = new System.Drawing.Size(1177, 394);
+            this.ucBudgetDetailed1.Size = new System.Drawing.Size(1177, 393);
             this.ucBudgetDetailed1.TabIndex = 0;
             // 
             // chkbxDetailed
@@ -1121,16 +1132,6 @@ namespace AccountingSystem
             this.ucTreasuryDashboard1.Size = new System.Drawing.Size(1191, 473);
             this.ucTreasuryDashboard1.TabIndex = 0;
             // 
-            // ucBudgetSummary1
-            // 
-            this.ucBudgetSummary1.AutoScroll = true;
-            this.ucBudgetSummary1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucBudgetSummary1.Location = new System.Drawing.Point(3, 3);
-            this.ucBudgetSummary1.Margin = new System.Windows.Forms.Padding(0);
-            this.ucBudgetSummary1.Name = "ucBudgetSummary1";
-            this.ucBudgetSummary1.Size = new System.Drawing.Size(1177, 394);
-            this.ucBudgetSummary1.TabIndex = 0;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1145,7 +1146,7 @@ namespace AccountingSystem
             this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MinimumSize = new System.Drawing.Size(1196, 562);
+            this.MinimumSize = new System.Drawing.Size(1196, 560);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Local Finance System";
@@ -1244,8 +1245,6 @@ namespace AccountingSystem
         private System.Windows.Forms.TabPage tabPageFinancialStatements;
         private Views.Dashboard.ucJEVDashboard ucjevDashboard1;
         private System.Windows.Forms.RadioButton radBtnTreasury;
-        private System.Windows.Forms.TabPage tabPageTreasury;
-        private Views.Dashboard.TreasuryDashboard.ucTreasuryDashboard ucTreasuryDashboard1;
         private Views.Dashboard.AccountingDashboard.ucJournalsDashboard ucJournalsDashboard1;
         private System.Windows.Forms.TabControl tabControlLedgers;
         private System.Windows.Forms.TabPage tabPageGeneralLedger;
@@ -1290,6 +1289,8 @@ namespace AccountingSystem
         private System.Windows.Forms.TabPage tabPageBudgetDetailed;
         private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed ucBudgetDetailed1;
         private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary1;
+        private System.Windows.Forms.TabPage tabPageTreasury;
+        private Views.Dashboard.TreasuryDashboard.ucTreasuryDashboard ucTreasuryDashboard1;
     }
 }
 

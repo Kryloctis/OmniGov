@@ -35,6 +35,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.btnIssueCheck = new System.Windows.Forms.ToolStripButton();
             this.btnPaymentCollection = new System.Windows.Forms.ToolStripButton();
             this.btnBankDeposit = new System.Windows.Forms.ToolStripButton();
+            this.btnReportCollections = new System.Windows.Forms.ToolStripButton();
             this.btnGenerateRCD = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStrip2.SuspendLayout();
@@ -107,8 +108,20 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.btnBankDeposit.Text = "Bank Deposit";
             this.btnBankDeposit.Click += new System.EventHandler(this.btnBankDeposit_Click);
             // 
+            // btnReportCollections
+            // 
+            this.btnReportCollections.Enabled = false;
+            this.btnReportCollections.Image = global::AccountingSystem.Properties.Resources.money_banknotes_document_text_28px;
+            this.btnReportCollections.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnReportCollections.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnReportCollections.Name = "btnReportCollections";
+            this.btnReportCollections.Size = new System.Drawing.Size(150, 32);
+            this.btnReportCollections.Text = "Report of Collections";
+            this.btnReportCollections.Click += new System.EventHandler(this.btnReportCollections_Click);
+            // 
             // btnGenerateRCD
             // 
+            this.btnGenerateRCD.Enabled = false;
             this.btnGenerateRCD.Image = global::AccountingSystem.Properties.Resources.report_24px;
             this.btnGenerateRCD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnGenerateRCD.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -162,5 +175,6 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         internal System.Windows.Forms.ToolStripButton btnIssueReceipt;
         internal System.Windows.Forms.ToolStripButton btnReceipts;
         internal System.Windows.Forms.TabControl tabControl1;
+        internal System.Windows.Forms.ToolStripButton btnReportCollections;
     }
 }

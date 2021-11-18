@@ -13,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AccountingSystem.Views.Dashboard.TreasuryDashboard.RCDSummary;
+using AccountingSystem.Views.Reports.PaymentCollection;
 
 namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 {
@@ -22,12 +22,6 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         public ucTreasuryDashboard()
         {
             InitializeComponent();
-        }
-
-        private void btnGenerateRCD_Click(object sender, EventArgs e)
-        {
-            //_ = new frmRCD().ShowDialog();
-            Helper.createTabPage(tabControl1, new TabPage(), "tabrcd", "RCD Summary", new ucRCDDashboard());
         }
 
         private void btnBankDeposit_Click(object sender, EventArgs e)
@@ -55,12 +49,16 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             _ = new Manage.Receipts.frmReceipts().ShowDialog();
         }
 
-        private void toolStripDropDownButton1_Click(object sender, EventArgs e)
+        private void ucTreasuryDashboard_Load(object sender, EventArgs e)
         {
-            _ = new Transactions.ReceiptsIssued.frmReceiptsIssued().ShowDialog();
         }
 
-        private void ucTreasuryDashboard_Load(object sender, EventArgs e)
+        private void btnReportCollections_Click(object sender, EventArgs e)
+        {
+            _ = new frmPCReport().ShowDialog();
+        }
+
+        private void btnGenerateRCD_Click(object sender, EventArgs e)
         {
 
         }
