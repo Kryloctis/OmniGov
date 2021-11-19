@@ -44,13 +44,16 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             // 
             // dgPreview
             // 
+            this.dgPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgPreview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgPreview.Location = new System.Drawing.Point(12, 47);
             this.dgPreview.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgPreview.Name = "dgPreview";
             this.dgPreview.RowHeadersWidth = 51;
             this.dgPreview.RowTemplate.Height = 29;
-            this.dgPreview.Size = new System.Drawing.Size(937, 378);
+            this.dgPreview.Size = new System.Drawing.Size(863, 378);
             this.dgPreview.TabIndex = 26;
             this.dgPreview.SelectionChanged += new System.EventHandler(this.dgPreview_SelectionChanged);
             // 
@@ -113,13 +116,13 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(961, 27);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(887, 27);
             this.flowLayoutPanel1.TabIndex = 38;
             // 
             // btnCancel
             // 
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancel.Location = new System.Drawing.Point(874, 2);
+            this.btnCancel.Location = new System.Drawing.Point(800, 2);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -132,7 +135,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             // 
             this.btnSelectCollections.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSelectCollections.Enabled = false;
-            this.btnSelectCollections.Location = new System.Drawing.Point(784, 2);
+            this.btnSelectCollections.Location = new System.Drawing.Point(710, 2);
             this.btnSelectCollections.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSelectCollections.Name = "btnSelectCollections";
             this.btnSelectCollections.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -147,7 +150,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(961, 458);
+            this.ClientSize = new System.Drawing.Size(887, 458);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.dtto);
             this.Controls.Add(this.label3);
@@ -155,7 +158,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.Controls.Add(this.dtfrom);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgPreview);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmCollectorsRCDLoad";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

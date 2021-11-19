@@ -35,6 +35,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnCancel = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnApprove = new System.Windows.Forms.ToolStripButton();
+            this.btnDisapprove = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -62,6 +65,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnCancel,
             this.btnDelete,
             this.toolStripSeparator2,
+            this.btnApprove,
+            this.btnDisapprove,
+            this.toolStripSeparator3,
             this.btnPrint,
             this.btnSearch});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -107,6 +113,34 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 50);
             // 
+            // btnApprove
+            // 
+            this.btnApprove.Enabled = false;
+            this.btnApprove.Image = global::AccountingSystem.Properties.Resources.document_approve_28px;
+            this.btnApprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnApprove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnApprove.Name = "btnApprove";
+            this.btnApprove.Size = new System.Drawing.Size(56, 47);
+            this.btnApprove.Text = "&Approve";
+            this.btnApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnApprove.ToolTipText = "Approve";
+            // 
+            // btnDisapprove
+            // 
+            this.btnDisapprove.Enabled = false;
+            this.btnDisapprove.Image = global::AccountingSystem.Properties.Resources.document_disapprove_28px;
+            this.btnDisapprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnDisapprove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDisapprove.Name = "btnDisapprove";
+            this.btnDisapprove.Size = new System.Drawing.Size(70, 47);
+            this.btnDisapprove.Text = "&Disapprove";
+            this.btnDisapprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 50);
+            // 
             // btnPrint
             // 
             this.btnPrint.Enabled = false;
@@ -126,8 +160,8 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSearch.Margin = new System.Windows.Forms.Padding(0, 1, 15, 2);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(55, 47);
-            this.btnSearch.Text = "S&earch...";
+            this.btnSearch.Size = new System.Drawing.Size(46, 47);
+            this.btnSearch.Text = "S&earch";
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // statusStrip1
@@ -212,6 +246,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private System.Windows.Forms.ToolStripButton btnCancel;
         internal System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        internal System.Windows.Forms.ToolStripButton btnApprove;
+        internal System.Windows.Forms.ToolStripButton btnDisapprove;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         internal System.Windows.Forms.ToolStripButton btnPrint;
         internal System.Windows.Forms.ToolStripButton btnSearch;
         private System.Windows.Forms.StatusStrip statusStrip1;
