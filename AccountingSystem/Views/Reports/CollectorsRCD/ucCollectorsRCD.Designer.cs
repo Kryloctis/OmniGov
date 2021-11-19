@@ -21,6 +21,8 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             base.Dispose(disposing);
         }
 
+
+
         #region Component Designer generated code
 
         /// <summary> 
@@ -247,6 +249,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         internal System.Windows.Forms.Button btnclear;
         internal System.Windows.Forms.Button btnadd;
         private System.Windows.Forms.Label label4;
-        internal System.Windows.Forms.DataGridView dgvpayments;
+        public System.Windows.Forms.DataGridView dgvpayments;
     }
 }

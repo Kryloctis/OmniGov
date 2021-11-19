@@ -19,6 +19,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         public ucCollectorsRCD()
         {
             InitializeComponent();
+            Helper.DatagridFullRowSelectStyle(dgvpayments, true);
         }
 
         private void ucRCDCollector_Load(object sender, EventArgs e)
@@ -27,7 +28,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             LoadFunds();
             LoadCollectors();
         }
-
         private void LoadCollectors()
         {
             try
@@ -48,8 +48,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
                 Helper.MessageBoxError(ex.Message);
             }
         }
-
-
 
         internal void ResetForm() 
         {
@@ -99,9 +97,11 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             }
         }
 
+
+
         private void btnadd_Click(object sender, EventArgs e)
         {
-            _ = new frmCollectorsRCDLoad(fundId, collectorId).ShowDialog();
+            _ = new frmCollectorsRCDLoad(fundId, collectorId, this).ShowDialog();
 
         }
 

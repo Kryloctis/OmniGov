@@ -26,5 +26,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
 
         }
+
+
     }
 }

@@ -556,12 +556,8 @@ namespace AccountingSystem
         }
         #endregion
 
-        #region CollectionDataGridView
-        internal static void CollectionDataGridView(DataTable dataTable, DataGridView datagrid)
+        internal static void CollectionDataGridColumns(DataGridView datagrid) 
         {
-
-            datagrid.Rows.Clear();
-            datagrid.Columns.Clear();
 
             datagrid.Columns.Add("payment_collection_id", "Payment Collection ID");
             datagrid.Columns.Add("fund_id", "Fund Id");
@@ -606,6 +602,15 @@ namespace AccountingSystem
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             datagrid.Columns["payment_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
+        }
+
+        #region CollectionDataGridView
+        internal static void CollectionDataGridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.Rows.Clear();
+            datagrid.Columns.Clear();
+
+            CollectionDataGridColumns(datagrid);
 
             foreach (DataRow drPaymentCollection in dataTable.Rows)
             {
