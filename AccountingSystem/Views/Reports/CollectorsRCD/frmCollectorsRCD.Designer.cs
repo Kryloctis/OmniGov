@@ -37,15 +37,20 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblJevStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblShowMessage = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ucCollectorsrcd1
             // 
-            this.ucCollectorsrcd1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ucCollectorsrcd1.Location = new System.Drawing.Point(0, 62);
+            this.ucCollectorsrcd1.Location = new System.Drawing.Point(0, 75);
             this.ucCollectorsrcd1.Name = "ucCollectorsrcd1";
-            this.ucCollectorsrcd1.Size = new System.Drawing.Size(916, 515);
+            this.ucCollectorsrcd1.Size = new System.Drawing.Size(916, 520);
             this.ucCollectorsrcd1.TabIndex = 0;
             // 
             // toolStrip1
@@ -125,22 +130,75 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnSearch.Text = "S&earch...";
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
-            // CollectorsRCD
+            // statusStrip1
+            // 
+            this.statusStrip1.BackColor = System.Drawing.Color.White;
+            this.statusStrip1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2,
+            this.lblJevStatus,
+            this.lblShowMessage});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 50);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(916, 22);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.TabIndex = 15;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(841, 17);
+            this.toolStripStatusLabel1.Spring = true;
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.toolStripStatusLabel2.Margin = new System.Windows.Forms.Padding(0);
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(42, 22);
+            this.toolStripStatusLabel2.Text = "Status:";
+            // 
+            // lblJevStatus
+            // 
+            this.lblJevStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.lblJevStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblJevStatus.Margin = new System.Windows.Forms.Padding(0);
+            this.lblJevStatus.Name = "lblJevStatus";
+            this.lblJevStatus.Size = new System.Drawing.Size(18, 22);
+            this.lblJevStatus.Text = "--";
+            // 
+            // lblShowMessage
+            // 
+            this.lblShowMessage.ActiveLinkColor = System.Drawing.Color.Firebrick;
+            this.lblShowMessage.ForeColor = System.Drawing.Color.Firebrick;
+            this.lblShowMessage.IsLink = true;
+            this.lblShowMessage.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lblShowMessage.Name = "lblShowMessage";
+            this.lblShowMessage.Size = new System.Drawing.Size(88, 17);
+            this.lblShowMessage.Text = "Show Message.";
+            this.lblShowMessage.Visible = false;
+            // 
+            // frmCollectorsRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(916, 577);
+            this.ClientSize = new System.Drawing.Size(916, 593);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.ucCollectorsrcd1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "CollectorsRCD";
+            this.Name = "frmCollectorsRCD";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Collector\'s Report of Collections ";
             this.Load += new System.EventHandler(this.CollectorsRCD_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -156,5 +214,10 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         internal System.Windows.Forms.ToolStripButton btnPrint;
         internal System.Windows.Forms.ToolStripButton btnSearch;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        internal System.Windows.Forms.ToolStripStatusLabel lblJevStatus;
+        internal System.Windows.Forms.ToolStripStatusLabel lblShowMessage;
     }
 }

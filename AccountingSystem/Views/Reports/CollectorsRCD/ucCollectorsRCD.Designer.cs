@@ -52,7 +52,8 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             // dtdate
             // 
-            this.dtdate.Location = new System.Drawing.Point(561, 76);
+            this.dtdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtdate.Location = new System.Drawing.Point(678, 76);
             this.dtdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtdate.Name = "dtdate";
             this.dtdate.Size = new System.Drawing.Size(225, 23);
@@ -80,8 +81,9 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(522, 79);
+            this.label3.Location = new System.Drawing.Point(639, 79);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 15);
             this.label3.TabIndex = 20;
