@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Reports.CollectorsRCD
 {
-    partial class CollectorsRCD
+    partial class frmCollectorsRCD
     {
         /// <summary>
         /// Required designer variable.
@@ -135,6 +135,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "CollectorsRCD";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Collector\'s Report of Collections ";
             this.Load += new System.EventHandler(this.CollectorsRCD_Load);

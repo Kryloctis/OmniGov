@@ -33,32 +33,15 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
-                string id = string.Join(",", data.Select(x => String.Format("'{0}'", x.Key)).ToArray());
+                var pcRepository = Factory.PaymentCollectionRepository();
+                var dateFrom = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtfrom.Value));
+                var dateTo = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtto.Value));
 
-                if (data.Count > 0)
-                {
-                    //var pcRepository = Factory.PaymentCollectionRepository();
+                //list = pcRepository.GetRecordByLedger(collectorId, fundId, dateFrom, dateTo, id);
+                HelperLoadRecords.CollectionDataGridView(list, dgPreview);
 
-                    //var dateFrom = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtfrom.Value));
-                    //var dateTo = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtto.Value));
-
-                    //list = pcRepository.GetRecordByLedger(collectorId, fundId, dateFrom, dateTo, id);
-                    //HelperLoadRecords.PaymentDatagridView(list, dgPreview);
-
-                    //txttotalamount.Text = String.Format("{0:N2}",pcRepository.SumRecords(collectorId, fundId, dateFrom, dateTo,id));
-                }
-                else
-                {
-                    var pcRepository = Factory.PaymentCollectionRepository();
-                    var dateFrom = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtfrom.Value));
-                    var dateTo = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dtto.Value));
-
-                    list = pcRepository.GetRecordByLedger(collectorId, fundId, dateFrom, dateTo, id);
-                    HelperLoadRecords.CollectionDataGridView(list, dgPreview);
-
-                    txttotalamount.Text = String.Format("{0:N2}", pcRepository.SumRecords(collectorId, fundId, dateFrom, dateTo));
-                }               
-                
+                txttotalamount.Text = String.Format("{0:N2}", pcRepository.SumRecords(collectorId, fundId, dateFrom, dateTo));
+               
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

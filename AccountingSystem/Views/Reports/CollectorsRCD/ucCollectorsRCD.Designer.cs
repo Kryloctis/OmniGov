@@ -76,6 +76,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.cmbcollector.Name = "cmbcollector";
             this.cmbcollector.Size = new System.Drawing.Size(171, 23);
             this.cmbcollector.TabIndex = 15;
+            this.cmbcollector.SelectedValueChanged += new System.EventHandler(this.cmbcollector_SelectedValueChanged);
             // 
             // label3
             // 
@@ -178,6 +179,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.btnadd.Text = "Add";
             this.btnadd.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnadd.UseVisualStyleBackColor = true;
+            this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
             // 
             // label4
             // 
@@ -199,7 +201,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.dgvpayments.Size = new System.Drawing.Size(895, 370);
             this.dgvpayments.TabIndex = 21;
             // 
-            // ucRCDCollector
+            // ucCollectorsRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -216,7 +218,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.Controls.Add(this.btnadd);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dgvpayments);
-            this.Name = "ucRCDCollector";
+            this.Name = "ucCollectorsRCD";
             this.Size = new System.Drawing.Size(913, 510);
             this.Load += new System.EventHandler(this.ucRCDCollector_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();

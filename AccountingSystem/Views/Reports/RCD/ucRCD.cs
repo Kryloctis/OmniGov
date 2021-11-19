@@ -180,7 +180,6 @@ namespace AccountingSystem.Views.Reports.RCD
             }
             
             _ = new frmGenerateRCD(this, collectorId, fundId, data).ShowDialog();
-           
         }
        
 

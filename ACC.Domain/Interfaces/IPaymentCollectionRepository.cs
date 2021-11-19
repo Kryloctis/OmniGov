@@ -17,7 +17,7 @@ namespace ACC.Domain.Interfaces
         decimal SumRecords(int Id, string month);
         decimal SumRecords(int Id,int fid,string from,string to);
         decimal SumRecords(int Id, int fid, string from, string to, string ids);
-        DataTable GetRecordByLedger(int Id, int fid, string from, string to, string ids);
+        DataTable GetRecordByLedger(object[] parameter);
         DataTable GetRecords(string date);
         bool ReceiptExist(string receipt, int formid);
     }

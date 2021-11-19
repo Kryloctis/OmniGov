@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccountingSystem.Views.Reports.CollectorsRCD;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
     public partial class ucCollectorsRCD : UserControl
     {
         private byte fundId;
+        private ushort collectorId = 30;
 
         public ucCollectorsRCD()
         {
@@ -65,6 +67,17 @@ namespace AccountingSystem.Views.Reports.RCDCollector
                         radFund.Image = null;
                 };
             }
+        }
+
+        private void btnadd_Click(object sender, EventArgs e)
+        {
+            _ = new frmCollectorsRCDLoad(fundId, collectorId).ShowDialog();
+
+        }
+
+        private void cmbcollector_SelectedValueChanged(object sender, EventArgs e)
+        {
+            collectorId = (ushort)Convert.ToSByte(cmbcollector.SelectedValue);
         }
     }
 }

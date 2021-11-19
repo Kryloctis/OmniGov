@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.CollectorsRCD
 {
-    public partial class CollectorsRCD : Form
+    public partial class frmCollectorsRCD : Form
     {
-        public CollectorsRCD()
+        public frmCollectorsRCD()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
