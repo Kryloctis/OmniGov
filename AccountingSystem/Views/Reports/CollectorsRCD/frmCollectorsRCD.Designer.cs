@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucCollectorsrcd1 = new AccountingSystem.Views.Reports.RCDCollector.ucCollectorsRCD();
+            this.ucCollectorsRCD1 = new AccountingSystem.Views.Reports.RCDCollector.ucCollectorsRCD();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnCancel = new System.Windows.Forms.ToolStripButton();
@@ -51,10 +51,10 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             // 
             // ucCollectorsrcd1
             // 
-            this.ucCollectorsrcd1.Location = new System.Drawing.Point(0, 75);
-            this.ucCollectorsrcd1.Name = "ucCollectorsrcd1";
-            this.ucCollectorsrcd1.Size = new System.Drawing.Size(916, 520);
-            this.ucCollectorsrcd1.TabIndex = 0;
+            this.ucCollectorsRCD1.Location = new System.Drawing.Point(0, 75);
+            this.ucCollectorsRCD1.Name = "ucCollectorsrcd1";
+            this.ucCollectorsRCD1.Size = new System.Drawing.Size(916, 520);
+            this.ucCollectorsRCD1.TabIndex = 0;
             // 
             // toolStrip1
             // 
@@ -221,7 +221,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.ClientSize = new System.Drawing.Size(916, 593);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.ucCollectorsrcd1);
+            this.Controls.Add(this.ucCollectorsRCD1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmCollectorsRCD";
@@ -240,7 +240,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         #endregion
 
-        private RCDCollector.ucCollectorsRCD ucCollectorsrcd1;
+        internal RCDCollector.ucCollectorsRCD ucCollectorsRCD1;
         internal System.Windows.Forms.ToolStrip toolStrip1;
         internal System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStripButton btnCancel;

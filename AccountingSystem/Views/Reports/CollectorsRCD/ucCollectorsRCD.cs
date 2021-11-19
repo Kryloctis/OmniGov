@@ -14,7 +14,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
     public partial class ucCollectorsRCD : UserControl
     {
         private byte fundId;
-        private ushort collectorId = 30;
+        private ushort collectorId;
 
         public ucCollectorsRCD()
         {
@@ -23,7 +23,37 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         private void ucRCDCollector_Load(object sender, EventArgs e)
         {
+            ResetForm();
             LoadFunds();
+            LoadCollectors();
+        }
+
+        private void LoadCollectors()
+        {
+            try
+            {
+                cmbcollector.SelectedValueChanged -= new EventHandler(cmbcollector_SelectedValueChanged);
+                var collectingOfficerRepository = Factory.CollectingOfficerRepository();
+                var dtCollectors = collectingOfficerRepository.GetRecords();
+
+                cmbcollector.DataSource = dtCollectors;
+                cmbcollector.DisplayMember = "fullname";
+                cmbcollector.ValueMember = "id";
+                cmbcollector.SelectedValueChanged += new EventHandler(cmbcollector_SelectedValueChanged);
+
+                collectorId = (ushort)Convert.ToInt32(cmbcollector.SelectedValue);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+
+
+        internal void ResetForm() 
+        {
+            cmbcollector.SelectedIndex = -1;
         }
 
         internal void LoadFunds()
@@ -79,5 +109,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         {
             collectorId = (ushort)Convert.ToSByte(cmbcollector.SelectedValue);
         }
+
     }
 }
