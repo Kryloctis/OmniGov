@@ -20,13 +20,13 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
 
         private bool buttonSelectAccess;
+        private DataTable dtPaymentCollection;
+
 
         public frmCollectorsRCDLoad(byte fundId, ushort collectorId, ucCollectorsRCD uc)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgPreview, true);
-
 
             _fundId = fundId;
             _collectorId = collectorId;
@@ -46,8 +46,8 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void LoadCollections()
         {
-            var collectionFrom = dtfrom.Value;
-            var collectionTo = dtto.Value;
+            var collectionFrom = Convert.ToDateTime(dtfrom.SelectionRange.Start.ToShortDateString());
+            var collectionTo = Convert.ToDateTime(dtto.SelectionRange.Start.ToShortDateString());
 
             var parameter = new object[] {
                 _collectorId,
@@ -56,88 +56,37 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 collectionTo
             };
 
-            var dtPaymentCollection = Factory.PaymentCollectionRepository().GetRecordByLedger(parameter);
-            HelperLoadRecords.CollectionDataGridView(dtPaymentCollection, dgPreview);
+            dtPaymentCollection = Factory.PaymentCollectionRepository().GetRecordByLedger(parameter);
+
+            int collectionsCount = dtPaymentCollection.Rows.Count;
+            txtCollectionsCount.Text = collectionsCount.ToString();
         }
 
         private void EnableDisableLocalControls()
         {
-            buttonSelectAccess = dgPreview.Rows.Count != 0;
+            buttonSelectAccess = dtPaymentCollection.Rows.Count != 0;
             btnSelectCollections.Enabled = buttonSelectAccess;
         }
 
         private void btnSelectCollections_Click(object sender, EventArgs e)
         {
-
-            DataTable dtPaymentCollection = new();
-
-            dtPaymentCollection.Columns.Add("Payment Collection ID");
-            dtPaymentCollection.Columns.Add("Fund Id");
-            dtPaymentCollection.Columns.Add("Fund");
-            dtPaymentCollection.Columns.Add("Accountable Form ID");
-            dtPaymentCollection.Columns.Add("Accountable Form");
-            dtPaymentCollection.Columns.Add( "Abstract Of General Collection ID");
-            dtPaymentCollection.Columns.Add("Abstract Of General Collection");
-            dtPaymentCollection.Columns.Add("Payee");
-            dtPaymentCollection.Columns.Add("Receipt No.");
-            dtPaymentCollection.Columns.Add("Quantity");
-            dtPaymentCollection.Columns.Add("Payment Date");
-            dtPaymentCollection.Columns.Add("Amount");
-            dtPaymentCollection.Columns.Add("Created at");
-            dtPaymentCollection.Columns.Add("Created by");
-            dtPaymentCollection.Columns.Add("Updated at");
-            dtPaymentCollection.Columns.Add("Updated by");
-
-            foreach (DataGridViewRow row in dgPreview.Rows)
-            {
-                string paymentCollectionId = row.Cells["payment_collection_id"].Value.ToString();
-                string fundId = row.Cells["fund_id"].Value.ToString();
-                string fund = row.Cells["fund"].Value.ToString();
-                string accountableFormId = row.Cells["accountable_form_id"].Value.ToString();
-                string accountableForm = row.Cells["accountable_form"].Value.ToString();
-                string abstractOfGeneralCollectionId = row.Cells["abstract_of_general_collection_id"].Value.ToString();
-                string abstractOfGeneralCollection = row.Cells["abstract_of_general_collection"].Value.ToString();
-                string payee = row.Cells["payee"].Value.ToString();
-                string receiptNo = row.Cells["receipt_no"].Value.ToString();
-                string quantity = row.Cells["quantity"].Value.ToString();
-                string paymentDate = row.Cells["payment_date"].Value.ToString();
-                string amount = row.Cells["amount"].Value.ToString();
-                string createdAt = row.Cells["created_at"].Value.ToString();
-                string createdBy = row.Cells["created_by"].Value.ToString();
-                string updatedAt = row.Cells["updated_at"].Value.ToString();
-                string updatedBy = row.Cells["updated_by"].Value.ToString();
-
-
-                object[] columns = {
-                    paymentCollectionId,
-                    fundId,
-                    fund,
-                    accountableFormId,
-                    accountableForm,
-                    abstractOfGeneralCollectionId,
-                    abstractOfGeneralCollection,
-                    payee,
-                    receiptNo,
-                    quantity,
-                    paymentDate,
-                    amount,
-                    createdAt,
-                    createdBy,
-                    updatedAt,
-                    updatedBy,
-                };
-
-
-                dtPaymentCollection.Rows.Add(columns);
-            }
-
-            _uc.dgvpayments.DataSource = dtPaymentCollection;
-
+            HelperLoadRecords.PaymentDatagridView(dtPaymentCollection, _uc.dgvpayments);
+            this.Close();
         }
-        private void dgPreview_SelectionChanged(object sender, EventArgs e)
+
+        private void frmCollectorsRCDLoad_Load(object sender, EventArgs e)
         {
 
         }
 
+        private void dtfrom_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            lblCollectionsFrom.Text = dtfrom.SelectionRange.Start.ToShortDateString();
+        }
+
+        private void dtto_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            lblCollectionsTo.Text = dtto.SelectionRange.Start.ToShortDateString();
+        }
     }
 }
