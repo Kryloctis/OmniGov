@@ -49,10 +49,10 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // ucCollectorsrcd1
+            // ucCollectorsRCD1
             // 
             this.ucCollectorsRCD1.Location = new System.Drawing.Point(0, 75);
-            this.ucCollectorsRCD1.Name = "ucCollectorsrcd1";
+            this.ucCollectorsRCD1.Name = "ucCollectorsRCD1";
             this.ucCollectorsRCD1.Size = new System.Drawing.Size(916, 520);
             this.ucCollectorsRCD1.TabIndex = 0;
             // 

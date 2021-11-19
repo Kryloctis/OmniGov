@@ -24,9 +24,17 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void CollectorsRCD_Load(object sender, EventArgs e)
         {
-
+            ValidateLocalPermission();
         }
 
+
+        private void ValidateLocalPermission()
+        {
+            if (!Helper.HasPermission("Transaction Approved RCD"))
+                btnApprove.Visible = false;
+            if (!Helper.HasPermission("Transaction Disapproved RCD"))
+                btnDisapprove.Visible = false;
+        }
 
     }
 }
