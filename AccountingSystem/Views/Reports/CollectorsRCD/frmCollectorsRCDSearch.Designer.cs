@@ -57,7 +57,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(752, 33);
+            this.panel1.Size = new System.Drawing.Size(814, 33);
             this.panel1.TabIndex = 0;
             // 
             // label1
@@ -133,16 +133,16 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.panel2.Controls.Add(this.btnClose);
             this.panel2.Controls.Add(this.btnSelect);
-            this.panel2.Location = new System.Drawing.Point(0, 337);
+            this.panel2.Location = new System.Drawing.Point(0, 367);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(752, 28);
+            this.panel2.Size = new System.Drawing.Size(814, 28);
             this.panel2.TabIndex = 9;
             // 
             // btnClose
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(666, 3);
+            this.btnClose.Location = new System.Drawing.Point(728, 3);
             this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClose.Name = "btnClose";
             this.btnClose.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -154,7 +154,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             // btnSelect
             // 
             this.btnSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSelect.Location = new System.Drawing.Point(578, 3);
+            this.btnSelect.Location = new System.Drawing.Point(640, 3);
             this.btnSelect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -175,7 +175,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.dgCollectorsReport.Name = "dgCollectorsReport";
             this.dgCollectorsReport.RowHeadersWidth = 51;
             this.dgCollectorsReport.RowTemplate.Height = 29;
-            this.dgCollectorsReport.Size = new System.Drawing.Size(745, 297);
+            this.dgCollectorsReport.Size = new System.Drawing.Size(807, 327);
             this.dgCollectorsReport.TabIndex = 18;
             this.dgCollectorsReport.SelectionChanged += new System.EventHandler(this.dgCollectorsReport_SelectionChanged);
             // 
@@ -183,7 +183,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(752, 365);
+            this.ClientSize = new System.Drawing.Size(814, 395);
             this.Controls.Add(this.dgCollectorsReport);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);

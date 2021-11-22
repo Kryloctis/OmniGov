@@ -45,6 +45,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void frmCollectorsRCDSearch_Load(object sender, EventArgs e)
         {
+            cmbstatus.SelectedIndex = 1;
             LoadFunds();
             LoadRecords();
         }
@@ -54,9 +55,10 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             try
             {
-                string status = cmbstatus.Text.ToUpper();
+                string status = cmbstatus.Text.ToLower();
                 byte fundId = (byte)(cmbfunds.SelectedValue != null ? Convert.ToByte(cmbfunds.SelectedValue.ToString()) : 0);
                 string keySearch = txtsearch.Text;
+
 
                 var colectorRepository = Factory.CollectorReportRepository();
 
@@ -103,9 +105,5 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             LoadRecords();
         }
 
-        private void cmbstatus_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
