@@ -21,6 +21,8 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         public frmCollectorsRCDSearch(frmCollectorsRCD frmCollectorsRCD, ucCollectorsRCD uc)
         {
             InitializeComponent();
+
+            Helper.DatagridFullRowSelectStyle(dgCollectorsReport);
             _frmCollectorsRCD = frmCollectorsRCD;
             _uc = uc;
         }
@@ -89,7 +91,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.Close();
         }
 
-
-
+        private void txtsearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
     }
 }

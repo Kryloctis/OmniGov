@@ -493,11 +493,13 @@ namespace AccountingSystem
             datagrid.Columns[5].DefaultCellStyle.Format = "N2";
             datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns[6].Visible = false;
-            DataGridViewCheckBoxColumn chk = new DataGridViewCheckBoxColumn();
-            datagrid.Columns.Add(chk);
-            chk.HeaderText = "Generate RCD";
             datagrid.Sort(datagrid.Columns[0], System.ComponentModel.ListSortDirection.Descending);
-
+            
+            
+            foreach (DataGridViewColumn column in datagrid.Columns)
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+  
+          
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
