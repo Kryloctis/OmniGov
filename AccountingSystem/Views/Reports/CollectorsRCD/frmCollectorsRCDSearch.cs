@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             InitializeComponent();
 
-            Helper.DatagridFullRowSelectStyle(dgCollectorsReport);
+            Helper.DatagridFullRowSelectStyle(dgCollectorsReport, true);
             _frmCollectorsRCD = frmCollectorsRCD;
             _uc = uc;
         }
@@ -54,12 +54,14 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             try
             {
-                int approved = cmbstatus.SelectedIndex != -1 && cmbstatus.SelectedItem.Equals("Approved") ? 1 : 0;
-                string status = cmbstatus.SelectedIndex != -1 && (cmbstatus.SelectedItem.Equals("Pending") || cmbstatus.SelectedItem.Equals("Cancelled")) ? cmbstatus.SelectedItem.ToString().ToUpper() : string.Empty;
-                int fundid = cmbfunds.SelectedValue != null ? int.Parse(cmbfunds.SelectedValue.ToString()) : 0;
+                string status = cmbstatus.Text.ToUpper();
+                byte fundId = (byte)(cmbfunds.SelectedValue != null ? Convert.ToByte(cmbfunds.SelectedValue.ToString()) : 0);
+                string keySearch = txtsearch.Text;
 
-                var colrepo = Factory.CollectorReportRepository();
-                var dtrcd = colrepo.GetRecords(approved, status, fundid, string.Empty);
+                var colectorRepository = Factory.CollectorReportRepository();
+
+                var dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch);
+
                 HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgCollectorsReport);
             }
             catch (Exception ex)
@@ -94,6 +96,16 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
             LoadRecords();
+        }
+
+        private void cmbstatus_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
+
+        private void cmbstatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

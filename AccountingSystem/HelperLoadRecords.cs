@@ -481,25 +481,65 @@ namespace AccountingSystem
         #region Collector Report
         internal static void CollectorReportDatagridView(DataTable dataTable, DataGridView datagrid)
         {
-            datagrid.Columns.Clear();
-            datagrid.DataSource = dataTable;
 
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Report No.";
-            datagrid.Columns[2].HeaderText = "Fund";
-            datagrid.Columns[3].HeaderText = "Date";
-            datagrid.Columns[4].HeaderText = "Collector";
-            datagrid.Columns[5].HeaderText = "Total Amount";
-            datagrid.Columns[5].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[6].Visible = false;
-            datagrid.Sort(datagrid.Columns[0], System.ComponentModel.ListSortDirection.Descending);
+            datagrid.Rows.Clear();
+            datagrid.Columns.Clear();
+
+            datagrid.Columns.Add("id", "Id");
+            datagrid.Columns.Add("report_no", "Report No. ");
+            datagrid.Columns.Add("collecting_officers_id", "Collecting Officer Id");
+            datagrid.Columns.Add("fund_id", "Fund Id");
+            datagrid.Columns.Add("fund_name", "Fund");
+            datagrid.Columns.Add("date", "Date");
+            datagrid.Columns.Add("is_approved", "is_approved");
+            datagrid.Columns.Add("is_disapproved", "is_disapproved");
+            datagrid.Columns.Add("amount", "Amount");
+            datagrid.Columns.Add("status", "Status");
+
+
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["collecting_officers_id"].Visible = false;
+            datagrid.Columns["fund_id"].Visible = false;
+            datagrid.Columns["is_approved"].Visible = false;
+            datagrid.Columns["is_disapproved"].Visible = false;
+
+            datagrid.Columns["status"].Width = 90;
+            datagrid.Columns["status"].MinimumWidth = 90;
+            datagrid.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+
+            datagrid.Columns["amount"].Resizable = DataGridViewTriState.False;
+            datagrid.Columns["amount"].Width = 80;
+            datagrid.Columns["amount"].MinimumWidth = 80;
+            datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            datagrid.Columns["date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
+
+
+            foreach (DataRow drCollectionReport in dataTable.Rows)
+            {
+                var status = Convert.ToInt16(drCollectionReport["is_approved"].ToString()) == 1 ? " Approved" :
+                             Convert.ToInt16(drCollectionReport["is_disapproved"].ToString()) == 1 ? " Disapproved": " Pending"; 
+                            
+
+                datagrid.Rows.Add(new object[]
+                {
+                    drCollectionReport["id"],
+                    drCollectionReport["report_no"],
+                    drCollectionReport["collecting_officers_id"],
+                    drCollectionReport["fund_id"],
+                    drCollectionReport["fund_name"],
+                    drCollectionReport["date"],
+                    drCollectionReport["is_approved"],
+                    drCollectionReport["is_disapproved"],
+                    drCollectionReport["amount"],
+                    status
+                });
+            }
+
+            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", 9f);
             
-            
-            foreach (DataGridViewColumn column in datagrid.Columns)
-                column.SortMode = DataGridViewColumnSortMode.NotSortable;
-  
-          
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }

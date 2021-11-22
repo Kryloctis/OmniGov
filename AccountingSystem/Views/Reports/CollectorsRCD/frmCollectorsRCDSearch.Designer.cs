@@ -75,6 +75,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.cmbstatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbstatus.FormattingEnabled = true;
             this.cmbstatus.Items.AddRange(new object[] {
+            "All",
             "Approved",
             "Disapproved",
             "Pending",
@@ -84,6 +85,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.cmbstatus.Name = "cmbstatus";
             this.cmbstatus.Size = new System.Drawing.Size(185, 23);
             this.cmbstatus.TabIndex = 9;
+            this.cmbstatus.SelectedValueChanged += new System.EventHandler(this.cmbstatus_SelectedValueChanged);
             // 
             // label2
             // 

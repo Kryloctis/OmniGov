@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.CollectorsRCD
@@ -57,44 +58,50 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 return false;
             }
 
-            var collectorsReportModel = new CollectorReportModel()
+            using (var scope = new TransactionScope())
             {
-                CollectorId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
-                ReportNo = uc.txtReport.Text.Trim(),
-                Date = Convert.ToDateTime(uc.dtdate.Value),
-                IsApproved = 0,
-                IsDisapproved = 0,
-                FundId = uc.fundId,
-                Remarks = String.Empty
-            };
-
-            bool rcdDetailsSaveSuccess = Factory.CollectorReportRepository().Insert(collectorsReportModel);
-
-            if (!rcdDetailsSaveSuccess) return false;
-            if (uc.dgPayments.Rows.Count == 0) return false;
-
-
-            data = new List<CollectorReportPaymentModel>();
-            data.Clear();
-
-
-            foreach (DataGridViewRow item in uc.dgPayments.Rows)
-            {
-                var PaymentCollectionsId = Convert.ToInt16(item.Cells["payment_collection_id"].Value.ToString());
-
-                var collectorReportPaymentModel = new CollectorReportPaymentModel()
+                var collectorsReportModel = new CollectorReportModel()
                 {
-                    CollectorsReportId = CollectorsReportId(),
-                    PaymentCollectionsId = PaymentCollectionsId
+                    CollectorId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
+                    ReportNo = uc.txtReport.Text.Trim(),
+                    Date = Convert.ToDateTime(uc.dtdate.Value),
+                    IsApproved = 0,
+                    IsDisapproved = 0,
+                    FundId = uc.fundId,
+                    Remarks = String.Empty
                 };
 
-                Factory.CollectorReportPaymentsRepository().Insert(collectorReportPaymentModel);
-            }
+                bool rcdDetailsSaveSuccess = Factory.CollectorReportRepository().Insert(collectorsReportModel);
 
-            return true;
+                if (!rcdDetailsSaveSuccess) return false;
+                if (uc.dgPayments.Rows.Count == 0) return false;
+
+
+                data = new List<CollectorReportPaymentModel>();
+                data.Clear();
+
+
+                foreach (DataGridViewRow item in uc.dgPayments.Rows)
+                {
+                    var CollectorsReportId = GetCollectorsReportId();
+                    var PaymentCollectionsId = Convert.ToInt16(item.Cells["payment_collection_id"].Value.ToString());
+
+
+                    var collectorReportPaymentModel = new CollectorReportPaymentModel()
+                    {
+                        CollectorsReportId = CollectorsReportId,
+                        PaymentCollectionsId = PaymentCollectionsId
+                    };
+
+                    Factory.CollectorReportPaymentsRepository().Insert(collectorReportPaymentModel);
+                }
+
+                scope.Complete();
+                return true;
+            }
         }
 
-        private int CollectorsReportId()
+        private int GetCollectorsReportId()
         {
             var collectorId = uc.collectorId;
             var reportNumber = uc.txtReport.Text;

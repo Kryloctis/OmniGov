@@ -10,7 +10,7 @@ using System.Transactions;
 
 namespace ACC.Data
 {
-    class CollectorReportRepository:ICollectorReportRepository
+    class CollectorReportRepository : ICollectorReportRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableColletorsReport = "collector_report";
@@ -18,6 +18,10 @@ namespace ACC.Data
         private readonly string tableCollectorReportPayments = "collector_report_payments";
         private readonly string tablePaymentCollections = "payment_collections";
         private readonly string tableFunds = "funds";
+
+
+
+        private readonly string viewTableName = "view_collector_report";
 
         public CollectorReportRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -51,7 +55,7 @@ namespace ACC.Data
                     record.Add("status", reader.Rows[0]["status"].ToString());
                     record.Add("remarks", reader.Rows[0]["remarks"].ToString());
                 }
-                
+
             }
             catch (Exception)
             {
@@ -141,7 +145,7 @@ namespace ACC.Data
                 var uRepository = Factory.UsersRepository();
                 int cid = uRepository.LinkedCollector(Factory.UserId) ? int.Parse(uRepository.GetCollectorByUserId(Factory.UserId)) : 0;
                 if (cid > 0) conditions.Add($"{tableColletorsReport}.collecting_officers_id={cid}");
-                if(id.Length > 0) conditions.Add($"{tableColletorsReport}.id IN ({id})");
+                if (id.Length > 0) conditions.Add($"{tableColletorsReport}.id IN ({id})");
                 if (conditions.Count > 0)
                 {
                     query += $" WHERE {string.Join(" AND ", conditions)}";
@@ -155,7 +159,7 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetRecords(int approved,string status, int fid, string date)
+        public DataTable GetRecords(int approved, string status, int fid, string date)
         {
             try
             {
@@ -173,8 +177,8 @@ namespace ACC.Data
                 if (colid > 0) conditions.Add($"{tableColletorsReport}.collecting_officers_id={colid}");
                 if (date.Length > 0) conditions.Add($"{tableColletorsReport}.date='{date}'");
                 if (approved > 0) conditions.Add($"{tableColletorsReport}.is_approved={approved}");
-                if(status.Length > 0) conditions.Add($"{tableColletorsReport}.status='{status}'");
-                if (fid > 0) conditions.Add($"{tableColletorsReport}.funds_id={fid}");                
+                if (status.Length > 0) conditions.Add($"{tableColletorsReport}.status='{status}'");
+                if (fid > 0) conditions.Add($"{tableColletorsReport}.funds_id={fid}");
                 if (conditions.Count > 0)
                 {
                     query += $" WHERE {string.Join(" AND ", conditions)}";
@@ -188,16 +192,16 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetSummary(int cid,int fid,int year)
+        public DataTable GetSummary(int cid, int fid, int year)
         {
             try
             {
                 List<string> conditions = new List<string>();
                 string query = $"SELECT * FROM {tableColletorsReport}";
-                if(cid > 0) conditions.Add($"collecting_officers_id={cid}");
+                if (cid > 0) conditions.Add($"collecting_officers_id={cid}");
                 if (year > 0) conditions.Add($"DATE_FORMAT(date,'%Y')={year}");
                 if (fid > 0) conditions.Add($"funds_id={fid}");
-                
+
                 if (conditions.Count > 0)
                 {
                     query += $" WHERE {string.Join(" AND ", conditions)}";
@@ -256,7 +260,7 @@ namespace ACC.Data
 
                 return _dbGenericCommands.ExecuteNonQueryId(query, parameters);
 
-                
+
             }
             catch (Exception)
             {
@@ -505,9 +509,61 @@ namespace ACC.Data
             }
         }
 
-        public int GetReportId(int collectorId, string collectorReportId)
+        public int GetReportId(int collectorId, string collectorReportNumber)
         {
-            return 2;
+
+            var parameter = new object[][] {
+                new object[] {"@collectorId", DbType.Int16, collectorId},
+                new object[] { "@collectorReportNumber", DbType.String, collectorReportNumber}
+            };
+
+            string query = $"SELECT id FROM {tableColletorsReport} " +
+                $"WHERE collecting_officers_id = @collectorId AND report_no = @collectorReportNumber ";
+
+            return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
+
+        }
+
+        public DataTable FilterRecords(string status, byte fundId, string keySearch)
+        {
+            try
+            {
+                string statusQuery;
+
+                switch (status)
+                {
+                    case "pending":
+                        statusQuery = " is_approved = 0 AND is_disapproved = 0 AND ";
+                        break;
+
+                    case "approved":
+                        statusQuery = " is_approved = 1 AND is_disapproved = 0 AND  ";
+                        break;
+
+                    case "disapproved":
+                        statusQuery = " is_approved = 0 AND is_disapproved = 1 AND  ";
+                        break;
+
+                    default:
+                        statusQuery = string.Empty;
+                        break;
+                }
+
+                var parameter = new object[][] {
+                    new object[] {"@keySearch", DbType.String, $"%{keySearch}%" },
+                    new object[] {"@fundId", DbType.Byte, fundId }
+                };
+
+                string query = $"SELECT * FROM {viewTableName} WHERE {statusQuery} fund_id = @fundId AND " +
+                    $"(collecting_officer LIKE @keySearch OR report_no LIKE @keySearch OR fund_name LIKE @keySearch)";
+
+                var dtCollectorReport = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtCollectorReport, parameter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

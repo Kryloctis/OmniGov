@@ -17,9 +17,10 @@ namespace ACC.Domain.Interfaces
         bool Approved(CollectorReportModel entity);
         bool Cancel(int id);
 
-        int GetReportId(int collectorId, string collectorReportId);
+        int GetReportId(int collectorId, string collectorReporrtNumber);
         DataTable GetRecords(int approved, string status, int fid, string date);
         bool Remarks(CollectorReportModel entity);
         DataTable GetRecords(string id);
+        DataTable FilterRecords(string status, byte fundId, string keySearch);
     }
 }
