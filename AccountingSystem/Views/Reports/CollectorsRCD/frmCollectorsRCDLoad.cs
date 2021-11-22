@@ -44,7 +44,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             EnableDisableLocalControls();
         }
 
-        private void LoadCollections()
+        internal void LoadCollections()
         {
             var collectionFrom = Convert.ToDateTime(dtfrom.SelectionRange.Start.ToShortDateString());
             var collectionTo = Convert.ToDateTime(dtto.SelectionRange.Start.ToShortDateString());
@@ -70,7 +70,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnSelectCollections_Click(object sender, EventArgs e)
         {
-            HelperLoadRecords.PaymentDatagridView(dtPaymentCollection, _uc.dgvpayments);
+            HelperLoadRecords.PaymentDatagridView(dtPaymentCollection, _uc.dgPayments);
             this.Close();
         }
 

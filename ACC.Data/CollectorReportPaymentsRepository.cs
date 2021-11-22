@@ -8,7 +8,7 @@ using System.Transactions;
 
 namespace ACC.Data
 {
-    class CollectorReportPaymentsRepository:ICollectorReportPaymentRepository
+    class CollectorReportPaymentsRepository:ICollectorReportPaymentsRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "collector_report_payments";
@@ -91,63 +91,6 @@ namespace ACC.Data
             }
         }
 
-        public bool Insert(List<CollectorReportPaymentModel> entityList)
-        {
-            try
-            {
-                using (var scope = new TransactionScope())
-                {                    
-                    foreach (var entity in entityList)
-                    {
-                        var parameters = new object[][]
-                        {
-                            new object[] { "@collector_report_id", DbType.Int16, entity.CoId},
-                            new object[] { "@payment_collections_id", DbType.Int16, entity.PcId},
-                        };
-
-                        string query = $"INSERT INTO {tableName} (collector_report_id,payment_collections_id) VALUES(@collector_report_id,@payment_collections_id)";
-                        _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-                    }
-
-                    scope.Complete();
-                    return true;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-           
-        }
-
-        public bool Update(List<CollectorReportPaymentModel> entityList)
-        {
-            try
-            {
-                using (var scope = new TransactionScope())
-                {
-                    foreach (var entity in entityList)
-                    {
-                        var parameters = new object[][]
-                        {
-                            new object[] { "@id", DbType.Int16, entity.Id},
-                            new object[] { "@collector_report_id", DbType.Int16, entity.CoId},
-                            new object[] { "@payment_collections_id", DbType.Int16, entity.PcId},
-                        };
-
-                        string query = $"UPDATE {tableName} SET collector_report_id=@collector_report_id,payment_collections_id=@payment_collections_id WHERE id=@id";
-                        _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-                    }
-
-                    scope.Complete();
-                    return true;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
         public bool Append(List<CollectorReportPaymentModel> entityList)
         {
@@ -163,8 +106,8 @@ namespace ACC.Data
                             var parameters = new object[][]
                            {
                                 new object[] { "@id", DbType.Int16, entity.Id},
-                                new object[] { "@collector_report_id", DbType.Int16, entity.CoId},
-                                new object[] { "@payment_collections_id", DbType.Int16, entity.PcId},
+                                new object[] { "@collector_report_id", DbType.Int16, entity.CollectorsReportId},
+                                new object[] { "@payment_collections_id", DbType.Int16, entity.PaymentCollectionsId},
                            };
 
                             string query = $"UPDATE {tableName} SET collector_report_id=@collector_report_id,payment_collections_id=@payment_collections_id WHERE id=@id";
@@ -174,8 +117,8 @@ namespace ACC.Data
                         {
                             var parameters = new object[][]
                                {
-                                    new object[] { "@collector_report_id", DbType.Int16, entity.CoId},
-                                    new object[] { "@payment_collections_id", DbType.Int16, entity.PcId},
+                                    new object[] { "@collector_report_id", DbType.Int16, entity.CollectorsReportId},
+                                    new object[] { "@payment_collections_id", DbType.Int16, entity.PaymentCollectionsId},
                                };
 
                             string query = $"INSERT INTO {tableName} (collector_report_id,payment_collections_id) VALUES(@collector_report_id,@payment_collections_id)";
@@ -201,11 +144,11 @@ namespace ACC.Data
                 {
                     foreach (var entity in entityList)
                     {
-                        if(entity.CoId > 0)
+                        if(entity.CollectorsReportId > 0)
                         {
                            var parameters = new object[][]
                            {
-                                new object[] { "@collector_report_id", DbType.Int16, entity.CoId},
+                                new object[] { "@collector_report_id", DbType.Int16, entity.CollectorsReportId},
                            };
 
                             string query = $"DELETE FROM {tableName} WHERE collector_report_id = @collector_report_id";
@@ -311,12 +254,53 @@ namespace ACC.Data
         }
         public bool Insert(CollectorReportPaymentModel entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@collector_report_id", DbType.Int16, entity.CollectorsReportId},
+                        new object[] { "@payment_collections_id", DbType.Int16, entity.PaymentCollectionsId},
+                    };
+
+                    string query = $"INSERT INTO {tableName} (collector_report_id, payment_collections_id) VALUES(@collector_report_id, @payment_collections_id)";
+                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                 
+                    scope.Complete();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Update(CollectorReportPaymentModel entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@id", DbType.Int16, entity.Id},
+                        new object[] { "@collector_report_id", DbType.Int16, entity.CollectorsReportId},
+                        new object[] { "@payment_collections_id", DbType.Int16, entity.PaymentCollectionsId},
+                    };
+
+                    string query = $"UPDATE {tableName} SET collector_report_id=@collector_report_id,payment_collections_id=@payment_collections_id WHERE id=@id";
+                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+          
+                    scope.Complete();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

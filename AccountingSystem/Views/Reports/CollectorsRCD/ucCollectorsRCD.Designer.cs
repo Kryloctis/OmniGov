@@ -33,7 +33,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         {
             this.components = new System.ComponentModel.Container();
             this.dtdate = new System.Windows.Forms.DateTimePicker();
-            this.txtreport = new System.Windows.Forms.TextBox();
+            this.txtReport = new System.Windows.Forms.TextBox();
             this.cmbcollector = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -46,10 +46,10 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.btnclear = new System.Windows.Forms.Button();
             this.btnadd = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.dgvpayments = new System.Windows.Forms.DataGridView();
+            this.dgPayments = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvpayments)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgPayments)).BeginInit();
             this.SuspendLayout();
             // 
             // dtdate
@@ -61,14 +61,14 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.dtdate.Size = new System.Drawing.Size(225, 23);
             this.dtdate.TabIndex = 19;
             // 
-            // txtreport
+            // txtReport
             // 
-            this.txtreport.Location = new System.Drawing.Point(79, 76);
-            this.txtreport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtreport.MaxLength = 20;
-            this.txtreport.Name = "txtreport";
-            this.txtreport.Size = new System.Drawing.Size(171, 23);
-            this.txtreport.TabIndex = 17;
+            this.txtReport.Location = new System.Drawing.Point(79, 76);
+            this.txtReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtReport.MaxLength = 20;
+            this.txtReport.Name = "txtReport";
+            this.txtReport.Size = new System.Drawing.Size(171, 23);
+            this.txtReport.TabIndex = 17;
             // 
             // cmbcollector
             // 
@@ -194,23 +194,23 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.label4.TabIndex = 22;
             this.label4.Text = "Total";
             // 
-            // dgvpayments
+            // dgPayments
             // 
-            this.dgvpayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvpayments.Location = new System.Drawing.Point(9, 107);
-            this.dgvpayments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dgvpayments.Name = "dgvpayments";
-            this.dgvpayments.RowHeadersWidth = 51;
-            this.dgvpayments.RowTemplate.Height = 29;
-            this.dgvpayments.Size = new System.Drawing.Size(895, 370);
-            this.dgvpayments.TabIndex = 21;
+            this.dgPayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgPayments.Location = new System.Drawing.Point(9, 107);
+            this.dgPayments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgPayments.Name = "dgPayments";
+            this.dgPayments.RowHeadersWidth = 51;
+            this.dgPayments.RowTemplate.Height = 29;
+            this.dgPayments.Size = new System.Drawing.Size(895, 370);
+            this.dgPayments.TabIndex = 21;
             // 
             // ucCollectorsRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dtdate);
-            this.Controls.Add(this.txtreport);
+            this.Controls.Add(this.txtReport);
             this.Controls.Add(this.cmbcollector);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -221,13 +221,13 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.Controls.Add(this.btnclear);
             this.Controls.Add(this.btnadd);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.dgvpayments);
+            this.Controls.Add(this.dgPayments);
             this.Name = "ucCollectorsRCD";
             this.Size = new System.Drawing.Size(913, 510);
             this.Load += new System.EventHandler(this.ucRCDCollector_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvpayments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgPayments)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -236,7 +236,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         #endregion
 
         internal System.Windows.Forms.DateTimePicker dtdate;
-        internal System.Windows.Forms.TextBox txtreport;
+        internal System.Windows.Forms.TextBox txtReport;
         internal System.Windows.Forms.ComboBox cmbcollector;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -249,6 +249,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         internal System.Windows.Forms.Button btnclear;
         internal System.Windows.Forms.Button btnadd;
         private System.Windows.Forms.Label label4;
-        public System.Windows.Forms.DataGridView dgvpayments;
+        public System.Windows.Forms.DataGridView dgPayments;
     }
 }

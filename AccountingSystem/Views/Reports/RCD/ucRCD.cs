@@ -125,7 +125,7 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
-                var rcdRepository = Factory.CollectorReportPaymentRepository();
+                var rcdRepository = Factory.CollectorReportPaymentsRepository();
 
                 var dtrcd = rcdRepository.GetRecords(Id);
 
@@ -192,8 +192,8 @@ namespace AccountingSystem.Views.Reports.RCD
                     if (Helper.MessageBoxConfirmDelete(dgvpayments.Rows.Count))
                     {
                         var rcdModelList = new List<CollectorReportPaymentModel>();
-                        var rcdRepository = Factory.CollectorReportPaymentRepository();
-                        rcdModelList.Add(new CollectorReportPaymentModel() { CoId = Id });
+                        var rcdRepository = Factory.CollectorReportPaymentsRepository();
+                        rcdModelList.Add(new CollectorReportPaymentModel() { CollectorsReportId = Id });
                         if (rcdRepository.Delete(rcdModelList))
                         {
                             LoadCollections();
@@ -240,7 +240,7 @@ namespace AccountingSystem.Views.Reports.RCD
                         if (id > 0)
                         {
                             var rcdModelList = new List<CollectorReportPaymentModel>();
-                            var rcdRepository = Factory.CollectorReportPaymentRepository();
+                            var rcdRepository = Factory.CollectorReportPaymentsRepository();
                             rcdModelList.Add(new CollectorReportPaymentModel() { Id = id });
                             if (rcdRepository.Delete(rcdModelList))
                             {

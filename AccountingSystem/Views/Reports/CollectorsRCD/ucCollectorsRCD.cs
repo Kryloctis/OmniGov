@@ -15,11 +15,12 @@ namespace AccountingSystem.Views.Reports.RCDCollector
     {
         internal byte fundId;
         internal ushort collectorId;
+        internal bool isSaveFunction;
 
         public ucCollectorsRCD()
         {
             InitializeComponent();
-            Helper.DatagridFullRowSelectStyle(dgvpayments, true);
+            Helper.DatagridFullRowSelectStyle(dgPayments, true);
         }
 
         private void ucRCDCollector_Load(object sender, EventArgs e)
@@ -52,6 +53,11 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         internal void ResetForm() 
         {
             cmbcollector.SelectedIndex = -1;
+            txtReport.Text = string.Empty;
+
+            dgPayments.Rows.Clear();
+            dgPayments.Refresh();
+
         }
 
         internal void LoadFunds()
@@ -101,8 +107,14 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         private void btnadd_Click(object sender, EventArgs e)
         {
+            ActionPerformIsSave(true);
             _ = new frmCollectorsRCDLoad(fundId, collectorId, this).ShowDialog();
 
+        }
+
+        internal void ActionPerformIsSave(bool isSave)
+        {
+            isSaveFunction = isSave;
         }
 
         private void cmbcollector_SelectedValueChanged(object sender, EventArgs e)

@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using AccountingSystem;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,7 +24,7 @@ namespace ACC.Data
             _dbGenericCommands = dbGenericCommands;
         }
 
-        public Dictionary<string, string> GetRecordByID(int Id)
+        public Dictionary<string, string> GetRecordByID(int id)
         {
             var record = new Dictionary<string, string>();
 
@@ -31,7 +32,7 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Int32, Id},
+                    new object[] { "@id", DbType.Int32, id},
                 };
 
                 string query = $"SELECT * FROM {tableColletorsReport} WHERE id = @id";
@@ -40,6 +41,7 @@ namespace ACC.Data
                 {
                     if (reader.Rows.Count < 1)
                         return record;
+
                     record.Add("id", reader.Rows[0]["id"].ToString());
                     record.Add("collecting_officers_id", reader.Rows[0]["collecting_officers_id"].ToString());
                     record.Add("report_no", reader.Rows[0]["report_no"].ToString());
@@ -250,7 +252,11 @@ namespace ACC.Data
                 };
 
                 string query = $"INSERT INTO {tableColletorsReport} (collecting_officers_id,report_no,date,is_approved,funds_id,status,remarks) VALUES (@collecting_officers_id,@report_no,@date,@is_approved,@funds_id,@status,@remarks)";
+
+
                 return _dbGenericCommands.ExecuteNonQueryId(query, parameters);
+
+                
             }
             catch (Exception)
             {
@@ -499,6 +505,9 @@ namespace ACC.Data
             }
         }
 
-
+        public int GetReportId(int collectorId, string collectorReportId)
+        {
+            return 2;
+        }
     }
 }

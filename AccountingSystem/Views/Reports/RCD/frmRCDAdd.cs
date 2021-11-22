@@ -95,12 +95,12 @@ namespace AccountingSystem.Views.Reports.RCD
                                     data.Add(new CollectorReportPaymentModel()
                                     {
                                         Id = Convert.ToInt16(uc.dgvpayments.Rows[i].Cells[0].Value),
-                                        CoId = id,
-                                        PcId = Convert.ToInt16(uc.dgvpayments.Rows[i].Cells[1].Value),
+                                        CollectorsReportId = id,
+                                        PaymentCollectionsId = Convert.ToInt16(uc.dgvpayments.Rows[i].Cells[1].Value),
                                     });
                                 }
 
-                                var crpRepository = Factory.CollectorReportPaymentRepository();
+                                var crpRepository = Factory.CollectorReportPaymentsRepository();
                                 return crpRepository.Append(data);
                             }
                            
@@ -135,14 +135,6 @@ namespace AccountingSystem.Views.Reports.RCD
             }*/
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-           
-        }
 
-        private void btnSave_Click_1(object sender, EventArgs e)
-        {
-
-        }
     }
 }

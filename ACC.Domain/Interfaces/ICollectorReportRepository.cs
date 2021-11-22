@@ -16,6 +16,8 @@ namespace ACC.Domain.Interfaces
         bool HasReported(int id);
         bool Approved(CollectorReportModel entity);
         bool Cancel(int id);
+
+        int GetReportId(int collectorId, string collectorReportId);
         DataTable GetRecords(int approved, string status, int fid, string date);
         bool Remarks(CollectorReportModel entity);
         DataTable GetRecords(string id);
