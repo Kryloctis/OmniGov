@@ -49,6 +49,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.txtsearch = new System.Windows.Forms.TextBox();
             this.dgpayments = new System.Windows.Forms.DataGridView();
             this.dtpdate = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgpayments)).BeginInit();
@@ -236,12 +237,24 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.dtpdate.TabIndex = 12;
             this.dtpdate.ValueChanged += new System.EventHandler(this.dtpdate_ValueChanged);
             // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.SystemColors.Control;
+            this.label6.Location = new System.Drawing.Point(403, 23);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(42, 15);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "Search";
+            // 
             // frmPaymentCollection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(1060, 562);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.dtpdate);
             this.Controls.Add(this.dgpayments);
@@ -288,5 +301,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.DataGridView dgpayments;
         private System.Windows.Forms.ToolStripButton btnrefresh;
         private System.Windows.Forms.DateTimePicker dtpdate;
+        private System.Windows.Forms.Label label6;
     }
 }

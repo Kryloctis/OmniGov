@@ -73,12 +73,12 @@ namespace AccountingSystem.Views.Reports.RCD
                 else{
                     var rcdModel = new CollectorReportModel()
                     {
-                        CoId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
-                        ReportNo = uc.txtreport.Text.Trim(),
-                        Date = Convert.ToDateTime(uc.dtdate.Value),
-                        Approved = uc.approved,
-                        Fid = uc.fundId,
-                        status = uc.status
+                        //CollectorId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
+                        //ReportNo = uc.txtreport.Text.Trim(),
+                        //Date = Convert.ToDateTime(uc.dtdate.Value),
+                        //IsApproved = uc.approved,
+                        //FundId = uc.fundId,
+                        //IsDisapproved = uc.status
                     };
                     var rcdRepository = Factory.CollectorReportRepository();
                     if (!rcdRepository.CodeExist(uc.txtreport.Text.Trim()))
@@ -138,6 +138,11 @@ namespace AccountingSystem.Views.Reports.RCD
         private void btnSave_Click(object sender, EventArgs e)
         {
            
+        }
+
+        private void btnSave_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

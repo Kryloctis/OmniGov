@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Reports.RCDCollector;
+﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Reports.RCDCollector;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,5 +37,36 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 btnDisapprove.Visible = false;
         }
 
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("RCD has been created.");
+                uc.ResetForm();
+            }
+        }
+
+        private bool SaveData()
+        {
+            if (!uc.ValidateChildren())
+            {
+                //Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
+            }
+
+            var collectorsReportModel = new CollectorReportModel()
+            {
+                CollectorId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
+                ReportNo = uc.txtreport.Text.Trim(),
+                Date = Convert.ToDateTime(uc.dtdate.Value),
+                IsApproved = 0,
+                IsDisapproved = 0,
+                FundId = uc.fundId,
+                Remarks = String.Empty
+            };
+
+            return Factory.CollectorReportRepository().Insert(collectorsReportModel);
+
+        }
     }
 }

@@ -111,8 +111,8 @@ namespace AccountingSystem.Views.Reports.RCD
                 {
                     CollectorReportModel model = new CollectorReportModel()
                     {
-                        Id = ucrcd1.Id,
-                        Approved = is_approved
+                        //Id = ucrcd1.Id,
+                        //IsApproved = is_approved
                     };
                     var rcdRepository = Factory.CollectorReportRepository();
                     return rcdRepository.Approved(model);
@@ -160,12 +160,12 @@ namespace AccountingSystem.Views.Reports.RCD
                 {
                     var rcdModel = new CollectorReportModel()
                     {
-                        CoId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
-                        ReportNo = uc.txtreport.Text.Trim(),
-                        Date = Convert.ToDateTime(uc.dtdate.Value),
-                        Approved = uc.approved,
-                        Fid = uc.fundId,
-                        status = uc.status
+                        //CollectorId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
+                        //ReportNo = uc.txtreport.Text.Trim(),
+                        //Date = Convert.ToDateTime(uc.dtdate.Value),
+                        //IsApproved = uc.approved,
+                        //FundId = uc.fundId,
+                        //IsDisapproved = uc.status
                     };
                     var rcdRepository = Factory.CollectorReportRepository();
                     if (!rcdRepository.CodeExist(uc.txtreport.Text.Trim()))
@@ -222,13 +222,13 @@ namespace AccountingSystem.Views.Reports.RCD
 
                 var rcdModel = new CollectorReportModel()
                 {
-                    Id = uc.Id,
-                    CoId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
-                    ReportNo = uc.txtreport.Text.Trim(),
-                    Date = Convert.ToDateTime(uc.dtdate.Value),
-                    Approved = uc.approved,
-                    Fid = uc.fundId,
-                    status = uc.status
+                    //Id = uc.Id,
+                    //CollectorId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
+                    //ReportNo = uc.txtreport.Text.Trim(),
+                    //Date = Convert.ToDateTime(uc.dtdate.Value),
+                    //IsApproved = uc.approved,
+                    //FundId = uc.fundId,
+                    //IsDisapproved = uc.status
                 };
                 var rcdRepository = Factory.CollectorReportRepository();
                 bool saved = rcdRepository.Update(rcdModel);

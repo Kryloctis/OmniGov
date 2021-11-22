@@ -13,8 +13,8 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 {
     public partial class ucCollectorsRCD : UserControl
     {
-        private byte fundId;
-        private ushort collectorId;
+        internal byte fundId;
+        internal ushort collectorId;
 
         public ucCollectorsRCD()
         {

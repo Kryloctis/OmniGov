@@ -204,16 +204,16 @@ namespace AccountingSystem.Views.Reports.RCD
                 {
                     if (Helper.MessageBoxConfirmRCDApproved(isapproved))
                     {
-                        var rcdRepository = Factory.CollectorReportRepository();
-                        var rcdModel = new CollectorReportModel()
-                        {
-                            Id = int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString()),
-                            Approved = isapproved ? 0 : 1,
-                        };
-                        if (rcdRepository.Approved(rcdModel))
-                        {
-                            LoadRecords();
-                        }
+                        //var rcdRepository = Factory.CollectorReportRepository();
+                        //var rcdModel = new CollectorReportModel()
+                        //{
+                        //    Id = int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString()),
+                        //    IsApproved = isapproved ? 0 : 1,
+                        //};
+                        //if (rcdRepository.Approved(rcdModel))
+                        //{
+                        //    LoadRecords();
+                        //}
                     }
                 }
                 catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

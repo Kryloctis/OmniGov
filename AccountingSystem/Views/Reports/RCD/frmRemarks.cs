@@ -51,7 +51,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 CollectorReportModel model = new CollectorReportModel()
                 {
                     Id = Id,
-                    remarks = txtremarks.Text.Trim()
+                    Remarks = txtremarks.Text.Trim()
                 };
                 return rcdRepository.Remarks(model);
             }
