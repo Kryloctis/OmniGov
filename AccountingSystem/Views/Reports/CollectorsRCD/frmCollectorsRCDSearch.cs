@@ -14,7 +14,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
     public partial class frmCollectorsRCDSearch : Form
     {
 
-        internal int reportId = 0;
+        internal string reportNo;
         private readonly frmCollectorsRCD _frmCollectorsRCD;
         private readonly ucCollectorsRCD _uc;
 
@@ -78,7 +78,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             {
                 foreach (DataGridViewRow row in dgCollectorsReport.SelectedRows)
                 {
-                    reportId = int.Parse(row.Cells[0].Value.ToString());
+                    reportNo = row.Cells[1].Value.ToString();
                 }
                 btnSelect.Enabled = true;
             }
@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            _frmCollectorsRCD.LoadSelectedValue(reportId);
+            _frmCollectorsRCD.LoadSelectedValue(reportNo);
             _uc.ActionPerformIsSave(false);
             this.Close();
         }

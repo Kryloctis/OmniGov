@@ -11,6 +11,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordByLedger(string Id);
         DataTable GetRecords(int id);
         DataTable GetRecords(string reportno);
+        DataTable GetRecordsByReportNo(string reportNo);
         decimal SumRecords(string reportno);
         decimal SumRecords(int id);
         bool Append(List<CollectorReportPaymentModel> entityList);

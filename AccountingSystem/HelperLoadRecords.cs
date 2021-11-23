@@ -704,10 +704,6 @@ namespace AccountingSystem
             datagrid.Columns.Add("quantity", "Quantity");
             datagrid.Columns.Add("payment_date", "Payment Date");
             datagrid.Columns.Add("amount", "Amount");
-            datagrid.Columns.Add("created_at", "Created at");
-            datagrid.Columns.Add("created_by", "Created by");
-            datagrid.Columns.Add("updated_at", "Updated at");
-            datagrid.Columns.Add("updated_by", "Updated by");
 
 
             datagrid.Columns["payment_collection_id"].Visible = false;
@@ -715,10 +711,6 @@ namespace AccountingSystem
             datagrid.Columns["fund_id"].Visible = false;
             datagrid.Columns["accountable_form_id"].Visible = false;
             datagrid.Columns["abstract_of_general_collection_id"].Visible = false;
-            datagrid.Columns["created_at"].Visible = false;
-            datagrid.Columns["created_by"].Visible = false;
-            datagrid.Columns["updated_at"].Visible = false;
-            datagrid.Columns["updated_by"].Visible = false;
 
 
             datagrid.Columns["accountable_form"].Width = 150;
@@ -752,11 +744,7 @@ namespace AccountingSystem
                     drPaymentCollection["receipt_no"],
                     drPaymentCollection["quantity"],
                     drPaymentCollection["payment_date"],
-                    drPaymentCollection["amount"],
-                    drPaymentCollection["created_at"],
-                    drPaymentCollection["created_by"],
-                    drPaymentCollection["updated_at"],
-                    drPaymentCollection["updated_by"]
+                    drPaymentCollection["amount"]
                 });
             }
 

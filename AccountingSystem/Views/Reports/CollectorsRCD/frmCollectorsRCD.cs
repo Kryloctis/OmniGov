@@ -117,12 +117,12 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         }
 
 
-        internal void LoadSelectedValue(int reportId)
+        internal void LoadSelectedValue(string reportNo)
         {
             try
             {
                 var rcdRepository = Factory.CollectorReportRepository();
-                var rcdData = rcdRepository.GetRecordByID(reportId);
+                var rcdData = rcdRepository.GetRecordByID(reportNo);
 
 
                 uc.collectorId = (ushort)Convert.ToInt16(rcdData["collecting_officers_id"]);
@@ -133,13 +133,17 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 uc.dtdate.Value = Convert.ToDateTime(rcdData["date"]);
 
 
+
+                var collectionOfPaymentReportsRepo = Factory.CollectorReportPaymentsRepository();
+                var collectionOfPaymentReportDt = collectionOfPaymentReportsRepo.GetRecordsByReportNo(reportNo);
+
                 //uc.approved = Convert.ToBoolean(rcdData["is_approved"]) ? 1 : 0;
-                //uc.status = rcdData["status"];
+                //uc.status = rcdData["status"];s
                 //lblStatus.Text = rcdData["status"];
                 //uc.remarks = rcdData["remarks"];
                 //uc.LoadCollections();
 
-                //HelperLoadRecords.PaymentDatagridView(uc.dtPaymentCollection, uc.dgvpayments);
+                HelperLoadRecords.PaymentDatagridView(collectionOfPaymentReportDt, uc.dgPayments);
 
 
                 uc.cmbcollector.Enabled = false;

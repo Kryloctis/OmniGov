@@ -23,6 +23,8 @@ namespace ACC.Data
         private readonly string tableName10 = "sub_major_account_group";
         private readonly string tableName11 = "subsidiary_ledger_accounts";
 
+        private readonly string viewTableName = "view_collector_report_payments";
+
         public CollectorReportPaymentsRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -296,6 +298,27 @@ namespace ACC.Data
                     scope.Complete();
                     return true;
                 }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetRecordsByReportNo(string reportNo)
+        {
+            try
+            {
+                var parameter = new object[][] { 
+                    new object[]{"@reportNo", DbType.String, reportNo},
+                };
+
+                //string query = $"SELECT {tableName}.id,{tableName2}.report_no,{tableName2}.date,CONCAT({tableName8}.account_group_code,'-',{tableName9}.maj_acc_group_code,'-',{tableName10}.sub_maj_acc_group_code,'-',{tableName6}.ledger_code) AS account_code,CONCAT({tableName5}.acc_form_no,'-',{tableName5}.acc_form_desc) AS accform,{tableName6}.ledger_name,CONCAT({tableName11}.sub_code,'-',{tableName11}.sub_name) AS subsidiary,{tableName3}.payee,{tableName3}.receipt_no,{tableName3}.payment_date,{tableName3}.amount,CONCAT({tableName4}.last_name,', ',{tableName4}.first_name,' ',{tableName4}.mid_initial) AS collector,{tableName3}.created_at,{tableName3}.updated_at,CONCAT(u1.last_name,', ',u1.first_name,' ',u1.mid_initial) AS createdby,CONCAT(u2.last_name,', ',u2.first_name,' ',u2.mid_initial) AS updatedby FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collector_report_id LEFT JOIN {tableName3} ON {tableName3}.id={tableName}.payment_collections_id LEFT JOIN {tableName5} ON {tableName5}.id={tableName3}.accountable_forms_id LEFT JOIN {tableName6} ON {tableName6}.id={tableName3}.general_ledger_accounts_id LEFT JOIN {tableName7} u1 ON u1.id={tableName3}.created_by LEFT JOIN {tableName7} u2 ON u2.id={tableName3}.updated_by LEFT JOIN {tableName10} ON {tableName6}.sub_major_account_group_id={tableName10}.id LEFT JOIN {tableName9} ON {tableName10}.major_account_group_id={tableName9}.id LEFT JOIN {tableName8} ON {tableName9}.account_group_id={tableName8}.id LEFT JOIN {tableName11} ON {tableName3}.subsidiary_ledger_accounts_id={tableName11}.id LEFT JOIN {tableName4} ON {tableName4}.id={tableName3}.collecting_officers_id WHERE {tableName2}.id IN ({Id})";
+
+                string query = $"SELECT * FROM {viewTableName} WHERE report_no = @reportNO";
+
+                var dtpc = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
             }
             catch (Exception)
             {

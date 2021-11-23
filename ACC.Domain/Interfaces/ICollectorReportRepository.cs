@@ -8,7 +8,7 @@ namespace ACC.Domain.Interfaces
 {
     public interface ICollectorReportRepository : IRepository<CollectorReportModel>
     {
-        Dictionary<string, string> GetRecordByID(string Id);
+        Dictionary<string, string> GetRecordByID(string reportNo);
         bool CodeExist(string id);
         bool HasGenerated(int id);
         DataTable GetSummary(int cid, int fid, int year);

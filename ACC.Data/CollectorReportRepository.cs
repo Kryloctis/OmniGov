@@ -52,7 +52,6 @@ namespace ACC.Data
                     record.Add("date", reader.Rows[0]["date"].ToString());
                     record.Add("is_approved", reader.Rows[0]["is_approved"].ToString());
                     record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
-                    record.Add("status", reader.Rows[0]["status"].ToString());
                     record.Add("remarks", reader.Rows[0]["remarks"].ToString());
                 }
 
@@ -88,7 +87,6 @@ namespace ACC.Data
                     record.Add("date", reader.Rows[0]["date"].ToString());
                     record.Add("is_approved", reader.Rows[0]["is_approved"].ToString());
                     record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
-                    record.Add("status", reader.Rows[0]["status"].ToString());
                     record.Add("remarks", reader.Rows[0]["remarks"].ToString());
                 }
             }
