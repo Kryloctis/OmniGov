@@ -18,8 +18,8 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
     {
         private int Id;
         Dictionary<int, string> _data = new Dictionary<int, string>();
-        frmRCD frmrcd;
-        public frmGC(Dictionary<int, string> data,frmRCD _frmrcd)
+        frmRCD2 frmrcd;
+        public frmGC(Dictionary<int, string> data,frmRCD2 _frmrcd)
         {
             InitializeComponent();
             _data = data;

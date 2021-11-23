@@ -13,9 +13,9 @@ namespace AccountingSystem.Views.Reports.RCD
 {
     public partial class frmRCDAdd : Form
     {
-        private frmRCD _frmrcd;
+        private frmRCD2 _frmrcd;
         private List<CollectorReportPaymentModel> data;
-        public frmRCDAdd(frmRCD frmrcd)
+        public frmRCDAdd(frmRCD2 frmrcd)
         {
             InitializeComponent();
             _frmrcd = frmrcd;

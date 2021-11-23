@@ -56,7 +56,8 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 
         private void btnGenerateRCD_Click(object sender, EventArgs e)
         {
-            _ = new frmRCDAdd().ShowDialog();
+            frmRCD frmRCD = new frmRCD();
+            frmRCD.ShowDialog();
         }
 
         private void btnReportOfCollections_Click(object sender, EventArgs e)

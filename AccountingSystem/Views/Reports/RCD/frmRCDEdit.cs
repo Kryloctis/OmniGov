@@ -14,9 +14,9 @@ namespace AccountingSystem.Views.Reports.RCD
 {
     public partial class frmRCDEdit : Form
     {
-        private frmRCD _frmrcd;
+        private frmRCD2 _frmrcd;
         private List<CollectorReportPaymentModel> data;
-        public frmRCDEdit(frmRCD frmrcd, int Id)
+        public frmRCDEdit(frmRCD2 frmrcd, int Id)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
