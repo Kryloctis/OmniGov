@@ -596,5 +596,33 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public bool SetRCDStatus(byte status, string reportNo)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@status", DbType.Int16, status},
+                    new object[] { "@reportNo", DbType.String, reportNo},
+                };
+
+                string queryStatus = string.Empty;
+
+                if (status == 0)
+                    queryStatus = $"is_approved = 0, is_disapproved = 0";
+                else if (status == 1)
+                    queryStatus = $"is_approved = 1, is_disapproved = 0";
+                else if (status == 2)
+                    queryStatus = $"is_approved = 0, is_disapproved = 1";
+
+                string query = $"UPDATE {tableColletorsReport} SET {queryStatus} WHERE report_no = @reportNo";
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

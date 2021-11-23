@@ -198,5 +198,44 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 throw;
             }
         }
+
+        private bool SetRCDStatus(byte status, string reportNo)
+        {
+            try
+            {
+
+                var updateResult = Factory.CollectorReportRepository().SetRCDStatus(status, reportNo);
+
+                return updateResult;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void btnApprove_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string reportNo = uc.txtReport.Text;
+                if (String.IsNullOrEmpty(reportNo)) return;
+
+
+                if (MessageBox.Show("Are you sure you want to approved this Collector's Report?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    if (SetRCDStatus(1, reportNo))
+                    {
+                        Helper.MessageBoxSuccess("Collector's Report has been approved.");
+                        CheckRCDStatus(reportNo);
+                    }
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)");
+            }
+        }
     }
 }

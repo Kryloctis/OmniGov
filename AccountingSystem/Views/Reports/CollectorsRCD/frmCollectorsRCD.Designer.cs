@@ -125,6 +125,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnApprove.Text = "&Approve";
             this.btnApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnApprove.ToolTipText = "Approve";
+            this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
             // 
             // btnDisapprove
             // 

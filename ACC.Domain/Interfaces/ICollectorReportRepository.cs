@@ -24,5 +24,7 @@ namespace ACC.Domain.Interfaces
         DataTable FilterRecords(string status, byte fundId, string keySearch);
 
         string GetRCDStatus(string reportNo);
+
+        bool SetRCDStatus(byte status, string reportNo);
     }
 }
