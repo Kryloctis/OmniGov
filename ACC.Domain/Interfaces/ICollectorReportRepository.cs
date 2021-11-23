@@ -26,5 +26,8 @@ namespace ACC.Domain.Interfaces
         string GetRCDStatus(string reportNo);
 
         bool SetRCDStatus(byte status, string reportNo);
+
+        bool SetRemarks(string reportNo, string remark);
+        string GetRemarks(string reportNo);
     }
 }

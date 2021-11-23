@@ -237,5 +237,18 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)");
             }
         }
+
+        private void lblShowMessage_Click(object sender, EventArgs e)
+        {
+            var frmCollectorsRCDRemarks = new frmCollectorsRCDRemarks(this);
+
+            if (uc.Enabled)
+            {
+                frmCollectorsRCDRemarks.btnAccept.Visible = false;
+                frmCollectorsRCDRemarks.btnCancel.Text = "Close";
+            }
+
+            frmCollectorsRCDRemarks.ShowDialog();
+        }
     }
 }

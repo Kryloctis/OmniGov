@@ -186,7 +186,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(841, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(722, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -216,6 +216,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.lblShowMessage.Size = new System.Drawing.Size(88, 17);
             this.lblShowMessage.Text = "Show Message.";
             this.lblShowMessage.Visible = false;
+            this.lblShowMessage.Click += new System.EventHandler(this.lblShowMessage_Click);
             // 
             // frmCollectorsRCD
             // 

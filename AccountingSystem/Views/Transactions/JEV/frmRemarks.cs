@@ -114,5 +114,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 Helper.MessageBoxSuccess("Dissaproval message has been saved.");
             }
         }
+
     }
 }

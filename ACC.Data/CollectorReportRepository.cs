@@ -624,5 +624,47 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public bool SetRemarks(string reportNo, string remarks)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@reportNo", DbType.String, reportNo},
+                    new object[] { "@remarks", DbType.String, remarks }
+                };
+
+                string query = $"UPDATE {tableColletorsReport} SET remarks = @remarks WHERE report_no = @reportNo";
+
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public string GetRemarks(string reportNo)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@reportNo", DbType.String, reportNo}
+                };
+
+                string query = $"SELECT remarks FROM {tableColletorsReport} WHERE report_no = @reportNo";
+                return _dbGenericCommands.ExecuteScalar(query, parameters).ToString();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
