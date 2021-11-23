@@ -104,7 +104,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         }
 
 
-
         private void btnadd_Click(object sender, EventArgs e)
         {
             ActionPerformIsSave(true);

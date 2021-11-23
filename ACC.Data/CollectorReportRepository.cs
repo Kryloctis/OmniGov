@@ -563,5 +563,38 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public string GetRCDStatus(string reportNo)
+        {
+            var record = new Dictionary<string, byte>();
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@reportNo", DbType.String, reportNo }
+                };
+
+                string query = $"SELECT is_approved, is_disapproved FROM {tableColletorsReport} WHERE report_no = @reportNo";
+                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                {
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("is_approved", Convert.ToByte(item[0]));
+                        record.Add("is_disapproved", Convert.ToByte(item[1]));
+                    }
+                }
+
+                if (record["is_approved"] == 1)
+                    return "approved";
+                else if (record["is_disapproved"] == 1)
+                    return "disapproved";
+                else
+                    return "pending";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

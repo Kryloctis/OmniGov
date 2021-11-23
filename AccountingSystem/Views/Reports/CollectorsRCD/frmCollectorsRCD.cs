@@ -29,7 +29,11 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void CollectorsRCD_Load(object sender, EventArgs e)
         {
+
             ValidateLocalPermission();
+
+            if (uc.dgPayments.Rows.Count == 0) return;
+            
         }
 
 
@@ -133,24 +137,66 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 uc.dtdate.Value = Convert.ToDateTime(rcdData["date"]);
 
 
-
                 var collectionOfPaymentReportsRepo = Factory.CollectorReportPaymentsRepository();
                 var collectionOfPaymentReportDt = collectionOfPaymentReportsRepo.GetRecordsByReportNo(reportNo);
-
-                //uc.approved = Convert.ToBoolean(rcdData["is_approved"]) ? 1 : 0;
-                //uc.status = rcdData["status"];s
-                //lblStatus.Text = rcdData["status"];
-                //uc.remarks = rcdData["remarks"];
-                //uc.LoadCollections();
-
                 HelperLoadRecords.PaymentDatagridView(collectionOfPaymentReportDt, uc.dgPayments);
-
-
-                uc.cmbcollector.Enabled = false;
-                uc.txtReport.Enabled = false;
 
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+
+        internal void CheckRCDStatus(string reportNo)
+        {
+            try
+            {
+                switch (Factory.CollectorReportRepository().GetRCDStatus(reportNo))
+                {
+                    case "pending":
+                        //PENDING
+                        lblJevStatus.Text = "PENDING";
+                        lblJevStatus.ForeColor = Color.FromArgb(216, 146, 22);
+                        lblShowMessage.Visible = false;
+                        btnPrint.Enabled = false;
+                        btnApprove.Enabled = true;
+                        btnDisapprove.Enabled = true;
+                        btnDelete.Enabled = true;
+                        uc.Enabled = true;
+                        //btnSave.Enabled = true;
+                        break;
+                    case "approved":
+                        //APPROVED
+                        lblJevStatus.Text = "APPROVED";
+                        lblJevStatus.ForeColor = Color.FromArgb(78, 159, 61);
+                        lblShowMessage.Visible = false;
+                        btnApprove.Enabled = false;
+                        btnDisapprove.Enabled = false;
+                        btnPrint.Enabled = true;
+                        btnSave.Enabled = true;
+                        uc.Enabled = false;
+                        //btnDelete.Enabled = false;
+                        //btnSave.Enabled = false;
+                        break;
+                    case "disapproved":
+                        //DISSAPROVED
+                        lblJevStatus.Text = "DISAPPROVED";
+                        lblJevStatus.ForeColor = Color.FromArgb(149, 1, 1);
+                        lblShowMessage.Visible = true;
+                        btnApprove.Enabled = false;
+                        btnDisapprove.Enabled = false;
+                        btnPrint.Enabled = false;
+                        btnSave.Enabled = false;
+                        btnDelete.Enabled = false;
+                        uc.Enabled = false;
+                        break;
+                }
+
+            }
+
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

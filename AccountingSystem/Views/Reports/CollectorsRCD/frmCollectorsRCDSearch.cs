@@ -91,7 +91,14 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private void btnSelect_Click(object sender, EventArgs e)
         {
             _frmCollectorsRCD.LoadSelectedValue(reportNo);
+            _frmCollectorsRCD.CheckRCDStatus(reportNo);
+
+            _uc.cmbcollector.Enabled = false;
+            _uc.txtReport.Enabled = false;
+            _uc.dgPayments.Enabled = false;
+
             _uc.ActionPerformIsSave(false);
+
             this.Close();
         }
 

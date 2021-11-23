@@ -195,7 +195,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(931, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(812, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -244,7 +244,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(866, 17);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(897, 17);
             this.toolStripStatusLabel3.Spring = true;
             // 
             // toolStripStatusLabel4
