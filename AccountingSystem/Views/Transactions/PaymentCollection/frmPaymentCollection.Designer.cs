@@ -57,6 +57,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             // toolStrip
             // 
+            this.toolStrip.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -241,7 +242,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.SystemColors.Control;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Location = new System.Drawing.Point(403, 23);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(42, 15);

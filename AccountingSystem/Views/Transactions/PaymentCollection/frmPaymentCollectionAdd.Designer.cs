@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.ucPaymentCollection1.Location = new System.Drawing.Point(0, -1);
             this.ucPaymentCollection1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucPaymentCollection1.Name = "ucPaymentCollection1";
-            this.ucPaymentCollection1.Size = new System.Drawing.Size(598, 317);
+            this.ucPaymentCollection1.Size = new System.Drawing.Size(598, 311);
             this.ucPaymentCollection1.TabIndex = 6;
             // 
             // flowLayoutPanel1

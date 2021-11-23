@@ -24,9 +24,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void frmPaymentCollectionAdd_Load(object sender, EventArgs e)
         {
-            ucPaymentCollection1.LoadForms();
-            ucPaymentCollection1.LoadCollectors();
-            ucPaymentCollection1.LoadFunds();
 
             if(ucPaymentCollection1.cmbcollector.Items.Count > 0)
             {
@@ -38,7 +35,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     ucPaymentCollection1.cmbcollector.SelectedValue = data["id"];
                     ucPaymentCollection1.cmbcollector.Enabled = false;
                 }
-               // ucpc1.LoadForms(Helper.UserId);
             }
            
         }
@@ -51,7 +47,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
                 uc.txtCashTicketQuantity.Validating -= new CancelEventHandler(uc.txtCashTicketQuantity_Validating);
 
-                uc.txtpayee.Validating -= new CancelEventHandler(uc.txtpayee_Validating);
 
                 if (!uc.ValidateChildren())
                 {
@@ -138,7 +133,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 SaveCashTickets();
             else
                 SaveReceipts();
-
         }
 
         private void SaveCashTickets()
@@ -148,6 +142,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
                 var uc = ucPaymentCollection1;
 
+                uc.txtreceipt.Validating -= new CancelEventHandler(uc.txtreceipt_Validating);
                 uc.txtpayee.Validating -= new CancelEventHandler(uc.txtpayee_Validating);
 
                 if (!uc.ValidateChildren())
@@ -155,6 +150,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return;
                 }
+
+                uc.txtreceipt.Validating += new CancelEventHandler(uc.txtreceipt_Validating);
+                uc.txtpayee.Validating += new CancelEventHandler(uc.txtpayee_Validating);
 
 
                 var paymentCollectionModel = new PaymentCollectionModel()

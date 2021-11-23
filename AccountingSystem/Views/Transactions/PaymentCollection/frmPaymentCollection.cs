@@ -35,7 +35,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 var pcRepository = Factory.PaymentCollectionRepository();
                 var dtpayments = pcRepository.GetRecords();
+
                 HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
+
                 lblRecordCount.Text = dgpayments.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -107,7 +109,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 int id = int.Parse(dgpayments.CurrentRow.Cells[0].Value.ToString());
                 byte[] columnIndexData = { 11, 12, 13, 14 };
-                Helper.ShowRecordTimestamp(dgpayments, columnIndexData, lblCreatedAt, lblUpdatedAt, lblCreatedBy, lblUpdatedBy);
+                //Helper.ShowRecordTimestamp(dgpayments, columnIndexData, lblCreatedAt, lblUpdatedAt, lblCreatedBy, lblUpdatedBy);
                 Helper.EnableDisableToolStripButtons(dgpayments, btnEdit, btnDelete);
 
                 var crRepository = Factory.CollectorReportRepository();
