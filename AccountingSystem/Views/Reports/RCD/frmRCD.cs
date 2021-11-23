@@ -17,5 +17,15 @@ namespace AccountingSystem.Views.Reports.RCD
             InitializeComponent();
             Helper.LoadFormIcon(this);
         }
+
+        private void btnadd_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            _ = new frmSearch().ShowDialog();
+        }
     }
 }

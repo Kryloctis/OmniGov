@@ -18,12 +18,10 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
     {
         private int Id;
         Dictionary<int, string> _data = new Dictionary<int, string>();
-        frmRCD2 frmrcd;
-        public frmGC(Dictionary<int, string> data,frmRCD2 _frmrcd)
+        public frmGC(Dictionary<int, string> data)
         {
             InitializeComponent();
             _data = data;
-            frmrcd = _frmrcd;
         }
 
         private void frmGC_Load(object sender, EventArgs e)
@@ -122,21 +120,21 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                         fbd.Gcamount = gcsum;
                         if(fbd.ShowDialog() == DialogResult.OK)
                         {
-                            frmrcd.LoadRecords();
-                            frmrcd.rcdgenerate.Clear();
+                            //frmrcd.LoadRecords();
+                            //frmrcd.rcdgenerate.Clear();
                             this.Close();
                         }
                         else
                         {
-                            frmrcd.LoadRecords();
-                            frmrcd.rcdgenerate.Clear();
+                            //frmrcd.LoadRecords();
+                            //frmrcd.rcdgenerate.Clear();
                             this.Close();
                         }
                     }
                     else
                     {
-                        frmrcd.LoadRecords();
-                        frmrcd.rcdgenerate.Clear();
+                        //frmrcd.LoadRecords();
+                        //frmrcd.rcdgenerate.Clear();
                         this.Close();
                     }
                 }

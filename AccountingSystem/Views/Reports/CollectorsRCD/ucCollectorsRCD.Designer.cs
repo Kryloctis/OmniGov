@@ -115,6 +115,8 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.flowLayoutPanelFunds);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -136,6 +138,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             // txttotal
             // 
+            this.txttotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txttotal.Location = new System.Drawing.Point(49, 482);
             this.txttotal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txttotal.Name = "txttotal";
@@ -147,6 +150,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             // btndelete
             // 
+            this.btndelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btndelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btndelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btndelete.Location = new System.Drawing.Point(751, 482);
@@ -160,6 +164,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             // btnclear
             // 
+            this.btnclear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnclear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnclear.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnclear.Location = new System.Drawing.Point(830, 482);
@@ -173,6 +178,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             // btnadd
             // 
+            this.btnadd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnadd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnadd.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnadd.Location = new System.Drawing.Point(675, 482);
@@ -187,6 +193,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(9, 486);
             this.label4.Name = "label4";
@@ -196,6 +203,9 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             // dgPayments
             // 
+            this.dgPayments.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgPayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgPayments.Location = new System.Drawing.Point(9, 107);
             this.dgPayments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

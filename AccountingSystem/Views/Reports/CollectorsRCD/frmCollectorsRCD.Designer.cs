@@ -51,6 +51,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             // 
             // ucCollectorsRCD1
             // 
+            this.ucCollectorsRCD1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ucCollectorsRCD1.Location = new System.Drawing.Point(0, 75);
             this.ucCollectorsRCD1.Name = "ucCollectorsRCD1";
             this.ucCollectorsRCD1.Size = new System.Drawing.Size(916, 520);
@@ -186,7 +189,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(722, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(841, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -226,12 +229,12 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.ucCollectorsRCD1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmCollectorsRCD";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Collector\'s Report of Collections ";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.CollectorsRCD_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

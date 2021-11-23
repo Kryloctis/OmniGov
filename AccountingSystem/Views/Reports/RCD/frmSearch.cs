@@ -12,13 +12,11 @@ namespace AccountingSystem.Views.Reports.RCD
 {
     public partial class frmSearch : Form
     {
-        private frmRCDEdit frmrcd;
         internal int Id = 0;
-        public frmSearch(frmRCDEdit _frmrcd)
+        public frmSearch()
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgrcd);
-            frmrcd = _frmrcd;
             
         }
 
@@ -100,7 +98,7 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             if(Id > 0)
             {
-                frmrcd.LoadSearchValue(Id);
+                //frmrcd.LoadSearchValue(Id);
                 this.Close();
             }
         }

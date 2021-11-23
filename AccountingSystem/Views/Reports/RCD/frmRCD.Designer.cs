@@ -136,6 +136,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnSearch.Size = new System.Drawing.Size(46, 47);
             this.btnSearch.Text = "S&earch";
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtReport
             // 
@@ -217,6 +218,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnadd.Text = "Add";
             this.btnadd.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnadd.UseVisualStyleBackColor = true;
+            this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
             // 
             // frmRCD
             // 
@@ -231,11 +233,12 @@ namespace AccountingSystem.Views.Reports.RCD
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.toolStrip1);
-            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmRCD";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reports of Collections and Deposits (RCD)";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgpayments)).EndInit();
