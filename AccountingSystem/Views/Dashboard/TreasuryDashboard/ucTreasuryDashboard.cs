@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AccountingSystem.Views.Reports.PaymentCollection;
+using AccountingSystem.Views.Reports.CollectorsRCD;
 
 namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 {
@@ -53,14 +54,15 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         {
         }
 
-        private void btnReportCollections_Click(object sender, EventArgs e)
-        {
-            _ = new frmPCReport().ShowDialog();
-        }
-
         private void btnGenerateRCD_Click(object sender, EventArgs e)
         {
+            frmRCD frmRCD = new frmRCD();
+            frmRCD.ShowDialog();
+        }
 
+        private void btnReportOfCollections_Click(object sender, EventArgs e)
+        {
+            _ = new frmCollectorsRCD().ShowDialog();
         }
     }
 }

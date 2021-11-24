@@ -19,5 +19,8 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordByGC(string from, string to);
         DataTable GetRecordByReceipts(int Id); 
         DataTable GetRecordByReceiptsConsolidated(string to);
+
+        DataTable GetRecordsByRCDNo(string rcdNo);
+        int GetGeneralCollectionId(string rcdNo);
     }
 }

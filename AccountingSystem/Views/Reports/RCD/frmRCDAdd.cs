@@ -1,5 +1,4 @@
-﻿using ACC.Domain.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,127 +12,127 @@ namespace AccountingSystem.Views.Reports.RCD
 {
     public partial class frmRCDAdd : Form
     {
-        private frmRCD _frmrcd;
-        private List<CollectorReportPaymentModel> data;
-        public frmRCDAdd(frmRCD frmrcd)
+
+        private readonly frmRCD _frmRCD;
+        private string reportNo;
+        private string collectorsReportId;
+        private string collector;
+
+        public frmRCDAdd(frmRCD frmRCD)
         {
             InitializeComponent();
-            _frmrcd = frmrcd;
+            Helper.DatagridFullRowSelectStyle(dgCollectorsReport, true);
+
+            _frmRCD = frmRCD;
         }
 
         private void frmRCDAdd_Load(object sender, EventArgs e)
-        {            
-            ucrcd1.LoadCollectors();
-            ucrcd1.LoadFunds();            
-            if (ucrcd1.cmbcollector.Items.Count > 0)
-            {                
-                var uRepository = Factory.UsersRepository();
-                if (uRepository.LinkedCollector(Helper.UserId))
-                {
-                    var colRepository = Factory.CollectingOfficerRepository();
-                    var data = colRepository.GetRecordByUserID(Helper.UserId);
-                    ucrcd1.cmbcollector.SelectedValue = data["id"];
-                    ucrcd1.cmbcollector.Enabled = false;
-                }
-               // ucrcd1.chckapproved.Visible = uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer" ? true : false; 
-                if(uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer")
-                {
-                    ucrcd1.btnadd.Visible = false;
-                    ucrcd1.btndelete.Visible = false;
-                    ucrcd1.btnclear.Visible = false;
-                }
-                else
-                {
-                    ucrcd1.btnadd.Visible = true;
-                    ucrcd1.btndelete.Visible = true;
-                    ucrcd1.btnclear.Visible = true;
-                }                
-            }
+        {
+            cmbCollector.SelectedIndex = -1;
+
+
+            cmbCollector.SelectedValueChanged -= new EventHandler(cmbCollector_SelectedValueChanged);
+            LoadCollectors();
+            cmbCollector.SelectedValueChanged += new EventHandler(cmbCollector_SelectedValueChanged);
+
+            LoadFunds();
+            LoadRecords();
         }
 
-        private bool SaveData()
+        private void LoadCollectors()
         {
             try
             {
-                var uc = ucrcd1;
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-                else if (uc.dgvpayments.Rows.Count <= 0)
-                {
-                    Helper.MessageBoxError("Please Load Payment Collection list!");
-                    return false;
-                }
-                else{
-                    var rcdModel = new CollectorReportModel()
-                    {
-                        CoId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
-                        ReportNo = uc.txtreport.Text.Trim(),
-                        Date = Convert.ToDateTime(uc.dtdate.Value),
-                        Approved = uc.approved,
-                        Fid = uc.fundId,
-                        status = uc.status
-                    };
-                    var rcdRepository = Factory.CollectorReportRepository();
-                    if (!rcdRepository.CodeExist(uc.txtreport.Text.Trim()))
-                    {
-                        int id = rcdRepository.InsertId(rcdModel);
-                        if(id > 0)
-                        {
-                            if (uc.dgvpayments.Rows.Count > 0) 
-                            {
-                                data = new List<CollectorReportPaymentModel>();
-                                data.Clear(); 
-                                for (int i = 0; i < uc.dgvpayments.Rows.Count; i++)
-                                {
-                                    data.Add(new CollectorReportPaymentModel()
-                                    {
-                                        Id = Convert.ToInt16(uc.dgvpayments.Rows[i].Cells[0].Value),
-                                        CoId = id,
-                                        PcId = Convert.ToInt16(uc.dgvpayments.Rows[i].Cells[1].Value),
-                                    });
-                                }
+                //cmbCollector.SelectedValueChanged -= new EventHandler(cmbcollector_SelectedValueChanged);
+                var collectingOfficerRepository = Factory.CollectingOfficerRepository();
+                var dtCollectors = collectingOfficerRepository.GetRecords();
 
-                                var crpRepository = Factory.CollectorReportPaymentRepository();
-                                return crpRepository.Append(data);
-                            }
-                           
-                        }
+                cmbCollector.DataSource = dtCollectors;
+                cmbCollector.DisplayMember = "fullname";
+                cmbCollector.ValueMember = "id";
+                //cmbCollector.SelectedValueChanged += new EventHandler(cmbcollector_SelectedValueChanged);
 
-                    }
-                    else
-                    {
-                        Helper.ErrorMessage("Report Number already exists!");
-                        uc.txtreport.Focus();
-                    }
-                }
-              
+                //collectorId = (ushort)Convert.ToInt32(cmbCollector.SelectedValue);
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
-            return false;
         }
 
-        private void frmRCDAdd_Click(object sender, EventArgs e)
+        private void LoadRecords()
         {
-           /* if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("RCD has been saved.");
-                _frmrcd.LoadRecords();
-                var uc = ucrcd1;
-                uc.ResetForm();
-                uc.cmbcollector.Enabled = true;
-                uc.txtreport.Enabled = true;
-            }*/
+                short collectorId = (short)Convert.ToInt32(cmbCollector.SelectedValue);
+                string status = cmbCollector.Text.ToLower();
+                byte fundId = (byte)(cmbfunds.SelectedValue != null ? Convert.ToByte(cmbfunds.SelectedValue.ToString()) : 0);
+                string keySearch = txtsearch.Text;
+
+                var colectorRepository = Factory.CollectorReportRepository();
+                var dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch, collectorId);
+
+                HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgCollectorsReport);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void LoadFunds()
         {
-           
+            try
+            {
+                var fundrepo = Factory.FundsRepository();
+                var dtfunds = fundrepo.GetRecords();
+                cmbfunds.DataSource = dtfunds;
+                cmbfunds.ValueMember = "id";
+                cmbfunds.DisplayMember = "fund_name";
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
+
+        private void txtsearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
+
+        private void btnOkay_Click(object sender, EventArgs e)
+        {
+            _frmRCD.collectorsReportId = Convert.ToInt32(collectorsReportId);
+            _frmRCD.txtReport.Text = reportNo;
+            _frmRCD.txtCollector.Text = collector;
+            _frmRCD.LoadSelectedReport(reportNo);
+
+            this.Close();
+        }
+
+        private void dgCollectorsReport_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgCollectorsReport.Rows.Count > 0 && dgCollectorsReport.SelectedRows.Count > 0)
+            {
+                foreach (DataGridViewRow row in dgCollectorsReport.SelectedRows)
+                {
+                    collectorsReportId = row.Cells[0].Value.ToString();
+                    reportNo = row.Cells[1].Value.ToString();
+                    collector = row.Cells[3].Value.ToString();
+                }
+                btnSelect.Enabled = true;
+            }
+            else
+            {
+                btnSelect.Enabled = false;
+            }
+        }
+
+        private void cmbCollector_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
+
     }
 }

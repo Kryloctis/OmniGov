@@ -478,26 +478,122 @@ namespace AccountingSystem
         }
         #endregion
 
+        #region RCD 
+        internal static void RCDDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+
+            datagrid.Rows.Clear();
+            datagrid.Columns.Clear();
+
+            datagrid.Columns.Add("id", "Id");
+            datagrid.Columns.Add("rcd_no", "RCD No. ");
+            datagrid.Columns.Add("date", "Date");
+            datagrid.Columns.Add("report_no", "Date");
+            datagrid.Columns.Add("users_id", "User Id");
+            datagrid.Columns.Add("user", "Liquidating Officer");
+            datagrid.Columns.Add("amount", "Total Amount");
+
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["users_id"].Visible = false;
+            datagrid.Columns["report_no"].Visible = false;
+
+
+            datagrid.Columns["amount"].Resizable = DataGridViewTriState.False;
+            datagrid.Columns["amount"].Width = 100;
+            datagrid.Columns["amount"].MinimumWidth = 100;
+            datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            datagrid.Columns["date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
+
+
+            foreach (DataRow drRCD in dataTable.Rows)
+            {
+                
+                datagrid.Rows.Add(new object[]
+                {
+                    drRCD["id"],
+                    drRCD["rcd_no"],
+                    drRCD["date"],
+                    drRCD["report_no"],
+                    drRCD["users_id"],
+                    drRCD["user"],
+                    drRCD["amount"]
+                });
+            }
+
+            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", 9f);
+
+         
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        #endregion
+
         #region Collector Report
         internal static void CollectorReportDatagridView(DataTable dataTable, DataGridView datagrid)
         {
+
+            datagrid.Rows.Clear();
             datagrid.Columns.Clear();
-            datagrid.DataSource = dataTable;
 
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Report No.";
-            datagrid.Columns[2].HeaderText = "Fund";
-            datagrid.Columns[3].HeaderText = "Date";
-            datagrid.Columns[4].HeaderText = "Collector";
-            datagrid.Columns[5].HeaderText = "Total Amount";
-            datagrid.Columns[5].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[6].Visible = false;
-            DataGridViewCheckBoxColumn chk = new DataGridViewCheckBoxColumn();
-            datagrid.Columns.Add(chk);
-            chk.HeaderText = "Generate RCD";
-            datagrid.Sort(datagrid.Columns[0], System.ComponentModel.ListSortDirection.Descending);
+            datagrid.Columns.Add("id", "Id");
+            datagrid.Columns.Add("report_no", "Report No. ");
+            datagrid.Columns.Add("collecting_officers_id", "Collecting Officer Id");
+            datagrid.Columns.Add("collector_officer", "Collecting Officer");
+            datagrid.Columns.Add("fund_id", "Fund Id");
+            datagrid.Columns.Add("fund_name", "Fund");
+            datagrid.Columns.Add("date", "Date");
+            datagrid.Columns.Add("is_approved", "is_approved");
+            datagrid.Columns.Add("is_disapproved", "is_disapproved");
+            datagrid.Columns.Add("amount", "Amount");
+            datagrid.Columns.Add("status", "Status");
 
+
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["collecting_officers_id"].Visible = false;
+            datagrid.Columns["collector_officer"].Visible = false;
+            datagrid.Columns["fund_id"].Visible = false;
+            datagrid.Columns["is_approved"].Visible = false;
+            datagrid.Columns["is_disapproved"].Visible = false;
+
+            datagrid.Columns["status"].Width = 90;
+            datagrid.Columns["status"].MinimumWidth = 90;
+            datagrid.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+
+            datagrid.Columns["amount"].Resizable = DataGridViewTriState.False;
+            datagrid.Columns["amount"].Width = 80;
+            datagrid.Columns["amount"].MinimumWidth = 80;
+            datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            datagrid.Columns["date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
+
+
+            foreach (DataRow drCollectionReport in dataTable.Rows)
+            {
+                var status = Convert.ToInt16(drCollectionReport["is_approved"].ToString()) == 1 ? " Approved" :
+                             Convert.ToInt16(drCollectionReport["is_disapproved"].ToString()) == 1 ? " Disapproved": " Pending"; 
+                            
+
+                datagrid.Rows.Add(new object[]
+                {
+                    drCollectionReport["id"],
+                    drCollectionReport["report_no"],
+                    drCollectionReport["collecting_officers_id"],
+                    drCollectionReport["collecting_officer"],
+                    drCollectionReport["fund_id"],
+                    drCollectionReport["fund_name"],
+                    drCollectionReport["date"],
+                    drCollectionReport["is_approved"],
+                    drCollectionReport["is_disapproved"],
+                    drCollectionReport["amount"],
+                    status
+                });
+            }
+
+            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", 9f);
+            
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -556,12 +652,8 @@ namespace AccountingSystem
         }
         #endregion
 
-        #region CollectionDataGridView
-        internal static void CollectionDataGridView(DataTable dataTable, DataGridView datagrid)
+        internal static void CollectionDataGridColumns(DataGridView datagrid) 
         {
-
-            datagrid.Rows.Clear();
-            datagrid.Columns.Clear();
 
             datagrid.Columns.Add("payment_collection_id", "Payment Collection ID");
             datagrid.Columns.Add("fund_id", "Fund Id");
@@ -606,6 +698,15 @@ namespace AccountingSystem
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             datagrid.Columns["payment_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
+        }
+
+        #region CollectionDataGridView
+        internal static void CollectionDataGridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.Rows.Clear();
+            datagrid.Columns.Clear();
+
+            CollectionDataGridColumns(datagrid);
 
             foreach (DataRow drPaymentCollection in dataTable.Rows)
             {
@@ -647,7 +748,7 @@ namespace AccountingSystem
 
             datagrid.Columns.Add("payment_collection_id", "Payment Collection ID");
             datagrid.Columns.Add("fund_id", "Fund Id");
-            datagrid.Columns.Add("fund", "Fund");
+            datagrid.Columns.Add("fund_name", "Fund");
             datagrid.Columns.Add("accountable_form_id", "Accountable Form ID");
             datagrid.Columns.Add("accountable_form", "Accountable Form");
             datagrid.Columns.Add("abstract_of_general_collection_id", "Abstract Of General Collection ID");
@@ -657,43 +758,38 @@ namespace AccountingSystem
             datagrid.Columns.Add("quantity", "Quantity");
             datagrid.Columns.Add("payment_date", "Payment Date");
             datagrid.Columns.Add("amount", "Amount");
-            datagrid.Columns.Add("created_at", "Created at");
-            datagrid.Columns.Add("created_by", "Created by");
-            datagrid.Columns.Add("updated_at", "Updated at");
-            datagrid.Columns.Add("updated_by", "Updated by");
 
 
             datagrid.Columns["payment_collection_id"].Visible = false;
-            datagrid.Columns["fund"].Visible = false;
             datagrid.Columns["fund_id"].Visible = false;
+            datagrid.Columns["fund_name"].Visible = false;
             datagrid.Columns["accountable_form_id"].Visible = false;
             datagrid.Columns["abstract_of_general_collection_id"].Visible = false;
-            datagrid.Columns["created_at"].Visible = false;
-            datagrid.Columns["created_by"].Visible = false;
-            datagrid.Columns["updated_at"].Visible = false;
-            datagrid.Columns["updated_by"].Visible = false;
 
 
-            datagrid.Columns["accountable_form"].Width = 150;
-            datagrid.Columns["abstract_of_general_collection"].Width = 350;
+            datagrid.Columns["accountable_form"].Width = 200;
+            datagrid.Columns["abstract_of_general_collection"].Width = 300;
             datagrid.Columns["payee"].Width = 200;
             datagrid.Columns["receipt_no"].Width = 80;
             datagrid.Columns["quantity"].Width = 60;
 
+            datagrid.Columns["payment_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
+            datagrid.Columns["payment_date"].Width = 120;
+            datagrid.Columns["payment_date"].MinimumWidth = 120;
+
+
             datagrid.Columns["amount"].Resizable = DataGridViewTriState.False;
-            datagrid.Columns["amount"].Width = 100;
-            datagrid.Columns["amount"].MinimumWidth = 100;
+            datagrid.Columns["amount"].Width = 80;
+            datagrid.Columns["amount"].MinimumWidth = 80;
             datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-            datagrid.Columns["payment_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
 
             foreach (DataRow drPaymentCollection in dataTable.Rows)
             {
                 var abstractOfGeneralCollection = $"{drPaymentCollection["account_code"]} - {drPaymentCollection["ledger_name"]}";
+
                 datagrid.Rows.Add(new object[]
                 {
-                    
                     drPaymentCollection["id"],
                     drPaymentCollection["funds_id"],
                     drPaymentCollection["fund_name"],
@@ -705,39 +801,13 @@ namespace AccountingSystem
                     drPaymentCollection["receipt_no"],
                     drPaymentCollection["quantity"],
                     drPaymentCollection["payment_date"],
-                    drPaymentCollection["amount"],
-                    drPaymentCollection["created_at"],
-                    drPaymentCollection["created_by"],
-                    drPaymentCollection["updated_at"],
-                    drPaymentCollection["updated_by"]
+                    drPaymentCollection["amount"]
                 });
             }
 
             datagrid.ClearSelection();
             Helper.DatagridFullRowSelectStyle(datagrid, true);
 
-        }
-        #endregion
-
-        #region RCDGridView
-        internal static void RCDDatagridView(DataTable dataTable, DataGridView datagrid)
-        {
-            datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].Visible = false;
-            datagrid.Columns[2].HeaderText = "Account Code";
-            datagrid.Columns[3].HeaderText = "Accountable Form";
-            datagrid.Columns[4].HeaderText = "Ledger";
-            datagrid.Columns[5].HeaderText = "Subsidiary";
-            datagrid.Columns[6].HeaderText = "Payee";
-            datagrid.Columns[7].HeaderText = "Receipt No.";
-            datagrid.Columns[8].HeaderText = "Payment Date";
-            datagrid.Columns[8].DefaultCellStyle.Format = "yyyy-MM-dd";
-            datagrid.Columns[9].HeaderText = "Amount";
-            datagrid.Columns[9].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[10].Visible = false;
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
 

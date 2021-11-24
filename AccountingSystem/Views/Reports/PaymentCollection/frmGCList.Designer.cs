@@ -89,7 +89,6 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             // 
             // btnRCD
             // 
-            this.btnRCD.Enabled = false;
             this.btnRCD.Image = global::AccountingSystem.Properties.Resources.printer;
             this.btnRCD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnRCD.ImageTransparentColor = System.Drawing.Color.Magenta;

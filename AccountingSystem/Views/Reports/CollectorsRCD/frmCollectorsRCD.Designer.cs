@@ -1,7 +1,7 @@
 ﻿
-namespace AccountingSystem.Views.Reports.RCD
+namespace AccountingSystem.Views.Reports.CollectorsRCD
 {
-    partial class frmRCDEdit
+    partial class frmCollectorsRCD
     {
         /// <summary>
         /// Required designer variable.
@@ -29,83 +29,35 @@ namespace AccountingSystem.Views.Reports.RCD
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucrcd1 = new AccountingSystem.Views.Reports.RCD.ucRCD();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblShowMessage = new System.Windows.Forms.ToolStripStatusLabel();
+            this.ucCollectorsRCD1 = new AccountingSystem.Views.Reports.RCDCollector.ucCollectorsRCD();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.btnCancel = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnApprove = new System.Windows.Forms.ToolStripButton();
             this.btnDisapprove = new System.Windows.Forms.ToolStripButton();
-            this.btnCancel = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
-            this.statusStrip.SuspendLayout();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblJevStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblShowMessage = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // ucrcd1
+            // ucCollectorsRCD1
             // 
-            this.ucrcd1.Location = new System.Drawing.Point(0, 74);
-            this.ucrcd1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ucrcd1.Name = "ucrcd1";
-            this.ucrcd1.Size = new System.Drawing.Size(912, 508);
-            this.ucrcd1.TabIndex = 8;
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.BackColor = System.Drawing.Color.White;
-            this.statusStrip.Dock = System.Windows.Forms.DockStyle.Top;
-            this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripStatusLabel2,
-            this.lblStatus,
-            this.lblShowMessage});
-            this.statusStrip.Location = new System.Drawing.Point(0, 50);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(912, 22);
-            this.statusStrip.SizingGrip = false;
-            this.statusStrip.TabIndex = 17;
-            this.statusStrip.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(848, 17);
-            this.toolStripStatusLabel1.Spring = true;
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.toolStripStatusLabel2.Margin = new System.Windows.Forms.Padding(15, 3, 0, 2);
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(42, 17);
-            this.toolStripStatusLabel2.Text = "Status:";
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(17, 17);
-            this.lblStatus.Text = "--";
-            // 
-            // lblShowMessage
-            // 
-            this.lblShowMessage.ActiveLinkColor = System.Drawing.Color.Firebrick;
-            this.lblShowMessage.ForeColor = System.Drawing.Color.Firebrick;
-            this.lblShowMessage.IsLink = true;
-            this.lblShowMessage.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lblShowMessage.Name = "lblShowMessage";
-            this.lblShowMessage.Size = new System.Drawing.Size(88, 17);
-            this.lblShowMessage.Text = "Show Message.";
-            this.lblShowMessage.Visible = false;
-            this.lblShowMessage.Click += new System.EventHandler(this.lblShowMessage_Click);
+            this.ucCollectorsRCD1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ucCollectorsRCD1.Location = new System.Drawing.Point(0, 75);
+            this.ucCollectorsRCD1.Name = "ucCollectorsRCD1";
+            this.ucCollectorsRCD1.Size = new System.Drawing.Size(916, 520);
+            this.ucCollectorsRCD1.TabIndex = 0;
             // 
             // toolStrip1
             // 
@@ -113,18 +65,18 @@ namespace AccountingSystem.Views.Reports.RCD
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSave,
+            this.btnCancel,
             this.btnDelete,
             this.toolStripSeparator2,
             this.btnApprove,
             this.btnDisapprove,
-            this.btnCancel,
             this.toolStripSeparator3,
             this.btnPrint,
             this.btnSearch});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(912, 50);
-            this.toolStrip1.TabIndex = 16;
+            this.toolStrip1.Size = new System.Drawing.Size(916, 50);
+            this.toolStrip1.TabIndex = 10;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // btnSave
@@ -139,6 +91,16 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
+            this.btnCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(47, 47);
+            this.btnCancel.Text = "&Cancel";
+            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
@@ -149,7 +111,6 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnDelete.Size = new System.Drawing.Size(44, 47);
             this.btnDelete.Text = "&Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // toolStripSeparator2
             // 
@@ -179,19 +140,6 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnDisapprove.Size = new System.Drawing.Size(70, 47);
             this.btnDisapprove.Text = "&Disapprove";
             this.btnDisapprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDisapprove.Click += new System.EventHandler(this.btnDisapprove_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Enabled = false;
-            this.btnCancel.Image = global::AccountingSystem.Properties.Resources.document_cancel_28px;
-            this.btnCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(73, 47);
-            this.btnCancel.Text = "&Cancel RCD";
-            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // toolStripSeparator3
             // 
@@ -223,40 +171,84 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // frmRCDEdit
+            // statusStrip1
+            // 
+            this.statusStrip1.BackColor = System.Drawing.Color.White;
+            this.statusStrip1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2,
+            this.lblJevStatus,
+            this.lblShowMessage});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 50);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(916, 22);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.TabIndex = 15;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(841, 17);
+            this.toolStripStatusLabel1.Spring = true;
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.toolStripStatusLabel2.Margin = new System.Windows.Forms.Padding(0);
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(42, 22);
+            this.toolStripStatusLabel2.Text = "Status:";
+            // 
+            // lblJevStatus
+            // 
+            this.lblJevStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.lblJevStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblJevStatus.Margin = new System.Windows.Forms.Padding(0);
+            this.lblJevStatus.Name = "lblJevStatus";
+            this.lblJevStatus.Size = new System.Drawing.Size(18, 22);
+            this.lblJevStatus.Text = "--";
+            // 
+            // lblShowMessage
+            // 
+            this.lblShowMessage.ActiveLinkColor = System.Drawing.Color.Firebrick;
+            this.lblShowMessage.ForeColor = System.Drawing.Color.Firebrick;
+            this.lblShowMessage.IsLink = true;
+            this.lblShowMessage.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lblShowMessage.Name = "lblShowMessage";
+            this.lblShowMessage.Size = new System.Drawing.Size(88, 17);
+            this.lblShowMessage.Text = "Show Message.";
+            this.lblShowMessage.Visible = false;
+            this.lblShowMessage.Click += new System.EventHandler(this.lblShowMessage_Click);
+            // 
+            // frmCollectorsRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.ClientSize = new System.Drawing.Size(912, 584);
-            this.Controls.Add(this.statusStrip);
+            this.ClientSize = new System.Drawing.Size(916, 593);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.ucrcd1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximizeBox = false;
+            this.Controls.Add(this.ucCollectorsRCD1);
             this.MinimizeBox = false;
-            this.Name = "frmRCDEdit";
+            this.Name = "frmCollectorsRCD";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Report of Collections";
-            this.Load += new System.EventHandler(this.frmRCDEdit_Load);
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
+            this.Text = "Collector\'s Report of Collections ";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.CollectorsRCD_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private ucRCD ucrcd1;
-        private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        internal System.Windows.Forms.ToolStripStatusLabel lblStatus;
-        internal System.Windows.Forms.ToolStripStatusLabel lblShowMessage;
+
+        internal RCDCollector.ucCollectorsRCD ucCollectorsRCD1;
         internal System.Windows.Forms.ToolStrip toolStrip1;
         internal System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStripButton btnCancel;
@@ -267,5 +259,10 @@ namespace AccountingSystem.Views.Reports.RCD
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         internal System.Windows.Forms.ToolStripButton btnPrint;
         internal System.Windows.Forms.ToolStripButton btnSearch;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        internal System.Windows.Forms.ToolStripStatusLabel lblJevStatus;
+        internal System.Windows.Forms.ToolStripStatusLabel lblShowMessage;
     }
 }

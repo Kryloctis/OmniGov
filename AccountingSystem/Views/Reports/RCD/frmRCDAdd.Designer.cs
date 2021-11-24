@@ -29,235 +29,213 @@ namespace AccountingSystem.Views.Reports.RCD
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucrcd1 = new AccountingSystem.Views.Reports.RCD.ucRCD();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnSave = new System.Windows.Forms.ToolStripButton();
-            this.btnCancel = new System.Windows.Forms.ToolStripButton();
-            this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnApprove = new System.Windows.Forms.ToolStripButton();
-            this.btnDisapprove = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnPrint = new System.Windows.Forms.ToolStripButton();
-            this.btnSearch = new System.Windows.Forms.ToolStripButton();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblJevStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblShowMessage = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStrip1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnOkay = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnSelect = new System.Windows.Forms.Button();
+            this.dgCollectorsReport = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbCollector = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbfunds = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtsearch = new System.Windows.Forms.TextBox();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgCollectorsReport)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // ucrcd1
+            // panel2
             // 
-            this.ucrcd1.Location = new System.Drawing.Point(14, 75);
-            this.ucrcd1.Name = "ucrcd1";
-            this.ucrcd1.Size = new System.Drawing.Size(1033, 681);
-            this.ucrcd1.TabIndex = 8;
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSave,
-            this.btnCancel,
-            this.btnDelete,
-            this.toolStripSeparator2,
-            this.btnApprove,
-            this.btnDisapprove,
-            this.toolStripSeparator3,
-            this.btnPrint,
-            this.btnSearch});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1065, 55);
-            this.toolStrip1.TabIndex = 9;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // btnSave
-            // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save28px;
-            this.btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSave.Margin = new System.Windows.Forms.Padding(15, 1, 0, 2);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(44, 52);
-            this.btnSave.Text = "&Save";
-            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.panel2.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.panel2.Controls.Add(this.btnCancel);
+            this.panel2.Controls.Add(this.btnOkay);
+            this.panel2.Controls.Add(this.btnClose);
+            this.panel2.Controls.Add(this.btnSelect);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 422);
+            this.panel2.Margin = new System.Windows.Forms.Padding(0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(800, 28);
+            this.panel2.TabIndex = 10;
             // 
             // btnCancel
             // 
-            this.btnCancel.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
-            this.btnCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Location = new System.Drawing.Point(715, 3);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(57, 52);
-            this.btnCancel.Text = "&Cancel";
-            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnCancel.Size = new System.Drawing.Size(82, 22);
+            this.btnCancel.TabIndex = 5;
+            this.btnCancel.Text = "Close";
+            this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // btnDelete
+            // btnOkay
             // 
-            this.btnDelete.Enabled = false;
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
-            this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(57, 52);
-            this.btnDelete.Text = "&Delete";
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnOkay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOkay.Location = new System.Drawing.Point(627, 3);
+            this.btnOkay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnOkay.Name = "btnOkay";
+            this.btnOkay.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnOkay.Size = new System.Drawing.Size(82, 22);
+            this.btnOkay.TabIndex = 6;
+            this.btnOkay.Text = "Select";
+            this.btnOkay.UseVisualStyleBackColor = true;
+            this.btnOkay.Click += new System.EventHandler(this.btnOkay_Click);
             // 
-            // toolStripSeparator2
+            // btnClose
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 55);
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.Location = new System.Drawing.Point(1328, -69);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnClose.Size = new System.Drawing.Size(82, 22);
+            this.btnClose.TabIndex = 3;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
             // 
-            // btnApprove
+            // btnSelect
             // 
-            this.btnApprove.Enabled = false;
-            this.btnApprove.Image = global::AccountingSystem.Properties.Resources.document_approve_28px;
-            this.btnApprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnApprove.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnApprove.Name = "btnApprove";
-            this.btnApprove.Size = new System.Drawing.Size(70, 52);
-            this.btnApprove.Text = "&Approve";
-            this.btnApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnApprove.ToolTipText = "Approve";
+            this.btnSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelect.Location = new System.Drawing.Point(1240, -69);
+            this.btnSelect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnSelect.Size = new System.Drawing.Size(82, 22);
+            this.btnSelect.TabIndex = 4;
+            this.btnSelect.Text = "Select";
+            this.btnSelect.UseVisualStyleBackColor = true;
             // 
-            // btnDisapprove
+            // dgCollectorsReport
             // 
-            this.btnDisapprove.Enabled = false;
-            this.btnDisapprove.Image = global::AccountingSystem.Properties.Resources.document_disapprove_28px;
-            this.btnDisapprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnDisapprove.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDisapprove.Name = "btnDisapprove";
-            this.btnDisapprove.Size = new System.Drawing.Size(89, 52);
-            this.btnDisapprove.Text = "&Disapprove";
-            this.btnDisapprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.dgCollectorsReport.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgCollectorsReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgCollectorsReport.Location = new System.Drawing.Point(12, 38);
+            this.dgCollectorsReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgCollectorsReport.Name = "dgCollectorsReport";
+            this.dgCollectorsReport.RowHeadersWidth = 51;
+            this.dgCollectorsReport.RowTemplate.Height = 29;
+            this.dgCollectorsReport.Size = new System.Drawing.Size(776, 382);
+            this.dgCollectorsReport.TabIndex = 19;
+            this.dgCollectorsReport.SelectionChanged += new System.EventHandler(this.dgCollectorsReport_SelectionChanged);
             // 
-            // toolStripSeparator3
+            // panel1
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 55);
+            this.panel1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.cmbCollector);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.cmbfunds);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.txtsearch);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(800, 33);
+            this.panel1.TabIndex = 20;
             // 
-            // btnPrint
+            // label1
             // 
-            this.btnPrint.Enabled = false;
-            this.btnPrint.Image = global::AccountingSystem.Properties.Resources.printer;
-            this.btnPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(43, 52);
-            this.btnPrint.Text = "&Print";
-            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(4, 5);
+            this.label1.Name = "label1";
+            this.label1.Padding = new System.Windows.Forms.Padding(4);
+            this.label1.Size = new System.Drawing.Size(63, 23);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Collector";
             // 
-            // btnSearch
+            // cmbCollector
             // 
-            this.btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnSearch.Image = global::AccountingSystem.Properties.Resources.find_doc;
-            this.btnSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(0, 1, 15, 2);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(57, 52);
-            this.btnSearch.Text = "S&earch";
-            this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.cmbCollector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCollector.FormattingEnabled = true;
+            this.cmbCollector.Location = new System.Drawing.Point(73, 5);
+            this.cmbCollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbCollector.Name = "cmbCollector";
+            this.cmbCollector.Size = new System.Drawing.Size(217, 23);
+            this.cmbCollector.TabIndex = 9;
+            this.cmbCollector.SelectedValueChanged += new System.EventHandler(this.cmbCollector_SelectedValueChanged);
             // 
-            // statusStrip1
+            // label2
             // 
-            this.statusStrip1.BackColor = System.Drawing.Color.White;
-            this.statusStrip1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripStatusLabel2,
-            this.lblJevStatus,
-            this.lblShowMessage});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 55);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1065, 26);
-            this.statusStrip1.SizingGrip = false;
-            this.statusStrip1.TabIndex = 18;
-            this.statusStrip1.Text = "statusStrip1";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(303, 5);
+            this.label2.Name = "label2";
+            this.label2.Padding = new System.Windows.Forms.Padding(4);
+            this.label2.Size = new System.Drawing.Size(47, 23);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Funds";
             // 
-            // toolStripStatusLabel1
+            // cmbfunds
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(960, 20);
-            this.toolStripStatusLabel1.Spring = true;
+            this.cmbfunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbfunds.FormattingEnabled = true;
+            this.cmbfunds.Location = new System.Drawing.Point(356, 5);
+            this.cmbfunds.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbfunds.Name = "cmbfunds";
+            this.cmbfunds.Size = new System.Drawing.Size(173, 23);
+            this.cmbfunds.TabIndex = 10;
             // 
-            // toolStripStatusLabel2
+            // label3
             // 
-            this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.toolStripStatusLabel2.Margin = new System.Windows.Forms.Padding(15, 3, 0, 2);
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(52, 21);
-            this.toolStripStatusLabel2.Text = "Status:";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(527, 5);
+            this.label3.Name = "label3";
+            this.label3.Padding = new System.Windows.Forms.Padding(4);
+            this.label3.Size = new System.Drawing.Size(50, 23);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Search";
             // 
-            // lblJevStatus
+            // txtsearch
             // 
-            this.lblJevStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblJevStatus.Name = "lblJevStatus";
-            this.lblJevStatus.Size = new System.Drawing.Size(21, 20);
-            this.lblJevStatus.Text = "--";
-            // 
-            // lblShowMessage
-            // 
-            this.lblShowMessage.ActiveLinkColor = System.Drawing.Color.Firebrick;
-            this.lblShowMessage.ForeColor = System.Drawing.Color.Firebrick;
-            this.lblShowMessage.IsLink = true;
-            this.lblShowMessage.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lblShowMessage.Name = "lblShowMessage";
-            this.lblShowMessage.Size = new System.Drawing.Size(110, 20);
-            this.lblShowMessage.Text = "Show Message.";
-            this.lblShowMessage.Visible = false;
+            this.txtsearch.Location = new System.Drawing.Point(583, 5);
+            this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtsearch.Name = "txtsearch";
+            this.txtsearch.Size = new System.Drawing.Size(203, 23);
+            this.txtsearch.TabIndex = 12;
+            this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
             // frmRCDAdd
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.ClientSize = new System.Drawing.Size(1065, 757);
-            this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.ucrcd1);
+            this.CancelButton = this.btnCancel;
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.dgCollectorsReport);
+            this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "frmRCDAdd";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "RCD Add";
+            this.Text = "Add Report of Collection";
             this.Load += new System.EventHandler(this.frmRCDAdd_Load);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgCollectorsReport)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private ucRCD ucrcd1;
-        internal System.Windows.Forms.ToolStrip toolStripbtnSave1;
-        internal System.Windows.Forms.ToolStripButton btnSave;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        internal System.Windows.Forms.ToolStripButton btnDelete;
-        internal System.Windows.Forms.ToolStripButton btnSearch;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        internal System.Windows.Forms.ToolStripButton btnApprove;
-        internal System.Windows.Forms.ToolStripButton btnDisapprove;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        internal System.Windows.Forms.ToolStripButton btnPrint;
-        internal System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton btnCancel;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        internal System.Windows.Forms.ToolStripStatusLabel lblJevStatus;
-        internal System.Windows.Forms.ToolStripStatusLabel lblShowMessage;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnClose;
+        internal System.Windows.Forms.Button btnSelect;
+        private System.Windows.Forms.Button btnCancel;
+        internal System.Windows.Forms.Button btnOkay;
+        private System.Windows.Forms.DataGridView dgCollectorsReport;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmbCollector;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cmbfunds;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtsearch;
     }
 }

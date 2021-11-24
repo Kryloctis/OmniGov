@@ -18,12 +18,10 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
     {
         private int Id;
         Dictionary<int, string> _data = new Dictionary<int, string>();
-        frmRCD frmrcd;
-        public frmGC(Dictionary<int, string> data,frmRCD _frmrcd)
+        public frmGC(Dictionary<int, string> data)
         {
             InitializeComponent();
             _data = data;
-            frmrcd = _frmrcd;
         }
 
         private void frmGC_Load(object sender, EventArgs e)
@@ -61,7 +59,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 }
                 var gcModel = new GeneralCollectionsModel()
                 {
-                    Rcdno = txtrcd.Text.Trim(),
+                    RcdNo = txtrcd.Text.Trim(),
                     Rcddate = Convert.ToDateTime(dtdate.Value),
                     //Userid = 2
                     Userid=Helper.UserId
@@ -79,7 +77,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                             list.Clear();
                             foreach (var item in _data)
                             {
-                                list.Add(new GeneralCollectionPaymentsModel() { Gcid = Id, Crid = item.Key });
+                                list.Add(new GeneralCollectionPaymentsModel() { GeneralCollectionsId = Id, CollectorsReportId = item.Key });
                             }
                             var gcpRepository = Factory.GeneralCollectionsPaymentsRepository();
                             return gcpRepository.Append(list);
@@ -122,21 +120,21 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                         fbd.Gcamount = gcsum;
                         if(fbd.ShowDialog() == DialogResult.OK)
                         {
-                            frmrcd.LoadRecords();
-                            frmrcd.rcdgenerate.Clear();
+                            //frmrcd.LoadRecords();
+                            //frmrcd.rcdgenerate.Clear();
                             this.Close();
                         }
                         else
                         {
-                            frmrcd.LoadRecords();
-                            frmrcd.rcdgenerate.Clear();
+                            //frmrcd.LoadRecords();
+                            //frmrcd.rcdgenerate.Clear();
                             this.Close();
                         }
                     }
                     else
                     {
-                        frmrcd.LoadRecords();
-                        frmrcd.rcdgenerate.Clear();
+                        //frmrcd.LoadRecords();
+                        //frmrcd.rcdgenerate.Clear();
                         this.Close();
                     }
                 }

@@ -15,10 +15,13 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
     {
         private readonly ReportViewer reportViewer = new ReportViewer();
         private string Ids = string.Empty;
-        public frmCDReport(string _ids)
+
+        private string _rcdId;
+        public frmCDReport(string rcdId)
         {
             InitializeComponent();
-            Ids = _ids;
+            _rcdId = rcdId;
+
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
             Helper.LoadFormIcon(this);
@@ -34,11 +37,11 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         }
 
 
-        private DataTable DataTableData(string id)
+        private DataTable DataTableData(string rcdId)
         {
 
             var dtPC = new dsLFS.dtRCDDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByData(id);
+            var dt = Factory.GeneralCollectionsRepository().GetRecordByData(rcdId);
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
@@ -60,7 +63,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         {
 
             var dtPC = new dsLFS.dtRCDFormsDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByForms(id);
+            var dt = Factory.GeneralCollectionsRepository().GetRecordByForms(1);
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
@@ -149,12 +152,13 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             try
             {
                 var lguDetails = Helper.LGUDetails();
-                var parameters = new[] {
-                            new ReportParameter("paramLGUName", lguDetails["lgu_name"])
-                    };
+                var parameters = new[] 
+                {
+                    new ReportParameter("paramLGUName", lguDetails["lgu_name"])
+                };
                 report.ReportPath = $"{Application.StartupPath}Reports\\rcd.rdlc";
                 report.DataSources.Clear();
-                report.DataSources.Add(new ReportDataSource("dtRCD", DataTableData(Ids)));
+                report.DataSources.Add(new ReportDataSource("dtRCD", DataTableData(_rcdId)));
                 report.SubreportProcessing += Report_SubreportProcessing;
 
                 report.SetParameters(parameters);

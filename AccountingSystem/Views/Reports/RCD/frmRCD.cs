@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Reports.PaymentCollection;
+using AccountingSystem.Views.Transactions.BankDeposits;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,242 +9,170 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RCD
 {
     public partial class frmRCD : Form
     {
-        public Dictionary<int, string> rcdgenerate = new Dictionary<int, string>();
-        private string rcds = string.Empty;
-        public frmRCD(string id)
+
+        internal ushort collectorId;
+        internal int collectorsReportId;
+        internal sbyte fundId;
+        internal string reportNo;
+        internal string rcdNo;
+        internal string rcdId;
+
+
+        internal DateTime date;
+
+
+        private List<GeneralCollectionsModel> data;
+
+        public frmRCD()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgrcd, true);
-            rcds = id;
+            Helper.DatagridFullRowSelectStyle(dgpayments, true);
         }
 
-        private void frmRCD_Load(object sender, EventArgs e)
-        {
-            LoadFunds();
-            LoadRecords();
-            var uRepository = Factory.UsersRepository();
-            dgrcd.Columns[7].Visible = uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer" ? true : false;
-        }
-        private void LoadFunds()
-        {
-            try
-            {
-                var fundrepo = Factory.FundsRepository();
-                var dtfunds = fundrepo.GetRecords();
-                cmbfunds.DataSource = dtfunds;
-                cmbfunds.ValueMember = "id";
-                cmbfunds.DisplayMember = "fund_name";
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        public void LoadRecords()
-        {
-            try
-            {
-                int approved = cmbstatus.SelectedIndex != -1 && cmbstatus.SelectedItem.Equals("Approved") ? 1 : 0;
-                string status = cmbstatus.SelectedIndex != -1 && (cmbstatus.SelectedItem.Equals("Pending") || cmbstatus.SelectedItem.Equals("Cancelled")) ? cmbstatus.SelectedItem.ToString().ToUpper() : string.Empty;
-                int fundid = cmbfunds.SelectedValue != null ? int.Parse(cmbfunds.SelectedValue.ToString()):0;
-
-                var colrepo = Factory.CollectorReportRepository();
-                var dtrcd = rcds.Length > 0 ? colrepo.GetRecords(rcds) : colrepo.GetRecords(approved, status, fundid, string.Empty);
-                HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgrcd);
-
-                lblRecordCount.Text = dgrcd.Rows.Count.ToString();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnadd_Click(object sender, EventArgs e)
         {
             _ = new frmRCDAdd(this).ShowDialog();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
-            int selectedrowscount = dgrcd.SelectedRows.Count;
+            _ = new frmSearch(this).ShowDialog();
+        }
+
+        private void frmRCD_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        internal void LoadSelectedRCD(string reportNo)
+        {
             try
             {
-                if (selectedrowscount > 0)
+                var rcdRepository = Factory.CollectorReportRepository();
+                var rcdData = rcdRepository.GetRecordByID(reportNo);
+
+                var collectionOfPaymentReportsRepo = Factory.CollectorReportPaymentsRepository();
+                var collectionOfPaymentReportDt = collectionOfPaymentReportsRepo.GetRecordsByReportNo(reportNo);
+                HelperLoadRecords.PaymentDatagridView(collectionOfPaymentReportDt, dgpayments);
+
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        internal void LoadSelectedReport(string reportNo)
+        {
+            try
+            {
+                var rcdRepository = Factory.CollectorReportRepository();
+                var rcdData = rcdRepository.GetRecordByID(reportNo);
+
+
+                collectorId = (ushort)Convert.ToInt16(rcdData["collecting_officers_id"]);
+                fundId = (sbyte)Convert.ToInt32(rcdData["funds_id"]);
+                reportNo = rcdData["report_no"];
+                date = Convert.ToDateTime(rcdData["date"]);
+
+                var collectionOfPaymentReportsRepo = Factory.CollectorReportPaymentsRepository();
+                var collectionOfPaymentReportDt = collectionOfPaymentReportsRepo.GetRecordsByReportNo(reportNo);
+                HelperLoadRecords.PaymentDatagridView(collectionOfPaymentReportDt, dgpayments);
+
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("RCD has been created.");
+                ResetForm();
+            }
+
+        }
+
+        private void ResetForm()
+        {
+            txtCollector.Text = string.Empty;
+            txtReport.Text = string.Empty;
+            txtRCDNo.Text = string.Empty;
+            dtpdate.Value = DateTime.Now;
+
+            dgpayments.Rows.Clear();
+            panelRCD.Enabled = true;
+        }
+
+        private bool SaveData()
+        {
+
+            using (var scope = new TransactionScope())
+            {
+                if (ValidateInputs())
                 {
-                    if (Helper.MessageBoxConfirmDelete(selectedrowscount))
-                    {
-                        var rcdModelList = new List<CollectorReportModel>();
-                        foreach (DataGridViewRow row in dgrcd.SelectedRows)
-                        {
-                            int rcdId = int.Parse(row.Cells[0].Value.ToString());
-                            rcdModelList.Add(new CollectorReportModel() { Id = rcdId });
-                        }
-
-                        var rcdRepository = Factory.CollectorReportRepository();
-                        _ = rcdRepository.Delete(rcdModelList);
-                        LoadRecords();
-                    }
+                    Helper.MessageBoxError("Please add collector's report and RCD number.");
+                    return false;
                 }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
 
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            if (dgrcd.Rows.Count > 0 && dgrcd.SelectedRows.Count > 0)
-            {
-                int Id = int.Parse(dgrcd.SelectedCells[0].Value.ToString());
-                _ = new frmRCDEdit(this, Id).ShowDialog();
-            }
-        }
-        private void dgrcd_SelectionChanged(object sender, EventArgs e)
-        {   
-            if(dgrcd.SelectedRows.Count > 0)
-            {
-                try
+                var generalCollectionModel = new GeneralCollectionsModel()
                 {
-                    int id = int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString());
-                    bool isapproved = Convert.ToBoolean(dgrcd.CurrentRow.Cells[6].Value);
-                    var gcpRepository = Factory.GeneralCollectionsPaymentsRepository();
-                    var uRepository = Factory.UsersRepository();
-                    btnGenerate.Visible = uRepository.GetUserRole(Helper.UserId) == "Liquidating Officer" ? true : false;
-                    btnGenerate.Enabled = gcpRepository.IdExist(id) ? false : true;
+                    RcdNo = txtRCDNo.Text,
+                    Rcddate = Convert.ToDateTime(dtpdate.Value),
+                    Userid = Helper.UserId
+                };
 
-                }
-                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            }
-           
-            
-        }
+                bool rcdSaveSuccess = Factory.GeneralCollectionsRepository().Insert(generalCollectionModel);
+                if (!rcdSaveSuccess) return false;
 
-        private void dgrcd_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dgrcd.SelectedRows.Count > 0)
-            {
-                int id = int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString());
-                _ = new frmRCDEdit(this, id).ShowDialog();
-            }
-                
-            
-        }
+                var generalCollectionsId = GetGeneralCollectionsId();
+                var collectionsReportId = collectorsReportId;
 
-        private void dgrcd_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-            if (e.ColumnIndex == 7)
-            {
-                bool isapproved = Convert.ToBoolean(dgrcd.CurrentRow.Cells[6].Value);
-                var gcpRepository = Factory.GeneralCollectionsPaymentsRepository();
-                bool isgenerated = gcpRepository.IdExist(int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString()));
-                if (isapproved && !isgenerated)
+                var generalCollectionPaymentModel = new GeneralCollectionPaymentsModel()
                 {
-                    if (!Convert.ToBoolean(dgrcd.CurrentRow.Cells[e.ColumnIndex].Value))
-                    {
-                        dgrcd.CurrentRow.Cells[e.ColumnIndex].Value = true;
-                        if (!rcdgenerate.ContainsKey(int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString())))
-                        {
-                            rcdgenerate.Add(int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString()), dgrcd.CurrentRow.Cells[1].Value.ToString());
-                        }
-                    }
-                    else
-                    {
-                        dgrcd.CurrentRow.Cells[e.ColumnIndex].Value = false;
-                        rcdgenerate.Remove(int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString()));
-                    }
-                    btnGenerate.Enabled = rcdgenerate.Count > 0 ? true : false;
-                }
-                else
-                {                    
-                   dgrcd.CurrentRow.Cells[e.ColumnIndex].Value = false;
-                }
-              
-            }
-            
-        }
+                    CollectorsReportId = collectionsReportId,
+                    GeneralCollectionsId = generalCollectionsId
+                };
 
-        private void txtsearch_TextChanged(object sender, EventArgs e)
-        {
-            if (txtsearch.Text.Length > 0)
-            {
-                try
-                {
-                    string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                    var dtrcd = Factory.CollectorReportRepository().GetRecordsBySearch(searchkey);
-                    HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgrcd);
-
-                    lblRecordCount.Text = dgrcd.Rows.Count.ToString();
-                }
-                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            }
-            else
-            {
-                LoadRecords();
+                Factory.GeneralCollectionsPaymentsRepository().Insert(generalCollectionPaymentModel);
+               
+                scope.Complete();
+                return true;
             }
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
+        private int GetGeneralCollectionsId()
         {
-            LoadRecords();
+            var rcdNo = txtRCDNo.Text;
+            int generalCollectionId = Factory.GeneralCollectionsRepository().GetGeneralCollectionId(rcdNo);
+            return generalCollectionId;
+        }
+         
+        private bool ValidateInputs()
+        {
+            bool hasError = String.IsNullOrEmpty(txtRCDNo.Text) || dgpayments.Rows.Count == 0;
+            return hasError;
         }
 
-        private void btnApproved_Click(object sender, EventArgs e)
+        private void btnDeposit_Click(object sender, EventArgs e)
         {
-            if(dgrcd.SelectedRows.Count > 0)
-            {
-                bool isapproved = Convert.ToBoolean(dgrcd.CurrentRow.Cells[6].Value);
-                try
-                {
-                    if (Helper.MessageBoxConfirmRCDApproved(isapproved))
-                    {
-                        var rcdRepository = Factory.CollectorReportRepository();
-                        var rcdModel = new CollectorReportModel()
-                        {
-                            Id = int.Parse(dgrcd.CurrentRow.Cells[0].Value.ToString()),
-                            Approved = isapproved ? 0 : 1,
-                        };
-                        if (rcdRepository.Approved(rcdModel))
-                        {
-                            LoadRecords();
-                        }
-                    }
-                }
-                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            }
+            _ = new frmBankDepositsAdd(new frmBankDeposits()).ShowDialog();
         }
 
-        private void cmbstatus_SelectionChangeCommitted(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
-            rcds = string.Empty;
-            LoadRecords();
+            ResetForm();
         }
 
-        private void cmbfunds_SelectionChangeCommitted(object sender, EventArgs e)
+        private void btnPrint_Click(object sender, EventArgs e)
         {
-            rcds = string.Empty;
-            LoadRecords();
-        }
-
-        private void btnGenerate_Click(object sender, EventArgs e)
-        {
-            if (rcdgenerate.Count > 0)
-            {
-                //string id = string.Join(",", rcdgenerate.Select(x => String.Format("'{0}'",x.Key)).ToArray());
-                //_ = new frmPCReport(id).ShowDialog();
-                _ = new frmGC(rcdgenerate, this).ShowDialog();
-            }
-            else
-            {
-                Helper.MessageBoxError("Please select reports to Generate RCD!");
-            }
+            _ = new frmCDReport(rcdId).ShowDialog();
         }
     }
 }

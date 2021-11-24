@@ -73,13 +73,10 @@ namespace ACC.Data
         {
             try
             {
-                string query = string.Empty;
-                var uRepository = Factory.UsersRepository();
-
-                query = $"SELECT * FROM view_payment_collections ORDER BY accountable_form_id ";
+                string query = $"SELECT * FROM {viewTableName} ORDER BY accountable_form_id ";
                 
-                var dtRCI = new DataTable();
-                return _dbGenericCommands.Fill(query, dtRCI);
+                var dtPaymentCollection = new DataTable();
+                return _dbGenericCommands.Fill(query, dtPaymentCollection);
             }
             catch (Exception)
             {
@@ -91,7 +88,7 @@ namespace ACC.Data
         {
             try
             {
-                string query  = $"SELECT * FROM view_payment_collections ";
+                string query  = $"SELECT * FROM {viewTableName} ";
 
                 var dtPaymentCollection = new DataTable();
                 return _dbGenericCommands.Fill(query, dtPaymentCollection);
@@ -332,19 +329,16 @@ namespace ACC.Data
         {
             try
             {
-                string query = string.Empty;
-                var uRepository = Factory.UsersRepository();
-                if (uRepository.LinkedCollector(Factory.UserId))
-                {
-                    query = $"SELECT {tablePaymentCollections}.id,CONCAT({tableFunds}.fund_code,' - ',{tableFunds}.fund_name) AS fund,CONCAT({tableAccountaGroup}.account_group_code,'-',{tableMajorAccountGroup}.maj_acc_group_code,'-',{tableSubMajorAccountGroup}.sub_maj_acc_group_code,'-',{tableGeneralLedgerAccounts}.ledger_code) AS account_code,CONCAT({tableAccountableForms}.acc_form_no,'-',{tableAccountableForms}.acc_form_desc) AS accform,{tableGeneralLedgerAccounts}.ledger_name,CONCAT({tableSubsidiaryLedgerAccounts}.sub_code,'-',{tableSubsidiaryLedgerAccounts}.sub_name) AS subsidiary,{tablePaymentCollections}.payee,{tablePaymentCollections}.receipt_no,{tablePaymentCollections}.payment_date,{tablePaymentCollections}.amount,CONCAT({tableCollectionOfficers}.last_name,', ',{tableCollectionOfficers}.first_name,' ',{tableCollectionOfficers}.mid_initial) AS collector,{tablePaymentCollections}.created_at,{tablePaymentCollections}.updated_at,CONCAT(u1.last_name,', ',u1.first_name,' ',u1.mid_initial) AS createdby,CONCAT(u2.last_name,', ',u2.first_name,' ',u2.mid_initial) AS updatedby FROM {tablePaymentCollections} LEFT JOIN {tableCollectionOfficers} ON {tableCollectionOfficers}.id={tablePaymentCollections}.collecting_officers_id LEFT JOIN {tableAccountableForms} ON {tableAccountableForms}.id={tablePaymentCollections}.accountable_forms_id LEFT JOIN {tableGeneralLedgerAccounts} ON {tableGeneralLedgerAccounts}.id={tablePaymentCollections}.general_ledger_accounts_id LEFT JOIN {tableUsers} u1 ON u1.id={tablePaymentCollections}.created_by LEFT JOIN {tableUsers} u2 ON u2.id={tablePaymentCollections}.updated_by LEFT JOIN {tableSubMajorAccountGroup} ON {tableGeneralLedgerAccounts}.sub_major_account_group_id={tableSubMajorAccountGroup}.id LEFT JOIN {tableMajorAccountGroup} ON {tableSubMajorAccountGroup}.major_account_group_id={tableMajorAccountGroup}.id LEFT JOIN {tableAccountaGroup} ON {tableMajorAccountGroup}.account_group_id={tableAccountaGroup}.id LEFT JOIN {tableSubsidiaryLedgerAccounts} ON {tablePaymentCollections}.subsidiary_ledger_accounts_id={tableSubsidiaryLedgerAccounts}.id LEFT JOIN {tableFunds} ON {tablePaymentCollections}.funds_id={tableFunds}.id WHERE {tablePaymentCollections}.collecting_officers_id='{uRepository.GetCollectorByUserId(Factory.UserId)}' AND {tablePaymentCollections}.payee  LIKE'%{searchText}%' OR {tablePaymentCollections}.receipt_no  LIKE'%{searchText}%' OR {tablePaymentCollections}.payment_date  LIKE'%{searchText}%' OR {tablePaymentCollections}.amount  LIKE'%{searchText}%' OR CONCAT({tableCollectionOfficers}.last_name,', ',{tableCollectionOfficers}.first_name,' ',{tableCollectionOfficers}.mid_initial) LIKE'%{searchText}%' OR {tableAccountableForms}.acc_form_no  LIKE'%{searchText}%' OR {tableAccountableForms}.acc_form_desc LIKE'%{searchText}%' OR CONCAT(DATE_FORMAT({tablePaymentCollections}.payment_date,'%y'),'-',DATE_FORMAT({tablePaymentCollections}.payment_date,'%m'),'-',LPAD({tablePaymentCollections}.id, 3, 0)) LIKE'%{searchText}%' OR CONCAT({tableAccountaGroup}.account_group_code,'-',{tableMajorAccountGroup}.maj_acc_group_code,'-',{tableSubMajorAccountGroup}.sub_maj_acc_group_code,'-',{tableGeneralLedgerAccounts}.ledger_code) LIKE'%{searchText}%' OR {tableGeneralLedgerAccounts}.ledger_name LIKE'%{searchText}%' OR CONCAT(u1.last_name,', ',u1.first_name,' ',u1.mid_initial) LIKE'%{searchText}%' OR CONCAT(u2.last_name,', ',u2.first_name,' ',u2.mid_initial) LIKE'%{searchText}%' ORDER BY {tablePaymentCollections}.id DESC";
-                }
-                else
-                {
-                    query = $"SELECT {tablePaymentCollections}.id,CONCAT({tableFunds}.fund_code,' - ',{tableFunds}.fund_name) AS fund,CONCAT({tableAccountaGroup}.account_group_code,'-',{tableMajorAccountGroup}.maj_acc_group_code,'-',{tableSubMajorAccountGroup}.sub_maj_acc_group_code,'-',{tableGeneralLedgerAccounts}.ledger_code) AS account_code,CONCAT({tableAccountableForms}.acc_form_no,'-',{tableAccountableForms}.acc_form_desc) AS accform,{tableGeneralLedgerAccounts}.ledger_name,CONCAT({tableSubsidiaryLedgerAccounts}.sub_code,'-',{tableSubsidiaryLedgerAccounts}.sub_name) AS subsidiary,{tablePaymentCollections}.payee,{tablePaymentCollections}.receipt_no,{tablePaymentCollections}.payment_date,{tablePaymentCollections}.amount,CONCAT({tableCollectionOfficers}.last_name,', ',{tableCollectionOfficers}.first_name,' ',{tableCollectionOfficers}.mid_initial) AS collector,{tablePaymentCollections}.created_at,{tablePaymentCollections}.updated_at,CONCAT(u1.last_name,', ',u1.first_name,' ',u1.mid_initial) AS createdby,CONCAT(u2.last_name,', ',u2.first_name,' ',u2.mid_initial) AS updatedby FROM {tablePaymentCollections} LEFT JOIN {tableCollectionOfficers} ON {tableCollectionOfficers}.id={tablePaymentCollections}.collecting_officers_id LEFT JOIN {tableAccountableForms} ON {tableAccountableForms}.id={tablePaymentCollections}.accountable_forms_id LEFT JOIN {tableGeneralLedgerAccounts} ON {tableGeneralLedgerAccounts}.id={tablePaymentCollections}.general_ledger_accounts_id LEFT JOIN {tableUsers} u1 ON u1.id={tablePaymentCollections}.created_by LEFT JOIN {tableUsers} u2 ON u2.id={tablePaymentCollections}.updated_by LEFT JOIN {tableSubMajorAccountGroup} ON {tableGeneralLedgerAccounts}.sub_major_account_group_id={tableSubMajorAccountGroup}.id LEFT JOIN {tableMajorAccountGroup} ON {tableSubMajorAccountGroup}.major_account_group_id={tableMajorAccountGroup}.id LEFT JOIN {tableAccountaGroup} ON {tableMajorAccountGroup}.account_group_id={tableAccountaGroup}.id LEFT JOIN {tableSubsidiaryLedgerAccounts} ON {tablePaymentCollections}.subsidiary_ledger_accounts_id={tableSubsidiaryLedgerAccounts}.id LEFT JOIN {tableFunds} ON {tablePaymentCollections}.funds_id={tableFunds}.id WHERE {tablePaymentCollections}.payee  LIKE'%{searchText}%' OR {tablePaymentCollections}.receipt_no  LIKE'%{searchText}%' OR {tablePaymentCollections}.payment_date  LIKE'%{searchText}%' OR {tablePaymentCollections}.amount  LIKE'%{searchText}%' OR CONCAT({tableCollectionOfficers}.last_name,', ',{tableCollectionOfficers}.first_name,' ',{tableCollectionOfficers}.mid_initial) LIKE'%{searchText}%' OR {tableAccountableForms}.acc_form_no  LIKE'%{searchText}%' OR {tableAccountableForms}.acc_form_desc LIKE'%{searchText}%' OR CONCAT(DATE_FORMAT({tablePaymentCollections}.payment_date,'%y'),'-',DATE_FORMAT({tablePaymentCollections}.payment_date,'%m'),'-',LPAD({tablePaymentCollections}.id, 3, 0)) LIKE'%{searchText}%' OR CONCAT({tableAccountaGroup}.account_group_code,'-',{tableMajorAccountGroup}.maj_acc_group_code,'-',{tableSubMajorAccountGroup}.sub_maj_acc_group_code,'-',{tableGeneralLedgerAccounts}.ledger_code) LIKE'%{searchText}%' OR {tableGeneralLedgerAccounts}.ledger_name LIKE'%{searchText}%' OR CONCAT(u1.last_name,', ',u1.first_name,' ',u1.mid_initial) LIKE'%{searchText}%' OR CONCAT(u2.last_name,', ',u2.first_name,' ',u2.mid_initial) LIKE'%{searchText}%' ORDER BY {tablePaymentCollections}.id DESC";
-                }
+                var parameter = new object[][] {
+                    new object[] { "@searchText", DbType.String, $"%{searchText}%" }
+                }; 
 
+                string query = $"SELECT * FROM {viewTableName}  WHERE accountable_forms LIKE @searchText OR collecting_officer LIKE @searchText";
+
+                
+               
                 var dtpc = new DataTable();
-                return _dbGenericCommands.Fill(query, dtpc);
+                return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
             }
             catch (Exception)
             {
@@ -397,16 +391,23 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetRecordByLedger(int Id, int fid, string from, string to,string ids)
+        public DataTable GetRecordByLedger(object[] parameter)
         {
             try
             {
-                string query = $"SELECT * FROM {viewTableName} WHERE payment_date BETWEEN CAST('{from}' AS DATE) AND CAST('{to}' AS DATE)";
+                var parameters = new object[][]
+                {
+                    new object[] { "@collectorId", DbType.UInt16, parameter[0] },
+                    new object[] { "@collectionFund", DbType.UInt16, parameter[1] },
+                    new object[] { "@collectionDateFrom", DbType.Date, parameter[2] },
+                    new object[] { "@collectionDateTo", DbType.Date, parameter[3] }
+                };
 
-                //string query = $"SELECT {tablePaymentCollections}.id,CONCAT({tableFunds}.fund_code,' - ',{tableFunds}.fund_name) AS fund,CONCAT({tableAccountaGroup}.account_group_code,'-',{tableMajorAccountGroup}.maj_acc_group_code,'-',{tableSubMajorAccountGroup}.sub_maj_acc_group_code,'-',{tableGeneralLedgerAccounts}.ledger_code) AS account_code,CONCAT({tableAccountableForms}.acc_form_no,'-',{tableAccountableForms}.acc_form_desc) AS accform,{tableGeneralLedgerAccounts}.ledger_name,CONCAT({tableSubsidiaryLedgerAccounts}.sub_code,'-',{tableSubsidiaryLedgerAccounts}.sub_name) AS subsidiary,{tablePaymentCollections}.payee,{tablePaymentCollections}.receipt_no,{tablePaymentCollections}.payment_date,{tablePaymentCollections}.amount,CONCAT({tableCollectionOfficers}.last_name,', ',{tableCollectionOfficers}.first_name,' ',{tableCollectionOfficers}.mid_initial) AS collector,{tablePaymentCollections}.created_at,{tablePaymentCollections}.updated_at,CONCAT(u1.last_name,', ',u1.first_name,' ',u1.mid_initial) AS createdby,CONCAT(u2.last_name,', ',u2.first_name,' ',u2.mid_initial) AS updatedby FROM {tablePaymentCollections} LEFT JOIN {tableCollectionOfficers} ON {tableCollectionOfficers}.id={tablePaymentCollections}.collecting_officers_id LEFT JOIN {tableAccountableForms} ON {tableAccountableForms}.id={tablePaymentCollections}.accountable_forms_id LEFT JOIN {tableGeneralLedgerAccounts} ON {tableGeneralLedgerAccounts}.id={tablePaymentCollections}.general_ledger_accounts_id LEFT JOIN {tableUsers} u1 ON u1.id={tablePaymentCollections}.created_by LEFT JOIN {tableUsers} u2 ON u2.id={tablePaymentCollections}.updated_by LEFT JOIN {tableSubMajorAccountGroup} ON {tableGeneralLedgerAccounts}.sub_major_account_group_id={tableSubMajorAccountGroup}.id LEFT JOIN {tableMajorAccountGroup} ON {tableSubMajorAccountGroup}.major_account_group_id={tableMajorAccountGroup}.id LEFT JOIN {tableAccountaGroup} ON {tableMajorAccountGroup}.account_group_id={tableAccountaGroup}.id LEFT JOIN {tableSubsidiaryLedgerAccounts} ON {tablePaymentCollections}.subsidiary_ledger_accounts_id={tableSubsidiaryLedgerAccounts}.id LEFT JOIN {tableFunds} ON {tablePaymentCollections}.funds_id={tableFunds}.id WHERE {tableCollectionOfficers}.id='{Id}' AND {tableFunds}.id={fid} AND ({tablePaymentCollections}.payment_date BETWEEN CAST('{from}' AS DATE) AND CAST('{to}' AS DATE)) AND {tablePaymentCollections}.id NOT IN ({ids}) AND {tablePaymentCollections}.id NOT IN (SELECT payment_collections_id FROM {tableCollectorReportPayments})";
+                string query = $"SELECT * FROM {viewTableName} WHERE collecting_officer_id = @collectorId AND payment_date " +
+                    $"BETWEEN @collectionDateFrom AND @collectionDateTo ";
 
-                var dtpc = new DataTable();
-                return _dbGenericCommands.Fill(query, dtpc);
+                var dtPaymentCollection = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtPaymentCollection, parameters);
             }
             catch (Exception)
             {
@@ -428,5 +429,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
+    
     }
 }

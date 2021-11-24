@@ -313,7 +313,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.tabCashTickets.Location = new System.Drawing.Point(4, 5);
             this.tabCashTickets.Name = "tabCashTickets";
             this.tabCashTickets.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCashTickets.Size = new System.Drawing.Size(550, 132);
+            this.tabCashTickets.Size = new System.Drawing.Size(569, 132);
             this.tabCashTickets.TabIndex = 1;
             // 
             // txtCashTicketsAmount
@@ -321,7 +321,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.txtCashTicketsAmount.Location = new System.Drawing.Point(174, 86);
             this.txtCashTicketsAmount.Name = "txtCashTicketsAmount";
             this.txtCashTicketsAmount.ReadOnly = true;
-            this.txtCashTicketsAmount.Size = new System.Drawing.Size(297, 23);
+            this.txtCashTicketsAmount.Size = new System.Drawing.Size(371, 23);
             this.txtCashTicketsAmount.TabIndex = 17;
             this.txtCashTicketsAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -335,7 +335,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             0,
             0});
             this.txtCashTicketQuantity.Name = "txtCashTicketQuantity";
-            this.txtCashTicketQuantity.Size = new System.Drawing.Size(297, 23);
+            this.txtCashTicketQuantity.Size = new System.Drawing.Size(371, 23);
             this.txtCashTicketQuantity.TabIndex = 16;
             this.txtCashTicketQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtCashTicketQuantity.TextChanged += new System.EventHandler(this.txtCashTicketQuantity_TextChanged);
@@ -356,7 +356,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.dtCashTicketDateOfCollection.Location = new System.Drawing.Point(174, 18);
             this.dtCashTicketDateOfCollection.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtCashTicketDateOfCollection.Name = "dtCashTicketDateOfCollection";
-            this.dtCashTicketDateOfCollection.Size = new System.Drawing.Size(297, 23);
+            this.dtCashTicketDateOfCollection.Size = new System.Drawing.Size(371, 23);
             this.dtCashTicketDateOfCollection.TabIndex = 14;
             // 
             // label15

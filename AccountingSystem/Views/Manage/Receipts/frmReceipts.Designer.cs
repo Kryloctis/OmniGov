@@ -47,6 +47,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             // toolStrip1
             // 
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -56,7 +57,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.btnRefresh});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(4);
             this.toolStrip1.Size = new System.Drawing.Size(1060, 58);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
@@ -169,7 +170,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.label1.TabIndex = 11;
             this.label1.Text = "Search ";
             // 
-            // frmAccForms
+            // frmReceipts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -181,7 +182,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.Controls.Add(this.toolStrip1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinimizeBox = false;
-            this.Name = "frmAccForms";
+            this.Name = "frmReceipts";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Receipts";

@@ -10,7 +10,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         public int Gcid = 0;
         public decimal Gcamount = 0;
         public frmBankDepositsAdd(frmBankDeposits frmbd)
-        {
+        { 
             InitializeComponent();
             _frmbd = frmbd;
             ucbd1.userid = Helper.UserId;

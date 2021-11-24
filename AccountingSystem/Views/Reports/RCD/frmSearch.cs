@@ -12,21 +12,26 @@ namespace AccountingSystem.Views.Reports.RCD
 {
     public partial class frmSearch : Form
     {
-        private frmRCDEdit frmrcd;
         internal int Id = 0;
-        public frmSearch(frmRCDEdit _frmrcd)
+
+        internal string reportNo;
+        internal string rcdNo;
+        internal string rcdId;
+
+        private readonly frmRCD _frmRCD;
+
+        public frmSearch(frmRCD frmRCD)
         {
             InitializeComponent();
-            Helper.DatagridFullRowSelectStyle(dgrcd);
-            frmrcd = _frmrcd;
-            
+            Helper.DatagridFullRowSelectStyle(dgrcd, true);
+
+            _frmRCD = frmRCD;
         }
 
         private void frmSearch_Load(object sender, EventArgs e)
         {
             LoadFunds();
             LoadRecords();
-            dgrcd.Columns[7].Visible = false;
         }
 
         private void LoadFunds()
@@ -38,7 +43,8 @@ namespace AccountingSystem.Views.Reports.RCD
                 cmbfunds.DataSource = dtfunds;
                 cmbfunds.ValueMember = "id";
                 cmbfunds.DisplayMember = "fund_name";
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
@@ -48,13 +54,13 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
-                int approved = cmbstatus.SelectedIndex != -1 && cmbstatus.SelectedItem.Equals("Approved") ? 1:0;
-                string status = cmbstatus.SelectedIndex != -1 && (cmbstatus.SelectedItem.Equals("Pending") || cmbstatus.SelectedItem.Equals("Cancelled")) ? cmbstatus.SelectedItem.ToString().ToUpper():string.Empty;
-                int fundid = cmbfunds.SelectedValue != null ? int.Parse(cmbfunds.SelectedValue.ToString()):0;
+                byte fundId = (byte)cmbfunds.SelectedValue;
+                string keySearch = txtsearch.Text;
 
-                var colrepo = Factory.CollectorReportRepository();
-                var dtrcd = colrepo.GetRecords(approved, status, fundid, string.Empty);
-                HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgrcd);
+                var rcdRepository = Factory.GeneralCollectionsRepository();
+                var dtRCD = rcdRepository.GetRecords();
+
+                HelperLoadRecords.RCDDatagridView(dtRCD, dgrcd);
             }
             catch(Exception ex)
             {
@@ -98,11 +104,13 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            if(Id > 0)
-            {
-                frmrcd.LoadSearchValue(Id);
-                this.Close();
-            }
+            _frmRCD.txtRCDNo.Text = rcdNo;
+            _frmRCD.rcdId = rcdId;
+
+            _frmRCD.btnPrint.Enabled = true;
+            _frmRCD.panelRCD.Enabled = false;
+            _frmRCD.LoadSelectedRCD(reportNo);
+            this.Close();
         }
        
 
@@ -112,7 +120,9 @@ namespace AccountingSystem.Views.Reports.RCD
             {
                 foreach (DataGridViewRow row in dgrcd.SelectedRows)
                 {
-                    Id = int.Parse(row.Cells[0].Value.ToString());
+                    rcdId = row.Cells[0].Value.ToString();
+                    rcdNo = row.Cells[1].Value.ToString();
+                    reportNo = row.Cells[3].Value.ToString();
                 }
                 btnSelect.Enabled = true;
             }

@@ -57,6 +57,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             slaId = 0;
             cmbforms.SelectedIndex = -1;
             cmbAccount.SelectedIndex = -1;
+
             txtpayee.Clear();
             txtreceipt.Clear();
             dtdate.Value = DateTime.Now;
@@ -64,13 +65,14 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             minreceipt = 0;
             maxreceipt = 0;
             receipt = 0;
-    }
-        internal void LoadForms(string id)
+        }
+
+        internal void LoadForms(int collectorsId)
         {
             try
             {
                 var formRepository = Factory.ReceiptsIssuedRepository();
-                var dtforms = formRepository.GetRecordsReceipts(id);
+                var dtforms = formRepository.GetRecordsReceipts(collectorsId.ToString());
                 dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
                 cmbforms.DataSource = dtforms;
                 cmbforms.ValueMember = "id";
@@ -78,6 +80,41 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+
+        internal void LoadForms()
+        {
+            try
+            {
+                cmbforms.SelectedValueChanged -= cmbforms_SelectedValueChanged;
+                var formRepository = Factory.AccountableRepository();
+                var dtforms = formRepository.GetRecords();
+                dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
+                cmbforms.DataSource = dtforms;
+                cmbforms.ValueMember = "id";
+                cmbforms.DisplayMember = "formdisplay";
+                cmbforms.SelectedValueChanged += cmbforms_SelectedValueChanged;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+
+
+        internal void LoadFunds()
+        {
+            try
+            {
+                var fundRepository = Factory.FundsRepository();
+                var dtFund = fundRepository.GetRecords();
+                dtFund.Columns.Add("funddisplay", typeof(string), "fund_code + ' - ' + fund_name");
+                cmbfund.DataSource = dtFund;
+                cmbfund.ValueMember = "id";
+                cmbfund.DisplayMember = "funddisplay";
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+
         internal void setSelectedValue(int Id, string table)
         {
            
@@ -117,50 +154,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             return num >= minreceipt && num <= maxreceipt;
         }
 
-   
-        internal void LoadForms()
-        {
-            try
-            {
-                cmbforms.SelectedValueChanged -= cmbforms_SelectedValueChanged;
-                var formRepository = Factory.AccountableRepository();
-                var dtforms = formRepository.GetRecords();
-                dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
-                cmbforms.DataSource = dtforms;
-                cmbforms.ValueMember = "id";
-                cmbforms.DisplayMember = "formdisplay";
-                cmbforms.SelectedValueChanged += cmbforms_SelectedValueChanged;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
 
-        internal void LoadFunds()
-        {
-            try
-            {
-                var fundRepository = Factory.FundsRepository();
-                var dtFund = fundRepository.GetRecords();
-                dtFund.Columns.Add("funddisplay", typeof(string), "fund_code + ' - ' + fund_name");
-                cmbfund.DataSource = dtFund;
-                cmbfund.ValueMember = "id";
-                cmbfund.DisplayMember = "funddisplay";
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
 
-        internal void LoadForms(int id)
-        {
-            try
-            {
-                var formRepository = Factory.AccountableRepository();
-                var dtforms = formRepository.GetRecords(id);
-                dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
-                cmbforms.DataSource = dtforms;
-                cmbforms.ValueMember = "id";
-                cmbforms.DisplayMember = "formdisplay";
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
         public void loadSelectedLedger(int Id, string value)
         {
             generalLedgerId = Id;
@@ -179,11 +174,15 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void ucPC_Load(object sender, EventArgs e)
         {
+            LoadForms(Convert.ToInt32(cmbcollector.SelectedValue));
+            LoadCollectors();
+            LoadFunds();
 
-            cmbAccount.SelectedIndex = -1;
+
             cmbAccount.SelectedValueChanged -= cmbAccount_SelectedValueChanged;
             LoadAccounts();
             cmbAccount.SelectedValueChanged += cmbAccount_SelectedValueChanged;
+            cmbAccount.SelectedIndex = -1;
         }
 
         private void cmbfund_Validating(object sender, CancelEventArgs e)
@@ -221,12 +220,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtpayee, "Payee.");
         }
         private void txtpayee_Validated(object sender, EventArgs e)
-
         {
             Helper.ClearErrorTextBox(errorProvider, txtpayee);
         }
 
-        private void txtreceipt_Validating(object sender, CancelEventArgs e)
+        internal void txtreceipt_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtreceipt, "Receipt No.");
             if (!isbetween(Convert.ToInt32(txtreceipt.Text.Trim())))
@@ -255,6 +253,17 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbforms, "Accountable Forms!");
         }
+
+        internal void txtCashTicketQuantity_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider, txtCashTicketQuantity, "Cash Ticket Quantity.");
+        }
+
+        private void txtCashTicketQuantity_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorNumericUpDown(errorProvider, txtCashTicketQuantity);
+        }
+
 
         private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -474,15 +483,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
         }
 
-        internal void txtCashTicketQuantity_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider, txtCashTicketQuantity, "Cash Ticket Quantity.");
-        }
-
-        private void txtCashTicketQuantity_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorNumericUpDown(errorProvider, txtCashTicketQuantity);
-        }
 
         private void cmbAccount_KeyDown(object sender, KeyEventArgs e)
         {

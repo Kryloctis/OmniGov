@@ -7,12 +7,12 @@ namespace ACC.Domain.Models
     public class CollectorReportModel
     {
         public int Id { get; set; }
-        public int CoId { get; set; }
+        public int CollectorId { get; set; }
         public string ReportNo { get; set; }
         public DateTime Date { get; set; }
-        public int Approved { get; set; }
-        public int Fid { get; set; }
-        public string status { get; set; }
-        public string remarks { get; set; }
+        public sbyte IsApproved { get; set; }
+        public sbyte IsDisapproved { get; set; }
+        public int FundId { get; set; }
+        public string Remarks { get; set; }
     }
 }

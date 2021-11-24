@@ -15,6 +15,12 @@ namespace ACC.Data
         private readonly string tableName2 = "general_collections";
         private readonly string tableName3 = "collector_report_payments";
         private readonly string tableName4 = "payment_collections";
+
+
+
+        private readonly string viewTableName = "view_general_collections";
+
+
         public GeneralCollectionsPaymentsRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -50,28 +56,20 @@ namespace ACC.Data
             return record;
         }
 
-
-        public bool Insert(List<GeneralCollectionPaymentsModel> entityList)
+        public bool Insert(GeneralCollectionPaymentsModel entity)
         {
             try
             {
-                using (var scope = new TransactionScope())
+                var parameters = new object[][]
                 {
-                    foreach (var entity in entityList)
-                    {
-                        var parameters = new object[][]
-                        {
-                            new object[] { "@collector_report_id", DbType.Int16, entity.Crid},
-                            new object[] { "@general_collections_id", DbType.Int16, entity.Gcid},
-                        };
+                    new object[] { "@collector_report_id", DbType.Int16, entity.CollectorsReportId},
+                    new object[] { "@general_collections_id", DbType.Int16, entity.GeneralCollectionsId},
+                };
 
-                        string query = $"INSERT INTO {tableName} (collector_report_id,general_collections_id) VALUES (@collector_report_id,@general_collections_id)";
-                        _= _dbGenericCommands.ExecuteNonQuery(query, parameters);
-                    }
-                    scope.Complete();
-                    return true;
-                }
-                    
+                string query = $"INSERT INTO {tableName} (collector_report_id, general_collections_id) VALUES (@collector_report_id, @general_collections_id)";
+             
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+
             }
             catch (Exception)
             {
@@ -90,8 +88,8 @@ namespace ACC.Data
                         var parameters = new object[][]
                         {
                             new object[] { "@id", DbType.Int16, entity.Id},
-                            new object[] { "@collector_report_id", DbType.Int16, entity.Crid},
-                            new object[] { "@general_collections_id", DbType.Int16, entity.Gcid},
+                            new object[] { "@collector_report_id", DbType.Int16, entity.CollectorsReportId},
+                            new object[] { "@general_collections_id", DbType.Int16, entity.GeneralCollectionsId},
                         };
 
                         string query = $"UPDATE {tableName} SET collector_report_id=@collector_report_id,general_collections_id=@general_collections_id WHERE id=@id";
@@ -149,8 +147,8 @@ namespace ACC.Data
                             var parameters = new object[][]
                            {
                                 new object[] { "@id", DbType.Int16, entity.Id},
-                                new object[] { "@collector_report_id", DbType.Int16, entity.Crid},
-                                new object[] { "@general_collections_id", DbType.Int16, entity.Gcid},
+                                new object[] { "@collector_report_id", DbType.Int16, entity.CollectorsReportId},
+                                new object[] { "@general_collections_id", DbType.Int16, entity.GeneralCollectionsId},
                            };
 
                             string query = $"UPDATE {tableName} SET collector_report_id=@collector_report_id,general_collections_id=@general_collections_id WHERE id=@id";
@@ -160,8 +158,8 @@ namespace ACC.Data
                         {
                             var parameters = new object[][]
                                {
-                                    new object[] { "@collector_report_id", DbType.Int16, entity.Crid},
-                                    new object[] { "@general_collections_id", DbType.Int16, entity.Gcid},
+                                    new object[] { "@collector_report_id", DbType.Int16, entity.CollectorsReportId},
+                                    new object[] { "@general_collections_id", DbType.Int16, entity.GeneralCollectionsId},
                                };
 
                             string query = $"INSERT INTO {tableName} (collector_report_id,general_collections_id) VALUES(@collector_report_id,@general_collections_id)";
@@ -204,7 +202,17 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            throw new NotImplementedException();
+            try
+            {
+                string query = $"SELECT * FROM {viewTableName}";
+                var dtRCD = new DataTable();
+
+                return _dbGenericCommands.Fill(query, dtRCD);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -217,10 +225,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Insert(GeneralCollectionPaymentsModel entity)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public bool Update(GeneralCollectionPaymentsModel entity)
         {
