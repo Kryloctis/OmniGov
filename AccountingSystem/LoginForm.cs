@@ -51,7 +51,6 @@ namespace AccountingSystem
             Helper.MessageBoxError("Incorrect username or password.");
         }
 
-
         private void btnVisibility_Click(object sender, EventArgs e)
         {
             Image invisibleImage = Properties.Resources.invisible_16px;
