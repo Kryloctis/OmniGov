@@ -195,6 +195,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.Size = new System.Drawing.Size(203, 23);
             this.txtsearch.TabIndex = 12;
+            this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
             // frmRCDAdd
             // 

@@ -23,7 +23,29 @@ namespace AccountingSystem.Views.Reports.RCD
             cmbCollector.SelectedIndex = -1;
 
             LoadFunds();
+            LoadCollectors();
             LoadRecords();
+        }
+
+        private void LoadCollectors()
+        {
+            try
+            {
+                //cmbCollector.SelectedValueChanged -= new EventHandler(cmbcollector_SelectedValueChanged);
+                var collectingOfficerRepository = Factory.CollectingOfficerRepository();
+                var dtCollectors = collectingOfficerRepository.GetRecords();
+
+                cmbCollector.DataSource = dtCollectors;
+                cmbCollector.DisplayMember = "fullname";
+                cmbCollector.ValueMember = "id";
+                //cmbCollector.SelectedValueChanged += new EventHandler(cmbcollector_SelectedValueChanged);
+
+                //collectorId = (ushort)Convert.ToInt32(cmbCollector.SelectedValue);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void LoadRecords()
@@ -65,6 +87,9 @@ namespace AccountingSystem.Views.Reports.RCD
             }
         }
 
-
+        private void txtsearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
     }
 }
