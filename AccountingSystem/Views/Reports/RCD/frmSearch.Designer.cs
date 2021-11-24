@@ -52,7 +52,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.dgrcd.Name = "dgrcd";
             this.dgrcd.RowHeadersWidth = 51;
             this.dgrcd.RowTemplate.Height = 29;
-            this.dgrcd.Size = new System.Drawing.Size(730, 376);
+            this.dgrcd.Size = new System.Drawing.Size(779, 372);
             this.dgrcd.TabIndex = 17;
             this.dgrcd.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrcd_CellDoubleClick);
             this.dgrcd.SelectionChanged += new System.EventHandler(this.dgrcd_SelectionChanged);
@@ -128,7 +128,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(658, 421);
+            this.btnCancel.Location = new System.Drawing.Point(707, 417);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(82, 22);
@@ -141,7 +141,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSelect.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSelect.Enabled = false;
-            this.btnSelect.Location = new System.Drawing.Point(570, 421);
+            this.btnSelect.Location = new System.Drawing.Point(619, 417);
             this.btnSelect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(82, 22);
@@ -155,7 +155,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(751, 454);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.cmbstatus);

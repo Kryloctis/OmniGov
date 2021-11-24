@@ -36,7 +36,8 @@ namespace AccountingSystem.Views.Reports.RCD
                 cmbfunds.DataSource = dtfunds;
                 cmbfunds.ValueMember = "id";
                 cmbfunds.DisplayMember = "fund_name";
-            }catch(Exception ex)
+            }
+            catch(Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
@@ -46,12 +47,12 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
-                int approved = cmbstatus.SelectedIndex != -1 && cmbstatus.SelectedItem.Equals("Approved") ? 1:0;
-                string status = cmbstatus.SelectedIndex != -1 && (cmbstatus.SelectedItem.Equals("Pending") || cmbstatus.SelectedItem.Equals("Cancelled")) ? cmbstatus.SelectedItem.ToString().ToUpper():string.Empty;
-                int fundid = cmbfunds.SelectedValue != null ? int.Parse(cmbfunds.SelectedValue.ToString()):0;
+                string status = cmbstatus.Text;
+                byte fundId = (byte)cmbfunds.SelectedValue;
+                string keySearch = txtsearch.Text;
 
-                var colrepo = Factory.CollectorReportRepository();
-                var dtrcd = colrepo.GetRecords(approved, status, fundid, string.Empty);
+                var collectorsReportRepo = Factory.CollectorReportRepository();
+                var dtrcd = collectorsReportRepo.FilterRecords(status, fundId, keySearch);
                 HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgrcd);
             }
             catch(Exception ex)

@@ -152,11 +152,11 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(404, 55);
+            this.label2.Location = new System.Drawing.Point(416, 55);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 15);
+            this.label2.Size = new System.Drawing.Size(52, 15);
             this.label2.TabIndex = 20;
-            this.label2.Text = "Report No";
+            this.label2.Text = "RCD No.";
             // 
             // dtpdate
             // 
@@ -171,7 +171,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(654, 55);
+            this.label1.Location = new System.Drawing.Point(659, 55);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(31, 15);
             this.label1.TabIndex = 20;
@@ -239,6 +239,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reports of Collections and Deposits (RCD)";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmRCD_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgpayments)).EndInit();

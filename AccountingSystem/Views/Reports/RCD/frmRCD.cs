@@ -20,12 +20,17 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnadd_Click(object sender, EventArgs e)
         {
-
+            _ = new frmRCDAdd().ShowDialog();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
             _ = new frmSearch().ShowDialog();
+        }
+
+        private void frmRCD_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
