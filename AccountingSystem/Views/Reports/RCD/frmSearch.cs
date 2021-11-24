@@ -16,6 +16,7 @@ namespace AccountingSystem.Views.Reports.RCD
 
         internal string reportNo;
         internal string rcdNo;
+        internal string rcdId;
 
         private readonly frmRCD _frmRCD;
 
@@ -104,6 +105,9 @@ namespace AccountingSystem.Views.Reports.RCD
         private void btnSelect_Click(object sender, EventArgs e)
         {
             _frmRCD.txtRCDNo.Text = rcdNo;
+            _frmRCD.rcdId = rcdId;
+
+            _frmRCD.btnPrint.Enabled = true;
             _frmRCD.panelRCD.Enabled = false;
             _frmRCD.LoadSelectedRCD(reportNo);
             this.Close();
@@ -116,6 +120,7 @@ namespace AccountingSystem.Views.Reports.RCD
             {
                 foreach (DataGridViewRow row in dgrcd.SelectedRows)
                 {
+                    rcdId = row.Cells[0].Value.ToString();
                     rcdNo = row.Cells[1].Value.ToString();
                     reportNo = row.Cells[3].Value.ToString();
                 }

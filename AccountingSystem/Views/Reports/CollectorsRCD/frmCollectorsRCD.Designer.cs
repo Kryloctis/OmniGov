@@ -156,6 +156,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnPrint.Size = new System.Drawing.Size(36, 47);
             this.btnPrint.Text = "&Print";
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnSearch
             // 

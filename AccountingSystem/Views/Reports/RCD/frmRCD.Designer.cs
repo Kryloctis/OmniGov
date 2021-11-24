@@ -93,6 +93,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnCancel.Size = new System.Drawing.Size(47, 47);
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnDelete
             // 
@@ -120,6 +121,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnDeposit.Text = "Deposit";
             this.btnDeposit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDeposit.ToolTipText = "Deposit";
+            this.btnDeposit.Click += new System.EventHandler(this.btnDeposit_Click);
             // 
             // btnPrint
             // 
@@ -131,6 +133,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnPrint.Size = new System.Drawing.Size(36, 47);
             this.btnPrint.Text = "&Print";
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnSearch
             // 
@@ -234,7 +237,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.txtReport.MaxLength = 20;
             this.txtReport.Name = "txtReport";
             this.txtReport.ReadOnly = true;
-            this.txtReport.Size = new System.Drawing.Size(115, 23);
+            this.txtReport.Size = new System.Drawing.Size(131, 23);
             this.txtReport.TabIndex = 31;
             // 
             // label3
@@ -249,7 +252,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(188, 10);
+            this.label4.Location = new System.Drawing.Point(204, 10);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 15);
             this.label4.TabIndex = 30;
@@ -257,7 +260,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // txtCollector
             // 
-            this.txtCollector.Location = new System.Drawing.Point(249, 7);
+            this.txtCollector.Location = new System.Drawing.Point(265, 7);
             this.txtCollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCollector.MaxLength = 20;
             this.txtCollector.Name = "txtCollector";

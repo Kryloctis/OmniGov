@@ -28,7 +28,21 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             ResetForm();
             LoadFunds();
             LoadCollectors();
+
+            cmbcollector.SelectedIndex = -1;
         }
+
+        internal void TotalCollections()
+        {
+            string TotalCollections;
+
+            TotalCollections = (from DataGridViewRow row in dgPayments.Rows
+                                where !String.IsNullOrEmpty(row.Cells["amount"].FormattedValue.ToString())
+                                select Convert.ToDecimal(row.Cells["amount"].FormattedValue)).Sum().ToString("N2");
+
+            txtTotal.Text = TotalCollections;
+        }
+
         private void LoadCollectors()
         {
             try
@@ -119,6 +133,13 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         private void cmbcollector_SelectedValueChanged(object sender, EventArgs e)
         {
             collectorId = (ushort)Convert.ToSByte(cmbcollector.SelectedValue);
+
+
+            if (cmbcollector.SelectedIndex == -1) 
+                btnadd.Enabled = false;
+            else
+                btnadd.Enabled = true;
+
         }
 
     }

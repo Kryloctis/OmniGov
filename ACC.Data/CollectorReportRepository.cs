@@ -523,6 +523,48 @@ namespace ACC.Data
 
         }
 
+        public DataTable FilterRecords(string status, byte fundId, string keySearch)
+        {
+            try
+            {
+                string statusQuery;
+
+                switch (status)
+                {
+                    case "pending":
+                        statusQuery = " is_approved = 0 AND is_disapproved = 0 AND ";
+                        break;
+
+                    case "approved":
+                        statusQuery = " is_approved = 1 AND is_disapproved = 0 AND  ";
+                        break;
+
+                    case "disapproved":
+                        statusQuery = " is_approved = 0 AND is_disapproved = 1 AND  ";
+                        break;
+
+                    default:
+                        statusQuery = string.Empty;
+                        break;
+                }
+
+                var parameter = new object[][] {
+                    new object[] {"@keySearch", DbType.String, $"%{keySearch}%" },
+                    new object[] {"@fundId", DbType.Byte, fundId }
+                };
+
+                string query = $"SELECT * FROM {viewTableName} WHERE {statusQuery} fund_id = @fundId AND " +
+                    $"(collecting_officer LIKE @keySearch OR report_no LIKE @keySearch OR fund_name LIKE @keySearch)";
+
+                var dtCollectorReport = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtCollectorReport, parameter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public DataTable FilterRecords(string status, byte fundId, string keySearch, short collectingOfficerId)
         {
             try
@@ -669,6 +711,6 @@ namespace ACC.Data
             }
         }
 
-
+       
     }
 }

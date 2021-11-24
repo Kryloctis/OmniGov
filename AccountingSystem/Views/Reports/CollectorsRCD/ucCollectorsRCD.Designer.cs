@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelFunds = new System.Windows.Forms.FlowLayoutPanel();
-            this.txttotal = new System.Windows.Forms.TextBox();
+            this.txtTotal = new System.Windows.Forms.TextBox();
             this.btndelete = new System.Windows.Forms.Button();
             this.btnclear = new System.Windows.Forms.Button();
             this.btnadd = new System.Windows.Forms.Button();
@@ -136,17 +136,17 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.flowLayoutPanelFunds.Size = new System.Drawing.Size(901, 39);
             this.flowLayoutPanelFunds.TabIndex = 0;
             // 
-            // txttotal
+            // txtTotal
             // 
-            this.txttotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txttotal.Location = new System.Drawing.Point(49, 482);
-            this.txttotal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txttotal.Name = "txttotal";
-            this.txttotal.ReadOnly = true;
-            this.txttotal.Size = new System.Drawing.Size(229, 23);
-            this.txttotal.TabIndex = 26;
-            this.txttotal.Text = "0.00";
-            this.txttotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtTotal.Location = new System.Drawing.Point(49, 482);
+            this.txtTotal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.ReadOnly = true;
+            this.txtTotal.Size = new System.Drawing.Size(229, 23);
+            this.txtTotal.TabIndex = 26;
+            this.txtTotal.Text = "0.00";
+            this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btndelete
             // 
@@ -226,7 +226,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.txttotal);
+            this.Controls.Add(this.txtTotal);
             this.Controls.Add(this.btndelete);
             this.Controls.Add(this.btnclear);
             this.Controls.Add(this.btnadd);
@@ -254,7 +254,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.GroupBox groupBox1;
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFunds;
-        internal System.Windows.Forms.TextBox txttotal;
+        internal System.Windows.Forms.TextBox txtTotal;
         internal System.Windows.Forms.Button btndelete;
         internal System.Windows.Forms.Button btnclear;
         internal System.Windows.Forms.Button btnadd;

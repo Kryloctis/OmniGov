@@ -1,4 +1,6 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Reports.PaymentCollection;
+using AccountingSystem.Views.Transactions.BankDeposits;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,10 +21,8 @@ namespace AccountingSystem.Views.Reports.RCD
         internal int collectorsReportId;
         internal sbyte fundId;
         internal string reportNo;
-
-
         internal string rcdNo;
-
+        internal string rcdId;
 
 
         internal DateTime date;
@@ -107,6 +107,7 @@ namespace AccountingSystem.Views.Reports.RCD
             dtpdate.Value = DateTime.Now;
 
             dgpayments.Rows.Clear();
+            panelRCD.Enabled = true;
         }
 
         private bool SaveData()
@@ -156,8 +157,22 @@ namespace AccountingSystem.Views.Reports.RCD
         private bool ValidateInputs()
         {
             bool hasError = String.IsNullOrEmpty(txtRCDNo.Text) || dgpayments.Rows.Count == 0;
-
             return hasError;
+        }
+
+        private void btnDeposit_Click(object sender, EventArgs e)
+        {
+            _ = new frmBankDepositsAdd(new frmBankDeposits()).ShowDialog();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            ResetForm();
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            _ = new frmCDReport(rcdId).ShowDialog();
         }
     }
 }

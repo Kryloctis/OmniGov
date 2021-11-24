@@ -48,6 +48,8 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             cmbstatus.SelectedIndex = 1;
             LoadFunds();
             LoadRecords();
+
+
         }
 
 
@@ -58,14 +60,22 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 string status = cmbstatus.Text.ToLower();
                 byte fundId = (byte)(cmbfunds.SelectedValue != null ? Convert.ToByte(cmbfunds.SelectedValue.ToString()) : 0);
                 string keySearch = txtsearch.Text;
-                byte collectingOfficerId = 1;
-
+                //byte collectingOfficerId = (byte)_frmCollectorsRCD.ucCollectorsRCD1.collectorId;
 
                 var colectorRepository = Factory.CollectorReportRepository();
-
-                var dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch, collectingOfficerId);
+                var dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch);
 
                 HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgCollectorsReport);
+
+
+                if (dgCollectorsReport.Rows.Count == 0)
+                {
+                    btnSelect.Enabled = false;
+                    return;
+                }
+
+                btnSelect.Enabled = true;
+
             }
             catch (Exception ex)
             {
@@ -75,25 +85,18 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void dgCollectorsReport_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgCollectorsReport.Rows.Count > 0 && dgCollectorsReport.SelectedRows.Count > 0)
+            foreach (DataGridViewRow row in dgCollectorsReport.SelectedRows)
             {
-                foreach (DataGridViewRow row in dgCollectorsReport.SelectedRows)
-                {
-                    reportNo = row.Cells[1].Value.ToString();
-                }
-                btnSelect.Enabled = true;
-            }
-            else
-            {
-                btnSelect.Enabled = false;
+                reportNo = row.Cells[1].Value.ToString();
             }
         }
-
+       
         private void btnSelect_Click(object sender, EventArgs e)
         {
             _frmCollectorsRCD.LoadSelectedValue(reportNo);
             _frmCollectorsRCD.CheckRCDStatus(reportNo);
 
+            _uc.TotalCollections();
             _uc.cmbcollector.Enabled = false;
             _uc.txtReport.Enabled = false;
             _uc.dgPayments.Enabled = false;

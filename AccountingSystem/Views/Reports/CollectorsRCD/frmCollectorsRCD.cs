@@ -220,8 +220,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 string reportNo = uc.txtReport.Text;
                 if (String.IsNullOrEmpty(reportNo)) return;
 
+            
 
-                if (MessageBox.Show("Are you sure you want to approved this Collector's Report?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (MessageBox.Show("Are you sure you want to approved this Collector's Report?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     if (SetRCDStatus(1, reportNo))
                     {
@@ -248,6 +249,11 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             }
 
             frmCollectorsRCDRemarks.ShowDialog();
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

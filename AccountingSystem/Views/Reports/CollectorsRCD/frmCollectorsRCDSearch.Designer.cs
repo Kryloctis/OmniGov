@@ -78,8 +78,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             "All",
             "Approved",
             "Disapproved",
-            "Pending",
-            "Cancelled"});
+            "Pending"});
             this.cmbstatus.Location = new System.Drawing.Point(54, 5);
             this.cmbstatus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbstatus.Name = "cmbstatus";
@@ -154,6 +153,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             // btnSelect
             // 
             this.btnSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelect.Enabled = false;
             this.btnSelect.Location = new System.Drawing.Point(640, 3);
             this.btnSelect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSelect.Name = "btnSelect";

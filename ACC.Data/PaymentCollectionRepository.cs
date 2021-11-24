@@ -397,14 +397,14 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@collectionFund", DbType.UInt16, parameter[0] },
-                    new object[] { "@collectorId", DbType.UInt16, parameter[1] },
+                    new object[] { "@collectorId", DbType.UInt16, parameter[0] },
+                    new object[] { "@collectionFund", DbType.UInt16, parameter[1] },
                     new object[] { "@collectionDateFrom", DbType.Date, parameter[2] },
                     new object[] { "@collectionDateTo", DbType.Date, parameter[3] }
                 };
 
-                string query = $"SELECT * FROM {viewTableName} WHERE payment_date " +
-                    $"BETWEEN @collectionDateFrom AND @collectionDateTo";
+                string query = $"SELECT * FROM {viewTableName} WHERE collecting_officer_id = @collectorId AND payment_date " +
+                    $"BETWEEN @collectionDateFrom AND @collectionDateTo ";
 
                 var dtPaymentCollection = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtPaymentCollection, parameters);
