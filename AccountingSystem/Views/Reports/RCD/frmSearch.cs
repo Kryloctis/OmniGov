@@ -13,18 +13,24 @@ namespace AccountingSystem.Views.Reports.RCD
     public partial class frmSearch : Form
     {
         internal int Id = 0;
-        public frmSearch()
+
+        internal string reportNo;
+        internal string rcdNo;
+
+        private readonly frmRCD _frmRCD;
+
+        public frmSearch(frmRCD frmRCD)
         {
             InitializeComponent();
-            Helper.DatagridFullRowSelectStyle(dgrcd);
-            
+            Helper.DatagridFullRowSelectStyle(dgrcd, true);
+
+            _frmRCD = frmRCD;
         }
 
         private void frmSearch_Load(object sender, EventArgs e)
         {
             LoadFunds();
             LoadRecords();
-            dgrcd.Columns[7].Visible = false;
         }
 
         private void LoadFunds()
@@ -37,7 +43,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 cmbfunds.ValueMember = "id";
                 cmbfunds.DisplayMember = "fund_name";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
@@ -47,13 +53,13 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
-                string status = cmbstatus.Text;
                 byte fundId = (byte)cmbfunds.SelectedValue;
                 string keySearch = txtsearch.Text;
 
-                var collectorsReportRepo = Factory.CollectorReportRepository();
-                var dtrcd = collectorsReportRepo.FilterRecords(status, fundId, keySearch);
-                HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgrcd);
+                var rcdRepository = Factory.GeneralCollectionsRepository();
+                var dtRCD = rcdRepository.GetRecords();
+
+                HelperLoadRecords.RCDDatagridView(dtRCD, dgrcd);
             }
             catch(Exception ex)
             {
@@ -97,11 +103,10 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            if(Id > 0)
-            {
-                //frmrcd.LoadSearchValue(Id);
-                this.Close();
-            }
+            _frmRCD.txtRCDNo.Text = rcdNo;
+            _frmRCD.panelRCD.Enabled = false;
+            _frmRCD.LoadSelectedRCD(reportNo);
+            this.Close();
         }
        
 
@@ -111,7 +116,8 @@ namespace AccountingSystem.Views.Reports.RCD
             {
                 foreach (DataGridViewRow row in dgrcd.SelectedRows)
                 {
-                    Id = int.Parse(row.Cells[0].Value.ToString());
+                    rcdNo = row.Cells[1].Value.ToString();
+                    reportNo = row.Cells[3].Value.ToString();
                 }
                 btnSelect.Enabled = true;
             }

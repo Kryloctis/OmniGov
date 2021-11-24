@@ -30,8 +30,8 @@ namespace AccountingSystem.Views.Reports.RCD
         private void InitializeComponent()
         {
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnOkay = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSelect = new System.Windows.Forms.Button();
             this.dgCollectorsReport = new System.Windows.Forms.DataGridView();
@@ -50,8 +50,8 @@ namespace AccountingSystem.Views.Reports.RCD
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.button2);
+            this.panel2.Controls.Add(this.btnCancel);
+            this.panel2.Controls.Add(this.btnOkay);
             this.panel2.Controls.Add(this.btnClose);
             this.panel2.Controls.Add(this.btnSelect);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -61,29 +61,30 @@ namespace AccountingSystem.Views.Reports.RCD
             this.panel2.Size = new System.Drawing.Size(800, 28);
             this.panel2.TabIndex = 10;
             // 
-            // button1
+            // btnCancel
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(715, 3);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button1.Size = new System.Drawing.Size(82, 22);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Close";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Location = new System.Drawing.Point(715, 3);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnCancel.Size = new System.Drawing.Size(82, 22);
+            this.btnCancel.TabIndex = 5;
+            this.btnCancel.Text = "Close";
+            this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnOkay
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(627, 3);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button2.Name = "button2";
-            this.button2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button2.Size = new System.Drawing.Size(82, 22);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Select";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnOkay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOkay.Location = new System.Drawing.Point(627, 3);
+            this.btnOkay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnOkay.Name = "btnOkay";
+            this.btnOkay.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnOkay.Size = new System.Drawing.Size(82, 22);
+            this.btnOkay.TabIndex = 6;
+            this.btnOkay.Text = "Select";
+            this.btnOkay.UseVisualStyleBackColor = true;
+            this.btnOkay.Click += new System.EventHandler(this.btnOkay_Click);
             // 
             // btnClose
             // 
@@ -122,6 +123,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.dgCollectorsReport.RowTemplate.Height = 29;
             this.dgCollectorsReport.Size = new System.Drawing.Size(776, 382);
             this.dgCollectorsReport.TabIndex = 19;
+            this.dgCollectorsReport.SelectionChanged += new System.EventHandler(this.dgCollectorsReport_SelectionChanged);
             // 
             // panel1
             // 
@@ -157,6 +159,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.cmbCollector.Name = "cmbCollector";
             this.cmbCollector.Size = new System.Drawing.Size(217, 23);
             this.cmbCollector.TabIndex = 9;
+            this.cmbCollector.SelectedValueChanged += new System.EventHandler(this.cmbCollector_SelectedValueChanged);
             // 
             // label2
             // 
@@ -201,6 +204,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dgCollectorsReport);
@@ -223,8 +227,8 @@ namespace AccountingSystem.Views.Reports.RCD
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnClose;
         internal System.Windows.Forms.Button btnSelect;
-        private System.Windows.Forms.Button button1;
-        internal System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnCancel;
+        internal System.Windows.Forms.Button btnOkay;
         private System.Windows.Forms.DataGridView dgCollectorsReport;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;

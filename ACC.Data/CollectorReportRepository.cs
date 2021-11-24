@@ -81,6 +81,7 @@ namespace ACC.Data
                 {
                     if (reader.Rows.Count < 1)
                         return record;
+
                     record.Add("id", reader.Rows[0]["id"].ToString());
                     record.Add("collecting_officers_id", reader.Rows[0]["collecting_officers_id"].ToString());
                     record.Add("report_no", reader.Rows[0]["report_no"].ToString());
@@ -522,7 +523,7 @@ namespace ACC.Data
 
         }
 
-        public DataTable FilterRecords(string status, byte fundId, string keySearch)
+        public DataTable FilterRecords(string status, byte fundId, string keySearch, short collectingOfficerId)
         {
             try
             {
@@ -549,10 +550,11 @@ namespace ACC.Data
 
                 var parameter = new object[][] {
                     new object[] {"@keySearch", DbType.String, $"%{keySearch}%" },
-                    new object[] {"@fundId", DbType.Byte, fundId }
+                    new object[] {"@fundId", DbType.Byte, fundId },
+                    new object[] {"@collectingOfficerId", DbType.Byte, collectingOfficerId }
                 };
 
-                string query = $"SELECT * FROM {viewTableName} WHERE {statusQuery} fund_id = @fundId AND " +
+                string query = $"SELECT * FROM {viewTableName} WHERE {statusQuery} fund_id = @fundId AND collecting_officers_id = @collectingOfficerId AND " +
                     $"(collecting_officer LIKE @keySearch OR report_no LIKE @keySearch OR fund_name LIKE @keySearch)";
 
                 var dtCollectorReport = new DataTable();
@@ -666,5 +668,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
+
     }
 }

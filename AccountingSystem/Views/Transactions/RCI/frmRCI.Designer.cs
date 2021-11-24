@@ -44,6 +44,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgRCI = new System.Windows.Forms.DataGridView();
             this.txtsearch = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgRCI)).BeginInit();
@@ -51,6 +52,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // toolStrip
             // 
+            this.toolStrip.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -194,11 +196,22 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.txtsearch.TabIndex = 10;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(729, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 15);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Search";
+            // 
             // frmRCI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1060, 562);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.dgRCI);
             this.Controls.Add(this.statusStrip);
@@ -238,5 +251,6 @@ namespace AccountingSystem.Views.Transactions.RCI
         private System.Windows.Forms.DataGridView dgRCI;
         private System.Windows.Forms.TextBox txtsearch;
         private System.Windows.Forms.ToolStripButton btnRefresh;
+        private System.Windows.Forms.Label label1;
     }
 }

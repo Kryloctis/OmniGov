@@ -49,7 +49,6 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             this.ClientSize = new System.Drawing.Size(1156, 547);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmCDReport";
             this.ShowInTaskbar = false;

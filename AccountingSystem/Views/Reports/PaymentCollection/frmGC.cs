@@ -59,7 +59,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 }
                 var gcModel = new GeneralCollectionsModel()
                 {
-                    Rcdno = txtrcd.Text.Trim(),
+                    RcdNo = txtrcd.Text.Trim(),
                     Rcddate = Convert.ToDateTime(dtdate.Value),
                     //Userid = 2
                     Userid=Helper.UserId
@@ -77,7 +77,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                             list.Clear();
                             foreach (var item in _data)
                             {
-                                list.Add(new GeneralCollectionPaymentsModel() { Gcid = Id, Crid = item.Key });
+                                list.Add(new GeneralCollectionPaymentsModel() { GeneralCollectionsId = Id, CollectorsReportId = item.Key });
                             }
                             var gcpRepository = Factory.GeneralCollectionsPaymentsRepository();
                             return gcpRepository.Append(list);

@@ -478,6 +478,57 @@ namespace AccountingSystem
         }
         #endregion
 
+        #region RCD 
+        internal static void RCDDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+
+            datagrid.Rows.Clear();
+            datagrid.Columns.Clear();
+
+            datagrid.Columns.Add("id", "Id");
+            datagrid.Columns.Add("rcd_no", "RCD No. ");
+            datagrid.Columns.Add("date", "Date");
+            datagrid.Columns.Add("report_no", "Date");
+            datagrid.Columns.Add("users_id", "User Id");
+            datagrid.Columns.Add("user", "Liquidating Officer");
+            datagrid.Columns.Add("amount", "Total Amount");
+
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["users_id"].Visible = false;
+            datagrid.Columns["report_no"].Visible = false;
+
+
+            datagrid.Columns["amount"].Resizable = DataGridViewTriState.False;
+            datagrid.Columns["amount"].Width = 100;
+            datagrid.Columns["amount"].MinimumWidth = 100;
+            datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            datagrid.Columns["date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
+
+
+            foreach (DataRow drRCD in dataTable.Rows)
+            {
+                
+                datagrid.Rows.Add(new object[]
+                {
+                    drRCD["id"],
+                    drRCD["rcd_no"],
+                    drRCD["date"],
+                    drRCD["report_no"],
+                    drRCD["users_id"],
+                    drRCD["user"],
+                    drRCD["amount"]
+                });
+            }
+
+            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", 9f);
+
+         
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        #endregion
+
         #region Collector Report
         internal static void CollectorReportDatagridView(DataTable dataTable, DataGridView datagrid)
         {
@@ -488,6 +539,7 @@ namespace AccountingSystem
             datagrid.Columns.Add("id", "Id");
             datagrid.Columns.Add("report_no", "Report No. ");
             datagrid.Columns.Add("collecting_officers_id", "Collecting Officer Id");
+            datagrid.Columns.Add("collector_officer", "Collecting Officer");
             datagrid.Columns.Add("fund_id", "Fund Id");
             datagrid.Columns.Add("fund_name", "Fund");
             datagrid.Columns.Add("date", "Date");
@@ -499,6 +551,7 @@ namespace AccountingSystem
 
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["collecting_officers_id"].Visible = false;
+            datagrid.Columns["collector_officer"].Visible = false;
             datagrid.Columns["fund_id"].Visible = false;
             datagrid.Columns["is_approved"].Visible = false;
             datagrid.Columns["is_disapproved"].Visible = false;
@@ -528,6 +581,7 @@ namespace AccountingSystem
                     drCollectionReport["id"],
                     drCollectionReport["report_no"],
                     drCollectionReport["collecting_officers_id"],
+                    drCollectionReport["collecting_officer"],
                     drCollectionReport["fund_id"],
                     drCollectionReport["fund_name"],
                     drCollectionReport["date"],
@@ -754,28 +808,6 @@ namespace AccountingSystem
             datagrid.ClearSelection();
             Helper.DatagridFullRowSelectStyle(datagrid, true);
 
-        }
-        #endregion
-
-        #region RCDGridView
-        internal static void RCDDatagridView(DataTable dataTable, DataGridView datagrid)
-        {
-            datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].Visible = false;
-            datagrid.Columns[2].HeaderText = "Account Code";
-            datagrid.Columns[3].HeaderText = "Accountable Form";
-            datagrid.Columns[4].HeaderText = "Ledger";
-            datagrid.Columns[5].HeaderText = "Subsidiary";
-            datagrid.Columns[6].HeaderText = "Payee";
-            datagrid.Columns[7].HeaderText = "Receipt No.";
-            datagrid.Columns[8].HeaderText = "Payment Date";
-            datagrid.Columns[8].DefaultCellStyle.Format = "yyyy-MM-dd";
-            datagrid.Columns[9].HeaderText = "Amount";
-            datagrid.Columns[9].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[10].Visible = false;
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
 

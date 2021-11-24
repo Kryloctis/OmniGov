@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         {
 
             var dtPC = new dsLFS.dtRCDFormsDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByForms(id);
+            var dt = Factory.GeneralCollectionsRepository().GetRecordByForms(1);
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
@@ -149,9 +149,10 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             try
             {
                 var lguDetails = Helper.LGUDetails();
-                var parameters = new[] {
-                            new ReportParameter("paramLGUName", lguDetails["lgu_name"])
-                    };
+                var parameters = new[] 
+                {
+                    new ReportParameter("paramLGUName", lguDetails["lgu_name"])
+                };
                 report.ReportPath = $"{Application.StartupPath}Reports\\rcd.rdlc";
                 report.DataSources.Clear();
                 report.DataSources.Add(new ReportDataSource("dtRCD", DataTableData(Ids)));

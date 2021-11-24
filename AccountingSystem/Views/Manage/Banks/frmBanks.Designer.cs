@@ -43,6 +43,7 @@ namespace AccountingSystem.Views.Manage.Banks
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.dgBanks = new System.Windows.Forms.DataGridView();
             this.txtsearch = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.statusStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgBanks)).BeginInit();
@@ -108,6 +109,7 @@ namespace AccountingSystem.Views.Manage.Banks
             // 
             // toolStrip
             // 
+            this.toolStrip.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -184,11 +186,22 @@ namespace AccountingSystem.Views.Manage.Banks
             this.txtsearch.TabIndex = 9;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(422, 36);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 15);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Search";
+            // 
             // frmBanks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(735, 395);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.dgBanks);
             this.Controls.Add(this.statusStrip);
@@ -225,5 +238,6 @@ namespace AccountingSystem.Views.Manage.Banks
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.DataGridView dgBanks;
         private System.Windows.Forms.TextBox txtsearch;
+        private System.Windows.Forms.Label label1;
     }
 }

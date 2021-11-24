@@ -58,11 +58,12 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 string status = cmbstatus.Text.ToLower();
                 byte fundId = (byte)(cmbfunds.SelectedValue != null ? Convert.ToByte(cmbfunds.SelectedValue.ToString()) : 0);
                 string keySearch = txtsearch.Text;
+                byte collectingOfficerId = 1;
 
 
                 var colectorRepository = Factory.CollectorReportRepository();
 
-                var dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch);
+                var dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch, collectingOfficerId);
 
                 HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgCollectorsReport);
             }

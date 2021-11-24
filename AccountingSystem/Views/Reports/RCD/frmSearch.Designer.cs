@@ -30,14 +30,12 @@ namespace AccountingSystem.Views.Reports.RCD
         private void InitializeComponent()
         {
             this.dgrcd = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cmbstatus = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cmbfunds = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtsearch = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSelect = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cmbfunds = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgrcd)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,57 +55,10 @@ namespace AccountingSystem.Views.Reports.RCD
             this.dgrcd.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrcd_CellDoubleClick);
             this.dgrcd.SelectionChanged += new System.EventHandler(this.dgrcd_SelectionChanged);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 5);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(4);
-            this.label1.Size = new System.Drawing.Size(47, 23);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Status";
-            // 
-            // cmbstatus
-            // 
-            this.cmbstatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbstatus.FormattingEnabled = true;
-            this.cmbstatus.Items.AddRange(new object[] {
-            "Approved",
-            "Disapproved",
-            "Pending",
-            "Cancelled"});
-            this.cmbstatus.Location = new System.Drawing.Point(58, 7);
-            this.cmbstatus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbstatus.Name = "cmbstatus";
-            this.cmbstatus.Size = new System.Drawing.Size(185, 23);
-            this.cmbstatus.TabIndex = 1;
-            this.cmbstatus.SelectionChangeCommitted += new System.EventHandler(this.cmbstatus_SelectionChangeCommitted);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(249, 5);
-            this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(4);
-            this.label2.Size = new System.Drawing.Size(47, 23);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Funds";
-            // 
-            // cmbfunds
-            // 
-            this.cmbfunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbfunds.FormattingEnabled = true;
-            this.cmbfunds.Location = new System.Drawing.Point(302, 7);
-            this.cmbfunds.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbfunds.Name = "cmbfunds";
-            this.cmbfunds.Size = new System.Drawing.Size(185, 23);
-            this.cmbfunds.TabIndex = 2;
-            this.cmbfunds.SelectionChangeCommitted += new System.EventHandler(this.cmbfunds_SelectionChangeCommitted);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(493, 5);
+            this.label3.Location = new System.Drawing.Point(237, 10);
             this.label3.Name = "label3";
             this.label3.Padding = new System.Windows.Forms.Padding(4);
             this.label3.Size = new System.Drawing.Size(50, 23);
@@ -116,7 +67,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // txtsearch
             // 
-            this.txtsearch.Location = new System.Drawing.Point(549, 7);
+            this.txtsearch.Location = new System.Drawing.Point(293, 12);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.Size = new System.Drawing.Size(191, 23);
@@ -150,18 +101,36 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(4, 11);
+            this.label4.Name = "label4";
+            this.label4.Padding = new System.Windows.Forms.Padding(4);
+            this.label4.Size = new System.Drawing.Size(47, 23);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "Funds";
+            // 
+            // cmbfunds
+            // 
+            this.cmbfunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbfunds.FormattingEnabled = true;
+            this.cmbfunds.Location = new System.Drawing.Point(57, 11);
+            this.cmbfunds.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbfunds.Name = "cmbfunds";
+            this.cmbfunds.Size = new System.Drawing.Size(173, 23);
+            this.cmbfunds.TabIndex = 18;
+            // 
             // frmSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.cmbstatus);
-            this.Controls.Add(this.btnSelect);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.cmbfunds);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dgrcd);
             this.Controls.Add(this.txtsearch);
@@ -191,5 +160,7 @@ namespace AccountingSystem.Views.Reports.RCD
         private System.Windows.Forms.ComboBox cmbfunds;
         private System.Windows.Forms.TextBox txtsearch;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

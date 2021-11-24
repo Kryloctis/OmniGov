@@ -90,7 +90,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                     var CollectorsReportId = GetCollectorsReportId();
                     var PaymentCollectionsId = Convert.ToInt16(item.Cells["payment_collection_id"].Value.ToString());
 
-
                     var collectorReportPaymentModel = new CollectorReportPaymentModel()
                     {
                         CollectorsReportId = CollectorsReportId,

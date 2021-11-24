@@ -21,7 +21,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecords(int approved, string status, int fid, string date);
         bool Remarks(CollectorReportModel entity);
         DataTable GetRecords(string id);
-        DataTable FilterRecords(string status, byte fundId, string keySearch);
+        DataTable FilterRecords(string status, byte fundId, string keySearch, short collectingOfficerId);
 
         string GetRCDStatus(string reportNo);
 

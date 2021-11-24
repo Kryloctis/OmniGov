@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,31 +7,157 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RCD
 {
     public partial class frmRCD : Form
     {
+
+        internal ushort collectorId;
+        internal int collectorsReportId;
+        internal sbyte fundId;
+        internal string reportNo;
+
+
+        internal string rcdNo;
+
+
+
+        internal DateTime date;
+
+
+        private List<GeneralCollectionsModel> data;
+
         public frmRCD()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+            Helper.DatagridFullRowSelectStyle(dgpayments, true);
         }
 
         private void btnadd_Click(object sender, EventArgs e)
         {
-            _ = new frmRCDAdd().ShowDialog();
+            _ = new frmRCDAdd(this).ShowDialog();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            _ = new frmSearch().ShowDialog();
+            _ = new frmSearch(this).ShowDialog();
         }
 
         private void frmRCD_Load(object sender, EventArgs e)
         {
 
+        }
+
+        internal void LoadSelectedRCD(string reportNo)
+        {
+            try
+            {
+                var rcdRepository = Factory.CollectorReportRepository();
+                var rcdData = rcdRepository.GetRecordByID(reportNo);
+
+                var collectionOfPaymentReportsRepo = Factory.CollectorReportPaymentsRepository();
+                var collectionOfPaymentReportDt = collectionOfPaymentReportsRepo.GetRecordsByReportNo(reportNo);
+                HelperLoadRecords.PaymentDatagridView(collectionOfPaymentReportDt, dgpayments);
+
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        internal void LoadSelectedReport(string reportNo)
+        {
+            try
+            {
+                var rcdRepository = Factory.CollectorReportRepository();
+                var rcdData = rcdRepository.GetRecordByID(reportNo);
+
+
+                collectorId = (ushort)Convert.ToInt16(rcdData["collecting_officers_id"]);
+                fundId = (sbyte)Convert.ToInt32(rcdData["funds_id"]);
+                reportNo = rcdData["report_no"];
+                date = Convert.ToDateTime(rcdData["date"]);
+
+                var collectionOfPaymentReportsRepo = Factory.CollectorReportPaymentsRepository();
+                var collectionOfPaymentReportDt = collectionOfPaymentReportsRepo.GetRecordsByReportNo(reportNo);
+                HelperLoadRecords.PaymentDatagridView(collectionOfPaymentReportDt, dgpayments);
+
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("RCD has been created.");
+                ResetForm();
+            }
+
+        }
+
+        private void ResetForm()
+        {
+            txtCollector.Text = string.Empty;
+            txtReport.Text = string.Empty;
+            txtRCDNo.Text = string.Empty;
+            dtpdate.Value = DateTime.Now;
+
+            dgpayments.Rows.Clear();
+        }
+
+        private bool SaveData()
+        {
+
+            using (var scope = new TransactionScope())
+            {
+                if (ValidateInputs())
+                {
+                    Helper.MessageBoxError("Please add collector's report and RCD number.");
+                    return false;
+                }
+
+                var generalCollectionModel = new GeneralCollectionsModel()
+                {
+                    RcdNo = txtRCDNo.Text,
+                    Rcddate = Convert.ToDateTime(dtpdate.Value),
+                    Userid = Helper.UserId
+                };
+
+                bool rcdSaveSuccess = Factory.GeneralCollectionsRepository().Insert(generalCollectionModel);
+                if (!rcdSaveSuccess) return false;
+
+                var generalCollectionsId = GetGeneralCollectionsId();
+                var collectionsReportId = collectorsReportId;
+
+                var generalCollectionPaymentModel = new GeneralCollectionPaymentsModel()
+                {
+                    CollectorsReportId = collectionsReportId,
+                    GeneralCollectionsId = generalCollectionsId
+                };
+
+                Factory.GeneralCollectionsPaymentsRepository().Insert(generalCollectionPaymentModel);
+               
+                scope.Complete();
+                return true;
+            }
+        }
+
+        private int GetGeneralCollectionsId()
+        {
+            var rcdNo = txtRCDNo.Text;
+            int generalCollectionId = Factory.GeneralCollectionsRepository().GetGeneralCollectionId(rcdNo);
+            return generalCollectionId;
+        }
+         
+        private bool ValidateInputs()
+        {
+            bool hasError = String.IsNullOrEmpty(txtRCDNo.Text) || dgpayments.Rows.Count == 0;
+
+            return hasError;
         }
     }
 }

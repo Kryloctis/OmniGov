@@ -44,6 +44,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgbankdeposits = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgbankdeposits)).BeginInit();
@@ -52,6 +53,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // toolStrip
             // 
             this.toolStrip.AutoSize = false;
+            this.toolStrip.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -196,11 +198,22 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.dgbankdeposits.TabIndex = 14;
             this.dgbankdeposits.SelectionChanged += new System.EventHandler(this.dgbankdeposits_SelectionChanged);
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(410, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 15);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Search";
+            // 
             // frmBankDeposits
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(746, 418);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dgbankdeposits);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.txtsearch);
@@ -241,5 +254,6 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.DataGridView dgbankdeposits;
         private System.Windows.Forms.ToolStripButton btnRefresh;
+        private System.Windows.Forms.Label label1;
     }
 }

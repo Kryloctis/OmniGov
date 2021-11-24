@@ -18,7 +18,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgvgc);
+            Helper.DatagridFullRowSelectStyle(dgvgc, true);
         }
 
         private void dgvgc_SelectionChanged(object sender, EventArgs e)
@@ -126,11 +126,9 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 
         private void btnRCD_Click(object sender, EventArgs e)
         {
-            if (print.Count > 0)
-            {
-                string id = string.Join(",", print.Select(x => String.Format("'{0}'", x.Key)).ToArray());
-                _ = new frmCDReport(id).ShowDialog();
-            }
+            string id = string.Join(",", print.Select(x => String.Format("'{0}'", x.Key)).ToArray());
+            _ = new frmCDReport(id).ShowDialog();
+           
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
