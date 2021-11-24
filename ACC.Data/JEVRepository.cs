@@ -763,7 +763,7 @@ namespace ACC.Data
 
                 string query = $"SELECT COUNT(*) " +
                     $"FROM {viewTableName} " +
-                    $"WHERE is_approved = 1 " +
+                    $"WHERE is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 " +
                     $"AND fund_name = @fund_name " +
                     $"AND journal_name = @journal_name " +
                     $"AND MONTH(date_entry) = @month " +
