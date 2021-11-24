@@ -133,7 +133,8 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             // 
             // lnkProcurementReceivedJournal
             // 
-            this.lnkProcurementReceivedJournal.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lnkProcurementReceivedJournal.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lnkProcurementReceivedJournal.BackColor = System.Drawing.SystemColors.Control;
             this.lnkProcurementReceivedJournal.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lnkProcurementReceivedJournal.Dock = System.Windows.Forms.DockStyle.Top;
             this.lnkProcurementReceivedJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -176,7 +177,8 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             // 
             // lnkCashDisbursementJournal
             // 
-            this.lnkCashDisbursementJournal.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lnkCashDisbursementJournal.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lnkCashDisbursementJournal.BackColor = System.Drawing.SystemColors.Control;
             this.lnkCashDisbursementJournal.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lnkCashDisbursementJournal.Dock = System.Windows.Forms.DockStyle.Top;
             this.lnkCashDisbursementJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -219,7 +221,8 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             // 
             // lnkGeneralJournal
             // 
-            this.lnkGeneralJournal.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lnkGeneralJournal.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lnkGeneralJournal.BackColor = System.Drawing.SystemColors.Control;
             this.lnkGeneralJournal.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lnkGeneralJournal.Dock = System.Windows.Forms.DockStyle.Top;
             this.lnkGeneralJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -262,7 +265,8 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             // 
             // lnkCashReceiptJournal
             // 
-            this.lnkCashReceiptJournal.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lnkCashReceiptJournal.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lnkCashReceiptJournal.BackColor = System.Drawing.SystemColors.Control;
             this.lnkCashReceiptJournal.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lnkCashReceiptJournal.Dock = System.Windows.Forms.DockStyle.Top;
             this.lnkCashReceiptJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -305,7 +309,8 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             // 
             // lnkCheckDisbursementsJournal
             // 
-            this.lnkCheckDisbursementsJournal.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lnkCheckDisbursementsJournal.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lnkCheckDisbursementsJournal.BackColor = System.Drawing.SystemColors.Control;
             this.lnkCheckDisbursementsJournal.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lnkCheckDisbursementsJournal.Dock = System.Windows.Forms.DockStyle.Top;
             this.lnkCheckDisbursementsJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -348,7 +353,8 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             // 
             // lnkADAdisbursementsJournal
             // 
-            this.lnkADAdisbursementsJournal.ActiveLinkColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lnkADAdisbursementsJournal.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lnkADAdisbursementsJournal.BackColor = System.Drawing.SystemColors.Control;
             this.lnkADAdisbursementsJournal.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lnkADAdisbursementsJournal.Dock = System.Windows.Forms.DockStyle.Top;
             this.lnkADAdisbursementsJournal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
