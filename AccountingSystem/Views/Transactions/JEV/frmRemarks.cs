@@ -5,7 +5,6 @@ namespace AccountingSystem.Views.Transactions.JEV
 {
     public partial class frmRemarks : Form
     {
-        internal bool isDissaprove;
 
         frmJEV _frmJEV;
 
@@ -82,7 +81,23 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            if (isDissaprove)
+            _frmJEV.btnSave.Enabled = true;
+            _frmJEV.btnSave.Text = "Update";
+            _frmJEV.ucjev1.Enabled = true;
+            Close();
+        }
+
+        private void btnSaveMessage_Click(object sender, EventArgs e)
+        {
+            if (SetRemarks()) 
+            {
+                Helper.MessageBoxSuccess("Dissaproval message has been saved.");
+            }
+        }
+
+        private void btnDisapprove_Click(object sender, EventArgs e)
+        {
+            try
             {
                 if (MessageBox.Show("Are you sure you want to disapproved this JEV?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
@@ -98,22 +113,10 @@ namespace AccountingSystem.Views.Transactions.JEV
                     }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                _frmJEV.btnSave.Enabled = true;
-                _frmJEV.btnSave.Text = "Update";
-                _frmJEV.ucjev1.Enabled = true;
-                Close();
+                Helper.MessageBoxError(ex.Message);
             }
         }
-
-        private void btnSaveMessage_Click(object sender, EventArgs e)
-        {
-            if (SetRemarks()) 
-            {
-                Helper.MessageBoxSuccess("Dissaproval message has been saved.");
-            }
-        }
-
     }
 }

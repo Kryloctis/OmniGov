@@ -780,8 +780,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             if (uc.jevId != 0)
             {
                 var frmRemarks = new frmRemarks(this);
-                frmRemarks.isDissaprove = true;
-                frmRemarks.btnAccept.Text = "Disapprove";
+                frmRemarks.btnDisapprove.Visible = true;
+                frmRemarks.btnAccept.Visible = false;
                 frmRemarks.btnSaveMessage.Visible = false;
                 frmRemarks.ShowDialog();
             }
@@ -789,14 +789,12 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void lblShowMessage_Click(object sender, EventArgs e)
         {
-            var frmRemarks = new frmRemarks(this);
-            if (ucjev1.Enabled)
-            {
-                frmRemarks.btnAccept.Visible = false;
+            if (uc.jevId != 0)
+            {   var frmRemarks = new frmRemarks(this);
+                frmRemarks.btnDisapprove.Visible = false;
                 frmRemarks.btnCancel.Text = "Close";
+                frmRemarks.ShowDialog();
             }
-            frmRemarks.ShowDialog();
-
         }
 
         //CANCEL

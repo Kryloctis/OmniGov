@@ -33,6 +33,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAccept = new System.Windows.Forms.Button();
+            this.btnDisapprove = new System.Windows.Forms.Button();
             this.btnSaveMessage = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -50,6 +51,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnAccept);
+            this.flowLayoutPanel1.Controls.Add(this.btnDisapprove);
             this.flowLayoutPanel1.Controls.Add(this.btnSaveMessage);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
@@ -63,7 +65,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnCancel.Location = new System.Drawing.Point(493, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(133, 23);
-            this.btnCancel.TabIndex = 0;
+            this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -72,17 +74,27 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnAccept.Location = new System.Drawing.Point(354, 3);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(133, 23);
-            this.btnAccept.TabIndex = 0;
+            this.btnAccept.TabIndex = 3;
             this.btnAccept.Text = "Accept && Edit";
             this.btnAccept.UseVisualStyleBackColor = true;
             this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
+            // btnDisapprove
+            // 
+            this.btnDisapprove.Location = new System.Drawing.Point(215, 3);
+            this.btnDisapprove.Name = "btnDisapprove";
+            this.btnDisapprove.Size = new System.Drawing.Size(133, 23);
+            this.btnDisapprove.TabIndex = 2;
+            this.btnDisapprove.Text = "Dissaprove";
+            this.btnDisapprove.UseVisualStyleBackColor = true;
+            this.btnDisapprove.Click += new System.EventHandler(this.btnDisapprove_Click);
+            // 
             // btnSaveMessage
             // 
-            this.btnSaveMessage.Location = new System.Drawing.Point(215, 3);
+            this.btnSaveMessage.Location = new System.Drawing.Point(76, 3);
             this.btnSaveMessage.Name = "btnSaveMessage";
             this.btnSaveMessage.Size = new System.Drawing.Size(133, 23);
-            this.btnSaveMessage.TabIndex = 0;
+            this.btnSaveMessage.TabIndex = 1;
             this.btnSaveMessage.Text = "Save Message";
             this.btnSaveMessage.UseVisualStyleBackColor = true;
             this.btnSaveMessage.Click += new System.EventHandler(this.btnSaveMessage_Click);
@@ -116,5 +128,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal System.Windows.Forms.Button btnAccept;
         internal System.Windows.Forms.Button btnCancel;
         internal System.Windows.Forms.Button btnSaveMessage;
+        internal System.Windows.Forms.Button btnDisapprove;
     }
 }
