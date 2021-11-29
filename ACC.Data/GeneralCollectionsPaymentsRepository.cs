@@ -18,7 +18,7 @@ namespace ACC.Data
 
 
 
-        private readonly string viewTableName = "view_general_collections";
+        private readonly string viewTableName = "view_general_collections_payment";
 
 
         public GeneralCollectionsPaymentsRepository(IDbGenericCommands dbGenericCommands)
@@ -215,6 +215,20 @@ namespace ACC.Data
             }
         }
 
+
+        public DataTable GetRecordsByRCDNO(string RCDNo)
+        {
+
+            var parameter = new object[][] {
+                new object[]{"@rcdNo", DbType.String, RCDNo}
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE rcd_no = @rcdNo";
+            var dtRCD = new DataTable();
+
+            return _dbGenericCommands.FillBySearch(query, dtRCD, parameter);
+        }
+
         public DataTable GetRecordsBySearch(string searchText)
         {
             throw new NotImplementedException();
@@ -236,5 +250,6 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
+
     }
 }

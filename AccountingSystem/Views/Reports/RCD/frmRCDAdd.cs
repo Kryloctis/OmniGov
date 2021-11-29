@@ -136,6 +136,8 @@ namespace AccountingSystem.Views.Reports.RCD
                 amount = row.Cells["amount"].Value.ToString();
             }
 
+
+
             foreach (DataGridViewRow row in _frmRCD.dgpayments.Rows)
             {
                 reportNoChecker = row.Cells[2].Value.ToString();
@@ -183,5 +185,14 @@ namespace AccountingSystem.Views.Reports.RCD
             LoadRecords();
         }
 
+        private void dgCollectorsReport_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgCollectorsReport_DoubleClick(object sender, EventArgs e)
+        {
+            btnOkay.PerformClick();
+        }
     }
 }

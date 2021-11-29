@@ -109,7 +109,8 @@ namespace AccountingSystem.Views.Reports.RCD
 
             _frmRCD.btnPrint.Enabled = true;
             _frmRCD.panelRCD.Enabled = false;
-            _frmRCD.LoadSelectedRCD(reportNo);
+            _frmRCD.LoadSelectedRCD(rcdNo);
+
             this.Close();
         }
        

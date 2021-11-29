@@ -47,29 +47,43 @@ namespace AccountingSystem.Views.Reports.RCD
 
         }
 
-        internal void LoadRecords(string reportNo)
+
+        internal void LoadSelectedRCD(string rcdNo)
         {
             try
             {
 
-                //HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgCollectorsReport);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
+                var generalCollectionsPaymentRepo = Factory.GeneralCollectionsPaymentsRepository();
+                var dtRCD = generalCollectionsPaymentRepo.GetRecordsByRCDNO(rcdNo);
 
-        internal void LoadSelectedRCD(string reportNo)
-        {
-            try
-            {
-                var rcdRepository = Factory.CollectorReportRepository();
-                var rcdData = rcdRepository.GetRecordByID(reportNo);
 
-                var collectionOfPaymentReportsRepo = Factory.CollectorReportPaymentsRepository();
-                var collectionOfPaymentReportDt = collectionOfPaymentReportsRepo.GetRecordsByReportNo(reportNo);
-                HelperLoadRecords.PaymentDatagridView(collectionOfPaymentReportDt, dgpayments);
+                string reportId = String.Empty;
+                string collectingOfficer = String.Empty;
+                string reportNo = String.Empty;
+                string reportNoChecker = String.Empty;
+                string amount = String.Empty;
+
+
+                foreach (DataRow row in dtRCD.Rows)
+                {
+                    reportId = row["collectors_report_id"].ToString();
+                    collectingOfficer = row["collecting_officer"].ToString();
+                    reportNo = row["report_no"].ToString();
+                    amount = Convert.ToDecimal(row["amount"].ToString()).ToString("N2");
+
+
+                    object[] reportRow = new object[]
+                    {
+                        reportId,
+                        collectingOfficer,
+                        reportNo,
+                        amount
+                    };
+
+                    dgpayments.Rows.Add(reportRow);
+                }
+
+
 
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

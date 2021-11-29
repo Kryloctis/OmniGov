@@ -123,7 +123,9 @@ namespace AccountingSystem.Views.Reports.RCD
             this.dgCollectorsReport.RowTemplate.Height = 29;
             this.dgCollectorsReport.Size = new System.Drawing.Size(776, 382);
             this.dgCollectorsReport.TabIndex = 19;
+            this.dgCollectorsReport.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCollectorsReport_CellContentClick);
             this.dgCollectorsReport.SelectionChanged += new System.EventHandler(this.dgCollectorsReport_SelectionChanged);
+            this.dgCollectorsReport.DoubleClick += new System.EventHandler(this.dgCollectorsReport_DoubleClick);
             // 
             // panel1
             // 
