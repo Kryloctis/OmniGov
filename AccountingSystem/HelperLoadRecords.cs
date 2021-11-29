@@ -479,7 +479,7 @@ namespace AccountingSystem
         #endregion
 
         #region RCD 
-        internal static void RCDDatagridView(DataTable dataTable, DataGridView datagrid)
+        internal static void RCDSearchDatagridView(DataTable dataTable, DataGridView datagrid)
         {
 
             datagrid.Rows.Clear();
@@ -525,6 +525,48 @@ namespace AccountingSystem
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", 9f);
 
          
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        internal static void RCDDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+
+            datagrid.Rows.Clear();
+            datagrid.Columns.Clear();
+
+            datagrid.Columns.Add("id", "Id");
+            datagrid.Columns.Add("collecting_officers_id", "Collector Id");
+            datagrid.Columns.Add("collecting_officer", "Collector");
+            datagrid.Columns.Add("report_no", "Report No.");
+            datagrid.Columns.Add("amount", "Amount");
+
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["collecting_officers_id"].Visible = false;
+
+
+            datagrid.Columns["amount"].Resizable = DataGridViewTriState.False;
+            datagrid.Columns["amount"].Width = 100;
+            datagrid.Columns["amount"].MinimumWidth = 100;
+            datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+
+            foreach (DataRow drRCD in dataTable.Rows)
+            {
+
+                datagrid.Rows.Add(new object[]
+                {
+                    drRCD["id"],
+                    drRCD["collecting_officers_id"],
+                    drRCD["collecting_officer"],
+                    drRCD["report_no"],
+                    drRCD["amount"]
+                });
+            }
+
+            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", 9f);
+
+
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion

@@ -44,11 +44,11 @@ namespace AccountingSystem.Views.Reports.RCD
             this.dgpayments = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.btnadd = new System.Windows.Forms.Button();
-            this.txtReport = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtCollector = new System.Windows.Forms.TextBox();
             this.panelRCD = new System.Windows.Forms.Panel();
+            this.reportId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.collecting_officer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.report_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgpayments)).BeginInit();
             this.panelRCD.SuspendLayout();
@@ -150,8 +150,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // txtRCDNo
             // 
-            this.txtRCDNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtRCDNo.Location = new System.Drawing.Point(514, 7);
+            this.txtRCDNo.Location = new System.Drawing.Point(63, 7);
             this.txtRCDNo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtRCDNo.MaxLength = 20;
             this.txtRCDNo.Name = "txtRCDNo";
@@ -160,9 +159,8 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(458, 10);
+            this.label2.Location = new System.Drawing.Point(7, 10);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 15);
             this.label2.TabIndex = 20;
@@ -170,8 +168,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // dtpdate
             // 
-            this.dtpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtpdate.Location = new System.Drawing.Point(702, 7);
+            this.dtpdate.Location = new System.Drawing.Point(251, 7);
             this.dtpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpdate.Name = "dtpdate";
             this.dtpdate.Size = new System.Drawing.Size(211, 23);
@@ -179,9 +176,8 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(668, 10);
+            this.label1.Location = new System.Drawing.Point(217, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(31, 15);
             this.label1.TabIndex = 20;
@@ -193,6 +189,11 @@ namespace AccountingSystem.Views.Reports.RCD
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgpayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgpayments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.reportId,
+            this.collecting_officer,
+            this.report_no,
+            this.amount});
             this.dgpayments.Location = new System.Drawing.Point(3, 34);
             this.dgpayments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgpayments.Name = "dgpayments";
@@ -200,6 +201,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.dgpayments.RowTemplate.Height = 29;
             this.dgpayments.Size = new System.Drawing.Size(910, 478);
             this.dgpayments.TabIndex = 22;
+            this.dgpayments.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgpayments_CellContentClick);
             // 
             // button1
             // 
@@ -230,65 +232,47 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnadd.UseVisualStyleBackColor = true;
             this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
             // 
-            // txtReport
-            // 
-            this.txtReport.Location = new System.Drawing.Point(67, 7);
-            this.txtReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtReport.MaxLength = 20;
-            this.txtReport.Name = "txtReport";
-            this.txtReport.ReadOnly = true;
-            this.txtReport.Size = new System.Drawing.Size(131, 23);
-            this.txtReport.TabIndex = 31;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 15);
-            this.label3.TabIndex = 32;
-            this.label3.Text = "Report No.";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(204, 10);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 15);
-            this.label4.TabIndex = 30;
-            this.label4.Text = "Collector";
-            // 
-            // txtCollector
-            // 
-            this.txtCollector.Location = new System.Drawing.Point(265, 7);
-            this.txtCollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtCollector.MaxLength = 20;
-            this.txtCollector.Name = "txtCollector";
-            this.txtCollector.ReadOnly = true;
-            this.txtCollector.Size = new System.Drawing.Size(184, 23);
-            this.txtCollector.TabIndex = 33;
-            // 
             // panelRCD
             // 
             this.panelRCD.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelRCD.BackColor = System.Drawing.Color.White;
-            this.panelRCD.Controls.Add(this.label3);
             this.panelRCD.Controls.Add(this.button1);
             this.panelRCD.Controls.Add(this.btnadd);
-            this.panelRCD.Controls.Add(this.txtCollector);
             this.panelRCD.Controls.Add(this.label2);
-            this.panelRCD.Controls.Add(this.txtReport);
             this.panelRCD.Controls.Add(this.label1);
             this.panelRCD.Controls.Add(this.txtRCDNo);
-            this.panelRCD.Controls.Add(this.label4);
             this.panelRCD.Controls.Add(this.dtpdate);
             this.panelRCD.Controls.Add(this.dgpayments);
             this.panelRCD.Location = new System.Drawing.Point(0, 53);
             this.panelRCD.Name = "panelRCD";
             this.panelRCD.Size = new System.Drawing.Size(916, 541);
             this.panelRCD.TabIndex = 34;
+            // 
+            // reportId
+            // 
+            this.reportId.HeaderText = "Report Id";
+            this.reportId.Name = "reportId";
+            this.reportId.Visible = false;
+            // 
+            // collecting_officer
+            // 
+            this.collecting_officer.HeaderText = "Collecting Officer";
+            this.collecting_officer.Name = "collecting_officer";
+            this.collecting_officer.Width = 500;
+            // 
+            // report_no
+            // 
+            this.report_no.HeaderText = "Report No.";
+            this.report_no.Name = "report_no";
+            this.report_no.Width = 250;
+            // 
+            // amount
+            // 
+            this.amount.HeaderText = "Amount";
+            this.amount.Name = "amount";
+            this.amount.Width = 250;
             // 
             // frmRCD
             // 
@@ -328,14 +312,14 @@ namespace AccountingSystem.Views.Reports.RCD
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtpdate;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dgpayments;
         internal System.Windows.Forms.Button button1;
         internal System.Windows.Forms.Button btnadd;
-        internal System.Windows.Forms.TextBox txtReport;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        internal System.Windows.Forms.TextBox txtCollector;
         internal System.Windows.Forms.Panel panel1;
         internal System.Windows.Forms.Panel panelRCD;
+        internal System.Windows.Forms.DataGridView dgpayments;
+        private System.Windows.Forms.DataGridViewTextBoxColumn reportId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn collecting_officer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn report_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn amount;
     }
 }

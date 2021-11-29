@@ -3,12 +3,7 @@ using AccountingSystem.Views.Reports.PaymentCollection;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 using System.Windows.Forms;
 
@@ -52,6 +47,19 @@ namespace AccountingSystem.Views.Reports.RCD
 
         }
 
+        internal void LoadRecords(string reportNo)
+        {
+            try
+            {
+
+                //HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgCollectorsReport);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
         internal void LoadSelectedRCD(string reportNo)
         {
             try
@@ -80,9 +88,12 @@ namespace AccountingSystem.Views.Reports.RCD
                 reportNo = rcdData["report_no"];
                 date = Convert.ToDateTime(rcdData["date"]);
 
-                var collectionOfPaymentReportsRepo = Factory.CollectorReportPaymentsRepository();
-                var collectionOfPaymentReportDt = collectionOfPaymentReportsRepo.GetRecordsByReportNo(reportNo);
-                HelperLoadRecords.PaymentDatagridView(collectionOfPaymentReportDt, dgpayments);
+                
+
+                var colectorRepository = Factory.CollectorReportRepository();
+                var dtrcd = new DataTable();
+                dtrcd = colectorRepository.FilterRecords(fundId, collectorId, reportNo);
+                HelperLoadRecords.RCDDatagridView(dtrcd, dgpayments);
 
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -101,8 +112,6 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void ResetForm()
         {
-            txtCollector.Text = string.Empty;
-            txtReport.Text = string.Empty;
             txtRCDNo.Text = string.Empty;
             dtpdate.Value = DateTime.Now;
 
@@ -132,15 +141,20 @@ namespace AccountingSystem.Views.Reports.RCD
                 if (!rcdSaveSuccess) return false;
 
                 var generalCollectionsId = GetGeneralCollectionsId();
-                var collectionsReportId = collectorsReportId;
+                
 
-                var generalCollectionPaymentModel = new GeneralCollectionPaymentsModel()
+                foreach (DataGridViewRow row in dgpayments.Rows)
                 {
-                    CollectorsReportId = collectionsReportId,
-                    GeneralCollectionsId = generalCollectionsId
-                };
+                    ushort collectionsReportId = (ushort)Convert.ToInt32(row.Cells["reportId"].Value);
 
-                Factory.GeneralCollectionsPaymentsRepository().Insert(generalCollectionPaymentModel);
+                    var generalCollectionPaymentModel = new GeneralCollectionPaymentsModel()
+                    {
+                        CollectorsReportId = collectionsReportId,
+                        GeneralCollectionsId = generalCollectionsId
+                    };
+
+                    Factory.GeneralCollectionsPaymentsRepository().Insert(generalCollectionPaymentModel);
+                }
                
                 scope.Complete();
                 return true;
@@ -173,6 +187,11 @@ namespace AccountingSystem.Views.Reports.RCD
         private void btnPrint_Click(object sender, EventArgs e)
         {
             _ = new frmCDReport(rcdId).ShowDialog();
+        }
+
+        private void dgpayments_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

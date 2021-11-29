@@ -608,6 +608,27 @@ namespace ACC.Data
             }
         }
 
+        public DataTable FilterRecords(sbyte fundId, ushort collectorId, string reportNo)
+        {
+            try
+            {
+                var parameter = new object[][] {
+                    new object[] {"@fundId", DbType.SByte, fundId },
+                    new object[] {"@collectorId", DbType.Int16, collectorId },
+                    new object[] {"@reportNo", DbType.String, reportNo }
+                };
+
+                string query = $"SELECT * FROM {viewTableName} WHERE fund_id = @fundId AND collecting_officers_id = @collectorId AND report_no = @reportNo";
+
+                var dtCollectorReport = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtCollectorReport, parameter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public string GetRCDStatus(string reportNo)
         {
             var record = new Dictionary<string, byte>();
@@ -711,6 +732,6 @@ namespace ACC.Data
             }
         }
 
-       
+
     }
 }

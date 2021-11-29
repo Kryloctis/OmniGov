@@ -28,15 +28,18 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void frmRCDAdd_Load(object sender, EventArgs e)
         {
-            cmbCollector.SelectedIndex = -1;
 
 
             cmbCollector.SelectedValueChanged -= new EventHandler(cmbCollector_SelectedValueChanged);
             LoadCollectors();
             cmbCollector.SelectedValueChanged += new EventHandler(cmbCollector_SelectedValueChanged);
 
+
             LoadFunds();
             LoadRecords();
+
+
+            cmbCollector.SelectedIndex = -1;
         }
 
         private void LoadCollectors()
@@ -45,14 +48,21 @@ namespace AccountingSystem.Views.Reports.RCD
             {
                 //cmbCollector.SelectedValueChanged -= new EventHandler(cmbcollector_SelectedValueChanged);
                 var collectingOfficerRepository = Factory.CollectingOfficerRepository();
-                var dtCollectors = collectingOfficerRepository.GetRecords();
+
+
+                var dtCollectors = new DataTable();
+                dtCollectors = collectingOfficerRepository.GetRecords();
+
+                dtCollectors.Rows.Add(0, "All");
 
                 cmbCollector.DataSource = dtCollectors;
                 cmbCollector.DisplayMember = "fullname";
                 cmbCollector.ValueMember = "id";
+
                 //cmbCollector.SelectedValueChanged += new EventHandler(cmbcollector_SelectedValueChanged);
 
                 //collectorId = (ushort)Convert.ToInt32(cmbCollector.SelectedValue);
+
             }
             catch (Exception ex)
             {
@@ -69,8 +79,15 @@ namespace AccountingSystem.Views.Reports.RCD
                 byte fundId = (byte)(cmbfunds.SelectedValue != null ? Convert.ToByte(cmbfunds.SelectedValue.ToString()) : 0);
                 string keySearch = txtsearch.Text;
 
+
                 var colectorRepository = Factory.CollectorReportRepository();
-                var dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch, collectorId);
+
+                var dtrcd = new DataTable();
+
+                if (collectorId == 0)
+                    dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch);
+                else
+                    dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch, collectorId);
 
                 HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgCollectorsReport);
             }
@@ -103,12 +120,44 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnOkay_Click(object sender, EventArgs e)
         {
-            _frmRCD.collectorsReportId = Convert.ToInt32(collectorsReportId);
-            _frmRCD.txtReport.Text = reportNo;
-            _frmRCD.txtCollector.Text = collector;
-            _frmRCD.LoadSelectedReport(reportNo);
 
-            this.Close();
+            string reportId = String.Empty;
+            string collectingOfficer = String.Empty;
+            string reportNo = String.Empty;
+            string reportNoChecker = String.Empty;
+            string amount = String.Empty;
+
+
+            foreach (DataGridViewRow row in dgCollectorsReport.SelectedRows)
+            {
+                reportId = row.Cells["id"].Value.ToString();
+                collectingOfficer = row.Cells["collector_officer"].Value.ToString();
+                reportNo = row.Cells["report_no"].Value.ToString();
+                amount = row.Cells["amount"].Value.ToString();
+            }
+
+            foreach (DataGridViewRow row in _frmRCD.dgpayments.Rows)
+            {
+                reportNoChecker = row.Cells[2].Value.ToString();
+
+                if (reportNo == reportNoChecker)
+                {
+                    Helper.MessageBoxError("Collector's report is already on the list.");
+                    return;
+                }
+            }
+
+            object[] reportRow = new object[]
+            {
+                reportId,
+                collectingOfficer,
+                reportNo,
+                amount
+            };
+
+            _frmRCD.dgpayments.Rows.Add(reportRow);
+
+            //this.Close();
         }
 
         private void dgCollectorsReport_SelectionChanged(object sender, EventArgs e)

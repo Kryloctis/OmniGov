@@ -24,6 +24,8 @@ namespace ACC.Domain.Interfaces
         DataTable FilterRecords(string status, byte fundId, string keySearch, short collectingOfficerId);
         DataTable FilterRecords(string status, byte fundId, string keySearch);
 
+        DataTable FilterRecords(sbyte fundId, ushort collectorId, string reportNo);
+
         string GetRCDStatus(string reportNo);
 
         bool SetRCDStatus(byte status, string reportNo);

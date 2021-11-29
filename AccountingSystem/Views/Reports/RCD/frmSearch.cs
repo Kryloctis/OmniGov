@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 var rcdRepository = Factory.GeneralCollectionsRepository();
                 var dtRCD = rcdRepository.GetRecords();
 
-                HelperLoadRecords.RCDDatagridView(dtRCD, dgrcd);
+                HelperLoadRecords.RCDSearchDatagridView(dtRCD, dgrcd);
             }
             catch(Exception ex)
             {

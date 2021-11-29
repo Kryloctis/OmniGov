@@ -128,7 +128,7 @@ namespace ACC.Data
                     new object[] { "@users_id", DbType.Int16, entity.Userid},
                 };
 
-                string query = $"INSERT INTO {tableGeneralCollections} (rcd_no,rcd_date,users_id) VALUES (@rcd_no,@rcd_date,@users_id)";
+                string query = $"INSERT INTO {tableGeneralCollections} (rcd_no, rcd_date, users_id) VALUES (@rcd_no,@rcd_date,@users_id)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)

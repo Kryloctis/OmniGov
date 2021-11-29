@@ -154,6 +154,8 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             this.cmbCollector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCollector.FormattingEnabled = true;
+            this.cmbCollector.Items.AddRange(new object[] {
+            "All"});
             this.cmbCollector.Location = new System.Drawing.Point(73, 5);
             this.cmbCollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbCollector.Name = "cmbCollector";
