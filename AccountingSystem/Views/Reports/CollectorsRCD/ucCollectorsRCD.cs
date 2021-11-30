@@ -71,7 +71,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
             dgPayments.Rows.Clear();
             dgPayments.Refresh();
-
         }
 
         internal void LoadFunds()

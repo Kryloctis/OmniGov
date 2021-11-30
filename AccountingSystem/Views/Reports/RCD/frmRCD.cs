@@ -205,7 +205,6 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void dgpayments_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
     }
 }

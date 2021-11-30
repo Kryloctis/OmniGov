@@ -215,6 +215,27 @@ namespace ACC.Data
             }
         }
 
+        public DataTable GetCollectionPaymentByRCDNo(string rcdNo)
+        {
+            try
+            {
+
+                var parameter = new object[][] { 
+                    new object[] {"@rcdNo", DbType.String, rcdNo}
+                };
+
+                string query = $"SELECT * FROM {viewTableName} WHERE rcd_no=@rcdNo";
+                var dtRCD = new DataTable();
+
+                return _dbGenericCommands.FillBySearch(query, dtRCD, parameter);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }   
+        }
+
 
         public DataTable GetRecordsByRCDNO(string RCDNo)
         {
@@ -250,6 +271,7 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
+
 
     }
 }

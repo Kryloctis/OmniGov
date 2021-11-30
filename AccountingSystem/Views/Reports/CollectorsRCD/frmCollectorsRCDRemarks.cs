@@ -22,29 +22,12 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            //if (isDissaprove)
-            //{
-            //    if (MessageBox.Show("Are you sure you want to disapproved this JEV?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            //    {
-
-            //        if (SetJEVToDisapproved() && SetRemarks())
-            //        {
-            //            Helper.MessageBoxSuccess("JEV has been disapproved.");
-            //            _frmJEV.ucjev1.isDisapproved = 1;
-            //            _frmJEV.CheckJevStatus(_frmJEV.ucjev1.jevId);
-            //            _frmJEV._frmJEVList.LoadJEVList();
-            //            _frmJEV._ucJEVDashboard.LoadJEVCounter();
-            //            Close();
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    _frmJEV.btnSave.Enabled = true;
-            //    _frmJEV.btnSave.Text = "Update";
-            //    _frmJEV.ucjev1.Enabled = true;
-            //    Close();
-            //}
+            _frmCollectorsRCD.btnSave.Enabled = true;
+            _frmCollectorsRCD.ucCollectorsRCD1.txtReport.Enabled = true;
+            _frmCollectorsRCD.ucCollectorsRCD1.dgPayments.Enabled = true;
+            _frmCollectorsRCD.btnSave.Text = "Update";
+            _frmCollectorsRCD.ucCollectorsRCD1.Enabled = true;
+            Close();
         }
 
         private void btnSaveMessage_Click(object sender, EventArgs e)
@@ -52,6 +35,11 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             if (SetRemarks())
             {
                 Helper.MessageBoxSuccess("Dissaproval message has been saved.");
+
+                string reportNo = _frmCollectorsRCD.ucCollectorsRCD1.txtReport.Text;
+                _frmCollectorsRCD.CheckRCDStatus(reportNo);
+
+                this.Close();
             }
         }
 
@@ -59,11 +47,11 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             try
             {
-                //if (!uc.FormValidations())
-                //    return false;
-
                 string reportNo = _frmCollectorsRCD.ucCollectorsRCD1.txtReport.Text;
                 string remark = txtRemarks.Text.Trim();
+
+                if (String.IsNullOrEmpty(remark))
+                    return false;
 
                 var remarks = Factory.CollectorReportRepository().SetRemarks(reportNo, remark);
 
@@ -82,8 +70,8 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
             txtRemarks.Text = Factory.CollectorReportRepository().GetRemarks(reportNo);
             txtRemarks.SelectionStart = 0;
-
-            ///PermissionVerification();
         }
+
+        
     }
 }

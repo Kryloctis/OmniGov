@@ -32,7 +32,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.ucCollectorsRCD1 = new AccountingSystem.Views.Reports.RCDCollector.ucCollectorsRCD();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
-            this.btnCancel = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnApprove = new System.Windows.Forms.ToolStripButton();
@@ -65,7 +64,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSave,
-            this.btnCancel,
             this.btnDelete,
             this.toolStripSeparator2,
             this.btnApprove,
@@ -90,16 +88,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnSave.Text = "&Save";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
-            this.btnCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(47, 47);
-            this.btnCancel.Text = "&Cancel";
-            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // btnDelete
             // 
@@ -140,6 +128,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnDisapprove.Size = new System.Drawing.Size(70, 47);
             this.btnDisapprove.Text = "&Disapprove";
             this.btnDisapprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDisapprove.Click += new System.EventHandler(this.btnDisapprove_Click);
             // 
             // toolStripSeparator3
             // 
@@ -251,7 +240,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         internal RCDCollector.ucCollectorsRCD ucCollectorsRCD1;
         internal System.Windows.Forms.ToolStrip toolStrip1;
         internal System.Windows.Forms.ToolStripButton btnSave;
-        private System.Windows.Forms.ToolStripButton btnCancel;
         internal System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         internal System.Windows.Forms.ToolStripButton btnApprove;

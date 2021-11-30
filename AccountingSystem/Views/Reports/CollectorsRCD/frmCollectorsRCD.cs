@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Reports.PaymentCollection;
 using AccountingSystem.Views.Reports.RCDCollector;
 using System;
 using System.Collections.Generic;
@@ -189,7 +190,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                         uc.Enabled = false;
                         break;
                 }
-
             }
 
             catch (Exception)
@@ -253,7 +253,35 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
+            _ = new frmCDReport("30").ShowDialog();
+        }
 
+        private void btnDisapprove_Click(object sender, EventArgs e)
+        {
+
+            string reportNo = uc.txtReport.Text;
+            if (String.IsNullOrEmpty(reportNo)) return;
+
+
+            if (MessageBox.Show("Are you sure you want to disapproved this Collector's Report?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (SetRCDStatus(2, reportNo))
+                {
+                    Helper.MessageBoxSuccess("Collector's Report has been disapproved.");
+                    if (MessageBox.Show("Do you want to add disapproval message?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        _ = new frmCollectorsRCDRemarks(this).ShowDialog();
+                    }
+                    CheckRCDStatus(reportNo);
+                }
+                return;
+            }
+
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            uc.ResetForm();
         }
     }
 }

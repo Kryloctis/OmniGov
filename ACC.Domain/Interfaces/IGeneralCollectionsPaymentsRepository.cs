@@ -11,5 +11,7 @@ namespace ACC.Domain.Interfaces
         bool Append(List<GeneralCollectionPaymentsModel> entityList);
 
         DataTable GetRecordsByRCDNO(string RCDNo);
+
+        DataTable GetCollectionPaymentByRCDNo(string rcdNo);
     }
 }
