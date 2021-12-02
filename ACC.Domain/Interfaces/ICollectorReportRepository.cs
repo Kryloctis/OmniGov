@@ -9,6 +9,8 @@ namespace ACC.Domain.Interfaces
     public interface ICollectorReportRepository : IRepository<CollectorReportModel>
     {
         Dictionary<string, string> GetRecordByID(string reportNo);
+
+        bool Delete(CollectorReportModel entity);
         bool CodeExist(string id);
         bool HasGenerated(int paymentCollectionsId);
 

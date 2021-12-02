@@ -19,7 +19,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private readonly ucCollectorsRCD uc;
         private List<CollectorReportPaymentModel> data;
 
-
         public frmCollectorsRCD()
         {
             InitializeComponent();
@@ -128,7 +127,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 var rcdRepository = Factory.CollectorReportRepository();
                 var rcdData = rcdRepository.GetRecordByID(reportNo);
 
-
+                uc.reportId = (ushort)Convert.ToInt32(rcdData["id"]);
                 uc.collectorId = (ushort)Convert.ToInt16(rcdData["collecting_officers_id"]);
                 uc.fundId = (byte)Convert.ToInt32(rcdData["funds_id"]);
                 uc.flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => ((byte)r.Tag == Convert.ToInt16(rcdData["funds_id"])) ? r.Checked = true : r.Checked = false);
@@ -282,6 +281,60 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private void btnCancel_Click(object sender, EventArgs e)
         {
             uc.ResetForm();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (DeleteReport())
+            {
+                Helper.MessageBoxSuccess("Report of Collection successfully deleted.");
+                ResetLocalControls();
+                uc.ResetForm();
+            }
+        }
+
+        private bool DeleteReport()
+        {
+            try
+            {
+                if (MessageBox.Show("Are you sure you want to delete report of collection?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    ushort reportId = uc.reportId;
+                    string reportNo = uc.txtReport.Text.Trim();
+
+                    var collectorReportPaymentModel = new CollectorReportPaymentModel() {CollectorsReportId = reportId };
+                    var collectorReportPaymentRepo = Factory.CollectorReportPaymentsRepository();
+                    bool isDeleteSuccess =  collectorReportPaymentRepo.Delete(collectorReportPaymentModel);
+
+                    if (isDeleteSuccess)
+                    {
+                        var collectorReportModel = new CollectorReportModel() { Id = reportId, ReportNo = reportNo };
+                        var collectorReportRepo = Factory.CollectorReportRepository();
+                        return collectorReportRepo.Delete(collectorReportModel);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void ResetLocalControls()
+        {
+            btnDelete.Enabled = false;
+            btnApprove.Enabled = false;
+            btnDisapprove.Enabled = false;
+            btnPrint.Enabled = false;
+
+            lblJevStatus.Text = "--";
+            lblJevStatus.ForeColor = Color.Black;
+        }
+
+        private void ucCollectorsRCD1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

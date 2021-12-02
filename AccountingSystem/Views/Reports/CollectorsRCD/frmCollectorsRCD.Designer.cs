@@ -53,10 +53,12 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.ucCollectorsRCD1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ucCollectorsRCD1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucCollectorsRCD1.Location = new System.Drawing.Point(0, 75);
             this.ucCollectorsRCD1.Name = "ucCollectorsRCD1";
             this.ucCollectorsRCD1.Size = new System.Drawing.Size(916, 520);
             this.ucCollectorsRCD1.TabIndex = 0;
+            this.ucCollectorsRCD1.Load += new System.EventHandler(this.ucCollectorsRCD1_Load);
             // 
             // toolStrip1
             // 
@@ -99,6 +101,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnDelete.Size = new System.Drawing.Size(44, 47);
             this.btnDelete.Text = "&Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // toolStripSeparator2
             // 

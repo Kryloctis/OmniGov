@@ -14,6 +14,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 {
     public partial class ucCollectorsRCD : UserControl
     {
+        internal ushort reportId;
         internal byte fundId;
         internal ushort collectorId;
         internal bool isSaveFunction;
@@ -80,8 +81,15 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         internal void ResetForm() 
         {
+            btnadd.Enabled = false;
+            btnRemove.Enabled = false;
+            btnclear.Enabled = false;
+            
+            txtTotal.Text = "0.00";
+
             cmbcollector.SelectedIndex = -1;
             txtReport.Text = string.Empty;
+            dtdate.Value = DateTime.Now;
 
             dgPayments.Rows.Clear();
             dgPayments.Refresh();
@@ -166,6 +174,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         private void btnclear_Click(object sender, EventArgs e)
         {
             dgPayments.Rows.Clear();
+            btnclear.Enabled = false;
         }
 
         private void txtReport_Validating(object sender, CancelEventArgs e)
@@ -181,6 +190,10 @@ namespace AccountingSystem.Views.Reports.RCDCollector
                 errorProvider.SetError(txtReport, "Report number already existed.");
                 e.Cancel = true;
             }
+            else {
+                e.Cancel = false;
+            }
+            
         }
         private void txtReport_Validated(object sender, EventArgs e)
         {
@@ -199,7 +212,13 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         private void dgPayments_SelectionChanged(object sender, EventArgs e)
         {
-            btnRemove.Enabled = dgPayments.SelectedRows.Count != 0;
+            var selectedRowCount = dgPayments.SelectedRows.Count;
+            var rowCount = dgPayments.Rows.Count;
+
+            btnRemove.Enabled = selectedRowCount  != 0 && selectedRowCount !> 1;
+            btnclear.Enabled = rowCount > 0;
+
+            TotalCollections();
         }
     }
 }
