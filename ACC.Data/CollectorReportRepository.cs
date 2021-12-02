@@ -460,16 +460,16 @@ namespace ACC.Data
             return false;
         }
 
-        public bool HasGenerated(int id)
+        public bool HasGenerated(int paymentCollectionId)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@collector_report_id", DbType.Int16, id },
+                    new object[] { "@payment_collection_id", DbType.Int16, paymentCollectionId },
                 };
 
-                string query = $"SELECT * FROM {tableCollectorReportPayments} WHERE collector_report_id = @collector_report_id";
+                string query = $"SELECT * FROM {tableCollectorReportPayments} WHERE payment_collections_id = @payment_collection_id";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true

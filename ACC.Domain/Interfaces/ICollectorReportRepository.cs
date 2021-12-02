@@ -10,7 +10,7 @@ namespace ACC.Domain.Interfaces
     {
         Dictionary<string, string> GetRecordByID(string reportNo);
         bool CodeExist(string id);
-        bool HasGenerated(int id);
+        bool HasGenerated(int paymentCollectionsId);
 
         bool ReportNumberExist(string reporNo);
 

@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             cmbcollector.SelectedIndex = -1;
 
             btnadd.Enabled = false;
-            btndelete.Enabled = false;
+            btnRemove.Enabled = false;
         }
 
         internal void TotalCollections()
@@ -199,7 +199,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         private void dgPayments_SelectionChanged(object sender, EventArgs e)
         {
-            btndelete.Enabled = dgPayments.SelectedRows.Count != 0;
+            btnRemove.Enabled = dgPayments.SelectedRows.Count != 0;
         }
     }
 }

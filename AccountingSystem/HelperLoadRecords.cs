@@ -826,6 +826,7 @@ namespace AccountingSystem
             datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
+
             foreach (DataRow drPaymentCollection in dataTable.Rows)
             {
                 var abstractOfGeneralCollection = $"{drPaymentCollection["account_code"]} - {drPaymentCollection["ledger_name"]}";
