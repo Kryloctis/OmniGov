@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelFunds = new System.Windows.Forms.FlowLayoutPanel();
             this.txtTotal = new System.Windows.Forms.TextBox();
-            this.btndelete = new System.Windows.Forms.Button();
+            this.btnRemove = new System.Windows.Forms.Button();
             this.btnclear = new System.Windows.Forms.Button();
             this.btnadd = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -69,6 +69,8 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.txtReport.Name = "txtReport";
             this.txtReport.Size = new System.Drawing.Size(171, 23);
             this.txtReport.TabIndex = 17;
+            this.txtReport.Validating += new System.ComponentModel.CancelEventHandler(this.txtReport_Validating);
+            this.txtReport.Validated += new System.EventHandler(this.txtReport_Validated);
             // 
             // cmbcollector
             // 
@@ -148,19 +150,20 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.txtTotal.Text = "0.00";
             this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // btndelete
+            // btnRemove
             // 
-            this.btndelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btndelete.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btndelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btndelete.Location = new System.Drawing.Point(751, 482);
-            this.btndelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btndelete.Name = "btndelete";
-            this.btndelete.Size = new System.Drawing.Size(74, 23);
-            this.btndelete.TabIndex = 25;
-            this.btndelete.Text = "Delete";
-            this.btndelete.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btndelete.UseVisualStyleBackColor = true;
+            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemove.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRemove.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnRemove.Location = new System.Drawing.Point(751, 482);
+            this.btnRemove.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(74, 23);
+            this.btnRemove.TabIndex = 25;
+            this.btnRemove.Text = "Remove";
+            this.btnRemove.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btndelete_Click);
             // 
             // btnclear
             // 
@@ -175,6 +178,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.btnclear.Text = "Clear";
             this.btnclear.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnclear.UseVisualStyleBackColor = true;
+            this.btnclear.Click += new System.EventHandler(this.btnclear_Click);
             // 
             // btnadd
             // 
@@ -186,7 +190,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.btnadd.Name = "btnadd";
             this.btnadd.Size = new System.Drawing.Size(70, 23);
             this.btnadd.TabIndex = 23;
-            this.btnadd.Text = "Add";
+            this.btnadd.Text = "Add...";
             this.btnadd.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnadd.UseVisualStyleBackColor = true;
             this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
@@ -214,11 +218,13 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.dgPayments.RowTemplate.Height = 29;
             this.dgPayments.Size = new System.Drawing.Size(895, 370);
             this.dgPayments.TabIndex = 21;
+            this.dgPayments.SelectionChanged += new System.EventHandler(this.dgPayments_SelectionChanged);
             // 
             // ucCollectorsRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.Controls.Add(this.dtdate);
             this.Controls.Add(this.txtReport);
             this.Controls.Add(this.cmbcollector);
@@ -227,7 +233,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtTotal);
-            this.Controls.Add(this.btndelete);
+            this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.btnclear);
             this.Controls.Add(this.btnadd);
             this.Controls.Add(this.label4);
@@ -260,5 +266,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         internal System.Windows.Forms.Button btnadd;
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.DataGridView dgPayments;
+        internal System.Windows.Forms.Button btnRemove;
     }
 }

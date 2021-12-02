@@ -414,6 +414,29 @@ namespace ACC.Data
             return false;
         }
 
+
+        public bool ReportNumberExist(string reporNo)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@report_no", DbType.String, reporNo }
+                };
+
+                string query = $"SELECT report_no FROM {tableColletorsReport} WHERE report_no = @report_no";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
+
         public bool CodeExist(string id)
         {
             try
@@ -731,7 +754,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
 
     }
 }

@@ -11,6 +11,9 @@ namespace ACC.Domain.Interfaces
         Dictionary<string, string> GetRecordByID(string reportNo);
         bool CodeExist(string id);
         bool HasGenerated(int id);
+
+        bool ReportNumberExist(string reporNo);
+
         DataTable GetSummary(int cid, int fid, int year);
         int InsertId(CollectorReportModel entity);
         bool HasReported(int id);

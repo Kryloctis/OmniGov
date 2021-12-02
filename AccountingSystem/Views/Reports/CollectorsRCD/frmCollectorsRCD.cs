@@ -50,7 +50,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             if (SaveData())
             {
-                Helper.MessageBoxSuccess("RCD has been created.");
+                Helper.MessageBoxSuccess("Collector's has been created.");
                 uc.ResetForm();
             }
         }
@@ -59,7 +59,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             if (!uc.ValidateChildren())
             {
-                //Helper.MessageBoxError(uc.GetFormErrors());
+                Helper.MessageBoxError(uc.GetFormErrors());
                 return false;
             }
 

@@ -631,11 +631,149 @@
               <FontSize>9pt</FontSize>
             </Style>
           </Tablix>
+          <Rectangle Name="Rectangle1">
+            <ReportItems>
+              <Textbox Name="Textbox17">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>D. SUMMARY OF COLECTION AND REMITTANCES / DEPOSITS</Value>
+                        <Style>
+                          <FontSize>9pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox2</rd:DefaultName>
+                <Height>0.635cm</Height>
+                <Width>18.53687cm</Width>
+                <Style>
+                  <Border>
+                    <Style>Solid</Style>
+                  </Border>
+                  <BackgroundColor>LightGrey</BackgroundColor>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+            </ReportItems>
+            <KeepTogether>true</KeepTogether>
+            <Top>2.29167in</Top>
+            <Left>0.06252in</Left>
+            <Height>1.25347in</Height>
+            <Width>7.31048in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="Rectangle2">
+            <ReportItems>
+              <Textbox Name="Textbox18">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>Certification</Value>
+                        <Style>
+                          <FontSize>9pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox2</rd:DefaultName>
+                <Left>0.00002cm</Left>
+                <Height>0.635cm</Height>
+                <Width>18.53685cm</Width>
+                <Style>
+                  <Border>
+                    <Style>Solid</Style>
+                  </Border>
+                  <BackgroundColor>LightGrey</BackgroundColor>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Rectangle Name="Rectangle3">
+                <ReportItems>
+                  <Textbox Name="Textbox19">
+                    <CanGrow>true</CanGrow>
+                    <KeepTogether>true</KeepTogether>
+                    <Paragraphs>
+                      <Paragraph>
+                        <TextRuns>
+                          <TextRun>
+                            <Value>E. ACCOUNTING ENTRIES</Value>
+                            <Style>
+                              <FontSize>9pt</FontSize>
+                              <FontWeight>Bold</FontWeight>
+                            </Style>
+                          </TextRun>
+                        </TextRuns>
+                        <Style />
+                      </Paragraph>
+                    </Paragraphs>
+                    <rd:DefaultName>Textbox2</rd:DefaultName>
+                    <Height>0.635cm</Height>
+                    <Width>18.56863cm</Width>
+                    <Style>
+                      <Border>
+                        <Style>Solid</Style>
+                      </Border>
+                      <BackgroundColor>LightGrey</BackgroundColor>
+                      <PaddingLeft>2pt</PaddingLeft>
+                      <PaddingRight>2pt</PaddingRight>
+                      <PaddingTop>2pt</PaddingTop>
+                      <PaddingBottom>2pt</PaddingBottom>
+                    </Style>
+                  </Textbox>
+                </ReportItems>
+                <KeepTogether>true</KeepTogether>
+                <Top>1.98958in</Top>
+                <Height>1.98958in</Height>
+                <Width>7.31048in</Width>
+                <ZIndex>1</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>Solid</Style>
+                  </Border>
+                </Style>
+              </Rectangle>
+            </ReportItems>
+            <KeepTogether>true</KeepTogether>
+            <Top>3.54514in</Top>
+            <Left>0.06251in</Left>
+            <Height>3.97916in</Height>
+            <Width>7.31048in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Rectangle>
         </ReportItems>
-        <Height>6.48264in</Height>
+        <Height>8.99306in</Height>
         <Style />
       </Body>
-      <Width>7.48967in</Width>
+      <Width>7.48342in</Width>
       <Page>
         <PageHeader>
           <Height>1.19806in</Height>
