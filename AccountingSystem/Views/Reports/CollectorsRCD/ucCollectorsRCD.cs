@@ -28,8 +28,8 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         internal string GetFormErrors()
         {
             var errorArray = new string[2];
-            errorArray[0] = errorProvider.GetError(txtReport);
-            errorArray[1] = errorProvider.GetError(cmbcollector);
+            errorArray[0] = epReportNo.GetError(txtReport);
+            errorArray[1] = epReportNo.GetError(cmbcollector);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -179,25 +179,31 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         private void txtReport_Validating(object sender, CancelEventArgs e)
         {
+
             string reportNo = txtReport.Text.Trim();
 
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtReport, "Report No.");
-
-            var reportNoExist = Factory.CollectorReportRepository().ReportNumberExist(reportNo);
-
-            if (reportNoExist)
+            if (String.IsNullOrEmpty(reportNo))
             {
-                errorProvider.SetError(txtReport, "Report number already existed.");
-                e.Cancel = true;
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epReportNo, txtReport, "Report No.");
             }
-            else {
-                e.Cancel = false;
+            else
+            {
+                var reportNoExist = Factory.CollectorReportRepository().ReportNumberExist(reportNo);
+
+                if (reportNoExist)
+                {
+                    epReportNo.SetError(txtReport, "Report number already existed.");
+                    e.Cancel = true;
+                }
+                else
+                {
+                    e.Cancel = false;
+                }
             }
-            
         }
         private void txtReport_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider, txtReport);
+            Helper.ClearErrorTextBox(epReportNo, txtReport);
         }
 
         private void cmbcollector_Validating(object sender, CancelEventArgs e)

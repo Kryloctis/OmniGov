@@ -38,7 +38,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epReportNo = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelFunds = new System.Windows.Forms.FlowLayoutPanel();
             this.txtTotal = new System.Windows.Forms.TextBox();
@@ -47,9 +47,11 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.btnadd = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.dgPayments = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.epCollector = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.epReportNo)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgPayments)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCollector)).BeginInit();
             this.SuspendLayout();
             // 
             // dtdate
@@ -111,9 +113,9 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.label1.TabIndex = 16;
             this.label1.Text = "Collector";
             // 
-            // errorProvider
+            // epReportNo
             // 
-            this.errorProvider.ContainerControl = this;
+            this.epReportNo.ContainerControl = this;
             // 
             // groupBox1
             // 
@@ -220,6 +222,10 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.dgPayments.TabIndex = 21;
             this.dgPayments.SelectionChanged += new System.EventHandler(this.dgPayments_SelectionChanged);
             // 
+            // epCollector
+            // 
+            this.epCollector.ContainerControl = this;
+            // 
             // ucCollectorsRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -241,9 +247,10 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.Name = "ucCollectorsRCD";
             this.Size = new System.Drawing.Size(913, 510);
             this.Load += new System.EventHandler(this.ucRCDCollector_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epReportNo)).EndInit();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgPayments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCollector)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -257,7 +264,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ErrorProvider epReportNo;
         private System.Windows.Forms.GroupBox groupBox1;
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFunds;
         internal System.Windows.Forms.TextBox txtTotal;
@@ -267,5 +274,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.DataGridView dgPayments;
         internal System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.ErrorProvider epCollector;
     }
 }
