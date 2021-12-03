@@ -49,9 +49,15 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnadd = new System.Windows.Forms.Button();
             this.panelRCD = new System.Windows.Forms.Panel();
+            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblTotalRecords = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblTotalAmount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListOfApprovedReport)).BeginInit();
             this.panelRCD.SuspendLayout();
+            this.statusStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -201,9 +207,11 @@ namespace AccountingSystem.Views.Reports.RCD
             this.dgListOfApprovedReport.Name = "dgListOfApprovedReport";
             this.dgListOfApprovedReport.RowHeadersWidth = 51;
             this.dgListOfApprovedReport.RowTemplate.Height = 29;
-            this.dgListOfApprovedReport.Size = new System.Drawing.Size(910, 478);
+            this.dgListOfApprovedReport.Size = new System.Drawing.Size(910, 457);
             this.dgListOfApprovedReport.TabIndex = 22;
-            this.dgListOfApprovedReport.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgpayments_CellContentClick);
+            this.dgListOfApprovedReport.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgListOfApprovedReport_RowsAdded);
+            this.dgListOfApprovedReport.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgListOfApprovedReport_RowsRemoved);
+            this.dgListOfApprovedReport.SelectionChanged += new System.EventHandler(this.dgListOfApprovedReport_SelectionChanged);
             // 
             // reportId
             // 
@@ -234,7 +242,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRemove.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRemove.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnRemove.Location = new System.Drawing.Point(839, 515);
+            this.btnRemove.Location = new System.Drawing.Point(839, 495);
             this.btnRemove.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(74, 23);
@@ -249,7 +257,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnadd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnadd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnadd.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnadd.Location = new System.Drawing.Point(763, 515);
+            this.btnadd.Location = new System.Drawing.Point(763, 495);
             this.btnadd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnadd.Name = "btnadd";
             this.btnadd.Size = new System.Drawing.Size(70, 23);
@@ -274,14 +282,56 @@ namespace AccountingSystem.Views.Reports.RCD
             this.panelRCD.Controls.Add(this.dgListOfApprovedReport);
             this.panelRCD.Location = new System.Drawing.Point(0, 53);
             this.panelRCD.Name = "panelRCD";
-            this.panelRCD.Size = new System.Drawing.Size(916, 541);
+            this.panelRCD.Size = new System.Drawing.Size(916, 520);
             this.panelRCD.TabIndex = 34;
+            // 
+            // statusStrip2
+            // 
+            this.statusStrip2.BackColor = System.Drawing.Color.White;
+            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.lblTotalRecords,
+            this.toolStripStatusLabel3,
+            this.lblTotalAmount});
+            this.statusStrip2.Location = new System.Drawing.Point(0, 576);
+            this.statusStrip2.Name = "statusStrip2";
+            this.statusStrip2.Size = new System.Drawing.Size(916, 22);
+            this.statusStrip2.SizingGrip = false;
+            this.statusStrip2.TabIndex = 35;
+            this.statusStrip2.Text = "statusStrip2";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(58, 17);
+            this.toolStripStatusLabel1.Text = "Records : ";
+            // 
+            // lblTotalRecords
+            // 
+            this.lblTotalRecords.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTotalRecords.Name = "lblTotalRecords";
+            this.lblTotalRecords.Size = new System.Drawing.Size(14, 17);
+            this.lblTotalRecords.Text = "0";
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(88, 17);
+            this.toolStripStatusLabel3.Text = "Total Amount : ";
+            // 
+            // lblTotalAmount
+            // 
+            this.lblTotalAmount.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTotalAmount.Name = "lblTotalAmount";
+            this.lblTotalAmount.Size = new System.Drawing.Size(24, 17);
+            this.lblTotalAmount.Text = "0.0";
             // 
             // frmRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(916, 593);
+            this.ClientSize = new System.Drawing.Size(916, 598);
+            this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.panelRCD);
             this.Controls.Add(this.toolStrip1);
             this.MinimizeBox = false;
@@ -296,6 +346,8 @@ namespace AccountingSystem.Views.Reports.RCD
             ((System.ComponentModel.ISupportInitialize)(this.dgListOfApprovedReport)).EndInit();
             this.panelRCD.ResumeLayout(false);
             this.panelRCD.PerformLayout();
+            this.statusStrip2.ResumeLayout(false);
+            this.statusStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -325,5 +377,13 @@ namespace AccountingSystem.Views.Reports.RCD
         private System.Windows.Forms.DataGridViewTextBoxColumn amount;
         internal System.Windows.Forms.Button btnRemove;
         internal System.Windows.Forms.DataGridView dgListOfApprovedReport;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblQuantity;
+        private System.Windows.Forms.StatusStrip statusStrip2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel lblTotalAmount;
+        private System.Windows.Forms.ToolStripStatusLabel lblCreatedBy;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel lblTotalRecords;
     }
 }

@@ -73,7 +73,6 @@ namespace AccountingSystem.Views.Reports.RCD
                 var dtrcd = Factory.GeneralCollectionsRepository().GetRecordsBySearch(searchkey);
 
                 HelperLoadRecords.RCDSearchDatagridView(dtrcd, dgRCDSearch);
-
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -85,17 +84,19 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
+
+            _frmRCD.dgListOfApprovedReport.Rows.Clear();
             _frmRCD.txtRCDNo.Text = rcdNo;
             _frmRCD.rcdId = rcdId;
 
             _frmRCD.btnPrint.Enabled = true;
             _frmRCD.panelRCD.Enabled = false;
+
             _frmRCD.LoadSelectedRCD(rcdNo);
 
             this.Close();
         }
        
-
         private void dgrcd_SelectionChanged(object sender, EventArgs e)
         {
             if (dgRCDSearch.Rows.Count > 0 && dgRCDSearch.SelectedRows.Count > 0)

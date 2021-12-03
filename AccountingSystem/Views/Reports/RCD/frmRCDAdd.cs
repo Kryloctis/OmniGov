@@ -124,48 +124,45 @@ namespace AccountingSystem.Views.Reports.RCD
                 collectingOfficer = row.Cells["collector_officer"].Value.ToString();
                 reportNo = row.Cells["report_no"].Value.ToString();
                 amount = Convert.ToDecimal(row.Cells["amount"].Value);
-            }
 
-            foreach (DataGridViewRow row in _frmRCD.dgListOfApprovedReport.Rows)
-            {
-                reportNoChecker = row.Cells[2].Value.ToString();
-
-                if (reportNo == reportNoChecker)
+                foreach (DataGridViewRow _frmRCDRow in _frmRCD.dgListOfApprovedReport.Rows)
                 {
-                    Helper.MessageBoxError("Collector's report is already on the list.");
-                    return;
+                    reportNoChecker = _frmRCDRow.Cells[2].Value.ToString();
+
+                    if (reportNo == reportNoChecker)
+                    {
+                        Helper.MessageBoxError("Selected collector's report is already on the list.");
+                        return;
+                    }
                 }
+
+
+                object[] reportRow = new object[]
+                {
+                    reportId,
+                    collectingOfficer,
+                    reportNo,
+                    amount.ToString("N2")
+                };
+
+                _frmRCD.dgListOfApprovedReport.Rows.Add(reportRow);
             }
-
-            object[] reportRow = new object[]
-            {
-                reportId,
-                collectingOfficer,
-                reportNo,
-                amount.ToString("N2")
-            };
-
-            _frmRCD.dgListOfApprovedReport.Rows.Add(reportRow);
 
             //this.Close();
         }
 
+
         private void dgCollectorsReport_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgCollectorsReport.Rows.Count > 0 && dgCollectorsReport.SelectedRows.Count > 0)
+            btnSelect.Enabled = dgCollectorsReport.SelectedRows.Count != 0;
+            
+            foreach (DataGridViewRow row in dgCollectorsReport.SelectedRows)
             {
-                foreach (DataGridViewRow row in dgCollectorsReport.SelectedRows)
-                {
-                    collectorsReportId = row.Cells[0].Value.ToString();
-                    reportNo = row.Cells[1].Value.ToString();
-                    collector = row.Cells[3].Value.ToString();
-                }
-                btnSelect.Enabled = true;
+                collectorsReportId = row.Cells[0].Value.ToString();
+                reportNo = row.Cells[1].Value.ToString();
+                collector = row.Cells[3].Value.ToString();
             }
-            else
-            {
-                btnSelect.Enabled = false;
-            }
+          
         }
 
         private void cmbCollector_SelectedValueChanged(object sender, EventArgs e)

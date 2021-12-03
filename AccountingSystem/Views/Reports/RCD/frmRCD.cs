@@ -18,6 +18,7 @@ namespace AccountingSystem.Views.Reports.RCD
         internal string reportNo;
         internal string rcdNo;
         internal string rcdId;
+        internal short reportQuantity;
 
 
         internal DateTime date;
@@ -44,7 +45,7 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void frmRCD_Load(object sender, EventArgs e)
         {
-
+            btnRemove.Enabled = dgListOfApprovedReport.Rows.Count != 0;
         }
 
 
@@ -52,10 +53,8 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
-
                 var generalCollectionsPaymentRepo = Factory.GeneralCollectionsPaymentsRepository();
                 var dtRCD = generalCollectionsPaymentRepo.GetRecordsByRCDNO(rcdNo);
-
 
                 string reportId = String.Empty;
                 string collectingOfficer = String.Empty;
@@ -128,6 +127,8 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             txtRCDNo.Text = string.Empty;
             dtpdate.Value = DateTime.Now;
+
+            btnRemove.Enabled = false;
 
             dgListOfApprovedReport.Rows.Clear();
             panelRCD.Enabled = true;
@@ -211,9 +212,33 @@ namespace AccountingSystem.Views.Reports.RCD
             }
         }
 
-        private void dgpayments_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgListOfApprovedReport_SelectionChanged(object sender, EventArgs e)
         {
-
+            btnRemove.Enabled = dgListOfApprovedReport.Rows.Count != 0;
         }
+
+        private void dgListOfApprovedReport_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            SetStatusStrip();
+        }
+
+        private void dgListOfApprovedReport_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            SetStatusStrip();
+        }
+
+        internal void SetStatusStrip()
+        {
+            decimal totalCollections = 0.0m;
+
+            foreach (DataGridViewRow row in dgListOfApprovedReport.Rows)
+                totalCollections += Convert.ToDecimal(row.Cells["amount"].Value);
+
+            reportQuantity = (short)dgListOfApprovedReport.Rows.Count;
+            lblTotalRecords.Text = reportQuantity.ToString();
+            lblTotalAmount.Text = totalCollections.ToString("N2");
+        }
+     
+
     }
 }
