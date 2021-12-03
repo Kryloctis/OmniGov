@@ -41,16 +41,16 @@ namespace AccountingSystem.Views.Reports.RCD
             this.label2 = new System.Windows.Forms.Label();
             this.dtpdate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.dgpayments = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btnadd = new System.Windows.Forms.Button();
-            this.panelRCD = new System.Windows.Forms.Panel();
+            this.dgListOfApprovedReport = new System.Windows.Forms.DataGridView();
             this.reportId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.collecting_officer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.report_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnRemove = new System.Windows.Forms.Button();
+            this.btnadd = new System.Windows.Forms.Button();
+            this.panelRCD = new System.Windows.Forms.Panel();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgpayments)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgListOfApprovedReport)).BeginInit();
             this.panelRCD.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,6 +86,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // btnCancel
             // 
+            this.btnCancel.Enabled = false;
             this.btnCancel.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
             this.btnCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -113,6 +114,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // btnDeposit
             // 
+            this.btnDeposit.Enabled = false;
             this.btnDeposit.Image = global::AccountingSystem.Properties.Resources.mailbox_in_filled_28px;
             this.btnDeposit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDeposit.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -143,8 +145,8 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSearch.Margin = new System.Windows.Forms.Padding(0, 1, 15, 2);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(46, 47);
-            this.btnSearch.Text = "S&earch";
+            this.btnSearch.Size = new System.Drawing.Size(55, 47);
+            this.btnSearch.Text = "S&earch...";
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
@@ -183,72 +185,25 @@ namespace AccountingSystem.Views.Reports.RCD
             this.label1.TabIndex = 20;
             this.label1.Text = "Date";
             // 
-            // dgpayments
+            // dgListOfApprovedReport
             // 
-            this.dgpayments.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgListOfApprovedReport.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgpayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgpayments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgListOfApprovedReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgListOfApprovedReport.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.reportId,
             this.collecting_officer,
             this.report_no,
             this.amount});
-            this.dgpayments.Location = new System.Drawing.Point(3, 34);
-            this.dgpayments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dgpayments.Name = "dgpayments";
-            this.dgpayments.RowHeadersWidth = 51;
-            this.dgpayments.RowTemplate.Height = 29;
-            this.dgpayments.Size = new System.Drawing.Size(910, 478);
-            this.dgpayments.TabIndex = 22;
-            this.dgpayments.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgpayments_CellContentClick);
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button1.Location = new System.Drawing.Point(839, 516);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(74, 23);
-            this.button1.TabIndex = 28;
-            this.button1.Text = "Delete";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // btnadd
-            // 
-            this.btnadd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnadd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnadd.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnadd.Location = new System.Drawing.Point(763, 516);
-            this.btnadd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnadd.Name = "btnadd";
-            this.btnadd.Size = new System.Drawing.Size(70, 23);
-            this.btnadd.TabIndex = 26;
-            this.btnadd.Text = "Add";
-            this.btnadd.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnadd.UseVisualStyleBackColor = true;
-            this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
-            // 
-            // panelRCD
-            // 
-            this.panelRCD.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelRCD.BackColor = System.Drawing.Color.White;
-            this.panelRCD.Controls.Add(this.button1);
-            this.panelRCD.Controls.Add(this.btnadd);
-            this.panelRCD.Controls.Add(this.label2);
-            this.panelRCD.Controls.Add(this.label1);
-            this.panelRCD.Controls.Add(this.txtRCDNo);
-            this.panelRCD.Controls.Add(this.dtpdate);
-            this.panelRCD.Controls.Add(this.dgpayments);
-            this.panelRCD.Location = new System.Drawing.Point(0, 53);
-            this.panelRCD.Name = "panelRCD";
-            this.panelRCD.Size = new System.Drawing.Size(916, 541);
-            this.panelRCD.TabIndex = 34;
+            this.dgListOfApprovedReport.Location = new System.Drawing.Point(3, 34);
+            this.dgListOfApprovedReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgListOfApprovedReport.Name = "dgListOfApprovedReport";
+            this.dgListOfApprovedReport.RowHeadersWidth = 51;
+            this.dgListOfApprovedReport.RowTemplate.Height = 29;
+            this.dgListOfApprovedReport.Size = new System.Drawing.Size(910, 478);
+            this.dgListOfApprovedReport.TabIndex = 22;
+            this.dgListOfApprovedReport.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgpayments_CellContentClick);
             // 
             // reportId
             // 
@@ -274,6 +229,54 @@ namespace AccountingSystem.Views.Reports.RCD
             this.amount.Name = "amount";
             this.amount.Width = 250;
             // 
+            // btnRemove
+            // 
+            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemove.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRemove.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnRemove.Location = new System.Drawing.Point(839, 515);
+            this.btnRemove.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(74, 23);
+            this.btnRemove.TabIndex = 28;
+            this.btnRemove.Text = "Remove";
+            this.btnRemove.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            // 
+            // btnadd
+            // 
+            this.btnadd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnadd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnadd.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnadd.Location = new System.Drawing.Point(763, 515);
+            this.btnadd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnadd.Name = "btnadd";
+            this.btnadd.Size = new System.Drawing.Size(70, 23);
+            this.btnadd.TabIndex = 26;
+            this.btnadd.Text = "Add...";
+            this.btnadd.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnadd.UseVisualStyleBackColor = true;
+            this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
+            // 
+            // panelRCD
+            // 
+            this.panelRCD.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelRCD.BackColor = System.Drawing.Color.White;
+            this.panelRCD.Controls.Add(this.btnRemove);
+            this.panelRCD.Controls.Add(this.btnadd);
+            this.panelRCD.Controls.Add(this.label2);
+            this.panelRCD.Controls.Add(this.label1);
+            this.panelRCD.Controls.Add(this.txtRCDNo);
+            this.panelRCD.Controls.Add(this.dtpdate);
+            this.panelRCD.Controls.Add(this.dgListOfApprovedReport);
+            this.panelRCD.Location = new System.Drawing.Point(0, 53);
+            this.panelRCD.Name = "panelRCD";
+            this.panelRCD.Size = new System.Drawing.Size(916, 541);
+            this.panelRCD.TabIndex = 34;
+            // 
             // frmRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -290,7 +293,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.Load += new System.EventHandler(this.frmRCD_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgpayments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgListOfApprovedReport)).EndInit();
             this.panelRCD.ResumeLayout(false);
             this.panelRCD.PerformLayout();
             this.ResumeLayout(false);
@@ -316,10 +319,11 @@ namespace AccountingSystem.Views.Reports.RCD
         internal System.Windows.Forms.Button btnadd;
         internal System.Windows.Forms.Panel panel1;
         internal System.Windows.Forms.Panel panelRCD;
-        internal System.Windows.Forms.DataGridView dgpayments;
         private System.Windows.Forms.DataGridViewTextBoxColumn reportId;
         private System.Windows.Forms.DataGridViewTextBoxColumn collecting_officer;
         private System.Windows.Forms.DataGridViewTextBoxColumn report_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn amount;
+        internal System.Windows.Forms.Button btnRemove;
+        internal System.Windows.Forms.DataGridView dgListOfApprovedReport;
     }
 }

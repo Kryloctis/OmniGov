@@ -18,6 +18,8 @@ namespace AccountingSystem.Views.Reports.RCD
         private string collectorsReportId;
         private string collector;
 
+
+
         public frmRCDAdd(frmRCD frmRCD)
         {
             InitializeComponent();
@@ -28,41 +30,29 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void frmRCDAdd_Load(object sender, EventArgs e)
         {
-
-
-            cmbCollector.SelectedValueChanged -= new EventHandler(cmbCollector_SelectedValueChanged);
             LoadCollectors();
-            cmbCollector.SelectedValueChanged += new EventHandler(cmbCollector_SelectedValueChanged);
-
-
             LoadFunds();
             LoadRecords();
-
-
-            cmbCollector.SelectedIndex = -1;
         }
 
         private void LoadCollectors()
         {
             try
             {
-                //cmbCollector.SelectedValueChanged -= new EventHandler(cmbcollector_SelectedValueChanged);
+                cmbCollector.SelectedValueChanged -= new EventHandler(cmbCollector_SelectedValueChanged);
                 var collectingOfficerRepository = Factory.CollectingOfficerRepository();
 
-
-                var dtCollectors = new DataTable();
-                dtCollectors = collectingOfficerRepository.GetRecords();
-
-                dtCollectors.Rows.Add(0, "All");
+                DataTable dtCollectors = collectingOfficerRepository.GetRecords();
+                DataView dv = dtCollectors.DefaultView;
 
                 cmbCollector.DataSource = dtCollectors;
                 cmbCollector.DisplayMember = "fullname";
                 cmbCollector.ValueMember = "id";
+                dtCollectors.Rows.Add(0, "All");
 
-                //cmbCollector.SelectedValueChanged += new EventHandler(cmbcollector_SelectedValueChanged);
+                dv.Sort = "id asc";
 
-                //collectorId = (ushort)Convert.ToInt32(cmbCollector.SelectedValue);
-
+                cmbCollector.SelectedValueChanged += new EventHandler(cmbCollector_SelectedValueChanged);
             }
             catch (Exception ex)
             {
@@ -84,7 +74,7 @@ namespace AccountingSystem.Views.Reports.RCD
 
                 var dtrcd = new DataTable();
 
-                if (collectorId == 0)
+                if (cmbCollector.Text == "All")
                     dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch);
                 else
                     dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch, collectorId);
@@ -125,7 +115,7 @@ namespace AccountingSystem.Views.Reports.RCD
             string collectingOfficer = String.Empty;
             string reportNo = String.Empty;
             string reportNoChecker = String.Empty;
-            string amount = String.Empty;
+            decimal amount = 0.0m;
 
 
             foreach (DataGridViewRow row in dgCollectorsReport.SelectedRows)
@@ -133,12 +123,10 @@ namespace AccountingSystem.Views.Reports.RCD
                 reportId = row.Cells["id"].Value.ToString();
                 collectingOfficer = row.Cells["collector_officer"].Value.ToString();
                 reportNo = row.Cells["report_no"].Value.ToString();
-                amount = row.Cells["amount"].Value.ToString();
+                amount = Convert.ToDecimal(row.Cells["amount"].Value);
             }
 
-
-
-            foreach (DataGridViewRow row in _frmRCD.dgpayments.Rows)
+            foreach (DataGridViewRow row in _frmRCD.dgListOfApprovedReport.Rows)
             {
                 reportNoChecker = row.Cells[2].Value.ToString();
 
@@ -154,10 +142,10 @@ namespace AccountingSystem.Views.Reports.RCD
                 reportId,
                 collectingOfficer,
                 reportNo,
-                amount
+                amount.ToString("N2")
             };
 
-            _frmRCD.dgpayments.Rows.Add(reportRow);
+            _frmRCD.dgListOfApprovedReport.Rows.Add(reportRow);
 
             //this.Close();
         }

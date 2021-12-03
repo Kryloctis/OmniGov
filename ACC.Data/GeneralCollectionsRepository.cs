@@ -32,7 +32,6 @@ namespace ACC.Data
         private readonly string tableReceipts = "receipts";
         private readonly string tableReceiptsIssued = "receipts_issued";
 
-
         private readonly string viewTableName = "view_general_collections";
 
         public GeneralCollectionsRepository(IDbGenericCommands dbGenericCommands)
@@ -82,7 +81,7 @@ namespace ACC.Data
                     new object[] { "@rcd_no", DbType.String, Id},
                 };
 
-                string query = $"SELECT * FROM {tableGeneralCollections} WHERE  rcd_no= @rcd_no";
+                string query = $"SELECT * FROM {tableGeneralCollections} WHERE  rcd_no = @rcd_no";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -107,8 +106,8 @@ namespace ACC.Data
             try
             {
                 string query = $"SELECT * FROM {viewTableName}";
-
                 var dtRCD = new DataTable();
+
                 return _dbGenericCommands.Fill(query, dtRCD);
             }
             catch (Exception)
@@ -232,7 +231,6 @@ namespace ACC.Data
                 string query = $"SELECT rcd_no FROM {tableGeneralCollections} WHERE rcd_no = @rcd_no";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
-                // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
             }
             catch (Exception)
@@ -247,10 +245,14 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableGeneralCollections}.id,{tableGeneralCollections}.rcd_no,{tableGeneralCollections}.rcd_date,CONCAT({tableUsers}.last_name,', ',{tableUsers}.first_name,' ',{tableUsers}.mid_initial) AS officer,(SELECT SUM({tablePaymentCollections}.amount) FROM {tablePaymentCollections} LEFT JOIN {tableCollectorReportPayments} ON {tableCollectorReportPayments}.payment_collections_id={tablePaymentCollections}.id LEFT JOIN {tableGeneralCollectionsPayment} ON {tableGeneralCollectionsPayment}.collector_report_id={tableCollectorReportPayments}.collector_report_id WHERE {tableGeneralCollectionsPayment}.general_collections_id={tableGeneralCollections}.id) AS colamount,(SELECT IF(COUNT({tableGeneralCollectionsDeposits}.id)>0,true,false) FROM {tableGeneralCollectionsDeposits} WHERE {tableGeneralCollectionsDeposits}.general_collections_id={tableGeneralCollections}.id) AS deposited FROM {tableGeneralCollections} LEFT JOIN {tableUsers} ON {tableUsers}.id={tableGeneralCollections}.users_id WHERE {tableGeneralCollections}.rcd_no LIKE '%{searchText}%' OR CONCAT({tableUsers}.last_name,', ',{tableUsers}.first_name,' ',{tableUsers}.mid_initial) LIKE '%{searchText}%' ORDER BY {tableGeneralCollections}.id DESC";
+                var parameter = new object[][] { 
+                    new object[]{"@searchKey", DbType.String, $"%{ searchText }%" }
+                };
 
+                string query = $"SELECT * FROM {viewTableName} WHERE rcd_no LIKE @searchKey";
                 var dtpc = new DataTable();
-                return _dbGenericCommands.Fill(query, dtpc);
+
+                return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
             }
             catch (Exception)
             {

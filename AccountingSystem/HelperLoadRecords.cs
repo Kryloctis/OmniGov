@@ -509,7 +509,6 @@ namespace AccountingSystem
 
             foreach (DataRow drRCD in dataTable.Rows)
             {
-                
                 datagrid.Rows.Add(new object[]
                 {
                     drRCD["id"],
@@ -523,8 +522,6 @@ namespace AccountingSystem
             }
 
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", 9f);
-
-         
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 

@@ -23,8 +23,7 @@ namespace AccountingSystem.Views.Reports.RCD
         public frmSearch(frmRCD frmRCD)
         {
             InitializeComponent();
-            Helper.DatagridFullRowSelectStyle(dgrcd, true);
-
+            Helper.DatagridFullRowSelectStyle(dgRCDSearch, true);
             _frmRCD = frmRCD;
         }
 
@@ -40,6 +39,7 @@ namespace AccountingSystem.Views.Reports.RCD
             {
                 var fundrepo = Factory.FundsRepository();
                 var dtfunds = fundrepo.GetRecords();
+
                 cmbfunds.DataSource = dtfunds;
                 cmbfunds.ValueMember = "id";
                 cmbfunds.DisplayMember = "fund_name";
@@ -54,13 +54,10 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
-                byte fundId = (byte)cmbfunds.SelectedValue;
-                string keySearch = txtsearch.Text;
-
                 var rcdRepository = Factory.GeneralCollectionsRepository();
                 var dtRCD = rcdRepository.GetRecords();
 
-                HelperLoadRecords.RCDSearchDatagridView(dtRCD, dgrcd);
+                HelperLoadRecords.RCDSearchDatagridView(dtRCD, dgRCDSearch);
             }
             catch(Exception ex)
             {
@@ -70,31 +67,15 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            if (txtsearch.Text.Length > 0)
+            try
             {
-                try
-                {
-                    string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                    var dtrcd = Factory.CollectorReportRepository().GetRecordsBySearch(searchkey);
-                    HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgrcd);
+                string searchkey = Convert.ToString(txtsearch.Text.Trim());
+                var dtrcd = Factory.GeneralCollectionsRepository().GetRecordsBySearch(searchkey);
 
-                }
-                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+                HelperLoadRecords.RCDSearchDatagridView(dtrcd, dgRCDSearch);
+
             }
-            else
-            {
-                LoadRecords();
-            }
-        }
-
-        private void cmbstatus_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadRecords();
-        }
-
-        private void cmbfunds_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadRecords();
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgrcd_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -117,9 +98,9 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void dgrcd_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgrcd.Rows.Count > 0 && dgrcd.SelectedRows.Count > 0)
+            if (dgRCDSearch.Rows.Count > 0 && dgRCDSearch.SelectedRows.Count > 0)
             {
-                foreach (DataGridViewRow row in dgrcd.SelectedRows)
+                foreach (DataGridViewRow row in dgRCDSearch.SelectedRows)
                 {
                     rcdId = row.Cells[0].Value.ToString();
                     rcdNo = row.Cells[1].Value.ToString();

@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgpayments, true);
+            Helper.DatagridFullRowSelectStyle(dgListOfApprovedReport, true);
         }
 
         private void btnadd_Click(object sender, EventArgs e)
@@ -80,7 +80,7 @@ namespace AccountingSystem.Views.Reports.RCD
                         amount
                     };
 
-                    dgpayments.Rows.Add(reportRow);
+                    dgListOfApprovedReport.Rows.Add(reportRow);
                 }
 
 
@@ -107,7 +107,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 var colectorRepository = Factory.CollectorReportRepository();
                 var dtrcd = new DataTable();
                 dtrcd = colectorRepository.FilterRecords(fundId, collectorId, reportNo);
-                HelperLoadRecords.RCDDatagridView(dtrcd, dgpayments);
+                HelperLoadRecords.RCDDatagridView(dtrcd, dgListOfApprovedReport);
 
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -129,7 +129,7 @@ namespace AccountingSystem.Views.Reports.RCD
             txtRCDNo.Text = string.Empty;
             dtpdate.Value = DateTime.Now;
 
-            dgpayments.Rows.Clear();
+            dgListOfApprovedReport.Rows.Clear();
             panelRCD.Enabled = true;
         }
 
@@ -157,7 +157,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 var generalCollectionsId = GetGeneralCollectionsId();
                 
 
-                foreach (DataGridViewRow row in dgpayments.Rows)
+                foreach (DataGridViewRow row in dgListOfApprovedReport.Rows)
                 {
                     ushort collectionsReportId = (ushort)Convert.ToInt32(row.Cells["reportId"].Value);
 
@@ -184,7 +184,7 @@ namespace AccountingSystem.Views.Reports.RCD
          
         private bool ValidateInputs()
         {
-            bool hasError = String.IsNullOrEmpty(txtRCDNo.Text) || dgpayments.Rows.Count == 0;
+            bool hasError = String.IsNullOrEmpty(txtRCDNo.Text) || dgListOfApprovedReport.Rows.Count == 0;
             return hasError;
         }
 
@@ -203,8 +203,17 @@ namespace AccountingSystem.Views.Reports.RCD
             _ = new frmCDReport(rcdId).ShowDialog();
         }
 
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow item in dgListOfApprovedReport.SelectedRows)
+            {
+                dgListOfApprovedReport.Rows.RemoveAt(item.Index);
+            }
+        }
+
         private void dgpayments_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
         }
     }
 }
