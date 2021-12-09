@@ -39,16 +39,13 @@ namespace AccountingSystem.Views.Transactions.RCI
             errorArray[6] = errorProvider.GetError(dtcheckdate);
             errorArray[7] = errorProvider.GetError(txtpayee);
             errorArray[8] = errorProvider.GetError(txtnature);
-            errorArray[9] = errorProvider.GetError(txttrust);
-            errorArray[10] = errorProvider.GetError(txtvat);
-            errorArray[11] = errorProvider.GetError(txtamount);
+            errorArray[9] = errorProvider.GetError(txtamount);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
         internal void ResetForm()
         {
-            txtObno.Clear();
             txtdvno.Clear();
             bankId=fundsId=functionId=0;
             cmbbank.SelectedIndex = -1;
@@ -58,8 +55,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             dtcheckdate.Value = DateTime.Now;
             txtpayee.Clear();
             txtnature.Clear();
-            txttrust.Value = Convert.ToDecimal("0.00");
-            txtvat.Value = Convert.ToDecimal("0.00");
             txtamount.Value = Convert.ToDecimal("0.00");
         }
         internal void LoadFunds()
@@ -120,26 +115,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             _ = new frmFind(this, "banks").ShowDialog();
         }
 
-        private void txtfunction_DoubleClick(object sender, EventArgs e)
-        {
-            btnfunction.PerformClick();
-        }
-
-        private void btnfunction_Click(object sender, EventArgs e)
-        {
-            _ = new frmFind(this, "functions").ShowDialog();
-        }
-
-        private void btnfund_Click(object sender, EventArgs e)
-        {
-            _ = new frmFind(this, "funds").ShowDialog();
-        }
-
-        private void txtObno_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtObno, "obligation no.!");
-        }
-
         private void txtdvno_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtdvno, "disbursement no.!");
@@ -182,15 +157,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtnature, "nature of payment.!");
         }
 
-        private void txttrust_Validating(object sender, CancelEventArgs e)
-        {
-            
-        }
 
-        private void txtObno_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider, txtObno);
-        }
 
         private void txtdvno_Validated(object sender, EventArgs e)
         {

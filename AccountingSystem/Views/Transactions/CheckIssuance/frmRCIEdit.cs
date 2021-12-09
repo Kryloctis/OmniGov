@@ -30,9 +30,6 @@ namespace AccountingSystem.Views.Transactions.RCI
                 var rcidata = rciRepository.GetRecordByID(uc.Id);
                 uc.txtObno.Text = rcidata["obligation_no"];
                 uc.txtdvno.Text = rcidata["dv_no"];
-                //uc.setSelectedValue(Convert.ToInt16(rcidata["banks_id"]), "banks");
-               // uc.setSelectedValue(Convert.ToInt16(rcidata["funds_id"]), "funds");
-                //uc.setSelectedValue(Convert.ToInt16(rcidata["function_program_project_id"]), "functions");
                 uc.cmbbank.SelectedValue = rcidata["banks_id"];
                 uc.cmbfund.SelectedValue = rcidata["funds_id"];
                 LoadSelectedRecord(uc, "functions", Convert.ToInt16(rcidata["function_program_project_id"]));
@@ -40,8 +37,6 @@ namespace AccountingSystem.Views.Transactions.RCI
                 uc.dtcheckdate.Value = Convert.ToDateTime(rcidata["check_date"]);
                 uc.txtpayee.Text = rcidata["payee"];
                 uc.txtnature.Text = rcidata["nature_of_payment"];
-                uc.txttrust.Value = Convert.ToDecimal(rcidata["trust_liabilities"]);
-                uc.txtvat.Value = Convert.ToDecimal(rcidata["bir_vat_nonvat"]);
                 uc.txtamount.Value = Convert.ToDecimal(rcidata["amount"]);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -97,8 +92,6 @@ namespace AccountingSystem.Views.Transactions.RCI
                     DvNo = uc.txtdvno.Text.Trim(),
                     Payee = uc.txtpayee.Text.Trim(),
                     NaturePayment = uc.txtnature.Text.Trim(),
-                    TrustLiabilities = Convert.ToDecimal(uc.txttrust.Value),
-                    BirVatNonVat = Convert.ToDecimal(uc.txtvat.Value),
                     Amount = Convert.ToDecimal(uc.txtamount.Value)
                 };
 

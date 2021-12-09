@@ -33,7 +33,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnfunction = new System.Windows.Forms.Button();
             this.txtfunction = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -41,31 +40,28 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.dtcheckdate = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.txtObno = new System.Windows.Forms.TextBox();
             this.txtdvno = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.txtpayee = new System.Windows.Forms.TextBox();
             this.txtnature = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txttrust = new System.Windows.Forms.NumericUpDown();
-            this.txtvat = new System.Windows.Forms.NumericUpDown();
             this.txtamount = new System.Windows.Forms.NumericUpDown();
             this.cmbfund = new System.Windows.Forms.ComboBox();
             this.cmbbank = new System.Windows.Forms.ComboBox();
+            this.txtObno = new System.Windows.Forms.ComboBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txttrust)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtvat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtamount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 90);
+            this.label1.Location = new System.Drawing.Point(12, 85);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 15);
             this.label1.TabIndex = 0;
@@ -74,7 +70,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 37);
+            this.label2.Location = new System.Drawing.Point(12, 53);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 15);
             this.label2.TabIndex = 3;
@@ -83,40 +79,28 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 65);
+            this.label3.Location = new System.Drawing.Point(12, 153);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(27, 15);
             this.label3.TabIndex = 4;
             this.label3.Text = "FPP";
             // 
-            // btnfunction
-            // 
-            this.btnfunction.Image = global::AccountingSystem.Properties.Resources.find1;
-            this.btnfunction.Location = new System.Drawing.Point(615, 61);
-            this.btnfunction.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnfunction.Name = "btnfunction";
-            this.btnfunction.Size = new System.Drawing.Size(28, 23);
-            this.btnfunction.TabIndex = 8;
-            this.btnfunction.UseVisualStyleBackColor = true;
-            this.btnfunction.Click += new System.EventHandler(this.btnfunction_Click);
-            // 
             // txtfunction
             // 
             this.errorProvider.SetIconAlignment(this.txtfunction, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
-            this.txtfunction.Location = new System.Drawing.Point(142, 61);
+            this.txtfunction.Location = new System.Drawing.Point(142, 150);
             this.txtfunction.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtfunction.Name = "txtfunction";
             this.txtfunction.ReadOnly = true;
-            this.txtfunction.Size = new System.Drawing.Size(468, 23);
+            this.txtfunction.Size = new System.Drawing.Size(501, 23);
             this.txtfunction.TabIndex = 3;
-            this.txtfunction.DoubleClick += new System.EventHandler(this.txtfunction_DoubleClick);
             this.txtfunction.Validating += new System.ComponentModel.CancelEventHandler(this.txtfunction_Validating);
             this.txtfunction.Validated += new System.EventHandler(this.txtfunction_Validated);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 118);
+            this.label4.Location = new System.Drawing.Point(12, 117);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 15);
             this.label4.TabIndex = 9;
@@ -125,7 +109,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(349, 118);
+            this.label5.Location = new System.Drawing.Point(12, 188);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(67, 15);
             this.label5.TabIndex = 10;
@@ -133,21 +117,21 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // txtcheckno
             // 
-            this.txtcheckno.Location = new System.Drawing.Point(142, 115);
+            this.txtcheckno.Location = new System.Drawing.Point(142, 114);
             this.txtcheckno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtcheckno.MaxLength = 15;
             this.txtcheckno.Name = "txtcheckno";
-            this.txtcheckno.Size = new System.Drawing.Size(195, 23);
+            this.txtcheckno.Size = new System.Drawing.Size(254, 23);
             this.txtcheckno.TabIndex = 5;
             this.txtcheckno.Validating += new System.ComponentModel.CancelEventHandler(this.txtcheckno_Validating);
             this.txtcheckno.Validated += new System.EventHandler(this.txtcheckno_Validated);
             // 
             // dtcheckdate
             // 
-            this.dtcheckdate.Location = new System.Drawing.Point(423, 115);
+            this.dtcheckdate.Location = new System.Drawing.Point(142, 182);
             this.dtcheckdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtcheckdate.Name = "dtcheckdate";
-            this.dtcheckdate.Size = new System.Drawing.Size(220, 23);
+            this.dtcheckdate.Size = new System.Drawing.Size(501, 23);
             this.dtcheckdate.TabIndex = 6;
             this.dtcheckdate.Validating += new System.ComponentModel.CancelEventHandler(this.dtcheckdate_Validating);
             this.dtcheckdate.Validated += new System.EventHandler(this.dtcheckdate_Validated);
@@ -155,7 +139,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(11, 9);
+            this.label6.Location = new System.Drawing.Point(316, 22);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(85, 15);
             this.label6.TabIndex = 13;
@@ -164,30 +148,19 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(361, 10);
+            this.label7.Location = new System.Drawing.Point(12, 21);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(47, 15);
             this.label7.TabIndex = 14;
             this.label7.Text = "DV No. ";
             // 
-            // txtObno
-            // 
-            this.txtObno.Location = new System.Drawing.Point(142, 7);
-            this.txtObno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtObno.MaxLength = 20;
-            this.txtObno.Name = "txtObno";
-            this.txtObno.Size = new System.Drawing.Size(195, 23);
-            this.txtObno.TabIndex = 0;
-            this.txtObno.Validating += new System.ComponentModel.CancelEventHandler(this.txtObno_Validating);
-            this.txtObno.Validated += new System.EventHandler(this.txtObno_Validated);
-            // 
             // txtdvno
             // 
-            this.txtdvno.Location = new System.Drawing.Point(415, 7);
+            this.txtdvno.Location = new System.Drawing.Point(142, 18);
             this.txtdvno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtdvno.MaxLength = 20;
             this.txtdvno.Name = "txtdvno";
-            this.txtdvno.Size = new System.Drawing.Size(228, 23);
+            this.txtdvno.Size = new System.Drawing.Size(162, 23);
             this.txtdvno.TabIndex = 1;
             this.txtdvno.Validating += new System.ComponentModel.CancelEventHandler(this.txtdvno_Validating);
             this.txtdvno.Validated += new System.EventHandler(this.txtdvno_Validated);
@@ -195,7 +168,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 144);
+            this.label8.Location = new System.Drawing.Point(12, 217);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(38, 15);
             this.label8.TabIndex = 17;
@@ -204,7 +177,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 172);
+            this.label9.Location = new System.Drawing.Point(12, 249);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(107, 15);
             this.label9.TabIndex = 18;
@@ -212,7 +185,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // txtpayee
             // 
-            this.txtpayee.Location = new System.Drawing.Point(142, 142);
+            this.txtpayee.Location = new System.Drawing.Point(142, 214);
             this.txtpayee.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtpayee.MaxLength = 150;
             this.txtpayee.Name = "txtpayee";
@@ -223,7 +196,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // txtnature
             // 
-            this.txtnature.Location = new System.Drawing.Point(142, 169);
+            this.txtnature.Location = new System.Drawing.Point(142, 246);
             this.txtnature.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtnature.MaxLength = 150;
             this.txtnature.Multiline = true;
@@ -233,28 +206,10 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.txtnature.Validating += new System.ComponentModel.CancelEventHandler(this.txtnature_Validating);
             this.txtnature.Validated += new System.EventHandler(this.txtnature_Validated);
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(12, 268);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(84, 15);
-            this.label10.TabIndex = 23;
-            this.label10.Text = "Trust Liabilities";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(11, 295);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(92, 15);
-            this.label11.TabIndex = 24;
-            this.label11.Text = "BIR Vat/Non-Vat";
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(12, 241);
+            this.label12.Location = new System.Drawing.Point(12, 324);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(51, 15);
             this.label12.TabIndex = 25;
@@ -264,42 +219,10 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // txttrust
-            // 
-            this.txttrust.DecimalPlaces = 2;
-            this.txttrust.Location = new System.Drawing.Point(142, 267);
-            this.txttrust.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txttrust.Maximum = new decimal(new int[] {
-            1316134911,
-            2328,
-            0,
-            0});
-            this.txttrust.Name = "txttrust";
-            this.txttrust.Size = new System.Drawing.Size(501, 23);
-            this.txttrust.TabIndex = 9;
-            this.txttrust.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txttrust.Validating += new System.ComponentModel.CancelEventHandler(this.txttrust_Validating);
-            this.txttrust.Validated += new System.EventHandler(this.txttrust_Validated);
-            // 
-            // txtvat
-            // 
-            this.txtvat.DecimalPlaces = 2;
-            this.txtvat.Location = new System.Drawing.Point(142, 294);
-            this.txtvat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtvat.Maximum = new decimal(new int[] {
-            1316134911,
-            2328,
-            0,
-            0});
-            this.txtvat.Name = "txtvat";
-            this.txtvat.Size = new System.Drawing.Size(501, 23);
-            this.txtvat.TabIndex = 10;
-            this.txtvat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // txtamount
             // 
             this.txtamount.DecimalPlaces = 2;
-            this.txtamount.Location = new System.Drawing.Point(142, 240);
+            this.txtamount.Location = new System.Drawing.Point(142, 322);
             this.txtamount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtamount.Maximum = new decimal(new int[] {
             1316134911,
@@ -315,10 +238,10 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             this.cmbfund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfund.FormattingEnabled = true;
-            this.cmbfund.Location = new System.Drawing.Point(142, 34);
+            this.cmbfund.Location = new System.Drawing.Point(142, 50);
             this.cmbfund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbfund.Name = "cmbfund";
-            this.cmbfund.Size = new System.Drawing.Size(501, 23);
+            this.cmbfund.Size = new System.Drawing.Size(254, 23);
             this.cmbfund.TabIndex = 26;
             this.cmbfund.Validating += new System.ComponentModel.CancelEventHandler(this.cmbfund_Validating);
             this.cmbfund.Validated += new System.EventHandler(this.cmbfund_Validated);
@@ -327,51 +250,74 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             this.cmbbank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbbank.FormattingEnabled = true;
-            this.cmbbank.Location = new System.Drawing.Point(142, 88);
+            this.cmbbank.Location = new System.Drawing.Point(142, 82);
             this.cmbbank.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbbank.Name = "cmbbank";
-            this.cmbbank.Size = new System.Drawing.Size(501, 23);
+            this.cmbbank.Size = new System.Drawing.Size(254, 23);
             this.cmbbank.TabIndex = 27;
             this.cmbbank.Validating += new System.ComponentModel.CancelEventHandler(this.cmbbank_Validating);
             this.cmbbank.Validated += new System.EventHandler(this.cmbbank_Validated);
+            // 
+            // txtObno
+            // 
+            this.txtObno.FormattingEnabled = true;
+            this.txtObno.Location = new System.Drawing.Point(416, 18);
+            this.txtObno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtObno.Name = "txtObno";
+            this.txtObno.Size = new System.Drawing.Size(146, 23);
+            this.txtObno.TabIndex = 28;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(416, 50);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(228, 87);
+            this.dataGridView1.TabIndex = 29;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(568, 18);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 30;
+            this.button1.Text = "Add";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // ucRCI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.txtObno);
             this.Controls.Add(this.cmbbank);
             this.Controls.Add(this.cmbfund);
             this.Controls.Add(this.txtamount);
-            this.Controls.Add(this.txtvat);
-            this.Controls.Add(this.txttrust);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.label10);
             this.Controls.Add(this.txtnature);
             this.Controls.Add(this.txtpayee);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtdvno);
-            this.Controls.Add(this.txtObno);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dtcheckdate);
             this.Controls.Add(this.txtcheckno);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.btnfunction);
             this.Controls.Add(this.txtfunction);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.dataGridView1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucRCI";
-            this.Size = new System.Drawing.Size(667, 333);
+            this.Size = new System.Drawing.Size(667, 354);
             this.Load += new System.EventHandler(this.ucRCI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txttrust)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtvat)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtamount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -382,28 +328,25 @@ namespace AccountingSystem.Views.Transactions.RCI
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnfunction;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ErrorProvider errorProvider;
         internal System.Windows.Forms.TextBox txtfunction;
         internal System.Windows.Forms.TextBox txtcheckno;
         internal System.Windows.Forms.DateTimePicker dtcheckdate;
-        internal System.Windows.Forms.TextBox txtObno;
         internal System.Windows.Forms.TextBox txtdvno;
         internal System.Windows.Forms.TextBox txtpayee;
         internal System.Windows.Forms.TextBox txtnature;
         internal System.Windows.Forms.NumericUpDown txtamount;
-        internal System.Windows.Forms.NumericUpDown txtvat;
-        internal System.Windows.Forms.NumericUpDown txttrust;
         internal System.Windows.Forms.ComboBox cmbbank;
         internal System.Windows.Forms.ComboBox cmbfund;
+        internal System.Windows.Forms.ComboBox txtObno;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button button1;
     }
 }

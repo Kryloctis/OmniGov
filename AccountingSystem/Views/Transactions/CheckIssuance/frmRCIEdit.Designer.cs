@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Transactions.RCI
 {
-    partial class frmRCIAdd
+    partial class frmRCIEdit
     {
         /// <summary>
         /// Required designer variable.
@@ -47,7 +47,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.flowLayoutPanel1.Size = new System.Drawing.Size(682, 27);
-            this.flowLayoutPanel1.TabIndex = 4;
+            this.flowLayoutPanel1.TabIndex = 5;
             // 
             // btnCancel
             // 
@@ -77,35 +77,36 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // ucrci1
             // 
-            this.ucrci1.Location = new System.Drawing.Point(12, 11);
+            this.ucrci1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucrci1.Location = new System.Drawing.Point(0, 0);
             this.ucrci1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucrci1.Name = "ucrci1";
-            this.ucrci1.Size = new System.Drawing.Size(670, 329);
-            this.ucrci1.TabIndex = 5;
+            this.ucrci1.Size = new System.Drawing.Size(682, 351);
+            this.ucrci1.TabIndex = 6;
             // 
-            // frmRCIAdd
+            // frmRCIEdit
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(682, 378);
             this.Controls.Add(this.ucrci1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "frmRCIAdd";
+            this.Name = "frmRCIEdit";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Check Issuance";
-            this.Load += new System.EventHandler(this.frmRCIAdd_Load);
+            this.Text = "Edit Check Issuance";
+            this.Load += new System.EventHandler(this.frmRCIEdit_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;

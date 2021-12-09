@@ -48,8 +48,6 @@ namespace AccountingSystem.Views.Transactions.RCI
                     DvNo = uc.txtdvno.Text.Trim(),
                     Payee = uc.txtpayee.Text.Trim(),
                     NaturePayment = uc.txtnature.Text.Trim(),
-                    TrustLiabilities = Convert.ToDecimal(uc.txttrust.Value),
-                    BirVatNonVat = Convert.ToDecimal(uc.txtvat.Value),
                     Amount = Convert.ToDecimal(uc.txtamount.Value)
                 };
 
