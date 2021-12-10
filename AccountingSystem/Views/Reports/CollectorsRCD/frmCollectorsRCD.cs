@@ -252,7 +252,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            _ = new frmCDReport("30").ShowDialog();
+            _ = new frmCDReport("40").ShowDialog();
         }
 
         private void btnDisapprove_Click(object sender, EventArgs e)

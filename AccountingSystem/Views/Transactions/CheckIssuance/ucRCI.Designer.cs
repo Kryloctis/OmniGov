@@ -279,8 +279,10 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.obligation_no,
             this.options});
             this.dgObligationNoList.Location = new System.Drawing.Point(416, 50);
+            this.dgObligationNoList.MultiSelect = false;
             this.dgObligationNoList.Name = "dgObligationNoList";
             this.dgObligationNoList.RowTemplate.Height = 25;
+            this.dgObligationNoList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgObligationNoList.Size = new System.Drawing.Size(227, 87);
             this.dgObligationNoList.TabIndex = 3;
             this.dgObligationNoList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgObligationNoList_CellContentClick);

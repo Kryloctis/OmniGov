@@ -73,17 +73,16 @@ namespace AccountingSystem.Views.Transactions.RCI
             }
         }
 
-        private void SaveDVObligations()
+        internal void SaveDVObligations()
         {
             try
             {
-                short rcid = 1;
+                short rcid = 6;
                 string obligationNo = String.Empty;
 
-                foreach (DataGridViewRow item in ucrci1.dgObligationNoList.Rows)
+                foreach (DataGridViewRow item in uc.dgObligationNoList.Rows)
                 {
                     obligationNo = item.Cells["obligation_no"].Value.ToString();
-
                     Factory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo);
                 }
             }

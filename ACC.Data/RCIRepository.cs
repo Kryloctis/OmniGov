@@ -46,7 +46,10 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT * FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.banks_id LEFT JOIN {tableName3} ON {tableName3}.id={tableName}.funds_id LEFT JOIN {tableName4} ON {tableName4}.id={tableName}.function_program_project_id LEFT JOIN {tableName5} ON {tableName5}.id={tableName4}.functional_classification_services_id LEFT JOIN {tableName6} ON {tableName6}.id={tableName5}.functional_classifications_id WHERE {tableName}.id = @id";
+                //string query = $"SELECT * FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.banks_id LEFT JOIN {tableName3} ON {tableName3}.id={tableName}.funds_id LEFT JOIN {tableName4} ON {tableName4}.id={tableName}.function_program_project_id LEFT JOIN {tableName5} ON {tableName5}.id={tableName4}.functional_classification_services_id LEFT JOIN {tableName6} ON {tableName6}.id={tableName5}.functional_classifications_id WHERE {tableName}.id = @id";
+
+
+                string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -55,15 +58,13 @@ namespace ACC.Data
 
                     record.Add("check_date", reader.Rows[0]["check_date"].ToString());
                     record.Add("check_no", reader.Rows[0]["check_no"].ToString());
-                    record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
-                    record.Add("banks_id", reader.Rows[0]["banks_id"].ToString());
+                    record.Add("fund_id", reader.Rows[0]["fund_id"].ToString());
+                    record.Add("bank_id", reader.Rows[0]["bank_id"].ToString());
                     record.Add("dv_no", reader.Rows[0]["dv_no"].ToString());
                     record.Add("payee", reader.Rows[0]["payee"].ToString());
                     record.Add("nature_of_payment", reader.Rows[0]["nature_of_payment"].ToString());
                     record.Add("obligation_no", reader.Rows[0]["obligation_no"].ToString());
                     record.Add("function_program_project_id", reader.Rows[0]["function_program_project_id"].ToString());
-                    record.Add("trust_liabilities", reader.Rows[0]["trust_liabilities"].ToString());
-                    record.Add("bir_vat_nonvat", reader.Rows[0]["bir_vat_nonvat"].ToString());
                     record.Add("amount", reader.Rows[0]["amount"].ToString());
                     record.Add("created_at", reader.Rows[0]["created_at"].ToString());
                     record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
@@ -168,7 +169,22 @@ namespace ACC.Data
                     new object[] { "@amount", DbType.Decimal, entity.Amount}
                 };
 
-                string query = $"UPDATE {tableName} SET banks_id=@banks_id,funds_id=@funds_id,function_program_project_id=@function_program_project_id,check_date=@check_date,check_no=@check_no,dv_no=@dv_no,payee=@payee,nature_of_payment=@nature_of_payment,obligation_no=@obligation_no,trust_liabilities=@trust_liabilities,bir_vat_nonvat=@bir_vat_nonvat,amount=@amount WHERE id = @id";
+                string query = $"UPDATE {tableName} " +
+                    $"SET " +
+                    $"banks_id = @banks_id, " +
+                    $"funds_id = @funds_id, " +
+                    $"function_program_project_id = @function_program_project_id, " +
+                    $"check_date = @check_date, " +
+                    $"check_no = @check_no, " +
+                    $"dv_no = @dv_no, " +
+                    $"payee=@payee, " +
+                    $"nature_of_payment = @nature_of_payment, " +
+                    $"amount= @amount " +
+                    $"WHERE id = @id";
+
+                //string query = $"UPDATE {tableName } SET " +
+                //    $"ban";
+                
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -247,14 +263,14 @@ namespace ACC.Data
         {
             try
             {
-                var srchtxt = searchText;
+                var parameter = new object[][] {
+                    new object[] { "@searchTxt", DbType.String, $"%{searchText}%"}
+                };
 
-                //string query = $"SELECT {tableName}.id,{tableName2}.account_no,{tableName2}.bank_name,{tableName}.check_date,{tableName}.check_no,{tableName}.dv_no,{tableName}.payee,{tableName}.nature_of_payment,{tableName4}.fpp_code,{tableName}.obligation_no,{tableName}.trust_liabilities,{tableName}.bir_vat_nonvat,{tableName}.amount,{tableName}.created_at,{tableName}.updated_at FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.banks_id LEFT JOIN {tableName3} ON {tableName3}.id={tableName}.funds_id LEFT JOIN {tableName4} ON {tableName4}.id={tableName}.function_program_project_id LEFT JOIN {tableName5} ON {tableName5}.id={tableName4}.functional_classification_services_id LEFT JOIN {tableName6} ON {tableName6}.id={tableName5}.functional_classifications_id WHERE {tableName2}.account_no  LIKE'%{srchtxt}%' OR {tableName2}.bank_name  LIKE'%{srchtxt}%' OR {tableName3}.fund_code  LIKE'%{srchtxt}%' OR {tableName4}.fpp_code  LIKE'%{srchtxt}%' OR {tableName4}.fpp_name  LIKE'%{srchtxt}%' OR {tableName}.payee  LIKE'%{srchtxt}%' OR {tableName}.nature_of_payment  LIKE'%{srchtxt}%'";
-
-                string query = $"SELECT * FROM {viewTableName} WHERE payee LIKE '%{ searchText }%'";
+                string query = $"SELECT * FROM {viewTableName} WHERE payee LIKE @searchTxt";
 
                 var dtRCI = new DataTable();
-                return _dbGenericCommands.Fill(query, dtRCI);
+                return _dbGenericCommands.FillBySearch(query, dtRCI, parameter);
             }
             catch (Exception)
             {

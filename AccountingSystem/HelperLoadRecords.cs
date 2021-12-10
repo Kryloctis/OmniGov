@@ -666,25 +666,38 @@ namespace AccountingSystem
         {
             datagrid.DataSource = dataTable;
 
-            datagrid.Columns[0].Visible = false;
             datagrid.Columns[0].HeaderText = "Id ";
-            datagrid.Columns[1].HeaderText = "Account No.";
-            datagrid.Columns[2].HeaderText = "Bank Name";
-            datagrid.Columns[3].HeaderText = "Check Date";
-            datagrid.Columns[4].HeaderText = "Check Number";
-            datagrid.Columns[5].HeaderText = "DV No.";
-            datagrid.Columns[6].HeaderText = "Payee";
-            datagrid.Columns[7].HeaderText = "Nature of Payment";
-            datagrid.Columns[8].HeaderText = "Obligation/s No. ";
-            datagrid.Columns[9].HeaderText = "Functional Code";
-            datagrid.Columns[10].HeaderText = "Amount";
-            datagrid.Columns[10].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[10].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[1].HeaderText = "Bank Id ";
+            datagrid.Columns[2].HeaderText = "Account No.";
+            datagrid.Columns[3].HeaderText = "Bank Name";
+            datagrid.Columns[4].HeaderText = "Fund Id";
+            datagrid.Columns[5].HeaderText = "Fund";
+            datagrid.Columns[6].HeaderText = "Check Date";
+            datagrid.Columns[7].HeaderText = "Check No.";
+            datagrid.Columns[8].HeaderText = "DV No.";
+            datagrid.Columns[9].HeaderText = "Payee";
+            datagrid.Columns[10].HeaderText = "Nature of Payment";
+            datagrid.Columns[11].HeaderText = "Obligation No.";
+            datagrid.Columns[12].HeaderText = "FPP Id";
+            datagrid.Columns[13].HeaderText = "Functional Code";
+            datagrid.Columns[14].HeaderText = "Amount";
+            datagrid.Columns[14].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[14].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[15].HeaderText = "Created at";
+            datagrid.Columns[16].HeaderText = "Updated at";
 
-            datagrid.Columns[11].HeaderText = "Created at";
-            datagrid.Columns[12].HeaderText = "Updated at";
-            datagrid.Columns[11].Visible = false;
+
+
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].Visible = false;
+            datagrid.Columns[4].Visible = false;
             datagrid.Columns[12].Visible = false;
+            datagrid.Columns[11].Visible = false;
+            datagrid.Columns[15].Visible = false;
+            datagrid.Columns[16].Visible = false;
+
+
+
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion

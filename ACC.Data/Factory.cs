@@ -84,6 +84,8 @@ namespace AccountingSystem
 
         public static IBanksRepository BanksRepository() => new BanksRepository(new MySqlGenericCommands());
 
+        public static IRCIObligationsRepository RCIObligationsRepository() => new RCIObligationsRepository(new MySqlGenericCommands());
+
         public static IRCIRepository RCIRepository() => new RCIRepository(new MySqlGenericCommands());
 
         public static IAccountableRepository AccountableRepository() => new AccountableRepository(new MySqlGenericCommands());

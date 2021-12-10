@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         {
             var dtPC = new dsLFS.dtRCDDataTable();
             //var dt = Factory.GeneralCollectionsRepository().GetRecordByData(rcdId);
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByData("37");
+            var dt = Factory.GeneralCollectionsRepository().GetRecordByData(_rcdId);
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         private DataTable DataTableForms(int id)
         {
             var dtPC = new dsLFS.dtRCDFormsDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByForms(37);
+            var dt = Factory.GeneralCollectionsRepository().GetRecordByForms(Convert.ToInt32(_rcdId));
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
@@ -83,7 +83,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         private DataTable DataTableCollections(int rcdNo)
         {
             var dtPC = new dsLFS.dtRCDCollectionsDataTable();
-            var dt = Factory.GeneralCollectionsPaymentsRepository().GetCollectionPaymentByRCDNo("RCD-100-001");
+            var dt = Factory.GeneralCollectionsPaymentsRepository().GetCollectionPaymentByRCDNo("RCD-002");
 
             if (dt.Rows.Count > 0)
             {

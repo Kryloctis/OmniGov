@@ -72,7 +72,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
         internal void LoadBanks()
         {
             try
@@ -86,7 +85,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
         internal void setSelectedValue(int Id, string table)
         {
             try
@@ -105,18 +103,15 @@ namespace AccountingSystem.Views.Transactions.RCI
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
         public void loadSelectedFunction(int Id,string value)
         {
             functionId = Id;
             txtfunction.Text = value;
         }
-
         private void btncharge_Click(object sender, EventArgs e)
         {
             _ = new frmFind(this, "banks").ShowDialog();
         }
-
         private void txtdvno_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtdvno, "disbursement no.");
