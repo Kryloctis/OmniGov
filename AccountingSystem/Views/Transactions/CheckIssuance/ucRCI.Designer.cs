@@ -95,7 +95,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.txtfunction.Name = "txtfunction";
             this.txtfunction.ReadOnly = true;
             this.txtfunction.Size = new System.Drawing.Size(501, 23);
-            this.txtfunction.TabIndex = 3;
+            this.txtfunction.TabIndex = 4;
             this.txtfunction.DoubleClick += new System.EventHandler(this.txtfunction_DoubleClick);
             this.txtfunction.Validating += new System.ComponentModel.CancelEventHandler(this.txtfunction_Validating);
             this.txtfunction.Validated += new System.EventHandler(this.txtfunction_Validated);
@@ -125,7 +125,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.txtcheckno.MaxLength = 15;
             this.txtcheckno.Name = "txtcheckno";
             this.txtcheckno.Size = new System.Drawing.Size(254, 23);
-            this.txtcheckno.TabIndex = 5;
+            this.txtcheckno.TabIndex = 3;
             this.txtcheckno.Validating += new System.ComponentModel.CancelEventHandler(this.txtcheckno_Validating);
             this.txtcheckno.Validated += new System.EventHandler(this.txtcheckno_Validated);
             // 
@@ -135,7 +135,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.dtcheckdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtcheckdate.Name = "dtcheckdate";
             this.dtcheckdate.Size = new System.Drawing.Size(501, 23);
-            this.dtcheckdate.TabIndex = 6;
+            this.dtcheckdate.TabIndex = 5;
             this.dtcheckdate.Validating += new System.ComponentModel.CancelEventHandler(this.dtcheckdate_Validating);
             this.dtcheckdate.Validated += new System.EventHandler(this.dtcheckdate_Validated);
             // 
@@ -234,7 +234,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             0});
             this.txtamount.Name = "txtamount";
             this.txtamount.Size = new System.Drawing.Size(501, 23);
-            this.txtamount.TabIndex = 11;
+            this.txtamount.TabIndex = 9;
             this.txtamount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // cmbfund
@@ -245,7 +245,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.cmbfund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbfund.Name = "cmbfund";
             this.cmbfund.Size = new System.Drawing.Size(254, 23);
-            this.cmbfund.TabIndex = 26;
+            this.cmbfund.TabIndex = 2;
             this.cmbfund.Validating += new System.ComponentModel.CancelEventHandler(this.cmbfund_Validating);
             this.cmbfund.Validated += new System.EventHandler(this.cmbfund_Validated);
             // 
@@ -257,7 +257,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.cmbbank.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbbank.Name = "cmbbank";
             this.cmbbank.Size = new System.Drawing.Size(254, 23);
-            this.cmbbank.TabIndex = 27;
+            this.cmbbank.TabIndex = 2;
             this.cmbbank.Validating += new System.ComponentModel.CancelEventHandler(this.cmbbank_Validating);
             this.cmbbank.Validated += new System.EventHandler(this.cmbbank_Validated);
             // 
@@ -268,7 +268,8 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.txtObno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtObno.Name = "txtObno";
             this.txtObno.Size = new System.Drawing.Size(146, 23);
-            this.txtObno.TabIndex = 28;
+            this.txtObno.TabIndex = 1;
+            this.txtObno.TextChanged += new System.EventHandler(this.txtObno_TextChanged);
             // 
             // dgObligationNoList
             // 
@@ -281,7 +282,8 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.dgObligationNoList.Name = "dgObligationNoList";
             this.dgObligationNoList.RowTemplate.Height = 25;
             this.dgObligationNoList.Size = new System.Drawing.Size(227, 87);
-            this.dgObligationNoList.TabIndex = 29;
+            this.dgObligationNoList.TabIndex = 3;
+            this.dgObligationNoList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgObligationNoList_CellContentClick);
             // 
             // obligation_no
             // 
@@ -291,18 +293,20 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // options
             // 
-            this.options.HeaderText = "Option";
+            this.options.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.options.FillWeight = 50F;
+            this.options.HeaderText = "";
             this.options.Name = "options";
             this.options.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.options.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.options.Width = 50;
             // 
             // btnAdd
             // 
+            this.btnAdd.Enabled = false;
             this.btnAdd.Location = new System.Drawing.Point(568, 18);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 30;
+            this.btnAdd.TabIndex = 2;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);

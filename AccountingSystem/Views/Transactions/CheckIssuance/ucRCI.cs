@@ -18,6 +18,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         internal int bankId = 0;
         internal int fundsId = 0;
         internal int functionId = 0;
+
         public ucRCI()
         {
             InitializeComponent();
@@ -111,7 +112,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             txtfunction.Text = value;
         }
 
-
         private void btncharge_Click(object sender, EventArgs e)
         {
             _ = new frmFind(this, "banks").ShowDialog();
@@ -119,14 +119,14 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void txtdvno_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtdvno, "disbursement no.!");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtdvno, "disbursement no.");
         }
 
         private void txtfunction_Validating(object sender, CancelEventArgs e)
         {
             if (!txtfunction.Focused)
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtfunction, "function.!");
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtfunction, "fpp.");
                 if (functionId <= 0)
                 {
                     errorProvider.SetError(txtfunction, "Please select function!");
@@ -203,7 +203,7 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void cmbfund_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbfund, "Fund!");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbfund, "Fund.");
         }
 
         private void cmbbank_Validated(object sender, EventArgs e)
@@ -219,14 +219,33 @@ namespace AccountingSystem.Views.Transactions.RCI
         private void btnAdd_Click(object sender, EventArgs e)
         {
             var obligationNo = txtObno.Text.Trim();
-            dgObligationNoList.Rows.Add(obligationNo, "Remove");
 
+            if (String.IsNullOrEmpty(obligationNo))
+                return;
+
+            dgObligationNoList.Rows.Add(obligationNo, "Remove");
             txtObno.Text = String.Empty;
+            txtObno.Focus();
         }
 
         private void txtfunction_DoubleClick(object sender, EventArgs e)
         {
             _ = new frmFind(this,  "functions").ShowDialog();
+        }
+
+        private void dgObligationNoList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                int rowIndex = dgObligationNoList.CurrentCell.RowIndex;
+                dgObligationNoList.Rows.RemoveAt(rowIndex);
+            }
+        }
+
+        private void txtObno_TextChanged(object sender, EventArgs e)
+        {
+            btnAdd.Enabled = !string.IsNullOrEmpty(txtObno.Text.Trim());
         }
     }
 }

@@ -14,10 +14,13 @@ namespace AccountingSystem.Views.Transactions.RCI
     public partial class frmRCIAdd : Form
     {
         private frmRCI _frmrci;
+        private readonly ucRCI uc;
         public frmRCIAdd(frmRCI frmrci)
         {
             InitializeComponent();
             _frmrci = frmrci;
+
+            uc = ucrci1;
         }
 
         private void frmRCIAdd_Load(object sender, EventArgs e)
@@ -30,7 +33,6 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             try
             {
-                var uc = ucrci1;
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
