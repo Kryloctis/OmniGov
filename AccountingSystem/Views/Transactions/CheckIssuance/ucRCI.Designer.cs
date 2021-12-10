@@ -51,11 +51,13 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.cmbfund = new System.Windows.Forms.ComboBox();
             this.cmbbank = new System.Windows.Forms.ComboBox();
             this.txtObno = new System.Windows.Forms.ComboBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.dgObligationNoList = new System.Windows.Forms.DataGridView();
+            this.obligation_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.options = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnAdd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtamount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgObligationNoList)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -94,6 +96,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.txtfunction.ReadOnly = true;
             this.txtfunction.Size = new System.Drawing.Size(501, 23);
             this.txtfunction.TabIndex = 3;
+            this.txtfunction.DoubleClick += new System.EventHandler(this.txtfunction_DoubleClick);
             this.txtfunction.Validating += new System.ComponentModel.CancelEventHandler(this.txtfunction_Validating);
             this.txtfunction.Validated += new System.EventHandler(this.txtfunction_Validated);
             // 
@@ -267,29 +270,49 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.txtObno.Size = new System.Drawing.Size(146, 23);
             this.txtObno.TabIndex = 28;
             // 
-            // dataGridView1
+            // dgObligationNoList
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(416, 50);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(228, 87);
-            this.dataGridView1.TabIndex = 29;
+            this.dgObligationNoList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgObligationNoList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgObligationNoList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.obligation_no,
+            this.options});
+            this.dgObligationNoList.Location = new System.Drawing.Point(416, 50);
+            this.dgObligationNoList.Name = "dgObligationNoList";
+            this.dgObligationNoList.RowTemplate.Height = 25;
+            this.dgObligationNoList.Size = new System.Drawing.Size(227, 87);
+            this.dgObligationNoList.TabIndex = 29;
             // 
-            // button1
+            // obligation_no
             // 
-            this.button1.Location = new System.Drawing.Point(568, 18);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 30;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
+            this.obligation_no.HeaderText = "Obligation No.";
+            this.obligation_no.Name = "obligation_no";
+            this.obligation_no.Width = 140;
+            // 
+            // options
+            // 
+            this.options.HeaderText = "Option";
+            this.options.Name = "options";
+            this.options.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.options.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.options.Width = 50;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(568, 18);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.TabIndex = 30;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // ucRCI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.dgObligationNoList);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.txtObno);
             this.Controls.Add(this.cmbbank);
             this.Controls.Add(this.cmbfund);
@@ -310,14 +333,13 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dataGridView1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucRCI";
-            this.Size = new System.Drawing.Size(667, 354);
+            this.Size = new System.Drawing.Size(671, 354);
             this.Load += new System.EventHandler(this.ucRCI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtamount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgObligationNoList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -346,7 +368,10 @@ namespace AccountingSystem.Views.Transactions.RCI
         internal System.Windows.Forms.ComboBox cmbbank;
         internal System.Windows.Forms.ComboBox cmbfund;
         internal System.Windows.Forms.ComboBox txtObno;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn obligation_no;
+        private System.Windows.Forms.DataGridViewButtonColumn options;
+        internal System.Windows.Forms.DataGridView dgObligationNoList;
     }
 }

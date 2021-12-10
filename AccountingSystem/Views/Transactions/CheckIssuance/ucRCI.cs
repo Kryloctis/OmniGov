@@ -21,6 +21,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         public ucRCI()
         {
             InitializeComponent();
+            Helper.DatagridFullRowSelectStyle(dgObligationNoList, true);
         }
 
         private void ucRCI_Load(object sender, EventArgs e)
@@ -84,6 +85,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
         internal void setSelectedValue(int Id, string table)
         {
             try
@@ -194,7 +196,6 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
 
         }
-
         private void cmbfund_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(errorProvider, cmbfund);
@@ -213,6 +214,19 @@ namespace AccountingSystem.Views.Transactions.RCI
         private void cmbbank_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbbank, "Bank!");
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            var obligationNo = txtObno.Text.Trim();
+            dgObligationNoList.Rows.Add(obligationNo, "Remove");
+
+            txtObno.Text = String.Empty;
+        }
+
+        private void txtfunction_DoubleClick(object sender, EventArgs e)
+        {
+            _ = new frmFind(this,  "functions").ShowDialog();
         }
     }
 }

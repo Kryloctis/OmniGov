@@ -18,6 +18,18 @@ namespace ACC.Data
         private readonly string tableName4 = "function_program_project";
         private readonly string tableName5 = "functional_classification_services";
         private readonly string tableName6 = "functional_classifications";
+
+
+        private readonly string tableRCIObligations = "rci_obligations";
+
+
+        private readonly string viewTableName = "view_rci";
+
+
+
+
+
+
         public RCIRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -69,7 +81,9 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableName}.id,{tableName2}.account_no,{tableName2}.bank_name,{tableName}.check_date,{tableName}.check_no,{tableName}.dv_no,{tableName}.payee,{tableName}.nature_of_payment,{tableName}.obligation_no,{tableName4}.fpp_code,{tableName}.trust_liabilities,{tableName}.bir_vat_nonvat,{tableName}.amount,{tableName}.amount-{tableName}.bir_vat_nonvat AS netamount,{tableName}.created_at,{tableName}.updated_at FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.banks_id LEFT JOIN {tableName3} ON {tableName3}.id={tableName}.funds_id LEFT JOIN {tableName4} ON {tableName4}.id={tableName}.function_program_project_id LEFT JOIN {tableName5} ON {tableName5}.id={tableName4}.functional_classification_services_id LEFT JOIN {tableName6} ON {tableName6}.id={tableName5}.functional_classifications_id";
+                //string query = $"SELECT {tableName}.id,{tableName2}.account_no,{tableName2}.bank_name,{tableName}.check_date,{tableName}.check_no,{tableName}.dv_no,{tableName}.payee,{tableName}.nature_of_payment,{tableName}.obligation_no,{tableName4}.fpp_code,{tableName}.trust_liabilities,{tableName}.bir_vat_nonvat,{tableName}.amount,{tableName}.amount-{tableName}.bir_vat_nonvat AS netamount,{tableName}.created_at,{tableName}.updated_at FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.banks_id LEFT JOIN {tableName3} ON {tableName3}.id={tableName}.funds_id LEFT JOIN {tableName4} ON {tableName4}.id={tableName}.function_program_project_id LEFT JOIN {tableName5} ON {tableName5}.id={tableName4}.functional_classification_services_id LEFT JOIN {tableName6} ON {tableName6}.id={tableName5}.functional_classifications_id";
+
+                string query = $"SELECT * FROM {viewTableName}";
 
                 var dtRCI = new DataTable();
                 return _dbGenericCommands.Fill(query, dtRCI);
@@ -110,13 +124,23 @@ namespace ACC.Data
                     new object[] { "@dv_no", DbType.String, entity.DvNo},
                     new object[] { "@payee", DbType.String, entity.Payee},
                     new object[] { "@nature_of_payment", DbType.String, entity.NaturePayment},
-                    new object[] { "@obligation_no", DbType.String, entity.ObNo},
-                    new object[] { "@trust_liabilities", DbType.Decimal, entity.TrustLiabilities},
-                    new object[] { "@bir_vat_nonvat", DbType.Decimal, entity.BirVatNonVat},
                     new object[] { "@amount", DbType.Decimal, entity.Amount}
                 };
 
-                string query = $"INSERT INTO {tableName} (banks_id,funds_id,function_program_project_id,check_date,check_no,dv_no,payee,nature_of_payment,obligation_no,trust_liabilities,bir_vat_nonvat,amount) VALUES (@banks_id,@funds_id,@function_program_project_id,@check_date,@check_no,@dv_no,@payee,@nature_of_payment,@obligation_no,@trust_liabilities,@bir_vat_nonvat,@amount)";
+                string query =  $"INSERT INTO {tableName} " +
+                                $"(banks_id, funds_id, function_program_project_id, check_date,check_no, dv_no,payee, nature_of_payment,amount) " +
+                                $"VALUES(" +
+                                $"@banks_id, " +
+                                $"@funds_id, " +
+                                $"@function_program_project_id, " +
+                                $"@check_date, " +
+                                $"@check_no, " +
+                                $"@dv_no, " +
+                                $"@payee, " +
+                                $"@nature_of_payment, " +
+                                $"@amount)";
+
+
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -141,9 +165,6 @@ namespace ACC.Data
                     new object[] { "@dv_no", DbType.String, entity.DvNo},
                     new object[] { "@payee", DbType.String, entity.Payee},
                     new object[] { "@nature_of_payment", DbType.String, entity.NaturePayment},
-                    new object[] { "@obligation_no", DbType.String, entity.ObNo},
-                    new object[] { "@trust_liabilities", DbType.Decimal, entity.TrustLiabilities},
-                    new object[] { "@bir_vat_nonvat", DbType.Decimal, entity.BirVatNonVat},
                     new object[] { "@amount", DbType.Decimal, entity.Amount}
                 };
 
@@ -247,6 +268,31 @@ namespace ACC.Data
 
                 var dtRCI = new DataTable();
                 return _dbGenericCommands.Fill(query, dtRCI);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        public bool SaveRCIDVObligations(short rciId, string obligationNo)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@rciId", DbType.Int16, rciId},
+                    new object[] { "@obligationNo", DbType.String, obligationNo},
+                };
+
+                string query = $"INSERT INTO {tableRCIObligations} " +
+                                $"(rci_id, obligation_no) " +
+                                $"VALUES(" +
+                                $"@rciId, " +
+                                $"@obligationNo)";
+
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
             {

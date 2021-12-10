@@ -102,7 +102,7 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void dgRCI_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 13, 14 };
+            byte[] columnIndexTimestamp = { 11, 12 };
             Helper.ShowRecordTimestamp(dgRCI, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgRCI, btnEdit, btnDelete);
         }

@@ -44,7 +44,6 @@ namespace AccountingSystem.Views.Transactions.RCI
                     FunctionProgramProjectId = uc.functionId,
                     CheckNo = uc.txtcheckno.Text.Trim(),
                     CheckDate = Convert.ToDateTime(uc.dtcheckdate.Text.Trim()),
-                    ObNo = uc.txtObno.Text.Trim(),
                     DvNo = uc.txtdvno.Text.Trim(),
                     Payee = uc.txtpayee.Text.Trim(),
                     NaturePayment = uc.txtnature.Text.Trim(),
@@ -66,9 +65,35 @@ namespace AccountingSystem.Views.Transactions.RCI
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("RCI has been saved.");
+                SaveDVObligations();
                 _frmrci.LoadRecords();
                 ucrci1.ResetForm();
             }
         }
+
+        private void SaveDVObligations()
+        {
+            try
+            {
+                short rcid = 1;
+                string obligationNo = String.Empty;
+
+                foreach (DataGridViewRow item in ucrci1.dgObligationNoList.Rows)
+                {
+                    obligationNo = item.Cells["obligation_no"].Value.ToString();
+
+                    Factory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+
+
     }
 }

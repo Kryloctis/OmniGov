@@ -88,7 +88,6 @@ namespace AccountingSystem.Views.Transactions.RCI
                     FunctionProgramProjectId = uc.functionId,
                     CheckNo = uc.txtcheckno.Text.Trim(),
                     CheckDate = Convert.ToDateTime(uc.dtcheckdate.Text.Trim()),
-                    ObNo = uc.txtObno.Text.Trim(),
                     DvNo = uc.txtdvno.Text.Trim(),
                     Payee = uc.txtpayee.Text.Trim(),
                     NaturePayment = uc.txtnature.Text.Trim(),

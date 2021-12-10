@@ -15,10 +15,7 @@ namespace ACC.Domain.Models
         public string DvNo { get; set; }
         public string Payee { get; set; }
         public string NaturePayment { get; set; }
-        public string ObNo { get; set; }
         public decimal Amount { get; set; }
-        public decimal TrustLiabilities { get; set; }
-        public decimal BirVatNonVat { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }

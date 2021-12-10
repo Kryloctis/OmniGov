@@ -665,7 +665,9 @@ namespace AccountingSystem
         internal static void RCIDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
+
             datagrid.Columns[0].Visible = false;
+            datagrid.Columns[0].HeaderText = "Id ";
             datagrid.Columns[1].HeaderText = "Account No.";
             datagrid.Columns[2].HeaderText = "Bank Name";
             datagrid.Columns[3].HeaderText = "Check Date";
@@ -673,20 +675,16 @@ namespace AccountingSystem
             datagrid.Columns[5].HeaderText = "DV No.";
             datagrid.Columns[6].HeaderText = "Payee";
             datagrid.Columns[7].HeaderText = "Nature of Payment";
-            datagrid.Columns[8].HeaderText = "OBR No.";
+            datagrid.Columns[8].HeaderText = "Obligation/s No. ";
             datagrid.Columns[9].HeaderText = "Functional Code";
-            datagrid.Columns[10].HeaderText = "Trust Liabilities";
+            datagrid.Columns[10].HeaderText = "Amount";
             datagrid.Columns[10].DefaultCellStyle.Format = "N2";
             datagrid.Columns[10].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[11].HeaderText = "BIR VAT/Non-VAT";
-            datagrid.Columns[11].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[11].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[12].HeaderText = "Amount";
-            datagrid.Columns[12].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[12].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[13].Visible = false;
-            datagrid.Columns[14].Visible = false;
-            datagrid.Columns[15].Visible = false;
+
+            datagrid.Columns[11].HeaderText = "Created at";
+            datagrid.Columns[12].HeaderText = "Updated at";
+            datagrid.Columns[11].Visible = false;
+            datagrid.Columns[12].Visible = false;
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
