@@ -16,7 +16,7 @@ namespace AccountingSystem.Views.Transactions.RCI.Find
         internal string selectedValue = string.Empty;
         internal string table = string.Empty;
         private ucRCI frmrci;
-        public frmFind(ucRCI rci,string find)
+        public frmFind(ucRCI ? rci, string ? find)
         {
             InitializeComponent();
             Helper.DatagridDefaultStyle(dgSelect);

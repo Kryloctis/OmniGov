@@ -304,7 +304,7 @@ namespace AccountingSystem
 
         #region MessageBoxes
         // prompt a success messagebox
-
+        
         public static void MessageBoxWarning(string message)
         {
             _ = MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);

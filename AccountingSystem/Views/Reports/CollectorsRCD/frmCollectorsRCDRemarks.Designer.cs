@@ -31,8 +31,8 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnAccept = new System.Windows.Forms.Button();
             this.btnSaveMessage = new System.Windows.Forms.Button();
+            this.btnAccept = new System.Windows.Forms.Button();
             this.txtRemarks = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -41,8 +41,8 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
-            this.flowLayoutPanel1.Controls.Add(this.btnAccept);
             this.flowLayoutPanel1.Controls.Add(this.btnSaveMessage);
+            this.flowLayoutPanel1.Controls.Add(this.btnAccept);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 244);
@@ -59,25 +59,25 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // btnAccept
-            // 
-            this.btnAccept.Location = new System.Drawing.Point(354, 3);
-            this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(133, 23);
-            this.btnAccept.TabIndex = 0;
-            this.btnAccept.Text = "Accept && Edit";
-            this.btnAccept.UseVisualStyleBackColor = true;
-            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
-            // 
             // btnSaveMessage
             // 
-            this.btnSaveMessage.Location = new System.Drawing.Point(215, 3);
+            this.btnSaveMessage.Location = new System.Drawing.Point(354, 3);
             this.btnSaveMessage.Name = "btnSaveMessage";
             this.btnSaveMessage.Size = new System.Drawing.Size(133, 23);
             this.btnSaveMessage.TabIndex = 0;
             this.btnSaveMessage.Text = "Save Message";
             this.btnSaveMessage.UseVisualStyleBackColor = true;
             this.btnSaveMessage.Click += new System.EventHandler(this.btnSaveMessage_Click);
+            // 
+            // btnAccept
+            // 
+            this.btnAccept.Location = new System.Drawing.Point(215, 3);
+            this.btnAccept.Name = "btnAccept";
+            this.btnAccept.Size = new System.Drawing.Size(133, 23);
+            this.btnAccept.TabIndex = 0;
+            this.btnAccept.Text = "Accept && Edit";
+            this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
             // txtRemarks
             // 

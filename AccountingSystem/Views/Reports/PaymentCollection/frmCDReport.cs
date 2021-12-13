@@ -36,12 +36,11 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             reportViewer.RefreshReport();
         }
 
-
         private DataTable DataTableData(string rcdId)
         {
-
             var dtPC = new dsLFS.dtRCDDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByData(rcdId);
+            //var dt = Factory.GeneralCollectionsRepository().GetRecordByData(rcdId);
+            var dt = Factory.GeneralCollectionsRepository().GetRecordByData(_rcdId);
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
@@ -49,9 +48,10 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                     DataRow row = dtPC.NewRow();
                     row["rcdid"] = item["id"];
                     row["rcdno"] = item["rcd_no"];
-                    row["rcddate"] = item["rcd_date"];
-                    row["officer"] = item["officer"];
-                    row["fund"] = item["fund"];
+                    row["rcddate"] = item["date"];
+                    row["officer"] = item["user"];
+                    //row["fund"] = item["fund"];
+                    row["fund"] = "General Fund";
                     dtPC.Rows.Add(row);
                 }
             }
@@ -61,9 +61,8 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 
         private DataTable DataTableForms(int id)
         {
-
             var dtPC = new dsLFS.dtRCDFormsDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByForms(1);
+            var dt = Factory.GeneralCollectionsRepository().GetRecordByForms(Convert.ToInt32(_rcdId));
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
@@ -81,20 +80,20 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             return dtPC;
         }
 
-        private DataTable DataTableCollections(int id)
+        private DataTable DataTableCollections(int rcdNo)
         {
-
             var dtPC = new dsLFS.dtRCDCollectionsDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByCollections(id);
+            var dt = Factory.GeneralCollectionsPaymentsRepository().GetCollectionPaymentByRCDNo("RCD-002");
+
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
                 {
                     DataRow row = dtPC.NewRow();
                     row["rcdid"] = item["id"];
-                    row["collectorname"] = item["collector"];
+                    row["collectorname"] = item["collecting_officer"];
                     row["reportno"] = item["report_no"];
-                    row["amount"] = item["total"];
+                    row["amount"] = item["amount"];
                     dtPC.Rows.Add(row);
                 }
             }
@@ -104,15 +103,14 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 
         private DataTable DataTableDeposits(int id)
         {
-
             var dtPC = new dsLFS.dtRCDDepositsDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByDeposits(id);
+            var dt = Factory.GeneralCollectionsRepository().GetRecordByDeposits(2);
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
                 {
                     DataRow row = dtPC.NewRow();
-                    row["rcdid"] = item["id"];
+                    //row["rcdid"] = item["id"];
                     row["bankname"] = String.Format("{0} - {1}", item["bank_name"], item["account_no"]);
                     row["reference"] = item["reference"];
                     row["amount"] = item["amount"];
@@ -168,7 +166,6 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             {
                 Helper.MessageBoxError(ex.Message);
             }
-
         }
         private void Report_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
         {

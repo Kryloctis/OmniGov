@@ -3,12 +3,7 @@ using AccountingSystem.Views.Reports.PaymentCollection;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 using System.Windows.Forms;
 
@@ -23,6 +18,7 @@ namespace AccountingSystem.Views.Reports.RCD
         internal string reportNo;
         internal string rcdNo;
         internal string rcdId;
+        internal short reportQuantity;
 
 
         internal DateTime date;
@@ -34,7 +30,7 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgpayments, true);
+            Helper.DatagridFullRowSelectStyle(dgListOfApprovedReport, true);
         }
 
         private void btnadd_Click(object sender, EventArgs e)
@@ -49,19 +45,44 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void frmRCD_Load(object sender, EventArgs e)
         {
-
+            btnRemove.Enabled = dgListOfApprovedReport.Rows.Count != 0;
         }
 
-        internal void LoadSelectedRCD(string reportNo)
+
+        internal void LoadSelectedRCD(string rcdNo)
         {
             try
             {
-                var rcdRepository = Factory.CollectorReportRepository();
-                var rcdData = rcdRepository.GetRecordByID(reportNo);
+                var generalCollectionsPaymentRepo = Factory.GeneralCollectionsPaymentsRepository();
+                var dtRCD = generalCollectionsPaymentRepo.GetRecordsByRCDNO(rcdNo);
 
-                var collectionOfPaymentReportsRepo = Factory.CollectorReportPaymentsRepository();
-                var collectionOfPaymentReportDt = collectionOfPaymentReportsRepo.GetRecordsByReportNo(reportNo);
-                HelperLoadRecords.PaymentDatagridView(collectionOfPaymentReportDt, dgpayments);
+                string reportId = String.Empty;
+                string collectingOfficer = String.Empty;
+                string reportNo = String.Empty;
+                string reportNoChecker = String.Empty;
+                string amount = String.Empty;
+
+
+                foreach (DataRow row in dtRCD.Rows)
+                {
+                    reportId = row["collectors_report_id"].ToString();
+                    collectingOfficer = row["collecting_officer"].ToString();
+                    reportNo = row["report_no"].ToString();
+                    amount = Convert.ToDecimal(row["amount"].ToString()).ToString("N2");
+
+
+                    object[] reportRow = new object[]
+                    {
+                        reportId,
+                        collectingOfficer,
+                        reportNo,
+                        amount
+                    };
+
+                    dgListOfApprovedReport.Rows.Add(reportRow);
+                }
+
+
 
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -80,9 +101,12 @@ namespace AccountingSystem.Views.Reports.RCD
                 reportNo = rcdData["report_no"];
                 date = Convert.ToDateTime(rcdData["date"]);
 
-                var collectionOfPaymentReportsRepo = Factory.CollectorReportPaymentsRepository();
-                var collectionOfPaymentReportDt = collectionOfPaymentReportsRepo.GetRecordsByReportNo(reportNo);
-                HelperLoadRecords.PaymentDatagridView(collectionOfPaymentReportDt, dgpayments);
+                
+
+                var colectorRepository = Factory.CollectorReportRepository();
+                var dtrcd = new DataTable();
+                dtrcd = colectorRepository.FilterRecords(fundId, collectorId, reportNo);
+                HelperLoadRecords.RCDDatagridView(dtrcd, dgListOfApprovedReport);
 
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -101,12 +125,12 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void ResetForm()
         {
-            txtCollector.Text = string.Empty;
-            txtReport.Text = string.Empty;
             txtRCDNo.Text = string.Empty;
             dtpdate.Value = DateTime.Now;
 
-            dgpayments.Rows.Clear();
+            btnRemove.Enabled = false;
+
+            dgListOfApprovedReport.Rows.Clear();
             panelRCD.Enabled = true;
         }
 
@@ -132,15 +156,20 @@ namespace AccountingSystem.Views.Reports.RCD
                 if (!rcdSaveSuccess) return false;
 
                 var generalCollectionsId = GetGeneralCollectionsId();
-                var collectionsReportId = collectorsReportId;
+                
 
-                var generalCollectionPaymentModel = new GeneralCollectionPaymentsModel()
+                foreach (DataGridViewRow row in dgListOfApprovedReport.Rows)
                 {
-                    CollectorsReportId = collectionsReportId,
-                    GeneralCollectionsId = generalCollectionsId
-                };
+                    ushort collectionsReportId = (ushort)Convert.ToInt32(row.Cells["reportId"].Value);
 
-                Factory.GeneralCollectionsPaymentsRepository().Insert(generalCollectionPaymentModel);
+                    var generalCollectionPaymentModel = new GeneralCollectionPaymentsModel()
+                    {
+                        CollectorsReportId = collectionsReportId,
+                        GeneralCollectionsId = generalCollectionsId
+                    };
+
+                    Factory.GeneralCollectionsPaymentsRepository().Insert(generalCollectionPaymentModel);
+                }
                
                 scope.Complete();
                 return true;
@@ -156,7 +185,7 @@ namespace AccountingSystem.Views.Reports.RCD
          
         private bool ValidateInputs()
         {
-            bool hasError = String.IsNullOrEmpty(txtRCDNo.Text) || dgpayments.Rows.Count == 0;
+            bool hasError = String.IsNullOrEmpty(txtRCDNo.Text) || dgListOfApprovedReport.Rows.Count == 0;
             return hasError;
         }
 
@@ -174,5 +203,42 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             _ = new frmCDReport(rcdId).ShowDialog();
         }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow item in dgListOfApprovedReport.SelectedRows)
+            {
+                dgListOfApprovedReport.Rows.RemoveAt(item.Index);
+            }
+        }
+
+        private void dgListOfApprovedReport_SelectionChanged(object sender, EventArgs e)
+        {
+            btnRemove.Enabled = dgListOfApprovedReport.Rows.Count != 0;
+        }
+
+        private void dgListOfApprovedReport_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            SetStatusStrip();
+        }
+
+        private void dgListOfApprovedReport_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            SetStatusStrip();
+        }
+
+        internal void SetStatusStrip()
+        {
+            decimal totalCollections = 0.0m;
+
+            foreach (DataGridViewRow row in dgListOfApprovedReport.Rows)
+                totalCollections += Convert.ToDecimal(row.Cells["amount"].Value);
+
+            reportQuantity = (short)dgListOfApprovedReport.Rows.Count;
+            lblTotalRecords.Text = reportQuantity.ToString();
+            lblTotalAmount.Text = totalCollections.ToString("N2");
+        }
+     
+
     }
 }

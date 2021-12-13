@@ -10,5 +10,8 @@ namespace ACC.Domain.Interfaces
     {
         DataTable GetRecordsbyaccountid(int Id,string month);
         DataTable GetRecords(int id);
+
+        bool SaveRCIDVObligations(short rciId, string obligationNo);
+
     }
 }

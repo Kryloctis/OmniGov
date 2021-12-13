@@ -13,7 +13,7 @@ namespace ACC.Data
     class CollectorReportRepository : ICollectorReportRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
-        private readonly string tableColletorsReport = "collector_report";
+        private readonly string tableName = "collector_report";
         private readonly string tableCollectingOfficer = "collecting_officers";
         private readonly string tableCollectorReportPayments = "collector_report_payments";
         private readonly string tablePaymentCollections = "payment_collections";
@@ -39,7 +39,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, id},
                 };
 
-                string query = $"SELECT * FROM {tableColletorsReport} WHERE id = @id";
+                string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -75,7 +75,7 @@ namespace ACC.Data
                     new object[] { "@report_no", DbType.String, Id},
                 };
 
-                string query = $"SELECT * FROM {tableColletorsReport} WHERE report_no = @report_no";
+                string query = $"SELECT * FROM {tableName} WHERE report_no = @report_no";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -104,17 +104,17 @@ namespace ACC.Data
             try
             {
                 List<string> conditions = new List<string>();
-                string query = $"SELECT {tableColletorsReport}.id," +
-                        $"{tableColletorsReport}.report_no," +
+                string query = $"SELECT {tableName}.id," +
+                        $"{tableName}.report_no," +
                         $"CONCAT({tableFunds}.fund_code,'-',{tableFunds}.fund_name) AS fund," +
-                        $"{tableColletorsReport}.date," +
+                        $"{tableName}.date," +
                         $"CONCAT({tableCollectingOfficer}.last_name,', ',{tableCollectingOfficer}.first_name,' ',{tableCollectingOfficer}.mid_initial) AS collector," +
-                        $"(SELECT SUM({tablePaymentCollections}.amount) FROM {tableCollectorReportPayments} LEFT JOIN {tablePaymentCollections} ON {tableCollectorReportPayments}.payment_collections_id={tablePaymentCollections}.id AND {tableCollectorReportPayments}.collector_report_id={tableColletorsReport}.id) AS colamount," +
-                        $"{tableColletorsReport}.is_approved " +
-                        $"FROM {tableColletorsReport} LEFT JOIN {tableCollectingOfficer} ON {tableCollectingOfficer}.id={tableColletorsReport}.collecting_officers_id LEFT JOIN {tableFunds} ON {tableColletorsReport}.funds_id={tableFunds}.id";
+                        $"(SELECT SUM({tablePaymentCollections}.amount) FROM {tableCollectorReportPayments} LEFT JOIN {tablePaymentCollections} ON {tableCollectorReportPayments}.payment_collections_id={tablePaymentCollections}.id AND {tableCollectorReportPayments}.collector_report_id={tableName}.id) AS colamount," +
+                        $"{tableName}.is_approved " +
+                        $"FROM {tableName} LEFT JOIN {tableCollectingOfficer} ON {tableCollectingOfficer}.id={tableName}.collecting_officers_id LEFT JOIN {tableFunds} ON {tableName}.funds_id={tableFunds}.id";
                 var uRepository = Factory.UsersRepository();
                 int cid = uRepository.LinkedCollector(Factory.UserId) ? int.Parse(uRepository.GetCollectorByUserId(Factory.UserId)) : 0;
-                if (cid > 0) conditions.Add($"{tableColletorsReport}.collecting_officers_id={cid}");
+                if (cid > 0) conditions.Add($"{tableName}.collecting_officers_id={cid}");
                 if (conditions.Count > 0)
                 {
                     query += $" WHERE {string.Join(" AND ", conditions)}";
@@ -133,18 +133,18 @@ namespace ACC.Data
             try
             {
                 List<string> conditions = new List<string>();
-                string query = $"SELECT {tableColletorsReport}.id," +
-                        $"{tableColletorsReport}.report_no," +
+                string query = $"SELECT {tableName}.id," +
+                        $"{tableName}.report_no," +
                         $"CONCAT({tableFunds}.fund_code,'-',{tableFunds}.fund_name) AS fund," +
-                        $"{tableColletorsReport}.date," +
+                        $"{tableName}.date," +
                         $"CONCAT({tableCollectingOfficer}.last_name,', ',{tableCollectingOfficer}.first_name,' ',{tableCollectingOfficer}.mid_initial) AS collector," +
-                        $"(SELECT SUM({tablePaymentCollections}.amount) FROM {tableCollectorReportPayments} LEFT JOIN {tablePaymentCollections} ON {tableCollectorReportPayments}.payment_collections_id={tablePaymentCollections}.id AND {tableCollectorReportPayments}.collector_report_id={tableColletorsReport}.id) AS colamount," +
-                        $"{tableColletorsReport}.is_approved " +
-                        $"FROM {tableColletorsReport} LEFT JOIN {tableCollectingOfficer} ON {tableCollectingOfficer}.id={tableColletorsReport}.collecting_officers_id LEFT JOIN {tableFunds} ON {tableColletorsReport}.funds_id={tableFunds}.id";
+                        $"(SELECT SUM({tablePaymentCollections}.amount) FROM {tableCollectorReportPayments} LEFT JOIN {tablePaymentCollections} ON {tableCollectorReportPayments}.payment_collections_id={tablePaymentCollections}.id AND {tableCollectorReportPayments}.collector_report_id={tableName}.id) AS colamount," +
+                        $"{tableName}.is_approved " +
+                        $"FROM {tableName} LEFT JOIN {tableCollectingOfficer} ON {tableCollectingOfficer}.id={tableName}.collecting_officers_id LEFT JOIN {tableFunds} ON {tableName}.funds_id={tableFunds}.id";
                 var uRepository = Factory.UsersRepository();
                 int cid = uRepository.LinkedCollector(Factory.UserId) ? int.Parse(uRepository.GetCollectorByUserId(Factory.UserId)) : 0;
-                if (cid > 0) conditions.Add($"{tableColletorsReport}.collecting_officers_id={cid}");
-                if (id.Length > 0) conditions.Add($"{tableColletorsReport}.id IN ({id})");
+                if (cid > 0) conditions.Add($"{tableName}.collecting_officers_id={cid}");
+                if (id.Length > 0) conditions.Add($"{tableName}.id IN ({id})");
                 if (conditions.Count > 0)
                 {
                     query += $" WHERE {string.Join(" AND ", conditions)}";
@@ -165,19 +165,19 @@ namespace ACC.Data
                 List<string> conditions = new List<string>();
                 var uRepository = Factory.UsersRepository();
                 int colid = uRepository.LinkedCollector(Factory.UserId) ? int.Parse(uRepository.GetCollectorByUserId(Factory.UserId)) : 0;
-                string query = $"SELECT {tableColletorsReport}.id," +
-                       $"{tableColletorsReport}.report_no," +
+                string query = $"SELECT {tableName}.id," +
+                       $"{tableName}.report_no," +
                        $"CONCAT({tableFunds}.fund_code,'-',{tableFunds}.fund_name) AS fund," +
-                       $"{tableColletorsReport}.date," +
+                       $"{tableName}.date," +
                        $"CONCAT({tableCollectingOfficer}.last_name,', ',{tableCollectingOfficer}.first_name,' ',{tableCollectingOfficer}.mid_initial) AS collector," +
-                       $"(SELECT SUM({tablePaymentCollections}.amount) FROM {tableCollectorReportPayments} LEFT JOIN {tablePaymentCollections} ON {tableCollectorReportPayments}.payment_collections_id={tablePaymentCollections}.id AND {tableCollectorReportPayments}.collector_report_id={tableColletorsReport}.id) AS colamount," +
-                       $"{tableColletorsReport}.is_approved " +
-                       $"FROM {tableColletorsReport} LEFT JOIN {tableCollectingOfficer} ON {tableCollectingOfficer}.id={tableColletorsReport}.collecting_officers_id LEFT JOIN {tableFunds} ON {tableColletorsReport}.funds_id={tableFunds}.id";
-                if (colid > 0) conditions.Add($"{tableColletorsReport}.collecting_officers_id={colid}");
-                if (date.Length > 0) conditions.Add($"{tableColletorsReport}.date='{date}'");
-                if (approved > 0) conditions.Add($"{tableColletorsReport}.is_approved={approved}");
-                if (status.Length > 0) conditions.Add($"{tableColletorsReport}.status='{status}'");
-                if (fid > 0) conditions.Add($"{tableColletorsReport}.funds_id={fid}");
+                       $"(SELECT SUM({tablePaymentCollections}.amount) FROM {tableCollectorReportPayments} LEFT JOIN {tablePaymentCollections} ON {tableCollectorReportPayments}.payment_collections_id={tablePaymentCollections}.id AND {tableCollectorReportPayments}.collector_report_id={tableName}.id) AS colamount," +
+                       $"{tableName}.is_approved " +
+                       $"FROM {tableName} LEFT JOIN {tableCollectingOfficer} ON {tableCollectingOfficer}.id={tableName}.collecting_officers_id LEFT JOIN {tableFunds} ON {tableName}.funds_id={tableFunds}.id";
+                if (colid > 0) conditions.Add($"{tableName}.collecting_officers_id={colid}");
+                if (date.Length > 0) conditions.Add($"{tableName}.date='{date}'");
+                if (approved > 0) conditions.Add($"{tableName}.is_approved={approved}");
+                if (status.Length > 0) conditions.Add($"{tableName}.status='{status}'");
+                if (fid > 0) conditions.Add($"{tableName}.funds_id={fid}");
                 if (conditions.Count > 0)
                 {
                     query += $" WHERE {string.Join(" AND ", conditions)}";
@@ -196,7 +196,7 @@ namespace ACC.Data
             try
             {
                 List<string> conditions = new List<string>();
-                string query = $"SELECT * FROM {tableColletorsReport}";
+                string query = $"SELECT * FROM {tableName}";
                 if (cid > 0) conditions.Add($"collecting_officers_id={cid}");
                 if (year > 0) conditions.Add($"DATE_FORMAT(date,'%Y')={year}");
                 if (fid > 0) conditions.Add($"funds_id={fid}");
@@ -229,7 +229,7 @@ namespace ACC.Data
                     new object[] { "@remarks", DbType.String, entity.Remarks}
                 };
 
-                string query = $"INSERT INTO {tableColletorsReport} VALUES (null, @collecting_officers_id, @report_no, @date, @is_approved, @is_disapproved, @funds_id, @remarks)";
+                string query = $"INSERT INTO {tableName} VALUES (null, @collecting_officers_id, @report_no, @date, @is_approved, @is_disapproved, @funds_id, @remarks)";
 
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
@@ -254,7 +254,7 @@ namespace ACC.Data
                     new object[] { "@remarks", DbType.String, entity.Remarks}
                 };
 
-                string query = $"INSERT INTO {tableColletorsReport} (collecting_officers_id,report_no,date,is_approved,funds_id,status,remarks) VALUES (@collecting_officers_id,@report_no,@date,@is_approved,@funds_id,@status,@remarks)";
+                string query = $"INSERT INTO {tableName} (collecting_officers_id,report_no,date,is_approved,funds_id,status,remarks) VALUES (@collecting_officers_id,@report_no,@date,@is_approved,@funds_id,@status,@remarks)";
 
 
                 return _dbGenericCommands.ExecuteNonQueryId(query, parameters);
@@ -283,7 +283,7 @@ namespace ACC.Data
                     new object[] { "@remarks", DbType.String, entity.Remarks}
                 };
 
-                string query = $"UPDATE {tableColletorsReport} SET collecting_officers_id=@collecting_officers_id,report_no=@report_no,date=@date,is_approved=@is_approved,funds_id=@funds_id,status=@status,remarks=@remarks WHERE id=@id";
+                string query = $"UPDATE {tableName} SET collecting_officers_id=@collecting_officers_id,report_no=@report_no,date=@date,is_approved=@is_approved,funds_id=@funds_id,status=@status,remarks=@remarks WHERE id=@id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -302,7 +302,7 @@ namespace ACC.Data
                     new object[] { "@status", DbType.String, entity.IsApproved > 0 ? "COMPLETED":"PENDING"},
                 };
 
-                string query = $"UPDATE {tableColletorsReport} SET is_approved=@is_approved,status=@status WHERE id=@id";
+                string query = $"UPDATE {tableName} SET is_approved=@is_approved,status=@status WHERE id=@id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -321,7 +321,7 @@ namespace ACC.Data
                     new object[] { "@status", DbType.String, "CANCELLED"}
                 };
 
-                string query = $"UPDATE {tableColletorsReport} SET status=@status WHERE id=@id";
+                string query = $"UPDATE {tableName} SET status=@status WHERE id=@id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -340,7 +340,7 @@ namespace ACC.Data
                     new object[] { "@remarks", DbType.String, entity.Remarks}
                 };
 
-                string query = $"UPDATE {tableColletorsReport} SET remarks=@remarks WHERE id=@id";
+                string query = $"UPDATE {tableName} SET remarks=@remarks WHERE id=@id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -349,6 +349,24 @@ namespace ACC.Data
             }
         }
 
+        public bool Delete(CollectorReportModel entity)
+        {
+            using (var scope = new TransactionScope())
+            {
+               
+                var parameters = new object[][]
+                {
+                        new object[] { "@id", DbType.Int32, entity.Id},
+                        new object[] { "@report_no", DbType.String, entity.ReportNo},
+                };
+
+                string query = $"DELETE FROM {tableName} WHERE id = @id AND report_no = @report_no";
+                _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+               
+                scope.Complete();
+                return true;
+            }
+        }
 
         public bool Delete(List<CollectorReportModel> entityList)
         {
@@ -363,7 +381,7 @@ namespace ACC.Data
                             new object[] { "@id", DbType.Int16, entity.Id},
                         };
 
-                        string query = $"DELETE FROM {tableColletorsReport} WHERE id = @id";
+                        string query = $"DELETE FROM {tableName} WHERE id = @id";
                         _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
                     }
 
@@ -381,7 +399,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT COUNT(*) FROM {tableColletorsReport}";
+                string query = $"SELECT COUNT(*) FROM {tableName}";
 
                 return int.Parse(_dbGenericCommands.ExecuteScalar(query));
             }
@@ -400,10 +418,33 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int16, id },
                 };
 
-                string query = $"SELECT id FROM {tableColletorsReport} WHERE id = @id";
+                string query = $"SELECT id FROM {tableName} WHERE id = @id";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
+
+
+        public bool ReportNumberExist(string reporNo)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@report_no", DbType.String, reporNo }
+                };
+
+                string query = $"SELECT report_no FROM {tableName} WHERE report_no = @report_no";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
                 if (!string.IsNullOrEmpty(queryResult)) return true;
             }
             catch (Exception)
@@ -423,7 +464,7 @@ namespace ACC.Data
                     new object[] { "@report_no", DbType.String, id },
                 };
 
-                string query = $"SELECT report_no FROM {tableColletorsReport} WHERE report_no = @report_no";
+                string query = $"SELECT report_no FROM {tableName} WHERE report_no = @report_no";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -437,16 +478,16 @@ namespace ACC.Data
             return false;
         }
 
-        public bool HasGenerated(int id)
+        public bool HasGenerated(int paymentCollectionId)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@collector_report_id", DbType.Int16, id },
+                    new object[] { "@payment_collection_id", DbType.Int16, paymentCollectionId },
                 };
 
-                string query = $"SELECT * FROM {tableCollectorReportPayments} WHERE collector_report_id = @collector_report_id";
+                string query = $"SELECT * FROM {tableCollectorReportPayments} WHERE payment_collections_id = @payment_collection_id";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -492,11 +533,11 @@ namespace ACC.Data
                 int colid = uRepository.LinkedCollector(Factory.UserId) ? int.Parse(uRepository.GetCollectorByUserId(Factory.UserId)) : 0;
                 if (colid > 0)
                 {
-                    query = $"SELECT {tableColletorsReport}.id,{tableColletorsReport}.report_no,CONCAT({tableFunds}.fund_code,'-',{tableFunds}.fund_name) AS fund,{tableColletorsReport}.date,CONCAT({tableCollectingOfficer}.last_name,', ',{tableCollectingOfficer}.first_name,' ',{tableCollectingOfficer}.mid_initial) AS collector,(SELECT SUM({tablePaymentCollections}.amount) FROM {tableCollectorReportPayments} LEFT JOIN {tablePaymentCollections} ON {tableCollectorReportPayments}.payment_collections_id={tablePaymentCollections}.id AND {tableCollectorReportPayments}.collector_report_id={tableColletorsReport}.id) AS colamount,{tableColletorsReport}.is_approved FROM {tableColletorsReport} LEFT JOIN {tableCollectingOfficer} ON {tableCollectingOfficer}.id={tableColletorsReport}.collecting_officers_id LEFT JOIN {tableFunds} ON {tableColletorsReport}.funds_id={tableFunds}.id WHERE {tableColletorsReport}.collecting_officers_id={colid} AND {tableColletorsReport}.report_no LIKE '%{searchText}%' OR CONCAT({tableCollectingOfficer}.last_name,', ',{tableCollectingOfficer}.first_name,' ',{tableCollectingOfficer}.mid_initial) LIKE '%{searchText}%' OR ({tableFunds}.fund_code,'-',{tableFunds}.fund_name) LIKE '%{searchText}%' ORDER BY {tableColletorsReport}.date DESC";
+                    query = $"SELECT {tableName}.id,{tableName}.report_no,CONCAT({tableFunds}.fund_code,'-',{tableFunds}.fund_name) AS fund,{tableName}.date,CONCAT({tableCollectingOfficer}.last_name,', ',{tableCollectingOfficer}.first_name,' ',{tableCollectingOfficer}.mid_initial) AS collector,(SELECT SUM({tablePaymentCollections}.amount) FROM {tableCollectorReportPayments} LEFT JOIN {tablePaymentCollections} ON {tableCollectorReportPayments}.payment_collections_id={tablePaymentCollections}.id AND {tableCollectorReportPayments}.collector_report_id={tableName}.id) AS colamount,{tableName}.is_approved FROM {tableName} LEFT JOIN {tableCollectingOfficer} ON {tableCollectingOfficer}.id={tableName}.collecting_officers_id LEFT JOIN {tableFunds} ON {tableName}.funds_id={tableFunds}.id WHERE {tableName}.collecting_officers_id={colid} AND {tableName}.report_no LIKE '%{searchText}%' OR CONCAT({tableCollectingOfficer}.last_name,', ',{tableCollectingOfficer}.first_name,' ',{tableCollectingOfficer}.mid_initial) LIKE '%{searchText}%' OR ({tableFunds}.fund_code,'-',{tableFunds}.fund_name) LIKE '%{searchText}%' ORDER BY {tableName}.date DESC";
                 }
                 else
                 {
-                    query = $"SELECT {tableColletorsReport}.id,{tableColletorsReport}.report_no,CONCAT({tableFunds}.fund_code,'-',{tableFunds}.fund_name) AS fund,{tableColletorsReport}.date,CONCAT({tableCollectingOfficer}.last_name,', ',{tableCollectingOfficer}.first_name,' ',{tableCollectingOfficer}.mid_initial) AS collector,(SELECT SUM({tablePaymentCollections}.amount) FROM {tableCollectorReportPayments} LEFT JOIN {tablePaymentCollections} ON {tableCollectorReportPayments}.payment_collections_id={tablePaymentCollections}.id AND {tableCollectorReportPayments}.collector_report_id={tableColletorsReport}.id) AS colamount,{tableColletorsReport}.is_approved FROM {tableColletorsReport} LEFT JOIN {tableCollectingOfficer} ON {tableCollectingOfficer}.id={tableColletorsReport}.collecting_officers_id LEFT JOIN {tableFunds} ON {tableColletorsReport}.funds_id={tableFunds}.id WHERE {tableColletorsReport}.report_no LIKE '%{searchText}%' OR CONCAT({tableCollectingOfficer}.last_name,', ',{tableCollectingOfficer}.first_name,' ',{tableCollectingOfficer}.mid_initial) LIKE '%{searchText}%' OR ({tableFunds}.fund_code,'-',{tableFunds}.fund_name) LIKE '%{searchText}%' ORDER BY {tableColletorsReport}.date DESC";
+                    query = $"SELECT {tableName}.id,{tableName}.report_no,CONCAT({tableFunds}.fund_code,'-',{tableFunds}.fund_name) AS fund,{tableName}.date,CONCAT({tableCollectingOfficer}.last_name,', ',{tableCollectingOfficer}.first_name,' ',{tableCollectingOfficer}.mid_initial) AS collector,(SELECT SUM({tablePaymentCollections}.amount) FROM {tableCollectorReportPayments} LEFT JOIN {tablePaymentCollections} ON {tableCollectorReportPayments}.payment_collections_id={tablePaymentCollections}.id AND {tableCollectorReportPayments}.collector_report_id={tableName}.id) AS colamount,{tableName}.is_approved FROM {tableName} LEFT JOIN {tableCollectingOfficer} ON {tableCollectingOfficer}.id={tableName}.collecting_officers_id LEFT JOIN {tableFunds} ON {tableName}.funds_id={tableFunds}.id WHERE {tableName}.report_no LIKE '%{searchText}%' OR CONCAT({tableCollectingOfficer}.last_name,', ',{tableCollectingOfficer}.first_name,' ',{tableCollectingOfficer}.mid_initial) LIKE '%{searchText}%' OR ({tableFunds}.fund_code,'-',{tableFunds}.fund_name) LIKE '%{searchText}%' ORDER BY {tableName}.date DESC";
                 }
 
                 var dtpc = new DataTable();
@@ -516,7 +557,7 @@ namespace ACC.Data
                 new object[] { "@collectorReportNumber", DbType.String, collectorReportNumber}
             };
 
-            string query = $"SELECT id FROM {tableColletorsReport} " +
+            string query = $"SELECT id FROM {tableName} " +
                 $"WHERE collecting_officers_id = @collectorId AND report_no = @collectorReportNumber ";
 
             return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
@@ -608,6 +649,27 @@ namespace ACC.Data
             }
         }
 
+        public DataTable FilterRecords(sbyte fundId, ushort collectorId, string reportNo)
+        {
+            try
+            {
+                var parameter = new object[][] {
+                    new object[] {"@fundId", DbType.SByte, fundId },
+                    new object[] {"@collectorId", DbType.Int16, collectorId },
+                    new object[] {"@reportNo", DbType.String, reportNo }
+                };
+
+                string query = $"SELECT * FROM {viewTableName} WHERE fund_id = @fundId AND collecting_officers_id = @collectorId AND report_no = @reportNo";
+
+                var dtCollectorReport = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtCollectorReport, parameter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public string GetRCDStatus(string reportNo)
         {
             var record = new Dictionary<string, byte>();
@@ -618,7 +680,7 @@ namespace ACC.Data
                     new object[] { "@reportNo", DbType.String, reportNo }
                 };
 
-                string query = $"SELECT is_approved, is_disapproved FROM {tableColletorsReport} WHERE report_no = @reportNo";
+                string query = $"SELECT is_approved, is_disapproved FROM {tableName} WHERE report_no = @reportNo";
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
                     foreach (DataRow item in reader.Rows)
@@ -660,7 +722,7 @@ namespace ACC.Data
                 else if (status == 2)
                     queryStatus = $"is_approved = 0, is_disapproved = 1";
 
-                string query = $"UPDATE {tableColletorsReport} SET {queryStatus} WHERE report_no = @reportNo";
+                string query = $"UPDATE {tableName} SET {queryStatus} WHERE report_no = @reportNo";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -679,7 +741,7 @@ namespace ACC.Data
                     new object[] { "@remarks", DbType.String, remarks }
                 };
 
-                string query = $"UPDATE {tableColletorsReport} SET remarks = @remarks WHERE report_no = @reportNo";
+                string query = $"UPDATE {tableName} SET remarks = @remarks WHERE report_no = @reportNo";
 
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
@@ -702,7 +764,7 @@ namespace ACC.Data
                     new object[] { "@reportNo", DbType.String, reportNo}
                 };
 
-                string query = $"SELECT remarks FROM {tableColletorsReport} WHERE report_no = @reportNo";
+                string query = $"SELECT remarks FROM {tableName} WHERE report_no = @reportNo";
                 return _dbGenericCommands.ExecuteScalar(query, parameters).ToString();
             }
             catch (Exception)
@@ -711,6 +773,5 @@ namespace ACC.Data
             }
         }
 
-       
     }
 }

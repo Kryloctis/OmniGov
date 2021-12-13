@@ -14,10 +14,13 @@ namespace AccountingSystem.Views.Transactions.RCI
     public partial class frmRCIAdd : Form
     {
         private frmRCI _frmrci;
+        private readonly ucRCI uc;
         public frmRCIAdd(frmRCI frmrci)
         {
             InitializeComponent();
             _frmrci = frmrci;
+
+            uc = ucrci1;
         }
 
         private void frmRCIAdd_Load(object sender, EventArgs e)
@@ -30,7 +33,6 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             try
             {
-                var uc = ucrci1;
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
@@ -44,12 +46,9 @@ namespace AccountingSystem.Views.Transactions.RCI
                     FunctionProgramProjectId = uc.functionId,
                     CheckNo = uc.txtcheckno.Text.Trim(),
                     CheckDate = Convert.ToDateTime(uc.dtcheckdate.Text.Trim()),
-                    ObNo = uc.txtObno.Text.Trim(),
                     DvNo = uc.txtdvno.Text.Trim(),
                     Payee = uc.txtpayee.Text.Trim(),
                     NaturePayment = uc.txtnature.Text.Trim(),
-                    TrustLiabilities = Convert.ToDecimal(uc.txttrust.Value),
-                    BirVatNonVat = Convert.ToDecimal(uc.txtvat.Value),
                     Amount = Convert.ToDecimal(uc.txtamount.Value)
                 };
 
@@ -68,9 +67,34 @@ namespace AccountingSystem.Views.Transactions.RCI
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("RCI has been saved.");
+                SaveDVObligations();
                 _frmrci.LoadRecords();
                 ucrci1.ResetForm();
             }
         }
+
+        internal void SaveDVObligations()
+        {
+            try
+            {
+                short rcid = 6;
+                string obligationNo = String.Empty;
+
+                foreach (DataGridViewRow item in uc.dgObligationNoList.Rows)
+                {
+                    obligationNo = item.Cells["obligation_no"].Value.ToString();
+                    Factory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+
+
     }
 }

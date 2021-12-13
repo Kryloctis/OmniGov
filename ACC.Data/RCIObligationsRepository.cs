@@ -50,6 +50,35 @@ namespace ACC.Data
             }
         }
 
+        public bool DeleteRecordsByRCIId(int rcidId)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    //_obligationAccountRepository.DeleteByObligationRequestId(obligationRequestId);
+
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@id", DbType.Int32, rcidId }
+                    };
+
+                    string query = $"DELETE FROM {tableName} WHERE rci_id = @id";
+
+                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+
+
+                    scope.Complete();
+                    return true;
+                };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             throw new NotImplementedException();
@@ -58,6 +87,27 @@ namespace ACC.Data
         public DataTable GetRecords()
         {
             throw new NotImplementedException();
+        }
+
+        public DataTable GetRecordsByRCIId(int rciId)
+        {
+            try
+            {
+                var parameter = new object[][] {
+                    new object[] {"@rciId", DbType.Int32, rciId}
+                };
+
+                string query = $"SELECT obligation_no FROM {tableName} WHERE rci_id = @rciId";
+                var dtRCI = new DataTable();
+
+                return _dbGenericCommands.FillBySearch(query, dtRCI, parameter);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public DataTable GetRecordsBySearch(string searchText)

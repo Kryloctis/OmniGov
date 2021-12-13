@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Reports.CollectorsRCD;
+﻿using ACC.Domain.Interfaces;
+using AccountingSystem.Views.Reports.CollectorsRCD;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 {
     public partial class ucCollectorsRCD : UserControl
     {
+        internal ushort reportId;
         internal byte fundId;
         internal ushort collectorId;
         internal bool isSaveFunction;
@@ -23,6 +25,16 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             Helper.DatagridFullRowSelectStyle(dgPayments, true);
         }
 
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[2];
+            errorArray[0] = epReportNo.GetError(txtReport);
+            errorArray[1] = epReportNo.GetError(cmbcollector);
+
+            IError _errors = Factory.CreateErrors(errorArray);
+            return _errors.GenerateErrorMessage();
+        }
+
         private void ucRCDCollector_Load(object sender, EventArgs e)
         {
             ResetForm();
@@ -30,6 +42,9 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             LoadCollectors();
 
             cmbcollector.SelectedIndex = -1;
+
+            btnadd.Enabled = false;
+            btnRemove.Enabled = false;
         }
 
         internal void TotalCollections()
@@ -66,12 +81,18 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         internal void ResetForm() 
         {
+            btnadd.Enabled = false;
+            btnRemove.Enabled = false;
+            btnclear.Enabled = false;
+            
+            txtTotal.Text = "0.00";
+
             cmbcollector.SelectedIndex = -1;
             txtReport.Text = string.Empty;
+            dtdate.Value = DateTime.Now;
 
             dgPayments.Rows.Clear();
             dgPayments.Refresh();
-
         }
 
         internal void LoadFunds()
@@ -142,5 +163,68 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         }
 
+        private void btndelete_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow item in this.dgPayments.SelectedRows)
+            {
+                dgPayments.Rows.RemoveAt(item.Index);
+            }
+        }
+
+        private void btnclear_Click(object sender, EventArgs e)
+        {
+            dgPayments.Rows.Clear();
+            btnclear.Enabled = false;
+        }
+
+        private void txtReport_Validating(object sender, CancelEventArgs e)
+        {
+
+            string reportNo = txtReport.Text.Trim();
+
+            if (String.IsNullOrEmpty(reportNo))
+            {
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epReportNo, txtReport, "Report No.");
+            }
+            else
+            {
+                var reportNoExist = Factory.CollectorReportRepository().ReportNumberExist(reportNo);
+
+                if (reportNoExist)
+                {
+                    epReportNo.SetError(txtReport, "Report number already existed.");
+                    e.Cancel = true;
+                }
+                else
+                {
+                    e.Cancel = false;
+                }
+            }
+        }
+        private void txtReport_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epReportNo, txtReport);
+        }
+
+        private void cmbcollector_Validating(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void cmbcollector_Validated(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgPayments_SelectionChanged(object sender, EventArgs e)
+        {
+            var selectedRowCount = dgPayments.SelectedRows.Count;
+            var rowCount = dgPayments.Rows.Count;
+
+            btnRemove.Enabled = selectedRowCount  != 0 && selectedRowCount !> 1;
+            btnclear.Enabled = rowCount > 0;
+
+            TotalCollections();
+        }
     }
 }

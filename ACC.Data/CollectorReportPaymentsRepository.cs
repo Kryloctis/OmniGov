@@ -138,37 +138,21 @@ namespace ACC.Data
             
         }
 
-        public bool Delete(List<CollectorReportPaymentModel> entityList)
+        public bool Delete(CollectorReportPaymentModel entity)
         {
             try
             {
                 using (var scope = new TransactionScope())
                 {
-                    foreach (var entity in entityList)
-                    {
-                        if(entity.CollectorsReportId > 0)
-                        {
-                           var parameters = new object[][]
-                           {
-                                new object[] { "@collector_report_id", DbType.Int16, entity.CollectorsReportId},
-                           };
 
-                            string query = $"DELETE FROM {tableName} WHERE collector_report_id = @collector_report_id";
-                            _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-                        }
-                        if(entity.Id > 0)
-                        {
-                           var parameters = new object[][]
-                           {
-                                new object[] { "@id", DbType.Int16, entity.Id},
-                           };
+                    var parameter = new object[][] {
+                        new object[]{"@reportId", DbType.Int32, entity.CollectorsReportId}
+                    };
 
-                            string query = $"DELETE FROM {tableName} WHERE id = @id";
-                            _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-                        }
-                       
-                    }
+                    var query = $"DELETE FROM {tableName} WHERE collector_report_id = @reportId";
+                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameter);
 
+                   
                     scope.Complete();
                     return true;
                 }
@@ -177,6 +161,11 @@ namespace ACC.Data
             {
                 throw;
             }
+        }
+
+        public bool Delete(List<CollectorReportPaymentModel> entityList)
+        {
+            throw new NotImplementedException();
         }
 
         public int CountRecords(int id)
@@ -250,10 +239,7 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
-        public bool Delete(CollectorReportPaymentModel entity)
-        {
-            throw new NotImplementedException();
-        }
+     
         public bool Insert(CollectorReportPaymentModel entity)
         {
             try
@@ -323,5 +309,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
+   
     }
 }

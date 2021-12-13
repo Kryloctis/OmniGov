@@ -8,6 +8,7 @@ namespace ACC.Domain.Interfaces
 {
     public interface ICollectorReportPaymentsRepository : IRepository<CollectorReportPaymentModel>
     {
+        bool Delete(CollectorReportPaymentModel entity);
         DataTable GetRecordByLedger(string Id);
         DataTable GetRecords(int id);
         DataTable GetRecords(string reportno);

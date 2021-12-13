@@ -14,12 +14,14 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
     public partial class frmPaymentCollectionAdd : Form
     {
         private readonly frmPaymentCollection _frmPaymentCollection;
+        private readonly ucPaymentCollection uc;
 
         public frmPaymentCollectionAdd(frmPaymentCollection frmpc)
         {
             InitializeComponent();
             _frmPaymentCollection = frmpc;
             ucPaymentCollection1.userid = Helper.UserId;
+            uc = ucPaymentCollection1;
         }
 
         private void frmPaymentCollectionAdd_Load(object sender, EventArgs e)
@@ -129,7 +131,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             var uc = ucPaymentCollection1;
 
-            if (!uc.isCashTicket)
+            if (uc.isCashTicket)
                 SaveCashTickets();
             else
                 SaveReceipts();
@@ -139,9 +141,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-
-                var uc = ucPaymentCollection1;
-
                 uc.txtreceipt.Validating -= new CancelEventHandler(uc.txtreceipt_Validating);
                 uc.txtpayee.Validating -= new CancelEventHandler(uc.txtpayee_Validating);
 
@@ -169,7 +168,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
 
                 var paymentCollectionRepo = Factory.PaymentCollectionRepository();
-
                 bool insertSuccess = paymentCollectionRepo.Insert(paymentCollectionModel);
 
                 if (insertSuccess)

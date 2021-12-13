@@ -29,31 +29,31 @@ namespace AccountingSystem.Views.Reports.RCD
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgrcd = new System.Windows.Forms.DataGridView();
+            this.dgRCDSearch = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.txtsearch = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSelect = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbfunds = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dgrcd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgRCDSearch)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgrcd
+            // dgRCDSearch
             // 
-            this.dgrcd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgRCDSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgrcd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgrcd.Location = new System.Drawing.Point(10, 41);
-            this.dgrcd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dgrcd.Name = "dgrcd";
-            this.dgrcd.RowHeadersWidth = 51;
-            this.dgrcd.RowTemplate.Height = 29;
-            this.dgrcd.Size = new System.Drawing.Size(779, 372);
-            this.dgrcd.TabIndex = 17;
-            this.dgrcd.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrcd_CellDoubleClick);
-            this.dgrcd.SelectionChanged += new System.EventHandler(this.dgrcd_SelectionChanged);
+            this.dgRCDSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgRCDSearch.Location = new System.Drawing.Point(10, 41);
+            this.dgRCDSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgRCDSearch.Name = "dgRCDSearch";
+            this.dgRCDSearch.RowHeadersWidth = 51;
+            this.dgRCDSearch.RowTemplate.Height = 29;
+            this.dgRCDSearch.Size = new System.Drawing.Size(779, 372);
+            this.dgRCDSearch.TabIndex = 17;
+            this.dgRCDSearch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrcd_CellDoubleClick);
+            this.dgRCDSearch.SelectionChanged += new System.EventHandler(this.dgrcd_SelectionChanged);
             // 
             // label3
             // 
@@ -132,7 +132,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.dgrcd);
+            this.Controls.Add(this.dgRCDSearch);
             this.Controls.Add(this.txtsearch);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -143,7 +143,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Search Report of Collections and Deposits (RCD)";
             this.Load += new System.EventHandler(this.frmSearch_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgrcd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgRCDSearch)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -162,5 +162,6 @@ namespace AccountingSystem.Views.Reports.RCD
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.DataGridView dgRCDSearch;
     }
 }

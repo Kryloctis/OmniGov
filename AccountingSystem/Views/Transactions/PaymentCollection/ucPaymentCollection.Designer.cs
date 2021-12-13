@@ -129,7 +129,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.txtpayee.MaxLength = 200;
             this.txtpayee.Name = "txtpayee";
             this.txtpayee.Size = new System.Drawing.Size(370, 23);
-            this.txtpayee.TabIndex = 4;
+            this.txtpayee.TabIndex = 6;
             this.txtpayee.Validating += new System.ComponentModel.CancelEventHandler(this.txtpayee_Validating);
             this.txtpayee.Validated += new System.EventHandler(this.txtpayee_Validated);
             // 
@@ -152,7 +152,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.dtdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtdate.Name = "dtdate";
             this.dtdate.Size = new System.Drawing.Size(370, 23);
-            this.dtdate.TabIndex = 6;
+            this.dtdate.TabIndex = 4;
             // 
             // txtamount
             // 
@@ -204,7 +204,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.cmbforms.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbforms.Name = "cmbforms";
             this.cmbforms.Size = new System.Drawing.Size(371, 23);
-            this.cmbforms.TabIndex = 19;
+            this.cmbforms.TabIndex = 2;
             this.cmbforms.SelectedIndexChanged += new System.EventHandler(this.cmbforms_SelectedIndexChanged);
             this.cmbforms.SelectedValueChanged += new System.EventHandler(this.cmbforms_SelectedValueChanged);
             this.cmbforms.Validating += new System.ComponentModel.CancelEventHandler(this.cmbforms_Validating);
@@ -234,7 +234,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.cmbAccount.Location = new System.Drawing.Point(181, 114);
             this.cmbAccount.Name = "cmbAccount";
             this.cmbAccount.Size = new System.Drawing.Size(371, 23);
-            this.cmbAccount.TabIndex = 24;
+            this.cmbAccount.TabIndex = 3;
             this.cmbAccount.SelectedValueChanged += new System.EventHandler(this.cmbAccount_SelectedValueChanged);
             this.cmbAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbAccount_KeyDown);
             this.cmbAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbAccount_Validating);
@@ -248,7 +248,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.cmbfund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbfund.Name = "cmbfund";
             this.cmbfund.Size = new System.Drawing.Size(371, 23);
-            this.cmbfund.TabIndex = 23;
+            this.cmbfund.TabIndex = 1;
             this.cmbfund.Validating += new System.ComponentModel.CancelEventHandler(this.cmbfund_Validating);
             this.cmbfund.Validated += new System.EventHandler(this.cmbfund_Validated);
             // 
@@ -322,7 +322,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.txtCashTicketsAmount.Name = "txtCashTicketsAmount";
             this.txtCashTicketsAmount.ReadOnly = true;
             this.txtCashTicketsAmount.Size = new System.Drawing.Size(371, 23);
-            this.txtCashTicketsAmount.TabIndex = 17;
+            this.txtCashTicketsAmount.TabIndex = 6;
             this.txtCashTicketsAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtCashTicketQuantity
@@ -336,7 +336,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             0});
             this.txtCashTicketQuantity.Name = "txtCashTicketQuantity";
             this.txtCashTicketQuantity.Size = new System.Drawing.Size(371, 23);
-            this.txtCashTicketQuantity.TabIndex = 16;
+            this.txtCashTicketQuantity.TabIndex = 5;
             this.txtCashTicketQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtCashTicketQuantity.TextChanged += new System.EventHandler(this.txtCashTicketQuantity_TextChanged);
             this.txtCashTicketQuantity.Validating += new System.ComponentModel.CancelEventHandler(this.txtCashTicketQuantity_Validating);
@@ -357,7 +357,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.dtCashTicketDateOfCollection.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtCashTicketDateOfCollection.Name = "dtCashTicketDateOfCollection";
             this.dtCashTicketDateOfCollection.Size = new System.Drawing.Size(371, 23);
-            this.dtCashTicketDateOfCollection.TabIndex = 14;
+            this.dtCashTicketDateOfCollection.TabIndex = 4;
             // 
             // label15
             // 
@@ -418,7 +418,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.ErrorProvider errorProvider;
         internal System.Windows.Forms.ComboBox cmbcollector;
         internal System.Windows.Forms.ComboBox cmbforms;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
         internal System.Windows.Forms.ComboBox cmbfund;
         private System.Windows.Forms.Label label9;
@@ -432,5 +431,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.Label label16;
         internal System.Windows.Forms.NumericUpDown txtCashTicketQuantity;
         internal System.Windows.Forms.TextBox txtCashTicketsAmount;
+        internal System.Windows.Forms.GroupBox groupBox2;
     }
 }

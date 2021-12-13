@@ -18,9 +18,11 @@ namespace AccountingSystem.Views.Transactions.RCI
         internal int bankId = 0;
         internal int fundsId = 0;
         internal int functionId = 0;
+
         public ucRCI()
         {
             InitializeComponent();
+            Helper.DatagridFullRowSelectStyle(dgObligationNoList, true);
         }
 
         private void ucRCI_Load(object sender, EventArgs e)
@@ -39,16 +41,13 @@ namespace AccountingSystem.Views.Transactions.RCI
             errorArray[6] = errorProvider.GetError(dtcheckdate);
             errorArray[7] = errorProvider.GetError(txtpayee);
             errorArray[8] = errorProvider.GetError(txtnature);
-            errorArray[9] = errorProvider.GetError(txttrust);
-            errorArray[10] = errorProvider.GetError(txtvat);
-            errorArray[11] = errorProvider.GetError(txtamount);
+            errorArray[9] = errorProvider.GetError(txtamount);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
         internal void ResetForm()
         {
-            txtObno.Clear();
             txtdvno.Clear();
             bankId=fundsId=functionId=0;
             cmbbank.SelectedIndex = -1;
@@ -58,8 +57,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             dtcheckdate.Value = DateTime.Now;
             txtpayee.Clear();
             txtnature.Clear();
-            txttrust.Value = Convert.ToDecimal("0.00");
-            txtvat.Value = Convert.ToDecimal("0.00");
             txtamount.Value = Convert.ToDecimal("0.00");
         }
         internal void LoadFunds()
@@ -75,7 +72,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
         internal void LoadBanks()
         {
             try
@@ -107,49 +103,25 @@ namespace AccountingSystem.Views.Transactions.RCI
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
         public void loadSelectedFunction(int Id,string value)
         {
             functionId = Id;
             txtfunction.Text = value;
         }
-
-
         private void btncharge_Click(object sender, EventArgs e)
         {
             _ = new frmFind(this, "banks").ShowDialog();
         }
-
-        private void txtfunction_DoubleClick(object sender, EventArgs e)
-        {
-            btnfunction.PerformClick();
-        }
-
-        private void btnfunction_Click(object sender, EventArgs e)
-        {
-            _ = new frmFind(this, "functions").ShowDialog();
-        }
-
-        private void btnfund_Click(object sender, EventArgs e)
-        {
-            _ = new frmFind(this, "funds").ShowDialog();
-        }
-
-        private void txtObno_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtObno, "obligation no.!");
-        }
-
         private void txtdvno_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtdvno, "disbursement no.!");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtdvno, "disbursement no.");
         }
 
         private void txtfunction_Validating(object sender, CancelEventArgs e)
         {
             if (!txtfunction.Focused)
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtfunction, "function.!");
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtfunction, "fpp.");
                 if (functionId <= 0)
                 {
                     errorProvider.SetError(txtfunction, "Please select function!");
@@ -182,15 +154,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtnature, "nature of payment.!");
         }
 
-        private void txttrust_Validating(object sender, CancelEventArgs e)
-        {
-            
-        }
 
-        private void txtObno_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider, txtObno);
-        }
 
         private void txtdvno_Validated(object sender, EventArgs e)
         {
@@ -227,7 +191,6 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
 
         }
-
         private void cmbfund_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(errorProvider, cmbfund);
@@ -235,7 +198,7 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void cmbfund_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbfund, "Fund!");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbfund, "Fund.");
         }
 
         private void cmbbank_Validated(object sender, EventArgs e)
@@ -246,6 +209,38 @@ namespace AccountingSystem.Views.Transactions.RCI
         private void cmbbank_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbbank, "Bank!");
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            var obligationNo = txtObno.Text.Trim();
+
+            if (String.IsNullOrEmpty(obligationNo))
+                return;
+
+            dgObligationNoList.Rows.Add(obligationNo, "Remove");
+            txtObno.Text = String.Empty;
+            txtObno.Focus();
+        }
+
+        private void txtfunction_DoubleClick(object sender, EventArgs e)
+        {
+            _ = new frmFind(this,  "functions").ShowDialog();
+        }
+
+        private void dgObligationNoList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                int rowIndex = dgObligationNoList.CurrentCell.RowIndex;
+                dgObligationNoList.Rows.RemoveAt(rowIndex);
+            }
+        }
+
+        private void txtObno_TextChanged(object sender, EventArgs e)
+        {
+            btnAdd.Enabled = !string.IsNullOrEmpty(txtObno.Text.Trim());
         }
     }
 }
