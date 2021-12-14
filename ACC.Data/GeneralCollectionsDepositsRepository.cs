@@ -11,7 +11,11 @@ namespace ACC.Data
     class GeneralCollectionsDepositsRepository:IGeneralCollectionsDepositsRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
-        private readonly string tableName = "general_collections_deposits";
+        private readonly string tableName = "general_collections_deeposits";
+        private readonly string viewTableName = "view_general_collections_deposits";
+
+
+
         public GeneralCollectionsDepositsRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -45,6 +49,33 @@ namespace ACC.Data
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        public DataTable GetCollectionsDepositsByRCDNo(string rcdNo)
+        {
+            try
+            {
+                try
+                {
+                    var parameter = new object[][] {
+                    new object[]{"@rcdNo", DbType.String, rcdNo }
+                };
+
+                    string query = $"SELECT * FROM {viewTableName} WHERE rcd_no = @rcdNo";
+                    var dtRCD = new DataTable();
+
+                    return _dbGenericCommands.FillBySearch(query, dtRCD, parameter);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

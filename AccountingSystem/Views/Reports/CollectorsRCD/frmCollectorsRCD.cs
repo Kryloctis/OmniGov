@@ -252,7 +252,8 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            _ = new frmCDReport("40").ShowDialog();
+            string reportNumber = uc.txtReport.Text.Trim();
+            _ = new PaymentCollection.frmCollectorsReportOfCollectionsAndDeposits(reportNumber).ShowDialog();
         }
 
         private void btnDisapprove_Click(object sender, EventArgs e)

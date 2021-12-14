@@ -16,6 +16,10 @@ namespace ACC.Data
         private readonly string tableName3 = "collecting_officers";
         private readonly string tableName4 = "accountable_forms";
         private readonly string tableName5 = "receipts";
+
+        private readonly string viewTableName = "view_receipts_issued";
+
+
         public ReceiptsIssuedRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -404,5 +408,32 @@ namespace ACC.Data
             }
         }
 
+        public DataTable GetAccountabilityForAccountableForms()
+        {
+            try
+            {
+                string query =  $"SELECT " +
+                                $"accountable_forms, " +
+                                $"(MAX(issueto) - MIN(issuefrom) + 1) quantity, " +
+                                $"MIN(issuefrom) serial_no_from, " +
+                                $"MAX(issueto) serial_no_to, " +
+                                $"((issueto - issuefrom) + 1) issue_quantity, " +
+                                $"issuefrom, " +
+                                $"issueto, " +
+                                $"(issueto - last_issued) ending_balance_quantity, " +
+                                $"(last_issued + 1) ending_balance_serial_from, " +
+                                $"(issueto) ending_balance_serial_to " +
+                                $"FROM {viewTableName} " +
+                                $"GROUP BY collecting_officer_id ";
+
+                var dt = new DataTable();
+                return _dbGenericCommands.Fill(query, dt);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

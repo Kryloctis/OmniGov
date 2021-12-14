@@ -127,7 +127,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         private void btnRCD_Click(object sender, EventArgs e)
         {
             string id = string.Join(",", print.Select(x => String.Format("'{0}'", x.Key)).ToArray());
-            _ = new frmCDReport(id).ShowDialog();
+            _ = new frmCollectorsReportOfCollectionsAndDeposits(id).ShowDialog();
            
         }
 

@@ -99,6 +99,30 @@ namespace ACC.Data
             return record;
         }
 
+        public DataTable GetCollectorsReportByReportNo(string reportNumber)
+        {
+            try
+            {
+                var parameter = new object[][] {
+                    new object[]{"@reportNo", DbType.String, reportNumber},
+                };
+
+                string query = $"SELECT " +
+                    $"collecting_officer,  " +
+                    $"report_no, " +
+                    $"amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE is_approved = 1 ";
+
+                var dtpc = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public DataTable GetRecords()
         {
             try
@@ -187,6 +211,26 @@ namespace ACC.Data
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        public DataTable GetRecordsByReportNumber(string reportNumber)
+        {
+            try
+            {
+                var parameter = new object[][] {
+                    new object[] {"@reportNumber", DbType.String, reportNumber}
+                };
+
+                string query = $"SELECT * FROM {viewTableName} WHERE report_no = @reportNumber";
+
+                var dtReport = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtReport, parameter);
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }
@@ -773,5 +817,6 @@ namespace ACC.Data
             }
         }
 
+       
     }
 }
