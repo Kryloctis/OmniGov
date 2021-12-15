@@ -225,12 +225,12 @@ namespace ACC.Data
                 $"date_entry " +
                 $"FROM {viewTableName} " +
                 $"WHERE " +
-                $"MONTH(date_entry) = @month " + 
+                $"MONTH(date_entry) = @month " +
                 $"AND YEAR(date_entry) = @year " +
                 $"AND journals_id = @journalId " +
                 $"AND is_approved = 1 " +
                 $"AND is_disapproved = 0 " +
-                $"AND is_cancelled =  0 " + 
+                $"AND is_cancelled =  0 " +
                 $"AND jev_no LIKE @jev_no";
 
                 var dtGeneralLedgers = new DataTable();
@@ -593,9 +593,10 @@ namespace ACC.Data
                         new object[] { "@payee", DbType.String, entity.Payee },
                         new object[] { "@explanation", DbType.String, entity.Explanation },
                         new object[] { "@updated_by", DbType.Byte, entity.UpdatedBy },
+                        new object[] { "@is_edited", DbType.Byte, entity.IsEdited},
                     };
 
-                    string query = $"UPDATE {tableName} SET funds_id = @funds_id, journals_id = @journals_id, jev_no = @jev_no, date_entry = @date_entry, ref_no = @ref_no, payee = @payee, explanation = @explanation, updated_by = @updated_by WHERE id = @id";
+                    string query = $"UPDATE {tableName} SET funds_id = @funds_id, journals_id = @journals_id, jev_no = @jev_no, date_entry = @date_entry, ref_no = @ref_no, payee = @payee, explanation = @explanation, updated_by = @updated_by, is_edited = @is_edited WHERE id = @id";
 
                     // save and get the last inserted id
                     _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
@@ -703,6 +704,7 @@ namespace ACC.Data
                     $"is_approved, " +
                     $"is_disapproved, " +
                     $"is_cancelled, " +
+                    $"is_edited, " +
                     $"created_at, " +
                     $"created_by, " +
                     $"created_by_name, " +
@@ -732,6 +734,7 @@ namespace ACC.Data
                     record.Add("is_approved", reader.Rows[0]["is_approved"].ToString());
                     record.Add("is_disapproved", reader.Rows[0]["is_disapproved"].ToString());
                     record.Add("is_cancelled", reader.Rows[0]["is_cancelled"].ToString());
+                    record.Add("is_edited", reader.Rows[0]["is_edited"].ToString());
                     record.Add("created_at", reader.Rows[0]["created_at"].ToString());
                     record.Add("created_by", reader.Rows[0]["created_by"].ToString());
                     record.Add("created_by_name", reader.Rows[0]["created_by_name"].ToString());
@@ -1000,7 +1003,7 @@ namespace ACC.Data
                     case "approved":
                         jevStatusQuery = $"is_approved = 1 AND is_disapproved = 0 AND is_cancelled = 0 AND ";
                         break;
-                    case "disapproved": 
+                    case "disapproved":
                         jevStatusQuery = $"is_approved = 0 AND is_disapproved = 1 AND is_cancelled = 0 AND ";
                         break;
                     case "cancelled":

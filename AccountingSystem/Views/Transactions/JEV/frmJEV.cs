@@ -1,14 +1,13 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Dashboard;
 using AccountingSystem.Views.Reports.JEV;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Windows.Forms;
-using AccountingSystem.Views.Transactions;
-using System.Transactions;
-using System.Linq;
 using System.Data;
-using AccountingSystem.Views.Dashboard;
+using System.Drawing;
+using System.Linq;
+using System.Transactions;
+using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
@@ -32,7 +31,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void frmJEV_Load(object sender, EventArgs e)
         {
-           
+
             if (_frmJEVList != null)
             {
                 LoadSelectedJEV(uc.jevNo);
@@ -46,7 +45,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             PermissionVerification();
         }
 
-        private void PermissionVerification() 
+        private void PermissionVerification()
         {
             if (!Helper.HasPermission("JEV Approval"))
             {
@@ -59,7 +58,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             if (!Helper.HasPermission("Report JEVs"))
                 btnPrint.Enabled = false;
 
-            if(!Helper.HasPermission("Transaction JEV"))
+            if (!Helper.HasPermission("Transaction JEV"))
             {
                 btnSave.Enabled = false;
                 btnDelete.Enabled = false;
@@ -74,11 +73,17 @@ namespace AccountingSystem.Views.Transactions.JEV
                 ucjev1.Enabled = false;
             }
 
-            if(createdById != Helper.UserId)
+            if (createdById != Helper.UserId)
                 lblShowMessage.Enabled = false;
 
             if (Helper.HasPermission("JEV Approval"))
                 lblShowMessage.Enabled = true;
+
+            if (Helper.HasPermission("Transaction Edit Approved JEV"))
+            {
+                btnSave.Enabled = true;
+                ucjev1.Enabled = true;
+            }
 
         }
 
@@ -125,7 +130,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             jevModel.RefNo = uc.txtRefNo.Text.Trim();
             jevModel.Payee = uc.txtPayee.Text.Trim();
             jevModel.Explanation = uc.txtExplanation.Text.Trim();
-
+            jevModel.IsEdited = uc.isApproved == 1 && uc.isEdit ? true : false;
 
             if (!Helper.HasPermission("Transaction JEV Approved"))
                 jevModel.IsApproved = false;
@@ -344,7 +349,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             try
             {
                 int jevId = ucjev1.jevId;
-                var remarks = Factory.JEVRepository().SetRemarks(jevId,string.Empty);
+                var remarks = Factory.JEVRepository().SetRemarks(jevId, string.Empty);
 
                 return remarks;
             }
@@ -399,7 +404,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             if (!FormValidations())
                 return false;
 
-            using (TransactionScope scope = new TransactionScope()) 
+            using (TransactionScope scope = new TransactionScope())
             {
                 bool updated = true;
 
@@ -410,7 +415,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         _ = SetJEVStatus(0);
                         _ = SetRemarks();
                     }
-                        
+
 
 
                     switch (uc.journalName)
@@ -437,7 +442,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                         case "Authority to Debit Account Disbursement Journal":
                             _ = UpdateADADisbursementsJournal(userId);
-                            break; 
+                            break;
                     }
 
                     if (updated == true)
@@ -469,7 +474,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         }
 
-        private bool DeleteData() 
+        private bool DeleteData()
         {
             try
             {
@@ -492,7 +497,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            if (uc.jevId == 0)
+            if (!uc.isEdit)
             {
                 if (InsertData())
                 {
@@ -507,7 +512,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
 
                 int jevId = uc.jevId;
-                string message = uc.isDisapproved == 1 ? "This JEV will be send back to pending." : jevId == 0? "JEV has been saved.": "JEV has been updated.";
+                string message = uc.isDisapproved == 1 ? "This JEV will be send back to pending." : jevId == 0 ? "JEV has been saved." : "JEV has been updated.";
 
                 Helper.MessageBoxSuccess(message);
                 CheckJevStatus(jevId);
@@ -622,7 +627,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             btnCancelJEV.Enabled = false;
             btnPrint.Enabled = false;
             btnSave.Text = "Save";
-            
+
 
             uc.Enabled = true;
             lblJevStatus.ForeColor = Color.Black;
@@ -645,7 +650,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-           if(DeleteData())
+            if (DeleteData())
             {
                 Helper.MessageBoxSuccess("JEV has been deleted.");
                 _frmJEVList.LoadJEVList();
@@ -692,6 +697,11 @@ namespace AccountingSystem.Views.Transactions.JEV
                         ucjev1.Enabled = false;
                         btnDelete.Enabled = false;
                         btnSave.Enabled = false;
+                        if (Helper.HasPermission("Transaction Edit Approved JEV"))
+                        {
+                            btnSave.Enabled = true;
+                            ucjev1.Enabled = true;
+                        }
                         break;
                     case "disapproved":
                         //DISSAPROVED
@@ -790,7 +800,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void lblShowMessage_Click(object sender, EventArgs e)
         {
             if (uc.jevId != 0)
-            {   var frmRemarks = new frmRemarks(this);
+            {
+                var frmRemarks = new frmRemarks(this);
                 frmRemarks.btnDisapprove.Visible = false;
                 frmRemarks.btnCancel.Text = "Close";
                 frmRemarks.ShowDialog();
@@ -1006,6 +1017,16 @@ namespace AccountingSystem.Views.Transactions.JEV
                 uc.isDisapproved = Convert.ToByte(jevDict["is_disapproved"]);
                 uc.isCancelled = Convert.ToByte(jevDict["is_cancelled"]);
                 lblCreatedBy.Text = jevDict["created_by_name"];
+
+
+
+                if (Convert.ToByte(jevDict["is_edited"]) == 1)
+                {
+                    lblIsEdited.Visible = true;
+                    lblIsEdited.Text = $"(Edited)";
+                }
+                else
+                    lblIsEdited.Visible = false;
 
                 CheckedFund(jevDict["fund_name"]);
                 CheckedJournal(jevDict["journal_name"]);
