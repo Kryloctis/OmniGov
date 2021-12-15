@@ -77,10 +77,11 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // ucrci1
             // 
-            this.ucrci1.Location = new System.Drawing.Point(12, 11);
+            this.ucrci1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucrci1.Location = new System.Drawing.Point(0, 0);
             this.ucrci1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucrci1.Name = "ucrci1";
-            this.ucrci1.Size = new System.Drawing.Size(666, 336);
+            this.ucrci1.Size = new System.Drawing.Size(682, 351);
             this.ucrci1.TabIndex = 6;
             // 
             // frmRCIEdit

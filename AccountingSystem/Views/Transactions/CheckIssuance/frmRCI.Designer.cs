@@ -220,6 +220,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinimizeBox = false;
             this.Name = "frmRCI";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Transactions > Issue Check";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

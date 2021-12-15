@@ -20,7 +20,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         {
             ucbd1.LoadBanks();
             ucbd1.LoadFunds();
-            if(Gcid > 0)
+            if (Gcid > 0)
             {
                 ucbd1.txtamount.Value = Gcamount;
                 ucbd1.txtamount.Enabled = false;
@@ -73,7 +73,6 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 {
                     return bdrepository.Insert(bdModel);
                 }
-              
             }
             catch (Exception ex)
             {

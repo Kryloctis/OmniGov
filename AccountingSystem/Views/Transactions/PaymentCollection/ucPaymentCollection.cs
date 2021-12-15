@@ -460,12 +460,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             if (isCashTicket)
             {
                 tabPaymentType.SelectedTab = tabCashTickets;
-                isCashTicket = false;
+                isCashTicket = true;
             }
             else
             {
                 tabPaymentType.SelectedTab = tabNonCashTickets;
-                isCashTicket = true;
+                isCashTicket = false;
             }
         }
 

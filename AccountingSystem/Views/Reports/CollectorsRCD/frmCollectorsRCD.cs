@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Reports.PaymentCollection;
 using AccountingSystem.Views.Reports.RCDCollector;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
     {
         private readonly ucCollectorsRCD uc;
         private List<CollectorReportPaymentModel> data;
-
 
         public frmCollectorsRCD()
         {
@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             if (SaveData())
             {
-                Helper.MessageBoxSuccess("RCD has been created.");
+                Helper.MessageBoxSuccess("Collector's has been created.");
                 uc.ResetForm();
             }
         }
@@ -58,7 +58,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             if (!uc.ValidateChildren())
             {
-                //Helper.MessageBoxError(uc.GetFormErrors());
+                Helper.MessageBoxError(uc.GetFormErrors());
                 return false;
             }
 
@@ -127,7 +127,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 var rcdRepository = Factory.CollectorReportRepository();
                 var rcdData = rcdRepository.GetRecordByID(reportNo);
 
-
+                uc.reportId = (ushort)Convert.ToInt32(rcdData["id"]);
                 uc.collectorId = (ushort)Convert.ToInt16(rcdData["collecting_officers_id"]);
                 uc.fundId = (byte)Convert.ToInt32(rcdData["funds_id"]);
                 uc.flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => ((byte)r.Tag == Convert.ToInt16(rcdData["funds_id"])) ? r.Checked = true : r.Checked = false);
@@ -189,7 +189,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                         uc.Enabled = false;
                         break;
                 }
-
             }
 
             catch (Exception)
@@ -252,6 +251,88 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
+        {
+            _ = new frmCDReport("40").ShowDialog();
+        }
+
+        private void btnDisapprove_Click(object sender, EventArgs e)
+        {
+
+            string reportNo = uc.txtReport.Text;
+            if (String.IsNullOrEmpty(reportNo)) return;
+
+
+            if (MessageBox.Show("Are you sure you want to disapproved this Collector's Report?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (SetRCDStatus(2, reportNo))
+                {
+                    Helper.MessageBoxSuccess("Collector's Report has been disapproved.");
+                    if (MessageBox.Show("Do you want to add disapproval message?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        _ = new frmCollectorsRCDRemarks(this).ShowDialog();
+                    }
+                    CheckRCDStatus(reportNo);
+                }
+                return;
+            }
+
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            uc.ResetForm();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (DeleteReport())
+            {
+                Helper.MessageBoxSuccess("Report of Collection successfully deleted.");
+                ResetLocalControls();
+                uc.ResetForm();
+            }
+        }
+
+        private bool DeleteReport()
+        {
+            try
+            {
+                if (MessageBox.Show("Are you sure you want to delete report of collection?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    ushort reportId = uc.reportId;
+                    string reportNo = uc.txtReport.Text.Trim();
+
+                    var collectorReportPaymentModel = new CollectorReportPaymentModel() {CollectorsReportId = reportId };
+                    var collectorReportPaymentRepo = Factory.CollectorReportPaymentsRepository();
+                    bool isDeleteSuccess =  collectorReportPaymentRepo.Delete(collectorReportPaymentModel);
+
+                    if (isDeleteSuccess)
+                    {
+                        var collectorReportModel = new CollectorReportModel() { Id = reportId, ReportNo = reportNo };
+                        var collectorReportRepo = Factory.CollectorReportRepository();
+                        return collectorReportRepo.Delete(collectorReportModel);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void ResetLocalControls()
+        {
+            btnDelete.Enabled = false;
+            btnApprove.Enabled = false;
+            btnDisapprove.Enabled = false;
+            btnPrint.Enabled = false;
+
+            lblJevStatus.Text = "--";
+            lblJevStatus.ForeColor = Color.Black;
+        }
+
+        private void ucCollectorsRCD1_Load(object sender, EventArgs e)
         {
 
         }

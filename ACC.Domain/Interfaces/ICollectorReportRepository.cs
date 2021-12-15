@@ -9,8 +9,13 @@ namespace ACC.Domain.Interfaces
     public interface ICollectorReportRepository : IRepository<CollectorReportModel>
     {
         Dictionary<string, string> GetRecordByID(string reportNo);
+
+        bool Delete(CollectorReportModel entity);
         bool CodeExist(string id);
-        bool HasGenerated(int id);
+        bool HasGenerated(int paymentCollectionsId);
+
+        bool ReportNumberExist(string reporNo);
+
         DataTable GetSummary(int cid, int fid, int year);
         int InsertId(CollectorReportModel entity);
         bool HasReported(int id);
@@ -23,6 +28,8 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecords(string id);
         DataTable FilterRecords(string status, byte fundId, string keySearch, short collectingOfficerId);
         DataTable FilterRecords(string status, byte fundId, string keySearch);
+
+        DataTable FilterRecords(sbyte fundId, ushort collectorId, string reportNo);
 
         string GetRCDStatus(string reportNo);
 

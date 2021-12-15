@@ -479,7 +479,7 @@ namespace AccountingSystem
         #endregion
 
         #region RCD 
-        internal static void RCDDatagridView(DataTable dataTable, DataGridView datagrid)
+        internal static void RCDSearchDatagridView(DataTable dataTable, DataGridView datagrid)
         {
 
             datagrid.Rows.Clear();
@@ -509,7 +509,6 @@ namespace AccountingSystem
 
             foreach (DataRow drRCD in dataTable.Rows)
             {
-                
                 datagrid.Rows.Add(new object[]
                 {
                     drRCD["id"],
@@ -523,8 +522,48 @@ namespace AccountingSystem
             }
 
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", 9f);
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
 
-         
+        internal static void RCDDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+
+            datagrid.Rows.Clear();
+            datagrid.Columns.Clear();
+
+            datagrid.Columns.Add("id", "Id");
+            datagrid.Columns.Add("collecting_officers_id", "Collector Id");
+            datagrid.Columns.Add("collecting_officer", "Collector");
+            datagrid.Columns.Add("report_no", "Report No.");
+            datagrid.Columns.Add("amount", "Amount");
+
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["collecting_officers_id"].Visible = false;
+
+
+            datagrid.Columns["amount"].Resizable = DataGridViewTriState.False;
+            datagrid.Columns["amount"].Width = 100;
+            datagrid.Columns["amount"].MinimumWidth = 100;
+            datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+
+            foreach (DataRow drRCD in dataTable.Rows)
+            {
+
+                datagrid.Rows.Add(new object[]
+                {
+                    drRCD["id"],
+                    drRCD["collecting_officers_id"],
+                    drRCD["collecting_officer"],
+                    drRCD["report_no"],
+                    drRCD["amount"]
+                });
+            }
+
+            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", 9f);
+
+
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
@@ -626,28 +665,39 @@ namespace AccountingSystem
         internal static void RCIDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
+
+            datagrid.Columns[0].HeaderText = "Id ";
+            datagrid.Columns[1].HeaderText = "Bank Id ";
+            datagrid.Columns[2].HeaderText = "Account No.";
+            datagrid.Columns[3].HeaderText = "Bank Name";
+            datagrid.Columns[4].HeaderText = "Fund Id";
+            datagrid.Columns[5].HeaderText = "Fund";
+            datagrid.Columns[6].HeaderText = "Check Date";
+            datagrid.Columns[7].HeaderText = "Check No.";
+            datagrid.Columns[8].HeaderText = "DV No.";
+            datagrid.Columns[9].HeaderText = "Payee";
+            datagrid.Columns[10].HeaderText = "Nature of Payment";
+            datagrid.Columns[11].HeaderText = "Obligation No.";
+            datagrid.Columns[12].HeaderText = "FPP Id";
+            datagrid.Columns[13].HeaderText = "Functional Code";
+            datagrid.Columns[14].HeaderText = "Amount";
+            datagrid.Columns[14].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[14].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[15].HeaderText = "Created at";
+            datagrid.Columns[16].HeaderText = "Updated at";
+
+
+
             datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Account No.";
-            datagrid.Columns[2].HeaderText = "Bank Name";
-            datagrid.Columns[3].HeaderText = "Check Date";
-            datagrid.Columns[4].HeaderText = "Check Number";
-            datagrid.Columns[5].HeaderText = "DV No.";
-            datagrid.Columns[6].HeaderText = "Payee";
-            datagrid.Columns[7].HeaderText = "Nature of Payment";
-            datagrid.Columns[8].HeaderText = "OBR No.";
-            datagrid.Columns[9].HeaderText = "Functional Code";
-            datagrid.Columns[10].HeaderText = "Trust Liabilities";
-            datagrid.Columns[10].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[10].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[11].HeaderText = "BIR VAT/Non-VAT";
-            datagrid.Columns[11].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[11].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[12].HeaderText = "Amount";
-            datagrid.Columns[12].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[12].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[13].Visible = false;
-            datagrid.Columns[14].Visible = false;
+            datagrid.Columns[1].Visible = false;
+            datagrid.Columns[4].Visible = false;
+            datagrid.Columns[12].Visible = false;
+            datagrid.Columns[11].Visible = false;
             datagrid.Columns[15].Visible = false;
+            datagrid.Columns[16].Visible = false;
+
+
+
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
@@ -783,6 +833,7 @@ namespace AccountingSystem
             datagrid.Columns["amount"].MinimumWidth = 80;
             datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
 
             foreach (DataRow drPaymentCollection in dataTable.Rows)
             {

@@ -57,9 +57,30 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             };
 
             dtPaymentCollection = Factory.PaymentCollectionRepository().GetRecordByLedger(parameter);
+            PaymentCollectionChecker();
 
             int collectionsCount = dtPaymentCollection.Rows.Count;
             txtCollectionsCount.Text = collectionsCount.ToString();
+
+            if (dtPaymentCollection.Rows.Count == 0)
+                Helper.MessageBoxSuccess("No records found. You might have already created a report of collections for the selected date range.\n\n\nPlease select another date.");
+
+        }
+
+        private void PaymentCollectionChecker()
+        {
+            foreach (DataRow item in dtPaymentCollection.Rows)
+            {
+                var paymentCollectionId = Convert.ToInt32(item["id"].ToString());
+                var isPaymentCollectionHasReport = Factory.CollectorReportRepository().HasGenerated(paymentCollectionId);
+
+                if (isPaymentCollectionHasReport)
+                {
+                    item.Delete();
+                }
+            }
+
+            dtPaymentCollection.AcceptChanges();
         }
 
         private void EnableDisableLocalControls()

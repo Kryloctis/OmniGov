@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 351);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 352);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -77,20 +77,20 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // ucrci1
             // 
-            this.ucrci1.Location = new System.Drawing.Point(12, 11);
+            this.ucrci1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucrci1.Location = new System.Drawing.Point(0, 0);
             this.ucrci1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucrci1.Name = "ucrci1";
-            this.ucrci1.Size = new System.Drawing.Size(670, 329);
+            this.ucrci1.Size = new System.Drawing.Size(682, 352);
             this.ucrci1.TabIndex = 5;
             // 
             // frmRCIAdd
             // 
-            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(682, 378);
+            this.ClientSize = new System.Drawing.Size(682, 379);
             this.Controls.Add(this.ucrci1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
