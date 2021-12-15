@@ -44,6 +44,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblJevStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblIsEdited = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblShowMessage = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -184,6 +185,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2,
             this.lblJevStatus,
+            this.lblIsEdited,
             this.lblShowMessage});
             this.statusStrip1.Location = new System.Drawing.Point(0, 50);
             this.statusStrip1.Name = "statusStrip1";
@@ -195,7 +197,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(812, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(764, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -214,6 +216,13 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.lblJevStatus.Name = "lblJevStatus";
             this.lblJevStatus.Size = new System.Drawing.Size(18, 22);
             this.lblJevStatus.Text = "--";
+            // 
+            // lblIsEdited
+            // 
+            this.lblIsEdited.Name = "lblIsEdited";
+            this.lblIsEdited.Size = new System.Drawing.Size(48, 17);
+            this.lblIsEdited.Text = "(Edited)";
+            this.lblIsEdited.Visible = false;
             // 
             // lblShowMessage
             // 
@@ -309,5 +318,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedBy;
+        internal System.Windows.Forms.ToolStripStatusLabel lblIsEdited;
     }
 }
