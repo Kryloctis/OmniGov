@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         public ucRCI()
         {
             InitializeComponent();
-            Helper.DatagridFullRowSelectStyle(dgObligationNoList, true);
+            Helper.DatagridFullRowSelectStyle(dgObligationNoList,  true);
         }
 
         private void ucRCI_Load(object sender, EventArgs e)

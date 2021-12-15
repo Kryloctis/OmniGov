@@ -17,6 +17,7 @@ using AccountingSystem.Views.Reports.Cashbook;
 using AccountingSystem.Views.Reports.ConsolidatedReceipts;
 using AccountingSystem.Views.Reports.DailyCashReport;
 using AccountingSystem.Views.Reports.PaymentCollection;
+using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.SAAOBB;
@@ -409,7 +410,7 @@ namespace AccountingSystem
 
         private void menuprintPC_Click(object sender, EventArgs e)
         {
-            _ = new frmGCList().ShowDialog();
+            _ = new frmRCD().ShowDialog();
         }
 
         private void menuprintGC_Click(object sender, EventArgs e)

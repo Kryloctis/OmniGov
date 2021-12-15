@@ -642,6 +642,8 @@ namespace AccountingSystem
         internal static void GeneralCollectionDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.Columns.Clear();
+            datagrid.Rows.Clear();
+
             datagrid.DataSource = dataTable;
 
             datagrid.Columns[0].Visible = false;

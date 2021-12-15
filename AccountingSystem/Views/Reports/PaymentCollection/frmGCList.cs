@@ -55,22 +55,15 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            if(txtsearch.Text.Length > 0)
+            try
             {
-                try
-                {
-                    var gcRepository = Factory.GeneralCollectionsRepository();
-                    var dtgc = gcRepository.GetRecordsBySearch(txtsearch.Text.Trim());
-                    HelperLoadRecords.GeneralCollectionDatagridView(dtgc, dgvgc);
+                var gcRepository = Factory.GeneralCollectionsRepository();
+                var dtgc = gcRepository.GetRecordsBySearch(txtsearch.Text.Trim());
+                HelperLoadRecords.GeneralCollectionDatagridView(dtgc, dgvgc);
 
-                    lblRecordCount.Text = dgvgc.Rows.Count.ToString();
-                }
-                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+                lblRecordCount.Text = dgvgc.Rows.Count.ToString();
             }
-            else
-            {
-                LoadGC();
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgvgc_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -108,11 +101,11 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                     {
                         if (Helper.MessageBoxConfirmGCDeposit())
                         {
-                            frmBankDeposits fd = new frmBankDeposits();
-                            frmBankDepositsAdd fbd = new frmBankDepositsAdd(fd);
-                            fbd.Gcid = Id;
-                            fbd.Gcamount = gcsum;
-                            if (fbd.ShowDialog() == DialogResult.OK)
+                            frmBankDeposits frmBankDeposit = new();
+                            frmBankDepositsAdd frmBankDepositAdd = new(frmBankDeposit);
+                            frmBankDepositAdd.Gcid = Id;
+                            frmBankDepositAdd.Gcamount = gcsum;
+                            if (frmBankDepositAdd.ShowDialog() == DialogResult.OK)
                             {
                                 this.Close();
                             }
@@ -135,5 +128,6 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         {
             LoadGC();
         }
+
     }
 }
