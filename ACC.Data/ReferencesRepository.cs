@@ -8,6 +8,13 @@ namespace ACC.Data
 {
     public class ReferencesRepository : IReferences
     {
+        private MySqlGenericCommands mySqlGenericCommands;
+
+        public ReferencesRepository(MySqlGenericCommands mySqlGenericCommands)
+        {
+            this.mySqlGenericCommands = mySqlGenericCommands;
+        }
+
         public int CountRecords()
         {
             throw new NotImplementedException();

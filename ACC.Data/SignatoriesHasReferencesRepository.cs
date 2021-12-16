@@ -5,8 +5,15 @@ using System.Data;
 
 namespace ACC.Data
 {
-    public class SignatoriesHasPreferencesRepository : ISignatoriesHasReferences
+    public class SignatoriesHasReferencesRepository : ISignatoriesHasReferences
     {
+        private MySqlGenericCommands mySqlGenericCommands;
+
+        public SignatoriesHasReferencesRepository(MySqlGenericCommands mySqlGenericCommands)
+        {
+            this.mySqlGenericCommands = mySqlGenericCommands;
+        }
+
         public int CountRecords()
         {
             throw new System.NotImplementedException();

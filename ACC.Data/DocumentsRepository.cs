@@ -7,6 +7,13 @@ namespace ACC.Data
 {
     public class DocumentsRepository : IDocuments
     {
+        private MySqlGenericCommands mySqlGenericCommands;
+
+        public DocumentsRepository(MySqlGenericCommands mySqlGenericCommands)
+        {
+            this.mySqlGenericCommands = mySqlGenericCommands;
+        }
+
         public int CountRecords()
         {
             throw new System.NotImplementedException();
