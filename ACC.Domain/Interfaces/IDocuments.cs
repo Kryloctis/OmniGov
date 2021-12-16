@@ -2,7 +2,7 @@
 
 namespace ACC.Domain.Interfaces
 {
-    interface IDocuments : IRepository<DocumentsModel>
+    public interface IDocuments : IRepository<DocumentsModel>
     {
     }
 }
