@@ -48,6 +48,7 @@ namespace AccountingSystem
             this.menuAccForm = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReceipts = new System.Windows.Forms.ToolStripMenuItem();
             this.amortiaztionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.signatoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOB = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSAAOBB = new System.Windows.Forms.ToolStripMenuItem();
@@ -209,7 +210,8 @@ namespace AccountingSystem
             this.menuBanks,
             this.menuAccForm,
             this.menuReceipts,
-            this.amortiaztionToolStripMenuItem});
+            this.amortiaztionToolStripMenuItem,
+            this.signatoriesToolStripMenuItem});
             this.menuManage.Name = "menuManage";
             this.menuManage.Size = new System.Drawing.Size(62, 19);
             this.menuManage.Text = "Manage";
@@ -313,6 +315,12 @@ namespace AccountingSystem
             this.amortiaztionToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.amortiaztionToolStripMenuItem.Text = "Amortization";
             this.amortiaztionToolStripMenuItem.Click += new System.EventHandler(this.amortiaztionToolStripMenuItem_Click);
+            // 
+            // signatoriesToolStripMenuItem
+            // 
+            this.signatoriesToolStripMenuItem.Name = "signatoriesToolStripMenuItem";
+            this.signatoriesToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.signatoriesToolStripMenuItem.Text = "Signatories";
             // 
             // menuReports
             // 
@@ -1410,6 +1418,7 @@ namespace AccountingSystem
         private System.Windows.Forms.RadioButton radLedgers;
         private System.Windows.Forms.RadioButton radTrialBalance;
         private System.Windows.Forms.RadioButton radFinancialStatements;
+        private System.Windows.Forms.ToolStripMenuItem signatoriesToolStripMenuItem;
     }
 }
 
