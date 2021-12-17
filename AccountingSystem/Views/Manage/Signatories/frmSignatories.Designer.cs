@@ -167,6 +167,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.btnSave.Size = new System.Drawing.Size(42, 47);
             this.btnSave.Text = "Add...";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnEdit
             // 
@@ -177,6 +178,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.btnEdit.Size = new System.Drawing.Size(40, 47);
             this.btnEdit.Text = "Edit...";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnDelete
             // 

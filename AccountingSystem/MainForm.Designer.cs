@@ -321,6 +321,7 @@ namespace AccountingSystem
             this.signatoriesToolStripMenuItem.Name = "signatoriesToolStripMenuItem";
             this.signatoriesToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.signatoriesToolStripMenuItem.Text = "Signatories";
+            this.signatoriesToolStripMenuItem.Click += new System.EventHandler(this.signatoriesToolStripMenuItem_Click);
             // 
             // menuReports
             // 
