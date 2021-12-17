@@ -7,11 +7,13 @@ namespace AccountingSystem.Views.Manage.Signatories
     public partial class frmAddSignatories : Form
     {
         private ucSignatories uc;
+        private frmSignatories _frmSignatories;
 
-        public frmAddSignatories()
+        public frmAddSignatories(frmSignatories frmSignatories)
         {
             InitializeComponent();
             uc = ucSignatories1;
+            _frmSignatories = frmSignatories;
         }
 
         private bool SaveData()
@@ -29,7 +31,7 @@ namespace AccountingSystem.Views.Manage.Signatories
                     Prefix = uc.txtPrefix.Text.Trim(),
                     FirstName = uc.txtFirstName.Text.Trim(),
                     MiddleInitial = Convert.ToChar(uc.txtMiddleInitial.Text),
-                    LastName = uc.txtMiddleInitial.Text.Trim(),
+                    LastName = uc.txtLastName.Text.Trim(),
                     Suffix = uc.txtSuffix.Text.Trim(),
                     Title = uc.txtTitle.Text.Trim()
                 };
@@ -50,6 +52,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             {
                 Helper.MessageBoxSuccess("Signatory has been saved");
                 uc.ResetForm();
+                _frmSignatories.LoadSignatories();
             }
         }
 

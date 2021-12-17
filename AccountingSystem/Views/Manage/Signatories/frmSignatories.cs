@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Signatories
 {
@@ -10,9 +11,23 @@ namespace AccountingSystem.Views.Manage.Signatories
             Helper.LoadFormIcon(this);
         }
 
+        internal void LoadSignatories()
+        {
+            try
+            {
+                var dtSignatories = Factory.SignatoriesRepository().GetRecords();
+
+                HelperLoadRecords.SignatoriesDatagridView(dtSignatories, dgSignatories);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
         private void btnSave_Click(object sender, System.EventArgs e)
         {
-            _ = new frmAddSignatories().ShowDialog();
+            _ = new frmAddSignatories(this).ShowDialog();
         }
 
         private void btnEdit_Click(object sender, System.EventArgs e)
@@ -38,6 +53,7 @@ namespace AccountingSystem.Views.Manage.Signatories
         private void frmSignatories_Load(object sender, System.EventArgs e)
         {
             EnableDisableButtons();
+            LoadSignatories();
         }
     }
 }
