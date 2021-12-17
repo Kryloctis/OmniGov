@@ -4,9 +4,25 @@ namespace AccountingSystem.Views.Manage.Signatories
 {
     public partial class ucSignatories : UserControl
     {
+        internal int signatoriesId = 0;
+        internal bool isEdit = false;
+
         public ucSignatories()
         {
             InitializeComponent();
+        }
+
+        internal void ResetForm()
+        {
+            if (isEdit)
+                signatoriesId = 0;
+
+            txtPrefix.Text = string.Empty;
+            txtFirstName.Text = string.Empty;
+            txtMiddleInitial.Text = string.Empty;
+            txtLastName.Text = string.Empty;
+            txtSuffix.Text = string.Empty;
+            txtTitle.Text = string.Empty;
         }
 
         internal string GetFormErrors()

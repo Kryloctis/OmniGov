@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Manage.Signatories
         /// </summary>
         private void InitializeComponent()
         {
-            this.dtSignatories = new System.Windows.Forms.DataGridView();
+            this.dgSignatories = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -48,19 +48,20 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDocumentReferences = new System.Windows.Forms.ToolStripButton();
-            ((System.ComponentModel.ISupportInitialize)(this.dtSignatories)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgSignatories)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dtSignatories
+            // dgSignatories
             // 
-            this.dtSignatories.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtSignatories.Location = new System.Drawing.Point(12, 76);
-            this.dtSignatories.Name = "dtSignatories";
-            this.dtSignatories.RowTemplate.Height = 25;
-            this.dtSignatories.Size = new System.Drawing.Size(443, 379);
-            this.dtSignatories.TabIndex = 2;
+            this.dgSignatories.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgSignatories.Location = new System.Drawing.Point(12, 76);
+            this.dgSignatories.Name = "dgSignatories";
+            this.dgSignatories.RowTemplate.Height = 25;
+            this.dgSignatories.Size = new System.Drawing.Size(443, 379);
+            this.dgSignatories.TabIndex = 2;
+            this.dgSignatories.SelectionChanged += new System.EventHandler(this.dtSignatories_SelectionChanged);
             // 
             // label1
             // 
@@ -232,13 +233,14 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listDocuments);
-            this.Controls.Add(this.dtSignatories);
+            this.Controls.Add(this.dgSignatories);
             this.Controls.Add(this.toolStrip1);
             this.Name = "frmSignatories";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Signatories";
-            ((System.ComponentModel.ISupportInitialize)(this.dtSignatories)).EndInit();
+            this.Load += new System.EventHandler(this.frmSignatories_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgSignatories)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -249,8 +251,7 @@ namespace AccountingSystem.Views.Manage.Signatories
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridView dtSignatories;
+        private System.Windows.Forms.DataGridView dgSignatories;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.StatusStrip statusStrip1;

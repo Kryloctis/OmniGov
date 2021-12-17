@@ -107,11 +107,12 @@ namespace AccountingSystem.Views.Manage.Signatories
             // 
             // txtMiddleInitial
             // 
+            this.txtMiddleInitial.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtMiddleInitial.Location = new System.Drawing.Point(83, 61);
             this.txtMiddleInitial.MaxLength = 1;
             this.txtMiddleInitial.Name = "txtMiddleInitial";
             this.txtMiddleInitial.Size = new System.Drawing.Size(382, 23);
-            this.txtMiddleInitial.TabIndex = 4;
+            this.txtMiddleInitial.TabIndex = 2;
             this.txtMiddleInitial.Validating += new System.ComponentModel.CancelEventHandler(this.txtMiddleInitial_Validating);
             this.txtMiddleInitial.Validated += new System.EventHandler(this.txtMiddleInitial_Validated);
             // 
@@ -129,14 +130,14 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.txtSuffix.Location = new System.Drawing.Point(83, 119);
             this.txtSuffix.Name = "txtSuffix";
             this.txtSuffix.Size = new System.Drawing.Size(382, 23);
-            this.txtSuffix.TabIndex = 6;
+            this.txtSuffix.TabIndex = 4;
             // 
             // txtLastName
             // 
             this.txtLastName.Location = new System.Drawing.Point(83, 90);
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(382, 23);
-            this.txtLastName.TabIndex = 7;
+            this.txtLastName.TabIndex = 3;
             this.txtLastName.Validating += new System.ComponentModel.CancelEventHandler(this.txtLastName_Validating);
             this.txtLastName.Validated += new System.EventHandler(this.txtLastName_Validated);
             // 
@@ -145,7 +146,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.txtPrefix.Location = new System.Drawing.Point(83, 3);
             this.txtPrefix.Name = "txtPrefix";
             this.txtPrefix.Size = new System.Drawing.Size(382, 23);
-            this.txtPrefix.TabIndex = 8;
+            this.txtPrefix.TabIndex = 0;
             this.txtPrefix.Validating += new System.ComponentModel.CancelEventHandler(this.txtPrefix_Validating);
             this.txtPrefix.Validated += new System.EventHandler(this.txtPrefix_Validated);
             // 
@@ -154,7 +155,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.txtFirstName.Location = new System.Drawing.Point(83, 32);
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(382, 23);
-            this.txtFirstName.TabIndex = 9;
+            this.txtFirstName.TabIndex = 1;
             this.txtFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.txtFirstName_Validating);
             this.txtFirstName.Validated += new System.EventHandler(this.txtFirstName_Validated);
             // 

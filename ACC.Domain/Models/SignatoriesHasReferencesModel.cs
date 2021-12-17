@@ -2,7 +2,7 @@
 {
     public class SignatoriesHasReferencesModel
     {
-        int SignatoriesId { get; set; }
-        int ReferencesId { get; set; }
+        public int SignatoriesId { get; set; }
+        public int ReferencesId { get; set; }
     }
 }

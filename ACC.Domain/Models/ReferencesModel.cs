@@ -2,7 +2,7 @@
 {
     public class ReferencesModel
     {
-        int DocumentsId { get; set; }
-        string Name { get; set; }
+        public int DocumentsId { get; set; }
+        public string Name { get; set; }
     }
 }

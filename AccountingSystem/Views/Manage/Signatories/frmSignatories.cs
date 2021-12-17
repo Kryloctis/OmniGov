@@ -19,5 +19,25 @@ namespace AccountingSystem.Views.Manage.Signatories
         {
             _ = new frmEditSignatories().ShowDialog();
         }
+
+        private void EnableDisableButtons()
+        {
+            Helper.EnableDisableToolStripButtons(dgSignatories, btnEdit, btnDelete);
+
+            if (dgSignatories.SelectedRows.Count < 1)
+                btnDocumentReferences.Enabled = false;
+            else
+                btnDocumentReferences.Enabled = true;
+        }
+
+        private void dtSignatories_SelectionChanged(object sender, System.EventArgs e)
+        {
+            EnableDisableButtons();
+        }
+
+        private void frmSignatories_Load(object sender, System.EventArgs e)
+        {
+            EnableDisableButtons();
+        }
     }
 }

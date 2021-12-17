@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Signatories
@@ -23,7 +24,18 @@ namespace AccountingSystem.Views.Manage.Signatories
                     return false;
                 }
 
-                return true;
+                var signatoriesModel = new SignatoriesModel()
+                {
+                    Prefix = uc.txtPrefix.Text.Trim(),
+                    FirstName = uc.txtFirstName.Text.Trim(),
+                    MiddleInitial = Convert.ToChar(uc.txtMiddleInitial.Text),
+                    LastName = uc.txtMiddleInitial.Text.Trim(),
+                    Suffix = uc.txtSuffix.Text.Trim(),
+                    Title = uc.txtTitle.Text.Trim()
+                };
+
+
+                return Factory.SignatoriesRepository().Insert(signatoriesModel);
             }
             catch (Exception ex)
             {
@@ -35,7 +47,15 @@ namespace AccountingSystem.Views.Manage.Signatories
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (SaveData())
-                Helper.MessageBoxSuccess("Validated");
+            {
+                Helper.MessageBoxSuccess("Signatory has been saved");
+                uc.ResetForm();
+            }
+        }
+
+        private void frmAddSignatories_Load(object sender, EventArgs e)
+        {
+            uc.isEdit = false;
         }
     }
 }
