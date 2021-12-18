@@ -11,6 +11,7 @@ using AccountingSystem.Views.Manage.FunctionProgramProject;
 using AccountingSystem.Views.Manage.Funds;
 using AccountingSystem.Views.Manage.Journals;
 using AccountingSystem.Views.Manage.Receipts;
+using AccountingSystem.Views.Manage.Signatories;
 using AccountingSystem.Views.Manage.Users.List;
 using AccountingSystem.Views.Manage.Users.Roles;
 using AccountingSystem.Views.Reports.Cashbook;
@@ -603,6 +604,11 @@ namespace AccountingSystem
         private void radFinancialStatements_CheckedChanged(object sender, EventArgs e)
         {
             tabControlAccounting.SelectedTab = tabPageFinancialStatements;
+        }
+
+        private void signatoriesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmSignatories().ShowDialog();
         }
     }
 }
