@@ -95,6 +95,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Signatories";
+            this.Load += new System.EventHandler(this.frmEditSignatories_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

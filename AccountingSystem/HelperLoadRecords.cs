@@ -14,7 +14,7 @@ namespace AccountingSystem
 
         internal static void SignatoriesDatagridView(DataTable dataTable, DataGridView dataGridView)
         {
-            Helper.DatagridDefaultStyle(dataGridView, true);
+            Helper.DatagridFullRowSelectStyle(dataGridView, true);
             dataGridView.DataSource = dataTable;
             dataGridView.Columns["id"].Visible = false;
             dataGridView.Columns["name"].HeaderText = "Name";

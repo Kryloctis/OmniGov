@@ -32,7 +32,11 @@ namespace AccountingSystem.Views.Manage.Signatories
 
         private void btnEdit_Click(object sender, System.EventArgs e)
         {
-            _ = new frmEditSignatories().ShowDialog();
+            int signatoriesId = Convert.ToInt32(dgSignatories.Rows[dgSignatories.CurrentRow.Index].Cells["id"].Value);
+
+            var _frmEditSignatories = new frmEditSignatories(this);
+            _frmEditSignatories.uc.signatoriesId = signatoriesId;
+            _frmEditSignatories.ShowDialog();
         }
 
         private void EnableDisableButtons()
