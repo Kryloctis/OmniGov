@@ -3,6 +3,7 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Transactions;
 
 namespace ACC.Data
 {
@@ -23,7 +24,29 @@ namespace ACC.Data
 
         public bool Delete(List<SignatoriesModel> entityList)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    foreach (var entity in entityList)
+                    {
+                        var parameters = new object[][]
+                        {
+                            new object[] { "@id", DbType.Int32, entity.Id},
+                        };
+
+                        string query = $"DELETE FROM {tableName} WHERE id = @id";
+                        _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                    }
+
+                    scope.Complete();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
