@@ -20,6 +20,8 @@ namespace AccountingSystem.Views.Manage.Signatories
                 var dtSignatories = Factory.SignatoriesRepository().GetRecords();
 
                 HelperLoadRecords.SignatoriesDatagridView(dtSignatories, dgSignatories);
+                lblRecordCount.Text = dgSignatories.Rows.Count.ToString();
+                Helper.ShowRecordTimestamp(dgSignatories, new byte[] { 3, 4 }, lblCreatedAt, lblUpdatedAt);
             }
             catch (Exception ex)
             {
