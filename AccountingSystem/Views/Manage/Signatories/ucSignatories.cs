@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Signatories
@@ -34,7 +36,8 @@ namespace AccountingSystem.Views.Manage.Signatories
                 errorProvider1.GetError(txtFirstName),
                 errorProvider1.GetError(txtMiddleInitial),
                 errorProvider1.GetError(txtLastName),
-                errorProvider1.GetError(txtTitle)
+                errorProvider1.GetError(txtTitle),
+                dgReferences.Tag.ToString()
             };
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
@@ -115,6 +118,31 @@ namespace AccountingSystem.Views.Manage.Signatories
             Helper.ClearErrorTextBox(errorProvider1, txtTitle);
         }
 
+
+        private List<int> SelectedReferences()
+        {
+            List<int> referencesIdList = new List<int>();
+
+            foreach (DataGridViewRow row in dgReferences.Rows)
+            {
+                var isReferenced = Convert.ToBoolean(row.Cells["is_referenced"].Value);
+                if (isReferenced)
+                    referencesIdList.Add(Convert.ToInt32(row.Cells["id"].Value));
+            }
+
+            return referencesIdList;
+        }
+
+        private bool ReferencesIsEmpty()
+        {
+            if (SelectedReferences().Count < 1)
+            {
+                dgReferences.Tag = "No reference has been selected";
+                return true;
+            }
+            return false;
+        }
+
         #endregion
 
         private void ucSignatories_Load(object sender, System.EventArgs e)
@@ -123,6 +151,21 @@ namespace AccountingSystem.Views.Manage.Signatories
             {
                 LoadReferences();
             }
+        }
+
+        private void dgReferences_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
+        }
+
+        private void dgReferences_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = ReferencesIsEmpty();
+        }
+
+        private void dgReferences_Validated(object sender, EventArgs e)
+        {
+            dgReferences.Tag = string.Empty;
         }
     }
 }

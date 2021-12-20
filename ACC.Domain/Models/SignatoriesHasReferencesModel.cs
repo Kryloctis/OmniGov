@@ -3,6 +3,6 @@
     public class SignatoriesHasReferencesModel
     {
         public int SignatoriesId { get; set; }
-        public int ReferencesId { get; set; }
+        public int DocumentReferencesId { get; set; }
     }
 }

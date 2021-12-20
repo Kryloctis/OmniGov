@@ -11,15 +11,30 @@ namespace ACC.Data
     {
         private MySqlGenericCommands mySqlGenericCommands;
         private readonly string tableName = "signatories";
+        private readonly ISignatoriesHasReferences _signatoriesHasReferences;
 
-        public SignatoriesRepository(MySqlGenericCommands mySqlGenericCommands)
+        public SignatoriesRepository(MySqlGenericCommands mySqlGenericCommands, ISignatoriesHasReferences signatoriesHasReferences)
         {
             this.mySqlGenericCommands = mySqlGenericCommands;
+            _signatoriesHasReferences = signatoriesHasReferences;
         }
 
         public int CountRecords()
         {
             throw new NotImplementedException();
+        }
+
+        public byte GetLastInsertedID()
+        {
+            try
+            {
+                string query = $"SELECT MAX(id) FROM {tableName}";
+                return byte.Parse(mySqlGenericCommands.ExecuteScalar(query));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Delete(List<SignatoriesModel> entityList)
@@ -118,27 +133,7 @@ namespace ACC.Data
 
         public bool Insert(SignatoriesModel entity)
         {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@prefix", DbType.String, entity.Prefix},
-                    new object[] { "@first_name", DbType.String, entity.FirstName},
-                    new object[] { "@middle_initial",DbType.String, entity.MiddleInitial},
-                    new object[] { "@last_name", DbType.String, entity.LastName},
-                    new object[] { "@suffix", DbType.String, entity.Suffix},
-                    new object[] { "@title", DbType.String, entity.Title}
-                };
-
-                string query = $"INSERT INTO {tableName} (prefix, first_name, middle_initial, last_name, suffix, title) VALUES (@prefix, @first_name, @middle_initial, @last_name, @suffix, @title)";
-
-                return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            throw new NotImplementedException();
         }
 
         public bool Update(SignatoriesModel entity)
@@ -160,6 +155,42 @@ namespace ACC.Data
 
                 return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
 
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool Insert(SignatoriesModel signatoriesModel, List<SignatoriesHasReferencesModel> signatoriesHasReferencesModelList)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    var parameters = new object[][]
+                     {
+                        new object[] { "@prefix", DbType.String, signatoriesModel.Prefix},
+                        new object[] { "@first_name", DbType.String, signatoriesModel.FirstName},
+                        new object[] { "@middle_initial",DbType.String, signatoriesModel.MiddleInitial},
+                        new object[] { "@last_name", DbType.String, signatoriesModel.LastName},
+                        new object[] { "@suffix", DbType.String, signatoriesModel.Suffix},
+                        new object[] { "@title", DbType.String, signatoriesModel.Title}
+                     };
+
+                    string query = $"INSERT INTO {tableName} (prefix, first_name, middle_initial, last_name, suffix, title) VALUES (@prefix, @first_name, @middle_initial, @last_name, @suffix, @title)";
+
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+
+                    foreach (SignatoriesHasReferencesModel signatoriesHasReferencesModel in signatoriesHasReferencesModelList)
+                    {
+                        signatoriesHasReferencesModel.SignatoriesId = GetLastInsertedID();
+                        _signatoriesHasReferences.Insert(signatoriesHasReferencesModel);
+                    }
+
+                    scope.Complete();
+                    return true;
+                }
             }
             catch (Exception)
             {

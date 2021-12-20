@@ -90,6 +90,9 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.dgReferences.RowTemplate.Height = 25;
             this.dgReferences.Size = new System.Drawing.Size(464, 264);
             this.dgReferences.TabIndex = 1;
+            this.dgReferences.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgReferences_ColumnAdded);
+            this.dgReferences.Validating += new System.ComponentModel.CancelEventHandler(this.dgReferences_Validating);
+            this.dgReferences.Validated += new System.EventHandler(this.dgReferences_Validated);
             // 
             // groupBox2
             // 
@@ -271,6 +274,6 @@ namespace AccountingSystem.Views.Manage.Signatories
         internal System.Windows.Forms.TextBox txtPrefix;
         internal System.Windows.Forms.TextBox txtFirstName;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.DataGridView dgReferences;
+        internal System.Windows.Forms.DataGridView dgReferences;
     }
 }
