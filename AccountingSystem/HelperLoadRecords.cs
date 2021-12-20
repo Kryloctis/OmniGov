@@ -10,6 +10,26 @@ namespace AccountingSystem
     public class HelperLoadRecords
     {
 
+        #region References
+
+        public static void ReferencesDatagridView(DataTable dataTable, DataGridView dataGridView)
+        {
+            Helper.DatagridFullRowSelectStyle(dataGridView, true);
+            dataGridView.Columns.Add("id", "ID");
+            dataGridView.Columns.Add(new DataGridViewCheckBoxColumn() { HeaderText = "", Name = "is_referenced" });
+            dataGridView.Columns.Add("document_reference_name", "References");
+            dataGridView.Columns.Add("document_name", "Documents");
+
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["is_referenced"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.ReadOnly = false;
+            dataGridView.Columns["document_reference_name"].ReadOnly = true;
+            dataGridView.Columns["document_reference_name"].Width = 150;
+            dataGridView.Columns["document_name"].ReadOnly = true;
+        }
+
+        #endregion
+
         #region Signatories
 
         internal static void SignatoriesDatagridView(DataTable dataTable, DataGridView dataGridView)

@@ -119,7 +119,7 @@ namespace AccountingSystem
 
         public static ISignatoriesHasReferences SignatoriesHasReferencesRepository() => new SignatoriesHasReferencesRepository(new MySqlGenericCommands());
 
-        public static IReferences ReferencesRepository() => new ReferencesRepository(new MySqlGenericCommands());
+        public static IDocumentReferences DocumentReferencesRepository() => new DocumentReferencesRepository(new MySqlGenericCommands());
 
         public static IDocuments DocumentsRepository() => new DocumentsRepository(new MySqlGenericCommands());
     }

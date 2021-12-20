@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Data;
+using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Signatories
 {
@@ -38,6 +39,29 @@ namespace AccountingSystem.Views.Manage.Signatories
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
+
+        #region References
+
+        private void LoadReferences()
+        {
+            HelperLoadRecords.ReferencesDatagridView(null, dgReferences);
+            var dtViewDocumentReferences = Factory.DocumentReferencesRepository().GetViewRecords();
+
+            foreach (DataRow row in dtViewDocumentReferences.Rows)
+            {
+                var data = new object[]
+                {
+                    row["document_references_id"],
+                    false,
+                    row["document_references_name"],
+                    row["documents_name"]
+                };
+
+                dgReferences.Rows.Add(data);
+            }
+        }
+
+        #endregion
 
         #region Validation
 
@@ -92,5 +116,13 @@ namespace AccountingSystem.Views.Manage.Signatories
         }
 
         #endregion
+
+        private void ucSignatories_Load(object sender, System.EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadReferences();
+            }
+        }
     }
 }
