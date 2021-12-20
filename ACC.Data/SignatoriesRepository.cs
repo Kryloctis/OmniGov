@@ -138,28 +138,7 @@ namespace ACC.Data
 
         public bool Update(SignatoriesModel entity)
         {
-            try
-            {
-                var parameters = new object[][]
-                  {
-                    new object[] { "@id", DbType.Int32, entity.Id},
-                    new object[] { "@prefix", DbType.String, entity.Prefix},
-                    new object[] { "@first_name", DbType.String, entity.FirstName},
-                    new object[] { "@middle_initial",DbType.String, entity.MiddleInitial},
-                    new object[] { "@last_name", DbType.String, entity.LastName},
-                    new object[] { "@suffix", DbType.String, entity.Suffix},
-                    new object[] { "@title", DbType.String, entity.Title}
-                  };
-
-                string query = $"UPDATE {tableName} SET prefix = @prefix, first_name = @first_name, middle_initial = @middle_initial, last_name = @last_name, suffix = @suffix, title = @title WHERE id = @id";
-
-                return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            throw new NotImplementedException();
         }
 
         public bool Insert(SignatoriesModel signatoriesModel, List<SignatoriesHasReferencesModel> signatoriesHasReferencesModelList)
@@ -187,6 +166,47 @@ namespace ACC.Data
                         signatoriesHasReferencesModel.SignatoriesId = GetLastInsertedID();
                         _signatoriesHasReferences.Insert(signatoriesHasReferencesModel);
                     }
+
+                    scope.Complete();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool Update(SignatoriesModel signatoriesModel, List<SignatoriesHasReferencesModel> signatoriesHasReferencesModelList)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@id", DbType.Int32, signatoriesModel.Id},
+                        new object[] { "@prefix", DbType.String, signatoriesModel.Prefix},
+                        new object[] { "@first_name", DbType.String, signatoriesModel.FirstName},
+                        new object[] { "@middle_initial",DbType.String, signatoriesModel.MiddleInitial},
+                        new object[] { "@last_name", DbType.String, signatoriesModel.LastName},
+                        new object[] { "@suffix", DbType.String, signatoriesModel.Suffix},
+                        new object[] { "@title", DbType.String, signatoriesModel.Title}
+                    };
+
+                    string query = $"UPDATE {tableName} SET prefix = @prefix, first_name = @first_name, middle_initial = @middle_initial, last_name = @last_name, suffix = @suffix, title = @title WHERE id = @id";
+
+                    _signatoriesHasReferences.DeleteBySignatoryId(signatoriesModel.Id);
+
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+
+                    foreach (SignatoriesHasReferencesModel signatoriesHasReferencesModel in signatoriesHasReferencesModelList)
+                    {
+                        signatoriesHasReferencesModel.SignatoriesId = signatoriesModel.Id;
+                        _signatoriesHasReferences.Insert(signatoriesHasReferencesModel);
+                    }
+
 
                     scope.Complete();
                     return true;

@@ -45,17 +45,20 @@ namespace AccountingSystem.Views.Manage.Signatories
 
         #region References
 
-        private void LoadReferences()
+        internal void LoadReferences()
         {
             HelperLoadRecords.ReferencesDatagridView(null, dgReferences);
             var dtViewDocumentReferences = Factory.DocumentReferencesRepository().GetViewRecords();
 
             foreach (DataRow row in dtViewDocumentReferences.Rows)
             {
+                int documentReferencesId = Convert.ToInt32(row["document_references_id"]);
+                bool isReferenced = Factory.SignatoriesHasReferencesRepository().IsReferencedBySignatory(documentReferencesId, signatoriesId);
+
                 var data = new object[]
                 {
-                    row["document_references_id"],
-                    false,
+                    documentReferencesId,
+                    isEdit? isReferenced : false,
                     row["document_references_name"],
                     row["documents_name"]
                 };
@@ -147,10 +150,6 @@ namespace AccountingSystem.Views.Manage.Signatories
 
         private void ucSignatories_Load(object sender, System.EventArgs e)
         {
-            if (!DesignMode)
-            {
-                LoadReferences();
-            }
         }
 
         private void dgReferences_ColumnAdded(object sender, DataGridViewColumnEventArgs e)

@@ -6,5 +6,7 @@ namespace ACC.Domain.Interfaces
     public interface ISignatories : IRepository<SignatoriesModel>
     {
         bool Insert(SignatoriesModel signatoriesModel, List<SignatoriesHasReferencesModel> signatoriesHasReferencesModelList);
+
+        bool Update(SignatoriesModel signatoriesModel, List<SignatoriesHasReferencesModel> signatoriesHasReferencesModelList);
     }
 }
