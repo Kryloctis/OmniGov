@@ -46,7 +46,10 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private void frmCollectorsRCDSearch_Load(object sender, EventArgs e)
         {
             cmbstatus.SelectedIndex = 1;
+
+            cmbfunds.SelectedValueChanged -= new EventHandler(cmbfunds_SelectedValueChanged);
             LoadFunds();
+            cmbfunds.SelectedValueChanged += new EventHandler(cmbfunds_SelectedValueChanged);
             LoadRecords();
 
 
@@ -58,15 +61,13 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             try
             {
                 string status = cmbstatus.Text.ToLower();
-                byte fundId = (byte)(cmbfunds.SelectedValue != null ? Convert.ToByte(cmbfunds.SelectedValue.ToString()) : 0);
+                byte fundId = Convert.ToByte(cmbfunds.SelectedValue);
                 string keySearch = txtsearch.Text;
-                //byte collectingOfficerId = (byte)_frmCollectorsRCD.ucCollectorsRCD1.collectorId;
 
                 var colectorRepository = Factory.CollectorReportRepository();
                 var dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch);
 
                 HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgCollectorsReport);
-
 
                 if (dgCollectorsReport.Rows.Count == 0)
                 {
@@ -116,5 +117,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             LoadRecords();
         }
 
+        private void cmbfunds_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
     }
 }

@@ -639,7 +639,7 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT * FROM {viewTableName} WHERE {statusQuery} fund_id = @fundId AND " +
-                    $"(collecting_officer LIKE @keySearch OR report_no LIKE @keySearch OR fund_name LIKE @keySearch)";
+                    $"(collecting_officer LIKE @keySearch OR report_no LIKE @keySearch)";
 
                 var dtCollectorReport = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtCollectorReport, parameter);

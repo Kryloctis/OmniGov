@@ -385,7 +385,22 @@ namespace ACC.Data
                     new object[] { "@remarks", DbType.String, entity.Remarks}
                 };
 
-                string query = $"INSERT INTO {tableReceipts} (users_id,accountable_forms_id,receiptsfrom,receiptsto,received_date,quantity,remarks) VALUES (@users_id,@accountable_forms_id,@receiptsfrom,@receiptsto,@received_date,@quantity,@remarks)";
+                string query =  $"INSERT INTO {tableReceipts} " +
+                                $"(users_id, " +
+                                $"accountable_forms_id, " +
+                                $"receiptsfrom, " +
+                                $"receiptsto, " +
+                                $"received_date, " +
+                                $"quantity, " +
+                                $"remarks) " +
+                                $"VALUES " +
+                                $"(@users_id, " +
+                                $"@accountable_forms_id, " +
+                                $"@receiptsfrom, " +
+                                $"@receiptsto, " +
+                                $"@received_date, " +
+                                $"@quantity, " +
+                                $"@remarks)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)

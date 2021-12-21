@@ -201,9 +201,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             try
             {
-
                 var updateResult = Factory.CollectorReportRepository().SetRCDStatus(status, reportNo);
-
                 return updateResult;
             }
             catch (Exception)
@@ -219,11 +217,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 string reportNo = uc.txtReport.Text;
                 if (String.IsNullOrEmpty(reportNo)) return;
 
-            
-
                 if (MessageBox.Show("Are you sure you want to approved this Collector's Report?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    if (SetRCDStatus(1, reportNo))
+                    if (SetRCDStatus(1, reportNo))  
                     {
                         Helper.MessageBoxSuccess("Collector's Report has been approved.");
                         CheckRCDStatus(reportNo);

@@ -201,7 +201,8 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            _ = new frmCollectorsReportOfCollectionsAndDeposits(rcdId).ShowDialog();
+            string reportNo = txtRCDNo.Text.Trim();
+            _ = new frmCollectorsReportOfCollectionsAndDeposits(reportNo).ShowDialog();
         }
 
         private void btnRemove_Click(object sender, EventArgs e)

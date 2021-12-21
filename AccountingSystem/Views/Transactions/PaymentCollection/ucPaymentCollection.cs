@@ -428,7 +428,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-
                 if (DatatableAccounts().Rows.Count == 0) return;
 
                 var accountDict = new Dictionary<ushort, string>();
