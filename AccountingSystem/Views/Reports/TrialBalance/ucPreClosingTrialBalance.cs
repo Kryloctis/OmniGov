@@ -1,5 +1,6 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -91,20 +92,35 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
+
+                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Certified Correct", "Pre Trial Balance");
+                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
+                {
+                    if (dictSignatory.Count > 0)
+                    {
+                        signatory = dictSignatory["signatories_full_name"];
+                        signatoryTitle = dictSignatory["signatories_title"];
+                    }
+                }
+
                 var lguDict = Helper.LGUDetails();
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\pre-trial-balance.rdlc";
                 report.DataSources.Clear();
 
                 report.DataSources.Add(new ReportDataSource("dtTrialBalance", DataTablePreTrialBalance()));
 
-                var signatory = "MARY MAGDALYN T. REGANION, CPA";
+                var certifiedCorrectSignatory = string.Empty;
+                var certifiedCorrectSignatoryTitle = string.Empty;
+                ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+
                 var fundName = cmbFund.Text;
                 var asOfDate = dtAsOf.Value.ToString("MMMM dd, yyyy");
 
                 var parameters = new[] {
                     new ReportParameter("paramLGUName", lguDict["lgu_name"]),
                     new ReportParameter("paramFund", fundName),
-                    new ReportParameter("paramSignatory", signatory),
+                    new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
+                    new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
                     new ReportParameter("paramAsOf", asOfDate),
                   };
                 report.SetParameters(parameters);
