@@ -115,7 +115,7 @@ namespace AccountingSystem
         }
 
 
-        public static Color StatusColor(string status) 
+        public static Color StatusColor(string status)
         {
             switch (status)
             {
@@ -124,7 +124,7 @@ namespace AccountingSystem
 
                 case "Disapproved":
                     return Color.FromArgb(246, 169, 169);
-                  
+
 
                 case "Cancelled":
                     return Color.FromArgb(200, 198, 198);
@@ -231,7 +231,7 @@ namespace AccountingSystem
 
             return false;
         }
-        
+
         public static bool ShowErrorCheckedListBox(ErrorProvider ep, CheckedListBox chklstBox, string fieldName = "Field")
         {
             if (chklstBox.CheckedIndices.Count == 0)
@@ -304,7 +304,7 @@ namespace AccountingSystem
 
         #region MessageBoxes
         // prompt a success messagebox
-        
+
         public static void MessageBoxWarning(string message)
         {
             _ = MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -490,7 +490,7 @@ namespace AccountingSystem
 
         public static void createTabPage(TabControl tcontrol, TabPage tpage, string name, string headertext, Control ctrl)
         {
-            bool found = false; 
+            bool found = false;
             tpage.Name = name;
             foreach (TabPage page in tcontrol.TabPages)
                 if (tpage.Name.Equals(page.Name))
@@ -514,6 +514,5 @@ namespace AccountingSystem
                 tpage.Focus();
             }
         }
-
     }
 }
