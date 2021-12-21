@@ -3431,7 +3431,7 @@
             <DataSetName>AuthorityToDebitAccountDisbursementsJournal</DataSetName>
             <Top>0.19667in</Top>
             <Height>0.97366in</Height>
-            <Width>12.35416in</Width>
+            <Width>12.3542in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3485,7 +3485,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>Chief Accountant/Head of the Accounting</Value>
+                        <Value>=Parameters!paramCertifiedCorrectSignatoryTitle.Value</Value>
                         <Style>
                           <FontFamily>Calibri</FontFamily>
                           <FontSize>9pt</FontSize>
@@ -3520,7 +3520,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>=Parameters!paramSignatory.Value</Value>
+                        <Value>=UCase(Parameters!paramCertifiedCorrectSignatory.Value)</Value>
                         <Style>
                           <FontFamily>Calibri</FontFamily>
                           <FontWeight>Bold</FontWeight>
@@ -3601,7 +3601,7 @@
         <Height>3.01328in</Height>
         <Style />
       </Body>
-      <Width>12.35416in</Width>
+      <Width>12.3542in</Width>
       <Page>
         <PageHeader>
           <Height>1.2004in</Height>
@@ -3849,8 +3849,10 @@
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramSignatory">
+    <ReportParameter Name="paramCertifiedCorrectSignatory">
       <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramDefaultAccountCodeFirst">
@@ -3889,6 +3891,12 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="paramCertifiedCorrectSignatoryTitle">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -3913,7 +3921,7 @@
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>paramSignatory</ParameterName>
+          <ParameterName>paramCertifiedCorrectSignatory</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -3944,6 +3952,11 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>2</RowIndex>
           <ParameterName>paramDefaultAccountIDThird</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>paramCertifiedCorrectSignatoryTitle</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
