@@ -1,5 +1,6 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -27,8 +28,8 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         private void RecordsFilter(LocalReport report, byte hideZeroBalance)
         {
             var parameters = new[] {
-                    new ReportParameter("paramHideZeroBalance", hideZeroBalance.ToString())
-            };
+                        new ReportParameter("paramHideZeroBalance", hideZeroBalance.ToString())
+                };
 
             reportViewer.LocalReport.SetParameters(parameters);
             reportViewer.RefreshReport();
@@ -107,6 +108,31 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
                     dtPreTrialBalance.Rows.Add(new object[]
                     {
+                            accountGroupId,
+                            accountGroupCode,
+                            accountGroupName,
+                            majorAccountGroupId,
+                            majorAccountGroupCode,
+                            majorAccountGroupName,
+                            subMajorAccountGroupId,
+                            subMajorAccountGroupCode,
+                            subMajorAccountGroupName,
+                            accountId,
+                            accountCode,
+                            accountName,
+                            governmentEquityDebit,
+                            governmentEquityCredit
+                    });
+                }
+
+                //
+                decimal balanceDebit, balanceCredit;
+                GetDebitCredit(fundId, dateAsOF, (ushort)accountId, out balanceDebit, out balanceCredit);
+
+                if (accountGroupId == 3 || accountGroupId == 4 || accountGroupId == 5) break;
+
+                dtPreTrialBalance.Rows.Add(new object[]
+                {
                         accountGroupId,
                         accountGroupCode,
                         accountGroupName,
@@ -119,33 +145,8 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                         accountId,
                         accountCode,
                         accountName,
-                        governmentEquityDebit,
-                        governmentEquityCredit
-                    });
-                }
-
-                //
-                decimal balanceDebit, balanceCredit;
-                GetDebitCredit(fundId, dateAsOF, (ushort)accountId, out balanceDebit, out balanceCredit);
-
-                if (accountGroupId == 3 || accountGroupId == 4 || accountGroupId == 5) break;
-
-                dtPreTrialBalance.Rows.Add(new object[]
-                {
-                    accountGroupId,
-                    accountGroupCode,
-                    accountGroupName,
-                    majorAccountGroupId,
-                    majorAccountGroupCode,
-                    majorAccountGroupName,
-                    subMajorAccountGroupId,
-                    subMajorAccountGroupCode,
-                    subMajorAccountGroupName,
-                    accountId,
-                    accountCode,
-                    accountName,
-                    balanceDebit,
-                    balanceCredit
+                        balanceDebit,
+                        balanceCredit
                 });
             }
 
@@ -159,22 +160,37 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
+
+                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Certified Correct", "Post Trial Balance");
+                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
+                {
+                    if (dictSignatory.Count > 0)
+                    {
+                        signatory = dictSignatory["signatories_full_name"];
+                        signatoryTitle = dictSignatory["signatories_title"];
+                    }
+                }
+
                 var lguDict = Helper.LGUDetails();
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\post-trial-balance.rdlc";
                 report.DataSources.Clear();
 
                 report.DataSources.Add(new ReportDataSource("dtTrialBalance", DataTablePostTrialBalance()));
 
-                var signatory = "MARY MAGDALYN T. REGANION, CPA";
+                var certifiedCorrectSignatory = string.Empty;
+                var certifiedCorrectSignatoryTitle = string.Empty;
+                ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+
                 var fundName = cmbFund.Text;
                 var asOfDate = dtAsOf.Value.ToString("MMMM dd, yyyy");
 
                 var parameters = new[] {
-                    new ReportParameter("paramLGUName", lguDict["lgu_name"]),
-                    new ReportParameter("paramFund", fundName),
-                    new ReportParameter("paramSignatory", signatory),
-                    new ReportParameter("paramAsOf", asOfDate),
-                  };
+                        new ReportParameter("paramLGUName", lguDict["lgu_name"]),
+                        new ReportParameter("paramFund", fundName),
+                        new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
+                        new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
+                        new ReportParameter("paramAsOf", asOfDate),
+                      };
 
                 cbHideZeroBalance.Enabled = true;
                 reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
