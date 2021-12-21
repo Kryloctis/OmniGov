@@ -175,6 +175,9 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Manage Amortization"))
                 amortiaztionToolStripMenuItem.Visible = false;
+
+            if (!Helper.HasPermission("Manage Signatories"))
+                signatoriesToolStripMenuItem.Visible = false;
         }
 
         private void ValidateAccountingControlPermissions()
@@ -365,7 +368,6 @@ namespace AccountingSystem
 
             #endregion
         }
-
 
 
         private void radBtnBudget_CheckedChanged(object sender, EventArgs e)
