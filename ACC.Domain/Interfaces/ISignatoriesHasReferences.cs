@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using System.Collections.Generic;
 using System.Data;
 
 namespace ACC.Domain.Interfaces
@@ -8,6 +9,8 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordsBySignatoryId(int signatoryId);
 
         DataTable GetDocumentRecordsBySignatoryId(int signatoryId);
+
+        Dictionary<string, string> GetSignatoryByReferenceAndDocumentName(string reference, string documentName);
 
         bool DeleteBySignatoryId(int signatoryId);
 

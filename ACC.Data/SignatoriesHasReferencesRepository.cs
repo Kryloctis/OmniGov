@@ -197,5 +197,37 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public Dictionary<string, string> GetSignatoryByReferenceAndDocumentName(string reference, string documentName)
+        {
+            try
+            {
+                var record = new Dictionary<string, string>();
+
+
+                var parameters = new object[][]
+                {
+                    new object[] { "@document_references_name", DbType.String, reference},
+                    new object[] { "@documents_name", DbType.String, documentName }
+                };
+
+                string query = $"SELECT signatories_full_name, signatories_title FROM {viewTableName} WHERE document_references_name = @document_references_name AND documents_name = @documents_name";
+
+                using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    record.Add("signatories_full_name", reader.Rows[0]["signatories_full_name"].ToString());
+                    record.Add("signatories_title", reader.Rows[0]["signatories_title"].ToString());
+                }
+
+                return record;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

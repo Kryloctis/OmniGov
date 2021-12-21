@@ -1,12 +1,7 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.SAAOBB
@@ -28,13 +23,13 @@ namespace AccountingSystem.Views.Reports.SAAOBB
         private DataTable DatatableSAAOBB()
         {
 
-            var dataSet = new dsLFS();  
+            var dataSet = new dsLFS();
             DataTable dtSAAOBB = dataSet.dtSAAOBB;
 
             int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
             DateTime date = dtAsOf.Value;
             short year = Convert.ToInt16(dtAsOf.Value.Year);
-            int ffpIsSpecial = chkbxSpecialAccounts.Checked ? 1 : 0; 
+            int ffpIsSpecial = chkbxSpecialAccounts.Checked ? 1 : 0;
 
             //Get Current Records
             var dtBudgetAppropriations = Factory.BudgetAppropriationsRepository().GetViewRecords(fundId, date, (byte)ffpIsSpecial);
@@ -62,7 +57,7 @@ namespace AccountingSystem.Views.Reports.SAAOBB
                 string rowFPPCode = item["fpp_code"].ToString();
                 string rowFPPName = item["fpp_name"].ToString();
                 byte rowFPPSpecial = Convert.ToByte(item["fpp_is_special"]);
-           
+
                 //SUB FPP
                 string rowSubFPPId = item["others_fpp_id"] == null ? string.Empty : item["others_fpp_id"].ToString();
                 string rowSubFPPCode = item["others_fpp_code"].ToString();
@@ -107,29 +102,29 @@ namespace AccountingSystem.Views.Reports.SAAOBB
 
                 var items = new object[]
                 {
-                    rowFundId, 
-                    rowFundCode, 
-                    rowFundName, 
-                    rowFunctionalClassificationId, 
-                    rowFunctionalClassificationSectorCode, 
-                    rowFunctionalClassificationSectorName, 
-                    rowFunctionalClassificationServiceId, 
-                    rowFunctionalClassificationServiceName, 
-                    rowFPPId, 
-                    rowFPPCode, 
-                    rowFPPName, 
-                    rowFPPSpecial, 
-                    rowSubFPPId, 
-                    rowSubFPPCode, 
-                    rowSubFPPName, 
-                    rowAllotmentClassId, 
-                    rowAllotmentClassCode, 
-                    rowAllotmentClassName, 
-                    rowAccountId, 
-                    rowAccountCode, 
-                    rowAccountName, 
-                    rowYear, 
-                    rowRemarks, 
+                    rowFundId,
+                    rowFundCode,
+                    rowFundName,
+                    rowFunctionalClassificationId,
+                    rowFunctionalClassificationSectorCode,
+                    rowFunctionalClassificationSectorName,
+                    rowFunctionalClassificationServiceId,
+                    rowFunctionalClassificationServiceName,
+                    rowFPPId,
+                    rowFPPCode,
+                    rowFPPName,
+                    rowFPPSpecial,
+                    rowSubFPPId,
+                    rowSubFPPCode,
+                    rowSubFPPName,
+                    rowAllotmentClassId,
+                    rowAllotmentClassCode,
+                    rowAllotmentClassName,
+                    rowAccountId,
+                    rowAccountCode,
+                    rowAccountName,
+                    rowYear,
+                    rowRemarks,
                     rowIsContinuing,
                     TotalBudgetAppropraition,
                     balancesOfAppropriationsAmount,
@@ -151,12 +146,22 @@ namespace AccountingSystem.Views.Reports.SAAOBB
         {
             try
             {
+                Cursor = Cursors.WaitCursor;
+                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Certified Correct", "SAAOBB");
+                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
+                {
+                    if (dictSignatory.Count > 0)
+                    {
+                        signatory = dictSignatory["signatories_full_name"];
+                        signatoryTitle = dictSignatory["signatories_title"];
+                    }
+                }
+
                 int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
                 DateTime AsOf = dtAsOf.Value;
-
-                Cursor = Cursors.WaitCursor;
-                string userName = $"{Helper.LoggedInUserData()["first_name"]} {Helper.LoggedInUserData()["mid_initial"]} {Helper.LoggedInUserData()["last_name"]}";
-                string userRoleName = $"{Helper.LoggedInUserData()["role_name"]}";
+                string certifiedCorrectSignatory = string.Empty;
+                string certifiedCorrectSignatoryTitle = string.Empty;
+                ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
                 var fundRepo = Factory.FundsRepository().GetRecordByID(fundId);
 
@@ -165,8 +170,8 @@ namespace AccountingSystem.Views.Reports.SAAOBB
                     new ReportParameter("paramFundName", fundRepo["fund_name"]),
                     new ReportParameter("paramFundCode", fundRepo["fund_code"]),
                     new ReportParameter("paramDate", AsOf.ToString("MMMM dd, yyyy")),
-                    new ReportParameter("paramSignatoryName", userName),
-                    new ReportParameter("paramSignatoryPosition", userRoleName),
+                    new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
+                    new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
                 };
 
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\statement-of-appropriations-allotments-obligations-and-balances.rdlc";

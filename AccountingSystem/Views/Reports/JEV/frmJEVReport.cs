@@ -1,9 +1,8 @@
-﻿using System;
-using System.Windows.Forms;
-using Microsoft.Reporting.WinForms;
-using System.Data;
+﻿using Microsoft.Reporting.WinForms;
+using System;
 using System.Collections.Generic;
-using AccountingSystem.Views.Transactions.JEV;
+using System.Data;
+using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.JEV
 {
@@ -86,12 +85,12 @@ namespace AccountingSystem.Views.Reports.JEV
                     paramOfficer = journalDict["full_name"];
 
                     SetJournalData("Date Paid:", "", "", "DV No. ", "Disburse officer: ");
-                   
+
                     return;
                 case 5:
                     journalDict = Factory.CheckDisbursementsJournalRepository().GetRecordByJevID(_jevId);
-                   
-                    paramCheckDate = Convert.ToDateTime(journalDict["check_date"]).ToString("MM/dd/yy"); 
+
+                    paramCheckDate = Convert.ToDateTime(journalDict["check_date"]).ToString("MM/dd/yy");
                     paramCheckNo = journalDict["check_no"];
                     paramORNo = journalDict["rci_no"];
                     paramDVNo = journalDict["dv_no"];
@@ -112,13 +111,30 @@ namespace AccountingSystem.Views.Reports.JEV
         {
             try
             {
+
+                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Certified Correct", "Journal Entry Voucher");
+
+                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatory_title)
+                {
+                    if (dictSignatory.Count > 0)
+                    {
+                        signatory = dictSignatory["signatories_full_name"];
+                        signatory_title = dictSignatory["signatories_title"];
+                    }
+                }
+
                 if (_jevId != 0)
                 {
                     Cursor.Current = Cursors.WaitCursor;
                     var data = Factory.JEVRepository().GetRecordByID(_jevId);
 
                     var lguDetails = Helper.LGUDetails();
-                    var signatory = "MARY MAGDALYN T. REGANION, CPA";
+
+                    var CertifiedBySignatory = string.Empty;
+                    var CertifiedBysignatoryTitle = string.Empty;
+
+                    ParseSignatory(dictSignatory, ref CertifiedBySignatory, ref CertifiedBysignatoryTitle);
+
                     var preparedByData = Helper.LoggedInUserData();
                     var preparedByFullName = $"{preparedByData["first_name"]} {preparedByData["mid_initial"]} {preparedByData["last_name"]}";
                     var full_jev = $"{data["fund_code"]}-{Convert.ToDateTime(data["date_entry"]).Year}-{Convert.ToDateTime(data["date_entry"]).Month}-{data["jev_no"]}";
@@ -139,7 +155,8 @@ namespace AccountingSystem.Views.Reports.JEV
                     new ReportParameter("paramExplanation", data["explanation"]),
                     new ReportParameter("paramPreparedBy",dictJev["created_by_name"].ToUpper()),
                     new ReportParameter("paramPreparedByRole",dictUser["role_name"]),
-                    new ReportParameter("paramCertifiedBy", signatory),
+                    new ReportParameter("paramCertifiedBySignatory", CertifiedBySignatory),
+                    new ReportParameter("paramCertifiedBySignatoryTitle", CertifiedBysignatoryTitle),
                     new ReportParameter("paramDateEntry", Convert.ToDateTime(data["date_entry"]).ToString("MM/dd/yy")),
 
                     //For fields label
@@ -261,7 +278,7 @@ namespace AccountingSystem.Views.Reports.JEV
             dgJEV.SelectionChanged += new EventHandler(dgJEV_SelectionChanged);
         }
 
-        private void LoadSelectedJEV() 
+        private void LoadSelectedJEV()
         {
             if (dgJEV.SelectedRows.Count != 0 && leftPanel.Visible)
             {
@@ -311,6 +328,6 @@ namespace AccountingSystem.Views.Reports.JEV
             LoadSelectedJEV();
         }
 
-    
+
     }
 }

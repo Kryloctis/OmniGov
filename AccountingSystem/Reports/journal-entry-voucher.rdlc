@@ -1277,7 +1277,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>=Parameters!paramCertifiedBy.Value</Value>
+                        <Value>=UCase(Parameters!paramCertifiedBySignatory.Value)</Value>
                         <Style>
                           <FontStyle>Normal</FontStyle>
                           <FontFamily>Calibri</FontFamily>
@@ -1354,7 +1354,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>Municipal Accountant</Value>
+                        <Value>=Parameters!paramCertifiedBySignatoryTitle.Value</Value>
                         <Style>
                           <FontStyle>Normal</FontStyle>
                           <FontFamily>Calibri</FontFamily>
@@ -2365,7 +2365,7 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramCertifiedBy">
+    <ReportParameter Name="paramCertifiedBySignatory">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -2431,6 +2431,12 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="paramCertifiedBySignatoryTitle">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -2490,7 +2496,7 @@
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>2</RowIndex>
-          <ParameterName>paramCertifiedBy</ParameterName>
+          <ParameterName>paramCertifiedBySignatory</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
@@ -2541,6 +2547,11 @@
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>5</RowIndex>
           <ParameterName>paramPreparedByRole</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>5</RowIndex>
+          <ParameterName>paramCertifiedBySignatoryTitle</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
