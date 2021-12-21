@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Signatories
@@ -36,8 +37,22 @@ namespace AccountingSystem.Views.Manage.Signatories
                     Title = uc.txtTitle.Text.Trim()
                 };
 
+                var signatoriesHasDocumentReferences = new List<SignatoriesHasReferencesModel>();
 
-                return Factory.SignatoriesRepository().Insert(signatoriesModel);
+                foreach (DataGridViewRow row in uc.dgReferences.Rows)
+                {
+                    if (Convert.ToByte(row.Cells["is_referenced"].Value) == 1)
+                    {
+                        var SignatoriesHasReferencesModel = new SignatoriesHasReferencesModel()
+                        {
+                            DocumentReferencesId = Convert.ToInt32(row.Cells["id"].Value)
+                        };
+
+                        signatoriesHasDocumentReferences.Add(SignatoriesHasReferencesModel);
+                    }
+                }
+
+                return Factory.SignatoriesRepository().Insert(signatoriesModel, signatoriesHasDocumentReferences);
             }
             catch (Exception ex)
             {
@@ -59,6 +74,7 @@ namespace AccountingSystem.Views.Manage.Signatories
         private void frmAddSignatories_Load(object sender, EventArgs e)
         {
             uc.isEdit = false;
+            uc.LoadReferences();
         }
     }
 }

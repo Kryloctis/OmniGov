@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Signatories
@@ -20,6 +21,31 @@ namespace AccountingSystem.Views.Manage.Signatories
                 var dtSignatories = Factory.SignatoriesRepository().GetRecords();
 
                 HelperLoadRecords.SignatoriesDatagridView(dtSignatories, dgSignatories);
+                lblRecordCount.Text = dgSignatories.Rows.Count.ToString();
+                Helper.ShowRecordTimestamp(dgSignatories, new byte[] { 3, 4 }, lblCreatedAt, lblUpdatedAt);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        internal void LoadReferencedDocuments()
+        {
+            try
+            {
+                listDocuments.Items.Clear();
+
+                if (dgSignatories.SelectedRows.Count == 1)
+                {
+                    int signatoriesId = Convert.ToInt32(dgSignatories.Rows[dgSignatories.CurrentCell.RowIndex].Cells["id"].Value);
+
+                    var dtReferencedDocuments = Factory.SignatoriesHasReferencesRepository().GetDocumentRecordsBySignatoryId(signatoriesId);
+                    foreach (DataRow row in dtReferencedDocuments.Rows)
+                    {
+                        listDocuments.Items.Add(row["documents_name"]);
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -44,16 +70,13 @@ namespace AccountingSystem.Views.Manage.Signatories
         private void EnableDisableButtons()
         {
             Helper.EnableDisableToolStripButtons(dgSignatories, btnEdit, btnDelete);
-
-            if (dgSignatories.SelectedRows.Count < 1)
-                btnDocumentReferences.Enabled = false;
-            else
-                btnDocumentReferences.Enabled = true;
         }
+
 
         private void dtSignatories_SelectionChanged(object sender, System.EventArgs e)
         {
             EnableDisableButtons();
+            LoadReferencedDocuments();
         }
 
         private void frmSignatories_Load(object sender, System.EventArgs e)

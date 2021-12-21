@@ -43,14 +43,14 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 191);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 520);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(494, 30);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(517, 30);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(396, 3);
+            this.btnCancel.Location = new System.Drawing.Point(419, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(95, 23);
             this.btnCancel.TabIndex = 0;
@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             // btnSave
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
-            this.btnSave.Location = new System.Drawing.Point(295, 3);
+            this.btnSave.Location = new System.Drawing.Point(318, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(95, 23);
             this.btnSave.TabIndex = 0;
@@ -76,7 +76,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.ucSignatories1.Location = new System.Drawing.Point(9, 9);
             this.ucSignatories1.Margin = new System.Windows.Forms.Padding(0);
             this.ucSignatories1.Name = "ucSignatories1";
-            this.ucSignatories1.Size = new System.Drawing.Size(486, 177);
+            this.ucSignatories1.Size = new System.Drawing.Size(499, 506);
             this.ucSignatories1.TabIndex = 2;
             // 
             // frmEditSignatories
@@ -86,7 +86,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(494, 221);
+            this.ClientSize = new System.Drawing.Size(517, 550);
             this.Controls.Add(this.ucSignatories1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
