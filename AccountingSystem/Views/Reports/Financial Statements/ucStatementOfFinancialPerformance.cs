@@ -1,5 +1,6 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -19,7 +20,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
         private DataTable StatementOfFinancialPerformanceDatatable()
         {
-           
+
             var dataSet = new dsLFS();
             var dtStatementOfFinancialPerformance = dataSet.dtStatementOfFinancialPerformance;
             int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
@@ -59,7 +60,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 Helper.MessageBoxError(ex.Message);
             }
 
-            return dtStatementOfFinancialPerformance;     
+            return dtStatementOfFinancialPerformance;
         }
 
         private void LoadReport(LocalReport report)
@@ -67,6 +68,20 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
+                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Certified Correct", "Statement of Financial Performance");
+                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
+                {
+                    if (dictSignatory.Count > 0)
+                    {
+                        signatory = dictSignatory["signatories_full_name"];
+                        signatoryTitle = dictSignatory["signatories_title"];
+                    }
+                }
+
+                string certifiedCorrectSignatory = string.Empty;
+                string certifiedCorrectSignatoryTitle = string.Empty;
+                ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+
                 int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
                 DateTime dateEnded = dtPickerDateEnds.Value;
 
@@ -77,6 +92,8 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
                 var fundRepo = Factory.FundsRepository().GetRecordByID(fundId);
                 var parameters = new[] {
+                    new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
+                    new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
                     new ReportParameter("paramFund", fundRepo["fund_name"]),
                     new ReportParameter("paramDateEnded", dateEnded.ToString("MMMM dd, yyyy")),
                 };
