@@ -10,6 +10,7 @@ namespace ACC.Data
     {
         private MySqlGenericCommands mySqlGenericCommands;
         private const string tableName = "signatories_has_document_references";
+        private const string viewTableName = "view_signatories_has_document_references";
 
         public SignatoriesHasReferencesRepository(MySqlGenericCommands mySqlGenericCommands)
         {
@@ -176,6 +177,25 @@ namespace ACC.Data
             };
 
             return false;
+        }
+
+        public DataTable GetDocumentRecordsBySignatoryId(int signatoryId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@signatories_id", DbType.Int32, signatoryId}
+                };
+
+                string query = $"SELECT * FROM {viewTableName} WHERE signatories_id = @signatories_id GROUP BY documents_id";
+                var dataTable = new DataTable();
+                return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

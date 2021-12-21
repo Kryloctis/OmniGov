@@ -7,6 +7,8 @@ namespace ACC.Domain.Interfaces
     {
         DataTable GetRecordsBySignatoryId(int signatoryId);
 
+        DataTable GetDocumentRecordsBySignatoryId(int signatoryId);
+
         bool DeleteBySignatoryId(int signatoryId);
 
         bool ReferenceIdExist(int documentReferenceId);

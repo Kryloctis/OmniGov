@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Signatories
@@ -29,6 +30,29 @@ namespace AccountingSystem.Views.Manage.Signatories
             }
         }
 
+        internal void LoadReferencedDocuments()
+        {
+            try
+            {
+                listDocuments.Items.Clear();
+
+                if (dgSignatories.SelectedRows.Count == 1)
+                {
+                    int signatoriesId = Convert.ToInt32(dgSignatories.Rows[dgSignatories.CurrentCell.RowIndex].Cells["id"].Value);
+
+                    var dtReferencedDocuments = Factory.SignatoriesHasReferencesRepository().GetDocumentRecordsBySignatoryId(signatoriesId);
+                    foreach (DataRow row in dtReferencedDocuments.Rows)
+                    {
+                        listDocuments.Items.Add(row["documents_name"]);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
         private void btnSave_Click(object sender, System.EventArgs e)
         {
             _ = new frmAddSignatories(this).ShowDialog();
@@ -48,9 +72,11 @@ namespace AccountingSystem.Views.Manage.Signatories
             Helper.EnableDisableToolStripButtons(dgSignatories, btnEdit, btnDelete);
         }
 
+
         private void dtSignatories_SelectionChanged(object sender, System.EventArgs e)
         {
             EnableDisableButtons();
+            LoadReferencedDocuments();
         }
 
         private void frmSignatories_Load(object sender, System.EventArgs e)
