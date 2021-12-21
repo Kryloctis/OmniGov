@@ -1,13 +1,7 @@
-﻿using ACC.Domain.Interfaces;
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.SAAOB
@@ -25,7 +19,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
             panelConfig.Enabled = false;
         }
 
-        private void LoadFunds() 
+        private void LoadFunds()
         {
             try
             {
@@ -40,14 +34,14 @@ namespace AccountingSystem.Views.Reports.SAAOB
             }
         }
 
-        private DataTable DatatableSAAOB() 
+        private DataTable DatatableSAAOB()
         {
             var dataSet = new dsLFS();
             var dtSAAOB = dataSet.dtSAAOB;
             int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
             DateTime date = dtAsOf.Value;
             short year = Convert.ToInt16(dtAsOf.Value.Year);
-            int fppSpecial = chkbxSpecialFPP.Checked? 1 : 0;
+            int fppSpecial = chkbxSpecialFPP.Checked ? 1 : 0;
 
             try
             {
@@ -134,7 +128,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
                     dtSAAOB.Rows.Add(items);
                 }
 
-              
+
             }
             catch (Exception ex)
             {
@@ -145,7 +139,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
         }
 
 
-        private void FilterReport(int filterLevel, LocalReport report) 
+        private void FilterReport(int filterLevel, LocalReport report)
         {
             var parameters = new[] {
                     new ReportParameter("paramFilterLevel",filterLevel.ToString())
@@ -156,16 +150,28 @@ namespace AccountingSystem.Views.Reports.SAAOB
             reportViewer.RefreshReport();
         }
 
-        private bool LoadReport(LocalReport report) 
+        private bool LoadReport(LocalReport report)
         {
             try
             {
                 Cursor = Cursors.WaitCursor;
+
+                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Certified Correct", "SAAOB");
+                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
+                {
+                    if (dictSignatory.Count > 0)
+                    {
+                        signatory = dictSignatory["signatories_full_name"];
+                        signatoryTitle = dictSignatory["signatories_title"];
+                    }
+                }
+
+                string certifiedCorrectSignatory = string.Empty;
+                string certifiedCorrectSignatoryTitle = string.Empty;
+                ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+
                 int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
                 DateTime AsOf = dtAsOf.Value;
-
-                string userName = $"{Helper.LoggedInUserData()["first_name"]} {Helper.LoggedInUserData()["mid_initial"]} {Helper.LoggedInUserData()["last_name"]}";
-                string userRoleName = $"{Helper.LoggedInUserData()["role_name"]}";
 
                 var fundRepo = Factory.FundsRepository().GetRecordByID(fundId);
 
@@ -173,8 +179,8 @@ namespace AccountingSystem.Views.Reports.SAAOB
                     new ReportParameter("paramFundName", fundRepo["fund_name"]),
                     new ReportParameter("paramFundCode", fundRepo["fund_code"]),
                     new ReportParameter("paramDate", AsOf.ToString("MMMM dd, yyyy")),
-                    new ReportParameter("paramSignatoryName", userName),
-                    new ReportParameter("paramSignatoryPosition", userRoleName),
+                    new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
+                    new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
                     new ReportParameter("paramFilterLevel","5"),
                     new ReportParameter("paramFPPIsSpecial", (chkbxSpecialFPP.Checked? 1 : 0).ToString())
                 };
@@ -203,7 +209,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            if (LoadReport(reportViewer.LocalReport)) 
+            if (LoadReport(reportViewer.LocalReport))
             {
                 panelConfig.Enabled = true;
             }
@@ -240,6 +246,6 @@ namespace AccountingSystem.Views.Reports.SAAOB
         {
             FilterReport(5, reportViewer.LocalReport);
         }
-      
+
     }
 }
