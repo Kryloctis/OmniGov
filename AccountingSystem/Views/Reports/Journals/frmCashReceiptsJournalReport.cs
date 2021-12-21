@@ -86,6 +86,8 @@ namespace AccountingSystem.Views.Reports.Journals
         {
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
+
                 var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Certified Correct", "Cash Receipts Journal");
                 static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
                 {
@@ -96,8 +98,6 @@ namespace AccountingSystem.Views.Reports.Journals
                     }
                 }
 
-
-                Cursor.Current = Cursors.WaitCursor;
                 var lguDetails = Helper.LGUDetails();
                 var certifiedCorrectSignatory = string.Empty;
                 var certifiedCorrectSinatoryTitle = string.Empty;
