@@ -15,6 +15,7 @@ namespace AccountingSystem
         public static void ReferencesDatagridView(DataTable dataTable, DataGridView dataGridView)
         {
             Helper.DatagridFullRowSelectStyle(dataGridView, true);
+            dataGridView.ShowCellToolTips = false;
             dataGridView.Columns.Add("id", "ID");
             dataGridView.Columns.Add(new DataGridViewCheckBoxColumn() { HeaderText = "", Name = "is_referenced" });
             dataGridView.Columns.Add("document_reference_name", "References");
@@ -23,6 +24,7 @@ namespace AccountingSystem
             dataGridView.Columns["id"].Visible = false;
             dataGridView.Columns["is_referenced"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.ReadOnly = false;
+            dataGridView.MultiSelect = false;
             dataGridView.Columns["document_reference_name"].ReadOnly = true;
             dataGridView.Columns["document_reference_name"].Width = 150;
             dataGridView.Columns["document_name"].ReadOnly = true;

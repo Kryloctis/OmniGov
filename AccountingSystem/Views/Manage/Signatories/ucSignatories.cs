@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Signatories
@@ -43,6 +44,30 @@ namespace AccountingSystem.Views.Manage.Signatories
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
+        private void ValidateReferenced()
+        {
+            try
+            {
+                foreach (DataGridViewRow row in dgReferences.Rows)
+                {
+                    int referenceId = Convert.ToInt32(row.Cells["id"].Value);
+                    bool isReferenced = Factory.SignatoriesHasReferencesRepository().ReferenceIdExist(referenceId);
+                    bool isReferencedBySignatoryId = Factory.SignatoriesHasReferencesRepository().ReferenceIdExist(referenceId, signatoriesId);
+
+                    if (!isEdit ? isReferenced : isReferencedBySignatoryId)
+                    {
+                        row.ReadOnly = true;
+                        row.DefaultCellStyle.BackColor = Color.DarkGray;
+                        row.DefaultCellStyle.SelectionBackColor = Color.DarkGray;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
         #region References
 
         internal void LoadReferences()
@@ -65,6 +90,8 @@ namespace AccountingSystem.Views.Manage.Signatories
 
                 dgReferences.Rows.Add(data);
             }
+
+            ValidateReferenced();
         }
 
         #endregion

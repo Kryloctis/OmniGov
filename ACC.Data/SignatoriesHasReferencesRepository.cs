@@ -107,11 +107,6 @@ namespace ACC.Data
             }
         }
 
-        public bool ReferenceIdExist(int referenceId)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool IsReferencedBySignatory(int documentReferenceId, int signatories_id)
         {
             try
@@ -123,6 +118,53 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT document_references_id FROM {tableName} WHERE document_references_id = @document_references_id AND signatories_id = @signatories_id";
+                string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
+
+        public bool ReferenceIdExist(int documentReferenceId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@document_references_id", DbType.Int32, documentReferenceId }
+                };
+
+                string query = $"SELECT document_references_id FROM {tableName} WHERE document_references_id = @document_references_id";
+                string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
+
+        public bool ReferenceIdExist(int documentReferenceId, int signatories_id)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@document_references_id", DbType.Int32, documentReferenceId },
+                    new object[] { "@signatories_id", DbType.Int32, signatories_id }
+                };
+
+                string query = $"SELECT document_references_id FROM {tableName} WHERE signatories_id <> @signatories_id AND  document_references_id = @document_references_id";
                 string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true

@@ -9,7 +9,10 @@ namespace ACC.Domain.Interfaces
 
         bool DeleteBySignatoryId(int signatoryId);
 
-        bool ReferenceIdExist(int referenceId);
+        bool ReferenceIdExist(int documentReferenceId);
+
+        bool ReferenceIdExist(int documentReferenceId, int signatories_id);
+
         bool IsReferencedBySignatory(int documentReferenceId, int signatories_id);
     }
 }
