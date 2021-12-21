@@ -15,6 +15,10 @@ namespace ACC.Data
         private readonly string tableUser = "users";
         private readonly string tableAccountableForms = "accountable_forms";
         private readonly string tableReceiptsIssued = "receipts_issued";
+
+
+        private readonly string viewTableName = "view_receipts";
+
         public ReceiptsRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -101,7 +105,16 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableReceipts}.id,CONCAT({tableAccountableForms}.acc_form_no,' - ',{tableAccountableForms}.acc_form_desc) AS receipt,{tableReceipts}.receiptsfrom,{tableReceipts}.receiptsto,{tableReceipts}.received_date,{tableReceipts}.quantity,CONCAT({tableUser}.last_name,', ',{tableUser}.first_name,' ',{tableUser}.mid_initial) AS officer FROM {tableReceipts} LEFT JOIN {tableUser} ON {tableReceipts}.users_id={tableUser}.id LEFT JOIN {tableAccountableForms} ON {tableReceipts}.accountable_forms_id={tableAccountableForms}.id ORDER BY {tableReceipts}.received_date DESC";
+                string query = $"SELECT " +
+                    $"id, " +
+                    $"CONCAT(acc_form_no, ' - ', acc_form_desc) receipt, " +
+                    $"receiptsfrom, " +
+                    $"receiptsto, " +
+                    $"received_date, " +
+                    $"quantity, " +
+                    $"user officer " +
+                    $"FROM {viewTableName} " +
+                    $"ORDER BY received_date DESC";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
@@ -116,10 +129,26 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableReceipts}.id,CONCAT({tableAccountableForms}.acc_form_no,' - ',{tableAccountableForms}.acc_form_desc) AS receipt,{tableReceipts}.receiptsfrom,{tableReceipts}.receiptsto,{tableReceipts}.received_date,{tableReceipts}.quantity,CONCAT({tableUser}.last_name,', ',{tableUser}.first_name,' ',{tableUser}.mid_initial) AS officer FROM {tableReceipts} LEFT JOIN {tableUser} ON {tableReceipts}.users_id={tableUser}.id LEFT JOIN {tableAccountableForms} ON {tableReceipts}.accountable_forms_id={tableAccountableForms}.id WHERE {tableReceipts}.receiptsfrom LIKE '%{searchText}%' OR {tableReceipts}.receiptsto LIKE '%{searchText}%' OR {tableReceipts}.remarks LIKE '%{searchText}%' OR CONCAT({tableUser}.last_name,', ',{tableUser}.first_name,' ',{tableUser}.mid_initial) LIKE '%{searchText}%' OR CONCAT({tableAccountableForms}.acc_form_no,' - ',{tableAccountableForms}.acc_form_desc) LIKE '%{searchText}%' ORDER BY {tableReceipts}.received_date DESC";
+                var parameter = new object[][] {
+                    new object[]{"@searchText", DbType.String, $"%{searchText}%"},
+                };
+
+                string query =    $"SELECT " +
+                                  $"id, " +
+                                  $"CONCAT(acc_form_no, ' - ', acc_form_desc) receipt, " +
+                                  $"receiptsfrom, " +
+                                  $"receiptsto, " +
+                                  $"received_date, " +
+                                  $"quantity, " +
+                                  $"user officer " +
+                                  $"FROM {viewTableName} " +
+                                  $"WHERE acc_form_desc LIKE @searchText " +
+                                  $"OR acc_form_no LIKE @searchText " +
+                                  $"OR user LIKE @searchText " +
+                                  $"ORDER BY received_date DESC";
 
                 var dtri = new DataTable();
-                return _dbGenericCommands.Fill(query, dtri);
+                return _dbGenericCommands.FillBySearch(query, dtri, parameter);
             }
             catch (Exception)
             {
