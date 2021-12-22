@@ -314,7 +314,6 @@ namespace ACC.Data
                 string query = $"SELECT id FROM {tablePaymentCollections} WHERE receipt_no=@receipt_no AND accountable_forms_id=@accountable_forms_id";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
-                // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
             }
             catch (Exception)

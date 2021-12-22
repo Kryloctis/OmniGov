@@ -811,7 +811,6 @@ namespace AccountingSystem
             datagrid.Columns.Add("payment_date", "Payment Date");
             datagrid.Columns.Add("amount", "Amount");
 
-
             datagrid.Columns["payment_collection_id"].Visible = false;
             datagrid.Columns["fund_id"].Visible = false;
             datagrid.Columns["fund_name"].Visible = false;

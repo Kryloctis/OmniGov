@@ -40,25 +40,29 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
                 lblRecordCount.Text = dgpayments.Rows.Count.ToString();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) 
+            {
+                Helper.MessageBoxError(ex.Message); 
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgpayments.SelectedRows.Count > 0)
+            if (dgpayments.SelectedRows.Count != 0) 
             {
                 var dgRowIndex = dgpayments.SelectedCells[0].Value.ToString();
-                int Id = int.Parse(dgRowIndex);
-                _ = new frmPaymentCollectionEdit(this, Id).ShowDialog();
+                int paymentCollectionId = int.Parse(dgRowIndex);
+
+                _ = new frmPaymentCollectionEdit(this, paymentCollectionId).ShowDialog();
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int selectedrowscount = dgpayments.SelectedRows.Count;
+            int selectedRowCount = dgpayments.SelectedRows.Count;
             try
             {
-                var confirmDelete = Helper.MessageBoxConfirmDelete(selectedrowscount);
+                var confirmDelete = Helper.MessageBoxConfirmDelete(selectedRowCount);
                 if (confirmDelete)
                 {
                     var paymentCollectionModelList = new List<PaymentCollectionModel>();

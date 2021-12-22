@@ -45,21 +45,14 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-                var uc = ucPaymentCollection1;
-
-                uc.txtCashTicketQuantity.Validating -= new CancelEventHandler(uc.txtCashTicketQuantity_Validating);
-
-
+                CancelCashTicketFieldValidations(true);
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
 
-                uc.txtCashTicketQuantity.Validating += new CancelEventHandler(uc.txtCashTicketQuantity_Validating);
-                uc.txtpayee.Validating += new CancelEventHandler(uc.txtpayee_Validating);
-
-                var pcModel = new PaymentCollectionModel()
+                var paymentCollectionModel = new PaymentCollectionModel()
                 {
                     CollectingOfficerId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
                     FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
@@ -74,50 +67,33 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 };
 
                 var paymentCollectionRepo = Factory.PaymentCollectionRepository();
+                bool insertSuccess = paymentCollectionRepo.Insert(paymentCollectionModel);
 
-                bool receiptExist = paymentCollectionRepo.ReceiptExist(uc.txtreceipt.Text.Trim(), Convert.ToInt32(uc.cmbforms.SelectedValue));
+                if (insertSuccess)
+                {
+                    var receiptsIssuedRepo = Factory.ReceiptsIssuedRepository();
+                    var dtReceiptIssued = receiptsIssuedRepo.GetRecords(uc.cmbcollector.SelectedValue.ToString(), uc.cmbforms.SelectedValue.ToString());
 
-                if (receiptExist)
-                {
-                    Helper.MessageBoxSuccess("Receipt already exists!");
-                    uc.txtreceipt.Focus();
-                    return false;
-                }
-                else if(uc.txtamount.Value <= 0)
-                {
-                    Helper.MessageBoxSuccess("Please enter amount.");
-                    uc.txtamount.Focus();
-                    return false;
+                    var receiptIssuedCount = dtReceiptIssued.Rows.Count;
+
+                    if (receiptIssuedCount > 0)
+                    {
+                        int rid = 0;
+                        for (int i = 0; i < receiptIssuedCount; i++)
+                        {
+                            rid = Convert.ToInt32(dtReceiptIssued.Rows[i]["id"]);
+                        }
+                        var rcModel = new ReceiptsIssuedModel()
+                        {
+                            Id = rid,
+                            Last_issued = Convert.ToInt32(uc.txtreceipt.Text.Trim())
+                        };
+                        return receiptsIssuedRepo.UpdateCurrentIssued(rcModel);
+                    }
                 }
                 else
                 {
-                    bool insertSuccess = paymentCollectionRepo.Insert(pcModel);
-
-                    if (insertSuccess)
-                    {
-                        var receiptsIssuedRepo = Factory.ReceiptsIssuedRepository();
-                        var dtReceiptIssued = receiptsIssuedRepo.GetRecords(uc.cmbcollector.SelectedValue.ToString(), uc.cmbforms.SelectedValue.ToString());
-                        var receiptIssuedCount = dtReceiptIssued.Rows.Count;
-
-                        if (receiptIssuedCount > 0)
-                        {
-                            int rid = 0;
-                            for (int i = 0; i < receiptIssuedCount; i++)
-                            {
-                                rid = Convert.ToInt32(dtReceiptIssued.Rows[i]["id"]);
-                            }
-                            var rcModel = new ReceiptsIssuedModel()
-                            {
-                                Id = rid,
-                                Last_issued = Convert.ToInt32(uc.txtreceipt.Text.Trim())
-                            };
-                            return receiptsIssuedRepo.UpdateCurrentIssued(rcModel);
-                        }
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    return false;
                 }
             }
             catch (Exception ex)
@@ -129,8 +105,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            bool isFormCashTicket = uc.isCashTicket;
 
-            if (uc.isCashTicket)
+            if (isFormCashTicket)
                 SaveCashTickets();
             else
                 SaveReceipts();
@@ -140,17 +117,14 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-                uc.txtreceipt.Validating -= new CancelEventHandler(uc.txtreceipt_Validating);
-                uc.txtpayee.Validating -= new CancelEventHandler(uc.txtpayee_Validating);
 
+                CancelReceiptFieldValidations(true);
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return;
                 }
-
-                uc.txtreceipt.Validating += new CancelEventHandler(uc.txtreceipt_Validating);
-                uc.txtpayee.Validating += new CancelEventHandler(uc.txtpayee_Validating);
+                CancelReceiptFieldValidations(false);
 
 
                 var paymentCollectionModel = new PaymentCollectionModel()
@@ -165,7 +139,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     CreatedBy = uc.userid,
                 };
 
-
                 var paymentCollectionRepo = Factory.PaymentCollectionRepository();
                 bool insertSuccess = paymentCollectionRepo.Insert(paymentCollectionModel);
 
@@ -173,7 +146,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 {
                     Helper.MessageBoxSuccess("Payment Collection has been saved.");
                     _frmPaymentCollection.LoadRecords();
-                    ucPaymentCollection1.ResetForm();
+                    uc.ResetForm();
                 }
                 
             }
@@ -183,6 +156,32 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
         }
 
+        private void CancelReceiptFieldValidations(bool cancelEvent)
+        {
+            if (cancelEvent)
+            {
+                uc.txtreceipt.Validating -= new CancelEventHandler(uc.txtreceipt_Validating);
+                uc.txtpayee.Validating -= new CancelEventHandler(uc.txtpayee_Validating);
+            }
+            else
+            {
+                uc.txtreceipt.Validating += new CancelEventHandler(uc.txtreceipt_Validating);
+                uc.txtpayee.Validating += new CancelEventHandler(uc.txtpayee_Validating);
+            }
+        }
+
+        private void CancelCashTicketFieldValidations(bool cancelEvent) 
+        {
+            if (cancelEvent)
+            {
+                uc.txtCashTicketQuantity.Validating -= new CancelEventHandler(uc.txtCashTicketQuantity_Validating);
+            }
+            else
+            {
+                uc.txtCashTicketQuantity.Validating += new CancelEventHandler(uc.txtCashTicketQuantity_Validating);
+                uc.txtpayee.Validating += new CancelEventHandler(uc.txtpayee_Validating);
+            }
+        }
 
         private void SaveReceipts()
         {
@@ -190,10 +189,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 Helper.MessageBoxSuccess("Payment Collection has been saved.");
                 _frmPaymentCollection.LoadRecords();
-                ucPaymentCollection1.ResetForm();
+                uc.ResetForm();
             }
         }
 
-      
     }
 }
