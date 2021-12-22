@@ -129,7 +129,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            var uc = ucPaymentCollection1;
 
             if (uc.isCashTicket)
                 SaveCashTickets();
