@@ -1,13 +1,5 @@
-﻿using ACC.Domain.Interfaces;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ObligationRequest
@@ -26,7 +18,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             btnSelect.Enabled = false;
         }
 
-        private void LoadObligationRequests() 
+        private void LoadObligationRequests()
         {
             try
             {
@@ -51,13 +43,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 btnSelect.Enabled = false;
         }
 
-        private void LoadSelected() 
+        private void LoadSelected()
         {
+            _ucObligationRequestMain.isEdit = true;
             int rowIndex = dgObligationRequests.CurrentCell.RowIndex;
             int obligationRequestId = Convert.ToInt32(dgObligationRequests.Rows[rowIndex].Cells["id"].Value);
             _ucObligationRequestMain.obligationRequestId = obligationRequestId;
             _ucObligationRequestMain.LoadSearched();
-            _frmObligationRequestMain.EnableDisableButtons();
+            _frmObligationRequestMain.EnableDisableControls();
             _ucObligationRequestMain.EnableDisableComponents(false);
             _frmObligationRequestMain.btnSave.Text = "Update";
 

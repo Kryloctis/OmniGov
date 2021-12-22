@@ -1,14 +1,7 @@
-﻿using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
+﻿using ACC.Domain.Models;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ObligationRequest
@@ -22,14 +15,13 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             InitializeComponent();
             Helper.LoadFormIcon(this);
             uc = ucObligationRequestMain1;
-            btnDelete.Enabled = false;
         }
 
-        private List<ObligationAccountModel> ObligationAccountsModelList() 
+        private List<ObligationAccountModel> ObligationAccountsModelList()
         {
             var obligationRequestModelList = new List<ObligationAccountModel>();
 
-            foreach (DataGridViewRow item in uc.dgObligationRequests.Rows) 
+            foreach (DataGridViewRow item in uc.dgObligationRequests.Rows)
             {
                 int budgetAppropriationId = Convert.ToInt32(item.Cells["budget_appropriation_id"].Value);
                 decimal obligationAmount = Convert.ToDecimal(item.Cells["obligation_amount"].Value);
@@ -46,24 +38,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return obligationRequestModelList;
         }
 
-        internal void EnableDisableButtons() 
-        {
-            if (uc.obligationRequestId == 0)
-            {
-                btnSave.Enabled = true;
-                btnDelete.Enabled = false;
-                btnCancel.Enabled = false;
-            }
-            else
-            {
-                btnSave.Enabled = true;
-                btnDelete.Enabled = true;
-                btnCancel.Enabled = true;
-            }
-        }
-
-
-        //DELETE
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             try
@@ -82,8 +56,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
         }
 
-        //INSERT
-        private bool InsertData() 
+        private bool InsertData()
         {
             try
             {
@@ -113,8 +86,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-        //UPDATE
-        private bool UpdateData() 
+        private bool UpdateData()
         {
             try
             {
@@ -141,12 +113,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-
-        private bool SaveData() 
+        private bool SaveData()
         {
             try
             {
-                if (!uc.ValidateChildren()) 
+                if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
@@ -154,7 +125,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
                 bool saveData;
 
-                if (uc.obligationRequestId == 0)
+                if (!uc.isEdit)
                     saveData = InsertData();
                 else
                     saveData = UpdateData();
@@ -172,25 +143,25 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             if (SaveData())
             {
-                string message = uc.obligationRequestId == 0 ? "saved" : "updated";
+                string message = !uc.isEdit ? "saved" : "updated";
                 Helper.MessageBoxSuccess($"Obligation Request has been {message}.");
                 uc.ResetForm();
+                EnableDisableControls();
                 btnSave.Text = "Save";
             }
         }
 
-
-
-        private void CancelAction() 
+        private void CancelAction()
         {
-            string message = "Are you sure? Changes cannot be undone.";
+            string message = "Are you sure? Changes will not be saved.";
 
-            if (uc.obligationRequestId > 0 || uc.dgObligationRequests.Rows.Count > 0)
+            if (uc.isEdit || uc.dgObligationRequests.Rows.Count > 0)
             {
                 if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     btnSave.Text = "Save";
-                    btnDelete.Enabled = false;
+                    uc.isEdit = false;
+                    EnableDisableControls();
                     uc.ResetForm();
                 }
             }
@@ -204,6 +175,32 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private void BtnSearch_Click(object sender, EventArgs e)
         {
             _ = new frmObligationRequestSearch(this).ShowDialog();
+        }
+
+        internal void EnableDisableControls()
+        {
+            if (!uc.isEdit)
+            {
+                btnApprove.Enabled = false;
+                btnDisapprove.Enabled = false;
+                btnCancelObligation.Enabled = false;
+                lblStatus.Text = "--";
+                linkShowMessage.Visible = false;
+                btnDelete.Enabled = false;
+            }
+            else
+            {
+                btnApprove.Enabled = true;
+                btnDisapprove.Enabled = true;
+                btnCancelObligation.Enabled = true;
+                btnDelete.Enabled = true;
+            }
+
+        }
+
+        private void frmObligationRequestMain_Load(object sender, EventArgs e)
+        {
+            EnableDisableControls();
         }
     }
 }
