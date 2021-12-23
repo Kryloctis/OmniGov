@@ -219,7 +219,6 @@ namespace ACC.Data
             }
         }
 
-        //SAAOB and SAAOBB
         public DataTable GetViewRecords(int budgetAppropriationId, DateTime dateRequested)
         {
             try
@@ -281,7 +280,6 @@ namespace ACC.Data
             }
         }
 
-        //DASHBOARD
         #region DASHBOARD BUDGET
         //DETAILED
         public decimal GetSumObligationsByAppropriationId(int appropriationId, DateTime dateRequested)
@@ -364,7 +362,6 @@ namespace ACC.Data
         }
         #endregion
 
-
         private int GetLastInsertedID()
         {
             try
@@ -378,7 +375,6 @@ namespace ACC.Data
             }
         }
 
-        //INSERT
         public bool Insert(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels)
         {
             try
@@ -430,7 +426,6 @@ namespace ACC.Data
             }
         }
 
-        //UPDATE
         public bool Update(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels)
         {
             try
@@ -477,7 +472,6 @@ namespace ACC.Data
             }
         }
 
-        //DELETE
         public bool Delete(int obligationRequestId)
         {
             try
@@ -507,8 +501,7 @@ namespace ACC.Data
             }
         }
 
-
-        //Validations
+        #region Validations
 
         public bool ObligationRequestNoExist(string obligationNo)
         {
@@ -553,6 +546,42 @@ namespace ACC.Data
             };
 
             return false;
+        }
+
+        #endregion
+
+        public bool SetObligationRequestStatus(int obligationId, string status)
+        {
+            try
+            {
+                string Status()
+                {
+                    switch (status)
+                    {
+                        case "approve":
+                            return "is_approved = 1, is_disapproved = 0, is_cancelled = 0";
+                        case "disapprove":
+                            return "is_approved = 0, is_disapproved = 1, is_cancelled = 0";
+                        case "cancel":
+                            return "is_cancelled = 1";
+                        default:
+                            return "is_cancelled= 0, is_disapproved = 0, is_approved = 0";
+                    }
+                }
+
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, obligationId},
+                };
+
+                string query = $"UPDATE {tableName} SET {Status()}  WHERE id = @id";
+
+                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

@@ -128,6 +128,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnApprove.Size = new System.Drawing.Size(56, 47);
             this.btnApprove.Text = "Approve";
             this.btnApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
             // 
             // btnDisapprove
             // 
@@ -177,7 +178,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(386, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(417, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2

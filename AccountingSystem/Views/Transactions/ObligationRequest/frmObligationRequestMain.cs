@@ -202,5 +202,26 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             EnableDisableControls();
         }
+
+        private bool SetObligationStatus(string status)
+        {
+            try
+            {
+                return Factory.ObligationRequestRepository().SetObligationRequestStatus(uc.obligationRequestId, status);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void btnApprove_Click(object sender, EventArgs e)
+        {
+            if (SetObligationStatus("approve"))
+            {
+                Helper.MessageBoxSuccess("Obligation Request has been approved.");
+            }
+        }
     }
 }

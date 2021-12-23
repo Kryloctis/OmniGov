@@ -29,5 +29,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecordsById(int Id);
 
         DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId);
+
+        bool SetObligationRequestStatus(int obligationId, string status);
     }
 }
