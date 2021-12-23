@@ -136,8 +136,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnDisapprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDisapprove.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDisapprove.Name = "btnDisapprove";
-            this.btnDisapprove.Size = new System.Drawing.Size(77, 47);
-            this.btnDisapprove.Text = "Disapproved";
+            this.btnDisapprove.Size = new System.Drawing.Size(70, 47);
+            this.btnDisapprove.Text = "Disapprove";
             this.btnDisapprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDisapprove.Click += new System.EventHandler(this.btnDisapprove_Click);
             // 
@@ -150,6 +150,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnCancelObligation.Size = new System.Drawing.Size(47, 47);
             this.btnCancelObligation.Text = "Cancel";
             this.btnCancelObligation.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCancelObligation.Click += new System.EventHandler(this.btnCancelObligation_Click);
             // 
             // ucObligationRequestMain1
             // 

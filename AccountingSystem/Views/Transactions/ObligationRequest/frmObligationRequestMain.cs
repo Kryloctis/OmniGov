@@ -203,6 +203,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             EnableDisableControls();
         }
 
+
         private bool SetObligationStatus(string status)
         {
             try
@@ -229,6 +230,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             if (SetObligationStatus("disapprove"))
             {
                 Helper.MessageBoxSuccess("Obligation Request has been disapproved.");
+            }
+        }
+
+        private void btnCancelObligation_Click(object sender, EventArgs e)
+        {
+            if (SetObligationStatus("cancel"))
+            {
+                Helper.MessageBoxSuccess("Obligation Request has been cancelled.");
             }
         }
     }
