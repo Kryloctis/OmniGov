@@ -223,5 +223,13 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 Helper.MessageBoxSuccess("Obligation Request has been approved.");
             }
         }
+
+        private void btnDisapprove_Click(object sender, EventArgs e)
+        {
+            if (SetObligationStatus("disapprove"))
+            {
+                Helper.MessageBoxSuccess("Obligation Request has been disapproved.");
+            }
+        }
     }
 }

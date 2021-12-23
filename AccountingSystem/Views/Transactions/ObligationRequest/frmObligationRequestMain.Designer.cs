@@ -139,6 +139,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnDisapprove.Size = new System.Drawing.Size(77, 47);
             this.btnDisapprove.Text = "Disapproved";
             this.btnDisapprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDisapprove.Click += new System.EventHandler(this.btnDisapprove_Click);
             // 
             // btnCancelObligation
             // 
