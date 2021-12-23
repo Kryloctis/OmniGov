@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnCancelObligation});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(585, 50);
+            this.toolStrip1.Size = new System.Drawing.Size(725, 50);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -143,7 +143,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnCancelObligation
             // 
-            this.btnCancelObligation.Image = global::AccountingSystem.Properties.Resources.document_cancel_28px;
+            this.btnCancelObligation.Image = global::AccountingSystem.Properties.Resources.document_color_magenta_filled_forbidden_28px;
             this.btnCancelObligation.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnCancelObligation.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCancelObligation.Name = "btnCancelObligation";
@@ -157,7 +157,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.ucObligationRequestMain1.AutoSize = true;
             this.ucObligationRequestMain1.Location = new System.Drawing.Point(12, 79);
             this.ucObligationRequestMain1.Name = "ucObligationRequestMain1";
-            this.ucObligationRequestMain1.Size = new System.Drawing.Size(571, 525);
+            this.ucObligationRequestMain1.Size = new System.Drawing.Size(713, 525);
             this.ucObligationRequestMain1.TabIndex = 0;
             // 
             // statusStrip1
@@ -171,7 +171,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.linkShowMessage});
             this.statusStrip1.Location = new System.Drawing.Point(0, 50);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(585, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(725, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
@@ -180,7 +180,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(417, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(556, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -191,8 +191,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // lblStatus
             // 
+            this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(17, 17);
+            this.lblStatus.Size = new System.Drawing.Size(18, 17);
             this.lblStatus.Text = "--";
             // 
             // linkShowMessage
@@ -211,7 +212,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(585, 612);
+            this.ClientSize = new System.Drawing.Size(725, 612);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.ucObligationRequestMain1);
@@ -245,8 +246,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private System.Windows.Forms.ToolStripButton btnCancelObligation;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        private System.Windows.Forms.ToolStripStatusLabel lblStatus;
-        private System.Windows.Forms.ToolStripStatusLabel linkShowMessage;
+        internal System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        internal System.Windows.Forms.ToolStripStatusLabel lblStatus;
+        internal System.Windows.Forms.ToolStripStatusLabel linkShowMessage;
     }
 }

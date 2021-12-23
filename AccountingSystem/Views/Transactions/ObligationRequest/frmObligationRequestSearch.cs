@@ -52,6 +52,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             _ucObligationRequestMain.LoadSearched();
             _frmObligationRequestMain.EnableDisableControls();
             _ucObligationRequestMain.EnableDisableComponents(false);
+            _frmObligationRequestMain.GetObligationStatus();
             _frmObligationRequestMain.btnSave.Text = "Update";
 
             Helper.ClearErrorComboBox(_ucObligationRequestMain.epFPP, _ucObligationRequestMain.cmbxFPP);

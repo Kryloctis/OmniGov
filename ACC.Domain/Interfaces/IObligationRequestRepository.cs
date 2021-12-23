@@ -30,6 +30,8 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId);
 
-        bool SetObligationRequestStatus(int obligationId, string status);
+        bool SetObligationRequestStatus(int obligationRequestId, string status);
+
+        string GetObligationRequestStatus(int obligationRequestId);
     }
 }

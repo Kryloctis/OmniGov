@@ -583,5 +583,45 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public string GetObligationRequestStatus(int obligationRequestId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, obligationRequestId }
+                };
+
+                string query = $"SELECT is_approved, is_disapproved, is_cancelled FROM {tableName} WHERE id = @id";
+
+                using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return string.Empty;
+
+                    bool isApproved = Convert.ToBoolean(reader.Rows[0]["is_approved"]);
+                    bool isDisapproved = Convert.ToBoolean(reader.Rows[0]["is_disapproved"]);
+                    bool isCancelled = Convert.ToBoolean(reader.Rows[0]["is_cancelled"]);
+
+
+                    if (isCancelled)
+                        return "Cancelled";
+                    else if (isDisapproved && !isApproved)
+                        return "Disapproved";
+                    else if (isApproved && !isDisapproved)
+                        return "Approved";
+                    else if (!isApproved && !isDisapproved && !isCancelled)
+                        return "Pending";
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return string.Empty;
+        }
     }
 }

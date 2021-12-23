@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ObligationRequest
@@ -153,16 +154,39 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void CancelAction()
         {
+            var obligationStatus = Factory.ObligationRequestRepository().GetObligationRequestStatus(uc.obligationRequestId);
             string message = "Are you sure? Changes will not be saved.";
+
+            void ResetForm()
+            {
+                btnSave.Text = "Save";
+                lblStatus.ForeColor = Color.Black;
+                uc.Enabled = true;
+                uc.isEdit = false;
+                EnableDisableControls();
+                uc.ResetForm();
+            }
 
             if (uc.isEdit || uc.dgObligationRequests.Rows.Count > 0)
             {
-                if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                switch (obligationStatus.ToLower())
                 {
-                    btnSave.Text = "Save";
-                    uc.isEdit = false;
-                    EnableDisableControls();
-                    uc.ResetForm();
+                    case "approved":
+                        ResetForm();
+                        break;
+                    case "disapproved":
+                        ResetForm();
+                        break;
+                    case "cancelled":
+                        ResetForm();
+                        break;
+
+                    default:
+                        if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                        {
+                            ResetForm();
+                        }
+                        break;
                 }
             }
         }
@@ -187,6 +211,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 lblStatus.Text = "--";
                 linkShowMessage.Visible = false;
                 btnDelete.Enabled = false;
+                btnSave.Enabled = true;
             }
             else
             {
@@ -203,6 +228,64 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             EnableDisableControls();
         }
 
+
+        internal void GetObligationStatus()
+        {
+            try
+            {
+                string ObligationRequestStatus = Factory.ObligationRequestRepository().GetObligationRequestStatus(uc.obligationRequestId);
+
+
+                switch (ObligationRequestStatus.ToLower())
+                {
+                    case "approved":
+                        btnApprove.Enabled = false;
+                        btnDisapprove.Enabled = false;
+                        btnDelete.Enabled = false;
+                        btnSave.Enabled = false;
+                        linkShowMessage.Visible = false;
+                        lblStatus.ForeColor = Color.FromArgb(78, 159, 61);
+                        uc.Enabled = false;
+                        break;
+                    case "disapproved":
+                        btnApprove.Enabled = false;
+                        btnDisapprove.Enabled = false;
+                        btnDelete.Enabled = false;
+                        btnSave.Enabled = false;
+                        linkShowMessage.Visible = true;
+                        lblStatus.ForeColor = Color.FromArgb(149, 1, 1);
+                        uc.Enabled = false;
+                        break;
+                    case "cancelled":
+                        btnApprove.Enabled = false;
+                        btnDisapprove.Enabled = false;
+                        btnSave.Enabled = false;
+                        btnCancelObligation.Enabled = false;
+                        btnDelete.Enabled = false;
+                        linkShowMessage.Visible = false;
+                        lblStatus.ForeColor = Color.FromArgb(66, 63, 62);
+                        uc.Enabled = false;
+                        break;
+                    case "pending":
+                        btnApprove.Enabled = true;
+                        btnDisapprove.Enabled = true;
+                        btnCancelObligation.Enabled = true;
+                        btnSave.Enabled = true;
+                        uc.Enabled = true;
+                        linkShowMessage.Visible = false;
+                        lblStatus.ForeColor = Color.FromArgb(216, 146, 22);
+                        break;
+                    default:
+                        break;
+                }
+
+                lblStatus.Text = ObligationRequestStatus.ToUpper();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
 
         private bool SetObligationStatus(string status)
         {
@@ -222,22 +305,31 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             if (SetObligationStatus("approve"))
             {
                 Helper.MessageBoxSuccess("Obligation Request has been approved.");
+                GetObligationStatus();
             }
         }
 
         private void btnDisapprove_Click(object sender, EventArgs e)
         {
-            if (SetObligationStatus("disapprove"))
+            if (MessageBox.Show("Confirm Disapproval of the obligation request.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, defaultButton: MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
-                Helper.MessageBoxSuccess("Obligation Request has been disapproved.");
+                if (SetObligationStatus("disapprove"))
+                {
+                    Helper.MessageBoxSuccess("Obligation Request has been disapproved.");
+                    GetObligationStatus();
+                }
             }
         }
 
         private void btnCancelObligation_Click(object sender, EventArgs e)
         {
-            if (SetObligationStatus("cancel"))
+            if (MessageBox.Show("Confirm Cancellation of the obligation request.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, defaultButton: MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
-                Helper.MessageBoxSuccess("Obligation Request has been cancelled.");
+                if (SetObligationStatus("cancel"))
+                {
+                    Helper.MessageBoxSuccess("Obligation Request has been cancelled.");
+                    GetObligationStatus();
+                }
             }
         }
     }
