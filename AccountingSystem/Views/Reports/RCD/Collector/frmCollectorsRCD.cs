@@ -11,12 +11,11 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.PaymentCollection
 {
-    public partial class frmCollectorsReportOfCollectionsAndDeposits : Form
+    public partial class frmCollectorsRCD : Form
     {
         private readonly ReportViewer reportViewer = new();
-        
         private readonly string _reportNumber;
-        public frmCollectorsReportOfCollectionsAndDeposits(string reportNumber)
+        public frmCollectorsRCD(string reportNumber)
         {
             InitializeComponent();
 
@@ -269,14 +268,5 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         }
 
 
-        private void Report_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
-        {
-            //int id = int.Parse(e.Parameters["rcdid"].Values[0].ToString());
-            //e.DataSources.Add(new ReportDataSource("dtRCDForms", DataTableForms(id)));
-            //e.DataSources.Add(new ReportDataSource("dtRCDCollections", DataTableCollections(id)));
-            //e.DataSources.Add(new ReportDataSource("dtRCDDeposits", DataTableDeposits(id)));
-            //e.DataSources.Add(new ReportDataSource("dtReceipts", DataTableReceipts(id)));
-
-        }
     }
 }

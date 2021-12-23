@@ -413,10 +413,6 @@ namespace AccountingSystem
             _ = new frmRCD().ShowDialog();
         }
 
-        private void menuprintGC_Click(object sender, EventArgs e)
-        {
-            _ = new frmPCReport().ShowDialog();
-        }
 
         private void menureceipts_Click(object sender, EventArgs e)
         {

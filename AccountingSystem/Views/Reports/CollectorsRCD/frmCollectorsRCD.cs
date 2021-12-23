@@ -249,7 +249,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private void btnPrint_Click(object sender, EventArgs e)
         {
             string reportNumber = uc.txtReport.Text.Trim();
-            _ = new PaymentCollection.frmCollectorsReportOfCollectionsAndDeposits(reportNumber).ShowDialog();
+            _ = new PaymentCollection.frmCollectorsRCD(reportNumber).ShowDialog();
         }
 
         private void btnDisapprove_Click(object sender, EventArgs e)

@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Reports.PaymentCollection
 {
-    partial class frmCollectorsReportOfCollectionsAndDeposits
+    partial class frmCollectorsRCD
     {
         /// <summary>
         /// Required designer variable.

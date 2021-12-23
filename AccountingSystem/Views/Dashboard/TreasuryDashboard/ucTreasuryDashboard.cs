@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 
         private void btnReportOfCollections_Click(object sender, EventArgs e)
         {
-            _ = new frmCollectorsRCD().ShowDialog();
+            _ = new Reports.CollectorsRCD.frmCollectorsRCD().ShowDialog();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Reports.PaymentCollection;
+using AccountingSystem.Views.Reports.RCD.Liquidating;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using System;
 using System.Collections.Generic;
@@ -19,11 +20,7 @@ namespace AccountingSystem.Views.Reports.RCD
         internal string rcdNo;
         internal string rcdId;
         internal short reportQuantity;
-
-
         internal DateTime date;
-
-
         private List<GeneralCollectionsModel> data;
 
         public frmRCD()
@@ -202,7 +199,7 @@ namespace AccountingSystem.Views.Reports.RCD
         private void btnPrint_Click(object sender, EventArgs e)
         {
             string reportNo = txtRCDNo.Text.Trim();
-            _ = new frmCollectorsReportOfCollectionsAndDeposits(reportNo).ShowDialog();
+            _ = new frmLiquidatingRCD(reportNo).ShowDialog();
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
