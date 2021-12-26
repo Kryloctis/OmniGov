@@ -18,7 +18,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             _frmObligationRequestMain = frmObligationRequestMain;
             _ucObligationRequestMain = _frmObligationRequestMain.ucObligationRequestMain1;
             btnSelect.Enabled = false;
-            cmbxStatus.SelectedValue = "All";
         }
 
         private DataTable ObligationRequestsDatatable()
