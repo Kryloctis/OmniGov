@@ -1904,33 +1904,29 @@ namespace AccountingSystem
 
         #region Obligation Request
 
-        internal static void ObligationRequestDatagridView(DataGridView dataGridView, string searchTxt)
+        internal static void ObligationRequestDatagridView(DataTable dataTable, DataGridView dataGridView)
         {
             try
             {
-                dataGridView.DataSource = Factory.ObligationRequestRepository().GetRecordsBySearch(searchTxt);
+                Helper.DatagridFullRowSelectStyle(dataGridView, true);
+
+                dataGridView.DataSource = dataTable;
 
                 dataGridView.Columns["obligation_no"].HeaderText = "Obligation No.";
                 dataGridView.Columns["payee"].HeaderText = "Payee";
                 dataGridView.Columns["explanation"].HeaderText = "Explanation";
                 dataGridView.Columns["reference_no"].HeaderText = "Reference No.";
+                dataGridView.Columns["status"].HeaderText = "Status";
                 dataGridView.Columns["id"].Visible = false;
                 dataGridView.Columns["date_requested"].Visible = false;
                 dataGridView.Columns["created_at"].Visible = false;
-                dataGridView.Columns["created_by"].Visible = false;
+                dataGridView.Columns["created_by_id"].Visible = false;
+                dataGridView.Columns["created_by_full_name"].HeaderText = "Created By";
                 dataGridView.Columns["updated_at"].Visible = false;
-                dataGridView.Columns["updated_by"].Visible = false;
+                dataGridView.Columns["updated_by_id"].Visible = false;
+                dataGridView.Columns["updated_by_full_name"].HeaderText = "Updated By";
 
-                dataGridView.Columns["id"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["obligation_no"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["payee"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["explanation"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["reference_no"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["date_requested"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["created_at"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["created_by"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["updated_at"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["updated_by"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
                 dataGridView.ClearSelection();
 

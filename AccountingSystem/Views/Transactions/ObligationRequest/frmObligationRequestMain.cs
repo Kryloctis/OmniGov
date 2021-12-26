@@ -1,14 +1,9 @@
-﻿using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
+﻿using ACC.Domain.Models;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ObligationRequest
@@ -22,14 +17,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             InitializeComponent();
             Helper.LoadFormIcon(this);
             uc = ucObligationRequestMain1;
-            btnDelete.Enabled = false;
+            lblCreatedBy.Text = "--";
         }
 
-        private List<ObligationAccountModel> ObligationAccountsModelList() 
+        private List<ObligationAccountModel> ObligationAccountsModelList()
         {
             var obligationRequestModelList = new List<ObligationAccountModel>();
 
-            foreach (DataGridViewRow item in uc.dgObligationRequests.Rows) 
+            foreach (DataGridViewRow item in uc.dgObligationRequests.Rows)
             {
                 int budgetAppropriationId = Convert.ToInt32(item.Cells["budget_appropriation_id"].Value);
                 decimal obligationAmount = Convert.ToDecimal(item.Cells["obligation_amount"].Value);
@@ -46,24 +41,59 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return obligationRequestModelList;
         }
 
-        internal void EnableDisableButtons() 
+        internal void LoadSearched()
         {
-            if (uc.obligationRequestId == 0)
+            try
             {
-                btnSave.Enabled = true;
-                btnDelete.Enabled = false;
-                btnCancel.Enabled = false;
+                uc.dgObligationRequests.Rows.Clear();
+
+                var dictObligationRequest = Factory.ObligationRequestRepository().GetViewRecordById(uc.obligationRequestId);
+                var dtObligationRequest = Factory.ObligationRequestRepository().GetViewRecordsById(uc.obligationRequestId);
+
+                int fppId = Convert.ToInt32(dictObligationRequest["function_program_project_id"]);
+                var subFPPId = dictObligationRequest["others_fpp_id"];
+                int fundId = Convert.ToInt32(dictObligationRequest["funds_id"]);
+                int allotmentClassId = Convert.ToInt32(dictObligationRequest["allotment_classes_id"]);
+                string obligationRequestNo = dictObligationRequest["obligation_no"].ToString();
+                DateTime dateOfRequest = Convert.ToDateTime(dictObligationRequest["date_requested"]);
+                string referenceNo = dictObligationRequest["reference_no"].ToString();
+                string payee = dictObligationRequest["payee"].ToString();
+                string explanation = dictObligationRequest["explanation"].ToString();
+                string createdBy = dictObligationRequest["created_by_full_name"].ToString();
+
+
+                uc.cmbxFPP.SelectedValue = fppId;
+                uc.CheckedFund(fundId);
+                uc.CheckedAllotmentClass(allotmentClassId);
+                uc.mskTxtObligationNoSeries.Text = obligationRequestNo;
+                uc.dtDateRequest.Value = dateOfRequest;
+                uc.txtReferenceNo.Text = referenceNo;
+                uc.txtPayee.Text = payee;
+                uc.txtExplanation.Text = explanation;
+                lblCreatedBy.Text = createdBy;
+
+                foreach (DataRow item in dtObligationRequest.Rows)
+                {
+                    string remarks = item["remarks"].ToString();
+
+                    var obligationRequest = new object[]
+                    {
+                        item["budget_appropriations_id"],
+                        $"{item["ledger_name"]} ({remarks})",
+                        item["account_code"],
+                        item["amount"]
+                    };
+
+                    uc.dgObligationRequests.Rows.Add(obligationRequest);
+                    uc.GetTotalObligations();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                btnSave.Enabled = true;
-                btnDelete.Enabled = true;
-                btnCancel.Enabled = true;
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
-
-        //DELETE
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             try
@@ -82,8 +112,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
         }
 
-        //INSERT
-        private bool InsertData() 
+        private bool InsertData()
         {
             try
             {
@@ -113,8 +142,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-        //UPDATE
-        private bool UpdateData() 
+        private bool UpdateData()
         {
             try
             {
@@ -141,12 +169,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-
-        private bool SaveData() 
+        private bool SaveData()
         {
             try
             {
-                if (!uc.ValidateChildren()) 
+                if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
@@ -154,7 +181,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
                 bool saveData;
 
-                if (uc.obligationRequestId == 0)
+                if (!uc.isEdit)
                     saveData = InsertData();
                 else
                     saveData = UpdateData();
@@ -172,26 +199,49 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             if (SaveData())
             {
-                string message = uc.obligationRequestId == 0 ? "saved" : "updated";
+                string message = !uc.isEdit ? "saved" : "updated";
                 Helper.MessageBoxSuccess($"Obligation Request has been {message}.");
                 uc.ResetForm();
+                ResetControls();
                 btnSave.Text = "Save";
             }
         }
 
-
-
-        private void CancelAction() 
+        private void CancelAction()
         {
-            string message = "Are you sure? Changes cannot be undone.";
+            var obligationStatus = Factory.ObligationRequestRepository().GetObligationRequestStatus(uc.obligationRequestId);
+            string message = "Are you sure? Changes will not be saved.";
 
-            if (uc.obligationRequestId > 0 || uc.dgObligationRequests.Rows.Count > 0)
+            void ResetForm()
             {
-                if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                btnSave.Text = "Save";
+                lblStatus.ForeColor = Color.Black;
+                uc.Enabled = true;
+                uc.isEdit = false;
+                ResetControls();
+                uc.ResetForm();
+            }
+
+            if (uc.isEdit || uc.dgObligationRequests.Rows.Count > 0)
+            {
+                switch (obligationStatus.ToLower())
                 {
-                    btnSave.Text = "Save";
-                    btnDelete.Enabled = false;
-                    uc.ResetForm();
+                    case "approved":
+                        ResetForm();
+                        break;
+                    case "disapproved":
+                        ResetForm();
+                        break;
+                    case "cancelled":
+                        ResetForm();
+                        break;
+
+                    default:
+                        if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                        {
+                            ResetForm();
+                        }
+                        break;
                 }
             }
         }
@@ -204,6 +254,140 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private void BtnSearch_Click(object sender, EventArgs e)
         {
             _ = new frmObligationRequestSearch(this).ShowDialog();
+        }
+
+        internal void ResetControls()
+        {
+            if (!uc.isEdit)
+            {
+                btnApprove.Enabled = false;
+                btnDisapprove.Enabled = false;
+                btnCancelObligation.Enabled = false;
+                lblStatus.Text = "--";
+                lblCreatedBy.Text = "--";
+                linkShowMessage.Visible = false;
+                btnDelete.Enabled = false;
+                btnSave.Enabled = true;
+            }
+            else
+            {
+                btnApprove.Enabled = true;
+                btnDisapprove.Enabled = true;
+                btnCancelObligation.Enabled = true;
+                btnDelete.Enabled = true;
+                lblCreatedBy.Text = "--";
+            }
+
+        }
+
+        private void frmObligationRequestMain_Load(object sender, EventArgs e)
+        {
+            ResetControls();
+        }
+
+
+        internal void GetObligationStatus()
+        {
+            try
+            {
+                string ObligationRequestStatus = Factory.ObligationRequestRepository().GetObligationRequestStatus(uc.obligationRequestId);
+
+
+                switch (ObligationRequestStatus.ToLower())
+                {
+                    case "approved":
+                        btnApprove.Enabled = false;
+                        btnDisapprove.Enabled = false;
+                        btnDelete.Enabled = false;
+                        btnSave.Enabled = false;
+                        linkShowMessage.Visible = false;
+                        lblStatus.ForeColor = Color.FromArgb(78, 159, 61);
+                        uc.Enabled = false;
+                        break;
+                    case "disapproved":
+                        btnApprove.Enabled = false;
+                        btnDisapprove.Enabled = false;
+                        btnDelete.Enabled = false;
+                        btnSave.Enabled = false;
+                        linkShowMessage.Visible = true;
+                        lblStatus.ForeColor = Color.FromArgb(149, 1, 1);
+                        uc.Enabled = false;
+                        break;
+                    case "cancelled":
+                        btnApprove.Enabled = false;
+                        btnDisapprove.Enabled = false;
+                        btnSave.Enabled = false;
+                        btnCancelObligation.Enabled = false;
+                        btnDelete.Enabled = false;
+                        linkShowMessage.Visible = false;
+                        lblStatus.ForeColor = Color.FromArgb(66, 63, 62);
+                        uc.Enabled = false;
+                        break;
+                    case "pending":
+                        btnApprove.Enabled = true;
+                        btnDisapprove.Enabled = true;
+                        btnCancelObligation.Enabled = true;
+                        btnSave.Enabled = true;
+                        uc.Enabled = true;
+                        linkShowMessage.Visible = false;
+                        lblStatus.ForeColor = Color.FromArgb(216, 146, 22);
+                        break;
+                    default:
+                        break;
+                }
+
+                lblStatus.Text = ObligationRequestStatus.ToUpper();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private bool SetObligationStatus(string status)
+        {
+            try
+            {
+                return Factory.ObligationRequestRepository().SetObligationRequestStatus(uc.obligationRequestId, status);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void btnApprove_Click(object sender, EventArgs e)
+        {
+            if (SetObligationStatus("approve"))
+            {
+                Helper.MessageBoxSuccess("Obligation Request has been approved.");
+                GetObligationStatus();
+            }
+        }
+
+        private void btnDisapprove_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Confirm Disapproval of the obligation request.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, defaultButton: MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                if (SetObligationStatus("disapprove"))
+                {
+                    Helper.MessageBoxSuccess("Obligation Request has been disapproved.");
+                    GetObligationStatus();
+                }
+            }
+        }
+
+        private void btnCancelObligation_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Confirm Cancellation of the obligation request.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, defaultButton: MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                if (SetObligationStatus("cancel"))
+                {
+                    Helper.MessageBoxSuccess("Obligation Request has been cancelled.");
+                    GetObligationStatus();
+                }
+            }
         }
     }
 }
