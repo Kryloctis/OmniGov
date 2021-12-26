@@ -44,8 +44,13 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.linkShowMessage = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblCreatedBy = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.statusStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -207,12 +212,44 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.linkShowMessage.Size = new System.Drawing.Size(94, 17);
             this.linkShowMessage.Text = "Show Message...";
             // 
+            // statusStrip2
+            // 
+            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel3,
+            this.toolStripStatusLabel4,
+            this.lblCreatedBy});
+            this.statusStrip2.Location = new System.Drawing.Point(0, 610);
+            this.statusStrip2.Name = "statusStrip2";
+            this.statusStrip2.Size = new System.Drawing.Size(725, 22);
+            this.statusStrip2.SizingGrip = false;
+            this.statusStrip2.TabIndex = 3;
+            this.statusStrip2.Text = "statusStrip2";
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(494, 17);
+            this.toolStripStatusLabel3.Spring = true;
+            // 
+            // toolStripStatusLabel4
+            // 
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(67, 17);
+            this.toolStripStatusLabel4.Text = "Created By:";
+            // 
+            // lblCreatedBy
+            // 
+            this.lblCreatedBy.Name = "lblCreatedBy";
+            this.lblCreatedBy.Size = new System.Drawing.Size(118, 17);
+            this.lblCreatedBy.Text = "toolStripStatusLabel5";
+            // 
             // frmObligationRequestMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(725, 612);
+            this.ClientSize = new System.Drawing.Size(725, 632);
+            this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.ucObligationRequestMain1);
@@ -228,6 +265,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.statusStrip2.ResumeLayout(false);
+            this.statusStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -249,5 +288,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         internal System.Windows.Forms.ToolStripStatusLabel lblStatus;
         internal System.Windows.Forms.ToolStripStatusLabel linkShowMessage;
+        private System.Windows.Forms.StatusStrip statusStrip2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        internal System.Windows.Forms.ToolStripStatusLabel lblCreatedBy;
     }
 }

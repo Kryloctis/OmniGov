@@ -110,8 +110,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             int rowIndex = dgObligationRequests.CurrentCell.RowIndex;
             int obligationRequestId = Convert.ToInt32(dgObligationRequests.Rows[rowIndex].Cells["id"].Value);
             _ucObligationRequestMain.obligationRequestId = obligationRequestId;
-            _ucObligationRequestMain.LoadSearched();
-            _frmObligationRequestMain.EnableDisableControls();
+            _frmObligationRequestMain.ResetControls();
+            _frmObligationRequestMain.LoadSearched();
             _ucObligationRequestMain.EnableDisableComponents(false);
             _frmObligationRequestMain.GetObligationStatus();
             _frmObligationRequestMain.btnSave.Text = "Update";

@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -16,6 +17,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             InitializeComponent();
             Helper.LoadFormIcon(this);
             uc = ucObligationRequestMain1;
+            lblCreatedBy.Text = "--";
         }
 
         private List<ObligationAccountModel> ObligationAccountsModelList()
@@ -37,6 +39,59 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
 
             return obligationRequestModelList;
+        }
+
+        internal void LoadSearched()
+        {
+            try
+            {
+                uc.dgObligationRequests.Rows.Clear();
+
+                var dictObligationRequest = Factory.ObligationRequestRepository().GetViewRecordById(uc.obligationRequestId);
+                var dtObligationRequest = Factory.ObligationRequestRepository().GetViewRecordsById(uc.obligationRequestId);
+
+                int fppId = Convert.ToInt32(dictObligationRequest["function_program_project_id"]);
+                var subFPPId = dictObligationRequest["others_fpp_id"];
+                int fundId = Convert.ToInt32(dictObligationRequest["funds_id"]);
+                int allotmentClassId = Convert.ToInt32(dictObligationRequest["allotment_classes_id"]);
+                string obligationRequestNo = dictObligationRequest["obligation_no"].ToString();
+                DateTime dateOfRequest = Convert.ToDateTime(dictObligationRequest["date_requested"]);
+                string referenceNo = dictObligationRequest["reference_no"].ToString();
+                string payee = dictObligationRequest["payee"].ToString();
+                string explanation = dictObligationRequest["explanation"].ToString();
+                string createdBy = dictObligationRequest["created_by_full_name"].ToString();
+
+
+                uc.cmbxFPP.SelectedValue = fppId;
+                uc.CheckedFund(fundId);
+                uc.CheckedAllotmentClass(allotmentClassId);
+                uc.mskTxtObligationNoSeries.Text = obligationRequestNo;
+                uc.dtDateRequest.Value = dateOfRequest;
+                uc.txtReferenceNo.Text = referenceNo;
+                uc.txtPayee.Text = payee;
+                uc.txtExplanation.Text = explanation;
+                lblCreatedBy.Text = createdBy;
+
+                foreach (DataRow item in dtObligationRequest.Rows)
+                {
+                    string remarks = item["remarks"].ToString();
+
+                    var obligationRequest = new object[]
+                    {
+                        item["budget_appropriations_id"],
+                        $"{item["ledger_name"]} ({remarks})",
+                        item["account_code"],
+                        item["amount"]
+                    };
+
+                    uc.dgObligationRequests.Rows.Add(obligationRequest);
+                    uc.GetTotalObligations();
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
@@ -147,7 +202,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 string message = !uc.isEdit ? "saved" : "updated";
                 Helper.MessageBoxSuccess($"Obligation Request has been {message}.");
                 uc.ResetForm();
-                EnableDisableControls();
+                ResetControls();
                 btnSave.Text = "Save";
             }
         }
@@ -163,7 +218,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 lblStatus.ForeColor = Color.Black;
                 uc.Enabled = true;
                 uc.isEdit = false;
-                EnableDisableControls();
+                ResetControls();
                 uc.ResetForm();
             }
 
@@ -201,7 +256,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             _ = new frmObligationRequestSearch(this).ShowDialog();
         }
 
-        internal void EnableDisableControls()
+        internal void ResetControls()
         {
             if (!uc.isEdit)
             {
@@ -209,6 +264,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 btnDisapprove.Enabled = false;
                 btnCancelObligation.Enabled = false;
                 lblStatus.Text = "--";
+                lblCreatedBy.Text = "--";
                 linkShowMessage.Visible = false;
                 btnDelete.Enabled = false;
                 btnSave.Enabled = true;
@@ -219,13 +275,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 btnDisapprove.Enabled = true;
                 btnCancelObligation.Enabled = true;
                 btnDelete.Enabled = true;
+                lblCreatedBy.Text = "--";
             }
 
         }
 
         private void frmObligationRequestMain_Load(object sender, EventArgs e)
         {
-            EnableDisableControls();
+            ResetControls();
         }
 
 

@@ -207,64 +207,13 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
         }
 
-
-        //LOAD SEARCHED OBLIGATIONS
-        internal void LoadSearched()
-        {
-            try
-            {
-                dgObligationRequests.Rows.Clear();
-
-                DataTable dtObligationRequest = Factory.ObligationRequestRepository().GetViewRecordsById(obligationRequestId);
-
-                int fppId = Convert.ToInt32(dtObligationRequest.Rows[0]["function_program_project_id"]);
-                var subFPPId = dtObligationRequest.Rows[0]["others_fpp_id"];
-                int fundId = Convert.ToInt32(dtObligationRequest.Rows[0]["funds_id"]);
-                int allotmentClassId = Convert.ToInt32(dtObligationRequest.Rows[0]["allotment_classes_id"]);
-                string obligationRequestNo = dtObligationRequest.Rows[0]["obligation_no"].ToString();
-                DateTime dateOfRequest = Convert.ToDateTime(dtObligationRequest.Rows[0]["date_requested"]);
-                string referenceNo = dtObligationRequest.Rows[0]["reference_no"].ToString();
-                string payee = dtObligationRequest.Rows[0]["payee"].ToString();
-                string explanation = dtObligationRequest.Rows[0]["explanation"].ToString();
-
-                cmbxFPP.SelectedValue = fppId;
-                CheckedFund(fundId);
-                CheckedAllotmentClass(allotmentClassId);
-                mskTxtObligationNoSeries.Text = obligationRequestNo;
-                dtDateRequest.Value = dateOfRequest;
-                txtReferenceNo.Text = referenceNo;
-                txtPayee.Text = payee;
-                txtExplanation.Text = explanation;
-
-                foreach (DataRow item in dtObligationRequest.Rows)
-                {
-                    string remarks = string.IsNullOrEmpty(item["remarks"].ToString()) ? string.Empty : $"({item["remarks"]})";
-
-                    var obligationRequest = new object[]
-                    {
-                        item["budget_appropriations_id"],
-                        $"{item["ledger_name"]}{remarks}",
-                        item["account_code"],
-                        item["amount"]
-                    };
-
-                    dgObligationRequests.Rows.Add(obligationRequest);
-                    GetTotalObligations();
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        private void CheckedFund(int radFundId)
+        internal void CheckedFund(int radFundId)
         {
             flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => (Convert.ToInt32(r.Tag) == radFundId) ? r.Checked = true : r.Checked = false);
             fundId = radFundId;
         }
 
-        private void CheckedAllotmentClass(int radAllotmentClassId)
+        internal void CheckedAllotmentClass(int radAllotmentClassId)
         {
             flowLayoutPanelAllotmentClass.Controls.OfType<RadioButton>().FirstOrDefault(r => (Convert.ToInt32(r.Tag) == radAllotmentClassId) ? r.Checked = true : r.Checked = false);
             allotmentClassId = radAllotmentClassId;

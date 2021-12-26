@@ -101,8 +101,10 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public DataTable GetViewRecordsById(int Id)
+        public Dictionary<string, string> GetViewRecordById(int Id)
         {
+            var record = new Dictionary<string, string>();
+
             var parameters = new object[][]
             {
                 new object[] { "@obligation_request_id", DbType.Int32, Id }
@@ -110,8 +112,63 @@ namespace ACC.Data
 
             string query = $"SELECT * FROM {viewTableName} WHERE obligation_request_id = @obligation_request_id";
 
-            var dtObligationRequests = new DataTable();
-            return _mySqlGenericCommands.FillBySearch(query, dtObligationRequests, parameters);
+            using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return record;
+
+                record.Add("obligation_request_id", reader.Rows[0]["obligation_request_id"].ToString());
+                record.Add("obligation_account_id", reader.Rows[0]["obligation_account_id"].ToString());
+                record.Add("obligation_no", reader.Rows[0]["obligation_no"].ToString());
+                record.Add("payee", reader.Rows[0]["payee"].ToString());
+                record.Add("explanation", reader.Rows[0]["explanation"].ToString());
+                record.Add("reference_no", reader.Rows[0]["reference_no"].ToString());
+                record.Add("date_requested", reader.Rows[0]["date_requested"].ToString());
+                record.Add("budget_appropriations_id", reader.Rows[0]["budget_appropriations_id"].ToString());
+                record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
+                record.Add("fund_code", reader.Rows[0]["fund_code"].ToString());
+                record.Add("fund_name", reader.Rows[0]["fund_name"].ToString());
+                record.Add("function_program_project_id", reader.Rows[0]["function_program_project_id"].ToString());
+                record.Add("fpp_code", reader.Rows[0]["fpp_code"].ToString());
+                record.Add("fpp_name", reader.Rows[0]["fpp_name"].ToString());
+                record.Add("others_fpp_id", reader.Rows[0]["others_fpp_id"].ToString());
+                record.Add("others_fpp_code", reader.Rows[0]["others_fpp_code"].ToString());
+                record.Add("others_fpp_name", reader.Rows[0]["others_fpp_name"].ToString());
+                record.Add("allotment_classes_id", reader.Rows[0]["allotment_classes_id"].ToString());
+                record.Add("allotment_code", reader.Rows[0]["allotment_code"].ToString());
+                record.Add("allotment_name", reader.Rows[0]["allotment_name"].ToString());
+                record.Add("general_ledger_accounts_id", reader.Rows[0]["general_ledger_accounts_id"].ToString());
+                record.Add("account_code", reader.Rows[0]["account_code"].ToString());
+                record.Add("ledger_name", reader.Rows[0]["ledger_name"].ToString());
+                record.Add("is_contra_account", reader.Rows[0]["is_contra_account"].ToString());
+                record.Add("year", reader.Rows[0]["year"].ToString());
+                record.Add("continuing", reader.Rows[0]["continuing"].ToString());
+                record.Add("remarks", reader.Rows[0]["remarks"].ToString());
+                record.Add("amount", reader.Rows[0]["amount"].ToString());
+                record.Add("is_approved", reader.Rows[0]["is_approved"].ToString());
+                record.Add("is_disapproved", reader.Rows[0]["is_disapproved"].ToString());
+                record.Add("is_cancelled", reader.Rows[0]["is_cancelled"].ToString());
+                record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                record.Add("created_by_id", reader.Rows[0]["created_by_id"].ToString());
+                record.Add("created_by_full_name", reader.Rows[0]["created_by_full_name"].ToString());
+                record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+                record.Add("updated_by_id", reader.Rows[0]["updated_by_id"].ToString());
+                record.Add("updated_by_full_name", reader.Rows[0]["updated_by_full_name"].ToString());
+            }
+
+            return record;
+        }
+
+        public DataTable GetViewRecordsById(int Id)
+        {
+            var parameters = new object[][]
+           {
+                new object[] { "@obligation_request_id", DbType.Int32, Id }
+           };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE obligation_request_id = @obligation_request_id";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId)

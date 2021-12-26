@@ -402,7 +402,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.Label label7;
         internal System.Windows.Forms.Label label8;
         internal System.Windows.Forms.DataGridView dgObligationRequests;
-        private System.Windows.Forms.Label label9;
         internal System.Windows.Forms.TextBox txtTotalObligations;
         internal System.Windows.Forms.ComboBox cmbxFPP;
         internal System.Windows.Forms.Label label1;
@@ -411,5 +410,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.GroupBox groupBox1;
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFunds;
         internal System.Windows.Forms.ErrorProvider epFPP;
+        internal System.Windows.Forms.Label label9;
     }
 }
