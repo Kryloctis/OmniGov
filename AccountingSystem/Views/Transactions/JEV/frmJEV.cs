@@ -512,7 +512,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             return false;
         }
 
-
         private void BtnSave_Click(object sender, EventArgs e)
         {
             if (!uc.isEdit)
@@ -534,6 +533,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                 Helper.MessageBoxSuccess(message);
                 GetJevStatus(jevId);
+                PermissionVerification();
                 _frmJEVList.LoadJEVList();
                 _ucJEVDashboard.LoadJEVCounter();
                 uc.isDisapproved = 0;
@@ -633,36 +633,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 case 6:
                     //DO NOTHING
                     return;
-            }
-        }
-
-        internal void ResetForm()
-        {
-            btnSave.Enabled = true;
-            btnDelete.Enabled = false;
-            btnApprove.Enabled = false;
-            btnDisapprove.Enabled = false;
-            btnCancelJEV.Enabled = false;
-            btnPrint.Enabled = false;
-            btnSave.Text = "Save";
-
-
-            uc.Enabled = true;
-            lblJevStatus.ForeColor = Color.Black;
-            lblJevStatus.Text = "--";
-            lblShowMessage.Visible = false;
-        }
-
-        private void BtnCancel_Click(object sender, EventArgs e)
-        {
-            if (_frmJEVList != null)
-            {
-                Close();
-            }
-            else
-            {
-                ResetForm();
-                uc.ResetForm();
             }
         }
 
