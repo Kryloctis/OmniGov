@@ -31,7 +31,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
-            this.btnCancel = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnApprove = new System.Windows.Forms.ToolStripButton();
@@ -61,7 +60,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSave,
-            this.btnCancel,
             this.btnDelete,
             this.toolStripSeparator2,
             this.btnApprove,
@@ -86,17 +84,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnSave.Text = "&Save";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
-            this.btnCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(47, 47);
-            this.btnCancel.Text = "&Cancel";
-            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // btnDelete
             // 
@@ -197,7 +184,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(764, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(931, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -230,6 +217,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.lblShowMessage.ForeColor = System.Drawing.Color.Firebrick;
             this.lblShowMessage.IsLink = true;
             this.lblShowMessage.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lblShowMessage.LinkColor = System.Drawing.Color.Firebrick;
             this.lblShowMessage.Name = "lblShowMessage";
             this.lblShowMessage.Size = new System.Drawing.Size(88, 17);
             this.lblShowMessage.Text = "Show Message.";
@@ -298,7 +286,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         }
 
         #endregion
-        private System.Windows.Forms.ToolStripButton btnCancel;
         internal System.Windows.Forms.ToolStrip toolStrip1;
         internal System.Windows.Forms.ToolStripButton btnSave;
         internal System.Windows.Forms.ToolStripButton btnDelete;

@@ -395,9 +395,34 @@ namespace AccountingSystem.Views.Transactions.JEV
             GenerateJEVNumber();
         }
 
+
+        private void EnableDisableButtons(DataGridView dgv, Button btnEdit, Button btnDelete)
+        {
+            int SelectedRows = dgv.SelectedRows.Count;
+            if (SelectedRows == 1)
+            {
+                btnEdit.Enabled = true;
+                btnDelete.Enabled = true;
+                btnDelete.Text = "Remove (" + SelectedRows + ")";
+
+            }
+            else if (SelectedRows > 1)
+            {
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = true;
+                btnDelete.Text = "Remove (" + SelectedRows + ")";
+            }
+            else
+            {
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = false;
+                btnDelete.Text = "Remove";
+            }
+        }
+
         private void dgAccounts_SelectionChanged(object sender, EventArgs e)
         {
-            Helper.EnableDisableButtons(dgAccounts, btnEditAccount, btnRemoveAccount);
+            EnableDisableButtons(dgAccounts, btnEditAccount, btnRemoveAccount);
         }
 
         private void txtJEVNo_Validating(object sender, CancelEventArgs e)
