@@ -18,6 +18,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             _frmObligationRequestMain = frmObligationRequestMain;
             _ucObligationRequestMain = _frmObligationRequestMain.ucObligationRequestMain1;
             btnSelect.Enabled = false;
+            cmbxStatus.SelectedIndex = 0;
         }
 
         private DataTable ObligationRequestsDatatable()
@@ -51,7 +52,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             dataTable.Columns.Add("status");
 
             string searchTxt = txtSearch.Text.Trim();
-            var dtObligationRequests = Factory.ObligationRequestRepository().GetViewRecordsBySearch(searchTxt);
+            string filterStatus = cmbxStatus.Text.Trim().ToLower();
+            var dtObligationRequests = Factory.ObligationRequestRepository().GetViewRecordsBySearchAndStatus(searchTxt, filterStatus);
 
             foreach (DataRow row in dtObligationRequests.Rows)
             {
@@ -182,6 +184,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.SelectionBackColor = DefaultBackColor;
                     break;
             }
+        }
+
+        private void cmbxStatus_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadObligationRequests();
         }
     }
 }

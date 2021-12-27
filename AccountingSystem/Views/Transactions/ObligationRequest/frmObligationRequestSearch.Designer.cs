@@ -35,6 +35,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.dgObligationRequests = new System.Windows.Forms.DataGridView();
+            this.cmbxStatus = new System.Windows.Forms.ComboBox();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgObligationRequests)).BeginInit();
             this.SuspendLayout();
@@ -48,12 +49,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 441);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(705, 30);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(718, 30);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(609, 3);
+            this.btnCancel.Location = new System.Drawing.Point(622, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(93, 23);
             this.btnCancel.TabIndex = 2;
@@ -64,7 +65,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             this.btnSelect.Image = global::AccountingSystem.Properties.Resources.ok14px;
             this.btnSelect.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSelect.Location = new System.Drawing.Point(510, 3);
+            this.btnSelect.Location = new System.Drawing.Point(523, 3);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(93, 23);
             this.btnSelect.TabIndex = 1;
@@ -75,14 +76,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(356, 12);
+            this.txtSearch.Location = new System.Drawing.Point(369, 12);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(256, 23);
             this.txtSearch.TabIndex = 0;
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(618, 12);
+            this.btnSearch.Location = new System.Drawing.Point(631, 12);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 1;
@@ -96,12 +97,28 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.dgObligationRequests.Location = new System.Drawing.Point(12, 41);
             this.dgObligationRequests.Name = "dgObligationRequests";
             this.dgObligationRequests.RowTemplate.Height = 25;
-            this.dgObligationRequests.Size = new System.Drawing.Size(681, 394);
+            this.dgObligationRequests.Size = new System.Drawing.Size(694, 394);
             this.dgObligationRequests.TabIndex = 2;
             this.dgObligationRequests.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgObligationRequests_ColumnAdded);
             this.dgObligationRequests.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgObligationRequests_RowHeaderMouseDoubleClick);
             this.dgObligationRequests.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgObligationRequests_RowsAdded);
             this.dgObligationRequests.SelectionChanged += new System.EventHandler(this.dgObligationRequests_SelectionChanged);
+            // 
+            // cmbxStatus
+            // 
+            this.cmbxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxStatus.FormattingEnabled = true;
+            this.cmbxStatus.Items.AddRange(new object[] {
+            "All",
+            "Pending",
+            "Approved",
+            "Disapproved",
+            "Cancelled"});
+            this.cmbxStatus.Location = new System.Drawing.Point(12, 12);
+            this.cmbxStatus.Name = "cmbxStatus";
+            this.cmbxStatus.Size = new System.Drawing.Size(179, 23);
+            this.cmbxStatus.TabIndex = 3;
+            this.cmbxStatus.SelectedValueChanged += new System.EventHandler(this.cmbxStatus_SelectedValueChanged);
             // 
             // frmObligationRequestSearch
             // 
@@ -110,7 +127,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(705, 471);
+            this.ClientSize = new System.Drawing.Size(718, 471);
+            this.Controls.Add(this.cmbxStatus);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.dgObligationRequests);
@@ -138,5 +156,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         internal System.Windows.Forms.TextBox txtSearch;
         internal System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.DataGridView dgObligationRequests;
+        internal System.Windows.Forms.ComboBox cmbxStatus;
     }
 }

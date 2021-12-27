@@ -470,36 +470,29 @@ namespace ACC.Data
 
         public bool SetObligationRequestStatus(int obligationId, string status)
         {
-            try
+            string Status()
             {
-                string Status()
+                switch (status)
                 {
-                    switch (status)
-                    {
-                        case "approve":
-                            return "is_approved = 1, is_disapproved = 0, is_cancelled = 0";
-                        case "disapprove":
-                            return "is_approved = 0, is_disapproved = 1, is_cancelled = 0";
-                        case "cancel":
-                            return "is_cancelled = 1";
-                        default:
-                            return "is_cancelled= 0, is_disapproved = 0, is_approved = 0";
-                    }
+                    case "approve":
+                        return "is_approved = 1, is_disapproved = 0, is_cancelled = 0";
+                    case "disapprove":
+                        return "is_approved = 0, is_disapproved = 1, is_cancelled = 0";
+                    case "cancel":
+                        return "is_cancelled = 1";
+                    default:
+                        return "is_cancelled= 0, is_disapproved = 0, is_approved = 0";
                 }
-
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, obligationId},
-                };
-
-                string query = $"UPDATE {tableName} SET {Status()}  WHERE id = @id";
-
-                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
             }
-            catch (Exception)
+
+            var parameters = new object[][]
             {
-                throw;
-            }
+                new object[] { "@id", DbType.Int32, obligationId},
+            };
+
+            string query = $"UPDATE {tableName} SET {Status()}  WHERE id = @id";
+
+            return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public string GetObligationRequestStatus(int obligationRequestId)
@@ -542,14 +535,32 @@ namespace ACC.Data
             return string.Empty;
         }
 
-        public DataTable GetViewRecordsBySearch(string searchText)
+        public DataTable GetViewRecordsBySearchAndStatus(string searchText, string status)
         {
+
+            string Status()
+            {
+                switch (status)
+                {
+                    case "approved":
+                        return "is_approved = 1 AND is_disapproved = 0 AND is_cancelled = 0 AND";
+                    case "disapproved":
+                        return "is_approved = 0 AND is_disapproved = 1 AND is_cancelled = 0 AND";
+                    case "cancelled":
+                        return "is_cancelled = 1 AND";
+                    case "pending":
+                        return "is_approved  = 0 AND is_disapproved = 0 AND is_cancelled = 0 AND";
+                    default:
+                        return string.Empty;
+                }
+            }
+
             var parameters = new object[][]
             {
                 new object[] { "@searchText", DbType.String, $"%{searchText}%" }
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE obligation_no LIKE @searchText OR payee LIKE @searchText OR explanation = @searchText OR reference_no LIKE @searchText OR YEAR(date_requested) LIKE @searchText";
+            string query = $"SELECT * FROM {viewTableName} WHERE {Status()} (obligation_no LIKE @searchText OR payee LIKE @searchText OR explanation = @searchText OR reference_no LIKE @searchText OR YEAR(date_requested) LIKE @searchText)";
 
             var dataTable = new DataTable();
 
