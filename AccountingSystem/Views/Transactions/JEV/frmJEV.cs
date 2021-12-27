@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             if (_frmJEVList != null)
             {
                 LoadSelectedJEV(uc.jevNo);
-                CheckJevStatus(uc.jevId);
+                GetJevStatus(uc.jevId);
             }
             else
                 lblCreatedBy.Text = $"{userDict["first_name"]} {userDict["mid_initial"]} {userDict["last_name"]}";
@@ -47,44 +47,62 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void PermissionVerification()
         {
-            if (!Helper.HasPermission("JEV Approval"))
+            try
             {
-                btnApprove.Visible = false;
-                btnDisapprove.Visible = false;
-                btnCancelJEV.Visible = false;
-                toolStripSeparator2.Visible = false;
+                void HasPermissionToEditApprovedJEV()
+                {
+                    if (uc.isEdit)
+                    {
+                        string jevStatus = Factory.JEVRepository().GetJevStatus(uc.jevId);
+
+
+                        if (Helper.HasPermission("Transaction Edit Approved JEV") && jevStatus == "approved")
+                        {
+                            btnSave.Enabled = true;
+                            ucjev1.Enabled = true;
+                        }
+                    }
+                }
+
+
+                if (!Helper.HasPermission("JEV Approval"))
+                {
+                    btnApprove.Visible = false;
+                    btnDisapprove.Visible = false;
+                    btnCancelJEV.Visible = false;
+                    toolStripSeparator2.Visible = false;
+                }
+
+                if (!Helper.HasPermission("Report JEVs"))
+                    btnPrint.Enabled = false;
+
+                if (!Helper.HasPermission("Transaction JEV"))
+                {
+                    btnSave.Enabled = false;
+                    btnDelete.Enabled = false;
+                    ucjev1.Enabled = false;
+                }
+
+
+                if (Helper.UserId != createdById && createdById != 0)
+                {
+                    btnSave.Enabled = false;
+                    btnDelete.Enabled = false;
+                    ucjev1.Enabled = false;
+                }
+
+                if (createdById != Helper.UserId)
+                    lblShowMessage.Enabled = false;
+
+                if (Helper.HasPermission("JEV Approval"))
+                    lblShowMessage.Enabled = true;
+
+                HasPermissionToEditApprovedJEV();
             }
-
-            if (!Helper.HasPermission("Report JEVs"))
-                btnPrint.Enabled = false;
-
-            if (!Helper.HasPermission("Transaction JEV"))
+            catch (Exception ex)
             {
-                btnSave.Enabled = false;
-                btnDelete.Enabled = false;
-                ucjev1.Enabled = false;
+                Helper.MessageBoxError(ex.Message);
             }
-
-
-            if (Helper.UserId != createdById && createdById != 0)
-            {
-                btnSave.Enabled = false;
-                btnDelete.Enabled = false;
-                ucjev1.Enabled = false;
-            }
-
-            if (createdById != Helper.UserId)
-                lblShowMessage.Enabled = false;
-
-            if (Helper.HasPermission("JEV Approval"))
-                lblShowMessage.Enabled = true;
-
-            if (Helper.HasPermission("Transaction Edit Approved JEV"))
-            {
-                btnSave.Enabled = true;
-                ucjev1.Enabled = true;
-            }
-
         }
 
         private static ushort? ValidateNullSubsidiary(object subsidiaryCellValue)
@@ -515,7 +533,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 string message = uc.isDisapproved == 1 ? "This JEV will be send back to pending." : jevId == 0 ? "JEV has been saved." : "JEV has been updated.";
 
                 Helper.MessageBoxSuccess(message);
-                CheckJevStatus(jevId);
+                GetJevStatus(jevId);
                 _frmJEVList.LoadJEVList();
                 _ucJEVDashboard.LoadJEVCounter();
                 uc.isDisapproved = 0;
@@ -664,15 +682,15 @@ namespace AccountingSystem.Views.Transactions.JEV
             _frmJEVReport.ShowDialog();
         }
 
-        //CHECK JEV STATUS
-        internal void CheckJevStatus(int jevId)
+        internal void GetJevStatus(int jevId)
         {
             try
             {
-                switch (Factory.JEVRepository().GetJevStatus(jevId))
+                string jevStatus = Factory.JEVRepository().GetJevStatus(jevId);
+
+                switch (jevStatus)
                 {
                     case "pending":
-                        //PENDING
                         lblJevStatus.Text = "PENDING";
                         lblJevStatus.ForeColor = Color.FromArgb(216, 146, 22);
                         lblShowMessage.Visible = false;
@@ -685,7 +703,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                         btnSave.Enabled = true;
                         break;
                     case "approved":
-                        //APPROVED
                         lblJevStatus.Text = "APPROVED";
                         lblJevStatus.ForeColor = Color.FromArgb(78, 159, 61);
                         lblShowMessage.Visible = false;
@@ -697,14 +714,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                         ucjev1.Enabled = false;
                         btnDelete.Enabled = false;
                         btnSave.Enabled = false;
-                        if (Helper.HasPermission("Transaction Edit Approved JEV"))
-                        {
-                            btnSave.Enabled = true;
-                            ucjev1.Enabled = true;
-                        }
                         break;
                     case "disapproved":
-                        //DISSAPROVED
                         lblJevStatus.Text = "DISAPPROVED";
                         lblJevStatus.ForeColor = Color.FromArgb(149, 1, 1);
                         lblShowMessage.Visible = true;
@@ -737,7 +748,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        //Set JEV Status
         private bool SetJEVStatus(byte jevStatus)
         {
             try
@@ -757,7 +767,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        //APPROVE
         private void btnApprove_Click(object sender, EventArgs e)
         {
             try
@@ -769,7 +778,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         if (SetJEVStatus(1))
                         {
                             Helper.MessageBoxSuccess("JEV has been approved.");
-                            CheckJevStatus(uc.jevId);
+                            GetJevStatus(uc.jevId);
                             _frmJEVList.LoadJEVList();
                             _ucJEVDashboard.LoadJEVCounter();
                         }
@@ -784,12 +793,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        //DISAPPROVE
         private void btnDisapprove_Click(object sender, EventArgs e)
         {
             if (uc.jevId != 0)
             {
-                var frmRemarks = new frmRemarks(this);
+                var frmRemarks = new frmJEVRemarks(this);
                 frmRemarks.btnDisapprove.Visible = true;
                 frmRemarks.btnAccept.Visible = false;
                 frmRemarks.btnSaveMessage.Visible = false;
@@ -801,14 +809,13 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             if (uc.jevId != 0)
             {
-                var frmRemarks = new frmRemarks(this);
+                var frmRemarks = new frmJEVRemarks(this);
                 frmRemarks.btnDisapprove.Visible = false;
                 frmRemarks.btnCancel.Text = "Close";
                 frmRemarks.ShowDialog();
             }
         }
 
-        //CANCEL
         private void btnCancelJEV_Click(object sender, EventArgs e)
         {
             try
@@ -820,7 +827,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         if (SetJEVStatus(3))
                         {
                             Helper.MessageBoxSuccess("JEV has been cancelled.");
-                            CheckJevStatus(uc.jevId);
+                            GetJevStatus(uc.jevId);
                             _frmJEVList.LoadJEVList();
                             _ucJEVDashboard.LoadJEVCounter();
                         }
@@ -834,9 +841,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)");
             }
         }
-
-
-        //Load Selected JEV 
 
         private void CheckedFund(string fundName)
         {
@@ -1036,7 +1040,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                 uc.dgAccounts.Rows.Clear();
                 LoadJevAccounts();
                 uc.SumDebitCredit();
-                CheckJevStatus(uc.jevId);
+                GetJevStatus(uc.jevId);
+
                 btnSave.Text = "&Update";
             }
             catch (Exception ex)

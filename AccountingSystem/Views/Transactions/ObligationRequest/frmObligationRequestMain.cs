@@ -285,7 +285,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             ResetControls();
         }
 
-
         internal void GetObligationStatus()
         {
             try

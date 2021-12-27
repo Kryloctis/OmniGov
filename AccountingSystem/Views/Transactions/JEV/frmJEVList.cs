@@ -52,14 +52,13 @@ namespace AccountingSystem.Views.Transactions.JEV
             int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
             int createdById = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["created_by_id"].Value);
 
-            var newFrmJev = new frmJEV(this, _ucJEVDashboard);
-            var ucFrmJev = newFrmJev.ucjev1;
+            var frmJev = new frmJEV(this, _ucJEVDashboard);
+            var ucFrmJev = frmJev.ucjev1;
             ucFrmJev.jevNo = jevNo;
             ucFrmJev.jevId = jevId;
-            newFrmJev.createdById = createdById;
+            frmJev.createdById = createdById;
             ucFrmJev.isEdit = true;
-            newFrmJev.ShowDialog();
-
+            frmJev.ShowDialog();
         }
 
         private void btnSelect_Click(object sender, EventArgs e)
