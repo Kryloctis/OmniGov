@@ -104,8 +104,8 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         private DataTable RemittanceAndDeposits()
         {
             DataTable dtFromDataSource = new dsLFS.dtRemittanceDepositsDataTable();
-            DataTable dt = Factory.GeneralCollectionsDepositsRepository().GetCollectionsDepositsByRCDNo("RCD-002");
-
+            DataTable dt = Factory.GeneralCollectionsDepositsRepository().GetCollectionsDepositsByRCDNo(_reportNumber);
+            //DataTable dt = Factory.GeneralCollectionsRepository().GetRecordsByRCDNo(_reportNumber);
             if (dt.Rows.Count != 0)
             {
                 foreach (DataRow item in dt.Rows)
@@ -117,7 +117,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                     dtFromDataSource.Rows.Add(row);
                 }
             }
-
+                
             return dtFromDataSource;
         }
         private DataTable CollectorsReports()

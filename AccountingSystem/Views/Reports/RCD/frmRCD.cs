@@ -12,7 +12,6 @@ namespace AccountingSystem.Views.Reports.RCD
 {
     public partial class frmRCD : Form
     {
-
         internal ushort collectorId;
         internal int collectorsReportId;
         internal sbyte fundId;
@@ -78,9 +77,6 @@ namespace AccountingSystem.Views.Reports.RCD
 
                     dgListOfApprovedReport.Rows.Add(reportRow);
                 }
-
-
-
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

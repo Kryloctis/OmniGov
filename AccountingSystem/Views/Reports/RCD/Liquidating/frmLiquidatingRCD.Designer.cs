@@ -52,6 +52,7 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
             this.ShowInTaskbar = false;
             this.Text = "Reports > Liquidating Reports of Collections and Deposits  ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmLiquidatingRCD_Load);
             this.ResumeLayout(false);
 
         }
