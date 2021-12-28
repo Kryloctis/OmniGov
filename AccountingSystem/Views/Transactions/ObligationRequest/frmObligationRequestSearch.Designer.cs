@@ -101,7 +101,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.dgObligationRequests.TabIndex = 2;
             this.dgObligationRequests.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgObligationRequests_ColumnAdded);
             this.dgObligationRequests.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgObligationRequests_RowHeaderMouseDoubleClick);
-            this.dgObligationRequests.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgObligationRequests_RowsAdded);
             this.dgObligationRequests.SelectionChanged += new System.EventHandler(this.dgObligationRequests_SelectionChanged);
             // 
             // cmbxStatus
@@ -118,7 +117,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.cmbxStatus.Name = "cmbxStatus";
             this.cmbxStatus.Size = new System.Drawing.Size(179, 23);
             this.cmbxStatus.TabIndex = 3;
-            this.cmbxStatus.SelectedValueChanged += new System.EventHandler(this.cmbxStatus_SelectedValueChanged);
+            this.cmbxStatus.SelectionChangeCommitted += new System.EventHandler(this.cmbxStatus_SelectionChangeCommitted);
             // 
             // frmObligationRequestSearch
             // 

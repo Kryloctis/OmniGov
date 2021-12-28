@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Data;
 using System.Windows.Forms;
 
@@ -19,6 +18,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             _ucObligationRequestMain = _frmObligationRequestMain.ucObligationRequestMain1;
             btnSelect.Enabled = false;
             cmbxStatus.SelectedIndex = 0;
+            Helper.DatagridFullRowSelectStyle(dgObligationRequests, true);
         }
 
         private DataTable ObligationRequestsDatatable()
@@ -55,6 +55,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             string filterStatus = cmbxStatus.Text.Trim().ToLower();
             var dtObligationRequests = Factory.ObligationRequestRepository().GetViewRecordsBySearchAndStatus(searchTxt, filterStatus);
 
+
             foreach (DataRow row in dtObligationRequests.Rows)
             {
                 var id = row["obligation_request_id"].ToString();
@@ -82,15 +83,48 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return dataTable;
         }
 
+        private void LoadStatusColors()
+        {
+            foreach (DataGridViewRow row in dgObligationRequests.Rows)
+            {
+                var status = row.Cells["status"].Value;
+
+                switch (status.ToString().ToLower())
+                {
+                    case "approved":
+                        row.Cells["status"].Style.BackColor = Helper.StatusColor("Approved");
+                        row.Cells["status"].Style.SelectionBackColor = Helper.StatusColor("Approved");
+                        break;
+
+                    case "disapproved":
+                        row.Cells["status"].Style.BackColor = Helper.StatusColor("Disapproved");
+                        row.Cells["status"].Style.SelectionBackColor = Helper.StatusColor("Disapproved");
+                        break;
+
+                    case "cancelled":
+                        row.Cells["status"].Style.BackColor = Helper.StatusColor("Cancelled");
+                        row.Cells["status"].Style.SelectionBackColor = Helper.StatusColor("Cancelled");
+                        break;
+
+                    case "pending":
+                        row.Cells["status"].Style.BackColor = Helper.StatusColor("Pending");
+                        row.Cells["status"].Style.SelectionBackColor = Helper.StatusColor("Pending");
+                        break;
+
+                    default:
+                        row.Cells["status"].Style.BackColor = DefaultBackColor;
+                        row.Cells["status"].Style.SelectionBackColor = DefaultBackColor;
+                        break;
+                }
+            }
+        }
+
         private void LoadObligationRequests()
         {
             try
             {
                 HelperLoadRecords.ObligationRequestDatagridView(ObligationRequestsDatatable(), dgObligationRequests);
-            }
-            catch (MySqlException ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                LoadStatusColors();
             }
             catch (Exception ex)
             {
@@ -140,7 +174,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void frmObligationRequestSearch_Load(object sender, EventArgs e)
         {
-            Helper.DatagridDefaultStyle(dgObligationRequests, true);
+            LoadObligationRequests();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -153,40 +187,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
         }
 
-        private void dgObligationRequests_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            var status = dgObligationRequests.Rows[e.RowIndex].Cells["status"].Value;
-
-            switch (status.ToString().ToLower())
-            {
-                case "approved":
-                    dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.BackColor = Helper.StatusColor("Approved");
-                    dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.SelectionBackColor = Helper.StatusColor("Approved");
-                    break;
-
-                case "disapproved":
-                    dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.BackColor = Helper.StatusColor("Disapproved");
-                    dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.SelectionBackColor = Helper.StatusColor("Disapproved");
-                    break;
-
-                case "cancelled":
-                    dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.BackColor = Helper.StatusColor("Cancelled");
-                    dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.SelectionBackColor = Helper.StatusColor("Cancelled");
-                    break;
-
-                case "pending":
-                    dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.BackColor = Helper.StatusColor("Pending");
-                    dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.SelectionBackColor = Helper.StatusColor("Pending");
-                    break;
-
-                default:
-                    dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.BackColor = DefaultBackColor;
-                    dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.SelectionBackColor = DefaultBackColor;
-                    break;
-            }
-        }
-
-        private void cmbxStatus_SelectedValueChanged(object sender, EventArgs e)
+        private void cmbxStatus_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadObligationRequests();
         }

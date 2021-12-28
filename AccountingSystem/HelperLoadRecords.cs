@@ -1908,8 +1908,6 @@ namespace AccountingSystem
         {
             try
             {
-                Helper.DatagridFullRowSelectStyle(dataGridView, true);
-
                 dataGridView.DataSource = dataTable;
 
                 dataGridView.Columns["obligation_no"].HeaderText = "Obligation No.";
