@@ -39,10 +39,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
             dataTable.Columns.Add("id");
             dataTable.Columns.Add("obligation_no");
+            dataTable.Columns.Add("date_requested");
             dataTable.Columns.Add("payee");
             dataTable.Columns.Add("explanation");
             dataTable.Columns.Add("reference_no");
-            dataTable.Columns.Add("date_requested");
             dataTable.Columns.Add("created_at");
             dataTable.Columns.Add("created_by_id");
             dataTable.Columns.Add("created_by_full_name");
@@ -52,8 +52,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             dataTable.Columns.Add("status");
 
             string searchTxt = txtSearch.Text.Trim();
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            int allotmentClassId = Convert.ToInt32(cmbxAllotmentClasses.SelectedValue);
+            DateTime dateRequestedCoverage = dtDateRequested.Value;
             string filterStatus = cmbxStatus.Text.Trim().ToLower();
-            var dtObligationRequests = Factory.ObligationRequestRepository().GetViewRecordsBySearchAndStatus(searchTxt, filterStatus);
+            var dtObligationRequests = Factory.ObligationRequestRepository().GetViewRecordsBySearchAndStatus(searchTxt, filterStatus, fundId, allotmentClassId, dateRequestedCoverage);
 
 
             foreach (DataRow row in dtObligationRequests.Rows)
@@ -67,7 +70,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 bool isDisapproved = Convert.ToBoolean(row["is_disapproved"]);
                 bool isCancelled = Convert.ToBoolean(row["is_cancelled"]);
                 var status = ObligationRequestStatus(isApproved, isDisapproved, isCancelled);
-                var dateRequested = row["date_requested"].ToString();
+                var dateRequested = Convert.ToDateTime(row["date_requested"]).ToString("MMM. dd, yyyy");
                 var createdAt = row["created_at"].ToString();
                 var createdById = row["created_by_id"].ToString();
                 var createdByFullName = row["created_by_full_name"].ToString();
@@ -75,12 +78,39 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 var updatedById = row["updated_by_id"].ToString();
                 var updatedByFullName = row["updated_by_full_name"].ToString();
 
-                var item = new object[] { id, obligationNo, payee, explanation, referenceNo, dateRequested, createdAt, createdById, createdByFullName, updatedAt, updatedById, updatedByFullName, status };
+                var item = new object[] { id, obligationNo, dateRequested, payee, explanation, referenceNo, createdAt, createdById, createdByFullName, updatedAt, updatedById, updatedByFullName, status };
 
                 dataTable.Rows.Add(item);
             }
 
             return dataTable;
+        }
+
+
+        private void LoadFunds()
+        {
+            try
+            {
+                var dtFunds = Factory.FundsRepository().GetRecords();
+                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void LoadAllotmentClasses()
+        {
+            try
+            {
+                var dtFunds = Factory.AllotmentClassesRepository().GetRecords();
+                HelperLoadRecords.AllotmentClasssesCombobox(dtFunds, cmbxAllotmentClasses, "allotment_code", "id");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void LoadStatusColors()
@@ -174,6 +204,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void frmObligationRequestSearch_Load(object sender, EventArgs e)
         {
+            LoadFunds();
+            LoadAllotmentClasses();
             LoadObligationRequests();
         }
 
@@ -188,6 +220,21 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         }
 
         private void cmbxStatus_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadObligationRequests();
+        }
+
+        private void cmbxFunds_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadObligationRequests();
+        }
+
+        private void cmbxAllotmentClasses_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadObligationRequests();
+        }
+
+        private void dtDateRequested_ValueChanged(object sender, EventArgs e)
         {
             LoadObligationRequests();
         }

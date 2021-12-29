@@ -535,7 +535,7 @@ namespace ACC.Data
             return string.Empty;
         }
 
-        public DataTable GetViewRecordsBySearchAndStatus(string searchText, string status)
+        public DataTable GetViewRecordsBySearchAndStatus(string searchText, string status, int fundId, int allotmentClassId, DateTime dateOfRequest)
         {
 
             string Status()
@@ -557,10 +557,13 @@ namespace ACC.Data
 
             var parameters = new object[][]
             {
-                new object[] { "@searchText", DbType.String, $"%{searchText}%" }
+                new object[] { "@searchText", DbType.String, $"%{searchText}%" },
+                new object[] { "@funds_id", DbType.Int32, fundId},
+                new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId },
+                new object[] { "@date_requested", DbType.Date, dateOfRequest.Date}
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE {Status()} (obligation_no LIKE @searchText OR payee LIKE @searchText OR explanation = @searchText OR reference_no LIKE @searchText OR YEAR(date_requested) LIKE @searchText)";
+            string query = $"SELECT * FROM {viewTableName} WHERE funds_id = @funds_id AND allotment_classes_id = @allotment_classes_id AND  date_requested <= @date_requested AND {Status()} (obligation_no LIKE @searchText OR payee LIKE @searchText OR explanation = @searchText OR reference_no LIKE @searchText)";
 
             var dataTable = new DataTable();
 

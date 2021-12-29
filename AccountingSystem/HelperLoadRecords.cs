@@ -447,6 +447,7 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
+
         #region FaceValue
         internal static void FaceValueDatagridView(DataTable dataTable, DataGridView datagrid)
         {
@@ -1084,6 +1085,24 @@ namespace AccountingSystem
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
+
+        internal static void AllotmentClasssesCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+
+            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                // loop datatable to add items in autocompletesource
+                foreach (DataRow item in dataTable.Rows)
+                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
+
+                comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+                comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            }
+        }
+
         #endregion
 
         #region Collecting Officer
@@ -1909,20 +1928,19 @@ namespace AccountingSystem
             try
             {
                 dataGridView.DataSource = dataTable;
-
+                dataGridView.Columns["id"].Visible = false;
                 dataGridView.Columns["obligation_no"].HeaderText = "Obligation No.";
+                dataGridView.Columns["date_requested"].HeaderText = "Date Requested";
                 dataGridView.Columns["payee"].HeaderText = "Payee";
                 dataGridView.Columns["explanation"].HeaderText = "Explanation";
                 dataGridView.Columns["reference_no"].HeaderText = "Reference No.";
                 dataGridView.Columns["status"].HeaderText = "Status";
-                dataGridView.Columns["id"].Visible = false;
-                dataGridView.Columns["date_requested"].Visible = false;
                 dataGridView.Columns["created_at"].Visible = false;
                 dataGridView.Columns["created_by_id"].Visible = false;
                 dataGridView.Columns["created_by_full_name"].HeaderText = "Created By";
                 dataGridView.Columns["updated_at"].Visible = false;
                 dataGridView.Columns["updated_by_id"].Visible = false;
-                dataGridView.Columns["updated_by_full_name"].HeaderText = "Updated By";
+                dataGridView.Columns["updated_by_full_name"].Visible = false;
 
                 dataGridView.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 

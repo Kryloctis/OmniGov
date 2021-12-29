@@ -51,7 +51,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 var dtObligationRequest = Factory.ObligationRequestRepository().GetViewRecordsById(uc.obligationRequestId);
 
                 int fppId = Convert.ToInt32(dictObligationRequest["function_program_project_id"]);
-                var subFPPId = dictObligationRequest["others_fpp_id"];
                 int fundId = Convert.ToInt32(dictObligationRequest["funds_id"]);
                 int allotmentClassId = Convert.ToInt32(dictObligationRequest["allotment_classes_id"]);
                 string obligationRequestNo = dictObligationRequest["obligation_no"].ToString();

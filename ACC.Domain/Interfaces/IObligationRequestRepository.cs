@@ -33,7 +33,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId);
 
 
-        DataTable GetViewRecordsBySearchAndStatus(string searchText, string status);
+        DataTable GetViewRecordsBySearchAndStatus(string searchText, string status, int fundId, int allotmentClassId, DateTime dateOfRequest);
 
         bool SetObligationRequestStatus(int obligationRequestId, string status);
 
