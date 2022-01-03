@@ -96,13 +96,16 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             _frmCollectorsRCD.LoadSelectedValue(reportNo);
             _frmCollectorsRCD.CheckRCDStatus(reportNo);
+            _frmCollectorsRCD.btnSave.Enabled = false;
+            _frmCollectorsRCD.btnDelete.Enabled = false;
 
             _uc.TotalCollections();
             _uc.cmbcollector.Enabled = false;
             _uc.txtReport.Enabled = false;
             _uc.dgPayments.Enabled = false;
-
+            _uc.dtdate.Enabled = false;
             _uc.ActionPerformIsSave(false);
+            _uc.groubBoxFund.Enabled = false;
 
             this.Close();
         }

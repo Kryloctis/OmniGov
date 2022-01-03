@@ -39,7 +39,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.epReportNo = new System.Windows.Forms.ErrorProvider(this.components);
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groubBoxFund = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelFunds = new System.Windows.Forms.FlowLayoutPanel();
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.btnRemove = new System.Windows.Forms.Button();
@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.dgPayments = new System.Windows.Forms.DataGridView();
             this.epCollector = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.epReportNo)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.groubBoxFund.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgPayments)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epCollector)).BeginInit();
             this.SuspendLayout();
@@ -115,19 +115,19 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             this.epReportNo.ContainerControl = this;
             // 
-            // groupBox1
+            // groubBoxFund
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groubBoxFund.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.flowLayoutPanelFunds);
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(907, 59);
-            this.groupBox1.TabIndex = 27;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Funds";
+            this.groubBoxFund.Controls.Add(this.flowLayoutPanelFunds);
+            this.groubBoxFund.Location = new System.Drawing.Point(3, 3);
+            this.groubBoxFund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groubBoxFund.Name = "groubBoxFund";
+            this.groubBoxFund.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groubBoxFund.Size = new System.Drawing.Size(907, 59);
+            this.groubBoxFund.TabIndex = 27;
+            this.groubBoxFund.TabStop = false;
+            this.groubBoxFund.Text = "Funds";
             // 
             // flowLayoutPanelFunds
             // 
@@ -235,7 +235,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groubBoxFund);
             this.Controls.Add(this.txtTotal);
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.btnClear);
@@ -246,7 +246,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.Size = new System.Drawing.Size(913, 510);
             this.Load += new System.EventHandler(this.ucRCDCollector_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epReportNo)).EndInit();
-            this.groupBox1.ResumeLayout(false);
+            this.groubBoxFund.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgPayments)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epCollector)).EndInit();
             this.ResumeLayout(false);
@@ -263,7 +263,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ErrorProvider epReportNo;
-        private System.Windows.Forms.GroupBox groupBox1;
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFunds;
         internal System.Windows.Forms.TextBox txtTotal;
         internal System.Windows.Forms.Button btndelete;
@@ -273,5 +272,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         public System.Windows.Forms.DataGridView dgPayments;
         internal System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.ErrorProvider epCollector;
+        internal System.Windows.Forms.GroupBox groubBoxFund;
     }
 }
