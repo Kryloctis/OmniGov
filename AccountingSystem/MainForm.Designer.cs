@@ -68,7 +68,9 @@ namespace AccountingSystem
             this.tabPageBudget = new System.Windows.Forms.TabPage();
             this.tabControlBudget = new System.Windows.Forms.TabControl();
             this.tabPageBudgetSummary = new System.Windows.Forms.TabPage();
+            this.ucBudgetSummary1 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary();
             this.tabPageBudgetDetailed = new System.Windows.Forms.TabPage();
+            this.ucBudgetDetailed1 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed();
             this.chkbxDetailed = new System.Windows.Forms.CheckBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnBudgetAppropriations = new System.Windows.Forms.ToolStripButton();
@@ -77,11 +79,15 @@ namespace AccountingSystem
             this.tabPageAccounting = new System.Windows.Forms.TabPage();
             this.tabControlAccounting = new System.Windows.Forms.TabControl();
             this.tabPageJournalEntryVoucher = new System.Windows.Forms.TabPage();
+            this.ucjevDashboard1 = new AccountingSystem.Views.Dashboard.ucJEVDashboard();
             this.tabPageJournals = new System.Windows.Forms.TabPage();
+            this.ucJournalsDashboard1 = new AccountingSystem.Views.Dashboard.AccountingDashboard.ucJournalsDashboard();
             this.tabPageLedgers = new System.Windows.Forms.TabPage();
             this.tabControlLedgers = new System.Windows.Forms.TabControl();
             this.tabPageGeneralLedger = new System.Windows.Forms.TabPage();
+            this.ucGeneralLedger1 = new AccountingSystem.Views.Reports.Ledgers.ucGeneralLedger();
             this.tabPageSubsidiaryLedger = new System.Windows.Forms.TabPage();
+            this.ucSubsidiaryLedger1 = new AccountingSystem.Views.Reports.Ledgers.ucSubsidiaryLedger();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.radioGeneralLedger = new System.Windows.Forms.RadioButton();
             this.radioSubsidiaryLedger = new System.Windows.Forms.RadioButton();
@@ -89,15 +95,20 @@ namespace AccountingSystem
             this.tabPageTrialBalance = new System.Windows.Forms.TabPage();
             this.tabControlTrialBalance = new System.Windows.Forms.TabControl();
             this.tabPagePreTrial = new System.Windows.Forms.TabPage();
+            this.ucPreClosingTrialBalance1 = new AccountingSystem.Views.Reports.TrialBalance.ucPreClosingTrialBalance();
             this.tabPagePostTrial = new System.Windows.Forms.TabPage();
+            this.ucPostClosingTrialBalance1 = new AccountingSystem.Views.Reports.TrialBalance.ucPostClosingTrialBalance();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.radioPreTB = new System.Windows.Forms.RadioButton();
             this.radioPostTB = new System.Windows.Forms.RadioButton();
             this.tabPageFinancialStatements = new System.Windows.Forms.TabPage();
             this.tabControlFinancialStatements = new System.Windows.Forms.TabControl();
             this.tabPageSFPosition = new System.Windows.Forms.TabPage();
+            this.ucStatementOfFinancialPosition1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfFinancialPosition();
             this.tabPageSFPerformance = new System.Windows.Forms.TabPage();
+            this.ucStatementOfFinancialPerformance1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfFinancialPerformance();
             this.tabPageSCNAE = new System.Windows.Forms.TabPage();
+            this.ucStatementOfChangesInNetAssetsquity1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfChangesInNetAssetsquity();
             this.tabPageSCF = new System.Windows.Forms.TabPage();
             this.tabPageSCBAA = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
@@ -107,24 +118,37 @@ namespace AccountingSystem
             this.radSCF = new System.Windows.Forms.RadioButton();
             this.radSCBAA = new System.Windows.Forms.RadioButton();
             this.tabPageTreasury = new System.Windows.Forms.TabPage();
+            this.ucTreasuryDashboard1 = new AccountingSystem.Views.Dashboard.TreasuryDashboard.ucTreasuryDashboard();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tabControlDashboard.SuspendLayout();
             this.tabPageBudget.SuspendLayout();
             this.tabControlBudget.SuspendLayout();
+            this.tabPageBudgetSummary.SuspendLayout();
+            this.tabPageBudgetDetailed.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabPageAccounting.SuspendLayout();
             this.tabControlAccounting.SuspendLayout();
+            this.tabPageJournalEntryVoucher.SuspendLayout();
+            this.tabPageJournals.SuspendLayout();
             this.tabPageLedgers.SuspendLayout();
             this.tabControlLedgers.SuspendLayout();
+            this.tabPageGeneralLedger.SuspendLayout();
+            this.tabPageSubsidiaryLedger.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.tabPageTrialBalance.SuspendLayout();
             this.tabControlTrialBalance.SuspendLayout();
+            this.tabPagePreTrial.SuspendLayout();
+            this.tabPagePostTrial.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
             this.tabPageFinancialStatements.SuspendLayout();
             this.tabControlFinancialStatements.SuspendLayout();
+            this.tabPageSFPosition.SuspendLayout();
+            this.tabPageSFPerformance.SuspendLayout();
+            this.tabPageSCNAE.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
+            this.tabPageTreasury.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -484,6 +508,7 @@ namespace AccountingSystem
             // tabPageBudgetSummary
             // 
             this.tabPageBudgetSummary.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageBudgetSummary.Controls.Add(this.ucBudgetSummary1);
             this.tabPageBudgetSummary.Location = new System.Drawing.Point(4, 5);
             this.tabPageBudgetSummary.Name = "tabPageBudgetSummary";
             this.tabPageBudgetSummary.Padding = new System.Windows.Forms.Padding(3);
@@ -491,15 +516,35 @@ namespace AccountingSystem
             this.tabPageBudgetSummary.TabIndex = 0;
             this.tabPageBudgetSummary.Text = "Budget Summary";
             // 
+            // ucBudgetSummary1
+            // 
+            this.ucBudgetSummary1.AutoScroll = true;
+            this.ucBudgetSummary1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucBudgetSummary1.Location = new System.Drawing.Point(3, 3);
+            this.ucBudgetSummary1.Margin = new System.Windows.Forms.Padding(0);
+            this.ucBudgetSummary1.Name = "ucBudgetSummary1";
+            this.ucBudgetSummary1.Size = new System.Drawing.Size(1177, 393);
+            this.ucBudgetSummary1.TabIndex = 0;
+            // 
             // tabPageBudgetDetailed
             // 
             this.tabPageBudgetDetailed.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageBudgetDetailed.Controls.Add(this.ucBudgetDetailed1);
             this.tabPageBudgetDetailed.Location = new System.Drawing.Point(4, 5);
             this.tabPageBudgetDetailed.Name = "tabPageBudgetDetailed";
             this.tabPageBudgetDetailed.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageBudgetDetailed.Size = new System.Drawing.Size(1183, 399);
             this.tabPageBudgetDetailed.TabIndex = 1;
             this.tabPageBudgetDetailed.Text = "Budget Detailed";
+            // 
+            // ucBudgetDetailed1
+            // 
+            this.ucBudgetDetailed1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucBudgetDetailed1.Location = new System.Drawing.Point(3, 3);
+            this.ucBudgetDetailed1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ucBudgetDetailed1.Name = "ucBudgetDetailed1";
+            this.ucBudgetDetailed1.Size = new System.Drawing.Size(1177, 393);
+            this.ucBudgetDetailed1.TabIndex = 0;
             // 
             // chkbxDetailed
             // 
@@ -592,6 +637,7 @@ namespace AccountingSystem
             // 
             // tabPageJournalEntryVoucher
             // 
+            this.tabPageJournalEntryVoucher.Controls.Add(this.ucjevDashboard1);
             this.tabPageJournalEntryVoucher.Location = new System.Drawing.Point(4, 24);
             this.tabPageJournalEntryVoucher.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageJournalEntryVoucher.Name = "tabPageJournalEntryVoucher";
@@ -601,8 +647,20 @@ namespace AccountingSystem
             this.tabPageJournalEntryVoucher.Text = "Journal Entry Voucher";
             this.tabPageJournalEntryVoucher.UseVisualStyleBackColor = true;
             // 
+            // ucjevDashboard1
+            // 
+            this.ucjevDashboard1.AutoSize = true;
+            this.ucjevDashboard1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ucjevDashboard1.Location = new System.Drawing.Point(3, 3);
+            this.ucjevDashboard1.Margin = new System.Windows.Forms.Padding(0);
+            this.ucjevDashboard1.MinimumSize = new System.Drawing.Size(782, 160);
+            this.ucjevDashboard1.Name = "ucjevDashboard1";
+            this.ucjevDashboard1.Size = new System.Drawing.Size(1177, 160);
+            this.ucjevDashboard1.TabIndex = 0;
+            // 
             // tabPageJournals
             // 
+            this.tabPageJournals.Controls.Add(this.ucJournalsDashboard1);
             this.tabPageJournals.Location = new System.Drawing.Point(4, 24);
             this.tabPageJournals.Name = "tabPageJournals";
             this.tabPageJournals.Padding = new System.Windows.Forms.Padding(3);
@@ -610,6 +668,18 @@ namespace AccountingSystem
             this.tabPageJournals.TabIndex = 1;
             this.tabPageJournals.Text = "Journals";
             this.tabPageJournals.UseVisualStyleBackColor = true;
+            // 
+            // ucJournalsDashboard1
+            // 
+            this.ucJournalsDashboard1.AutoSize = true;
+            this.ucJournalsDashboard1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ucJournalsDashboard1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ucJournalsDashboard1.Location = new System.Drawing.Point(3, 3);
+            this.ucJournalsDashboard1.Margin = new System.Windows.Forms.Padding(0);
+            this.ucJournalsDashboard1.MinimumSize = new System.Drawing.Size(941, 160);
+            this.ucJournalsDashboard1.Name = "ucJournalsDashboard1";
+            this.ucJournalsDashboard1.Size = new System.Drawing.Size(1177, 160);
+            this.ucJournalsDashboard1.TabIndex = 0;
             // 
             // tabPageLedgers
             // 
@@ -641,6 +711,7 @@ namespace AccountingSystem
             // 
             // tabPageGeneralLedger
             // 
+            this.tabPageGeneralLedger.Controls.Add(this.ucGeneralLedger1);
             this.tabPageGeneralLedger.Location = new System.Drawing.Point(4, 5);
             this.tabPageGeneralLedger.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageGeneralLedger.Name = "tabPageGeneralLedger";
@@ -649,8 +720,18 @@ namespace AccountingSystem
             this.tabPageGeneralLedger.Text = "Generl Ledger";
             this.tabPageGeneralLedger.UseVisualStyleBackColor = true;
             // 
+            // ucGeneralLedger1
+            // 
+            this.ucGeneralLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucGeneralLedger1.Location = new System.Drawing.Point(0, 0);
+            this.ucGeneralLedger1.Margin = new System.Windows.Forms.Padding(0);
+            this.ucGeneralLedger1.Name = "ucGeneralLedger1";
+            this.ucGeneralLedger1.Size = new System.Drawing.Size(1175, 405);
+            this.ucGeneralLedger1.TabIndex = 0;
+            // 
             // tabPageSubsidiaryLedger
             // 
+            this.tabPageSubsidiaryLedger.Controls.Add(this.ucSubsidiaryLedger1);
             this.tabPageSubsidiaryLedger.Location = new System.Drawing.Point(4, 5);
             this.tabPageSubsidiaryLedger.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageSubsidiaryLedger.Name = "tabPageSubsidiaryLedger";
@@ -658,6 +739,15 @@ namespace AccountingSystem
             this.tabPageSubsidiaryLedger.TabIndex = 1;
             this.tabPageSubsidiaryLedger.Text = "Subsidiary Ledger";
             this.tabPageSubsidiaryLedger.UseVisualStyleBackColor = true;
+            // 
+            // ucSubsidiaryLedger1
+            // 
+            this.ucSubsidiaryLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucSubsidiaryLedger1.Location = new System.Drawing.Point(0, 0);
+            this.ucSubsidiaryLedger1.Margin = new System.Windows.Forms.Padding(0);
+            this.ucSubsidiaryLedger1.Name = "ucSubsidiaryLedger1";
+            this.ucSubsidiaryLedger1.Size = new System.Drawing.Size(1175, 405);
+            this.ucSubsidiaryLedger1.TabIndex = 0;
             // 
             // flowLayoutPanel2
             // 
@@ -748,6 +838,7 @@ namespace AccountingSystem
             // 
             // tabPagePreTrial
             // 
+            this.tabPagePreTrial.Controls.Add(this.ucPreClosingTrialBalance1);
             this.tabPagePreTrial.Location = new System.Drawing.Point(4, 5);
             this.tabPagePreTrial.Margin = new System.Windows.Forms.Padding(0);
             this.tabPagePreTrial.Name = "tabPagePreTrial";
@@ -756,8 +847,19 @@ namespace AccountingSystem
             this.tabPagePreTrial.Text = "tabPage1";
             this.tabPagePreTrial.UseVisualStyleBackColor = true;
             // 
+            // ucPreClosingTrialBalance1
+            // 
+            this.ucPreClosingTrialBalance1.BackColor = System.Drawing.Color.Transparent;
+            this.ucPreClosingTrialBalance1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucPreClosingTrialBalance1.Location = new System.Drawing.Point(0, 0);
+            this.ucPreClosingTrialBalance1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ucPreClosingTrialBalance1.Name = "ucPreClosingTrialBalance1";
+            this.ucPreClosingTrialBalance1.Size = new System.Drawing.Size(1175, 405);
+            this.ucPreClosingTrialBalance1.TabIndex = 0;
+            // 
             // tabPagePostTrial
             // 
+            this.tabPagePostTrial.Controls.Add(this.ucPostClosingTrialBalance1);
             this.tabPagePostTrial.Location = new System.Drawing.Point(4, 5);
             this.tabPagePostTrial.Margin = new System.Windows.Forms.Padding(0);
             this.tabPagePostTrial.Name = "tabPagePostTrial";
@@ -765,6 +867,16 @@ namespace AccountingSystem
             this.tabPagePostTrial.TabIndex = 1;
             this.tabPagePostTrial.Text = "tabPage2";
             this.tabPagePostTrial.UseVisualStyleBackColor = true;
+            // 
+            // ucPostClosingTrialBalance1
+            // 
+            this.ucPostClosingTrialBalance1.BackColor = System.Drawing.Color.Transparent;
+            this.ucPostClosingTrialBalance1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucPostClosingTrialBalance1.Location = new System.Drawing.Point(0, 0);
+            this.ucPostClosingTrialBalance1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ucPostClosingTrialBalance1.Name = "ucPostClosingTrialBalance1";
+            this.ucPostClosingTrialBalance1.Size = new System.Drawing.Size(1175, 405);
+            this.ucPostClosingTrialBalance1.TabIndex = 0;
             // 
             // flowLayoutPanel4
             // 
@@ -839,6 +951,7 @@ namespace AccountingSystem
             // 
             // tabPageSFPosition
             // 
+            this.tabPageSFPosition.Controls.Add(this.ucStatementOfFinancialPosition1);
             this.tabPageSFPosition.Location = new System.Drawing.Point(4, 5);
             this.tabPageSFPosition.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageSFPosition.Name = "tabPageSFPosition";
@@ -847,8 +960,19 @@ namespace AccountingSystem
             this.tabPageSFPosition.Text = "tabSFPosition";
             this.tabPageSFPosition.UseVisualStyleBackColor = true;
             // 
+            // ucStatementOfFinancialPosition1
+            // 
+            this.ucStatementOfFinancialPosition1.BackColor = System.Drawing.Color.Transparent;
+            this.ucStatementOfFinancialPosition1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucStatementOfFinancialPosition1.Location = new System.Drawing.Point(0, 0);
+            this.ucStatementOfFinancialPosition1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ucStatementOfFinancialPosition1.Name = "ucStatementOfFinancialPosition1";
+            this.ucStatementOfFinancialPosition1.Size = new System.Drawing.Size(1175, 405);
+            this.ucStatementOfFinancialPosition1.TabIndex = 0;
+            // 
             // tabPageSFPerformance
             // 
+            this.tabPageSFPerformance.Controls.Add(this.ucStatementOfFinancialPerformance1);
             this.tabPageSFPerformance.Location = new System.Drawing.Point(4, 5);
             this.tabPageSFPerformance.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageSFPerformance.Name = "tabPageSFPerformance";
@@ -857,8 +981,19 @@ namespace AccountingSystem
             this.tabPageSFPerformance.Text = "tabSFPerformance";
             this.tabPageSFPerformance.UseVisualStyleBackColor = true;
             // 
+            // ucStatementOfFinancialPerformance1
+            // 
+            this.ucStatementOfFinancialPerformance1.BackColor = System.Drawing.Color.Transparent;
+            this.ucStatementOfFinancialPerformance1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucStatementOfFinancialPerformance1.Location = new System.Drawing.Point(0, 0);
+            this.ucStatementOfFinancialPerformance1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ucStatementOfFinancialPerformance1.Name = "ucStatementOfFinancialPerformance1";
+            this.ucStatementOfFinancialPerformance1.Size = new System.Drawing.Size(1175, 405);
+            this.ucStatementOfFinancialPerformance1.TabIndex = 0;
+            // 
             // tabPageSCNAE
             // 
+            this.tabPageSCNAE.Controls.Add(this.ucStatementOfChangesInNetAssetsquity1);
             this.tabPageSCNAE.Location = new System.Drawing.Point(4, 5);
             this.tabPageSCNAE.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageSCNAE.Name = "tabPageSCNAE";
@@ -866,6 +1001,16 @@ namespace AccountingSystem
             this.tabPageSCNAE.TabIndex = 2;
             this.tabPageSCNAE.Text = "tabSCNAE";
             this.tabPageSCNAE.UseVisualStyleBackColor = true;
+            // 
+            // ucStatementOfChangesInNetAssetsquity1
+            // 
+            this.ucStatementOfChangesInNetAssetsquity1.BackColor = System.Drawing.Color.Transparent;
+            this.ucStatementOfChangesInNetAssetsquity1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucStatementOfChangesInNetAssetsquity1.Location = new System.Drawing.Point(0, 0);
+            this.ucStatementOfChangesInNetAssetsquity1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ucStatementOfChangesInNetAssetsquity1.Name = "ucStatementOfChangesInNetAssetsquity1";
+            this.ucStatementOfChangesInNetAssetsquity1.Size = new System.Drawing.Size(1175, 405);
+            this.ucStatementOfChangesInNetAssetsquity1.TabIndex = 0;
             // 
             // tabPageSCF
             // 
@@ -969,12 +1114,22 @@ namespace AccountingSystem
             // 
             // tabPageTreasury
             // 
+            this.tabPageTreasury.Controls.Add(this.ucTreasuryDashboard1);
             this.tabPageTreasury.Location = new System.Drawing.Point(4, 5);
             this.tabPageTreasury.Name = "tabPageTreasury";
             this.tabPageTreasury.Size = new System.Drawing.Size(1191, 473);
             this.tabPageTreasury.TabIndex = 2;
             this.tabPageTreasury.Text = "Treasury";
             this.tabPageTreasury.UseVisualStyleBackColor = true;
+            // 
+            // ucTreasuryDashboard1
+            // 
+            this.ucTreasuryDashboard1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucTreasuryDashboard1.Location = new System.Drawing.Point(0, 0);
+            this.ucTreasuryDashboard1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ucTreasuryDashboard1.Name = "ucTreasuryDashboard1";
+            this.ucTreasuryDashboard1.Size = new System.Drawing.Size(1191, 473);
+            this.ucTreasuryDashboard1.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -1007,23 +1162,37 @@ namespace AccountingSystem
             this.tabPageBudget.ResumeLayout(false);
             this.tabPageBudget.PerformLayout();
             this.tabControlBudget.ResumeLayout(false);
+            this.tabPageBudgetSummary.ResumeLayout(false);
+            this.tabPageBudgetDetailed.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.tabPageAccounting.ResumeLayout(false);
             this.tabControlAccounting.ResumeLayout(false);
+            this.tabPageJournalEntryVoucher.ResumeLayout(false);
+            this.tabPageJournalEntryVoucher.PerformLayout();
+            this.tabPageJournals.ResumeLayout(false);
+            this.tabPageJournals.PerformLayout();
             this.tabPageLedgers.ResumeLayout(false);
             this.tabPageLedgers.PerformLayout();
             this.tabControlLedgers.ResumeLayout(false);
+            this.tabPageGeneralLedger.ResumeLayout(false);
+            this.tabPageSubsidiaryLedger.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.tabPageTrialBalance.ResumeLayout(false);
             this.tabPageTrialBalance.PerformLayout();
             this.tabControlTrialBalance.ResumeLayout(false);
+            this.tabPagePreTrial.ResumeLayout(false);
+            this.tabPagePostTrial.ResumeLayout(false);
             this.flowLayoutPanel4.ResumeLayout(false);
             this.tabPageFinancialStatements.ResumeLayout(false);
             this.tabPageFinancialStatements.PerformLayout();
             this.tabControlFinancialStatements.ResumeLayout(false);
+            this.tabPageSFPosition.ResumeLayout(false);
+            this.tabPageSFPerformance.ResumeLayout(false);
+            this.tabPageSCNAE.ResumeLayout(false);
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
+            this.tabPageTreasury.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1060,6 +1229,7 @@ namespace AccountingSystem
         internal System.Windows.Forms.RadioButton radBtnBudget;
         private System.Windows.Forms.RadioButton radBtnAccounting;
         private System.Windows.Forms.ToolStripMenuItem menuprintGC;
+        private System.Windows.Forms.ToolStripMenuItem menuReceipts;
         private System.Windows.Forms.ToolStripMenuItem menuBankCashBook;
         private System.Windows.Forms.TabControl tabControlDashboard;
         internal System.Windows.Forms.TabPage tabPageAccounting;
@@ -1120,7 +1290,6 @@ namespace AccountingSystem
         private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary1;
         private System.Windows.Forms.TabPage tabPageTreasury;
         private Views.Dashboard.TreasuryDashboard.ucTreasuryDashboard ucTreasuryDashboard1;
-        internal System.Windows.Forms.ToolStripMenuItem menuReceipts;
     }
 }
 
