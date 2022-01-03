@@ -32,9 +32,9 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.dtdate = new System.Windows.Forms.DateTimePicker();
+            this.dtRCDDate = new System.Windows.Forms.DateTimePicker();
             this.txtReport = new System.Windows.Forms.TextBox();
-            this.cmbcollector = new System.Windows.Forms.ComboBox();
+            this.cmbCollector = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -54,13 +54,13 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             ((System.ComponentModel.ISupportInitialize)(this.epCollector)).BeginInit();
             this.SuspendLayout();
             // 
-            // dtdate
+            // dtRCDDate
             // 
-            this.dtdate.Location = new System.Drawing.Point(557, 76);
-            this.dtdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dtdate.Name = "dtdate";
-            this.dtdate.Size = new System.Drawing.Size(225, 23);
-            this.dtdate.TabIndex = 19;
+            this.dtRCDDate.Location = new System.Drawing.Point(559, 76);
+            this.dtRCDDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtRCDDate.Name = "dtRCDDate";
+            this.dtRCDDate.Size = new System.Drawing.Size(225, 23);
+            this.dtRCDDate.TabIndex = 19;
             // 
             // txtReport
             // 
@@ -73,21 +73,21 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.txtReport.Validating += new System.ComponentModel.CancelEventHandler(this.txtReport_Validating);
             this.txtReport.Validated += new System.EventHandler(this.txtReport_Validated);
             // 
-            // cmbcollector
+            // cmbCollector
             // 
-            this.cmbcollector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbcollector.FormattingEnabled = true;
-            this.cmbcollector.Location = new System.Drawing.Point(333, 77);
-            this.cmbcollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbcollector.Name = "cmbcollector";
-            this.cmbcollector.Size = new System.Drawing.Size(171, 23);
-            this.cmbcollector.TabIndex = 15;
-            this.cmbcollector.SelectedValueChanged += new System.EventHandler(this.cmbcollector_SelectedValueChanged);
+            this.cmbCollector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCollector.FormattingEnabled = true;
+            this.cmbCollector.Location = new System.Drawing.Point(333, 77);
+            this.cmbCollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbCollector.Name = "cmbCollector";
+            this.cmbCollector.Size = new System.Drawing.Size(171, 23);
+            this.cmbCollector.TabIndex = 15;
+            this.cmbCollector.SelectedValueChanged += new System.EventHandler(this.cmbcollector_SelectedValueChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(518, 79);
+            this.label3.Location = new System.Drawing.Point(520, 79);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 15);
             this.label3.TabIndex = 20;
@@ -229,9 +229,9 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.Controls.Add(this.dtdate);
+            this.Controls.Add(this.dtRCDDate);
             this.Controls.Add(this.txtReport);
-            this.Controls.Add(this.cmbcollector);
+            this.Controls.Add(this.cmbCollector);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -256,9 +256,9 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         #endregion
 
-        internal System.Windows.Forms.DateTimePicker dtdate;
+        internal System.Windows.Forms.DateTimePicker dtRCDDate;
         internal System.Windows.Forms.TextBox txtReport;
-        internal System.Windows.Forms.ComboBox cmbcollector;
+        internal System.Windows.Forms.ComboBox cmbCollector;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;

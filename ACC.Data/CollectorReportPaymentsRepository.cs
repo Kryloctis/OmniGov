@@ -299,7 +299,22 @@ namespace ACC.Data
                     new object[]{"@reportNo", DbType.String, reportNo},
                 };
 
-                string query = $"SELECT * FROM {viewTableName} WHERE report_no = @reportNo";
+                string query = $"SELECT  " +
+                    $"payment_collections_id, " +
+                    $"funds_id, " +
+                    $"fund_name, " +
+                    $"accountable_form_id, " +
+                    $"account_code, " +
+                    $"accountable_forms, " +
+                    $"general_ledger_accounts_id, " +
+                    $"ledger_name, " +
+                    $"payee, " +
+                    $"receipt_no, " +
+                    $"quantity, " +
+                    $"payment_date, " +
+                    $"amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE report_no = @reportNo";
 
                 var dtpc = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtpc, parameter);

@@ -1,14 +1,9 @@
 ﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Reports.PaymentCollection;
 using AccountingSystem.Views.Reports.RCDCollector;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 using System.Windows.Forms;
 
@@ -33,7 +28,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             ValidateLocalPermission();
 
             if (uc.dgPayments.Rows.Count == 0) return;
-            
+
         }
 
 
@@ -47,10 +42,71 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            if (uc.isSaveFunction)
             {
-                Helper.MessageBoxSuccess("Collector's has been created.");
-                uc.ResetForm();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Collector's report has been created.");
+                    uc.ResetForm();
+                }
+            }
+            else
+            {
+                if (UpdateData())
+                {
+                    Helper.MessageBoxSuccess("Collector's report has been updated.");
+                    uc.ResetForm();
+                }
+            }
+        }
+
+        private bool UpdateData()
+        {
+            if (uc.dgPayments.Rows.Count == 0) return false;
+
+            using (var scope = new TransactionScope())
+            {
+                var collectorsReportModel = new CollectorReportModel()
+                {
+                    Id = uc.reportId,
+                    CollectorId = Convert.ToInt16(uc.cmbCollector.SelectedValue),
+                    ReportNo = uc.txtReport.Text.Trim(),
+                    Date = Convert.ToDateTime(uc.dtRCDDate.Value),
+                    IsApproved = 0,
+                    IsDisapproved = 0,
+                    FundId = uc.fundId,
+                    Remarks = String.Empty
+                };
+
+                bool rcdDetailsUpdateSuccess = Factory.CollectorReportRepository().Update(collectorsReportModel);
+                var collectorReportPaymentModel = new CollectorReportPaymentModel() { CollectorsReportId = uc.reportId };
+                bool isDeleteSuccess = Factory.CollectorReportPaymentsRepository().Delete(collectorReportPaymentModel);
+
+                if (rcdDetailsUpdateSuccess == false || isDeleteSuccess == false) return false;
+
+                InsertPaymentsIntoReport();
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        private void InsertPaymentsIntoReport()
+        {
+            foreach (DataGridViewRow item in uc.dgPayments.Rows)
+            {
+                var CollectorsReportId = GetCollectorsReportId();
+                var PaymentCollectionsId = Convert.ToInt16(item.Cells["payment_collections_id"].Value.ToString());
+
+                MessageBox.Show("PaymentCollectionsId " + PaymentCollectionsId);
+
+                var collectorReportPaymentModel = new CollectorReportPaymentModel()
+                {
+                    CollectorsReportId = CollectorsReportId,
+                    PaymentCollectionsId = PaymentCollectionsId
+                };
+
+                Factory.CollectorReportPaymentsRepository().Insert(collectorReportPaymentModel);
             }
         }
 
@@ -66,9 +122,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             {
                 var collectorsReportModel = new CollectorReportModel()
                 {
-                    CollectorId = Convert.ToInt16(uc.cmbcollector.SelectedValue),
+                    CollectorId = Convert.ToInt16(uc.cmbCollector.SelectedValue),
                     ReportNo = uc.txtReport.Text.Trim(),
-                    Date = Convert.ToDateTime(uc.dtdate.Value),
+                    Date = Convert.ToDateTime(uc.dtRCDDate.Value),
                     IsApproved = 0,
                     IsDisapproved = 0,
                     FundId = uc.fundId,
@@ -84,11 +140,10 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 data = new List<CollectorReportPaymentModel>();
                 data.Clear();
 
-
                 foreach (DataGridViewRow item in uc.dgPayments.Rows)
                 {
                     var CollectorsReportId = GetCollectorsReportId();
-                    var PaymentCollectionsId = Convert.ToInt16(item.Cells["payment_collection_id"].Value.ToString());
+                    var PaymentCollectionsId = Convert.ToInt16(item.Cells["payment_collections_id"].Value.ToString());
 
                     var collectorReportPaymentModel = new CollectorReportPaymentModel()
                     {
@@ -131,14 +186,13 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 uc.collectorId = (ushort)Convert.ToInt16(rcdData["collecting_officers_id"]);
                 uc.fundId = (byte)Convert.ToInt32(rcdData["funds_id"]);
                 uc.flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => ((byte)r.Tag == Convert.ToInt16(rcdData["funds_id"])) ? r.Checked = true : r.Checked = false);
-                uc.cmbcollector.SelectedValue = rcdData["collecting_officers_id"];
+                uc.cmbCollector.SelectedValue = rcdData["collecting_officers_id"];
                 uc.txtReport.Text = rcdData["report_no"];
-                uc.dtdate.Value = Convert.ToDateTime(rcdData["date"]);
-
+                uc.dtRCDDate.Value = Convert.ToDateTime(rcdData["date"]);
 
                 var collectionOfPaymentReportsRepo = Factory.CollectorReportPaymentsRepository();
                 var collectionOfPaymentReportDt = collectionOfPaymentReportsRepo.GetRecordsByReportNo(reportNo);
-                HelperLoadRecords.PaymentDatagridView(collectionOfPaymentReportDt, uc.dgPayments);
+                HelperLoadRecords.PaymentCollectionReportDatagrid(collectionOfPaymentReportDt, uc.dgPayments);
 
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -275,11 +329,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            uc.ResetForm();
-        }
-
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (DeleteReport())
@@ -329,9 +378,5 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             lblJevStatus.ForeColor = Color.Black;
         }
 
-        private void ucCollectorsRCD1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
