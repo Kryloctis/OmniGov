@@ -32,7 +32,36 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new NotImplementedException();
+            var record = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+               new object[] { "@id", DbType.Int32, Id}
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE id = @id";
+
+            using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return record;
+
+                record.Add("id", reader.Rows[0]["id"].ToString());
+                record.Add("obligation_no", reader.Rows[0]["obligation_no"].ToString());
+                record.Add("payee", reader.Rows[0]["payee"].ToString());
+                record.Add("explanation", reader.Rows[0]["explanation"].ToString());
+                record.Add("date_requested", reader.Rows[0]["date_requested"].ToString());
+                record.Add("is_approved", reader.Rows[0]["is_approved"].ToString());
+                record.Add("is_disapproved", reader.Rows[0]["is_disapproved"].ToString());
+                record.Add("is_cancelled", reader.Rows[0]["is_cancelled"].ToString());
+                record.Add("disapproval_message", reader.Rows[0]["disapproval_message"].ToString());
+                record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                record.Add("created_by", reader.Rows[0]["created_by"].ToString());
+                record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+                record.Add("updated_by", reader.Rows[0]["updated_by"].ToString());
+            }
+
+            return record;
         }
 
         public DataTable GetRecords()
@@ -295,128 +324,100 @@ namespace ACC.Data
 
         public bool Insert(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels)
         {
-            try
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
+                object[][] parameters = new object[][]
                 {
-                    object[][] parameters = new object[][]
-                    {
+                    new object[] { "@obligation_no", DbType.String, entity.ObligationNo },
+                    new object[] { "@payee", DbType.String, entity.Payee },
+                    new object[] { "@explanation", DbType.String, entity.Explanation },
+                    new object[] { "@reference_no", DbType.String, entity.ReferenceNo },
+                    new object[] { "@date_requested", DbType.Date, entity.DateRequested.Date },
+                    new object[] { "@created_by", DbType.Int32, entity.CreatedBy },
+                };
 
-                        new object[] { "@obligation_no", DbType.String, entity.ObligationNo },
-                        new object[] { "@payee", DbType.String, entity.Payee },
-                        new object[] { "@explanation", DbType.String, entity.Explanation },
-                        new object[] { "@reference_no", DbType.String, entity.ReferenceNo },
-                        new object[] { "@date_requested", DbType.Date, entity.DateRequested.Date },
-                        new object[] { "@created_by", DbType.Int32, entity.CreatedBy },
-                    };
+                string query = $"INSERT INTO {tableName} " +
+                    $"(obligation_no, " +
+                    $"payee, " +
+                    $"explanation, " +
+                    $"reference_no, " +
+                    $"date_requested, " +
+                    $"created_by) " +
+                    $"VALUES " +
+                    $"(@obligation_no, " +
+                    $"@payee, " +
+                    $"@explanation, " +
+                    $"@reference_no, " +
+                    $"@date_requested, " +
+                    $"@created_by)";
 
-                    string query = $"INSERT INTO {tableName} " +
-                        $"(obligation_no, " +
-                        $"payee, " +
-                        $"explanation, " +
-                        $"reference_no, " +
-                        $"date_requested, " +
-                        $"created_by) " +
-                        $"VALUES " +
-                        $"(@obligation_no, " +
-                        $"@payee, " +
-                        $"@explanation, " +
-                        $"@reference_no, " +
-                        $"@date_requested, " +
-                        $"@created_by)";
+                _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
 
-                    _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-
-                    foreach (var obligationAccounts in obligationAccountModels)
-                    {
-                        obligationAccounts.ObligationRequestId = GetLastInsertedID();
-                        _ = _obligationAccountRepository.Insert(obligationAccounts);
-                    }
-
-                    scope.Complete();
-                    return true;
+                foreach (var obligationAccounts in obligationAccountModels)
+                {
+                    obligationAccounts.ObligationRequestId = GetLastInsertedID();
+                    _ = _obligationAccountRepository.Insert(obligationAccounts);
                 }
 
-            }
-            catch (Exception)
-            {
-                throw;
+                scope.Complete();
+                return true;
             }
         }
 
         public bool Update(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels)
         {
-            try
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
+                var parameters = new object[][]
                 {
-                    var parameters = new object[][]
-                    {
-                        new object[] { "@id",DbType.Int32, entity.Id},
-                        new object[] { "@obligation_no", DbType.String, entity.ObligationNo },
-                        new object[] { "@payee", DbType.String, entity.Payee },
-                        new object[] { "@explanation", DbType.String, entity.Explanation },
-                        new object[] { "@reference_no", DbType.String, entity.ReferenceNo },
-                        new object[] { "@date_requested", DbType.Date, entity.DateRequested.Date },
-                        new object[] { "@updated_by", DbType.Int32, entity.UpdatedBy },
-                    };
-
-                    string query = $"UPDATE {tableName} SET obligation_no = @obligation_no, payee = @payee, explanation = @explanation, reference_no = @reference_no, date_requested = @date_requested, updated_by = @updated_by WHERE id = @id";
-
-
-                    // save and get the last inserted id
-                    _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-
-                    // delete all the obligation accounts first
-                    _ = _obligationAccountRepository.DeleteByObligationRequestId(entity.Id);
-
-                    // loop obligation accounts list then insert each using the latest obligation request Id
-                    foreach (var obligationAccounts in obligationAccountModels)
-                    {
-                        obligationAccounts.ObligationRequestId = entity.Id;
-                        _ = _obligationAccountRepository.Insert(obligationAccounts);
-                    }
-
-
-                    scope.Complete();
-
-                    return true;
+                    new object[] { "@id",DbType.Int32, entity.Id},
+                    new object[] { "@obligation_no", DbType.String, entity.ObligationNo },
+                    new object[] { "@payee", DbType.String, entity.Payee },
+                    new object[] { "@explanation", DbType.String, entity.Explanation },
+                    new object[] { "@reference_no", DbType.String, entity.ReferenceNo },
+                    new object[] { "@date_requested", DbType.Date, entity.DateRequested.Date },
+                    new object[] { "@updated_by", DbType.Int32, entity.UpdatedBy },
                 };
 
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                string query = $"UPDATE {tableName} SET obligation_no = @obligation_no, payee = @payee, explanation = @explanation, reference_no = @reference_no, date_requested = @date_requested, updated_by = @updated_by WHERE id = @id";
+
+
+                _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+
+                _ = _obligationAccountRepository.DeleteByObligationRequestId(entity.Id);
+
+                foreach (var obligationAccounts in obligationAccountModels)
+                {
+                    obligationAccounts.ObligationRequestId = entity.Id;
+                    _ = _obligationAccountRepository.Insert(obligationAccounts);
+                }
+
+
+                scope.Complete();
+
+                return true;
+            };
         }
 
         public bool Delete(int obligationRequestId)
         {
-            try
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
+                _obligationAccountRepository.DeleteByObligationRequestId(obligationRequestId);
+
+                var parameters = new object[][]
                 {
-                    _obligationAccountRepository.DeleteByObligationRequestId(obligationRequestId);
-
-                    var parameters = new object[][]
-                    {
-                        new object[] { "@id", DbType.Int32, obligationRequestId}
-                    };
-
-                    string query = $"DELETE FROM {tableName} WHERE id = @id";
-
-                    _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-
-
-                    scope.Complete();
-                    return true;
+                    new object[] { "@id", DbType.Int32, obligationRequestId}
                 };
 
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                string query = $"DELETE FROM {tableName} WHERE id = @id";
+
+                _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+
+
+                scope.Complete();
+                return true;
+            };
         }
 
         #region Validations
@@ -468,8 +469,16 @@ namespace ACC.Data
 
         #endregion
 
-        public bool SetObligationRequestStatus(int obligationId, string status)
+        public bool SetObligationRequestStatus(int obligationRequestId, string status, string disapprovalMessage = null)
         {
+
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, obligationRequestId},
+                new object[] { "@disapproval_message", DbType.String, disapprovalMessage}
+            };
+
+
             string Status()
             {
                 switch (status)
@@ -477,18 +486,15 @@ namespace ACC.Data
                     case "approve":
                         return "is_approved = 1, is_disapproved = 0, is_cancelled = 0";
                     case "disapprove":
-                        return "is_approved = 0, is_disapproved = 1, is_cancelled = 0";
+                        return "is_approved = 0, is_disapproved = 1, is_cancelled = 0 , disapproval_message = @disapproval_message";
                     case "cancel":
                         return "is_cancelled = 1";
+                    case "pending":
+                        return "is_cancelled= 0, is_disapproved = 0, is_approved = 0";
                     default:
                         return "is_cancelled= 0, is_disapproved = 0, is_approved = 0";
                 }
             }
-
-            var parameters = new object[][]
-            {
-                new object[] { "@id", DbType.Int32, obligationId},
-            };
 
             string query = $"UPDATE {tableName} SET {Status()}  WHERE id = @id";
 
@@ -497,41 +503,32 @@ namespace ACC.Data
 
         public string GetObligationRequestStatus(int obligationRequestId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, obligationRequestId }
-                };
+                new object[] { "@id", DbType.Int32, obligationRequestId }
+            };
 
-                string query = $"SELECT is_approved, is_disapproved, is_cancelled FROM {tableName} WHERE id = @id";
+            string query = $"SELECT is_approved, is_disapproved, is_cancelled FROM {tableName} WHERE id = @id";
 
-                using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return string.Empty;
-
-                    bool isApproved = Convert.ToBoolean(reader.Rows[0]["is_approved"]);
-                    bool isDisapproved = Convert.ToBoolean(reader.Rows[0]["is_disapproved"]);
-                    bool isCancelled = Convert.ToBoolean(reader.Rows[0]["is_cancelled"]);
-
-
-                    if (isCancelled)
-                        return "Cancelled";
-                    else if (isDisapproved && !isApproved)
-                        return "Disapproved";
-                    else if (isApproved && !isDisapproved)
-                        return "Approved";
-                    else if (!isApproved && !isDisapproved && !isCancelled)
-                        return "Pending";
-                }
-
-            }
-            catch (Exception)
+            using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
             {
-                throw;
-            }
+                if (reader.Rows.Count < 1)
+                    return string.Empty;
 
+                bool isApproved = Convert.ToBoolean(reader.Rows[0]["is_approved"]);
+                bool isDisapproved = Convert.ToBoolean(reader.Rows[0]["is_disapproved"]);
+                bool isCancelled = Convert.ToBoolean(reader.Rows[0]["is_cancelled"]);
+
+
+                if (isCancelled)
+                    return "Cancelled";
+                else if (isDisapproved && !isApproved)
+                    return "Disapproved";
+                else if (isApproved && !isDisapproved)
+                    return "Approved";
+                else if (!isApproved && !isDisapproved && !isCancelled)
+                    return "Pending";
+            }
             return string.Empty;
         }
 

@@ -13,6 +13,7 @@ namespace ACC.Domain.Models
         public Boolean IsApproved { get; set; }
         public Boolean IsDisapproved { get; set; }
         public Boolean IsCancelled { get; set; }
+        public string DisapprovalMessage { get; set; }
         public int CreatedBy { get; set; }
         public int UpdatedBy { get; set; }
     }

@@ -24,7 +24,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             if (!DesignMode)
             {
-                //LOAD FPP
                 LoadFPP();
                 cmbxFPP.SelectedIndex = -1;
                 cmbxFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
@@ -340,6 +339,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             {
                 dgObligationRequests.Rows.Remove(item);
             }
+
+            if (dgObligationRequests.Rows.Count == 0)
+                EnableDisableComponents(true);
         }
 
 
