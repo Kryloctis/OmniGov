@@ -45,6 +45,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
             btnadd.Enabled = false;
             btnRemove.Enabled = false;
+            btnClear.Enabled = false;
         }
 
         internal void TotalCollections()
@@ -83,7 +84,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         {
             btnadd.Enabled = false;
             btnRemove.Enabled = false;
-            btnclear.Enabled = false;
+            btnClear.Enabled = false;
             
             txtTotal.Text = "0.00";
 
@@ -169,12 +170,16 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             {
                 dgPayments.Rows.RemoveAt(item.Index);
             }
+
+            TotalCollections();
         }
 
         private void btnclear_Click(object sender, EventArgs e)
         {
             dgPayments.Rows.Clear();
-            btnclear.Enabled = false;
+            btnClear.Enabled = false;
+
+            TotalCollections();
         }
 
         private void txtReport_Validating(object sender, CancelEventArgs e)
@@ -221,8 +226,8 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             var selectedRowCount = dgPayments.SelectedRows.Count;
             var rowCount = dgPayments.Rows.Count;
 
-            btnRemove.Enabled = selectedRowCount  != 0 && selectedRowCount !> 1;
-            btnclear.Enabled = rowCount > 0;
+            btnRemove.Enabled = selectedRowCount != 0;
+            btnClear.Enabled = rowCount > 0;
 
             TotalCollections();
         }

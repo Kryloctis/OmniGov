@@ -113,7 +113,7 @@ namespace ACC.Data
                     $"{tableName}.date_issued," +
                     $"{tableName}.quantity," +
                     $"{tableName}.last_issued," +
-                    $"IF(IFNULL({tableName}.is_returned,0)>0,'YES','NO') AS returned," +
+                    $"IF(IFNULL({tableName}.is_returned,0)>0,'Yes','No') AS returned," +
                     $"{tableName}.returned_date," +
                     $"CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS officer " +
                     $"FROM {tableName} LEFT JOIN {tableName5} ON {tableName}.receipts_id={tableName5}.id " +

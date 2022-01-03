@@ -316,7 +316,7 @@ namespace AccountingSystem
             datagrid.Columns[5].DefaultCellStyle.Format = "yyyy-MM-dd";
             datagrid.Columns[6].HeaderText = "Quantity";
             datagrid.Columns[7].HeaderText = "Last Issued No.";
-            datagrid.Columns[8].HeaderText = "Is Returned";
+            datagrid.Columns[8].HeaderText = "Returned";
             datagrid.Columns[9].HeaderText = "Returned Date";
             datagrid.Columns[9].DefaultCellStyle.Format = "yyyy-MM-dd";
             datagrid.Columns[10].HeaderText = "User/Officer";
@@ -326,6 +326,7 @@ namespace AccountingSystem
             datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             datagrid.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;

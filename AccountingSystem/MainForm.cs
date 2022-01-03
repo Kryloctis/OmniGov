@@ -144,7 +144,6 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Manage Receipts"))
             {
-                ucTreasuryDashboard1.btnReceipts.Enabled = false;
                 menuReceipts.Visible = false;
             }
 
@@ -152,7 +151,7 @@ namespace AccountingSystem
                 ucTreasuryDashboard1.btnIssueReceipt.Enabled = false;
 
             if (!Helper.HasPermission("Transaction Generate RCD"))
-                ucTreasuryDashboard1.btnGenerateRCD.Enabled = false;
+                ucTreasuryDashboard1.btnRCD.Enabled = false;
 
             if (!Helper.HasPermission("Report of Checks Issued"))
                 menuprintRCI.Visible = false;

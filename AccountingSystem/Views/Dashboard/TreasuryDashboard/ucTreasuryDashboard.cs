@@ -1,20 +1,9 @@
-﻿using AccountingSystem.Views.Manage.Receipts;
-using AccountingSystem.Views.Reports.RCD;
+﻿using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Transactions.PaymentCollection;
 using AccountingSystem.Views.Transactions.RCI;
-using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using AccountingSystem.Views.Reports.PaymentCollection;
-using AccountingSystem.Views.Reports.CollectorsRCD;
 
 namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 {

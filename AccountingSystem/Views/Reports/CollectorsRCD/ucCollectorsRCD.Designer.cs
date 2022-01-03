@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.flowLayoutPanelFunds = new System.Windows.Forms.FlowLayoutPanel();
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.btnRemove = new System.Windows.Forms.Button();
-            this.btnclear = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             this.btnadd = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.dgPayments = new System.Windows.Forms.DataGridView();
@@ -56,8 +56,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             // dtdate
             // 
-            this.dtdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtdate.Location = new System.Drawing.Point(678, 76);
+            this.dtdate.Location = new System.Drawing.Point(557, 76);
             this.dtdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtdate.Name = "dtdate";
             this.dtdate.Size = new System.Drawing.Size(225, 23);
@@ -87,9 +86,8 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(639, 79);
+            this.label3.Location = new System.Drawing.Point(518, 79);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 15);
             this.label3.TabIndex = 20;
@@ -167,20 +165,20 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btndelete_Click);
             // 
-            // btnclear
+            // btnClear
             // 
-            this.btnclear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnclear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnclear.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnclear.Location = new System.Drawing.Point(830, 482);
-            this.btnclear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnclear.Name = "btnclear";
-            this.btnclear.Size = new System.Drawing.Size(74, 23);
-            this.btnclear.TabIndex = 24;
-            this.btnclear.Text = "Clear";
-            this.btnclear.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnclear.UseVisualStyleBackColor = true;
-            this.btnclear.Click += new System.EventHandler(this.btnclear_Click);
+            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClear.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnClear.Location = new System.Drawing.Point(830, 482);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(74, 23);
+            this.btnClear.TabIndex = 24;
+            this.btnClear.Text = "Clear";
+            this.btnClear.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnclear_Click);
             // 
             // btnadd
             // 
@@ -240,7 +238,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtTotal);
             this.Controls.Add(this.btnRemove);
-            this.Controls.Add(this.btnclear);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnadd);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dgPayments);
@@ -269,7 +267,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFunds;
         internal System.Windows.Forms.TextBox txtTotal;
         internal System.Windows.Forms.Button btndelete;
-        internal System.Windows.Forms.Button btnclear;
+        internal System.Windows.Forms.Button btnClear;
         internal System.Windows.Forms.Button btnadd;
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.DataGridView dgPayments;
