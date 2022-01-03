@@ -143,11 +143,8 @@ namespace AccountingSystem
                 ucTreasuryDashboard1.btnPaymentCollection.Enabled = false;
 
             if (!Helper.HasPermission("Manage Receipts"))
-            {
-                ucTreasuryDashboard1.btnReceipts.Enabled = false;
                 menuReceipts.Visible = false;
-            }
-
+           
             if (!Helper.HasPermission("Transaction Issue Receipt"))
                 ucTreasuryDashboard1.btnIssueReceipt.Enabled = false;
 
