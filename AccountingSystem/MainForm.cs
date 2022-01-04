@@ -120,8 +120,6 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Transaction Issue Receipt"))
                 ucTreasuryDashboard1.btnIssueReceipt.Enabled = false;
 
-            if (!Helper.HasPermission("Transaction Generate RCD"))
-                ucTreasuryDashboard1.btnGenerateRCD.Enabled = false;
         }
 
         private void ValidateManagePermissions()
