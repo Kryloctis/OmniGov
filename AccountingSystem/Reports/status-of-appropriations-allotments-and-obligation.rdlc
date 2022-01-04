@@ -345,7 +345,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>MARY MAGDALYN T. REGANION, CPA</Value>
+                        <Value>=UCase(Parameters!paramCertifiedCorrectSignatory.Value)</Value>
                         <Style>
                           <FontFamily>calibri</FontFamily>
                           <FontWeight>ExtraBold</FontWeight>
@@ -376,7 +376,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>Municipal Accountant</Value>
+                        <Value>=Parameters!paramCertifiedCorrectSignatoryTitle.Value</Value>
                         <Style>
                           <FontStyle>Normal</FontStyle>
                           <FontFamily>Calibri</FontFamily>
@@ -5608,13 +5608,13 @@ RunningValue(Fields!function_classification_sector_name.Value,CountDistinct,"dtS
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramSignatoryName">
+    <ReportParameter Name="paramCertifiedCorrectSignatory">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramSignatoryPosition">
+    <ReportParameter Name="paramCertifiedCorrectSignatoryTitle">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -5660,12 +5660,12 @@ RunningValue(Fields!function_classification_sector_name.Value,CountDistinct,"dtS
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>1</RowIndex>
-          <ParameterName>paramSignatoryName</ParameterName>
+          <ParameterName>paramCertifiedCorrectSignatory</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>1</RowIndex>
-          <ParameterName>paramSignatoryPosition</ParameterName>
+          <ParameterName>paramCertifiedCorrectSignatoryTitle</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>

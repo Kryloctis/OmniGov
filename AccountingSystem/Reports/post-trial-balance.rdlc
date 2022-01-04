@@ -837,7 +837,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>Chief Accountant/Head of the Accounting</Value>
+                        <Value>=Parameters!paramCertifiedCorrectSignatoryTitle.Value</Value>
                         <Style>
                           <FontSize>9pt</FontSize>
                         </Style>
@@ -871,7 +871,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>=Parameters!paramSignatory.Value</Value>
+                        <Value>=UCase(Parameters!paramCertifiedCorrectSignatory.Value)</Value>
                         <Style>
                           <FontWeight>Bold</FontWeight>
                         </Style>
@@ -1239,7 +1239,7 @@
     </ReportSection>
   </ReportSections>
   <ReportParameters>
-    <ReportParameter Name="paramSignatory">
+    <ReportParameter Name="paramCertifiedCorrectSignatory">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -1269,6 +1269,12 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="paramCertifiedCorrectSignatoryTitle">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -1278,7 +1284,7 @@
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>paramSignatory</ParameterName>
+          <ParameterName>paramCertifiedCorrectSignatory</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
@@ -1299,6 +1305,11 @@
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>1</RowIndex>
           <ParameterName>paramHideZeroBalance</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>paramCertifiedCorrectSignatoryTitle</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

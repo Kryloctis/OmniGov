@@ -10,6 +10,43 @@ namespace AccountingSystem
     public class HelperLoadRecords
     {
 
+        #region References
+
+        public static void ReferencesDatagridView(DataTable dataTable, DataGridView dataGridView)
+        {
+            Helper.DatagridFullRowSelectStyle(dataGridView, true);
+            dataGridView.ShowCellToolTips = false;
+            dataGridView.Columns.Add("id", "ID");
+            dataGridView.Columns.Add(new DataGridViewCheckBoxColumn() { HeaderText = "", Name = "is_referenced" });
+            dataGridView.Columns.Add("document_reference_name", "References");
+            dataGridView.Columns.Add("document_name", "Documents");
+
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["is_referenced"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.ReadOnly = false;
+            dataGridView.MultiSelect = false;
+            dataGridView.Columns["document_reference_name"].ReadOnly = true;
+            dataGridView.Columns["document_reference_name"].Width = 150;
+            dataGridView.Columns["document_name"].ReadOnly = true;
+        }
+
+        #endregion
+
+        #region Signatories
+
+        internal static void SignatoriesDatagridView(DataTable dataTable, DataGridView dataGridView)
+        {
+            Helper.DatagridFullRowSelectStyle(dataGridView, true);
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["name"].HeaderText = "Name";
+            dataGridView.Columns["title"].HeaderText = "Title";
+            dataGridView.Columns["created_at"].Visible = false;
+            dataGridView.Columns["updated_at"].Visible = false;
+        }
+
+        #endregion
+
         #region Year
         internal static void YearComboBox(ComboBox comboBox)
         {
@@ -613,8 +650,8 @@ namespace AccountingSystem
             foreach (DataRow drCollectionReport in dataTable.Rows)
             {
                 var status = Convert.ToInt16(drCollectionReport["is_approved"].ToString()) == 1 ? " Approved" :
-                             Convert.ToInt16(drCollectionReport["is_disapproved"].ToString()) == 1 ? " Disapproved": " Pending"; 
-                            
+                             Convert.ToInt16(drCollectionReport["is_disapproved"].ToString()) == 1 ? " Disapproved" : " Pending";
+
 
                 datagrid.Rows.Add(new object[]
                 {
@@ -633,7 +670,7 @@ namespace AccountingSystem
             }
 
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", 9f);
-            
+
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -705,7 +742,7 @@ namespace AccountingSystem
         }
         #endregion
 
-        internal static void CollectionDataGridColumns(DataGridView datagrid) 
+        internal static void CollectionDataGridColumns(DataGridView datagrid)
         {
 
             datagrid.Columns.Add("payment_collection_id", "Payment Collection ID");
@@ -1375,7 +1412,7 @@ namespace AccountingSystem
                 dgvBudgetAppropriations.Columns["realigned"].DefaultCellStyle.NullValue = null;
                 dgvBudgetAppropriations.Columns["realigned"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 dgvBudgetAppropriations.Columns["realigned"].Width = 80;
-                dgvBudgetAppropriations.Columns["realigned"].MinimumWidth = 80; 
+                dgvBudgetAppropriations.Columns["realigned"].MinimumWidth = 80;
                 #endregion
 
                 //Initialize Repository Method
@@ -1868,7 +1905,7 @@ namespace AccountingSystem
                         drRealignment["ledger_name"],
                         drRealignment["date_entry"],
                         drRealignment["total_amount"],
-                        drRealignment["remarks"] 
+                        drRealignment["remarks"]
                     });
                 }
 
@@ -1936,33 +1973,29 @@ namespace AccountingSystem
 
         #region Obligation Request
 
-        internal static void ObligationRequestDatagridView(DataGridView dataGridView, string searchTxt)
+        internal static void ObligationRequestDatagridView(DataTable dataTable, DataGridView dataGridView)
         {
             try
             {
-                dataGridView.DataSource = Factory.ObligationRequestRepository().GetRecordsBySearch(searchTxt);
+                Helper.DatagridFullRowSelectStyle(dataGridView, true);
+
+                dataGridView.DataSource = dataTable;
 
                 dataGridView.Columns["obligation_no"].HeaderText = "Obligation No.";
                 dataGridView.Columns["payee"].HeaderText = "Payee";
                 dataGridView.Columns["explanation"].HeaderText = "Explanation";
                 dataGridView.Columns["reference_no"].HeaderText = "Reference No.";
+                dataGridView.Columns["status"].HeaderText = "Status";
                 dataGridView.Columns["id"].Visible = false;
                 dataGridView.Columns["date_requested"].Visible = false;
                 dataGridView.Columns["created_at"].Visible = false;
-                dataGridView.Columns["created_by"].Visible = false;
+                dataGridView.Columns["created_by_id"].Visible = false;
+                dataGridView.Columns["created_by_full_name"].HeaderText = "Created By";
                 dataGridView.Columns["updated_at"].Visible = false;
-                dataGridView.Columns["updated_by"].Visible = false;
+                dataGridView.Columns["updated_by_id"].Visible = false;
+                dataGridView.Columns["updated_by_full_name"].HeaderText = "Updated By";
 
-                dataGridView.Columns["id"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["obligation_no"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["payee"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["explanation"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["reference_no"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["date_requested"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["created_at"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["created_by"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["updated_at"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView.Columns["updated_by"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
                 dataGridView.ClearSelection();
 
@@ -2032,7 +2065,7 @@ namespace AccountingSystem
             datagrid.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns["created_by_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             datagrid.ShowCellToolTips = false;
-            datagrid.Columns["payee"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill; 
+            datagrid.Columns["payee"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             datagrid.Columns["date_entry"].DefaultCellStyle.Format = "MMMM, dd, yyyy";
             datagrid.Columns["jev_no"].Visible = false;
             datagrid.Columns["fund_code"].Visible = false;
@@ -2040,7 +2073,7 @@ namespace AccountingSystem
             datagrid.Columns["updated_at"].Visible = false;
             datagrid.Columns["created_by_id"].Visible = false;
             datagrid.Columns["updated_by_id"].Visible = false;
-            datagrid.Columns["updated_by_name"].Visible = false;    
+            datagrid.Columns["updated_by_name"].Visible = false;
             datagrid.Columns["explanation"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             datagrid.Columns["status"].SortMode = DataGridViewColumnSortMode.Automatic;
 
@@ -2050,7 +2083,7 @@ namespace AccountingSystem
 
         #region Amortization
 
-        internal static void AmortizationDataGridView(DataTable dataTable, DataGridView dataGridView) 
+        internal static void AmortizationDataGridView(DataTable dataTable, DataGridView dataGridView)
         {
             dataGridView.DataSource = dataTable;
 
@@ -2066,14 +2099,14 @@ namespace AccountingSystem
             dataGridView.Columns["amount_released"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             dataGridView.Columns["amount_released"].Width = 200;
             dataGridView.Columns["interest"].DefaultCellStyle.Format = "0.00\\%";
-            dataGridView.Columns["amount_released"].DefaultCellStyle.Format = "#,0.00###";         
+            dataGridView.Columns["amount_released"].DefaultCellStyle.Format = "#,0.00###";
         }
 
         #endregion
 
         #region Amortization Schedule
 
-        public static void DatagridViewAmortizationSchedule(DataTable dataTable, string amortizationTerm, DataGridView dataGridView) 
+        public static void DatagridViewAmortizationSchedule(DataTable dataTable, string amortizationTerm, DataGridView dataGridView)
         {
 
             dataGridView.DataSource = dataTable;
@@ -2104,7 +2137,7 @@ namespace AccountingSystem
                     break;
             }
 
-          
+
             dataGridView.Columns["principal_amount"].DefaultCellStyle.Format = "#,0.00###";
             dataGridView.Columns["principal_amount"].HeaderText = "Principal";
             dataGridView.Columns["interest_amount"].DefaultCellStyle.Format = "#,0.00###";

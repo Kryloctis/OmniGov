@@ -101,187 +101,103 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
+        public Dictionary<string, string> GetViewRecordById(int Id)
+        {
+            var record = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@obligation_request_id", DbType.Int32, Id }
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE obligation_request_id = @obligation_request_id";
+
+            using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return record;
+
+                record.Add("obligation_request_id", reader.Rows[0]["obligation_request_id"].ToString());
+                record.Add("obligation_account_id", reader.Rows[0]["obligation_account_id"].ToString());
+                record.Add("obligation_no", reader.Rows[0]["obligation_no"].ToString());
+                record.Add("payee", reader.Rows[0]["payee"].ToString());
+                record.Add("explanation", reader.Rows[0]["explanation"].ToString());
+                record.Add("reference_no", reader.Rows[0]["reference_no"].ToString());
+                record.Add("date_requested", reader.Rows[0]["date_requested"].ToString());
+                record.Add("budget_appropriations_id", reader.Rows[0]["budget_appropriations_id"].ToString());
+                record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
+                record.Add("fund_code", reader.Rows[0]["fund_code"].ToString());
+                record.Add("fund_name", reader.Rows[0]["fund_name"].ToString());
+                record.Add("function_program_project_id", reader.Rows[0]["function_program_project_id"].ToString());
+                record.Add("fpp_code", reader.Rows[0]["fpp_code"].ToString());
+                record.Add("fpp_name", reader.Rows[0]["fpp_name"].ToString());
+                record.Add("others_fpp_id", reader.Rows[0]["others_fpp_id"].ToString());
+                record.Add("others_fpp_code", reader.Rows[0]["others_fpp_code"].ToString());
+                record.Add("others_fpp_name", reader.Rows[0]["others_fpp_name"].ToString());
+                record.Add("allotment_classes_id", reader.Rows[0]["allotment_classes_id"].ToString());
+                record.Add("allotment_code", reader.Rows[0]["allotment_code"].ToString());
+                record.Add("allotment_name", reader.Rows[0]["allotment_name"].ToString());
+                record.Add("general_ledger_accounts_id", reader.Rows[0]["general_ledger_accounts_id"].ToString());
+                record.Add("account_code", reader.Rows[0]["account_code"].ToString());
+                record.Add("ledger_name", reader.Rows[0]["ledger_name"].ToString());
+                record.Add("is_contra_account", reader.Rows[0]["is_contra_account"].ToString());
+                record.Add("year", reader.Rows[0]["year"].ToString());
+                record.Add("continuing", reader.Rows[0]["continuing"].ToString());
+                record.Add("remarks", reader.Rows[0]["remarks"].ToString());
+                record.Add("amount", reader.Rows[0]["amount"].ToString());
+                record.Add("is_approved", reader.Rows[0]["is_approved"].ToString());
+                record.Add("is_disapproved", reader.Rows[0]["is_disapproved"].ToString());
+                record.Add("is_cancelled", reader.Rows[0]["is_cancelled"].ToString());
+                record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                record.Add("created_by_id", reader.Rows[0]["created_by_id"].ToString());
+                record.Add("created_by_full_name", reader.Rows[0]["created_by_full_name"].ToString());
+                record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+                record.Add("updated_by_id", reader.Rows[0]["updated_by_id"].ToString());
+                record.Add("updated_by_full_name", reader.Rows[0]["updated_by_full_name"].ToString());
+            }
+
+            return record;
+        }
+
         public DataTable GetViewRecordsById(int Id)
         {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@obligation_request_id", DbType.Int32, Id }
-                };
+            var parameters = new object[][]
+           {
+                new object[] { "@obligation_request_id", DbType.Int32, Id }
+           };
 
-                string query = $"SELECT " +
-                    $"obligation_request_id, " +
-                    $"obligation_account_id, " +
-                    $"obligation_no, " +
-                    $"payee, " +
-                    $"explanation, " +
-                    $"reference_no, " +
-                    $"date_requested, " +
-                    $"obligation_request_created_at, " +
-                    $"created_by, " +
-                    $"obligation_request_updated_at, " +
-                    $"updated_by, " +
-                    $"budget_appropriations_id, " +
-                    $"funds_id, " +
-                    $"fund_code, " +
-                    $"fund_name, " +
-                    $"function_program_project_id, " +
-                    $"fpp_code, " +
-                    $"fpp_name, " +
-                    $"others_fpp_id, " +
-                    $"others_fpp_code, " +
-                    $"others_fpp_name, " +
-                    $"allotment_classes_id, " +
-                    $"allotment_code, " +
-                    $"allotment_name, " +
-                    $"general_ledger_accounts_id, " +
-                    $"account_code, " +
-                    $"ledger_name, " +
-                    $"is_contra_account, " +
-                    $"year, " +
-                    $"continuing, " +
-                    $"remarks, " +
-                    $"amount " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE " +
-                    $"obligation_request_id = @obligation_request_id";
-
-                var dtObligationRequests = new DataTable();
-                return _mySqlGenericCommands.FillBySearch(query, dtObligationRequests, parameters);
-            }
-            catch (MySqlException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"SELECT * FROM {viewTableName} WHERE obligation_request_id = @obligation_request_id";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId }
-                };
+                new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId }
+            };
 
-                string query = $"SELECT " +
-                    $"obligation_request_id, " +
-                    $"obligation_account_id, " +
-                    $"obligation_no, " +
-                    $"payee, " +
-                    $"explanation, " +
-                    $"reference_no, " +
-                    $"date_requested, " +
-                    $"obligation_request_created_at, " +
-                    $"created_by, " +
-                    $"obligation_request_updated_at, " +
-                    $"updated_by, " +
-                    $"budget_appropriations_id, " +
-                    $"funds_id, " +
-                    $"fund_code, " +
-                    $"fund_name, " +
-                    $"function_program_project_id, " +
-                    $"fpp_code, " +
-                    $"fpp_name, " +
-                    $"others_fpp_id, " +
-                    $"others_fpp_code, " +
-                    $"others_fpp_name, " +
-                    $"allotment_classes_id, " +
-                    $"allotment_code, " +
-                    $"allotment_name, " +
-                    $"general_ledger_accounts_id, " +
-                    $"account_code, " +
-                    $"ledger_name, " +
-                    $"is_contra_account, " +
-                    $"year, " +
-                    $"continuing, " +
-                    $"remarks, " +
-                    $"amount " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE " +
-                    $"budget_appropriations_id = @budget_appropriations_id";
+            string query = $"SELECT * FROM {viewTableName} WHERE budget_appropriations_id = @budget_appropriations_id";
 
-                var dtObligationRequests = new DataTable();
-                return _mySqlGenericCommands.FillBySearch(query, dtObligationRequests, parameters);
-            }
-            catch (MySqlException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtObligationRequests = new DataTable();
+            return _mySqlGenericCommands.FillBySearch(query, dtObligationRequests, parameters);
         }
 
-        //SAAOB and SAAOBB
         public DataTable GetViewRecords(int budgetAppropriationId, DateTime dateRequested)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId },
-                    new object[] { "@date_requested", DbType.Date, dateRequested.Date}
-                };
+                new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId },
+                new object[] { "@date_requested", DbType.Date, dateRequested.Date}
+            };
 
-                string query = $"SELECT " +
-                    $"obligation_request_id, " +
-                    $"obligation_account_id, " +
-                    $"obligation_no, " +
-                    $"payee, " +
-                    $"explanation, " +
-                    $"reference_no, " +
-                    $"date_requested, " +
-                    $"obligation_request_created_at, " +
-                    $"created_by, " +
-                    $"obligation_request_updated_at, " +
-                    $"updated_by, " +
-                    $"budget_appropriations_id, " +
-                    $"funds_id, " +
-                    $"fund_code, " +
-                    $"fund_name, " +
-                    $"function_program_project_id, " +
-                    $"fpp_code, " +
-                    $"fpp_name, " +
-                    $"others_fpp_id, " +
-                    $"others_fpp_code, " +
-                    $"others_fpp_name, " +
-                    $"allotment_classes_id, " +
-                    $"allotment_code, " +
-                    $"allotment_name, " +
-                    $"general_ledger_accounts_id, " +
-                    $"account_code, " +
-                    $"ledger_name, " +
-                    $"is_contra_account, " +
-                    $"year, " +
-                    $"continuing, " +
-                    $"remarks, " +
-                    $"amount " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE " +
-                    $"budget_appropriations_id = @budget_appropriations_id " +
-                    $"AND date_requested <= @date_requested";
+            string query = $"SELECT * FROM {viewTableName} WHERE budget_appropriations_id = @budget_appropriations_id AND date_requested <= @date_requested";
 
-                var dtObligationRequests = new DataTable();
-                return _mySqlGenericCommands.FillBySearch(query, dtObligationRequests, parameters);
-            }
-            catch (MySqlException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtObligationRequests = new DataTable();
+            return _mySqlGenericCommands.FillBySearch(query, dtObligationRequests, parameters);
         }
 
-        //DASHBOARD
         #region DASHBOARD BUDGET
         //DETAILED
         public decimal GetSumObligationsByAppropriationId(int appropriationId, DateTime dateRequested)
@@ -364,7 +280,6 @@ namespace ACC.Data
         }
         #endregion
 
-
         private int GetLastInsertedID()
         {
             try
@@ -378,7 +293,6 @@ namespace ACC.Data
             }
         }
 
-        //INSERT
         public bool Insert(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels)
         {
             try
@@ -430,7 +344,6 @@ namespace ACC.Data
             }
         }
 
-        //UPDATE
         public bool Update(ObligationRequestModel entity, List<ObligationAccountModel> obligationAccountModels)
         {
             try
@@ -477,7 +390,6 @@ namespace ACC.Data
             }
         }
 
-        //DELETE
         public bool Delete(int obligationRequestId)
         {
             try
@@ -507,8 +419,7 @@ namespace ACC.Data
             }
         }
 
-
-        //Validations
+        #region Validations
 
         public bool ObligationRequestNoExist(string obligationNo)
         {
@@ -553,6 +464,96 @@ namespace ACC.Data
             };
 
             return false;
+        }
+
+        #endregion
+
+        public bool SetObligationRequestStatus(int obligationId, string status)
+        {
+            try
+            {
+                string Status()
+                {
+                    switch (status)
+                    {
+                        case "approve":
+                            return "is_approved = 1, is_disapproved = 0, is_cancelled = 0";
+                        case "disapprove":
+                            return "is_approved = 0, is_disapproved = 1, is_cancelled = 0";
+                        case "cancel":
+                            return "is_cancelled = 1";
+                        default:
+                            return "is_cancelled= 0, is_disapproved = 0, is_approved = 0";
+                    }
+                }
+
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, obligationId},
+                };
+
+                string query = $"UPDATE {tableName} SET {Status()}  WHERE id = @id";
+
+                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public string GetObligationRequestStatus(int obligationRequestId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, obligationRequestId }
+                };
+
+                string query = $"SELECT is_approved, is_disapproved, is_cancelled FROM {tableName} WHERE id = @id";
+
+                using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return string.Empty;
+
+                    bool isApproved = Convert.ToBoolean(reader.Rows[0]["is_approved"]);
+                    bool isDisapproved = Convert.ToBoolean(reader.Rows[0]["is_disapproved"]);
+                    bool isCancelled = Convert.ToBoolean(reader.Rows[0]["is_cancelled"]);
+
+
+                    if (isCancelled)
+                        return "Cancelled";
+                    else if (isDisapproved && !isApproved)
+                        return "Disapproved";
+                    else if (isApproved && !isDisapproved)
+                        return "Approved";
+                    else if (!isApproved && !isDisapproved && !isCancelled)
+                        return "Pending";
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return string.Empty;
+        }
+
+        public DataTable GetViewRecordsBySearch(string searchText)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@searchText", DbType.String, $"%{searchText}%" }
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE obligation_no LIKE @searchText OR payee LIKE @searchText OR explanation = @searchText OR reference_no LIKE @searchText OR YEAR(date_requested) LIKE @searchText";
+
+            var dataTable = new DataTable();
+
+            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
     }
 }

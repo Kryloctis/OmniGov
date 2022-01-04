@@ -1,9 +1,6 @@
 ﻿using AccountingSystem.Views.Dashboard;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.JEV
@@ -33,7 +30,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 LoadJournals();
                 LoadMonths();
                 LoadJEVList();
-                nudYear.Value = _year == 0? DateTime.Now.Year:_year;
+                nudYear.Value = _year == 0 ? DateTime.Now.Year : _year;
             }
         }
 
@@ -55,13 +52,13 @@ namespace AccountingSystem.Views.Transactions.JEV
             int jevId = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["id"].Value);
             int createdById = Convert.ToInt32(dgJEV.Rows[rowIndex].Cells["created_by_id"].Value);
 
-            var newFrmJev = new frmJEV(this, _ucJEVDashboard);
-            var ucFrmJev = newFrmJev.ucjev1;
+            var frmJev = new frmJEV(this, _ucJEVDashboard);
+            var ucFrmJev = frmJev.ucjev1;
             ucFrmJev.jevNo = jevNo;
             ucFrmJev.jevId = jevId;
-            newFrmJev.createdById = createdById;
-            newFrmJev.ShowDialog();
-
+            frmJev.createdById = createdById;
+            ucFrmJev.isEdit = true;
+            frmJev.ShowDialog();
         }
 
         private void btnSelect_Click(object sender, EventArgs e)
@@ -78,10 +75,10 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             foreach (var item in Helper.MonthsDatasource().Values)
                 cbMonth.Items.Add(item);
-            cbMonth.SelectedIndex = _month == 0? DateTime.Now.Month - 1 : _month;
+            cbMonth.SelectedIndex = _month == 0 ? DateTime.Now.Month - 1 : _month;
         }
 
-        private void EnableDisableButtons() 
+        private void EnableDisableButtons()
         {
             if (dgJEV.SelectedRows.Count == 1)
             {
@@ -91,10 +88,10 @@ namespace AccountingSystem.Views.Transactions.JEV
                 btnSelect.Enabled = false;
         }
 
-        private string GetJevStatus(byte isApproved, byte isDisapproved, byte isCancelled) 
+        private string GetJevStatus(byte isApproved, byte isDisapproved, byte isCancelled)
         {
             if (isApproved == 0 && isDisapproved == 0 && isCancelled == 0)
-                return  "Pending";
+                return "Pending";
 
             if (isApproved == 1 && isDisapproved == 0 && isCancelled == 0)
                 return "Approved";
@@ -108,7 +105,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             return string.Empty;
         }
 
-        private void LoadStatusColors() 
+        private void LoadStatusColors()
         {
             foreach (DataGridViewRow row in dgJEV.Rows)
             {

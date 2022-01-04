@@ -230,7 +230,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>MARY MAGDALYN T. REGANION, CPA</Value>
+                        <Value>=UCase(Parameters!paramCertifiedCorrectSignatory.Value)</Value>
                         <Style>
                           <FontFamily>calibri</FontFamily>
                           <FontWeight>ExtraBold</FontWeight>
@@ -261,7 +261,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>Municipal Accountant</Value>
+                        <Value>=Parameters!paramCertifiedCorrectSignatoryTitle.Value</Value>
                         <Style>
                           <FontStyle>Normal</FontStyle>
                           <FontFamily>Calibri</FontFamily>
@@ -2681,6 +2681,18 @@ ReportItems!txtTotalRecognizedRevenueAndExpensesForThePeriodCurrent.Value)</Valu
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="paramCertifiedCorrectSignatory">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramCertifiedCorrectSignatoryTitle">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -2696,6 +2708,16 @@ ReportItems!txtTotalRecognizedRevenueAndExpensesForThePeriodCurrent.Value)</Valu
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>0</RowIndex>
           <ParameterName>paramDateEnded</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>paramCertifiedCorrectSignatory</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>paramCertifiedCorrectSignatoryTitle</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

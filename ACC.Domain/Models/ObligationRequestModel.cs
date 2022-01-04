@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ACC.Domain.Models
 {
@@ -12,6 +10,9 @@ namespace ACC.Domain.Models
         public string Explanation { get; set; }
         public string ReferenceNo { get; set; }
         public DateTime DateRequested { get; set; }
+        public Boolean IsApproved { get; set; }
+        public Boolean IsDisapproved { get; set; }
+        public Boolean IsCancelled { get; set; }
         public int CreatedBy { get; set; }
         public int UpdatedBy { get; set; }
     }

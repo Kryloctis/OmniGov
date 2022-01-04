@@ -3,12 +3,12 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
-    public partial class frmRemarks : Form
+    public partial class frmJEVRemarks : Form
     {
 
         frmJEV _frmJEV;
 
-        public frmRemarks(frmJEV frmjev)
+        public frmJEVRemarks(frmJEV frmjev)
         {
             Helper.LoadFormIcon(this);
             InitializeComponent();
@@ -106,7 +106,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     {
                         Helper.MessageBoxSuccess("JEV has been disapproved.");
                         _frmJEV.ucjev1.isDisapproved = 1;
-                        _frmJEV.CheckJevStatus(_frmJEV.ucjev1.jevId);
+                        _frmJEV.GetJevStatus(_frmJEV.ucjev1.jevId);
                         _frmJEV._frmJEVList.LoadJEVList();
                         _frmJEV._ucJEVDashboard.LoadJEVCounter();
                         Close();
