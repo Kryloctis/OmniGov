@@ -2003,6 +2003,7 @@ namespace AccountingSystem
                 dataGridView.Columns["payee"].HeaderText = "Payee";
                 dataGridView.Columns["explanation"].HeaderText = "Explanation";
                 dataGridView.Columns["reference_no"].HeaderText = "Reference No.";
+                dataGridView.Columns["total_obligations_amount"].HeaderText = "Total Obligations";
                 dataGridView.Columns["status"].HeaderText = "Status";
                 dataGridView.Columns["created_at"].Visible = false;
                 dataGridView.Columns["created_by_id"].Visible = false;

@@ -54,14 +54,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(505, 12);
+            this.txtSearch.Location = new System.Drawing.Point(548, 14);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(242, 23);
+            this.txtSearch.Size = new System.Drawing.Size(274, 23);
             this.txtSearch.TabIndex = 0;
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(753, 12);
+            this.btnSearch.Location = new System.Drawing.Point(828, 14);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 1;
@@ -75,7 +75,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.dgObligationRequests.Location = new System.Drawing.Point(12, 41);
             this.dgObligationRequests.Name = "dgObligationRequests";
             this.dgObligationRequests.RowTemplate.Height = 25;
-            this.dgObligationRequests.Size = new System.Drawing.Size(816, 394);
+            this.dgObligationRequests.Size = new System.Drawing.Size(891, 394);
             this.dgObligationRequests.TabIndex = 2;
             this.dgObligationRequests.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgObligationRequests_ColumnAdded);
             this.dgObligationRequests.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgObligationRequests_RowHeaderMouseDoubleClick);
@@ -123,7 +123,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.dtDateRequested.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtDateRequested.Location = new System.Drawing.Point(370, 12);
             this.dtDateRequested.Name = "dtDateRequested";
-            this.dtDateRequested.Size = new System.Drawing.Size(106, 23);
+            this.dtDateRequested.Size = new System.Drawing.Size(121, 23);
             this.dtDateRequested.TabIndex = 6;
             this.dtDateRequested.ValueChanged += new System.EventHandler(this.dtDateRequested_ValueChanged);
             // 
@@ -144,7 +144,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 441);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(842, 30);
+            this.panel1.Size = new System.Drawing.Size(915, 30);
             this.panel1.TabIndex = 7;
             // 
             // panel6
@@ -240,7 +240,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(746, 3);
+            this.btnCancel.Location = new System.Drawing.Point(819, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(93, 23);
             this.btnCancel.TabIndex = 4;
@@ -252,7 +252,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSelect.Image = global::AccountingSystem.Properties.Resources.ok14px;
             this.btnSelect.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSelect.Location = new System.Drawing.Point(647, 3);
+            this.btnSelect.Location = new System.Drawing.Point(720, 3);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(93, 23);
             this.btnSelect.TabIndex = 3;
@@ -267,7 +267,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(842, 471);
+            this.ClientSize = new System.Drawing.Size(915, 471);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dtDateRequested);
             this.Controls.Add(this.cmbxAllotmentClasses);
