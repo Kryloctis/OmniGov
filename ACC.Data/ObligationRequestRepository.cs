@@ -333,23 +333,13 @@ namespace ACC.Data
                     new object[] { "@explanation", DbType.String, entity.Explanation },
                     new object[] { "@reference_no", DbType.String, entity.ReferenceNo },
                     new object[] { "@date_requested", DbType.Date, entity.DateRequested.Date },
+                    new object[] { "@is_approved", DbType.Boolean, entity.IsApproved},
+                    new object[] { "@is_disapproved", DbType.Boolean, entity.IsDisapproved},
+                    new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled},
                     new object[] { "@created_by", DbType.Int32, entity.CreatedBy },
                 };
 
-                string query = $"INSERT INTO {tableName} " +
-                    $"(obligation_no, " +
-                    $"payee, " +
-                    $"explanation, " +
-                    $"reference_no, " +
-                    $"date_requested, " +
-                    $"created_by) " +
-                    $"VALUES " +
-                    $"(@obligation_no, " +
-                    $"@payee, " +
-                    $"@explanation, " +
-                    $"@reference_no, " +
-                    $"@date_requested, " +
-                    $"@created_by)";
+                string query = $"INSERT INTO {tableName} (obligation_no, payee, explanation, reference_no, date_requested, is_approved, is_disapproved, is_cancelled, created_by) VALUES (@obligation_no, @payee, @explanation, @reference_no, @date_requested, @is_approved, @is_disapproved, @is_cancelled, @created_by)";
 
                 _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
 

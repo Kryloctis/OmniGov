@@ -3,10 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AllotmentRelease
@@ -32,9 +28,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             _ucAllotmentMain = ucAllotmentReleaseMain;
         }
-
-
-        //ACCOUNT COMBOBOX
 
         private DataTable DatatableBudgetAppropriations()
         {
@@ -73,14 +66,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 foreach (DataRow item in DatatableBudgetAppropriations().Rows)
                 {
                     int accountId = Convert.ToInt32(item["id"]);
-                    string remarks = string.IsNullOrEmpty(item["remarks"].ToString())? string.Empty : $"({item["remarks"]})";
+                    string remarks = string.IsNullOrEmpty(item["remarks"].ToString()) ? string.Empty : $"({item["remarks"]})";
                     string accountName = $"{item["account_code"]} - {item["general_ledger_accounts_name"]} {remarks}";
                     bool isContinuing = Convert.ToByte(item["continuing"]) == 1 ? true : false;
                     short year = Convert.ToInt16(item["year"]);
 
-                    if(!isContinuing && year == nudYear.Value)
+                    if (!isContinuing && year == nudYear.Value)
                         accountDict.Add(accountId, accountName);
-                    else if(isContinuing && year <= nudYear.Value)
+                    else if (isContinuing && year <= nudYear.Value)
                         accountDict.Add(accountId, accountName);
                 }
 
@@ -137,8 +130,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             cmbxBudgetAppropriations.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
         }
 
-
-
         internal string GetFormErrors()
         {
             var errorArray = new string[3];
@@ -160,20 +151,49 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
         }
 
-        internal void ResetForm() 
+        internal void ResetForm()
         {
             cmbxBudgetAppropriations.DataSource = null;
             LoadBudgetAppropriations();
             cmbxBudgetAppropriations.SelectedIndex = -1;
-            cmbxBudgetAppropriations.Focus(); 
+            cmbxBudgetAppropriations.Focus();
             nudAmount.Value = 0;
             _budgetAppropriationId = 0;
             _amount = 0;
         }
 
+        private decimal GetBudgetAppropriationBalance()
+        {
+            decimal appropriationBalance = 0;
 
-        //VALIDATIONS
-    
+            try
+            {
+                if (cmbxBudgetAppropriations.SelectedIndex > -1)
+                {
+                    int budgetAppropriationId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
+                    var budgetAppropriationDict = Factory.BudgetAppropriationsRepository().GetViewRecordByIdDateEntry(budgetAppropriationId, dateIssued);
+                    var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
+                    var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationIdDateEntry(budgetAppropriationId, dateIssued);
+
+                    decimal budgetAppropriation = budgetAppropriationDict.Values.Count == 0 ? 0 : Convert.ToDecimal(budgetAppropriationDict["amount"]);
+                    decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
+                    decimal totalSupplementalAppropriation = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0 ? 0 : dtSupplementalAppropriation.Compute("Sum(amount)", string.Empty));
+
+                    appropriationBalance = ((budgetAppropriation + totalSupplementalAppropriation) - totalAllotmentRelease) + (budgetAppropriationId == _budgetAppropriationId ? _amount : 0);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return appropriationBalance < 0 ? 0 : appropriationBalance;
+        }
+
+
+        #region VALIDATIONS
+
         private void nudYear_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epYear, nudYear, "Year");
@@ -184,31 +204,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             Helper.ClearErrorNumericUpDown(epYear, nudYear);
         }
 
-
-
-        private decimal GetBudgetAppropriationBalance()
-        {
-            decimal appropriationBalance = 0;
-
-            if (cmbxBudgetAppropriations.SelectedIndex > -1)
-            {
-                int budgetAppropriationId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
-                var budgetAppropriationDict = Factory.BudgetAppropriationsRepository().GetViewRecordByIdDateEntry(budgetAppropriationId, dateIssued);
-                var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
-                var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationIdDateEntry(budgetAppropriationId, dateIssued);
-
-                decimal budgetAppropriation = budgetAppropriationDict.Values.Count == 0 ? 0 : Convert.ToDecimal(budgetAppropriationDict["amount"]);
-                decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
-                decimal totalSupplementalAppropriation = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0 ? 0 : dtSupplementalAppropriation.Compute("Sum(amount)", string.Empty));
-
-                appropriationBalance = ((budgetAppropriation + totalSupplementalAppropriation) - totalAllotmentRelease) + (budgetAppropriationId == _budgetAppropriationId ? _amount : 0);
-
-            }
-
-            return appropriationBalance;
-        }
-
-        private bool AmountExceeds() 
+        private bool AmountExceeds()
         {
 
             if (nudAmount.Value > GetBudgetAppropriationBalance())
@@ -220,7 +216,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return false;
         }
 
-        private bool AmountNotValidated() 
+        private bool AmountNotValidated()
         {
             try
             {
@@ -255,8 +251,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
 
-
-        private bool AllotmentReleaseExist() 
+        private bool AllotmentReleaseExist()
         {
             try
             {
@@ -304,7 +299,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return false;
         }
 
-        private bool BudgetAppropriationNotValidated() 
+        private bool BudgetAppropriationNotValidated()
         {
             try
             {
@@ -338,6 +333,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             Helper.ClearErrorComboBox(epBudgetAppropriation, cmbxBudgetAppropriations);
         }
- 
+
+        #endregion
+
     }
 }
