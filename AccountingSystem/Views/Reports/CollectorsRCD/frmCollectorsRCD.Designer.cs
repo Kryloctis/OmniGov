@@ -89,6 +89,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnSave.Text = "&Save";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.TextChanged += new System.EventHandler(this.btnSave_TextChanged);
             // 
             // btnDelete
             // 

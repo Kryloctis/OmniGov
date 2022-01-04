@@ -24,13 +24,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void CollectorsRCD_Load(object sender, EventArgs e)
         {
-
             ValidateLocalPermission();
-
             if (uc.dgPayments.Rows.Count == 0) return;
-
         }
-
 
         private void ValidateLocalPermission()
         {
@@ -42,7 +38,11 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (uc.dgPayments.Rows.Count == 0) return;
+            if (uc.dgPayments.Rows.Count == 0) 
+            {
+                Helper.MessageBoxError("Please load payment collections.");
+                return;
+            }
 
             if (uc.isSaveFunction)
             {
@@ -98,8 +98,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             {
                 var CollectorsReportId = GetCollectorsReportId();
                 var PaymentCollectionsId = Convert.ToInt16(item.Cells["payment_collections_id"].Value.ToString());
-
-                MessageBox.Show("PaymentCollectionsId " + PaymentCollectionsId);
 
                 var collectorReportPaymentModel = new CollectorReportPaymentModel()
                 {
@@ -379,5 +377,12 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             lblJevStatus.ForeColor = Color.Black;
         }
 
+        private void btnSave_TextChanged(object sender, EventArgs e)
+        {
+            if (btnSave.Text == "Save")
+                uc.ActionPerformIsSave(true);
+            else
+                uc.ActionPerformIsSave(false);
+        }
     }
 }
