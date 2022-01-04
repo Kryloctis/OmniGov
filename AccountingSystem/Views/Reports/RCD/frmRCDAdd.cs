@@ -18,8 +18,6 @@ namespace AccountingSystem.Views.Reports.RCD
         private string collectorsReportId;
         private string collector;
 
-
-
         public frmRCDAdd(frmRCD frmRCD)
         {
             InitializeComponent();

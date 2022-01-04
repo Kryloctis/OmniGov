@@ -37,7 +37,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
-                var rModel = new ReceiptsModel()
+                var receiptModel = new ReceiptsModel()
                 {
                     AccId = int.Parse(uc.cmbforms.SelectedValue.ToString()),
                     Rfrom = int.Parse(uc.txtfrom.Text.Trim()),
@@ -46,32 +46,28 @@ namespace AccountingSystem.Views.Manage.Receipts
                     Quantity = int.Parse(uc.txtquantity.Text.Trim()),
                     Remarks = uc.txtremarks.Text.Trim(),
                     UserId = UserId
-
                 };
 
-                var rcRepository = Factory.ReceiptsRepository();
-                /* if (rcRepository.ReceiptExist(int.Parse(uc.cmbforms.SelectedValue), int.Parse(uc.txtfrom.Text.Trim()), int.Parse(uc.txtto.Text.Trim())))
-                 {
-                     Helper.MessageBoxError("Receipt already exists!");
-                     uc.cmbforms.Focus();
-                     return false;
-                 }
-                 else */
+                var receiptRepository = Factory.ReceiptsRepository();
+
                 if (!uc.istickets)
                 {
-                    if (int.Parse(uc.txtfrom.Text.Trim()) > int.Parse(uc.txtto.Text.Trim()))
+                    var serialNoFrom = int.Parse(uc.txtfrom.Text.Trim());
+                    var serialNoTo = int.Parse(uc.txtto.Text.Trim());
+
+                    if (serialNoFrom > serialNoTo)
                     {
-                        Helper.MessageBoxError("Invalid Receipt!");
+                        Helper.MessageBoxError("Invalid Receipt.");
                         return false;
                     }
                     else
                     {
-                        return rcRepository.Insert(rModel);
+                        return receiptRepository.Insert(receiptModel);
                     }
                 }
                 else
                 {
-                    return rcRepository.Insert(rModel);
+                    return receiptRepository.Insert(receiptModel);
                 }
             }
             catch (Exception ex)

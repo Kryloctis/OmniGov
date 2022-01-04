@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Reports.PaymentCollection;
+using AccountingSystem.Views.Reports.RCD.Liquidating;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,6 @@ namespace AccountingSystem.Views.Reports.RCD
 {
     public partial class frmRCD : Form
     {
-
         internal ushort collectorId;
         internal int collectorsReportId;
         internal sbyte fundId;
@@ -19,11 +19,7 @@ namespace AccountingSystem.Views.Reports.RCD
         internal string rcdNo;
         internal string rcdId;
         internal short reportQuantity;
-
-
         internal DateTime date;
-
-
         private List<GeneralCollectionsModel> data;
 
         public frmRCD()
@@ -81,9 +77,6 @@ namespace AccountingSystem.Views.Reports.RCD
 
                     dgListOfApprovedReport.Rows.Add(reportRow);
                 }
-
-
-
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -201,7 +194,8 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            _ = new frmCDReport(rcdId).ShowDialog();
+            string reportNo = txtRCDNo.Text.Trim();
+            _ = new frmLiquidatingRCD(reportNo).ShowDialog();
         }
 
         private void btnRemove_Click(object sender, EventArgs e)

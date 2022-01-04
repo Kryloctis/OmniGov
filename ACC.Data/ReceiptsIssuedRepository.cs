@@ -16,6 +16,10 @@ namespace ACC.Data
         private readonly string tableName3 = "collecting_officers";
         private readonly string tableName4 = "accountable_forms";
         private readonly string tableName5 = "receipts";
+
+        private readonly string viewTableName = "view_receipts_issued";
+
+
         public ReceiptsIssuedRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -109,7 +113,7 @@ namespace ACC.Data
                     $"{tableName}.date_issued," +
                     $"{tableName}.quantity," +
                     $"{tableName}.last_issued," +
-                    $"IF(IFNULL({tableName}.is_returned,0)>0,'YES','NO') AS returned," +
+                    $"IF(IFNULL({tableName}.is_returned,0)>0,'Yes','No') AS returned," +
                     $"{tableName}.returned_date," +
                     $"CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS officer " +
                     $"FROM {tableName} LEFT JOIN {tableName5} ON {tableName}.receipts_id={tableName5}.id " +
@@ -176,6 +180,8 @@ namespace ACC.Data
             try
             {
                 string query = $"SELECT * FROM {tableName4} WHERE id IN (SELECT {tableName5}.accountable_forms_id FROM {tableName5} LEFT JOIN {tableName} ON {tableName}.receipts_id={tableName5}.id LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id WHERE {tableName}.collecting_officers_id='{id}' AND IF(IFNULL({tableName}.is_returned,0)>0,1,0)=0 AND IF({tableName}.issueto={tableName}.last_issued,true,false)=false)";
+
+
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
@@ -404,5 +410,32 @@ namespace ACC.Data
             }
         }
 
+        public DataTable GetAccountabilityForAccountableForms()
+        {
+            try
+            {
+                string query =  $"SELECT " +
+                                $"accountable_forms, " +
+                                $"(MAX(issueto) - MIN(issuefrom) + 1) quantity, " +
+                                $"MIN(issuefrom) serial_no_from, " +
+                                $"MAX(issueto) serial_no_to, " +
+                                $"((issueto - issuefrom) + 1) issue_quantity, " +
+                                $"issuefrom, " +
+                                $"issueto, " +
+                                $"(issueto - last_issued) ending_balance_quantity, " +
+                                $"(last_issued + 1) ending_balance_serial_from, " +
+                                $"(issueto) ending_balance_serial_to " +
+                                $"FROM {viewTableName} " +
+                                $"GROUP BY collecting_officer_id ";
+
+                var dt = new DataTable();
+                return _dbGenericCommands.Fill(query, dt);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

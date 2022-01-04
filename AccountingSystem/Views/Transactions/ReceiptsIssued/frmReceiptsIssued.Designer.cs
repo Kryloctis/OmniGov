@@ -144,7 +144,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.dgissue.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgissue.Size = new System.Drawing.Size(1039, 474);
             this.dgissue.TabIndex = 8;
-            this.dgissue.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgissue_CellDoubleClick);
             this.dgissue.SelectionChanged += new System.EventHandler(this.dgissue_SelectionChanged);
             // 
             // statusStrip1

@@ -22,20 +22,63 @@ namespace AccountingSystem.Views.Transactions.RCI
         public ucRCI()
         {
             InitializeComponent();
-            Helper.DatagridFullRowSelectStyle(dgObligationNoList, true);
+            Helper.DatagridFullRowSelectStyle(dgObligationNoList,  true);
         }
 
         private void ucRCI_Load(object sender, EventArgs e)
         {
-
+            if (!DesignMode)
+            {
+                
+            }
         }
+        internal void LoadFPP()
+        {
+            try
+            {
+                cmbFPP.DroppedDown = false;
+                Cursor.Current = Cursors.Default;
+
+                if (DataTableFPP().Rows.Count == 0) return;
+
+                var fppDict = new Dictionary<int, string>();
+                foreach (DataRow item in DataTableFPP().Rows)
+                {
+                    int fppId = Convert.ToInt32(item["id"]);
+                    string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
+
+                    fppDict.Add(fppId, fppName);
+                }
+
+                cmbFPP.DataSource = new BindingSource(fppDict, null);
+                cmbFPP.DisplayMember = "value";
+                cmbFPP.ValueMember = "key";
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private DataTable DataTableFPP()
+        {
+            DataTable dtFPP;
+
+            if (string.IsNullOrEmpty(cmbFPP.Text))
+                dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
+            else
+                dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbFPP.Text);
+
+            return dtFPP;
+        }
+
         internal string GetFormErrors()
         {
             var errorArray = new string[12];
             errorArray[0] = errorProvider.GetError(txtObno);
             errorArray[1] = errorProvider.GetError(txtdvno);
             errorArray[2] = errorProvider.GetError(cmbfund);
-            errorArray[3] = errorProvider.GetError(txtfunction);
+            errorArray[3] = errorProvider.GetError(cmbFPP);
             errorArray[4] = errorProvider.GetError(cmbbank);
             errorArray[5] = errorProvider.GetError(txtcheckno);
             errorArray[6] = errorProvider.GetError(dtcheckdate);
@@ -51,7 +94,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             txtdvno.Clear();
             bankId=fundsId=functionId=0;
             cmbbank.SelectedIndex = -1;
-            txtfunction.Clear();
+            cmbFPP.SelectedIndex = -1;
             cmbfund.SelectedIndex = -1;
             txtcheckno.Clear();
             dtcheckdate.Value = DateTime.Now;
@@ -96,7 +139,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                         var functionRepository = Factory.FunctionProgramProjectRepository();
                         var functionData = functionRepository.GetRecordByID(Id);
                         functionId = Convert.ToInt16(functionData["id"]);
-                        txtfunction.Text = String.Format("{0} - {1}", functionData["fpp_code"], functionData["fpp_name"]);
+                        cmbFPP.Text = String.Format("{0} - {1}", functionData["fpp_code"], functionData["fpp_name"]);
                     }
                 }
 
@@ -106,7 +149,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         public void loadSelectedFunction(int Id,string value)
         {
             functionId = Id;
-            txtfunction.Text = value;
+            cmbFPP.Text = value;
         }
         private void btncharge_Click(object sender, EventArgs e)
         {
@@ -117,14 +160,14 @@ namespace AccountingSystem.Views.Transactions.RCI
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtdvno, "disbursement no.");
         }
 
-        private void txtfunction_Validating(object sender, CancelEventArgs e)
+        private void cmbFPP_Validating_1(object sender, CancelEventArgs e)
         {
-            if (!txtfunction.Focused)
+            if (!cmbFPP.Focused)
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtfunction, "fpp.");
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbFPP, "fpp.");
                 if (functionId <= 0)
                 {
-                    errorProvider.SetError(txtfunction, "Please select function!");
+                    errorProvider.SetError(cmbFPP, "Please select function!");
                     e.Cancel = true;
                 }
             }
@@ -132,8 +175,14 @@ namespace AccountingSystem.Views.Transactions.RCI
             {
                 e.Cancel = false;
             }
-            
         }
+
+        private void cmbFPP_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider, cmbFPP);
+        }
+
+
         private void txtcheckno_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtcheckno, "check no.!");
@@ -162,10 +211,6 @@ namespace AccountingSystem.Views.Transactions.RCI
         }
 
      
-        private void txtfunction_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider, txtfunction);
-        }
 
         private void txtcheckno_Validated(object sender, EventArgs e)
         {
@@ -223,7 +268,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             txtObno.Focus();
         }
 
-        private void txtfunction_DoubleClick(object sender, EventArgs e)
+        private void cmbFPP_DoubleClick(object sender, EventArgs e)
         {
             _ = new frmFind(this,  "functions").ShowDialog();
         }
@@ -242,5 +287,27 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             btnAdd.Enabled = !string.IsNullOrEmpty(txtObno.Text.Trim());
         }
+
+        private void cmbFPP_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && !string.IsNullOrEmpty(cmbFPP.Text) && cmbFPP.Focused)
+            {
+                LoadFPP();
+                cmbFPP.DroppedDown = true;
+            }
+        }
+
+        internal void cmbxFPP_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbFPP.Text))
+            {
+                cmbFPP.TextChanged -= new EventHandler(cmbxFPP_TextChanged);
+                LoadFPP();
+                cmbFPP.SelectedIndex = -1;
+                cmbFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
+            }
+        }
+
+
     }
 }

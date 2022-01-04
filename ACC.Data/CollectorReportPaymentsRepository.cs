@@ -299,7 +299,22 @@ namespace ACC.Data
                     new object[]{"@reportNo", DbType.String, reportNo},
                 };
 
-                string query = $"SELECT * FROM {viewTableName} WHERE report_no = @reportNO";
+                string query = $"SELECT  " +
+                    $"payment_collections_id, " +
+                    $"funds_id, " +
+                    $"fund_name, " +
+                    $"accountable_form_id, " +
+                    $"account_code, " +
+                    $"accountable_forms, " +
+                    $"general_ledger_accounts_id, " +
+                    $"ledger_name, " +
+                    $"payee, " +
+                    $"receipt_no, " +
+                    $"quantity, " +
+                    $"payment_date, " +
+                    $"amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE report_no = @reportNo";
 
                 var dtpc = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
@@ -310,6 +325,30 @@ namespace ACC.Data
             }
         }
 
-   
+        public DataTable GetCollectorsReportByReportNo(string reportNo)
+        {
+            try
+            {
+                var parameter = new object[][] {
+                    new object[]{"@reportNo", DbType.String, reportNo},
+                };
+
+                string query = $"SELECT " +
+                    $"accountable_forms,  " +
+                    $"MIN(receipt_no) serial_no_from, " +
+                    $"MAX(receipt_no) serial_no_to, " +
+                    $"SUM(amount) amount " +
+                    $"FROM {viewTableName} " +
+                    $"WHERE report_no = @reportNo " +
+                    $"GROUP BY accountable_form_id ";
+
+                var dtpc = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

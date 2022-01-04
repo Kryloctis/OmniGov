@@ -34,7 +34,8 @@ namespace AccountingSystem.Views.Manage.Receipts
                 var dtreceipts = rcRepository.GetRecords();
                 HelperLoadRecords.ReceiptsDatagridView(dtreceipts, dgreceipts);
 
-                lblRecordCount.Text = dgreceipts.Rows.Count.ToString();
+                SetToolStripStatusData();
+
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -55,7 +56,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                     var dtreceipts = rcRepository.GetRecordsBySearch(txtsearch.Text.Trim());
                     HelperLoadRecords.ReceiptsDatagridView(dtreceipts, dgreceipts);
 
-                    lblRecordCount.Text = dgreceipts.Rows.Count.ToString();
+                    SetToolStripStatusData();
                 }
                 catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             }
@@ -63,6 +64,16 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 LoadRecords();
             }
+        }
+
+        private void SetToolStripStatusData()
+        {
+            var quantity = (from DataGridViewRow row in dgreceipts.Rows
+                          where !String.IsNullOrEmpty(row.Cells["quantity"].FormattedValue.ToString())
+                          select Convert.ToDecimal(row.Cells["quantity"].FormattedValue)).Sum().ToString("N2");
+
+            lblRecordCount.Text = dgreceipts.Rows.Count.ToString();
+            lblQuantity.Text = quantity;
         }
 
         private void dgreceipts_SelectionChanged(object sender, EventArgs e)
@@ -130,5 +141,6 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             btnEdit.PerformClick();
         }
+
     }
 }

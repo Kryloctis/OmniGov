@@ -46,7 +46,10 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private void frmCollectorsRCDSearch_Load(object sender, EventArgs e)
         {
             cmbstatus.SelectedIndex = 1;
+
+            cmbfunds.SelectedValueChanged -= new EventHandler(cmbfunds_SelectedValueChanged);
             LoadFunds();
+            cmbfunds.SelectedValueChanged += new EventHandler(cmbfunds_SelectedValueChanged);
             LoadRecords();
 
 
@@ -58,15 +61,13 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             try
             {
                 string status = cmbstatus.Text.ToLower();
-                byte fundId = (byte)(cmbfunds.SelectedValue != null ? Convert.ToByte(cmbfunds.SelectedValue.ToString()) : 0);
+                byte fundId = Convert.ToByte(cmbfunds.SelectedValue);
                 string keySearch = txtsearch.Text;
-                //byte collectingOfficerId = (byte)_frmCollectorsRCD.ucCollectorsRCD1.collectorId;
 
                 var colectorRepository = Factory.CollectorReportRepository();
                 var dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch);
 
                 HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgCollectorsReport);
-
 
                 if (dgCollectorsReport.Rows.Count == 0)
                 {
@@ -86,22 +87,23 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private void dgCollectorsReport_SelectionChanged(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in dgCollectorsReport.SelectedRows)
-            {
                 reportNo = row.Cells[1].Value.ToString();
-            }
         }
        
         private void btnSelect_Click(object sender, EventArgs e)
         {
             _frmCollectorsRCD.LoadSelectedValue(reportNo);
             _frmCollectorsRCD.CheckRCDStatus(reportNo);
+            _frmCollectorsRCD.btnSave.Enabled = false;
+            _frmCollectorsRCD.btnDelete.Enabled = false;
 
             _uc.TotalCollections();
-            _uc.cmbcollector.Enabled = false;
+            _uc.ActionPerformIsSave(false);
+            _uc.cmbCollector.Enabled = false;
             _uc.txtReport.Enabled = false;
             _uc.dgPayments.Enabled = false;
-
-            _uc.ActionPerformIsSave(false);
+            _uc.dtRCDDate.Enabled = false;
+            _uc.groubBoxFund.Enabled = false;
 
             this.Close();
         }
@@ -116,5 +118,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             LoadRecords();
         }
 
+        private void cmbfunds_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
     }
 }

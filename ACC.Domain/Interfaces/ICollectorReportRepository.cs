@@ -30,6 +30,8 @@ namespace ACC.Domain.Interfaces
         DataTable FilterRecords(string status, byte fundId, string keySearch);
 
         DataTable FilterRecords(sbyte fundId, ushort collectorId, string reportNo);
+        DataTable GetRecordsByReportNumber(string reportNumber);
+        DataTable GetCollectorsReportByReportNo(string reportNumber);
 
         string GetRCDStatus(string reportNo);
 

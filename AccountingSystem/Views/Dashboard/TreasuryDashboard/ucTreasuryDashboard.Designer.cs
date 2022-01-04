@@ -30,13 +30,12 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         private void InitializeComponent()
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.btnReceipts = new System.Windows.Forms.ToolStripButton();
             this.btnIssueReceipt = new System.Windows.Forms.ToolStripButton();
             this.btnIssueCheck = new System.Windows.Forms.ToolStripButton();
             this.btnPaymentCollection = new System.Windows.Forms.ToolStripButton();
             this.btnBankDeposit = new System.Windows.Forms.ToolStripButton();
             this.btnReportCollections = new System.Windows.Forms.ToolStripButton();
-            this.btnGenerateRCD = new System.Windows.Forms.ToolStripButton();
+            this.btnRCD = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.btnReportOfCollections = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2.SuspendLayout();
@@ -56,16 +55,6 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 0;
             // 
-            // btnReceipts
-            // 
-            this.btnReceipts.Image = global::AccountingSystem.Properties.Resources.document_delivery_receipt_signed_24px;
-            this.btnReceipts.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnReceipts.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnReceipts.Name = "btnReceipts";
-            this.btnReceipts.Size = new System.Drawing.Size(79, 32);
-            this.btnReceipts.Text = "Receipts";
-            this.btnReceipts.Click += new System.EventHandler(this.btnReceipts_Click);
-            // 
             // btnIssueReceipt
             // 
             this.btnIssueReceipt.Image = global::AccountingSystem.Properties.Resources.document_delivery_receipt_user_24px;
@@ -83,8 +72,8 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.btnIssueCheck.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnIssueCheck.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
             this.btnIssueCheck.Name = "btnIssueCheck";
-            this.btnIssueCheck.Size = new System.Drawing.Size(97, 32);
-            this.btnIssueCheck.Text = "Issue Check";
+            this.btnIssueCheck.Size = new System.Drawing.Size(116, 32);
+            this.btnIssueCheck.Text = "Check Issuance";
             this.btnIssueCheck.Click += new System.EventHandler(this.BtnRCI_Click);
             // 
             // btnPaymentCollection
@@ -119,16 +108,16 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.btnReportCollections.Size = new System.Drawing.Size(150, 32);
             this.btnReportCollections.Text = "Report of Collections";
             // 
-            // btnGenerateRCD
+            // btnRCD
             // 
-            this.btnGenerateRCD.Image = global::AccountingSystem.Properties.Resources.report_24px;
-            this.btnGenerateRCD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnGenerateRCD.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnGenerateRCD.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
-            this.btnGenerateRCD.Name = "btnGenerateRCD";
-            this.btnGenerateRCD.Size = new System.Drawing.Size(217, 28);
-            this.btnGenerateRCD.Text = "Reports of Collection and Deposits";
-            this.btnGenerateRCD.Click += new System.EventHandler(this.btnGenerateRCD_Click);
+            this.btnRCD.Image = global::AccountingSystem.Properties.Resources.report_24px;
+            this.btnRCD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnRCD.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRCD.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
+            this.btnRCD.Name = "btnRCD";
+            this.btnRCD.Size = new System.Drawing.Size(217, 32);
+            this.btnRCD.Text = "Reports of Collection and Deposits";
+            this.btnRCD.Click += new System.EventHandler(this.btnGenerateRCD_Click);
             // 
             // toolStrip2
             // 
@@ -136,13 +125,12 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnReceipts,
             this.btnIssueReceipt,
-            this.btnIssueCheck,
             this.btnPaymentCollection,
+            this.btnIssueCheck,
             this.btnBankDeposit,
             this.btnReportOfCollections,
-            this.btnGenerateRCD});
+            this.btnRCD});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(933, 35);
@@ -181,9 +169,8 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         internal System.Windows.Forms.ToolStripButton btnIssueCheck;
         internal System.Windows.Forms.ToolStripButton btnPaymentCollection;
         internal System.Windows.Forms.ToolStripButton btnBankDeposit;
-        internal System.Windows.Forms.ToolStripButton btnGenerateRCD;
+        internal System.Windows.Forms.ToolStripButton btnRCD;
         internal System.Windows.Forms.ToolStripButton btnIssueReceipt;
-        internal System.Windows.Forms.ToolStripButton btnReceipts;
         internal System.Windows.Forms.TabControl tabControl1;
         internal System.Windows.Forms.ToolStripButton btnReportCollections;
         private System.Windows.Forms.ToolStripButton btnReportOfCollections;

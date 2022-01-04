@@ -125,11 +125,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             }
         }
 
-        private void dgissue_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            btnEdit.PerformClick();
-        }
-
         private void btnReturn_Click(object sender, EventArgs e)
         {
             if(dgissue.SelectedRows.Count > 0)
@@ -139,9 +134,5 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             }
         }
 
-        private void dgissue_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-           //btnEdit.PerformClick();
-        }
     }
 }

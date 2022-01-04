@@ -58,7 +58,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.ucCollectorsRCD1.Name = "ucCollectorsRCD1";
             this.ucCollectorsRCD1.Size = new System.Drawing.Size(916, 520);
             this.ucCollectorsRCD1.TabIndex = 0;
-            this.ucCollectorsRCD1.Load += new System.EventHandler(this.ucCollectorsRCD1_Load);
             // 
             // toolStrip1
             // 

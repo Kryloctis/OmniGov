@@ -38,6 +38,8 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblQuantity = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtsearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
@@ -130,7 +132,9 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
-            this.lblRecordCount});
+            this.lblRecordCount,
+            this.toolStripStatusLabel2,
+            this.lblQuantity});
             this.statusStrip1.Location = new System.Drawing.Point(0, 540);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
@@ -141,8 +145,8 @@ namespace AccountingSystem.Views.Manage.Receipts
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
-            this.toolStripStatusLabel1.Text = "Records:";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(55, 17);
+            this.toolStripStatusLabel1.Text = "Records :";
             // 
             // lblRecordCount
             // 
@@ -150,13 +154,25 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
             this.lblRecordCount.Text = "0";
             // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(62, 17);
+            this.toolStripStatusLabel2.Text = " Quantity :";
+            // 
+            // lblQuantity
+            // 
+            this.lblQuantity.Name = "lblQuantity";
+            this.lblQuantity.Size = new System.Drawing.Size(13, 17);
+            this.lblQuantity.Text = "0";
+            // 
             // txtsearch
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(754, 22);
+            this.txtsearch.Location = new System.Drawing.Point(819, 22);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.Size = new System.Drawing.Size(294, 23);
+            this.txtsearch.Size = new System.Drawing.Size(229, 23);
             this.txtsearch.TabIndex = 10;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
@@ -164,7 +180,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(705, 25);
+            this.label1.Location = new System.Drawing.Point(768, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 15);
             this.label1.TabIndex = 11;
@@ -211,5 +227,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         private System.Windows.Forms.TextBox txtsearch;
         private System.Windows.Forms.ToolStripButton btnRefresh;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel lblQuantity;
     }
 }

@@ -38,9 +38,11 @@ namespace AccountingSystem.Views.Reports.RCI
         private DataTable DataTableRCI()
         {
             int bankId = (int)cmbBanks.SelectedValue;
-            var dateYearMonth = String.Format("{0:MMMM}-{0:yyyy}",Convert.ToDateTime(dtpMonth.Value));
+            var dateYearMonth = Convert.ToDateTime(dtpMonth.Value).ToString("MM/yyyy");
+
+
             var dtRCI = new dsLFS.dtRCIDataTable();
-            var dt = Factory.RCIRepository().GetRecordsbyaccountid(bankId, dateYearMonth);
+            var dt = Factory.RCIRepository().GetRecordsByAccountId(bankId, dateYearMonth);
             if(dt.Rows.Count > 0)
             {
                 foreach(DataRow item in dt.Rows)
@@ -56,8 +58,6 @@ namespace AccountingSystem.Views.Reports.RCI
                     row["nature_of_payment"] = item["nature_of_payment"];
                     row["dv_no"] = item["dv_no"];
                     row["obligation_no"] = item["obligation_no"];
-                    row["trust_liabilities"] = item["trust_liabilities"];
-                    row["bir_vat_nonvat"] = item["bir_vat_nonvat"];
                     row["amount"] = item["amount"];
                     row["fpp_code"] = item["fpp_code"];
                     dtRCI.Rows.Add(row);
@@ -100,19 +100,13 @@ namespace AccountingSystem.Views.Reports.RCI
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
             if (cmbBanks.SelectedIndex == -1)
-            {
                 Helper.MessageBoxError("Please select Bank!");
-                cmbBanks.Focus();
-            }
-            else
-            {
-                LoadReport(reportViewer.LocalReport);
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-                reportViewer.RefreshReport();
-            }
-         
+              
+            LoadReport(reportViewer.LocalReport);
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.Percent;
+            reportViewer.ZoomPercent = 100;
+            reportViewer.RefreshReport();
         }
     }
 }

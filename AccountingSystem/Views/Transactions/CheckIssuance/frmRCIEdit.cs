@@ -83,7 +83,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                         var functionreposity = Factory.FunctionProgramProjectRepository();
                         var functiondata = functionreposity.GetRecordByID(Id);
                         uc.functionId = Id;
-                        uc.txtfunction.Text = String.Format("{0} - {1}", functiondata["fpp_code"], functiondata["fpp_name"]);
+                        uc.cmbFPP.Text = String.Format("{0} - {1}", functiondata["fpp_code"], functiondata["fpp_name"]);
                     }
 
                 }
