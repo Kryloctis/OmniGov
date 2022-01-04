@@ -11,11 +11,11 @@ namespace ACC.Data
     public class ReceiptsIssuedRepository:IReceiptsIssuedRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
-        private readonly string tableName = "receipts_issued";
-        private readonly string tableName2 = "users";
-        private readonly string tableName3 = "collecting_officers";
-        private readonly string tableName4 = "accountable_forms";
-        private readonly string tableName5 = "receipts";
+        private readonly string tableReceiptsIssued = "receipts_issued";
+        private readonly string tableUsers = "users";
+        private readonly string tableCollectingOfficers = "collecting_officers";
+        private readonly string tableAccountableForms = "accountable_forms";
+        private readonly string tableReceipts = "receipts";
 
         private readonly string viewTableName = "view_receipts_issued";
 
@@ -35,7 +35,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT * FROM {tableName} id = @id";
+                string query = $"SELECT * FROM {tableReceiptsIssued} id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -65,7 +65,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT COUNT(*) FROM {tableName}";
+                string query = $"SELECT COUNT(*) FROM {tableReceiptsIssued}";
 
                 return int.Parse(_dbGenericCommands.ExecuteScalar(query));
             }
@@ -88,7 +88,7 @@ namespace ACC.Data
                             new object[] { "@id", DbType.Int32, entity.Id},
                         };
 
-                        string query = $"DELETE FROM {tableName} WHERE id = @id";
+                        string query = $"DELETE FROM {tableReceiptsIssued} WHERE id = @id";
                         _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
                     }
 
@@ -105,22 +105,22 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableName}.id," +
-                    $"CONCAT({tableName3}.last_name,', ',{tableName3}.first_name,' ',{tableName3}.mid_initial) AS collector," +
-                    $"CONCAT({tableName4}.acc_form_no,' - ',{tableName4}.acc_form_desc) AS receipt," +
-                    $"{tableName}.issuefrom," +
-                    $"{tableName}.issueto," +
-                    $"{tableName}.date_issued," +
-                    $"{tableName}.quantity," +
-                    $"{tableName}.last_issued," +
-                    $"IF(IFNULL({tableName}.is_returned,0)>0,'Yes','No') AS returned," +
-                    $"{tableName}.returned_date," +
-                    $"CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS officer " +
-                    $"FROM {tableName} LEFT JOIN {tableName5} ON {tableName}.receipts_id={tableName5}.id " +
-                    $"LEFT JOIN {tableName2} ON {tableName5}.users_id={tableName2}.id " +
-                    $"LEFT JOIN {tableName3} ON {tableName}.collecting_officers_id={tableName3}.id " +
-                    $"LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id " +
-                    $"ORDER BY {tableName}.date_issued DESC";
+                string query = $"SELECT {tableReceiptsIssued}.id," +
+                    $"CONCAT({tableCollectingOfficers}.last_name,', ',{tableCollectingOfficers}.first_name,' ',{tableCollectingOfficers}.mid_initial) AS collector," +
+                    $"CONCAT({tableAccountableForms}.acc_form_no,' - ',{tableAccountableForms}.acc_form_desc) AS receipt," +
+                    $"{tableReceiptsIssued}.issuefrom," +
+                    $"{tableReceiptsIssued}.issueto," +
+                    $"{tableReceiptsIssued}.date_issued," +
+                    $"{tableReceiptsIssued}.quantity," +
+                    $"{tableReceiptsIssued}.last_issued," +
+                    $"IF(IFNULL({tableReceiptsIssued}.is_returned,0)>0,'Yes','No') AS returned," +
+                    $"{tableReceiptsIssued}.returned_date," +
+                    $"CONCAT({tableUsers}.last_name,', ',{tableUsers}.first_name,' ',{tableUsers}.mid_initial) AS officer " +
+                    $"FROM {tableReceiptsIssued} LEFT JOIN {tableReceipts} ON {tableReceiptsIssued}.receipts_id={tableReceipts}.id " +
+                    $"LEFT JOIN {tableUsers} ON {tableReceipts}.users_id={tableUsers}.id " +
+                    $"LEFT JOIN {tableCollectingOfficers} ON {tableReceiptsIssued}.collecting_officers_id={tableCollectingOfficers}.id " +
+                    $"LEFT JOIN {tableAccountableForms} ON {tableReceipts}.accountable_forms_id={tableAccountableForms}.id " +
+                    $"ORDER BY {tableReceiptsIssued}.date_issued DESC";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
@@ -135,10 +135,10 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName5} " +
-                    $"LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id " +
-                    $"WHERE ({tableName5}.receiptsto<>IFNULL((SELECT SUM(IF(IFNULL(ri.last_issued,0)>0,ri.issueto-ri.last_issued,0)) FROM {tableName} ri WHERE ri.receipts_id={tableName5}.id),0) OR {tableName5}.quantity<>IFNULL((SELECT SUM(ri.quantity) FROM {tableName} ri LEFT JOIN {tableName5} r ON ri.receipts_id=r.id LEFT JOIN {tableName4} af ON r.accountable_forms_id=af.id WHERE r.id=receipts.id),0))" +
-                    $"AND {tableName5}.id NOT IN (SELECT {tableName}.receipts_id FROM {tableName} WHERE {tableName}.collecting_officers_id='{id}' AND IF(IFNULL({tableName}.is_returned,0)>0,1,0)=0)";
+                string query = $"SELECT * FROM {tableReceipts} " +
+                    $"LEFT JOIN {tableAccountableForms} ON {tableReceipts}.accountable_forms_id={tableAccountableForms}.id " +
+                    $"WHERE ({tableReceipts}.receiptsto<>IFNULL((SELECT SUM(IF(IFNULL(ri.last_issued,0)>0,ri.issueto-ri.last_issued,0)) FROM {tableReceiptsIssued} ri WHERE ri.receipts_id={tableReceipts}.id),0) OR {tableReceipts}.quantity<>IFNULL((SELECT SUM(ri.quantity) FROM {tableReceiptsIssued} ri LEFT JOIN {tableReceipts} r ON ri.receipts_id=r.id LEFT JOIN {tableAccountableForms} af ON r.accountable_forms_id=af.id WHERE r.id=receipts.id),0))" +
+                    $"AND {tableReceipts}.id NOT IN (SELECT {tableReceiptsIssued}.receipts_id FROM {tableReceiptsIssued} WHERE {tableReceiptsIssued}.collecting_officers_id='{id}' AND IF(IFNULL({tableReceiptsIssued}.is_returned,0)>0,1,0)=0)";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
@@ -153,18 +153,18 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableName}.id," +
-                    $"CONCAT({tableName4}.acc_form_no,' - ',{tableName4}.acc_form_desc) AS receipt," +
-                    $"{tableName}.issuefrom," +
-                    $"{tableName}.issueto," +
-                    $"{tableName}.date_issued," +
-                    $"{tableName}.quantity," +
-                    $"{tableName}.last_issued," +
-                    $"IF(IFNULL({tableName}.is_returned,0)>0,'YES','NO') AS returned," +
-                    $"{tableName}.returned_date " +
-                    $"FROM {tableName5} LEFT JOIN {tableName} ON {tableName}.receipts_id={tableName5}.id " +
-                    $"LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id " +
-                    $"WHERE {tableName}.collecting_officers_id='{coid}' AND {tableName5}.accountable_forms_id='{formid}' AND IF(IFNULL({tableName}.is_returned,0)>0,1,0)=0 AND IF({tableName}.issueto={tableName}.last_issued,true,false)=false";
+                string query = $"SELECT {tableReceiptsIssued}.id," +
+                    $"CONCAT({tableAccountableForms}.acc_form_no,' - ',{tableAccountableForms}.acc_form_desc) AS receipt," +
+                    $"{tableReceiptsIssued}.issuefrom," +
+                    $"{tableReceiptsIssued}.issueto," +
+                    $"{tableReceiptsIssued}.date_issued," +
+                    $"{tableReceiptsIssued}.quantity," +
+                    $"{tableReceiptsIssued}.last_issued," +
+                    $"IF(IFNULL({tableReceiptsIssued}.is_returned,0)>0,'YES','NO') AS returned," +
+                    $"{tableReceiptsIssued}.returned_date " +
+                    $"FROM {tableReceipts} LEFT JOIN {tableReceiptsIssued} ON {tableReceiptsIssued}.receipts_id={tableReceipts}.id " +
+                    $"LEFT JOIN {tableAccountableForms} ON {tableReceipts}.accountable_forms_id={tableAccountableForms}.id " +
+                    $"WHERE {tableReceiptsIssued}.collecting_officers_id='{coid}' AND {tableReceipts}.accountable_forms_id='{formid}' AND IF(IFNULL({tableReceiptsIssued}.is_returned,0)>0,1,0)=0 AND IF({tableReceiptsIssued}.issueto={tableReceiptsIssued}.last_issued,true,false)=false";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
@@ -179,12 +179,24 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {tableName4} WHERE id IN (SELECT {tableName5}.accountable_forms_id FROM {tableName5} LEFT JOIN {tableName} ON {tableName}.receipts_id={tableName5}.id LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id WHERE {tableName}.collecting_officers_id='{id}' AND IF(IFNULL({tableName}.is_returned,0)>0,1,0)=0 AND IF({tableName}.issueto={tableName}.last_issued,true,false)=false)";
+                var parameter = new object[][] {
+                    new object[]{"@collectingOfficerId", DbType.String, id }
+                };
 
-
+                string query = $"SELECT " +
+                                $"af.id, " +
+                                $"af.acc_form_no, " +
+                                $"af.acc_form_desc, " +
+                                $"ri.quantity " +
+                                $"FROM accountable_forms af " +
+                                $"INNER JOIN receipts r " +
+                                $"ON r.accountable_forms_id = af.id " +
+                                $"INNER JOIN receipts_issued ri " +
+                                $"ON ri.receipts_id = r.id " +
+                                $"WHERE ri.collecting_officers_id = @collectingOfficerId";
 
                 var dtri = new DataTable();
-                return _dbGenericCommands.Fill(query, dtri);
+                return _dbGenericCommands.FillBySearch(query, dtri, parameter);
             }
             catch (Exception)
             {
@@ -196,26 +208,26 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableName}.id," +
-                    $"CONCAT({tableName3}.last_name,', ',{tableName3}.first_name,' ',{tableName3}.mid_initial) AS collector," +
-                    $"CONCAT({tableName4}.acc_form_no,' - ',{tableName4}.acc_form_desc) AS receipt," +
-                    $"{tableName}.issuefrom," +
-                    $"{tableName}.issueto," +
-                    $"{tableName}.date_issued," +
-                    $"{tableName}.quantity," +
-                    $"{tableName}.last_issued," +
-                    $"IF(IFNULL({tableName}.is_returned,0)>0,'YES','NO') AS returned," +
-                    $"{tableName}.returned_date," +
-                    $"CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) AS officer " +
-                    $"FROM {tableName} LEFT JOIN {tableName5} ON {tableName}.receipts_id={tableName5}.id " +
-                    $"LEFT JOIN {tableName2} ON {tableName5}.users_id={tableName2}.id " +
-                    $"LEFT JOIN {tableName3} ON {tableName}.collecting_officers_id={tableName3}.id " +
-                    $"LEFT JOIN {tableName4} ON {tableName5}.accountable_forms_id={tableName4}.id " +
-                    $"WHERE {tableName5}.receiptsfrom LIKE '%{searchText}%' " +
-                    $"OR {tableName5}.receiptsto LIKE '%{searchText}%' " +
-                    $"OR CONCAT({tableName3}.last_name,', ',{tableName3}.first_name,' ',{tableName3}.mid_initial) LIKE '%{searchText}%' " +
-                    $"OR CONCAT({tableName2}.last_name,', ',{tableName2}.first_name,' ',{tableName2}.mid_initial) LIKE '%{searchText}%' " +
-                    $"OR CONCAT({tableName4}.acc_form_no,' - ',{tableName4}.acc_form_desc) LIKE '%{searchText}%' ORDER BY {tableName}.date_issued DESC";
+                string query = $"SELECT {tableReceiptsIssued}.id," +
+                    $"CONCAT({tableCollectingOfficers}.last_name,', ',{tableCollectingOfficers}.first_name,' ',{tableCollectingOfficers}.mid_initial) AS collector," +
+                    $"CONCAT({tableAccountableForms}.acc_form_no,' - ',{tableAccountableForms}.acc_form_desc) AS receipt," +
+                    $"{tableReceiptsIssued}.issuefrom," +
+                    $"{tableReceiptsIssued}.issueto," +
+                    $"{tableReceiptsIssued}.date_issued," +
+                    $"{tableReceiptsIssued}.quantity," +
+                    $"{tableReceiptsIssued}.last_issued," +
+                    $"IF(IFNULL({tableReceiptsIssued}.is_returned,0)>0,'YES','NO') AS returned," +
+                    $"{tableReceiptsIssued}.returned_date," +
+                    $"CONCAT({tableUsers}.last_name,', ',{tableUsers}.first_name,' ',{tableUsers}.mid_initial) AS officer " +
+                    $"FROM {tableReceiptsIssued} LEFT JOIN {tableReceipts} ON {tableReceiptsIssued}.receipts_id={tableReceipts}.id " +
+                    $"LEFT JOIN {tableUsers} ON {tableReceipts}.users_id={tableUsers}.id " +
+                    $"LEFT JOIN {tableCollectingOfficers} ON {tableReceiptsIssued}.collecting_officers_id={tableCollectingOfficers}.id " +
+                    $"LEFT JOIN {tableAccountableForms} ON {tableReceipts}.accountable_forms_id={tableAccountableForms}.id " +
+                    $"WHERE {tableReceipts}.receiptsfrom LIKE '%{searchText}%' " +
+                    $"OR {tableReceipts}.receiptsto LIKE '%{searchText}%' " +
+                    $"OR CONCAT({tableCollectingOfficers}.last_name,', ',{tableCollectingOfficers}.first_name,' ',{tableCollectingOfficers}.mid_initial) LIKE '%{searchText}%' " +
+                    $"OR CONCAT({tableUsers}.last_name,', ',{tableUsers}.first_name,' ',{tableUsers}.mid_initial) LIKE '%{searchText}%' " +
+                    $"OR CONCAT({tableAccountableForms}.acc_form_no,' - ',{tableAccountableForms}.acc_form_desc) LIKE '%{searchText}%' ORDER BY {tableReceiptsIssued}.date_issued DESC";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
@@ -235,7 +247,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, id },
                 };
 
-                string query = $"SELECT id FROM {tableName} WHERE id = @id";
+                string query = $"SELECT id FROM {tableReceiptsIssued} WHERE id = @id";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -261,7 +273,7 @@ namespace ACC.Data
                     new object[] { "@issueto", DbType.Int32, entity.IssuedTo }
                 };
 
-               string query = $"SELECT id FROM {tableName} WHERE receipts_id=@receipts_id AND issuefrom=@issuefrom AND issueto=@issueto AND IF(IFNULL(is_returned,0)<1,false,true)=false";
+               string query = $"SELECT id FROM {tableReceiptsIssued} WHERE receipts_id=@receipts_id AND issuefrom=@issuefrom AND issueto=@issueto AND IF(IFNULL(is_returned,0)<1,false,true)=false";
 
 
 
@@ -287,7 +299,7 @@ namespace ACC.Data
                     new object[] { "@receipts_id", DbType.Int32, id },
                 };
 
-                string query = $"SELECT * FROM {tableName} WHERE {tableName}.collecting_officers_id = @collecting_officers_id AND {tableName}.receipts_id=@receipts_id AND IF(IFNULL({tableName}.is_returned,0)<1,false,true)=true";
+                string query = $"SELECT * FROM {tableReceiptsIssued} WHERE {tableReceiptsIssued}.collecting_officers_id = @collecting_officers_id AND {tableReceiptsIssued}.receipts_id=@receipts_id AND IF(IFNULL({tableReceiptsIssued}.is_returned,0)<1,false,true)=true";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -310,7 +322,7 @@ namespace ACC.Data
                     new object[] { "@receipts_id", DbType.Int32, id },
                 };
 
-                string query = $"SELECT * FROM {tableName} WHERE receipts_id=@receipts_id";
+                string query = $"SELECT * FROM {tableReceiptsIssued} WHERE receipts_id=@receipts_id";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -338,7 +350,7 @@ namespace ACC.Data
                     new object[] { "@quantity", DbType.Int32, entity.Quantity}
                 };
 
-                string query = $"INSERT INTO {tableName} (receipts_id,collecting_officers_id,date_issued,issuefrom,issueto,quantity) VALUES (@receipts_id,@collecting_officers_id,@date_issued,@issuefrom,@issueto,@quantity)";
+                string query = $"INSERT INTO {tableReceiptsIssued} (receipts_id,collecting_officers_id,date_issued,issuefrom,issueto,quantity) VALUES (@receipts_id,@collecting_officers_id,@date_issued,@issuefrom,@issueto,@quantity)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -362,7 +374,7 @@ namespace ACC.Data
                     new object[] { "@quantity", DbType.Int32, entity.Quantity}
                 };
 
-                string query = $"UPDATE {tableName} SET receipts_id=@receipts_id,collecting_officers_id=@collecting_officers_id,date_issued=@date_issued,issuefrom=@issuefrom,issueto=@issueto,quantity=@quantity WHERE id = @id";
+                string query = $"UPDATE {tableReceiptsIssued} SET receipts_id=@receipts_id,collecting_officers_id=@collecting_officers_id,date_issued=@date_issued,issuefrom=@issuefrom,issueto=@issueto,quantity=@quantity WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -382,7 +394,7 @@ namespace ACC.Data
                     new object[] { "@returned_date", DbType.Date, entity.Returned_date}
                 };
 
-                string query = $"UPDATE {tableName} SET is_returned=@is_returned,returned_date=@returned_date WHERE id = @id";
+                string query = $"UPDATE {tableReceiptsIssued} SET is_returned=@is_returned,returned_date=@returned_date WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -401,7 +413,7 @@ namespace ACC.Data
                     new object[] { "@last_issued", DbType.Int32, entity.Last_issued}
                 };
 
-                string query = $"UPDATE {tableName} SET last_issued=@last_issued WHERE id = @id";
+                string query = $"UPDATE {tableReceiptsIssued} SET last_issued=@last_issued WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)

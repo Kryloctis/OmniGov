@@ -72,7 +72,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 var formRepository = Factory.ReceiptsIssuedRepository();
                 var dtforms = formRepository.GetRecordsReceipts(collectorsId.ToString());
-                dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
+                dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc + ' - ' + (quantity)");
                 cmbforms.DataSource = dtforms;
                 cmbforms.ValueMember = "id";
                 cmbforms.DisplayMember = "formdisplay";
@@ -166,7 +166,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             LoadForms(Convert.ToInt32(cmbcollector.SelectedValue));
             LoadCollectors();
             LoadFunds();
-
 
             cmbAccount.SelectedValueChanged -= cmbAccount_SelectedValueChanged;
             LoadAccounts();

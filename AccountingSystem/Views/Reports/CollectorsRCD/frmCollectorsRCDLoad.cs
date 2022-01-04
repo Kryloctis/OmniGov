@@ -91,7 +91,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnSelectCollections_Click(object sender, EventArgs e)
         {
-            HelperLoadRecords.PaymentCollectionReportDatagrid(dtPaymentCollection, _uc.dgPayments);
+            HelperLoadRecords.PaymentDatagridView(dtPaymentCollection, _uc.dgPayments);
             _uc.TotalCollections();
             this.Close();
         }

@@ -42,6 +42,8 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (uc.dgPayments.Rows.Count == 0) return;
+
             if (uc.isSaveFunction)
             {
                 if (SaveData())
@@ -62,7 +64,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private bool UpdateData()
         {
-            if (uc.dgPayments.Rows.Count == 0) return false;
 
             using (var scope = new TransactionScope())
             {

@@ -141,7 +141,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 {
                     return pcrepository.Update(pcModel);
                 }
-                
             }
             catch (Exception ex)
             {
