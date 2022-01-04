@@ -52,9 +52,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
                 bool isCashTickets = String.IsNullOrEmpty(paymentCollectionDict["receipt_no"]);
 
+
                 if (!isCashTickets)
                 {
-                    uc.SwitchFields(); //false
+                    uc.SwitchFields(); 
                     uc.txtpayee.Text = paymentCollectionDict["payee"];
                     uc.txtreceipt.Text = paymentCollectionDict["receipt_no"];
                     uc.dtdate.Value = Convert.ToDateTime(paymentCollectionDict["payment_date"]);
@@ -63,18 +64,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     uc.receipt = Convert.ToInt32(paymentCollectionDict["receipt_no"]);
                     uc.cmbcollector.Enabled = false;
                 }
-                else //Cash Tickets Fields
+                else
                 {
-                    uc.SwitchFields(); //true
+                    uc.SwitchFields(); 
                     uc.dtCashTicketDateOfCollection.Value = Convert.ToDateTime(paymentCollectionDict["payment_date"]);
                     uc.txtCashTicketQuantity.Text = paymentCollectionDict["quantity"];
                     uc.txtCashTicketsAmount.Text = Convert.ToDecimal(paymentCollectionDict["amount"]).ToString("N2");
                 }
-
-
-
-
-
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -158,18 +154,16 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             var uc = ucPaymentCollection1;
 
-            if (!uc.isCashTicket)
+            if (uc.isCashTicket)
                 UpdateCashTickets();
             else
                 UpdateReceipts();
-
         }
 
         private void UpdateCashTickets()
         {
             try
             {
-
                 var uc = ucPaymentCollection1;
 
                 uc.txtpayee.Validating -= new CancelEventHandler(uc.txtpayee_Validating);
