@@ -228,6 +228,7 @@ namespace ACC.Data
         }
 
         #region DASHBOARD BUDGET
+
         //DETAILED
         public decimal GetSumObligationsByAppropriationId(int appropriationId, DateTime dateRequested)
         {
@@ -307,6 +308,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
         #endregion
 
         private int GetLastInsertedID()
@@ -550,11 +552,23 @@ namespace ACC.Data
                 new object[] { "@date_requested", DbType.Date, dateOfRequest.Date}
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE funds_id = @funds_id AND allotment_classes_id = @allotment_classes_id AND  date_requested <= @date_requested AND {Status()} (obligation_no LIKE @searchText OR payee LIKE @searchText OR explanation = @searchText OR reference_no LIKE @searchText)";
+            string query = $"SELECT * FROM {viewTableName} WHERE funds_id = @funds_id AND allotment_classes_id = @allotment_classes_id AND  date_requested <= @date_requested AND {Status()} (obligation_no LIKE @searchText OR payee LIKE @searchText OR explanation = @searchText OR reference_no LIKE @searchText) GROUP BY obligation_request_id ORDER BY obligation_no";
 
             var dataTable = new DataTable();
 
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
+        public decimal GetSumObligations(int obligationRequestId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] {"@obligation_request_id", DbType.Int32, obligationRequestId}
+            };
+
+            string query = $"SELECT SUM(amount) FROM {viewTableName} WHERE obligation_request_id = @obligation_request_id";
+
+            return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
     }
 }
