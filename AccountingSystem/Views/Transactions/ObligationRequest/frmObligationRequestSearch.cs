@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Data;
 using System.Windows.Forms;
 
@@ -18,6 +17,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             _frmObligationRequestMain = frmObligationRequestMain;
             _ucObligationRequestMain = _frmObligationRequestMain.ucObligationRequestMain1;
             btnSelect.Enabled = false;
+            cmbxStatus.SelectedIndex = 0;
+            Helper.DatagridFullRowSelectStyle(dgObligationRequests, true);
         }
 
         private DataTable ObligationRequestsDatatable()
@@ -38,10 +39,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
             dataTable.Columns.Add("id");
             dataTable.Columns.Add("obligation_no");
+            dataTable.Columns.Add("date_requested");
             dataTable.Columns.Add("payee");
             dataTable.Columns.Add("explanation");
             dataTable.Columns.Add("reference_no");
-            dataTable.Columns.Add("date_requested");
             dataTable.Columns.Add("created_at");
             dataTable.Columns.Add("created_by_id");
             dataTable.Columns.Add("created_by_full_name");
@@ -51,7 +52,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             dataTable.Columns.Add("status");
 
             string searchTxt = txtSearch.Text.Trim();
-            var dtObligationRequests = Factory.ObligationRequestRepository().GetViewRecordsBySearch(searchTxt);
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            int allotmentClassId = Convert.ToInt32(cmbxAllotmentClasses.SelectedValue);
+            DateTime dateRequestedCoverage = dtDateRequested.Value;
+            string filterStatus = cmbxStatus.Text.Trim().ToLower();
+            var dtObligationRequests = Factory.ObligationRequestRepository().GetViewRecordsBySearchAndStatus(searchTxt, filterStatus, fundId, allotmentClassId, dateRequestedCoverage);
+
 
             foreach (DataRow row in dtObligationRequests.Rows)
             {
@@ -64,7 +70,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 bool isDisapproved = Convert.ToBoolean(row["is_disapproved"]);
                 bool isCancelled = Convert.ToBoolean(row["is_cancelled"]);
                 var status = ObligationRequestStatus(isApproved, isDisapproved, isCancelled);
-                var dateRequested = row["date_requested"].ToString();
+                var dateRequested = Convert.ToDateTime(row["date_requested"]).ToString("MMM. dd, yyyy");
                 var createdAt = row["created_at"].ToString();
                 var createdById = row["created_by_id"].ToString();
                 var createdByFullName = row["created_by_full_name"].ToString();
@@ -72,7 +78,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 var updatedById = row["updated_by_id"].ToString();
                 var updatedByFullName = row["updated_by_full_name"].ToString();
 
-                var item = new object[] { id, obligationNo, payee, explanation, referenceNo, dateRequested, createdAt, createdById, createdByFullName, updatedAt, updatedById, updatedByFullName, status };
+                var item = new object[] { id, obligationNo, dateRequested, payee, explanation, referenceNo, createdAt, createdById, createdByFullName, updatedAt, updatedById, updatedByFullName, status };
 
                 dataTable.Rows.Add(item);
             }
@@ -80,15 +86,74 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return dataTable;
         }
 
+        private void LoadFunds()
+        {
+            try
+            {
+                var dtFunds = Factory.FundsRepository().GetRecords();
+                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void LoadAllotmentClasses()
+        {
+            try
+            {
+                var dtFunds = Factory.AllotmentClassesRepository().GetRecords();
+                HelperLoadRecords.AllotmentClasssesCombobox(dtFunds, cmbxAllotmentClasses, "allotment_code", "id");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void LoadStatusColors()
+        {
+            foreach (DataGridViewRow row in dgObligationRequests.Rows)
+            {
+                var status = row.Cells["status"].Value;
+
+                switch (status.ToString().ToLower())
+                {
+                    case "approved":
+                        row.Cells["status"].Style.BackColor = Helper.StatusColor("Approved");
+                        row.Cells["status"].Style.SelectionBackColor = Helper.StatusColor("Approved");
+                        break;
+
+                    case "disapproved":
+                        row.Cells["status"].Style.BackColor = Helper.StatusColor("Disapproved");
+                        row.Cells["status"].Style.SelectionBackColor = Helper.StatusColor("Disapproved");
+                        break;
+
+                    case "cancelled":
+                        row.Cells["status"].Style.BackColor = Helper.StatusColor("Cancelled");
+                        row.Cells["status"].Style.SelectionBackColor = Helper.StatusColor("Cancelled");
+                        break;
+
+                    case "pending":
+                        row.Cells["status"].Style.BackColor = Helper.StatusColor("Pending");
+                        row.Cells["status"].Style.SelectionBackColor = Helper.StatusColor("Pending");
+                        break;
+
+                    default:
+                        row.Cells["status"].Style.BackColor = DefaultBackColor;
+                        row.Cells["status"].Style.SelectionBackColor = DefaultBackColor;
+                        break;
+                }
+            }
+        }
+
         private void LoadObligationRequests()
         {
             try
             {
                 HelperLoadRecords.ObligationRequestDatagridView(ObligationRequestsDatatable(), dgObligationRequests);
-            }
-            catch (MySqlException ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                LoadStatusColors();
             }
             catch (Exception ex)
             {
@@ -138,7 +203,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void frmObligationRequestSearch_Load(object sender, EventArgs e)
         {
-            Helper.DatagridDefaultStyle(dgObligationRequests, true);
+            LoadFunds();
+            LoadAllotmentClasses();
+            LoadObligationRequests();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -151,37 +218,24 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
         }
 
-        private void dgObligationRequests_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        private void cmbxStatus_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            var status = dgObligationRequests.Rows[e.RowIndex].Cells["status"].Value;
+            LoadObligationRequests();
+        }
 
-            switch (status.ToString().ToLower())
-            {
-                case "approved":
-                    dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.BackColor = Helper.StatusColor("Approved");
-                    dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.SelectionBackColor = Helper.StatusColor("Approved");
-                    break;
+        private void cmbxFunds_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadObligationRequests();
+        }
 
-                case "disapproved":
-                    dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.BackColor = Helper.StatusColor("Disapproved");
-                    dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.SelectionBackColor = Helper.StatusColor("Disapproved");
-                    break;
+        private void cmbxAllotmentClasses_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadObligationRequests();
+        }
 
-                case "cancelled":
-                    dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.BackColor = Helper.StatusColor("Cancelled");
-                    dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.SelectionBackColor = Helper.StatusColor("Cancelled");
-                    break;
-
-                case "pending":
-                    dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.BackColor = Helper.StatusColor("Pending");
-                    dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.SelectionBackColor = Helper.StatusColor("Pending");
-                    break;
-
-                default:
-                    dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.BackColor = DefaultBackColor;
-                    dgObligationRequests.Rows[e.RowIndex].Cells["status"].Style.SelectionBackColor = DefaultBackColor;
-                    break;
-            }
+        private void dtDateRequested_ValueChanged(object sender, EventArgs e)
+        {
+            LoadObligationRequests();
         }
     }
 }

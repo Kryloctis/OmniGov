@@ -407,7 +407,7 @@ namespace ACC.Data
                        $"FROM {viewTableName} " +
                        $"WHERE {fppWhereQuery} " +
                        $"others_fpp_id <=> @others_fpp_id AND " +
-                       $"allotment_class_id = @allotment_class_id "+
+                       $"allotment_class_id = @allotment_class_id " +
                        $"AND date_entry <= @date_entry " +
                        $"AND year = @year AND funds_id = @funds_id " +
                        $"GROUP BY general_ledger_accounts_id";
@@ -811,91 +811,82 @@ namespace ACC.Data
         public Dictionary<string, string> GetViewRecordByIdDateEntry(int budgetAppropriationId, DateTime dateEntry)
         {
             var record = new Dictionary<string, string>();
-
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                   new object[] { "@id", DbType.Int32, budgetAppropriationId},
-                   new object[] { "@date_entry", DbType.Date, dateEntry.Date}
-                };
-                string query = $"SELECT " +
-                    $"id, " +
-                    $"funds_id, " +
-                    $"fund_code, " +
-                    $"fund_name, " +
-                    $"fpp_id, " +
-                    $"fpp_code, " +
-                    $"fpp_name, " +
-                    $"functional_classification_service_id, " +
-                    $"functional_classification_service_name, " +
-                    $"functional_classification_id, " +
-                    $"functional_classification_sector_code, " +
-                    $"functional_classification_sector_name, " +
-                    $"others_fpp_id, " +
-                    $"others_fpp_name, " +
-                    $"allotment_class_id, " +
-                    $"allotment_class_code, " +
-                    $"allotment_class_name, " +
-                    $"general_ledger_accounts_id, " +
-                    $"general_ledger_accounts_code, " +
-                    $"general_ledger_accounts_name, " +
-                    $"account_code, " +
-                    $"date_entry, " +
-                    $"year, " +
-                    $"amount, " +
-                    $"continuing, " +
-                    $"remarks, " +
-                    $"created_at, " +
-                    $"updated_at " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE " +
-                    $"id = @id " +
-                    $"AND date_entry <= @date_entry";
+                    new object[] { "@id", DbType.Int32, budgetAppropriationId},
+                    new object[] { "@date_entry", DbType.Date, dateEntry.Date}
+            };
+            string query = $"SELECT " +
+                $"id, " +
+                $"funds_id, " +
+                $"fund_code, " +
+                $"fund_name, " +
+                $"fpp_id, " +
+                $"fpp_code, " +
+                $"fpp_name, " +
+                $"functional_classification_service_id, " +
+                $"functional_classification_service_name, " +
+                $"functional_classification_id, " +
+                $"functional_classification_sector_code, " +
+                $"functional_classification_sector_name, " +
+                $"others_fpp_id, " +
+                $"others_fpp_name, " +
+                $"allotment_class_id, " +
+                $"allotment_class_code, " +
+                $"allotment_class_name, " +
+                $"general_ledger_accounts_id, " +
+                $"general_ledger_accounts_code, " +
+                $"general_ledger_accounts_name, " +
+                $"account_code, " +
+                $"date_entry, " +
+                $"year, " +
+                $"amount, " +
+                $"continuing, " +
+                $"remarks, " +
+                $"created_at, " +
+                $"updated_at " +
+                $"FROM {viewTableName} " +
+                $"WHERE " +
+                $"id = @id " +
+                $"AND date_entry <= @date_entry";
 
-                using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
+            using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return record;
 
-                    foreach (DataRow item in reader.Rows)
-                    {
-                        record.Add("id", item[0].ToString());
-                        record.Add("funds_id", item[1].ToString());
-                        record.Add("fund_code", item[2].ToString());
-                        record.Add("fund_name", item[3].ToString());
-                        record.Add("fpp_id", item[4].ToString());
-                        record.Add("fpp_code", item[5].ToString());
-                        record.Add("fpp_name", item[6].ToString());
-                        record.Add("functional_classification_service_id", item[7].ToString());
-                        record.Add("functional_classification_service_name", item[8].ToString());
-                        record.Add("functional_classification_id", item[9].ToString());
-                        record.Add("functional_classification_sector_code", item[10].ToString());
-                        record.Add("functional_classification_sector_name", item[11].ToString());
-                        record.Add("others_fpp_id", item[12].ToString());
-                        record.Add("others_fpp_name", item[13].ToString());
-                        record.Add("allotment_class_id", item[14].ToString());
-                        record.Add("allotment_class_code", item[15].ToString());
-                        record.Add("allotment_class_name", item[16].ToString());
-                        record.Add("general_ledger_accounts_id", item[17].ToString());
-                        record.Add("general_ledger_accounts_code", item[18].ToString());
-                        record.Add("general_ledger_accounts_name", item[19].ToString());
-                        record.Add("account_code", item[20].ToString());
-                        record.Add("date_entry", item[21].ToString());
-                        record.Add("year", item[22].ToString());
-                        record.Add("amount", item[23].ToString());
-                        record.Add("continuing", item[24].ToString());
-                        record.Add("remarks", item[25].ToString());
-                        record.Add("created_at", item[26].ToString());
-                        record.Add("updated_at", item[27].ToString());
-                    }
+                foreach (DataRow item in reader.Rows)
+                {
+                    record.Add("id", item[0].ToString());
+                    record.Add("funds_id", item[1].ToString());
+                    record.Add("fund_code", item[2].ToString());
+                    record.Add("fund_name", item[3].ToString());
+                    record.Add("fpp_id", item[4].ToString());
+                    record.Add("fpp_code", item[5].ToString());
+                    record.Add("fpp_name", item[6].ToString());
+                    record.Add("functional_classification_service_id", item[7].ToString());
+                    record.Add("functional_classification_service_name", item[8].ToString());
+                    record.Add("functional_classification_id", item[9].ToString());
+                    record.Add("functional_classification_sector_code", item[10].ToString());
+                    record.Add("functional_classification_sector_name", item[11].ToString());
+                    record.Add("others_fpp_id", item[12].ToString());
+                    record.Add("others_fpp_name", item[13].ToString());
+                    record.Add("allotment_class_id", item[14].ToString());
+                    record.Add("allotment_class_code", item[15].ToString());
+                    record.Add("allotment_class_name", item[16].ToString());
+                    record.Add("general_ledger_accounts_id", item[17].ToString());
+                    record.Add("general_ledger_accounts_code", item[18].ToString());
+                    record.Add("general_ledger_accounts_name", item[19].ToString());
+                    record.Add("account_code", item[20].ToString());
+                    record.Add("date_entry", item[21].ToString());
+                    record.Add("year", item[22].ToString());
+                    record.Add("amount", item[23].ToString());
+                    record.Add("continuing", item[24].ToString());
+                    record.Add("remarks", item[25].ToString());
+                    record.Add("created_at", item[26].ToString());
+                    record.Add("updated_at", item[27].ToString());
                 }
             }
-            catch (Exception)
-            {
-                throw;
-            }
-
             return record;
         }
 

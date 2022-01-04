@@ -179,35 +179,28 @@ namespace ACC.Data
         //SAAOB and SAAOBB
         public DataTable GetRecordsByBudgetAppropriationIdDateEntry(int budgetAppropriationId, DateTime dateEntry)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId },
-                    new object[] { "@date_entry", DbType.Date, dateEntry.Date}
-                };
+                new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId },
+                new object[] { "@date_entry", DbType.Date, dateEntry.Date}
+            };
 
-                string query = $"SELECT " +
-                    $"id, " +
-                    $"budget_appropriations_id, " +
-                    $"date_entry, " +
-                    $"amount, " +
-                    $"remarks, " +
-                    $"created_at, " +
-                    $"updated_at " +
-                    $"FROM {tableName} " +
-                    $"WHERE " +
-                    $"budget_appropriations_id = @budget_appropriations_id " +
-                    $"AND date_entry <= @date_entry";
+            string query = $"SELECT " +
+                $"id, " +
+                $"budget_appropriations_id, " +
+                $"date_entry, " +
+                $"amount, " +
+                $"remarks, " +
+                $"created_at, " +
+                $"updated_at " +
+                $"FROM {tableName} " +
+                $"WHERE " +
+                $"budget_appropriations_id = @budget_appropriations_id " +
+                $"AND date_entry <= @date_entry";
 
-                var dtSupplementalApprorpriation = new DataTable();
+            var dtSupplementalApprorpriation = new DataTable();
 
-                return _mySqlGenericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return _mySqlGenericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
         }
 
         //DASHBOARD

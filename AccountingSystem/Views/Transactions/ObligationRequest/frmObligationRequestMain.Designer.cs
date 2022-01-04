@@ -185,7 +185,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(556, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(525, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -211,6 +211,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.linkShowMessage.Name = "linkShowMessage";
             this.linkShowMessage.Size = new System.Drawing.Size(94, 17);
             this.linkShowMessage.Text = "Show Message...";
+            this.linkShowMessage.Click += new System.EventHandler(this.linkShowMessage_Click);
             // 
             // statusStrip2
             // 
@@ -228,7 +229,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(494, 17);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(525, 17);
             this.toolStripStatusLabel3.Spring = true;
             // 
             // toolStripStatusLabel4

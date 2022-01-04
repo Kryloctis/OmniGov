@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Transactions;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ObligationRequest
@@ -51,7 +52,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 var dtObligationRequest = Factory.ObligationRequestRepository().GetViewRecordsById(uc.obligationRequestId);
 
                 int fppId = Convert.ToInt32(dictObligationRequest["function_program_project_id"]);
-                var subFPPId = dictObligationRequest["others_fpp_id"];
                 int fundId = Convert.ToInt32(dictObligationRequest["funds_id"]);
                 int allotmentClassId = Convert.ToInt32(dictObligationRequest["allotment_classes_id"]);
                 string obligationRequestNo = dictObligationRequest["obligation_no"].ToString();
@@ -101,9 +101,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 if (Helper.MessageBoxConfirmDelete(1))
                 {
                     _ = Factory.ObligationRequestRepository().Delete(uc.obligationRequestId);
-                    btnSave.Text = "&Save";
-                    btnDelete.Enabled = false;
                     uc.ResetForm();
+                    ResetControls();
+                    btnSave.Text = "&Save";
                 }
             }
             catch (Exception ex)
@@ -112,7 +112,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
         }
 
-        private bool InsertData()
+        private bool InsertData(ref string message)
         {
             try
             {
@@ -128,7 +128,15 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     CreatedBy = Helper.UserId
                 };
 
+                if (Helper.HasPermission("Transaction Obligation Request Approved"))
+                {
+                    obligationRequestModel.IsApproved = true;
+                    obligationRequestModel.IsDisapproved = false;
+                    obligationRequestModel.IsCancelled = false;
+                    obligationRequestModel.DisapprovalMessage = string.Empty;
+                }
 
+                message = "Obligation Request has been saved.";
                 return Factory.ObligationRequestRepository().Insert(obligationRequestModel, ObligationAccountsModelList());
             }
             catch (MySqlException ex)
@@ -142,65 +150,79 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-        private bool UpdateData()
+        private bool UpdateData(ref string message)
         {
-            try
+            using (TransactionScope scope = new TransactionScope())
             {
-                string obligationNo = $"{uc.mskTxtObligationNoSeries.Text}-{uc.mskTxtObligationNoTemplate.Text}";
+                bool updated = true;
 
-                var obligationRequestModel = new ObligationRequestModel()
+                try
                 {
-                    Id = uc.obligationRequestId,
-                    ObligationNo = obligationNo,
-                    Payee = uc.txtPayee.Text,
-                    Explanation = uc.txtExplanation.Text,
-                    ReferenceNo = uc.txtReferenceNo.Text,
-                    DateRequested = uc.dtDateRequest.Value,
-                    UpdatedBy = Helper.UserId
-                };
+                    string obligationNo = $"{uc.mskTxtObligationNoSeries.Text}-{uc.mskTxtObligationNoTemplate.Text}";
 
+                    var obligationRequestModel = new ObligationRequestModel()
+                    {
+                        Id = uc.obligationRequestId,
+                        ObligationNo = obligationNo,
+                        Payee = uc.txtPayee.Text,
+                        Explanation = uc.txtExplanation.Text,
+                        ReferenceNo = uc.txtReferenceNo.Text,
+                        DateRequested = uc.dtDateRequest.Value,
+                        UpdatedBy = Helper.UserId
+                    };
 
-                return Factory.ObligationRequestRepository().Update(obligationRequestModel, ObligationAccountsModelList());
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.StackTrace);
-            }
-            return false;
-        }
+                    string ObligationRequestStatus = Factory.ObligationRequestRepository().GetObligationRequestStatus(uc.obligationRequestId);
 
-        private bool SaveData()
-        {
-            try
-            {
-                if (!uc.ValidateChildren())
+                    if (ObligationRequestStatus.ToLower() == "disapproved")
+                    {
+                        _ = Factory.ObligationRequestRepository().SetObligationRequestStatus(uc.obligationRequestId, "pending");
+                        obligationRequestModel.DisapprovalMessage = string.Empty;
+                        message = "Obligation request updated and will be send back to pending.";
+                    }
+                    else
+                        message = "Obligation Request has been Updated";
+
+                    _ = Factory.ObligationRequestRepository().Update(obligationRequestModel, ObligationAccountsModelList());
+
+                    scope.Complete();
+                }
+                catch (Exception ex)
                 {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
+                    Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)");
+                    updated = false;
                 }
 
-                bool saveData;
-
-                if (!uc.isEdit)
-                    saveData = InsertData();
+                if (updated)
+                    return true;
                 else
-                    saveData = UpdateData();
+                    return false;
+            }
+        }
 
-                return saveData;
-            }
-            catch (Exception ex)
+        private bool SaveData(ref string message)
+        {
+            if (!uc.ValidateChildren())
             {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
-            return false;
+
+            bool saveData;
+
+            if (!uc.isEdit)
+                saveData = InsertData(ref message);
+            else
+                saveData = UpdateData(ref message);
+
+            return saveData;
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            string message = string.Empty;
+            if (SaveData(ref message))
             {
-                string message = !uc.isEdit ? "saved" : "updated";
-                Helper.MessageBoxSuccess($"Obligation Request has been {message}.");
+                Helper.MessageBoxSuccess(message);
                 uc.ResetForm();
                 ResetControls();
                 btnSave.Text = "Save";
@@ -264,6 +286,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 btnDisapprove.Enabled = false;
                 btnCancelObligation.Enabled = false;
                 lblStatus.Text = "--";
+                lblStatus.ForeColor = Color.Black;
                 lblCreatedBy.Text = "--";
                 linkShowMessage.Visible = false;
                 btnDelete.Enabled = false;
@@ -276,13 +299,26 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 btnCancelObligation.Enabled = true;
                 btnDelete.Enabled = true;
                 lblCreatedBy.Text = "--";
+                lblStatus.ForeColor = Color.Black;
             }
 
+        }
+
+        private void VerifyPermissions()
+        {
+            if (!Helper.HasPermission("Transaction Obligation Request Approval"))
+            {
+                btnApprove.Visible = false;
+                btnDisapprove.Visible = false;
+                btnCancelObligation.Visible = false;
+                toolStripSeparator1.Visible = false;
+            }
         }
 
         private void frmObligationRequestMain_Load(object sender, EventArgs e)
         {
             ResetControls();
+            VerifyPermissions();
         }
 
         internal void GetObligationStatus()
@@ -367,14 +403,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void btnDisapprove_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Confirm Disapproval of the obligation request.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, defaultButton: MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-            {
-                if (SetObligationStatus("disapprove"))
-                {
-                    Helper.MessageBoxSuccess("Obligation Request has been disapproved.");
-                    GetObligationStatus();
-                }
-            }
+            _ = new frmObligationRequestDisapproval(this).ShowDialog();
         }
 
         private void btnCancelObligation_Click(object sender, EventArgs e)
@@ -387,6 +416,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     GetObligationStatus();
                 }
             }
+        }
+
+        private void linkShowMessage_Click(object sender, EventArgs e)
+        {
+            _ = new frmObligationRequestDisapproval(this).ShowDialog();
         }
     }
 }
