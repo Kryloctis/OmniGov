@@ -144,5 +144,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             _frmObligationRequestMain.ucObligationRequestMain1.Enabled = true;
             Close();
         }
+
+        private void btnSaveMessage_Click(object sender, EventArgs e)
+        {
+            if (DisapproveObligationRequest()) Helper.MessageBoxSuccess("Disapproval message has been updated.");
+        }
     }
 }

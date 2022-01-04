@@ -99,6 +99,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnSaveMessage.TabIndex = 1;
             this.btnSaveMessage.Text = "Save Message";
             this.btnSaveMessage.UseVisualStyleBackColor = true;
+            this.btnSaveMessage.Click += new System.EventHandler(this.btnSaveMessage_Click);
             // 
             // frmObligationRequestDisapproval
             // 
