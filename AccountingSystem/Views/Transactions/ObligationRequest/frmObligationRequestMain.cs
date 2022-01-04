@@ -101,9 +101,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 if (Helper.MessageBoxConfirmDelete(1))
                 {
                     _ = Factory.ObligationRequestRepository().Delete(uc.obligationRequestId);
-                    btnSave.Text = "&Save";
-                    btnDelete.Enabled = false;
                     uc.ResetForm();
+                    ResetControls();
+                    btnSave.Text = "&Save";
                 }
             }
             catch (Exception ex)
@@ -286,6 +286,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 btnDisapprove.Enabled = false;
                 btnCancelObligation.Enabled = false;
                 lblStatus.Text = "--";
+                lblStatus.ForeColor = Color.Black;
                 lblCreatedBy.Text = "--";
                 linkShowMessage.Visible = false;
                 btnDelete.Enabled = false;
@@ -298,6 +299,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 btnCancelObligation.Enabled = true;
                 btnDelete.Enabled = true;
                 lblCreatedBy.Text = "--";
+                lblStatus.ForeColor = Color.Black;
             }
 
         }

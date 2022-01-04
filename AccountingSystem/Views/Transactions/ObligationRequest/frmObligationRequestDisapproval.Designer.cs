@@ -87,7 +87,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnDisapprove.Name = "btnDisapprove";
             this.btnDisapprove.Size = new System.Drawing.Size(133, 23);
             this.btnDisapprove.TabIndex = 2;
-            this.btnDisapprove.Text = "Dissaprove";
+            this.btnDisapprove.Text = "Disapprove";
             this.btnDisapprove.UseVisualStyleBackColor = true;
             this.btnDisapprove.Click += new System.EventHandler(this.btnDisapprove_Click);
             // 
