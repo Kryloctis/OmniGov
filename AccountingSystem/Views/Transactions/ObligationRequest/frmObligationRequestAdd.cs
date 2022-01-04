@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ObligationRequest
@@ -25,11 +18,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         }
 
 
-        private bool AddToListRecord() 
+        private bool AddToListRecord()
         {
             try
             {
-                if (!uc.ValidateChildren()) 
+                if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
@@ -38,7 +31,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 int budgetAppropriationId = Convert.ToInt32(uc.cmbxObjectOfExpenditure.SelectedValue);
                 var budgetAppropriationsDict = Factory.BudgetAppropriationsRepository().GetViewRecordByID(budgetAppropriationId);
 
-                string remarks = string.IsNullOrEmpty(budgetAppropriationsDict["remarks"].ToString()) ? string.Empty : $"({budgetAppropriationsDict["remarks"]})";
+                string remarks = $"({budgetAppropriationsDict["remarks"]})";
 
                 string objectOfExpenditure = $"{budgetAppropriationsDict["general_ledger_accounts_name"]} {remarks}";
                 string accountCode = budgetAppropriationsDict["account_code"].ToString();
@@ -51,12 +44,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     accountCode,
                     obligationAmount
                 };
-                               
+
                 _ucObligationRequestMain.dgObligationRequests.Rows.Add(items);
                 _ucObligationRequestMain.GetTotalObligations();
 
                 return true;
-            
+
             }
             catch (Exception ex)
             {
@@ -67,7 +60,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void btnAddToList_Click(object sender, EventArgs e)
         {
-            if (AddToListRecord()) 
+            if (AddToListRecord())
             {
                 uc.ResetForm();
                 _ucObligationRequestMain.EnableDisableComponents(false);

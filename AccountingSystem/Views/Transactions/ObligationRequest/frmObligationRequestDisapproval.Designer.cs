@@ -1,7 +1,7 @@
 ﻿
-namespace AccountingSystem.Views.Transactions.JEV
+namespace AccountingSystem.Views.Transactions.ObligationRequest
 {
-    partial class frmRemarks
+    partial class frmObligationRequestDisapproval
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtRemarks = new System.Windows.Forms.TextBox();
+            this.txtDissaprovalMessage = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAccept = new System.Windows.Forms.Button();
@@ -38,13 +38,15 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // txtRemarks
+            // txtDissaprovalMessage
             // 
-            this.txtRemarks.Location = new System.Drawing.Point(9, 11);
-            this.txtRemarks.Multiline = true;
-            this.txtRemarks.Name = "txtRemarks";
-            this.txtRemarks.Size = new System.Drawing.Size(609, 225);
-            this.txtRemarks.TabIndex = 0;
+            this.txtDissaprovalMessage.Location = new System.Drawing.Point(12, 12);
+            this.txtDissaprovalMessage.Multiline = true;
+            this.txtDissaprovalMessage.Name = "txtDissaprovalMessage";
+            this.txtDissaprovalMessage.Size = new System.Drawing.Size(609, 225);
+            this.txtDissaprovalMessage.TabIndex = 0;
+            this.txtDissaprovalMessage.Validating += new System.ComponentModel.CancelEventHandler(this.txtDissaprovalMessage_Validating);
+            this.txtDissaprovalMessage.Validated += new System.EventHandler(this.txtDissaprovalMessage_Validated);
             // 
             // flowLayoutPanel1
             // 
@@ -55,14 +57,14 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.flowLayoutPanel1.Controls.Add(this.btnSaveMessage);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 244);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 243);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(629, 28);
-            this.flowLayoutPanel1.TabIndex = 1;
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(635, 29);
+            this.flowLayoutPanel1.TabIndex = 2;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(493, 3);
+            this.btnCancel.Location = new System.Drawing.Point(499, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(133, 23);
             this.btnCancel.TabIndex = 4;
@@ -71,7 +73,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(354, 3);
+            this.btnAccept.Location = new System.Drawing.Point(360, 3);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(133, 23);
             this.btnAccept.TabIndex = 3;
@@ -81,17 +83,17 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // btnDisapprove
             // 
-            this.btnDisapprove.Location = new System.Drawing.Point(215, 3);
+            this.btnDisapprove.Location = new System.Drawing.Point(221, 3);
             this.btnDisapprove.Name = "btnDisapprove";
             this.btnDisapprove.Size = new System.Drawing.Size(133, 23);
             this.btnDisapprove.TabIndex = 2;
-            this.btnDisapprove.Text = "Dissaprove";
+            this.btnDisapprove.Text = "Disapprove";
             this.btnDisapprove.UseVisualStyleBackColor = true;
             this.btnDisapprove.Click += new System.EventHandler(this.btnDisapprove_Click);
             // 
             // btnSaveMessage
             // 
-            this.btnSaveMessage.Location = new System.Drawing.Point(76, 3);
+            this.btnSaveMessage.Location = new System.Drawing.Point(82, 3);
             this.btnSaveMessage.Name = "btnSaveMessage";
             this.btnSaveMessage.Size = new System.Drawing.Size(133, 23);
             this.btnSaveMessage.TabIndex = 1;
@@ -99,22 +101,23 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnSaveMessage.UseVisualStyleBackColor = true;
             this.btnSaveMessage.Click += new System.EventHandler(this.btnSaveMessage_Click);
             // 
-            // frmRemarks
+            // frmObligationRequestDisapproval
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(629, 272);
+            this.ClientSize = new System.Drawing.Size(635, 272);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.txtRemarks);
+            this.Controls.Add(this.txtDissaprovalMessage);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmRemarks";
+            this.Name = "frmObligationRequestDisapproval";
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Disapproval Message";
-            this.Load += new System.EventHandler(this.frmRemarks_Load);
+            this.Load += new System.EventHandler(this.frmObligationRequestDisapproval_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -123,11 +126,11 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtRemarks;
+        private System.Windows.Forms.TextBox txtDissaprovalMessage;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        internal System.Windows.Forms.Button btnAccept;
         internal System.Windows.Forms.Button btnCancel;
-        internal System.Windows.Forms.Button btnSaveMessage;
+        internal System.Windows.Forms.Button btnAccept;
         internal System.Windows.Forms.Button btnDisapprove;
+        internal System.Windows.Forms.Button btnSaveMessage;
     }
 }

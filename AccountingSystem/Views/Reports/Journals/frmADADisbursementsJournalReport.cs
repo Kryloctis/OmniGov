@@ -1,12 +1,7 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Journals
@@ -73,8 +68,22 @@ namespace AccountingSystem.Views.Reports.Journals
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
+
+                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Certified Correct", "ADA Disbursements Journal");
+                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
+                {
+                    if (dictSignatory.Count > 0)
+                    {
+                        signatory = dictSignatory["signatories_full_name"];
+                        signatoryTitle = dictSignatory["signatories_title"];
+                    }
+                }
+
                 var lguDetails = Helper.LGUDetails();
-                var signatory = "MARY MAGDALYN T. REGANION, CPA";
+                var certifiedCorrectSignatory = string.Empty;
+                var certifiedCorrectSignatoryTitle = string.Empty;
+                ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+
                 byte journalId = 6;
 
                 DataTable defaultAccountsDataTable = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId);
@@ -107,7 +116,8 @@ namespace AccountingSystem.Views.Reports.Journals
                     new ReportParameter("paramMonth", date.ToString()),
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                     new ReportParameter("paramFund", fundName),
-                    new ReportParameter("paramSignatory", signatory),
+                    new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
+                    new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
                     new ReportParameter("paramDefaultAccountCodeFirst", defaultAccountCodeFirst),
                     new ReportParameter("paramDefaultAccountCodeSecond", defaultAccountCodeSecond),
                     new ReportParameter("paramDefaultAccountCodeThird", defaultAccountCodeThird),

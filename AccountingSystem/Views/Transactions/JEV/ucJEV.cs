@@ -1,6 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -10,6 +9,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 {
     public partial class ucJEV : UserControl
     {
+        internal bool isEdit = false;
         internal int jevId = 0;
         internal string jevNo;
         internal byte fundId = 0;
@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             txtCreditTotal.Text = 0.ToString("N2");
             flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => ((byte)r.Tag == 1) ? r.Checked = true : r.Checked = false);
             flowLayoutPanelJournals.Controls.OfType<RadioButton>().FirstOrDefault(r => ((byte)r.Tag == 1) ? r.Checked = true : r.Checked = false);
-            
+
 
             dtpDateEntry.Value = DateTime.Now;
             txtJEVNo.Text = GetJEVSeriesNo();
@@ -395,9 +395,34 @@ namespace AccountingSystem.Views.Transactions.JEV
             GenerateJEVNumber();
         }
 
+
+        private void EnableDisableButtons(DataGridView dgv, Button btnEdit, Button btnDelete)
+        {
+            int SelectedRows = dgv.SelectedRows.Count;
+            if (SelectedRows == 1)
+            {
+                btnEdit.Enabled = true;
+                btnDelete.Enabled = true;
+                btnDelete.Text = "Remove (" + SelectedRows + ")";
+
+            }
+            else if (SelectedRows > 1)
+            {
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = true;
+                btnDelete.Text = "Remove (" + SelectedRows + ")";
+            }
+            else
+            {
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = false;
+                btnDelete.Text = "Remove";
+            }
+        }
+
         private void dgAccounts_SelectionChanged(object sender, EventArgs e)
         {
-            Helper.EnableDisableButtons(dgAccounts, btnEditAccount, btnRemoveAccount);
+            EnableDisableButtons(dgAccounts, btnEditAccount, btnRemoveAccount);
         }
 
         private void txtJEVNo_Validating(object sender, CancelEventArgs e)
@@ -453,8 +478,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);;
-            } 
+                MessageBox.Show(ex.Message); ;
+            }
 
         }
 
@@ -533,6 +558,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             Helper.ClearErrorComboBox(epCollectingDisbursing, cmbCollectingDisbursingOfficer);
         }
-        
+
     }
 }

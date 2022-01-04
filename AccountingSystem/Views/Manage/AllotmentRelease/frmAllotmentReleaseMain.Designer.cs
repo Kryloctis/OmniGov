@@ -70,7 +70,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // btnSearch
             // 
             this.btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnSearch.Image = global::AccountingSystem.Properties.Resources.find;
+            this.btnSearch.Image = global::AccountingSystem.Properties.Resources.find_doc;
             this.btnSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSearch.Margin = new System.Windows.Forms.Padding(0, 1, 15, 2);

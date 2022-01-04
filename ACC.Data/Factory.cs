@@ -114,5 +114,13 @@ namespace AccountingSystem
         public static IAmortizationRepository AmortizationRepository() => new AmortizationRepository(new MySqlGenericCommands());
         public static IAmortizationScheduleRepository AmortizationScheduleRepository() => new AmortizationScheduleRepository(new MySqlGenericCommands());
         public static IFaceValueRepository FaceValueRepository() => new FaceValueRepository(new MySqlGenericCommands());
+
+        public static ISignatories SignatoriesRepository() => new SignatoriesRepository(new MySqlGenericCommands(), SignatoriesHasReferencesRepository());
+
+        public static ISignatoriesHasReferences SignatoriesHasReferencesRepository() => new SignatoriesHasReferencesRepository(new MySqlGenericCommands());
+
+        public static IDocumentReferences DocumentReferencesRepository() => new DocumentReferencesRepository(new MySqlGenericCommands());
+
+        public static IDocuments DocumentsRepository() => new DocumentsRepository(new MySqlGenericCommands());
     }
 }

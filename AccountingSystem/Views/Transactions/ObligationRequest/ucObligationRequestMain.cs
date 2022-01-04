@@ -3,16 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ObligationRequest
 {
     public partial class ucObligationRequestMain : UserControl
     {
+        internal bool isEdit = false;
         internal int obligationRequestId = 0;
         internal int fundId;
         internal int allotmentClassId;
@@ -26,7 +24,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             if (!DesignMode)
             {
-                //LOAD FPP
                 LoadFPP();
                 cmbxFPP.SelectedIndex = -1;
                 cmbxFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
@@ -59,6 +56,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             EnableDisableComponents(true);
 
+            if (isEdit)
+            {
+                isEdit = false;
+                obligationRequestId = 0;
+                fundId = 0;
+                allotmentClassId = 0;
+            }
+
             cmbxFPP.SelectedValue = 0;
             cmbxFPP.Text = string.Empty;
             CheckedFund(1);
@@ -69,7 +74,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             txtPayee.Text = string.Empty;
             txtExplanation.Text = string.Empty;
             dgObligationRequests.Rows.Clear();
-            obligationRequestId = 0;
             txtTotalObligations.Text = "0.00";
         }
 
@@ -104,7 +108,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             Helper.DatagridDefaultStyle(dgObligationRequests, true);
         }
 
-        internal void EnableDisableComponents(bool enableComponents) 
+        internal void EnableDisableComponents(bool enableComponents)
         {
             cmbxFPP.Enabled = enableComponents;
             flowLayoutPanelFunds.Enabled = enableComponents;
@@ -140,8 +144,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             EnableDisableButtons();
         }
-
-
 
         //FPP COMBOBOX
         private DataTable DataTableFPP()
@@ -204,64 +206,13 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
         }
 
-
-        //LOAD SEARCHED OBLIGATIONS
-        internal void LoadSearched()
-        {
-            try
-            {
-                dgObligationRequests.Rows.Clear();
-
-                DataTable dtObligationRequest = Factory.ObligationRequestRepository().GetViewRecordsById(obligationRequestId);
-
-                int fppId = Convert.ToInt32(dtObligationRequest.Rows[0]["function_program_project_id"]);
-                var subFPPId = dtObligationRequest.Rows[0]["others_fpp_id"];
-                int fundId = Convert.ToInt32(dtObligationRequest.Rows[0]["funds_id"]);
-                int allotmentClassId = Convert.ToInt32(dtObligationRequest.Rows[0]["allotment_classes_id"]);
-                string obligationRequestNo = dtObligationRequest.Rows[0]["obligation_no"].ToString();
-                DateTime dateOfRequest = Convert.ToDateTime(dtObligationRequest.Rows[0]["date_requested"]);
-                string referenceNo = dtObligationRequest.Rows[0]["reference_no"].ToString();
-                string payee = dtObligationRequest.Rows[0]["payee"].ToString();
-                string explanation = dtObligationRequest.Rows[0]["explanation"].ToString();
-
-                cmbxFPP.SelectedValue = fppId;
-                CheckedFund(fundId);
-                CheckedAllotmentClass(allotmentClassId);
-                mskTxtObligationNoSeries.Text = obligationRequestNo;
-                dtDateRequest.Value = dateOfRequest;
-                txtReferenceNo.Text = referenceNo;
-                txtPayee.Text = payee;
-                txtExplanation.Text = explanation;
-
-                foreach (DataRow item in dtObligationRequest.Rows)
-                {
-                    string remarks = string.IsNullOrEmpty(item["remarks"].ToString()) ? string.Empty : $"({item["remarks"]})";
-
-                    var obligationRequest = new object[]
-                    {
-                        item["budget_appropriations_id"],
-                        $"{item["ledger_name"]}{remarks}",
-                        item["account_code"],
-                        item["amount"]
-                    };
-
-                    dgObligationRequests.Rows.Add(obligationRequest);
-                    GetTotalObligations();
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        private void CheckedFund(int radFundId)
+        internal void CheckedFund(int radFundId)
         {
             flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => (Convert.ToInt32(r.Tag) == radFundId) ? r.Checked = true : r.Checked = false);
             fundId = radFundId;
         }
 
-        private void CheckedAllotmentClass (int radAllotmentClassId)
+        internal void CheckedAllotmentClass(int radAllotmentClassId)
         {
             flowLayoutPanelAllotmentClass.Controls.OfType<RadioButton>().FirstOrDefault(r => (Convert.ToInt32(r.Tag) == radAllotmentClassId) ? r.Checked = true : r.Checked = false);
             allotmentClassId = radAllotmentClassId;
@@ -293,7 +244,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 };
 
                 // making general fund as default
-                if (Convert.ToInt32(fund["id"])  == 1)
+                if (Convert.ToInt32(fund["id"]) == 1)
                 {
                     radFund.Checked = true;
                     fundId = Convert.ToByte(fund["id"]);
@@ -388,6 +339,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             {
                 dgObligationRequests.Rows.Remove(item);
             }
+
+            if (dgObligationRequests.Rows.Count == 0)
+                EnableDisableComponents(true);
         }
 
 
@@ -465,7 +419,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 ucObligationRequestEdit.fundId = fundId;
                 ucObligationRequestEdit.allotmentClassId = allotmentClassId;
                 ucObligationRequestEdit.dateRequested = dtDateRequest.Value;
-                ucObligationRequestEdit._subFPPId =  string.IsNullOrWhiteSpace(subFPP)? null : Convert.ToInt32(subFPP);
+                ucObligationRequestEdit._subFPPId = string.IsNullOrWhiteSpace(subFPP) ? null : Convert.ToInt32(subFPP);
                 ucObligationRequestEdit._budgetAppropriationsId = budgetAppropriationId;
                 ucObligationRequestEdit._amount = amount;
                 ucObligationRequestEdit.nudAmount.Value = amount;
@@ -514,7 +468,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
 
         //FPP
-        private bool ShowErrorFPPNameNotExist() 
+        private bool ShowErrorFPPNameNotExist()
         {
             try
             {
@@ -533,7 +487,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
             return false;
         }
-     
+
         private void cmbxFPP_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(cmbxFPP.Text))
@@ -549,7 +503,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
 
         //OBLIGATION NO.
-        private bool ShowErrorObligationRequestNoEmpty() 
+        private bool ShowErrorObligationRequestNoEmpty()
         {
             if (!mskTxtObligationNoSeries.MaskCompleted)
             {
@@ -560,7 +514,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 return false;
         }
 
-        private bool ShowErrorObligationRequestNoExist() 
+        private bool ShowErrorObligationRequestNoExist()
         {
             try
             {
