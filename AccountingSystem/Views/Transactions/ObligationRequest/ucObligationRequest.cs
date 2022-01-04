@@ -4,10 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ObligationRequest
@@ -30,35 +26,42 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             InitializeComponent();
         }
 
-        private decimal GetCurrentBalance() 
+        private decimal GetCurrentBalance()
         {
             decimal currentBalance = 0;
-            
+
             decimal currentAmount = nudAmount.Value;
             decimal unobligatedBalance = GetAllotmentReleaseBalance();
 
             currentBalance = unobligatedBalance - currentAmount;
 
-            return currentBalance < 0? 0 : currentBalance;
+            return currentBalance < 0 ? 0 : currentBalance;
         }
 
         private decimal GetAllotmentReleaseBalance()
         {
             decimal allotmentReleaseBalance = 0;
 
-            if (cmbxObjectOfExpenditure.SelectedIndex > -1)
+            try
             {
-                int budgetAppropriationId = Convert.ToInt32(cmbxObjectOfExpenditure.SelectedValue);
-                var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationIdDateIssued(budgetAppropriationId, dateRequested);
-                var dtObligationRequests = Factory.ObligationRequestRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
+                if (cmbxObjectOfExpenditure.SelectedIndex > -1)
+                {
+                    int budgetAppropriationId = Convert.ToInt32(cmbxObjectOfExpenditure.SelectedValue);
+                    var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationIdDateIssued(budgetAppropriationId, dateRequested);
+                    var dtObligationRequests = Factory.ObligationRequestRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
 
-                decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
-                decimal totalObligations = Convert.ToDecimal(dtObligationRequests.Rows.Count == 0 ? 0 : dtObligationRequests.Compute("SUM(amount)", string.Empty));
+                    decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
+                    decimal totalObligations = Convert.ToDecimal(dtObligationRequests.Rows.Count == 0 ? 0 : dtObligationRequests.Compute("SUM(amount)", string.Empty));
 
-                allotmentReleaseBalance = (totalAllotmentRelease - totalObligations) + (budgetAppropriationId == _budgetAppropriationsId ? _amount : 0);
+                    allotmentReleaseBalance = (totalAllotmentRelease - totalObligations) + (budgetAppropriationId == _budgetAppropriationsId ? _amount : 0);
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
 
-            return allotmentReleaseBalance;
+            return allotmentReleaseBalance < 0 ? 0 : allotmentReleaseBalance;
         }
 
         internal void LoadReferences(ucObligationRequestMain ucObligationRequestMain)
@@ -89,7 +92,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             LoadObjectOfExpendituresCombobox();
         }
 
-
         private void ucObligationRequest_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
@@ -102,15 +104,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
         }
 
-
         private void nudAmount_ValueChanged(object sender, EventArgs e)
         {
             txtRemainingBalance.Text = GetCurrentBalance().ToString("N2");
         }
 
-
-        //SUB FPP COMBOBOX
-
+        #region SUB FPP COMBOBOX
         private DataTable DataTableSubFPP()
         {
             DataTable dtSubFPP;
@@ -140,7 +139,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     subFPPDict.Add(subFPPId, subFPPName);
                 }
 
-                cmbxSubFPP.DataSource = DataTableSubFPP().Rows.Count == 0? null : new BindingSource(subFPPDict, null);
+                cmbxSubFPP.DataSource = DataTableSubFPP().Rows.Count == 0 ? null : new BindingSource(subFPPDict, null);
                 cmbxSubFPP.DisplayMember = "value";
                 cmbxSubFPP.ValueMember = "key";
             }
@@ -150,7 +149,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
         }
 
-        private void LoadSubFPPCombobox() 
+        private void LoadSubFPPCombobox()
         {
             LoadSubFPP();
             cmbxSubFPP.TextChanged -= new EventHandler(cmbxSubFPP_TextChanged);
@@ -179,10 +178,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             LoadObjectOfExpendituresCombobox();
         }
+        #endregion
 
-
-        //OBJECT OF EXPENDITURE COMBOBOX
-
+        #region OBJECT OF EXPENDITURES COMBOBOX
         private DataTable DatatableObjectOfExpenditures()
         {
             var dtBudgetAppropriation = new DataTable();
@@ -191,7 +189,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             var budgetAppropriationsModel = new BudgetAppropriationsModel()
             {
                 FunctionProgramProjectId = fppId,
-                OthersFPPId = string.IsNullOrWhiteSpace(cmbxSubFPP.Text)? null : subFPPId,
+                OthersFPPId = string.IsNullOrWhiteSpace(cmbxSubFPP.Text) ? null : subFPPId,
                 AllotmentClassesId = allotmentClassId,
                 FundsId = fundId,
                 Year = Convert.ToInt16(dateRequested.Year)
@@ -282,9 +280,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 cmbxObjectOfExpenditure.DroppedDown = true;
             }
         }
+        #endregion
 
-
-        //VALIDATIONS
+        #region VALIDATIONS
 
         private bool ShowErrorObjectExpenditureNotExist()
         {
@@ -303,11 +301,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-        private bool ShowErrorObjectExpenditureExistOnList() 
+        private bool ShowErrorObjectExpenditureExistOnList()
         {
             try
             {
-                foreach (DataGridViewRow item in _ucObligationRequestMain.dgObligationRequests.Rows) 
+                foreach (DataGridViewRow item in _ucObligationRequestMain.dgObligationRequests.Rows)
                 {
                     int budgetAppriationId = Convert.ToInt32(cmbxObjectOfExpenditure.SelectedValue);
                     int rowBudgetAppropriationId = Convert.ToInt32(item.Cells["budget_appropriation_id"].Value);
@@ -329,7 +327,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                             return true;
                         }
                     }
-                 
+
                 }
 
             }
@@ -373,7 +371,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return false;
         }
 
-        private bool ShowErrorAmountExceeds() 
+        private bool ShowErrorAmountExceeds()
         {
             try
             {
@@ -404,5 +402,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
+        #endregion
     }
 }

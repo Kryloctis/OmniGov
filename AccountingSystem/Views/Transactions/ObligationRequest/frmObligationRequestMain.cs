@@ -128,6 +128,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     CreatedBy = Helper.UserId
                 };
 
+                if (Helper.HasPermission("Transaction Obligation Request Approved"))
+                {
+                    obligationRequestModel.IsApproved = true;
+                    obligationRequestModel.IsDisapproved = false;
+                    obligationRequestModel.IsCancelled = false;
+                    obligationRequestModel.DisapprovalMessage = string.Empty;
+                }
+
                 message = "Obligation Request has been saved.";
                 return Factory.ObligationRequestRepository().Insert(obligationRequestModel, ObligationAccountsModelList());
             }
@@ -294,9 +302,21 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         }
 
+        private void VerifyPermissions()
+        {
+            if (!Helper.HasPermission("Transaction Obligation Request Approval"))
+            {
+                btnApprove.Visible = false;
+                btnDisapprove.Visible = false;
+                btnCancelObligation.Visible = false;
+                toolStripSeparator1.Visible = false;
+            }
+        }
+
         private void frmObligationRequestMain_Load(object sender, EventArgs e)
         {
             ResetControls();
+            VerifyPermissions();
         }
 
         internal void GetObligationStatus()

@@ -91,8 +91,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
                 btnDisapprove.Visible = false;
                 txtDissaprovalMessage.Text = GetDissaprovalMessage();
-                txtDissaprovalMessage.SelectionStart = 0;
-                txtDissaprovalMessage.ReadOnly = true;
+
                 btnCancel.Text = "Close";
             }
             else
@@ -108,7 +107,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private void VerifyPermissions()
         {
             if (!Helper.HasPermission("Transaction Obligation Request Approval"))
+            {
                 btnSaveMessage.Visible = false;
+                txtDissaprovalMessage.SelectionStart = 0;
+                txtDissaprovalMessage.ReadOnly = true;
+            }
+
 
             var dictObligationRequest = Factory.ObligationRequestRepository().GetViewRecordById(_frmObligationRequestMain.ucObligationRequestMain1.obligationRequestId);
 

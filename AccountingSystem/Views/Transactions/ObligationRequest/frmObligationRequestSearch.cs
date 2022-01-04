@@ -86,7 +86,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             return dataTable;
         }
 
-
         private void LoadFunds()
         {
             try
