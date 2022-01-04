@@ -105,6 +105,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.cmbfunds.Name = "cmbfunds";
             this.cmbfunds.Size = new System.Drawing.Size(185, 23);
             this.cmbfunds.TabIndex = 10;
+            this.cmbfunds.SelectedValueChanged += new System.EventHandler(this.cmbfunds_SelectedValueChanged);
             // 
             // label3
             // 

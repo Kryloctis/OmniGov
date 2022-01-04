@@ -11,10 +11,11 @@ namespace ACC.Domain.Interfaces
         bool IssuedExist(int coid, int id);
         bool UpdateReturnedReceipt(ReceiptsIssuedModel entity);
         bool HasIssued(int id);
+        bool UpdateCurrentIssued(ReceiptsIssuedModel entity);
+        bool IssuedExist(ReceiptsIssuedModel entity);
         DataTable GetRecords(int id);
         DataTable GetRecords(string coid, string formid);
         DataTable GetRecordsReceipts(string id);
-        bool UpdateCurrentIssued(ReceiptsIssuedModel entity);
-        bool IssuedExist(ReceiptsIssuedModel entity);
+        DataTable GetAccountabilityForAccountableForms();
     }
 }

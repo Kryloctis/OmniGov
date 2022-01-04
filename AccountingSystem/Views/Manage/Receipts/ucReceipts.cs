@@ -23,12 +23,6 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             InitializeComponent();
         }
-
-        private void ucForms_Load(object sender, EventArgs e)
-        {
-
-        }
-
         internal string GetFormErrors()
         {
             var errorArray = new string[5];
@@ -87,7 +81,6 @@ namespace AccountingSystem.Views.Manage.Receipts
                     e.Cancel = true;
                 }
             }
-         
         }
 
         private void txtfrom_Validated(object sender, EventArgs e)

@@ -84,7 +84,6 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-
             _frmRCD.dgListOfApprovedReport.Rows.Clear();
             _frmRCD.txtRCDNo.Text = rcdNo;
             _frmRCD.rcdId = rcdId;

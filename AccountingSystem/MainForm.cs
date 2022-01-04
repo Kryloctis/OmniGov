@@ -18,6 +18,7 @@ using AccountingSystem.Views.Reports.Cashbook;
 using AccountingSystem.Views.Reports.ConsolidatedReceipts;
 using AccountingSystem.Views.Reports.DailyCashReport;
 using AccountingSystem.Views.Reports.PaymentCollection;
+using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.SAAOBB;
@@ -165,13 +166,37 @@ namespace AccountingSystem
                 menuDisbursingOfficer.Visible = false;
 
             if (!Helper.HasPermission("Manage Receipts"))
-            {
-                ucTreasuryDashboard1.btnReceipts.Enabled = false;
                 menuReceipts.Visible = false;
-            }
 
-            if (!Helper.HasPermission("Manage Accountable Forms"))
-                menuAccForm.Visible = false;
+            if (!Helper.HasPermission("Transaction Issue Receipt"))
+                ucTreasuryDashboard1.btnIssueReceipt.Enabled = false;
+
+            if (!Helper.HasPermission("Transaction Generate RCD"))
+                ucTreasuryDashboard1.btnRCD.Enabled = false;
+
+            if (!Helper.HasPermission("Report of Checks Issued"))
+                menuprintRCI.Visible = false;
+
+            if (!Helper.HasPermission("Report of Collections and Deposits"))
+                menuprintPC.Visible = false;
+
+            if (!Helper.HasPermission("Reports of General Collections"))
+                menuprintGC.Visible = false;
+
+            if (!Helper.HasPermission("Report Bank Cashbook"))
+                menuBankCashBook.Visible = false;
+
+            if (!Helper.HasPermission("Report Consolidated Receipts"))
+                menuReceiptsConsolidated.Visible = false;
+
+            if (!Helper.HasPermission("Report Daily Cash Position"))
+                menuDailyCash.Visible = false;
+
+            if (!Helper.HasPermission("Report SAAOB"))
+                menuSAAOB.Visible = false;
+
+            if (!Helper.HasPermission("Report SAAOBB"))
+                menuSAAOBB.Visible = false;
 
             if (!Helper.HasPermission("Manage Amortization"))
                 amortiaztionToolStripMenuItem.Visible = false;
@@ -463,13 +488,9 @@ namespace AccountingSystem
 
         private void menuprintPC_Click(object sender, EventArgs e)
         {
-            _ = new frmGCList().ShowDialog();
+            _ = new frmRCD().ShowDialog();
         }
 
-        private void menuprintGC_Click(object sender, EventArgs e)
-        {
-            _ = new frmPCReport().ShowDialog();
-        }
 
         private void menureceipts_Click(object sender, EventArgs e)
         {

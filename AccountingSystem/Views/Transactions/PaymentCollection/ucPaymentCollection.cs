@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ACC.Domain.Interfaces;
-using AccountingSystem.Views.Transactions.PaymentCollection.Find;
 
 namespace AccountingSystem.Views.Transactions.PaymentCollection
 {
@@ -149,9 +148,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }    
 
-        internal bool isbetween(int num)
+        internal bool IsBetween(int num)
         {
-            return num >= minreceipt && num <= maxreceipt;
+            return (num >= minreceipt) && (num <= maxreceipt);
         }
 
 
@@ -160,16 +159,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             generalLedgerId = Id;
             cmbAccount.Text = value;
-        }
-
-        private void btnaccountable_Click(object sender, EventArgs e)
-        {
-            _ = new frmFind(this, "accountable").ShowDialog();
-        }
-
-        private void btnledger_Click(object sender, EventArgs e)
-        {
-            _ = new frmFind(this, "ledger").ShowDialog();
         }
 
         private void ucPC_Load(object sender, EventArgs e)
@@ -227,7 +216,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal void txtreceipt_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtreceipt, "Receipt No.");
-            if (!isbetween(Convert.ToInt32(txtreceipt.Text.Trim())))
+            if (!IsBetween(Convert.ToInt32(txtreceipt.Text.Trim())))
             {
                 errorProvider.SetError(txtreceipt, "Receipt No. invalid.");
                 e.Cancel = true;
@@ -428,7 +417,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-
                 if (DatatableAccounts().Rows.Count == 0) return;
 
                 var accountDict = new Dictionary<ushort, string>();

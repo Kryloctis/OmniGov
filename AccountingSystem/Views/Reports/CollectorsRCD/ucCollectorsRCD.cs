@@ -1,13 +1,9 @@
 ﻿using ACC.Domain.Interfaces;
 using AccountingSystem.Views.Reports.CollectorsRCD;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RCDCollector
@@ -17,7 +13,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         internal ushort reportId;
         internal byte fundId;
         internal ushort collectorId;
-        internal bool isSaveFunction;
+        internal bool isSaveFunction = true;
 
         public ucCollectorsRCD()
         {
@@ -29,7 +25,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         {
             var errorArray = new string[2];
             errorArray[0] = epReportNo.GetError(txtReport);
-            errorArray[1] = epReportNo.GetError(cmbcollector);
+            errorArray[1] = epReportNo.GetError(cmbCollector);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -41,55 +37,23 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             LoadFunds();
             LoadCollectors();
 
-            cmbcollector.SelectedIndex = -1;
+            cmbCollector.SelectedIndex = -1;
 
             btnadd.Enabled = false;
             btnRemove.Enabled = false;
+            btnClear.Enabled = false;
         }
-
-        internal void TotalCollections()
-        {
-            string TotalCollections;
-
-            TotalCollections = (from DataGridViewRow row in dgPayments.Rows
-                                where !String.IsNullOrEmpty(row.Cells["amount"].FormattedValue.ToString())
-                                select Convert.ToDecimal(row.Cells["amount"].FormattedValue)).Sum().ToString("N2");
-
-            txtTotal.Text = TotalCollections;
-        }
-
-        private void LoadCollectors()
-        {
-            try
-            {
-                cmbcollector.SelectedValueChanged -= new EventHandler(cmbcollector_SelectedValueChanged);
-                var collectingOfficerRepository = Factory.CollectingOfficerRepository();
-                var dtCollectors = collectingOfficerRepository.GetRecords();
-
-                cmbcollector.DataSource = dtCollectors;
-                cmbcollector.DisplayMember = "fullname";
-                cmbcollector.ValueMember = "id";
-                cmbcollector.SelectedValueChanged += new EventHandler(cmbcollector_SelectedValueChanged);
-
-                collectorId = (ushort)Convert.ToInt32(cmbcollector.SelectedValue);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        internal void ResetForm() 
+        internal void ResetForm()
         {
             btnadd.Enabled = false;
             btnRemove.Enabled = false;
-            btnclear.Enabled = false;
-            
+            btnClear.Enabled = false;
+
             txtTotal.Text = "0.00";
 
-            cmbcollector.SelectedIndex = -1;
+            cmbCollector.SelectedIndex = -1;
             txtReport.Text = string.Empty;
-            dtdate.Value = DateTime.Now;
+            dtRCDDate.Value = DateTime.Now;
 
             dgPayments.Rows.Clear();
             dgPayments.Refresh();
@@ -110,7 +74,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
                     TextImageRelation = TextImageRelation.ImageBeforeText
                 };
 
-                // making general fund as default
                 if (fund["fund_name"].ToString() == "General Fund")
                 {
                     radFund.Checked = true;
@@ -138,12 +101,43 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             }
         }
 
+        private void LoadCollectors()
+        {
+            try
+            {
+                cmbCollector.SelectedValueChanged -= new EventHandler(cmbcollector_SelectedValueChanged);
+                var collectingOfficerRepository = Factory.CollectingOfficerRepository();
+                var dtCollectors = collectingOfficerRepository.GetRecords();
+
+                cmbCollector.DataSource = dtCollectors;
+                cmbCollector.DisplayMember = "fullname";
+                cmbCollector.ValueMember = "id";
+                cmbCollector.SelectedValueChanged += new EventHandler(cmbcollector_SelectedValueChanged);
+
+                collectorId = (ushort)Convert.ToInt32(cmbCollector.SelectedValue);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+
+        internal void TotalCollections()
+        {
+            string TotalCollections;
+
+            TotalCollections = (from DataGridViewRow row in dgPayments.Rows
+                                where !String.IsNullOrEmpty(row.Cells["amount"].FormattedValue.ToString())
+                                select Convert.ToDecimal(row.Cells["amount"].FormattedValue)).Sum().ToString("N2");
+
+            txtTotal.Text = TotalCollections;
+        }
 
         private void btnadd_Click(object sender, EventArgs e)
         {
             ActionPerformIsSave(true);
             _ = new frmCollectorsRCDLoad(fundId, collectorId, this).ShowDialog();
-
         }
 
         internal void ActionPerformIsSave(bool isSave)
@@ -153,10 +147,10 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         private void cmbcollector_SelectedValueChanged(object sender, EventArgs e)
         {
-            collectorId = (ushort)Convert.ToSByte(cmbcollector.SelectedValue);
+            collectorId = (ushort)Convert.ToSByte(cmbCollector.SelectedValue);
 
 
-            if (cmbcollector.SelectedIndex == -1) 
+            if (cmbCollector.SelectedIndex == -1) 
                 btnadd.Enabled = false;
             else
                 btnadd.Enabled = true;
@@ -169,12 +163,16 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             {
                 dgPayments.Rows.RemoveAt(item.Index);
             }
+
+            TotalCollections();
         }
 
         private void btnclear_Click(object sender, EventArgs e)
         {
             dgPayments.Rows.Clear();
-            btnclear.Enabled = false;
+            btnClear.Enabled = false;
+
+            TotalCollections();
         }
 
         private void txtReport_Validating(object sender, CancelEventArgs e)
@@ -185,35 +183,25 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             if (String.IsNullOrEmpty(reportNo))
             {
                 e.Cancel = Helper.ShowErrorTextBoxEmpty(epReportNo, txtReport, "Report No.");
+                return;
+            }
+          
+            var reportNoExist = Factory.CollectorReportRepository().ReportNumberExist(reportNo);
+
+            if (reportNoExist)
+            {
+                epReportNo.SetError(txtReport, "Report number already existed.");
+                e.Cancel = true;
             }
             else
             {
-                var reportNoExist = Factory.CollectorReportRepository().ReportNumberExist(reportNo);
-
-                if (reportNoExist)
-                {
-                    epReportNo.SetError(txtReport, "Report number already existed.");
-                    e.Cancel = true;
-                }
-                else
-                {
-                    e.Cancel = false;
-                }
+                e.Cancel = false;
             }
+           
         }
         private void txtReport_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(epReportNo, txtReport);
-        }
-
-        private void cmbcollector_Validating(object sender, CancelEventArgs e)
-        {
-
-        }
-
-        private void cmbcollector_Validated(object sender, EventArgs e)
-        {
-
         }
 
         private void dgPayments_SelectionChanged(object sender, EventArgs e)
@@ -221,8 +209,8 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             var selectedRowCount = dgPayments.SelectedRows.Count;
             var rowCount = dgPayments.Rows.Count;
 
-            btnRemove.Enabled = selectedRowCount  != 0 && selectedRowCount !> 1;
-            btnclear.Enabled = rowCount > 0;
+            btnRemove.Enabled = selectedRowCount != 0;
+            btnClear.Enabled = rowCount > 0;
 
             TotalCollections();
         }

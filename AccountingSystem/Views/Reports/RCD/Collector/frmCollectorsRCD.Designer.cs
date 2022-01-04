@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Reports.PaymentCollection
 {
-    partial class frmCDReport
+    partial class frmCollectorsRCD
     {
         /// <summary>
         /// Required designer variable.
@@ -29,31 +29,31 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelReport = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panelReport.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Location = new System.Drawing.Point(10, 10);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1135, 527);
-            this.panel1.TabIndex = 20;
+            this.panelReport.Location = new System.Drawing.Point(10, 10);
+            this.panelReport.Name = "panel1";
+            this.panelReport.Size = new System.Drawing.Size(1135, 527);
+            this.panelReport.TabIndex = 20;
             // 
-            // frmCDReport
+            // frmCollectorsRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1156, 547);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelReport);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinimizeBox = false;
-            this.Name = "frmCDReport";
+            this.Name = "frmCollectorsRCD";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Reports > Reports of Collections and Deposits";
+            this.Text = "Reports > Collector\'s Reports of Collections and Deposits  ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmCDReport_Load);
             this.ResumeLayout(false);
@@ -62,6 +62,6 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelReport;
     }
 }

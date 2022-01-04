@@ -27,6 +27,10 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             ucrci1.LoadBanks();
             ucrci1.LoadFunds();
+
+            ucrci1.LoadFPP();
+            ucrci1.cmbFPP.SelectedIndex = -1;
+            ucrci1.cmbFPP.TextChanged += new EventHandler(uc.cmbxFPP_TextChanged);
         }
 
         private bool SaveData()

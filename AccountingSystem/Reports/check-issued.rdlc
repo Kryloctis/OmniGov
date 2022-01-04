@@ -155,6 +155,7 @@
                               <Style>Solid</Style>
                             </Border>
                             <BackgroundColor>LightGrey</BackgroundColor>
+                            <VerticalAlign>Bottom</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -195,6 +196,7 @@
                               <Style>None</Style>
                             </BottomBorder>
                             <BackgroundColor>LightGrey</BackgroundColor>
+                            <VerticalAlign>Bottom</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -233,6 +235,7 @@
                               <Style>None</Style>
                             </BottomBorder>
                             <BackgroundColor>LightGrey</BackgroundColor>
+                            <VerticalAlign>Bottom</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -271,6 +274,7 @@
                               <Style>None</Style>
                             </BottomBorder>
                             <BackgroundColor>LightGrey</BackgroundColor>
+                            <VerticalAlign>Bottom</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -309,6 +313,7 @@
                               <Style>None</Style>
                             </BottomBorder>
                             <BackgroundColor>LightGrey</BackgroundColor>
+                            <VerticalAlign>Bottom</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -347,6 +352,7 @@
                               <Style>None</Style>
                             </BottomBorder>
                             <BackgroundColor>LightGrey</BackgroundColor>
+                            <VerticalAlign>Bottom</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -1212,7 +1218,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!trust_liabilities.Value</Value>
+                                  <Value />
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <Format>#,0.00;(#,0.00)</Format>
@@ -1246,7 +1252,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!bir_vat_nonvat.Value</Value>
+                                  <Value />
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <Format>#,0.00;(#,0.00)</Format>
@@ -1502,7 +1508,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!trust_liabilities.Value)</Value>
+                                  <Value />
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -1538,7 +1544,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!bir_vat_nonvat.Value)</Value>
+                                  <Value />
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -1716,7 +1722,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Month:</Value>
+                      <Value>Month</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1787,7 +1793,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>LGU:</Value>
+                      <Value>LGU</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1832,7 +1838,7 @@
               <Top>2.03172cm</Top>
               <Left>2.07434cm</Left>
               <Height>0.6cm</Height>
-              <Width>5.96604cm</Width>
+              <Width>11.81333cm</Width>
               <ZIndex>4</ZIndex>
               <Style>
                 <Border>
@@ -1856,7 +1862,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>ACCOUNT:</Value>
+                      <Value>ACCOUNT</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1901,7 +1907,7 @@
               <Top>2.667cm</Top>
               <Left>2.07434cm</Left>
               <Height>0.6cm</Height>
-              <Width>5.96604cm</Width>
+              <Width>11.81333cm</Width>
               <ZIndex>6</ZIndex>
               <Style>
                 <Border>
@@ -1925,7 +1931,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Sheet No.:</Value>
+                      <Value>Sheet No.</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -2561,7 +2567,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Sum(ReportItems!Textbox90.Value)</Value>
+                      <Value />
                       <Style>
                         <FontSize>8pt</FontSize>
                         <FontWeight>Bold</FontWeight>
@@ -2597,7 +2603,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Sum(ReportItems!Textbox91.Value)</Value>
+                      <Value />
                       <Style>
                         <FontSize>8pt</FontSize>
                         <FontWeight>Bold</FontWeight>

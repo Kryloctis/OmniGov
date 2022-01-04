@@ -142,11 +142,12 @@ namespace AccountingSystem.Views.Transactions.JEV
                 cmbFPP.SelectedIndex = -1;
                 cmbFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
             }
+
         }
 
         private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F1 && !string.IsNullOrEmpty(cmbFPP.Text) && cmbFPP.Focused)
+            if (e.KeyCode == Keys.Enter && !string.IsNullOrEmpty(cmbFPP.Text) && cmbFPP.Focused)
             {
                 LoadFPP();
                 cmbFPP.DroppedDown = true;
