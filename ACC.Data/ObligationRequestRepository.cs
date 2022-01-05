@@ -542,7 +542,7 @@ namespace ACC.Data
                 new object[] { "@date_requested", DbType.Date, dateOfRequest.Date}
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE funds_id = @funds_id AND allotment_classes_id = @allotment_classes_id AND  date_requested <= @date_requested AND {Status()} (obligation_no LIKE @searchText OR payee LIKE @searchText OR explanation = @searchText OR reference_no LIKE @searchText) GROUP BY obligation_request_id ORDER BY obligation_no";
+            string query = $"SELECT * FROM {viewTableName} WHERE funds_id = @funds_id AND allotment_classes_id = @allotment_classes_id AND  date_requested <= @date_requested AND YEAR(date_requested) = YEAR(@date_requested) AND {Status()} (obligation_no LIKE @searchText OR payee LIKE @searchText OR explanation = @searchText OR reference_no LIKE @searchText) GROUP BY obligation_request_id ORDER BY obligation_no";
 
             var dataTable = new DataTable();
 
