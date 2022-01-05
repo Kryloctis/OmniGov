@@ -48,17 +48,16 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 {
                     int budgetAppropriationId = Convert.ToInt32(cmbxObjectOfExpenditure.SelectedValue);
                     var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationIdDateIssued(budgetAppropriationId, dateRequested);
-                    var dtObligationRequests = Factory.ObligationRequestRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
 
                     decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
-                    decimal totalObligations = Convert.ToDecimal(dtObligationRequests.Rows.Count == 0 ? 0 : dtObligationRequests.Compute("SUM(amount)", string.Empty));
+                    decimal totalObligations = Factory.ObligationRequestRepository().GetSumObligationsByBudgetAppropriationAndStatus(budgetAppropriationId);
 
                     allotmentReleaseBalance = (totalAllotmentRelease - totalObligations) + (budgetAppropriationId == _budgetAppropriationsId ? _amount : 0);
                 }
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError(ex.StackTrace);
             }
 
             return allotmentReleaseBalance < 0 ? 0 : allotmentReleaseBalance;

@@ -26,7 +26,9 @@ namespace ACC.Domain.Interfaces
 
         decimal GetSumObligations(string fppId, string subFPPId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing);
 
-        decimal GetSumObligations(int obligationRequestId);
+        decimal GetSumObligationsByBudgetAppropriationAndStatus(int budgetAppropriationsId);
+
+        decimal GetSumObligationsById(int obligationRequestId);
 
         Dictionary<string, string> GetViewRecordById(int Id);
 
