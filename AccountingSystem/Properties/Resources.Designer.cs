@@ -113,16 +113,6 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap allotment_release_24px {
-            get {
-                object obj = ResourceManager.GetObject("allotment_release_24px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap augmentation_24px {
             get {
                 object obj = ResourceManager.GetObject("augmentation_24px", resourceCulture);
@@ -153,9 +143,49 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap budget_approprations_24px {
+        internal static System.Drawing.Bitmap bank_deposit_filled_16px {
             get {
-                object obj = ResourceManager.GetObject("budget_approprations_24px", resourceCulture);
+                object obj = ResourceManager.GetObject("bank_deposit_filled_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bank_deposit_filled_20px {
+            get {
+                object obj = ResourceManager.GetObject("bank_deposit_filled_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bank_deposit_filled_24px {
+            get {
+                object obj = ResourceManager.GetObject("bank_deposit_filled_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap check_16px {
+            get {
+                object obj = ResourceManager.GetObject("check_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap check_20px {
+            get {
+                object obj = ResourceManager.GetObject("check_20px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -216,6 +246,36 @@ namespace AccountingSystem.Properties {
         internal static System.Drawing.Bitmap document_approve_28px {
             get {
                 object obj = ResourceManager.GetObject("document_approve_28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_blue_filled_edit_filled_16px {
+            get {
+                object obj = ResourceManager.GetObject("document_blue_filled_edit_filled_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_blue_filled_edit_filled_20px {
+            get {
+                object obj = ResourceManager.GetObject("document_blue_filled_edit_filled_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_blue_filled_edit_filled_24px {
+            get {
+                object obj = ResourceManager.GetObject("document_blue_filled_edit_filled_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -293,9 +353,69 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap document_delivery_receipt_user_filled_16px {
+            get {
+                object obj = ResourceManager.GetObject("document_delivery_receipt_user_filled_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_delivery_receipt_user_filled_20px {
+            get {
+                object obj = ResourceManager.GetObject("document_delivery_receipt_user_filled_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_delivery_receipt_user_filled_24px {
+            get {
+                object obj = ResourceManager.GetObject("document_delivery_receipt_user_filled_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap document_disapprove_28px {
             get {
                 object obj = ResourceManager.GetObject("document_disapprove_28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_text_graph_stats_filled_16px {
+            get {
+                object obj = ResourceManager.GetObject("document_text_graph_stats_filled_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_text_graph_stats_filled_20px {
+            get {
+                object obj = ResourceManager.GetObject("document_text_graph_stats_filled_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_text_graph_stats_filled_24px {
+            get {
+                object obj = ResourceManager.GetObject("document_text_graph_stats_filled_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -353,9 +473,29 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap give_money_28px {
+        internal static System.Drawing.Bitmap give_money_2_16px {
             get {
-                object obj = ResourceManager.GetObject("give_money_28px", resourceCulture);
+                object obj = ResourceManager.GetObject("give_money_2_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap give_money_2_20px {
+            get {
+                object obj = ResourceManager.GetObject("give_money_2_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap give_money_2_24px {
+            get {
+                object obj = ResourceManager.GetObject("give_money_2_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -376,6 +516,66 @@ namespace AccountingSystem.Properties {
         internal static System.Drawing.Bitmap invisible_16px {
             get {
                 object obj = ResourceManager.GetObject("invisible_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap justice_filled_document_16px {
+            get {
+                object obj = ResourceManager.GetObject("justice_filled_document_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap justice_filled_document_20px {
+            get {
+                object obj = ResourceManager.GetObject("justice_filled_document_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap justice_filled_document_24px {
+            get {
+                object obj = ResourceManager.GetObject("justice_filled_document_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap knowledge_books_filled_16px {
+            get {
+                object obj = ResourceManager.GetObject("knowledge_books_filled_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap knowledge_books_filled_20px {
+            get {
+                object obj = ResourceManager.GetObject("knowledge_books_filled_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap knowledge_books_filled_24px {
+            get {
+                object obj = ResourceManager.GetObject("knowledge_books_filled_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -413,9 +613,129 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap money_banknote_filled_archive_16px {
+            get {
+                object obj = ResourceManager.GetObject("money_banknote_filled_archive_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_banknote_filled_archive_20px {
+            get {
+                object obj = ResourceManager.GetObject("money_banknote_filled_archive_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_banknote_filled_archive_24px {
+            get {
+                object obj = ResourceManager.GetObject("money_banknote_filled_archive_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_banknotes_1_filled_arrow_right_filled_16px {
+            get {
+                object obj = ResourceManager.GetObject("money_banknotes_1_filled_arrow_right_filled_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_banknotes_1_filled_arrow_right_filled_20px {
+            get {
+                object obj = ResourceManager.GetObject("money_banknotes_1_filled_arrow_right_filled_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_banknotes_1_filled_arrow_right_filled_24px {
+            get {
+                object obj = ResourceManager.GetObject("money_banknotes_1_filled_arrow_right_filled_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_banknotes_2_document_text_16px {
+            get {
+                object obj = ResourceManager.GetObject("money_banknotes_2_document_text_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_banknotes_2_document_text_20px {
+            get {
+                object obj = ResourceManager.GetObject("money_banknotes_2_document_text_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_banknotes_2_document_text_24px {
+            get {
+                object obj = ResourceManager.GetObject("money_banknotes_2_document_text_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap money_banknotes_document_text_28px {
             get {
                 object obj = ResourceManager.GetObject("money_banknotes_document_text_28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap notes_text_16px {
+            get {
+                object obj = ResourceManager.GetObject("notes_text_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap notes_text_20px {
+            get {
+                object obj = ResourceManager.GetObject("notes_text_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap notes_text_24px {
+            get {
+                object obj = ResourceManager.GetObject("notes_text_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -516,6 +836,36 @@ namespace AccountingSystem.Properties {
         internal static System.Drawing.Bitmap report_24px {
             get {
                 object obj = ResourceManager.GetObject("report_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap report_document_text_16px {
+            get {
+                object obj = ResourceManager.GetObject("report_document_text_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap report_document_text_20px {
+            get {
+                object obj = ResourceManager.GetObject("report_document_text_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap report_document_text_24px {
+            get {
+                object obj = ResourceManager.GetObject("report_document_text_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -636,6 +986,36 @@ namespace AccountingSystem.Properties {
         internal static System.Drawing.Bitmap symbol_refresh_28px {
             get {
                 object obj = ResourceManager.GetObject("symbol_refresh_28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap view_list_money_banknotes_16px {
+            get {
+                object obj = ResourceManager.GetObject("view_list_money_banknotes_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap view_list_money_banknotes_20px {
+            get {
+                object obj = ResourceManager.GetObject("view_list_money_banknotes_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap view_list_money_banknotes_24px {
+            get {
+                object obj = ResourceManager.GetObject("view_list_money_banknotes_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
