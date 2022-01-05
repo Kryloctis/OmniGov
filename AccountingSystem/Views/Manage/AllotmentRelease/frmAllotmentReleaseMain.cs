@@ -1,15 +1,7 @@
 ﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.BudgetAppropriations;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AllotmentRelease
@@ -30,7 +22,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             var allotmentAccountModelList = new List<AllotmentAccountModel>();
 
-            foreach (DataGridViewRow row in uc.dgAllotmentRelease.Rows) 
+            foreach (DataGridViewRow row in uc.dgAllotmentRelease.Rows)
             {
                 int budgetAppropriationsId = Convert.ToInt32(row.Cells["budget_appropriation_id"].Value);
                 decimal allotmentReleaseAmount = Convert.ToDecimal(row.Cells["allotment_amount"].Value);
@@ -47,7 +39,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return allotmentAccountModelList;
         }
 
-        private bool InsertData() 
+        private bool InsertData()
         {
             try
             {
@@ -70,7 +62,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return false;
         }
 
-        private bool UpdateData() 
+        private bool UpdateData()
         {
             try
             {
@@ -96,7 +88,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         }
 
 
-        private bool SaveData() 
+        private bool SaveData()
         {
             try
             {
@@ -131,7 +123,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             if (SaveData())
             {
-                string message = uc.allotmentReleaseId == 0? "saved" : "updated";
+                string message = uc.allotmentReleaseId == 0 ? "saved" : "updated";
                 Helper.MessageBoxSuccess($"Allotment release has been {message}.");
                 uc.ResetForm();
                 btnSave.Text = "Save";
@@ -141,7 +133,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void CanceAction()
         {
-            var message = "Are you sure? Changes cannot be undone.";
+            var message = "Are you sure? Changes will not be saved.";
             if (uc.allotmentReleaseId > 0 || uc.dgAllotmentRelease.Rows.Count > 0)
             {
                 if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
@@ -153,7 +145,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
         }
 
-        private void BtnCancel_Click(object sender, EventArgs e) 
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             CanceAction();
         }
@@ -164,7 +156,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         }
 
 
-        private bool Delete() 
+        private bool Delete()
         {
             try
             {
@@ -186,7 +178,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (Delete()) 
+            if (Delete())
             {
                 Helper.MessageBoxSuccess($"Allotment Release records has been deleted.");
                 uc.ResetForm();

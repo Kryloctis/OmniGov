@@ -267,6 +267,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(915, 471);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dtDateRequested);
