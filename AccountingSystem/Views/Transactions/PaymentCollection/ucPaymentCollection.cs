@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             errorArray[4] = errorProvider.GetError(txtpayee);
             errorArray[5] = errorProvider.GetError(txtreceipt);
             errorArray[6] = errorProvider.GetError(dtdate);
-            errorArray[7] = errorProvider.GetError(txtamount);
+            errorArray[7] = errorProvider.GetError(txtAmount);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             txtpayee.Clear();
             txtreceipt.Clear();
             dtdate.Value = DateTime.Now;
-            txtamount.Value = Convert.ToDecimal("0.00");
+            txtAmount.Value = Convert.ToDecimal("0.00");
             minreceipt = 0;
             maxreceipt = 0;
             receipt = 0;
@@ -72,7 +72,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 var formRepository = Factory.ReceiptsIssuedRepository();
                 var dtforms = formRepository.GetRecordsReceipts(collectorsId.ToString());
-                dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
+                dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc + ' - ' + (quantity)");
                 cmbforms.DataSource = dtforms;
                 cmbforms.ValueMember = "id";
                 cmbforms.DisplayMember = "formdisplay";
@@ -166,7 +166,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             LoadForms(Convert.ToInt32(cmbcollector.SelectedValue));
             LoadCollectors();
             LoadFunds();
-
 
             cmbAccount.SelectedValueChanged -= cmbAccount_SelectedValueChanged;
             LoadAccounts();
@@ -370,7 +369,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 txtpayee.Enabled = true;
                 //txtreceipt.Enabled = true;
                 dtdate.Enabled = true;
-                txtamount.Enabled = true;
+                txtAmount.Enabled = true;
                 cmbAccount.Enabled = true;
                 LoadForms(int.Parse(collector[0].ToString()));
             }
@@ -380,7 +379,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 txtpayee.Enabled = false;
                 //txtreceipt.Enabled = false;
                 dtdate.Enabled = false;
-                txtamount.Enabled = false;
+                txtAmount.Enabled = false;
                 cmbAccount.Enabled = false;
             }
         }
@@ -393,7 +392,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
             }
         }
-
 
         private DataTable DatatableAccounts()
         {
@@ -449,11 +447,14 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 tabPaymentType.SelectedTab = tabCashTickets;
                 isCashTicket = true;
+                txtCashTicketsAmount.Value = accountableFormFaceValue;
+
             }
             else
             {
                 tabPaymentType.SelectedTab = tabNonCashTickets;
                 isCashTicket = false;
+                txtAmount.Value = accountableFormFaceValue;
             }
         }
 
@@ -470,7 +471,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
         }
-
 
         private void cmbAccount_KeyDown(object sender, KeyEventArgs e)
         {

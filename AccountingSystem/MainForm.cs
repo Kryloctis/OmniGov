@@ -17,6 +17,7 @@ using AccountingSystem.Views.Manage.Users.Roles;
 using AccountingSystem.Views.Reports.Cashbook;
 using AccountingSystem.Views.Reports.ConsolidatedReceipts;
 using AccountingSystem.Views.Reports.DailyCashReport;
+using AccountingSystem.Views.Reports.GeneralCollection;
 using AccountingSystem.Views.Reports.PaymentCollection;
 using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Reports.RCI;
@@ -630,6 +631,11 @@ namespace AccountingSystem
         private void signatoriesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmSignatories().ShowDialog();
+        }
+
+        private void menuprintGC_Click(object sender, EventArgs e)
+        {
+            _ = new frmAbstractOfGeneralCollection().ShowDialog();
         }
     }
 }

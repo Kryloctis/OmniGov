@@ -53,7 +53,7 @@ namespace AccountingSystem.Views.Reports.RCI
                     row["bank_name"] = item["bank_name"];
                     row["check_no"] = item["check_no"];
                     row["check_date"] = item["check_date"];
-                    row["fund_code"] = item["fund_code"];
+                    row["fund_code"] = "100";
                     row["payee"] = item["payee"];
                     row["nature_of_payment"] = item["nature_of_payment"];
                     row["dv_no"] = item["dv_no"];
@@ -84,6 +84,7 @@ namespace AccountingSystem.Views.Reports.RCI
                     new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
                     new ReportParameter("paramSignatory", signatory)
                 };
+
                 report.ReportPath = $"{Application.StartupPath}Reports\\check-issued.rdlc";
                 report.DataSources.Clear();
 

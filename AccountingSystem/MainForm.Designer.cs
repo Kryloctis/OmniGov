@@ -376,6 +376,7 @@ namespace AccountingSystem
             this.menuprintGC.Name = "menuprintGC";
             this.menuprintGC.Size = new System.Drawing.Size(233, 22);
             this.menuprintGC.Text = "Reports of General Collections";
+            this.menuprintGC.Click += new System.EventHandler(this.menuprintGC_Click);
             // 
             // menuBankCashBook
             // 

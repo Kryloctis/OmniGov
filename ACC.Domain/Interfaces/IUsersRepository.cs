@@ -34,6 +34,8 @@ namespace ACC.Domain.Interfaces
 
         string GetCollectorByUserId(int id);
 
+        string GetCollectorNameByUserId(int userId);
+
         string GetDisbursingByUserId(int id);
     }
 }

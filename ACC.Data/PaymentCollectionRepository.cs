@@ -392,26 +392,34 @@ namespace ACC.Data
 
         public DataTable GetRecordByLedger(object[] parameter)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@collectorId", DbType.UInt16, parameter[0] },
-                    new object[] { "@collectionFund", DbType.UInt16, parameter[1] },
-                    new object[] { "@collectionDateFrom", DbType.Date, parameter[2] },
-                    new object[] { "@collectionDateTo", DbType.Date, parameter[3] }
-                };
+                new object[] { "@collectorId", DbType.UInt16, parameter[0] },
+                new object[] { "@collectionFund", DbType.UInt16, parameter[1] },
+                new object[] { "@collectionDateFrom", DbType.Date, parameter[2] },
+                new object[] { "@collectionDateTo", DbType.Date, parameter[3] }
+            };
 
-                string query = $"SELECT * FROM {viewTableName} WHERE collecting_officer_id = @collectorId AND payment_date " +
-                    $"BETWEEN @collectionDateFrom AND @collectionDateTo ";
+            string query =  $"SELECT " +
+                            $"id AS payment_collections_id, " +
+                            $"funds_id, " +
+                            $"fund_name, " +
+                            $"accountable_form_id," +
+                            $"accountable_forms," +
+                            $"general_ledger_accounts_id, " +
+                            $"account_code, " +
+                            $"ledger_name, " +
+                            $"payee, " +
+                            $"receipt_no, " +
+                            $"quantity, " +
+                            $"payment_date, " +
+                            $"amount " +
+                            $"FROM {viewTableName} " +
+                            $"WHERE collecting_officer_id = @collectorId AND payment_date " +
+                            $"BETWEEN @collectionDateFrom AND @collectionDateTo ";
 
-                var dtPaymentCollection = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtPaymentCollection, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtPaymentCollection = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtPaymentCollection, parameters);
         }
 
         public DataTable GetRecordByExcel(string month)

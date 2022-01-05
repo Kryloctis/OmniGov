@@ -504,7 +504,7 @@
             <Top>0.13889in</Top>
             <Left>0.05001in</Left>
             <Height>0.42708in</Height>
-            <Width>7.78475in</Width>
+            <Width>7.78474in</Width>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1070,7 +1070,7 @@
             <DataSetName>dtCollectorsReports</DataSetName>
             <Top>1.82639in</Top>
             <Left>0.12703cm</Left>
-            <Height>0.9717in</Height>
+            <Height>0.97171in</Height>
             <Width>7.78475in</Width>
             <ZIndex>2</ZIndex>
             <Style>
@@ -1732,7 +1732,7 @@
             <Top>0.81597in</Top>
             <Left>0.12703cm</Left>
             <Height>1.01042in</Height>
-            <Width>7.78475in</Width>
+            <Width>7.78476in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -2130,7 +2130,7 @@
             <Top>2.86753in</Top>
             <Left>0.12708cm</Left>
             <Height>0.95833in</Height>
-            <Width>7.78473in</Width>
+            <Width>7.78474in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -2747,7 +2747,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>=CDec(Parameters!paramTotalCash.Value)</Value>
+                        <Value>=Sum(Fields!amount.Value, "dtCollectorsReports")</Value>
                         <Style>
                           <FontSize>8pt</FontSize>
                           <Format>n2</Format>
@@ -2883,7 +2883,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>=CDec(Parameters!paramTotalCash.Value)+CDec(Parameters!paramTotalCheck.Value)</Value>
+                        <Value>=Sum(Fields!amount.Value, "dtCollectorsReports")</Value>
                         <Style>
                           <FontSize>8pt</FontSize>
                           <Format>n2</Format>
@@ -3387,7 +3387,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>Certification</Value>
+                        <Value>CERTIFICATION :                                                                                     VERIFICATION AND ACKNOWLEDGEMENT :</Value>
                         <Style>
                           <FontSize>9pt</FontSize>
                           <FontWeight>Bold</FontWeight>
@@ -5462,7 +5462,7 @@
             <Top>3.94914in</Top>
             <Left>0.05003in</Left>
             <Height>1.25in</Height>
-            <Width>7.7846in</Width>
+            <Width>7.78459in</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
@@ -6020,10 +6020,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>dtRCDDetails</DataSetName>
-            <Top>25.31269cm</Top>
+            <Top>25.63019cm</Top>
             <Left>0.1267cm</Left>
             <Height>0.7257in</Height>
-            <Width>7.78475in</Width>
+            <Width>7.78474in</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>

@@ -36,6 +36,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 
         private void ucTreasuryDashboard_Load(object sender, EventArgs e)
         {
+
         }
 
         private void btnGenerateRCD_Click(object sender, EventArgs e)

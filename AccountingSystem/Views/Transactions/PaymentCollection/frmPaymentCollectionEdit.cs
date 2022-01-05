@@ -52,29 +52,25 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
                 bool isCashTickets = String.IsNullOrEmpty(paymentCollectionDict["receipt_no"]);
 
+
                 if (!isCashTickets)
                 {
-                    uc.SwitchFields(); //false
+                    uc.SwitchFields(); 
                     uc.txtpayee.Text = paymentCollectionDict["payee"];
                     uc.txtreceipt.Text = paymentCollectionDict["receipt_no"];
                     uc.dtdate.Value = Convert.ToDateTime(paymentCollectionDict["payment_date"]);
-                    uc.txtamount.Value = Convert.ToDecimal(paymentCollectionDict["amount"]);
+                    uc.txtAmount.Value = Convert.ToDecimal(paymentCollectionDict["amount"]);
                     receipt = paymentCollectionDict["receipt_no"];
                     uc.receipt = Convert.ToInt32(paymentCollectionDict["receipt_no"]);
                     uc.cmbcollector.Enabled = false;
                 }
-                else //Cash Tickets Fields
+                else
                 {
-                    uc.SwitchFields(); //true
+                    uc.SwitchFields(); 
                     uc.dtCashTicketDateOfCollection.Value = Convert.ToDateTime(paymentCollectionDict["payment_date"]);
                     uc.txtCashTicketQuantity.Text = paymentCollectionDict["quantity"];
                     uc.txtCashTicketsAmount.Text = Convert.ToDecimal(paymentCollectionDict["amount"]).ToString("N2");
                 }
-
-
-
-
-
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -107,7 +103,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     Payee = uc.txtpayee.Text.Trim(),
                     ReceiptNo = uc.txtreceipt.Text.Trim(),
                     PaymentDate = Convert.ToDateTime(uc.dtdate.Text.Trim()),
-                    Amount = Convert.ToDecimal(uc.txtamount.Value),
+                    Amount = Convert.ToDecimal(uc.txtAmount.Value),
                     UpdatedBy =uc.userid,
                 };
 
@@ -135,17 +131,16 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     }                       
                     else return false;
                 }
-                else if (uc.txtamount.Value <= 0)
+                else if (uc.txtAmount.Value <= 0)
                 {
                     Helper.MessageBoxSuccess("Empty Amount!");
-                    uc.txtamount.Focus();
+                    uc.txtAmount.Focus();
                     return false;
                 }
                 else
                 {
                     return pcrepository.Update(pcModel);
                 }
-                
             }
             catch (Exception ex)
             {
@@ -158,18 +153,16 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             var uc = ucPaymentCollection1;
 
-            if (!uc.isCashTicket)
+            if (uc.isCashTicket)
                 UpdateCashTickets();
             else
                 UpdateReceipts();
-
         }
 
         private void UpdateCashTickets()
         {
             try
             {
-
                 var uc = ucPaymentCollection1;
 
                 uc.txtpayee.Validating -= new CancelEventHandler(uc.txtpayee_Validating);

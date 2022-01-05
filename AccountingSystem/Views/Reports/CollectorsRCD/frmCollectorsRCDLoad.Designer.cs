@@ -191,14 +191,13 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmCollectorsRCDLoad";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Load Collections";
-            this.Load += new System.EventHandler(this.frmCollectorsRCDLoad_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

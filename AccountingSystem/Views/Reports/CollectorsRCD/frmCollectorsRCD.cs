@@ -24,30 +24,32 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void CollectorsRCD_Load(object sender, EventArgs e)
         {
-
             ValidateLocalPermission();
-
             if (uc.dgPayments.Rows.Count == 0) return;
-
         }
-
 
         private void ValidateLocalPermission()
         {
-            if (!Helper.HasPermission("Transaction Approved RCD"))
+            if (!Helper.HasPermission("Transaction RCD Approval"))
+            {
                 btnApprove.Visible = false;
-            if (!Helper.HasPermission("Transaction Disapproved RCD"))
                 btnDisapprove.Visible = false;
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (uc.dgPayments.Rows.Count == 0) 
+            {
+                Helper.MessageBoxError("Please load payment collections.");
+                return;
+            }
+
             if (uc.isSaveFunction)
             {
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Collector's report has been created.");
-                    uc.ResetForm();
                 }
             }
             else
@@ -58,11 +60,11 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                     uc.ResetForm();
                 }
             }
+            this.Close();
         }
 
         private bool UpdateData()
         {
-            if (uc.dgPayments.Rows.Count == 0) return false;
 
             using (var scope = new TransactionScope())
             {
@@ -97,8 +99,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             {
                 var CollectorsReportId = GetCollectorsReportId();
                 var PaymentCollectionsId = Convert.ToInt16(item.Cells["payment_collections_id"].Value.ToString());
-
-                MessageBox.Show("PaymentCollectionsId " + PaymentCollectionsId);
 
                 var collectorReportPaymentModel = new CollectorReportPaymentModel()
                 {
@@ -207,8 +207,8 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 {
                     case "pending":
                         //PENDING
-                        lblJevStatus.Text = "PENDING";
-                        lblJevStatus.ForeColor = Color.FromArgb(216, 146, 22);
+                        lblReportStatus.Text = "PENDING";
+                        lblReportStatus.ForeColor = Color.FromArgb(216, 146, 22);
                         lblShowMessage.Visible = false;
                         btnPrint.Enabled = false;
                         btnApprove.Enabled = true;
@@ -219,27 +219,27 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                         break;
                     case "approved":
                         //APPROVED
-                        lblJevStatus.Text = "APPROVED";
-                        lblJevStatus.ForeColor = Color.FromArgb(78, 159, 61);
+                        lblReportStatus.Text = "APPROVED";
+                        lblReportStatus.ForeColor = Color.FromArgb(78, 159, 61);
                         lblShowMessage.Visible = false;
                         btnApprove.Enabled = false;
                         btnDisapprove.Enabled = false;
                         btnPrint.Enabled = true;
                         btnSave.Enabled = true;
                         uc.Enabled = false;
-                        //btnDelete.Enabled = false;
-                        //btnSave.Enabled = false;
+                        btnDelete.Enabled = false;
+                        btnSave.Enabled = false;
                         break;
                     case "disapproved":
                         //DISSAPROVED
-                        lblJevStatus.Text = "DISAPPROVED";
-                        lblJevStatus.ForeColor = Color.FromArgb(149, 1, 1);
+                        lblReportStatus.Text = "DISAPPROVED";
+                        lblReportStatus.ForeColor = Color.FromArgb(149, 1, 1);
                         lblShowMessage.Visible = true;
                         btnApprove.Enabled = false;
                         btnDisapprove.Enabled = false;
                         btnPrint.Enabled = false;
                         btnSave.Enabled = false;
-                        btnDelete.Enabled = false;
+                        btnDelete.Enabled = true;
                         uc.Enabled = false;
                         break;
                 }
@@ -369,14 +369,22 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void ResetLocalControls()
         {
+            btnSave.Text = "Save";
             btnDelete.Enabled = false;
             btnApprove.Enabled = false;
             btnDisapprove.Enabled = false;
             btnPrint.Enabled = false;
 
-            lblJevStatus.Text = "--";
-            lblJevStatus.ForeColor = Color.Black;
+            lblReportStatus.Text = "--";
+            lblReportStatus.ForeColor = Color.Black;
         }
 
+        private void btnSave_TextChanged(object sender, EventArgs e)
+        {
+            if (btnSave.Text == "Save")
+                uc.ActionPerformIsSave(true);
+            else
+                uc.ActionPerformIsSave(false);
+        }
     }
 }

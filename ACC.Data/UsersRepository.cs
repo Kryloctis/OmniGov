@@ -591,5 +591,11 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public string GetCollectorNameByUserId(int userId)
+        {
+           string query = $"SELECT CONCAT(first_name, ' ', mid_initial, ' ', last_name) AS full_name FROM {tableName2} WHERE id='{userId}'";
+           return _dbGenericCommands.ExecuteScalar(query);
+        }
     }
 }

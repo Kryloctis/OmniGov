@@ -39,13 +39,13 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
             cmbCollector.SelectedIndex = -1;
 
-            btnadd.Enabled = false;
+            btnAdd.Enabled = false;
             btnRemove.Enabled = false;
             btnClear.Enabled = false;
         }
         internal void ResetForm()
         {
-            btnadd.Enabled = false;
+            btnAdd.Enabled = false;
             btnRemove.Enabled = false;
             btnClear.Enabled = false;
 
@@ -122,7 +122,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             }
         }
 
-
         internal void TotalCollections()
         {
             string TotalCollections;
@@ -136,7 +135,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         private void btnadd_Click(object sender, EventArgs e)
         {
-            ActionPerformIsSave(true);
             _ = new frmCollectorsRCDLoad(fundId, collectorId, this).ShowDialog();
         }
 
@@ -151,9 +149,9 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
 
             if (cmbCollector.SelectedIndex == -1) 
-                btnadd.Enabled = false;
+                btnAdd.Enabled = false;
             else
-                btnadd.Enabled = true;
+                btnAdd.Enabled = true;
 
         }
 
@@ -175,6 +173,18 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             TotalCollections();
         }
 
+        private void dgPayments_SelectionChanged(object sender, EventArgs e)
+        {
+            var selectedRowCount = dgPayments.SelectedRows.Count;
+            var rowCount = dgPayments.Rows.Count;
+
+            btnRemove.Enabled = selectedRowCount != 0;
+            btnClear.Enabled = rowCount > 0;
+
+            TotalCollections();
+        }
+
+        #region Validation
         private void txtReport_Validating(object sender, CancelEventArgs e)
         {
 
@@ -185,7 +195,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
                 e.Cancel = Helper.ShowErrorTextBoxEmpty(epReportNo, txtReport, "Report No.");
                 return;
             }
-          
+
             var reportNoExist = Factory.CollectorReportRepository().ReportNumberExist(reportNo);
 
             if (reportNoExist)
@@ -197,22 +207,13 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             {
                 e.Cancel = false;
             }
-           
+
         }
         private void txtReport_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(epReportNo, txtReport);
         }
+        #endregion
 
-        private void dgPayments_SelectionChanged(object sender, EventArgs e)
-        {
-            var selectedRowCount = dgPayments.SelectedRows.Count;
-            var rowCount = dgPayments.Rows.Count;
-
-            btnRemove.Enabled = selectedRowCount != 0;
-            btnClear.Enabled = rowCount > 0;
-
-            TotalCollections();
-        }
     }
 }

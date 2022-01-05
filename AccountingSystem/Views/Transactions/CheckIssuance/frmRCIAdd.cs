@@ -25,12 +25,11 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void frmRCIAdd_Load(object sender, EventArgs e)
         {
-            ucrci1.LoadBanks();
-            ucrci1.LoadFunds();
+    
 
-            ucrci1.LoadFPP();
-            ucrci1.cmbFPP.SelectedIndex = -1;
-            ucrci1.cmbFPP.TextChanged += new EventHandler(uc.cmbxFPP_TextChanged);
+
+            uc.cmbFPP.SelectedIndex = -1;
+            uc.cmbFPP.TextChanged += new EventHandler(uc.cmbxFPP_TextChanged);
         }
 
         private bool SaveData()
@@ -81,7 +80,8 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             try
             {
-                short rcid = 6;
+                string lastRecentRCIId = Factory.RCIRepository().GetRecentRCIId();
+                short rcid = (short)(Convert.ToUInt32(lastRecentRCIId));
                 string obligationNo = String.Empty;
 
                 foreach (DataGridViewRow item in uc.dgObligationNoList.Rows)
@@ -92,7 +92,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

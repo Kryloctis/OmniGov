@@ -1,12 +1,6 @@
 ﻿using AccountingSystem.Views.Reports.RCDCollector;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.CollectorsRCD
@@ -18,10 +12,8 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private readonly ushort _collectorId;
         private readonly ucCollectorsRCD _uc;
 
-
         private bool buttonSelectAccess;
         private DataTable dtPaymentCollection;
-
 
         public frmCollectorsRCDLoad(byte fundId, ushort collectorId, ucCollectorsRCD uc)
         {
@@ -31,11 +23,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             _fundId = fundId;
             _collectorId = collectorId;
             _uc = uc;
-        }
-
-        private void btnPreview_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
@@ -71,7 +58,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             foreach (DataRow item in dtPaymentCollection.Rows)
             {
-                var paymentCollectionId = Convert.ToInt32(item["id"].ToString());
+                var paymentCollectionId = Convert.ToInt32(item["payment_collections_id"].ToString());
                 var isPaymentCollectionHasReport = Factory.CollectorReportRepository().HasGenerated(paymentCollectionId);
 
                 if (isPaymentCollectionHasReport)
@@ -91,14 +78,10 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnSelectCollections_Click(object sender, EventArgs e)
         {
+            //HelperLoadRecords.PaymentDatagridView(dtPaymentCollection, _uc.dgPayments);
             HelperLoadRecords.PaymentCollectionReportDatagrid(dtPaymentCollection, _uc.dgPayments);
             _uc.TotalCollections();
             this.Close();
-        }
-
-        private void frmCollectorsRCDLoad_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void dtfrom_DateChanged(object sender, DateRangeEventArgs e)
@@ -110,5 +93,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             lblCollectionsTo.Text = dtto.SelectionRange.Start.ToShortDateString();
         }
+
     }
 }
