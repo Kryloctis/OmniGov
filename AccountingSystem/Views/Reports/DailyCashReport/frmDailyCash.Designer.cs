@@ -40,33 +40,36 @@ namespace AccountingSystem.Views.Reports.DailyCashReport
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Location = new System.Drawing.Point(8, 45);
+            this.panel1.Location = new System.Drawing.Point(7, 34);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1236, 619);
+            this.panel1.Size = new System.Drawing.Size(1082, 464);
             this.panel1.TabIndex = 1;
             // 
             // dtdate
             // 
-            this.dtdate.Location = new System.Drawing.Point(66, 12);
+            this.dtdate.Location = new System.Drawing.Point(58, 9);
+            this.dtdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtdate.Name = "dtdate";
-            this.dtdate.Size = new System.Drawing.Size(348, 27);
+            this.dtdate.Size = new System.Drawing.Size(305, 23);
             this.dtdate.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 17);
+            this.label1.Location = new System.Drawing.Point(10, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 20);
+            this.label1.Size = new System.Drawing.Size(37, 15);
             this.label1.TabIndex = 3;
             this.label1.Text = "Date :";
             // 
             // btnretrieve
             // 
             this.btnretrieve.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnretrieve.Location = new System.Drawing.Point(420, 10);
+            this.btnretrieve.Location = new System.Drawing.Point(368, 8);
+            this.btnretrieve.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnretrieve.Name = "btnretrieve";
-            this.btnretrieve.Size = new System.Drawing.Size(94, 29);
+            this.btnretrieve.Size = new System.Drawing.Size(82, 22);
             this.btnretrieve.TabIndex = 8;
             this.btnretrieve.Text = "Retrieve";
             this.btnretrieve.UseVisualStyleBackColor = true;
@@ -74,17 +77,18 @@ namespace AccountingSystem.Views.Reports.DailyCashReport
             // 
             // frmDailyCash
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1255, 676);
+            this.ClientSize = new System.Drawing.Size(1098, 507);
             this.Controls.Add(this.btnretrieve);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtdate);
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmDailyCash";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmDailyCash";
+            this.Text = "Daily Cash Position";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ResumeLayout(false);
             this.PerformLayout();
