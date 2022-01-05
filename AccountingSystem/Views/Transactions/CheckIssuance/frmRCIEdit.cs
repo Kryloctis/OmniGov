@@ -56,6 +56,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             {
                 var rciRepository = Factory.RCIRepository();
                 var rcidata = rciRepository.GetRecordByID(uc.Id);
+
                 uc.txtdvno.Text = rcidata["dv_no"];
                 uc.cmbbank.SelectedValue = rcidata["bank_id"];
                 uc.cmbfund.SelectedValue = rcidata["fund_id"];
@@ -110,7 +111,7 @@ namespace AccountingSystem.Views.Transactions.RCI
 
             if (deleteSuccess)
             {
-                short rcid = 6;
+                short rcid = (short)uc.Id;
                 string obligationNo = String.Empty;
 
                 foreach (DataGridViewRow item in uc.dgObligationNoList.Rows)

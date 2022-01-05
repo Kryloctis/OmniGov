@@ -110,7 +110,6 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reports > Reports of General Collection";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.frmPCReport_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

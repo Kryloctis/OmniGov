@@ -29,7 +29,12 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             if (!DesignMode)
             {
-                
+                LoadBanks();
+                LoadFunds();
+
+                cmbFPP.SelectedValueChanged -= new EventHandler(cmbFPP_SelectedValueChanged);
+                LoadFPP();
+                cmbFPP.SelectedValueChanged += new EventHandler(cmbFPP_SelectedValueChanged);
             }
         }
         internal void LoadFPP()
@@ -162,18 +167,11 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void cmbFPP_Validating_1(object sender, CancelEventArgs e)
         {
-            if (!cmbFPP.Focused)
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbFPP, "fpp.");
+            if (functionId <= 0)
             {
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbFPP, "fpp.");
-                if (functionId <= 0)
-                {
-                    errorProvider.SetError(cmbFPP, "Please select function!");
-                    e.Cancel = true;
-                }
-            }
-            else
-            {
-                e.Cancel = false;
+                errorProvider.SetError(cmbFPP, "Please select fpp.");
+                e.Cancel = true;
             }
         }
 
@@ -308,6 +306,9 @@ namespace AccountingSystem.Views.Transactions.RCI
             }
         }
 
-
+        internal void cmbFPP_SelectedValueChanged(object sender, EventArgs e)
+        {
+            functionId = Convert.ToInt32(cmbFPP.SelectedValue);
+        }
     }
 }

@@ -39,7 +39,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.txtpayee = new System.Windows.Forms.TextBox();
             this.txtreceipt = new System.Windows.Forms.TextBox();
             this.dtdate = new System.Windows.Forms.DateTimePicker();
-            this.txtamount = new System.Windows.Forms.NumericUpDown();
+            this.txtAmount = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.cmbcollector = new System.Windows.Forms.ComboBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
@@ -52,13 +52,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.tabPaymentType = new System.Windows.Forms.TabControl();
             this.tabNonCashTickets = new System.Windows.Forms.TabPage();
             this.tabCashTickets = new System.Windows.Forms.TabPage();
-            this.txtCashTicketsAmount = new System.Windows.Forms.TextBox();
             this.txtCashTicketQuantity = new System.Windows.Forms.NumericUpDown();
             this.label14 = new System.Windows.Forms.Label();
             this.dtCashTicketDateOfCollection = new System.Windows.Forms.DateTimePicker();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.txtamount)).BeginInit();
+            this.txtCashTicketsAmount = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -66,6 +66,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.tabNonCashTickets.SuspendLayout();
             this.tabCashTickets.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCashTicketQuantity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCashTicketsAmount)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -154,21 +155,21 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.dtdate.Size = new System.Drawing.Size(370, 23);
             this.dtdate.TabIndex = 4;
             // 
-            // txtamount
+            // txtAmount
             // 
-            this.txtamount.DecimalPlaces = 2;
-            this.txtamount.Location = new System.Drawing.Point(174, 104);
-            this.txtamount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtamount.Maximum = new decimal(new int[] {
+            this.txtAmount.DecimalPlaces = 2;
+            this.txtAmount.Location = new System.Drawing.Point(174, 104);
+            this.txtAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtAmount.Maximum = new decimal(new int[] {
             999999999,
             0,
             0,
             0});
-            this.txtamount.Name = "txtamount";
-            this.txtamount.Size = new System.Drawing.Size(371, 23);
-            this.txtamount.TabIndex = 7;
-            this.txtamount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtamount.ThousandsSeparator = true;
+            this.txtAmount.Name = "txtAmount";
+            this.txtAmount.Size = new System.Drawing.Size(371, 23);
+            this.txtAmount.TabIndex = 7;
+            this.txtAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtAmount.ThousandsSeparator = true;
             // 
             // label7
             // 
@@ -289,7 +290,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.tabNonCashTickets.BackColor = System.Drawing.SystemColors.Control;
             this.tabNonCashTickets.Controls.Add(this.label3);
             this.tabNonCashTickets.Controls.Add(this.dtdate);
-            this.tabNonCashTickets.Controls.Add(this.txtamount);
+            this.tabNonCashTickets.Controls.Add(this.txtAmount);
             this.tabNonCashTickets.Controls.Add(this.txtreceipt);
             this.tabNonCashTickets.Controls.Add(this.label6);
             this.tabNonCashTickets.Controls.Add(this.label4);
@@ -315,15 +316,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.tabCashTickets.Padding = new System.Windows.Forms.Padding(3);
             this.tabCashTickets.Size = new System.Drawing.Size(569, 132);
             this.tabCashTickets.TabIndex = 1;
-            // 
-            // txtCashTicketsAmount
-            // 
-            this.txtCashTicketsAmount.Location = new System.Drawing.Point(174, 86);
-            this.txtCashTicketsAmount.Name = "txtCashTicketsAmount";
-            this.txtCashTicketsAmount.ReadOnly = true;
-            this.txtCashTicketsAmount.Size = new System.Drawing.Size(371, 23);
-            this.txtCashTicketsAmount.TabIndex = 6;
-            this.txtCashTicketsAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtCashTicketQuantity
             // 
@@ -377,6 +369,20 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label16.TabIndex = 9;
             this.label16.Text = "Cash Tickets Quantity";
             // 
+            // txtCashTicketsAmount
+            // 
+            this.txtCashTicketsAmount.Location = new System.Drawing.Point(174, 86);
+            this.txtCashTicketsAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtCashTicketsAmount.Maximum = new decimal(new int[] {
+            200000,
+            0,
+            0,
+            0});
+            this.txtCashTicketsAmount.Name = "txtCashTicketsAmount";
+            this.txtCashTicketsAmount.Size = new System.Drawing.Size(371, 23);
+            this.txtCashTicketsAmount.TabIndex = 13;
+            this.txtCashTicketsAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // ucPaymentCollection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -387,7 +393,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.Name = "ucPaymentCollection";
             this.Size = new System.Drawing.Size(589, 309);
             this.Load += new System.EventHandler(this.ucPC_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.txtamount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -398,6 +404,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.tabCashTickets.ResumeLayout(false);
             this.tabCashTickets.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCashTicketQuantity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCashTicketsAmount)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -414,7 +421,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal System.Windows.Forms.TextBox txtpayee;
         internal System.Windows.Forms.TextBox txtreceipt;
         internal System.Windows.Forms.DateTimePicker dtdate;
-        internal System.Windows.Forms.NumericUpDown txtamount;
+        internal System.Windows.Forms.NumericUpDown txtAmount;
         private System.Windows.Forms.ErrorProvider errorProvider;
         internal System.Windows.Forms.ComboBox cmbcollector;
         internal System.Windows.Forms.ComboBox cmbforms;
@@ -430,7 +437,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         internal System.Windows.Forms.NumericUpDown txtCashTicketQuantity;
-        internal System.Windows.Forms.TextBox txtCashTicketsAmount;
         internal System.Windows.Forms.GroupBox groupBox2;
+        internal System.Windows.Forms.NumericUpDown txtCashTicketsAmount;
     }
 }

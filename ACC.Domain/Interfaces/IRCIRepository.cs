@@ -13,5 +13,7 @@ namespace ACC.Domain.Interfaces
 
         bool SaveRCIDVObligations(short rciId, string obligationNo);
 
+        string GetRecentRCIId();
+
     }
 }

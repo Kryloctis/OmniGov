@@ -20,43 +20,13 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
             Helper.LoadFormIcon(this);
         }
 
-        private void frmPCReport_Load(object sender, EventArgs e)
-        {
-           
-        }
-
-        private DataTable DataTablePC()
-        {
-            var dateYearMonth = String.Format("{0:MMMM}-{0:yyyy}", Convert.ToDateTime(dtpMonth.Value));
-            var dtPC = new dsLFS.dtPCDataTable();
-            var dt = Factory.PaymentCollectionRepository().GetRecordByLedger(dateYearMonth);
-            if(dt.Rows.Count > 0)
-            {
-                foreach (DataRow item in dt.Rows)
-                {
-                    DataRow row = dtPC.NewRow();
-                    row["rcdno"] = item["rcdno"];
-                    row["account_code"] = item["account_code"];
-                    row["subsidiary"] = item["subsidiary"];
-                    row["payee"] = item["payee"];
-                    row["acc_form_desc"] = item["accform"];
-                    row["ledger_name"] = item["ledger_name"];
-                    row["payment_date"] = item["payment_date"];
-                    row["receipt_no"] = item["receipt_no"];
-                    row["amount"] = item["amount"];
-                    row["collector"] = item["collector"];                    
-                    dtPC.Rows.Add(row);
-                }
-            }
-
-            return dtPC;
-        }
-
-        private DataTable DataTableGC(string from,string to)
+        private DataTable DataTableGC(string from, string to)
         {
             
             var dtPC = new dsLFS.dtPCDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByGC(from,to);
+            var dt = Factory.GeneralCollectionsRepository().GetRecordByGC(from, to);
+            DateTime date = DateTime.Now;
+
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
@@ -74,7 +44,6 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
                     row["receipt_no"] = item["receipt_no"];
                     row["amount"] = item["amount"];
                     row["collector"] = item["collector"];
-                    dtPC.Rows.Add(row);
                 }
             }
 
@@ -88,6 +57,7 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
             {
                 string from = String.Format("{0:yyyy-MM-dd}", dtpMonth.Value);
                 string to = String.Format("{0:yyyy-MM-dd}", dtto.Value);
+
                 var lguDetails = Helper.LGUDetails();
                 var signatory = "ENSIGN S. UBA";
                 var parameters = new[] {
@@ -96,7 +66,7 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
                     };
                 report.ReportPath = $"{Application.StartupPath}Reports\\payment-collection2.rdlc";
                 report.DataSources.Clear();
-                report.DataSources.Add(new ReportDataSource("dtPC", DataTableGC(from,to)));
+                report.DataSources.Add(new ReportDataSource("dtPC", DataTableGC(from, to)));
                 report.SetParameters(parameters);
                 report.Refresh();
 
@@ -106,8 +76,6 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
             {
                 Helper.MessageBoxError(ex.Message);
             }
-
-           
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)

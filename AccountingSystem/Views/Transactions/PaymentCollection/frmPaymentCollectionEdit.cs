@@ -59,7 +59,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     uc.txtpayee.Text = paymentCollectionDict["payee"];
                     uc.txtreceipt.Text = paymentCollectionDict["receipt_no"];
                     uc.dtdate.Value = Convert.ToDateTime(paymentCollectionDict["payment_date"]);
-                    uc.txtamount.Value = Convert.ToDecimal(paymentCollectionDict["amount"]);
+                    uc.txtAmount.Value = Convert.ToDecimal(paymentCollectionDict["amount"]);
                     receipt = paymentCollectionDict["receipt_no"];
                     uc.receipt = Convert.ToInt32(paymentCollectionDict["receipt_no"]);
                     uc.cmbcollector.Enabled = false;
@@ -103,7 +103,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     Payee = uc.txtpayee.Text.Trim(),
                     ReceiptNo = uc.txtreceipt.Text.Trim(),
                     PaymentDate = Convert.ToDateTime(uc.dtdate.Text.Trim()),
-                    Amount = Convert.ToDecimal(uc.txtamount.Value),
+                    Amount = Convert.ToDecimal(uc.txtAmount.Value),
                     UpdatedBy =uc.userid,
                 };
 
@@ -131,10 +131,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     }                       
                     else return false;
                 }
-                else if (uc.txtamount.Value <= 0)
+                else if (uc.txtAmount.Value <= 0)
                 {
                     Helper.MessageBoxSuccess("Empty Amount!");
-                    uc.txtamount.Focus();
+                    uc.txtAmount.Focus();
                     return false;
                 }
                 else

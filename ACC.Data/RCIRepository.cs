@@ -26,10 +26,6 @@ namespace ACC.Data
         private readonly string viewTableName = "view_rci";
 
 
-
-
-
-
         public RCIRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -45,8 +41,6 @@ namespace ACC.Data
                 {
                     new object[] { "@id", DbType.Int32, Id},
                 };
-
-                //string query = $"SELECT * FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.banks_id LEFT JOIN {tableName3} ON {tableName3}.id={tableName}.funds_id LEFT JOIN {tableName4} ON {tableName4}.id={tableName}.function_program_project_id LEFT JOIN {tableName5} ON {tableName5}.id={tableName4}.functional_classification_services_id LEFT JOIN {tableName6} ON {tableName6}.id={tableName5}.functional_classifications_id WHERE {tableName}.id = @id";
 
 
                 string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
@@ -64,7 +58,7 @@ namespace ACC.Data
                     record.Add("payee", reader.Rows[0]["payee"].ToString());
                     record.Add("nature_of_payment", reader.Rows[0]["nature_of_payment"].ToString());
                     record.Add("obligation_no", reader.Rows[0]["obligation_no"].ToString());
-                    record.Add("function_program_project_id", reader.Rows[0]["function_program_project_id"].ToString());
+                    record.Add("function_program_project_id", reader.Rows[0]["fpp_id"].ToString());
                     record.Add("amount", reader.Rows[0]["amount"].ToString());
                     record.Add("created_at", reader.Rows[0]["created_at"].ToString());
                     record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
@@ -82,8 +76,6 @@ namespace ACC.Data
         {
             try
             {
-                //string query = $"SELECT {tableName}.id,{tableName2}.account_no,{tableName2}.bank_name,{tableName}.check_date,{tableName}.check_no,{tableName}.dv_no,{tableName}.payee,{tableName}.nature_of_payment,{tableName}.obligation_no,{tableName4}.fpp_code,{tableName}.trust_liabilities,{tableName}.bir_vat_nonvat,{tableName}.amount,{tableName}.amount-{tableName}.bir_vat_nonvat AS netamount,{tableName}.created_at,{tableName}.updated_at FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.banks_id LEFT JOIN {tableName3} ON {tableName3}.id={tableName}.funds_id LEFT JOIN {tableName4} ON {tableName4}.id={tableName}.function_program_project_id LEFT JOIN {tableName5} ON {tableName5}.id={tableName4}.functional_classification_services_id LEFT JOIN {tableName6} ON {tableName6}.id={tableName5}.functional_classifications_id";
-
                 string query = $"SELECT * FROM {viewTableName}";
 
                 var dtRCI = new DataTable();
@@ -131,7 +123,7 @@ namespace ACC.Data
                 };
 
                 string query =  $"INSERT INTO {tableRCI} " +
-                                $"(banks_id, funds_id, function_program_project_id, check_date,check_no, dv_no,payee, nature_of_payment,amount) " +
+                                $"(banks_id, funds_id, function_program_project_id, check_date, check_no, dv_no, payee, nature_of_payment, amount) " +
                                 $"VALUES(" +
                                 $"@banks_id, " +
                                 $"@funds_id, " +
@@ -313,6 +305,20 @@ namespace ACC.Data
                                 $"@obligationNo)";
 
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public string GetRecentRCIId()
+        {
+            try
+            {
+                string query = $"SELECT MAX(id) FROM {tableRCI}";
+
+                return _dbGenericCommands.ExecuteScalar(query);
             }
             catch (Exception)
             {

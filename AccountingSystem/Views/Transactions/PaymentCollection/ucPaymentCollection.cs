@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             errorArray[4] = errorProvider.GetError(txtpayee);
             errorArray[5] = errorProvider.GetError(txtreceipt);
             errorArray[6] = errorProvider.GetError(dtdate);
-            errorArray[7] = errorProvider.GetError(txtamount);
+            errorArray[7] = errorProvider.GetError(txtAmount);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             txtpayee.Clear();
             txtreceipt.Clear();
             dtdate.Value = DateTime.Now;
-            txtamount.Value = Convert.ToDecimal("0.00");
+            txtAmount.Value = Convert.ToDecimal("0.00");
             minreceipt = 0;
             maxreceipt = 0;
             receipt = 0;
@@ -369,7 +369,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 txtpayee.Enabled = true;
                 //txtreceipt.Enabled = true;
                 dtdate.Enabled = true;
-                txtamount.Enabled = true;
+                txtAmount.Enabled = true;
                 cmbAccount.Enabled = true;
                 LoadForms(int.Parse(collector[0].ToString()));
             }
@@ -379,7 +379,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 txtpayee.Enabled = false;
                 //txtreceipt.Enabled = false;
                 dtdate.Enabled = false;
-                txtamount.Enabled = false;
+                txtAmount.Enabled = false;
                 cmbAccount.Enabled = false;
             }
         }
@@ -392,7 +392,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
             }
         }
-
 
         private DataTable DatatableAccounts()
         {
@@ -448,11 +447,14 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 tabPaymentType.SelectedTab = tabCashTickets;
                 isCashTicket = true;
+                txtCashTicketsAmount.Value = accountableFormFaceValue;
+
             }
             else
             {
                 tabPaymentType.SelectedTab = tabNonCashTickets;
                 isCashTicket = false;
+                txtAmount.Value = accountableFormFaceValue;
             }
         }
 
@@ -469,7 +471,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
         }
-
 
         private void cmbAccount_KeyDown(object sender, KeyEventArgs e)
         {
