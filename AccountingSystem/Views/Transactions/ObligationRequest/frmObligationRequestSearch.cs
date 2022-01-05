@@ -78,7 +78,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 var updatedAt = row["updated_at"].ToString();
                 var updatedById = row["updated_by_id"].ToString();
                 var updatedByFullName = row["updated_by_full_name"].ToString();
-                string totalObligations = Factory.ObligationRequestRepository().GetSumObligations(Convert.ToInt32(id)).ToString("N2");
+                string totalObligations = Factory.ObligationRequestRepository().GetSumObligationsById(Convert.ToInt32(id)).ToString("N2");
 
                 var item = new object[] { id, obligationNo, dateRequested, payee, explanation, referenceNo, createdAt, createdById, createdByFullName, updatedAt, updatedById, updatedByFullName, totalObligations, status };
 
