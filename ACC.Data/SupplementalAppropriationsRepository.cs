@@ -157,23 +157,16 @@ namespace ACC.Data
 
         public DataTable GetRecordsByBudgetAppropriationId(int budgetAppropriationsId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@budget_appropriations_id",DbType.Int32, budgetAppropriationsId }
-                };
+                new object[] { "@budget_appropriations_id",DbType.Int32, budgetAppropriationsId }
+            };
 
-                string query = $"SELECT id, budget_appropriations_id, date_entry, amount, remarks, created_at, updated_at FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id";
+            string query = $"SELECT id, budget_appropriations_id, date_entry, amount, remarks, created_at, updated_at FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id";
 
-                var dtSupplementalApprorpriation = new DataTable();
+            var dtSupplementalApprorpriation = new DataTable();
 
-                return _mySqlGenericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return _mySqlGenericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
         }
 
         //SAAOB and SAAOBB
@@ -210,50 +203,43 @@ namespace ACC.Data
         //SUMMARY
         public decimal GetSumSupplementalAppropriations(string fppId, string subFPPId, int fundId, DateTime dateEntry, int allotmentClassId, Byte isContinuing)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@function_program_project_id", DbType.String, fppId },
-                    new object[] { "@others_fpp_id", DbType.String, subFPPId },
-                    new object[] { "@funds_id", DbType.Int32, fundId },
-                    new object[] { "@date_entry", DbType.Date, dateEntry.Date},
-                    new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId },
-                    new object[] { "@continuing", DbType.Byte, isContinuing },
-                    new object[] { "@appropriation_year", DbType.Int16, dateEntry.Year}
-                };
+                new object[] { "@function_program_project_id", DbType.String, fppId },
+                new object[] { "@others_fpp_id", DbType.String, subFPPId },
+                new object[] { "@funds_id", DbType.Int32, fundId },
+                new object[] { "@date_entry", DbType.Date, dateEntry.Date},
+                new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId },
+                new object[] { "@continuing", DbType.Byte, isContinuing },
+                new object[] { "@appropriation_year", DbType.Int16, dateEntry.Year}
+            };
 
-                string fppWhereQuery = fppId == "all" ? string.Empty : "function_program_project_id = @function_program_project_id AND";
-                string isContinuingQuery = isContinuing == 0 ? "appropriation_year = @appropriation_year" : "appropriation_year <= @appropriation_year";
+            string fppWhereQuery = fppId == "all" ? string.Empty : "function_program_project_id = @function_program_project_id AND";
+            string isContinuingQuery = isContinuing == 0 ? "appropriation_year = @appropriation_year" : "appropriation_year <= @appropriation_year";
 
-                string subFPPQuery = string.Empty;
-                if (subFPPId == "all")
-                    subFPPQuery = "others_fpp_id IS NOT NULL AND";
-                else if (fppId == "all")
-                    subFPPQuery = string.Empty;
-                else if (string.IsNullOrEmpty(subFPPId))
-                    subFPPQuery = "others_fpp_id IS NULL AND";
-                else
-                    subFPPQuery = "others_fpp_id = @others_fpp_id AND";
+            string subFPPQuery = string.Empty;
+            if (subFPPId == "all")
+                subFPPQuery = "others_fpp_id IS NOT NULL AND";
+            else if (fppId == "all")
+                subFPPQuery = string.Empty;
+            else if (string.IsNullOrEmpty(subFPPId))
+                subFPPQuery = "others_fpp_id IS NULL AND";
+            else
+                subFPPQuery = "others_fpp_id = @others_fpp_id AND";
 
-                string query = $"SELECT COALESCE(SUM(amount), 0) AS amount " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE {fppWhereQuery} " +
-                    $"{subFPPQuery} " +
-                    $"funds_id = @funds_id " +
-                    $"AND date_entry <= @date_entry " +
-                    $"AND allotment_classes_id = @allotment_classes_id " +
-                    $"AND continuing = @continuing " +
-                    $"AND {isContinuingQuery}";
+            string query = $"SELECT COALESCE(SUM(amount), 0) AS amount " +
+                $"FROM {viewTableName} " +
+                $"WHERE {fppWhereQuery} " +
+                $"{subFPPQuery} " +
+                $"funds_id = @funds_id " +
+                $"AND date_entry <= @date_entry " +
+                $"AND allotment_classes_id = @allotment_classes_id " +
+                $"AND continuing = @continuing " +
+                $"AND {isContinuingQuery}";
 
-                decimal supplementalAppropriations = Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+            decimal supplementalAppropriations = Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
 
-                return supplementalAppropriations;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return supplementalAppropriations;
         }
 
         //DETAILED
