@@ -30,10 +30,11 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void ValidateLocalPermission()
         {
-            if (!Helper.HasPermission("Transaction Approved RCD"))
+            if (!Helper.HasPermission("Transaction RCD Approval"))
+            {
                 btnApprove.Visible = false;
-            if (!Helper.HasPermission("Transaction Disapproved RCD"))
                 btnDisapprove.Visible = false;
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
