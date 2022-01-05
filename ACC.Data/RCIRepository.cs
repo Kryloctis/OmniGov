@@ -95,7 +95,6 @@ namespace ACC.Data
                     new object[] { "@bankId", DbType.Int32, bankId},
                     new object[] { "@month", DbType.String, month},
                 };
-                //string query = $"SELECT * FROM {tableRCI} LEFT JOIN {tblBanks} ON {tblBanks}.id={tableRCI}.banks_id LEFT JOIN {tblFunds} ON {tblFunds}.id={tableRCI}.funds_id LEFT JOIN {tblFPP} ON {tblFPP}.id={tableRCI}.function_program_project_id LEFT JOIN {tblFCS} ON {tblFCS}.id={tblFPP}.functional_classification_services_id LEFT JOIN {tblFC} ON {tblFC}.id={tblFCS}.functional_classifications_id WHERE {tblBanks}.id = @id AND DATE_FORMAT({tableRCI}.check_date,'%M-%Y')=@month";
 
                 string query = $"SELECT * FROM {viewTableName} WHERE bank_id = @bankId AND MONTH(check_date) = @month";
                 return _dbGenericCommands.ExecuteReader(query, parameters);
@@ -276,7 +275,31 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableRCI}.id,{tblBanks}.account_no,{tblBanks}.bank_name,{tableRCI}.check_date,{tableRCI}.check_no,{tableRCI}.dv_no,{tableRCI}.payee,{tableRCI}.nature_of_payment,{tableRCI}.obligation_no,{tblFPP}.fpp_code,{tableRCI}.trust_liabilities,{tableRCI}.bir_vat_nonvat,{tableRCI}.amount,{tableRCI}.amount-{tableRCI}.bir_vat_nonvat AS netamount,{tableRCI}.created_at,{tableRCI}.updated_at FROM {tableRCI} LEFT JOIN {tblBanks} ON {tblBanks}.id={tableRCI}.banks_id LEFT JOIN {tblFunds} ON {tblFunds}.id={tableRCI}.funds_id LEFT JOIN {tblFPP} ON {tblFPP}.id={tableRCI}.function_program_project_id LEFT JOIN {tblFCS} ON {tblFCS}.id={tblFPP}.functional_classification_services_id LEFT JOIN {tblFC} ON {tblFC}.id={tblFCS}.functional_classifications_id WHERE {tableRCI}.banks_id='{id}'";
+                string query = $"SELECT " +
+                    $"{tableRCI}.id, " +
+                    $"{tblBanks}.account_no, " +
+                    $"{tblBanks}.bank_name, " +
+                    $"{tableRCI}.check_date, " +
+                    $"{tableRCI}.check_no, " +
+                    $"{tableRCI}.dv_no, " +
+                    $"{tableRCI}.payee, " +
+                    $"{tableRCI}.nature_of_payment, " +
+                    $"{tblFPP}.fpp_code, " +
+                    $"{tableRCI}.amount," +
+                    $"{tableRCI}.created_at, " +
+                    $"{tableRCI}.updated_at " +
+                    $"FROM {tableRCI} " +
+                    $"LEFT JOIN {tblBanks} " +
+                    $"ON {tblBanks}.id={tableRCI}.banks_id " +
+                    $"LEFT JOIN {tblFunds} " +
+                    $"ON {tblFunds}.id={tableRCI}.funds_id " +
+                    $"LEFT JOIN {tblFPP} " +
+                    $"ON {tblFPP}.id={tableRCI}.function_program_project_id " +
+                    $"LEFT JOIN {tblFCS} " +
+                    $"ON {tblFCS}.id={tblFPP}.functional_classification_services_id " +
+                    $"LEFT JOIN {tblFC} " +
+                    $"ON {tblFC}.id={tblFCS}.functional_classifications_id " +
+                    $"WHERE {tableRCI}.banks_id='{id}'";
 
                 var dtRCI = new DataTable();
                 return _dbGenericCommands.Fill(query, dtRCI);
