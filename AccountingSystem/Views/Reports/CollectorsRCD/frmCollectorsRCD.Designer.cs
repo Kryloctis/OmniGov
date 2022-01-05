@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblJevStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblReportStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblShowMessage = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -170,7 +170,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2,
-            this.lblJevStatus,
+            this.lblReportStatus,
             this.lblShowMessage});
             this.statusStrip1.Location = new System.Drawing.Point(0, 50);
             this.statusStrip1.Name = "statusStrip1";
@@ -182,7 +182,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(841, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(722, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -193,14 +193,14 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(42, 22);
             this.toolStripStatusLabel2.Text = "Status:";
             // 
-            // lblJevStatus
+            // lblReportStatus
             // 
-            this.lblJevStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.lblJevStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblJevStatus.Margin = new System.Windows.Forms.Padding(0);
-            this.lblJevStatus.Name = "lblJevStatus";
-            this.lblJevStatus.Size = new System.Drawing.Size(18, 22);
-            this.lblJevStatus.Text = "--";
+            this.lblReportStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.lblReportStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblReportStatus.Margin = new System.Windows.Forms.Padding(0);
+            this.lblReportStatus.Name = "lblReportStatus";
+            this.lblReportStatus.Size = new System.Drawing.Size(18, 22);
+            this.lblReportStatus.Text = "--";
             // 
             // lblShowMessage
             // 
@@ -255,5 +255,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         internal System.Windows.Forms.ToolStripStatusLabel lblJevStatus;
         internal System.Windows.Forms.ToolStripStatusLabel lblShowMessage;
+        internal System.Windows.Forms.ToolStripStatusLabel lblReportStatus;
     }
 }

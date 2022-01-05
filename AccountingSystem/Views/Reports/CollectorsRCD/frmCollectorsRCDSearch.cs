@@ -103,7 +103,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             _uc.dgPayments.Enabled = false;
             _uc.dtRCDDate.Enabled = false;
             _uc.groubBoxFund.Enabled = false;
-            _uc.btnadd.Enabled = false;
+            _uc.btnAdd.Enabled = false;
             _uc.btnRemove.Enabled = false;
             _uc.btnClear.Enabled = false;
             this.Close();

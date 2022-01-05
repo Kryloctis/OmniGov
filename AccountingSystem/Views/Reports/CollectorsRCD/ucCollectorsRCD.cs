@@ -39,13 +39,13 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
             cmbCollector.SelectedIndex = -1;
 
-            btnadd.Enabled = false;
+            btnAdd.Enabled = false;
             btnRemove.Enabled = false;
             btnClear.Enabled = false;
         }
         internal void ResetForm()
         {
-            btnadd.Enabled = false;
+            btnAdd.Enabled = false;
             btnRemove.Enabled = false;
             btnClear.Enabled = false;
 
@@ -149,9 +149,9 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
 
             if (cmbCollector.SelectedIndex == -1) 
-                btnadd.Enabled = false;
+                btnAdd.Enabled = false;
             else
-                btnadd.Enabled = true;
+                btnAdd.Enabled = true;
 
         }
 

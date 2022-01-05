@@ -44,7 +44,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
-            this.btnadd = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.dgPayments = new System.Windows.Forms.DataGridView();
             this.epCollector = new System.Windows.Forms.ErrorProvider(this.components);
@@ -180,20 +180,20 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnclear_Click);
             // 
-            // btnadd
+            // btnAdd
             // 
-            this.btnadd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnadd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnadd.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnadd.Location = new System.Drawing.Point(675, 482);
-            this.btnadd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnadd.Name = "btnadd";
-            this.btnadd.Size = new System.Drawing.Size(70, 23);
-            this.btnadd.TabIndex = 23;
-            this.btnadd.Text = "Add...";
-            this.btnadd.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnadd.UseVisualStyleBackColor = true;
-            this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
+            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAdd.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnAdd.Location = new System.Drawing.Point(675, 482);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(70, 23);
+            this.btnAdd.TabIndex = 23;
+            this.btnAdd.Text = "Add...";
+            this.btnAdd.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnadd_Click);
             // 
             // label4
             // 
@@ -239,7 +239,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.Controls.Add(this.txtTotal);
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.btnClear);
-            this.Controls.Add(this.btnadd);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dgPayments);
             this.Name = "ucCollectorsRCD";
@@ -265,9 +265,9 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         private System.Windows.Forms.ErrorProvider epReportNo;
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFunds;
         internal System.Windows.Forms.TextBox txtTotal;
-        internal System.Windows.Forms.Button btndelete;
+        internal System.Windows.Forms.Button btnDelete;
         internal System.Windows.Forms.Button btnClear;
-        internal System.Windows.Forms.Button btnadd;
+        internal System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.DataGridView dgPayments;
         internal System.Windows.Forms.Button btnRemove;

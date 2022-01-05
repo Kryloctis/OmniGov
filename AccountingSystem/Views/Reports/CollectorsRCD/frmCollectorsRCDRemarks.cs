@@ -16,12 +16,13 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private void btnAccept_Click(object sender, EventArgs e)
         {
             _frmCollectorsRCD.btnSave.Enabled = true;
+            _frmCollectorsRCD.btnDelete.Enabled = true;
             _frmCollectorsRCD.btnSave.Text = "Update";
 
             _frmCollectorsRCD.ucCollectorsRCD1.txtReport.Enabled = true;
             _frmCollectorsRCD.ucCollectorsRCD1.dgPayments.Enabled = true;
             _frmCollectorsRCD.ucCollectorsRCD1.dtRCDDate.Enabled = true;
-            _frmCollectorsRCD.ucCollectorsRCD1.btnadd.Enabled = true;
+            _frmCollectorsRCD.ucCollectorsRCD1.btnAdd.Enabled = true;
 
             _frmCollectorsRCD.ucCollectorsRCD1.Enabled = true;
             Close();

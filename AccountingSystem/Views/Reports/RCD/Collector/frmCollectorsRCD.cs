@@ -39,10 +39,10 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         {
             try
             {
-                string accountableOfficer = "ARCHIE S. SALE";
-                string treasurer = "ENSIGN S. UBA";
+                string accountableOfficer = Factory.UsersRepository().GetCollectorNameByUserId(Helper.UserId);
+                string treasurer = "FE F. HAMOY";
                 var totalCashAmount = 5000;
-                var totalChecksAmount = 5000;
+                var totalChecksAmount = 0;
                 var totamAmount = 5000;
                 var lguDetails = Helper.LGUDetails();
 
