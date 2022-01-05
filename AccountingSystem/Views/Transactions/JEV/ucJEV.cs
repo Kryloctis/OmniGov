@@ -16,9 +16,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal byte journalId = 0;
         internal byte oldJournalId = 0;
         internal string journalName;
-        internal byte isApproved = 0;
-        internal byte isDisapproved = 0;
-        internal byte isCancelled = 0;
 
         public ucJEV()
         {
@@ -47,9 +44,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             jevNo = string.Empty;
             oldJournalId = 0;
             journalName = string.Empty;
-            isApproved = 0;
-            isDisapproved = 0;
-            isCancelled = 0;
 
             txtJEVNo.Text = string.Empty;
             txtRefNo.Text = string.Empty;

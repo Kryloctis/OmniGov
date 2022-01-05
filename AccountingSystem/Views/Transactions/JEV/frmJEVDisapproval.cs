@@ -3,21 +3,21 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.JEV
 {
-    public partial class frmJEVRemarks : Form
+    public partial class frmJEVDisapproval : Form
     {
 
         frmJEV _frmJEV;
 
-        public frmJEVRemarks(frmJEV frmjev)
+        public frmJEVDisapproval(frmJEV frmjev)
         {
             Helper.LoadFormIcon(this);
             InitializeComponent();
             _frmJEV = frmjev;
         }
 
-        private void PermissionVerification() 
+        private void PermissionVerification()
         {
-            if(_frmJEV.createdById != Helper.UserId)
+            if (_frmJEV.createdById != Helper.UserId)
                 btnAccept.Enabled = false;
 
             if (!Helper.HasPermission("JEV Approval"))
@@ -66,7 +66,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 if (!_frmJEV.FormValidations())
                     return false;
 
-                var isDisapproved = Factory.JEVRepository().SetJEVStatus(jevId, 2);
+                var isDisapproved = Factory.JEVRepository().SetJEVStatus(jevId, "disapprove");
 
                 return isDisapproved;
 
@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void btnSaveMessage_Click(object sender, EventArgs e)
         {
-            if (SetRemarks()) 
+            if (SetRemarks())
             {
                 Helper.MessageBoxSuccess("Dissaproval message has been saved.");
             }
@@ -105,7 +105,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                     if (SetJEVToDisapproved() && SetRemarks())
                     {
                         Helper.MessageBoxSuccess("JEV has been disapproved.");
-                        _frmJEV.ucjev1.isDisapproved = 1;
                         _frmJEV.GetJevStatus(_frmJEV.ucjev1.jevId);
                         _frmJEV._frmJEVList.LoadJEVList();
                         _frmJEV._ucJEVDashboard.LoadJEVCounter();

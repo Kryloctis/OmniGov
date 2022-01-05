@@ -138,6 +138,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             string jevNo = uc.txtJEVNo.Text.Trim();
             var jevModel = new JEVModel();
+            string jevStatus = Factory.JEVRepository().GetJevStatus(uc.jevId).ToLower();
 
             if (isUpdate) jevModel.Id = uc.jevId;
 
@@ -148,7 +149,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             jevModel.RefNo = uc.txtRefNo.Text.Trim();
             jevModel.Payee = uc.txtPayee.Text.Trim();
             jevModel.Explanation = uc.txtExplanation.Text.Trim();
-            jevModel.IsEdited = uc.isApproved == 1 && uc.isEdit ? true : false;
+            jevModel.IsEdited = jevStatus == "approved" && uc.isEdit ? true : false;
 
             if (!Helper.HasPermission("Transaction JEV Approved"))
                 jevModel.IsApproved = false;
@@ -377,14 +378,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        private bool InsertData()
+        private bool InsertData(ref string message)
         {
             try
             {
                 var userId = Helper.UserId;
-
-                if (!FormValidations())
-                    return false;
 
                 switch (uc.journalName)
                 {
@@ -411,16 +409,14 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 Helper.MessageBoxError(ex.Message);
             }
+            message = "JEV has been saved.";
 
             return false;
         }
 
-        private bool UpdateData()
+        private bool UpdateData(ref string message)
         {
             var userId = Helper.UserId;
-
-            if (!FormValidations())
-                return false;
 
             using (TransactionScope scope = new TransactionScope())
             {
@@ -428,13 +424,16 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                 try
                 {
-                    if (uc.isDisapproved == 1)
+                    string jevStatus = Factory.JEVRepository().GetJevStatus(uc.jevId);
+
+                    if (jevStatus.ToLower() == "disapproved")
                     {
-                        _ = SetJEVStatus(0);
+                        _ = SetJEVStatus("pending");
                         _ = SetRemarks();
+                        message = "JEV has been updated and will be send back to pending.";
                     }
-
-
+                    else
+                        message = "JEV has been updated.";
 
                     switch (uc.journalName)
                     {
@@ -463,33 +462,65 @@ namespace AccountingSystem.Views.Transactions.JEV
                             break;
                     }
 
-                    if (updated == true)
+                    if (uc.journalId != uc.oldJournalId) //CHECK IF THE PREVIOUS JOURNAL ID IS NOT EQUAL TO NEW SELECTED JOURNAL ID
                     {
-                        scope.Complete();
-                        return true;
-                    }
-                    else
-                        throw new TransactionAbortedException();
+                        switch (uc.oldJournalId)
+                        {
+                            case 1:
+                                Factory.GeneralJournalRepository().DeleteGeneralJournalByJevID(uc.jevId);
+                                TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
+                                break;
+                            case 2:
+                                Factory.CashReceiptsJournalRepository().DeleteCashReceiptsJournalByJevID(uc.jevId);
+                                TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
+                                break;
+                            case 3:
+                                //Factory.GeneralJournalRepository().DeleteGeneralJournalByJevID(uc.jevId);
+                                break;
+                            case 4:
+                                Factory.CashDisbursementsJournalRepository().DeleteCashDisbursementJournalByJevID(uc.jevId);
+                                TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
+                                break;
+                            case 5:
+                                Factory.CheckDisbursementsJournalRepository().DeleteCheckDisbursementJournalByJevID(uc.jevId);
+                                TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
+                                break;
+                            case 6:
+                                //Factory.GeneralJournalRepository().DeleteGeneralJournalByJevID(uc.jevId);
+                                break;
+                        }
 
-                }
-                catch (TransactionAbortedException ex)
-                {
-                    Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)");
-                    updated = false;
-                }
-                catch (ApplicationException ex)
-                {
-                    Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)");
-                    updated = false;
+                    }
+
+                    scope.Complete();
                 }
                 catch (Exception ex)
                 {
                     Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)");
                     updated = false;
                 }
-                return false;
+
+                if (updated)
+                    return true;
+                else
+                    return false;
             }
 
+        }
+
+        private bool SaveData(ref string message)
+        {
+            if (!FormValidations())
+                return false;
+
+            bool saveData;
+
+            if (uc.isEdit)
+                saveData = UpdateData(ref message);
+            else
+                saveData = InsertData(ref message);
+
+            return saveData;
         }
 
         private bool DeleteData()
@@ -514,63 +545,27 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            if (!uc.isEdit)
+            string message = string.Empty;
+
+            if (SaveData(ref message))
             {
-                if (InsertData())
+                if (!uc.isEdit)
                 {
-                    Helper.MessageBoxSuccess("JEV has been saved.");
+                    Helper.MessageBoxSuccess(message);
                     ucjev1.ResetForm();
                     _ucJEVDashboard.LoadJEVCounter();
                 }
-                return;
-            }
-
-            if (UpdateData())
-            {
-
-                int jevId = uc.jevId;
-                string message = uc.isDisapproved == 1 ? "This JEV will be send back to pending." : jevId == 0 ? "JEV has been saved." : "JEV has been updated.";
-
-                Helper.MessageBoxSuccess(message);
-                GetJevStatus(jevId);
-                PermissionVerification();
-                _frmJEVList.LoadJEVList();
-                _ucJEVDashboard.LoadJEVCounter();
-                uc.isDisapproved = 0;
-
-                if (uc.journalId != uc.oldJournalId) //CHECK IF THE PREVIOUS JOURNAL ID IS NOT EQUAL TO NEW SELECTED JOURNAL ID
+                else
                 {
-                    switch (uc.oldJournalId)
-                    {
-                        case 1:
-                            Factory.GeneralJournalRepository().DeleteGeneralJournalByJevID(uc.jevId);
-                            TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
-                            return;
-                        case 2:
-                            Factory.CashReceiptsJournalRepository().DeleteCashReceiptsJournalByJevID(uc.jevId);
-                            TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
-                            return;
-                        case 3:
-                            //Factory.GeneralJournalRepository().DeleteGeneralJournalByJevID(uc.jevId);
-                            return;
-                        case 4:
-                            Factory.CashDisbursementsJournalRepository().DeleteCashDisbursementJournalByJevID(uc.jevId);
-                            TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
-                            return;
-                        case 5:
-                            Factory.CheckDisbursementsJournalRepository().DeleteCheckDisbursementJournalByJevID(uc.jevId);
-                            TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
-                            return;
-                        case 6:
-                            //Factory.GeneralJournalRepository().DeleteGeneralJournalByJevID(uc.jevId);
-                            return;
-                    }
-
+                    int jevId = uc.jevId;
+                    Helper.MessageBoxSuccess(message);
+                    GetJevStatus(jevId);
+                    PermissionVerification();
+                    _frmJEVList.LoadJEVList();
+                    _ucJEVDashboard.LoadJEVCounter();
                 }
-
-
-                return;
             }
+
         }
 
         private void TransferJournalToNewJournal()
@@ -656,7 +651,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             try
             {
-                string jevStatus = Factory.JEVRepository().GetJevStatus(jevId);
+                string jevStatus = Factory.JEVRepository().GetJevStatus(jevId).ToLower();
 
                 switch (jevStatus)
                 {
@@ -718,7 +713,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        private bool SetJEVStatus(byte jevStatus)
+        private bool SetJEVStatus(string status)
         {
             try
             {
@@ -727,9 +722,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 if (!FormValidations())
                     return false;
 
-                var status = Factory.JEVRepository().SetJEVStatus(uc.jevId, jevStatus);
-
-                return status;
+                return Factory.JEVRepository().SetJEVStatus(uc.jevId, status);
             }
             catch (Exception)
             {
@@ -741,20 +734,15 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             try
             {
-                if (uc.jevId != 0)
+                if (uc.isEdit)
                 {
-                    if (MessageBox.Show("Are you sure you want to approved this JEV?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    if (SetJEVStatus("approve"))
                     {
-                        if (SetJEVStatus(1))
-                        {
-                            Helper.MessageBoxSuccess("JEV has been approved.");
-                            GetJevStatus(uc.jevId);
-                            _frmJEVList.LoadJEVList();
-                            _ucJEVDashboard.LoadJEVCounter();
-                        }
-                        return;
+                        Helper.MessageBoxSuccess("JEV has been approved.");
+                        GetJevStatus(uc.jevId);
+                        _frmJEVList.LoadJEVList();
+                        _ucJEVDashboard.LoadJEVCounter();
                     }
-
                 }
             }
             catch (Exception ex)
@@ -767,7 +755,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             if (uc.jevId != 0)
             {
-                var frmRemarks = new frmJEVRemarks(this);
+                var frmRemarks = new frmJEVDisapproval(this);
                 frmRemarks.btnDisapprove.Visible = true;
                 frmRemarks.btnAccept.Visible = false;
                 frmRemarks.btnSaveMessage.Visible = false;
@@ -779,7 +767,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             if (uc.jevId != 0)
             {
-                var frmRemarks = new frmJEVRemarks(this);
+                var frmRemarks = new frmJEVDisapproval(this);
                 frmRemarks.btnDisapprove.Visible = false;
                 frmRemarks.btnCancel.Text = "Close";
                 frmRemarks.ShowDialog();
@@ -792,9 +780,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 if (uc.jevId != 0)
                 {
-                    if (MessageBox.Show("Are you sure you want to cancel this JEV?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    if (MessageBox.Show("Confirm cancellation of JEV.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        if (SetJEVStatus(3))
+                        if (SetJEVStatus("cancel"))
                         {
                             Helper.MessageBoxSuccess("JEV has been cancelled.");
                             GetJevStatus(uc.jevId);
@@ -987,9 +975,6 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                 uc.journalId = Convert.ToByte(jevDict["journals_id"]);
                 uc.oldJournalId = Convert.ToByte(jevDict["journals_id"]);
-                uc.isApproved = Convert.ToByte(jevDict["is_approved"]);
-                uc.isDisapproved = Convert.ToByte(jevDict["is_disapproved"]);
-                uc.isCancelled = Convert.ToByte(jevDict["is_cancelled"]);
                 lblCreatedBy.Text = jevDict["created_by_name"];
 
 
