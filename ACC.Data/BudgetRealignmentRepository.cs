@@ -47,6 +47,7 @@ namespace ACC.Data
         {
             throw new System.NotImplementedException();
         }
+
         public bool InsertRealignment(BudgetRealignmentModel entity)
         {
             try
@@ -66,6 +67,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
         public bool Insert(BudgetRealignmentModel entity)
         {
             try
@@ -133,7 +135,6 @@ namespace ACC.Data
             }
         }
 
-
         public DataTable GetRecordsByBudgetAppropriationId(int budgetAppropriationsId)
         {
             try
@@ -176,44 +177,30 @@ namespace ACC.Data
             }
         }
 
-
         public decimal GetAmountOfBudgetRealignedToByBudgetId(int budgetId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetId},
-                };
+                  new object[] { "@budget_appropriations_id", DbType.Int32, budgetId},
+            };
 
-                string query = $"SELECT COALESCE(SUM(amount), 0) AS amount FROM view_realignment WHERE to_budget_appropriations_id=@budget_appropriations_id";
-                decimal amount = Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
-                return amount;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"SELECT COALESCE(SUM(amount), 0) AS amount FROM view_realignment WHERE to_budget_appropriations_id=@budget_appropriations_id";
+            decimal amount = Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return amount;
         }
 
         public decimal GetAmountOfBudgetRealignedFromByBudgetId(int budgetId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetId},
-                };
+                new object[] { "@budget_appropriations_id", DbType.Int32, budgetId},
+            };
 
-                string query = $"SELECT COALESCE(SUM(amount), 0) AS amount FROM view_realignment WHERE from_budget_appropriations_id=@budget_appropriations_id";
-                decimal amount = Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
-                return amount;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"SELECT COALESCE(SUM(amount), 0) AS amount FROM view_realignment WHERE from_budget_appropriations_id=@budget_appropriations_id";
+            decimal amount = Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return amount;
         }
+
         public bool BudgetHasRealignment(int budgetId)
         {
             try
@@ -273,7 +260,7 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@realignment_id",DbType.Int32, realignmentId }  
+                    new object[] { "@realignment_id",DbType.Int32, realignmentId }
                 };
 
                 string query = $"SELECT " +
@@ -296,7 +283,7 @@ namespace ACC.Data
                 throw;
             }
         }
-       
+
         public DataTable GetRealignedAccountsByBudgetAppropriationId(int budgetAppropriationsId)
         {
             try

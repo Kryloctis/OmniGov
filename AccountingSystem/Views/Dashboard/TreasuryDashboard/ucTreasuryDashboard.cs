@@ -34,11 +34,6 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             _ = new Transactions.ReceiptsIssued.frmReceiptsIssued().ShowDialog();
         }
 
-        private void btnReceipts_Click(object sender, EventArgs e)
-        {
-            _ = new Manage.Receipts.frmReceipts().ShowDialog();
-        }
-
         private void ucTreasuryDashboard_Load(object sender, EventArgs e)
         {
         }

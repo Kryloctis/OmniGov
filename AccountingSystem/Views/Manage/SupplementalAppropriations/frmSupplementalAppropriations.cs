@@ -1,14 +1,9 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.SupplementalAppropriations
@@ -55,7 +50,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             ShowSupplementalAppropriationsEdit();
         }
 
-        private bool DeleteSupplementalRecords() 
+        private bool DeleteSupplementalRecords()
         {
             try
             {
@@ -72,7 +67,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
                     supplementalAppropriationsModelList.Add(supplementalAppropriationsModel);
                 }
 
-                return  Factory.SupplementalAppropriationsRepository().Delete(supplementalAppropriationsModelList);
+                return Factory.SupplementalAppropriationsRepository().Delete(supplementalAppropriationsModelList);
 
             }
             catch (Exception ex)
@@ -107,7 +102,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             }
         }
 
-        private void ShowSupplementalAppropriationAdd() 
+        private void ShowSupplementalAppropriationAdd()
         {
             var frmSupplementalAppropriationAdd = new frmSupplementalAppropriationAdd(this);
             frmSupplementalAppropriationAdd.uc.dateEntry = dateEntry;
@@ -115,11 +110,11 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             frmSupplementalAppropriationAdd.ShowDialog();
         }
 
-        private void ShowSupplementaryStatus() 
+        private void ShowSupplementaryStatus()
         {
             int rowIndex = dataGridView1.CurrentCell.RowIndex;
 
-            if (dataGridView1.SelectedRows.Count == 1) 
+            if (dataGridView1.SelectedRows.Count == 1)
             {
                 var dateEntry = dataGridView1.Rows[rowIndex].Cells["date_entry"].Value.ToString();
                 var createdAt = dataGridView1.Rows[rowIndex].Cells["created_at"].Value.ToString();
@@ -132,18 +127,25 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             }
         }
 
-        internal void LoadSupplementalApproprationsRecords() 
+        internal void LoadSupplementalApproprationsRecords()
         {
-            var supplementalRepo = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(budgetAppropriationsId);
+            try
+            {
+                var supplementalRepo = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(budgetAppropriationsId);
 
-            HelperLoadRecords.SupplementalDatagridView(supplementalRepo, dataGridView1);
+                HelperLoadRecords.SupplementalDatagridView(supplementalRepo, dataGridView1);
 
-            lblRecordCounts.Text = dataGridView1.Rows.Count.ToString();
+                lblRecordCounts.Text = dataGridView1.Rows.Count.ToString();
 
-            //Show Total Value 
-            txtTotalSupplementalAppropriations.Text = (from DataGridViewRow row in dataGridView1.Rows
-                                             where !String.IsNullOrEmpty(row.Cells["amount"].FormattedValue.ToString())
-                                             select Convert.ToDecimal(row.Cells["amount"].FormattedValue)).Sum().ToString("N2");
+                //Show Total Value 
+                txtTotalSupplementalAppropriations.Text = (from DataGridViewRow row in dataGridView1.Rows
+                                                           where !String.IsNullOrEmpty(row.Cells["amount"].FormattedValue.ToString())
+                                                           select Convert.ToDecimal(row.Cells["amount"].FormattedValue)).Sum().ToString("N2");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)

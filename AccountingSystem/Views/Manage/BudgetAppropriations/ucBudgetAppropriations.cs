@@ -3,10 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BudgetSystem.Views.BudgetAppropriations
@@ -75,7 +71,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             Helper.ClearErrorComboBox(epOthersFunctionProgramProject, cmbxOthersFPP);
         }
-        
+
 
         //ACCOUNT VALIDATION
 
@@ -140,7 +136,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
                     budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationExist(fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, year, remarks);
                 else
                     budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationExist(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, year, remarks);
-                
+
                 if (budgetAppropriationExist)
                 {
                     epGeneralLedgerAcc.SetError(cmbxAccount, "Account you entered is not allowed. Budget appropriation already exist on your record.");
@@ -163,7 +159,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 e.Cancel = Helper.ShowErrorComboBoxEmpty(epGeneralLedgerAcc, cmbxAccount, "General Ledger Account");
             else if (ShowErrorLedgerNameNotExist())
                 e.Cancel = ShowErrorLedgerNameNotExist();
-            else if(ShowErrorBudgetAppropriationContinuing())
+            else if (ShowErrorBudgetAppropriationContinuing())
                 e.Cancel = ShowErrorBudgetAppropriationContinuing();
             else
                 e.Cancel = ShowErrorBudgetAppropriationExist();
@@ -174,30 +170,38 @@ namespace BudgetSystem.Views.BudgetAppropriations
             Helper.ClearErrorComboBox(epGeneralLedgerAcc, cmbxAccount);
         }
 
-    
+
 
         //AMOUNT VALIDATION
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
-            var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(budgetAppropriationId);
-            decimal totalSupplementalApprorpriationAmount = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0? 0 : dtSupplementalAppropriation.Compute("SUM(amount)", string.Empty));
-
-            decimal appropriationAmount = nudAmount.Value;
-
-            decimal totalAppropriationAmount = totalSupplementalApprorpriationAmount + appropriationAmount;
-
-            if (string.IsNullOrEmpty(nudAmount.Text))
-                e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
-            else if (nudAmount.Value == 0)
+            try
             {
-                epAmount.SetError(nudAmount, Helper.ErrorMessage("Amount"));
-                e.Cancel = true;
+                var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(budgetAppropriationId);
+                decimal totalSupplementalApprorpriationAmount = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0 ? 0 : dtSupplementalAppropriation.Compute("SUM(amount)", string.Empty));
+
+                decimal appropriationAmount = nudAmount.Value;
+
+                decimal totalAppropriationAmount = totalSupplementalApprorpriationAmount + appropriationAmount;
+
+                if (string.IsNullOrEmpty(nudAmount.Text))
+                    e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
+                else if (nudAmount.Value == 0)
+                {
+                    epAmount.SetError(nudAmount, Helper.ErrorMessage("Amount"));
+                    e.Cancel = true;
+                }
+                else if (totalAppropriationAmount < totalAllotmentRelease)
+                {
+                    epAmount.SetError(nudAmount, "Amount you entered is less than allotment released.");
+                    e.Cancel = true;
+                }
             }
-            else if(totalAppropriationAmount < totalAllotmentRelease)
+            catch (Exception ex)
             {
-                epAmount.SetError(nudAmount, "Amount you entered is less than allotment released.");
-                e.Cancel = true;
+
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
