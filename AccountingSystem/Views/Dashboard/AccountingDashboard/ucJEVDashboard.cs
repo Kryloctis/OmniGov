@@ -1,8 +1,5 @@
-﻿using AccountingSystem.Views.Manage.BudgetAppropriations;
-using AccountingSystem.Views.Transactions.JEV;
+﻿using AccountingSystem.Views.Transactions.JEV;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Dashboard
@@ -12,7 +9,7 @@ namespace AccountingSystem.Views.Dashboard
         public ucJEVDashboard()
         {
             InitializeComponent();
-      
+
         }
 
         private void UcAccountingDashboard_Load(object sender, EventArgs e)
@@ -22,6 +19,7 @@ namespace AccountingSystem.Views.Dashboard
                 LoadMonths();
                 LoadJournals();
                 LoadJEVCounter();
+                nudYear.Value = DateTime.Now.Year;
             }
         }
 
@@ -31,7 +29,7 @@ namespace AccountingSystem.Views.Dashboard
             HelperLoadRecords.ComboboxJournals(dtJournals, cmbxJournals, "id", "journal_name");
         }
 
-        private void LoadMonths() 
+        private void LoadMonths()
         {
             foreach (var item in Helper.MonthsDatasource().Values)
                 cbMonth.Items.Add(item);
@@ -45,11 +43,11 @@ namespace AccountingSystem.Views.Dashboard
             short month = Convert.ToInt16(cbMonth.SelectedIndex + 1);
             short year = Convert.ToInt16(nudYear.Value);
 
-            var jevCount = Factory.JEVRepository().JevCounterByStatus(string.Empty,journalName, month, year);
-            var approvedJEVCount = Factory.JEVRepository().JevCounterByStatus("approved", journalName,month, year);
-            var pendingJEVCount = Factory.JEVRepository().JevCounterByStatus("pending",journalName, month, year);
-            var disapprovedJEVCOunt = Factory.JEVRepository().JevCounterByStatus("disapproved" ,journalName ,month, year);
-            var cancelledJEVCount = Factory.JEVRepository().JevCounterByStatus("cancelled" ,journalName , month, year);
+            var jevCount = Factory.JEVRepository().JevCounterByStatus(string.Empty, journalName, month, year);
+            var approvedJEVCount = Factory.JEVRepository().JevCounterByStatus("approved", journalName, month, year);
+            var pendingJEVCount = Factory.JEVRepository().JevCounterByStatus("pending", journalName, month, year);
+            var disapprovedJEVCOunt = Factory.JEVRepository().JevCounterByStatus("disapproved", journalName, month, year);
+            var cancelledJEVCount = Factory.JEVRepository().JevCounterByStatus("cancelled", journalName, month, year);
 
             lblJEVCounter.Text = jevCount.ToString();
             lblApprovedJEVCounter.Text = approvedJEVCount.ToString();
@@ -133,14 +131,12 @@ namespace AccountingSystem.Views.Dashboard
 
         private void btnAddJEV_Click(object sender, EventArgs e)
         {
-            _ = new frmJEV(null,this).ShowDialog();
+            _ = new frmJEV(null, this).ShowDialog();
         }
 
         private void cmbxJournals_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadJEVCounter();
         }
-
-    
     }
 }

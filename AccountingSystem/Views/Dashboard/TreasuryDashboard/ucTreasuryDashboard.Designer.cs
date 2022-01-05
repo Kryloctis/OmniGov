@@ -30,15 +30,15 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         private void InitializeComponent()
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.btnIssueReceipt = new System.Windows.Forms.ToolStripButton();
-            this.btnIssueCheck = new System.Windows.Forms.ToolStripButton();
-            this.btnPaymentCollection = new System.Windows.Forms.ToolStripButton();
-            this.btnBankDeposit = new System.Windows.Forms.ToolStripButton();
             this.btnReportCollections = new System.Windows.Forms.ToolStripButton();
-            this.btnRCD = new System.Windows.Forms.ToolStripButton();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.btnReportOfCollections = new System.Windows.Forms.ToolStripButton();
-            this.toolStrip2.SuspendLayout();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnIssueReceipt = new System.Windows.Forms.Button();
+            this.btnPaymentCollection = new System.Windows.Forms.Button();
+            this.btnIssueCheck = new System.Windows.Forms.Button();
+            this.btnBankDeposit = new System.Windows.Forms.Button();
+            this.btnReportOfCollections = new System.Windows.Forms.Button();
+            this.btnRCD = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -46,57 +46,14 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.ItemSize = new System.Drawing.Size(0, 1);
-            this.tabControl1.Location = new System.Drawing.Point(0, 35);
+            this.tabControl1.Location = new System.Drawing.Point(0, 30);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(933, 356);
+            this.tabControl1.Size = new System.Drawing.Size(1074, 361);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 0;
-            // 
-            // btnIssueReceipt
-            // 
-            this.btnIssueReceipt.Image = global::AccountingSystem.Properties.Resources.document_delivery_receipt_user_24px;
-            this.btnIssueReceipt.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnIssueReceipt.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnIssueReceipt.Name = "btnIssueReceipt";
-            this.btnIssueReceipt.Size = new System.Drawing.Size(108, 32);
-            this.btnIssueReceipt.Text = "Issue Receipts";
-            this.btnIssueReceipt.Click += new System.EventHandler(this.btnIssueReceipt_Click);
-            // 
-            // btnIssueCheck
-            // 
-            this.btnIssueCheck.Image = global::AccountingSystem.Properties.Resources.check_24px;
-            this.btnIssueCheck.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnIssueCheck.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnIssueCheck.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
-            this.btnIssueCheck.Name = "btnIssueCheck";
-            this.btnIssueCheck.Size = new System.Drawing.Size(116, 32);
-            this.btnIssueCheck.Text = "Check Issuance";
-            this.btnIssueCheck.Click += new System.EventHandler(this.BtnRCI_Click);
-            // 
-            // btnPaymentCollection
-            // 
-            this.btnPaymentCollection.Image = global::AccountingSystem.Properties.Resources.money_banknote_archive_24px;
-            this.btnPaymentCollection.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnPaymentCollection.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPaymentCollection.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
-            this.btnPaymentCollection.Name = "btnPaymentCollection";
-            this.btnPaymentCollection.Size = new System.Drawing.Size(139, 32);
-            this.btnPaymentCollection.Text = "Payment Collection";
-            this.btnPaymentCollection.Click += new System.EventHandler(this.btnPaymentCollection_Click);
-            // 
-            // btnBankDeposit
-            // 
-            this.btnBankDeposit.Image = global::AccountingSystem.Properties.Resources.bank_deposit_24px;
-            this.btnBankDeposit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnBankDeposit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnBankDeposit.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
-            this.btnBankDeposit.Name = "btnBankDeposit";
-            this.btnBankDeposit.Size = new System.Drawing.Size(104, 32);
-            this.btnBankDeposit.Text = "Bank Deposit";
-            this.btnBankDeposit.Click += new System.EventHandler(this.btnBankDeposit_Click);
             // 
             // btnReportCollections
             // 
@@ -108,71 +65,130 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.btnReportCollections.Size = new System.Drawing.Size(150, 32);
             this.btnReportCollections.Text = "Report of Collections";
             // 
-            // btnRCD
+            // flowLayoutPanel1
             // 
-            this.btnRCD.Image = global::AccountingSystem.Properties.Resources.report_24px;
-            this.btnRCD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnRCD.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRCD.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
-            this.btnRCD.Name = "btnRCD";
-            this.btnRCD.Size = new System.Drawing.Size(217, 32);
-            this.btnRCD.Text = "Reports of Collection and Deposits";
-            this.btnRCD.Click += new System.EventHandler(this.btnGenerateRCD_Click);
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.Controls.Add(this.btnIssueReceipt);
+            this.flowLayoutPanel1.Controls.Add(this.btnPaymentCollection);
+            this.flowLayoutPanel1.Controls.Add(this.btnIssueCheck);
+            this.flowLayoutPanel1.Controls.Add(this.btnBankDeposit);
+            this.flowLayoutPanel1.Controls.Add(this.btnReportOfCollections);
+            this.flowLayoutPanel1.Controls.Add(this.btnRCD);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1074, 30);
+            this.flowLayoutPanel1.TabIndex = 2;
             // 
-            // toolStrip2
+            // btnIssueReceipt
             // 
-            this.toolStrip2.BackColor = System.Drawing.Color.Transparent;
-            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnIssueReceipt,
-            this.btnPaymentCollection,
-            this.btnIssueCheck,
-            this.btnBankDeposit,
-            this.btnReportOfCollections,
-            this.btnRCD});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(933, 35);
-            this.toolStrip2.TabIndex = 1;
-            this.toolStrip2.Text = "toolStrip2";
+            this.btnIssueReceipt.Image = global::AccountingSystem.Properties.Resources.document_delivery_receipt_user_filled_20px;
+            this.btnIssueReceipt.Location = new System.Drawing.Point(0, 0);
+            this.btnIssueReceipt.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.btnIssueReceipt.Name = "btnIssueReceipt";
+            this.btnIssueReceipt.Size = new System.Drawing.Size(133, 30);
+            this.btnIssueReceipt.TabIndex = 0;
+            this.btnIssueReceipt.Text = "Issue Receipts";
+            this.btnIssueReceipt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnIssueReceipt.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnIssueReceipt.UseVisualStyleBackColor = true;
+            this.btnIssueReceipt.Click += new System.EventHandler(this.btnIssueReceipt_Click);
+            // 
+            // btnPaymentCollection
+            // 
+            this.btnPaymentCollection.Image = global::AccountingSystem.Properties.Resources.money_banknote_filled_archive_20px;
+            this.btnPaymentCollection.Location = new System.Drawing.Point(136, 0);
+            this.btnPaymentCollection.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.btnPaymentCollection.Name = "btnPaymentCollection";
+            this.btnPaymentCollection.Size = new System.Drawing.Size(167, 30);
+            this.btnPaymentCollection.TabIndex = 0;
+            this.btnPaymentCollection.Text = "Payment Collections";
+            this.btnPaymentCollection.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPaymentCollection.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPaymentCollection.UseVisualStyleBackColor = true;
+            this.btnPaymentCollection.Click += new System.EventHandler(this.btnPaymentCollection_Click);
+            // 
+            // btnIssueCheck
+            // 
+            this.btnIssueCheck.Image = global::AccountingSystem.Properties.Resources.check_20px;
+            this.btnIssueCheck.Location = new System.Drawing.Point(306, 0);
+            this.btnIssueCheck.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.btnIssueCheck.Name = "btnIssueCheck";
+            this.btnIssueCheck.Size = new System.Drawing.Size(146, 30);
+            this.btnIssueCheck.TabIndex = 0;
+            this.btnIssueCheck.Text = "Check Issuance";
+            this.btnIssueCheck.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnIssueCheck.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnIssueCheck.UseVisualStyleBackColor = true;
+            this.btnIssueCheck.Click += new System.EventHandler(this.BtnRCI_Click);
+            // 
+            // btnBankDeposit
+            // 
+            this.btnBankDeposit.Image = global::AccountingSystem.Properties.Resources.bank_deposit_filled_20px;
+            this.btnBankDeposit.Location = new System.Drawing.Point(455, 0);
+            this.btnBankDeposit.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.btnBankDeposit.Name = "btnBankDeposit";
+            this.btnBankDeposit.Size = new System.Drawing.Size(137, 30);
+            this.btnBankDeposit.TabIndex = 0;
+            this.btnBankDeposit.Text = "Bank Deposit";
+            this.btnBankDeposit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBankDeposit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnBankDeposit.UseVisualStyleBackColor = true;
+            this.btnBankDeposit.Click += new System.EventHandler(this.btnBankDeposit_Click);
             // 
             // btnReportOfCollections
             // 
-            this.btnReportOfCollections.Image = global::AccountingSystem.Properties.Resources.money_banknotes_document_text_28px;
-            this.btnReportOfCollections.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnReportOfCollections.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnReportOfCollections.Image = global::AccountingSystem.Properties.Resources.money_banknotes_2_document_text_20px;
+            this.btnReportOfCollections.Location = new System.Drawing.Point(595, 0);
+            this.btnReportOfCollections.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnReportOfCollections.Name = "btnReportOfCollections";
-            this.btnReportOfCollections.Size = new System.Drawing.Size(150, 32);
+            this.btnReportOfCollections.Size = new System.Drawing.Size(177, 30);
+            this.btnReportOfCollections.TabIndex = 0;
             this.btnReportOfCollections.Text = "Report of Collections";
+            this.btnReportOfCollections.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnReportOfCollections.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnReportOfCollections.UseVisualStyleBackColor = true;
             this.btnReportOfCollections.Click += new System.EventHandler(this.btnReportOfCollections_Click);
+            // 
+            // btnRCD
+            // 
+            this.btnRCD.Image = global::AccountingSystem.Properties.Resources.report_document_text_20px;
+            this.btnRCD.Location = new System.Drawing.Point(775, 0);
+            this.btnRCD.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.btnRCD.Name = "btnRCD";
+            this.btnRCD.Size = new System.Drawing.Size(246, 30);
+            this.btnRCD.TabIndex = 0;
+            this.btnRCD.Text = "Reports of Collection and Deposits";
+            this.btnRCD.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRCD.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRCD.UseVisualStyleBackColor = true;
+            this.btnRCD.Click += new System.EventHandler(this.btnGenerateRCD_Click);
             // 
             // ucTreasuryDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.toolStrip2);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "ucTreasuryDashboard";
-            this.Size = new System.Drawing.Size(933, 391);
+            this.Size = new System.Drawing.Size(1074, 391);
             this.Load += new System.EventHandler(this.ucTreasuryDashboard_Load);
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ToolStrip toolStrip2;
-        internal System.Windows.Forms.ToolStripButton btnIssueCheck;
-        internal System.Windows.Forms.ToolStripButton btnPaymentCollection;
-        internal System.Windows.Forms.ToolStripButton btnBankDeposit;
-        internal System.Windows.Forms.ToolStripButton btnRCD;
-        internal System.Windows.Forms.ToolStripButton btnIssueReceipt;
         internal System.Windows.Forms.TabControl tabControl1;
         internal System.Windows.Forms.ToolStripButton btnReportCollections;
-        private System.Windows.Forms.ToolStripButton btnReportOfCollections;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        internal System.Windows.Forms.Button btnIssueReceipt;
+        internal System.Windows.Forms.Button btnPaymentCollection;
+        internal System.Windows.Forms.Button btnIssueCheck;
+        internal System.Windows.Forms.Button btnBankDeposit;
+        internal System.Windows.Forms.Button btnReportOfCollections;
+        internal System.Windows.Forms.Button btnRCD;
     }
 }

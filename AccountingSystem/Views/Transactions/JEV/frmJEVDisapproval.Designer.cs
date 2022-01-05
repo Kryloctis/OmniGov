@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Transactions.JEV
 {
-    partial class frmJEVRemarks
+    partial class frmJEVDisapproval
     {
         /// <summary>
         /// Required designer variable.

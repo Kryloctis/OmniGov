@@ -45,9 +45,9 @@ namespace ACC.Domain.Interfaces
 
         bool JevNumberExist(string jevNo, int jevId);
 
-        int JevCounterByJournal(string fundName, int month, int year ,string journalName);
+        int JevCounterByJournal(string fundName, int month, int year, string journalName);
 
-        int JevCounterByStatus(string status,string journalName, short month, short year);
+        int JevCounterByStatus(string status, string journalName, short month, short year);
 
         int TotalJEV(short month, short year);
 
@@ -59,7 +59,7 @@ namespace ACC.Domain.Interfaces
 
         int TotalCancelledJEV(short month, short year);
 
-        bool SetJEVStatus(int jevId, byte jevStatus);
+        bool SetJEVStatus(int jevId, string status);
 
         //REMARKS
         bool SetRemarks(int jevId, string remarks);

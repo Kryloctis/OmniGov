@@ -783,34 +783,6 @@ namespace ACC.Data
             };
         }
 
-        public bool SetJEVStatus(int jevId, byte jevStatus)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@jev_id", DbType.Int64, jevId},
-                };
-
-                string queryStatus = string.Empty;
-                if (jevStatus == 0)
-                    queryStatus = $"is_approved = 0, is_disapproved = 0, is_cancelled = 0";
-                else if (jevStatus == 1)
-                    queryStatus = $"is_approved = 1, is_disapproved = 0, is_cancelled = 0";
-                else if (jevStatus == 2)
-                    queryStatus = $"is_approved = 0, is_disapproved = 1, is_cancelled = 0";
-                else if (jevStatus == 3)
-                    queryStatus = $"is_cancelled = 1";
-
-                string query = $"UPDATE {tableName} SET {queryStatus} WHERE id = @jev_id";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         public bool JevNumberAndYearExist(string jevNo, int jevEntryDate)
         {
             try
@@ -1092,39 +1064,61 @@ namespace ACC.Data
             }
         }
 
+        public bool SetJEVStatus(int jevId, string status)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@jev_id", DbType.Int64, jevId},
+            };
+
+            string Status()
+            {
+                switch (status)
+                {
+                    case "approve":
+                        return "is_approved = 1, is_disapproved = 0, is_cancelled = 0";
+                    case "disapprove":
+                        return "is_approved = 0, is_disapproved = 1, is_cancelled = 0";
+                    case "cancel":
+                        return "is_cancelled = 1";
+                    case "pending":
+                        return "is_cancelled= 0, is_disapproved = 0, is_approved = 0";
+                    default:
+                        return "is_cancelled= 0, is_disapproved = 0, is_approved = 0";
+                }
+            }
+
+            string query = $"UPDATE {tableName} SET {Status()} WHERE id = @jev_id";
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+        }
+
         public string GetJevStatus(int jevId)
         {
-            var record = new Dictionary<string, byte>();
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@jev_id", DbType.Int32, jevId}
-                };
-                string query = $"SELECT is_approved, is_disapproved, is_cancelled FROM {tableName} WHERE id = @jev_id";
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
-                {
-                    foreach (DataRow item in reader.Rows)
-                    {
-                        record.Add("is_approved", Convert.ToByte(item[0]));
-                        record.Add("is_disapproved", Convert.ToByte(item[1]));
-                        record.Add("is_cancelled", Convert.ToByte(item[2]));
-                    }
-                }
+                new object[] { "@jev_id", DbType.Int32, jevId}
+            };
+            string query = $"SELECT is_approved, is_disapproved, is_cancelled FROM {tableName} WHERE id = @jev_id";
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return string.Empty;
 
-                if (record["is_cancelled"] == 1)
-                    return "cancelled";
-                else if (record["is_disapproved"] == 1)
-                    return "disapproved";
-                else if (record["is_approved"] == 1)
-                    return "approved";
-                else
-                    return "pending";
+                bool isApproved = Convert.ToBoolean(reader.Rows[0]["is_approved"]);
+                bool isDisapproved = Convert.ToBoolean(reader.Rows[0]["is_disapproved"]);
+                bool isCancelled = Convert.ToBoolean(reader.Rows[0]["is_cancelled"]);
+
+
+                if (isCancelled)
+                    return "Cancelled";
+                else if (isDisapproved && !isApproved)
+                    return "Disapproved";
+                else if (isApproved && !isDisapproved)
+                    return "Approved";
+                else if (!isApproved && !isDisapproved && !isCancelled)
+                    return "Pending";
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            return string.Empty;
         }
 
         //REMARKS
