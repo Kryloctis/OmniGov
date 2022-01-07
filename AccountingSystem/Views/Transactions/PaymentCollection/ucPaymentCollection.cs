@@ -210,22 +210,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             DateTime todaysDate = DateTime.Now;
             DateTime dateOfCollection = dtDateOfCollection.Value;
             e.Cancel = Helper.ShowErrorDateTimePickerRange(errorProvider, todaysDate, dateOfCollection, dtDateOfCollection, "Date of Collection");
-
         }
 
         private void dtDateOfCollection_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorDateTimePickerRange(errorProvider, dtDateOfCollection);
-        }
-
-
-        internal void txtpayee_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtpayee, "Payee.");
-        }
-        private void txtpayee_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider, txtpayee);
         }
 
         internal void txtreceipt_Validating(object sender, CancelEventArgs e)
@@ -243,22 +232,24 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
         }
 
+        private void txtreceipt_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider, txtreceipt);
+        }
+
+        internal void txtpayee_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtpayee, "Payee.");
+        }
+        private void txtpayee_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider, txtpayee);
+        }
+
         #endregion
 
 
         #region CashTicketValidation
-
-        #endregion
-
-
-
-
-        private void txtreceipt_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider, txtreceipt);
-        }  
-
-
 
         internal void txtCashTicketQuantity_Validating(object sender, CancelEventArgs e)
         {
@@ -269,6 +260,22 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             Helper.ClearErrorNumericUpDown(errorProvider, txtCashTicketQuantity);
         }
+
+        private void dtCashTicketDateOfCollection_Validating(object sender, CancelEventArgs e)
+        {
+            DateTime todaysDate = DateTime.Now;
+            DateTime dateOfCollection = dtCashTicketDateOfCollection.Value;
+            e.Cancel = Helper.ShowErrorDateTimePickerRange(errorProvider, todaysDate, dateOfCollection, dtCashTicketDateOfCollection, "Date of Collection");
+        }
+
+        private void dtCashTicketDateOfCollection_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorDateTimePickerRange(errorProvider, dtCashTicketDateOfCollection);
+        }
+       
+
+        #endregion
+
 
         private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -404,10 +411,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void txtreceipt_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
                 e.Handled = true;
-
-            }
         }
 
         private DataTable DatatableAccounts()
@@ -455,7 +459,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         }
 
-
         internal void SwitchFields()
         {
             isCashTicket = cmbAccountableForms.Text.Contains("Tickets");
@@ -498,6 +501,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
         }
 
-   
+
     }
 }

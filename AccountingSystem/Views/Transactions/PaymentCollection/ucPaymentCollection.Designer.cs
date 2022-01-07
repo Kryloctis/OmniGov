@@ -366,6 +366,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.dtCashTicketDateOfCollection.Name = "dtCashTicketDateOfCollection";
             this.dtCashTicketDateOfCollection.Size = new System.Drawing.Size(371, 23);
             this.dtCashTicketDateOfCollection.TabIndex = 4;
+            this.dtCashTicketDateOfCollection.Validating += new System.ComponentModel.CancelEventHandler(this.dtCashTicketDateOfCollection_Validating);
+            this.dtCashTicketDateOfCollection.Validated += new System.EventHandler(this.dtCashTicketDateOfCollection_Validated);
             // 
             // label15
             // 
