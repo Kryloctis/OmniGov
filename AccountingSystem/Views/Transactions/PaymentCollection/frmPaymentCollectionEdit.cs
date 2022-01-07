@@ -58,7 +58,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     uc.SwitchFields(); 
                     uc.txtpayee.Text = paymentCollectionDict["payee"];
                     uc.txtreceipt.Text = paymentCollectionDict["receipt_no"];
-                    uc.dtdate.Value = Convert.ToDateTime(paymentCollectionDict["payment_date"]);
+                    uc.dtDateOfCollection.Value = Convert.ToDateTime(paymentCollectionDict["payment_date"]);
                     uc.txtAmount.Value = Convert.ToDecimal(paymentCollectionDict["amount"]);
                     receipt = paymentCollectionDict["receipt_no"];
                     uc.receipt = Convert.ToInt32(paymentCollectionDict["receipt_no"]);
@@ -102,7 +102,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     GeneralLedgerAccountId = uc.generalLedgerId,
                     Payee = uc.txtpayee.Text.Trim(),
                     ReceiptNo = uc.txtreceipt.Text.Trim(),
-                    PaymentDate = Convert.ToDateTime(uc.dtdate.Text.Trim()),
+                    PaymentDate = Convert.ToDateTime(uc.dtDateOfCollection.Text.Trim()),
                     Amount = Convert.ToDecimal(uc.txtAmount.Value),
                     UpdatedBy =uc.userid,
                 };

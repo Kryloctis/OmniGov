@@ -254,6 +254,30 @@ namespace AccountingSystem
             return false;
         }
 
+        public static bool ShowErrorDateTimePickerRange(ErrorProvider ep, DateTime firstDate, DateTime secondDate, DateTimePicker dtp ,string fieldName = "Field") 
+        {
+            //bool isValidDate = Convert.ToBoolean(DateTime.Compare(firstDate, secondDate));
+            bool isValidDate = firstDate <= secondDate;
+
+            if (isValidDate)
+            {
+                ep.SetError(dtp, $"{fieldName} is invalid");
+                return true;
+            }
+
+            return false;
+        }
+        public static void ClearErrorDateTimePickerRange(ErrorProvider ep, DateTimePicker dtpDateRange)
+        {
+            ep.SetError(dtpDateRange, string.Empty);
+        }
+
+        public static void ClearErrorNumericUpDown(ErrorProvider ep, NumericUpDown numUpDown)
+        {
+            ep.SetError(numUpDown, string.Empty);
+        }
+
+
         public static bool ShowMaskedTextboxError(ErrorProvider ep, MaskedTextBox maskedTextBox, string fieldName)
         {
             if (!maskedTextBox.MaskCompleted)
@@ -264,7 +288,7 @@ namespace AccountingSystem
             return false;
         }
 
-        public static void ClearErrorNumericUpDown(ErrorProvider ep, NumericUpDown numUpDown)
+        public static void ClearErrorDateTimePickerRange(ErrorProvider ep, NumericUpDown numUpDown)
         {
             ep.SetError(numUpDown, string.Empty);
         }

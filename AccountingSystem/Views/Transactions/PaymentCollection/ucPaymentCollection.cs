@@ -17,6 +17,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal int minReceipt = 0;
         internal int maxReceipt = 0;
         internal int receipt = 0;
+
        
         internal bool isCashTicket;
         internal int cashTicketFaceValue = 0;
@@ -36,7 +37,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             errorArray[3]= errorProvider.GetError(cmbAccount);
             errorArray[4] = errorProvider.GetError(txtpayee);
             errorArray[5] = errorProvider.GetError(txtreceipt);
-            errorArray[6] = errorProvider.GetError(dtdate);
+            errorArray[6] = errorProvider.GetError(dtDateOfCollection);
             errorArray[7] = errorProvider.GetError(txtAmount);
 
             IError _errors = Factory.CreateErrors(errorArray);
@@ -53,7 +54,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
             txtpayee.Clear();
             txtreceipt.Clear();
-            dtdate.Value = DateTime.Now;
+            dtDateOfCollection.Value = DateTime.Now;
             txtAmount.Value = Convert.ToDecimal("0.00");
             minReceipt = 0;
             maxReceipt = 0;
@@ -157,6 +158,19 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             cmbAccount.SelectedIndex = -1;
         }
 
+
+        #region Validations
+        private void cmbcollector_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmdCollector, "Collecting Officer.");
+        }
+
+        private void cmbcollector_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider, cmdCollector);
+        }
+
+
         private void cmbfund_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbFund, "Funds.");
@@ -167,14 +181,14 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             Helper.ClearErrorComboBox(errorProvider, cmbFund);
         }
 
-        private void cmbcollector_Validated(object sender, EventArgs e)
+        private void cmbAccountableForms_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(errorProvider, cmdCollector);
+            Helper.ClearErrorComboBox(errorProvider, cmbAccountableForms);
         }
 
-        private void cmbcollector_Validating(object sender, CancelEventArgs e)
+        private void cmbAccountableForms_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmdCollector, "Collecting Officer.");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbAccountableForms, "Accountable Forms!");
         }
 
         private void cmbAccount_Validating(object sender, CancelEventArgs e)
@@ -186,7 +200,25 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             Helper.ClearErrorComboBox(errorProvider, cmbAccount);
         }
-       
+
+        #endregion
+
+
+        #region ORValidation
+        private void dtDateOfCollection_Validation(object sender, CancelEventArgs e)
+        {
+            DateTime todaysDate = DateTime.Now;
+            DateTime dateOfCollection = dtDateOfCollection.Value;
+            e.Cancel = Helper.ShowErrorDateTimePickerRange(errorProvider, todaysDate, dateOfCollection, dtDateOfCollection, "Date of Collection");
+
+        }
+
+        private void dtDateOfCollection_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorDateTimePickerRange(errorProvider, dtDateOfCollection);
+        }
+
+
         internal void txtpayee_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtpayee, "Payee.");
@@ -204,27 +236,29 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 errorProvider.SetError(txtreceipt, "Receipt No. invalid.");
                 e.Cancel = true;
             }
-            else if(Convert.ToInt32(txtreceipt.Text.Trim()) <= 0)
+            else if (Convert.ToInt32(txtreceipt.Text.Trim()) <= 0)
             {
                 errorProvider.SetError(txtreceipt, "Receipt No. invalid.");
                 e.Cancel = true;
             }
         }
 
+        #endregion
+
+
+        #region CashTicketValidation
+
+        #endregion
+
+
+
+
         private void txtreceipt_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider, txtreceipt);
         }  
 
-        private void cmbforms_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(errorProvider, cmbAccountableForms);
-        }
 
-        private void cmbforms_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbAccountableForms, "Accountable Forms!");
-        }
 
         internal void txtCashTicketQuantity_Validating(object sender, CancelEventArgs e)
         {
@@ -235,7 +269,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             Helper.ClearErrorNumericUpDown(errorProvider, txtCashTicketQuantity);
         }
-
 
         private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -352,7 +385,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 cmbAccountableForms.Enabled = true;
                 txtpayee.Enabled = true;
                 //txtreceipt.Enabled = true;
-                dtdate.Enabled = true;
+                dtDateOfCollection.Enabled = true;
                 txtAmount.Enabled = true;
                 cmbAccount.Enabled = true;
                 LoadForms(int.Parse(collector[0].ToString()));
@@ -362,7 +395,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 cmbAccountableForms.Enabled = false;
                 txtpayee.Enabled = false;
                 //txtreceipt.Enabled = false;
-                dtdate.Enabled = false;
+                dtDateOfCollection.Enabled = false;
                 txtAmount.Enabled = false;
                 cmbAccount.Enabled = false;
             }
@@ -464,5 +497,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 cmbAccount.DroppedDown = true;
             }
         }
+
+   
     }
 }

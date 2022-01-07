@@ -61,7 +61,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     Quantity = 1,
                     Payee = uc.txtpayee.Text.Trim(),
                     ReceiptNo = uc.txtreceipt.Text.Trim(),
-                    PaymentDate = Convert.ToDateTime(uc.dtdate.Text.Trim()),
+                    PaymentDate = Convert.ToDateTime(uc.dtDateOfCollection.Text.Trim()),
                     Amount = Convert.ToDecimal(uc.txtAmount.Value),
                     CreatedBy = uc.userid,
                 };

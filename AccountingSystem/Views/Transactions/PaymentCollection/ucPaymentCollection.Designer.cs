@@ -38,7 +38,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label6 = new System.Windows.Forms.Label();
             this.txtpayee = new System.Windows.Forms.TextBox();
             this.txtreceipt = new System.Windows.Forms.TextBox();
-            this.dtdate = new System.Windows.Forms.DateTimePicker();
+            this.dtDateOfCollection = new System.Windows.Forms.DateTimePicker();
             this.txtAmount = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.cmdCollector = new System.Windows.Forms.ComboBox();
@@ -146,14 +146,16 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.txtreceipt.Validating += new System.ComponentModel.CancelEventHandler(this.txtreceipt_Validating);
             this.txtreceipt.Validated += new System.EventHandler(this.txtreceipt_Validated);
             // 
-            // dtdate
+            // dtDateOfCollection
             // 
-            this.dtdate.Enabled = false;
-            this.dtdate.Location = new System.Drawing.Point(174, 12);
-            this.dtdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dtdate.Name = "dtdate";
-            this.dtdate.Size = new System.Drawing.Size(370, 23);
-            this.dtdate.TabIndex = 4;
+            this.dtDateOfCollection.Enabled = false;
+            this.dtDateOfCollection.Location = new System.Drawing.Point(174, 12);
+            this.dtDateOfCollection.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtDateOfCollection.Name = "dtDateOfCollection";
+            this.dtDateOfCollection.Size = new System.Drawing.Size(370, 23);
+            this.dtDateOfCollection.TabIndex = 4;
+            this.dtDateOfCollection.Validating += new System.ComponentModel.CancelEventHandler(this.dtDateOfCollection_Validation);
+            this.dtDateOfCollection.Validated += new System.EventHandler(this.dtDateOfCollection_Validated);
             // 
             // txtAmount
             // 
@@ -208,8 +210,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.cmbAccountableForms.TabIndex = 2;
             this.cmbAccountableForms.SelectedIndexChanged += new System.EventHandler(this.cmbforms_SelectedIndexChanged);
             this.cmbAccountableForms.SelectedValueChanged += new System.EventHandler(this.cmbforms_SelectedValueChanged);
-            this.cmbAccountableForms.Validating += new System.ComponentModel.CancelEventHandler(this.cmbforms_Validating);
-            this.cmbAccountableForms.Validated += new System.EventHandler(this.cmbforms_Validated);
+            this.cmbAccountableForms.Validating += new System.ComponentModel.CancelEventHandler(this.cmbAccountableForms_Validating);
+            this.cmbAccountableForms.Validated += new System.EventHandler(this.cmbAccountableForms_Validated);
             // 
             // groupBox1
             // 
@@ -289,7 +291,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             this.tabNonCashTickets.BackColor = System.Drawing.SystemColors.Control;
             this.tabNonCashTickets.Controls.Add(this.label3);
-            this.tabNonCashTickets.Controls.Add(this.dtdate);
+            this.tabNonCashTickets.Controls.Add(this.dtDateOfCollection);
             this.tabNonCashTickets.Controls.Add(this.txtAmount);
             this.tabNonCashTickets.Controls.Add(this.txtreceipt);
             this.tabNonCashTickets.Controls.Add(this.label6);
@@ -420,7 +422,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.Label label7;
         internal System.Windows.Forms.TextBox txtpayee;
         internal System.Windows.Forms.TextBox txtreceipt;
-        internal System.Windows.Forms.DateTimePicker dtdate;
+        internal System.Windows.Forms.DateTimePicker dtDateOfCollection;
         internal System.Windows.Forms.NumericUpDown txtAmount;
         private System.Windows.Forms.ErrorProvider errorProvider;
         internal System.Windows.Forms.ComboBox cmdCollector;
