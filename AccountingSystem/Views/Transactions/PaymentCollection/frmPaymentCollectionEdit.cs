@@ -44,10 +44,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
 
 
-                uc.cmbcollector.SelectedValue = paymentCollectionDict["collecting_officers_id"];
-                uc.cmbfund.SelectedValue = paymentCollectionDict["funds_id"];
-                uc.cmbforms.SelectedValue = paymentCollectionDict["accountable_forms_id"];
-                uc.setSelectedValue(Convert.ToInt32(paymentCollectionDict["general_ledger_accounts_id"]), "ledger");
+                uc.cmdCollector.SelectedValue = paymentCollectionDict["collecting_officers_id"];
+                uc.cmbFund.SelectedValue = paymentCollectionDict["funds_id"];
+                uc.cmbAccountableForms.SelectedValue = paymentCollectionDict["accountable_forms_id"];
+                uc.SetSelectedValue(Convert.ToInt32(paymentCollectionDict["general_ledger_accounts_id"]), "ledger");
                 uc.accId = Convert.ToInt32(paymentCollectionDict["accountable_forms_id"]);
 
                 bool isCashTickets = String.IsNullOrEmpty(paymentCollectionDict["receipt_no"]);
@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     uc.txtAmount.Value = Convert.ToDecimal(paymentCollectionDict["amount"]);
                     receipt = paymentCollectionDict["receipt_no"];
                     uc.receipt = Convert.ToInt32(paymentCollectionDict["receipt_no"]);
-                    uc.cmbcollector.Enabled = false;
+                    uc.cmdCollector.Enabled = false;
                 }
                 else
                 {
@@ -96,9 +96,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 var pcModel = new PaymentCollectionModel()
                 {
                     Id = uc.Id,
-                    CollectingOfficerId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
-                    FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
-                    AccountableFormId = Convert.ToInt32(uc.cmbforms.SelectedValue),
+                    CollectingOfficerId = Convert.ToInt32(uc.cmdCollector.SelectedValue),
+                    FundId = Convert.ToInt32(uc.cmbFund.SelectedValue),
+                    AccountableFormId = Convert.ToInt32(uc.cmbAccountableForms.SelectedValue),
                     GeneralLedgerAccountId = uc.generalLedgerId,
                     Payee = uc.txtpayee.Text.Trim(),
                     ReceiptNo = uc.txtreceipt.Text.Trim(),
@@ -113,7 +113,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     if (pcrepository.Update(pcModel))
                     {
                         var riRepository = Factory.ReceiptsIssuedRepository();
-                        var dtri = riRepository.GetRecords(uc.cmbcollector.SelectedValue.ToString(), uc.cmbforms.SelectedValue.ToString());
+                        var dtri = riRepository.GetRecords(uc.cmdCollector.SelectedValue.ToString(), uc.cmbAccountableForms.SelectedValue.ToString());
                         if (dtri.Rows.Count > 0)
                         {
                             int rid = 0;
@@ -176,9 +176,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
                 var paymentCollectionModel = new PaymentCollectionModel()
                 {
-                    CollectingOfficerId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
-                    FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
-                    AccountableFormId = Convert.ToInt32(uc.cmbforms.SelectedValue),
+                    CollectingOfficerId = Convert.ToInt32(uc.cmdCollector.SelectedValue),
+                    FundId = Convert.ToInt32(uc.cmbFund.SelectedValue),
+                    AccountableFormId = Convert.ToInt32(uc.cmbAccountableForms.SelectedValue),
                     GeneralLedgerAccountId = uc.generalLedgerId,
                     Quantity = Convert.ToInt32(uc.txtCashTicketQuantity.Value),
                     PaymentDate = Convert.ToDateTime(uc.dtCashTicketDateOfCollection.Text.Trim()),
