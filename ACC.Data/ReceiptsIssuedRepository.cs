@@ -466,7 +466,8 @@ namespace ACC.Data
                            $"IF(is_returned = 1, (issueto - last_issued), null) AS returned_quantity, " +
                            $"returned_date " +
                            $"FROM " +
-                           $"{viewTableName}";
+                           $"{viewTableName} " +
+                           $"WHERE is_returned = 1";
 
             var dt = new DataTable();
             return _dbGenericCommands.Fill(query, dt);

@@ -34,10 +34,7 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCounts = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgReturnedReceipts)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -63,10 +60,7 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             this.toolStripStatusLabel1,
             this.lblRecordCounts,
             this.toolStripStatusLabel2,
-            this.toolStripStatusLabel3,
             this.lblCreatedAt,
-            this.toolStripStatusLabel4,
-            this.toolStripStatusLabel5,
             this.lblUpdatedAt});
             this.statusStrip1.Location = new System.Drawing.Point(0, 399);
             this.statusStrip1.Name = "statusStrip1";
@@ -84,39 +78,19 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             // lblRecordCounts
             // 
             this.lblRecordCounts.Name = "lblRecordCounts";
-            this.lblRecordCounts.Size = new System.Drawing.Size(0, 17);
+            this.lblRecordCounts.Size = new System.Drawing.Size(13, 17);
+            this.lblRecordCounts.Text = "0";
             // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(619, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(748, 17);
             this.toolStripStatusLabel2.Spring = true;
-            // 
-            // toolStripStatusLabel3
-            // 
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(64, 17);
-            this.toolStripStatusLabel3.Text = "Created at:";
             // 
             // lblCreatedAt
             // 
             this.lblCreatedAt.Name = "lblCreatedAt";
             this.lblCreatedAt.Size = new System.Drawing.Size(0, 17);
-            // 
-            // toolStripStatusLabel4
-            // 
-            this.toolStripStatusLabel4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.toolStripStatusLabel4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(10, 17);
-            this.toolStripStatusLabel4.Text = "|";
-            this.toolStripStatusLabel4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // toolStripStatusLabel5
-            // 
-            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            this.toolStripStatusLabel5.Size = new System.Drawing.Size(68, 17);
-            this.toolStripStatusLabel5.Text = "Updated at:";
             // 
             // lblUpdatedAt
             // 
@@ -155,10 +129,7 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCounts;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
     }
 }

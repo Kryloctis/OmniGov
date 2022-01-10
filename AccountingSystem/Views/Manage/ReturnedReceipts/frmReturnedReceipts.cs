@@ -38,6 +38,7 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
                 var returnedReceiptDt = receiptIssuedRepo.GetReturnedReceipts();
 
                 HelperLoadRecords.ReturnedReceiptsDatagridView(returnedReceiptDt, dgReturnedReceipts);
+                lblRecordCounts.Text = dgReturnedReceipts.Rows.Count.ToString();
 
             }
             catch (Exception)
@@ -46,5 +47,9 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             }
         }
 
+        private void toolStripStatusLabel2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
