@@ -16,5 +16,10 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
         {
             InitializeComponent();
         }
+
+        private void dgreceipts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
