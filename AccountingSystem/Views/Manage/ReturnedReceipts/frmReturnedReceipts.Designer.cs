@@ -49,13 +49,13 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgReturnedReceipts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgReturnedReceipts.Location = new System.Drawing.Point(12, 59);
+            this.dgReturnedReceipts.Location = new System.Drawing.Point(12, 38);
             this.dgReturnedReceipts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgReturnedReceipts.Name = "dgReturnedReceipts";
             this.dgReturnedReceipts.RowHeadersWidth = 51;
             this.dgReturnedReceipts.RowTemplate.Height = 29;
             this.dgReturnedReceipts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgReturnedReceipts.Size = new System.Drawing.Size(711, 312);
+            this.dgReturnedReceipts.Size = new System.Drawing.Size(711, 333);
             this.dgReturnedReceipts.TabIndex = 9;
             // 
             // statusStrip1
@@ -138,6 +138,7 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             this.Name = "frmReturnedReceipts";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Returned Receipts";
+            this.Load += new System.EventHandler(this.frmReturnedReceipts_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgReturnedReceipts)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

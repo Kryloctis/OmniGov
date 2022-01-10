@@ -449,5 +449,26 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public DataTable GetReturnedReceipts()
+        {
+            string query = $"SELECT " +
+                           $"receipts_id " +
+                           $"accountable_form_id, " +
+                           $"accountable_forms, " +
+                           $"collecting_officer_id, " +
+                           $"collecting_officer, " +
+                           $"date_issued, " +
+                           $"issuefrom, " +
+                           $"issueto, " +
+                           $"last_issued, " +
+                           $"IF(is_returned = 1, (issueto - last_issued), null) AS returned_quantity, " +
+                           $"returned_date " +
+                           $"FROM " +
+                           $"{viewTableName}";
+
+            var dt = new DataTable();
+            return _dbGenericCommands.Fill(query, dt);
+        }
     }
 }
