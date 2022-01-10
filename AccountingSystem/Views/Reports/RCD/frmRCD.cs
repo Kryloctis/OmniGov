@@ -107,13 +107,11 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("RCD has been created.");
                 ResetForm();
             }
-
         }
 
         private void ResetForm()
@@ -229,7 +227,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 totalCollections += Convert.ToDecimal(row.Cells["amount"].Value);
 
             reportQuantity = (short)dgListOfApprovedReport.Rows.Count;
-            lblTotalRecords.Text = reportQuantity.ToString();
+            lblRecordCount.Text = reportQuantity.ToString();
             lblTotalAmount.Text = totalCollections.ToString("N2");
         }
      

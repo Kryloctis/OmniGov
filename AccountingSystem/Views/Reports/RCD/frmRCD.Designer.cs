@@ -51,7 +51,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.panelRCD = new System.Windows.Forms.Panel();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblTotalRecords = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblTotalAmount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
@@ -290,7 +290,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.statusStrip2.BackColor = System.Drawing.Color.White;
             this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
-            this.lblTotalRecords,
+            this.lblRecordCount,
             this.toolStripStatusLabel3,
             this.lblTotalAmount});
             this.statusStrip2.Location = new System.Drawing.Point(0, 576);
@@ -306,12 +306,12 @@ namespace AccountingSystem.Views.Reports.RCD
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(58, 17);
             this.toolStripStatusLabel1.Text = "Records : ";
             // 
-            // lblTotalRecords
+            // lblRecordCount
             // 
-            this.lblTotalRecords.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTotalRecords.Name = "lblTotalRecords";
-            this.lblTotalRecords.Size = new System.Drawing.Size(14, 17);
-            this.lblTotalRecords.Text = "0";
+            this.lblRecordCount.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblRecordCount.Name = "lblRecordCount";
+            this.lblRecordCount.Size = new System.Drawing.Size(14, 17);
+            this.lblRecordCount.Text = "0";
             // 
             // toolStripStatusLabel3
             // 
@@ -384,6 +384,6 @@ namespace AccountingSystem.Views.Reports.RCD
         private System.Windows.Forms.ToolStripStatusLabel lblTotalAmount;
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedBy;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel lblTotalRecords;
+        private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
     }
 }

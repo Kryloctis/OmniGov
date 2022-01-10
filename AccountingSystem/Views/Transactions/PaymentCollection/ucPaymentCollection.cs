@@ -18,7 +18,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal int maxReceipt = 0;
         internal int receipt = 0;
 
-       
         internal bool isCashTicket;
         internal int cashTicketFaceValue = 0;
         internal decimal accountableFormFaceValue;
@@ -71,7 +70,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 cmbAccountableForms.DataSource = dtforms;
                 cmbAccountableForms.ValueMember = "id";
                 cmbAccountableForms.DisplayMember = "formdisplay";
-            }
+            } 
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
@@ -248,9 +247,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         #endregion
 
-
         #region CashTicketValidation
-
         internal void txtCashTicketQuantity_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider, txtCashTicketQuantity, "Cash Ticket Quantity.");
@@ -272,8 +269,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             Helper.ClearErrorDateTimePickerRange(errorProvider, dtCashTicketDateOfCollection);
         }
-       
-
         #endregion
 
 

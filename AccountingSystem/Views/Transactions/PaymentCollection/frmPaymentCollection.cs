@@ -38,12 +38,25 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
                 HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
 
-                lblRecordCount.Text = dgpayments.Rows.Count.ToString();
+                SetStatusStrip();
             }
             catch (Exception ex) 
             {
                 Helper.MessageBoxError(ex.Message); 
             }
+        }
+
+        internal void SetStatusStrip()
+        {
+            decimal totalCollections = 0.0m;
+            int paymentQuantity;
+
+            foreach (DataGridViewRow row in dgpayments.Rows)
+                totalCollections += Convert.ToDecimal(row.Cells["amount"].Value);
+
+            paymentQuantity = (short)dgpayments.Rows.Count;
+            lblRecordCount.Text = paymentQuantity.ToString();
+            lblTotalAmount.Text = totalCollections.ToString("N2");
         }
 
         private void btnEdit_Click(object sender, EventArgs e)

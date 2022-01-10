@@ -142,7 +142,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void txtto_Validating(object sender, CancelEventArgs e)
         {
-            
             if (!istickets)
             {
                 e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtto, "Receipt No. To!");
@@ -153,7 +152,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                     e.Cancel = true;
                 }
             }
-         
         }
 
         private void txtquantity_Validated(object sender, EventArgs e)
