@@ -36,6 +36,8 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtsearch = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgReturnedReceipts)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -45,13 +47,13 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             this.dgReturnedReceipts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgReturnedReceipts.Location = new System.Drawing.Point(12, 11);
+            this.dgReturnedReceipts.Location = new System.Drawing.Point(12, 44);
             this.dgReturnedReceipts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgReturnedReceipts.Name = "dgReturnedReceipts";
             this.dgReturnedReceipts.RowHeadersWidth = 51;
             this.dgReturnedReceipts.RowTemplate.Height = 29;
             this.dgReturnedReceipts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgReturnedReceipts.Size = new System.Drawing.Size(814, 386);
+            this.dgReturnedReceipts.Size = new System.Drawing.Size(814, 353);
             this.dgReturnedReceipts.TabIndex = 9;
             // 
             // statusStrip1
@@ -98,12 +100,33 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
             this.lblUpdatedAt.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(574, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(45, 15);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Search ";
+            // 
+            // txtsearch
+            // 
+            this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtsearch.Location = new System.Drawing.Point(625, 17);
+            this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtsearch.Name = "txtsearch";
+            this.txtsearch.Size = new System.Drawing.Size(201, 23);
+            this.txtsearch.TabIndex = 12;
+            // 
             // frmReturnedReceipts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(838, 421);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.dgReturnedReceipts);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -131,5 +154,7 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtsearch;
     }
 }
