@@ -14,24 +14,25 @@ namespace ACC.Domain.Interfaces
 
         bool Delete(int allotmentReleaseId);
 
-        bool AllotmentReleaseNoExist(string allotmentReleaseNo);
+        bool AllotmentReleaseNoExist(string allotmentReleaseNo, short year);
 
-        bool AllotmentReleaseNoExist(int Id, string allotmentReleaseNo);
+        bool AllotmentReleaseNoExist(int Id, string allotmentReleaseNo, short year);
 
         bool AllotmentReleaseExist(int budgetAppropriationId, DateTime dateIssued);
 
         bool AllotmentReleaseExist(int Id, int budgetAppropriationId, DateTime dateIssued);
 
+        decimal GetTotalAllotmentReleaseById(int allotmentReleaseId);
 
-        //VIEWS
         DataTable GetViewRecords();
+
+        DataTable GetViewRecordsBySearch(int fundId, int AllotmentClassId, DateTime dateIssued, string searchText);
 
         DataTable GetViewRecordsByBudgetAppropriationIdDateIssued(int budgetAppropriationId, DateTime dateIssued);
 
         DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId);
 
         DataTable GetViewRecordsById(int Id);
-
 
         //DASHBOARD
 
@@ -42,5 +43,7 @@ namespace ACC.Domain.Interfaces
         //DETAILED
         decimal GetSumAllotments(string fppId, string subFPPId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing);
         #endregion
+
+        string GetLeastAllotmentReleaseNumber();
     }
 }
