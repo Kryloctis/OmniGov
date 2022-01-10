@@ -22,16 +22,17 @@ namespace ACC.Domain.Interfaces
 
         bool AllotmentReleaseExist(int Id, int budgetAppropriationId, DateTime dateIssued);
 
+        decimal GetTotalAllotmentReleaseById(int allotmentReleaseId);
 
-        //VIEWS
         DataTable GetViewRecords();
+
+        DataTable GetViewRecordsBySearch(int fundId, int AllotmentClassId, DateTime dateIssued, string searchText);
 
         DataTable GetViewRecordsByBudgetAppropriationIdDateIssued(int budgetAppropriationId, DateTime dateIssued);
 
         DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId);
 
         DataTable GetViewRecordsById(int Id);
-
 
         //DASHBOARD
 

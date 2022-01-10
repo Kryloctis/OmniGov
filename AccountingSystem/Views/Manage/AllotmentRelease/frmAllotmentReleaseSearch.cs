@@ -1,12 +1,5 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AllotmentRelease
@@ -22,19 +15,81 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             btnSelect.Enabled = false;
         }
 
-
-        private void LoadAllotmentRelease() 
+        private void LoadFunds()
         {
-            string searchTxt = txtSearch.Text.Trim();
-            var dtAllotmentReleaseSearch = Factory.AllotmentReleaseRepository().GetRecordsBySearch(searchTxt);
-            dgAllotmentRelease.DataSource = dtAllotmentReleaseSearch;
+            try
+            {
+                var dtFunds = Factory.FundsRepository().GetRecords();
+                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
 
-            dgAllotmentRelease.Columns["aro_no"].HeaderText = "ARO No.";
-            dgAllotmentRelease.Columns["purpose"].HeaderText = "Purpose";
-            dgAllotmentRelease.Columns["id"].Visible = false;
-            dgAllotmentRelease.Columns["date_issued"].Visible = false;
-            dgAllotmentRelease.Columns["created_at"].Visible = false;
-            dgAllotmentRelease.Columns["updated_at"].Visible = false;   
+        private void LoadAllotmentClasses()
+        {
+            try
+            {
+                var dtFunds = Factory.AllotmentClassesRepository().GetRecords();
+                HelperLoadRecords.AllotmentClasssesCombobox(dtFunds, cmbxAllotmentClasses, "allotment_code", "id");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private DataTable AllotmentReleaseDatatable()
+        {
+            var dataTable = new DataTable();
+
+            try
+            {
+                string searchTxt = txtSearch.Text.Trim();
+                dataTable.Columns.Add("allotment_release_id");
+                dataTable.Columns.Add("full_aro_no");
+                dataTable.Columns.Add("date_issued");
+                dataTable.Columns.Add("purpose");
+                dataTable.Columns.Add("total_allotment_release");
+                dataTable.Columns.Add("continuing");
+
+                int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+                int allotmentClassId = Convert.ToInt32(cmbxAllotmentClasses.SelectedValue);
+                var dateIssued = dtDateIssued.Value;
+
+                var dtAllotmentReleaseSearch = Factory.AllotmentReleaseRepository().GetViewRecordsBySearch(fundId, allotmentClassId, dateIssued, searchTxt);
+
+
+                foreach (DataRow row in dtAllotmentReleaseSearch.Rows)
+                {
+                    int rowAllotmentReleaseId = Convert.ToInt32(row["allotment_release_id"]);
+                    string rowFullAroNo = row["full_aro_no"].ToString();
+                    DateTime rowDateIssued = Convert.ToDateTime(row["date_issued"]);
+                    string rowPurpose = row["purpose"].ToString();
+                    bool rowIsContinuing = Convert.ToBoolean(row["continuing"]);
+                    string rowTotalAllotmentRelease = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseById(rowAllotmentReleaseId).ToString("N2");
+
+
+                    var item = new object[] { rowAllotmentReleaseId, rowFullAroNo, rowDateIssued.ToString("MMM dd, yyyy"), rowPurpose, rowTotalAllotmentRelease, rowIsContinuing };
+
+                    if (rowDateIssued.Year == dateIssued.Year || rowIsContinuing)
+                        dataTable.Rows.Add(item);
+                }
+
+                return dataTable;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return dataTable;
+        }
+
+        private void LoadAllotmentRelease()
+        {
+            HelperLoadRecords.SearchAllotmentReleaseDatagridView(AllotmentReleaseDatatable(), dgAllotmentRelease);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -44,7 +99,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void frmAllotmentReleaseSearch_Load(object sender, EventArgs e)
         {
-            Helper.DatagridDefaultStyle(dgAllotmentRelease, true);
+            Helper.DatagridFullRowSelectStyle(dgAllotmentRelease, true);
+            LoadFunds();
+            LoadAllotmentClasses();
+            LoadAllotmentRelease();
         }
 
         private void dgAllotmentRelease_SelectionChanged(object sender, EventArgs e)
@@ -55,12 +113,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 btnSelect.Enabled = false;
         }
 
-
-        private void ApplySelected() 
+        private void ApplySelected()
         {
             var ucMain = _frmAllotmentReleaseMain.ucAllotmentReleaseMain1;
             int rowIndex = dgAllotmentRelease.CurrentCell.RowIndex;
-            int allotmentReleaseId = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["id"].Value);
+            int allotmentReleaseId = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["allotment_release_id"].Value);
 
             ucMain.allotmentReleaseId = allotmentReleaseId;
             ucMain.LoadSelected();
@@ -81,6 +138,15 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             ApplySelected();
         }
 
-       
+        private void cmbxFunds_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadAllotmentRelease();
+        }
+
+        private void cmbxAllotmentClasses_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadAllotmentRelease();
+
+        }
     }
 }

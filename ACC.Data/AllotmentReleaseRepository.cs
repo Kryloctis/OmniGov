@@ -527,6 +527,34 @@ namespace ACC.Data
             }
         }
 
+        public DataTable GetViewRecordsBySearch(int fundId, int allotmentClassId, DateTime dateIssued, string searchText)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@funds_id", DbType.Int32, fundId },
+                new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId },
+                new object[] { "@date_issued", DbType.Date, dateIssued},
+                new object[] { "@searchTxt", DbType.String, $"%{searchText}%"}
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE funds_id = @funds_id AND allotment_classes_id = @allotment_classes_id AND date_issued <= @date_issued AND (aro_no LIKE @searchTxt OR purpose LIKE  @searchTxt)";
+
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
+        public decimal GetTotalAllotmentReleaseById(int allotmentReleaseId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@allotment_release_id", DbType.Int32, allotmentReleaseId }
+            };
+
+            string query = $"SELECT COALESCE(SUM(amount), 0) AS total_allotment_release FROM {viewTableName} WHERE allotment_release_id = @allotment_release_id";
+
+            return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+        }
+
         #region BUDGET DASHBOARD METHODS
         //SUMMARY
         public decimal GetSumAllotments(string fppId, string subFPPId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing)
@@ -571,7 +599,7 @@ namespace ACC.Data
             return allotments;
         }
 
-        //DETAILED  
+        //DETAILED 
         public decimal GetSumAllotments(int budgetAppropriationId, DateTime dateIssued)
         {
             var parameters = new object[][]
@@ -587,6 +615,7 @@ namespace ACC.Data
             decimal allotments = Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
             return allotments;
         }
+
         #endregion
     }
 }
