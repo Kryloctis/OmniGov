@@ -126,6 +126,7 @@ namespace AccountingSystem
             this.radFinancialStatements = new System.Windows.Forms.RadioButton();
             this.tabPageTreasury = new System.Windows.Forms.TabPage();
             this.ucTreasuryDashboard1 = new AccountingSystem.Views.Dashboard.TreasuryDashboard.ucTreasuryDashboard();
+            this.menuReturnReceipts = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -215,6 +216,7 @@ namespace AccountingSystem
             this.menuBanks,
             this.menuAccForm,
             this.menuReceipts,
+            this.menuReturnReceipts,
             this.amortiaztionToolStripMenuItem,
             this.signatoriesToolStripMenuItem});
             this.menuManage.Name = "menuManage";
@@ -1292,6 +1294,12 @@ namespace AccountingSystem
             this.ucTreasuryDashboard1.Size = new System.Drawing.Size(1191, 464);
             this.ucTreasuryDashboard1.TabIndex = 0;
             // 
+            // menuReturnReceipts
+            // 
+            this.menuReturnReceipts.Name = "menuReturnReceipts";
+            this.menuReturnReceipts.Size = new System.Drawing.Size(214, 22);
+            this.menuReturnReceipts.Text = "Returned Receipts";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1458,6 +1466,7 @@ namespace AccountingSystem
         internal System.Windows.Forms.Button btnBudgetAppropriations;
         internal System.Windows.Forms.Button btnAllotmentRelease;
         internal System.Windows.Forms.Button btnObligationRequest;
+        private System.Windows.Forms.ToolStripMenuItem menuReturnReceipts;
     }
 }
 
