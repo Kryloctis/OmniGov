@@ -11,6 +11,7 @@ using AccountingSystem.Views.Manage.FunctionProgramProject;
 using AccountingSystem.Views.Manage.Funds;
 using AccountingSystem.Views.Manage.Journals;
 using AccountingSystem.Views.Manage.Receipts;
+using AccountingSystem.Views.Manage.ReturnedReceipts;
 using AccountingSystem.Views.Manage.Signatories;
 using AccountingSystem.Views.Manage.Users.List;
 using AccountingSystem.Views.Manage.Users.Roles;
@@ -636,6 +637,11 @@ namespace AccountingSystem
         private void menuprintGC_Click(object sender, EventArgs e)
         {
             _ = new frmAbstractOfGeneralCollection().ShowDialog();
+        }
+
+        private void menuReturnReceipts_Click(object sender, EventArgs e)
+        {
+            _ = new frmReturnedReceipts().ShowDialog();
         }
     }
 }

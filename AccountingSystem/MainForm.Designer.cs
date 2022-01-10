@@ -47,6 +47,7 @@ namespace AccountingSystem
             this.menuBanks = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAccForm = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReceipts = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuReturnReceipts = new System.Windows.Forms.ToolStripMenuItem();
             this.amortiaztionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.signatoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
@@ -126,7 +127,6 @@ namespace AccountingSystem
             this.radFinancialStatements = new System.Windows.Forms.RadioButton();
             this.tabPageTreasury = new System.Windows.Forms.TabPage();
             this.ucTreasuryDashboard1 = new AccountingSystem.Views.Dashboard.TreasuryDashboard.ucTreasuryDashboard();
-            this.menuReturnReceipts = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -315,6 +315,13 @@ namespace AccountingSystem
             this.menuReceipts.Size = new System.Drawing.Size(214, 22);
             this.menuReceipts.Text = "Receipts";
             this.menuReceipts.Click += new System.EventHandler(this.menureceipts_Click);
+            // 
+            // menuReturnReceipts
+            // 
+            this.menuReturnReceipts.Name = "menuReturnReceipts";
+            this.menuReturnReceipts.Size = new System.Drawing.Size(214, 22);
+            this.menuReturnReceipts.Text = "Returned Receipts";
+            this.menuReturnReceipts.Click += new System.EventHandler(this.menuReturnReceipts_Click);
             // 
             // amortiaztionToolStripMenuItem
             // 
@@ -1293,12 +1300,6 @@ namespace AccountingSystem
             this.ucTreasuryDashboard1.Name = "ucTreasuryDashboard1";
             this.ucTreasuryDashboard1.Size = new System.Drawing.Size(1191, 464);
             this.ucTreasuryDashboard1.TabIndex = 0;
-            // 
-            // menuReturnReceipts
-            // 
-            this.menuReturnReceipts.Name = "menuReturnReceipts";
-            this.menuReturnReceipts.Size = new System.Drawing.Size(214, 22);
-            this.menuReturnReceipts.Text = "Returned Receipts";
             // 
             // MainForm
             // 
