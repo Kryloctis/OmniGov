@@ -118,6 +118,7 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.Size = new System.Drawing.Size(201, 23);
             this.txtsearch.TabIndex = 12;
+            this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
             // frmReturnedReceipts
             // 

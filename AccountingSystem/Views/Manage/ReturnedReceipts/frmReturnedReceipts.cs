@@ -47,9 +47,22 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             }
         }
 
-        private void toolStripStatusLabel2_Click(object sender, EventArgs e)
+        private void txtsearch_TextChanged(object sender, EventArgs e)
         {
+            try
+            {
+                var searchKey = txtsearch.Text.Trim();
 
-        }
+                var receiptIssuedRepo = Factory.ReceiptsIssuedRepository();
+                var returnedReceiptDt = receiptIssuedRepo.GetReturnedReceiptsBySearch(searchKey);
+
+                HelperLoadRecords.ReturnedReceiptsDatagridView(returnedReceiptDt, dgReturnedReceipts);
+                lblRecordCounts.Text = dgReturnedReceipts.Rows.Count.ToString();
+             }
+            catch (Exception ex) 
+            {
+                Helper.MessageBoxError(ex.Message); 
+            }
+}
     }
 }
