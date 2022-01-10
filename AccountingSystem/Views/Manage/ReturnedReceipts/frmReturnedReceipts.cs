@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
 
         }
 
-    private void frmReturnedReceipts_Load(object sender, EventArgs e)
+        private void frmReturnedReceipts_Load(object sender, EventArgs e)
         {
            LoadRecords();
         }
@@ -37,10 +37,11 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
                 var receiptIssuedRepo = Factory.ReceiptsIssuedRepository();
                 var returnedReceiptDt = receiptIssuedRepo.GetReturnedReceipts();
 
+                HelperLoadRecords.ReturnedReceiptsDatagridView(returnedReceiptDt, dgReturnedReceipts);
+
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

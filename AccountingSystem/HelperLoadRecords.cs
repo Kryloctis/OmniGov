@@ -379,6 +379,56 @@ namespace AccountingSystem
         }
         #endregion
 
+        #region Returned Receipts
+        internal static void ReturnedReceiptsDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+
+            datagrid.Columns[0].HeaderText = "Receipt ID";
+            datagrid.Columns[1].HeaderText = "Accountable Form ID";
+            datagrid.Columns[2].HeaderText = "Accountable Form";
+            datagrid.Columns[3].HeaderText = "Collecting Officer ID ";
+            datagrid.Columns[4].HeaderText = "Collecting Officer";
+            datagrid.Columns[5].HeaderText = "Date Issued";
+            datagrid.Columns[6].HeaderText = "Serial No. From";
+            datagrid.Columns[7].HeaderText = "Serial No. To";
+            datagrid.Columns[8].HeaderText = "Quantity";
+            datagrid.Columns[9].HeaderText = "Last Issued";
+            datagrid.Columns[10].HeaderText = "Returned Quantity";
+            datagrid.Columns[11].HeaderText = "Date Returned";
+            
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].Visible = false;
+            datagrid.Columns[3].Visible = false;
+
+            datagrid.Columns[5].DefaultCellStyle.Format = "yyyy-MM-dd";
+            datagrid.Columns[11].DefaultCellStyle.Format = "yyyy-MM-dd";
+            
+            datagrid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            datagrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            datagrid.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            datagrid.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[10].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            datagrid.Columns[2].Width = 300;
+            datagrid.Columns[5].Width = 100;
+            datagrid.Columns[4].Width = 200;
+            datagrid.Columns[6].Width = 90;
+            datagrid.Columns[7].Width = 90;
+            datagrid.Columns[8].Width = 80;
+            datagrid.Columns[9].Width = 90;
+            datagrid.Columns[10].Width = 100;
+            datagrid.Columns[11].Width = 100;
+
+            float fontSize = 8f;
+            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        #endregion
+
         #region Receipts
         internal static void ReceiptsDatagridView(DataTable dataTable, DataGridView datagrid)
         {

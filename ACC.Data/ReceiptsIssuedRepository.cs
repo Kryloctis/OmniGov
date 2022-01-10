@@ -453,7 +453,7 @@ namespace ACC.Data
         public DataTable GetReturnedReceipts()
         {
             string query = $"SELECT " +
-                           $"receipts_id " +
+                           $"receipts_id, " +
                            $"accountable_form_id, " +
                            $"accountable_forms, " +
                            $"collecting_officer_id, " +
@@ -461,6 +461,7 @@ namespace ACC.Data
                            $"date_issued, " +
                            $"issuefrom, " +
                            $"issueto, " +
+                           $"quantity, " +
                            $"last_issued, " +
                            $"IF(is_returned = 1, (issueto - last_issued), null) AS returned_quantity, " +
                            $"returned_date " +

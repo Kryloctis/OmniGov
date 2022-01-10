@@ -48,14 +48,13 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             this.dgReturnedReceipts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgReturnedReceipts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgReturnedReceipts.Location = new System.Drawing.Point(12, 38);
+            this.dgReturnedReceipts.Location = new System.Drawing.Point(12, 11);
             this.dgReturnedReceipts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgReturnedReceipts.Name = "dgReturnedReceipts";
             this.dgReturnedReceipts.RowHeadersWidth = 51;
             this.dgReturnedReceipts.RowTemplate.Height = 29;
             this.dgReturnedReceipts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgReturnedReceipts.Size = new System.Drawing.Size(711, 333);
+            this.dgReturnedReceipts.Size = new System.Drawing.Size(814, 386);
             this.dgReturnedReceipts.TabIndex = 9;
             // 
             // statusStrip1
@@ -69,9 +68,9 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             this.toolStripStatusLabel4,
             this.toolStripStatusLabel5,
             this.lblUpdatedAt});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 373);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 399);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(735, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(838, 22);
             this.statusStrip1.TabIndex = 10;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -90,7 +89,7 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(516, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(619, 17);
             this.toolStripStatusLabel2.Spring = true;
             // 
             // toolStripStatusLabel3
@@ -130,14 +129,16 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(735, 395);
+            this.ClientSize = new System.Drawing.Size(838, 421);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.dgReturnedReceipts);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmReturnedReceipts";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Returned Receipts";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmReturnedReceipts_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgReturnedReceipts)).EndInit();
             this.statusStrip1.ResumeLayout(false);
