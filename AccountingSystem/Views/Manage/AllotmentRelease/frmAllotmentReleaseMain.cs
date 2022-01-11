@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                string allotmentReleaseNo = $"{uc.mskSeriesNo.Text}-{uc.mskYear.Text}";
+                string allotmentReleaseNo = uc.mskSeriesNo.Text;
                 string purpose = uc.txtPurpose.Text.Trim();
 
                 var allotmemtReleaseModel = new AllotmentReleaseModel()
@@ -66,7 +66,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                string allotmentReleaseNo = $"{uc.mskSeriesNo.Text}-{uc.mskYear.Text}";
+                string allotmentReleaseNo = uc.mskSeriesNo.Text;
                 string purpose = uc.txtPurpose.Text.Trim();
 
                 var allotmemtReleaseModel = new AllotmentReleaseModel()
