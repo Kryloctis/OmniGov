@@ -66,7 +66,6 @@ namespace ACC.Data
             }
 
             return record;
-
         }
 
         public DataTable GetRecords()
@@ -79,16 +78,16 @@ namespace ACC.Data
 
         public DataTable GetRecordsByDate(string date)
         {
-            var parameter = new object[]
+            var parameter = new object[][]
             {
                 new object[]{"@date", DbType.DateTime2, date}
             };
-            string query  = $"SELECT * FROM {viewTableName} WHERE date = @date";
+
+            string query  = $"SELECT * FROM {viewTableName} WHERE payment_date = @date";
 
             var dtPaymentCollection = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtPaymentCollection, parameter);
         }
-
 
         public bool Insert(PaymentCollectionModel entity)
         {
