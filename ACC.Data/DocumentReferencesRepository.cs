@@ -68,16 +68,29 @@ namespace ACC.Data
 
         public DataTable GetViewRecords()
         {
-            try
+            string query = $"SELECT * FROM {viewTableName}";
+            var dataTable = new DataTable();
+            return mySqlGenericCommands.Fill(query, dataTable);
+        }
+
+        public DataTable GetViewRecordsByOffice(string office)
+        {
+            var parameters = new dynamic[][]
             {
-                string query = $"SELECT * FROM {viewTableName}";
-                var dataTable = new DataTable();
-                return mySqlGenericCommands.Fill(query, dataTable);
-            }
-            catch (Exception)
+                new dynamic[] { "@office", DbType.String, $"%{office}%"}
+            };
+
+            string Filter()
             {
-                throw;
+                if (office == "All")
+                    return string.Empty;
+                else
+                    return "WHERE office LIKE @office";
             }
+
+            string query = $"SELECT * FROM {viewTableName} {Filter()}";
+            var dataTable = new DataTable();
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
     }
 }
