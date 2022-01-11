@@ -86,17 +86,14 @@ namespace ACC.Data
 
         public DataTable GetRecordsByDate(string date)
         {
-            try
+            var parameter = new object[]
             {
-                string query  = $"SELECT * FROM {viewTableName} ";
+                new object[]{"@date", DbType.DateTime2, date}
+            };
+            string query  = $"SELECT * FROM {viewTableName} WHERE date = @date";
 
-                var dtPaymentCollection = new DataTable();
-                return _dbGenericCommands.Fill(query, dtPaymentCollection);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtPaymentCollection = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtPaymentCollection, parameter);
         }
 
         public DataTable GenerateRecords(int id,string month)
