@@ -645,7 +645,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT LPAD(MAX(jev_no)+1, 4, '0') AS jev_no FROM {tableName}";
+                string query = $"SELECT COALESCE(LPAD(MAX(jev_no)+1, 4, '0'), 0000) AS jev_no FROM {tableName}";
                 return _dbGenericCommands.ExecuteScalar(query);
             }
             catch (Exception)

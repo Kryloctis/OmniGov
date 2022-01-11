@@ -14,9 +14,9 @@ namespace ACC.Domain.Interfaces
 
         bool Delete(int allotmentReleaseId);
 
-        bool AllotmentReleaseNoExist(string allotmentReleaseNo);
+        bool AllotmentReleaseNoExist(string allotmentReleaseNo, short year);
 
-        bool AllotmentReleaseNoExist(int Id, string allotmentReleaseNo);
+        bool AllotmentReleaseNoExist(int Id, string allotmentReleaseNo, short year);
 
         bool AllotmentReleaseExist(int budgetAppropriationId, DateTime dateIssued);
 
@@ -43,5 +43,7 @@ namespace ACC.Domain.Interfaces
         //DETAILED
         decimal GetSumAllotments(string fppId, string subFPPId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing);
         #endregion
+
+        string GetLeastAllotmentReleaseNumber();
     }
 }

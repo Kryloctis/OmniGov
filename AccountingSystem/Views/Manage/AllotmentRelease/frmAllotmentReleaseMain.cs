@@ -52,13 +52,15 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     int budgetAppropriationId = Convert.ToInt32(row["budget_appropriations_id"]);
                     string accountName = row["ledger_name"].ToString();
                     string accountCode = row["account_code"].ToString();
+                    string remarks = row["remarks"].ToString();
                     decimal amount = Convert.ToDecimal(row["amount"]);
+                    string fullAccountName = $"{accountName} {(string.IsNullOrEmpty(remarks) ? string.Empty : $"({remarks})")}";
 
                     var records = new object[]
                     {
                         year,
                         budgetAppropriationId,
-                        accountName,
+                        fullAccountName,
                         accountCode,
                         amount
                     };
@@ -69,6 +71,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 btnDelete.Enabled = true;
                 btnSave.Text = "Update";
                 uc.isEdit = true;
+                uc.btnAutoGenerateSeriesNo.Enabled = false;
             }
             catch (Exception ex)
             {

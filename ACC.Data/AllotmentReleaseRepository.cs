@@ -286,16 +286,17 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool AllotmentReleaseNoExist(string allotmentReleaseNo)
+        public bool AllotmentReleaseNoExist(string allotmentReleaseNo, short year)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@aro_no", DbType.String, allotmentReleaseNo }
+                    new object[] { "@aro_no", DbType.String, allotmentReleaseNo },
+                    new object[] { "@year", DbType.Int16, year}
                 };
 
-                string query = $"SELECT id FROM {tableName} WHERE aro_no = @aro_no";
+                string query = $"SELECT id FROM {tableName} WHERE aro_no = @aro_no AND YEAR(date_issued) = @year";
                 string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -307,17 +308,18 @@ namespace ACC.Data
             return false;
         }
 
-        public bool AllotmentReleaseNoExist(int Id, string allotmentReleaseNo)
+        public bool AllotmentReleaseNoExist(int Id, string allotmentReleaseNo, short year)
         {
             try
             {
                 var parameters = new object[][]
                 {
                     new object[] { "@id",   DbType.Int32, Id },
-                    new object[] { "@aro_no", DbType.String, allotmentReleaseNo }
+                    new object[] { "@aro_no", DbType.String, allotmentReleaseNo },
+                    new object[] { "@year", DbType.Int16, year}
                 };
 
-                string query = $"SELECT id FROM {tableName} WHERE id <> @id AND aro_no = @aro_no";
+                string query = $"SELECT id FROM {tableName} WHERE id <> @id AND aro_no = @aro_no AND YEAR(date_issued) = @year";
                 string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -610,5 +612,11 @@ namespace ACC.Data
         }
 
         #endregion
+
+        public string GetLeastAllotmentReleaseNumber()
+        {
+            string query = $"SELECT COALESCE(LPAD(MAX(aro_no)+1, 3, '0'),000) AS aro_no FROM {viewTableName}";
+            return _mySqlGenericCommands.ExecuteScalar(query);
+        }
     }
 }

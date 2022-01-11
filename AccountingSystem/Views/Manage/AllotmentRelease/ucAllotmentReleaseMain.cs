@@ -205,6 +205,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             dtDateIssued.Enabled = true;
             dgAllotmentRelease.Rows.Clear();
             txtPurpose.Text = string.Empty;
+            btnAutoGenerateSeriesNo.Enabled = true;
 
             LoadFPPCombobox();
             LoadFunds();
@@ -224,6 +225,18 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             errorArray[4] = dgAllotmentRelease.Tag.ToString();
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        internal void AutoGenerateSeriesNo()
+        {
+            try
+            {
+                mskSeriesNo.Text = Factory.AllotmentReleaseRepository().GetLeastAllotmentReleaseNumber();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         internal void LoadFunds()
@@ -389,6 +402,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 btnRemove.Enabled = false;
                 btnEdit.Enabled = false;
 
+                AutoGenerateSeriesNo();
                 DisplayTotalAllotmentRelease();
             }
         }
@@ -626,17 +640,18 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             Helper.ClearErrorComboBox(epSubFPP, cmbxSubFPP);
         }
 
-        private bool AllotmentNotReleaseExist()
+        private bool AllotmentNoReleaseExist()
         {
             try
             {
-                string allotmentReleaseNo = $"{mskSeriesNo.Text}-{mskYear.Text}";
+                string allotmentReleaseNo = mskSeriesNo.Text.Trim();
+                short dateIssued = (short)dtDateIssued.Value.Year;
                 bool allotmentReleaseNoExist;
 
                 if (allotmentReleaseId == 0)
-                    allotmentReleaseNoExist = Factory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseNo);
+                    allotmentReleaseNoExist = Factory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseNo, dateIssued);
                 else
-                    allotmentReleaseNoExist = Factory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseId, allotmentReleaseNo);
+                    allotmentReleaseNoExist = Factory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseId, allotmentReleaseNo, dateIssued);
 
 
                 if (allotmentReleaseNoExist)
@@ -675,7 +690,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             if (ShowErrorSeriesNo())
                 return true;
-            else if (AllotmentNotReleaseExist())
+            else if (AllotmentNoReleaseExist())
                 return true;
 
             return false;
@@ -713,5 +728,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         #endregion
 
+        private void btnAutoGenerateSeriesNo_Click(object sender, EventArgs e)
+        {
+            AutoGenerateSeriesNo();
+        }
     }
 }
