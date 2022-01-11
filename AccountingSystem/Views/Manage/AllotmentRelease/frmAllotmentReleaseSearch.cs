@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AllotmentRelease
@@ -47,13 +48,17 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
             try
             {
+                var continuingColumn = new DataColumn();
+                continuingColumn.DataType = typeof(Image);
+                continuingColumn.ColumnName = "continuing";
+
                 string searchTxt = txtSearch.Text.Trim();
                 dataTable.Columns.Add("allotment_release_id");
                 dataTable.Columns.Add("full_aro_no");
                 dataTable.Columns.Add("date_issued");
                 dataTable.Columns.Add("purpose");
                 dataTable.Columns.Add("total_allotment_release");
-                dataTable.Columns.Add("continuing");
+                dataTable.Columns.Add(continuingColumn);
 
                 int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
                 int allotmentClassId = Convert.ToInt32(cmbxAllotmentClasses.SelectedValue);
@@ -72,7 +77,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     string rowTotalAllotmentRelease = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseById(rowAllotmentReleaseId).ToString("N2");
 
 
-                    var item = new object[] { rowAllotmentReleaseId, rowFullAroNo, rowDateIssued.ToString("MMM dd, yyyy"), rowPurpose, rowTotalAllotmentRelease, rowIsContinuing };
+                    var item = new dynamic[] { rowAllotmentReleaseId, rowFullAroNo, rowDateIssued.ToString("MMM dd, yyyy"), rowPurpose, rowTotalAllotmentRelease, rowIsContinuing ? Properties.Resources.ok14px : null };
 
                     if (rowDateIssued.Year == dateIssued.Year || rowIsContinuing)
                         dataTable.Rows.Add(item);

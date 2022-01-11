@@ -1583,10 +1583,15 @@ namespace AccountingSystem
             dataGridView.Columns["allotment_release_id"].HeaderText = "Allotment Release ID";
             dataGridView.Columns["allotment_release_id"].Visible = false;
             dataGridView.Columns["full_aro_no"].HeaderText = "ARO No.";
+            dataGridView.Columns["full_aro_no"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["date_issued"].HeaderText = "Date Issued";
+            dataGridView.Columns["date_issued"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["purpose"].HeaderText = "Purpose";
             dataGridView.Columns["total_allotment_release"].HeaderText = "Total Allotment Release";
+            dataGridView.Columns["total_allotment_release"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridView.Columns["continuing"].HeaderText = "Continuing";
+            dataGridView.Columns["continuing"].DefaultCellStyle.NullValue = null;
+            dataGridView.Columns["continuing"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         }
 
         #endregion
