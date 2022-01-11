@@ -29,6 +29,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             _ = new frmPaymentCollectionAdd(this).ShowDialog();
         }
+
         internal void LoadRecords()
         {
             try
@@ -153,7 +154,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             try
             {
                 string date = String.Format("{0:yyyy-MM-dd}", dtpdate.Value);
-                var dtpayments = Factory.PaymentCollectionRepository().GetRecords(date);
+                var dtpayments = Factory.PaymentCollectionRepository().GetRecordsByDate(date);
                 HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
 
                 lblRecordCount.Text = dgpayments.Rows.Count.ToString();

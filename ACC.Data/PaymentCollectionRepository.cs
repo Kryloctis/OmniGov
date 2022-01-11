@@ -84,7 +84,7 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetRecords(string date)
+        public DataTable GetRecordsByDate(string date)
         {
             try
             {
