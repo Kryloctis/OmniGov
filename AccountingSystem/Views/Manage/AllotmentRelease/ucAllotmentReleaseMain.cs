@@ -205,7 +205,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             dtDateIssued.Enabled = true;
             dgAllotmentRelease.Rows.Clear();
             txtPurpose.Text = string.Empty;
-            btnAutoGenerateSeriesNo.Enabled = true;
 
             LoadFPPCombobox();
             LoadFunds();
@@ -727,10 +726,5 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         }
 
         #endregion
-
-        private void btnAutoGenerateSeriesNo_Click(object sender, EventArgs e)
-        {
-            AutoGenerateSeriesNo();
-        }
     }
 }

@@ -572,5 +572,11 @@ namespace ACC.Data
 
             return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
         }
+
+        public string GetLeastAllotmentReleaseNumber()
+        {
+            string query = $"SELECT COALESCE(LPAD(MAX(obligation_no)+1, 4, '0'),0000) AS obligation_no FROM {viewTableName}";
+            return _mySqlGenericCommands.ExecuteScalar(query);
+        }
     }
 }

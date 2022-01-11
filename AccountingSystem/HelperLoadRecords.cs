@@ -396,14 +396,14 @@ namespace AccountingSystem
             datagrid.Columns[9].HeaderText = "Last Issued";
             datagrid.Columns[10].HeaderText = "Returned Quantity";
             datagrid.Columns[11].HeaderText = "Date Returned";
-            
+
             datagrid.Columns[0].Visible = false;
             datagrid.Columns[1].Visible = false;
             datagrid.Columns[3].Visible = false;
 
             datagrid.Columns[5].DefaultCellStyle.Format = "yyyy-MM-dd";
             datagrid.Columns[11].DefaultCellStyle.Format = "yyyy-MM-dd";
-            
+
             datagrid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             datagrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -2166,7 +2166,7 @@ namespace AccountingSystem
             datagrid.Columns["created_by_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             datagrid.ShowCellToolTips = false;
             datagrid.Columns["payee"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            datagrid.Columns["date_entry"].DefaultCellStyle.Format = "MMMM, dd, yyyy";
+            datagrid.Columns["date_entry"].DefaultCellStyle.Format = "MMMM dd, yyyy";
             datagrid.Columns["jev_no"].Visible = false;
             datagrid.Columns["fund_code"].Visible = false;
             datagrid.Columns["created_at"].Visible = false;

@@ -57,7 +57,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnEdit = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.txtTotalAllotmentRelease = new System.Windows.Forms.TextBox();
-            this.btnAutoGenerateSeriesNo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgAllotmentRelease)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
@@ -314,28 +313,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.txtTotalAllotmentRelease.Size = new System.Drawing.Size(194, 23);
             this.txtTotalAllotmentRelease.TabIndex = 48;
             // 
-            // btnAutoGenerateSeriesNo
-            // 
-            this.btnAutoGenerateSeriesNo.AutoSize = true;
-            this.btnAutoGenerateSeriesNo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAutoGenerateSeriesNo.Image = global::AccountingSystem.Properties.Resources.symbol_refresh_14px;
-            this.btnAutoGenerateSeriesNo.Location = new System.Drawing.Point(178, 181);
-            this.btnAutoGenerateSeriesNo.Name = "btnAutoGenerateSeriesNo";
-            this.btnAutoGenerateSeriesNo.Size = new System.Drawing.Size(133, 25);
-            this.btnAutoGenerateSeriesNo.TabIndex = 49;
-            this.btnAutoGenerateSeriesNo.Text = "Generate Series No.";
-            this.btnAutoGenerateSeriesNo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAutoGenerateSeriesNo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAutoGenerateSeriesNo.UseVisualStyleBackColor = true;
-            this.btnAutoGenerateSeriesNo.Click += new System.EventHandler(this.btnAutoGenerateSeriesNo_Click);
-            // 
             // ucAllotmentReleaseMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.Controls.Add(this.btnAutoGenerateSeriesNo);
             this.Controls.Add(this.txtTotalAllotmentRelease);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.dtDateIssued);
@@ -396,6 +379,5 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         internal System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Label label7;
         internal System.Windows.Forms.TextBox txtTotalAllotmentRelease;
-        internal System.Windows.Forms.Button btnAutoGenerateSeriesNo;
     }
 }
