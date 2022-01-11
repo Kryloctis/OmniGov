@@ -162,6 +162,9 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Manage Banks"))
                 menuBanks.Visible = false;
 
+            if (!Helper.HasPermission("Manage Accountable Forms"))
+                menuAccForm.Visible = false;
+
             if (!Helper.HasPermission("Manage Disbursing Officer"))
                 menuDisbursingOfficer.Visible = false;
 
