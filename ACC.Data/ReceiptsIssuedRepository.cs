@@ -449,5 +449,58 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public DataTable GetReturnedReceipts()
+        {
+            string query = $"SELECT " +
+                           $"receipts_id, " +
+                           $"accountable_form_id, " +
+                           $"accountable_forms, " +
+                           $"collecting_officer_id, " +
+                           $"collecting_officer, " +
+                           $"date_issued, " +
+                           $"issuefrom, " +
+                           $"issueto, " +
+                           $"quantity, " +
+                           $"last_issued, " +
+                           $"IF(is_returned = 1, (issueto - last_issued), null) AS returned_quantity, " +
+                           $"returned_date " +
+                           $"FROM " +
+                           $"{viewTableName} " +
+                           $"WHERE is_returned = 1";
+
+            var dt = new DataTable();
+            return _dbGenericCommands.Fill(query, dt);
+        }
+
+        public DataTable GetReturnedReceiptsBySearch(string searchKey)
+        {
+            var parameter = new object[][] {
+                new object[]{"@searchKey", DbType.String, $"%{searchKey}%"}
+            };
+
+            string query = $"SELECT " +
+                  $"receipts_id, " +
+                  $"accountable_form_id, " +
+                  $"accountable_forms, " +
+                  $"collecting_officer_id, " +
+                  $"collecting_officer, " +
+                  $"date_issued, " +
+                  $"issuefrom, " +
+                  $"issueto, " +
+                  $"quantity, " +
+                  $"last_issued, " +
+                  $"IF(is_returned = 1, (issueto - last_issued), null) AS returned_quantity, " +
+                  $"returned_date " +
+                  $"FROM " +
+                  $"{viewTableName} " +
+                  $"WHERE is_returned = 1 AND " +
+                  $"collecting_officer LIKE @searchKey OR " +
+                  $"accountable_forms LIKE @searchkey";
+
+            var dt = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dt, parameter);
+
+        }
     }
 }

@@ -47,6 +47,7 @@ namespace AccountingSystem
             this.menuBanks = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAccForm = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReceipts = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuReturnReceipts = new System.Windows.Forms.ToolStripMenuItem();
             this.amortiaztionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.signatoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
@@ -215,6 +216,7 @@ namespace AccountingSystem
             this.menuBanks,
             this.menuAccForm,
             this.menuReceipts,
+            this.menuReturnReceipts,
             this.amortiaztionToolStripMenuItem,
             this.signatoriesToolStripMenuItem});
             this.menuManage.Name = "menuManage";
@@ -313,6 +315,13 @@ namespace AccountingSystem
             this.menuReceipts.Size = new System.Drawing.Size(214, 22);
             this.menuReceipts.Text = "Receipts";
             this.menuReceipts.Click += new System.EventHandler(this.menureceipts_Click);
+            // 
+            // menuReturnReceipts
+            // 
+            this.menuReturnReceipts.Name = "menuReturnReceipts";
+            this.menuReturnReceipts.Size = new System.Drawing.Size(214, 22);
+            this.menuReturnReceipts.Text = "Returned Receipts";
+            this.menuReturnReceipts.Click += new System.EventHandler(this.menuReturnReceipts_Click);
             // 
             // amortiaztionToolStripMenuItem
             // 
@@ -1458,6 +1467,7 @@ namespace AccountingSystem
         internal System.Windows.Forms.Button btnBudgetAppropriations;
         internal System.Windows.Forms.Button btnAllotmentRelease;
         internal System.Windows.Forms.Button btnObligationRequest;
+        private System.Windows.Forms.ToolStripMenuItem menuReturnReceipts;
     }
 }
 

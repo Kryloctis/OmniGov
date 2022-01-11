@@ -1,19 +1,13 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Cashbook
 {
     public partial class frmCashbook : Form
     {
-        private readonly ReportViewer reportViewer = new ReportViewer();
+        private readonly ReportViewer reportViewer = new();
         public frmCashbook()
         {
             InitializeComponent();
@@ -41,11 +35,12 @@ namespace AccountingSystem.Views.Reports.Cashbook
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private DataTable DataTableCB(int id)
+        private DataTable DataTableCashBook(int id)
         {
             var dtCB = new dsLFS.dtCashbookDataTable();
             var dtBD = Factory.BankDepositsRepository().GetRecordsBySearch(id);
             var dtRC = Factory.RCIRepository().GetRecords(id);
+
             if(dtBD.Rows.Count > 0 || dtRC.Rows.Count > 0)
             {
                 //decimal balance = 0;
@@ -101,18 +96,14 @@ namespace AccountingSystem.Views.Reports.Cashbook
                     };
                 report.ReportPath = $"{Application.StartupPath}Reports\\cashbook.rdlc";
                 report.DataSources.Clear();
-                report.DataSources.Add(new ReportDataSource("dtCashbook", DataTableCB(id)));
+                report.DataSources.Add(new ReportDataSource("dtCashbook", DataTableCashBook(id)));
                 report.SetParameters(parameters);
                 report.Refresh();
-
-
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
-
-
         }
         private void btnretrieve_Click(object sender, EventArgs e)
         {

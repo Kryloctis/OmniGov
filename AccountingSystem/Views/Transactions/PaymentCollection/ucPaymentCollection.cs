@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ACC.Domain.Interfaces;
 
@@ -17,31 +13,31 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal int fundId = 0;
         internal int accId = 0;
         internal int generalLedgerId = 0;
-        internal int slaId = 0;
         internal int userid = 0;
-        internal bool withsubsidiary = false;
-        internal int minreceipt = 0;
-        internal int maxreceipt = 0;
+        internal int minReceipt = 0;
+        internal int maxReceipt = 0;
         internal int receipt = 0;
+
        
         internal bool isCashTicket;
         internal int cashTicketFaceValue = 0;
-        internal decimal accountableFormFaceValue = 0;
+        internal decimal accountableFormFaceValue;
 
         public ucPaymentCollection()
         {
             InitializeComponent();
         }
+
         internal string GetFormErrors()
         {
             var errorArray = new string[8];
-            errorArray[0] = errorProvider.GetError(cmbcollector);
-            errorArray[1] = errorProvider.GetError(cmbfund);
-            errorArray[2] = errorProvider.GetError(cmbforms);
+            errorArray[0] = errorProvider.GetError(cmdCollector);
+            errorArray[1] = errorProvider.GetError(cmbFund);
+            errorArray[2] = errorProvider.GetError(cmbAccountableForms);
             errorArray[3]= errorProvider.GetError(cmbAccount);
             errorArray[4] = errorProvider.GetError(txtpayee);
             errorArray[5] = errorProvider.GetError(txtreceipt);
-            errorArray[6] = errorProvider.GetError(dtdate);
+            errorArray[6] = errorProvider.GetError(dtDateOfCollection);
             errorArray[7] = errorProvider.GetError(txtAmount);
 
             IError _errors = Factory.CreateErrors(errorArray);
@@ -53,16 +49,15 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             fundId = 0;
             accId = 0;
             generalLedgerId = 0;
-            slaId = 0;
-            cmbforms.SelectedIndex = -1;
+            cmbAccountableForms.SelectedIndex = -1;
             cmbAccount.SelectedIndex = -1;
 
             txtpayee.Clear();
             txtreceipt.Clear();
-            dtdate.Value = DateTime.Now;
+            dtDateOfCollection.Value = DateTime.Now;
             txtAmount.Value = Convert.ToDecimal("0.00");
-            minreceipt = 0;
-            maxreceipt = 0;
+            minReceipt = 0;
+            maxReceipt = 0;
             receipt = 0;
         }
 
@@ -73,31 +68,28 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 var formRepository = Factory.ReceiptsIssuedRepository();
                 var dtforms = formRepository.GetRecordsReceipts(collectorsId.ToString());
                 dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc + ' - ' + (quantity)");
-                cmbforms.DataSource = dtforms;
-                cmbforms.ValueMember = "id";
-                cmbforms.DisplayMember = "formdisplay";
+                cmbAccountableForms.DataSource = dtforms;
+                cmbAccountableForms.ValueMember = "id";
+                cmbAccountableForms.DisplayMember = "formdisplay";
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
 
         internal void LoadForms()
         {
             try
             {
-                cmbforms.SelectedValueChanged -= cmbforms_SelectedValueChanged;
+                cmbAccountableForms.SelectedValueChanged -= cmbforms_SelectedValueChanged;
                 var formRepository = Factory.AccountableRepository();
                 var dtforms = formRepository.GetRecords();
                 dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
-                cmbforms.DataSource = dtforms;
-                cmbforms.ValueMember = "id";
-                cmbforms.DisplayMember = "formdisplay";
-                cmbforms.SelectedValueChanged += cmbforms_SelectedValueChanged;
+                cmbAccountableForms.DataSource = dtforms;
+                cmbAccountableForms.ValueMember = "id";
+                cmbAccountableForms.DisplayMember = "formdisplay";
+                cmbAccountableForms.SelectedValueChanged += cmbforms_SelectedValueChanged;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-
 
         internal void LoadFunds()
         {
@@ -106,15 +98,15 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 var fundRepository = Factory.FundsRepository();
                 var dtFund = fundRepository.GetRecords();
                 dtFund.Columns.Add("funddisplay", typeof(string), "fund_code + ' - ' + fund_name");
-                cmbfund.DataSource = dtFund;
-                cmbfund.ValueMember = "id";
-                cmbfund.DisplayMember = "funddisplay";
+                cmbFund.DataSource = dtFund;
+                cmbFund.ValueMember = "id";
+                cmbFund.DisplayMember = "funddisplay";
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
 
-        internal void setSelectedValue(int Id, string table)
+        internal void SetSelectedValue(int Id, string table)
         {
            
             try
@@ -135,35 +127,28 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
         internal void LoadCollectors()
         {
             try
             {
                 var collectorRepository = Factory.CollectingOfficerRepository();
                 var dtCollector = collectorRepository.GetRecords();
-                cmbcollector.DataSource = dtCollector;
-                cmbcollector.ValueMember = "id";
-                cmbcollector.DisplayMember = "fullname";
+                cmdCollector.DataSource = dtCollector;
+                cmdCollector.ValueMember = "id";
+                cmdCollector.DisplayMember = "fullname";
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }    
 
         internal bool IsBetween(int num)
         {
-            return (num >= minreceipt) && (num <= maxreceipt);
+            return (num >= minReceipt) && (num <= maxReceipt);
         }
 
-
-
-        public void loadSelectedLedger(int Id, string value)
+        private void ucPaymentCollection_Load(object sender, EventArgs e)
         {
-            generalLedgerId = Id;
-            cmbAccount.Text = value;
-        }
-
-        private void ucPC_Load(object sender, EventArgs e)
-        {
-            LoadForms(Convert.ToInt32(cmbcollector.SelectedValue));
+            LoadForms(Convert.ToInt32(cmdCollector.SelectedValue));
             LoadCollectors();
             LoadFunds();
 
@@ -173,24 +158,37 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             cmbAccount.SelectedIndex = -1;
         }
 
-        private void cmbfund_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbfund, "Funds.");
-        }
 
-        private void cmbfund_Validated(object sender, EventArgs e)
+        #region Validations
+        private void cmbcollector_Validating(object sender, CancelEventArgs e)
         {
-            Helper.ClearErrorComboBox(errorProvider, cmbfund);
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmdCollector, "Collecting Officer.");
         }
 
         private void cmbcollector_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(errorProvider, cmbcollector);
+            Helper.ClearErrorComboBox(errorProvider, cmdCollector);
         }
 
-        private void cmbcollector_Validating(object sender, CancelEventArgs e)
+
+        private void cmbfund_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbcollector, "Collecting Officer.");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbFund, "Funds.");
+        }
+
+        private void cmbfund_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider, cmbFund);
+        }
+
+        private void cmbAccountableForms_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider, cmbAccountableForms);
+        }
+
+        private void cmbAccountableForms_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbAccountableForms, "Accountable Forms!");
         }
 
         private void cmbAccount_Validating(object sender, CancelEventArgs e)
@@ -202,14 +200,21 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             Helper.ClearErrorComboBox(errorProvider, cmbAccount);
         }
-       
-        internal void txtpayee_Validating(object sender, CancelEventArgs e)
+
+        #endregion
+
+
+        #region ORValidation
+        private void dtDateOfCollection_Validation(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtpayee, "Payee.");
+            DateTime todaysDate = DateTime.Now;
+            DateTime dateOfCollection = dtDateOfCollection.Value;
+            e.Cancel = Helper.ShowErrorDateTimePickerRange(errorProvider, todaysDate, dateOfCollection, dtDateOfCollection, "Date of Collection");
         }
-        private void txtpayee_Validated(object sender, EventArgs e)
+
+        private void dtDateOfCollection_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider, txtpayee);
+            Helper.ClearErrorDateTimePickerRange(errorProvider, dtDateOfCollection);
         }
 
         internal void txtreceipt_Validating(object sender, CancelEventArgs e)
@@ -220,7 +225,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 errorProvider.SetError(txtreceipt, "Receipt No. invalid.");
                 e.Cancel = true;
             }
-            else if(Convert.ToInt32(txtreceipt.Text.Trim()) <= 0)
+            else if (Convert.ToInt32(txtreceipt.Text.Trim()) <= 0)
             {
                 errorProvider.SetError(txtreceipt, "Receipt No. invalid.");
                 e.Cancel = true;
@@ -230,17 +235,21 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void txtreceipt_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider, txtreceipt);
-        }  
-
-        private void cmbforms_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(errorProvider, cmbforms);
         }
 
-        private void cmbforms_Validating(object sender, CancelEventArgs e)
+        internal void txtpayee_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbforms, "Accountable Forms!");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtpayee, "Payee.");
         }
+        private void txtpayee_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider, txtpayee);
+        }
+
+        #endregion
+
+
+        #region CashTicketValidation
 
         internal void txtCashTicketQuantity_Validating(object sender, CancelEventArgs e)
         {
@@ -252,13 +261,28 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             Helper.ClearErrorNumericUpDown(errorProvider, txtCashTicketQuantity);
         }
 
+        private void dtCashTicketDateOfCollection_Validating(object sender, CancelEventArgs e)
+        {
+            DateTime todaysDate = DateTime.Now;
+            DateTime dateOfCollection = dtCashTicketDateOfCollection.Value;
+            e.Cancel = Helper.ShowErrorDateTimePickerRange(errorProvider, todaysDate, dateOfCollection, dtCashTicketDateOfCollection, "Date of Collection");
+        }
+
+        private void dtCashTicketDateOfCollection_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorDateTimePickerRange(errorProvider, dtCashTicketDateOfCollection);
+        }
+       
+
+        #endregion
+
 
         private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbforms.SelectedIndex != -1)
+            if (cmbAccountableForms.SelectedIndex != -1)
             {
-                DataRowView forms = cmbforms.SelectedItem as DataRowView;
-                DataRowView collector = cmbcollector.SelectedItem as DataRowView;
+                DataRowView forms = cmbAccountableForms.SelectedItem as DataRowView;
+                DataRowView collector = cmdCollector.SelectedItem as DataRowView;
                 if (forms != null && collector != null)
                 {
                     if (Id <= 0)
@@ -274,8 +298,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                                 for (int i = 0; i < dtrc.Rows.Count; i++)
                                 {
                                     receiptto = Convert.ToInt32(dtrc.Rows[i]["issueto"]);
-                                    maxreceipt = Convert.ToInt32(dtrc.Rows[i]["issueto"]);
-                                    minreceipt = Convert.ToInt32(dtrc.Rows[i]["issuefrom"]);
+                                    maxReceipt = Convert.ToInt32(dtrc.Rows[i]["issueto"]);
+                                    minReceipt = Convert.ToInt32(dtrc.Rows[i]["issuefrom"]);
                                     receiptlast = dtrc.Rows[i]["last_issued"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtrc.Rows[i]["last_issued"]);
 
                                 }
@@ -283,9 +307,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                                     txtreceipt.Text = "0";
                                 else
                                 {
-                                    if (receiptlast < minreceipt)
-                                        txtreceipt.Text = minreceipt.ToString();
-                                    else if (receiptlast.Equals(minreceipt))
+                                    if (receiptlast < minReceipt)
+                                        txtreceipt.Text = minReceipt.ToString();
+                                    else if (receiptlast.Equals(minReceipt))
                                         txtreceipt.Text = (receiptlast + 1).ToString();
                                     else
                                         txtreceipt.Text = (receiptlast + 1).ToString();
@@ -301,7 +325,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     }
                     else
                     {
-                        if (accId != Convert.ToInt32(cmbforms.SelectedValue))
+                        if (accId != Convert.ToInt32(cmbAccountableForms.SelectedValue))
                         {
                             try
                             {
@@ -315,17 +339,17 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                                     {
 
                                         receiptto = Convert.ToInt32(dtrc.Rows[i]["issueto"]);
-                                        maxreceipt = Convert.ToInt32(dtrc.Rows[i]["issueto"]);
-                                        minreceipt = Convert.ToInt32(dtrc.Rows[i]["issuefrom"]);
+                                        maxReceipt = Convert.ToInt32(dtrc.Rows[i]["issueto"]);
+                                        minReceipt = Convert.ToInt32(dtrc.Rows[i]["issuefrom"]);
                                         receiptlast = dtrc.Rows[i]["last_issued"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtrc.Rows[i]["last_issued"]);
                                     }
                                     if (receiptto.Equals(receiptlast))
                                         txtreceipt.Text = "0";
                                     else
                                     {
-                                        if (receiptlast < minreceipt)
-                                            txtreceipt.Text = minreceipt.ToString();
-                                        else if (receiptlast.Equals(minreceipt))
+                                        if (receiptlast < minReceipt)
+                                            txtreceipt.Text = minReceipt.ToString();
+                                        else if (receiptlast.Equals(minReceipt))
                                             txtreceipt.Text = (receiptlast + 1).ToString();
                                         else
                                             txtreceipt.Text = (receiptlast + 1).ToString();
@@ -351,7 +375,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         }
         private void cmbforms_SelectedValueChanged(object sender, EventArgs e)
         {
-            int idOfSelectedAccountableForm = Convert.ToInt32(cmbforms.SelectedValue);
+            int idOfSelectedAccountableForm = Convert.ToInt32(cmbAccountableForms.SelectedValue);
 
             accountableFormFaceValue = Factory.FaceValueRepository().GetFaceValueByAccountableFormId(idOfSelectedAccountableForm);
 
@@ -362,23 +386,23 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
       
         private void cmbcollector_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cmbcollector.SelectedIndex != -1)
+            if(cmdCollector.SelectedIndex != -1)
             {
-                DataRowView collector = cmbcollector.SelectedItem as DataRowView;
-                cmbforms.Enabled = true;
+                DataRowView collector = cmdCollector.SelectedItem as DataRowView;
+                cmbAccountableForms.Enabled = true;
                 txtpayee.Enabled = true;
                 //txtreceipt.Enabled = true;
-                dtdate.Enabled = true;
+                dtDateOfCollection.Enabled = true;
                 txtAmount.Enabled = true;
                 cmbAccount.Enabled = true;
                 LoadForms(int.Parse(collector[0].ToString()));
             }
             else
             {
-                cmbforms.Enabled = false;
+                cmbAccountableForms.Enabled = false;
                 txtpayee.Enabled = false;
                 //txtreceipt.Enabled = false;
-                dtdate.Enabled = false;
+                dtDateOfCollection.Enabled = false;
                 txtAmount.Enabled = false;
                 cmbAccount.Enabled = false;
             }
@@ -387,10 +411,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void txtreceipt_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
                 e.Handled = true;
-
-            }
         }
 
         private DataTable DatatableAccounts()
@@ -438,10 +459,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         }
 
-
         internal void SwitchFields()
         {
-            isCashTicket = cmbforms.Text.Contains("Tickets");
+            isCashTicket = cmbAccountableForms.Text.Contains("Tickets");
 
             if (isCashTicket)
             {
@@ -480,5 +500,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 cmbAccount.DroppedDown = true;
             }
         }
+
+
     }
 }

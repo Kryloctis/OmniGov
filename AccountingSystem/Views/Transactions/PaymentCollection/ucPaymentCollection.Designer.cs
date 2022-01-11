@@ -38,26 +38,26 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label6 = new System.Windows.Forms.Label();
             this.txtpayee = new System.Windows.Forms.TextBox();
             this.txtreceipt = new System.Windows.Forms.TextBox();
-            this.dtdate = new System.Windows.Forms.DateTimePicker();
+            this.dtDateOfCollection = new System.Windows.Forms.DateTimePicker();
             this.txtAmount = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
-            this.cmbcollector = new System.Windows.Forms.ComboBox();
+            this.cmdCollector = new System.Windows.Forms.ComboBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.cmbforms = new System.Windows.Forms.ComboBox();
+            this.cmbAccountableForms = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cmbAccount = new System.Windows.Forms.ComboBox();
-            this.cmbfund = new System.Windows.Forms.ComboBox();
+            this.cmbFund = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tabPaymentType = new System.Windows.Forms.TabControl();
             this.tabNonCashTickets = new System.Windows.Forms.TabPage();
             this.tabCashTickets = new System.Windows.Forms.TabPage();
+            this.txtCashTicketsAmount = new System.Windows.Forms.NumericUpDown();
             this.txtCashTicketQuantity = new System.Windows.Forms.NumericUpDown();
             this.label14 = new System.Windows.Forms.Label();
             this.dtCashTicketDateOfCollection = new System.Windows.Forms.DateTimePicker();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.txtCashTicketsAmount = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.txtAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -65,8 +65,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.tabPaymentType.SuspendLayout();
             this.tabNonCashTickets.SuspendLayout();
             this.tabCashTickets.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCashTicketQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCashTicketsAmount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCashTicketQuantity)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -146,14 +146,16 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.txtreceipt.Validating += new System.ComponentModel.CancelEventHandler(this.txtreceipt_Validating);
             this.txtreceipt.Validated += new System.EventHandler(this.txtreceipt_Validated);
             // 
-            // dtdate
+            // dtDateOfCollection
             // 
-            this.dtdate.Enabled = false;
-            this.dtdate.Location = new System.Drawing.Point(174, 12);
-            this.dtdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dtdate.Name = "dtdate";
-            this.dtdate.Size = new System.Drawing.Size(370, 23);
-            this.dtdate.TabIndex = 4;
+            this.dtDateOfCollection.Enabled = false;
+            this.dtDateOfCollection.Location = new System.Drawing.Point(174, 12);
+            this.dtDateOfCollection.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtDateOfCollection.Name = "dtDateOfCollection";
+            this.dtDateOfCollection.Size = new System.Drawing.Size(370, 23);
+            this.dtDateOfCollection.TabIndex = 4;
+            this.dtDateOfCollection.Validating += new System.ComponentModel.CancelEventHandler(this.dtDateOfCollection_Validation);
+            this.dtDateOfCollection.Validated += new System.EventHandler(this.dtDateOfCollection_Validated);
             // 
             // txtAmount
             // 
@@ -180,47 +182,47 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label7.TabIndex = 12;
             this.label7.Text = "Collecting Officer";
             // 
-            // cmbcollector
+            // cmdCollector
             // 
-            this.cmbcollector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbcollector.FormattingEnabled = true;
-            this.cmbcollector.Location = new System.Drawing.Point(181, 16);
-            this.cmbcollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbcollector.Name = "cmbcollector";
-            this.cmbcollector.Size = new System.Drawing.Size(371, 23);
-            this.cmbcollector.TabIndex = 0;
-            this.cmbcollector.SelectedIndexChanged += new System.EventHandler(this.cmbcollector_SelectedIndexChanged);
-            this.cmbcollector.Validating += new System.ComponentModel.CancelEventHandler(this.cmbcollector_Validating);
-            this.cmbcollector.Validated += new System.EventHandler(this.cmbcollector_Validated);
+            this.cmdCollector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmdCollector.FormattingEnabled = true;
+            this.cmdCollector.Location = new System.Drawing.Point(181, 16);
+            this.cmdCollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmdCollector.Name = "cmdCollector";
+            this.cmdCollector.Size = new System.Drawing.Size(371, 23);
+            this.cmdCollector.TabIndex = 0;
+            this.cmdCollector.SelectedIndexChanged += new System.EventHandler(this.cmbcollector_SelectedIndexChanged);
+            this.cmdCollector.Validating += new System.ComponentModel.CancelEventHandler(this.cmbcollector_Validating);
+            this.cmdCollector.Validated += new System.EventHandler(this.cmbcollector_Validated);
             // 
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // cmbforms
+            // cmbAccountableForms
             // 
-            this.cmbforms.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbforms.FormattingEnabled = true;
-            this.cmbforms.Location = new System.Drawing.Point(181, 80);
-            this.cmbforms.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbforms.Name = "cmbforms";
-            this.cmbforms.Size = new System.Drawing.Size(371, 23);
-            this.cmbforms.TabIndex = 2;
-            this.cmbforms.SelectedIndexChanged += new System.EventHandler(this.cmbforms_SelectedIndexChanged);
-            this.cmbforms.SelectedValueChanged += new System.EventHandler(this.cmbforms_SelectedValueChanged);
-            this.cmbforms.Validating += new System.ComponentModel.CancelEventHandler(this.cmbforms_Validating);
-            this.cmbforms.Validated += new System.EventHandler(this.cmbforms_Validated);
+            this.cmbAccountableForms.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbAccountableForms.FormattingEnabled = true;
+            this.cmbAccountableForms.Location = new System.Drawing.Point(181, 80);
+            this.cmbAccountableForms.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbAccountableForms.Name = "cmbAccountableForms";
+            this.cmbAccountableForms.Size = new System.Drawing.Size(371, 23);
+            this.cmbAccountableForms.TabIndex = 2;
+            this.cmbAccountableForms.SelectedIndexChanged += new System.EventHandler(this.cmbforms_SelectedIndexChanged);
+            this.cmbAccountableForms.SelectedValueChanged += new System.EventHandler(this.cmbforms_SelectedValueChanged);
+            this.cmbAccountableForms.Validating += new System.ComponentModel.CancelEventHandler(this.cmbAccountableForms_Validating);
+            this.cmbAccountableForms.Validated += new System.EventHandler(this.cmbAccountableForms_Validated);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.cmbAccount);
-            this.groupBox1.Controls.Add(this.cmbfund);
+            this.groupBox1.Controls.Add(this.cmbFund);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.cmbforms);
-            this.groupBox1.Controls.Add(this.cmbcollector);
+            this.groupBox1.Controls.Add(this.cmbAccountableForms);
+            this.groupBox1.Controls.Add(this.cmdCollector);
             this.groupBox1.Location = new System.Drawing.Point(3, -3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(583, 145);
@@ -241,17 +243,17 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.cmbAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbAccount_Validating);
             this.cmbAccount.Validated += new System.EventHandler(this.cmbAccount_Validated);
             // 
-            // cmbfund
+            // cmbFund
             // 
-            this.cmbfund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbfund.FormattingEnabled = true;
-            this.cmbfund.Location = new System.Drawing.Point(181, 48);
-            this.cmbfund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbfund.Name = "cmbfund";
-            this.cmbfund.Size = new System.Drawing.Size(371, 23);
-            this.cmbfund.TabIndex = 1;
-            this.cmbfund.Validating += new System.ComponentModel.CancelEventHandler(this.cmbfund_Validating);
-            this.cmbfund.Validated += new System.EventHandler(this.cmbfund_Validated);
+            this.cmbFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFund.FormattingEnabled = true;
+            this.cmbFund.Location = new System.Drawing.Point(181, 48);
+            this.cmbFund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbFund.Name = "cmbFund";
+            this.cmbFund.Size = new System.Drawing.Size(371, 23);
+            this.cmbFund.TabIndex = 1;
+            this.cmbFund.Validating += new System.ComponentModel.CancelEventHandler(this.cmbfund_Validating);
+            this.cmbFund.Validated += new System.EventHandler(this.cmbfund_Validated);
             // 
             // label9
             // 
@@ -289,7 +291,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             this.tabNonCashTickets.BackColor = System.Drawing.SystemColors.Control;
             this.tabNonCashTickets.Controls.Add(this.label3);
-            this.tabNonCashTickets.Controls.Add(this.dtdate);
+            this.tabNonCashTickets.Controls.Add(this.dtDateOfCollection);
             this.tabNonCashTickets.Controls.Add(this.txtAmount);
             this.tabNonCashTickets.Controls.Add(this.txtreceipt);
             this.tabNonCashTickets.Controls.Add(this.label6);
@@ -316,6 +318,20 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.tabCashTickets.Padding = new System.Windows.Forms.Padding(3);
             this.tabCashTickets.Size = new System.Drawing.Size(569, 132);
             this.tabCashTickets.TabIndex = 1;
+            // 
+            // txtCashTicketsAmount
+            // 
+            this.txtCashTicketsAmount.Location = new System.Drawing.Point(174, 86);
+            this.txtCashTicketsAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtCashTicketsAmount.Maximum = new decimal(new int[] {
+            200000,
+            0,
+            0,
+            0});
+            this.txtCashTicketsAmount.Name = "txtCashTicketsAmount";
+            this.txtCashTicketsAmount.Size = new System.Drawing.Size(371, 23);
+            this.txtCashTicketsAmount.TabIndex = 13;
+            this.txtCashTicketsAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtCashTicketQuantity
             // 
@@ -350,6 +366,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.dtCashTicketDateOfCollection.Name = "dtCashTicketDateOfCollection";
             this.dtCashTicketDateOfCollection.Size = new System.Drawing.Size(371, 23);
             this.dtCashTicketDateOfCollection.TabIndex = 4;
+            this.dtCashTicketDateOfCollection.Validating += new System.ComponentModel.CancelEventHandler(this.dtCashTicketDateOfCollection_Validating);
+            this.dtCashTicketDateOfCollection.Validated += new System.EventHandler(this.dtCashTicketDateOfCollection_Validated);
             // 
             // label15
             // 
@@ -369,20 +387,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label16.TabIndex = 9;
             this.label16.Text = "Cash Tickets Quantity";
             // 
-            // txtCashTicketsAmount
-            // 
-            this.txtCashTicketsAmount.Location = new System.Drawing.Point(174, 86);
-            this.txtCashTicketsAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtCashTicketsAmount.Maximum = new decimal(new int[] {
-            200000,
-            0,
-            0,
-            0});
-            this.txtCashTicketsAmount.Name = "txtCashTicketsAmount";
-            this.txtCashTicketsAmount.Size = new System.Drawing.Size(371, 23);
-            this.txtCashTicketsAmount.TabIndex = 13;
-            this.txtCashTicketsAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // ucPaymentCollection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -392,7 +396,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucPaymentCollection";
             this.Size = new System.Drawing.Size(589, 309);
-            this.Load += new System.EventHandler(this.ucPC_Load);
+            this.Load += new System.EventHandler(this.ucPaymentCollection_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -403,8 +407,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.tabNonCashTickets.PerformLayout();
             this.tabCashTickets.ResumeLayout(false);
             this.tabCashTickets.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCashTicketQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCashTicketsAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCashTicketQuantity)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -420,13 +424,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.Label label7;
         internal System.Windows.Forms.TextBox txtpayee;
         internal System.Windows.Forms.TextBox txtreceipt;
-        internal System.Windows.Forms.DateTimePicker dtdate;
+        internal System.Windows.Forms.DateTimePicker dtDateOfCollection;
         internal System.Windows.Forms.NumericUpDown txtAmount;
         private System.Windows.Forms.ErrorProvider errorProvider;
-        internal System.Windows.Forms.ComboBox cmbcollector;
-        internal System.Windows.Forms.ComboBox cmbforms;
+        internal System.Windows.Forms.ComboBox cmdCollector;
+        internal System.Windows.Forms.ComboBox cmbAccountableForms;
         private System.Windows.Forms.GroupBox groupBox1;
-        internal System.Windows.Forms.ComboBox cmbfund;
+        internal System.Windows.Forms.ComboBox cmbFund;
         private System.Windows.Forms.Label label9;
         internal System.Windows.Forms.ComboBox cmbAccount;
         private System.Windows.Forms.TabControl tabPaymentType;
