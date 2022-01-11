@@ -727,10 +727,5 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         }
 
         #endregion
-
-        private void btnAutoGenerateSeriesNo_Click(object sender, EventArgs e)
-        {
-            AutoGenerateSeriesNo();
-        }
     }
 }
