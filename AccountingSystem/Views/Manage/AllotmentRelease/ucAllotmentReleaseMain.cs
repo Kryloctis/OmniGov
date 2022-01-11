@@ -205,7 +205,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             dtDateIssued.Enabled = true;
             dgAllotmentRelease.Rows.Clear();
             txtPurpose.Text = string.Empty;
-            btnAutoGenerateSeriesNo.Enabled = true;
 
             LoadFPPCombobox();
             LoadFunds();
