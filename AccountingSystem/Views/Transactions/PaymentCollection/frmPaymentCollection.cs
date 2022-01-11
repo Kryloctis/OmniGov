@@ -39,6 +39,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
                 HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
 
+                btnrefresh.Enabled = dtpayments.Rows.Count != 0;
                 SetStatusStrip();
             }
             catch (Exception ex) 
@@ -93,6 +94,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                             lblRecordCount.Text = dgpayments.Rows.Count.ToString();
                         }
                     }
+
+                    LoadRecords();
                 }
             }
             catch (Exception ex)
@@ -131,6 +134,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 Helper.EnableDisableToolStripButtons(dgpayments, btnEdit, btnDelete);
 
                 var crRepository = Factory.CollectorReportRepository();
+
                 btnEdit.Enabled = crRepository.HasReported(id) ? false : true;
                 btnDelete.Enabled = crRepository.HasReported(id) ? false : true;
             }
